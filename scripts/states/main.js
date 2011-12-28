@@ -1,10 +1,9 @@
 define(function(require) {
-  var Radium = require('core/radium');
-  
-  var viewObj = Ember.View.create();
-  
+  var Radium = require('core/radium'),
+      peopleView = require('views/people').create();
+        
   var view = Ember.ViewState.create({
-    view: viewObj
+    view: peopleView
   });
   
   Radium.MainStateManager = Ember.StateManager.create({

@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: '/scripts',
+  baseUrl: 'scripts/',
   paths: {
     jquery: 'libs/jquery/jquery',
     jqueryUI: 'libs/jquery/jquery-ui.min',
@@ -9,6 +9,6 @@ require.config({
   }
 });
 
-require(['core/app'], function(){
+require(['core/app'], function() {
   Radium.MainStateManager.goToState('start');
 });
