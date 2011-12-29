@@ -1,9 +1,8 @@
 define(function(require) {
-  var Radium = require('core/radium'),
-      peopleController = require('controllers/people'),
-      testTmpl = require('text!templates/people.html');
+  var testTmpl = require('text!templates/people.html'),
+      view;
 
-  Radium.TestCollectionView = Ember.CollectionView.extend({
+  view = Ember.CollectionView.extend({
     tagName: 'ul',
     contentBinding: 'Radium.peopleController',
     itemViewClass: Ember.View.extend({
@@ -14,5 +13,5 @@ define(function(require) {
     }),
   });
   
-  return Radium.TestCollectionView;
+  return view.create();
 });

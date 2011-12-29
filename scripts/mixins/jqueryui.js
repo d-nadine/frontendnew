@@ -1,4 +1,5 @@
-define(['core/radium'], function(radium) {
+define(function(require) {
+  var Radium = require('radium');
   window.JQ = Ember.Object.create();
   
   JQ.Widget = Ember.Mixin.create({
@@ -71,15 +72,5 @@ define(['core/radium'], function(radium) {
 
       return options;
     }
-  });
-  
-  Radium.ProgressBar = Ember.View.extend(JQ.Widget, {
-    uiType: 'progressbar',
-    uiOptions: ['value', 'max'],
-    uiEvents: ['change', 'complete']
-  });
-  
-  Radium.DialogBox = Ember.View.extend(JQ.Widget, {
-    
   });
 });

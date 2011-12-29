@@ -1,7 +1,6 @@
 define(function(require) {
-  var Radium = require('core/radium');
 
-  Radium.Person = Ember.Object.extend({
+  var Person = Ember.Object.extend({
     firstName: null,
     lastName: null,
     fullName: function() {
@@ -9,6 +8,6 @@ define(function(require) {
     }.property('firstName', 'lastName')
   });
   
-  return Radium.Person;
+  return Person;
   
 });

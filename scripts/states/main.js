@@ -1,15 +1,22 @@
 define(function(require) {
-  var Radium = require('core/radium'),
-      peopleView = require('views/people').create();
-        
+  var peopleController = require('controllers/people'),
+      peopleView = require('views/people'),
+      loader = require('views/jq.progressbar').create(),
+      client = require('models/client');
+  
   var view = Ember.ViewState.create({
-    view: peopleView
+    view: peopleView,
+    init: function() {
+      Radium.peopleController.createPerson();
+      
+      this._super();
+    }
   });
   
-  Radium.MainStateManager = Ember.StateManager.create({
+  Radium.App = Ember.StateManager.create({
     rootElement: '#feed',
     start: view
   });
   
-  return Radium.MainStateManager;
+  return Radium.App;
 });
