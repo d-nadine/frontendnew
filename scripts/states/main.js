@@ -7,8 +7,6 @@ define(function(require) {
     view: peopleView,
     init: function() {
       Radium.peopleController.createPerson();
-      test.append();
-      console.log(loader.$());
       this._super();
     }
   });
