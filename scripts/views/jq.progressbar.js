@@ -1,4 +1,5 @@
 define(function(require) {
+  require('mixins/jqueryui');
   
   var view = Ember.View.extend(JQ.Widget, {
     uiType: 'progressbar',

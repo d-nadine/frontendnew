@@ -56,6 +56,7 @@ define(function(require) {
           options = {};
         
       options.ember_view = this; // FIXME: This there a better way to access the Ember#View from inside jQueryUI callbacks?
+
       uiOptions.forEach(function(key) {
         options[key] = this.get(key);
 
@@ -67,7 +68,7 @@ define(function(require) {
         this._observers = this._observers || {};
         this._observers[key] = observer;
       }, this);
-
+      
       return options;
     }
   });
