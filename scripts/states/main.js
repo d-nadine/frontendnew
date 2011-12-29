@@ -1,14 +1,14 @@
 define(function(require) {
   var peopleController = require('controllers/people'),
       peopleView = require('views/people'),
-      loader = require('views/jq.progressbar').create(),
-      client = require('models/client');
-  
+      loader = require('views/jq.progressbar').create();
+      
   var view = Ember.ViewState.create({
     view: peopleView,
     init: function() {
       Radium.peopleController.createPerson();
-      
+      test.append();
+      console.log(loader.$());
       this._super();
     }
   });

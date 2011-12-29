@@ -20,10 +20,15 @@
     }
   });
   
-  require(['tests/spec/app/radium'], function() {
-    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-    jasmine.getEnv().execute();
-  });
+  require([
+    'tests/spec/app/radium',
+    'tests/spec/mixins/jqueryui.spec',
+    'tests/spec/views/jq.progressbar.spec'
+    ], function() {
+      jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+      jasmine.getEnv().execute();
+    }
+  );
   </script>
 </head>
 <body>

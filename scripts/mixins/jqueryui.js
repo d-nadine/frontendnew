@@ -1,6 +1,5 @@
 define(function(require) {
-  var Radium = require('radium');
-  window.JQ = Ember.Object.create();
+  window.JQ = Ember.Namespace.create();
   
   JQ.Widget = Ember.Mixin.create({
     uiChildElement: function() {
@@ -13,7 +12,6 @@ define(function(require) {
 
     didInsertElement: function() {
       this._super();
-
       Ember.run.schedule('render', this, function() {
         var options, ui;
         
