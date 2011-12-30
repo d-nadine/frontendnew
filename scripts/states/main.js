@@ -1,10 +1,9 @@
 define(function(require) {
   require('controllers/app');
-  var get = Ember.get,
-      buttonView = require('views/button').create(),
-      asdf = Ember.View.create({template: Ember.Handlebars.compile('hi')});
+  var buttonView = require('views/button').create();
   
   Radium.App = Ember.StateManager.create({
+    initialState: 'loggedOut',
     isLoggedIn: YES,
     loggedOut: Ember.State.create({
       enter: function() {
@@ -17,61 +16,46 @@ define(function(require) {
     }),
     loggingIn: Ember.State.create({
       enter: function(manager, transition) {
-        console.log('entering logginIn')
+        console.log('logging in...')
         transition.async();
         transition.resume();
         manager.goToState('loggedIn');
       },
       exit: function(manager, transition) {
-        console.log('leaving .loggingIn');
+        console.log('login successful!');
       }
     }),
-    loggedIn: Ember.State.create({
+    loggedIn: Ember.StateManager.create({
+      initialState: 'dashboard',
       enter: function() {
         console.log('logged in');
+        buttonView.appendTo('#action-button-container');
       },
       exit: function() {
-        console.log('logging out');
-      }
-    }),
-    logIn: function() {
-      this.goToState('loggedIn');
-    }
-    // loggedIn: Ember.StateManager.create({
-    //   initialState: 'dashboard',
-    //   enter: function() {
-    //     console.log('logged in');
-    //     buttonView.appendTo('#action-button-container');
-    //   },
-    //   exit: function() {
-    //     console.log('exiting');
-    //     buttonView.destroy();
-    //   },
-    //   dashboard: Ember.State.create({
-    //     enter: function() {
-    //       Radium.appController.set('currentSection', 'dashboard');
-    //     },
-    //     test: Ember.StateManager.create({
-    //       rootElement: '#feed',
-    //       start: Ember.ViewState.create({view: asdf})
-    //     })
-    //   }),
-    //   contacts: Ember.State.create({
-    //     enter: function() {
-    //       Radium.appController.set('currentSection', 'contacts');
-    //     }
-    //   }),
-    //   pipeline: Ember.State.create({
-    //     enter: function() {
-    //       Radium.appController.set('currentSection', 'pipeline');
-    //     }
-    //   }),
-    //   messages: Ember.State.create({
-    //     enter: function() {
-    //       Radium.appController.set('currentSection', 'messages');
-    //     }
-    //   })
-    // })
+        console.log('exiting');
+        buttonView.destroy();
+      },
+      dashboard: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'dashboard');
+        }
+      }),
+      contacts: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'contacts');
+        }
+      }),
+      pipeline: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'pipeline');
+        }
+      }),
+      messages: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'messages');
+        }
+      })
+    })
   });
     
 });

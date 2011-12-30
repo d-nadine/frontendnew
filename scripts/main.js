@@ -11,8 +11,8 @@ require.config({
 });
 
 require(['core/app'], function() {
-  if (!LOGGEDIN) {
-    Radium.App.goToState('loggingIn');
+  if (!ISLOGGEDIN) {
+    Radium.App.goToState('loggedOut');
   } else {
     Radium.App.goToState('loggedIn');
   }
