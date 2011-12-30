@@ -24,40 +24,41 @@
         <div id="topbar-container" class="container">
           <div id="action-button-container"></div>
           <a class="brand" href="#">Radium</a>
-          <ul class="nav">
-            <li class="active"><a href="index.html">Dashboard</a></li>
+          <ul id="main-nav" class="nav" style="display:none;">
+            <li class="active"><a href="/">Dashboard</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle">Contacts</a>
+              <a href="/contacts" class="dropdown-toggle">Contacts</a>
               <ul class="dropdown-menu">
-                <li><a href="#">leads</a></li>
-                <li><a href="#">propsects</a></li>
-                <li><a href="#">opportunities</a></li>
-                <li><a href="#">customers</a></li>
-                <li><a href="#">dead ends</a></li>
+                <li><a href="/contacts/leads">leads</a></li>
+                <li><a href="/contacts/prospects">prospects</a></li>
+                <li><a href="/contacts/opportunities">opportunities</a></li>
+                <li><a href="/contacts/customers">customers</a></li>
+                <li><a href="/contacts/dead-ends">dead ends</a></li>
               </ul>
               </li>
             <li> 
-            <li><a href="pipeline.html">Pipeline</a></li>
+            <li><a href="/pipeline">Pipeline</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle">Campaigns</a>
+              <a href="/campaigns" class="dropdown-toggle">Campaigns</a>
               <ul class="dropdown-menu">
-                <li><a href="campaign.html">fall campaign</a></li>
-                <li><a href="campaign.html">winter campaign</a></li>
-                <li><a href="campaign.html">spring campaign</a></li>
-                <li><a href="campaign.html">summer campaign</a></li>
+                <li><a href="/campaigns/fall">fall campaign</a></li>
+                <li><a href="/campaigns/winter">winter campaign</a></li>
+                <li><a href="/campaigns/spring">spring campaign</a></li>
+                <li><a href="/campaigns/summer">summer campaign</a></li>
                 <li class="divider"></li>
-                <li><a href="#">show past campaigns</a></li>
+                <li><a href="/campaigns/past">show past campaigns</a></li>
               </ul>
             </li>
-            <li><a href="#">Calendar</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="#about">Settings</a></li>
+            <li><a href="/calendar">Calendar</a></li>
+            <li><a href="/messages">Messages</a></li>
+            <li><a href="/settings">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
     <div id="main" class="container">
+      
       <div class="row">
         
         <div id="owner" class="span4"></div>

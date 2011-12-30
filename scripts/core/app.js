@@ -1,9 +1,10 @@
 define(function(require) {  
-  var jQuery = require('jquery'),
-      ui = require('jqueryUI'),
-      Ember = require('ember'),
-      DS = require('data'),
-      Radium = require('radium'),
-      JQ = require('mixins/jqueryui'),
-      states = require('states/main');
+  require('jquery'),
+  require('jqueryUI'),
+  require('ember'),
+  require('data'),
+  require('router');
+  require('radium'),
+  require('mixins/jqueryui'),
+  require('states/main');
 });

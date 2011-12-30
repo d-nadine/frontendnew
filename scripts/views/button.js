@@ -12,7 +12,7 @@ define(function(require) {
       return (this.get('currentSection')) ? YES : NO;
     }.property('currentSection').cacheable(),
     click: function() {
-      console.log('click');
+      console.log('click', this.getPath('currentSection'));
     },
     template: Ember.Handlebars.compile('Add {{ section }}')
   });
