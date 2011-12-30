@@ -11,5 +11,10 @@ require.config({
 });
 
 require(['core/app'], function() {
-  Radium.App.goToState('start');
+  if (!LOGGEDIN) {
+    Radium.App.goToState('loggingIn');
+  } else {
+    Radium.App.goToState('loggedIn');
+  }
+  
 });

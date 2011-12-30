@@ -1,4 +1,7 @@
 define(function(require) {
+  require('jqueryUI');
+  require('ember');
+  
   window.JQ = Ember.Namespace.create();
   
   JQ.Widget = Ember.Mixin.create({

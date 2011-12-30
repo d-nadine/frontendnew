@@ -12,18 +12,22 @@
 
     <link href="stylesheets/app.css" rel="stylesheet">
     <link href="stylesheets/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet">
+    <script>
+    window.LOGGEDIN = true;
+    </script>
     <script data-main="scripts/main" src="scripts/libs/require/require.js"></script>
   </head>
 
   <body>
     <div class="topbar">
       <div class="fill">
-        <div class="container">
+        <div id="topbar-container" class="container">
+          <div id="action-button-container"></div>
           <a class="brand" href="#">Radium</a>
           <ul class="nav">
             <li class="active"><a href="index.html">Dashboard</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle">contacts</a>
+              <a href="#" class="dropdown-toggle">Contacts</a>
               <ul class="dropdown-menu">
                 <li><a href="#">leads</a></li>
                 <li><a href="#">propsects</a></li>
@@ -33,9 +37,9 @@
               </ul>
               </li>
             <li> 
-            <li><a href="pipeline.html">pipeline</a></li>
+            <li><a href="pipeline.html">Pipeline</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle">campaigns</a>
+              <a href="#" class="dropdown-toggle">Campaigns</a>
               <ul class="dropdown-menu">
                 <li><a href="campaign.html">fall campaign</a></li>
                 <li><a href="campaign.html">winter campaign</a></li>
@@ -45,9 +49,9 @@
                 <li><a href="#">show past campaigns</a></li>
               </ul>
             </li>
-            <li><a href="#">calendar</a></li>
-            <li><a href="#">messages</a></li>
-            <li><a href="#about">settings</a></li>
+            <li><a href="#">Calendar</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#about">Settings</a></li>
           </ul>
         </div>
       </div>
@@ -59,11 +63,7 @@
         <div id="owner" class="span4"></div>
 
         <div class="span12">
-          <form action="" id="search">
-            <fieldset>
-              <input type="text" class="prependedInput" placeholder="Find me..." id="search-box">
-            </fieldset>
-          </form>
+          
         </div>
         <div id="feed" class="span12">
           

@@ -1,7 +1,6 @@
 define(function(require) {
   var Radium = require('radium'),
-      Person = require('models/person'),
-      peopleController;
+      Person = require('models/person');
 
   Radium.peopleController = Ember.ArrayController.create({
     content: [],
