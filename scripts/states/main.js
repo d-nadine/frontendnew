@@ -59,9 +59,24 @@ define(function(require) {
           Radium.appController.set('currentSection', 'pipeline');
         }
       }),
+      campaigns: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'campaigns');
+        }
+      }),
+      calendar: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'calendar');
+        }
+      }),
       messages: Ember.State.create({
         enter: function() {
           Radium.appController.set('currentSection', 'messages');
+        }
+      }),
+      settings: Ember.State.create({
+        enter: function() {
+          Radium.appController.set('currentSection', 'settings');
         }
       })
     }),
@@ -81,7 +96,9 @@ define(function(require) {
   Radium.Router = Ember.Object.create({
     pages: function(page) {
       if (page.page) {
-        Radium.App.goToState('loggedIn.pipeline');
+        Radium.App.goToState('loggedIn.' + page.page);
+      } else {
+        Radium.App.goToState('loggedIn.dashboard');
       }
     }
   });
