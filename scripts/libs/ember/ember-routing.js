@@ -1,10 +1,10 @@
+define('router', ['ember'], function(SC) {
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
 // Copyright: ©2006-2011 Strobe Inc. and contributors.
 //            Portions ©2008-2011 Apple Inc. All rights reserved.
 // License:   Licensed under MIT license (see license.js)
 // ==========================================================================
-
 var get = SC.get, set = SC.set;
 
 /**
@@ -39,7 +39,6 @@ var Route = SC.Object.extend(
 
   add: function(parts, target, method) {
     var part, nextRoute;
-
     // clone the parts array because we are going to alter it
     parts = SC.copy(parts);
 
@@ -462,7 +461,6 @@ var routes = SC.routes = SC.Object.create(
     if (!this._didSetup) {
       SC.run.once(this, 'ping');
     }
-
     if (method === undefined && SC.typeOf(target) === 'function') {
       method = target;
       target = null;
@@ -567,3 +565,5 @@ function popState(event) {
   }
   routes._skipRoute = false;
 }
+
+});

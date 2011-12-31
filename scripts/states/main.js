@@ -1,5 +1,6 @@
 define(function(require) {
   require('ember');
+  require('router');
   require('controllers/app');
   
   var buttonView = require('views/button').create(),
@@ -46,25 +47,21 @@ define(function(require) {
       dashboard: Ember.State.create({
         enter: function() {
           Radium.appController.set('currentSection', 'dashboard');
-          window.history.pushState(null, "Dashboard", "/");
         }
       }),
       contacts: Ember.State.create({
         enter: function() {
           Radium.appController.set('currentSection', 'contacts');
-          window.history.pushState(null, "Contacts", "/contacts");
         }
       }),
       pipeline: Ember.State.create({
         enter: function() {
           Radium.appController.set('currentSection', 'pipeline');
-          window.history.pushState(null, "Pipeline", "/pipeline");
         }
       }),
       messages: Ember.State.create({
         enter: function() {
           Radium.appController.set('currentSection', 'messages');
-          window.history.pushState(null, "Messages", "/messages");
         }
       })
     }),
@@ -72,7 +69,20 @@ define(function(require) {
     // Events
     logIn: function() {
       this.goToState('loggingIn');
+    },
+    
+    loadPage: function() {
+      console.log(arguments)
+      this.goToState('loggedIn.contacts');
     }
   });
-    
+  
+  
+  Radium.Router = Ember.Object.create({
+    pages: function(page) {
+      if (page.page) {
+        Radium.App.goToState('loggedIn.pipeline');
+      }
+    }
+  });
 });
