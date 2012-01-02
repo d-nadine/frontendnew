@@ -1,6 +1,5 @@
 define(function(require) {
   require('ember');
-  require('router');
   require('controllers/app');
   
   var buttonView = require('views/button').create(),
@@ -81,6 +80,12 @@ define(function(require) {
       })
     }),
     
+    error: Ember.State.create({
+      enter: function() {
+        console.log('error');
+      }
+    }),
+    
     // Events
     logIn: function() {
       this.goToState('loggingIn');
@@ -92,14 +97,4 @@ define(function(require) {
     }
   });
   
-  
-  Radium.Router = Ember.Object.create({
-    pages: function(page) {
-      if (page.page) {
-        Radium.App.goToState('loggedIn.' + page.page);
-      } else {
-        Radium.App.goToState('loggedIn.dashboard');
-      }
-    }
-  });
 });

@@ -7,4 +7,5 @@ define(function(require) {
   require('radium'),
   require('mixins/jqueryui'),
   require('states/main');
+  require('core/routes');
 });

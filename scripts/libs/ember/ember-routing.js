@@ -1,10 +1,11 @@
-define('router', ['ember'], function(SC) {
+define('router', ['ember'], function() {
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
 // Copyright: ©2006-2011 Strobe Inc. and contributors.
 //            Portions ©2008-2011 Apple Inc. All rights reserved.
 // License:   Licensed under MIT license (see license.js)
 // ==========================================================================
+
 var get = SC.get, set = SC.set;
 
 /**
@@ -39,6 +40,7 @@ var Route = SC.Object.extend(
 
   add: function(parts, target, method) {
     var part, nextRoute;
+
     // clone the parts array because we are going to alter it
     parts = SC.copy(parts);
 
@@ -104,6 +106,7 @@ var Route = SC.Object.extend(
       for (key in this.dynamicRoutes) {
         route = this.dynamicRoutes[key].routeForParts(parts, params);
         if (route) {
+          console.log(params, key, part);
           params[key] = part;
           return route;
         }
@@ -361,7 +364,7 @@ var routes = SC.routes = SC.Object.create(
 
         if (this.usesHistory) {
           if (encodedValue.length > 0) {
-            encodedValue = encodedValue;
+            encodedValue = '/' + encodedValue;
           }
           window.history.pushState(null, null, get(this, 'baseURI') + encodedValue);
         } else if (encodedValue.length > 0 || window.location.hash.length > 0) {
@@ -390,13 +393,14 @@ var routes = SC.routes = SC.Object.create(
   ping: function() {
     if (!this._didSetup) {
       this._didSetup = true;
+      var state;
 
       if (get(this, 'wantsHistory') && supportsHistory) {
         this.usesHistory = true;
 
         // Move any hash state to url state
         // TODO: Make sure we have a hash before adding slash
-        var state = window.location.hash.slice(1);
+        state = window.location.hash.slice(1);
         if (state.length > 0) {
           state = '/' + state;
           window.history.replaceState(null, null, get(this, 'baseURI')+state);
@@ -410,9 +414,9 @@ var routes = SC.routes = SC.Object.create(
 
         if (get(this, 'wantsHistory')) {
           // Move any url state to hash
-          var base = get(this, 'baseURI'),
-              loc = (base.charAt(0) === '/') ? document.location.pathname : document.location.href.replace(document.location.hash, ''),
-              state = loc.slice(base.length+1);
+          var base = get(this, 'baseURI');
+          var loc = (base.charAt(0) === '/') ? document.location.pathname : document.location.href.replace(document.location.hash, '');
+          state = loc.slice(base.length+1);
           if (state.length > 0) {
             window.location.href = base+'#'+state;
           }
@@ -461,6 +465,7 @@ var routes = SC.routes = SC.Object.create(
     if (!this._didSetup) {
       SC.run.once(this, 'ping');
     }
+
     if (method === undefined && SC.typeOf(target) === 'function') {
       method = target;
       target = null;
@@ -508,8 +513,8 @@ var routes = SC.routes = SC.Object.create(
 
   getRoute: function(route, params) {
     var firstRoute = this._firstRoute;
-    if (params == null) {
-      params = {}
+    if (params === null) {
+      params = {};
     }
 
     return firstRoute.routeForParts(route.split('/'), params);
@@ -517,7 +522,7 @@ var routes = SC.routes = SC.Object.create(
 
   exists: function(route, params) {
     route = this.getRoute(route, params);
-    return route != null && route.method != null;
+    return route !== null && route.method !== null;
   }
 
 });
@@ -565,5 +570,4 @@ function popState(event) {
   }
   routes._skipRoute = false;
 }
-
 });
