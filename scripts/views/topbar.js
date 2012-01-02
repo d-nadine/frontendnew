@@ -12,6 +12,16 @@ define('views/topbar', function(require) {
     section: function() {
       return (this.get('currentSection') === 'dashboard') ? 'Todo' : 'Contact';
     }.property('currentSection').cacheable(),
+    highlightNav: function() {
+      var section = this.get('currentSection');
+      $('ul#main-nav').find('li')
+        .removeClass('active')
+        .filter('li#btn-' + section).addClass('active');
+    }.observes('currentSection'),
+    didInsertElement: function() {
+      var section = this.get('currentSection');
+      $('li#btn-'+section).addClass('active');
+    },
     mainActionButton: buttonView,
     template: Ember.Handlebars.compile(template)
   });
