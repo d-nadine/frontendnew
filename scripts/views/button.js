@@ -3,18 +3,20 @@ define(function(require) {
   require('ember');
   
   var button = Ember.Button.extend({
-    currentSectionBinding: 'Radium.appController.currentSection',
-    section: function() {
-      return (this.get('currentSection') === 'dashboard') ? 'Todo' : 'Contact';
-    }.property('currentSection').cacheable(),
     classNames: "btn primary".w(),
     isVisible: function() {
-      return (this.get('currentSection')) ? YES : NO;
-    }.property('currentSection').cacheable(),
+      var section = this.getPath('parentView.currentSection');
+      if (!section || section === 'settings') {
+        return false;
+      } else {
+        return true;
+      }
+      return false;
+    }.property('parentView.currentSection'),
     click: function() {
       console.log('click', this.getPath('currentSection'));
     },
-    template: Ember.Handlebars.compile('Add {{ section }}')
+    template: Ember.Handlebars.compile('Add {{ parentView.section }}')
   });
   
   return button;

@@ -2,8 +2,8 @@ define(function(require) {
   require('ember');
   require('controllers/app');
   
-  var buttonView = require('views/button').create(),
-      loginPane = require('views/loginpane').create();
+  var loginPane = require('views/loginpane').create(),
+      topBar = require('views/topbar').create();
   
   Radium.App = Ember.StateManager.create({
     initialState: 'loggedOut',
@@ -37,7 +37,7 @@ define(function(require) {
       enter: function() {
         console.log('logged in');
         $('#main-nav').show();
-        buttonView.appendTo('#action-button-container');
+        topBar.appendTo('#topbar');
       },
       exit: function() {
         console.log('exiting');
@@ -92,7 +92,6 @@ define(function(require) {
     },
     
     loadPage: function() {
-      console.log(arguments)
       this.goToState('loggedIn.contacts');
     }
   });

@@ -12,10 +12,9 @@ require.config({
 });
 
 require(['core/app'], function() {
-  $('body').delegate('a', 'click', function(e) {e.preventDefault();});
+  Radium.Routes.start();
   if (ISLOGGEDIN) {
-    Radium.Routes.start();
+    console.log('logged in!');
     Radium.App.goToState('loggedIn');
   }
-  
 });
