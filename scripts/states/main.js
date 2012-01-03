@@ -1,12 +1,11 @@
 define(function(require) {
-  require('ember');
+
   require('controllers/app');
     
   var loggedOut = require('states/loggedout'),
       loggedIn = require('states/loggedin');
-  
+
   Radium.App = Ember.StateManager.create({
-    initialState: 'loggedOut',
     isLoggedIn: NO,
     
     loggedOut: loggedOut,
@@ -20,6 +19,7 @@ define(function(require) {
         manager.goToState('loggedIn');
       },
       exit: function(manager, transition) {
+        ISLOGGEDIN = true;
         console.log('login successful!');
       }
     }),

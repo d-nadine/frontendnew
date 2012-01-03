@@ -12,9 +12,5 @@ require.config({
 });
 
 require(['core/app'], function() {
-  Radium.Routes.start();
-  if (ISLOGGEDIN) {
-    console.log('logged in!');
-    Radium.App.goToState('loggedIn');
-  }
+  console.log('started...');
 });

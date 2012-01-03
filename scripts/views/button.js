@@ -1,7 +1,7 @@
 define(function(require) {
   require('jquery');
   require('ember');
-  
+
   var button = Ember.Button.extend({
     classNames: "btn primary".w(),
     isVisible: function() {
@@ -14,7 +14,7 @@ define(function(require) {
       return false;
     }.property('parentView.currentSection'),
     click: function() {
-      console.log('click', this.getPath('currentSection'));
+      // TODO: Add action for creating new action bound by current section here
     },
     template: Ember.Handlebars.compile('Add {{ parentView.section }}')
   });

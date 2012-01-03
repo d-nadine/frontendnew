@@ -1,6 +1,7 @@
 define(function(require) {
   
   require('ember');
+
   var loginPane = require('views/loginpane').create();
   
   return Ember.ViewState.create({

@@ -1,11 +1,10 @@
 define(function(require) {  
-  require('jquery'),
-  require('jqueryUI'),
-  require('ember'),
-  require('data'),
-  require('router');
-  require('radium'),
-  require('mixins/jqueryui'),
-  require('states/main');
-  require('core/routes');
+  require('order!jquery'),
+  require('order!jqueryUI'),
+  require('order!ember'),
+  require('order!data'),
+  require('order!router');
+  require('order!radium'),
+  require('order!mixins/jqueryui'),
+  require('order!core/routes');
 });

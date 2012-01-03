@@ -1,8 +1,5 @@
 define('views/topbar', function(require) {
   
-  require('jquery');
-  require('ember');
-  
   var view, 
       buttonView = require('views/button'),
       template = require('text!templates/topbar.handlebars');
@@ -14,13 +11,14 @@ define('views/topbar', function(require) {
     }.property('currentSection').cacheable(),
     highlightNav: function() {
       var section = this.get('currentSection');
+      console.log(section);
       $('ul#main-nav').find('li')
         .removeClass('active')
         .filter('li#btn-' + section).addClass('active');
     }.observes('currentSection'),
     didInsertElement: function() {
       var section = this.get('currentSection');
-      $('li#btn-'+section).addClass('active');
+      if (section) $('li#btn-'+section).addClass('active');
     },
     mainActionButton: buttonView,
     template: Ember.Handlebars.compile(template)
