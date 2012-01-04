@@ -30,16 +30,7 @@ define(function(require) {
       enter: function() {
         console.log('error');
       }
-    }),
-    
-    // Events
-    logIn: function() {
-      this.goToState('loggingIn');
-    },
-    
-    loadPage: function() {
-      this.goToState('loggedIn.contacts');
-    }
+    })
   });
   
 });

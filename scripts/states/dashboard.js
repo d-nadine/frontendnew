@@ -1,16 +1,16 @@
 define(function(require) {
   
-  return Ember.State.create({
+  var state, viewz, DashboardView = require('views/dashboard').create();
+  
+  state = Ember.ViewState.create({
+    view: DashboardView,
     enter: function() {
-      
+      DashboardView.appendTo('#main');
     },
-    test: Ember.ViewState.create({
-      enter: function() {
-        this.get('view').append();
-      },
-      view: Ember.View.create({
-        template: "hi"
-      })
-    })
+    exit: function() {
+      DashboardView.remove();
+    }
   });
+  
+  return state;
 });

@@ -7,7 +7,8 @@ define('views/topbar', function(require) {
   view = Ember.View.extend({
     currentSectionBinding: 'Radium.appController.currentSection',
     section: function() {
-      return (this.get('currentSection') === 'dashboard') ? 'Todo' : 'Contact';
+      var section = this.get('currentSection') || 'dashboard';
+      return (section === 'dashboard') ? 'Todo' : 'Contact';
     }.property('currentSection').cacheable(),
     highlightNav: function() {
       var section = this.get('currentSection');
@@ -17,7 +18,7 @@ define('views/topbar', function(require) {
         .filter('li#btn-' + section).addClass('active');
     }.observes('currentSection'),
     didInsertElement: function() {
-      var section = this.get('currentSection');
+      var section = this.get('currentSection') || 'dashboard';
       if (section) $('li#btn-'+section).addClass('active');
     },
     mainActionButton: buttonView,

@@ -1,6 +1,4 @@
 define(function(require) {
-  require('jquery');
-  require('ember');
 
   var button = Ember.Button.extend({
     classNames: "btn primary".w(),
