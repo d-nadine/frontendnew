@@ -3,7 +3,7 @@ define(function(require) {
   require('views/dashboard');
     
   var topBarView = Radium.TopbarView.create(),
-      _dashboard = require('states/dashboard');
+      dashboardState = require('states/dashboard');
   
   return Ember.StateManager.create({
     rootElement: '#main',
@@ -15,9 +15,7 @@ define(function(require) {
     exit: function() {
       console.log('exiting');
     },
-    dashboard: Ember.ViewState.create({
-      view: Radium.DashboardView.create()
-    }),
+    dashboard: dashboardState.create(),
     contacts: Ember.State.create({}),
     pipeline: Ember.State.create({}),
     campaigns: Ember.State.create({}),
