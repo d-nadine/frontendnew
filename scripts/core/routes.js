@@ -1,5 +1,4 @@
 define('core/routes', function(require) {
-  require('states/main');
     
   Radium.Routes = Davis(function() {      
     this.before(function(req) {
@@ -31,5 +30,5 @@ define('core/routes', function(require) {
         Radium.App.goToState('error');
       }
     });
-  }).start();
+  });
 });

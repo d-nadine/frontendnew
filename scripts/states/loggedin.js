@@ -1,7 +1,8 @@
 define(function(require) {
+  require('views/topbar');
+  require('views/dashboard');
     
   var topBarView = Radium.TopbarView.create(),
-      // globalSearchView = require('views/globalsearch').create(),
       _dashboard = require('states/dashboard');
   
   return Ember.StateManager.create({

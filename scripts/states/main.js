@@ -1,5 +1,4 @@
 define('states/main', function(require) {
-  require('views/main');
   
   var loggedOut = require('states/loggedout'),
       loggedIn = require('states/loggedin');
@@ -32,5 +31,4 @@ define('states/main', function(require) {
       }
     })
   });
-  console.log('states main');
 });
