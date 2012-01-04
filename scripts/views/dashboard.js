@@ -1,11 +1,8 @@
 define('views/dashboard', function(require) {
   
-  var view, template = require('text!templates/dashboard.handlebars');
-  
-  view = Ember.View.extend({
+  var template = require('text!templates/dashboard.handlebars');
+  Radium.DashboardView = Ember.View.extend({
     template: Ember.Handlebars.compile(template)
-  })
-  
-  return view;
+  });
   
 });

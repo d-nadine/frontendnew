@@ -1,11 +1,11 @@
-define(function(require) {
-
-  require('controllers/app');
-    
+define('states/main', function(require) {
+  require('views/main');
+  
   var loggedOut = require('states/loggedout'),
       loggedIn = require('states/loggedin');
 
   Radium.App = Ember.StateManager.create({
+    rootElement: '#main',
     isLoggedIn: NO,
     
     loggedOut: loggedOut,
@@ -32,5 +32,5 @@ define(function(require) {
       }
     })
   });
-  
+  console.log('states main');
 });

@@ -1,10 +1,11 @@
 define(function(require) {
     
-  var topBarView = require('views/topbar').create(),
-      globalSearchView = require('views/globalsearch').create(),
+  var topBarView = Radium.TopbarView.create(),
+      // globalSearchView = require('views/globalsearch').create(),
       _dashboard = require('states/dashboard');
   
   return Ember.StateManager.create({
+    rootElement: '#main',
     enter: function() {
       console.log('logged in');
       $('#main-nav').show();
@@ -13,7 +14,9 @@ define(function(require) {
     exit: function() {
       console.log('exiting');
     },
-    dashboard: _dashboard,
+    dashboard: Ember.ViewState.create({
+      view: Radium.DashboardView.create()
+    }),
     contacts: Ember.State.create({}),
     pipeline: Ember.State.create({}),
     campaigns: Ember.State.create({}),
