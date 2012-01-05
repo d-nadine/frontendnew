@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="lib/jasmine-1.1.0/jasmine.css">
 	<script type="text/javascript" src="lib/jasmine-1.1.0/jasmine.js"></script>
 	<script type="text/javascript" src="lib/jasmine-1.1.0/jasmine-html.js"></script>
+  <script src="lib/jasmine-1.1.0/jasmine-jquery.js"></script>
   <script src="../libs/require/require.js"></script>
   <script>
   require.config({
@@ -13,18 +14,30 @@
       jquery: 'libs/jquery/jquery',
       jqueryUI: 'libs/jquery/jquery-ui.min',
       ember: 'libs/ember/ember',
+      router: 'libs/davis',
       data: 'libs/ember/ember-data',
       radium: 'core/radium',
       text: 'libs/require/require.text',
-      order: 'libs/require/require.order',
-      testdir: 'tests/spec/'
-    }
+      testdir: 'tests/spec'
+    },
+    // TODO: Remove when deploying
+    urlArgs: "bust=" +  (new Date()).getTime(),
+    priority: [
+      'jquery',
+      'jqueryUI',
+      'ember',
+      'router',
+      'data',
+      'radium'
+    ]
   });
   
   require([
-    'tests/spec/app/radium.spec',
-    'tests/spec/mixins/jqueryui.spec',
-    'tests/spec/views/jq.progressbar.spec'
+    'testdir/app/radium.spec',
+    'testdir/mixins/jqueryui.spec',
+    'testdir/views/jq.progressbar.spec',
+    'testdir/states/loggedOut.spec',
+    'testdir/states/loggedOut.spec'
     ], function() {
       jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
       jasmine.getEnv().execute();

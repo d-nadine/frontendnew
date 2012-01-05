@@ -9,6 +9,8 @@ require.config({
     radium: 'core/radium',
     text: 'libs/require/require.text',
   },
+  // TODO: Remove when deploying
+  urlArgs: "bust=" +  (new Date()).getTime(),
   priority: [
     'jquery',
     'jqueryUI',
@@ -16,14 +18,10 @@ require.config({
     'router',
     'data',
     'radium',
-    // 'core/app',
-    // 'models/main',
-    // 'controllers/main',
-    // 'states/main',
-    // 'core/routes'
+    'core/app'
   ]
 });
 
 require(['core/app'], function() {
-  console.log('started...');
+  console.log('Application started...');
 });

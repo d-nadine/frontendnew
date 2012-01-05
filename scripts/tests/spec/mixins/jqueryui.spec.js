@@ -1,8 +1,4 @@
-define('tests/spec/mixins/jqueryui.spec', function(require) {
-  require('order!jquery');
-  require('order!jqueryUI');
-  require('order!ember');
-  require('order!mixins/jqueryui');
+define('testdir/mixins/jqueryui.spec', function(require) {
 
   describe("Mixin#jQueryUI", function() {
     

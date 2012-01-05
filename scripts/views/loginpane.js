@@ -6,6 +6,7 @@ define(function(require) {
       loginPane;
 
   loginPane = Ember.View.extend({
+    elementId: 'login-pane',
     template: Ember.Handlebars.compile(template),
     loginButton: Ember.Button.extend({
       click: function() {

@@ -1,21 +1,14 @@
 define(function(require) {  
   require('order!jquery');
-  console.log('got jquery');
   require('order!jqueryUI');
-  console.log('got jqueryUI');
   require('order!ember');
-  console.log('got ember');
   require('order!data');
-  console.log('got data');
   require('order!router');
-  console.log('got router');
   require('order!radium');
   require('order!mixins/jqueryui');
   require('order!core/routes');
   require('order!controllers/main');
-  console.log('got controllers');
   require('order!models/main');
   require('order!views/main');
-  console.log('got views');
   require('order!states/main');
 });

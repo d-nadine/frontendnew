@@ -1,5 +1,5 @@
 define('core/routes', function(require) {
-    
+  
   Radium.Routes = Davis(function() {      
     this.before(function(req) {
       console.log('logged in?', ISLOGGEDIN);
@@ -18,11 +18,13 @@ define('core/routes', function(require) {
     });
     
     this.get('/:page', function(req) {
+      var page = req.params['page'] || null;
+      
       if (!ISLOGGEDIN) {
         req.redirect('/login');
         return false;
       }
-      var page = req.params['page'];
+      
       if (Radium.App.getState('loggedIn').getState(page)) {
         Radium.appController.set('currentSection', page);
         Radium.App.goToState('loggedIn.' + page);

@@ -6,11 +6,9 @@ define(function(require) {
   
   return Ember.ViewState.create({
     view: loginPane,
-    enter: function() {
-      this.get('view').appendTo('#main');
-    },
-    exit: function() {
-      this.get('view').destroy();
+    enter: function(manager) {
+      manager.set('isLoggedin', NO);
+      this._super(manager);
     }
   });
   

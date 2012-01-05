@@ -1,7 +1,4 @@
-define('tests/spec/app/radium', function(require) {  
-  require('order!jquery');
-  require('order!ember');
-  require('order!radium');
+define('testdir/app/radium', function(require) {  
   
   describe("Creates global Radium namespace", function() {
     it("expects Radium to exist", function() {

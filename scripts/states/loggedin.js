@@ -13,6 +13,7 @@ define(function(require) {
       topBarView.appendTo('#topbar');
     },
     exit: function() {
+      topBarView.remove();
       console.log('exiting');
     },
     dashboard: dashboardState.create(),
