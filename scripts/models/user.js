@@ -1,16 +1,16 @@
+
+define(function(require) {
+  require('./person');
+
 /**
   @extends {Class} Person
 */
-
-define(function(require) {
-  var Person = require('./person');
-
-  Raduim.User = Person.extend({
+  Radium.User = Radium.Person.extend({
     email: DS.attr('string'),
-    phone: DS.attr('sting'),
-    account: DS.attr('number'),
-    contacts: DS.toMany(Radium.Contact),
-    following: DS.toMany(Radium.User)
+    phone: DS.attr('string'),
+    account: DS.attr('integer'),
+    contacts: DS.hasMany(Radium.Contact),
+    following: DS.hasMany(Radium.User)
   });
-  
+    
 });

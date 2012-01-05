@@ -4,14 +4,14 @@ define('testdir/models/person.spec', function(require) {
   describe("Person Class", function() {
 
     beforeEach(function() {
-      this.person = Person.create({
+      this.person = Radium.Person.create({
         id: 1,
         created_at: "2011-05-04T12:03:47Z",
         updated_at: "2011-05-04T12:03:47Z",
         name: 'Spiros Vondos Vondopoulos'
       });
 
-      this.longpersonname = Person.create({
+      this.longpersonname = Radium.Person.create({
         id: 2,
         created_at: "2011-05-04T12:03:47Z",
         updated_at: "2011-05-04T12:03:47Z",

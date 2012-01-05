@@ -6,9 +6,17 @@
 define(function(require) {
   require('ember');
   require('data');
-  require('models/deal');
+  require('./deal');
+  require('./campaign');
+  require('./todo');
+  require('./meeting');
+  require('./reminder');
+  require('./note');
+  require('./message');
+  require('./phonecall');
+  require('./activity');
   
-  var Person = DS.Model.extend({
+  Radium.Person = DS.Model.extend({
     name: DS.attr('string'),
     created_at: DS.attr('string'),
     updated_at: DS.attr('string'),
@@ -22,19 +30,17 @@ define(function(require) {
       return this.get('name').split(" ")[0];
     }.property('name'),
     
-    // Default ToMany groups
-    deals: DS.toMany(Radium.Deal),
-    campaigns: DS.toMany(Radium.Campaign),
-    todos: DS.toMany(Radium.Todo),
-    meetings: DS.toMany(Radium.Meeting),
-    reminders: DS.toMany(Radium.Reminder),
-    notes: DS.toMany(Radium.Note),
-    phone_calls: DS.toMany(Radium.PhoneCall),
-    messages: DS.toMany(Radium.Message),
-    activities: DS.toMany(Radium.Activity),
-    followers: DS.toMany(Radium.User)
+    // Default hasMany groups
+    deals: DS.hasMany(Radium.Deal),
+    campaigns: DS.hasMany(Radium.Campaign),
+    todos: DS.hasMany(Radium.Todo),
+    meetings: DS.hasMany(Radium.Meeting),
+    reminders: DS.hasMany(Radium.Reminder),
+    notes: DS.hasMany(Radium.Note),
+    phone_calls: DS.hasMany(Radium.PhoneCall),
+    messages: DS.hasMany(Radium.Message),
+    activities: DS.hasMany(Radium.Activity),
+    followers: DS.hasMany(Radium.User)
   });
-  
-  return Person;
   
 });
