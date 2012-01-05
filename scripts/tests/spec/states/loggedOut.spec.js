@@ -1,6 +1,5 @@
 define('testdir/states/loggedOut.spec', function(require) {
   require('jquery');
-
   require('states/main');
     
   describe("Radium Logged Out State", function() {
