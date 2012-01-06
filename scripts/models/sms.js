@@ -1,12 +1,10 @@
-define('models/email', function(require) {
+define('models/sms', function(require) {
   
   require('ember');
   require('data');
   require('./message');
   
-  Radium.Email = Radium.Message.extend({
-    subject: DS.attr('string'),
-    html: DS.attr('string')
+  Radium.SMS = Radium.Message.extend({
     // FIXME: Add back Sender object once I know what to do with it.
   });
 });

@@ -5,19 +5,19 @@ define('models/todo', function(require) {
   Radium.Todo = DS.Model.extend({
     created_at: DS.attr('date'),
     updated_at: DS.attr('date'),
-    kind: DS.attr('string'),
     description: DS.attr('string'),
     finish_by: DS.attr('date'),
     // FIXME: DS.hasOne
+    user: DS.hasMany(Radium.User),
+    // FIXME: DS.hasOne
     campaign: DS.hasMany(Radium.Campaign),
+    todos: DS.hasMany(Radium.Todo),
+    pending_todos: DS.hasMany(Radium.Todo),
+    finished_todos: DS.hasMany(Radium.Todo),
+    overdue_todos: DS.hasMany(Radium.Todo),
     // FIXME: DS.hasOne
-    call_list: DS.hasMany(Radium.CallList),
-    // TODO: Find out what reference refers to
-    reference: null,
-    contacts: DS.hasMany(Radium.Contact),
-    comments: DS.hasMany(Radium.Comment),
-    // FIXME: DS.hasOne
-    user: DS.hasMany(Radium.User)
+    users: DS.hasMany(Radium.User),
+    contacts: DS.hasMany(Radium.Contact)
   });
   
 });
