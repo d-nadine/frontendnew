@@ -10,7 +10,8 @@ define(function(require) {
     phone_numbers: DS.hasMany(Radium.PhoneNumber, {embedded: true}),
     email_addresses: DS.hasMany(Radium.Email, {embedded: true}),
     fields: DS.hasMany(Radium.CustomField, {embedded: true}),
-    user: DS.attr('integer')
+    // TODO: Get hasOne up in this club
+    user: DS.hasMany(Radium.User)
   });
 
 });
