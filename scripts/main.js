@@ -17,6 +17,7 @@ require.config({
     'ember',
     'router',
     'data',
+    'mixins/data',
     'radium',
     'core/app'
   ]

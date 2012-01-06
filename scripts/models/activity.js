@@ -4,10 +4,12 @@ define('models/activity', function(require) {
   
   Radium.Activity = DS.Model.extend({
     // FIXME: Add array transform
-    tags: [],
+    tags: DS.attr('array'),
     timestamp: DS.attr('date'),
-    owner: DS.hasOne(Radium.User, {embedded: true}),
-    reference: 
+    // FIXME: DS.hasOne
+    owner: DS.hasMany(Radium.User, {embedded: true}),
+    // FIXME: This needs to process which activity type we're loading. 
+    reference: {}
   });
   
 });
