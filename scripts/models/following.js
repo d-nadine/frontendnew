@@ -1,8 +1,9 @@
 define('models/following', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Following = DS.Model.extend({
+  Radium.Following = Radium.Core.extend({
     approved: DS.attr('boolean'),
     // FIXME: DS.hasOne
     user: DS.hasMany(Radium.User),

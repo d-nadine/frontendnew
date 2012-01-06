@@ -1,8 +1,9 @@
 define('models/activity', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Activity = DS.Model.extend({
+  Radium.Activity = Radium.Core.extend({
     // FIXME: Add array transform
     tags: DS.attr('array'),
     timestamp: DS.attr('date'),

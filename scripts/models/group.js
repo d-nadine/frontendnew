@@ -1,10 +1,9 @@
 define('models/group', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Group = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Group = Radium.Core.extend({
     name: DS.attr('string'),
     email: DS.attr('string'),
     phone: DS.attr('string'),

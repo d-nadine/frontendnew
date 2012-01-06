@@ -1,8 +1,10 @@
 define('models/Reminder', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Reminder = DS.Model.extend({
+  Radium.Reminder = Radium.Core.extend({
+    
   });
   
 });

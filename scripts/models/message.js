@@ -1,10 +1,9 @@
 define('models/message', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Message = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Message = Radium.Core.extend({
     message: DS.attr('string'),
     sent_at: DS.attr('date'),
     type: DS.attr('string'),

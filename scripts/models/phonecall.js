@@ -1,10 +1,9 @@
 define('models/phonecall', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.PhoneCall = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.PhoneCall = Radium.Core.extend({
     // FIXME: Add validation, can only be one of the following: not_interested, unanswered, follow_up_required
     outcome: DS.attr('string'),
     duration: DS.attr('integer'),

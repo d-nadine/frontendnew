@@ -1,10 +1,9 @@
 define('models/address', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Address = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Address = Radium.Core.extend({
     name: DS.attr('string'),
     street: DS.attr('string'),
     state: DS.attr('string'),

@@ -1,10 +1,9 @@
 define('models/deal', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Deal = DS.Model.extend({
-    created_at: DS.attr('string'),
-    updated_at: DS.attr('string'),
+  Radium.Deal = Radium.Core.extend({
     description: DS.attr('string'),
     close_by: DS.attr('date'),
     state: DS.attr('string'),

@@ -6,6 +6,7 @@
 define(function(require) {
   require('ember');
   require('data');
+  require('./core');
   require('./deal');
   require('./campaign');
   require('./todo');
@@ -16,10 +17,8 @@ define(function(require) {
   require('./phonecall');
   require('./activity');
   
-  Radium.Person = DS.Model.extend({
+  Radium.Person = Radium.Core.extend({
     name: DS.attr('string'),
-    created_at: DS.attr('string'),
-    updated_at: DS.attr('string'),
     
     // Computed name properties
     abbrName: function() {

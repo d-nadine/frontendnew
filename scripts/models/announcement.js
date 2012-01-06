@@ -1,10 +1,9 @@
 define('models/announcement', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Announcement = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Announcement = Radium.Core.extend({
     title: DS.attr('string'),
     message: DS.attr('string'),
     comments: DS.hasMany(Radium.Comment),

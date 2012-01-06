@@ -1,10 +1,9 @@
 define('models/todo', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Todo = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Todo = Radium.Core.extend({
     description: DS.attr('string'),
     finish_by: DS.attr('date'),
     // FIXME: DS.hasOne

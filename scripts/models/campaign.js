@@ -1,10 +1,9 @@
 define('models/campaign', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Campaign = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Campaign = Radium.Core.extend({
     name: DS.attr('string'),
     description: DS.attr('string'),
     ends_at: DS.attr('date'),

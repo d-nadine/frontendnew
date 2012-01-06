@@ -1,8 +1,9 @@
 define('models/product', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Product = DS.Model.extend({
+  Radium.Product = Radium.Core.extend({
     
   });
   

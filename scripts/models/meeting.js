@@ -1,10 +1,9 @@
 define('models/meeting', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Meeting = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date'),
+  Radium.Meeting = Radium.Core.extend({
     topic: DS.attr('string'),
     location: DS.attr('string'),
     starts_at: DS.attr('date'),

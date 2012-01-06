@@ -1,8 +1,9 @@
 define('models/note', function(require) {
   require('ember');
   require('data');
+  require('./core');
   
-  Radium.Note = DS.Model.extend({
+  Radium.Note = Radium.Core.extend({
     text: DS.attr('string')
   });
   
