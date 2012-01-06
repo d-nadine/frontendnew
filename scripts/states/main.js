@@ -1,7 +1,7 @@
 define('states/main', function(require) {
   
-  var loggedOut = require('states/loggedout'),
-      loggedIn = require('states/loggedin');
+  var loggedOut = require('./loggedout'),
+      loggedIn = require('./loggedin');
 
   Radium.App = Ember.StateManager.create({
     rootElement: '#main',

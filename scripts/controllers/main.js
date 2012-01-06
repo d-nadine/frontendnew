@@ -1,3 +1,3 @@
 define(function(require) {
-  require('controllers/app');
+  require('./app');
 });

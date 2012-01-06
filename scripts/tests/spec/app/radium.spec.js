@@ -1,8 +1,12 @@
 define('testdir/app/radium', function(require) {  
-  
-  describe("Creates global Radium namespace", function() {
-    it("expects Radium to exist", function() {
+
+  describe("Radium", function() {
+    it("exists", function() {
       expect(Radium).toBeDefined();
+    });
+    
+    it("creates an instance of Ember#Application", function() {
+      expect(Ember.typeOf(Radium)).toEqual('instance');
     });
   });
 });

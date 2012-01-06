@@ -1,7 +1,7 @@
 define('testdir/models/person.spec', function(require) {
   var Person = require('models/person');
   
-  describe("Person Class", function() {
+  describe("Radium#Person", function() {
 
     beforeEach(function() {
       this.person = Radium.Person.create({

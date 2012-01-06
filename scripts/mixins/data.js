@@ -6,8 +6,8 @@ define('mixins/data', function(require) {
     from: function(serialized) {
       return serialized;
     },
-    to: function(deseralized) {
-      return deserialized;
+    to: function(array) {
+      return array;
     }
   };
 });

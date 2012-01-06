@@ -1,60 +1,41 @@
-define('data', ['jquery', 'ember'], function(jQuery, Ember) {
 
 (function(exports) {
-//Copyright (C) 2011 by Living Social, Inc.
-
-//Permission is hereby granted, free of charge, to any person obtaining a copy of
-//this software and associated documentation files (the "Software"), to deal in
-//the Software without restriction, including without limitation the rights to
-//use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-//of the Software, and to permit persons to whom the Software is furnished to do
-//so, subject to the following conditions:
-
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
-
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//SOFTWARE.
-
 window.DS = SC.Namespace.create();
+
 })({});
+
 
 (function(exports) {
 DS.Adapter = SC.Object.extend({
   commit: function(store, commitDetails) {
     commitDetails.updated.eachType(function(type, array) {
-      this.updateMany(store, type, array.slice());
+      this.updateRecords(store, type, array.slice());
     }, this);
 
     commitDetails.created.eachType(function(type, array) {
-      this.createMany(store, type, array.slice());
+      this.createRecords(store, type, array.slice());
     }, this);
 
     commitDetails.deleted.eachType(function(type, array) {
-      this.deleteMany(store, type, array.slice());
+      this.deleteRecords(store, type, array.slice());
     }, this);
   },
 
-  createMany: function(store, type, models) {
+  createRecords: function(store, type, models) {
     models.forEach(function(model) {
-      this.create(store, type, model);
+      this.createRecord(store, type, model);
     }, this);
   },
 
-  updateMany: function(store, type, models) {
+  updateRecords: function(store, type, models) {
     models.forEach(function(model) {
-      this.update(store, type, model);
+      this.updateRecord(store, type, model);
     }, this);
   },
 
-  deleteMany: function(store, type, models) {
+  deleteRecords: function(store, type, models) {
     models.forEach(function(model) {
-      this.deleteModel(store, type, model);
+      this.deleteRecord(store, type, model);
     }, this);
   },
 
@@ -103,10 +84,10 @@ DS.ModelArray = SC.ArrayProxy.extend({
   },
 
   arrayDidChange: function(array, index, removed, added) {
-    this._super(array, index, removed, added);
-
     var modelCache = get(this, 'modelCache');
     modelCache.replace(index, 0, Array(added));
+    
+    this._super(array, index, removed, added);
   },
 
   arrayWillChange: function(array, index, removed, added) {
@@ -158,6 +139,196 @@ DS.AdapterPopulatedModelArray = DS.ModelArray.extend({
     set(this, 'content', Ember.A(clientIds));
     set(this, 'isLoaded', true);
     this.endPropertyChanges();
+  }
+});
+
+})({});
+
+
+(function(exports) {
+var get = Ember.get, set = Ember.set, getPath = Ember.getPath, fmt = Ember.String.fmt;
+
+var OrderedSet = SC.Object.extend({
+  init: function() {
+    this.clear();
+  },
+
+  clear: function() {
+    this.set('presenceSet', {});
+    this.set('list', SC.NativeArray.apply([]));
+  },
+
+  add: function(obj) {
+    var guid = SC.guidFor(obj),
+        presenceSet = get(this, 'presenceSet'),
+        list = get(this, 'list');
+
+    if (guid in presenceSet) { return; }
+
+    presenceSet[guid] = true;
+    list.pushObject(obj);
+  },
+
+  remove: function(obj) {
+    var guid = SC.guidFor(obj),
+        presenceSet = get(this, 'presenceSet'),
+        list = get(this, 'list');
+
+    delete presenceSet[guid];
+    list.removeObject(obj);
+  },
+
+  isEmpty: function() {
+    return getPath(this, 'list.length') === 0;
+  },
+
+  forEach: function(fn, self) {
+    get(this, 'list').forEach(function(item) {
+      fn.call(self, item);
+    });
+  },
+
+  toArray: function() {
+    return get(this, 'list').slice();
+  }
+});
+
+/**
+  A Hash stores values indexed by keys. Unlike JavaScript's
+  default Objects, the keys of a Hash can be any JavaScript
+  object.
+
+  Internally, a Hash has two data structures:
+
+    `keys`: an OrderedSet of all of the existing keys
+    `values`: a JavaScript Object indexed by the
+      Ember.guidFor(key)
+
+  When a key/value pair is added for the first time, we
+  add the key to the `keys` OrderedSet, and create or
+  replace an entry in `values`. When an entry is deleted,
+  we delete its entry in `keys` and `values`.
+*/
+
+var Hash = SC.Object.extend({
+  init: function() {
+    set(this, 'keys', OrderedSet.create());
+    set(this, 'values', {});
+  },
+
+  add: function(key, value) {
+    var keys = get(this, 'keys'), values = get(this, 'values');
+    var guid = Ember.guidFor(key);
+
+    keys.add(key);
+    values[guid] = value;
+
+    return value;
+  },
+
+  remove: function(key) {
+    var keys = get(this, 'keys'), values = get(this, 'values');
+    var guid = Ember.guidFor(key), value;
+
+    keys.remove(key);
+
+    value = values[guid];
+    delete values[guid];
+
+    return value;
+  },
+
+  fetch: function(key) {
+    var values = get(this, 'values');
+    var guid = Ember.guidFor(key);
+
+    return values[guid];
+  },
+
+  forEach: function(fn, binding) {
+    var keys = get(this, 'keys'), values = get(this, 'values');
+
+    keys.forEach(function(key) {
+      var guid = Ember.guidFor(key);
+      fn.call(binding, key, values[guid]);
+    });
+  }
+});
+
+DS.Transaction = Ember.Object.extend({
+  init: function() {
+    set(this, 'dirty', {
+      created: Hash.create(),
+      updated: Hash.create(),
+      deleted: Hash.create()
+    });
+  },
+
+  createRecord: function(type, hash) {
+    var store = get(this, 'store');
+
+    return store.createRecord(type, hash, this);
+  },
+
+  add: function(model) {
+    var modelTransaction = get(model, 'transaction');
+    ember_assert("Models cannot belong to more than one transaction at a time.", !modelTransaction);
+
+    set(model, 'transaction', this);
+  },
+
+  modelBecameDirty: function(kind, model) {
+    var dirty = get(get(this, 'dirty'), kind),
+        type = model.constructor;
+
+    var models = dirty.fetch(type);
+
+    models = models || dirty.add(type, OrderedSet.create());
+    models.add(model);
+  },
+
+  modelBecameClean: function(kind, model) {
+    var dirty = get(get(this, 'dirty'), kind),
+        type = model.constructor;
+
+    var models = dirty.fetch(type);
+    models.remove(model);
+
+    set(model, 'transaction', null);
+  },
+
+  commit: function() {
+    var dirtyMap = get(this, 'dirty');
+
+    var iterate = function(kind, fn, binding) {
+      var dirty = get(dirtyMap, kind);
+
+      dirty.forEach(function(type, models) {
+        if (models.isEmpty()) { return; }
+
+        models.forEach(function(model) { model.willCommit(); });
+        fn.call(binding, type, models.toArray());
+      });
+    };
+
+    var commitDetails = {
+      updated: {
+        eachType: function(fn, binding) { iterate('updated', fn, binding); }
+      },
+
+      created: {
+        eachType: function(fn, binding) { iterate('created', fn, binding); }
+      },
+
+      deleted: {
+        eachType: function(fn, binding) { iterate('deleted', fn, binding); }
+      }
+    };
+
+    var store = get(this, 'store');
+    var adapter = get(store, '_adapter');
+    if (adapter && adapter.commit) { adapter.commit(store, commitDetails); }
+    else { throw fmt("Adapter is either null or do not implement `commit` method", this); }
   }
 });
 
@@ -259,21 +430,18 @@ DS.Store = SC.Object.extend({
       set(DS, 'defaultStore', this);
     }
 
-    var adapter = get(this, 'adapter');
-    if (typeof adapter === 'string') {
-      set(this, 'adapter', getPath(this, adapter));
-    }
-
     set(this, 'data', []);
     set(this, 'ids', {});
     set(this, 'models', []);
     set(this, 'modelArrays', []);
     set(this, 'modelArraysByClientId', {});
-    set(this, 'updatedTypes', OrderedSet.create());
-    set(this, 'createdTypes', OrderedSet.create());
-    set(this, 'deletedTypes', OrderedSet.create());
+    set(this, 'defaultTransaction', DS.Transaction.create({ store: this }));
 
     return this._super();
+  },
+
+  transaction: function() {
+    return DS.Transaction.create({ store: this });
   },
 
   modelArraysForClientId: function(clientId) {
@@ -297,29 +465,43 @@ DS.Store = SC.Object.extend({
   */
   adapter: null,
 
+  _adapter: SC.computed(function() {
+    var adapter = get(this, 'adapter');
+    if (typeof adapter === 'string') {
+      return getPath(this, adapter);
+    }
+    return adapter;
+  }).property('adapter').cacheable(),
+
   clientIdCounter: -1,
 
   // ....................
   // . CREATE NEW MODEL .
   // ....................
 
-  create: function(type, hash) {
+  createRecord: function(type, hash, transaction) {
     hash = hash || {};
 
     var id = hash[getPath(type, 'proto.primaryKey')] || null;
 
-    var model = type.create({ data: hash || {}, store: this });
+    var model = type.create({
+      data: hash || {},
+      store: this,
+      transaction: transaction
+    });
+
     model.adapterDidCreate();
 
     var data = this.clientIdToHashMap(type);
     var models = get(this, 'models');
 
     var clientId = this.pushHash(hash, id, type);
-    this.updateModelArrays(type, clientId, hash);
 
     set(model, 'clientId', clientId);
 
-    get(this, 'models')[clientId] = model;
+    models[clientId] = model;
+    
+    this.updateModelArrays(type, clientId, hash);
 
     return model;
   },
@@ -328,8 +510,8 @@ DS.Store = SC.Object.extend({
   // . DELETE MODEL .
   // ................
 
-  deleteModel: function(model) {
-    model.deleteModel();
+  deleteRecord: function(model) {
+    model.deleteRecord();
   },
 
   // ...............
@@ -404,7 +586,9 @@ DS.Store = SC.Object.extend({
       model = this.createModel(type, clientId);
 
       // let the adapter set the data, possibly async
-      get(this, 'adapter').find(this, type, id);
+      var adapter = get(this, '_adapter');
+      if (adapter && adapter.find) { adapter.find(this, type, id); }
+      else { throw fmt("Adapter is either null or do not implement `find` method", this); }
     }
 
     return model;
@@ -435,7 +619,9 @@ DS.Store = SC.Object.extend({
     }
 
     if ((needed && get(needed, 'length') > 0) || query) {
-      get(this, 'adapter').findMany(this, type, needed, query);
+      var adapter = get(this, '_adapter');
+      if (adapter && adapter.findMany) { adapter.findMany(this, type, needed, query); }
+      else { throw fmt("Adapter is either null or do not implement `findMany` method", this); }
     }
 
     return this.createModelArray(type, clientIds);
@@ -443,7 +629,9 @@ DS.Store = SC.Object.extend({
 
   findQuery: function(type, query) {
     var array = DS.AdapterPopulatedModelArray.create({ type: type, content: Ember.A([]), store: this });
-    get(this, 'adapter').findQuery(this, type, query, array);
+    var adapter = get(this, '_adapter');
+    if (adapter && adapter.findQuery) { adapter.findQuery(this, type, query, array); }
+    else { throw fmt("Adapter is either null or do not implement `findQuery` method", this); }
     return array;
   },
 
@@ -451,8 +639,8 @@ DS.Store = SC.Object.extend({
     var array = DS.ModelArray.create({ type: type, content: Ember.A([]), store: this });
     this.registerModelArray(array, type);
 
-    var adapter = get(this, 'adapter');
-    if (adapter.findAll) { adapter.findAll(this, type); }
+    var adapter = get(this, '_adapter');
+    if (adapter && adapter.findAll) { adapter.findAll(this, type); }
 
     return array;
   },
@@ -476,7 +664,6 @@ DS.Store = SC.Object.extend({
     this.updateModelArrays(type, clientId, hash);
   },
 
-
   // Internally, the store keeps two data structures representing
   // the dirty models.
   //
@@ -495,6 +682,7 @@ DS.Store = SC.Object.extend({
   //       sc3: [ thing1, thing2 ]
   //     }
   //   }
+  //
   //
   // Adapters receive an iterator that they can use to retrieve the
   // type and array at the same time:
@@ -519,89 +707,49 @@ DS.Store = SC.Object.extend({
   // `created`, `updated` and `deleted`. These correspond with the
   // commitDetails passed into the adapter's commit method.
 
-  modelBecameDirty: function(kind, model) {
-    var dirtyTypes = get(this, kind + 'Types'), type = model.constructor;
-    dirtyTypes.add(type);
-
-    var dirtyModels = this.typeMap(type)[kind + 'Models'];
-    dirtyModels.add(model);
-  },
-
-  modelBecameClean: function(kind, model) {
-    var dirtyTypes = get(this, kind + 'Types'), type = model.constructor;
-
-    var dirtyModels = this.typeMap(type)[kind + 'Models'];
-    dirtyModels.remove(model);
-
-    if (dirtyModels.isEmpty()) {
-      dirtyTypes.remove(type);
-    }
-  },
-
-  eachDirtyType: function(kind, fn, self) {
-    var types = get(this, kind + 'Types'), dirtyModels;
-
-    types.forEach(function(type) {
-      dirtyModels = this.typeMap(type)[kind + 'Models'];
-      fn.call(self, type, get(dirtyModels, 'list'));
-    }, this);
-  },
-
   // ..............
   // . PERSISTING .
   // ..............
 
   commit: function() {
-    var self = this;
-
-    var iterate = function(kind, fn, binding) {
-      self.eachDirtyType(kind, function(type, models) {
-        models.forEach(function(model) {
-          model.willCommit();
-        });
-
-        fn.call(binding, type, models);
-      });
-    };
-
-    var commitDetails = {
-      updated: {
-        eachType: function(fn, binding) { iterate('updated', fn, binding); }
-      },
-
-      created: {
-        eachType: function(fn, binding) { iterate('created', fn, binding); }
-      },
-
-      deleted: {
-        eachType: function(fn, binding) { iterate('deleted', fn, binding); }
-      }
-    };
-
-    get(this, 'adapter').commit(this, commitDetails);
+    get(this, 'defaultTransaction').commit();
   },
 
-  didUpdateModels: function(array) {
-    array.forEach(function(model) {
-      model.adapterDidUpdate();
-    });
+  didUpdateRecords: function(array, hashes) {
+    if (arguments.length === 2) {
+      array.forEach(function(model, idx) {
+        this.didUpdateRecord(model, hashes[idx]);
+      }, this);
+    } else {
+      array.forEach(function(model) {
+        this.didUpdateRecord(model);
+      }, this);
+    }
   },
 
-  didUpdateModel: function(model) {
+  didUpdateRecord: function(model, hash) {
+    if (arguments.length === 2) {
+      var clientId = get(model, 'clientId');
+      var data = this.clientIdToHashMap(model.constructor);
+
+      data[clientId] = hash;
+      model.set('data', hash);
+    }
+
     model.adapterDidUpdate();
   },
 
-  didDeleteModels: function(array) {
+  didDeleteRecords: function(array) {
     array.forEach(function(model) {
       model.adapterDidDelete();
     });
   },
 
-  didDeleteModel: function(model) {
+  didDeleteRecord: function(model) {
     model.adapterDidDelete();
   },
 
-  didCreateModels: function(type, array, hashes) {
+  didCreateRecords: function(type, array, hashes) {
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
 
     var idToClientIdMap = this.idToClientIdMap(type);
@@ -613,9 +761,8 @@ DS.Store = SC.Object.extend({
       id = hash[primaryKey];
       clientId = get(model, 'clientId');
 
-      // TODO: Notify models that data has changed?
       data[clientId] = hash;
-      model.set('data', hash);
+      set(model, 'data', hash);
 
       idToClientIdMap[id] = clientId;
       idList.push(id);
@@ -624,7 +771,7 @@ DS.Store = SC.Object.extend({
     }
   },
 
-  didCreateModel: function(model, hash) {
+  didCreateRecord: function(model, hash) {
     var type = model.constructor;
 
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
@@ -637,6 +784,7 @@ DS.Store = SC.Object.extend({
 
     clientId = get(model, 'clientId');
     data[clientId] = hash;
+    set(model, 'data', hash);
 
     idToClientIdMap[id] = clientId;
     idList.push(id);
@@ -747,10 +895,7 @@ DS.Store = SC.Object.extend({
           idToCid: {},
           idList: [],
           cidList: [],
-          cidToHash: {},
-          updatedModels: OrderedSet.create(),
-          createdModels: OrderedSet.create(),
-          deletedModels: OrderedSet.create()
+          cidToHash: {}
       });
     }
   },
@@ -1005,9 +1150,32 @@ var states = {
 
         enter: function(manager) {
           var model = get(manager, 'model');
-          var store = get(model, 'store');
 
-          if (store) { store.modelBecameDirty('created', model); }
+          model.withTransaction(function (t) {
+            t.modelBecameDirty('created', model);
+          });
+        },
+
+        exit: function(manager) {
+          var model = get(manager, 'model');
+
+          model.didCreate();
+
+          model.withTransaction(function (t) {
+            t.modelBecameClean('created', model);
+          });
+        },
+
+        setProperty: function(manager, context) {
+          var key = context.key, value = context.value;
+
+          var model = get(manager, 'model'), type = model.constructor;
+          var store = get(model, 'store');
+          var data = get(model, 'data');
+
+          data[key] = value;
+
+          if (store) { store.hashWasUpdated(type, get(model, 'clientId')); }
         },
 
         willCommit: function(manager) {
@@ -1016,15 +1184,6 @@ var states = {
 
         saving: DS.State.create({
           isSaving: true,
-
-          exit: function(manager) {
-            var model = get(manager, 'model');
-            var store = get(model, 'store');
-
-            model.didCreate();
-
-            if (store) { store.modelBecameClean('created', model); }
-          },
 
           didUpdate: function(manager) {
             manager.goToState('loaded');
@@ -1039,31 +1198,33 @@ var states = {
 
         enter: function(manager) {
           var model = get(manager, 'model');
-          var store = get(model, 'store');
 
-          if (store) { store.modelBecameDirty('updated', model); }
+          model.withTransaction(function(t) {
+            t.modelBecameDirty('updated', model);
+          });
         },
 
         willCommit: function(manager) {
           manager.goToState('saving');
         },
 
+        exit: function(manager) {
+          var model = get(manager, 'model');
+
+          model.didUpdate();
+
+          model.withTransaction(function(t) {
+            t.modelBecameClean('updated', model);
+          });
+        },
+
         saving: DS.State.create({
           isSaving: true,
-
-          exit: function(manager) {
-            var model = get(manager, 'model');
-            var store = get(model, 'store');
-
-            model.didUpdate();
-
-            if (store) { store.modelBecameClean('updated', model); }
-          },
 
           didUpdate: function(manager) {
             manager.goToState('loaded');
           }
-        }),
+        })
       })
     }),
 
@@ -1080,8 +1241,11 @@ var states = {
 
         if (store) {
           store.removeFromModelArrays(model);
-          store.modelBecameDirty('deleted', model);
         }
+
+        model.withTransaction(function(t) {
+          t.modelBecameDirty('deleted', model);
+        });
       },
 
       willCommit: function(manager) {
@@ -1097,9 +1261,10 @@ var states = {
 
         exit: function(stateManager) {
           var model = get(stateManager, 'model');
-          var store = get(model, 'store');
 
-          store.modelBecameClean('deleted', model);
+          model.withTransaction(function(t) {
+            t.modelBecameClean('deleted', model);
+          });
         }
       }),
 
@@ -1134,8 +1299,11 @@ DS.Model = SC.Object.extend({
 
   clientId: null,
 
+  // because unknownProperty is used, any internal property
+  // must be initialized here.
   primaryKey: 'id',
   data: null,
+  transaction: null,
 
   didLoad: Ember.K,
   didUpdate: Ember.K,
@@ -1150,6 +1318,12 @@ DS.Model = SC.Object.extend({
     stateManager.goToState('empty');
   },
 
+  withTransaction: function(fn) {
+    var transaction = get(this, 'transaction') || getPath(this, 'store.defaultTransaction');
+
+    if (transaction) { fn(transaction); }
+  },
+
   setData: function(data) {
     var stateManager = get(this, 'stateManager');
     stateManager.send('setData', data);
@@ -1160,9 +1334,14 @@ DS.Model = SC.Object.extend({
     stateManager.send('setProperty', { key: key, value: value });
   },
 
-  "deleteModel": function() {
+  deleteRecord: function() {
     var stateManager = get(this, 'stateManager');
     stateManager.send('delete');
+  },
+
+  destroy: function() {
+    this.deleteRecord();
+    this._super();
   },
 
   loadingData: function() {
@@ -1254,6 +1433,7 @@ DS.hasMany = function(type, options) {
     var data = get(this, 'data'), ids;
     var store = get(this, 'store');
 
+    key = (options && options.key) ? options.key : key;
     ids = findMany(store, type, data, key);
     var hasMany = store.findMany(type, ids);
 
@@ -1309,15 +1489,73 @@ DS.attr.transforms = {
 
   date: {
     from: function(serialized) {
-      return new Date(serialized);
+      var type = typeof serialized;
+
+      if (type === "string" || type === "number") {
+        return new Date(serialized);
+      } else if (serialized === null || serialized === undefined) {
+        // if the value is not present in the data,
+        // return undefined, not null.
+        return serialized;
+      } else {
+        return null;
+      }
     },
 
-    to: function(deserialized) {
-      return deserialized.toString();
+    to: function(date) {
+      if (date instanceof Date) {
+        var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        var pad = function(num) {
+          return num < 10 ? "0"+num : ""+num;
+        };
+
+        var utcYear = date.getUTCFullYear(),
+            utcMonth = date.getUTCMonth(),
+            utcDayOfMonth = date.getUTCDate(),
+            utcDay = date.getUTCDay(),
+            utcHours = date.getUTCHours(),
+            utcMinutes = date.getUTCMinutes(),
+            utcSeconds = date.getUTCSeconds();
+
+
+        var dayOfWeek = days[utcDay];
+        var dayOfMonth = pad(utcDayOfMonth);
+        var month = months[utcMonth];
+
+        return dayOfWeek + ", " + dayOfMonth + " " + month + " " + utcYear + " " +
+               pad(utcHours) + ":" + pad(utcMinutes) + ":" + pad(utcSeconds) + " GMT";
+      } else if (date === undefined) {
+        return undefined;
+      } else {
+        return null;
+      }
     }
   }
 };
 
 })({});
 
-});
+
+(function(exports) {
+//Copyright (C) 2011 by Living Social, Inc.
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy of
+//this software and associated documentation files (the "Software"), to deal in
+//the Software without restriction, including without limitation the rights to
+//use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+//of the Software, and to permit persons to whom the Software is furnished to do
+//so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+})({});
