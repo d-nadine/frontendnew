@@ -24,6 +24,10 @@ define('testdir/models/person.spec', function(require) {
       this.longpersonname.destroy();
     });
 
+    it("inherits from Radium#Core", function() {
+      expect(Radium.Core.detect(Radium.Person)).toBeTruthy();
+    });
+    
     it("should extract first name", function() {
       expect(this.person.get('firstName')).toEqual("Spiros");
     });
