@@ -34,6 +34,7 @@ DS.Adapter = SC.Object.extend({
   },
 
   deleteRecords: function(store, type, models) {
+    alert();
     models.forEach(function(model) {
       this.deleteRecord(store, type, model);
     }, this);

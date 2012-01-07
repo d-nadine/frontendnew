@@ -39,7 +39,7 @@ define(function(require) {
     phone_calls: DS.hasMany(Radium.PhoneCall),
     messages: DS.hasMany(Radium.Message),
     activities: DS.hasMany(Radium.Activity),
-    followers: DS.hasMany(Radium.User)
+    followers: DS.hasMany(Radium.Follower)
   });
   
 });
