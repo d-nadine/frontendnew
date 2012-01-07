@@ -3,7 +3,7 @@ define('testdir/models/user.spec', function(require) {
   require('ember');
   require('data');
   require('radium');
-  require('models/person');
+  require('models/contact');
   require('models/user');
   
   describe("Radium#User", function() {
@@ -48,7 +48,7 @@ define('testdir/models/user.spec', function(require) {
           "email": "example@example.com",
           "name": "Adam Hawkins",
           "phone_number": "+1234987"
-        })
+        });
       });
       
       afterEach(function() {
@@ -59,6 +59,24 @@ define('testdir/models/user.spec', function(require) {
         var user = this.store.find(Radium.User, 1);
         user.set('name', "Joshua Jones");
         expect(user.get('firstName')).toBe("Joshua");
+      });
+    });
+    
+    describe("associations", function() {
+      it("loads associated Radium#Contact", function() {
+        this.store = DS.Store.create({adapter: 'DS.fixtureAdapter'});
+        this.store.createRecord(Radium.User, {
+          "id": 1,
+          "name": "Proposition Joe",
+          "contacts": [2]
+        });
+        this.store.createRecord(Radium.Contact, {
+          "id": 2,
+          "name": "Marlo Stanfield"
+        });
+        
+        expect(this.store.find(Radium.User, 1).get('contacts').objectAt(0).get('name'))
+          .toBe("Marlo Stanfield");
       });
     });
     

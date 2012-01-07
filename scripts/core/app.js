@@ -8,6 +8,7 @@ define(function(require) {
   require('order!mixins/jqueryui');
   require('order!controllers/main');
   require('order!models/main');
+  require('order!fixtures/main');
   require('order!views/main');
   require('order!states/main');
   require('order!core/routes');
