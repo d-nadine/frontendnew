@@ -6,16 +6,17 @@ define('testdir/models/person.spec', function(require) {
     beforeEach(function() {
       this.person = Radium.Person.create({
         id: 1,
-        created_at: "2011-05-04T12:03:47Z",
-        updated_at: "2011-05-04T12:03:47Z",
         name: 'Spiros Vondos Vondopoulos'
       });
 
       this.longpersonname = Radium.Person.create({
         id: 2,
-        created_at: "2011-05-04T12:03:47Z",
-        updated_at: "2011-05-04T12:03:47Z",
         name: 'Joshua Ray Jones-Hoefler'
+      });
+      
+      this.firstnameonly = Radium.Person.create({
+        id: 3,
+        name: "Bubbles"
       });
     });
 
@@ -40,5 +41,9 @@ define('testdir/models/person.spec', function(require) {
       expect(this.longpersonname.get('abbrName')).toEqual("Joshua J.");
     });
 
+    it("should skip an abbreviation if the name is only 1 word long", function() {
+      expect(this.firstnameonly.get('firstName')).toEqual("Bubbles");
+      expect(this.firstnameonly.get('abbrName')).toEqual("Bubbles");
+    });
   });
 });

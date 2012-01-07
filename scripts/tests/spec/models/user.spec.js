@@ -14,7 +14,7 @@ define('testdir/models/user.spec', function(require) {
     describe("creating a new user", function() {
       
       beforeEach(function() {
-        this.store = DS.Store.create({adapter: 'DS.fixtureAdapter'});
+        this.store = DS.Store.create();
         this.store.createRecord(Radium.User, {
           "id": 1,
           "email": "example@example.com",
@@ -42,7 +42,7 @@ define('testdir/models/user.spec', function(require) {
     
     describe("updating a user", function() {
       beforeEach(function() {
-        this.store = DS.Store.create({adapter: 'DS.fixtureAdapter'});
+        this.store = DS.Store.create();
         this.store.createRecord(Radium.User, {
           "id": 1,
           "email": "example@example.com",
@@ -64,7 +64,7 @@ define('testdir/models/user.spec', function(require) {
     
     describe("associations", function() {
       it("loads associated Radium#Contact", function() {
-        this.store = DS.Store.create({adapter: 'DS.fixtureAdapter'});
+        this.store = DS.Store.create();
         this.store.createRecord(Radium.User, {
           "id": 1,
           "name": "Proposition Joe",

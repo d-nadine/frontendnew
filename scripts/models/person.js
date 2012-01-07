@@ -22,8 +22,13 @@ define(function(require) {
     
     // Computed name properties
     abbrName: function() {
-      var nameArr = this.get('name').split(" ");
-      return nameArr[0] + " " + nameArr[nameArr.length - 1].substr(0, 1) + ".";
+      var nameArray = this.get('name').split(" ");
+      if (nameArray.length > 1) {
+        return nameArray[0] + " " + nameArray[nameArray.length - 1].substr(0, 1) + ".";
+      } else {
+        return nameArray[0];
+      }
+      
     }.property('name'),
     firstName: function() {
       return this.get('name').split(" ")[0];
