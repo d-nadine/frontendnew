@@ -25,4 +25,7 @@ require.config({
 
 require(['core/app'], function() {
   console.log('Application started...');
+  Radium.usersController.fetchUsers();
+  Radium.contactsController.fetchContacts();
+  
 });
