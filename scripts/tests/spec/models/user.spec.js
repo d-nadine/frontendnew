@@ -78,6 +78,31 @@ define('testdir/models/user.spec', function(require) {
         expect(this.store.find(Radium.User, 1).get('contacts').objectAt(0).get('name'))
           .toBe("Marlo Stanfield");
       });
+      
+      it("should assign a contact from one user to another", function() {
+        this.store = DS.Store.create();
+        this.store.loadMany(Radium.User, 
+          {
+            "id": 1,
+            "name": "Avon Barksdale",
+            "contacts": [2]
+          },
+          {
+            "id": 2,
+            "name": "Marlo Stanfield",
+            "contacts": []
+          }
+        );
+        this.store.createRecord(Radium.Contact, {
+          "id": 102,
+          "name": "Bubbles",
+          "user": 1
+        });
+        
+        var contact = this.store.find(Radium.Contact, 102);
+        
+        // expect(this.store.find(Radium.User, 2).get('contacts')).toBe([])
+      });
     });
     
   });
