@@ -1,5 +1,9 @@
 define('core/routes', function(require) {
   
+  require('ember');
+  require('controllers/main');
+  require('states/main');
+  
   Radium.Routes = Davis(function() {      
     this.before(function(req) {
       console.log('logged in?', ISLOGGEDIN);

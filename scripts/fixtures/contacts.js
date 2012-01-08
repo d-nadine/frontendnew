@@ -5,31 +5,37 @@ define('fixtures/contacts', function(require) {
   Radium.Contact.FIXTURES = [
     {
       id: 101,
-      name: "Stringer Bell"
+      name: "Stringer Bell",
+      user: 1
     },
     {
       id: 102,
-      name: "Avon Barksdale"
+      name: "Avon Barksdale",
+      user: 1
     },
     {
       id: 103,
-      name: "Bodie Broadus"
+      name: "Bodie Broadus",
     },
     {
       id: 104,
-      name: "Marlo Stanfield"
+      name: "Marlo Stanfield",
+      user: 5
     },
     {
       id: 105,
-      name: "D'Angelo Barksdale"
+      name: "D'Angelo Barksdale",
+      user: 4
     },
     {
       id: 106,
-      name: "Chris Partlow"
+      name: "Chris Partlow",
+      user: 6
     },
     {
       id: 107,
-      name: "Snoop Pearson"
+      name: "Snoop Pearson",
+      user: 7
     },
     {      
       id: 108,
@@ -37,7 +43,8 @@ define('fixtures/contacts', function(require) {
     },
     {
       id: 109,
-      name: "Bubbles"
+      name: "Bubbles",
+      user: 3
     }
   ];
   

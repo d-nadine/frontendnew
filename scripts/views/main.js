@@ -1,4 +1,4 @@
 define(function(require) {
-  require('./topbar');
-  require('./dashboard');
+  require('views/topbar');
+  require('views/dashboard');  
 });

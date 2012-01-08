@@ -1,8 +1,8 @@
 /**
   @extends {Class} Person
 */
-define(function(require) {
-  require('./person');
+define('models/user', function(require) {
+  require('models/person');
 
   Radium.User = Radium.Person.extend({
     email: DS.attr('string'),

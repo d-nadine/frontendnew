@@ -3,8 +3,11 @@ define('testdir/models/user.spec', function(require) {
   require('ember');
   require('data');
   require('radium');
+  require('models/person');
   require('models/contact');
   require('models/user');
+  
+  var get = Ember.get;
   
   describe("Radium#User", function() {
     it("inherits from Radium.Person", function() {
@@ -20,7 +23,7 @@ define('testdir/models/user.spec', function(require) {
           "email": "example@example.com",
           "name": "Adam Hawkins",
           "phone_number": "+1234987"
-        })
+        });
       });
       
       afterEach(function() {
@@ -80,28 +83,35 @@ define('testdir/models/user.spec', function(require) {
       });
       
       it("should assign a contact from one user to another", function() {
-        this.store = DS.Store.create();
-        this.store.loadMany(Radium.User, 
-          {
-            "id": 1,
-            "name": "Avon Barksdale",
-            "contacts": [2]
-          },
-          {
-            "id": 2,
-            "name": "Marlo Stanfield",
-            "contacts": []
-          }
-        );
-        this.store.createRecord(Radium.Contact, {
-          "id": 102,
-          "name": "Bubbles",
-          "user": 1
+        Radium.User.FIXTURES = [];
+        Radium.Contact.FIXTURES = [];
+        var store = DS.Store.create({
+          adapter: 'DS.fixturesAdapter'
         });
         
-        var contact = this.store.find(Radium.Contact, 102);
+        store.loadMany(Radium.User, [
+          {
+            id: 1,
+            name: "Avon Barksdale",
+            contacts: [101]
+          },
+          {
+            id: 2,
+            name: "Marlo Stanfield",
+            contacts: []
+          }
+        ]);
         
-        // expect(this.store.find(Radium.User, 2).get('contacts')).toBe([])
+        store.load(Radium.Contact, {
+          id: 101,
+          name: "Bubbles",
+          user: 1
+        });
+        
+        var user = store.find(Radium.User, 1);
+        var contact = store.find(Radium.Contact, 101);
+        expect(contact.get('user')).toBe(user);
+        
       });
     });
     

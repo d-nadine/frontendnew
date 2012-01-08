@@ -1,6 +1,7 @@
 define('views/dashboard', function(require) {
   require('views/profile');
   require('views/globalsearch');
+  require('views/filter_list');
   
   var template = require('text!templates/dashboard.handlebars'),
       userListTemplate = require('text!templates/users_list.handlebars');
@@ -14,6 +15,9 @@ define('views/dashboard', function(require) {
       classNames: 'filters people'.w(),
       contentBinding: 'Radium.usersController',
       itemViewClass: Ember.View.extend({
+        click: function() {
+          
+        },
         template: Ember.Handlebars.compile(userListTemplate)
       }),
       didInsertElement: function() {

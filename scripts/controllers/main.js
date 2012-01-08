@@ -1,5 +1,6 @@
 define(function(require) {
-  require('./app');
-  require('./users');
-  require('./contacts');
+  require('controllers/app');
+  require('controllers/users');
+  require('controllers/contacts');
+  require('controllers/resources');
 });

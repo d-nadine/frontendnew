@@ -17,5 +17,4 @@ define('controllers/users', function(require) {
       });
     }
   });
-  
 });

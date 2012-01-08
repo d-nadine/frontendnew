@@ -2,6 +2,6 @@ define(function(require) {
   require('ember');
   require('data');
   
-  require('./user');
-  require('./contact');
+  require('models/user');
+  require('models/contact');
 });
