@@ -16,6 +16,7 @@ define('fixtures/contacts', function(require) {
     {
       id: 103,
       name: "Bodie Broadus",
+      user: 1
     },
     {
       id: 104,
@@ -39,7 +40,8 @@ define('fixtures/contacts', function(require) {
     },
     {      
       id: 108,
-      name: "Michael Lee"
+      name: "Michael Lee",
+      user: 2
     },
     {
       id: 109,

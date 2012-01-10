@@ -6,11 +6,12 @@ define('fixtures/users', function(require) {
     {
       id: 1,
       name: "Jimmy McNulty",
-      contacts: [101, 102]
+      contacts: [101, 102, 103]
     },
     {
       id: 2,
       name: "Cedric Daniels",
+      contacts: [108]
     },
     {
       id: 3,

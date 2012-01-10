@@ -1430,11 +1430,10 @@ define('data', function(require) {
     return SC.computed(function(key) {
       var data = get(this, 'data'), ids;
       var store = get(this, 'store');
-
+      if (typeof type === 'string') { type = getPath(this, type); }
       key = (options && options.key) ? options.key : key;
       ids = findMany(store, type, data, key);
       var hasMany = store.findMany(type, ids);
-
       SC.addObserver(this, 'data', function() {
         var data = get(this, 'data');
 
@@ -1449,7 +1448,6 @@ define('data', function(require) {
 
         set(hasMany, 'content', Ember.A(clientIds));
       });
-
       return hasMany;
     }).property().cacheable();
   };
