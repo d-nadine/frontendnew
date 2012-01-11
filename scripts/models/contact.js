@@ -3,6 +3,10 @@
 */
 
 define('models/contact', function(require) {
+  
+  require('ember');
+  require('data');
+  var Radium = require('radium');
   require('models/person');
   
   Radium.Contact = Radium.Person.extend({
@@ -13,4 +17,5 @@ define('models/contact', function(require) {
     user: DS.hasOne('Radium.User')
   });
 
+  return Radium;
 });

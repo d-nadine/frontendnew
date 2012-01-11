@@ -23,8 +23,10 @@ require.config({
   ]
 });
 
-require(['core/app'], function() {
+require(['core/app'], function(Radium) {
   console.log('Application started...');
-  Radium.contactsController.fetchContacts();
-  Radium.usersController.fetchUsers();
+  
+  window.Radium = Radium;
+  // Radium.usersController.fetchUsers();
+  // Radium.contactsController.fetchContacts();
 });

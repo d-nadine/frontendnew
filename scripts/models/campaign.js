@@ -1,6 +1,8 @@
 define('models/campaign', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Campaign = Radium.Core.extend({
@@ -25,4 +27,5 @@ define('models/campaign', function(require) {
     activities: DS.hasMany(Radium.Activity)
   });
   
+  return Radium;
 });

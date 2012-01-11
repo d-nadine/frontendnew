@@ -1,6 +1,8 @@
 define('models/comment', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Comment = Radium.Core.extend({
@@ -10,4 +12,5 @@ define('models/comment', function(require) {
     attachments: DS.hasMany(Radium.Attachment) 
   });
   
+  return Radium;
 });

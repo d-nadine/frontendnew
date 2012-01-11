@@ -1,6 +1,8 @@
 define('models/meeting', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Meeting = Radium.Core.extend({
@@ -17,4 +19,5 @@ define('models/meeting', function(require) {
     
   });
   
+  return Radium;
 });

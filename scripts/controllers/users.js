@@ -1,5 +1,7 @@
 define('controllers/users', function(require) {
   
+  require('ember');
+  var Radium = require('radium');
   require('models/user');
   require('fixtures/users');
   
@@ -17,4 +19,6 @@ define('controllers/users', function(require) {
       });
     }
   });
+  
+  return Radium;
 });

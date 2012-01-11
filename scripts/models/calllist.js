@@ -1,6 +1,8 @@
 define('models/todo', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Todo = Radium.Core.extend({
@@ -19,4 +21,5 @@ define('models/todo', function(require) {
     contacts: DS.hasMany(Radium.Contact)
   });
   
+  return Radium;
 });

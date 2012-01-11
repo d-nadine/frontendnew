@@ -1,5 +1,8 @@
 define('testdir/views/jq.progressbar.spec', function(require) {
   
+  require('ember');
+  var Radium = require('radium');
+  
   var view;
   
   describe("ProgressBarView", function() {

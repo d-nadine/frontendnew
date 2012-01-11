@@ -1,6 +1,8 @@
 define('models/phonecall', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.PhoneCall = Radium.Core.extend({
@@ -19,4 +21,5 @@ define('models/phonecall', function(require) {
     
   });
   
+  return Radium;
 });

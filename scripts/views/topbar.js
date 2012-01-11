@@ -1,6 +1,8 @@
 define('views/topbar', function(require) {
   
-  var buttonView = require('views/button'),
+  require('ember');
+  var Radium = require('radium'),
+      buttonView = require('views/button'),
       template = require('text!templates/topbar.handlebars');
   
   Radium.TopbarView = Ember.View.extend({
@@ -23,4 +25,5 @@ define('views/topbar', function(require) {
     template: Ember.Handlebars.compile(template)
   });
   
+  return Radium;
 });

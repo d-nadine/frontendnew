@@ -4,8 +4,10 @@
 */
 
 define(function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   require('./deal');
   require('./campaign');
@@ -47,4 +49,5 @@ define(function(require) {
     followers: DS.hasMany(Radium.Follower)
   });
   
+  return Radium;
 });

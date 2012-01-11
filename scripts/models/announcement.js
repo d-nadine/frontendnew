@@ -1,6 +1,8 @@
 define('models/announcement', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Announcement = Radium.Core.extend({
@@ -11,4 +13,5 @@ define('models/announcement', function(require) {
     user: DS.hasMany(Radium.User)
   });
   
+  return Radium;
 });

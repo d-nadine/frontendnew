@@ -1,6 +1,8 @@
 define('models/deal', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Deal = Radium.Core.extend({
@@ -17,4 +19,5 @@ define('models/deal', function(require) {
     activities: DS.hasMany(Radium.Activity)
   });
   
+  return Radium;
 });

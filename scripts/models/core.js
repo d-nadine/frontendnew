@@ -5,9 +5,14 @@
 
 define('models/radium', function(require) {
   
+  require('ember');
+  require('data');
+  var Radium = require('radium');
+  
   Radium.Core = DS.Model.extend({
     created_at: DS.attr('date'),
     updated_at: DS.attr('date')
   });
   
+  return Radium;
 });

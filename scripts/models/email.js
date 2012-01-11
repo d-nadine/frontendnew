@@ -2,6 +2,7 @@ define('models/email', function(require) {
   
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./message');
   
   Radium.Email = Radium.Message.extend({
@@ -9,4 +10,6 @@ define('models/email', function(require) {
     html: DS.attr('string')
     // FIXME: Add back Sender object once I know what to do with it.
   });
+  
+  return Radium;
 });

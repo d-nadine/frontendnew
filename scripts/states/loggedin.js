@@ -1,4 +1,8 @@
 define(function(require) {
+  
+  require('ember');
+  require('data');
+  var Radium = require('radium');
   require('views/topbar');
     
   var topBarView = Radium.TopbarView.create(),
@@ -24,4 +28,5 @@ define(function(require) {
     settings: Ember.State.create({})
   });
   
+  return Radium;
 });

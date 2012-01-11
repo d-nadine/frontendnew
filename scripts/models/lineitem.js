@@ -1,6 +1,8 @@
 define('models/lineitem', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   
   Radium.LineItem = DS.Model.extend({
     name: DS.attr('string'),
@@ -10,4 +12,5 @@ define('models/lineitem', function(require) {
     product: DS.attr('integer')
   });
   
+  return Radium;
 });

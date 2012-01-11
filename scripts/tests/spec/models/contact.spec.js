@@ -2,7 +2,7 @@ define('testdir/models/contact.spec', function(require) {
   
   require('ember');
   require('data');
-  require('radium');
+  var Radium = require('radium');
   require('models/contact');
   
   Radium.Contact.FIXTURES = [];

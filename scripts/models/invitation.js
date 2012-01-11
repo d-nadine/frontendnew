@@ -2,6 +2,8 @@ define('models/invitation', function(require) {
   
   require('ember');
   require('data');
+  var Radium = require('radium');
+  require('./message');
   
   Radium.Invitation = Radium.Message.extend({
     // FIXME: Add validation, state can only have pending, cancelled, or rescheduled
@@ -12,4 +14,6 @@ define('models/invitation', function(require) {
     // FIXME: DS.hasOne
     user: 28
   });
+  
+  return Radium;
 });

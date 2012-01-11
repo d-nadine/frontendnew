@@ -1,6 +1,8 @@
 define('models/activity', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Activity = Radium.Core.extend({
@@ -13,4 +15,5 @@ define('models/activity', function(require) {
     reference: {}
   });
   
+  return Radium;
 });

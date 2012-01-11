@@ -2,7 +2,11 @@
   @extends {Class} Person
 */
 define('models/user', function(require) {
+  require('ember');
+  require('data');
+  var Radium = require('radium');
   require('models/person');
+  require('models/contact');
 
   Radium.User = Radium.Person.extend({
     email: DS.attr('string'),
@@ -11,5 +15,6 @@ define('models/user', function(require) {
     contacts: DS.hasMany('Radium.Contact'),
     following: DS.hasMany('Radium.User')
   });
-    
+  
+  return Radium;
 });

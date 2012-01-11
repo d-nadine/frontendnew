@@ -1,6 +1,8 @@
 define('models/emailaddr', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.EmailAddress = Radium.Core.extend({
@@ -9,4 +11,5 @@ define('models/emailaddr', function(require) {
     accepted_values: DS.attr('string')
   });
   
+  return Radium;
 });

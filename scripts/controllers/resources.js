@@ -5,7 +5,7 @@
 
 define('controllers/resources', function(require) {
   require('ember');
-  require('radium');
+  var Radium = require('radium');
   
   Radium.resourcesController = Ember.ArrayProxy.create({
     content: [
@@ -21,4 +21,5 @@ define('controllers/resources', function(require) {
     ]
   });
   
+  return Radium;
 });

@@ -1,6 +1,8 @@
 define('models/customfield', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Field = Radium.Core.extend({
@@ -11,4 +13,5 @@ define('models/customfield', function(require) {
     kind: DS.attr('string')
   });
   
+  return Radium;
 });

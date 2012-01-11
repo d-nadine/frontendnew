@@ -1,6 +1,8 @@
 define('models/address', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Address = Radium.Core.extend({
@@ -12,4 +14,5 @@ define('models/address', function(require) {
     time_zone: DS.attr('string')
   });
   
+  return Radium;
 });

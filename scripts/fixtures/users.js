@@ -1,5 +1,5 @@
 define('fixtures/users', function(require) {
-  
+  var Radium = require('radium');
   require('models/user');
   
   Radium.User.FIXTURES = [
@@ -40,4 +40,5 @@ define('fixtures/users', function(require) {
     }
   ];
   
+  return Radium;
 });

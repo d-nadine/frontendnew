@@ -1,11 +1,14 @@
 define('testdir/models/user.spec', function(require) {  
   
+  require('ember');
+  require('data')
+  var Radium = require('radium');
+  require('models/contact');
+  require('models/user');
+  
   var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
   
   describe("Radium#User", function() {
-    afterEach(function() {
-      set(DS, 'defaultStore', null);
-    });
     
     it("inherits from Radium.Person", function() {
       expect(Radium.Person.detect(Radium.User)).toBeTruthy();
@@ -15,7 +18,7 @@ define('testdir/models/user.spec', function(require) {
 
       beforeEach(function() {
         this.store = DS.Store.create();
-        this.store.createRecord(Radium.User, {
+        this.store.load(Radium.User, {
           "id": 1,
           "email": "example@example.com",
           "name": "Adam Hawkins",
@@ -37,13 +40,12 @@ define('testdir/models/user.spec', function(require) {
         expect(person.get('firstName')).toBe("Adam");
         expect(person.get('abbrName')).toBe("Adam H.");
       });
-
     });
 
     describe("updating a user", function() {
       beforeEach(function() {
         this.store = DS.Store.create();
-        this.store.createRecord(Radium.User, {
+        this.store.load(Radium.User, {
           "id": 1,
           "email": "example@example.com",
           "name": "Adam Hawkins",
@@ -62,64 +64,34 @@ define('testdir/models/user.spec', function(require) {
       });
     });
     
-    
-    describe("associations", function() {
-      it("loads associated Radium#Contact", function() {
-        var user, contact, store = DS.Store.create();
+    describe("", function() {
+      var adapter, store, server;
+      beforeEach(function() {
+        adapter = DS.RESTAdapter.create();
+        store = DS.Store.create({adapter: adapter});
+        server = sinon.fakeServer.create();
         
-        store.createRecord(Radium.User, {
-          id: 1,
-          name: "Proposition Joe",
-          contacts: [2]
-        });
+      });
+      
+      afterEach(function() {
+        adapter.destroy();
+        store.destroy();
+        server.restore();
+      });
+      
+      it("pings the server", function() {
+        var spy = sinon.spy(jQuery, 'ajax');
+
+        server.respondWith("GET", "/users/1",
+              [200, {"Content-Type": "application/json"},
+              '{"id":442,"created_at":"2011-12-13T15:15:35Z","updated_at":"2011-12-13T15:15:35Z","name":"Adam Hawkins","email":"user-1@example.com","api_key":"e68ff9eeeedbf05f2909f78eb960b69c2ae3fc2a","phone":"+1234987","account":294,contacts":[1,3,4,5,6,7],"deals":[1,3,4,5,6],"campaigns":[1,2,3],"following":[1,2,3],"followers":[1,2],"todos":[1,3,5,6],"meetings":[1,3,5,6],"reminders":[1,5,6,7],"notes":[183,81],"phone_calls":[57,85],"messages":[1,3,5],"activities":[237, 82347, 123847]}']);
+        store.find(Radium.User, 1);
+        server.respond();
         
-        store.load(Radium.Contact, {
-          id: 2,
-          name: "Marlo Stanfield",
-          user: 1
-        });
-        
-        user = store.find(Radium.User, 1);
-        contact = store.find(Radium.Contact, 2);
-        
-        expect(Ember.isEqual(user.get('contacts').objectAt(0), contact)).toBeTruthy();
-        expect(Ember.isEqual(contact.get('user'), user)).toBeTruthy();
-        
+        expect(spy).toHaveBeenCalled();
       });
     });
     
-    describe("WTF", function() {
-      
-    });
-    it("should assign a contact from one user to another", function() {
-      var user, contact, store = DS.Store.create();
-      store.loadMany(Radium.User, [
-        {
-          id: 10,
-          name: "Avon Barksdale",
-          contacts: [101]
-        },
-        {
-          id: 20,
-          name: "Marlo Stanfield",
-          contacts: [101]
-        }
-      ]);
-      
-      store.load(Radium.Contact, {
-        id: 101,
-        name: "Bubbles",
-        user: 10
-      });
-      
-      users = store.findAll(Radium.User);
-      contact = store.find(Radium.Contact, 101);
-      
-      // contact.set('user', 20);
-      console.log(store.findAll(Radium.User).getEach('name'));
-      console.log(contact.get('user').get('name'));
-      expect(contact.get('user').get('name')).toBe(users.objectAt(0).get('name'));
-    });
   });
   
 });

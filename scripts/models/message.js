@@ -1,6 +1,8 @@
 define('models/message', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Message = Radium.Core.extend({
@@ -14,4 +16,5 @@ define('models/message', function(require) {
     todos: DS.hasMany(Radium.Todo)
   });
   
+  return Radium;
 });

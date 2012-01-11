@@ -1,5 +1,6 @@
 define(function(require) {
-
+  require('ember');
+  
   var button = Ember.Button.extend({
     classNames: "btn primary".w(),
     isVisible: function() {

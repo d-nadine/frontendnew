@@ -1,5 +1,8 @@
 define('controllers/contacts', function(require) {
   
+  require('ember');
+  require('data')
+  var Radium = require('radium');
   require('models/user');
   require('fixtures/contacts');
   
@@ -17,5 +20,7 @@ define('controllers/contacts', function(require) {
       });
     }
   });
+  
+  return Radium;
   
 });

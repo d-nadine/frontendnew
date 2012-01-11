@@ -1,4 +1,7 @@
 define('views/dashboard', function(require) {
+  
+  require('ember');
+  var Radium = require('radium');
   require('views/profile');
   require('views/globalsearch');
   require('views/filter_list');
@@ -27,5 +30,7 @@ define('views/dashboard', function(require) {
       
     })
   });
+  
+  return Radium;
   
 });

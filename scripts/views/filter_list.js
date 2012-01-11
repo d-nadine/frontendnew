@@ -1,5 +1,7 @@
 define('views/filter_list', function(require) {
   
+  require('ember');
+  var Radium = require('radium');
   require('controllers/resources');
   
   var template = require('text!templates/filter_list.handlebars');
@@ -21,4 +23,5 @@ define('views/filter_list', function(require) {
     })
   });
   
+  return Radium;
 });

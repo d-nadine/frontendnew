@@ -1,6 +1,7 @@
 define('core/routes', function(require) {
   
   require('ember');
+  var Radium = require('radium');
   require('controllers/main');
   require('states/main');
   
@@ -37,4 +38,6 @@ define('core/routes', function(require) {
       }
     });
   });
+  
+  return Radium;
 });

@@ -5,9 +5,9 @@ define('radium', function(require) {
   require('mixins/data');
   
   // Set up the Ember Application
-  window.Radium = Ember.Application.create({
+  return Ember.Application.create({
     store: DS.Store.create({
-      adapter: 'DS.fixtureAdapter'
+      adapter: 'DS.radiumFixtureAdapter'
     })
   });
 

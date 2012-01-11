@@ -1,6 +1,8 @@
 define('models/group', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Group = Radium.Core.extend({
@@ -21,4 +23,5 @@ define('models/group', function(require) {
     activities: DS.hasMany(Radium.Activity)
   });
   
+  return Radium;
 });

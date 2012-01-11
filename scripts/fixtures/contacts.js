@@ -1,5 +1,5 @@
 define('fixtures/contacts', function(require) {
-  
+  var Radium = require('radium');
   require('models/contact');
   
   Radium.Contact.FIXTURES = [
@@ -50,4 +50,5 @@ define('fixtures/contacts', function(require) {
     }
   ];
   
+  return Radium;
 });

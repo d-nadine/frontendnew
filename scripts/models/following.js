@@ -1,6 +1,8 @@
 define('models/following', function(require) {
+  
   require('ember');
   require('data');
+  var Radium = require('radium');
   require('./core');
   
   Radium.Following = Radium.Core.extend({
@@ -11,4 +13,5 @@ define('models/following', function(require) {
     followable: DS.hasMany(Radium.Contact)
   });
   
+  return Radium;
 });

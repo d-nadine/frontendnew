@@ -1,6 +1,6 @@
 define(function(require) {
   require('ember');
-  require('radium');
+  var Radium = require('radium');
   
   var template = require('text!templates/login.handlebars'),
       loginPane;
