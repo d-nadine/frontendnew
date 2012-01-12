@@ -10,7 +10,6 @@ window.DS = SC.Namespace.create();
 (function(exports) {
 DS.Adapter = SC.Object.extend({
   commit: function(store, commitDetails) {
-    console.log(arguments);
     commitDetails.updated.eachType(function(type, array) {
       this.updateRecords(store, type, array.slice());
     }, this);
@@ -31,7 +30,6 @@ DS.Adapter = SC.Object.extend({
   },
 
   updateRecords: function(store, type, models) {
-    console.log('DS.Adapter#updateRecords');
     models.forEach(function(model) {
       this.updateRecord(store, type, model);
     }, this);
@@ -55,7 +53,6 @@ DS.Adapter = SC.Object.extend({
 (function(exports) {
 DS.fixtureAdapter = DS.Adapter.create({
   find: function(store, type, id) {
-    console.log(type);
     var fixtures = type.FIXTURES;
 
     ember_assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
@@ -81,7 +78,6 @@ var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 DS.RESTAdapter = DS.Adapter.extend({
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);
-
     var data = {};
     data[root] = get(model, 'data');
 
@@ -115,7 +111,6 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   updateRecord: function(store, type, model) {
-    console.log('DS.RESTAdapter#updateRecord');
     var id = get(model, 'id');
     var root = this.rootForType(type);
     var data = {};
@@ -132,7 +127,6 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   updateRecords: function(store, type, models) {
-    console.log('DS.RESTAdapter#updateRecords');
     if (get(this, 'bulkCommit') === false) {
       return this._super(store, type, models);
     }
@@ -904,7 +898,6 @@ DS.Store = SC.Object.extend({
 
   didCreateRecords: function(type, array, hashes) {
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
-
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type);
     var idList = this.idList(type);

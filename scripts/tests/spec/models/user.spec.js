@@ -80,7 +80,7 @@ define('testdir/models/user.spec', function(require) {
       });
     });
     
-    describe("RESTful", function() {
+    describe("when making RESTful API requests", function() {
       var adapter, store, server;
       
       beforeEach(function() {
@@ -95,6 +95,33 @@ define('testdir/models/user.spec', function(require) {
         store.destroy();
         server.restore();
         jQuery.ajax.restore();
+      });
+
+      it("creates a new user", function() {
+        var spy, user, 
+            fixture = {
+              name: "Brother Mouzone",
+              email: "harperslover@hotmail.com"
+            };
+        
+        server.fakeHTTPMethods = true;
+        spy = sinon.spy(jQuery, 'ajax');
+
+        user = store.createRecord(Radium.User, fixture);
+
+        server.respondWith("POST", "/users", [
+          200, 
+          {"Content-Type": "application/json"},
+          JSON.stringify({users: [jQuery.extend({id: 11231}, fixture)]})
+        ]);
+
+        store.commit();
+        server.respond();
+
+        expect(server.requests[0].method).toEqual("POST");
+        expect(user.get('isNew')).toBeFalsy();
+        expect(user.get('id')).toEqual(11231);
+        expect(spy).toHaveBeenCalled();
       });
       
       it("loads a user that exists", function() {
@@ -134,6 +161,7 @@ define('testdir/models/user.spec', function(require) {
         user.set('phone', '+1 410 555-4444');
         store.commit();
         server.respond();
+        
         expect(spy).toHaveBeenCalled();
         expect(user.get('phone')).toBe("+1 410 555-4444");
       });
