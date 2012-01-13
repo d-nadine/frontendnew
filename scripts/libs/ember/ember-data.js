@@ -1,14 +1,16 @@
 define('data', function(require) {
-  require('ember');
+require('ember');
   
+
+
 (function(exports) {
-window.DS = SC.Namespace.create();
+window.DS = Ember.Namespace.create();
 
 })({});
 
 
 (function(exports) {
-DS.Adapter = SC.Object.extend({
+DS.Adapter = Ember.Object.extend({
   commit: function(store, commitDetails) {
     commitDetails.updated.eachType(function(type, array) {
       this.updateRecords(store, type, array.slice());
@@ -78,6 +80,7 @@ var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 DS.RESTAdapter = DS.Adapter.extend({
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);
+
     var data = {};
     data[root] = get(model, 'data');
 
@@ -113,6 +116,7 @@ DS.RESTAdapter = DS.Adapter.extend({
   updateRecord: function(store, type, model) {
     var id = get(model, 'id');
     var root = this.rootForType(type);
+
     var data = {};
     data[root] = get(model, 'data');
 
@@ -183,7 +187,6 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   find: function(store, type, id) {
-
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
@@ -261,9 +264,9 @@ DS.RESTAdapter = DS.Adapter.extend({
 
 
 (function(exports) {
-var get = SC.get, set = SC.set;
+var get = Ember.get, set = Ember.set;
 
-DS.ModelArray = SC.ArrayProxy.extend({
+DS.ModelArray = Ember.ArrayProxy.extend({
   type: null,
   content: null,
   store: null,
@@ -310,7 +313,7 @@ DS.ModelArray = SC.ArrayProxy.extend({
 DS.FilteredModelArray = DS.ModelArray.extend({
   filterFunction: null,
 
-  updateFilter: SC.observer(function() {
+  updateFilter: Ember.observer(function() {
     var store = get(this, 'store');
     store.updateModelArrayFilter(this, get(this, 'type'), get(this, 'filterFunction'));
   }, 'filterFunction')
@@ -338,18 +341,18 @@ DS.AdapterPopulatedModelArray = DS.ModelArray.extend({
 (function(exports) {
 var get = Ember.get, set = Ember.set, getPath = Ember.getPath, fmt = Ember.String.fmt;
 
-var OrderedSet = SC.Object.extend({
+var OrderedSet = Ember.Object.extend({
   init: function() {
     this.clear();
   },
 
   clear: function() {
     this.set('presenceSet', {});
-    this.set('list', SC.NativeArray.apply([]));
+    this.set('list', Ember.NativeArray.apply([]));
   },
 
   add: function(obj) {
-    var guid = SC.guidFor(obj),
+    var guid = Ember.guidFor(obj),
         presenceSet = get(this, 'presenceSet'),
         list = get(this, 'list');
 
@@ -360,7 +363,7 @@ var OrderedSet = SC.Object.extend({
   },
 
   remove: function(obj) {
-    var guid = SC.guidFor(obj),
+    var guid = Ember.guidFor(obj),
         presenceSet = get(this, 'presenceSet'),
         list = get(this, 'list');
 
@@ -400,7 +403,7 @@ var OrderedSet = SC.Object.extend({
   we delete its entry in `keys` and `values`.
 */
 
-var Hash = SC.Object.extend({
+var Hash = Ember.Object.extend({
   init: function() {
     set(this, 'keys', OrderedSet.create());
     set(this, 'values', {});
@@ -526,20 +529,20 @@ DS.Transaction = Ember.Object.extend({
 
 
 (function(exports) {
-var get = SC.get, set = SC.set, getPath = SC.getPath, fmt = SC.String.fmt;
+var get = Ember.get, set = Ember.set, getPath = Ember.getPath, fmt = Ember.String.fmt;
 
-var OrderedSet = SC.Object.extend({
+var OrderedSet = Ember.Object.extend({
   init: function() {
     this.clear();
   },
 
   clear: function() {
     this.set('presenceSet', {});
-    this.set('list', SC.NativeArray.apply([]));
+    this.set('list', Ember.NativeArray.apply([]));
   },
 
   add: function(obj) {
-    var guid = SC.guidFor(obj),
+    var guid = Ember.guidFor(obj),
         presenceSet = get(this, 'presenceSet'),
         list = get(this, 'list');
 
@@ -550,7 +553,7 @@ var OrderedSet = SC.Object.extend({
   },
 
   remove: function(obj) {
-    var guid = SC.guidFor(obj),
+    var guid = Ember.guidFor(obj),
         presenceSet = get(this, 'presenceSet'),
         list = get(this, 'list');
 
@@ -605,7 +608,7 @@ var OrderedSet = SC.Object.extend({
     You can learn more about writing a custom adapter by reading the `DS.Adapter`
     documentation.
 */
-DS.Store = SC.Object.extend({
+DS.Store = Ember.Object.extend({
 
   /**
     Many methods can be invoked without specifying which store should be used.
@@ -655,7 +658,7 @@ DS.Store = SC.Object.extend({
   */
   adapter: null,
 
-  _adapter: SC.computed(function() {
+  _adapter: Ember.computed(function() {
     var adapter = get(this, 'adapter');
     if (typeof adapter === 'string') {
       return getPath(this, adapter);
@@ -733,11 +736,11 @@ DS.Store = SC.Object.extend({
 
     if (query !== undefined) {
       return this.findMany(type, id, query);
-    } else if (SC.typeOf(id) === 'object') {
+    } else if (Ember.typeOf(id) === 'object') {
       return this.findQuery(type, id);
     }
 
-    if (SC.isArray(id)) {
+    if (Ember.isArray(id)) {
       return this.findMany(type, id);
     }
 
@@ -898,6 +901,7 @@ DS.Store = SC.Object.extend({
 
   didCreateRecords: function(type, array, hashes) {
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
+
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type);
     var idList = this.idList(type);
@@ -1033,7 +1037,7 @@ DS.Store = SC.Object.extend({
 
   typeMap: function(type) {
     var ids = get(this, 'ids');
-    var guidForType = SC.guidFor(type);
+    var guidForType = Ember.guidFor(type);
 
     var idToClientIdMap = ids[guidForType];
 
@@ -1139,7 +1143,6 @@ DS.Store = SC.Object.extend({
       hashes = ids;
       ids = [];
       var primaryKey = getPath(type, 'proto.primaryKey');
-
       ids = hashes.map(function(hash) {
         ember_assert("A data hash was loaded for a model of type " + type.toString() + " but no primary key '" + primaryKey + "' was provided.", !!hash[primaryKey]);
         return hash[primaryKey];
@@ -1205,16 +1208,16 @@ DS.Store = SC.Object.extend({
 
 
 (function(exports) {
-var get = SC.get, set = SC.set, getPath = SC.getPath;
+var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
-var stateProperty = SC.computed(function(key) {
+var stateProperty = Ember.computed(function(key) {
   var parent = get(this, 'parentState');
   if (parent) {
     return get(parent, key);
   }
 }).property();
 
-DS.State = SC.State.extend({
+DS.State = Ember.State.extend({
   isLoaded: stateProperty,
   isDirty: stateProperty,
   isSaving: stateProperty,
@@ -1323,7 +1326,7 @@ var DirtyState = DS.State.extend({
 });
 
 var states = {
-  rootState: SC.State.create({
+  rootState: Ember.State.create({
     isLoaded: false,
     isDirty: false,
     isSaving: false,
@@ -1345,7 +1348,7 @@ var states = {
     }),
 
     loading: DS.State.create({
-      willLoadData: SC.K,
+      willLoadData: Ember.K,
 
       exit: function(manager) {
         var model = get(manager, 'model');
@@ -1369,7 +1372,7 @@ var states = {
     loaded: DS.State.create({
       isLoaded: true,
 
-      willLoadData: SC.K,
+      willLoadData: Ember.K,
 
       setProperty: function(manager, context) {
         setProperty(manager, context);
@@ -1455,11 +1458,11 @@ DS.StateManager = Ember.StateManager.extend({
   states: states
 });
 
-var retrieveFromCurrentState = SC.computed(function(key) {
+var retrieveFromCurrentState = Ember.computed(function(key) {
   return get(getPath(this, 'stateManager.currentState'), key);
 }).property('stateManager.currentState').cacheable();
 
-DS.Model = SC.Object.extend({
+DS.Model = Ember.Object.extend({
   isLoaded: retrieveFromCurrentState,
   isDirty: retrieveFromCurrentState,
   isSaving: retrieveFromCurrentState,
@@ -1572,7 +1575,7 @@ DS.attr = function(type, options) {
   var transformFrom = transform.from;
   var transformTo = transform.to;
 
-  return SC.computed(function(key, value) {
+  return Ember.computed(function(key, value) {
     var data = get(this, 'data');
 
     key = (options && options.key) ? options.key : key;
@@ -1591,95 +1594,90 @@ DS.attr = function(type, options) {
   }).property('data');
 };
 
-var embeddedFindMany = function(store, type, data, key) {
-  var association = data ? get(data, key) : [];
-  return store.loadMany(type, association).ids;
+var embeddedFindRecord = function(store, type, data, key, one) {
+  var association = data ? get(data, key) : one ? null : [];
+  if (one) {
+    return association ? store.load(type, association).id : null;
+  } else {
+    return association ? store.loadMany(type, association).ids : [];
+  }
 };
 
-var referencedFindMany = function(store, type, data, key) {
-  return data ? get(data, key) : [];
+var referencedFindRecord = function(store, type, data, key, one) {
+  return data ? get(data, key) : one ? null : [];
 };
 
-var embeddedFindOne = function(store, type, data, key) {
-  var association = data ? get(data, key) : null;
-  return association ? store.load(type, association).id : null;
-};
+var hasAssociation = function(type, options, one) {
+  var embedded = options && options.embedded, association,
+    findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
+  return Ember.computed(function(key) {
+    if (association !== undefined) {
+      return association;
+    }
+    var data = get(this, 'data'), ids, id,
+      store = get(this, 'store');
+    if (typeof type === 'string') { type = getPath(this, type); }
 
-var referencedFindOne = function(store, type, data, key) {
-  return data ? get(data, key) : null;
+    key = (options && options.key) ? options.key : key;
+    if (one) {
+      id = findRecord(store, type, data, key, true);
+      association = id ? store.find(type, id) : null;
+    } else {
+      ids = findRecord(store, type, data, key);
+      association = store.findMany(type, ids);
+    }
+
+    Ember.addObserver(this, 'data', function() {
+      var data = get(this, 'data');
+
+      if (one) {
+        id = findRecord(store, type, data, key, true);
+        association = id ? store.find(type, id) : null;
+
+        this.notifyPropertyChange(key);
+      } else {
+        ids = findRecord(store, type, data, key);
+        store.findMany(type, ids);
+
+        var idToClientIdMap = store.idToClientIdMap(type);
+
+        var clientIds = ids.map(function(id) {
+          return idToClientIdMap[id];
+        });
+
+        set(association, 'content', Ember.A(clientIds));
+      }
+    });
+
+    return association;
+  }).property().cacheable();
 };
 
 DS.hasMany = function(type, options) {
-  var embedded = options && options.embedded, load;
-
-  findMany = embedded ? embeddedFindMany : referencedFindMany;
-
-  return SC.computed(function(key) {
-    var data = get(this, 'data'), ids;
-    var store = get(this, 'store');
-    
-    if (typeof type === 'string') { type = getPath(this, type); }
-    
-    key = (options && options.key) ? options.key : key;
-    ids = findMany(store, type, data, key);
-    var hasMany = store.findMany(type, ids);
-
-    SC.addObserver(this, 'data', function() {
-      var data = get(this, 'data');
-
-      var ids = findMany(store, type, data, key);
-      store.findMany(type, ids);
-
-      var idToClientIdMap = store.idToClientIdMap(type);
-
-      var clientIds = ids.map(function(id) {
-        return idToClientIdMap[id];
-      });
-
-      set(hasMany, 'content', Ember.A(clientIds));
-    });
-
-    return hasMany;
-  }).property().cacheable();
+  ember_assert("The type passed to DS.hasMany must be defined", !!type);
+  return hasAssociation(type, options);
 };
 
 DS.hasOne = function(type, options) {
-  var embedded = options && options.embedded;
-  var hasOne;
-
-  findOne = embedded ? embeddedFindOne : referencedFindOne;
-
-  return SC.computed(function(key) {
-    if (hasOne === undefined) {
-      var data = get(this, 'data'), id;
-      var store = get(this, 'store');
-
-      if (typeof type === 'string') { type = getPath(this, type); }
-
-      key = (options && options.key) ? options.key : key;
-      id = findOne(store, type, data, key);
-      hasOne = id ? store.find(type, id) : null;
-
-      SC.addObserver(this, 'data', this, function() {
-        var data = get(this, 'data');
-
-        var id = findOne(store, type, data, key);
-        hasOne = id ? store.find(type, id) : null;
-
-        this.notifyPropertyChange(key);
-      });
-    }
-    return hasOne;
-  }).property().cacheable();
+  ember_assert("The type passed to DS.hasOne must be defined", !!type);
+  return hasAssociation(type, options, true);
 };
 
 DS.attr.transforms = {
   string: {
     from: function(serialized) {
+      if (serialized == null) {
+        return null;
+      }
+
       return String(serialized);
     },
 
     to: function(deserialized) {
+      if (deserialized === null) {
+        return null;
+      }
+
       return String(deserialized);
     }
   },
@@ -1777,4 +1775,6 @@ DS.attr.transforms = {
 //SOFTWARE.
 })({});
 
+
+//@end Ember-Data
 });

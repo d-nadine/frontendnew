@@ -7,7 +7,6 @@ define(function(require) {
   
   var Radium = require('order!radium');
   
-  require('order!mixins/data');
   require('order!mixins/jqueryui');
   
   require('order!controllers/app');

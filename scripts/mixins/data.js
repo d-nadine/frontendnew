@@ -32,7 +32,7 @@ define('mixins/data', function(require) {
       }, 300);
     }
   });
-  
+
   DS.attr.transforms.array = {
     from: function(serialized) {
       return serialized;

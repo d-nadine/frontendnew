@@ -80,7 +80,7 @@ define('testdir/models/user.spec', function(require) {
       });
     });
     
-    describe("when making RESTful API requests", function() {
+    describe("when making RESTful API requests and talks with the datastore", function() {
       var adapter, store, server;
       
       beforeEach(function() {
