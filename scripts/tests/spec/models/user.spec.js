@@ -19,7 +19,7 @@ define('testdir/models/user.spec', function(require) {
   var PUT_FIXTURE = {user: {
     id: 1,
     name: "Jimmy McNulty",
-    phone: "+1 410 555-4444",
+    phone: "+1 410 555-5555",
     contacts: [101, 102, 103]
   }};
   
@@ -159,9 +159,10 @@ define('testdir/models/user.spec', function(require) {
         ]);
 
         user.set('phone', '+1 410 555-4444');
+
         store.commit();
         server.respond();
-        
+
         expect(spy).toHaveBeenCalled();
         expect(user.get('phone')).toBe("+1 410 555-4444");
       });
