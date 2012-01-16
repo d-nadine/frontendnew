@@ -6,7 +6,18 @@ define('fixtures/contacts', function(require) {
     {
       id: 101,
       name: "Stringer Bell",
-      user: 1
+      user: 1,
+      addresses: [
+                    {
+                      id: 8,
+                      name: "Address 1",
+                      street: "03284 Johnson Center",
+                      state: "Illinois",
+                      country: "United States",
+                      zip_code: "39645",
+                      time_zone: null
+                    }
+                  ]
     },
     {
       id: 102,

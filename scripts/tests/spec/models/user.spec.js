@@ -1,11 +1,5 @@
 define('testdir/models/user.spec', function(require) {  
-  
-  require('ember');
-  require('data')
-  var Radium = require('radium');
-  require('models/contact');
-  require('models/user');
-  
+var Radium = require('radium');
   var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
   
   // FIXTURES
@@ -80,7 +74,7 @@ define('testdir/models/user.spec', function(require) {
       });
     });
     
-    describe("when making RESTful API requests and talks with the datastore", function() {
+    describe("when talking with the API", function() {
       var adapter, store, server;
       
       beforeEach(function() {
@@ -124,7 +118,7 @@ define('testdir/models/user.spec', function(require) {
         expect(spy).toHaveBeenCalled();
       });
       
-      it("loads a user that exists", function() {
+      it("loads a user", function() {
         var spy, user;
         
         spy = sinon.spy(jQuery, 'ajax');
@@ -137,7 +131,6 @@ define('testdir/models/user.spec', function(require) {
         
         user = store.find(Radium.User, 1);
         server.respond();
-          
         expect(spy).toHaveBeenCalled();
         expect(user.get('name')).toBe("Jimmy McNulty");
       });

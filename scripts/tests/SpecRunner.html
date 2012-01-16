@@ -16,6 +16,7 @@
       jquery: 'libs/jquery/jquery',
       jqueryUI: 'libs/jquery/jquery-ui.min',
       ember: 'libs/ember/ember',
+      datetime: 'libs/ember/ember-datetime',
       router: 'libs/davis',
       data: 'libs/ember/ember-data',
       radium: 'core/radium',
@@ -34,14 +35,9 @@
     ]
   });
   
-  require([
-    'testdir/app/radium.spec',
-    'testdir/models/models.spec',
-    'testdir/mixins/jqueryui.spec',
-    'testdir/views/jq.progressbar.spec',
-    'testdir/states/loggedOut.spec',
-    'testdir/states/loggedOut.spec'
-    ], function(Radium) {
+  require(['testdir/bootstrap.spec',],
+    function(Radium) {
+      window.Radium = Radium;
       jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
       jasmine.getEnv().execute();
     }

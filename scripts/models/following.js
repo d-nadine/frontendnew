@@ -7,10 +7,9 @@ define('models/following', function(require) {
   
   Radium.Following = Radium.Core.extend({
     approved: DS.attr('boolean'),
-    // FIXME: DS.hasOne
-    user: DS.hasMany(Radium.User),
+    user: DS.hasOne('Radium.User'),
     // TODO: Look into how to deal with this nested resource
-    followable: DS.hasMany(Radium.Contact)
+    followable: DS.hasMany('Radium.Contact')
   });
   
   return Radium;

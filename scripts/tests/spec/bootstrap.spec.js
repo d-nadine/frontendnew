@@ -23,7 +23,6 @@ define(function(require) {
   require('order!models/calllist');
   require('order!models/campaign');
   require('order!models/customfield');
-  require('order!models/deal');
   require('order!models/email');
   require('order!models/emailaddr');
   require('order!models/following');
@@ -40,12 +39,10 @@ define(function(require) {
   require('order!models/reminder');
   require('order!models/sms');
   require('order!models/todo');
+  require('order!models/deal');
   require('order!models/contact');
   require('order!models/user');
-  
-  require('order!fixtures/contacts');
-  require('order!fixtures/users');
-  
+    
   require('order!views/topbar');
   require('order!views/dashboard');
   require('order!views/filter_list');
@@ -54,8 +51,13 @@ define(function(require) {
   require('order!views/profile');
   
   require('order!states/main');
-  
-  require('order!core/routes');
-  
+
+  require('testdir/app/radium.spec');
+  require('testdir/models/models.spec');
+  require('testdir/mixins/jqueryui.spec');
+  require('testdir/views/jq.progressbar.spec');
+  require('testdir/states/loggedOut.spec');
+  require('testdir/states/loggedOut.spec');
+
   return Radium;
 });

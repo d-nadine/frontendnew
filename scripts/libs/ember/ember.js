@@ -1072,13 +1072,13 @@ define('ember', ['jquery'], function (jQuery) {
       // PUBLIC API: You can override these methods in a subclass to provide
       // alternative compiled forms for name lookup and buffering semantics
       nameLookup: function(parent, name, type) {
-  			if (/^[0-9]+$/.test(name)) {
+        if (/^[0-9]+$/.test(name)) {
           return parent + "[" + name + "]";
         } else if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
-  	    	return parent + "." + name;
-  			}
-  			else {
-  				return parent + "['" + name + "']";
+          return parent + "." + name;
+        }
+        else {
+          return parent + "['" + name + "']";
         }
       },
 
@@ -1292,7 +1292,7 @@ define('ember', ['jquery'], function (jQuery) {
       lookup: function(name) {
         var topStack = this.topStack();
         this.source.push(topStack + " = (" + topStack + " === null || " + topStack + " === undefined || " + topStack + " === false ? " +
-   				topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
+          topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
       },
 
       pushStringParam: function(string) {
@@ -1495,12 +1495,12 @@ define('ember', ['jquery'], function (jQuery) {
       compilerWords[reservedWords[i]] = true;
     }
 
-  	JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
-  		if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
-  			return true;
-  		}
-  		return false;
-  	}
+    JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
+      if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
+        return true;
+      }
+      return false;
+    }
 
   })(Handlebars.Compiler, Handlebars.JavaScriptCompiler);
 
@@ -8337,7 +8337,7 @@ define('ember', ['jquery'], function (jQuery) {
   var TYPE_MAP = {};
   var t ="Boolean Number String Function Array Date RegExp Object".split(" ");
   t.forEach(function(name) {
-  	TYPE_MAP[ "[object " + name + "]" ] = name.toLowerCase();
+    TYPE_MAP[ "[object " + name + "]" ] = name.toLowerCase();
   });
 
   var toString = Object.prototype.toString;

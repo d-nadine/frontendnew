@@ -8,16 +8,13 @@ define('models/todo', function(require) {
     kind: DS.attr('string'),
     description: DS.attr('string'),
     finish_by: DS.attr('date'),
-    // FIXME: DS.hasOne
-    campaign: DS.hasMany(Radium.Campaign),
-    // FIXME: DS.hasOne
-    call_list: DS.hasMany(Radium.CallList),
+    campaign: DS.hasOne('Radium.Campaign'),
+    call_list: DS.hasOne('Radium.CallList'),
     // TODO: Find out what reference refers to
     reference: null,
-    contacts: DS.hasMany(Radium.Contact),
-    comments: DS.hasMany(Radium.Comment),
-    // FIXME: DS.hasOne
-    user: DS.hasMany(Radium.User)
+    contacts: DS.hasMany('Radium.Contact'),
+    comments: DS.hasMany('Radium.Comment'),
+    user: DS.hasOne('Radium.User')
   });
   
   return Radium;
