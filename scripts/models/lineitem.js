@@ -9,7 +9,8 @@ define('models/lineitem', function(require) {
     quantity: DS.attr('integer'),
     price: DS.attr('integer'),
     currency: DS.attr('string'),
-    product: DS.attr('integer')
+    product: DS.hasOne('Radium.Product'),
+    deal: DS.hasOne('Radium.Deal')
   });
   
   return Radium;

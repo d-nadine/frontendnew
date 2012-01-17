@@ -7,7 +7,7 @@ define('models/deal', function(require) {
   Radium.Deal = Radium.Core.extend({
     description: DS.attr('string'),
     close_by: DS.attr('date'),
-    state: DS.attr('string'),
+    state: DS.attr('dealState'),
     is_public: DS.attr('boolean'),
     line_items: DS.hasMany('Radium.LineItem', {embedded: true}),
     contact: DS.hasOne('Radium.Contact'),
@@ -33,7 +33,7 @@ define('models/deal', function(require) {
         return total += parseInt(item.get('price'));
       });
       return total;
-    }.property('@each.line_items').cacheable()
+    }.property('line_items').cacheable()
   });
   
   return Radium;

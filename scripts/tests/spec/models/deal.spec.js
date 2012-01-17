@@ -5,6 +5,7 @@ define(function(require) {
 
   var CREATE_FIXTURE = {
     id: 31,
+    state: 'pending',
     created_at: "2011-12-15T09:37:23Z",
     updated_at: "2011-12-15T09:37:23Z",
     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
@@ -89,7 +90,7 @@ define(function(require) {
           JSON.stringify(CREATE_FIXTURE)
         ]);
 
-        store.createRecord(Radium.Deal, {
+        var deal = store.createRecord(Radium.Deal, {
           description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
           close_by: "2011-12-22T09:37:23Z",
           line_items: [
@@ -117,6 +118,19 @@ define(function(require) {
         expect(store.find(Radium.Deal, 31)).toBeDefined();
       });
 
+      it("validates the Deal state", function() {
+        var deal;
+
+        store.load(Radium.Deal, CREATE_FIXTURE);
+        deal = store.find(Radium.Deal, 31);
+
+        expect(deal.get('state')).toBe('pending');
+
+        deal.set('state', 'asdf');
+
+        expect(deal.get('state')).toEqual('pending')
+      });
+
       it("creates LineItems from embedded data", function() {
         var deal;
 
@@ -135,7 +149,7 @@ define(function(require) {
       });
 
       // TODO: Once updating nested stores work, implement this test.
-      it("updates the total price when a LineItem is added", function() {
+      xit("updates the total price when a LineItem is added", function() {
         var deal, fixture, lineItemFixture, lineItem;
 
         lineItemFixture = {
@@ -148,7 +162,7 @@ define(function(require) {
 
         fixture = CREATE_FIXTURE;
         
-        fixture.line_items.push(jQuery.extend({id: 35}, lineItemFixture))
+        fixture.line_items.push(jQuery.extend({id: 35}, lineItemFixture));
 
         server.fakeHTTPMethods = true;
         server.respondWith(
@@ -161,14 +175,14 @@ define(function(require) {
         store.load(Radium.Deal, CREATE_FIXTURE);
         deal = store.find(Radium.Deal, 31);
         lineItem = store.createRecord(Radium.LineItem, lineItemFixture);
-        deal.get('line_items').pushObject(lineItem);
-        console.log(deal.get('line_items').objectAt(3).get('id'));
+        deal.get('line_items').pushObject(lineItemFixture);
+
         store.commit();
         server.respond();
 
         expect(spy).toHaveBeenCalled();
         expect(deal.getPath('line_items.length')).toEqual(4);
-        // expect(deal.get('dealTotal')).toEqual(4500);
+        expect(deal.get('dealTotal')).toEqual(4500);
       });
     });
 

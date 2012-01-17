@@ -41,7 +41,6 @@ define('adapter', function(require) {
     },
 
     updateRecord: function(store, type, model) {
-      alert()
       var id = get(model, 'id');
       var root = this.rootForType(type);
 
