@@ -1,6 +1,7 @@
 define(function(require) {
   
-  var Radium = require('radium');
+  var RadiumAdapter = require('adapter'),
+      Radium = require('radium');
 
   var CREATE_FIXTURE = {
     id: 31,
@@ -10,21 +11,23 @@ define(function(require) {
     close_by: "2011-12-22T09:37:23Z",
     line_items: [
       {
+        id: 34,
         name: "Radium",
         quantity: 1,
         price: "1000.0",
         currency: "USD",
+        product: null
       },
       {
+        id: 33,
+        name: "Radium",
         quantity: 1,
-        product_id: 5
-      }
-    ],
-    contact_id: 151,
-    user_id: 460,
-    line_items: [
+        price: "1000.0",
+        currency: "USD",
+        product: null
+      },
       {
-        id: 34,
+        id: 32,
         name: "Radium",
         quantity: 1,
         price: "1000.0",
@@ -32,6 +35,8 @@ define(function(require) {
         product: null
       }
     ],
+    contact_id: 151,
+    user_id: 460,
     todos: [],
     comments: [],
     products: [],
@@ -49,7 +54,7 @@ define(function(require) {
 
       it("marks the deal as overdue", function() {
         var today = new Date();
-        adapter = DS.RESTAdapter.create();
+        adapter = RadiumAdapter.create();
         store = DS.Store.create({adapter: adapter});
 
         store.load(Radium.Deal, CREATE_FIXTURE);
@@ -62,7 +67,7 @@ define(function(require) {
       var adapter, store, server, spy;
 
       beforeEach(function() {
-        adapter = DS.RESTAdapter.create();
+        adapter = RadiumAdapter.create();
         store = DS.Store.create({adapter: adapter});
         server = sinon.fakeServer.create();
         spy = sinon.spy(jQuery, 'ajax');
@@ -81,13 +86,13 @@ define(function(require) {
           "POST", "/deals", [
           200, 
           {"Content-Type": "application/json"},
-          JSON.stringify({deals: [CREATE_FIXTURE]})
+          JSON.stringify(CREATE_FIXTURE)
         ]);
 
         store.createRecord(Radium.Deal, {
           description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
           close_by: "2011-12-22T09:37:23Z",
-          line_items_attributes: [
+          line_items: [
             {
               name: "Radium",
               quantity: 1,
@@ -110,6 +115,60 @@ define(function(require) {
         expect(server.requests[0].method).toEqual("POST");
         expect(store.models.length).toEqual(1);
         expect(store.find(Radium.Deal, 31)).toBeDefined();
+      });
+
+      it("creates LineItems from embedded data", function() {
+        var deal;
+
+        store.load(Radium.Deal, CREATE_FIXTURE);
+        deal = store.find(Radium.Deal, 31);
+
+        expect(deal.getPath('line_items.length')).toEqual(3);
+      });
+
+      it("calculates a total of all deal line items", function() {
+        var deal;
+
+        store.load(Radium.Deal, CREATE_FIXTURE);
+        deal = store.find(Radium.Deal, 31);
+        expect(deal.get('dealTotal')).toEqual(3000);
+      });
+
+      // TODO: Once updating nested stores work, implement this test.
+      it("updates the total price when a LineItem is added", function() {
+        var deal, fixture, lineItemFixture, lineItem;
+
+        lineItemFixture = {
+          name: "Radium",
+          quantity: 1,
+          price: "1500.0",
+          currency: "USD",
+          product: null
+        };
+
+        fixture = CREATE_FIXTURE;
+        
+        fixture.line_items.push(jQuery.extend({id: 35}, lineItemFixture))
+
+        server.fakeHTTPMethods = true;
+        server.respondWith(
+          "POST", "/deals/31", [
+          200, 
+          {"Content-Type": "application/json"},
+          JSON.stringify(fixture)
+        ]);
+
+        store.load(Radium.Deal, CREATE_FIXTURE);
+        deal = store.find(Radium.Deal, 31);
+        lineItem = store.createRecord(Radium.LineItem, lineItemFixture);
+        deal.get('line_items').pushObject(lineItem);
+        console.log(deal.get('line_items').objectAt(3).get('id'));
+        store.commit();
+        server.respond();
+
+        expect(spy).toHaveBeenCalled();
+        expect(deal.getPath('line_items.length')).toEqual(4);
+        // expect(deal.get('dealTotal')).toEqual(4500);
       });
     });
 

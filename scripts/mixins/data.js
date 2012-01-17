@@ -41,4 +41,5 @@ define('mixins/data', function(require) {
       return array;
     }
   };
+  
 });

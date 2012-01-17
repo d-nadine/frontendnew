@@ -1,80 +1,77 @@
 define('testdir/models/contact.spec', function(require) {
-  var Radium = require('radium');
-  var RadiumAdapter = require('core/adapter');
+  var RadiumAdapter = require('adapter'),
+      Radium = require('radium');
+
   var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
-  var USER_FIXTURE = {user: {
+  var USER_FIXTURE = {
     id: 100,
     name: "Jimmy McNulty",
     phone: "+1 410 555-5555",
     contacts: [1]
-  }};
+  };
 
-  var NEW_USER_FIXTURE = {user: {
+  var NEW_USER_FIXTURE = {
     id: 101,
     name: "Bunk Moreland",
     phone: "+1 410 555-6666",
     contacts: []
-    }
-  }
+  };
 
-  var CONTACT_FIXTURE = {contact: {
+  var CONTACT_FIXTURE = {
         id: 1,
         name: "Stringer Bell",
         user: 100,
-        addresses: [
-                    {
-                      id: 8,
-                      name: "Address 1",
-                      street: "03284 Johnson Center",
-                      state: "Illinois",
-                      country: "United States",
-                      zip_code: "39645",
-                      time_zone: null
-                    }
-                  ],
-        phone_numbers: [
-                    {
-                      id: 282,
-                      name: "Phone Number",
-                      value: "+52313872481",
-                      accepted_values: null
-                  }],
+        addresses: [{
+            id: 8,
+            name: "Address 1",
+            street: "03284 Johnson Center",
+            state: "Illinois",
+            country: "United States",
+            zip_code: "39645",
+            time_zone: null
+        }],
+        phone_numbers: [{
+            id: 282,
+            name: "Phone Number",
+            value: "+52313872481",
+            accepted_values: null
+        }],
         email_addresses: [{
-                    id: 281,
-                    name: "Email",
-                    value: "email-1@example.com",
-                    accepted_values: null,
-                  }],
+            id: 281,
+            name: "Email",
+            value: "email-1@example.com",
+            accepted_values: null,
+        }],
         fields: [{
-                    id: 285,
-                    created_at: "2011-12-14T19:12:30Z",
-                    updated_at: "2011-12-14T19:12:30Z",
-                    name: "Industry",
-                    value: "Real Estate Development",
-                    accepted_values: null,
-                    kind: "other"
-                  },
-                  {
-                    id: 284,
-                    created_at: "2011-12-14T19:12:28Z",
-                    updated_at: "2011-12-14T19:12:28Z",
-                    name: "Industry",
-                    value: "Auto Parts Stores",
-                    accepted_values: null,
-                    kind: "other"
-                  },
-                  {
-                    id: 283,
-                    created_at: "2011-12-14T19:12:25Z",
-                    updated_at: "2011-12-14T19:12:25Z",
-                    name: "Industry",
-                    value: "Property & Casualty Insurance",
-                    accepted_values: null,
-                    kind: "other"
-                  }]
-      }
+          id: 285,
+          created_at: "2011-12-14T19:12:30Z",
+          updated_at: "2011-12-14T19:12:30Z",
+          name: "Industry",
+          value: "Real Estate Development",
+          accepted_values: null,
+          kind: "other"
+        },
+        {
+          id: 284,
+          created_at: "2011-12-14T19:12:28Z",
+          updated_at: "2011-12-14T19:12:28Z",
+          name: "Industry",
+          value: "Auto Parts Stores",
+          accepted_values: null,
+          kind: "other"
+        },
+        {
+          id: 283,
+          created_at: "2011-12-14T19:12:25Z",
+          updated_at: "2011-12-14T19:12:25Z",
+          name: "Industry",
+          value: "Property & Casualty Insurance",
+          accepted_values: null,
+          kind: "other"
+        }]
   };
+
   describe("Radium#Contact", function() {
     
     it("inherits from Radium.Person", function() {
@@ -85,7 +82,7 @@ define('testdir/models/contact.spec', function(require) {
       var contact;
 
       beforeEach(function() {
-        contact = Radium.Contact.create(CONTACT_FIXTURE.contact)
+        contact = Radium.Contact.create(CONTACT_FIXTURE)
       });
       
       afterEach(function() {
@@ -108,7 +105,7 @@ define('testdir/models/contact.spec', function(require) {
       var adapter, store, server;
 
       beforeEach(function() {
-        adapter = DS.RESTAdapter.create();
+        adapter = RadiumAdapter.create();
         store = DS.Store.create({adapter: adapter});
         server = sinon.fakeServer.create();
       });
@@ -143,7 +140,7 @@ define('testdir/models/contact.spec', function(require) {
         var spy, user1, user2, contact, updatedFixture;
 
         updatedFixture = CONTACT_FIXTURE;
-        updatedFixture.contact.user = 101;
+        updatedFixture = 101;
 
         server.fakeHTTPMethods = true;
         spy = sinon.spy(jQuery, 'ajax');
@@ -155,11 +152,11 @@ define('testdir/models/contact.spec', function(require) {
         ]);
 
         store.loadMany(Radium.User, [
-          USER_FIXTURE.user,
-          NEW_USER_FIXTURE.user
+          USER_FIXTURE,
+          NEW_USER_FIXTURE
         ]);
 
-        store.load(Radium.Contact, CONTACT_FIXTURE.contact);
+        store.load(Radium.Contact, CONTACT_FIXTURE);
 
         user1 = store.find(Radium.User, 100);
         user2 = store.find(Radium.User, 101);
@@ -294,5 +291,5 @@ define('testdir/models/contact.spec', function(require) {
     });
     
   });
-  
+
 });

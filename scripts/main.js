@@ -7,6 +7,7 @@ require.config({
     datetime: 'libs/ember/ember-datetime',
     router: 'libs/davis',
     data: 'libs/ember/ember-data',
+    adapter: 'mixins/adapter',
     radium: 'core/radium',
     text: 'libs/require/require.text',
   },
@@ -19,6 +20,7 @@ require.config({
     'datetime',
     'router',
     'data',
+    'adapter',
     'mixins/data',
     'radium',
     'core/app'

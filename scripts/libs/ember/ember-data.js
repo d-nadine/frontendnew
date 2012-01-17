@@ -901,7 +901,6 @@ DS.Store = Ember.Object.extend({
 
   didCreateRecords: function(type, array, hashes) {
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
-
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type);
     var idList = this.idList(type);

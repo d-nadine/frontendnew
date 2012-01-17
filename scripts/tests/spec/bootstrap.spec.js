@@ -4,10 +4,12 @@ define(function(require) {
   require('order!ember');
   require('order!datetime');
   require('order!data');
+  require('order!adapter')
   require('order!router');
   
   var Radium = require('order!radium');
   
+  require('order!mixins/data');
   require('order!mixins/jqueryui');
   
   require('order!controllers/app');

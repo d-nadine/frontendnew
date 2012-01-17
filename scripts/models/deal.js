@@ -16,11 +16,24 @@ define('models/deal', function(require) {
     comments: DS.hasMany('Radium.Comment'),
     products: DS.hasMany('Radium.Product'),
     activities: DS.hasMany('Radium.Activity'),
-
+    
+    /**
+      Checks to see if the Deal has passed it's close by date.
+      @return {Boolean}
+    */
     isOverdue: function() {
-      console.log(this.get('close_by'));
-      // return (this.get('close_by'))
-    }.property('close_by').cacheable()
+      var d = new Date().getTime(),
+          closeBy = new Date(this.get('close_by')).getTime();
+      return (closeBy <= d) ? true : false;
+    }.property('close_by').cacheable(),
+
+    dealTotal: function() {
+      var total = 0;
+      this.get('line_items').forEach(function(item) {
+        return total += parseInt(item.get('price'));
+      });
+      return total;
+    }.property('@each.line_items').cacheable()
   });
   
   return Radium;
