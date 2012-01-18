@@ -1,4 +1,4 @@
-define(function(require) {
+define('testdir/models/deal.spec', function(require) {
   
   var RadiumAdapter = require('adapter'),
       Radium = require('radium');
@@ -46,7 +46,7 @@ define(function(require) {
 
   describe("Radium#Deal", function() {
     
-    it("inherits from Radium.Person", function() {
+    it("inherits from Radium.Core", function() {
       expect(Radium.Core.detect(Radium.Deal)).toBeTruthy();
     });
 

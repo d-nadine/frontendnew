@@ -27,6 +27,10 @@ define('models/deal', function(require) {
       return (closeBy <= d) ? true : false;
     }.property('close_by').cacheable(),
 
+    /**
+      Calculate the total price from all the embedded line items
+      @return {Number}
+    */
     dealTotal: function() {
       var total = 0;
       this.get('line_items').forEach(function(item) {

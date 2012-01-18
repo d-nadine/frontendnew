@@ -11,7 +11,6 @@ define('adapter', function(require) {
     createRecord: function(store, type, model) {
       var root = this.rootForType(type);
       var data = get(model, 'data');
-
       this.ajax("/" + this.pluralize(root), "POST", {
         data: data,
         success: function(json) {
@@ -41,6 +40,7 @@ define('adapter', function(require) {
     },
 
     updateRecord: function(store, type, model) {
+      console.log('incoming change')
       var id = get(model, 'id');
       var root = this.rootForType(type);
 
@@ -58,6 +58,8 @@ define('adapter', function(require) {
     },
 
     updateRecords: function(store, type, models) {
+            console.log('incoming change')
+
       if (get(this, 'bulkCommit') === false) {
         return this._super(store, type, models);
       }

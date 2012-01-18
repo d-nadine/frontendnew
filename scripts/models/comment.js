@@ -7,7 +7,6 @@ define('models/comment', function(require) {
   
   Radium.Comment = Radium.Core.extend({
     text: DS.attr('string'),
-    // FIXME: DS.hasOne
     user: DS.hasOne('Radium.User'),
     attachments: DS.hasMany('Radium.Attachment') 
   });

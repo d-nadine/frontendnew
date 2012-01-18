@@ -61,5 +61,26 @@ define('mixins/data', function(require) {
 
       return String(state);
     }
-  }
+  };
+
+  DS.attr.transforms.todoKind = {
+    from: function(serialized) {
+      if (serialized == null) {
+        return 'general';
+      }
+      return String(serialized);
+    },
+    to: function(deserialized) {
+      var kind;
+      
+      if (deserialized == null || 
+        ['call', 'general', 'support'].indexOf(deserialized) < 0) {
+        kind = 'pending';
+      } else {
+        kind = deserialized;
+      }
+
+      return String(kind);
+    }
+  };
 });

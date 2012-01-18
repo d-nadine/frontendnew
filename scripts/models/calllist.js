@@ -1,4 +1,4 @@
-define('models/todo', function(require) {
+define('models/calllist', function(require) {
   
   require('ember');
   require('data');
