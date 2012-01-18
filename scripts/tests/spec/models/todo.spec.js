@@ -105,34 +105,36 @@ define('testdir/models/todo.spec', function(require) {
       });
 
       // TODO: Implement this test when nested updates are working.
-      xit("assigns a todo to a user", function() {
+      it("assigns a new todo to a user", function() {
         var todo, user, todoSpy;
 
         server.fakeHTTPMethods = true;
         server.respondWith(
-          "POST", "/todos/100", [
+          "POST", "/todos", [
           200, 
           {"Content-Type": "application/json"},
-          JSON.stringify(CREATE_FIXTURE)
+          JSON.stringify(jQuery.extend(CREATE_FIXTURE, {user: 50}))
         ]);
 
-        store.load(Radium.Todo, CREATE_FIXTURE);
         store.load(Radium.User, {
           id: 50,
           name: "Jimmy McNulty",
           todos: []
         });
 
-        todo = store.find(Radium.Todo, 100);
+        todo = store.createRecord(Radium.Todo, CREATE_FIXTURE);
         user = store.find(Radium.User, 50);
-        todoSpy = sinon.spy(todo, 'didUpdate');
+
+        // TODO: This needs to be implemented by Ember-Data
         todo.set('user', user);
+        user.get('todos').pushObject(todo);
 
         store.commit();
         server.respond();
 
-        expect(todoSpy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
         expect(todo.get('user')).toEqual(user);
+        expect(user.getPath('todos.length')).toEqual(1);
       });
 
       it("validates the kind property", function() {

@@ -10,15 +10,59 @@ define('testdir/models/comment.spec', function() {
       expect(Radium.Core.detect(Radium.Comment)).toBeTruthy();
     });
 
-    xit("adds an attachment", function() {
-      var comment, attachment,
-          adapter = RadiumAdapter.create(),
-          store = DS.Store.create({adapter: adapter});
+    describe("when updating or adding a comment", function() {
+      beforeEach(function() {
+        adapter = RadiumAdapter.create();
+        store = DS.Store.create({adapter: adapter});
+        server = sinon.fakeServer.create();
+        spy = sinon.spy(jQuery, 'ajax');
+      });
       
-      attachment = store.createRecord(Radium.Attachment, {});
+      afterEach(function() {
+        adapter.destroy();
+        store.destroy();
+        server.restore();
+        jQuery.ajax.restore();
+      });
 
-      store.createRecord(Radium.Comment, {
-        text: "Look at this attachment"
+      it("updates a comment", function() {
+        var comment,
+            newText = "I mean, you call something a war and pretty soon everybody gonna be running around acting like warriors.";
+
+        server.respondWith('POST', '/todos/55/comments', [
+          200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({
+            id: 13,
+            text: newText
+          })
+        ]);
+
+        store.load(Radium.Comment, {
+          id: 13,
+          text: "This drug thing, this ain't police work."
+        });
+
+        comment = store.find(Radium.Comment, 13);
+
+        comment.set('text', newText);
+
+        store.commit();
+        server.respond();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy.getCall(0).args[0].url).toBe('/comments/13');
+        expect(comment.get('text')).toBe(newText);
+      });
+
+      xit("adds an attachment", function() {
+        var comment, attachment;
+                
+        attachment = store.createRecord(Radium.Attachment, {});
+
+        store.createRecord(Radium.Comment, {
+          text: "Look at this attachment"
+        });
       });
     });
     
