@@ -11,11 +11,22 @@ define('adapter', function(require) {
     createRecord: function(store, type, model) {
       var root = this.rootForType(type);
       var data = get(model, 'data');
-      this.ajax("/" + this.pluralize(root), "POST", {
+      var url = this.pluralize(root);
+      var success = function(json) {
+        store.didCreateRecord(model, json);
+      };
+
+      if (model.get('_type')) {
+        url = [
+                this.pluralize(model.get('_type')),
+                model.get('reference'),
+                this.pluralize(this.rootForType(type))
+              ].join('/')
+      }
+            
+      this.ajax("/" + url, "POST", {
         data: data,
-        success: function(json) {
-          store.didCreateRecord(model, json);
-        }
+        success: success
       });
     },
 
@@ -23,19 +34,21 @@ define('adapter', function(require) {
       if (get(this, 'bulkCommit') === false) {
         return this._super(store, type, models);
       }
-
+      
       var root = this.rootForType(type),
           plural = this.pluralize(root);
 
       var data = models.map(function(model) {
         return get(model, 'data');
       });
+      
+      var success = function(json) {
+        store.didCreateRecords(type, models, json);
+      };
 
       this.ajax("/" + this.pluralize(root), "POST", {
         data: data,
-        success: function(json) {
-          store.didCreateRecords(type, models, json);
-        }
+        success: success
       });
     },
 
@@ -162,7 +175,9 @@ define('adapter', function(require) {
 
     // HELPERS
 
-    plurals: {},
+    plurals: {
+      'activity': 'activities'
+    },
 
     // define a plurals hash in your subclass to define
     // special-case pluralization

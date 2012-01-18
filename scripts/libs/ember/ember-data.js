@@ -7,7 +7,7 @@ require('ember');
 window.DS = Ember.Namespace.create();
 
 })({});
-
+ 
 
 (function(exports) {
 DS.Adapter = Ember.Object.extend({

@@ -44,6 +44,7 @@ define(function(require) {
   require('order!models/deal');
   require('order!models/contact');
   require('order!models/user');
+  require('order!models/activity');
     
   require('order!views/topbar');
   require('order!views/dashboard');
