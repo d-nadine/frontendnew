@@ -5,4 +5,5 @@ define('testdir/models/models.spec', function(require) {
   require('./todo.spec');
   require('./deal.spec');
   require('./comment.spec');
+  require('./group.spec');
 });

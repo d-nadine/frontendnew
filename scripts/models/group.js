@@ -20,7 +20,8 @@ define('models/group', function(require) {
     meetings: DS.hasMany('Radium.Meeting'),
     campaigns: DS.hasMany('Radium.Campaign'),
     users: DS.hasMany('Radium.User'),
-    activities: DS.hasMany('Radium.Activity')
+    activities: DS.hasMany('Radium.Activity'),
+    user: DS.hasOne('Radium.User')
   });
   
   return Radium;

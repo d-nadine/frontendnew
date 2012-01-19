@@ -17,59 +17,7 @@ define('testdir/models/todo.spec', function(require) {
     it("inherits from Radium.Core", function() {
       expect(Radium.Core.detect(Radium.Todo)).toBeTruthy();
     });
-
-
-    describe("when loading nested reference items", function() {
-      var adapter, store, server, spy;
-
-      beforeEach(function() {
-        adapter = RadiumAdapter.create();
-        store = DS.Store.create({adapter: adapter});
-        server = sinon.fakeServer.create();
-        spy = sinon.spy(jQuery, 'ajax');
-      });
-      
-      afterEach(function() {
-        adapter.destroy();
-        store.destroy();
-        server.restore();
-        jQuery.ajax.restore();
-      });
-
-      it("loads a nested reference", function() {      
-        store.load(Radium.Todo, {
-          id: 100,
-          created_at: Ember.DateTime.create().toISO8601(),
-          updated_at: Ember.DateTime.create().toISO8601(),
-          kind: "general",
-          description: "Load nested non-declared objects",
-          finish_by: "2012-12-22T15:06:27Z",
-          reference: {
-            // deal: {
-              id: 31,
-              state: 'pending',
-              created_at: "2011-12-15T09:37:23Z",
-              updated_at: "2011-12-15T09:37:23Z",
-              description: "Have Radium API talk to Ember",
-              close_by: "2011-12-22T09:37:23Z",
-              line_items: [],
-              contact_id: 151,
-              user_id: 460,
-              todos: [],
-              comments: [],
-              products: [],
-              activities: []
-            }
-          // }
-        });
-
-        var todo = store.find(Radium.Todo, 100);
-        console.log('rrr', todo.get('fuckme'))
-        // expect(todo.get('reference')).toEqual();
-      });
-
-    });
-
+    
     describe("when a todo is overdue", function() {
       var adapter, store;
 
