@@ -15,11 +15,11 @@ define('adapter', function(require) {
       var success = function(json) {
         store.didCreateRecord(model, json);
       };
-
+      // 
       if (model.get('_type')) {
         url = [
                 this.pluralize(model.get('_type')),
-                model.get('reference'),
+                model.get('relation'),
                 this.pluralize(this.rootForType(type))
               ].join('/')
       }

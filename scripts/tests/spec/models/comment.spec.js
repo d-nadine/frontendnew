@@ -109,7 +109,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'todo',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var todo = store.find(Radium.Todo, 55);
@@ -144,7 +144,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'deal',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var deal = store.find(Radium.Deal, 55);
@@ -179,7 +179,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'meeting',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var meeting = store.find(Radium.Meeting, 55);
@@ -214,7 +214,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'phone_call',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var call = store.find(Radium.PhoneCall, 55);
@@ -249,7 +249,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'message',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var message = store.find(Radium.Message, 55);
@@ -283,7 +283,7 @@ define('testdir/models/comment.spec', function() {
           text: "This drug thing, this ain't police work.",
           _type: 'activity',
           user: 468,
-          reference: 55
+          relation: 55
         });
 
         var activity = store.find(Radium.Activity, 55);

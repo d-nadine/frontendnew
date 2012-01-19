@@ -5,16 +5,23 @@ define('models/todo', function(require) {
   var Radium = require('radium');
   
   Radium.Todo = Radium.Core.extend({
+    ref: null,
     kind: DS.attr('todoKind'),
     description: DS.attr('string'),
     finish_by: DS.attr('date'),
     campaign: DS.hasOne('Radium.Campaign'),
     call_list: DS.hasOne('Radium.CallList'),
-    // TODO: Find out what reference refers to
-    reference: null,
+    // TODO: Set up this as an embedded object possibly... variabl toOne not supported
+    reference: DS.hasOne('Radium.Deal', {
+      embedded: true
+    }),
     contacts: DS.hasMany('Radium.Contact'),
     comments: DS.hasMany('Radium.Comment'),
     user: DS.hasOne('Radium.User'),
+
+    fuckme: function() {
+      console.log('!!', this.get('reference').get('id'));
+    }.property('reference').cacheable(),
     /**
       Checks to see if the Deal has passed it's close by date.
       @return {Boolean}

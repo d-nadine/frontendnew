@@ -1,13 +1,12 @@
 define('data', function(require) {
+require('jquery');
 require('ember');
-  
-
 
 (function(exports) {
 window.DS = Ember.Namespace.create();
 
 })({});
- 
+
 
 (function(exports) {
 DS.Adapter = Ember.Object.extend({
@@ -279,7 +278,7 @@ DS.ModelArray = Ember.ArrayProxy.extend({
   arrayDidChange: function(array, index, removed, added) {
     var modelCache = get(this, 'modelCache');
     modelCache.replace(index, 0, Array(added));
-    
+
     this._super(array, index, removed, added);
   },
 
@@ -624,7 +623,7 @@ DS.Store = Ember.Object.extend({
     }
 
     set(this, 'data', []);
-    set(this, 'ids', {});
+    set(this, '_typeMap', {});
     set(this, 'models', []);
     set(this, 'modelArrays', []);
     set(this, 'modelArraysByClientId', {});
@@ -693,7 +692,7 @@ DS.Store = Ember.Object.extend({
     set(model, 'clientId', clientId);
 
     models[clientId] = model;
-    
+
     this.updateModelArrays(type, clientId, hash);
 
     return model;
@@ -829,12 +828,19 @@ DS.Store = Ember.Object.extend({
   },
 
   findAll: function(type) {
+
+    var typeMap = this.typeMapFor(type),
+        findAllCache = typeMap.findAllCache;
+
+    if (findAllCache) { return findAllCache; }
+
     var array = DS.ModelArray.create({ type: type, content: Ember.A([]), store: this });
     this.registerModelArray(array, type);
 
     var adapter = get(this, '_adapter');
     if (adapter && adapter.findAll) { adapter.findAll(this, type); }
 
+    typeMap.findAllCache = array;
     return array;
   },
 
@@ -901,6 +907,7 @@ DS.Store = Ember.Object.extend({
 
   didCreateRecords: function(type, array, hashes) {
     var id, clientId, primaryKey = getPath(type, 'proto.primaryKey');
+
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type);
     var idList = this.idList(type);
@@ -1034,14 +1041,14 @@ DS.Store = Ember.Object.extend({
   // . TYPE MAP .
   // ............
 
-  typeMap: function(type) {
-    var ids = get(this, 'ids');
+  typeMapFor: function(type) {
+    var ids = get(this, '_typeMap');
     var guidForType = Ember.guidFor(type);
 
-    var idToClientIdMap = ids[guidForType];
+    var typeMap = ids[guidForType];
 
-    if (idToClientIdMap) {
-      return idToClientIdMap;
+    if (typeMap) {
+      return typeMap;
     } else {
       return (ids[guidForType] =
         {
@@ -1054,19 +1061,19 @@ DS.Store = Ember.Object.extend({
   },
 
   idToClientIdMap: function(type) {
-    return this.typeMap(type).idToCid;
+    return this.typeMapFor(type).idToCid;
   },
 
   idList: function(type) {
-    return this.typeMap(type).idList;
+    return this.typeMapFor(type).idList;
   },
 
   clientIdList: function(type) {
-    return this.typeMap(type).cidList;
+    return this.typeMapFor(type).cidList;
   },
 
   clientIdToHashMap: function(type) {
-    return this.typeMap(type).cidToHash;
+    return this.typeMapFor(type).cidToHash;
   },
 
   /** @private
@@ -1078,7 +1085,7 @@ DS.Store = Ember.Object.extend({
     @param {String|Number} id
   */
   clientIdForId: function(type, id) {
-    return this.typeMap(type).idToCid[id];
+    return this.typeMapFor(type).idToCid[id];
   },
 
   idForHash: function(type, hash) {
@@ -1112,7 +1119,6 @@ DS.Store = Ember.Object.extend({
       id = hash[primaryKey];
     }
 
-    var ids = get(this, 'ids');
     var data = this.clientIdToHashMap(type);
     var models = get(this, 'models');
 
@@ -1142,6 +1148,7 @@ DS.Store = Ember.Object.extend({
       hashes = ids;
       ids = [];
       var primaryKey = getPath(type, 'proto.primaryKey');
+
       ids = hashes.map(function(hash) {
         ember_assert("A data hash was loaded for a model of type " + type.toString() + " but no primary key '" + primaryKey + "' was provided.", !!hash[primaryKey]);
         return hash[primaryKey];
@@ -1609,12 +1616,14 @@ var referencedFindRecord = function(store, type, data, key, one) {
 var hasAssociation = function(type, options, one) {
   var embedded = options && options.embedded, association,
     findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
+
   return Ember.computed(function(key) {
     if (association !== undefined) {
       return association;
     }
     var data = get(this, 'data'), ids, id,
       store = get(this, 'store');
+
     if (typeof type === 'string') { type = getPath(this, type); }
 
     key = (options && options.key) ? options.key : key;
@@ -1665,29 +1674,21 @@ DS.hasOne = function(type, options) {
 DS.attr.transforms = {
   string: {
     from: function(serialized) {
-      if (serialized == null) {
-        return null;
-      }
-
-      return String(serialized);
+      return Em.none(serialized) ? null : String(serialized);
     },
 
     to: function(deserialized) {
-      if (deserialized === null) {
-        return null;
-      }
-
-      return String(deserialized);
+      return Em.none(deserialized) ? null : String(deserialized);
     }
   },
 
   integer: {
     from: function(serialized) {
-      return Number(serialized);
+      return Em.none(serialized) ? null : Number(serialized);
     },
 
     to: function(deserialized) {
-      return Number(deserialized);
+      return Em.none(deserialized) ? null : Number(deserialized);
     }
   },
 
@@ -1773,7 +1774,4 @@ DS.attr.transforms = {
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 })({});
-
-
-//@end Ember-Data
 });

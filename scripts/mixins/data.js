@@ -83,4 +83,23 @@ define('mixins/data', function(require) {
       return String(kind);
     }
   };
+
+  // TODO: Test this
+  DS.attr.transforms.nestedModel = {
+    from: function(serialized) {
+      var type, typeUppercase;
+      for (var key in serialized) {
+        type = key;
+      }
+
+      typeUppercase = type[0].toUpperCase() + type.substr(1);
+
+      return DS.hasOne('Radium.'+typeUppercase, {
+        embedded: true
+      });
+    },
+    to: function(deserialized) {
+      console.log('to', deserialized)
+    }
+  };
 });

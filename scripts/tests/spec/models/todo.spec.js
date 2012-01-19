@@ -19,6 +19,57 @@ define('testdir/models/todo.spec', function(require) {
     });
 
 
+    describe("when loading nested reference items", function() {
+      var adapter, store, server, spy;
+
+      beforeEach(function() {
+        adapter = RadiumAdapter.create();
+        store = DS.Store.create({adapter: adapter});
+        server = sinon.fakeServer.create();
+        spy = sinon.spy(jQuery, 'ajax');
+      });
+      
+      afterEach(function() {
+        adapter.destroy();
+        store.destroy();
+        server.restore();
+        jQuery.ajax.restore();
+      });
+
+      it("loads a nested reference", function() {      
+        store.load(Radium.Todo, {
+          id: 100,
+          created_at: Ember.DateTime.create().toISO8601(),
+          updated_at: Ember.DateTime.create().toISO8601(),
+          kind: "general",
+          description: "Load nested non-declared objects",
+          finish_by: "2012-12-22T15:06:27Z",
+          reference: {
+            // deal: {
+              id: 31,
+              state: 'pending',
+              created_at: "2011-12-15T09:37:23Z",
+              updated_at: "2011-12-15T09:37:23Z",
+              description: "Have Radium API talk to Ember",
+              close_by: "2011-12-22T09:37:23Z",
+              line_items: [],
+              contact_id: 151,
+              user_id: 460,
+              todos: [],
+              comments: [],
+              products: [],
+              activities: []
+            }
+          // }
+        });
+
+        var todo = store.find(Radium.Todo, 100);
+        console.log('rrr', todo.get('fuckme'))
+        // expect(todo.get('reference')).toEqual();
+      });
+
+    });
+
     describe("when a todo is overdue", function() {
       var adapter, store;
 
@@ -125,7 +176,7 @@ define('testdir/models/todo.spec', function(require) {
         todo = store.createRecord(Radium.Todo, CREATE_FIXTURE);
         user = store.find(Radium.User, 50);
 
-        // TODO: This needs to be implemented by Ember-Data
+        // TODO: This needs to be implemented by Ember-Data 
         todo.set('user', user);
         user.get('todos').pushObject(todo);
 
@@ -146,6 +197,50 @@ define('testdir/models/todo.spec', function(require) {
         todo.set('kind', 'asdf');
         expect(todo.get('kind')).toEqual('pending')
       });
+
+      xit("creates a Contacts todo", function() {
+        var todo, user,
+            contactFixture = {
+              id: 50,
+              name: "Jimmy McNulty",
+              todos: []
+            };
+
+        server.respondWith(
+          "POST", "/contacts/50/todos", [
+          200, 
+          {"Content-Type": "application/json"},
+          JSON.stringify(
+            jQuery.extend(
+              CREATE_FIXTURE, 
+              {
+                contacts: [50],
+                reference: jQuery.extend(contactFixture, {todos: [100]})
+              }
+            )
+          )
+        ]);
+
+        store.load(Radium.Contact, contactFixture);
+
+        contact = store.find(Radium.Contact, 50);
+
+        todo = store.createRecord(Radium.Todo, jQuery.extend(
+          CREATE_FIXTURE, {
+            _type: 'contact',
+            relation: contact.get('id'),
+          })
+        );
+
+        store.commit();
+        server.respond();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy.getCall(0).args[0].url).toBe('/contacts/50/todos');
+        expect(contact.getPath('todos.length')).toEqual(1);
+        expect(contact.get('todos').objectAt(0).get('id')).toEqual(50)
+      });
+
     });
   });
 });
