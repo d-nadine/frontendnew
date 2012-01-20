@@ -172,7 +172,8 @@ define(function(require) {
     // HELPERS
 
     plurals: {
-      'activity': 'activities'
+      'activity': 'activities',
+      'sms': 'sms'
     },
 
     // define a plurals hash in your subclass to define

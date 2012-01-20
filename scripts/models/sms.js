@@ -5,8 +5,11 @@ define('models/sms', function(require) {
   var Radium = require('radium');
   require('./message');
   
-  Radium.SMS = Radium.Message.extend({
-    // FIXME: Add back Sender object once I know what to do with it.
+  Radium.Sms = Radium.Message.extend({
+    to: DS.attr('array'),
+    smsSender: function() {
+      return this.getPath('sender.id');
+    }.property('sender').cacheable()
   });
   
   return Radium;

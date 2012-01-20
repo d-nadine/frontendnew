@@ -9,4 +9,6 @@ define('testdir/models/models.spec', function(require) {
   require('./comment.spec');
   require('./group.spec');
   require('./email.spec');
+  require('./sms.spec');
+  require('./im.spec');
 });

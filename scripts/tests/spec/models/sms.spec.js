@@ -1,24 +1,27 @@
-define('testdir/models/email.spec', function(require) {
+define('testdir/models/sms.spec', function(require) {
   var RadiumAdapter = require('adapter'),
       Radium = require('radium');
   
-  describe("Radium#Email", function() {
+  describe("Radium#SMS", function() {
       var CREATE_FIXTURE = {
-        id: 21,
-        created_at: "2011-12-15T12:39:01Z",
-        updated_at: "2011-12-15T12:39:01Z",
-        name: "Partners",
-        email: "joe@partners.com",
-        phone: "+13249812348",
-        is_public: false,
-        contacts: [1,3,5,6],
-        deals: [],
-        user: 55,
-        avatar: null
-      };
+            id: 19,
+            created_at: "2011-12-15T10:38:39Z",
+            updated_at: "2011-12-15T10:38:39Z",
+            message: "Lorem ipsum dolo ...... ",
+            sent_at: "2011-12-15T10:38:39Z",
+            type: "Sms",
+            sender: {
+              id: 462,
+              sender_type: "User"
+            },
+            users: [462],
+            contacts: [153],
+            comments: [],
+            todos: []
+          };
 
     it("inherits from Radium.Message", function() {
-      expect(Radium.Message.detect(Radium.Email)).toBeTruthy();
+      expect(Radium.Message.detect(Radium.Sms)).toBeTruthy();
     });
 
 
@@ -39,41 +42,34 @@ define('testdir/models/email.spec', function(require) {
         jQuery.ajax.restore();
       });
 
-      it("sends an email", function() {
-        var email, sender;
+      it("sends an SMS", function() {
+        var sms;
 
         server.fakeHTTPMethods = true;
         server.respondWith(
-          "POST", "/emails", [
+          "POST", "/sms", [
           200, 
           {"Content-Type": "application/json"},
           JSON.stringify({
             id: 19,
             created_at: "2011-12-15T10:38:39Z",
             updated_at: "2011-12-15T10:38:39Z",
-            subject: "Hey",
-            message: "How's it going?",
+            message: "Lorem ipsum dolo ...... ",
             sent_at: "2011-12-15T10:38:39Z",
-            html: null,
-            type: "Email",
+            type: "Sms",
             sender: {
-              "id": 462,
-              "sender_type": "User"
+              id: 462,
+              sender_type: "User"
             },
             users: [462],
             contacts: [153],
             comments: [],
-            attachments: [],
-            todos: [],
-            to: ["example@example.com"],
-            cc: ["someone@else.com"]
+            todos: []
           })
         ]);
 
-        email = store.createRecord(Radium.Email, {
-          to: ["example@example.com"],
-          cc: ["someone@else.com"], 
-          subject: "Hey",
+        sms = store.createRecord(Radium.Sms, {
+          to: ["+12348123894"],
           message: "How's it going?"
         });
 
@@ -88,9 +84,8 @@ define('testdir/models/email.spec', function(require) {
         server.respond();
 
         expect(spy).toHaveBeenCalled();
-        // Right now we can get the sender ID, but should look at retrieving
-        // nested objects.
-        expect(email.get('emailSender')).toEqual(sender.get('id'));
+        expect(spy.getCall(0).args[0].url).toEqual('/sms')
+        expect(sms.get('smsSender')).toEqual(sender.get('id'));
       });
     });
   });

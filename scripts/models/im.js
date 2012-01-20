@@ -5,8 +5,11 @@ define('models/im', function(require) {
   var Radium = require('radium');
   require('./message');
   
-  Radium.IM = Radium.Message.extend({
-    // FIXME: Add back Sender object once I know what to do with it.
+  Radium.Im = Radium.Message.extend({
+    to: DS.hasMany('Radium.Contact'),
+    imSender: function() {
+      return this.getPath('sender.id');
+    }.property('sender').cacheable()
   });
   
   return Radium;

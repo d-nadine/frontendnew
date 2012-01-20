@@ -9,7 +9,11 @@ define('models/email', function(require) {
     to: DS.attr('array'),
     from: DS.attr('array'),
     subject: DS.attr('string'),
-    html: DS.attr('string')
+    html: DS.attr('string'),
+    sender: DS.attr('object'),
+    emailSender: function() {
+      return this.getPath('sender.id');
+    }.property('sender').cacheable()
     // FIXME: Add back Sender object once I know what to do with it.
   });
   
