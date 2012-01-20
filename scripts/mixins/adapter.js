@@ -1,4 +1,4 @@
-define('adapter', function(require) {
+define(function(require) {
   require('ember');
   require('data');
 
@@ -15,7 +15,7 @@ define('adapter', function(require) {
       var success = function(json) {
         store.didCreateRecord(model, json);
       };
-      // 
+       
       if (model.get('_type')) {
         url = [
                 this.pluralize(model.get('_type')),
@@ -53,7 +53,6 @@ define('adapter', function(require) {
     },
 
     updateRecord: function(store, type, model) {
-      console.log('incoming change')
       var id = get(model, 'id');
       var root = this.rootForType(type);
 
@@ -71,8 +70,6 @@ define('adapter', function(require) {
     },
 
     updateRecords: function(store, type, models) {
-            console.log('incoming change')
-
       if (get(this, 'bulkCommit') === false) {
         return this._super(store, type, models);
       }
@@ -149,7 +146,6 @@ define('adapter', function(require) {
           store.loadMany(type, ids, json);
         }
       });
-      var url = "/" + plural;
     },
 
     findAll: function(store, type) {

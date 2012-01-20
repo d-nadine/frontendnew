@@ -188,7 +188,7 @@ define('testdir/models/todo.spec', function(require) {
         expect(contact.getPath('todos.length')).toEqual(1);
         expect(contact.get('todos').objectAt(0).get('id')).toEqual(50)
       });
-
+      
     });
   });
 });

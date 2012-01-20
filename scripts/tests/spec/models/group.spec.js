@@ -2,21 +2,20 @@ define('testdir/models/group.spec', function(require) {
   var RadiumAdapter = require('adapter'),
       Radium = require('radium');
   
-  var CREATE_FIXTURE = {
-    id: 21,
-    created_at: "2011-12-15T12:39:01Z",
-    updated_at: "2011-12-15T12:39:01Z",
-    name: "Partners",
-    email: "joe@partners.com",
-    phone: "+13249812348",
-    is_public: false,
-    contacts: [1,3,5,6],
-    deals: [],
-    user: 55,
-    avatar: null
-  };
-
   describe("Radium#Group", function() {
+      var CREATE_FIXTURE = {
+        id: 21,
+        created_at: "2011-12-15T12:39:01Z",
+        updated_at: "2011-12-15T12:39:01Z",
+        name: "Partners",
+        email: "joe@partners.com",
+        phone: "+13249812348",
+        is_public: false,
+        contacts: [1,3,5,6],
+        deals: [],
+        user: 55,
+        avatar: null
+      };
 
     it("inherits from Radium.Core", function() {
       expect(Radium.Core.detect(Radium.Group)).toBeTruthy();
@@ -66,7 +65,31 @@ define('testdir/models/group.spec', function(require) {
         expect(group.getPath('contacts.length')).toEqual(4);
       });
 
-      it("removes a contact from the group", function() {
+
+      xit("adds a Contact to a Group", function() {
+        var group, contact;
+
+        store.loadMany(Radium.Contact, [
+          {id: 1, name: 'Omar Little'},
+          {id: 3, name: 'Butchie'},
+          {id: 5, name: 'Brandon Wright'},
+          {id: 6, name: 'John Bailey'}
+        ]);
+        store.load(Radium.Group, {
+          id: 44,
+          contacts: [1,3,5]
+        });
+        
+        contact = store.find(Radium.Contact, 6);
+        group = store.find(Radium.Group, 44);
+
+        expect(group.getPath('contacts.length')).toEqual(3);  
+        group.get('contacts').pushObject(contact);
+        expect(group.getPath('contacts.length')).toEqual(4);
+      });
+
+
+      xit("removes a Contact from a Group", function() {
         var group;
 
         store.loadMany(Radium.Contact, [
@@ -76,14 +99,13 @@ define('testdir/models/group.spec', function(require) {
           {id: 6, name: 'John Bailey'}
         ]);
         store.load(Radium.Group, {
-          id: 21,
-          contacts: [1,3,5,6]
+          id: 44,
+          deals: [11],
+          contacts: [1,3]
         });
-
-        group = store.find(Radium.Group, 21);
-        console.log(store.findAll(Radium.Contact).getEach('id'))
-console.log(group.get('contacts').getEach('id'))
-        // group.get('contacts').objectAt(3).removeObject();
+        
+        group = store.find(Radium.Group, 44);
+        group.get('contacts').removeAt(1);
         expect(group.getPath('contacts.length')).toEqual(3)
       });
     });

@@ -8,11 +8,7 @@ define('models/contact', function(require) {
   require('data');
   var Radium = require('radium');
   require('models/person');
-  require('models/address');
-  require('models/phonenumber');
-  require('models/emailaddr');
-  require('models/customfield');
-  
+    
   Radium.Contact = Radium.Person.extend({
     addresses: DS.hasMany('Radium.Address', {embedded: true}),
     phoneNumbers: DS.hasMany('Radium.PhoneNumber', {

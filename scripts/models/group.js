@@ -3,7 +3,6 @@ define('models/group', function(require) {
   require('ember');
   require('data');
   var Radium = require('radium');
-  require('./core');
   
   Radium.Group = Radium.Core.extend({
     name: DS.attr('string'),
@@ -11,7 +10,6 @@ define('models/group', function(require) {
     phone: DS.attr('string'),
     is_public: DS.attr('boolean'),
     fields: DS.hasMany('Radium.Field'),
-    contacts: DS.hasMany('Radium.Contact'),
     todos: DS.hasMany('Radium.Todo'),
     deals: DS.hasMany('Radium.Deal'),
     messages: DS.hasMany('Radium.Message'),
@@ -20,8 +18,13 @@ define('models/group', function(require) {
     meetings: DS.hasMany('Radium.Meeting'),
     campaigns: DS.hasMany('Radium.Campaign'),
     users: DS.hasMany('Radium.User'),
+    contacts: DS.hasMany('Radium.Contact'),
     activities: DS.hasMany('Radium.Activity'),
-    user: DS.hasOne('Radium.User')
+    user: DS.hasOne('Radium.User'),
+
+    contact_ids: function() {
+      return this.get('contacts').getEach('id');
+    }.property('contacts').cacheable()
   });
   
   return Radium;

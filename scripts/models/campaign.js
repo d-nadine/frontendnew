@@ -24,7 +24,11 @@ define('models/campaign', function(require) {
     followers: DS.hasMany('Radium.User'),
     notes: DS.hasMany('Radium.Note'),
     meetings: DS.hasMany('Radium.Meeting'),
-    activities: DS.hasMany('Radium.Activity')
+    activities: DS.hasMany('Radium.Activity'),
+
+    contact_ids: function() {
+      return this.get('contacts').getEach('id');
+    }.property('contacts').cacheable()
   });
   
   return Radium;

@@ -83,4 +83,14 @@ define('mixins/data', function(require) {
       return String(kind);
     }
   };
+
+  DS.attr.transforms.object = {
+    from: function(serialized) {
+      return Em.none(serialized) ? {} : serialized;
+    },
+
+    to: function(deserialized) {
+      return Em.none(serialized) ? {} : serialized;
+    }
+  };
 });
