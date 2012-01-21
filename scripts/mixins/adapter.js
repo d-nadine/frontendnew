@@ -60,8 +60,8 @@ define(function(require) {
       var data = {};
       data[root] = get(model, 'data');
 
-      if (model.url) {
-        url = model.url.fmt(id);
+      if (model.get('url')) {
+        url = model.get('url').fmt(id);
       } else {
         url = ["", this.pluralize(root), id].join("/");
       }

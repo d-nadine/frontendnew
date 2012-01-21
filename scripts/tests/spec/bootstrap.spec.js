@@ -1,5 +1,5 @@
 define(function(require) {  
-  require('order!jquery');
+  // require('order!jquery');
   require('order!jqueryUI');
   require('order!ember');
   require('order!datetime');

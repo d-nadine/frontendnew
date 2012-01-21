@@ -1718,7 +1718,6 @@ DS.attr.transforms = {
     },
 
     to: function(date) {
-      console.log('change?', date)
       if (date instanceof Date) {
         var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -1739,7 +1738,6 @@ DS.attr.transforms = {
         var dayOfWeek = days[utcDay];
         var dayOfMonth = pad(utcDayOfMonth);
         var month = months[utcMonth];
-
         return dayOfWeek + ", " + dayOfMonth + " " + month + " " + utcYear + " " +
                pad(utcHours) + ":" + pad(utcMinutes) + ":" + pad(utcSeconds) + " GMT";
       } else if (date === undefined) {

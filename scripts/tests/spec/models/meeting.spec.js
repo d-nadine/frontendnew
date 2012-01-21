@@ -134,8 +134,8 @@ define('testdir/models/meeting.spec', function(require) {
 
       it("reschedules a meeting", function() {
         var meeting,
-            newStartAt = "2012-01-30T15:00:00-08:00",
-            newEndsAt = "2012-01-30T15:00:00-08:00";
+            newStartAt = "2012-01-30T15:00:00Z",
+            newEndsAt = "2012-01-30T15:00:00Z";
         
         server.fakeHTTPMethods = true;
         server.respondWith(
@@ -157,14 +157,38 @@ define('testdir/models/meeting.spec', function(require) {
         store.load(Radium.Meeting, CREATE_MEETING);
 
         meeting = store.find(Radium.Meeting, 2);
-        meeting.set('starts_at', "2012-01-30T15:00:00-08:00");
+        meeting.set('starts_at', newStartAt);
+
+        store.commit();
+        server.respond();
+        expect(spy).toHaveBeenCalled();
+        expect(spy.getCall(0).args[0].url).toBe('/meetings/2/reschedule');
+        expect(meeting.get('starts_at')).toBe(newStartAt);
+      });
+
+      it("cancels a meeting", function() {
+        var meeting;
+
+        server.fakeHTTPMethods = true;
+        server.respondWith(
+          "PUT", "/meetings/2/cancel", [
+            200,
+            {"Content-Type": "application/json"},
+            JSON.stringify(
+              jQuery.extend(CREATE_MEETING, {cancelled: true})
+            )
+          ]
+        );
+
+        store.load(Radium.Meeting, CREATE_MEETING);
+        meeting = store.find(Radium.Meeting, 2);
+        meeting.set('cancelled', true);
 
         store.commit();
         server.respond();
 
         expect(spy).toHaveBeenCalled();
-        expect(spy.getCall(0).args[0].url).toBe('/meetings/2/reschedule');
-        expect(meeting.get('starts_at')).toBe(newStartAt);
+        expect(spy.getCall(0).args[0].url).toBe("/meetings/2/cancel")
       });
     });
   });

@@ -93,4 +93,13 @@ define('mixins/data', function(require) {
       return Em.none(serialized) ? {} : serialized;
     }
   };
+
+  DS.attr.transforms.date = {
+    from: function(date) {
+      return date;
+    },
+    to: function(date) {
+      return date;
+    }
+  };
 });

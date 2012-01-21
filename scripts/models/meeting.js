@@ -6,7 +6,6 @@ define('models/meeting', function(require) {
   require('./core');
   
   Radium.Meeting = Radium.Core.extend({
-    url: "/meetings/%@/reschedule",
     topic: DS.attr('string'),
     location: DS.attr('string'),
     starts_at: DS.attr('date'),
@@ -17,7 +16,16 @@ define('models/meeting', function(require) {
     activities: DS.hasMany('Radium.Activity'),
     invitations: DS.hasMany('Radium.Invitation', {
       embedded: true
-    })
+    }),
+    cancelled: DS.attr('boolean'),
+    // Compute whether or not we're sending /meetings/{id}/cancel
+    // or /meetings/{id}/reschedule
+    url: function() {
+      console.log(this.get('cancelled'))
+      return (this.get('cancelled')) ?
+         "/meetings/%@/cancel" : 
+         "/meetings/%@/reschedule"
+    }.property('cancelled')
     
   });
   
