@@ -6,6 +6,7 @@ define('models/meeting', function(require) {
   require('./core');
   
   Radium.Meeting = Radium.Core.extend({
+    url: "/meetings/%@/reschedule",
     topic: DS.attr('string'),
     location: DS.attr('string'),
     starts_at: DS.attr('date'),
@@ -14,7 +15,9 @@ define('models/meeting', function(require) {
     contacts: DS.hasMany('Radium.Contact'),
     users: DS.hasMany('Radium.User'),
     activities: DS.hasMany('Radium.Activity'),
-    invitations: DS.hasMany('Radium.Invitation')
+    invitations: DS.hasMany('Radium.Invitation', {
+      embedded: true
+    })
     
   });
   

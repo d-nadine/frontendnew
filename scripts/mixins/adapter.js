@@ -53,14 +53,18 @@ define(function(require) {
     },
 
     updateRecord: function(store, type, model) {
+      var url;
       var id = get(model, 'id');
       var root = this.rootForType(type);
 
       var data = {};
       data[root] = get(model, 'data');
 
-      var url = ["", this.pluralize(root), id].join("/");
-
+      if (model.url) {
+        url = model.url.fmt(id);
+      } else {
+        url = ["", this.pluralize(root), id].join("/");
+      }
       this.ajax(url, "PUT", {
         data: data,
         success: function(json) {

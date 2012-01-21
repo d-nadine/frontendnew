@@ -9,10 +9,8 @@ define('models/invitation', function(require) {
     // FIXME: Add validation, state can only have pending, cancelled, or rescheduled
     state: DS.attr('string'),
     hash_key: DS.attr('string'),
-    // FIXME: DS.hasOne
-    meeting: 1,
-    // FIXME: DS.hasOne
-    user: 28
+    meeting: DS.hasOne('Radium.Meeting'),
+    user: DS.hasOne('Radium.User')
   });
   
   return Radium;

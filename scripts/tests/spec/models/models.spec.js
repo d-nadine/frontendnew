@@ -8,6 +8,8 @@ define('testdir/models/models.spec', function(require) {
   require('./phonecall.spec');
   require('./comment.spec');
   require('./group.spec');
+  require('./meeting.spec');
+  require('./message.spec');
   require('./email.spec');
   require('./sms.spec');
   require('./im.spec');

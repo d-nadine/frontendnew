@@ -8,16 +8,6 @@ define(function(require) {
   require('ember');
   require('data');
   var Radium = require('radium');
-  require('./core');
-  // require('./deal');
-  // require('./campaign');
-  // require('./todo');
-  // require('./meeting');
-  // require('./reminder');
-  // require('./note');
-  // require('./message');
-  // require('./phonecall');
-  // require('./activity');
   
   Radium.Person = Radium.Core.extend({
     name: DS.attr('string'),
