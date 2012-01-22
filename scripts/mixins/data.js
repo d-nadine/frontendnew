@@ -71,13 +71,11 @@ define('mixins/data', function(require) {
       return String(serialized);
     },
     to: function(deserialized) {
-      var kind;
+      var kind = deserialized;
       
       if (deserialized == null || 
         ['call', 'general', 'support'].indexOf(deserialized) < 0) {
         kind = 'pending';
-      } else {
-        kind = deserialized;
       }
 
       return String(kind);
@@ -102,4 +100,20 @@ define('mixins/data', function(require) {
       return date;
     }
   };
+  DS.attr.transforms.inviteState = {
+    from: function(serialized) {
+      if (serialized == null) {
+        return 'pending';
+      }
+      return String(serialized);
+    },
+    to: function(deserialized) {
+      var state = deserialized;
+      if (['pending', 'confirmed', 'rejected'].indexOf(deserialized) < 0) {
+        state = 'pending';
+      }
+
+      return String(state);
+    }
+  }
 });

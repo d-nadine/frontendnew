@@ -9,6 +9,7 @@ define('testdir/models/models.spec', function(require) {
   require('./comment.spec');
   require('./group.spec');
   require('./meeting.spec');
+  require('./invitation.spec');
   require('./message.spec');
   require('./email.spec');
   require('./sms.spec');

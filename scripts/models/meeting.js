@@ -17,11 +17,13 @@ define('models/meeting', function(require) {
     invitations: DS.hasMany('Radium.Invitation', {
       embedded: true
     }),
+
+    // Client side only, so user can choose to decline a meeting.
     cancelled: DS.attr('boolean'),
+
     // Compute whether or not we're sending /meetings/{id}/cancel
     // or /meetings/{id}/reschedule
     url: function() {
-      console.log(this.get('cancelled'))
       return (this.get('cancelled')) ?
          "/meetings/%@/cancel" : 
          "/meetings/%@/reschedule"

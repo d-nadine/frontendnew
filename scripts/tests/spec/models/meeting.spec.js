@@ -73,7 +73,7 @@ define('testdir/models/meeting.spec', function(require) {
       id: 12,
       name: "Reginal Cousins",
       meetings: []
-    }
+    };
 
     describe("when talking with the API", function() {
       var adapter, store, server, spy;
