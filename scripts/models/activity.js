@@ -7,7 +7,7 @@ define('models/activity', function(require) {
   Radium.Activity = Radium.Core.extend({
     tags: DS.attr('array'),
     timestamp: DS.attr('date'),
-    test: DS.hasOne('Radium.Contact', {
+    test: DS.hasOne('Radium.User', {
       embedded: true
     }),
     // owner: DS.hasOne('Radium.User', {embedded: true}),

@@ -11,8 +11,11 @@ define(function(require) {
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: "2011-12-28T14:26:27Z",
       test: {
-        id: 1211,
-        name: 'asdf'
+        id: 1233,
+          created_at: "2011-12-28T14:26:27Z",
+          updated_at: "2011-12-28T14:26:27Z",
+          name: "Omar Little",
+          email: "irobsdrugsdealers@hotmail.com",
       },
       owner: {
         user: {
@@ -23,12 +26,12 @@ define(function(require) {
           email: "irobsdrugsdealers@hotmail.com",
           phone: "+1410333-3321",
           is_public: true,
-          contacts: [],
-          deals: [],
+          contacts: [33, 44],
+          deals: [65, 11],
           campaigns: [],
           following: [],
           followers: [],
-          todos: [10, 11, 12],
+          todos: [],
           meetings: [],
           reminders: [],
           notes: [],
@@ -48,7 +51,7 @@ define(function(require) {
           kind: "general",
           description: "Finish programming radium",
           finish_by: "2012-01-04T14:26:22Z",
-          contacts: [],
+          contacts: [33, 44, 55],
           comments: [],
           activities: [51, 52],
           user: 45,
@@ -83,18 +86,48 @@ define(function(require) {
 
       beforeEach(function() {
         store.load(Radium.Activity, ACTIVITY);
+        store.loadMany(Radium.Deal, [
+          {id: 65, description: "Testing 123"},
+          {id: 11, description: "Testing 123"},
+        ]);
+        store.loadMany(Radium.Contact, [
+          {id: 33, name: "Testing 123"},
+          {id: 44, name: "Testing 123"},
+          {id: 55, name: "Testing 123"}
+        ]);
         activity = store.find(Radium.Activity, 53);
       });
 
+      afterEach(function() {
+
+      });
+
       it("loads an embedded user", function() {
+        var owner = activity.get('owner');
         expect(activity.getPath('owner.id')).toEqual(46);
         expect(activity.getPath('owner.name')).toBe('Omar Little');
         expect(activity.getPath('owner.abbrName')).toBe('Omar L.');
+        expect(store.find(Radium.User, 46)).toEqual(owner);
       });
 
+      it("loads an embedded user", function() {
+        expect(activity.getPath('owner.deals.length')).toEqual(2);
+        expect(activity.getPath('owner.deals').getEach('id'))
+              .toEqual([65, 11]);
+      });
+      
       it("loads an embedded activity", function() {
         expect(activity.getPath('reference.id')).toEqual(3);
       });
+
+      it("loads an embedded activity's contacts", function() {
+        expect(activity.getPath('reference.contacts.length')).toEqual(3);
+        expect(activity.getPath('reference.contacts').getEach('id'))
+              .toEqual([33, 44, 55]);
+        expect(activity.getPath('reference.contacts').getEach('name'))
+              .toEqual(["Testing 123", "Testing 123", "Testing 123"]);
+      });
+
     });
   });
   

@@ -791,7 +791,6 @@ DS.Store = Ember.Object.extend({
   findMany: function(type, ids, query) {
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type), needed;
-
     var clientIds = Ember.A([]);
 
     if (ids) {
@@ -815,7 +814,6 @@ DS.Store = Ember.Object.extend({
       if (adapter && adapter.findMany) { adapter.findMany(this, type, needed, query); }
       else { throw fmt("Adapter is either null or do not implement `findMany` method", this); }
     }
-
     return this.createModelArray(type, clientIds);
   },
 
@@ -1610,7 +1608,7 @@ var embeddedFindRecord = function(store, type, data, key, one) {
 };
 
 var referencedFindRecord = function(store, type, data, key, one) {
-  return data ? get(data, key) : one ? null : [];
+  return data ? getPath(data, key) : one ? null : [];
 };
 
 var hasAssociation = function(type, options, one) {
@@ -1623,7 +1621,6 @@ var hasAssociation = function(type, options, one) {
     }
     var data = get(this, 'data'), ids, id,
       store = get(this, 'store');
-
     if (typeof type === 'string') {
       type = getPath(this, type); 
     } else if (type === null) {
@@ -1640,7 +1637,6 @@ var hasAssociation = function(type, options, one) {
     }
 
     key = (options && options.key) ? options.key : key;
-
     if (one) {
       id = findRecord(store, type, data, key, true);
       association = id ? store.find(type, id) : null;
