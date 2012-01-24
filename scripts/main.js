@@ -31,6 +31,6 @@ require(['core/app'], function(Radium) {
   console.log('Application started...');
   
   window.Radium = Radium;
-  // Radium.usersController.fetchUsers();
+  Radium.usersController.fetchUsers();
   // Radium.contactsController.fetchContacts();
 });

@@ -2,10 +2,10 @@ define(function(require) {
   require('ember');
   var Radium = require('radium');
   
-  require('controllers/app');
-  require('controllers/users');
-  require('controllers/contacts');
-  require('controllers/resources');
+  require('./app');
+  require('./users');
+  require('./contacts');
+  require('./resources');
   
   return Radium;
 });
