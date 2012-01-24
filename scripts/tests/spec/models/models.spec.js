@@ -14,4 +14,5 @@ define('testdir/models/models.spec', function(require) {
   require('./email.spec');
   require('./sms.spec');
   require('./im.spec');
+  require('./activity.spec');
 });

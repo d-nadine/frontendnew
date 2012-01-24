@@ -128,11 +128,22 @@ var Radium = require('radium');
           {"Content-Type": "application/json"},
           JSON.stringify(GET_FIXTURE)
         ]);
-        
+        store.loadMany(Radium.Contact, [
+          {
+            id: 101
+          }, {
+            id: 102
+          }, {
+            id: 103
+          }]);
         user = store.find(Radium.User, 1);
         server.respond();
         expect(spy).toHaveBeenCalled();
         expect(user.get('name')).toBe("Jimmy McNulty");
+
+        expect(user.getPath('contacts.length')).toEqual(3);
+        expect(user.get('contacts').getEach('id')).toEqual([101, 102, 103]);
+        expect(spy).toHaveBeenCalled();
       });
       
       it("updates a user", function() {

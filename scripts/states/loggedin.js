@@ -11,13 +11,11 @@ define(function(require) {
   return Ember.StateManager.create({
     rootElement: '#main',
     enter: function() {
-      console.log('logged in');
       $('#main-nav').show();
       topBarView.appendTo('#topbar');
     },
     exit: function() {
       topBarView.remove();
-      console.log('exiting');
     },
     dashboard: dashboardState.create(),
     contacts: Ember.State.create({}),

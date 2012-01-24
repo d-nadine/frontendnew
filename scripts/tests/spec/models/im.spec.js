@@ -2,7 +2,7 @@ define('testdir/models/im.spec', function(require) {
   var RadiumAdapter = require('adapter'),
       Radium = require('radium');
   
-  describe("Radium#IMG", function() {
+  describe("Radium#IM", function() {
 
     it("inherits from Radium.Message", function() {
       expect(Radium.Message.detect(Radium.Im)).toBeTruthy();

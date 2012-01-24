@@ -1601,7 +1601,7 @@ DS.attr = function(type, options) {
 };
 
 var embeddedFindRecord = function(store, type, data, key, one) {
-  var association = data ? get(data, key) : one ? null : [];
+  var association = data ? getPath(data, key) : one ? null : [];
   if (one) {
     return association ? store.load(type, association).id : null;
   } else {
@@ -1614,7 +1614,7 @@ var referencedFindRecord = function(store, type, data, key, one) {
 };
 
 var hasAssociation = function(type, options, one) {
-  var embedded = options && options.embedded, association,
+  var embedded = options && options.embedded, association, ref, refType,
     findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
 
   return Ember.computed(function(key) {
@@ -1624,9 +1624,23 @@ var hasAssociation = function(type, options, one) {
     var data = get(this, 'data'), ids, id,
       store = get(this, 'store');
 
-    if (typeof type === 'string') { type = getPath(this, type); }
+    if (typeof type === 'string') {
+      type = getPath(this, type); 
+    } else if (type === null) {
+      ref = getPath(this, 'data.' + key);
+      if(ref) {
+        for (refType in ref) break;
+        key = [key, refType].join('.');
+        type = getPath(this, [
+                options.namespace,
+                refType[0].toUpperCase() + refType.substr(1)
+                ].join('.')
+              );
+      }
+    }
 
     key = (options && options.key) ? options.key : key;
+
     if (one) {
       id = findRecord(store, type, data, key, true);
       association = id ? store.find(type, id) : null;
@@ -1641,7 +1655,6 @@ var hasAssociation = function(type, options, one) {
       if (one) {
         id = findRecord(store, type, data, key, true);
         association = id ? store.find(type, id) : null;
-
         this.notifyPropertyChange(key);
       } else {
         ids = findRecord(store, type, data, key);
@@ -1669,6 +1682,10 @@ DS.hasMany = function(type, options) {
 DS.hasOne = function(type, options) {
   ember_assert("The type passed to DS.hasOne must be defined", !!type);
   return hasAssociation(type, options, true);
+};
+
+DS.hasOneReference = function(options) {
+  return hasAssociation(null, options, true);
 };
 
 DS.attr.transforms = {

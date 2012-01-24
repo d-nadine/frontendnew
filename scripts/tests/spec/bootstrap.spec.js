@@ -59,8 +59,7 @@ define(function(require) {
   require('testdir/models/models.spec');
   require('testdir/mixins/jqueryui.spec');
   require('testdir/views/jq.progressbar.spec');
-  require('testdir/states/loggedOut.spec');
-  require('testdir/states/loggedOut.spec');
+  // require('testdir/states/loggedOut.spec');
 
   return Radium;
 });
