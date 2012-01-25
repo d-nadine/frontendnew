@@ -157,13 +157,13 @@ define('testdir/models/meeting.spec', function(require) {
         store.load(Radium.Meeting, CREATE_MEETING);
 
         meeting = store.find(Radium.Meeting, 2);
-        meeting.set('starts_at', newStartAt);
+        meeting.set('startsAt', newStartAt);
 
         store.commit();
         server.respond();
         expect(spy).toHaveBeenCalled();
         expect(spy.getCall(0).args[0].url).toBe('/meetings/2/reschedule');
-        expect(meeting.get('starts_at')).toBe(newStartAt);
+        expect(meeting.get('startsAt')).toEqual(new Date(newStartAt));
       });
 
       it("cancels a meeting", function() {

@@ -8,8 +8,8 @@ define('models/meeting', function(require) {
   Radium.Meeting = Radium.Core.extend({
     topic: DS.attr('string'),
     location: DS.attr('string'),
-    starts_at: DS.attr('date'),
-    ends_at: DS.attr('date'),
+    startsAt: DS.attr('date', {key: 'starts_at'}),
+    endsAt: DS.attr('date', {key: 'ends_at'}),
     user: DS.hasOne('Radium.User'),
     contacts: DS.hasMany('Radium.Contact'),
     users: DS.hasMany('Radium.User'),

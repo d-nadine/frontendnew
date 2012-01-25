@@ -10,13 +10,6 @@ define(function(require) {
       updated_at: "2011-12-28T14:26:27Z",
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: "2011-12-28T14:26:27Z",
-      test: {
-        id: 1233,
-          created_at: "2011-12-28T14:26:27Z",
-          updated_at: "2011-12-28T14:26:27Z",
-          name: "Omar Little",
-          email: "irobsdrugsdealers@hotmail.com",
-      },
       owner: {
         user: {
           id: 46,
@@ -128,6 +121,37 @@ define(function(require) {
               .toEqual(["Testing 123", "Testing 123", "Testing 123"]);
       });
 
+    });
+
+    describe("when sorting by date", function() {
+      var activity;
+
+      beforeEach(function() {
+        store.loadMany(Radium.Activity, [
+          {id: 100, timestamp: "2012-01-12T14:26:27Z"},
+          {id: 101, timestamp: "2012-03-25T14:26:27Z"},
+          {id: 102, timestamp: "2012-05-08T14:26:27Z"},
+          {id: 103, timestamp: "2012-07-30T14:26:27Z"},
+          {id: 104, timestamp: "2012-08-17T14:26:27Z"},
+          {id: 105, timestamp: "2011-12-04T14:26:27Z"}
+        ]);
+        activities = store.findAll(Radium.Activity);
+      });
+
+      it("computes the days", function() {
+        expect(activities.getEach('day'))
+          .toEqual(['12', '25', '08', '30', '17', '04']);
+      });
+
+      it("computes the months", function() {
+        expect(activities.getEach('month'))
+            .toEqual(['01', '03', '05', '07', '08', '12']);
+      });
+
+      it("computes the years", function() {
+        expect(activities.getEach('year'))
+          .toEqual(['2012','2012','2012','2012','2012','2011']);
+      });
     });
   });
   

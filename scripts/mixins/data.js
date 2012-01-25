@@ -92,14 +92,18 @@ define('mixins/data', function(require) {
     }
   };
 
-  DS.attr.transforms.date = {
-    from: function(date) {
+  DS.attr.transforms.date.to = function(date) {
+    var type = typeof date;
+
+    if (type === "string") {
       return date;
-    },
-    to: function(date) {
-      return date;
+    } else if (type === "date") {
+      return Ember.DateTime.create(date.getTime()).toISO8601();
     }
+
+    return Ember.DateTime.create().toISO8601();
   };
+
   DS.attr.transforms.inviteState = {
     from: function(serialized) {
       if (serialized == null) {
