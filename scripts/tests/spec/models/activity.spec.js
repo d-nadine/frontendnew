@@ -138,19 +138,26 @@ define(function(require) {
         activities = store.findAll(Radium.Activity);
       });
 
-      it("computes the days", function() {
-        expect(activities.getEach('day'))
-          .toEqual(['12-2012', '25-2012', '08-2012', '30-2012', '17-2012', '04-2011']);
+      it("computes the day", function() {
+        expect(activities.objectAt(0).get('day')).toBe('2012-12');
       });
 
-      it("computes the months", function() {
-        expect(activities.getEach('month'))
-          .toEqual(['01-2012', '03-2012', '05-2012', '07-2012', '08-2012', '12-2011']);
+      it("computes the week", function() {
+        expect(activities.objectAt(0).get('week')).toBe('2012-02');
+        expect(activities.getPath('lastObject.week')).toBe('2011-48');
       });
 
-      it("computes the years", function() {
-        expect(activities.getEach('year'))
-          .toEqual(['2012','2012','2012','2012','2012','2011']);
+      it("computes the month", function() {
+        expect(activities.objectAt(1).get('month')).toBe('2012-03');
+      });
+
+      it("computes the quarter", function() {
+        expect(activities.objectAt(0).get('quarter')).toBe('2012-Q1');
+        expect(activities.objectAt(2).get('quarter')).toBe('2012-Q2');
+      });
+
+      it("computes the year", function() {
+        expect(activities.getPath('lastObject.year')).toBe('2011');
       });
     });
   });
