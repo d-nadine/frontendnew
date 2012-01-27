@@ -20,11 +20,11 @@ define('models/activity', function(require) {
     // If performance is slow, revisit.
     day: function() {
       var date = new Date(this.get('timestamp')).getTime();
-      return Ember.DateTime.create(date).toFormattedString('%d');
+      return Ember.DateTime.create(date).toFormattedString('%d-%Y');
     }.property('timestamp').cacheable(),
     month: function() {
       var date = new Date(this.get('timestamp')).getTime();
-      return Ember.DateTime.create(date).toFormattedString('%m');
+      return Ember.DateTime.create(date).toFormattedString('%m-%Y');
     }.property('timestamp').cacheable(),
     year: function() {
       var date = new Date(this.get('timestamp')).getTime();

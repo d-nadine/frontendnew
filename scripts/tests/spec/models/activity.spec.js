@@ -140,12 +140,12 @@ define(function(require) {
 
       it("computes the days", function() {
         expect(activities.getEach('day'))
-          .toEqual(['12', '25', '08', '30', '17', '04']);
+          .toEqual(['12-2012', '25-2012', '08-2012', '30-2012', '17-2012', '04-2011']);
       });
 
       it("computes the months", function() {
         expect(activities.getEach('month'))
-            .toEqual(['01', '03', '05', '07', '08', '12']);
+          .toEqual(['01-2012', '03-2012', '05-2012', '07-2012', '08-2012', '12-2011']);
       });
 
       it("computes the years", function() {

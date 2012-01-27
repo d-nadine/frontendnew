@@ -4,11 +4,11 @@ define(function(require) {
   require('order!ember');
   require('order!datetime');
   require('order!data');
-  require('order!adapter')
   require('order!router');
   
   var Radium = require('order!radium');
   
+  require('order!adapter')
   require('order!mixins/data');
   require('order!mixins/jqueryui');
   
@@ -57,9 +57,10 @@ define(function(require) {
 
   require('testdir/app/radium.spec');
   require('testdir/models/models.spec');
+  require('testdir/controllers/controllers.spec');
   require('testdir/mixins/jqueryui.spec');
   require('testdir/views/jq.progressbar.spec');
-  // require('testdir/states/loggedOut.spec');
+  require('testdir/states/loggedOut.spec');
 
   return Radium;
 });

@@ -8,6 +8,18 @@
   
   <div id="feed" class="span12">
     {{view searchView}}
+    {{ Radium.feedController.length }}
+    <hr>
+    {{#each Radium.feedController.days}}
+      {{this}}
+      <hr>
+      {{#view Radium.TestView dateBinding="this"}}
+        {{#each test }}
+          {{ title }}
+        {{/each}}
+      {{/view}}
+      <br><br>
+    {{/each}}
   </div>
   
 </div>

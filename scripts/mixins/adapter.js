@@ -1,4 +1,4 @@
-define(function(require) {
+define('adapter', function(require) {
   require('ember');
   require('data');
 
