@@ -20,15 +20,19 @@ define('models/activity', function(require) {
       var date = new Date(this.get('timestamp')).getTime();
       return Ember.DateTime.create(date);
     }.property('timestamp').cacheable(),
+
     day: function() {
       return this.get('date').toFormattedString('%Y-%d');
     }.property('date').cacheable(),
+
     week: function() {
       return this.get('date').toFormattedString('%Y-%W');
     }.property('date').cacheable(),
+
     month: function() {
       return this.get('date').toFormattedString('%Y-%m');
     }.property('date').cacheable(),
+
     // Bind to the `timestamp` property instead of `time` property so we can 
     // calculate what quarter we're in.
     quarter: function() {
@@ -41,6 +45,7 @@ define('models/activity', function(require) {
         if (month > 9 && month <= 12) { quarter = 4; }
       return this.get('date').toFormattedString('%Y-Q') + quarter;
     }.property('timestamp').cacheable(),
+    
     year: function() {
       return this.get('date').toFormattedString('%Y');
     }.property('date').cacheable()

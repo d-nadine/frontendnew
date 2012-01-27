@@ -1,0 +1,10 @@
+{{#each Radium.feedController.years}}
+  {{this}}
+  <hr>
+  {{#view Radium.TestView dateBinding="this"}}
+    {{#each items}}
+      {{ title }}<br>
+    {{/each}}
+  {{/view}}
+  <br><br>
+{{/each}}
