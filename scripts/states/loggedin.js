@@ -19,6 +19,7 @@ define(function(require) {
     },
     dashboard: dashboardState.create(),
     contacts: Ember.State.create({}),
+    deals: Ember.State.create({}),
     pipeline: Ember.State.create({}),
     campaigns: Ember.State.create({}),
     calendar: Ember.State.create({}),

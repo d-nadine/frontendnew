@@ -13,12 +13,7 @@ define('models/user', function(require) {
     phone: DS.attr('string'),
     account: DS.attr('integer'),
     contacts: DS.hasMany('Radium.Contact'),
-    following: DS.hasMany('Radium.User'),
-    
-    // States
-    didUpdate: function() {
-      console.log('updating');
-    }
+    following: DS.hasMany('Radium.User')
   });
   
   return Radium;

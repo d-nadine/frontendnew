@@ -32,7 +32,6 @@ define(function(require) {
       server.restore();
       jQuery.ajax.restore();
       Radium.feedController.set('content', []);
-      Radium.feedController.set('sorted', []);
     });
 
     it("loads activities", function() {

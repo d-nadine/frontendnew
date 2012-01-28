@@ -4,11 +4,18 @@ define(function(require) {
   require('data');
   var Radium = require('radium');
   require('views/dashboard');
-  
+
   var state;
   
   state = Ember.ViewState.extend({
-    view: Radium.DashboardView.create()
+    initialState: 'load',
+    view: Radium.DashboardView.create(),
+    load: Ember.State.create({
+      enter: function() {
+        var activities = Radium.store.findAll(Radium.Activity);
+        Radium.feedController.set('content', activities);
+      }
+    })
   });
   
   return state;

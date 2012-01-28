@@ -261,31 +261,40 @@ define('testdir/models/contact.spec', function(require) {
       });
 
       it("adds a new phone number", function() {
-        var spy, newPhone, contact;
+        var spy, newPhone, contact, response;
         spy = sinon.spy(jQuery, 'ajax');
+
+        response = CONTACT_FIXTURE;
+        response.phone_numbers.push({
+          id: 123123123,
+          name: "Home Phone",
+          value: "+410 444 4442",
+          accepted_values: null
+        });
 
         server.respondWith("PUT", "/contacts/1", [
           200, 
           {"Content-Type": "application/json"},
-          JSON.stringify(CONTACT_FIXTURE) 
+          JSON.stringify(response) 
         ]);
-
+        
+        store.load(CONTACT_FIXTURE);
         contact = store.find(Radium.Contact, 1);
 
-        newPhone = store.createRecord(Radium.EmailAddress, {
+        newPhone = store.createRecord(Radium.PhoneNumber, {
           name: "Home Phone",
           value: "+410 444 4442"
         });
 
-        contact.get('emailAddresses').pushObject(newPhone);
+        contact.get('phoneNumbers').pushObject(newPhone);
 
-        expect(contact.getPath('emailAddresses.length')).toEqual(2);
         expect(newPhone.get('isNew')).toBeTruthy();
 
         store.commit();
         server.respond();
-        expect(spy).toHaveBeenCalled();
 
+        expect(spy).toHaveBeenCalled();
+        expect(contact.getPath('phoneNumbers.length')).toEqual(2);
       });
 
     });

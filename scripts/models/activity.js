@@ -3,18 +3,22 @@ define('models/activity', function(require) {
   require('ember');
   require('data');
   var Radium = require('radium');
+
+  Radium.Owner = DS.Model.extend({
+    user: DS.hasOne('Radium.User', {embedded: true})
+  });
+
+  Radium.ActivityType = DS.Model.extend({
+    todo: DS.hasOne('Radium.Todo', {embedded: true})
+  });
   
   Radium.Activity = Radium.Core.extend({
     tags: DS.attr('array'),
     timestamp: DS.attr('date'),
-    owner: DS.hasOneReference({
-      embedded: true,
-      namespace: 'Radium'
-    }),
-    reference: DS.hasOneReference({
-      embedded: true,
-      namespace: 'Radium'
-    }),
+    owner: DS.hasOne('Radium.Owner', {embedded: true}),
+    reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
+
+
     // @returns {Ember.DateTime}
     date: function() {
       var date = new Date(this.get('timestamp')).getTime();

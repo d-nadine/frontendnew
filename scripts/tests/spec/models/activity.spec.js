@@ -11,6 +11,7 @@ define(function(require) {
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: "2011-12-28T14:26:27Z",
       owner: {
+        id: 1312312,
         user: {
           id: 46,
           created_at: "2011-12-28T14:26:27Z",
@@ -37,6 +38,7 @@ define(function(require) {
         }
       },
       reference: {
+        id: 34123131,
         todo: {
           id: 3,
           created_at: "2011-12-28T14:26:27Z",
@@ -97,28 +99,29 @@ define(function(require) {
 
       it("loads an embedded user", function() {
         var owner = activity.get('owner');
-        expect(activity.getPath('owner.id')).toEqual(46);
-        expect(activity.getPath('owner.name')).toBe('Omar Little');
-        expect(activity.getPath('owner.abbrName')).toBe('Omar L.');
-        expect(store.find(Radium.User, 46)).toEqual(owner);
+        expect(owner.getPath('user.id')).toEqual(46);
+        expect(owner.getPath('user.name')).toBe('Omar Little');
+        expect(owner.getPath('user.abbrName')).toBe('Omar L.');
+        expect(store.find(Radium.User, 46)).toEqual(owner.get('user'));
       });
 
-      it("loads an embedded user", function() {
-        expect(activity.getPath('owner.deals.length')).toEqual(2);
-        expect(activity.getPath('owner.deals').getEach('id'))
+      it("loads an embedded user's deals", function() {
+        expect(activity.getPath('owner.user.deals.length')).toEqual(2);
+        expect(activity.getPath('owner.user.deals').getEach('id'))
               .toEqual([65, 11]);
       });
       
       it("loads an embedded activity", function() {
-        expect(activity.getPath('reference.id')).toEqual(3);
+        var ref = activity.get('reference');
+        expect(ref.getPath('todo.id')).toEqual(3);
       });
 
       it("loads an embedded activity's contacts", function() {
-        expect(activity.getPath('reference.contacts.length')).toEqual(3);
-        expect(activity.getPath('reference.contacts').getEach('id'))
-              .toEqual([33, 44, 55]);
-        expect(activity.getPath('reference.contacts').getEach('name'))
-              .toEqual(["Testing 123", "Testing 123", "Testing 123"]);
+        expect(activity.getPath('owner.user.contacts.length')).toEqual(2);
+        expect(activity.getPath('owner.user.contacts').getEach('id'))
+              .toEqual([33, 44]);
+        expect(activity.getPath('owner.user.contacts').getEach('name'))
+              .toEqual(["Testing 123", "Testing 123"]);
       });
 
     });

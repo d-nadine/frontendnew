@@ -2,6 +2,7 @@ define('data', function(require) {
 require('jquery');
 require('ember');
 
+
 (function(exports) {
 window.DS = Ember.Namespace.create();
 
@@ -67,7 +68,17 @@ DS.fixtureAdapter = DS.Adapter.create({
 
   findMany: function() {
     this.find.apply(this, arguments);
+  },
+
+  findAll: function(store, type) {
+    var fixtures = type.FIXTURES;
+
+    ember_assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
+
+    var ids = fixtures.map(function(item, index, self){ return item.id });
+    store.loadMany(type, ids, fixtures);
   }
+
 });
 
 })({});
@@ -113,7 +124,8 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   updateRecord: function(store, type, model) {
-    var id = get(model, 'id');
+    var primaryKey = getPath(type, 'proto.primaryKey'),
+        id = get(model, primaryKey);
     var root = this.rootForType(type);
 
     var data = {};
@@ -151,7 +163,8 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   deleteRecord: function(store, type, model) {
-    var id = get(model, 'id');
+    var primaryKey = getPath(type, 'proto.primaryKey'),
+        id = get(model, primaryKey);
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
@@ -660,7 +673,7 @@ DS.Store = Ember.Object.extend({
   _adapter: Ember.computed(function() {
     var adapter = get(this, 'adapter');
     if (typeof adapter === 'string') {
-      return getPath(this, adapter);
+      return getPath(this, adapter, false) || getPath(window, adapter);
     }
     return adapter;
   }).property('adapter').cacheable(),
@@ -791,6 +804,7 @@ DS.Store = Ember.Object.extend({
   findMany: function(type, ids, query) {
     var idToClientIdMap = this.idToClientIdMap(type);
     var data = this.clientIdToHashMap(type), needed;
+
     var clientIds = Ember.A([]);
 
     if (ids) {
@@ -814,6 +828,7 @@ DS.Store = Ember.Object.extend({
       if (adapter && adapter.findMany) { adapter.findMany(this, type, needed, query); }
       else { throw fmt("Adapter is either null or do not implement `findMany` method", this); }
     }
+
     return this.createModelArray(type, clientIds);
   },
 
@@ -1574,6 +1589,16 @@ DS.Model = Ember.Object.extend({
   }
 });
 
+DS.Model.reopenClass({
+  typeForAssociation: function(association) {
+    var type = this.metaForProperty(association).type;
+    if (typeof type === 'string') {
+      type = getPath(this, type, false) || getPath(window, type);
+    }
+    return type;
+  }
+});
+
 DS.attr = function(type, options) {
   var transform = DS.attr.transforms[type];
   var transformFrom = transform.from;
@@ -1599,7 +1624,7 @@ DS.attr = function(type, options) {
 };
 
 var embeddedFindRecord = function(store, type, data, key, one) {
-  var association = data ? getPath(data, key) : one ? null : [];
+  var association = data ? get(data, key) : one ? null : [];
   if (one) {
     return association ? store.load(type, association).id : null;
   } else {
@@ -1608,32 +1633,19 @@ var embeddedFindRecord = function(store, type, data, key, one) {
 };
 
 var referencedFindRecord = function(store, type, data, key, one) {
-  return data ? getPath(data, key) : one ? null : [];
+  return data ? get(data, key) : one ? null : [];
 };
 
 var hasAssociation = function(type, options, one) {
-  var embedded = options && options.embedded, association, ref, refType,
+  var embedded = options && options.embedded,
     findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
 
   return Ember.computed(function(key) {
-    if (association !== undefined) {
-      return association;
-    }
-    var data = get(this, 'data'), ids, id,
+    var data = get(this, 'data'), ids, id, association,
       store = get(this, 'store');
+
     if (typeof type === 'string') {
-      type = getPath(this, type); 
-    } else if (type === null) {
-      ref = getPath(this, 'data.' + key);
-      if(ref) {
-        for (refType in ref) break;
-        key = [key, refType].join('.');
-        type = getPath(this, [
-                options.namespace,
-                refType[0].toUpperCase() + refType.substr(1)
-                ].join('.')
-              );
-      }
+      type = getPath(this, type, false) || getPath(window, type);
     }
 
     key = (options && options.key) ? options.key : key;
@@ -1645,29 +1657,8 @@ var hasAssociation = function(type, options, one) {
       association = store.findMany(type, ids);
     }
 
-    Ember.addObserver(this, 'data', function() {
-      var data = get(this, 'data');
-
-      if (one) {
-        id = findRecord(store, type, data, key, true);
-        association = id ? store.find(type, id) : null;
-        this.notifyPropertyChange(key);
-      } else {
-        ids = findRecord(store, type, data, key);
-        store.findMany(type, ids);
-
-        var idToClientIdMap = store.idToClientIdMap(type);
-
-        var clientIds = ids.map(function(id) {
-          return idToClientIdMap[id];
-        });
-
-        set(association, 'content', Ember.A(clientIds));
-      }
-    });
-
     return association;
-  }).property().cacheable();
+  }).property('data').cacheable().meta({ type: type });
 };
 
 DS.hasMany = function(type, options) {
@@ -1678,10 +1669,6 @@ DS.hasMany = function(type, options) {
 DS.hasOne = function(type, options) {
   ember_assert("The type passed to DS.hasOne must be defined", !!type);
   return hasAssociation(type, options, true);
-};
-
-DS.hasOneReference = function(options) {
-  return hasAssociation(null, options, true);
 };
 
 DS.attr.transforms = {
@@ -1751,6 +1738,7 @@ DS.attr.transforms = {
         var dayOfWeek = days[utcDay];
         var dayOfMonth = pad(utcDayOfMonth);
         var month = months[utcMonth];
+
         return dayOfWeek + ", " + dayOfMonth + " " + month + " " + utcYear + " " +
                pad(utcHours) + ":" + pad(utcMinutes) + ":" + pad(utcSeconds) + " GMT";
       } else if (date === undefined) {
@@ -1786,4 +1774,5 @@ DS.attr.transforms = {
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 })({});
+
 });
