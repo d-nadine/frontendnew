@@ -3,20 +3,16 @@ define('fixtures/activities', function(require) {
   var Radium = require('radium');
   require('models/activity');
 
-  Radium.Activity.FIXTURES = [
+  Radium.Activity.FIXTURES = [];
+
+  for (var i = 0; i < 100; i++) {
+    Radium.Activity.FIXTURES.push(
     {
-      id: 53,
-      created_at: "2011-12-28T14:26:27Z",
+      id: i+1,
+      created_at: "2012-12-28T14:26:27Z",
       updated_at: "2011-12-28T14:26:27Z",
       tags: ["tags", "describing", "what", "action", "happened"],
-      timestamp: "2011-12-28T14:26:27Z",
-      test: {
-        id: 1233,
-          created_at: "2011-12-28T14:26:27Z",
-          updated_at: "2011-12-28T14:26:27Z",
-          name: "Omar Little",
-          email: "irobsdrugsdealers@hotmail.com",
-      },
+      timestamp: Ember.DateTime.create({day: i+1}).toISO8601(),
       owner: {
         user: {
           id: 46,
@@ -59,7 +55,8 @@ define('fixtures/activities', function(require) {
         }
       }
     }
-  ];
+  )
+  }
   
   return Radium;
 });
