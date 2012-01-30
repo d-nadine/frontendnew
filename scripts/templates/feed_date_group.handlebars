@@ -1,10 +1,14 @@
-{{#each Radium.feedController.years}}
-  {{this}}
-  <hr>
-  {{#view Radium.TestView dateBinding="this"}}
+{{#each Radium.feedController.selectedDateType}}
+<section>
+  <div class="page-header">
+    <!-- Get some date helpers up in this club -->
+    <h2>{{this}}</h2>
+  </div>
+  {{#view Radium.FeedDateItemView dateBinding="this"}}
     {{#each items}}
-      {{ title }}<br>
+      {{ id }}<br>
     {{/each}}
   {{/view}}
   <br><br>
+</section>
 {{/each}}

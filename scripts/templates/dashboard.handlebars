@@ -6,10 +6,8 @@
     {{collection usersList class="filters people"}}
   </div>
   
-  <div id="feed" class="span12">
-    {{view searchView}}
-
-    {{view Radium.FeedDateGroupView id="poop"}}
-  </div>
+  {{view searchView}}
+  {{view Radium.DateFilterView}}
+  {{view Radium.FeedDateGroupView id="feed"}}
   
 </div>

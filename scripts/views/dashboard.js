@@ -5,7 +5,9 @@ define('views/dashboard', function(require) {
   require('views/profile');
   require('views/globalsearch');
   require('views/filter_list');
+  require('views/feed_date_item');
   require('views/feed_date_group');
+  require('views/date_filters');
   
   var template = require('text!templates/dashboard.handlebars'),
       userListTemplate = require('text!templates/users_list.handlebars');
