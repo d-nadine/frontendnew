@@ -1,14 +1,14 @@
-{{#each Radium.feedController.selectedDateType}}
+{{Radium.dateGroupsController.length}}
+{{#each Radium.activityDateGroupsController.selectedDateType}}
 <section>
   <div class="page-header">
     <!-- Get some date helpers up in this club -->
-    <h2>{{this}}</h2>
+    <h2>{{date}}</h2>
   </div>
-  {{#view Radium.FeedDateItemView dateBinding="this"}}
-    {{#each items}}
-      {{ id }}<br>
-    {{/each}}
-  {{/view}}
-  <br><br>
+
+  {{#if items.length}}
+  There are {{items.length}} items.
+  {{/if}}
+
 </section>
 {{/each}}

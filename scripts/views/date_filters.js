@@ -16,7 +16,7 @@ define('views/date_filter', function(require) {
         Ember.Object.create({label: "Yearly", type: "year"})
       ],
       itemViewClass: Ember.View.extend({
-        dateFilterBinding: 'Radium.feedController.dateFilter',
+        dateFilterBinding: 'Radium.activityDateGroupsController.dateFilter',
         isSelected: function() {
           return (this.get('dateFilter') === this.getPath('content.type')) ?
                   true : false;
@@ -24,7 +24,7 @@ define('views/date_filter', function(require) {
         classNameBindings: ['isSelected:active'],
         click: function() {
           var filterType = this.getPath('content.type');
-          Radium.feedController.set('dateFilter', filterType);
+          Radium.activityDateGroupsController.set('dateFilter', filterType);
           return false;
         },
         template: Ember.Handlebars.compile('<a href="#">{{content.label}}</a>')

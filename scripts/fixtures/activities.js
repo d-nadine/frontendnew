@@ -14,12 +14,13 @@ define('fixtures/activities', function(require) {
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: Ember.DateTime.create({day: i+1}).toISO8601(),
       owner: {
+        id: Math.floor(Math.random() * 10000),
         user: {
-          id: 46,
+          id: i+1*3000,
           created_at: "2011-12-28T14:26:27Z",
           updated_at: "2011-12-28T14:26:27Z",
           name: "Omar Little",
-          email: "irobsdrugsdealers@hotmail.com",
+          email: "irobsdrugdealers@hotmail.com",
           phone: "+1410333-3321",
           is_public: true,
           contacts: [33, 44],
@@ -40,8 +41,9 @@ define('fixtures/activities', function(require) {
         }
       },
       reference: {
+        id: Math.floor(Math.random() * 10000),
         todo: {
-          id: 3,
+          id: i+1*1000,
           created_at: "2011-12-28T14:26:27Z",
           updated_at: "2011-12-28T14:26:27Z",
           kind: "general",

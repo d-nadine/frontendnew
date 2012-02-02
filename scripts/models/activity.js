@@ -23,7 +23,15 @@ define('models/activity', function(require) {
     timestamp: DS.attr('date'),
     owner: DS.hasOne('Radium.Owner', {embedded: true}),
     reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
-
+    activityType: function() {
+      if (this.getPath('data.reference.todo')) return "todo";
+      if (this.getPath('data.reference.deal')) return "deal";
+      if (this.getPath('data.reference.meeting')) return "meeting";
+      if (this.getPath('data.reference.campaign')) return "campaign";
+      if (this.getPath('data.reference.message')) return "message";
+      if (this.getPath('data.reference.call_list')) return "calllist";
+      if (this.getPath('data.reference.announcement')) return "announcement";
+    }.property('data').cacheable(),
     // @returns {Ember.DateTime}
     date: function() {
       var date = new Date(this.get('timestamp')).getTime();
@@ -31,7 +39,7 @@ define('models/activity', function(require) {
     }.property('timestamp').cacheable(),
 
     day: function() {
-      return this.get('date').toFormattedString('%Y-%d');
+      return this.get('date').toFormattedString('%Y-%m-%d');
     }.property('date').cacheable(),
 
     week: function() {

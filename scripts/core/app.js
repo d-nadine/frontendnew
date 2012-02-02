@@ -14,6 +14,7 @@ define(function(require) {
   require('order!controllers/users');
   require('order!controllers/contacts');
   require('order!controllers/resources');
+  require('order!controllers/activity_date_groups');
   require('order!controllers/feed');
   
   require('order!models/core');
@@ -44,10 +45,9 @@ define(function(require) {
   require('order!models/contact');
   require('order!models/user');
   require('order!models/activity');
+  require('order!models/activity_date_group');
   
-  require('order!fixtures/contacts');
-  require('order!fixtures/users');
-  require('order!fixtures/activities');
+  require('order!fixtures/main');
   
   require('order!views/topbar');
   require('order!views/dashboard');
