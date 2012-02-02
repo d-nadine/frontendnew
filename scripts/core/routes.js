@@ -14,6 +14,7 @@ define('core/routes', function(require) {
       if (!ISLOGGEDIN) {
         req.redirect('/login');
       }
+
       Radium.appController.set('currentSection', 'dashboard');
       Radium.App.goToState('loggedIn.dashboard');
     });
@@ -29,8 +30,9 @@ define('core/routes', function(require) {
         req.redirect('/login');
         return false;
       }
-      
-      if (Radium.App.getState('loggedIn').getState(page)) {
+
+
+      if (Radium.App.getPath('loggedIn.' + page)) {
         Radium.appController.set('currentSection', page);
         Radium.App.goToState('loggedIn.' + page);
       } else {

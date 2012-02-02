@@ -8,10 +8,11 @@ define(function(require) {
   var topBarView = Radium.TopbarView.create(),
       dashboardState = require('states/dashboard');
   
-  return Ember.StateManager.create({
-    rootElement: '#main',
+  return Ember.State.create({
     enter: function() {
       $('#main-nav').show();
+      Radium.usersController.fetchUsers();
+      Radium.contactsController.fetchContacts();
       topBarView.appendTo('#topbar');
     },
     exit: function() {
@@ -26,6 +27,4 @@ define(function(require) {
     messages: Ember.State.create({}),
     settings: Ember.State.create({})
   });
-  
-  return Radium;
 });

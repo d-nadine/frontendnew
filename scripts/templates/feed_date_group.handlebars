@@ -1,14 +1,19 @@
 {{Radium.dateGroupsController.length}}
 {{#each Radium.activityDateGroupsController.selectedDateType}}
-<section>
-  <div class="page-header">
-    <!-- Get some date helpers up in this club -->
-    <h2>{{date}}</h2>
-  </div>
+  <section>
+    <div class="page-header">
+      <!-- Get some date helpers up in this club -->
+      <h2>{{date}}</h2>
+    </div>
+    {{#if todos.length}}
+    <div class="row feed-item pipeline">
+      <div class="span12">
+        <div class="alert-message">
+          <p>Your company finished <b>{{todos.length}} todos</b>.</p>
+        </div>
+      </div>
+    </div>
+    {{/if}}
 
-  {{#if items.length}}
-  There are {{items.length}} items.
-  {{/if}}
-
-</section>
+  </section>
 {{/each}}
