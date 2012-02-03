@@ -14,6 +14,9 @@ define(function(require) {
       enter: function() {
         var activities = Radium.store.findAll(Radium.Activity);
         Radium.feedController.set('content', activities);
+
+        var announcements = Radium.store.findAll(Radium.Announcement);
+        Radium.announcementsController.set('content', announcements);
       }
     })
   });

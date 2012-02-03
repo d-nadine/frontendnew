@@ -4,5 +4,6 @@ define('fixtures/main', function(require) {
   require('./activities');
   require('./todos');
   require('./activity_date_groups');
+  require('./announcements');
 
 });

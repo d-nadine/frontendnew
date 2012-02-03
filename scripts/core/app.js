@@ -10,6 +10,7 @@ define(function(require) {
   
   require('order!mixins/jqueryui');
   
+  require('order!controllers/announcements');
   require('order!controllers/app');
   require('order!controllers/users');
   require('order!controllers/contacts');

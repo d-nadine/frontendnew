@@ -8,6 +8,7 @@ define('views/dashboard', function(require) {
   require('views/feed_date_item');
   require('views/feed_date_group');
   require('views/date_filters');
+  require('views/dashboard/announcements');
   
   var template = require('text!templates/dashboard.handlebars'),
       userListTemplate = require('text!templates/users_list.handlebars');

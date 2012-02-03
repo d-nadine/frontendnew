@@ -10,8 +10,12 @@ define('models/radium', function(require) {
   var Radium = require('radium');
   
   Radium.Core = DS.Model.extend({
-    created_at: DS.attr('date'),
-    updated_at: DS.attr('date')
+    createdAt: DS.attr('date', {
+      key: 'created_at'
+    }),
+    updatedAt: DS.attr('date', {
+      key: 'updated_at'
+    })
   });
   
   return Radium;
