@@ -55,6 +55,7 @@ define(function(require) {
   require('order!views/globalsearch');
   require('order!views/loginpane');
   require('order!views/profile');
+  require('order!views/dashboard/activity_summary');
   
   require('order!states/main');
   

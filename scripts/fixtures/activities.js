@@ -16,7 +16,7 @@ define('fixtures/activities', function(require) {
       owner: {
         id: Math.floor(Math.random() * 10000),
         user: {
-          id: i+1*3000,
+          id: 12312,
           created_at: "2011-12-28T14:26:27Z",
           updated_at: "2011-12-28T14:26:27Z",
           name: "Omar Little",

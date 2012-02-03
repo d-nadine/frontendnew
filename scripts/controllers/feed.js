@@ -38,6 +38,7 @@ define('controllers/feedController', function(require) {
       var createDateGroup = function(day, type, activityType, item) {
         var dayGroup = Ember.Object.create({
           date: day,
+          datetime: item.get('date'),
           type: type,
           todos: Ember.A([]),
           deals: Ember.A([]),
