@@ -33,6 +33,9 @@ define('models/activity', function(require) {
       if (this.getPath('data.reference.announcement')) return "announcement";
     }.property('data').cacheable(),
     // @returns {Ember.DateTime}
+    rawDate: function() {
+      return new Date(this.get('timestamp')).getTime();
+    }.property('timestamp').cacheable(),
     date: function() {
       var date = new Date(this.get('timestamp')).getTime();
       return Ember.DateTime.create(date);

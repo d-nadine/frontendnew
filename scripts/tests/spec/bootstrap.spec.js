@@ -11,6 +11,8 @@ define(function(require) {
   require('order!adapter')
   require('order!mixins/data');
   require('order!mixins/jqueryui');
+
+  require('order!helpers/date_helper');
   
   require('order!controllers/app');
   require('order!controllers/users');
@@ -56,6 +58,7 @@ define(function(require) {
   require('order!states/main');
 
   require('testdir/app/radium.spec');
+  require('testdir/helpers/date_helper.spec');
   require('testdir/models/models.spec');
   require('testdir/controllers/controllers.spec');
   require('testdir/mixins/jqueryui.spec');

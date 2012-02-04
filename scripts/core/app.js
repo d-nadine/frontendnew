@@ -8,6 +8,8 @@ define(function(require) {
   
   var Radium = require('order!radium');
   
+  require('order!helpers/date_helper');
+
   require('order!mixins/jqueryui');
   
   require('order!controllers/announcements');

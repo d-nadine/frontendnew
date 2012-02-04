@@ -142,7 +142,7 @@ define(function(require) {
       });
 
       it("computes the day", function() {
-        expect(activities.objectAt(0).get('day')).toBe('2012-12');
+        expect(activities.objectAt(0).get('day')).toBe('2012-01-12');
       });
 
       it("computes the week", function() {

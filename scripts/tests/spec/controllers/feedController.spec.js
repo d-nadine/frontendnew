@@ -34,33 +34,33 @@ define(function(require) {
       Radium.feedController.set('content', []);
     });
 
-    it("loads activities", function() {
-      console.log(Radium.feedController.get('sorted'));
-    });
+    // it("loads activities", function() {
+    //   console.log(Radium.feedController.get('sorted'));
+    // });
 
-    it("maps days", function() {
-      expect(Radium.feedController.get('days'))
-        .toEqual(['2012-12', '2012-25', '2012-08', '2012-30', '2012-17', '2011-24']);
-    });
+    // it("maps days", function() {
+    //   expect(Radium.feedController.get('days'))
+    //     .toEqual(['2012-12', '2012-25', '2012-08', '2012-30', '2012-17', '2011-24']);
+    // });
 
-    it("maps weeks", function() {
-      expect(Radium.feedController.get('days'))
-        .toEqual([ '2012-12', '2012-25', '2012-08', '2012-30', '2012-17', '2011-24']);
-    });
+    // it("maps weeks", function() {
+    //   expect(Radium.feedController.get('days'))
+    //     .toEqual([ '2012-12', '2012-25', '2012-08', '2012-30', '2012-17', '2011-24']);
+    // });
 
-    it("maps months", function() {
-      expect(Radium.feedController.get('months'))
-        .toEqual(['2012-09', '2012-10', '2012-11', '2012-12', '2011-12']);
-    });
+    // it("maps months", function() {
+    //   expect(Radium.feedController.get('months'))
+    //     .toEqual(['2012-09', '2012-10', '2012-11', '2012-12', '2011-12']);
+    // });
 
-    it("maps quarters", function() {
-      expect(Radium.feedController.get('quarters'))
-        .toEqual(['2012-Q3', '2012-Q4', '2011-Q4']);
-    });
+    // it("maps quarters", function() {
+    //   expect(Radium.feedController.get('quarters'))
+    //     .toEqual(['2012-Q3', '2012-Q4', '2011-Q4']);
+    // });
 
-    it("maps years", function() {
-      expect(Radium.feedController.get('years')).toEqual(['2012', '2011']);
-    });
+    // it("maps years", function() {
+    //   expect(Radium.feedController.get('years')).toEqual(['2012', '2011']);
+    // });
   });
   
 });
