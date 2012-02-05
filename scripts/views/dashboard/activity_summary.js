@@ -13,7 +13,6 @@ define(function(require) {
       classNames: 'span12'.w(),
       actionsVisible: false,
       click: function(evt) {
-        // var p = this.getPath('parentView.isDetailsVisible');
         this.get('parentView').toggleProperty('isDetailsVisible');
       },
       template: Ember.Handlebars.compile(template)

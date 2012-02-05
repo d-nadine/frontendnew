@@ -52,6 +52,7 @@ define(function(require) {
   
   require('order!fixtures/main');
   
+  require('order!views/checkbox');
   require('order!views/topbar');
   require('order!views/dashboard');
   require('order!views/filter_list');

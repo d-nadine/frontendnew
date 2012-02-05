@@ -5,7 +5,7 @@ define('fixtures/activities', function(require) {
 
   Radium.Activity.FIXTURES = [];
 
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 10; i++) {
     Radium.Activity.FIXTURES.push(
     {
       id: i+1,
@@ -13,6 +13,7 @@ define('fixtures/activities', function(require) {
       updated_at: "2011-12-28T14:26:27Z",
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: Ember.DateTime.create({day: i+1}).toISO8601(),
+      tester: true,
       owner: {
         id: Math.floor(Math.random() * 10000),
         user: {
@@ -49,6 +50,7 @@ define('fixtures/activities', function(require) {
           kind: "general",
           description: "Finish programming radium",
           finish_by: "2012-01-04T14:26:22Z",
+          finished: false,
           contacts: [33, 44, 55],
           comments: [],
           activities: [51, 52],

@@ -1,12 +1,10 @@
 {{#each parentView.todos}}
-  {{#with reference.todo}}
   <div class="span2"><span class="timestamp">9:30 AM</span></div>
   <div class="span9 content">
     <p>
-      <input type="checkbox">
-      <span class="label notice">{{kind}}</span>
-      {{description}}
-      {{/with}}
+      {{view Radium.Checkbox valueBinding="reference.todo.finished"}}
+      <span class="label notice">{{reference.todo.kind}}</span>
+      {{reference.todo.description}}
       (<a href="#">{{owner.user.abbrName}}</a>)
     </p>
   </div>
