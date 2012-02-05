@@ -8,6 +8,7 @@ define('models/todo', function(require) {
     kind: DS.attr('todoKind'),
     description: DS.attr('string'),
     finish_by: DS.attr('date'),
+    finished: DS.attr('boolean'),
     campaign: DS.hasOne('Radium.Campaign'),
     call_list: DS.hasOne('Radium.CallList'),
     // TODO: Set up this as an embedded object possibly... variable toOne not supported

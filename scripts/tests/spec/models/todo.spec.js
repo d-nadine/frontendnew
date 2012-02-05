@@ -8,6 +8,7 @@ define('testdir/models/todo.spec', function(require) {
     created_at: Ember.DateTime.create().toISO8601(),
     updated_at: Ember.DateTime.create().toISO8601(),
     kind: "general",
+    finished: false,
     description: "Finish programming radium",
     finish_by: "2012-12-22T15:06:27Z"
   };
@@ -32,6 +33,7 @@ define('testdir/models/todo.spec', function(require) {
             kind: "general",
             description: "Finish programming radium",
             finish_by: "2011-12-22T15:06:27Z",
+            finished: false,
             campaign: 3,
             call_list: 5,
             reference: null,
@@ -45,6 +47,7 @@ define('testdir/models/todo.spec', function(require) {
             kind: "general",
             description: "Finish programming radium",
             finish_by: "2012-12-22T15:06:27Z",
+            finished: false,
             campaign: 3,
             call_list: 5,
             reference: null,
@@ -101,6 +104,26 @@ define('testdir/models/todo.spec', function(require) {
         expect(spy).toHaveBeenCalled();
         expect(todoSpy).toHaveBeenCalled();
         expect(todo.get('id')).toEqual(100);
+      });
+
+      it("completes a todo", function() {
+        store.load(Radium.Todo, CREATE_FIXTURE);
+        var todo = store.find(Radium.Todo, 100);
+
+        server.fakeHTTPMethods = true;
+        server.respondWith(
+          "POST", "/todos", [
+          200, 
+          {"Content-Type": "application/json"},
+          JSON.stringify(jQuery.extend(CREATE_FIXTURE, {finished: true}))
+        ]);
+
+        todo.set('finished', true);
+        store.commit();
+        server.respond();
+
+        expect(spy).toHaveBeenCalled();
+        expect(todo.get('finished')).toBeTruthy();
       });
 
       // TODO: Implement this test when nested updates are working.
