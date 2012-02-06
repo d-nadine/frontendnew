@@ -2,7 +2,7 @@ define(function(require) {
   require('ember');
   
   var button = Ember.Button.extend({
-    classNames: "btn primary".w(),
+    classNames: "btn primary pull-right".w(),
     isVisible: function() {
       var section = this.getPath('parentView.currentSection');
       if (!section || section === 'settings') {

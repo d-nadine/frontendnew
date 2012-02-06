@@ -4,7 +4,6 @@ define('views/date_filter', function(require) {
       template = require('text!templates/date_filters.handlebars');
 
   Radium.DateFilterView = Ember.View.extend({
-    classNames: 'span12'.w(),
     template: Ember.Handlebars.compile(template),
     testView: Ember.CollectionView.extend({
       tagName: 'ul',

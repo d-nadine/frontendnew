@@ -10,7 +10,7 @@ define(function(require) {
     isDetailsVisible: false,
     detailsView: Radium.FeedTodosView,
     summaryBox: Ember.View.extend({
-      classNames: 'span12'.w(),
+      classNames: 'span9'.w(),
       actionsVisible: false,
       click: function(evt) {
         this.get('parentView').toggleProperty('isDetailsVisible');

@@ -1,14 +1,19 @@
 <div class="row">
   
-  <div id="sidebar" class="span4">
+  <div id="sidebar" class="span3">
     {{view profileView}}
-    {{collection Radium.ActivityFilterList tagName="table" class="filters types"}}
+    {{collection Radium.ActivityFilterList}}
     {{collection usersList class="filters people"}}
   </div>
   
-  {{view searchView}}
-  {{view Radium.DateFilterView}}
-  {{view Radium.AnnouncementsView}}
-  {{view Radium.FeedDateGroupView id="feed"}}
-  
+  <div class="span9">
+    <div class="row">
+        {{view searchView}}
+    </div>
+    {{view Radium.DateFilterView}}
+    {{view Radium.AnnouncementsView}}
+    <div class="row">
+      {{view Radium.FeedDateGroupView id="feed" class="span9"}}
+    </div>
+  </div>
 </div>

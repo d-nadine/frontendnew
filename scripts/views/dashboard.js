@@ -18,8 +18,8 @@ define('views/dashboard', function(require) {
     profileView: Radium.ProfileView,
     searchView: Radium.GlobalSearchTextView,
     usersList: Ember.CollectionView.extend({
-      tagName: 'table',
-      classNames: 'filters people'.w(),
+      tagName: 'ul',
+      classNames: 'nav nav-tabs nav-stacked filters people'.w(),
       contentBinding: 'Radium.usersController',
       itemViewClass: Ember.View.extend({
         click: function() {
@@ -28,7 +28,7 @@ define('views/dashboard', function(require) {
         template: Ember.Handlebars.compile(userListTemplate)
       }),
       didInsertElement: function() {
-        this.$().prepend('<thead><tr id="secondary-filter"><th colspan="3">People</th></tr></thead>');
+        this.$().prepend('<h3>Team</h3>');
         this.$().find('tr').addClass('filter');
       }
       

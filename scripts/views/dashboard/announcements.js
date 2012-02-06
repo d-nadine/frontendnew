@@ -4,7 +4,7 @@ define('views/dashboard/announcements', function(require) {
       template = require('text!templates/dashboard/announcements.handlebars');
 
   Radium.AnnouncementsView = Ember.View.extend({
-    classNames: 'span12'.w(),
+    classNames: 'row'.w(),
     isVisible: function() {
       var arr = Radium.announcementsController.get('length');
       return (arr > 0) ? true : false;

@@ -4,7 +4,6 @@ define(function(require) {
       template = require('text!templates/feed_date_group.handlebars');
 
   Radium.FeedDateGroupView = Ember.View.extend({
-    classNames: 'span12'.w(),
     contentBinding: 'Radium.feedController.content',
     dateFilterBinding: 'Radium.feedController.dateFilter',
     template: Ember.Handlebars.compile(template)

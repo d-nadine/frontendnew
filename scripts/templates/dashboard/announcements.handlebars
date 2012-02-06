@@ -1,9 +1,12 @@
-<div class="alert-message block-message info" id="notifications">
-  {{#collection notificationsCollectionView tagName="ul" class="unstyled"}}
-    <span class="time">{{time content.updatedAt}}</span>
-    <a href="/{{content.user.id}}" {{action "viewUser"}}>{{content.user.firstName}}</a> {{content.message}}
-    <span class="options">
-      (<a href="#" {{action "dismiss"}}>Dismiss</a>)
-    </span>
-  {{/collection}}
+<div class="span9">
+  <div class="alert alert-info" id="notifications">
+    <a class="close">×</a>
+    {{#collection notificationsCollectionView tagName="ul" class="unstyled"}}
+      <span class="time">{{time content.updatedAt}}</span>
+      <a href="/{{content.user.id}}" {{action "viewUser"}}>{{content.user.firstName}}</a> {{content.message}}
+      <span class="options">
+        (<a href="#" {{action "dismiss"}}>Dismiss</a>)
+      </span>
+    {{/collection}}
+  </div>
 </div>

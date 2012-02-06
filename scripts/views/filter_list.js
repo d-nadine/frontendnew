@@ -7,6 +7,8 @@ define('views/filter_list', function(require) {
   var template = require('text!templates/filter_list.handlebars');
   
   Radium.ActivityFilterList = Ember.CollectionView.extend({
+    tagName: 'ul',
+    classNames: 'nav nav-tabs nav-stacked'.w(),
     contentBinding: 'Radium.resourcesController.content',
     itemViewClass: Ember.View.extend({
       // currentFilterBinding: 'Radium.activityStreamController.currentFilter',

@@ -4,8 +4,8 @@ define('views/globalsearch', function(require) {
   var Radium = require('radium');
   
   Radium.GlobalSearchTextView = Ember.View.extend({
-    classNames: 'span12'.w(),
-    template: Ember.Handlebars.compile('<fieldset><input type="text" class="prependedInput" placeholder="Find me..." id="search-box"></fieldset>')
+    classNames: 'span9'.w(),
+    template: Ember.Handlebars.compile('<input type="text" class="prependedInput span9" placeholder="Find me..." id="search-box">')
   });
   
   return Radium;

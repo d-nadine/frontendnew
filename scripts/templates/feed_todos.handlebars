@@ -10,7 +10,7 @@
         {{/if}}
         </span>
       </div>
-      <div class="span9 content">
+      <div class="span7 content">
         <p>
           {{view Radium.Checkbox valueBinding="finished"}}
           <span class="label notice">{{kind}}</span>
@@ -18,7 +18,7 @@
     {{/with}}
         (<a href="#">{{owner.user.abbrName}}</a>)
       {{#if reference.todo.comments.length}}
-        <img src="/images/icons/balloon-white.png">
+        <i class="icon-comment"></i>
       {{/if}}
       </p>
     </div>
