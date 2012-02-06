@@ -9,6 +9,7 @@ define(function(require) {
   var Radium = require('order!radium');
   
   require('order!helpers/date_helper');
+  require('order!helpers/time_helper');
 
   require('order!mixins/jqueryui');
   

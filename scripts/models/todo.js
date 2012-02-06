@@ -7,10 +7,14 @@ define('models/todo', function(require) {
   Radium.Todo = Radium.Core.extend({
     kind: DS.attr('todoKind'),
     description: DS.attr('string'),
-    finish_by: DS.attr('date'),
+    finishBy: DS.attr('date', {
+      key: 'finish_by'
+    }),
     finished: DS.attr('boolean'),
     campaign: DS.hasOne('Radium.Campaign'),
-    call_list: DS.hasOne('Radium.CallList'),
+    callList: DS.hasOne('Radium.CallList', {
+      key: 'call_list'
+    }),
     // TODO: Set up this as an embedded object possibly... variable toOne not supported
     // reference: DS.hasOne('Radium.', {
     //   embedded: true

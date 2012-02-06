@@ -1,11 +1,23 @@
 {{#each parentView.todos}}
-  <div class="span2"><span class="timestamp">9:30 AM</span></div>
-  <div class="span9 content">
-    <p>
-      {{view Radium.Checkbox valueBinding="reference.todo.finished"}}
-      <span class="label notice">{{reference.todo.kind}}</span>
-      {{reference.todo.description}}
-      (<a href="#">{{owner.user.abbrName}}</a>)
-    </p>
+  {{#with reference.todo}}
+    <div {{bindAttr class="isOverdue:overdue"}}>
+      <div class="span2">
+        <span class="timestamp">
+        {{#if isOverdue}}
+          OVERDUE
+        {{else}}
+          {{time updatedAt}}
+        {{/if}}
+        </span>
+      </div>
+      <div class="span9 content">
+        <p>
+          {{view Radium.Checkbox valueBinding="finished"}}
+          <span class="label notice">{{kind}}</span>
+          {{description}}
+    {{/with}}
+        (<a href="#">{{owner.user.abbrName}}</a>)
+      </p>
+    </div>
   </div>
 {{/each}}

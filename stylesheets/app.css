@@ -29,8 +29,8 @@ body {
   text-transform: uppercase;
 }
 
-.feed-item.overdue .timestamp,
-.feed-item.overdue .content p {
+.overdue .timestamp,
+.overdue .content p {
   color: #C43C35;
   font-weight: bold;
 }

@@ -3,6 +3,8 @@ define('fixtures/activities', function(require) {
   var Radium = require('radium');
   require('models/activity');
 
+  var todoKinds = ["call", "general", "support"];
+
   Radium.Activity.FIXTURES = [];
 
   for (var i = 0; i < 10; i++) {
@@ -12,7 +14,11 @@ define('fixtures/activities', function(require) {
       created_at: "2012-12-28T14:26:27Z",
       updated_at: "2011-12-28T14:26:27Z",
       tags: ["tags", "describing", "what", "action", "happened"],
-      timestamp: Ember.DateTime.create({day: i+1}).toISO8601(),
+      timestamp: Ember.DateTime.create({
+        day: i+1,
+        hour: Math.floor(Math.random() * 12),
+        minute: Math.floor(Math.random() * 59)
+      }).toISO8601(),
       tester: true,
       owner: {
         id: Math.floor(Math.random() * 10000),
@@ -46,10 +52,18 @@ define('fixtures/activities', function(require) {
         todo: {
           id: i+1*1000,
           created_at: "2011-12-28T14:26:27Z",
-          updated_at: "2011-12-28T14:26:27Z",
-          kind: "general",
+          updated_at: Ember.DateTime.create({
+            day: i+1,
+            hour: Math.floor(Math.random() * 24),
+            minute: Math.floor(Math.random() * 59)
+          }).toISO8601(),
+          kind: todoKinds[Math.floor(Math.random() * todoKinds.length)],
           description: "Finish programming radium",
-          finish_by: "2012-01-04T14:26:22Z",
+          finish_by: Ember.DateTime.create({
+            day: i+1,
+            hour: Math.floor(Math.random() * 24),
+            minute: Math.floor(Math.random() * 59)
+          }).toISO8601(),
           finished: false,
           contacts: [33, 44, 55],
           comments: [],
