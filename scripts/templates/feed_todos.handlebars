@@ -17,6 +17,9 @@
           {{description}}
     {{/with}}
         (<a href="#">{{owner.user.abbrName}}</a>)
+      {{#if reference.todo.comments.length}}
+        <img src="/images/icons/balloon-white.png">
+      {{/if}}
       </p>
     </div>
   </div>

@@ -66,7 +66,7 @@ define('fixtures/activities', function(require) {
           }).toISO8601(),
           finished: false,
           contacts: [33, 44, 55],
-          comments: [],
+          comments: [12],
           activities: [51, 52],
           user: 45,
           reference: null

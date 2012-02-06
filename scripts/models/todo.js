@@ -29,9 +29,10 @@ define('models/todo', function(require) {
     */
     isOverdue: function() {
       var d = new Date().getTime(),
+          isFinished = this.get('finished'),
           finishBy = new Date(this.get('finish_by')).getTime();
-      return (finishBy <= d) ? true : false;
-    }.property('finish_by')
+      return (finishBy <= d && !isFinished) ? true : false;
+    }.property('finishBy', 'finished').cacheable()
   });
   
   return Radium;
