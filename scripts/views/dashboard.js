@@ -22,15 +22,11 @@ define('views/dashboard', function(require) {
       classNames: 'nav nav-tabs nav-stacked filters people'.w(),
       contentBinding: 'Radium.usersController',
       itemViewClass: Ember.View.extend({
-        click: function() {
-          
+        viewUser: function(event) {
+          return false;
         },
         template: Ember.Handlebars.compile(userListTemplate)
-      }),
-      didInsertElement: function() {
-        this.$().prepend('<h3>Team</h3>');
-        this.$().find('tr').addClass('filter');
-      }
+      })
       
     })
   });

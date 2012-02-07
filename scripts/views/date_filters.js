@@ -21,12 +21,13 @@ define('views/date_filter', function(require) {
                   true : false;
         }.property('dateFilter').cacheable(),
         classNameBindings: ['isSelected:active'],
-        click: function() {
+        changeFilter: function(event) {
+          event.preventDefault();
           var filterType = this.getPath('content.type');
           Radium.activityDateGroupsController.set('dateFilter', filterType);
           return false;
         },
-        template: Ember.Handlebars.compile('<a href="#">{{content.label}}</a>')
+        template: Ember.Handlebars.compile('<a href="#" {{action "changeFilter"}}>{{content.label}}</a>')
       }),
     })
   });

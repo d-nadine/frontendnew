@@ -9,6 +9,10 @@ define(function(require) {
     template: Ember.Handlebars.compile('{{view summaryBox}} {{view detailsView}}'),
     isDetailsVisible: false,
     detailsView: Radium.FeedTodosView,
+    isVisible: function() {
+      var filter = Radium.feedController.get('categoryFilter');
+      return (this.get(filter) !== undefined || filter === 'everything') ? true : false;
+    }.property('Radium.feedController.categoryFilter').cacheable(),
     summaryBox: Ember.View.extend({
       classNames: 'span9'.w(),
       actionsVisible: false,

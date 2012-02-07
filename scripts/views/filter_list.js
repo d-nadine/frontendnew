@@ -11,16 +11,17 @@ define('views/filter_list', function(require) {
     classNames: 'nav nav-tabs nav-stacked'.w(),
     contentBinding: 'Radium.resourcesController.content',
     itemViewClass: Ember.View.extend({
-      // currentFilterBinding: 'Radium.activityStreamController.currentFilter',
-      // isEnabled: function() {
-      //   return (this.get('currentFilter') == this.get('content').get('model')) ? true : false;
-      // }.property('currentFilter').cacheable(),
-      // classNameBindings: ['isEnabled:enabled'],
+      categoryFilterBinding: 'Radium.feedController.categoryFilter',
+      isEnabled: function() {
+        return (this.get('categoryFilter') == this.getPath('content.shortname')) ? true : false;
+      }.property('categoryFilter').cacheable(),
+      classNameBindings: ['isEnabled:active'],
       template: Ember.Handlebars.compile(template),
-      click: function() {
-        var type = this.get('content').get('model');
-        console.log(type);
-        // Radium.activityStreamController.set('currentFilter', type);
+      changeFilter: function(event) {
+        event.preventDefault();
+        var type = this.getPath('content.shortname');
+        Radium.feedController.set('categoryFilter', type);
+        return false;
       }
     })
   });

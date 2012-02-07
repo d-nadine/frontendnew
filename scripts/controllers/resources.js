@@ -10,31 +10,31 @@ define('controllers/resources', function(require) {
   Radium.resourcesController = Ember.ArrayProxy.create({
     content: [
       Ember.Object.create({
-        title: 'Everything', model: 'Everything', isMain: true
+        title: 'Everything', shortname: 'everything', isMain: true
       }),
       Ember.Object.create({
-        title: 'Todos', model: 'Todo', isMain: false
+        title: 'Todos', shortname: 'todos', isMain: false
       }),
       Ember.Object.create({
-        title: 'Meetings', model: 'Meeting', isMain: false
+        title: 'Meetings', shortname: 'meetings', isMain: false
       }), 
       Ember.Object.create({
-        title: 'Phone Call', model: 'PhoneCall', isMain: false
+        title: 'Phone Call', shortname: 'phonecalls', isMain: false
       }),
       Ember.Object.create({
-        title: 'Deals', model: 'Deal', isMain: false
+        title: 'Deals', shortname: 'deals', isMain: false
       }),
       Ember.Object.create({
-        title: 'Messages', model: 'Message', isMain: false
+        title: 'Messages', shortname: 'messages', isMain: false
       }),
       Ember.Object.create({
-        title: 'Discussions', model: 'Discussion', isMain: false
+        title: 'Discussions', shortname: 'discussions', isMain: false
       }), 
       Ember.Object.create({
-        title: 'Activity', model: 'Activity', isMain: true
+        title: 'Activity', shortname: 'Activity', isMain: true
       }), 
       Ember.Object.create({
-        title: 'Pipeline', model: 'Pipeline', isMain: true
+        title: 'Pipeline', shortname: 'Pipeline', isMain: true
       })
     ]
   });
