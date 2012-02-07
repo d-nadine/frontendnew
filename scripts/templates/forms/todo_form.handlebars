@@ -1,0 +1,24 @@
+<form class="well">
+  <label for="task">Task</label>
+  {{view Ember.TextArea id="task" class="span8"}}
+  <label for="date">Date:</label>
+  {{view Ember.TextField id="date" class="input-small"}}
+  <label for="time">Time:</label>
+  {{view Ember.TextField id="time" class="input-small"}}
+  <label for="assigned-to">Assigned To</label>
+  {{view Ember.Select 
+      id="assigned-to"
+      contentBinding="Radium.usersController"
+      optionLabelPath="content.abbrName"
+      optionValuePath="content.id"
+  }}
+  <label for="customer">Customer</label>
+  {{view Ember.TextField id="customer" class="input-small"}}
+
+  {{view Ember.Checkbox title="Add Reminder" class="checkbox controls"}}
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Add Todo</button>
+    <button type="reset" class="btn">Cancel</button>
+  </div>
+</form>

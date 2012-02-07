@@ -21,7 +21,23 @@ define('views/topbar', function(require) {
       var section = this.get('currentSection') || 'dashboard';
       if (section) $('li#btn-'+section).addClass('active');
     },
-    mainActionButton: buttonView,
+    
+    mainActionButton: Ember.Button.extend({
+      classNames: "btn primary pull-right".w(),
+      isVisible: function() {
+        var section = this.getPath('parentView.currentSection');
+        if (!section || section === 'settings') {
+          return false;
+        } else {
+          return true;
+        }
+        return false;
+      }.property('parentView.currentSection'),
+      click: function() {
+        
+      },
+      template: Ember.Handlebars.compile('Add {{ parentView.section }}')
+    }),
     template: Ember.Handlebars.compile(template)
   });
   

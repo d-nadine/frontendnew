@@ -55,6 +55,7 @@ define(function(require) {
   
   require('order!views/checkbox');
   require('order!views/topbar');
+  require('order!views/forms/todo_form');
   require('order!views/dashboard');
   require('order!views/filter_list');
   require('order!views/globalsearch');
