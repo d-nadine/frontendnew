@@ -13,7 +13,6 @@ define(function(require) {
       if (this.get('categoryFilter') === 'everything') {
         return true;
       } else {
-        console.log($children.css('display'))
         if ($children.length > 0 && $children.css('display') === 'block') {
           return true;
         } else {

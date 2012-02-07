@@ -60,7 +60,6 @@ define('controllers/feedController', function(require) {
         } else {
           cache.objectAt(dayIdx).get(activityType).pushObject(item);
         }
-
         // Week
         if (weekIdx < 0) {
           cache.pushObject(createDateGroup(week, 'week', activityType, item));

@@ -3,11 +3,12 @@ define('fixtures/activities', function(require) {
   var Radium = require('radium');
   require('models/activity');
 
-  var todoKinds = ["call", "general", "support"];
+  var todoKinds = ["call", "general", "support"],
+      limit = 10;
 
   Radium.Activity.FIXTURES = [];
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < limit; i++) {
     Radium.Activity.FIXTURES.push(
     {
       id: i+1,
@@ -15,7 +16,7 @@ define('fixtures/activities', function(require) {
       updated_at: "2011-12-28T14:26:27Z",
       tags: ["tags", "describing", "what", "action", "happened"],
       timestamp: Ember.DateTime.create({
-        day: i+1,
+        day: new Date().getDate() - i,
         hour: Math.floor(Math.random() * 12),
         minute: Math.floor(Math.random() * 59)
       }).toISO8601(),
