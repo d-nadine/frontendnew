@@ -5,6 +5,10 @@ define('views/dashboard/announcements', function(require) {
 
   Radium.AnnouncementsView = Ember.View.extend({
     classNames: 'row'.w(),
+    classNameBindings: 'isVisible'.w(),
+    hideNotifications: function() {
+      this.$().fadeOut();
+    },
     isVisible: function() {
       var arr = Radium.announcementsController.get('length');
       return (arr > 0) ? true : false;
