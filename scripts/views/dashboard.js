@@ -17,6 +17,7 @@ define('views/dashboard', function(require) {
     template: Ember.Handlebars.compile(template),
     profileView: Radium.ProfileView,
     searchView: Radium.GlobalSearchTextView,
+    formContainerView: null,
     usersList: Ember.CollectionView.extend({
       tagName: 'ul',
       classNames: 'nav nav-tabs nav-stacked filters people'.w(),

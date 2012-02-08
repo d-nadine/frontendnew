@@ -10,6 +10,7 @@ define(function(require) {
   state = Ember.ViewState.extend({
     initialState: 'load',
     view: Radium.DashboardView.create(),
+    isFormAddView: false,
     load: Ember.State.create({
       enter: function() {
         var activities = Radium.store.findAll(Radium.Activity);
@@ -18,7 +19,26 @@ define(function(require) {
         var announcements = Radium.store.findAll(Radium.Announcement);
         Radium.announcementsController.set('content', announcements);
       }
-    })
+    }),
+    form: Ember.State.create({
+      form: null,
+      enter: function() {
+        var form = this.get('form') || Radium.TodoFormView.create();
+        form.appendTo('#form-container');
+        this.set('form', form);
+        this.setPath('parentState.isFormAddView', true);
+      },
+      exit: function() {
+        this.get('form').destroy();
+        this.set('form', null);
+        this.setPath('parentState.isFormAddView', false);
+      }
+    }),
+
+    //Actions
+    loadForm: function(manager) {
+      manager.goToState('form');
+    }
   });
   
   return state;

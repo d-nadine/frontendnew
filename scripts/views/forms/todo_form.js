@@ -28,7 +28,6 @@ define('views/forms/todo_form', function(require) {
       var vals = this.$('form').serializeArray();
       var createObject = {};
       vals.forEach(function(item) {
-        console.log('item', item.name, item.value);
         createObject[item.name] = item.value;
       });
 
@@ -49,13 +48,7 @@ define('views/forms/todo_form', function(require) {
       //   contacts: [],
       //   user: []
       // });
-      this.hideForm();
-    },
-    hideForm: function() {
-      var self = this;
-      this.$().slideUp('fast', function() {
-        self.destroy();
-      });
+      Radium.App.goToState('load');
     }
   });
 

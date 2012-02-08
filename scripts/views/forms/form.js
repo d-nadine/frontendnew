@@ -7,8 +7,9 @@ define('/views/forms/form', function(require) {
       action: 'submitForm'
     }),
     cancelFormButton: Ember.Button.extend({
-      target: 'parentView',
-      action: 'hideForm'
+      click: function() {
+        Radium.App.goToState('load');
+      }
     })
   });
 
