@@ -10,5 +10,11 @@ define(function(require) {
     defaultTemplate: Ember.Handlebars.compile('<input type="checkbox" {{bindAttr checked="value" disabled="disabled"}}>')
   });
 
+  Radium.FormCheckbox = Ember.Checkbox.extend({
+    tagName: 'label',
+    classNames: 'checkbox'.w(),
+    defaultTemplate: Ember.Handlebars.compile('<input type="checkbox"> {{title}}')
+  });
+
   return Radium;
 });

@@ -21,7 +21,7 @@ define('views/topbar', function(require) {
       var section = this.get('currentSection') || 'dashboard';
       if (section) $('li#btn-'+section).addClass('active');
     },
-    
+    // Main action button in the topbar, changes depending on section
     mainActionButton: Ember.Button.extend({
       classNames: "btn primary pull-right".w(),
       isVisible: function() {

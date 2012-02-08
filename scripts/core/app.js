@@ -53,8 +53,11 @@ define(function(require) {
   
   require('order!fixtures/main');
   
+  require('order!views/forms/form');
   require('order!views/checkbox');
-  require('order!views/topbar');
+  require('order!views/forms/datepicker');
+  require('order!views/forms/autocomplete');
+  require('order!views/topbar');2
   require('order!views/forms/todo_form');
   require('order!views/dashboard');
   require('order!views/filter_list');

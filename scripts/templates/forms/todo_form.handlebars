@@ -2,7 +2,7 @@
   <label for="task">Task</label>
   {{view Ember.TextArea id="task" class="span8"}}
   <label for="date">Date:</label>
-  {{view Ember.TextField id="date" class="input-small"}}
+  {{view Radium.DatePickerField id="date" class="input-small"}}
   <label for="time">Time:</label>
   {{view Ember.TextField id="time" class="input-small"}}
   <label for="assigned-to">Assigned To</label>
@@ -13,12 +13,35 @@
       optionValuePath="content.id"
   }}
   <label for="customer">Customer</label>
-  {{view Ember.TextField id="customer" class="input-small"}}
+  {{view Radium.AutocompleteTextField 
+    id="customer" class="input-xlarge"
+    sourceBinding="Radium.contactsController.contactNames"
+  }}
 
-  {{view Ember.Checkbox title="Add Reminder" class="checkbox controls"}}
+  {{view Radium.FormCheckbox 
+      title="Add Reminder" 
+      valueBinding="wantsReminder"
+  }}
+
+  {{#view addReminder}}
+    <label for="todo-reminder">When</label>
+    <select id="todo-reminder" name="todo-reminder">
+      <option value="300">Right before!</option>
+      <option value="1800">Half hour</option>
+      <option value="3600">An hour</option>
+      <option value="10800">3 hours</option>
+      <option value="86400">A day</option>
+      <option value="259200">3 Days</option>
+    </select>
+    <label for="by">By</label>
+    <select id="by" name="by">
+      <option value="sms">SMS</option>
+      <option value="email">Email</option>
+    </select>
+  {{/view}}
 
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Add Todo</button>
-    <button type="reset" class="btn">Cancel</button>
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
   </div>
 </form>

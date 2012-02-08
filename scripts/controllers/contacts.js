@@ -8,6 +8,9 @@ define('controllers/contacts', function(require) {
   
   Radium.contactsController = Ember.ArrayProxy.create({
     content: [],
+    contactNames: function() {
+      return this.getEach('name');
+    }.property('@each.name').cacheable(),
     fetchContacts: function() {
       Radium.store.loadMany(Radium.Contact, Radium.Contact.FIXTURES);
       var self = this,
