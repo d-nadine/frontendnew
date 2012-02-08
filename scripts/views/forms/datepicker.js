@@ -2,7 +2,7 @@ define('views/forms/datepicker', function(require) {
   
   var Radium = require('radium');
 
-  Radium.DatePickerField = Ember.TextField.extend({
+  Radium.DatePickerField = Radium.TextField.extend({
     placeholder: "",
     didInsertElement: function() {
       this.$().datepicker();

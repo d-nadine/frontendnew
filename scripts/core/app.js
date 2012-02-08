@@ -54,6 +54,7 @@ define(function(require) {
   require('order!fixtures/main');
   
   require('order!views/forms/form');
+  require('order!views/forms/textfield');
   require('order!views/checkbox');
   require('order!views/forms/datepicker');
   require('order!views/forms/autocomplete');

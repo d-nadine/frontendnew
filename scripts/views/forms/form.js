@@ -8,7 +8,7 @@ define('/views/forms/form', function(require) {
     }),
     cancelFormButton: Ember.Button.extend({
       target: 'parentView',
-      action: 'cancelForm'
+      action: 'hideForm'
     })
   });
 

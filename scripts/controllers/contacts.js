@@ -8,8 +8,15 @@ define('controllers/contacts', function(require) {
   
   Radium.contactsController = Ember.ArrayProxy.create({
     content: [],
+    /**
+      An array of objects for autocomplete in forms.
+      eg [{label: "Avon Barksdale", value: {userid}}]
+      @return {Array} 
+    */
     contactNames: function() {
-      return this.getEach('name');
+      return this.map(function(item) {
+        return {label: item.get('name'), value: item.get('id')};
+      });
     }.property('@each.name').cacheable(),
     fetchContacts: function() {
       Radium.store.loadMany(Radium.Contact, Radium.Contact.FIXTURES);

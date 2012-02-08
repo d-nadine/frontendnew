@@ -50,7 +50,8 @@ define(function(require) {
             this.removeObserver(prop, observers[prop]);
           }
         }
-        ui._destroy();
+        // ui._destroy(); Might have to revert back to this...
+        ui.destroy();
       }
     },
 

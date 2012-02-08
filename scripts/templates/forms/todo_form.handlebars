@@ -1,44 +1,29 @@
 <form class="well">
-  <label for="task">Task</label>
-  {{view Ember.TextArea id="task" class="span8"}}
+  <label for="description">Task</label>
+  <textarea name="description" id="description" class="span8"></textarea>
   <label for="date">Date:</label>
-  {{view Radium.DatePickerField id="date" class="input-small"}}
+  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}
   <label for="time">Time:</label>
-  {{view Ember.TextField id="time" class="input-small"}}
+  <input type="text" id="time" name="time" class="input-small" placeholder="eg 1:00">
   <label for="assigned-to">Assigned To</label>
-  {{view Ember.Select 
-      id="assigned-to"
-      contentBinding="Radium.usersController"
-      optionLabelPath="content.abbrName"
-      optionValuePath="content.id"
-  }}
+  <select id="assigned-to" name="assigned-to">
+    {{#each Radium.usersController}}
+    <option {{bindAttr value="id"}}>{{abbrName}}</option>
+    {{/each}}
+  </select>
   <label for="customer">Customer</label>
   {{view Radium.AutocompleteTextField 
     id="customer" class="input-xlarge"
     sourceBinding="Radium.contactsController.contactNames"
   }}
+  <input type="hidden" id="todo-contact" name="contact" value="">
 
   {{view Radium.FormCheckbox 
       title="Add Reminder" 
       valueBinding="wantsReminder"
   }}
 
-  {{#view addReminder}}
-    <label for="todo-reminder">When</label>
-    <select id="todo-reminder" name="todo-reminder">
-      <option value="300">Right before!</option>
-      <option value="1800">Half hour</option>
-      <option value="3600">An hour</option>
-      <option value="10800">3 hours</option>
-      <option value="86400">A day</option>
-      <option value="259200">3 Days</option>
-    </select>
-    <label for="by">By</label>
-    <select id="by" name="by">
-      <option value="sms">SMS</option>
-      <option value="email">Email</option>
-    </select>
-  {{/view}}
+  <div id="reminder-holder"></div>
 
   <div class="form-actions">
     {{#view submitButton class="btn btn-primary"}}Save{{/view}}
