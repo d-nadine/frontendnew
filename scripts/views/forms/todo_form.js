@@ -5,7 +5,6 @@ define('views/forms/todo_form', function(require) {
       reminderForm = require('text!templates/forms/reminder.handlebars');
 
   Radium.TodoFormView = Radium.FormView.extend({
-    template: Ember.Handlebars.compile(template),
     wantsReminder: false,
     reminderForm: Ember.View.extend({
       id: 'add-reminder',
@@ -49,7 +48,8 @@ define('views/forms/todo_form', function(require) {
       //   user: []
       // });
       Radium.App.goToState('load');
-    }
+    },
+    template: Ember.Handlebars.compile(template)
   });
 
   return Radium;

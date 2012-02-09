@@ -22,8 +22,11 @@ define(function(require) {
     }),
     form: Ember.State.create({
       form: null,
+      formType: 'Todo',
       enter: function() {
-        var form = this.get('form') || Radium.TodoFormView.create();
+        var type = this.get('formType');
+        console.log('manager', type);
+        var form = this.get('form') || Radium[type+'FormView'].create();
         form.appendTo('#form-container');
         this.set('form', form);
         this.setPath('parentState.isFormAddView', true);
@@ -36,7 +39,8 @@ define(function(require) {
     }),
 
     //Actions
-    loadForm: function(manager) {
+    loadForm: function(manager, context) {
+      Radium.App.setPath('loggedIn.dashboard.form.formType', context);
       manager.goToState('form');
     }
   });

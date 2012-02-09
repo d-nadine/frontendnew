@@ -35,7 +35,7 @@ define('views/topbar', function(require) {
       }.property('parentView.currentSection'),
       hasAddedForm: false,
       click: function() {
-        Radium.App.send('loadForm');
+        Radium.App.send('loadForm', 'Todo');
       },
       disabled: function() {
         var formState = Radium.App.getPath('loggedIn.dashboard.isFormAddView');

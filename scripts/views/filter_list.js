@@ -22,7 +22,24 @@ define('views/filter_list', function(require) {
         var type = this.getPath('content.shortname');
         Radium.feedController.set('categoryFilter', type);
         return false;
-      }
+      },
+
+      // The little + buttons
+      addFormInlineView: Ember.View.extend({
+        classNames: 'icon-plus',
+        tagName: 'i',
+        attributeBindings: ['title'],
+        title: function() {
+          var type = this.getPath('parentView.content.title');
+          return "Add a new " + type.substr(0, type.length-1);
+        }.property(),
+        click: function(event) {
+          var formType = this.getPath('parentView.content.formViewClass');
+          Radium.App.send('loadForm', formType);
+          event.stopPropagation();
+          return false;
+        }
+      })
     })
   });
   

@@ -60,6 +60,10 @@ define(function(require) {
   require('order!views/forms/autocomplete');
   require('order!views/topbar');2
   require('order!views/forms/todo_form');
+  require('order!views/forms/call_list_form');
+  require('order!views/forms/meeting_form');
+  require('order!views/forms/deal_form');
+  require('order!views/forms/todo_form');
   require('order!views/dashboard');
   require('order!views/filter_list');
   require('order!views/globalsearch');

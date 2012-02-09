@@ -1,0 +1,35 @@
+<form class="well">
+  <label for="description">Call by</label>
+  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}  
+  <label for="time">Time:</label>
+  <input type="text" id="time" name="time" class="input-small" placeholder="eg 1:00">
+  <label for="assigned-to">Assigned To</label>
+  <select id="assigned-to" name="assigned-to">
+    {{#each Radium.usersController}}
+    <option {{bindAttr value="id"}}>{{abbrName}}</option>
+    {{/each}}
+  </select>
+  <label for="customer">Call List</label>
+  <select class="call-list-name" id="todo_description" name="todo">
+    <option value=""></option>
+    <option value="Follow Ups">Follow Ups</option>
+    <option value="From Website">From Website</option>
+    <option value="Macs">Macs</option>
+    <option value="Repairs">Repairs</option>
+    <option value="Winter Promos">Winter Promos</option>
+    <option value="">-----------</option>
+    <option value="custom">Make a New One</option>
+  </select>
+
+  {{view Radium.FormCheckbox 
+      title="Add Reminder" 
+      valueBinding="wantsReminder"
+  }}
+
+  <div id="reminder-holder"></div>
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

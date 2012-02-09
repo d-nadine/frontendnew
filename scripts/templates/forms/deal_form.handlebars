@@ -1,0 +1,26 @@
+<form class="well">
+  <label for="description">Description</label>
+  <textarea name="description" id="description" class="span8"></textarea>
+  <label for="customer">Customer</label>
+  {{view Radium.AutocompleteTextField 
+    id="customer" class="input-xlarge"
+    sourceBinding="Radium.contactsController.contactNames"
+  }}
+  <input type="hidden" id="todo-contact" name="contact" value="">
+  <label for="amount">Amount</label>
+  <input type="text" name="amount" id="amount" value="">
+  <label for="date">Close Date</label>
+  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}
+  <label for="status">Status:</label>
+  <select id="status" name="status">
+    <option value="rejected">Rejected</option>
+    <option value="pending" selected="selected">Pending</option>
+    <option value="paid">Paid</option>
+    <option value="closed">Closed</option>
+  </select>
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

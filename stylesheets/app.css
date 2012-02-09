@@ -8,6 +8,15 @@ body {
   margin-bottom: 0
 }
 
+[class^="ember-view icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: text-top;
+  background-image: url(../images/icons/glyphicons-halflings.png);
+  background-repeat: no-repeat;
+}
+
 #feed .page-header h2 small {
   float: right;
   font-weight: bold;
