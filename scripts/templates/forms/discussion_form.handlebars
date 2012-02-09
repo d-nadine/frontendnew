@@ -1,0 +1,14 @@
+<form class="well">
+  <legend>Start a new Discussion</legend>
+
+  <label for="topic">Topic</label>
+  <input name="topic" id="topic" class="span8">
+  
+  <label for="message">Message</label>
+  <textarea name="message" id="message" class="span8"></textarea>
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Send{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

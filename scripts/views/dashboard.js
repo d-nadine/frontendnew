@@ -17,7 +17,6 @@ define('views/dashboard', function(require) {
     template: Ember.Handlebars.compile(template),
     profileView: Radium.ProfileView,
     searchView: Radium.GlobalSearchTextView,
-    formContainerView: null,
     usersList: Ember.CollectionView.extend({
       tagName: 'ul',
       classNames: 'nav nav-tabs nav-stacked filters people'.w(),
@@ -29,7 +28,57 @@ define('views/dashboard', function(require) {
         template: Ember.Handlebars.compile(userListTemplate)
       })
       
-    })
+    }),
+
+    didInsertElement: function() {
+      // Charts
+      var chart;
+      chart = new Highcharts.Chart({
+        chart: {
+          renderTo: 'feed-chart',
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false
+        },
+        title: {
+          text: 'Campaign Progress'
+        },
+        tooltip: {
+          formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+          }
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+              }
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          name: 'Browser share',
+          data: [
+            ['MacPro',   45.0],
+            ['iPhone',       26.8],
+              {
+                name: 'iMacs',
+                y: 12.8,
+                sliced: true,
+                selected: true
+              },
+            ['Macbook Airs',    8.5],
+            ['Monitor',     6.2],
+            ['iPod',   0.7]
+          ]
+        }]
+      });
+    }
   });
   
   return Radium;

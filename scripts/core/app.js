@@ -5,6 +5,7 @@ define(function(require) {
   require('order!datetime');
   require('order!data');
   require('order!router');
+  require('order!highcharts');
   
   var Radium = require('order!radium');
   
@@ -17,6 +18,7 @@ define(function(require) {
   require('order!controllers/app');
   require('order!controllers/users');
   require('order!controllers/contacts');
+  require('order!controllers/everyone');
   require('order!controllers/resources');
   require('order!controllers/activity_date_groups');
   require('order!controllers/feed');
@@ -60,6 +62,8 @@ define(function(require) {
   require('order!views/forms/autocomplete');
   require('order!views/topbar');2
   require('order!views/forms/todo_form');
+  require('order!views/forms/message_form');
+  require('order!views/forms/discussion_form');
   require('order!views/forms/call_list_form');
   require('order!views/forms/meeting_form');
   require('order!views/forms/deal_form');
