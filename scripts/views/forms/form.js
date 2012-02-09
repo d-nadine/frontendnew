@@ -22,9 +22,7 @@ define('/views/forms/form', function(require) {
     }),
     cancelFormButton: Ember.Button.extend({
       click: function() {
-        this.$().slideUp('fast', function() {
-          Radium.App.goToState('load');
-        });
+        Radium.App.goToState('load');
       }
     })
   });

@@ -2,7 +2,7 @@ require.config({
   baseUrl: 'scripts/',
   paths: {
     jquery: 'libs/jquery/jquery',
-    jqueryUI: 'libs/jquery/jquery-ui.min',
+    jqueryUI: 'libs/jquery/jquery-ui',
     ember: 'libs/ember/ember',
     datetime: 'libs/ember/ember-datetime',
     router: 'libs/davis',
@@ -34,4 +34,9 @@ require(['core/app'], function(Radium) {
   
   window.Radium = Radium;
   Radium.Routes.start();
+
+  // FIXME: Temp fix until the datepicker registering clicks can be solved.
+  $('body').on('click', 'table.ui-datepicker-calendar', function(event) {
+    return false;
+  });
 });

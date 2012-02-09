@@ -28,7 +28,15 @@ define('views/date_filter', function(require) {
           return false;
         },
         template: Ember.Handlebars.compile('<a href="#" {{action "changeFilter"}}>{{content.label}}</a>')
-      }),
+      })
+    }),
+
+    // DatePicker
+    datePicker: Ember.TextField.extend({
+      classNames: ["span2"],
+      didInsertElement: function() {
+        this.$().datepicker();
+      }
     })
   });
 
