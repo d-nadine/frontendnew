@@ -13,6 +13,7 @@ define(function(require) {
   require('order!helpers/time_helper');
 
   require('order!mixins/jqueryui');
+
   
   require('order!controllers/announcements');
   require('order!controllers/app');
@@ -55,6 +56,7 @@ define(function(require) {
   
   require('order!fixtures/main');
   
+  require('order!views/highchart');
   require('order!views/forms/form');
   require('order!views/forms/textfield');
   require('order!views/checkbox');
