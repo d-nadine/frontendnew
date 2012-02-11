@@ -4,6 +4,9 @@ define('views/highchart', function(require) {
 
   Radium.PieChart = Ember.View.extend({
     defaults: {
+      credits: {
+        enabled: false
+      },
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,

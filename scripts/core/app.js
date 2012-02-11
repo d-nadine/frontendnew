@@ -1,5 +1,4 @@
 define(function(require) {  
-  require('order!jquery');
   require('order!jqueryUI');
   require('order!ember');
   require('order!datetime');
@@ -71,6 +70,7 @@ define(function(require) {
   require('order!views/forms/deal_form');
   require('order!views/forms/todo_form');
   require('order!views/dashboard');
+  require('order!views/deals/deals');
   require('order!views/filter_list');
   require('order!views/globalsearch');
   require('order!views/loginpane');

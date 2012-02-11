@@ -1,13 +1,8 @@
 define(function(require) {
-  
-  require('ember');
-  require('data');
-  var Radium = require('radium');
-  require('views/dashboard');
 
-  var state;
+  var Radium = require('radium');
   
-  state = Ember.ViewState.extend({
+  Radium.DashboardState = Ember.ViewState.extend({
     initialState: 'load',
     view: Radium.DashboardView.create(),
     isFormAddView: false,
@@ -45,5 +40,5 @@ define(function(require) {
     }
   });
   
-  return state;
+  return Radium;
 });

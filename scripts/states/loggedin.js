@@ -3,10 +3,10 @@ define(function(require) {
   require('ember');
   require('data');
   var Radium = require('radium');
+  var topBarView = Radium.TopbarView.create();
   require('views/topbar');
-    
-  var topBarView = Radium.TopbarView.create(),
-      dashboardState = require('states/dashboard');
+  require('states/dashboard');
+  require('states/deals');
   
   return Ember.State.create({
     enter: function() {
@@ -18,9 +18,9 @@ define(function(require) {
     exit: function() {
       topBarView.remove();
     },
-    dashboard: dashboardState.create(),
+    dashboard: Radium.DashboardState.create(),
     contacts: Ember.State.create({}),
-    deals: Ember.State.create({}),
+    deals: Radium.DealsState.create(),
     pipeline: Ember.State.create({}),
     campaigns: Ember.State.create({}),
     calendar: Ember.State.create({}),

@@ -32,11 +32,8 @@ define('views/date_filter', function(require) {
     }),
 
     // DatePicker
-    datePicker: Ember.TextField.extend({
-      classNames: ["span2"],
-      didInsertElement: function() {
-        this.$().datepicker();
-      }
+    datePicker: Radium.DatePickerField.extend({
+      classNames: ["span2"]
     })
   });
 
