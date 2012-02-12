@@ -1,0 +1,23 @@
+require "rake-pipeline-web-filters"
+require "json"
+
+input "app"
+output "public"
+
+match "**/*.handlebars" do
+  handlebars
+end
+
+match "lib/**/*.js" do
+  minispade :module_id_generator => proc { |input|
+    input.path.sub(/lib\//, 'radium/').sub(/\.js$/, '')
+  }
+
+  concat "scripts/application.js"
+end
+
+match "static/**/*" do
+  concat do |input|
+    input.sub(/static\//, '')
+  end
+end
