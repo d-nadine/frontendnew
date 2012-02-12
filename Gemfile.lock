@@ -16,10 +16,17 @@ GIT
 
 GEM
   remote: http://rubygems.org/
+  remote: http://rubygems.org/
+  remote: http://rubygems.org/
+  remote: http://gemcutter.org/
   specs:
     json (1.6.5)
     rack (1.4.1)
+    rack-streaming-proxy (1.0.3)
+      rack (>= 1.0)
+      servolux (~> 0.8.1)
     rake (0.9.2.2)
+    servolux (0.8.1)
     thor (0.14.6)
 
 PLATFORMS
@@ -28,5 +35,6 @@ PLATFORMS
 DEPENDENCIES
   json
   rack
+  rack-streaming-proxy
   rake-pipeline!
   rake-pipeline-web-filters!
