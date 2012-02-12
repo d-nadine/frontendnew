@@ -1,0 +1,8 @@
+development:
+  server: "http://localhost:3000"
+  developer_api_key: 26233b7b68290c7c7d4eec03643d0cf3e9b88ba8
+  user_api_key: test
+
+production:
+  server: "http://api.radiumcrm.com"
+  api_key: "<%= ENV['RADIUM_API_KEY'] %>"
