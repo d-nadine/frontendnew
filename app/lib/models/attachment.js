@@ -1,0 +1,1 @@
+Radium.Attachment = Radium.Core.extend();
