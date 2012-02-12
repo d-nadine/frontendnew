@@ -11,7 +11,7 @@ define('views/filter_list', function(require) {
     classNames: 'nav nav-tabs nav-stacked'.w(),
     contentBinding: 'Radium.resourcesController.content',
     itemViewClass: Ember.View.extend({
-      categoryFilterBinding: 'Radium.feedController.categoryFilter',
+      categoryFilterBinding: 'Radium.dashboardController.categoryFilter',
       isEnabled: function() {
         return (this.get('categoryFilter') == this.getPath('content.shortname')) ? true : false;
       }.property('categoryFilter').cacheable(),
@@ -20,7 +20,7 @@ define('views/filter_list', function(require) {
       changeFilter: function(event) {
         event.preventDefault();
         var type = this.getPath('content.shortname');
-        Radium.feedController.set('categoryFilter', type);
+        Radium.dashboardController.set('categoryFilter', type);
         return false;
       },
 

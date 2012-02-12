@@ -63,7 +63,6 @@ define('views/highchart', function(require) {
     updateData: function() {
       var data = this.get('series'),
           chart = this.get('chart');
-      console.log('data', data);
       if (chart) {
         chart.series[0].setData(data);
       }

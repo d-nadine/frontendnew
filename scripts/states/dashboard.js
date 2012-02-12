@@ -9,7 +9,7 @@ define(function(require) {
     load: Ember.State.create({
       enter: function() {
         var activities = Radium.store.findAll(Radium.Activity);
-        Radium.feedController.set('content', activities);
+        Radium.dashboardController.set('content', activities);
 
         var announcements = Radium.store.findAll(Radium.Announcement);
         Radium.announcementsController.set('content', announcements);

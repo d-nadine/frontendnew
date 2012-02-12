@@ -32,8 +32,8 @@ define('views/dashboard', function(require) {
 
     // Chart
     dashboardChart: Radium.PieChart.extend({
-      titleBinding: 'Radium.feedController.statsTitle',
-      seriesBinding: 'Radium.feedController.allStats'
+      titleBinding: 'Radium.dashboardController.statsTitle',
+      seriesBinding: 'Radium.dashboardController.allStats'
     })
 
   });

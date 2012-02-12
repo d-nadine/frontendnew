@@ -3,6 +3,7 @@ define('fixtures/main', function(require) {
   require('./contacts');
   require('./comments');
   require('./activities');
+  require('./deals');
   require('./todos');
   require('./activity_date_groups');
   require('./announcements');

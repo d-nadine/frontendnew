@@ -16,7 +16,10 @@
     {{view dashboardChart}}
     {{view Radium.DateFilterView}}
     <div class="row">
-      {{view Radium.FeedDateGroupView id="feed" class="span9"}}
+      {{view Radium.FeedDateGroupView 
+        id="feed" class="span9"
+        contentBinding="Radium.dashboardController.content"
+      }}
     </div>
   </div>
 </div>

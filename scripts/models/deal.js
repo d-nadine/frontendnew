@@ -7,6 +7,7 @@ define('models/deal', function(require) {
   Radium.Deal = Radium.Core.extend({
     description: DS.attr('string'),
     close_by: DS.attr('date'),
+    // Can be `pending`, `closed`, `paid`, `rejected`
     state: DS.attr('dealState'),
     is_public: DS.attr('boolean'),
     line_items: DS.hasMany('Radium.LineItem', {embedded: true}),

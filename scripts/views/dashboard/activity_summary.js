@@ -10,9 +10,9 @@ define(function(require) {
     isDetailsVisible: false,
     detailsView: Radium.FeedTodosView,
     isVisible: function() {
-      var filter = Radium.feedController.get('categoryFilter');
+      var filter = Radium.dashboardController.get('categoryFilter');
       return (this.get(filter) !== undefined || filter === 'everything') ? true : false;
-    }.property('Radium.feedController.categoryFilter').cacheable(),
+    }.property('Radium.dashboardController.categoryFilter').cacheable(),
     summaryBox: Ember.View.extend({
       classNames: 'span9'.w(),
       actionsVisible: false,

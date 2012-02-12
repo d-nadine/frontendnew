@@ -14,14 +14,16 @@ define(function(require) {
   require('order!mixins/jqueryui');
 
   
+  require('order!controllers/feed');
   require('order!controllers/announcements');
   require('order!controllers/app');
   require('order!controllers/users');
   require('order!controllers/contacts');
   require('order!controllers/everyone');
   require('order!controllers/resources');
+  require('order!controllers/dashboard');
   require('order!controllers/activity_date_groups');
-  require('order!controllers/feed');
+  require('order!controllers/deals');
   
   require('order!models/core');
   require('order!models/comment');

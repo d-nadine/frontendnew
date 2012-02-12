@@ -2,22 +2,7 @@ define('controllers/feedController', function(require) {
   
   var Radium = require('radium');
 
-  Radium.feedController = Ember.ArrayProxy.create({
-    content: [],
-
-    // Filter the feed by type
-    categoryFilter: 'everything',
-    statsTitle: "Statistics",
-    allStats: [
-          ['Leads', 10.0],
-          ['Prospects', 10],
-          ['Meetings', 10],
-          ['Call List', 10],
-          ['Pending Deals', 20],
-          ['Closed Deals', 4],
-          ['Paid Deals', 6],
-          ['Rejected Deals', 1]
-        ],
+  Radium.feedController = Ember.ArrayProxy.extend({
 
     /**
       Override the `arrayDidChange` so only any newly added chunks of 
@@ -52,7 +37,7 @@ define('controllers/feedController', function(require) {
             month = item.get('month'),
             quarter = item.get('quarter'),
             year = item.get('year'),
-            activityType = item.get('activityType') + 's',
+            activityType =  item.get('activityType') + 's',
             // Cache `Radium.activityDateGroupsController`
             cache = Radium.activityDateGroupsController.get('content');
         

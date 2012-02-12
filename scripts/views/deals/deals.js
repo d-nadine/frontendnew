@@ -29,8 +29,8 @@ define('views/deals/deals', function(require) {
     }),
     // Chart
     dealsChart: Radium.PieChart.extend({
-      titleBinding: 'Radium.feedController.statsTitle',
-      seriesBinding: 'Radium.feedController.allStats'
+      titleBinding: 'Radium.dealsController.statsTitle',
+      seriesBinding: 'Radium.dealsController.allStats'
     })
   });
   
