@@ -1,10 +1,8 @@
-minispade.require('templates/dashboard/activity_summary');
-
 Radium.ActivitySummaryView = Ember.View.extend({
   classNames: 'row feed-item'.w(),
-  template: Ember.Handlebars.compile('{{view summaryBox}} {{view detailsView}}'),
   isDetailsVisible: false,
   detailsView: Radium.FeedTodosView,
+  template: Ember.Handlebars.compile('{{view summaryBox}} {{view detailsView}}'),
   isVisible: function() {
     var filter = Radium.dashboardController.get('categoryFilter');
     return (this.get(filter) !== undefined || filter === 'everything') ? true : false;

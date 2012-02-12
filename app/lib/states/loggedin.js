@@ -1,5 +1,5 @@
 var topBarView = Radium.TopbarView.create();
-Radium.App.LoggedIn = Ember.State.create({
+Radium.LoggedIn = Ember.State.create({
   enter: function() {
     $('#main-nav').show();
     Radium.usersController.fetchUsers();
@@ -9,9 +9,9 @@ Radium.App.LoggedIn = Ember.State.create({
   exit: function() {
     topBarView.remove();
   },
-  dashboard: Radium.App.DashboardState.create(),
+  dashboard: Radium.DashboardState.create(),
   contacts: Ember.State.create({}),
-  deals: Radium.App.DealsState.create(),
+  deals: Radium.DealsState.create(),
   pipeline: Ember.State.create({}),
   campaigns: Ember.State.create({}),
   calendar: Ember.State.create({}),

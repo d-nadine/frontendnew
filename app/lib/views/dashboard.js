@@ -1,6 +1,3 @@
-minispade.require('text!templates/dashboard');
-minispade.require('text!templates/users_list');
-    
 Radium.DashboardView = Ember.View.extend({
   templateName: 'dashboard',
   profileView: Radium.ProfileView,

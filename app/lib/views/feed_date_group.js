@@ -1,5 +1,3 @@
-minispade.require('radium/templates/feed_date_group');
-
 Radium.FeedDateGroupView = Ember.View.extend({
   dateFilterBinding: 'Radium.dashboardController.dateFilter',
   categoryFilterBinding: 'Radium.dashboardController.categoryFilter',

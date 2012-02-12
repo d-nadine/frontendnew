@@ -1,5 +1,3 @@
-minispade.require('radium/templates/date_filters');
-
 Radium.DateFilterView = Ember.View.extend({
   templateName: 'date_filters',
   testView: Ember.CollectionView.extend({

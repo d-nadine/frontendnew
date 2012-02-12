@@ -1,5 +1,3 @@
-minispade.require('radium/templates/filter_list');
-
 Radium.ActivityFilterList = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),

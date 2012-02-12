@@ -1,5 +1,3 @@
-minispade.require('radium/templates/topbar');
-
 Radium.TopbarView = Ember.View.extend({
   currentSectionBinding: 'Radium.appController.currentSection',
   section: function() {

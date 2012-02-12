@@ -1,8 +1,8 @@
-minispade.require('users');
-minispade.require('contacts');
-minispade.require('comments');
-minispade.require('activities');
-minispade.require('deals');
-minispade.require('todos');
-minispade.require('activity_date_groups');
-minispade.require('announcements');
+minispade.require('radium/fixtures/users');
+minispade.require('radium/fixtures/contacts');
+minispade.require('radium/fixtures/comments');
+minispade.require('radium/fixtures/activities');
+minispade.require('radium/fixtures/deals');
+minispade.require('radium/fixtures/todos');
+// minispade.require('radium/fixtures/activity_date_groups');
+minispade.require('radium/fixtures/announcements');

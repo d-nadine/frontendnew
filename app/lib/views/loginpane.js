@@ -1,5 +1,3 @@
-minispade.require('radium/templates/login');
-
 Radium.LoginPane = Ember.View.extend({
   elementId: 'login-pane',
   templateName: 'login',

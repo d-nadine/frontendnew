@@ -1,10 +1,10 @@
-define(function(require) {
-  require('ember');
-  var Radium = require('radium');
-  
-  require('./app');
-  require('./users');
-  require('./contacts');
-  
-  return Radium;
-});
+minispade.require('radium/controllers/feed');
+minispade.require('radium/controllers/announcements');
+minispade.require('radium/controllers/app');
+minispade.require('radium/controllers/users');
+minispade.require('radium/controllers/contacts');
+minispade.require('radium/controllers/everyone');
+minispade.require('radium/controllers/resources');
+minispade.require('radium/controllers/dashboard');
+minispade.require('radium/controllers/activity_date_groups');
+minispade.require('radium/controllers/deals');

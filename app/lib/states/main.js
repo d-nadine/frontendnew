@@ -1,14 +1,14 @@
-minispade.require('dashboard');
-minispade.require('deals');
-minispade.require('loggedOut');
-minispade.require('loggedin');
+minispade.require('radium/states/dashboard');
+minispade.require('radium/states/deals');
+minispade.require('radium/states/loggedout');
+minispade.require('radium/states/loggedin');
 
 
 Radium.App = Ember.StateManager.create({
   rootElement: '#main',
   isLoggedIn: NO,
   
-  loggedOut: Radium.App.LoggedOut,
+  loggedOut: Radium.LoggedOut,
   
   loggingIn: Ember.State.create({
     enter: function(manager, transition) {
@@ -24,7 +24,7 @@ Radium.App = Ember.StateManager.create({
     }
   }),
   
-  loggedIn: Radium.App.LoggedIn,
+  loggedIn: Radium.LoggedIn,
   
   error: Ember.State.create({
     enter: function() {

@@ -1,4 +1,4 @@
-Radium.App.DashboardState = Ember.ViewState.extend({
+Radium.DashboardState = Ember.ViewState.extend({
   initialState: 'load',
   view: Radium.DashboardView.create(),
   isFormAddView: false,

@@ -1,5 +1,5 @@
-Radium.App.LoggedOutState = Ember.ViewState.create({
-  view: loginPane,
+Radium.LoggedOutState = Ember.ViewState.create({
+  view: Radium.LoginPane,
   enter: function(manager) {
     manager.set('isLoggedin', NO);
     this._super(manager);
