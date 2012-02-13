@@ -66,5 +66,5 @@ use Rack::ReverseProxy do
   reverse_proxy /^\/api(\/.*)$/, "#{Application.server}$1"
 end
 
-use Rake::Pipeline::Middleware, 'Assetfile' # This is the path to your Assetfile
+use Rake::Pipeline::Middleware, 'Assetfile' if Application.env == 'development'
 run Rack::Directory.new('public')
