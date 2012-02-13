@@ -32,7 +32,7 @@ module Rack
       }
       headers['HOST'] = uri.host if all_opts[:preserve_host]
 
-      $stdout.puts headers.inspect
+      raise headers.inspect
  
       session = Net::HTTP.new(uri.host, uri.port)
       session.read_timeout=all_opts[:timeout] if all_opts[:timeout]
