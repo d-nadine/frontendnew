@@ -1,7 +1,7 @@
 <div class="row">
   
   <div id="sidebar" class="span3">
-    {{collection Radium.ActivityFilterList contentBinding="Radium.dealsController.filterTypes"}}
+    {{collection Radium.ActivityFilterList contentBinding="Radium.dealsDateGroupsController.filterTypes"}}
     <h4>Team</h4>
     {{collection usersList id="user-list" class="filters people"}}
   </div>
@@ -13,14 +13,27 @@
 
     <div id="form-container"></div>
     {{view dealsChart}}
-
+    {{view Radium.DateFilterView dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"}}
     <div class="row">
-      {{view Radium.FeedDateGroupView 
+      {{#view Radium.FeedDateGroupView 
         id="feed" class="span9"
-        dateFilterBinding="Radium.dealsController.dateFilter"
-        categoryFilterBinding="Radium.dealsController.categoryFilter"
-        contentBinding="Radium.dealsController.content"
+        dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"
+        categoryFilterBinding="Radium.dealsDateGroupsController.categoryFilter"
+        contentBinding="Radium.dealsDateGroupsController.content"
       }}
+        {{#each Radium.dealsDateGroupsController.selectedDateType}}
+          <section>
+            <div class="page-header">
+              <h2>{{formatDate datetime}}</h2>
+            </div>
+            {{#if pending.length}}
+              <div class="alert alert-block">
+                <p><b>{{pending.length}}</b> deals pending.</p>
+              </div>
+            {{/if}}
+          </section>
+        {{/each}}
+      {{/view}}
     </div>
   </div>
 </div>

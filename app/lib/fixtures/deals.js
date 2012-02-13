@@ -1,9 +1,17 @@
 Radium.Deal.FIXTURES = [
   {
-    id: 31,
+    id: 1231,
     state: 'pending',
-    created_at: "2011-12-15T09:37:23Z",
-    updated_at: "2011-12-15T09:37:23Z",
+    created_at: Ember.DateTime.create({
+      day: new Date().getDate(),
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
+    updated_at: Ember.DateTime.create({
+      day: new Date().getDate(),
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
     close_by: "2011-12-22T09:37:23Z",
     line_items: [

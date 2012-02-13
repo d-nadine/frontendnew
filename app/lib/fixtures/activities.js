@@ -7,15 +7,22 @@ for (var i = 0; i < limit; i++) {
   Radium.Activity.FIXTURES.push(
   {
     id: i+1,
-    created_at: "2012-12-28T14:26:27Z",
-    updated_at: "2011-12-28T14:26:27Z",
+    created_at: Ember.DateTime.create({
+      day: new Date().getDate() - i,
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
+    updated_at: Ember.DateTime.create({
+      day: new Date().getDate() - i,
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
     tags: ["tags", "describing", "what", "action", "happened"],
     timestamp: Ember.DateTime.create({
       day: new Date().getDate() - i,
       hour: Math.floor(Math.random() * 12),
       minute: Math.floor(Math.random() * 59)
     }).toISO8601(),
-    tester: true,
     owner: {
       id: Math.floor(Math.random() * 10000),
       user: {

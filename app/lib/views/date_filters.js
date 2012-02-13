@@ -1,5 +1,5 @@
 Radium.DateFilterView = Ember.View.extend({
-  templateName: 'date_filters',
+  templateName: 'date_filters', 
   testView: Ember.CollectionView.extend({
     tagName: 'ul',
     content: [
@@ -10,16 +10,15 @@ Radium.DateFilterView = Ember.View.extend({
       Ember.Object.create({label: "Yearly", type: "year"})
     ],
     itemViewClass: Ember.View.extend({
-      dateFilterBinding: 'Radium.activityDateGroupsController.dateFilter',
       isSelected: function() {
-        return (this.get('dateFilter') === this.getPath('content.type')) ?
+        return (this.getPath('parentView.parentView.dateFilter') === this.getPath('content.type')) ?
                 true : false;
-      }.property('dateFilter').cacheable(),
+      }.property('parentView.parentView.dateFilter').cacheable(),
       classNameBindings: ['isSelected:active'],
       changeFilter: function(event) {
         event.preventDefault();
         var filterType = this.getPath('content.type');
-        Radium.activityDateGroupsController.set('dateFilter', filterType);
+        this.setPath('parentView.parentView.dateFilter', filterType);
         return false;
       },
       template: Ember.Handlebars.compile('<a href="#" {{action "changeFilter"}}>{{content.label}}</a>')
@@ -28,6 +27,10 @@ Radium.DateFilterView = Ember.View.extend({
 
   // DatePicker
   datePicker: Radium.DatePickerField.extend({
-    classNames: ["span2"]
+    classNames: ["span2"],
+    change: function() {
+      var date = this.$().val();
+      this.setPath('parentView.dateFilter', date);
+    }
   })
 });

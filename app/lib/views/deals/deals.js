@@ -18,7 +18,7 @@ Radium.DealPageView = Ember.View.extend({
   }),
   // Chart
   dealsChart: Radium.PieChart.extend({
-    titleBinding: 'Radium.dealsController.statsTitle',
-    seriesBinding: 'Radium.dealsController.allStats'
+    titleBinding: 'Radium.dealsDateGroupsController.statsTitle',
+    seriesBinding: 'Radium.dealsDateGroupsController.allStats'
   })
 });
