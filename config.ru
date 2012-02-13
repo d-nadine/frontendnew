@@ -61,10 +61,9 @@ class UserKeyHeader
   end
 end
 
+puts "Starting Application in #{Application.env}..."
+
 use DeveloperKeyHeader
-use Rack::ReverseProxy do
-  reverse_proxy /^\/api(\/.*)$/, "#{Application.server}$1"
-end
 
 if Application.env == 'development'
   use UserKeyHeader
@@ -74,6 +73,10 @@ elsif Application.env == 'production'
   # use Rack::Rewrite do
   #  rewrite '/', '/index.html'
   # end
+end
+
+use Rack::ReverseProxy do
+  reverse_proxy /^\/api(\/.*)$/, "#{Application.server}$1"
 end
 
 run Rack::Directory.new('public')
