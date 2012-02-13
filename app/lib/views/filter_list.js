@@ -1,7 +1,6 @@
 Radium.ActivityFilterList = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
-  contentBinding: 'Radium.resourcesController.content',
   itemViewClass: Ember.View.extend({
     categoryFilterBinding: 'Radium.dashboardController.categoryFilter',
     isEnabled: function() {

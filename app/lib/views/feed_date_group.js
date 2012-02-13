@@ -1,6 +1,4 @@
 Radium.FeedDateGroupView = Ember.View.extend({
-  dateFilterBinding: 'Radium.dashboardController.dateFilter',
-  categoryFilterBinding: 'Radium.dashboardController.categoryFilter',
   isVisible: function() {
     var $children = this.$().find('.feed-item');
 

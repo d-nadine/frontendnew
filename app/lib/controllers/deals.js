@@ -1,8 +1,35 @@
 Radium.dealsController = Radium.feedController.create({
   content: [],
-
+  dateFilter: null,
   // Filter the feed by type
   categoryFilter: 'everything',
+  filterTypes: [
+    Ember.Object.create({
+      title: 'Everything', 
+      shortname: 'everything', 
+      isMain: true
+    }),
+    Ember.Object.create({
+      title: 'Pending', 
+      shortname: 'pending', 
+      isMain: true
+    }),
+    Ember.Object.create({
+      title: 'Closed', 
+      shortname: 'closed', 
+      isMain: true
+    }),
+    Ember.Object.create({
+      title: 'Paid', 
+      shortname: 'paid', 
+      isMain: true
+    }),
+    Ember.Object.create({
+      title: 'Rejected', 
+      shortname: 'rejected', 
+      isMain: true
+    })
+  ],
   statsTitle: "Statistics",
   allStats: [
         ['Apple', 18385],
@@ -12,7 +39,7 @@ Radium.dealsController = Radium.feedController.create({
         ['Yahoo', 6612]
 
       ],
-  arrayDidChange: function(content, idx, removedCnt, addedCnt) {
+  // arrayDidChange: function(content, idx, removedCnt, addedCnt) {
     // var self = this,
     //     // Grab only new array items
     //     newDeals = content.slice(idx);
@@ -87,7 +114,7 @@ Radium.dealsController = Radium.feedController.create({
     // });
 
     // Made our calculations, carry on then.
-    this._super(content, idx, removedCnt, addedCnt);
+  //   this._super(content, idx, removedCnt, addedCnt);
 
-  }
+  // }
 });
