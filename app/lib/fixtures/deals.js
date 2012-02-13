@@ -13,7 +13,11 @@ Radium.Deal.FIXTURES = [
       minute: Math.floor(Math.random() * 59)
     }).toISO8601(),
     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
-    close_by: "2011-12-22T09:37:23Z",
+    close_by: Ember.DateTime.create({
+      day: new Date().getDate() + 10,
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
     line_items: [
       {
         id: 34,
@@ -40,8 +44,8 @@ Radium.Deal.FIXTURES = [
         product: null
       }
     ],
-    contact_id: 151,
-    user_id: 460,
+    contact: 104,
+    user: 2,
     todos: [],
     comments: [],
     products: [],

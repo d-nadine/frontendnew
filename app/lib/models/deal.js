@@ -1,10 +1,17 @@
 Radium.Deal = Radium.Core.extend({
   description: DS.attr('string'),
-  close_by: DS.attr('date'),
+  closeBy: DS.attr('date', {
+    key: 'close_by'
+  }),
   // Can be `pending`, `closed`, `paid`, `rejected`
   state: DS.attr('dealState'),
-  is_public: DS.attr('boolean'),
-  line_items: DS.hasMany('Radium.LineItem', {embedded: true}),
+  isPublic: DS.attr('boolean', {
+    key: 'is_public'
+  }),
+  lineItems: DS.hasMany('Radium.LineItem', {
+    embedded: true,
+    key: 'line_items'
+  }),
   contact: DS.hasOne('Radium.Contact'),
   user: DS.hasOne('Radium.User'),
   todos: DS.hasMany('Radium.Todo'),
@@ -18,9 +25,9 @@ Radium.Deal = Radium.Core.extend({
   */
   isOverdue: function() {
     var d = new Date().getTime(),
-        closeBy = new Date(this.get('close_by')).getTime();
+        closeBy = new Date(this.get('closeBy')).getTime();
     return (closeBy <= d) ? true : false;
-  }.property('close_by').cacheable(),
+  }.property('closeBy').cacheable(),
 
   /**
     Calculate the total price from all the embedded line items
@@ -28,9 +35,9 @@ Radium.Deal = Radium.Core.extend({
   */
   dealTotal: function() {
     var total = 0;
-    this.get('line_items').forEach(function(item) {
+    this.get('lineItems').forEach(function(item) {
       return total += parseInt(item.get('price'));
     });
     return total;
-  }.property('line_items').cacheable()
+  }.property('lineItems').cacheable()
 });
