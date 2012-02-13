@@ -1,6 +1,7 @@
 require 'erb'
 require 'yaml'
 require 'rack/reverse_proxy'
+require 'rack/rewrite'
 require 'rake-pipeline'
 require 'rake-pipeline/middleware'
 
@@ -61,10 +62,18 @@ class UserKeyHeader
 end
 
 use DeveloperKeyHeader
-use UserKeyHeader if Application.env == 'development'
 use Rack::ReverseProxy do
   reverse_proxy /^\/api(\/.*)$/, "#{Application.server}$1"
 end
 
-use Rake::Pipeline::Middleware, 'Assetfile' if Application.env == 'development'
+if Application.env == 'development'
+  use UserKeyHeader
+  use Rake::Pipeline::Middleware, 'Assetfile'
+elsif Application.env == 'production'
+  use Rack::ETag
+  use Rack::Rewrite do
+    rewrite '/', '/index.html'
+  end
+end
+
 run Rack::Directory.new('public')
