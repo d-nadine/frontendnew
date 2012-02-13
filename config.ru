@@ -220,7 +220,6 @@ class DeveloperKeyHeader
 
   def call(env)
     env['HTTP_X_RADIUM_DEVELOPER_API_KEY'] = Application.developer_api_key
-    env['HTTP_TEST_HEADER'] = 'foo'
     @app.call env
   end
 end
