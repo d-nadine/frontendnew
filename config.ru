@@ -69,10 +69,10 @@ if Application.env == 'development'
   use UserKeyHeader
   use Rake::Pipeline::Middleware, 'Assetfile'
 elsif Application.env == 'production'
-  # use Rack::ETag
-  # use Rack::Rewrite do
-  #  rewrite '/', '/index.html'
-  # end
+  use Rack::ETag
+  use Rack::Rewrite do
+   rewrite '/', '/index.html'
+  end
 end
 
 use Rack::ReverseProxy do
