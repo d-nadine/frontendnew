@@ -66,5 +66,5 @@ $ git push heroku master
 
 ## Maintainers
 
-Assets (JS/CSS/HTML): Josh
-All Server Stuff: Adam
+* Assets (JS/CSS/HTML): Josh
+* All Server Stuff: Adam
