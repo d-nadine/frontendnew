@@ -1,0 +1,9 @@
+development:
+  server: "http://api.radiumcrm.com"
+  developer_api_key: test
+  user_api_key: test
+
+production:
+  server: "<%= ENV['RADIUM_SERVER_URL'] %>"
+  developer_api_key: "<%= ENV['RADIUM_API_KEY'] %>"
+  user_api_key: test

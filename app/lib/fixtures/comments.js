@@ -1,0 +1,1 @@
+Radium.Comment.FIXTURES = [];
