@@ -19,6 +19,8 @@ Radium.DateFilterView = Ember.View.extend({
         event.preventDefault();
         var filterType = this.getPath('content.type');
         this.setPath('parentView.parentView.dateFilter', filterType);
+        $('#date-ranges').next()
+          .find('input').val('');
         return false;
       },
       template: Ember.Handlebars.compile('<a href="#" {{action "changeFilter"}}>{{content.label}}</a>')
@@ -28,6 +30,7 @@ Radium.DateFilterView = Ember.View.extend({
   // DatePicker
   datePicker: Radium.DatePickerField.extend({
     classNames: ["span2"],
+    value: null,
     change: function() {
       var date = this.$().val();
       this.setPath('parentView.dateFilter', date);
