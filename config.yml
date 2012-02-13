@@ -5,4 +5,4 @@ development:
 
 production:
   server: "<%= ENV['RADIUM_SERVER_URL'] %>"
-  api_key: "<%= ENV['RADIUM_API_KEY'] %>"
+  developer_api_key: "<%= ENV['RADIUM_API_KEY'] %>"
