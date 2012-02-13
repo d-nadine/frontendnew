@@ -8,6 +8,8 @@ require 'rake-pipeline/middleware'
 require 'net/http'
 require 'net/https'
 
+require 'pp'
+
 module Rack
   class ReverseProxy
     def initialize(app = nil, &b)
@@ -31,6 +33,9 @@ module Rack
         end
       }
       headers['HOST'] = uri.host if all_opts[:preserve_host]
+
+      pp headers
+      $stdout.flush
 
       session = Net::HTTP.new(uri.host, uri.port)
       session.read_timeout=all_opts[:timeout] if all_opts[:timeout]
