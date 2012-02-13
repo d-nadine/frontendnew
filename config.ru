@@ -45,7 +45,7 @@ class DeveloperKeyHeader
   end
 
   def call(env)
-    env['HTTP_X_RADIUM_DEVELOPER_API_KEY'] = Application.developer_api_key
+    env['HTTP_X-RADIUM-DEVELOPER-API-KEY'] = Application.developer_api_key
     @app.call env
   end
 end
@@ -56,7 +56,7 @@ class UserKeyHeader
   end
 
   def call(env)
-    env['HTTP_X_RADIUM_USER_API_KEY'] = Application.user_api_key
+    env['HTTP_X_RADIUM-USER-API-KEY'] = Application.user_api_key
     @app.call env
   end
 end
