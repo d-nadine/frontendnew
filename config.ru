@@ -32,9 +32,6 @@ module Rack
       }
       headers['HOST'] = uri.host if all_opts[:preserve_host]
 
-      puts headers.inspect
-      $stdout.flush
-
       session = Net::HTTP.new(uri.host, uri.port)
       session.read_timeout=all_opts[:timeout] if all_opts[:timeout]
 
@@ -222,7 +219,8 @@ class DeveloperKeyHeader
   end
 
   def call(env)
-    env['HTTP_X_DEVELOPER_API_KEY'] = Application.developer_api_key
+    env['HTTP_X_RADIUM_DEVELOPER_API_KEY'] = Application.developer_api_key
+    env['HTTP_TEST_HEADER'] = 'foo'
     @app.call env
   end
 end
@@ -239,6 +237,7 @@ class UserKeyHeader
 end
 
 puts "Starting Application in #{Application.env}..."
+$stdout.flush
 
 use DeveloperKeyHeader
 
