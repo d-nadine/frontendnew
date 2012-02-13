@@ -1,4 +1,4 @@
-return Handlebars.registerHelper('date', function(date, options) {
+return Handlebars.registerHelper('formatDate', function(date, options) {
   var value = Ember.getPath(this, date);
   var type = Ember.getPath(this, 'type');
   var formats = {

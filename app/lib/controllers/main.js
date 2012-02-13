@@ -5,6 +5,7 @@ minispade.require('radium/controllers/users');
 minispade.require('radium/controllers/contacts');
 minispade.require('radium/controllers/everyone');
 minispade.require('radium/controllers/resources');
+minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/dashboard');
 minispade.require('radium/controllers/activity_date_groups');
-minispade.require('radium/controllers/deals');
+minispade.require('radium/controllers/deals_date_groups');
