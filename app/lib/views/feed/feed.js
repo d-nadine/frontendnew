@@ -1,4 +1,4 @@
-Radium.FeedDateGroupView = Ember.View.extend({
+Radium.FeedView = Ember.View.extend({
   isVisible: function() {
     var $children = this.$().find('.feed-item');
 
@@ -11,6 +11,5 @@ Radium.FeedDateGroupView = Ember.View.extend({
         return false;
       }
     }
-  }.property('categoryFilter').cacheable(),
-  templateName: 'feed_date_group'
+  }.property('categoryFilter').cacheable()
 });

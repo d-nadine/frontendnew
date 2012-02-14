@@ -1,0 +1,34 @@
+<div class="well span8">
+    {{#each parentView.pending}}
+      <div class="page-header">
+        <h5>{{ description }}</h5>
+      </div>
+      <div class="span2">
+        <div class="thumbnail">
+          <img src="http://placehold.it/150x150" {{bindAttr alt="contact.name"}}>
+          <div class="caption">
+            <h5>With: {{ contact.name }}</h5>
+            <p>
+              <a href="#" class="btn primary">Call</a> 
+              <a href="#" class="btn">Email</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="span5">
+        <p>
+          <b>Assigned To</b>: {{ user.name }}<br>
+          <b>Close Date</b>: {{ closeBy }}<br>
+          <b>Amount</b>: ${{ dealTotal }}<br>
+          <b>Status</b>: {{ state }}
+        </p>
+        <hr>
+        <ul>
+        {{#each lineItems}}
+          <li>{{ name }} | {{ quantity }} | ${{ price }}</li>
+        {{/each}}
+        </ul>
+      {{/each}}
+      </div>
+  </div>
+</div>

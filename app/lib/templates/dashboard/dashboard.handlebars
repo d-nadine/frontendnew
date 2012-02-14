@@ -16,29 +16,13 @@
     {{view dashboardChart}}
     {{view Radium.DateFilterView dateFilterBinding="Radium.activityDateGroupsController.dateFilter"}}
     <div class="row">
-      {{#view Radium.FeedDateGroupView 
+      {{view Radium.FeedView 
         id="feed" class="span9"
         dateFilterBinding="Radium.dashboardController.dateFilter"
         categoryFilterBinding="Radium.dashboardController.categoryFilter"
         contentBinding="Radium.dashboardController.content"
+        templateName="activity_feed_group"
       }}
-        {{#each Radium.activityDateGroupsController.selectedDateType}}
-          <section>
-            <div class="page-header">
-              <h2>{{formatDate datetime}}</h2>
-            </div>
-            {{#if todos.length}}
-              {{#view Radium.FeedItemTodosView todosBinding="todos"}}
-                <div class="alert alert-block">
-                  <p>Your company finished <b>{{todos.length}} todos</b>.</p>
-                </div>
-                {{view Radium.FeedItemTodosView}}
-              {{/view}}
-            {{/if}}
-
-          </section>
-        {{/each}}
-      {{/view}}
     </div>
   </div>
 </div>

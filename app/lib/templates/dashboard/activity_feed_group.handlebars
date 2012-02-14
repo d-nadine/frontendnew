@@ -6,13 +6,13 @@
     </div>
     {{#if todos.length}}
       {{#view Radium.FeedItemBlockView todosBinding="todos"}}
-      <!-- Item Headline -->
-      {{#view headlineView}}
-        <div class="alert alert-block">
-          <p>Your company finished <b>{{todos.length}} todos</b>.</p>
-        </div>
-      {{/view}}
-      <!-- Item Content -->
+        <!-- Item Headline -->
+        {{#view headlineView}}
+          <div class="alert alert-block">
+            <p>Your company finished <b>{{todos.length}} todos</b>.</p>
+          </div>
+        {{/view}}
+        <!-- Item Content -->
         {{view Radium.FeedItemTodosView class="span9"}}
       {{/view}}
     {{/if}}

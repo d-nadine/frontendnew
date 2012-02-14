@@ -2,17 +2,20 @@ minispade.require('radium/templates/topbar');
 minispade.require('radium/templates/login');
 
 minispade.require('radium/templates/feed/feed_filter');
-minispade.require('radium/templates/feed/feed_item_block_view');
+minispade.require('radium/templates/feed/feed_item_headline');
 minispade.require('radium/templates/feed/feed_date_filters');
 minispade.require('radium/templates/feed/feed_date_group');
 minispade.require('radium/templates/feed/feed_item_todos');
+minispade.require('radium/templates/feed/feed_item_deals_pending');
 
 
+minispade.require('radium/templates/dashboard/activity_feed_group');
 minispade.require('radium/templates/dashboard/dashboard');
+
+minispade.require('radium/templates/deals/deals_feed_group');
 
 minispade.require('radium/templates/profile');
 minispade.require('radium/templates/users_list');
-
 
 minispade.require('radium/views/highchart');
 
@@ -33,8 +36,10 @@ minispade.require('radium/views/forms/autocomplete');
 minispade.require('radium/views/feed/feed_filter');
 minispade.require('radium/views/feed/feed_date_filters');
 minispade.require('radium/views/feed/feed_item_todos');
+minispade.require('radium/views/feed/feed_item_deals_pending');
+minispade.require('radium/views/feed/feed_item_headline');
 minispade.require('radium/views/feed/feed_item_block');
-minispade.require('radium/views/feed/feed_date_group');
+minispade.require('radium/views/feed/feed');
 
 minispade.require('radium/views/topbar');
 minispade.require('radium/views/profile');

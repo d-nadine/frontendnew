@@ -1,0 +1,20 @@
+{{#each Radium.dealsDateGroupsController.selectedDateType}}
+  <section>
+    <div class="page-header">
+      <h2>{{formatDate datetime}}</h2>
+    </div>
+    <div class="row feed-item">
+      <div class="span9">
+      {{#if pending.length}}
+        {{#view Radium.FeedItemBlockView pendingBinding="pending"}}
+          {{#view headlineView}}
+            <div class="alert alert-block">
+              <p><b>{{parentView.pending.length}}</b> deals pending: $</p>
+            </div>
+          {{/view}}
+          {{view Radium.FeedItemDealsPendingView class="span9"}}
+        {{/view}}
+    {{/if}}
+    </div>
+  </section>
+{{/each}}
