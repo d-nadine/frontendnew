@@ -1,4 +1,4 @@
-Radium.ActivityFilterList = Ember.CollectionView.extend({
+Radium.FeedFilter = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
   itemViewClass: Ember.View.extend({
@@ -7,7 +7,7 @@ Radium.ActivityFilterList = Ember.CollectionView.extend({
       return (this.get('categoryFilter') == this.getPath('content.shortname')) ? true : false;
     }.property('categoryFilter').cacheable(),
     classNameBindings: ['isEnabled:active'],
-    templateName: 'filter_list',
+    templateName: 'feed_filter',
     changeFilter: function(event) {
       event.preventDefault();
       var type = this.getPath('content.shortname');

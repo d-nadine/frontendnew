@@ -13,6 +13,6 @@ Radium.ActivitySummaryView = Ember.View.extend({
     click: function(evt) {
       this.get('parentView').toggleProperty('isDetailsVisible');
     },
-    templateName: 'activity_summary'
+    templateName: 'feed_item_block_view'
   })
 });

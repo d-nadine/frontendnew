@@ -1,5 +1,5 @@
 Radium.DateFilterView = Ember.View.extend({
-  templateName: 'date_filters', 
+  templateName: 'feed_date_filters', 
   testView: Ember.CollectionView.extend({
     tagName: 'ul',
     content: [

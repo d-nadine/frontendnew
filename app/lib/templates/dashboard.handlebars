@@ -2,7 +2,7 @@
   
   <div id="sidebar" class="span3">
     {{view profileView}}
-    {{collection Radium.ActivityFilterList contentBinding="Radium.dashboardController.filterTypes"}}
+    {{collection Radium.FeedFilter contentBinding="Radium.dashboardController.filterTypes"}}
     <h4>Team</h4>
     {{collection usersList id="user-list" class="filters people"}}
   </div>
