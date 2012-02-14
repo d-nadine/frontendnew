@@ -1,4 +1,4 @@
-Radium.FeedTodosView = Ember.View.extend({
+Radium.FeedItemTodosView = Ember.View.extend({
   isVisible: function() {
     return this.getPath('parentView.isDetailsVisible');
   }.property('parentView.isDetailsVisible'),

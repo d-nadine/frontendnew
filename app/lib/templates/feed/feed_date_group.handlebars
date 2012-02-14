@@ -1,10 +1,17 @@
 {{#each Radium.activityDateGroupsController.selectedDateType}}
   <section>
     <div class="page-header">
-      <h2>{{date datetime}}</h2>
+      <h2>{{formatDate datetime}}</h2>
     </div>
     {{#if todos.length}}
-      {{view Radium.ActivitySummaryView todosBinding="todos"}}
+      {{#view Radium.FeedItemBlockView todosBinding="todos"}}
+        {{#view Radium.FeedItemTodosView}}
+          <div class="alert alert-block">
+            <p>Your company finished <b>{{parentView.todos.length}} todos</b>.</p>
+          </div>
+        {{/view}}
+        {{view summaryBox}}
+      {{/view}}
     {{/if}}
 
   </section>

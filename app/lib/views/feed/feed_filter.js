@@ -1,4 +1,4 @@
-Radium.FeedFilter = Ember.CollectionView.extend({
+Radium.FeedFilterView = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
   itemViewClass: Ember.View.extend({

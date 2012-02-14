@@ -2,7 +2,7 @@
   
   <div id="sidebar" class="span3">
     {{view profileView}}
-    {{collection Radium.FeedFilter contentBinding="Radium.dashboardController.filterTypes"}}
+    {{collection Radium.FeedFilterView contentBinding="Radium.dashboardController.filterTypes"}}
     <h4>Team</h4>
     {{collection usersList id="user-list" class="filters people"}}
   </div>
@@ -28,7 +28,12 @@
               <h2>{{formatDate datetime}}</h2>
             </div>
             {{#if todos.length}}
-              {{view Radium.ActivitySummaryView todosBinding="todos"}}
+              {{#view Radium.FeedItemTodosView todosBinding="todos"}}
+                <div class="alert alert-block">
+                  <p>Your company finished <b>{{todos.length}} todos</b>.</p>
+                </div>
+                {{view Radium.FeedItemTodosView}}
+              {{/view}}
             {{/if}}
 
           </section>
