@@ -6,7 +6,6 @@ Radium.dealsController = Ember.ArrayProxy.create({
         newDeals = content.slice(idx);
 
     var createDateGroup = function(day, type, state, item) {
-      console.log(day);
       var dayGroup = Ember.Object.create({
         date: day,
         datetime: item.get('date'),

@@ -6,15 +6,26 @@
     <div class="row feed-item">
       <div class="span9">
       {{#if pending.length}}
-        {{#view Radium.FeedItemBlockView pendingBinding="pending"}}
-          {{#view headlineView}}
-            <div class="alert alert-block">
-              <p><b>{{parentView.pending.length}}</b> deals pending: $</p>
-            </div>
-          {{/view}}
+        {{#view Radium.FeedItemBlockView dealBinding="pending"}}
+          <div class="span9">
+            {{#view Radium.FeedDealHeadlineView}}
+              <p><b>{{ totalDeals}}</b> pending worth ${{ dealsTotal }}</p>
+            {{/view}}
+          </div>
           {{view Radium.FeedItemDealsPendingView class="span9"}}
         {{/view}}
-    {{/if}}
+      {{/if}}
+
+      {{#if paid.length}}
+        {{#view Radium.FeedItemBlockView dealBinding="paid"}}
+          <div class="span9">
+            {{#view Radium.FeedDealHeadlineView}}
+              <p><b>{{ totalDeals}}</b> pending worth ${{ dealsTotal }}</p>
+            {{/view}}
+          </div>
+          {{view Radium.FeedItemDealsPendingView class="span9"}}
+        {{/view}}
+      {{/if}}
     </div>
   </section>
 {{/each}}

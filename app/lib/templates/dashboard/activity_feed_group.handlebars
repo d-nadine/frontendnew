@@ -7,11 +7,11 @@
     {{#if todos.length}}
       {{#view Radium.FeedItemBlockView todosBinding="todos"}}
         <!-- Item Headline -->
-        {{#view headlineView}}
-          <div class="alert alert-block">
-            <p>Your company finished <b>{{todos.length}} todos</b>.</p>
-          </div>
-        {{/view}}
+        <div class="span9">
+          {{#view Radium.FeedItemHeadlineView}}
+            <p>Your company finished <b>{{parentView.todos.length}} todos</b>.</p>
+          {{/view}}
+        </div>
         <!-- Item Content -->
         {{view Radium.FeedItemTodosView class="span9"}}
       {{/view}}
