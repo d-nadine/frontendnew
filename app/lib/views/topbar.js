@@ -17,6 +17,25 @@ Radium.TopbarView = Ember.View.extend({
   // Main action button in the topbar, changes depending on section
   mainActionButton: Ember.Button.extend({
     classNames: "btn pull-right".w(),
+    buttonTitle: function() {
+      var section = this.getPath('parentView.currentSection'),
+          sectionText = "";
+      switch (section) {
+        case 'dashboard':
+          sectionText = "Todo";
+          break;
+        case 'deals':
+          sectionText = "Deal";
+          break;
+        case 'campaign':
+          sectionText = "Campaign";
+          break;
+        default:
+          sectionText = "Contact";
+          break;
+      };
+      return sectionText;
+    }.property('parentView.currentSection').cacheable(),
     isVisible: function() {
       var section = this.getPath('parentView.currentSection');
       if (!section || section === 'settings') {
@@ -28,13 +47,29 @@ Radium.TopbarView = Ember.View.extend({
     }.property('parentView.currentSection'),
     hasAddedForm: false,
     click: function() {
-      Radium.App.send('loadForm', 'Todo');
+      var section = this.getPath('parentView.currentSection');
+
+      switch (section) {
+        case 'dashboard':
+          Radium.App.send('loadForm', 'Todo');
+          break;
+        case 'deals':
+          Radium.App.send('loadForm', 'Deal');
+          break;
+        case 'campaign':
+          Radium.App.send('loadForm', 'Campaign');
+          break;
+        default:
+          Radium.App.send('loadForm', 'Contact');
+          break;
+      };
+      
     },
     disabled: function() {
-      var formState = Radium.App.getPath('loggedIn.dashboard.isFormAddView');
-      return (formState) ? true : false;
-    }.property('Radium.App.loggedIn.dashboard.isFormAddView').cacheable(),
-    template: Ember.Handlebars.compile('Add {{ parentView.section }}')
+      var formState = Radium.App.get('currentState').name;
+      return (formState === '.form') ? true : false;
+    }.property('Radium.App.currentState').cacheable(),
+    template: Ember.Handlebars.compile('Add {{ buttonTitle }}')
   }),
   templateName: 'topbar'
 });

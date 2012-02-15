@@ -3,6 +3,7 @@
 */
 
 Radium.Contact = Radium.Person.extend({
+  status: DS.attr('string'),
   addresses: DS.hasMany('Radium.Address', {embedded: true}),
   phoneNumbers: DS.hasMany('Radium.PhoneNumber', {
     embedded: true,

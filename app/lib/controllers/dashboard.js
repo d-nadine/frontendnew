@@ -56,7 +56,23 @@ Radium.dashboardController = Radium.feedController.create({
     })
   ],
   statsTitle: "Statistics",
-  allStats: [
+  // allStats: [
+  //       ['Leads', 10.0],
+  //       ['Prospects', 10],
+  //       ['Meetings', 10],
+  //       ['Call List', 10],
+  //       ['Pending Deals', 20],
+  //       ['Closed Deals', 4],
+  //       ['Paid Deals', 6],
+  //       ['Rejected Deals', 1]
+  //     ],
+  /**
+    collect the stats for the Dashboard chart.
+  */
+  stats: function() {
+    console.log('')
+
+    return [
         ['Leads', 10.0],
         ['Prospects', 10],
         ['Meetings', 10],
@@ -65,7 +81,8 @@ Radium.dashboardController = Radium.feedController.create({
         ['Closed Deals', 4],
         ['Paid Deals', 6],
         ['Rejected Deals', 1]
-      ],
+      ];
+  }.property('Radium.contactsController').cacheable(),
   arrayDidChange: function(content, idx, removedCnt, addedCnt) {
     var self = this,
         // Grab only new array items

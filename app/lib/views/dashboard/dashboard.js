@@ -6,7 +6,7 @@ Radium.DashboardView = Ember.View.extend({
   // Chart
   dashboardChart: Radium.PieChart.extend({
     titleBinding: 'Radium.dashboardController.statsTitle',
-    seriesBinding: 'Radium.dashboardController.allStats'
+    seriesBinding: 'Radium.dashboardController.stats'
   })
 
 });

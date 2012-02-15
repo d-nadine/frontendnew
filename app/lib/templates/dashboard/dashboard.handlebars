@@ -2,6 +2,7 @@
   
   <div id="sidebar" class="span3">
     {{view profileView}}
+
     {{collection Radium.FeedFilterView 
       contentBinding="Radium.dashboardController.filterTypes"
       categoryFilterBinding="Radium.dashboardController.categoryFilter"
@@ -20,8 +21,11 @@
     </div>
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
+
     {{view dashboardChart}}
+    
     {{view Radium.DateFilterView dateFilterBinding="Radium.activityDateGroupsController.dateFilter"}}
+    
     <div class="row">
       {{view Radium.FeedView 
         id="feed" class="span9"
