@@ -43,6 +43,7 @@ minispade.require('radium/views/feed/feed_item_block');
 minispade.require('radium/views/feed/feed');
 
 minispade.require('radium/views/topbar');
+minispade.require('radium/views/users_list');
 minispade.require('radium/views/profile');
 minispade.require('radium/views/dashboard/dashboard');
 minispade.require('radium/views/dashboard/announcements');

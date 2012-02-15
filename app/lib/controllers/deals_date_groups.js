@@ -5,6 +5,7 @@ Radium.dealsDateGroupsController = Ember.ArrayProxy.create({
   dateFilter: 'day',
   // Filter the feed by type
   categoryFilter: 'everything',
+  userFilter: null,
   filterTypes: [
     Ember.Object.create({
       title: 'Everything', 

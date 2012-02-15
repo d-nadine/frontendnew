@@ -1,9 +1,16 @@
 <div class="row">
   
   <div id="sidebar" class="span3">
-    {{collection Radium.FeedFilterView contentBinding="Radium.dealsDateGroupsController.filterTypes"}}
-    <h4>Team</h4>
-    {{collection usersList id="user-list" class="filters people"}}
+    {{collection Radium.FeedFilterView 
+      contentBinding="Radium.dealsDateGroupsController.filterTypes"
+      categoryFilterBinding="Radium.dealsDateGroupsController.categoryFilter"
+    }}
+    
+    {{collection usersList 
+      id="user-list" 
+      class="filters people"
+      selectedUserBinding="Radium.dealsDateGroupsController.userFilter"
+    }}
   </div>
   
   <div class="span9">

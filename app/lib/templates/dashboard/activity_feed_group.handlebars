@@ -5,7 +5,11 @@
       <h2>{{formatDate datetime}}</h2>
     </div>
     {{#if todos.length}}
-      {{#view Radium.FeedItemBlockView todosBinding="todos"}}
+      {{#view Radium.FeedItemBlockView 
+        filter="todos" 
+        todosBinding="todos"
+        categoryBinding="Radium.dashboardController.categoryFilter"
+      }}
         <!-- Item Headline -->
         <div class="span9">
           {{#view Radium.FeedItemHeadlineView}}

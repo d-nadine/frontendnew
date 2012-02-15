@@ -3,7 +3,7 @@ Radium.activityDateGroupsController = Ember.ArrayProxy.create({
   // Set the filter singularly
   // @default 'day'
   dateFilter: 'day',
-
+  userFilter: null,
   days: function() {
     return this.filterProperty('type', 'day');
   }.property('@each.type').cacheable(),

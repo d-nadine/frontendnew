@@ -2,16 +2,15 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
   itemViewClass: Ember.View.extend({
-    categoryFilterBinding: 'Radium.dashboardController.categoryFilter',
     isEnabled: function() {
-      return (this.get('categoryFilter') == this.getPath('content.shortname')) ? true : false;
-    }.property('categoryFilter').cacheable(),
+      return (this.getPath('parentView.categoryFilter') === this.getPath('content.shortname')) ? true : false;
+    }.property('parentView.categoryFilter').cacheable(),
     classNameBindings: ['isEnabled:active'],
     templateName: 'feed_filter',
     changeFilter: function(event) {
       event.preventDefault();
       var type = this.getPath('content.shortname');
-      Radium.dashboardController.set('categoryFilter', type);
+      this.setPath('parentView.categoryFilter', type);
       return false;
     },
 
