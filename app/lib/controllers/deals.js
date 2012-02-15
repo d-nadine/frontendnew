@@ -1,5 +1,54 @@
 Radium.dealsController = Ember.ArrayProxy.create({
   content: [],
+
+  unclosedDeals: function() {
+    return this.filter(function(item) {
+      if (item.get('state') === 'pending' && item.get('isOverdue') === true) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }.property('@each.isOverdue').cacheable(),
+
+  unpaidDeals: function() {
+    return this.filter(function(item) { 
+      if (item.get('state') === 'closed' && item.get('isOverdue') === true) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }.property('@each.isOverdue').cacheable(),
+
+  unclosedCosts: function() {
+    var total = 0,
+        unpaid = this.get('unclosedDeals');
+    
+    unpaid.forEach(function(item) {
+      total += item.get('dealTotal');
+    });
+    return total;
+  }.property('@each.unclosedDeals').cacheable(),
+
+  unpaidCosts: function() {
+    var total = 0,
+        unpaid = this.get('unpaidDeals');
+    
+    unpaid.forEach(function(item) {
+      total += item.get('dealTotal');
+    });
+    return total;
+  }.property('@each.unpaidDeals').cacheable(),
+
+  /**
+    Count the total number of unpaid and unclosed deals
+    @return {Number}
+  */
+  hasOverdueItems: function() {
+    return (this.getPath('unpaidDeals.length') > 0 || this.getPath('unclosedDeals.length') > 0) ? true : false;
+  }.property('unpaidDeals', 'unclosedDeals').cacheable(),
+
   arrayDidChange: function(content, idx, removedCnt, addedCnt) {
     var self = this,
         // Grab only new array items

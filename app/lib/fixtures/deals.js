@@ -45,7 +45,7 @@ Radium.Deal.FIXTURES = [
   },
   {
     id: 131313,
-    state: 'paid',
+    state: 'closed',
     created_at: Ember.DateTime.create({
       day: new Date().getDate(),
       hour: Math.floor(Math.random() * 12),
@@ -58,7 +58,59 @@ Radium.Deal.FIXTURES = [
     }).toISO8601(),
     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
     close_by: Ember.DateTime.create({
-      day: new Date().getDate() + 10,
+      day: new Date().getDate() - 10,
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
+    line_items: [
+      {
+        id: 41414,
+        name: "Radium",
+        quantity: 1,
+        price: "1000.0",
+        currency: "USD",
+        product: null
+      },
+      {
+        id: 2132321,
+        name: "Radium",
+        quantity: 1,
+        price: "1000.50",
+        currency: "USD",
+        product: null
+      },
+      {
+        id: 123134,
+        name: "Radium",
+        quantity: 1,
+        price: "1220.0",
+        currency: "USD",
+        product: null
+      }
+    ],
+    contact: 102,
+    user: 4,
+    todos: [],
+    comments: [],
+    products: [],
+    activities: []
+  },
+  {
+    id: 31444,
+    state: 'pending',
+    created_at: Ember.DateTime.create({
+      day: new Date().getDate(),
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
+    updated_at: Ember.DateTime.create({
+      day: new Date().getDate(),
+      hour: Math.floor(Math.random() * 12),
+      minute: Math.floor(Math.random() * 59)
+    }).toISO8601(),
+    description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
+    close_by: Ember.DateTime.create({
+      day: new Date().getDate() - 10,
       hour: Math.floor(Math.random() * 12),
       minute: Math.floor(Math.random() * 59)
     }).toISO8601(),

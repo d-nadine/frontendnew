@@ -21,7 +21,9 @@
     <div id="form-container"></div>
     {{view dealsChart}}
     {{view Radium.DateFilterView dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"}}
+
     <div class="row">
+      {{view Radium.OverdueItemsView}}
       {{view Radium.FeedView 
         id="feed" class="span9"
         dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"
@@ -30,5 +32,6 @@
         templateName="deals_feed_group"
       }}
     </div>
+
   </div>
 </div>

@@ -1,0 +1,29 @@
+{{#if Radium.dealsController.hasOverdueItems}}
+  <section class="span9">
+    <div class="page-header">
+      <h2>Overdue</h2>
+    </div>
+    {{#if Radium.dealsController.unclosedDeals }}
+    <div class="row feed-item">
+      <div class="span9">
+        <div class="alert alert-error">
+          <b>{{ Radium.dealsController.unclosedDeals.length }} deals</b> worth ${{ Radium.dealsController.unclosedCosts }} have missed their close date.
+
+          {{view followUpButton}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if Radium.dealsController.unpaidDeals }}
+    <div class="row feed-item">
+      <div class="span9">
+        <div class="alert alert-error">
+          <b>{{ Radium.dealsController.unclosedDeals.length }} deals</b> worth ${{ Radium.dealsController.unpaidCosts }} payment overdue.
+          {{view followUpButton}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </section>
+{{/if}}
