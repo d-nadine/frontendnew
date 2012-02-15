@@ -4,7 +4,6 @@ Radium.PageState = Ember.ViewState.extend({
     formType: 'Todo',
     enter: function() {
       var type = this.get('formType');
-      console.log('manager', type);
       var form = this.get('form') || Radium[type+'FormView'].create();
       form.appendTo('#form-container');
       this.set('form', form);
