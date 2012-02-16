@@ -33,15 +33,6 @@ Radium.dealsDateGroupsController = Ember.ArrayProxy.create({
       isMain: true
     })
   ],
-  statsTitle: "Statistics",
-  allStats: [
-        ['Apple', 18385],
-        ['Nokia', 12283],
-        ['Microsoft', 8238],
-        ['Google', 6873],
-        ['Yahoo', 6612]
-      ],
-
   days: function() {
     return this.filterProperty('type', 'day');
   }.property('@each.type').cacheable(),

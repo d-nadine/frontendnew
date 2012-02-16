@@ -7,8 +7,8 @@ Radium.DealPageView = Ember.View.extend({
   usersList: Radium.UsersListView,
   // Chart
   dealsChart: Radium.PieChart.extend({
-    titleBinding: 'Radium.dealsDateGroupsController.statsTitle',
-    seriesBinding: 'Radium.dealsDateGroupsController.allStats'
+    titleBinding: 'Radium.dealsController.statsTitle',
+    seriesBinding: 'Radium.dealsController.dealStatistics'
   }),
   overdueDealsBinding: 'Radium.dealsController.overdueDeals'
 });
