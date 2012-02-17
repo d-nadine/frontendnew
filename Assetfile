@@ -19,9 +19,9 @@ input "app" do
 
   match "specs/**/*.js" do
     minispade :module_id_generator => proc { |input|
-      input.path.sub(/lib\//, 'radium/').sub(/\.js$/, '')
+      input.path.sub(/\.js$/, '')
     }
-    
+
     concat "tests/specs/specs.js"
   end
 

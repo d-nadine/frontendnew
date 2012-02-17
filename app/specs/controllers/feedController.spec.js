@@ -2,7 +2,7 @@ describe("Radium#feedController", function() {
   var adapter, store, server, spy;
 
   beforeEach(function() {
-    adapter = RadiumAdapter.create();
+    adapter = Radium.Adapter.create();
     store = DS.Store.create({adapter: adapter});
     server = sinon.fakeServer.create();
     spy = sinon.spy(jQuery, 'ajax');

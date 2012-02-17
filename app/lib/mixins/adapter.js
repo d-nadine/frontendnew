@@ -1,6 +1,6 @@
 var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
-var RadiumAdapter = DS.Adapter.extend({
+Radium.Adapter = DS.Adapter.extend({
   bulkCommit: false,
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);

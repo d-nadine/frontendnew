@@ -1,1 +1,1 @@
-minispade.require('spec/controllers/feedController.spec');
+minispade.require('specs/controllers/feedController.spec');
