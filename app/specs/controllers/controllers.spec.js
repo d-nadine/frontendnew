@@ -1,0 +1,1 @@
+minispade.require('spec/controllers/feedController.spec');
