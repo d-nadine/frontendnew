@@ -10,7 +10,7 @@ describe("Handlebars helpers", function() {
         myDate: Ember.DateTime.create({
           year: '2012', month: '02', day: '03'
         }),
-        template: Ember.Handlebars.compile('<h1>{{date myDate}}</h1>')
+        template: Ember.Handlebars.compile('<h1>{{formatDate myDate}}</h1>')
       });
     });
 
