@@ -125,12 +125,12 @@ describe("Radium#Activity", function() {
 
     beforeEach(function() {
       store.loadMany(Radium.Activity, [
-        {id: 100, timestamp: "2012-01-12T14:26:27Z"},
-        {id: 101, timestamp: "2012-03-25T14:26:27Z"},
-        {id: 102, timestamp: "2012-05-08T14:26:27Z"},
-        {id: 103, timestamp: "2012-07-30T14:26:27Z"},
-        {id: 104, timestamp: "2012-08-17T14:26:27Z"},
-        {id: 105, timestamp: "2011-12-04T14:26:27Z"}
+        {id: 100, updated_at: "2012-01-12T14:26:27Z"},
+        {id: 101, updated_at: "2012-03-25T14:26:27Z"},
+        {id: 102, updated_at: "2012-05-08T14:26:27Z"},
+        {id: 103, updated_at: "2012-07-30T14:26:27Z"},
+        {id: 104, updated_at: "2012-08-17T14:26:27Z"},
+        {id: 105, updated_at: "2011-12-04T14:26:27Z"}
       ]);
       activities = store.findAll(Radium.Activity);
     });
