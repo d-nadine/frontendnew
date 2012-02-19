@@ -23,6 +23,7 @@ minispade.require('radium/models/group');
 minispade.require('radium/models/lineitem');
 minispade.require('radium/models/phonecall');
 minispade.require('radium/models/phonenumber');
+minispade.require('radium/models/emailaddr');
 minispade.require('radium/models/product');
 minispade.require('radium/models/reminder');
 minispade.require('radium/models/todo');

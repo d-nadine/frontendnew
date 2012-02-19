@@ -60,7 +60,6 @@ DS.attr.transforms.object = {
 
 DS.attr.transforms.date.to = function(date) {
   var type = typeof date;
-  console.log(type);
   if (type === "string") {
     return date;
   } else if (type === "date") {

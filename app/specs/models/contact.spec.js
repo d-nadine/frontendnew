@@ -211,7 +211,7 @@ describe("Radium#Contact", function() {
         .toEqual(282);
     });
 
-    it("loads nested Radium.PhoneNumber", function() {
+    it("loads nested Radium.Email", function() {
       var spy, contact;
       
       spy = sinon.spy(jQuery, 'ajax');
@@ -220,7 +220,7 @@ describe("Radium#Contact", function() {
       server.respond();
       
       expect(spy).toHaveBeenCalled();
-      expect(contact.get('emailAddresses').objectAt(0).get('id'))
+      expect(contact.getPath('emailAddresses.firstObject.id'))
         .toEqual(281);
     });
 
