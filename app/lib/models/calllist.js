@@ -1,4 +1,4 @@
-Radium.Todo = Radium.Core.extend({
+Radium.CallList = Radium.Core.extend({
   description: DS.attr('string'),
   finish_by: DS.attr('date'),
   user: DS.hasOne('Radium.User'),

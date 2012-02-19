@@ -43,18 +43,14 @@ Radium.dashboardController = Radium.feedController.create({
       shortname: 'discussions', 
       formViewClass: 'Discussion',
       isMain: false
-    }), 
-    Ember.Object.create({
-      title: 'Activity', 
-      shortname: 'Activity', 
-      isMain: true
-    }), 
+    }),
     Ember.Object.create({
       title: 'Pipeline', 
       shortname: 'Pipeline', 
       isMain: true
     })
   ],
+
   statsTitle: "Statistics",
   // allStats: [
   //       ['Leads', 10.0],
@@ -67,22 +63,44 @@ Radium.dashboardController = Radium.feedController.create({
   //       ['Rejected Deals', 1]
   //     ],
   /**
-    collect the stats for the Dashboard chart.
+    Collect these stats for the dashboard chart:
+    - Leads {Radium.Contact}
+    - Prospects {Radium.Contact}
+    - Meetings {Radium.Meeting}
+    - Call List {Radium.CallList}
+    - Pending Deals {Radium.Deal}
+    - Closed Deals {Radium.Deal}
+    - Paid Deals {Radium.Deal}
+    - Rejected Deals {Radium.Deal}
+
+    @binding {Radium.contactsController}
+    @binding {Radium.dealsController}
+    @return {Array}
   */
   stats: function() {
-    console.log('')
+    var leads = Radium.contactsController.get('leads'),
+        prospects = Radium.contactsController.get('prospects'),
 
+        pendingDeals = Radium.dealsController.get('content').filterProperty('state', 'pending').get('length'),
+        closedDeals = Radium.dealsController.get('content').filterProperty('state', 'closed').get('length'),
+        paidDeals = Radium.dealsController.get('content').filterProperty('state', 'paid').get('length'),
+        rejectedDeals = Radium.dealsController.get('content').filterProperty('state', 'rejected').get('length'),
+        meetings = Radium.meetingsController.getPath('content.length'),
+        callLists = Radium.callListsController.getPath('content.length');
     return [
-        ['Leads', 10.0],
-        ['Prospects', 10],
-        ['Meetings', 10],
-        ['Call List', 10],
-        ['Pending Deals', 20],
-        ['Closed Deals', 4],
-        ['Paid Deals', 6],
-        ['Rejected Deals', 1]
+        ['Leads', leads.get('length')],
+        ['Prospects', prospects.get('length')],
+        ['Meetings', meetings],
+        ['Call List', callLists],
+        ['Pending Deals', pendingDeals],
+        ['Closed Deals', closedDeals],
+        ['Paid Deals', paidDeals],
+        ['Rejected Deals', rejectedDeals]
       ];
-  }.property('Radium.contactsController').cacheable(),
+  }.property(
+    'Radium.contactsController.content',
+    'Radium.dealsController.content'
+  ).cacheable(),
   arrayDidChange: function(content, idx, removedCnt, addedCnt) {
     var self = this,
         // Grab only new array items

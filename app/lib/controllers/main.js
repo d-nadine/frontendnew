@@ -4,6 +4,8 @@ minispade.require('radium/controllers/app');
 minispade.require('radium/controllers/users');
 minispade.require('radium/controllers/contacts');
 minispade.require('radium/controllers/everyone');
+minispade.require('radium/controllers/call_lists');
+minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/resources');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/dashboard');

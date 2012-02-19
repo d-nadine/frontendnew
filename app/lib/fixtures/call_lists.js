@@ -1,0 +1,2 @@
+Radium.CallList.FIXTURES = [
+];

@@ -1,7 +1,7 @@
 Radium.Deal.FIXTURES = [
   {
     id: 1231,
-    state: 'pending',
+    state: 'rejected',
     created_at: Ember.DateTime.create({
       day: new Date().getDate(),
       hour: Math.floor(Math.random() * 12),

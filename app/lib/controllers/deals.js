@@ -1,5 +1,9 @@
 Radium.dealsController = Ember.ArrayProxy.create({
   content: [],
+  /**
+    @binding {content.state}
+    @return {Number} Total dollar amount of pending deals
+  */
   pendingTotal: function() {
     var pendingTotal = 0,
         totals = this.filterProperty('state', 'pending').getEach('dealTotal');
@@ -8,6 +12,10 @@ Radium.dealsController = Ember.ArrayProxy.create({
     });
     return pendingTotal;
   }.property('@each.state').cacheable(),
+  /**
+    @binding {content.state}
+    @return {Number} Total dollar amount of closed deals
+  */
   closedTotal: function() {
     var closedTotal = 0,
         totals = this.filterProperty('state', 'closed').getEach('dealTotal');
@@ -16,6 +24,10 @@ Radium.dealsController = Ember.ArrayProxy.create({
     });
     return closedTotal;
   }.property('@each.state').cacheable(),
+  /**
+    @binding {content.state}
+    @return {Number} Total dollar amount of paid deals
+  */
   paidTotal: function() {
     var paidTotal = 0,
         totals = this.filterProperty('state', 'paid').getEach('dealTotal');
@@ -24,6 +36,10 @@ Radium.dealsController = Ember.ArrayProxy.create({
     });
     return paidTotal;
   }.property('@each.state').cacheable(),
+  /**
+    @binding {content.state}
+    @return {Number} Total dollar amount of rejected deals
+  */
   rejectedTotal: function() {
     var rejectedTotal = 0,
         totals = this.filterProperty('state', 'rejected').getEach('dealTotal');
