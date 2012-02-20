@@ -4,14 +4,14 @@
     {{view profileView}}
 
     {{collection Radium.FeedFilterView 
-      contentBinding="Radium.dashboardController.filterTypes"
-      categoryFilterBinding="Radium.dashboardController.categoryFilter"
+      contentBinding="Radium.activitiesController.filterTypes"
+      categoryFilterBinding="Radium.activitiesController.categoryFilter"
     }}
     
     {{collection usersList 
       id="user-list" 
       class="filters people"
-      selectedUserBinding="Radium.activityDateGroupsController.userFilter"
+      selectedUserBinding="Radium.dashboardController.selectedUser"
     }}
   </div>
   
@@ -29,9 +29,9 @@
     <div class="row">
       {{view Radium.FeedView 
         id="feed" class="span9"
-        dateFilterBinding="Radium.dashboardController.dateFilter"
-        categoryFilterBinding="Radium.dashboardController.categoryFilter"
-        contentBinding="Radium.dashboardController.content"
+        dateFilterBinding="Radium.activitiesController.dateFilter"
+        categoryFilterBinding="Radium.activitiesController.categoryFilter"
+        contentBinding="Radium.activitiesController.content"
         templateName="activity_feed_group"
       }}
     </div>

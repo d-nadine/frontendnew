@@ -3,5 +3,5 @@ Radium.feedController = Ember.ArrayProxy.extend({
 
   /**
   */
-  
+  selectedUser: null
 });

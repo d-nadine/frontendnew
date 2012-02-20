@@ -8,7 +8,7 @@ Radium.LoggedIn = Ember.State.create({
 
     // Fetch data
     var activities = Radium.store.findAll(Radium.Activity);
-    Radium.dashboardController.set('content', activities);
+    Radium.activitiesController.set('content', activities);
 
     var announcements = Radium.store.findAll(Radium.Announcement);
     Radium.announcementsController.set('content', announcements);

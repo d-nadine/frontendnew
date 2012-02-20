@@ -9,5 +9,6 @@ minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/resources');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/dashboard');
+minispade.require('radium/controllers/activities');
 minispade.require('radium/controllers/activity_date_groups');
 minispade.require('radium/controllers/deals_date_groups');

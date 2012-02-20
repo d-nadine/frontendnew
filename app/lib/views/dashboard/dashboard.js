@@ -3,9 +3,12 @@ Radium.DashboardView = Ember.View.extend({
   profileView: Radium.ProfileView,
   searchView: Radium.GlobalSearchTextView,
   usersList: Radium.UsersListView,
+  selectedUserBinding: 'Radium.dashboardController.selectedUser',
   // Chart
   dashboardChart: Radium.PieChart.extend({
-    titleBinding: 'Radium.dashboardController.statsTitle',
+    title: function() {
+      return (this.getPath('parentView.selectedUser')) ? this.getPath('parentView.selectedUser.firstName') + "'s Statistics" : "Your Company's Statistics"
+    }.property('parentView.selectedUser'),
     seriesBinding: 'Radium.dashboardController.stats'
   })
 

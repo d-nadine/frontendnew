@@ -1,4 +1,7 @@
 <a href="#" {{action "viewUser"}}>
   <img src="/images/headshots/holman_normal.png" class="avatar">
   <span>{{ content.abbrName }}</span>
+  {{#if isSelected}}
+  <i class="icon-ok pull-right"></i>
+  {{/if}}
 </a>

@@ -3,13 +3,18 @@ Radium.UsersListView = Ember.CollectionView.extend({
     classNames: 'nav nav-tabs nav-stacked filters people'.w(),
     contentBinding: 'Radium.usersController',
     itemViewClass: Ember.View.extend({
-      isEnabled: function() {
-        return (this.getPath('parentView.selectedUser') === this.getPath('content.id')) ? true : false;
+      isSelected: function() {
+        var selectedUser = this.getPath('parentView.selectedUser'),
+            user = this.get('content');
+        return (selectedUser === user) ? true : false;
       }.property('parentView.selectedUser').cacheable(),
-      classNameBindings: ['isEnabled:active'],
+      classNameBindings: ['isSelected:active'],
       viewUser: function(event) {
-        var id = this.getPath('content.id');
-        this.setPath('parentView.selectedUser', id);
+        if (this.get('isSelected')) {
+          this.setPath('parentView.selectedUser', null);
+        } else {
+          this.setPath('parentView.selectedUser', this.get('content'));
+        }
         return false;
       },
       templateName: 'users_list'
