@@ -7,10 +7,10 @@ Radium.dashboardController = Ember.Object.create({
         stats = this.get('companyStats');
     if (user) {
       var data = [
-        ['Leads', 50],
+        ['Leads', user.getPath('leads.length')],
         ['Prospects', user.getPath('prospects.length')],
         ['Meetings', user.getPath('meetings.length')],
-        // ['Call List', user.getPath('callList.length')],
+        ['Call List', user.getPath('phoneCalls.length')],
         ['Pending Deals', user.getPath('pendingDeals.length')],
         ['Closed Deals', user.getPath('closedDeals.length')],
         ['Paid Deals', user.getPath('paidDeals.length')],
@@ -64,9 +64,5 @@ Radium.dashboardController = Ember.Object.create({
   }.property(
     'Radium.contactsController.content',
     'Radium.dealsController.content'
-  ).cacheable(),
-
-  test: function() {
-    this.set('stats', this.get('companyStats'));
-  }
+  ).cacheable()
 });

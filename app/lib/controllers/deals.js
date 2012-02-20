@@ -1,4 +1,5 @@
 Radium.dealsController = Ember.ArrayProxy.create({
+  selectedUser: null,
   content: [],
   /**
     @binding {content.state}
@@ -125,7 +126,6 @@ Radium.dealsController = Ember.ArrayProxy.create({
   /**
     @binding {pendingTotal, closedTotal, paidTotal, rejectedTotal}
   */
-  statsTitle: "Your Company's Deals Statistics",
   dealStatistics: function() {
     var totalsObject = {
           pending: this.get('pendingTotal'),

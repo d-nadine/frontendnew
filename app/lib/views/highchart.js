@@ -27,6 +27,7 @@ Radium.PieChart = Ember.View.extend({
     }
   },
   didInsertElement: function() {
+    var self = this;
     this._super();
     var target = this.$()[0];
     var title = this.get('title');
@@ -38,23 +39,29 @@ Radium.PieChart = Ember.View.extend({
       {title: {text: title}},
       {series: [{type: 'pie', data: data}]}
     );
+
+    var updateTitle = function() {
+      var title = this.get('title'),
+        chart = this.get('chart');
+      if (chart) {
+        chart.setTitle({text: title});
+      }
+    };
+
+    this.addObserver('title', updateTitle);
+    this._observers = this._observers || {};
+    this._observers['title'] = updateTitle;
+
     var chart = new Highcharts.Chart(options);
     this.set('chart', chart);
   },
 
   willDestroyElement: function() {
     var chart = this.get('chart');
+    var titleObserver = this._observers['title'];
+    this.removeObserver('title', titleObserver);
     chart.destroy();
   },
-
-  updateTitle: function() {
-    var title = this.get('title'),
-        chart = this.get('chart');
-
-    if (chart) {
-      chart.setTitle({text: title});
-    }
-  }.observes('title'),
 
   updateData: function() {
     var data = this.get('series'),

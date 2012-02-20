@@ -27,7 +27,7 @@ Radium.User.FIXTURES = [
   {
     id: 6,
     name: "Thomas Hauk",
-    contacts: [106]
+    contacts: []
   },
   {
     id: 7,
