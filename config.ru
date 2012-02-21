@@ -69,6 +69,17 @@ use DeveloperKeyHeader
 if Application.env == 'development'
   use UserKeyHeader
   use Rake::Pipeline::Middleware, 'Assetfile'
+  use Rack::Rewrite do
+   rewrite '/', '/index.html'
+   rewrite '/contacts', '/index.html'
+   rewrite '/deals', '/index.html'
+   rewrite '/pipeline', '/index.html'
+   rewrite '/campaings', '/index.html'
+   rewrite '/calendar', '/index.html'
+   rewrite '/messages', '/index.html'
+   rewrite '/settings', '/index.html'
+
+  end
 elsif Application.env == 'production'
   use Rack::Rewrite do
    rewrite '/', '/index.html'

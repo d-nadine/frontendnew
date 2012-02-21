@@ -6,7 +6,7 @@ Radium.Deal = Radium.Core.extend({
   // Can be `pending`, `closed`, `paid`, `rejected`
   state: DS.attr('dealState'),
   isPublic: DS.attr('boolean', {
-    key: 'is_public'
+    key: 'public'
   }),
   lineItems: DS.hasMany('Radium.LineItem', {
     embedded: true,

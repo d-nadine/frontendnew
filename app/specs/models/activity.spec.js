@@ -14,7 +14,7 @@ describe("Radium#Activity", function() {
         name: "Omar Little",
         email: "irobsdrugsdealers@hotmail.com",
         phone: "+1410333-3321",
-        is_public: true,
+        public: true,
         contacts: [33, 44],
         deals: [65, 11],
         campaigns: [],

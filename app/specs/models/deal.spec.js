@@ -142,7 +142,7 @@ describe("Radium#Deal", function() {
     });
 
     // TODO: Once updating nested stores work, implement this test.
-    xit("updates the total price when a LineItem is added", function() {
+    it("updates the total price when a LineItem is added", function() {
       var deal, fixture, lineItemFixture, lineItem;
 
       lineItemFixture = {
@@ -168,13 +168,13 @@ describe("Radium#Deal", function() {
       store.load(Radium.Deal, CREATE_FIXTURE);
       deal = store.find(Radium.Deal, 31);
       lineItem = store.createRecord(Radium.LineItem, lineItemFixture);
-      deal.get('lineItems').pushObject(lineItemFixture);
+      // deal.get('lineItems').pushObject(lineItem);
 
       store.commit();
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(deal.getPath('line_items.length')).toEqual(4);
+      expect(deal.getPath('lineItems.length')).toEqual(4);
       expect(deal.get('dealTotal')).toEqual(4500);
     });
   });
