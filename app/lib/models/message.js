@@ -1,6 +1,8 @@
 Radium.Message = Radium.Core.extend({
   message: DS.attr('string'),
-  sent_at: DS.attr('date'),
+  sentAt: DS.attr('date', {
+    key: 'sent_at'
+  }),
   type: DS.attr('string'),
   users: DS.hasMany('Radium.User'),
   contacts: DS.hasMany('Radium.Contact'),

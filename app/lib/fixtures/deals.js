@@ -116,7 +116,7 @@ Radium.Deal.FIXTURES = [
     }).toISO8601(),
     line_items: [
       {
-        id: 41414,
+        id: 4141412,
         name: "Radium",
         quantity: 1,
         price: "1000.0",
@@ -124,7 +124,7 @@ Radium.Deal.FIXTURES = [
         product: null
       },
       {
-        id: 2132321,
+        id: 213213321,
         name: "Radium",
         quantity: 1,
         price: "1000.50",
@@ -132,7 +132,7 @@ Radium.Deal.FIXTURES = [
         product: null
       },
       {
-        id: 123134,
+        id: 123112313234,
         name: "Radium",
         quantity: 1,
         price: "1220.0",
@@ -148,7 +148,7 @@ Radium.Deal.FIXTURES = [
     activities: []
   },
   {
-    id: 1313122,
+    id: 1313131122,
     state: 'rejected',
     created_at: Ember.DateTime.create({
       day: new Date().getDate(),
@@ -168,7 +168,7 @@ Radium.Deal.FIXTURES = [
     }).toISO8601(),
     line_items: [
       {
-        id: 41414,
+        id: 41412314,
         name: "Radium",
         quantity: 1,
         price: "1000.0",
@@ -176,7 +176,7 @@ Radium.Deal.FIXTURES = [
         product: null
       },
       {
-        id: 2132321,
+        id: 21323231331,
         name: "Radium",
         quantity: 1,
         price: "1000.50",
@@ -184,7 +184,7 @@ Radium.Deal.FIXTURES = [
         product: null
       },
       {
-        id: 123134,
+        id: 123134144,
         name: "Radium",
         quantity: 1,
         price: "1220.0",

@@ -53,10 +53,7 @@ describe("Radium#SMS", function() {
           message: "Lorem ipsum dolo ...... ",
           sent_at: "2011-12-15T10:38:39Z",
           type: "Sms",
-          sender: {
-            id: 462,
-            sender_type: "User"
-          },
+          sender: 462,
           users: [462],
           contacts: [153],
           comments: [],

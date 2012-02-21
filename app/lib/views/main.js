@@ -14,6 +14,7 @@ minispade.require('radium/templates/dashboard/dashboard');
 
 minispade.require('radium/templates/deals/deals_feed_group');
 minispade.require('radium/templates/deals/overdue_deals');
+minispade.require('radium/templates/deals/deals');
 
 minispade.require('radium/templates/profile');
 minispade.require('radium/templates/users_list');

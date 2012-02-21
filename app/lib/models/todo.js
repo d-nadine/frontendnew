@@ -24,7 +24,7 @@ Radium.Todo = Radium.Core.extend({
   isOverdue: function() {
     var d = new Date().getTime(),
         isFinished = this.get('finished'),
-        finishBy = new Date(this.get('finish_by')).getTime();
+        finishBy = new Date(this.get('finishBy')).getTime();
     return (finishBy <= d && !isFinished) ? true : false;
   }.property('finishBy', 'finished').cacheable()
 });

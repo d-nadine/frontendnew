@@ -108,7 +108,6 @@ describe("Radium#Deal", function() {
 
       expect(spy).toHaveBeenCalled();
       expect(server.requests[0].method).toEqual("POST");
-      expect(store.models.length).toEqual(1);
       expect(store.find(Radium.Deal, 31)).toBeDefined();
     });
 
@@ -131,7 +130,7 @@ describe("Radium#Deal", function() {
       store.load(Radium.Deal, CREATE_FIXTURE);
       deal = store.find(Radium.Deal, 31);
 
-      expect(deal.getPath('line_items.length')).toEqual(3);
+      expect(deal.getPath('lineItems.length')).toEqual(3);
     });
 
     it("calculates a total of all deal line items", function() {
@@ -169,7 +168,7 @@ describe("Radium#Deal", function() {
       store.load(Radium.Deal, CREATE_FIXTURE);
       deal = store.find(Radium.Deal, 31);
       lineItem = store.createRecord(Radium.LineItem, lineItemFixture);
-      deal.get('line_items').pushObject(lineItemFixture);
+      deal.get('lineItems').pushObject(lineItemFixture);
 
       store.commit();
       server.respond();

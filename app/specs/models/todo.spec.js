@@ -88,7 +88,7 @@ describe("Radium#Todo", function() {
       todo = store.createRecord(Radium.Todo, {
         kind: "general",
         description: "Finish programming radium",
-        finish_by: "2011-12-22T15:06:27Z"
+        finishBy: "2011-12-22T15:06:27Z"
       });
 
       todoSpy = sinon.spy(todo, 'didCreate');

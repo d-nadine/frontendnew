@@ -5,14 +5,14 @@ describe("Radium#Person", function() {
   });
   
   it("should extract first name", function() {
-    var person = Radium.Person.create({
+    var person = Radium.Person.createRecord({
       name: 'Spiros Vondos Vondopoulos'
     });
     expect(person.get('firstName')).toEqual("Spiros");
   });
 
   it("should extract an intialed last name", function() {
-    var person = Radium.Person.create({
+    var person = Radium.Person.createRecord({
       name: 'Spiros Vondos Vondopoulos'
     });
     
@@ -20,14 +20,14 @@ describe("Radium#Person", function() {
   });
 
   it("should extract a name that contains middle name", function() {
-    var longPersonName = Radium.Person.create({
+    var longPersonName = Radium.Person.createRecord({
       name: 'Joshua Ray Jones-Hoefler'
     });
     expect(longPersonName.get('abbrName')).toEqual("Joshua J.");
   });
 
   it("should skip an abbreviation if the name is only 1 word long", function() {
-    var firstNameOnly = Radium.Person.create({
+    var firstNameOnly = Radium.Person.createRecord({
       name: "Bubbles"
     });
     expect(firstNameOnly.get('firstName')).toEqual("Bubbles");

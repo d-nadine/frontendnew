@@ -17,6 +17,7 @@ Radium.Activity = Radium.Core.extend({
   timestamp: DS.attr('date'),
   owner: DS.hasOne('Radium.Owner', {embedded: true}),
   reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
+  comments: DS.hasMany('Radium.Comment'),
   activityType: function() {
     if (this.getPath('data.reference.todo')) return "todo";
     if (this.getPath('data.reference.deal')) return "deal";
@@ -25,6 +26,6 @@ Radium.Activity = Radium.Core.extend({
     if (this.getPath('data.reference.message')) return "message";
     if (this.getPath('data.reference.call_list')) return "calllist";
     if (this.getPath('data.reference.announcement')) return "announcement";
-  }.property('data').cacheable(),
+  }.property('data').cacheable()
   
 });

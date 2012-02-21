@@ -10,7 +10,7 @@ Radium.Meeting = Radium.Core.extend({
   invitations: DS.hasMany('Radium.Invitation', {
     embedded: true
   }),
-
+  comments: DS.hasMany('Radium.Comment'),
   // Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean'),
 

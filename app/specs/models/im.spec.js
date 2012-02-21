@@ -23,7 +23,7 @@ describe("Radium#IM", function() {
     });
 
     it("sends an IM", function() {
-      var sms;
+      var im;
 
       server.fakeHTTPMethods = true;
       server.respondWith(
@@ -32,26 +32,19 @@ describe("Radium#IM", function() {
         {"Content-Type": "application/json"},
         JSON.stringify({
           id: 19,
+          to: [131],
           created_at: "2011-12-15T10:38:39Z",
           updated_at: "2011-12-15T10:38:39Z",
           message: "How's it going?",
           sent_at: "2011-12-15T10:38:39Z",
-          type: "Sms",
-          sender: {
-            id: 462,
-            sender_type: "User"
-          },
+          type: "Im",
+          sender: 462,
           users: [462],
-          contacts: [131],
           comments: [],
           todos: []
         })
       ]);
 
-      sms = store.createRecord(Radium.Im, {
-              to: [131],
-              message: "How's it going?"
-            });
 
       store.load(Radium.User, {
         id: 462,
@@ -64,16 +57,20 @@ describe("Radium#IM", function() {
       });
 
       sender = store.find(Radium.User, 462);
-      recipients = store.findMany(Radium.Contact, [131]);
+      recipient = store.findMany(Radium.Contact, [131]);
+
+      im = store.createRecord(Radium.Im, {
+              message: "How's it going?"
+            });
+      
+      im.get('to').pushObjects(recipient);
 
       store.commit();
       server.respond();
-
       expect(spy).toHaveBeenCalled();
       expect(spy.getCall(0).args[0].url).toEqual('/ims')
-      expect(sms.get('imSender')).toEqual(sender.get('id'));
-      expect(sms.get('contacts').getEach('id'))
-          .toEqual(recipients.getEach('id'));
+      expect(im.getPath('sender.id')).toEqual(sender.get('id'));
+      expect(im.get('to').getEach('id')).toEqual([131]);
     });
   });
 });

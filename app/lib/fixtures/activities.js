@@ -23,33 +23,33 @@ for (var i = 0; i < limit; i++) {
       hour: Math.floor(Math.random() * 12),
       minute: Math.floor(Math.random() * 59)
     }).toISO8601(),
-    owner: {
-      id: Math.floor(Math.random() * 10000),
-      user: {
-        id: 12312,
-        created_at: "2011-12-28T14:26:27Z",
-        updated_at: "2011-12-28T14:26:27Z",
-        name: "Omar Little",
-        email: "irobsdrugdealers@hotmail.com",
-        phone: "+1410333-3321",
-        is_public: true,
-        contacts: [33, 44],
-        deals: [65, 11],
-        campaigns: [],
-        following: [],
-        followers: [],
-        todos: [],
-        meetings: [],
-        reminders: [],
-        notes: [],
-        phone_calls: [],
-        ims: [],
-        emails: [],
-        sms: [],
-        activities: [],
-        account: 1
-      }
-    },
+    // owner: {
+    //   id: Math.floor(Math.random() * 10000),
+    //   user: {
+    //     id: 12312,
+    //     created_at: "2011-12-28T14:26:27Z",
+    //     updated_at: "2011-12-28T14:26:27Z",
+    //     name: "Omar Little",
+    //     email: "irobsdrugdealers@hotmail.com",
+    //     phone: "+1410333-3321",
+    //     is_public: true,
+    //     contacts: [33, 44],
+    //     deals: [65, 11],
+    //     campaigns: [],
+    //     following: [],
+    //     followers: [],
+    //     todos: [],
+    //     meetings: [],
+    //     reminders: [],
+    //     notes: [],
+    //     phone_calls: [],
+    //     ims: [],
+    //     emails: [],
+    //     sms: [],
+    //     activities: [],
+    //     account: 1
+    //   }
+    // },
     reference: {
       id: Math.floor(Math.random() * 10000),
       todo: {
