@@ -1,8 +1,4 @@
 Radium.Routes = Davis(function() {      
-  this.before(function(req) {
-    console.log('logged in?', ISLOGGEDIN);
-  });
-
   this.get('/', function(req){
     Radium.App.send('loadSection', 'dashboard');
   });

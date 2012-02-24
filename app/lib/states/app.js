@@ -48,8 +48,6 @@ Radium.App = Ember.StateManager.create({
     ------------------------------------
   */
   loadSection: function(manager, context) {
-    console.log('load %@, and first visit is %@'.fmt(context, this.get('isFirstRun')));
-
     if (manager.get('isLoggedIn') && manager.get('isFirstRun') == false) {
       // If this is the first visit in the session, grab some resources first
       manager.goToState(context);

@@ -130,7 +130,10 @@ window.RadiumAdapter = DS.Adapter.extend({
     
     this.ajax("/" + plural, "GET", {
       data: { ids: ids },
-      success: function(json) {
+      success: function(json, status, xhr) {
+        var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+            page = xhr.getResponseHeader('x-radium-current-page');
+        console.log('results from page %@ of %@.'.fmt(page, totalPages));
         store.loadMany(type, ids, json);
       }
     });
@@ -147,8 +150,9 @@ window.RadiumAdapter = DS.Adapter.extend({
   },
   
   findQuery: function(store, type, query, modelArray) {
-    var url,
-        resource,
+    var resource,
+        url,
+        data = {},
         self = this,
         type = this.rootForType(type);
 
@@ -156,7 +160,13 @@ window.RadiumAdapter = DS.Adapter.extend({
       url = query.type + "s/" + query.id + "/feed";
     }
 
+    if (type === 'user') {
+      url = type + 's';
+      data['page'] = 1;
+    }
+
     this.ajax("/"+url, "GET", {
+      data: data,
       success: function(json) {
         // Normalize nested elements without ID's
         var data = self.normalize(json);

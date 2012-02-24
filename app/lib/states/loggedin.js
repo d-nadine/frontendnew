@@ -11,13 +11,13 @@ Radium.LoggedIn = Ember.State.create({
     enter: function(manager) {
       console.log('bootstrap');
       var account = Radium.store.find(Radium.Account, ACCOUNT),
-          users = account.get('users');
+          users = Radium.store.find(Radium.User, {page: 1});
 
-      manager.send('loadSection', manager.get('_routeCache'));
       users.addObserver('isLoaded', function() {
         console.log('Users loaded, go to %@'.fmt(manager.get('_routeCache')));
+        manager.send('loadSection', manager.get('_routeCache'));
+        Radium.usersController.set('content', users);
       });
-      Radium.usersController.set('content', users);
     }
   }),
   loading: Ember.ViewState.create({
