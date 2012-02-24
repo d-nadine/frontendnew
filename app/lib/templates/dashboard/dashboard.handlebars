@@ -7,12 +7,14 @@
       contentBinding="Radium.activitiesController.filterTypes"
       categoryFilterBinding="Radium.activitiesController.categoryFilter"
     }}
-    
-    {{collection usersList 
-      id="user-list" 
-      class="filters people"
-      selectedUserBinding="Radium.dashboardController.selectedUser"
-    }}
+
+    {{#if Radium.usersController.content.length}}
+      {{collection Radium.UsersListView 
+        id="user-list" 
+        class="filters people"
+        selectedUserBinding="Radium.dashboardController.selectedUser"
+      }}
+    {{/if}}
   </div>
   
   <div class="span9">
@@ -22,18 +24,38 @@
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
 
-    {{view dashboardChart}}
+    {{!view dashboardChart}}
     
-    {{view Radium.DateFilterView dateFilterBinding="Radium.activityDateGroupsController.dateFilter"}}
+    {{view Radium.DateFilterView dateFilterBinding="Radium.activitiesController.dateFilter"}}
     
     <div class="row">
-      {{view Radium.FeedView 
-        id="feed" class="span9"
-        dateFilterBinding="Radium.activitiesController.dateFilter"
-        categoryFilterBinding="Radium.activitiesController.categoryFilter"
-        contentBinding="Radium.activitiesController.content"
-        templateName="activity_feed_group"
-      }}
+      <div id="feed" class="span9">
+        {{#each Radium.activitiesController.selectedDateType}}
+          {{#view Radium.FeedDateGroupView 
+            tagName="section"
+            groupBinding="this" 
+            dateFilterBinding="Radium.activitiesController.dateFilter"
+            categoryFilterBinding="Radium.activitiesController.categoryFilter"
+            contentBinding="Radium.activitiesController.content"
+            activityTypesBinding="Radium.activitiesController.activityTypes"
+          }}
+            <div class="page-header">
+              <h2>{{group}}</h2>
+            </div>
+            
+            {{#if Radium.activitiesController.todos.length}}
+              {{#view Radium.TestFeedItemView 
+                filterType="todo" 
+                itemsBinding="groups"
+              }}
+                {{view Radium.FeedItemHeadlineView}}
+                {{!view Radium.FeedItemTodosView}}
+              {{/view}}
+            {{/if}}
+
+          {{/view}}
+        {{/each}}
+      </div>
     </div>
   </div>
 </div>

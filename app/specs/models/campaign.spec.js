@@ -8,7 +8,7 @@ describe("Radium#Campaign", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -25,7 +25,7 @@ describe("Radium#Campaign", function() {
       var campaign;
 
       server.fakeHTTPMethods = true;
-      server.respondWith("POST", "/campaigns", [
+      server.respondWith("POST", "/api/campaigns", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify({
@@ -56,7 +56,7 @@ describe("Radium#Campaign", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toBe('/campaigns');
+      expect(spy.getCall(0).args[0].url).toBe('/api/campaigns');
     });
 
 

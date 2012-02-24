@@ -22,7 +22,7 @@ describe("Radium#Email", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -40,7 +40,7 @@ describe("Radium#Email", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/emails", [
+        "POST", "/api/emails", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify({
@@ -52,10 +52,7 @@ describe("Radium#Email", function() {
           sent_at: "2011-12-15T10:38:39Z",
           html: null,
           type: "Email",
-          sender: {
-            "id": 462,
-            "sender_type": "User"
-          },
+          user: 462,
           users: [462],
           contacts: [153],
           comments: [],
@@ -66,6 +63,13 @@ describe("Radium#Email", function() {
         })
       ]);
 
+      store.load(Radium.User, {
+        id: 462,
+        name: "Jimmy McNulty"
+      });
+      
+      sender = store.find(Radium.User, 462);
+
       email = store.createRecord(Radium.Email, {
         to: ["example@example.com"],
         cc: ["someone@else.com"], 
@@ -73,20 +77,11 @@ describe("Radium#Email", function() {
         message: "How's it going?"
       });
 
-      store.load(Radium.User, {
-        id: 462,
-        name: "Jimmy McNulty"
-      });
-
-      sender = store.find(Radium.User, 462);
-
       store.commit();
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      // Right now we can get the sender ID, but should look at retrieving
-      // nested objects.
-      expect(email.get('emailSender')).toEqual(sender.get('id'));
+      expect(email.get('user')).toBe(sender);
     });
   });
 });

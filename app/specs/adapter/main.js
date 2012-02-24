@@ -1,0 +1,1 @@
+minispade.require('specs/adapter/adapter.spec');

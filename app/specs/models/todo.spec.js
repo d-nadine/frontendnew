@@ -18,7 +18,7 @@ describe("Radium#Todo", function() {
     var adapter, store;
 
     it("marks the todo as overdue", function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
 
       store.loadMany(Radium.Todo, [{
@@ -61,7 +61,7 @@ describe("Radium#Todo", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -79,7 +79,7 @@ describe("Radium#Todo", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/todos", [
+        "POST", "/api/todos", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(CREATE_FIXTURE)
@@ -107,7 +107,7 @@ describe("Radium#Todo", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/todos", [
+        "POST", "/api/todos", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(jQuery.extend(CREATE_FIXTURE, {finished: true}))
@@ -127,7 +127,7 @@ describe("Radium#Todo", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/todos", [
+        "POST", "/api/todos", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(jQuery.extend(CREATE_FIXTURE, {user: 50}))

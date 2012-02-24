@@ -2,29 +2,29 @@ var topBarView = Radium.TopbarView.create();
 Radium.LoggedIn = Ember.State.create({
   enter: function() {
     $('#main-nav').show();
-    Radium.usersController.fetchUsers();
-    Radium.contactsController.fetchContacts();
     topBarView.appendTo('#topbar');
-
-    // Fetch data
-    var activities = Radium.store.findAll(Radium.Activity);
-    Radium.activitiesController.set('content', activities);
-
-    var announcements = Radium.store.findAll(Radium.Announcement);
-    Radium.announcementsController.set('content', announcements);
-
-    var deals = Radium.store.findAll(Radium.Deal);
-    Radium.dealsController.set('content', deals);
-
-    var meetings = Radium.store.findAll(Radium.Meeting);
-    Radium.meetingsController.set('content', meetings);
-
-    var callLists = Radium.store.findAll(Radium.CallList);
-    Radium.callListsController.set('content', callLists);
   },
   exit: function() {
     topBarView.remove();
   },
+  start: Ember.State.create({
+    enter: function(manager) {
+      console.log('bootstrap');
+      var account = Radium.store.find(Radium.Account, ACCOUNT),
+          users = account.get('users');
+
+      manager.send('loadSection', manager.get('_routeCache'));
+      users.addObserver('isLoaded', function() {
+        console.log('Users loaded, go to %@'.fmt(manager.get('_routeCache')));
+      });
+      Radium.usersController.set('content', users);
+    }
+  }),
+  loading: Ember.ViewState.create({
+    view: Ember.View.create({
+      template: Ember.Handlebars.compile('LOADING')
+    })
+  }),
   dashboard: Radium.DashboardState.create(),
   contacts: Ember.State.create({}),
   deals: Radium.DealsState.create(),

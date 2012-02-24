@@ -6,8 +6,8 @@ minispade.require('radium/libs/ember/ember-data');
 minispade.require('radium/libs/davis');
 minispade.require('radium/libs/highcharts/highcharts');
 minispade.require('radium/mixins/jqueryui');
-minispade.require('radium/core/radium');
 minispade.require('radium/adapters/main');
+minispade.require('radium/core/radium');
 minispade.require('radium/helpers/main');
 
 minispade.require('radium/models/main')

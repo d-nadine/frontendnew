@@ -44,7 +44,7 @@ describe("Radium#PhoneCall", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -75,10 +75,13 @@ describe("Radium#PhoneCall", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
+        'POST', '/api/phone_calls/8', [
+        200,
+        {"Content-Type": "application/json"},
         JSON.stringify(
           jQuery.extend(FIXTURE, {outcome: 'follow_up_required'})
         )
-      );
+      ]);
 
       store.load(Radium.PhoneCall, FIXTURE);
 
@@ -89,7 +92,7 @@ describe("Radium#PhoneCall", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toBe('/phone_calls/8');
+      expect(spy.getCall(0).args[0].url).toBe('/api/phone_calls/8');
       expect(call.get('outcome')).toBe('follow_up_required');
     });
   });

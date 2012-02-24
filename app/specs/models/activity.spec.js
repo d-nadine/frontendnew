@@ -3,7 +3,7 @@ describe("Radium#Activity", function() {
     id: 53,
     created_at: "2011-12-28T14:26:27Z",
     updated_at: "2011-12-28T14:26:27Z",
-    tags: ["tags", "describing", "what", "action", "happened"],
+    tags: ["todo", "assigned"],
     timestamp: "2011-12-28T14:26:27Z",
     owner: {
       id: 1312312,
@@ -53,7 +53,7 @@ describe("Radium#Activity", function() {
   var adapter, store, server, spy;
 
   beforeEach(function() {
-    adapter = Radium.Adapter.create();
+    adapter = RadiumAdapter.create();
     store = DS.Store.create({adapter: adapter});
     server = sinon.fakeServer.create();
     spy = sinon.spy(jQuery, 'ajax');
@@ -70,20 +70,42 @@ describe("Radium#Activity", function() {
     expect(Radium.Core.detect(Radium.Activity)).toBeTruthy();
   });
 
+  describe("when processing computed values", function() {
+    beforeEach(function() {
+      store.load(Radium.Activity, ACTIVITY);
+    });
+
+    afterEach(function() {
+    
+    });
+
+    it("computes the activity type", function() {
+      var activity = store.find(Radium.Activity, 53);
+      expect(activity.get('type')).toBe('todo');
+    });
+  });
+
   describe("when getting a nested reference", function() {
     var activity;
 
     beforeEach(function() {
-      store.load(Radium.Activity, ACTIVITY);
-      store.loadMany(Radium.Deal, [
-        {id: 65, description: "Testing 123"},
-        {id: 11, description: "Testing 123"},
-      ]);
-      store.loadMany(Radium.Contact, [
-        {id: 33, name: "Testing 123"},
-        {id: 44, name: "Testing 123"},
-        {id: 55, name: "Testing 123"}
-      ]);
+      store.load(Radium.Activity, {
+        id: 53,
+        owner: {
+          id: 'R31241',
+          user: {
+            id: 77,
+            deals: [65, 11],
+            contacts: [33, 44]
+          }
+        },
+        reference: {
+          id: 'R31341',
+          todo: {
+            id: 11
+          }
+        }
+      });
       activity = store.find(Radium.Activity, 53);
     });
 
@@ -92,30 +114,26 @@ describe("Radium#Activity", function() {
     });
 
     it("loads an embedded user", function() {
-      var owner = activity.get('owner');
-      expect(owner.getPath('user.id')).toEqual(46);
-      expect(owner.getPath('user.name')).toBe('Omar Little');
-      expect(owner.getPath('user.abbrName')).toBe('Omar L.');
-      expect(store.find(Radium.User, 46)).toEqual(owner.get('user'));
+      expect(activity.getPath('owner.user.id')).toEqual(77);
     });
 
     it("loads an embedded user's deals", function() {
-      expect(activity.getPath('owner.user.deals.length')).toEqual(2);
-      expect(activity.getPath('owner.user.deals').getEach('id'))
-            .toEqual([65, 11]);
+      // FIXME: Simulate fetching nested activities
+      // server.respondWith("GET", "/api/deals", [
+      //   200, {"Content-Type": "application/json"},
+      //   JSON.stringify([{id: 65},{id: 11}])
+      // ]);
+
+      var deals = activity.getPath('owner.user.deals');
+      
+      server.respond();
+      expect(spy).toHaveBeenCalled();
+      expect(deals.get('length')).toEqual(2);
+      // expect(deals.getEach('id')).toEqual([65, 11]);
     });
     
     it("loads an embedded activity", function() {
-      var ref = activity.get('reference');
-      expect(ref.getPath('todo.id')).toEqual(3);
-    });
-
-    it("loads an embedded activity's contacts", function() {
-      expect(activity.getPath('owner.user.contacts.length')).toEqual(2);
-      expect(activity.getPath('owner.user.contacts').getEach('id'))
-            .toEqual([33, 44]);
-      expect(activity.getPath('owner.user.contacts').getEach('name'))
-            .toEqual(["Testing 123", "Testing 123"]);
+      expect(activity.getPath('reference.todo.id')).toEqual(11);
     });
 
   });

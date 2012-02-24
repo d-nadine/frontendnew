@@ -1,4 +1,5 @@
 minispade.require('radium/models/core');
+minispade.require('radium/models/account');
 // Humans
 minispade.require('radium/models/person');
 minispade.require('radium/models/contact');

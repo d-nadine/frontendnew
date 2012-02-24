@@ -9,10 +9,6 @@ Radium.Todo = Radium.Core.extend({
   callList: DS.hasOne('Radium.CallList', {
     key: 'call_list'
   }),
-  // TODO: Set up this as an embedded object possibly... variable toOne not supported
-  // reference: DS.hasOne('Radium.', {
-  //   embedded: true
-  // }),
   contacts: DS.hasMany('Radium.Contact'),
   comments: DS.hasMany('Radium.Comment'),
   user: DS.hasOne('Radium.User'),

@@ -1010,6 +1010,7 @@ Davis.history = (function () {
    * and a path property will also be accepted.
    */
   function assign(request) {
+    console.log('request', request);
     history.pushState(wrapStateData(request.toJSON()), request.title, request.location());
     Davis.utils.forEach(pushStateHandlers, function (handler) {
       handler(request);

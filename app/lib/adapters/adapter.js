@@ -1,23 +1,15 @@
 var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
-Radium.Adapter = DS.Adapter.extend({
+window.RadiumAdapter = DS.Adapter.extend({
   bulkCommit: false,
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);
     var data = get(model, 'data');
-    var url = this.pluralize(root);
+    var url = (type.url) ? type.url : this.pluralize(root);
     var success = function(json) {
       store.didCreateRecord(model, json);
     };
-     
-    if (model.get('_type')) {
-      url = [
-              this.pluralize(model.get('_type')),
-              model.get('relation'),
-              this.pluralize(this.rootForType(type))
-            ].join('/')
-    }
-          
+
     this.ajax("/" + url, "POST", {
       data: data,
       success: success
@@ -50,10 +42,8 @@ Radium.Adapter = DS.Adapter.extend({
     var url;
     var id = get(model, 'id');
     var root = this.rootForType(type);
-
     var data = {};
     data[root] = get(model, 'data');
-
     if (model.get('url')) {
       url = model.get('url').fmt(id);
     } else {
@@ -137,7 +127,7 @@ Radium.Adapter = DS.Adapter.extend({
 
   findMany: function(store, type, ids) {
     var root = this.rootForType(type), plural = this.pluralize(root);
-
+    
     this.ajax("/" + plural, "GET", {
       data: { ids: ids },
       success: function(json) {
@@ -146,28 +136,78 @@ Radium.Adapter = DS.Adapter.extend({
     });
   },
 
-  findAll: function(store, type) {
+  findAll: function(store, type, query) {
     var root = this.rootForType(type), plural = this.pluralize(root);
-
+    
     this.ajax("/" + plural, "GET", {
       success: function(json) {
         store.loadMany(type, json);
       }
     });
   },
-
+  
   findQuery: function(store, type, query, modelArray) {
-    var root = this.rootForType(type), plural = this.pluralize(root);
+    var url,
+        resource,
+        self = this,
+        type = this.rootForType(type);
 
-    this.ajax("/" + plural, "GET", {
-      data: query,
+    if (type === 'activity') {
+      url = query.type + "s/" + query.id + "/feed";
+    }
+
+    this.ajax("/"+url, "GET", {
       success: function(json) {
-        modelArray.load(json);
+        // Normalize nested elements without ID's
+        var data = self.normalize(json);
+        modelArray.load(data);
       }
     });
   },
 
   // HELPERS
+
+  /**
+    Normalize nested JSON resources returned without a unique id that are 
+    nested 2 or more levels deep. For example, the code will take this 
+    JSON response:
+
+    ```
+    [{
+      id: 52,
+      owner: {
+        user: {
+          id: 11
+        }
+      }
+    }];
+    ```
+    to:
+    ```
+    [{
+      id: 52,
+      owner: {
+        id: R83968
+        user: {
+          id: 11
+        }
+      }
+    }];
+    ```
+    It also prepends an 'R' to avoid any possible ID collision.
+
+    @param {Array} JSON response
+  */
+  normalize: function(data) {
+    var normalized = data.map(function(item) {
+      if (item.hasOwnProperty('owner') && item.hasOwnProperty('reference')) {
+        item.owner.id = "R"+ Math.ceil(Math.random() * 10000);
+        item.reference.id = "R"+ Math.ceil(Math.random() * 10000);
+      }
+      return item;
+    });
+    return normalized;
+  },
 
   plurals: {
     'activity': 'activities',
@@ -190,7 +230,7 @@ Radium.Adapter = DS.Adapter.extend({
   },
 
   ajax: function(url, type, hash) {
-    hash.url = url;
+    hash.url = '/api' + url;
     hash.type = type;
     hash.dataType = "json";
 

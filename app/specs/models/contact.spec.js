@@ -99,7 +99,7 @@ describe("Radium#Contact", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -117,7 +117,7 @@ describe("Radium#Contact", function() {
     it("loads a user that exists", function() {
       var contact;
 
-      server.respondWith("GET", "/contacts/1", [
+      server.respondWith("GET", "/api/contacts/1", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(CONTACT_FIXTURE)
@@ -138,7 +138,7 @@ describe("Radium#Contact", function() {
 
       server.fakeHTTPMethods = true;
 
-      server.respondWith("POST", "/contacts/1", [
+      server.respondWith("POST", "/api/contacts/1", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(updatedFixture)
@@ -167,10 +167,10 @@ describe("Radium#Contact", function() {
 
   describe("when nested attributes are requested", function() {
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
-      server.respondWith("GET", "/contacts/1", [
+      server.respondWith("GET", "/api/contacts/1", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(CONTACT_FIXTURE)
@@ -239,7 +239,7 @@ describe("Radium#Contact", function() {
 
   describe("when adding a new nested item", function() {
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       server.fakeHTTPMethods = true;
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
@@ -268,7 +268,7 @@ describe("Radium#Contact", function() {
       expect(newPhone.get('isNew')).toBeTruthy();
 
       store.commit();
-      server.respondWith("PUT", "/contacts/1", [
+      server.respondWith("PUT", "/api/contacts/1", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(CONTACT_FIXTURE) 

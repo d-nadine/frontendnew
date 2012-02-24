@@ -2,12 +2,14 @@
   @extends {Class} Person
 */
 Radium.User = Radium.Person.extend({
+  apiKey: DS.attr('string', {
+    key: 'api_key'
+  }),
   email: DS.attr('string'),
   phone: DS.attr('string'),
   account: DS.attr('integer'),
   contacts: DS.hasMany('Radium.Contact'),
   following: DS.hasMany('Radium.User'),
-
   leads: function() {
     var contacts = this.get('contacts');
     return contacts.filterProperty('status', 'lead');
@@ -31,5 +33,9 @@ Radium.User = Radium.Person.extend({
   rejectedDeals: function() {
     var deals = this.get('deals');
     return deals.filterProperty('state', 'rejected');
-  }.property('deals').cacheable()
+  }.property('deals').cacheable(),
+
+  isLoggedIn: function() {
+    return (this.get('apiKey')) ? true : false;
+  }.property('apiKey').cacheable()
 });

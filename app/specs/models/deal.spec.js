@@ -49,7 +49,7 @@ describe("Radium#Deal", function() {
 
     it("marks the deal as overdue", function() {
       var today = new Date();
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
 
       store.load(Radium.Deal, CREATE_FIXTURE);
@@ -62,7 +62,7 @@ describe("Radium#Deal", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -78,7 +78,7 @@ describe("Radium#Deal", function() {
     it("creates a new Deal", function() {
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/deals", [
+        "POST", "/api/deals", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify(CREATE_FIXTURE)
@@ -107,7 +107,6 @@ describe("Radium#Deal", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(server.requests[0].method).toEqual("POST");
       expect(store.find(Radium.Deal, 31)).toBeDefined();
     });
 

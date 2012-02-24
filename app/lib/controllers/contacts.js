@@ -74,7 +74,6 @@ Radium.contactsController = Ember.ArrayProxy.create({
     });
   }.property('@each.name').cacheable(),
   fetchContacts: function() {
-    Radium.store.loadMany(Radium.Contact, Radium.Contact.FIXTURES);
     var self = this,
         content = Radium.store.findAll(Radium.Contact);
     this.set('content', content);

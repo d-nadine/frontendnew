@@ -1,6 +1,6 @@
 Radium.DateFilterView = Ember.View.extend({
   templateName: 'feed_date_filters', 
-  testView: Ember.CollectionView.extend({
+  dateTypesView: Ember.CollectionView.extend({
     tagName: 'ul',
     content: [
       Ember.Object.create({label: "Daily", type: "day"}),
@@ -15,12 +15,14 @@ Radium.DateFilterView = Ember.View.extend({
                 true : false;
       }.property('parentView.parentView.dateFilter').cacheable(),
       classNameBindings: ['isSelected:active'],
-      changeFilter: function(event) {
+      changeFilter: function(view, event, context) {
         event.preventDefault();
         var filterType = this.getPath('content.type');
         this.setPath('parentView.parentView.dateFilter', filterType);
-        $('#date-ranges').next()
-          .find('input').val('');
+        Radium.App.goToState('load');
+        
+        // Blur out the datepicker
+        $('#date-ranges').next().find('input').val('');
         return false;
       },
       template: Ember.Handlebars.compile('<a href="#" {{action "changeFilter"}}>{{content.label}}</a>')
@@ -33,7 +35,7 @@ Radium.DateFilterView = Ember.View.extend({
     value: null,
     change: function() {
       var date = this.$().val();
-      this.setPath('parentView.dateFilter', date);
+      Radium.App.send('displaySpecificDate', date);
     }
   })
 });

@@ -9,7 +9,7 @@ describe("Radium#IM", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -27,7 +27,7 @@ describe("Radium#IM", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/ims", [
+        "POST", "/api/ims", [
         200, 
         {"Content-Type": "application/json"},
         JSON.stringify({
@@ -58,7 +58,6 @@ describe("Radium#IM", function() {
 
       sender = store.find(Radium.User, 462);
       recipient = store.findMany(Radium.Contact, [131]);
-
       im = store.createRecord(Radium.Im, {
               message: "How's it going?"
             });
@@ -67,9 +66,9 @@ describe("Radium#IM", function() {
 
       store.commit();
       server.respond();
+
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toEqual('/ims')
-      expect(im.getPath('sender.id')).toEqual(sender.get('id'));
+      expect(spy.getCall(0).args[0].url).toEqual('/api/ims')
       expect(im.get('to').getEach('id')).toEqual([131]);
     });
   });

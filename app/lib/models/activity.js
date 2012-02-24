@@ -9,7 +9,12 @@ Radium.ActivityType = DS.Model.extend({
   message: DS.hasOne('Radium.Message', {embedded: true}),
   campaign: DS.hasOne('Radium.Campaign', {embedded: true}),
   contact: DS.hasOne('Radium.Contact', {embedded: true}),
-  group: DS.hasOne('Radium.Group', {embedded: true})
+  group: DS.hasOne('Radium.Group', {embedded: true}),
+  meeting: DS.hasOne('Radium.Meeting', {embedded: true}),
+  phoneCall: DS.hasOne('Radium.PhoneCall', {
+    embedded: true,
+    key: 'phone_call'
+  })
 });
 
 Radium.Activity = Radium.Core.extend({
@@ -18,7 +23,7 @@ Radium.Activity = Radium.Core.extend({
   owner: DS.hasOne('Radium.Owner', {embedded: true}),
   reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
   comments: DS.hasMany('Radium.Comment'),
-  activityType: function() {
+  type: function() {
     if (this.getPath('data.reference.todo')) return "todo";
     if (this.getPath('data.reference.deal')) return "deal";
     if (this.getPath('data.reference.meeting')) return "meeting";

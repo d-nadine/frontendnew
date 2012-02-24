@@ -1,5 +1,5 @@
 var todoKinds = ["call", "general", "support"],
-    limit = 10;
+    limit = 100;
 
 Radium.Activity.FIXTURES = [];
 
@@ -17,7 +17,7 @@ for (var i = 0; i < limit; i++) {
       hour: Math.floor(Math.random() * 12),
       minute: Math.floor(Math.random() * 59)
     }).toISO8601(),
-    tags: ["tags", "describing", "what", "action", "happened"],
+    tags: ["todo","assigned"],
     timestamp: Ember.DateTime.create({
       day: new Date().getDate() - i,
       hour: Math.floor(Math.random() * 12),

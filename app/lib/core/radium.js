@@ -1,5 +1,5 @@
 window.Radium = Ember.Application.create({
   store: DS.Store.create({
-    adapter: 'DS.fixtureAdapter'
+    adapter: RadiumAdapter.create({bulkCommit: false})
   })
 });

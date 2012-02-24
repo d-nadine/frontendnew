@@ -72,13 +72,13 @@ describe("Radium#User", function() {
   });
   
   describe("when talking with the API", function() {
-    var adapter, store, server;
+    var adapter, store, server, spy;
     
     beforeEach(function() {
       adapter = DS.RESTAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
-      
+      spy = sinon.spy(jQuery, 'ajax');
     });
     
     afterEach(function() {
@@ -89,14 +89,13 @@ describe("Radium#User", function() {
     });
 
     it("creates a new user", function() {
-      var spy, user, 
+      var user, 
           fixture = {
             name: "Brother Mouzone",
             email: "harperslover@hotmail.com"
           };
       
       server.fakeHTTPMethods = true;
-      spy = sinon.spy(jQuery, 'ajax');
 
       user = store.createRecord(Radium.User, fixture);
 
@@ -116,9 +115,7 @@ describe("Radium#User", function() {
     });
     
     it("loads a user", function() {
-      var spy, user;
-      
-      spy = sinon.spy(jQuery, 'ajax');
+      var user;
 
       server.respondWith("GET", "/users/1", [
         200, 
@@ -142,16 +139,27 @@ describe("Radium#User", function() {
       expect(user.get('contacts').getEach('id')).toEqual([101, 102, 103]);
       expect(spy).toHaveBeenCalled();
     });
+
+    it("detects the current user's API key", function() {
+      store.load(Radium.User, {
+        id: 8,
+        name: 'Jimmy McNulty',
+        api_key: 'test'
+      });
+
+      var mainUser = store.find(Radium.User, 8);
+
+      expect(mainUser.get('isLoggedIn')).toBeTruthy();
+    });
     
     it("updates a user", function() {
-      var spy, user;
+      var user;
       
       server.fakeHTTPMethods = true;
       
       store.load(Radium.User, GET_FIXTURE.user);
 
       user = store.find(Radium.User, 1);
-      spy = sinon.spy(jQuery, 'ajax');
       
       server.respondWith("PUT", "/users/1", [
         200, 

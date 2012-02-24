@@ -21,7 +21,7 @@ describe("Radium#Group", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create();
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -39,7 +39,7 @@ describe("Radium#Group", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/groups", [
+        "POST", "/api/groups", [
           200,
           {"Content-Type": "application/json"},
           JSON.stringify(CREATE_FIXTURE)
@@ -55,7 +55,7 @@ describe("Radium#Group", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toBe('/groups');
+      expect(spy.getCall(0).args[0].url).toBe('/api/groups');
       expect(store.find(Radium.Group, 21)).toBeDefined();
       expect(group.get('id')).toEqual(21);
       expect(group.getPath('contacts.length')).toEqual(4);

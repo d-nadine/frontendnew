@@ -75,7 +75,7 @@ describe("Radium#Meeting", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = Radium.Adapter.create();
+      adapter = RadiumAdapter.create({bulkCommit: false});
       store = DS.Store.create({adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
@@ -93,7 +93,7 @@ describe("Radium#Meeting", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "POST", "/meetings", [
+        "POST", "/api/meetings", [
         200,
         {"Content-Type": "application/json"},
         JSON.stringify(CREATE_MEETING)
@@ -110,8 +110,8 @@ describe("Radium#Meeting", function() {
       meeting = store.createRecord(Radium.Meeting, {
         topic: "Stringer Bell",
         location: "Police station basement",
-        starts_at: "2011-12-28T15:26:22Z",
-        ends_at: "2011-12-28T16:26:22Z",
+        startsAt: "2011-12-28T15:26:22Z",
+        endsAt: "2011-12-28T16:26:22Z",
         invite: [
           'bunk@baltimorepolice.org',
           'greggs@baltimorepolice.org',
@@ -123,9 +123,10 @@ describe("Radium#Meeting", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(meeting.get('invitations').getEach('id'))
-        .toEqual([300, 301, 302]);
-      
+      expect(meeting.get('users').getEach('id'))
+        .toEqual([29, 44]);
+      expect(meeting.get('contacts').getEach('id'))
+        .toEqual([12]);
     });
 
     it("reschedules a meeting", function() {
@@ -135,7 +136,7 @@ describe("Radium#Meeting", function() {
       
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "PUT", "/meetings/2/reschedule", [
+        "PUT", "/api/meetings/2/reschedule", [
           200,
           {"Content-Type": "application/json"},
           JSON.stringify(
@@ -158,7 +159,7 @@ describe("Radium#Meeting", function() {
       store.commit();
       server.respond();
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toBe('/meetings/2/reschedule');
+      expect(spy.getCall(0).args[0].url).toBe('/api/meetings/2/reschedule');
       expect(meeting.get('startsAt')).toEqual(new Date(newStartAt));
     });
 
@@ -167,7 +168,7 @@ describe("Radium#Meeting", function() {
 
       server.fakeHTTPMethods = true;
       server.respondWith(
-        "PUT", "/meetings/2/cancel", [
+        "PUT", "/api/meetings/2/cancel", [
           200,
           {"Content-Type": "application/json"},
           JSON.stringify(
@@ -184,7 +185,7 @@ describe("Radium#Meeting", function() {
       server.respond();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy.getCall(0).args[0].url).toBe("/meetings/2/cancel")
+      expect(spy.getCall(0).args[0].url).toBe("/api/meetings/2/cancel")
     });
   });
 });
