@@ -27,5 +27,14 @@ Radium.DashboardState = Radium.PageState.extend({
   loadForm: function(manager, context) {
     Radium.App.setPath('loggedIn.dashboard.form.formType', context);
     manager.goToState('form');
+  },
+  loadFeed: function(manager, context) {
+    debugger;
+    var activity = Radium.store.find(Radium.Activity, context);
+    manager.goToState('loggedIn.dashboard.loading');
+    activity.addObserver('isLoaded', function() {
+      Radium.activitiesController.set('content', activity);
+      manager.goToState('loggedIn.dashboard.ready');
+    });
   }
 });

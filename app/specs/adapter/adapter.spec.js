@@ -118,6 +118,64 @@ describe("RadiumAdapter", function() {
       expect(test.getPath('firstObject.owner.user.id')).toEqual(77);
       expect(spy.getCall(0).args[0].url).toBe('/api/users/53/feed');
     });
+
+    it("loads a single page", function() {
+
+    });
+
+    it("loads all models split across several pages", function() {
+      var deals;
+
+
+      server.respondWith(
+        "GET", "/api/deals", [
+        200, 
+        {
+          "Content-Type": "application/json", 
+          "x-radium-current-page": "1",
+          "x-radium-total-pages": "2"
+        },
+        JSON.stringify([
+          {id: 1},
+          {id: 2},
+          {id: 3}
+        ])
+      ]);
+
+      deals = store.findMany(Radium.Deal, [1,2,3]);
+      server.respond();
+      expect(spy).toHaveBeenCalled();
+      expect(spy.getCall(0).args[0].url).toBe('/api/deals');
+      expect(deals.getEach('id')).toEqual([1,2,3]);
+    });
+
+    it("loads a query to find page=0", function() {
+      var deals;
+      server.respondWith(
+        "GET", "/api/deals?page=0", [
+        200, 
+        {
+          "Content-Type": "application/json", 
+          "x-radium-current-page": "1",
+          "x-radium-total-pages": "2",
+
+        },
+        JSON.stringify([
+          {id: 1},
+          {id: 2},
+          {id: 3}
+        ])
+      ]);
+
+      deals = store.find(Radium.Deal, {
+        page: 0
+      });
+      server.respond();
+      expect(spy).toHaveBeenCalled();
+      expect(spy.getCall(0).args[0].url).toBe('/api/deals');
+      expect(spy.getCall(0).args[0].data.page).toEqual(0);
+      expect(deals.getEach('id')).toEqual([1,2,3]);
+    });
   });
 
 });

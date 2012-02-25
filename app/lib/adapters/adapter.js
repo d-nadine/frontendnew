@@ -128,18 +128,29 @@ window.RadiumAdapter = DS.Adapter.extend({
   findMany: function(store, type, ids) {
     var root = this.rootForType(type), plural = this.pluralize(root);
     
+    // Set up the deffered
+    var totalPages = 0,
+        currentPage = 0;
+        console.log(ids.get('length'));
     this.ajax("/" + plural, "GET", {
       data: { ids: ids },
       success: function(json, status, xhr) {
-        var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
-            page = xhr.getResponseHeader('x-radium-current-page');
+        totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+        currentPage = xhr.getResponseHeader('x-radium-current-page');
         console.log('results from page %@ of %@.'.fmt(page, totalPages));
-        store.loadMany(type, ids, json);
+        if (totalPages === 1) {
+          store.loadMany(type, ids, json);
+        } else {
+
+        }
+      },
+      error: function() {
+        console.log(arguments);
       }
     });
   },
 
-  findAll: function(store, type, query) {
+  findAll: function(store, type) {
     var root = this.rootForType(type), plural = this.pluralize(root);
     
     this.ajax("/" + plural, "GET", {
@@ -154,15 +165,17 @@ window.RadiumAdapter = DS.Adapter.extend({
         url,
         data = {},
         self = this,
-        type = this.rootForType(type);
+        page = query.page,
+        root = this.rootForType(type),
+        url = this.pluralize(root);
 
-    if (type === 'activity') {
-      url = query.type + "s/" + query.id + "/feed";
+    if (root === 'activity') {
+      url = [query.type+"s",query.id,"feed"].join("/");
     }
 
-    if (type === 'user') {
-      url = type + 's';
-      data['page'] = 1;
+    if (root.match(/(deal|user)/)) {
+      url = this.pluralize(root)
+      data['page'] = query.page;
     }
 
     this.ajax("/"+url, "GET", {

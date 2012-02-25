@@ -12,14 +12,13 @@ Radium.UsersListView = Ember.CollectionView.extend({
       viewUser: function(event) {
         var id = this.getPath('content.id');
         if (this.get('isSelected')) {
-          // this.setPath('parentView.selectedUser', null);
+          this.setPath('parentView.selectedUser', null);
         } else {
           // this.setPath('parentView.selectedUser', this.getPath('content'));
-          var activity = Radium.store.find(Radium.Activity, {
+          Radium.App.send('loadFeed', {
             type: 'user',
             id: id
           });
-          Radium.activitiesController.set('content', activity);
         }
         return false;
       },
