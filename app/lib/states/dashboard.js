@@ -1,40 +1,42 @@
 Radium.DashboardState = Radium.PageState.extend({
   
-  initialState: 'loading',
+  initialState: 'ready',
   
-  view: Radium.DashboardView.create(),
+  view: Radium.DashboardView,
   
   isFormAddView: false,
 
-  loading: Ember.State.create({
+  loading: Ember.ViewState.create({
+    view: Radium.LoadingView
+  }),
+
+  ready: Ember.State.create({
     enter: function() {
-      console.log('loading');
-      // Fetch data
-      // var activities = Radium.store.find(Radium.Activity, {
-      //   type: 'user',
-      //   id: Radium.usersController.getPath('loggedInUser.id')
-      // });
-      // Radium.activitiesController.set('content', activities);
+      console.log('Ready');
+      var user = Radium.usersController.get('loggedInUser');
+      console.log(user);
+      var activities = user.get('activities');
+      Radium.dashboardController.set('selectedUser', user);
+      Radium.activitiesController.set('content', activities);
     }
   }),
-  ready: Ember.State.create({}),
+
   specificDate: Ember.State.create({
     exit: function() {
       Radium.activitiesController.set('content', Radium.store.findAll(Radium.Activity));
     } 
   }),
   //Actions
-  loadForm: function(manager, context) {
+  addResource: function(manager, context) {
     Radium.App.setPath('loggedIn.dashboard.form.formType', context);
     manager.goToState('form');
   },
   loadFeed: function(manager, context) {
-    debugger;
     var activity = Radium.store.find(Radium.Activity, context);
     manager.goToState('loggedIn.dashboard.loading');
     activity.addObserver('isLoaded', function() {
       Radium.activitiesController.set('content', activity);
-      manager.goToState('loggedIn.dashboard.ready');
+      manager.goToState('ready');
     });
   }
 });

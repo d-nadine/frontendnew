@@ -383,7 +383,6 @@ DS.AdapterPopulatedModelArray = DS.ModelArray.extend({
     var store = get(this, 'store'), type = get(this, 'type');
 
     var clientIds = store.loadMany(type, array).clientIds;
-
     this.beginPropertyChanges();
     set(this, 'content', Ember.A(clientIds));
     set(this, 'isLoaded', true);

@@ -2,6 +2,10 @@ var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
 window.RadiumAdapter = DS.Adapter.extend({
   bulkCommit: false,
+  // Assuming the total number of records is a constant, set the results
+  // per page here.
+  resultsPerPage: 24,
+
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);
     var data = get(model, 'data');
@@ -127,27 +131,61 @@ window.RadiumAdapter = DS.Adapter.extend({
 
   findMany: function(store, type, ids) {
     var root = this.rootForType(type), plural = this.pluralize(root);
-    
-    // Set up the deffered
-    var totalPages = 0,
-        currentPage = 0;
-        console.log(ids.get('length'));
-    this.ajax("/" + plural, "GET", {
-      data: { ids: ids },
-      success: function(json, status, xhr) {
-        totalPages = xhr.getResponseHeader('x-radium-total-pages'),
-        currentPage = xhr.getResponseHeader('x-radium-current-page');
-        console.log('results from page %@ of %@.'.fmt(page, totalPages));
-        if (totalPages === 1) {
+    // Activities have to be loaded via their type, ie users, contacts, deals
+    if (root === 'activity') {
+      plural = ["users", query.id, "feed"].join("/");
+    }
+    // If the request is for more records than what a page can return, proxy
+    // to `findRecursively` to loop through the pages.
+    if (ids.length > this.get('resultsPerPage')) {
+      this.findRecursively(store, type, ids, plural);
+    // Otherwise grab the first page of results and carry on.
+    } else {
+      this.ajax("/" + plural, "GET", {
+        data: { ids: ids },
+        success: function(json) {
           store.loadMany(type, ids, json);
-        } else {
-
         }
-      },
-      error: function() {
-        console.log(arguments);
-      }
-    });
+      });
+    }
+  },
+
+  /**
+    Loops through paginated resources.
+  */
+  findRecursively: function(store, type, ids, plural) {
+    // Set up the deffered
+    var self = this,
+        // Guess the total number of pages via the number of id's requested
+        totalPages = Math.ceil(ids.length / this.get('resultsPerPage')),
+        currentPage = 1,
+        ids = ids || [],
+        dataHash = [];
+    console.log(ids.length);
+    var fetchPage = function() {
+      self.ajax("/"+plural, "GET", {
+        data: {ids: ids, page: currentPage},
+        success: function(json, status, xhr) {
+          // On the last page, send to `pagesLoaded` to add to store.
+          console.log(xhr.getResponseHeader('x-radium-total-pages'));
+          if (currentPage >= totalPages) {
+            dataHash = dataHash.concat(json);
+            pagesLoaded();
+          // Loop on through the pages
+          } else {
+            currentPage++;
+            dataHash = dataHash.concat(json);
+            fetchPage();
+          }
+        }
+      });
+    };
+
+    var pagesLoaded = function() {
+      store.loadMany(type, ids, dataHash);
+    };
+
+    fetchPage();
   },
 
   findAll: function(store, type) {
@@ -163,29 +201,51 @@ window.RadiumAdapter = DS.Adapter.extend({
   findQuery: function(store, type, query, modelArray) {
     var resource,
         url,
-        data = {},
         self = this,
-        page = query.page,
+        // If no page is declared, load page 1 by default.
+        currentPage = query.page || 1,
         root = this.rootForType(type),
-        url = this.pluralize(root);
+        url = this.pluralize(root),
+        // Cache all the hashes here if they are spread out across several pages.
+        dataHash = [];
 
+    // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
-      url = [query.type+"s",query.id,"feed"].join("/");
-    }
-
-    if (root.match(/(deal|user)/)) {
+      url = [query.type+"s", query.id, "feed"].join("/");
+    } else {
       url = this.pluralize(root)
-      data['page'] = query.page;
     }
 
-    this.ajax("/"+url, "GET", {
-      data: data,
-      success: function(json) {
-        // Normalize nested elements without ID's
-        var data = self.normalize(json);
-        modelArray.load(data);
-      }
-    });
+    var fetchPage = function() {
+      self.ajax("/"+url, "GET", {
+        data: {page: currentPage},
+        success: function(json, status, xhr) {
+          // A page=0 query loads all available pages.
+          if (query.page === 0) {
+            var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+            // If we are on the last page, cache the hash and then wrap up
+            if (currentPage >= totalPages) {
+              dataHash = dataHash.concat(json);
+              pagesLoaded(dataHash);
+            // Otherwise loop on to the next page
+            } else {
+              currentPage++;
+              dataHash = dataHash.concat(json);
+              fetchPage();
+            }
+          } else {
+            pagesLoaded(json);
+          }
+        }
+      });
+    };
+    // Notify the ModelArray that we've got all the models.
+    var pagesLoaded = function(dataHash) {
+      var data = self.normalize(dataHash);
+      modelArray.load(data);
+    };
+    // Init.
+    fetchPage();
   },
 
   // HELPERS

@@ -25,7 +25,7 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
       }.property(),
       click: function(event) {
         var formType = this.getPath('parentView.content.formViewClass');
-        Radium.App.send('loadForm', formType);
+        Radium.App.send('addResource', formType);
         event.stopPropagation();
         return false;
       }

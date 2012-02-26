@@ -51,16 +51,16 @@ Radium.TopbarView = Ember.View.extend({
 
       switch (section) {
         case 'dashboard':
-          Radium.App.send('loadForm', 'Todo');
+          Radium.App.send('addResource', 'Todo');
           break;
         case 'deals':
-          Radium.App.send('loadForm', 'Deal');
+          Radium.App.send('addResource', 'Deal');
           break;
         case 'campaign':
-          Radium.App.send('loadForm', 'Campaign');
+          Radium.App.send('addResource', 'Campaign');
           break;
         default:
-          Radium.App.send('loadForm', 'Contact');
+          Radium.App.send('addResource', 'Contact');
           break;
       };
       

@@ -8,7 +8,7 @@ Radium.DealsState = Radium.PageState.extend({
     }
   }),
   //Actions
-  loadForm: function(manager, context) {
+  addResource: function(manager, context) {
     Radium.App.setPath('loggedIn.deals.form.formType', context);
     manager.goToState('form');
   }

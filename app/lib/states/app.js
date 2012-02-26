@@ -18,6 +18,7 @@
 Radium.App = Ember.StateManager.create({
   rootElement: '#main',
   isLoggedIn: true,
+  // Set to false when all the intial data has been loaded
   isFirstRun: true,
   loggedOut: Radium.LoggedOutState,
   
@@ -27,13 +28,8 @@ Radium.App = Ember.StateManager.create({
     }
   }),
   // TODO: Add server login logic here.
-  authenticate: Ember.State.create({
-    enter: function(manager, transition) {
-      console.log('Authenticating.....');
-    },
-    exit: function(manager) {
-      console.log('User authenticated!');
-    }
+  authenticate: Ember.ViewState.create({
+    view: Radium.LoadingView
   }),
   
   loggedIn: Radium.LoggedIn,

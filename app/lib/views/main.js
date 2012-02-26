@@ -57,6 +57,7 @@ minispade.require('radium/views/topbar');
 minispade.require('radium/views/users_list');
 minispade.require('radium/views/profile');
 minispade.require('radium/views/loginpane');
+minispade.require('radium/views/loading');
 
 // Dashboard
 minispade.require('radium/views/dashboard/dashboard');

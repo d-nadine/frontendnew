@@ -10,11 +10,10 @@ Radium.UsersListView = Ember.CollectionView.extend({
       }.property('parentView.selectedUser').cacheable(),
       classNameBindings: ['isSelected:active'],
       viewUser: function(event) {
-        var id = this.getPath('content.id');
         if (this.get('isSelected')) {
           this.setPath('parentView.selectedUser', null);
         } else {
-          // this.setPath('parentView.selectedUser', this.getPath('content'));
+          this.setPath('parentView.selectedUser', this.getPath('content'));
           Radium.App.send('loadFeed', {
             type: 'user',
             id: id
