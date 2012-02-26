@@ -133,7 +133,7 @@ window.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type), plural = this.pluralize(root);
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
-      plural = ["users", query.id, "feed"].join("/");
+      plural = ["users", 8, "feed"].join("/");
     }
     // If the request is for more records than what a page can return, proxy
     // to `findRecursively` to loop through the pages.
@@ -161,13 +161,12 @@ window.RadiumAdapter = DS.Adapter.extend({
         currentPage = 1,
         ids = ids || [],
         dataHash = [];
-    console.log(ids.length);
+        
     var fetchPage = function() {
       self.ajax("/"+plural, "GET", {
         data: {ids: ids, page: currentPage},
         success: function(json, status, xhr) {
           // On the last page, send to `pagesLoaded` to add to store.
-          console.log(xhr.getResponseHeader('x-radium-total-pages'));
           if (currentPage >= totalPages) {
             dataHash = dataHash.concat(json);
             pagesLoaded();

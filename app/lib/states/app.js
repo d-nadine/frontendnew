@@ -8,11 +8,10 @@
   2.  `loadSection` determins whether if the user is logged in and if this is 
       the first visit of the sesson. Obviously if the vistor is not logged in,
       we must punt them to the `loggedOut` state.
-
-
   3.  If the visitor is logged in, the first step is to load all the account's
-      users. All these records are important for the entire app to run on 
-      first load. This is done at `
+      users. All these records are important to start the application with as
+      much data as possible on load.
+      
 */
 
 Radium.App = Ember.StateManager.create({

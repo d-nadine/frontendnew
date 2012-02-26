@@ -8,13 +8,9 @@
       categoryFilterBinding="Radium.activitiesController.categoryFilter"
     }}
 
-    {{#if Radium.usersController.content.length}}
-      {{collection Radium.UsersListView 
-        id="user-list" 
-        class="filters people"
-        selectedUserBinding="Radium.dashboardController.selectedUser"
-      }}
-    {{/if}}
+    {{view Radium.UsersListView 
+      selectedUserBinding="Radium.dashboardController.selectedUser"
+    }}
   </div>
   
   <div class="span9">

@@ -1,7 +1,16 @@
-<a href="#" {{action "viewUser"}}>
-  <img src="/images/headshots/holman_normal.png" class="avatar">
-  <span>{{ content.abbrName }}</span>
-  {{#if isSelected}}
-  <i class="icon-ok pull-right"></i>
-  {{/if}}
-</a>
+<h3>Team</h3>
+{{#if Radium.usersController.content.length}}
+  <ul id="user-list" class="nav nav-tabs nav-stacked filters people">
+    {{#each Radium.usersController.content contentBinding="this"}}
+      {{#view Radium.UserListItemView userBinding="this"}}
+        <a href="#" {{action "viewUser"}}>
+          <img src="/images/headshots/holman_normal.png" class="avatar">
+          <span>{{ user.abbrName }}</span>
+          {{#if isSelected}}
+          <i class="icon-ok pull-right"></i>
+          {{/if}}
+        </a>
+      {{/view}}
+    {{/each}}
+  </ul>
+{{/if}}

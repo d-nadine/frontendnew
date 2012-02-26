@@ -14,8 +14,10 @@ Radium.DashboardState = Radium.PageState.extend({
     enter: function() {
       console.log('Ready');
       var user = Radium.usersController.get('loggedInUser');
-      console.log(user);
-      var activities = user.get('activities');
+      var activities = Radium.store.find(Radium.Activity, {
+        type: 'user',
+        id: user.get('id')
+      });
       Radium.dashboardController.set('selectedUser', user);
       Radium.activitiesController.set('content', activities);
     }
