@@ -30,7 +30,7 @@ Radium.feedController = Ember.ArrayProxy.extend({
       // Pluralize this here so Radium.FeedDateItemView can filter singularly
       return this.get(selectedDateFilter + 's');
     }
-  }.property('dateFilter').cacheable(),
+  }.property('@each.updatedAt', 'dateFilter').cacheable(),
   
   displaySpecificDate: function(manager, context) {
     var activity = Radium.store.filter(Radium.Activity, function(data) {

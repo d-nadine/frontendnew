@@ -6,9 +6,7 @@
       categoryFilterBinding="Radium.dealsDateGroupsController.categoryFilter"
     }}
     
-    {{collection usersList 
-      id="user-list" 
-      class="filters people"
+    {{view Radium.UsersListView 
       selectedUserBinding="Radium.dealsController.selectedUser"
     }}
   </div>

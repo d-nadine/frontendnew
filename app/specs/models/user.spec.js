@@ -22,10 +22,10 @@ describe("Radium#User", function() {
   });
   
   describe("creating a new user", function() {
-
+    var store;
     beforeEach(function() {
-      this.store = DS.Store.create();
-      this.store.load(Radium.User, {
+      store = DS.Store.create({revision: 1});
+      store.load(Radium.User, {
         "id": 1,
         "email": "example@example.com",
         "name": "Adam Hawkins",
@@ -34,15 +34,15 @@ describe("Radium#User", function() {
     });
 
     afterEach(function() {
-      this.store.destroy();
+      store.destroy();
     });
 
     it("creates a user", function() {
-      expect(this.store.findAll(Radium.User).get('length')).toBe(1);
+      expect(store.findAll(Radium.User).get('length')).toBe(1);
     });
 
     it("loads and processes their name", function() {
-      var person = this.store.find(Radium.User, 1);
+      var person = store.find(Radium.User, 1);
       expect(person.get('name')).toBe("Adam Hawkins");
       expect(person.get('firstName')).toBe("Adam");
       expect(person.get('abbrName')).toBe("Adam H.");
@@ -50,9 +50,10 @@ describe("Radium#User", function() {
   });
 
   describe("updating a user", function() {
+    var store;
     beforeEach(function() {
-      this.store = DS.Store.create();
-      this.store.load(Radium.User, {
+      store = DS.Store.create({revision: 1});
+      store.load(Radium.User, {
         "id": 1,
         "email": "example@example.com",
         "name": "Adam Hawkins",
@@ -61,11 +62,11 @@ describe("Radium#User", function() {
     });
 
     afterEach(function() {
-      this.store.destroy();
+      store.destroy();
     });
 
     it("updates name", function() {
-      var user = this.store.find(Radium.User, 1);
+      var user = store.find(Radium.User, 1);
       user.set('name', "Joshua Jones");
       expect(user.get('firstName')).toBe("Joshua");
     });
@@ -76,7 +77,7 @@ describe("Radium#User", function() {
     
     beforeEach(function() {
       adapter = DS.RESTAdapter.create();
-      store = DS.Store.create({adapter: adapter});
+      store = DS.Store.create({revision: 1,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });

@@ -14,11 +14,12 @@ Radium.DashboardState = Radium.PageState.extend({
     enter: function() {
       console.log('Ready');
       var user = Radium.usersController.get('loggedInUser');
+      Radium.store.adapter.set('selectedUserID', user.get('id'));
       var activities = Radium.store.find(Radium.Activity, {
         type: 'user',
         id: user.get('id')
       });
-      Radium.dashboardController.set('selectedUser', user);
+      // Radium.dashboardController.set('selectedUser', user);
       Radium.activitiesController.set('content', activities);
     }
   }),
@@ -35,7 +36,7 @@ Radium.DashboardState = Radium.PageState.extend({
   },
   loadFeed: function(manager, context) {
     var activity = Radium.store.find(Radium.Activity, context);
-    manager.goToState('loggedIn.dashboard.loading');
+    manager.goToState('loading');
     activity.addObserver('isLoaded', function() {
       Radium.activitiesController.set('content', activity);
       manager.goToState('ready');

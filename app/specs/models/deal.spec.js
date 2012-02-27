@@ -50,7 +50,7 @@ describe("Radium#Deal", function() {
     it("marks the deal as overdue", function() {
       var today = new Date();
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({adapter: adapter});
+      store = DS.Store.create({revision: 1,adapter: adapter});
 
       store.load(Radium.Deal, CREATE_FIXTURE);
 
@@ -63,7 +63,7 @@ describe("Radium#Deal", function() {
 
     beforeEach(function() {
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({adapter: adapter});
+      store = DS.Store.create({revision: 1,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });

@@ -8,8 +8,8 @@ describe("Radium#Campaign", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = RadiumAdapter.create();
-      store = DS.Store.create({adapter: adapter});
+      adapter = RadiumAdapter.create({bulkCommit: false});
+      store = DS.Store.create({revision: 1,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });
@@ -23,7 +23,7 @@ describe("Radium#Campaign", function() {
 
     it("creates a campaign", function() {
       var campaign;
-
+      
       server.fakeHTTPMethods = true;
       server.respondWith("POST", "/api/campaigns", [
         200, 

@@ -5,12 +5,13 @@ window.RadiumAdapter = DS.Adapter.extend({
   // Assuming the total number of records is a constant, set the results
   // per page here.
   resultsPerPage: 24,
-
+  selectedUserID: null,
   createRecord: function(store, type, model) {
     var root = this.rootForType(type);
     var data = get(model, 'data');
     var url = (type.url) ? type.url : this.pluralize(root);
     var success = function(json) {
+      console.log('Woot', json);
       store.didCreateRecord(model, json);
     };
 
@@ -130,10 +131,17 @@ window.RadiumAdapter = DS.Adapter.extend({
   },
 
   findMany: function(store, type, ids) {
-    var root = this.rootForType(type), plural = this.pluralize(root);
+    var root = this.rootForType(type), 
+        plural = this.pluralize(root),
+        userID = this.get('selectedUserID');
+    console.log('user %@ is requesting %@ %@ records'.fmt(
+      userID,
+      ids.length,
+      root
+    ));
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
-      plural = ["users", 8, "feed"].join("/");
+      plural = ["users", userID, "feed"].join("/");
     }
     // If the request is for more records than what a page can return, proxy
     // to `findRecursively` to loop through the pages.
@@ -141,9 +149,15 @@ window.RadiumAdapter = DS.Adapter.extend({
       this.findRecursively(store, type, ids, plural);
     // Otherwise grab the first page of results and carry on.
     } else {
+      console.log('not recursive');
       this.ajax("/" + plural, "GET", {
         data: { ids: ids },
         success: function(json) {
+          var arr = [];
+          json.forEach(function(item) {
+            arr.push(item.id);
+          });
+          console.log("ID's loaded: ", arr);
           store.loadMany(type, ids, json);
         }
       });
@@ -156,12 +170,12 @@ window.RadiumAdapter = DS.Adapter.extend({
   findRecursively: function(store, type, ids, plural) {
     // Set up the deffered
     var self = this,
-        // Guess the total number of pages via the number of id's requested
+        // Calculate the total number of pages via the number of id's requested
         totalPages = Math.ceil(ids.length / this.get('resultsPerPage')),
         currentPage = 1,
         ids = ids || [],
         dataHash = [];
-        
+
     var fetchPage = function() {
       self.ajax("/"+plural, "GET", {
         data: {ids: ids, page: currentPage},
@@ -314,7 +328,13 @@ window.RadiumAdapter = DS.Adapter.extend({
   ajax: function(url, type, hash) {
     hash.url = '/api' + url;
     hash.type = type;
-    hash.dataType = "json";
+    hash.dataType = 'json';
+    hash.contentType = 'application/json';
+    hash.context = this;
+
+    if (hash.data && type !== 'GET') {
+      hash.data = JSON.stringify(hash.data);
+    }
 
     jQuery.ajax(hash);
   }

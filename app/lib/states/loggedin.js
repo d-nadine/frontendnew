@@ -15,7 +15,6 @@ Radium.LoggedIn = Ember.State.create({
       var account = Radium.store.find(Radium.Account, ACCOUNT),
           users = Radium.store.find(Radium.User, {page: 0});
           // users = account.get('users');
-
       users.addObserver('isLoaded', function() {
         console.log('Users loaded, go to', manager.get('_routeCache'));
         Radium.usersController.set('content', users);

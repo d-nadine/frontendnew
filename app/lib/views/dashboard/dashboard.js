@@ -1,7 +1,5 @@
 Radium.DashboardView = Ember.View.extend({
   templateName: 'dashboard',
-  profileView: Radium.ProfileView,
-  searchView: Radium.GlobalSearchTextView,
   selectedUserBinding: 'Radium.dashboardController.selectedUser',
   // Chart
   dashboardChart: Radium.PieChart.extend({
