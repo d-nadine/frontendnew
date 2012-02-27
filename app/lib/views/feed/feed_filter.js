@@ -29,6 +29,27 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
         event.stopPropagation();
         return false;
       }
+    }),
+
+    // The badge count of leads
+    badgeView: Ember.View.extend({
+      tagName: 'span',
+      classNames: 'label pull-right'.w(),
+      count: function() {
+        var type = this.getPath('parentView.content.shortname'),
+            plural = (type === 'everything' || type === 'pipeline') ? 'content' : type+'s',
+            activities = Radium.activitiesController.get(plural);
+        return activities.get('length');
+      }.property(
+        'Radium.activitiesController.todos',
+        'Radium.activitiesController.meetings',
+        'Radium.activitiesController.deals',
+        'Radium.activitiesController.messages',
+        'Radium.activitiesController.phonecalls',
+        'Radium.activitiesController.discussions',
+        'Radium.activitiesController.pipeline'
+      ).cacheable(),
+      template: Ember.Handlebars.compile('{{count}}')
     })
   })
 });

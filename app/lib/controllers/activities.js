@@ -62,7 +62,13 @@ Radium.activitiesController = Radium.feedController.create({
   messages: function() {
     return this.filterProperty('type', 'message');
   }.property('@each.type').cacheable(),
-  phoneCalls: function() {
+  phonecalls: function() {
+    return this.filterProperty('type', 'calllist');
+  }.property('@each.type').cacheable(),
+  discussions: function() {
+    return this.filterProperty('type', 'calllist');
+  }.property('@each.type').cacheable(),
+  pipeline: function() {
     return this.filterProperty('type', 'calllist');
   }.property('@each.type').cacheable(),
 
