@@ -19,7 +19,7 @@ Radium.DashboardState = Radium.PageState.extend({
         type: 'user',
         id: user.get('id')
       });
-      // Radium.dashboardController.set('selectedUser', user);
+      Radium.dashboardController.set('selectedUser', user);
       Radium.activitiesController.set('content', activities);
     }
   }),

@@ -24,5 +24,17 @@ Radium.UserListItemView = Ember.View.extend({
       });
     }
     return false;
-  }
+  },
+
+  // The badge count of leads
+  userCount: Ember.View.extend({
+    tagName: 'span',
+    classNames: 'label label-important pull-right'.w(),
+    classNameBindings: ['isHigh:label-success'],
+    isHigh: function() {
+      return (this.getPath('parentView.user.prospects.length') > 5) ? 
+        true : false;
+    }.property('parentView.user.prospects').cacheable(),
+    template: Ember.Handlebars.compile('{{parentView.user.prospects.length}}')
+  })
 });
