@@ -5,7 +5,7 @@
       {{#view Radium.UserListItemView userBinding="this"}}
         <a href="#" {{action "viewUser"}}>
           <img src="/images/headshots/holman_normal.png" class="avatar">
-          <span>{{ user.abbrName }}</span>
+          <span>{{ user.abbrName }} <small>({{user.id}})</small></span>
           {{#if isSelected}}
             <i class="icon-ok pull-right"></i>
           {{/if}}

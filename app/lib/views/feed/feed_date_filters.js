@@ -35,7 +35,7 @@ Radium.DateFilterView = Ember.View.extend({
     value: null,
     change: function() {
       var date = this.$().val();
-      Radium.App.send('displaySpecificDate', date);
+      Radium.App.send('selectDate', date);
     }
   })
 });

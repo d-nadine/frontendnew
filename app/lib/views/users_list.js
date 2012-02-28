@@ -16,6 +16,8 @@ Radium.UserListItemView = Ember.View.extend({
     if (this.get('isSelected')) {
       this.setPath('parentView.selectedUser', null);
     } else {
+      // Hack. Need to let the adapter know which user is requesting a feed
+      // so the url `/users/:id/feed` can be loaded.
       Radium.store.adapter.set('selectedUserID', id);
       this.setPath('parentView.selectedUser', this.get('user'));
       Radium.App.send('loadFeed', {

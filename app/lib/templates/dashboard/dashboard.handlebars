@@ -26,30 +26,7 @@
     
     <div class="row">
       <div id="feed" class="span9">
-        {{#each Radium.activitiesController.selectedDateType}}
-          {{#view Radium.FeedDateGroupView 
-            tagName="section"
-            groupBinding="this" 
-            dateFilterBinding="Radium.activitiesController.dateFilter"
-            categoryFilterBinding="Radium.activitiesController.categoryFilter"
-            contentBinding="Radium.activitiesController.content"
-            activityTypesBinding="Radium.activitiesController.activityTypes"
-          }}
-            <div class="page-header">
-              <h2>{{group}}</h2>
-            </div>
-            
-            {{#if Radium.activitiesController.todos.length}}
-              {{#view Radium.TestFeedItemView 
-                filterType="todo" 
-                itemsBinding="groups"
-              }}
-                {{view Radium.FeedItemHeadlineView}}
-              {{/view}}
-            {{/if}}
-
-          {{/view}}
-        {{/each}}
+      
       </div>
     </div>
   </div>

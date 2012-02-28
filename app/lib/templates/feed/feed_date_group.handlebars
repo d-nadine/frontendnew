@@ -1,18 +1,26 @@
-  <!-- Item Block -->
-  <section>
-    <div class="page-header">
-      <h2>{{formatDate datetime}}</h2>
-    </div>
-    {{#if todos.length}}
-      {{#view Radium.FeedItemBlockView todosBinding="todos"}}
-      <!-- Item Headline -->
-      {{#view headlineView}}
-        <div class="alert alert-block">
-          <p>Your company finished <b>{{todos.length}} todos</b>.</p>
-        </div>
-      {{/view}}
-      <!-- Item Content -->
-        {{view Radium.FeedItemTodosView class="span9"}}
-      {{/view}}
-    {{/if}}
-  </section>
+{{#if Radium.activitiesController.selectedDateType}}
+  {{#each Radium.activitiesController.selectedDateType}}
+    {{#view Radium.FeedDateGroupView 
+      tagName="section"
+      groupBinding="this" 
+      dateFilterBinding="Radium.activitiesController.dateFilter"
+      categoryFilterBinding="Radium.activitiesController.categoryFilter"
+      contentBinding="Radium.activitiesController.content"
+      activityTypesBinding="Radium.activitiesController.activityTypes"
+    }}
+      <div class="page-header">
+        <h2>{{group}}</h2>
+      </div>
+      
+      {{#if Radium.activitiesController.todos.length}}
+        {{#view Radium.TestFeedItemView 
+          filterType="todo" 
+          itemsBinding="groups"
+        }}
+          {{view Radium.FeedItemHeadlineView}}
+        {{/view}}
+      {{/if}}
+
+    {{/view}}
+  {{/each}}
+{{/if}}

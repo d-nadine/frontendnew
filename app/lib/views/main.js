@@ -4,6 +4,7 @@ minispade.require('radium/templates/login');
 minispade.require('radium/templates/feed/feed_filter');
 minispade.require('radium/templates/feed/feed_item_headline');
 minispade.require('radium/templates/feed/feed_date_filters');
+minispade.require('radium/templates/feed/feed_date');
 minispade.require('radium/templates/feed/feed_date_group');
 minispade.require('radium/templates/feed/feed_item_todos');
 minispade.require('radium/templates/feed/feed_item_deals_pending');

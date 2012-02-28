@@ -139,6 +139,7 @@ window.RadiumAdapter = DS.Adapter.extend({
       ids.length,
       root
     ));
+    console.log(ids)
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
       plural = ["users", userID, "feed"].join("/");

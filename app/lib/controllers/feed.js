@@ -22,23 +22,15 @@ Radium.feedController = Ember.ArrayProxy.extend({
     return this.mapProperty('year').uniq();
   }.property('@each.updatedAt').cacheable(),
 
+  // 
   selectedDateType: function() {
     var selectedDateFilter = this.get('dateFilter');
+    // Test for a date string, and if so fetch that locally
     if (selectedDateFilter.match('-')) {
-      return this.get('selectedDay');
+      return false;
     } else {
       // Pluralize this here so Radium.FeedDateItemView can filter singularly
       return this.get(selectedDateFilter + 's');
     }
-  }.property('@each.updatedAt', 'dateFilter').cacheable(),
-  
-  displaySpecificDate: function(manager, context) {
-    var activity = Radium.store.filter(Radium.Activity, function(data) {
-      var testString = data.updated_at;
-      if (testString.match(/\d+-\d+-\d+/)[0] === context) return true;
-    });
-    Radium.activitiesController.set('content', activity);
-    Radium.activitiesController.set('dateFilter', context);
-    manager.goToState('specificDate');
-  }
+  }.property('@each.updatedAt', 'dateFilter').cacheable()
 });
