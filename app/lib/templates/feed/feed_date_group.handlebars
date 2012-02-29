@@ -2,37 +2,28 @@
 
   {{#if content.length}}
     {{#if selectedDateType}}
-      {{#each selectedDateType}}
-        {{#view Radium.FeedDateGroupView 
-          tagName="section"
-          groupBinding="this" 
-          dateFilterBinding="Radium.activitiesController.dateFilter"
-          categoryFilterBinding="Radium.activitiesController.categoryFilter"
-          contentBinding="Radium.activitiesController.content"
-          activityTypesBinding="Radium.activitiesController.activityTypes"
-        }}
-          <div class="page-header">
-            <h2>{{group}}</h2>
-          </div>
-          
-          <!-- {{#if Radium.activitiesController.todos.length}}
-            {{#view Radium.TestFeedItemView 
-              filterType="todo" 
-              itemsBinding="groups"
-            }}
-              {{view Radium.FeedItemHeadlineView}}
-            {{/view}}
-          {{/if}} -->
-          {{#each activityTypes}}
-            {{this}}
-            {{view Radium.FeedItemView 
-              itemTypeBinding="this"
-            }}
-          {{/each}}
 
-        {{/view}}
+
+      {{#each selectedDateType}}
+        <div class="page-header">
+          <h2>{{date}}</h2>
+        </div>
+        {{#if todos.length}}
+          {{#view Radium.TestFeedItemView type="todo" todosBinding="todos" idsBinding="todoIds"}}
+            <div class="alert">
+              There are {{todos.length}} todos.
+            </div>
+            {{#if nested}}
+              {{#each nested}}
+                {{description}}
+              {{/each}}
+            {{/if}}
+          {{/view}}
+        {{/if}}
       {{/each}}
+
     {{else}}
+      
       <div class="page-header">
         <h2>{{dateFilter}}</h2>
       </div>

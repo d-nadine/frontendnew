@@ -14,7 +14,7 @@ Radium.DashboardState = Radium.PageState.extend({
       });
 
       activities.addObserver('isLoaded', function() {
-        Radium.dashboardController.set('selectedUser', user);
+        // Radium.dashboardController.set('selectedUser', user);
         Radium.activitiesController.set('content', activities);
         manager.goToState('ready');
       });

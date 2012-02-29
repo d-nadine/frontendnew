@@ -17,6 +17,7 @@ Radium.DateFilterView = Ember.View.extend({
       classNameBindings: ['isSelected:active'],
       changeFilter: function(view, event, context) {
         event.preventDefault();
+        debugger;
         var filterType = this.getPath('content.type');
         this.setPath('parentView.parentView.dateFilter', filterType);
         Radium.App.goToState('load');
