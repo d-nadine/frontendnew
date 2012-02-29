@@ -10,7 +10,7 @@ Radium.PieChart = Ember.View.extend({
     },
     tooltip: {
       formatter: function() {
-        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+        return '<b>'+ this.point.name +'</b>: '+ Math.floor(this.percentage) +' %';
       }
     },
     plotOptions: {
@@ -20,7 +20,7 @@ Radium.PieChart = Ember.View.extend({
         dataLabels: {
           enabled: true,
           formatter: function() {
-            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+            return '<b>'+ this.point.name +'</b>: '+ Math.floor(this.percentage) +' %';
           }
         }
       }

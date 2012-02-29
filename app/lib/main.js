@@ -17,8 +17,6 @@ minispade.require('radium/fixtures/main');
 minispade.require('radium/core/routes');
 minispade.require('radium/states/main');
 
-Radium.Routes.start();
-
 // FIXME: Temp fix until the datepicker registering clicks can be solved.
 $('body').on('click', 'table.ui-datepicker-calendar', function(event) {
   return false;

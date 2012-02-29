@@ -45,6 +45,7 @@ minispade.require('radium/views/forms/autocomplete');
 // Feeds
 minispade.require('radium/views/feed/feed_filter');
 minispade.require('radium/views/feed/feed_date_filters');
+minispade.require('radium/views/feed/feed_item');
 minispade.require('radium/views/feed/feed_item_todos');
 minispade.require('radium/views/feed/feed_item_deals_pending');
 minispade.require('radium/views/feed/feed_item_headline');

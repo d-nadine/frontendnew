@@ -1,5 +1,5 @@
 Radium.PageState = Ember.ViewState.extend({
-  form: Ember.State.extend({
+  form: Ember.State.create({
     form: null,
     formType: 'Todo',
     enter: function() {

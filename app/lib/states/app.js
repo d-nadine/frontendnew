@@ -16,6 +16,7 @@
 
 Radium.App = Ember.StateManager.create({
   rootElement: '#main',
+  // During development set to true
   isLoggedIn: true,
   // Set to false when all the intial data has been loaded
   isFirstRun: true,

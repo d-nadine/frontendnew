@@ -4,6 +4,7 @@
     {{view Radium.ProfileView}}
 
     {{collection Radium.FeedFilterView 
+      controllerBinding="Radium.activitiesController"
       contentBinding="Radium.activitiesController.filterTypes"
       categoryFilterBinding="Radium.activitiesController.categoryFilter"
     }}
@@ -25,9 +26,7 @@
     {{view Radium.DateFilterView dateFilterBinding="Radium.activitiesController.dateFilter"}}
     
     <div class="row">
-      <div id="feed" class="span9">
-      
-      </div>
+      {{view Radium.FeedView id="feed" class="span9"}}
     </div>
   </div>
 </div>

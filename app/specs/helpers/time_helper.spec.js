@@ -21,10 +21,19 @@ describe("Handlebars Date Helper", function() {
     expect(fixture.find('h1').text()).toEqual('9:28 AM');
   });
 
-  it('converts regular date objects', function() {
+  it("converts regular date objects", function() {
     var time = Ember.DateTime.create().toFormattedString('%i:%M %p');
     view.set('myDate', new Date());
     Ember.run(function() {view.appendTo(fixture);});
     expect(fixture.find('h1').text()).toEqual(time);
-  })
+  });
+
+  it("parses ISO8601 strings", function() {
+    view = Ember.View.create({
+      myDate: '2012-02-21T19:22:54Z',
+      template: Ember.Handlebars.compile('<h1>{{time myDate}}</h1>')
+    });
+    Ember.run(function() {view.appendTo(fixture);});
+    expect(fixture.find('h1').text()).toEqual('11:22 AM')
+  });
 });

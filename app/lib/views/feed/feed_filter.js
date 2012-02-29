@@ -38,16 +38,16 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
       count: function() {
         var type = this.getPath('parentView.content.shortname'),
             plural = (type === 'everything' || type === 'pipeline') ? 'content' : type+'s',
-            activities = Radium.activitiesController.get(plural);
+            activities = this.getPath('parentView.controller.'+plural);
         return activities.get('length');
       }.property(
-        'Radium.activitiesController.todos',
-        'Radium.activitiesController.meetings',
-        'Radium.activitiesController.deals',
-        'Radium.activitiesController.messages',
-        'Radium.activitiesController.phonecalls',
-        'Radium.activitiesController.discussions',
-        'Radium.activitiesController.pipeline'
+        'parentView.controller.todos',
+        'parentView.controller.meetings',
+        'parentView.controller.deals',
+        'parentView.controller.messages',
+        'parentView.controller.phonecalls',
+        'parentView.controller.discussions',
+        'parentView.controller.pipeline'
       ).cacheable(),
       template: Ember.Handlebars.compile('{{count}}')
     })

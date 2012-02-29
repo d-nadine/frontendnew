@@ -113,6 +113,10 @@ describe("Radium#Activity", function() {
 
     });
 
+    it("gets the computed id of the nested reference", function() {
+      expect(activity.get('referenceID')).toEqual(11);
+    });
+
     it("loads an embedded user", function() {
       expect(activity.getPath('owner.user.id')).toEqual(77);
     });

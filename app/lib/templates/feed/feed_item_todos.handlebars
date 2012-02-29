@@ -1,26 +1,21 @@
-{{#each parentView.items}}
-  {{#with reference.todo}}
-    <div {{bindAttr class="isOverdue:overdue"}}>
-      <div class="span2">
-        <span class="timestamp">
-        {{#if isOverdue}}
-          OVERDUE
-        {{else}}
-          {{time updatedAt}}
-        {{/if}}
-        </span>
-      </div>
-      <div class="span6 content">
-        <p>
-          {{view Radium.Checkbox valueBinding="finished"}}
-          <span class="label notice">{{kind}}</span>
-          {{description}}
-    {{/with}}
-        (<a href="#">{{owner.user.abbrName}}</a>)
-      {{#if reference.todo.comments.length}}
-        <i class="icon-comment"></i>
+{{#each items}}
+  <div {{bindAttr class="isOverdue:overdue"}}>
+    <div class="span2">
+      <span class="timestamp">
+      {{#if isOverdue}}
+        OVERDUE
+      {{else}}
+        {{formatTime updatedAt}}
       {{/if}}
-      </p>
+      </span>
     </div>
+    <div class="span6 content">
+      <p>
+        {{view Radium.Checkbox valueBinding="finished"}}
+        <span class="label notice">{{kind}} {{id}}</span>
+        {{description}}
+      (<a href="#">{{owner.user.abbrName}}</a>)
+    </p>
   </div>
+</div>
 {{/each}}

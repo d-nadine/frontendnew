@@ -14,12 +14,12 @@ Radium.FormView = Ember.View.extend({
     });
 
     this.$().slideUp('fast', function() {
-      Radium.App.goToState('load');
+      Radium.App.goToState('ready');
     });
   },
   cancelForm: function() {
     this.$().slideUp('fast', function() {
-      Radium.App.goToState('load');
+      Radium.App.goToState('ready');
     });
   },
   submitButton: Ember.Button.extend({

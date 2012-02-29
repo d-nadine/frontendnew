@@ -1,18 +1,11 @@
 Radium.DashboardState = Radium.PageState.extend({
-  
-  initialState: 'ready',
-  
+    
   view: Radium.DashboardView,
-  
+
   isFormAddView: false,
 
-  loading: Ember.ViewState.create({
-    view: Radium.LoadingView
-  }),
-
-  ready: Ember.State.create({
-    enter: function(manager, transition) {
-      console.log('Ready');
+  start: Ember.State.create({
+    enter: function(manager) {
       var user = Radium.usersController.get('loggedInUser');
       Radium.store.adapter.set('selectedUserID', user.get('id'));
       var activities = Radium.store.find(Radium.Activity, {
@@ -23,36 +16,35 @@ Radium.DashboardState = Radium.PageState.extend({
       activities.addObserver('isLoaded', function() {
         Radium.dashboardController.set('selectedUser', user);
         Radium.activitiesController.set('content', activities);
-        manager.goToState('feed');
+        manager.goToState('ready');
       });
     }
   }),
 
-  feed: Ember.ViewState.create({
-    view: Ember.View.extend({
-      templateName: 'feed_date_group'
-    }),
+  ready: Ember.State.create({}),
+
+  feed: Ember.State.create({
     enter: function(manager) {
-      var view = this.get('view').create();
-      view.appendTo($('#feed'));
+      
     },
     exit: function() {
-      var view = this.get('view');
-      view.remove();
+      
     }
   }),
 
-  specificDate: Ember.ViewState.create({
-    view: Ember.View.extend({
-      templateName: 'feed_date'
-    }),
+  specificDate: Ember.State.create({
+    enter: function(manager) {
+      
+    },
     exit: function() {
-      Radium.activitiesController.set('content', Radium.store.findAll(Radium.Activity));
-    } 
+      Radium.selectedFeedDateController.set('content', []);
+    }
   }),
 
-  //Actions
-
+  /**
+    ACTIONS
+    ------------------------------------
+  */
   addResource: function(manager, context) {
     Radium.App.setPath('loggedIn.dashboard.form.formType', context);
     manager.goToState('form');
@@ -63,12 +55,25 @@ Radium.DashboardState = Radium.PageState.extend({
     manager.goToState('loading');
     activity.addObserver('isLoaded', function() {
       Radium.activitiesController.set('content', activity);
-      manager.goToState('feed');
+      manager.goToState('ready');
     });
   },
 
   selectDate: function(manager, context) {
+    var activity = Radium.Activity.filter(function(data) {
+      var date = data.get('updated_at').replace(/T(.*)/g, '');
+      if (date === context) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     Radium.activitiesController.set('dateFilter', context);
+    Radium.selectedFeedDateController.set('content', activity);
+    var ids = Radium.selectedFeedDateController.get('todos');
+    var todos = Radium.store.findMany(Radium.Todo, ids);
+
     manager.goToState('specificDate');
+
   }
 });

@@ -11,7 +11,6 @@ window.RadiumAdapter = DS.Adapter.extend({
     var data = get(model, 'data');
     var url = (type.url) ? type.url : this.pluralize(root);
     var success = function(json) {
-      console.log('Woot', json);
       store.didCreateRecord(model, json);
     };
 
@@ -134,12 +133,11 @@ window.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type), 
         plural = this.pluralize(root),
         userID = this.get('selectedUserID');
-    console.log('user %@ is requesting %@ %@ records'.fmt(
+    console.log('user %@ requested %@ %@ records'.fmt(
       userID,
       ids.length,
       root
     ));
-    console.log(ids)
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
       plural = ["users", userID, "feed"].join("/");
@@ -150,7 +148,6 @@ window.RadiumAdapter = DS.Adapter.extend({
       this.findRecursively(store, type, ids, plural);
     // Otherwise grab the first page of results and carry on.
     } else {
-      console.log('not recursive');
       this.ajax("/" + plural, "GET", {
         data: { ids: ids },
         success: function(json) {
@@ -158,7 +155,6 @@ window.RadiumAdapter = DS.Adapter.extend({
           json.forEach(function(item) {
             arr.push(item.id);
           });
-          console.log("ID's loaded: ", arr);
           store.loadMany(type, ids, json);
         }
       });

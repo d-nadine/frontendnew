@@ -23,6 +23,10 @@ Radium.Activity = Radium.Core.extend({
   owner: DS.hasOne('Radium.Owner', {embedded: true}),
   reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
   comments: DS.hasMany('Radium.Comment'),
+  referenceID: function() {
+    var type = this.get('type');
+    return this.getPath('data.reference.'+type+'.id');
+  }.property('data', 'type').cacheable(),
   type: function() {
     if (this.getPath('data.reference.todo')) return "todo";
     if (this.getPath('data.reference.deal')) return "deal";

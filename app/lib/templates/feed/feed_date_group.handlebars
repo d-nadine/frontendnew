@@ -1,26 +1,59 @@
-{{#if Radium.activitiesController.selectedDateType}}
-  {{#each Radium.activitiesController.selectedDateType}}
-    {{#view Radium.FeedDateGroupView 
-      tagName="section"
-      groupBinding="this" 
-      dateFilterBinding="Radium.activitiesController.dateFilter"
-      categoryFilterBinding="Radium.activitiesController.categoryFilter"
-      contentBinding="Radium.activitiesController.content"
-      activityTypesBinding="Radium.activitiesController.activityTypes"
-    }}
-      <div class="page-header">
-        <h2>{{group}}</h2>
-      </div>
-      
-      {{#if Radium.activitiesController.todos.length}}
-        {{#view Radium.TestFeedItemView 
-          filterType="todo" 
-          itemsBinding="groups"
-        }}
-          {{view Radium.FeedItemHeadlineView}}
-        {{/view}}
-      {{/if}}
+{{#with Radium.activitiesController}}}
 
-    {{/view}}
-  {{/each}}
-{{/if}}
+  {{#if content.length}}
+    {{#if selectedDateType}}
+      {{#each selectedDateType}}
+        {{#view Radium.FeedDateGroupView 
+          tagName="section"
+          groupBinding="this" 
+          dateFilterBinding="Radium.activitiesController.dateFilter"
+          categoryFilterBinding="Radium.activitiesController.categoryFilter"
+          contentBinding="Radium.activitiesController.content"
+          activityTypesBinding="Radium.activitiesController.activityTypes"
+        }}
+          <div class="page-header">
+            <h2>{{group}}</h2>
+          </div>
+          
+          <!-- {{#if Radium.activitiesController.todos.length}}
+            {{#view Radium.TestFeedItemView 
+              filterType="todo" 
+              itemsBinding="groups"
+            }}
+              {{view Radium.FeedItemHeadlineView}}
+            {{/view}}
+          {{/if}} -->
+          {{#each activityTypes}}
+            {{this}}
+            {{view Radium.FeedItemView 
+              itemTypeBinding="this"
+            }}
+          {{/each}}
+
+        {{/view}}
+      {{/each}}
+    {{else}}
+      <div class="page-header">
+        <h2>{{dateFilter}}</h2>
+      </div>
+      {{#with Radium.selectedFeedDateController}}
+        {{#if content.length}}
+          {{#each activityTypes}}
+            {{view Radium.FeedItemView 
+              itemTypeBinding="this"
+            }}
+          {{/each}}
+        {{else}}
+          <div class="alert alert-error">
+            No activities recorded on this date...
+          </div>
+        {{/if}}
+      {{/with}}
+    {{/if}}
+
+
+  {{else}}
+    <h2>Loading feed...</h2>
+  {{/if}}
+
+{{/with}}
