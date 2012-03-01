@@ -5,7 +5,9 @@ Radium.DashboardState = Radium.PageState.extend({
   isFormAddView: false,
 
   start: Ember.State.create({
-    enter: function(manager) {
+    firstRun: true,
+    loadActivities: function(manager) {
+      var self = this;
       var user = Radium.usersController.get('loggedInUser');
       Radium.store.adapter.set('selectedUserID', user.get('id'));
       var activities = Radium.store.find(Radium.Activity, {
@@ -14,10 +16,20 @@ Radium.DashboardState = Radium.PageState.extend({
       });
 
       activities.addObserver('isLoaded', function() {
+        console.log('activities loaded');
         // Radium.dashboardController.set('selectedUser', user);
         Radium.activitiesController.set('content', activities);
         manager.goToState('ready');
+        self.set('firstRun', false);
       });
+    },
+    enter: function(manager) {
+      var firstRun = this.get('firstRun');
+      if (firstRun) {
+        this.loadActivities(manager);
+      } else {
+        manager.goToState('ready');
+      }
     }
   }),
 

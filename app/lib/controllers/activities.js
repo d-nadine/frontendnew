@@ -73,7 +73,7 @@ Radium.activitiesController = Radium.feedController.create({
   // }.property('@each.type').cacheable(),
 
   // Cache all the different activity types
-  // activityTypes: function() {
-  //   return this.mapProperty('type').uniq();
-  // }.property('@each.type').cacheable()
+  activityTypes: function() {
+    return this.mapProperty('type').uniq();
+  }.property('@each.type').cacheable()
 });

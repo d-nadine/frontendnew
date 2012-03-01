@@ -3,16 +3,25 @@
   {{#if content.length}}
     {{#if selectedDateType}}
       {{#each selectedDateType}}
-        <div class="page-header">
-          <h2>{{date}}</h2>
-        </div>
-        {{#if todos.length}}
-          {{#view Radium.TestFeedItemView type="todo" todosBinding="todos" idsBinding="todoIds"}}
-            <div class="alert">
+        {{#view Radium.FeedDateGroupView 
+          contentBinding="this"
+          activityTypesBinding="Radium.activitiesController.activityTypes"
+          categoryFilterBinding="Radium.activitiesController.categoryFilter"
+        }}
+          <div class="page-header">
+            <h2>{{content.date}}</h2>
+          </div>
+          {{#if content.todos.length}}
+            {{#view Radium.FeedItemHeadlineView 
+              filterType="todo" 
+              model="Todo"
+              todosBinding="content.todos" 
+              idsBinding="content.todoIds"
+            }}
               There are {{todos.length}} todos.
-            </div>
-          {{/view}}
-        {{/if}}
+            {{/view}}
+          {{/if}}
+        {{/view}}
       {{/each}}
 
     {{else}}

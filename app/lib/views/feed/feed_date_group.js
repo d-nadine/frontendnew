@@ -4,12 +4,17 @@ Radium.FeedDateGroupView = Ember.View.extend({
     var selectedFilter = this.get('categoryFilter'),
         activityTypes = this.get('activityTypes'),
         dateFilter = this.get('dateFilter');
+
     if (selectedFilter === 'everything' || activityTypes.indexOf(selectedFilter) > -1) {
       return true;
     } else {
       return false;
     }
-  }.property('categoryFilter', 'activityTypes', 'dateFilter').cacheable()
+  }.property('categoryFilter', 'activityTypes', 'dateFilter').cacheable(),
+
+  tagger: function() {
+    console.log(this.getEach('tags'));
+  }.property('@each.tags').cacheable()
 });
 
 // Each date group's content
@@ -30,16 +35,17 @@ Radium.TestFeedItemView = Ember.View.extend({
   nestedView: null,
   click: function() {
     var type = this.get('type').toString();
+    var typeCap = capitalize(type);
     var ids = this.get('ids');
     console.log('ids', ids);
-    var deets = Radium.store.findMany(Radium.Todo, ids);
+    var deets = Radium.store.findMany(Radium[typeCap], ids);
     if (this.get('isDetailsVisible') && this.get('nestedView')) {
       var test = this.get('nestedView');
       test.remove();
       this.set('nestedView', null);
       this.set('isDetailsVisible', false);
     } else {
-      var view = Radium.FeedItemTodosView.create();
+      var view = Radium['FeedItem' + typeCap + 'sView'].create();
       this.set('nestedView', view);
       this.set('isDetailsVisible', true);
       view.set('items', deets);
