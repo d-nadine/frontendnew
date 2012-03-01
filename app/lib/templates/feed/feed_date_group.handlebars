@@ -2,8 +2,6 @@
 
   {{#if content.length}}
     {{#if selectedDateType}}
-
-
       {{#each selectedDateType}}
         <div class="page-header">
           <h2>{{date}}</h2>
@@ -13,11 +11,6 @@
             <div class="alert">
               There are {{todos.length}} todos.
             </div>
-            {{#if nested}}
-              {{#each nested}}
-                {{description}}
-              {{/each}}
-            {{/if}}
           {{/view}}
         {{/if}}
       {{/each}}

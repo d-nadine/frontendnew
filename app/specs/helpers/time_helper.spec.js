@@ -8,7 +8,7 @@ describe("Handlebars Date Helper", function() {
         year: '2012', month: '02', day: '03',
         hour: '09', minute: '28'
       }),
-      template: Ember.Handlebars.compile('<h1>{{time myDate}}</h1>')
+      template: Ember.Handlebars.compile('<h1>{{formatTime myDate}}</h1>')
     });
   });
 
@@ -31,9 +31,17 @@ describe("Handlebars Date Helper", function() {
   it("parses ISO8601 strings", function() {
     view = Ember.View.create({
       myDate: '2012-02-21T19:22:54Z',
-      template: Ember.Handlebars.compile('<h1>{{time myDate}}</h1>')
+      template: Ember.Handlebars.compile('<h1>{{formatTime myDate}}</h1>')
     });
     Ember.run(function() {view.appendTo(fixture);});
     expect(fixture.find('h1').text()).toEqual('11:22 AM')
+  });
+
+  it("it updates when observers fire", function() {
+    var time = Ember.DateTime.create().toFormattedString('%i:%M %p');
+    Ember.run(function() {view.appendTo(fixture);});
+    expect(fixture.find('h1').text()).toEqual('9:28 AM');
+    Ember.run(function() {view.set('myDate', new Date());});
+    expect(fixture.find('h1').text()).toEqual(time);
   });
 });
