@@ -71,8 +71,10 @@ describe("Radium#Activity", function() {
   });
 
   describe("when processing computed values", function() {
+    var activity;
     beforeEach(function() {
       store.load(Radium.Activity, ACTIVITY);
+      activity = store.find(Radium.Activity, 53);
     });
 
     afterEach(function() {
@@ -80,8 +82,11 @@ describe("Radium#Activity", function() {
     });
 
     it("computes the activity type", function() {
-      var activity = store.find(Radium.Activity, 53);
       expect(activity.get('type')).toBe('todo');
+    });
+
+    it("computes the tags into an description", function() {
+      expect(activity.get('action')).toEqual('assigned');
     });
   });
 

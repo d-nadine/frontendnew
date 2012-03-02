@@ -12,14 +12,54 @@
             <h2>{{content.date}}</h2>
           </div>
           {{#if content.todos.length}}
-            {{#view Radium.FeedItemHeadlineView 
+            {{#view Radium.FeedClusterView 
+              contentBinding="content"
               filterType="todo" 
               model="Todo"
               todosBinding="content.todos" 
               idsBinding="content.todoIds"
             }}
-              There are {{todos.length}} todos.
+              {{#view Radium.FeedItemHeadlineView 
+                todosBinding="parentView.content.createdTodos"
+              }}
+                <b>{{todos.length}} todos</b> created.
+              {{/view}}
+              <hr>
+              {{view Radium.FeedItemTodosView itemsBinding="parentView.content.createdTodos.reference.todo"}}
             {{/view}}
+
+            {{#view Radium.FeedClusterView 
+              contentBinding="content"
+              filterType="todo" 
+              model="Todo"
+              todosBinding="content.todos" 
+              idsBinding="content.todoIds"
+            }}
+              {{#view Radium.FeedItemHeadlineView 
+                todosBinding="parentView.content.assignedTodos"
+              }}
+                <b>{{todos.length}} todos</b> assigned to you.
+              {{/view}}
+              <hr>
+              {{view Radium.FeedItemTodosView itemsBinding="parentView.content.assignedTodos.reference.todo"}}
+            {{/view}}
+
+            {{#view Radium.FeedClusterView 
+              contentBinding="content"
+              filterType="todo" 
+              model="Todo"
+              todosBinding="content.todos" 
+              idsBinding="content.todoIds"
+            }}
+              {{#view Radium.FeedItemHeadlineView 
+                todosBinding="parentView.content.finishedTodos"
+              }}
+                You finished <b>{{todos.length}} todos</b>.
+              {{/view}}
+              <hr>
+              {{view Radium.FeedItemTodosView itemsBinding="parentView.content.finishedTodos.reference.todo"}}
+            {{/view}}
+
           {{/if}}
         {{/view}}
       {{/each}}

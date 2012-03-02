@@ -27,6 +27,9 @@ Radium.Activity = Radium.Core.extend({
     var type = this.get('type');
     return this.getPath('data.reference.'+type+'.id');
   }.property('data', 'type').cacheable(),
+  action: function() {
+    return this.get('tags').objectAt(1);
+  }.property('tags').cacheable(),
   type: function() {
     if (this.getPath('data.reference.todo')) return "todo";
     if (this.getPath('data.reference.deal')) return "deal";

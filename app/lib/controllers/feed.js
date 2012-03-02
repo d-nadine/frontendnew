@@ -52,6 +52,15 @@ Radium.feedController = Ember.ArrayProxy.extend({
         todoIds: function() {
           return this.get('todos').mapProperty('referenceID').uniq();
         }.property('todos').cacheable(),
+        createdTodos: function() {
+          return this.get('todos').filterProperty('action', 'created');
+        }.property('todos').cacheable(),
+        assignedTodos: function() {
+          return this.get('todos').filterProperty('action', 'assigned');
+        }.property('todos').cacheable(),
+        finishedTodos: function() {
+          return this.get('todos').filterProperty('action', 'finished');
+        }.property('todos').cacheable(),
         deals: Ember.A([]),
         meetings: Ember.A([]),
         campaigns: Ember.A([]),

@@ -6,6 +6,7 @@ minispade.require('radium/templates/feed/feed_item_headline');
 minispade.require('radium/templates/feed/feed_date_filters');
 minispade.require('radium/templates/feed/feed_date');
 minispade.require('radium/templates/feed/feed_date_group');
+minispade.require('radium/templates/feed/feed_cluster');
 minispade.require('radium/templates/feed/feed_item_todos');
 minispade.require('radium/templates/feed/feed_item_deals_pending');
 
@@ -52,6 +53,7 @@ minispade.require('radium/views/feed/feed_item_headline');
 minispade.require('radium/views/feed/feed_deal_headline');
 minispade.require('radium/views/feed/feed_item_block');
 minispade.require('radium/views/feed/feed_date_group');
+minispade.require('radium/views/feed/feed_cluster');
 minispade.require('radium/views/feed/feed');
 
 // Global
