@@ -1,1 +1,17 @@
-Your company finished {{parentView.items.length}} todos.
+{{#with parentView.content}}
+  {{#if createdTodos.length}}
+    {{createdTodos.length}} todos were created. 
+  {{/if}}
+  {{#if assignedTodos.length}}
+    {{assignedTodos.length}} todos were assigned. 
+  {{/if}}
+  {{#if finishedTodos.length}}
+    {{createdTodos.length}} todos were finished.
+  {{/if}}
+{{/with}}
+
+{{#if isDetailsVisible}}
+<a href="#" class="close">-</a>
+{{else}}
+<a href="#" class="close">+</a>
+{{/if}}

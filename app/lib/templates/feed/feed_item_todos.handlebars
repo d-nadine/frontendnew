@@ -1,24 +1,30 @@
-{{#each items}}
-  <div {{bindAttr class="isOverdue:overdue"}}>
-    <div class="span2">
-      <span class="timestamp">
-      {{#if isOverdue}}
-        OVERDUE
-      {{else}}
-        {{formatTime updatedAt}}
-      {{/if}}
-      </span>
-    </div>
-    <div class="span6 content">
-      <p>
-        {{view Radium.Checkbox valueBinding="finished"}}
-        <span class="label notice">{{kind}}</span>
-        {{description}}
-      (<a href="#">{{user.abbrName}}</a>)
-      
-        <!-- <i class="icon-comment"></i> -->
+{{#if items.length}}
 
-    </p>
+  {{#each items}}
+    <div {{bindAttr class="isOverdue:overdue"}}>
+      <div class="span2">
+        <span class="timestamp">
+        {{#if isOverdue}}
+          OVERDUE
+        {{else}}
+          {{formatTime updatedAt}}
+        {{/if}}
+        </span>
+      </div>
+      <div class="span6 content">
+        <p>
+          {{view Radium.Checkbox valueBinding="finished"}}
+          <span class="label notice">{{kind}}</span>
+          {{description}}
+        (<a href="#">{{user.abbrName}}</a>)
+        
+          <!-- <i class="icon-comment"></i> -->
+
+      </p>
+    </div>
   </div>
-</div>
-{{/each}}
+  {{/each}}
+
+{{else}}
+  No TODOS for you!
+{{/if}}
