@@ -24,7 +24,7 @@ describe("Radium#User", function() {
   describe("creating a new user", function() {
     var store;
     beforeEach(function() {
-      store = DS.Store.create({revision: 1});
+      store = DS.Store.create({revision: 2});
       store.load(Radium.User, {
         "id": 1,
         "email": "example@example.com",
@@ -52,7 +52,7 @@ describe("Radium#User", function() {
   describe("updating a user", function() {
     var store;
     beforeEach(function() {
-      store = DS.Store.create({revision: 1});
+      store = DS.Store.create({revision: 2});
       store.load(Radium.User, {
         "id": 1,
         "email": "example@example.com",
@@ -77,7 +77,7 @@ describe("Radium#User", function() {
     
     beforeEach(function() {
       adapter = DS.RESTAdapter.create();
-      store = DS.Store.create({revision: 1,adapter: adapter});
+      store = DS.Store.create({revision: 2,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });

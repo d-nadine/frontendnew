@@ -7,7 +7,7 @@ Radium.User = Radium.Person.extend({
   }),
   email: DS.attr('string'),
   phone: DS.attr('string'),
-  account: DS.attr('integer'),
+  account: DS.attr('number'),
   contacts: DS.hasMany('Radium.Contact'),
   following: DS.hasMany('Radium.User'),
   leads: function() {

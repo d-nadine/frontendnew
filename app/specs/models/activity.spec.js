@@ -54,7 +54,7 @@ describe("Radium#Activity", function() {
 
   beforeEach(function() {
     adapter = RadiumAdapter.create();
-    store = DS.Store.create({revision: 1,adapter: adapter});
+    store = DS.Store.create({revision: 2,adapter: adapter});
     server = sinon.fakeServer.create();
     spy = sinon.spy(jQuery, 'ajax');
   });
@@ -94,15 +94,23 @@ describe("Radium#Activity", function() {
     var activity;
 
     beforeEach(function() {
+      Radium.Activity.reopenClass({
+        test: DS.hasOne('Radium.Todo', {embedded: true})
+      });
       store.load(Radium.Activity, {
         id: 53,
         owner: {
           id: 'R31241',
           user: {
             id: 77,
+            name: 'Bunk',
             deals: [65, 11],
             contacts: [33, 44]
           }
+        },
+        test: {
+          id: 131,
+          description: 'bar'
         },
         reference: {
           id: 'R31341',
@@ -123,7 +131,17 @@ describe("Radium#Activity", function() {
     });
 
     it("loads an embedded user", function() {
+      var user = store.find(Radium.User, 77);
       expect(activity.getPath('owner.user.id')).toEqual(77);
+      expect(activity.getPath('owner.user.id')).toEqual(user.get('id'));
+      expect(activity.getPath('owner.user.name')).toEqual(user.get('name'));
+    });
+
+    it("loads an embedded todo", function() {
+      var todos = store.find(Radium.Todo, 11);
+      var todo = store.find(Radium.Todo, 131);
+      console.log(activity.get('test'));
+      expect(todo.get('id')).toEqual(11);
     });
 
     it("loads an embedded user's deals", function() {

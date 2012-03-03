@@ -1,6 +1,6 @@
 window.Radium = Ember.Application.create({
   store: DS.Store.create({
-    revision: 1,
+    revision: 2,
     adapter: RadiumAdapter.create({bulkCommit: false})
   })
 });

@@ -294,8 +294,8 @@ window.RadiumAdapter = DS.Adapter.extend({
   normalize: function(data) {
     var normalized = data.map(function(item) {
       if (item.hasOwnProperty('owner') && item.hasOwnProperty('reference')) {
-        item.owner.id = "R"+ Math.ceil(Math.random() * 10000);
-        item.reference.id = "R"+ Math.ceil(Math.random() * 10000);
+        item.owner.guid = Math.ceil(Math.random() * 10000);
+        item.reference.guid = Math.ceil(Math.random() * 10000);
       }
       return item;
     });

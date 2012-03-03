@@ -19,7 +19,7 @@ describe("Radium#Todo", function() {
 
     it("marks the todo as overdue", function() {
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({revision: 1,adapter: adapter});
+      store = DS.Store.create({revision: 2,adapter: adapter});
 
       store.loadMany(Radium.Todo, [{
           id: 1,
@@ -62,7 +62,7 @@ describe("Radium#Todo", function() {
 
     beforeEach(function() {
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({revision: 1,adapter: adapter});
+      store = DS.Store.create({revision: 2,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });

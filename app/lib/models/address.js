@@ -3,6 +3,6 @@ Radium.Address = Radium.Core.extend({
   street: DS.attr('string'),
   state: DS.attr('string'),
   country: DS.attr('string'),
-  zip_code: DS.attr('integer'),
+  zip_code: DS.attr('number'),
   time_zone: DS.attr('string')
 });

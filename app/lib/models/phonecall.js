@@ -1,6 +1,6 @@
 Radium.PhoneCall = Radium.Core.extend({
   outcome: DS.attr('string'),
-  duration: DS.attr('integer'),
+  duration: DS.attr('number'),
   kind: DS.attr('string'),
   dialed_at: DS.attr('date'),
   to: DS.attr('object'),

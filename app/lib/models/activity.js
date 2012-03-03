@@ -1,9 +1,11 @@
 Radium.Owner = DS.Model.extend({
+  primaryKey: 'guid',
   user: DS.hasOne('Radium.User', {embedded: true}),
   contact: DS.hasOne('Radium.Contact', {embedded: true})
 });
 
 Radium.ActivityType = DS.Model.extend({
+  primaryKey: 'guid',
   todo: DS.hasOne('Radium.Todo', {embedded: true}),
   deal: DS.hasOne('Radium.Deal', {embedded: true}),
   message: DS.hasOne('Radium.Message', {embedded: true}),
@@ -20,8 +22,8 @@ Radium.ActivityType = DS.Model.extend({
 Radium.Activity = Radium.Core.extend({
   tags: DS.attr('array'),
   timestamp: DS.attr('date'),
-  owner: DS.hasOne('Radium.Owner', {embedded: true}),
-  reference: DS.hasOne('Radium.ActivityType', {embedded: true}),
+  owner: DS.hasOne(Radium.Owner, {embedded: true}),
+  reference: DS.hasOne(Radium.ActivityType, {embedded: true}),
   comments: DS.hasMany('Radium.Comment'),
   referenceID: function() {
     var type = this.get('type');
