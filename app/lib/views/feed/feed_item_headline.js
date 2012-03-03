@@ -7,16 +7,18 @@ Radium.FeedItemHeadlineView = Ember.View.extend({
   isDetailsVisible: false,
   click: function() {
     var type = this.getPath('parentView.model');
-    console.log('show?', this.get('isDetailsVisible'));
+
     if (this.get('isDetailsVisible')) {
       this.getPath('parentView.childViews').popObject();
     } else {
-      var view = Radium['FeedItem' + type + 'sView'].create();
+      var ids = this.getPath('parentView.ids'),
+          items = Radium.store.findMany(Radium[type], ids),
+          view = Radium['FeedItem' + type + 'sView'].create();
+      this.setPath('parentView.items', items);
       this.getPath('parentView.childViews').pushObject(view);
     }
   },
   childrenAdded: function() {
-    console.log(this.getPath('parentView.childViews.length'))
     if (this.getPath('parentView.childViews.length') === 1) {
       this.set('isDetailsVisible', false);
     } else {

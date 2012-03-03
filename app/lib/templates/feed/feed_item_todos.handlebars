@@ -1,5 +1,5 @@
-{{#if items.length}}
-
+{{#if parentView.items.length}}
+  {{#with parentView}}
   {{#each items}}
     <div {{bindAttr class="isOverdue:overdue"}}>
       <div class="span2">
@@ -24,7 +24,8 @@
     </div>
   </div>
   {{/each}}
+  {{/with}}
 
 {{else}}
-  No TODOS for you!
+  <h4 style="text-align:center;"><span class="label label-important">Error:</span> No todos found</h4>
 {{/if}}

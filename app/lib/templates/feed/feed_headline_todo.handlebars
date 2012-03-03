@@ -1,17 +1,17 @@
 {{#with parentView.content}}
   {{#if createdTodos.length}}
-    {{createdTodos.length}} todos were created. 
+    <strong>{{createdTodos.length}} todos</strong> were created. 
   {{/if}}
   {{#if assignedTodos.length}}
-    {{assignedTodos.length}} todos were assigned. 
+    <strong>{{assignedTodos.length}} todos</strong> were assigned. 
   {{/if}}
   {{#if finishedTodos.length}}
-    {{createdTodos.length}} todos were finished.
+    <strong>{{createdTodos.length}} todos</strong> were finished.
   {{/if}}
 {{/with}}
 
 {{#if isDetailsVisible}}
-<a href="#" class="close">-</a>
+<a class="close">-</a>
 {{else}}
-<a href="#" class="close">+</a>
+<a class="close">+</a>
 {{/if}}

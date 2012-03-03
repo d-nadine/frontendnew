@@ -63,7 +63,7 @@ Radium.DashboardState = Radium.PageState.extend({
   },
 
   loadFeed: function(manager, context) {
-    console.log('loadme!');
+    Radium.activitiesController.set('content', []);
     var activity = Radium.store.find(Radium.Activity, context);
     manager.goToState('loading');
     activity.addObserver('isLoaded', function() {
