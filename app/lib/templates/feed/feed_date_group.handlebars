@@ -20,6 +20,18 @@
               idsBinding="content.todoIds"
             }}
           {{/if}}
+          {{#if content.contacts.length}}
+              There are {{content.contacts.length}} contacts.
+          {{/if}}
+          {{#if content.deals.length}}
+            There are {{content.deals.length}} deals.
+          {{/if}}
+          {{#if content.meetings.length}}
+            There are {{content.meetings.length}} meetings
+          {{/if}}
+          {{#if content.calllists.length}}
+            There are {{content.calllists.length}} call lists.
+          {{/if}}
         {{/view}}
       {{/each}}
 

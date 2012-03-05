@@ -40,6 +40,7 @@ Radium.Activity = Radium.Core.extend({
     if (this.getPath('data.reference.message')) return "message";
     if (this.getPath('data.reference.call_list')) return "calllist";
     if (this.getPath('data.reference.announcement')) return "announcement";
+    if (this.getPath('data.reference.contact')) return "contact";
   }.property('data').cacheable()
   
 });

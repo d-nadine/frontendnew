@@ -63,14 +63,14 @@ Radium.App = Ember.StateManager.create({
     manager.goToState('authenticate');
 
     var account = Radium.store.find(Radium.Account, ACCOUNT);
-
+    
     var timer = setTimeout(function() {
       manager.goToState('error');
-    }, 4000);
+    }, 5000);
 
     account.addObserver('isLoaded', function() {
       if (this.get('isLoaded')) {
-        timer.clearInterval();
+        clearTimeout(timer);
         manager.set('isFirstRun', false);
         manager.set('isLoggedIn', true);
         manager.goToState('loggedIn');

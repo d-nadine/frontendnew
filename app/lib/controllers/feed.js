@@ -49,7 +49,11 @@ Radium.feedController = Ember.ArrayProxy.extend({
         datetime: item.get('date'),
         type: type,
         todos: Ember.A([]),
+        todosUpdated: function() {
+          console.log('new todos!');
+        }.observes('todos'),
         todoIds: function() {
+          console.log(this.get('todos').mapProperty('referenceID').uniq());
           return this.get('todos').mapProperty('referenceID').uniq();
         }.property('todos').cacheable(),
         createdTodos: function() {
@@ -64,11 +68,13 @@ Radium.feedController = Ember.ArrayProxy.extend({
         deals: Ember.A([]),
         meetings: Ember.A([]),
         campaigns: Ember.A([]),
-        calls: Ember.A([])
+        calllists: Ember.A([]),
+        contacts: Ember.A([])
       });
       dayGroup.get(activityType).pushObject(item);
       return dayGroup;
     };
+    console.log('chchchcage!');
         
     // Goes through only newly added array items
     newActivities.forEach(function(item) {
