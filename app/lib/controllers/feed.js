@@ -2,6 +2,7 @@ Radium.feedController = Ember.ArrayProxy.extend({
   selectedUser: null,
   selectedDate: 'day',
   dateFilter: 'day',
+  categoryFilter: 'everything',
   dataCache: Ember.A([]),
   // days: function() {
   //   return this.mapProperty('day').uniq();
@@ -49,11 +50,7 @@ Radium.feedController = Ember.ArrayProxy.extend({
         datetime: item.get('date'),
         type: type,
         todos: Ember.A([]),
-        todosUpdated: function() {
-          console.log('new todos!');
-        }.observes('todos'),
         todoIds: function() {
-          console.log(this.get('todos').mapProperty('referenceID').uniq());
           return this.get('todos').mapProperty('referenceID').uniq();
         }.property('todos').cacheable(),
         createdTodos: function() {
@@ -74,7 +71,6 @@ Radium.feedController = Ember.ArrayProxy.extend({
       dayGroup.get(activityType).pushObject(item);
       return dayGroup;
     };
-    console.log('chchchcage!');
         
     // Goes through only newly added array items
     newActivities.forEach(function(item) {

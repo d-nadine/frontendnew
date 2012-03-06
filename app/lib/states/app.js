@@ -22,11 +22,7 @@ Radium.App = Ember.StateManager.create({
   isFirstRun: true,
   loggedOut: Radium.LoggedOutState,
   
-  start: Ember.State.create({
-    enter: function() {
-      console.log('Booting app');
-    }
-  }),
+  start: Ember.State.create(),
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView
@@ -46,8 +42,8 @@ Radium.App = Ember.StateManager.create({
   loadSection: function(manager, context) {
     if (manager.get('isLoggedIn') && manager.get('isFirstRun') == false) {
       // If this is the first visit in the session, grab some resources first
-      manager.goToState(context);
       Radium.appController.set('currentSection', context);
+      manager.goToState(context);
     } else if (manager.get('isLoggedIn')) {
       if (this.get('isFirstRun')) {
         manager.send('authenticateUser', context);

@@ -1,26 +1,48 @@
-Radium.DashboardState = Radium.PageState.extend({
+Radium.DashboardState = Ember.ViewState.extend({
     
   view: Radium.DashboardView,
 
   isFormAddView: false,
 
+  form: Ember.State.create({
+    form: null,
+    formType: 'Todo',
+    enter: function() {
+      var type = this.get('formType');
+      var form = this.get('form') || Radium[type+'FormView'].create();
+      form.appendTo('#form-container');
+      this.set('form', form);
+      this.setPath('parentState.isFormAddView', true);
+    },
+    exit: function() {
+      this.get('form').destroy();
+      this.set('form', null);
+      this.setPath('parentState.isFormAddView', false);
+    }
+  }),
+
   start: Ember.State.create({
     firstRun: true,
     loadActivities: function(manager) {
-      var self = this;
-      var user = Radium.usersController.get('loggedInUser');
-      Radium.store.adapter.set('selectedUserID', user.get('id'));
-      var activities = Radium.store.find(Radium.Activity, {
-        type: 'user',
-        id: user.get('id')
-      });
+      // DISABLE FOR NOW UNTIL NEW FEEDS FEED IS READY
+      // var self = this;
+      // var user = Radium.usersController.get('loggedInUser');
+      // Radium.store.adapter.set('selectedUserID', user.get('id'));
+      // var activities = Radium.store.find(Radium.Activity, {
+      //   type: 'user',
+      //   id: user.get('id')
+      // });
 
-      activities.addObserver('isLoaded', function() {
-        console.log('activities loaded');
-        // Radium.dashboardController.set('selectedUser', user);
-        Radium.activitiesController.set('content', activities);
+      // activities.addObserver('isLoaded', function() {
+      //   console.log('activities loaded');
+      //   // Radium.dashboardController.set('selectedUser', user);
+      //   // Radium.activitiesController.set('content', activities);
+      //   Radium.selectedUserFeedController.set('selectedUser', user);
+      //   manager.goToState('ready');
+      //   self.set('firstRun', false);
+      // });
+      Ember.run.next(function() {
         manager.goToState('ready');
-        self.set('firstRun', false);
       });
     },
     enter: function(manager) {
@@ -62,12 +84,19 @@ Radium.DashboardState = Radium.PageState.extend({
     manager.goToState('form');
   },
 
+  closeForm: function(manager) {
+    manager.goToState('ready');
+  },
+
   loadFeed: function(manager, context) {
-    Radium.activitiesController.set('content', []);
-    var activity = Radium.store.find(Radium.Activity, context);
+    // Hack. Need to let the adapter know which user is requesting a feed
+    // so the url `/users/:id/feed` can be loaded.
+    Radium.store.adapter.set('selectedUserID', context.data.id);
+    var activity = Radium.store.find(Radium.Activity, context.data);
+    Radium.selectedUserFeedController.set('content', []);
     manager.goToState('loading');
     activity.addObserver('isLoaded', function() {
-      Radium.activitiesController.set('content', activity);
+      Radium.selectedUserFeedController.set('selectedUser', context.user);
       manager.goToState('ready');
     });
   },

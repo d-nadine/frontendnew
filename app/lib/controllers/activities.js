@@ -1,5 +1,5 @@
 Radium.activitiesController = Radium.feedController.create({
-  content: [],
+  content: Radium.store.findAll(Radium.Activity),
   // Filter the feed by type
   categoryFilter: 'everything',
   filterTypes: [

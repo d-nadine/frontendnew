@@ -201,6 +201,8 @@ window.RadiumAdapter = DS.Adapter.extend({
   findAll: function(store, type) {
     var root = this.rootForType(type), plural = this.pluralize(root);
     
+    if (root === 'activity') return false;
+
     this.ajax("/" + plural, "GET", {
       success: function(json) {
         store.loadMany(type, json);
