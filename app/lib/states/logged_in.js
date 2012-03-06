@@ -22,11 +22,11 @@ Radium.LoggedIn = Ember.State.create({
       }
     })
   }),
-  dashboard: Radium.DashboardState.create(),
+  dashboard: Radium.DashboardPage.create(),
   contacts: Ember.State.create({}),
-  deals: Radium.DealsState.create(),
-  pipeline: Ember.State.create({}),
-  campaigns: Ember.State.create({}),
+  deals: Radium.DealsPage.create(),
+  pipeline: Radium.PipelinePage.create(),
+  campaigns: Radium.CampaignsPage.create({}),
   calendar: Ember.State.create({}),
   messages: Ember.State.create({}),
   settings: Ember.State.create({})

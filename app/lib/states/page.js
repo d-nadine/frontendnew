@@ -1,5 +1,5 @@
-Radium.PageState = Ember.ViewState.extend({
-  form: Ember.State.create({
+Radium.PageStateMixin = Ember.Mixin.create({
+  form: Ember.State.extend({
     form: null,
     formType: 'Todo',
     enter: function() {
@@ -14,5 +14,9 @@ Radium.PageState = Ember.ViewState.extend({
       this.set('form', null);
       this.setPath('parentState.isFormAddView', false);
     }
-  })
+  }),
+
+  closeForm: function(manager) {
+    manager.goToState('ready');
+  }
 });

@@ -9,9 +9,7 @@ minispade.require('radium/templates/feed/feed_date_group');
 minispade.require('radium/templates/feed/feed_cluster');
 minispade.require('radium/templates/feed/feed_item_todos');
 minispade.require('radium/templates/feed/feed_item_deals_pending');
-
 minispade.require('radium/templates/feed/feed_headline_todo');
-
 
 minispade.require('radium/templates/dashboard/activity_feed_group');
 minispade.require('radium/templates/dashboard/dashboard');
@@ -19,6 +17,10 @@ minispade.require('radium/templates/dashboard/dashboard');
 minispade.require('radium/templates/deals/deals_feed_group');
 minispade.require('radium/templates/deals/overdue_deals');
 minispade.require('radium/templates/deals/deals');
+
+minispade.require('radium/templates/pipeline/pipeline');
+
+minispade.require('radium/templates/campaigns/campaigns');
 
 minispade.require('radium/templates/profile');
 minispade.require('radium/templates/users_list');
@@ -70,3 +72,9 @@ minispade.require('radium/views/dashboard/announcements');
 // Deals
 minispade.require('radium/views/deals/overdue_deals');
 minispade.require('radium/views/deals/deals');
+
+// Pipeline
+minispade.require('radium/views/pipeline/pipeline');
+
+// Campaigns
+minispade.require('radium/views/campaigns/campaigns');

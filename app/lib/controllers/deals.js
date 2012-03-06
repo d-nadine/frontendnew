@@ -1,6 +1,33 @@
 Radium.dealsController = Ember.ArrayProxy.create({
   selectedUser: null,
   content: [],
+  filterTypes: [
+    {
+      title: 'Everything', 
+      shortname: 'everything', 
+      hasForm: false
+    },
+    {
+      title: 'Pending', 
+      shortname: 'pending', 
+      hasForm: false
+    },
+    {
+      title: 'Closed', 
+      shortname: 'closed', 
+      hasForm: false
+    },
+    {
+      title: 'Paid', 
+      shortname: 'paid', 
+      hasForm: false
+    },
+    {
+      title: 'Rejected', 
+      shortname: 'rejected', 
+      hasForm: false
+    }
+  ],
   /**
     @binding {content.state}
     @return {Number} Total dollar amount of pending deals

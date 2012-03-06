@@ -1,11 +1,9 @@
 <div class="row">
   
   <div id="sidebar" class="span3">
-    {{view Radium.ProfileView}}
-
     {{collection Radium.FeedFilterView 
       controllerBinding="Radium.selectedUserFeedController"
-      contentBinding="Radium.dashboardController.filterTypes"
+      contentBinding="Radium.pipelineController.filterTypes"
       categoryFilterBinding="Radium.selectedUserFeedController.categoryFilter"
     }}
 
@@ -16,17 +14,14 @@
   
   <div class="span9">
     <div class="row">
-        {{view Radium.GlobalSearchTextView}}
+      {{view Radium.GlobalSearchTextView}}
     </div>
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
-    <!-- Chart is disabled for now -->
-    {{!view dashboardChart}}
-    
+
     {{view Radium.DateFilterView dateFilterBinding="Radium.selectedUserFeedController.dateFilter"}}
     
     <div class="row">
-      {{view Radium.FeedView id="feed" class="span9"}}
     </div>
   </div>
 </div>

@@ -1,25 +1,8 @@
-Radium.DashboardState = Ember.ViewState.extend({
+Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
     
   view: Radium.DashboardView,
 
   isFormAddView: false,
-
-  form: Ember.State.create({
-    form: null,
-    formType: 'Todo',
-    enter: function() {
-      var type = this.get('formType');
-      var form = this.get('form') || Radium[type+'FormView'].create();
-      form.appendTo('#form-container');
-      this.set('form', form);
-      this.setPath('parentState.isFormAddView', true);
-    },
-    exit: function() {
-      this.get('form').destroy();
-      this.set('form', null);
-      this.setPath('parentState.isFormAddView', false);
-    }
-  }),
 
   start: Ember.State.create({
     firstRun: true,
@@ -82,10 +65,6 @@ Radium.DashboardState = Ember.ViewState.extend({
   addResource: function(manager, context) {
     Radium.App.setPath('loggedIn.dashboard.form.formType', context);
     manager.goToState('form');
-  },
-
-  closeForm: function(manager) {
-    manager.goToState('ready');
   },
 
   loadFeed: function(manager, context) {
