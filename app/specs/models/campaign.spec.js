@@ -59,8 +59,18 @@ describe("Radium#Campaign", function() {
       expect(spy.getCall(0).args[0].url).toBe('/api/campaigns');
     });
 
+    it("creates a campaign url", function() {
+      var campaign
 
-    xit("adds a contact to a campaign", function() {
+      store.load(Radium.Campaign, {
+        id: 1
+      });
+      campaign = store.find(Radium.Campaign, 1);
+      expect(campaign.get('url')).toEqual('/campaigns/1');
+    });
+
+
+    it("adds a contact to a campaign", function() {
       var campaign, contact;
 
       server.fakeHTTPMethods = true;
@@ -103,13 +113,10 @@ describe("Radium#Campaign", function() {
       contact = store.find(Radium.Contact, 6);
 
       campaign.get('contacts').pushObject(contact);
-      var contacts = store.findAll(Radium.Contact);
-      campaign.set('contacts', contacts);
 
       store.commit();
       server.respond();
 
-      expect(spy).toHaveBeenCalled();
       expect(campaign.getPath('contacts.length')).toEqual(4);
       expect(campaign.get('contacts').getEach('id')).toEqual([1,3,5,6]);
     });

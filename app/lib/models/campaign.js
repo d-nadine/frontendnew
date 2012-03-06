@@ -1,7 +1,9 @@
 Radium.Campaign = Radium.Core.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
-  ends_at: DS.attr('date'),
+  endsAt: DS.attr('date', {
+    key: 'ends_at'
+  }),
   currency: DS.attr('string'),
   target: DS.attr('number'),
   user: DS.hasOne('Radium.User'),
@@ -18,6 +20,14 @@ Radium.Campaign = Radium.Core.extend({
   notes: DS.hasMany('Radium.Note'),
   meetings: DS.hasMany('Radium.Meeting'),
   activities: DS.hasMany('Radium.Activity'),
+
+  url: function() {
+    return '/campaigns/%@'.fmt(this.get('id'));
+  }.property('id').cacheable(),
+
+  totalCustomers: function() {
+    return this.getPath('data.contacts.length');
+  }.property('contacts').cacheable(),
 
   contact_ids: function() {
     return this.get('contacts').getEach('id');

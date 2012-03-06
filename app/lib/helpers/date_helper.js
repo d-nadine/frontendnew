@@ -1,6 +1,7 @@
 return Handlebars.registerHelper('formatDate', function(date, options) {
   var value = Ember.getPath(this, date);
   var type = Ember.getPath(this, 'type');
+  console.log(value, type);
   var formats = {
     day: '%B %D, %Y',
     week: 'Week %W, %Y',

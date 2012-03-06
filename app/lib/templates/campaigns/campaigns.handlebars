@@ -1,1 +1,39 @@
-Campaigns!
+<div class="row">
+  <div class="span12">
+    {{view Radium.GlobalSearchTextView class="pull-right"}}
+    {{view Radium.AnnouncementsView}}
+    <div id="form-container"></div>
+  </div>
+</div>
+<div id="campaigns-all" class="row">
+  <div class="span12">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Assigned To</th>
+          <th>Name</th>
+          <th>Customers</th>
+          <th>Ends At</th>
+          <th>Target Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each Radium.campaignsController}}
+        <tr>
+          <td>{{user.name}}</td>
+          <td>{{name}}</td>
+          <td>{{totalCustomers}}</td>
+          <td>{{log endsAt}}</td>
+          <td>
+            {{#if target}}
+            {{target}} {{currency}}
+            {{else}}
+            0.00
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

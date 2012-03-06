@@ -18,6 +18,12 @@ describe("Handlebars helpers", function() {
       view.destroy();
     });
 
+    it("converts a date object into a string", function() {
+      view.set('myDate', new Date('Sat Apr 21 2012 11:28:42 GMT-0700 (PDT)'));
+      Ember.run(function() {view.appendTo(fixture);});
+      expect(fixture.find('h1').text()).toEqual('April 21, 2012');
+    });
+
     it("outputs a formatted DateTime object day", function() {
       view.set('type', 'day');
       Ember.run(function() {view.appendTo(fixture);});
