@@ -1,52 +1,52 @@
 Radium.selectedUserFeedController = Radium.feedController.create({
   content: [],
   filterTypes: [
-    Ember.Object.create({
+    {
       title: 'Everything', 
       shortname: 'everything', 
-      isMain: true
-    }),
-    Ember.Object.create({
+      hasForm: false
+    },
+    {
       title: 'Todos', 
       shortname: 'todo', 
       formViewClass: 'Todo',
-      isMain: false
-    }),
-    Ember.Object.create({
+      hasForm: true
+    },
+    {
       title: 'Meetings', 
       shortname: 'meeting', 
       formViewClass: 'Meeting',
-      isMain: false
-    }), 
-    Ember.Object.create({
+      hasForm: true
+    }, 
+    {
       title: 'Phone Calls', 
       shortname: 'phonecall', 
       formViewClass: 'CallList',
-      isMain: false
-    }),
-    Ember.Object.create({
+      hasForm: true
+    },
+    {
       title: 'Deals', 
       shortname: 'deal', 
       formViewClass: 'Deal',
-      isMain: false
-    }),
-    Ember.Object.create({
+      hasForm: true
+    },
+    {
       title: 'Messages', 
       shortname: 'message',
       formViewClass: 'Message', 
-      isMain: false
-    }),
-    Ember.Object.create({
+      hasForm: true
+    },
+    {
       title: 'Discussions', 
       shortname: 'discussion', 
       formViewClass: 'Discussion',
-      isMain: false
-    }),
-    Ember.Object.create({
+      hasForm: true
+    },
+    {
       title: 'Pipeline', 
       shortname: 'pipeline', 
-      isMain: true
-    })
+      hasForm: false
+    }
   ],
   userSelected: function() {
     var selectedUserId = this.getPath('selectedUser.id');

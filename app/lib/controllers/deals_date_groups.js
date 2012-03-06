@@ -7,31 +7,31 @@ Radium.dealsDateGroupsController = Ember.ArrayProxy.create({
   categoryFilter: 'everything',
   userFilter: null,
   filterTypes: [
-    Ember.Object.create({
+    {
       title: 'Everything', 
       shortname: 'everything', 
-      isMain: true
-    }),
-    Ember.Object.create({
+      hasForm: false
+    },
+    {
       title: 'Pending', 
       shortname: 'pending', 
-      isMain: true
-    }),
-    Ember.Object.create({
+      hasForm: false
+    },
+    {
       title: 'Closed', 
       shortname: 'closed', 
-      isMain: true
-    }),
-    Ember.Object.create({
+      hasForm: false
+    },
+    {
       title: 'Paid', 
       shortname: 'paid', 
-      isMain: true
-    }),
-    Ember.Object.create({
+      hasForm: false
+    },
+    {
       title: 'Rejected', 
       shortname: 'rejected', 
-      isMain: true
-    })
+      hasForm: false
+    }
   ],
   days: function() {
     return this.filterProperty('type', 'day');

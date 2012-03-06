@@ -13,8 +13,8 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
       return false;
     },
 
-    // The little + buttons
-    addFormInlineView: Ember.View.extend({
+    // The little + buttons, clicking goes to an add resource state.
+    newResourceButton: Ember.View.extend({
       classNames: 'icon-plus',
       tagName: 'i',
       attributeBindings: ['title'],

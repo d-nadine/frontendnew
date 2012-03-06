@@ -3,9 +3,9 @@
   <ul id="user-list" class="nav nav-tabs nav-stacked filters people">
     {{#each Radium.usersController.content contentBinding="this"}}
       {{#view Radium.UserListItemView userBinding="this"}}
-        <a href="#" {{action "viewUser"}}>
+        <a href="#" {{action "viewUser"}} title="User #{{unbound user.id}}">
           <img src="/images/headshots/holman_normal.png" class="avatar">
-          <span>{{ user.abbrName }} <small>({{user.id}})</small></span>
+          <span>{{ user.abbrName }}</span>
           {{#if isSelected}}
             <i class="icon-ok pull-right"></i>
           {{/if}}

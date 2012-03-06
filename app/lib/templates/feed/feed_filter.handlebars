@@ -1,7 +1,7 @@
 <a href="#" {{action "changeFilter"}}>
-  {{#unless content.isMain}}
-  {{view addFormInlineView}}
-  {{/unless}}
+  {{#if content.hasForm}}
+  {{view newResourceButton}}
+  {{/if}}
   {{ content.title }}
   {{!view badgeView}}
 </a>
