@@ -1,3 +1,11 @@
+/**
+  Formats a native JS Date object for now into the format of your choice. 
+  See `ember-datetime.js` at line 325 for more options.
+
+  @param {Date} property
+  @param {Hash} options.hash.format An Ember.DateTime string format
+  @return {String} A formatted date string eg: "January 1, 2012"
+*/
 return Handlebars.registerHelper('formatDate', function(property, options) {
   var context = (options.context && options.context[0]) || this,
       view = options.data.view,
@@ -14,7 +22,7 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
   // Observer function, rerenders the view with the updated date.
   var observer = function() {
     var newValue = Ember.getPath(context, property),
-        updatedDate = parseDate(val);
+        updatedDate = parseDate(newValue);
     view.$().text(updatedDate);
     view.rerender();
   };
@@ -25,19 +33,5 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
 
   Ember.addObserver(context, property, invoker);
 
-  // var formats = {
-  //   day: '%B %D, %Y',
-  //   week: 'Week %W, %Y',
-  //   month: '%B %Y',
-  //   quarter: (function() {
-  //     var month = value.get('month');
-  //     if (month <= 3) { return '1st Quarter, %Y'}
-  //     else if (month <= 6 && month > 3) { return '2nd Quarter, %Y'}
-  //     else if (month <= 9 && month > 6) { return '3rd Quarter, %Y'}
-  //     else if (month < 13 && month > 9) { return '4th Quarter, %Y'}
-  //   })(),
-  //   year: '%Y'
-  // }
-  // return value.toFormattedString(formats[type]);
   return parseDate(value);
 });

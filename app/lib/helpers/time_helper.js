@@ -1,9 +1,12 @@
 /**
-  @param {Date|Ember.DateTime|String} 
+  Formats a variety of date formats into the standard 12-hour clock 
+  time format.
+
+  @param {Date|Ember.DateTime|String} property
     Can format either a native JS Date, Ember.DateTime instance or a ISO8601-
     formatted string.
-  @param {Hash} opts
-  @return {Ember.DateTime} A time string eg: '8:31 AM'
+  @param {Hash} options
+  @return {String} A time string eg: '8:31 AM'
 */
 Handlebars.registerHelper('formatTime', function(property, options) {
   var dateParams,
