@@ -21,6 +21,7 @@ minispade.require('radium/templates/deals/deals');
 minispade.require('radium/templates/pipeline/pipeline');
 
 minispade.require('radium/templates/campaigns/campaigns');
+minispade.require('radium/templates/campaigns/campaign');
 
 minispade.require('radium/templates/profile');
 minispade.require('radium/templates/users_list');
@@ -78,3 +79,4 @@ minispade.require('radium/views/pipeline/pipeline');
 
 // Campaigns
 minispade.require('radium/views/campaigns/campaigns');
+minispade.require('radium/views/campaigns/campaign');

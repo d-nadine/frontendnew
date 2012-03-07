@@ -25,9 +25,13 @@ Radium.Campaign = Radium.Core.extend({
     return '/campaigns/%@'.fmt(this.get('id'));
   }.property('id').cacheable(),
 
-  totalCustomers: function() {
+  totalContacts: function() {
     return this.getPath('data.contacts.length');
   }.property('contacts').cacheable(),
+
+  totalUsers: function() {
+    return this.getPath('data.users.length');
+  }.property('users').cacheable(),
 
   contact_ids: function() {
     return this.get('contacts').getEach('id');

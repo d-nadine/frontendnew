@@ -19,19 +19,21 @@
       </thead>
       <tbody>
         {{#each Radium.campaignsController}}
-        <tr>
-          <td>{{user.name}}</td>
-          <td><a href="{{unbound url}}">{{name}}</a></td>
-          <td>{{totalCustomers}}</td>
-          <td>{{formatDate endsAt}}</td>
-          <td>
-            {{#if target}}
-            {{target}} {{currency}}
-            {{else}}
-            0.00
-            {{/if}}
-          </td>
-        </tr>
+          {{#view Radium.CampaignTableRow tagName="tr" contentBinding="this"}}
+            <td>{{content.user.name}}</td>
+            <td>
+              <a {{bindAttr href="content.url"}} {{action "show"}}>{{content.name}}</a>
+            </td>
+            <td>{{content.totalContacts}}</td>
+            <td>{{formatDate content.endsAt}}</td>
+            <td>
+              {{#if target}}
+              {{content.target}} {{content.currency}}
+              {{else}}
+              0.00
+              {{/if}}
+            </td>
+          {{/view}}
         {{/each}}
       </tbody>
     </table>

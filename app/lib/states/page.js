@@ -16,6 +16,7 @@ Radium.PageStateMixin = Ember.Mixin.create({
     }
   }),
 
+  // Idle state
   ready: Ember.State.create(),
 
   // Actions

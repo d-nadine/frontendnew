@@ -1,0 +1,22 @@
+<div class="row">
+  {{#with Radium.selectedCampaignController.content}}  
+  <div id="sidebar" class="span3">
+    <div class="module">
+      <h3>{{name}}</h3>
+      <p>{{description}}</p>
+      Target Value: 
+      {{#if target}}
+        {{content.target}} {{content.currency}}
+      {{else}}
+        0.00
+      {{/if}}
+      Started On: {{formatDate createdAt}}
+      {{totalUsers}} People in this campaign
+  
+      Managing this Campaign
+
+      {{user.name}}
+    </div>
+  </div>
+  {{/with}}
+</div>

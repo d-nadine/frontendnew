@@ -19,12 +19,13 @@ Radium.CampaignsPage = Ember.State.extend(Radium.PageStateMixin, {
     ready: Ember.State.create()
   }),
   show: Ember.ViewState.create({
-    view: Ember.View.create({
-      template: Ember.Handlebars.compile('oh hi')
-    }),
+    view: Radium.CampaignPage,
     start: Ember.State.create({
       enter: function() {
         
+      },
+      exit: function(manager) {
+        Radium.selectedCampaignController.set('content', null);
       }
     }),
     ready: Ember.State.create()
