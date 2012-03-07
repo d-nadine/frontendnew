@@ -15,9 +15,11 @@ Radium.LoggedIn = Ember.State.create({
             users = Radium.store.find(Radium.User, {page: 0});
 
         users.addObserver('isLoaded', function() {
-          console.log('Users loaded, go to', manager.get('_routeCache'));
+          console.log('Users loaded for', Radium.appController.get('_routeCache'));
           Radium.usersController.set('content', users);
-          manager.send('loadSection', manager.get('_routeCache'));
+          Ember.run.next(function() {
+            manager.goToState(Radium.appController.getPath('_routeCache.page'));
+          });
         });
       }
     })
@@ -27,6 +29,14 @@ Radium.LoggedIn = Ember.State.create({
   deals: Radium.DealsPage.create(),
   pipeline: Radium.PipelinePage.create(),
   campaigns: Radium.CampaignsPage.create({}),
+  campaign: Ember.ViewState.create(Radium.PageStateMixin, {
+    view: Ember.View.create({}),
+    start: Ember.State.create({
+      enter: function() {
+        console.log('worked!');
+      }
+    })
+  }),
   calendar: Ember.State.create({}),
   messages: Ember.State.create({}),
   settings: Ember.State.create({})

@@ -1,24 +1,24 @@
 Radium.TopbarView = Ember.View.extend({
-  currentSectionBinding: 'Radium.appController.currentSection',
+  currentPageBinding: 'Radium.appController.currentPage',
   section: function() {
-    var section = this.get('currentSection') || 'dashboard';
+    var section = this.get('currentPage') || 'dashboard';
     return (section === 'dashboard') ? 'Todo' : 'Contact';
-  }.property('currentSection').cacheable(),
+  }.property('currentPage').cacheable(),
   highlightNav: function() {
-    var section = this.get('currentSection') || 'dashboard';
+    var section = this.get('currentPage') || 'dashboard';
     $('ul#main-nav').find('li')
       .removeClass('active')
       .filter('li#btn-' + section).addClass('active');
-  }.observes('currentSection'),
+  }.observes('currentPage'),
   didInsertElement: function() {
-    var section = this.get('currentSection') || 'dashboard';
+    var section = this.get('currentPage') || 'dashboard';
     if (section) $('li#btn-'+section).addClass('active');
   },
   // Main action button in the topbar, changes depending on section
   mainActionButton: Ember.Button.extend({
     classNames: "btn pull-right".w(),
     buttonTitle: function() {
-      var section = this.getPath('parentView.currentSection'),
+      var section = this.getPath('parentView.currentPage'),
           sectionText = "";
       switch (section) {
         case 'dashboard':
@@ -35,16 +35,16 @@ Radium.TopbarView = Ember.View.extend({
           break;
       };
       return sectionText;
-    }.property('parentView.currentSection').cacheable(),
+    }.property('parentView.currentPage').cacheable(),
     isVisible: function() {
-      var section = this.getPath('parentView.currentSection');
+      var section = this.getPath('parentView.currentPage');
       if (!section || section === 'settings') {
         return false;
       } else {
         return true;
       }
       return false;
-    }.property('parentView.currentSection'),
+    }.property('parentView.currentPage'),
     hasAddedForm: false,
     click: function() {
       var formName = this.$().text().replace('Add ', '');
