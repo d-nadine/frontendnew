@@ -4,7 +4,7 @@ Radium.appController = Ember.Object.create({
   // Set to false when all the intial data has been loaded
   isFirstRun: true,
   _routeCache: {},
-  currentSection: null,
+  currentPage: null,
   selectedForm: null,
   params: null
 });
