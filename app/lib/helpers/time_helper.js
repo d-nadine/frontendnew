@@ -3,6 +3,7 @@
     Can format either a native JS Date, Ember.DateTime instance or a ISO8601-
     formatted string.
   @param {Hash} opts
+  @return {Ember.DateTime} A time string eg: '8:31 AM'
 */
 Handlebars.registerHelper('formatTime', function(property, options) {
   var dateParams,
@@ -30,11 +31,11 @@ Handlebars.registerHelper('formatTime', function(property, options) {
     return date.toFormattedString('%i:%M %p');
   };
 
-
+  // Observer function, rerenders the view with the updated date.
   var observer = function() {
-    var val = Ember.getPath(context, property),
-        type = Ember.typeOf(val),
-        updatedDate = parseDate(val);
+    var newValue = Ember.getPath(context, property),
+        // type = Ember.typeOf(newValue),
+        updatedDate = parseDate(newValue);
     view.$().text(updatedDate);
     view.rerender();
   };
