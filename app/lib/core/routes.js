@@ -21,7 +21,7 @@ Radium.Routes = Davis(function() {
 
     Radium.App.send('loadPage', {
       page: page,
-      id: id
+      show: id
     });
   });
 });

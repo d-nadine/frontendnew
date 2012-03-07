@@ -28,15 +28,7 @@ Radium.LoggedIn = Ember.State.create({
   contacts: Ember.State.create({}),
   deals: Radium.DealsPage.create(),
   pipeline: Radium.PipelinePage.create(),
-  campaigns: Radium.CampaignsPage.create({}),
-  campaign: Ember.ViewState.create(Radium.PageStateMixin, {
-    view: Ember.View.create({}),
-    start: Ember.State.create({
-      enter: function() {
-        console.log('worked!');
-      }
-    })
-  }),
+  campaigns: Radium.CampaignsPage.create(),
   calendar: Ember.State.create({}),
   messages: Ember.State.create({}),
   settings: Ember.State.create({})

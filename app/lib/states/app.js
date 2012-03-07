@@ -45,13 +45,21 @@ Radium.App = Ember.StateManager.create({
     ------------------------------------
   */
   loadPage: function(manager, context) {
-    var app = Radium.appController;
+    var app = Radium.appController,
+        routeParams = [];
     app.set('_routeCache', context);
+    Radium.appController.set('currentPage', context.page);
+    
     if (app.get('isFirstRun')) {
       manager.goToState('authenticate');
     } else {
-      Radium.appController.set('currentPage', context.page);
-      manager.goToState(context.page);
+      if (context.show) {
+        Radium.appController.set('params', context);
+        manager.goToState([context.page, 'show'].join('.'));
+      } else {
+        manager.goToState(context.page);
+      }
+      
     }
   },
 
