@@ -9,9 +9,4 @@ Radium.DealsPage = Ember.ViewState.extend(Radium.PageStateMixin, {
   }),
   
   //Actions
-  
-  addResource: function(manager, context) {
-    Radium.App.setPath('loggedIn.deals.form.formType', context);
-    manager.goToState('form');
-  }
 });

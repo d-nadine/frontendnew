@@ -62,11 +62,6 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
     ACTIONS
     ------------------------------------
   */
-  addResource: function(manager, context) {
-    Radium.App.setPath('loggedIn.dashboard.form.formType', context);
-    manager.goToState('form');
-  },
-
   loadFeed: function(manager, context) {
     // Hack. Need to let the adapter know which user is requesting a feed
     // so the url `/users/:id/feed` can be loaded.

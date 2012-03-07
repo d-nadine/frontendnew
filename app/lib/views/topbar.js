@@ -27,7 +27,7 @@ Radium.TopbarView = Ember.View.extend({
         case 'deals':
           sectionText = "Deal";
           break;
-        case 'campaign':
+        case 'campaigns':
           sectionText = "Campaign";
           break;
         default:
@@ -47,28 +47,13 @@ Radium.TopbarView = Ember.View.extend({
     }.property('parentView.currentSection'),
     hasAddedForm: false,
     click: function() {
-      var section = this.getPath('parentView.currentSection');
-
-      switch (section) {
-        case 'dashboard':
-          Radium.App.send('addResource', 'Todo');
-          break;
-        case 'deals':
-          Radium.App.send('addResource', 'Deal');
-          break;
-        case 'campaign':
-          Radium.App.send('addResource', 'Campaign');
-          break;
-        default:
-          Radium.App.send('addResource', 'Contact');
-          break;
-      };
-      
+      var formName = this.$().text().replace('Add ', '');
+      Radium.App.send('addResource', 'Deal');
     },
     disabled: function() {
-      var formState = Radium.App.get('currentState').name;
-      return (formState === '.form') ? true : false;
-    }.property('Radium.App.currentState').cacheable(),
+      var selectedForm = Radium.appController.get('selectedForm');
+      return (selectedForm) ? true : false;
+    }.property('Radium.appController.selectedForm').cacheable(),
     template: Ember.Handlebars.compile('Add {{ buttonTitle }}')
   }),
   templateName: 'topbar'

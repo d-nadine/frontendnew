@@ -1,3 +1,4 @@
 Radium.appController = Ember.Object.create({
-  currentSection: null
+  currentSection: null,
+  selectedForm: null
 });
