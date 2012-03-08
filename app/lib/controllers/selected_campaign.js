@@ -1,34 +1,51 @@
 Radium.selectedCampaignController = Ember.Object.create({
+  content: null,
   filterTypes: [
-    {
+   {
       title: 'Everything', 
       shortname: 'everything', 
       hasForm: false
     },
     {
-      title: 'Leads', 
-      shortname: 'leads', 
-      hasForm: false
+      title: 'Todos', 
+      shortname: 'todo', 
+      formViewClass: 'Todo',
+      hasForm: true
     },
     {
-      title: 'Prospects', 
-      shortname: 'prospects', 
-      hasForm: false
+      title: 'Meetings', 
+      shortname: 'meeting', 
+      formViewClass: 'Meeting',
+      hasForm: true
+    }, 
+    {
+      title: 'Phone Calls', 
+      shortname: 'phonecall', 
+      formViewClass: 'CallList',
+      hasForm: true
     },
     {
-      title: 'Opportunities', 
-      shortname: 'rejected', 
-      hasForm: false
+      title: 'Deals', 
+      shortname: 'deal', 
+      formViewClass: 'Deal',
+      hasForm: true
     },
     {
-      title: 'Customers', 
-      shortname: 'rejected', 
-      hasForm: false
+      title: 'Messages', 
+      shortname: 'message',
+      formViewClass: 'Message', 
+      hasForm: true
     },
     {
-      title: 'Dead Ends', 
-      shortname: 'rejected', 
+      title: 'Discussions', 
+      shortname: 'discussion', 
+      formViewClass: 'Discussion',
+      hasForm: true
+    },
+    {
+      title: 'Pipeline', 
+      shortname: 'pipeline', 
       hasForm: false
     }
-  ],
+  ]
 });

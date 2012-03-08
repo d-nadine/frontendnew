@@ -1,22 +1,101 @@
 <div class="row">
-  {{#with Radium.selectedCampaignController.content}}  
   <div id="sidebar" class="span3">
+    {{#with Radium.selectedCampaignController.content}}  
     <div class="module">
-      <h3>{{name}}</h3>
-      <p>{{description}}</p>
-      Target Value: 
-      {{#if target}}
-        {{content.target}} {{content.currency}}
-      {{else}}
-        0.00
-      {{/if}}
-      Started On: {{formatDate createdAt}}
-      {{totalUsers}} People in this campaign
-  
-      Managing this Campaign
+      <div class="component">
+        <h3>{{name}}</h3>
+        <p>{{description}}</p>
+        <dl>
+          <dt>Target Value: </dt>
+          <dd>
+            {{#if target}}
+              {{content.target}} {{content.currency}}
+            {{else}}
+              0.00
+            {{/if}}
+          </dd>
+          <dt>Started On:</dt>
+          <dd>{{formatDate createdAt}}</dd>
+        </dl>
+        <p>{{totalUsers}} people in this campaign</p>
+      </div>
+      <div id="owner" class="component">
+        <img src="/images/headshots/mcnulty.jpg" class="avatar">
+        <h5>Managing this Campaign</h5>
+        <p class="name">{{user.name}}</p>
+      </div>
+    </div>
+    {{/with}}
+    {{collection Radium.FeedFilterView 
+      controllerBinding="Radium.selectedUserFeedController"
+      contentBinding="Radium.selectedCampaignController.filterTypes"
+      categoryFilterBinding="Radium.selectedUserFeedController.categoryFilter"
+    }}
+    {{view Radium.UsersListView 
+      contentBinding="Radium.selectedCampaignController.content.users"
+    }}
+  </div>
 
-      {{user.name}}
+
+  <div class="span9">
+    {{view Radium.GlobalSearchTextView class="pull-right"}}
+    {{view Radium.AnnouncementsView}}
+    <div class="row">
+      <div class="span9">
+        <button class="btn btn-small">Send Email</button>
+        <button class="btn btn-small">Send SMS</button>
+        <button class="btn btn-small">Add Todo</button>
+        <button class="btn btn-small">Add Team Member</button>
+        <button class="btn btn-small btn-primary">Add to Campaign</button>
+      </div>
+    </div>
+    <div id="form-container"></div>
+    <div class="row">
+      <div class="span9" id="summary">
+        <h2>{{Radium.selectedCampaignController.content.name}} Summary!</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Calls Made</th>
+              <th>Calls Remaining</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>500</td>
+              <td>1000</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Todos Finished</th>
+              <th>Todos Remaining</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>683</td>
+              <td>973</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Paid Deals</th>
+              <th>Unpaid Deals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$283,837</td>
+              <td>$18,437</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  {{/with}}
 </div>

@@ -1,5 +1,4 @@
 Radium.UsersListView = Ember.View.extend({
-  contentBinding: 'Radium.usersController.content',
   templateName: 'users_list'
 });
 

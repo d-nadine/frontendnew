@@ -16,9 +16,6 @@ Radium.PageStateMixin = Ember.Mixin.create({
     }
   }),
 
-  // Idle state
-  ready: Ember.State.create(),
-
   // Actions
   // Add any resource form in the main layout.
   addResource: function(manager, context) {

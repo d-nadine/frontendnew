@@ -1,6 +1,6 @@
-Radium.CampaignsPage = Ember.State.extend(Radium.PageStateMixin, {
+Radium.CampaignsPage = Ember.State.extend({
   initialState: 'index',
-  index: Ember.ViewState.extend({
+  index: Ember.ViewState.extend(Radium.PageStateMixin, {
     view: Radium.CampaignsPageView,
     start: Ember.State.create({
       isFirstRun: true,
@@ -18,15 +18,14 @@ Radium.CampaignsPage = Ember.State.extend(Radium.PageStateMixin, {
     }),
     ready: Ember.State.create()
   }),
-  show: Ember.ViewState.create({
+  show: Ember.ViewState.create(Radium.PageStateMixin, {
     view: Radium.CampaignPage,
+    exit: function(manager) {
+      this._super(manager);
+      Radium.selectedCampaignController.set('content', null);
+    },
     start: Ember.State.create({
-      enter: function() {
-        
-      },
-      exit: function(manager) {
-        Radium.selectedCampaignController.set('content', null);
-      }
+      
     }),
     ready: Ember.State.create()
   })
