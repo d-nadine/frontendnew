@@ -1,6 +1,3 @@
-minispade.require('radium/templates/forms/todo_form'),
-minispade.require('radium/templates/forms/reminder');
-
 Radium.TodoFormView = Radium.FormView.extend({
   wantsReminder: false,
   reminderForm: Ember.View.extend({

@@ -21,8 +21,15 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
 
   // Observer function, rerenders the view with the updated date.
   var observer = function() {
+    var elem = view.$();
+    // Delete the observes if the view gets got.
+    if (elem.length === 0) {
+      Ember.removeObserver(context, property, invoker);
+      return;
+    }
+    // Compute new date and update the view.
     var newValue = Ember.getPath(context, property),
-        updatedDate = parseDate(newValue);
+      updatedDate = parseDate(newValue);
     view.$().text(updatedDate);
     view.rerender();
   };

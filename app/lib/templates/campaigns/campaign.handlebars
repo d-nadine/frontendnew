@@ -89,7 +89,9 @@
       </div>
       <div class="span9">
         <div class="page-header">
-          <h1>Finish by {{formatDate Radium.selectedCampaignController.content.endsAt}}</h1>
+          {{#with Radium.selectedCampaignController}}
+          <h1>Finish by {{formatDate finishByDate}}</h1>
+          {{/with}}
         </div>
         {{view campaignChart}}
       </div>

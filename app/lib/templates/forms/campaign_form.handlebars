@@ -1,0 +1,26 @@
+<form class="well">
+  <legend>Create a Campaign</legend>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" class="span8" value="">
+
+  <label for="target">Target</label>
+  <input type="text" name="target" id="target" class="span8" value="">
+
+  <label for="ends-by">Ends by:</label>
+  {{view Radium.DatePickerField id="ends-by" name="ends-by" class="input-small"}}
+
+  <label for="currency">Currency:</label>
+  <select id="currency" name="currency">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="CAD">CAD</option>
+  </select>
+
+  <label for="description">Description:</label>
+  <textarea name="description" id="description" class="span8"></textarea>
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

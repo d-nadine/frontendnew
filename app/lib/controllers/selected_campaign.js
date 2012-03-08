@@ -95,5 +95,9 @@ Radium.selectedCampaignController = Ember.Object.create({
   addStatsData: function(data) {
     var stats = Radium.StatCalculator.create(data);
     this.set('campaignStats', stats);
-  }
+  },
+
+  finishByDate: function() {
+    return this.getPath('content.endsAt');
+  }.property('content').cacheable()
 });
