@@ -23,9 +23,22 @@ Radium.CampaignsPage = Ember.State.extend({
     exit: function(manager) {
       this._super(manager);
       Radium.selectedCampaignController.set('content', null);
+      Radium.selectedCampaignController.set('campaignStats', {});
     },
     start: Ember.State.create({
-      
+      enter: function() {
+        // Grab the static stats for the campaign, raw JSON object, no need for DS.
+        var id = Radium.selectedCampaignController.getPath('content.id');
+
+        $.ajax({
+          url: '/api/campaigns/%@/statistics'.fmt(id),
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function(data) {
+            Radium.selectedCampaignController.addStatsData(data);
+          }
+        });
+      }
     }),
     ready: Ember.State.create()
   })

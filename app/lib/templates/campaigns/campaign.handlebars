@@ -26,11 +26,14 @@
       </div>
     </div>
     {{/with}}
+
     {{collection Radium.FeedFilterView 
       controllerBinding="Radium.selectedUserFeedController"
       contentBinding="Radium.selectedCampaignController.filterTypes"
       categoryFilterBinding="Radium.selectedUserFeedController.categoryFilter"
     }}
+
+    <h3>Working This Campaign</h3>
     {{view Radium.UsersListView 
       contentBinding="Radium.selectedCampaignController.content.users"
     }}
@@ -41,60 +44,54 @@
     {{view Radium.GlobalSearchTextView class="pull-right"}}
     {{view Radium.AnnouncementsView}}
     <div class="row">
-      <div class="span9">
-        <button class="btn btn-small">Send Email</button>
-        <button class="btn btn-small">Send SMS</button>
-        <button class="btn btn-small">Add Todo</button>
-        <button class="btn btn-small">Add Team Member</button>
-        <button class="btn btn-small btn-primary">Add to Campaign</button>
-      </div>
+      <span class="span9">
+        {{#view emailButton action="test" class="btn btn-small"}}Send Email{{/view}}
+        {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
+        {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
+        {{#view addTeamMemberButton class="btn btn-small"}}Add Team Member{{/view}}
+        {{#view addToCampaignButton class="btn btn-small btn-primary"}}Add to Campaign{{/view}}
+      </span>
     </div>
     <div id="form-container"></div>
     <div class="row">
       <div class="span9" id="summary">
-        <h2>{{Radium.selectedCampaignController.content.name}} Summary!</h2>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Calls Made</th>
-              <th>Calls Remaining</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>500</td>
-              <td>1000</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Todos Finished</th>
-              <th>Todos Remaining</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>683</td>
-              <td>973</td>
-            </tr>
-          </tbody>
-        </table>
+        <h2>{{Radium.selectedCampaignController.content.name}} Summary</h2>
+        {{#with Radium.selectedCampaignController.campaignStats}}
         <table class="table table-bordered">
           <thead>
             <tr>
               <th>Paid Deals</th>
-              <th>Unpaid Deals</th>
+              <th>Closed Deals</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>$283,837</td>
-              <td>$18,437</td>
+              <td>{{paidDeals}}</td>
+              <td>{{closedDeals}}</td>
             </tr>
           </tbody>
         </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Pending Deals</th>
+              <th>Rejected Deals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{pendingDeals}}</td>
+              <td>{{rejectedDeals}}</td>
+            </tr>
+          </tbody>
+        </table>
+        {{/with}}
+      </div>
+      <div class="span9">
+        <div class="page-header">
+          <h1>Finish by {{formatDate Radium.selectedCampaignController.content.endsAt}}</h1>
+        </div>
+        {{view campaignChart}}
       </div>
     </div>
   </div>
