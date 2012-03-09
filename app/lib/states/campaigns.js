@@ -6,8 +6,13 @@ Radium.CampaignsPage = Ember.State.extend({
       isFirstRun: true,
       enter: function(manager) {
         if (this.get('isFirstRun')) {
-          var campaigns = Radium.store.find(Radium.Campaign, {page: 0});
-          Radium.campaignsController.set('content', campaigns);
+          if (Radium.campaignsController.get('length') <= 0) {
+            Radium.campaignsController.set(
+              'content', 
+              Radium.store.find(Radium.Campaign, {page: 0})
+            );
+          }
+
           this.toggleProperty('isFirstRun');
         } else {
           Ember.run.next(function() {

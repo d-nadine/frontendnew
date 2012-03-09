@@ -1,0 +1,65 @@
+<div class="row">
+  <div id="sidebar" class="span3">
+    {{collection Radium.FeedFilterView 
+      controllerBinding="Radium.contactsController"
+      contentBinding="Radium.contactsController.filterTypes"
+    }}
+
+    <ul class="ember-view nav nav-tabs nav-stacked">
+      {{#with Radium.campaignsController}}
+        {{#if content.length}}
+          
+          <li><a href="#">All Campaigns</a></li>
+          {{#each this}}
+          <li><a href="#">{{unbound name}}</a></li>
+          {{/each}}
+        {{else}}
+          <li>Loading...</li>
+        {{/if}}
+      {{/with}}
+    </ul>
+  </div> <!-- /#sidebar -->
+
+  <div id="content" class="span9">
+    {{view Radium.GlobalSearchTextView class="pull-right"}}
+    {{view Radium.AnnouncementsView}}
+    <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
+      <div class="btn-group">
+        <a class="btn" href="#">A</a>
+        <a class="btn" href="#">B</a>
+        <a class="btn" href="#">C</a>
+        <a class="btn" href="#">D</a>
+        <a class="btn" href="#">E</a>
+        <a class="btn" href="#">F</a>
+        <a class="btn" href="#">G</a>
+        <a class="btn" href="#">H</a>
+        <a class="btn" href="#">I</a>
+        <a class="btn" href="#">J</a>
+        <a class="btn" href="#">K</a>
+        <a class="btn" href="#">L</a>
+        <a class="btn" href="#">M</a>
+        <a class="btn" href="#">N</a>
+        <a class="btn" href="#">O</a>
+        <a class="btn" href="#">P</a>
+        <a class="btn" href="#">Q</a>
+        <a class="btn" href="#">R</a>
+        <a class="btn" href="#">S</a>
+        <a class="btn" href="#">T</a>
+        <a class="btn" href="#">U</a>
+        <a class="btn" href="#">V</a>
+        <a class="btn" href="#">W</a>
+        <a class="btn" href="#">X</a>
+        <a class="btn" href="#">Y</a>
+        <a class="btn" href="#">Z</a>
+      </div>
+    </div> <!-- /#alpha -->
+
+    <div id="form-container"></div>
+
+    <div id="contacts">
+      {{#each Radium.contactsController}}
+        {{name}}<br>
+      {{/each}}
+    </div>
+  </div> <!-- /#content -->
+</div> <!-- /.row -->

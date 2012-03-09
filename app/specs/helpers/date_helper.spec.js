@@ -25,12 +25,19 @@ describe("Handlebars helpers", function() {
       expect(fixture.find('h1').text()).toEqual('April 21, 2012');
     });
 
-    it("it updates when observers fire", function() {
+    it("updates when observers fire", function() {
       var newDate = Ember.DateTime.create().toFormattedString("%B %D, %Y");
       Ember.run(function() {view.appendTo(fixture);});
       expect(fixture.find('h1').text()).toEqual('April 21, 2012');
       Ember.run(function() {view.set('myDate', new Date());});
       expect(fixture.find('h1').text()).toEqual(newDate);
+    });
+
+    it("removes observers", function() {
+      Ember.run(function() {view.appendTo(fixture);});
+      expect(fixture.find('h1').length).toEqual(1);
+      view.remove();
+      expect(fixture.find('h1').length).toEqual(0);
     });
   });
 });

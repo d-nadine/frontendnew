@@ -82,5 +82,61 @@ Radium.contactsController = Ember.ArrayProxy.create({
     return this.get('content').find(function(item) {
       return item.get('id') === id;
     });
-  }
+  },
+
+  // Contacts Page Filters
+  filterTypes: [
+    {
+      title: 'Everything', 
+      shortname: 'everything', 
+      hasForm: false
+    },
+    {
+      title: 'Contacts', 
+      shortname: 'contacts', 
+      formViewClass: 'Contact',
+      hasForm: true
+    },
+    {
+      title: 'Companies', 
+      shortname: 'meeting', 
+      formViewClass: 'Group',
+      hasForm: true
+    }, 
+    {
+      title: 'Leads', 
+      shortname: 'leads', 
+      hasForm: false
+    },
+    {
+      title: 'Prospects', 
+      shortname: 'Prospects', 
+      hasForm: false
+    },
+    {
+      title: 'Opportunities', 
+      shortname: 'Opportunities',
+      hasForm: false
+    },
+    {
+      title: 'Customers', 
+      shortname: 'Customers', 
+      hasForm: false
+    },
+    {
+      title: 'Dead Ends', 
+      shortname: 'deadends', 
+      hasForm: false
+    },
+    {
+      title: 'Unassigned', 
+      shortname: 'Unassigned', 
+      hasForm: false
+    },
+    {
+      title: 'No Upcoming Tasks', 
+      shortname: 'notasks', 
+      hasForm: false
+    }
+  ]
 });

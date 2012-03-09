@@ -1,5 +1,6 @@
 minispade.require('radium/states/page');
 minispade.require('radium/states/dashboard');
+minispade.require('radium/states/contacts');
 minispade.require('radium/states/pipeline');
 minispade.require('radium/states/campaigns');
 minispade.require('radium/states/deals');

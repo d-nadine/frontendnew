@@ -44,4 +44,11 @@ describe("Handlebars Date Helper", function() {
     Ember.run(function() {view.set('myDate', new Date());});
     expect(fixture.find('h1').text()).toEqual(time);
   });
+
+  it("removes observers", function() {
+    Ember.run(function() {view.appendTo(fixture);});
+    expect(fixture.find('h1').length).toEqual(1);
+    view.remove();
+    expect(fixture.find('h1').length).toEqual(0);
+  });
 });

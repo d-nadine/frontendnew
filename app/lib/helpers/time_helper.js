@@ -36,6 +36,13 @@ Handlebars.registerHelper('formatTime', function(property, options) {
 
   // Observer function, rerenders the view with the updated date.
   var observer = function() {
+    var elem = view.$();
+    // Delete the observes if the view gets got.
+    if (elem.length === 0) {
+      Ember.removeObserver(context, property, invoker);
+      return;
+    }
+
     var newValue = Ember.getPath(context, property),
         // type = Ember.typeOf(newValue),
         updatedDate = parseDate(newValue);
@@ -49,9 +56,5 @@ Handlebars.registerHelper('formatTime', function(property, options) {
 
   Ember.addObserver(context, property, invoker);
 
-  if (value) {
-    return parseDate(value);
-  } else {
-    return '';
-  }
+  return parseDate(value);
 });
