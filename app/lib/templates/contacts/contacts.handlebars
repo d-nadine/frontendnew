@@ -25,40 +25,56 @@
     {{view Radium.AnnouncementsView}}
     <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
       <div class="btn-group">
-        <a class="btn" href="#">A</a>
-        <a class="btn" href="#">B</a>
-        <a class="btn" href="#">C</a>
-        <a class="btn" href="#">D</a>
-        <a class="btn" href="#">E</a>
-        <a class="btn" href="#">F</a>
-        <a class="btn" href="#">G</a>
-        <a class="btn" href="#">H</a>
-        <a class="btn" href="#">I</a>
-        <a class="btn" href="#">J</a>
-        <a class="btn" href="#">K</a>
-        <a class="btn" href="#">L</a>
-        <a class="btn" href="#">M</a>
-        <a class="btn" href="#">N</a>
-        <a class="btn" href="#">O</a>
-        <a class="btn" href="#">P</a>
-        <a class="btn" href="#">Q</a>
-        <a class="btn" href="#">R</a>
-        <a class="btn" href="#">S</a>
-        <a class="btn" href="#">T</a>
-        <a class="btn" href="#">U</a>
-        <a class="btn" href="#">V</a>
-        <a class="btn" href="#">W</a>
-        <a class="btn" href="#">X</a>
-        <a class="btn" href="#">Y</a>
-        <a class="btn" href="#">Z</a>
+        <button class="btn" href="#">A</button>
+        <button class="btn" href="#">B</button>
+        <button class="btn" href="#">C</button>
+        <button class="btn" href="#">D</button>
+        <button class="btn" href="#">E</button>
+        <button class="btn" href="#">F</button>
+        <button class="btn" href="#">G</button>
+        <button class="btn" href="#">H</button>
+        <button class="btn" href="#">I</button>
+        <button class="btn" href="#">J</button>
+        <button class="btn" href="#">K</button>
+        <button class="btn" href="#">L</button>
+        <button class="btn" href="#">M</button>
+        <button class="btn" href="#">N</button>
+        <button class="btn" href="#">O</button>
+        <button class="btn" href="#">P</button>
+        <button class="btn" href="#">Q</button>
+        <button class="btn" href="#">R</button>
+        <button class="btn" href="#">S</button>
+        <button class="btn" href="#">T</button>
+        <button class="btn" href="#">U</button>
+        <button class="btn" href="#">V</button>
+        <button class="btn" href="#">W</button>
+        <button class="btn" href="#">X</button>
+        <button class="btn" href="#">Y</button>
+        <button class="btn" href="#">Z</button>
       </div>
     </div> <!-- /#alpha -->
 
+    <div class="btn-toolbar" style="margin-bottom: 9px">
+      <div class="btn-group">
+        <button class="btn btn-small">Send Email</button>
+        <button class="btn btn-small">Send SMS</button>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-small">Add Todo</button>
+        <button class="btn btn-small">Add to Call List</button>
+        <button class="btn btn-small">Add to Campaign</button>
+        <button class="btn btn-small">Remove from Campaign</button>
+        <button class="btn btn-small">Change Status</button>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-small btn-info">Import</button>
+      </div>
+    </div>
     <div id="form-container"></div>
 
     <div id="contacts">
       {{#each Radium.contactsController}}
-        {{name}}<br>
+        {{view Radium.ContactCardView contentBinding="this"}}
       {{/each}}
     </div>
   </div> <!-- /#content -->

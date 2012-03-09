@@ -1,0 +1,25 @@
+{{#with content}}
+<div class="contact-card row">
+  <div class="span2">
+    <img src="http://placehold.it/72x72">
+  </div>
+  <div class="span7">
+    <h4 class="headline">
+      {{name}}
+      <span class="label">Lead for 5 days</span>
+      {{#each emailAddresses}}
+        {{view Radium.TooltipView titleBinding="value" icon="envelope"}}
+      {{/each}}
+      {{#each phoneNumbers}}
+        {{view Radium.TooltipView titleBinding="value" icon="user"}}
+      {{/each}}
+    </h4>
+    <p>Next Up, Todo: <a href="#">Schedule conference call</a> - Tomorrow at 5pm</p>
+    <p>Campagins: 
+      {{#each campaigns}}
+        <a {{bindAttr href="url"}}>{{name}}</a> 
+      {{/each}}
+    </p>
+  </div>
+</div>
+{{/with}}

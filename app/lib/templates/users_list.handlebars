@@ -3,7 +3,7 @@
     {{#each content contentBinding="this"}}
       {{#view Radium.UserListItemView userBinding="this"}}
         <a href="#" {{action "viewUser"}} title="User #{{unbound user.id}}">
-          <img src="/images/headshots/holman_normal.png" class="avatar">
+          <img src="http://placehold.it/34x34" class="avatar">
           <span>{{ user.abbrName }}</span>
           {{#if isSelected}}
             <i class="icon-ok pull-right"></i>

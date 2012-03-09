@@ -29,6 +29,7 @@ minispade.require('radium/templates/dashboard/dashboard');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
+minispade.require('radium/templates/contacts/contact_card');
 
 // Deals
 minispade.require('radium/templates/deals/deals_feed_group');
@@ -50,6 +51,7 @@ minispade.require('radium/templates/users_list');
 // -------------------------
 // UI Elements
 minispade.require('radium/views/highchart');
+minispade.require('radium/views/ui/tooltip');
 
 // Forms
 minispade.require('radium/views/forms/datepicker');
@@ -93,6 +95,7 @@ minispade.require('radium/views/dashboard/announcements');
 
 // Contacts
 minispade.require('radium/views/contacts/contacts');
+minispade.require('radium/views/contacts/contact_card');
 
 // Deals
 minispade.require('radium/views/deals/overdue_deals');
