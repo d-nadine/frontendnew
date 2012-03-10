@@ -54,7 +54,7 @@ describe("Radium#Activity", function() {
 
   beforeEach(function() {
     adapter = RadiumAdapter.create();
-    store = DS.Store.create({revision: 2,adapter: adapter});
+    store = DS.Store.create({revision: 3,adapter: adapter});
     server = sinon.fakeServer.create();
     spy = sinon.spy(jQuery, 'ajax');
   });

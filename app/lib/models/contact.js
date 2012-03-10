@@ -14,5 +14,6 @@ Radium.Contact = Radium.Person.extend({
     key: 'email_addresses'
   }),
   fields: DS.hasMany('Radium.Field', {embedded: true}),
-  user: DS.hasOne('Radium.User')
+  user: DS.hasOne('Radium.User'),
+  isSelected: false
 });

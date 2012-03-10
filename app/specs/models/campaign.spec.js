@@ -9,7 +9,7 @@ describe("Radium#Campaign", function() {
 
     beforeEach(function() {
       adapter = RadiumAdapter.create({bulkCommit: false});
-      store = DS.Store.create({revision: 2,adapter: adapter});
+      store = DS.Store.create({revision: 3,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });

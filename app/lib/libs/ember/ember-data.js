@@ -1,7 +1,7 @@
 
 (function(exports) {
 window.DS = Ember.Namespace.create({
-  CURRENT_API_REVISION: 2
+  CURRENT_API_REVISION: 3
 });
 
 })({});
@@ -1088,6 +1088,7 @@ DS.Store = Ember.Object.extend({
 
       dataCache[clientId] = hash;
       model.send('didChangeData');
+      model.hashWasUpdated();
     }
 
     model.send('didCommit');
@@ -1114,6 +1115,7 @@ DS.Store = Ember.Object.extend({
       record.beginPropertyChanges();
       record.send('didChangeData');
       recordData.adapterDidUpdate(hash);
+      record.hashWasUpdated();
       record.endPropertyChanges();
 
       id = hash[primaryKey];
@@ -2019,7 +2021,7 @@ DS.StateManager = Ember.StateManager.extend({
 
 
 (function(exports) {
-var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
+var get = Ember.get, set = Ember.set, getPath = Ember.getPath, none = Ember.none;
 
 var retrieveFromCurrentState = Ember.computed(function(key) {
   return get(getPath(this, 'stateManager.currentState'), key);
@@ -2086,10 +2088,7 @@ DataProxy.prototype = {
 
     unsavedData[key] = value;
 
-    // At the end of the run loop, notify model arrays that
-    // this record has changed so they can re-evaluate its contents
-    // to determine membership.
-    Ember.run.once(record, record.notifyHashWasUpdated);
+    record.hashWasUpdated();
 
     return value;
   },
@@ -2250,13 +2249,18 @@ DS.Model = Ember.Object.extend({
     @param {Object} options options passed to `toJSON`
   */
   addBelongsToToJSON: function(json, data, meta, options) {
-    var key = meta.key, id;
+    var key = meta.key, value, id;
 
-    if (id = data.get(key)) {
-      json[key] = id;
+    if (options.embedded) {
+      key = options.key || get(this, 'namingConvention').keyToJSONKey(key);
+      value = get(data.record, key);
+      json[key] = value ? value.toJSON(options) : null;
+    } else {
+      key = options.key || get(this, 'namingConvention').foreignKey(key);
+      id = data.get(key);
+      json[key] = none(id) ? null : id;
     }
   },
-
   /**
     Create a JSON representation of the record, including its `id`,
     attributes and associations. Honor any settings defined on the
@@ -2374,8 +2378,16 @@ DS.Model = Ember.Object.extend({
     },
 
     foreignKey: function(key) {
-      return key + '_id';
+      return Ember.String.decamelize(key) + '_id';
     }
+  },
+
+  /** @private */
+  hashWasUpdated: function() {
+    // At the end of the run loop, notify model arrays that
+    // this record has changed so they can re-evaluate its contents
+    // to determine membership.
+    Ember.run.once(this, this.notifyHashWasUpdated);
   }
 });
 
@@ -2502,7 +2514,7 @@ DS.attr.transforms = {
     }
   },
 
-  boolean: {
+  'boolean': {
     from: function(serialized) {
       return Boolean(serialized);
     },
@@ -2633,10 +2645,12 @@ var referencedFindRecord = function(store, type, data, key, one) {
 };
 
 var hasAssociation = function(type, options, one) {
-  var embedded = options && options.embedded,
-    findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
+  options = options || {};
 
-  var meta = { type: type, isAssociation: true, options: options || {} };
+  var embedded = options.embedded,
+      findRecord = embedded ? embeddedFindRecord : referencedFindRecord;
+
+  var meta = { type: type, isAssociation: true, options: options };
   if (one) {
     meta.kind = 'belongsTo';
   } else {
@@ -2651,19 +2665,28 @@ var hasAssociation = function(type, options, one) {
       type = getPath(this, type, false) || getPath(window, type);
     }
 
-    key = (options && options.key) ? options.key : key;
     if (one) {
       if (arguments.length === 2) {
+        key = options.key || get(this, 'namingConvention').foreignKey(key);
         data.setAssociation(key, get(value, 'clientId'));
         // put the client id in `key` in the data hash
         return value;
       } else {
+        // Embedded belongsTo associations should not look for
+        // a foreign key.
+        if (embedded) {
+          key = options.key || key;
+
+        // Non-embedded associations should look for a foreign key.
+        // For example, instead of person, we might look for person_id
+        } else {
+          key = options.key || get(this, 'namingConvention').foreignKey(key);
+        }
         id = findRecord(store, type, data, key, true);
         association = id ? store.find(type, id) : null;
-
-        // if we have an association, store its client id in `key` in the data hash
       }
     } else {
+      key = options.key || key;
       ids = findRecord(store, type, data, key);
       association = store.findMany(type, ids);
       set(association, 'parentRecord', this);

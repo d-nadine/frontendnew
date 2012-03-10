@@ -19,7 +19,7 @@ Radium.ContactsPage = Ember.State.extend({
               Radium.store.findAll(Radium.Contact, {page: 1})
             );
           }
-          this.toggleProperty('isFirstRun');
+          this.set('isFirstRun', false);
         } else {
           Ember.run.next(function() {
             manager.goToState('ready');

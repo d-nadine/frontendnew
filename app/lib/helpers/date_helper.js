@@ -14,9 +14,13 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       format = Ember.getPath('options.hash.format') || "%B %D, %Y";
       
   var parseDate = function(date) {
-    var milli = date.getTime();
-    var d = Ember.DateTime.create(milli);
-    return d.toFormattedString(format);
+    if (date) {
+      var milli = date.getTime();
+      var d = Ember.DateTime.create(milli);
+      return d.toFormattedString(format);
+    } else {
+      return "";
+    }
   };
 
   // Observer function, rerenders the view with the updated date.
@@ -29,7 +33,7 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
     }
     // Compute new date and update the view.
     var newValue = Ember.getPath(context, property),
-      updatedDate = parseDate(newValue);
+        updatedDate = parseDate(newValue);
     view.$().text(updatedDate);
     view.rerender();
   };
@@ -38,7 +42,9 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
     Ember.run.once(observer);
   };
 
-  Ember.addObserver(context, property, invoker);
+  Ember.run(function() {
+    Ember.addObserver(context, property, invoker);
+  });
 
   return parseDate(value);
 });

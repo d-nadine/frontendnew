@@ -100,7 +100,7 @@ describe("Radium#Contact", function() {
 
     beforeEach(function() {
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({revision: 2,adapter: adapter});
+      store = DS.Store.create({revision: 3,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');
     });
@@ -168,7 +168,7 @@ describe("Radium#Contact", function() {
   describe("when nested attributes are requested", function() {
     beforeEach(function() {
       adapter = RadiumAdapter.create();
-      store = DS.Store.create({revision: 2,adapter: adapter});
+      store = DS.Store.create({revision: 3,adapter: adapter});
       server = sinon.fakeServer.create();
       server.respondWith("GET", "/api/contacts/1", [
         200, 
@@ -241,7 +241,7 @@ describe("Radium#Contact", function() {
     beforeEach(function() {
       adapter = RadiumAdapter.create();
       server.fakeHTTPMethods = true;
-      store = DS.Store.create({revision: 2,adapter: adapter});
+      store = DS.Store.create({revision: 3,adapter: adapter});
       server = sinon.fakeServer.create();
     });
     
