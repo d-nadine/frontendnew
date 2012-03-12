@@ -1,0 +1,15 @@
+<form class="well">
+  <legend>Add to Campaign</legend>
+  <label for="all-campaigns">Campaigns</label>
+  {{view Ember.Select 
+    viewName="select"
+    contentBinding="Radium.campaignsController"
+    optionLabelPath="content.name"
+    optionValuePath="contend.id"
+  }}
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

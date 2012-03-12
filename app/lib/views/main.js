@@ -23,6 +23,7 @@ minispade.require('radium/templates/forms/meeting_form');
 minispade.require('radium/templates/forms/message_form');
 minispade.require('radium/templates/forms/todo_form');
 minispade.require('radium/templates/forms/campaign_form');
+minispade.require('radium/templates/forms/add_to_campaign_form');
 
 // Dashboard
 minispade.require('radium/templates/dashboard/dashboard');
@@ -66,6 +67,7 @@ minispade.require('radium/views/forms/call_list_form');
 minispade.require('radium/views/forms/meeting_form');
 minispade.require('radium/views/forms/deal_form');
 minispade.require('radium/views/forms/campaign_form');
+minispade.require('radium/views/forms/add_to_campaign_form');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/globalsearch');
 

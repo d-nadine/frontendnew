@@ -23,12 +23,13 @@ Radium.ContactsToolbarView = Ember.View.extend({
   }),
   callListButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'Call List');
+      Radium.App.send('addResource', 'CallList');
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
   addCampaignButton: Ember.Button.extend({
     click: function() {
+      Radium.App.send('addResource', 'AddToCampaign');
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -40,7 +41,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
         item.get('campaigns').removeObjects(campaigns);
       }, this);
 
-      // Radium.store.commit();
+      Radium.store.commit();
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
