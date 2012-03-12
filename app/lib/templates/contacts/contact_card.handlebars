@@ -1,38 +1,42 @@
 {{#with content}}
-  <div id="contact-avatar" class="span2">
-    <span class="inline-checkbox">
-      {{view Radium.Checkbox valueBinding="isSelected"}}
-    </span>
-    <img src="http://placehold.it/72x72">
-  </div>
-  <div class="span7">
-    <h4 class="headline">
-      {{name}}
+  <div class="contact-card-inner">
+    <div class="contact-avatar">
+      <span class="inline-checkbox">
+        {{view Radium.Checkbox valueBinding="isSelected"}}
+      </span>
+      <img src="http://placehold.it/72x72">
+    </div>
+    <div class="contact-details">
+      <h4 class="headline">
+        {{name}}
 
-      {{#each emailAddresses}}
-        {{view Radium.TooltipView titleBinding="value" icon="envelope"}}
-      {{/each}}
-      {{#each phoneNumbers}}
-        {{view Radium.TooltipView titleBinding="value" icon="user"}}
-      {{/each}}
-    </h4>
+        {{#each emailAddresses}}
+          {{view Radium.TooltipView titleBinding="value" icon="envelope"}}
+        {{/each}}
+        {{#each phoneNumbers}}
+          {{view Radium.TooltipView titleBinding="value" icon="user"}}
+        {{/each}}
+      </h4>
+      <!--
+      {{!if groups.length}}
+      <h5>
+        {{!each groups}}
+          {{!name}}, 
+        {{!each}}
+      </h5>
+      {{!if}}
 
-    {{!if groups.length}}
-    <h5>
-      {{!each groups}}
-        {{!name}}, 
-      {{!each}}
-    </h5>
-    {{!if}}
-
-    {{!if todos.length}}
-    <p><strong>Next Up:</strong> {{!todos.lastObject.description}} - {{!formatDate todos.lastObject.finishBy}}</p>
-    {{!if}}
-
-    <p><strong>Campaigns:</strong> 
-      {{!each campaigns}}
-        <a {{!bindAttr href="url"}}>{{!name}}</a> 
-      {{!each}}
-    </p>
+      {{!if todos.length}}
+      <p><strong>Next Up:</strong> {{!todos.lastObject.description}} - {{!formatDate todos.lastObject.finishBy}}</p>
+      {{!if}}
+      -->
+      {{#if campaigns.length}}
+        <p><strong>Campaigns:</strong> 
+          {{#each campaigns}}
+            <a {{bindAttr href="url"}}>{{name}}</a> 
+          {{/each}}
+        </p>
+      {{/if}}
+    </div>
   </div>
 {{/with}}

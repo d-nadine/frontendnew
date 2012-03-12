@@ -34,6 +34,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
     @binding {content.status}
     @return {Ember.Array} Filtered dead ends
   */
+
   deadEnds: function() {
     return this.filterProperty('status', 'dead_end');
   }.property('@each.status').cacheable(),
@@ -48,6 +49,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
       };
     });
   }.property('@each.name').cacheable(),
+
   /**
     An array of objects for simple, name-only autocomplete in forms.
     eg [{label: "Avon Barksdale", value: {userid}}]
@@ -58,6 +60,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
       return {label: item.get('name'), value: item.get('id')};
     });
   }.property('@each.name').cacheable(),
+
   /**
     An array of objects for emails, sms, etc for autocomplete in forms.
     eg [{label: "Avon Barksdale", value: {userid}}]
@@ -73,11 +76,13 @@ Radium.contactsController = Ember.ArrayProxy.create({
       };
     });
   }.property('@each.name').cacheable(),
+
   fetchContacts: function() {
     var self = this,
         content = Radium.store.findAll(Radium.Contact);
     this.set('content', content);
   },
+
   findContact: function(id) {
     return this.get('content').find(function(item) {
       return item.get('id') === id;
@@ -138,5 +143,12 @@ Radium.contactsController = Ember.ArrayProxy.create({
       shortname: 'notasks', 
       hasForm: false
     }
-  ]
+  ],
+
+  /**
+    Return all contacts selected on Contacts page.
+  */
+  selectedContacts: function() {
+    return this.filterProperty('isSelected', true);
+  }.property('@each.isSelected').cacheable()
 });

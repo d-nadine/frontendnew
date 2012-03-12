@@ -53,25 +53,26 @@
         <button class="btn" href="#">Z</button>
       </div>
     </div> <!-- /#alpha -->
-
-    <div class="btn-toolbar" style="margin-bottom: 9px">
-      <div class="btn-group">
-        <button class="btn btn-small">Send Email</button>
-        <button class="btn btn-small">Send SMS</button>
+    {{#view Radium.ContactsToolbarView}}
+      <div class="btn-toolbar" style="margin-bottom: 9px">
+        <div class="btn-group">
+          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
+          {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
+        </div>
+        <div class="btn-group">
+          {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
+          {{#view callListButton class="btn btn-small"}}Add to Call List{{/view}}
+          {{#view addCampaignButton class="btn btn-small"}}Add to Campaign{{/view}}
+          {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
+        </div>
+        <div class="btn-group">
+          {{#view statusButton class="btn btn-small"}}Change Status{{/view}}
+        </div>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-small">Add Todo</button>
-        <button class="btn btn-small">Add to Call List</button>
-        <button class="btn btn-small">Add to Campaign</button>
-        <button class="btn btn-small">Remove from Campaign</button>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-small">Change Status</button>
-      </div>
-    </div>
+    {{/view}}
     <div id="form-container"></div>
 
-    <div id="contacts">
+    <div id="contacts" class="row">
       {{#each Radium.contactsController}}
         {{view Radium.ContactCardView contentBinding="this"}}
       {{/each}}

@@ -54,9 +54,11 @@ minispade.require('radium/views/highchart');
 minispade.require('radium/views/ui/tooltip');
 
 // Forms
+minispade.require('radium/views/forms/textfield');
+minispade.require('radium/views/checkbox');
 minispade.require('radium/views/forms/datepicker');
 minispade.require('radium/views/forms/form');
-minispade.require('radium/views/forms/textfield');
+minispade.require('radium/views/forms/autocomplete');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/forms/message_form');
 minispade.require('radium/views/forms/discussion_form');
@@ -65,9 +67,7 @@ minispade.require('radium/views/forms/meeting_form');
 minispade.require('radium/views/forms/deal_form');
 minispade.require('radium/views/forms/campaign_form');
 minispade.require('radium/views/forms/todo_form');
-minispade.require('radium/views/checkbox');
 minispade.require('radium/views/globalsearch');
-minispade.require('radium/views/forms/autocomplete');
 
 // Feeds
 minispade.require('radium/views/feed/feed_filter');
@@ -95,6 +95,7 @@ minispade.require('radium/views/dashboard/announcements');
 
 // Contacts
 minispade.require('radium/views/contacts/contacts');
+minispade.require('radium/views/contacts/toolbar');
 minispade.require('radium/views/contacts/contact_card');
 
 // Deals
