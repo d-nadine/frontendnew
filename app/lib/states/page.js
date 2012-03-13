@@ -4,7 +4,7 @@ Radium.PageStateMixin = Ember.Mixin.create({
     formType: 'Todo',
     enter: function() {
       var type = Radium.appController.get('selectedForm');
-      var form = this.get('form') || Radium[type+'FormView'].create();
+      var form = this.get('form') || Radium[type+'Form'].create();
       form.appendTo('#form-container');
       this.set('form', form);
       this.setPath('parentState.isFormAddView', true);

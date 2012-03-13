@@ -14,7 +14,6 @@
           <li>
             <a href="#">
               {{unbound name}}
-              <span class="label">{{contacts.length}}</span>
             </a>
           </li>
           {{/each}}
@@ -71,16 +70,13 @@
           {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
         </div>
         <div class="btn-group">
-          {{#view statusButton class="btn btn-small dropdown-toggle"}}
-            Change Status
-            <span class="caret"></span>
-          {{/view}}
+          {{view statusButton title="Change Status" selectionBinding="Radium.contactsController.selectedContacts"}}
           <ul class="dropdown-menu">
-            <li><a href="#">Dead End</a></li>
-            <li><a href="#">Opportunity</a></li>
-            <li><a href="#">Prospect</a></li>
-            <li><a href="#">Client</a></li>
-            <li><a href="#">Lead</a></li>
+            <li><a href="#" {{action "assignStatus"}}>Dead End</a></li>
+            <li><a href="#" {{action "assignStatus"}}>Opportunity</a></li>
+            <li><a href="#" {{action "assignStatus"}}>Prospect</a></li>
+            <li><a href="#" {{action "assignStatus"}}>Client</a></li>
+            <li><a href="#" {{action "assignStatus"}}>Lead</a></li>
           </ul>
         </div>
       </div>

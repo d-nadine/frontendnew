@@ -1,4 +1,4 @@
-Radium.TodoFormView = Radium.FormView.extend({
+Radium.TodoForm = Radium.FormView.extend({
   wantsReminder: false,
   reminderForm: Ember.View.extend({
     id: 'add-reminder',

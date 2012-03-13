@@ -1,7 +1,4 @@
-minispade.require('radium/templates/forms/call_list_form'),
-minispade.require('radium/templates/forms/reminder');
-
-  Radium.CallListFormView = Radium.FormView.extend({
+  Radium.CallListForm = Radium.FormView.extend({
     templateName: 'call_list_form',
     wantsReminder: false,
     reminderForm: Ember.View.extend({

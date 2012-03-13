@@ -1,4 +1,4 @@
-  Radium.CampaignFormView = Radium.FormView.extend({
+  Radium.CampaignForm = Radium.FormView.extend({
     templateName: 'campaign_form',
     wantsReminder: false,
     reminderForm: Ember.View.extend({

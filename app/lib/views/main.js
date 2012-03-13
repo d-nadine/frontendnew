@@ -21,6 +21,8 @@ minispade.require('radium/templates/forms/deal_form');
 minispade.require('radium/templates/forms/discussion_form');
 minispade.require('radium/templates/forms/meeting_form');
 minispade.require('radium/templates/forms/message_form');
+minispade.require('radium/templates/forms/contacts_message_form');
+minispade.require('radium/templates/forms/contacts_sms_form');
 minispade.require('radium/templates/forms/todo_form');
 minispade.require('radium/templates/forms/campaign_form');
 minispade.require('radium/templates/forms/add_to_campaign_form');
@@ -53,6 +55,7 @@ minispade.require('radium/templates/users_list');
 // UI Elements
 minispade.require('radium/views/highchart');
 minispade.require('radium/views/ui/tooltip');
+minispade.require('radium/views/ui/dropdown_button');
 
 // Forms
 minispade.require('radium/views/forms/textfield');
@@ -62,6 +65,8 @@ minispade.require('radium/views/forms/form');
 minispade.require('radium/views/forms/autocomplete');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/forms/message_form');
+minispade.require('radium/views/forms/contacts_message_form');
+minispade.require('radium/views/forms/contacts_sms_form');
 minispade.require('radium/views/forms/discussion_form');
 minispade.require('radium/views/forms/call_list_form');
 minispade.require('radium/views/forms/meeting_form');

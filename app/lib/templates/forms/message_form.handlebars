@@ -1,16 +1,8 @@
 <form class="well">
-  <legend>Send a Message
-    <div class="btn-toolbar pull-right" style="margin-top: 0">
-      <div class="btn-group">
-        <a class="btn active" href="#">New Email</a>
-        <a class="btn" href="#">New SMS</a>
-        <a class="btn" href="#">New IM</a>
-      </div>
-    </div>
-  </legend>
+  <legend>Send a Message</legend>
 
   <label for="to">To</label>
-  {{view toFieldInput 
+  {{view Radium.AutocompleteTextField 
     id="to" class="input-xlarge"
     sourceBinding="Radium.everyoneController.all"
   }}

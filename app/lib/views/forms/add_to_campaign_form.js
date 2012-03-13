@@ -1,4 +1,4 @@
-Radium.AddToCampaignFormView = Radium.FormView.extend({
+Radium.AddToCampaignForm = Radium.FormView.extend({
   templateName: 'add_to_campaign_form',
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   submitForm: function() {
