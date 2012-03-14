@@ -1,3 +1,7 @@
 Radium.selectedContactsController = Ember.ArrayProxy.create({
-  // contactsBinding:
+  content: [],
+  selectedCampaign: null,
+  uncheckContacts: function() {
+    Radium.contactsController.setEach('isSelected', false);
+  }.observes('content.@each')
 });

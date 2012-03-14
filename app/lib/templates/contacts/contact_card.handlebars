@@ -9,7 +9,8 @@
     <div class="contact-details">
       <h4 class="headline">
         {{name}}
-        <span class="label">{{status}}</span>
+        {{view Radium.ContactLabelView statusBinding="status"}}
+        {{Radium.contactsController.categoryFilter}}
 
         {{#each emailAddresses}}
           {{view Radium.TooltipView titleBinding="value" icon="envelope"}}

@@ -104,6 +104,7 @@ minispade.require('radium/views/dashboard/announcements');
 minispade.require('radium/views/contacts/contacts');
 minispade.require('radium/views/contacts/toolbar');
 minispade.require('radium/views/contacts/contact_card');
+minispade.require('radium/views/contacts/contact_label');
 
 // Deals
 minispade.require('radium/views/deals/overdue_deals');

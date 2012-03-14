@@ -4,7 +4,7 @@
 
 Radium.Contact = Radium.Person.extend({
   status: DS.attr('string', {
-    defaultValue: 'Pending'
+    defaultValue: 'Prospect'
   }),
   addresses: DS.hasMany('Radium.Address', {embedded: true}),
   phoneNumbers: DS.hasMany('Radium.PhoneNumber', {

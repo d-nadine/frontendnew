@@ -5,23 +5,22 @@
       contentBinding="Radium.contactsController.filterTypes"
     }}
 
-    <ul class="ember-view nav nav-tabs nav-stacked">
-      {{#with Radium.campaignsController}}
-        {{#if content.length}}
-          
-          <li><a href="#">All Campaigns</a></li>
-          {{#each this}}
-          <li>
-            <a href="#">
-              {{unbound name}}
+    {{#view campaignsFilterView contentBinding="Radium.campaignsController"}}
+      {{#if content.length}}
+        <li {{bindAttr class="noSelectedCampaigns:active"}}>
+          <a href="#" {{action "allCampaigns"}}>All Campaigns</a>
+        </li>
+        {{#each content}}
+          {{#view Radium.CampaignListView itemBinding="this"}}
+            <a href="#" {{action "filterCampaigns"}}>
+              {{item.name}}
             </a>
-          </li>
-          {{/each}}
-        {{else}}
-          <li>Loading...</li>
-        {{/if}}
-      {{/with}}
-    </ul>
+          {{/view}}
+        {{/each}}
+      {{else}}
+        <li>Loading Campaigns...</li>
+      {{/if}}
+    {{/view}}
   </div> <!-- /#sidebar -->
 
   <div id="content" class="span9">
@@ -29,36 +28,36 @@
     {{view Radium.AnnouncementsView}}
     <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
       <div class="btn-group">
-        <button class="btn" href="#">A</button>
-        <button class="btn" href="#">B</button>
-        <button class="btn" href="#">C</button>
-        <button class="btn" href="#">D</button>
-        <button class="btn" href="#">E</button>
-        <button class="btn" href="#">F</button>
-        <button class="btn" href="#">G</button>
-        <button class="btn" href="#">H</button>
-        <button class="btn" href="#">I</button>
-        <button class="btn" href="#">J</button>
-        <button class="btn" href="#">K</button>
-        <button class="btn" href="#">L</button>
-        <button class="btn" href="#">M</button>
-        <button class="btn" href="#">N</button>
-        <button class="btn" href="#">O</button>
-        <button class="btn" href="#">P</button>
-        <button class="btn" href="#">Q</button>
-        <button class="btn" href="#">R</button>
-        <button class="btn" href="#">S</button>
-        <button class="btn" href="#">T</button>
-        <button class="btn" href="#">U</button>
-        <button class="btn" href="#">V</button>
-        <button class="btn" href="#">W</button>
-        <button class="btn" href="#">X</button>
-        <button class="btn" href="#">Y</button>
-        <button class="btn" href="#">Z</button>
+        <button class="btn">A</button>
+        <button class="btn">B</button>
+        <button class="btn">C</button>
+        <button class="btn">D</button>
+        <button class="btn">E</button>
+        <button class="btn">F</button>
+        <button class="btn">G</button>
+        <button class="btn">H</button>
+        <button class="btn">I</button>
+        <button class="btn">J</button>
+        <button class="btn">K</button>
+        <button class="btn">L</button>
+        <button class="btn">M</button>
+        <button class="btn">N</button>
+        <button class="btn">O</button>
+        <button class="btn">P</button>
+        <button class="btn">Q</button>
+        <button class="btn">R</button>
+        <button class="btn">S</button>
+        <button class="btn">T</button>
+        <button class="btn">U</button>
+        <button class="btn">V</button>
+        <button class="btn">W</button>
+        <button class="btn">X</button>
+        <button class="btn">Y</button>
+        <button class="btn">Z</button>
       </div>
     </div> <!-- /#alpha -->
     {{#view Radium.ContactsToolbarView}}
-      <div class="btn-toolbar" style="margin-bottom: 9px">
+      <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
         <div class="btn-group">
           {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
           {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
@@ -79,14 +78,42 @@
             <li><a href="#" {{action "assignStatus"}}>Lead</a></li>
           </ul>
         </div>
+      </div> <!-- /#contacts-bulk-toolbar -->
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          {{#view selectAllButton class="btn btn-mini"}}
+            <i class="icon-ok-circle"></i> All
+          {{/view}}
+          {{#view selectNoneButton class="btn btn-mini"}}
+           <i class="icon-remove-circle"></i> None
+          {{/view}}
+        </div>
+        {{#view totalSelected class="pull-right"}}
+          <h5>{{totalSelectedString}} selected.</h5>
+        {{/view}}
       </div>
     {{/view}}
     <div id="form-container"></div>
 
     <div id="contacts" class="row">
-      {{#each Radium.contactsController}}
-        {{view Radium.ContactCardView contentBinding="this"}}
-      {{/each}}
+      {{#with Radium.selectedContactsController}}
+        {{#if selectedCampaign}}
+          <div class="span9">
+            <div class="page-header">
+              <h2>{{selectedCampaign.name}}'s Contacts</h2>
+            </div>
+          </div>
+        {{/if}}
+        {{#if content.length}}
+          {{#each content}}
+            {{view Radium.ContactCardView contentBinding="this"}}
+          {{/each}}
+        {{else}}
+          {{#each Radium.contactsController}}
+            {{view Radium.ContactCardView contentBinding="this"}}
+          {{/each}}
+        {{/if}}
+      {{/with}}
     </div>
   </div> <!-- /#content -->
 </div> <!-- /.row -->

@@ -7,9 +7,9 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
     }.property('parentView.categoryFilter').cacheable(),
     classNameBindings: ['isEnabled:active'],
     templateName: 'feed_filter',
-    changeFilter: function(view, event, context) {
+    changeFilter: function(event) {
       var type = this.getPath('content.shortname');
-      this.setPath('parentView.categoryFilter', type);
+      this.setPath('parentView.controller.categoryFilter', type);
       return false;
     },
 
