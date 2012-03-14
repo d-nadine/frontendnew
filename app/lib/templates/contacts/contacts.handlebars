@@ -1,13 +1,29 @@
 <div class="row">
   <div id="sidebar" class="span3">
-    {{collection Radium.FeedFilterView 
+    {{!collection Radium.FeedFilterView 
       controllerBinding="Radium.contactsController"
       contentBinding="Radium.contactsController.filterTypes"
     }}
 
+    {{#view contactsFilterView contentBinding="Radium.contactsController.filterTypes"}}
+      <li {{bindAttr class="parentView.noSelectedFilter:active"}}>
+        <a href="#" {{action "allContacts"}}>Everything</a>
+      </li>
+      {{#each content}}
+        {{#view Radium.ContactFilterListView itemBinding="this"}}
+          <a href="#" {{action "filterContacts"}}>
+            {{#if item.hasForm}}
+              {{view newResourceButton}}
+            {{/if}}
+            {{item.title}}
+          </a>
+        {{/view}}
+      {{/each}}
+    {{/view}}
+
     {{#view campaignsFilterView contentBinding="Radium.campaignsController"}}
       {{#if content.length}}
-        <li {{bindAttr class="noSelectedCampaigns:active"}}>
+        <li {{bindAttr class="parentView.noSelectedCampaigns:active"}}>
           <a href="#" {{action "allCampaigns"}}>All Campaigns</a>
         </li>
         {{#each content}}
@@ -71,11 +87,11 @@
         <div class="btn-group">
           {{view statusButton title="Change Status" selectionBinding="Radium.contactsController.selectedContacts"}}
           <ul class="dropdown-menu">
-            <li><a href="#" {{action "assignStatus"}}>Dead End</a></li>
-            <li><a href="#" {{action "assignStatus"}}>Opportunity</a></li>
-            <li><a href="#" {{action "assignStatus"}}>Prospect</a></li>
-            <li><a href="#" {{action "assignStatus"}}>Client</a></li>
-            <li><a href="#" {{action "assignStatus"}}>Lead</a></li>
+            <li><a href="#" {{action "assignStatus"}} data-status="lead">Lead</a></li>
+            <li><a href="#" {{action "assignStatus"}} data-status="prospect">Prospect</a></li>
+            <li><a href="#" {{action "assignStatus"}} data-status="opportunity">Opportunity</a></li>
+            <li><a href="#" {{action "assignStatus"}} data-status="customer">Customer</a></li>
+            <li><a href="#" {{action "assignStatus"}} data-status="dead_end">Dead End</a></li>
           </ul>
         </div>
       </div> <!-- /#contacts-bulk-toolbar -->
@@ -100,7 +116,7 @@
         {{#if selectedCampaign}}
           <div class="span9">
             <div class="page-header">
-              <h2>{{selectedCampaign.name}}'s Contacts</h2>
+              <h3>{{selectedCampaign.name}}'s Contacts</h3>
             </div>
           </div>
         {{/if}}
@@ -109,9 +125,9 @@
             {{view Radium.ContactCardView contentBinding="this"}}
           {{/each}}
         {{else}}
-          {{#each Radium.contactsController}}
-            {{view Radium.ContactCardView contentBinding="this"}}
-          {{/each}}
+          <div class="span9">
+            <h4>Loading contacts...</h4>
+          </div>
         {{/if}}
       {{/with}}
     </div>

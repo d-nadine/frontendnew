@@ -19,7 +19,12 @@ Radium.ContactsPage = Ember.State.extend({
               Radium.store.findAll(Radium.Contact, {page: 1})
             );
           }
+
           this.set('isFirstRun', false);
+
+          Ember.run.next(function() {
+            manager.goToState('ready');
+          });
         } else {
           Ember.run.next(function() {
             manager.goToState('ready');
@@ -27,6 +32,36 @@ Radium.ContactsPage = Ember.State.extend({
         }
       }
     }),
-    ready: Ember.State.create()
+    ready: Ember.State.create({
+      enter: function(manager) {
+        Radium.selectedContactsController.set('content', Radium.contactsController.get('content'));
+      },
+      exit: function(manager) {
+        Radium.contactsController.setEach('isSelected', false);
+      }
+    }),
+
+    selectedCampaign: Ember.State.create({
+      exit: function(manager) {
+        Radium.contactsController.setEach('isSelected', false);
+        Radium.selectedContactsController.setProperties({
+          content: [],
+          selectedCampaign: null
+        });
+      }
+    }),
+
+    // Events
+    allCampaigns: function(manager, context) {
+      manager.goToState('ready');
+    },
+
+    selectCampaign: function(manager, context) {
+      Radium.selectedContactsController.setProperties({
+        content: context.get('contacts'),
+        selectedCampaign: context
+      });
+      manager.goToState('selectedCampaign');
+    }
   })
 })

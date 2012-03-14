@@ -9,19 +9,19 @@ Radium.ContactLabelView = Ember.View.extend({
     'isDeadEnd:label-important'
   ],
   isLead: function() {
-    return (this.get('status') === 'Lead') ? true : false;
+    return (this.get('status') === 'lead') ? true : false;
   }.property('status').cacheable(),
   isProspect: function() {
-    return (this.get('status') === 'Prospect') ? true : false;
+    return (this.get('status') === 'prospect') ? true : false;
   }.property('status').cacheable(),
   isOpportunity: function() {
-    return (this.get('status') === 'Opportunity') ? true : false;
+    return (this.get('status') === 'opportunity') ? true : false;
   }.property('status').cacheable(),
   isClient: function() {
-    return (this.get('status') === 'Client') ? true : false;
+    return (this.get('status') === 'client') ? true : false;
   }.property('status').cacheable(),
   isDeadEnd: function() {
-    return (this.get('status') === 'Dead End') ? true : false;
+    return (this.get('status') === 'dead_end') ? true : false;
   }.property('status').cacheable(),
 
   template: Ember.Handlebars.compile('{{status}}')

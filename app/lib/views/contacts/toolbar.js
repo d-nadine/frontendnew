@@ -12,7 +12,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   assignStatus: function(event) {
     var contacts = this.get('selectedContacts'),
-        newStatus = event.target.innerText;
+        newStatus = $(event.target).data('status');
     // Hide all open dropdown menus
     this.$('.btn-group').toggleClass('open');
     contacts.setEach('status', newStatus);
@@ -92,7 +92,11 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   selectAllButton: Ember.Button.extend({
     click: function() {
-      Radium.contactsController.setEach('isSelected', true);
+      if (Radium.selectedContactsController.get('length')) {
+        Radium.selectedContactsController.setEach('isSelected', true);
+      } else {
+        Radium.contactsController.setEach('isSelected', true);
+      }
     }
   }),
 
@@ -101,7 +105,11 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   selectNoneButton: Ember.Button.extend({
     click: function() {
-      Radium.contactsController.setEach('isSelected', false);
+      if (Radium.selectedContactsController.get('length')) {
+        Radium.selectedContactsController.setEach('isSelected', false);
+      } else {
+        Radium.contactsController.setEach('isSelected', false);
+      }
     }
   }),
 

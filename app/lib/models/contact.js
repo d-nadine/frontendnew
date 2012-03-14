@@ -4,7 +4,7 @@
 
 Radium.Contact = Radium.Person.extend({
   status: DS.attr('string', {
-    defaultValue: 'Prospect'
+    defaultValue: 'prospect'
   }),
   addresses: DS.hasMany('Radium.Address', {embedded: true}),
   phoneNumbers: DS.hasMany('Radium.PhoneNumber', {
@@ -17,5 +17,15 @@ Radium.Contact = Radium.Person.extend({
   }),
   fields: DS.hasMany('Radium.Field', {embedded: true}),
   user: DS.hasOne('Radium.User'),
-  isSelected: false
+  // For checkboxes
+  isSelected: false,
+
+  // Filter properties
+  assigned: function() {
+    return (this.get('user')) ? true : false;
+  }.property('user').cacheable(),
+  
+  noUpcomingTasks: function() {
+    return (this.get('todos')) ? true : false;
+  }.property('todos').cacheable()
 });
