@@ -3,6 +3,24 @@
 */
 
 Radium.Contact = Radium.Person.extend({
+  contactedAt: DS.attr('date', {
+    key: 'contacted_at'
+  }),
+  becameLeadAt: DS.attr('date', {
+    key: 'became_lead_at'
+  }),
+  becameProspectAt: DS.attr('date', {
+    key: 'became_prospect_at'
+  }),
+  becameOpportunityAt: DS.attr('date', {
+    key: 'became_opportunity_at'
+  }),
+  becameCustomerAt: DS.attr('date', {
+    key: 'became_customer_at'
+  }),
+  becameDeadEndAt: DS.attr('date', {
+    key: 'became_dead_end_at'
+  }),
   status: DS.attr('string', {
     defaultValue: 'prospect'
   }),

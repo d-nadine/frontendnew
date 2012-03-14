@@ -1,4 +1,4 @@
-describe("Handlebars Date Helper", function() {
+describe("Handlebars Time Helper", function() {
   
   var view, fixture;
   beforeEach(function() {
@@ -30,7 +30,7 @@ describe("Handlebars Date Helper", function() {
 
   it("parses ISO8601 strings", function() {
     view = Ember.View.create({
-      myDate: '2012-02-21T19:22:54Z',
+      myDate: '2012-02-21T18:22:54Z',
       template: Ember.Handlebars.compile('<h1>{{formatTime myDate}}</h1>')
     });
     Ember.run(function() {view.appendTo(fixture);});
