@@ -1,55 +1,5 @@
 Radium.contactsController = Ember.ArrayProxy.create({
   content: [],
-  selectedFilter: null,
-  // _cache: [],
-  // changeFilter: function() {
-  //   var filter = this.get('selectedFilter'),
-  //       content = this.get('content');
-
-  //   console.log('filter', filter);
-
-  //   if (filter) {
-  //     var test = content.filter(function(item) {
-  //       if (item.get('status') === filter) {
-  //         return true;
-  //       }
-  //     });
-  //     // this.set('_cache', content);
-  //     // this.set('content', test);
-  //   } else {
-  //     this.set('content', cache);
-  //   }
-
-  // }.observes('selectedFilter'),
-
-  setFilter: function(filterType) {
-    
-    var content = this.get('content'),
-        _cache = this.get('_cache');
-
-    if (filterType) {
-      
-    }
-
-    var test = content.filter(function(item) {
-      if (filterType === 'unassigned') {
-        if (item.get('noUpcomingTasks') === true) {
-          return true;
-        }
-      }
-
-      if (filterType === 'no_tasks') {
-        if (item.get('assigned') === false) {
-          return true;
-        }
-      }
-
-      if (item.get('status') === filterType) {
-        return true;
-      }
-
-    });
-  },
 
   /**
     @binding {content.status}

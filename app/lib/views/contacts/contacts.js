@@ -2,7 +2,7 @@ Radium.ContactsPageView = Ember.View.extend({
   templateName: 'contacts',
 
   selectedCampaignBinding: 'Radium.selectedContactsController.selectedCampaign',
-  selectedFilterBinding: 'Radium.contactsController.selectedFilter',
+  selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
 
   noSelectedCampaigns: function() {
     return (this.get('selectedCampaign')) ? false : true;
@@ -27,7 +27,6 @@ Radium.ContactsPageView = Ember.View.extend({
     classNames: 'nav nav-tabs nav-stacked',
 
     allContacts: function(event) {
-      Radium.selectedContactsController.set('content', []);
       this.setPath('parentView.selectedFilter', null);
       return false;
     }
@@ -59,7 +58,7 @@ Radium.ContactFilterListView = Ember.View.extend({
   }.property('parentView.parentView.selectedFilter').cacheable(),
   filterContacts: function(event) {
     var filter = this.getPath('item.shortname');
-    Radium.contactsController.set('selectedFilter', filter);
+    Radium.selectedContactsController.set('selectedFilter', filter);
     return false;
   },
 
