@@ -2,3 +2,5 @@
 tmp/
 public/
 .sass-cache/
+*.sublime-project
+*.sublime-workspace

@@ -4,6 +4,26 @@ body {
   padding-top: 60px;
 }
 
+.module {
+  text-shadow: 0 1px 0 white;
+  border: 1px solid #EEE;
+  position: relative;
+  margin-bottom: 10px;
+  line-height: 16px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.module .component {
+  background-color: #F9F9F9;
+  padding: 12px;
+  line-height: 16px;
+}
+
 #search {
   margin-bottom: 0
 }
@@ -13,8 +33,22 @@ body {
   width: 14px;
   height: 14px;
   vertical-align: text-top;
-  background-image: url(../images/icons/glyphicons-halflings.png);
+  background-image: url(images/vendor/glyphicons-halflings.png);
   background-repeat: no-repeat;
+}
+
+#alpha .btn {
+  width: 28px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#alpha .btn:last-child {
+  width: 25px;
+}
+
+#form-container {
+  margin: 20px 0;
 }
 
 #feed .page-header h2 small {
@@ -140,4 +174,55 @@ ul.comments {
 #owner .name {
   font-weight: bold;
   font-size: 14px;
+}
+
+.contact-card {
+  margin-bottom: 20px;
+}
+
+.contact-card-inner {
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.contact-card p {
+  margin: 0;
+}
+
+.contact-card.selected {
+  background: whiteSmoke;
+}
+
+.contact-avatar {
+  width: 90px;
+  position: relative;
+  float: left;
+}
+
+.contact-avatar .inline-checkbox {
+  padding: 2px 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  display: none;
+}
+
+.contact-card:hover .inline-checkbox,
+.contact-card.selected .contact-avatar .inline-checkbox {
+  display: block;
+}
+
+.contact-avatar .inline-checkbox label {
+  margin: 0;
+}
+
+.contact-details {
+  width: 540px;
+  float: left;
+}
+
+.label {
+  -webkit-transition: background-color 0.25s ease-out;
 }
