@@ -24,12 +24,19 @@ Radium.ContactLabelView = Ember.View.extend({
         sinceDate = this.getPath('contact.became'
                         + key[status].replace(' ', '')
                         + 'At');
-    if (sinceDate) {
-      var daysBetween = sinceDate.getDaysBetween(new Date());
-      if (daysBetween !== 0) {
-        daysSinceAdded = " for "+ daysBetween +" days";
-      }
-    }
+    // Hold off till bindings are set up.
+    // if (sinceDate) {
+    //   var daysBetween = sinceDate.getDaysBetween(new Date());
+    //   if (daysBetween !== 0) {
+    //     daysSinceAdded = " for "+ daysBetween;
+
+    //     if (daysBetween === 1) {
+    //       daysSinceAdded += " day";
+    //     } else {
+    //       daysSinceAdded += " days";
+    //     }
+    //   }
+    // }
     return key[status] + daysSinceAdded;
   }.property('status', 'contact').cacheable(),
 
