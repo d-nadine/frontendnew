@@ -5,7 +5,7 @@ Radium.ContactLabelView = Ember.View.extend({
     'isLead:label-info',
     'isProspect:label-warning',
     'isOpportunity:label-info',
-    'isClient:label-success',
+    'isCustomer:label-success',
     'isDeadEnd:label-important'
   ],
   isLead: function() {
@@ -17,8 +17,8 @@ Radium.ContactLabelView = Ember.View.extend({
   isOpportunity: function() {
     return (this.get('status') === 'opportunity') ? true : false;
   }.property('status').cacheable(),
-  isClient: function() {
-    return (this.get('status') === 'client') ? true : false;
+  isCustomer: function() {
+    return (this.get('status') === 'customer') ? true : false;
   }.property('status').cacheable(),
   isDeadEnd: function() {
     return (this.get('status') === 'dead_end') ? true : false;

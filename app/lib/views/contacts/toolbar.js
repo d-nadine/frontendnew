@@ -1,6 +1,5 @@
 Radium.ContactsToolbarView = Ember.View.extend({
-  selectedContactsBinding: 'Radium.contactsController.selectedContacts',
-
+  selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
   // Bind all child buttons' `disabled` property here
   isContactsSelected: function() {
     return (this.getPath('selectedContacts.length') === 0) ? true : false;
@@ -92,8 +91,15 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   selectAllButton: Ember.Button.extend({
     click: function() {
+      var selectedFilter = this.getPath('parentView.selectedFilter');
       if (Radium.selectedContactsController.get('length')) {
-        Radium.selectedContactsController.setEach('isSelected', true);
+        if (selectedFilter) {
+          Radium.selectedContactsController
+            .filterProperty('status', selectedFilter)
+            .setEach('isSelected', true);
+        } else {
+          Radium.selectedContactsController.setEach('isSelected', true);
+        }
       } else {
         Radium.contactsController.setEach('isSelected', true);
       }
