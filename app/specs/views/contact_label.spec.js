@@ -33,4 +33,10 @@ describe("Radium#ContactLabelView", function() {
     expect(fixture.find('span').hasClass('label-warning')).toBeTruthy();
   });
 
+  it("converts the status key into a clean, grammatical string", function() {
+    view.set('status', 'dead_end');
+    Ember.run(function() {view.appendTo(fixture);});
+    expect(fixture.find('span').text()).toEqual('Dead End');
+  });
+
 });

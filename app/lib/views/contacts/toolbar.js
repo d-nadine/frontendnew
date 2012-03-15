@@ -99,29 +99,25 @@ Radium.ContactsToolbarView = Ember.View.extend({
           selectedLetter = this.getPath('parentView.selectedLetter');
 
       if (Radium.selectedContactsController.get('length')) {
-        // Select all filters only
+        // Select contacts by name AND status
         if (selectedFilter && selectedLetter) {
-          console.log('both');
           Radium.selectedContactsController
             .filterProperty('status', selectedFilter)
             .filterProperty('firstLetter', selectedLetter)
             .setEach('isSelected', true);
-        // 
+        // Select contacts by their name only (first name, first letter)
         } else if (selectedLetter) {
-          console.log('letter only');
           Radium.selectedContactsController
             .filterProperty('firstLetter', selectedLetter)
             .setEach('isSelected', true);
 
-        // A selected letter and filter
+        // Select contact by status only
         } else if (selectedFilter) {
-          console.log('filter only');
           Radium.selectedContactsController
             .filterProperty('status', selectedFilter)
             .setEach('isSelected', true);
-
-        // Assume we're looking at everything and select all of them
         } else {
+          // Assume we're looking at everything and select all of them
           Radium.selectedContactsController.setEach('isSelected', true);
         }
       }
