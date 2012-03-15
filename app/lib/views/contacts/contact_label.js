@@ -18,10 +18,20 @@ Radium.ContactLabelView = Ember.View.extend({
   },
 
   statusString: function() {
-    var key = this.get('key'),
-        status = this.get('status');
-    return key[status];
-  }.property('status').cacheable(),
+    var daysSinceAdded = "",
+        key = this.get('key'),
+        status = this.get('status'),
+        sinceDate = this.getPath('contact.became'
+                        + key[status].replace(' ', '')
+                        + 'At');
+    if (sinceDate) {
+      var daysBetween = sinceDate.getDaysBetween(new Date());
+      if (daysBetween !== 0) {
+        daysSinceAdded = " for "+ daysBetween +" days";
+      }
+    }
+    return key[status] + daysSinceAdded;
+  }.property('status', 'contact').cacheable(),
 
   isLead: function() {
     return (this.get('status') === 'lead') ? true : false;

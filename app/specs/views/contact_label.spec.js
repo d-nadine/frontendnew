@@ -8,16 +8,21 @@ describe("Radium#ContactLabelView", function() {
 
     store.load(Radium.Contact, {
       id: 1,
-      status: 'prospect'
+      status: 'prospect',
+      "became_lead_at": "2012-03-14T20:05:50Z",
+      "became_prospect_at": "2012-03-14T20:05:50Z",
+      "became_opportunity_at": "2012-03-14T20:05:50Z",
+      "became_customer_at": "2012-03-14T20:05:50Z",
+      "became_dead_end_at": "2012-03-14T20:05:50Z",
     });
     
     contact = Ember.Object.create({
       content: store.find(Radium.Contact, 1)
     });
-    console.log('asdf', contact.getPath('content.status'));
 
     view = Radium.ContactLabelView.create({
-      status: 'prospect'
+      status: 'prospect',
+      contact: 'contact.content'
     });
     
   });
