@@ -1,6 +1,9 @@
 Radium.ContactsToolbarView = Ember.View.extend({
+  contactsBinding: 'Radium.selectedContactsController.content',
+  selectedCampaignBinding: 'Radium.selectedContactsController.selectedCampaign',
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
+  selectedLetterBinding: 'Radium.selectedContactsController.selectedLetter',
   // Bind all child buttons' `disabled` property here
   isContactsSelected: function() {
     return (this.getPath('selectedContacts.length') === 0) ? true : false;
@@ -16,7 +19,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
     // Hide all open dropdown menus
     this.$('.btn-group').toggleClass('open');
     contacts.setEach('status', newStatus);
-
+    Radium.contactsController.clearSelected();
     event.preventDefault();
     return false;
   },
@@ -92,17 +95,32 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   selectAllButton: Ember.Button.extend({
     click: function() {
-      var selectedFilter = this.getPath('parentView.selectedFilter');
+      var selectedFilter = this.getPath('parentView.selectedFilter'),
+          selectedLetter = this.getPath('parentView.selectedLetter');
+
       if (Radium.selectedContactsController.get('length')) {
+        // Select all filters only
         if (selectedFilter) {
           Radium.selectedContactsController
             .filterProperty('status', selectedFilter)
             .setEach('isSelected', true);
+        // 
+        } else if (selectedLetter) {
+          Radium.selectedContactsController
+            .filterProperty('firstLetter', selectedLetter)
+            .setEach('isSelected', true);
+
+        // A selected letter and filter
+        } else if (selectedFilter && selectedLetter) {
+          Radium.selectedContactsController
+            .filterProperty('status', selectedFilter)
+            .filterProperty('firstLetter', selectedLetter)
+            .setEach('isSelected', true);
+
+        // Assume we're looking at everything and select all of them
         } else {
           Radium.selectedContactsController.setEach('isSelected', true);
         }
-      } else {
-        Radium.contactsController.setEach('isSelected', true);
       }
     }
   }),
@@ -140,5 +158,18 @@ Radium.ContactsToolbarView = Ember.View.extend({
       var total = this.getPath('selectedContacts.length');
       return (total === 1) ? total + ' contact' : total + ' contacts';
     }.property('selectedContacts').cacheable()
+  }),
+
+  /**
+    Letters Filter
+    ----------------------------------- */
+  lettersFilter: Ember.View.extend({
+    click: function(event) {
+      var $button = $(event.target)
+          letter = $button.text();
+      $button.siblings().removeClass('active')
+      .end().addClass('active');
+      Radium.selectedContactsController.set('selectedLetter', letter);
+    }
   })
 });

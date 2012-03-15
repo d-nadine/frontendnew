@@ -42,37 +42,40 @@
   <div id="content" class="span9">
     {{view Radium.GlobalSearchTextView class="pull-right"}}
     {{view Radium.AnnouncementsView}}
-    <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
-      <div class="btn-group">
-        <button class="btn">A</button>
-        <button class="btn">B</button>
-        <button class="btn">C</button>
-        <button class="btn">D</button>
-        <button class="btn">E</button>
-        <button class="btn">F</button>
-        <button class="btn">G</button>
-        <button class="btn">H</button>
-        <button class="btn">I</button>
-        <button class="btn">J</button>
-        <button class="btn">K</button>
-        <button class="btn">L</button>
-        <button class="btn">M</button>
-        <button class="btn">N</button>
-        <button class="btn">O</button>
-        <button class="btn">P</button>
-        <button class="btn">Q</button>
-        <button class="btn">R</button>
-        <button class="btn">S</button>
-        <button class="btn">T</button>
-        <button class="btn">U</button>
-        <button class="btn">V</button>
-        <button class="btn">W</button>
-        <button class="btn">X</button>
-        <button class="btn">Y</button>
-        <button class="btn">Z</button>
-      </div>
-    </div> <!-- /#alpha -->
+    
     {{#view Radium.ContactsToolbarView}}
+      <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
+        {{#view lettersFilter}}
+        <div class="btn-group">
+          <button class="btn">A</button>
+          <button class="btn">B</button>
+          <button class="btn">C</button>
+          <button class="btn">D</button>
+          <button class="btn">E</button>
+          <button class="btn">F</button>
+          <button class="btn">G</button>
+          <button class="btn">H</button>
+          <button class="btn">I</button>
+          <button class="btn">J</button>
+          <button class="btn">K</button>
+          <button class="btn">L</button>
+          <button class="btn">M</button>
+          <button class="btn">N</button>
+          <button class="btn">O</button>
+          <button class="btn">P</button>
+          <button class="btn">Q</button>
+          <button class="btn">R</button>
+          <button class="btn">S</button>
+          <button class="btn">T</button>
+          <button class="btn">U</button>
+          <button class="btn">V</button>
+          <button class="btn">W</button>
+          <button class="btn">X</button>
+          <button class="btn">Y</button>
+          <button class="btn">Z</button>
+        </div>
+        {{/view}}
+      </div> <!-- /#alpha -->
       <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
         <div class="btn-group">
           {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
@@ -95,6 +98,7 @@
           </ul>
         </div>
       </div> <!-- /#contacts-bulk-toolbar -->
+
       <div class="btn-toolbar">
         <div class="btn-group">
           {{#view selectAllButton class="btn btn-mini"}}
@@ -108,6 +112,7 @@
           <h5>{{totalSelectedString}} selected.</h5>
         {{/view}}
       </div>
+
     {{/view}}
     <div id="form-container"></div>
 

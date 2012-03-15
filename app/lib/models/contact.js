@@ -43,5 +43,13 @@ Radium.Contact = Radium.Person.extend({
   
   noUpcomingTasks: function() {
     return (this.get('todos')) ? true : false;
-  }.property('todos').cacheable()
+  }.property('todos').cacheable(),
+
+  firstLetter: function() {
+    if (this.get('name')) {
+      return this.get('name').charAt(0).toUpperCase();  
+    } else {
+      return "";
+    }
+  }.property('name').cacheable()
 });

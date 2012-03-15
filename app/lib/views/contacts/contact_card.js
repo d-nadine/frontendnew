@@ -7,32 +7,47 @@ Radium.ContactCardView = Ember.View.extend({
   isVisible: function() {
     var status = this.getPath('content.status'),
         todos = this.getPath('data.todos.length'),
+        firstLetter = this.getPath('content.firstLetter'),
         isAssigned = this.getPath('content.user'),
+        selectedLetter = this.get('selectedLetter'),
         selectedFilter = this.get('selectedFilter');
 
     if (!selectedFilter) {
-      return true;
-    }
 
-    if (selectedFilter === 'unassigned') {
-      if (isAssigned) {
+      if (selectedLetter) {
+        if (selectedLetter !== firstLetter) {          
+          return false;
+        }
+      }
+    } else {
+      if (selectedFilter === 'unassigned') {
+        if (isAssigned) {
+          return false;
+        }
+      }
+
+      if (selectedFilter === 'no_tasks') {
+        if (todos > 0) {
+          return false;
+        }
+      }
+
+      if (status !== selectedFilter) {
         return false;
+      }
+
+      if (selectedLetter) {
+        if (selectedLetter !== firstLetter) {          
+          return false;
+        }
       }
     }
 
-    if (selectedFilter === 'no_tasks') {
-      if (todos > 0) {
-        return false;
-      }
-    }
-
-    if (status !== selectedFilter) {
-      return false;
-    }
     return true;
   }.property(
     'selectedFilter', 
-    'selectedLetter', 
+    'selectedLetter',
+    'content.firstLetter', 
     'content.status', 
     'content.unassigned',
     'content.todos'

@@ -92,7 +92,10 @@ describe("Radium#Contact", function() {
       expect(contact.get('firstName')).toBe("Stringer");
       expect(contact.get('abbrName')).toBe("Stringer B.");
     });
-  
+    
+    it("grabs the starting letter of the name", function() {
+      expect(contact.get('firstLetter')).toEqual("S");
+    });
   });
 
   describe("when talking with the API", function() {
