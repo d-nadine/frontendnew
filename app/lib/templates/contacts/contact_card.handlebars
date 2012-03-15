@@ -1,4 +1,5 @@
 {{#with content}}
+  {{#unless isLoading}}
   <div class="contact-card-inner">
     <div class="contact-avatar">
       <span class="inline-checkbox">
@@ -41,4 +42,5 @@
       {{/if}}
     </div>
   </div>
+  {{/unless}}
 {{/with}}

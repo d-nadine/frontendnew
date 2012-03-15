@@ -38,13 +38,9 @@ Radium.ContactsPage = Ember.State.extend({
     }),
     ready: Ember.State.create(),
 
-    clearChecked: function() {
-      Radium.contactsController.setEach('isSelected', false);
-    },
-
     // Events
     allCampaigns: function(manager, context) {
-      this.clearChecked();
+      Radium.contactsController.clearSelected();
       Radium.selectedContactsController.setProperties({
         content: Radium.contactsController.get('content'),
         selectedCampaign: null
@@ -53,7 +49,7 @@ Radium.ContactsPage = Ember.State.extend({
     },
 
     selectCampaign: function(manager, context) {
-      this.clearChecked();
+      Radium.contactsController.clearSelected();
       Radium.selectedContactsController.setProperties({
         content: context.get('contacts'),
         selectedCampaign: context

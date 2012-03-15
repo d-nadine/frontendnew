@@ -1,7 +1,7 @@
 Radium.ContactsPageView = Ember.View.extend({
   templateName: 'contacts',
 
-  selectedContactsBinding: 'Radium.selectedContactsController.selectedCampaign',
+  selectedCampaignBinding: 'Radium.selectedContactsController.selectedCampaign',
   selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
 
   noSelectedCampaigns: function() {
@@ -38,7 +38,7 @@ Radium.CampaignListView = Ember.View.extend({
   classNameBindings: ['isSelected:active'],
   isSelected: function() {
     var campaign = this.get('item'),
-        selectedCampaign = Radium.selectedContactsController.get('selectedCampaign');
+        selectedCampaign = this.getPath('parentView.parentView.selectedCampaign');
     if (campaign === selectedCampaign) { return true; }
   }.property('parentView.parentView.selectedCampaign').cacheable(),
   filterCampaigns: function(event) {
@@ -58,6 +58,7 @@ Radium.ContactFilterListView = Ember.View.extend({
   }.property('parentView.parentView.selectedFilter').cacheable(),
   filterContacts: function(event) {
     var filter = this.getPath('item.shortname');
+    Radium.contactsController.clearSelected();
     Radium.selectedContactsController.set('selectedFilter', filter);
     return false;
   },
