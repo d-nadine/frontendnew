@@ -1,7 +1,7 @@
 Radium.ContactsPageView = Ember.View.extend({
   templateName: 'contacts',
 
-  selectedCampaignBinding: 'Radium.selectedContactsController.selectedCampaign',
+  selectedContactsBinding: 'Radium.selectedContactsController.selectedCampaign',
   selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
 
   noSelectedCampaigns: function() {

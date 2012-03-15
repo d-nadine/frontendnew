@@ -1,4 +1,5 @@
 Radium.ContactsToolbarView = Ember.View.extend({
+  selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   selectedFilterBinding: 'Radium.selectedContactsController.selectedFilter',
   // Bind all child buttons' `disabled` property here
   isContactsSelected: function() {
