@@ -100,21 +100,24 @@ Radium.ContactsToolbarView = Ember.View.extend({
 
       if (Radium.selectedContactsController.get('length')) {
         // Select all filters only
-        if (selectedFilter) {
+        if (selectedFilter && selectedLetter) {
+          console.log('both');
           Radium.selectedContactsController
             .filterProperty('status', selectedFilter)
+            .filterProperty('firstLetter', selectedLetter)
             .setEach('isSelected', true);
         // 
         } else if (selectedLetter) {
+          console.log('letter only');
           Radium.selectedContactsController
             .filterProperty('firstLetter', selectedLetter)
             .setEach('isSelected', true);
 
         // A selected letter and filter
-        } else if (selectedFilter && selectedLetter) {
+        } else if (selectedFilter) {
+          console.log('filter only');
           Radium.selectedContactsController
             .filterProperty('status', selectedFilter)
-            .filterProperty('firstLetter', selectedLetter)
             .setEach('isSelected', true);
 
         // Assume we're looking at everything and select all of them
@@ -164,12 +167,21 @@ Radium.ContactsToolbarView = Ember.View.extend({
     Letters Filter
     ----------------------------------- */
   lettersFilter: Ember.View.extend({
-    click: function(event) {
-      var $button = $(event.target)
-          letter = $button.text();
-      $button.siblings().removeClass('active')
-      .end().addClass('active');
-      Radium.selectedContactsController.set('selectedLetter', letter);
-    }
+    letterButton: Ember.Button.extend({
+      selectedLetterBinding: 'Radium.selectedContactsController.selectedLetter',
+      classNameBindings: ['isSelected:active'],
+      isSelected: function() {
+        return (this.get('letter') === this.get('selectedLetter')) ? true : false;
+      }.property('selectedLetter').cacheable(),
+      click: function(event) {
+        var letter = this.get('letter');
+        console.log(letter);
+        if (this.get('isSelected')) {
+          Radium.selectedContactsController.set('selectedLetter', null);
+        } else {
+          Radium.selectedContactsController.set('selectedLetter', letter);
+        }
+      }
+    })
   })
 });
