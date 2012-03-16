@@ -97,7 +97,7 @@ class Deploy < Thor
     say "Testing assets compile correctly"
 
     inside ROOT do
-      run "bundle exec rake assets:precompile"
+      run "bundle exec rake compile"
     end
 
     if $?.success?
