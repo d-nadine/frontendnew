@@ -1,3 +1,4 @@
+* [2012-03-16 20:37 +0100] 420f451 - adman65: Update deploy script once again
 * [2012-03-16 20:33 +0100] 1f7b9be - adman65: Fix deploy script to use markdown
 * [2012-03-16 20:21 +0100] 7afe23f - adman65: Test HEAD == origin/master/HEAD before deploy
 * [2012-03-16 20:03 +0100] 524bfb0 - adman65: Keep icons under source control
