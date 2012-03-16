@@ -1,0 +1,188 @@
+#!/usr/bin/env ruby
+require "rubygems"
+require "thor"
+
+ROOT = File.expand_path "../../", __FILE__
+
+REQUIRED_ENV = [ :radium_server_url, :radium_api_key, :radium_user_api_key, :radium_account_id ]
+
+class Deploy < Thor
+  include Thor::Actions
+
+  desc "ensure_github_connection", "Tests this user can ssh to github"
+  def ensure_github_connection
+    say "Testing Github connection..."
+    run "ssh -T git@github.com > /dev/null 2>/dev/null"
+
+    if $?.exitstatus == 1
+      say_status "OK", "Github connected", :green
+      true
+    else
+      say_status "FAILED", "SSH keys not setup correctly", :red
+      false
+    end
+  end
+
+  desc "ensure_heroku_connection", "Tests this user can access heroku"
+  def ensure_heroku_connection
+    say "Testing heroku access"
+    run "heroku config > /dev/null 2>/dev/null"
+
+    if $?.success?
+      say_status "OK", "Heroku access granted", :green
+      true
+    else
+      say_status "FAILED", %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}, :red
+      false
+    end
+  end
+
+  desc "ensure_clean", "Test to see if the repo is clean"
+  def ensure_clean
+    say "Ensuring git is clean"
+    run "git diff --exit-code > /dev/null 2>/dev/null"
+
+    if $?.success?
+      say_status "OK", "Cool, repo is clean", :green
+      true
+    else
+      say_status "FAILED", "There are uncommited files", :red
+      false
+    end
+  end
+
+  desc "ensure_heroku_outdated", "Test to see if this code has been deployed or not"
+  def ensure_heroku_outdated
+    say "Ensuring Heroku is outdated"
+    run "git diff head heroku/master --exit-code > /dev/null 2>/dev/null"
+
+    if !$?.success?
+      say_status "OK", "Code hasn't been deployed yet", :green
+      true
+    else
+      say_status "FAILED", "This commit is already deployed", :red
+      false
+    end
+  end
+
+  desc "ensure_environment", "Test to see if heroku is configured correctly"
+  def ensure_environment
+    say "Testing heroku config"
+
+    inside ROOT do
+      result = run "heroku config", :capture => true
+
+      variables = result.split("\n").map { |s| s.split('=>').map(&:strip) }.inject({}) do |hash, pair|
+        hash.merge! pair[0] => pair[1]
+      end
+
+      missing = REQUIRED_ENV.select do |var|
+        variables[var.to_s.upcase].nil?
+      end
+
+      if missing.size >= 1
+        missing.each do |var|
+          say_status "$#{var.to_s.upcase}", "is not configured on Heroku!", :red
+        end
+        return false
+      else
+        say_status "OK!", "Heroku ENV is good"
+        return true
+      end
+    end
+  end
+
+  desc "compile_assets", "Tests assets compile correctly"
+  def compile_assets
+    say "Testing assets compile correctly"
+
+    inside ROOT do
+      run "bundle exec rake assets:precompile"
+    end
+
+    if $?.success?
+      say_status "OK", "Assets compiled!", :green
+      run "git reset --hard HEAD", :verbose => false
+      true
+    else
+      say_status "FAILED", "Assets failed to compile...suprising :/", :red
+      false
+    end
+  end
+
+  desc "record", "Records this deploy in deploys.md"
+  def record
+    inside ROOT do
+      commit_info = run('git show --format="format:%h - %an: %s"', :capture => true, :verbose => false).split("\n")[0]
+
+      say %Q{Recording: "#{commit_info}" to deploy file}
+
+      format = "[%s] %s\n"
+
+      existing_contents = File.read "#{ROOT}/deploys.md"
+
+      File.open "#{ROOT}/deploys.md", 'w' do |f|
+        f.puts format % [Time.now.strftime("%Y-%m-%d %H:%M %z"), commit_info]
+        f.puts existing_contents.chomp
+      end
+
+      say_status "Deploy Log", "Recorded"
+    end
+
+    true
+  end
+
+  desc "commit", "Commits assets and pushes to Github" 
+  def commit
+    say "Commiting assets"
+
+    inside ROOT do
+      run 'git add deploys.md'
+      run "git commit -m '[Deploy]'"
+      run "git push origin master"
+    end
+
+    say_status "OK", "Commited!"
+
+    true
+  end
+
+  desc "run_deploy", "Tests prereqs and runs a deploy"
+  method_option :environment, :default => "production"
+  def run_deploy
+    prereqs = invoke(:ensure_clean) && 
+      invoke(:ensure_github_connection) && 
+      invoke(:ensure_heroku_connection) && 
+      invoke(:ensure_heroku_outdated) && 
+      invoke(:ensure_environment) && 
+      invoke(:compile_assets)
+
+    if !prereqs
+      say_status "Deploy Failed", "Please check prereqs", :red
+      return false
+    end
+
+    commited = invoke(:record) && invoke(:commit)
+
+    if !commited
+      say_status "Deploy Failed!", "Git commits and push failed for some reason.", :red
+
+      inside ROOT do
+        run "git reset --hard HEAD", :verbose => false
+      end
+
+      return false
+    end
+
+    inside ROOT do
+      run "git push origin master"
+      run "git push heroku master"
+    end
+
+    say_status "Deployed!", "PIZZA TIME!"
+  end
+
+  default_task :run_deploy
+end
+
+Deploy.start
