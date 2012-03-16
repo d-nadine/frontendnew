@@ -1,10 +1,6 @@
-namespace :assets do
-  task :precompile do
-    ENV['RACK_ENV'] = 'production'
+task :compile do
+  ENV['RACK_ENV'] = 'production'
+  require './radium'
 
-    require './radium'
-    raise unless Radium.new.production?
-
-    Radium.new.compile_assets
-  end
+  Radium.new.compile_assets
 end
