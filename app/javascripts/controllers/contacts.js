@@ -3,9 +3,17 @@ Radium.contactsController = Ember.ArrayProxy.create({
   totalPagesLoaded: 0,
   totalPages: 0,
   isAllContactsLoaded: function() {
-    return (this.get('totalPages') === this.get('totalPagesLoaded')) ? true : false;
+    return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
   }.property('totalPagesLoaded', 'totalPages').cacheable(),
-  
+
+  /**
+    @binding {content.status}
+    @return {Ember.Array} Contacts as companies
+  */
+  leads: function() {
+    return this.filterProperty('status', 'lead');
+  }.property('@each.status').cacheable(),
+
   /**
     @binding {content.status}
     @return {Ember.Array} Filtered leads
@@ -40,10 +48,30 @@ Radium.contactsController = Ember.ArrayProxy.create({
     @binding {content.status}
     @return {Ember.Array} Filtered dead ends
   */
-
   deadEnds: function() {
     return this.filterProperty('status', 'dead_end');
   }.property('@each.status').cacheable(),
+
+  /**
+    @binding {content.user}
+    @return {Ember.Array} Contacts without a user :'(
+  */
+  unassigned: function() {
+    return this.filterProperty('user', false);
+  }.property('@each.user').cacheable(),
+
+  /**
+    @binding {content.todos}
+    @return {Ember.Array} Contacts with no upcoming todos
+    TODO: Figure out how to acurately determine this
+  */
+  noUpcomingTasks: function() {
+    return this.filter(function(item) {
+      if (!item.getPath('data.todos.length')) {
+        return true;
+      }
+    });
+  }.property('@each.todos').cacheable(),
 
   usersContactInfo: function() {
     return this.map(function(item) {
@@ -94,57 +122,6 @@ Radium.contactsController = Ember.ArrayProxy.create({
       return item.get('id') === id;
     });
   },
-
-  // Contacts Page Filters
-  filterTypes: [
-    {
-      title: 'Contacts', 
-      shortname: 'contact', 
-      formViewClass: 'Contact',
-      hasForm: true
-    },
-    {
-      title: 'Companies', 
-      shortname: 'company', 
-      formViewClass: 'Group',
-      hasForm: true
-    }, 
-    {
-      title: 'Leads', 
-      shortname: 'lead', 
-      hasForm: false
-    },
-    {
-      title: 'Prospects', 
-      shortname: 'prospect', 
-      hasForm: false
-    },
-    {
-      title: 'Opportunities', 
-      shortname: 'opportunity',
-      hasForm: false
-    },
-    {
-      title: 'Customers', 
-      shortname: 'customer', 
-      hasForm: false
-    },
-    {
-      title: 'Dead Ends', 
-      shortname: 'dead_end', 
-      hasForm: false
-    },
-    {
-      title: 'Unassigned', 
-      shortname: 'unassigned', 
-      hasForm: false
-    },
-    {
-      title: 'No Upcoming Tasks', 
-      shortname: 'no_tasks', 
-      hasForm: false
-    }
-  ],
 
   /**
     Return all contacts selected on Contacts page.

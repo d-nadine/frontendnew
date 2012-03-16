@@ -23,9 +23,9 @@ minispade.require('radium/core/routes');
 $(document).ready(function() {
   var app = Davis(Radium.Routes);
   app.start();
-});
 
-// FIXME: Temp fix until the datepicker registering clicks can be solved.
-$('body').on('click', 'table.ui-datepicker-calendar', function(event) {
-  return false;
+  // FIXME: Temp fix until the datepicker registering clicks can be solved.
+  $('body').on('click', 'table.ui-datepicker-calendar', function(event) {
+    return false;
+  });
 });

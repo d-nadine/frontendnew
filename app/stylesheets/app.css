@@ -8,6 +8,18 @@ body {
   right: 10px;
 }
 
+.nav-tabs.nav-stacked > li:first-of-type > a {
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs.nav-stacked > li:last-of-type > a {
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+
 .module {
   text-shadow: 0 1px 0 white;
   border: 1px solid #EEE;

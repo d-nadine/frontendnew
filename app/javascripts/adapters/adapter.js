@@ -133,11 +133,6 @@ window.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type), 
         plural = this.pluralize(root),
         userID = this.get('selectedUserID');
-    console.log('user %@ requested %@ %@ records'.fmt(
-      userID,
-      ids.length,
-      root
-    ));
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
       plural = ["users", userID, "feed"].join("/");
@@ -204,7 +199,13 @@ window.RadiumAdapter = DS.Adapter.extend({
     if (root === 'activity') return false;
 
     this.ajax("/" + plural, "GET", {
-      success: function(json) {
+      success: function(json, status, xhr) {
+        var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+        var currentPage = xhr.getResponseHeader('x-radium-current-page');
+        Radium[plural + 'Controller'].setProperties({
+          totalPages: totalPages,
+          totalPagesLoaded: currentPage
+        });
         store.loadMany(type, json);
       }
     });
