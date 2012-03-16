@@ -4,3 +4,4 @@ site/
 .sass-cache/
 *.sublime-project
 *.sublime-workspace
+script/deploy
