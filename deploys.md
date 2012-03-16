@@ -1,3 +1,4 @@
+[2012-03-16 20:03 +0100] 524bfb0 - adman65: Keep icons under source control
 [2012-03-16 19:18 +0100] 086035d - adman65: Update deploy script
 [2012-03-16 18:35 +0100] 9bd8cae - adman65: Fix fast forward errors
 [2012-03-16 18:32 +0100] d9bcdd5 - adman65: Add missing ;
