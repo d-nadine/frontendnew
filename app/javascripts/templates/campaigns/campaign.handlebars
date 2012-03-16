@@ -1,6 +1,6 @@
 <div class="row">
   <div id="sidebar" class="span3">
-    {{#with Radium.selectedCampaignController.content}}  
+    {{#with Radium.selectedCampaignController.content}}
     <div class="module">
       <div class="component">
         <h3>{{name}}</h3>
@@ -45,7 +45,7 @@
     {{view Radium.AnnouncementsView}}
     <div class="row">
       <span class="span9">
-        {{#view emailButton action="test" class="btn btn-small"}}Send Email{{/view}}
+        {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
         {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
         {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
         {{#view addTeamMemberButton class="btn btn-small"}}Add Team Member{{/view}}

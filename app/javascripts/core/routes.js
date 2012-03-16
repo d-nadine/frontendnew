@@ -1,4 +1,7 @@
 Radium.Routes = Davis(function() {      
+  this.bind('start', function() {
+  });
+
   this.get('/', function(req){
     Radium.App.send('loadPage', {page:'dashboard'});
   });

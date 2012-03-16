@@ -12,13 +12,16 @@ minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
 minispade.require('radium/helpers/main');
 
+
 minispade.require('radium/models/main')
 minispade.require('radium/controllers/main');
 minispade.require('radium/views/main');
-minispade.require('radium/core/routes');
 minispade.require('radium/states/main');
+minispade.require('radium/core/routes');
+minispade.require('radium/templates/main')
 
 $(document).ready(function() {
+  // Radium.App.goToState('loggedIn');
   Radium.Routes.start();
 });
 
