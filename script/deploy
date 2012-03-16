@@ -65,6 +65,34 @@ class Deploy < Thor
     end
   end
 
+  desc "ensure_head", "Test to see if HEAD is origin/master/HEAD"
+  def ensure_head
+    say "Checking if HEAD is up-to-date"
+
+    inside ROOT do
+      run "git fetch origin master"
+
+      head = run "git rev-parse head", :capture => true
+      master = run "git rev-parse origin/master", :capture => true
+
+      if head == master
+        say_status "OK!", "HEAD is up-to-date with master"
+        return true
+      else
+        run "git pull origin master"
+
+        if $?.success?
+          say_status "OK!", "merged in changes from master"
+          return true
+        else
+          say_status "FAILED!", "auto merge failed. Human required! Changes reset."
+          run "git reset --hard HEAD"
+          return false
+        end
+      end
+    end
+  end
+
   desc "ensure_environment", "Test to see if heroku is configured correctly"
   def ensure_environment
     say "Testing heroku config"
@@ -194,6 +222,7 @@ class Deploy < Thor
       invoke(:ensure_github_connection) && 
       invoke(:ensure_heroku_connection) && 
       invoke(:ensure_heroku_outdated) && 
+      invoke(:ensure_head) &&
       invoke(:ensure_environment) && 
       invoke(:ensure_assets_compile)
 
