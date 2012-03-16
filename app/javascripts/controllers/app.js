@@ -3,6 +3,7 @@ Radium.appController = Ember.Object.create({
   isLoggedIn: true,
   // Set to false when all the intial data has been loaded
   isFirstRun: true,
+  // Store the routes intercepted by Davis
   _routeCache: {},
   currentPage: null,
   selectedForm: null,
