@@ -140,7 +140,10 @@ class Deploy < Thor
 
     env_string = REQUIRED_ENV.collect { |v| %Q{#{v.to_s.upcase}="#{variables[v.to_s.upcase]}"} }.join " "
 
-    run "#{env_string} bundle exec rake compile", :verbose => true
+    inside ROOT do
+      run "rm -rm site/"
+      run "#{env_string} bundle exec rake compile", :verbose => true
+    end
 
     if $?.success?
       say_status "OK", "Assets compiled!", :green
