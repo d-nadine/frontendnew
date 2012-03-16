@@ -2,9 +2,22 @@ Radium.ContactsPage = Ember.State.extend({
   initialState: 'index',
   index: Ember.ViewState.extend(Radium.PageStateMixin, {
     view: Radium.ContactsPageView,
+    exit: function(manager) {
+      this._super(manager);
+      $(window).off('scroll');
+    },
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {
+
+        $(window).on('scroll', function(){
+          if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+           Radium.contactsController.loadPage();
+           console.log('more....');
+          }
+        });
+
+
         if (this.get('isFirstRun')) {
           if (Radium.campaignsController.get('length') <= 0) {
             Radium.campaignsController.set(
@@ -14,10 +27,10 @@ Radium.ContactsPage = Ember.State.extend({
           }
 
           if (Radium.contactsController.get('length') <= 0) {
-            Radium.contactsController.set(
-              'content', 
-              Radium.store.findAll(Radium.Contact, {page: 1})
-            );
+            Radium.contactsController.setProperties({
+              content: Radium.store.findAll(Radium.Contact, {page: 1}),
+              totalPagesLoaded: 1
+            });
           }
 
           this.set('isFirstRun', false);

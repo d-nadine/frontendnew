@@ -14,10 +14,13 @@ minispade.require('radium/helpers/main');
 
 minispade.require('radium/models/main')
 minispade.require('radium/controllers/main');
-minispade.require('radium/views/main')
-minispade.require('radium/fixtures/main');
+minispade.require('radium/views/main');
 minispade.require('radium/core/routes');
 minispade.require('radium/states/main');
+
+$(document).ready(function() {
+  Radium.Routes.start();
+});
 
 // FIXME: Temp fix until the datepicker registering clicks can be solved.
 $('body').on('click', 'table.ui-datepicker-calendar', function(event) {

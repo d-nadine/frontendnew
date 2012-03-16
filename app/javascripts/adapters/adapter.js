@@ -220,7 +220,6 @@ window.RadiumAdapter = DS.Adapter.extend({
         url = this.pluralize(root),
         // Cache all the hashes here if they are spread out across several pages.
         dataHash = [];
-
     // Activities have to be loaded via their type, ie users, contacts, deals
     if (root === 'activity') {
       url = [query.type+"s", query.id, "feed"].join("/");
@@ -233,8 +232,8 @@ window.RadiumAdapter = DS.Adapter.extend({
         data: {page: currentPage},
         success: function(json, status, xhr) {
           // A page=0 query loads all available pages.
+          var totalPages = xhr.getResponseHeader('x-radium-total-pages');
           if (query.page === 0) {
-            var totalPages = xhr.getResponseHeader('x-radium-total-pages');
             // If we are on the last page, cache the hash and then wrap up
             if (currentPage >= totalPages) {
               dataHash = dataHash.concat(json);
@@ -246,6 +245,10 @@ window.RadiumAdapter = DS.Adapter.extend({
               fetchPage();
             }
           } else {
+            Radium[url + 'Controller'].setProperties({
+              totalPages: totalPages,
+              totalPagesLoaded: query.page
+            });
             pagesLoaded(json);
           }
         }

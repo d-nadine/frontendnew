@@ -171,7 +171,6 @@ Radium.ContactsToolbarView = Ember.View.extend({
       }.property('selectedLetter').cacheable(),
       click: function(event) {
         var letter = this.get('letter');
-        console.log(letter);
         if (this.get('isSelected')) {
           Radium.selectedContactsController.set('selectedLetter', null);
         } else {

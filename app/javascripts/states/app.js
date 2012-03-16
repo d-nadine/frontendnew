@@ -19,7 +19,11 @@ Radium.App = Ember.StateManager.create({
   
   loggedOut: Radium.LoggedOutState,
   
-  start: Ember.State.create(),
+  start: Ember.State.create({
+    enter: function(manager) {
+      
+    }
+  }),
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
@@ -68,7 +72,7 @@ Radium.App = Ember.StateManager.create({
     
     var timer = setTimeout(function() {
       manager.goToState('error');
-    }, 5000);
+    }, 8000);
 
     account.addObserver('isLoaded', function() {
       if (this.get('isLoaded')) {
