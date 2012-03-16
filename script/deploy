@@ -65,30 +65,20 @@ class Deploy < Thor
     end
   end
 
-  desc "ensure_head", "Test to see if HEAD is origin/master/HEAD"
+  desc "ensure_fast_forward", "Tests if this is a fast forward commit"
   def ensure_head
-    say "Checking if HEAD is up-to-date"
+    say "Checking for fast forward"
 
     inside ROOT do
-      run "git fetch origin master"
+      run "git pull origin master"
 
-      head = run "git rev-parse head", :capture => true
-      master = run "git rev-parse origin/master", :capture => true
-
-      if head == master
-        say_status "OK!", "HEAD is up-to-date with master"
+      if $?.success?
+        say_status "OK!", "merged in changes from master"
         return true
       else
-        run "git pull origin master"
-
-        if $?.success?
-          say_status "OK!", "merged in changes from master"
-          return true
-        else
-          say_status "FAILED!", "auto merge failed. Human required! Changes reset."
-          run "git reset --hard HEAD"
-          return false
-        end
+        say_status "FAILED!", "Auto merge failed. Human required! Changes reset."
+        run "git reset --hard HEAD"
+        return false
       end
     end
   end
