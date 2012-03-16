@@ -1,5 +1,11 @@
-Radium.Routes = Davis(function() {      
-  this.bind('start', function() {
+/**
+  Settings for Davis. Called in `app/javascripts/main.js` when DOM is ready.
+  @require Davis.js
+*/
+
+Radium.Routes = function() {      
+  this.configure(function() {
+    this.generateRequestOnPageLoad = true;
   });
 
   this.get('/', function(req){
@@ -27,4 +33,4 @@ Radium.Routes = Davis(function() {
       show: id
     });
   });
-});
+};
