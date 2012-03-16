@@ -3,3 +3,4 @@ tmp/
 .sass-cache/
 *.sublime-project
 *.sublime-workspace
+!site/images/icons
