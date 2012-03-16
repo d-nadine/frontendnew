@@ -1,2 +1,3 @@
-require './application'
+require './radium'
+
 run Radium.new
