@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/threadedlabs/frontend_server
-  revision: abe7b9a22737d66981bce751bd6291c6ff51417d
+  revision: 80311f8e2a56cd176ef220533f71ecde20f1fa15
   specs:
     frontend_server (0.0.1)
       compass
