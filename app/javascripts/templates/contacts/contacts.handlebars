@@ -1,10 +1,6 @@
 <div class="row">
   <div id="sidebar" class="span3">
-    {{!collection Radium.FeedFilterView 
-      controllerBinding="Radium.contactsController"
-      contentBinding="Radium.contactsController.filterTypes"
-    }}
-
+    
     {{#view contactsFilterView contentBinding="Radium.contactsController.filterTypes"}}
       <li {{bindAttr class="parentView.noSelectedFilter:active"}}>
         <a href="#" {{action "allContacts"}}>Everything</a>
@@ -34,7 +30,7 @@
           {{/view}}
         {{/each}}
       {{else}}
-        <li>Loading Campaigns...</li>
+        <li><h4>Loading Campaigns...</h4></li>
       {{/if}}
     {{/view}}
   </div> <!-- /#sidebar -->
@@ -115,7 +111,6 @@
 
     {{/view}}
     <div id="form-container"></div>
-
     <div id="contacts" class="row">
       {{#with Radium.selectedContactsController}}
         {{#if selectedCampaign}}

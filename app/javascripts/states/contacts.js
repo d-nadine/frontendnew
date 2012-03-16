@@ -1,28 +1,28 @@
+function infiniteLoading() {
+  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    console.log('Load more contacts...');
+    Radium.App.send('loadContacts');
+  }
+}
+
 Radium.ContactsPage = Ember.State.extend({
   initialState: 'index',
   index: Ember.ViewState.extend(Radium.PageStateMixin, {
     view: Radium.ContactsPageView,
     exit: function(manager) {
       this._super(manager);
-      $(window).off('scroll');
+      $(window).off('scroll', infiniteLoading);
     },
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {
-
-        $(window).on('scroll', function(){
-          if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-           Radium.contactsController.loadPage();
-           console.log('more....');
-          }
-        });
-
+        $(window).on('scroll', infiniteLoading);
 
         if (this.get('isFirstRun')) {
           if (Radium.campaignsController.get('length') <= 0) {
             Radium.campaignsController.set(
               'content',
-              Radium.store.findAll(Radium.Campaign, {page: 0})
+              Radium.store.findAll(Radium.Campaign)
             );
           }
 
@@ -36,11 +36,7 @@ Radium.ContactsPage = Ember.State.extend({
           this.set('isFirstRun', false);
 
           Ember.run.next(function() {
-            Radium.selectedContactsController.setProperties({
-              content: Radium.contactsController.get('content'),
-              selectedCampaign: null
-            });
-            manager.goToState('ready');
+            manager.send('allCampaigns');
           });
         } else {
           Ember.run.next(function() {
@@ -49,25 +45,60 @@ Radium.ContactsPage = Ember.State.extend({
         }
       }
     }),
+
     ready: Ember.State.create(),
 
-    // Events
-    allCampaigns: function(manager, context) {
-      Radium.contactsController.clearSelected();
-      Radium.selectedContactsController.setProperties({
-        content: Radium.contactsController.get('content'),
-        selectedCampaign: null
-      });
-      manager.goToState('ready');
-    },
+    // Loader for infinite scrolling
+    loading: Ember.State.create({
+      miniLoader: $('<div id="mini-loader" class="alert alert-block"><h4 class="alert-heading">Loading &hellip;</h4></div>').hide(),
+      enter: function() {
+        this.get('miniLoader').appendTo($('body')).fadeIn();
+      },
+      exit: function() {
+        $('#mini-loader').fadeOut(function() {
+          $(this).remove();
+        });
+      }
+    })
+  }),
 
-    selectCampaign: function(manager, context) {
-      Radium.contactsController.clearSelected();
-      Radium.selectedContactsController.setProperties({
-        content: context.get('contacts'),
-        selectedCampaign: context
+  // Events
+  allCampaigns: function(manager, context) {
+    $(window).on('scroll', infiniteLoading);
+    Radium.contactsController.clearSelected();
+    Radium.selectedContactsController.setProperties({
+      content: Radium.contactsController.get('content'),
+      selectedCampaign: null
+    });
+    manager.goToState('ready');
+  },
+
+  selectCampaign: function(manager, context) {
+    $(window).off('scroll', infiniteLoading);
+    Radium.contactsController.clearSelected();
+    Radium.selectedContactsController.setProperties({
+      content: context.get('contacts'),
+      selectedCampaign: context
+    });
+    manager.goToState('ready');
+  },
+
+  loadContacts: function(manager) {
+    var self = this;
+
+    $(window).off('scroll', infiniteLoading);
+    
+    var page = Radium.contactsController.get('totalPagesLoaded'),
+        isAllContactsLoaded = Radium.contactsController.get('isAllContactsLoaded');
+    manager.goToState('loading');
+    if (!isAllContactsLoaded) {
+      var moreContacts = Radium.store.find(Radium.Contact, {page: page+1});
+      moreContacts.addObserver('isLoaded', function() {
+        if (this.get('isLoaded')) {
+          $(window).on('scroll', infiniteLoading);
+          manager.goToState('ready');
+        }
       });
-      manager.goToState('ready');
     }
-  })
+  }
 })

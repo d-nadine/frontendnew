@@ -2,16 +2,10 @@ Radium.contactsController = Ember.ArrayProxy.create({
   content: [],
   totalPagesLoaded: 0,
   totalPages: 0,
-  loadPage: function(page) {
-    var page = page || this.get('totalPagesLoaded');
-
-    if (!this.get('isAllContactsLoaded')) {
-      Radium.store.find(Radium.Contact, {page: page+1});
-    }
-  },
   isAllContactsLoaded: function() {
     return (this.get('totalPages') === this.get('totalPagesLoaded')) ? true : false;
   }.property('totalPagesLoaded', 'totalPages').cacheable(),
+  
   /**
     @binding {content.status}
     @return {Ember.Array} Filtered leads
