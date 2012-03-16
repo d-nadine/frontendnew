@@ -139,21 +139,21 @@ class Deploy < Thor
     inside ROOT do
       run 'git add deploys.md'
 
-      unless $?.exitstatus == 0
+      unless $?.success?
         say_status "FAILED", "Could not add new deploy file for some reason"
         return false
       end
 
       run "git commit -m '[Deploy]'"
 
-      unless $?.exitstatus == 0
+      unless $?.success?
         say_status "FAILED", "Could not commit for some reason"
         return false
       end
 
       run "git push origin master"
 
-      unless $?.exitstatus == 0
+      unless $?.success?
         say_status "FAILED", "Could not push to Github"
         return false
       end
