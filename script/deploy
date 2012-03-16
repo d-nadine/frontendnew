@@ -168,7 +168,7 @@ class Deploy < Thor
 
       say %Q{Recording: "#{commit_info}" to deploy file}
 
-      format = "[%s] %s\n"
+      format = "* [%s] %s\n"
 
       existing_contents = File.read "#{ROOT}/deploys.md"
 
