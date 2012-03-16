@@ -120,15 +120,15 @@ class Deploy < Thor
       hash.merge! pair[0] => pair[1]
     end
 
-    env_string = REQUIRED_ENV.collect { |v| "#{v.to_s.upcase}=#{variables[v.to_s.upcase]}" }.join " "
+    env_string = REQUIRED_ENV.collect { |v| %Q{#{v.to_s.upcase}="#{variables[v.to_s.upcase]}"} }.join " "
 
-    run "#{env_string} bundle exec rake compile"
+    run "#{env_string} bundle exec rake compile", :verbose => true
 
     if $?.success?
       say_status "OK", "Assets compiled!", :green
       true
     else
-      say_status "FAILED", "Assets failed to compile", :red
+      say_status "FAILED", "Assets failed to compile...suprising :/", :red
       false
     end
   end
@@ -167,14 +167,14 @@ class Deploy < Thor
         return false
       end
 
-      run 'git add public/'
+      run 'git add site/'
 
       unless $?.success?
         say_status "FAILED", "Could not add new assets for some reason"
         return false
       end
 
-      run "git commit -m '[Deploy]'", :pretend => true
+      run "git commit -m '[Deploy]'"
 
       unless $?.success?
         say_status "FAILED", "Could not commit for some reason"
