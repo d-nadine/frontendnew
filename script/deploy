@@ -92,8 +92,8 @@ class Deploy < Thor
     end
   end
 
-  desc "compile_assets", "Tests assets compile correctly"
-  def compile_assets
+  desc "ensure_assets_compile", "Tests assets compile correctly"
+  def ensure_assets_compile
     say "Testing assets compile correctly"
 
     inside ROOT do
@@ -106,6 +106,29 @@ class Deploy < Thor
       true
     else
       say_status "FAILED", "Assets failed to compile...suprising :/", :red
+      false
+    end
+  end
+
+  desc "compile_assets", "Compile assets locally with Heroku ENV"
+  def compile_assets
+    say "Compiling assets"
+
+    result = run "heroku config", :capture => true, :verbose => false
+
+    variables = result.split("\n").map { |s| s.split('=>').map(&:strip) }.inject({}) do |hash, pair|
+      hash.merge! pair[0] => pair[1]
+    end
+
+    env_string = REQUIRED_ENV.collect { |v| "#{v.to_s.upcase}=#{variables[v.to_s.upcase]}" }.join " "
+
+    run "#{env_string} bundle exec rake compile"
+
+    if $?.success?
+      say_status "OK", "Assets compiled!", :green
+      true
+    else
+      say_status "FAILED", "Assets failed to compile", :red
       false
     end
   end
@@ -144,17 +167,17 @@ class Deploy < Thor
         return false
       end
 
-      run "git commit -m '[Deploy]'"
+      run 'git add public/'
 
       unless $?.success?
-        say_status "FAILED", "Could not commit for some reason"
+        say_status "FAILED", "Could not add new assets for some reason"
         return false
       end
 
-      run "git push origin master"
+      run "git commit -m '[Deploy]'", :pretend => true
 
       unless $?.success?
-        say_status "FAILED", "Could not push to Github"
+        say_status "FAILED", "Could not commit for some reason"
         return false
       end
     end
@@ -172,14 +195,14 @@ class Deploy < Thor
       invoke(:ensure_heroku_connection) && 
       invoke(:ensure_heroku_outdated) && 
       invoke(:ensure_environment) && 
-      invoke(:compile_assets)
+      invoke(:ensure_assets_compile)
 
     if !prereqs
       say_status "Deploy Failed", "Please check prereqs", :red
       return false
     end
 
-    commited = invoke(:record) && invoke(:commit)
+    commited = invoke(:compile_assets) && invoke(:record) && invoke(:commit)
 
     if !commited
       say_status "Deploy Failed!", "Git commits and push failed for some reason.", :red
