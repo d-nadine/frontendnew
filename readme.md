@@ -8,6 +8,8 @@ for underlying code that powers this project.
 There are 3 different things that may be configured.
 
 ```yml
+# config/settings.yml
+
 server: "http://api.radiumcrm.com" # server to proxy all requests too
 developer_api_key: test # developer key to use
 user_api_key: test # optionally, authenticate as a user indevelopment
