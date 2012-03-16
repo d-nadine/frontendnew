@@ -1,8 +1,8 @@
 development:
   server: "http://localhost:3000"
   developer_api_key: "26233b7b68290c7c7d4eec03643d0cf3e9b88ba8"
-  user_api_key: "156a0133148ae415319d9bd1e79cf0e5986f3801"
-  account_id: 6
+  user_api_key: "10dad82539189c5cd8c9b78209d98233a83ba477"
+  account_id: 11 
 
 production:
   server: "<%= ENV['RADIUM_SERVER_URL'] %>"
