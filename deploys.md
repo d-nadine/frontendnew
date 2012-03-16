@@ -1,3 +1,4 @@
+* [2012-03-16 16:36 -0700] 67836a0 - Joshua Jones: Clean up Contacts layout.
 * [2012-03-16 13:13 -0700] e8a527f - Joshua Jones: Merge branch 'joshlocal'
 * [2012-03-16 20:37 +0100] 420f451 - adman65: Update deploy script once again
 * [2012-03-16 20:33 +0100] 1f7b9be - adman65: Fix deploy script to use markdown
