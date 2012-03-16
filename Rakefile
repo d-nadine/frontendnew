@@ -1,7 +1,10 @@
-require './application'
-
 namespace :assets do
   task :precompile do
-    Radium.new.pipeline.invoke
+    ENV['RACK_ENV'] = 'production'
+
+    require './radium'
+    raise unless Radium.new.production?
+
+    Radium.new.compile_assets
   end
 end

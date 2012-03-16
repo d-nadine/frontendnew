@@ -1,6 +1,6 @@
 .DS_Store
 tmp/
-public/
+site/
 .sass-cache/
 *.sublime-project
 *.sublime-workspace
