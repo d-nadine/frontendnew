@@ -2,15 +2,10 @@
   <legend>Send a Message</legend>
   <p><strong>To:</strong> 
     {{#with Radium.contactsController}}
-      {{#if selectedContactsNames}}
-        {{selectedContactsNames}}
-        <input type="hidden" name="message-to" id="message-to" {{bindAttr value="selectedContactsNames"}}>
+      {{#if selectedContactsEmails}}
+        {{selectedContactsEmails}}
       {{/if}}
     {{/with}}
-    {{#if data}}
-      {{data.name}}
-      <input type="hidden" name="message-to" id="message-to" {{bindAttr value="data.value"}}>
-    {{/if}}
   </p>
 
   <label for="subject">Subject</label>

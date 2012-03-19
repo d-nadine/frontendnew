@@ -55,6 +55,7 @@ Radium.ContactCardView = Ember.View.extend({
 
   sendContactMessage: function(event) {
     var contact = this.get('content');
+    contact.set('isSelected', true);
     Radium.App.send('addResource', {
       form: "ContactsMessage",
       data: contact  

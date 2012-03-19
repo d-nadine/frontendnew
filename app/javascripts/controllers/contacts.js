@@ -2,6 +2,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
   content: [],
   totalPagesLoaded: 0,
   totalPages: 0,
+
   isAllContactsLoaded: function() {
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
   }.property('totalPagesLoaded', 'totalPages').cacheable(),
@@ -136,8 +137,18 @@ Radium.contactsController = Ember.ArrayProxy.create({
     @binding {content.isSelected}
   */
   selectedContactsNames: function() {
-    return this.filterProperty('isSelected', true).getEach('name');
-  }.property('@each.isSelected').cacheable(),
+    return this.get('selectedContacts').getEach('name');
+  }.property('selectedContacts').cacheable(),
+
+  selectedContactsEmails: function() {
+    var selectedContacts = this.get('selectedContacts'),
+        emails = Ember.A([]);
+    selectedContacts.forEach(function(item) {
+      var email = item.getPath('emailAddresses.firstObject.value');
+      emails.pushObject(email);
+    });
+    return emails;
+  }.property('selectedContacts').cacheable(),
 
   clearSelected: function() {
     this.setEach('isSelected', false);

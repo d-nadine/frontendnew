@@ -2,10 +2,12 @@ Radium.ContactForm = Radium.FormView.extend({
   templateName: 'contact_form',
   submitForm: function() {
     var self = this;
-    var vals = this.$('form').serialize(),
-        emails = [],
+    var emails = [],
         phoneNumbers = [],
-        addresses = [];
+        addresses = [],
+        // Assigned User
+        assignedTo = $('#assigned-to').val(),
+        data = {};
 
     var emailFields = this.$('fieldset#email-addresses').find('.control-group'),
         phoneFields = this.$('fieldset#phone-numbers').find('.control-group'),
@@ -36,7 +38,8 @@ Radium.ContactForm = Radium.FormView.extend({
       addressFields.push(addressGroup);
     });
 
-    var data = {
+    // Bundle up the values
+    data = {
       contact: {
         name: this.$('#contact-name').val(),
         email_addresses_attributes: emails,
@@ -45,13 +48,19 @@ Radium.ContactForm = Radium.FormView.extend({
       }
     }
 
+    // Disable the form buttons
+    this.sending();
+
     $.ajax({
       url: '/api/contacts',
       data: data,
       type: 'POST',
       success: function(data) {
         Radium.store.load(Radium.Contact, data);
-        self.hideForm();
+        self.success();
+      },
+      error: function() {
+        self.error();
       }
     })
 
