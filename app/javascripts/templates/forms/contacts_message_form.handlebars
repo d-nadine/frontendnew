@@ -1,7 +1,17 @@
 <form class="well">
   <legend>Send a Message</legend>
-  <p><strong>To:</strong> {{Radium.contactsController.selectedContactsNames}}</p>
-  <input type="hidden" id="message-to" name="message-to" value="">
+  <p><strong>To:</strong> 
+    {{#with Radium.contactsController}}
+      {{#if selectedContactsNames}}
+        {{selectedContactsNames}}
+        <input type="hidden" name="message-to" id="message-to" {{bindAttr value="selectedContactsNames"}}>
+      {{/if}}
+    {{/with}}
+    {{#if data}}
+      {{data.name}}
+      <input type="hidden" name="message-to" id="message-to" {{bindAttr value="data.value"}}>
+    {{/if}}
+  </p>
 
   <label for="subject">Subject</label>
   <input name="subject" id="subject" class="span8">

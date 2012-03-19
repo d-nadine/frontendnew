@@ -57,7 +57,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
     @return {Ember.Array} Contacts without a user :'(
   */
   unassigned: function() {
-    return this.filterProperty('user', false);
+    return this.filterProperty('user', null);
   }.property('@each.user').cacheable(),
 
   /**

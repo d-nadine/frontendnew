@@ -2,22 +2,17 @@ Radium.FormView = Ember.View.extend({
   /**
     Default submit form action.
   */
+
   didInsertElement: function() {
     this._super();
     this.$().hide().slideDown('slow');
   },
   submitForm: function() {
-    var vals = this.$('form').serializeArray();
-    var createObject = {};
-    vals.forEach(function(item) {
-      createObject[item.name] = item.value;
-    });
-
     this.$().slideUp('fast', function() {
       Radium.App.send('closeForm');
     });
   },
-  cancelForm: function() {
+  hideForm: function() {
     this.$().slideUp('fast', function() {
       Radium.App.send('closeForm');
     });
@@ -28,6 +23,6 @@ Radium.FormView = Ember.View.extend({
   }),
   cancelFormButton: Ember.Button.extend({
     target: 'parentView',
-    action: 'cancelForm'
+    action: 'hideForm'
   })
 });

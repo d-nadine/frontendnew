@@ -11,6 +11,7 @@ minispade.require('radium/views/forms/form');
 minispade.require('radium/views/forms/autocomplete');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/forms/message_form');
+minispade.require('radium/views/forms/contact_form');
 minispade.require('radium/views/forms/contacts_message_form');
 minispade.require('radium/views/forms/contacts_sms_form');
 minispade.require('radium/views/forms/discussion_form');

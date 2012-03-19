@@ -67,6 +67,10 @@ body {
   margin: 20px 0;
 }
 
+fieldset legend {
+  font-size: 15px;
+}
+
 #feed .page-header h2 small {
   float: right;
   font-weight: bold;

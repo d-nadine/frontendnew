@@ -21,6 +21,7 @@ minispade.require('radium/templates/forms/deal_form');
 minispade.require('radium/templates/forms/discussion_form');
 minispade.require('radium/templates/forms/meeting_form');
 minispade.require('radium/templates/forms/message_form');
+minispade.require('radium/templates/forms/contact_form');
 minispade.require('radium/templates/forms/contacts_message_form');
 minispade.require('radium/templates/forms/contacts_sms_form');
 minispade.require('radium/templates/forms/todo_form');

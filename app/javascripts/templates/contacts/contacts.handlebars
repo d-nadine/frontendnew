@@ -21,12 +21,14 @@
           {{view badge countBinding="Radium.contactsController.length"}}
         </a>
       {{/view}}
-      {{#view Radium.ContactFilterListView singularName="company"}}
+      <!-- 
+      {{!view Radium.ContactFilterListView singularName="company"}}
         <a href="#" {{action "filterContacts"}}>
-          {{view newResourceButton title="Add a new Company" formViewClass="Company"}}
+          {{!view newResourceButton title="Add a new Company" formViewClass="Company"}}
           Companies
         </a>
-      {{/view}}
+      {{!view}}
+ -->
       {{#view Radium.ContactFilterListView singularName="lead"}}
         <a href="#" {{action "filterContacts"}}>
           Leads

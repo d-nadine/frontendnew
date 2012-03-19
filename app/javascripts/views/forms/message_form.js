@@ -1,3 +1,6 @@
 Radium.MessageForm = Radium.FormView.extend({
-  templateName: 'message_form'
+  templateName: 'message_form',
+  submitForm: function() {
+
+  }
 });

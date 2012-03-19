@@ -14,7 +14,14 @@
         {{Radium.contactsController.categoryFilter}}
 
         {{#each emailAddresses}}
-          {{view Radium.TooltipView titleBinding="value" icon="envelope"}}
+          {{view 
+            Radium.TooltipView 
+            contentBinding="this"
+            titleBinding="value" 
+            icon="envelope"
+            action="sendContactMessage"
+            target="parentView"
+          }}
         {{/each}}
         {{#each phoneNumbers}}
           {{view Radium.TooltipView titleBinding="value" icon="user"}}

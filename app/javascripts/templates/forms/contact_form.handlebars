@@ -1,0 +1,53 @@
+<form class="well">
+  <legend>Add a Contact</legend>
+
+  <label for="contact-name">Name</label>
+  <input name="contact-name" id="contact-name" class="span6">
+
+  <fieldset class="form-inline" id="email-addresses">
+    <legend>Emails</legend>
+    <div class="control-group">
+      <input type="text" class="email-name" placeholder="Name">
+      <input type="text" class="email-value" placeholder="Email">
+      <!-- <i class="icon-plus-sign"></i> -->
+    </div>
+  </fieldset>
+
+  <fieldset class="form-inline" id="phone-numbers">
+    <legend>Phone Numbers</legend>
+    <div class="control-group">
+      <input type="text" class="phone-name" placeholder="Name">
+      <input type="text" class="phone-value" placeholder="Phone Number">
+      <!-- <i class="icon-plus-sign"></i> -->
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-inline" id="addresses">
+    <legend>Addresses</legend>
+    <div class="control-group">
+      <input class="address-name" placeholder="Name">
+      <input class="address-street" placeholder="Street">
+      <input class="address-state" placeholder="State">
+      <select class="address-country">
+        <option>Country</option>
+        <option value="Australia">Australia</option>
+        <option value="Canada">Canada</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option>More To Be Added</option>
+      </select>
+      <input class="address-zip" placeholder="Zip Code">
+    </div>
+  </fieldset>
+
+  <label for="assigned-to">Assigned To</label>
+  <select id="assigned-to" name="assigned-to">
+    {{#each Radium.usersController}}
+    <option {{bindAttr value="id"}}>{{abbrName}}</option>
+    {{/each}}
+  </select>
+
+  <div class="form-actions">
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  </div>
+</form>

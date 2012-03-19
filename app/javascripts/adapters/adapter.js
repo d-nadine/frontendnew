@@ -13,11 +13,11 @@ window.RadiumAdapter = DS.Adapter.extend({
     var success = function(json) {
       store.didCreateRecord(model, json);
     };
-
-    this.ajax("/" + url, "POST", {
-      data: data,
-      success: success
-    });
+    console.log(data);
+    // this.ajax("/" + url, "POST", {
+    //   data: data,
+    //   success: success
+    // });
   },
 
   createRecords: function(store, type, models) {
