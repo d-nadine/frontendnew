@@ -150,6 +150,16 @@ Radium.contactsController = Ember.ArrayProxy.create({
     return emails;
   }.property('selectedContacts').cacheable(),
 
+  selectedContactsPhoneNumbers: function() {
+    var selectedContacts = this.get('selectedContacts'),
+        phoneNumbers = Ember.A([]);
+    selectedContacts.forEach(function(item) {
+      var phone = item.getPath('phoneNumbers.firstObject.value');
+      phoneNumbers.pushObject(phone);
+    });
+    return phoneNumbers;
+  }.property('selectedContacts').cacheable(),
+
   clearSelected: function() {
     this.setEach('isSelected', false);
   }

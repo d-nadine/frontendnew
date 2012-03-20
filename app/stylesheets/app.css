@@ -8,6 +8,19 @@ body {
   right: 10px;
 }
 
+.icon-sms,
+.icon-call {
+  background-image: url('/images/icons/icons-radium.png') !important;
+}
+
+.icon-call {
+  background-position: 0px 0px !important;
+}
+
+.icon-sms {
+  background-position: right 0px !important;
+}
+
 .nav-tabs.nav-stacked > li:first-of-type > a {
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;

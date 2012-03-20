@@ -21,14 +21,6 @@
           {{view badge countBinding="Radium.contactsController.length"}}
         </a>
       {{/view}}
-      <!-- 
-      {{!view Radium.ContactFilterListView singularName="company"}}
-        <a href="#" {{action "filterContacts"}}>
-          {{!view newResourceButton title="Add a new Company" formViewClass="Company"}}
-          Companies
-        </a>
-      {{!view}}
- -->
       {{#view Radium.ContactFilterListView singularName="lead"}}
         <a href="#" {{action "filterContacts"}}>
           Leads
@@ -139,7 +131,9 @@
           {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
           {{#view callListButton class="btn btn-small"}}Add to Call List{{/view}}
           {{#view addCampaignButton class="btn btn-small"}}Add to Campaign{{/view}}
-          {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
+          {{#if Radium.selectedContactsController.selectedCampaign}}
+            {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
+          {{/if}}
         </div>
         <div class="btn-group">
           {{view statusButton title="Change Status" selectionBinding="Radium.contactsController.selectedContacts"}}

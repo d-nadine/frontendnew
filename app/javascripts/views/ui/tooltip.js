@@ -9,6 +9,9 @@ Radium.TooltipView = Ember.Button.extend({
   attributeBindings: ['title', 'href', 'rel'],
   href: '#',
   rel: 'tooltip',
+  title: function() {
+    return this.get('text') + ' ' + this.get('value');
+  }.property('value', 'title').cacheable(),
   click: function() {
     return false;
   },

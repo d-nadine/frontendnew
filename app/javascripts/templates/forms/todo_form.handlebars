@@ -3,21 +3,25 @@
   <label for="description">Task</label>
   <textarea name="description" id="description" class="span8"></textarea>
   <label for="date">Date:</label>
-  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}
+  {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
   <label for="time">Time:</label>
-  <input type="text" id="time" name="time" class="input-small" placeholder="eg 1:00">
+  <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
   <label for="assigned-to">Assigned To</label>
   <select id="assigned-to" name="assigned-to">
+    <option value="">Unnassigned</option>
     {{#each Radium.usersController}}
     <option {{bindAttr value="id"}}>{{abbrName}}</option>
     {{/each}}
   </select>
-  <label for="customer">Customer</label>
-  {{view Radium.AutocompleteTextField 
-    id="customer" class="input-xlarge"
-    sourceBinding="Radium.contactsController.contactNames"
-  }}
-  <input type="hidden" id="todo-contact" name="contact" value="">
+  <label for="contacts">Contacts</label>
+  {{#if selectedContacts}}
+    {{selectedContacts}}
+  {{else}}
+    {{view Radium.AutocompleteTextField 
+      id="contacts" name="contacts" class="input-xlarge"
+      sourceBinding="Radium.contactsController.contactNames"
+    }}
+  {{/if}}
 
   {{view Radium.FormCheckbox 
       title="Add Reminder" 

@@ -1,13 +1,18 @@
 <form class="well">
   <legend>Send an SMS Message</legend>
-  <p><strong>To:</strong> {{Radium.contactsController.selectedContactsNames}}</p>
-  <input type="hidden" id="message-to" name="message-to" value="">
+  <p><strong>To:</strong> 
+    {{#with Radium.contactsController}}
+      {{#if selectedContactsPhoneNumbers}}
+        {{selectedContactsPhoneNumbers}}
+      {{/if}}
+    {{/with}}
+  </p>
 
   <label for="message">Message</label>
   <textarea name="message" id="message" class="span8"></textarea>
 
   <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Send{{/view}}
+    {{#view submitButton class="btn btn-primary"}}Send SMS{{/view}}
     {{#view cancelFormButton class="btn"}}Cancel{{/view}}
   </div>
 </form>
