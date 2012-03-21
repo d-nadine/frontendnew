@@ -133,6 +133,14 @@ Radium.contactsController = Ember.ArrayProxy.create({
   }.property('@each.isSelected').cacheable(),
 
   /**
+    Return all contacts IDs selected on Contacts page.
+    @binding {content.isSelected}
+  */
+  selectedContactsIds: function() {
+    return this.get('selectedContacts').filterProperty('id');
+  }.property('@each.isSelected').cacheable(),
+
+  /**
     Return the selected contacts names
     @binding {content.isSelected}
   */

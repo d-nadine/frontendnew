@@ -18,7 +18,7 @@ minispade.register('radium/templates/campaigns/campaign', function() {Ember.TEMP
 });minispade.register('radium/templates/feed/feed_item_headline', function() {Ember.TEMPLATES['feed_item_headline']=Ember.Handlebars.compile("This is a test.");
 });minispade.register('radium/templates/feed/feed_item_todos', function() {Ember.TEMPLATES['feed_item_todos']=Ember.Handlebars.compile("{{#if parentView.items.length}}\n  {{#with parentView}}\n  {{#each items}}\n    <div {{bindAttr class=\"isOverdue:overdue\"}}>\n      <div class=\"span2\">\n        <span class=\"timestamp\">\n        {{#if isOverdue}}\n          OVERDUE\n        {{else}}\n          {{formatTime updatedAt}}\n        {{/if}}\n        </span>\n      </div>\n      <div class=\"span6 content\">\n        <p>\n          {{view Radium.Checkbox valueBinding=\"finished\"}}\n          <span class=\"label notice\">{{kind}}</span>\n          {{description}}\n        (<a href=\"#\">{{user.abbrName}}</a>)\n        \n          <!-- <i class=\"icon-comment\"></i> -->\n\n      </p>\n    </div>\n  </div>\n  {{/each}}\n  {{/with}}\n\n{{else}}\n  <h4 style=\"text-align:center;\"><span class=\"label label-important\">Error:</span> No todos found</h4>\n{{/if}}");
 });minispade.register('radium/templates/forms/add_to_campaign_form', function() {Ember.TEMPLATES['add_to_campaign_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Add to Campaign</legend>\n  <label for=\"all-campaigns\">Campaigns</label>\n  {{view Ember.Select \n    viewName=\"select\"\n    contentBinding=\"Radium.campaignsController\"\n    optionLabelPath=\"content.name\"\n    optionValuePath=\"content.id\"\n  }}\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
-});minispade.register('radium/templates/forms/call_list_form', function() {Ember.TEMPLATES['call_list_form']=Ember.Handlebars.compile("<form data-type=\"call_list\" class=\"well\">\n  <legend>Add to Call List</legend>\n  <label for=\"call-by\">Call by</label>\n  {{view Radium.DatePickerField id=\"call-by\" name=\"call-by\" class=\"input-small\"}}  \n  <label for=\"time\">Time:</label>\n  <input type=\"text\" id=\"time\" name=\"time\" class=\"input-small\" placeholder=\"eg 1:00\">\n  <label for=\"assigned-to\">Assigned To</label>\n  <select name=\"assigned-to\" id=\"assigned-to\">\n    <option value=\"\">Assigned To</option>\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n\n  <label for=\"call-list\">Call List</label>\n\n  <select name=\"call-list\" id=\"call-list\">\n    <option value=\"\">Assign to a Call List</option>\n    {{#each Radium.callListsController}}\n    <option {{bindAttr value=\"id\"}}>{{description}}</option>\n    {{/each}}\n  </select>\n\n  {{view Radium.FormCheckbox \n      title=\"Add Reminder\" \n      valueBinding=\"wantsReminder\"\n  }}\n\n  <div id=\"reminder-holder\"></div>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
+});minispade.register('radium/templates/forms/call_list_form', function() {Ember.TEMPLATES['call_list_form']=Ember.Handlebars.compile("<form data-type=\"call_list\" class=\"well\">\n  <legend>Add to Call List</legend>\n  <label for=\"finish-by\">Finish by</label>\n  {{view Radium.DatePickerField id=\"finish-by\" name=\"finish-by\" class=\"input-small\"}}\n  <label for=\"assigned-to\">Assigned To</label>\n  <select name=\"assigned-to\" id=\"assigned-to\">\n    <option value=\"\">Assigned To</option>\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n\n  <label for=\"call-list\">Call List</label>\n\n  <select name=\"call-list\" id=\"call-list\">\n    <option value=\"\">Assign to a Call List</option>\n    {{#each Radium.callListsController}}\n    <option {{bindAttr value=\"id\"}}>{{description}}</option>\n    {{/each}}\n  </select>\n\n  {{view Radium.FormCheckbox \n      title=\"Add Reminder\" \n      valueBinding=\"wantsReminder\"\n  }}\n\n  <div id=\"reminder-holder\"></div>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/campaign_form', function() {Ember.TEMPLATES['campaign_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Create a Campaign</legend>\n  <label for=\"name\">Name</label>\n  <input type=\"text\" name=\"name\" id=\"name\" class=\"span8\" value=\"\">\n\n  <label for=\"target\">Target</label>\n  <input type=\"text\" name=\"target\" id=\"target\" class=\"span8\" value=\"\">\n\n  <label for=\"ends-by\">Ends by:</label>\n  {{view Radium.DatePickerField id=\"ends-by\" name=\"ends-by\" class=\"input-small\"}}\n\n  <label for=\"currency\">Currency:</label>\n  <select id=\"currency\" name=\"currency\">\n    <option value=\"USD\">USD</option>\n    <option value=\"EUR\">EUR</option>\n    <option value=\"CAD\">CAD</option>\n  </select>\n\n  <label for=\"description\">Description:</label>\n  <textarea name=\"description\" id=\"description\" class=\"span8\"></textarea>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/contact_form', function() {Ember.TEMPLATES['contact_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Add a Contact</legend>\n\n  <label for=\"contact-name\">Name</label>\n  <input name=\"contact-name\" id=\"contact-name\" class=\"span6\">\n\n  <fieldset class=\"form-inline\" id=\"email-addresses\">\n    <legend>Emails</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"email-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"email-value\" placeholder=\"Email\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n\n  <fieldset class=\"form-inline\" id=\"phone-numbers\">\n    <legend>Phone Numbers</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"phone-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"phone-value\" placeholder=\"Phone Number\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n  \n  <fieldset class=\"form-inline\" id=\"addresses\">\n    <legend>Addresses</legend>\n    <div class=\"control-group\">\n      <input class=\"address-name\" placeholder=\"Name\">\n      <input class=\"address-street\" placeholder=\"Street\">\n      <input class=\"address-state\" placeholder=\"State\">\n      <select class=\"address-country\">\n        <option>Country</option>\n        <option value=\"Australia\">Australia</option>\n        <option value=\"Canada\">Canada</option>\n        <option value=\"United Kingdom\">United Kingdom</option>\n        <option>More To Be Added</option>\n      </select>\n      <input class=\"address-zip\" placeholder=\"Zip Code\">\n    </div>\n  </fieldset>\n  <!--\n  <label for=\"assigned-to\">Assigned To</label>\n  <select id=\"assigned-to\" name=\"assigned-to\">\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n    -->\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/contacts_message_form', function() {Ember.TEMPLATES['contacts_message_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Send a Message</legend>\n  <p><strong>To:</strong> \n    {{#with Radium.contactsController}}\n      {{#if selectedContactsEmails}}\n        {{selectedContactsEmails}}\n      {{/if}}\n    {{/with}}\n  </p>\n\n  <label for=\"subject\">Subject</label>\n  <input name=\"subject\" id=\"subject\" class=\"span8\">\n\n  <label for=\"message\">Message</label>\n  <textarea name=\"message\" id=\"message\" class=\"span8\"></textarea>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Send{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
@@ -746,6 +746,14 @@ DS.attr.transforms.inviteState = {
   */
   selectedContacts: function() {
     return this.filterProperty('isSelected', true);
+  }.property('@each.isSelected').cacheable(),
+
+  /**
+    Return all contacts IDs selected on Contacts page.
+    @binding {content.isSelected}
+  */
+  selectedContactsIds: function() {
+    return this.get('selectedContacts').filterProperty('id');
   }.property('@each.isSelected').cacheable(),
 
   /**
@@ -3035,14 +3043,9 @@ Radium.App = Ember.StateManager.create({
 
   authenticateUser: function(manager, context) {
     var account = Radium.store.find(Radium.Account, ACCOUNT);
-    
-    var timer = setTimeout(function() {
-      manager.goToState('error');
-    }, 8000);
 
     account.addObserver('isLoaded', function() {
       if (this.get('isLoaded')) {
-        clearTimeout(timer);
         Radium.appController.set('isFirstRun', false);
         Radium.appController.set('isLoggedIn', true);
         manager.goToState('loggedIn');
@@ -4308,17 +4311,39 @@ Radium.AnnouncementsView = Ember.View.extend({
 });
 });minispade.register('radium/views/forms/call_list_form', function() {  Radium.CallListForm = Radium.FormView.extend(Radium.FormReminder, {
     templateName: 'call_list_form',
+    selectedContactIdsBinding: 'Radium.contactsController.selectedContactsIds',
     // TODO: Figure out how this works with the API...
-    // submitForm: function() {
-    //   var self = this,
-    //       values = this.$('form').serializeArray(),
-    //       type = 
-    //       request = {};
-      
-    //   values.forEach(function(item) {
+    submitForm: function() {
+      var self = this,
+          $callListSelect = this.$('select#call-list'),
+          finishByDate = this.$('input#finish-by').val(),
+          callListId = $callListSelect.val(),
+          callList = Radium.store.find(Radium.CallList, callListId),
+          callListName = callList.get('description'),
+          callListContactsIds =callList.getPath('data.contacts'),
+          selectedContactIds = this.get('selectedContactIds').getEach('id'),
+          data = {
+            call_list: {
+              finish_by: finishByDate,
+              contact_ids: callListContactsIds
+            }
+          };
+      data.call_list.contact_ids.push(selectedContactIds);
 
-    //   });
-    // }
+      $.ajax({
+        url: '/api/call_lists/%@'.fmt(callListId),
+        type: 'PUT',
+        data: data,
+        success: function(data) {
+          console.log(data);
+          console.log("Contact added to %@".fmt(callListName));
+          self.success("Contact added to <b>%@</b>".fmt(callListName));
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          self.error("Oops, %@.".fmt(jqXHR.responseText));
+        }
+      });
+    }
   });
 });minispade.register('radium/views/forms/campaign_form', function() {  Radium.CampaignForm = Radium.FormView.extend({
     templateName: 'campaign_form'
@@ -4486,7 +4511,7 @@ Radium.AnnouncementsView = Ember.View.extend({
                         .addClass('alert-' + type)
                         .text(message);
     this.$().before($flashMessage);
-    $flashMessage.wait(2000).fadeOut(function() {
+    $flashMessage.delay(2000).fadeOut(function() {
       $(this).remove();
     });
   },

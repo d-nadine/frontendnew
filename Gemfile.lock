@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/livingsocial/rake-pipeline.git
-  revision: 961659f592eca500050c884d61c5d1a2da45cf09
+  revision: 1f2029c23865c9a996c367fbf2a75f04a7efd967
   specs:
     rake-pipeline (0.6.0)
       rake (~> 0.9.0)
@@ -43,8 +43,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    commonjs (0.2.0)
-      therubyracer (~> 0.9.9)
+    commonjs (0.2.5)
     compass (0.12.1)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
