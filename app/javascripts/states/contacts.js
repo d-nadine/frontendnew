@@ -30,7 +30,7 @@ Radium.ContactsPage = Ember.State.extend({
               totalPages: 1
             });
           }
-
+          
           this.set('isFirstRun', false);
 
           Ember.run.next(function() {

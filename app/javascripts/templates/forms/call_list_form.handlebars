@@ -1,25 +1,24 @@
-<form class="well">
+<form data-type="call_list" class="well">
   <legend>Add to Call List</legend>
-  <label for="description">Call by</label>
-  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}  
+  <label for="call-by">Call by</label>
+  {{view Radium.DatePickerField id="call-by" name="call-by" class="input-small"}}  
   <label for="time">Time:</label>
   <input type="text" id="time" name="time" class="input-small" placeholder="eg 1:00">
   <label for="assigned-to">Assigned To</label>
-  <select id="assigned-to" name="assigned-to">
+  <select name="assigned-to" id="assigned-to">
+    <option value="">Assigned To</option>
     {{#each Radium.usersController}}
     <option {{bindAttr value="id"}}>{{abbrName}}</option>
     {{/each}}
   </select>
-  <label for="customer">Call List</label>
-  <select class="call-list-name" id="todo_description" name="todo">
-    <option value=""></option>
-    <option value="Follow Ups">Follow Ups</option>
-    <option value="From Website">From Website</option>
-    <option value="Macs">Macs</option>
-    <option value="Repairs">Repairs</option>
-    <option value="Winter Promos">Winter Promos</option>
-    <option value="">-----------</option>
-    <option value="custom">Make a New One</option>
+
+  <label for="call-list">Call List</label>
+
+  <select name="call-list" id="call-list">
+    <option value="">Assign to a Call List</option>
+    {{#each Radium.callListsController}}
+    <option {{bindAttr value="id"}}>{{description}}</option>
+    {{/each}}
   </select>
 
   {{view Radium.FormCheckbox 

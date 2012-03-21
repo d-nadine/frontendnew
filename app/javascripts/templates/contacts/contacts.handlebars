@@ -124,10 +124,15 @@
       </div> <!-- /#alpha -->
       <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
         <div class="btn-group">
-          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
-          {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
+          {{#view selectAllButton class="btn btn-small"}}
+            <i class="icon-ok-circle"></i> All
+          {{/view}}
+          {{#view selectNoneButton class="btn btn-small"}}
+           <i class="icon-remove-circle"></i> None
+          {{/view}}
         </div>
         <div class="btn-group">
+          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
           {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
           {{#view callListButton class="btn btn-small"}}Add to Call List{{/view}}
           {{#view addCampaignButton class="btn btn-small"}}Add to Campaign{{/view}}
@@ -147,16 +152,8 @@
         </div>
       </div> <!-- /#contacts-bulk-toolbar -->
 
-      <div class="btn-toolbar">
-        <div class="btn-group">
-          {{#view selectAllButton class="btn btn-mini"}}
-            <i class="icon-ok-circle"></i> All
-          {{/view}}
-          {{#view selectNoneButton class="btn btn-mini"}}
-           <i class="icon-remove-circle"></i> None
-          {{/view}}
-        </div>
-        {{#view totalSelected class="pull-right"}}
+      <div class="btn-toolbar clear">
+        {{#view totalSelected}}
           <h5>{{totalSelectedString}} selected.</h5>
         {{/view}}
       </div>

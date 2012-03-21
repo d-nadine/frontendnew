@@ -26,9 +26,6 @@
         {{#each phoneNumbers}}
           {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}
         {{/each}}
-        {{#each phoneNumbers}}
-          {{view Radium.TooltipView valueBinding="value" text="SMS" icon="sms"}}
-        {{/each}}
       </h4>
       {{#if campaigns.length}}
         <p><strong>Campaigns:</strong> 

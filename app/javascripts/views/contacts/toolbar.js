@@ -65,6 +65,9 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   callListButton: Ember.Button.extend({
     click: function() {
+      // TODO: This might not be efficient
+      var callLists = Radium.store.findAll(Radium.CallList);
+      Radium.callListsController.set('content', callLists);
       Radium.App.send('addResource', {
         form: 'CallList'
       });

@@ -13,11 +13,9 @@ Radium.FormView = Ember.View.extend({
                         .addClass('alert-' + type)
                         .text(message);
     this.$().before($flashMessage);
-    setTimeout(function() {
-      $flashMessage.fadeOut(function() {
-        $(this).remove();
-      });
-    }, 2000);
+    $flashMessage.wait(2000).fadeOut(function() {
+      $(this).remove();
+    });
   },
   success: function(message) {
     this.flash('success', message);

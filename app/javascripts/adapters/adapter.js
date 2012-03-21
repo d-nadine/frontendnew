@@ -193,15 +193,17 @@ window.RadiumAdapter = DS.Adapter.extend({
   },
 
   findAll: function(store, type) {
-    var root = this.rootForType(type), plural = this.pluralize(root);
+    var root = this.rootForType(type), 
+        plural = this.pluralize(root);
     
     if (root === 'activity') return false;
 
     this.ajax("/" + plural, "GET", {
       success: function(json, status, xhr) {
-        var totalPages = xhr.getResponseHeader('x-radium-total-pages');
-        var currentPage = xhr.getResponseHeader('x-radium-current-page');
-        Radium[plural + 'Controller'].setProperties({
+        var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+            currentPage = xhr.getResponseHeader('x-radium-current-page'),
+            controllerName = plural.camelize();
+        Radium[controllerName + 'Controller'].setProperties({
           totalPages: totalPages,
           totalPagesLoaded: currentPage
         });
@@ -232,7 +234,8 @@ window.RadiumAdapter = DS.Adapter.extend({
         data: {page: currentPage},
         success: function(json, status, xhr) {
           // A page=0 query loads all available pages.
-          var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+          var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+              controllerName = url.camelize();
           if (query.page === 0) {
             // If we are on the last page, cache the hash and then wrap up
             if (currentPage >= totalPages) {
@@ -245,7 +248,7 @@ window.RadiumAdapter = DS.Adapter.extend({
               fetchPage();
             }
           } else {
-            Radium[url + 'Controller'].setProperties({
+            Radium[controllerName + 'Controller'].setProperties({
               totalPages: totalPages,
               totalPagesLoaded: query.page
             });

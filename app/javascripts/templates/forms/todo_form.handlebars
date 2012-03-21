@@ -14,14 +14,16 @@
     {{/each}}
   </select>
   <label for="contacts">Contacts</label>
-  {{#if selectedContacts}}
-    {{selectedContacts}}
-  {{else}}
-    {{view Radium.AutocompleteTextField 
-      id="contacts" name="contacts" class="input-xlarge"
-      sourceBinding="Radium.contactsController.contactNames"
-    }}
-  {{/if}}
+  {{#with Radium.contactsController}}
+    {{#if selectedContacts}}
+      {{selectedContactsNames}}
+    {{else}}
+      {{view Radium.AutocompleteTextField 
+        id="contacts" name="contacts" class="input-xlarge"
+        sourceBinding="contactNames"
+      }}
+    {{/if}}
+  {{/with}}
 
   {{view Radium.FormCheckbox 
       title="Add Reminder" 

@@ -7,9 +7,9 @@ minispade.require('ember-data');
 minispade.require('date-utils');
 minispade.require('highcharts');
 minispade.require('bootstrap-tooltip');
-minispade.require('radium/mixins/jqueryui');
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
+minispade.require('radium/mixins/main');
 minispade.require('radium/helpers/main');
 
 
