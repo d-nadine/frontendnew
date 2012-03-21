@@ -156,7 +156,7 @@ window.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
-    console.log('this should not be', url);
+
     this.ajax(url, "GET", {
       success: function(json) {
         store.load(type, json);
@@ -209,12 +209,10 @@ window.RadiumAdapter = DS.Adapter.extend({
         success: function(json, status, xhr) {
           // On the last page, send to `pagesLoaded` to add to store.
           if (currentPage >= totalPages) {
-            console.log('stop')
             dataHash = dataHash.concat(json);
             pagesLoaded();
           // Loop on through the pages
           } else {
-            console.log('keep going...');
             currentPage++;
             dataHash = dataHash.concat(json);
             fetchPage();
@@ -235,7 +233,7 @@ window.RadiumAdapter = DS.Adapter.extend({
         plural = this.pluralize(root);
     
     if (root === 'activity') return false;
-    console.log(type, 'me again');
+
     this.ajax("/" + plural, "GET", {
       success: function(json, status, xhr) {
         var totalPages = xhr.getResponseHeader('x-radium-total-pages'),

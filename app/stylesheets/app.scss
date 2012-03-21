@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 body {
   padding-top: 60px;
 }
@@ -10,15 +12,15 @@ body {
 
 .icon-sms,
 .icon-call {
-  background-image: url('/images/icons/icons-radium.png') !important;
+  background-image: url('/images/icons/icons-radium.png');
 }
 
 .icon-call {
-  background-position: 0px 0px !important;
+  background-position: 0px 0px;
 }
 
 .icon-sms {
-  background-position: right 0px !important;
+  background-position: right 0px;
 }
 
 .nav-tabs.nav-stacked > li:first-of-type > a {
