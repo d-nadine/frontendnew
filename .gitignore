@@ -4,4 +4,3 @@ tmp/
 *.sublime-project
 *.sublime-workspace
 !site/images/icons
-script/deploy
