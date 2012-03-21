@@ -192,7 +192,7 @@ class Deploy < Thor
   def run_deploy
     say "Testing prereqs...."
 
-    prereqs = true && 
+    prereqs = invoke(:ensure_clean) && 
       invoke(:ensure_github_connection) &&
       invoke(:ensure_heroku_connection) &&
       invoke(:ensure_heroku_outdated) &&
