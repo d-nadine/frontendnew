@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 body {
   padding-top: 60px;
 }
@@ -6,6 +8,31 @@ body {
   position: fixed;
   bottom: 10px;
   right: 10px;
+}
+
+.icon-sms,
+.icon-call {
+  background-image: url('/images/icons/icons-radium.png');
+}
+
+.icon-call {
+  background-position: 0px 0px;
+}
+
+.icon-sms {
+  background-position: right 0px;
+}
+
+.nav-tabs.nav-stacked > li:first-of-type > a {
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs.nav-stacked > li:last-of-type > a {
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
 }
 
 .module {
@@ -53,6 +80,10 @@ body {
 
 #form-container {
   margin: 20px 0;
+}
+
+fieldset legend {
+  font-size: 15px;
 }
 
 #feed .page-header h2 small {

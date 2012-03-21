@@ -29,7 +29,9 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   emailButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'ContactsMessage');
+      Radium.App.send('addResource', {
+        form: 'ContactsMessage'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -39,7 +41,9 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   smsButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'ContactSMS');
+      Radium.App.send('addResource', {
+        form: 'ContactSMS'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -49,7 +53,9 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   todoButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'Todo');
+      Radium.App.send('addResource', {
+        form: 'Todo'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -59,7 +65,12 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   callListButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'CallList');
+      // TODO: This might not be efficient
+      var callLists = Radium.store.findAll(Radium.CallList);
+      Radium.callListsController.set('content', callLists);
+      Radium.App.send('addResource', {
+        form: 'CallList'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -69,7 +80,9 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   addCampaignButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', 'AddToCampaign');
+      Radium.App.send('addResource', {
+        form: 'AddToCampaign'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),

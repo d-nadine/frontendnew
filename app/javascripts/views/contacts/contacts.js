@@ -52,12 +52,12 @@ Radium.ContactFilterListView = Ember.View.extend({
   tagName: 'li',
   classNameBindings: ['isSelected:active'],
   isSelected: function() {
-    var filter = this.getPath('item.shortname'),
+    var filter = this.get('singularName'),
         selectedFilter = this.getPath('parentView.parentView.selectedFilter');
     if (filter === selectedFilter) { return true; }
   }.property('parentView.parentView.selectedFilter').cacheable(),
   filterContacts: function(event) {
-    var filter = this.getPath('item.shortname');
+    var filter = this.get('singularName');
     Radium.contactsController.clearSelected();
     Radium.selectedContactsController.set('selectedFilter', filter);
     return false;
@@ -67,15 +67,17 @@ Radium.ContactFilterListView = Ember.View.extend({
     classNames: 'icon-plus',
     tagName: 'i',
     attributeBindings: ['title'],
-    title: function() {
-      var type = this.getPath('parentView.item.title');
-      return "Add a new " + type.substr(0, type.length-1);
-    }.property(),
     click: function(event) {
-      var formType = this.getPath('parentView.item.formViewClass');
+      var formType = this.get('formViewClass');
       Radium.App.send('addResource', formType);
       event.stopPropagation();
       return false;
     }
+  }),
+
+  badge: Ember.View.extend({
+    tagName: 'span',
+    classNames: ['pull-right'],
+    template: Ember.Handlebars.compile('<span class="badge">{{count}}</span>')
   })
 });

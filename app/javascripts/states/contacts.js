@@ -1,7 +1,7 @@
 function infiniteLoading() {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    console.log('Load more contacts...');
     Radium.App.send('loadContacts');
+    return false;
   }
 }
 
@@ -11,13 +11,11 @@ Radium.ContactsPage = Ember.State.extend({
     view: Radium.ContactsPageView,
     exit: function(manager) {
       this._super(manager);
-      $(window).off('scroll', infiniteLoading);
+      $(window).off();
     },
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {
-        $(window).on('scroll', infiniteLoading);
-
         if (this.get('isFirstRun')) {
           if (Radium.campaignsController.get('length') <= 0) {
             Radium.campaignsController.set(
@@ -28,11 +26,11 @@ Radium.ContactsPage = Ember.State.extend({
 
           if (Radium.contactsController.get('length') <= 0) {
             Radium.contactsController.setProperties({
-              content: Radium.store.findAll(Radium.Contact, {page: 1}),
-              totalPagesLoaded: 1
+              content: Radium.store.findAll(Radium.Contact),
+              totalPages: 1
             });
           }
-
+          
           this.set('isFirstRun', false);
 
           Ember.run.next(function() {
@@ -74,7 +72,7 @@ Radium.ContactsPage = Ember.State.extend({
   },
 
   selectCampaign: function(manager, context) {
-    $(window).off('scroll', infiniteLoading);
+    $(window).off();
     Radium.contactsController.clearSelected();
     Radium.selectedContactsController.setProperties({
       content: context.get('contacts'),
@@ -86,13 +84,17 @@ Radium.ContactsPage = Ember.State.extend({
   loadContacts: function(manager) {
     var self = this;
 
-    $(window).off('scroll', infiniteLoading);
+    $(window).off();
     
-    var page = Radium.contactsController.get('totalPagesLoaded'),
+    var lastLoadedPage = Radium.contactsController.get('totalPagesLoaded'),
+        page = ++lastLoadedPage,
         isAllContactsLoaded = Radium.contactsController.get('isAllContactsLoaded');
-    manager.goToState('loading');
-    if (!isAllContactsLoaded) {
-      var moreContacts = Radium.store.find(Radium.Contact, {page: page+1});
+
+    if (isAllContactsLoaded) {
+      manager.goToState('ready');
+    } else {
+      manager.goToState('loading');
+      var moreContacts = Radium.store.find(Radium.Contact, {page: page});
       moreContacts.addObserver('isLoaded', function() {
         if (this.get('isLoaded')) {
           $(window).on('scroll', infiniteLoading);

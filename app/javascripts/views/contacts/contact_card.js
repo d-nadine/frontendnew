@@ -51,5 +51,15 @@ Radium.ContactCardView = Ember.View.extend({
     'content.status', 
     'content.unassigned',
     'content.todos'
-  ).cacheable()
+  ).cacheable(),
+
+  sendContactMessage: function(event) {
+    var contact = this.get('content');
+    contact.set('isSelected', true);
+    Radium.App.send('addResource', {
+      form: "ContactsMessage",
+      data: contact  
+    });
+    return false;
+  }
 });

@@ -14,25 +14,19 @@
         {{Radium.contactsController.categoryFilter}}
 
         {{#each emailAddresses}}
-          {{view Radium.TooltipView titleBinding="value" icon="envelope"}}
+          {{view 
+            Radium.TooltipView 
+            valueBinding="value" 
+            icon="envelope"
+            text="Message"
+            action="sendContactMessage"
+            target="parentView"
+          }}
         {{/each}}
         {{#each phoneNumbers}}
-          {{view Radium.TooltipView titleBinding="value" icon="user"}}
+          {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}
         {{/each}}
       </h4>
-      <!--
-      {{!if groups.length}}
-      <h5>
-        {{!each groups}}
-          {{!name}}, 
-        {{!each}}
-      </h5>
-      {{!if}}
-
-      {{!if todos.length}}
-      <p><strong>Next Up:</strong> {{!todos.lastObject.description}} - {{!formatDate todos.lastObject.finishBy}}</p>
-      {{!if}}
-      -->
       {{#if campaigns.length}}
         <p><strong>Campaigns:</strong> 
           {{#each campaigns}}

@@ -1,5 +1,5 @@
 Radium.usersController = Ember.ArrayProxy.create({
-  content: [],
+  content: Radium.store.findAll(Radium.User),
   loggedInUser: function() {
     return this.filterProperty('isLoggedIn', true).get('firstObject');
   }.property('@each.isLoggedIn').cacheable(),

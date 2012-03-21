@@ -1,20 +1,69 @@
 <div class="row">
   <div id="sidebar" class="span3">
     
-    {{#view contactsFilterView contentBinding="Radium.contactsController.filterTypes"}}
+    {{#view contactsFilterView}}
       <li {{bindAttr class="parentView.noSelectedFilter:active"}}>
-        <a href="#" {{action "allContacts"}}>Everything</a>
-      </li>
-      {{#each content}}
-        {{#view Radium.ContactFilterListView itemBinding="this"}}
-          <a href="#" {{action "filterContacts"}}>
-            {{#if item.hasForm}}
-              {{view newResourceButton}}
+        <a href="#" {{action "allContacts"}}>
+          Everything
+          {{#with Radium.contactsController}}
+            {{#if content.length}}
+              <span class="pull-right">
+                <span class="badge">{{content.length}}</span>
+              </span>
             {{/if}}
-            {{item.title}}
-          </a>
-        {{/view}}
-      {{/each}}
+          {{/with}}
+        </a>
+      </li>
+      {{#view Radium.ContactFilterListView singularName="contact"}}
+        <a href="#" {{action "filterContacts"}}>
+          {{view newResourceButton title="Add a new Contact" formViewClass="Contact"}}
+          Contacts
+          {{view badge countBinding="Radium.contactsController.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="lead"}}
+        <a href="#" {{action "filterContacts"}}>
+          Leads
+          {{view badge countBinding="Radium.contactsController.leads.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="prospect"}}
+        <a href="#" {{action "filterContacts"}}>
+          Prospects
+          {{view badge countBinding="Radium.contactsController.prospects.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="opportunity"}}
+        <a href="#" {{action "filterContacts"}}>
+          Opportunities
+          {{view badge countBinding="Radium.contactsController.opportunities.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="customer"}}
+        <a href="#" {{action "filterContacts"}}>
+          Customers
+          {{view badge countBinding="Radium.contactsController.customers.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="dead_end"}}
+        <a href="#" {{action "filterContacts"}}>
+          Dead Ends
+          {{view badge countBinding="Radium.contactsController.deadEnds.length"}}
+        </a>
+      {{/view}}
+      {{#view Radium.ContactFilterListView singularName="unassigned"}}
+        <a href="#" {{action "filterContacts"}}>
+          Unassigned
+          {{view badge countBinding="Radium.contactsController.unassigned.length"}}
+        </a>
+      {{/view}}
+
+      {{#view Radium.ContactFilterListView singularName="notasks"}}
+        <a href="#" {{action "filterContacts"}}>
+          No Upcoming Tasks
+          {{view badge countBinding="Radium.contactsController.noUpcomingTasks.length"}}
+        </a>
+      {{/view}}
     {{/view}}
 
     {{#view campaignsFilterView contentBinding="Radium.campaignsController"}}
@@ -26,11 +75,12 @@
           {{#view Radium.CampaignListView itemBinding="this"}}
             <a href="#" {{action "filterCampaigns"}}>
               {{item.name}}
+              <span class="pull-right">
+                <span class="badge">{{item.totalContacts}}</span>
+              </span>
             </a>
           {{/view}}
         {{/each}}
-      {{else}}
-        <li><h4>Loading Campaigns...</h4></li>
       {{/if}}
     {{/view}}
   </div> <!-- /#sidebar -->
@@ -74,14 +124,21 @@
       </div> <!-- /#alpha -->
       <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
         <div class="btn-group">
-          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
-          {{#view smsButton class="btn btn-small"}}Send SMS{{/view}}
+          {{#view selectAllButton class="btn btn-small"}}
+            <i class="icon-ok-circle"></i> All
+          {{/view}}
+          {{#view selectNoneButton class="btn btn-small"}}
+           <i class="icon-remove-circle"></i> None
+          {{/view}}
         </div>
         <div class="btn-group">
+          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
           {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
           {{#view callListButton class="btn btn-small"}}Add to Call List{{/view}}
           {{#view addCampaignButton class="btn btn-small"}}Add to Campaign{{/view}}
-          {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
+          {{#if Radium.selectedContactsController.selectedCampaign}}
+            {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
+          {{/if}}
         </div>
         <div class="btn-group">
           {{view statusButton title="Change Status" selectionBinding="Radium.contactsController.selectedContacts"}}
@@ -95,16 +152,8 @@
         </div>
       </div> <!-- /#contacts-bulk-toolbar -->
 
-      <div class="btn-toolbar">
-        <div class="btn-group">
-          {{#view selectAllButton class="btn btn-mini"}}
-            <i class="icon-ok-circle"></i> All
-          {{/view}}
-          {{#view selectNoneButton class="btn btn-mini"}}
-           <i class="icon-remove-circle"></i> None
-          {{/view}}
-        </div>
-        {{#view totalSelected class="pull-right"}}
+      <div class="btn-toolbar clear">
+        {{#view totalSelected}}
           <h5>{{totalSelectedString}} selected.</h5>
         {{/view}}
       </div>

@@ -5,7 +5,6 @@
 
 Radium.Person = Radium.Core.extend({
   name: DS.attr('string'),
-  
   // Computed name properties
   abbrName: function() {
     var nameArray = this.get('name').split(" ");

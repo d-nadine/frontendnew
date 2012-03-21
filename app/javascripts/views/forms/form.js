@@ -1,33 +1,62 @@
 Radium.FormView = Ember.View.extend({
-  /**
-    Default submit form action.
-  */
+  isSubmitting: false,
+  // Actions and basic states
   didInsertElement: function() {
-    this._super();
     this.$().hide().slideDown('slow');
   },
-  submitForm: function() {
-    var vals = this.$('form').serializeArray();
-    var createObject = {};
-    vals.forEach(function(item) {
-      createObject[item.name] = item.value;
-    });
-
-    this.$().slideUp('fast', function() {
-      Radium.App.send('closeForm');
+  sending: function() {
+    this.set('isSubmitting', true);
+    this.$('input, select, textarea').prop('disabled', true);
+  },
+  flash: function(type, message) {
+    var $flashMessage = $('<div class="alert"/>')
+                        .addClass('alert-' + type)
+                        .text(message);
+    this.$().before($flashMessage);
+    $flashMessage.wait(2000).fadeOut(function() {
+      $(this).remove();
     });
   },
-  cancelForm: function() {
+  success: function(message) {
+    this.flash('success', message);
+    this.set('isSubmitting', false);
+    this.close();
+  },
+  error: function(message) {
+    this.flash('error', message);
+    this.$('input, select, textarea').prop('disabled', false);
+    this.set('isSubmitting', false);
+  },
+  close: function() {
     this.$().slideUp('fast', function() {
       Radium.App.send('closeForm');
     });
   },
   submitButton: Ember.Button.extend({
+    _buttonTextCache: null,
     target: 'parentView',
-    action: 'submitForm'
+    action: 'submitForm',
+    isSubmittingBinding: 'parentView.isSubmitting',
+    disabledBinding: 'isSubmitting',
+    changeTextOnSubmit: function() {
+      var cachedText = this.get('_buttonTextCache');
+      if (this.get('isSubmitting') === true) {
+        this.$().text('Sending...');
+      } else {
+        this.$().text(cachedText);
+      }
+    }.observes('disabled'),
+    // On init grab and cache the button's text from the Handlebars
+    // template so that it can be reverted back if the form returns
+    // an error after being disabled and reset as "Sending..."
+    didInsertElement: function() {
+      var text = this.$().text();
+      this.set('_buttonTextCache', text);
+    }
   }),
   cancelFormButton: Ember.Button.extend({
     target: 'parentView',
-    action: 'cancelForm'
+    action: 'close',
+    disabledBinding: 'parentView.isSubmitting'
   })
 });

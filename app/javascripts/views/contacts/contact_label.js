@@ -56,5 +56,5 @@ Radium.ContactLabelView = Ember.View.extend({
     return (this.get('status') === 'dead_end') ? true : false;
   }.property('status').cacheable(),
 
-  template: Ember.Handlebars.compile('{{statusString}}')
+  template: Ember.Handlebars.compile('{{#if status}}{{statusString}}{{/if}}')
 });
