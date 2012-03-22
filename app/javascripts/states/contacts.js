@@ -6,7 +6,6 @@ function infiniteLoading() {
 }
 
 Radium.ContactsPage = Ember.State.extend({
-  initialState: 'index',
   index: Ember.ViewState.extend(Radium.PageStateMixin, {
     view: Radium.ContactsPageView,
     exit: function(manager) {
@@ -59,7 +58,10 @@ Radium.ContactsPage = Ember.State.extend({
       }
     })
   }),
-
+  
+  show: Ember.ViewState.extend(Radium.PageStateMixin, {
+    view: Radium.ContactPageView
+  }),
   // Events
   allCampaigns: function(manager, context) {
     $(window).on('scroll', infiniteLoading);

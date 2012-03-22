@@ -18,7 +18,7 @@ Radium.LoggedIn = Ember.State.create({
         //   console.log('Users loaded for', Radium.appController.get('_routeCache'));
         //   Radium.usersController.set('content', users);
           Ember.run.next(function() {
-            manager.goToState(Radium.appController.getPath('_routeCache.page'));
+            manager.goToState(Radium.appController.getPath('_statePathCache'));
           });
         // });
       }

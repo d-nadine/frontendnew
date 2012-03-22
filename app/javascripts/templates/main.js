@@ -33,6 +33,7 @@ minispade.require('radium/templates/dashboard/dashboard');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
+minispade.require('radium/templates/contacts/contact');
 minispade.require('radium/templates/contacts/contact_card');
 
 // Deals

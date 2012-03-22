@@ -16,21 +16,22 @@ Radium.Routes = function() {
     Radium.App.goToState('loggedOut');
   });
   
-  this.get('/:page', function(req) {
-    var page = req.params['page'] || null;
-
-    Radium.App.send('loadPage', {
-      page: page
-    });
-  });
-
   this.get('/:page/:id', function(req) {
     var page = req.params['page'],
         id = req.params['id'];
-
     Radium.App.send('loadPage', {
       page: page,
-      show: id
+      action: 'show',
+      param: id // <- Better key name than `param`?
     });
   });
+
+  this.get('/:page', function(req) {
+    var page = req.params['page'] || null;
+    Radium.App.send('loadPage', {
+      page: page,
+      action: 'index'
+    });
+  });
+
 };

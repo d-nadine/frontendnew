@@ -50,20 +50,19 @@ Radium.App = Ember.StateManager.create({
   */
   loadPage: function(manager, context) {
     var app = Radium.appController,
+        statePath = [context.page, context.action].join('.'),
         routeParams = [];
-    app.set('_routeCache', context);
-    Radium.appController.set('currentPage', context.page);
+
+    app.setProperties({
+      _statePathCache: statePath,
+      currentPage: context.page,
+      params: (context.param) ? context.param : null
+    });
     
     if (app.get('isFirstRun')) {
       manager.goToState('authenticate');
     } else {
-      if (context.show) {
-        Radium.appController.set('params', context);
-        manager.goToState([context.page, 'show'].join('.'));
-      } else {
-        manager.goToState(context.page);
-      }
-      
+      manager.goToState(statePath);
     }
   },
 
@@ -72,8 +71,10 @@ Radium.App = Ember.StateManager.create({
 
     account.addObserver('isLoaded', function() {
       if (this.get('isLoaded')) {
-        Radium.appController.set('isFirstRun', false);
-        Radium.appController.set('isLoggedIn', true);
+        Radium.appController.setProperties({
+          isFirstRun: false,
+          isLoggedIn: true
+        });
         manager.goToState('loggedIn');
       }
     });

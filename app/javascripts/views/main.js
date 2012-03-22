@@ -49,6 +49,7 @@ minispade.require('radium/views/dashboard/announcements');
 
 // Contacts
 minispade.require('radium/views/contacts/contacts');
+minispade.require('radium/views/contacts/contact');
 minispade.require('radium/views/contacts/toolbar');
 minispade.require('radium/views/contacts/contact_card');
 minispade.require('radium/views/contacts/contact_label');
