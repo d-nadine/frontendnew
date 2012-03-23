@@ -1,6 +1,6 @@
-function infiniteLoading() {
+function infiniteLoading(action) {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    Radium.App.send('loadContacts');
+    Radium.App.send(action);
     return false;
   }
 }
@@ -60,11 +60,25 @@ Radium.ContactsPage = Ember.State.extend({
   }),
   
   show: Ember.ViewState.extend(Radium.PageStateMixin, {
-    view: Radium.ContactPageView
+    view: Radium.ContactPageView,
+    enter: function(manager) {
+      var controller = Radium.selectedContactController;
+      this._super(manager);
+      if (controller.get('contact') == null) {
+        var contact = Radium.store.find(Radium.Contact, Radium.appController.get('params'));
+        controller.set('content', contact);
+      }
+    },
+    exit: function(manager) {
+      this._super(manager);
+      Radium.selectedContactController.set('contact', null);
+    }
   }),
   // Events
   allCampaigns: function(manager, context) {
-    $(window).on('scroll', infiniteLoading);
+    $(window).on('scroll', function() {
+      infiniteLoading('loadContacts')
+    });
     Radium.contactsController.clearSelected();
     Radium.selectedContactsController.setProperties({
       content: Radium.contactsController.get('content'),
@@ -99,7 +113,9 @@ Radium.ContactsPage = Ember.State.extend({
       var moreContacts = Radium.store.find(Radium.Contact, {page: page});
       moreContacts.addObserver('isLoaded', function() {
         if (this.get('isLoaded')) {
-          $(window).on('scroll', infiniteLoading);
+          $(window).on('scroll', function() {
+            infiniteLoading('loadContacts')
+          });
           manager.goToState('ready');
         }
       });

@@ -50,7 +50,9 @@ Radium.App = Ember.StateManager.create({
   */
   loadPage: function(manager, context) {
     var app = Radium.appController,
-        statePath = [context.page, context.action].join('.'),
+        page = context.page,
+        action = context.action || 'index',
+        statePath = [page, action].join('.'),
         routeParams = [];
 
     app.setProperties({

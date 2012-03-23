@@ -1,19 +1,18 @@
-{{#with content}}
-  {{#if isLoaded}}
+  {{#if content.isLoaded}}
   <div class="contact-card-inner">
     <div class="contact-avatar">
       <span class="inline-checkbox">
-        {{view Ember.Checkbox valueBinding="isSelected"}}
+        {{view Ember.Checkbox valueBinding="content.isSelected"}}
       </span>
       <img src="http://placehold.it/72x72">
     </div>
     <div class="contact-details">
       <h4 class="headline">
-        <a href="/contacts/{{unbound id}}">{{name}}</a>
-        {{view Radium.ContactLabelView contactBinding="this" statusBinding="status"}}
+        {{#view contactPageLink contentBinding="content"}}{{content.name}}{{/view}}
+        {{view Radium.ContactLabelView contactBinding="this" statusBinding="content.status"}}
         {{Radium.contactsController.categoryFilter}}
 
-        {{#each emailAddresses}}
+        {{#each content.emailAddresses}}
           {{view 
             Radium.TooltipView 
             valueBinding="value" 
@@ -23,13 +22,13 @@
             target="parentView"
           }}
         {{/each}}
-        {{#each phoneNumbers}}
+        {{#each content.phoneNumbers}}
           {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}
         {{/each}}
       </h4>
-      {{#if campaigns.length}}
+      {{#if content.campaigns.length}}
         <p><strong>Campaigns:</strong> 
-          {{#each campaigns}}
+          {{#each content.campaigns}}
             <a {{bindAttr href="url"}}>{{name}}</a> 
           {{/each}}
         </p>
@@ -37,4 +36,3 @@
     </div>
   </div>
   {{/if}}
-{{/with}}

@@ -4,7 +4,7 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
 
   isFormAddView: false,
 
-  start: Ember.State.create({
+  index: Ember.State.create({
     firstRun: true,
     loadActivities: function(manager) {
       // DISABLE FOR NOW UNTIL NEW FEEDS FEED IS READY

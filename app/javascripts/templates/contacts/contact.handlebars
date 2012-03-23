@@ -1,1 +1,64 @@
-This is a contact view.
+<div class="row">
+  {{#with Radium.selectedContactController.content}}
+  <div id="sidebar" class="span3">
+    <div id="contact-info" class="module">
+      <div class="component">
+        <h4>{{name}} {{view Radium.ContactLabelView contactBinding="this" statusBinding="status" class="pull-right"}}</h4>
+        <small>{{#each groups}}{{name}} {{/each}}</small>
+        <p>Assigned to: {{user.name}}</p>
+        <address>
+          {{#each phoneNumbers}}
+            <abbr>{{name}}:</abbr> {{value}}<br>
+          {{/each}}
+        </address>
+        <address>
+          {{#each emailAddresses}}
+            <abbr>{{name}}:</abbr> <a href="mailto:{{unbound value}}">{{value}}</a><br>
+          {{/each}}
+        </address>
+      </div>
+    </div> <!-- / #contact-info -->
+    <div id="contact-addresses" class="module">
+      {{#each addresses}}
+        <div class="component bordered">
+          <address>
+            <strong>{{name}}</strong><br>
+            {{street}}<br>
+            {{state}} {{zipCode}}<br>
+            {{country}}
+          </address>
+        </div>
+      {{/each}}
+    </div> <!-- / #contact-addresses -->
+
+    <div id="contact-todos" class="module">
+      <div class="component">
+        <h4>Todos</h4>
+        <ul class="unstyled todos">
+          {{#each todos}}
+            <li>
+              {{view Ember.Checkbox 
+                valueBinding="finished" 
+                titleBinding="description"
+                classBinding="isOverdue:overdue"
+              }}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div> <!-- / #contact-todos -->
+
+    <div class="module">
+      <div class="component bordered"><h4>Notes</h4></div>
+      {{#each notes}}
+        <div class="component bordered">
+          {{message}}
+        </div>
+      {{/each}}
+      </div>
+  </div> <!-- /#sidebar -->
+  {{/with}}
+  <div id="content" class="span9">
+
+  </div>
+</div>

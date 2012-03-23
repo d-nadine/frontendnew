@@ -47,12 +47,20 @@ body {
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
   background-clip: padding-box;
-}
 
-.module .component {
-  background-color: #F9F9F9;
-  padding: 12px;
-  line-height: 16px;
+  .component {
+    background-color: #F9F9F9;
+    padding: 12px;
+    line-height: 16px;
+  }
+
+  .bordered {
+    border-bottom: 1px solid #EEE;
+
+    &:last-child {
+      border: none;
+    }
+  }
 }
 
 #search {
@@ -103,6 +111,7 @@ fieldset legend {
   text-transform: uppercase;
 }
 
+.overdue,
 .overdue .timestamp,
 .overdue .content p {
   color: #C43C35;
@@ -260,4 +269,11 @@ ul.comments {
 
 .label {
   -webkit-transition: background-color 0.25s ease-out;
+}
+
+.todos {
+  input[type=checkbox] {
+    display: inline-block;
+    margin-right: 5px;
+  }
 }

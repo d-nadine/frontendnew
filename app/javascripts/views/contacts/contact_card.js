@@ -53,6 +53,18 @@ Radium.ContactCardView = Ember.View.extend({
     'content.todos'
   ).cacheable(),
 
+  contactPageLink: Ember.Button.extend({
+    tagName: 'a',
+    attributeBindings: ['href'],
+    href: function() {
+      return '/contacts/%@'.fmt(this.getPath('content.id'))
+    }.property('content'),
+    click: function() {
+      var contact = this.get('content');
+      Radium.selectedContactController.set('content', contact);
+    }
+  }),
+
   sendContactMessage: function(event) {
     var contact = this.get('content');
     contact.set('isSelected', true);

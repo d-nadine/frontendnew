@@ -9,7 +9,9 @@ Radium.Routes = function() {
   });
 
   this.get('/', function(req){
-    Radium.App.send('loadPage', {page:'dashboard'});
+    Radium.App.send('loadPage', {
+      page:'dashboard'
+    });
   });
   
   this.get('/login', function(req) {
