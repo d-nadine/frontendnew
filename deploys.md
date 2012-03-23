@@ -1,3 +1,4 @@
+* [2012-03-23 11:08 +0100] 15f984e - adman65: Update deploy script
 * [2012-03-21 21:01 +0100] f01c727 - adman65: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-03-16 16:36 -0700] 67836a0 - Joshua Jones: Clean up Contacts layout.
 * [2012-03-16 13:13 -0700] e8a527f - Joshua Jones: Merge branch 'joshlocal'
