@@ -1,9 +1,15 @@
 var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 
-window.RadiumAdapter = DS.Adapter.extend({
+/**
+
+  Borrows some methods from methods from DS.RESTAdapter. Because Radium's API
+  isn't a traditional 
+
+  @extends DS.Adapter
+*/
+DS.RadiumAdapter = DS.Adapter.extend({
   bulkCommit: false,
-  // Assuming the total number of records is a constant, set the results
-  // per page here.
+  // Assuming the total number of records is a constant, set the results per page here.
   resultsPerPage: 24,
   selectedUserID: null,
   createRecord: function(store, type, model) {

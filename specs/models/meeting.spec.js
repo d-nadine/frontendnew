@@ -75,7 +75,7 @@ describe("Radium#Meeting", function() {
     var adapter, store, server, spy;
 
     beforeEach(function() {
-      adapter = RadiumAdapter.create({bulkCommit: false});
+      adapter = DS.RadiumAdapter.create({bulkCommit: false});
       store = DS.Store.create({revision: 3,adapter: adapter});
       server = sinon.fakeServer.create();
       spy = sinon.spy(jQuery, 'ajax');

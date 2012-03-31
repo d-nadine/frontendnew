@@ -1,3 +1,8 @@
+/**
+  Transforms
+*/
+
+// Array transforms
 DS.attr.transforms.array = {
   from: function(serialized) {
     return serialized;
@@ -7,7 +12,18 @@ DS.attr.transforms.array = {
   }
 };
 
-// Shim for validating the string states of a Deal model only.
+// Object transform
+DS.attr.transforms.object = {
+  from: function(serialized) {
+    return Em.none(serialized) ? {} : serialized;
+  },
+
+  to: function(deserialized) {
+    return Em.none(serialized) ? {} : serialized;
+  }
+};
+
+// Transform for validating the string states of a Deal state property
 DS.attr.transforms.dealState = {
   from: function(serialized) {
     if (serialized == null) {
@@ -29,6 +45,7 @@ DS.attr.transforms.dealState = {
   }
 };
 
+// Transform for validating the string states of a Todo kind property
 DS.attr.transforms.todoKind = {
   from: function(serialized) {
     if (serialized == null) {
@@ -48,27 +65,7 @@ DS.attr.transforms.todoKind = {
   }
 };
 
-DS.attr.transforms.object = {
-  from: function(serialized) {
-    return Em.none(serialized) ? {} : serialized;
-  },
-
-  to: function(deserialized) {
-    return Em.none(serialized) ? {} : serialized;
-  }
-};
-
-DS.attr.transforms.date.to = function(date) {
-  var type = typeof date;
-  if (type === "string") {
-    return date;
-  } else if (type === "date") {
-    return Ember.DateTime.create(date.getTime()).toISO8601();
-  }
-
-  return Ember.DateTime.create().toISO8601();
-};
-
+// Transform for validating the string states of an Invitation state property
 DS.attr.transforms.inviteState = {
   from: function(serialized) {
     if (serialized == null) {
@@ -84,4 +81,16 @@ DS.attr.transforms.inviteState = {
 
     return String(state);
   }
-}
+};
+
+// Overwrite Ember Data's date to keep date's ISO8601 formatted.
+DS.attr.transforms.date.to = function(date) {
+  var type = typeof date;
+  if (type === "string") {
+    return date;
+  } else if (type === "date") {
+    return Ember.DateTime.create(date.getTime()).toISO8601();
+  }
+
+  return Ember.DateTime.create().toISO8601();
+};
