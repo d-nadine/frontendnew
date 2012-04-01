@@ -4,3 +4,5 @@ tmp/
 *.sublime-project
 *.sublime-workspace
 !site/images/icons
+site/application.css
+site/application.js
