@@ -27,12 +27,6 @@
     </div>
     {{/with}}
 
-    {{collection Radium.FeedFilterView 
-      controllerBinding="Radium.selectedUserFeedController"
-      contentBinding="Radium.selectedCampaignController.filterTypes"
-      categoryFilterBinding="Radium.selectedUserFeedController.categoryFilter"
-    }}
-
     <h3>Working This Campaign</h3>
     {{view Radium.UsersListView 
       contentBinding="Radium.selectedCampaignController.content.users"

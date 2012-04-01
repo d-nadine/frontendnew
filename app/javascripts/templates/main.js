@@ -1,18 +1,15 @@
+// Auth
+minispade.require('radium/templates/auth/login');
+
 // Global
-minispade.require('radium/templates/topbar');
-minispade.require('radium/templates/login');
+minispade.require('radium/templates/global/profile');
+minispade.require('radium/templates/global/users_list');
+minispade.require('radium/templates/global/topbar');
 
 // Feed
-minispade.require('radium/templates/feed/feed_filter');
-minispade.require('radium/templates/feed/feed_item_headline');
-minispade.require('radium/templates/feed/feed_date_filters');
-minispade.require('radium/templates/feed/feed_date');
-minispade.require('radium/templates/feed/feed_date_group');
-minispade.require('radium/templates/feed/feed_cluster');
-minispade.require('radium/templates/feed/feed_item_todos');
-minispade.require('radium/templates/feed/feed_item_deals_pending');
-minispade.require('radium/templates/feed/feed_headline_todo');
-minispade.require('radium/templates/dashboard/activity_feed_group');
+minispade.require('radium/templates/feed/cluster');
+minispade.require('radium/templates/feed/date_filters');
+minispade.require('radium/templates/feed/type_filters');
 
 // Forms
 minispade.require('radium/templates/forms/reminder');
@@ -30,6 +27,7 @@ minispade.require('radium/templates/forms/add_to_campaign_form');
 
 // Dashboard
 minispade.require('radium/templates/dashboard/dashboard');
+minispade.require('radium/templates/dashboard/announcements');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
@@ -37,7 +35,6 @@ minispade.require('radium/templates/contacts/contact');
 minispade.require('radium/templates/contacts/contact_card');
 
 // Deals
-minispade.require('radium/templates/deals/deals_feed_group');
 minispade.require('radium/templates/deals/overdue_deals');
 minispade.require('radium/templates/deals/deals');
 
@@ -47,7 +44,3 @@ minispade.require('radium/templates/pipeline/pipeline');
 // Campaigns
 minispade.require('radium/templates/campaigns/campaigns');
 minispade.require('radium/templates/campaigns/campaign');
-
-// Sidebar
-minispade.require('radium/templates/profile');
-minispade.require('radium/templates/users_list');

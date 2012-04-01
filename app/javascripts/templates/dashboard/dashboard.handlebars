@@ -3,11 +3,6 @@
   <div id="sidebar" class="span3">
     {{view Radium.ProfileView}}
 
-    {{collection Radium.FeedFilterView 
-      controllerBinding="Radium.selectedUserFeedController"
-      contentBinding="Radium.dashboardController.filterTypes"
-      categoryFilterBinding="Radium.selectedUserFeedController.categoryFilter"
-    }}
     <h3>Team</h3>
     {{view Radium.UsersListView 
       contentBinding="Radium.usersController.content"
@@ -23,11 +18,9 @@
     <div id="form-container"></div>
     <!-- Chart is disabled for now -->
     {{!view dashboardChart}}
-    
-    {{view Radium.DateFilterView dateFilterBinding="Radium.selectedUserFeedController.dateFilter"}}
-    
+        
     <div class="row">
-      {{view Radium.FeedView id="feed" class="span9"}}
+      
     </div>
   </div>
 </div>

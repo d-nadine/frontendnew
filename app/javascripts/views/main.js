@@ -1,11 +1,17 @@
+// Auth
+minispade.require('radium/views/auth/login_pane');
+
+
 // UI Elements
-minispade.require('radium/views/highchart');
+minispade.require('radium/views/ui/highcharts');
 minispade.require('radium/views/ui/tooltip');
 minispade.require('radium/views/ui/dropdown_button');
+minispade.require('radium/views/ui/checkbox');
+minispade.require('radium/views/ui/search');
+minispade.require('radium/views/ui/loading');
 
 // Forms
 minispade.require('radium/views/forms/textfield');
-minispade.require('radium/views/checkbox');
 minispade.require('radium/views/forms/datepicker');
 minispade.require('radium/views/forms/form');
 minispade.require('radium/views/forms/autocomplete');
@@ -21,27 +27,16 @@ minispade.require('radium/views/forms/deal_form');
 minispade.require('radium/views/forms/campaign_form');
 minispade.require('radium/views/forms/add_to_campaign_form');
 minispade.require('radium/views/forms/todo_form');
-minispade.require('radium/views/globalsearch');
 
 // Feeds
-minispade.require('radium/views/feed/feed_filter');
-minispade.require('radium/views/feed/feed_date_filters');
-minispade.require('radium/views/feed/feed_item');
-minispade.require('radium/views/feed/feed_item_todos');
-minispade.require('radium/views/feed/feed_item_deals_pending');
-minispade.require('radium/views/feed/feed_item_headline');
-minispade.require('radium/views/feed/feed_deal_headline');
-minispade.require('radium/views/feed/feed_item_block');
-minispade.require('radium/views/feed/feed_date_group');
-minispade.require('radium/views/feed/feed_cluster');
 minispade.require('radium/views/feed/feed');
+minispade.require('radium/views/feed/date_filters');
+minispade.require('radium/views/feed/cluster');
 
 // Global
-minispade.require('radium/views/topbar');
-minispade.require('radium/views/users_list');
-minispade.require('radium/views/profile');
-minispade.require('radium/views/loginpane');
-minispade.require('radium/views/loading');
+minispade.require('radium/views/global/topbar');
+minispade.require('radium/views/global/users_list');
+minispade.require('radium/views/global/profile');
 
 // Dashboard
 minispade.require('radium/views/dashboard/dashboard');

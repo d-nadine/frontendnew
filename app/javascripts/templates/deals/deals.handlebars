@@ -1,11 +1,6 @@
 <div class="row">
   
-  <div id="sidebar" class="span3">
-    {{collection Radium.FeedFilterView 
-      contentBinding="Radium.dealsController.filterTypes"
-      categoryFilterBinding="Radium.dealsDateGroupsController.categoryFilter"
-    }}
-    
+  <div id="sidebar" class="span3">    
     {{view Radium.UsersListView 
       selectedUserBinding="Radium.dealsController.selectedUser"
     }}
@@ -20,23 +15,8 @@
 
     {{!view dealsChart}}
     
-    {{view Radium.DateFilterView dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"}}
-
     <div class="row">
       {{view Radium.OverdueItemsView}}
-      {{!view Radium.FeedView 
-        id="feed" class="span9"
-        dateFilterBinding="Radium.dealsDateGroupsController.dateFilter"
-        categoryFilterBinding="Radium.dealsDateGroupsController.categoryFilter"
-        contentBinding="Radium.dealsDateGroupsController.content"
-        templateName="deals_feed_group"
-      }}
-
-      {{#view id="feed" class="span9"}}
-        {{#each Radium.dealsController}}
-          hi {{id}}
-        {{/each}}
-      {{/view}}
     </div>
 
   </div>
