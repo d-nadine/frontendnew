@@ -1,0 +1,1 @@
+Radium.dashboardFeedController = Crossfilter.Data.create({});

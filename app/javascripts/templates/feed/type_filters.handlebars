@@ -1,7 +1,8 @@
-<a href="#" {{action "changeFilter"}}>
-  {{#if content.hasForm}}
-  {{view newResourceButton}}
-  {{/if}}
-  {{ content.title }}
-  {{!view badgeView}}
-</a>
+{{#with content}}
+  <a href="#" {{action "setFilter"}} {{bindAttr data-filter-kind="kind"}}>
+    {{#if addButton}}
+    +
+    {{/if}}
+    {{label}}
+  </a>
+{{/with}}

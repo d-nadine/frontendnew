@@ -2,7 +2,7 @@
   
   <div id="sidebar" class="span3">
     {{view Radium.ProfileView}}
-
+    {{view Radium.DashboardFeedFilterView}}
     <h3>Team</h3>
     {{view Radium.UsersListView 
       contentBinding="Radium.usersController.content"
@@ -16,11 +16,17 @@
     </div>
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
-    <!-- Chart is disabled for now -->
-    {{!view dashboardChart}}
         
     <div class="row">
-      
+      {{#with Radium.feedByKindController}}
+        {{#if group}}
+          {{#each group}}
+            {{key}}, {{value}}<br>
+          {{/each}}
+        {{else}}
+          loading...
+        {{/if}}
+      {{/with}}
     </div>
   </div>
 </div>

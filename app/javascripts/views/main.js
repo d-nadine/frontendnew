@@ -31,6 +31,7 @@ minispade.require('radium/views/forms/todo_form');
 // Feeds
 minispade.require('radium/views/feed/feed');
 minispade.require('radium/views/feed/date_filters');
+minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/cluster');
 
 // Global
@@ -41,6 +42,7 @@ minispade.require('radium/views/global/profile');
 // Dashboard
 minispade.require('radium/views/dashboard/dashboard');
 minispade.require('radium/views/dashboard/announcements');
+minispade.require('radium/views/dashboard/feed_filter');
 
 // Contacts
 minispade.require('radium/views/contacts/contacts');

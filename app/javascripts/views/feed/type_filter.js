@@ -1,33 +1,18 @@
 Radium.FeedFilterView = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
+  templateName: 'type_filters',
   itemViewClass: Ember.View.extend({
-    isEnabled: function() {
-      return (this.getPath('parentView.categoryFilter') === this.getPath('content.shortname')) ? true : false;
-    }.property('parentView.categoryFilter').cacheable(),
-    classNameBindings: ['isEnabled:active'],
-    templateName: 'feed_filter',
-    changeFilter: function(event) {
-      var type = this.getPath('content.shortname');
-      this.setPath('parentView.controller.categoryFilter', type);
+    tagName: 'li',
+    templateName: 'type_filters',
+    classNameBindings: ['isSelected:active'],
+    isSelected: function() {
+      return (this.getPath('parentView.filter') == this.getPath('content.kind')) ? true : false;
+    }.property('parentView.filter').cacheable(),
+    setFilter: function(event) {
+      var kind = this.getPath('content.kind');
+      this.setPath('parentView.filter', kind);
       return false;
-    },
-
-    // The little + buttons, clicking goes to an add resource state.
-    newResourceButton: Ember.View.extend({
-      classNames: 'icon-plus',
-      tagName: 'i',
-      attributeBindings: ['title'],
-      title: function() {
-        var type = this.getPath('parentView.content.title');
-        return "Add a new " + type.substr(0, type.length-1);
-      }.property(),
-      click: function(event) {
-        var formType = this.getPath('parentView.content.formViewClass');
-        Radium.App.send('addResource', formType);
-        event.stopPropagation();
-        return false;
-      }
-    })
+    }
   })
 });
