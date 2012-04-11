@@ -5,3 +5,4 @@ tmp/
 *.sublime-workspace
 !site/images/icons
 site/
+env.sh
