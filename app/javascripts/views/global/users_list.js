@@ -1,38 +1,21 @@
-Radium.UsersListView = Ember.View.extend({
-  templateName: 'users_list'
-});
-
-Radium.UserListItemView = Ember.View.extend({
-  tagName: 'li',
-  isSelected: function() {
-    var selectedUser = this.getPath('parentView.selectedUser'),
-        user = this.get('user');
-    return (selectedUser === user) ? true : false;
-  }.property('parentView.selectedUser').cacheable(),
-  classNameBindings: ['isSelected:active'],
-  viewUser: function(event) {
-    var user = this.get('user');
-    var id = user.get('id');
-    if (this.get('isSelected')) {
-      this.setPath('parentView.selectedUser', null);
-    } else {
-      Radium.App.send('loadFeed', {
-        user: user,
-        data: {type: 'user', id: id}
-      });
+Radium.UsersListView = Radium.FeedFilterView.extend({
+  elementId: 'user-list',
+  classNames: 'filters people'.w(),
+  contentBinding: 'Radium.usersController.content',
+  filterBinding: 'Radium.feedByUserController.filter',
+  itemViewClass: Ember.View.extend({
+    tagName: 'li',
+    templateName: 'users_list',
+    classNameBindings: ['isSelected:active'],
+    isSelected: function() {
+      return (this.getPath('parentView.filter') == this.getPath('content.id')) ? true : false;
+    }.property('parentView.filter').cacheable(),
+    
+    // Actions
+    setFilter: function(event) {
+      var id = this.getPath('content.id');
+      this.setPath('parentView.filter', id);
+      return false;
     }
-    return false;
-  },
-
-  // The badge count of leads
-  userCount: Ember.View.extend({
-    tagName: 'span',
-    classNames: 'label label-important pull-right'.w(),
-    classNameBindings: ['isHigh:label-success'],
-    isHigh: function() {
-      return (this.getPath('parentView.user.prospects.length') > 5) ? 
-        true : false;
-    }.property('parentView.user.prospects').cacheable(),
-    template: Ember.Handlebars.compile('{{parentView.user.prospects.length}}')
   })
 });

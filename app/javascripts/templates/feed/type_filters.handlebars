@@ -1,8 +1,9 @@
-{{#with content}}
-  <a href="#" {{action "setFilter"}} {{bindAttr data-filter-kind="kind"}}>
-    {{#if addButton}}
-    +
-    {{/if}}
-    {{label}}
-  </a>
-{{/with}}
+<a href="#" {{action "setFilter"}}>
+  {{#if content.addButton}}
+  {{view addResourceButton}}
+  {{/if}}
+  {{content.label}}
+  {{#if isSelected}}
+    <i class="icon-ok pull-right"></i>
+  {{/if}}
+</a>

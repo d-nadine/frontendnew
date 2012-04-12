@@ -1,15 +1,7 @@
-{{#if content.length}}
-  <ul id="user-list" class="nav nav-tabs nav-stacked filters people">
-    {{#each content contentBinding="this"}}
-      {{#view Radium.UserListItemView userBinding="this"}}
-        <a href="#" {{action "viewUser"}} title="User #{{unbound user.id}}">
-          <img src="http://placehold.it/34x34" class="avatar">
-          <span>{{ user.abbrName }}</span>
-          {{#if isSelected}}
-            <i class="icon-ok pull-right"></i>
-          {{/if}}
-        </a>
-      {{/view}}
-    {{/each}}
-  </ul>
-{{/if}}
+<a href="#" {{action "setFilter"}}>
+  <img src="http://placehold.it/34x34" class="avatar">
+  {{content.abbrName}}
+  {{#if isSelected}}
+    <i class="icon-ok pull-right"></i>
+  {{/if}}
+</a>

@@ -121,7 +121,7 @@ fieldset legend {
   text-decoration: line-through;
 }
 
-.filters th, .filters td {
+.filters li, {
   line-height: inherit;
 }
 
@@ -134,8 +134,13 @@ fieldset legend {
   float: left;
 }
 
-#user-list span {
-  line-height: 32px;
+#user-list {
+  a {
+    line-height: 32px;
+    i {
+      margin: 7px 0 0;
+    }
+  }
 }
 
 img.avatar {

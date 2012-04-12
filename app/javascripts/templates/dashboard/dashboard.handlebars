@@ -4,29 +4,26 @@
     {{view Radium.ProfileView}}
     {{view Radium.DashboardFeedFilterView}}
     <h3>Team</h3>
-    {{view Radium.UsersListView 
-      contentBinding="Radium.usersController.content"
-      selectedUserBinding="Radium.selectedUserFeedController.selectedUser"
-    }}
+    {{view Radium.UsersListView}}
   </div>
   
   <div class="span9">
     <div class="row">
-        {{view Radium.GlobalSearchTextView}}
+      {{view Radium.GlobalSearchTextView}}
     </div>
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
         
     <div class="row">
-      {{#with Radium.feedByKindController}}
-        {{#if group}}
-          {{#each group}}
-            {{key}}, {{value}}<br>
-          {{/each}}
-        {{else}}
-          loading...
-        {{/if}}
-      {{/with}}
+      <div class="span9">
+       {{#view Ember.View tagName="ul" class="nav nav-tabs"}}
+          <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="today"}}>Today</a></li>
+          <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="week"}}>This Week</a></li>
+          <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="month"}}>This Month</a></li>
+          <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="quarter"}}>This Quarter</a></li>
+          <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="year"}}>Everything</a></li>
+        {{/view}}
+      </div>
     </div>
   </div>
 </div>
