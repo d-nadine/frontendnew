@@ -23,13 +23,24 @@ Crossfilter.Data = Ember.Object.extend({
   },
 
   registerFeed: function(feed) {
+    feed.set('parent', this);
     this.get('feeds').pushObject(feed);
     this.propertyDidChange('crossfilter');
   },
 
-  registerFeeds: function(feed) {
-    this.get('feeds').pushObjects(feed);
+  registerFeeds: function(feeds) {
+    feeds.setEach('parent', this);
+    this.get('feeds').pushObjects(feeds);
     this.propertyDidChange('crossfilter');
+  },
+
+  refresh: function(sender) {
+    var feeds = this.get('feeds');
+    feeds.forEach(function(feed) {
+      if (feed !== sender) {
+        feed.refresh();
+      }
+    });
   },
 
   size: function() {

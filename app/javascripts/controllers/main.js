@@ -1,3 +1,4 @@
+minispade.require('radium/controllers/account');
 minispade.require('radium/controllers/form');
 minispade.require('radium/controllers/feed');
 minispade.require('radium/controllers/announcements');
@@ -12,6 +13,8 @@ minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/dashboard/feed_by_kind');
 minispade.require('radium/controllers/dashboard/feed_by_user');
+minispade.require('radium/controllers/dashboard/feed_by_date');
+minispade.require('radium/controllers/dashboard/feed_by_activity');
 minispade.require('radium/controllers/dashboard/feed');
 minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');

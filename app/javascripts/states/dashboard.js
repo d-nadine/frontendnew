@@ -10,7 +10,9 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
       var user = Radium.usersController.getPath('loggedInUser.id');
       Radium.dashboardFeedController.registerFeeds([
         Radium.feedByKindController,
-        Radium.feedByUserController
+        Radium.feedByUserController,
+        Radium.feedByDayController,
+        Radium.feedByActivityController
       ]);
 
       $.ajax({

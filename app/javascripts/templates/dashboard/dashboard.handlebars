@@ -23,6 +23,89 @@
           <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="quarter"}}>This Quarter</a></li>
           <li><a href="#" {{action "switchFeed"}} {{bindAttr data-feed-group="year"}}>Everything</a></li>
         {{/view}}
+        <div class="page-header">
+          <h3>{{Radium.accountController.content.name}}'s Coffee Cup Summary</h3>
+        </div>
+      </div>
+    </div>
+
+    {{#with Radium.feedByActivityController.coffeeCupSummary}}
+    <div class="stats row">
+      <div class="span2">
+        <dl>
+          <dt>Todos</dt>
+          <dd>
+            {{todoCreated}} created<br>
+            {{todoAssigned}} assigned<br>
+            {{todoFinished}} finished
+          </dd>
+        </dl>
+      </div>
+      <div class="span2">
+        <dl>
+          <dt>Campaigns</dt>
+          <dd>
+            {{campaignCreated}} created<br>
+            {{campaignAssigned}} assigned<br>
+            {{campaignContactAdded}} added<br>
+            {{campaignContactRemoved}} removed<br>
+            {{campaignFollowed}} followed
+          </dd>
+        </dl>
+      </div>
+      <div class="span2">
+        <dl>
+          <dt>Contacts</dt>
+          <dd>
+            {{contactCreated}} created<br>
+            {{contactAssigned}} assigned<br>
+            {{contactBecameLead}} became leads<br>
+            {{contactBecameProspect}} became prospects<br>
+            {{contactBecameOpportunity}} became opportunities<br>
+            {{contactBecameCustomer}} became customers<br>
+            {{contactBecameDeadEnd}} became dead ends<br>
+            {{contactFollowed}} followed
+          </dd>
+        </dl>
+      </div>
+      <div class="span2">
+        <dl>
+          <dt>Meetings</dt>
+          <dd>
+            {{meetingCreated}} created<br>
+            {{meetingRescheduled}} rescheduled<br>
+            {{meetingCancelled}} cancelled<br>
+            {{meetingConfirmed}} confirmed<br>
+            {{meetingRejected}} rejected<br>
+          </dd>
+        </dl>
+        <dl>
+          <dt>Phone Calls</dt>
+          <dd>
+            {{phoneCallCreated}} calls were made<br>
+          </dd>
+        </dl>
+      </div>
+      {{/with}}
+    </div>
+
+    <div class="row">
+      <div class="span9">
+        <div class="page-header">
+          <h3>Activity Ticker</h3>
+        </div>
+        <table class="table" style="display:none">
+          <thead>
+            <tr>
+              <th>header</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>data</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
