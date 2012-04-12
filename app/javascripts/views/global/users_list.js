@@ -13,8 +13,12 @@ Radium.UsersListView = Radium.FeedFilterView.extend({
     
     // Actions
     setFilter: function(event) {
-      var id = this.getPath('content.id');
-      this.setPath('parentView.filter', id);
+      if (this.get('isSelected')) {
+        this.setPath('parentView.filter', null);
+      } else {
+        var id = this.getPath('content.id');
+        this.setPath('parentView.filter', id);
+      }
       return false;
     }
   })
