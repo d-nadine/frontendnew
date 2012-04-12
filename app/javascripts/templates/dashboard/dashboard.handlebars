@@ -94,18 +94,21 @@
         <div class="page-header">
           <h3>Activity Ticker</h3>
         </div>
-        <table class="table" style="display:none">
-          <thead>
-            <tr>
-              <th>header</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>data</td>
-            </tr>
-          </tbody>
-        </table>
+        {{#with Radium.feedByDayController}}
+          {{#if activityList}}
+            <table class="table">
+              <tbody>
+                {{#each activityList}}
+                  <tr>
+                    <td>{{owner.user.name}} {{tag}} a {{kind}}.</td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          {{else}}
+            <h3 align="center">No activities yet.</h3>
+          {{/if}}
+        {{/with}}
       </div>
     </div>
   </div>
