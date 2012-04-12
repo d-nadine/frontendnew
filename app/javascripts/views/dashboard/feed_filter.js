@@ -1,0 +1,42 @@
+Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
+  filterBinding: 'Radium.feedByKindController.filter',
+  groupBinding: 'Radium.feedByKindController.group',
+  content: [
+    {label: "Everything", kind: null, addButton: false},
+    {label: "Todos", kind: 'todo', addButton: true},
+    {label: "Deals", kind: 'deal', addButton: true},
+    {label: "Campaigns", kind: 'campaign', addButton: true},
+    {label: "Phone Calls", kind: 'phone_call', addButton: true},
+    {label: "Meetings", kind: 'meeting', addButton: true}
+  ],
+  itemViewClass: Ember.View.extend({
+    tagName: 'li',
+    templateName: 'type_filters',
+    classNameBindings: ['isSelected:active'],
+    isSelected: function() {
+      return (this.getPath('parentView.filter') == this.getPath('content.kind')) ? true : false;
+    }.property('parentView.filter').cacheable(),
+    
+    // Actions
+    setFilter: function(event) {
+      var kind = this.getPath('content.kind');
+      this.setPath('parentView.filter', kind);
+      return false;
+    },
+    addResourceButton: Ember.View.extend({
+      classNames: 'icon-plus',
+      tagName: 'i',
+      attributeBindings: ['title'],
+      title: function() {
+        var type = this.getPath('parentView.content.label');
+        return "Add a new " + type.substr(0, type.length-1);
+      }.property(),
+      click: function(event) {
+        var formType = this.getPath('parentView.content.kind');
+        Radium.App.send('addResource', formType);
+        event.stopPropagation();
+        return false;
+      }
+    })
+  })
+});
