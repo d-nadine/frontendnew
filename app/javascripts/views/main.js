@@ -31,6 +31,7 @@ minispade.require('radium/views/forms/todo_form');
 // Feeds
 minispade.require('radium/views/feed/feed');
 minispade.require('radium/views/feed/date_filters');
+minispade.require('radium/views/feed/feed_list');
 minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/cluster');
 

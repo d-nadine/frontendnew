@@ -11,6 +11,10 @@ minispade.require('radium/templates/feed/cluster');
 minispade.require('radium/templates/feed/date_filters');
 minispade.require('radium/templates/feed/type_filters');
 
+minispade.require('radium/templates/dashboard/feed/todo_created');
+minispade.require('radium/templates/dashboard/feed/todo_assigned');
+minispade.require('radium/templates/dashboard/feed/todo_finished');
+
 // Forms
 minispade.require('radium/templates/forms/reminder');
 minispade.require('radium/templates/forms/call_list_form');

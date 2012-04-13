@@ -1,1 +1,328 @@
-body{padding-top:60px}#mini-loader{position:fixed;bottom:10px;right:10px}.icon-sms,.icon-call{background-image:url("/images/icons/icons-radium.png")}.icon-call{background-position:0 0}.icon-sms{background-position:right 0}.nav-tabs.nav-stacked>li:first-of-type>a{-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0}.nav-tabs.nav-stacked>li:last-of-type>a{-webkit-border-radius:0 0 4px 4px;-moz-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px}.module{text-shadow:0 1px 0 white;border:1px solid #EEE;position:relative;margin-bottom:10px;line-height:16px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;-webkit-background-clip:padding-box;-moz-background-clip:padding;background-clip:padding-box}.module .component{background-color:#f9f9f9;padding:12px;line-height:16px}.module .bordered{border-bottom:1px solid #EEE}.module .bordered:last-child{border:none}#search{margin-bottom:0}[class^="ember-view icon-"]{display:inline-block;width:14px;height:14px;vertical-align:text-top;background-image:url(images/vendor/glyphicons-halflings.png);background-repeat:no-repeat}#alpha .btn{width:28px;padding-left:0;padding-right:0}#alpha .btn:last-child{width:25px}#form-container{margin:20px 0}fieldset legend{font-size:15px}#feed .page-header h2 small{float:right;font-weight:bold;position:relative;top:12px}#feed section{margin-bottom:25px}.feed-item .timestamp{color:#898989;font-weight:bold;text-transform:uppercase}.overdue,.overdue .timestamp,.overdue .content p{color:#c43c35;font-weight:bold}.feed-item.todo.finished .content{text-decoration:line-through}.filters li{line-height:inherit}.filters span.label{float:right}#user-list img{margin-right:10px;float:left}#user-list a{line-height:32px}#user-list a i{margin:7px 0 0}img.avatar{border:solid 1px #ddd;height:32px;width:32px;border-radius:4px}.enabled .filter{font-weight:bold}.filter.disabled{color:gray;opacity:.75}.topbar button{float:right;padding:5px 30px;margin-top:5px}#feed>section{clear:both}#search-box{color:black;height:32px;font-size:18px}#notifications ul{margin-bottom:0}#notifications .time{text-transform:uppercase;font-weight:bold;width:100px;display:inline-block}ul.comments{margin-left:40px}.comments li{color:#404040}.comments img{float:left;height:32px;width:32px;margin-right:10px;margin-bottom:10px}.comments .name{font-weight:bold}#owner{margin-bottom:10px}#owner img.avatar{height:70px;width:70px;margin:0 10px 0 0;border-radius:6px;float:left;border-color:#8a8a8a}#owner .name{font-weight:bold;font-size:14px}.contact-card{margin-bottom:20px}.contact-card-inner{padding:10px;display:inline-block;border-radius:5px}.contact-card p{margin:0}.contact-card.selected{background:whiteSmoke}.contact-avatar{width:90px;position:relative;float:left}.contact-avatar .inline-checkbox{padding:2px 5px;position:absolute;top:0;left:0;background:#fff;display:none}.contact-card:hover .inline-checkbox,.contact-card.selected .contact-avatar .inline-checkbox{display:block}.contact-avatar .inline-checkbox label{margin:0}.contact-details{width:540px;float:left}.label{-webkit-transition:background-color .25s ease-out}.todos input[type=checkbox]{display:inline-block;margin-right:5px}
+/* line 2, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+body {
+  padding-top: 60px;
+}
+
+/* line 6, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#mini-loader {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* line 13, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.icon-sms,
+.icon-call {
+  background-image: url("/images/icons/icons-radium.png");
+}
+
+/* line 17, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.icon-call {
+  background-position: 0px 0px;
+}
+
+/* line 21, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.icon-sms {
+  background-position: right 0px;
+}
+
+/* line 25, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.nav-tabs.nav-stacked > li:first-of-type > a {
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* line 31, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.nav-tabs.nav-stacked > li:last-of-type > a {
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+
+/* line 37, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.module {
+  text-shadow: 0 1px 0 white;
+  border: 1px solid #EEE;
+  position: relative;
+  margin-bottom: 10px;
+  line-height: 16px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+/* line 50, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.module .component {
+  background-color: #F9F9F9;
+  padding: 12px;
+  line-height: 16px;
+}
+/* line 56, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.module .bordered {
+  border-bottom: 1px solid #EEE;
+}
+/* line 59, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.module .bordered:last-child {
+  border: none;
+}
+
+/* line 65, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#search {
+  margin-bottom: 0;
+}
+
+/* line 69, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+[class^="ember-view icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: text-top;
+  background-image: url(images/vendor/glyphicons-halflings.png);
+  background-repeat: no-repeat;
+}
+
+/* line 78, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#alpha .btn {
+  width: 28px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* line 84, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#alpha .btn:last-child {
+  width: 25px;
+}
+
+/* line 88, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#form-container {
+  margin: 20px 0;
+}
+
+/* line 92, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+fieldset legend {
+  font-size: 15px;
+}
+
+/* line 96, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#feed .page-header h2 small {
+  float: right;
+  font-weight: bold;
+  position: relative;
+  top: 12px;
+}
+
+/* line 103, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#feed section {
+  margin-bottom: 25px;
+}
+
+/* line 107, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.feed-item .timestamp {
+  color: #898989;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* line 115, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.overdue,
+.overdue .timestamp,
+.overdue .content p {
+  color: #C43C35;
+  font-weight: bold;
+}
+
+/* line 120, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.feed-item.todo.finished .content {
+  text-decoration: line-through;
+}
+
+/* line 124, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.filters li {
+  line-height: inherit;
+}
+
+/* line 128, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.filters span.label {
+  float: right;
+}
+
+/* line 132, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#user-list img {
+  margin-right: 10px;
+  float: left;
+}
+
+/* line 138, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#user-list a {
+  line-height: 32px;
+}
+/* line 140, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#user-list a i {
+  margin: 7px 0 0;
+}
+
+/* line 146, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+img.avatar {
+  border: solid 1px #ddd;
+  height: 32px;
+  width: 32px;
+  border-radius: 4px;
+}
+
+/* line 153, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.enabled .filter {
+  font-weight: bold;
+}
+
+/* line 157, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.filter.disabled {
+  color: gray;
+  opacity: 0.75;
+}
+
+/* line 162, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.topbar button {
+  float: right;
+  padding: 5px 30px;
+  margin-top: 5px;
+}
+
+/* line 168, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#feed > section {
+  clear: both;
+}
+
+/* line 172, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#search-box {
+  color: black;
+  height: 32px;
+  font-size: 18px;
+}
+
+/* line 178, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#notifications ul {
+  margin-bottom: 0;
+}
+
+/* line 182, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#notifications .time {
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100px;
+  display: inline-block;
+}
+
+/* line 189, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+ul.comments {
+  margin-left: 40px;
+}
+
+/* line 193, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.comments li {
+  color: #404040;
+}
+
+/* line 197, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.comments img {
+  float: left;
+  height: 32px;
+  width: 32px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 205, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.comments .name {
+  font-weight: bold;
+}
+
+/* line 209, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#owner {
+  margin-bottom: 10px;
+}
+
+/* line 213, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#owner img.avatar {
+  height: 70px;
+  width: 70px;
+  margin: 0 10px 0 0;
+  border-radius: 6px;
+  float: left;
+  border-color: #8a8a8a;
+}
+
+/* line 222, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+#owner .name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* line 227, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-card {
+  margin-bottom: 20px;
+}
+
+/* line 231, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-card-inner {
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/* line 237, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-card p {
+  margin: 0;
+}
+
+/* line 241, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-card.selected {
+  background: whiteSmoke;
+}
+
+/* line 245, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-avatar {
+  width: 90px;
+  position: relative;
+  float: left;
+}
+
+/* line 251, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-avatar .inline-checkbox {
+  padding: 2px 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  display: none;
+}
+
+/* line 261, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-card:hover .inline-checkbox,
+.contact-card.selected .contact-avatar .inline-checkbox {
+  display: block;
+}
+
+/* line 265, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-avatar .inline-checkbox label {
+  margin: 0;
+}
+
+/* line 269, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.contact-details {
+  width: 540px;
+  float: left;
+}
+
+/* line 274, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.label {
+  -webkit-transition: background-color 0.25s ease-out;
+}
+
+/* line 279, /Users/Joshua/Sites/Radium/radium/app/stylesheets/app.scss */
+.todos input[type=checkbox] {
+  display: inline-block;
+  margin-right: 5px;
+}
