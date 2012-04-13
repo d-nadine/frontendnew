@@ -9,6 +9,13 @@ Radium.feedByActivityController = Crossfilter.Dimension.create({
           todoCreated: 0,
           todoAssigned: 0,
           todoFinished: 0,
+          dealCreated: 0,
+          dealAssigned: 0,
+          dealPending: 0,
+          dealClosed: 0,
+          dealPaid: 0,
+          dealRejected: 0,
+          dealFollowed: 0,
           campaignCreated: 0,
           campaignAssigned: 0,
           campaignContactAdded: 0,
@@ -29,7 +36,8 @@ Radium.feedByActivityController = Crossfilter.Dimension.create({
           meetingConfirmed: 0,
           meetingRejected: 0,
           noteCreated: 0,
-          phoneCallCreated: 0
+          phoneCallCreated: 0,
+          callListCreated: 0
         };
     if (group) {
       group.all().forEach(function(item) {
