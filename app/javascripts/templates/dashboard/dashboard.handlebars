@@ -21,7 +21,6 @@
           <li><a href="#" {{bindAttr data-feed-group="week"}}>This Week</a></li>
           <li><a href="#" {{bindAttr data-feed-group="month"}}>This Month</a></li>
           <li><a href="#" {{bindAttr data-feed-group="quarter"}}>This Quarter</a></li>
-          <li><a href="#" {{bindAttr data-feed-group="year"}}>Everything</a></li>
         {{/view}}
         <div class="page-header">
           <h3>{{Radium.accountController.content.name}}'s Coffee Cup Summary</h3>
@@ -97,7 +96,7 @@
               <tbody>
                 {{#each activityList}}
                   <tr>
-                    
+                    <td><small>{{formatTime timestamp}}</small> {{owner.user.name}} {{tag}} a {{kind}}.</td>
                   </tr>
                 {{/each}}
               </tbody>
