@@ -4,5 +4,5 @@ tmp/
 *.sublime-project
 *.sublime-workspace
 !site/images/icons
-site/
 env.sh
+deploy.log

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Radium</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/css/_bootstrap.css"           rel="stylesheet">
+    <link href="/css/_jquery-ui-bootstrap.css" rel="stylesheet">
+
+    <link href="/application.css" rel="stylesheet">
+    <script>
+    window.ISLOGGEDIN = true;
+    window.ACCOUNT = 2;
+    </script>
+    <script type="text/javascript" src="/scripts/minispade.js"></script>
+  </head>
+
+  <body>
+    <div id="topbar" role="header" class="navbar navbar-fixed-top"></div>
+    <div id="main" class="container"></div>
+    <script src="/application.js"></script>
+
+    <script type="text/javascript">
+      minispade.require('radium/main');
+    </script>
+  </body>
+</html>
