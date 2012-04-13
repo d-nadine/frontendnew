@@ -1,3 +1,4 @@
+* [2012-04-13 15:34 -0700] 49b74a5 - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-13 23:43 +0200] 4eb6f3b - Joshua Jones: [Deploy]
 * [2012-04-13 14:17 -0700] 3b276cc - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-13 23:08 +0200] 508b774 - twinturbo: Compile seems to work incorrectly if present
