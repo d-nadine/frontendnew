@@ -34,5 +34,5 @@ $ ./script/deploy
 
 ## Maintainers
 
-* Assets (JS/CSS/HTML): Josh
-* All Server Stuff: Adam
+* Assets (JS/CSS/HTML): Josh & Stefan
+* All Server Stuff: Adam & Stefan
