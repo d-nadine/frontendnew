@@ -8,7 +8,8 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
     {label: "Campaigns", kind: 'campaign', addButton: true},
     {label: "Phone Calls", kind: 'phone_call', addButton: false},
     {label: "Call Lists", kind: 'call_list', addButton: true},
-    {label: "Meetings", kind: 'meeting', addButton: true}
+    {label: "Meetings", kind: 'meeting', addButton: true},
+    {label: "Contacts", kind: 'contact', addButton: true}
   ],
   itemViewClass: Ember.View.extend({
     tagName: 'li',
