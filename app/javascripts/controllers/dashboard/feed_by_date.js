@@ -6,6 +6,7 @@ Radium.feedByDayController = Crossfilter.Dimension.create({
     var cf = this.get('crossfilter'),
         dimension = cf.dimension(this._byDay),
         group = dimension.group().all();
+
     this.setProperties({
       dimension: dimension,
       group: group
@@ -16,7 +17,7 @@ Radium.feedByDayController = Crossfilter.Dimension.create({
   updateList: function() {
     var dimension = this.get('dimension');
     if (dimension) {
-      this.set('activityList', dimension.top(100));
+      this.set('activityList', dimension.top(Infinity));
     }
   },
 

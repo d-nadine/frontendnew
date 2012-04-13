@@ -6,7 +6,7 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
     {label: "Todos", kind: 'todo', addButton: true},
     {label: "Deals", kind: 'deal', addButton: true},
     {label: "Campaigns", kind: 'campaign', addButton: true},
-    {label: "Phone Calls", kind: 'phone_call', addButton: true},
+    {label: "Phone Calls", kind: 'phone_call', addButton: false},
     {label: "Meetings", kind: 'meeting', addButton: true}
   ],
   itemViewClass: Ember.View.extend({
@@ -32,8 +32,9 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
         return "Add a new " + type.substr(0, type.length-1);
       }.property(),
       click: function(event) {
-        var formType = this.getPath('parentView.content.kind');
-        Radium.App.send('addResource', formType);
+        var kind = this.getPath('parentView.content.label'),
+            formType = kind.replace(' ', '').slice(0, -1);
+        Radium.App.send('addResource', {form: formType});
         event.stopPropagation();
         return false;
       }

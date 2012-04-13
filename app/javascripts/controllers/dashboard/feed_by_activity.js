@@ -32,7 +32,7 @@ Radium.feedByActivityController = Crossfilter.Dimension.create({
           phoneCallCreated: 0
         };
     if (group) {
-      group.forEach(function(item) {
+      group.all().forEach(function(item) {
         var type = Ember.String.camelize(item.key);
         summary[type] = item.value;
       });
@@ -48,7 +48,7 @@ Radium.feedByActivityController = Crossfilter.Dimension.create({
   crossfilterDidChange: function() {
     var cf = this.get('crossfilter'),
         dimension = cf.dimension(this._byGroupedActivity),
-        group = dimension.group().all();
+        group = dimension.group();
     this.setProperties({
       dimension: dimension,
       group: group

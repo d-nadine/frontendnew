@@ -4,7 +4,6 @@ Radium.AddToCampaignForm = Radium.FormView.extend({
   submitForm: function() {
     var contacts = this.get('selectedContactIds'),
         campaignId = this.getPath('select.selection.id');
-    debugger;
     $.ajax({
       url: '/api/campaigns/%@'.fmt(campaignId),
       type: 'PUT',

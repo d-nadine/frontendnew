@@ -34,7 +34,14 @@ Crossfilter.Data = Ember.Object.extend({
     this.propertyDidChange('crossfilter');
   },
 
-  refresh: function(sender) {
+  refreshAll: function() {
+    var feeds = this.get('feeds');
+    feeds.forEach(function(feed) {
+      feed.refresh();
+    });
+  },
+
+  refreshFeed: function(sender) {
     var feeds = this.get('feeds');
     feeds.forEach(function(feed) {
       if (feed !== sender) {

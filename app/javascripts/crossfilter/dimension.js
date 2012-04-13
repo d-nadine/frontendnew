@@ -6,7 +6,7 @@ Crossfilter.Dimension = Ember.Object.extend({
   refreshParent: function() {
     var parent = this.get('parent');
     if (parent) {
-      parent.refresh(this);
+      parent.refreshFeed(this);
     }
   },
   applyFilter: function() {
