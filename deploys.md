@@ -1,3 +1,4 @@
+* [2012-04-13 11:32 -0700] 9e330d0 - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-13 20:26 +0200] e316e61 - Joshua Jones: [Deploy]
 * [2012-04-13 10:59 -0700] 484b8c3 - Joshua Jones: Add site dir back in.
 * [2012-04-13 10:52 -0700] ee2f0d0 - Joshua Jones: Add miniloader class to contacts state.
