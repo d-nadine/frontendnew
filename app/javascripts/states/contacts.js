@@ -46,17 +46,7 @@ Radium.ContactsPage = Ember.State.extend({
     ready: Ember.State.create(),
 
     // Loader for infinite scrolling
-    loading: Ember.State.create({
-      miniLoader: $('<div id="mini-loader" class="alert alert-block"><h4 class="alert-heading">Loading &hellip;</h4></div>').hide(),
-      enter: function() {
-        this.get('miniLoader').appendTo($('body')).fadeIn();
-      },
-      exit: function() {
-        $('#mini-loader').fadeOut(function() {
-          $(this).remove();
-        });
-      }
-    })
+    loading: Radium.MiniLoader.create(),
   }),
   
   show: Ember.ViewState.extend(Radium.PageStateMixin, {
