@@ -153,6 +153,7 @@ class Deploy < Thor
     env_string = REQUIRED_ENV.collect { |v| %Q{#{v.to_s.upcase}="#{variables[v.to_s.upcase]}"} }.join " "
 
     inside ROOT do
+      run "rm -rf tmp/"
       run "rm -rf site/"
       run! "#{env_string} bundle exec rake compile"
     end
