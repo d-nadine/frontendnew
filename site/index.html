@@ -16,9 +16,12 @@
     <link href="/application.css" rel="stylesheet">
     <script>
     window.ISLOGGEDIN = true;
-    window.ACCOUNT = 3;
+    window.ACCOUNT = 4;
+    window.API_KEY = "d9ee8d3c34d1e165b442d269176781712e283aca";
+    window.IO = "4f7326f14e6b4c0007000002";
     </script>
-    <script type="text/javascript" src="/scripts/minispade.js"></script>
+    <script src="/scripts/faye/faye-browser.js"></script>
+    <script src="/scripts/minispade.js"></script>
   </head>
 
   <body>
@@ -28,6 +31,14 @@
 
     <script type="text/javascript">
       minispade.require('radium/main');
+      var client = new Faye.Client('http://api.radium.io/servers/push/faye');
+      client.disable('cross-origin-long-polling');
+
+      var subscribe = client.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
+        console.log('message', data);
+      });
+
+      
     </script>
   </body>
 </html>

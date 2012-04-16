@@ -80,5 +80,12 @@ Radium.App = Ember.StateManager.create({
         manager.goToState('loggedIn');
       }
     });
+  },
+
+  infiniteLoading: function(action) {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      Radium.App.send(action);
+      return false;
+    }
   }
 });
