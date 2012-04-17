@@ -191,7 +191,6 @@ class Deploy < Thor
     say "Starting deploy..."
 
     begin
-      invoke :compile_assets
       invoke :record
       invoke :commit
 
