@@ -1,3 +1,4 @@
+* [2012-04-17 23:57 +0200] f58240e - twinturbo: Fix deploy script
 * [2012-04-17 23:53 +0200] abb3748 - twinturbo: No need to track site/
 * [2012-04-17 13:20 -0700] 062124f - Joshua Jones: Update application.js
 * [2012-04-16 21:04 -0700] a51492d - Joshua Jones: Add logo.
