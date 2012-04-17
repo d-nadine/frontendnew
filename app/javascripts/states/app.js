@@ -31,7 +31,7 @@ Radium.App = Ember.StateManager.create({
       enter: function(manager) {
         console.log('authenticating...');
         Ember.run.next(function() {
-          manager.send('authenticateUser');
+          manager.send('bootstrapUser');
         });
       }
     })
@@ -48,6 +48,24 @@ Radium.App = Ember.StateManager.create({
     ACTIONS
     ------------------------------------
   */
+
+  isLoggedInCheck: function() {
+    var api = $.cookie('user_api_key');
+    if (api) {
+      Radium.setProperties({
+        _api: api
+      });
+      $.ajaxSetup({
+        headers: {
+          'X-Radium-User-API-Key': api
+        }
+      });
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   loadPage: function(manager, context) {
     var app = Radium.appController,
         page = context.page,
@@ -60,19 +78,23 @@ Radium.App = Ember.StateManager.create({
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
-    
-    if (app.get('isFirstRun')) {
-      manager.goToState('authenticate');
+
+    if (!this.isLoggedInCheck()) {
+      manager.goToState('loggedOut');
     } else {
-      manager.goToState(statePath);
+      if (app.get('isFirstRun')) {
+        manager.goToState('authenticate');
+      } else {
+        manager.goToState(statePath);
+      }
     }
   },
 
-  authenticateUser: function(manager, context) {
-    var account = Radium.store.find(Radium.Account, ACCOUNT);
-
-    account.addObserver('isLoaded', function() {
-      if (this.get('isLoaded')) {
+  bootstrapUser: function(manager, context) {
+    $.ajax({
+      url: '/api/account',
+      success: function(data) {
+        Radium.store.load(Radium.Account, data);
         Radium.appController.setProperties({
           isFirstRun: false,
           isLoggedIn: true
@@ -83,7 +105,7 @@ Radium.App = Ember.StateManager.create({
   },
 
   infiniteLoading: function(action) {
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 300) {
       Radium.App.send(action);
       return false;
     }

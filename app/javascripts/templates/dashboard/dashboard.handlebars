@@ -92,10 +92,10 @@
     <div class="row">
       <div class="span9">
         {{#with Radium.feedByDayController}}
-          {{#if activityList}}
+          {{#if loadedActivities.length}}
             <table class="table">
               <tbody>
-                {{#each activityList}}
+                {{#each loadedActivities}}
                   <tr>
                     {{view Radium.FeedListView contentBinding="this"}}
                   </tr>
