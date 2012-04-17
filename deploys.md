@@ -1,3 +1,4 @@
+* [2012-04-17 13:20 -0700] 062124f - Joshua Jones: Update application.js
 * [2012-04-16 21:04 -0700] a51492d - Joshua Jones: Add logo.
 * [2012-04-13 15:55 -0700] 8584281 - Joshua Jones: Add default template for feed items.
 * [2012-04-13 15:44 -0700] cddc276 - Joshua Jones: Add contacts to dashboard filter.
