@@ -3,6 +3,21 @@ body {
   padding-top: 60px;
 }
 
+.navbar {
+  .nav {
+    > li {
+      line-height: 26px;
+      > a {
+        line-height: 26px;
+      }
+    }
+  }
+
+  .btn-group {
+    margin-top: 9px;
+  }
+}
+
 #mini-loader {
   position: fixed;
   bottom: 10px;
