@@ -31,7 +31,7 @@ Radium.App = Ember.StateManager.create({
       enter: function(manager) {
         console.log('authenticating...');
         Ember.run.next(function() {
-          manager.send('authenticateUser');
+          manager.send('bootstrapUser');
         });
       }
     })
@@ -48,6 +48,21 @@ Radium.App = Ember.StateManager.create({
     ACTIONS
     ------------------------------------
   */
+
+  isLoggedInCheck: function() {
+    var api = $.cookie('user_api_key'),
+        account = $.cookie('user_account_id');
+    if (api && account) {
+      Radium.setProperties({
+        _api: api,
+        _account: account
+      });
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   loadPage: function(manager, context) {
     var app = Radium.appController,
         page = context.page,
@@ -60,16 +75,21 @@ Radium.App = Ember.StateManager.create({
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
-    
-    if (app.get('isFirstRun')) {
-      manager.goToState('authenticate');
+
+    if (!this.isLoggedInCheck()) {
+      manager.goToState('loggedOut');
     } else {
-      manager.goToState(statePath);
+      if (app.get('isFirstRun')) {
+        manager.goToState('authenticate');
+      } else {
+        manager.goToState(statePath);
+      }
     }
   },
 
-  authenticateUser: function(manager, context) {
-    var account = Radium.store.find(Radium.Account, ACCOUNT);
+  bootstrapUser: function(manager, context) {
+    var accountID = Radium.get('_account'),
+        account = Radium.store.find(Radium.Account, ACCOUNT);
 
     account.addObserver('isLoaded', function() {
       if (this.get('isLoaded')) {

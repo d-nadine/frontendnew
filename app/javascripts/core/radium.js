@@ -1,4 +1,5 @@
 window.Radium = Ember.Application.create({
+  _api: null,
   today: function() {
     return Ember.DateTime.create().toISO8601();
   }.property().cacheable(),

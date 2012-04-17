@@ -1,5 +1,6 @@
 minispade.require('jquery');
 minispade.require('jquery-ui');
+minispade.require('jquery-cookie');
 minispade.require('davis');
 minispade.require('ember');
 minispade.require('ember-datetime');

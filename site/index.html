@@ -31,17 +31,20 @@
 
     <script type="text/javascript">
       minispade.require('radium/main');
-      Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
-      Radium._feed.disable('cross-origin-long-polling');
+      $.cookie('user_api_key', 'd9ee8d3c34d1e165b442d269176781712e283aca');
+      $.cookie('user_account_id', '4');
+      if ($.cookie('user_api_key')) {
+        Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
+        Radium._feed.disable('cross-origin-long-polling');
 
-      var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
-        console.log('Feed push update.');
-        data.isNewActivity = true;
-        data.isCached = false;
-        Radium.dashboardFeedController.addData([data]);
-      });
+        var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
+          console.log('New activity.');
+          data.isNewActivity = true;
+          data.isCached = false;
+          Radium.dashboardFeedController.addData([data]);
+        });
+      }
 
-      
     </script>
   </body>
 </html>
