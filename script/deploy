@@ -131,7 +131,7 @@ class Deploy < Thor
   desc "ensure_assets_compile", "Tests assets compile correctly"
   def ensure_assets_compile
     inside ROOT do
-      if success? "bundle exec rake compile"
+      if success? "bundle exec rake assets:precompile"
         run "git reset --hard HEAD"
         pass "Asset compilation"
         return true
