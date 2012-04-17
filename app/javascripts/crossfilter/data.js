@@ -21,6 +21,7 @@ Crossfilter.Data = Ember.Object.extend({
       this._crossfilter.add(data);
     }
     this.propertyDidChange('crossfilter');
+    this.refreshAll();
   },
 
   registerFeed: function(feed) {

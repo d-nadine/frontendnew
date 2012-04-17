@@ -12,7 +12,10 @@ Crossfilter.Dimension = Ember.Object.extend({
   applyFilter: function() {
     var filter = this.get('filter'),
         dimension = this.get('dimension');
-    dimension.filter(filter);
-    this.refreshParent();
+        
+    if (dimension) {
+      dimension.filter(filter);
+      this.refreshParent();
+    }
   }.observes('filter')
 });

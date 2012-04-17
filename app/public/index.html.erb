@@ -35,7 +35,10 @@
       Radium._feed.disable('cross-origin-long-polling');
 
       var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
-        console.log('message', data);
+        console.log('Feed push update.');
+        data.isNewActivity = true;
+        Radium.dashboardFeedController.addData([data]);
+        // Radium.feedByDayController.get('activityList').insertAt(0, data);
       });
 
       

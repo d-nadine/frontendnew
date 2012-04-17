@@ -50,14 +50,14 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
     ACTIONS
     ------------------------------------
   */
-  page: 1,
-  totalPages: 0,
+  page: 0,
+  totalPages: 2,
   loadFeed: function(manager) {
     var self = this,
         user = Radium.usersController.getPath('loggedInUser.id'),
         page = this.get('page');
 
-    if (this.page !== this.totalPages) {
+    if (this.get('page') < this.get('totalPages')) {
       Ember.run.next(function() {
         manager.goToState('loading');
       });
@@ -67,19 +67,28 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
         dataType: 'json',
         contentType: 'application/json',
         type: 'GET',
-        data: {page: page},
+        data: {page: (page+1), beginDate: Radium.get('today')},
         success: function(data, status, xhr) {
-          var totalPages = xhr.getResponseHeader('x-radium-total-pages');
-          self.set('totalPages', totalPages)
+          var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+              currentPage = xhr.getResponseHeader('x-radium-current-page');
+
+          self.setProperties({
+            totalPages: parseInt(totalPages),
+            page: parseInt(currentPage)
+          });
+
+          data.forEach(function(item) {
+            item.isNewActivity = false;
+          });
+
           Radium.dashboardFeedController.addData(data);
           Radium.dashboardFeedController.refreshAll();
           Ember.run.sync();
 
-          if (totalPages > 1) {
-            self.incrementProperty('page');
-          } else {
-            self.set('totalPages', 1);
-          }
+          // if (currentPage < totalPages) {
+          //   self.incrementProperty('page');
+          // }
+
           Ember.run.next(function() {
             manager.goToState('ready');
           }); 

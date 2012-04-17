@@ -15,6 +15,7 @@ minispade.require('radium/controllers/dashboard/feed_by_kind');
 minispade.require('radium/controllers/dashboard/feed_by_user');
 minispade.require('radium/controllers/dashboard/feed_by_date');
 minispade.require('radium/controllers/dashboard/feed_by_activity');
+minispade.require('radium/controllers/dashboard/feed_list');
 minispade.require('radium/controllers/dashboard/feed');
 minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');

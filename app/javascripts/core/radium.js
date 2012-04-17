@@ -1,4 +1,7 @@
 window.Radium = Ember.Application.create({
+  today: function() {
+    return Ember.DateTime.create().toISO8601();
+  }.property().cacheable(),
   store: DS.Store.create({
     revision: 3,
     adapter: DS.RadiumAdapter.create({bulkCommit: false})
