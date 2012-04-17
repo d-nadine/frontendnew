@@ -55,7 +55,9 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
   loadFeed: function(manager) {
     var self = this,
         user = Radium.usersController.getPath('loggedInUser.id'),
-        page = this.get('page');
+        page = this.get('page'),
+        today = Ember.DateTime.create()
+        oneWeekAgo = today.adjust({day: today.get('day') - 7});
 
     if (this.get('page') < this.get('totalPages')) {
       Ember.run.next(function() {
@@ -70,7 +72,7 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
         headers: {
           'X-Radium-User-API-Key': Radium.get('_api')
         },
-        data: {page: (page+1), beginDate: Radium.get('today')},
+        data: {page: (page+1), endDate: today.toISO8601(), beginDate: oneWeekAgo.toISO8601()},
         success: function(data, status, xhr) {
           var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
               currentPage = xhr.getResponseHeader('x-radium-current-page');

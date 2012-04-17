@@ -84,6 +84,9 @@ Radium.App = Ember.StateManager.create({
   bootstrapUser: function(manager, context) {
     $.ajax({
       url: '/api/account',
+      headers: {
+        'X-Radium-User-API-Key': Radium.get('_api')
+      },
       success: function(data) {
         Radium.store.load(Radium.Account, data);
         var account = Radium.store.find(Radium.Account, data.id);
