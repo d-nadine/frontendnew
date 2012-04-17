@@ -46,4 +46,18 @@ end
 
 class Radium < FrontendServer::Application ; end
 
+class AddCookie 
+  def initialize(app, name, value)
+    @app, @name, @value = app, name, value
+  end
+
+  def call(env)
+    status, headers, body = @app.call(env)
+
+    Rack::Utils.set_cookie_header!(headers, @name, @value)
+
+    [status, headers, body]
+  end
+end
+
 Radium.root = File.dirname __FILE__
