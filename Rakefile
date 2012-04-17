@@ -1,6 +1,7 @@
-task :compile do
-  ENV['RACK_ENV'] = 'production'
-  require './radium'
+namespace :assets do
+  task :precompile do
+    require './radium'
 
-  Radium.new.compile_assets
+    Radium.new.compile_assets
+  end
 end
