@@ -6,7 +6,7 @@ ROOT = File.expand_path "../../", __FILE__
 
 LOG_FILE = "#{ROOT}/deploy.log"
 
-REQUIRED_ENV = [ :radium_server_url, :radium_api_key, :radium_user_api_key, :radium_account_id, :web_password ]
+REQUIRED_ENV = [ :radium_server_url, :radium_api_key, :web_password ]
 
 class Deploy < Thor
   include Thor::Actions
@@ -142,23 +142,6 @@ class Deploy < Thor
     end
   end
 
-  desc "compile_assets", "Compile assets locally with Heroku ENV"
-  def compile_assets
-    result = run "heroku config", :capture => true
-
-    variables = result.split("\n").map { |s| s.split('=>').map(&:strip) }.inject({}) do |hash, pair|
-      hash.merge! pair[0] => pair[1]
-    end
-
-    env_string = REQUIRED_ENV.collect { |v| %Q{#{v.to_s.upcase}="#{variables[v.to_s.upcase]}"} }.join " "
-
-    inside ROOT do
-      run "rm -rf tmp/"
-      run "rm -rf site/"
-      run! "#{env_string} bundle exec rake compile"
-    end
-  end
-
   desc "record", "Records this deploy in deploys.md"
   def record
     inside ROOT do
@@ -181,7 +164,6 @@ class Deploy < Thor
   def commit
     inside ROOT do
       run! 'git add deploys.md'
-      run! 'git add site/'
       run! "git commit -m '[Deploy]'"
     end
 
