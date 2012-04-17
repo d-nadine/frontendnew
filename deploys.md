@@ -1,3 +1,4 @@
+* [2012-04-17 16:00 -0700] 43efdd2 - Joshua Jones: Fix timing for storing API key.
 * [2012-04-17 15:28 -0700] 05c675a - Joshua Jones: Remove old account datastore loading.
 * [2012-04-18 00:07 +0200] 091fea6 - twinturbo: Fix API_KEY reference
 * [2012-04-17 23:57 +0200] f58240e - twinturbo: Fix deploy script
