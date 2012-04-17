@@ -34,16 +34,16 @@ Radium.feedByDayController = Crossfilter.Dimension.create({
     }
 
     if (unCachedPushed.length) {
-      this.get('loadedActivities').insertAt(0, unCachedPushed)
-    }
-
-    if (Ember.compare(this.get('loadedActivities'), dimension.top(Infinity)) !== 0) {
-      this.set('loadedActivities', dimension.top(Infinity));
+      this.get('loadedActivities').insertAt(0, unCachedPushed[0])
+      unCachedPushed.setEach('isCached', true);
+    } else {
+      if (Ember.compare(this.get('loadedActivities'), dimension.top(Infinity)) !== 0) {
+        this.set('loadedActivities', dimension.top(Infinity));
+      }
     }
   },
 
   refresh: function() {
-    Ember.run.sync();
     this.updateList();
   }
 });
