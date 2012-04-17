@@ -9,6 +9,11 @@ window.Radium = Ember.Application.create({
   })
 });
 
+var api = $.cookie('user_api_key');
+if (api) {
+  Radium.set('_api', api);
+}
+
 DS.Model.reopen({
   namingConvention: {
     keyToJSONKey: function(key) {

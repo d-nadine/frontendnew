@@ -50,16 +50,7 @@ Radium.App = Ember.StateManager.create({
   */
 
   isLoggedInCheck: function() {
-    var api = $.cookie('user_api_key');
-    if (api) {
-      Radium.setProperties({
-        _api: api
-      });
-      $.ajaxSetup({
-        headers: {
-          'X-Radium-User-API-Key': api
-        }
-      });
+    if (Radium.get('_api')) {
       return true;
     } else {
       return false;

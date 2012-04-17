@@ -67,6 +67,9 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
         dataType: 'json',
         contentType: 'application/json',
         type: 'GET',
+        headers: {
+          'X-Radium-User-API-Key': Radium.get('_api')
+        },
         data: {page: (page+1), beginDate: Radium.get('today')},
         success: function(data, status, xhr) {
           var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
