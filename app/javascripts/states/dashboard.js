@@ -55,31 +55,38 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
   loadFeed: function(manager) {
     var self = this,
         user = Radium.usersController.getPath('loggedInUser.id'),
-        page = this.get('page');    
-    
-    Ember.run.next(function() {
-      manager.goToState('loading');
-    });
+        page = this.get('page');
 
-    $.ajax({
-      url: '/api/users/%@/feed'.fmt(user),
-      dataType: 'json',
-      contentType: 'application/json',
-      type: 'GET',
-      data: {page: page},
-      success: function(data, status, xhr) {
-        var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+    if (this.page !== this.totalPages) {
+      Ember.run.next(function() {
+        manager.goToState('loading');
+      });
 
-        if (totalPages > 1) {
+      $.ajax({
+        url: '/api/users/%@/feed'.fmt(user),
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'GET',
+        data: {page: page},
+        success: function(data, status, xhr) {
+          var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+          self.set('totalPages', totalPages)
           Radium.dashboardFeedController.addData(data);
           Radium.dashboardFeedController.refreshAll();
           Ember.run.sync();
-          self.incrementProperty('page');
+
+          if (totalPages > 1) {
+            self.incrementProperty('page');
+          } else {
+            self.set('totalPages', 1);
+          }
+          Ember.run.next(function() {
+            manager.goToState('ready');
+          }); 
         }
-        Ember.run.next(function() {
-          manager.goToState('ready');
-        }); 
-      }
-    });
+      });
+    } else {
+      $(window).off('scroll');
+    }
   }
 });

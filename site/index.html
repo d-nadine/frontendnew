@@ -31,10 +31,10 @@
 
     <script type="text/javascript">
       minispade.require('radium/main');
-      var client = new Faye.Client('http://api.radium.io/servers/push/faye');
-      client.disable('cross-origin-long-polling');
+      Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
+      Radium._feed.disable('cross-origin-long-polling');
 
-      var subscribe = client.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
+      var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
         console.log('message', data);
       });
 

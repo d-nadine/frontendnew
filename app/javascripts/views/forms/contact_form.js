@@ -57,10 +57,10 @@ Radium.ContactForm = Radium.FormView.extend({
       type: 'POST',
       success: function(data) {
         Radium.store.load(Radium.Contact, data);
-        self.success();
+        self.success("Contact created");
       },
-      error: function() {
-        self.error();
+      error: function(jqXHR, textStatus, errorThrown) {
+        self.error("Oops, %@.".fmt(jqXHR.responseText));
       }
     })
 

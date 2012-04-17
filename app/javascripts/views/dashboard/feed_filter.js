@@ -11,6 +11,15 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
     {label: "Meetings", kind: 'meeting', addButton: true},
     {label: "Contacts", kind: 'contact', addButton: true}
   ],
+  didInsertElement: function() {
+    var notificationView = Ember.View.create({
+      tagName: 'li',
+      notificationsBinding: 'Radium.dashboardFeedController.size',
+      click: function() {return false;},
+      template: Ember.Handlebars.compile('<a href="#">Notifications <span class="badge">{{notifications}}</span></a>')
+    });
+    this.get('childViews').pushObject(notificationView);
+  },
   itemViewClass: Ember.View.extend({
     tagName: 'li',
     templateName: 'type_filters',

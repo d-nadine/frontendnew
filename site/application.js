@@ -48,7 +48,7 @@ minispade.register('radium/templates/auth/login', function() {Ember.TEMPLATES['l
 });minispade.register('radium/templates/forms/add_to_campaign_form', function() {Ember.TEMPLATES['add_to_campaign_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Add to Campaign</legend>\n  <label for=\"all-campaigns\">Campaigns</label>\n  {{view Ember.Select \n    viewName=\"select\"\n    contentBinding=\"Radium.campaignsController\"\n    optionLabelPath=\"content.name\"\n    optionValuePath=\"content.id\"\n  }}\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/call_list_form', function() {Ember.TEMPLATES['call_list_form']=Ember.Handlebars.compile("<form data-type=\"call_list\" class=\"well\">\n  <legend>Add to Call List</legend>\n  <label for=\"finish-by\">Finish by</label>\n  {{view Radium.DatePickerField id=\"finish-by\" name=\"finish-by\" class=\"input-small\"}}\n  <label for=\"assigned-to\">Assigned To</label>\n  <select name=\"assigned-to\" id=\"assigned-to\">\n    <option value=\"\">Assigned To</option>\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n\n  <label for=\"call-list\">Call List</label>\n\n  <select name=\"call-list\" id=\"call-list\">\n    <option value=\"\">Assign to a Call List</option>\n    {{#each Radium.callListsController}}\n    <option {{bindAttr value=\"id\"}}>{{description}}</option>\n    {{/each}}\n  </select>\n\n  {{view Radium.FormCheckbox \n      title=\"Add Reminder\" \n      valueBinding=\"wantsReminder\"\n  }}\n\n  <div id=\"reminder-holder\"></div>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/campaign_form', function() {Ember.TEMPLATES['campaign_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Create a Campaign</legend>\n  <label for=\"name\">Name</label>\n  <input type=\"text\" name=\"name\" id=\"name\" class=\"span8\" value=\"\">\n\n  <label for=\"target\">Target</label>\n  <input type=\"text\" name=\"target\" id=\"target\" class=\"span8\" value=\"\">\n\n  <label for=\"ends-by\">Ends by:</label>\n  {{view Radium.DatePickerField id=\"ends-by\" name=\"ends-by\" class=\"input-small\"}}\n\n  <label for=\"currency\">Currency:</label>\n  <select id=\"currency\" name=\"currency\">\n    <option value=\"USD\">USD</option>\n    <option value=\"EUR\">EUR</option>\n    <option value=\"CAD\">CAD</option>\n  </select>\n\n  <label for=\"description\">Description:</label>\n  <textarea name=\"description\" id=\"description\" class=\"span8\"></textarea>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
-});minispade.register('radium/templates/forms/contact_form', function() {Ember.TEMPLATES['contact_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Add a Contact</legend>\n\n  <label for=\"contact-name\">Name</label>\n  <input name=\"contact-name\" id=\"contact-name\" class=\"span6\">\n\n  <fieldset class=\"form-inline\" id=\"email-addresses\">\n    <legend>Emails</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"email-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"email-value\" placeholder=\"Email\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n\n  <fieldset class=\"form-inline\" id=\"phone-numbers\">\n    <legend>Phone Numbers</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"phone-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"phone-value\" placeholder=\"Phone Number\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n  \n  <fieldset class=\"form-inline\" id=\"addresses\">\n    <legend>Addresses</legend>\n    <div class=\"control-group\">\n      <input class=\"address-name\" placeholder=\"Name\">\n      <input class=\"address-street\" placeholder=\"Street\">\n      <input class=\"address-state\" placeholder=\"State\">\n      <select class=\"address-country\">\n        <option>Country</option>\n        <option value=\"Australia\">Australia</option>\n        <option value=\"Canada\">Canada</option>\n        <option value=\"United Kingdom\">United Kingdom</option>\n        <option>More To Be Added</option>\n      </select>\n      <input class=\"address-zip\" placeholder=\"Zip Code\">\n    </div>\n  </fieldset>\n  <!--\n  <label for=\"assigned-to\">Assigned To</label>\n  <select id=\"assigned-to\" name=\"assigned-to\">\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n    -->\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
+});minispade.register('radium/templates/forms/contact_form', function() {Ember.TEMPLATES['contact_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Add a Contact</legend>\n\n  <label for=\"contact-name\">Name</label>\n  <input name=\"contact-name\" id=\"contact-name\" class=\"span6\">\n\n  <fieldset class=\"form-inline\" id=\"email-addresses\">\n    <legend>Emails</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"email-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"email-value\" placeholder=\"Email\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n\n  <fieldset class=\"form-inline\" id=\"phone-numbers\">\n    <legend>Phone Numbers</legend>\n    <div class=\"control-group\">\n      <input type=\"text\" class=\"phone-name\" placeholder=\"Name\">\n      <input type=\"text\" class=\"phone-value\" placeholder=\"Phone Number\">\n      <!-- <i class=\"icon-plus-sign\"></i> -->\n    </div>\n  </fieldset>\n  \n  <fieldset class=\"form-inline\" id=\"addresses\">\n    <legend>Addresses</legend>\n    <div class=\"control-group\">\n      <input class=\"address-name\" placeholder=\"Name\">\n      <input class=\"address-street\" placeholder=\"Street\">\n      <input class=\"address-state\" placeholder=\"State\">\n      <select class=\"address-country\">\n        <option>Country</option>\n        <option value=\"Australia\">Australia</option>\n        <option value=\"Canada\">Canada</option>\n        <option value=\"United State\">United States</option>\n      </select>\n      <input class=\"address-zip\" placeholder=\"Zip Code\">\n    </div>\n  </fieldset>\n  <!--\n  <label for=\"assigned-to\">Assigned To</label>\n  <select id=\"assigned-to\" name=\"assigned-to\">\n    {{#each Radium.usersController}}\n    <option {{bindAttr value=\"id\"}}>{{abbrName}}</option>\n    {{/each}}\n  </select>\n    -->\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/contacts_message_form', function() {Ember.TEMPLATES['contacts_message_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Send a Message</legend>\n  <p><strong>To:</strong> \n    {{#with Radium.contactsController}}\n      {{#if selectedContactsEmails}}\n        {{selectedContactsEmails}}\n      {{/if}}\n    {{/with}}\n  </p>\n\n  <label for=\"subject\">Subject</label>\n  <input name=\"subject\" id=\"subject\" class=\"span8\">\n\n  <label for=\"message\">Message</label>\n  <textarea name=\"message\" id=\"message\" class=\"span8\"></textarea>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Send{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/contacts_sms_form', function() {Ember.TEMPLATES['contacts_sms_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Send an SMS Message</legend>\n  <p><strong>To:</strong> \n    {{#with Radium.contactsController}}\n      {{#if selectedContactsPhoneNumbers}}\n        {{selectedContactsPhoneNumbers}}\n      {{/if}}\n    {{/with}}\n  </p>\n\n  <label for=\"message\">Message</label>\n  <textarea name=\"message\" id=\"message\" class=\"span8\"></textarea>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Send SMS{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
 });minispade.register('radium/templates/forms/deal_form', function() {Ember.TEMPLATES['deal_form']=Ember.Handlebars.compile("<form class=\"well\">\n  <legend>Create a Deal</legend>\n  <label for=\"description\">Description</label>\n  <textarea name=\"description\" id=\"description\" class=\"span8\"></textarea>\n  <label for=\"contact\">Contact</label>\n  {{view Radium.AutocompleteTextField \n    id=\"customer\" class=\"input-xlarge\"\n    sourceBinding=\"Radium.contactsController.contactNames\"\n  }}\n  <input type=\"hidden\" id=\"todo-contact\" name=\"contact\" value=\"\">\n  <label for=\"amount\">Amount</label>\n  <input type=\"text\" name=\"amount\" id=\"amount\" value=\"\">\n  <label for=\"date\">Close Date</label>\n  {{view Radium.DatePickerField id=\"date\" name=\"date\" class=\"input-small\"}}\n  <label for=\"status\">Status:</label>\n  <select id=\"status\" name=\"status\">\n    <option value=\"rejected\">Rejected</option>\n    <option value=\"pending\" selected=\"selected\">Pending</option>\n    <option value=\"paid\">Paid</option>\n    <option value=\"closed\">Closed</option>\n  </select>\n\n  <div class=\"form-actions\">\n    {{#view submitButton class=\"btn btn-primary\"}}Save{{/view}}\n    {{#view cancelFormButton class=\"btn\"}}Cancel{{/view}}\n  </div>\n</form>");
@@ -1406,6 +1406,7 @@ Crossfilter.Data = Ember.Object.extend({
     } else {
       this._crossfilter.add(data);
     }
+    this.propertyDidChange('crossfilter');
   },
 
   registerFeed: function(feed) {
@@ -1438,7 +1439,7 @@ Crossfilter.Data = Ember.Object.extend({
 
   size: function() {
     return (this._crossfilter) ? this._crossfilter.size() : 0;
-  }.property().cacheable()
+  }.property('crossfilter').cacheable()
 });
 });minispade.register('radium/crossfilter/dimension', function() {Crossfilter.Dimension = Ember.Object.extend({
   filter: null,
@@ -3109,32 +3110,39 @@ Radium.ContactsPage = Ember.State.extend({
   loadFeed: function(manager) {
     var self = this,
         user = Radium.usersController.getPath('loggedInUser.id'),
-        page = this.get('page');    
-    
-    Ember.run.next(function() {
-      manager.goToState('loading');
-    });
+        page = this.get('page');
 
-    $.ajax({
-      url: '/api/users/%@/feed'.fmt(user),
-      dataType: 'json',
-      contentType: 'application/json',
-      type: 'GET',
-      data: {page: page},
-      success: function(data, status, xhr) {
-        var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+    if (this.page !== this.totalPages) {
+      Ember.run.next(function() {
+        manager.goToState('loading');
+      });
 
-        if (totalPages > 1) {
+      $.ajax({
+        url: '/api/users/%@/feed'.fmt(user),
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'GET',
+        data: {page: page},
+        success: function(data, status, xhr) {
+          var totalPages = xhr.getResponseHeader('x-radium-total-pages');
+          self.set('totalPages', totalPages)
           Radium.dashboardFeedController.addData(data);
           Radium.dashboardFeedController.refreshAll();
           Ember.run.sync();
-          self.incrementProperty('page');
+
+          if (totalPages > 1) {
+            self.incrementProperty('page');
+          } else {
+            self.set('totalPages', 1);
+          }
+          Ember.run.next(function() {
+            manager.goToState('ready');
+          }); 
         }
-        Ember.run.next(function() {
-          manager.goToState('ready');
-        }); 
-      }
-    });
+      });
+    } else {
+      $(window).off('scroll');
+    }
   }
 });
 
@@ -3896,6 +3904,15 @@ Radium.AnnouncementsView = Ember.View.extend({
     {label: "Meetings", kind: 'meeting', addButton: true},
     {label: "Contacts", kind: 'contact', addButton: true}
   ],
+  didInsertElement: function() {
+    var notificationView = Ember.View.create({
+      tagName: 'li',
+      notificationsBinding: 'Radium.dashboardFeedController.size',
+      click: function() {return false;},
+      template: Ember.Handlebars.compile('<a href="#">Notifications <span class="badge">{{notifications}}</span></a>')
+    });
+    this.get('childViews').pushObject(notificationView);
+  },
   itemViewClass: Ember.View.extend({
     tagName: 'li',
     templateName: 'type_filters',
@@ -4147,10 +4164,10 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
       type: 'POST',
       success: function(data) {
         Radium.store.load(Radium.Contact, data);
-        self.success();
+        self.success("Contact created");
       },
-      error: function() {
-        self.error();
+      error: function(jqXHR, textStatus, errorThrown) {
+        self.error("Oops, %@.".fmt(jqXHR.responseText));
       }
     })
 
@@ -4231,40 +4248,7 @@ Radium.FeedFilterView = Ember.CollectionView.extend({
   }
 });
 });minispade.register('radium/views/forms/deal_form', function() {Radium.DealForm = Radium.FormView.extend({
-  templateName: 'deal_form',
-  submitForm: function() {
-    var self = this;
-    var contactIds = this.get('selectedContacts').getEach('id'),
-        description = this.$('#description').val(),
-        contact = this.$('#contact').val(),
-        finishBy = this.$('#finish-by-date').val(),
-        time = this.$('#finish-by-time').val(),
-        user = this.$('select#assigned-to').val(),
-        data = {
-          todo: {
-            description: description,
-            finish_by: finishBy,
-            user_id: user
-          }
-        };
-
-    // Disable the form buttons
-    this.sending();
-
-    contactIds.forEach(function(id) {
-      $.ajax({
-        url: '/api/contacts/%@/todos'.fmt(id),
-        type: 'POST',
-        data: data,
-        success: function(data) {
-          self.success("Todo created");
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          self.error("Oops, %@.".fmt(jqXHR.responseText));
-        }
-      });
-    });
-  }
+  templateName: 'deal_form'
 });
 });minispade.register('radium/views/forms/discussion_form', function() {Radium.DiscussionForm = Radium.FormView.extend({
   templateName: 'discussion_form'

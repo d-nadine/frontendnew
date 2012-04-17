@@ -20,6 +20,7 @@ Crossfilter.Data = Ember.Object.extend({
     } else {
       this._crossfilter.add(data);
     }
+    this.propertyDidChange('crossfilter');
   },
 
   registerFeed: function(feed) {
@@ -52,5 +53,5 @@ Crossfilter.Data = Ember.Object.extend({
 
   size: function() {
     return (this._crossfilter) ? this._crossfilter.size() : 0;
-  }.property().cacheable()
+  }.property('crossfilter').cacheable()
 });
