@@ -50,12 +50,15 @@ Radium.App = Ember.StateManager.create({
   */
 
   isLoggedInCheck: function() {
-    var api = $.cookie('user_api_key'),
-        account = $.cookie('user_account_id');
-    if (api && account) {
+    var api = $.cookie('user_api_key');
+    if (api) {
       Radium.setProperties({
-        _api: api,
-        _account: account
+        _api: api
+      });
+      $.ajaxSetup({
+        headers: {
+          'X-Radium-User-API-Key': api
+        }
       });
       return true;
     } else {
@@ -88,11 +91,10 @@ Radium.App = Ember.StateManager.create({
   },
 
   bootstrapUser: function(manager, context) {
-    var accountID = Radium.get('_account'),
-        account = Radium.store.find(Radium.Account, ACCOUNT);
-
-    account.addObserver('isLoaded', function() {
-      if (this.get('isLoaded')) {
+    $.ajax({
+      url: '/api/account',
+      success: function(data) {
+        Radium.store.load(Radium.Account, data);
         Radium.appController.setProperties({
           isFirstRun: false,
           isLoggedIn: true

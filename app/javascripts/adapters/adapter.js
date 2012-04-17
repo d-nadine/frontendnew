@@ -342,9 +342,6 @@ DS.RadiumAdapter = DS.Adapter.extend({
     hash.dataType = 'json';
     hash.contentType = 'application/json';
     hash.context = this;
-    hash.headers = {
-      'X-Radium-User-API-Key': Radium.get('_api')
-    };
 
     if (hash.data && type !== 'GET') {
       hash.data = JSON.stringify(hash.data);
