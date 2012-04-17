@@ -5,7 +5,7 @@ minispade.register('radium/templates/auth/login', function() {Ember.TEMPLATES['l
 });minispade.register('radium/templates/contacts/contact_card', function() {Ember.TEMPLATES['contact_card']=Ember.Handlebars.compile("  {{#if content.isLoaded}}\n  <div class=\"contact-card-inner\">\n    <div class=\"contact-avatar\">\n      <span class=\"inline-checkbox\">\n        {{view Ember.Checkbox valueBinding=\"content.isSelected\"}}\n      </span>\n      <img src=\"http://placehold.it/72x72\">\n    </div>\n    <div class=\"contact-details\">\n      <h4 class=\"headline\">\n        {{#view contactPageLink contentBinding=\"content\"}}{{content.name}}{{/view}}\n        {{view Radium.ContactLabelView contactBinding=\"this\" statusBinding=\"content.status\"}}\n        {{Radium.contactsController.categoryFilter}}\n\n        {{#each content.emailAddresses}}\n          {{view \n            Radium.TooltipView \n            valueBinding=\"value\" \n            icon=\"envelope\"\n            text=\"Message\"\n            action=\"sendContactMessage\"\n            target=\"parentView\"\n          }}\n        {{/each}}\n        {{#each content.phoneNumbers}}\n          {{view Radium.TooltipView valueBinding=\"value\" text=\"Call\" icon=\"call\"}}\n        {{/each}}\n      </h4>\n      {{#if content.campaigns.length}}\n        <p><strong>Campaigns:</strong> \n          {{#each content.campaigns}}\n            <a {{bindAttr href=\"url\"}}>{{name}}</a> \n          {{/each}}\n        </p>\n      {{/if}}\n    </div>\n  </div>\n  {{/if}}");
 });minispade.register('radium/templates/contacts/contacts', function() {Ember.TEMPLATES['contacts']=Ember.Handlebars.compile("<div class=\"row\">\n  <div id=\"sidebar\" class=\"span3\">\n    \n    {{#view contactsFilterView}}\n      <li {{bindAttr class=\"parentView.noSelectedFilter:active\"}}>\n        <a href=\"#\" {{action \"allContacts\"}}>\n          Everything\n          {{#with Radium.contactsController}}\n            {{#if content.length}}\n              <span class=\"pull-right\">\n                <span class=\"badge\">{{content.length}}</span>\n              </span>\n            {{/if}}\n          {{/with}}\n        </a>\n      </li>\n      {{#view Radium.ContactFilterListView singularName=\"contact\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          {{view newResourceButton title=\"Add a new Contact\" formViewClass=\"Contact\"}}\n          Contacts\n          {{view badge countBinding=\"Radium.contactsController.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"lead\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Leads\n          {{view badge countBinding=\"Radium.contactsController.leads.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"prospect\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Prospects\n          {{view badge countBinding=\"Radium.contactsController.prospects.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"opportunity\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Opportunities\n          {{view badge countBinding=\"Radium.contactsController.opportunities.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"customer\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Customers\n          {{view badge countBinding=\"Radium.contactsController.customers.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"dead_end\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Dead Ends\n          {{view badge countBinding=\"Radium.contactsController.deadEnds.length\"}}\n        </a>\n      {{/view}}\n      {{#view Radium.ContactFilterListView singularName=\"unassigned\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          Unassigned\n          {{view badge countBinding=\"Radium.contactsController.unassigned.length\"}}\n        </a>\n      {{/view}}\n\n      {{#view Radium.ContactFilterListView singularName=\"notasks\"}}\n        <a href=\"#\" {{action \"filterContacts\"}}>\n          No Upcoming Tasks\n          {{view badge countBinding=\"Radium.contactsController.noUpcomingTasks.length\"}}\n        </a>\n      {{/view}}\n    {{/view}}\n\n    {{#view campaignsFilterView contentBinding=\"Radium.campaignsController\"}}\n      {{#if content.length}}\n        <li {{bindAttr class=\"parentView.noSelectedCampaigns:active\"}}>\n          <a href=\"#\" {{action \"allCampaigns\"}}>All Campaigns</a>\n        </li>\n        {{#each content}}\n          {{#view Radium.CampaignListView itemBinding=\"this\"}}\n            <a href=\"#\" {{action \"filterCampaigns\"}}>\n              {{item.name}}\n              <span class=\"pull-right\">\n                <span class=\"badge\">{{item.totalContacts}}</span>\n              </span>\n            </a>\n          {{/view}}\n        {{/each}}\n      {{/if}}\n    {{/view}}\n  </div> <!-- /#sidebar -->\n\n  <div id=\"content\" class=\"span9\">\n    {{view Radium.GlobalSearchTextView class=\"pull-right\"}}\n    {{view Radium.AnnouncementsView}}\n\n    {{#view Radium.ContactsToolbarView}}\n      <div id=\"alpha\" class=\"btn-toolbar\" style=\"margin-bottom: 9px\">\n        {{#view lettersFilter}}\n        <div class=\"btn-group\">\n          {{#view letterButton class=\"btn\" letter=\"A\"}}A{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"B\"}}B{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"C\"}}C{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"D\"}}D{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"E\"}}E{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"F\"}}F{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"G\"}}G{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"H\"}}H{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"I\"}}I{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"J\"}}J{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"K\"}}K{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"L\"}}L{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"M\"}}M{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"N\"}}N{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"O\"}}O{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"P\"}}P{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"Q\"}}Q{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"R\"}}R{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"S\"}}S{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"T\"}}T{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"U\"}}U{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"V\"}}V{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"W\"}}W{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"X\"}}X{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"Y\"}}Y{{/view}}\n          {{#view letterButton class=\"btn\" letter=\"Z\"}}Z{{/view}}\n        </div>\n        {{/view}}\n      </div> <!-- /#alpha -->\n      <div id=\"contacts-bulk-toolbar\" class=\"btn-toolbar\" style=\"margin-bottom: 9px\">\n        <div class=\"btn-group\">\n          {{#view selectAllButton class=\"btn btn-small\"}}\n            <i class=\"icon-ok-circle\"></i> All\n          {{/view}}\n          {{#view selectNoneButton class=\"btn btn-small\"}}\n           <i class=\"icon-remove-circle\"></i> None\n          {{/view}}\n        </div>\n        <div class=\"btn-group\">\n          {{#view emailButton class=\"btn btn-small\"}}Send Email{{/view}}\n          {{#view todoButton class=\"btn btn-small\"}}Add Todo{{/view}}\n          {{#view callListButton class=\"btn btn-small\"}}Add to Call List{{/view}}\n          {{#view addCampaignButton class=\"btn btn-small\"}}Add to Campaign{{/view}}\n          {{#if Radium.selectedContactsController.selectedCampaign}}\n            {{#view removeCampaignButton class=\"btn btn-small\"}}Remove from Campaign{{/view}}\n          {{/if}}\n        </div>\n        <!--\n        <div class=\"btn-group\">\n          {{view statusButton title=\"Change Status\" selectionBinding=\"Radium.contactsController.selectedContacts\"}}\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\" {{action \"assignStatus\"}} data-status=\"lead\">Lead</a></li>\n            <li><a href=\"#\" {{action \"assignStatus\"}} data-status=\"prospect\">Prospect</a></li>\n            <li><a href=\"#\" {{action \"assignStatus\"}} data-status=\"opportunity\">Opportunity</a></li>\n            <li><a href=\"#\" {{action \"assignStatus\"}} data-status=\"customer\">Customer</a></li>\n            <li><a href=\"#\" {{action \"assignStatus\"}} data-status=\"dead_end\">Dead End</a></li>\n          </ul>\n        </div>\n      </div>\n    -->\n      <div class=\"btn-toolbar clear\">\n        {{#view totalSelected}}\n          <h5>{{totalSelectedString}} selected.</h5>\n        {{/view}}\n      </div>\n\n    {{/view}}\n    <div id=\"form-container\"></div>\n    <div id=\"contacts\" class=\"row\">\n      {{#with Radium.selectedContactsController}}\n        {{#if selectedCampaign}}\n          <div class=\"span9\">\n            <div class=\"page-header\">\n              <h3>{{selectedCampaign.name}}'s Contacts</h3>\n            </div>\n          </div>\n        {{/if}}\n        {{#if content.length}}\n          {{#each content}}\n            {{view Radium.ContactCardView contentBinding=\"this\"}}\n          {{/each}}\n        {{else}}\n          <div class=\"span9\">\n            <h4>Loading contacts...</h4>\n          </div>\n        {{/if}}\n      {{/with}}\n    </div>\n  </div> <!-- /#content -->\n</div> <!-- /.row -->\n");
 });minispade.register('radium/templates/dashboard/announcements', function() {Ember.TEMPLATES['announcements']=Ember.Handlebars.compile("<div class=\"span9\">\n  <div class=\"alert alert-info\" id=\"notifications\">\n    <a class=\"close\" {{action \"hideNotifications\"}}>×</a>\n    {{#collection notificationsCollectionView tagName=\"ul\" class=\"unstyled\"}}\n      <span class=\"time\">{{time content.updatedAt}}</span>\n      <a href=\"/{{content.user.id}}\" {{action \"viewUser\"}}>{{content.user.firstName}}</a> {{content.message}}\n      <span class=\"options\">\n        (<a href=\"#\" {{action \"dismiss\"}}>Dismiss</a>)\n      </span>\n    {{/collection}}\n  </div>\n</div>");
-});minispade.register('radium/templates/dashboard/dashboard', function() {Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<div class=\"row\">\n  \n  <div id=\"sidebar\" class=\"span3\">\n    {{view Radium.ProfileView}}\n    {{view Radium.DashboardFeedFilterView}}\n    <h3>Team</h3>\n    {{view Radium.UsersListView}}\n  </div>\n  \n  <div class=\"span9\">\n    <div class=\"row\">\n      {{view Radium.GlobalSearchTextView}}\n    </div>\n    {{view Radium.AnnouncementsView}}\n    <div id=\"form-container\"></div>\n        \n    <div class=\"row\">\n      <div class=\"span9\">\n       {{#view Ember.View tagName=\"ul\" class=\"nav nav-tabs\"}}\n          <li class=\"active\"><a href=\"#\" {{bindAttr data-feed-group=\"today\"}}>Daily</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"week\"}}>This Week</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"month\"}}>This Month</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"quarter\"}}>This Quarter</a></li>\n        {{/view}}\n        <div class=\"page-header\">\n          <h3>{{Radium.accountController.content.name}}'s Coffee Cup Summary</h3>\n        </div>\n      </div>\n    </div>\n\n    {{#with Radium.feedByActivityController.coffeeCupSummary}}\n    <div class=\"stats row\">\n      <div class=\"span2\">\n        <dl>\n          <dt>Todos</dt>\n          <dd>\n            {{todoCreated}} created<br>\n            {{todoAssigned}} assigned<br>\n            {{todoFinished}} finished\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Campaigns</dt>\n          <dd>\n            {{campaignCreated}} created<br>\n            {{campaignAssigned}} assigned<br>\n            {{campaignContactAdded}} added<br>\n            {{campaignContactRemoved}} removed<br>\n            {{campaignFollowed}} followed\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Contacts</dt>\n          <dd>\n            {{contactCreated}} created<br>\n            {{contactAssigned}} assigned<br>\n            {{contactBecameLead}} became leads<br>\n            {{contactBecameProspect}} became prospects<br>\n            {{contactBecameOpportunity}} became opportunities<br>\n            {{contactBecameCustomer}} became customers<br>\n            {{contactBecameDeadEnd}} became dead ends<br>\n            {{contactFollowed}} followed\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Meetings</dt>\n          <dd>\n            {{meetingCreated}} created<br>\n            {{meetingRescheduled}} rescheduled<br>\n            {{meetingCancelled}} cancelled<br>\n            {{meetingConfirmed}} confirmed<br>\n            {{meetingRejected}} rejected<br>\n          </dd>\n        </dl>\n        <dl>\n          <dt>Phone Calls</dt>\n          <dd>\n            {{phoneCallCreated}} calls were created<br>\n            {{callListCreated}} call lists were created\n          </dd>\n        </dl>\n      </div>\n      {{/with}}\n    </div>\n\n    <div class=\"row\">\n      <div class=\"span9\">\n        {{#with Radium.feedByDayController}}\n          {{#if activityList}}\n            <table class=\"table\">\n              <tbody>\n                {{#each activityList}}\n                  <tr>\n                    {{view Radium.FeedListView contentBinding=\"this\"}}\n                  </tr>\n                {{/each}}\n              </tbody>\n            </table>\n          {{else}}\n            <div class=\"well\">\n              <h3 align=\"center\">No activities yet.</h3>\n            </div>\n          {{/if}}\n        {{/with}}\n      </div>\n    </div>\n  </div>\n</div>");
+});minispade.register('radium/templates/dashboard/dashboard', function() {Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<div class=\"row\">\n  \n  <div id=\"sidebar\" class=\"span3\">\n    {{view Radium.ProfileView}}\n    {{view Radium.DashboardFeedFilterView}}\n    <h3>Team</h3>\n    {{view Radium.UsersListView}}\n  </div>\n  \n  <div class=\"span9\">\n    <div class=\"row\">\n      {{view Radium.GlobalSearchTextView}}\n    </div>\n    {{view Radium.AnnouncementsView}}\n    <div id=\"form-container\"></div>\n        \n    <div class=\"row\">\n      <div class=\"span9\">\n       {{#view Ember.View tagName=\"ul\" class=\"nav nav-tabs\"}}\n          <li class=\"active\"><a href=\"#\" {{bindAttr data-feed-group=\"today\"}}>Daily</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"week\"}}>This Week</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"month\"}}>This Month</a></li>\n          <li><a href=\"#\" {{bindAttr data-feed-group=\"quarter\"}}>This Quarter</a></li>\n        {{/view}}\n        <div class=\"page-header\">\n          <h3>{{Radium.accountController.content.name}}'s Coffee Cup Summary</h3>\n        </div>\n      </div>\n    </div>\n\n    {{#with Radium.feedByActivityController.coffeeCupSummary}}\n    <div class=\"stats row\">\n      <div class=\"span2\">\n        <dl>\n          <dt>Todos</dt>\n          <dd>\n            {{todoCreated}} created<br>\n            {{todoAssigned}} assigned<br>\n            {{todoFinished}} finished\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Campaigns</dt>\n          <dd>\n            {{campaignCreated}} created<br>\n            {{campaignAssigned}} assigned<br>\n            {{campaignContactAdded}} added<br>\n            {{campaignContactRemoved}} removed<br>\n            {{campaignFollowed}} followed\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Contacts</dt>\n          <dd>\n            {{contactCreated}} created<br>\n            {{contactAssigned}} assigned<br>\n            {{contactBecameLead}} became leads<br>\n            {{contactBecameProspect}} became prospects<br>\n            {{contactBecameOpportunity}} became opportunities<br>\n            {{contactBecameCustomer}} became customers<br>\n            {{contactBecameDeadEnd}} became dead ends<br>\n            {{contactFollowed}} followed\n          </dd>\n        </dl>\n      </div>\n      <div class=\"span2\">\n        <dl>\n          <dt>Meetings</dt>\n          <dd>\n            {{meetingCreated}} created<br>\n            {{meetingRescheduled}} rescheduled<br>\n            {{meetingCancelled}} cancelled<br>\n            {{meetingConfirmed}} confirmed<br>\n            {{meetingRejected}} rejected<br>\n          </dd>\n        </dl>\n        <dl>\n          <dt>Phone Calls</dt>\n          <dd>\n            {{phoneCallCreated}} calls were created<br>\n            {{callListCreated}} call lists were created\n          </dd>\n        </dl>\n      </div>\n      {{/with}}\n    </div>\n\n    <div class=\"row\">\n      <div class=\"span9\">\n        {{#with Radium.feedByDayController}}\n          {{#if loadedActivities.length}}\n            <table class=\"table\">\n              <tbody>\n                {{#each loadedActivities}}\n                  <tr>\n                    {{view Radium.FeedListView contentBinding=\"this\"}}\n                  </tr>\n                {{/each}}\n              </tbody>\n            </table>\n          {{else}}\n            <div class=\"well\">\n              <h3 align=\"center\">No activities yet.</h3>\n            </div>\n          {{/if}}\n        {{/with}}\n      </div>\n    </div>\n  </div>\n</div>");
 });minispade.register('radium/templates/dashboard/feed/call_list_created', function() {Ember.TEMPLATES['call_list_created']=Ember.Handlebars.compile("{{owner.user.name}} created a new call list - <strong>{{reference.call_list.description}}</strong>.");
 });minispade.register('radium/templates/dashboard/feed/campaign_assigned', function() {Ember.TEMPLATES['campaign_assigned']=Ember.Handlebars.compile("{{owner.user.name}} was assigned to <strong>{{reference.campaign.name}}</strong>");
 });minispade.register('radium/templates/dashboard/feed/campaign_contact_added', function() {Ember.TEMPLATES['campaign_contact_added']=Ember.Handlebars.compile("{{owner.user.name}} added a contact from <strong>{{reference.campaign.name}}</strong>");
@@ -860,10 +860,16 @@ DS.attr.transforms.date.to = function(date) {
   _byDay: function(data) {
     return new Date(data.timestamp).getTime();
   },
+
+  userFilterBinding: 'Radium.feedByUserController.filter',
+  kindFilterBinding: 'Radium.feedByKindController.filter',
+
+  loadedActivities: Ember.A([]),
+
   crossfilterDidChange: function() {
     var cf = this.get('crossfilter'),
         dimension = cf.dimension(this._byDay),
-        group = dimension.group().all();
+        group = dimension.group();
 
     this.setProperties({
       dimension: dimension,
@@ -874,13 +880,28 @@ DS.attr.transforms.date.to = function(date) {
   }.observes('crossfilter'),
 
   updateList: function() {
-    var dimension = this.get('dimension');
-    if (dimension) {
-      this.set('activityList', dimension.top(Infinity));
+    var dimension = this.get('dimension'),
+        pastActivities = dimension.top(Infinity).filterProperty('isNewActivity', false),
+        pushedActivities = dimension.top(Infinity).filterProperty('isNewActivity', true),
+        unCachedActivities = pastActivities.filterProperty('isCached', false),
+        unCachedPushed = pushedActivities.filterProperty('isCached', false);
+
+    if (unCachedActivities.length) {
+      this.get('loadedActivities').pushObjects(unCachedActivities);
+      unCachedActivities.setEach('isCached', true);
+    }
+
+    if (unCachedPushed.length) {
+      this.get('loadedActivities').insertAt(0, unCachedPushed)
+    }
+
+    if (Ember.compare(this.get('loadedActivities'), dimension.top(Infinity)) !== 0) {
+      this.set('loadedActivities', dimension.top(Infinity));
     }
   },
 
   refresh: function() {
+    Ember.run.sync();
     this.updateList();
   }
 });
@@ -912,16 +933,8 @@ DS.attr.transforms.date.to = function(date) {
     });
   }.observes('crossfilter')
 });
-});minispade.register('radium/controllers/dashboard/feed_list', function() {Radium.feedListController = Ember.ArrayProxy.create(Radium.CFDimension, {
-  content: [],
-  contentWillChange: function() {
-    console.log('1', arguments);
-    this._super();
-  }.observesBefore('content.@each'),
-  contentDidChange: function() {
-    console.log('2', arguments);
-    this._super();
-  }.observes('content.@each'),
+});minispade.register('radium/controllers/dashboard/feed_list', function() {Radium.feedListController = Ember.ArrayProxy.create({
+  content: []
 });
 });minispade.register('radium/controllers/deals', function() {Radium.dealsController = Ember.ArrayProxy.create({
   selectedUser: null,
@@ -2904,7 +2917,7 @@ Radium.App = Ember.StateManager.create({
   },
 
   infiniteLoading: function(action) {
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 300) {
       Radium.App.send(action);
       return false;
     }
@@ -3165,6 +3178,7 @@ Radium.ContactsPage = Ember.State.extend({
 
           data.forEach(function(item) {
             item.isNewActivity = false;
+            item.isCached = false;
           });
 
           Radium.dashboardFeedController.addData(data);
@@ -29433,6 +29447,53 @@ y;for(y=Na;y--;)Sa[y].rank>=U&&Sa.splice(y,1);Na=Sa.length}for(y=0;y<Na;y++){b=S
 align:h[6]})[g.moved?"animate":"attr"]({x:Y+d.x+({left:e,right:-e}[h[6]]||0),y:H+d.y});g.moved=true;if(P&&f){g=b.connector;h=i?[Za,Y+(h[6]==="left"?5:-5),H,"C",Y,H,2*h[2]-h[4],2*h[3]-h[5],h[2],h[3],Ka,h[4],h[5]]:[Za,Y+(h[6]==="left"?5:-5),H,Ka,h[2],h[3],Ka,h[4],h[5]];if(g){g.animate({d:h});g.attr("visibility",U)}else b.connector=g=this.chart.renderer.path(h).attr({"stroke-width":f,stroke:d.connectorColor||b.color||"#606060",visibility:U,zIndex:3}).translate(c.plotLeft,c.plotTop).add()}}}}},drawTracker:hd.prototype.drawTracker,
 getSymbol:function(){}});wb.pie=ma;db.Highcharts={Chart:Nd,dateFormat:Zc,pathAnim:Nc,getOptions:function(){return Xa},hasRtlBug:me,numberFormat:Ed,Point:Oc,Color:bc,Renderer:fd,seriesTypes:wb,setOptions:function(a){Xa=Ca(Xa,a);Id();return Xa},Series:sb,addEvent:Qa,removeEvent:pb,createElement:hb,discardElement:pc,css:Ja,each:u,extend:sa,map:tc,merge:Ca,pick:A,extendClass:yb,product:"Highcharts",version:"2.1.9"}})();
 
+});minispade.register('jquery-cookie', function() {/*!
+ * jQuery Cookie Plugin
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($) {
+    $.cookie = function(key, value, options) {
+
+        // key and at least value given, set cookie...
+        if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value === null || value === undefined)) {
+            options = $.extend({}, options);
+
+            if (value === null || value === undefined) {
+                options.expires = -1;
+            }
+
+            if (typeof options.expires === 'number') {
+                var days = options.expires, t = options.expires = new Date();
+                t.setDate(t.getDate() + days);
+            }
+
+            value = String(value);
+
+            return (document.cookie = [
+                encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+                options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+                options.path    ? '; path=' + options.path : '',
+                options.domain  ? '; domain=' + options.domain : '',
+                options.secure  ? '; secure' : ''
+            ].join(''));
+        }
+
+        // key and possibly options given, get cookie...
+        options = value || {};
+        var decode = options.raw ? function(s) { return s; } : decodeURIComponent;
+
+        var pairs = document.cookie.split('; ');
+        for (var i = 0, pair; pair = pairs[i] && pairs[i].split('='); i++) {
+            if (decode(pair[0]) === key) return decode(pair[1] || ''); // IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB, thus pair[1] may be undefined
+        }
+        return null;
+    };
+})(jQuery);
 });minispade.register('jquery-ui', function() {/*!
  * jQuery UI 1.8.17
  *

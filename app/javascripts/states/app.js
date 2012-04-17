@@ -83,7 +83,7 @@ Radium.App = Ember.StateManager.create({
   },
 
   infiniteLoading: function(action) {
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 300) {
       Radium.App.send(action);
       return false;
     }

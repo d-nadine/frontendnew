@@ -79,6 +79,7 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
 
           data.forEach(function(item) {
             item.isNewActivity = false;
+            item.isCached = false;
           });
 
           Radium.dashboardFeedController.addData(data);

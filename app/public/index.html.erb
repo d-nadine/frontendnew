@@ -37,8 +37,8 @@
       var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + API_KEY, function(data) {
         console.log('Feed push update.');
         data.isNewActivity = true;
+        data.isCached = false;
         Radium.dashboardFeedController.addData([data]);
-        // Radium.feedByDayController.get('activityList').insertAt(0, data);
       });
 
       
