@@ -6,3 +6,4 @@ tmp/
 !site/images/icons
 env.sh
 deploy.log
+site/
