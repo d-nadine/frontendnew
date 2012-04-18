@@ -1,3 +1,4 @@
+* [2012-04-18 15:52 -0700] c8d954a - Joshua Jones: Hook up deal and campaign forms.
 * [2012-04-18 14:07 -0700] d20508f - Joshua Jones: Remove auth from Davis route events.
 * [2012-04-18 20:33 +0200] fea7024 - twinturbo: Add logging middleware
 * [2012-04-18 20:01 +0200] 5593abb - twinturbo: Remove HTTP auth
