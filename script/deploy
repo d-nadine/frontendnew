@@ -6,7 +6,7 @@ ROOT = File.expand_path "../../", __FILE__
 
 LOG_FILE = "#{ROOT}/deploy.log"
 
-REQUIRED_ENV = [ :radium_server_url, :radium_api_key, :web_password ]
+REQUIRED_ENV = [ :radium_server_url, :radium_api_key ]
 
 class Deploy < Thor
   include Thor::Actions
