@@ -4,16 +4,18 @@
   <textarea name="description" id="description" class="span8"></textarea>
   <label for="contact">Contact</label>
   {{view Radium.AutocompleteTextField 
-    id="customer" class="input-xlarge"
+    id="contact" class="input-xlarge"
     sourceBinding="Radium.contactsController.contactNames"
   }}
-  <input type="hidden" id="todo-contact" name="contact" value="">
+  <input type="hidden" id="contact-id" name="contact-id" value="">
   <label for="amount">Amount</label>
   <input type="text" name="amount" id="amount" value="">
   <label for="date">Close Date</label>
-  {{view Radium.DatePickerField id="date" name="date" class="input-small"}}
-  <label for="status">Status:</label>
-  <select id="status" name="status">
+  {{view Radium.DatePickerField id="close-date" name="close-date" class="input-small"}}
+  <label for="time">Close Time:</label>
+  <input type="text" id="close-time" name="close-time" class="input-small" placeholder="eg 1:00">
+  <label for="state">State:</label>
+  <select id="state" name="state">
     <option value="rejected">Rejected</option>
     <option value="pending" selected="selected">Pending</option>
     <option value="paid">Paid</option>
