@@ -69,7 +69,6 @@ Radium.App = Ember.StateManager.create({
   */
 
   loadPage: function(manager, context) {
-    console.log('first url');
     var app = Radium.appController,
         page = context.page,
         action = context.action || 'index',
@@ -82,18 +81,11 @@ Radium.App = Ember.StateManager.create({
       params: (context.param) ? context.param : null
     });
 
-    if (!this.isLoggedInCheck()) {
-      manager.goToState('loggedOut');
-    } else {
-      if (app.get('isFirstRun')) {
-        manager.goToState('authenticate');
-      } else {
-        manager.goToState(statePath);
-      }
-    }
+    manager.goToState(statePath);
+    
   },
 
-  bootstrapUser: function(manager, context) {
+  bootstrapUser: function() {
     return $.ajax({
       url: '/api/account'
     });
