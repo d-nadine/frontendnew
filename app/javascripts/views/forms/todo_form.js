@@ -3,6 +3,14 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   templateName: 'todo_form',
 
+  findContactsField: Radium.AutocompleteTextField.extend({
+    select: function(event, ui) {
+      var contact = Radium.store.find(Radium.Contact, ui.item.value);
+      contact.set('isSelected', true);
+      this.$().val('');
+    }
+  }),
+
   submitForm: function() {
     var self = this;
     var contactIds = this.get('selectedContacts').getEach('id'),
@@ -20,7 +28,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
     // Disable the form buttons
     this.sending();
-
+    
     contactIds.forEach(function(id) {
       $.ajax({
         url: '/api/contacts/%@/todos'.fmt(id),

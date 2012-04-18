@@ -11,15 +11,15 @@ Radium.LoggedIn = Ember.State.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
-        // var users = Radium.store.find(Radium.User, {page: 0});
+        var contacts = Radium.store.find(Radium.Contact, {page: 0});
         
-        // users.addObserver('isLoaded', function() {
-        //   console.log('Users loaded for', Radium.appController.get('_routeCache'));
-        //   Radium.usersController.set('content', users);
+        contacts.addObserver('isLoaded', function() {
+          console.log('Contacts loaded');
+          Radium.contactsController.set('content', contacts);
           Ember.run.next(function() {
             manager.goToState(Radium.appController.getPath('_statePathCache'));
           });
-        // });
+        });
       }
     })
   }),

@@ -7,5 +7,9 @@ Radium.appController = Ember.Object.create({
   _statePathCache: {},
   currentPage: null,
   selectedForm: null,
-  params: null
+  params: null,
+
+  today: function() {
+    return Ember.DateTime.create();
+  }.property().cacheable()
 });
