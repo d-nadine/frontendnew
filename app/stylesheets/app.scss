@@ -1,3 +1,4 @@
+@import "compass/css3";
 
 body {
   padding-top: 60px;
@@ -73,6 +74,28 @@ body {
 
     &:last-child {
       border: none;
+    }
+  }
+}
+
+.feed {
+  width: 100%;
+  clear: both;
+  margin: 0 0 100px;
+
+  .feed-row {
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid #EEE;
+    background-color: #fff;
+    @include transition(background-color 0.75s ease-in);
+
+    &.pushed {
+      background-color: #FBEED5;
+    }
+
+    p {
+      margin-top: 9px;
     }
   }
 }
