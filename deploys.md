@@ -1,3 +1,4 @@
+* [2012-04-18 14:07 -0700] d20508f - Joshua Jones: Remove auth from Davis route events.
 * [2012-04-18 20:33 +0200] fea7024 - twinturbo: Add logging middleware
 * [2012-04-18 20:01 +0200] 5593abb - twinturbo: Remove HTTP auth
 * [2012-04-17 16:46 -0700] c1475c6 - Joshua Jones: Add missing header args for loading /account.
