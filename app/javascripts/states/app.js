@@ -18,21 +18,40 @@ Radium.App = Ember.StateManager.create({
   rootElement: '#main',
   
   loggedOut: Radium.LoggedOutState,
-  
-  start: Ember.State.create({
-    enter: function(manager) {
-      
+
+  initialState: function() {
+    if (CONFIG.api) {
+      return 'authenticate';
+    } else {
+      return 'loggedOut';
     }
-  }),
+  }.property(),
+
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
         console.log('authenticating...');
-        Ember.run.next(function() {
-          manager.send('bootstrapUser');
-        });
+        $.when(manager.bootstrapUser())
+          .then(
+            // Load account data
+            function(data) {
+              Radium.store.load(Radium.Account, data);
+              var account = Radium.store.find(Radium.Account, data.id);
+              Radium.accountController.set('content', account);
+
+              Radium.appController.setProperties({
+                isFirstRun: false,
+                isLoggedIn: true
+              });
+              manager.goToState('loggedIn');
+            },
+            // Error
+            function() {
+              manager.goToState('loggedIn.noData');
+            }
+          )
       }
     })
   }),
@@ -49,15 +68,8 @@ Radium.App = Ember.StateManager.create({
     ------------------------------------
   */
 
-  isLoggedInCheck: function() {
-    if (Radium.get('_api')) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-
   loadPage: function(manager, context) {
+    console.log('first url');
     var app = Radium.appController,
         page = context.page,
         action = context.action || 'index',
@@ -82,22 +94,8 @@ Radium.App = Ember.StateManager.create({
   },
 
   bootstrapUser: function(manager, context) {
-    $.ajax({
-      url: '/api/account',
-      headers: {
-        'X-Radium-User-API-Key': Radium.get('_api')
-      },
-      success: function(data) {
-        Radium.store.load(Radium.Account, data);
-        var account = Radium.store.find(Radium.Account, data.id);
-        Radium.accountController.set('content', account);
-
-        Radium.appController.setProperties({
-          isFirstRun: false,
-          isLoggedIn: true
-        });
-        manager.goToState('loggedIn');
-      }
+    return $.ajax({
+      url: '/api/account'
     });
   },
 

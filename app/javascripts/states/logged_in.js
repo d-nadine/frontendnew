@@ -30,5 +30,10 @@ Radium.LoggedIn = Ember.State.create({
   campaigns: Radium.CampaignsPage.create(),
   calendar: Ember.State.create({}),
   messages: Ember.State.create({}),
-  settings: Ember.State.create({})
+  settings: Ember.State.create({}),
+  noData: Ember.ViewState.create({
+    view: Ember.View.extend({
+      templateName: 'error_page'
+    })
+  })
 });

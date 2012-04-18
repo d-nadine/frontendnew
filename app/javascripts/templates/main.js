@@ -1,5 +1,6 @@
 // Auth
 minispade.require('radium/templates/auth/login');
+minispade.require('radium/templates/auth/error_page');
 
 // Global
 minispade.require('radium/templates/global/profile');

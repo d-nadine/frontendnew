@@ -15,8 +15,10 @@
 
     <link href="/application.css" rel="stylesheet">
     <script>
-    window.ISLOGGEDIN = true;
-    window.IO = "4f7326f14e6b4c0007000002";
+    window.CONFIG = {
+      api: null,
+      IO: "4f7326f14e6b4c0007000002"
+    }
     </script>
     <script src="/scripts/faye/faye-browser.js"></script>
     <script src="/scripts/minispade.js"></script>
@@ -30,11 +32,11 @@
     <script type="text/javascript">
       minispade.require('radium/main');
 
-      if ($.cookie('user_api_key')) {
+      if (CONFIG.api) {
         Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
         Radium._feed.disable('cross-origin-long-polling');
 
-        var subscribe = Radium._feed.subscribe('/'+ IO + '/feed/' + $.cookie('user_api_key'), function(data) {
+        var subscribe = Radium._feed.subscribe('/%@/feed/%@'.fmt(CONFIG.IO, CONFIG.api), function(data) {
           console.log('New activity.');
           data.isNewActivity = true;
           data.isCached = false;
