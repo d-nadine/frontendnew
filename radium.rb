@@ -61,3 +61,5 @@ class AddCookie
 end
 
 Radium.root = File.dirname __FILE__
+
+$stdout.sync = true
