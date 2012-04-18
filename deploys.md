@@ -1,3 +1,4 @@
+* [2012-04-18 20:01 +0200] 5593abb - twinturbo: Remove HTTP auth
 * [2012-04-17 16:46 -0700] c1475c6 - Joshua Jones: Add missing header args for loading /account.
 * [2012-04-17 16:00 -0700] 43efdd2 - Joshua Jones: Fix timing for storing API key.
 * [2012-04-17 15:28 -0700] 05c675a - Joshua Jones: Remove old account datastore loading.
