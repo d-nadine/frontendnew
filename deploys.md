@@ -1,3 +1,4 @@
+* [2012-04-19 11:10 -0700] db9d187 - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-19 10:51 -0700] 5db4631 - twinturbo: [Deploy]
 * [2012-04-19 19:50 +0200] b9a99ad - Joshua Jones: Fix missing close handlebars tags.
 * [2012-04-19 14:58 +0200] a818fe8 - twinturbo: Merge branch 'server-updates'
