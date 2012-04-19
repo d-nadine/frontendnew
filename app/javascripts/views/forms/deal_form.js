@@ -6,21 +6,17 @@ Radium.DealForm = Radium.FormView.extend({
     var contact = this.$('#contact-id').val(),
         description = this.$('#description').val(),
         amount = this.$('#amount').val(),
-        closeByDate = this.$('#close-date').val().split('-'),
-        closeByTime = this.$('#close-time').val().split(':'),
+        closeByDate = this.$('#close-date').val(),
+        closeByTime = this.$('#close-time').val(),
+        closeByMeridian = this.$('#end-time-meridian').val(),
+        closeByValue = this.timeFormatter(closeByDate, closeByTime, closeByMeridian),
         user = this.$('select#assigned-to').val(),
         state = this.$('#state').val(),
         data = {
           deal: {
             description: description,
-            close_by: Ember.DateTime.create({
-              year: closeByDate[0],
-              month: closeByDate[1],
-              day: closeByDate[2],
-              hour: closeByTime[0],
-              minute: closeByTime[1]
-            }).toISO8601(),
-            amount: amount
+            close_by: closeByValue,
+            amount: amount,
             user_id: user,
             contact_id: contact,
             state: state

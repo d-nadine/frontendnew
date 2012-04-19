@@ -15,19 +15,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var self = this;
     var contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
-        finishByDate = this.$('#finish-by-date').val().split('-'),
-        finishByTime = this.$('#finish-by-time').val().split(':'),
+        finishByDate = this.$('#finish-by-date').val(),
+        finishByTime = this.$('#finish-by-time').val(),
+        finishByMeridian = this.$('#finish-by-meridian').val(),
+        finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
         user = this.$('select#assigned-to').val(),
         data = {
           todo: {
             description: description,
-            finish_by: Ember.DateTime.create({
-              year: finishByDate[0],
-              month: finishByDate[1],
-              day: finishByDate[2],
-              hour: finishByTime[0],
-              minute: finishByTime[1]
-            }).toISO8601(),
+            finish_by: finishByValue,
             user_id: user
           }
         };

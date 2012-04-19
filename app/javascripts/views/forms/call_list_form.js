@@ -1,32 +1,42 @@
   Radium.CallListForm = Radium.FormView.extend(Radium.FormReminder, {
     templateName: 'call_list_form',
     selectedContactIdsBinding: 'Radium.contactsController.selectedContactsIds',
-    // TODO: Figure out how this works with the API...
+
+    findContactsField: Radium.AutocompleteTextField.extend({
+      select: function(event, ui) {
+        var contact = Radium.store.find(Radium.Contact, ui.item.value);
+        contact.set('isSelected', true);
+        this.$().val('');
+      }
+    }),
+
     submitForm: function() {
       var self = this,
-          $callListSelect = this.$('select#call-list'),
-          finishByDate = this.$('input#finish-by').val(),
-          callListId = $callListSelect.val(),
-          callList = Radium.store.find(Radium.CallList, callListId),
-          callListName = callList.get('description'),
-          callListContactsIds =callList.getPath('data.contacts'),
+          description = this.$('#description').val(),
+          finishByDate = this.$('#finish-by-date').val(),
+          finishByTime = this.$('#finish-by-time').val(),
+          finishByMeridian = this.$('#finish-by-meridian').val(),
+          finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
+          user = this.$('#user').val(),
+          campaign = this.$('#campaign').val(),
           selectedContactIds = this.get('selectedContactIds').getEach('id'),
+
           data = {
             call_list: {
-              finish_by: finishByDate,
-              contact_ids: callListContactsIds
+              description: description,
+              finish_by: finishByValue,
+              entries: callListContactsIds
+              campaign: campaign
             }
           };
-      data.call_list.contact_ids.push(selectedContactIds);
 
       $.ajax({
-        url: '/api/call_lists/%@'.fmt(callListId),
+        url: '/api/call_lists/',
         type: 'PUT',
         data: data,
         success: function(data) {
           console.log(data);
-          console.log("Contact added to %@".fmt(callListName));
-          self.success("Contact added to <b>%@</b>".fmt(callListName));
+          self.success("Call List created");
         },
         error: function(jqXHR, textStatus, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));

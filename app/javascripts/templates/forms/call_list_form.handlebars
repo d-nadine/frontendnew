@@ -1,7 +1,18 @@
 <form data-type="call_list" class="well">
   <legend>Add to Call List</legend>
-  <label for="finish-by">Finish by</label>
-  {{view Radium.DatePickerField id="finish-by" name="finish-by" class="input-small"}}
+  
+  <label for="description">Description</label>
+  <textarea name="description" id="description" class="span8"></textarea>
+
+  <label for="date">Date:</label>
+  {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
+  <label for="time">Time:</label>
+  <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
+  <select id="finish-by-meridian" style="width: 60px;">
+    <option value="am">AM</option>
+    <option value="pm">PM</option>
+  </select>
+
   <label for="assigned-to">Assigned To</label>
   <select name="assigned-to" id="assigned-to">
     <option value="">Assigned To</option>
@@ -10,14 +21,25 @@
     {{/each}}
   </select>
 
-  <label for="call-list">Call List</label>
-
-  <select name="call-list" id="call-list">
-    <option value="">Assign to a Call List</option>
-    {{#each Radium.callListsController}}
-    <option {{bindAttr value="id"}}>{{description}}</option>
+  <label for="campaign">Campaign</label>
+  <select name="campaign" id="campaign">
+    <option value="">Select a campaign</option>
+    {{#each Radium.campaignsController}}
+    <option {{bindAttr value="id"}}>{{name}}</option>
     {{/each}}
   </select>
+
+  <label for="contacts">Entries</label>
+  {{#with Radium.contactsController}}
+    {{#if selectedContacts}}
+      {{selectedContactsNames}}
+    {{/if}}
+  {{/with}}
+  
+  {{view findContactsField 
+    id="entries" name="entries" class="input-xlarge"
+    sourceBinding="Radium.contactsController.contactNames"
+  }}
 
   {{view Radium.FormCheckbox 
       title="Add Reminder" 

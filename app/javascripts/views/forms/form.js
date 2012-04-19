@@ -58,5 +58,26 @@ Radium.FormView = Ember.View.extend({
     target: 'parentView',
     action: 'close',
     disabledBinding: 'parentView.isSubmitting'
-  })
+  }),
+
+  // Helpers
+  /**
+    @param {String} date A calendar date string formatted as YYYY-MM-DD
+    @param {String} time A 24-hr time string in hours and minutes, eg HH-MM
+  */
+  timeFormatter: function(date, time, meridian) {
+    var dateValues = date.split('-'),
+        timeValues = time.split(':'),
+        convertedHour = (meridian === 'pm') ? 
+                        parseInt(timeValues[0]) + 12 : timeValues[0],
+        hour = (convertedHour === 24) ? 00 : convertedHour;
+
+    return Ember.DateTime.create({
+      year: dateValues[0],
+      month: dateValues[1],
+      day: dateValues[2],
+      hour: hour,
+      minute: timeValues[1]
+    }).toISO8601();
+  }
 });

@@ -15,8 +15,10 @@
       var contactIds = this.get('selectedContacts').getEach('id'),
           name = this.$('#campaign-name').val(),
           target = this.$('#target').val(),
-          endsByDate = this.$('#ends-by-date').val().split('-'),
-          endsByTime = this.$('#ends-by-time').val().split(':'),
+          endsByDate = this.$('#ends-by-date').val(),
+          endsByTime = this.$('#ends-by-time').val(),
+          endsByMeridian = this.$('#ends-by-meridian'),
+          endsByValue = this.timeFormatter(endsByDate, endsByTime, endsByMeridian),
           currency = this.$('#currency').val(),
           description = this.$('#description').val(),
           user = this.$('select#assigned-to').val(),
@@ -25,13 +27,7 @@
               name: name,
               description: description,
               target: target,
-              ends_at: Ember.DateTime.create({
-                year: endsByDate[0],
-                month: endsByDate[1],
-                day: endsByDate[2],
-                hour: endsByTime[0],
-                minute: endsByTime[1]
-              }).toISO8601(),
+              ends_at: endsByValue,
               user_id: user,
               contact_ids: contactIds,
               currency: currency
