@@ -4,6 +4,7 @@ Radium.FormView = Ember.View.extend({
   didInsertElement: function() {
     this.$().hide().slideDown('slow');
   },
+
   sending: function() {
     this.set('isSubmitting', true);
     this.$('input, select, textarea').prop('disabled', true);
@@ -29,7 +30,7 @@ Radium.FormView = Ember.View.extend({
   },
   close: function() {
     this.$().slideUp('fast', function() {
-      Radium.App.send('closeForm');
+      Radium.FormManager.send('closeForm');
     });
   },
   submitButton: Ember.Button.extend({

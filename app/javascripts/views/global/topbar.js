@@ -48,14 +48,10 @@ Radium.TopbarView = Ember.View.extend({
     hasAddedForm: false,
     click: function() {
       var formName = this.$().text().replace('Add ', '');
-      Radium.App.send('addResource', {
+      Radium.FormManager.send('showForm', {
         form: formName
       });
     },
-    disabled: function() {
-      var selectedForm = Radium.appController.get('selectedForm');
-      return (selectedForm) ? true : false;
-    }.property('Radium.appController.selectedForm').cacheable(),
     template: Ember.Handlebars.compile('Add {{ buttonTitle }}')
   }),
   templateName: 'topbar'

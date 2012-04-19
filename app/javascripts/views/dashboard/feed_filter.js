@@ -21,7 +21,7 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
     });
     this.get('childViews').pushObject(notificationView);
   },
-  
+
   itemViewClass: Ember.View.extend({
     tagName: 'li',
     templateName: 'type_filters',
@@ -47,7 +47,7 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
       click: function(event) {
         var kind = this.getPath('parentView.content.label'),
             formType = kind.replace(' ', '').slice(0, -1);
-        Radium.App.send('addResource', {form: formType});
+        Radium.FormManager.send('showForm', {form: formType});
         event.stopPropagation();
         return false;
       }

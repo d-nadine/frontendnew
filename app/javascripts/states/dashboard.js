@@ -40,7 +40,6 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
       this._super($(window).off());
     },
     exit: function(manager) {
-      console.log(manager.get('isEmptyFeed'));
       if (!manager.get('isEmptyFeed')) {
         $(window).on('scroll', function() {
           Radium.App.infiniteLoading('loadFeed');
