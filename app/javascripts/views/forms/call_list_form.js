@@ -25,7 +25,7 @@
             call_list: {
               description: description,
               finish_by: finishByValue,
-              entries: callListContactsIds
+              entries: callListContactsIds,
               campaign: campaign
             }
           };

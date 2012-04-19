@@ -18,10 +18,11 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
         Radium.feedByDayController,
         Radium.feedByActivityController
       ]);
-
-      $(window).on('scroll', function() {
-        Radium.App.infiniteLoading('loadFeed');
-      });
+      if (!manager.get('isEmptyFeed')) {
+        $(window).on('scroll', function() {
+          Radium.App.infiniteLoading('loadFeed');
+        });
+      }
       
       Ember.run.next(function() {
         manager.send('loadFeed');
@@ -38,10 +39,13 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
     enter: function() {
       this._super($(window).off());
     },
-    exit: function() {
-      $(window).on('scroll', function() {
-        Radium.App.infiniteLoading('loadFeed');
-      });
+    exit: function(manager) {
+      console.log(manager.get('isEmptyFeed'));
+      if (!manager.get('isEmptyFeed')) {
+        $(window).on('scroll', function() {
+          Radium.App.infiniteLoading('loadFeed');
+        });
+      }
       this._super();
     }
   }),
@@ -86,13 +90,16 @@ Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
           Radium.dashboardFeedController.refreshAll();
           Ember.run.sync();
 
-          // if (currentPage < totalPages) {
-          //   self.incrementProperty('page');
-          // }
-
           Ember.run.next(function() {
             manager.goToState('ready');
           }); 
+        },
+        error: function() {
+          $(window).off('scroll');
+          manager.set('isEmptyFeed', true);
+          // Ember.run.next(function() {
+            manager.goToState('ready');
+          // });
         }
       });
     } else {

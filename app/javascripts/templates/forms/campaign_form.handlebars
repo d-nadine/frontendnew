@@ -1,4 +1,4 @@
-<form class="well">
+ <form class="well">
   <legend>Create a Campaign</legend>
   <label for="name">Name</label>
   <input type="text" name="campaign-name" id="campaign-name" class="span8" value="">
@@ -25,6 +25,7 @@
   <label for="description">Description:</label>
   <textarea name="description" id="description" class="span8"></textarea>
 
+  <label for="contacts">Add Contacts to Campaign</label>
   {{view findContactsField 
     id="contacts" name="contacts" class="input-xlarge"
     sourceBinding="Radium.contactsController.contactNames"
