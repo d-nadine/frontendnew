@@ -21,6 +21,7 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
     });
     this.get('childViews').pushObject(notificationView);
   },
+  
   itemViewClass: Ember.View.extend({
     tagName: 'li',
     templateName: 'type_filters',
