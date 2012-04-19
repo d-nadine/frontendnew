@@ -1,3 +1,4 @@
+* [2012-04-18 23:33 -0700] 3e6806b - Joshua Jones: Implement new form manager.
 * [2012-04-18 21:38 -0700] ad57da9 - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-18 15:52 -0700] c8d954a - Joshua Jones: Hook up deal and campaign forms.
 * [2012-04-18 14:07 -0700] d20508f - Joshua Jones: Remove auth from Davis route events.
