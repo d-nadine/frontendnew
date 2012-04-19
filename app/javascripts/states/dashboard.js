@@ -15,6 +15,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
       Radium.dashboardFeedController.registerFeeds([
         Radium.feedByKindController,
         Radium.feedByUserController,
+        Radium.feedByContactController,
         Radium.feedByDayController,
         Radium.feedByActivityController
       ]);

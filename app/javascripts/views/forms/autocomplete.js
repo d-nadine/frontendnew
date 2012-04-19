@@ -1,8 +1,9 @@
 Radium.AutocompleteTextField = Radium.TextField.extend(JQ.Widget, {
   uiType: 'autocomplete',
   uiOptions: ['source'],
-  uiEvents: ['select', 'focus'],
+  uiEvents: ['select', 'focus', 'change'],
   select: function(event, ui) {
+    console.log('me me')
     if ( ui.item ) {
       event.target.value = '';
       event.preventDefault();

@@ -7,6 +7,14 @@ Radium.contactsController = Ember.ArrayProxy.create({
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
   }.property('totalPagesLoaded', 'totalPages').cacheable(),
 
+  recentlySearchedFor: function() {
+    return this.filter(function(contact, idx) {
+      if (contact.get('isRecentlySearchedFor') && idx <= 5) {
+        return true;
+      }
+    });
+  }.property('@each.isRecentlySearchedFor').cacheable(),
+
   /**
     @binding {content.status}
     @return {Ember.Array} Contacts as companies
@@ -93,6 +101,12 @@ Radium.contactsController = Ember.ArrayProxy.create({
   contactNames: function() {
     return this.map(function(item) {
       return {label: item.get('name'), value: item.get('id')};
+    });
+  }.property('@each.name').cacheable(),
+
+  contactNamesWithObject: function() {
+    return this.map(function(item) {
+      return {label: item.get('name'), contact: item};
     });
   }.property('@each.name').cacheable(),
 
