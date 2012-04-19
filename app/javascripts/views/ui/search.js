@@ -6,9 +6,12 @@ Radium.GlobalSearchTextView = Ember.View.extend({
     placeholder: "Find me...",
     elementId: 'search-box',
     sourceBinding: 'Radium.contactsController.contactNamesWithObject',
+    recentContactSearchesBinding: 'Radium.contactsController.recentlySearchedFor',
     select: function(event, ui) {
       this.$().prop('value', ui.item.label);
-      ui.item.contact.set('isRecentlySearchedFor', true);
+      Ember.run(function() {
+        ui.item.contact.set('isRecentlySearchedFor', true);
+      });
       Radium.feedByContactController.set('filter', ui.item.contact.get('id'));
     },
     focus: function(event, ui) {
