@@ -1,4 +1,4 @@
-Radium.DashboardPage = Ember.ViewState.extend(Radium.PageStateMixin, {
+Radium.DashboardPage = Ember.ViewState.extend({
     
   view: Radium.DashboardView,
 

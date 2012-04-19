@@ -1,3 +1,4 @@
+// TODO: Remove/depreciate once Radium.FormManager is 100%
 Radium.PageStateMixin = Ember.Mixin.create({
   form: Ember.State.extend({
     form: null,

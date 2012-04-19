@@ -6,7 +6,7 @@ function infiniteLoading(action) {
 }
 
 Radium.ContactsPage = Ember.State.extend({
-  index: Ember.ViewState.extend(Radium.PageStateMixin, {
+  index: Ember.ViewState.extend({
     view: Radium.ContactsPageView,
     exit: function(manager) {
       this._super(manager);
@@ -49,7 +49,7 @@ Radium.ContactsPage = Ember.State.extend({
     loading: Radium.MiniLoader.create(),
   }),
   
-  show: Ember.ViewState.extend(Radium.PageStateMixin, {
+  show: Ember.ViewState.extend({
     view: Radium.ContactPageView,
     enter: function(manager) {
       var controller = Radium.selectedContactController;

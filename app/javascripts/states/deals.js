@@ -1,4 +1,4 @@
-Radium.DealsPage = Ember.ViewState.extend(Radium.PageStateMixin, {
+Radium.DealsPage = Ember.ViewState.extend({
   initialState: 'load',
   view: Radium.DealPageView.create(),
   load: Ember.State.create({
