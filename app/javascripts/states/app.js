@@ -67,7 +67,6 @@ Radium.App = Ember.StateManager.create({
     ACTIONS
     ------------------------------------
   */
-
   loadPage: function(manager, context) {
     var app = Radium.appController,
         page = context.page,

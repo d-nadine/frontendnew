@@ -35,5 +35,10 @@ Radium.LoggedIn = Ember.State.create({
     view: Ember.View.extend({
       templateName: 'error_page'
     })
-  })
+  }),
+
+  // Actions
+  logout: function(manager, context) {
+    manager.goToState('loggedOut');
+  }
 });
