@@ -37,7 +37,7 @@
             }
           },
           settings = {
-            url: '/api/call_lists',
+            url: '/api/campaigns/%@/call_lists'.fmt(campaign),
             type: 'POST',
             data: JSON.stringify(data)
           },
