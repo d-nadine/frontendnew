@@ -31,21 +31,25 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     // Disable the form buttons
     this.sending();
     
-    contactIds.forEach(function(id) {
-      var settings = {
-            url: '/api/contacts/%@/todos'.fmt(id),
-            type: 'POST',
-            data: data
-          },
-          request = jQuery.extend(settings, CONFIG.ajax);
+    if (contactIds.length) {
+      contactIds.forEach(function(id) {
+        var settings = {
+              url: '/api/contacts/%@/todos'.fmt(id),
+              type: 'POST',
+              data: data
+            },
+            request = jQuery.extend(settings, CONFIG.ajax);
 
-      $.ajax(request)
-        .success(function(data) {
-          self.success("Todo created");
-        })
-        .error(function(jqXHR, textStatus, errorThrown) {
-          self.error("Oops, %@.".fmt(jqXHR.responseText));
-        });
-    });
+        $.ajax(request)
+          .success(function(data) {
+            self.success("Todo created");
+          })
+          .error(function(jqXHR, textStatus, errorThrown) {
+            self.error("Oops, %@.".fmt(jqXHR.responseText));
+          });
+      });
+    } else {
+      self.error("A contact is required.");
+    }
   }
 });
