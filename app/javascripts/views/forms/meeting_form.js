@@ -19,11 +19,11 @@ Radium.MeetingForm = Radium.FormView.extend({
             topic: topic,
             starts_at: startsAtValue,
             ends_at: endsAtValue,
-            invite: invitees
+            invite: [invitees]
           }
         },
         settings = {
-          url: '/meetings',
+          url: '/api/meetings',
           type: 'POST',
           data: JSON.stringify(data)
         },

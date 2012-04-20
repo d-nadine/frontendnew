@@ -13,12 +13,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }
   }),
 
-  // Form actions
-  didCreateTodo: function(data) {
-    Radium.store.load(Radium.Todo, data);
-    self.success("Todo created");
-  },
-
+  
   errorMessage: function(jqXHR, textStatus, errorThrown) {
     self.error("Oops, %@.".fmt(jqXHR.responseText));
   },
@@ -56,7 +51,10 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         userRequest = jQuery.extend(userSettings, CONFIG.ajax);
 
     $.ajax(userRequest)
-      .success(self.didCreateTodo)
+      .success(function(data) {
+        Radium.store.load(Radium.Todo, data);
+        self.success("Todo created");
+      })
       .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
       });
@@ -71,8 +69,13 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             request = jQuery.extend(settings, CONFIG.ajax);
 
         $.ajax(request)
-          .success(self.didCreateTodo)
-          .error(self.errorMessage);
+          .success(function(data) {
+            Radium.store.load(Radium.Todo, data);
+            self.success("Todo created");
+          })
+          .error(function(jqXHR, textStatus, errorThrown) {
+            self.error("Oops, %@.".fmt(jqXHR.responseText));
+          });
       });
     }
   }

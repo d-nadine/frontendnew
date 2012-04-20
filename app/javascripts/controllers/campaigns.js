@@ -1,3 +1,3 @@
 Radium.campaignsController = Ember.ArrayProxy.create({
-  content: []  
+  content: Radium.store.findAll(Radium.Campaign)
 });

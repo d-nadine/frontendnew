@@ -16,7 +16,8 @@ Radium.FormManager = Ember.StateManager.create({
       manager.getPath('rootView.childViews').pushObject(form);
       manager.set('formName', context.form);
       manager.goToState('open');
-    }
+    },
+    closeForm: Ember.K()
   }),
 
   open: Ember.State.create({

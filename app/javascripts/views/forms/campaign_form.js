@@ -52,6 +52,7 @@
     
       $.ajax(request)
         .success(function(data) {
+          Radium.store.load(Radium.Campaign, data);
           self.success("Campaign created");
         })
         .error(function(jqXHR, textstate, errorThrown) {

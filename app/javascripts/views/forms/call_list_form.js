@@ -26,29 +26,32 @@
           finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
           user = this.$('#user').val(),
           campaign = this.$('#campaign').val(),
-          selectedContactIds = this.get('selectedContactIds').getEach('id'),
+          selectedContactIds = this.get('selectedContactIds'),
 
           data = {
             call_list: {
               description: description,
               finish_by: finishByValue,
-              entries: callListContactsIds,
+              entries: selectedContactIds,
               campaign: campaign
             }
           },
           settings = {
-            url: '/api/call_lists/',
-            type: 'PUT',
+            url: '/api/call_lists',
+            type: 'POST',
             data: JSON.stringify(data)
           },
           request = jQuery.extend(settings, CONFIG.ajax);
+          
+      // Disable the form buttons
+      this.sending();
 
       $.ajax(request)
         .success(function(data) {
-          console.log(data);
+          Radium.store.load(Radium.CallList, data);
           self.success("Call List created");
         })
-        error(function(jqXHR, textStatus, errorThrown) {
+        .error(function(jqXHR, textStatus, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));
         });
     }
