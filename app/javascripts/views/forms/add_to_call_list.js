@@ -22,7 +22,7 @@
       var settings = {
             url: '/api/call_lists/%@'.fmt(callListId),
             type: 'PUT',
-            data: data
+            data: JSON.stringify(data)
           },
           request = jQuery.extend(settings, CONFIG.ajax);
 

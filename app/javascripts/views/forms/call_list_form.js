@@ -32,7 +32,7 @@
           settings = {
             url: '/api/call_lists/',
             type: 'PUT',
-            data: data
+            data: JSON.stringify(data)
           },
           request = jQuery.extend(settings, CONFIG.ajax);
 

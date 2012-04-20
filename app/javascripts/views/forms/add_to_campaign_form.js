@@ -7,11 +7,11 @@ Radium.AddToCampaignForm = Radium.FormView.extend({
         settings = {
           url: '/api/campaigns/%@'.fmt(campaignId),
           type: 'PUT',
-          data: {
+          data: JSON.stringify({
             campaign: {
               contact_ids: contacts
             }
-          }
+          })
         },
         request = jQuery.extend(settings, CONFIG.ajax);
 

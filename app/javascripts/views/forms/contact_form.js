@@ -53,8 +53,8 @@ Radium.ContactForm = Radium.FormView.extend({
 
     var settings = {
           url: '/api/contacts',
-          data: data,
-          type: 'POST'
+          type: 'POST',
+          data: JSON.stringify(data)
         },
         request = jQuery.extend(settings, CONFIG.ajax);
 

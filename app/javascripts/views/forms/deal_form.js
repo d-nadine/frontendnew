@@ -25,7 +25,7 @@ Radium.DealForm = Radium.FormView.extend({
         settings = {
           url: '/api/deals',
           type: 'POST',
-          data: data
+          data: JSON.stringify(data)
         },
         request = jQuery.extend(settings, CONFIG.ajax);
 

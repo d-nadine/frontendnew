@@ -19,24 +19,39 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         finishByTime = this.$('#finish-by-time').val(),
         finishByMeridian = this.$('#finish-by-meridian').val(),
         finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
-        user = this.$('select#assigned-to').val(),
+        userId = this.$('select#assigned-to').val(),
         data = {
           todo: {
             description: description,
             finish_by: finishByValue,
-            user_id: user
+            user_id: userId
           }
         };
 
     // Disable the form buttons
     this.sending();
     
+    var userSettings = {
+          url: '/api/users/%@/todos'.fmt(userId),
+          type: 'POST',
+          data: JSON.stringify(data)
+        },
+        userRequest = jQuery.extend(userSettings, CONFIG.ajax);
+
+    // $.ajax(userRequest)
+    //   .success(function(data) {
+    //     self.success("Todo created");
+    //   })
+    //   .error(function(jqXHR, textStatus, errorThrown) {
+    //     self.error("Oops, %@.".fmt(jqXHR.responseText));
+    //   });
+
     if (contactIds.length) {
       contactIds.forEach(function(id) {
         var settings = {
               url: '/api/contacts/%@/todos'.fmt(id),
               type: 'POST',
-              data: data
+              data: JSON.stringify(data)
             },
             request = jQuery.extend(settings, CONFIG.ajax);
 
@@ -48,8 +63,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             self.error("Oops, %@.".fmt(jqXHR.responseText));
           });
       });
-    } else {
-      self.error("A contact is required.");
     }
   }
 });

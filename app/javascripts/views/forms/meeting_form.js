@@ -25,7 +25,7 @@ Radium.MeetingForm = Radium.FormView.extend({
         settings = {
           url: '/meetings',
           type: 'POST',
-          data: data
+          data: JSON.stringify(data)
         },
         request = jQuery.extend(settings, CONFIG.ajax);
         
