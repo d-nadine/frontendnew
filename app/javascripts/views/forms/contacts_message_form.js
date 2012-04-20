@@ -12,21 +12,23 @@ Radium.ContactsMessageForm = Radium.FormView.extend({
             subject: subject,
             message: message
           }
-        };
+        },
+        settings = {
+          url: '/api/emails',
+          type: 'POST',
+          data: data
+        },
+        request = jQuery.extend(settings, CONFIG.ajax);
 
     // Disable the form buttons
     this.sending();
 
-    $.ajax({
-      url: '/api/emails',
-      type: 'POST',
-      data: data,
-      success: function() {
+    $.ajax(request)
+      .success(function() {
         self.success("Message sent");
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      })
+      .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
-      }
-    })
+      });
   }
 });

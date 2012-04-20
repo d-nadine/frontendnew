@@ -85,9 +85,8 @@ Radium.App = Ember.StateManager.create({
   },
 
   bootstrapUser: function() {
-    return $.ajax({
-      url: '/api/account'
-    });
+    var request = jQuery.extend({url: '/api/account'}, CONFIG.ajax);
+    return $.ajax(request);
   },
 
   infiniteLoading: function(action) {

@@ -21,22 +21,25 @@ Radium.MeetingForm = Radium.FormView.extend({
             ends_at: endsAtValue,
             invite: invitees
           }
-        };
+        },
+        settings = {
+          url: '/meetings',
+          type: 'POST',
+          data: data
+        },
+        request = jQuery.extend(settings, CONFIG.ajax);
+        
     // Disable the form buttons
     this.sending();
     
     
-    $.ajax({
-      url: '/meetings',
-      type: 'POST',
-      data: data,
-      success: function(data) {
+    $.ajax(request)
+      .success(function(data) {
         self.success("Meeting created");
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      })
+      .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
-      }
-    });
+      });
   
   }
 });

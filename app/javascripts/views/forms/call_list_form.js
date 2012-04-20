@@ -28,19 +28,21 @@
               entries: callListContactsIds,
               campaign: campaign
             }
-          };
+          },
+          settings = {
+            url: '/api/call_lists/',
+            type: 'PUT',
+            data: data
+          },
+          request = jQuery.extend(settings, CONFIG.ajax);
 
-      $.ajax({
-        url: '/api/call_lists/',
-        type: 'PUT',
-        data: data,
-        success: function(data) {
+      $.ajax(request)
+        .success(function(data) {
           console.log(data);
           self.success("Call List created");
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+        })
+        error(function(jqXHR, textStatus, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));
-        }
-      });
+        });
     }
   });

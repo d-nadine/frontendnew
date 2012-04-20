@@ -21,23 +21,25 @@ Radium.DealForm = Radium.FormView.extend({
             contact_id: contact,
             state: state
           }
-        };
+        },
+        settings = {
+          url: '/api/deals',
+          type: 'POST',
+          data: data
+        },
+        request = jQuery.extend(settings, CONFIG.ajax);
 
     // Disable the form buttons
     this.sending();
     
   
-    $.ajax({
-      url: '/api/deals',
-      type: 'POST',
-      data: data,
-      success: function(data) {
+    $.ajax(request)
+      .success(function(data) {
         self.success("Deal created");
-      },
-      error: function(jqXHR, textstate, errorThrown) {
+      })
+      .error(function(jqXHR, textstate, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
-      }
-    });
+      });
   
   }
 });

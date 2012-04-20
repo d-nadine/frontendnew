@@ -32,17 +32,20 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     this.sending();
     
     contactIds.forEach(function(id) {
-      $.ajax({
-        url: '/api/contacts/%@/todos'.fmt(id),
-        type: 'POST',
-        data: data,
-        success: function(data) {
+      var settings = {
+            url: '/api/contacts/%@/todos'.fmt(id),
+            type: 'POST',
+            data: data
+          },
+          request = jQuery.extend(settings, CONFIG.ajax);
+
+      $.ajax(request)
+        .success(function(data) {
           self.success("Todo created");
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+        })
+        .error(function(jqXHR, textStatus, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));
-        }
-      });
+        });
     });
   }
 });

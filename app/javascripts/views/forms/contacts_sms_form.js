@@ -10,21 +10,23 @@ Radium.ContactSMSForm = Radium.FormView.extend({
             to: phoneNumbers,
             message: message
           }
-        };
+        },
+        settings = {
+          url: '/api/sms',
+          type: 'POST',
+          data: data
+        },
+        request = jQuery.extend(settings, CONFIG.ajax);
 
     // Disable the form buttons
     this.sending();
 
-    $.ajax({
-      url: '/api/sms',
-      type: 'POST',
-      data: data,
-      success: function() {
+    $.ajax(request)
+      .success(function() {
         self.success("SMS sent");
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      })
+      .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
-      }
-    })
+      });
   }
 });

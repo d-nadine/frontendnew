@@ -19,18 +19,20 @@
           };
       data.call_list.contact_ids.push(selectedContactIds);
 
-      $.ajax({
-        url: '/api/call_lists/%@'.fmt(callListId),
-        type: 'PUT',
-        data: data,
-        success: function(data) {
-          console.log(data);
+      var settings = {
+            url: '/api/call_lists/%@'.fmt(callListId),
+            type: 'PUT',
+            data: data
+          },
+          request = jQuery.extend(settings, CONFIG.ajax);
+
+      $.ajax(request)
+        .success(function(data) {
           console.log("Contact added to %@".fmt(callListName));
           self.success("Contact added to <b>%@</b>".fmt(callListName));
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+        })
+        .error(function(jqXHR, textStatus, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));
-        }
-      });
+        });
     }
   });

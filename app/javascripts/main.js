@@ -10,23 +10,13 @@ minispade.require('highcharts');
 minispade.require('crossfilter');
 minispade.require('bootstrap-tooltip');
 
-CONFIG.api = $.cookie('user_api_key');
-
-$.ajaxSetup({
-  dataType: 'json',
-  contentType: 'application/json',
-  headers: {
-    "X-Radium-User-API-Key": CONFIG.api,
-    "Accept": "application/json"
-  }
-});
-
+minispade.require('radium/core/config');
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
 minispade.require('radium/mixins/main');
 minispade.require('radium/helpers/main');
-minispade.require('radium/crossfilter/main')
-minispade.require('radium/models/main')
+minispade.require('radium/crossfilter/main');
+minispade.require('radium/models/main');
 minispade.require('radium/controllers/main');
 minispade.require('radium/views/main');
 minispade.require('radium/states/main');

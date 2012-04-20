@@ -32,23 +32,24 @@
               contact_ids: contactIds,
               currency: currency
             }
-          };
+          },
+          settings = {
+            url: '/api/campaigns',
+            type: 'POST',
+            data: data
+          },
+          request = jQuery.extend(settings, CONFIG.ajax);
 
       // Disable the form buttons
       this.sending();
-      
     
-      $.ajax({
-        url: '/api/campaigns',
-        type: 'POST',
-        data: data,
-        success: function(data) {
+      $.ajax(request)
+        .success(function(data) {
           self.success("Campaign created");
-        },
-        error: function(jqXHR, textstate, errorThrown) {
+        })
+        .error(function(jqXHR, textstate, errorThrown) {
           self.error("Oops, %@.".fmt(jqXHR.responseText));
-        }
-      });
+        });
     
     }
   });

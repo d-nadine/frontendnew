@@ -51,18 +51,21 @@ Radium.ContactForm = Radium.FormView.extend({
     // Disable the form buttons
     this.sending();
 
-    $.ajax({
-      url: '/api/contacts',
-      data: data,
-      type: 'POST',
-      success: function(data) {
+    var settings = {
+          url: '/api/contacts',
+          data: data,
+          type: 'POST'
+        },
+        request = jQuery.extend(settings, CONFIG.ajax);
+
+    $.ajax(request)
+      .success(function(data) {
         Radium.store.load(Radium.Contact, data);
         self.success("Contact created");
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      })
+      .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
-      }
-    })
+      });
 
   }
 });

@@ -68,11 +68,16 @@ Radium.DashboardPage = Ember.ViewState.extend({
         manager.goToState('loading');
       });
 
-      $.ajax({
-        url: '/api/users/%@/feed'.fmt(user),
-        type: 'GET',
-        data: {page: (page+1), before_date: today.toISO8601(), after_date: oneWeekAgo.toISO8601()},
-        success: function(data, status, xhr) {
+      var data = {
+            url: '/api/users/%@/feed'.fmt(user),
+            type: 'GET',
+            data: {page: (page+1), before_date: today.toISO8601(), after_date: oneWeekAgo.toISO8601()}
+          },
+          request = jQuery.extend(data, CONFIG.ajax);
+
+      $.ajax(request)
+      // TODO: Use `context: this` and move this into a function.
+        .success(function(data, status, xhr) {
           var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
               currentPage = xhr.getResponseHeader('x-radium-current-page');
 
@@ -93,15 +98,12 @@ Radium.DashboardPage = Ember.ViewState.extend({
           Ember.run.next(function() {
             manager.goToState('ready');
           }); 
-        },
-        error: function() {
+        })
+        .error(function() {
           $(window).off('scroll');
           manager.set('isEmptyFeed', true);
-          // Ember.run.next(function() {
-            manager.goToState('ready');
-          // });
-        }
-      });
+          manager.goToState('ready');
+        });
     } else {
       $(window).off('scroll');
     }
