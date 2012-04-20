@@ -4,12 +4,29 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   templateName: 'todo_form',
 
   findContactsField: Radium.AutocompleteTextField.extend({
+    sourceBinding: 'Radium.contactsController.contactNamesWithObject',
     select: function(event, ui) {
-      var contact = Radium.store.find(Radium.Contact, ui.item.value);
+      var contact = ui.item.contact;
       contact.set('isSelected', true);
-      this.$().val('');
+      this.set('value', null);
+      event.preventDefault();
     }
   }),
+
+  // Form actions
+  didCreateTodo: function(data) {
+    Radium.store.load(Radium.Todo, data);
+    self.success("Todo created");
+  },
+
+  errorMessage: function(jqXHR, textStatus, errorThrown) {
+    self.error("Oops, %@.".fmt(jqXHR.responseText));
+  },
+
+  close: function() {
+    Radium.contactsController.setEach('isSelected', false);
+    this._super();
+  },
 
   submitForm: function() {
     var self = this;
@@ -39,9 +56,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         userRequest = jQuery.extend(userSettings, CONFIG.ajax);
 
     $.ajax(userRequest)
-      .success(function(data) {
-        self.success("Todo created");
-      })
+      .success(self.didCreateTodo)
       .error(function(jqXHR, textStatus, errorThrown) {
         self.error("Oops, %@.".fmt(jqXHR.responseText));
       });
@@ -56,12 +71,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             request = jQuery.extend(settings, CONFIG.ajax);
 
         $.ajax(request)
-          .success(function(data) {
-            self.success("Todo created");
-          })
-          .error(function(jqXHR, textStatus, errorThrown) {
-            self.error("Oops, %@.".fmt(jqXHR.responseText));
-          });
+          .success(self.didCreateTodo)
+          .error(self.errorMessage);
       });
     }
   }

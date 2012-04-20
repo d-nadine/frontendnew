@@ -71,7 +71,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
       var data = {
             url: '/api/users/%@/feed'.fmt(user),
             type: 'GET',
-            data: {page: (page+1), before_date: today.toISO8601(), after_date: oneWeekAgo.toISO8601()}
+            data: {page: (page+1), before_date: today.toISO8601()}
           },
           request = jQuery.extend(data, CONFIG.ajax);
 

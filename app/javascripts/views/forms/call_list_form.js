@@ -3,12 +3,19 @@
     selectedContactIdsBinding: 'Radium.contactsController.selectedContactsIds',
 
     findContactsField: Radium.AutocompleteTextField.extend({
+      sourceBinding: 'Radium.contactsController.contactNamesWithObject',
       select: function(event, ui) {
-        var contact = Radium.store.find(Radium.Contact, ui.item.value);
+        var contact = ui.item.contact;
         contact.set('isSelected', true);
-        this.$().val('');
+        this.set('value', null);
+        event.preventDefault();
       }
     }),
+
+    close: function() {
+      Radium.contactsController.setEach('isSelected', false);
+      this._super();
+    },
 
     submitForm: function() {
       var self = this,

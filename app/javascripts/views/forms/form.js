@@ -9,6 +9,7 @@ Radium.FormView = Ember.View.extend({
     this.set('isSubmitting', true);
     this.$('input, select, textarea').prop('disabled', true);
   },
+  
   flash: function(type, message) {
     var $flashMessage = $('<div class="alert"/>')
                         .addClass('alert-' + type)
@@ -83,7 +84,9 @@ Radium.FormView = Ember.View.extend({
         minute: timeValues[1]
       }).toISO8601();
     } else {
-      return "";
+      var now = Ember.DateTime.create(),
+          defaultDate = now.advance({hour: 5});
+      return defaultDate.toISO8601();
     }
   }
 });
