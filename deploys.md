@@ -1,3 +1,4 @@
+* [2012-04-20 14:37 -0700] 603a671 - Joshua Jones: Remove a stray debugger.
 * [2012-04-20 14:09 -0700] 35fc325 - Joshua Jones: Fix bugs with create forms.
 * [2012-04-20 09:48 -0700] 4da285c - Joshua Jones: Don't bully user into having to pick contacts.
 * [2012-04-20 09:45 -0700] 0e033da - Joshua Jones: Move accepts back into headers setting.
