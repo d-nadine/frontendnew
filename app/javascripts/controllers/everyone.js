@@ -8,17 +8,13 @@ Radium.everyoneController = Ember.ArrayProxy.create({
   */
   everyonesEmail: function() {
     var allEmails = Ember.A([]);
+    debugger;
     this.get('users').forEach(function(item) {
-      item.get('emailAddresses').forEach(function(email) {
-        allEmails.pushObject(email.get('value'));
-      });
+      allEmails.pushObject(item.email);
     });
 
     this.get('contacts').forEach(function(item) {
-      item.get('emailAddresses').forEach(function(email) {
-        allEmails.pushObject(email.get('value'));
-      });
-      
+      allEmails.pushObject(item.email);
     });
     return allEmails;
   }.property('@each.name').cacheable(),

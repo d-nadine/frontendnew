@@ -35,6 +35,7 @@ Radium.MeetingForm = Radium.FormView.extend({
     
     $.ajax(request)
       .success(function(data) {
+        Radium.store.load(Radium.Meeting, data);
         self.success("Meeting created");
       })
       .error(function(jqXHR, textStatus, errorThrown) {
