@@ -32,19 +32,19 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     this.sending();
     
     var userSettings = {
-          url: '/api/users/%@/todos'.fmt(userId),
+          url: '/api/todos'.fmt(userId),
           type: 'POST',
           data: JSON.stringify(data)
         },
         userRequest = jQuery.extend(userSettings, CONFIG.ajax);
 
-    // $.ajax(userRequest)
-    //   .success(function(data) {
-    //     self.success("Todo created");
-    //   })
-    //   .error(function(jqXHR, textStatus, errorThrown) {
-    //     self.error("Oops, %@.".fmt(jqXHR.responseText));
-    //   });
+    $.ajax(userRequest)
+      .success(function(data) {
+        self.success("Todo created");
+      })
+      .error(function(jqXHR, textStatus, errorThrown) {
+        self.error("Oops, %@.".fmt(jqXHR.responseText));
+      });
 
     if (contactIds.length) {
       contactIds.forEach(function(id) {
