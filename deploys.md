@@ -1,3 +1,4 @@
+* [2012-04-20 09:48 -0700] 4da285c - Joshua Jones: Don't bully user into having to pick contacts.
 * [2012-04-20 09:45 -0700] 0e033da - Joshua Jones: Move accepts back into headers setting.
 * [2012-04-19 23:56 -0700] 766aaf5 - Joshua Jones: Throw error if todo form has no contact.
 * [2012-04-19 23:53 -0700] 1c8f1b9 - Joshua Jones: Refactor form AJAX requests.
