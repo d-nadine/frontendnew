@@ -1,3 +1,4 @@
+* [2012-04-19 23:56 -0700] 766aaf5 - Joshua Jones: Throw error if todo form has no contact.
 * [2012-04-19 23:53 -0700] 1c8f1b9 - Joshua Jones: Refactor form AJAX requests.
 * [2012-04-19 11:10 -0700] db9d187 - Joshua Jones: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-04-19 10:51 -0700] 5db4631 - twinturbo: [Deploy]
