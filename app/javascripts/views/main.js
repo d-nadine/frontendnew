@@ -60,6 +60,9 @@ minispade.require('radium/views/deals/deals');
 // Pipeline
 minispade.require('radium/views/pipeline/pipeline');
 
+// Todos
+minispade.require('radium/views/todos/todo');
+
 // Campaigns
 minispade.require('radium/views/campaigns/campaigns');
 minispade.require('radium/views/campaigns/campaign');

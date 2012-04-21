@@ -11,7 +11,9 @@ Radium.Todo = Radium.Core.extend({
   }),
   contacts: DS.hasMany('Radium.Contact'),
   comments: DS.hasMany('Radium.Comment'),
-  user: DS.hasOne('Radium.User'),
+  user: DS.hasOne('Radium.User', {
+    embedded: true
+  }),
 
   /**
     Checks to see if the Deal has passed it's close by date.

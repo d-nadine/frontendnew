@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="span2"><span class="timestamp">{{formatTime content.finishBy}}</span></div>
+  <div class="span7">
+    <p>
+      {{view checkboxView}}
+      <span class="label">{{content.kind}}</span>
+      <span class="content">{{content.description}}</span>
+      ({{content.user.abbrName}})
+      {{#if content.comments.length}}
+      <i class="icon-bubble"></i>
+      {{/if}}
+    </p>
+  </div>
+</div>
+{{#if content.comments.length}}
+<div class="row">
+  <div class="span10 offset2">
+    <ul class="comments unstyled">
+      <li>
+      <img src="headshots/IMG_9486-small_normal.jpeg">
+      <a class="name" href="#">David C.</a><br>
+      You know he's pretty pissed at you right?
+      <span class="time">5 hours ago</span>
+      </li>
+    </ul>
+  </div>
+</div>
+{{/if}}

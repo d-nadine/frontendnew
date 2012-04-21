@@ -80,3 +80,6 @@ minispade.require('radium/templates/pipeline/pipeline');
 // Campaigns
 minispade.require('radium/templates/campaigns/campaigns');
 minispade.require('radium/templates/campaigns/campaign');
+
+// Todos
+minispade.require('radium/templates/todos/todo');

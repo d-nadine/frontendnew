@@ -19,15 +19,16 @@ Radium.DashboardPage = Ember.ViewState.extend({
         Radium.feedByDayController,
         Radium.feedByActivityController
       ]);
-      if (!manager.get('isEmptyFeed')) {
-        $(window).on('scroll', function() {
-          Radium.App.infiniteLoading('loadFeed');
-        });
-      }
+
+      // if (!manager.get('isEmptyFeed')) {
+      //   $(window).on('scroll', function() {
+      //     Radium.App.infiniteLoading('loadFeed');
+      //   });
+      // }
       
-      Ember.run.next(function() {
-        manager.send('loadFeed');
-      });
+      // Ember.run.next(function() {
+      //   manager.send('loadFeed');
+      // });
     },
     exit: function(manager) {
       this._super(manager);
@@ -36,6 +37,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
   }),
 
   ready: Ember.State.create({}),
+
   loading: Radium.MiniLoader.create({
     enter: function() {
       this._super($(window).off());
@@ -76,7 +78,6 @@ Radium.DashboardPage = Ember.ViewState.extend({
           request = jQuery.extend(data, CONFIG.ajax);
 
       $.ajax(request)
-      // TODO: Use `context: this` and move this into a function.
         .success(function(data, status, xhr) {
           var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
               currentPage = xhr.getResponseHeader('x-radium-current-page');

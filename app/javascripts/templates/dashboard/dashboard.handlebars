@@ -29,7 +29,7 @@
     </div>
 
     {{#with Radium.feedByActivityController.coffeeCupSummary}}
-    <div class="stats row">
+    <div class="stats row" style="display:none">
       <div class="span2">
         <dl>
           <dt>Todos</dt>
@@ -92,19 +92,32 @@
 
     <div class="row">
       <div class="span9">
-        {{#with Radium.feedByDayController}}
-          {{#if loadedActivities.length}}
+        {{#with Radium.todosController}}
+          {{#each content}}
+            {{view Radium.TodoView contentBinding="this"}}
+          {{/each}}
+        {{/with}}
+      </div>
+    </div>
+
+    <div class="row" style="display:none">
+      <div class="span9">
+        <div class="page-header">
+          <h3>Notifications</h3>
+        </div>
+        {{!with Radium.feedByDayController}}
+          {{!if loadedActivities.length}}
             <div class="feed">
-            {{#each loadedActivities}}
-              {{view Radium.FeedListView contentBinding="this"}}
-            {{/each}}
+            {{!each loadedActivities}}
+              {{!view Radium.FeedListView contentBinding="this"}}
+            {{!each}}
             </table>
           {{else}}
             <div class="well">
               <h3 align="center">No activities yet.</h3>
             </div>
-          {{/if}}
-        {{/with}}
+          {{!if}}
+        {{!with}}
       </div>
     </div>
   </div>
