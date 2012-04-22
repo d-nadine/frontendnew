@@ -19,6 +19,13 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     attributeBindings: ['name'],
     name: 'description',
     classNames: ['span8'],
+    keyUp: function() {
+      if (this.$().val() !== '') {
+        this.setPath('parentView.isValid', true);
+        this.$().parent().removeClass('error');
+        this.$().next('span.help-inline').remove();
+      }
+    },
     focusOut: function() {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
@@ -59,17 +66,12 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     select: function(event, ui) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      console.log('select', event);
       var contact = ui.item.contact;
       contact.set('isSelected', true);
       this.set('value', null);
     }
   }),
   
-  errorMessage: function(jqXHR, textStatus, errorThrown) {
-    self.error("Oops, %@.".fmt(jqXHR.responseText));
-  },
-
   close: function() {
     Radium.contactsController.setEach('isSelected', false);
     this._super();
@@ -92,9 +94,13 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           }
         };
 
+    if (!userId) {
+      this.error("A user must be assigned to a todo.");
+      return false;
+    }
     // Disable the form buttons
     this.sending();
-    
+
     var userSettings = {
           url: '/api/todos'.fmt(userId),
           type: 'POST',

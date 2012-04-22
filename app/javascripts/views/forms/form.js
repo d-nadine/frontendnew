@@ -4,7 +4,7 @@ Radium.FormView = Ember.View.extend({
   hasNoOptions: true,
   isSubmitting: false,
   isValid: false,
-  // Actions and basic states
+  // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
     this.$('.more-options').addClass('hide');
     this.$().hide().slideDown('slow');
@@ -35,6 +35,7 @@ Radium.FormView = Ember.View.extend({
     this.$('input, select, textarea').prop('disabled', false);
     this.set('isSubmitting', false);
   },
+
   close: function() {
     this.$().slideUp('fast', function() {
       Radium.FormManager.send('closeForm');
@@ -44,8 +45,10 @@ Radium.FormView = Ember.View.extend({
   submit: function(event) {
     event.preventDefault();
     this.submitForm();
+    return false;
   },
 
+  // Show/hide the extra options when creating a todo.
   toggleOptions: function() {
     this.toggleProperty('hasNoOptions');
     return false;
@@ -75,11 +78,11 @@ Radium.FormView = Ember.View.extend({
     changeTextOnSubmit: function() {
       var cachedText = this.get('_buttonTextCache');
       if (this.get('isSubmitting') === true) {
-        this.$().text('Sending...');
+        this.$().html('<img src="/images/icons/inline-loading.gif" width="16" height="16"> Sending...');
       } else {
-        this.$().text(cachedText);
+        this.$().html(cachedText);
       }
-    }.observes('disabled'),
+    }.observes('isSubmitting'),
     // On init grab and cache the button's text from the Handlebars
     // template so that it can be reverted back if the form returns
     // an error after being disabled and reset as "Sending..."
