@@ -1,38 +1,45 @@
  <form class="well">
   <legend>Create a Campaign</legend>
-  <label for="name">Name</label>
-  <input type="text" name="campaign-name" id="campaign-name" class="span8" value="">
-
-  <label for="target">Target</label>
-  <input type="text" name="target" id="target" class="span8" value="">
-
-  <label for="ends-by">Ends by:</label>
-  {{view Radium.DatePickerField id="ends-by-date" name="ends-by-date" class="input-small"}}
-  <label for="time">Time:</label>
-  <input type="text" id="ends-by-time" name="ends-by-time" class="input-small" placeholder="eg 1:00">
-  <select id="ends-by-meridian" style="width: 60px;">
-    <option value="am">AM</option>
-    <option value="pm">PM</option>
-  </select>
-
-  <label for="currency">Currency:</label>
-  <select id="currency" name="currency">
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="CAD">CAD</option>
-  </select>
-
-  <label for="description">Description:</label>
-  <textarea name="description" id="description" class="span8"></textarea>
-
-  <label for="contacts">Add Contacts to Campaign</label>
-  {{#with Radium.contactsController}}
-    {{#if selectedContacts}}
-      {{selectedContactsNames}}
-    {{/if}}
-  {{/with}}
-  {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
-
+  </fieldset>
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="campaign-name" id="campaign-name" class="span8" value="">
+  </fieldset>
+  <fieldset>
+    <label for="target">Target</label>
+    <input type="text" name="target" id="target" class="span8" value="">
+  </fieldset>
+  <fieldset>
+    <label for="ends-by">Ends by:</label>
+    {{view Radium.DatePickerField id="ends-by-date" name="ends-by-date" class="input-small"}}
+    <label for="time">Time:</label>
+    <input type="text" id="ends-by-time" name="ends-by-time" class="input-small" placeholder="eg 1:00">
+    <select id="ends-by-meridian" style="width: 60px;">
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="currency">Currency:</label>
+    <select id="currency" name="currency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="CAD">CAD</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description" class="span8"></textarea>
+  </fieldset>
+  <fieldset>
+    <label for="contacts">Add Contacts to Campaign</label>
+    {{#with Radium.contactsController}}
+      {{#if selectedContacts}}
+        {{selectedContactsNames}}
+      {{/if}}
+    {{/with}}
+    {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
+  </fieldset>
   <div class="form-actions">
     {{#view submitButton class="btn btn-primary"}}Save{{/view}}
     {{#view cancelFormButton class="btn"}}Cancel{{/view}}

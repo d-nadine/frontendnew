@@ -1,48 +1,53 @@
 <form data-type="call_list" class="well">
   <legend>Add to Call List</legend>
-  
-  <label for="description">Description</label>
-  <textarea name="description" id="description" class="span8"></textarea>
-
-  <label for="date">Date:</label>
-  {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
-  <label for="time">Time:</label>
-  <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
-  <select id="finish-by-meridian" style="width: 60px;">
-    <option value="am">AM</option>
-    <option value="pm">PM</option>
-  </select>
-
-  <label for="assigned-to">Assigned To</label>
-  <select name="assigned-to" id="assigned-to">
-    <option value="">Assigned To</option>
-    {{#each Radium.usersController}}
-    <option {{bindAttr value="id"}}>{{abbrName}}</option>
-    {{/each}}
-  </select>
-
-  <label for="campaign">Campaign</label>
-  <select name="campaign" id="campaign">
-    <option value="">Select a campaign</option>
-    {{#each Radium.campaignsController}}
-    <option {{bindAttr value="id"}}>{{name}}</option>
-    {{/each}}
-  </select>
-
-  <label for="contacts">Entries</label>
-  {{#with Radium.contactsController}}
-    {{#if selectedContacts}}
-      {{selectedContactsNames}}
-    {{/if}}
-  {{/with}}
-  
-  {{view findContactsField id="entries" name="entries" class="input-xlarge"}}
-
-  {{view Radium.FormCheckbox 
-      title="Add Reminder" 
-      valueBinding="wantsReminder"
-  }}
-
+  <fieldset>
+    <label for="description">Description</label>
+    <textarea name="description" id="description" class="span8"></textarea>
+  </fieldset>
+  <fieldset>
+    <label for="date">Date:</label>
+    {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
+    <label for="time">Time:</label>
+    <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
+    <select id="finish-by-meridian" style="width: 60px;">
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="assigned-to">Assigned To</label>
+    <select name="assigned-to" id="assigned-to">
+      <option value="">Assigned To</option>
+      {{#each Radium.usersController}}
+      <option {{bindAttr value="id"}}>{{abbrName}}</option>
+      {{/each}}
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="campaign">Campaign</label>
+    <select name="campaign" id="campaign">
+      <option value="">Select a campaign</option>
+      {{#each Radium.campaignsController}}
+      <option {{bindAttr value="id"}}>{{name}}</option>
+      {{/each}}
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="contacts">Entries</label>
+    {{#with Radium.contactsController}}
+      {{#if selectedContacts}}
+        {{selectedContactsNames}}
+      {{/if}}
+    {{/with}}
+    
+    {{view findContactsField id="entries" name="entries" class="input-xlarge"}}
+  </fieldset>
+  <fieldset>
+    {{view Radium.FormCheckbox 
+        title="Add Reminder" 
+        valueBinding="wantsReminder"
+    }}
+  </fieldset>
   <div id="reminder-holder"></div>
 
   <div class="form-actions">

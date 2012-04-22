@@ -1,36 +1,42 @@
 <form class="well">
   <legend>Add a Todo</legend>
-  <label for="description">Task</label>
-  <textarea name="description" id="description" class="span8"></textarea>
-  <label for="date">Date:</label>
-  {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
-  <label for="time">Time:</label>
-  <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
-  <select id="finish-by-meridian" style="width: 60px;">
-    <option value="am">AM</option>
-    <option value="pm">PM</option>
-  </select>
-  <label for="assigned-to">Assigned To</label>
-  <select id="assigned-to" name="assigned-to">
-    <option value="">Unnassigned</option>
-    {{#each Radium.usersController}}
-    <option {{bindAttr value="id"}}>{{abbrName}}</option>
-    {{/each}}
-  </select>
-  <label for="contacts">Contacts</label>
-  {{#with Radium.contactsController}}
-    {{#if selectedContacts}}
-      {{selectedContactsNames}}
-    {{/if}}
-  {{/with}}
+  <fieldset>
+    <label for="description">Task</label>
+    <textarea name="description" id="description" class="span8"></textarea>
+  </fieldset>
+  <fieldset>
+    <label for="date">Date:</label>
+    {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
+    <label for="time">Time:</label>
+    <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
+    <select id="finish-by-meridian" style="width: 60px;">
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="assigned-to">Assigned To</label>
+    <select id="assigned-to" name="assigned-to">
+      <option value="">Unnassigned</option>
+      {{#each Radium.usersController}}
+      <option {{bindAttr value="id"}}>{{abbrName}}</option>
+      {{/each}}
+    </select>
+    <label for="contacts">Contacts</label>
+    {{#with Radium.contactsController}}
+      {{#if selectedContacts}}
+        {{selectedContactsNames}}
+      {{/if}}
+    {{/with}}
   
-  {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
-
-  {{view Radium.FormCheckbox 
-      title="Add Reminder" 
-      valueBinding="wantsReminder"
-  }}
-
+    {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
+  </fieldset>
+  <fieldset>
+    {{view Radium.FormCheckbox 
+        title="Add Reminder" 
+        valueBinding="wantsReminder"
+    }}
+  </fieldset>
   <div id="reminder-holder"></div>
 
   <div class="form-actions">

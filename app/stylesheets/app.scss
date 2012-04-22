@@ -125,6 +125,13 @@ body {
 
 #form-container {
   margin: 20px 0;
+  width: 100%;
+}
+
+.create-form {
+  width: 700px;
+  float: left;
+  overflow: hidden;
 }
 
 fieldset legend {

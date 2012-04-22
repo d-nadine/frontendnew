@@ -1,32 +1,36 @@
 <form class="well">
   <legend>Create a Meeting</legend>
-  <label for="topic">Topic</label>
-  <input type="text" name="topic" id="topic" class="span8" value="">
-
-  <label for="date">Date</label>
-  {{view Radium.DatePickerField id="start-date" name="start-date" class="input-small"}}
-
-  <label for="time">Starts at</label>
-  <input type="text" id="start-time" name="start-time" class="input-small" placeholder="eg 1:00"> 
-  <select id="start-time-meridian" style="width: 60px;">
-    <option value="am">AM</option>
-    <option value="pm">PM</option>
-  </select>
-
-  <label for="meeting-duration">Ends at</label>
-  <input type="text" id="end-time" name="end-time" class="input-small" placeholder="eg 1:00">
-  <select id="end-time-meridian" style="width: 60px;">
-    <option value="am">AM</option>
-    <option value="pm">PM</option>
-  </select>
-
-  <label for="customer">Invite</label>
-  {{view Radium.AutocompleteTextField 
-    id="customer" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.everyonesEmail"
-  }}
-  <input type="hidden" id="invitees" name="contact" value="">
-
+  <fieldset>
+    <label for="topic">Topic</label>
+    <input type="text" name="topic" id="topic" class="span8" value="">
+  </fieldset>
+  <fieldset>
+    <label for="date">Date</label>
+    {{view Radium.DatePickerField id="start-date" name="start-date" class="input-small"}}
+    <label for="time">Starts at</label>
+    <input type="text" id="start-time" name="start-time" class="input-small" placeholder="eg 1:00"> 
+    <select id="start-time-meridian" style="width: 60px;">
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="meeting-duration">Ends at</label>
+    <input type="text" id="end-time" name="end-time" class="input-small" placeholder="eg 1:00">
+    <select id="end-time-meridian" style="width: 60px;">
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <label for="customer">Invite</label>
+    {{view Radium.AutocompleteTextField 
+      id="customer" class="input-xlarge"
+      sourceBinding="Radium.everyoneController.everyonesEmail"
+    }}
+    <input type="hidden" id="invitees" name="contact" value="">
+  </fieldset>
+  <fieldset>
   <div class="form-actions">
     {{#view submitButton class="btn btn-primary"}}Save{{/view}}
     {{#view cancelFormButton class="btn"}}Cancel{{/view}}

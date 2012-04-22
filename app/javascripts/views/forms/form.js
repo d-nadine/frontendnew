@@ -1,8 +1,10 @@
 Radium.FormView = Ember.View.extend({
+  classNames: ['create-form'],
   isSubmitting: false,
   // Actions and basic states
   didInsertElement: function() {
     this.$().hide().slideDown('slow');
+    this.$('fieldset:first').find('input:text, textarea').focus();
   },
 
   sending: function() {
