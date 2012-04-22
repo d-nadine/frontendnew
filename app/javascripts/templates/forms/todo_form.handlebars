@@ -1,27 +1,29 @@
-<form class="well">
-  <legend>Add a Todo</legend>
-  <fieldset>
-    <label for="description">Task</label>
-    <textarea name="description" id="description" class="span8"></textarea>
+<legend>Add a Todo for {{headerDate}}</legend>
+<fieldset class="control-group">
+  <label for="description">Task</label>
+  {{view description}}
+</fieldset>
+<fieldset class="control-group">
+  <label for="assigned-to">Assigned To</label>
+  <select id="assigned-to" name="assigned-to">
+    <option value="">Unnassigned</option>
+    {{#each Radium.usersController}}
+      {{#if isLoggedIn}}
+        <option {{bindAttr value="id"}} selected>{{unbound abbrName}}</option>
+      {{else}}
+        <option {{bindAttr value="id"}}>{{unbound abbrName}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
+  <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
+</fieldset>
+
+<div class="more-options" {{bindAttr class="hasNoOptions:hide"}}>
+  <fieldset class="control-group">
+    <label for="date">Finish By:</label>
+    {{view finishByDateField}}
   </fieldset>
-  <fieldset>
-    <label for="date">Date:</label>
-    {{view Radium.DatePickerField id="finish-by-date" name="finish-by-date" class="input-small"}}
-    <label for="time">Time:</label>
-    <input type="text" id="finish-by-time" name="finish-by-time" class="input-small" placeholder="eg 1:00">
-    <select id="finish-by-meridian" style="width: 60px;">
-      <option value="am">AM</option>
-      <option value="pm">PM</option>
-    </select>
-  </fieldset>
-  <fieldset>
-    <label for="assigned-to">Assigned To</label>
-    <select id="assigned-to" name="assigned-to">
-      <option value="">Unnassigned</option>
-      {{#each Radium.usersController}}
-      <option {{bindAttr value="id"}}>{{abbrName}}</option>
-      {{/each}}
-    </select>
+  <fieldset class="control-group">
     <label for="contacts">Contacts</label>
     {{#with Radium.contactsController}}
       {{#if selectedContacts}}
@@ -31,16 +33,9 @@
   
     {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
   </fieldset>
-  <fieldset>
-    {{view Radium.FormCheckbox 
-        title="Add Reminder" 
-        valueBinding="wantsReminder"
-    }}
-  </fieldset>
-  <div id="reminder-holder"></div>
-
-  <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
-    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
-  </div>
-</form>
+  {{view reminderForm}}
+</div>
+<div class="form-actions">
+  {{#view submitButton class="btn btn-primary"}}Create Todo{{/view}}
+  {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+</div>

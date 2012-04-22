@@ -1169,7 +1169,6 @@ Ember.DateTime.reopenClass(Ember.Comparable,
 */
 Ember.Binding.dateTime = function(format) {
   return this.transform(function(value, binding) {
-    console.log('!', value, binding, format);
     return value ? value.toFormattedString(format) : null;
   });
 };

@@ -1,8 +1,12 @@
 Radium.FormView = Ember.View.extend({
-  classNames: ['create-form'],
+  tagName: 'form',
+  classNames: ['well'],
+  hasNoOptions: true,
   isSubmitting: false,
+  isValid: false,
   // Actions and basic states
   didInsertElement: function() {
+    this.$('.more-options').addClass('hide');
     this.$().hide().slideDown('slow');
     this.$('fieldset:first').find('input:text, textarea').focus();
   },
@@ -36,12 +40,38 @@ Radium.FormView = Ember.View.extend({
       Radium.FormManager.send('closeForm');
     });
   },
+
+  submit: function(event) {
+    event.preventDefault();
+    this.submitForm();
+  },
+
+  toggleOptions: function() {
+    this.toggleProperty('hasNoOptions');
+    return false;
+  },
+
+  toggleOptionsText: function() {
+    return (this.get('hasNoOptions')) ? 'More options' : 'Less options';
+  }.property('hasNoOptions').cacheable(),
+
+  moreOptions: Ember.View.extend({
+    isVisibleBinding: 'parentView.hasMoreOptions'
+  }),
+
   submitButton: Ember.Button.extend({
     _buttonTextCache: null,
-    target: 'parentView',
-    action: 'submitForm',
+    // target: 'parentView',
+    // action: 'submitForm',
+    attributeBindings: ['type'],
+    type: 'submit',
     isSubmittingBinding: 'parentView.isSubmitting',
-    disabledBinding: 'isSubmitting',
+    isValid: 'parentView.isValid',
+    disabled: function() {
+      var isSubmitting = this.getPath('parentView.isSubmitting'),
+          isValid = this.getPath('parentView.isValid');
+      return (isSubmitting || isValid) ? false : true;
+    }.property('parentView.isSubmitting', 'parentView.isValid').cacheable(),
     changeTextOnSubmit: function() {
       var cachedText = this.get('_buttonTextCache');
       if (this.get('isSubmitting') === true) {
@@ -70,24 +100,20 @@ Radium.FormView = Ember.View.extend({
     @param {String} time A 24-hr time string in hours and minutes, eg HH-MM
     @return {String} ISO8601 formated date string, or an empty string
   */
-  timeFormatter: function(date, time, meridian) {
+  timeFormatter: function(date) {
     if (arguments.length) {
-      var dateValues = date.split('-'),
-          timeValues = time.split(':'),
-          convertedHour = (meridian === 'pm') ? 
-                          parseInt(timeValues[0]) + 12 : timeValues[0],
-          hour = (convertedHour === 24) ? 00 : convertedHour;
+      var dateValues = date.split('-');
 
       return Ember.DateTime.create({
         year: dateValues[0],
         month: dateValues[1],
         day: dateValues[2],
-        hour: hour,
-        minute: timeValues[1]
+        hour: 17,
+        minute: 0
       }).toISO8601();
     } else {
-      var now = Ember.DateTime.create(),
-          defaultDate = now.advance({hour: 5});
+      var now = Radium.appController.get('today'),
+          defaultDate = now.advance({hour: 17});
       return defaultDate.toISO8601();
     }
   }

@@ -3,7 +3,8 @@ Radium.DatePickerField = Ember.TextField.extend({
   attributeBindings: ['name'],
   willInsertElement: function() {
     this.$().datepicker({
-      dateFormat: 'yy-mm-dd'
+      dateFormat: 'yy-mm-dd',
+      minDate: this.get('minDate')
     });
   },
   willDestroyElement: function() {
