@@ -60,6 +60,10 @@ Radium.InlineDatePicker = Ember.View.extend({
       if (this.get('_cachedValue') !== this.get('value')) {
         Radium.store.commit();
       }
+    },
+    focusOut: function() {
+      this._super();
+      this.setPath('parentView.isEditing', false);
     }
   })
 });
