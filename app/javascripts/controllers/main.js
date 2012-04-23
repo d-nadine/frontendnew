@@ -12,6 +12,7 @@ minispade.require('radium/controllers/everyone');
 minispade.require('radium/controllers/call_lists');
 minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/deals');
+minispade.require('radium/controllers/inline_comments');
 minispade.require('radium/controllers/dashboard/feed_by_kind');
 minispade.require('radium/controllers/dashboard/feed_by_user');
 minispade.require('radium/controllers/dashboard/feed_by_contact');

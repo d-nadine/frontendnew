@@ -40,6 +40,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),
 
   assignToSelect: Ember.Select.extend({
+    elementId: 'assigned-to',
     contentBinding: 'Radium.usersController',
     optionLabelPath: 'content.abbrName',
     optionValuePath: 'content.id',

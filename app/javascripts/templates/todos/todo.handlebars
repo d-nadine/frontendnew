@@ -6,24 +6,11 @@
       <span class="label">{{content.kind}}</span>
       <span class="content">{{content.description}}</span>
       ({{content.user.abbrName}})
-      <i class="icon-comment"></i>
+      <i class="icon-comment" {{action "toggleComments"}}></i>
       {{#if content.comments.length}}
         ({{content.comments.length}})
       {{/if}}
     </p>
   </div>
 </div>
-{{#if content.comments.length}}
-<div class="row">
-  <div class="span10 offset2">
-    <ul class="comments unstyled">
-      <li>
-      <img src="headshots/IMG_9486-small_normal.jpeg">
-      <a class="name" href="#">David C.</a><br>
-      You know he's pretty pissed at you right?
-      <span class="time">5 hours ago</span>
-      </li>
-    </ul>
-  </div>
-</div>
-{{/if}}
+{{view Radium.InlineCommentsView}}

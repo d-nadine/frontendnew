@@ -25,7 +25,6 @@ Radium.DashboardPage = Ember.ViewState.extend({
       todos.addObserver('isLoaded', function() {
         var loadedTodos = Radium.store.findAll(Radium.Todo);
         loadedTodos.forEach(function(todo) {
-          console.log('add', todo);
           Radium.todosController.add(todo);
         });
       });

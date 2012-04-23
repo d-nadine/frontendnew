@@ -1,0 +1,17 @@
+<div class="row comments">
+  <div class="span10 offset2">
+    {{#if content.length}}
+    <ul class="comments unstyled">
+      {{#each content}}
+      <li>
+        <img src="http://placehold.it/80x80">
+        <a class="name" href="#">{{user.abbrName}}</a><br>
+        {{text}}
+        <span class="time">{{formatDate updatedAt}}</span>
+      </li>
+      {{/each}}
+    </ul>
+    {{/if}}
+    <textarea>Add comment</textarea>
+  </div>
+</div>
