@@ -5,16 +5,7 @@
 </fieldset>
 <fieldset class="control-group">
   <label for="assigned-to">Assigned To</label>
-  <select id="assigned-to" name="assigned-to">
-    <option value="">Unnassigned</option>
-    {{#each Radium.usersController}}
-      {{#if isLoggedIn}}
-        <option {{bindAttr value="id"}} selected>{{unbound abbrName}}</option>
-      {{else}}
-        <option {{bindAttr value="id"}}>{{unbound abbrName}}</option>
-      {{/if}}
-    {{/each}}
-  </select>
+  {{view assignToSelect}}
   <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
 </fieldset>
 

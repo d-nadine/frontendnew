@@ -39,6 +39,16 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }
   }),
 
+  assignToSelect: Ember.Select.extend({
+    contentBinding: 'Radium.usersController',
+    optionLabelPath: 'content.abbrName',
+    optionValuePath: 'content.id',
+    didInsertElement: function() {
+      var user = this.get('content').filterProperty('isLoggedIn', true)[0];
+      this.set('selection', user);
+    }
+  }),  
+
   finishByDateField: Radium.DatePickerField.extend({
      elementId: 'finish-by-date',
      name: 'finish-by-date',
