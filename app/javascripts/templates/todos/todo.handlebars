@@ -6,8 +6,9 @@
       <span class="label">{{content.kind}}</span>
       <span class="content">{{content.description}}</span>
       ({{content.user.abbrName}})
-      {{#if content.comments.length}}
       <i class="icon-bubble"></i>
+      {{#if content.comments.length}}
+        ({{content.comments.length}})
       {{/if}}
     </p>
   </div>
