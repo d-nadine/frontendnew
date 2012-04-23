@@ -326,3 +326,13 @@ ul.comments {
     margin-right: 5px;
   }
 }
+
+.todo {
+  .content,
+  .timestamp {
+    cursor: pointer;
+    &:hover {
+      background-color: #FCF8E3;
+    }
+  }
+}
