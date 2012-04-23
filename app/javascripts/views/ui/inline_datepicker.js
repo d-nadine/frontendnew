@@ -22,7 +22,6 @@ Radium.InlineDatePicker = Ember.View.extend({
   },
   inlineDatePicker: Ember.TextField.extend({
     classNames: ['input-small'],
-    minDate: new Date(),
     valueBinding: Ember.Binding.transform({
     to: function(value, binding) {
       var date = Ember.DateTime.create(new Date(value));
@@ -47,7 +46,9 @@ Radium.InlineDatePicker = Ember.View.extend({
       this.set('_cachedValue', this.get('value'));
       this.$().datepicker({
         dateFormat: 'yy-mm-dd',
-        minDate: this.get('minDate')
+        minDate: new Date(),
+        defaultDate: +1,
+        gotoCurrent: true
       }).focus();
     },
     willDestroyElement: function() {
