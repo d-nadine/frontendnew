@@ -1,3 +1,4 @@
+* [2012-04-23 14:18 -0700] 6d60eb0 - Joshua Jones: Stop focusOut in inline datepicker from nullifying input change.
 * [2012-04-23 13:19 -0700] 8f96aa9 - Joshua Jones: Fixed todo comment button conflict.
 * [2012-04-22 17:39 -0700] 69a4c2e - Joshua Jones: Remove unused sections, form submitting indicator.
 * [2012-04-20 14:37 -0700] 603a671 - Joshua Jones: Remove a stray debugger.
