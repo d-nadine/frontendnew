@@ -18,7 +18,7 @@ DS.Model.reopen({
     },
 
     foreignKey: function(key) {
-      return key;
+      return key.toLowerCase()+"_id";
     }
   }
 });

@@ -38,6 +38,21 @@ body {
   background-position: right 0px;
 }
 
+.icon-inline-loading {
+  width: 16px;
+  height: 16px;
+  background-position: 0 0;
+  background-image: url('/images/icons/inline-loading.gif');
+}
+
+.btn-primary {
+  i {display: none;}
+  &.is-submitting i {
+      display: inline-block;
+      margin-right: 5px;
+    }
+}
+
 .nav-tabs.nav-stacked > li:first-of-type > a {
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;

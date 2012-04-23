@@ -64,6 +64,7 @@ Radium.InlineDatePicker = Ember.View.extend({
     focusOut: function() {
       this._super();
       this.setPath('parentView.isEditing', false);
+      this.$().datepicker('hide');
     }
   })
 });

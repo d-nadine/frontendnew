@@ -69,7 +69,9 @@ Radium.FormView = Ember.View.extend({
     attributeBindings: ['type'],
     type: 'submit',
     isSubmittingBinding: 'parentView.isSubmitting',
+    classNameBindings: ['isSubmitting'],
     isValid: 'parentView.isValid',
+    template: Ember.Handlebars.compile('<i class="icon-inline-loading"></i> <span>Create Todo</span>'),
     disabled: function() {
       var isSubmitting = this.getPath('parentView.isSubmitting'),
           isValid = this.getPath('parentView.isValid');
@@ -78,16 +80,16 @@ Radium.FormView = Ember.View.extend({
     changeTextOnSubmit: function() {
       var cachedText = this.get('_buttonTextCache');
       if (this.get('isSubmitting') === true) {
-        this.$().html('<img src="/images/icons/inline-loading.gif" width="16" height="16"> Sending...');
+        this.$('span').text('Sending...');
       } else {
-        this.$().html(cachedText);
+        this.$('span').text(cachedText);
       }
     }.observes('isSubmitting'),
     // On init grab and cache the button's text from the Handlebars
     // template so that it can be reverted back if the form returns
     // an error after being disabled and reset as "Sending..."
     didInsertElement: function() {
-      var text = this.$().text();
+      var text = this.$('span').text();
       this.set('_buttonTextCache', text);
     }
   }),

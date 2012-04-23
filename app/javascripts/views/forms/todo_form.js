@@ -103,6 +103,11 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             finish_by: finishByValue,
             user_id: userId
           }
+        },
+        testData = {
+          description: description,
+          finishBy: finishByValue,
+          user_id: userId
         };
 
     if (!userId) {
@@ -112,6 +117,26 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     // Disable the form buttons
     this.sending();
 
+    Radium.Todo.reopenClass({
+      url: 'todos',
+      root: 'todo'
+    });
+
+    var todo = Radium.store.createRecord(Radium.Todo, testData);
+    Radium.todosController.add(todo);
+    Radium.store.commit();
+
+    todo.addObserver('isLoaded', function() {
+      if (this.get('isLoaded')) {
+        self.success("Todo created");
+      }
+    });
+    todo.addObserver('isError', function() {
+      if (this.get('isError')) {
+        self.error("Look like something broke. Report it so we can fix it");
+      }
+    });
+
     var userSettings = {
           url: '/api/todos'.fmt(userId),
           type: 'POST',
@@ -119,15 +144,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         },
         userRequest = jQuery.extend(userSettings, CONFIG.ajax);
 
-    $.ajax(userRequest)
-      .success(function(data) {
-        var todo = Radium.store.createRecord(Radium.Todo, data);
-        Radium.todosController.add(todo);
-        self.success("Todo created");
-      })
-      .error(function(jqXHR, textStatus, errorThrown) {
-        self.error("Oops, %@.".fmt(jqXHR.responseText));
-      });
+    // $.ajax(userRequest)
+    //   .success(function(data) {
+    //     var todo = Radium.store.createRecord(Radium.Todo, data);
+    //     Radium.todosController.add(todo);
+    //     self.success("Todo created");
+    //   })
+    //   .error(function(jqXHR, textStatus, errorThrown) {
+    //     self.error("Look like something broke. Report it so we can fix it");
+    //   });
 
     if (contactIds.length) {
       contactIds.forEach(function(id) {
@@ -144,7 +169,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             self.success("Todo created");
           })
           .error(function(jqXHR, textStatus, errorThrown) {
-            self.error("Oops, %@.".fmt(jqXHR.responseText));
+            self.error("Look like something broke. Report it so we can fix it");
           });
       });
     }

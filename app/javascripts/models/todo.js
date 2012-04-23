@@ -17,6 +17,7 @@ Radium.Todo = Radium.Core.extend({
   user: DS.hasOne('Radium.User', {
     embedded: true
   }),
+  user_id: DS.attr('number'),
 
   /**
     Checks to see if the Deal has passed it's close by date.
