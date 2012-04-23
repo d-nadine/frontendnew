@@ -20,6 +20,15 @@ Radium.DashboardPage = Ember.ViewState.extend({
         Radium.feedByActivityController
       ]);
 
+      var todos = Radium.store.find(Radium.Todo, {page:1});
+
+      todos.addObserver('isLoaded', function() {
+        var loadedTodos = Radium.store.findAll(Radium.Todo);
+        loadedTodos.forEach(function(todo) {
+          Radium.todosController.add(todo);
+        });
+      });
+
       // if (!manager.get('isEmptyFeed')) {
       //   $(window).on('scroll', function() {
       //     Radium.App.infiniteLoading('loadFeed');

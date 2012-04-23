@@ -4,6 +4,9 @@ Radium.Todo = Radium.Core.extend({
   finishBy: DS.attr('date', {
     key: 'finish_by'
   }),
+  sortValue: function() {
+    return new Date(this.get('finishBy')).getTime();
+  }.property('finishBy').cacheable(),
   finished: DS.attr('boolean'),
   campaign: DS.hasOne('Radium.Campaign'),
   callList: DS.hasOne('Radium.CallList', {
@@ -14,6 +17,7 @@ Radium.Todo = Radium.Core.extend({
   user: DS.hasOne('Radium.User', {
     embedded: true
   }),
+  user_id: DS.attr('number'),
 
   /**
     Checks to see if the Deal has passed it's close by date.

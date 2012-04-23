@@ -83,6 +83,25 @@ DS.attr.transforms.inviteState = {
   }
 };
 
+DS.attr.transforms.dateTime = {
+  from: function(serialized) {
+    var type = typeof serialized;
+
+    if (type === "string" || type === "number") {
+      return Ember.DateTime.create(new Date(serialized));
+    } else if (serialized === null || serialized === undefined) {
+      // if the value is not present in the data,
+      // return undefined, not null.
+      return serialized;
+    } else {
+      return null;
+    }
+  },
+  to: function(date) {
+    return date.toISO8601();
+  }
+};
+
 // Overwrite Ember Data's date to keep date's ISO8601 formatted.
 DS.attr.transforms.date.to = function(date) {
   var type = typeof date;

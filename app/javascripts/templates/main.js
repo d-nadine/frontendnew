@@ -11,6 +11,7 @@ minispade.require('radium/templates/global/topbar');
 minispade.require('radium/templates/feed/cluster');
 minispade.require('radium/templates/feed/date_filters');
 minispade.require('radium/templates/feed/type_filters');
+minispade.require('radium/templates/feed/inline_comments');
 
 minispade.require('radium/templates/dashboard/feed/todo_created');
 minispade.require('radium/templates/dashboard/feed/todo_assigned');
@@ -83,3 +84,8 @@ minispade.require('radium/templates/campaigns/campaign');
 
 // Todos
 minispade.require('radium/templates/todos/todo');
+
+minispade.require('radium/templates/ui/inline_textarea');
+minispade.require('radium/templates/ui/inline_textfield');
+minispade.require('radium/templates/ui/inline_select');
+minispade.require('radium/templates/ui/inline_datepicker');

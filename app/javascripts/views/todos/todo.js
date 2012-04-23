@@ -10,5 +10,13 @@ Radium.TodoView = Ember.View.extend({
     click: function() {
       Radium.store.commit();
     }
-  })
+  }),
+
+  commentsView: null,
+
+  isCommentsVisible: false,
+  // Comments
+  toggleComments: function() {
+    this.toggleProperty('isCommentsVisible');
+  }
 });

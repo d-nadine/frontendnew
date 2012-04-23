@@ -13,6 +13,10 @@ minispade.require('radium/views/ui/dropdown_button');
 minispade.require('radium/views/ui/checkbox');
 minispade.require('radium/views/ui/search');
 minispade.require('radium/views/ui/loading');
+minispade.require('radium/views/ui/inline_textarea');
+minispade.require('radium/views/ui/inline_textfield');
+minispade.require('radium/views/ui/inline_select');
+minispade.require('radium/views/ui/inline_datepicker');
 
 // Forms
 minispade.require('radium/views/forms/todo_form');
@@ -35,6 +39,7 @@ minispade.require('radium/views/feed/feed_list');
 minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/coffee_cup_total');
 minispade.require('radium/views/feed/cluster');
+minispade.require('radium/views/feed/inline_comments');
 
 // Global
 minispade.require('radium/views/global/topbar');

@@ -13,9 +13,12 @@ DS.RadiumAdapter = DS.Adapter.extend({
   resultsPerPage: 24,
   selectedUserID: null,
   createRecord: function(store, type, model) {
-    var root = this.rootForType(type);
-    var data = get(model, 'data');
+    var root = (type.root) ? type.root : this.rootForType(type);
+    var data = {};
+    var hash = get(model, 'data');
+    data[root] = hash.unsavedData;
     var url = (type.url) ? type.url : this.pluralize(root);
+    
     var success = function(json) {
       store.didCreateRecord(model, json);
     };
@@ -52,12 +55,13 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var id = get(model, 'id');
     var root = this.rootForType(type);
     var data = {};
-    data[root] = get(model, 'data');
+    data[root] = getPath(model, 'data.unsavedData');
     if (model.get('url')) {
       url = model.get('url').fmt(id);
     } else {
       url = ["", this.pluralize(root), id].join("/");
     }
+
     this.ajax(url, "PUT", {
       data: data,
       success: function(json) {

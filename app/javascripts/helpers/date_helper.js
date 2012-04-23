@@ -15,7 +15,13 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       
   var parseDate = function(date) {
     if (date) {
-      var milli = date.getTime();
+      var milli;
+      if (typeof date === 'string') {
+        milli = new Date(date).getTime();
+      } else {
+        milli = date.getTime();  
+      }
+      
       var d = Ember.DateTime.create(milli);
       return d.toFormattedString(format);
     } else {
