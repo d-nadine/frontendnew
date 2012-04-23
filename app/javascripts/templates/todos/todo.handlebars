@@ -1,13 +1,14 @@
 <div class="row">
-  <div class="span2"><span class="timestamp">{{formatTime content.finishBy}}</span></div>
+  <div class="span2"><span class="timestamp">{{formatDate content.finishBy}}</span></div>
   <div class="span7">
     <p>
       {{view checkboxView}}
       <span class="label">{{content.kind}}</span>
       <span class="content">{{content.description}}</span>
       ({{content.user.abbrName}})
+      <i class="icon-comment"></i>
       {{#if content.comments.length}}
-      <i class="icon-bubble"></i>
+        ({{content.comments.length}})
       {{/if}}
     </p>
   </div>
