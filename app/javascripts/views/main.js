@@ -13,6 +13,8 @@ minispade.require('radium/views/ui/dropdown_button');
 minispade.require('radium/views/ui/checkbox');
 minispade.require('radium/views/ui/search');
 minispade.require('radium/views/ui/loading');
+minispade.require('radium/views/ui/inline_textarea');
+minispade.require('radium/views/ui/inline_datepicker');
 
 // Forms
 minispade.require('radium/views/forms/todo_form');

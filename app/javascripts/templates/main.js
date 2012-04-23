@@ -84,3 +84,6 @@ minispade.require('radium/templates/campaigns/campaign');
 
 // Todos
 minispade.require('radium/templates/todos/todo');
+
+minispade.require('radium/templates/ui/inline_textarea');
+minispade.require('radium/templates/ui/inline_datepicker');

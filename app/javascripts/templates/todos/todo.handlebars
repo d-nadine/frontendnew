@@ -4,7 +4,7 @@
     <p>
       {{view checkboxView}}
       <span class="label">{{content.kind}}</span>
-      <span class="content">{{content.description}}</span>
+      <span class="content">{{inlineTextarea content.description}}</span>
       ({{content.user.abbrName}})
       <i class="icon-comment" {{action "toggleComments"}}></i>
       {{#if content.comments.length}}

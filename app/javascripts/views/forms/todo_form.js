@@ -51,15 +51,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),  
 
   finishByDateField: Radium.DatePickerField.extend({
-     elementId: 'finish-by-date',
-     name: 'finish-by-date',
-     classNames: ['input-small'],
-     minDate: new Date(),
-     valueBinding: Ember.Binding.transform({
-      to: function(value, binding) {
-        return value.toFormattedString('%Y-%m-%d');
-      },
-      from: function(value, binding) {
+    elementId: 'finish-by-date',
+    name: 'finish-by-date',
+    classNames: ['input-small'],
+    minDate: new Date(),
+    valueBinding: Ember.Binding.transform({
+    to: function(value, binding) {
+      return value.toFormattedString('%Y-%m-%d');
+    },
+    from: function(value, binding) {
         var date = binding.getPath('parentView.finishBy'),
             dateValues = value.split('-');
         
@@ -121,7 +121,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
     $.ajax(userRequest)
       .success(function(data) {
-        Radium.store.load(Radium.Todo, data);
+        var todo = Radium.store.createRecord(Radium.Todo, data);
+        Radium.todosController.add(todo);
         self.success("Todo created");
       })
       .error(function(jqXHR, textStatus, errorThrown) {
