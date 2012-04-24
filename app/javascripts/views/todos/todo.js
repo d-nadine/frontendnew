@@ -22,8 +22,13 @@ Radium.TodoView = Ember.View.extend({
   toggleComments: function() {
     if (this.get('commentsView')) {
       this.get('commentsView').remove();
+      this.set('commentsView', null);
     } else {
-      var commentsView = Radium.InlineCommentsView.create();
+      var commentsController = Radium.inlineCommentsController.create({
+          }),
+          commentsView = Radium.InlineCommentsView.create({
+            controller: commentsController
+          });
       this.set('commentsView', commentsView);
       commentsView.appendTo(this.$());
     }
