@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span2"><span class="timestamp">{{inlineDatePicker content.finishBy}}</span></div>
+  <div class="span2"><span class="timestamp">{{formatDate content.finishBy}}</span></div>
   <div class="span7">
     <p>
       {{view checkboxView}}
@@ -13,4 +13,5 @@
     </p>
   </div>
 </div>
+
 {{view Radium.InlineCommentsView}}

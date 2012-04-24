@@ -5,7 +5,7 @@ Radium.Todo = Radium.Core.extend({
     key: 'finish_by'
   }),
   sortValue: function() {
-    return new Date(this.get('finishBy')).getTime();
+    return new Date(this.get('updatedAt')).getTime();
   }.property('finishBy').cacheable(),
   finished: DS.attr('boolean'),
   campaign: DS.hasOne('Radium.Campaign'),

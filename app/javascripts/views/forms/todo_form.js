@@ -54,14 +54,19 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     elementId: 'finish-by-date',
     name: 'finish-by-date',
     classNames: ['input-small'],
-    minDate: new Date(),
     valueBinding: Ember.Binding.transform({
-    to: function(value, binding) {
-      return value.toFormattedString('%Y-%m-%d');
-    },
-    from: function(value, binding) {
-        var date = binding.getPath('parentView.finishBy'),
-            dateValues = value.split('-');
+      to: function(value, binding) {
+        return value.toFormattedString('%Y-%m-%d');
+      },
+      from: function(value, binding) {
+        var dateValues,
+            date = binding.getPath('parentView.finishBy');
+        
+        if (value) {
+          dateValues = value.split('-');
+        } else {
+          dateValues = binding.get('_cachedDate').split('-');
+        }
         
         return date.adjust({
           year: parseInt(dateValues[0]),
@@ -131,6 +136,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         self.success("Todo created");
       }
     });
+
     todo.addObserver('isError', function() {
       if (this.get('isError')) {
         self.error("Look like something broke. Report it so we can fix it");
@@ -143,16 +149,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           data: JSON.stringify(data)
         },
         userRequest = jQuery.extend(userSettings, CONFIG.ajax);
-
-    // $.ajax(userRequest)
-    //   .success(function(data) {
-    //     var todo = Radium.store.createRecord(Radium.Todo, data);
-    //     Radium.todosController.add(todo);
-    //     self.success("Todo created");
-    //   })
-    //   .error(function(jqXHR, textStatus, errorThrown) {
-    //     self.error("Look like something broke. Report it so we can fix it");
-    //   });
 
     if (contactIds.length) {
       contactIds.forEach(function(id) {
