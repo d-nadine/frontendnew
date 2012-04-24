@@ -12,6 +12,7 @@
       {{/each}}
     </ul>
     {{/if}}
-    <textarea>Add comment</textarea>
+    {{view commentTextArea}}
+    {{#view Ember.Button action="addComment" target="parentView"}}Add comment{{/view}}
   </div>
 </div>
