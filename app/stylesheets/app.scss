@@ -343,8 +343,7 @@ ul.comments {
 }
 
 .todo {
-  .content,
-  .timestamp {
+  .content {
     cursor: pointer;
     &:hover {
       background-color: #FCF8E3;

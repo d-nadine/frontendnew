@@ -1,11 +1,6 @@
-Radium.feedByDateController = Crossfilter.Dimension.create({
-  _byDate: function(data) {
-    var date = Radium.Utils.dateFromISO8601(data.timestamp);
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-    return date;
+Radium.feedByDayController = Crossfilter.Dimension.create({
+  _byDay: function(data) {
+    return new Date(data.timestamp).getTime();
   },
 
   userFilterBinding: 'Radium.feedByUserController.filter',
@@ -15,7 +10,7 @@ Radium.feedByDateController = Crossfilter.Dimension.create({
 
   crossfilterDidChange: function() {
     var cf = this.get('crossfilter'),
-        dimension = cf.dimension(this._byDate),
+        dimension = cf.dimension(this._byDay),
         group = dimension.group();
 
     this.setProperties({

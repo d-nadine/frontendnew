@@ -16,7 +16,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
         Radium.feedByKindController,
         Radium.feedByUserController,
         Radium.feedByContactController,
-        Radium.feedByDayController,
+        Radium.feedByDateController,
         Radium.feedByActivityController
       ]);
 
@@ -35,9 +35,9 @@ Radium.DashboardPage = Ember.ViewState.extend({
       //   });
       // }
       
-      // Ember.run.next(function() {
-      //   manager.send('loadFeed');
-      // });
+      Ember.run.next(function() {
+        manager.send('loadFeed');
+      });
     },
     exit: function(manager) {
       this._super(manager);
@@ -104,7 +104,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
           Radium.dashboardFeedController.addData(data);
           Radium.dashboardFeedController.refreshAll();
           Ember.run.sync();
-
+          // debugger;
           Ember.run.next(function() {
             manager.goToState('ready');
           }); 
