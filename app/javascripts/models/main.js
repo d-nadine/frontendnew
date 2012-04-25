@@ -1,5 +1,6 @@
 minispade.require('radium/models/core');
 minispade.require('radium/models/account');
+
 // Humans
 minispade.require('radium/models/person');
 minispade.require('radium/models/contact');
@@ -32,3 +33,4 @@ minispade.require('radium/models/campaign');
 minispade.require('radium/models/customfield');
 minispade.require('radium/models/calllist');
 minispade.require('radium/models/activity');
+minispade.require('radium/models/feed_group');

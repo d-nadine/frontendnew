@@ -10,6 +10,9 @@ Radium.Core = DS.Model.extend({
   updatedAt: DS.attr('date', {
     key: 'updated_at'
   }),
+  updated_at: DS.attr('date'),
+  created_at: DS.attr('date'),
+
   // @returns {Ember.DateTime}
   rawDate: function() {
     return new Date(this.get('updatedAt')).getTime();

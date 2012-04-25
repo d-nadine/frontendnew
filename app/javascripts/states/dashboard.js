@@ -20,19 +20,19 @@ Radium.DashboardPage = Ember.ViewState.extend({
         Radium.feedByActivityController
       ]);
 
-      var todos = Radium.store.find(Radium.Todo, {page:1});
+      // var todos = Radium.store.find(Radium.Todo, {page:1});
 
-      todos.addObserver('isLoaded', function() {
-        todos.forEach(function(todo) {
-          Radium.todosController.add(todo);
-        });
-      });
-
-      // if (!manager.get('isEmptyFeed')) {
-      //   $(window).on('scroll', function() {
-      //     Radium.App.infiniteLoading('loadFeed');
+      // todos.addObserver('isLoaded', function() {
+      //   todos.forEach(function(todo) {
+      //     Radium.todosController.add(todo);
       //   });
-      // }
+      // });
+
+      if (!manager.get('isEmptyFeed')) {
+        $(window).on('scroll', function() {
+          Radium.App.infiniteLoading('loadFeed');
+        });
+      }
       
       Ember.run.next(function() {
         manager.send('loadFeed');
@@ -95,9 +95,13 @@ Radium.DashboardPage = Ember.ViewState.extend({
             page: parseInt(currentPage)
           });
 
-          data.forEach(function(item) {
-            item.isNewActivity = false;
-            item.isCached = false;
+          data.forEach(function(activity) {
+            // Set some properties for view's to distingushed old items from
+            // pushed new items.
+            activity.isNewActivity = false;
+            activity.isCached = false;
+
+            Radium.feedController.add(activity);
           });
 
           Radium.dashboardFeedController.addData(data);

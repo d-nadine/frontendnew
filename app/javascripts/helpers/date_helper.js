@@ -18,6 +18,8 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       var milli;
       if (typeof date === 'string') {
         milli = new Date(date).getTime();
+      } else if (typeof date === 'number') {
+        milli = date;
       } else {
         milli = date.getTime();  
       }

@@ -1,6 +1,6 @@
 Radium.feedByDayController = Crossfilter.Dimension.create({
   _byDay: function(data) {
-    return new Date(data.timestamp).getTime();
+    return Date.parse(data.timestamp);
   },
 
   userFilterBinding: 'Radium.feedByUserController.filter',

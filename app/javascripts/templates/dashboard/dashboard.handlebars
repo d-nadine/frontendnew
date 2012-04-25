@@ -92,9 +92,14 @@
 
     <div class="row">
       <div class="span9">
-        {{#with Radium.todosController}}
+        {{#with Radium.feedController}}
           {{#each content}}
-            {{view Radium.TodoView contentBinding="this"}}
+            <div class="page-header">
+              <h3>{{formatDate date}}</h3>
+            </div>
+            {{#each todos}}
+              {{view Radium.TodoView contentBinding="this"}}
+            {{/each}}
           {{/each}}
         {{/with}}
       </div>

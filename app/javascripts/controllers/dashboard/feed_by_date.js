@@ -1,6 +1,6 @@
 Radium.feedByDateController = Crossfilter.Dimension.create({
   _byDate: function(data) {
-    var date = Radium.Utils.dateFromISO8601(data.timestamp);
+    var date = new Date(Date.parse(data.timestamp));
     date.setHours(0);
     date.setMinutes(0);
     date.setSeconds(0);

@@ -106,13 +106,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           todo: {
             description: description,
             finish_by: finishByValue,
-            user_id: userId
+            user_id: userId,
+            created_at: Ember.DateTime.create().toISO8601()
           }
         },
         testData = {
           description: description,
           finishBy: finishByValue,
-          user_id: userId
+          user_id: userId,
+          created_at: Ember.DateTime.create().toISO8601()
         };
 
     if (!userId) {
