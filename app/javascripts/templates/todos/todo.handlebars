@@ -6,7 +6,7 @@
       <span class="label">{{content.kind}}</span>
       <span class="content">{{inlineTextField content.description}}</span>
       ({{content.user.abbrName}})
-      <i class="icon-comment" {{action "toggleComments"}}></i>
+      <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
       {{#if content.comments.length}}
         ({{content.comments.length}})
       {{/if}}

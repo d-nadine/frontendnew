@@ -246,24 +246,36 @@ img.avatar {
   display: inline-block;
 }
 
+i.comment-toggle-button {
+  cursor: pointer;
+}
+
 ul.comments {
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
-.comments li {
-  color: #404040;
-}
+.comments {
+  margin-bottom: 20px;
+  
+  li {
+    width: 100%;
+    float: left;
+    clear: both;
+    color: #404040;
+    font-weight: normal;
+  }
 
-.comments img {
-  float: left;
-  height: 32px;
-  width: 32px;
-  margin-right: 10px;
-  margin-bottom: 10px
-}
+  img {
+    float: left;
+    height: 32px;
+    width: 32px;
+    margin-right: 10px;
+    margin-bottom: 10px
+  }
 
-.comments .name {
-  font-weight: bold;
+  .name {
+    font-weight: bold;
+  }
 }
 
 #owner {

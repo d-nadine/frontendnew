@@ -1,16 +1,20 @@
 <div class="row comments">
-  <div class="span10 offset2">
+  <div class="span5 offset2">
     {{#if content.length}}
     <ul class="comments unstyled">
       {{#each content}}
       <li>
         <img src="http://placehold.it/80x80">
-        <a class="name" href="#">{{user.abbrName}}</a><br>
+        <strong>{{user.abbrName}}</strong><br>
         {{text}}
         <span class="time">{{formatDate updatedAt}}</span>
       </li>
       {{/each}}
     </ul>
+    {{/if}}
+    <hr>
+    {{#if controller.isError}}
+    <p class="error">Hmm, something wasn't done correctly. Try again?</p>
     {{/if}}
     {{view commentTextArea}}
     {{#view addCommentButton}}Add comment{{/view}}

@@ -24,10 +24,14 @@ Radium.TodoView = Ember.View.extend({
       this.get('commentsView').remove();
       this.set('commentsView', null);
     } else {
-      var commentsController = Radium.inlineCommentsController.create({
+      var activity = this.get('content'),
+          commentsController = Radium.inlineCommentsController.create({
+            activity: activity,
+            contentBinding: 'activity.comments'
           }),
           commentsView = Radium.InlineCommentsView.create({
-            controller: commentsController
+            controller: commentsController,
+            contentBinding: 'controller.content'
           });
       this.set('commentsView', commentsView);
       commentsView.appendTo(this.$());

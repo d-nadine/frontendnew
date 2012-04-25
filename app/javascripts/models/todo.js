@@ -13,7 +13,9 @@ Radium.Todo = Radium.Core.extend({
     key: 'call_list'
   }),
   contacts: DS.hasMany('Radium.Contact'),
-  comments: DS.hasMany('Radium.Comment'),
+  comments: DS.hasMany('Radium.Comment', {
+    embedded: true
+  }),
   user: DS.hasOne('Radium.User', {
     embedded: true
   }),

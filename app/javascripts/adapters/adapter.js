@@ -22,9 +22,17 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var success = function(json) {
       store.didCreateRecord(model, json);
     };
+
+    var error = function(xhr, status, error) {
+      if (xhr.status === 422) {
+        store.recordWasInvalid(model, error);
+      }
+    };
+
     this.ajax("/" + url, "POST", {
       data: data,
-      success: success
+      success: success,
+      error: error
     });
   },
 
