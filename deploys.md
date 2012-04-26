@@ -1,3 +1,4 @@
+* [2012-04-25 17:14 -0700] 3c20f7f - Joshua Jones: Add feed grouping. fixes #18.
 * [2012-04-23 14:18 -0700] 6d60eb0 - Joshua Jones: Stop focusOut in inline datepicker from nullifying input change.
 * [2012-04-23 13:19 -0700] 8f96aa9 - Joshua Jones: Fixed todo comment button conflict.
 * [2012-04-22 17:39 -0700] 69a4c2e - Joshua Jones: Remove unused sections, form submitting indicator.
