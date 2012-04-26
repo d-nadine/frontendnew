@@ -4,7 +4,7 @@
     <p>
       {{view checkboxView}}
       {{#if content.contact}}
-      {{view statusLabelView}}
+      {{view Radium.LabelView labelBinding="content.contact.status"}}
       {{/if}}
       <span class="content">{{inlineTextField content.description}}</span>
       ({{content.user.abbrName}})

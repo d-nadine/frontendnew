@@ -3,7 +3,7 @@
   <div id="sidebar" class="span3">
     <div id="contact-info" class="module">
       <div class="component">
-        <h4>{{name}} {{view Radium.ContactLabelView contactBinding="this" statusBinding="status" class="pull-right"}}</h4>
+        <h4>{{name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
         <small>{{#each groups}}{{name}} {{/each}}</small>
         <p>Assigned to: {{user.name}}</p>
         <address>
