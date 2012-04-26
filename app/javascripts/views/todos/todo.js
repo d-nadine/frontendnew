@@ -12,6 +12,37 @@ Radium.TodoView = Ember.View.extend({
     }
   }),
 
+  statusLabelView: Ember.View.extend({
+    tagName: 'span',
+    classNames: ['label'],
+    contactBinding: 'parentView.content.contact',
+    classNameBindings: [
+      'isLead:label-info',
+      'isProspect:label-warning',
+      'isOpportunity:label-inverse',
+      'isCustomer:label-success',
+      'isDeadEnd:label-important'
+    ],
+    // Status type bindings
+    isLead: function() {
+      return (this.getPath('contact.status') === 'lead') ? true : false;
+    }.property('contact.status').cacheable(),
+    isProspect: function() {
+      return (this.getPath('contact.status') === 'prospect') ? true : false;
+    }.property('contact.status').cacheable(), 
+    isOpportunity: function() {
+      return (this.getPath('contact.status') === 'opportunity') ? true : false;
+    }.property('contact.status').cacheable(),
+    isCustomer: function() {
+      return (this.getPath('contact.status') === 'customer') ? true : false;
+    }.property('contact.status').cacheable(),
+    isDeadEnd: function() {
+      return (this.getPath('contact.status') === 'dead_end') ? true : false;
+    }.property('contact.status').cacheable(),
+
+    template: Ember.Handlebars.compile('{{contact.status}}')
+  }),
+
   // Comments
   commentsView: null,
 

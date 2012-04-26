@@ -2,8 +2,10 @@
   <div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
   <div class="span7">
     <p>
-      {{view checkboxView}}
-      <span class="label">{{content.kind}}</span>
+      {{#if content.contact}}
+        {{view checkboxView}}
+      {{/if}}
+      {{view statusLabelView}}
       <span class="content">{{inlineTextField content.description}}</span>
       ({{content.user.abbrName}})
       <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
