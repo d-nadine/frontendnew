@@ -1,3 +1,4 @@
+* [2012-04-26 13:16 -0700] b0351e1 - Joshua Jones: Make Radium.LabelView class for labels.
 * [2012-04-25 17:14 -0700] 3c20f7f - Joshua Jones: Add feed grouping. fixes #18.
 * [2012-04-23 14:18 -0700] 6d60eb0 - Joshua Jones: Stop focusOut in inline datepicker from nullifying input change.
 * [2012-04-23 13:19 -0700] 8f96aa9 - Joshua Jones: Fixed todo comment button conflict.
