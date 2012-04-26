@@ -2,10 +2,12 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
   content: [],
   newComment: "",
   isError: false,
+  isSubmitting: false,
   addComment: function() {
     var self = this;
     if (this.get('newComment') !== '') {
       var comment,
+          commentText = this.get('newComment'),
           id = this.getPath('activity.id');
 
       Radium.Comment.reopenClass({
@@ -14,9 +16,13 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
       });
       
       comment = Radium.store.createRecord(Radium.Comment, {
-        text: this.get('newComment')
+        text: commentText,
+        createdAt: Ember.DateTime.create().toISO8601()
       });
-      self.set('isError', false);
+
+      this.set('isError', false);
+      this.set('newComment', '');
+      this.get('content').pushObject(comment);
 
       Radium.store.commit();
 
@@ -25,11 +31,9 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
           Radium.Comment.reopenClass({
             url: null
           });
-
-          self.set('newComment', '');
-          self.get('content').pushObject(comment);
         } else {
           self.set('isError', true);
+          self.set('newComment', commentText);
         }
       });
       

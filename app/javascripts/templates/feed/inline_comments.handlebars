@@ -3,20 +3,13 @@
     {{#if content.length}}
     <ul class="comments unstyled">
       {{#each content}}
-      <li>
-        <img src="http://placehold.it/80x80">
-        <strong>{{user.abbrName}}</strong><br>
-        {{text}}
-        <span class="time">{{formatDate updatedAt}}</span>
-      </li>
+        {{view Radium.CommentView commentBinding="this"}}
       {{/each}}
     </ul>
     {{/if}}
-    <hr>
     {{#if controller.isError}}
     <p class="error">Hmm, something wasn't done correctly. Try again?</p>
     {{/if}}
     {{view commentTextArea}}
-    {{#view addCommentButton}}Add comment{{/view}}
   </div>
 </div>

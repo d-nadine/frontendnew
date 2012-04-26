@@ -40,6 +40,7 @@ minispade.require('radium/views/feed/feed_list');
 minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/coffee_cup_total');
 minispade.require('radium/views/feed/cluster');
+minispade.require('radium/views/feed/comment');
 minispade.require('radium/views/feed/inline_comments');
 
 // Global

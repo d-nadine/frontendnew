@@ -1,6 +1,8 @@
 minispade.require('jquery');
 minispade.require('jquery-ui');
 minispade.require('jquery-cookie');
+minispade.require('jquery-autoresize');
+minispade.require('jquery-timeago');
 minispade.require('iso8601');
 minispade.require('davis');
 minispade.require('ember');

@@ -1,0 +1,8 @@
+{{#with comment}}
+  <img src="http://placehold.it/80x80">
+  <strong>{{user.abbrName}}</strong><br>
+  {{text}}
+  <span class="time" {{bindAttr title="dateToISO8601"}}>
+    {{formatDate createdAt}}
+  </span>
+{{/with}}
