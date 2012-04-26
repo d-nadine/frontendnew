@@ -12,6 +12,9 @@ Radium.Todo = Radium.Core.extend({
   callList: DS.hasOne('Radium.CallList', {
     key: 'call_list'
   }),
+  contact: DS.hasOne('Radium.Contact', {
+    embedded: true
+  }),
   contacts: DS.hasMany('Radium.Contact'),
   comments: DS.hasMany('Radium.Comment', {
     embedded: true
@@ -20,6 +23,8 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
   user_id: DS.attr('number'),
+
+  // Status is determined by a nested contact's `status`.
 
   /**
     Checks to see if the Deal has passed it's close by date.
