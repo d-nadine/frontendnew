@@ -13,9 +13,12 @@ Radium.TodoView = Ember.View.extend({
   }),
 
   statusLabelView: Ember.View.extend({
+    didInsertElement: function() {
+      console.log(this.get('status'));
+    },
     tagName: 'span',
     classNames: ['label'],
-    contactBinding: 'parentView.content.contact',
+    statusBinding: 'parentView.content.contact.status',
     classNameBindings: [
       'isLead:label-info',
       'isProspect:label-warning',
@@ -25,22 +28,22 @@ Radium.TodoView = Ember.View.extend({
     ],
     // Status type bindings
     isLead: function() {
-      return (this.getPath('contact.status') === 'lead') ? true : false;
-    }.property('contact.status').cacheable(),
+      return (this.get('status') === 'lead') ? true : false;
+    }.property('status').cacheable(),
     isProspect: function() {
-      return (this.getPath('contact.status') === 'prospect') ? true : false;
-    }.property('contact.status').cacheable(), 
+      return (this.get('status') === 'prospect') ? true : false;
+    }.property('status').cacheable(), 
     isOpportunity: function() {
-      return (this.getPath('contact.status') === 'opportunity') ? true : false;
-    }.property('contact.status').cacheable(),
+      return (this.get('status') === 'opportunity') ? true : false;
+    }.property('status').cacheable(),
     isCustomer: function() {
-      return (this.getPath('contact.status') === 'customer') ? true : false;
-    }.property('contact.status').cacheable(),
+      return (this.get('status') === 'customer') ? true : false;
+    }.property('status').cacheable(),
     isDeadEnd: function() {
-      return (this.getPath('contact.status') === 'dead_end') ? true : false;
-    }.property('contact.status').cacheable(),
+      return (this.get('status') === 'dead_end') ? true : false;
+    }.property('status').cacheable(),
 
-    template: Ember.Handlebars.compile('{{contact.status}}')
+    template: Ember.Handlebars.compile('{{status}}')
   }),
 
   // Comments
