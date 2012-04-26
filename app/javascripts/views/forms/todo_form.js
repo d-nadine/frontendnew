@@ -14,16 +14,26 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     return date.toFormattedString(format);
   }.property('finishBy'),
 
-  description: Ember.TextArea.extend({
+  description: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
     attributeBindings: ['name'],
     name: 'description',
     classNames: ['span8'],
+    action: 'submitForm',
+    target: 'parentView',
     keyUp: function() {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
         this.$().parent().removeClass('error');
         this.$().next('span.help-inline').remove();
+      }
+    },
+    keyPress: function(event) {
+      if (event.keyCode === 13 && !event.ctrlKey) {
+        event.preventDefault();
+        if (this.$().val() !== '') {
+          this.triggerAction();
+        }
       }
     },
     focusOut: function() {

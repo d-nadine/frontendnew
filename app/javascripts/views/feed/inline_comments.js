@@ -20,6 +20,9 @@ Radium.InlineCommentsView = Ember.View.extend({
           this.triggerAction();
         }
       }
+    },
+    cancel: function(event) {
+      this.setPath('parentView.isVisible', false);
     }
   })
 });

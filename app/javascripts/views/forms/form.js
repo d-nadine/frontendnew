@@ -75,7 +75,7 @@ Radium.FormView = Ember.View.extend({
     disabled: function() {
       var isSubmitting = this.getPath('parentView.isSubmitting'),
           isValid = this.getPath('parentView.isValid');
-      return (isSubmitting || isValid) ? false : true;
+      return (isSubmitting || !isValid) ? true : false;
     }.property('parentView.isSubmitting', 'parentView.isValid').cacheable(),
     changeTextOnSubmit: function() {
       var cachedText = this.get('_buttonTextCache');
