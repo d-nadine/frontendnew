@@ -18,16 +18,7 @@
     <label for="date">Finish By:</label>
     {{view finishByDateField}}
   </fieldset>
-  <fieldset class="control-group" style="display:none">
-    <label for="contacts">Contacts</label>
-    {{#with Radium.contactsController}}
-      {{#if selectedContacts}}
-        {{selectedContactsNames}}
-      {{/if}}
-    {{/with}}
   
-    {{view findContactsField id="contacts" name="contacts" class="input-xlarge"}}
-  </fieldset>
   {{view reminderForm}}
 </div>
 <div class="form-actions">

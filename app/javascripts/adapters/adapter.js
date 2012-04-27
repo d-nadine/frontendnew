@@ -24,9 +24,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     };
 
     var error = function(xhr, status, error) {
-      if (xhr.status === 422) {
-        store.recordWasInvalid(model, error);
-      }
+      store.recordWasInvalid(model, xhr);
     };
 
     this.ajax("/" + url, "POST", {

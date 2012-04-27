@@ -3,7 +3,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   templateName: 'todo_form',
 
   // finishByBinding: 'Radium.todosFormController.finishBy',
-  finishBy: Ember.DateTime.create({hour: 17, minute: 0}),
+  finishBy: function() {
+    var now = Ember.DateTime.create();
+
+    if (now.get('hour') >= 17) {
+      return now.advance({day: 1, hour: 17, minute: 0});
+    } else {
+      return now.adjust({hour: 17, minute: 0})
+    }
+  }.property().cacheable(),
 
   headerDate: function() {
     var currentYear = Radium.appController.getPath('today.year'),
@@ -90,17 +98,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }).from('parentView.finishBy')
   }),
 
-  findContactsField: Radium.AutocompleteTextField.extend({
-    sourceBinding: 'Radium.contactsController.contactNamesWithObject',
-    select: function(event, ui) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      var contact = ui.item.contact;
-      contact.set('isSelected', true);
-      this.set('value', null);
-    }
-  }),
-  
   close: function() {
     Radium.contactsController.setEach('isSelected', false);
     this._super();
@@ -111,13 +108,12 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
         finishByDate = this.$('#finish-by-date').val(),
-        finishByTime = this.$('#finish-by-time').val(),
-        finishByMeridian = this.$('#finish-by-meridian').val(),
-        finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
+        finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
+        finishByValue = Ember.DateTime.create(finishByParsed),
         userId = this.$('select#assigned-to').val(),
         data = {
           description: description,
-          finishBy: finishByValue,
+          finishBy: finishByValue.toISO8601(),
           user_id: userId,
           created_at: Ember.DateTime.create().toISO8601()
         };
@@ -138,9 +134,23 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     Radium.todosController.add(todo);
     Radium.store.commit();
 
-    todo.addObserver('isLoaded', function() {
-      if (this.get('isLoaded')) {
+    todo.addObserver('isValid', function() {
+      if (this.get('isValid')) {
+        Radium.Todo.reopenClass({
+          url: null
+        });
         self.success("Todo created");
+      } else {
+        // Anticipating more codes as the app grows.
+        switch (this.getPath('errors.status')) {
+          case 422:
+            self.error("Something was filled incorrectly, try again?");
+            break;
+          default:
+            self.error("Look like something broke. Report it so we can fix it");
+            break;
+        }
+        
       }
     });
 
