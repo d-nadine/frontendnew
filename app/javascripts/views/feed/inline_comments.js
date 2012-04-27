@@ -9,10 +9,12 @@ Radium.InlineCommentsView = Ember.View.extend({
     classNameBindings: ['parentView.controller.isError:error'],
     action: 'addComment',
     target: 'parentView.controller',
+
     didInsertElement: function() {
       this._super();
       this.$().focus().autosize().css('resize','none');
     },
+
     keyPress: function(event) {
       if (event.keyCode === 13 && !event.ctrlKey) {
         event.preventDefault();
@@ -21,6 +23,7 @@ Radium.InlineCommentsView = Ember.View.extend({
         }
       }
     },
+    
     cancel: function(event) {
       this.setPath('parentView.isVisible', false);
     }
