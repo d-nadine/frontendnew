@@ -1,7 +1,11 @@
+{{#view cancelFormButton class="close"}}×{{/view}}
 <legend>Add a Todo for {{headerDate}}</legend>
 <fieldset class="control-group">
   <label for="description">Task</label>
   {{view description}}
+  {{#if isError}}
+  <span class="help-inline">Can't create an empty todo.</span>
+  {{/if}}
 </fieldset>
 <fieldset class="control-group">
   <label for="assigned-to">Assigned To</label>
@@ -28,5 +32,4 @@
 </div>
 <div class="form-actions">
   {{view submitButton class="btn btn-primary"}}
-  {{#view cancelFormButton class="btn"}}Cancel{{/view}}
 </div>

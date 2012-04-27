@@ -27,8 +27,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     keyUp: function() {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
+        this.setPath('parentView.isError', false);
         this.$().parent().removeClass('error');
-        this.$().next('span.help-inline').remove();
       }
     },
     keyPress: function(event) {
@@ -42,12 +42,12 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     focusOut: function() {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
+        this.setPath('parentView.isError', false);
         this.$().parent().removeClass('error');
-        this.$().next('span.help-inline').remove();
       } else {
         this.$().parent().addClass('error');
+        this.setPath('parentView.isError', true);
         this.setPath('parentView.isValid', false);
-        this.$().after('<span class="help-inline">Can\'t create an empty todo.</span>');
       }
     }
   }),

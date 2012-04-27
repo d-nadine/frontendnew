@@ -141,6 +141,20 @@ body {
 #form-container {
   margin: 20px 0;
   width: 100%;
+
+  .well {
+    width: 660px;
+    position: relative;
+    float: left;
+  }
+
+  button.close {
+    border: none;
+    background: none;
+    position: absolute;
+    right: 12px;
+    top: 22px;
+  }
 }
 
 .create-form {
