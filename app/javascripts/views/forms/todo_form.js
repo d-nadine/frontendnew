@@ -21,6 +21,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     classNames: ['span8'],
     action: 'submitForm',
     target: 'parentView',
+    didInsertElement: function() {
+      this.$().autosize().css('resize','none');
+    },
     keyUp: function() {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
