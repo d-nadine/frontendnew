@@ -116,14 +116,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         finishByValue = this.timeFormatter(finishByDate, finishByTime, finishByMeridian),
         userId = this.$('select#assigned-to').val(),
         data = {
-          todo: {
-            description: description,
-            finish_by: finishByValue,
-            user_id: userId,
-            created_at: Ember.DateTime.create().toISO8601()
-          }
-        },
-        testData = {
           description: description,
           finishBy: finishByValue,
           user_id: userId,
@@ -142,7 +134,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       root: 'todo'
     });
 
-    var todo = Radium.store.createRecord(Radium.Todo, testData);
+    var todo = Radium.store.createRecord(Radium.Todo, data);
     Radium.todosController.add(todo);
     Radium.store.commit();
 
@@ -157,32 +149,5 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         self.error("Look like something broke. Report it so we can fix it");
       }
     });
-
-    var userSettings = {
-          url: '/api/todos'.fmt(userId),
-          type: 'POST',
-          data: JSON.stringify(data)
-        },
-        userRequest = jQuery.extend(userSettings, CONFIG.ajax);
-
-    if (contactIds.length) {
-      contactIds.forEach(function(id) {
-        var settings = {
-              url: '/api/contacts/%@/todos'.fmt(id),
-              type: 'POST',
-              data: JSON.stringify(data)
-            },
-            request = jQuery.extend(settings, CONFIG.ajax);
-
-        $.ajax(request)
-          .success(function(data) {
-            Radium.store.load(Radium.Todo, data);
-            self.success("Todo created");
-          })
-          .error(function(jqXHR, textStatus, errorThrown) {
-            self.error("Look like something broke. Report it so we can fix it");
-          });
-      });
-    }
   }
 });
