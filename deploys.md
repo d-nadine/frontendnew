@@ -1,3 +1,4 @@
+* [2012-04-27 17:40 -0700] 844510c - Joshua Jones: Clean up contact form, add Company, Group forms.
 * [2012-04-27 02:18 -0700] a6ff9d8 - Joshua Jones: Formatting.
 * [2012-04-26 16:16 -0700] ad82a37 - Joshua Jones: Disable submit button while submitting a form. fixes #30
 * [2012-04-26 15:34 -0700] f3f4aa7 - Joshua Jones: Update comment UX. fixes #31
