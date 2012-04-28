@@ -98,11 +98,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }).from('parentView.finishBy')
   }),
 
-  close: function() {
-    Radium.contactsController.setEach('isSelected', false);
-    this._super();
-  },
-
   submitForm: function() {
     var self = this;
     var contactIds = this.get('selectedContacts').getEach('id'),

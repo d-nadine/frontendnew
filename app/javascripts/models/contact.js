@@ -51,5 +51,12 @@ Radium.Contact = Radium.Person.extend({
     } else {
       return "";
     }
-  }.property('name').cacheable()
+  }.property('name').cacheable(),
+
+  // HAX for Data
+  email_addresses_attributes: DS.attr('array'),
+  phone_numbers_attributes: DS.attr('array'),
+  addresses_attributes: DS.attr('array'),
+  fields_attributes: DS.attr('array'),
+  notes_attributes: DS.attr('array')
 });

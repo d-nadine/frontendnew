@@ -20,16 +20,6 @@ Radium.ContactsPageView = Ember.View.extend({
       Radium.App.send('allCampaigns');
       return false;
     }
-  }),
-
-  contactsFilterView: Ember.View.extend({
-    tagName: 'ul',
-    classNames: 'nav nav-tabs nav-stacked',
-
-    allContacts: function(event) {
-      this.setPath('parentView.selectedFilter', null);
-      return false;
-    }
   })
 });
 
@@ -46,38 +36,4 @@ Radium.CampaignListView = Ember.View.extend({
     Radium.App.send('selectCampaign', campaign);
     return false;
   }
-});
-
-Radium.ContactFilterListView = Ember.View.extend({
-  tagName: 'li',
-  classNameBindings: ['isSelected:active'],
-  isSelected: function() {
-    var filter = this.get('singularName'),
-        selectedFilter = this.getPath('parentView.parentView.selectedFilter');
-    if (filter === selectedFilter) { return true; }
-  }.property('parentView.parentView.selectedFilter').cacheable(),
-  filterContacts: function(event) {
-    var filter = this.get('singularName');
-    Radium.contactsController.clearSelected();
-    Radium.selectedContactsController.set('selectedFilter', filter);
-    return false;
-  },
-
-  newResourceButton: Ember.View.extend({
-    classNames: 'icon-plus',
-    tagName: 'i',
-    attributeBindings: ['title'],
-    click: function(event) {
-      var formType = this.get('formViewClass');
-      Radium.App.send('addResource', formType);
-      event.stopPropagation();
-      return false;
-    }
-  }),
-
-  badge: Ember.View.extend({
-    tagName: 'span',
-    classNames: ['pull-right'],
-    template: Ember.Handlebars.compile('<span class="badge">{{count}}</span>')
-  })
 });

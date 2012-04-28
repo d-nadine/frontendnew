@@ -1,7 +1,7 @@
-Radium.ContactForm = Radium.FormView.extend({
-  templateName: 'contact_form',
+Radium.CompanyForm = Radium.FormView.extend({
+  templateName: 'company_form',
 
-  contactNameField: Ember.TextField.extend({
+  companyNameField: Ember.TextField.extend({
     attributeBindings: ['name'],
     name: 'contact-name',
     elementId: 'contact-name',
@@ -30,7 +30,8 @@ Radium.ContactForm = Radium.FormView.extend({
 
     var emailFields = this.$('fieldset#email-addresses').find('.control-group'),
         phoneFields = this.$('fieldset#phone-numbers').find('.control-group'),
-        addressFields = this.$('fieldset#addresses').find('.control-group');
+        addressFields = this.$('fieldset#addresses').find('.control-group'),
+        website = this.$('input#website').val();
 
     emailFields.each(function() {
       var emailGroup = {
@@ -78,20 +79,23 @@ Radium.ContactForm = Radium.FormView.extend({
       data.addresses_attributes = addresses;
     }
 
-    Radium.Contact.reopenClass({
-      url: 'contacts',
-      root: 'contact'
-    });
+    if (website) {
+      data.fields_attributes = [{
+        name: 'Website',
+        value: website,
+        kind: 'url'
+      }];
+    }
 
     // Disable the form buttons
     this.sending();
 
-    var contact = Radium.store.createRecord(Radium.Contact, data);
+    var company = Radium.store.createRecord(Radium.Contact, data);
     Radium.store.commit();
 
-    contact.addObserver('isValid', function() {
+    company.addObserver('isValid', function() {
       if (this.get('isValid')) {
-        self.success("Contact created");
+        self.success("Company created");
       } else {
         // Anticipating more codes as the app grows.
         switch (this.getPath('errors.status')) {
@@ -106,7 +110,7 @@ Radium.ContactForm = Radium.FormView.extend({
       }
     });
 
-    contact.addObserver('isError', function() {
+    company.addObserver('isError', function() {
       if (this.get('isError')) {
         self.error("Look like something broke. Report it so we can fix it");
       }

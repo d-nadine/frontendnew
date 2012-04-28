@@ -32,12 +32,15 @@ minispade.require('radium/views/forms/deal_form');
 minispade.require('radium/views/forms/campaign_form');
 minispade.require('radium/views/forms/add_to_campaign_form');
 minispade.require('radium/views/forms/todo_form');
+minispade.require('radium/views/forms/company_form');
+minispade.require('radium/views/forms/group_form');
 
 // Feeds
 minispade.require('radium/views/feed/feed');
 minispade.require('radium/views/feed/date_filters');
 minispade.require('radium/views/feed/feed_list');
 minispade.require('radium/views/feed/type_filter');
+minispade.require('radium/views/feed/feed_filter_item');
 minispade.require('radium/views/feed/coffee_cup_total');
 minispade.require('radium/views/feed/cluster');
 minispade.require('radium/views/feed/comment');
@@ -57,6 +60,7 @@ minispade.require('radium/views/dashboard/feed_filter');
 minispade.require('radium/views/contacts/contacts');
 minispade.require('radium/views/contacts/contact');
 minispade.require('radium/views/contacts/toolbar');
+minispade.require('radium/views/contacts/feed_filter');
 minispade.require('radium/views/contacts/contact_card');
 minispade.require('radium/views/contacts/contact_label');
 

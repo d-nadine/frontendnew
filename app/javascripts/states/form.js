@@ -27,6 +27,7 @@ Radium.FormManager = Ember.StateManager.create({
       manager.getPath('rootView.childViews').removeObject(currentForm);
       manager.set('formName', null);
       manager.goToState('empty');
+      manager.get('rootView').remove();
     },
     showForm: function(manager, context) {
       var form = Radium[context.form + 'Form'].create(),

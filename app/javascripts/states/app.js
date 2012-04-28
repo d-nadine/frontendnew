@@ -79,7 +79,6 @@ Radium.App = Ember.StateManager.create({
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
-    
     manager.goToState(statePath);
     
   },

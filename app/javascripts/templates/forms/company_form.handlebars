@@ -1,10 +1,10 @@
 {{#view cancelFormButton class="close"}}×{{/view}}
-<legend>Add a Contact</legend>
+<legend>Add a Company</legend>
 <fieldset class="control-group">
   <label for="contact-name">Name</label>
-  {{view contactNameField}}
+  {{view companyNameField}}
   {{#if isError}}
-  <span class="help-inline clear">Contact name is required</span>
+  <span class="help-inline clear">Company name is required</span>
   {{/if}}
 </fieldset>
 <fieldset class="control-group form-inline" id="email-addresses">
@@ -23,6 +23,11 @@
     <input type="text" class="phone-value" placeholder="Phone Number">
     <!-- <i class="icon-plus-sign"></i> -->
   </div>
+</fieldset>
+
+<fieldset class="control-group">
+  <label for="website">Website</label>
+  <input type="text" name="website" id="website" placeholder="http://">
 </fieldset>
 
 <fieldset class="control-group form-inline" id="addresses">
