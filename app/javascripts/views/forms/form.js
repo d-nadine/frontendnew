@@ -1,9 +1,13 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
   classNames: ['well'],
+
+  // Validation properties
   hasNoOptions: true,
   isSubmitting: false,
   isValid: false,
+  isMatchError: null,
+
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
     this.$('.more-options').addClass('hide');

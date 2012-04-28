@@ -1,22 +1,12 @@
 Radium.CompanyForm = Radium.FormView.extend({
   templateName: 'company_form',
 
-  companyNameField: Ember.TextField.extend({
+  companyNameField: Ember.TextField.extend(Radium.UniqueTextFieldValidation, {
     attributeBindings: ['name'],
     name: 'contact-name',
     elementId: 'contact-name',
     classNames: ['span6'],
-    focusOut: function(event) {
-      if (this.$().val() !== '') {
-        this.setPath('parentView.isValid', true);
-        this.setPath('parentView.isError', false);
-        this.$().parent().removeClass('error');
-      } else {
-        this.$().parent().addClass('error');
-        this.setPath('parentView.isError', true);
-        this.setPath('parentView.isValid', false);
-      }
-    }
+    storedNamesBinding: 'Radium.contactsController.names'
   }),
 
   submitForm: function() {

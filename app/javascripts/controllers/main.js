@@ -5,6 +5,7 @@ minispade.require('radium/controllers/announcements');
 minispade.require('radium/controllers/app');
 minispade.require('radium/controllers/users');
 minispade.require('radium/controllers/contacts');
+minispade.require('radium/controllers/groups');
 minispade.require('radium/controllers/todos');
 minispade.require('radium/controllers/selected_contacts');
 minispade.require('radium/controllers/selected_contact');

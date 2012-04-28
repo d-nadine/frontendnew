@@ -1,10 +1,13 @@
 {{#view cancelFormButton class="close"}}×{{/view}}
 <legend>Add a Group</legend>
-<fieldset class="control-group">
+<fieldset class="control-group" {{bindAttr class="isError:error"}}>
   <label for="group-name">Name</label>
   {{view groupNameField}}
-  {{#if isError}}
+  {{#if isEmptyError}}
   <span class="help-inline clear">Group name is required</span>
+  {{/if}}
+  {{#if isMatchError}}
+  <span class="help-inline clear">Group name must be unique.</span>
   {{/if}}
 </fieldset>
 

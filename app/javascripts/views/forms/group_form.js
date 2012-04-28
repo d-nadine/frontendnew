@@ -1,29 +1,11 @@
 Radium.GroupForm = Radium.FormView.extend({
   templateName: 'group_form',
-
-  groupNameField: Ember.TextField.extend({
+  groupNameField: Ember.TextField.extend(Radium.UniqueTextFieldValidation, {
     attributeBindings: ['name'],
     name: 'group-name',
     elementId: 'group-name',
     classNames: ['span6'],
-    keyUp: function() {
-      if (this.$().val() !== '') {
-        this.setPath('parentView.isValid', true);
-        this.setPath('parentView.isError', false);
-        this.$().parent().removeClass('error');
-      }
-    },
-    focusOut: function(event) {
-      if (this.$().val() !== '') {
-        this.setPath('parentView.isValid', true);
-        this.setPath('parentView.isError', false);
-        this.$().parent().removeClass('error');
-      } else {
-        this.$().parent().addClass('error');
-        this.setPath('parentView.isError', true);
-        this.setPath('parentView.isValid', false);
-      }
-    }
+    storedNamesBinding: 'Radium.groupsController.names'
   }),
 
   submitForm: function() {

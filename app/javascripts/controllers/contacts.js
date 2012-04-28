@@ -17,14 +17,6 @@ Radium.contactsController = Ember.ArrayProxy.create({
 
   /**
     @binding {content.status}
-    @return {Ember.Array} Contacts as companies
-  */
-  leads: function() {
-    return this.filterProperty('status', 'lead');
-  }.property('@each.status').cacheable(),
-
-  /**
-    @binding {content.status}
     @return {Ember.Array} Filtered leads
   */
   leads: function() {
@@ -93,6 +85,10 @@ Radium.contactsController = Ember.ArrayProxy.create({
     });
   }.property('@each.name').cacheable(),
 
+  // Simple array of names.
+  names: function() {
+    return this.getEach('name');
+  }.property('@each.name').cacheable(),
   /**
     An array of objects for simple, name-only autocomplete in forms.
     eg [{label: "Avon Barksdale", value: {userid}}]
