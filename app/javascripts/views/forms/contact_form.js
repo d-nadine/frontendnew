@@ -59,7 +59,7 @@ Radium.ContactForm = Radium.FormView.extend({
       addressGroup.country = $(this).find('.address-country').val();
       addressGroup.zip_code = $(this).find('.address-zip').val();
       if (addressGroup.name) {
-        addressFields.push(addressGroup);
+        addresses.push(addressGroup);
       }
     });
 
@@ -85,7 +85,7 @@ Radium.ContactForm = Radium.FormView.extend({
 
     // Disable the form buttons
     this.sending();
-
+    debugger;
     var contact = Radium.store.createRecord(Radium.Contact, data);
     Radium.store.commit();
 

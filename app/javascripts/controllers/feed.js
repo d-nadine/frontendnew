@@ -1,4 +1,4 @@
-Radium.feedController = Ember.Object.create({
+Radium.feedController = Ember.Object.extend({
   /**
     Example content hash:
     
@@ -8,10 +8,6 @@ Radium.feedController = Ember.Object.create({
     }
 
   */
-  content: [],
-
-  // Lookup any stored days.
-  dates: {},
 
   modelTypes: {
     'todo': 'Todo',
@@ -38,7 +34,7 @@ Radium.feedController = Ember.Object.create({
             Ember.DATETIME_ISO8601
         ).toFormattedString('%B %D, %Y'),
         hash = activity.timestamp.match(/(?:\d+\-\d+\-\d+)/)[0],
-        ref = activity.reference[kind],
+        ref = activity[kind],
         model = this.modelTypes[kind];
 
     // Don't load if we already gots it.

@@ -15,7 +15,7 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
   didInsertElement: function() {
     var notificationView = Ember.View.create({
       tagName: 'li',
-      notificationsBinding: 'Radium.dashboardFeedController.size',
+      notificationsBinding: 'Radium.dashboardFeedListController.size',
       click: function() {return false;},
       template: Ember.Handlebars.compile('<a href="#">Notifications <span class="badge badge-error">{{notifications}}</span></a>')
     });

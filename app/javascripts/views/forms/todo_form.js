@@ -100,7 +100,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
   submitForm: function() {
     var self = this;
-    var contactIds = this.get('selectedContacts').getEach('id'),
+    var targetId = this.getPath('params.id'),
+        targetType = this.getPath('params.type'),
+        contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
         finishByDate = this.$('#finish-by-date').val(),
         finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
@@ -117,13 +119,22 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       this.error("A user must be assigned to a todo.");
       return false;
     }
+
+    // set the url based on the context, ie. a contact or meeting todo versus
+    // general todo that is created for the logged in user.
+    if (targetType) {
+      Radium.Todo.reopenClass({
+        url: '%@/%@/todos'.fmt(targetType, targetId),
+        root: 'todo'
+      });
+    } else {
+      Radium.Todo.reopenClass({
+        url: 'todos',
+        root: 'todo'
+      });
+    }
     // Disable the form buttons
     this.sending();
-
-    Radium.Todo.reopenClass({
-      url: 'todos',
-      root: 'todo'
-    });
 
     var todo = Radium.store.createRecord(Radium.Todo, data);
     Radium.todosController.add(todo);

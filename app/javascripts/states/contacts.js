@@ -1,17 +1,6 @@
-function infiniteLoading(action) {
-  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    Radium.App.send(action);
-    return false;
-  }
-}
-
 Radium.ContactsPage = Ember.State.extend({
   index: Ember.ViewState.extend({
     view: Radium.ContactsPageView,
-    exit: function(manager) {
-      this._super(manager);
-      $(window).off();
-    },
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {
@@ -46,29 +35,72 @@ Radium.ContactsPage = Ember.State.extend({
     ready: Ember.State.create(),
 
     // Loader for infinite scrolling
-    loading: Radium.MiniLoader.create(),
+    loading: Radium.MiniLoader,
   }),
   
   show: Ember.ViewState.extend({
     view: Radium.ContactPageView,
     enter: function(manager) {
-      var controller = Radium.selectedContactController;
-      this._super(manager);
-      if (controller.get('contact') == null) {
+      var selectedContact = Radium.selectedContactController,
+          contactId,
+          view = this.get('view'),
+          feedsManager = Radium.loadedContactsFeed;
+
+      if (selectedContact.get('contact') == null) {
         var contact = Radium.store.find(Radium.Contact, Radium.appController.get('params'));
-        controller.set('content', contact);
+        selectedContact.set('content', contact);
       }
+      
+      contactId = selectedContact.getPath('content.id');
+
+      // if (feedsManager.find(contactId)) {
+      //   view.reopen({
+      //     controller: feedsManager.find(contactId)
+      //   });
+      // } else {
+        // var contactFeed = Radium.feedController.create({
+        //       content: [],
+        //       page: 0,
+        //       totalPages: 2
+        //     });
+      //   view.reopen({
+      //     contentBinding: contactFeed
+      //   });
+      //   feedsManager.add(contactFeed, contactId);
+      // }
+
+      if (!selectedContact.getPath('content.feed')) {
+        var contactFeed = Radium.feedController.create({
+              content: [],
+              dates: {},
+              page: 0,
+              totalPages: 2
+            });
+        selectedContact.setPath('content.feed', contactFeed);
+      }
+
+      this._super(manager);
+
+
+
+      Radium.PhoneNumber.reopenClass({
+        url: 'contacts/%@'.fmt(contactId),
+        root: 'contact'
+      });
     },
     exit: function(manager) {
       this._super(manager);
-      Radium.selectedContactController.set('contact', null);
-    }
+      Radium.PhoneNumber.reopenClass({
+        url: null,
+        root: null
+      });
+      Radium.selectedContactController.set('content', null);
+    },
+    ready: Ember.State.create(),
+    loading: Radium.MiniLoader
   }),
   // Events
   allCampaigns: function(manager, context) {
-    $(window).on('scroll', function() {
-      infiniteLoading('loadContacts')
-    });
     Radium.contactsController.clearSelected();
     Radium.selectedContactsController.setProperties({
       content: Radium.contactsController.get('content'),
@@ -103,9 +135,6 @@ Radium.ContactsPage = Ember.State.extend({
       var moreContacts = Radium.store.find(Radium.Contact, {page: page});
       moreContacts.addObserver('isLoaded', function() {
         if (this.get('isLoaded')) {
-          $(window).on('scroll', function() {
-            infiniteLoading('loadContacts')
-          });
           manager.goToState('ready');
         }
       });

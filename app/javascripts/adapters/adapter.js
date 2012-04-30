@@ -59,7 +59,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
   updateRecord: function(store, type, model) {
     var url;
     var id = get(model, 'id');
-    var root = this.rootForType(type);
+    var root = (type.root) ? type.root : this.rootForType(type);
     var data = {};
     data[root] = getPath(model, 'data.unsavedData');
     if (model.get('url')) {

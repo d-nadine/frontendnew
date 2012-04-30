@@ -3,6 +3,21 @@
 */
 
 Radium.Contact = Radium.Person.extend({
+  namingConvention: {
+    keyToJSONKey: function(key) {
+      // TODO: Strip off `is` from the front. Example: `isHipster` becomes `hipster`
+      return Ember.String.decamelize(key);
+    },
+    foreignKey: function(key) {
+      if (key !== 'user') {
+        return Ember.String.decamelize(key) + '_attributes';
+      } else {
+        return key;
+      }
+      
+    }
+  },
+
   contactedAt: DS.attr('date', {
     key: 'contacted_at'
   }),
@@ -52,6 +67,8 @@ Radium.Contact = Radium.Person.extend({
       return "";
     }
   }.property('name').cacheable(),
+
+  feed: null,
 
   // HAX for Data
   email_addresses_attributes: DS.attr('array'),

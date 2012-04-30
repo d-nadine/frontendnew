@@ -1,1 +1,6 @@
-Radium.dashboardFeedController = Crossfilter.Data.create({});
+Radium.dashboardFeedController = Radium.feedController.create({
+  content: [],
+  dates: {},
+  page: 0,
+  totalPages: 2
+});

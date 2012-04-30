@@ -1,6 +1,6 @@
 Radium.feedByUserController = Crossfilter.Dimension.create({
   _byUser: function(data) {
-    return data.owner.user.id;
+    return (data.user) ? data.user.id : 0;
   },
   crossfilterDidChange: function() {
     var cf = this.get('crossfilter'),

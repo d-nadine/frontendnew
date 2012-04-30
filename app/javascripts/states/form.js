@@ -9,7 +9,9 @@ Radium.FormManager = Ember.StateManager.create({
 
   empty: Ember.State.create({
     showForm: function(manager, context) {
-      var form = Radium[context.form + 'Form'].create();
+      var form = Radium[context.form + 'Form'].create({
+                  params: context
+                });
       if (Radium.FormContainer.get('state') !== 'inDOM') {
         Radium.FormContainer.appendTo('#form-container');
       }
@@ -30,7 +32,9 @@ Radium.FormManager = Ember.StateManager.create({
       manager.get('rootView').remove();
     },
     showForm: function(manager, context) {
-      var form = Radium[context.form + 'Form'].create(),
+      var form = Radium[context.form + 'Form'].create({
+                    params: context
+                  }),
           container = manager.getPath('rootView.childViews');
       if (context.form !== manager.get('formName')) {
         container.removeAt(0);

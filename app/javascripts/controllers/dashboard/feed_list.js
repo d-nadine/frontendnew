@@ -1,3 +1,1 @@
-Radium.feedListController = Ember.ArrayProxy.create({
-  content: []
-});
+Radium.dashboardFeedListController = Crossfilter.Data.create({});

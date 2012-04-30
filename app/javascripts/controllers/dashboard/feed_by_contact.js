@@ -1,10 +1,6 @@
 Radium.feedByContactController = Crossfilter.Dimension.create({
   _byContact: function(data) {
-    if (data.reference.contact) {
-      return data.reference.contact.id;
-    } else {
-      return 0;
-    }
+   return (data.contact) ? data.contact.id : 0;
   },
   crossfilterDidChange: function() {
     var cf = this.get('crossfilter'),

@@ -14,6 +14,8 @@ minispade.require('radium/controllers/call_lists');
 minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/inline_comments');
+
+minispade.require('radium/controllers/dashboard/feed_by_kind');
 minispade.require('radium/controllers/dashboard/feed_by_kind');
 minispade.require('radium/controllers/dashboard/feed_by_user');
 minispade.require('radium/controllers/dashboard/feed_by_contact');
@@ -22,6 +24,10 @@ minispade.require('radium/controllers/dashboard/feed_by_day');
 minispade.require('radium/controllers/dashboard/feed_by_activity');
 minispade.require('radium/controllers/dashboard/feed_list');
 minispade.require('radium/controllers/dashboard/feed');
+
+minispade.require('radium/controllers/contacts/feed');
+minispade.require('radium/controllers/contacts/loaded_feeds');
+
 minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');
 minispade.require('radium/controllers/selected_feed_date');
