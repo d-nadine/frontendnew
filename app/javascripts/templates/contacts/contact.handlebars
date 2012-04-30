@@ -3,7 +3,7 @@
   <div id="sidebar" class="span3">
     <div id="contact-info" class="module">
       <div class="component">
-        <h4>{{name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
+        <h4>{{inlineTextField name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
         <small>{{#each groups}}{{name}} {{/each}}</small>
         <p>Assigned to: {{user.name}}</p>
         <address>
@@ -18,6 +18,7 @@
         </address>
       </div>
     </div> <!-- / #contact-info -->
+    {{#if addresses}}
     <div id="contact-addresses" class="module">
       {{#each addresses}}
         <div class="component bordered">
@@ -30,12 +31,14 @@
         </div>
       {{/each}}
     </div> <!-- / #contact-addresses -->
+    {{/if}}
 
   </div> <!-- /#sidebar -->
   {{/with}}
   <div id="content" class="span9">
     <div id="form-container"></div>
     <div class="page-header">
+      <a href="#" class="btn btn-small pull-right" {{action "addContactTodo"}}>Add todo</a>
       <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
     </div>
     {{#with Radium.selectedContactController.content.feed}}
