@@ -1,3 +1,4 @@
+* [2012-04-30 07:30 -0700] bda82ab - twinturbo: Remove stray debugger
 * [2012-04-30 07:11 -0700] ad44626 - twinturbo: Use unicorn
 * [2012-04-30 02:28 -0700] a446705 - Joshua Jones: Add todo buttons to user/contact pages.
 * [2012-04-28 01:37 -0700] bf49e07 - Joshua Jones: Add unique name field validations. closes #25, closes #26
