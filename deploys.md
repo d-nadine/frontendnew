@@ -1,3 +1,4 @@
+* [2012-04-30 02:28 -0700] a446705 - Joshua Jones: Add todo buttons to user/contact pages.
 * [2012-04-28 01:37 -0700] bf49e07 - Joshua Jones: Add unique name field validations. closes #25, closes #26
 * [2012-04-27 17:40 -0700] 844510c - Joshua Jones: Clean up contact form, add Company, Group forms.
 * [2012-04-27 02:18 -0700] a6ff9d8 - Joshua Jones: Formatting.
