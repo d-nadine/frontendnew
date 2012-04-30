@@ -10,6 +10,7 @@ Radium.User = Radium.Person.extend({
   account: DS.attr('number'),
   contacts: DS.hasMany('Radium.Contact'),
   following: DS.hasMany('Radium.User'),
+  feed: null,
   campaign: DS.belongsTo('Radium.Campaign'),
   leads: function() {
     var contacts = this.get('contacts');

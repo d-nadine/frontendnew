@@ -64,6 +64,10 @@ minispade.require('radium/views/contacts/feed_filter');
 minispade.require('radium/views/contacts/contact_card');
 minispade.require('radium/views/contacts/contact_label');
 
+// Users
+minispade.require('radium/views/users/users');
+minispade.require('radium/views/users/user');
+
 // Deals
 minispade.require('radium/views/deals/overdue_deals');
 minispade.require('radium/views/deals/deals');

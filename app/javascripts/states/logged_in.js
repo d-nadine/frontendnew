@@ -30,6 +30,7 @@ Radium.LoggedIn = Ember.State.create({
   }),
   dashboard: Radium.DashboardPage.create(),
   contacts: Radium.ContactsPage.create(),
+  users: Radium.UsersPage.create(),
   deals: Radium.DealsPage.create(),
   pipeline: Radium.PipelinePage.create(),
   campaigns: Radium.CampaignsPage.create(),

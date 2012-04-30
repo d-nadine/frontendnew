@@ -74,6 +74,10 @@ minispade.require('radium/templates/contacts/contacts');
 minispade.require('radium/templates/contacts/contact');
 minispade.require('radium/templates/contacts/contact_card');
 
+// Users
+minispade.require('radium/templates/users/users');
+minispade.require('radium/templates/users/user');
+
 // Deals
 minispade.require('radium/templates/deals/overdue_deals');
 minispade.require('radium/templates/deals/deals');

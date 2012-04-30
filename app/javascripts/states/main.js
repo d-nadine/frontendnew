@@ -3,6 +3,7 @@ minispade.require('radium/states/form');
 minispade.require('radium/states/mini_loader');
 minispade.require('radium/states/dashboard');
 minispade.require('radium/states/contacts');
+minispade.require('radium/states/users');
 minispade.require('radium/states/pipeline');
 minispade.require('radium/states/campaigns');
 minispade.require('radium/states/deals');

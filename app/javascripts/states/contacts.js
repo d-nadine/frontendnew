@@ -42,9 +42,7 @@ Radium.ContactsPage = Ember.State.extend({
     view: Radium.ContactPageView,
     enter: function(manager) {
       var selectedContact = Radium.selectedContactController,
-          contactId,
-          view = this.get('view'),
-          feedsManager = Radium.loadedContactsFeed;
+          contactId;
 
       if (selectedContact.get('contact') == null) {
         var contact = Radium.store.find(Radium.Contact, Radium.appController.get('params'));
@@ -52,22 +50,6 @@ Radium.ContactsPage = Ember.State.extend({
       }
       
       contactId = selectedContact.getPath('content.id');
-
-      // if (feedsManager.find(contactId)) {
-      //   view.reopen({
-      //     controller: feedsManager.find(contactId)
-      //   });
-      // } else {
-        // var contactFeed = Radium.feedController.create({
-        //       content: [],
-        //       page: 0,
-        //       totalPages: 2
-        //     });
-      //   view.reopen({
-      //     contentBinding: contactFeed
-      //   });
-      //   feedsManager.add(contactFeed, contactId);
-      // }
 
       if (!selectedContact.getPath('content.feed')) {
         var contactFeed = Radium.feedController.create({

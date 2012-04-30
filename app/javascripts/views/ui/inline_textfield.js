@@ -4,6 +4,7 @@ Radium.InlineTextField = Ember.View.extend({
   attributeBindings: ['title'],
   title: "Click to edit",
   isEditing: false,
+
   click: function(event) {
     this.set('isEditing', true);
     this.$('textarea').focus();

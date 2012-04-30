@@ -1,0 +1,31 @@
+<div class="row">
+  {{#with content}}
+  <div id="sidebar" class="span3">
+    <div id="contact-info" class="module">
+      <div class="component">
+        <h4>{{inlineTextField name}}</h4>
+        <address>
+          <abbr>Email:</abbr> {{inlineTextField email}}<br>
+          <abbr>Phone:</abbr> {{inlineTextField phone}}<br>
+        </address>
+      </div>
+    </div>
+  </div> <!-- /#sidebar -->
+  <div id="content" class="span9">
+    <div id="form-container"></div>
+    <div class="page-header">
+      <h3>{{name}} Feed</h3>
+    </div>
+    {{#with feed}}
+      {{#each content}}
+        <div class="page-header">
+          <h3>{{formatDate date}}</h3>
+        </div>
+        {{#each todos}}
+          {{view Radium.TodoView contentBinding="this"}}
+        {{/each}}
+      {{/each}}
+    {{/with}}
+  </div>
+  {{/with}}
+</div>

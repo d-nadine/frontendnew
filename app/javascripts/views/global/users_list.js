@@ -7,6 +7,9 @@ Radium.UsersListView = Radium.FeedFilterView.extend({
     tagName: 'li',
     templateName: 'users_list',
     classNameBindings: ['isSelected:active'],
+    userUrl: function() {
+      return '/users/' + this.getPath('content.id');
+    }.property('content.id').cacheable(),
     isSelected: function() {
       return (this.getPath('parentView.filter') == this.getPath('content.id')) ? true : false;
     }.property('parentView.filter').cacheable(),

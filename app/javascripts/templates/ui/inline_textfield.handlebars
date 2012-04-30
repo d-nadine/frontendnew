@@ -1,5 +1,9 @@
 {{#if isEditing}}
   {{view inlineEditTextField valueBinding="value" propagatesEvents=true}}
 {{else}}
-  {{value}}
+  {{#if value}}
+    {{value}}
+  {{else}}
+    <i>Add new</i>
+  {{/if}}
 {{/if}}

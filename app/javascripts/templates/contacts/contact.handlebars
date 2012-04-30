@@ -8,7 +8,7 @@
         <p>Assigned to: {{user.name}}</p>
         <address>
           {{#each phoneNumbers}}
-            <abbr>{{name}}:</abbr> {{inlineTextField value}}<br>
+            <abbr>{{name}}:</abbr> {{value}}<br>
           {{/each}}
         </address>
         <address>
@@ -36,7 +36,7 @@
   <div id="content" class="span9">
     <div id="form-container"></div>
     <div class="page-header">
-      <h3>{{test}}{{Radium.selectedContactController.content.name}} Feed</h3>
+      <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
     </div>
     {{#with Radium.selectedContactController.content.feed}}
       {{#each content}}

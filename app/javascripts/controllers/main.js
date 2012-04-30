@@ -9,6 +9,7 @@ minispade.require('radium/controllers/groups');
 minispade.require('radium/controllers/todos');
 minispade.require('radium/controllers/selected_contacts');
 minispade.require('radium/controllers/selected_contact');
+minispade.require('radium/controllers/selected_user');
 minispade.require('radium/controllers/everyone');
 minispade.require('radium/controllers/call_lists');
 minispade.require('radium/controllers/meetings');
@@ -26,7 +27,6 @@ minispade.require('radium/controllers/dashboard/feed_list');
 minispade.require('radium/controllers/dashboard/feed');
 
 minispade.require('radium/controllers/contacts/feed');
-minispade.require('radium/controllers/contacts/loaded_feeds');
 
 minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');
