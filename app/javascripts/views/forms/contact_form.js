@@ -85,7 +85,6 @@ Radium.ContactForm = Radium.FormView.extend({
 
     // Disable the form buttons
     this.sending();
-    debugger;
     var contact = Radium.store.createRecord(Radium.Contact, data);
     Radium.store.commit();
 
@@ -102,7 +101,6 @@ Radium.ContactForm = Radium.FormView.extend({
             self.error("Look like something broke. Report it so we can fix it");
             break;
         }
-        
       }
     });
 
