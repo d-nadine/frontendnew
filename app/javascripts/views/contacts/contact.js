@@ -10,6 +10,17 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
     return false;
   },
 
+  addContactToGroup: function() {
+    Radium.FormManager.send('showForm', {
+      form: 'AddToGroup'
+    });
+    return false;
+  },
+
+  addContactToCompany: function() {
+    return false;
+  },
+
   // Endless scrolling properties
   feedBinding: 'content.feed',
   pageBinding: 'content.feed.page',

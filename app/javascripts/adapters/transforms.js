@@ -5,10 +5,10 @@
 // Array transforms
 DS.attr.transforms.array = {
   from: function(serialized) {
-    return serialized;
+    return (Ember.isArray(serialized) ? serialized : null);
   },
-  to: function(array) {
-    return array;
+  to: function(deserialized){
+    return (Ember.isArray(deserialized) ? deserialized : null);
   }
 };
 

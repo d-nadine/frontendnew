@@ -18,7 +18,7 @@
         </address>
       </div>
     </div> <!-- / #contact-info -->
-    {{#if addresses}}
+    {{#if addresses.length}}
     <div id="contact-addresses" class="module">
       {{#each addresses}}
         <div class="component bordered">
@@ -38,7 +38,11 @@
   <div id="content" class="span9">
     <div id="form-container"></div>
     <div class="page-header">
-      <a href="#" class="btn btn-small pull-right" {{action "addContactTodo"}}>Add todo</a>
+      <div class="btn-group pull-right">
+        <a href="#" class="btn btn-small" {{action "addContactTodo"}}>Add todo</a>
+        <a href="#" class="btn btn-small" {{action "addContactToGroup"}}>Add to Group</a>
+        <a href="#" class="btn btn-small" {{action "addContactToCompany"}}>Add to Company</a>
+      </div>
       <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
     </div>
     {{#with Radium.selectedContactController.content.feed}}

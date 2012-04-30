@@ -20,6 +20,9 @@ Radium.InlineTextField = Ember.View.extend({
       this.set('isEditing', false);
     }
   },
+  focusOut: function() {
+    this.set('isEditing', false);
+  },
   inlineEditTextField: Ember.TextField.extend({
     didInsertElement: function() {
       this._super();

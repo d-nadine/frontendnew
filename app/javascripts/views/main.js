@@ -34,6 +34,7 @@ minispade.require('radium/views/forms/add_to_campaign_form');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/forms/company_form');
 minispade.require('radium/views/forms/group_form');
+minispade.require('radium/views/forms/add_to_group');
 
 // Feeds
 minispade.require('radium/views/feed/feed');

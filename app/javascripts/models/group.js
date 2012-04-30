@@ -16,7 +16,5 @@ Radium.Group = Radium.Core.extend({
   activities: DS.hasMany('Radium.Activity'),
   user: DS.hasOne('Radium.User'),
 
-  contact_ids: function() {
-    return this.get('contacts').getEach('id');
-  }.property('contacts').cacheable()
+  contact_ids: DS.attr('array')
 });

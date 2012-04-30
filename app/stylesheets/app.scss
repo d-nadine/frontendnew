@@ -145,7 +145,7 @@ body {
   .well {
     width: 660px;
     position: relative;
-    float: left;
+    display: inline-block;
   }
 
   button.close {

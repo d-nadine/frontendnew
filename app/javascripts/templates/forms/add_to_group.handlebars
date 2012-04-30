@@ -1,0 +1,15 @@
+{{#view cancelFormButton class="close"}}×{{/view}}
+<legend>Add to Group</legend>
+<fieldset class="control-group" {{bindAttr class="isError:error"}}>
+  <label for="contact-name">Group</label>
+  {{view groupSearchField}}
+</fieldset>
+{{#if willCreateNewGroup}}
+  <div class="alert alert-info">
+    A new group of {{newGroupName}} will be created.
+  </div>
+{{/if}}
+
+<div class="form-actions">
+  {{#view submitButton class="btn btn-primary"}}Add to Group{{/view}}
+</div>

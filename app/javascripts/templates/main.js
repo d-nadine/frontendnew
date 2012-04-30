@@ -64,6 +64,7 @@ minispade.require('radium/templates/forms/campaign_form');
 minispade.require('radium/templates/forms/add_to_campaign_form');
 minispade.require('radium/templates/forms/company_form');
 minispade.require('radium/templates/forms/group_form');
+minispade.require('radium/templates/forms/add_to_group');
 
 // Dashboard
 minispade.require('radium/templates/dashboard/dashboard');
