@@ -359,10 +359,11 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
   sideload: function(store, type, json, root) {
     var sideloadedType, mappings;
-    
+
     for (var prop in json) {
       if (!json.hasOwnProperty(prop)) { continue; }
       if (prop === root) { continue; }
+      if (prop === 'meta') { continue; }
 
       sideloadedType = type.typeForAssociation(prop);
 
