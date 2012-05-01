@@ -70,7 +70,7 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         selectedGroup = this.get('selectedGroup'),
         newGroupName = this.get('newGroupName'),
         selectedContacts = this.getPath('params.target'),
-        targetType = Ember.typeOf(selectedContacts);
+        isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
 
     Radium.Group.reopenClass({
       url: 'groups',
@@ -80,8 +80,7 @@ Radium.AddToGroupForm = Radium.FormView.extend({
     this.sending();
 
     if (selectedGroup) {
-      debugger;
-      if (targetType === 'array') {
+      if (isBulk) {
         selectedGroup.get('contacts').pushObjects(selectedContacts);
         selectedContacts.forEach(function(contact) {
           contact.get('groups').pushObject(selectedGroup);
@@ -92,9 +91,10 @@ Radium.AddToGroupForm = Radium.FormView.extend({
       }
       Radium.store.commit();
     } else {
-      var contactIds = (targetType === 'array') 
+      var contactIds = (isBulk) 
             ? selectedContacts.getEach('id') 
             : [selectedContacts.get('id')];
+
       var newGroup = Radium.store.createRecord(Radium.Group, {
         name: newGroupName,
         contact_ids: contactIds
@@ -123,6 +123,11 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         }
       });
     }
+    
+    Radium.Group.reopenClass({
+      url: null,
+      root: null
+    });
   }
   
 });

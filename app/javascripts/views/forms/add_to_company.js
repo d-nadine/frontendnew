@@ -69,22 +69,38 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
     var self = this,
         selectedCompany = this.get('selectedCompany'),
         newCompanyName = this.get('newCompanyName'),
-        selectedContact = Radium.selectedContactController.get('content');
+        selectedContacts = this.getPath('params.target'),
+        isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
+
+    Radium.Group.reopenClass({
+      url: 'groups',
+      root: 'group'
+    });
 
     this.sending();
+
     if (selectedCompany) {
-      selectedCompany.get('contacts').pushObject(selectedContact);
-      selectedContact.get('groups').pushObject(selectedCompany);
-      debugger;
+      if (isBulk) {
+        selectedCompany.get('contacts').pushObjects(selectedContacts);
+        selectedContacts.get('groups').pushObjects(selectedCompany);
+      } else {
+        selectedCompany.get('contacts').pushObject(selectedContacts);
+        selectedContacts.get('groups').pushObject(selectedCompany);
+      }
       Radium.store.commit();
+
     } else {
-      var newGroup = Radium.store.createRecord(Radium.Group, {
+      var contactIds = (isBulk) 
+            ? selectedContacts.getEach('id') 
+            : [selectedContacts.get('id')];
+
+      var newCompany = Radium.store.createRecord(Radium.Group, {
         name: newCompanyName,
-        contact_ids: [selectedContact.get('id')]
+        contact_ids: contactIds
       });
 
       Radium.store.commit();
-      newGroup.addObserver('isValid', function() {
+      newCompany.addObserver('isValid', function() {
         if (this.get('isValid')) {
           self.success("New group created");
         } else {
@@ -100,13 +116,16 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
         }
       });
 
-      newGroup.addObserver('isError', function() {
+      newCompany.addObserver('isError', function() {
         if (this.get('isError')) {
           self.error("Look like something broke. Report it so we can fix it");
         }
       });
     }
 
-    return false;
+    Radium.Group.reopenClass({
+      url: null,
+      root: null
+    });
   }
 });

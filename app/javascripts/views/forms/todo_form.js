@@ -113,7 +113,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           finishBy: finishByValue.toISO8601(),
           user_id: userId,
           created_at: Ember.DateTime.create().toISO8601()
-        };
+        },
+        selectedContacts = this.getPath('params.target'),
+        isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
 
     if (!userId) {
       this.error("A user must be assigned to a todo.");
@@ -133,6 +135,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         root: 'todo'
       });
     }
+    
     // Disable the form buttons
     this.sending();
 
@@ -143,7 +146,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     todo.addObserver('isValid', function() {
       if (this.get('isValid')) {
         Radium.Todo.reopenClass({
-          url: null
+          url: null,
+          root: null
         });
         self.success("Todo created");
       } else {
