@@ -14,5 +14,5 @@ Radium.DashboardView = Ember.View.extend(Radium.EndlessScrolling, {
   targetIdBinding: 'Radium.usersController.loggedInUser.id',
   pageBinding: 'Radium.dashboardFeedController.page',
   totalPagesBinding: 'Radium.dashboardFeedController.totalPages',
-  feedUrl: '/api/users/13/feed'
+  feedUrl: '/api/users/@%/feed'
 });
