@@ -1,3 +1,4 @@
+* [2012-05-01 00:13 -0700] e0d9594 - Joshua Jones: Fix pushed feed data going to the wrong controller.
 * [2012-04-30 07:30 -0700] bda82ab - twinturbo: Remove stray debugger
 * [2012-04-30 07:11 -0700] ad44626 - twinturbo: Use unicorn
 * [2012-04-30 02:28 -0700] a446705 - Joshua Jones: Add todo buttons to user/contact pages.
