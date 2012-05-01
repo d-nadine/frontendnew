@@ -1,5 +1,5 @@
 Radium.FormView = Ember.View.extend({
-  tagName: 'form',
+  // tagName: 'form',
   classNames: ['well'],
 
   // Validation properties
@@ -11,7 +11,6 @@ Radium.FormView = Ember.View.extend({
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
     this.$('.more-options').addClass('hide');
-    this.$().hide().slideDown(300);
     this.$('fieldset:first').find('input:text, textarea').focus();
   },
 

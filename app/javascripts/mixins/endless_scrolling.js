@@ -43,8 +43,8 @@ Radium.EndlessScrolling = Ember.Mixin.create({
 
       $.ajax(request)
         .success(function(data, status, xhr) {
-          var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
-              currentPage = xhr.getResponseHeader('x-radium-current-page');
+          var totalPages = data.meta.pagination.total,
+              currentPage = data.meta.pagination.current;
 
           self.setProperties({
             totalPages: parseInt(totalPages),
