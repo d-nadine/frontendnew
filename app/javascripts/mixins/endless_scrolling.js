@@ -51,7 +51,7 @@ Radium.EndlessScrolling = Ember.Mixin.create({
             page: parseInt(currentPage)
           });
 
-          data.forEach(function(activity) {
+          data.activities.forEach(function(activity) {
             // Set some properties for view's to distingushed old items from
             // pushed new items.
             activity.isNewActivity = false;

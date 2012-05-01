@@ -37,12 +37,8 @@ Radium.feedController = Ember.Object.extend({
         ref = activity[kind],
         model = this.modelTypes[kind];
 
-    // Don't load if we already gots it.
-    if (this['_'+kind+'Ids'].indexOf(ref.id) < 0){
+    if(ref) {
       Radium.store.load(Radium[model], ref);
-
-      // Store every loaded ID so `DS.load` doesn't yell at us
-      this['_'+kind+'Ids'].push(ref.id);
     }
 
     if (!this.dates[hash]) {

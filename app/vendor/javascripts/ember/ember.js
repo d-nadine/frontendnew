@@ -1199,13 +1199,13 @@ Handlebars.JavaScriptCompiler = function() {};
     // PUBLIC API: You can override these methods in a subclass to provide
     // alternative compiled forms for name lookup and buffering semantics
     nameLookup: function(parent, name, type) {
-      if (/^[0-9]+$/.test(name)) {
+			if (/^[0-9]+$/.test(name)) {
         return parent + "[" + name + "]";
       } else if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
-        return parent + "." + name;
-      }
-      else {
-        return parent + "['" + name + "']";
+	    	return parent + "." + name;
+			}
+			else {
+				return parent + "['" + name + "']";
       }
     },
 
@@ -1419,7 +1419,7 @@ Handlebars.JavaScriptCompiler = function() {};
     lookup: function(name) {
       var topStack = this.topStack();
       this.source.push(topStack + " = (" + topStack + " === null || " + topStack + " === undefined || " + topStack + " === false ? " +
-        topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
+ 				topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
     },
 
     pushStringParam: function(string) {
@@ -1622,12 +1622,12 @@ Handlebars.JavaScriptCompiler = function() {};
     compilerWords[reservedWords[i]] = true;
   }
 
-  JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
-    if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
-      return true;
-    }
-    return false;
-  }
+	JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
+		if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
+			return true;
+		}
+		return false;
+	}
 
 })(Handlebars.Compiler, Handlebars.JavaScriptCompiler);
 
@@ -3458,8 +3458,8 @@ Ember.computed = function(func) {
   var args;
 
   if (arguments.length > 1) {
-    args = [].slice.call(arguments, 0, -1);
-    func = [].slice.call(arguments, -1)[0];
+    args = a_slice.call(arguments, 0, -1);
+    func = a_slice.call(arguments, -1)[0];
   }
 
   var cp = new ComputedProperty(func);
@@ -3562,6 +3562,11 @@ Ember.ArrayUtils = {
   indexOf: function(obj) {
     var args = Array.prototype.slice.call(arguments, 1);
     return obj.indexOf ? obj.indexOf.apply(obj, args) : arrayIndexOf.apply(obj, args);
+  },
+
+  removeObject: function(array, item) {
+    var index = this.indexOf(array, item);
+    if (index !== -1) { array.splice(index, 1); }
   }
 };
 
@@ -3691,14 +3696,29 @@ Ember.endPropertyChanges = function() {
         obj2.set('bar', baz);
       });
 */
-Ember.changeProperties = function(cb){
+Ember.changeProperties = function(cb, binding){
   Ember.beginPropertyChanges();
   try {
-    cb();
+    cb.call(binding);
   } finally {
     Ember.endPropertyChanges();
   }
 };
+
+/**
+  Set a list of properties on an object. These properties are set inside
+  a single `beginPropertyChanges` and `endPropertyChanges` batch, so
+  observers will be buffered.
+*/
+Ember.setProperties = function(self, hash) {
+  Ember.changeProperties(function(){
+    for(var prop in hash) {
+      if (hash.hasOwnProperty(prop)) Ember.set(self, prop, hash[prop]);
+    }
+  });
+  return self;
+};
+
 
 /** @private */
 function changeEvent(keyName) {
@@ -3799,11 +3819,15 @@ Ember.removeBeforeObserver = function(obj, path, target, method) {
 
 /** @private */
 Ember.notifyObservers = function(obj, keyName) {
+  if (obj.isDestroying) { return; }
+
   notifyObservers(obj, changeEvent(keyName));
 };
 
 /** @private */
 Ember.notifyBeforeObservers = function(obj, keyName) {
+  if (obj.isDestroying) { return; }
+
   var guid, set, forceNotification = false;
 
   if (deferred) {
@@ -3882,6 +3906,8 @@ var WILL_SEEN, DID_SEEN;
 // called whenever a property is about to change to clear the cache of any dependent keys (and notify those properties of changes, etc...)
 /** @private */
 function dependentKeysWillChange(obj, depKey, meta) {
+  if (obj.isDestroying) { return; }
+
   var seen = WILL_SEEN, top = !seen;
   if (top) seen = WILL_SEEN = {};
   iterDeps(propertyWillChange, obj, depKey, seen, meta);
@@ -3891,6 +3917,8 @@ function dependentKeysWillChange(obj, depKey, meta) {
 // called whenever a property has just changed to update dependent keys
 /** @private */
 function dependentKeysDidChange(obj, depKey, meta) {
+  if (obj.isDestroying) { return; }
+
   var seen = DID_SEEN, top = !seen;
   if (top) seen = DID_SEEN = {};
   iterDeps(propertyDidChange, obj, depKey, seen, meta);
@@ -4853,6 +4881,12 @@ function applyMixin(obj, mixins, partial) {
 
   var mixinBindings = Ember._mixinBindings;
 
+  // Go through all mixins and hashes passed in, and:
+  //
+  // * Handle concatenated properties
+  // * Set up _super wrapping if necessary
+  // * Set up descriptors (simple, watched or computed properties)
+  // * Copying `toString` in broken browsers
   mergeMixins(mixins, meta(obj), descs, values, obj);
 
   if (MixinDelegate.detect(obj)) {
@@ -6761,7 +6795,7 @@ if (typeof console === 'undefined') {
 var TYPE_MAP = {};
 var t ="Boolean Number String Function Array Date RegExp Object".split(" ");
 Ember.ArrayUtils.forEach(t, function(name) {
-  TYPE_MAP[ "[object " + name + "]" ] = name.toLowerCase();
+	TYPE_MAP[ "[object " + name + "]" ] = name.toLowerCase();
 });
 
 var toString = Object.prototype.toString;
@@ -9301,13 +9335,7 @@ Ember.Observable = Ember.Mixin.create(/** @scope Ember.Observable.prototype */ {
     @returns {Ember.Observable}
   */
   setProperties: function(hash) {
-    var self = this;
-    Ember.changeProperties(function(){
-      for(var prop in hash) {
-        if (hash.hasOwnProperty(prop)) set(self, prop, hash[prop]);
-      }
-    });
-    return this;
+    return Ember.setProperties(this, hash);
   },
 
   /**
@@ -9707,6 +9735,7 @@ var classToString = Ember.Mixin.prototype.toString;
 var set = Ember.set, get = Ember.get;
 var o_create = Ember.platform.create,
     o_defineProperty = Ember.platform.defineProperty,
+    a_slice = Array.prototype.slice,
     meta = Ember.meta;
 
 /** @private */
@@ -9716,14 +9745,23 @@ function makeCtor() {
   // method a lot faster.  This is glue code so we want it to be as fast as
   // possible.
 
-  var isPrepared = false, initMixins, init = false, hasChains = false;
+  var wasApplied = false, initMixins, defaults, init = false, hasChains = false;
 
   var Class = function() {
-    if (!isPrepared) { get(Class, 'proto'); } // prepare prototype...
+    if (defaults) {
+      for (var prop in defaults) {
+        if (!defaults.hasOwnProperty(prop)) { continue; }
+        Ember.defineProperty(this, prop, undefined, defaults[prop]);
+      }
+
+      defaults = null;
+    }
+
+    if (!wasApplied) { Class.proto(); } // prepare prototype...
     if (initMixins) {
       this.reopen.apply(this, initMixins);
       initMixins = null;
-      rewatch(this); // ålways rewatch just in case
+      rewatch(this); // always rewatch just in case
       this.init.apply(this, arguments);
     } else {
       if (hasChains) {
@@ -9740,20 +9778,29 @@ function makeCtor() {
   };
 
   Class.toString = classToString;
-  Class._prototypeMixinDidChange = function() {
-    ember_assert("Reopening already instantiated classes is not supported. We plan to support this in the future.", isPrepared === false);
-    isPrepared = false;
+  Class.willReopen = function() {
+    if (wasApplied) {
+      Class.PrototypeMixin = Ember.Mixin.create(Class.PrototypeMixin);
+    }
+
+    wasApplied = false;
   };
   Class._initMixins = function(args) { initMixins = args; };
+  Class._setDefaults = function(arg) { defaults = arg; };
 
-  Ember.defineProperty(Class, 'proto', Ember.computed(function() {
-    if (!isPrepared) {
-      isPrepared = true;
+  Class.proto = function() {
+    var superclass = Class.superclass;
+    if (superclass) { superclass.proto(); }
+
+    if (!wasApplied) {
+      wasApplied = true;
       Class.PrototypeMixin.applyPartial(Class.prototype);
+      Ember.rewatch(Class.prototype); // setup watch chains if needed.
       hasChains = !!meta(Class.prototype, false).chains; // avoid rewatch
     }
+
     return this.prototype;
-  }));
+  };
 
   return Class;
 
@@ -9774,6 +9821,7 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
   init: function() {},
 
   isDestroyed: false,
+  isDestroying: false,
 
   /**
     Destroys an object by setting the isDestroyed flag and removing its
@@ -9788,6 +9836,12 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
     @returns {Ember.Object} receiver
   */
   destroy: function() {
+    if (this.isDestroying) { return; }
+
+    this.isDestroying = true;
+
+    if (this.willDestroy) { this.willDestroy(); }
+
     set(this, 'isDestroyed', true);
     Ember.run.schedule('destroy', this, this._scheduledDestroy);
     return this;
@@ -9801,6 +9855,7 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
   */
   _scheduledDestroy: function() {
     Ember.destroy(this);
+    if (this.didDestroy) { this.didDestroy(); }
   },
 
   bind: function(to, from) {
@@ -9844,7 +9899,6 @@ var ClassMixin = Ember.Mixin.create({
     proto.constructor = Class;
     Ember.generateGuid(proto, 'ember');
     meta(proto).proto = proto; // this will disable observers on prototype
-    Ember.rewatch(proto); // setup watch chains if needed.
 
 
     Class.subclasses = Ember.Set ? new Ember.Set() : null;
@@ -9860,10 +9914,34 @@ var ClassMixin = Ember.Mixin.create({
     return new C();
   },
 
+  /**
+    @private
+
+    Right now, when a key is passed in `create` that is not already
+    present in the superclass, we need to create a mixin object and
+    apply the mixin to the object we're creating. This is
+    unnecessarily expensive. Because Ember views are created a lot,
+    this is a temporary convenience that will allow us to create
+    a new object and set properties before `init` time.
+
+    The correct solution is for the default init code to detect
+    properties that do not need special handling and call
+    `setProperties` on them when `create` occurs. This will
+    massively speed up `create` calls that do not need any special
+    Ember features (like bindings, observers or computed properties)
+    and are not overriding a computed property with a regular value.
+  */
+  createWith: function(defaults) {
+    var C = this;
+    if (arguments.length>0) { this._initMixins(a_slice.call(arguments, 1)); }
+    if (defaults) { this._setDefaults(defaults); }
+    return new C();
+  },
+
   reopen: function() {
+    this.willReopen();
     var PrototypeMixin = this.PrototypeMixin;
     PrototypeMixin.reopen.apply(PrototypeMixin, arguments);
-    this._prototypeMixinDidChange();
     return this;
   },
 
@@ -9884,7 +9962,7 @@ var ClassMixin = Ember.Mixin.create({
   },
 
   detectInstance: function(obj) {
-    return this.PrototypeMixin.detect(obj);
+    return obj instanceof this;
   },
 
   /**
@@ -9908,7 +9986,7 @@ var ClassMixin = Ember.Mixin.create({
     This will return the original hash that was passed to `meta()`.
   */
   metaForProperty: function(key) {
-    var desc = meta(get(this, 'proto'), false).descs[key];
+    var desc = meta(this.proto(), false).descs[key];
 
     ember_assert("metaForProperty() could not find a computed property with key '"+key+"'.", !!desc && desc instanceof Ember.ComputedProperty);
     return desc._meta || {};
@@ -9919,7 +9997,7 @@ var ClassMixin = Ember.Mixin.create({
     and any associated metadata (see `metaForProperty`) to the callback.
   */
   eachComputedProperty: function(callback, binding) {
-    var proto = get(this, 'proto'),
+    var proto = this.proto(),
         descs = meta(proto).descs,
         empty = {},
         property;
@@ -11941,8 +12019,6 @@ Ember.Application = Ember.Namespace.extend(
         self.didBecomeReady();
       });
     }
-
-    this._super();
   },
 
   /** @private */
@@ -12024,7 +12100,7 @@ var childViewsProperty = Ember.computed(function() {
   });
 
   return ret;
-}).property('_childViews.@each').cacheable();
+}).property().cacheable();
 
 /**
   @static
@@ -12212,7 +12288,7 @@ Ember.View = Ember.Object.extend(Ember.Evented,
   */
   childViews: childViewsProperty,
 
-  _childViews: Ember.A(),
+  _childViews: [],
 
   /**
     Return the nearest ancestor that is an instance of the provided
@@ -12297,6 +12373,8 @@ Ember.View = Ember.Object.extend(Ember.Evented,
     collectionView, itemView, and contentView
   */
   _parentViewDidChange: Ember.observer(function() {
+    if (this.isDestroying) { return; }
+
     this.invokeRecursively(function(view) {
       view.propertyDidChange('collectionView');
       view.propertyDidChange('itemView');
@@ -13147,15 +13225,13 @@ Ember.View = Ember.Object.extend(Ember.Evented,
       dispatch
   */
   init: function() {
-    var parentView = get(this, '_parentView');
-
     this._super();
 
     // Register the view for event handling. This hash is used by
     // Ember.RootResponder to dispatch incoming events.
     Ember.View.views[get(this, 'elementId')] = this;
 
-    var childViews = Ember.A(get(this, '_childViews').slice());
+    var childViews = get(this, '_childViews').slice();
 
     // setup child views. be sure to clone the child views array first
     set(this, '_childViews', childViews);
@@ -13186,12 +13262,19 @@ Ember.View = Ember.Object.extend(Ember.Evented,
     @returns {Ember.View} receiver
   */
   removeChild: function(view) {
+    // If we're destroying, the entire subtree will be
+    // freed, and the DOM will be handled separately,
+    // so no need to mess with childViews.
+    if (this.isDestroying) { return; }
+
     // update parent node
     set(view, '_parentView', null);
 
     // remove view from childViews array.
     var childViews = get(this, '_childViews');
-    childViews.removeObject(view);
+    Ember.ArrayUtils.removeObject(childViews, view);
+
+    this.propertyDidChange('childViews');
 
     return this;
   },
@@ -13230,14 +13313,12 @@ Ember.View = Ember.Object.extend(Ember.Evented,
   },
 
   /**
-    You must call this method on a view to destroy the view (and all of its
+    You must call `destroy` on a view to destroy the view (and all of its
     child views). This will remove the view from any parent node, then make
     sure that the DOM element managed by the view can be released by the
     memory manager.
   */
-  destroy: function() {
-    if (get(this, 'isDestroyed')) { return; }
-
+  willDestroy: function() {
     // calling this._super() will nuke computed properties and observers,
     // so collect any information we need before calling super.
     var childViews = get(this, '_childViews'),
@@ -13262,9 +13343,7 @@ Ember.View = Ember.Object.extend(Ember.Evented,
     // the DOM again.
     if (parent) { parent.removeChild(this); }
 
-    Ember.Descriptor.setup(this, 'state', 'destroyed');
-
-    this._super();
+    this.state = 'destroyed';
 
     childLen = get(childViews, 'length');
     for (var i=childLen-1; i>=0; i--) {
@@ -13274,8 +13353,6 @@ Ember.View = Ember.Object.extend(Ember.Evented,
 
     // next remove view from global hash
     delete Ember.View.views[get(this, 'elementId')];
-
-    return this; // done with cleanup
   },
 
   /**
@@ -13292,7 +13369,11 @@ Ember.View = Ember.Object.extend(Ember.Evented,
   */
   createChildView: function(view, attrs) {
     if (Ember.View.detect(view)) {
-      view = view.create(attrs || {}, { _parentView: this });
+      if (attrs) {
+        view = view.createWith({ _parentView: this }, attrs);
+      } else {
+        view = view.createWith({ _parentView: this });
+      }
 
       var viewName = view.viewName;
 
@@ -13463,6 +13544,10 @@ var DOMManager = {
     set(view, 'element', null);
 
     Ember.$(elem).remove();
+  },
+
+  empty: function(view) {
+    view.$().empty();
   }
 };
 
@@ -13563,6 +13648,8 @@ Ember.View.states.preRender = {
     return Ember.$();
   },
 
+  empty: Ember.K,
+
   // This exists for the removal warning, remove later
   getElement: function(view){
     if (view._willInsertElementAccessUnsupported) {
@@ -13626,8 +13713,12 @@ Ember.View.states.inBuffer = {
     var buffer = view.buffer;
 
     childView = this.createChildView(childView, options);
-    get(view, '_childViews').pushObject(childView);
+    get(view, '_childViews').push(childView);
+
     childView.renderToBuffer(buffer);
+
+    view.propertyDidChange('childViews');
+
     return childView;
   },
 
@@ -13640,6 +13731,10 @@ Ember.View.states.inBuffer = {
     view.transitionTo('preRender');
 
     return view;
+  },
+
+  empty: function() {
+    throw "EWOT";
   },
 
   // It should be impossible for a rendered view to be scheduled for
@@ -13721,6 +13816,10 @@ Ember.View.states.hasElement = {
     return view;
   },
 
+  empty: function(view) {
+    view.domManager.empty(view);
+  },
+
   // Handle events from `Ember.EventDispatcher`
   handleEvent: function(view, eventName, evt) {
     var handler = view[eventName];
@@ -13762,6 +13861,9 @@ Ember.View.states.destroyed = {
   },
   destroyElement: function() {
     throw fmt(destroyedError, ['destroyElement']);
+  },
+  empty: function() {
+    throw fmt(destroyedError, ['empty']);
   },
 
   setElement: function() {
@@ -13824,6 +13926,9 @@ Ember.ContainerView = Ember.View.extend({
       _childViews[idx] = view;
     }, this);
 
+    // Make the _childViews array observable
+    Ember.A(_childViews);
+
     // Sets up an array observer on the child views array. This
     // observer will detect when child views are added or removed
     // and update the DOM to reflect the mutation.
@@ -13851,7 +13956,7 @@ Ember.ContainerView = Ember.View.extend({
 
     @private
   */
-  destroy: function() {
+  willDestroy: function() {
     get(this, 'childViews').removeArrayObserver(this, {
       willChange: 'childViewsWillChange',
       didChange: 'childViewsDidChange'
@@ -14073,13 +14178,11 @@ Ember.CollectionView = Ember.ContainerView.extend(
     this.arrayDidChange(content, 0, null, len);
   }, 'content'),
 
-  destroy: function() {
+  willDestroy: function() {
     var content = get(this, 'content');
     if (content) { content.removeArrayObserver(this); }
 
     this._super();
-
-    return this;
   },
 
   arrayWillChange: function(content, start, removedCount) {
@@ -14096,8 +14199,17 @@ Ember.CollectionView = Ember.ContainerView.extend(
     var childViews = get(this, 'childViews'), childView, idx, len;
 
     len = get(childViews, 'length');
+
+    var removingAll = removedCount === len;
+
+    if (removingAll) {
+      this.invokeForState('empty');
+    }
+
     for (idx = start + removedCount - 1; idx >= start; idx--) {
-      childViews[idx].destroy();
+      childView = childViews[idx];
+      if (removingAll) { childView.removedFromDOM = true; }
+      childView.destroy();
     }
   },
 
@@ -15181,6 +15293,10 @@ var DOMManager = {
       view.transitionTo('inDOM');
       view._notifyDidInsertElement();
     });
+  },
+
+  empty: function(view) {
+    view.morph.html("");
   }
 };
 
@@ -15982,7 +16098,7 @@ Ember.Handlebars.registerHelper('collection', function(path, options) {
 
   // Extract item view class if provided else default to the standard class
   var itemViewClass, itemViewPath = hash.itemViewClass;
-  var collectionPrototype = get(collectionClass, 'proto');
+  var collectionPrototype = collectionClass.proto();
   delete hash.itemViewClass;
   itemViewClass = itemViewPath ? getPath(collectionPrototype, itemViewPath) : collectionPrototype.itemViewClass;
   ember_assert(fmt("%@ #collection: Could not find %@", data.view, itemViewPath), !!itemViewClass);
@@ -16003,7 +16119,7 @@ Ember.Handlebars.registerHelper('collection', function(path, options) {
     }
   }
 
-  var tagName = hash.tagName || get(collectionClass, 'proto').tagName;
+  var tagName = hash.tagName || collectionPrototype.tagName;
 
   if (fn) {
     itemHash.template = fn;
