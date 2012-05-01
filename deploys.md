@@ -1,3 +1,4 @@
+* [2012-05-01 11:58 -0700] d8e2eba - Joshua Jones: Endless scrolling checks location based on meta.pagination object.
 * [2012-05-01 11:09 -0700] 6af4a2f - Joshua Jones: Don't try and add meta into datastore.
 * [2012-05-01 11:04 -0700] aad82a5 - Joshua Jones: Remove time from GET before parameter..
 * [2012-05-01 10:48 -0700] 3c1fde3 - Joshua Jones: Wire up bulk add to new groups and companies.
