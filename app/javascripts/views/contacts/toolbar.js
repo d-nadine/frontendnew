@@ -29,12 +29,44 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   emailButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', {
-        form: 'ContactsMessage'
+      Radium.FormManager.send('showForm', {
+        form: 'ContactsMessage',
+        isMultiple: true,
+        type: 'contacts'
       });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
+
+  /**
+    Opens New Message form in the main page state
+  */
+  addToGroupButton: Ember.Button.extend({
+    click: function() {
+      Radium.FormManager.send('showForm', {
+        form: 'AddToGroup',
+        isMultiple: true,
+        type: 'contacts'
+      });
+    },
+    disabledBinding: 'parentView.isContactsSelected'
+  }),
+
+
+  /**
+    Opens New Message form in the main page state
+  */
+  addToCompanyButton: Ember.Button.extend({
+    click: function() {
+      Radium.FormManager.send('showForm', {
+        form: 'AddToCompany',
+        isMultiple: true,
+        type: 'contacts'
+      });
+    },
+    disabledBinding: 'parentView.isContactsSelected'
+  }),
+
 
   /**
     Opens New SMS form in the main page state
@@ -53,8 +85,10 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   todoButton: Ember.Button.extend({
     click: function() {
-      Radium.App.send('addResource', {
-        form: 'Todo'
+      Radium.FormManager.send('showForm', {
+        form: 'Todo',
+        id: this.getPath('content.id'),
+        type: 'contacts'
       });
     },
     disabledBinding: 'parentView.isContactsSelected'

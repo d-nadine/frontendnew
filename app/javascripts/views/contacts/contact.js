@@ -18,6 +18,9 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   },
 
   addContactToCompany: function() {
+    Radium.FormManager.send('showForm', {
+      form: 'AddToCompany'
+    });
     return false;
   },
 

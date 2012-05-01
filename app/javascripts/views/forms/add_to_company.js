@@ -1,23 +1,23 @@
-Radium.AddToGroupForm = Radium.FormView.extend({
-  templateName: 'add_to_group',
-  newGroupName: '',
-  selectedGroup: null,
-  groupSearchField: Radium.AutocompleteTextField.extend({
+Radium.AddToCompanyForm = Radium.FormView.extend({
+  templateName: 'add_to_company',
+  newCompanyName: '',
+  selectedCompany: null,
+  companySearchField: Radium.AutocompleteTextField.extend({
     attributeBindings: ['name'],
     name: 'contact-name',
     elementId: 'contact-name',
     classNames: ['span6'],
-    sourceBinding: 'Radium.groupsController.namesWithObject',
-    newGroupNameBinding: 'parentView.newGroupName',
+    sourceBinding: 'Radium.groupsController.companiesWithObject',
+    newCompanyNameBinding: 'parentView.newCompanyName',
     select: function(event, ui) {
       if ( ui.item ) {
         event.target.value = '';
-        this.resetNewGroupName();
+        this.resetnewCompanyName();
         event.preventDefault();
       }
       this.$().val(ui.item.label);
-      this.setPath('parentView.selectedGroup', ui.item.group);
-      this.testGroupName();
+      this.setPath('parentView.selectedCompany', ui.item.group);
+      this.testCompanyName();
     },
 
     keyUp: function() {
@@ -25,8 +25,8 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         this.setPath('parentView.isValid', false);
         this.setPath('parentView.isError', true);
         this.setPath('parentView.isEmptyError', true);
-        this.setPath('parentView.selectedGroup', null);
-        this.resetNewGroupName();
+        this.setPath('parentView.selectedCompany', null);
+        this.resetnewCompanyName();
       }
     },
 
@@ -35,29 +35,29 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         this.setPath('parentView.isValid', false);
         this.setPath('parentView.isError', true);
         this.setPath('parentView.isEmptyError', true);
-        this.resetNewGroupName();
+        this.resetnewCompanyName();
       } else {
         this.setPath('parentView.isValid', true);
         this.setPath('parentView.isError', false);
         this.setPath('parentView.isEmptyError', false);
-        this.testGroupName();
+        this.testCompanyName();
       }
     },
 
-    resetNewGroupName: function() {
-      this.set('newGroupName', null);
-      this.setPath('parentView.willCreateNewGroup', false);
-      this.setPath('parentView.selectedGroup', null);
+    resetnewCompanyName: function() {
+      this.set('newCompanyName', null);
+      this.setPath('parentView.willCreateNewCompany', false);
+      this.setPath('parentView.selectedCompany', null);
     },
 
-    testGroupName: function() {
-      var groups = this.get('source').getEach('label'),
+    testCompanyName: function() {
+      var companies = this.get('source').getEach('label'),
           value = this.$().val();
-          
-      if (groups.indexOf(value) < 0) {
-        this.resetNewGroupName();
-        this.setPath('parentView.willCreateNewGroup', true);
-        this.set('newGroupName', value);
+
+      if (companies.indexOf(value) < 0) {
+        this.resetNewCompanyName();
+        this.setPath('parentView.willCreateNewCompany', true);
+        this.set('newCompanyName', value);
       } else {
         this.setPath('parentView.isValid', true);
         this.setPath('parentView.isError', false);
@@ -67,18 +67,19 @@ Radium.AddToGroupForm = Radium.FormView.extend({
   }),
   submitForm: function() {
     var self = this,
-        selectedGroup = this.get('selectedGroup'),
-        newGroupName = this.get('newGroupName'),
+        selectedCompany = this.get('selectedCompany'),
+        newCompanyName = this.get('newCompanyName'),
         selectedContact = Radium.selectedContactController.get('content');
 
     this.sending();
-    if (selectedGroup) {
-      selectedGroup.get('contacts').pushObject(selectedContact);
-      selectedContact.get('groups').pushObject(selectedGroup);
+    if (selectedCompany) {
+      selectedCompany.get('contacts').pushObject(selectedContact);
+      selectedContact.get('groups').pushObject(selectedCompany);
+      
       Radium.store.commit();
     } else {
       var newGroup = Radium.store.createRecord(Radium.Group, {
-        name: newGroupName,
+        name: newCompanyName,
         contact_ids: [selectedContact.get('id')]
       });
 

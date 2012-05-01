@@ -1,0 +1,15 @@
+{{#view cancelFormButton class="close"}}×{{/view}}
+<legend>Add to Company</legend>
+<fieldset class="control-group" {{bindAttr class="isError:error"}}>
+  <label for="company-name">Company</label>
+  {{view companySearchField}}
+</fieldset>
+{{#if willCreateNewCompany}}
+  <div class="alert alert-info">
+    A new company named {{newCompanyName}} will be created.
+  </div>
+{{/if}}
+
+<div class="form-actions">
+  {{#view submitButton class="btn btn-primary"}}Add to Company{{/view}}
+</div>
