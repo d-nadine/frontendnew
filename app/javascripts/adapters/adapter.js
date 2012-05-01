@@ -23,15 +23,13 @@ DS.RadiumAdapter = DS.Adapter.extend({
       this.sideload(store,type,json,root)
       store.didCreateRecord(model, json[root]);
     };
-
-    var error = function(xhr, status, error) {
-      store.recordWasInvalid(model, xhr);
-    };
     
     this.ajax("/" + url, "POST", {
       data: data,
-      success: success,
-      error: error
+      success: success
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -76,6 +74,9 @@ DS.RadiumAdapter = DS.Adapter.extend({
       this.sideload(store,type,json,root)
         store.didUpdateRecord(model, json[root]);
       }
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -112,6 +113,9 @@ DS.RadiumAdapter = DS.Adapter.extend({
         if(json){ this.sideload(store,type,json); }
         store.didDeleteRecord(model);
       }
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -381,10 +385,17 @@ DS.RadiumAdapter = DS.Adapter.extend({
     }
   },
 
-  ajax: function(url, type, hash) {
+  ajax: function(url, type, hash, adapterContext) {
     hash.url = '/api' + url;
     hash.type = type;
     hash.context = this;
+    hash.error = function(jqXHR, textStatus, errorThrown) {
+      if (jqXHR.status === 422 && adapterContext.model && adapterContext.store) {
+        var data = JSON.parse(jqXHR.responseText);
+        adapterContext.store.recordWasInvalid(adapterContext.model, data['errors']);
+        console.log(data['errors']);
+      }
+    };
 
     if (hash.data && type !== 'GET') {
       hash.data = JSON.stringify(hash.data);
