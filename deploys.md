@@ -1,3 +1,4 @@
+* [2012-05-01 00:34 -0700] 1b1eb59 - Joshua Jones: Formatting options backwards, dammit.
 * [2012-05-01 00:31 -0700] 61f9d32 - Joshua Jones: Remove hardcoded user id.
 * [2012-05-01 00:22 -0700] 454f65f - Joshua Jones: Remove before_date parameter requesting feed.
 * [2012-05-01 00:13 -0700] e0d9594 - Joshua Jones: Fix pushed feed data going to the wrong controller.
