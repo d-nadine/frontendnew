@@ -1,3 +1,4 @@
+
 (function(exports) {
 // ==========================================================================
 // Project:   Ember - JavaScript Application Framework
@@ -6,15 +7,6 @@
 // License:   Licensed under MIT license (see license.js)
 // ==========================================================================
 var get = Ember.get, set = Ember.set;
-
-// simple copy op needed for just this code.
-function copy(opts) {
-  var ret = {};
-  for(var key in opts) {
-    if (opts.hasOwnProperty(key)) ret[key] = opts[key];
-  }
-  return ret;
-}
 
 /**
   Standard error thrown by `Ember.Scanner` when it runs out of bounds
@@ -136,9 +128,9 @@ var Scanner = Ember.Object.extend({
   */
   scanInt: function(min_len, max_len) {
     if (max_len === undefined) max_len = min_len;
-    var str = this.scan(max_len);
-    var re = new RegExp("^\\d{" + min_len + "," + max_len + "}");
-    var match = str.match(re);
+    var str = this.scan(max_len),
+      re = new RegExp("^\\d{" + min_len + "," + max_len + "}"),
+      match = str.match(re);
     if (!match) throw new Error(Ember.SCANNER_INT_ERROR);
     if (match[0].length < max_len) {
       this.scanLocation += match[0].length - max_len;
@@ -151,13 +143,13 @@ var Scanner = Ember.Object.extend({
 
     @param {String} str The string to skip
     @throws {Ember.SCANNER_SKIP_ERROR} If the given string could not be scanned
-    @returns {Boolean} true if the given string was successfully scanned, NO otherwise
+    @returns {Boolean} true if the given string was successfully scanned, false otherwise
   */
   skipString: function(str) {
     if (this.scan(str.length) !== str) {
       throw new Error(Ember.SCANNER_SKIP_ERROR);
     }
-    
+
     return true;
   },
 
@@ -192,7 +184,7 @@ var Scanner = Ember.Object.extend({
   it is running.  Any time zone can be specified when creating an
   `Ember.DateTime` object, e.g.
 
-      // Creates a DateTime representing 5am in Washington, DC and 10am in 
+      // Creates a DateTime representing 5am in Washington, DC and 10am in
       // London
       var d = Ember.DateTime.create({ hour: 5, timezone: 300 }); // -5 hours from UTC
       var e = Ember.DateTime.create({ hour: 10, timezone: 0 }); // same time, specified in UTC
@@ -250,18 +242,18 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
   isFrozen: true,
 
   /**
-    Returns a new `Ember.DateTime` object where one or more of the elements have 
+    Returns a new `Ember.DateTime` object where one or more of the elements have
     been changed according to the options parameter. The time options (hour,
     minute, sec, usec) reset cascadingly, so if only the hour is passed, then
     minute, sec, and usec is set to 0. If the hour and minute is passed, then
     sec and usec is set to 0.
 
-    If a time zone is passed in the options hash, all dates and times are 
-    assumed to be local to it, and the returned `Ember.DateTime` instance has 
+    If a time zone is passed in the options hash, all dates and times are
+    assumed to be local to it, and the returned `Ember.DateTime` instance has
     that time zone. If none is passed, it defaults to `Ember.DateTime.timezone`.
 
-    Note that passing only a time zone does not affect the actual milliseconds 
-    since Jan 1, 1970, only the time zone in which it is expressed when 
+    Note that passing only a time zone does not affect the actual milliseconds
+    since Jan 1, 1970, only the time zone in which it is expressed when
     displayed.
 
     @see Ember.DateTime#create for the list of options you can pass
@@ -270,14 +262,14 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
   adjust: function(options, resetCascadingly) {
     var timezone;
 
-    options = options ? copy(options) : {};
+    options = options ? Ember.copy(options) : {};
     timezone = (options.timezone !== undefined) ? options.timezone : (this.timezone !== undefined) ? this.timezone : 0;
 
     return this.constructor._adjust(options, this._ms, timezone, resetCascadingly)._createFromCurrentState();
   },
 
   /**
-    Returns a new `Ember.DateTime` object advanced according the the given 
+    Returns a new `Ember.DateTime` object advanced according the the given
     parameters. Don't use floating point values, it might give unpredicatble results.
 
     @see Ember.DateTime#create for the list of options you can pass
@@ -361,6 +353,7 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
     @return {String} the formatted string
   */
   toFormattedString: function(fmt) {
+    //fmt = Ember.String.loc(fmt);
     return this.constructor._toFormattedString(fmt, this._ms, this.timezone);
   },
 
@@ -594,8 +587,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     'timezone' will be used, or the last this._tz.
   */
   _setCalcStateFromHash: function(hash, timezone) {
-    var tz = (timezone !== undefined) ? timezone : this._tz; // use the last-known time zone if necessary
-    var ms = this._toMilliseconds(hash, this._ms, tz); // convert the hash (local to specified time zone) to milliseconds (in UTC)
+    var tz = (timezone !== undefined) ? timezone : this._tz, // use the last-known time zone if necessary
+      ms = this._toMilliseconds(hash, this._ms, tz); // convert the hash (local to specified time zone) to milliseconds (in UTC)
     return this._setCalcState(ms, tz); // now call the one we really wanted
   },
 
@@ -604,10 +597,11 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     @see Ember.DateTime#unknownProperty
   */
   _get: function(key, start, timezone) {
-    var ms, tz, doy, m, y, firstDayOfWeek, dayOfWeek, dayOfYear, prefix, suffix;
-    var currentWeekday, targetWeekday;
-    var d = this._date;
-    var originalTime, v = null;
+    var ms, tz, doy, m, y, firstDayOfWeek, dayOfWeek, dayOfYear, prefix, suffix,
+      currentWeekday, targetWeekday,
+      d = this._date,
+      originalTime, v = null,
+      delta;
 
     // Set up an absolute date/time using the given milliseconds since Jan 1, 1970.
     // Only do it if we're given a time value, though, otherwise we want to use the
@@ -637,7 +631,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
         currentWeekday = this._get('dayOfWeek', start, timezone);
         targetWeekday = this._englishDayNames.indexOf(suffix);
         if (targetWeekday >= 0) {
-          var delta = targetWeekday - currentWeekday;
+          delta = targetWeekday - currentWeekday;
           if (prefix === 'last' && delta >= 0) delta -= 7;
           if (prefix === 'next' && delta <  0) delta += 7;
           this._advance({ day: delta }, start, timezone);
@@ -747,8 +741,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     Sets the internal calculation state to something specified.
   */
   _adjust: function(options, start, timezone, resetCascadingly) {
-    var opts = options ? copy(options) : {};
-    var ms = this._toMilliseconds(options, start, timezone, resetCascadingly);
+    var opts = options ? Ember.copy(options) : {},
+      ms = this._toMilliseconds(options, start, timezone, resetCascadingly);
     this._setCalcState(ms, timezone);
     return this; // for chaining
   },
@@ -758,10 +752,10 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     @see Ember.DateTime#advance
   */
   _advance: function(options, start, timezone) {
-    var opts = options ? copy(options) : {};
-    var tz;
+    var opts = options ? Ember.copy(options) : {},
+      tz, key;
 
-    for (var key in opts) {
+    for (key in opts) {
       opts[key] += this._get(key, start, timezone);
     }
 
@@ -779,10 +773,10 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     in time relative to Jan 1, 1970
   */
   _toMilliseconds: function(options, start, timezone, resetCascadingly) {
-    var opts = options ? copy(options) : {};
-    var d = this._date;
-    var previousMilliseconds = d.getTime(); // rather than create a new Date object, we'll reuse the instance we have for calculations, then restore it
-    var ms, tz;
+    var opts = options ? Ember.copy(options) : {},
+      d = this._date,
+      previousMilliseconds = d.getTime(), // rather than create a new Date object, we'll reuse the instance we have for calculations, then restore it
+      ms, tz;
 
     // Initialize our internal for-calculations Date object to our current date/time.
     // Note that this object was created in the local machine time zone, so when we set
@@ -806,15 +800,16 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     // the time options (hour, minute, sec, millisecond)
     // reset cascadingly (see documentation)
     if (resetCascadingly === undefined || resetCascadingly === true) {
-      if ( !Ember.none(opts.hour) && Ember.none(opts.minute)) {
+      if (!Ember.none(opts.hour) && Ember.none(opts.minute)) {
         opts.minute = 0;
       }
-      if (!(Ember.none(opts.hour) && Ember.none(opts.minute))
-          && Ember.none(opts.second)) {
+      if (!(Ember.none(opts.hour) && Ember.none(opts.minute)) &&
+          Ember.none(opts.second)) {
         opts.second = 0;
       }
-      if (!(Ember.none(opts.hour) && Ember.none(opts.minute) && Ember.none(opts.second))
-          && Ember.none(opts.millisecond)) {
+      if (!(Ember.none(opts.hour) && Ember.none(opts.minute) &&
+          Ember.none(opts.second)) &&
+          Ember.none(opts.millisecond)) {
         opts.millisecond = 0;
       }
     }
@@ -875,8 +870,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
       passed parameters, possibly fetched from cache
   */
   create: function() {
-    var arg = arguments.length === 0 ? {} : arguments[0];
-    var timezone;
+    var arg = arguments.length === 0 ? {} : arguments[0], timezone;
 
     // if simply milliseconds since Jan 1, 1970 are given, just use those
     if (Ember.typeOf(arg) === 'number') {
@@ -941,8 +935,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
   parse: function(str, fmt) {
     // Declared as an object not a literal since in some browsers the literal
     // retains state across function calls
-    var re = new RegExp('(?:%([aAbBcdDhHiIjmMpsSUWwxXyYZ%])|(.))', "g");
-    var d, parts, opts = {}, check = {}, scanner = Scanner.create({string: str});
+    var re = new RegExp('(?:%([aAbBcdDhHiIjmMpsSUWwxXyYZ%])|(.))', "g"),
+      d, parts, opts = {}, check = {}, scanner = Scanner.create({string: str});
 
     if (Ember.none(fmt)) fmt = Ember.DATETIME_ISO8601;
 
@@ -994,7 +988,10 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     }
 
     if (!Ember.none(opts.meridian) && !Ember.none(opts.hour)) {
-      if (opts.meridian === 1) opts.hour = (opts.hour + 12) % 24;
+      if ((opts.meridian === 1 && opts.hour !== 12) ||
+        (opts.meridian === 0 && opts.hour === 12)) {
+          opts.hour = (opts.hour + 12) % 24;
+      }
       delete opts.meridian;
     }
 
@@ -1008,10 +1005,10 @@ Ember.DateTime.reopenClass(Ember.Comparable,
        return null;
      }
      if (!Ember.none(opts.day)){
-       if ( opts.month === 2 && opts.day > 29 ){
+       if (opts.month === 2 && opts.day > 29){
          return null;
        }
-       if (jQuery.inArray(opts.month, [4,6,9,11]) > -1 && opts.day > 30) {
+       if (Ember.A([4,6,9,11]).contains(opts.month) && opts.day > 30) {
          return null;
        }
      }
@@ -1029,7 +1026,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
   /**
     @private
 
-    Converts the x parameter into a string padded with 0s so that the string’s
+    Converts the x parameter into a string padded with 0s so that the string's
     length is at least equal to the len parameter.
 
     @param {Object} x the object to convert to a string
@@ -1090,10 +1087,9 @@ Ember.DateTime.reopenClass(Ember.Comparable,
       case 'Y': return this._get('year');
       case 'Z':
         offset = -1 * timezone;
-        return (offset >= 0 ? '+' : '-')
-               + this._pad(parseInt(Math.abs(offset)/60, 10))
-               + ':'
-               + this._pad(Math.abs(offset)%60);
+        return (offset >= 0 ? '+' : '-') +
+               this._pad(parseInt(Math.abs(offset)/60, 10)) + ':' +
+               this._pad(Math.abs(offset)%60);
       case '%': return '%';
     }
   },
@@ -1103,8 +1099,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     @see Ember.DateTime#toFormattedString
   */
   _toFormattedString: function(format, start, timezone) {
-    var that = this;
-    var tz = (timezone !== undefined) ? timezone : (this.timezone !== undefined) ? this.timezone : 0;
+    var that = this,
+      tz = (timezone !== undefined) ? timezone : (this.timezone !== undefined) ? this.timezone : 0;
 
     // need to move into local time zone for these calculations
     this._setCalcState(start - (timezone * 60000), 0); // so simulate a shifted 'UTC' time
@@ -1127,8 +1123,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
                        0 if a == b
   */
   compare: function(a, b) {
-    var ma = get(a, 'milliseconds');
-    var mb = get(b, 'milliseconds');
+    var ma = get(a, 'milliseconds'),
+      mb = get(b, 'milliseconds');
     return ma < mb ? -1 : ma === mb ? 0 : 1;
   },
 
@@ -1149,9 +1145,9 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     if (get(a, 'timezone') !== get(b,'timezone')) {
       throw new Error(Ember.DATETIME_COMPAREDATE_TIMEZONE_ERROR);
     }
-    
-    var ma = get(a.adjust({hour: 0}), 'milliseconds');
-    var mb = get(b.adjust({hour: 0}), 'milliseconds');
+
+    var ma = get(a.adjust({hour: 0}), 'milliseconds'),
+      mb = get(b.adjust({hour: 0}), 'milliseconds');
     return ma < mb ? -1 : ma === mb ? 0 : 1;
   }
 
@@ -1173,14 +1169,34 @@ Ember.Binding.dateTime = function(format) {
   });
 };
 
+if ('DS' in window) {
 
-})({});
+  DS.attr.transforms.datetime = {
+    from: function(serialized) {
+      var type = typeof serialized;
 
+      if (type === "string" || type === "number") {
+        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format);
+      } else if (Em.none(serialized)) {
+        return serialized;
+      } else {
+        return null;
+      }
+    },
 
-(function(exports) {
-// ==========================================================================
-// Project:   Ember DateTime
-// Copyright: ©2010 Strobe Inc. and contributors
-// License:   Licensed under MIT license (see license.js)
-// ==========================================================================
+    to: function(deserialized) {
+      if (deserialized instanceof Ember.DateTime) {
+        return deserialized.toFormattedString(DS.attr.transforms.datetime.format);
+      } else if (deserialized === undefined) {
+        return undefined;
+      } else {
+        return null;
+      }
+    },
+
+    format: Ember.DATETIME_ISO8601
+  };
+
+}
+
 })({});
