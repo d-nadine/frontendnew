@@ -37,7 +37,7 @@ Radium.EndlessScrolling = Ember.Mixin.create({
       var data = {
             url: feedUrl.fmt(targetId),
             type: 'GET',
-            data: {page: (page+1), before: today.toISO8601()}
+            data: {page: (page+1), before: today.toFormattedString('%Y-%m-%D')}
           },
           request = jQuery.extend(data, CONFIG.ajax);
 
