@@ -38,7 +38,6 @@ Radium.App = Ember.StateManager.create({
             // Load account data
             function(data) {
               data = data.account;
-
               Radium.store.load(Radium.Account, data);
               var account = Radium.store.find(Radium.Account, data.id);
               Radium.accountController.set('content', account);
