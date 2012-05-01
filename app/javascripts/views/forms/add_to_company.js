@@ -12,7 +12,7 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
     select: function(event, ui) {
       if ( ui.item ) {
         event.target.value = '';
-        this.resetnewCompanyName();
+        this.resetNewCompanyName();
         event.preventDefault();
       }
       this.$().val(ui.item.label);
@@ -26,7 +26,7 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
         this.setPath('parentView.isError', true);
         this.setPath('parentView.isEmptyError', true);
         this.setPath('parentView.selectedCompany', null);
-        this.resetnewCompanyName();
+        this.resetNewCompanyName();
       }
     },
 
@@ -35,7 +35,7 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
         this.setPath('parentView.isValid', false);
         this.setPath('parentView.isError', true);
         this.setPath('parentView.isEmptyError', true);
-        this.resetnewCompanyName();
+        this.resetNewCompanyName();
       } else {
         this.setPath('parentView.isValid', true);
         this.setPath('parentView.isError', false);
@@ -44,7 +44,7 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
       }
     },
 
-    resetnewCompanyName: function() {
+    resetNewCompanyName: function() {
       this.set('newCompanyName', null);
       this.setPath('parentView.willCreateNewCompany', false);
       this.setPath('parentView.selectedCompany', null);
@@ -75,7 +75,7 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
     if (selectedCompany) {
       selectedCompany.get('contacts').pushObject(selectedContact);
       selectedContact.get('groups').pushObject(selectedCompany);
-      
+      debugger;
       Radium.store.commit();
     } else {
       var newGroup = Radium.store.createRecord(Radium.Group, {

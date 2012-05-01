@@ -5,21 +5,24 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
     Radium.FormManager.send('showForm', {
       form: 'Todo',
       id: this.getPath('content.id'),
-      type: 'contacts'
+      type: 'contacts',
+      target: this.get('content')
     });
     return false;
   },
 
   addContactToGroup: function() {
     Radium.FormManager.send('showForm', {
-      form: 'AddToGroup'
+      form: 'AddToGroup',
+      target: this.get('content')
     });
     return false;
   },
 
   addContactToCompany: function() {
     Radium.FormManager.send('showForm', {
-      form: 'AddToCompany'
+      form: 'AddToCompany',
+      target: this.get('content')
     });
     return false;
   },

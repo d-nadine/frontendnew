@@ -27,7 +27,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var error = function(xhr, status, error) {
       store.recordWasInvalid(model, xhr);
     };
-
+    
     this.ajax("/" + url, "POST", {
       data: data,
       success: success,

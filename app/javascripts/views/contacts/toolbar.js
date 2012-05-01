@@ -43,9 +43,10 @@ Radium.ContactsToolbarView = Ember.View.extend({
   */
   addToGroupButton: Ember.Button.extend({
     click: function() {
+      var selectedContacts = this.getPath('parentView.selectedContacts');
       Radium.FormManager.send('showForm', {
         form: 'AddToGroup',
-        isMultiple: true,
+        target: selectedContacts,
         type: 'contacts'
       });
     },
@@ -60,7 +61,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'AddToCompany',
-        isMultiple: true,
+        target: selectedContacts,
         type: 'contacts'
       });
     },
