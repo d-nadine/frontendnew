@@ -1,3 +1,4 @@
+* [2012-05-01 00:22 -0700] 454f65f - Joshua Jones: Remove before_date parameter requesting feed.
 * [2012-05-01 00:13 -0700] e0d9594 - Joshua Jones: Fix pushed feed data going to the wrong controller.
 * [2012-04-30 07:30 -0700] bda82ab - twinturbo: Remove stray debugger
 * [2012-04-30 07:11 -0700] ad44626 - twinturbo: Use unicorn
