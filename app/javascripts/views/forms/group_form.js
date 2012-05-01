@@ -15,6 +15,10 @@ Radium.GroupForm = Radium.FormView.extend({
           name: name
         };
 
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
     // Disable the form buttons
     this.sending();
 

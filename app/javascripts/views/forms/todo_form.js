@@ -117,8 +117,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
 
-    if (!userId) {
-      this.error("A user must be assigned to a todo.");
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
       return false;
     }
 

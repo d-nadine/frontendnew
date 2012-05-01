@@ -78,6 +78,11 @@ Radium.ContactForm = Radium.FormView.extend({
       data.addresses_attributes = addresses;
     }
 
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
+
     Radium.Contact.reopenClass({
       url: 'contacts',
       root: 'contact'

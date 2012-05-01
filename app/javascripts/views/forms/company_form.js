@@ -77,6 +77,11 @@ Radium.CompanyForm = Radium.FormView.extend({
       }];
     }
 
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
+
     // Disable the form buttons
     this.sending();
 

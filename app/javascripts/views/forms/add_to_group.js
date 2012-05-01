@@ -72,6 +72,11 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
 
+    if (newGroupName === '') {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
+
     Radium.Group.reopenClass({
       url: 'groups',
       root: 'group'

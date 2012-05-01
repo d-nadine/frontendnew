@@ -1,5 +1,5 @@
 Radium.FormView = Ember.View.extend({
-  // tagName: 'form',
+  tagName: 'form',
   classNames: ['well'],
 
   // Validation properties
@@ -100,5 +100,13 @@ Radium.FormView = Ember.View.extend({
     target: 'parentView',
     action: 'close',
     disabledBinding: 'parentView.isSubmitting'
-  })
+  }),
+
+  checkForEmpty: function(hash) {
+    for (var val in hash) {
+      if (hash.hasOwnProperty(val)) {
+        return hash[val] === null || hash[val] === undefined;
+      }
+    }
+  }
 });
