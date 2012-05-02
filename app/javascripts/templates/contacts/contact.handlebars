@@ -4,7 +4,6 @@
     <div id="contact-info" class="module">
       <div class="component">
         <h4>{{inlineTextField name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
-        <small>{{#each groups}}{{name}} {{/each}}</small>
         <p>Assigned to: {{user.name}}</p>
         <address>
           {{#each phoneNumbers}}
@@ -31,6 +30,17 @@
         </div>
       {{/each}}
     </div> <!-- / #contact-addresses -->
+    {{/if}}
+
+    {{#if groups.length}}
+      <div id="contact-groups" class="module">
+        <div class="component">
+          <h4>Groups</h4>
+          {{#each groups}}
+            <p>{{name}}</p>
+          {{/each}}
+        </div>
+      </div>
     {{/if}}
 
   </div> <!-- /#sidebar -->

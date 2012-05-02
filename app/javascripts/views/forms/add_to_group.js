@@ -27,6 +27,11 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         this.setPath('parentView.isEmptyError', true);
         this.setPath('parentView.selectedGroup', null);
         this.resetNewGroupName();
+      } else {
+        this.setPath('parentView.isValid', true);
+        this.setPath('parentView.isError', false);
+        this.setPath('parentView.isEmptyError', false);
+        this.setPath('parentView.newGroupName', this.$().val());
       }
     },
 
@@ -105,7 +110,18 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         contact_ids: contactIds
       });
 
+      if (isBulk) {
+        newGroup.get('contacts').pushObjects(selectedContacts);
+        selectedContacts.forEach(function(contact) {
+          contact.get('groups').pushObject(newGroup);
+        });
+      } else {
+        newGroup.get('contacts').pushObject(selectedContacts);
+        selectedContacts.get('groups').pushObject(newGroup);
+      }
+
       Radium.store.commit();
+
       newGroup.addObserver('isValid', function() {
         if (this.get('isValid')) {
           self.success("New group created");

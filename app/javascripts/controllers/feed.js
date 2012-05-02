@@ -34,7 +34,7 @@ Radium.feedController = Ember.Object.extend({
             Ember.DATETIME_ISO8601
         ).toFormattedString('%B %D, %Y'),
         hash = activity.timestamp.match(/(?:\d+\-\d+\-\d+)/)[0],
-        ref = activity[kind],
+        ref = activity[kind] || activity.reference.kind,
         model = this.modelTypes[kind];
 
     if(ref) {

@@ -393,7 +393,6 @@ DS.RadiumAdapter = DS.Adapter.extend({
       if (jqXHR.status === 422 && adapterContext.model && adapterContext.store) {
         var data = JSON.parse(jqXHR.responseText);
         adapterContext.store.recordWasInvalid(adapterContext.model, data['errors']);
-        console.log(data['errors']);
       }
     };
 
