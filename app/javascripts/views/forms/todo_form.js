@@ -100,7 +100,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
   submitForm: function() {
     var self = this;
-    var targetId = this.getPath('params.id'),
+    var targetId = this.getPath('params.target.id'),
         targetType = this.getPath('params.type'),
         contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
@@ -121,7 +121,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       this.error("Something was filled incorrectly, try again?");
       return false;
     }
-
+    
     // set the url based on the context, ie. a contact or meeting todo versus
     // general todo that is created for the logged in user.
     if (targetType) {

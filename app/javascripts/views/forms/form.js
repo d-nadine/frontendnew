@@ -29,9 +29,14 @@ Radium.FormView = Ember.View.extend({
     });
   },
   success: function(message) {
-    this.flash('success', message);
-    this.set('isSubmitting', false);
-    this.close();
+    var self = this;
+    self.flash('success', message);
+    self.set('isSubmitting', false);
+    setTimeout(function() {
+      self.$().slideUp('fast', function() {
+        Radium.FormManager.send('closeForm');
+      });
+    }, 2000);
   },
   error: function(message) {
     this.flash('error', message);
@@ -40,12 +45,9 @@ Radium.FormView = Ember.View.extend({
   },
 
   close: function() {
-    var self = this;
-    setTimeout(function() {
-      self.$().slideUp('fast', function() {
-        Radium.FormManager.send('closeForm');
-      });
-    }, 2000);
+    this.$().slideUp('fast', function() {
+      Radium.FormManager.send('closeForm');
+    });
   },
 
   submit: function(event) {

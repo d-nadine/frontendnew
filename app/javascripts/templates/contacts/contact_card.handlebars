@@ -27,6 +27,13 @@
         {{/each}}
       </h4>
       {{#if content.campaigns.length}}
+        <p><strong>Groups:</strong> 
+          {{#each content.groups}}
+            {{name}}
+          {{/each}}
+        </p>
+      {{/if}}
+      {{#if content.campaigns.length}}
         <p><strong>Campaigns:</strong> 
           {{#each content.campaigns}}
             <a {{bindAttr href="url"}}>{{name}}</a> 
