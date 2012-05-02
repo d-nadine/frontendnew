@@ -4,7 +4,10 @@ Radium.InlineTextArea = Ember.View.extend({
   attributeBindings: ['title'],
   title: "Click to edit",
   isEditing: false,
+  _cachedValue: null,
+
   click: function(event) {
+    this.set('_cachedValue', this.get('value'));
     this.set('isEditing', true);
     this.$('textarea').focus();
   },
@@ -16,6 +19,7 @@ Radium.InlineTextArea = Ember.View.extend({
       Radium.store.commit();
     }
     if (event.keyCode === 27) {
+      this.set('value', this.get('_cachedValue'));
       this.set('isEditing', false);
     }
   },
