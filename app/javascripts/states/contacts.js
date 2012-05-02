@@ -1,6 +1,7 @@
 Radium.ContactsPage = Ember.State.extend({
   index: Ember.ViewState.extend({
     view: Radium.ContactsPageView,
+
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {
@@ -12,13 +13,6 @@ Radium.ContactsPage = Ember.State.extend({
             );
           }
 
-          if (Radium.contactsController.get('length') <= 0) {
-            Radium.contactsController.setProperties({
-              content: Radium.store.findAll(Radium.Contact),
-              totalPages: 1
-            });
-          }
-          
           this.set('isFirstRun', false);
 
           Ember.run.next(function() {
