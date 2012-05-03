@@ -13,6 +13,20 @@ Radium.ContactsPage = Ember.State.extend({
             );
           }
 
+          var groups = Radium.store.find(Radium.Group, {page: 0});
+          // contacts = Radium.store.find(Radium.Contact, {page: 0}),
+          
+          groups.addObserver('isLoaded', function() {
+            Radium.groupsController.set('content', groups);
+          });
+          
+          if (Radium.contactsController.get('length') <= 0) {
+            Radium.contactsController.setProperties({
+              content: Radium.store.findAll(Radium.Contact),
+              totalPages: 1
+            });
+          }
+          
           this.set('isFirstRun', false);
 
           Ember.run.next(function() {
