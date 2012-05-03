@@ -32,7 +32,6 @@ Radium.App = Ember.StateManager.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
-        console.log('authenticating...');
         $.when(manager.bootstrapUser())
           .then(
             // Load account data
@@ -41,18 +40,23 @@ Radium.App = Ember.StateManager.create({
               Radium.store.load(Radium.Account, data);
               var account = Radium.store.find(Radium.Account, data.id);
               Radium.accountController.set('content', account);
-
               Radium.appController.setProperties({
                 isFirstRun: false,
                 isLoggedIn: true
               });
-              manager.goToState('loggedIn');
+              manager.send('loginComplete');
             },
             // Error
             function() {
-              manager.goToState('loggedIn.noData');
+              manager.send('accountLoadFailed');
             }
           )
+      },
+      loginComplete: function(manager) {
+        manager.goToState('loggedIn');
+      },
+      accountLoadFailed: function(manager) {
+        manager.goToState('loggedIn.noData');
       }
     })
   }),
