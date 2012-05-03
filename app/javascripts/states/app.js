@@ -20,13 +20,18 @@ Radium.App = Ember.StateManager.create({
   
   loggedOut: Radium.LoggedOutState,
 
-  start: Ember.State.create(),
+  start: Ember.State.create({
+    enter: function() {
+      $('#main').empty();
+    }
+  }),
 
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
+        console.log('----------');
         $.when(manager.bootstrapUser())
           .then(
             // Load account data
@@ -73,7 +78,7 @@ Radium.App = Ember.StateManager.create({
         action = context.action || 'index',
         statePath = [page, action].join('.'),
         routeParams = [];
-        
+
     app.setProperties({
       _statePathCache: statePath,
       currentPage: context.page,
