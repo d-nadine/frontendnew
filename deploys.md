@@ -1,3 +1,4 @@
+* [2012-05-02 18:18 -0700] 857caf7 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-05-01 17:21 -0700] 6c9696f - Joshua Jones: Catch activities that are either nested in 'reference' or are their own property in the feed.
 * [2012-05-01 11:58 -0700] d8e2eba - Joshua Jones: Endless scrolling checks location based on meta.pagination object.
 * [2012-05-01 11:09 -0700] 6af4a2f - Joshua Jones: Don't try and add meta into datastore.
