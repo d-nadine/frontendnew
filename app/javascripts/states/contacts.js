@@ -58,12 +58,11 @@ Radium.ContactsPage = Ember.State.extend({
               page: 0,
               totalPages: 2
             });
+        
         selectedContact.setPath('content.feed', contactFeed);
       }
 
       this._super(manager);
-
-
 
       Radium.PhoneNumber.reopenClass({
         url: 'contacts/%@'.fmt(contactId),

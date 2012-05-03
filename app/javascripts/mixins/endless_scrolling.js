@@ -37,21 +37,21 @@ Radium.EndlessScrolling = Ember.Mixin.create({
       var data = {
             url: feedUrl.fmt(targetId),
             type: 'GET',
-            data: {page: (page+1), before_date: today.toISO8601()}
+            data: {page: (page+1), before: today.toFormattedString('%Y-%m-%D')}
           },
           request = jQuery.extend(data, CONFIG.ajax);
 
       $.ajax(request)
         .success(function(data, status, xhr) {
-          var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
-              currentPage = xhr.getResponseHeader('x-radium-current-page');
+          var totalPages = data.meta.pagination.total,
+              currentPage = data.meta.pagination.current;
 
           self.setProperties({
             totalPages: parseInt(totalPages),
             page: parseInt(currentPage)
           });
 
-          data.forEach(function(activity) {
+          data.activities.forEach(function(activity) {
             // Set some properties for view's to distingushed old items from
             // pushed new items.
             activity.isNewActivity = false;

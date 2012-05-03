@@ -11,7 +11,6 @@ Radium.FormView = Ember.View.extend({
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
     this.$('.more-options').addClass('hide');
-    this.$().hide().slideDown(300);
     this.$('fieldset:first').find('input:text, textarea').focus();
   },
 
@@ -41,9 +40,12 @@ Radium.FormView = Ember.View.extend({
   },
 
   close: function() {
-    this.$().slideUp('fast', function() {
-      Radium.FormManager.send('closeForm');
-    });
+    var self = this;
+    setTimeout(function() {
+      self.$().slideUp('fast', function() {
+        Radium.FormManager.send('closeForm');
+      });
+    }, 2000);
   },
 
   submit: function(event) {
@@ -101,5 +103,13 @@ Radium.FormView = Ember.View.extend({
     target: 'parentView',
     action: 'close',
     disabledBinding: 'parentView.isSubmitting'
-  })
+  }),
+
+  checkForEmpty: function(hash) {
+    for (var val in hash) {
+      if (hash.hasOwnProperty(val)) {
+        return hash[val] === null || hash[val] === undefined;
+      }
+    }
+  }
 });

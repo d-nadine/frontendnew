@@ -70,31 +70,15 @@
         <div class="btn-group">
           {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
           {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
-          {{#view callListButton class="btn btn-small"}}Add to Call List{{/view}}
-          {{#view addCampaignButton class="btn btn-small"}}Add to Campaign{{/view}}
-          {{#if Radium.selectedContactsController.selectedCampaign}}
-            {{#view removeCampaignButton class="btn btn-small"}}Remove from Campaign{{/view}}
-          {{/if}}
-        </div>
-        <!--
-        <div class="btn-group">
-          {{view statusButton title="Change Status" selectionBinding="Radium.contactsController.selectedContacts"}}
-          <ul class="dropdown-menu">
-            <li><a href="#" {{action "assignStatus"}} data-status="lead">Lead</a></li>
-            <li><a href="#" {{action "assignStatus"}} data-status="prospect">Prospect</a></li>
-            <li><a href="#" {{action "assignStatus"}} data-status="opportunity">Opportunity</a></li>
-            <li><a href="#" {{action "assignStatus"}} data-status="customer">Customer</a></li>
-            <li><a href="#" {{action "assignStatus"}} data-status="dead_end">Dead End</a></li>
-          </ul>
+          {{#view addToGroupButton class="btn btn-small"}}Add to Group{{/view}}
+          {{#view addToCompanyButton class="btn btn-small"}}Add to Company{{/view}}
         </div>
       </div>
-    -->
       <div class="btn-toolbar clear">
         {{#view totalSelected}}
           <h5>{{totalSelectedString}} selected.</h5>
         {{/view}}
       </div>
-
     {{/view}}
     <div id="form-container"></div>
     <div id="contacts" class="row">

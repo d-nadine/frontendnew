@@ -1,3 +1,12 @@
+* [2012-05-01 17:21 -0700] 6c9696f - Joshua Jones: Catch activities that are either nested in 'reference' or are their own property in the feed.
+* [2012-05-01 11:58 -0700] d8e2eba - Joshua Jones: Endless scrolling checks location based on meta.pagination object.
+* [2012-05-01 11:09 -0700] 6af4a2f - Joshua Jones: Don't try and add meta into datastore.
+* [2012-05-01 11:04 -0700] aad82a5 - Joshua Jones: Remove time from GET before parameter..
+* [2012-05-01 10:48 -0700] 3c1fde3 - Joshua Jones: Wire up bulk add to new groups and companies.
+* [2012-05-01 00:34 -0700] 1b1eb59 - Joshua Jones: Formatting options backwards, dammit.
+* [2012-05-01 00:31 -0700] 61f9d32 - Joshua Jones: Remove hardcoded user id.
+* [2012-05-01 00:22 -0700] 454f65f - Joshua Jones: Remove before_date parameter requesting feed.
+* [2012-05-01 00:13 -0700] e0d9594 - Joshua Jones: Fix pushed feed data going to the wrong controller.
 * [2012-04-30 07:30 -0700] bda82ab - twinturbo: Remove stray debugger
 * [2012-04-30 07:11 -0700] ad44626 - twinturbo: Use unicorn
 * [2012-04-30 02:28 -0700] a446705 - Joshua Jones: Add todo buttons to user/contact pages.

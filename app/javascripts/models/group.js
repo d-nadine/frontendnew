@@ -3,12 +3,17 @@ Radium.Group = Radium.Core.extend({
   email: DS.attr('string'),
   phone: DS.attr('string'),
   is_public: DS.attr('boolean'),
+  primaryContact: DS.hasOne('Radium.Contact', {
+    key: 'primary_contact'
+  }),
   fields: DS.hasMany('Radium.Field'),
   todos: DS.hasMany('Radium.Todo'),
   deals: DS.hasMany('Radium.Deal'),
   messages: DS.hasMany('Radium.Message'),
   notes: DS.hasMany('Radium.Note'),
-  phone_calls: DS.hasMany('Radium.PhoneCall'),
+  phoneCalls: DS.hasMany('Radium.PhoneCall', {
+    key: 'phone_calls'
+  }),
   meetings: DS.hasMany('Radium.Meeting'),
   campaigns: DS.hasMany('Radium.Campaign'),
   users: DS.hasMany('Radium.User'),
@@ -16,7 +21,5 @@ Radium.Group = Radium.Core.extend({
   activities: DS.hasMany('Radium.Activity'),
   user: DS.hasOne('Radium.User'),
 
-  contact_ids: function() {
-    return this.get('contacts').getEach('id');
-  }.property('contacts').cacheable()
+  contact_ids: DS.attr('array')
 });

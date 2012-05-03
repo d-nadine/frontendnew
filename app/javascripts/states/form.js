@@ -1,4 +1,8 @@
-Radium.FormContainer = Ember.ContainerView.create();
+Radium.FormContainer = Ember.ContainerView.create({
+  didInsertElement: function() {
+    this.$().hide().slideDown(300);
+  }
+});
 
 Radium.FormManager = Ember.StateManager.create({
   enableLogging: true,

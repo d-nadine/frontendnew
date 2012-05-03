@@ -34,15 +34,11 @@ Radium.feedController = Ember.Object.extend({
             Ember.DATETIME_ISO8601
         ).toFormattedString('%B %D, %Y'),
         hash = activity.timestamp.match(/(?:\d+\-\d+\-\d+)/)[0],
-        ref = activity[kind],
+        ref = activity[kind] || activity.reference.kind,
         model = this.modelTypes[kind];
 
-    // Don't load if we already gots it.
-    if (this['_'+kind+'Ids'].indexOf(ref.id) < 0){
+    if(ref) {
       Radium.store.load(Radium[model], ref);
-
-      // Store every loaded ID so `DS.load` doesn't yell at us
-      this['_'+kind+'Ids'].push(ref.id);
     }
 
     if (!this.dates[hash]) {

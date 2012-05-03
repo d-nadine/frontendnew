@@ -3,7 +3,7 @@ var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 /**
 
   Borrows some methods from methods from DS.RESTAdapter. Because Radium's API
-  isn't a traditional 
+  isn't a traditional
 
   @extends DS.Adapter
 */
@@ -17,20 +17,19 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var data = {};
     var hash = get(model, 'data');
     data[root] = hash.unsavedData;
-    var url = (type.url) ? type.url : this.pluralize(root);
-    
+    var url = (type.url) ? type.url : this.puralize(root);
+
     var success = function(json) {
-      store.didCreateRecord(model, json);
+      this.sideload(store,type,json,root)
+      store.didCreateRecord(model, json[root]);
     };
-
-    var error = function(xhr, status, error) {
-      store.recordWasInvalid(model, xhr);
-    };
-
+    
     this.ajax("/" + url, "POST", {
       data: data,
-      success: success,
-      error: error
+      success: success
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -38,16 +37,17 @@ DS.RadiumAdapter = DS.Adapter.extend({
     if (get(this, 'bulkCommit') === false) {
       return this._super(store, type, models);
     }
-    
+
     var root = this.rootForType(type),
         plural = this.pluralize(root);
 
     var data = models.map(function(model) {
       return get(model, 'data');
     });
-    
+
     var success = function(json) {
-      store.didCreateRecords(type, models, json);
+      this.sideload(store,type,json,plural)
+      store.didCreateRecords(type, models, json[plural]);
     };
 
     this.ajax("/" + this.pluralize(root), "POST", {
@@ -71,8 +71,12 @@ DS.RadiumAdapter = DS.Adapter.extend({
     this.ajax(url, "PUT", {
       data: data,
       success: function(json) {
-        store.didUpdateRecord(model, json);
+      this.sideload(store,type,json,root)
+        store.didUpdateRecord(model, json[root]);
       }
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -92,7 +96,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
     this.ajax("/" + this.pluralize(root), "POST", {
       data: data,
       success: function(json) {
-        store.didUpdateRecords(models, json);
+      this.sideload(store,type,json,plural)
+        store.didUpdateRecords(models, json[plural]);
       }
     });
   },
@@ -105,8 +110,12 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     this.ajax(url, "DELETE", {
       success: function(json) {
+        if(json){ this.sideload(store,type,json); }
         store.didDeleteRecord(model);
       }
+    }, {
+      store: store,
+      model: model
     });
   },
 
@@ -127,6 +136,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     this.ajax("/" + this.pluralize(root) + "/delete", "POST", {
       data: data,
       success: function(json) {
+        if(json) { this.sideload(store,type,json); }
         store.didDeleteRecords(models);
       }
     });
@@ -139,13 +149,14 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     this.ajax(url, "GET", {
       success: function(json) {
-        store.load(type, json);
+        store.load(type, json[root]);
+        this.sideload(store,type,json,root);
       }
     });
   },
 
   findMany: function(store, type, ids) {
-    var root = this.rootForType(type), 
+    var root = this.rootForType(type),
         plural = this.pluralize(root),
         userID = this.get('selectedUserID');
     // Activities have to be loaded via their type, ie users, contacts, deals
@@ -165,7 +176,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
           json.forEach(function(item) {
             arr.push(item.id);
           });
-          store.loadMany(type, ids, json);
+          store.loadMany(type, ids, json[plural]);
+          this.sideload(store,type,json,plural);
         }
       });
     }
@@ -209,9 +221,9 @@ DS.RadiumAdapter = DS.Adapter.extend({
   },
 
   findAll: function(store, type) {
-    var root = this.rootForType(type), 
+    var root = this.rootForType(type),
         plural = this.pluralize(root);
-    
+
     if (root === 'activity') return false;
 
     this.ajax("/" + plural, "GET", {
@@ -223,11 +235,12 @@ DS.RadiumAdapter = DS.Adapter.extend({
           totalPages: totalPages,
           totalPagesLoaded: currentPage
         });
-        store.loadMany(type, json);
+        store.loadMany(type, json[plural]);
+        this.sideload(store,type,json,plural);
       }
     });
   },
-  
+
   findQuery: function(store, type, query, modelArray) {
     var resource,
         url,
@@ -236,6 +249,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
         currentPage = query.page || 1,
         root = this.rootForType(type),
         url = this.pluralize(root),
+        plural = url,
         // Cache all the hashes here if they are spread out across several pages.
         dataHash = [];
     // Activities have to be loaded via their type, ie users, contacts, deals
@@ -275,8 +289,9 @@ DS.RadiumAdapter = DS.Adapter.extend({
     };
     // Notify the ModelArray that we've got all the models.
     var pagesLoaded = function(dataHash) {
-      var data = self.normalize(dataHash);
-      modelArray.load(data);
+      var data = self.normalize(dataHash)[0];
+      modelArray.load(data[plural]);
+      self.sideload(store,type,data,plural);
     };
     // Init.
     fetchPage();
@@ -285,8 +300,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
   // HELPERS
 
   /**
-    Normalize nested JSON resources returned without a unique id that are 
-    nested 2 or more levels deep. For example, the code will take this 
+    Normalize nested JSON resources returned without a unique id that are
+    nested 2 or more levels deep. For example, the code will take this
     JSON response:
 
     ```
@@ -346,11 +361,41 @@ DS.RadiumAdapter = DS.Adapter.extend({
     return name.replace(/([A-Z])/g, '_$1').toLowerCase().slice(1);
   },
 
-  ajax: function(url, type, hash) {
+  sideload: function(store, type, json, root) {
+    var sideloadedType, mappings;
+
+    for (var prop in json) {
+      if (!json.hasOwnProperty(prop)) { continue; }
+      if (prop === root) { continue; }
+      if (prop === 'meta') { continue; }
+
+      sideloadedType = type.typeForAssociation(prop);
+
+      if (!sideloadedType) {
+        mappings = get(this, 'mappings');
+
+        ember_assert("Your server returned a hash with the key " + prop + " but you have no mappings", !!mappings);
+
+        sideloadedType = get(get(this, 'mappings'), prop);
+
+        ember_assert("Your server returned a hash with the key " + prop + " but you have no mapping for it", !!sideloadedType);
+      }
+
+      this.loadValue(store, sideloadedType, json[prop]);
+    }
+  },
+
+  ajax: function(url, type, hash, adapterContext) {
     hash.url = '/api' + url;
     hash.type = type;
     hash.context = this;
-    
+    hash.error = function(jqXHR, textStatus, errorThrown) {
+      if (jqXHR.status === 422 && adapterContext.model && adapterContext.store) {
+        var data = JSON.parse(jqXHR.responseText);
+        adapterContext.store.recordWasInvalid(adapterContext.model, data['errors']);
+      }
+    };
+
     if (hash.data && type !== 'GET') {
       hash.data = JSON.stringify(hash.data);
     }

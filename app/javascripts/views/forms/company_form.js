@@ -77,6 +77,11 @@ Radium.CompanyForm = Radium.FormView.extend({
       }];
     }
 
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
+
     // Disable the form buttons
     this.sending();
 
@@ -87,16 +92,7 @@ Radium.CompanyForm = Radium.FormView.extend({
       if (this.get('isValid')) {
         self.success("Company created");
       } else {
-        // Anticipating more codes as the app grows.
-        switch (this.getPath('errors.status')) {
-          case 422:
-            self.error("Something was filled incorrectly, try again?");
-            break;
-          default:
-            self.error("Look like something broke. Report it so we can fix it");
-            break;
-        }
-        
+        self.error("Something was filled incorrectly, try again?");
       }
     });
 

@@ -1131,7 +1131,7 @@ DS.Store = Ember.Object.extend({
 
 
   didCreateRecords: function(type, array, hashes) {
-    var primaryKey = getPath(type, 'proto.primaryKey'),
+    var primaryKey = type.proto().primaryKey,
         typeMap = this.typeMapFor(type),
         id, clientId;
 
@@ -1151,7 +1151,7 @@ DS.Store = Ember.Object.extend({
     // The hash is optional, but if it is not provided, the client must have
     // provided a primary key.
 
-    primaryKey = getPath(type, 'proto.primaryKey');
+    primaryKey = type.proto().primaryKey;
 
     // TODO: Make ember_assert more flexible and convert this into an ember_assert
     if (hash) {
@@ -1324,7 +1324,7 @@ DS.Store = Ember.Object.extend({
   load: function(type, id, hash) {
     if (hash === undefined) {
       hash = id;
-      var primaryKey = getPath(type, 'proto.primaryKey');
+      var primaryKey = type.proto().primaryKey;
       ember_assert("A data hash was loaded for a model of type " + type.toString() + " but no primary key '" + primaryKey + "' was provided.", primaryKey in hash);
       id = hash[primaryKey];
     }
@@ -1357,7 +1357,7 @@ DS.Store = Ember.Object.extend({
     if (hashes === undefined) {
       hashes = ids;
       ids = [];
-      var primaryKey = getPath(type, 'proto.primaryKey');
+      var primaryKey = type.proto().primaryKey;
 
       ids = Ember.ArrayUtils.map(hashes, function(hash) {
         return hash[primaryKey];
@@ -1934,7 +1934,7 @@ var states = {
       // A record is in this state if it has already been
       // saved to the server, but there are new local changes
       // that have not yet been saved.
-      updated: updatedState,
+      updated: updatedState
     }),
 
     // A record is in this state if it was deleted from the store.
@@ -2437,7 +2437,7 @@ DS.Model.reopenClass({
   processAttributeKeys: function() {
     if (this.processedAttributeKeys) { return; }
 
-    var namingConvention = getPath(this, 'proto.namingConvention');
+    var namingConvention = this.proto().namingConvention;
 
     this.eachComputedProperty(function(name, meta) {
       if (meta.isAttribute && !meta.options.key) {
