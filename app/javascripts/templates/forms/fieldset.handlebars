@@ -1,0 +1,7 @@
+<label {{bindAttr for="fieldAttributes"}}>{{label}}</label>
+{{view formField}}
+{{#if errors.length}}
+  {{#each errors}}
+    <span class="help-inline">{{this}}</span>
+  {{/each}}
+{{/if}}
