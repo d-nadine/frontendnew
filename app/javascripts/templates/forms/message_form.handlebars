@@ -1,36 +1,43 @@
-<form class="well">
-  <legend>Send a Message</legend>
+<legend>Send a Message</legend>
 
-  <label for="to">To</label>
+<label for="to">To</label>
+{{#if params.target}}
+  <p>{{params.target.name}} ({{params.target.emailAddresses.firstObject.value}})</p>
+{{else}}
   {{view Radium.AutocompleteTextField 
     id="to" class="input-xlarge"
     sourceBinding="Radium.everyoneController.all"
     valueBinding="data.name"
   }}
-  <input type="hidden" id="message-to" name="message-to" value="">
+{{/if}}
 
-  <label for="subject">Subject</label>
-  <input name="subject" id="subject" class="span8">
+<label for="subject">Subject</label>
+<input name="subject" id="subject" class="span8">
 
+<p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
+{{#view messageOptionalFields}}
   <label for="cc">CC</label>
   {{view Radium.AutocompleteTextField 
     id="cc" class="input-xlarge"
     sourceBinding="Radium.everyoneController.all"
   }}
-  <input type="hidden" name="cc" value="">
 
   <label for="bcc">BCC</label>
   {{view Radium.AutocompleteTextField 
     id="bcc" class="input-xlarge"
     sourceBinding="Radium.everyoneController.all"
   }}
-  <input type="hidden" name="bcc" value="">
-  
-  <label for="message">Message</label>
-  <textarea name="message" id="message" class="span8"></textarea>
+{{/view}}
 
-  <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Send{{/view}}
-    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
-  </div>
-</form>
+<label for="message">Message</label>
+<textarea name="message" id="message" class="span8"></textarea>
+<p><a href="#" {{action "toggleAttachment"}}>
+  {{toggleAttachmentText}} Attachement
+</a></p>
+{{#view attachmentField}}
+  <label for="attachment">Attachment</label>
+  <input type="file" name="attachment" id="attachment">
+{{/view}}
+<div class="form-actions">
+  {{#view submitButton class="btn btn-primary"}}Send{{/view}}
+</div>

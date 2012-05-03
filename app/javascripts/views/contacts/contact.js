@@ -10,6 +10,15 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
     return false;
   },
 
+  emailContact: function() {
+    Radium.FormManager.send('showForm', {
+      form: 'Message',
+      type: 'contacts',
+      target: this.get('content')
+    });
+    return false;
+  },
+
   addContactToGroup: function() {
     Radium.FormManager.send('showForm', {
       form: 'AddToGroup',
