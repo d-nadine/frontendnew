@@ -16,16 +16,11 @@
 
 Radium.App = Ember.StateManager.create({
   rootElement: '#main',
+  enableLogging: true,
   
   loggedOut: Radium.LoggedOutState,
 
-  initialState: function() {
-    if (CONFIG.api) {
-      return 'authenticate';
-    } else {
-      return 'loggedOut';
-    }
-  }.property(),
+  start: Ember.State.create(),
 
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
@@ -78,25 +73,23 @@ Radium.App = Ember.StateManager.create({
         action = context.action || 'index',
         statePath = [page, action].join('.'),
         routeParams = [];
-
+        
     app.setProperties({
       _statePathCache: statePath,
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
-    manager.goToState(statePath);
+
+    if (app.get('isFirstRun')) {
+      manager.goToState('authenticate');
+    } else {
+      manager.goToState(statePath);
+    }
     
   },
 
   bootstrapUser: function() {
     var request = jQuery.extend({url: '/api/account'}, CONFIG.ajax);
     return $.ajax(request);
-  },
-
-  infiniteLoading: function(action) {
-    if ($(window).scrollTop() > $(document).height() - $(window).height() - 300) {
-      Radium.App.send(action);
-      return false;
-    }
   }
 });
