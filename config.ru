@@ -1,3 +1,3 @@
 require './radium'
 
-run Radium.new
+run Radium

@@ -19,7 +19,8 @@ user_api_key: test # optionally, authenticate as a user indevelopment
 
 ```
 # bundle if required
-$ bundle exec rackup
+$ bundle exec foreman start
+$ open localhost:5000
 ```
 
 ## Deploying
