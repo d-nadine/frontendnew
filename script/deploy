@@ -67,7 +67,7 @@ class Deploy < Thor
     if success? "heroku config"
       pass "Heroku connection"
     else
-      failure %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}, :red
+      failure %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}
     end
   end
 
