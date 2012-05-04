@@ -1,3 +1,4 @@
+* [2012-05-04 03:30 -0700] 04b6fa9 - twinturbo: Bump iridium
 * [2012-05-04 02:56 -0700] c96bcd9 - twinturbo: Bump iridium again
 * [2012-05-04 02:52 -0700] 481dfcf - twinturbo: Bump iridium
 * [2012-05-04 02:41 -0700] 67dad49 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
