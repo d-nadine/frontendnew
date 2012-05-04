@@ -12,5 +12,16 @@ Radium.usersController = Ember.ArrayProxy.create({
         phone: item.get('phone')
       };
     });
-  }.property('@each.name').cacheable()
+  }.property('@each.name').cacheable(),
+
+  emails: function() {
+    return this.map(function(item) {
+      var name = item.get('name'),
+          email = item.get('email');
+      return {
+        label: "%@ <%@>".fmt(name, email),
+        value: email
+      };
+    });
+  }.property('@each.emailAddresses').cacheable(),
 });

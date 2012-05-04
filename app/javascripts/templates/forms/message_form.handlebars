@@ -15,17 +15,8 @@
 
 <p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
 {{#view messageOptionalFields}}
-  <label for="cc">CC</label>
-  {{view Radium.AutocompleteTextField 
-    id="cc" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-  }}
 
-  <label for="bcc">BCC</label>
-  {{view Radium.AutocompleteTextField 
-    id="bcc" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-  }}
+  {{view ccField label="CC"}}
 {{/view}}
 
 {{view messageField label="Message"}}

@@ -111,11 +111,24 @@ Radium.contactsController = Ember.ArrayProxy.create({
   */
   contactsContactInfo: function() {
     return this.map(function(item) {
+      var name = item.get('name'),
+          email = item.getPath('emailAddresses.firstObject.value');
+
       return {
-        label: item.get('name'), 
-        value: item.get('id'),
-        email: item.get('email'),
-        phone: item.get('phone')
+        label: "%@ <%@>".fmt(name, email),
+        value: email
+      };
+    });
+  }.property('@each.name').cacheable(),
+
+  emails: function() {
+    return this.map(function(item) {
+      var name = item.get('name'),
+          email = item.getPath('emailAddresses.firstObject.value');
+
+      return {
+        label: "%@ <%@>".fmt(name, email),
+        value: email
       };
     });
   }.property('@each.name').cacheable(),

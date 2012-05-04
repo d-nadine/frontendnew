@@ -1,9 +1,12 @@
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
+
+  // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
   isValid: function() {
     return (this.getPath('invalidFields.length')) ? false : true;
   }.property('invalidFields.@each').cacheable(),
-  subjectField: Radium.FieldSet.extend({
+  
+  subjectField: Radium.Fieldset.extend({
     errors: Ember.A([]),
     formField: Ember.TextField.extend(Radium.FieldValidation, {
       classNames: ['span8'],
@@ -13,7 +16,7 @@ Radium.MessageForm = Radium.FormView.extend({
     })
   }),
 
-  messageField: Radium.FieldSet.extend({
+  messageField: Radium.Fieldset.extend({
     errors: Ember.A([]),
     formField: Ember.TextArea.extend(Radium.FieldValidation, {
       classNames: ['span8'],
@@ -32,13 +35,23 @@ Radium.MessageForm = Radium.FormView.extend({
     this.toggleProperty('isOptionalVisible');
     return false;
   },
+
   messageOptionalFields: Ember.View.extend({
     isVisibleBinding: 'parentView.isOptionalVisible',
     willClearFields: function() {
       if (!this.get('isVisible')) {
         this.$('input:text').val('');
       }
-    }.observes('isVisible')
+    }.observes('isVisible'),
+
+    ccField: Radium.Fieldset.extend({
+      formField: Radium.AutocompleteTextField.extend({
+        elementId: 'cc',
+        classNames: ['span4'],
+        nameBinding: 'parentView.fieldAttributes',
+        sourceBinding: 'Radium.everyoneController.emails'
+      })
+    }),
   }),
 
   isAttachmentVisible: false,

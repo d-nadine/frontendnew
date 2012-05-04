@@ -1,4 +1,4 @@
-Radium.FieldSet = Ember.View.extend({
+Radium.Fieldset = Ember.View.extend({
   tagName: 'fieldset',
   classNames: ['control-group'],
   classNameBindings: ['isError:error'],
