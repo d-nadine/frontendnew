@@ -1,6 +1,6 @@
 namespace :assets do
   task :precompile do
     require './radium'
-    Radium.new.compile_assets
+    Radium.compile_assets
   end
 end
