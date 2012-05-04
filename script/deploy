@@ -62,6 +62,15 @@ class Deploy < Thor
     end
   end
 
+  desc "ensure_heroku_installed", "Tests that the heroku gem is installed"
+  def ensure_heroku_installed
+    if success? "which heroku"
+      pass "Heroku gem installed"
+    else
+      failure "Heroku gem is missing. Please install with: gem install heorku"
+    end
+  end
+
   desc "ensure_heroku_connection", "Tests this user can access heroku"
   def ensure_heroku_connection
     if success? "heroku config"
@@ -177,6 +186,7 @@ class Deploy < Thor
 
     prereqs = invoke(:ensure_clean) && 
       invoke(:ensure_github_connection) &&
+      invoke(:ensure_heroku_installed) &&
       invoke(:ensure_heroku_connection) &&
       invoke(:ensure_heroku_outdated) &&
       invoke(:ensure_fast_forward) &&
