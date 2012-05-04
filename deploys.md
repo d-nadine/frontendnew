@@ -1,3 +1,4 @@
+* [2012-05-04 11:02 -0700] faa170d - Joshua Jones: Fix image path error in bootstrap.min.css
 * [2012-05-04 03:30 -0700] 04b6fa9 - twinturbo: Bump iridium
 * [2012-05-04 02:56 -0700] c96bcd9 - twinturbo: Bump iridium again
 * [2012-05-04 02:52 -0700] 481dfcf - twinturbo: Bump iridium
