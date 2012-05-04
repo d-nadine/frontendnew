@@ -87,7 +87,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'Todo',
-        id: this.getPath('parentView.selectedContacts'),
+        target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'
       });
     },

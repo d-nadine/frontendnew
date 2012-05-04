@@ -3,7 +3,6 @@ Radium.ContactsFeedFilterView = Radium.FeedFilterView.extend({
   content: [
     {label: "Everything", kind: null, addButton: false},
     {label: "Contacts", kind: 'contact', addButton: true},
-    {label: "Companies", kind: 'company', addButton: true},
     {label: "Groups", kind: 'group', addButton: true},
     {label: "Leads", kind: 'lead', addButton: false},
     {label: "Prospects", kind: 'prospect', addButton: false},

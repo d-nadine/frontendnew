@@ -228,8 +228,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     this.ajax("/" + plural, "GET", {
       success: function(json, status, xhr) {
-        var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
-            currentPage = xhr.getResponseHeader('x-radium-current-page'),
+        var totalPages = json.meta.pagination.total,
+            currentPage = json.meta.pagination.current,
             controllerName = plural.camelize();
         Radium[controllerName + 'Controller'].setProperties({
           totalPages: totalPages,
@@ -264,7 +264,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
         data: {page: currentPage},
         success: function(json, status, xhr) {
           // A page=0 query loads all available pages.
-          var totalPages = xhr.getResponseHeader('x-radium-total-pages'),
+          var totalPages = json.meta.pagination.total,
               controllerName = url.camelize();
           if (query.page === 0) {
             // If we are on the last page, cache the hash and then wrap up

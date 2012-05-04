@@ -4,7 +4,6 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   addContactTodo: function() {
     Radium.FormManager.send('showForm', {
       form: 'Todo',
-      id: this.getPath('content.id'),
       type: 'contacts',
       target: this.get('content')
     });
