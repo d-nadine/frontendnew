@@ -1,3 +1,4 @@
+* [2012-05-04 02:41 -0700] 67dad49 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-05-03 11:14 -0700] 32f7dc7 - Joshua Jones: Move fixtures out of app folder.
 * [2012-05-03 10:51 -0700] b3adf72 - Joshua Jones: Fix loading order so loading pane doesn't persist after load.
 * [2012-05-02 18:18 -0700] 857caf7 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
