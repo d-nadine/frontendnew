@@ -20,7 +20,8 @@ Radium.usersController = Ember.ArrayProxy.create({
           email = item.get('email');
       return {
         label: "%@ <%@>".fmt(name, email),
-        value: email
+        value: email,
+        target: item
       };
     });
   }.property('@each.emailAddresses').cacheable(),

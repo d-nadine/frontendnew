@@ -1,5 +1,19 @@
+Radium.EmailTokenView = Ember.View.extend({
+  classNames: ['span2'],
+  removeEmail: function() {
+    this.getPath('parentView.content').removeObject(this.get('item'));
+  },
+  template: Ember.Handlebars.compile('<span class="alert alert-info" {{item.name}} <button class="close" {{action "removeEmail"}}>&times;</button></span>')
+})
+
+
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
+
+  ccEmailValues: Radium.typeAheadController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: []
+  }),
 
   // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
   isValid: function() {
@@ -36,22 +50,23 @@ Radium.MessageForm = Radium.FormView.extend({
     return false;
   },
 
-  messageOptionalFields: Ember.View.extend({
-    isVisibleBinding: 'parentView.isOptionalVisible',
-    willClearFields: function() {
-      if (!this.get('isVisible')) {
-        this.$('input:text').val('');
-      }
-    }.observes('isVisible'),
+  selectedCCEmails: Ember.View.extend({
+    contentBinding: 'parentView.ccEmailValues.selected'
+  }),
 
-    ccField: Radium.Fieldset.extend({
-      formField: Radium.AutocompleteTextField.extend({
-        elementId: 'cc',
-        classNames: ['span4'],
-        nameBinding: 'parentView.fieldAttributes',
-        sourceBinding: 'Radium.everyoneController.emails'
-      })
-    }),
+  ccField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend({
+      elementId: 'cc',
+      classNames: ['span4'],
+      nameBinding: 'parentView.fieldAttributes',
+      storedCCBinding: 'parentView.parentView.ccEmailValues',
+      sourceBinding: 'storedCC.content',
+      select: function(event, ui) {
+        this.getPath('storedCC.selected').pushObject(ui.item.target);
+        this.set('value', null);
+        event.preventDefault();
+      }
+    })
   }),
 
   isAttachmentVisible: false,
@@ -62,14 +77,6 @@ Radium.MessageForm = Radium.FormView.extend({
     this.toggleProperty('isAttachmentVisible');
     return false;
   },
-  attachmentField: Ember.View.extend({
-    isVisibleBinding: 'parentView.isAttachmentVisible',
-    willClearFields: function() {
-      if (!this.get('isVisible')) {
-        this.$('input:file').val('');
-      }
-    }.observes('isVisible')
-  }),
 
   submitForm: function() {
     console.log('yay');

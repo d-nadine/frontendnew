@@ -1,3 +1,3 @@
-Radium.typeAheadController = Ember.ArrayController.create({
-  content: []
+Radium.typeAheadController = Ember.ArrayController.extend({
+  
 });

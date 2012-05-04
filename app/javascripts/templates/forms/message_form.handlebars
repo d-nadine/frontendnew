@@ -1,4 +1,4 @@
-{{#view cancelFormButton class="close"}}×{{/view}}
+{{#view cancelFormButton class="close close-form"}}×{{/view}}
 <legend>Send a Message</legend>
 <label for="to">To</label>
 {{#if params.target}}
@@ -14,20 +14,26 @@
 {{view subjectField label="Subject"}}
 
 <p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
-{{#view messageOptionalFields}}
-
+{{#if isOptionalVisible}}
+  {{#view selectedCCEmails}}
+    {{#each content}}
+      {{view Radium.EmailTokenView itemBinding="this"}}
+    {{/each}}
+  {{/view}}
   {{view ccField label="CC"}}
-{{/view}}
+{{/if}}
 
 {{view messageField label="Message"}}
 
 <p><a href="#" {{action "toggleAttachment"}}>
   {{toggleAttachmentText}} Attachement
 </a></p>
-{{#view attachmentField}}
+
+{{#if isAttachmentVisible}}
   <label for="attachment">Attachment</label>
   <input type="file" name="attachment" id="attachment">
-{{/view}}
+{{/if}}
+
 <div class="form-actions">
   {{#view submitButton class="btn btn-primary"}}Send{{/view}}
 </div>

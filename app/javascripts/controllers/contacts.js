@@ -128,7 +128,8 @@ Radium.contactsController = Ember.ArrayProxy.create({
 
       return {
         label: "%@ <%@>".fmt(name, email),
-        value: email
+        value: email,
+        target: item
       };
     });
   }.property('@each.name').cacheable(),
