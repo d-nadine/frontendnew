@@ -1,3 +1,4 @@
+* [2012-05-04 02:56 -0700] c96bcd9 - twinturbo: Bump iridium again
 * [2012-05-04 02:52 -0700] 481dfcf - twinturbo: Bump iridium
 * [2012-05-04 02:41 -0700] 67dad49 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-05-03 11:14 -0700] 32f7dc7 - Joshua Jones: Move fixtures out of app folder.
