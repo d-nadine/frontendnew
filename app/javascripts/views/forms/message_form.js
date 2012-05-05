@@ -1,18 +1,14 @@
-Radium.EmailTokenView = Ember.View.extend({
-  classNames: ['span2'],
-  removeEmail: function() {
-    this.getPath('parentView.content').removeObject(this.get('item'));
-  },
-  template: Ember.Handlebars.compile('<span class="alert alert-info" {{item.name}} <button class="close" {{action "removeEmail"}}>&times;</button></span>')
-})
-
-
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
 
-  ccEmailValues: Radium.typeAheadController.create({
+  ccEmailValues: Ember.ArrayController.create({
     contentBinding: 'Radium.everyoneController.emails',
-    selected: []
+    selected: Ember.A([])
+  }),
+
+  bccEmailValues: Ember.ArrayController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: Ember.A([])
   }),
 
   // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
@@ -47,6 +43,10 @@ Radium.MessageForm = Radium.FormView.extend({
   }.property('isOptionalVisible').cacheable(),
   toggleOptional: function() {
     this.toggleProperty('isOptionalVisible');
+    if (!this.get('isOptionalVisible')) {
+      this.setPath('ccEmailValues.selected', []);
+      this.setPath('bccEmailValues.selected', []);
+    }
     return false;
   },
 
@@ -54,17 +54,68 @@ Radium.MessageForm = Radium.FormView.extend({
     contentBinding: 'parentView.ccEmailValues.selected'
   }),
 
+  selectedBCCEmails: Ember.View.extend({
+    contentBinding: 'parentView.bccEmailValues.selected'
+  }),
+
   ccField: Radium.Fieldset.extend({
     formField: Radium.AutocompleteTextField.extend({
       elementId: 'cc',
-      classNames: ['span4'],
+      classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
       storedCCBinding: 'parentView.parentView.ccEmailValues',
       sourceBinding: 'storedCC.content',
       select: function(event, ui) {
-        this.getPath('storedCC.selected').pushObject(ui.item.target);
+        if (ui.item) {
+          this.getPath('storedCC.selected').pushObject(ui.item.target);
+        }
+        return false;
+      },
+      close: function() {
         this.set('value', null);
-        event.preventDefault();
+      },
+      change: function(event, ui) {
+        var val = this.get('value');
+        if (!ui && val) {
+          var nonSystemEmail = Ember.Object.create({
+                email: val
+              });
+            this.getPath('storedCC.selected').addObject(nonSystemEmail);
+        } else {
+          return false;
+        }
+        this.set('value', null);
+      }
+    })
+  }),
+
+  bccField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend({
+      elementId: 'bcc',
+      classNames: ['span3'],
+      nameBinding: 'parentView.fieldAttributes',
+      storedBCCBinding: 'parentView.parentView.bccEmailValues',
+      sourceBinding: 'storedBCC.content',
+      select: function(event, ui) {
+        if (ui.item) {
+          this.getPath('storedBCC.selected').pushObject(ui.item.target);
+        }
+        return false;
+      },
+      close: function() {
+        this.set('value', null);
+      },
+      change: function(event, ui) {
+        var val = this.get('value');
+        if (!ui && val) {
+          var nonSystemEmail = Ember.Object.create({
+                email: val
+              });
+            this.getPath('storedBCC.selected').addObject(nonSystemEmail);
+        } else {
+          return false;
+        }
+        this.set('value', null);
       }
     })
   }),
@@ -79,6 +130,9 @@ Radium.MessageForm = Radium.FormView.extend({
   },
 
   submitForm: function() {
-    console.log('yay');
+    if (this.get('isValid')) {
+      console.log('yay');
+      debugger;
+    }
   }
 });

@@ -1,0 +1,7 @@
+{{#if item.name}}
+  {{item.name}}
+{{/if}}
+{{#unless item.name}}
+  {{item.email}}
+{{/unless}}
+<a href="#" class="close" {{action "removeEmail"}}>&times;</a>

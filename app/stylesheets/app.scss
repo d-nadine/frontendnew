@@ -161,6 +161,19 @@ body {
   }
 }
 
+.alert.token {
+  height: 17px;
+  display: inline-block;
+  position: relative;
+
+  .close {
+    top: 5px;
+    right: 12px;
+    position: absolute;
+    background: transparent;
+  }
+}
+
 .create-form {
   width: 700px;
   float: left;

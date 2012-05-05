@@ -18,6 +18,7 @@ minispade.require('radium/views/ui/inline_textfield');
 minispade.require('radium/views/ui/inline_select');
 minispade.require('radium/views/ui/inline_datepicker');
 minispade.require('radium/views/ui/label');
+minispade.require('radium/views/ui/token');
 
 // Forms
 minispade.require('radium/views/forms/fieldset');

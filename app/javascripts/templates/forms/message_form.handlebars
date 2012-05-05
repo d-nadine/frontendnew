@@ -15,12 +15,21 @@
 
 <p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
 {{#if isOptionalVisible}}
+  {{view ccField label="CC"}}
   {{#view selectedCCEmails}}
     {{#each content}}
-      {{view Radium.EmailTokenView itemBinding="this"}}
+      {{view Radium.TokenView itemBinding="this"}}
     {{/each}}
+    <div class="clearfix"></div>
   {{/view}}
-  {{view ccField label="CC"}}
+
+  {{view bccField label="BCC"}}
+  {{#view selectedBCCEmails}}
+    {{#each content}}
+      {{view Radium.TokenView itemBinding="this"}}
+    {{/each}}
+    <div class="clearfix"></div>
+  {{/view}}
 {{/if}}
 
 {{view messageField label="Message"}}
