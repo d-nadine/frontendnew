@@ -4,11 +4,13 @@
 {{#if params.target}}
   <p>{{params.target.name}} ({{params.target.emailAddresses.firstObject.value}})</p>
 {{else}}
-  {{view Radium.AutocompleteTextField 
-    id="to" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-    valueBinding="data.name"
-  }}
+  {{view toField label="To"}}
+  {{#view selectedToEmails}}
+    {{#each content}}
+      {{view Radium.TokenView itemBinding="this"}}
+    {{/each}}
+    <div class="clearfix"></div>
+  {{/view}}
 {{/if}}
 
 {{view subjectField label="Subject"}}

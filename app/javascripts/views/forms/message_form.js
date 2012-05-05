@@ -1,6 +1,11 @@
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
 
+  toEmailValues: Ember.ArrayController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: Ember.A([])
+  }),
+
   ccEmailValues: Ember.ArrayController.create({
     contentBinding: 'Radium.everyoneController.emails',
     selected: Ember.A([])
@@ -15,6 +20,20 @@ Radium.MessageForm = Radium.FormView.extend({
   isValid: function() {
     return (this.getPath('invalidFields.length')) ? false : true;
   }.property('invalidFields.@each').cacheable(),
+
+  selectedToEmails: Ember.View.extend({
+    contentBinding: 'parentView.toEmailValues.selected'
+  }),
+
+  toField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+      elementId: 'to',
+      classNames: ['span3'],
+      nameBinding: 'parentView.fieldAttributes',
+      selectedGroupBinding: 'parentView.parentView.toEmailValues',
+      sourceBinding: 'selectedGroup.content'
+    })
+  }),
   
   subjectField: Radium.Fieldset.extend({
     errors: Ember.A([]),
@@ -74,7 +93,7 @@ Radium.MessageForm = Radium.FormView.extend({
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
       selectedGroupBinding: 'parentView.parentView.bccEmailValues',
-      sourceBinding: 'selectedGroup.content',
+      sourceBinding: 'selectedGroup.content'
     })
   }),
 
@@ -88,9 +107,56 @@ Radium.MessageForm = Radium.FormView.extend({
   },
 
   submitForm: function() {
+    var self = this;
+    
     if (this.get('isValid')) {
-      console.log('yay');
-      debugger;
+      // Fields
+      var to = this.getPath('toEmailValues.selected').getEach('email').uniq(),
+          cc = this.getPath('ccEmailValues.selected').getEach('email').uniq(),
+          bcc = this.getPath('bccEmailValues.selected').getEach('email').uniq();
+          subject = this.$('#subject').val(),
+          message = this.$('#message').val();
+
+      if (!to.length) {
+        to = [this.getPath('params.target.emailAddresses.firstObject.value')];
+      }
+      
+      Radium.Email.reopenClass({
+        url: 'emails',
+        root: 'email'
+      });
+
+      this.sending();
+
+      var data = {
+            to: to,
+            cc: cc,
+            bcc: bcc,
+            subject: subject,
+            message: message
+          },
+          email = Radium.store.createRecord(Radium.Email, data);
+      
+      Radium.store.commit();
+
+      email.addObserver('isValid', function() {
+        if (this.get('isValid')) {
+          Radium.Email.reopenClass({
+            url: null,
+            root: null
+          });
+          self.success("Email sent");
+        } else {
+          self.error("Something was filled incorrectly, try again?");
+        }
+      });
+
+      email.addObserver('isError', function() {
+        if (this.get('isError')) {
+          self.error("Look like something broke. Report it so we can fix it");
+        }
+      });
     }
+    return false;
   }
 });
