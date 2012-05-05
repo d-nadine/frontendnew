@@ -59,64 +59,22 @@ Radium.MessageForm = Radium.FormView.extend({
   }),
 
   ccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
       elementId: 'cc',
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
-      storedCCBinding: 'parentView.parentView.ccEmailValues',
-      sourceBinding: 'storedCC.content',
-      select: function(event, ui) {
-        if (ui.item) {
-          this.getPath('storedCC.selected').pushObject(ui.item.target);
-        }
-        return false;
-      },
-      close: function() {
-        this.set('value', null);
-      },
-      change: function(event, ui) {
-        var val = this.get('value');
-        if (!ui && val) {
-          var nonSystemEmail = Ember.Object.create({
-                email: val
-              });
-            this.getPath('storedCC.selected').addObject(nonSystemEmail);
-        } else {
-          return false;
-        }
-        this.set('value', null);
-      }
+      selectedGroupBinding: 'parentView.parentView.ccEmailValues',
+      sourceBinding: 'selectedGroup.content'
     })
   }),
 
   bccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
       elementId: 'bcc',
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
-      storedBCCBinding: 'parentView.parentView.bccEmailValues',
-      sourceBinding: 'storedBCC.content',
-      select: function(event, ui) {
-        if (ui.item) {
-          this.getPath('storedBCC.selected').pushObject(ui.item.target);
-        }
-        return false;
-      },
-      close: function() {
-        this.set('value', null);
-      },
-      change: function(event, ui) {
-        var val = this.get('value');
-        if (!ui && val) {
-          var nonSystemEmail = Ember.Object.create({
-                email: val
-              });
-            this.getPath('storedBCC.selected').addObject(nonSystemEmail);
-        } else {
-          return false;
-        }
-        this.set('value', null);
-      }
+      selectedGroupBinding: 'parentView.parentView.bccEmailValues',
+      sourceBinding: 'selectedGroup.content',
     })
   }),
 

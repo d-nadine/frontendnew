@@ -11,15 +11,12 @@ Radium.AutocompleteTextField = Radium.TextField.extend(JQ.Widget, {
     this.$().next().val(ui.item.value);
   },
   close: function(event, ui) {
-    debugger;
     return false;
   },
   focus: function(event, ui) {
-    console.log('focus');
-    return false;
+    event.preventDefault();
   },
   change: function(event, ui) {
-    debugger;
     return false;
   }
 });
