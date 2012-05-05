@@ -1,36 +1,50 @@
-<form class="well">
-  <legend>Send a Message</legend>
+{{#view cancelFormButton class="close close-form"}}×{{/view}}
+<legend>Send a Message</legend>
+<label for="to">To</label>
+{{#if params.target}}
+  <p>{{params.target.name}} ({{params.target.emailAddresses.firstObject.value}})</p>
+{{else}}
+  {{view toField label="To"}}
+  {{#view selectedToEmails}}
+    {{#each content}}
+      {{view Radium.TokenView itemBinding="this"}}
+    {{/each}}
+    <div class="clearfix"></div>
+  {{/view}}
+{{/if}}
 
-  <label for="to">To</label>
-  {{view Radium.AutocompleteTextField 
-    id="to" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-    valueBinding="data.name"
-  }}
-  <input type="hidden" id="message-to" name="message-to" value="">
+{{view subjectField label="Subject"}}
 
-  <label for="subject">Subject</label>
-  <input name="subject" id="subject" class="span8">
+<p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
+{{#if isOptionalVisible}}
+  {{view ccField label="CC"}}
+  {{#view selectedCCEmails}}
+    {{#each content}}
+      {{view Radium.TokenView itemBinding="this"}}
+    {{/each}}
+    <div class="clearfix"></div>
+  {{/view}}
 
-  <label for="cc">CC</label>
-  {{view Radium.AutocompleteTextField 
-    id="cc" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-  }}
-  <input type="hidden" name="cc" value="">
+  {{view bccField label="BCC"}}
+  {{#view selectedBCCEmails}}
+    {{#each content}}
+      {{view Radium.TokenView itemBinding="this"}}
+    {{/each}}
+    <div class="clearfix"></div>
+  {{/view}}
+{{/if}}
 
-  <label for="bcc">BCC</label>
-  {{view Radium.AutocompleteTextField 
-    id="bcc" class="input-xlarge"
-    sourceBinding="Radium.everyoneController.all"
-  }}
-  <input type="hidden" name="bcc" value="">
-  
-  <label for="message">Message</label>
-  <textarea name="message" id="message" class="span8"></textarea>
+{{view messageField label="Message"}}
 
-  <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Send{{/view}}
-    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
-  </div>
-</form>
+<p><a href="#" {{action "toggleAttachment"}}>
+  {{toggleAttachmentText}} Attachement
+</a></p>
+
+{{#if isAttachmentVisible}}
+  <label for="attachment">Attachment</label>
+  <input type="file" name="attachment" id="attachment">
+{{/if}}
+
+<div class="form-actions">
+  {{#view submitButton class="btn btn-primary"}}Send{{/view}}
+</div>

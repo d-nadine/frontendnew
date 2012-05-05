@@ -1,6 +1,7 @@
 Radium.ContactsPage = Ember.State.extend({
   index: Ember.ViewState.extend({
     view: Radium.ContactsPageView,
+
     start: Ember.State.create({
       isFirstRun: true,
       enter: function(manager) {

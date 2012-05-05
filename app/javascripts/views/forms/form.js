@@ -7,6 +7,7 @@ Radium.FormView = Ember.View.extend({
   isSubmitting: false,
   isValid: false,
   isMatchError: null,
+  invalidFields: Ember.A([]),
 
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {

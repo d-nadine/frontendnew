@@ -152,12 +152,25 @@ body {
     display: inline-block;
   }
 
-  button.close {
+  button.close-form {
     border: none;
     background: none;
     position: absolute;
     right: 12px;
     top: 22px;
+  }
+}
+
+.alert.token {
+  height: 17px;
+  display: inline-block;
+  position: relative;
+
+  .close {
+    top: 5px;
+    right: 12px;
+    position: absolute;
+    background: transparent;
   }
 }
 

@@ -1,3 +1,162 @@
 Radium.MessageForm = Radium.FormView.extend({
-  templateName: 'message_form'
+  templateName: 'message_form',
+
+  toEmailValues: Ember.ArrayController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: Ember.A([])
+  }),
+
+  ccEmailValues: Ember.ArrayController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: Ember.A([])
+  }),
+
+  bccEmailValues: Ember.ArrayController.create({
+    contentBinding: 'Radium.everyoneController.emails',
+    selected: Ember.A([])
+  }),
+
+  // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
+  isValid: function() {
+    return (this.getPath('invalidFields.length')) ? false : true;
+  }.property('invalidFields.@each').cacheable(),
+
+  selectedToEmails: Ember.View.extend({
+    contentBinding: 'parentView.toEmailValues.selected'
+  }),
+
+  toField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+      elementId: 'to',
+      classNames: ['span3'],
+      nameBinding: 'parentView.fieldAttributes',
+      selectedGroupBinding: 'parentView.parentView.toEmailValues',
+      sourceBinding: 'selectedGroup.content'
+    })
+  }),
+  
+  subjectField: Radium.Fieldset.extend({
+    errors: Ember.A([]),
+    formField: Ember.TextField.extend(Radium.FieldValidation, {
+      classNames: ['span8'],
+      elementId: 'subject',
+      nameBinding: 'parentView.fieldAttributes',
+      rules: ['required']
+    })
+  }),
+
+  messageField: Radium.Fieldset.extend({
+    errors: Ember.A([]),
+    formField: Ember.TextArea.extend(Radium.FieldValidation, {
+      classNames: ['span8'],
+      elementId: 'message',
+      nameBinding: 'parentView.fieldAttributes',
+      rules: ['required']
+    })
+  }),
+
+  // Extra field toggles
+  isOptionalVisible: false,
+  toggleText: function() {
+    return (this.get('isOptionalVisible')) ? 'Hide' : 'Show';
+  }.property('isOptionalVisible').cacheable(),
+  toggleOptional: function() {
+    this.toggleProperty('isOptionalVisible');
+    if (!this.get('isOptionalVisible')) {
+      this.setPath('ccEmailValues.selected', []);
+      this.setPath('bccEmailValues.selected', []);
+    }
+    return false;
+  },
+
+  selectedCCEmails: Ember.View.extend({
+    contentBinding: 'parentView.ccEmailValues.selected'
+  }),
+
+  selectedBCCEmails: Ember.View.extend({
+    contentBinding: 'parentView.bccEmailValues.selected'
+  }),
+
+  ccField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+      elementId: 'cc',
+      classNames: ['span3'],
+      nameBinding: 'parentView.fieldAttributes',
+      selectedGroupBinding: 'parentView.parentView.ccEmailValues',
+      sourceBinding: 'selectedGroup.content'
+    })
+  }),
+
+  bccField: Radium.Fieldset.extend({
+    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+      elementId: 'bcc',
+      classNames: ['span3'],
+      nameBinding: 'parentView.fieldAttributes',
+      selectedGroupBinding: 'parentView.parentView.bccEmailValues',
+      sourceBinding: 'selectedGroup.content'
+    })
+  }),
+
+  isAttachmentVisible: false,
+  toggleAttachmentText: function() {
+    return (this.get('isAttachmentVisible')) ? 'Remove' : 'Add';
+  }.property('isAttachmentVisible').cacheable(),
+  toggleAttachment: function() {
+    this.toggleProperty('isAttachmentVisible');
+    return false;
+  },
+
+  submitForm: function() {
+    var self = this;
+    
+    if (this.get('isValid')) {
+      // Fields
+      var to = this.getPath('toEmailValues.selected').getEach('email').uniq(),
+          cc = this.getPath('ccEmailValues.selected').getEach('email').uniq(),
+          bcc = this.getPath('bccEmailValues.selected').getEach('email').uniq();
+          subject = this.$('#subject').val(),
+          message = this.$('#message').val();
+
+      if (!to.length) {
+        to = [this.getPath('params.target.emailAddresses.firstObject.value')];
+      }
+      
+      Radium.Email.reopenClass({
+        url: 'emails',
+        root: 'email'
+      });
+
+      this.sending();
+
+      var data = {
+            to: to,
+            cc: cc,
+            bcc: bcc,
+            subject: subject,
+            message: message
+          },
+          email = Radium.store.createRecord(Radium.Email, data);
+      
+      Radium.store.commit();
+
+      email.addObserver('isValid', function() {
+        if (this.get('isValid')) {
+          Radium.Email.reopenClass({
+            url: null,
+            root: null
+          });
+          self.success("Email sent");
+        } else {
+          self.error("Something was filled incorrectly, try again?");
+        }
+      });
+
+      email.addObserver('isError', function() {
+        if (this.get('isError')) {
+          self.error("Look like something broke. Report it so we can fix it");
+        }
+      });
+    }
+    return false;
+  }
 });

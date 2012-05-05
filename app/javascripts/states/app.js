@@ -31,7 +31,6 @@ Radium.App = Ember.StateManager.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
-        console.log('----------');
         $.when(manager.bootstrapUser())
           .then(
             // Load account data

@@ -1,7 +1,5 @@
 Radium.contactsController = Ember.ArrayProxy.create({
   content: [],
-  totalPagesLoaded: 0,
-  totalPages: 0,
 
   isAllContactsLoaded: function() {
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
@@ -113,11 +111,25 @@ Radium.contactsController = Ember.ArrayProxy.create({
   */
   contactsContactInfo: function() {
     return this.map(function(item) {
+      var name = item.get('name'),
+          email = item.getPath('emailAddresses.firstObject.value');
+
       return {
-        label: item.get('name'), 
-        value: item.get('id'),
-        email: item.get('email'),
-        phone: item.get('phone')
+        label: "%@ <%@>".fmt(name, email),
+        value: email
+      };
+    });
+  }.property('@each.name').cacheable(),
+
+  emails: function() {
+    return this.map(function(item) {
+      var name = item.get('name'),
+          email = item.getPath('emailAddresses.firstObject.value');
+
+      return {
+        label: "%@ <%@>".fmt(name, email),
+        value: email,
+        target: item
       };
     });
   }.property('@each.name').cacheable(),
@@ -180,5 +192,31 @@ Radium.contactsController = Ember.ArrayProxy.create({
 
   clearSelected: function() {
     this.setEach('isSelected', false);
+  },
+
+
+  // Infinite scroll functions
+  currentPage: 0,
+  totalPages: 0,
+  load: function() {
+    var self = this,
+        currentPage = this.get('currentPage'),
+        totalPages = this.get('totalPages'),
+        hasNoPages = currentPage === 0 && totalPages === 0,
+        isNotAtEnd = currentPage !== totalPages;
+
+    if (hasNoPages) {
+      var contacts = Radium.store.findAll(Radium.Contact);
+      this.set('content', contacts);
+    } else {
+      if (isNotAtEnd) {
+        var contactsPage = Radium.store.find(Radium.Contact, {
+              page: ++currentPage
+            });
+        contactsPage.addObserver('isLoaded', function() {
+          self.get('content').pushObjects(contactsPage);
+        });
+      }
+    }
   }
 });

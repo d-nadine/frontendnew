@@ -9,8 +9,6 @@ var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
 */
 DS.RadiumAdapter = DS.Adapter.extend({
   bulkCommit: false,
-  // Assuming the total number of records is a constant, set the results per page here.
-  resultsPerPage: 24,
   selectedUserID: null,
   createRecord: function(store, type, model) {
     var root = (type.root) ? type.root : this.rootForType(type);
@@ -228,74 +226,92 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     this.ajax("/" + plural, "GET", {
       success: function(json, status, xhr) {
-        var totalPages = json.meta.pagination.total,
-            currentPage = json.meta.pagination.current,
-            controllerName = plural.camelize();
-        Radium[controllerName + 'Controller'].setProperties({
-          totalPages: totalPages,
-          totalPagesLoaded: currentPage
-        });
+        var controllerName = plural.camelize();
+
         store.loadMany(type, json[plural]);
         this.sideload(store,type,json,plural);
+
+        Radium[controllerName + 'Controller'].setProperties({
+          currentPage: json.meta.pagination.current,
+          totalPages: json.meta.pagination.total
+        });
       }
     });
   },
 
   findQuery: function(store, type, query, modelArray) {
-    var resource,
-        url,
-        self = this,
-        // If no page is declared, load page 1 by default.
-        currentPage = query.page || 1,
-        root = this.rootForType(type),
-        url = this.pluralize(root),
-        plural = url,
-        // Cache all the hashes here if they are spread out across several pages.
-        dataHash = [];
-    // Activities have to be loaded via their type, ie users, contacts, deals
-    if (root === 'activity') {
-      url = [query.type+"s", query.id, "feed"].join("/");
-    } else {
-      url = this.pluralize(root)
-    }
+    var root = this.rootForType(type), plural = this.pluralize(root);
 
-    var fetchPage = function() {
-      self.ajax("/"+url, "GET", {
-        data: {page: currentPage},
-        success: function(json, status, xhr) {
-          // A page=0 query loads all available pages.
-          var totalPages = json.meta.pagination.total,
-              controllerName = url.camelize();
-          if (query.page === 0) {
-            // If we are on the last page, cache the hash and then wrap up
-            if (currentPage >= totalPages) {
-              dataHash = dataHash.concat(json);
-              pagesLoaded(dataHash);
-            // Otherwise loop on to the next page
-            } else {
-              currentPage++;
-              dataHash = dataHash.concat(json);
-              fetchPage();
-            }
-          } else {
-            Radium[controllerName + 'Controller'].setProperties({
-              totalPages: totalPages,
-              totalPagesLoaded: query.page
-            });
-            pagesLoaded(json);
-          }
-        }
-      });
-    };
-    // Notify the ModelArray that we've got all the models.
-    var pagesLoaded = function(dataHash) {
-      var data = self.normalize(dataHash)[0];
-      modelArray.load(data[plural]);
-      self.sideload(store,type,data,plural);
-    };
-    // Init.
-    fetchPage();
+    this.ajax(this.buildURL(root), "GET", {
+      data: query,
+      success: function(json) {
+        var controllerName = plural.camelize();
+        modelArray.load(json[plural]);
+        this.sideload(store, type, json, plural);
+
+        Radium[controllerName+'Controller'].setProperties({
+          currentPage: json.meta.pagination.current,
+          totalPages: json.meta.pagination.total
+        });
+      }
+    });
   },
+
+  // findQuery: function(store, type, query, modelArray) {
+  //   var resource,
+  //       url,
+  //       self = this,
+  //       // If no page is declared, load page 1 by default.
+  //       currentPage = query.page || 1,
+  //       root = this.rootForType(type),
+  //       url = this.pluralize(root),
+  //       plural = url,
+  //       // Cache all the hashes here if they are spread out across several pages.
+  //       dataHash = [];
+  //   // Activities have to be loaded via their type, ie users, contacts, deals
+  //   if (root === 'activity') {
+  //     url = [query.type+"s", query.id, "feed"].join("/");
+  //   } else {
+  //     url = this.pluralize(root)
+  //   }
+
+  //   var fetchPage = function() {
+  //     self.ajax("/"+url, "GET", {
+  //       data: {page: currentPage},
+  //       success: function(json, status, xhr) {
+  //         // A page=0 query loads all available pages.
+  //         var totalPages = json.meta.pagination.total,
+  //             controllerName = url.camelize();
+  //         if (query.page === 0) {
+  //           // If we are on the last page, cache the hash and then wrap up
+  //           if (currentPage >= totalPages) {
+  //             dataHash = dataHash.concat(json);
+  //             pagesLoaded(dataHash);
+  //           // Otherwise loop on to the next page
+  //           } else {
+  //             currentPage++;
+  //             dataHash = dataHash.concat(json);
+  //             fetchPage();
+  //           }
+  //         } else {
+  //           Radium[controllerName + 'Controller'].setProperties({
+  //             totalPages: totalPages,
+  //             totalPagesLoaded: query.page
+  //           });
+  //           pagesLoaded(json);
+  //         }
+  //       }
+  //     });
+  //   };
+  //   // Notify the ModelArray that we've got all the models.
+  //   var pagesLoaded = function(dataHash) {
+  //     var data = self.normalize(dataHash)[0];
+  //     modelArray.load(data[plural]);
+  //     self.sideload(store,type,data,plural);
+  //   };
+  //   // Init.
+  //   fetchPage();
+  // },
 
   // HELPERS
 
@@ -403,5 +419,20 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var request = jQuery.extend(hash, CONFIG.ajax);
 
     jQuery.ajax(request);
+  },
+
+  buildURL: function(model, suffix) {
+    var url = [""];
+
+    if (this.namespace !== undefined) {
+      url.push(this.namespace);
+    }
+
+    url.push(this.pluralize(model));
+    if (suffix !== undefined) {
+      url.push(suffix);
+    }
+
+    return url.join("/");
   }
 });

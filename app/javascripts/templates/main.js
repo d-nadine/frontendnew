@@ -49,6 +49,7 @@ minispade.require('radium/templates/dashboard/feed/phone_call_created');
 minispade.require('radium/templates/dashboard/feed/call_list_created');
 
 // Forms
+minispade.require('radium/templates/forms/fieldset');
 minispade.require('radium/templates/forms/reminder');
 minispade.require('radium/templates/forms/call_list_form');
 minispade.require('radium/templates/forms/add_to_call_list');
@@ -98,3 +99,4 @@ minispade.require('radium/templates/ui/inline_textarea');
 minispade.require('radium/templates/ui/inline_textfield');
 minispade.require('radium/templates/ui/inline_select');
 minispade.require('radium/templates/ui/inline_datepicker');
+minispade.require('radium/templates/ui/token');
