@@ -36,7 +36,7 @@
         Radium._feed.disable('cross-origin-long-polling');
 
         var subscribe = Radium._feed.subscribe('/%@/feed/%@'.fmt(CONFIG.IO, CONFIG.api), function(data) {
-          console.log('New activity.');
+          console.log('New activity.', data);
           data.isNewActivity = true;
           data.isCached = false;
           Radium.dashboardFeedListController.addData([data]);
