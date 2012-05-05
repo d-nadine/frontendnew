@@ -3,11 +3,13 @@ Radium.EmailFormGroup = Ember.Mixin.create({
     event.preventDefault();
     var val = this.get('value');
     if (val) {
-      var nonSystemEmail = Ember.Object.create({
-            email: val
-          });
-        this.getPath('selectedGroup.selected').addObject(nonSystemEmail);
-      this.set('value', null);
+      if (Radium.Utils.VALIDATION_REGEX.email.test(val)) {
+        var nonSystemEmail = Ember.Object.create({
+              email: val
+            });
+          this.getPath('selectedGroup.selected').addObject(nonSystemEmail);
+        this.set('value', null);
+      }
     }
   },
   select: function(event, ui) {
