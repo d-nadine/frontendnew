@@ -151,13 +151,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         });
         self.success("Todo created");
       } else {
-        self.error("Something was filled incorrectly, try again?");
-      }
-    });
-
-    todo.addObserver('isError', function() {
-      if (this.get('isError')) {
-        self.error("Look like something broke. Report it so we can fix it");
+        self.fail();
       }
     });
   }

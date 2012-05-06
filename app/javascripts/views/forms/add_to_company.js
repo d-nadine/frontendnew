@@ -105,19 +105,15 @@ Radium.AddToCompanyForm = Radium.FormView.extend({
       });
 
       Radium.store.commit();
+
       newCompany.addObserver('isValid', function() {
         if (this.get('isValid')) {
           self.success("New group created");
         } else {
-          self.error("Something was filled incorrectly, try again?");
+          self.fail();
         }
       });
 
-      newCompany.addObserver('isError', function() {
-        if (this.get('isError')) {
-          self.error("Look like something broke. Report it so we can fix it");
-        }
-      });
     }
 
     Radium.Group.reopenClass({

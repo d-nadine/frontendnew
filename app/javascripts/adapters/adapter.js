@@ -406,6 +406,11 @@ DS.RadiumAdapter = DS.Adapter.extend({
     hash.type = type;
     hash.context = this;
     hash.error = function(jqXHR, textStatus, errorThrown) {
+      Radium.ErrorManager.send('displayError', {
+        status: jqXHR.status,
+        responseText: jqXHR.responseText
+      });
+
       if (jqXHR.status === 422 && adapterContext.model && adapterContext.store) {
         var data = JSON.parse(jqXHR.responseText);
         adapterContext.store.recordWasInvalid(adapterContext.model, data['errors']);

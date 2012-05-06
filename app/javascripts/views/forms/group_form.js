@@ -29,15 +29,9 @@ Radium.GroupForm = Radium.FormView.extend({
       if (this.get('isValid')) {
         self.success("Group created");
       } else {
-        self.error("Something was filled incorrectly, try again?");
+        self.fail();
       }
     });
-
-    contact.addObserver('isError', function() {
-      if (this.get('isError')) {
-        self.error("Look like something broke. Report it so we can fix it");
-      }
-    });
-
+    
   }
 });

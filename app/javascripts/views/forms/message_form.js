@@ -147,13 +147,7 @@ Radium.MessageForm = Radium.FormView.extend({
           });
           self.success("Email sent");
         } else {
-          self.error("Something was filled incorrectly, try again?");
-        }
-      });
-
-      email.addObserver('isError', function() {
-        if (this.get('isError')) {
-          self.error("Look like something broke. Report it so we can fix it");
+          self.fail();
         }
       });
     }

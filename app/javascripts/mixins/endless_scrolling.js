@@ -65,10 +65,14 @@ Radium.EndlessScrolling = Ember.Mixin.create({
           // self.bindToScroll();
           $(window).on('scroll', $.proxy(self.infiniteLoading, self));
         })
-        .error(function() {
+        .error(function(jqXHR, textStatus, errorThrown) {
           $(window).off('scroll');
           Radium.App.set('isEmptyFeed', true);
           Radium.App.goToState('ready');
+          Radium.ErrorManager.send('displayError', {
+            status: jqXHR.status,
+            responseText: jqXHR.responseText
+          });
         });
     } else {
       $(window).off('scroll');

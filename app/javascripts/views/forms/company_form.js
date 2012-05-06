@@ -92,13 +92,7 @@ Radium.CompanyForm = Radium.FormView.extend({
       if (this.get('isValid')) {
         self.success("Company created");
       } else {
-        self.error("Something was filled incorrectly, try again?");
-      }
-    });
-
-    company.addObserver('isError', function() {
-      if (this.get('isError')) {
-        self.error("Look like something broke. Report it so we can fix it");
+        self.fail();
       }
     });
 

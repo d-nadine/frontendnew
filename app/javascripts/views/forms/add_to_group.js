@@ -126,13 +126,7 @@ Radium.AddToGroupForm = Radium.FormView.extend({
         if (this.get('isValid')) {
           self.success("New group created");
         } else {
-          self.error("Something was filled incorrectly, try again?");
-        }
-      });
-
-      newGroup.addObserver('isError', function() {
-        if (this.get('isError')) {
-          self.error("Look like something broke. Report it so we can fix it");
+          self.fail();
         }
       });
     }

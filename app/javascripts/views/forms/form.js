@@ -45,6 +45,11 @@ Radium.FormView = Ember.View.extend({
     this.set('isSubmitting', false);
   },
 
+  fail: function() {
+    this.$('input, select, textarea').prop('disabled', false);
+    this.set('isSubmitting', false);
+  },
+
   close: function() {
     this.$().slideUp('fast', function() {
       Radium.FormManager.send('closeForm');
@@ -79,13 +84,13 @@ Radium.FormView = Ember.View.extend({
     type: 'submit',
     isSubmittingBinding: 'parentView.isSubmitting',
     classNameBindings: ['isSubmitting'],
-    isValid: 'parentView.isValid',
+    isValidBinding: 'parentView.isValid',
     template: Ember.Handlebars.compile('<i class="icon-inline-loading"></i> <span>Create Todo</span>'),
     disabled: function() {
       var isSubmitting = this.getPath('parentView.isSubmitting'),
-          isValid = this.getPath('parentView.isValid');
+          isValid = this.get('isValid');
       return (isSubmitting || !isValid) ? true : false;
-    }.property('parentView.isSubmitting', 'parentView.isValid').cacheable(),
+    }.property('parentView.isSubmitting', 'isValid').cacheable(),
     changeTextOnSubmit: function() {
       var cachedText = this.get('_buttonTextCache');
       if (this.get('isSubmitting') === true) {

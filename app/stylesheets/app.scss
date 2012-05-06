@@ -389,3 +389,14 @@ ul.comments {
     background-color: #FCF8E3;
   }
 }
+
+// Errors
+.global-error {
+  $width: 475px;
+  width: $width;
+  position: absolute;
+  top: 37px;
+  left: 50%;
+  margin-left: -($width / 2);
+  z-index: 9999;
+}
