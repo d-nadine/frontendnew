@@ -1,3 +1,4 @@
+* [2012-05-06 09:28 -0700] 22e24c8 - Joshua Jones: [#28992441] Add error messaging, detailed error logs.
 * [2012-05-05 13:49 -0700] 54ff975 - Joshua Jones: Print out push notifications for development.
 * [2012-05-04 11:02 -0700] faa170d - Joshua Jones: Fix image path error in bootstrap.min.css
 * [2012-05-04 03:30 -0700] 04b6fa9 - twinturbo: Bump iridium
