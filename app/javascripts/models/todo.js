@@ -25,7 +25,7 @@ Radium.Todo = Radium.Core.extend({
   user_id: DS.attr('number'),
 
   canEdit: function() {
-    return (this.getPath('user.api_key') || this.getPath('user.id') !== CONFIG.userId) ? true : false;
+    return (this.getPath('user.api_key') || this.getPath('user.id') === CONFIG.userId) ? true : false;
   }.property('user.id').cacheable(),
 
   /**
