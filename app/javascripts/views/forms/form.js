@@ -85,7 +85,7 @@ Radium.FormView = Ember.View.extend({
     isSubmittingBinding: 'parentView.isSubmitting',
     classNameBindings: ['isSubmitting'],
     isValidBinding: 'parentView.isValid',
-    template: Ember.Handlebars.compile('<i class="icon-inline-loading"></i> <span>Create Todo</span>'),
+    template: Ember.Handlebars.compile('<i class="icon-inline-loading"></i> <span>Save</span>'),
     disabled: function() {
       var isSubmitting = this.getPath('parentView.isSubmitting'),
           isValid = this.get('isValid');
