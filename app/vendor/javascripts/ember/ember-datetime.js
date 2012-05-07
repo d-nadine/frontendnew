@@ -1072,7 +1072,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
         hour = this._get('hour');
         return this._pad((hour === 12 || hour === 0) ? 12 : (hour + 12) % 12);
       case 'j': return this._pad(this._get('dayOfYear'), 3);
-      case 'm': return this._pad(this._get('month'));
+      case 'm': return this._get('month');
+      // case 'm': return this._pad(this._get('month'));
       case 'M': return this._pad(this._get('minute'));
       case 'p': return this._get('hour') > 11 ? 'PM' : 'AM';
       case 'S': return this._pad(this._get('second'));
