@@ -38,6 +38,7 @@ Radium.User = Radium.Person.extend({
   }.property('deals').cacheable(),
   
   isLoggedIn: function() {
-    return (this.get('apiKey')) ? true : false;
+    // Check via API key property or cookie for session id.
+    return (this.get('apiKey') || this.get('id') === CONFIG.userId) ? true : false;
   }.property('apiKey').cacheable()
 });

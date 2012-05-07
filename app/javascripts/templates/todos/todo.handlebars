@@ -2,7 +2,9 @@
   <div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
   <div class="span7">
     <p>
-      {{view checkboxView}}
+      {{#if content.canEdit}}
+        {{view checkboxView}}
+      {{/if}}
       {{#if content.contact}}
       {{view Radium.LabelView labelBinding="content.contact.status"}}
       {{/if}}

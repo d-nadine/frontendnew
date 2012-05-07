@@ -24,7 +24,9 @@ Radium.Todo = Radium.Core.extend({
   }),
   user_id: DS.attr('number'),
 
-  // Status is determined by a nested contact's `status`.
+  canEdit: function() {
+    return (this.getPath('user.api_key') || this.getPath('user.id') !== CONFIG.userId) ? true : false;
+  }.property('user.id').cacheable(),
 
   /**
     Checks to see if the Deal has passed it's close by date.
