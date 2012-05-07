@@ -330,7 +330,8 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
       - %i -- Hour of the day, 12-hour clock (1..12)
       - %I -- Hour of the day, 12-hour clock (01..12)
       - %j -- Day of the year (001..366)
-      - %m -- Month of the year (01..12)
+      - %e -- Month of the year (01..12)
+      - %m -- Month of the year with leading zero (01..12)
       - %M -- Minute of the hour (00..59)
       - %p -- Meridian indicator (``AM'' or ``PM'')
       - %S -- Second of the minute (00..60)
@@ -955,6 +956,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
           case 'i':
           case 'I': opts.hour = scanner.scanInt(1, 2); break;
           case 'j': throw new Error("%j is not implemented");
+          case 'e': opts.month = scanner.scanInt(1, 2); break;
           case 'm': opts.month = scanner.scanInt(1, 2); break;
           case 'M': opts.minute = scanner.scanInt(1, 2); break;
           case 'p': opts.meridian = scanner.scanArray(['AM', 'PM']); break;
@@ -1072,8 +1074,8 @@ Ember.DateTime.reopenClass(Ember.Comparable,
         hour = this._get('hour');
         return this._pad((hour === 12 || hour === 0) ? 12 : (hour + 12) % 12);
       case 'j': return this._pad(this._get('dayOfYear'), 3);
-      case 'm': return this._get('month');
-      // case 'm': return this._pad(this._get('month'));
+      case 'e': return this._get('month');
+      case 'm': return this._pad(this._get('month'));
       case 'M': return this._pad(this._get('minute'));
       case 'p': return this._get('hour') > 11 ? 'PM' : 'AM';
       case 'S': return this._pad(this._get('second'));
@@ -1106,7 +1108,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     // need to move into local time zone for these calculations
     this._setCalcState(start - (timezone * 60000), 0); // so simulate a shifted 'UTC' time
 
-    return format.replace(/\%([aAbBcdDhHiIjmMpsSUWwxXyYZ\%])/g, function() {
+    return format.replace(/\%([aAbBcdDehHiIjmMpsSUWwxXyYZ\%])/g, function() {
       var v = that.__toFormattedString.call(that, arguments, start, timezone);
       return v;
     });

@@ -16,8 +16,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   headerDate: function() {
     var currentYear = Radium.appController.getPath('today.year'),
         date = this.get('finishBy'),
-        sameYearString = '%A, %m/%D',
-        differentYearString = '%A, %m/%D/%Y',
+        sameYearString = '%A, %e/%D',
+        differentYearString = '%A, %e/%D/%Y',
         format = (date.get('year') !== currentYear) ? differentYearString : sameYearString;
     return date.toFormattedString(format);
   }.property('finishBy'),
