@@ -50,6 +50,9 @@ Radium.Contact = Radium.Person.extend({
   user: DS.hasOne('Radium.User'),
   // For checkboxes
   isSelected: false,
+  url: function() {
+    return "/contacts/%@".fmt(this.get('id'));
+  }.property('id').cacheable(),
 
   // Filter properties
   assigned: function() {

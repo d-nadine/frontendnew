@@ -100,6 +100,9 @@
             {{#each todos}}
               {{view Radium.TodoView contentBinding="this"}}
             {{/each}}
+            {{#each leads}}
+              {{view Radium.LeadView contentBinding="this"}}
+            {{/each}}
           {{/each}}
         {{/with}}
       </div>

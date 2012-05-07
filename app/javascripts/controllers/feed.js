@@ -35,11 +35,11 @@ Radium.feedController = Ember.Object.extend({
             activity.timestamp, 
             Ember.DATETIME_ISO8601
         ).toFormattedString('%B %D, %Y'),
-        hash = activity.timestamp.match(/(?:\d+\-\d+\-\d+)/)[0],
+        hash = activity.timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear)[0],
         ref = activity[kind] || activity.reference[kind],
         model = this.modelTypes[kind];
 
-    if(ref) {
+    if (ref) {
       Radium.store.load(Radium[model], ref);
     }
 
@@ -49,8 +49,13 @@ Radium.feedController = Ember.Object.extend({
             sortValue: hash,
             todos: Radium.Todo.filter(function(data) {
               var todoUpdated = data.get('created_at'),
-                  lookupDate = todoUpdated.match(/(?:\d+\-\d+\-\d+)/);
+                  lookupDate = todoUpdated.match(Radium.Utils.DATES_REGEX.monthDayYear);
               return (lookupDate[0] === hash) ? true : false;
+            }),
+            leads: Radium.Contact.filter(function(data) {
+              var contactType = data.get('status'),
+                  lookupDate = data.get('created_at').match(Radium.Utils.DATES_REGEX.monthDayYear);
+              return contactType === 'lead' && lookupDate[0] === hash;
             })
           }),
           length = this.getPath('content.length'),
