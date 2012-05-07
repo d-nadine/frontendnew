@@ -2,10 +2,10 @@ Radium.ErrorTypes = Ember.Object.create({
   errorString: null,
   keys: {
     401: "Unauthorized. Authentication failed.",
-    403: "Forbidden: Permission failure, you don't have access to that",
-    404: "Not Found: Looks like you still haven't found what you're looking for.",
-    412: "Precondition Failed: Say something like: there is not enough money in your account",
-    422: "Unprocessable Entity: Check your entry for errors.",
+    403: "You don't have access to that",
+    404: "Looks like you still haven't found what you're looking for.",
+    412: "There is not enough money in your account.",
+    422: "Check your entry for errors.",
     500: "Server did something wrong. We're sorry.",
     all: "Unknown problem, please report."
   },
