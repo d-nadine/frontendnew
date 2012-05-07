@@ -30,9 +30,9 @@ Radium.ErrorManager = Ember.StateManager.create({
 
   noErrors: Ember.State.create({
     errorLogger: function(error) {
-      var errorLog = '[!%@][%@] \n%@'.fmt(
-            error.status,
+      var errorLog = '[%@] Unexpected Response: %@\n%@'.fmt(
             Ember.DateTime.create().toFormattedString('%d-%m %H:%M:%S'),
+            error.status,
             error.responseText
           );
       console.error(errorLog);
