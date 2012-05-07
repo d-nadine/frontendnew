@@ -1,3 +1,4 @@
+* [2012-05-07 02:58 -0700] 4706c0d - Joshua Jones: Remove incorrect use of the account cookie.
 * [2012-05-07 02:27 -0700] aa66488 - Joshua Jones: [#28995637] Users can go around completing todos that don't belong to them.
 * [2012-05-06 09:28 -0700] 22e24c8 - Joshua Jones: [#28992441] Add error messaging, detailed error logs.
 * [2012-05-05 13:49 -0700] 54ff975 - Joshua Jones: Print out push notifications for development.
