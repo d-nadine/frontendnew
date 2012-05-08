@@ -1,11 +1,19 @@
 <div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
 <div class="span7">
   <p>
-    {{view checkboxView}}
-    {{#if content.contact}}
-    {{view Radium.LabelView labelBinding="content.contact.status"}}
+    {{#if canEdit}}
+      {{view checkboxView}}
     {{/if}}
-    <span class="content">{{inlineTextField content.description}}</span>
+    {{#if content.contact}}
+     {{view Radium.LabelView labelBinding="content.contact.status"}}
+    {{/if}}
+    <span class="content">
+      {{#if canEdit}}
+        {{inlineTextField content.description}}
+      {{else}}
+        {{content.description}}
+      {{/if}}
+    </span>
     ({{content.user.abbrName}})
     <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
     {{#if content.comments.length}}
