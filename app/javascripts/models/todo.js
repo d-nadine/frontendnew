@@ -25,8 +25,8 @@ Radium.Todo = Radium.Core.extend({
   user_id: DS.attr('number'),
 
   canEdit: function() {
-    return (this.getPath('user.api_key')) ? true : false;
-  }.property('user.id').cacheable(),
+    return (this.getPath('user.apiKey')) ? true : false;
+  }.property('user').cacheable(),
 
   /**
     Checks to see if the Deal has passed it's close by date.
