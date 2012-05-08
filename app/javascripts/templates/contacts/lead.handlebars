@@ -10,7 +10,8 @@
     {{#if isReassigning}}
       {{view userSelect}}
     {{else}}
-      <a href="#"{{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
+      <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
     {{/if}}
+    <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add todo</a>
   </p>
 </div>

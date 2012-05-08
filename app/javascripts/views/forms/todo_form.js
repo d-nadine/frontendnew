@@ -154,5 +154,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         self.fail();
       }
     });
+
+    todo.addObserver('isError', function() {
+      self.fail();
+    });
   }
 });
