@@ -1,3 +1,4 @@
+* [2012-05-08 21:07 -0700] 9b09646 - Joshua Jones: [Deliver #28977633] Layout and interact with leads in feed.
 * [2012-05-08 14:58 -0700] ef40b98 - Joshua Jones: Return the ability for a user to edit their own todos...
 * [2012-05-08 14:48 -0700] f9ed791 - Joshua Jones: Add leads to other page feeds.
 * [2012-05-07 21:25 -0700] aec5d99 - Joshua Jones: Add reassignment, todos to leads.
