@@ -26,7 +26,9 @@ Radium.ContactForm = Radium.FormView.extend({
         addresses = [],
         // Assigned User
         assignedTo = $('#assigned-to').val(),
-        data = {};
+        data = {
+          createdAt: Ember.DateTime.create().toISO8601()
+        };
 
     var emailFields = this.$('fieldset#email-addresses').find('.control-group'),
         phoneFields = this.$('fieldset#phone-numbers').find('.control-group'),

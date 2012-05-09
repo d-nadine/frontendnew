@@ -43,7 +43,13 @@ Radium.App = Ember.StateManager.create({
                 isFirstRun: false,
                 isLoggedIn: true
               });
-              manager.send('loginComplete');
+
+              var users = Radium.store.find(Radium.User, {page: 'all'});
+
+              users.addObserver('isLoaded', function() {
+                Radium.usersController.set('content', users);
+                manager.send('loginComplete');
+              });
             },
             // Error
             function() {
