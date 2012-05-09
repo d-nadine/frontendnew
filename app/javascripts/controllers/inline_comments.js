@@ -15,8 +15,6 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
         url: '%@/%@/comments'.fmt(root, id),
         root: 'comment'
       });
-
-      debugger;
       
       comment = Radium.store.createRecord(Radium.Comment, {
         text: commentText,
