@@ -1,6 +1,7 @@
 Radium.TodoView = Radium.FeedView.extend({
   templateName: 'todo',
   classNames: ['feed-item', 'todo'],
+  root: 'todos',
   classNameBindings: [
     'content.isOverdue:overdue', 
     'content.finished:finished'

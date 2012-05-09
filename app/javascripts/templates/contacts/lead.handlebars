@@ -13,9 +13,5 @@
   </p>
   <p>
     <i class="icon-user"></i> <a {{bindAttr href="content.url"}}>{{content.name}}</a> {{#if content.source}}({{content.source}}){{/if}}
-    <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
-    {{#if content.comments.length}}
-      ({{content.comments.length}})
-    {{/if}}
   </p>
 </div>

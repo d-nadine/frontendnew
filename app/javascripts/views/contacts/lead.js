@@ -1,5 +1,6 @@
 Radium.LeadView = Radium.FeedView.extend({
   templateName: 'lead',
+  root: 'contacts',
   classNames: ['feed-item', 'contact-lead'],
   isReassigning: null,
   reassign: function(event) {

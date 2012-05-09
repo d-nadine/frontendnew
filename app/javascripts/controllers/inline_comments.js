@@ -8,12 +8,15 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
     if (this.get('newComment') !== '') {
       var comment,
           commentText = this.get('newComment'),
-          id = this.getPath('activity.id');
+          id = this.getPath('activity.id'),
+          root = this.get('root');
 
       Radium.Comment.reopenClass({
-        url: 'todos/%@/comments'.fmt(id),
+        url: '%@/%@/comments'.fmt(root, id),
         root: 'comment'
       });
+
+      debugger;
       
       comment = Radium.store.createRecord(Radium.Comment, {
         text: commentText,
@@ -29,7 +32,8 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
       comment.addObserver('isValid', function() {
         if (this.get('isValid')) {
           Radium.Comment.reopenClass({
-            url: null
+            url: null,
+            root: null
           });
         } else {
           self.set('isError', true);

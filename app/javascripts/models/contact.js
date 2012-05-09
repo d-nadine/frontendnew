@@ -36,6 +36,9 @@ Radium.Contact = Radium.Person.extend({
   becameDeadEndAt: DS.attr('date', {
     key: 'became_dead_end_at'
   }),
+  comments: DS.hasMany('Radium.Comment', {
+    embedded: true
+  }),
   status: DS.attr('string'),
   addresses: DS.hasMany('Radium.Address', {embedded: true}),
   phoneNumbers: DS.hasMany('Radium.PhoneNumber', {

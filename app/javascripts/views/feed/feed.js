@@ -15,6 +15,7 @@ Radium.FeedView = Ember.View.extend({
       var activity = this.get('content'),
           commentsController = Radium.inlineCommentsController.create({
             activity: activity,
+            root: this.get('root'),
             contentBinding: 'activity.comments'
           }),
           commentsView = Radium.InlineCommentsView.create({
