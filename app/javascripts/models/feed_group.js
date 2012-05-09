@@ -2,6 +2,17 @@ Radium.FeedGroup = Ember.Object.extend({
   content: [],
   date: null,
 
+  hasVisibleContent: function() {
+    var todos = this.getPath('todos.length'),
+        leads = this.getPath('leads.length');
+    console.log(todos && leads, todos);
+    if (todos || leads) {
+      return true;
+    } else {
+      return false;
+    }
+  }.property('todos.@each', 'leads.@each').cacheable(),
+
   todos: Ember.A([]),
   todoIds: function() {
     return this.get('todos').mapProperty('id').uniq();
