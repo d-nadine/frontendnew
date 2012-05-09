@@ -1,3 +1,4 @@
+* [2012-05-09 12:38 -0700] b042b1b - Joshua Jones: [Delivers #29319939] Remove unneeded colon.
 * [2012-05-09 11:37 -0700] ea0c79d - Joshua Jones: [Delivers #28992251] Don't render empty date groups.
 * [2012-05-09 11:08 -0700] 43b5a56 - Joshua Jones: [#29032921] Stop UI from loading if logged out.
 * [2012-05-09 11:01 -0700] d82906d - Joshua Jones: Remove empty string throwing the todo form out of whack.
