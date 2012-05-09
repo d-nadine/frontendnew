@@ -17,7 +17,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var params = this.get('params');
 
     if (params.target && params.target.get('name')) {
-      return "Assign a Todo to %@".fmt(params.target.get('name'));
+      return "Assign a Todo about %@".fmt(params.target.get('name'));
     } else {
       return "Add a Todo";
     }
