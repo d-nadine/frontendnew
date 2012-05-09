@@ -8,8 +8,8 @@ Radium.TodoView = Radium.FeedView.extend({
   ],
   checkboxView: Radium.Checkbox.extend({
     valueBinding: 'parentView.content.finished',
-    click: function() {
+    todoDidChange: function() {
       Radium.store.commit();
-    }
+    }.observes('value')
   })
 });
