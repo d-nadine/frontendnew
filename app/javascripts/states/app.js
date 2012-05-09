@@ -89,6 +89,10 @@ Radium.App = Ember.StateManager.create({
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
+    
+    if (!Radium.get('_api')) {
+      manager.goToState('loggedOut');
+    }
 
     if (app.get('isFirstRun')) {
       manager.goToState('authenticate');
