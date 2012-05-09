@@ -70,7 +70,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
       data: data,
       success: function(json) {
       this.sideload(store,type,json,root)
-        store.didUpdateRecord(model, json[root]);
+        store.didUpdateRecord(model, json && json[root]);
       }
     }, {
       store: store,
