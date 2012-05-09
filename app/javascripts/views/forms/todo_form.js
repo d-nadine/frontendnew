@@ -17,7 +17,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var params = this.get('params');
 
     if (params.target && params.target.get('name')) {
-      return "Assign a Todo about %@".fmt(params.target.get('name'));
+      return "Assign a Todo to %@".fmt(params.target.get('name'));
     } else {
       return "Add a Todo";
     }
@@ -71,6 +71,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }
   }),
 
+  assignedUser: null,
+
   assignToSelect: Ember.Select.extend({
     elementId: 'assigned-to',
     contentBinding: 'Radium.usersController',
@@ -78,7 +80,12 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     optionValuePath: 'content.id',
     didInsertElement: function() {
       var user = this.get('content').filterProperty('isLoggedIn', true)[0];
+      this.setPath('parentView.assignedUser', user);
       this.set('selection', user);
+    },
+    change: function() {
+      this.setPath('parentView.assignedUser', this.get('selection'));
+      this._super();
     }
   }),  
 
@@ -118,11 +125,13 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         finishByDate = this.$('#finish-by-date').val(),
         finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
         finishByValue = Ember.DateTime.create(finishByParsed),
-        userId = this.$('select#assigned-to').val(),
+        assignedUser = this.get('assignedUser'),
+        assignedUserId = assignedUser.get('id'),
         data = {
           description: description,
           finishBy: finishByValue.toISO8601(),
-          user_id: userId,
+          user_id: assignedUserId,
+          user: assignedUser,
           created_at: Ember.DateTime.create().toISO8601()
         },
         selectedContacts = this.getPath('params.target'),

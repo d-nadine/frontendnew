@@ -19,6 +19,7 @@
 
 
       {{#if content.isCallList}}
+        {{#if content.isSaving}}Assigning...{{/if}}
         <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
       {{/if}}
       

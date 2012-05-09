@@ -70,8 +70,10 @@ Radium.LeadView = Radium.FeedView.extend({
   addCallTask: function(event) {
 
     var id = this.getPath('content.id'),
+        user = this.getPath('content.user'),
         todo = Radium.store.createRecord(Radium.Todo, {
           kind: "call",
+          user: user,
           created_at: Ember.DateTime.create().toISO8601(),
           finishBy: Ember.DateTime.create({
             hour: 17
