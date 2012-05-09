@@ -52,11 +52,21 @@ Radium.feedController = Ember.Object.extend({
                   lookupDate = todoUpdated.match(Radium.Utils.DATES_REGEX.monthDayYear);
               return (lookupDate[0] === hash) ? true : false;
             }),
+            sortedTodos: function() {
+              return this.get('todos').slice(0).sort(function(a, b) {
+                return a.get('createdAt') - b.get('createdAt');
+              });
+            }.property('todos.@each').cacheable(),
             leads: Radium.Contact.filter(function(data) {
               var contactType = data.get('status'),
                   lookupDate = data.get('created_at').match(Radium.Utils.DATES_REGEX.monthDayYear);
               return contactType === 'lead' && lookupDate[0] === hash;
-            })
+            }),
+            sortedLeads: function() {
+              return this.get('leads').slice(0).sort(function(a, b) {
+                return a.get('createdAt') - b.get('createdAt');
+              });
+            }.property('leads.@each').cacheable(),
           }),
           length = this.getPath('content.length'),
           idx = this.binarySearch(group.get('sortValue'), 0, length);

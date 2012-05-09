@@ -98,10 +98,10 @@
               <div class="page-header">
                 <h3>{{formatDate date}}</h3>
               </div>
-              {{#each todos}}
+              {{#each sortedTodos}}
                 {{view Radium.TodoView contentBinding="this"}}
               {{/each}}
-              {{#each leads}}
+              {{#each sortedLeads}}
                 {{view Radium.LeadView contentBinding="this"}}
               {{/each}}
             {{/if}}
