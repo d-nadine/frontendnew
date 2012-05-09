@@ -15,9 +15,7 @@ Radium.InlineTextField = Ember.View.extend({
   keyUp: function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-      this.set('isEditing', false);
-      event.stopPropagation();
-      Radium.store.commit();
+      this.$().blur();
     }
     if (event.keyCode === 27) {
       this.set('value', this.get('_cachedValue'));
@@ -26,6 +24,7 @@ Radium.InlineTextField = Ember.View.extend({
   },
   focusOut: function() {
     this.set('isEditing', false);
+    Radium.store.commit();
   },
   inlineEditTextField: Ember.TextField.extend({
     classNames: ['inline-edit'],
