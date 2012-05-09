@@ -30,13 +30,24 @@ Radium.LeadView = Radium.FeedView.extend({
     contentBinding: 'Radium.usersController.content',
     optionLabelPath: 'content.name',
     optionValuePath: 'content.id',
+    reassignLead: function(user, lead) {
+      if (user.get('id') !== lead.getPath('user.id')) {
+        lead.set('user', user.get('id'));
+        user.get('contacts').pushObject(lead);
+        Radium.store.commit();
+        this.setPath('parentView.isReassigning', false);
+      }
+    },
     assignmentDidChange: function() {
-      // var assignee = this.get('selection'),
-      //     lead = this.getPath('parentView.content');
-
-      // if (assignee.get('id')) {
-      //   lead.set('user', assignee.get('id'));
-      // }
+      var user = this.get('selection'), 
+          lead = this.getPath('parentView.content');
+          
+      if (user.get('id') !== lead.getPath('user.id')) {
+        lead.set('user', user.get('id'));
+        user.get('contacts').pushObject(lead);
+        Radium.store.commit();
+        this.setPath('parentView.isReassigning', false);
+      }
     }.observes('selection')
   }),
 
@@ -47,6 +58,26 @@ Radium.LeadView = Radium.FeedView.extend({
       type: 'contacts'
     })
 
+    return false;
+  },
+
+  addCallTask: function(event) {
+
+    var id = this.getPath('content.id'),
+        todo = Radium.store.createRecord(Radium.Todo, {
+          kind: "call",
+          created_at: Ember.DateTime.create().toISO8601(),
+          finishBy: Ember.DateTime.create({
+            hour: 17
+          }).toISO8601()
+        });
+
+    Radium.Todo.reopenClass({
+      url: 'contacts/%@/todos'.fmt(id),
+      root: 'todo'
+    });
+
+    Radium.store.commit();
     return false;
   }
 });

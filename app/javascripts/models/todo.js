@@ -12,6 +12,9 @@ Radium.Todo = Radium.Core.extend({
   callList: DS.hasOne('Radium.CallList', {
     key: 'call_list'
   }),
+  isCallList: function() {
+    return (this.get('kind') === 'call') ? true : false;
+  }.property('kind').cacheable(),
   contact: DS.hasOne('Radium.Contact', {
     embedded: true
   }),
@@ -19,14 +22,15 @@ Radium.Todo = Radium.Core.extend({
   comments: DS.hasMany('Radium.Comment', {
     embedded: true
   }),
+  reference: DS.attr('object'),
   user: DS.hasOne('Radium.User', {
     embedded: true
   }),
   user_id: DS.attr('number'),
 
   canEdit: function() {
-    return (this.getPath('user.apiKey')) ? true : false;
-  }.property('user').cacheable(),
+    return (this.getPath('user.apiKey') && this.get('finished') === false) ? true : false;
+  }.property('user', 'finished').cacheable(),
 
   /**
     Checks to see if the Deal has passed it's close by date.

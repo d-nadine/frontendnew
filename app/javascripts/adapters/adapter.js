@@ -171,7 +171,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
         data: { ids: ids },
         success: function(json) {
           var arr = [];
-          json.forEach(function(item) {
+          json[plural].forEach(function(item) {
             arr.push(item.id);
           });
           store.loadMany(type, ids, json[plural]);

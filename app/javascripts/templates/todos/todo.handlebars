@@ -1,21 +1,32 @@
 <div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
 <div class="span7">
   <p>
-    {{log content.canEdit}}
     {{#if content.canEdit}}
       {{view checkboxView}}
     {{/if}}
-    {{#if content.contact}}
-     {{view Radium.LabelView labelBinding="content.contact.status"}}
+    {{#if content.reference.contact}}
+     {{view Radium.LabelView labelBinding="content.reference.contact.status"}}
     {{/if}}
     <span class="content">
-      {{#if content.canEdit}}
-        {{inlineTextField content.description}}
-      {{else}}
-        {{content.description}}
+      {{#unless content.isCallList}}
+        {{#if content.canEdit}}
+          {{inlineTextField content.description}}
+        {{else}}
+          {{content.description}}
+        {{/if}}
+      {{/unless}}
+
+
+      {{#if content.isCallList}}
+        <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> : 
       {{/if}}
+      ({{content.user.abbrName}})
     </span>
-    ({{content.user.abbrName}})
+    
+    {{#if content.isCallList}}
+      <i class="icon-sms"></i>
+    {{/if}}
+
     <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
     {{#if content.comments.length}}
       ({{content.comments.length}})

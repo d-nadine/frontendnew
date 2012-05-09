@@ -195,10 +195,33 @@ fieldset legend {
   margin-bottom: 25px;
 }
 
-.feed-item .timestamp {
-  color: #898989;
-  font-weight: bold;
-  text-transform: uppercase;
+.feed-item {
+  p.feed-actions {
+    float: right;
+    display: none;
+
+    select {
+      width: 140px;
+    }
+  }
+
+  &:hover {
+    p.feed-actions {
+      display: block;
+    }
+  }
+
+  .label {
+    text-transform: uppercase;
+    top: -2px;
+    position: relative;
+  }
+
+  .timestamp {
+    color: #898989;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
 
 .overdue,
@@ -394,7 +417,7 @@ ul.comments {
 .global-error {
   $width: 475px;
   width: $width;
-  position: absolute;
+  position: fixed;
   top: -5px;
   left: 50%;
   margin-left: -($width / 2);

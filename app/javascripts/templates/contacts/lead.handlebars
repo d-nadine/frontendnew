@@ -1,17 +1,19 @@
 <div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
 <div class="span7">
+  <p class="feed-actions">
+    {{#if isReassigning}}
+      {{view userSelect}}
+    {{else}}
+      <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
+    {{/if}}
+    <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add Todo</a>
+    <a href="#" {{action "addCallTask"}}><i class="icon-check"></i> Add Call Task</a>
+  </p>
   <p>
     <i class="icon-user"></i> <a {{bindAttr href="content.url"}}>{{content.name}}</a>
     <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
     {{#if content.comments.length}}
       ({{content.comments.length}})
     {{/if}}
-
-    {{#if isReassigning}}
-      {{view userSelect}}
-    {{else}}
-      <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
-    {{/if}}
-    <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add todo</a>
   </p>
 </div>
