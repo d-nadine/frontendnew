@@ -71,18 +71,9 @@ Radium.ContactsPage = Ember.State.extend({
       }
 
       this._super(manager);
-
-      Radium.PhoneNumber.reopenClass({
-        url: 'contacts/%@'.fmt(contactId),
-        root: 'contact'
-      });
     },
     exit: function(manager) {
       this._super(manager);
-      Radium.PhoneNumber.reopenClass({
-        url: null,
-        root: null
-      });
       Radium.selectedContactController.set('content', null);
     },
     ready: Ember.State.create(),

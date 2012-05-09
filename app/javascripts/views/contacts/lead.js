@@ -40,12 +40,17 @@ Radium.LeadView = Radium.FeedView.extend({
     },
     assignmentDidChange: function() {
       var user = this.get('selection'), 
+          oldUser = this.getPath('parentView.content.user'),
           lead = this.getPath('parentView.content');
           
       if (user.get('id') !== lead.getPath('user.id')) {
-        lead.set('user', user.get('id'));
-        user.get('contacts').pushObject(lead);
+        lead.setProperties({
+          user: user,
+          user_id: user.get('id')
+        });
         Radium.store.commit();
+        // user.get('contacts').pushObject(lead);
+        // oldUser.get('contacts').removeObject(lead);
         this.setPath('parentView.isReassigning', false);
       }
     }.observes('selection')

@@ -39,6 +39,6 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   feedBinding: 'content.feed',
   pageBinding: 'content.feed.page',
   totalPagesBinding: 'content.feed.totalPages',
-  targetIdBinding: 'content.id',
+  // targetIdBinding: 'content.id',
   feedUrl: '/api/contacts/%@/feed'
 });

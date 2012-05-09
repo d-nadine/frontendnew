@@ -47,9 +47,11 @@ Radium.Contact = Radium.Person.extend({
     key: 'email_addresses'
   }),
   fields: DS.hasMany('Radium.Field', {embedded: true}),
+  source: DS.attr('string'),
   user: DS.hasOne('Radium.User'),
   // For checkboxes
   isSelected: false,
+
   url: function() {
     return "/contacts/%@".fmt(this.get('id'));
   }.property('id').cacheable(),
@@ -72,6 +74,14 @@ Radium.Contact = Radium.Person.extend({
   }.property('name').cacheable(),
 
   feed: null,
+
+  user_id: DS.attr('number'),
+
+  canEdit: function() {
+    var userId = this.getPath('user.id'),
+        loggedInUserId = Radium.usersController.getPath('loggedInUser.id');
+    return userId === loggedInUserId;
+  }.property('user').cacheable(),
 
   // HAX for Data
   email_addresses_attributes: DS.attr('array'),

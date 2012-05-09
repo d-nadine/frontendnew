@@ -155,12 +155,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
   findMany: function(store, type, ids) {
     var root = this.rootForType(type),
-        plural = this.pluralize(root),
-        userID = this.get('selectedUserID');
-    // Activities have to be loaded via their type, ie users, contacts, deals
-    if (root === 'activity') {
-      plural = ["users", userID, "feed"].join("/");
-    }
+        plural = this.pluralize(root);
+
     // If the request is for more records than what a page can return, proxy
     // to `findRecursively` to loop through the pages.
     if (ids.length > this.get('resultsPerPage')) {

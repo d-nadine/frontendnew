@@ -21,7 +21,8 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     // View Settings
     var feed = this.get('feed'),
         feedUrl = this.get('feedUrl'),
-        targetId = this.get('targetId');
+        targetId = Radium.appController.get('params') 
+                  || Radium.usersController.getPath('loggedInUser.id');
 
     // Local variables
     var self = this,
