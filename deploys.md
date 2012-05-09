@@ -1,3 +1,4 @@
+* [2012-05-09 11:37 -0700] ea0c79d - Joshua Jones: [Delivers #28992251] Don't render empty date groups.
 * [2012-05-09 11:08 -0700] 43b5a56 - Joshua Jones: [#29032921] Stop UI from loading if logged out.
 * [2012-05-09 11:01 -0700] d82906d - Joshua Jones: Remove empty string throwing the todo form out of whack.
 * [2012-05-09 10:37 -0700] 4a71225 - Joshua Jones: Add name in todo form header if assigning to a contact.
