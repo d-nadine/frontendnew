@@ -27,17 +27,17 @@ Radium.FormView = Ember.View.extend({
     this.$().before($flashMessage);
     $flashMessage.delay(2000).fadeOut(function() {
       $(this).remove();
+
+      if (type === 'success') {
+        Radium.FormManager.send('closeForm');
+      }
     });
   },
   success: function(message) {
     var self = this;
     self.flash('success', message);
     self.set('isSubmitting', false);
-    setTimeout(function() {
-      self.$().slideUp('fast', function() {
-        Radium.FormManager.send('closeForm');
-      });
-    }, 2000);
+    this.$().slideUp('fast');
   },
   error: function(message) {
     this.flash('error', message);

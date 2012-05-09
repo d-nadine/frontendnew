@@ -6,6 +6,7 @@ Radium.UserPageView = Ember.View.extend(Radium.EndlessScrolling, {
     Radium.FormManager.send('showForm', {
       form: 'Todo',
       id: this.getPath('content.id'),
+      target: this.get('content'),
       type: 'user'
     });
     return false;
