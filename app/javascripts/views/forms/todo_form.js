@@ -22,7 +22,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       return "Add a Todo";
     }
     
-  }.property('').cacheable(),
+  }.property().cacheable(),
 
   headerDate: function() {
     var currentYear = Radium.appController.getPath('today.year'),
