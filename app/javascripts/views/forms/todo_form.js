@@ -84,8 +84,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       this.set('selection', user);
     },
     change: function() {
-      this.setPath('parentView.assignedUser', this.get('selection'));
       this._super();
+      this.setPath('parentView.assignedUser', this.get('selection'));
     }
   }),  
 
