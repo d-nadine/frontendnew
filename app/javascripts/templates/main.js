@@ -13,6 +13,7 @@ minispade.require('radium/templates/feed/date_filters');
 minispade.require('radium/templates/feed/type_filters');
 minispade.require('radium/templates/feed/comment');
 minispade.require('radium/templates/feed/inline_comments');
+minispade.require('radium/templates/feed/historical_layout');
 
 minispade.require('radium/templates/dashboard/feed/todo_created');
 minispade.require('radium/templates/dashboard/feed/todo_assigned');

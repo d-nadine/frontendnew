@@ -38,35 +38,41 @@ Radium.feedController = Ember.Object.extend({
         hash = activity.timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear)[0],
         ref = activity[kind] || activity.reference[kind],
         model = this.modelTypes[kind];
+    
+    // Normalize the activity
+    activity[kind] = ref;
 
-    if (ref) {
-      Radium.store.load(Radium[model], ref);
-    }
+    Radium.store.load(Radium.Activity, activity);
+
+    // if (ref) {
+    //   Radium.store.load(Radium[model], ref);
+    // }
 
     if (!this.dates[hash]) {
       var group = Radium.FeedGroup.create({
             date: parsedDate,
             sortValue: hash,
-            todos: Radium.Todo.filter(function(data) {
-              var todoUpdated = data.get('created_at'),
-                  lookupDate = todoUpdated.match(Radium.Utils.DATES_REGEX.monthDayYear);
-              return (lookupDate[0] === hash) ? true : false;
+            ongoing: Radium.Activity.filter(function(data) {
+              var updated = data.get('timestamp'),
+                  lookupDate = updated.match(Radium.Utils.DATES_REGEX.monthDayYear);
+              return lookupDate[0] === hash && data.get('tag') === 'scheduled';
             }),
-            sortedTodos: function() {
-              return this.get('todos').slice(0).sort(function(a, b) {
-                return a.get('createdAt') - b.get('createdAt');
+            sortedOngoing: function() {
+              return this.get('ongoing').slice(0).sort(function(a, b) {
+                return a.get('timestamp') - b.get('timestamp');
               });
-            }.property('todos.@each').cacheable(),
-            leads: Radium.Contact.filter(function(data) {
-              var contactType = data.get('status'),
-                  lookupDate = data.get('created_at').match(Radium.Utils.DATES_REGEX.monthDayYear);
-              return contactType === 'lead' && lookupDate[0] === hash;
+            }.property('ongoing.@each').cacheable(),
+            
+            historical: Radium.Activity.filter(function(data) {
+              var timestamp = data.get('created_at'),
+                  lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
+              return lookupDate[0] === hash && data.get('tag') !== 'scheduled';
             }),
-            sortedLeads: function() {
-              return this.get('leads').slice(0).sort(function(a, b) {
-                return a.get('createdAt') - b.get('createdAt');
+            sortedHistorical: function() {
+              return this.get('historical').slice(0).sort(function(a, b) {
+                return a.get('timestamp') - b.get('timestamp');
               });
-            }.property('leads.@each').cacheable(),
+            }.property('historical.@each').cacheable()
           }),
           length = this.getPath('content.length'),
           idx = this.binarySearch(group.get('sortValue'), 0, length);

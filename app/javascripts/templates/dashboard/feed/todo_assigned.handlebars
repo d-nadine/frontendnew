@@ -1,1 +1,9 @@
-{{owner.user.name}} was assigned a todo - {{reference.todo.description}}
+Assigned: 
+  {{#if isCall}}
+    {{#with reference.todo.reference.contact}}
+      Call <a href="/contacts/{{unbound id}}">{{name}}</a>
+    {{/with}}
+  {{else}}
+    {{reference.todo.description}}
+  {{/if}}
+   (<a href="/users/{{unbound owner.user.id}}">{{owner.user.name}}</a>)

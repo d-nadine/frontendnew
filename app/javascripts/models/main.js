@@ -15,6 +15,7 @@ minispade.require('radium/models/sms');
 minispade.require('radium/models/announcement');
 minispade.require('radium/models/invitation');
 
+minispade.require('radium/models/activity');
 minispade.require('radium/models/attachment');
 minispade.require('radium/models/comment');
 minispade.require('radium/models/deal');
@@ -32,5 +33,4 @@ minispade.require('radium/models/todo');
 minispade.require('radium/models/campaign');
 minispade.require('radium/models/customfield');
 minispade.require('radium/models/calllist');
-minispade.require('radium/models/activity');
 minispade.require('radium/models/feed_group');

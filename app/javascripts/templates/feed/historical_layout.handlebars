@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="span2">
+    {{view iconView}}
+  {{#with content}}
+    <span class="timestamp">{{formatTime timestamp}}</span>
+  </div>
+  <div class="span7">
+    <p>
+      <span class="content">{{yield}}</span>
+  {{/with}}
+
+      <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
+      {{#if content.comments.length}}
+        ({{content.comments.length}})
+      {{/if}}
+    </p>
+  </div>
+</div>

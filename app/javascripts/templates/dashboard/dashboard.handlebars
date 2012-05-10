@@ -94,17 +94,21 @@
       <div class="span9">
         {{#with Radium.dashboardFeedController}}
           {{#each content}}
-            {{#if hasVisibleContent}}
+            {{!if hasVisibleContent}}
               <div class="page-header">
                 <h3>{{formatDate date}}</h3>
               </div>
-              {{#each todos}}
-                {{view Radium.TodoView contentBinding="this"}}
+              {{#if sortedTodos}}
+                {{#each sortedTodos}}
+                  {{view Radium.TodoView contentBinding="this"}}
+                {{/each}}
+                <hr>
+              {{/if}}
+              
+              {{#each sortedHistorical}}
+                {{view Radium.HistoricalFeedView contentBinding="this"}}
               {{/each}}
-              {{#each sortedLeads}}
-                {{view Radium.LeadView contentBinding="this"}}
-              {{/each}}
-            {{/if}}
+            {{!if}}
           {{/each}}
         {{/with}}
       </div>

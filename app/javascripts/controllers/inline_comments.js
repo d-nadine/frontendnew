@@ -1,5 +1,4 @@
 Radium.inlineCommentsController = Ember.ArrayProxy.extend({
-  content: [],
   newComment: "",
   isError: false,
   isSubmitting: false,
@@ -8,14 +7,13 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
     if (this.get('newComment') !== '') {
       var comment,
           commentText = this.get('newComment'),
-          id = this.getPath('activity.id'),
-          root = this.get('root');
+          id = this.getPath('activity.id');
 
       Radium.Comment.reopenClass({
-        url: '%@/%@/comments'.fmt(root, id),
+        url: 'activities/%@/comments'.fmt(id),
         root: 'comment'
       });
-      
+
       comment = Radium.store.createRecord(Radium.Comment, {
         text: commentText,
         createdAt: Ember.DateTime.create().toISO8601()
