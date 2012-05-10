@@ -21,8 +21,8 @@
 
 
       {{#if content.isCallList}}
-        {{#if content.isSaving}}Assigning...{{/if}}
-        <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
+        {{#if content.isSaving}}Saving...{{/if}}
+        Call <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
       {{/if}}
       
       ({{content.user.abbrName}})

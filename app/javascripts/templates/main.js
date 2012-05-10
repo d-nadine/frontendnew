@@ -48,6 +48,7 @@ minispade.require('radium/templates/dashboard/feed/message_created');
 minispade.require('radium/templates/dashboard/feed/note_created');
 minispade.require('radium/templates/dashboard/feed/phone_call_created');
 minispade.require('radium/templates/dashboard/feed/call_list_created');
+minispade.require('radium/templates/dashboard/feed/email_sent');
 
 // Forms
 minispade.require('radium/templates/forms/fieldset');

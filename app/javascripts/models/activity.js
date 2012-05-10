@@ -1,24 +1,3 @@
-// Radium.Owner = DS.Model.extend({
-//   primaryKey: 'guid',
-//   user: DS.hasOne('Radium.User', {embedded: true}),
-//   contact: DS.hasOne('Radium.Contact', {embedded: true})
-// });
-
-// Radium.ActivityType = DS.Model.extend({
-//   primaryKey: 'guid',
-//   todo: DS.hasOne('Radium.Todo', {embedded: true}),
-//   deal: DS.hasOne('Radium.Deal', {embedded: true}),
-//   message: DS.hasOne('Radium.Message', {embedded: true}),
-//   campaign: DS.hasOne('Radium.Campaign', {embedded: true}),
-//   contact: DS.hasOne('Radium.Contact', {embedded: true}),
-//   group: DS.hasOne('Radium.Group', {embedded: true}),
-//   meeting: DS.hasOne('Radium.Meeting', {embedded: true}),
-//   phoneCall: DS.hasOne('Radium.PhoneCall', {
-//     embedded: true,
-//     key: 'phone_call'
-//   })
-// });
-
 Radium.Activity = Radium.Core.extend({
   tag: DS.attr('string'),
   kind: DS.attr('string'),
@@ -34,6 +13,7 @@ Radium.Activity = Radium.Core.extend({
   // todo: DS.attr('object'),
   deal: DS.hasOne('Radium.Deal', {embedded: true}),
   message: DS.hasOne('Radium.Message', {embedded: true}),
+  email: DS.hasOne('Radium.Email', {embedded: true}),
   campaign: DS.hasOne('Radium.Campaign', {embedded: true}),
   contact: DS.hasOne('Radium.Contact', {embedded: true}),
   group: DS.hasOne('Radium.Group', {embedded: true}),
