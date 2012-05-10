@@ -58,7 +58,6 @@ Radium.HistoricalFeedView = Ember.View.extend({
   commentsView: null,
   
   toggleComments: function() {
-    console.log(this.get('isActionsVisible'));
     if (this.get('isActionsVisible')) {
       var activity = this.get('content'),
         commentsController = Radium.inlineCommentsController.create({
