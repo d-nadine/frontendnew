@@ -1,6 +1,8 @@
-<div class="span1"><i class="icon-check"></i></div>
-<div class="span2"><span class="timestamp">{{formatTime content.createdAt}}</span></div>
-<div class="span6">
+<div class="span2">
+  <i class="icon-check"></i>
+  <span class="timestamp">{{formatTime content.createdAt}}</span>
+</div>
+<div class="span7">
   <p>
     {{#if content.canEdit}}
       {{view checkboxView}}
