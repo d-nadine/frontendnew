@@ -1,3 +1,4 @@
+* [2012-05-10 12:02 -0700] ce82e0a - Joshua Jones: Remove stray log.
 * [2012-05-10 01:01 -0700] 03ea52e - Joshua Jones: Temporarily remove comments from todos.
 * [2012-05-09 14:41 -0700] 7daedee - Joshua Jones: [Delivers #29318445] Fire a commit on todo value change instead of listening on click.
 * [2012-05-09 13:51 -0700] 400e479 - Joshua Jones: [Delivers #28977633] Update verbage in todo form header.
