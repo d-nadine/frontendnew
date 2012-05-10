@@ -32,6 +32,24 @@ Radium.HistoricalFeedView = Ember.View.extend({
     }.property('parentView.content.kind').cacheable(),
   }),
 
+  isActionsVisible: false,
+
+  toggleActionsView: Ember.View.extend({
+    tagName: 'i',
+    classNames: 'activity-action-btn'.w(),
+    classNameBindings: [
+      'isActionsVisible:icon-chevron-up',
+      'isActionsNotVisible:icon-chevron-down'
+    ],
+    isActionsVisibleBinding: 'parentView.isActionsVisible',
+    isActionsNotVisible: function() {
+      return !this.get('isActionsVisible');
+    }.property('isActionsVisible').cacheable(),
+    click: function() {
+      this.toggleProperty('isActionsVisible');
+    }
+  }),
+
   // Comments
   commentsView: null,
 
@@ -40,22 +58,25 @@ Radium.HistoricalFeedView = Ember.View.extend({
   commentsView: null,
   
   toggleComments: function() {
-    if (this.get('commentsView')) {
-      this.get('commentsView').remove();
-      this.set('commentsView', null);
-    } else {
+    console.log(this.get('isActionsVisible'));
+    if (this.get('isActionsVisible')) {
       var activity = this.get('content'),
-          commentsController = Radium.inlineCommentsController.create({
-            activity: activity,
-            contentBinding: 'activity.comments'
-          }),
-          commentsView = Radium.InlineCommentsView.create({
-            controller: commentsController,
-            contentBinding: 'controller.content'
-          });
-      this.set('commentsView', commentsView);
-      commentsView.appendTo(this.$());
+        commentsController = Radium.inlineCommentsController.create({
+          activity: activity,
+          contentBinding: 'activity.comments'
+        }),
+        commentsView = Radium.InlineCommentsView.create({
+          controller: commentsController,
+          contentBinding: 'controller.content'
+        });
+    this.set('commentsView', commentsView);
+    commentsView.appendTo(this.$());
+
+    } else {
+      if (this.get('commentsView')) {
+        this.get('commentsView').remove();
+        this.set('commentsView', null);
+      }      
     }
-    this.toggleProperty('isCommentsVisible');
-  }
+  }.observes('isActionsVisible')
 });

@@ -4,15 +4,16 @@
   {{#with content}}
     <span class="timestamp">{{formatTime timestamp}}</span>
   </div>
-  <div class="span7">
+  <div class="span7 feed-description">
     <p>
       <span class="content">{{yield}}</span>
   {{/with}}
 
-      <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
       {{#if content.comments.length}}
+        <i class="icon-comment comment-toggle-button"></i>
         ({{content.comments.length}})
       {{/if}}
     </p>
+    {{view toggleActionsView}}
   </div>
 </div>

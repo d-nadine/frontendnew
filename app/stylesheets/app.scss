@@ -196,6 +196,18 @@ fieldset legend {
 }
 
 .feed-item {
+  .feed-description {
+    position: relative;
+
+    .activity-action-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+  }
+
+
   p.feed-actions {
     float: right;
     display: none;
