@@ -15,7 +15,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var data = {};
     var hash = get(model, 'data');
     data[root] = hash.unsavedData;
-    var url = (type.url) ? type.url : this.puralize(root);
+    var url = (type.url) ? type.url : this.pluralize(root);
 
     var success = function(json) {
       this.sideload(store,type,json,root)

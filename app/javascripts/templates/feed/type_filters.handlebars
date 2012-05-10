@@ -1,9 +1,10 @@
 <a href="#" {{action "setFilter"}}>
-  {{#if content.addButton}}
-  {{view addResourceButton}}
-  {{/if}}
-  {{content.label}}
+  {{view iconView}} {{content.label}}
   {{#if isSelected}}
     <i class="icon-ok pull-right"></i>
+  {{/if}}
+  
+  {{#if content.addButton}}
+    {{view addResourceButton}}
   {{/if}}
 </a>

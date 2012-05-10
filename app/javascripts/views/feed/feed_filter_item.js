@@ -1,6 +1,7 @@
 Radium.FeedFilterItemView = Ember.View.extend({
   tagName: 'li',
   templateName: 'type_filters',
+  classNames: ['main-filter-item'],
   classNameBindings: ['isSelected:active'],
   isSelected: function() {
     return (this.getPath('parentView.filter') == this.getPath('content.kind')) ? true : false;
@@ -13,7 +14,7 @@ Radium.FeedFilterItemView = Ember.View.extend({
     return false;
   },
   addResourceButton: Ember.View.extend({
-    classNames: 'icon-plus',
+    classNames: 'icon-plus'.w(),
     tagName: 'i',
     attributeBindings: ['title'],
     singular: {
@@ -33,6 +34,8 @@ Radium.FeedFilterItemView = Ember.View.extend({
       return false;
     }
   }),
+  iconView: Radium.SmallIconView,
+
   badge: Ember.View.extend({
     tagName: 'span',
     classNames: ['pull-right'],

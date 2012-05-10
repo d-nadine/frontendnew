@@ -19,6 +19,7 @@ minispade.require('radium/views/ui/inline_select');
 minispade.require('radium/views/ui/inline_datepicker');
 minispade.require('radium/views/ui/label');
 minispade.require('radium/views/ui/token');
+minispade.require('radium/views/ui/small_icon');
 
 // Forms
 minispade.require('radium/views/forms/fieldset');

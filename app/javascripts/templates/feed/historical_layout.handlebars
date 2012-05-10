@@ -1,19 +1,29 @@
 <div class="row">
-  <div class="span2">
+  <div class="span9 feed-description">
     {{view iconView}}
-  {{#with content}}
-    <span class="timestamp">{{formatTime timestamp}}</span>
-  </div>
-  <div class="span7 feed-description">
     <p>
-      <span class="content">{{yield}}</span>
-  {{/with}}
-
+      {{#with content}}
+        <span class="content">{{yield}}</span>
+      {{/with}}
       {{#if content.comments.length}}
         <i class="icon-comment comment-toggle-button"></i>
         ({{content.comments.length}})
       {{/if}}
     </p>
-    {{view toggleActionsView}}
+
+    {{#if isActionsVisible}}
+      <p class="feed-actions">
+        {{#if content.canEdit}}
+          <a href="#"><i class="icon-pencil"></i> Edit</a>
+          {{#if isReassigning}}
+            {{view userSelect}}
+          {{else}}
+            <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
+          {{/if}}
+        {{/if}}
+        <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add Todo</a>
+        <a href="#" {{action "addCallTask"}}><i class="icon-check"></i> Call</a>
+      </p>
+    {{/if}}
   </div>
 </div>

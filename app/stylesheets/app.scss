@@ -119,6 +119,21 @@ body {
   }
 }
 
+li.main-filter-item {
+  i {
+    margin-right: 5px;
+  }
+
+  i.icon-plus {
+    @include opacity(0);
+    @include transition(opacity 0.25s ease-in);
+  }
+
+  &:hover i.icon-plus {
+    @include opacity(1);
+  }
+}
+
 #search {
   margin-bottom: 0
 }
@@ -196,6 +211,32 @@ fieldset legend {
 }
 
 .feed-item {
+  padding: 5px 0;
+  margin: 0 0 2px;
+  cursor: pointer;
+  @include transition(background-color 0.25s ease-in);
+
+  &:hover {
+    background-color: #f7f7f9;
+  }
+
+  &.expanded {
+    background-color: #d9edf7;
+    p {
+      margin: 0 0 9px;
+    }
+  }
+
+  &.historical {
+    i.activity-icon {
+      margin-right: 10px;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
   .feed-description {
     position: relative;
 
@@ -209,8 +250,9 @@ fieldset legend {
 
 
   p.feed-actions {
-    float: right;
-    display: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
 
     select {
       width: 140px;
