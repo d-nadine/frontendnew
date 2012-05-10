@@ -38,7 +38,7 @@ Radium.feedController = Ember.Object.extend({
         hash = activity.timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear)[0],
         ref = activity[kind] || activity.reference[kind],
         model = this.modelTypes[kind];
-    
+    console.log(kind, activity.tag);
     // Normalize the activity
     activity[kind] = ref;
 
