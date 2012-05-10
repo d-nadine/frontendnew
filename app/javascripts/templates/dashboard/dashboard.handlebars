@@ -28,68 +28,6 @@
       </div>
     </div>
 
-    {{#with Radium.feedByActivityController.coffeeCupSummary}}
-    <div class="stats row" style="display:none">
-      <div class="span2">
-        <dl>
-          <dt>Todos</dt>
-          <dd>
-            {{!view Radium.CoffeeCupTotalView contentBinding="todoCreated" label="created"}}
-            {{todoCreated}} created<br>
-            {{todoAssigned}} assigned<br>
-            {{todoFinished}} finished
-          </dd>
-        </dl>
-      </div>
-      <div class="span2">
-        <dl>
-          <dt>Campaigns</dt>
-          <dd>
-            {{campaignCreated}} created<br>
-            {{campaignAssigned}} assigned<br>
-            {{campaignContactAdded}} added<br>
-            {{campaignContactRemoved}} removed<br>
-            {{campaignFollowed}} followed
-          </dd>
-        </dl>
-      </div>
-      <div class="span2">
-        <dl>
-          <dt>Contacts</dt>
-          <dd>
-            {{contactCreated}} created<br>
-            {{contactAssigned}} assigned<br>
-            {{contactBecameLead}} became leads<br>
-            {{contactBecameProspect}} became prospects<br>
-            {{contactBecameOpportunity}} became opportunities<br>
-            {{contactBecameCustomer}} became customers<br>
-            {{contactBecameDeadEnd}} became dead ends<br>
-            {{contactFollowed}} followed
-          </dd>
-        </dl>
-      </div>
-      <div class="span2">
-        <dl>
-          <dt>Meetings</dt>
-          <dd>
-            {{meetingCreated}} created<br>
-            {{meetingRescheduled}} rescheduled<br>
-            {{meetingCancelled}} cancelled<br>
-            {{meetingConfirmed}} confirmed<br>
-            {{meetingRejected}} rejected<br>
-          </dd>
-        </dl>
-        <dl>
-          <dt>Phone Calls</dt>
-          <dd>
-            {{phoneCallCreated}} calls were created<br>
-            {{callListCreated}} call lists were created
-          </dd>
-        </dl>
-      </div>
-      {{/with}}
-    </div>
-
     <div class="row">
       <div class="span9">
         {{#with Radium.dashboardFeedController}}

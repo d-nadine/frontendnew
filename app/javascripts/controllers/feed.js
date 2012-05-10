@@ -59,7 +59,7 @@ Radium.feedController = Ember.Object.extend({
             }),
             sortedOngoing: function() {
               return this.get('ongoing').slice(0).sort(function(a, b) {
-                return a.get('created_at') - b.get('created_at');
+                return a.get('timestamp') - b.get('timestamp');
               });
             }.property('ongoing.@each').cacheable(),
 

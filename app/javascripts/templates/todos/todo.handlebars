@@ -21,18 +21,20 @@
 
 
       {{#if content.isCallList}}
-        {{#if content.isSaving}}Saving...{{/if}}
-        Call <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
+        {{#if content.isSaving}}Assigning...{{/if}}
+        <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
       {{/if}}
       
       ({{content.user.abbrName}})
     </span>
     
-    {{#if isFoo}}
+    {{#if content.isCallList}}
+      <i class="icon-sms"></i>
+    {{/if}}
+
     <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
     {{#if content.comments.length}}
       ({{content.comments.length}})
-    {{/if}}
     {{/if}}
   </p>
 </div>
