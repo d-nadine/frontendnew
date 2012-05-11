@@ -1,40 +1,23 @@
-<div class="span2">
-  <i class="icon-check"></i>
-  <span class="timestamp">{{formatTime content.createdAt}}</span>
-</div>
-<div class="span7">
-  <p>
-    {{#if content.canEdit}}
-      {{view checkboxView}}
+{{#if todo.canEdit}}
+  {{view checkboxView}}
+{{/if}}
+{{#if todo.reference.contact}}
+ {{view Radium.LabelView labelBinding="todo.reference.contact.status"}}
+{{/if}}
+<span class="content">
+  {{#unless todo.isCallList}}
+    {{#if todo.canEdit}}
+      {{inlineTextField todo.description}}
+    {{else}}
+      {{todo.description}}
     {{/if}}
-    {{#if content.reference.contact}}
-     {{view Radium.LabelView labelBinding="content.reference.contact.status"}}
-    {{/if}}
-    <span class="content">
-      {{#unless content.isCallList}}
-        {{#if content.canEdit}}
-          {{inlineTextField content.description}}
-        {{else}}
-          {{content.description}}
-        {{/if}}
-      {{/unless}}
+  {{/unless}}
 
 
-      {{#if content.isCallList}}
-        {{#if content.isSaving}}Assigning...{{/if}}
-        <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> 
-      {{/if}}
-      
-      ({{content.user.abbrName}})
-    </span>
-    
-    {{#if content.isCallList}}
-      <i class="icon-sms"></i>
-    {{/if}}
-
-    <i class="icon-comment comment-toggle-button" {{action "toggleComments"}}></i>
-    {{#if content.comments.length}}
-      ({{content.comments.length}})
-    {{/if}}
-  </p>
-</div>
+  {{#if todo.isCallList}}
+    {{#if todo.isSaving}}Assigning...{{/if}}
+    <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+  {{/if}}
+  
+  (<a href="/users/{{unbound todo.user.id}}">{{todo.user.abbrName}}</a>)
+</span>

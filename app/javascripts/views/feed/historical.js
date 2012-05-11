@@ -1,5 +1,5 @@
-Radium.HistoricalFeedView = Ember.View.extend({
-  classNames: 'feed-item historical'.w(),
+Radium.HistoricalFeedView = Radium.FeedView.extend({
+  classNames: ['historical'],
   classNameBindings: [
     'content.kind',
     'content.isTodoFinished:finished',
@@ -14,45 +14,6 @@ Radium.HistoricalFeedView = Ember.View.extend({
         template = this.templateForName(templateName, 'template');
     return template || this.get('defaultTemplate');
   }).property('content.kind', 'content.tag').cacheable(),
-
-  iconView: Radium.SmallIconView.extend({
-    classNames: 'pull-left activity-icon'.w()
-  }),
-
-  isActionsVisible: false,
-
-  click: function() {
-    this.toggleProperty('isActionsVisible');
-  },
-
-  // Comments
-  commentsView: null,
-
-  isCommentsVisible: false,
-
-  commentsView: null,
-  
-  toggleComments: function() {
-    if (this.get('isActionsVisible')) {
-      var activity = this.get('content'),
-        commentsController = Radium.inlineCommentsController.create({
-          activity: activity,
-          contentBinding: 'activity.comments'
-        }),
-        commentsView = Radium.InlineCommentsView.create({
-          controller: commentsController,
-          contentBinding: 'controller.content'
-        });
-    this.set('commentsView', commentsView);
-    commentsView.appendTo(this.$());
-
-    } else {
-      if (this.get('commentsView')) {
-        this.get('commentsView').remove();
-        this.set('commentsView', null);
-      }      
-    }
-  }.observes('isActionsVisible'),
 
   isReassigning: null,
   reassign: function(event) {
@@ -120,7 +81,6 @@ Radium.HistoricalFeedView = Ember.View.extend({
   },
 
   addCallTask: function(event) {
-    debugger;
     var id = this.getPath('content.reference.contact.id'),
         user = this.getPath('content.reference.todo.user.id'),
         todo = Radium.store.createRecord(Radium.Todo, {

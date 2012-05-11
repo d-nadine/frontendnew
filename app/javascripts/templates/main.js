@@ -10,6 +10,7 @@ minispade.require('radium/templates/global/topbar');
 // Feed
 minispade.require('radium/templates/feed/cluster');
 minispade.require('radium/templates/feed/date_filters');
+minispade.require('radium/templates/feed/activity_row');
 minispade.require('radium/templates/feed/type_filters');
 minispade.require('radium/templates/feed/comment');
 minispade.require('radium/templates/feed/inline_comments');

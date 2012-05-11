@@ -4,11 +4,11 @@
     <p>
       {{#with content}}
         <span class="content">{{yield}}</span>
-      {{/with}}
-      {{#if content.comments.length}}
-        <i class="icon-comment comment-toggle-button"></i>
-        ({{content.comments.length}})
+      {{#if comments.length}}
+        <i class="icon-comment"></i>
+        ({{comments.length}})
       {{/if}}
+      {{/with}}
     </p>
 
     {{#if isActionsVisible}}

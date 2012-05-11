@@ -15,6 +15,10 @@ Radium.InlineCommentsView = Ember.View.extend({
       this.$().focus().autosize().css('resize','none');
     },
 
+    click: function(event) {
+      event.stopPropagation();
+    },
+
     keyPress: function(event) {
       if (event.keyCode === 13 && !event.ctrlKey) {
         event.preventDefault();

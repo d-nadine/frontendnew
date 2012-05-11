@@ -8,6 +8,7 @@ Radium.InlineTextField = Ember.View.extend({
   _cachedValue: null,
 
   click: function(event) {
+    event.stopPropagation();
     this.set('_cachedValue', this.get('value'));
     this.set('isEditing', true);
     this.$('textarea').focus();

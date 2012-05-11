@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="span2">
+    <span class="timestamp">
+      {{view iconView}}
+      {{formatTime content.timestamp}}
+    </span>
+  </div>
+  <div class="span7 feed-description">
+    <p>
+      <span class="content">
+        {{view Radium.TodoView todoBinding="content.todo"}}
+      </span>
+        {{#if content.comments.length}}
+          <i class="icon-comment comment-toggle-button"></i>
+          ({{content.comments.length}})
+        {{/if}}
+    </p>
+  </div>
+</div>
