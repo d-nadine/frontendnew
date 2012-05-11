@@ -22,7 +22,6 @@ Radium.FeedView = Ember.View.extend({
   commentsView: null,
   
   toggleComments: function() {
-    console.log('toggle');
     if (this.get('isActionsVisible')) {
       var activity = this.get('content'),
         commentsController = Radium.inlineCommentsController.create({
