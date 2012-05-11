@@ -1,29 +1,31 @@
-<div class="row">
-  <div class="span9 feed-description">
-    {{view iconView}}
-    <p>
-      {{#with content}}
-        <span class="content">{{yield}}</span>
-      {{#if comments.length}}
-        <i class="icon-comment"></i>
-        ({{comments.length}})
-      {{/if}}
-      {{/with}}
-    </p>
-
-    {{#if isActionsVisible}}
-      <p class="feed-actions">
-        {{#if content.canEdit}}
-          <a href="#"><i class="icon-pencil"></i> Edit</a>
-          {{#if isReassigning}}
-            {{view userSelect}}
-          {{else}}
-            <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
-          {{/if}}
+<div class="feed-header">
+  <div class="row">
+    <div class="span9 feed-description">
+      {{view iconView}}
+      <p>
+        {{#with content}}
+          <span class="content">{{yield}}</span>
+        {{#if comments.length}}
+          <i class="icon-comment"></i>
+          ({{comments.length}})
         {{/if}}
-        <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add Todo</a>
-        <a href="#" {{action "addCallTask"}}><i class="icon-check"></i> Call</a>
+        {{/with}}
       </p>
-    {{/if}}
+
+      {{#if isActionsVisible}}
+        <p class="feed-actions">
+          {{#if content.canEdit}}
+            <a href="#"><i class="icon-pencil"></i> Edit</a>
+            {{#if isReassigning}}
+              {{view userSelect}}
+            {{else}}
+              <a href="#" {{action "reassign"}}><i class="icon-share-alt"></i> Reassign</a>
+            {{/if}}
+          {{/if}}
+          <a href="#" {{action "addTodo"}}><i class="icon-check"></i> Add Todo</a>
+          <a href="#" {{action "addCallTask"}}><i class="icon-check"></i> Call</a>
+        </p>
+      {{/if}}
+    </div>
   </div>
 </div>

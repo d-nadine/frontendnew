@@ -211,26 +211,39 @@ fieldset legend {
 }
 
 .feed-item {
-  padding: 5px 0;
   margin: 0 0 2px;
   cursor: pointer;
-  @include transition(background-color 0.25s ease-in);
 
-  &:hover {
+  .feed-header {
+    padding: 5px 0;
+
+    .activity-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .feed-header:hover,
+  &.expanded .feed-header {
     background-color: #f7f7f9;
   }
 
   &.expanded {
-    background-color: #d9edf7;
-    p {
-      margin: 0 0 9px;
+    p.feed-actions {
+      display: block;
     }
   }
 
   &.historical {
+    opacity: 0.64;
+
     i.activity-icon {
       margin-right: 10px;
     }
+  }
+
+  &.expanded.historical,
+  &.historical:hover {
+    opacity: 1;
   }
 
   p {
@@ -248,7 +261,6 @@ fieldset legend {
     }
   }
 
-
   p.feed-actions {
     position: absolute;
     top: 0;
@@ -256,12 +268,6 @@ fieldset legend {
 
     select {
       width: 140px;
-    }
-  }
-
-  &:hover {
-    p.feed-actions {
-      display: block;
     }
   }
 
