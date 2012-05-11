@@ -14,20 +14,31 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       format = Ember.getPath('options.hash.format') || "%B %D, %Y";
       
   var parseDate = function(date) {
-    if (date) {
-      var milli;
-      if (typeof date === 'string') {
-        milli = new Date(date).getTime();
-      } else if (typeof date === 'number') {
-        milli = date;
-      } else {
-        milli = date.getTime();  
-      }
-      
-      var d = Ember.DateTime.create(milli);
-      return d.toFormattedString(format);
+    if(!date) { return ""; }
+    
+    var milli;
+    if (typeof date === 'string') {
+      milli = new Date(date).getTime();
+    } else if (typeof date === 'number') {
+      milli = date;
     } else {
-      return "";
+      milli = date.getTime();  
+    }
+    
+    var d = Ember.DateTime.create(milli);
+    
+    var tomorrow = Ember.DateTime.create(new Date().getTime()).advance({day: 1});
+    var today = Ember.DateTime.create(new Date().getTime());
+    var yesterday = Ember.DateTime.create(new Date().getTime()).advance({day: -1});
+    
+    if (d.toFormattedString('%Y-%m-%d') == tomorrow.toFormattedString('%Y-%m-%d')) {
+      return "Tomorrow"
+    } else if (d.toFormattedString('%Y-%m-%d') == today.toFormattedString('%Y-%m-%d')) {
+      return "Today"
+    } else if (d.toFormattedString('%Y-%m-%d') == yesterday.toFormattedString('%Y-%m-%d')) {
+      return "Yesterday"
+    } else {
+      return d.toFormattedString(format);
     }
   };
 
