@@ -49,16 +49,7 @@ Radium.feedController = Ember.Object.extend({
             date: parsedDate,
             sortValue: hash,
             ongoing: Radium.Activity.filter(function(data) {
-              var updated = data.get('timestamp'),
-                  lookupDate = updated.match(Radium.Utils.DATES_REGEX.monthDayYear);
-              if (data.get('todo')) {
-                return lookupDate[0] === hash 
-                        && !data.get('todo').finished
-                        && data.get('tag') === 'assigned';
-              } else {
-                return false;
-              }
-
+              return data.get('scheduled');
             }),
             sortedOngoing: function() {
               return this.get('ongoing').slice(0).sort(function(a, b) {
@@ -67,9 +58,9 @@ Radium.feedController = Ember.Object.extend({
             }.property('ongoing.@each').cacheable(),
 
             historical: Radium.Activity.filter(function(data) {
-              var timestamp = data.get('created_at'),
+              var timestamp = data.get('timestamp'),
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
-              return lookupDate[0] === hash && data.get('tag') !== 'scheduled';
+              return lookupDate[0] === hash && data.get('scheduled') !== true;
             }),
             sortedHistorical: function() {
               return this.get('historical').slice(0).sort(function(a, b) {
