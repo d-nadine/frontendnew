@@ -57,15 +57,21 @@
     </div>
     {{#with Radium.selectedContactController.content.feed}}
       {{#each content}}
-        <div class="page-header">
-          <h3>{{formatDate date}}</h3>
-        </div>
-        {{#each todos}}
-          {{view Radium.TodoView contentBinding="this"}}
-        {{/each}}
-        {{#each leads}}
-          {{view Radium.LeadView contentBinding="this"}}
-        {{/each}}
+        {{#if hasVisibleContent}}
+          <div class="page-header">
+            <h3>{{formatDate date}}</h3>
+          </div>
+          {{#if sortedOngoing}}
+            {{#each sortedOngoing}}
+              {{view Radium.FeedView contentBinding="this"}}
+            {{/each}}
+            <hr>
+          {{/if}}
+          
+          {{#each historical}}
+            {{view Radium.HistoricalFeedView contentBinding="this"}}
+          {{/each}}
+        {{/if}}
       {{/each}}
     {{/with}}
   </div>
