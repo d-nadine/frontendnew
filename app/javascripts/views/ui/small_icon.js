@@ -7,12 +7,12 @@ Radium.SmallIconView = Ember.View.extend({
     'email:icon-envelope'
   ],
   todo: function() {
-    return this.getPath('parentView.content.kind') === 'todo';
-  }.property('parentView.content.kind').cacheable(),
+    return this.getPath('content.kind') === 'todo';
+  }.property('content.kind').cacheable(),
   contact: function() {
-    return this.getPath('parentView.content.kind') === 'contact';
-  }.property('parentView.content.kind').cacheable(),
+    return this.getPath('content.kind') === 'contact';
+  }.property('content.kind').cacheable(),
   email: function() {
-    return this.getPath('parentView.content.kind') === 'email';
-  }.property('parentView.content.kind').cacheable(),
+    return this.getPath('content.kind') === 'email';
+  }.property('content.kind').cacheable(),
 });

@@ -1,3 +1,4 @@
+
 @import "compass/css3";
 
 body {
@@ -212,10 +213,11 @@ fieldset legend {
 
 .feed-item {
   margin: 0 0 2px;
-  cursor: pointer;
 
   .feed-header {
     padding: 5px 0;
+    position: relative;
+    cursor: pointer;
 
     .activity-icon {
       margin-right: 10px;
@@ -263,7 +265,7 @@ fieldset legend {
 
   p.feed-actions {
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 10px;
 
     select {

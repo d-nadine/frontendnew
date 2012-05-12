@@ -2,44 +2,85 @@ Radium.FeedView = Ember.View.extend({
   classNames: 'feed-item'.w(),
   classNameBindings: ['isActionsVisible:expanded'],
   templateName: 'activity_row',
-  // template: Ember.Handlebars.compile('{{view Radium.TodoView todoBinding="content.todo"}}'),
   // Comments
-  iconView: Radium.SmallIconView.extend({
-    classNames: 'pull-left activity-icon'.w()
+
+  feedHeaderView: Ember.View.extend({
+    contentBinding: 'parentView.content',
+    isActionsVisibleBinding: 'parentView.isActionsVisible',
+    iconView: Radium.SmallIconView.extend({
+      contentBinding: 'parentView.parentView.content',
+      classNames: 'pull-left activity-icon'.w()
+    }),
+    click: function() {
+      this.toggleProperty('isActionsVisible');
+    }
   }),
 
   isActionsVisible: false,
 
-  click: function() {
-    this.toggleProperty('isActionsVisible');
+  activityActionsView: Ember.ContainerView.extend({
+    childViews: [],
+    contentBinding: 'parentView.content',
+    isActionsVisibleBinding: 'parentView.isActionsVisible',
+    actionsVisibilityDidChange: function() {
+      if (this.get('isActionsVisible')) {
+        var activity = this.get('content'),
+            commentsView = Radium.InlineCommentsView.create({
+              controller: Radium.inlineCommentsController.create({
+                activity: activity,
+                contentBinding: 'activity.comments'
+              }),
+              contentBinding: 'controller.content'
+            });
+        this.get('childViews').pushObject(commentsView);
+      } else {
+        this.get('childViews').popObject();
+        this.setPath('parentView.isEditMode', false);
+      }
+    }.observes('isActionsVisible')
+  }),
+
+  // Inline actions
+
+  addTodo: function(event) {
+    Radium.FormManager.send('showForm', {
+      form: 'Todo',
+      target: event.view.get('content'),
+      type: 'contacts'
+    });
+
+    return false;
   },
 
-  // Comments
-  commentsView: null,
-
-  isCommentsVisible: false,
-
-  commentsView: null,
-  
-  toggleComments: function() {
-    if (this.get('isActionsVisible')) {
-      var activity = this.get('content'),
-        commentsController = Radium.inlineCommentsController.create({
-          activity: activity,
-          contentBinding: 'activity.comments'
-        }),
-        commentsView = Radium.InlineCommentsView.create({
-          controller: commentsController,
-          contentBinding: 'controller.content'
+  addCallTask: function(event) {
+    var id = this.getPath('content.reference.contact.id'),
+        user = this.getPath('content.reference.todo.user.id'),
+        todo = Radium.store.createRecord(Radium.Todo, {
+          kind: "call",
+          user: user,
+          created_at: Ember.DateTime.create().toISO8601(),
+          finishBy: Ember.DateTime.create({
+            hour: 17
+          }).toISO8601()
         });
-    this.set('commentsView', commentsView);
-    commentsView.appendTo(this.$());
 
-    } else {
-      if (this.get('commentsView')) {
-        this.get('commentsView').remove();
-        this.set('commentsView', null);
-      }      
-    }
-  }.observes('isActionsVisible'),
+    Radium.Todo.reopenClass({
+      url: 'contacts/%@/todos'.fmt(id),
+      root: 'todo'
+    });
+
+    Radium.store.commit();
+    return false;
+  },
+
+  // Inline form editing
+  isEditMode: false,
+  isEditVisibleBinding: Ember.Binding.and(
+    'isEditMode',
+    'isActionsVisible'
+  ),
+  toggleEditMode: function(event) {
+    this.toggleProperty('isEditMode');
+    return false;
+  }
 });
