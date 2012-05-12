@@ -1,3 +1,4 @@
+* [2012-05-12 01:19 -0700] a24907b - Joshua Jones: [Delivers #29317365] Refactor comments UI.
 * [2012-05-11 12:32 +0200] f4af360 - twinturbo: Format feed dates correctly
 * [2012-05-11 00:15 -0700] f9fc39a - Joshua Jones: Remove stray log.
 * [2012-05-10 12:02 -0700] ce82e0a - Joshua Jones: Remove stray log.
