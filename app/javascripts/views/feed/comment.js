@@ -1,7 +1,7 @@
 Radium.CommentView = Ember.View.extend({
   tagName: 'li',
   didInsertElement: function() {
-    this.$('span.time').timeago();
+    this.$('small.time').timeago();
   },
   templateName: 'comment'
 });

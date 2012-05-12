@@ -364,27 +364,58 @@ i.comment-toggle-button {
   cursor: pointer;
 }
 
-ul.comments {
-  margin-left: 20px;
+.comments {
+  margin: 20px 0;
+  
+  a.add-comment-btn {
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    line-height: 30px;
+    background: #f7f7f9;
+  }
+
+  textarea {
+    width: 97%;
+    margin: 5px 0;
+  }
 }
 
-.comments {
-  margin-bottom: 20px;
+ul.comments-list {
   
   li {
     width: 100%;
     float: left;
+    margin: 0 0 1px;
     clear: both;
     color: #404040;
     font-weight: normal;
-  }
+    vertical-align: top;
+    background: #f7f7f9;
 
-  img {
-    float: left;
-    height: 32px;
-    width: 32px;
-    margin-right: 10px;
-    margin-bottom: 10px
+    a.user-avatar {
+      float: left;
+      margin: 10px;
+
+      img {
+        height: 32px;
+        width: 32px;
+      }
+    }
+
+    .comment-text {
+      float: left;
+      margin: 0 0 0 5px;
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    small.time {
+      font-size: 11px;
+      color: #DDD;
+    }
   }
 
   .name {

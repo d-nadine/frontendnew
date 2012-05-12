@@ -1,7 +1,7 @@
 <div class="row comments">
   <div class="span5 offset2">
     {{#if content.length}}
-    <ul class="comments unstyled">
+    <ul class="comments-list unstyled">
       {{#each content}}
         {{view Radium.CommentView commentBinding="this"}}
       {{/each}}
@@ -10,6 +10,10 @@
     {{#if controller.isError}}
     <p class="error">Hmm, something wasn't done correctly. Try again?</p>
     {{/if}}
-    {{view commentTextArea}}
+    {{#if isAddingComment}}
+      {{view commentTextArea}}
+    {{else}}
+      <a href="#" class="add-comment-btn" {{action "showCommentField"}}>Add comment</a>
+    {{/if}}
   </div>
 </div>
