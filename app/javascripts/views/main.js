@@ -41,6 +41,8 @@ minispade.require('radium/views/forms/add_to_group');
 minispade.require('radium/views/forms/add_to_company');
 
 // Feeds
+minispade.require('radium/views/feed/comment');
+minispade.require('radium/views/feed/inline_comments');
 minispade.require('radium/views/feed/feed');
 minispade.require('radium/views/feed/date_filters');
 minispade.require('radium/views/feed/historical');
@@ -49,8 +51,6 @@ minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/feed_filter_item');
 minispade.require('radium/views/feed/coffee_cup_total');
 minispade.require('radium/views/feed/cluster');
-minispade.require('radium/views/feed/comment');
-minispade.require('radium/views/feed/inline_comments');
 
 // Global
 minispade.require('radium/views/global/topbar');
@@ -84,6 +84,7 @@ minispade.require('radium/views/pipeline/pipeline');
 
 // Todos
 minispade.require('radium/views/todos/todo');
+minispade.require('radium/views/todos/todo_edit');
 
 // Campaigns
 minispade.require('radium/views/campaigns/campaigns');

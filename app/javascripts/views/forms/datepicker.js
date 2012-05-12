@@ -2,14 +2,12 @@ Radium.DatePickerField = Ember.TextField.extend({
   placeholder: "",
   attributeBindings: ['name'],
   minDate: new Date(),
-  willInsertElement: function() {
+  didInsertElement: function() {
+    this.set('_cachedDate', this.get('value'));
     this.$().datepicker({
       dateFormat: 'yy-mm-dd',
       minDate: this.get('minDate')
     });
-  },
-  didInsertElement: function() {
-    this.set('_cachedDate', this.get('value'));
   },
   willDestroyElement: function() {
     this.$().datepicker("destroy");
