@@ -17,7 +17,9 @@
     {{#if isActionsVisible}}
       <p class="feed-actions">
         <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-check"></i> Add Todo</a>
-        <a href="#" {{action "addCallTask" target="parentView"}}><i class="icon-check"></i> Call</a>
+      {{#if content.reference.contact}}
+        <a href="#" {{action "addCallTask" target="parentView"}}><i class="icon-check"></i> Add Call Todo</a>
+      {{/if}}
       </p>
     {{/if}}
   </div> <!-- /.feed-header -->

@@ -54,16 +54,15 @@ Radium.FeedView = Ember.View.extend({
 
   addCallTask: function(event) {
     var id = this.getPath('content.reference.contact.id'),
-        user = this.getPath('content.reference.todo.user.id'),
+        kind = this.getPath('content.kind'),
+        userId = this.getPath('content.reference.' + kind + '.user'),
         todo = Radium.store.createRecord(Radium.Todo, {
           kind: "call",
-          user: user,
+          user_id: userId,
           created_at: Ember.DateTime.create().toISO8601(),
-          finishBy: Ember.DateTime.create({
-            hour: 17
-          }).toISO8601()
+          finishBy: Radium.Utils.finishByDate().toISO8601()
         });
-
+        debugger;
     Radium.Todo.reopenClass({
       url: 'contacts/%@/todos'.fmt(id),
       root: 'todo'
