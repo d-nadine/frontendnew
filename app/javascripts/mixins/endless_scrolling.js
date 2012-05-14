@@ -47,7 +47,7 @@ Radium.EndlessScrolling = Ember.Mixin.create({
 
       $.ajax(request)
         .success(function(data, status, xhr) {
-
+console.log(data);
           self.setProperties({
             oldestDateLoaded: startDate,
             newestDateLoaded: endDate
