@@ -4,24 +4,24 @@
       <div class="span2">
         <span class="timestamp">
           {{view iconView}}
-          {{formatTime content.timestamp}}
+          {{formatTime content.createdAt}}
         </span>
       </div>
       <div class="span7 feed-description">
         <p>
           <span class="content">
-            {{view Radium.TodoView todoBinding="content.todo"}}
+            {{view Radium.TodoView todoBinding="content"}}
           </span>
-          {{#if content.comments.length}}
+          {{#if content.activity.comments.length}}
             <i class="icon-comment comment-toggle-button"></i>
-            ({{content.comments.length}})
+            ({{content.activity.comments.length}})
           {{/if}}
         </p>
       </div> <!-- /.feed-description -->
     </div> <!-- /.row -->
     {{#if isActionsVisible}}
       <p class="feed-actions">
-        {{#if content.todo.canEdit}}
+        {{#if content.canEdit}}
           <a href="#" {{action "toggleEditMode" target="parentView"}}><i class="icon-pencil"></i> Edit</a>
         {{/if}}
         <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-check"></i> Add Todo</a>
@@ -32,7 +32,7 @@
 {{#if isEditVisible}}
   <div class="row">
     <div class="span9">
-      {{view Radium.TodoEditView todoBinding="content.todo"}}
+      {{view Radium.TodoEditView todoBinding="content"}}
     </div>
   </div>
 {{/if}}

@@ -27,6 +27,9 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
   user_id: DS.attr('number'),
+  activity: DS.hasOne('Radium.Activity', {
+    embedded: true
+  }),
 
   canEdit: function() {
     return (this.getPath('user.apiKey') && this.get('finished') === false) ? true : false;

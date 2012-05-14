@@ -24,7 +24,9 @@ Radium.FeedView = Ember.View.extend({
     isActionsVisibleBinding: 'parentView.isActionsVisible',
     actionsVisibilityDidChange: function() {
       if (this.get('isActionsVisible')) {
-        var activity = this.get('content'),
+        // Comments are either available from an embedded activity or from the
+        // the activity itself if the view is historical.
+        var activity = this.getPath('content.activity') || this.get('content'),
             commentsView = Radium.InlineCommentsView.create({
               controller: Radium.inlineCommentsController.create({
                 activity: activity,

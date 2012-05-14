@@ -48,7 +48,6 @@ Radium.TodoEditView = Ember.View.extend({
         return date.toFormattedString('%Y-%m-%d');
       },
       from: function(value, binding) {
-        console.log('out');
         var dateValues;
         if (value) {
           dateValues = value.split('-');

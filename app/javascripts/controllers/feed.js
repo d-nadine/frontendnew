@@ -43,30 +43,33 @@ Radium.feedController = Ember.Object.extend({
     // Normalize the activity
     activity[kind] = ref;
 
+    if (activity.scheduled) {
+      ref.activity = activity;
+    }
+
     Radium.store.load(Radium.Activity, activity);
+    Radium.store.load(Radium[model], ref);
 
     if (!this.dates[hash]) {
       var group = Radium.FeedGroup.create({
             date: dateString,
             sortValue: hash,
-            ongoing: Radium.Activity.filter(function(data) {
-              var timestamp = data.get('timestamp'),
+            ongoingTodos: Radium.Todo.filter(function(data) {
+              var timestamp = data.get('created_at'),
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),
                   regex = new RegExp(lookupDate[0]);
-              return regex.test(hash) 
-                    && data.get('scheduled')
-                    && !data.get('todo').finished;
+              return regex.test(hash) && !data.get('finished');
             }),
             sortedOngoing: function() {
-              return this.get('ongoing').slice(0).sort(function(a, b) {
-                var date1 = a.get('timestamp'),
-                    date2 = b.get('timestamp');
+              return this.get('ongoingTodos').slice(0).sort(function(a, b) {
+                var date1 = a.get('createdAt'),
+                    date2 = b.get('createdAt');
 
                 if (date1 > date2) return 1;
                 if (date1 < date2) return -1;
                 return 0;
               });
-            }.property('ongoing.@each').cacheable(),
+            }.property('ongoingTodos.@each').cacheable(),
 
             historical: Radium.Activity.filter(function(data) {
               var timestamp = data.get('timestamp'),
