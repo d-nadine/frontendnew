@@ -21,16 +21,16 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     // View Settings
     var feed = this.get('feed'),
         feedUrl = this.get('feedUrl'),
+        accountCreatedAtDate = Radium.accountController.get('accountCreatedAt'),
         targetId = Radium.appController.get('params') 
                   || Radium.usersController.getPath('loggedInUser.id');
 
     // Local variables
     var self = this,
-        page = this.get('page'),
-        today = Radium.appController.get('today'),
-        oneWeekAgo = today.adjust({day: today.get('day') - 7});
+        endDate = this.get('newestDateLoaded') || Radium.appController.get('today'),
+        startDate = endDate.adjust({day: endDate.get('day') - 3});
 
-    if (this.get('page') < this.get('totalPages')) {
+    if (Ember.DateTime.compare(startDate, accountCreatedAtDate) === 1) {
       Ember.run.next(function() {
         Radium.App.goToState('loading');
       });
@@ -38,18 +38,19 @@ Radium.EndlessScrolling = Ember.Mixin.create({
       var data = {
             url: feedUrl.fmt(targetId),
             type: 'GET',
-            data: {page: (page+1), end_date: today.toFormattedString('%Y-%m-%d'), start_date: oneWeekAgo.toFormattedString('%Y-%m-%d')}
+            data: {
+              end_date: endDate.toFormattedString('%Y-%m-%d'), 
+              start_date: startDate.toFormattedString('%Y-%m-%d')
+            }
           },
           request = jQuery.extend(data, CONFIG.ajax);
 
       $.ajax(request)
         .success(function(data, status, xhr) {
-          // var totalPages = data.meta.pagination.total,
-          //     currentPage = data.meta.pagination.current;
 
           self.setProperties({
-            // totalPages: parseInt(totalPages),
-            // page: parseInt(currentPage)
+            oldestDateLoaded: startDate,
+            newestDateLoaded: endDate
           });
 
           data.activities.forEach(function(activity) {
@@ -59,6 +60,7 @@ Radium.EndlessScrolling = Ember.Mixin.create({
             activity.isCached = false;
             feed.add(activity);
           });
+
           Ember.run.next(function() {
             Radium.App.goToState('ready');
           });

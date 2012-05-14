@@ -62,7 +62,7 @@ Radium.FeedView = Ember.View.extend({
           created_at: Ember.DateTime.create().toISO8601(),
           finishBy: Radium.Utils.finishByDate().toISO8601()
         });
-        debugger;
+        
     Radium.Todo.reopenClass({
       url: 'contacts/%@/todos'.fmt(id),
       root: 'todo'
