@@ -31,18 +31,18 @@
     <script type="text/javascript">
       minispade.require('radium/main');
 
-      if (CONFIG.api) {
-        Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
-        Radium._feed.disable('cross-origin-long-polling');
+      // if (CONFIG.api) {
+      //   Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
+      //   Radium._feed.disable('cross-origin-long-polling');
 
-        var subscribe = Radium._feed.subscribe('/%@/feed/%@'.fmt(CONFIG.IO, CONFIG.api), function(data) {
-          console.log('New activity.', data);
-          data.isNewActivity = true;
-          data.isCached = false;
-          Radium.dashboardFeedListController.addData([data]);
-          Radium.dashboardFeedController.add(data);
-        });
-      }
+      //   var subscribe = Radium._feed.subscribe('/%@/feed/%@'.fmt(CONFIG.IO, CONFIG.api), function(data) {
+      //     console.log('New activity.', data);
+      //     data.isNewActivity = true;
+      //     data.isCached = false;
+      //     Radium.dashboardFeedListController.addData([data]);
+      //     Radium.dashboardFeedController.add(data);
+      //   });
+      // }
 
     </script>
     <img src="/images/icons/inline-loading.gif" width="16" height="16" style="display:none">
