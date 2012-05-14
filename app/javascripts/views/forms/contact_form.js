@@ -101,6 +101,10 @@ Radium.ContactForm = Radium.FormView.extend({
       } else {
         self.fail();
       }
+      Radium.Contact.reopenClass({
+        url: null,
+        root: null
+      });
     });
   }
 });

@@ -330,7 +330,7 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
       - %i -- Hour of the day, 12-hour clock (1..12)
       - %I -- Hour of the day, 12-hour clock (01..12)
       - %j -- Day of the year (001..366)
-      - %e -- Month of the year (01..12)
+      - %e -- Month of the year (1..12)
       - %m -- Month of the year with leading zero (01..12)
       - %M -- Minute of the hour (00..59)
       - %p -- Meridian indicator (``AM'' or ``PM'')

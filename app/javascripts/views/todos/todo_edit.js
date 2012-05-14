@@ -1,6 +1,7 @@
 Radium.TodoEditView = Ember.View.extend({
   classNames: ['well', 'form-inline'],
   templateName: 'todo_edit',
+  isEditModeBinding: 'parentView.isEditMode',
   userSelect: Ember.Select.extend({
     didInsertElement: function() {
       var self = this;
@@ -25,16 +26,17 @@ Radium.TodoEditView = Ember.View.extend({
     assignmentDidChange: function() {
       var user = this.get('selection'), 
           oldUser = this.getPath('parentView.todo.user'),
-          lead = this.getPath('parentView.todo');
+          todo = this.getPath('parentView.todo');
           
-      if (user.get('id') !== lead.getPath('user.id')) {
-        lead.setProperties({
+      if (user.get('id') !== todo.getPath('user.id')) {
+        todo.setProperties({
           user: user,
           user_id: user.get('id')
         });
+        this.setPath('parentView.isEditMode', false);
         Radium.store.commit();
-        // user.get('contacts').pushObject(lead);
-        // oldUser.get('contacts').removeObject(lead);
+        // user.get('todos').pushObject(todo);
+        // oldUser.get('todos').removeObject(todo);
       }
     }.observes('selection')
   }),
@@ -46,6 +48,7 @@ Radium.TodoEditView = Ember.View.extend({
         return date.toFormattedString('%Y-%m-%d');
       },
       from: function(value, binding) {
+        console.log('out');
         var dateValues;
         if (value) {
           dateValues = value.split('-');

@@ -34,8 +34,9 @@ Radium.feedController = Ember.Object.extend({
         parsedDate = Ember.DateTime.parse(
             activity.timestamp, 
             Ember.DATETIME_ISO8601
-        ).toFormattedString('%B %D, %Y'),
-        hash = activity.timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear)[0],
+        ),
+        dateString = parsedDate.toFormattedString('%B %D, %Y'),
+        hash = parsedDate.toFormattedString('%Y-%m-%d'),
         ref = activity[kind] || activity.reference[kind],
         model = this.modelTypes[kind];
     
@@ -46,7 +47,7 @@ Radium.feedController = Ember.Object.extend({
 
     if (!this.dates[hash]) {
       var group = Radium.FeedGroup.create({
-            date: parsedDate,
+            date: dateString,
             sortValue: hash,
             ongoing: Radium.Activity.filter(function(data) {
               var timestamp = data.get('timestamp'),
