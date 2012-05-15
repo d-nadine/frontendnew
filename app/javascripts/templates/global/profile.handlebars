@@ -2,7 +2,7 @@
   {{#if content.length}}
     <div class="row">
       <div id="owner" class="span3">
-        <img src="/images/headshots/mcnulty.jpg" class="avatar">
+        <img {{bindAttr src="loggedInUser.avatar.medium_url"}} class="avatar">
         <p class="name">{{loggedInUser.name}}</p>
         <small><a href="#" {{action "logout" target="Radium.App"}}>Logout</a></small>
       </div>
