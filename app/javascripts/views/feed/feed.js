@@ -45,11 +45,20 @@ Radium.FeedView = Ember.View.extend({
   // Inline actions
 
   addTodo: function(event) {
-    Radium.FormManager.send('showForm', {
-      form: 'Todo',
-      target: event.view.get('content'),
-      type: 'contacts'
-    });
+    var contact = this.getPath('content.reference.contact'),
+        user = this.getPath('content.user');
+
+    if (Ember.empty(contact)) {
+      Radium.FormManager.send('showForm', {
+        form: 'Todo'
+      });
+    } else {
+      Radium.FormManager.send('showForm', {
+        form: 'Todo',
+        target: contact,
+        type: 'contacts'
+      });
+    }
 
     return false;
   },
@@ -57,10 +66,12 @@ Radium.FeedView = Ember.View.extend({
   addCallTask: function(event) {
     var id = this.getPath('content.reference.contact.id'),
         kind = this.getPath('content.kind'),
+        user = this.getPath('content.' + kind + '.user'),
         userId = this.getPath('content.reference.' + kind + '.user'),
         todo = Radium.store.createRecord(Radium.Todo, {
           kind: "call",
           user_id: userId,
+          user: user,
           created_at: Ember.DateTime.create().toISO8601(),
           finishBy: Radium.Utils.finishByDate().toISO8601()
         });
