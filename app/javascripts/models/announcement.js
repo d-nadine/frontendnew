@@ -4,5 +4,5 @@ Radium.Announcement = Radium.Core.extend({
   comments: DS.hasMany('Radium.Comment', {
     embedded: true
   }),
-  user: DS.hasOne('Radium.User')
+  user: DS.belongsTo('Radium.User')
 });

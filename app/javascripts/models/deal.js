@@ -12,8 +12,8 @@ Radium.Deal = Radium.Core.extend({
     embedded: true,
     key: 'line_items'
   }),
-  contact: DS.hasOne('Radium.Contact'),
-  user: DS.hasOne('Radium.User'),
+  contact: DS.belongsTo('Radium.Contact'),
+  user: DS.belongsTo('Radium.User'),
   todos: DS.hasMany('Radium.Todo'),
   comments: DS.hasMany('Radium.Comment'),
   products: DS.hasMany('Radium.Product'),

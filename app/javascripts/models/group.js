@@ -3,7 +3,7 @@ Radium.Group = Radium.Core.extend({
   email: DS.attr('string'),
   phone: DS.attr('string'),
   is_public: DS.attr('boolean'),
-  primaryContact: DS.hasOne('Radium.Contact', {
+  primaryContact: DS.belongsTo('Radium.Contact', {
     key: 'primary_contact'
   }),
   fields: DS.hasMany('Radium.Field'),
@@ -19,7 +19,7 @@ Radium.Group = Radium.Core.extend({
   users: DS.hasMany('Radium.User'),
   contacts: DS.hasMany('Radium.Contact'),
   activities: DS.hasMany('Radium.Activity'),
-  user: DS.hasOne('Radium.User'),
+  user: DS.belongsTo('Radium.User'),
 
   contact_ids: DS.attr('array')
 });

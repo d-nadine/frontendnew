@@ -8,14 +8,14 @@ Radium.Todo = Radium.Core.extend({
     return new Date(this.get('updatedAt')).getTime();
   }.property('finishBy').cacheable(),
   finished: DS.attr('boolean'),
-  campaign: DS.hasOne('Radium.Campaign'),
-  callList: DS.hasOne('Radium.CallList', {
+  campaign: DS.belongsTo('Radium.Campaign'),
+  callList: DS.belongsTo('Radium.CallList', {
     key: 'call_list'
   }),
   isCallList: function() {
     return (this.get('kind') === 'call') ? true : false;
   }.property('kind').cacheable(),
-  contact: DS.hasOne('Radium.Contact', {
+  contact: DS.belongsTo('Radium.Contact', {
     embedded: true
   }),
   contacts: DS.hasMany('Radium.Contact'),
@@ -23,11 +23,11 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
   reference: DS.attr('object'),
-  user: DS.hasOne('Radium.User', {
+  user: DS.belongsTo('Radium.User', {
     embedded: true
   }),
   user_id: DS.attr('number'),
-  activity: DS.hasOne('Radium.Activity', {
+  activity: DS.belongsTo('Radium.Activity', {
     embedded: true
   }),
 

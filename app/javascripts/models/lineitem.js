@@ -3,6 +3,6 @@ Radium.LineItem = DS.Model.extend({
   quantity: DS.attr('number'),
   price: DS.attr('number'),
   currency: DS.attr('string'),
-  product: DS.hasOne('Radium.Product'),
-  deal: DS.hasOne('Radium.Deal')
+  product: DS.belongsTo('Radium.Product'),
+  deal: DS.belongsTo('Radium.Deal')
 });
