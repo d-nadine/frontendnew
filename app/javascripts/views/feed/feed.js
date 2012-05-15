@@ -8,7 +8,10 @@ Radium.FeedView = Ember.View.extend({
     contentBinding: 'parentView.content',
     isActionsVisibleBinding: 'parentView.isActionsVisible',
     iconView: Radium.SmallIconView.extend({
-      contentBinding: 'parentView.parentView.content',
+      kindBinding: Ember.Binding.or(
+        'parentView.parentView.content.kind',
+        'parentView.content.kind'
+      ),
       classNames: 'pull-left activity-icon'.w()
     }),
     click: function() {
@@ -20,6 +23,7 @@ Radium.FeedView = Ember.View.extend({
 
   activityActionsView: Ember.ContainerView.extend({
     childViews: [],
+    classNames: ['row'],
     contentBinding: 'parentView.content',
     isActionsVisibleBinding: 'parentView.isActionsVisible',
     actionsVisibilityDidChange: function() {

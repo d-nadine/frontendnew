@@ -1,14 +1,9 @@
 {{#view feedHeaderView class="row"}}
   <div class="span9 feed-header">
     <div class="row">
-      <div class="span2">
-        <span class="timestamp">
-          {{view iconView}}
-          {{formatTime content.createdAt}}
-        </span>
-      </div>
-      <div class="span7 feed-description">
+      <div class="span8 offset1 feed-description">
         <p>
+          {{view iconView}}
           <span class="content">
             {{view Radium.TodoView todoBinding="content"}}
           </span>
@@ -36,4 +31,8 @@
     </div>
   </div>
 {{/if}}
-{{view activityActionsView}}
+<div class="row">
+  <div class="span9">
+    {{view activityActionsView}}
+  </div>
+</div>

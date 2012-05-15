@@ -365,13 +365,14 @@ i.comment-toggle-button {
 }
 
 .comments {
-  margin: 20px 0;
+  margin: 10px 0 15px;
+  display: inline-block;
   
   a.add-comment-btn {
     width: 100%;
+    margin-bottom: 15px;
     display: inline-block;
     text-decoration: none;
-    text-align: center;
     font-weight: bold;
     line-height: 30px;
   }
@@ -395,7 +396,7 @@ ul.comments-list {
 
     a.user-avatar {
       float: left;
-      margin: 10px;
+      margin: 10px 10px 10px 0;
 
       img {
         height: 32px;

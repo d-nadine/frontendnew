@@ -4,15 +4,19 @@ Radium.SmallIconView = Ember.View.extend({
   classNameBindings: [
     'todo:icon-check',
     'contact:icon-user',
-    'email:icon-envelope'
+    'email:icon-envelope',
+    'call:icon-arrow-right'
   ],
   todo: function() {
-    return this.getPath('content.kind') === 'todo';
-  }.property('content.kind').cacheable(),
+    return this.get('kind') === 'todo' || this.get('kind') === 'general';
+  }.property('kind').cacheable(),
   contact: function() {
-    return this.getPath('content.kind') === 'contact';
-  }.property('content.kind').cacheable(),
+    return this.get('kind') === 'contact';
+  }.property('kind').cacheable(),
   email: function() {
-    return this.getPath('content.kind') === 'email';
-  }.property('content.kind').cacheable(),
+    return this.get('kind') === 'email';
+  }.property('kind').cacheable(),
+  call: function() {
+    return this.get('kind') === 'call';
+  }.property('kind').cacheable()
 });
