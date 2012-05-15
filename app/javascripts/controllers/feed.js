@@ -54,6 +54,10 @@ Radium.feedController = Ember.Object.extend({
       var group = Radium.FeedGroup.create({
             date: dateString,
             sortValue: hash,
+            isToday: function() {
+              var today = Radium.appController.get('today').toFormattedString('%Y-%m-%d');
+              return this.get('sortValue') === today;
+            }.property('sortValue').cacheable(),
             ongoingTodos: Radium.Todo.filter(function(data) {
               var timestamp = data.get('created_at'),
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),

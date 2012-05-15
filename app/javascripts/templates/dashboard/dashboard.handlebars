@@ -36,16 +36,18 @@
               <div class="page-header">
                 <h3>{{formatDate date}}</h3>
               </div>
-              {{#if sortedOngoing}}
-                {{#each sortedOngoing}}
-                  {{view Radium.FeedView contentBinding="this"}}
+              <div {{bindAttr class="isToday"}}>
+                {{#if sortedOngoing}}
+                  {{#each sortedOngoing}}
+                    {{view Radium.FeedView contentBinding="this"}}
+                  {{/each}}
+                  <hr>
+                {{/if}}
+                
+                {{#each historical}}
+                  {{view Radium.HistoricalFeedView contentBinding="this"}}
                 {{/each}}
-                <hr>
-              {{/if}}
-              
-              {{#each historical}}
-                {{view Radium.HistoricalFeedView contentBinding="this"}}
-              {{/each}}
+              </div>
             {{/if}}
           {{/each}}
         {{/with}}

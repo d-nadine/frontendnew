@@ -243,6 +243,7 @@ fieldset legend {
     }
   }
 
+  .is-today &,
   &.expanded.historical,
   &.historical:hover {
     opacity: 1;
