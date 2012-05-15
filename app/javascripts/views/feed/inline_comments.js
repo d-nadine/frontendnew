@@ -14,9 +14,6 @@ Radium.InlineCommentsView = Ember.View.extend({
       var self = this;
       this._super();
       this.$().focus().autosize().css('resize','none');
-      $('html').on('click.autoresize', function() {
-        self.setPath('parentView.isAddingComment', false);
-      });
     },
 
     willDestroyElement: function() {
@@ -34,16 +31,6 @@ Radium.InlineCommentsView = Ember.View.extend({
           this.triggerAction();
         }
       }
-    },
-    
-    cancel: function(event) {
-      this.setPath('parentView.isAddingComment', false);
     }
-  }),
-
-  isAddingComment: false,
-  showCommentField: function(event) {
-    this.set('isAddingComment', true);
-    return false;
-  }
+  })
 });

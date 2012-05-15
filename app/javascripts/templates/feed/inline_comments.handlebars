@@ -10,10 +10,6 @@
     {{#if controller.isError}}
     <p class="error">Hmm, something wasn't done correctly. Try again?</p>
     {{/if}}
-    {{#if isAddingComment}}
-      {{view commentTextArea}}
-    {{else}}
-      <a href="#" class="add-comment-btn" {{action "showCommentField"}}><i class="icon-comment"></i> Add comment</a>
-    {{/if}}
+    {{view commentTextArea}}
   </div>
 </div>
