@@ -32,7 +32,7 @@ Radium.Todo = Radium.Core.extend({
   }),
 
   canEdit: function() {
-    return (this.getPath('user.apiKey') && this.get('finished') === false) ? true : false;
+    return (this.getPath('user.apiKey')) ? true : false;
   }.property('user', 'finished').cacheable(),
 
   /**
