@@ -3,6 +3,9 @@
 
 body {
   padding-top: 60px;
+  &.loaded {
+    background: #fff url('/images/base/bg-grey.gif') repeat-y center top;
+  }
 }
 
 .navbar {
@@ -121,6 +124,13 @@ body {
 }
 
 li.main-filter-item {
+  &.active {
+    a,
+    a:hover {
+      border-right: none;
+    }
+  }
+
   i {
     margin-right: 5px;
   }

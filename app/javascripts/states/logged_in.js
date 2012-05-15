@@ -11,6 +11,7 @@ Radium.LoggedIn = Ember.State.create({
     view: Radium.LoadingView,
     start: Ember.State.create({
       enter: function(manager) {
+        $('body').addClass('loaded');
         var groups = Radium.store.find(Radium.Group, {page: 'all'});
         // contacts = Radium.store.find(Radium.Contact, {page: 0}),
         
