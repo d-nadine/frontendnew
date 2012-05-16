@@ -1,3 +1,4 @@
+* [2012-05-16 11:08 -0700] f42be51 - Joshua Jones: [Delivers #29681715] Toggle form if user clicks show form action button twice.
 * [2012-05-16 10:14 -0700] 85f0285 - Joshua Jones: [Delivers #29667893] Add border around expanded feed items.
 * [2012-05-15 16:15 -0700] f20447a - Joshua Jones: Add slideDown to comments on visibility toggle.
 * [2012-05-14 21:55 -0700] 44c43e8 - Joshua Jones: Clean up todo actions, pass contact context to form.
