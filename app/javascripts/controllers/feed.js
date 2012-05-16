@@ -61,9 +61,10 @@ Radium.feedController = Ember.Object.extend({
             }.property('sortValue').cacheable(),
             ongoingTodos: Radium.Todo.filter(function(data) {
               var timestamp = data.get('created_at'),
+                  updatedAt = Ember.DateTime.parse(data.get('updated_at')),
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),
                   regex = new RegExp(lookupDate[0]);
-
+                  
               return regex.test(hash);
             }),
             sortedOngoing: function() {

@@ -1,1 +1,7 @@
-{{reference.todo.description}} (<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+Finished:
+{{#if isCall}}
+  Call <a href="/contacts/{{unbound reference.todo.reference.contact.id}}">{{reference.todo.reference.contact.name}}</a>
+{{else}}
+  {{reference.todo.description}}
+{{/if}}
+ (<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)

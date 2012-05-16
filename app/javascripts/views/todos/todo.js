@@ -3,7 +3,7 @@ Radium.TodoView = Radium.FeedView.extend({
   templateName: 'todo',
   classNames: ['todo'],
   classNameBindings: [
-    'todo.isOverdue:overdue', 
+    'todo.isOverdue:overdue',
     'todo.finished:finished'
   ],
   checkboxView: Radium.Checkbox.extend({

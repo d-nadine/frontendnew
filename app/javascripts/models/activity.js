@@ -37,22 +37,4 @@ Radium.Activity = Radium.Core.extend({
   isTodoFinished: function() {
     return this.get('tag') === 'finished';
   }.property('tag').cacheable()
-  // referenceID: function() {
-  //   var type = this.get('type');
-  //   return this.getPath('data.reference.'+type+'.id');
-  // }.property('data', 'type').cacheable(),
-  // action: function() {
-  //   return this.get('tags').objectAt(1);
-  // }.property('tags').cacheable(),
-  // type: function() {
-  //   if (this.getPath('data.reference.todo')) return "todo";
-  //   if (this.getPath('data.reference.deal')) return "deal";
-  //   if (this.getPath('data.reference.meeting')) return "meeting";
-  //   if (this.getPath('data.reference.campaign')) return "campaign";
-  //   if (this.getPath('data.reference.message')) return "message";
-  //   if (this.getPath('data.reference.call_list')) return "calllist";
-  //   if (this.getPath('data.reference.announcement')) return "announcement";
-  //   if (this.getPath('data.reference.contact')) return "contact";
-  // }.property('data').cacheable()
-  
 });
