@@ -8,11 +8,14 @@ Radium.TodoView = Radium.FeedView.extend({
   ],
   checkboxView: Radium.Checkbox.extend({
     valueBinding: 'parentView.todo.finished',
+    disabledBinding: 'parentView.todo.isSaving',
     click: function(event) {
       event.stopPropagation();
     },
     todoDidChange: function() {
-      Radium.store.commit();
+      Ember.run.next(function() {
+        Radium.store.commit();
+      });
     }.observes('value')
   })
 });
