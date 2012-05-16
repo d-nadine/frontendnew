@@ -230,13 +230,23 @@ fieldset legend {
     position: relative;
     cursor: pointer;
 
+    i.feed-expand-icon {
+      margin-left: 10px;
+      @include opacity(0);
+      @include transition(opacity 0.2s ease-in);
+    }
+
+    &:hover {
+      background-color: #f7f7f9;
+
+      i.feed-expand-icon {
+        @include opacity(1);
+      }
+    }
+
     .activity-icon {
       margin-right: 10px;
     }
-  }
-
-  .feed-header:hover {
-    background-color: #f7f7f9;
   }
 
   &.expanded {
@@ -244,6 +254,10 @@ fieldset legend {
 
     .feed-header {
       background-color: #ECECEC;
+
+      i.feed-expand-icon {
+        @include opacity(1);
+      }
     }
 
     p.feed-actions {

@@ -31,6 +31,11 @@ Radium.FeedView = Ember.View.extend({
   feedHeaderView: Ember.View.extend({
     contentBinding: 'parentView.content',
     isActionsVisibleBinding: 'parentView.isActionsVisible',
+    expandToggleIconView: Ember.View.extend({
+      tagName: 'i',
+      classNames: 'feed-expand-icon icon-plus'.w(),
+      classNameBindings: ['parentView.isActionsVisible:icon-minus']
+    }),
     iconView: Radium.SmallIconView.extend({
       contentBinding: Ember.Binding.or(
         'parentView.parentView.content',
