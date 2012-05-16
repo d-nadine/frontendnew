@@ -42,6 +42,7 @@ Radium.feedController = Ember.Object.extend({
     
     // Normalize the activity
     activity[kind] = ref;
+    activity.user = (activity.owner) ? activity.owner.user : null;
 
     if (activity.scheduled) {
       ref.activity = activity;
