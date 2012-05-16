@@ -35,9 +35,11 @@ Radium.FormView = Ember.View.extend({
   },
   success: function(message) {
     var self = this;
-    self.flash('success', message);
+    // self.flash('success', message);
     self.set('isSubmitting', false);
-    this.$().slideUp('fast');
+    this.$().slideUp('fast', function() {
+      Radium.FormManager.send('closeForm');
+    });
   },
   error: function(message) {
     this.flash('error', message);
@@ -51,9 +53,11 @@ Radium.FormView = Ember.View.extend({
   },
 
   close: function() {
-    this.$().slideUp('fast', function() {
-      Radium.FormManager.send('closeForm');
-    });
+    Radium.FormManager.send('closeForm');
+  },
+
+  hide: function() {
+    this.$().hide();
   },
 
   submit: function(event) {

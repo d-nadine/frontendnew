@@ -31,6 +31,9 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
 
+  // Turn on when todo's are created from the form
+  hasNotificationAnim: DS.attr('boolean'),
+
   canEdit: function() {
     return (this.getPath('user.apiKey')) ? true : false;
   }.property('user', 'finished').cacheable(),

@@ -126,7 +126,7 @@ Radium.MessageForm = Radium.FormView.extend({
         root: 'email'
       });
 
-      this.sending();
+      this.hide();
 
       var data = {
             to: to,
@@ -150,6 +150,8 @@ Radium.MessageForm = Radium.FormView.extend({
           self.fail();
         }
       });
+
+      this.close();
     }
     return false;
   }

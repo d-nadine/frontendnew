@@ -91,7 +91,7 @@ Radium.ContactForm = Radium.FormView.extend({
     });
 
     // Disable the form buttons
-    this.sending();
+    this.hide();
     var contact = Radium.store.createRecord(Radium.Contact, data);
     Radium.store.commit();
 
@@ -106,5 +106,7 @@ Radium.ContactForm = Radium.FormView.extend({
         root: null
       });
     });
+    
+    this.close();
   }
 });

@@ -63,7 +63,7 @@ Radium.feedController = Ember.Object.extend({
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),
                   regex = new RegExp(lookupDate[0]);
 
-              return regex.test(hash) && !Ember.empty(data.get('activity'));
+              return regex.test(hash);
             }),
             sortedOngoing: function() {
               return this.get('ongoingTodos').slice(0).sort(function(a, b) {

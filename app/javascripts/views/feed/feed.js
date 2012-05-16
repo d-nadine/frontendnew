@@ -2,6 +2,27 @@ Radium.FeedView = Ember.View.extend({
   classNames: 'feed-item'.w(),
   classNameBindings: ['isActionsVisible:expanded'],
   templateName: 'activity_row',
+
+  didInsertElement: function() {
+    if (this.getPath('content.hasNotificationAnim')) {
+
+      var $newRow = this.$(),
+          offset = $newRow.offset().top - 90;
+    
+      $('html, body').animate({
+        scrollTop: offset
+      }, 250, function() {
+        $newRow.animate({
+          backgroundColor: '#FBB450'
+        }, 250, function() {
+          $newRow.animate({
+            backgroundColor: '#fff'
+          }, 1500);
+        });
+      });
+    }
+  },
+
   // Comments
 
   feedHeaderView: Ember.View.extend({

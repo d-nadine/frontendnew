@@ -135,7 +135,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           finishBy: finishByValue.toISO8601(),
           user_id: assignedUserId,
           user: assignedUser,
-          created_at: Ember.DateTime.create().toISO8601()
+          created_at: Ember.DateTime.create().toISO8601(),
+          hasNotificationAnim: true
         },
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
@@ -160,7 +161,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }
     
     // Disable the form buttons
-    this.sending();
+    this.hide();
 
     var todo = Radium.store.createRecord(Radium.Todo, data);
     Radium.todosController.add(todo);
@@ -181,5 +182,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     todo.addObserver('isError', function() {
       self.fail();
     });
+
+    this.close();
   }
 });
