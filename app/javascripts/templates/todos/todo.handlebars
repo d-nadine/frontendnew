@@ -16,7 +16,11 @@
 
   {{#if todo.isCallList}}
     {{#if todo.isSaving}}Assigning...{{/if}}
-    <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+    {{#if todo.description}}
+      {{todo.description}} for <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+    {{else}}
+      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+    {{/if}}
   {{/if}}
   
   (<a href="/users/{{unbound todo.user.id}}">{{todo.user.abbrName}}</a>)
