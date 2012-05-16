@@ -1,3 +1,4 @@
+* [2012-05-16 16:53 -0700] ac79568 - Joshua Jones: [Delivers #29654455] Add expand/close icons for feed rows.
 * [2012-05-16 12:48 -0700] 12bfe14 - Joshua Jones: Run DS commits right after a run loop.
 * [2012-05-16 11:08 -0700] f42be51 - Joshua Jones: [Delivers #29681715] Toggle form if user clicks show form action button twice.
 * [2012-05-16 10:14 -0700] 85f0285 - Joshua Jones: [Delivers #29667893] Add border around expanded feed items.
