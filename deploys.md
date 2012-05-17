@@ -1,3 +1,4 @@
+* [2012-05-17 12:35 -0700] 8592edb - Joshua Jones: [Fixes #29749707] Inline date editing shows/posts proper date.
 * [2012-05-17 09:43 -0700] 6157df2 - Joshua Jones: [Fixes #29749613] CSS points to the correct image sprite location.
 * [2012-05-16 16:53 -0700] ac79568 - Joshua Jones: [Delivers #29654455] Add expand/close icons for feed rows.
 * [2012-05-16 12:48 -0700] 12bfe14 - Joshua Jones: Run DS commits right after a run loop.
