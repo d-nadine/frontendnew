@@ -14,16 +14,22 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }.property().cacheable(),
 
   headerContext: function() {
-    var params = this.get('params');
+    var params = this.get('params'),
+        currentYear = Radium.appController.getPath('today.year'),
+        date = this.get('finishBy'),
+        sameYearString = '%A, %e/%D',
+        differentYearString = '%A, %e/%D/%Y',
+        format = (date.get('year') !== currentYear) ? differentYearString : sameYearString,
+        dateString = date.toFormattedString(format);
 
     if (params.type === 'contacts') {
       var name = params.target.name || params.target.get('name');
-      return "Assign a Todo to %@".fmt(name);
+      return "Assign a Todo to %@ for %@".fmt(name, dateString);
     } else {
-      return "Add a Todo";
+      return "Add a Todo for %@".fmt(dateString);
     }
     
-  }.property().cacheable(),
+  }.property('finishBy').cacheable(),
 
   headerDate: function() {
     var currentYear = Radium.appController.getPath('today.year'),
@@ -37,6 +43,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   description: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
     attributeBindings: ['name'],
+    placeholderBinding: 'parentView.headerContext',
     name: 'description',
     classNames: ['span8'],
     action: 'submitForm',

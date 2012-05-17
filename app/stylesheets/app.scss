@@ -168,8 +168,10 @@ li.main-filter-item {
 }
 
 #form-container {
-  margin: 20px 0;
   width: 100%;
+  margin: 20px 0;
+  position: fixed;
+  z-index: 999;
 
   .well {
     width: 660px;
@@ -184,6 +186,42 @@ li.main-filter-item {
     right: 12px;
     top: 22px;
   }
+}
+
+.radium-form {
+  label.radium-control-label {
+    width: auto;
+    text-align: left;
+    float: left;
+    padding: 5px 0 0;
+    margin: 0 10px 0 0;
+  }
+
+  .controls {
+    margin: 0;
+  }
+
+  .inline-fieldset {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  select {
+    width: 150px;
+  }
+
+  .pin-bottom-right {
+    position: absolute;
+    right: 60px;
+    bottom: 40px;
+  }
+
+  .more-options {
+    fieldset {
+      margin: 0 0 20px;
+    }
+  }
+
 }
 
 .alert.token {
