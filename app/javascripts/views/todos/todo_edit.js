@@ -44,7 +44,8 @@ Radium.TodoEditView = Ember.View.extend({
     classNames: ['span2'],
     valueBinding: Ember.Binding.transform({
       to: function(value, binding) {
-        var date = Ember.DateTime.create(new Date(value));
+        var time = value.getTime(),
+            date = Ember.DateTime.create(time);
         return date.toFormattedString('%Y-%m-%d');
       },
       from: function(value, binding) {
@@ -63,7 +64,7 @@ Radium.TodoEditView = Ember.View.extend({
     }).from('parentView.todo.finishBy'),
 
     valueDidChange: function() {
-      Ember.run(function() {
+      Ember.run.next(function() {
         Radium.store.commit();
       });
     }.observes('value')

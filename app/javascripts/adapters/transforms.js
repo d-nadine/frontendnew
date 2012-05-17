@@ -107,7 +107,7 @@ DS.attr.transforms.date.to = function(date) {
   var type = typeof date;
   if (type === "string") {
     return date;
-  } else if (type === "date") {
+  } else if (type === "date" || type === "object") {
     return Ember.DateTime.create(date.getTime()).toISO8601();
   }
 
