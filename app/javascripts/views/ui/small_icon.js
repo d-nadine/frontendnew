@@ -2,11 +2,11 @@ Radium.SmallIconView = Ember.View.extend({
   tagName: 'i',
   classNames: ['pull-left'],
   classNameBindings: [
-    'todo:icon-check',
-    'contact:icon-user',
+    'todo:icon-todo',
+    'contact:icon-contact',
     'email:icon-envelope',
-    'call:icon-arrow-right',
-    'assigned:icon-inbox'
+    'call:icon-call',
+    'assigned:icon-assigned'
   ],
   todo: function() {
     if (this.getPath('content.kind') === 'todo' && this.getPath('content.tag') !== 'assigned') {

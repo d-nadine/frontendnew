@@ -28,17 +28,47 @@ body {
   right: 10px;
 }
 
-.icon-sms,
-.icon-call {
-  background-image: url('/images/icons/icons-radium.png');
+.icon-call,
+.icon-todo,
+.icon-contact,
+.icon-assigned,
+.icon-add-todo,
+.icon-edit,
+.icon-comments {
+  width: 16px;
+  height: 16px;
+  background: {
+     repeat: no-repeat;
+     position: 0 0;
+  }
 }
 
 .icon-call {
-  background-position: 0px 0px;
+  background-image: url('/images/icons/feed-call-todo.png');
 }
 
-.icon-sms {
-  background-position: right 0px;
+.icon-todo {
+  background-image: url('/images/icons/feed-todo.png');
+}
+
+.icon-contact {
+  background-image: url('/images/icons/feed-contact.png');
+}
+
+.icon-assigned {
+  background-image: url('/images/icons/feed-assigned.png');
+}
+
+.icon-comments {
+  background-image: url('/images/icons/feed-comments.png');
+}
+
+.icon-add-todo {
+  background-image: url('/images/icons/feed-add-todo.png');
+}
+
+.icon-edit {
+  background-image: url('/images/icons/edit.png');
 }
 
 .icon-inline-loading {
@@ -300,6 +330,10 @@ fieldset legend {
 
     p.feed-actions {
       display: block;
+
+      a {
+        margin-left: 8px;
+      }
     }
   }
 
