@@ -3,7 +3,7 @@ Radium.FeedGroup = Ember.Object.extend({
   date: null,
 
   hasVisibleContent: function() {
-    var ongoing = this.getPath('ongoing.length'),
+    var ongoing = this.getPath('ongoingTodos.length'),
         historical = this.getPath('historical.length');
 
     if (ongoing || historical) {

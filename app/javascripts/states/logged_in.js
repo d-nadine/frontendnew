@@ -6,6 +6,7 @@ Radium.LoggedIn = Ember.State.create({
   },
   exit: function() {
     topBarView.remove();
+    $('body').removeClass('loaded');
   },
   start: Ember.ViewState.create({
     view: Radium.LoadingView,
