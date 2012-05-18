@@ -7,7 +7,7 @@ Radium.UsersPage = Ember.State.extend({
         if (this.get('isFirstRun')) {
           if (Radium.usersController.get('length') <= 0) {
             Radium.usersController.setProperties({
-              content: Radium.store.findAll(Radium.User),
+              content: Radium.store.find(Radium.User, {page: 'all'}),
               totalPages: 1
             });
           }

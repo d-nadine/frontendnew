@@ -28,7 +28,8 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     // Local variables
     var self = this,
         endDate = this.get('newestDateLoaded') || Radium.appController.get('today'),
-        startDate = endDate.adjust({day: endDate.get('day') - 3});
+        endDate = endDate.advance({day: 1}),
+        startDate = endDate.adjust({day: endDate.get('day') - 2});
 
     if (Ember.DateTime.compare(startDate, accountCreatedAtDate) === 1) {
       Ember.run.next(function() {

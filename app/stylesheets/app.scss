@@ -34,7 +34,8 @@ body {
 .icon-assigned,
 .icon-add-todo,
 .icon-edit,
-.icon-comments {
+.icon-comments,
+.icon-overdue {
   width: 16px;
   height: 16px;
   background: {
@@ -49,6 +50,11 @@ body {
 
 .icon-todo {
   background-image: url('/images/icons/feed-todo.png');
+}
+
+.icon-todo.icon-overdue,
+.icon-overdue {
+  background-image: url('/images/icons/feed-overdue.png');
 }
 
 .icon-contact {

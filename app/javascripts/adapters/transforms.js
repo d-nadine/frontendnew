@@ -88,7 +88,10 @@ DS.attr.transforms.dateTime = {
     var type = typeof serialized;
 
     if (type === "string" || type === "number") {
-      return Ember.DateTime.create(new Date(serialized));
+      var timezone = new Date().getTimezoneOffset();
+      return Ember.DateTime.parse(serialized).adjust({
+        timezone: timezone
+      });
     } else if (serialized === null || serialized === undefined) {
       // if the value is not present in the data,
       // return undefined, not null.

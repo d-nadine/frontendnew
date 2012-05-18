@@ -6,7 +6,8 @@ Radium.SmallIconView = Ember.View.extend({
     'contact:icon-contact',
     'email:icon-envelope',
     'call:icon-call',
-    'assigned:icon-assigned'
+    'assigned:icon-assigned',
+    'isOverdue:icon-overdue'
   ],
   todo: function() {
     if (this.getPath('content.isCall')) {
@@ -32,5 +33,8 @@ Radium.SmallIconView = Ember.View.extend({
   }.property('content.isCall').cacheable(),
   assigned: function() {
     return this.getPath('content.kind') === 'todo' && this.getPath('content.tag') === 'assigned';
-  }.property('content.kind', 'content.tag').cacheable()
+  }.property('content.kind', 'content.tag').cacheable(),
+  isOverdue: function() {
+    return this.getPath('content.isOverdue');
+  }.property('content.isOverdue').cacheable()
 });

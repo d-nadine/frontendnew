@@ -1,9 +1,9 @@
 New Todo: 
 {{#if isCall}}
   {{#with reference.todo.reference.contact}}
-    Call <a href="/contacts/{{unbound id}}">{{name}}</a>
+    Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
   {{/with}}
 {{else}}
-  {{reference.todo.description}}
+  {{unbound reference.todo.description}}
 {{/if}}
- (<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+ (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)

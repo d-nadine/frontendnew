@@ -135,14 +135,16 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         finishByDate = this.$('#finish-by-date').val(),
         finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
         finishByValue = Ember.DateTime.create(finishByParsed),
+        finishByValue = finishByValue.adjust({hour: 17, minute: 0, second: 0})
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
         data = {
           description: description,
-          finishBy: finishByValue.toISO8601(),
+          finishBy: finishByValue,
+          finished: false,
           user_id: assignedUserId,
           user: assignedUser,
-          created_at: Ember.DateTime.create().toISO8601(),
+          created_at: Ember.DateTime.create(),
           hasNotificationAnim: true
         },
         selectedContacts = this.getPath('params.target'),
@@ -171,7 +173,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     this.hide();
 
     var todo = Radium.store.createRecord(Radium.Todo, data);
-    Radium.todosController.add(todo);
     Radium.store.commit();
 
     todo.addObserver('isValid', function() {

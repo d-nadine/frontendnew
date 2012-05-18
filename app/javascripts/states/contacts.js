@@ -6,13 +6,6 @@ Radium.ContactsPage = Ember.State.extend({
       isFirstRun: true,
       enter: function(manager) {
         if (this.get('isFirstRun')) {
-          if (Radium.campaignsController.get('length') <= 0) {
-            Radium.campaignsController.set(
-              'content',
-              Radium.store.findAll(Radium.Campaign)
-            );
-          }
-
           var groups = Radium.store.find(Radium.Group, {page: 0});
           // contacts = Radium.store.find(Radium.Contact, {page: 0}),
           
@@ -22,7 +15,7 @@ Radium.ContactsPage = Ember.State.extend({
           
           if (Radium.contactsController.get('length') <= 0) {
             Radium.contactsController.setProperties({
-              content: Radium.store.findAll(Radium.Contact),
+              content: Radium.store.find(Radium.Contact, {page: 1}),
               totalPages: 1
             });
           }

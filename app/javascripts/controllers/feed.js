@@ -19,22 +19,15 @@ Radium.feedController = Ember.Object.extend({
     'email': 'Email'
   },
 
-  _todoIds: [],
-  _contactIds: [],
-  _campaignIds: [],
-  _call_listIds: [],
-  _dealIds: [],
-  _meetingIds: [],
-  _emailIds: [],
-
   add: function(activity) {
     var content = this.get('content'),
         kind = activity.kind,
+        timezone = new Date().getTimezoneOffset(),
         // Parse the timestamp from the server with the proper timezone set.
         parsedDate = Ember.DateTime.parse(
             activity.timestamp, 
             Ember.DATETIME_ISO8601
-        ),
+        ).adjust({timezone: timezone}),
         dateString = parsedDate.toFormattedString('%B %D, %Y'),
         hash = parsedDate.toFormattedString('%Y-%m-%d'),
         ref = activity[kind] || activity.reference[kind],
@@ -53,31 +46,12 @@ Radium.feedController = Ember.Object.extend({
 
     if (!this.dates[hash]) {
       var group = Radium.FeedGroup.create({
-            date: dateString,
+            date: parsedDate,
             sortValue: hash,
             isToday: function() {
               var today = Radium.appController.get('today').toFormattedString('%Y-%m-%d');
               return this.get('sortValue') === today;
             }.property('sortValue').cacheable(),
-            ongoingTodos: Radium.Todo.filter(function(data) {
-              var timestamp = data.get('created_at'),
-                  updatedAt = Ember.DateTime.parse(data.get('updated_at')),
-                  lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),
-                  regex = new RegExp(lookupDate[0]);
-                  
-              return regex.test(hash);
-            }),
-            sortedOngoing: function() {
-              return this.get('ongoingTodos').slice(0).sort(function(a, b) {
-                var date1 = a.get('createdAt'),
-                    date2 = b.get('createdAt');
-
-                if (date1 > date2) return 1;
-                if (date1 < date2) return -1;
-                return 0;
-              });
-            }.property('ongoingTodos.@each').cacheable(),
-
             historical: Radium.Activity.filter(function(data) {
               var timestamp = data.get('timestamp'),
                   lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
