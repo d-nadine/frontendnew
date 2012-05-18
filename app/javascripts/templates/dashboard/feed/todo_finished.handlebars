@@ -1,6 +1,8 @@
 Finished:
 {{#if isCall}}
-  Call <a href="/contacts/{{unbound reference.todo.reference.contact.id}}">{{reference.todo.reference.contact.name}}</a>
+  {{#with reference.todo.reference.contact}}
+    Call <a href="/contacts/{{unbound id}}">{{name}}</a>
+  {{/with}}
 {{else}}
   {{reference.todo.description}}
 {{/if}}
