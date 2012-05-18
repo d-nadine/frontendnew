@@ -2,16 +2,15 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   templateName: 'todo_form',
 
-  // finishByBinding: 'Radium.todosFormController.finishBy',
-  finishBy: function() {
-    var now = Ember.DateTime.create();
+  finishBy: Ember.computed(function(key, value) {
+    var date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : Ember.DateTime.create();
 
-    if (now.get('hour') >= 17) {
-      return now.advance({day: 1, hour: 17, minute: 0});
+    if (date.get('hour') >= 17) {
+      return date.advance({day: 1, hour: 17, minute: 0});
     } else {
-      return now.adjust({hour: 17, minute: 0})
+      return date.adjust({hour: 17, minute: 0})
     }
-  }.property().cacheable(),
+  }).property().cacheable(),
 
   headerContext: function() {
     var params = this.get('params'),
@@ -38,7 +37,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         differentYearString = '%A, %e/%D/%Y',
         format = (date.get('year') !== currentYear) ? differentYearString : sameYearString;
     return date.toFormattedString(format);
-  }.property('finishBy'),
+  }.property('finishBy').cacheable(),
 
   description: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
@@ -103,27 +102,28 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     elementId: 'finish-by-date',
     name: 'finish-by-date',
     classNames: ['input-small'],
-    valueBinding: Ember.Binding.transform({
-      to: function(value, binding) {
-        return value.toFormattedString('%Y-%m-%d');
-      },
-      from: function(value, binding) {
-        var dateValues,
-            date = binding.getPath('parentView.finishBy');
+    // valueBinding: Ember.Binding.transform({
+    //   to: function(value, binding) {
+    //     return value.toFormattedString('%Y-%m-%d');
+    //   },
+    //   from: function(value, binding) {
+    //     var dateValues,
+    //         date = binding.getPath('parentView.finishBy');
         
-        if (value) {
-          dateValues = value.split('-');
-        } else {
-          dateValues = binding.get('_cachedDate').split('-');
-        }
+    //     if (value) {
+    //       dateValues = value.split('-');
+    //     } else {
+    //       dateValues = binding.get('_cachedDate').split('-');
+    //     }
         
-        return date.adjust({
-          year: parseInt(dateValues[0]),
-          month: parseInt(dateValues[1]),
-          day: parseInt(dateValues[2])
-        });
-      }
-    }).from('parentView.finishBy')
+    //     return date.adjust({
+    //       year: parseInt(dateValues[0]),
+    //       month: parseInt(dateValues[1]),
+    //       day: parseInt(dateValues[2])
+    //     });
+    //   }
+    // }).from('parentView.finishBy')
+    valueBinding: Ember.Binding.dateTime('%Y-%m-%d').from('parentView.finishBy')
   }),
 
   submitForm: function() {

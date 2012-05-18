@@ -1,7 +1,7 @@
 Radium.Todo = Radium.Core.extend({
   kind: DS.attr('todoKind'),
   description: DS.attr('string'),
-  finishBy: DS.attr('dateTime', {
+  finishBy: DS.attr('datetime', {
     key: 'finish_by'
   }),
   sortValue: function() {

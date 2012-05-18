@@ -1173,7 +1173,6 @@ Ember.Binding.dateTime = function(format) {
 };
 
 if ('DS' in window) {
-
   DS.attr.transforms.datetime = {
     from: function(serialized) {
       var type = typeof serialized;

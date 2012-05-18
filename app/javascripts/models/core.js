@@ -4,14 +4,14 @@
 */
 
 Radium.Core = DS.Model.extend({
-  createdAt: DS.attr('dateTime', {
+  createdAt: DS.attr('datetime', {
     key: 'created_at'
   }),
-  updatedAt: DS.attr('dateTime', {
+  updatedAt: DS.attr('datetime', {
     key: 'updated_at'
   }),
-  updated_at: DS.attr('dateTime'),
-  created_at: DS.attr('dateTime'),
+  updated_at: DS.attr('datetime'),
+  created_at: DS.attr('datetime'),
 
   // @returns {Ember.DateTime}
   // rawDate: function() {
