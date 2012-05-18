@@ -5,10 +5,12 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   finishBy: Ember.computed(function(key, value) {
     var date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : Ember.DateTime.create();
 
+    date.adjust({hour: 17, minute: 0});
+
     if (date.get('hour') >= 17) {
-      return date.advance({day: 1, hour: 17, minute: 0});
+      return date.advance({day: 1});
     } else {
-      return date.adjust({hour: 17, minute: 0})
+      return date;
     }
   }).property().cacheable(),
 
@@ -132,10 +134,11 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         targetType = this.getPath('params.type'),
         contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
-        finishByDate = this.$('#finish-by-date').val(),
-        finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
-        finishByValue = Ember.DateTime.create(finishByParsed),
-        finishByValue = finishByValue.adjust({hour: 17, minute: 0, second: 0})
+        finishByValue = this.get('finishBy').adjust({
+                          hour: 17, 
+                          minute: 0, 
+                          second: 0
+                        }),
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
         data = {

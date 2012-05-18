@@ -52,6 +52,7 @@ Radium.Todo = Radium.Core.extend({
     var today = Radium.appController.get('today'),
         yesterday = today.advance({day: -1}),
         finishBy = this.get('finishBy');
+        
     return Ember.DateTime.compare(today, finishBy) === 1 && !this.get('finished');
   }.property('finishBy', 'finished').cacheable()
 });

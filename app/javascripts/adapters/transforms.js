@@ -83,27 +83,32 @@ DS.attr.transforms.inviteState = {
   }
 };
 
-DS.attr.transforms.dateTime = {
-  from: function(serialized) {
-    var type = typeof serialized;
+DS.attr.transforms.datetime = {
+    from: function(serialized) {
+      var type = typeof serialized;
 
-    if (type === "string" || type === "number") {
-      var timezone = new Date().getTimezoneOffset();
-      return Ember.DateTime.parse(serialized).adjust({
-        timezone: timezone
-      });
-    } else if (serialized === null || serialized === undefined) {
-      // if the value is not present in the data,
-      // return undefined, not null.
-      return serialized;
-    } else {
-      return null;
-    }
-  },
-  to: function(date) {
-    return date.toISO8601();
-  }
-};
+      if (type === "string" || type === "number") {
+        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format).adjust({timezone: new Date().getTimezoneOffset()});
+      } else if (Em.none(serialized)) {
+        return serialized;
+      } else {
+        return null;
+      }
+    },
+
+    to: function(deserialized) {
+      if (deserialized instanceof Ember.DateTime) {
+        deserialized.adjust({'timezone': 0});
+        return deserialized.toFormattedString(DS.attr.transforms.datetime.format);
+      } else if (deserialized === undefined) {
+        return undefined;
+      } else {
+        return null;
+      }
+    },
+
+    format: Ember.DATETIME_ISO8601
+  };
 
 // Overwrite Ember Data's date to keep date's ISO8601 formatted.
 DS.attr.transforms.date.to = function(date) {
