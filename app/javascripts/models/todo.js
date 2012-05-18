@@ -12,7 +12,7 @@ Radium.Todo = Radium.Core.extend({
   callList: DS.hasOne('Radium.CallList', {
     key: 'call_list'
   }),
-  isCallList: function() {
+  isCall: function() {
     return (this.get('kind') === 'call') ? true : false;
   }.property('kind').cacheable(),
   contact: DS.hasOne('Radium.Contact', {
