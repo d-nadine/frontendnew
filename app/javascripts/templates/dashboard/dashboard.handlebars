@@ -38,8 +38,8 @@
                 <hr>
               {{/if}}
 
-              {{#if sortedDueToday.length}}
-                {{#each sortedDueToday}}
+              {{#if isTodayEmpty}}
+                {{#each sortedOngoing}}
                   {{view Radium.FeedView contentBinding="this"}}
                 {{/each}}
                 <hr>

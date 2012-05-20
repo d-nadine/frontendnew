@@ -9,6 +9,64 @@ Radium.feedController = Ember.Object.extend({
 
   */
 
+  init: function() {
+    var pastDates = this.looper(-1, 30),
+        today = this.createDateGroup(Ember.DateTime.create()),
+        futureDates = this.looper(1, 15),
+        dates = pastDates.concat(today),
+        dates = futureDates.concat(dates);
+    this.set('dates', dates);
+    console.log(this.get('dates'));
+  },
+
+  // Lifted from Underscore.js
+  range: function(start, stop, step) {
+    if (arguments.length <= 1) {
+      stop = start || 0;
+      start = 0;
+    }
+    step = arguments[2] || 1;
+
+    var len = Math.max(Math.ceil((stop - start) / step), 0);
+    var idx = 0;
+    var range = new Array(len);
+
+    while(idx < len) {
+      range[idx++] = start;
+      start += step;
+    }
+
+    return range;
+  },
+
+  looper: function(dir, limit) {
+    var group = Ember.A([]),
+        limit = this.range(limit),
+        startDate = Ember.DateTime.create();
+    limit.forEach(function() {
+      var newDate = startDate.advance({day: dir}),
+          dateGroup = this.createDateGroup(newDate);
+
+      // tick the date up/down
+      startDate = newDate;
+      if (dir > 0) {
+        group.insertAt(0, dateGroup);
+      } else {
+        group.pushObject(dateGroup);
+      }
+    }, this);
+    return group;
+  },
+
+  createDateGroup: function(date) {
+    return Radium.FeedGroup.create({
+            date: date,
+            sortValue: date.toFormattedString('%Y-%m-%d')
+          });
+  },
+
+  dates: Ember.A([]),
+
   modelTypes: {
     'todo': 'Todo',
     'contact': 'Contact',
@@ -48,20 +106,6 @@ Radium.feedController = Ember.Object.extend({
       var group = Radium.FeedGroup.create({
             date: parsedDate,
             sortValue: hash,
-            isToday: function() {
-              var today = Radium.appController.get('today').toFormattedString('%Y-%m-%d');
-              return this.get('sortValue') === today;
-            }.property('sortValue').cacheable(),
-            historical: Radium.Activity.filter(function(data) {
-              var timestamp = data.get('timestamp'),
-                  lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
-              return lookupDate[0] === hash && data.get('scheduled') !== true;
-            }),
-            sortedHistorical: function() {
-              return this.get('historical').slice(0).sort(function(a, b) {
-                return a.get('timestamp') - b.get('timestamp');
-              });
-            }.property('historical.@each').cacheable()
           }),
           length = this.getPath('content.length'),
           idx = this.binarySearch(group.get('sortValue'), 0, length);

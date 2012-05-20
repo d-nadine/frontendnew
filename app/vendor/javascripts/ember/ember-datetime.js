@@ -1173,12 +1173,13 @@ Ember.Binding.dateTime = function(format) {
 };
 
 if ('DS' in window) {
+
   DS.attr.transforms.datetime = {
     from: function(serialized) {
       var type = typeof serialized;
 
       if (type === "string" || type === "number") {
-        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format);
+        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format).adjust({timezone: new Date().getTimezoneOffset()});;
       } else if (Em.none(serialized)) {
         return serialized;
       } else {

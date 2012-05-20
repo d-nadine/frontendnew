@@ -6,7 +6,7 @@ Radium.ContactsPage = Ember.State.extend({
       isFirstRun: true,
       enter: function(manager) {
         if (this.get('isFirstRun')) {
-          var groups = Radium.store.find(Radium.Group, {page: 0});
+          var groups = Radium.store.find(Radium.Group, {page: 'all'});
           // contacts = Radium.store.find(Radium.Contact, {page: 0}),
           
           groups.addObserver('isLoaded', function() {

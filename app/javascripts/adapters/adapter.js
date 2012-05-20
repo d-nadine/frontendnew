@@ -214,6 +214,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     fetchPage();
   },
 
+  // Disable for now, probably will only make selective requests
   // findAll: function(store, type, options) {
   //   debugger;
   //   var defaults = {local: false},
