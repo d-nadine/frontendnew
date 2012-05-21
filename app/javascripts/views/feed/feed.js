@@ -97,20 +97,25 @@ Radium.FeedView = Ember.View.extend({
   },
 
   addCallTask: function(event) {
-    var id = this.getPath('content.reference.contact.id'),
+    var contact = this.getPath('content.reference.contact'),
         kind = this.getPath('content.kind'),
         user = this.getPath('content.' + kind + '.user'),
         userId = this.getPath('content.reference.' + kind + '.user'),
         todo = Radium.store.createRecord(Radium.Todo, {
           kind: "call",
+          isCall: true,
           user_id: userId,
           user: user,
+          reference: contact,
           created_at: Ember.DateTime.create().toISO8601(),
-          finishBy: Radium.Utils.finishByDate().toISO8601()
+          finishBy: Radium.Utils.finishByDate(),
+          // Have to fake the response from the server, where the timezone is 0, so the filters update instantly.
+          finish_by: Radium.Utils.finishByDate().toTimezone().toISO8601(),
+          hasNotificationAnim: true
         });
         
     Radium.Todo.reopenClass({
-      url: 'contacts/%@/todos'.fmt(id),
+      url: 'contacts/%@/todos'.fmt(contact.id),
       root: 'todo'
     });
 

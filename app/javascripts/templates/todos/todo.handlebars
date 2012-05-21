@@ -16,9 +16,9 @@
 
   {{#if todo.isCall}}
     {{#if todo.description}}
-      {{todo.description}} for <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> for {{todo.description}}
     {{else}}
-      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{unbound todo.reference.contact.name}}</a> 
     {{/if}}
   {{/if}}
   

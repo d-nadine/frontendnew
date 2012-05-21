@@ -15,11 +15,11 @@ DS.attr.transforms.array = {
 // Object transform
 DS.attr.transforms.object = {
   from: function(serialized) {
-    return Em.none(serialized) ? {} : serialized;
+    return Ember.none(serialized) ? {} : serialized;
   },
 
   to: function(deserialized) {
-    return Em.none(serialized) ? {} : serialized;
+    return Ember.none(deserialized) ? {} : deserialized;
   }
 };
 

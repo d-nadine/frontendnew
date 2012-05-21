@@ -51,6 +51,12 @@
                   </div>
                 {{/if}}
               {{/with}}
+              {{#if isPast}}
+                <hr>
+                {{#each sortedHistorical}}
+                  {{view Radium.HistoricalFeedView contentBinding="this"}}
+                {{/each}}
+              {{/if}}
             {{/if}}
             {{#if isFuture}}
               {{#each sortedOngoingTodos}}

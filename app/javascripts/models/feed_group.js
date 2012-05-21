@@ -19,11 +19,11 @@ Radium.FeedGroup = Ember.Object.extend({
 
   // Open Todos
   ongoingTodos: function() {
-    var sortValue = this.get('date');
+    var date = this.get('date');
     return Radium.Todo.filter(function(data) {
       var finishByDate = Ember.DateTime.parse(data.get('finish_by'))
                           .toTimezone(CONFIG.dates.timezone);
-      return Ember.DateTime.compareDate(finishByDate, sortValue) === 0;
+      return Ember.DateTime.compareDate(finishByDate, date) === 0;
     });
   }.property().cacheable(),
 
@@ -39,11 +39,11 @@ Radium.FeedGroup = Ember.Object.extend({
   }.property('ongoingTodos.@each').cacheable(),
 
   historical: function() {
-    var sortValue = this.get('sortValue');
+    var date = this.get('date');
     return Radium.Activity.filter(function(data) {
-      var timestamp = data.get('timestamp'),
-          lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
-      return lookupDate[0] === sortValue && data.get('scheduled') !== true;
+      var timestamp = Ember.DateTime.parse(data.get('timestamp'))
+                          .toTimezone(CONFIG.dates.timezone);
+      return Ember.DateTime.compareDate(timestamp, date) === 0 && data.get('scheduled') !== true;
     });
   }.property().cacheable(),
 
