@@ -83,6 +83,35 @@ DS.attr.transforms.inviteState = {
   }
 };
 
+DS.attr.transforms.datetime = {
+  from: function(serialized) {
+    var type = typeof serialized;
+
+    if (type === "string" || type === "number") {
+      var timezone = new Date().getTimezoneOffset(),
+          serializedDate = Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format);
+      return serializedDate.toTimezone(timezone);
+    } else if (Em.none(serialized)) {
+      return serialized;
+    } else {
+      return null;
+    }
+  },
+
+  to: function(deserialized) {
+    if (deserialized instanceof Ember.DateTime) {
+      var normalized = deserialized.advance({timezone: 0});
+      return normalized.toFormattedString(DS.attr.transforms.datetime.format);
+    } else if (deserialized === undefined) {
+      return undefined;
+    } else {
+      return null;
+    }
+  },
+
+  format: Ember.DATETIME_ISO8601
+};
+
 // Overwrite Ember Data's date to keep date's ISO8601 formatted.
 DS.attr.transforms.date.to = function(date) {
   var type = typeof date;

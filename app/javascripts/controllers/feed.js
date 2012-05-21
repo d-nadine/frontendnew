@@ -12,11 +12,12 @@ Radium.feedController = Ember.Object.extend({
   init: function() {
     var pastDates = this.looper(-1, 30),
         today = this.createDateGroup(Ember.DateTime.create()),
-        futureDates = this.looper(1, 15),
-        dates = pastDates.concat(today),
-        dates = futureDates.concat(dates);
-    this.set('dates', dates);
-    console.log(this.get('dates'));
+        futureDates = this.looper(1, 15);
+    
+    futureDates.pushObject(today);
+    futureDates.pushObjects(pastDates);
+
+    this.set('dates', futureDates);
   },
 
   // Lifted from Underscore.js

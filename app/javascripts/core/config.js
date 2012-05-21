@@ -8,3 +8,7 @@ CONFIG.ajax = {
     "Accept": "application/json"
   }
 };
+
+CONFIG.dates = {
+  timezone: new Date().getTimezoneOffset()
+}

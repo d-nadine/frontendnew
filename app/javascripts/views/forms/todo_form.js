@@ -3,15 +3,14 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   templateName: 'todo_form',
 
   finishBy: Ember.computed(function(key, value) {
-    var date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : Ember.DateTime.create();
+    var today = Ember.DateTime.create(),
+        date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : today;
 
-    date.adjust({hour: 17, minute: 0});
-
-    if (date.get('hour') >= 17) {
-      return date.advance({day: 1});
-    } else {
-      return date;
+    if (date.get('hour') >= 17 && Ember.DateTime.compareDate(date, today) === 0) {
+      date = date.advance({day: 1});
     }
+
+    return date;
   }).property().cacheable(),
 
   headerContext: function() {
@@ -30,15 +29,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       return "Add a Todo for %@".fmt(dateString);
     }
     
-  }.property('finishBy').cacheable(),
-
-  headerDate: function() {
-    var currentYear = Radium.appController.getPath('today.year'),
-        date = this.get('finishBy'),
-        sameYearString = '%A, %e/%D',
-        differentYearString = '%A, %e/%D/%Y',
-        format = (date.get('year') !== currentYear) ? differentYearString : sameYearString;
-    return date.toFormattedString(format);
   }.property('finishBy').cacheable(),
 
   description: Ember.TextArea.extend(Ember.TargetActionSupport, {
@@ -104,6 +94,10 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     elementId: 'finish-by-date',
     name: 'finish-by-date',
     classNames: ['input-small'],
+    minDate: function() {
+      var now = Ember.DateTime.create();
+      return (now.get('hour') >= 17) ? '+1d' : new Date();
+    }.property().cacheable(),
     // valueBinding: Ember.Binding.transform({
     //   to: function(value, binding) {
     //     return value.toFormattedString('%Y-%m-%d');

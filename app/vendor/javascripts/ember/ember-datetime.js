@@ -1179,7 +1179,7 @@ if ('DS' in window) {
       var type = typeof serialized;
 
       if (type === "string" || type === "number") {
-        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format).adjust({timezone: new Date().getTimezoneOffset()});;
+        return Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format);
       } else if (Em.none(serialized)) {
         return serialized;
       } else {
