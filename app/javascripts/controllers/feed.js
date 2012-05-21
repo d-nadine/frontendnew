@@ -68,6 +68,17 @@ Radium.feedController = Ember.Object.extend({
 
   dates: Ember.A([]),
 
+  datesWithContent: function() {
+    return this.get('dates').filter(function(date) {
+      var kind = date.get('dateKind');
+      if (kind === 'today' || date.get('hasVisibleContent')) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }.property('dates', 'dates.@each.hasVisibleContent').cacheable(),
+
   modelTypes: {
     'todo': 'Todo',
     'contact': 'Contact',

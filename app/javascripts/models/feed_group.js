@@ -17,6 +17,27 @@ Radium.FeedGroup = Ember.Object.extend({
     return Ember.DateTime.compareDate(this.get('date'), today) < 0;
   }.property('date').cacheable(),
 
+  dateKind: function() {
+    var dateKind,
+        today = Ember.DateTime.create(),
+        diff = Ember.DateTime.compareDate(this.get('date'), today);
+    switch (true) {
+      case (diff === 0):
+        dateKind = 'today';
+      break;
+      case (diff < 0):
+        dateKind = 'past';
+      break;
+      case (diff === 1):
+        dateKind = 'future';
+      break;
+      default:
+        dateKind = 'today';
+      break;
+    }
+    return dateKind;
+  }.property('date').cacheable(),
+
   // Open Todos
   ongoingTodos: function() {
     var date = this.get('date');
@@ -53,9 +74,18 @@ Radium.FeedGroup = Ember.Object.extend({
     });
   }.property('historical.@each').cacheable(),
 
-  hasVisibleContentBinding: Ember.Binding.or(
-    'historical.length',
-    'ongoingTodos.length',
-    'isToday'
-  ),
+  hasVisibleContent: function() {
+    var dateKind = this.get('dateKind');
+    switch (true) {
+      case (this.getPath('ongoingTodos.length') && dateKind === 'future'):
+        return true;
+      break;
+      case ((this.getPath('historical.length') && dateKind === 'past')):
+        return true;
+      break;
+      default:
+        return false;
+      break;
+    }
+  }.property('ongoingTodos.@each', 'historical.@each').cacheable()
 });

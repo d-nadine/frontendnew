@@ -10,7 +10,7 @@ Radium.FeedView = Ember.View.extend({
     if (this.getPath('content.hasNotificationAnim')) {
 
       var $newRow = this.$(),
-          offset = $newRow.offset().top - 90;
+          offset = $newRow.offset().top - 200;
 
       $('html, body').animate({
         scrollTop: offset

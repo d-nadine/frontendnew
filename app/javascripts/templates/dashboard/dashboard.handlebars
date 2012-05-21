@@ -25,51 +25,8 @@
     <div class="row">
       <div class="span9">
         {{#with Radium.dashboardFeedController}}
-          {{#each dates}}
-          {{#if hasVisibleContent}}
-            <div class="page-header">
-              <h3>{{formatDate date}}</h3>
-            </div>
-            {{#if isToday}}
-              {{#with Radium.todosController}}
-                {{#if sortedOverdueTodos}}
-                  <h4>Overdue</h4>
-                  {{#each sortedOverdueTodos}}
-                    {{view Radium.FeedView contentBinding="this"}}
-                  {{/each}}
-                  <hr>
-                {{/if}}
-
-                {{#if sortedDueToday}}
-                  {{#each sortedDueToday}}
-                    {{view Radium.FeedView contentBinding="this"}}
-                  {{/each}}
-                  <hr>
-                {{else}}
-                  <div class="well">
-                    <h3 align="center">Nothing going on today yet...</h3>
-                  </div>
-                {{/if}}
-              {{/with}}
-              {{#if isPast}}
-                <hr>
-                {{#each sortedHistorical}}
-                  {{view Radium.HistoricalFeedView contentBinding="this"}}
-                {{/each}}
-              {{/if}}
-            {{/if}}
-            {{#if isFuture}}
-              {{#each sortedOngoingTodos}}
-                {{view Radium.FeedView contentBinding="this"}}
-              {{/each}}
-            {{/if}}
-            {{#if isPast}}
-              {{#each sortedHistorical}}
-                {{view Radium.HistoricalFeedView contentBinding="this"}}
-              {{/each}}
-            {{/if}}
-
-          {{/if}}
+          {{#each datesWithContent}}
+            {{view Radium.FeedDateGroupView contentBinding="this"}}
           {{/each}}
         {{/with}}
       </div>
