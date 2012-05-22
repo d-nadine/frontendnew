@@ -322,6 +322,18 @@ fieldset legend {
     }
   }
 
+  .create-form {
+    width: 700px;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    top: 30px;
+
+    .well {
+      @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+    }
+  }
+
   &.expanded {
     border: 1px solid #ECECEC;
 
@@ -378,18 +390,6 @@ fieldset legend {
 
     select {
       width: 140px;
-    }
-
-    .create-form {
-      width: 700px;
-      position: absolute;
-      left: -550px;
-      z-index: 999;
-      top: 30px;
-
-      .well {
-        @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
-      }
     }
   }
 
