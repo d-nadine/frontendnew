@@ -6,4 +6,6 @@ Finished:
 {{else}}
   {{unbound reference.todo.description}}
 {{/if}}
+{{#if user}}
  (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{/if}}

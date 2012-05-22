@@ -8,4 +8,6 @@ Assigned:
      <i class="icon-todo"></i>
     {{unbound reference.todo.description}}
   {{/if}}
-   (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{#if user}}
+ (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{/if}}
