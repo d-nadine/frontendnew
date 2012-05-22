@@ -1,1 +1,11 @@
-New Todo: {{reference.todo.description}}  (<a href="/users/{{unbound owner.user.id}}">{{owner.user.name}}</a>)
+New Todo: 
+{{#if isCall}}
+  {{#with reference.todo.reference.contact}}
+    Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
+  {{/with}}
+{{else}}
+  {{unbound reference.todo.description}}
+{{/if}}
+{{#if user}}
+ (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{/if}}

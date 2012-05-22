@@ -44,26 +44,18 @@ Radium.TodoEditView = Ember.View.extend({
     classNames: ['span2'],
     valueBinding: Ember.Binding.transform({
       to: function(value, binding) {
-        var date = Ember.DateTime.create(new Date(value));
-        return date.toFormattedString('%Y-%m-%d');
+        return value.toFormattedString('%Y-%m-%d');
       },
       from: function(value, binding) {
-        var dateValues;
-        if (value) {
-          dateValues = value.split('-');
-          return new Date(Date.UTC(
-            dateValues[0], 
-            dateValues[1] - 1, 
-            dateValues[2], 
-            17));
-        } else {
-          return new Date().setHours(17);
-        }
+        var newFinishBy = Ember.DateTime.parse(value, "%Y-%m-%d"),
+            // Adjust to 5PM due time.
+            newFinishByTime = newFinishBy.adjust({hour: 17, minute: 0, second: 0});
+        return newFinishByTime;
       }
     }).from('parentView.todo.finishBy'),
 
     valueDidChange: function() {
-      Ember.run(function() {
+      Ember.run.next(function() {
         Radium.store.commit();
       });
     }.observes('value')

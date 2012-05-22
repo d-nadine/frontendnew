@@ -5,7 +5,7 @@
  {{view Radium.LabelView labelBinding="todo.reference.contact.status"}}
 {{/if}}
 <span class="content">
-  {{#unless todo.isCallList}}
+  {{#unless todo.isCall}}
     {{#if todo.canEdit}}
       {{inlineTextField todo.description}}
     {{else}}
@@ -14,9 +14,12 @@
   {{/unless}}
 
 
-  {{#if todo.isCallList}}
-    {{#if todo.isSaving}}Assigning...{{/if}}
-    <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> 
+  {{#if todo.isCall}}
+    {{#if todo.description}}
+      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> for {{todo.description}}
+    {{else}}
+      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{unbound todo.reference.contact.name}}</a> 
+    {{/if}}
   {{/if}}
   
   (<a href="/users/{{unbound todo.user.id}}">{{todo.user.abbrName}}</a>)

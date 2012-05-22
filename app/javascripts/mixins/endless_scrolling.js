@@ -16,6 +16,9 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     }
   },
 
+  isFirstRun: true,
+  noData: false,
+
   loadFeed: function() {
     $(window).off('scroll');
     // View Settings
@@ -28,7 +31,8 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     // Local variables
     var self = this,
         endDate = this.get('newestDateLoaded') || Radium.appController.get('today'),
-        startDate = endDate.adjust({day: endDate.get('day') - 3});
+        endDate = endDate.advance({day: 1}),
+        startDate = endDate.adjust({day: endDate.get('day') - 2});
 
     if (Ember.DateTime.compare(startDate, accountCreatedAtDate) === 1) {
       Ember.run.next(function() {
@@ -47,6 +51,15 @@ Radium.EndlessScrolling = Ember.Mixin.create({
 
       $.ajax(request)
         .success(function(data, status, xhr) {
+
+          // test to make sure the feed isn't empty on first load
+          var keys = Ember.keys(data);
+          if (self.get('isFirstRun') && !data[keys[0]].length) {
+            self.set('noData', true);
+          } else {
+            self.set('isFirstRun', false);
+            self.set('noData', false);
+          }
 
           self.setProperties({
             oldestDateLoaded: endDate,

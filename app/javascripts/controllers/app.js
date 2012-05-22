@@ -9,5 +9,8 @@ Radium.appController = Ember.Object.create({
   selectedForm: null,
   params: null,
 
-  today: Ember.DateTime.create()
+  today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),
+  todayString: function() {
+    return this.get('today').toFormattedString("%Y-%m-%d");
+  }.property('today').cacheable()
 });

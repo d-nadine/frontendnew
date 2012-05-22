@@ -8,13 +8,10 @@
   </div>
   
   <div class="span9">
-    <div class="row">
-      {{view Radium.GlobalSearchTextView}}
-    </div>
     {{view Radium.AnnouncementsView}}
     <div id="form-container"></div>
         
-    <div class="row">
+    <div class="row" style="display:none">
       <div class="span9">
        {{#view Ember.View tagName="ul" class="nav nav-tabs"}}
           <li class="active"><a href="#" {{bindAttr data-feed-group="today"}}>Daily</a></li>
@@ -22,33 +19,26 @@
           <li><a href="#" {{bindAttr data-feed-group="month"}}>This Month</a></li>
           <li><a href="#" {{bindAttr data-feed-group="quarter"}}>This Quarter</a></li>
         {{/view}}
-        <div class="page-header" style="display:none">
-          <h3>{{Radium.accountController.content.name}}'s Coffee Cup Summary</h3>
-        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="span9">
-        {{#with Radium.dashboardFeedController}}
-          {{#each content}}
-            {{#if hasVisibleContent}}
-              <div class="page-header">
-                <h3>{{formatDate date}}</h3>
-              </div>
-              {{#if sortedOngoing}}
-                {{#each sortedOngoing}}
-                  {{view Radium.FeedView contentBinding="this"}}
-                {{/each}}
-                <hr>
+        {{#if noData}}
+          <div class="well">
+            <h3 align="center">
+              Add your <a href="#" {{action addTodo target="Radium.dashboardFeedController"}}>first todo</a>.
+            </h3>
+          </div>
+        {{else}}
+          {{#with Radium.dashboardFeedController}}
+            {{#each dates}}
+              {{#if hasVisibleContent}}
+                {{view Radium.FeedDateGroupView contentBinding="this"}}
               {{/if}}
-              
-              {{#each historical}}
-                {{view Radium.HistoricalFeedView contentBinding="this"}}
-              {{/each}}
-            {{/if}}
-          {{/each}}
-        {{/with}}
+            {{/each}}
+          {{/with}}
+        {{/if}}
       </div>
     </div>
 

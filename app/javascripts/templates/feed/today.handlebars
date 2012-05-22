@@ -1,0 +1,16 @@
+{{#with Radium.todosController}}
+  {{#if sortedOverdueTodos}}
+    <h4>Overdue</h4>
+    {{#each sortedOverdueTodos}}
+      {{view Radium.FeedView contentBinding="this"}}
+    {{/each}}
+    <hr>
+  {{/if}}
+
+  {{#if sortedDueToday}}
+    {{#each sortedDueToday}}
+      {{view Radium.FeedView contentBinding="this"}}
+    {{/each}}
+    <hr>
+  {{/if}}
+{{/with}}

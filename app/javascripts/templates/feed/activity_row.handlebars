@@ -1,19 +1,17 @@
 {{#view feedHeaderView class="row"}}
-  <div class="span9 feed-header">
+  <div class="span9 feed-header" {{bindAttr title="content.id"}}>
     <div class="row">
-      <div class="span2">
-        <span class="timestamp">
-          {{view iconView}}
-          {{formatTime content.createdAt}}
-        </span>
+      <div class="span1">
+        {{view expandToggleIconView}}
       </div>
-      <div class="span7 feed-description">
+      <div class="span8 feed-description">
         <p>
+          {{view iconView}}
           <span class="content">
             {{view Radium.TodoView todoBinding="content"}}
           </span>
           {{#if content.activity.comments.length}}
-            <i class="icon-comment comment-toggle-button"></i>
+            <i class="icon-comments comment-toggle-button"></i>
             ({{content.activity.comments.length}})
           {{/if}}
         </p>
@@ -22,9 +20,9 @@
     {{#if isActionsVisible}}
       <p class="feed-actions">
         {{#if content.canEdit}}
-          <a href="#" {{action "toggleEditMode" target="parentView"}}><i class="icon-pencil"></i> Edit</a>
+          <a href="#" {{action "toggleEditMode" target="parentView"}}><i class="icon-edit"></i> Edit</a>
         {{/if}}
-        <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-check"></i> Add Todo</a>
+        <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-add-todo"></i> Add Todo</a>
       </p>
     {{/if}}
   </div> <!-- /.feed-header -->
@@ -36,4 +34,8 @@
     </div>
   </div>
 {{/if}}
-{{view activityActionsView}}
+<div class="row">
+  <div class="span9">
+    {{view activityActionsView}}
+  </div>
+</div>

@@ -1,5 +1,4 @@
 {{#view cancelFormButton class="close close-form"}}×{{/view}}
-<legend>{{headerContext}} for {{headerDate}}</legend>
 <fieldset class="control-group">
   {{view description}}
   {{#if isError}}
@@ -7,19 +6,22 @@
   {{/if}}
 </fieldset>
 <fieldset class="control-group">
-  <label for="assigned-to">Assigned To</label>
-  {{view assignToSelect}}
-  <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
+  <label class="radium-control-label" for="assigned-to">Assigned To</label>
+  <div class="controls">
+    {{view assignToSelect}}
+    <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
+  </div>
 </fieldset>
 
-<div class="more-options" {{bindAttr class="hasNoOptions:hide"}}>
-  <fieldset class="control-group">
-    <label for="date">Finish By:</label>
-    {{view finishByDateField}}
+<div class="more-options form-inline" {{bindAttr class="hasNoOptions:hide"}}>
+  <fieldset>
+    <div class="inline-fieldset">
+      <label for="date">Finish By:</label>
+      {{view finishByDateField}}
+    </div>
+    <div class="inline-fieldset">
+      {{view reminderForm}}
+    </div>
   </fieldset>
-  
-  {{view reminderForm}}
 </div>
-<div class="form-actions">
-  {{view submitButton class="btn btn-primary"}}
-</div>
+{{view submitButton class="btn btn-primary pin-bottom-right"}}

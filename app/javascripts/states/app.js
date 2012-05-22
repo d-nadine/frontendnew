@@ -29,41 +29,40 @@ Radium.App = Ember.StateManager.create({
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
-    start: Ember.State.create({
-      enter: function(manager) {
-        $.when(manager.bootstrapUser())
-          .then(
-            // Load account data
-            function(data) {
-              data = data.account;
-              Radium.store.load(Radium.Account, data);
-              var account = Radium.store.find(Radium.Account, data.id);
-              Radium.accountController.set('content', account);
-              Radium.appController.setProperties({
-                isFirstRun: false,
-                isLoggedIn: true
-              });
+    enter: function(manager) {
+      this._super(manager);
+      $.when(manager.bootstrapUser())
+        .then(
+          // Load account data
+          function(data) {
+            data = data.account;
+            Radium.store.load(Radium.Account, data);
+            var account = Radium.store.find(Radium.Account, data.id);
+            Radium.accountController.set('content', account);
+            Radium.appController.setProperties({
+              isFirstRun: false,
+              isLoggedIn: true
+            });
 
-              var users = Radium.store.find(Radium.User, {page: 'all'});
+            var users = Radium.store.find(Radium.User, {page: 'all'});
 
-              users.addObserver('isLoaded', function() {
-                Radium.usersController.set('content', users);
-                manager.send('loginComplete');
-              });
-            },
-            // Error
-            function() {
-              manager.send('accountLoadFailed');
-            }
-          )
-      },
-      loginComplete: function(manager) {
-        manager.goToState('loggedIn');
-      },
-      accountLoadFailed: function(manager) {
-        manager.goToState('loggedIn.noData');
-      }
-    })
+            users.addObserver('isLoaded', function() {
+              Radium.usersController.set('content', users);
+              manager.send('loginComplete');
+            });
+          },
+          // Error
+          function() {
+            manager.send('accountLoadFailed');
+          }
+        )
+    },
+    loginComplete: function(manager) {
+      manager.goToState('loggedIn');
+    },
+    accountLoadFailed: function(manager) {
+      manager.goToState('loggedOut.error');
+    }
   }),
   
   loggedIn: Radium.LoggedIn,

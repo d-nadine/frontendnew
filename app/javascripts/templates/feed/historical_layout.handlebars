@@ -1,13 +1,16 @@
 {{#view feedHeaderView class="row"}}
-  <div class="span9 feed-header">
+  <div class="span9 feed-header" {{bindAttr title="content.id"}}>
     <div class="row">
-      <div class="span9 ">
+      <div class="span1">
+        {{view expandToggleIconView}}
+      </div>
+      <div class="span8">
         {{view iconView}}
         <p>
           {{#with content}}
             <span class="content">{{yield}}</span>
             {{#if comments.length}}
-              <i class="icon-comment"></i>
+              <i class="icon-comments"></i>
               ({{comments.length}})
             {{/if}}
           {{/with}}
@@ -16,9 +19,9 @@
     </div> <!-- /.row -->
     {{#if isActionsVisible}}
       <p class="feed-actions">
-        <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-check"></i> Add Todo</a>
+        <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-add-todo"></i> Add Todo</a>
       {{#if content.reference.contact}}
-        <a href="#" {{action "addCallTask" target="parentView"}}><i class="icon-check"></i> Add Call Todo</a>
+        <a href="#" {{action "addCallTask" target="parentView"}}><i class="icon-call"></i> Add Call Todo</a>
       {{/if}}
       </p>
     {{/if}}

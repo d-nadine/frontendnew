@@ -2,41 +2,39 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   templateName: 'todo_form',
 
-  // finishByBinding: 'Radium.todosFormController.finishBy',
-  finishBy: function() {
-    var now = Ember.DateTime.create();
+  finishBy: Ember.computed(function(key, value) {
+    var today = Ember.DateTime.create(),
+        date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : today;
 
-    if (now.get('hour') >= 17) {
-      return now.advance({day: 1, hour: 17, minute: 0});
-    } else {
-      return now.adjust({hour: 17, minute: 0})
+    if (date.get('hour') >= 17 && Ember.DateTime.compareDate(date, today) === 0) {
+      date = date.advance({day: 1});
     }
-  }.property().cacheable(),
+
+    return date;
+  }).property().cacheable(),
 
   headerContext: function() {
-    var params = this.get('params');
-
-    if (params.type === 'contacts') {
-      var name = params.target.name || params.target.get('name');
-      return "Assign a Todo to %@".fmt(name);
-    } else {
-      return "Add a Todo";
-    }
-    
-  }.property().cacheable(),
-
-  headerDate: function() {
-    var currentYear = Radium.appController.getPath('today.year'),
+    var params = this.get('params'),
+        currentYear = Radium.appController.getPath('today.year'),
         date = this.get('finishBy'),
         sameYearString = '%A, %e/%D',
         differentYearString = '%A, %e/%D/%Y',
-        format = (date.get('year') !== currentYear) ? differentYearString : sameYearString;
-    return date.toFormattedString(format);
-  }.property('finishBy'),
+        format = (date.get('year') !== currentYear) ? differentYearString : sameYearString,
+        dateString = date.toFormattedString(format);
+
+    if (params.type === 'contacts') {
+      var name = params.target.name || params.target.get('name');
+      return "Assign a Todo to %@ for %@".fmt(name, dateString);
+    } else {
+      return "Add a Todo for %@".fmt(dateString);
+    }
+    
+  }.property('finishBy').cacheable(),
 
   description: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
     attributeBindings: ['name'],
+    placeholderBinding: 'parentView.headerContext',
     name: 'description',
     classNames: ['span8'],
     action: 'submitForm',
@@ -96,27 +94,32 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     elementId: 'finish-by-date',
     name: 'finish-by-date',
     classNames: ['input-small'],
-    valueBinding: Ember.Binding.transform({
-      to: function(value, binding) {
-        return value.toFormattedString('%Y-%m-%d');
-      },
-      from: function(value, binding) {
-        var dateValues,
-            date = binding.getPath('parentView.finishBy');
+    minDate: function() {
+      var now = Ember.DateTime.create();
+      return (now.get('hour') >= 17) ? '+1d' : new Date();
+    }.property().cacheable(),
+    // valueBinding: Ember.Binding.transform({
+    //   to: function(value, binding) {
+    //     return value.toFormattedString('%Y-%m-%d');
+    //   },
+    //   from: function(value, binding) {
+    //     var dateValues,
+    //         date = binding.getPath('parentView.finishBy');
         
-        if (value) {
-          dateValues = value.split('-');
-        } else {
-          dateValues = binding.get('_cachedDate').split('-');
-        }
+    //     if (value) {
+    //       dateValues = value.split('-');
+    //     } else {
+    //       dateValues = binding.get('_cachedDate').split('-');
+    //     }
         
-        return date.adjust({
-          year: parseInt(dateValues[0]),
-          month: parseInt(dateValues[1]),
-          day: parseInt(dateValues[2])
-        });
-      }
-    }).from('parentView.finishBy')
+    //     return date.adjust({
+    //       year: parseInt(dateValues[0]),
+    //       month: parseInt(dateValues[1]),
+    //       day: parseInt(dateValues[2])
+    //     });
+    //   }
+    // }).from('parentView.finishBy')
+    valueBinding: Ember.Binding.dateTime('%Y-%m-%d').from('parentView.finishBy')
   }),
 
   submitForm: function() {
@@ -125,17 +128,21 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         targetType = this.getPath('params.type'),
         contactIds = this.get('selectedContacts').getEach('id'),
         description = this.$('#description').val(),
-        finishByDate = this.$('#finish-by-date').val(),
-        finishByParsed = Ember.DateTime.parse(finishByDate, '%Y-%m-%D'),
-        finishByValue = Ember.DateTime.create(finishByParsed),
+        finishByValue = this.get('finishBy').adjust({
+                          hour: 17, 
+                          minute: 0, 
+                          second: 0
+                        }),
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
         data = {
           description: description,
-          finishBy: finishByValue.toISO8601(),
+          finishBy: finishByValue,
+          finished: false,
           user_id: assignedUserId,
           user: assignedUser,
-          created_at: Ember.DateTime.create().toISO8601()
+          created_at: Ember.DateTime.create(),
+          hasNotificationAnim: true
         },
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
@@ -160,10 +167,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     }
     
     // Disable the form buttons
-    this.sending();
+    this.hide();
 
     var todo = Radium.store.createRecord(Radium.Todo, data);
-    Radium.todosController.add(todo);
     Radium.store.commit();
 
     todo.addObserver('isValid', function() {
@@ -181,5 +187,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     todo.addObserver('isError', function() {
       self.fail();
     });
+
+    this.close();
   }
 });

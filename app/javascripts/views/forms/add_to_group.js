@@ -87,7 +87,7 @@ Radium.AddToGroupForm = Radium.FormView.extend({
       root: 'group'
     });
 
-    this.sending();
+    this.hide();
 
     if (selectedGroup) {
       if (isBulk) {
@@ -135,6 +135,8 @@ Radium.AddToGroupForm = Radium.FormView.extend({
       url: null,
       root: null
     });
+
+    this.close();
   }
   
 });

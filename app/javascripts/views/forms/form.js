@@ -1,6 +1,6 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
-  classNames: ['well'],
+  classNames: 'well form-horizontal radium-form'.w(),
 
   // Validation properties
   hasNoOptions: true,
@@ -8,6 +8,12 @@ Radium.FormView = Ember.View.extend({
   isValid: false,
   isMatchError: null,
   invalidFields: Ember.A([]),
+
+  keyUp: function(event) {
+    if (event.keyCode === 27) {
+      Radium.FormManager.send('closeForm');
+    }
+  },
 
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
@@ -35,9 +41,11 @@ Radium.FormView = Ember.View.extend({
   },
   success: function(message) {
     var self = this;
-    self.flash('success', message);
+    // self.flash('success', message);
     self.set('isSubmitting', false);
-    this.$().slideUp('fast');
+    this.$().slideUp('fast', function() {
+      Radium.FormManager.send('closeForm');
+    });
   },
   error: function(message) {
     this.flash('error', message);
@@ -51,9 +59,11 @@ Radium.FormView = Ember.View.extend({
   },
 
   close: function() {
-    this.$().slideUp('fast', function() {
-      Radium.FormManager.send('closeForm');
-    });
+    Radium.FormManager.send('closeForm');
+  },
+
+  hide: function() {
+    this.$().hide();
   },
 
   submit: function(event) {

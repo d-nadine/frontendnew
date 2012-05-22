@@ -20,7 +20,7 @@ Radium.GroupForm = Radium.FormView.extend({
       return false;
     }
     // Disable the form buttons
-    this.sending();
+    this.hide();
 
     var contact = Radium.store.createRecord(Radium.Group, data);
     Radium.store.commit();
@@ -32,6 +32,8 @@ Radium.GroupForm = Radium.FormView.extend({
         self.fail();
       }
     });
+
+    this.close();
     
   }
 });

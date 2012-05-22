@@ -5,6 +5,7 @@ Radium.User = Radium.Person.extend({
   apiKey: DS.attr('string', {
     key: 'api_key'
   }),
+  avatar: DS.attr('object'),
   email: DS.attr('string'),
   phone: DS.attr('string'),
   account: DS.attr('number'),

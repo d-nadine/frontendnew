@@ -1,10 +1,10 @@
 Radium.Comment = Radium.Core.extend({
   dateToISO8601: function() {
-    var date = this.get('createdAt'),
-        utc = Date.parse(date);
-    return Ember.DateTime.create(utc).toISO8601();
+    return this.get('createdAt').toISO8601();
   }.property('createdAt').cacheable(),
   text: DS.attr('string'),
-  user: DS.belongsTo('Radium.User'),
+  user: DS.belongsTo('Radium.User', {
+    key: 'user'
+  }),
   attachments: DS.hasMany('Radium.Attachment')
 });

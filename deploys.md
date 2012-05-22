@@ -1,3 +1,12 @@
+* [2012-05-22 12:47 -0700] b58a269 - Joshua Jones: Fix missing styles for new placement of inline feed todo form.
+* [2012-05-17 15:50 -0700] cd2362c - Joshua Jones: [Delivers #29797447 #29793955 #29793913 #29655017] Relayout and modify todo form.
+* [2012-05-17 12:35 -0700] 8592edb - Joshua Jones: [Fixes #29749707] Inline date editing shows/posts proper date.
+* [2012-05-17 09:43 -0700] 6157df2 - Joshua Jones: [Fixes #29749613] CSS points to the correct image sprite location.
+* [2012-05-16 16:53 -0700] ac79568 - Joshua Jones: [Delivers #29654455] Add expand/close icons for feed rows.
+* [2012-05-16 12:48 -0700] 12bfe14 - Joshua Jones: Run DS commits right after a run loop.
+* [2012-05-16 11:08 -0700] f42be51 - Joshua Jones: [Delivers #29681715] Toggle form if user clicks show form action button twice.
+* [2012-05-16 10:14 -0700] 85f0285 - Joshua Jones: [Delivers #29667893] Add border around expanded feed items.
+* [2012-05-15 16:15 -0700] f20447a - Joshua Jones: Add slideDown to comments on visibility toggle.
 * [2012-05-14 21:55 -0700] 44c43e8 - Joshua Jones: Clean up todo actions, pass contact context to form.
 * [2012-05-12 01:19 -0700] a24907b - Joshua Jones: [Delivers #29317365] Refactor comments UI.
 * [2012-05-11 12:32 +0200] f4af360 - twinturbo: Format feed dates correctly

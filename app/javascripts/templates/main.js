@@ -10,11 +10,15 @@ minispade.require('radium/templates/global/topbar');
 // Feed
 minispade.require('radium/templates/feed/cluster');
 minispade.require('radium/templates/feed/date_filters');
+minispade.require('radium/templates/feed/date_group');
 minispade.require('radium/templates/feed/activity_row');
 minispade.require('radium/templates/feed/type_filters');
 minispade.require('radium/templates/feed/comment');
 minispade.require('radium/templates/feed/inline_comments');
 minispade.require('radium/templates/feed/historical_layout');
+minispade.require('radium/templates/feed/future');
+minispade.require('radium/templates/feed/today');
+minispade.require('radium/templates/feed/past');
 
 minispade.require('radium/templates/dashboard/feed/todo_created');
 minispade.require('radium/templates/dashboard/feed/todo_assigned');

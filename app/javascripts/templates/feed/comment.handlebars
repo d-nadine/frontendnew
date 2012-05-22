@@ -1,6 +1,10 @@
 {{#with comment}}
   <a href="/users/{{unbound user.id}}" class="user-avatar">
-    <img src="http://placehold.it/80x80">
+    {{#if user.avatar.small_url}}
+    <img {{bindAttr src="user.avatar.small_url"}}>
+    {{else}}
+    <img src="/images/fallback/small_default.png">
+    {{/if}}
   </a>
 
   <div class="comment-text">

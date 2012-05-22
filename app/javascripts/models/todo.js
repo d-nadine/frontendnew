@@ -1,7 +1,17 @@
 Radium.Todo = Radium.Core.extend({
+
+  didUpdate: function() {
+    var self = this;
+    Ember.run.next(function() {
+      self.set('hasAnimation', true);
+    });
+  },
+
+  hasAnimation: false,
+
   kind: DS.attr('todoKind'),
   description: DS.attr('string'),
-  finishBy: DS.attr('date', {
+  finishBy: DS.attr('datetime', {
     key: 'finish_by'
   }),
   sortValue: function() {
@@ -12,7 +22,7 @@ Radium.Todo = Radium.Core.extend({
   callList: DS.belongsTo('Radium.CallList', {
     key: 'call_list'
   }),
-  isCallList: function() {
+  isCall: function() {
     return (this.get('kind') === 'call') ? true : false;
   }.property('kind').cacheable(),
   contact: DS.belongsTo('Radium.Contact', {
@@ -31,8 +41,17 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
 
+  // Turn on when todo's are created from the form
+  hasNotificationAnim: DS.attr('boolean'),
+
+  isToday: function() {
+    var today = Radium.appController.get('today').toFormattedString('%Y-%m-%d'),
+        finishBy = this.get('finishBy').toFormattedString('%Y-%m-%d');
+    return finishBy === today && !this.get('finished');
+  }.property('finishBy').cacheable(),
+
   canEdit: function() {
-    return (this.getPath('user.apiKey') && this.get('finished') === false) ? true : false;
+    return (this.getPath('user.apiKey')) ? true : false;
   }.property('user', 'finished').cacheable(),
 
   /**
@@ -40,9 +59,10 @@ Radium.Todo = Radium.Core.extend({
     @return {Boolean}
   */
   isOverdue: function() {
-    var d = new Date().getTime(),
-        isFinished = this.get('finished'),
-        finishBy = new Date(this.get('finishBy')).getTime();
-    return (finishBy <= d && !isFinished) ? true : false;
+    var today = Radium.appController.get('today'),
+        yesterday = today.advance({day: -1}),
+        finishBy = this.get('finishBy');
+        
+    return Ember.DateTime.compare(today, finishBy) === 1 && !this.get('finished');
   }.property('finishBy', 'finished').cacheable()
 });

@@ -1,10 +1,9 @@
 Radium.GlobalSearchTextView = Ember.View.extend({
-  classNames: 'span9'.w(),
+  classNames: 'navbar-search pull-right'.w(),
   template: Ember.Handlebars.compile('{{view searchView}}'),
   searchView: Radium.AutocompleteTextField.extend({
-    classNames: ["prependedInput", "span9"],
+    classNames: 'search-query'.w(),
     placeholder: "Find me...",
-    elementId: 'search-box',
     sourceBinding: 'Radium.contactsController.contactNamesWithObject',
     recentContactSearchesBinding: 'Radium.contactsController.recentlySearchedFor',
     select: function(event, ui) {

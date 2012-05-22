@@ -1,5 +1,5 @@
 <a {{bindAttr href="userUrl"}}>
-  <img src="http://placehold.it/34x34" class="avatar">
+  <img {{bindAttr src="content.avatar.small_url"}} class="avatar">
   {{content.abbrName}}
   {{#if isSelected}}
     <i class="icon-ok pull-right"></i>

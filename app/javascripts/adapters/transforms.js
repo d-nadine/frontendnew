@@ -15,11 +15,11 @@ DS.attr.transforms.array = {
 // Object transform
 DS.attr.transforms.object = {
   from: function(serialized) {
-    return Em.none(serialized) ? {} : serialized;
+    return Ember.none(serialized) ? {} : serialized;
   },
 
   to: function(deserialized) {
-    return Em.none(serialized) ? {} : serialized;
+    return Ember.none(deserialized) ? {} : deserialized;
   }
 };
 
@@ -83,23 +83,33 @@ DS.attr.transforms.inviteState = {
   }
 };
 
-DS.attr.transforms.dateTime = {
+DS.attr.transforms.datetime = {
   from: function(serialized) {
     var type = typeof serialized;
 
     if (type === "string" || type === "number") {
-      return Ember.DateTime.create(new Date(serialized));
-    } else if (serialized === null || serialized === undefined) {
-      // if the value is not present in the data,
-      // return undefined, not null.
+      var timezone = new Date().getTimezoneOffset(),
+          serializedDate = Ember.DateTime.parse(serialized, DS.attr.transforms.datetime.format);
+      return serializedDate.toTimezone(timezone);
+    } else if (Em.none(serialized)) {
       return serialized;
     } else {
       return null;
     }
   },
-  to: function(date) {
-    return date.toISO8601();
-  }
+
+  to: function(deserialized) {
+    if (deserialized instanceof Ember.DateTime) {
+      var normalized = deserialized.advance({timezone: 0});
+      return normalized.toFormattedString(DS.attr.transforms.datetime.format);
+    } else if (deserialized === undefined) {
+      return undefined;
+    } else {
+      return null;
+    }
+  },
+
+  format: Ember.DATETIME_ISO8601
 };
 
 // Overwrite Ember Data's date to keep date's ISO8601 formatted.
@@ -107,7 +117,7 @@ DS.attr.transforms.date.to = function(date) {
   var type = typeof date;
   if (type === "string") {
     return date;
-  } else if (type === "date") {
+  } else if (type === "date" || type === "object") {
     return Ember.DateTime.create(date.getTime()).toISO8601();
   }
 

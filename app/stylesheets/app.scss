@@ -1,8 +1,10 @@
-
 @import "compass/css3";
 
 body {
   padding-top: 60px;
+  &.loaded {
+    background: #fff url('/images/base/bg-grey.gif') repeat-y center top;
+  }
 }
 
 .navbar {
@@ -26,17 +28,53 @@ body {
   right: 10px;
 }
 
-.icon-sms,
-.icon-call {
-  background-image: url('/images/icons/icons-radium.png');
+.icon-call,
+.icon-todo,
+.icon-contact,
+.icon-assigned,
+.icon-add-todo,
+.icon-edit,
+.icon-comments,
+.icon-overdue {
+  width: 16px;
+  height: 16px;
+  background: {
+     repeat: no-repeat;
+     position: 0 0;
+  }
 }
 
 .icon-call {
-  background-position: 0px 0px;
+  background-image: url('/images/icons/feed-call-todo.png');
 }
 
-.icon-sms {
-  background-position: right 0px;
+.icon-todo {
+  background-image: url('/images/icons/feed-todo.png');
+}
+
+.icon-todo.icon-overdue,
+.icon-overdue {
+  background-image: url('/images/icons/feed-overdue.png');
+}
+
+.icon-contact {
+  background-image: url('/images/icons/feed-contact.png');
+}
+
+.icon-assigned {
+  background-image: url('/images/icons/feed-assigned.png');
+}
+
+.icon-comments {
+  background-image: url('/images/icons/feed-comments.png');
+}
+
+.icon-add-todo {
+  background-image: url('/images/icons/feed-add-todo.png');
+}
+
+.icon-edit {
+  background-image: url('/images/icons/edit.png');
 }
 
 .icon-inline-loading {
@@ -121,6 +159,13 @@ body {
 }
 
 li.main-filter-item {
+  &.active {
+    a,
+    a:hover {
+      border-right: none;
+    }
+  }
+
   i {
     margin-right: 5px;
   }
@@ -159,13 +204,16 @@ li.main-filter-item {
 }
 
 #form-container {
-  margin: 20px 0;
   width: 100%;
+  margin: 20px 0;
+  position: fixed;
+  z-index: 999;
 
   .well {
     width: 660px;
     position: relative;
     display: inline-block;
+    @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
   }
 
   button.close-form {
@@ -175,6 +223,46 @@ li.main-filter-item {
     right: 12px;
     top: 22px;
   }
+}
+
+.radium-form {
+  label.radium-control-label {
+    width: auto;
+    text-align: left;
+    float: left;
+    padding: 5px 0 0;
+    margin: 0 10px 0 0;
+  }
+
+  .controls {
+    margin: 0;
+  }
+
+  .inline-fieldset {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  select {
+    width: 150px;
+  }
+
+  .pin-bottom-right {
+    position: absolute;
+    right: 60px;
+    bottom: 40px;
+  }
+
+  .more-options {
+    fieldset {
+      margin: 0 0 20px;
+    }
+  }
+
+  .form-horizontal .control-group:last-child {
+    margin-bottom: 0;
+  }
+
 }
 
 .alert.token {
@@ -188,12 +276,6 @@ li.main-filter-item {
     position: absolute;
     background: transparent;
   }
-}
-
-.create-form {
-  width: 700px;
-  float: left;
-  overflow: hidden;
 }
 
 fieldset legend {
@@ -212,26 +294,63 @@ fieldset legend {
 }
 
 .feed-item {
+  width: 698px;
   margin: 0 0 2px;
+  border: 1px solid transparent;
 
   .feed-header {
     padding: 5px 0;
     position: relative;
     cursor: pointer;
 
+    i.feed-expand-icon {
+      margin-left: 10px;
+      @include opacity(0);
+      @include transition(opacity 0.2s ease-in);
+    }
+
+    &:hover {
+      background-color: #f7f7f9;
+
+      i.feed-expand-icon {
+        @include opacity(1);
+      }
+    }
+
     .activity-icon {
       margin-right: 10px;
     }
   }
 
-  .feed-header:hover,
-  &.expanded .feed-header {
-    background-color: #f7f7f9;
+  .create-form {
+    width: 700px;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    top: 30px;
+
+    .well {
+      @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+    }
   }
 
   &.expanded {
+    border: 1px solid #ECECEC;
+
+    .feed-header {
+      background-color: #ECECEC;
+
+      i.feed-expand-icon {
+        @include opacity(1);
+      }
+    }
+
     p.feed-actions {
       display: block;
+
+      a {
+        margin-left: 8px;
+      }
     }
   }
 
@@ -243,6 +362,7 @@ fieldset legend {
     }
   }
 
+  .is-today &,
   &.expanded.historical,
   &.historical:hover {
     opacity: 1;
@@ -365,13 +485,14 @@ i.comment-toggle-button {
 }
 
 .comments {
-  margin: 20px 0;
+  margin: 10px 0 15px;
+  display: inline-block;
   
   a.add-comment-btn {
     width: 100%;
+    margin-bottom: 15px;
     display: inline-block;
     text-decoration: none;
-    text-align: center;
     font-weight: bold;
     line-height: 30px;
   }
@@ -395,7 +516,7 @@ ul.comments-list {
 
     a.user-avatar {
       float: left;
-      margin: 10px;
+      margin: 3px 10px 10px 0;
 
       img {
         height: 32px;

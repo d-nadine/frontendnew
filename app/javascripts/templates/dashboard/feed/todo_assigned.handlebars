@@ -1,9 +1,13 @@
 Assigned: 
   {{#if isCall}}
     {{#with reference.todo.reference.contact}}
-      Call <a href="/contacts/{{unbound id}}">{{name}}</a>
+      <i class="icon-call"></i>
+      Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
     {{/with}}
   {{else}}
-    {{reference.todo.description}}
+     <i class="icon-todo"></i>
+    {{unbound reference.todo.description}}
   {{/if}}
-   (<a href="/users/{{unbound owner.user.id}}">{{owner.user.name}}</a>)
+{{#if user}}
+ (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{/if}}

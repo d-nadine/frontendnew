@@ -1,42 +1,41 @@
 Radium.todosController = Ember.ArrayProxy.create({
-  content: [],
-  add: function(todo) {
-    var length = this.get('length'),
-        idx = this.binarySearch(todo.get('sortValue'), 0, length);
+  content: Radium.store.findAll(Radium.Todo),
 
-    this.insertAt(idx, todo);
+  overdueTodos: function() {
+    return this.filterProperty('isOverdue', true);
+  }.property('@each.isOverdue').cacheable(),
 
-    todo.addObserver('sortValue', this, 'todoFinishByDidChange');
-  },
+  sortedOverdueTodos: function() {
+    return this.get('overdueTodos').slice(0).sort(function(a, b) {
+      var date1 = a.get('createdAt'),
+          date2 = b.get('createdAt');
 
-  remove: function(todo) {
-    todo.removeObserver('sortValue', this, 'todoFinishByDidChange');
-    this.removeObject(todo);
-  },
+      if (date1 > date2) return 1;
+      if (date1 < date2) return -1;
+      return 0;
+    });
+  }.property('overdueTodos.@each').cacheable(),
 
-  binarySearch: function(value, low, high) {
-    var mid, midValue;
+  // Open Todos
+  dueToday: function() {
+    return this.filter(function(todo) {
+      return todo.get('isToday');
+    });
+  }.property('@each.isToday').cacheable(),
 
-    if (low === high) {
-      return low;
-    }
+  sortedDueToday: function() {
+    return this.get('dueToday').slice(0).sort(function(a, b) {
+      var date1 = a.get('createdAt'),
+          date2 = b.get('createdAt');
 
-    mid = low + Math.floor((high - low) / 2);
-    midValue = this.objectAt(mid).get('sortValue');
+      if (date1 > date2) return 1;
+      if (date1 < date2) return -1;
+      return 0;
+    });
+  }.property('dueToday.@each').cacheable(),
 
-    if (value < midValue) {
-      return this.binarySearch(value, mid+1, high);
-    } else if (value > midValue) {
-      return this.binarySearch(value, low, mid);
-    }
-
-    return mid;
-  },
-
-  todoFinishByDidChange: function(todo) {
-    if (todo.get('isDirty')) {
-      this.remove(todo);
-      this.add(todo);
-    }
-  }
+  isTodayEmpty: Ember.Binding.or(
+  'sortedOngoing.length',
+  'overdueTodos.length'
+  ),
 })

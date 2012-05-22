@@ -136,7 +136,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
 
   fetchContacts: function() {
     var self = this,
-        content = Radium.store.findAll(Radium.Contact);
+        content = Radium.store.find(Radium.Contact, {page: 'all'});
     this.set('content', content);
   },
 
@@ -206,7 +206,7 @@ Radium.contactsController = Ember.ArrayProxy.create({
         isNotAtEnd = currentPage !== totalPages;
 
     if (hasNoPages) {
-      var contacts = Radium.store.findAll(Radium.Contact);
+      var contacts = Radium.store.find(Radium.Contact, {page: 1});
       this.set('content', contacts);
     } else {
       if (isNotAtEnd) {

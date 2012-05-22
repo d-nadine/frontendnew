@@ -9,6 +9,76 @@ Radium.feedController = Ember.Object.extend({
 
   */
 
+  init: function() {
+    var pastDates = this.looper(-1, 30),
+        today = this.createDateGroup(Ember.DateTime.create()),
+        futureDates = this.looper(1, 60);
+    
+    futureDates.pushObject(today);
+    futureDates.pushObjects(pastDates);
+
+    this.set('dates', futureDates);
+  },
+
+  // Lifted from Underscore.js
+  range: function(start, stop, step) {
+    if (arguments.length <= 1) {
+      stop = start || 0;
+      start = 0;
+    }
+    step = arguments[2] || 1;
+
+    var len = Math.max(Math.ceil((stop - start) / step), 0);
+    var idx = 0;
+    var range = new Array(len);
+
+    while(idx < len) {
+      range[idx++] = start;
+      start += step;
+    }
+
+    return range;
+  },
+
+  looper: function(dir, limit) {
+    var group = Ember.A([]),
+        limit = this.range(limit),
+        startDate = Ember.DateTime.create();
+    limit.forEach(function() {
+      var newDate = startDate.advance({day: dir}),
+          dateGroup = this.createDateGroup(newDate);
+
+      // tick the date up/down
+      startDate = newDate;
+      if (dir > 0) {
+        group.insertAt(0, dateGroup);
+      } else {
+        group.pushObject(dateGroup);
+      }
+    }, this);
+    return group;
+  },
+
+  createDateGroup: function(date) {
+    return Radium.FeedGroup.create({
+            date: date,
+            sortValue: date.toFormattedString('%Y-%m-%d')
+          });
+  },
+
+  dates: Ember.A([]),
+
+  datesWithContent: function() {
+    return this.get('dates').filter(function(date) {
+      var kind = date.get('dateKind');
+      if (kind === 'today' || date.get('hasVisibleContent')) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }.property('dates', 'dates.@each.hasVisibleContent').cacheable(),
+
   modelTypes: {
     'todo': 'Todo',
     'contact': 'Contact',
@@ -19,22 +89,16 @@ Radium.feedController = Ember.Object.extend({
     'email': 'Email'
   },
 
-  _todoIds: [],
-  _contactIds: [],
-  _campaignIds: [],
-  _call_listIds: [],
-  _dealIds: [],
-  _meetingIds: [],
-  _emailIds: [],
-
   add: function(activity) {
+
     var content = this.get('content'),
         kind = activity.kind,
+        timezone = new Date().getTimezoneOffset(),
         // Parse the timestamp from the server with the proper timezone set.
         parsedDate = Ember.DateTime.parse(
             activity.timestamp, 
             Ember.DATETIME_ISO8601
-        ),
+        ).adjust({timezone: timezone}),
         dateString = parsedDate.toFormattedString('%B %D, %Y'),
         hash = parsedDate.toFormattedString('%Y-%m-%d'),
         ref = activity[kind] || activity.reference[kind],
@@ -42,6 +106,7 @@ Radium.feedController = Ember.Object.extend({
     
     // Normalize the activity
     activity[kind] = ref;
+    activity.user = (activity.owner) ? activity.owner.user : null;
 
     if (activity.scheduled) {
       ref.activity = activity;
@@ -50,44 +115,17 @@ Radium.feedController = Ember.Object.extend({
     Radium.store.load(Radium.Activity, activity);
     Radium.store.load(Radium[model], ref);
 
-    if (!this.dates[hash]) {
-      var group = Radium.FeedGroup.create({
-            date: dateString,
-            sortValue: hash,
-            ongoingTodos: Radium.Todo.filter(function(data) {
-              var timestamp = data.get('created_at'),
-                  lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear),
-                  regex = new RegExp(lookupDate[0]);
-              return regex.test(hash) && !data.get('finished');
-            }),
-            sortedOngoing: function() {
-              return this.get('ongoingTodos').slice(0).sort(function(a, b) {
-                var date1 = a.get('createdAt'),
-                    date2 = b.get('createdAt');
+    // if (!this.dates[hash]) {
+    //   var group = Radium.FeedGroup.create({
+    //         date: parsedDate,
+    //         sortValue: hash,
+    //       }),
+    //       length = this.getPath('content.length'),
+    //       idx = this.binarySearch(group.get('sortValue'), 0, length);
 
-                if (date1 > date2) return 1;
-                if (date1 < date2) return -1;
-                return 0;
-              });
-            }.property('ongoingTodos.@each').cacheable(),
-
-            historical: Radium.Activity.filter(function(data) {
-              var timestamp = data.get('timestamp'),
-                  lookupDate = timestamp.match(Radium.Utils.DATES_REGEX.monthDayYear);
-              return lookupDate[0] === hash && data.get('scheduled') !== true;
-            }),
-            sortedHistorical: function() {
-              return this.get('historical').slice(0).sort(function(a, b) {
-                return a.get('timestamp') - b.get('timestamp');
-              });
-            }.property('historical.@each').cacheable()
-          }),
-          length = this.getPath('content.length'),
-          idx = this.binarySearch(group.get('sortValue'), 0, length);
-
-      this.dates[hash] = group;
-      content.insertAt(idx, group);
-    }
+    //   this.dates[hash] = group;
+    //   content.insertAt(idx, group);
+    // }
   },
 
   binarySearch: function(value, low, high) {
