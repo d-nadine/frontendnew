@@ -3,6 +3,61 @@
     <h3>Error</h3>
   </div>
   <div class="modal-body">
-    <p>Something has gone wrong and your user data cannot be loaded at this time.</p>
+    <p>Something has gone wrong and your user data cannot be loaded at this time. Please try <a href="http://api.radiumcrm.com/sessions/new">logging in again</a> or, if you think something broke, report <a href="#" {{action "showBugReportForm"}}>this as a bug</a>.</p>
+
+    {{#if isBugReportFormVisible}}
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>Report a bug</legend>
+          <div class="control-group">
+            <label class="control-label" for="title">Problem</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge required" id="title" name="title">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="what_happened">What happened</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge required" id="what_happened" name="what_happened">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="expected_result">Expected Result</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge required" id="expected_result" name="expected_result">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="steps_to_reproduce">Steps to reproduce</label>
+            <div class="controls">
+              <textarea class="input-xlarge required" id="steps_to_reproduce" name="steps_to_reproduce" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="notes">Notes</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="notes" name="notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <input type="hidden" name="project_id" value="1">
+            <button type="submit" class="btn btn-primary" {{action "submitForm"}}>Send</button>
+            <button class="btn" {{action "cancelBugReport"}}>Cancel</button>
+          </div>
+        </fieldset>
+      </form>
+    {{/if}}
   </div>
+</div>
+<div style="
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+">
+  <img src="/images/logo-loading.gif" alt="::radium">
 </div>

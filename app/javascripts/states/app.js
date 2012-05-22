@@ -61,7 +61,7 @@ Radium.App = Ember.StateManager.create({
       manager.goToState('loggedIn');
     },
     accountLoadFailed: function(manager) {
-      manager.goToState('loggedIn.noData');
+      manager.goToState('loggedOut.error');
     }
   }),
   
