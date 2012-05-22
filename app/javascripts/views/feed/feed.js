@@ -8,24 +8,34 @@ Radium.FeedView = Ember.View.extend({
 
   didInsertElement: function() {
     if (this.getPath('content.hasNotificationAnim')) {
-
-      var $newRow = this.$(),
-          offset = $newRow.offset().top - 200;
-
-      $('html, body').animate({
-        scrollTop: offset
-      }, 250, function() {
-        $newRow.animate({
-          backgroundColor: '#FBB450'
-        }, 250, function() {
-          $newRow.animate({
-            backgroundColor: '#fff'
-          }, 1500);
-        });
-      });
+      this.scrollToChangedFeedItem('new');
     }
   },
 
+  contentDidUpdate: function() {
+    if (this.getPath('content.hasAnimation') && this.get('state') === 'inDOM') {
+      this.scrollToChangedFeedItem('change');
+    }
+  }.observes('content.hasAnimation'),
+
+  scrollToChangedFeedItem: function(type) {
+    var self = this,
+        $row = this.$(),
+        offset = $row.offset().top - 200,
+        bgColor = (type === 'new') ? '#FBB450' : '#D6E9C6';
+
+    $('html, body').animate({
+        scrollTop: offset
+      }, 250, function() {
+        $row.animate({
+            backgroundColor: bgColor
+          }, 250, function() {
+            $row.animate({
+              backgroundColor: '#fff'
+            }, 1500);
+        });
+      });
+  },
   // Comments
 
   feedHeaderView: Ember.View.extend({

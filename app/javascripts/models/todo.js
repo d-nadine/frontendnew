@@ -1,4 +1,14 @@
 Radium.Todo = Radium.Core.extend({
+
+  didUpdate: function() {
+    var self = this;
+    Ember.run.next(function() {
+      self.set('hasAnimation', true);
+    });
+  },
+
+  hasAnimation: false,
+
   kind: DS.attr('todoKind'),
   description: DS.attr('string'),
   finishBy: DS.attr('datetime', {

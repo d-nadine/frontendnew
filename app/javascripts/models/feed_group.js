@@ -83,6 +83,9 @@ Radium.FeedGroup = Ember.Object.extend({
       case ((this.getPath('historical.length') && dateKind === 'past')):
         return true;
       break;
+      case (this.get('isToday')):
+        return true;
+      break;
       default:
         return false;
       break;

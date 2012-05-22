@@ -19,9 +19,9 @@ Radium.todosController = Ember.ArrayProxy.create({
   // Open Todos
   dueToday: function() {
     return this.filter(function(todo) {
-      return todo.get('isToday') && !todo.get('finished');
+      return todo.get('isToday');
     });
-  }.property('@each.isToday', '@each.finished').cacheable(),
+  }.property('@each.isToday').cacheable(),
 
   sortedDueToday: function() {
     return this.get('dueToday').slice(0).sort(function(a, b) {

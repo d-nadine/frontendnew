@@ -12,7 +12,7 @@ Radium.feedController = Ember.Object.extend({
   init: function() {
     var pastDates = this.looper(-1, 30),
         today = this.createDateGroup(Ember.DateTime.create()),
-        futureDates = this.looper(1, 15);
+        futureDates = this.looper(1, 60);
     
     futureDates.pushObject(today);
     futureDates.pushObjects(pastDates);
@@ -90,6 +90,7 @@ Radium.feedController = Ember.Object.extend({
   },
 
   add: function(activity) {
+
     var content = this.get('content'),
         kind = activity.kind,
         timezone = new Date().getTimezoneOffset(),
