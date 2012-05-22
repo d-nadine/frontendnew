@@ -258,6 +258,10 @@ li.main-filter-item {
     }
   }
 
+  .form-horizontal .control-group:last-child {
+    margin-bottom: 0;
+  }
+
 }
 
 .alert.token {
@@ -271,12 +275,6 @@ li.main-filter-item {
     position: absolute;
     background: transparent;
   }
-}
-
-.create-form {
-  width: 700px;
-  float: left;
-  overflow: hidden;
 }
 
 fieldset legend {
@@ -379,6 +377,15 @@ fieldset legend {
 
     select {
       width: 140px;
+    }
+
+    .create-form {
+      width: 700px;
+      overflow: hidden;
+      position: absolute;
+      left: -606px;
+      z-index: 999;
+      top: 30px;
     }
   }
 

@@ -93,13 +93,15 @@ Radium.FeedView = Ember.View.extend({
 
     if (Ember.empty(contact)) {
       Radium.FormManager.send('showForm', {
-        form: 'Todo'
+        form: 'Todo',
+        source: event
       });
     } else {
       Radium.FormManager.send('showForm', {
         form: 'Todo',
         target: contact,
-        type: 'contacts'
+        type: 'contacts',
+        source: event
       });
     }
 

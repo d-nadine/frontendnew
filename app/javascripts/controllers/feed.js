@@ -115,17 +115,17 @@ Radium.feedController = Ember.Object.extend({
     Radium.store.load(Radium.Activity, activity);
     Radium.store.load(Radium[model], ref);
 
-    if (!this.dates[hash]) {
-      var group = Radium.FeedGroup.create({
-            date: parsedDate,
-            sortValue: hash,
-          }),
-          length = this.getPath('content.length'),
-          idx = this.binarySearch(group.get('sortValue'), 0, length);
+    // if (!this.dates[hash]) {
+    //   var group = Radium.FeedGroup.create({
+    //         date: parsedDate,
+    //         sortValue: hash,
+    //       }),
+    //       length = this.getPath('content.length'),
+    //       idx = this.binarySearch(group.get('sortValue'), 0, length);
 
-      this.dates[hash] = group;
-      content.insertAt(idx, group);
-    }
+    //   this.dates[hash] = group;
+    //   content.insertAt(idx, group);
+    // }
   },
 
   binarySearch: function(value, low, high) {
