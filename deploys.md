@@ -1,3 +1,4 @@
+* [2012-05-22 12:47 -0700] b58a269 - Joshua Jones: Fix missing styles for new placement of inline feed todo form.
 * [2012-05-17 15:50 -0700] cd2362c - Joshua Jones: [Delivers #29797447 #29793955 #29793913 #29655017] Relayout and modify todo form.
 * [2012-05-17 12:35 -0700] 8592edb - Joshua Jones: [Fixes #29749707] Inline date editing shows/posts proper date.
 * [2012-05-17 09:43 -0700] 6157df2 - Joshua Jones: [Fixes #29749613] CSS points to the correct image sprite location.
