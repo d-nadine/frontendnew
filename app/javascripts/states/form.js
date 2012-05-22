@@ -18,7 +18,7 @@ Radium.FormManager = Ember.StateManager.create({
                   params: context,
                   formType: context.form
                 }),
-          destination = (context.source) ? $(context.source.target) : '#form-container';
+          destination = (context.source) ? $(context.source.target).parent().parent() : '#form-container';
       if (Radium.FormContainer.get('state') !== 'inDOM') {
         Radium.FormContainer.appendTo(destination);
       }

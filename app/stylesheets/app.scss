@@ -213,6 +213,7 @@ li.main-filter-item {
     width: 660px;
     position: relative;
     display: inline-block;
+    @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
   }
 
   button.close-form {
@@ -381,11 +382,14 @@ fieldset legend {
 
     .create-form {
       width: 700px;
-      overflow: hidden;
       position: absolute;
-      left: -606px;
+      left: -550px;
       z-index: 999;
       top: 30px;
+
+      .well {
+        @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+      }
     }
   }
 
