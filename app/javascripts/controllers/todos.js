@@ -3,7 +3,7 @@ Radium.todosController = Ember.ArrayProxy.create({
 
   overdueTodos: function() {
     return this.filterProperty('isOverdue', true);
-  }.property('@each.isOverdue').cacheable(),
+  }.property('@each.isOverdue'),
 
   sortedOverdueTodos: function() {
     return this.get('overdueTodos').slice(0).sort(function(a, b) {
@@ -14,14 +14,14 @@ Radium.todosController = Ember.ArrayProxy.create({
       if (date1 < date2) return -1;
       return 0;
     });
-  }.property('overdueTodos.@each').cacheable(),
+  }.property('overdueTodos.@each'),
 
   // Open Todos
   dueToday: function() {
     return this.filter(function(todo) {
       return todo.get('isToday');
     });
-  }.property('@each.isToday').cacheable(),
+  }.property('@each.isToday'),
 
   sortedDueToday: function() {
     return this.get('dueToday').slice(0).sort(function(a, b) {
@@ -32,7 +32,7 @@ Radium.todosController = Ember.ArrayProxy.create({
       if (date1 < date2) return -1;
       return 0;
     });
-  }.property('dueToday.@each').cacheable(),
+  }.property('dueToday.@each'),
 
   isTodayEmpty: Ember.Binding.or(
   'sortedOngoing.length',

@@ -13,7 +13,6 @@ Radium.Activity = Radium.Core.extend({
 
   // Embedded models
   todo: DS.belongsTo('Radium.Todo', {embedded: true}),
-  // todo: DS.attr('object'),
   deal: DS.belongsTo('Radium.Deal', {embedded: true}),
   message: DS.belongsTo('Radium.Message', {embedded: true}),
   email: DS.belongsTo('Radium.Email', {embedded: true}),

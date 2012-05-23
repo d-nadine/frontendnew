@@ -14,6 +14,8 @@ minispade.require('highcharts');
 minispade.require('crossfilter');
 minispade.require('bootstrap-tooltip');
 
+Ember.ENV.CP_DEFAULT_CACHEABLE = true;
+
 minispade.require('radium/core/config');
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
