@@ -27,7 +27,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens New Message form in the main page state
   */
-  emailButton: Ember.Button.extend({
+  emailButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'ContactsMessage',
@@ -41,7 +42,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens New Message form in the main page state
   */
-  addToGroupButton: Ember.Button.extend({
+  addToGroupButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'AddToGroup',
@@ -56,7 +58,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens New Message form in the main page state
   */
-  addToCompanyButton: Ember.Button.extend({
+  addToCompanyButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'AddToCompany',
@@ -71,7 +74,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens New SMS form in the main page state
   */
-  smsButton: Ember.Button.extend({
+  smsButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.App.send('addResource', {
         form: 'ContactSMS'
@@ -83,7 +87,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens Add Todo form in the main page state
   */
-  todoButton: Ember.Button.extend({
+  todoButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.FormManager.send('showForm', {
         form: 'Todo',
@@ -97,7 +102,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens Add to Call List form in the main page state
   */
-  callListButton: Ember.Button.extend({
+  callListButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       // TODO: This might not be efficient
       var callLists = Radium.store.findAll(Radium.CallList);
@@ -112,7 +118,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens Add Campaign form in the main page state
   */
-  addCampaignButton: Ember.Button.extend({
+  addCampaignButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       Radium.App.send('addResource', {
         form: 'AddToCampaign'
@@ -124,7 +131,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Removes a selected user from a campaign
   */
-  removeCampaignButton: Ember.Button.extend({
+  removeCampaignButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       var contacts = this.getPath('parentView.selectedContacts');
       contacts.forEach(function(item) {
@@ -140,7 +148,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Select all Contacts
   */
-  selectAllButton: Ember.Button.extend({
+  selectAllButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       var selectedFilter = this.getPath('parentView.selectedFilter'),
           selectedLetter = this.getPath('parentView.selectedLetter');
@@ -174,7 +183,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Select all Contacts
   */
-  selectNoneButton: Ember.Button.extend({
+  selectNoneButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       if (Radium.selectedContactsController.get('length')) {
         Radium.selectedContactsController.setEach('isSelected', false);
@@ -210,7 +220,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
     Letters Filter
     ----------------------------------- */
   lettersFilter: Ember.View.extend({
-    letterButton: Ember.Button.extend({
+    letterButton: Ember.View.extend({
+      tagName: 'button',
       selectedLetterBinding: 'Radium.selectedContactsController.selectedLetter',
       classNameBindings: ['isSelected:active'],
       isSelected: function() {

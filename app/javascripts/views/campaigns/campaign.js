@@ -3,7 +3,9 @@
   bound to the page's form state, we want to disable them as a visual cue when
   another form is open.
 */
-Radium.CampaignActionButton = Ember.Button.extend({
+Radium.CampaignActionButton = Ember.View.extend({
+  tagName: 'button',
+  attributeBindings: ['disabled'],
   disabled: function() {
     var selectedForm = Radium.appController.get('selectedForm');
     return (selectedForm) ? true : false;

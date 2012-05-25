@@ -1,6 +1,7 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
   classNames: 'well form-horizontal radium-form'.w(),
+  layout: Ember.Handlebars.compile('<a href="#" class="close close-form" {{action "closeForm" target="Radium.FormManager"}}>×</a>{{yield}}'),
 
   // Validation properties
   hasNoOptions: true,
@@ -58,10 +59,6 @@ Radium.FormView = Ember.View.extend({
     this.set('isSubmitting', false);
   },
 
-  close: function() {
-    Radium.FormManager.send('closeForm');
-  },
-
   hide: function() {
     this.$().hide();
   },
@@ -91,7 +88,7 @@ Radium.FormView = Ember.View.extend({
     _buttonTextCache: null,
     // target: 'parentView',
     // action: 'submitForm',
-    attributeBindings: ['type'],
+    attributeBindings: ['type', 'disabled'],
     type: 'submit',
     isSubmittingBinding: 'parentView.isSubmitting',
     classNameBindings: ['isSubmitting'],
@@ -118,11 +115,15 @@ Radium.FormView = Ember.View.extend({
       this.set('_buttonTextCache', text);
     }
   }),
+
   cancelFormButton: Ember.View.extend(Ember.TargetActionSupport, {
-    tagName: 'button',
-    target: 'parentView',
-    action: 'close',
-    disabledBinding: 'parentView.isSubmitting'
+    tagName: 'a',
+    attributeBindings: ['href', 'title'],
+    href: '#',
+    title: 'Close form',
+    target: 'Radium.FormManager',
+    action: 'closeForm',
+
   }),
 
   checkForEmpty: function(hash) {

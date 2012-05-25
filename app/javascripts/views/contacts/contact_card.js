@@ -53,7 +53,7 @@ Radium.ContactCardView = Ember.View.extend({
     'content.todos'
   ).cacheable(),
 
-  contactPageLink: Ember.Button.extend({
+  contactPageLink: Ember.View.extend({
     tagName: 'a',
     attributeBindings: ['href'],
     href: function() {

@@ -15,7 +15,8 @@ Radium.TopbarView = Ember.View.extend({
     if (section) $('li#btn-'+section).addClass('active');
   },
   // Main action button in the topbar, changes depending on section
-  mainActionButton: Ember.Button.extend({
+  mainActionButton: Ember.View.extend({
+    tagName: 'button',
     classNames: "btn pull-right".w(),
     buttonTitle: function() {
       var section = this.getPath('parentView.currentPage'),
