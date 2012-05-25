@@ -265,6 +265,19 @@ li.main-filter-item {
 
 }
 
+.create-form {
+  width: 700px;
+  margin-left: -350px;
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  z-index: 999;
+
+  .well {
+    @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+  }
+}
+
 .alert.token {
   height: 17px;
   display: inline-block;

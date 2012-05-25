@@ -1,7 +1,7 @@
 Radium.Activity = Radium.Core.extend({
   tag: DS.attr('string'),
   kind: DS.attr('string'),
-  timestamp: DS.attr('date'),
+  timestamp: DS.attr('datetime'),
   owner: DS.attr('object'),
   user: DS.belongsTo('Radium.User', {
     embedded: true

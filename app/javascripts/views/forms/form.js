@@ -86,7 +86,8 @@ Radium.FormView = Ember.View.extend({
     isVisibleBinding: 'parentView.hasMoreOptions'
   }),
 
-  submitButton: Ember.Button.extend({
+  submitButton: Ember.View.extend(Ember.TargetActionSupport, {
+    tagName: 'button',
     _buttonTextCache: null,
     // target: 'parentView',
     // action: 'submitForm',
@@ -117,7 +118,8 @@ Radium.FormView = Ember.View.extend({
       this.set('_buttonTextCache', text);
     }
   }),
-  cancelFormButton: Ember.Button.extend({
+  cancelFormButton: Ember.View.extend(Ember.TargetActionSupport, {
+    tagName: 'button',
     target: 'parentView',
     action: 'close',
     disabledBinding: 'parentView.isSubmitting'

@@ -20,6 +20,7 @@ minispade.require('radium/templates/feed/future');
 minispade.require('radium/templates/feed/today');
 minispade.require('radium/templates/feed/past');
 
+minispade.require('radium/templates/dashboard/feed/todo_scheduled_for');
 minispade.require('radium/templates/dashboard/feed/todo_created');
 minispade.require('radium/templates/dashboard/feed/todo_assigned');
 minispade.require('radium/templates/dashboard/feed/todo_finished');
