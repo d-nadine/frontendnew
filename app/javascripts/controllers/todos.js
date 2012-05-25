@@ -3,7 +3,7 @@ Radium.todosController = Ember.ArrayProxy.create({
 
   overdueTodos: function() {
     return this.filter(function(todo) {
-      return todo.get('isOverue') && !todo.get('finished');
+      return todo.get('isOverdue') && !todo.get('finished');
     });
   }.property('@each.isOverdue'),
 

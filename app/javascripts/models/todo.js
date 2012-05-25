@@ -45,9 +45,9 @@ Radium.Todo = Radium.Core.extend({
   hasNotificationAnim: DS.attr('boolean'),
 
   isToday: function() {
-    var today = Radium.appController.get('today').toFormattedString('%Y-%m-%d'),
-        finishBy = this.get('finishBy').toFormattedString('%Y-%m-%d');
-    return finishBy === today && !this.get('finished');
+    var today = Ember.DateTime.create(),
+        finishBy = this.get('finishBy');
+    return Ember.DateTime.compareDate(today, finishBy) === 0;
   }.property('finishBy').cacheable(),
 
   canEdit: function() {
