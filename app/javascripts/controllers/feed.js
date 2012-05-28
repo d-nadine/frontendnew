@@ -116,11 +116,12 @@ Radium.feedController = Ember.Object.extend({
         day = lastDateLoaded.advance({day: offset});
 
     Radium.Activity.reopenClass({
-      url: feedUrl.fmt(userId),
+      url: feedUrl,
       root: 'activity'
     });
     
     this.set('isLoading', true);
+    
     var activities = Radium.store.find(Radium.Activity, {
           end_date: day.toFormattedString('%Y-%m-%d'), 
           start_date: day.toFormattedString('%Y-%m-%d')

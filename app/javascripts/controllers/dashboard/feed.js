@@ -7,13 +7,11 @@ Radium.dashboardFeedController = Radium.feedController.create({
     this.set('pastDates', pastDates);
   },
   content: [],
-  dates: {},
   _pastDateHash: {},
   oldestDateLoaded: null,
   newestDateLoaded: null,
   // Set up for loading feed
-  userIdBinding: 'Radium.usersController.loggedInUser.id',
-  feedUrl: 'users/%@/feed/',
+  feedUrl: 'users/%@/feed/'.fmt(Radium.usersController.getPath('loggedInUser.id')),
 
   addTodo: function() {
     Radium.FormManager.send('showForm', {
