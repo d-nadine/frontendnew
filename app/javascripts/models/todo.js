@@ -1,11 +1,11 @@
 Radium.Todo = Radium.Core.extend({
 
-  didUpdate: function() {
-    var self = this;
-    Ember.run.next(function() {
-      self.set('hasAnimation', true);
-    });
-  },
+  // didUpdate: function() {
+  //   var self = this;
+  //   Ember.run.next(function() {
+  //     self.set('hasAnimation', true);
+  //   });
+  // },
 
   hasAnimation: false,
 
@@ -14,9 +14,9 @@ Radium.Todo = Radium.Core.extend({
   finishBy: DS.attr('datetime', {
     key: 'finish_by'
   }),
-  sortValue: function() {
-    return new Date(this.get('updatedAt')).getTime();
-  }.property('finishBy').cacheable(),
+  // sortValue: function() {
+  //   return new Date(this.get('updatedAt')).getTime();
+  // }.property('finishBy'),
   finished: DS.attr('boolean'),
   campaign: DS.belongsTo('Radium.Campaign'),
   callList: DS.belongsTo('Radium.CallList', {
@@ -24,7 +24,7 @@ Radium.Todo = Radium.Core.extend({
   }),
   isCall: function() {
     return (this.get('kind') === 'call') ? true : false;
-  }.property('kind').cacheable(),
+  }.property('kind'),
   contact: DS.belongsTo('Radium.Contact', {
     embedded: true
   }),
@@ -44,25 +44,21 @@ Radium.Todo = Radium.Core.extend({
   // Turn on when todo's are created from the form
   hasNotificationAnim: DS.attr('boolean'),
 
-  isToday: function() {
+  isDueToday: function() {
     var today = Ember.DateTime.create(),
         finishBy = this.get('finishBy');
     return Ember.DateTime.compareDate(today, finishBy) === 0;
-  }.property('finishBy').cacheable(),
+  }.property('finishBy'),
 
   canEdit: function() {
     return (this.getPath('user.apiKey')) ? true : false;
-  }.property('user', 'finished').cacheable(),
+  }.property('user', 'finished'),
 
-  /**
-    Checks to see if the Deal has passed it's close by date.
-    @return {Boolean}
-  */
   isOverdue: function() {
-    var today = Radium.appController.get('today'),
-        yesterday = today.advance({day: -1}),
-        finishBy = this.get('finishBy');
+    var today = Ember.DateTime.create(),
+        finishBy = this.get('finishBy'),
+        dateCompare = Ember.DateTime.compareDate(finishBy, today);
         
-    return Ember.DateTime.compare(today, finishBy) === 1 && !this.get('finished');
-  }.property('finishBy', 'finished').cacheable()
+    return dateCompare < 0 && !this.get('finished');
+  }.property('finishBy', 'finished')
 });

@@ -6,24 +6,42 @@ Radium.FeedView = Ember.View.extend({
   ],
   templateName: 'activity_row',
 
-  didInsertElement: function() {
-    if (this.getPath('content.hasNotificationAnim')) {
-      this.scrollToChangedFeedItem('new');
-    }
-  },
+  // didInsertElement: function() {
+  //   if (this.getPath('content.hasNotificationAnim')) {
+  //     this.scrollToChangedFeedItem('new');
+  //   }
+  // },
 
-  contentDidUpdate: function() {
-    if (this.getPath('content.hasAnimation') && this.get('state') === 'inDOM') {
-      this.scrollToChangedFeedItem('change');
+  // contentDidUpdate: function() {
+  //   if (this.getPath('content.hasAnimation') && this.get('state') === 'inDOM') {
+  //     this.scrollToChangedFeedItem('change');
+  //   }
+  // }.observes('content.hasAnimation'),
+
+  stateDidChange: function() {
+    if (this.get('state') !== 'inDOM') {
+      return false;
     }
-  }.observes('content.hasAnimation'),
+
+    if (this.getPath('content.finished')) {
+      this.$().animate({
+        backgroundColor: 'green'
+      }, 500);
+      // this.scrollToChangedFeedItem('new');
+    } else {
+      this.$().animate({
+        backgroundColor: 'red'
+      }, 500);
+      // this.scrollToChangedFeedItem('change');
+    }
+  }.observes('content.finished'),
 
   scrollToChangedFeedItem: function(type) {
     var self = this,
         $row = this.$(),
         offset = $row.offset().top - 200,
         bgColor = (type === 'new') ? '#FBB450' : '#D6E9C6';
-
+debugger;
     $('html, body').animate({
         scrollTop: offset
       }, 250, function() {

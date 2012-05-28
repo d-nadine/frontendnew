@@ -1,26 +1,24 @@
-{{#if todo.canEdit}}
+{{#if content.canEdit}}
   {{view checkboxView}}
 {{/if}}
-{{#if todo.reference.contact}}
- {{view Radium.LabelView labelBinding="todo.reference.contact.status"}}
+{{#if content.reference.contact}}
+ {{view Radium.LabelView labelBinding="content.reference.contact.status"}}
 {{/if}}
 <span class="content">
-  {{#unless todo.isCall}}
-    {{#if todo.canEdit}}
-      {{inlineTextField todo.description}}
+
+  {{#if content.isCall}}
+    {{#if content.description}}
+      Call <a href="/contacts/{{unbound content.reference.contact.id}}">{{content.reference.contact.name}}</a> for {{content.description}}
     {{else}}
-      {{todo.description}}
+      Call <a href="/contacts/{{unbound content.reference.contact.id}}">{{unbound content.reference.contact.name}}</a> 
     {{/if}}
-  {{/unless}}
-
-
-  {{#if todo.isCall}}
-    {{#if todo.description}}
-      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{todo.reference.contact.name}}</a> for {{todo.description}}
+  {{else}}
+    {{#if content.canEdit}}
+      {{inlineTextField content.description}}
     {{else}}
-      Call <a href="/contacts/{{unbound todo.reference.contact.id}}">{{unbound todo.reference.contact.name}}</a> 
+      {{content.description}}
     {{/if}}
   {{/if}}
   
-  (<a href="/users/{{unbound todo.user.id}}">{{todo.user.abbrName}}</a>)
+  (<a href="/users/{{unbound content.user.id}}">{{content.user.abbrName}}</a>)
 </span>

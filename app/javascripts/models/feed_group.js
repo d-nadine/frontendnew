@@ -1,27 +1,6 @@
 Radium.FeedGroup = Ember.Object.extend({
   date: null,
 
-  dateKind: function() {
-    var dateKind,
-        today = Ember.DateTime.create(),
-        diff = Ember.DateTime.compareDate(this.get('date'), today);
-    switch (true) {
-      case (diff === 0):
-        dateKind = 'today';
-      break;
-      case (diff < 0):
-        dateKind = 'past';
-      break;
-      case (diff === 1):
-        dateKind = 'future';
-      break;
-      default:
-        dateKind = 'today';
-      break;
-    }
-    return dateKind;
-  }.property('date').cacheable(),
-
   // Open Todos
   ongoingTodos: function() {
     var date = this.get('date');
