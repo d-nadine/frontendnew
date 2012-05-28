@@ -122,7 +122,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           user_id: assignedUserId,
           user: assignedUser,
           created_at: Ember.DateTime.create(),
-          hasNotificationAnim: true
+          hasAnimation: true
         },
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;

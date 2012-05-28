@@ -29,33 +29,45 @@ Radium.feedController = Ember.Object.extend({
     return range;
   },
 
-  createDateRange: function(dir, limit) {
+  /**
+    @param {Object} options `limit` number of dates to start with, `direction` future or past
+  */
+  createDateRange: function(options) {
+    var settings = {
+      limit: 10,
+      direction: -1
+    };
+
+    var settings = $.extend({}, settings, options);
+
     var group = Ember.A([]),
-        dateLimit = this.range(limit),
+        dateLimit = this.range(settings.limit),
         startDate = Ember.DateTime.create();
 
-    dateLimit.forEach(function() {
-      var newDate = startDate.advance({day: dir}),
+    dateLimit.forEach(function(item, idx) {
+      var newDate = startDate.advance({day: settings.direction}),
           lookupValue = newDate.toFormattedString('%Y-%m-%d'),
           dateGroup = this.createDateGroup(newDate);
 
       this._pastDateHash[lookupValue] = dateGroup;
       // tick the date up/down
       startDate = newDate;
-      if (dir > 0) {
+      if (settings.direction > 0) {
         group.insertAt(0, dateGroup);
       } else {
         group.pushObject(dateGroup);
       }
     }, this);
+
     return group;
   },
 
   createDateGroup: function(date) {
+    var dateValue = date || Ember.DateTime.create();
     return Radium.FeedGroup.create({
             content: Ember.A([]),
-            date: date,
-            sortValue: date.toFormattedString('%Y-%m-%d')
+            date: dateValue,
+            sortValue: dateValue.toFormattedString('%Y-%m-%d')
           });
   },
 
@@ -147,8 +159,9 @@ Radium.feedController = Ember.Object.extend({
                 .adjust({timezone: CONFIG.dates.timezone})
                 .toFormattedString('%Y-%m-%d'),
         dateGroup = this._pastDateHash[date];
-
-     dateGroup.get('content').pushObject(activity);
+    if (dateGroup) {
+      dateGroup.get('content').pushObject(activity);
+    }
   },
 
   add: function(activity) {
