@@ -5,16 +5,7 @@
       <div class="component">
         <h4>{{inlineTextField name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
         <p>Assigned to: {{user.name}}</p>
-        <address>
-          {{#each phoneNumbers}}
-            <abbr>{{name}}:</abbr> {{inlineTextField value}}<br>
-          {{/each}}
-        </address>
-        <address>
-          {{#each emailAddresses}}
-            <abbr>{{name}}:</abbr> <a href="mailto:{{unbound value}}">{{value}}</a><br>
-          {{/each}}
-        </address>
+
       </div>
     </div> <!-- / #contact-info -->
     {{#if addresses.length}}
@@ -55,20 +46,13 @@
       </div>
       <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
     </div>
-    {{#with Radium.selectedContactController.content.feed}}
-      {{#each content}}
-        {{#if hasVisibleContent}}
+    {{#with controller}}
+      {{#each pastDates}}
+        {{#if content.length}}
           <div class="page-header">
             <h3>{{formatDate date}}</h3>
           </div>
-          {{#if sortedOngoing}}
-            {{#each sortedOngoing}}
-              {{view Radium.FeedView contentBinding="this"}}
-            {{/each}}
-            <hr>
-          {{/if}}
-          
-          {{#each historical}}
+          {{#each content}}
             {{view Radium.HistoricalFeedView contentBinding="this"}}
           {{/each}}
         {{/if}}

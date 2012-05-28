@@ -31,36 +31,66 @@
             </h3>
           </div>
         {{else}}
+
           {{#with Radium.dashboardFeedController}}
-            {{#each dates}}
-              {{#if hasVisibleContent}}
-                {{view Radium.FeedDateGroupView contentBinding="this"}}
+            {{#each futureDates}}
+              {{#if ongoingTodos.length}}
+                <div class="page-header">
+                  <h3>{{formatDate date}}</h3>
+                </div>
+                {{#each sortedOngoingTodos}}
+                  {{view Radium.FeedView contentBinding="this"}}
+                {{/each}}
               {{/if}}
             {{/each}}
           {{/with}}
+
+          <div class="page-header">
+            <h3>Today</h3>
+          </div>
+          {{#with Radium.todosController}}
+            {{#if overdueTodos.length}}
+              <h4>Overdue</h4>
+              {{#each sortedOverdueTodos}}
+                {{view Radium.FeedView contentBinding="this"}}
+              {{/each}}
+              <hr>
+            {{/if}}
+
+            {{#if dueToday.length}}
+              <h4>Due</h4>
+              {{#each sortedDueToday}}
+                {{view Radium.FeedView contentBinding="this"}}
+              {{/each}}
+              <hr>
+            {{/if}}
+
+            {{#if finishedOverdueTodos.length}}
+              <h4>Finished</h4>
+              {{#each finishedOverdueTodos}}
+                {{view Radium.FeedView contentBinding="this"}}
+              {{/each}}
+              <hr>
+            {{/if}}
+
+          {{/with}}
+
+           {{#with Radium.dashboardFeedController}}
+            {{#each pastDates}}
+              {{#if content.length}}
+                <div class="page-header">
+                  <h3>{{formatDate date}}</h3>
+                </div>
+                {{#each content}}
+                  {{view Radium.HistoricalFeedView contentBinding="this"}}
+                {{/each}}
+              {{/if}}
+            {{/each}}
+          {{/with}}
+
         {{/if}}
       </div>
     </div>
-
-    <div class="row" style="display:none">
-      <div class="span9">
-        <div class="page-header">
-          <h3>Notifications</h3>
-        </div>
-        {{!with Radium.feedByDayController}}
-          {{!if loadedActivities.length}}
-            <div class="feed">
-            {{!each loadedActivities}}
-              {{!view Radium.FeedListView contentBinding="this"}}
-            {{!each}}
-            </table>
-          {{else}}
-            <div class="well">
-              <h3 align="center">No activities yet.</h3>
-            </div>
-          {{!if}}
-        {{!with}}
-      </div>
-    </div>
+    
   </div>
 </div>

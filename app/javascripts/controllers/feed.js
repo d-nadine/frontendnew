@@ -9,17 +9,6 @@ Radium.feedController = Ember.Object.extend({
 
   */
 
-  init: function() {
-    var pastDates = this.looper(-1, 30),
-        today = this.createDateGroup(Ember.DateTime.create()),
-        futureDates = this.looper(1, 60);
-    
-    futureDates.pushObject(today);
-    futureDates.pushObjects(pastDates);
-
-    this.set('dates', futureDates);
-  },
-
   // Lifted from Underscore.js
   range: function(start, stop, step) {
     if (arguments.length <= 1) {
@@ -40,33 +29,48 @@ Radium.feedController = Ember.Object.extend({
     return range;
   },
 
-  looper: function(dir, limit) {
+  /**
+    @param {Object} options `limit` number of dates to start with, `direction` future or past
+  */
+  createDateRange: function(options) {
+    var settings = {
+      limit: 10,
+      direction: -1
+    };
+
+    var settings = $.extend({}, settings, options);
+
     var group = Ember.A([]),
-        limit = this.range(limit),
+        dateLimit = this.range(settings.limit),
         startDate = Ember.DateTime.create();
-    limit.forEach(function() {
-      var newDate = startDate.advance({day: dir}),
+
+    dateLimit.forEach(function(item, idx) {
+      var newDate = startDate.advance({day: settings.direction}),
+          lookupValue = newDate.toFormattedString('%Y-%m-%d'),
           dateGroup = this.createDateGroup(newDate);
 
+      this._pastDateHash[lookupValue] = dateGroup;
       // tick the date up/down
       startDate = newDate;
-      if (dir > 0) {
+      if (settings.direction > 0) {
         group.insertAt(0, dateGroup);
       } else {
         group.pushObject(dateGroup);
       }
     }, this);
+
     return group;
   },
 
   createDateGroup: function(date) {
+    var dateValue = date || Ember.DateTime.create();
     return Radium.FeedGroup.create({
-            date: date,
-            sortValue: date.toFormattedString('%Y-%m-%d')
+            content: Ember.A([]),
+            date: dateValue,
+            sortValue: dateValue.toFormattedString('%Y-%m-%d')
           });
   },
 
-  dates: Ember.A([]),
 
   datesWithContent: function() {
     return this.get('dates').filter(function(date) {
@@ -89,9 +93,82 @@ Radium.feedController = Ember.Object.extend({
     'email': 'Email'
   },
 
+  oldestHistoricalDateBinding: 'Radium.accountController.content.createdAt',
+  lastDateLoaded: Ember.DateTime.create(),
+  // Checks if the last date loaded is the same day or older than the oldest
+  // date of the account, since no
+  isAllHistoricalLoaded: function() {
+    var oldestDateLoaded = this.get('oldestDateLoaded'),
+        lastDateLoaded = this.get('lastDateLoaded');
+    return Ember.DateTime.compare(oldestDateLoaded, lastDateLoaded) >= 0;
+  }.property('oldestDateLoaded', 'lastDateLoaded'),
+
+  isLoading: false,
+  daysLoaded: 0,
+
+  loadDates: function() {
+    var self = this,
+        feedUrl = this.get('feedUrl'),
+        userId = this.get('userId'),
+        oldestHistoricalDate = this.get('oldestHistoricalDate'),
+        lastDateLoaded = this.get('lastDateLoaded'),
+        offset = (this.get('daysLoaded') === 0) ? 0 : -1,
+        day = lastDateLoaded.advance({day: offset});
+
+    Radium.Activity.reopenClass({
+      url: feedUrl,
+      root: 'activity'
+    });
+    
+    this.set('isLoading', true);
+    
+    var activities = Radium.store.find(Radium.Activity, {
+          end_date: day.toFormattedString('%Y-%m-%d'), 
+          start_date: day.toFormattedString('%Y-%m-%d')
+        });
+    
+    activities.addObserver('isLoaded', function() {
+      self.setProperties({
+        lastDateLoaded: day,
+        isLoading: false
+      });
+      
+      self.incrementProperty('daysLoaded');
+
+      if (activities.get('length') === 0) {
+        self.loadDates();
+      } else {
+        activities.forEach(function(activity) {
+          if (activity.get('tag') === 'scheduled_for') {
+            var kind = activity.get('kind'),
+                reference = activity.get(kind)
+          } else {
+            self.addToFeed(activity);
+          }
+        }, self);
+      }
+    });
+
+    Radium.Activity.reopenClass({
+      url: null,
+      root: null
+    });
+  },
+
+  addToFeed: function(activity) {
+    var date = activity.get('timestamp')
+                .adjust({timezone: CONFIG.dates.timezone})
+                .toFormattedString('%Y-%m-%d'),
+        dateGroup = this._pastDateHash[date];
+    if (dateGroup) {
+      dateGroup.get('content').pushObject(activity);
+    }
+  },
+
   add: function(activity) {
 
     var content = this.get('content'),
+        pastDates = this.get('pastDates'),
         kind = activity.kind,
         timezone = new Date().getTimezoneOffset(),
         // Parse the timestamp from the server with the proper timezone set.
@@ -114,6 +191,18 @@ Radium.feedController = Ember.Object.extend({
 
     Radium.store.load(Radium.Activity, activity);
     Radium.store.load(Radium[model], ref);
+
+    var dateGroup = pastDates.find(function(date) {
+      return date.get('sortValue') === hash;
+    });
+
+    if (dateGroup) {
+      dateGroup.get('content').pushObject(Radium.store.find(Radium.Activity, activity.id));
+    } else {
+      var pastDate = this.createDateGroup(parsedDate);
+      pastDate.get('content').pushObject(Radium.store.find(Radium.Activity, activity.id));
+      pastDates.pushObject(pastDate);
+    }
 
     // if (!this.dates[hash]) {
     //   var group = Radium.FeedGroup.create({
@@ -145,5 +234,5 @@ Radium.feedController = Ember.Object.extend({
     }
 
     return mid;
-  },
+  }
 });

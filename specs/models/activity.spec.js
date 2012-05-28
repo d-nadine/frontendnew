@@ -95,7 +95,7 @@ describe("Radium#Activity", function() {
 
     beforeEach(function() {
       Radium.Activity.reopenClass({
-        test: DS.hasOne('Radium.Todo', {embedded: true})
+        test: DS.belongsTo('Radium.Todo', {embedded: true})
       });
       store.load(Radium.Activity, {
         id: 53,

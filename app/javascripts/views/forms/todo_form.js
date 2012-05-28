@@ -98,28 +98,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       var now = Ember.DateTime.create();
       return (now.get('hour') >= 17) ? '+1d' : new Date();
     }.property().cacheable(),
-    // valueBinding: Ember.Binding.transform({
-    //   to: function(value, binding) {
-    //     return value.toFormattedString('%Y-%m-%d');
-    //   },
-    //   from: function(value, binding) {
-    //     var dateValues,
-    //         date = binding.getPath('parentView.finishBy');
-        
-    //     if (value) {
-    //       dateValues = value.split('-');
-    //     } else {
-    //       dateValues = binding.get('_cachedDate').split('-');
-    //     }
-        
-    //     return date.adjust({
-    //       year: parseInt(dateValues[0]),
-    //       month: parseInt(dateValues[1]),
-    //       day: parseInt(dateValues[2])
-    //     });
-    //   }
-    // }).from('parentView.finishBy')
-    valueBinding: Ember.Binding.dateTime('%Y-%m-%d').from('parentView.finishBy')
+    valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
+                  .from('parentView.finishBy')
   }),
 
   submitForm: function() {
@@ -142,7 +122,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           user_id: assignedUserId,
           user: assignedUser,
           created_at: Ember.DateTime.create(),
-          hasNotificationAnim: true
+          hasAnimation: true
         },
         selectedContacts = this.getPath('params.target'),
         isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
@@ -188,6 +168,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       self.fail();
     });
 
-    this.close();
+    Radium.FormManager.send('closeForm');
   }
 });

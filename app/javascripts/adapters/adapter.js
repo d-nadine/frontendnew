@@ -244,84 +244,68 @@ DS.RadiumAdapter = DS.Adapter.extend({
   findQuery: function(store, type, query, modelArray) {
     var self = this,
         root = this.rootForType(type), 
-        plural = this.pluralize(root),
+        plural = (type.root) ? this.pluralize(type.root) : this.pluralize(root),
         currentPage = 1,
-        loadedJSON = [];
+        loadedJSON = [],
+        url = (type.url) ? '/'+type.url : this.buildURL(root);
 
-    var loadPages = function(query) {
-      var paginatedQuery = (query.page === 'all') 
-          ? jQuery.extend({}, query, {page: currentPage})
-          : query;
-          
-      self.ajax(self.buildURL(root), "GET", {
-        data: paginatedQuery,
-        success: function(json) {
-          var controllerName = plural.camelize(),
-              current = json.meta.pagination.current,
-              total = json.meta.pagination.total,
-              data = json[plural];
+    if (query.page) {
+      var loadPages = function(query) {
+        var paginatedQuery = (query.page === 'all') ? jQuery.extend({}, query, {page: currentPage}) : query;
+            
+        self.ajax(url, "GET", {
+          data: paginatedQuery,
+          success: function(json) {
+            var controllerName = plural.camelize(),
+                current = json.meta.pagination.current,
+                total = json.meta.pagination.total,
+                data = json[plural];
 
-          Radium[controllerName+'Controller'].setProperties({
-            currentPage: current,
-            totalPages: total
-          });
-          
-          loadedJSON = loadedJSON.concat(data);
+            Radium[controllerName+'Controller'].setProperties({
+              currentPage: current,
+              totalPages: total
+            });
+            
+            loadedJSON = loadedJSON.concat(data);
 
-          if (query.page === 'all' && current < total) {
-            currentPage = current + 1;
-            loadPages(query);
-          } else {
-            modelArray.load(loadedJSON);
-            this.sideload(store, type, json, plural);
+            if (query.page === 'all' && current < total) {
+              currentPage = current + 1;
+              loadPages(query);
+            } else {
+              modelArray.load(loadedJSON);
+              this.sideload(store, type, json, plural);
+            }
           }
+        });
+      };
+        loadPages(query);
+    } else {
+      this.ajax(url, "GET", {
+        data: query,
+        success: function(json) {
+          var data = (type === Radium.Activity) ? self.normalize(json[plural]) : json[plural] ;
+          modelArray.load(json[plural]);
+          this.sideload(store, type, json, plural);
         }
       });
-    };
-
-    loadPages(query);
+    }
 
   },
 
   // HELPERS
 
   /**
-    Normalize nested JSON resources returned without a unique id that are
-    nested 2 or more levels deep. For example, the code will take this
-    JSON response:
-
-    ```
-    [{
-      id: 52,
-      owner: {
-        user: {
-          id: 11
-        }
-      }
-    }];
-    ```
-    to:
-    ```
-    [{
-      id: 52,
-      owner: {
-        id: R83968
-        user: {
-          id: 11
-        }
-      }
-    }];
-    ```
-    It also prepends an 'R' to avoid any possible ID collision.
+    Normalize nested data objects in activity models like todo and user.
 
     @param {Array} JSON response
   */
   normalize: function(data) {
     var normalized = data.map(function(item) {
-      if (item.hasOwnProperty('owner') && item.hasOwnProperty('reference')) {
-        item.owner.guid = Math.ceil(Math.random() * 10000);
-        item.reference.guid = Math.ceil(Math.random() * 10000);
-      }
+      var kind = item.kind,
+          reference = item.reference[kind];
+      item[kind] = reference;
+      item[kind].activity = item;
+      item.user = (item.owner) ? item.owner.user : null;
       return item;
     });
     return normalized;

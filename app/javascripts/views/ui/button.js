@@ -1,4 +1,6 @@
-Radium.ButtonView = Ember.Button.extend({
+Radium.ButtonView = Ember.View.extend({
+  tagName: 'button',
+  attributeBindings: ['disabled'],
   classNames: "btn primary pull-right".w(),
   isVisible: function() {
     var section = this.getPath('parentView.currentSection');

@@ -1,7 +1,8 @@
 Radium.LoginPane = Ember.View.extend({
   elementId: 'login-pane',
   templateName: 'login',
-  loginButton: Ember.Button.extend({
+  loginButton: Ember.View.extend({
+    tagName: 'button',
     click: function() {
       var $form = $('form#login-form'),
           $fields = $form.find('input.span9');

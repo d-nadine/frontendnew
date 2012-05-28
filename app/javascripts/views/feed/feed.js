@@ -7,23 +7,30 @@ Radium.FeedView = Ember.View.extend({
   templateName: 'activity_row',
 
   didInsertElement: function() {
-    if (this.getPath('content.hasNotificationAnim')) {
-      this.scrollToChangedFeedItem('new');
+    if (this.getPath('content.hasAnimation')) {
+      this.scrollToChangedFeedItem(this.getPath('content.finished'));
     }
   },
 
-  contentDidUpdate: function() {
-    if (this.getPath('content.hasAnimation') && this.get('state') === 'inDOM') {
-      this.scrollToChangedFeedItem('change');
+  stateDidChange: function() {
+    if (this.get('state') !== 'inDOM') {
+      return false;
     }
-  }.observes('content.hasAnimation'),
 
-  scrollToChangedFeedItem: function(type) {
+    if (this.getPath('content.finished')) {
+      this.setPath('content.hasAnimation', true);
+    } else {
+      this.setPath('content.hasAnimation', false);
+    }
+
+  }.observes('content.finished'),
+
+  scrollToChangedFeedItem: function(isFinished) {
     var self = this,
         $row = this.$(),
         offset = $row.offset().top - 200,
-        bgColor = (type === 'new') ? '#FBB450' : '#D6E9C6';
-
+        bgColor = (isFinished) ? '#D6E9C6' : '#FBB450';
+console.log(bgColor);
     $('html, body').animate({
         scrollTop: offset
       }, 250, function() {
@@ -35,6 +42,10 @@ Radium.FeedView = Ember.View.extend({
             }, 1500);
         });
       });
+
+    Ember.run.next(function() {
+      self.set('hasAnimation', false);
+    });
   },
   // Comments
 

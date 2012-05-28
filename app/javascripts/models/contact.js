@@ -51,7 +51,7 @@ Radium.Contact = Radium.Person.extend({
   }),
   fields: DS.hasMany('Radium.Field', {embedded: true}),
   source: DS.attr('string'),
-  user: DS.hasOne('Radium.User'),
+  user: DS.belongsTo('Radium.User'),
   // For checkboxes
   isSelected: false,
 

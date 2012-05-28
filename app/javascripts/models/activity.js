@@ -1,9 +1,9 @@
 Radium.Activity = Radium.Core.extend({
   tag: DS.attr('string'),
   kind: DS.attr('string'),
-  timestamp: DS.attr('date'),
+  timestamp: DS.attr('datetime'),
   owner: DS.attr('object'),
-  user: DS.hasOne('Radium.User', {
+  user: DS.belongsTo('Radium.User', {
     embedded: true
   }),
   reference: DS.attr('object'),
@@ -12,16 +12,15 @@ Radium.Activity = Radium.Core.extend({
   }),
 
   // Embedded models
-  todo: DS.hasOne('Radium.Todo', {embedded: true}),
-  // todo: DS.attr('object'),
-  deal: DS.hasOne('Radium.Deal', {embedded: true}),
-  message: DS.hasOne('Radium.Message', {embedded: true}),
-  email: DS.hasOne('Radium.Email', {embedded: true}),
-  campaign: DS.hasOne('Radium.Campaign', {embedded: true}),
-  contact: DS.hasOne('Radium.Contact', {embedded: true}),
-  group: DS.hasOne('Radium.Group', {embedded: true}),
-  meeting: DS.hasOne('Radium.Meeting', {embedded: true}),
-  phoneCall: DS.hasOne('Radium.PhoneCall', {
+  todo: DS.belongsTo('Radium.Todo', {embedded: true}),
+  deal: DS.belongsTo('Radium.Deal', {embedded: true}),
+  message: DS.belongsTo('Radium.Message', {embedded: true}),
+  email: DS.belongsTo('Radium.Email', {embedded: true}),
+  campaign: DS.belongsTo('Radium.Campaign', {embedded: true}),
+  contact: DS.belongsTo('Radium.Contact', {embedded: true}),
+  group: DS.belongsTo('Radium.Group', {embedded: true}),
+  meeting: DS.belongsTo('Radium.Meeting', {embedded: true}),
+  phoneCall: DS.belongsTo('Radium.PhoneCall', {
     embedded: true,
     key: 'phone_call'
   }),

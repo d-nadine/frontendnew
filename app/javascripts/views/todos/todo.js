@@ -1,21 +1,26 @@
-Radium.TodoView = Radium.FeedView.extend({
+Radium.TodoView = Ember.View.extend({
   tagName: 'span',
   templateName: 'todo',
   classNames: ['todo'],
   classNameBindings: [
-    'todo.isOverdue:overdue',
-    'todo.finished:finished'
+    'content.isOverdue:overdue',
+    'content.finished:finished'
   ],
-  checkboxView: Radium.Checkbox.extend({
-    valueBinding: 'parentView.todo.finished',
-    disabledBinding: 'parentView.todo.isSaving',
+  checkboxView: Ember.Checkbox.extend({
+    checkedBinding: 'parentView.content.finished',
+    disabledBinding: 'parentView.content.isSaving',
     click: function(event) {
       event.stopPropagation();
     },
     todoDidChange: function() {
+      var self = this;
+      Ember.run.once(function() {
+        self.set('updatedAt', Ember.DateTime.create());
+      });
+
       Ember.run.next(function() {
         Radium.store.commit();
       });
-    }.observes('value')
+    }.observes('checked')
   })
 });

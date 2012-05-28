@@ -4,7 +4,7 @@
   @requires bootstrap-tooltip.js
   @version  v2.0.1
 */
-Radium.TooltipView = Ember.Button.extend({
+Radium.TooltipView = Ember.View.extend({
   tagName: 'a',
   attributeBindings: ['title', 'href', 'rel'],
   href: '#',

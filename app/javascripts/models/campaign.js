@@ -6,7 +6,7 @@ Radium.Campaign = Radium.Core.extend({
   }),
   currency: DS.attr('string'),
   target: DS.attr('number'),
-  user: DS.hasOne('Radium.User'),
+  user: DS.belongsTo('Radium.User'),
   is_public: DS.attr('boolean'),
   contacts: DS.hasMany('Radium.Contact'),
   todos: DS.hasMany('Radium.Todo'),

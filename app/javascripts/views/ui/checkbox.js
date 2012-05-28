@@ -4,7 +4,7 @@
 */
 Radium.Checkbox = Ember.Checkbox.extend({
   tagName: 'span',
-  defaultTemplate: Ember.Handlebars.compile('<input type="checkbox" {{bindAttr checked="value" disabled="disabled"}}>')
+  defaultTemplate: Ember.Handlebars.compile('<input type="checkbox" {{bindAttr checked="checked" disabled="disabled"}}>')
 });
 
 Radium.FormCheckbox = Ember.Checkbox.extend({

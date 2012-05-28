@@ -3,7 +3,7 @@ Radium.CallList = Radium.Core.extend({
   finishBy: DS.attr('date', {
     key: 'finish_by'
   }),
-  user: DS.hasOne('Radium.User'),
+  user: DS.belongsTo('Radium.User'),
   campaign: DS.hasMany('Radium.Campaign'),
   todos: DS.hasMany('Radium.Todo'),
   pendingTodos: DS.hasMany('Radium.Todo', {
