@@ -42,40 +42,42 @@ Radium.ContactsPage = Ember.State.extend({
   show: Ember.ViewState.extend({
     view: null,
     enter: function(manager) {
-      var selectedContact = Radium.selectedContactController,
-          view = this.get('view'),
+      var self = this,
           contactId = Radium.appController.get('params');
 
-      if (selectedContact.get('contact') == null) {
-        var contact = Radium.store.find(Radium.Contact, contactId);
-        selectedContact.set('content', contact);
-      }
+      // if (selectedContact.get('contact') == null) {
+      //   var contact = Radium.store.find(Radium.Contact, contactId);
+      //   selectedContact.set('content', contact);
+      // }
+
+      var contact = Radium.store.find(Radium.Contact, contactId);
       
-      if (!selectedContact.getPath('content.feed')) {
-        var contactFeed = Radium.feedController.create({
-              init: function() {
-                  var pastDates = this.createDateRange({limit: 100}),
-                      futureDates = this.createDateRange({limit: 60, direction: 1});
+      Radium.selectedContactController.set('content', contact);
+      this.set('view', Radium.ContactPageView.create());
 
-                  this.set('futureDates', futureDates);
-                  this.set('pastDates', pastDates);
-                },
-                content: [],
-                _pastDateHash: {},
-                oldestDateLoaded: null,
-                newestDateLoaded: null,
-                feedUrl: 'contacts/%@/feed/'.fmt(contactId)
-            });
-        
-        selectedContact.setPath('content.feed', contactFeed);
+      contact.addObserver('isLoaded', function() {
+        if (contact.get('isLoaded')) {
+          var contactFeed = Radium.feedController.create({
+                init: function() {
+                    var pastDates = this.createDateRange({limit: 100}),
+                        futureDates = this.createDateRange({limit: 60, direction: 1});
 
-      }
-
-      this.set('view', Radium.ContactPageView.create({
-          controller: contactFeed
-        })
-      );
+                    this.set('futureDates', futureDates);
+                    this.set('pastDates', pastDates);
+                  },
+                  content: [],
+                  _pastDateHash: {},
+                  oldestDateLoaded: null,
+                  newestDateLoaded: null,
+                  oldestHistoricalDate: contact.get('createdAt'),
+                  lastDateLoaded: contact.get('updatedAt'),
+                  feedUrl: 'contacts/%@/feed/'.fmt(contactId)
+              });
+          }
+          self.get('view').set('controller', contactFeed);
+      });
       
+
       this._super(manager);
     },
     exit: function(manager) {

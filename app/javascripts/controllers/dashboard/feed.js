@@ -1,3 +1,5 @@
+// NOTE: Temporarily (maybe permamently) unused, will instantiate this in the
+// view state to mirrow the new router patterns
 Radium.dashboardFeedController = Radium.feedController.create({
   init: function() {
     var pastDates = this.createDateRange({limit: 100}),

@@ -93,7 +93,7 @@ Radium.feedController = Ember.Object.extend({
     'email': 'Email'
   },
 
-  oldestHistoricalDateBinding: 'Radium.accountController.content.createdAt',
+  oldestHistoricalDate: null,
   lastDateLoaded: Ember.DateTime.create(),
   // Checks if the last date loaded is the same day or older than the oldest
   // date of the account, since no
@@ -165,6 +165,7 @@ Radium.feedController = Ember.Object.extend({
     }
   },
 
+  // Receives activities delivered via push
   add: function(activity) {
 
     var content = this.get('content'),

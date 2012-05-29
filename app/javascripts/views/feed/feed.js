@@ -30,7 +30,7 @@ Radium.FeedView = Ember.View.extend({
         $row = this.$(),
         offset = $row.offset().top - 200,
         bgColor = (isFinished) ? '#D6E9C6' : '#FBB450';
-console.log(bgColor);
+
     $('html, body').animate({
         scrollTop: offset
       }, 250, function() {
@@ -43,9 +43,7 @@ console.log(bgColor);
         });
       });
 
-    Ember.run.next(function() {
-      self.set('hasAnimation', false);
-    });
+    self.set('hasAnimation', false);
   },
   // Comments
 
