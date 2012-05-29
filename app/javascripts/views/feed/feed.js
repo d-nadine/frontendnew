@@ -43,7 +43,7 @@ Radium.FeedView = Ember.View.extend({
         });
       });
 
-    self.set('hasAnimation', false);
+    self.setPath('content.hasAnimation', false);
   },
   // Comments
 

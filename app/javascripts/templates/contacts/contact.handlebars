@@ -46,17 +46,19 @@
       </div>
       <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
     </div>
-    {{#with controller}}
-      {{#each pastDates}}
-        {{#if content.length}}
-          <div class="page-header">
-            <h3>{{formatDate date}}</h3>
-          </div>
-          {{#each content}}
-            {{view Radium.HistoricalFeedView contentBinding="this"}}
-          {{/each}}
-        {{/if}}
-      {{/each}}
-    {{/with}}
+    {{#if controller}}
+      {{#with controller}}
+        {{#each pastDates}}
+          {{#if content.length}}
+            <div class="page-header">
+              <h3>{{formatDate date}}</h3>
+            </div>
+            {{#each content}}
+              {{view Radium.HistoricalFeedView contentBinding="this"}}
+            {{/each}}
+          {{/if}}
+        {{/each}}
+      {{/with}}
+    {{/if}}
   </div>
 </div>
