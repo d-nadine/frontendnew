@@ -29,6 +29,11 @@ Radium.EndlessScrolling = Ember.Mixin.create({
   }.observes('controller.isLoading'),
 
   loadFeed: function() {
+    //TODO: Check with Josh, in contact.show action, the ContactPageView.
+    //uses has no controller.  loadDates is in the feedController
+    if(!this.get('controller'))
+      return;
+
     this.get('controller').loadDates();
   }
 });

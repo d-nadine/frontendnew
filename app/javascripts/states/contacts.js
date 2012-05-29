@@ -45,38 +45,14 @@ Radium.ContactsPage = Ember.State.extend({
       var self = this,
           contactId = Radium.appController.get('params');
 
-      // if (selectedContact.get('contact') == null) {
-      //   var contact = Radium.store.find(Radium.Contact, contactId);
-      //   selectedContact.set('content', contact);
-      // }
-
       var contact = Radium.store.find(Radium.Contact, contactId);
       
       Radium.selectedContactController.set('content', contact);
-      this.set('view', Radium.ContactPageView.create());
-
-      contact.addObserver('isLoaded', function() {
-        if (contact.get('isLoaded')) {
-          var contactFeed = Radium.feedController.create({
-                init: function() {
-                    var pastDates = this.createDateRange({limit: 100}),
-                        futureDates = this.createDateRange({limit: 60, direction: 1});
-
-                    this.set('futureDates', futureDates);
-                    this.set('pastDates', pastDates);
-                  },
-                  content: [],
-                  _pastDateHash: {},
-                  oldestDateLoaded: null,
-                  newestDateLoaded: null,
-                  oldestHistoricalDate: contact.get('createdAt'),
-                  lastDateLoaded: contact.get('updatedAt'),
-                  feedUrl: 'contacts/%@/feed/'.fmt(contactId)
-              });
-          }
-          self.get('view').set('controller', contactFeed);
-      });
       
+      var view = Radium.ContactPageView.create();
+
+      this.set('view', view);
+      Radium.selectedContactController.set('view', view);
 
       this._super(manager);
     },
