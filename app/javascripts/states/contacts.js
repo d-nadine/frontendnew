@@ -1,42 +1,18 @@
 Radium.ContactsPage = Ember.State.extend({
   index: Ember.ViewState.extend({
-    view: Radium.ContactsPageView,
+    view: null,
+    enter: function(manager) {
+      // TODO: Kick off web worker to bring in additional contacts
+      Radium.contactsController.setProperties({
+        content: Radium.store.find(Radium.Contact, {page: 1}),
+        totalPages: 1
+      });
 
-    start: Ember.State.create({
-      isFirstRun: true,
-      enter: function(manager) {
-        if (this.get('isFirstRun')) {
-          var groups = Radium.store.find(Radium.Group, {page: 'all'});
-          // contacts = Radium.store.find(Radium.Contact, {page: 0}),
-          
-          groups.addObserver('isLoaded', function() {
-            Radium.groupsController.set('content', groups);
-          });
-          
-          if (Radium.contactsController.get('length') <= 0) {
-            Radium.contactsController.setProperties({
-              content: Radium.store.find(Radium.Contact, {page: 1}),
-              totalPages: 1
-            });
-          }
-          
-          this.set('isFirstRun', false);
-
-          Ember.run.next(function() {
-            manager.send('allCampaigns');
-          });
-        } else {
-          Ember.run.next(function() {
-            manager.goToState('ready');
-          });
-        }
-      }
-    }),
-
-    ready: Ember.State.create(),
-
-    // Loader for infinite scrolling
-    loading: Radium.MiniLoader,
+      this.set('view', Radium.ContactsPageView.create({
+        controller: Radium.contactsController
+      }));
+      this._super(manager);
+    }
   }),
   
   show: Ember.ViewState.extend({
@@ -56,6 +32,7 @@ Radium.ContactsPage = Ember.State.extend({
 
       this._super(manager);
     },
+
     exit: function(manager) {
       this._super(manager);
       Radium.selectedContactController.set('content', null);

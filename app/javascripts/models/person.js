@@ -18,6 +18,8 @@ Radium.Person = Radium.Core.extend({
   firstName: function() {
     return this.get('name').split(" ")[0];
   }.property('name'),
+
+  avatar: DS.attr('object'),
   
   // Default hasMany groups
   deals: DS.hasMany('Radium.Deal'),

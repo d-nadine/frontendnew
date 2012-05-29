@@ -7,9 +7,6 @@ Radium.Todo = Radium.Core.extend({
   finishBy: DS.attr('datetime', {
     key: 'finish_by'
   }),
-  // sortValue: function() {
-  //   return new Date(this.get('updatedAt')).getTime();
-  // }.property('finishBy'),
   finished: DS.attr('boolean'),
   campaign: DS.belongsTo('Radium.Campaign'),
   callList: DS.belongsTo('Radium.CallList', {

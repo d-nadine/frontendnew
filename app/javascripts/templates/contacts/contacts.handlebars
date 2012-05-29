@@ -80,7 +80,7 @@
     {{/view}}
     <div id="form-container"></div>
     <div id="contacts" class="row">
-      {{#with Radium.selectedContactsController}}
+      {{#with Radium.contactsController}}
         {{#if selectedCampaign}}
           <div class="span9">
             <div class="page-header">
@@ -88,7 +88,7 @@
             </div>
           </div>
         {{/if}}
-        {{#if content.length}}
+        {{#if content.isLoaded}}
           {{#each content}}
             {{view Radium.ContactCardView contentBinding="this"}}
           {{/each}}

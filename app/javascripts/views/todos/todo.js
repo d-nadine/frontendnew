@@ -11,6 +11,11 @@ Radium.TodoView = Ember.View.extend({
     finishedBinding: 'parentView.content.finished',
     disabledBinding: 'parentView.content.isSaving',
     click: function(event) {
+      /*
+        To keep the UI separating, we need to toggle the finished 
+        property on click instead of through bindings so updatedAt 
+        can be set at the same time.
+      */
       this.set('updatedAt', Ember.DateTime.create())
           .toggleProperty('finished');
       Radium.store.commit();

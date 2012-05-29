@@ -26,7 +26,6 @@ Radium.ContactsPageView = Ember.View.extend({
   // Infinite scrolling (To be reincorporated into own mixin)
   didInsertElement: function() {
     this._super();
-    this.load();
   },
 
   willDestroyElement: function() {
@@ -43,7 +42,6 @@ Radium.ContactsPageView = Ember.View.extend({
   },
 
   pagesLoaded: function() {
-    Radium.App.goToState('ready');
     if (this.getPath('controller.currentPage') < this.getPath('controller.totalPages')) {
       Radium.App.goToState('ready');
       $(window).on('scroll', $.proxy(this.infiniteLoading, this));

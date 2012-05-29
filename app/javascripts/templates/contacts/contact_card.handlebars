@@ -4,7 +4,7 @@
       <span class="inline-checkbox">
         {{view Ember.Checkbox checkedBinding="content.isSelected"}}
       </span>
-      <img src="http://placehold.it/72x72">
+      <img {{bindAttr src="content.avatar.small_url" title="content.name"}}>
     </div>
     <div class="contact-details">
       <h4 class="headline">

@@ -592,27 +592,27 @@ ul.comments-list {
 }
 
 .contact-avatar {
-  width: 90px;
+  width: 40px;
   position: relative;
   float: left;
-}
 
-.contact-avatar .inline-checkbox {
-  padding: 2px 5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #fff;
-  display: none;
+  .inline-checkbox {
+    padding: 2px 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    display: none;
+  }
+
+  .inline-checkbox label {
+    margin: 0;
+  }
 }
 
 .contact-card:hover .inline-checkbox,
 .contact-card.selected .contact-avatar .inline-checkbox {
   display: block;
-}
-
-.contact-avatar .inline-checkbox label {
-  margin: 0;
 }
 
 .contact-details {

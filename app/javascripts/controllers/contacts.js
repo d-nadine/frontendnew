@@ -205,18 +205,11 @@ Radium.contactsController = Ember.ArrayProxy.create({
         hasNoPages = currentPage === 0 && totalPages === 0,
         isNotAtEnd = currentPage !== totalPages;
 
-    if (hasNoPages) {
-      var contacts = Radium.store.find(Radium.Contact, {page: 1});
-      this.set('content', contacts);
-    } else {
-      if (isNotAtEnd) {
-        var contactsPage = Radium.store.find(Radium.Contact, {
-              page: ++currentPage
-            });
-        contactsPage.addObserver('isLoaded', function() {
-          self.get('content').pushObjects(contactsPage);
-        });
-      }
+    if (isNotAtEnd) {
+      var contactsPage = Radium.store.find(Radium.Contact, {
+            page: ++currentPage
+          });
+      this.get('content').pushObjects(contactsPage);
     }
   }
 });
