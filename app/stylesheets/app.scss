@@ -573,10 +573,6 @@ ul.comments-list {
   font-size: 14px;
 }
 
-.contact-card {
-  margin-bottom: 20px;
-}
-
 .contact-card-inner {
   padding: 10px;
   display: inline-block;
@@ -599,9 +595,8 @@ ul.comments-list {
   .inline-checkbox {
     padding: 2px 5px;
     position: absolute;
-    top: 0;
-    left: 0;
-    background: #fff;
+    top: 5px;
+    left: -25px;
     display: none;
   }
 
