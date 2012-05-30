@@ -20,7 +20,7 @@ Radium.FormContainer = Ember.ContainerView.create({
   }
 }).append();
 
-Radium.FormManager = Ember.StateManager.create({
+Radium.FormManager = Ember.StateManager.extend({
   enableLogging: true,
   // rootElement: '#form-container',
   rootView: Radium.FormContainer,

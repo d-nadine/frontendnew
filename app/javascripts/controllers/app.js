@@ -1,4 +1,4 @@
-Radium.appController = Ember.Object.extend({
+Radium.AppController = Ember.Object.extend({
   // During development set to true
   isLoggedIn: true,
   // Set to false when all the intial data has been loaded

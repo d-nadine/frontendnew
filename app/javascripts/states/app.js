@@ -26,6 +26,11 @@ Radium.App = Ember.StateManager.create({
     }
   }),
 
+  init: function(){
+    Radium.set('appController', Radium.AppController.create());
+    this._super();
+  },
+
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
@@ -77,7 +82,7 @@ Radium.App = Ember.StateManager.create({
     ------------------------------------
   */
   loadPage: function(manager, context) {
-    var app = Radium.appController,
+    var app = Radium.get('appController'),
         page = context.page,
         action = context.action || 'index',
         statePath = [page, action].join('.'),

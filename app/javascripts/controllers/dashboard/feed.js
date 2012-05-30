@@ -13,7 +13,7 @@ Radium.dashboardFeedController = Radium.feedController.extend({
   oldestDateLoaded: null,
   newestDateLoaded: null,
   // Set up for loading feed
-  feedUrl: 'users/%@/feed/'.fmt(Radium.usersController.getPath('loggedInUser.id')),
+  // feedUrl: 'users/%@/feed/'.fmt(Radium.usersController.getPath('loggedInUser.id')),
 
   addTodo: function() {
     Radium.FormManager.send('showForm', {
