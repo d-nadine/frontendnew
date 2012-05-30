@@ -122,8 +122,7 @@ Radium.FormView = Ember.View.extend({
     href: '#',
     title: 'Close form',
     target: 'Radium.FormManager',
-    action: 'closeForm',
-
+    action: 'closeForm'
   }),
 
   checkForEmpty: function(hash) {

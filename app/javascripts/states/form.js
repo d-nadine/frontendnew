@@ -4,10 +4,19 @@ Radium.FormContainer = Ember.ContainerView.create({
     this.$().hide().slideDown(300);
   },
   adjustPosition: function(position) {
-    this.$().css({
-      top: position.top - 20,
-      left: position.left + 20
-    });
+    var viewportWidth = $(window).width(),
+        viewportOffset = (viewportWidth - position.left),
+        layout = {top: position.top - 20};
+
+    if (viewportOffset < 700) {
+      layout.right = viewportOffset;
+      layout.left = 'auto';
+    } else {
+      layout.left = position.left + 20;
+      layout.right = 'auto';
+    }
+
+    this.$().css(layout);
   }
 }).append();
 
@@ -30,8 +39,7 @@ Radium.FormManager = Ember.StateManager.create({
         rootView.adjustPosition(context.position);
       }
 
-      rootView.get('childViews').pushObject(form);
-      manager.set('formName', context.form);
+      rootView.set('currentView', form);
       manager.goToState('open');
     },
     closeForm: Ember.K()
@@ -40,9 +48,7 @@ Radium.FormManager = Ember.StateManager.create({
   open: Ember.State.create({
 
     closeForm: function(manager, context) {
-      var currentForm = manager.getPath('rootView.childViews.firstObject');
-      manager.getPath('rootView.childViews').removeObject(currentForm);
-      manager.set('formName', null);
+      manager.setPath('rootView.currentView', null);
       manager.goToState('empty');
       
       if (context) {
@@ -55,17 +61,16 @@ Radium.FormManager = Ember.StateManager.create({
           form = Radium[context.form + 'Form'].create({
                     params: context,
                     formType: context.form
-                  }),
-          container = rootView.get('childViews');
+                  });
 
-      if (context.form !== manager.get('formName')) {
-        container.removeAt(0);
+      if (rootView.get('currentView')) {
+        rootView.set('currentView', null);
         
         if (context.position) {
           rootView.adjustPosition(context.position);
         }
 
-        container.pushObject(form);
+        rootView.set('currentView', form);
       } else {
         manager.send('closeForm');
       }
