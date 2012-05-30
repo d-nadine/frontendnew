@@ -2,6 +2,12 @@ Radium.FormContainer = Ember.ContainerView.create({
   classNames: ['create-form'],
   didInsertElement: function() {
     this.$().hide().slideDown(300);
+  },
+  adjustPosition: function(position) {
+    this.$().css({
+      top: position.top - 20,
+      left: position.left + 20
+    });
   }
 }).append();
 
@@ -14,12 +20,17 @@ Radium.FormManager = Ember.StateManager.create({
 
   empty: Ember.State.create({
     showForm: function(manager, context) {
-      var form = Radium[context.form + 'Form'].create({
+      var rootView = manager.get('rootView')
+          form = Radium[context.form + 'Form'].create({
                   params: context,
                   formType: context.form
                 });
 
-      manager.getPath('rootView.childViews').pushObject(form);
+      if (context.position) {
+        rootView.adjustPosition(context.position);
+      }
+
+      rootView.get('childViews').pushObject(form);
       manager.set('formName', context.form);
       manager.goToState('open');
     },
@@ -40,13 +51,20 @@ Radium.FormManager = Ember.StateManager.create({
       }
     },
     showForm: function(manager, context) {
-      var form = Radium[context.form + 'Form'].create({
+      var rootView = manager.get('rootView'),
+          form = Radium[context.form + 'Form'].create({
                     params: context,
                     formType: context.form
                   }),
-          container = manager.getPath('rootView.childViews');
+          container = rootView.get('childViews');
+
       if (context.form !== manager.get('formName')) {
         container.removeAt(0);
+        
+        if (context.position) {
+          rootView.adjustPosition(context.position);
+        }
+
         container.pushObject(form);
       } else {
         manager.send('closeForm');

@@ -25,11 +25,15 @@ Radium.FeedFilterItemView = Ember.View.extend({
       return "Add a new " + type.substr(0, type.length-1);
     }.property(),
     click: function(event) {
-      var kind = this.getPath('parentView.content.label'),
+      var $sender = $(event.target),
+          kind = this.getPath('parentView.content.label'),
           formType = (this.singular[kind]) 
                     ? this.singular[kind] 
                     : kind.replace(' ', '').slice(0, -1);
-      Radium.FormManager.send('showForm', {form: formType});
+      Radium.FormManager.send('showForm', {
+        form: formType,
+        position: $sender.offset()
+      });
       event.stopPropagation();
       return false;
     }

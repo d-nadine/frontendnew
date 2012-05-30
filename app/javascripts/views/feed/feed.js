@@ -27,7 +27,7 @@ Radium.FeedView = Ember.View.extend({
 
   scrollToChangedFeedItem: function(isFinished) {
     var self = this,
-        $row = this.$(),
+        $row = this.$('.feed-header'),
         offset = $row.offset().top - 200,
         bgColor = (isFinished) ? '#D6E9C6' : '#FBB450';
 
@@ -39,7 +39,9 @@ Radium.FeedView = Ember.View.extend({
           }, 250, function() {
             $row.animate({
               backgroundColor: '#fff'
-            }, 1500);
+            }, 1500, function() {
+              $(this).attr('style', null);
+            });
         });
       });
 

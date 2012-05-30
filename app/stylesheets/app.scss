@@ -207,7 +207,7 @@ li.main-filter-item {
 #form-container {
   width: 100%;
   margin: 20px 0;
-  position: fixed;
+  position: absolute;
   z-index: 999;
 
   .well {
@@ -268,10 +268,7 @@ li.main-filter-item {
 
 .create-form {
   width: 700px;
-  margin-left: -350px;
-  position: fixed;
-  top: 90px;
-  left: 50%;
+  position: absolute;
   z-index: 999;
 
   .well {
@@ -338,7 +335,7 @@ fieldset legend {
 
   .create-form {
     width: 700px;
-    position: absolute;
+    position: fixed;
     left: 0;
     z-index: 999;
     top: 30px;
