@@ -5,7 +5,7 @@
 
 Radium.Routes = function() {      
   this.configure(function() {
-    this.generateRequestOnPageLoad = true;
+    this.generateRequestOnPageLoad = false;
   });
 
   this.get('/', function(req){
