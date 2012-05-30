@@ -1,4 +1,4 @@
-Radium.selectedContactController = Ember.Object.create({
+Radium.selectedContactController = Ember.Object.extend({
   content: null,
   view: null,
 

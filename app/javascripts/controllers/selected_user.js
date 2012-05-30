@@ -1,3 +1,3 @@
-Radium.selectedUserController = Ember.Object.create({
+Radium.selectedUserController = Ember.Object.extend({
   content: null
 });

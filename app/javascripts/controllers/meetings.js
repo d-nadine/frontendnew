@@ -1,3 +1,3 @@
-Radium.meetingsController = Ember.ArrayProxy.create({
+Radium.meetingsController = Ember.ArrayProxy.extend({
   content: []
 });

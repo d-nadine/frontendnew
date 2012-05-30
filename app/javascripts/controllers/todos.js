@@ -1,4 +1,4 @@
-Radium.todosController = Ember.ArrayController.create({
+Radium.todosController = Ember.ArrayController.extend({
   content: Radium.store.findAll(Radium.Todo),
 
   overdueTodos: function() {

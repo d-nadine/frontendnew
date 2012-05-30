@@ -1,4 +1,4 @@
-Radium.groupsController = Ember.ArrayProxy.create({
+Radium.groupsController = Ember.ArrayProxy.extend({
   content: Radium.store.find(Radium.Group, {page: 'all'}),
   names: function() {
     return this.getEach('name');

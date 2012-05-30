@@ -1,1 +1,1 @@
-Radium.dashboardFeedListController = Crossfilter.Data.create({});
+Radium.dashboardFeedListController = Crossfilter.Data.extend({});

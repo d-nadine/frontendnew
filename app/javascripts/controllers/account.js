@@ -1,4 +1,4 @@
-Radium.accountController = Ember.Object.create({
+Radium.accountController = Ember.Object.extend({
   content: null,
   accountCreatedAt: function() {
     return this.getPath('content.createdAt').toFormattedString('%Y-%m-%d');

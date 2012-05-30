@@ -1,4 +1,4 @@
-Radium.selectedFeedDateController = Ember.ArrayProxy.create({
+Radium.selectedFeedDateController = Ember.ArrayProxy.extend({
   content: [],
   todos: function() {
     return this.filterProperty('type', 'todo').getEach('referenceID').uniq();

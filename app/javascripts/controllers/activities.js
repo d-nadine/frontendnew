@@ -1,4 +1,4 @@
-Radium.activitiesController = Radium.feedController.create({
+Radium.activitiesController = Radium.feedController.extend({
   content: [],
   // Filter the feed by type
   categoryFilter: 'everything',

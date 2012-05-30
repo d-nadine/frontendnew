@@ -1,3 +1,3 @@
-Radium.ChartController = Ember.Object.create({
+Radium.ChartController = Ember.Object.extend({
   content: null
 });

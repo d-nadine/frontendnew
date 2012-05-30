@@ -1,4 +1,4 @@
-Radium.dealsController = Ember.ArrayProxy.create({
+Radium.dealsController = Ember.ArrayProxy.extend({
   selectedUser: null,
   content: [],
   filterTypes: [

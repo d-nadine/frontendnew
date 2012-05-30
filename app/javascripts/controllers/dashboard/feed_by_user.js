@@ -1,4 +1,4 @@
-Radium.feedByUserController = Crossfilter.Dimension.create({
+Radium.feedByUserController = Crossfilter.Dimension.extend({
   _byUser: function(data) {
     return (data.user) ? data.user.id : 0;
   },

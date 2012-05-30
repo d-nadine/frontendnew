@@ -1,4 +1,4 @@
-Radium.feedByActivityController = Crossfilter.Dimension.create({
+Radium.feedByActivityController = Crossfilter.Dimension.extend({
   _byGroupedActivity: function(data) {
     return "%@_%@".fmt(data.kind, data.tag);
   },

@@ -1,3 +1,3 @@
-Radium.campaignsController = Ember.ArrayProxy.create({
+Radium.campaignsController = Ember.ArrayProxy.extend({
   content: []
 });

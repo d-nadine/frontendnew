@@ -1,4 +1,4 @@
-Radium.feedByKindController = Crossfilter.Dimension.create({
+Radium.feedByKindController = Crossfilter.Dimension.extend({
   _byKind: function(data) {
     return data.kind;
   },

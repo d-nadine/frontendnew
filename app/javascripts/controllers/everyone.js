@@ -1,4 +1,4 @@
-Radium.everyoneController = Ember.ArrayProxy.create({
+Radium.everyoneController = Ember.ArrayProxy.extend({
   usersBinding: 'Radium.usersController.emails',
   contactsBinding: 'Radium.contactsController.emails',
   /**

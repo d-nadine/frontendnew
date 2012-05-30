@@ -1,4 +1,4 @@
-Radium.usersController = Ember.ArrayProxy.create({
+Radium.usersController = Ember.ArrayProxy.extend({
   content: [],
   loggedInUser: function() {
     return this.filterProperty('isLoggedIn', true).get('firstObject');

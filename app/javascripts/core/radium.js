@@ -3,7 +3,10 @@ window.Radium = Ember.Application.create({
   store: DS.Store.create({
     revision: 4,
     adapter: DS.RadiumAdapter.create({bulkCommit: false})
-  })
+  }),
+  ready: function(){
+    console.log('in ready');
+  }
 });
 
 var api = $.cookie('user_api_key');

@@ -1,4 +1,4 @@
-Radium.feedByContactController = Crossfilter.Dimension.create({
+Radium.feedByContactController = Crossfilter.Dimension.extend({
   _byContact: function(data) {
    return (data.contact) ? data.contact.id : 0;
   },

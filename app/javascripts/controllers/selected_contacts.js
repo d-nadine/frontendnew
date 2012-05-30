@@ -1,4 +1,4 @@
-Radium.selectedContactsController = Ember.ArrayProxy.create({
+Radium.selectedContactsController = Ember.ArrayProxy.extend({
   content: [],
   selectedCampaign: null,
   selectedFilter: null,

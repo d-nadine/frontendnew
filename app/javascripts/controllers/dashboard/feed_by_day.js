@@ -1,4 +1,4 @@
-Radium.feedByDayController = Crossfilter.Dimension.create({
+Radium.feedByDayController = Crossfilter.Dimension.extend({
   _byDay: function(data) {
     return Date.parse(data.timestamp);
   },

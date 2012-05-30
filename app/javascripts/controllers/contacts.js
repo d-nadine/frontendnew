@@ -1,4 +1,4 @@
-Radium.contactsController = Ember.ArrayProxy.create({
+Radium.contactsController = Ember.ArrayProxy.extend({
   content: [],
 
   isAllContactsLoaded: function() {

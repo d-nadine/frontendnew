@@ -1,4 +1,4 @@
-Radium.pipelineController = Ember.Object.create({
+Radium.pipelineController = Ember.Object.extend({
   filterTypes: [
     {
       title: 'Everything', 

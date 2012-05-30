@@ -1,3 +1,3 @@
-Radium.callListsController = Ember.ArrayProxy.create({
+Radium.callListsController = Ember.ArrayProxy.extend({
   content: []
 });
