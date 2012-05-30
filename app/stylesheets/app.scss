@@ -36,6 +36,7 @@ body {
 .icon-add-todo,
 .icon-edit,
 .icon-comments,
+.icon-mail,
 .icon-overdue {
   width: 16px;
   height: 16px;
@@ -51,6 +52,10 @@ body {
 
 .icon-todo {
   background-image: url('/images/icons/feed-todo.png');
+}
+
+.icon-mail {
+  background-image: url('/images/icons/mail.png');
 }
 
 .icon-todo.icon-overdue,
@@ -335,7 +340,7 @@ fieldset legend {
 
   .create-form {
     width: 700px;
-    position: fixed;
+    position: absolute;
     left: 0;
     z-index: 999;
     top: 30px;
