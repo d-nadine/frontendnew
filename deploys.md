@@ -1,3 +1,4 @@
+* [2012-05-30 00:43 -0700] c14283a - Joshua Jones: Switch out old envelope icon for new style icons on contacts page.
 * [2012-05-29 01:01 -0700] 3e6f575 - Joshua Jones: Instantiate feed controller class in state charts instead of as a singleton.
 * [2012-05-28 17:04 -0700] a9e7bd2 - Joshua Jones: Merge branch 'upgrade_ember_data'
 * [2012-05-22 17:21 -0700] ac36604 - Joshua Jones: [Delivers #29033415] Add error page during auth, add bug report form.
