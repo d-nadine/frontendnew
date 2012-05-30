@@ -3,10 +3,9 @@ Radium.ContactsPage = Ember.State.extend({
     view: null,
     enter: function(manager) {
       // TODO: Kick off web worker to bring in additional contacts
-      Radium.contactsController.setProperties({
-        content: Radium.store.find(Radium.Contact, {page: 1}),
-        totalPages: 1
-      });
+      var contacts = Radium.store.find(Radium.Contact, {page: 1});
+      debugger;
+      Radium.contactsController.set('totalPages', 1);
 
       this.set('view', Radium.ContactsPageView.create({
         controller: Radium.contactsController

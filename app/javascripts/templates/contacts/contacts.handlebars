@@ -88,15 +88,9 @@
             </div>
           </div>
         {{/if}}
-        {{#if content.isLoaded}}
-          {{#each content}}
-            {{view Radium.ContactCardView contentBinding="this"}}
-          {{/each}}
-        {{else}}
-          <div class="span9">
-            <h4>Loading contacts...</h4>
-          </div>
-        {{/if}}
+        {{#each content}}
+          {{view Radium.ContactCardView contentBinding="this"}}
+        {{/each}}
       {{/with}}
     </div>
   </div> <!-- /#content -->
