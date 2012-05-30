@@ -106,6 +106,14 @@ Radium.feedController = Ember.Object.extend({
   isLoading: false,
   daysLoaded: 0,
 
+  isLoadingDidChange: function() {
+    if (this.get('isLoading')) {
+      Radium.LoadingManager.send('show');
+    } else {
+      Radium.LoadingManager.send('hide');
+    }
+  }.observes('isLoading'),
+
   loadDates: function() {
     var self = this,
         feedUrl = this.get('feedUrl'),
@@ -160,6 +168,7 @@ Radium.feedController = Ember.Object.extend({
                 .adjust({timezone: CONFIG.dates.timezone})
                 .toFormattedString('%Y-%m-%d'),
         dateGroup = this._pastDateHash[date];
+
     if (dateGroup) {
       dateGroup.get('content').pushObject(activity);
     }

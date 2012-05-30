@@ -1,7 +1,7 @@
 minispade.require('radium/states/page');
 minispade.require('radium/states/form');
 minispade.require('radium/states/error');
-minispade.require('radium/states/mini_loader');
+minispade.require('radium/states/loading');
 minispade.require('radium/states/dashboard');
 minispade.require('radium/states/contacts');
 minispade.require('radium/states/users');

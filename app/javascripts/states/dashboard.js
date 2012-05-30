@@ -53,8 +53,6 @@ Radium.DashboardPage = Ember.ViewState.extend({
 
   ready: Ember.State.create({}),
 
-  loading: Radium.MiniLoader,
-
   /**
     ACTIONS
     ------------------------------------

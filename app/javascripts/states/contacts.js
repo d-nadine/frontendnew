@@ -37,8 +37,7 @@ Radium.ContactsPage = Ember.State.extend({
       this._super(manager);
       Radium.selectedContactController.set('content', null);
     },
-    ready: Ember.State.create(),
-    loading: Radium.MiniLoader
+    ready: Ember.State.create()
   }),
   // Events
   allCampaigns: function(manager, context) {
