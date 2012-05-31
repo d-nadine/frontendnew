@@ -1,14 +1,12 @@
 Radium.AppController = Ember.Object.extend({
   // During development set to true
   isLoggedIn: true,
-  // Set to false when all the intial data has been loaded
-  isFirstRun: true,
   // Store the routes intercepted by Davis
   _statePathCache: {},
   currentPage: null,
   selectedForm: null,
   params: null,
-  currentUser: null,
+  account: null,
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),
   todayString: function() {

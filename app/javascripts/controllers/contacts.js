@@ -1,5 +1,5 @@
 Radium.contactsController = Ember.ArrayProxy.extend({
-  content: [],
+  content: Radium.store.findAll(Radium.Contact),
 
   isAllContactsLoaded: function() {
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
@@ -209,7 +209,6 @@ Radium.contactsController = Ember.ArrayProxy.extend({
       var contactsPage = Radium.store.find(Radium.Contact, {
             page: ++currentPage
           });
-      this.get('content').pushObjects(contactsPage);
     }
   }
 });

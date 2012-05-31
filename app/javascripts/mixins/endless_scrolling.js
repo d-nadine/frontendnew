@@ -16,7 +16,6 @@ Radium.EndlessScrolling = Ember.Mixin.create({
     }
   },
 
-  isFirstRun: true,
   noData: false,
 
   isLoadingObserver: function() {

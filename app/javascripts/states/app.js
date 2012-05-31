@@ -21,7 +21,7 @@ Radium.App = Ember.StateManager.create({
   loggedOut: Radium.LoggedOutState,
 
   start: Ember.State.create({
-    enter: function(manager, transition) {
+    enter: function(manager, transition){
       this._super(manager, transition);
       $('#main').empty();
     }
@@ -30,7 +30,6 @@ Radium.App = Ember.StateManager.create({
   init: function(){
     Radium.set('appController', Radium.AppController.create());
     Radium.set('accountController', Radium.AccountController.create());
-    Radium.set('usersController', Radium.UsersController.create());
     this._super();
   },
 
@@ -39,25 +38,22 @@ Radium.App = Ember.StateManager.create({
     view: Radium.LoadingView,
     enter: function(manager, transition) {
       this._super(manager, transition);
-      $.when(manager.bootstrapUser())
-        .then(function(data) {
-            data = data.account;
-            Radium.store.load(Radium.Account, data);
-            var account = Radium.store.find(Radium.Account, data.id);
-            Radium.get('accountController').set('content', account);
-            Radium.appController.setProperties({
-              isFirstRun: false,
-              isLoggedIn: true
-            });
+      $.when(manager.bootstrapUser()).then(function(data){
+        data = data.account;
+        Radium.store.load(Radium.Account, data);
+        var account = Radium.store.find(Radium.Account, data.id);
 
-            Radium.get('usersController').set('content', Radium.store.find(Radium.User, {page: 'all'}));
-            
-            manager.send('loginComplete');
-          },
-          function() {
-            manager.send('accountLoadFailed');
-          }
-        );
+        //do we need the accountController?
+        Radium.get('accountController').set('content', account);
+        Radium.get('appController').set('account', account);
+        
+        Radium.set('usersController', Radium.UsersController.create());
+
+        manager.send('loginComplete');
+      },
+      function() {
+        manager.send('accountLoadFailed');
+      });
     },
     loginComplete: function(manager) {
       manager.goToState('loggedIn');
@@ -96,7 +92,7 @@ Radium.App = Ember.StateManager.create({
       return false;
     }
 
-    if (app.get('currentUser')) {
+    if (Radium.get('appController').get('account')) {
       manager.goToState(statePath);
     } else {
       manager.goToState('authenticate');
