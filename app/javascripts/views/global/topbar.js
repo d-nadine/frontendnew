@@ -49,7 +49,7 @@ Radium.TopbarView = Ember.View.extend({
     hasAddedForm: false,
     click: function() {
       var formName = this.$().text().replace('Add ', '');
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: formName
       });
     },

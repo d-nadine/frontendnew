@@ -30,7 +30,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   emailButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'ContactsMessage',
         isMultiple: true,
         type: 'contacts'
@@ -45,7 +45,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   addToGroupButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'AddToGroup',
         target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'
@@ -61,7 +61,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   addToCompanyButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'AddToCompany',
         target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'
@@ -90,7 +90,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   todoButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'Todo',
         target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'

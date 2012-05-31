@@ -16,7 +16,7 @@ Radium.dashboardFeedController = Radium.feedController.extend({
   // feedUrl: 'users/%@/feed/'.fmt(Radium.usersController.getPath('loggedInUser.id')),
 
   addTodo: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'Todo'
     });
     return false;

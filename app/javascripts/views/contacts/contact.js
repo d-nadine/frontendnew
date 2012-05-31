@@ -2,7 +2,7 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   templateName: 'contact',
   contentBinding: 'Radium.selectedContactController.content',
   addContactTodo: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'Todo',
       type: 'contacts',
       target: this.get('content')
@@ -11,7 +11,7 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   },
 
   emailContact: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'Message',
       type: 'contacts',
       target: this.get('content')
@@ -20,7 +20,7 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   },
 
   addContactToGroup: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'AddToGroup',
       target: this.get('content')
     });
@@ -28,7 +28,7 @@ Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
   },
 
   addContactToCompany: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'AddToCompany',
       target: this.get('content')
     });

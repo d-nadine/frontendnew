@@ -168,6 +168,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       self.fail();
     });
 
-    Radium.FormManager.send('closeForm');
+    Radium.get('formManager').send('closeForm');
   }
 });

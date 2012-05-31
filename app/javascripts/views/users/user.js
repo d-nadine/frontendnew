@@ -3,7 +3,7 @@ Radium.UserPageView = Ember.View.extend(Radium.EndlessScrolling, {
   contentBinding: 'Radium.selectedUserController.content',
 
   addUserTodo: function() {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'Todo',
       id: this.getPath('content.id'),
       target: this.get('content'),

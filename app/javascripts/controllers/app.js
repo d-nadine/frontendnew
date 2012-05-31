@@ -8,6 +8,7 @@ Radium.AppController = Ember.Object.extend({
   currentPage: null,
   selectedForm: null,
   params: null,
+  currentUser: null,
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),
   todayString: function() {

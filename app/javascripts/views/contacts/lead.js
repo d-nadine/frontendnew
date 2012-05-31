@@ -58,7 +58,7 @@ Radium.LeadView = Radium.FeedView.extend({
   }),
 
   addTodo: function(event) {
-    Radium.FormManager.send('showForm', {
+    Radium.get('formManager').send('showForm', {
       form: 'Todo',
       target: event.view.get('content'),
       type: 'contacts'

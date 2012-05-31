@@ -22,7 +22,7 @@ Radium.DashboardPage = Ember.ViewState.extend({
         feedUrl: 'users/%@/feed/'.fmt(userId),
 
         addTodo: function() {
-          Radium.FormManager.send('showForm', {
+          Radium.get('formManager').send('showForm', {
             form: 'Todo'
           });
           return false;

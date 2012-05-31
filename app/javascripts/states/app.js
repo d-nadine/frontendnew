@@ -21,46 +21,43 @@ Radium.App = Ember.StateManager.create({
   loggedOut: Radium.LoggedOutState,
 
   start: Ember.State.create({
-    enter: function() {
+    enter: function(manager, transition) {
+      this._super(manager, transition);
       $('#main').empty();
     }
   }),
 
   init: function(){
     Radium.set('appController', Radium.AppController.create());
+    Radium.set('accountController', Radium.AccountController.create());
+    Radium.set('usersController', Radium.UsersController.create());
     this._super();
   },
 
   // TODO: Add server login logic here.
   authenticate: Ember.ViewState.create({
     view: Radium.LoadingView,
-    enter: function(manager) {
-      this._super(manager);
-      // $.when(manager.bootstrapUser())
-      //   .then(
-      //     // Load account data
-      //     function(data) {
-      //       data = data.account;
-      //       Radium.store.load(Radium.Account, data);
-      //       var account = Radium.store.find(Radium.Account, data.id);
-      //       Radium.accountController.set('content', account);
-      //       Radium.appController.setProperties({
-      //         isFirstRun: false,
-      //         isLoggedIn: true
-      //       });
+    enter: function(manager, transition) {
+      this._super(manager, transition);
+      $.when(manager.bootstrapUser())
+        .then(function(data) {
+            data = data.account;
+            Radium.store.load(Radium.Account, data);
+            var account = Radium.store.find(Radium.Account, data.id);
+            Radium.get('accountController').set('content', account);
+            Radium.appController.setProperties({
+              isFirstRun: false,
+              isLoggedIn: true
+            });
 
-      //       var users = Radium.store.find(Radium.User, {page: 'all'});
-
-      //       users.addObserver('isLoaded', function() {
-      //         Radium.usersController.set('content', users);
-      //         manager.send('loginComplete');
-      //       });
-      //     },
-      //     // Error
-      //     function() {
-      //       manager.send('accountLoadFailed');
-      //     }
-      //   );
+            Radium.get('usersController').set('content', Radium.store.find(Radium.User, {page: 'all'}));
+            
+            manager.send('loginComplete');
+          },
+          function() {
+            manager.send('accountLoadFailed');
+          }
+        );
     },
     loginComplete: function(manager) {
       manager.goToState('loggedIn');
@@ -99,14 +96,12 @@ Radium.App = Ember.StateManager.create({
       return false;
     }
 
-    if (app.get('isFirstRun')) {
-      manager.goToState('authenticate');
-    } else {
+    if (app.get('currentUser')) {
       manager.goToState(statePath);
+    } else {
+      manager.goToState('authenticate');
     }
-    
   },
-
   bootstrapUser: function() {
     var request = jQuery.extend({url: '/api/account'}, CONFIG.ajax);
     return $.ajax(request);

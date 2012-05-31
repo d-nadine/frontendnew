@@ -5,6 +5,7 @@ window.Radium = Ember.Application.create({
     adapter: DS.RadiumAdapter.create({bulkCommit: false})
   }),
   ready: function(){
+    Radium.set('formManager', Radium.FormManager.create());
   }
 });
 

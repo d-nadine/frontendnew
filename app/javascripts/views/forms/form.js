@@ -1,7 +1,7 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
   classNames: 'well form-horizontal radium-form'.w(),
-  layout: Ember.Handlebars.compile('<a href="#" class="close close-form" {{action "closeForm" target="Radium.FormManager"}}>×</a>{{yield}}'),
+  layout: Ember.Handlebars.compile('<a href="#" class="close close-form" {{action "closeForm" target="Radium.formManager"}}>×</a>{{yield}}'),
 
   // Validation properties
   hasNoOptions: true,
@@ -12,7 +12,7 @@ Radium.FormView = Ember.View.extend({
 
   keyUp: function(event) {
     if (event.keyCode === 27) {
-      Radium.FormManager.send('closeForm');
+      Radium.get('formManager').send('closeForm');
     }
   },
 
@@ -36,7 +36,7 @@ Radium.FormView = Ember.View.extend({
       $(this).remove();
 
       if (type === 'success') {
-        Radium.FormManager.send('closeForm');
+        Radium.get('formManager').send('closeForm');
       }
     });
   },
@@ -45,7 +45,7 @@ Radium.FormView = Ember.View.extend({
     // self.flash('success', message);
     self.set('isSubmitting', false);
     this.$().slideUp('fast', function() {
-      Radium.FormManager.send('closeForm');
+      Radium.get('formManager').send('closeForm');
     });
   },
   error: function(message) {
@@ -121,7 +121,7 @@ Radium.FormView = Ember.View.extend({
     attributeBindings: ['href', 'title'],
     href: '#',
     title: 'Close form',
-    target: 'Radium.FormManager',
+    target: 'Radium.formManager',
     action: 'closeForm'
   }),
 

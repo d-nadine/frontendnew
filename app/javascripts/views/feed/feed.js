@@ -104,12 +104,12 @@ Radium.FeedView = Ember.View.extend({
         user = this.getPath('content.user');
 
     if (Ember.empty(contact)) {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'Todo',
         position: $sender.offset()
       });
     } else {
-      Radium.FormManager.send('showForm', {
+      Radium.get('formManager').send('showForm', {
         form: 'Todo',
         target: contact,
         type: 'contacts',
