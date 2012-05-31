@@ -1,5 +1,3 @@
-{{#with Radium.usersController}}
-  {{#if content.length}}
     <div class="row">
       <div id="owner" class="span3">
         <img {{bindAttr src="loggedInUser.avatar.medium_url"}} class="avatar">
@@ -7,5 +5,3 @@
         <small><a href="#" {{action "logout" target="Radium.App"}}>Logout</a></small>
       </div>
     </div>
-  {{/if}}
-{{/with}}

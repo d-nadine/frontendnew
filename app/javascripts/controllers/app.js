@@ -1,4 +1,5 @@
 Radium.AppController = Ember.Object.extend({
+  sideBarView: null,
   // During development set to true
   isLoggedIn: true,
   // Store the routes intercepted by Davis

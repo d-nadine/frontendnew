@@ -1,9 +1,9 @@
-Radium.DashboardPage = Ember.ViewState.extend({
-    
-  view: null,
-
+Radium.DashboardPage = Ember.State.extend({
   enter: function(manager) {
-    console.log('in dashboard');
+    Radium.get('appController').set('sideBarView', Ember.View.create({
+      templateName: 'dash-sidebar'
+    }));
+    
     // var user = Radium.usersController.get('loggedInUser'),
     //     userId = user.get('id'),
     //     dashboardFeedController = Radium.feedController.create({
@@ -39,24 +39,10 @@ Radium.DashboardPage = Ember.ViewState.extend({
 
   index: Ember.State.create({
     enter: function(manager) {
-    console.log('in dashboard.index');
-      // Crossfilter feed, disabled until charts are integrated
-      // Radium.dashboardFeedListController.registerFeeds([
-      //   Radium.feedByKindController,
-      //   Radium.feedByUserController,
-      //   Radium.feedByContactController,
-      //   Radium.feedByDateController,
-      //   Radium.feedByActivityController
-      // ]);
-
+      Radium.set('activityFeedController', Radium.ActivityFeedController.create());
+      Radium.get('appController').set('feedView', Radium.HistoricalFeedView.create({
+        content: Radium.getPath('activityFeedController.content')
+      }));
     }
-  }),
-
-  ready: Ember.State.create({}),
-
-  /**
-    ACTIONS
-    ------------------------------------
-  */
-
+  })
 });

@@ -30,6 +30,7 @@ Radium.App = Ember.StateManager.create({
   init: function(){
     Radium.set('appController', Radium.AppController.create());
     Radium.set('accountController', Radium.AccountController.create());
+    Radium.set('feedController', Radium.feedController.create());
     this._super();
   },
 
@@ -45,7 +46,6 @@ Radium.App = Ember.StateManager.create({
         var account = Radium.store.find(Radium.Account, data.id);
 
         //do we need the accountController?
-        Radium.get('accountController').set('content', account);
         Radium.get('appController').set('account', account);
         
         Radium.set('usersController', Radium.UsersController.create());

@@ -110,3 +110,7 @@ minispade.require('radium/templates/ui/inline_textfield');
 minispade.require('radium/templates/ui/inline_select');
 minispade.require('radium/templates/ui/inline_datepicker');
 minispade.require('radium/templates/ui/token');
+
+// nav
+minispade.require('radium/templates/layouts/main-dash');
+minispade.require('radium/templates/nav/dash-sidebar');

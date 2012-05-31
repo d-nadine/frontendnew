@@ -1,7 +1,23 @@
 Radium.LoggedIn = Ember.State.create({
-  enter: function() {
-    // $('#main-nav').show();
+  enter: function(manager) {
+    $('#main-nav').show();
     Radium.set('topbarController', Radium.TopbarController.create());
+
+    appController = Radium.get('appController');
+
+    appController.set('view', Ember.View.create({
+      controller: appController,
+      templateName: 'main-dash' 
+    }));
+
+    rootView = Ember.ContainerView.create({
+      controller: Radium.get('appController'),
+      currentViewBinding: 'controller.view',
+      sideBarBinding: 'controller.sideBarView',
+      feedViewBinding: 'controller.feedView' 
+    });
+
+    rootView.appendTo('body');
   },
   exit: function() {
     topBarView.remove();
@@ -12,6 +28,7 @@ Radium.LoggedIn = Ember.State.create({
     enter: function(manager) {
       this._super(manager);
       $('body').addClass('loaded');
+      //TODO: Why delay? animation?
       Ember.run.next(function() {
         manager.goToState(Radium.appController.getPath('_statePathCache'));
       });
