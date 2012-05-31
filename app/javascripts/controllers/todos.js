@@ -1,5 +1,9 @@
 Radium.todosController = Ember.ArrayController.extend({
-  content: Radium.store.findAll(Radium.Todo),
+  //TODO: review
+  // content: Radium.store.findAll(Radium.Todo),
+  init: function(){
+    this.set('content', Radium.store.findAll(Radium.Todo)); 
+  },
 
   overdueTodos: function() {
     return this.filterProperty('isOverdue', true);

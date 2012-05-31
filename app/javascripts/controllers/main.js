@@ -33,3 +33,4 @@ minispade.require('radium/controllers/contacts/feed');
 minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');
 minispade.require('radium/controllers/selected_feed_date');
+minispade.require('radium/controllers/nav/topbar_controller');

@@ -1,8 +1,9 @@
 Radium.UsersController = Ember.ArrayProxy.extend({
-  content: [],
+  //TODO: Review
+  // content: Radium.store.findAll(Radium.User),
   init: function(){
     this._super();
-    this.set('content', Radium.store.find(Radium.User, {page: 'all'}));
+    this.set('content', Radium.store.findAll(Radium.User));
   },
   loggedInUser: function() {
     return this.filterProperty('isLoggedIn', true).get('firstObject');

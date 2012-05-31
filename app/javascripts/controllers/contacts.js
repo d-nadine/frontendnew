@@ -1,5 +1,10 @@
 Radium.contactsController = Ember.ArrayProxy.extend({
-  content: Radium.store.findAll(Radium.Contact),
+  //TODO: Review
+  // content: Radium.store.findAll(Radium.Contact),
+
+  init: function(){
+    this.set('content', Radium.store.findAll(Radium.Contact));
+  },
 
   isAllContactsLoaded: function() {
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;

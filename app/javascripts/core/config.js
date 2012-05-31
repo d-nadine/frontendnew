@@ -1,5 +1,6 @@
 CONFIG.api = $.cookie('user_api_key');
 
+//TODO: Why not use $.ajaxSetup
 CONFIG.ajax = {
   dataType: 'json',
   contentType: 'application/json',

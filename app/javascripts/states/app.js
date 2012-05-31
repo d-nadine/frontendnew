@@ -38,6 +38,7 @@ Radium.App = Ember.StateManager.create({
     view: Radium.LoadingView,
     enter: function(manager, transition) {
       this._super(manager, transition);
+      //TODO: why are we not using the data store?
       $.when(manager.bootstrapUser()).then(function(data){
         data = data.account;
         Radium.store.load(Radium.Account, data);

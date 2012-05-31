@@ -215,31 +215,30 @@ DS.RadiumAdapter = DS.Adapter.extend({
   },
 
   // Disable for now, probably will only make selective requests
-  // findAll: function(store, type, options) {
-  //   debugger;
-  //   var defaults = {local: false},
-  //       settings = $.extend({}, defaults, type);
-  //   if (!type.local) {
-  //     var root = this.rootForType(type),
-  //         plural = this.pluralize(root);
+  findAll: function(store, type, options) {
+    var defaults = {local: false},
+        settings = $.extend({}, defaults, type);
+    if (!type.local) {
+      var root = this.rootForType(type),
+          plural = this.pluralize(root);
 
-  //     if (root === 'activity') return false;
+      if (root === 'activity') return false;
 
-  //     this.ajax("/" + plural, "GET", {
-  //       success: function(json, status, xhr) {
-  //         var controllerName = plural.camelize();
+      this.ajax("/" + plural, "GET", {
+        success: function(json, status, xhr) {
+          var controllerName = plural.camelize();
 
-  //         store.loadMany(type, json[plural]);
-  //         this.sideload(store,type,json,plural);
+          store.loadMany(type, json[plural]);
+          this.sideload(store,type,json,plural);
 
-  //         Radium[controllerName + 'Controller'].setProperties({
-  //           currentPage: json.meta.pagination.current,
-  //           totalPages: json.meta.pagination.total
-  //         });
-  //       }
-  //     });
-  //   }
-  // },
+          Radium[controllerName + 'Controller'].setProperties({
+            currentPage: json.meta.pagination.current,
+            totalPages: json.meta.pagination.total
+          });
+        }
+      });
+    }
+  },
 
   findQuery: function(store, type, query, modelArray) {
     var self = this,
@@ -261,7 +260,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
                 total = json.meta.pagination.total,
                 data = json[plural];
 
-            Radium[controllerName+'Controller'].setProperties({
+            Radium.get(controllerName +'Controller').setProperties({
               currentPage: current,
               totalPages: total
             });
