@@ -37,7 +37,6 @@ Radium.User = Radium.Person.extend({
     var deals = this.get('deals');
     return deals.filterProperty('state', 'rejected');
   }.property('deals').cacheable(),
-  
   isLoggedIn: function() {
     return (this.get('apiKey')) ? true : false;
   }.property('apiKey').cacheable()

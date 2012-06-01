@@ -5,12 +5,10 @@
   </div>
   
   <div class="span9">
-    <!-- announcements -->
     <div id="form-container"></div>
         
-    <div class="row" style="display:none">
+    <div class="row">
       <div class="span9">
-        {{view Ember.ContainerView currentViewBinding="Radium.appController.feedView"}}
       </div>
     </div>
 
@@ -19,6 +17,7 @@
           <div class="page-header">
             <h3>Today</h3>
           </div>
+          {{view Ember.ContainerView currentViewBinding="Radium.appController.feedView"}}
       </div>
     </div>  
   </div>

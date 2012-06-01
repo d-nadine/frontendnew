@@ -1,4 +1,5 @@
 Radium.ActivityFeedController = Ember.ArrayProxy.extend({
+  content: null,
   init: function(){
     this._super();
 
