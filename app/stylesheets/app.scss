@@ -211,8 +211,10 @@ li.main-filter-item {
 
 #form-container {
   width: 100%;
-  margin: 20px 0;
+  margin: 20px 0 20px -350px;
   position: absolute;
+  top: 10%;
+  left: 50%;
   z-index: 999;
 
   .well {

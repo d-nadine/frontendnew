@@ -30,9 +30,12 @@ Radium.FeedFilterItemView = Ember.View.extend({
           formType = (this.singular[kind]) 
                     ? this.singular[kind] 
                     : kind.replace(' ', '').slice(0, -1);
-      Radium.FormManager.send('showForm', {
-        form: formType,
-        position: $sender.offset()
+      // Radium.FormManager.send('showForm', {
+      //   form: formType,
+      //   position: $sender.offset()
+      // });
+      Radium.FormContainerView.show({
+        form: formType
       });
       event.stopPropagation();
       return false;

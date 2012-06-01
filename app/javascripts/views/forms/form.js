@@ -1,7 +1,7 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
   classNames: 'well form-horizontal radium-form'.w(),
-  layout: Ember.Handlebars.compile('<a href="#" class="close close-form" {{action "closeForm" target="Radium.FormManager"}}>×</a>{{yield}}'),
+  layoutName: 'form_layout',
 
   // Validation properties
   hasNoOptions: true,
@@ -63,6 +63,18 @@ Radium.FormView = Ember.View.extend({
     this.$().hide();
   },
 
+  show: function() {
+    this.$().show();
+  },
+
+  close: function(event) {
+    var container = this.get('parentView');
+    this.$().fadeOut('fast', function() {
+      container.close();
+    });
+    event.stopPropagation();
+  },
+
   submit: function(event) {
     event.preventDefault();
     this.submitForm();
@@ -121,8 +133,8 @@ Radium.FormView = Ember.View.extend({
     attributeBindings: ['href', 'title'],
     href: '#',
     title: 'Close form',
-    target: 'Radium.FormManager',
-    action: 'closeForm'
+    target: 'parentView',
+    action: 'close'
   }),
 
   checkForEmpty: function(hash) {
