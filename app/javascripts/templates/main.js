@@ -112,5 +112,6 @@ minispade.require('radium/templates/ui/inline_datepicker');
 minispade.require('radium/templates/ui/token');
 
 // nav
-minispade.require('radium/templates/layouts/main-dash');
+minispade.require('radium/templates/layouts/main_dash');
 minispade.require('radium/templates/nav/dash-sidebar');
+minispade.require('radium/templates/feed/dashboard_feed');

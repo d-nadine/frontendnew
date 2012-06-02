@@ -1,27 +1,29 @@
-<div class="fill">
-  <div class="navbar-inner">
-    <div id="navbar-container" class="container">
-      
-      {{view Radium.GlobalSearchTextView}}
+<div id="topbar" role="header" class="navbar navbar-fixed-top">
+  <div class="fill">
+    <div class="navbar-inner">
+      <div id="navbar-container" class="container">
+        
+        {{view Radium.GlobalSearchTextView}}
 
-      <a class="brand" href="/"><img src="/images/logo.png" alt="::radium"></a>
-      <ul id="main-nav" class="nav">
-        <li id="btn-dashboard"><a href="/" title="Dashboard">Dashboard</a></li>
-        <li id="btn-contacts" class="dropdown">
-          <a href="/contacts" class="dropdown-toggle" title="Contacts">Contacts</a>
-          <ul class="dropdown-menu">
-            <li><a href="/contacts/leads">leads</a></li>
-            <li><a href="/contacts/prospects">prospects</a></li>
-            <li><a href="/contacts/opportunities">opportunities</a></li>
-            <li><a href="/contacts/customers">customers</a></li>
-            <li><a href="/contacts/dead-ends">dead ends</a></li>
-          </ul>
+        <a class="brand" href="/"><img src="/images/logo.png" alt="::radium"></a>
+        <ul id="main-nav" class="nav">
+          <li id="btn-dashboard"><a href="/" title="Dashboard">Dashboard</a></li>
+          <li id="btn-contacts" class="dropdown">
+            <a href="/contacts" class="dropdown-toggle" title="Contacts">Contacts</a>
+            <ul class="dropdown-menu">
+              <li><a href="/contacts/leads">leads</a></li>
+              <li><a href="/contacts/prospects">prospects</a></li>
+              <li><a href="/contacts/opportunities">opportunities</a></li>
+              <li><a href="/contacts/customers">customers</a></li>
+              <li><a href="/contacts/dead-ends">dead ends</a></li>
+            </ul>
+            </li>
           </li>
-        </li>
-        <li id="btn-support">
-          <a href="https://radium.flowdock.com/invitations/6d70fab64e2ff9222f15f60adb2e8d875ed72c61-support" title="Support">Support</a>
-        </li>
-      </ul>
+          <li id="btn-support">
+            <a href="https://radium.flowdock.com/invitations/6d70fab64e2ff9222f15f60adb2e8d875ed72c61-support" title="Support">Support</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

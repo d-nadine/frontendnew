@@ -65,7 +65,6 @@ Radium.FeedView = Ember.View.extend({
       classNames: 'pull-left activity-icon'.w()
     }),
     click: function() {
-      alert('in here');
       this.toggleProperty('isActionsVisible');
     }
   }),

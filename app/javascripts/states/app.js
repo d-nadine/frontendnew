@@ -15,12 +15,11 @@
 */
 
 Radium.App = Ember.StateManager.create({
-  rootElement: '#main',
   enableLogging: true,
   
   loggedOut: Radium.LoggedOutState,
 
-  start: Ember.State.create({
+  start: Ember.State.extend({
     enter: function(manager, transition){
       this._super(manager, transition);
       $('#main').empty();
@@ -36,29 +35,30 @@ Radium.App = Ember.StateManager.create({
   },
 
   // TODO: Add server login logic here.
-  authenticate: Ember.ViewState.create({
-    view: Radium.LoadingView,
+  authenticate: Ember.State.extend({
     enter: function(manager, transition) {
       this._super(manager, transition);
+
+      manager.set('rootView', Radium.LoadingView.create());
+      manager.get('rootView').appendTo('#main');
+
       //TODO: why are we not using the data store?
       $.when(manager.bootstrapUser()).then(function(data){
         data = data.account;
+
+        //TODO: why twice?
         Radium.store.load(Radium.Account, data);
         var account = Radium.store.find(Radium.Account, data.id);
 
-        //do we need the accountController?
         Radium.get('appController').set('account', account);
         
         Radium.set('usersController', Radium.UsersController.create());
 
-        manager.send('loginComplete');
+        manager.goToState('loggedIn');
       },
       function() {
         manager.send('accountLoadFailed');
       });
-    },
-    loginComplete: function(manager) {
-      manager.goToState('loggedIn');
     },
     accountLoadFailed: function(manager) {
       manager.goToState('loggedOut.error');
@@ -90,14 +90,14 @@ Radium.App = Ember.StateManager.create({
     });
 
     if (!Radium.get('_api')) {
-      manager.goToState('loggedOut');
+      manager.transitionTo('loggedOut');
       return false;
     }
 
     if (Radium.get('appController').get('account')) {
-      manager.goToState(statePath);
+      manager.transitionTo(statePath);
     } else {
-      manager.goToState('authenticate');
+      manager.transitionTo('authenticate');
     }
   },
   bootstrapUser: function() {

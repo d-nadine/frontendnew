@@ -1,4 +1,5 @@
 Radium.TopbarView = Ember.View.extend({
+  elementId: 'topbar',
   currentPageBinding: 'Radium.appController.currentPage',
   section: function() {
     var section = this.get('currentPage') || 'dashboard';

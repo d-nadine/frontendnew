@@ -1,40 +1,36 @@
-Radium.LoggedIn = Ember.State.create({
+Radium.LoggedIn = Ember.State.extend({
   enter: function(manager) {
     $('#main-nav').show();
-    Radium.set('topbarController', Radium.TopbarController.create());
 
-    appController = Radium.get('appController');
+    manager.get('rootView').remove();
 
-    appController.set('view', Ember.View.create({
-      controller: appController,
-      templateName: 'main-dash' 
+    manager.set('rootView', Ember.ContainerView.create({
+      childViews: ['topBar', 'loading', 'content'],
+      topBar: Radium.TopbarView,
+      loading: Radium.LoadingView,
+      content: Ember.View.create({
+        controller: Radium.get('appController'),
+        templateName: 'main_dash',
+        sideBarBinding: 'controller.sideBarView',
+        feedViewBinding: 'controller.feedView'
+      })
     }));
 
-    rootView = Ember.ContainerView.create({
-      controller: Radium.get('appController'),
-      currentViewBinding: 'controller.view',
-      sideBarBinding: 'controller.sideBarView',
-      feedViewBinding: 'controller.feedView' 
-    });
-
-    rootView.appendTo('body');
+    manager.get('rootView').appendTo('#main');
   },
   exit: function() {
-    topBarView.remove();
     $('body').removeClass('loaded');
   },
-  start: Ember.ViewState.create({
-    view: Radium.LoadingView,
+  start: Ember.State.extend({
+    // view: Radium.LoadingView,
     enter: function(manager) {
-      this._super(manager);
       $('body').addClass('loaded');
-      //TODO: Why delay? animation?
-      Ember.run.next(function() {
-        manager.goToState(Radium.appController.getPath('_statePathCache'));
+      Ember.run.next(function(){
+        manager.transitionTo(Radium.appController.getPath('_statePathCache'));
       });
     }
   }),
-  dashboard: Radium.DashboardPage.create(),
+  dashboard: Radium.DashboardPage,
   // contacts: Radium.ContactsPage.create(),
   // users: Radium.UsersPage.create(),
   // deals: Radium.DealsPage.create(),
