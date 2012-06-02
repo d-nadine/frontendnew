@@ -1,3 +1,3 @@
-Radium.announcementsController = Ember.ArrayProxy.extend({
+Radium.AnnouncementsController = Ember.ArrayProxy.extend({
   content: []
 });
