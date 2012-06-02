@@ -8,9 +8,7 @@
       {{view iconView}}
       <p>
         {{#with content}}
-          <span class="content">
-            {{view Radium.ActivityView contentBinding="this"}}
-          </span>
+          <span class="content">{{yield}}</span>
           {{#if comments.length}}
             <i class="icon-comments"></i>
             ({{comments.length}})
