@@ -4,7 +4,7 @@ Radium.HistoricalFeedView = Radium.FeedView.extend({
     'content.kind',
     'content.isTodoFinished:finished',
     'isActionsVisible:expanded',
-  ],  
+  ],
   isActionsVisible: false,
   layoutName: 'historical_layout',
   defaultTemplate: 'default_activity',

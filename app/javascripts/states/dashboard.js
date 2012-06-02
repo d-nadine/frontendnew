@@ -50,10 +50,6 @@ Radium.DashboardPage = Ember.State.extend({
         contentBinding: 'Radium.activityFeedController.content',
         controller: Radium.get('Radium.activityFeedController')
       }));
-
-      // Radium.get('appController').set('feedView', Radium.HistoricalFeedView.create({
-      //   contentBinding: 'Radium.activityFeedController.content'
-      // }));
     }
   })
 });

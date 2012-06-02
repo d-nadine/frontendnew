@@ -52,7 +52,6 @@ minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/feed_filter_item');
 minispade.require('radium/views/feed/coffee_cup_total');
 minispade.require('radium/views/feed/cluster');
-minispade.require('radium/views/feed/activity_view');
 
 // Global
 minispade.require('radium/views/global/topbar');
