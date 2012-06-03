@@ -54,18 +54,35 @@ Radium.App = Ember.StateManager.create({
         
         Radium.set('usersController', Radium.UsersController.create());
 
-        manager.goToState('loggedIn');
+        manager.send('loginComplete');
       },
       function() {
         manager.send('accountLoadFailed');
       });
     },
+    loginComplete: function(manager) {
+      manager.transitionTo('loggedIn');
+    },
     accountLoadFailed: function(manager) {
-      manager.goToState('loggedOut.error');
+      manager.transitionTo('loggedOut.error');
     }
   }),
   
   loggedIn: Radium.LoggedIn,
+  dashboard: Radium.DashboardPage,
+  // contacts: Radium.ContactsPage.create(),
+  // users: Radium.UsersPage.create(),
+  // deals: Radium.DealsPage.create(),
+  // pipeline: Radium.PipelinePage.create(),
+  // campaigns: Radium.CampaignsPage.create(),
+  // calendar: Ember.State.create({}),
+  // messages: Ember.State.create({}),
+  // settings: Ember.State.create({}),
+  // noData: Ember.ViewState.create({
+  //   view: Ember.View.extend({
+  //     templateName: 'error_page'
+  //   })
+  // }),
   
   error: Ember.State.create({
     enter: function() {

@@ -7,4 +7,3 @@ tmp/
 env.sh
 deploy.log
 site/
-*.ackrc 

@@ -22,30 +22,11 @@ Radium.LoggedIn = Ember.State.extend({
     $('body').removeClass('loaded');
   },
   start: Ember.State.extend({
-    // view: Radium.LoadingView,
     enter: function(manager) {
       $('body').addClass('loaded');
-      Ember.run.next(function(){
-        manager.transitionTo(Radium.appController.getPath('_statePathCache'));
-      });
+      manager.transitionTo(Radium.appController.getPath('_statePathCache'));
     }
   }),
-  dashboard: Radium.DashboardPage,
-  // contacts: Radium.ContactsPage.create(),
-  // users: Radium.UsersPage.create(),
-  // deals: Radium.DealsPage.create(),
-  // pipeline: Radium.PipelinePage.create(),
-  // campaigns: Radium.CampaignsPage.create(),
-  // calendar: Ember.State.create({}),
-  // messages: Ember.State.create({}),
-  // settings: Ember.State.create({}),
-  // noData: Ember.ViewState.create({
-  //   view: Ember.View.extend({
-  //     templateName: 'error_page'
-  //   })
-  // }),
-
-  // Actions
   logout: function(manager, context) {
     manager.goToState('loggedOut');
   }
