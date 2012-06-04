@@ -1,48 +1,55 @@
-Radium.todosController = Ember.ArrayController.extend({
+Radium.TodosController = Ember.ArrayController.extend({
   //TODO: review
   // content: Radium.store.findAll(Radium.Todo),
   init: function(){
     this.set('content', Radium.store.findAll(Radium.Todo)); 
+    this.set('sortedOverdueTodos', Ember.A());
+    this.set('sortedDueToday', Ember.A());
+    this.set('finishedOverdueTodos', Ember.A());
+    this._super();
   },
+  
+  arrayContentDidChange: function(startIdx, removeAmt, addAmt) {
+    if(addAmt === 0)
+      return;
 
-  overdueTodos: function() {
-    return this.filterProperty('isOverdue', true);
-  }.property('@each.isOverdue'),
+    var todo = this.objectAt(startIdx);
 
-  sortedOverdueTodos: function() {
-    return this.get('overdueTodos').slice(0).sort(function(a, b) {
-      var date1 = a.get('createdAt'),
-          date2 = b.get('createdAt');
+    if(todo.get('isOverdue')){
+      this.get('sortedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length')), todo, 'sortedOverdueTodos', 'createdAt');
+    }
 
-      if (date1 > date2) return 1;
-      if (date1 < date2) return -1;
-      return 0;
-    });
-  }.property('overdueTodos.@each'),
+    if(todo.get('isOverdue') && todo.get('dueToday') && !todo.get('finished')){
+      this.get('sortedDueToday').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedDueToday.length')), todo, 'sortedDueToday', 'createdAt');
+    }
 
-  finishedOverdueTodos: function() {
-    return this.filter(function(todo) {
-      var updatedAt = todo.get('updatedAt'),
-          today = Radium.appController.get('today');
-      return todo.get('finished') && Ember.DateTime.compareDate(updatedAt, today) === 0;
-    });
-  }.property('@each.finished'),
+    var updatedAt = todo.get('updatedAt'),
+        today = Radium.appController.get('today');
 
-  // Open Todos
-  dueToday: function() {
-    return this.filter(function(todo) {
-      return todo.get('isDueToday') && !todo.get('finished');
-    });
-  }.property('@each.isDueToday', '@each.finished'),
+    var isFinishedToday =  todo.get('finished') && Ember.DateTime.compareDate(updatedAt, today) === 0;
 
-  sortedDueToday: function() {
-    return this.get('dueToday').slice(0).sort(function(a, b) {
-      var date1 = a.get('createdAt'),
-          date2 = b.get('createdAt');
+    if(todo.get('finished') && isFinishedToday){
+      this.get('finishedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('finishedOverdueTodos.length')), todo, 'finishedOverdueTodos', 'createdAt');
+    }
 
-      if (date1 > date2) return 1;
-      if (date1 < date2) return -1;
-      return 0;
-    });
-  }.property('dueToday.@each')
+    this._super(startIdx, removeAmt, addAmt);
+  },
+  binarySearch: function(value, low, high, arrayName, property) {
+    var mid, midValue;
+
+    if (low === high) {
+      return low;
+    }
+
+    mid = low + Math.floor((high - low) / 2);
+    midValue = this.get(arrayName).objectAt(mid).get(property);
+
+    if (value < midValue) {
+      return this.binarySearch(value, mid+1, high);
+    } else if (value > midValue) {
+      return this.binarySearch(value, low, mid);
+    }
+
+    return mid;
+  }
 })

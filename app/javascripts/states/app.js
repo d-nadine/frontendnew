@@ -31,6 +31,7 @@ Radium.App = Ember.StateManager.create({
     Radium.set('accountController', Radium.AccountController.create());
     Radium.set('feedController', Radium.feedController.create());
     Radium.set('announcementsController', Radium.AnnouncementsController.create());
+    Radium.set('todosController', Radium.TodosController.create());
     this._super();
   },
 

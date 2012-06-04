@@ -231,7 +231,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
           store.loadMany(type, json[plural]);
           this.sideload(store,type,json,plural);
 
-          Radium[controllerName + 'Controller'].setProperties({
+          Radium.get(controllerName + 'Controller').setProperties({
             currentPage: json.meta.pagination.current,
             totalPages: json.meta.pagination.total
           });

@@ -1,5 +1,38 @@
-<h4>Overdue</h4>
+{{profile}}
+{{time "timing"}}
+<div class="page-header">
+  <h3>Today</h3>
+</div>
+{{#with Radium.todosController}}
+  {{#if sortedOverdueTodos.length}}
+    <h4>Overdue</h4>
+    {{#each sortedOverdueTodos}}
+      {{view Radium.FeedView contentBinding="this"}}
+    {{/each}}
+    <hr>
+  {{/if}}
+
+  {{#if dueToday.length}}
+    <h4>Due</h4>
+    {{#each sortedDueToday}}
+      {{view Radium.FeedView contentBinding="this"}}
+    {{/each}}
+    <hr>
+  {{/if}}
+
+  {{#if finishedOverdueTodos.length}}
+    <h4>Finished</h4>
+    {{#each finishedOverdueTodos}}
+      {{view Radium.FeedView contentBinding="this"}}
+    {{/each}}
+    <hr>
+  {{/if}}
+
+{{/with}}
+
 {{#each content}}
   {{view Radium.HistoricalFeedView  contentBinding="this"}}
 {{/each}}
+{{timeEnd "timing"}}
+{{profileEnd}}
 
