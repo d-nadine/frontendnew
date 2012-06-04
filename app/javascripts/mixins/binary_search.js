@@ -1,6 +1,6 @@
 Radium.BinarySearch = Ember.Mixin.create({
   binarySearch: function(value, low, high, collection, sortValue) {
-    var mid, midValue;
+    var mid, midValue, collection, sortValue;
 
     if (low === high) {
       return low;

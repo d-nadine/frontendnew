@@ -8,7 +8,6 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
     this.set('finishedOverdueTodos', Ember.A());
     this._super();
   },
-  
   arrayContentDidChange: function(startIdx, removeAmt, addAmt) {
     if(addAmt === 0)
       return;
