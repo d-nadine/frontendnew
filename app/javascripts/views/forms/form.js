@@ -12,7 +12,7 @@ Radium.FormView = Ember.View.extend({
 
   keyUp: function(event) {
     if (event.keyCode === 27) {
-      Radium.FormManager.send('closeForm');
+      this.close();
     }
   },
 
@@ -22,13 +22,18 @@ Radium.FormView = Ember.View.extend({
     this.$('fieldset:first').find('input:text, textarea').focus();
   },
 
+  willDestroy: function() {
+    this.get('invalidFields').clear();
+  },
+
   sending: function() {
     this.set('isSubmitting', true);
     this.$('input, select, textarea').prop('disabled', true);
   },
   
   flash: function(type, message) {
-    var $flashMessage = $('<div class="alert"/>')
+    var self = this,
+        $flashMessage = $('<div class="alert"/>')
                         .addClass('alert-' + type)
                         .text(message);
     this.$().before($flashMessage);
@@ -36,7 +41,7 @@ Radium.FormView = Ember.View.extend({
       $(this).remove();
 
       if (type === 'success') {
-        Radium.FormManager.send('closeForm');
+        self.close();
       }
     });
   },
@@ -45,7 +50,7 @@ Radium.FormView = Ember.View.extend({
     // self.flash('success', message);
     self.set('isSubmitting', false);
     this.$().slideUp('fast', function() {
-      Radium.FormManager.send('closeForm');
+      self.close();
     });
   },
   error: function(message) {
@@ -72,7 +77,7 @@ Radium.FormView = Ember.View.extend({
     this.$().fadeOut('fast', function() {
       container.close();
     });
-    event.stopPropagation();
+    return false;
   },
 
   submit: function(event) {

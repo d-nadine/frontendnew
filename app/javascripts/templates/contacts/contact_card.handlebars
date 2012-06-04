@@ -25,6 +25,14 @@
         {{#each content.phoneNumbers}}
           {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}
         {{/each}}
+        <button style="border:none;padding:0;background:transparent" 
+          {{action 
+            "showTodoForm" 
+            target="Radium.FormContainerView"
+            context="content"
+          }}>
+          <img src="/images/icons/feed-todo.png">
+        </button>
       </h4>
       {{#if content.campaigns.length}}
         <p><strong>Groups:</strong> 

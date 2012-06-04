@@ -2,6 +2,10 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   templateName: 'todo_form',
 
+  isBulk: function() {
+    return Ember.typeOf(this.get('selection')) === 'array';
+  }.property('selection'),
+
   finishBy: Ember.computed(function(key, value) {
     var today = Ember.DateTime.create(),
         date = (value) ? Ember.DateTime.parse(value, '%Y-%m-%d') : today;
@@ -14,7 +18,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }).property().cacheable(),
 
   headerContext: function() {
-    var params = this.get('params'),
+    var selection = this.get('selection'),
         currentYear = Radium.appController.getPath('today.year'),
         date = this.get('finishBy'),
         sameYearString = '%A, %e/%D',
@@ -22,17 +26,23 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         format = (date.get('year') !== currentYear) ? differentYearString : sameYearString,
         dateString = date.toFormattedString(format);
 
-    if (params.type === 'contacts') {
-      var name = params.target.name || params.target.get('name');
-      return "Assign a Todo to %@ for %@".fmt(name, dateString);
+    if (Ember.typeOf(selection) === 'array' && selection.get('length') > 1) {
+      var totalTodoContacts = selection.get('length');
+      return "Assign a Todo to %@ contacts for %@".fmt(totalTodoContacts, dateString);
     } else {
-      return "Add a Todo for %@".fmt(dateString);
+      if (selection) {
+        var name = selection.getPath('firstObject.name') || selection.get('name');
+        return "Assign a Todo to %@ for %@".fmt(name, dateString);
+      } else {
+        return "Add a Todo for %@".fmt(dateString);
+      }
     }
     
-  }.property('finishBy').cacheable(),
+  }.property('finishBy', 'selection').cacheable(),
 
   description: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
+    viewName: 'description',
     attributeBindings: ['name'],
     placeholderBinding: 'parentView.headerContext',
     name: 'description',
@@ -42,7 +52,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     didInsertElement: function() {
       this.$().autosize().css('resize','none');
     },
-    keyUp: function() {
+    keyUp: function(event) {
       if (this.$().val() !== '') {
         this.setPath('parentView.isValid', true);
         this.setPath('parentView.isError', false);
@@ -50,6 +60,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       } else {
         this.setPath('parentView.isValid', false);
       }
+      this._super(event);
     },
     keyPress: function(event) {
       if (event.keyCode === 13 && !event.ctrlKey) {
@@ -103,16 +114,16 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),
 
   submitForm: function() {
-    var self = this;
-    var targetId = this.getPath('params.target.id'),
-        targetType = this.getPath('params.type'),
-        contactIds = this.get('selectedContacts').getEach('id'),
-        description = this.$('#description').val(),
-        finishByValue = this.get('finishBy').adjust({
-                          hour: 17, 
-                          minute: 0, 
-                          second: 0
-                        }),
+    if (this.checkForEmpty(data)) {
+      this.error("Something was filled incorrectly, try again?");
+      return false;
+    }
+
+    // User enteries
+    var selectedContacts,
+        selection = this.get('selection'),
+        description = this.getPath('description.value'),
+        finishByValue = this.get('finishBy').adjust({hour: 17, minute: 0, second: 0}),
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
         data = {
@@ -123,51 +134,126 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           user: assignedUser,
           created_at: Ember.DateTime.create(),
           hasAnimation: true
-        },
-        selectedContacts = this.getPath('params.target'),
-        isBulk = (Ember.typeOf(selectedContacts) === 'array') ? true : false;
+        };
 
-    if (this.checkForEmpty(data)) {
-      this.error("Something was filled incorrectly, try again?");
-      return false;
-    }
+    // Determine that if there are selected items, the todo is contact based
+
+
+    if (selection) {
+      if (this.get('isBulk')) {
+        // Until bulk commits are enabled, multiple POSTs must be made
     
-    // set the url based on the context, ie. a contact or meeting todo versus
-    // general todo that is created for the logged in user.
-    if (targetType) {
-      Radium.Todo.reopenClass({
-        url: '%@/%@/todos'.fmt(targetType, targetId),
-        root: 'todo'
-      });
+        selection.forEach(function(model) {
+          // Determine the selection's type, id
+          var root = Radium.store.adapter.rootForType(model.constructor),
+              plural = Radium.store.adapter.pluralize(root),
+              id = model.get('id');
+
+          Radium.Todo.reopenClass({
+            url: '%@/%@/todos'.fmt(plural, id),
+            root: 'todo'
+          });
+
+          var bulkTodo = Radium.store.createRecord(Radium.Todo, data);
+          Radium.store.commit();
+        });
+      } else {
+        var root = Radium.store.adapter.rootForType(selection.constructor),
+            plural = Radium.store.adapter.pluralize(root),
+            id = selection.get('id');
+
+        Radium.Todo.reopenClass({
+          url: '%@/%@/todos'.fmt(plural, id),
+          root: 'todo'
+        });
+
+        var singleTodo = Radium.store.createRecord(Radium.Todo, data);
+      }
     } else {
       Radium.Todo.reopenClass({
         url: 'todos',
         root: 'todo'
       });
+      var todo = Radium.store.createRecord(Radium.Todo, data);
     }
-    
-    // Disable the form buttons
-    this.hide();
 
-    var todo = Radium.store.createRecord(Radium.Todo, data);
     Radium.store.commit();
 
-    todo.addObserver('isValid', function() {
-      if (this.get('isValid')) {
-        Radium.Todo.reopenClass({
-          url: null,
-          root: null
-        });
-        self.success("Todo created");
-      } else {
-        self.fail();
-      }
-    });
-
-    todo.addObserver('isError', function() {
-      self.fail();
+    Radium.Todo.reopenClass({
+      url: null,
+      root: null
     });
 
     this.get('parentView').close();
   }
+
+  // submitForm: function() {
+  //   debugger;
+  //   var self = this;
+  //   var targetId = this.getPath('context.target.id'),
+  //       targetType = this.getPath('context.type'),
+  //       contactIds = this.get('selectedContacts').getEach('id'),
+  //       description = this.$('#description').val(),
+  //       finishByValue = this.get('finishBy').adjust({
+  //                         hour: 17, 
+  //                         minute: 0, 
+  //                         second: 0
+  //                       }),
+  //       assignedUser = this.get('assignedUser'),
+  //       assignedUserId = assignedUser.get('id'),
+  //       data = {
+  //         description: description,
+  //         finishBy: finishByValue,
+  //         finished: false,
+  //         user_id: assignedUserId,
+  //         user: assignedUser,
+  //         created_at: Ember.DateTime.create(),
+  //         hasAnimation: true
+  //       },
+  //       selectedContacts = this.getPath('context.target'),
+  //       isBulk = this.get('isBulk');
+
+  //   if (this.checkForEmpty(data)) {
+  //     this.error("Something was filled incorrectly, try again?");
+  //     return false;
+  //   }
+    
+  //   // set the url based on the context, ie. a contact or meeting todo versus
+  //   // general todo that is created for the logged in user.
+  //   if (targetType) {
+  //     Radium.Todo.reopenClass({
+  //       url: '%@/%@/todos'.fmt(targetType, targetId),
+  //       root: 'todo'
+  //     });
+  //   } else {
+  //     Radium.Todo.reopenClass({
+  //       url: 'todos',
+  //       root: 'todo'
+  //     });
+  //   }
+    
+  //   // Disable the form buttons
+  //   this.hide();
+
+  //   var todo = Radium.store.createRecord(Radium.Todo, data);
+  //   Radium.store.commit();
+
+  //   todo.addObserver('isValid', function() {
+  //     if (this.get('isValid')) {
+  //       Radium.Todo.reopenClass({
+  //         url: null,
+  //         root: null
+  //       });
+  //       self.success("Todo created");
+  //     } else {
+  //       self.fail();
+  //     }
+  //   });
+
+  //   todo.addObserver('isError', function() {
+  //     self.fail();
+  //   });
+
+  //   this.get('parentView').close();
+  // }
 });
