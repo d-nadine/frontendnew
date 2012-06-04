@@ -1,4 +1,4 @@
-Radium.TodosController = Ember.ArrayController.extend({
+Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
   //TODO: review
   // content: Radium.store.findAll(Radium.Todo),
   init: function(){
@@ -33,23 +33,5 @@ Radium.TodosController = Ember.ArrayController.extend({
     }
 
     this._super(startIdx, removeAmt, addAmt);
-  },
-  binarySearch: function(value, low, high, arrayName, property) {
-    var mid, midValue;
-
-    if (low === high) {
-      return low;
-    }
-
-    mid = low + Math.floor((high - low) / 2);
-    midValue = this.get(arrayName).objectAt(mid).get(property);
-
-    if (value < midValue) {
-      return this.binarySearch(value, mid+1, high, arrayName, property);
-    } else if (value > midValue) {
-      return this.binarySearch(value, low, mid, arrayName, property);
-    }
-
-    return mid;
   }
 })
