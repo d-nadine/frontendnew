@@ -27,12 +27,6 @@ Radium.FormContainerView = Ember.ContainerView.create({
     this.show(form);
   },
 
-  /**
-  TODO: Detect if context is an array. If it is, bind to the array's selected 
-  items, otherwise bind to the selected object or to nothing at all.
-  The form will check if it's an array or an object and spit out the
-  appropriate string. Also check bindings when submitting.
-  */
   showTodoForm: function(event) {
       var context = (event) ? event.context : null,
           // Test if context is an array controller versus an object

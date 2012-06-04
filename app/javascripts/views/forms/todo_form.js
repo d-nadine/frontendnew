@@ -1,6 +1,21 @@
 Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
-  selectedContactsBinding: 'Radium.contactsController.selectedContacts',
   templateName: 'todo_form',
+  // NOTE: Make sure these aren't too expensive a way of setting this information about the context
+  root: function() {
+    var selection = this.get('selection'),
+        isArrayProxy = Ember.Array.detect(selection),
+        testForRoot = (isArrayProxy) ? selection.objectAt(0) : selection;
+    return (selection) ? Radium.store.adapter.rootForType(testForRoot.constructor) : null;
+  }.property('selection'),
+
+  plural: function() {
+    var root = this.get('root');
+    return (root) ? Radium.store.adapter.pluralize(root) : 'todos';
+  }.property('root'),
+
+  isContact: function() {
+    return this.get('root') === 'contact';
+  }.property('root'),
 
   isBulk: function() {
     return Ember.typeOf(this.get('selection')) === 'array';
@@ -40,9 +55,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     
   }.property('finishBy', 'selection').cacheable(),
 
-  description: Ember.TextArea.extend(Ember.TargetActionSupport, {
+  descriptionText: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
-    viewName: 'description',
+    viewName: 'descriptionText',
     attributeBindings: ['name'],
     placeholderBinding: 'parentView.headerContext',
     name: 'description',
@@ -81,6 +96,10 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         this.setPath('parentView.isValid', false);
       }
     }
+  }),
+
+  isCallCheckbox: Ember.Checkbox.extend({
+    viewName: 'isCallCheckbox'
   }),
 
   assignedUser: null,
@@ -122,7 +141,11 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     // User enteries
     var selectedContacts,
         selection = this.get('selection'),
-        description = this.getPath('description.value'),
+        plural = this.get('plural'),
+        description = this.getPath('descriptionText.value'),
+        isCall = this.getPath('isCallCheckbox.checked'),
+        // TODO: When support todos are added, add logic to toggle this from general to support
+        todoKind = 'general',
         finishByValue = this.get('finishBy').adjust({hour: 17, minute: 0, second: 0}),
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
@@ -130,6 +153,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           description: description,
           finishBy: finishByValue,
           finished: false,
+          kind: (isCall) ? 'call' : todoKind,
           user_id: assignedUserId,
           user: assignedUser,
           created_at: Ember.DateTime.create(),
@@ -137,7 +161,9 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         };
 
     // Determine that if there are selected items, the todo is contact based
-
+    Radium.Todo.reopenClass({
+      root: 'todo'
+    });
 
     if (selection) {
       if (this.get('isBulk')) {
@@ -145,40 +171,30 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     
         selection.forEach(function(model) {
           // Determine the selection's type, id
-          var root = Radium.store.adapter.rootForType(model.constructor),
-              plural = Radium.store.adapter.pluralize(root),
-              id = model.get('id');
-
           Radium.Todo.reopenClass({
-            url: '%@/%@/todos'.fmt(plural, id),
-            root: 'todo'
+            url: '%@/%@/todos'.fmt(plural, model.get('id'))
           });
 
           var bulkTodo = Radium.store.createRecord(Radium.Todo, data);
           Radium.store.commit();
         });
       } else {
-        var root = Radium.store.adapter.rootForType(selection.constructor),
-            plural = Radium.store.adapter.pluralize(root),
-            id = selection.get('id');
-
         Radium.Todo.reopenClass({
-          url: '%@/%@/todos'.fmt(plural, id),
-          root: 'todo'
+          url: '%@/%@/todos'.fmt(plural, selection.get('id'))
         });
 
         var singleTodo = Radium.store.createRecord(Radium.Todo, data);
       }
     } else {
       Radium.Todo.reopenClass({
-        url: 'todos',
-        root: 'todo'
+        url: 'todos'
       });
       var todo = Radium.store.createRecord(Radium.Todo, data);
     }
 
     Radium.store.commit();
 
+    // Clean up
     Radium.Todo.reopenClass({
       url: null,
       root: null
