@@ -16,11 +16,11 @@ Radium.TodosController = Ember.ArrayController.extend({
     var todo = this.objectAt(startIdx);
 
     if(todo.get('isOverdue')){
-      this.get('sortedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length')), todo, 'sortedOverdueTodos', 'createdAt');
+      this.get('sortedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length'), 'sortedOverdueTodos', 'createdAt'), todo);
     }
 
     if(todo.get('isOverdue') && todo.get('dueToday') && !todo.get('finished')){
-      this.get('sortedDueToday').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedDueToday.length')), todo, 'sortedDueToday', 'createdAt');
+      this.get('sortedDueToday').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedDueToday.length'), 'sortedDueToday', 'createdAt'), todo);
     }
 
     var updatedAt = todo.get('updatedAt'),
@@ -29,7 +29,7 @@ Radium.TodosController = Ember.ArrayController.extend({
     var isFinishedToday =  todo.get('finished') && Ember.DateTime.compareDate(updatedAt, today) === 0;
 
     if(todo.get('finished') && isFinishedToday){
-      this.get('finishedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('finishedOverdueTodos.length')), todo, 'finishedOverdueTodos', 'createdAt');
+      this.get('finishedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('finishedOverdueTodos.length'), 'finishedOverdueTodos', 'createdAt'), todo);
     }
 
     this._super(startIdx, removeAmt, addAmt);
@@ -45,9 +45,9 @@ Radium.TodosController = Ember.ArrayController.extend({
     midValue = this.get(arrayName).objectAt(mid).get(property);
 
     if (value < midValue) {
-      return this.binarySearch(value, mid+1, high);
+      return this.binarySearch(value, mid+1, high, arrayName, property);
     } else if (value > midValue) {
-      return this.binarySearch(value, low, mid);
+      return this.binarySearch(value, low, mid, arrayName, property);
     }
 
     return mid;
