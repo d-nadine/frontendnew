@@ -1,7 +1,7 @@
 Radium.UsersListView = Radium.FeedFilterView.extend({
   elementId: 'user-list',
   classNames: 'filters people'.w(),
-  contentBinding: 'Radium.usersController.content',
+  contentBinding: 'Radium.usersController',
   filterBinding: 'Radium.feedByUserController.filter',
   itemViewClass: Ember.View.extend({
     tagName: 'li',

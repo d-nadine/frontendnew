@@ -5,7 +5,7 @@ Radium.DashboardPage = Ember.State.extend({
     rootView.get('childViews').removeObject(rootView.get('loading'));
 
     Radium.get('appController').set('sideBarView', Ember.View.create({
-      templateName: 'dash-sidebar'
+      templateName: 'dashboard_sidebar'
     }));
     
     // var user = Radium.usersController.get('loggedInUser'),
@@ -43,8 +43,6 @@ Radium.DashboardPage = Ember.State.extend({
 
   index: Ember.State.create({
     enter: function(manager) {
-      Radium.set('activityFeedController', Radium.ActivityFeedController.create());
-
       Radium.get('appController').set('feedView', Ember.View.create({
         templateName: 'dashboard_feed',
         contentBinding: 'Radium.activityFeedController.content',

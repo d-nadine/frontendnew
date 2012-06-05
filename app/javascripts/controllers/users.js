@@ -1,13 +1,19 @@
 Radium.UsersController = Ember.ArrayProxy.extend({
-  //TODO: Review
-  // content: Radium.store.findAll(Radium.User),
   init: function(){
     this._super();
-    this.set('content', Radium.store.find(Radium.User, {page: 'all'}));
   },
+  bootStarpLoaded: function(){
+    var users = Radium.getPath('appController.users');
+    
+    Radium.store.loadMany(Radium.User, users);
+
+    this.set('content', Radium.store.findMany(Radium.User, users.mapProperty('id').uniq()));
+  }.observes('Radium.appController.users'),
+
   loggedInUser: function() {
-    return this.filterProperty('isLoggedIn', true).get('firstObject');
-  }.property('@each.isLoggedIn').cacheable(),
+    return Radium.store.find(Radium.User, Radium.getPath('appController.current_user.id'));
+  }.property('Radium.appController.current_user').cacheable(),
+
   usersContactInfo: function() {
     return this.map(function(item) {
       return {

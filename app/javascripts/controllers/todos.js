@@ -2,7 +2,6 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
   //TODO: review
   // content: Radium.store.findAll(Radium.Todo),
   init: function(){
-    this.set('content', Radium.store.findAll(Radium.Todo)); 
     this.set('sortedOverdueTodos', Ember.A());
     this.set('sortedDueToday', Ember.A());
     this.set('finishedOverdueTodos', Ember.A());
@@ -32,5 +31,14 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
     }
 
     this._super(startIdx, removeAmt, addAmt);
-  }
+  },
+  bootStarpLoaded: function(){
+    var feed = Radium.getPath('appController.overdue_feed');
+    //TODO: is there a base type for todos deals etc.?
+    feed.forEach(function(item){
+      Radium.store.load(Radium.Todo, item.reference[item.kind]);
+    });
+
+    this.set('content', Radium.store.findMany(Radium.Todo, feed.mapProperty('id')));
+  }.observes('Radium.appController.overdue_feed')
 })

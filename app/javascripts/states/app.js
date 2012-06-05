@@ -32,6 +32,8 @@ Radium.App = Ember.StateManager.create({
     Radium.set('feedController', Radium.feedController.create());
     Radium.set('announcementsController', Radium.AnnouncementsController.create());
     Radium.set('todosController', Radium.TodosController.create());
+    Radium.set('usersController', Radium.UsersController.create());
+    Radium.set('activityFeedController', Radium.ActivityFeedController.create());
     this._super();
   },
 
@@ -43,18 +45,9 @@ Radium.App = Ember.StateManager.create({
       manager.set('rootView', Radium.LoadingView.create());
       manager.get('rootView').appendTo('#main');
 
-      //TODO: why are we not using the data store?
       $.when(manager.bootstrapUser()).then(function(data){
-        data = data.account;
-
-        //TODO: why twice?
-        Radium.store.load(Radium.Account, data);
-        var account = Radium.store.find(Radium.Account, data.id);
-
-        Radium.get('appController').set('account', account);
+        Radium.get('appController').bootstrap(data);
         
-        Radium.set('usersController', Radium.UsersController.create());
-
         manager.send('loginComplete');
       },
       function() {
@@ -119,7 +112,7 @@ Radium.App = Ember.StateManager.create({
     }
   },
   bootstrapUser: function() {
-    var request = jQuery.extend({url: '/api/account'}, CONFIG.ajax);
+    var request = jQuery.extend({url: '/api/bootstrap.json'}, CONFIG.ajax);
     return $.ajax(request);
   }
 });
