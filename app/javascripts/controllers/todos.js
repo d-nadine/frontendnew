@@ -39,6 +39,6 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
       Radium.store.load(Radium.Todo, item.reference[item.kind]);
     });
 
-    this.set('content', Radium.store.findMany(Radium.Todo, feed.mapProperty('id')));
+    this.set('content', Radium.store.findAll(Radium.Todo, feed.mapProperty('id')));
   }.observes('Radium.appController.overdue_feed')
 })
