@@ -1,20 +1,24 @@
 Radium.ContactsPage = Ember.State.extend({
-  index: Ember.ViewState.extend({
-    view: null,
+  index: Ember.State.extend({
     enter: function(manager) {
-      // TODO: Kick off web worker to bring in additional contacts
-      var contacts = Radium.store.find(Radium.Contact, {page: 1});
-      
-      Radium.contactsController.set('totalPages', 1);
-
-      this.set('view', Radium.ContactsPageView.create({
-        controller: Radium.contactsController
-      }));
       this._super(manager);
+
+      rootView = manager.get('rootView');
+
+      rootView.get('childViews').removeObject(rootView.get('loading'));
+
+      //TODO: split out ContactsPageView
+      Radium.get('appController').set('sideBarView', Radium.ContactsPageView.create({
+        templateName: 'contacts_sidebar'
+      }));
+
+      Radium.get('appController').set('feedView', Radium.ContactsPageView.create({
+        controller: Radium.get('appController.contactsController')
+      }));
     }
   }),
   
-  show: Ember.ViewState.extend({
+  show: Ember.State.extend({
     view: null,
     enter: function(manager) {
       var self = this,

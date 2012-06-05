@@ -1,10 +1,11 @@
 Radium.contactsController = Ember.ArrayProxy.extend({
-  //TODO: Review
-  // content: Radium.store.findAll(Radium.Contact),
+   bootStarpLoaded: function(){
+    var contacts = Radium.getPath('appController.contacts');
+    
+    Radium.store.loadMany(Radium.Contact, contacts);
 
-  init: function(){
-    this.set('content', Radium.store.findAll(Radium.Contact));
-  },
+    this.set('content', Radium.store.findMany(Radium.Contact, contacts.mapProperty('id').uniq()));
+  }.observes('Radium.appController.contacts'),
 
   isAllContactsLoaded: function() {
     return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;

@@ -35,5 +35,8 @@ Radium.Activity = Radium.Core.extend({
 
   isTodoFinished: function() {
     return this.get('tag') === 'finished';
-  }.property('tag').cacheable()
+  }.property('tag').cacheable(),
+  dateLabel: function(){
+    return this.get('timestamp').toFormattedString("%Y-%m-%d"); 
+  }.property('timestamp')
 });

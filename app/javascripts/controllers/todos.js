@@ -1,6 +1,4 @@
 Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
-  //TODO: review
-  // content: Radium.store.findAll(Radium.Todo),
   init: function(){
     this.set('sortedOverdueTodos', Ember.A());
     this.set('sortedDueToday', Ember.A());

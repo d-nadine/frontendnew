@@ -20,6 +20,7 @@ Radium.AppController = Ember.Object.extend({
     this.set('current_user', data.current_user);
     this.set('overdue_feed', data.overdue_feed);
     this.set('feed', data.feed);
+    this.set('contacts', data.contacts);
   },
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),

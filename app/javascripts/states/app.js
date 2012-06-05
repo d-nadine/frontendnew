@@ -34,6 +34,7 @@ Radium.App = Ember.StateManager.create({
     Radium.set('todosController', Radium.TodosController.create());
     Radium.set('usersController', Radium.UsersController.create());
     Radium.set('activityFeedController', Radium.ActivityFeedController.create());
+    Radium.set('contactsController', Radium.ActivityFeedController.create());
     this._super();
   },
 
@@ -64,7 +65,7 @@ Radium.App = Ember.StateManager.create({
   
   loggedIn: Radium.LoggedIn,
   dashboard: Radium.DashboardPage,
-  // contacts: Radium.ContactsPage.create(),
+  contacts: Radium.ContactsPage.create(),
   // users: Radium.UsersPage.create(),
   // deals: Radium.DealsPage.create(),
   // pipeline: Radium.PipelinePage.create(),

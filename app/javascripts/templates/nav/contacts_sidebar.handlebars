@@ -1,0 +1,18 @@
+{{view Radium.ContactsFeedFilterView}}
+{{#view campaignsFilterView contentBinding="Radium.campaignsController"}}
+  {{#if content.length}}
+    <li {{bindAttr class="parentView.noSelectedCampaigns:active"}}>
+      <a href="#" {{action "allCampaigns"}}>All Campaigns</a>
+    </li>
+    {{#each content}}
+      {{#view Radium.CampaignListView itemBinding="this"}}
+        <a href="#" {{action "filterCampaigns"}}>
+          {{item.name}}
+          <span class="pull-right">
+            <span class="badge">{{item.totalContacts}}</span>
+          </span>
+        </a>
+      {{/view}}
+    {{/each}}
+  {{/if}}
+{{/view}}
