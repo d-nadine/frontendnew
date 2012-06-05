@@ -17,7 +17,7 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
       this.get('sortedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length'), 'sortedOverdueTodos', 'createdAt'), todo);
     }
 
-    if(todo.get('isOverdue') && todo.get('dueToday') && !todo.get('finished')){
+    if(todo.get('isOverdue') && todo.get('isDueToday') && !todo.get('finished')){
       this.get('sortedDueToday').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedDueToday.length'), 'sortedDueToday', 'createdAt'), todo);
     }
 
@@ -39,6 +39,12 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
       return item.reference[item.kind];
     }));
 
-    this.set('content', Radium.store.findAll(Radium.Todo, feed.mapProperty('id')));
+    var ids = feed.map(function(item){
+      return item.reference[item.kind].id;
+    });
+
+    records = Radium.store.findMany(Radium.Todo, ids);
+
+    this.set('content', records);
   }.observes('Radium.appController.overdue_feed')
 })

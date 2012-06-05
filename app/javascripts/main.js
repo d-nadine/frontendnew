@@ -13,6 +13,7 @@ minispade.require('date-utils');
 minispade.require('highcharts');
 minispade.require('crossfilter');
 minispade.require('bootstrap-tooltip');
+minispade.require('underscore');
 
 Ember.ENV.CP_DEFAULT_CACHEABLE = true;
 
