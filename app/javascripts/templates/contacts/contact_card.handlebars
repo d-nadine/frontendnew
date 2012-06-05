@@ -13,14 +13,10 @@
         {{Radium.contactsController.categoryFilter}}
 
         {{#each content.emailAddresses}}
-          {{view 
-            Radium.TooltipView 
-            valueBinding="value" 
-            icon="mail"
-            text="Message"
-            action="sendContactMessage"
-            target="parentView"
-          }}
+          <a href="#" {{action "showEmailForm" 
+            target="Radium.FormContainerView"
+            context="view.content"
+          }}><i class="icon-mail"></i></a>
         {{/each}}
         {{#each content.phoneNumbers}}
           {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}

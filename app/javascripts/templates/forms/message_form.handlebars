@@ -1,8 +1,17 @@
 <legend>Send a Message</legend>
-{{view toField label="To"}}
-{{#if params.target}}
-  <p>{{params.target.name}} ({{params.target.emailAddresses.firstObject.value}})</p>
+
+{{#if selection}}
+  <label>To: 
+  {{#if selection.length}}
+    {{#each selection}}
+      {{name}} <{{emailAddresses.firstObject.value}}>
+    {{/each}}
+  {{else}}
+    {{selection.name}} <{{selection.emailAddresses.firstObject.value}}>
+  {{/if}}
+  </label>
 {{else}}
+  {{view toField label="To"}}
   {{#view selectedToEmails}}
     {{#each content}}
       {{view Radium.TokenView itemBinding="this"}}
