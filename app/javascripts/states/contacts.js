@@ -19,7 +19,6 @@ Radium.ContactsPage = Ember.State.extend({
   }),
   
   show: Ember.State.extend({
-    view: null,
     enter: function(manager) {
       var self = this,
           contactId = Radium.appController.get('params');

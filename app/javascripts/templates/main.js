@@ -114,5 +114,5 @@ minispade.require('radium/templates/ui/token');
 // nav
 minispade.require('radium/templates/layouts/main_dash');
 minispade.require('radium/templates/nav/dashboard_sidebar');
-minispade.require('radium/templates/nav/contacts<D-N>_sidebar');
+minispade.require('radium/templates/nav/contacts_sidebar');
 minispade.require('radium/templates/feed/dashboard_feed');
