@@ -28,6 +28,7 @@ Radium.MessageForm = Radium.FormView.extend({
   toField: Radium.Fieldset.extend({
     formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
       elementId: 'to',
+      flagType: 'to',
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
       selectedGroupBinding: 'parentView.parentView.toEmailValues',
@@ -80,6 +81,7 @@ Radium.MessageForm = Radium.FormView.extend({
   ccField: Radium.Fieldset.extend({
     formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
       elementId: 'cc',
+      flagType: 'cc',
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
       selectedGroupBinding: 'parentView.parentView.ccEmailValues',
@@ -90,6 +92,7 @@ Radium.MessageForm = Radium.FormView.extend({
   bccField: Radium.Fieldset.extend({
     formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
       elementId: 'bcc',
+      flagType: 'bcc',
       classNames: ['span3'],
       nameBinding: 'parentView.fieldAttributes',
       selectedGroupBinding: 'parentView.parentView.bccEmailValues',

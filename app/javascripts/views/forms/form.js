@@ -1,7 +1,7 @@
 Radium.FormView = Ember.View.extend({
   tagName: 'form',
   classNames: 'well form-horizontal radium-form'.w(),
-  layout: Ember.Handlebars.compile('<a href="#" class="close close-form" {{action "closeForm" target="Radium.formManager"}}>×</a>{{yield}}'),
+  layoutName: 'form_layout',
 
   // Validation properties
   hasNoOptions: true,
@@ -12,7 +12,7 @@ Radium.FormView = Ember.View.extend({
 
   keyUp: function(event) {
     if (event.keyCode === 27) {
-      Radium.get('formManager').send('closeForm');
+      this.close();
     }
   },
 
@@ -22,13 +22,18 @@ Radium.FormView = Ember.View.extend({
     this.$('fieldset:first').find('input:text, textarea').focus();
   },
 
+  willDestroy: function() {
+    this.get('invalidFields').clear();
+  },
+
   sending: function() {
     this.set('isSubmitting', true);
     this.$('input, select, textarea').prop('disabled', true);
   },
   
   flash: function(type, message) {
-    var $flashMessage = $('<div class="alert"/>')
+    var self = this,
+        $flashMessage = $('<div class="alert"/>')
                         .addClass('alert-' + type)
                         .text(message);
     this.$().before($flashMessage);
@@ -36,7 +41,7 @@ Radium.FormView = Ember.View.extend({
       $(this).remove();
 
       if (type === 'success') {
-        Radium.get('formManager').send('closeForm');
+        self.close();
       }
     });
   },
@@ -45,7 +50,7 @@ Radium.FormView = Ember.View.extend({
     // self.flash('success', message);
     self.set('isSubmitting', false);
     this.$().slideUp('fast', function() {
-      Radium.get('formManager').send('closeForm');
+      self.close();
     });
   },
   error: function(message) {
@@ -61,6 +66,18 @@ Radium.FormView = Ember.View.extend({
 
   hide: function() {
     this.$().hide();
+  },
+
+  show: function() {
+    this.$().show();
+  },
+
+  close: function(event) {
+    var container = this.get('parentView');
+    this.$().fadeOut('fast', function() {
+      container.close();
+    });
+    return false;
   },
 
   submit: function(event) {
@@ -121,8 +138,8 @@ Radium.FormView = Ember.View.extend({
     attributeBindings: ['href', 'title'],
     href: '#',
     title: 'Close form',
-    target: 'Radium.formManager',
-    action: 'closeForm'
+    target: 'parentView',
+    action: 'close'
   }),
 
   checkForEmpty: function(hash) {

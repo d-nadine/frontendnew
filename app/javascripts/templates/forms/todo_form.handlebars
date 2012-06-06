@@ -1,5 +1,5 @@
 <fieldset class="control-group">
-  {{view description}}
+  {{view descriptionText}}
   {{#if isError}}
   <span class="help-inline">Can't create an empty todo.</span>
   {{/if}}
@@ -8,6 +8,13 @@
   <label class="radium-control-label" for="assigned-to">Assigned To</label>
   <div class="controls">
     {{view assignToSelect}}
+    {{#if isContact}}
+    <div class="inline-fieldset">
+      <label>
+        {{view isCallCheckbox}} Is Call?
+      </label>
+    </div>
+    {{/if}}
     <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
   </div>
 </fieldset>

@@ -97,23 +97,20 @@ Radium.FeedView = Ember.View.extend({
   }),
 
   // Inline actions
-
   addTodo: function(event) {
     var $sender = $(event.target),
         contact = this.getPath('content.reference.contact'),
         user = this.getPath('content.user');
 
     if (Ember.empty(contact)) {
-      Radium.get('formManager').send('showForm', {
-        form: 'Todo',
-        position: $sender.offset()
+      Radium.FormContainerView.show({
+        form: 'Todo'
       });
     } else {
-      Radium.get('formManager').send('showForm', {
+      Radium.FormContainerView.show({
         form: 'Todo',
         target: contact,
-        type: 'contacts',
-        position: $sender.offset()
+        type: 'contacts'
       });
     }
 

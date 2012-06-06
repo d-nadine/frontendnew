@@ -57,6 +57,7 @@ minispade.require('radium/templates/dashboard/feed/call_list_created');
 minispade.require('radium/templates/dashboard/feed/email_sent');
 
 // Forms
+minispade.require('radium/templates/forms/form_layout');
 minispade.require('radium/templates/forms/fieldset');
 minispade.require('radium/templates/forms/reminder');
 minispade.require('radium/templates/forms/call_list_form');

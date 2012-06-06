@@ -40,21 +40,34 @@
         {{/view}}
       </div> <!-- /#alpha -->
       <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
-        <div class="btn-group">
-          {{#view selectAllButton class="btn btn-small"}}
-            <i class="icon-ok-circle"></i> All
-          {{/view}}
-          {{#view selectNoneButton class="btn btn-small"}}
-           <i class="icon-remove-circle"></i> None
-          {{/view}}
-        </div>
-        <div class="btn-group">
-          {{#view emailButton class="btn btn-small"}}Send Email{{/view}}
-          {{#view todoButton class="btn btn-small"}}Add Todo{{/view}}
-          {{#view addToGroupButton class="btn btn-small"}}Add to Group{{/view}}
+        <div class="pull-left">
+          <div class="btn-group">
+            {{#view selectAllButton class="btn btn-small"}}
+              <i class="icon-ok-circle"></i> All
+            {{/view}}
+            {{#view selectNoneButton class="btn btn-small"}}
+             <i class="icon-remove-circle"></i> None
+            {{/view}}
+          </div>
+          {{#if Radium.contactsController.selectedContacts.length}}
+            <div class="btn-group">
+              <button {{action "showEmailForm" 
+                target="Radium.FormContainerView"
+                context="Radium.contactsController"
+              }} class="btn btn-small">Send Email</button>
+              <button {{action 
+                  "showTodoForm" 
+                  target="Radium.FormContainerView"
+                  context="Radium.contactsController"
+                }} class="btn btn-small">
+                Add Todo
+              </button>
+              <button {{action "showAddToGroupForm" target="Radium.FormContainerView"}} class="btn btn-small">Add to Group</button>
+            </div>
+          {{/if}}
         </div>
       </div>
-      <div class="btn-toolbar clear">
+      <div class="btn-toolbar pull-right">
         {{#view totalSelected}}
           <h5>{{totalSelectedString}} selected.</h5>
         {{/view}}

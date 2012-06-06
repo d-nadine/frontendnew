@@ -30,10 +30,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   emailButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.get('formManager').send('showForm', {
-        form: 'ContactsMessage',
-        isMultiple: true,
-        type: 'contacts'
+      Radium.FormContainerView.show({
+        form: 'Message'
       });
     },
     disabledBinding: 'parentView.isContactsSelected'
@@ -45,7 +43,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
   addToGroupButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.get('formManager').send('showForm', {
+    Radium.get('formManager').send('showForm', {
+      Radium.FormContainerView.show({
         form: 'AddToGroup',
         target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'
@@ -80,6 +79,11 @@ Radium.ContactsToolbarView = Ember.View.extend({
       Radium.App.send('addResource', {
         form: 'ContactSMS'
       });
+      Radium.FormManager.send('showForm', {
+        form: 'AddToCompany',
+        target: this.getPath('parentView.selectedContacts'),
+        type: 'contacts'
+      });
     },
     disabledBinding: 'parentView.isContactsSelected'
   }),
@@ -90,7 +94,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
   todoButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
-      Radium.get('formManager').send('showForm', {
+      Radium.FormContainerView.show({
         form: 'Todo',
         target: this.getPath('parentView.selectedContacts'),
         type: 'contacts'

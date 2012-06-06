@@ -22,6 +22,7 @@ minispade.require('radium/views/ui/token');
 minispade.require('radium/views/ui/small_icon');
 
 // Forms
+minispade.require('radium/views/forms/form_container');
 minispade.require('radium/views/forms/fieldset');
 minispade.require('radium/views/forms/todo_form');
 minispade.require('radium/views/forms/message_form');

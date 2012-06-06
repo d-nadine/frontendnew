@@ -11,6 +11,8 @@ Radium.DatePickerField = Ember.TextField.extend({
   },
   willDestroyElement: function() {
     this.$().datepicker("destroy");
+    // jQuery UI doesn't seem to want to get rid of this
+    $('#ui-datepicker-div').hide();
   },
   focusOut: function() {
     this._super();
