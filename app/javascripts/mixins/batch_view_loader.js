@@ -10,7 +10,7 @@ Radium.BatchViewLoader = Ember.Mixin.create({
       return;
 
     Ember.assert('You need to implement a view property', this.get('view'));
-    Ember.assert('You need pass a createChildView callBack', createChildView);
+    Ember.assert('You need to pass a createChildView callBack', createChildView);
 
     var self = this;
     this.get('content').forEach(function(item, idx) {

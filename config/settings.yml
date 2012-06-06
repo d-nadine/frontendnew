@@ -1,7 +1,7 @@
 development:
   server: "<%= ENV['RADIUM_SERVER_URL'] || 'http://api.radiumcrm.com' %>"
   developer_api_key: "26233b7b68290c7c7d4eec03643d0cf3e9b88ba8"
-  user_api_key: "d9ee8d3c34d1e165b442d269176781712e283aca"
+  user_api_key: "feed_demo"
 
 production:
   server: "<%= ENV['RADIUM_SERVER_URL'] %>"
