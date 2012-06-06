@@ -20,9 +20,8 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend({
     var self = this;
     console.time('manualViewCreate');
     this.get('content').forEach(function(activity, idx) {
-      var view = Ember.View.create({
-        content: activity,
-        templateName: activity.get('kind') + '_' + activity.get('tag')
+      var view = Radium.HistoricalFeedView.create({
+        content: activity
       });
       this.get('_cache').pushObject(view);
     }, this);

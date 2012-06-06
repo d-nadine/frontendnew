@@ -26,12 +26,8 @@
     {{/each}}
     <hr>
   {{/if}}
-
 {{/with}}
-
-{{#each content}}
-  {{view Radium.HistoricalFeedView  contentBinding="this"}}
-{{/each}}
+{{view Ember.ContainerView currentViewBinding="Radium.activityFeedController.view"}}
 {{timeEnd "timing"}}
 {{profileEnd}}
 

@@ -18,15 +18,15 @@ Radium.DashboardPage = Ember.State.extend({
   index: Ember.State.create({
     enter: function(manager) {
       
-      // if(!manager.get('dashboardFeedView')){
-      //   manager.set('dashboardFeedView', Ember.View.create({
-      //     templateName: 'dashboard_feed',
-      //     contentBinding: 'Radium.activityFeedController.content',
-      //     controller: Radium.get('Radium.activityFeedController')
-      //   }));
-      // }
+      if(!manager.get('dashboardFeedView')){
+        manager.set('dashboardFeedView', Ember.View.create({
+          templateName: 'dashboard_feed',
+          contentBinding: 'Radium.activityFeedController.content',
+          controller: Radium.get('Radium.activityFeedController')
+        }));
+      }
     
-      Radium.get('appController').set('feedView', Radium.getPath('activityFeedController.view'));
+      Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));
     }
   })
 });
