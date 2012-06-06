@@ -2,7 +2,7 @@ Radium.UsersController = Ember.ArrayProxy.extend({
   init: function(){
     this._super();
   },
-  bootStarpLoaded: function(){
+  bootStrapLoaded: function(){
     var users = Radium.getPath('appController.users');
     
     Radium.store.loadMany(Radium.User, users);

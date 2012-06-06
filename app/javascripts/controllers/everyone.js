@@ -1,6 +1,4 @@
-Radium.everyoneController = Ember.ArrayProxy.create({
-  usersBinding: 'Radium.usersController.content',
-  contactsBinding: 'Radium.contactsController.content',
+Radium.EveryoneController = Ember.ArrayProxy.extend({
   userEmailsBinding: 'users.emails',
   contactEmailsBinding: 'contacts.emails',
   /**
@@ -9,13 +7,12 @@ Radium.everyoneController = Ember.ArrayProxy.create({
     @return {Array} 
   */
   emails: function() {
-    return this.get('users').concat(this.get('contacts'));
+    if (this.get('users')) {
+      return this.get('users').toArray().concat(this.get('contacts').toArray());
+    } else {
+      return [];
+    }
   }.property('userEmails.@each', 'contactEmails.@each'),
-
-  flaggedTo: function() {
-    var flaggedUsers = this.get('users'),
-        flaggedContacts = this.get('contacts');
-  }.property('users.@each.messageFlag', 'contacts.@each.messageFlag'),
 
   all: function() {
     var all = Ember.A([]);
