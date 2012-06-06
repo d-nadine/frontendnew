@@ -3,8 +3,6 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend({
   bootstrapLoaded: function(){
     var feed = Radium.getPath('appController.feed');
     Radium.store.loadMany(Radium.Activity, feed);
-    var activities = Radium.store.findMany(Radium.Activity, feed.mapProperty('id').uniq()); 
-    var grouped = _.emberArrayGroupBy(activities, 'dateLabel');
     this.set('content', Radium.store.findMany(Radium.Activity, feed.mapProperty('id').uniq()));
   }.observes('Radium.appController.feed')
 });

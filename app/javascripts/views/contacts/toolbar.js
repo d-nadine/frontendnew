@@ -40,18 +40,19 @@ Radium.ContactsToolbarView = Ember.View.extend({
   /**
     Opens New Message form in the main page state
   */
-  addToGroupButton: Ember.View.extend({
-    tagName: 'button',
-    click: function() {
-    Radium.get('formManager').send('showForm', {
-      Radium.FormContainerView.show({
-        form: 'AddToGroup',
-        target: this.getPath('parentView.selectedContacts'),
-        type: 'contacts'
-      });
-    },
-    disabledBinding: 'parentView.isContactsSelected'
-  }),
+  //TODO: Check with josh to see how this is supposed to work
+  // addToGroupButton: Ember.View.extend({
+  //   tagName: 'button',
+  //   click: function() {
+  //   Radium.get('formManager').send('showForm', {
+  //     Radium.FormContainerView.show({
+  //       form: 'AddToGroup',
+  //       target: this.getPath('parentView.selectedContacts'),
+  //       type: 'contacts'
+  //     });
+  //   },
+  //   disabledBinding: 'parentView.isContactsSelected'
+  // }),
 
 
   /**
