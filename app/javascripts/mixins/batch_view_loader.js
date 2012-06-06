@@ -5,15 +5,17 @@ Radium.BatchViewLoader = Ember.Mixin.create({
     return this.get('length') - this.get('inc');
   }.property('content.length'),
   _cache: Ember.A([]),
-  batchloadViews: function(createChildView){
+  batchloadViews: function(createChildView, property){
     if(!this.get('content') || this.getPath('content.length') === 0)
       return;
 
     Ember.assert('You need to implement a view property', this.get('view'));
     Ember.assert('You need to pass a createChildView callBack', createChildView);
 
+    var property = (arguments.length === 1) ? 'content' : property;
+
     var self = this;
-    this.get('content').forEach(function(item, idx) {
+    this.get(property).forEach(function(item, idx) {
       var view = createChildView(item);
       this.get('_cache').pushObject(view);
     }, this);
