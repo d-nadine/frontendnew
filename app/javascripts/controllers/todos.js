@@ -1,9 +1,10 @@
-Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
+Radium.TodosController = Ember.ArrayController.extend(Radium.BatchViewLoader, Radium.BinarySearch, {
   content: Ember.A(),
   init: function(){
     this.set('sortedOverdueTodos', Ember.A());
     this.set('sortedDueToday', Ember.A());
     this.set('finishedOverdueTodos', Ember.A());
+    this.set('view', Ember.ContainerView.create({}));
     this._super();
   },
   arrayContentDidChange: function(startIdx, removeAmt, addAmt) {
@@ -59,8 +60,23 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
 
       Radium.store.load(kind, reference);
       var overdue = Radium.store.find(kind, reference.id);
-
+      
       self.get('content').pushObject(overdue);
     });
+
+    if(Radium.getPath('appController.overdue_feed.length') !== this.getPath('content.length')){
+      return;
+    }
+
+    var createView = function(activity){
+       return Radium.FeedView.create({
+        content: activity
+      });
+    };
+
+    if(this.getPath('sortedOverdueTodos.length') > 0){
+      this.batchloadViews(createView, 'sortedOverdueTodos');
+    }
+
   }.observes('Radium.appController.overdue_feed')
 })

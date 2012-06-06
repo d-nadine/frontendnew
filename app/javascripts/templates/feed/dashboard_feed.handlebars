@@ -6,9 +6,7 @@
 {{#with Radium.todosController}}
   {{#if sortedOverdueTodos.length}}
     <h4>Overdue</h4>
-    {{#each sortedOverdueTodos}}
-      {{view Radium.FeedView contentBinding="this"}}
-    {{/each}}
+    {{view Ember.ContainerView currentViewBinding="Radium.todosController.view"}}
     <hr>
   {{/if}}
 

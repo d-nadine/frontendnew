@@ -2,9 +2,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
   content: Ember.A(),
   init: function(){
     this._super();
-    this.set('view', Ember.ContainerView.create({
-      tagName: 'div'
-    }));
+    this.set('view', Ember.ContainerView.create({}));
   },
 
   bootstrapLoaded: function(){
