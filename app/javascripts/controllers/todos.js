@@ -43,6 +43,12 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
     var feedTypes = {};
     feedTypes['todo'] = Radium.Todo;
     feedTypes['deal'] = Radium.Deal;
+    feedTypes['call_list'] = Radium.CallList;
+    feedTypes['contact'] = Radium.Contact;
+    feedTypes['email'] = Radium.Email;
+    feedTypes['invitation'] = Radium.Invitation;
+    feedTypes['meeting'] = Radium.Meeting;
+    feedTypes['phone_call'] = Radium.PhoneCall;
 
     var self = this;
 
