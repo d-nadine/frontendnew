@@ -17,3 +17,14 @@ Radium.Utils = {
     monthDayYear: /(?:\d+\-\d+\-\d+)/
   }
 };
+_.emberArrayGroupBy = function(emberArray, val) {
+  var result = {}, key, value, i, l = emberArray.get('length'),
+    iterator = _.isFunction(val) ? val : function(obj) { return obj.get(val); };
+
+  for (i=0; i<l; i++) {
+    value = emberArray.objectAt(i);
+    key   = iterator(value, i);
+    (result[key] || (result[key] = [])).push(value);
+  }
+  return result;
+};

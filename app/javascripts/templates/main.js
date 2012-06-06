@@ -56,6 +56,11 @@ minispade.require('radium/templates/dashboard/feed/phone_call_created');
 minispade.require('radium/templates/dashboard/feed/call_list_created');
 minispade.require('radium/templates/dashboard/feed/email_sent');
 
+//TODO: Check functionality of new templates
+minispade.require('radium/templates/dashboard/feed/phone_call_made');
+minispade.require('radium/templates/dashboard/feed/deal_scheduled_for');
+minispade.require('radium/templates/dashboard/feed/campaign_scheduled_for');
+
 // Forms
 minispade.require('radium/templates/forms/form_layout');
 minispade.require('radium/templates/forms/fieldset');

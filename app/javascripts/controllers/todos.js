@@ -1,4 +1,5 @@
 Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
+  content: Ember.A(),
   init: function(){
     this.set('sortedOverdueTodos', Ember.A());
     this.set('sortedDueToday', Ember.A());
@@ -9,40 +10,57 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BinarySearch, {
     if(addAmt === 0)
       return;
 
-    var todo = this.objectAt(startIdx);
+    var overdueItem = this.objectAt(startIdx);
 
-    if(todo.get('isOverdue')){
-      this.get('sortedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length'), 'sortedOverdueTodos', 'createdAt'), todo);
+    if(overdueItem.get('isOverdue')){
+      this.get('sortedOverdueTodos').insertAt(this.binarySearch(overdueItem.get('createdAt'), 0, this.getPath('sortedOverdueTodos.length'), 'sortedOverdueTodos', 'createdAt'), overdueItem);
     }
 
-    if(todo.get('isOverdue') && todo.get('isDueToday') && !todo.get('finished')){
-      this.get('sortedDueToday').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('sortedDueToday.length'), 'sortedDueToday', 'createdAt'), todo);
+    if(overdueItem.get('isOverdue') && overdueItem.get('isDueToday') && !overdueItem.get('finished')){
+      this.get('sortedDueToday').insertAt(this.binarySearch(overdueItem.get('createdAt'), 0, this.getPath('sortedDueToday.length'), 'sortedDueToday', 'createdAt'), overdueItem);
     }
 
-    var updatedAt = todo.get('updatedAt'),
+    var updatedAt = overdueItem.get('updatedAt'),
         today = Radium.appController.get('today');
 
-    var isFinishedToday =  todo.get('finished') && Ember.DateTime.compareDate(updatedAt, today) === 0;
+    var isFinishedToday =  overdueItem.get('finished') && Ember.DateTime.compareDate(updatedAt, today) === 0;
 
-    if(todo.get('finished') && isFinishedToday){
-      this.get('finishedOverdueTodos').insertAt(this.binarySearch(todo.get('createdAt'), 0, this.getPath('finishedOverdueTodos.length'), 'finishedOverdueTodos', 'createdAt'), todo);
+    if(overdueItem.get('finished') && isFinishedToday){
+      this.get('finishedOverdueTodos').insertAt(this.binarySearch(overdueItem.get('createdAt'), 0, this.getPath('finishedOverdueTodos.length'), 'finishedOverdueTodos', 'createdAt'), overdueItem);
     }
 
     this._super(startIdx, removeAmt, addAmt);
   },
   bootStarpLoaded: function(){
     var feed = Radium.getPath('appController.overdue_feed');
-    //TODO: is there a base type for todos deals etc.?
-    Radium.store.loadMany(Radium.Todo, feed.map(function(item){
-      return item.reference[item.kind];
-    }));
 
-    var ids = feed.map(function(item){
-      return item.reference[item.kind].id;
+    if(!feed.length || feed.length === 0){
+      this.set('content', []);
+      return;
+    }
+
+    //TODO: Where can we put this for global access?
+    var feedTypes = {};
+    feedTypes['todo'] = Radium.Todo;
+    feedTypes['deal'] = Radium.Deal;
+    feedTypes['call_list'] = Radium.CallList;
+    feedTypes['contact'] = Radium.Contact;
+    feedTypes['email'] = Radium.Email;
+    feedTypes['invitation'] = Radium.Invitation;
+    feedTypes['meeting'] = Radium.Meeting;
+    feedTypes['phone_call'] = Radium.PhoneCall;
+
+    var self = this;
+
+    feed.forEach(function(item){
+      var kind = feedTypes[item.kind];
+
+      var reference = item.reference[item.kind];
+
+      Radium.store.load(kind, reference);
+      var overdue = Radium.store.find(kind, reference.id);
+
+      self.get('content').pushObject(overdue);
     });
-
-    records = Radium.store.findMany(Radium.Todo, ids);
-
-    this.set('content', records);
   }.observes('Radium.appController.overdue_feed')
 })
