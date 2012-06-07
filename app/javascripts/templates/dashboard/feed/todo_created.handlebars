@@ -1,3 +1,8 @@
+{{#if isCall}}
+<i class="pull-left activity-icon icon-call"></i>
+{{else}}
+<i class="pull-left activity-icon icon-todo"></i>
+{{/if}}
 New Todo: 
 {{#if isCall}}
   {{#with reference.todo.reference.contact}}

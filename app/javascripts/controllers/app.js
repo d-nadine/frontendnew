@@ -25,7 +25,7 @@ Radium.AppController = Ember.Object.extend({
     this.set('users', data.users);
     this.set('current_user', data.current_user);
     this.set('overdue_feed', data.overdue_feed);
-    this.set('feed', data.feed);
+    this.set('feed', feedItems);
     this.set('contacts', data.contacts);
   },
 

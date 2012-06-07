@@ -34,6 +34,7 @@
 .icon-add-todo,
 .icon-edit,
 .icon-comments,
+.icon-deal,
 .icon-mail,
 .icon-overdue {
   width: 16px;
@@ -54,6 +55,10 @@
 
 .icon-mail {
   background-image: url('/images/icons/mail.png');
+}
+
+.icon-deal {
+  background-image: url('/images/icons/feed-deal.png');
 }
 
 .icon-todo.icon-overdue,

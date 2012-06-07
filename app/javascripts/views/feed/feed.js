@@ -2,7 +2,7 @@ Radium.FeedView = Ember.View.extend({
   classNames: 'feed-item'.w(),
   classNameBindings: [
     'isActionsVisible:expanded',
-    'content.isSaving'
+    'content.isSaving',
   ],
   defaultTemplate: 'default_activity',
   templateName: 'activity_row',
@@ -53,11 +53,6 @@ Radium.FeedView = Ember.View.extend({
   feedHeaderView: Ember.View.extend({
     contentBinding: 'parentView.content',
     isActionsVisibleBinding: 'parentView.isActionsVisible',
-    expandToggleIconView: Ember.View.extend({
-      tagName: 'i',
-      classNames: 'feed-expand-icon icon-plus'.w(),
-      classNameBindings: ['parentView.isActionsVisible:icon-minus']
-    }),
     iconView: Radium.SmallIconView.extend({
       contentBinding: Ember.Binding.or(
         'parentView.parentView.content',

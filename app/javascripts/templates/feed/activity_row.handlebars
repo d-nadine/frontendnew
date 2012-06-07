@@ -2,7 +2,7 @@
   <div class="span9 feed-header" {{bindAttr title="content.id"}}>
     <div class="row">
       <div class="span1">
-        {{view expandToggleIconView}}
+        <i {{bindAttr class=":feed-expand-icon :icon-plus isActionsVisible:icon-minus"}}></i>
       </div>
       <div class="span8 feed-description">
         <p>
@@ -22,7 +22,7 @@
         {{#if content.canEdit}}
           <a href="#" {{action "toggleEditMode" target="parentView"}}><i class="icon-edit"></i> Edit</a>
         {{/if}}
-        <a href="#" {{action "addTodo" target="parentView"}}><i class="icon-add-todo"></i> Add Todo</a>
+        <a href="#" {{action "showTodoForm" target="Radium.FormContainerView" context="content"}}><i class="icon-add-todo"></i> Add Todo</a>
       </p>
     {{/if}}
   </div> <!-- /.feed-header -->
