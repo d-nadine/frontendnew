@@ -15,21 +15,38 @@ Radium.ClusterView = Radium.FeedView.extend({
     isActionsVisibleBinding: 'parentView.isActionsVisible',
     actionsVisibilityDidChange: function() {
       if (this.get('isActionsVisible')) {
-        debugger;
-        //TODO: use for real
-        // var activities = Radium.store.findMany(Radium.Activity, this.content.itemIds.uniq()));
-        var activities = Ember.A();
+        var activity = this.getPath('content.content');
 
-        for(var i = 0; i < 20; i++){
-          activities.pushObject(this.content);
-        }
+        var activities = Radium.store.findMany(Radium.Activity, activity.get('activities').uniq());
 
-        var clusterController = Radium.ClusterListController.create({});
+        var containerView = Ember.ContainerView.create({});
 
-        clusterController.set('content', activities);
+        activities.forEach(function(activity){
+          var view = Radium.HistoricalFeedView.create({
+            content: activity,
+            templateName: [activity.get('kind'), activity.get('tag')].join('_')
+          });
 
-        this.get('childViews').pushObject(clusterController.get('view'));
-        this.$().addClass('loaded');
+          containerView.get('childViews').pushObject(view);
+        });
+
+        this.get('childViews').pushObject(containerView);
+        // var clusterController = Radium.ClusterListController.create({});
+
+        // clusterController.set('content', activities);
+
+        // clusterController.batchloadViews(function(activity){
+        //   if (activity) {
+        //     return Ember.HistoricalFeedView.create({
+        //       content: activity,
+        //       templateName: [activity.get('kind'), activity.get('tag')].join('_')
+        //     });
+        //   }
+        // });
+
+        // this.get('childViews').pushObject(clusterController.get('view'));
+
+        // this.$().addClass('loaded');
       }else{
         this.get('childViews').popObject();
         this.setPath('parentView.isEditMode', false);

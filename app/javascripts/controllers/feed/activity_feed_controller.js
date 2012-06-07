@@ -1,3 +1,4 @@
+//TODO rename to ClusterFeedController
 Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
   content: Ember.A(),
   init: function(){
@@ -6,19 +7,18 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
   },
 
   bootstrapLoaded: function(){
-    var feed = Radium.getPath('appController.feed');
+    var clusters = Radium.getPath('appController.clusters');
 
-    if (feed) {
-      Radium.store.loadMany(Radium.Activity, feed);
-      this.set('content', Radium.store.findMany(Radium.Activity, feed.mapProperty('id').uniq()));
-      this.batchloadViews(function(activity){
-        if (activity) {
+    if (clusters) {
+      this.set('content', clusters);
+      this.batchloadViews(function(cluster){
+        if (cluster) {
           return Radium.ClusterView.create({
-            content: activity,
+            content: cluster,
             templateName: 'cluster_item'
           });
         }
       });
     }
-  }.observes('Radium.appController.feed')
+  }
 });

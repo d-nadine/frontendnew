@@ -206,7 +206,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }
 
   // submitForm: function() {
-  //   debugger;
   //   var self = this;
   //   var targetId = this.getPath('context.target.id'),
   //       targetType = this.getPath('context.type'),
