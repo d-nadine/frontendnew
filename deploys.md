@@ -1,3 +1,4 @@
+* [2012-06-06 22:12 -0700] c904f68 - Joshua Jones: Remove duplicate overdue todos being added in.
 * [2012-05-31 00:03 -0700] fc683db - Joshua Jones: Switch contactsController content property to a store.findAll() instead of a findQuery.
 * [2012-05-30 00:43 -0700] c14283a - Joshua Jones: Switch out old envelope icon for new style icons on contacts page.
 * [2012-05-29 01:01 -0700] 3e6f575 - Joshua Jones: Instantiate feed controller class in state charts instead of as a singleton.
