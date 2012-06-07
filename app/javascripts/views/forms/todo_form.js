@@ -5,6 +5,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var selection = this.get('selection'),
         isArrayProxy = Ember.Array.detect(selection),
         testForRoot = (isArrayProxy) ? selection.objectAt(0) : selection;
+        
     return (selection) ? Radium.store.adapter.rootForType(testForRoot.constructor) : null;
   }.property('selection'),
 
@@ -14,8 +15,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }.property('root'),
 
   isContact: function() {
-    return this.get('root') === 'contact';
-  }.property('root'),
+    return this.get('root') === 'contact' || this.getPath('selection.kind') === 'contact';
+  }.property('root', 'selection'),
 
   isBulk: function() {
     return Ember.typeOf(this.get('selection')) === 'array';
@@ -46,7 +47,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       return "Assign a Todo to %@ contacts for %@".fmt(totalTodoContacts, dateString);
     } else {
       if (selection) {
-        var name = selection.getPath('firstObject.name') || selection.get('name') || selection.name;
+        var name = selection.getPath('firstObject.name') || selection.get('name') || selection.getPath('reference.contact.name');
         return "Assign a Todo to %@ for %@".fmt(name, dateString);
       } else {
         return "Add a Todo for %@".fmt(dateString);
@@ -99,7 +100,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),
 
   isCallCheckbox: Ember.Checkbox.extend({
-    viewName: 'isCallCheckbox'
+    viewName: 'isCallCheckbox',
+    checkedBinding: 'parentView.isContact'
   }),
 
   assignedUser: null,
