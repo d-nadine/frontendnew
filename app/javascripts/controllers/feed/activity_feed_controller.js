@@ -13,9 +13,9 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       this.set('content', Radium.store.findMany(Radium.Activity, feed.mapProperty('id').uniq()));
       this.batchloadViews(function(activity){
         if (activity) {
-          return Radium.HistoricalFeedView.create({
+          return Radium.ClusterView.create({
             content: activity,
-            templateName: [activity.get('kind'), activity.get('tag')].join('_')
+            templateName: 'cluster_item'
           });
         }
       });

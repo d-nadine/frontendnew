@@ -15,7 +15,7 @@ Radium.AppController = Ember.Object.extend({
     var account = Radium.store.find(Radium.Account, data.account.id),
         feedItems = [];
     // Have to strip out any items tagged 'scheduled_for'
-    data.feed.forEach(function(activity) {
+    data.feed.activities.forEach(function(activity) {
       if (activity.tag !== 'scheduled_for') {
         feedItems.push(activity);
       }

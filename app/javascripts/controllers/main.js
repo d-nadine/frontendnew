@@ -35,3 +35,4 @@ minispade.require('radium/controllers/selected_campaign');
 minispade.require('radium/controllers/selected_feed_date');
 minispade.require('radium/controllers/nav/topbar_controller');
 minispade.require('radium/controllers/feed/activity_feed_controller');
+minispade.require('radium/controllers/feed/cluster_list_controller');

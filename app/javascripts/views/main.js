@@ -1,7 +1,6 @@
 // Auth
 minispade.require('radium/views/auth/login_pane');
 
-
 // UI Elements
 minispade.require('radium/views/forms/textfield');
 minispade.require('radium/views/forms/datepicker');
@@ -91,3 +90,7 @@ minispade.require('radium/views/todos/todo_edit');
 // Campaigns
 minispade.require('radium/views/campaigns/campaigns');
 minispade.require('radium/views/campaigns/campaign');
+
+//clusters
+minispade.require('radium/views/feed/cluster_view');
+minispade.require('radium/views/feed/cluster_list_view');
