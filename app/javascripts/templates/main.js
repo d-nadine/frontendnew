@@ -59,6 +59,8 @@ minispade.require('radium/templates/dashboard/feed/note_created');
 
 minispade.require('radium/templates/dashboard/feed/phone_call_created');
 
+minispade.require('radium/templates/dashboard/feed/sms_sent');
+
 minispade.require('radium/templates/dashboard/feed/call_list_created');
 minispade.require('radium/templates/dashboard/feed/call_list_scheduled_for');
 

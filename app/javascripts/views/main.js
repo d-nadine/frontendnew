@@ -51,7 +51,6 @@ minispade.require('radium/views/feed/feed_list');
 minispade.require('radium/views/feed/type_filter');
 minispade.require('radium/views/feed/feed_filter_item');
 minispade.require('radium/views/feed/coffee_cup_total');
-minispade.require('radium/views/feed/cluster');
 
 // Global
 minispade.require('radium/views/global/topbar');
@@ -92,5 +91,7 @@ minispade.require('radium/views/campaigns/campaigns');
 minispade.require('radium/views/campaigns/campaign');
 
 //clusters
-minispade.require('radium/views/feed/cluster_view');
+minispade.require('radium/views/feed/cluster');
 minispade.require('radium/views/feed/cluster_list_view');
+minispade.require('radium/views/feed/cluster_view');
+minispade.require('radium/views/feed/cluster_activity_list');

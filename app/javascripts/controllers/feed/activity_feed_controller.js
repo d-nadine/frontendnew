@@ -11,14 +11,13 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
 
     if (clusters) {
       this.set('content', clusters);
-      this.batchloadViews(function(cluster){
-        if (cluster) {
-          return Radium.ClusterView.create({
-            content: cluster,
-            templateName: 'cluster_item'
-          });
-        }
-      });
+      // this.batchloadViews(function(cluster){
+      //   if (cluster) {
+      //     return Radium.FeedClusterView.create({
+      //       content: cluster
+      //     });
+      //   }
+      // });
     }
   }.observes('Radium.appController.feed')
 });

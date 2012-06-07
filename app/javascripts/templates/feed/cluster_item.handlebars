@@ -1,1 +1,4 @@
-{{count}} {{kind}}
+<i {{bindAttr class=":feed-expand-icon :icon-plus isActivitiesVisible:icon-minus"}}></i>
+{{#with content}}
+{{count}} {{unbound kind}} {{unbound tag}}
+{{/with}}
