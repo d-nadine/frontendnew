@@ -4,6 +4,7 @@ Radium.FeedView = Ember.View.extend({
     'isActionsVisible:expanded',
     'content.isSaving'
   ],
+  defaultTemplate: 'default_activity',
   templateName: 'activity_row',
 
   didInsertElement: function() {

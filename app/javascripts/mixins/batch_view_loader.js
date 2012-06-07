@@ -5,6 +5,7 @@ Radium.BatchViewLoader = Ember.Mixin.create({
     return this.get('length') - this.get('inc');
   }.property('content.length'),
   _cache: Ember.A([]),
+
   batchloadViews: function(createChildView, property){
     if(!this.get('content') || this.getPath('content.length') === 0)
       return;

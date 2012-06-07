@@ -1,6 +1,6 @@
 Radium.DashboardPage = Ember.State.extend({
   enter: function(manager) {
-    rootView = manager.get('rootView')
+    var rootView = manager.get('rootView');
 
     rootView.get('childViews').removeObject(rootView.get('loading'));
 

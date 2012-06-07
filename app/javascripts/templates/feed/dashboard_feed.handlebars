@@ -6,26 +6,30 @@
 {{#with Radium.todosController}}
   {{#if sortedOverdueTodos.length}}
     <h4>Overdue</h4>
-    {{view Ember.ContainerView currentViewBinding="Radium.todosController.view"}}
+    {{collection Ember.CollectionView 
+      contentBinding="sortedOverdueTodos"
+      itemViewClass="Radium.FeedView"
+    }}
     <hr>
   {{/if}}
 
   {{#if dueToday.length}}
     <h4>Due</h4>
-    {{#each sortedDueToday}}
-      {{view Radium.FeedView contentBinding="this"}}
-    {{/each}}
+    {{collection Ember.CollectionView 
+      contentBinding="sortedDueToday"
+      itemViewClass="Radium.FeedView"
+    }}
     <hr>
   {{/if}}
   {{#if finishedOverdueTodos.length}}
     <h4>Finished</h4>
-    {{#each finishedOverdueTodos}}
-      {{view Radium.FeedView contentBinding="this"}}
-    {{/each}}
+    {{collection Ember.CollectionView 
+      contentBinding="finishedOverdueTodos"
+      itemViewClass="Radium.FeedView"
+    }}
     <hr>
   {{/if}}
 {{/with}}
 {{view Ember.ContainerView currentViewBinding="Radium.activityFeedController.view"}}
 {{timeEnd "timing"}}
 {{profileEnd}}
-

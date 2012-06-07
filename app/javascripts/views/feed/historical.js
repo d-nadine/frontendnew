@@ -7,14 +7,8 @@ Radium.HistoricalFeedView = Radium.FeedView.extend({
   ],
   isActionsVisible: false,
   layoutName: 'historical_layout',
-  defaultTemplate: 'default_activity',
-  template: Ember.computed(function() {
-    var kind = this.getPath('content.kind'),
-        tag = this.getPath('content.tag'),
-        templateName = [kind, tag].join('_'),
-        template = this.templateForName(templateName, 'template');
-    return template || this.get('defaultTemplate');
-  }).property('content.kind', 'content.tag').cacheable()});
+  defaultTemplate: 'default_activity'
+});
 
 
 

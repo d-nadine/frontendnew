@@ -12,8 +12,14 @@ Radium.AppController = Ember.Object.extend({
   
   bootstrap: function(data){
     Radium.store.load(Radium.Account, data.account);
-    var account = Radium.store.find(Radium.Account, data.account.id);
-
+    var account = Radium.store.find(Radium.Account, data.account.id),
+        feedItems = [];
+    // Have to strip out any items tagged 'scheduled_for'
+    data.feed.forEach(function(activity) {
+      if (activity.tag !== 'scheduled_for') {
+        feedItems.push(activity);
+      }
+    });
     //kick off observers
     this.set('account', account);
     this.set('users', data.users);

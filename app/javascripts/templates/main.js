@@ -45,15 +45,23 @@ minispade.require('radium/templates/dashboard/feed/contact_became_prospect');
 minispade.require('radium/templates/dashboard/feed/contact_created');
 minispade.require('radium/templates/dashboard/feed/contact_followed');
 minispade.require('radium/templates/dashboard/feed/invitation_created');
+
 minispade.require('radium/templates/dashboard/feed/meeting_cancelled');
 minispade.require('radium/templates/dashboard/feed/meeting_confirmed');
 minispade.require('radium/templates/dashboard/feed/meeting_created');
 minispade.require('radium/templates/dashboard/feed/meeting_rejected');
 minispade.require('radium/templates/dashboard/feed/meeting_rescheduled');
+minispade.require('radium/templates/dashboard/feed/meeting_scheduled_for');
+
 minispade.require('radium/templates/dashboard/feed/message_created');
+
 minispade.require('radium/templates/dashboard/feed/note_created');
+
 minispade.require('radium/templates/dashboard/feed/phone_call_created');
+
 minispade.require('radium/templates/dashboard/feed/call_list_created');
+minispade.require('radium/templates/dashboard/feed/call_list_scheduled_for');
+
 minispade.require('radium/templates/dashboard/feed/email_sent');
 
 //TODO: Check functionality of new templates
