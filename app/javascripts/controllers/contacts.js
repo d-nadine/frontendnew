@@ -1,4 +1,4 @@
-Radium.contactsController = Ember.ArrayProxy.extend({
+Radium.ContactsController = Ember.ArrayProxy.extend({
    bootStarpLoaded: function(){
     var contacts = Radium.getPath('appController.contacts');
     

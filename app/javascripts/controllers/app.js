@@ -24,19 +24,12 @@ Radium.AppController = Ember.Object.extend({
 
     Radium.store.loadMany(Radium.Activity, data.feed.activities);
 
-
-    data.feed.clusters.forEach(function(cluster){
-      var emCluster = Ember.Object.create({});
-      emCluster.setProperties(cluster);
-      clusters.push(emCluster);
-    });
-
     //kick off observers
     this.set('account', account);
     this.set('users', data.users);
     this.set('current_user', data.current_user);
     this.set('overdue_feed', data.overdue_activities);
-    this.set('clusters', clusters);
+    this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
 
     Radium.get('activityFeedController').bootstrapLoaded();

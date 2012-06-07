@@ -34,7 +34,7 @@ Radium.App = Ember.StateManager.create({
     Radium.set('todosController', Radium.TodosController.create());
     Radium.set('usersController', Radium.UsersController.create());
     Radium.set('activityFeedController', Radium.ActivityFeedController.create());
-    Radium.set('contactsController', Radium.ActivityFeedController.create());
+    Radium.set('contactsController', Radium.ContactsController.create());
     Radium.set('everyoneController', Radium.EveryoneController.create({
       usersBinding: 'Radium.usersController.content',
       contactsBinding: 'Radium.contactsController.content'
