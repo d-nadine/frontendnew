@@ -9,26 +9,63 @@ Radium.AppController = Ember.Object.extend({
   selectedForm: null,
   params: null,
   account: null,
-  createDataStoreWorker: function(activities){
+  createDataStoreWorker: function(bootstrap){
+    var feed = bootstrap.current_user.meta.feed;
+    //TODO: initialise from real dates
+    // var start_date = Ember.DateTime.create(new Date(Date.parse(feed.start_date)));
+    // var end_date = Ember.DateTime.create(new Date(Date.parse(feed.end_date)));
+
+    var start_date = Ember.DateTime.create().advance({day: -28}),
+        end_date = Ember.DateTime.create(),
+        diff = Ember.DateTime.compareDate(end_date, start_date),
+        date_ranges = Ember.A(),
+        interval = 7;
+
+    if(diff <= 7){
+      date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: end_date.toFormattedString('%Y-%m-%d')});
+      diff = 0; 
+    }
+
+    while(diff > 0){
+      date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: start_date.advance({day: interval}).toFormattedString('%Y-%m-%d')});
+
+      diff -= interval;
+
+      star_date = start_date.advance({day: interval});
+
+      if(diff < interval){
+        date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: start_date.advance({day: diff}).toFormattedString('%Y-%m-%d')});
+        break;
+      }
+    }
+
+    var urls = date_ranges.map(function(dateRange){
+      return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(bootstrap.current_user.id, dateRange.start, dateRange.end);
+    }); 
+
     var worker = new Worker('worker.js');
 
     worker.addEventListener('message', function(e){
+      var activities = JSON.parse(e.data).feed.activities;
       Radium.store.loadMany(Radium.Activity, e.data);
       worker.terminate();
     });
 
     worker.addEventListener('error', function(e){
-      Radium.store.loadMany(Radium.Activity, activities);
       worker.terminate();
     });
 
-    worker.postMessage(activities);
+    worker.postMessage({
+      key: CONFIG.api,
+      urls:  urls
+    });
   },
   bootstrap: function(data){
     if(Radium.Utils.browserSupportsWebWorkers()){
-      this.createDataStoreWorker(data.feed.activities);
+      this.createDataStoreWorker(data);
     }else{  
-      Radium.store.loadMany(Radium.Activity, activities);
+      //TODO: What to do or can we rely on webworkers being there 
+      Radium.store.loadMany(Radium.Activity, data.feed.activities);
     }
 
     Radium.store.load(Radium.Account, data.account);
