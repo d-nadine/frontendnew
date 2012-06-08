@@ -15,7 +15,7 @@ Radium.AppController = Ember.Object.extend({
     // var start_date = Ember.DateTime.create(new Date(Date.parse(feed.start_date)));
     // var end_date = Ember.DateTime.create(new Date(Date.parse(feed.end_date)));
 
-    var start_date = Ember.DateTime.create().advance({day: -28}),
+    var start_date = Ember.DateTime.create().advance({day: -7}),
         end_date = Ember.DateTime.create(),
         diff = Ember.DateTime.compareDate(end_date, start_date),
         date_ranges = Ember.A(),
@@ -48,7 +48,6 @@ Radium.AppController = Ember.Object.extend({
     worker.addEventListener('message', function(e){
       var activities = JSON.parse(e.data).feed.activities;
       Radium.store.loadMany(Radium.Activity, e.data);
-      worker.terminate();
     });
 
     worker.addEventListener('error', function(e){
@@ -65,7 +64,6 @@ Radium.AppController = Ember.Object.extend({
       this.createDataStoreWorker(data);
     }else{  
       //TODO: What to do or can we rely on webworkers being there 
-      Radium.store.loadMany(Radium.Activity, data.feed.activities);
     }
 
     Radium.store.load(Radium.Account, data.account);
