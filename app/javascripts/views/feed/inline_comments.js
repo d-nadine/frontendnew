@@ -6,6 +6,10 @@ Radium.InlineCommentsView = Ember.View.extend({
     this.$().hide().slideDown('fast');
   },
 
+  slideUp: function() {
+    return this.$().slideUp('fast');
+  },
+
   commentTextArea: Ember.TextArea.extend(Ember.TargetActionSupport, {
     placeholder: "Add a comment",
     valueBinding: 'parentView.comment',

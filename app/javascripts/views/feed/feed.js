@@ -73,6 +73,9 @@ Radium.FeedView = Ember.View.extend({
     contentBinding: 'parentView.content',
     isActionsVisibleBinding: 'parentView.isActionsVisible',
     actionsVisibilityDidChange: function() {
+      var self = this,
+          childViews = this.get('childViews');
+
       if (this.get('isActionsVisible')) {
         // Comments are either available from an embedded activity or from the
         // the activity itself if the view is historical.
@@ -84,10 +87,13 @@ Radium.FeedView = Ember.View.extend({
               }),
               contentBinding: 'controller.content'
             });
-        this.get('childViews').pushObject(commentsView);
-      } else {
-        this.get('childViews').popObject();
-        this.setPath('parentView.isEditMode', false);
+        childViews.pushObject(commentsView);
+      } else if (childViews.get('length')) {
+        $.when(childViews.objectAt(0).slideUp())
+          .then(function() {
+            childViews.popObject();
+            self.setPath('parentView.isEditMode', false);
+          });
       }
     }.observes('isActionsVisible')
   }),

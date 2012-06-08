@@ -9,6 +9,9 @@ Radium.ClusterListView = Ember.ContainerView.extend({
   removeActivities: function() {
     var childViews = this.get('childViews');
     if (childViews.get('length') === 2) {
+      // NOTE: There doesn't seem to be a way to run an animation
+      // when an Ember View is about to be destroyed, using jQuery.Deferred
+      // as a work around until a better solution is found.
       $.when(childViews.objectAt(1).slideUp()).then(function() {
         childViews.popObject();
       });      
