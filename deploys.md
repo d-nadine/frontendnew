@@ -1,3 +1,4 @@
+* [2012-06-07 22:17 -0700] 692d5f8 - Joshua Jones: [Deploy]
 * [2012-06-07 22:10 -0700] f1fddc9 - Joshua Jones: Test init state.
 * [2012-06-07 22:03 -0700] ceeda50 - Joshua Jones: Test auth state.
 * [2012-06-07 21:38 -0700] c3f6c6c - Joshua Jones: Try removing bootstrap call all together.
