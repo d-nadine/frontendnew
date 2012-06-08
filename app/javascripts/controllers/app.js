@@ -25,7 +25,7 @@ Radium.AppController = Ember.Object.extend({
     worker.postMessage(activities);
   },
   bootstrap: function(data){
-    if(Radium.Utils.browserSupportsWeb()){
+    if(Radium.Utils.browserSupportsWebWorkers()){
       this.createDataStoreWorker(data.feed.activities);
     }else{  
       Radium.store.loadMany(Radium.Activity, activities);

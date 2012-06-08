@@ -16,7 +16,7 @@ Radium.Utils = {
   DATES_REGEX: {
     monthDayYear: /(?:\d+\-\d+\-\d+)/
   },
-  browserSupportsWeb: function(){
+  browserSupportsWebWorkers: function(){
     return !!window.Worker;
   }
 };
