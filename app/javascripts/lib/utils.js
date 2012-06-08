@@ -15,6 +15,9 @@ Radium.Utils = {
   },
   DATES_REGEX: {
     monthDayYear: /(?:\d+\-\d+\-\d+)/
+  },
+  browserSupportsWeb: function(){
+    return !!window.Worker;
   }
 };
 _.emberArrayGroupBy = function(emberArray, val) {

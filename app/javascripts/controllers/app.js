@@ -9,13 +9,31 @@ Radium.AppController = Ember.Object.extend({
   selectedForm: null,
   params: null,
   account: null,
-  
+  createDataStoreWorker: function(activities){
+    var worker = new Worker('worker.js');
+
+    worker.addEventListener('message', function(e){
+      Radium.store.loadMany(Radium.Activity, e.data);
+      worker.terminate();
+    });
+
+    worker.addEventListener('error', function(e){
+      Radium.store.loadMany(Radium.Activity, activities);
+      worker.terminate();
+    });
+
+    worker.postMessage(activities);
+  },
   bootstrap: function(data){
+    if(Radium.Utils.browserSupportsWeb()){
+      this.createDataStoreWorker(data.feed.activities);
+    }else{  
+      Radium.store.loadMany(Radium.Activity, activities);
+    }
+
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
         clusters = [];
-
-    Radium.store.loadMany(Radium.Activity, data.feed.activities);
 
     //kick off observers
     this.set('account', account);
