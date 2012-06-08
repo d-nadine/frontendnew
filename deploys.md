@@ -1,3 +1,4 @@
+* [2012-06-07 17:40 -0700] 12f7d4c - Joshua Jones: Add slideUp method to inline comments.
 * [2012-06-07 00:04 -0700] f485619 - Joshua Jones: Attach isContact property to 'Is Call' checkbox in todo form.
 * [2012-06-06 23:05 -0700] 03cc9de - Joshua Jones: Move feed icons into their handlebar templates to cut off some view render time.
 * [2012-06-06 22:12 -0700] c904f68 - Joshua Jones: Remove duplicate overdue todos being added in.
