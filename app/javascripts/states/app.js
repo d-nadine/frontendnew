@@ -51,7 +51,6 @@ Radium.App = Ember.StateManager.create({
       manager.get('rootView').appendTo('#main');
 
       $.when(manager.bootstrapUser()).then(function(data){
-        Radium.get('appController').bootstrap(data);
         
         manager.send('loginComplete');
       },
