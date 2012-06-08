@@ -1,3 +1,4 @@
+* [2012-06-07 21:17 -0700] 56cc896 - Joshua Jones: Try and pinpoint forEach fail.
 * [2012-06-07 17:52 -0700] 7a575e9 - Joshua Jones: Remove commented out code that might be breaking minifier.
 * [2012-06-07 17:40 -0700] 12f7d4c - Joshua Jones: Add slideUp method to inline comments.
 * [2012-06-07 00:04 -0700] f485619 - Joshua Jones: Attach isContact property to 'Is Call' checkbox in todo form.
