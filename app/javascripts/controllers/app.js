@@ -14,13 +14,6 @@ Radium.AppController = Ember.Object.extend({
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
         clusters = [];
-    // TODO: Do we still need to do this 
-    // Have to strip out any items tagged 'scheduled_for'
-    // data.feed.forEach(function(activity) {
-    //   if (activity.tag !== 'scheduled_for') {
-    //     feedItems.push(activity);
-    //   }
-    // });
 
     Radium.store.loadMany(Radium.Activity, data.feed.activities);
 
