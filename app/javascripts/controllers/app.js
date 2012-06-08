@@ -11,13 +11,9 @@ Radium.AppController = Ember.Object.extend({
   account: null,
   
   bootstrap: function(data){
-    Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
         clusters = [];
 
-    Radium.store.loadMany(Radium.Activity, data.feed.activities);
-
-    //kick off observers
 
   },
 
