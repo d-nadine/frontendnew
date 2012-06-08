@@ -45,12 +45,14 @@ Radium.App = Ember.StateManager.create({
   // TODO: Add server login logic here.
   authenticate: Ember.State.extend({
     enter: function(manager, transition) {
+      console.log('test');
       this._super(manager, transition);
 
       manager.set('rootView', Radium.LoadingView.create());
       manager.get('rootView').appendTo('#main');
 
       $.when(manager.bootstrapUser()).then(function(data){
+        Radium.get('appController').bootstrap(data);
         
         manager.send('loginComplete');
       },
