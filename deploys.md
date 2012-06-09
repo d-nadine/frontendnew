@@ -1,3 +1,4 @@
+* [2012-06-09 00:46 -0700] 626642e - Joshua Jones: Add inline todo forms. WIP to get context passed correctly.
 * [2012-06-07 22:17 -0700] 692d5f8 - Joshua Jones: [Deploy]
 * [2012-06-07 22:10 -0700] f1fddc9 - Joshua Jones: Test init state.
 * [2012-06-07 22:03 -0700] ceeda50 - Joshua Jones: Test auth state.
