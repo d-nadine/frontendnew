@@ -58,7 +58,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
   descriptionText: Ember.TextArea.extend(Ember.TargetActionSupport, {
     elementId: 'description',
-    viewName: 'descriptionText',
+    viewName: 'descriptionField',
     attributeBindings: ['name'],
     placeholderBinding: 'parentView.headerContext',
     name: 'description',
@@ -144,7 +144,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var selectedContacts,
         selection = this.get('selection'),
         plural = this.get('plural'),
-        description = this.getPath('descriptionText.value'),
+        description = this.getPath('descriptionField.value'),
         isCall = this.getPath('isCallCheckbox.checked'),
         // TODO: When support todos are added, add logic to toggle this from general to support
         todoKind = 'general',

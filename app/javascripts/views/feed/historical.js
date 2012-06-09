@@ -1,20 +1,3 @@
-  // classNames: ['historical'],
-  // classNameBindings: [
-  //   'content.kind',
-  //   'content.isTodoFinished:finished',
-  //   'isActionsVisible:expanded',
-  // ],
-  // isActionsVisible: false,
-  // layoutName: 'historical_layout',
-  // defaultTemplate: 'default_activity',
-  // init: function() {
-  //   this._super();
-  //   var kind = this.getPath('content.kind'),
-  //       tag = this.getPath('content.tag'),
-  //       templateName = [kind, tag].join('_');
-
-  //   this.set('templateName', templateName);
-  // }
 Radium.FeedHeaderView = Ember.View.extend({
   contentBinding: 'parentView.content',
   classNames: 'feed-header span9'.w(),
@@ -36,7 +19,7 @@ Radium.FeedHeaderView = Ember.View.extend({
 });
 
 Radium.HistoricalFeedView = Ember.ContainerView.extend({
-  classNames: ['row'],
+  classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded'],
   isActionsVisible: false,
   init: function() {
@@ -55,11 +38,14 @@ Radium.HistoricalFeedView = Ember.ContainerView.extend({
         contentBinding: 'controller.content'
       });
     this.set('commentsView', commentsView);
+
+    // Add Todo Form
+    this.set('todoForm', Radium.TodoForm.create());
   },
   commentsVisibilityDidChange: function() {
     var self = this,
-          childViews = this.get('childViews'),
-          commentsView = this.get('commentsView');
+        childViews = this.get('childViews'),
+        commentsView = this.get('commentsView');
     if (this.get('isActionsVisible')) {
       childViews.pushObject(commentsView);
     } else if (childViews.get('length')) {
@@ -69,5 +55,15 @@ Radium.HistoricalFeedView = Ember.ContainerView.extend({
           self.setPath('parentView.isEditMode', false);
         });
     }
-  }.observes('isActionsVisible')
+  }.observes('isActionsVisible'),
+
+  showTodoForm: function(event) {
+    this.get('childViews').pushObject(this.get('todoForm'));
+    return false;
+  },
+
+  close: function(event) {
+    this.get('childViews').removeObject(this.get('todoForm'));
+    return false;
+  }
 });

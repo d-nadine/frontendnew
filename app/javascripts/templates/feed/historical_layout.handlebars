@@ -17,10 +17,7 @@
 </div> <!-- /.row -->
 {{#if isActionsVisible}}
   <p class="feed-actions">
-    <a href="#" {{action "showTodoForm" target="Radium.FormContainerView" context="content"}}><i class="icon-add-todo"></i> Add Todo</a>
-  {{#if content.reference.contact}}
-    <a href="#" {{action "showTodoForm" target="Radium.FormContainerView" context="content"}}><i class="icon-call"></i> Add Call Todo</a>
-  {{/if}}
+    <a href="#" {{action "showTodoForm" target="parentView" context="content"}}><i class="icon-add-todo"></i> Add Todo</a>
   </p>
 {{/if}}
 {{timeEnd "feeditem"}}
