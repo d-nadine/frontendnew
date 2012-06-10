@@ -1,31 +1,23 @@
 {{time "feeditem"}}
-{{#view feedHeaderView class="row"}}
-<div class="span9 feed-header" {{bindAttr title="content.id"}}>
-  <div class="row">
-    <div class="span1">
-      <i {{bindAttr class=":feed-expand-icon :icon-plus isActionsVisible:icon-minus"}}></i>
-    </div>
-    <div class="span8">
-      <p>
-        {{#with content}}
-          <span class="content">{{yield}}</span>
-          {{#if comments.length}}
-            <i class="icon-comments"></i>
-            ({{comments.length}})
-          {{/if}}
-        {{/with}}
-      </p>
-    </div> <!-- /.span9 -->
-  </div> <!-- /.row -->
-  {{#if isActionsVisible}}
-    <p class="feed-actions">
-      <a href="#" {{action "showTodoForm" target="Radium.FormContainerView" context="content"}}><i class="icon-add-todo"></i> Add Todo</a>
-    {{#if content.reference.contact}}
-      <a href="#" {{action "showTodoForm" target="Radium.FormContainerView" context="content"}}><i class="icon-call"></i> Add Call Todo</a>
-    {{/if}}
+<div class="row">
+  <div class="span1">
+    <i {{bindAttr class=":feed-expand-icon :icon-plus isActionsVisible:icon-minus"}}></i>
+  </div>
+  <div class="span8">
+    <p>
+      {{#with content}}
+        <span class="content">{{yield}}</span>
+        {{#if comments.length}}
+          <i class="icon-comments"></i>
+          ({{comments.length}})
+        {{/if}}
+      {{/with}}
     </p>
-  {{/if}}
-</div>
-{{/view}}
-{{view activityActionsView contentBinding="this"}}
+  </div> <!-- /.span9 -->
+</div> <!-- /.row -->
+{{#if isActionsVisible}}
+  <p class="feed-actions">
+    <a href="#" {{action "showTodoForm" target="parentView" context="content"}}><i class="icon-add-todo"></i> Add Todo</a>
+  </p>
+{{/if}}
 {{timeEnd "feeditem"}}

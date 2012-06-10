@@ -1,6 +1,7 @@
 Radium.ClusterListView = Ember.ContainerView.extend({
   childViews: [],
-  // currentView: Radium.ClusterHeaderView,
+  classNames: ['feed-cluster'],
+  
   init: function() {
     this._super();
     this.set('currentView', Radium.ClusterHeaderView.create());

@@ -4,10 +4,6 @@ Radium.FormContainerView = Ember.ContainerView.create({
   isVisible: function() {
     return (this.get('currentView')) ? true : false;
   }.property('currentView'),
-  
-  show: function(form) {
-    this.set('currentView', form);
-  },
 
   close: function(event) {
     var self = this,
@@ -17,6 +13,10 @@ Radium.FormContainerView = Ember.ContainerView.create({
       form.destroy();
     });
     return false;
+  },
+
+  show: function(form) {
+    this.set('currentView', form);
   },
 
   // Individual Forms
@@ -50,19 +50,19 @@ Radium.FormContainerView = Ember.ContainerView.create({
   },
 
   showTodoForm: function(event) {
-      var context = (event) ? event.context : null,
-          // Test if context is an array controller versus an object
-          isArray = Ember.Array.detect(context),
-          // If it is an array, we wanted the selected computed property,
-          // but if not, just pass the defined object along.
-          multipleBinding = {
-            source: context,
-            selectionBinding: 'source.selectedContacts'
-          },
-          singleBinding = {
-            selection: context
-          },
-          selection = (isArray) ? multipleBinding : singleBinding;
+    var context = (event) ? event.context : null,
+        // Test if context is an array controller versus an object
+        isArray = Ember.Array.detect(context),
+        // If it is an array, we wanted the selected computed property,
+        // but if not, just pass the defined object along.
+        multipleBinding = {
+          source: context,
+          selectionBinding: 'source.selectedContacts'
+        },
+        singleBinding = {
+          selection: context
+        },
+        selection = (isArray) ? multipleBinding : singleBinding;
 
     this.show(Radium.TodoForm.create(selection));
 

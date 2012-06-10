@@ -27,7 +27,6 @@ Radium.App = Ember.StateManager.create({
   }),
 
   init: function(){
-    console.log('confirm init is called');
     Radium.set('appController', Radium.AppController.create());
     Radium.set('accountController', Radium.AccountController.create());
     Radium.set('feedController', Radium.feedController.create());

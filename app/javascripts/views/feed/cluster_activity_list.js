@@ -1,4 +1,5 @@
 Radium.ClusterActivityListView = Ember.CollectionView.extend({
+  classNames: 'feed-item'.w(),
   itemViewClass: Radium.HistoricalFeedView,
   didInsertElement: function() {
     this.$().hide().slideDown('fast');

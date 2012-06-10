@@ -313,34 +313,43 @@ fieldset legend {
   margin-bottom: 25px;
 }
 
+.feed-cluster {
+  cursor: pointer;
+
+  .feed-item {
+    margin-bottom: 18px;
+  }
+}
+
+.feed-header {
+  padding: 5px 0;
+  position: relative;
+  cursor: pointer;
+
+  i.feed-expand-icon {
+    margin-left: 10px;
+    @include opacity(0);
+    @include transition(opacity 0.2s ease-in);
+  }
+
+  &:hover,
+  .expanded & {
+    background-color: #f7f7f9;
+
+    i.feed-expand-icon {
+      @include opacity(1);
+    }
+  }
+
+  .activity-icon {
+    margin-right: 10px;
+  }
+}
+
 .feed-item {
   width: 698px;
   margin: 0 0 2px;
   border: 1px solid transparent;
-
-  .feed-header {
-    padding: 5px 0;
-    position: relative;
-    cursor: pointer;
-
-    i.feed-expand-icon {
-      margin-left: 10px;
-      @include opacity(0);
-      @include transition(opacity 0.2s ease-in);
-    }
-
-    &:hover {
-      background-color: #f7f7f9;
-
-      i.feed-expand-icon {
-        @include opacity(1);
-      }
-    }
-
-    .activity-icon {
-      margin-right: 10px;
-    }
-  }
 
   .create-form {
     width: 700px;
@@ -423,6 +432,13 @@ fieldset legend {
     color: #898989;
     font-weight: bold;
     text-transform: uppercase;
+  }
+}
+
+.feed-item-container {
+  .radium-form {
+    margin-left: 20px;
+    position: relative;
   }
 }
 
