@@ -1,8 +1,7 @@
 self.addEventListener('message', function(e){ 
 		try {
-	         
-			var xhr=new XMLHttpRequest();
-	       
+      var xhr=new XMLHttpRequest();
+
       for(var i = 0; i < e.data.urls.length;i++){
         xhr.open('GET', e.data.urls[i], true);
         xhr.setRequestHeader("X-Radium-User-API-Key", e.data.key);
