@@ -21,6 +21,7 @@ minispade.require('radium/core/config');
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
 minispade.require('radium/lib/utils');
+minispade.require('radium/lib/ember-datetime-extensions');
 minispade.require('radium/mixins/main');
 minispade.require('radium/helpers/main');
 minispade.require('radium/crossfilter/main');

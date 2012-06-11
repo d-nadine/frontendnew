@@ -11,43 +11,52 @@ Radium.AppController = Ember.Object.extend({
   account: null,
   createDataStoreWorker: function(bootstrap){
     var feed = bootstrap.current_user.meta.feed;
-    //TODO: initialise from real dates
-    // var start_date = Ember.DateTime.create(new Date(Date.parse(feed.start_date)));
-    // var end_date = Ember.DateTime.create(new Date(Date.parse(feed.end_date)));
-
-    var start_date = Ember.DateTime.create().advance({day: -7}),
-        end_date = Ember.DateTime.create(),
-        diff = Ember.DateTime.compareDate(end_date, start_date),
+    //TODO: Do we need to include the timezone?
+    var start_date = Ember.DateTime.parse(feed.start_date, '%Y-%m-%d'),
+        end_date = Ember.DateTime.parse(feed.end_date, '%Y-%m-%d'),
+        diffDays = Ember.DateTime.DifferenceInDays(start_date, end_date),
         date_ranges = Ember.A(),
-        interval = 7;
+        days_to_advance = -1,
+        interval = 1;
 
-    if(diff <= 7){
+    if(diffDays <= interval){
       date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: end_date.toFormattedString('%Y-%m-%d')});
-      diff = 0; 
+      diffDays = 0; 
     }
 
-    while(diff > 0){
-      date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: start_date.advance({day: interval}).toFormattedString('%Y-%m-%d')});
+    while(diffDays > 0){
+      date_ranges.pushObject({start: start_date.advance({day: days_to_advance}).toFormattedString('%Y-%m-%d'), end: start_date.advance({day: (days_to_advance + interval) }).toFormattedString('%Y-%m-%d')});
 
-      diff -= interval;
+      days_to_advance += interval + 1;
+      diffDays -= interval;
 
-      star_date = start_date.advance({day: interval});
-
-      if(diff < interval){
-        date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: start_date.advance({day: diff}).toFormattedString('%Y-%m-%d')});
+      if(diffDays < interval){
+        date_ranges.pushObject({start: start_date.advance({day: days_to_advance}).toFormattedString('%Y-%m-%d'), end: start_date.advance({day: (days_to_advance + diffDays)}).toFormattedString('%Y-%m-%d')});
         break;
       }
     }
 
     var urls = date_ranges.map(function(dateRange){
       return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(bootstrap.current_user.id, dateRange.start, dateRange.end);
-    }); 
+    });
 
     var worker = new Worker('worker.js');
 
+    console.log('about to send' + urls.length + ' requests');
+
+    var replies = 0;
+
     worker.addEventListener('message', function(e){
-      var activities = JSON.parse(e.data).feed.activities;
-      Radium.store.loadMany(Radium.Activity, e.data);
+      try{
+        var activities = JSON.parse(e.data).feed.activities;
+        replies += 1;
+        console.log('replies = ' + replies);
+        if(activities.length > 0){
+          Radium.store.loadMany(Radium.Activity, activities);
+        }
+      }catch(err){
+        console.error(err);
+      }
     });
 
     worker.addEventListener('error', function(e){
@@ -56,7 +65,7 @@ Radium.AppController = Ember.Object.extend({
 
     worker.postMessage({
       key: CONFIG.api,
-      urls:  urls
+      urls: urls
     });
   },
   bootstrap: function(data){
