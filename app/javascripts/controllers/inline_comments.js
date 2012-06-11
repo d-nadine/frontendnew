@@ -16,7 +16,8 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
 
       comment = Radium.store.createRecord(Radium.Comment, {
         text: commentText,
-        createdAt: Ember.DateTime.create()
+        createdAt: Ember.DateTime.create(),
+        user: Radium.usersController.get('loggedInUser')
       });
 
       this.set('isError', false);
