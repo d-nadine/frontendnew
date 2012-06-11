@@ -4,7 +4,7 @@ Radium.Message = Radium.Core.extend({
     key: 'sent_at'
   }),
   type: DS.attr('string'),
-  user: DS.belongsTo('Radium.User'),
+  user: DS.belongsTo('Radium.User', {key: 'user'}),
   users: DS.hasMany('Radium.User'),
   contacts: DS.hasMany('Radium.Contact'),
   comments: DS.hasMany('Radium.Comment'),

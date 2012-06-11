@@ -19,7 +19,7 @@ Radium.Group = Radium.Core.extend({
   users: DS.hasMany('Radium.User'),
   contacts: DS.hasMany('Radium.Contact'),
   activities: DS.hasMany('Radium.Activity'),
-  user: DS.belongsTo('Radium.User'),
+  user: DS.belongsTo('Radium.User', {key: 'user'}),
 
   contact_ids: DS.attr('array')
 });

@@ -3,7 +3,7 @@ Radium.Meeting = Radium.Core.extend({
   location: DS.attr('string'),
   startsAt: DS.attr('date', {key: 'starts_at'}),
   endsAt: DS.attr('date', {key: 'ends_at'}),
-  user: DS.belongsTo('Radium.User'),
+  user: DS.belongsTo('Radium.User', {key: 'user'}),
   contacts: DS.hasMany('Radium.Contact'),
   users: DS.hasMany('Radium.User'),
   activities: DS.hasMany('Radium.Activity'),
