@@ -40,40 +40,17 @@ Radium.AppController = Ember.Object.extend({
       return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(bootstrap.current_user.id, dateRange.start, dateRange.end);
     });
 
-    var worker = new Worker('worker.js');
-
-    console.log('about to send' + urls.length + ' requests');
-
-    var replies = 0;
-
-    worker.addEventListener('message', function(e){
-      try{
-        var activities = JSON.parse(e.data).feed.activities;
-        replies += 1;
-        console.log('replies = ' + replies);
-        if(activities.length > 0){
-          Radium.store.loadMany(Radium.Activity, activities);
+    urls.forEach(function(url){    
+      var request = jQuery.extend({url: url}, CONFIG.ajax);
+      $.when($.ajax(request)).then(function(data){
+        if(data.feed.activities.length > 0){
+          Radium.store.loadMany(Radium.Activity, data.feed.activities);
         }
-      }catch(err){
-        console.error(err);
-      }
-    });
-
-    worker.addEventListener('error', function(e){
-      worker.terminate();
-    });
-
-    worker.postMessage({
-      key: CONFIG.api,
-      urls: urls
+      });
     });
   },
   bootstrap: function(data){
-    if(Radium.Utils.browserSupportsWebWorkers()){
-      this.createDataStoreWorker(data);
-    }else{  
-      //TODO: What to do or can we rely on webworkers being there 
-    }
+    this.createDataStoreWorker(data);
 
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
