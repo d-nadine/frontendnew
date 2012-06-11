@@ -18,6 +18,11 @@ Radium.Utils = {
   },
   browserSupportsWebWorkers: function(){
     return !!window.Worker;
+  },
+
+  stringToModel: function(string) {
+    var camelize = Ember.String.camelize(string);
+    return camelize.charAt(0).toUpperCase() + camelize.slice(1);
   }
 };
 Radium.DateDiff = {

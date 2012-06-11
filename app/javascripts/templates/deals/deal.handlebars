@@ -1,14 +1,10 @@
-{{#with todo}}
+{{#with deal}}
 
 {{#if overdue}}
   <i class="pull-left activity-icon icon-overdue"></i>
 {{/if}}
+<i class="pull-left activity-icon icon-deal"></i>
 
-{{#if isCall}}
-  <i class="pull-left activity-icon icon-call"></i>
-{{else}}
-  <i class="pull-left activity-icon icon-todo"></i>
-{{/if}}
 
 {{#if canEdit}}
   {{view checkboxView}}

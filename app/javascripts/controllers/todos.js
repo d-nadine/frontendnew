@@ -40,26 +40,15 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BatchViewLoader, Ra
       return;
     }
 
-    //TODO: Where can we put this for global access?
-    var feedTypes = {};
-    feedTypes['todo'] = Radium.Todo;
-    feedTypes['deal'] = Radium.Deal;
-    feedTypes['call_list'] = Radium.CallList;
-    feedTypes['contact'] = Radium.Contact;
-    feedTypes['email'] = Radium.Email;
-    feedTypes['invitation'] = Radium.Invitation;
-    feedTypes['meeting'] = Radium.Meeting;
-    feedTypes['phone_call'] = Radium.PhoneCall;
-
     var self = this;
 
     feed.forEach(function(item){
-      var kind = feedTypes[item.kind];
+      var kind = Radium.Utils.stringToModel(item.kind),
+          model = Radium[kind],
+          reference = item.reference[item.kind];
 
-      var reference = item.reference[item.kind];
-
-      Radium.store.load(kind, reference);
-      var overdue = Radium.store.find(kind, reference.id);
+      Radium.store.load(model, reference);
+      var overdue = Radium.store.find(model, reference.id);
       
       self.get('content').pushObject(overdue);
     });

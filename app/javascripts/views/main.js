@@ -43,8 +43,10 @@ minispade.require('radium/views/forms/add_to_company');
 // Feeds
 minispade.require('radium/views/feed/comment');
 minispade.require('radium/views/feed/inline_comments');
+minispade.require('radium/views/feed/header');
 minispade.require('radium/views/feed/date_group');
 minispade.require('radium/views/feed/feed');
+minispade.require('radium/views/feed/feed_activity');
 minispade.require('radium/views/feed/date_filters');
 minispade.require('radium/views/feed/historical');
 minispade.require('radium/views/feed/feed_list');
@@ -78,6 +80,7 @@ minispade.require('radium/views/users/user');
 // Deals
 minispade.require('radium/views/deals/overdue_deals');
 minispade.require('radium/views/deals/deals');
+minispade.require('radium/views/deals/deal');
 
 // Pipeline
 minispade.require('radium/views/pipeline/pipeline');

@@ -13,12 +13,12 @@ Radium.Deal = Radium.Core.extend({
     key: 'line_items'
   }),
   contact: DS.belongsTo('Radium.Contact'),
-  user: DS.belongsTo('Radium.User'),
+  user: DS.belongsTo('Radium.User', {key: 'user'}),
   todos: DS.hasMany('Radium.Todo'),
   comments: DS.hasMany('Radium.Comment'),
   products: DS.hasMany('Radium.Product'),
   activities: DS.hasMany('Radium.Activity'),
-  
+  overdue: DS.attr('boolean'),
   /**
     Checks to see if the Deal has passed it's close by date.
     @return {Boolean}

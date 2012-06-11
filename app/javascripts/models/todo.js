@@ -22,9 +22,10 @@ Radium.Todo = Radium.Core.extend({
   comments: DS.hasMany('Radium.Comment', {
     embedded: true
   }),
+  overdue: DS.attr('boolean'),
   reference: DS.attr('object'),
   user: DS.belongsTo('Radium.User', {
-    embedded: true
+    key: 'user'
   }),
   user_id: DS.attr('number'),
   activity: DS.belongsTo('Radium.Activity', {
@@ -42,13 +43,5 @@ Radium.Todo = Radium.Core.extend({
 
   canEdit: function() {
     return (this.getPath('user.apiKey')) ? true : false;
-  }.property('user', 'finished'),
-
-  isOverdue: function() {
-    var today = Ember.DateTime.create(),
-        finishBy = this.get('finishBy'),
-        dateCompare = Ember.DateTime.compareDate(finishBy, today);
-        
-    return dateCompare < 0 && !this.get('finished');
-  }.property('finishBy', 'finished')
+  }.property('user', 'finished')
 });

@@ -3,9 +3,7 @@ Radium.Activity = Radium.Core.extend({
   kind: DS.attr('string'),
   timestamp: DS.attr('datetime'),
   owner: DS.attr('object'),
-  user: DS.belongsTo('Radium.User', {
-    embedded: true
-  }),
+  user: DS.belongsTo('Radium.User'),
   reference: DS.attr('object'),
   comments: DS.hasMany('Radium.Comment', {
     embedded: true

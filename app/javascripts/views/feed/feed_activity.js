@@ -1,4 +1,4 @@
-Radium.HistoricalFeedView = Ember.ContainerView.extend({
+Radium.FeedActivityView = Ember.ContainerView.extend({
   classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded'],
   isActionsVisible: false,
@@ -10,10 +10,8 @@ Radium.HistoricalFeedView = Ember.ContainerView.extend({
       content: content,
       init: function() {
         this._super();
-        var kind = this.getPath('content.kind'),
-            tag = this.getPath('content.tag'),
-            templateName = [kind, tag].join('_');
-        this.set('templateName', templateName);
+        var kind = this.getPath('content.kind');
+        this.set('templateName', kind);
       }
     }));
     // Add a commentsView
@@ -53,4 +51,4 @@ Radium.HistoricalFeedView = Ember.ContainerView.extend({
     this.get('childViews').removeObject(this.get('todoForm'));
     return false;
   }
-});
+})

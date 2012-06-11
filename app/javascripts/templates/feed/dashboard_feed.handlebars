@@ -13,6 +13,12 @@
     <hr>
   {{/if}}
 
+  {{collection 
+    contentBinding="Radium.overdueActivitiesController.content"
+    itemViewClass="Radium.FeedActivityView"
+    class="feed-item"
+  }}
+
   {{#if dueToday.length}}
     <h4>Due</h4>
     {{collection Ember.CollectionView 
@@ -30,8 +36,8 @@
     <hr>
   {{/if}}
 {{/with}}
-{{!view Ember.ContainerView currentViewBinding="Radium.activityFeedController.view"}}
 
 {{collection contentBinding="Radium.activityFeedController" itemViewClass="Radium.ClusterListView"}}
+
 {{timeEnd "timing"}}
 {{profileEnd}}

@@ -109,6 +109,7 @@ minispade.require('radium/templates/users/user');
 // Deals
 minispade.require('radium/templates/deals/overdue_deals');
 minispade.require('radium/templates/deals/deals');
+minispade.require('radium/templates/deals/deal');
 
 // Pipeline
 minispade.require('radium/templates/pipeline/pipeline');
