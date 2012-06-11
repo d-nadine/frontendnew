@@ -19,6 +19,10 @@ Radium.AppController = Ember.Object.extend({
         days_to_advance = -1,
         interval = 1;
 
+    bootstrap.feed.activities.forEach(function(activity){
+      Radium.store.load(Radium.Activity, activity);
+    });
+
     if(diffDays <= interval){
       date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: end_date.toFormattedString('%Y-%m-%d')});
       diffDays = 0; 
