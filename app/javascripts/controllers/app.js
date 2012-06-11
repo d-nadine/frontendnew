@@ -9,7 +9,7 @@ Radium.AppController = Ember.Object.extend({
   selectedForm: null,
   params: null,
   account: null,
-  createDataStoreWorker: function(bootstrap){
+  loadActivities: function(bootstrap){
     var feed = bootstrap.current_user.meta.feed;
     //TODO: Do we need to include the timezone?
     var start_date = Ember.DateTime.parse(feed.start_date, '%Y-%m-%d'),
@@ -50,7 +50,7 @@ Radium.AppController = Ember.Object.extend({
     });
   },
   bootstrap: function(data){
-    this.createDataStoreWorker(data);
+    this.loadActivities(data);
 
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
