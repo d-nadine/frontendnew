@@ -19,5 +19,5 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       //   }
       // });
     }
-  }.observes('Radium.appController.feed')
+  }.observes('Radium.appController.clusters')
 });

@@ -63,8 +63,6 @@ Radium.AppController = Ember.Object.extend({
     this.set('overdue_feed', data.overdue_activities);
     this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
-
-    Radium.get('activityFeedController').bootstrapLoaded();
   },
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),
