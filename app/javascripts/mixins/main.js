@@ -8,5 +8,5 @@ minispade.require('radium/mixins/unique_textfield_validation');
 minispade.require('radium/mixins/email_form_group');
 minispade.require('radium/mixins/binary_search');
 minispade.require('radium/mixins/batch_view_loader');
-
+minispade.require('radium/mixins/infinite_scrolling');
 minispade.require('radium/mixins/views/todo_view');

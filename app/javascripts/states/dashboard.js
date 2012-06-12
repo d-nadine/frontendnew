@@ -19,10 +19,10 @@ Radium.DashboardPage = Ember.State.extend({
     enter: function(manager) {
       
       if(!manager.get('dashboardFeedView')){
-        manager.set('dashboardFeedView', Ember.View.create({
+        manager.set('dashboardFeedView', Ember.View.create(Radium.InfiniteScroller, {
           templateName: 'dashboard_feed',
           contentBinding: 'Radium.activityFeedController.content',
-          controller: Radium.get('Radium.activityFeedController')
+          controllerBinding: 'Radium.activityFeedController'
         }));
       }
     

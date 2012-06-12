@@ -51,7 +51,6 @@ Radium.AppController = Ember.Object.extend({
     });
   },
   bootstrap: function(data){
-    // this.loadActivities(data);
     data.feed.activities.forEach(function(activity){
       Radium.store.load(Radium.Activity, activity);
     });
