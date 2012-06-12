@@ -6,7 +6,6 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     this.set('view', Ember.ContainerView.create());
   },
   shouldScroll: function(){
-    debugger;
     this.set('start_date', Ember.DateTime.parse(Radium.getPath('appController.current_user.meta.feed.start_date'), '%Y-%m-%d'));
     this.set('end_date', Ember.DateTime.parse(Radium.getPath('appController.current_user.meta.feed.end_date'), '%Y-%m-%d'));
 
