@@ -1,3 +1,4 @@
+* [2012-06-12 20:59 +0100] 491f563 - Paul Cowan: infinite scrolling working for previous_activity_date
 * [2012-06-12 10:05 +0100] a63f420 - Paul Cowan: bootstrap activities loading fix
 * [2012-06-12 09:54 +0100] 4d3c0cb - Paul Cowan: loadActivities disabled but bootstrap activities loading
 * [2012-06-12 00:57 -0700] 16c586c - Joshua Jones: Turn load activities back on.
