@@ -1,3 +1,4 @@
+* [2012-06-12 00:02 -0700] 34ec74d - Joshua Jones: Add missing view context helper for feed checkboxView.
 * [2012-06-11 23:58 -0700] 5520f19 - Joshua Jones: Make TodoView a mixin so it can be inserted dynamically as a feed header view when required.
 * [2012-06-11 23:06 -0700] ec60880 - Joshua Jones: Add basic feed meeting items.
 * [2012-06-09 00:46 -0700] 626642e - Joshua Jones: Add inline todo forms. WIP to get context passed correctly.
