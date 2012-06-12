@@ -1,0 +1,22 @@
+{{#with todo}}
+
+{{#if overdue}}
+  <i class="pull-left activity-icon icon-overdue"></i>
+{{/if}}
+
+<i class="pull-left activity-icon icon-todo"></i>
+
+{{#if canEdit}}
+  {{view checkboxView}}
+{{/if}}
+
+<a href="/groups/{{unbound reference.group.id}}">{{reference.group.name}}</a>:
+{{#if canEdit}}
+  {{inlineTextField description}}
+{{else}}
+  {{description}}
+{{/if}}
+  
+(<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+
+{{/with}}
