@@ -1,3 +1,4 @@
+* [2012-06-11 23:58 -0700] 5520f19 - Joshua Jones: Make TodoView a mixin so it can be inserted dynamically as a feed header view when required.
 * [2012-06-11 23:06 -0700] ec60880 - Joshua Jones: Add basic feed meeting items.
 * [2012-06-09 00:46 -0700] 626642e - Joshua Jones: Add inline todo forms. WIP to get context passed correctly.
 * [2012-06-07 22:17 -0700] 692d5f8 - Joshua Jones: [Deploy]
