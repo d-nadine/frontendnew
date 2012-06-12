@@ -1,0 +1,36 @@
+{{#with todo}}
+
+{{#if overdue}}
+  <i class="pull-left activity-icon icon-overdue"></i>
+{{/if}}
+
+{{#if isCall}}
+  <i class="pull-left activity-icon icon-call"></i>
+{{else}}
+  <i class="pull-left activity-icon icon-todo"></i>
+{{/if}}
+
+{{#if canEdit}}
+  {{view checkboxView}}
+{{/if}}
+{{#if reference.contact}}
+ {{view Radium.LabelView labelBinding="reference.contact.status"}}
+{{/if}}
+
+{{#if isCall}}
+  {{#if description}}
+    Call <a href="/contacts/{{unbound reference.contact.id}}">{{reference.contact.name}}</a> for {{description}}
+  {{else}}
+    Call <a href="/contacts/{{unbound reference.contact.id}}">{{unbound reference.contact.name}}</a> 
+  {{/if}}
+{{else}}
+  {{#if canEdit}}
+    {{inlineTextField description}}
+  {{else}}
+    {{description}}
+  {{/if}}
+{{/if}}
+  
+(<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+
+{{/with}}
