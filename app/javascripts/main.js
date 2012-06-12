@@ -17,7 +17,6 @@ minispade.require('underscore');
 
 Ember.ENV.CP_DEFAULT_CACHEABLE = true;
 
-minispade.require('radium/core/config');
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
 minispade.require('radium/lib/utils');

@@ -1,24 +1,23 @@
-$.ajaxSetup({
-  dataType: 'json',
-  contentType: 'application/json',
-  headers: {
-    "X-Radium-User-API-Key": CONFIG.api,
-    "Accept": "application/json"
-  }
-});
-
 window.Radium = Ember.Application.create({
   _api: null,
   store: DS.Store.create({
     revision: 4,
     adapter: DS.RadiumAdapter.create({bulkCommit: false})
-  })
+  }),
+  init: function() {
+    this._super();
+    this.set('_api', $.cookie('user_api_key'));
+  }
 });
 
-var api = $.cookie('user_api_key');
-if (api) {
-  Radium.set('_api', api);
-}
+$.ajaxSetup({
+  dataType: 'json',
+  contentType: 'application/json',
+  headers: {
+    "X-Radium-User-API-Key": Radium.get('_api'),
+    "Accept": "application/json"
+  }
+});
 
 DS.Model.reopen({
   namingConvention: {

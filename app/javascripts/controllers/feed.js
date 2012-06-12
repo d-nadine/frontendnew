@@ -165,7 +165,7 @@ Radium.feedController = Ember.Object.extend({
 
   addToFeed: function(activity) {
     var date = activity.get('timestamp')
-                .adjust({timezone: CONFIG.dates.timezone})
+                .adjust({timezone: Radium.appController.get('timezone')})
                 .toFormattedString('%Y-%m-%d'),
         dateGroup = this._pastDateHash[date];
 

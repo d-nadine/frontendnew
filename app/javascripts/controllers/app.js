@@ -9,6 +9,7 @@ Radium.AppController = Ember.Object.extend({
   selectedForm: null,
   params: null,
   account: null,
+  timezone: new Date().getTimezoneOffset(),
   formContainerView: null,
   loadActivities: function(bootstrap){
     var feed = bootstrap.current_user.meta.feed;

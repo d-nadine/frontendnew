@@ -6,7 +6,7 @@ Radium.FeedGroup = Ember.Object.extend({
     var date = this.get('date');
     return Radium.Todo.filter(function(data) {
       var finishByDate = Ember.DateTime.parse(data.get('finish_by'))
-                          .toTimezone(CONFIG.dates.timezone);
+                          .toTimezone(Radium.appController.get('timezone'));
       return Ember.DateTime.compareDate(finishByDate, date) === 0;
     });
   }.property().cacheable(),
