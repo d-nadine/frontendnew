@@ -17,7 +17,6 @@ Radium.FeedActivityView = Ember.ContainerView.extend({
             activityReference = this.getPath(refPath),
             hasReference = (activityReference) ? true : false,
             reference = (hasReference) ? "_"+Ember.keys(activityReference)[0] : '';
-            console.log('feed_' + kind + reference);
         this.set('templateName', 'feed_' + kind + reference);
       }
     }));

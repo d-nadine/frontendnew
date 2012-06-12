@@ -34,6 +34,7 @@
 .icon-add-todo,
 .icon-edit,
 .icon-comments,
+.icon-meeting,
 .icon-deal,
 .icon-mail,
 .icon-overdue {
@@ -47,6 +48,10 @@
 
 .icon-call {
   background-image: url('/images/icons/feed-call-todo.png');
+}
+
+.icon-meeting {
+  background-image: url('/images/icons/feed-meeting.png');
 }
 
 .icon-todo {
