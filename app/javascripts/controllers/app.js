@@ -67,6 +67,7 @@ Radium.AppController = Ember.Object.extend({
     this.set('scheduled_feed', data.feed.scheduled_activities);
     this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
+    this.set('feed', data.feed);
   },
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),

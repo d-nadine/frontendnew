@@ -5,23 +5,18 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     this._super();
     this.set('view', Ember.ContainerView.create());
   },
+  bootStraploaded: function(){
+    this.set('previous_activity_date', Radium.getPath('appController.feed.previous_activity_date'));
+    this.set('next_activity_date', Radium.getPath('appController.feed.next_activity_date'));
+  }.observes('Radium.appController.feed'),
   shouldScroll: function(){
-    this.set('start_date', Ember.DateTime.parse(Radium.getPath('appController.current_user.meta.feed.start_date'), '%Y-%m-%d'));
-    this.set('end_date', Ember.DateTime.parse(Radium.getPath('appController.current_user.meta.feed.end_date'), '%Y-%m-%d'));
-
-    if(!this.get('current_date')){
-      this.set('current_date', Ember.DateTime.parse(Radium.getPath('appController.current_user.meta.feed.current_date'), '%Y-%m-%d'));
-    }
-
-    var diffDays = Ember.DateTime.DifferenceInDays(this.get('end_date'), this.get('current_date'));
-    
-    return (diffDays > 1);
+    return this.get('previous_activity_date');
   },
 
   loadFeed: function(){
     this.set('isLoading', true);
     
-    var date = this.get('current_date').toFormattedString('%Y-%m-%d');
+    var date = this.get('previous_activity_date');
 
     var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), date, date);
     
@@ -37,10 +32,12 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
         Radium.store.loadMany(Radium.Activity, data.feed.activities);
       }
 
-      self.set('current_date', self.get('current_date').advance({day: 1}));
+      self.set('previous_activity_date', data.feed.previous_activity_date);
+
+      self.set('foundData', data.feed.clusters.length > 0);
       self.set('isLoading', false);
-    }).fail(function(){
-      self.set('isLoading', false);
+      }).fail(function(){
+        self.set('isLoading', false);
     });
   },
 
