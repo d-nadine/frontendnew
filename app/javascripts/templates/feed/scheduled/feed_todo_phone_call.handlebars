@@ -1,0 +1,24 @@
+[finish checkbox] Call from A to B: todo.text (todo.user)
+
+{{#with todo}}
+
+{{#if overdue}}
+  <i class="pull-left activity-icon icon-overdue"></i>
+{{/if}}
+
+<i class="pull-left activity-icon icon-todo"></i>
+
+{{#if canEdit}}
+  {{view checkboxView}}
+{{/if}}
+
+Call from {{reference.phone_call.contacts.firstObject}} to {{reference.phone_call.users.firstObject}}:
+{{#if canEdit}}
+  {{inlineTextField description}}
+{{else}}
+  {{description}}
+{{/if}}
+  
+(<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+
+{{/with}}
