@@ -26,14 +26,13 @@ Radium.MeetingForm = Radium.FormView.extend({
           url: '/api/meetings',
           type: 'POST',
           data: JSON.stringify(data)
-        },
-        request = jQuery.extend(settings, CONFIG.ajax);
+        };
         
     // Disable the form buttons
     this.sending();
     
     
-    $.ajax(request)
+    $.ajax(settings)
       .success(function(data) {
         Radium.store.load(Radium.Meeting, data);
         self.success("Meeting created");

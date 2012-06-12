@@ -1,3 +1,12 @@
+$.ajaxSetup({
+  dataType: 'json',
+  contentType: 'application/json',
+  headers: {
+    "X-Radium-User-API-Key": CONFIG.api,
+    "Accept": "application/json"
+  }
+});
+
 window.Radium = Ember.Application.create({
   _api: null,
   store: DS.Store.create({

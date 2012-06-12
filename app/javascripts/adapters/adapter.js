@@ -374,9 +374,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
       hash.data = JSON.stringify(hash.data);
     }
 
-    var request = jQuery.extend(hash, CONFIG.ajax);
-
-    jQuery.ajax(request);
+    return jQuery.ajax(hash);
   },
 
   buildURL: function(model, suffix) {

@@ -17,13 +17,12 @@ Radium.ContactsMessageForm = Radium.FormView.extend({
           url: '/api/emails',
           type: 'POST',
           data: JSON.stringify(data)
-        },
-        request = jQuery.extend(settings, CONFIG.ajax);
+        };
 
     // Disable the form buttons
     this.sending();
 
-    $.ajax(request)
+    $.ajax(settings)
       .success(function() {
         self.success("Message sent");
       })

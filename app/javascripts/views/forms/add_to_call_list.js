@@ -19,14 +19,11 @@
           };
       data.call_list.contact_ids.push(selectedContactIds);
 
-      var settings = {
-            url: '/api/call_lists/%@'.fmt(callListId),
-            type: 'PUT',
-            data: JSON.stringify(data)
-          },
-          request = jQuery.extend(settings, CONFIG.ajax);
-
-      $.ajax(request)
+      $.ajax({
+          url: '/api/call_lists/%@'.fmt(callListId),
+          type: 'PUT',
+          data: JSON.stringify(data)
+        })
         .success(function(data) {
           console.log("Contact added to %@".fmt(callListName));
           self.success("Contact added to <b>%@</b>".fmt(callListName));

@@ -43,10 +43,10 @@ Radium.LoggedOutState = Ember.State.create({
             success: function() {
               self.set('isBugReportFormVisible', false);
             }
-          },
-          request = $.extend({}, ajax, CONFIG.ajax);
+          };
+          
           $requiredFields.parent().parent().removeClass('error');
-          $.ajax(request);
+          $.ajax(ajax);
         }
 
         return false;

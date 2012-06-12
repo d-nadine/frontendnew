@@ -42,8 +42,7 @@ Radium.AppController = Ember.Object.extend({
     });
 
     urls.forEach(function(url){    
-      var request = jQuery.extend({url: url}, CONFIG.ajax);
-      $.when($.ajax(request)).then(function(data){
+      $.when($.ajax({url: url})).then(function(data){
         if(data.feed.activities.length > 0){
           Radium.store.loadMany(Radium.Activity, data.feed.activities);
         }

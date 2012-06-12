@@ -44,13 +44,12 @@
             url: '/api/campaigns',
             type: 'POST',
             data: JSON.stringify(data)
-          },
-          request = jQuery.extend(settings, CONFIG.ajax);
+          };
 
       // Disable the form buttons
       this.sending();
     
-      $.ajax(request)
+      $.ajax(settings)
         .success(function(data) {
           Radium.store.load(Radium.Campaign, data);
           self.success("Campaign created");

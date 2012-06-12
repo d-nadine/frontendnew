@@ -26,14 +26,13 @@ Radium.DealForm = Radium.FormView.extend({
           url: '/api/deals',
           type: 'POST',
           data: JSON.stringify(data)
-        },
-        request = jQuery.extend(settings, CONFIG.ajax);
+        };
 
     // Disable the form buttons
     this.sending();
     
   
-    $.ajax(request)
+    $.ajax(settings)
       .success(function(data) {
         self.success("Deal created");
       })

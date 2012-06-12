@@ -12,9 +12,8 @@ Radium.AddToCampaignForm = Radium.FormView.extend({
               contact_ids: contacts
             }
           })
-        },
-        request = jQuery.extend(settings, CONFIG.ajax);
+        };
 
-    $.ajax(request)
+    $.ajax(settings)
   }
 });
