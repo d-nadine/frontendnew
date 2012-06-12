@@ -22,6 +22,9 @@ minispade.require('radium/templates/feed/past');
 
 
 minispade.require('radium/templates/feed/scheduled/feed_meeting');
+minispade.require('radium/templates/feed/scheduled/feed_deal');
+minispade.require('radium/templates/feed/scheduled/feed_campaign');
+minispade.require('radium/templates/feed/scheduled/feed_call_list');
 minispade.require('radium/templates/feed/scheduled/feed_todo');
 minispade.require('radium/templates/feed/scheduled/feed_todo_campaign');
 minispade.require('radium/templates/feed/scheduled/feed_todo_deal');
