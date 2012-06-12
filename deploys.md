@@ -1,3 +1,4 @@
+* [2012-06-12 00:57 -0700] 16c586c - Joshua Jones: Turn load activities back on.
 * [2012-06-12 00:21 -0700] f990807 - Joshua Jones: Add remainding scheduled templates.
 * [2012-06-12 00:02 -0700] 34ec74d - Joshua Jones: Add missing view context helper for feed checkboxView.
 * [2012-06-11 23:58 -0700] 5520f19 - Joshua Jones: Make TodoView a mixin so it can be inserted dynamically as a feed header view when required.
