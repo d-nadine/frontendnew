@@ -12,5 +12,15 @@ Radium.FeedHeaderView = Ember.View.extend({
   click: function(event) {
     event.stopPropagation();
     this.toggleProperty('isActionsVisible');
-  }
+  },
+  // FIXME: This is a dirty, dirty hack. If Ember Data allows you to 
+  // find records from nested objects, destroy me.
+  sender: function() {
+    if (this.getPath('content.reference.todo.reference.email')) {
+      var senderId = this.getPath('content.reference.todo.reference.email.sender.user');
+      if (senderId) {
+        return Radium.store.find(Radium.User, senderId)
+      }
+    }
+  }.property()
 });

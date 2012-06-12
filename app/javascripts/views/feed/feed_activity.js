@@ -1,3 +1,5 @@
+// TODO: Make this the master class for historical/scheduled
+
 Radium.FeedActivityView = Ember.ContainerView.extend({
   classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded'],
