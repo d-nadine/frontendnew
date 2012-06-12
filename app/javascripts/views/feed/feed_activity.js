@@ -6,14 +6,19 @@ Radium.FeedActivityView = Ember.ContainerView.extend({
   isActionsVisible: false,
   init: function() {
     this._super();
-    var content = this.get('content');
+    var content = this.get('content'),
+        kind = content.get('kind'),
+        kindClass = kind.charAt(0).toUpperCase() + kind.slice(1),
+        // Manual array to keep track of which mixins are needed
+        registeredMixins = ['todo'],
+        mixin = (registeredMixins.indexOf(kind) !== -1) ? Radium[kindClass+'ViewMixin'] : Radium.Noop;
     // Set up the main row header
-    this.set('currentView', Radium.FeedHeaderView.create({
+    
+    this.set('currentView', Radium.FeedHeaderView.create(mixin, {
       content: content,
       init: function() {
         this._super();
-        var kind = this.getPath('content.kind'),
-            refPath = 'content.reference.%@.reference'.fmt(kind),
+        var refPath = 'content.reference.%@.reference'.fmt(kind),
             activityReference = this.getPath(refPath),
             hasReference = (activityReference) ? true : false,
             reference = (hasReference) ? "_"+Ember.keys(activityReference)[0] : '';
@@ -57,4 +62,4 @@ Radium.FeedActivityView = Ember.ContainerView.extend({
     this.get('childViews').removeObject(this.get('todoForm'));
     return false;
   }
-})
+});
