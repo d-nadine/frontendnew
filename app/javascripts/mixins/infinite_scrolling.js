@@ -21,9 +21,9 @@ Radium.InfiniteScroller = Ember.Mixin.create({
 
       if(self.getPath('controller.foundData')){
         if(this.get('lastCluster')){
-          $('html,body').animate({
-            scrollTop: self.get('lastCluster')
-          }, 2000);
+          // $('html,body').animate({
+          //   scrollTop: self.get('lastCluster')
+          // }, 2000);
           this.set('lastCluster', null);
         }
       }
