@@ -10,8 +10,13 @@ Radium.FeedActivityView = Ember.ContainerView.extend({
       content: content,
       init: function() {
         this._super();
-        var kind = this.getPath('content.kind');
-        this.set('templateName', kind);
+        var kind = this.getPath('content.kind'),
+            refPath = 'content.reference.%@.reference'.fmt(kind),
+            activityReference = this.getPath(refPath),
+            hasReference = (activityReference) ? true : false,
+            reference = (hasReference) ? "_"+Ember.keys(activityReference)[0] : '';
+            console.log('feed_' + kind + reference);
+        this.set('templateName', 'feed_' + kind + reference);
       }
     }));
     // Add a commentsView

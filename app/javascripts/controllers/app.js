@@ -9,6 +9,7 @@ Radium.AppController = Ember.Object.extend({
   selectedForm: null,
   params: null,
   account: null,
+  formContainerView: null,
   loadActivities: function(bootstrap){
     var feed = bootstrap.current_user.meta.feed;
     //TODO: Do we need to include the timezone?
@@ -54,7 +55,7 @@ Radium.AppController = Ember.Object.extend({
     });
   },
   bootstrap: function(data){
-    this.loadActivities(data);
+    // this.loadActivities(data);
 
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
@@ -65,6 +66,7 @@ Radium.AppController = Ember.Object.extend({
     this.set('users', data.users);
     this.set('current_user', data.current_user);
     this.set('overdue_feed', data.overdue_activities);
+    this.set('scheduled_feed', data.feed.scheduled_activities);
     this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
   },

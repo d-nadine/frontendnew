@@ -1,6 +1,6 @@
-Radium.OverdueActivitiesController = Ember.ArrayController.extend({
+Radium.ScheduledActivitiesController = Ember.ArrayController.extend({
   bootstrapLoaded: function() {
-    var feed = Radium.getPath('appController.overdue_feed'),
+    var feed = Radium.getPath('appController.scheduled_feed'),
         ids = feed.getEach('id');
 
     feed.forEach(function(item){
@@ -20,5 +20,5 @@ Radium.OverdueActivitiesController = Ember.ArrayController.extend({
     Radium.store.loadMany(Radium.Activity, feed);
     this.set('content', Radium.store.findMany(Radium.Activity, ids));
 
-  }.observes('Radium.appController.overdue_feed')
+  }.observes('Radium.appController.scheduled_feed')
 });

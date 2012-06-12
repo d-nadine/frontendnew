@@ -16,6 +16,7 @@ minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/inline_comments');
 
+minispade.require('radium/controllers/datebook/scheduled_activities');
 minispade.require('radium/controllers/datebook/overdue_activities');
 
 minispade.require('radium/controllers/forms/type_ahead');

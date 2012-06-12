@@ -3,39 +3,21 @@
 <div class="page-header">
   <h3>Today</h3>
 </div>
-{{#with Radium.todosController}}
-  {{#if sortedOverdueTodos.length}}
-    <h4>Overdue</h4>
-    {{collection Ember.CollectionView 
-      contentBinding="sortedOverdueTodos"
-      itemViewClass="Radium.FeedView"
-    }}
-    <hr>
-  {{/if}}
-
+  <h4>Overdue</h4>
   {{collection 
     contentBinding="Radium.overdueActivitiesController.content"
     itemViewClass="Radium.FeedActivityView"
     class="feed-item"
   }}
+  <hr>
 
-  {{#if dueToday.length}}
-    <h4>Due</h4>
-    {{collection Ember.CollectionView 
-      contentBinding="sortedDueToday"
-      itemViewClass="Radium.FeedView"
-    }}
-    <hr>
-  {{/if}}
-  {{#if finishedOverdueTodos.length}}
-    <h4>Finished</h4>
-    {{collection Ember.CollectionView 
-      contentBinding="finishedOverdueTodos"
-      itemViewClass="Radium.FeedView"
-    }}
-    <hr>
-  {{/if}}
-{{/with}}
+  <h4>Due</h4>
+  {{collection Ember.CollectionView 
+    contentBinding="Radium.scheduledActivitiesController.content"
+    itemViewClass="Radium.FeedActivityView"
+    class="feed-item"
+  }}
+  <hr>
 
 {{collection contentBinding="Radium.activityFeedController" itemViewClass="Radium.ClusterListView"}}
 

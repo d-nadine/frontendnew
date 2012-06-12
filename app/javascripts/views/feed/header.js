@@ -1,3 +1,7 @@
+/**
+  Note: Override the init method when creating to load a the required template,
+  based on context.
+*/
 Radium.FeedHeaderView = Ember.View.extend({
   contentBinding: 'parentView.content',
   classNames: 'feed-header span9'.w(),
