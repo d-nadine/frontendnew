@@ -15,7 +15,6 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
     }else{
       //TODO: how do we know this is scheduled_activities
       this.set('currentView', Radium.ScheduledActivityView.create());
-      debugger;
     }
   },
 

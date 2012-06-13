@@ -3,6 +3,5 @@ Radium.ScheduledActivityView = Ember.View.extend({
   templateName: 'scheduled_activity_feed',
   init: function(){
     this._super();
-    debugger;
   }
 });
