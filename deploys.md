@@ -1,3 +1,4 @@
+* [2012-06-13 20:03 +0100] 1d9c0ff - Paul Cowan: not updating the store with activities in ActivityFeedController
 * [2012-06-13 10:48 +0100] 4e9a552 - Paul Cowan: settings.yml set to feed_demo
 * [2012-06-12 22:47 -0700] 198d8c9 - Joshua Jones: Comment out Crossfilter controllers for now.
 * [2012-06-12 21:32 +0100] 5339488 - Paul Cowan: [Deploy]
