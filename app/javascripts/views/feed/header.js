@@ -7,7 +7,7 @@ Radium.FeedHeaderView = Ember.View.extend({
   classNames: 'feed-header span9'.w(),
   attributeBindings: ['title'],
   titleBinding: Ember.Binding.oneWay('content.id'),
-  layoutName: 'feed_item_base',
+  layoutName: 'feed_header_layout',
   isActionsVisibleBinding: 'parentView.isActionsVisible',
   click: function(event) {
     event.stopPropagation();

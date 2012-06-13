@@ -14,7 +14,7 @@ minispade.require('radium/templates/feed/date_group');
 minispade.require('radium/templates/feed/type_filters');
 minispade.require('radium/templates/feed/comment');
 minispade.require('radium/templates/feed/inline_comments');
-minispade.require('radium/templates/feed/historical_layout');
+minispade.require('radium/templates/feed/feed_header_layout');
 minispade.require('radium/templates/feed/future');
 minispade.require('radium/templates/feed/today');
 minispade.require('radium/templates/feed/past');
