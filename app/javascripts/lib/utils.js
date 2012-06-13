@@ -23,14 +23,13 @@ Radium.Utils = {
     var ids = feed.getEach('id');
 
     feed.forEach(function(item){
-      var activity = item,
-        kind = activity.kind,
-        model = Radium[Radium.Utils.stringToModel(kind)],
-        reference = activity.reference[kind];
+      var kind = item.kind,
+          model = Radium[Radium.Utils.stringToModel(kind)],
+          reference = item.reference[kind];
 
-      activity[kind] = reference;
+      item[kind] = reference;
     });
-
+    
     if(!feed.length || feed.length === 0){
       return Ember.A();
     }else{

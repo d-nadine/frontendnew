@@ -10,6 +10,7 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
         var kind = this.getPath('content.kind'),
             tag = this.getPath('content.tag'),
             templateName = [kind, tag].join('_');
+            console.log(templateName);
         this.set('templateName', templateName);
       }
     }));

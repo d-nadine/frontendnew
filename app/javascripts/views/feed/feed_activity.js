@@ -10,7 +10,7 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
     // Set up the main row header
     
     this.set('currentView', Radium.FeedHeaderView.create(mixin, {
-      content: content,
+      content: content.get(kind),
       init: function() {
         this._super();
         var refPath = 'content.reference.%@.reference'.fmt(kind),

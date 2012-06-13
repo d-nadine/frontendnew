@@ -3,7 +3,6 @@
   based on context.
 */
 Radium.FeedHeaderView = Ember.View.extend({
-  contentBinding: 'parentView.content',
   classNames: 'feed-header span9'.w(),
   attributeBindings: ['title'],
   titleBinding: Ember.Binding.oneWay('content.id'),

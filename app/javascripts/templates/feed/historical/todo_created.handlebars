@@ -1,3 +1,5 @@
+{{#with reference.todo}}
+
 {{#if isCall}}
 <i class="pull-left activity-icon icon-call"></i>
 {{else}}
@@ -5,12 +7,15 @@
 {{/if}}
 New Todo: 
 {{#if isCall}}
-  {{#with reference.todo.reference.contact}}
+  {{#with reference.contact}}
     Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
   {{/with}}
 {{else}}
-  {{unbound reference.todo.description}}
+  {{unbound description}}
 {{/if}}
+
 {{#if user}}
  (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
 {{/if}}
+
+{{/with}}
