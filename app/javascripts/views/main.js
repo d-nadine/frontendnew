@@ -41,6 +41,7 @@ minispade.require('radium/views/forms/add_to_company');
 minispade.require('radium/views/forms/todo_edit');
 
 // Feeds
+minispade.require('radium/views/feed/feed_item');
 minispade.require('radium/views/feed/comment');
 minispade.require('radium/views/feed/inline_comments');
 minispade.require('radium/views/feed/header');
@@ -69,7 +70,6 @@ minispade.require('radium/views/contacts/toolbar');
 minispade.require('radium/views/contacts/feed_filter');
 minispade.require('radium/views/contacts/contact_card');
 minispade.require('radium/views/contacts/contact_label');
-minispade.require('radium/views/contacts/lead');
 
 // Users
 minispade.require('radium/views/users/users');

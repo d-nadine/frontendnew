@@ -31,41 +31,5 @@ Radium.TodosController = Ember.ArrayController.extend(Radium.BatchViewLoader, Ra
     }
 
     this._super(startIdx, removeAmt, addAmt);
-  },
-  bootStrapLoaded: function(){
-    var feed = Radium.getPath('appController.overdue_feed');
-
-    if(!feed.length || feed.length === 0){
-      this.set('content', []);
-      return;
-    }
-
-    var self = this;
-
-    feed.forEach(function(item){
-      var kind = Radium.Utils.stringToModel(item.kind),
-          model = Radium[kind],
-          reference = item.reference[item.kind];
-
-      Radium.store.load(model, reference);
-      var overdue = Radium.store.find(model, reference.id);
-      
-      self.get('content').pushObject(overdue);
-    });
-
-    // if(Radium.getPath('appController.overdue_feed.length') !== this.getPath('content.length')){
-    //   return;
-    // }
-
-    // var createView = function(activity){
-    //    return Radium.FeedView.create({
-    //     content: activity
-    //   });
-    // };
-
-    // if(this.getPath('sortedOverdueTodos.length') > 0){
-    //   this.batchloadViews(createView, 'sortedOverdueTodos');
-    // }
-
-  }.observes('Radium.appController.overdue_feed')
+  }
 })
