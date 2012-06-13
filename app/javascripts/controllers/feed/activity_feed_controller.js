@@ -24,8 +24,15 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
 
     //TODO: Should we have a cluster ember-data model?
     $.when($.ajax({url: url})).then(function(data){
-      if(data.feed.clusters.length > 0){
+      if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
         self.get('content').pushObject(Ember.Object.create({dateHeader: self.get('previous_activity_date')}));
+      }
+
+      if(data.feed.scheduled_activities.length > 0){
+        self.get('content').pushObject(Radium.Utils.transformActivities(data.feed.scheduled_activities));
+      }
+
+      if(data.feed.clusters.length > 0){
         self.get('content').pushObjects(data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
       }
 

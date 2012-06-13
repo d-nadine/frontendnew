@@ -6,10 +6,15 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
     this._super();
     var self = this;
 
+    //TODO: Can we use currentViewBinding for this
+    //Computed property would be too expensive
     if(this.getPath('content.activities')){
       this.set('currentView', Radium.ClusterHeaderView.create());
-    }else{
+    }else if(this.getPath('content.dateHeader')){
       this.set('currentView', Radium.DateHeaderView.create());
+    }else{
+      //TODO: how do we know this is scheduled_activities
+      this.set('currentView', Radium.ScheduledActivityView.create());
     }
   },
 
@@ -21,7 +26,7 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
       // as a work around until a better solution is found.
       $.when(childViews.objectAt(1).slideUp()).then(function() {
         childViews.popObject();
-      });      
+      });
     }
   },
 
