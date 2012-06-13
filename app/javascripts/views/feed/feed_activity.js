@@ -1,6 +1,7 @@
 Radium.FeedActivityView = Radium.FeedItemView.extend({
   init: function() {
     this._super();
+    debugger;
     var content = this.get('content'),
         kind = content.get('kind'),
         kindClass = kind.charAt(0).toUpperCase() + kind.slice(1),

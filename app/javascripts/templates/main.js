@@ -143,3 +143,5 @@ minispade.require('radium/templates/nav/contacts_sidebar');
 // feed
 minispade.require('radium/templates/feed/dashboard_feed');
 minispade.require('radium/templates/feed/date_section_header');
+minispade.require('radium/templates/feed/scheduled_activity_feed');
+
