@@ -4,7 +4,13 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
   
   init: function() {
     this._super();
-    this.set('currentView', Radium.ClusterHeaderView.create());
+    var self = this;
+
+    if(this.getPath('content.activities')){
+      this.set('currentView', Radium.ClusterHeaderView.create());
+    }else{
+      this.set('currentView', Radium.DateHeaderView.create());
+    }
   },
 
   removeActivities: function() {

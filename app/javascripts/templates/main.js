@@ -139,4 +139,7 @@ minispade.require('radium/templates/ui/token');
 minispade.require('radium/templates/layouts/main_dash');
 minispade.require('radium/templates/nav/dashboard_sidebar');
 minispade.require('radium/templates/nav/contacts_sidebar');
+
+// feed
 minispade.require('radium/templates/feed/dashboard_feed');
+minispade.require('radium/templates/feed/date_section_header');

@@ -25,6 +25,8 @@ Radium.DashboardPage = Ember.State.extend({
           controllerBinding: 'Radium.activityFeedController'
         }));
       }
+
+      Radium.get('activityFeedController').set('clusterview', manager.get('dashboardFeedView'));
     
       Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));
     }

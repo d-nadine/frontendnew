@@ -52,6 +52,7 @@ minispade.require('radium/views/feed/date_filters');
 minispade.require('radium/views/feed/historical');
 minispade.require('radium/views/feed/filter');
 minispade.require('radium/views/feed/feed_filter_item');
+minispade.require('radium/views/feed/date_header');
 
 // Global
 minispade.require('radium/views/global/topbar');
