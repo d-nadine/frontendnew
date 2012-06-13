@@ -1,4 +1,4 @@
-Radium.ClusterListView = Ember.ContainerView.extend({
+Radium.ClusterListItemView = Ember.ContainerView.extend({
   childViews: [],
   classNames: ['feed-cluster'],
   

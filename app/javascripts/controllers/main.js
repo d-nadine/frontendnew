@@ -16,8 +16,6 @@ minispade.require('radium/controllers/meetings');
 minispade.require('radium/controllers/deals');
 minispade.require('radium/controllers/inline_comments');
 
-minispade.require('radium/controllers/datebook/scheduled_activities');
-minispade.require('radium/controllers/datebook/overdue_activities');
 
 minispade.require('radium/controllers/forms/type_ahead');
 
@@ -37,5 +35,8 @@ minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');
 minispade.require('radium/controllers/selected_feed_date');
 minispade.require('radium/controllers/nav/topbar_controller');
+
 minispade.require('radium/controllers/feed/activity_feed_controller');
 minispade.require('radium/controllers/feed/cluster_list_controller');
+minispade.require('radium/controllers/feed/scheduled_activities');
+minispade.require('radium/controllers/feed/overdue_activities');
