@@ -33,7 +33,6 @@ minispade.require('radium/controllers/campaigns');
 minispade.require('radium/controllers/selected_campaign');
 minispade.require('radium/controllers/nav/topbar_controller');
 
-minispade.require('radium/controllers/feed/feed');
 minispade.require('radium/controllers/feed/activity_feed_controller');
 minispade.require('radium/controllers/feed/cluster_list_controller');
 minispade.require('radium/controllers/feed/scheduled_activities');

@@ -29,6 +29,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       }
 
       if(data.feed.activities.length > 0){
+        debugger
         Radium.store.loadMany(Radium.Activity, data.feed.activities);
       }
 

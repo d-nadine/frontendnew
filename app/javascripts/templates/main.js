@@ -104,7 +104,6 @@ minispade.require('radium/templates/forms/add_to_company');
 minispade.require('radium/templates/forms/todo_edit');
 
 // Dashboard
-minispade.require('radium/templates/dashboard/dashboard');
 minispade.require('radium/templates/dashboard/announcements');
 
 // Contacts
