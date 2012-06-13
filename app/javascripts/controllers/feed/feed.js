@@ -1,3 +1,4 @@
+// @Paul: do you foresee us needing this controller in the future? Or are there parts we can axe?
 Radium.feedController = Ember.Object.extend({
   /**
     Example content hash:
