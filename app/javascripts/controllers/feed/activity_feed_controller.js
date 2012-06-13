@@ -36,9 +36,9 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
         self.get('content').pushObjects(data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
       }
 
-      if(data.feed.activities.length > 0){
-        Radium.store.loadMany(Radium.Activity, data.feed.activities);
-      }
+      // if(data.feed.activities.length > 0){
+      //   Radium.store.loadMany(Radium.Activity, data.feed.activities);
+      // }
 
       self.set('previous_activity_date', data.feed.previous_activity_date);
 
