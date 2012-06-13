@@ -29,24 +29,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       }
 
       if(data.feed.scheduled_activities.length > 0){
-        var feed = Radium.getPath('appController.overdue_feed'),
-          ids = feed.getEach('id');
-
-        feed.forEach(function(item){
-          var activity = item,
-          kind = activity.kind,
-          model = Radium[Radium.Utils.stringToModel(kind)],
-          reference = activity.reference[kind];
-
-          activity[kind] = reference;
-        });
-
-        if(!feed.length || feed.length === 0){
-          self.get('content').pushObject(Ember.A());
-        }else{
-          Radium.store.loadMany(Radium.Activity, feed);
-          self.get('content').pushObject(Radium.store.findMany(Radium.Activity, ids));
-        } 
+        self.get('content').pushObject(Radium.Utils.transformActivities(data.feed.scheduled_activities));
       }
 
       if(data.feed.clusters.length > 0){
