@@ -50,7 +50,7 @@ minispade.require('radium/views/feed/feed');
 minispade.require('radium/views/feed/feed_activity');
 minispade.require('radium/views/feed/date_filters');
 minispade.require('radium/views/feed/historical');
-minispade.require('radium/views/feed/type_filter');
+minispade.require('radium/views/feed/filter');
 minispade.require('radium/views/feed/feed_filter_item');
 
 // Global

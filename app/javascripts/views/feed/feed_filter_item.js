@@ -1,6 +1,6 @@
 Radium.FeedFilterItemView = Ember.View.extend({
   tagName: 'li',
-  templateName: 'type_filters',
+  templateName: 'filter',
   classNames: ['main-filter-item'],
   classNameBindings: ['isSelected:active'],
   isSelected: function() {

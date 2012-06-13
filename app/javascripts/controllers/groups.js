@@ -1,7 +1,5 @@
-Radium.groupsController = Ember.ArrayProxy.extend({
-  init: function(){
-    this.set('content', Radium.store.find(Radium.Group, {page: 'all'}));
-  },
+Radium.groupsController = Ember.ArrayProxy.create({
+  content: [],
   names: function() {
     return this.getEach('name');
   }.property('@each.name').cacheable(),

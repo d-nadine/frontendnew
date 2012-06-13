@@ -4,5 +4,5 @@
 Radium.FeedFilterView = Ember.CollectionView.extend({
   tagName: 'ul',
   classNames: 'nav nav-tabs nav-stacked'.w(),
-  templateName: 'type_filters'
+  templateName: 'filter'
 });
