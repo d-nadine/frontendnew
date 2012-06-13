@@ -1,3 +1,4 @@
+* [2012-06-12 22:47 -0700] 198d8c9 - Joshua Jones: Comment out Crossfilter controllers for now.
 * [2012-06-12 21:32 +0100] 5339488 - Paul Cowan: [Deploy]
 * [2012-06-12 21:31 +0100] 1e3c7f7 - Paul Cowan: removed scroll animation
 * [2012-06-12 20:59 +0100] 491f563 - Paul Cowan: infinite scrolling working for previous_activity_date
