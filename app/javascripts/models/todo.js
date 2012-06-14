@@ -47,7 +47,11 @@ Radium.Todo = Radium.Core.extend({
     return Ember.DateTime.compareDate(today, finishBy) === 0;
   }.property('finishBy'),
 
-  canEdit: function() {
+  canComplete: function() {
     return (this.getPath('user.apiKey')) ? true : false;
+  }.property('user'),
+
+  canEdit: function() {
+    return (this.getPath('user.apiKey') && !this.get('finished')) ? true : false;
   }.property('user', 'finished')
 });
