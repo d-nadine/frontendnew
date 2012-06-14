@@ -1,7 +1,7 @@
-{{#with call_list}}
+<i class="pull-left activity-icon icon-call-list"></i>
 
-{{name}}
+{{description}}
   
-(<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
-
-{{/with}}
+( {{#each users}}
+<a href="/users/{{unbound id}}">{{abbrName}}</a> 
+{{/each}})
