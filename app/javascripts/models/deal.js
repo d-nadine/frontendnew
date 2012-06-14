@@ -1,5 +1,6 @@
 Radium.Deal = Radium.Core.extend({
   type: 'deal',
+  name: DS.attr('string'),
   description: DS.attr('string'),
   closeBy: DS.attr('date', {
     key: 'close_by'

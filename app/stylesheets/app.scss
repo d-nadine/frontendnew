@@ -28,6 +28,7 @@
 }
 
 .icon-call,
+.icon-call-list,
 .icon-todo,
 .icon-contact,
 .icon-assigned,
@@ -48,6 +49,10 @@
 
 .icon-call {
   background-image: url('/images/icons/feed-call-todo.png');
+}
+
+.icon-call-list {
+  background-image: url('/images/icons/feed-call-list.png');
 }
 
 .icon-meeting {
