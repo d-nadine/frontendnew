@@ -1,12 +1,17 @@
 //TODO rename to ClusterFeedController
 Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
   content: Ember.A(),
+  forwardContent: Ember.A(),
   init: function(){
     this._super();
     this.set('view', Ember.ContainerView.create());
     this.RequestDate = {};
-    this.RequestDate[Radium.SCROLL_FORWARD] = 'next_activity_date';
     this.RequestDate[Radium.SCROLL_BACK] = 'previous_activity_date';
+    this.RequestDate[Radium.SCROLL_FORWARD] = 'next_activity_date';
+
+    this.RequestContent = {};
+    this.RequestContent[Radium.SCROLL_BACK] = 'content';
+    this.RequestContent[Radium.SCROLL_FORWARD] = 'forwardContent';
   },
   bootStraploaded: function(){
     this.set('previous_activity_date', Radium.getPath('appController.feed.previous_activity_date'));
@@ -29,18 +34,20 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     
     var self = this;
 
+    var contentKey = this.RequestContent[scrollData.direction];
+
     //TODO: Should we have a cluster ember-data model?
     $.when($.ajax({url: url})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
-        self.get('content').pushObject(Ember.Object.create({dateHeader: self.get(self.RequestDate[scrollData.direction])}));
+        self.get(contentKey).pushObject(Ember.Object.create({dateHeader: self.get(self.RequestDate[scrollData.direction])}));
       }
 
       if(data.feed.scheduled_activities.length > 0){
-        self.get('content').pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
+        self.get(contentKey).pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
       }
 
       if(data.feed.clusters.length > 0){
-        self.get('content').pushObjects(data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
+        self.get(contentKey).pushObjects(data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
       }
 
       if(data.feed.activities.length > 0){
