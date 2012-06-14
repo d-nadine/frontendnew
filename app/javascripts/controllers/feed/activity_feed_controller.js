@@ -29,7 +29,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       }
 
       if(data.feed.scheduled_activities.length > 0){
-        self.get('content').pushObject(Radium.Utils.transformActivities(data.feed.scheduled_activities));
+        self.get('content').pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
       }
 
       if(data.feed.clusters.length > 0){
