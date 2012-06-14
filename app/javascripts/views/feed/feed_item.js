@@ -38,7 +38,16 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   init: function() {
     this._super();
     // Add Todo todoForm
-    this.set('todoForm', Radium.TodoForm.create());
+    this.set('todoForm', Radium.TodoForm.create({
+      didInsertElement: function() {
+        this.addObserver('parentView.isActionsVisible', function() {
+          this.close();
+        });
+      },
+      willDestroyElement: function() {
+        this.removeObserver('parentView.isActionsVisible');
+      }
+    }));
 
     // Assign the content in the subclassed views
     this.set('commentsController', Radium.InlineCommentsController.create({
