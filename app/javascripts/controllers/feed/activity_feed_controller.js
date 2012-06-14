@@ -1,7 +1,6 @@
-//TODO rename to ClusterFeedController
 Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
   content: Ember.A(),
-  forwardContent: Ember.A(),
+  forwardContent: Radium.FutureFeed.create(),
   init: function(){
     this._super();
     this.set('view', Ember.ContainerView.create());
@@ -17,6 +16,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     this.set('previous_activity_date', Radium.getPath('appController.feed.previous_activity_date'));
     this.set('next_activity_date', Radium.getPath('appController.feed.next_activity_date'));
   }.observes('Radium.appController.feed'),
+
   shouldScroll: function(scrollData){
     return this.get(this.RequestDate[scrollData.direction]);
   },
