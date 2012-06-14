@@ -1,3 +1,4 @@
+* [2012-06-14 11:36 -0700] d018f26 - Joshua Jones: Fix scoping issue in scheduled feed activities.
 * [2012-06-14 00:26 -0700] 9998904 - Joshua Jones: Fix render bug for scheduled activities coming in through endless scrolling.
 * [2012-06-13 23:11 -0700] 4facb30 - Joshua Jones: [Delivers #31053443] Finished todos cannot be edited.
 * [2012-06-13 22:36 -0700] c52bfb6 - Joshua Jones: [Delivers #31053971] Add Todo form in feed items slides up when the parentView does as well.
