@@ -1,3 +1,11 @@
+/**
+  Every feed item, either a historical activity or a scheduled resource 
+  like a todo or deal use this as the start point.
+
+  Initialization sets up the childViews for any forms and comments.
+  Override this further for individual needs of the historical/scheduled 
+  subclassed views
+*/
 Radium.FeedItemView = Ember.ContainerView.extend({
   classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded'],

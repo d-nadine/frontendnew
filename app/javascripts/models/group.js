@@ -1,4 +1,5 @@
 Radium.Group = Radium.Core.extend({
+  type: 'group',
   name: DS.attr('string'),
   email: DS.attr('string'),
   phone: DS.attr('string'),

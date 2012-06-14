@@ -1,4 +1,5 @@
 Radium.Email = Radium.Message.extend({
+  type: 'email',
   to: DS.attr('array'),
   from: DS.attr('array'),
   subject: DS.attr('string'),

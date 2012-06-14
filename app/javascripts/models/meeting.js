@@ -1,4 +1,5 @@
 Radium.Meeting = Radium.Core.extend({
+  type: 'meeting',
   topic: DS.attr('string'),
   location: DS.attr('string'),
   startsAt: DS.attr('date', {key: 'starts_at'}),
