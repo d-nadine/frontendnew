@@ -1,11 +1,15 @@
+Radium.SCROLL_FORWARD = 1;
+Radium.SCROLL_BACK = 0;
 Radium.InfiniteScroller = Ember.Mixin.create({
   willDestroyElement: function() {
     $(window).off('scroll');
   },
   infiniteLoading: function() {
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 300) {
-      this.get('controller').loadFeed();
+      this.get('controller').loadFeed({direction: Radium.SCROLL_BACK});
       return false;
+    }else if($(window).scrollTop() < 5){
+      this.get('controller').loadFeed({direction: Radium.SCROLL_FORWARD});
     }
   },
   isLoadingObserver: function() {
@@ -15,7 +19,6 @@ Radium.InfiniteScroller = Ember.Mixin.create({
       Radium.LoadingManager.send('show');
     } else {
       Radium.LoadingManager.send('hide');
-
       //TODO: Animate to date header
       // if(self.getPath('controller.foundData')){
       //   if($('.date-header:last').length === 1){
@@ -25,9 +28,7 @@ Radium.InfiniteScroller = Ember.Mixin.create({
       //   }
       // }
 
-      if(this.getPath('controller').shouldScroll()){
-        $(window).on('scroll', $.proxy(self.infiniteLoading, self));
-       }
+      $(window).on('scroll', $.proxy(self.infiniteLoading, self));
     }
   }.observes('controller.isLoading') 
 });

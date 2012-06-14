@@ -4,19 +4,26 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
   init: function(){
     this._super();
     this.set('view', Ember.ContainerView.create());
+    this.RequestDate = {};
+    this.RequestDate[Radium.SCROLL_FORWARD] = 'next_activity_date';
+    this.RequestDate[Radium.SCROLL_BACK] = 'previous_activity_date';
   },
   bootStraploaded: function(){
     this.set('previous_activity_date', Radium.getPath('appController.feed.previous_activity_date'));
     this.set('next_activity_date', Radium.getPath('appController.feed.next_activity_date'));
   }.observes('Radium.appController.feed'),
-  shouldScroll: function(){
-    return this.get('previous_activity_date');
+  shouldScroll: function(scrollData){
+    return this.get(this.RequestDate[scrollData.direction]);
   },
 
-  loadFeed: function(){
+  loadFeed: function(scrollData){
+    if(!this.shouldScroll(scrollData)){
+      return;
+    }
+
     this.set('isLoading', true);
     
-    var date = this.get('previous_activity_date');
+    var date = this.get(this.RequestDate[scrollData.direction]);
 
     var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), date, date);
     
@@ -25,7 +32,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     //TODO: Should we have a cluster ember-data model?
     $.when($.ajax({url: url})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
-        self.get('content').pushObject(Ember.Object.create({dateHeader: self.get('previous_activity_date')}));
+        self.get('content').pushObject(Ember.Object.create({dateHeader: self.get(self.RequestDate[scrollData.direction])}));
       }
 
       if(data.feed.scheduled_activities.length > 0){
@@ -40,7 +47,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
         Radium.store.loadMany(Radium.Activity, data.feed.activities);
       }
 
-      self.set('previous_activity_date', data.feed.previous_activity_date);
+      self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);
 
       self.set('foundData', data.feed.clusters.length > 0);
       self.set('isLoading', false);
