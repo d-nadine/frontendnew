@@ -6,18 +6,19 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
         referenceType = content.get('referenceType'),
         // Manual array to keep track of which mixins are needed
         registeredMixins = ['todo'],
-        mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[Radium.Utils.stringToModel(type)+'ViewMixin'] : Radium.Noop;
+        mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[Radium.Utils.stringToModel(type)+'ViewMixin'] : Radium.Noop,
+        contact = null;
 
-    // Embed a contact
+    // Embed a contact if referenced
     if (referenceType === "contact") {
-      var contact = Radium.store.find(Radium.Contact, content.getPath('reference.contact.id'));
+      contact = Radium.store.find(Radium.Contact, content.getPath('reference.contact.id'));
     }
 
     // Set up the main row header
     this.set('currentView', Radium.FeedHeaderView.create(mixin, {
       // Manually set to content to the activity's nested resource
       contentBinding: 'parentView.content',
-      contact: contact || null,
+      contact: contact,
       init: function() {
         this._super();
         var referenceString = (referenceType) ? "_"+referenceType : '';

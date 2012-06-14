@@ -20,14 +20,16 @@ Radium.Utils = {
     return !!window.Worker;
   },
 
-  pluckReferences: function(feed) {
+  pluckReferences: function(feed, silent) {
     return feed.map(function(item){
       var kind = item.kind,
           model = Radium[Radium.Utils.stringToModel(kind)],
           reference = item.reference[kind];
 
       Radium.store.load(model, reference);
-      return Radium.store.find(model, reference.id);
+      if (!silent) {
+        return Radium.store.find(model, reference.id);
+      }
     });
   },
 
@@ -46,6 +48,7 @@ Radium.Utils = {
       return Ember.A();
     }else{
       Radium.store.loadMany(Radium.Activity, feed);
+      this.pluckReferences(feed, true);
       return Radium.store.findMany(Radium.Activity, ids);
     }
   },

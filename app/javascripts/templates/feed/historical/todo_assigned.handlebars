@@ -1,7 +1,7 @@
 <i class="pull-left activity-icon icon-assigned"></i>
 Assigned: 
   {{#if isCall}}
-    {{#with reference.todo.reference.contact}}
+    {{#with view.resource.reference.contact}}
       <i class="icon-call"></i>
       Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
     {{/with}}
@@ -9,6 +9,6 @@ Assigned:
      <i class="icon-todo"></i>
     {{unbound reference.todo.description}}
   {{/if}}
-{{#if user}}
- (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{#if view.resource.user}}
+ (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
 {{/if}}
