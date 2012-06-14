@@ -1,4 +1,4 @@
-Radium.inlineCommentsController = Ember.ArrayProxy.extend({
+Radium.InlineCommentsController = Ember.ArrayProxy.extend({
   newComment: "",
   isError: false,
   isSubmitting: false,
@@ -7,10 +7,19 @@ Radium.inlineCommentsController = Ember.ArrayProxy.extend({
     if (this.get('newComment') !== '') {
       var comment,
           commentText = this.get('newComment'),
-          id = this.getPath('activity.id');
+          id = this.getPath('activity.id'),
+          type = this.getPath('activity.type'),
+          url;
+
+      if (type) {
+        var plural = Radium.store.adapter.pluralize(type);
+        url = '%@/%@/comments'.fmt(plural, id);
+      } else {
+        url = 'activities/%@/comments'.fmt(id);
+      }
 
       Radium.Comment.reopenClass({
-        url: 'activities/%@/comments'.fmt(id),
+        url: url,
         root: 'comment'
       });
 

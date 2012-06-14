@@ -19,6 +19,18 @@ Radium.Utils = {
   browserSupportsWebWorkers: function(){
     return !!window.Worker;
   },
+
+  pluckReferences: function(feed) {
+    return feed.map(function(item){
+      var kind = item.kind,
+          model = Radium[Radium.Utils.stringToModel(kind)],
+          reference = item.reference[kind];
+
+      Radium.store.load(model, reference);
+      return Radium.store.find(model, reference.id);
+    });
+  },
+
   transformActivities: function(feed){
     var ids = feed.getEach('id');
 
