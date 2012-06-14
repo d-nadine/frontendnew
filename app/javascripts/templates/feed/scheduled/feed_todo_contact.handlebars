@@ -11,14 +11,16 @@
 {{#if canComplete}}
   {{view view.checkboxView}}
 {{/if}}
-{{view Radium.LabelView labelBinding="reference.contact.status"}}
+{{view Radium.LabelView labelBinding="view.contact.status"}}
 
 
-<a href="/contacts/{{unbound reference.contact.id}}">{{reference.contact.name}}</a>: 
-{{#if canEdit}}
-  {{inlineTextField description}}
-{{else}}
-  {{description}}
+<a href="/contacts/{{unbound view.contact.id}}">{{view.contact.feedDisplayName}}</a>
+{{#if description}}: 
+  {{#if canEdit}}
+    {{inlineTextField description}}
+  {{else}}
+    {{description}}
+  {{/if}}
 {{/if}}
   
 (<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)

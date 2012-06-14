@@ -8,14 +8,19 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
         registeredMixins = ['todo'],
         mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[Radium.Utils.stringToModel(type)+'ViewMixin'] : Radium.Noop;
 
+    // Embed a contact
+    if (referenceType === "contact") {
+      var contact = Radium.store.find(Radium.Contact, content.getPath('reference.contact.id'));
+    }
+
     // Set up the main row header
     this.set('currentView', Radium.FeedHeaderView.create(mixin, {
       // Manually set to content to the activity's nested resource
       contentBinding: 'parentView.content',
+      contact: contact || null,
       init: function() {
         this._super();
         var referenceString = (referenceType) ? "_"+referenceType : '';
-        console.log('feed_' + type + referenceString);
         this.set('templateName', 'feed_' + type + referenceString);
       }
     }));

@@ -76,9 +76,10 @@ Radium.Contact = Radium.Person.extend({
     }
   }.property('name').cacheable(),
 
-  displayName: function() {
-    return this.get('name') || this.getPath('phoneNumbers.firstObject.value') || this.getPath('emailAddresses.firstObject.value');
-  }.property('name', 'phoneNumbers', 'emailAddresses'),
+  displayName: DS.attr('string', {key: 'display_name'}),
+  feedDisplayName: function() {
+    return this.get('displayName') || "Contact %@".fmt(this.get('id'));
+  }.property('displayName'),
 
   feed: null,
 
