@@ -1,12 +1,13 @@
 Radium.FutureFeed = Ember.ArrayProxy.extend({
   content: Ember.A(),
-  init: function(){
-    this._super();
-  },
+  realContent: Ember.A(),
+  
   arrayContentDidChange: function(startIdx, removeAmt, addAmt){
     if(addAmt === 0)
       return;
 
-    console.log('addAmt = ' + addAmt);
+    if(this.get('content')[startIdx].get('dateHeader')){
+
+    }
   }
 });
