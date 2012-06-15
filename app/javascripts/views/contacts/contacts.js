@@ -12,17 +12,7 @@ Radium.ContactsPageView = Ember.View.extend({
   noSelectedFilter: function() {
     return (this.get('selectedFilter')) ? false : true;
   }.property('selectedFilter').cacheable(),
-
-  campaignsFilterView: Ember.View.extend({
-    tagName: 'ul',
-    classNames: 'nav nav-tabs nav-stacked',
-
-    allCampaigns: function(event) {
-      Radium.App.send('allCampaigns');
-      return false;
-    }
-  }),
-
+ 
   // Infinite scrolling (To be reincorporated into own mixin)
   didInsertElement: function() {
     this._super();

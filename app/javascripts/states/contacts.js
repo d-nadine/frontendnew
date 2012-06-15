@@ -7,10 +7,8 @@ Radium.ContactsPage = Ember.State.extend({
 
       rootView.get('childViews').removeObject(rootView.get('loading'));
 
-      //TODO: split out ContactsPageView
       if(!manager.get('contactsSideBarView')){
-        manager.set("contactsSideBarView",  Radium.ContactsPageView.create({
-        templateName: 'contacts_sidebar'
+        manager.set("contactsSideBarView",  Radium.ContactsSideBar.create({
         }));
       }
 
