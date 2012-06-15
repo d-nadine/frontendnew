@@ -18,7 +18,8 @@
     <a href="#" {{action "toggleOptions"}}>{{toggleOptionsText}}</a>
   </div>
 </fieldset>
-<div class="more-options form-inline" {{bindAttr class="view.hasNoOptions:hide"}}>
+{{#if view.showOptions}}
+<div class="more-options form-inline">
   <fieldset>
     <div class="inline-fieldset">
       <label for="date">Finish By:</label>
@@ -29,4 +30,5 @@
     </div>
   </fieldset>
 </div>
+{{/if}}
 {{view submitButton class="btn btn-primary pin-bottom-right"}}
