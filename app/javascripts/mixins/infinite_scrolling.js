@@ -7,13 +7,21 @@ Radium.InfiniteScroller = Ember.Mixin.create({
     $(window).off('scroll');
   },
   infiniteLoading: function(e) {
-    var isUp = this.isUp()
+    var isUp = this.isUp();
+
+    if(isUp){
+      this.set('scrollDirection', Radium.SCROLL_FORWARD);
+    }else{
+      this.set('scrollDirection', Radium.SCROLL_BACK);
+    }
+
     if ((!isUp) && ($(window).scrollTop() > $(document).height() - $(window).height() - 300)) {
       this.get('controller').loadFeed({direction: Radium.SCROLL_BACK});
-      return false;
     }else if((isUp) && ($(window).scrollTop() < 5)){
       this.get('controller').loadFeed({direction: Radium.SCROLL_FORWARD});
     }
+
+    return false;
   },
   isUp: function(){
     var currentScrollTop = $(window).scrollTop();
@@ -28,8 +36,13 @@ Radium.InfiniteScroller = Ember.Mixin.create({
     var self = this;
     if (this.getPath('controller.isLoading')) {
       $(window).off('scroll');
-      
-      Radium.LoadingManager.send('show');
+
+      if(self.get('scrollDirection') === Radium.SCROLL_FORWARD){
+        //TODO: Place animation at the top of the page
+        Radium.LoadingManager.send('show');
+      }else{
+        Radium.LoadingManager.send('show');
+      }
     } else {
       Radium.LoadingManager.send('hide');
 
