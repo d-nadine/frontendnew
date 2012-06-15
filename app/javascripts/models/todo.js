@@ -4,10 +4,10 @@ Radium.Todo = Radium.Core.extend({
   // TODO: Can we just get this through Ember?
   type: 'todo',
   referenceType: function() {
-    var ref = this.get('reference'),
-        keys = Ember.keys(ref);
+    var ref = this.getPath('data.reference'),
+        keys = (ref) ? Ember.keys(ref) : [];
     return (keys.length) ? keys[0] : null;
-  }.property('reference'),
+  }.property('data.reference'),
   kind: DS.attr('todoKind'),
   description: DS.attr('string'),
   finishBy: DS.attr('datetime', {

@@ -1,21 +1,19 @@
-{{#with reference.todo}}
-
 {{#if isCall}}
 <i class="pull-left activity-icon icon-call"></i>
 {{else}}
 <i class="pull-left activity-icon icon-todo"></i>
 {{/if}}
 New Todo: 
-{{#if isCall}}
-  {{#with reference.contact}}
-    Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
-  {{/with}}
-{{else}}
-  {{unbound description}}
-{{/if}}
+  {{#if isCall}}
+    {{#with view.resource.reference.contact}}
+      <i class="icon-call"></i>
+      Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
+    {{/with}}
+  {{else}}
+     <i class="icon-todo"></i>
+    {{unbound reference.todo.description}}
+  {{/if}}
 
-{{#if user}}
- (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+{{#if view.resource.user}}
+ (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
 {{/if}}
-
-{{/with}}

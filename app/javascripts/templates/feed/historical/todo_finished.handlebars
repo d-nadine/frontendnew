@@ -4,13 +4,16 @@
 <i class="pull-left activity-icon icon-todo"></i>
 {{/if}}
 Finished:
-{{#if isCall}}
-  {{#with reference.todo.reference.contact}}
-    Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
-  {{/with}}
-{{else}}
-  {{unbound reference.todo.description}}
-{{/if}}
-{{#if user}}
- (<a href="/users/{{unbound user.id}}">{{unbound user.abbrName}}</a>)
+  {{#if isCall}}
+    {{#with view.resource.reference.contact}}
+      <i class="icon-call"></i>
+      Call <a href="/contacts/{{unbound id}}">{{unbound name}}</a>
+    {{/with}}
+  {{else}}
+     <i class="icon-todo"></i>
+    {{unbound reference.todo.description}}
+  {{/if}}
+
+{{#if view.resource.user}}
+ (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
 {{/if}}
