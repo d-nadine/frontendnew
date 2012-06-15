@@ -22,7 +22,7 @@ Radium.FormView = Ember.View.extend({
 
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
-    this.$('fieldset:first').find('input:text, textarea').focus();
+    this.$('fieldset:first').find('input:text, textarea').first().focus();
   },
 
   willDestroy: function() {

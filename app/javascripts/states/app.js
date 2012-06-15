@@ -37,8 +37,8 @@ Radium.App = Ember.StateManager.create({
     Radium.set('scheduledActivitiesController', Radium.ScheduledActivitiesController.create());
     Radium.set('contactsController', Radium.ContactsController.create());
     Radium.set('everyoneController', Radium.EveryoneController.create({
-      usersBinding: 'Radium.usersController.content',
-      contactsBinding: 'Radium.contactsController.content'
+      usersControllerBinding: 'Radium.usersController',
+      contactsControllerBinding: 'Radium.contactsController'
     }));
     this._super();
   },

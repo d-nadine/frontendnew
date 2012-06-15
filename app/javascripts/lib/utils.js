@@ -20,6 +20,20 @@ Radium.Utils = {
     return !!window.Worker;
   },
 
+  // TODO: During optimization phase make this smarter
+  parseTimeString: function(string, meridian) {
+    var time = string.split(':');
+
+    time[0] = parseInt(time[0], 10);
+    time[1] = parseInt(time[1], 10);
+
+    if (meridian === "pm") {
+      time[0] = time[0] + 12;
+    }
+    
+    return (time.length > 1) ? time : time.concat([0]);
+  },
+
   pluckReferences: function(feed, silent) {
     return feed.map(function(item){
       var kind = item.kind,
@@ -85,7 +99,7 @@ Radium.DateDiff = {
   inYears: function(d1, d2) {
       return d2.getFullYear()-d1.getFullYear();
   }
-}
+};
 
 _.emberArrayGroupBy = function(emberArray, val) {
   var result = {}, key, value, i, l = emberArray.get('length'),

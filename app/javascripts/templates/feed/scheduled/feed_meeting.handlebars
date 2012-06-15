@@ -1,6 +1,6 @@
 <i class="pull-left activity-icon icon-meeting"></i>
 
-Meeting at {{location}} 
+{{view.resource.topic}} @ {{view.resource.location}}, {{formatTime view.resource.startsAt}}
 ({{#each users}}
 <a href="/users/{{unbound id}}">{{abbrName}}</a>
 {{/each}})
