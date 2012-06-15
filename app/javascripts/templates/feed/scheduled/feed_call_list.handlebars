@@ -1,7 +1,9 @@
 <i class="pull-left activity-icon icon-call-list"></i>
 
 {{description}}
-  
-( {{#each users}}
-<a href="/users/{{unbound id}}">{{abbrName}}</a> 
-{{/each}})
+
+{{#if users.length}}
+  ( {{#each users}}
+  <a href="/users/{{unbound id}}">{{abbrName}}</a> 
+  {{/each}})
+{{/if}}
