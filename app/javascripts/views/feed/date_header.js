@@ -3,9 +3,10 @@ Radium.DateHeaderView = Ember.View.extend({
   templateName: 'date_section_header',
   contentBinding: 'parentView.content',
   didInsertElement: function(){
-    var self = this;
-    $('html,body').animate({
-      scrollTop: self.$().offset().top -50
-    }, 2000);
+    var currentScrollTop =  this.$().offset().top;
+    
+    if(currentScrollTop < 100){
+      $('html,body').scrollTop(this.$().offset().top -50);
+    }  
   }
 });
