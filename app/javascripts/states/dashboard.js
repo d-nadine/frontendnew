@@ -24,7 +24,7 @@ Radium.DashboardPage = Ember.State.extend({
           contentBinding: 'Radium.activityFeedController.content',
           controllerBinding: 'Radium.activityFeedController',
           didInsertElement: function(){
-            $('html,body').scrollTop(10);
+            $('html,body').scrollTop(5);
           }
         }));
       }
