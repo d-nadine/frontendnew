@@ -7,10 +7,6 @@ Radium.ContactsController = Ember.ArrayProxy.extend({
     this.set('content', Radium.store.findMany(Radium.Contact, contacts.mapProperty('id').uniq()));
   }.observes('Radium.appController.contacts'),
 
-  isAllContactsLoaded: function() {
-    return (this.get('totalPagesLoaded') === this.get('totalPages')) ? true : false;
-  }.property('totalPagesLoaded', 'totalPages').cacheable(),
-
   recentlySearchedFor: function() {
     return this.filter(function(contact, idx) {
       if (contact.get('isRecentlySearchedFor') && idx <= 5) {
@@ -199,22 +195,4 @@ Radium.ContactsController = Ember.ArrayProxy.extend({
   clearSelected: function() {
     this.setEach('isSelected', false);
   },
-
-
-  // Infinite scroll functions
-  currentPage: 0,
-  totalPages: 0,
-  load: function() {
-    var self = this,
-        currentPage = this.get('currentPage'),
-        totalPages = this.get('totalPages'),
-        hasNoPages = currentPage === 0 && totalPages === 0,
-        isNotAtEnd = currentPage !== totalPages;
-
-    if (isNotAtEnd) {
-      var contactsPage = Radium.store.find(Radium.Contact, {
-            page: ++currentPage
-          });
-    }
-  }
 });

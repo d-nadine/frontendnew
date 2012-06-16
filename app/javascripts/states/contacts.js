@@ -65,27 +65,5 @@ Radium.ContactsPage = Ember.State.extend({
       selectedCampaign: context
     });
     manager.goToState('ready');
-  },
-
-  loadContacts: function(manager) {
-    var self = this;
-
-    $(window).off();
-    
-    var lastLoadedPage = Radium.contactsController.get('totalPagesLoaded'),
-        page = ++lastLoadedPage,
-        isAllContactsLoaded = Radium.contactsController.get('isAllContactsLoaded');
-
-    if (isAllContactsLoaded) {
-      manager.goToState('ready');
-    } else {
-      manager.goToState('loading');
-      var moreContacts = Radium.store.find(Radium.Contact, {page: page});
-      moreContacts.addObserver('isLoaded', function() {
-        if (this.get('isLoaded')) {
-          manager.goToState('ready');
-        }
-      });
-    }
   }
-})
+});
