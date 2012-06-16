@@ -22,7 +22,6 @@ Radium.LoadingManager = Ember.StateManager.create({
           .animate(settings, 500);
       },
       hide: function(dir) {
-        console.log(this.get('direction'));
         var dir = this.get('direction') || dir,
             fromTop = {top:-40},
             fromBottom = {bottom: -70},
