@@ -1,6 +1,6 @@
 <i class="pull-left activity-icon icon-meeting"></i>
 
-{{view.resource.topic}} @ {{view.resource.location}}, {{formatTime view.resource.startsAt}}
+{{topic}} @ {{location}} ({{formatTime startsAt}} - {{formatTime endsAt}})
 ({{#each users}}
 <a href="/users/{{unbound id}}">{{abbrName}}</a>
 {{/each}})
