@@ -1,3 +1,4 @@
+* [2012-06-16 00:54 -0700] 028ae65 - Joshua Jones: Enable use to create future meetings instead of incorrectly defaulting to today.
 * [2012-06-15 21:08 -0700] 42eb45f - Joshua Jones: Remove log.
 * [2012-06-14 16:53 -0700] 5609136 - Joshua Jones: Remove extra DOM manipulation causing the extra form options to be visible when not wanted.
 * [2012-06-14 11:36 -0700] d018f26 - Joshua Jones: Fix scoping issue in scheduled feed activities.

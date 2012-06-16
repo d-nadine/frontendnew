@@ -3,7 +3,6 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   topicValue: null,
   locationValue: null,
-  dateValue: Ember.DateTime.create(),
   startsAtValue: null,
   endsAtValue: null,
 
@@ -55,13 +54,15 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   meetingDateField: Radium.DatePickerField.extend({
     elementId: 'start-date',
+    viewName: 'meetingDate',
     name: 'start-date',
     classNames: ['input-small'],
     minDate: function() {
       return new Date();
     }.property().cacheable(),
+    defaultDate: Ember.DateTime.create(),
     valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
-                  .from('parentView.dateValue')
+                  .from('defaultDate')
   }),
 
   startsAtField: Radium.Fieldset.extend({
@@ -93,7 +94,8 @@ Radium.MeetingForm = Radium.FormView.extend({
         self = this,
         topic = this.get('topicValue'),
         location = this.get('locationValue'),
-        day = this.get('dateValue'),
+        day = this.getPath('meetingDate.value'),
+        date = Ember.DateTime.parse(day, '%Y-%m-%d'),
         startsAt = this.get('startsAtValue'),
         startsAtMeridian = this.$('#start-time-meridian').val(),
         endsAt = this.get('endsAtValue'),
@@ -106,11 +108,11 @@ Radium.MeetingForm = Radium.FormView.extend({
 
         data = {
           topic: topic,
-          startsAt: day.adjust({
+          startsAt: date.adjust({
             hour: endsAtTimeArr[0],
             minute: endsAtTimeArr[0]
           }).toISO8601(),
-          endsAt: day.adjust({
+          endsAt: date.adjust({
             hour: startsAtTimeArr[0],
             minute: startsAtTimeArr[0]
           }).toISO8601(),
