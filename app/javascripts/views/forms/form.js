@@ -4,11 +4,15 @@ Radium.FormView = Ember.View.extend({
   layoutName: 'form_layout',
 
   // Validation properties
-  hasNoOptions: true,
   isSubmitting: false,
   isValid: false,
   isMatchError: null,
   invalidFields: Ember.A([]),
+
+  init: function() {
+    this._super();
+    this.set('showOptions', false);
+  },
 
   keyUp: function(event) {
     if (event.keyCode === 27) {
@@ -18,7 +22,7 @@ Radium.FormView = Ember.View.extend({
 
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
-    this.$('fieldset:first').find('input:text, textarea').focus();
+    this.$('fieldset:first').find('input:text, textarea').first().focus();
   },
 
   willDestroy: function() {
@@ -87,17 +91,13 @@ Radium.FormView = Ember.View.extend({
 
   // Show/hide the extra options when creating a todo.
   toggleOptions: function() {
-    this.toggleProperty('hasNoOptions');
+    this.toggleProperty('showOptions');
     return false;
   },
 
   toggleOptionsText: function() {
-    return (this.get('hasNoOptions')) ? 'More options' : 'Less options';
-  }.property('hasNoOptions').cacheable(),
-
-  moreOptions: Ember.View.extend({
-    isVisibleBinding: 'parentView.hasMoreOptions'
-  }),
+    return (this.get('showOptions')) ? 'Less options' : 'More options';
+  }.property('showOptions').cacheable(),
 
   submitButton: Ember.View.extend(Ember.TargetActionSupport, {
     tagName: 'button',

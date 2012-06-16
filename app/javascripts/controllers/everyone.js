@@ -1,14 +1,14 @@
 Radium.EveryoneController = Ember.ArrayProxy.extend({
-  userEmailsBinding: 'users.emails',
-  contactEmailsBinding: 'contacts.emails',
+  userEmailsBinding: 'usersController.emails',
+  contactEmailsBinding: 'contactsController.emails',
   /**
     An array of objects for simple, name-only autocomplete in forms.
     eg [{label: "Avon Barksdale", value: {userid}}]
     @return {Array} 
   */
   emails: function() {
-    if (this.get('users')) {
-      return this.get('users').toArray().concat(this.get('contacts').toArray());
+    if (this.get('userEmails')) {
+      return this.get('userEmails').toArray().concat(this.get('contactEmails').toArray());
     } else {
       return [];
     }
@@ -16,11 +16,11 @@ Radium.EveryoneController = Ember.ArrayProxy.extend({
 
   all: function() {
     var all = Ember.A([]);
-    this.get('users').map(function(item) {
+    this.get('contactEmails').map(function(item) {
       all.pushObject(item);
     });
 
-    this.get('contacts').map(function(item) {
+    this.get('contactEmails').map(function(item) {
       all.pushObject(item);
     });
     return all;

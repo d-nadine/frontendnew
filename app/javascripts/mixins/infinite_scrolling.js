@@ -39,9 +39,9 @@ Radium.InfiniteScroller = Ember.Mixin.create({
 
       if(self.get('scrollDirection') === Radium.SCROLL_FORWARD){
         //TODO: Place animation at the top of the page
-        Radium.LoadingManager.send('show');
+        Radium.LoadingManager.send('show', {direction: 1});
       }else{
-        Radium.LoadingManager.send('show');
+        Radium.LoadingManager.send('show', {direction: -1});
       }
     } else {
       Radium.LoadingManager.send('hide');

@@ -1,1 +1,6 @@
-{{owner.user.name}} booked a meeting about <strong>{{reference.meeting.topic}}</strong> at {{reference.meeting.location}}.
+<i class="pull-left activity-icon icon-meeting"></i>
+<strong>{{reference.meeting.topic}}</strong> @ {{reference.meeting.location}}
+
+{{#if view.resource.user}}
+ (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
+{{/if}}

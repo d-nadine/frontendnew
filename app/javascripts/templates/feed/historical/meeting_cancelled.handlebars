@@ -1,2 +1,5 @@
 <i class="pull-left activity-icon icon-meeting"></i>
-{{owner.user.name}} cancelled a meeting about <strong>{{reference.meeting.topic}}</strong>.
+{{reference.meeting.topic}} cancelled  
+{{#if view.resource.user}}
+ (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
+{{/if}}

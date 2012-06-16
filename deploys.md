@@ -1,3 +1,4 @@
+* [2012-06-15 21:08 -0700] 42eb45f - Joshua Jones: Remove log.
 * [2012-06-14 16:53 -0700] 5609136 - Joshua Jones: Remove extra DOM manipulation causing the extra form options to be visible when not wanted.
 * [2012-06-14 11:36 -0700] d018f26 - Joshua Jones: Fix scoping issue in scheduled feed activities.
 * [2012-06-14 00:26 -0700] 9998904 - Joshua Jones: Fix render bug for scheduled activities coming in through endless scrolling.
