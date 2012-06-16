@@ -6,6 +6,10 @@ window.Radium = Ember.Application.create({
   init: function() {
     this._super();
     this.set('_api', $.cookie('user_api_key'));
+  },
+  pusher: null,
+  ready: function(){
+    this.pusher = Radium.Pusher.create();
   }
 });
 
