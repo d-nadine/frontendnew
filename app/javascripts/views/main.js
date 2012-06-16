@@ -61,7 +61,6 @@ minispade.require('radium/views/global/users_list');
 minispade.require('radium/views/global/profile');
 
 // Dashboard
-// minispade.require('radium/views/dashboard/dashboard');
 minispade.require('radium/views/dashboard/announcements');
 minispade.require('radium/views/dashboard/feed_filter');
 

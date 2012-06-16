@@ -3,6 +3,7 @@ tmp/
 .sass-cache/
 *.sublime-project
 *.sublime-workspace
+*.orig
 !site/images/icons
 env.sh
 deploy.log
