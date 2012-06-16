@@ -4,17 +4,10 @@ Radium.DashboardFeedFilterView = Radium.FeedFilterView.extend({
   content: [
     {label: "Everything", kind: null, addButton: false},
     {label: "Todos", kind: 'todo', addButton: true},
-<<<<<<< HEAD
-    {label: "Deals", kind: 'deal', addButton: true},
-    {label: "Campaigns", kind: 'campaign', addButton: true},
-    {label: "Phone Calls", kind: 'phone_call', addButton: false},
-    {label: "Call Lists", kind: 'call_list', addButton: true},
-=======
     // {label: "Deals", kind: 'deal', addButton: true},
     // {label: "Campaigns", kind: 'campaign', addButton: true},
     // {label: "Phone Calls", kind: 'phone_call', addButton: false},
     // {label: "Call Lists", kind: 'call_list', addButton: true},
->>>>>>> master
     {label: "Meetings", kind: 'meeting', addButton: true},
     {label: "Contacts", kind: 'contact', addButton: true}
   ],
