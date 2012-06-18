@@ -1,6 +1,7 @@
 Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
   content: Ember.A(),
   forwardContent: Radium.FutureFeed.create(),
+  canScroll: true,
   init: function(){
     this._super();
     this.set('view', Ember.ContainerView.create());
@@ -18,7 +19,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
   }.observes('Radium.appController.feed'),
 
   shouldScroll: function(scrollData){
-    return this.get(this.RequestDate[scrollData.direction]);
+    return (this.get('canScroll') && (this.get(this.RequestDate[scrollData.direction])));
   },
 
   loadFeed: function(scrollData){
