@@ -8,7 +8,13 @@ Radium.FormContainerView = Ember.ContainerView.create({
   close: function(event) {
     var self = this,
         form = this.get('currentView');
-    form.$().fadeOut('fast', function() {
+
+    $('#main-feed').animate({
+      top: 0
+    }, 'fast');
+    
+    form.set('isGlobalLevelForm', false);  
+    form.$().slideUp('fast', function() {
       self.set('currentView', null);
       form.destroy();
     });
@@ -16,6 +22,7 @@ Radium.FormContainerView = Ember.ContainerView.create({
   },
 
   show: function(form) {
+    form.set('isGlobalLevelForm', true);
     this.set('currentView', form);
   },
 

@@ -1,26 +1,7 @@
 <form class="well">
-  <legend>Create a Meeting</legend>
   <fieldset>
-    {{view topicField label="Topic"}}
-    {{view locationField label="Location"}}
-  </fieldset>
-  <fieldset>
-    <legend>Choose a date and time</legend>
-    <label for="date">Date</label>
-    {{view meetingDateField}}
-  </fieldset>
-    {{view startsAtField label="Starts At"}}
-    <select id="start-time-meridian" style="width: 60px;">
-      <option value="am" selected>AM</option>
-      <option value="pm">PM</option>
-    </select>
-  </fieldset>
-  <fieldset>
-    {{view endsAtField label="Ends At"}}
-    <select id="end-time-meridian" style="width: 60px;">
-      <option value="am" selected>AM</option>
-      <option value="pm">PM</option>
-    </select>
+    {{view topicField label="Meeting Topic"}}
+
   </fieldset>
   <fieldset>
     {{view inviteField label="Invite"}}
@@ -33,8 +14,28 @@
     {{/view}}
 
   </fieldset>
-  <fieldset>
-  <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+  <div class="meeting-date-picker">
+    <div class="pull-left">
+      <label for="date">Date</label>
+      {{view meetingDateField}}
+    </div>
+    <div class="pull-left">
+      {{view startsAtField label="Starts At"}}
+      <select id="start-time-meridian" style="width: 60px;">
+        <option value="am" selected>AM</option>
+        <option value="pm">PM</option>
+      </select>
+    </div>
+    <div class="pull-left">
+      {{view endsAtField label="Ends At"}}
+      <select id="end-time-meridian" style="width: 60px;">
+        <option value="am" selected>AM</option>
+        <option value="pm">PM</option>
+      </select>
+    </div>
   </div>
+  <fieldset>
+    {{view locationField label="Location"}}
+    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+  </fieldset>
 </form>
