@@ -127,6 +127,15 @@
   border-radius: 0 0 4px 4px;
 }
 
+#sidebar {
+  position: fixed;
+  z-index: 10;
+  top: 60px;
+  bottom: 0;
+  overflow-y: scroll;
+  background: #eee;
+}
+
 .module {
   text-shadow: 0 1px 0 white;
   border: 1px solid #EEE;
