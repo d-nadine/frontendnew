@@ -47,8 +47,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       return "Assign a Todo to %@ contacts for %@".fmt(totalTodoContacts, dateString);
     } else {
       if (selection) {
-        var name = selection.getPath('firstObject.name') || selection.get('name') || selection.getPath('reference.contact.name');
-        return "Assign a Todo to %@ for %@".fmt(name, dateString);
+        var name = selection.getPath('firstObject.name') || selection.get('name') || selection.getPath('reference.contact.name') || selection.get('description') || selection.get('topic');
+        return "Assign a Todo to “%@” for %@".fmt(name, dateString);
       } else {
         return "Add a Todo for %@".fmt(dateString);
       }

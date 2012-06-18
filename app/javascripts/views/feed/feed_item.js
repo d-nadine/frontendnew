@@ -39,12 +39,21 @@ Radium.FeedItemView = Ember.ContainerView.extend({
     this._super();
     // Add Todo todoForm
     this.set('todoForm', Radium.TodoForm.create({
+      selection: this.get('content'),
+      close: function(event) {
+        var self = this,
+            parentView = this.get('parentView');
+        this.$().slideUp('fast', function() {
+          parentView.get('childViews').removeObject(self);
+        });
+        return false;
+      },
       didInsertElement: function() {
         this.addObserver('parentView.isActionsVisible', function() {
           this.close();
         });
       },
-      willDestroyElement: function() {
+      willDestroy: function() {
         this.removeObserver('parentView.isActionsVisible');
       }
     }));

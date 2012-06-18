@@ -78,6 +78,7 @@ Radium.FormView = Ember.View.extend({
   close: function(event) {
     var self = this;
     this.$().slideUp('fast', function() {
+      console.log('oh hai hai');
       $(this).remove();
       self.destroy();
     });
