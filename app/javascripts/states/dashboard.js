@@ -15,7 +15,7 @@ Radium.DashboardPage = Ember.State.extend({
     this._super(manager);
   },
 
-  index: Ember.State.create({
+  index: Ember.State.create({ 
     enter: function(manager) {
 
       if(!manager.get('dashboardFeedView')){
@@ -25,6 +25,9 @@ Radium.DashboardPage = Ember.State.extend({
           controllerBinding: 'Radium.activityFeedController',
           didInsertElement: function(){
             $('html,body').scrollTop(5);
+          },
+          addMeeting: function(evt){
+            Radium.Pusher.sendDummyPushes();
           }
         }));
       }
