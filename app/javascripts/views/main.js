@@ -1,3 +1,5 @@
+//base
+minispade.require('radium/views/base/persistent_container_view');
 // Auth
 minispade.require('radium/views/auth/login_pane');
 
