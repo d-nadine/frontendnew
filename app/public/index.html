@@ -17,7 +17,6 @@
       IO: "4f7326f14e6b4c0007000002"
     }
     </script>
-    <!-- <script src="/scripts/faye/faye-browser.js"></script> -->
     <script src="/scripts/minispade.js"></script>
   </head>
 
@@ -29,20 +28,6 @@
 
     <script type="text/javascript">
       minispade.require('radium/main');
-
-      // if (CONFIG.api) {
-      //   Radium._feed = new Faye.Client('http://api.radium.io/servers/push/faye');
-      //   Radium._feed.disable('cross-origin-long-polling');
-
-      //   var subscribe = Radium._feed.subscribe('/%@/feed/%@'.fmt(CONFIG.IO, CONFIG.api), function(data) {
-      //     console.log('New activity.', data);
-      //     data.isNewActivity = true;
-      //     data.isCached = false;
-      //     Radium.dashboardFeedListController.addData([data]);
-      //     Radium.dashboardFeedController.add(data);
-      //   });
-      // }
-
     </script>
   </body>
 </html>
