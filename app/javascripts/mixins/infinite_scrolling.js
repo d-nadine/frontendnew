@@ -38,9 +38,9 @@ Radium.InfiniteScroller = Ember.Mixin.create({
       $(window).off('scroll');
 
       if(self.get('scrollDirection') === Radium.SCROLL_FORWARD){
-        Radium.LoadingManager.send('show', {direction: 1});
+        Radium.LoadingManager.send('show');
       }else{
-        Radium.LoadingManager.send('show', {direction: -1});
+        Radium.LoadingManager.send('show');
       }
     } else {
       Radium.LoadingManager.send('hide');

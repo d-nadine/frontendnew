@@ -7,6 +7,8 @@ Radium.LoadingManager = Ember.StateManager.create({
         this.$().hide();
       },
       show: function(dir) {
+        // TODO: Remove once it's 100% confirmed the loading icon
+        // is only to be visible from the top of the page.
         var fromTop = {top: 40},
             fromBottom = {bottom: -20},
             fromTopLayout = {bottom: 'auto', top: 0},
@@ -17,9 +19,9 @@ Radium.LoadingManager = Ember.StateManager.create({
         this.set('direction', dir);
 
         this.$()
-          .css(layout)
+          .css(fromTopLayout)
           .show()
-          .animate(settings, 500);
+          .animate(fromTop, 500);
       },
       hide: function(dir) {
         var dir = this.get('direction') || dir,
@@ -28,7 +30,7 @@ Radium.LoadingManager = Ember.StateManager.create({
             settings = (dir > -1) ? fromTop : fromBottom;
 
         this.$()
-          .animate(settings, 500, function() {
+          .animate(fromTop, 500, function() {
             $(this).hide();
           });
       },
@@ -38,7 +40,7 @@ Radium.LoadingManager = Ember.StateManager.create({
     show: function(manager, context) {
       var view = this.get('view');
 
-      view.show(context.direction);
+      view.show();
     },
 
     hide: function(manager, context) {

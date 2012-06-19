@@ -26,7 +26,7 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       }
     }));
 
-    if (type !=== 'todo') {
+    if (type !== 'todo') {
       this.set('infoView', Ember.View.create({
         isVisibleBinding: 'parentView.isActionsVisible',
         content: this.get('content'),
