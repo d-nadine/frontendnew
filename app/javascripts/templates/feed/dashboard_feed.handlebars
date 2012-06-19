@@ -4,15 +4,12 @@
 <div class="page-header">
   <h3 class="today">Today</h3>
 </div>
-  <h4>Overdue</h4>
   {{collection 
     contentBinding="Radium.overdueActivitiesController.content"
     itemViewClass="Radium.FeedActivityView"
     class="feed-item"
   }}
-  <hr/>
 
-  <h4>Due</h4>
   {{collection Ember.CollectionView 
     contentBinding="Radium.scheduledActivitiesController.content"
     itemViewClass="Radium.FeedActivityView"
