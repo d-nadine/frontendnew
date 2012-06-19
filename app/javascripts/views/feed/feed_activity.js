@@ -26,6 +26,13 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       }
     }));
 
+    this.set('infoView', Ember.View.create({
+      isVisibleBinding: 'parentView.isActionsVisible',
+      content: this.get('content'),
+      layoutName: 'details_layout',
+      templateName: this.getPath('content.type') + '_details'
+    }));
+
     // Assign the comments
     this.setPath('commentsController.content', this.getPath('content.comments'));
   }

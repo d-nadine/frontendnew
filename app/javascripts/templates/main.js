@@ -81,6 +81,13 @@ minispade.require('radium/templates/feed/historical/phone_call_made');
 minispade.require('radium/templates/feed/historical/deal_scheduled_for');
 minispade.require('radium/templates/feed/historical/campaign_scheduled_for');
 
+minispade.require('radium/templates/feed/details/details_layout');
+minispade.require('radium/templates/feed/details/todo_details');
+minispade.require('radium/templates/feed/details/meeting_details');
+minispade.require('radium/templates/feed/details/deal_details');
+minispade.require('radium/templates/feed/details/campaign_details');
+minispade.require('radium/templates/feed/details/call_list_details');
+
 // Forms
 minispade.require('radium/templates/forms/form_layout');
 minispade.require('radium/templates/forms/fieldset');
