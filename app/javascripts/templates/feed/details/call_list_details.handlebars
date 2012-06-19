@@ -1,6 +1,6 @@
-<strong>Users in this list</strong>
+<dl class="dl-horizontal">
 {{#if users.length}}
-  {{#each users}}
-    <a href="/users/{{unbound id}}">{{abbrName}}</a><br>
-  {{/each}}
+  <dt>Users:</dt>
+  <dd>{{#each users}}<a href="/users/{{unbound id}}">{{abbrName}}</a> {{/each}}</dd>
 {{/if}}
+</dl>
