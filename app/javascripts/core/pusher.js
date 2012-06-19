@@ -79,7 +79,6 @@ Radium.Pusher = Ember.Object.create({
     events.forEach(function(act){
       instance.channel('stream-' + $.cookie('user_api_key')).emit('created', act);
     });
-
   },
   feedUpdate: function(data){
     console.log('feed update');
