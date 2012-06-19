@@ -18,7 +18,7 @@ Radium.FeedItemView = Ember.ContainerView.extend({
         commentsView = this.get('commentsView');
 
     if (this.get('isActionsVisible')) {
-      childViews.pushObjects([commentsView, infoView]);
+      childViews.pushObjects([infoView, commentsView]);
     } else if (childViews.get('length')) {
       childViews.removeObject(todoForm);
       $.when(commentsView.slideUp())

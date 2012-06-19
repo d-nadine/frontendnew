@@ -1,3 +1,5 @@
-<div class="span5 offset1">
-  {{yield}}
+<div class="well feed-info">
+  {{#with parentView.content}}
+    {{yield}}
+  {{/with}}
 </div>

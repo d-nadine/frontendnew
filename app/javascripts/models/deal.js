@@ -21,6 +21,22 @@ Radium.Deal = Radium.Core.extend({
   products: DS.hasMany('Radium.Product'),
   activities: DS.hasMany('Radium.Activity'),
   overdue: DS.attr('boolean'),
+
+  isPending: function() {
+    return this.get('state') === 'pending';
+  }.property('state'),
+
+  isClosed: function() {
+    return this.get('state') === 'closed';
+  }.property('state'),
+
+  isPaid: function() {
+    return this.get('state') === 'paid';
+  }.property('state'),
+
+  isRejected: function() {
+    return this.get('state') === 'rejected';
+  }.property('state'),
   /**
     Checks to see if the Deal has passed it's close by date.
     @return {Boolean}
