@@ -8,9 +8,7 @@
   <i class="pull-left activity-icon icon-todo"></i>
 {{/if}}
 
-{{#if canComplete}}
-  {{view view.checkboxView}}
-{{/if}}
+{{view view.checkboxView}}
 {{#if reference.contact}}
  {{view Radium.LabelView labelBinding="reference.contact.status"}}
 {{/if}}
