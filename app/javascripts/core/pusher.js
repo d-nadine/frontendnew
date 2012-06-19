@@ -25,27 +25,27 @@ Radium.Pusher = Ember.Object.create({
     // streamChannel.bind('updated', this.streamUpdated);
   },
   sendDummyPushes: function(){
-    var events = [{"event":"created","data":{"meeting":{"id":24,"created_at":"2012-06-18T14:53:38Z","updated_at":
-                    "2012-06-18T14:53:38Z","topic":"Yet Another meeting","location":"Location",
-                    "starts_at":"2012-06-18T01:02:00Z","ends_at":"2012-06-18T01:02:00Z","meta":{},
+    var events = [{"event":"created","data":{"meeting":{"id":24,"created_at":"2012-06-19T14:53:38Z","updated_at":
+                    "2012-06-19T14:53:38Z","topic":"THIS SHOULD STAND OUT!!!!!!!!!!!","location":"Location",
+                    "starts_at":"2012-06-19T01:02:00Z","ends_at":"2012-06-19T01:02:00Z","meta":{},
                     "contacts":[],"users":[1082],
-                    "invitations":[{"id":34,"created_at":"2012-06-18T14:53:38Z",
-                    "updated_at":"2012-06-18T14:53:38Z","state":"confirmed",
+                    "invitations":[{"id":34,"created_at":"2012-06-19T14:53:38Z",
+                    "updated_at":"2012-06-19T14:53:38Z","state":"confirmed",
                     "hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},
                     "comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}},"channel":"stream-feed_demo"},
-                    {"event":"created","data":{"activity":{"id":56421,"created_at":"2012-06-18T14:53:38Z",
-                    "updated_at":"2012-06-18T14:53:38Z","kind":"meeting","tag":"scheduled_for",
-                    "scheduled":true,"timestamp":"2012-06-18T01:02:00Z","meta":{},"comments":[],"owner":null,
-                    "reference":{"meeting":{"id":24,"created_at":"2012-06-18T14:53:38Z","updated_at":"2012-06-18T14:53:38Z",
-                    "topic":"Yet Another meeting","location":"Location","starts_at":"2012-06-18T01:02:00Z",
-                    "ends_at":"2012-06-18T01:02:00Z","meta":{},"contacts":[],"users":[1082],
-                    "invitations":[{"id":34,"created_at":"2012-06-18T14:53:38Z","updated_at":"2012-06-18T14:53:38Z",
+                    {"event":"created","data":{"activity":{"id":56421,"created_at":"2012-06-19T14:53:38Z",
+                    "updated_at":"2012-06-19T14:53:38Z","kind":"meeting","tag":"scheduled_for",
+                    "scheduled":true,"timestamp":"2012-06-19T01:02:00Z","meta":{},"comments":[],"owner":null,
+                    "reference":{"meeting":{"id":24,"created_at":"2012-06-19T14:53:38Z","updated_at":"2012-06-19T14:53:38Z",
+                    "topic":"Yet Another meeting","location":"Location","starts_at":"2012-06-19T01:02:00Z",
+                    "ends_at":"2012-06-19T01:02:00Z","meta":{},"contacts":[],"users":[1082],
+                    "invitations":[{"id":34,"created_at":"2012-06-19T14:53:38Z","updated_at":"2012-06-19T14:53:38Z",
                     "state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198",
                     "meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}}}},
                     "channel":"stream-feed_demo"},
-                    {"event":"created","data":{"activity":{"id":56423,"created_at":"2012-06-18T14:53:39Z",
-                    "updated_at":"2012-06-18T14:53:39Z","kind":"invitation","tag":"created","scheduled":false,
-                    "timestamp":"2012-06-18T14:53:38Z","meta":{},"comments":[],
+                    {"event":"created","data":{"activity":{"id":56423,"created_at":"2012-06-19T14:53:39Z",
+                    "updated_at":"2012-06-19T14:53:39Z","kind":"invitation","tag":"created","scheduled":false,
+                    "timestamp":"2012-06-19T14:53:38Z","meta":{},"comments":[],
                     "owner":{"user":{"id":1082,"created_at":"2012-06-14T16:02:47Z","updated_at":"2012-06-14T16:02:47Z",
                     "name":"Angela Marshall","email":"demo@feed-demo.com","phone":"127407572326",
                     "public":true,"meta":{"feed":{"start_date":"2012-05-14","end_date":"2013-06-14",
@@ -53,10 +53,10 @@ Radium.Pusher = Ember.Object.create({
                     "avatar":{"small_url":"/images/fallback/small_default.png",
                     "medium_url":"/images/fallback/medium_default.png",
                     "large_url":"/images/fallback/large_default.png",
-                    "huge_url":"/images/fallback/huge_default.png"},"account":27}},"reference":{"invitation":{"id":34,"created_at":"2012-06-18T14:53:38Z","updated_at":"2012-06-18T14:53:38Z","state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}}}},"channel":"stream-feed_demo"},
-                     {"event":"created","data":{"activity":{"id":56422,"created_at":"2012-06-18T14:53:39Z",
-                      "updated_at":"2012-06-18T14:53:39Z","kind":"meeting","tag":"created",
-                      "scheduled":false,"timestamp":"2012-06-18T14:53:38Z","meta":{},"comments":[],
+                    "huge_url":"/images/fallback/huge_default.png"},"account":27}},"reference":{"invitation":{"id":34,"created_at":"2012-06-19T14:53:38Z","updated_at":"2012-06-19T14:53:38Z","state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}}}},"channel":"stream-feed_demo"},
+                     {"event":"created","data":{"activity":{"id":56422,"created_at":"2012-06-19T14:53:39Z",
+                      "updated_at":"2012-06-19T14:53:39Z","kind":"meeting","tag":"created",
+                      "scheduled":false,"timestamp":"2012-06-19T14:53:38Z","meta":{},"comments":[],
                       "owner":{"user":{"id":1082,"created_at":"2012-06-14T16:02:47Z",
                       "updated_at":"2012-06-14T16:02:47Z","name":"Angela Marshall",
                       "email":"demo@feed-demo.com","phone":"127407572326","public":true,
@@ -65,12 +65,12 @@ Radium.Pusher = Ember.Object.create({
                       "avatar":{"small_url":"/images/fallback/small_default.png","medium_url":
                       "/images/fallback/medium_default.png","large_url":"/images/fallback/large_default.png",
                       "huge_url":"/images/fallback/huge_default.png"},"account":27}},
-                      "reference":{"meeting":{"id":24,"created_at":"2012-06-18T14:53:38Z",
-                        "updated_at":"2012-06-18T14:53:38Z","topic":"Yet Another meeting",
-                        "location":"Location","starts_at":"2012-06-18T01:02:00Z","ends_at":
-                        "2012-06-18T01:02:00Z","meta":{},"contacts":[],"users":[1082],
-                        "invitations":[{"id":34,"created_at":"2012-06-18T14:53:38Z",
-                        "updated_at":"2012-06-18T14:53:38Z","state":"confirmed",
+                      "reference":{"meeting":{"id":24,"created_at":"2012-06-19T14:53:38Z",
+                        "updated_at":"2012-06-19T14:53:38Z","topic":"Yet Another meeting",
+                        "location":"Location","starts_at":"2012-06-19T01:02:00Z","ends_at":
+                        "2012-06-19T01:02:00Z","meta":{},"contacts":[],"users":[1082],
+                        "invitations":[{"id":34,"created_at":"2012-06-19T14:53:38Z",
+                        "updated_at":"2012-06-19T14:53:38Z","state":"confirmed",
                         "hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},
                         "comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}}}},
                      "channel":"stream-feed_demo"}];
@@ -109,11 +109,23 @@ Radium.Events = Ember.Object.create({
       this.insertActivity(push.data.activity);
     }else{
       this.insertReference(push.data[this.getReferenceType(push.data)]);
-      var date = this.meeting.updated_at;
     }
   },
   insertReference: function(reference){
-    console.log('')
+    debugger;
+    Radium.store.load(Radium.Meeting, reference);
+
+    var model = Radium.store.find(Radium.Meeting, reference.id);
+
+    var date = Ember.DateTime.parse(reference.updated_at, '%Y-%m-%d');
+
+    var differenceInDays = Ember.DateTime.differenceInDays(date, Ember.DateTime.create({}));
+
+    var isToday = (differenceInDays === 0);
+
+    if(isToday){
+      Radium.get('scheduledActivitiesController').get('content').insertAt(0, model);
+    }
   },
   insertActivity: function(activity){
     console.log(activity);

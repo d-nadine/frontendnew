@@ -16,7 +16,7 @@ Radium.AppController = Ember.Object.extend({
     //TODO: Do we need to include the timezone?
     var start_date = Ember.DateTime.parse(feed.start_date, '%Y-%m-%d'),
         end_date = Ember.DateTime.parse(feed.end_date, '%Y-%m-%d'),
-        diffDays = Ember.DateTime.DifferenceInDays(start_date, end_date),
+        diffDays = Ember.DateTime.differenceInDays(start_date, end_date),
         date_ranges = Ember.A(),
         days_to_advance = -1,
         interval = 1;
