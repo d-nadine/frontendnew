@@ -108,16 +108,19 @@ Radium.Events = Ember.Object.create({
     if(push.data.hasOwnProperty('activity')){
       this.insertActivity(push.data.activity);
     }else{
-      this.insertReference(push.data[this.getReferenceType(push.data)]);
+      this.insertReference(push.data);
     }
   },
-  insertReference: function(reference){
+  insertReference: function(push){
     debugger;
-    Radium.store.load(Radium.Meeting, reference);
 
-    var model = Radium.store.find(Radium.Meeting, reference.id);
+    var details = this.getReferenceDetails(push);
 
-    var date = Ember.DateTime.parse(reference.updated_at, '%Y-%m-%d');
+    Radium.store.load(details.model, details.reference);
+
+    var model = Radium.store.find(Radium.Meeting, details.reference.id);
+
+    var date = Ember.DateTime.parse(details.reference.updated_at, '%Y-%m-%d');
 
     var differenceInDays = Ember.DateTime.differenceInDays(date, Ember.DateTime.create({}));
 
@@ -130,11 +133,11 @@ Radium.Events = Ember.Object.create({
   insertActivity: function(activity){
     console.log(activity);
   },
-  getReferenceType: function(data){
+  getReferenceDetails: function(data){
     if(data.hasOwnProperty('meeting')){
-      return 'meeting';
+      return {reference: data['meeting'], model: Radium.Meeting};
     }else if(data.hasOwnProprty('todo')){
-      return 'todo';
+      return {reference: data['todo'], model: Radium.Todo};
     }
 
     throw new Error('Unkown reference passed to pusher.getReferenceType');
