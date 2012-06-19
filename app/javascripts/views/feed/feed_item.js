@@ -13,14 +13,14 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   commentsVisibilityDidChange: function() {
     var self = this,
         childViews = this.get('childViews'),
-        todoForm = this.get('todoForm'),
+        editView = this.get('editView'),
         infoView = this.get('infoView'),
         commentsView = this.get('commentsView');
 
     if (this.get('isActionsVisible')) {
       childViews.pushObjects([infoView, commentsView]);
     } else if (childViews.get('length')) {
-      childViews.removeObject(todoForm);
+      childViews.removeObject(editView);
       $.when(commentsView.slideUp())
         .then(function() {
           childViews.removeObjects([commentsView, infoView]);
@@ -30,7 +30,12 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   }.observes('isActionsVisible'),
 
   showTodoForm: function(event) {
-    this.get('childViews').pushObject(this.get('todoForm'));
+    this.get('childViews').pushObject(this.get('editView'));
+    return false;
+  },
+
+  edit: function(event) {
+    this.get('childViews').insertAt(1, this.get('editView'));
     return false;
   },
 

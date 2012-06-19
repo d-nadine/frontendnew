@@ -17,6 +17,7 @@
 </div> <!-- /.row -->
 {{#if isActionsVisible}}
   <p class="feed-actions">
+    <a href="#" {{action "edit" target="parentView"}}><i class="icon-edit"></i> Edit</a> 
     <a href="#" {{action "showTodoForm" target="parentView"}}><i class="icon-add-todo"></i> Add Todo</a>
   </p>
 {{/if}}
