@@ -20,6 +20,13 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
       }
     }));
 
+    this.set('infoView', Ember.View.create({
+      isVisibleBinding: 'parentView.isActionsVisible',
+      content: this.get('content'),
+      layoutName: 'details_layout',
+      templateName: kind + '_details'
+    }));
+
     // Assign the comments
     this.setPath('commentsController.content', this.getPath('content.comments'));
   }

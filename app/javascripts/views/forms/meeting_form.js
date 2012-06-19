@@ -22,12 +22,10 @@ Radium.MeetingForm = Radium.FormView.extend({
   }),
 
   locationField: Radium.Fieldset.extend({
-    errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, {
-      classNames: ['span8'],
+    formField: Ember.TextField.extend({
+      classNames: ['span3'],
       elementId: 'location',
       nameBinding: 'parentView.fieldAttributes',
-      rules: ['required'],
       valueBinding: 'parentView.parentView.locationValue'
     })
   }),

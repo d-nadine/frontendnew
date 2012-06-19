@@ -1,94 +1,88 @@
 {{profile}}
-{{time "contacts"}}
-<div class="row">
-  <div id="sidebar" class="span3">
+{{time "timing"}}
 
-  </div> <!-- /#sidebar -->
+{{view Radium.AnnouncementsView}}
 
-  <div id="content" class="span9">
-    {{view Radium.AnnouncementsView}}
-
-    {{#view Radium.ContactsToolbarView}}
-      <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
-        {{#view lettersFilter}}
-        <div class="btn-group">
-          {{#view letterButton class="btn" letter="A"}}A{{/view}}
-          {{#view letterButton class="btn" letter="B"}}B{{/view}}
-          {{#view letterButton class="btn" letter="C"}}C{{/view}}
-          {{#view letterButton class="btn" letter="D"}}D{{/view}}
-          {{#view letterButton class="btn" letter="E"}}E{{/view}}
-          {{#view letterButton class="btn" letter="F"}}F{{/view}}
-          {{#view letterButton class="btn" letter="G"}}G{{/view}}
-          {{#view letterButton class="btn" letter="H"}}H{{/view}}
-          {{#view letterButton class="btn" letter="I"}}I{{/view}}
-          {{#view letterButton class="btn" letter="J"}}J{{/view}}
-          {{#view letterButton class="btn" letter="K"}}K{{/view}}
-          {{#view letterButton class="btn" letter="L"}}L{{/view}}
-          {{#view letterButton class="btn" letter="M"}}M{{/view}}
-          {{#view letterButton class="btn" letter="N"}}N{{/view}}
-          {{#view letterButton class="btn" letter="O"}}O{{/view}}
-          {{#view letterButton class="btn" letter="P"}}P{{/view}}
-          {{#view letterButton class="btn" letter="Q"}}Q{{/view}}
-          {{#view letterButton class="btn" letter="R"}}R{{/view}}
-          {{#view letterButton class="btn" letter="S"}}S{{/view}}
-          {{#view letterButton class="btn" letter="T"}}T{{/view}}
-          {{#view letterButton class="btn" letter="U"}}U{{/view}}
-          {{#view letterButton class="btn" letter="V"}}V{{/view}}
-          {{#view letterButton class="btn" letter="W"}}W{{/view}}
-          {{#view letterButton class="btn" letter="X"}}X{{/view}}
-          {{#view letterButton class="btn" letter="Y"}}Y{{/view}}
-          {{#view letterButton class="btn" letter="Z"}}Z{{/view}}
-        </div>
-        {{/view}}
-      </div> <!-- /#alpha -->
-      <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
-        <div class="pull-left">
-          <div class="btn-group">
-            {{#view selectAllButton class="btn btn-small"}}
-              <i class="icon-ok-circle"></i> All
-            {{/view}}
-            {{#view selectNoneButton class="btn btn-small"}}
-             <i class="icon-remove-circle"></i> None
-            {{/view}}
-          </div>
-          {{#if Radium.contactsController.selectedContacts.length}}
-            <div class="btn-group">
-              <button {{action "showEmailForm" 
-                target="Radium.FormContainerView"
-                context="Radium.contactsController"
-              }} class="btn btn-small">Send Email</button>
-              <button {{action 
-                  "showTodoForm" 
-                  target="Radium.FormContainerView"
-                  context="Radium.contactsController"
-                }} class="btn btn-small">
-                Add Todo
-              </button>
-              <button {{action "showAddToGroupForm" target="Radium.FormContainerView"}} class="btn btn-small">Add to Group</button>
-            </div>
-          {{/if}}
-        </div>
-      </div>
-      <div class="btn-toolbar pull-right">
-        {{#view totalSelected}}
-          <h5>{{totalSelectedString}} selected.</h5>
-        {{/view}}
-      </div>
-    {{/view}}
-    <div id="form-container"></div>
-    <div id="contacts" class="row">
-      {{#with Radium.contactsController}}
-        {{#if selectedCampaign}}
-          <div class="span9">
-            <div class="page-header">
-              <h3>{{selectedCampaign.name}}'s Contacts</h3>
-            </div>
-          </div>
-        {{/if}}
-        {{collection contentBinding="content" itemViewClass="Radium.ContactCardView" }}
-      {{/with}}
+{{#view Radium.ContactsToolbarView}}
+  <div id="alpha" class="btn-toolbar" style="margin-bottom: 9px">
+    {{#view lettersFilter}}
+    <div class="btn-group">
+      {{#view letterButton class="btn" letter="A"}}A{{/view}}
+      {{#view letterButton class="btn" letter="B"}}B{{/view}}
+      {{#view letterButton class="btn" letter="C"}}C{{/view}}
+      {{#view letterButton class="btn" letter="D"}}D{{/view}}
+      {{#view letterButton class="btn" letter="E"}}E{{/view}}
+      {{#view letterButton class="btn" letter="F"}}F{{/view}}
+      {{#view letterButton class="btn" letter="G"}}G{{/view}}
+      {{#view letterButton class="btn" letter="H"}}H{{/view}}
+      {{#view letterButton class="btn" letter="I"}}I{{/view}}
+      {{#view letterButton class="btn" letter="J"}}J{{/view}}
+      {{#view letterButton class="btn" letter="K"}}K{{/view}}
+      {{#view letterButton class="btn" letter="L"}}L{{/view}}
+      {{#view letterButton class="btn" letter="M"}}M{{/view}}
+      {{#view letterButton class="btn" letter="N"}}N{{/view}}
+      {{#view letterButton class="btn" letter="O"}}O{{/view}}
+      {{#view letterButton class="btn" letter="P"}}P{{/view}}
+      {{#view letterButton class="btn" letter="Q"}}Q{{/view}}
+      {{#view letterButton class="btn" letter="R"}}R{{/view}}
+      {{#view letterButton class="btn" letter="S"}}S{{/view}}
+      {{#view letterButton class="btn" letter="T"}}T{{/view}}
+      {{#view letterButton class="btn" letter="U"}}U{{/view}}
+      {{#view letterButton class="btn" letter="V"}}V{{/view}}
+      {{#view letterButton class="btn" letter="W"}}W{{/view}}
+      {{#view letterButton class="btn" letter="X"}}X{{/view}}
+      {{#view letterButton class="btn" letter="Y"}}Y{{/view}}
+      {{#view letterButton class="btn" letter="Z"}}Z{{/view}}
     </div>
-  </div> <!-- /#content -->
-</div> <!-- /.row -->
-{{timeEnd "contacts"}}
+    {{/view}}
+  </div> <!-- /#alpha -->
+  <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
+    <div class="pull-left">
+      <div class="btn-group">
+        {{#view selectAllButton class="btn btn-small"}}
+          <i class="icon-ok-circle"></i> All
+        {{/view}}
+        {{#view selectNoneButton class="btn btn-small"}}
+         <i class="icon-remove-circle"></i> None
+        {{/view}}
+      </div>
+      {{#if Radium.contactsController.selectedContacts.length}}
+        <div class="btn-group">
+          <button {{action "showEmailForm" 
+            target="Radium.FormContainerView"
+            context="Radium.contactsController"
+          }} class="btn btn-small">Send Email</button>
+          <button {{action 
+              "showTodoForm" 
+              target="Radium.FormContainerView"
+              context="Radium.contactsController"
+            }} class="btn btn-small">
+            Add Todo
+          </button>
+          <button {{action "showAddToGroupForm" target="Radium.FormContainerView"}} class="btn btn-small">Add to Group</button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="btn-toolbar pull-right">
+    {{#view totalSelected}}
+      <h5>{{totalSelectedString}} selected.</h5>
+    {{/view}}
+  </div>
+{{/view}}
+<div id="form-container"></div>
+<div id="contacts" class="row">
+  {{#with Radium.contactsController}}
+    {{#if selectedCampaign}}
+      <div class="span9">
+        <div class="page-header">
+          <h3>{{selectedCampaign.name}}'s Contacts</h3>
+        </div>
+      </div>
+    {{/if}}
+    {{collection contentBinding="content" itemViewClass="Radium.ContactCardView" }}
+  {{/with}}
+</div>
+
+{{timeEnd "timing"}}
 {{profileEnd}}

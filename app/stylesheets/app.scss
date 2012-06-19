@@ -127,6 +127,15 @@
   border-radius: 0 0 4px 4px;
 }
 
+#sidebar {
+  position: fixed;
+  z-index: 10;
+  top: 60px;
+  bottom: 0;
+  overflow-y: scroll;
+  background: #eee;
+}
+
 .module {
   text-shadow: 0 1px 0 white;
   border: 1px solid #EEE;
@@ -227,7 +236,7 @@ li.main-filter-item {
 }
 
 #form-container {
-  margin: 20px 0 20px -350px;
+  margin: 20px 0 20px -230px;
   position: absolute;
   top: 10%;
   left: 50%;
@@ -237,7 +246,6 @@ li.main-filter-item {
     width: 660px;
     position: relative;
     display: inline-block;
-    @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
   }
 
   button.close-form {
@@ -314,6 +322,31 @@ li.main-filter-item {
 
 fieldset legend {
   font-size: 15px;
+}
+
+.meeting-date-picker {
+  width: 100%;
+  display: inline-block;
+  clear: both;
+
+  .pull-left {
+    max-width: 200px;
+    margin-right: 15px;
+  }
+
+  select {
+    float: left;
+    margin: 23px 0 0 5px;
+  }
+
+  fieldset {
+    float: left;
+    clear: none;
+  }
+}
+
+#main-feed {
+  position: relative;
 }
 
 #feed .page-header h2 small {

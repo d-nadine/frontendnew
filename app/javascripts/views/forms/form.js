@@ -22,6 +22,13 @@ Radium.FormView = Ember.View.extend({
 
   // Actions and basic states. Send notifications and control the submi
   didInsertElement: function() {
+    if (this.get('isGlobalLevelForm')) {
+      $('#main-feed').animate({
+        top: this.$().height() + 100
+      }, 'fast');
+    }
+
+    this.$().hide().slideDown('fast');
     this.$('fieldset:first').find('input:text, textarea').first().focus();
   },
 

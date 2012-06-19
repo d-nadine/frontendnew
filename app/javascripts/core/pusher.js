@@ -19,9 +19,10 @@ Radium.Pusher = Ember.Object.create({
 
     var streamChannel = this.pusher.subscribe('stream-' + $.cookie('user_api_key'));
 
-    streamChannel.bind('created', this.streamCreated);
+    streamChannel.bind_all(this.streamReceive);
+    // streamChannel.bind('created', this.streamCreated);
 
-    streamChannel.bind('updated', this.streamUpdated);
+    // streamChannel.bind('updated', this.streamUpdated);
   },
   sendDummyPushes: function(){
     var events = [{"event":"created","data":{"meeting":{"id":24,"created_at":"2012-06-18T14:53:38Z","updated_at":
@@ -83,9 +84,19 @@ Radium.Pusher = Ember.Object.create({
   feedUpdate: function(data){
     console.log('feed update');
   },
-  streamCreated: function(data){
-    console.log(data);
-  },
+  streamReceive: function(evt, data){
+    if(Radium.Pusher.streamChannelEvents.indexOf(evt) === -1){
+      console.log(evt);
+      return;
+    }
+
+    var method = 'stream' + evt.charAt(0).toUpperCase() + evt.slice(1);
+
+    Radium.Events[method](data);
+  }
+});
+
+Radium.Events = Ember.Object.create({
   streamUpdated: function(data){
     console.log(data);
   },
@@ -93,10 +104,27 @@ Radium.Pusher = Ember.Object.create({
     console.log('in deleted');
     console.log(data);
   },
-  streamReceive: function(evt, data){
-    if(Radium.Pusher.streamChannelEvents.indexOf(evt) === -1){
-      console.log(evt);
-      return;
+  streamCreated: function(push){
+    if(push.data.hasOwnProperty('activity')){
+      this.insertActivity(push.data.activity);
+    }else{
+      this.insertReference(push.data[this.getReferenceType(push.data)]);
+      var date = this.meeting.updated_at;
     }
+  },
+  insertReference: function(reference){
+    console.log('')
+  },
+  insertActivity: function(activity){
+    console.log(activity);
+  },
+  getReferenceType: function(data){
+    if(data.hasOwnProperty('meeting')){
+      return 'meeting';
+    }else if(data.hasOwnProprty('todo')){
+      return 'todo';
+    }
+
+    throw new Error('Unkown reference passed to pusher.getReferenceType');
   }
 });

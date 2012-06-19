@@ -13,13 +13,17 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   commentsVisibilityDidChange: function() {
     var self = this,
         childViews = this.get('childViews'),
+        todoForm = this.get('todoForm'),
+        infoView = this.get('infoView'),
         commentsView = this.get('commentsView');
+
     if (this.get('isActionsVisible')) {
-      childViews.pushObject(commentsView);
+      childViews.pushObjects([commentsView, infoView]);
     } else if (childViews.get('length')) {
+      childViews.removeObject(todoForm);
       $.when(commentsView.slideUp())
         .then(function() {
-          childViews.removeObject(commentsView);
+          childViews.removeObjects([commentsView, infoView]);
           self.setPath('parentView.isEditMode', false);
         });
     }
@@ -31,7 +35,13 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   },
 
   close: function(event) {
-    this.get('childViews').removeObject(this.get('todoForm'));
+    var self = this,
+        todoForm = this.get('todoForm');
+
+    $.when(todoForm.$().slideUp('fast'))
+      .then(function() {
+        self.get('childViews').removeObject(todoForm);
+      });
     return false;
   },
 
@@ -39,14 +49,7 @@ Radium.FeedItemView = Ember.ContainerView.extend({
     this._super();
     // Add Todo todoForm
     this.set('todoForm', Radium.TodoForm.create({
-      didInsertElement: function() {
-        this.addObserver('parentView.isActionsVisible', function() {
-          this.close();
-        });
-      },
-      willDestroyElement: function() {
-        this.removeObserver('parentView.isActionsVisible');
-      }
+      selection: this.get('content')
     }));
 
     // Assign the content in the subclassed views
@@ -56,8 +59,8 @@ Radium.FeedItemView = Ember.ContainerView.extend({
 
     // Add the comments view.
     this.set('commentsView', Radium.InlineCommentsView.create({
-        controller: this.get('commentsController'),
-        contentBinding: 'controller.content'
-      }));
+      controller: this.get('commentsController'),
+      contentBinding: 'controller.content'
+    }));
   }
 });
