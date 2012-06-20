@@ -7,7 +7,7 @@ Radium.Events = Ember.Object.create({
     console.log(data);
   },
   streamCreated: function(push){
-    f(push.hasOwnProperty('activity')){
+    if(push.hasOwnProperty('activity')){
       if(push.activity.tag !== 'scheduled_for'){
         this.insertActivity(push.activity);
       }
