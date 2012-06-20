@@ -83,13 +83,17 @@ Radium.Events = Ember.Object.create({
         break;
       }
 
-      if(item.get('activities') && item.get('king') === activity.kind){
-        console.log('add to cluster');
+      if(item.get('activities') && item.get('kind')){
+        if(!firstCluster){
+          firstCluster = item;
+        }
+
+        if(activity === item.get('kind')){
+          console.log('add to cluster');
+        }
         return;
       }
     }
-
-    var firstCluster = mainContent.find(function(item){return item.get('activities') && item.get('kind'); })
 
     var nextIndex = (firstCluster) ? mainContent.indexOf(firstCluster) : 0;
 
