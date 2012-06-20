@@ -1,3 +1,4 @@
+* [2012-06-20 16:55 -0700] 4a7a418 - Joshua Jones: Add different notification templates.
 * [2012-06-19 21:20 -0700] 0fdc3cf - Joshua Jones: Add edit back in todos.
 * [2012-06-18 22:47 -0700] 56136e6 - Joshua Jones: Remove bottom loading indictor when loading feed items from any direction.
 * [2012-06-18 17:15 -0700] d4ae2fd - Joshua Jones: Add base structure for adding activity item info details.
