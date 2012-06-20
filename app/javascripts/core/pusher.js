@@ -20,32 +20,29 @@ Radium.Pusher = Ember.Object.create({
     var streamChannel = this.pusher.subscribe('stream-' + $.cookie('user_api_key'));
 
     streamChannel.bind_all(this.streamReceive);
-    // streamChannel.bind('created', this.streamCreated);
-
-    // streamChannel.bind('updated', this.streamUpdated);
   },
   sendDummyPushes: function(){
-    var events = [{"event":"created","data":{"meeting":{"id":24,"created_at":"2012-06-28T14:53:38Z","updated_at":
-                    "2012-06-28T14:53:38Z","topic":"THIS SHOULD STAND OUT!!!!!!!!!!!","location":"Location",
-                    "starts_at":"2012-06-28T01:02:00Z","ends_at":"2012-06-28T01:02:00Z","meta":{},
+    var events = [{"event":"created","data":{"meeting":{"id":24,"created_at":"2012-06-20T14:53:38Z","updated_at":
+                    "2012-06-20T14:53:38Z","topic":"THIS SHOULD STAND OUT!!!!!!!!!!!","location":"Location",
+                    "starts_at":"2012-06-20T01:02:00Z","ends_at":"2012-06-20T01:02:00Z","meta":{},
                     "contacts":[],"users":[1082],
-                    "invitations":[{"id":34,"created_at":"2012-06-28T14:53:38Z",
-                    "updated_at":"2012-06-28T14:53:38Z","state":"confirmed",
+                    "invitations":[{"id":34,"created_at":"2012-06-20T14:53:38Z",
+                    "updated_at":"2012-06-20T14:53:38Z","state":"confirmed",
                     "hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},
                     "comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}},"channel":"stream-feed_demo"},
-                    {"event":"created","data":{"activity":{"id":56421,"created_at":"2012-06-28T14:53:38Z",
-                    "updated_at":"2012-06-28T14:53:38Z","kind":"meeting","tag":"scheduled_for",
-                    "scheduled":true,"timestamp":"2012-06-28T01:02:00Z","meta":{},"comments":[],"owner":null,
-                    "reference":{"meeting":{"id":24,"created_at":"2012-06-28T14:53:38Z","updated_at":"2012-06-28T14:53:38Z",
-                    "topic":"Yet Another meeting","location":"Location","starts_at":"2012-06-28T01:02:00Z",
-                    "ends_at":"2012-06-28T01:02:00Z","meta":{},"contacts":[],"users":[1082],
-                    "invitations":[{"id":34,"created_at":"2012-06-28T14:53:38Z","updated_at":"2012-06-28T14:53:38Z",
+                    {"event":"created","data":{"activity":{"id":56421,"created_at":"2012-06-20T14:53:38Z",
+                    "updated_at":"2012-06-20T14:53:38Z","kind":"meeting","tag":"scheduled_for",
+                    "scheduled":true,"timestamp":"2012-06-20T01:02:00Z","meta":{},"comments":[],"owner":null,
+                    "reference":{"meeting":{"id":24,"created_at":"2012-06-20T14:53:38Z","updated_at":"2012-06-20T14:53:38Z",
+                    "topic":"Yet Another meeting","location":"Location","starts_at":"2012-06-20T01:02:00Z",
+                    "ends_at":"2012-06-20T01:02:00Z","meta":{},"contacts":[],"users":[1082],
+                    "invitations":[{"id":34,"created_at":"2012-06-20T14:53:38Z","updated_at":"2012-06-20T14:53:38Z",
                     "state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198",
                     "meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}}}},
                     "channel":"stream-feed_demo"},
-                    {"event":"created","data":{"activity":{"id":56423,"created_at":"2012-06-28T14:53:39Z",
-                    "updated_at":"2012-06-28T14:53:39Z","kind":"invitation","tag":"created","scheduled":false,
-                    "timestamp":"2012-06-28T14:53:38Z","meta":{},"comments":[],
+                    {"event":"created","data":{"activity":{"id":56423,"created_at":"2012-06-20T14:53:39Z",
+                    "updated_at":"2012-06-20T14:53:39Z","kind":"invitation","tag":"created","scheduled":false,
+                    "timestamp":"2012-06-20T14:53:38Z","meta":{},"comments":[],
                     "owner":{"user":{"id":1082,"created_at":"2012-06-14T16:02:47Z","updated_at":"2012-06-14T16:02:47Z",
                     "name":"Angela Marshall","email":"demo@feed-demo.com","phone":"127407572326",
                     "public":true,"meta":{"feed":{"start_date":"2012-05-14","end_date":"2013-06-14",
@@ -53,10 +50,10 @@ Radium.Pusher = Ember.Object.create({
                     "avatar":{"small_url":"/images/fallback/small_default.png",
                     "medium_url":"/images/fallback/medium_default.png",
                     "large_url":"/images/fallback/large_default.png",
-                    "huge_url":"/images/fallback/huge_default.png"},"account":27}},"reference":{"invitation":{"id":34,"created_at":"2012-06-28T14:53:38Z","updated_at":"2012-06-28T14:53:38Z","state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}}}},"channel":"stream-feed_demo"},
-                     {"event":"created","data":{"activity":{"id":56422,"created_at":"2012-06-28T14:53:39Z",
-                      "updated_at":"2012-06-28T14:53:39Z","kind":"meeting","tag":"created",
-                      "scheduled":false,"timestamp":"2012-06-28T14:53:38Z","meta":{},"comments":[],
+                    "huge_url":"/images/fallback/huge_default.png"},"account":27}},"reference":{"invitation":{"id":34,"created_at":"2012-06-20T14:53:38Z","updated_at":"2012-06-20T14:53:38Z","state":"confirmed","hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},"comments":[],"invitee":{"user":1082}}}}},"channel":"stream-feed_demo"},
+                     {"event":"created","data":{"activity":{"id":56422,"created_at":"2012-06-20T14:53:39Z",
+                      "updated_at":"2012-06-20T14:53:39Z","kind":"meeting","tag":"created",
+                      "scheduled":false,"timestamp":"2012-06-20T14:53:38Z","meta":{},"comments":[],
                       "owner":{"user":{"id":1082,"created_at":"2012-06-14T16:02:47Z",
                       "updated_at":"2012-06-14T16:02:47Z","name":"Angela Marshall",
                       "email":"demo@feed-demo.com","phone":"127407572326","public":true,
@@ -65,12 +62,12 @@ Radium.Pusher = Ember.Object.create({
                       "avatar":{"small_url":"/images/fallback/small_default.png","medium_url":
                       "/images/fallback/medium_default.png","large_url":"/images/fallback/large_default.png",
                       "huge_url":"/images/fallback/huge_default.png"},"account":27}},
-                      "reference":{"meeting":{"id":24,"created_at":"2012-06-28T14:53:38Z",
-                        "updated_at":"2012-06-28T14:53:38Z","topic":"Yet Another meeting",
-                        "location":"Location","starts_at":"2012-06-28T01:02:00Z","ends_at":
-                        "2012-06-28T01:02:00Z","meta":{},"contacts":[],"users":[1082],
-                        "invitations":[{"id":34,"created_at":"2012-06-28T14:53:38Z",
-                        "updated_at":"2012-06-28T14:53:38Z","state":"confirmed",
+                      "reference":{"meeting":{"id":24,"created_at":"2012-06-20T14:53:38Z",
+                        "updated_at":"2012-06-20T14:53:38Z","topic":"Yet Another meeting",
+                        "location":"Location","starts_at":"2012-06-20T01:02:00Z","ends_at":
+                        "2012-06-20T01:02:00Z","meta":{},"contacts":[],"users":[1082],
+                        "invitations":[{"id":34,"created_at":"2012-06-20T14:53:38Z",
+                        "updated_at":"2012-06-20T14:53:38Z","state":"confirmed",
                         "hash_key":"f11ed6ad40c9891558758fe852726198","meeting":24,"meta":{},
                         "comments":[],"invitee":{"user":1082}}],"attachments":[],"comments":[]}}}},
                      "channel":"stream-feed_demo"}];
@@ -93,74 +90,5 @@ Radium.Pusher = Ember.Object.create({
     var method = 'stream' + evt.charAt(0).toUpperCase() + evt.slice(1);
 
     Radium.Events[method](data);
-  }
-});
-
-Radium.Events = Ember.Object.create({
-  streamUpdated: function(data){
-    console.log(data);
-  },
-  steamDeleted: function(data){
-    console.log('in deleted');
-    console.log(data);
-  },
-  streamCreated: function(push){
-    if(push.data.hasOwnProperty('activity')){
-      this.insertActivity(push.data.activity);
-    }else{
-      this.insertReference(push.data);
-    }
-  },
-  insertReference: function(push){
-    var details = this.getReferenceDetails(push);
-
-    Radium.store.load(details.model, details.reference);
-
-    var model = Radium.store.find(Radium.Meeting, details.reference.id);
-
-    var date = Ember.DateTime.parse(details.reference.updated_at, '%Y-%m-%d');
-
-    var differenceInDays = Ember.DateTime.differenceInDays(date, Ember.DateTime.create({}));
-
-    var isToday = (differenceInDays === 0);
-
-    if(isToday){
-      Radium.getPath('scheduledActivitiesController.content').insertAt(0, model);
-      return;
-    }
-
-    var feedContent = Radium.getPath('activityFeedController.forwardContent.realContent');
-
-    var dateString = date.toFormattedString('%Y-%m-%d');
-
-    var existingDate = Radium.getPath('activityFeedController.dateHash')[dateString];
-
-    if(existingDate){
-      var nextIndex = (feedContent.indexOf(existingDate) + 1);
-
-      var nextContent = feedContent[nextIndex];
-      
-      if(Ember.isArray(nextContent)){
-        nextContent.insertAt(0, model);
-      }else{
-        feedContent.insertAt(nextIndex, Ember.A([model]));
-      } 
-      
-      return;
-    }
-    
-    Radium.get('activityFeedController').loadFeed({direction: Radium.SCROLL_FORWARD}, dateString);
-  },
-  insertActivity: function(activity){
-    console.log(activity);
-  },
-  getReferenceDetails: function(data){
-    if(data.hasOwnProperty('meeting')){
-      return {reference: data['meeting'], model: Radium.Meeting};
-    }else if(data.hasOwnProprty('todo')){
-      return {reference: data['todo'], model: Radium.Todo};
-    }
-
-    throw new Error('Unkown reference passed to pusher.getReferenceType');
   }
 });

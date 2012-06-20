@@ -63,10 +63,6 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
 
       if(isScroll){
         self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);
-
-        self.set('foundData', data.feed.clusters.length > 0);
-      }else{
-        self.set('foundData', false);
       }
 
       self.set('isLoading', false);
