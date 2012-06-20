@@ -1,4 +1,5 @@
 Radium.Campaign = Radium.Core.extend({
+  isEditable: true,
   type: 'campaign',
   name: DS.attr('string'),
   description: DS.attr('string'),

@@ -1,4 +1,5 @@
 Radium.Meeting = Radium.Core.extend({
+  isEditable: true,
   type: 'meeting',
   topic: DS.attr('string'),
   location: DS.attr('string'),

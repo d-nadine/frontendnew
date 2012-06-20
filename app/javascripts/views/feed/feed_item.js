@@ -30,12 +30,27 @@ Radium.FeedItemView = Ember.ContainerView.extend({
   }.observes('isActionsVisible'),
 
   showTodoForm: function(event) {
-    this.get('childViews').pushObject(this.get('editView'));
+    var childViews = this.get('childViews'),
+        todoForm = this.get('todoForm');
+    
+    if (childViews.indexOf(todoForm) === -1) {
+      childViews.pushObject(todoForm);
+    } else {
+      childViews.removeObject(todoForm);
+    }
+    
     return false;
   },
 
   edit: function(event) {
-    this.get('childViews').insertAt(1, this.get('editView'));
+    var childViews = this.get('childViews'),
+        editView = this.get('editView');
+
+    if (childViews.indexOf(editView) === -1) {
+      childViews.pushObject(editView);
+    } else {
+      childViews.removeObject(editView);
+    }
     return false;
   },
 

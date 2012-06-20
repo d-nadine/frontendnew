@@ -9,6 +9,7 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
         model = Radium.Utils.stringToModel(type),
         mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[model+'ViewMixin'] : Radium.Noop,
         contact = null,
+        editableTypes = ['todo', 'meeting', 'campaign', 'call_list', 'deal'],
         editView;
 
     // Embed a contact if referenced
@@ -35,10 +36,10 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       templateName: type + '_details'
     }));
     
-    if (type === 'todo') {
-      editView = Radium[model+'EditView'].create();
-    } else {
+    if (editableTypes.indexOf(type) === -1) {
       editView = Ember.View.create();
+    } else {
+      editView = Radium[model+'EditView'].create();
     }
 
     this.set('editView', editView);

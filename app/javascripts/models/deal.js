@@ -1,4 +1,5 @@
 Radium.Deal = Radium.Core.extend({
+  isEditable: true,
   type: 'deal',
   name: DS.attr('string'),
   description: DS.attr('string'),

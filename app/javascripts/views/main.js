@@ -20,6 +20,7 @@ minispade.require('radium/views/ui/inline_datepicker');
 minispade.require('radium/views/ui/label');
 minispade.require('radium/views/ui/token');
 minispade.require('radium/views/ui/small_icon');
+minispade.require('radium/views/ui/edit_text_field');
 
 // Forms
 minispade.require('radium/views/forms/form_container');
@@ -40,7 +41,14 @@ minispade.require('radium/views/forms/company_form');
 minispade.require('radium/views/forms/group_form');
 minispade.require('radium/views/forms/add_to_group');
 minispade.require('radium/views/forms/add_to_company');
-minispade.require('radium/views/forms/todo_edit');
+
+// Edit forms
+minispade.require('radium/views/forms/edit/feed_edit');
+minispade.require('radium/views/forms/edit/todo_edit');
+minispade.require('radium/views/forms/edit/call_list_edit');
+minispade.require('radium/views/forms/edit/campaign_edit');
+minispade.require('radium/views/forms/edit/deal_edit');
+minispade.require('radium/views/forms/edit/meeting_edit');
 
 // Feeds
 minispade.require('radium/views/feed/feed_item');

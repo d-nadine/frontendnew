@@ -1,4 +1,5 @@
 Radium.CallList = Radium.Core.extend({
+  isEditable: true,
   type: 'call_list',
   description: DS.attr('string'),
   finishBy: DS.attr('date', {

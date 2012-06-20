@@ -399,7 +399,10 @@ fieldset legend {
 
 .feed-info {
   clear: both;
-  margin-left: 20px;
+  margin: {
+    bottom: 10px;
+  };
+  border-bottom: 1px solid #ECECEC;
 }
 
 .feed-item {
@@ -494,9 +497,11 @@ fieldset legend {
 }
 
 .feed-item-container {
-  .radium-form {
+  .well {
+    width: 660px;
     margin-left: 20px;
     position: relative;
+    float: left;
   }
 }
 

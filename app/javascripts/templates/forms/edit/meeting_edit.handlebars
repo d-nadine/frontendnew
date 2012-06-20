@@ -1,0 +1,10 @@
+{{#with parentView.content}}
+  <label>
+    Topic: 
+    {{view Radium.EditTextField valueBinding="topic" class="span4"}}
+  </label>
+  <label>
+    Location:
+    {{view Radium.EditTextField valueBinding="location" class="span4"}}
+  </label>
+{{/with}}

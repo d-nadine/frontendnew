@@ -1,5 +1,5 @@
 Radium.Todo = Radium.Core.extend({
-
+  isEditable: true,
   hasAnimation: false,
   // TODO: Can we just get this through Ember?
   type: 'todo',
