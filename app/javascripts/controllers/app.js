@@ -11,45 +11,6 @@ Radium.AppController = Ember.Object.extend({
   account: null,
   timezone: new Date().getTimezoneOffset(),
   formContainerView: null,
-  loadActivities: function(bootstrap){
-    var feed = bootstrap.current_user.meta.feed;
-    //TODO: Do we need to include the timezone?
-    var start_date = Ember.DateTime.parse(feed.start_date, '%Y-%m-%d'),
-        end_date = Ember.DateTime.parse(feed.end_date, '%Y-%m-%d'),
-        diffDays = Ember.DateTime.differenceInDays(start_date, end_date),
-        date_ranges = Ember.A(),
-        days_to_advance = -1,
-        interval = 1;
-
-    if(diffDays <= interval){
-      date_ranges.pushObject({start: start_date.toFormattedString('%Y-%m-%d'), end: end_date.toFormattedString('%Y-%m-%d')});
-      diffDays = 0; 
-    }
-
-    while(diffDays > 0){
-      date_ranges.pushObject({start: start_date.advance({day: days_to_advance}).toFormattedString('%Y-%m-%d'), end: start_date.advance({day: (days_to_advance + interval) }).toFormattedString('%Y-%m-%d')});
-
-      days_to_advance += interval + 1;
-      diffDays -= interval;
-
-      if(diffDays < interval){
-        date_ranges.pushObject({start: start_date.advance({day: days_to_advance}).toFormattedString('%Y-%m-%d'), end: start_date.advance({day: (days_to_advance + diffDays)}).toFormattedString('%Y-%m-%d')});
-        break;
-      }
-    }
-
-    var urls = date_ranges.map(function(dateRange){
-      return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(bootstrap.current_user.id, dateRange.start, dateRange.end);
-    });
-
-    urls.forEach(function(url){    
-      $.when($.ajax({url: url})).then(function(data){
-        if(data.feed.activities.length > 0){
-          Radium.store.loadMany(Radium.Activity, data.feed.activities);
-        }
-      });
-    });
-  },
   bootstrap: function(data){
     data.feed.activities.forEach(function(activity){
       Radium.store.load(Radium.Activity, activity);
@@ -61,6 +22,9 @@ Radium.AppController = Ember.Object.extend({
     var account = Radium.store.find(Radium.Account, data.account.id),
         clusters = [];
 
+    Radium.store.loadMany(Radium.Notification, data.notifications);
+    var notifications = Radium.store.findMany(Radium.Notification, data.notifications.mapProperty('id').uniq());
+
     //kick off observers
     this.set('account', account);
     this.set('users', data.users);
@@ -70,6 +34,7 @@ Radium.AppController = Ember.Object.extend({
     this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
     this.set('feed', data.feed);
+    this.set('notifications', notifications);
   },
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),

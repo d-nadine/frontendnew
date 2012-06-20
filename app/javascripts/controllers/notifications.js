@@ -3,10 +3,12 @@
 Radium.NotificationsController = Ember.ArrayController.extend({
   init: function() {
     this._super();
-    this.set('content', Radium.store.findAll(Radium.Notification));
   },
   dismiss: function(event) {
     this.get('content').removeObject(event.view.content);
     return false;
-  }
+  },
+  bootstrapLoaded: function(){
+    this.set('content',  Radium.getPath('appController.notifications'));
+  }.observes('Radium.appController.notifications')
 });

@@ -7,13 +7,21 @@ Radium.Events = Ember.Object.create({
     console.log(data);
   },
   streamCreated: function(push){
-    if(push.hasOwnProperty('activity')){
+    f(push.hasOwnProperty('activity')){
       if(push.activity.tag !== 'scheduled_for'){
         this.insertActivity(push.activity);
       }
+    }else if(push.hasOwnProperty('notification')){
+      this.insertNotification(push.notification);
     }else{
       this.insertReference(push);
     }
+  },
+  insertNotification: function(data){
+    Radium.store.load(Radium.Notification, data);
+    var notification  = Radium.store.find(Radium.Notification, data.id);
+
+    Radium.getPath('notificationsController.content').insertAt(0, notification);
   },
   insertReference: function(push){
     var details = this.getReferenceDetails(push),
@@ -21,7 +29,6 @@ Radium.Events = Ember.Object.create({
 
     Radium.store.load(details.model, details.reference);
     var model = Radium.store.find(details.model, details.reference.id);
-
 
     if(Ember.DateTime.isToday(date)){
       Radium.getPath('scheduledActivitiesController.content').insertAt(0, model);
