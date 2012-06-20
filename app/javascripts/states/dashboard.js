@@ -12,6 +12,15 @@ Radium.DashboardPage = Ember.State.extend({
 
     Radium.get('appController').set('sideBarView', manager.get('dashBoardSideView'));
 
+    if (!manager.get('notificationsView')) {
+      manager.set('notificationsView', Radium.NotificationsView.create({
+        controller: Radium.get('notificationsController'),
+        contentBinding: 'Radium.notificationsController.content'
+      }))
+    }
+
+    Radium.get('notificationsController').set('notificationsView', manager.get('notificationsView'));
+
     this._super(manager);
   },
 

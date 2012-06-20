@@ -34,3 +34,4 @@ minispade.require('radium/models/campaign');
 minispade.require('radium/models/customfield');
 minispade.require('radium/models/calllist');
 minispade.require('radium/models/feed_group');
+minispade.require('radium/models/notification');

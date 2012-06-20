@@ -1,0 +1,7 @@
+{{#with content}}
+  <span class="time">{{formatTime updatedAt}}</span>
+  {{tag}}
+  <span class="options">
+    (<a href="#" {{action "dismiss" target="view.collectionView.parentView.controller"}}>Dismiss</a>)
+  </span>
+{{/with}}

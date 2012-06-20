@@ -218,7 +218,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
   findAll: function(store, type, options) {
     var defaults = {local: false},
         settings = $.extend({}, defaults, type);
-    if (!type.local) {
+    if (!settings.local) {
       var root = this.rootForType(type),
           plural = this.pluralize(root);
 

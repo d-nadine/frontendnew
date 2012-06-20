@@ -112,6 +112,8 @@ minispade.require('radium/templates/forms/todo_edit');
 
 // Dashboard
 minispade.require('radium/templates/dashboard/announcements');
+minispade.require('radium/templates/dashboard/notification_item');
+minispade.require('radium/templates/dashboard/notifications');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');

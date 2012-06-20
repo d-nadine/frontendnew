@@ -1,6 +1,7 @@
 minispade.require('radium/controllers/account');
 minispade.require('radium/controllers/form');
 minispade.require('radium/controllers/announcements');
+minispade.require('radium/controllers/notifications');
 minispade.require('radium/controllers/app');
 minispade.require('radium/controllers/users');
 minispade.require('radium/controllers/contacts/contacts');

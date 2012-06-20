@@ -64,6 +64,8 @@ minispade.require('radium/views/global/profile');
 
 // Dashboard
 minispade.require('radium/views/dashboard/announcements');
+minispade.require('radium/views/dashboard/notification_item');
+minispade.require('radium/views/dashboard/notifications');
 minispade.require('radium/views/dashboard/feed_filter');
 
 // Contacts
