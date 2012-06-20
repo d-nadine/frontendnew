@@ -7,10 +7,12 @@ Radium.Events = Ember.Object.create({
     console.log(data);
   },
   streamCreated: function(push){
-    if(push.data.hasOwnProperty('activity')){
-      this.insertActivity(push.data.activity);
+    if(push.hasOwnProperty('activity')){
+      if(push.activity.tag !== 'scheduled_for'){
+        this.insertActivity(push.activity);
+      }
     }else{
-      this.insertReference(push.data);
+      this.insertReference(push);
     }
   },
   insertReference: function(push){
@@ -18,7 +20,7 @@ Radium.Events = Ember.Object.create({
       date = Ember.DateTime.parse(details.reference.updated_at, '%Y-%m-%d');
 
     Radium.store.load(details.model, details.reference);
-    var model = Radium.store.find(Radium.Meeting, details.reference.id);
+    var model = Radium.store.find(details.model, details.reference.id);
 
 
     if(Ember.DateTime.isToday(date)){
@@ -104,11 +106,11 @@ Radium.Events = Ember.Object.create({
 
     return Radium.getPath('activityFeedController.dateHash')[dateString];
   },
-  getReferenceDetails: function(data){
-    if(data.hasOwnProperty('meeting')){
-      return {reference: data['meeting'], model: Radium.Meeting};
-    }else if(data.hasOwnProprty('todo')){
-      return {reference: data['todo'], model: Radium.Todo};
+  getReferenceDetails: function(reference){
+    if(reference.hasOwnProperty('meeting')){
+      return {reference: reference['meeting'], model: Radium.Meeting};
+    }else if(reference.hasOwnProperty('todo')){
+      return {reference: reference['todo'], model: Radium.Todo};
     }
 
     throw new Error('Unkown reference passed to pusher.getReferenceType');

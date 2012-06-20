@@ -28,9 +28,6 @@ Radium.DashboardPage = Ember.State.extend({
           didInsertElement: function(){
             $('html,body').scrollTop(5);
             Radium.get('activityFeedController').set('canScroll', true);
-          },
-          addMeeting: function(evt){
-            Radium.Pusher.sendDummyPushes();
           }
         }));
       }else{
