@@ -6,8 +6,10 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
         referenceType = content.get('referenceType'),
         // Manual array to keep track of which mixins are needed
         registeredMixins = ['todo'],
-        mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[Radium.Utils.stringToModel(type)+'ViewMixin'] : Radium.Noop,
-        contact = null;
+        model = Radium.Utils.stringToModel(type),
+        mixin = (registeredMixins.indexOf(type) !== -1) ? Radium[model+'ViewMixin'] : Radium.Noop,
+        contact = null,
+        editView;
 
     // Embed a contact if referenced
     if (referenceType === "contact") {
@@ -30,8 +32,16 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       isVisibleBinding: 'parentView.isActionsVisible',
       content: this.get('content'),
       layoutName: 'details_layout',
-      templateName: this.getPath('content.type') + '_details'
+      templateName: type + '_details'
     }));
+    
+    if (type === 'todo') {
+      editView = Radium[model+'EditView'].create();
+    } else {
+      editView = Ember.View.create();
+    }
+
+    this.set('editView', editView);
 
     // Assign the comments
     this.setPath('commentsController.content', this.getPath('content.comments'));

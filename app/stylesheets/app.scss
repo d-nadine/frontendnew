@@ -132,8 +132,12 @@
   z-index: 10;
   top: 60px;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   background: #eee;
+
+  &:hover {
+    overflow-y: scroll;
+  }
 }
 
 .module {
@@ -391,6 +395,11 @@ fieldset legend {
   .activity-icon {
     margin-right: 10px;
   }
+}
+
+.feed-info {
+  clear: both;
+  margin-left: 20px;
 }
 
 .feed-item {

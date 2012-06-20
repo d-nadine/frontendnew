@@ -1,4 +1,4 @@
 <i class="pull-left activity-icon icon-deal"></i>
-{{name}}
+<span {{bindAttr class=":label isPaid:label-success isClosed:label-inverse isPending:label-warning isRejected:label-important"}}>{{state}}</span> {{name}}
   
 (<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)

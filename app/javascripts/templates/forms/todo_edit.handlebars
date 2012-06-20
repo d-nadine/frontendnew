@@ -1,2 +1,4 @@
-<label>Reassign: {{view userSelect}}</label>
-<label>Due date: {{view editDueDateField}}</label>
+{{#with parentView.content}}
+  <label>Reassign: {{view view.userSelect}}</label>
+  <label>Due date: {{view view.editDueDateField}}</label>
+{{/with}}

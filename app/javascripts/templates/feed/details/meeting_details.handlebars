@@ -1,11 +1,10 @@
-{{#with parentView.content}}
-  {{#each users}}
-    {{name}}<br>
-  {{/each}}
-  {{#each contacts}}
-    {{name}}<br>
-  {{/each}}
-  {{#each invitations}}
-    {{state}}<br>
-  {{/each}}
-{{/with}}
+<dl class="dl-horizontal">
+{{#if users.length}}
+  <dt>Users:</dt>
+  <dd>{{#each users}}{{name}} {{/each}}</dd>
+{{/if}}
+{{#if contacts.length}}
+  <dt>Contacts:</dt>
+  <dd>{{#each contacts}}{{name}} {{/each}}</dd>
+{{/if}}
+</dl>

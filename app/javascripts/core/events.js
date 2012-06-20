@@ -46,7 +46,6 @@ Radium.Events = Ember.Object.create({
     } 
   },
   insertActivity: function(activity){
-    debugger;
     Radium.store.load(Radium.Activity, activity);
     
     var model = Radium.store.find(Radium.Activity, activity.id),
@@ -59,8 +58,6 @@ Radium.Events = Ember.Object.create({
       startIndex = 0;
 
       mainContent = Radium.getPath('activityFeedController.content');
- 
-      return;
     }else{
       var existingDate = this.getExistingDate(date);
 
@@ -88,19 +85,19 @@ Radium.Events = Ember.Object.create({
           firstCluster = item;
         }
 
-        if(activity === item.get('kind')){
+        if((activity.kind === item.get('kind')) && (activity.tag === item.get('tag'))){
           console.log('add to cluster');
+          return;
         }
-        return;
       }
     }
 
-    var nextIndex = (firstCluster) ? mainContent.indexOf(firstCluster) : 0;
+    var nextIndex = (firstCluster) ? mainContent.indexOf(firstCluster) : startIndex;
 
     mainContent.insertAt(nextIndex, this.getClusterFromActivity(activity));
   },
   getClusterFromActivity: function(activity){
-    return Ember.Object.create({tag:activity.tag,kind: activity.kind, count :1,"meta":null,"activities":[activity.id]});
+    return Ember.Object.create({tag:activity.tag, kind: activity.kind, count :1,"meta":null, activities: [activity.id]});
   },
   getExistingDate: function(date){
      var dateString = date.toFormattedString('%Y-%m-%d');

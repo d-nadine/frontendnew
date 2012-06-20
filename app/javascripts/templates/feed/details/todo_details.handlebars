@@ -1,0 +1,6 @@
+<dl class="dl-horizontal">
+{{#if contacts.length}}
+  <dt>Contacts:</dt>
+  <dd>{{#each contacts}}<a href="/contacts/{{unbound id}}">{{name}}</a>{{/each}}</dd>
+{{/if}}
+</dl>

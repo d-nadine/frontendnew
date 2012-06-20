@@ -8,3 +8,4 @@ tmp/
 env.sh
 deploy.log
 site/
+config/settings.yml

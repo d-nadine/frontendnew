@@ -1,0 +1,6 @@
+<dl class="dl-horizontal">
+{{#if users.length}}
+  <dt>Users:</dt>
+  <dd>{{#each users}}<a href="/users/{{unbound id}}">{{abbrName}}</a> {{/each}}</dd>
+{{/if}}
+</dl>

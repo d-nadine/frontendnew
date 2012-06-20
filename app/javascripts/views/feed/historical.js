@@ -4,12 +4,13 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
     var content = this.get('content'),
         kind = content.get('kind'),
         // Load the reference in through the store instead of accessing the nested object
-        referenceId = content.getPath('reference.' + kind + '.id');
+        referenceId = content.getPath('reference.' + kind + '.id'),
+        resource = Radium.store.find(Radium[Radium.Utils.stringToModel(kind)], referenceId);
 
     // Set up the main row header
     this.set('currentView', Radium.FeedHeaderView.create({
       content: content,
-      resource: Radium.store.find(Radium[Radium.Utils.stringToModel(kind)], referenceId),
+      resource: resource,
       userBinding: 'resource.user',
       init: function() {
         this._super();
@@ -22,7 +23,7 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
 
     this.set('infoView', Ember.View.create({
       isVisibleBinding: 'parentView.isActionsVisible',
-      content: this.get('content'),
+      content: resource,
       layoutName: 'details_layout',
       templateName: kind + '_details'
     }));
