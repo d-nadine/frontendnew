@@ -112,8 +112,19 @@ minispade.require('radium/templates/forms/todo_edit');
 
 // Dashboard
 minispade.require('radium/templates/dashboard/announcements');
+
+// Notifications
 minispade.require('radium/templates/dashboard/notification_item');
 minispade.require('radium/templates/dashboard/notifications');
+minispade.require('radium/templates/notifications/call_list_notification');
+minispade.require('radium/templates/notifications/campaign_notification');
+minispade.require('radium/templates/notifications/contact_notification');
+minispade.require('radium/templates/notifications/deal_notification');
+minispade.require('radium/templates/notifications/email_notification');
+minispade.require('radium/templates/notifications/meeting_notification');
+minispade.require('radium/templates/notifications/phone_call_notification');
+minispade.require('radium/templates/notifications/sms_notification');
+minispade.require('radium/templates/notifications/todo_notification');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');

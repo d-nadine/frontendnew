@@ -6,5 +6,34 @@ Radium.Notification = DS.Model.extend({
     key: 'updated_at'
   }),
   tag: DS.attr('string'),
-  reference: DS.attr('object')
+  todo: DS.belongsTo('Radium.Todo', {
+    embedded: true
+  }),
+  meeting: DS.belongsTo('Radium.Meeting', {
+    embedded: true
+  }),
+  campaign: DS.belongsTo('Radium.Campaign', {
+    embedded: true
+  }),
+  contact: DS.belongsTo('Radium.Contact', {
+    embedded: true,
+    key: 'contact'
+  }),
+  callList: DS.belongsTo('Radium.CallList', {
+    key: 'call_list', 
+    embedded: true
+  }),
+  phoneCall: DS.belongsTo('Radium.PhoneCall', {
+    key: 'phone_call', 
+    embedded: true
+  }),
+  email: DS.belongsTo('Radium.Email', {
+    embedded: true
+  }),
+  sms: DS.belongsTo('Radium.Sms', {
+    embedded: true
+  }),
+  deal: DS.belongsTo('Radium.Deal', {
+    embedded: true
+  })
 });
