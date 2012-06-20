@@ -122,15 +122,14 @@ minispade.require('radium/templates/dashboard/announcements');
 // Notifications
 minispade.require('radium/templates/dashboard/notification_item');
 minispade.require('radium/templates/dashboard/notifications');
-minispade.require('radium/templates/notifications/call_list_notification');
-minispade.require('radium/templates/notifications/campaign_notification');
-minispade.require('radium/templates/notifications/contact_notification');
-minispade.require('radium/templates/notifications/deal_notification');
-minispade.require('radium/templates/notifications/email_notification');
-minispade.require('radium/templates/notifications/meeting_notification');
-minispade.require('radium/templates/notifications/phone_call_notification');
-minispade.require('radium/templates/notifications/sms_notification');
-minispade.require('radium/templates/notifications/todo_notification');
+minispade.require('radium/templates/notifications/approved.following_notification');
+minispade.require('radium/templates/notifications/cancelled.meeting_notification');
+minispade.require('radium/templates/notifications/confirmed.meeting_notification');
+minispade.require('radium/templates/notifications/invited.meeting_notification');
+minispade.require('radium/templates/notifications/new.lead_notification');
+minispade.require('radium/templates/notifications/rejected.meeting_notification');
+minispade.require('radium/templates/notifications/requested.following_notification');
+minispade.require('radium/templates/notifications/rescheduled.meeting_notification');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
