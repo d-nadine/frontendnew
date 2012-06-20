@@ -9,13 +9,6 @@ Radium.NotificationsView = Ember.View.extend({
       });
     return false;
   },
-  // contentArrayDidChange: function() {
-  //   if (this.getPath('content.length')) {
-  //     this.set('isVisible', true);
-  //   } else {
-  //     this.set('isVisible', false);
-  //   }
-  // }.observes('content.length'),
   isVisible: function() {
     return (this.getPath('content.length')) ? true : false;
   }.property('content.length'),

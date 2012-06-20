@@ -1,3 +1,5 @@
+// TODO: Implement an `add` method for push notifications
+// TODO: Add ability to accept/decline invitations versus just dismisal.
 Radium.NotificationsController = Ember.ArrayController.extend({
   init: function() {
     this._super();
