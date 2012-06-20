@@ -17,7 +17,7 @@ Radium.Events = Ember.Object.create({
   },
   insertReference: function(push){
     var details = this.getReferenceDetails(push),
-      date = Ember.DateTime.parse(details.reference.updated_at, '%Y-%m-%d');
+      date = Ember.DateTime.parse(details.reference.calendar_time, '%Y-%m-%d');
 
     Radium.store.load(details.model, details.reference);
     var model = Radium.store.find(details.model, details.reference.id);
@@ -51,7 +51,7 @@ Radium.Events = Ember.Object.create({
     Radium.store.load(Radium.Activity, activity);
     
     var model = Radium.store.find(Radium.Activity, activity.id),
-        date = Ember.DateTime.parse(activity.updated_at, '%Y-%m-%d'),
+        date = Ember.DateTime.parse(activity.timestamp, '%Y-%m-%d'),
         startIndex = 0,
         mainContent = null,
         firstCluster = null;
