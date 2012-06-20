@@ -34,7 +34,8 @@ Radium.AppController = Ember.Object.extend({
     this.set('clusters', data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
     this.set('contacts', data.contacts);
     this.set('feed', data.feed);
-    this.set('notifications', notifications);
+    // Can set a mutable controller with findMany, I'm afraid
+    this.set('notifications', notifications.map(function(item) {return item;}));
   },
 
   today: Ember.DateTime.create({hour: 17, minute: 0, second: 0}),
