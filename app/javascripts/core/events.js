@@ -2,7 +2,7 @@ Radium.Events = Ember.Object.create({
   streamUpdated: function(data){
     console.log(data);
   },
-  steamDeleted: function(data){
+  streamDeleted: function(data){
     console.log('in deleted');
     console.log(data);
   },
@@ -86,7 +86,7 @@ Radium.Events = Ember.Object.create({
         }
 
         if((activity.kind === item.get('kind')) && (activity.tag === item.get('tag'))){
-          console.log('add to cluster');
+          item.get('activities').pushObject(activity.id);
           return;
         }
       }
