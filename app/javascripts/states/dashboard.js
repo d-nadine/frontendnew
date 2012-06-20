@@ -24,8 +24,10 @@ Radium.DashboardPage = Ember.State.extend({
     this._super(manager);
   },
 
-  index: Ember.State.create({
+  index: Ember.State.create({ 
     enter: function(manager) {
+
+      Radium.get('activityFeedController').set('canScroll', false);
 
       if(!manager.get('dashboardFeedView')){
         manager.set('dashboardFeedView', Ember.View.create(Radium.InfiniteScroller, {
@@ -34,13 +36,13 @@ Radium.DashboardPage = Ember.State.extend({
           controllerBinding: 'Radium.activityFeedController',
           didInsertElement: function(){
             $('html,body').scrollTop(5);
+            Radium.get('activityFeedController').set('canScroll', true);
           }
         }));
+      }else{
+        Radium.get('activityFeedController').set('canScroll', true);
       }
 
-      Radium.get('activityFeedController').set('canScroll', true);
-
-      Radium.get('activityFeedController').set('clusterview', manager.get('dashboardFeedView'));
     
       Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));
     }

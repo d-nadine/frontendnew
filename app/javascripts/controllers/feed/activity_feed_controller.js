@@ -1,6 +1,7 @@
 Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
   content: Ember.A(),
   forwardContent: Radium.FutureFeed.create(),
+  dateHash: {},
   canScroll: true,
   init: function(){
     this._super();
@@ -22,25 +23,30 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     return (this.get('canScroll') && (this.get(this.RequestDate[scrollData.direction])));
   },
 
-  loadFeed: function(scrollData){
-    if(!this.shouldScroll(scrollData)){
+  loadFeed: function(scrollData, dateToScrollTo){
+    var isScroll = (arguments.length === 1);
+
+    if(isScroll && (!this.shouldScroll(scrollData))){
       return;
     }
 
     this.set('isLoading', true);
     
-    var date = this.get(this.RequestDate[scrollData.direction]);
+    var getDate = (isScroll) ? this.get(this.RequestDate[scrollData.direction]) : dateToScrollTo;
 
-    var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), date, date);
+    var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), getDate, getDate);
     
     var self = this;
 
     var contentKey = this.RequestContent[scrollData.direction];
 
-    //TODO: Should we have a cluster ember-data model?
     $.when($.ajax({url: url})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
-        self.get(contentKey).pushObject(Ember.Object.create({dateHeader: self.get(self.RequestDate[scrollData.direction])}));
+        var dateContent = Ember.Object.create({dateHeader: getDate});
+        
+        self.get('dateHash')[getDate] = dateContent;
+        
+        self.get(contentKey).pushObject(dateContent);
       }
 
       if(data.feed.scheduled_activities.length > 0){
@@ -55,9 +61,10 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
         Radium.store.loadMany(Radium.Activity, data.feed.activities);
       }
 
-      self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);
+      if(isScroll){
+        self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);
+      }
 
-      self.set('foundData', data.feed.clusters.length > 0);
       self.set('isLoading', false);
       }).fail(function(){
         self.set('isLoading', false);

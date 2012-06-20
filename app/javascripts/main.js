@@ -19,6 +19,8 @@ Ember.ENV.CP_DEFAULT_CACHEABLE = true;
 
 minispade.require('radium/adapters/main');
 minispade.require('radium/core/radium');
+minispade.require('radium/core/pusher');
+minispade.require('radium/core/events');
 minispade.require('radium/lib/utils');
 minispade.require('radium/lib/ember-datetime-extensions');
 minispade.require('radium/mixins/main');
