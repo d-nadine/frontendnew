@@ -2,8 +2,14 @@
 // TODO: Add ability to accept/decline invitations versus just dismisal.
 Radium.NotificationsController = Ember.ArrayController.extend({
   dismiss: function(event) {
-    this.get('content').removeObject(event.view.content);
+    var notification = event.view.content;
+    this.get('content').removeObject(notification);
+    this.destroyNotification(notification);
     return false;
+  },
+  destroyNotification: function(notification) {
+    notification.destroy();
+    Radium.store.commit();
   },
   confirm: function(event) {
     var invitation = event.view.content,
@@ -11,9 +17,11 @@ Radium.NotificationsController = Ember.ArrayController.extend({
         content = this.get('content');
     $.ajax({
       url: '/api/invitation/%@/confirm'.fmt(id),
-      type: 'PUT'
+      type: 'PUT',
+      context: this
     }).success(function() {
       content.removeObject(invitation);
+      this.destroyNotification(invitation);
     });
     return false;
   },
@@ -23,9 +31,11 @@ Radium.NotificationsController = Ember.ArrayController.extend({
         content = this.get('content');
     $.ajax({
       url: '/api/invitation/%@/reject'.fmt(id),
-      type: 'PUT'
+      type: 'PUT',
+      context: this
     }).success(function() {
       content.removeObject(invitation);
+      this.destroyNotification(invitation);
     });
 
     return false;
