@@ -127,6 +127,10 @@
   border-radius: 0 0 4px 4px;
 }
 
+div.progress{
+  display: none;
+}
+
 #sidebar {
   position: fixed;
   z-index: 10;

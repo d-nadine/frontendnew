@@ -64,6 +64,9 @@ Radium.MeetingForm = Radium.FormView.extend({
                   .from('defaultDate'),
     change: function(){
       this._super();
+
+      $('.progress').show();
+
       var daysSummary = this.getPath('parentView.daysSummary');
 
       date = Ember.DateTime.parse(this.get('value'), '%Y-%m-%d');
@@ -79,6 +82,7 @@ Radium.MeetingForm = Radium.FormView.extend({
       var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), dateString, dateString);
 
       $.when($.ajax({url: url})).then(function(data){
+        $('.progress').hide();
         daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
 
         if(data.feed.scheduled_activities.length > 0){
