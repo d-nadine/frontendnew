@@ -12,6 +12,12 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
       this.set('currentView', Radium.ClusterHeaderView.create());
     }else if(this.getPath('content.dateHeader')){
       this.set('currentView', Radium.DateHeaderView.create());
+    }else if(this.getPath('content.message')){
+      var self = this;
+      this.set('currentView', Ember.View.create({
+        content: self.get('content'),
+        template: Ember.Handlebars.compile('<h4>{{content.message}}</h4>')
+      }));
     }else{
       //TODO: how do we know this is scheduled_activities
       this.set('currentView', Radium.ScheduledActivityView.create());

@@ -5,6 +5,7 @@ Radium.MeetingForm = Radium.FormView.extend({
   locationValue: null,
   startsAtValue: null,
   endsAtValue: null,
+  daysSummary: Ember.A(),
 
   isValid: function() {
     return (this.getPath('invalidFields.length')) ? false : true;
@@ -60,7 +61,38 @@ Radium.MeetingForm = Radium.FormView.extend({
     }.property().cacheable(),
     defaultDate: Ember.DateTime.create(),
     valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
-                  .from('defaultDate')
+                  .from('defaultDate'),
+    change: function(){
+      this._super();
+      var daysSummary = this.getPath('parentView.daysSummary');
+
+      date = Ember.DateTime.parse(this.get('value'), '%Y-%m-%d');
+
+      dateString = date.toFormattedString("%Y-%m-%d");
+
+      var length = daysSummary.get('length');
+
+      for(var i = (length - 1); i >= 0; i--){
+        daysSummary.removeObject(daysSummary[i]);
+      }
+
+      var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), dateString, dateString);
+
+      $.when($.ajax({url: url})).then(function(data){
+        daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
+
+        if(data.feed.scheduled_activities.length > 0){
+          daysSummary.pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
+        }else{
+          daysSummary.pushObject(Ember.Object.create({message: "Nothing Scheduled."}));
+        }
+      });
+    }
+  }),
+
+  daysActivities: Ember.CollectionView.extend({
+    contentBinding: "parentView.daysSummary",
+    itemViewClass: "Radium.ClusterListItemView"
   }),
 
   startsAtField: Radium.Fieldset.extend({
