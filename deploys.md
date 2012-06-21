@@ -1,3 +1,4 @@
+* [2012-06-21 16:54 -0700] 93b981c - Joshua Jones: Move cluster kind classname up a level.
 * [2012-06-20 17:07 -0700] c86af3e - Joshua Jones: Add deleting of notifications.
 * [2012-06-20 16:55 -0700] 4a7a418 - Joshua Jones: Add different notification templates.
 * [2012-06-19 21:20 -0700] 0fdc3cf - Joshua Jones: Add edit back in todos.
