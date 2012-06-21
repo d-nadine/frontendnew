@@ -11,6 +11,10 @@ Radium.AppController = Ember.Object.extend({
   account: null,
   timezone: new Date().getTimezoneOffset(),
   formContainerView: null,
+  getFeedUrl: function(start, end){
+    var endDate = (arguments.length === 1) ? start : end;
+    return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), start, endDate);
+  },
   bootstrap: function(data){
     data.feed.activities.forEach(function(activity){
       Radium.store.load(Radium.Activity, activity);

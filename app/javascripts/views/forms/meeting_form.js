@@ -79,9 +79,7 @@ Radium.MeetingForm = Radium.FormView.extend({
         daysSummary.removeObject(daysSummary[i]);
       }
 
-      var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), dateString, dateString);
-
-      $.when($.ajax({url: url})).then(function(data){
+      $.when($.ajax({url: Radium.get('appController').getFeedUrl(dateString)})).then(function(data){
         $('.progress').hide();
         daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
 

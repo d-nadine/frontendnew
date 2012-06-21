@@ -34,13 +34,11 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
     
     var getDate = (isScroll) ? this.get(this.RequestDate[scrollData.direction]) : dateToScrollTo;
 
-    var url = '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), getDate, getDate);
-    
     var self = this;
 
     var contentKey = this.RequestContent[scrollData.direction];
 
-    $.when($.ajax({url: url})).then(function(data){
+    $.when($.ajax({url: Radium.get('appController').getFeedUrl(getDate)})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
         var dateContent = Ember.Object.create({dateHeader: getDate});
         
