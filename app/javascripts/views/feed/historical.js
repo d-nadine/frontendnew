@@ -1,4 +1,5 @@
 Radium.HistoricalFeedView = Radium.FeedItemView.extend({
+  classNameBindings: ['content.kind'],
   init: function() {
     this._super();
     var content = this.get('content'),

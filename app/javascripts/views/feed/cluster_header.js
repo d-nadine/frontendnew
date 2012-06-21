@@ -3,7 +3,8 @@ Radium.ClusterHeaderView = Ember.View.extend({
   templateName: 'cluster_item',
   classNames: 'alert'.w(),
   classNameBindings: [
-    'isActionsVisible:expanded'
+    'isActionsVisible:expanded',
+    'content.kind'
   ],
   isActivitiesVisible: false,
   click: function() {

@@ -1,4 +1,5 @@
 Radium.FeedActivityView = Radium.FeedItemView.extend({
+  classNameBindings: ['content.type'],
   init: function() {
     this._super();
     var content = this.get('content'),
