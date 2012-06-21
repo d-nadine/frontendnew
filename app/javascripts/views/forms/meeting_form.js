@@ -52,6 +52,10 @@ Radium.MeetingForm = Radium.FormView.extend({
   }),
 
   meetingDateField: Radium.DatePickerField.extend({
+    init: function(){
+      this._super();
+      this.deleteSummary();
+    },
     elementId: 'start-date',
     viewName: 'meetingDate',
     name: 'start-date',
@@ -62,6 +66,15 @@ Radium.MeetingForm = Radium.FormView.extend({
     defaultDate: Ember.DateTime.create(),
     valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
                   .from('defaultDate'),
+    deleteSummary: function(){
+      var daysSummary = this.getPath('parentView.daysSummary');
+
+      var length = daysSummary.get('length');
+
+      for(var i = (length - 1); i >= 0; i--){
+        daysSummary.removeObject(daysSummary[i]);
+      }
+    },
     change: function(){
       this._super();
 
@@ -69,15 +82,11 @@ Radium.MeetingForm = Radium.FormView.extend({
 
       var daysSummary = this.getPath('parentView.daysSummary');
 
+      this.deleteSummary();
+
       date = Ember.DateTime.parse(this.get('value'), '%Y-%m-%d');
 
       dateString = date.toFormattedString("%Y-%m-%d");
-
-      var length = daysSummary.get('length');
-
-      for(var i = (length - 1); i >= 0; i--){
-        daysSummary.removeObject(daysSummary[i]);
-      }
 
       $.when($.ajax({url: Radium.get('appController').getFeedUrl(dateString)})).then(function(data){
         $('.progress').hide();
