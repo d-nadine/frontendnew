@@ -1,10 +1,9 @@
-<dl class="dl-horizontal">
-{{#if users.length}}
-  <dt>Users:</dt>
-  <dd>{{#each users}}{{name}} {{/each}}</dd>
-{{/if}}
-{{#if contacts.length}}
-  <dt>Contacts:</dt>
-  <dd>{{#each contacts}}{{name}} {{/each}}</dd>
-{{/if}}
-</dl>
+<ul class="unstyled">
+{{#each invitations}}
+  <li>
+    {{#if user}}{{user.name}}{{/if}}
+    {{#if contact}}{{contact.name}}{{/if}}
+     ({{state}})
+  </li>
+{{/each}}
+</ul>
