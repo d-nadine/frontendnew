@@ -1,6 +1,7 @@
 Radium.FeedEditView = Ember.View.extend({
   classNames: ['well', 'form-inline'],
   contentBinding: 'parentView.content',
+  classNameBindings: ['content.isSaving'],
   userSelect: Ember.Select.extend({
     init: function() {
       this._super();

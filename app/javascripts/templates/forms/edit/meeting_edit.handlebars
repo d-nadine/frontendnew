@@ -1,10 +1,24 @@
 {{#with parentView.content}}
-  <label>
-    Topic: 
-    {{view Radium.EditTextField valueBinding="topic" class="span4"}}
-  </label>
-  <label>
-    Location:
-    {{view Radium.EditTextField valueBinding="location" class="span4"}}
-  </label>
+  <div class="form-horizontal edit-meeting">
+    <fieldset>
+      <div class="control-group">
+        <label>Topic:</label>
+        {{view Radium.EditTextField valueBinding="topic" class="span4"}}
+      </div>
+      <div class="control-group">
+        <label>Location:</label>
+        {{view Radium.EditTextField valueBinding="location" class="span4"}}
+      </div>
+      <div class="control-group">
+        <label>Date:</label>
+        {{view view.editMeetingDateField}}
+        {{view view.startsAtField}}
+        {{view view.startsAtMeridianSelect}}
+        to
+        {{view view.endsAtField}}
+        {{!view view.endsAtMeridianSelect}}
+        <button class="btn btn-small"{{action "save"}}>Save date</button>
+      </div>
+    </fieldset>
+  </div>
 {{/with}}

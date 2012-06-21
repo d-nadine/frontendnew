@@ -305,6 +305,12 @@ li.main-filter-item {
 
 }
 
+.form-inline {
+  &.is-saving {
+    @include opacity(0.5);
+  }
+}
+
 .create-form {
   width: 700px;
   position: absolute;
@@ -506,6 +512,16 @@ fieldset legend {
     margin-left: 20px;
     position: relative;
     float: left;
+  }
+
+}
+.edit-meeting {
+  select {
+    width: 100px;
+
+    &.meridian-select {
+      width: 55px;
+    }
   }
 }
 
