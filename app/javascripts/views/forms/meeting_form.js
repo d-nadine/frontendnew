@@ -152,11 +152,11 @@ Radium.MeetingForm = Radium.FormView.extend({
           startsAt: date.adjust({
             hour: endsAtTimeArr[0],
             minute: endsAtTimeArr[0]
-          }).toISO8601(),
+          }),
           endsAt: date.adjust({
             hour: startsAtTimeArr[0],
             minute: startsAtTimeArr[0]
-          }).toISO8601(),
+          }),
           location: location,
           invite: invitees.map(function(invitee) {
             if (invitee.get('email')) {
@@ -166,7 +166,7 @@ Radium.MeetingForm = Radium.FormView.extend({
             }
           })
         };
-
+debugger;
     meeting = Radium.store.createRecord(Radium.Meeting, data);
 
     Radium.store.commit();
