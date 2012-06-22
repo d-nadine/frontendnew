@@ -1,3 +1,4 @@
+* [2012-06-22 11:30 -0700] 0395646 - Joshua Jones: Add new comment notification template.
 * [2012-06-22 10:50 -0700] 0166986 - Joshua Jones: Add missing group template from notifications.
 <<<<<<< HEAD
 * [2012-06-21 17:00 -0700] 45fe8e5 - Joshua Jones: Small change to see if new commit will fix deploy fail.
