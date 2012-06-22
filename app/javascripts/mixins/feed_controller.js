@@ -1,2 +1,2 @@
-Radium.FeedController = Ember.Mixin.create({
-)};
+Radium.FeedScroller = Ember.Mixin.create({
+});

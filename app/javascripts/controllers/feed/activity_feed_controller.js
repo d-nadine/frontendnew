@@ -1,4 +1,4 @@
-Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, {
+Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
   content: Ember.A(),
   forwardContent: Radium.FutureFeed.create(),
   dateHash: {},
