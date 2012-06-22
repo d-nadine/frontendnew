@@ -12,7 +12,9 @@ Radium.Group = Ember.State.extend({
 
       Radium.get('activityFeedController').set('canScroll', false);
 
-      Radium.get('activityFeedController').set('feedUrl', function(date){
+      Radium.set('groupFeedController', Radium.GroupFeedController.create());
+
+      Radium.get('groupFeedController').set('feedUrl', function(date){
         var resource = 'groups';
         return Radium.get('appController').getFeedUrl(resource, groupId, date);       
       });
@@ -22,15 +24,20 @@ Radium.Group = Ember.State.extend({
         }));
       }
 
+      var today = Ember.DateTime.create({}).toFormattedString('%Y-%m-%d');
+
+      Radium.get('groupFeedController').set('previous_activity_date', today);
+      Radium.get('groupFeedController').set('next_activity_date', today);
+
       Radium.get('appController').set('sideBarView', manager.get('groupSideBarView'));
 
       Radium.get('appController').set('feedView', Ember.View.create(Radium.InfiniteScroller, {
           templateName: 'group_feed',
-          contentBinding: 'Radium.activityFeedController.content',
-          controllerBinding: 'Radium.activityFeedController',
+          contentBinding: 'Radium.groupFeedController.content',
+          controllerBinding: 'Radium.groupFeedController',
           didInsertElement: function(){
             $('html,body').scrollTop(5);
-            Radium.get('activityFeedController').set('canScroll', true);
+            Radium.get('groupFeedController').set('canScroll', true);
           }
         }));
     }
