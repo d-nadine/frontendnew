@@ -40,8 +40,6 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
 
     var url = this.get('feedUrl')(getDate);
 
-    alert(url);
-
     $.when($.ajax({url: url})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
         var dateContent = Ember.Object.create({dateHeader: getDate});
