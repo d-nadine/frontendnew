@@ -15,6 +15,23 @@ Radium.AppController = Ember.Object.extend({
     var endDate = (arguments.length === 1) ? start : end;
     return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), start, endDate);
   },
+  toggleKind: function(){
+    var kind = this.get('filter');
+    var speed = 'fast';
+
+    var types = $('.meeting,.todo,.deal,.call_list,.campaign,.contact,.invitation,.phone_call');
+
+    if(!kind){
+      types.slideDown(speed);
+      return false;
+    }
+
+    var className = '.' + kind;
+
+    $(types).not(className).slideUp(speed, function(){
+      $(className).slideDown(speed);
+    });
+  },
   bootstrap: function(data){
     data.feed.activities.forEach(function(activity){
       Radium.store.load(Radium.Activity, activity);

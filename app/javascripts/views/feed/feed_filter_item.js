@@ -4,29 +4,14 @@ Radium.FeedFilterItemView = Ember.View.extend({
   classNames: ['main-filter-item'],
   classNameBindings: ['isSelected:active'],
   isSelected: function() {
-    return (this.getPath('parentView.filter') == this.getPath('content.kind')) ? true : false;
-  }.property('parentView.filter').cacheable(),
-  
-  // Actions
+    return (Radium.getPath('appController.filter') == this.getPath('content.kind')) ? true : false;
+  }.property('Radium.appController.filter').cacheable(),
   setFilter: function(event) {
     var kind = this.getPath('content.kind');
-    var speed = 'fast';
-
-    this.setPath('parentView.filter', kind);
-
-    var types = $('.meeting,.todo,.deal,.call_list,.campaign,.contact');
-
-    if(!kind){
-      types.slideDown(speed);
-      return false;
-    }
-
-    var className = '.' + kind;
-
-    $(types).not(className).slideUp(speed, function(){
-      $(className).slideDown(speed);
-    });
+    Radium.setPath('appController.filter', kind);
     
+    Radium.get('appController').toggleKind();
+
     return false;
   },
   addResourceButton: Ember.View.extend({
