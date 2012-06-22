@@ -12,8 +12,10 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
       this.set('currentView', Radium.ClusterHeaderView.create());
     }else if(this.getPath('content.dateHeader')){
       this.set('currentView', Radium.DateHeaderView.create());
+      this.classNames = [];
     }else if(this.getPath('content.message')){
       var self = this;
+      this.classNames = [];
       this.set('currentView', Ember.View.create({
         content: self.get('content'),
         template: Ember.Handlebars.compile('<h4>{{content.message}}</h4>')

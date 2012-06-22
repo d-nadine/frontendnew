@@ -10,7 +10,23 @@ Radium.FeedFilterItemView = Ember.View.extend({
   // Actions
   setFilter: function(event) {
     var kind = this.getPath('content.kind');
+    var speed = 'fast';
+
     this.setPath('parentView.filter', kind);
+
+    var types = $('.meeting,.todo,.deal,.call_list,.campaign,.contact');
+
+    if(!kind){
+      types.slideDown(speed);
+      return false;
+    }
+
+    var className = '.' + kind;
+
+    $(types).not(className).slideUp(speed, function(){
+      $(className).slideDown(speed);
+    });
+    
     return false;
   },
   addResourceButton: Ember.View.extend({
