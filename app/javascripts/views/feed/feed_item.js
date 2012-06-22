@@ -42,6 +42,18 @@ Radium.FeedItemView = Ember.ContainerView.extend({
     return false;
   },
 
+  showNoteForm: function(event) {
+    var childViews = this.get('childViews'),
+        noteView = this.get('noteView');
+
+    if (childViews.indexOf(noteView) === -1) {
+      childViews.pushObject(noteView);
+    } else {
+      childViews.removeObject(noteView);
+    }
+    return false;
+  },
+
   edit: function(event) {
     var childViews = this.get('childViews'),
         editView = this.get('editView');

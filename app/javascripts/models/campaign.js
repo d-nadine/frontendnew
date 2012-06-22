@@ -19,7 +19,7 @@ Radium.Campaign = Radium.Core.extend({
   products: DS.hasMany('Radium.Product'),
   users: DS.hasMany('Radium.User'),
   followers: DS.hasMany('Radium.User'),
-  notes: DS.hasMany('Radium.Note'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   meetings: DS.hasMany('Radium.Meeting'),
   activities: DS.hasMany('Radium.Activity'),
 

@@ -9,6 +9,7 @@ Radium.PhoneCall = Radium.Core.extend({
   contacts: DS.hasMany('Radium.Contact'),
   users: DS.hasMany('Radium.User'),
   comments: DS.hasMany('Radium.Comment'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   todos: DS.hasMany('Radium.Todo'),
   // For now, the best we can do is strip out the ID's
   callTo: function() {
