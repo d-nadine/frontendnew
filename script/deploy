@@ -6,8 +6,6 @@ ROOT = File.expand_path "../../", __FILE__
 
 LOG_FILE = "#{ROOT}/deploy.log"
 
-REQUIRED_ENV = [ :radium_server_url, :radium_api_key ]
-
 class Deploy < Thor
   include Thor::Actions
 
@@ -53,145 +51,18 @@ class Deploy < Thor
     end
   end
 
-  desc "ensure_github_connection", "Tests this user can ssh to github"
-  def ensure_github_connection
-    if run_with_status("ssh -T git@github.com").exitstatus == 1
-      pass "Github connection"
-    else
-      failure "Github SSH keys incorrect"
-    end
-  end
-
-  desc "ensure_heroku_installed", "Tests that the heroku gem is installed"
-  def ensure_heroku_installed
-    if success? "which heroku"
-      pass "Heroku gem installed"
-    else
-      failure "Heroku gem is missing. Please install with: gem install heorku"
-    end
-  end
-
-  desc "ensure_heroku_connection", "Tests this user can access heroku"
-  def ensure_heroku_connection
-    if success? "heroku config"
-      pass "Heroku connection"
-    else
-      failure %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}
-    end
-  end
-
-  desc "ensure_clean", "Test to see if the repo is clean"
-  def ensure_clean
-    if success? "git diff --exit-code"
-      pass "Working directory clean"
-    else
-      failure "There are uncommited files"
-    end
-  end
-
-  desc "ensure_heroku_outdated", "Test to see if this code has been deployed or not"
-  def ensure_heroku_outdated
-    if !success? "git diff head heroku/master --exit-code"
-      pass "Code hasn't been deployed yet"
-    else
-      failure "This commit is already deployed"
-    end
-  end
-
-  desc "ensure_fast_forward", "Tests if this is a fast forward commit"
-  def ensure_fast_forward
-    inside ROOT do
-      if success? "git pull origin master"
-        pass "Fast forwarded"
-        return true
-      else
-        run "git reset --hard HEAD"
-        failure "Could not merge. Changes reset"
-        return false
-      end
-    end
-  end
-
-  desc "ensure_environment", "Test to see if heroku is configured correctly"
-  def ensure_environment
-    inside ROOT do
-      result = run "heroku config", :capture => true
-
-      variables = result.split("\n").map { |s| s.split('=>').map(&:strip) }.inject({}) do |hash, pair|
-        hash.merge! pair[0] => pair[1]
-      end
-
-      missing = REQUIRED_ENV.select do |var|
-        variables[var.to_s.upcase].nil?
-      end
-
-      if missing.size >= 1
-        missing.each do |var|
-          failure "$#{var.to_s.upcase} is not configured on Heroku!"
-        end
-        return false
-      else
-        pass "Heroku ENV"
-        return true
-      end
-    end
-  end
-
-  desc "ensure_assets_compile", "Tests assets compile correctly"
-  def ensure_assets_compile
-    inside ROOT do
-      if success? "RAILS_ENV=production bundle exec rake assets:precompile --trace"
-        run "git reset --hard HEAD"
-        pass "Asset compilation"
-        return true
-      else
-        failure "Asset compilation failed"
-        return false
-      end
-    end
-  end
-
-  desc "record", "Records this deploy in deploys.md"
-  def record
-    inside ROOT do
-      commit_info = run('git show --format="format:%h - %an: %s"', :capture => true, :verbose => false).split("\n")[0]
-
-      format = "* [%s] %s\n"
-
-      existing_contents = File.read "#{ROOT}/deploys.md"
-
-      File.open "#{ROOT}/deploys.md", 'w' do |f|
-        f.puts format % [Time.now.strftime("%Y-%m-%d %H:%M %z"), commit_info]
-        f.puts existing_contents.chomp
-      end
-
-      say_status "Deploy Log", commit_info
-    end
-  end
-
-  desc "commit", "Commits assets and pushes to Github" 
-  def commit
-    inside ROOT do
-      run! 'git add deploys.md'
-      run! "git commit -m '[Deploy]'"
-    end
-
-    say_status "Deploy Files", "Commited"
-  end
-
-  desc "run_deploy", "Tests prereqs and runs a deploy"
+  desc "deploy", "Tests prereqs and runs a deploy"
   method_option :environment, :default => "production"
-  def run_deploy
+  def deploy
     say "Testing prereqs...."
 
-    prereqs = invoke(:ensure_clean) && 
-      invoke(:ensure_github_connection) &&
-      invoke(:ensure_heroku_installed) &&
-      invoke(:ensure_heroku_connection) &&
-      invoke(:ensure_heroku_outdated) &&
-      invoke(:ensure_fast_forward) &&
-      invoke(:ensure_environment) &&
-      invoke(:ensure_assets_compile)
+    prereqs = ensure_clean && 
+      ensure_github_connection &&
+      ensure_heroku_installed &&
+      ensure_heroku_connection &&
+      ensure_heroku_outdated &&
+      ensure_fast_forward &&
+      ensure_assets_compile
 
     if !prereqs
       abort_deploy "Preqs failed"
@@ -201,8 +72,8 @@ class Deploy < Thor
     say "Starting deploy..."
 
     begin
-      invoke :record
-      invoke :commit
+      record
+      commit
 
       inside ROOT do
         run! "git push origin master"
@@ -221,7 +92,101 @@ class Deploy < Thor
     end
   end
 
-  default_task :run_deploy
+  default_task :deploy
+
+  no_tasks do
+    def ensure_github_connection
+      if run_with_status("ssh -T git@github.com").exitstatus == 1
+        pass "Github connection"
+      else
+        failure "Github SSH keys incorrect"
+      end
+    end
+
+    def ensure_heroku_installed
+      if success? "which heroku"
+        pass "Heroku gem installed"
+      else
+        failure "Heroku gem is missing. Please install with: gem install heorku"
+      end
+    end
+
+    def ensure_heroku_connection
+      if success? "heroku config"
+        pass "Heroku connection"
+      else
+        failure %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}
+      end
+    end
+
+    def ensure_clean
+      if success? "git diff --exit-code"
+        pass "Working directory clean"
+      else
+        failure "There are uncommited files"
+      end
+    end
+
+    def ensure_heroku_outdated
+      if !success? "git diff head heroku/master --exit-code"
+        pass "Code hasn't been deployed yet"
+      else
+        failure "This commit is already deployed"
+      end
+    end
+
+    def ensure_fast_forward
+      inside ROOT do
+        if success? "git pull origin master"
+          pass "Fast forwarded"
+          return true
+        else
+          run "git reset --hard HEAD"
+          failure "Could not merge. Changes reset"
+          return false
+        end
+      end
+    end
+
+    def ensure_assets_compile
+      inside ROOT do
+        if success? "RACK_ENV=production bundle exec rake assets:precompile"
+          run "git reset --hard HEAD"
+          pass "Asset compilation"
+          return true
+        else
+          failure "Asset compilation failed"
+          return false
+        end
+      end
+    end
+
+    def record
+      inside ROOT do
+        commit_info = run('git show --format="format:%h - %an: %s"', :capture => true, :verbose => false).split("\n")[0]
+
+        format = "* [%s] %s\n"
+
+        existing_contents = File.read "#{ROOT}/deploys.md"
+
+        File.open "#{ROOT}/deploys.md", 'w' do |f|
+          f.puts format % [Time.now.strftime("%Y-%m-%d %H:%M %z"), commit_info]
+          f.puts existing_contents.chomp
+        end
+
+        say_status "Deploy Log", commit_info
+      end
+    end
+
+    def commit
+      inside ROOT do
+        run! 'git add deploys.md'
+        run! "git commit -m '[Deploy]'"
+      end
+
+      say_status "Deploy Files", "Commited"
+    end
+  end
 end
 
 Deploy.start

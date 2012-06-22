@@ -64,7 +64,12 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.BatchViewLoader, 
       }
 
       self.set('isLoading', false);
-      }).fail(function(){
+
+      //TODO: Tightly coupled.  Should be raising an event to subscribers
+      Ember.run.next(function(){
+        Radium.get('appController').toggleKind();
+      });
+    }).fail(function(){
         self.set('isLoading', false);
     });
   },

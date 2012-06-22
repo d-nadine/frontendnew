@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 * [2012-06-21 17:00 -0700] 45fe8e5 - Joshua Jones: Small change to see if new commit will fix deploy fail.
+=======
+* [2012-06-22 12:21 +0200] 11b362f - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
+>>>>>>> 757c1575c16b03a9eaada85e6c6ec49f67fff5d4
 * [2012-06-21 16:54 -0700] 93b981c - Joshua Jones: Move cluster kind classname up a level.
 * [2012-06-20 17:07 -0700] c86af3e - Joshua Jones: Add deleting of notifications.
 * [2012-06-20 16:55 -0700] 4a7a418 - Joshua Jones: Add different notification templates.

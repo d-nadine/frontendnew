@@ -166,7 +166,7 @@ Radium.MeetingForm = Radium.FormView.extend({
             }
           })
         };
-debugger;
+
     meeting = Radium.store.createRecord(Radium.Meeting, data);
 
     Radium.store.commit();
