@@ -164,9 +164,11 @@ minispade.require('radium/templates/ui/token');
 minispade.require('radium/templates/layouts/main_dash');
 minispade.require('radium/templates/nav/dashboard_sidebar');
 minispade.require('radium/templates/nav/contacts_sidebar');
+minispade.require('radium/templates/nav/group_sidebar');
 
 // feed
 minispade.require('radium/templates/feed/dashboard_feed');
 minispade.require('radium/templates/feed/date_section_header');
 minispade.require('radium/templates/feed/scheduled_activity_feed');
+minispade.require('radium/templates/feed/group_feed');
 

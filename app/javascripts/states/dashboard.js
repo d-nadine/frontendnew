@@ -29,6 +29,12 @@ Radium.DashboardPage = Ember.State.extend({
 
       Radium.get('activityFeedController').set('canScroll', false);
 
+      Radium.get('activityFeedController').set('feedUrl', function(date){
+        var id = Radium.getPath('appController.current_user.id');
+        var resource = 'users';
+        return Radium.get('appController').getFeedUrl(resource, id, date);       
+      });
+
       if(!manager.get('dashboardFeedView')){
         manager.set('dashboardFeedView', Ember.View.create(Radium.InfiniteScroller, {
           templateName: 'dashboard_feed',

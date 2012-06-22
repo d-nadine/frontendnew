@@ -11,9 +11,9 @@ Radium.AppController = Ember.Object.extend({
   account: null,
   timezone: new Date().getTimezoneOffset(),
   formContainerView: null,
-  getFeedUrl: function(start, end){
-    var endDate = (arguments.length === 1) ? start : end;
-    return '/api/users/%@/feed?start_date=%@&end_date=%@'.fmt(Radium.getPath('appController.current_user.id'), start, endDate);
+  getFeedUrl: function(resource, id, start, end){
+    var endDate = (arguments.length === 3) ? start : end;
+    return '/api/%@/%@/feed?start_date=%@&end_date=%@'.fmt(resource, id, start, endDate);
   },
   toggleKind: function(){
     var kind = this.get('filter');
