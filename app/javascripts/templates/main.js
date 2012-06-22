@@ -130,6 +130,7 @@ minispade.require('radium/templates/notifications/new.lead_notification');
 minispade.require('radium/templates/notifications/rejected.meeting_notification');
 minispade.require('radium/templates/notifications/requested.following_notification');
 minispade.require('radium/templates/notifications/rescheduled.meeting_notification');
+minispade.require('radium/templates/notifications/new.comment_notification');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
