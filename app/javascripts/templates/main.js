@@ -108,6 +108,7 @@ minispade.require('radium/templates/forms/company_form');
 minispade.require('radium/templates/forms/group_form');
 minispade.require('radium/templates/forms/add_to_group');
 minispade.require('radium/templates/forms/add_to_company');
+minispade.require('radium/templates/forms/note_form');
 
 // Edit forms
 minispade.require('radium/templates/forms/edit/call_list_edit');
@@ -130,6 +131,7 @@ minispade.require('radium/templates/notifications/new.lead_notification');
 minispade.require('radium/templates/notifications/rejected.meeting_notification');
 minispade.require('radium/templates/notifications/requested.following_notification');
 minispade.require('radium/templates/notifications/rescheduled.meeting_notification');
+minispade.require('radium/templates/notifications/new.comment_notification');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');

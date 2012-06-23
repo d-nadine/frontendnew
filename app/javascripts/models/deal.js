@@ -19,6 +19,7 @@ Radium.Deal = Radium.Core.extend({
   user: DS.belongsTo('Radium.User', {key: 'user'}),
   todos: DS.hasMany('Radium.Todo'),
   comments: DS.hasMany('Radium.Comment'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   products: DS.hasMany('Radium.Product'),
   activities: DS.hasMany('Radium.Activity'),
   overdue: DS.attr('boolean'),

@@ -11,7 +11,7 @@ Radium.Group = Radium.Core.extend({
   todos: DS.hasMany('Radium.Todo'),
   deals: DS.hasMany('Radium.Deal'),
   messages: DS.hasMany('Radium.Message'),
-  notes: DS.hasMany('Radium.Note'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   phoneCalls: DS.hasMany('Radium.PhoneCall', {
     key: 'phone_calls'
   }),

@@ -4,5 +4,6 @@ Radium.Email = Radium.Message.extend({
   from: DS.attr('array'),
   subject: DS.attr('string'),
   html: DS.attr('string'),
-  sender: DS.attr('object')
+  sender: DS.attr('object'),
+  notes: DS.hasMany('Radium.Note', {embedded: true})
 });

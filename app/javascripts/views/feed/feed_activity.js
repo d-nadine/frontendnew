@@ -36,6 +36,10 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       layoutName: 'details_layout',
       templateName: type + '_details'
     }));
+
+    this.set('noteView', Radium.NoteFormView.create({
+        contentBinding: 'parentView.content'
+    }));
     
     if (editableTypes.indexOf(type) === -1) {
       editView = Ember.View.create();

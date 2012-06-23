@@ -12,6 +12,9 @@ Radium.Core = DS.Model.extend({
   }),
   updated_at: DS.attr('datetime'),
   created_at: DS.attr('datetime'),
+  notes_attributes: DS.attr('array', {
+    defaultValue: []
+  })
 
   // @returns {Ember.DateTime}
   // rawDate: function() {
