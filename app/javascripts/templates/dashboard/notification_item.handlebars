@@ -2,7 +2,7 @@
   <span class="time">{{formatTime updatedAt}}</span>
   {{yield}}
   <span class="options">
-  {{#if isMeetingInvite}}
+  {{#if view.isMeetingInvite}}
     (<a href="#" {{action "confirm" target="view.collectionView.parentView.controller"}}>Confirm</a> | <a href="#" {{action "decline" target="view.collectionView.parentView.controller"}}>Decline</a>)
   {{else}}
     (<a href="#" {{action "dismiss" target="view.collectionView.parentView.controller"}}>Dismiss</a>)
