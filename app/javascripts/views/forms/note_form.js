@@ -1,22 +1,26 @@
-Radium.NoteFormView = Ember.View.extend({
-  classNames: ['well', 'form-inline'],
+Radium.NoteForm = Radium.FormView.extend({
   templateName: 'note_form',
   isNoteValueEmpty: true,
 
   noteField: Ember.TextArea.extend({
     classNames: ['span7'],
     viewName: 'newNoteField',
+    didInsertElement: function() {
+      this.$().autosize().css('resize','none');
+    },
     keyUp: function(event) {
-      this._super(event);
-      if (this.get('value')) {
-        this.setPath('parentView.isNoteValueEmpty', false);
+      if (this.$().val() !== '') {
+        this.setPath('parentView.isValid', true);
+        this.setPath('parentView.isError', false);
+        this.$().parent().removeClass('error');
       } else {
-        this.setPath('parentView.isNoteValueEmpty', true);
+        this.setPath('parentView.isValid', false);
       }
+      this._super(event);
     }
   }),
 
-  addNote: function(event) {
+  submitForm: function(event) {
     var noteValue = this.getPath('newNoteField.value'),
         referenceType = this.getPath('content.type'),
         referenceId = this.getPath('content.id'),
@@ -36,10 +40,11 @@ Radium.NoteFormView = Ember.View.extend({
     
     this.setPath('newNoteField.value', null);
     this.getPath('parentView.childViews').removeObject(this)
-    
-    Ember.run.next(function() {
-      Radium.store.commit();
-    });
+
+    // TODO: Re-hook up when the API is updated.
+    // Ember.run.next(function() {
+    //   Radium.store.commit();
+    // });
 
     return false;
   }
