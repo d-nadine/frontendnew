@@ -1,1 +1,8 @@
-Meeting invitation from <a href="/users/{{unbound invitation.user.id}}">{{invitation.user.name}}</a> for {{formatDate invitation.meeting.startsAt}}
+{{#with invitation.meeting}}
+  Meeting invitation for "{{topic}}" 
+  {{#if location}}
+    @ {{location}}
+  {{/if}}
+   ({{formatDate startsAt}})
+
+{{/with}}
