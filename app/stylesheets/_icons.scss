@@ -1,0 +1,90 @@
+// Icons are manually added until compass spriting works
+.icon-call,
+.icon-call-list,
+.icon-todo,
+.icon-contact,
+.icon-assigned,
+.icon-add-todo,
+.icon-edit,
+.icon-campaign,
+.icon-comments,
+.icon-meeting,
+.icon-deal,
+.icon-mail,
+.icon-overdue {
+  width: 16px;
+  height: 16px;
+  background: {
+     repeat: no-repeat;
+     position: 0 0;
+  }
+}
+
+.icon-call {
+  background-image: url('/images/icons/feed-call-todo.png');
+}
+
+.icon-call-list {
+  background-image: url('/images/icons/feed-call-list.png');
+}
+
+.icon-meeting {
+  background-image: url('/images/icons/feed-meeting.png');
+}
+
+.icon-campaign {
+  background-image: url('/images/icons/feed-campaign.png');
+}
+
+.icon-todo {
+  background-image: url('/images/icons/feed-todo.png');
+}
+
+.icon-mail {
+  background-image: url('/images/icons/mail.png');
+}
+
+.icon-deal {
+  background-image: url('/images/icons/feed-deal.png');
+}
+
+.icon-todo.icon-overdue,
+.icon-overdue {
+  background-image: url('/images/icons/feed-overdue.png');
+}
+
+.icon-contact {
+  background-image: url('/images/icons/feed-contact.png');
+}
+
+.icon-assigned {
+  background-image: url('/images/icons/feed-assigned.png');
+}
+
+.icon-comments {
+  background-image: url('/images/icons/feed-comments.png');
+}
+
+.icon-add-todo {
+  background-image: url('/images/icons/feed-add-todo.png');
+}
+
+.icon-edit {
+  background-image: url('/images/icons/edit.png');
+}
+
+.icon-inline-loading {
+  width: 16px;
+  height: 16px;
+  background-position: 0 0;
+  background-image: url('/images/icons/inline-loading.gif');
+}
+
+[class^="ember-view icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: text-top;
+  background-image: url(images/vendor/glyphicons-halflings.png);
+  background-repeat: no-repeat;
+}
