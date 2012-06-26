@@ -8,14 +8,14 @@
 */
 Radium.FeedItemView = Ember.ContainerView.extend({
   classNames: 'row feed-item-container'.w(),
-  classNameBindings: ['isActionsVisible:expanded'],
+  classNameBindings: ['isActionsVisible:expanded', 'hasDiscussions'],
   isActionsVisible: false,
+
   commentsVisibilityDidChange: function() {
     var self = this,
         childViews = this.get('childViews'),
         editView = this.get('editView'),
         infoView = this.get('infoView'),
-        noteView = this.get('noteView'),
         commentsView = this.get('commentsView');
 
     if (this.get('isActionsVisible')) {
@@ -24,7 +24,7 @@ Radium.FeedItemView = Ember.ContainerView.extend({
       childViews.removeObject(editView);
       $.when(commentsView.slideUp())
         .then(function() {
-          childViews.removeObjects([commentsView, infoView, noteView]);
+          childViews.removeObjects([commentsView, infoView]);
           self.setPath('parentView.isEditMode', false);
         });
     }
@@ -40,18 +40,6 @@ Radium.FeedItemView = Ember.ContainerView.extend({
       childViews.removeObject(todoForm);
     }
     
-    return false;
-  },
-
-  showNoteForm: function(event) {
-    var childViews = this.get('childViews'),
-        noteView = this.get('noteView');
-
-    if (childViews.indexOf(noteView) === -1) {
-      childViews.pushObject(noteView);
-    } else {
-      childViews.removeObject(noteView);
-    }
     return false;
   },
 

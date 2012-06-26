@@ -1,3 +1,6 @@
+* [2012-06-26 00:23 -0700] 5f1f652 - Joshua Jones: Separate CSS into SASS partials.
+* [2012-06-25 14:24 -0700] 4f15875 - Joshua Jones: Touch up invitation text.
+* [2012-06-25 13:54 -0700] e99cb5b - Joshua Jones: Hook up invitation notification.
 * [2012-06-22 17:06 -0700] 4ecf72f - Joshua Jones: Add note functionality for scheduled and historic feed items.
 * [2012-06-22 11:30 -0700] 0395646 - Joshua Jones: Add new comment notification template.
 * [2012-06-22 10:50 -0700] 0166986 - Joshua Jones: Add missing group template from notifications.

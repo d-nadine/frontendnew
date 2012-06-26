@@ -1,1 +1,8 @@
-Meeting invitation from {{invitation.user.name}} for {{formatDate invitation.meeting.startsAt}}
+{{#with invitation.meeting}}
+  Meeting invitation for "{{topic}}" 
+  {{#if location}}
+    @ {{location}}
+  {{/if}}
+   ({{formatDate startsAt}})
+
+{{/with}}

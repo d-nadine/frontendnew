@@ -108,7 +108,6 @@ minispade.require('radium/templates/forms/company_form');
 minispade.require('radium/templates/forms/group_form');
 minispade.require('radium/templates/forms/add_to_group');
 minispade.require('radium/templates/forms/add_to_company');
-minispade.require('radium/templates/forms/note_form');
 
 // Edit forms
 minispade.require('radium/templates/forms/edit/call_list_edit');
