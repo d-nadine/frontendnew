@@ -1,12 +1,15 @@
-Radium.Group = Ember.State.extend({
+Radium.States.Group = Ember.State.extend({
   show: Ember.State.extend({
     enter: function(manager) {
+      //497,489,490,495,491,492,496,494,498,493
       this._super();
   
       var self = this,
           groupId = Radium.appController.get('params');
 
       rootView = manager.get('rootView');
+
+      var group = Radium.store.find(Radium.Group, groupId);
 
       rootView.get('childViews').removeObject(rootView.get('loading'));
 

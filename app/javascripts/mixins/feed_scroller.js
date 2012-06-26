@@ -1,7 +1,8 @@
-Radium.FeedScroller = Ember.Mixin.create({
+Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
   content: Ember.A(),
   dateHash: {},
   canScroll: true,
+  handler: null,
   init: function(){
     this._super();
     this.set('view', Ember.ContainerView.create());
@@ -61,9 +62,10 @@ Radium.FeedScroller = Ember.Mixin.create({
 
       self.set('isLoading', false);
 
-      //TODO: Tightly coupled.  Should be raising an event to subscribers
       Ember.run.next(function(){
-        Radium.get('appController').toggleKind();
+        //TODO: Change fire to trigger on the next ember upgrade
+        self.fire('onNewData');
+        // Radium.get('appController').toggleKind();
       });
     }).fail(function(){
         self.set('isLoading', false);

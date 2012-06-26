@@ -150,7 +150,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
-
+    
     this.ajax(url, "GET", {
       success: function(json) {
         store.load(type, json[root]);
