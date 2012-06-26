@@ -65,7 +65,6 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
       Ember.run.next(function(){
         //TODO: Change fire to trigger on the next ember upgrade
         self.fire('onNewData');
-        // Radium.get('appController').toggleKind();
       });
     }).fail(function(){
         self.set('isLoading', false);

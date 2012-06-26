@@ -9,8 +9,6 @@ Radium.States.Group = Ember.State.extend({
 
       rootView = manager.get('rootView');
 
-      var group = Radium.store.find(Radium.Group, groupId);
-
       rootView.get('childViews').removeObject(rootView.get('loading'));
 
       Radium.get('activityFeedController').set('canScroll', false);
@@ -21,6 +19,8 @@ Radium.States.Group = Ember.State.extend({
         var resource = 'groups';
         return Radium.get('appController').getFeedUrl(resource, groupId, date);       
       });
+
+      Radium.get('groupFeedController').set('group', Radium.store.find(Radium.Group, groupId));
     
       if(!manager.get('groupSideBarView')){
           manager.set("groupSideBarView",  Radium.GroupSideBar.create({

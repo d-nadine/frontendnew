@@ -4,6 +4,7 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
     this._super();
     this.on('onNewData', this, 'onNewData');
   },
+
   onNewData: function(){
     Radium.get('appController').toggleKind();
   },
