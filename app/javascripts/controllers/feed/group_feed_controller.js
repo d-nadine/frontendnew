@@ -10,22 +10,21 @@ Radium.GroupFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
     var feed = this.getPath('group.meta.feed'),
         currentDate = feed.current_date;
   
-    this.set('previous_activity_date', Radium.getPath('start_date'));
-    this.set('next_activity_date', Radium.getPath('end_date'));
-
-    var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'), currentDate),
+     var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'), currentDate),
         content = this.get('content');
 
-    var content = this.get('content');
-    $.when($.ajax({url: url})).then(function(data){
-      content.pushObject(Ember.Object.create({dateHeader: 'Today'}));
+    var self = this;
 
-      if(data.feed.scheduled_activities.length > 0){
-        content.pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
-      }else{
-        content.pushObject(Ember.Object.create({message: "Nothing Scheduled."}));
-      }
-    });
+    var options = {
+                    requestDate: currentDate,
+                    url: url,
+                    newFeedCallBack: function(feed){
+                      self.set('previous_activity_date', feed.previous_activity_date);
+                      self.set('next_activity_date', feed.next_activity_date);
+                    }
+                  }
 
+    this.loadFeed({direction: Radium.SCROLL_BACK}, options);
+    
   }.observes('Radium.groupFeedController.group.meta.feed')
 });

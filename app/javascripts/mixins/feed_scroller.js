@@ -18,7 +18,7 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
     return (this.get('canScroll') && (this.get(this.RequestDate[scrollData.direction])));
   },
 
-  loadFeed: function(scrollData, dateToScrollTo){
+  loadFeed: function(scrollData, options){
     var isScroll = (arguments.length === 1);
 
     if(isScroll && (!this.shouldScroll(scrollData))){
@@ -27,13 +27,13 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
 
     this.set('isLoading', true);
     
-    var getDate = (isScroll) ? this.get(this.RequestDate[scrollData.direction]) : dateToScrollTo;
+    var getDate = (isScroll) ? this.get(this.RequestDate[scrollData.direction]) : options.requestDate;
 
     var self = this;
 
     var contentKey = this.RequestContent[scrollData.direction];
 
-    var url = this.get('feedUrl')(getDate);
+    var url = (isScroll) ? this.get('feedUrl')(getDate) : options.url;
 
     $.when($.ajax({url: url})).then(function(data){
       if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
@@ -58,6 +58,8 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
 
       if(isScroll){
         self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);
+      }else if(options.newFeedCallBack){
+        options.newFeedCallBack(data.feed);
       }
 
       self.set('isLoading', false);
