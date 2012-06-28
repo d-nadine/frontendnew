@@ -10,14 +10,13 @@ Radium.GroupFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
     var feed = this.getPath('group.meta.feed'),
         currentDate = feed.current_date;
   
-     var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'), currentDate),
-        content = this.get('content');
+    var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'), currentDate);
 
     var self = this;
 
     var options = {
-                    requestDate: currentDate,
                     url: url,
+                    requestDate: currentDate,
                     newFeedCallBack: function(feed){
                       self.set('previous_activity_date', feed.previous_activity_date);
                       self.set('next_activity_date', feed.next_activity_date);

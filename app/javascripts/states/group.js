@@ -1,7 +1,7 @@
 Radium.States.Group = Ember.State.extend({
   show: Ember.State.extend({
     enter: function(manager) {
-      //497,489,490,495,491,492,496,494,498,493
+      ///groups/497,489,490,495,491,492,496,494,498,493
       this._super();
   
       var self = this,
@@ -16,8 +16,7 @@ Radium.States.Group = Ember.State.extend({
       Radium.set('groupFeedController', Radium.GroupFeedController.create());
 
       Radium.get('groupFeedController').set('feedUrl', function(date){
-        var resource = 'groups';
-        return Radium.get('appController').getFeedUrl(resource, groupId, date);       
+        return Radium.get('appController').getFeedUrl('groups', groupId, date);
       });
 
       Radium.get('groupFeedController').set('group', Radium.store.find(Radium.Group, groupId));
@@ -26,11 +25,6 @@ Radium.States.Group = Ember.State.extend({
           manager.set("groupSideBarView",  Radium.GroupSideBar.create({
         }));
       }
-
-      var today = Ember.DateTime.create({}).toFormattedString('%Y-%m-%d');
-
-      Radium.get('groupFeedController').set('previous_activity_date', today);
-      Radium.get('groupFeedController').set('next_activity_date', today);
 
       Radium.get('appController').set('sideBarView', manager.get('groupSideBarView'));
 

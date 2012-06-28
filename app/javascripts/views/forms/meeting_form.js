@@ -92,6 +92,7 @@ Radium.MeetingForm = Radium.FormView.extend({
 
       $.when($.ajax({url: url})).then(function(data){
         $('.progress').hide();
+        debugger;
         daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
 
         if(data.feed.scheduled_activities.length > 0){
