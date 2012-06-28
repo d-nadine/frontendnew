@@ -1,4 +1,4 @@
-Radium.PersistentContainerView= Ember.ContainerView.extend({
+Radium.PersistentContainerView = Ember.ContainerView.extend({
   // _currentViewWillChange: Ember.beforeObserver(function() {
   //   var childViews = this.get('childViews'),
   //       currentView = this.get('currentView');

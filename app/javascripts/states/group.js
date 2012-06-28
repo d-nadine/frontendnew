@@ -1,7 +1,7 @@
 Radium.States.Group = Ember.State.extend({
   show: Ember.State.extend({
     enter: function(manager) {
-      ///groups/497,489,490,495,491,492,496,494,498,493
+      ///groups/497:A,489,490,495,491,492,496,494,498,493
       this._super();
   
       var self = this,
@@ -29,7 +29,7 @@ Radium.States.Group = Ember.State.extend({
       Radium.get('appController').set('sideBarView', manager.get('groupSideBarView'));
 
       Radium.get('appController').set('feedView', Ember.View.create(Radium.InfiniteScroller, {
-          templateName: 'group_feed',
+          templateName: 'general_feed',
           contentBinding: 'Radium.groupFeedController.content',
           controllerBinding: 'Radium.groupFeedController',
           didInsertElement: function(){
