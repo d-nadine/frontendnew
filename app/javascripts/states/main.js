@@ -1,3 +1,4 @@
+minispade.require('radium/states/base_state');
 minispade.require('radium/states/page');
 minispade.require('radium/states/form');
 minispade.require('radium/states/error');

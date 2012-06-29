@@ -1,8 +1,6 @@
-Radium.DashboardPage = Ember.State.extend({
-  enter: function(manager) {
-    var rootView = manager.get('rootView');
-
-    rootView.get('childViews').removeObject(rootView.get('loading'));
+Radium.DashboardPage = Radium.State.extend({
+  enter: function(manager, transition) {
+    this._super(manager, transition);
 
     if(!manager.get('dashBoardSideView')){
       manager.set('dashBoardSideView', Ember.View.create({
@@ -20,14 +18,11 @@ Radium.DashboardPage = Ember.State.extend({
     }
 
     Radium.get('notificationsController').set('notificationsView', manager.get('notificationsView'));
-
-    this._super(manager);
   },
 
-  index: Ember.State.create({ 
-    enter: function(manager) {
-
-      Radium.get('activityFeedController').set('canScroll', false);
+  index: Radium.State.extend({
+    enter: function(manager, transition) {
+      this._super(manager, transition);
 
       Radium.get('activityFeedController').set('feedUrl', function(date){
         var id = Radium.getPath('appController.current_user.id');

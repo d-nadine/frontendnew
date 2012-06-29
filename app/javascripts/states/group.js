@@ -1,17 +1,11 @@
 Radium.States.Group = Ember.State.extend({
-  show: Ember.State.extend({
-    enter: function(manager) {
+  show: Radium.State.extend({
+    enter: function(manager, transition) {
       ///groups/497:A,489,490,495,491,492,496,494,498,493
-      this._super();
+      this._super(manager, transition);
   
       var self = this,
           groupId = Radium.appController.get('params');
-
-      rootView = manager.get('rootView');
-
-      rootView.get('childViews').removeObject(rootView.get('loading'));
-
-      Radium.get('activityFeedController').set('canScroll', false);
 
       Radium.set('groupFeedController', Radium.GroupFeedController.create());
 

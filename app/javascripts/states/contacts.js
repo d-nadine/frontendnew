@@ -1,13 +1,7 @@
 Radium.ContactsPage = Ember.State.extend({
-  index: Ember.State.extend({
-    enter: function(manager) {
-      this._super(manager);
-
-      rootView = manager.get('rootView');
-
-      rootView.get('childViews').removeObject(rootView.get('loading'));
-
-      Radium.get('activityFeedController').set('canScroll', false);
+  index: Radium.State.extend({
+    enter: function(manager, transition) {
+      this._super(manager, transition);
 
       if(!manager.get('contactsSideBarView')){
         manager.set("contactsSideBarView",  Radium.ContactsSideBar.create({
@@ -26,8 +20,10 @@ Radium.ContactsPage = Ember.State.extend({
     }
   }),
   
-  show: Ember.State.extend({
-    enter: function(manager) {
+  show: Radium.State.extend({
+    enter: function(manager, transition) {
+      this._super(manager, transition);
+
       var self = this,
           contactId = Radium.appController.get('params');
 
