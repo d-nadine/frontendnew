@@ -29,6 +29,7 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
       templateName: kind + '_details'
     }));
 
+    //TODO: Joshua there is not NoteFormView?
     // this.set('noteView', Radium.NoteFormView.create({
     //     content: resource
     // }));
