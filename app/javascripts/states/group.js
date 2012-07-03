@@ -27,7 +27,7 @@ Radium.States.Group = Ember.State.extend({
           contentBinding: 'Radium.groupFeedController.content',
           controllerBinding: 'Radium.groupFeedController',
           didInsertElement: function(){
-            $('html,body').scrollTop(5);
+            $('html,body').scrollTop(10);
             Radium.get('groupFeedController').set('canScroll', true);
           }
         }));
