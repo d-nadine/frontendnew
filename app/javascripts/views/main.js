@@ -64,6 +64,8 @@ minispade.require('radium/views/feed/filter');
 minispade.require('radium/views/feed/feed_filter_item');
 minispade.require('radium/views/feed/date_header');
 minispade.require('radium/views/feed/scheduled_activity_feed');
+minispade.require('radium/views/feed/dashboard_feed');
+minispade.require('radium/views/feed/group_feed');
 
 // Global
 minispade.require('radium/views/global/topbar');

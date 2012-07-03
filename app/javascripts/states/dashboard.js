@@ -31,19 +31,10 @@ Radium.DashboardPage = Radium.State.extend({
       });
 
       if(!manager.get('dashboardFeedView')){
-        manager.set('dashboardFeedView', Ember.View.create(Radium.InfiniteScroller, {
-          templateName: 'dashboard_feed',
-          contentBinding: 'Radium.activityFeedController.content',
-          controllerBinding: 'Radium.activityFeedController',
-          didInsertElement: function(){
-            $('html,body').scrollTop(5);
-            Radium.get('activityFeedController').set('canScroll', true);
-          }
-        }));
+        manager.set('dashboardFeedView', Radium.DashboardFeedView.create());
       }else{
         Radium.get('activityFeedController').set('canScroll', true);
       }
-
     
       Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));
     }

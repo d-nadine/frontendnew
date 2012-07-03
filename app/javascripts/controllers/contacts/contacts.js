@@ -1,5 +1,7 @@
 Radium.ContactsController = Ember.ArrayProxy.extend({
-   bootStrapLoaded: function(){
+  
+
+  bootStrapLoaded: function(){
     var contacts = Radium.getPath('appController.contacts');
     
     Radium.store.loadMany(Radium.Contact, contacts);
