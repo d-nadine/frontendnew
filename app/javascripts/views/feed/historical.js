@@ -29,9 +29,9 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
       templateName: kind + '_details'
     }));
 
-    this.set('noteView', Radium.NoteFormView.create({
-        content: resource
-    }));
+    // this.set('noteView', Radium.NoteFormView.create({
+    //     content: resource
+    // }));
 
     // Assign the comments
     this.setPath('commentsController.content', this.getPath('content.comments'));
