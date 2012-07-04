@@ -88,7 +88,9 @@ Radium.MeetingForm = Radium.FormView.extend({
 
       dateString = date.toFormattedString("%Y-%m-%d");
 
-      $.when($.ajax({url: Radium.get('appController').getFeedUrl(dateString)})).then(function(data){
+      var url =  Radium.get('appController').getFeedUrl('users', Radium.getPath('appController.current_user.id'), dateString);
+
+      $.when($.ajax({url: url})).then(function(data){
         $('.progress').hide();
         daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
 

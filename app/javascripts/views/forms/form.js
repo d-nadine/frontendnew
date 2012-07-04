@@ -24,7 +24,7 @@ Radium.FormView = Ember.View.extend({
   didInsertElement: function() {
     if (this.get('isGlobalLevelForm')) {
       $('#main-feed').animate({
-        top: this.$().height() + 100
+        top: this.$().height() + 120
       }, 'fast');
     }
 

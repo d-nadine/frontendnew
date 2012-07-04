@@ -1,4 +1,14 @@
+* [2012-06-26 00:23 -0700] 5f1f652 - Joshua Jones: Separate CSS into SASS partials.
+* [2012-06-25 14:24 -0700] 4f15875 - Joshua Jones: Touch up invitation text.
+* [2012-06-25 13:54 -0700] e99cb5b - Joshua Jones: Hook up invitation notification.
+* [2012-06-22 17:06 -0700] 4ecf72f - Joshua Jones: Add note functionality for scheduled and historic feed items.
+* [2012-06-22 11:30 -0700] 0395646 - Joshua Jones: Add new comment notification template.
+* [2012-06-22 10:50 -0700] 0166986 - Joshua Jones: Add missing group template from notifications.
+<<<<<<< HEAD
+* [2012-06-21 17:00 -0700] 45fe8e5 - Joshua Jones: Small change to see if new commit will fix deploy fail.
+=======
 * [2012-06-22 12:21 +0200] 11b362f - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
+>>>>>>> 757c1575c16b03a9eaada85e6c6ec49f67fff5d4
 * [2012-06-21 16:54 -0700] 93b981c - Joshua Jones: Move cluster kind classname up a level.
 * [2012-06-20 17:07 -0700] c86af3e - Joshua Jones: Add deleting of notifications.
 * [2012-06-20 16:55 -0700] 4a7a418 - Joshua Jones: Add different notification templates.

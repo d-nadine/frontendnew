@@ -15,9 +15,16 @@ Radium.Notification = DS.Model.extend({
   campaign: DS.belongsTo('Radium.Campaign', {
     embedded: true
   }),
+  group: DS.belongsTo('Radium.Group', {
+    embedded: true
+  }),
   contact: DS.belongsTo('Radium.Contact', {
     embedded: true,
     key: 'contact'
+  }),
+  invitation: DS.belongsTo('Radium.Invitation', {
+    key: 'invitation',
+    embedded: true
   }),
   callList: DS.belongsTo('Radium.CallList', {
     key: 'call_list', 

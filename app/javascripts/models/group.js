@@ -1,5 +1,6 @@
 Radium.Group = Radium.Core.extend({
   type: 'group',
+  meta: DS.attr('object'),
   name: DS.attr('string'),
   email: DS.attr('string'),
   phone: DS.attr('string'),
@@ -11,7 +12,7 @@ Radium.Group = Radium.Core.extend({
   todos: DS.hasMany('Radium.Todo'),
   deals: DS.hasMany('Radium.Deal'),
   messages: DS.hasMany('Radium.Message'),
-  notes: DS.hasMany('Radium.Note'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   phoneCalls: DS.hasMany('Radium.PhoneCall', {
     key: 'phone_calls'
   }),

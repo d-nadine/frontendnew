@@ -11,6 +11,12 @@ DS.RadiumAdapter = DS.Adapter.extend({
   bulkCommit: false,
   selectedUserID: null,
   createRecord: function(store, type, model) {
+    // FIXME: For models without URL's like Notes we just want to avoid
+    // persistance for now, but should look at a more elegant solution.
+    if (type.url === false) {
+      return false;
+    }
+
     var root = (type.root) ? type.root : this.rootForType(type);
     var data = {};
     var hash = get(model, 'data');
@@ -144,7 +150,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
-
+    
     this.ajax(url, "GET", {
       success: function(json) {
         store.load(type, json[root]);

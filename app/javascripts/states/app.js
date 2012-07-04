@@ -72,6 +72,7 @@ Radium.App = Ember.StateManager.create({
   loggedIn: Radium.LoggedIn,
   dashboard: Radium.DashboardPage,
   contacts: Radium.ContactsPage.create(),
+  groups: Radium.States.Group.create(),
   // users: Radium.UsersPage.create(),
   // deals: Radium.DealsPage.create(),
   // pipeline: Radium.PipelinePage.create(),

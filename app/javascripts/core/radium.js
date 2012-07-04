@@ -1,4 +1,5 @@
 window.Radium = Ember.Application.create({
+  States: {},
   store: DS.Store.create({
     revision: 4,
     adapter: DS.RadiumAdapter.create({bulkCommit: false})

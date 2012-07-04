@@ -26,6 +26,11 @@ Radium.InfiniteScroller = Ember.Mixin.create({
   isUp: function(){
     var currentScrollTop = $(window).scrollTop();
 
+    if(currentScrollTop < 5){
+      this.lastScrollTop = 0;
+      return true;
+    }
+
     var isUp = (currentScrollTop < this.lastScrollTop);
 
     this.lastScrollTop = currentScrollTop;

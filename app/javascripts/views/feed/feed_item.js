@@ -8,8 +8,9 @@
 */
 Radium.FeedItemView = Ember.ContainerView.extend({
   classNames: 'row feed-item-container'.w(),
-  classNameBindings: ['isActionsVisible:expanded'],
+  classNameBindings: ['isActionsVisible:expanded', 'hasDiscussions'],
   isActionsVisible: false,
+
   commentsVisibilityDidChange: function() {
     var self = this,
         childViews = this.get('childViews'),

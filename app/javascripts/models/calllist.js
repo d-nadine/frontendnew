@@ -18,5 +18,6 @@ Radium.CallList = Radium.Core.extend({
     key: 'finished_todos'
   }),
   users: DS.hasMany('Radium.User'),
-  contacts: DS.hasMany('Radium.Contact')
+  contacts: DS.hasMany('Radium.Contact'),
+  notes: DS.hasMany('Radium.Note', {embedded: true})
 });

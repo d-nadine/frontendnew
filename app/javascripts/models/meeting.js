@@ -8,6 +8,7 @@ Radium.Meeting = Radium.Core.extend({
   user: DS.belongsTo('Radium.User', {key: 'user'}),
   contacts: DS.hasMany('Radium.Contact'),
   users: DS.hasMany('Radium.User'),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   activities: DS.hasMany('Radium.Activity'),
   invitations: DS.hasMany('Radium.Invitation', {
     embedded: true

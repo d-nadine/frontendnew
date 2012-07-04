@@ -1,9 +1,11 @@
+minispade.require('radium/states/base_state');
 minispade.require('radium/states/page');
 minispade.require('radium/states/form');
 minispade.require('radium/states/error');
 minispade.require('radium/states/loading');
 minispade.require('radium/states/dashboard');
 minispade.require('radium/states/contacts');
+minispade.require('radium/states/group');
 minispade.require('radium/states/users');
 minispade.require('radium/states/pipeline');
 minispade.require('radium/states/campaigns');

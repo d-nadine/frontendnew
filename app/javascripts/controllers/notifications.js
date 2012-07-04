@@ -10,25 +10,27 @@ Radium.NotificationsController = Ember.ArrayController.extend({
     Radium.store.commit();
   },
   confirm: function(event) {
-    var invitation = event.view.content,
-        id = invitation.get('id'),
+    var notification = event.view.content
+        invitation = notification.get('invitation'),
+        hashKey = invitation.get('hashKey'),
         content = this.get('content');
     $.ajax({
-      url: '/api/invitation/%@/confirm'.fmt(id),
+      url: '/api/invitation/%@/confirm'.fmt(hashKey),
       type: 'PUT',
       context: this
     }).success(function() {
-      content.removeObject(invitation);
-      this.destroyNotification(invitation);
+      content.removeObject(notification);
+      this.destroyNotification(notification);
     });
     return false;
   },
   decline: function(event) {
-    var invitation = event.view.content,
-        id = invitation.get('id'),
+    var notification = event.view.content
+        invitation = notification.get('invitation'),
+        hashKey = invitation.get('hashKey'),
         content = this.get('content');
     $.ajax({
-      url: '/api/invitation/%@/reject'.fmt(id),
+      url: '/api/invitation/%@/reject'.fmt(hashKey),
       type: 'PUT',
       context: this
     }).success(function() {

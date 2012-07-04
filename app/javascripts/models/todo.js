@@ -28,6 +28,7 @@ Radium.Todo = Radium.Core.extend({
   comments: DS.hasMany('Radium.Comment', {
     embedded: true
   }),
+  notes: DS.hasMany('Radium.Note', {embedded: true}),
   overdue: DS.attr('boolean'),
   reference: DS.attr('object'),
   user: DS.belongsTo('Radium.User', {

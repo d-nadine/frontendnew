@@ -6,7 +6,8 @@ Radium.NotificationItemView = Ember.View.extend({
     contact: '<a href="/contacts/{{unbound contact.id}}">{{contact.displayName}}</a> has been assigned to you.',
     todo: 'Todo {{todo.description}} has been assigned to you.',
     campaign: '<a href="/campaigns/{{unbound campaign.id}}">{{campaign.name}}</a> has been assigned to you.',
-    deal: '<a href="/deals/{{unbound deal.id}}">{{deal.name}}</a> has been assigned to you.'
+    deal: '<a href="/deals/{{unbound deal.id}}">{{deal.name}}</a> has been assigned to you.',
+    group: '<a href="/groups/{{unbound group.id}}">{{group.name}}</a> has been assigned to you.'
   },
   init: function() {
     this._super();
