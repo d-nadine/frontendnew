@@ -1,3 +1,4 @@
+* [2012-07-04 11:24 +0200] 82001e9 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-06-26 00:23 -0700] 5f1f652 - Joshua Jones: Separate CSS into SASS partials.
 * [2012-06-25 14:24 -0700] 4f15875 - Joshua Jones: Touch up invitation text.
 * [2012-06-25 13:54 -0700] e99cb5b - Joshua Jones: Hook up invitation notification.

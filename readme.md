@@ -1,26 +1,27 @@
 # Radium Pure JS Frontend
 
-See [frontend_server](https://github.com/threadedlabs/frontend_server)
+See [Iridium](https://github.com/radiumsoftware/iridium)
 for underlying code that powers this project.
 
 ## Configuration
 
-There are 3 different things that may be configured.
+You must create a `config/settings.yml` after cloning this repo. There
+you can configure the `user_api_key`. This allows you to use the app as
+if you were logged in as them.
 
 ```yml
 # config/settings.yml
 
-server: "http://api.radiumcrm.com" # server to proxy all requests too
-developer_api_key: test # developer key to use
-user_api_key: test # optionally, authenticate as a user indevelopment
+development:
+  user_api_key: test # optionally, authenticate as a user indevelopment
 ```
 
 ## Running Locally
 
 ```
 # bundle if required
-$ bundle exec foreman start
-$ open localhost:5000
+$ bundle exec foreman start dev
+$ open localhost:9292
 ```
 
 ## Deploying
@@ -35,5 +36,6 @@ $ ./script/deploy
 
 ## Maintainers
 
-* Assets (JS/CSS/HTML): Josh & Stefan
-* All Server Stuff: Adam & Stefan
+* JS Application: Paul
+* All Server Stuff: Adam
+* Iridium: Adam
