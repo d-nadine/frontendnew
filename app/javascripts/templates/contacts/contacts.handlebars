@@ -80,8 +80,8 @@
         </div>
       </div>
     {{/if}}
-    {{collection contentBinding="content" itemViewClass="Radium.ContactCardView" }}
   {{/with}}
+  {{collection contentBinding="Radium.contactsController.content" itemViewClass="Radium.ContactCardView"}}
 </div>
 
 {{timeEnd "timing"}}

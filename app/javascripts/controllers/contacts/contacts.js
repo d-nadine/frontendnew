@@ -1,11 +1,12 @@
 Radium.ContactsController = Ember.ArrayProxy.extend(Radium.PageScroller, {
+  content: Ember.A(),
   init: function(){
     this._super();
     this.set('scrollOptions', DS.Model.getScrollData('contact'));
   },
   load: function(){
     if(this.getPath('content.length') === 0){
-      this.loadFeed(null, this.get('scrollOptions'));
+      this.loadFeed();
     }
   },
   bootStrapLoaded: function(){

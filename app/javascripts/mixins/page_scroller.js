@@ -1,7 +1,6 @@
 Radium.PageScroller = Ember.Mixin.create(Ember.Evented, {
   page: 1,
   canScroll: true,
-  content: Ember.A(),
   shouldScroll: function(scrollData){
     if(scrollData.direction === Radium.SCROLL_FORWARD){
       return false;
@@ -9,10 +8,12 @@ Radium.PageScroller = Ember.Mixin.create(Ember.Evented, {
 
     return this.get('canScroll');
   },
-  loadFeed: function(scrollData, options){
+  loadFeed: function(scrollData){
     if(!this.get('canScroll')){
       return;
     }
+
+    var options = this.get('scrollOptions');
 
     var url = '%@?page=%@'.fmt(options.url, this.get('page'));
 
@@ -36,11 +37,9 @@ Radium.PageScroller = Ember.Mixin.create(Ember.Evented, {
 
       var entities = Radium.store.findMany(options.dataType, resources.mapProperty('id').uniq());
 
-      if(self.getPath('content.length') === 0){
-        self.set('content', entities);
-      }else{
-        self.get('content').pushObjects(entities);
-      }
+      entities.forEach(function(entity){
+        Radium.getPath(options.contentPath).pushObject(entity);
+      });
 
       self.set('isLoading', false);
     });

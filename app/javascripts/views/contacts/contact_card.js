@@ -1,4 +1,7 @@
 Radium.ContactCardView = Ember.View.extend({
+  init: function(){
+    this._super();
+  },
   templateName: 'contact_card',
   classNames: "contact-card row span9".w(),
   classNameBindings: ['content.isSelected:selected'],

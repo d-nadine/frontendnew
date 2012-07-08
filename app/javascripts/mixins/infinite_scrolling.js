@@ -19,9 +19,9 @@ Radium.InfiniteScroller = Ember.Mixin.create({
     }
 
     if ((!isUp) && ($(window).scrollTop() > $(document).height() - $(window).height() - 300)) {
-      this.get('controller').loadFeed({direction: Radium.SCROLL_BACK}, this.getPath('controller.scrollOptions'));
+      this.get('controller').loadFeed({direction: Radium.SCROLL_BACK});
     }else if((isUp) && ($(window).scrollTop() < 5)){
-      this.get('controller').loadFeed({direction: Radium.SCROLL_FORWARD}, this.getPath('controller.scrollOptions'));
+      this.get('controller').loadFeed({direction: Radium.SCROLL_FORWARD});
     }
 
     return false;
