@@ -22,7 +22,7 @@ Radium.States.Group = Ember.State.extend({
 
       Radium.get('appController').set('sideBarView', manager.get('groupSideBarView'));
 
-      Radium.get('appController').set('feedView', <D-N>);
+      Radium.get('appController').set('feedView', Radium.GroupFeedView.create());
     }
   })
 });

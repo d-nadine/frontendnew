@@ -1,9 +1,5 @@
-Radium.DashboardFeedView = Ember.View.extend(Radium.InfiniteScroller, {
+Radium.DashboardFeedView = Ember.View.extend(Radium.InfiniteScroller, Radium.FeedBehaviour,{
   templateName: 'dashboard_feed',
   contentBinding: 'Radium.activityFeedController.content',
   controllerBinding: 'Radium.activityFeedController',
-  didInsertElement: function(){
-    $('html,body').scrollTop(5);
-    Radium.get('activityFeedController').set('canScroll', true);
-  }
 });

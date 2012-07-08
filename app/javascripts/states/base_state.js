@@ -5,7 +5,5 @@ Radium.State = Ember.State.extend({
     rootView = manager.get('rootView');
 
     rootView.get('childViews').removeObject(rootView.get('loading'));
-
-    Radium.get('activityFeedController').set('canScroll', false);
   }
 });

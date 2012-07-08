@@ -1,5 +1,5 @@
-Radium.ContactsPageView = Ember.View.extend(Radium.InfiniteScroller, {
-  controllerBinding: Radium.contactsController,
+Radium.ContactsPageView = Ember.View.extend(Radium.InfiniteScroller, Radium.FeedBehaviour, {
+  controllerBinding: 'Radium.contactsController',
   templateName: 'contacts',
 
   selectedCampaignBinding: 'Radium.selectedContactsController.selectedCampaign',
