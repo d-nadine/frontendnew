@@ -1,3 +1,4 @@
+* [2012-07-09 14:21 -0700] baf18b2 - Joshua Jones: Fix notification template trying to parse date before it's loaded.
 * [2012-07-04 11:24 +0200] 82001e9 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
 * [2012-06-26 00:23 -0700] 5f1f652 - Joshua Jones: Separate CSS into SASS partials.
 * [2012-06-25 14:24 -0700] 4f15875 - Joshua Jones: Touch up invitation text.
