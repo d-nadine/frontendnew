@@ -1,8 +1,12 @@
 {{#with invitation.meeting}}
-  Meeting invitation for "{{topic}}" 
-  {{#if location}}
-    @ {{location}}
-  {{/if}}
-   ({{formatDate startsAt}})
+  {{#if isLoaded}}
+    Meeting invitation for "{{topic}}" 
+    {{#if location}}
+      @ {{location}}
+    {{/if}}
 
+    ({{formatDate startsAt}})
+  {{else}}
+    Loading...
+  {{/if}}
 {{/with}}
