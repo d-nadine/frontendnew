@@ -91,7 +91,6 @@ minispade.require('radium/templates/feed/details/call_list_details');
 // Forms
 minispade.require('radium/templates/forms/form_layout');
 minispade.require('radium/templates/forms/fieldset');
-minispade.require('radium/templates/forms/reminder');
 minispade.require('radium/templates/forms/call_list_form');
 minispade.require('radium/templates/forms/add_to_call_list');
 minispade.require('radium/templates/forms/deal_form');

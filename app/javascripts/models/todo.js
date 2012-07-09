@@ -54,5 +54,7 @@ Radium.Todo = Radium.Core.extend({
 
   canEdit: function() {
     return (this.getPath('user.apiKey') && !this.get('finished')) ? true : false;
-  }.property('user', 'finished')
+  }.property('user', 'finished'),
+
+  reminders_attributes: DS.attr('object')
 });

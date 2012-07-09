@@ -120,7 +120,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       this._super();
       this.setPath('parentView.assignedUser', this.get('selection'));
     }
-  }),  
+  }),
 
   finishByDateField: Radium.DatePickerField.extend({
     elementId: 'finish-by-date',
@@ -135,6 +135,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),
 
   submitForm: function() {
+    // debugger;
     if (this.checkForEmpty(data)) {
       this.error("Something was filled incorrectly, try again?");
       return false;
@@ -148,9 +149,11 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         isCall = this.getPath('isCallCheckbox.checked'),
         // TODO: When support todos are added, add logic to toggle this from general to support
         todoKind = 'general',
-        finishByValue = this.get('finishBy').adjust({hour: 17, minute: 0, second: 0}),
+        finishBy = this.get('finishBy'),
+        finishByValue = finishBy.adjust({hour: 17, minute: 0, second: 0}),
         assignedUser = this.get('assignedUser'),
         assignedUserId = assignedUser.get('id'),
+        reminder = this.getPath('reminderSelect.selection.value') || null,
         data = {
           description: description,
           finishBy: finishByValue,
@@ -162,6 +165,16 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           hasAnimation: true
         };
 
+    // TODO: Turn back on once API supports reminders.
+    // if (reminder) {
+    //   data = jQuery.extend(data, {
+    //     reminders_attributes: {
+    //         via: 'todo',
+    //         time: finishBy.advance({second: (reminder * -1)}).toISO8601()
+    //       }
+    //   });
+    // }
+    
     // Determine that if there are selected items, the todo is contact based
     Radium.Todo.reopenClass({
       root: 'todo'
