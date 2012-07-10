@@ -1,285 +1,562 @@
-/*
- * A time picker for jQuery
- *
- * Dual licensed under the MIT and GPL licenses.
- * Copyright (c) 2009 Anders Fajerson
- * @name     timePicker
- * @author   Anders Fajerson (http://perifer.se)
- * @example  $("#mytime").timePicker();
- * @example  $("#mytime").timePicker({step:30, startTime:"15:00", endTime:"18:00"});
- *
- * Based on timePicker by Sam Collet (http://www.texotela.co.uk/code/jquery/timepicker/)
- *
- * Options:
- *   step: # of minutes to step the time by
- *   startTime: beginning of the range of acceptable times
- *   endTime: end of the range of acceptable times
- *   separator: separator string to use between hours and minutes (e.g. ':')
- *   show24Hours: use a 24-hour scheme
- */
+/************************
+jquery-timepicker
+http://jonthornton.github.com/jquery-timepicker/
 
-(function($){
-  $.fn.timePicker = function(options) {
-    // Build main options before element iteration
-    var settings = $.extend({}, $.fn.timePicker.defaults, options);
+requires jQuery 1.6+
+************************/
 
-    return this.each(function() {
-      $.timePicker(this, settings);
-    });
+
+!(function($)
+{
+  var _baseDate = new Date(); _baseDate.setHours(0); _baseDate.setMinutes(0); _baseDate.setSeconds(0);
+  var _ONE_DAY = 86400;
+  var _defaults = {
+    className: null,
+    minTime: null,
+    maxTime: null,
+    durationTime: null,
+    step: 30,
+    showDuration: false,
+    timeFormat: 'g:ia',
+    scrollDefaultNow: false,
+    scrollDefaultTime: false
+  };
+  var _lang = {
+    decimal: '.',
+    mins: 'mins',
+    hr: 'hr',
+    hrs: 'hrs'
   };
 
-  $.timePicker = function (elm, settings) {
-    var e = $(elm)[0];
-    return e.timePicker || (e.timePicker = new jQuery._timePicker(e, settings));
-  };
+  var methods =
+  {
+    init: function(options)
+    {
+      return this.each(function()
+      {
+        var self = $(this);
 
-  $.timePicker.version = '0.3';
+        // convert dropdowns to text input
+        if (self[0].tagName == 'SELECT') {
+          var input = $('<input />');
+          var attrs = { 'type': 'text', 'value': self.val() };
+          var raw_attrs = self[0].attributes;
 
-  $._timePicker = function(elm, settings) {
+          for (var i=0; i < raw_attrs.length; i++) {
+            attrs[raw_attrs[i].nodeName] = raw_attrs[i].nodeValue;
+          }
 
-    var tpOver = false;
-    var keyDown = false;
-    var startTime = timeToDate(settings.startTime, settings);
-    var endTime = timeToDate(settings.endTime, settings);
-    var selectedClass = "selected";
-    var selectedSelector = "li." + selectedClass;
+          input.attr(attrs);
+          self.replaceWith(input);
+          self = input;
+        }
 
-    $(elm).attr('autocomplete', 'OFF'); // Disable browser autocomplete
+        var settings = $.extend({}, _defaults);
 
-    var times = [];
-    var time = new Date(startTime); // Create a new date object.
-    while(time <= endTime) {
-      times[times.length] = formatTime(time, settings);
-      time = new Date(time.setMinutes(time.getMinutes() + settings.step));
-    }
+        if (options) {
+          settings = $.extend(settings, options);
+        }
 
-    var $tpDiv = $('<div class="time-picker'+ (settings.show24Hours ? '' : ' time-picker-12hours') +'"></div>');
-    var $tpList = $('<ul></ul>');
+        if (settings.minTime) {
+          settings.minTime = _time2int(settings.minTime);
+        }
 
-    // Build the list.
-    for(var i = 0; i < times.length; i++) {
-      $tpList.append("<li>" + times[i] + "</li>");
-    }
-    $tpDiv.append($tpList);
-    // Append the timPicker to the body and position it.
-    $tpDiv.appendTo('body').hide();
+        if (settings.maxTime) {
+          settings.maxTime = _time2int(settings.maxTime);
+        }
 
-    // Store the mouse state, used by the blur event. Use mouseover instead of
-    // mousedown since Opera fires blur before mousedown.
-    $tpDiv.mouseover(function() {
-      tpOver = true;
-    }).mouseout(function() {
-      tpOver = false;
-    });
+        if (settings.durationTime) {
+          settings.durationTime = _time2int(settings.durationTime);
+        }
 
-    $("li", $tpList).mouseover(function() {
-      if (!keyDown) {
-        $(selectedSelector, $tpDiv).removeClass(selectedClass);
-        $(this).addClass(selectedClass);
+        if (settings.lang) {
+          _lang = $.extend(_lang, settings.lang);
+        }
+
+        self.data("settings", settings);
+        self.attr('autocomplete', 'off');
+        self.click(methods.show).focus(methods.show).keydown(_keyhandler);
+        self.addClass('ui-timepicker-input');
+
+        if (self.val()) {
+          var prettyTime = _int2time(_time2int(self.val()), settings.timeFormat);
+          self.val(prettyTime);
+        }
+
+        var container = $('<span class="ui-timepicker-container" />');
+        self.wrap(container);
+
+        // close the dropdown when container loses focus
+        $("body").attr("tabindex", -1).focusin(function(e) {
+          if ($(e.target).closest('.ui-timepicker-container').length == 0) {
+            methods.hide();
+          }
+        });
+
+      });
+    },
+
+    show: function(e)
+    {
+      var self = $(this);
+      var list = self.siblings('.ui-timepicker-list');
+
+      // check if a flag was set to close this picker
+      if (self.hasClass('ui-timepicker-hideme')) {
+        self.removeClass('ui-timepicker-hideme');
+        list.hide();
+        return;
       }
-    }).mousedown(function() {
-       tpOver = true;
-    }).click(function() {
-      setTimeVal(elm, this, $tpDiv, settings);
-      tpOver = false;
-    });
 
-    var showPicker = function() {
-      if ($tpDiv.is(":visible")) {
+      if (list.is(':visible')) {
+        return;
+      }
+
+      // make sure other pickers are hidden
+      methods.hide();
+
+      // check if list needs to be rendered
+      if (list.length == 0) {
+        _render(self);
+        list = self.siblings('.ui-timepicker-list');
+      }
+
+      var topMargin = parseInt(self.css('marginTop').slice(0, -2));
+      if ((self.offset().top + self.outerHeight(true) + list.outerHeight()) > $(window).height() + $(window).scrollTop()) {
+        // position the dropdown on top
+        list.css({ "top": self.position().top + topMargin - list.outerHeight() });
+      } else {
+        // put it under the input
+        list.css({ "top": self.position().top + topMargin + self.outerHeight() });
+      }
+
+      list.show();
+
+      var settings = self.data("settings");
+      // position scrolling
+      var selected = list.find('.ui-timepicker-selected');
+
+      if (!selected.length) {
+        if (self.val()) {
+          selected = _findRow(self, list, _time2int(self.val()));
+        } else if (settings.minTime === null && settings.scrollDefaultNow) {
+          selected = _findRow(self, list, _time2int(new Date()));
+        } else if (settings.scrollDefaultTime !== false) {
+          selected = _findRow(self, list, _time2int(settings.scrollDefaultTime));
+        }
+      }
+
+      if (selected && selected.length) {
+        var topOffset = list.scrollTop() + selected.position().top - selected.outerHeight();
+        list.scrollTop(topOffset);
+      } else {
+        list.scrollTop(0);
+      }
+
+      self.trigger('showTimepicker');
+    },
+
+    hide: function(e)
+    {
+      $('.ui-timepicker-list:visible').each(function() {
+        var list = $(this);
+        var self = list.siblings('.ui-timepicker-input');
+        //_selectValue(self);
+
+        list.hide();
+        self.trigger('hideTimepicker');
+      });
+    },
+
+    option: function(key, value)
+    {
+      var self = $(this);
+      var settings = self.data("settings");
+      var list = self.siblings('.ui-timepicker-list');
+
+      if (typeof key == 'object') {
+        settings = $.extend(settings, key);
+
+      } else if (typeof key == 'string' && typeof value != 'undefined') {
+        settings[key] = value;
+
+      } else if (typeof key == 'string') {
+        return settings[key];
+      }
+
+      if (settings.minTime) {
+        settings.minTime = _time2int(settings.minTime);
+      }
+
+      if (settings.maxTime) {
+        settings.maxTime = _time2int(settings.maxTime);
+      }
+
+      if (settings.durationTime) {
+        settings.durationTime = _time2int(settings.durationTime);
+      }
+
+      self.data("settings", settings);
+      list.remove();
+    },
+
+    getSecondsFromMidnight: function()
+    {
+      return _time2int($(this).val());
+    },
+
+    getTime: function()
+    {
+      return new Date(_baseDate.valueOf() + (_time2int($(this).val())*1000));
+    },
+
+    setTime: function(value)
+    {
+      var self = $(this);
+      var prettyTime = _int2time(_time2int(value), self.data('settings').timeFormat);
+      self.val(prettyTime);
+    }
+
+  };
+
+  // private methods
+
+  function _render(self)
+  {
+    var settings = self.data("settings");
+    var list = self.siblings('.ui-timepicker-list');
+
+    if (list && list.length) {
+      list.remove();
+    }
+
+    list = $('<ul />');
+    list.attr('tabindex', -1);
+    list.addClass('ui-timepicker-list');
+    if (settings.className) {
+      list.addClass(settings.className);
+    }
+
+    var zIndex = self.css('zIndex');
+    zIndex = (zIndex+0 == zIndex) ? zIndex+2 : 2;
+    list.css({'display':'none', 'position': 'absolute', "left":(self.position().left), 'zIndex': zIndex });
+
+    if (settings.minTime !== null && settings.showDuration) {
+      list.addClass('ui-timepicker-with-duration');
+    }
+
+    var durStart = (settings.durationTime !== null) ? settings.durationTime : settings.minTime;
+    var start = (settings.minTime !== null) ? settings.minTime : 0;
+    var end = (settings.maxTime !== null) ? settings.maxTime : (start + _ONE_DAY - 1);
+
+    if (end <= start) {
+      // make sure the end time is greater than start time, otherwise there will be no list to show
+      end += _ONE_DAY;
+    }
+
+    for (var i=start; i <= end; i += settings.step*60) {
+      var timeInt = i%_ONE_DAY;
+      var row = $('<li />');
+      row.data('time', timeInt)
+      row.text(_int2time(timeInt, settings.timeFormat));
+
+      if (settings.minTime !== null && settings.showDuration) {
+        var duration = $('<span />');
+        duration.addClass('ui-timepicker-duration');
+        duration.text(' ('+_int2duration(i - durStart)+')');
+        row.append(duration)
+      }
+
+      list.append(row);
+    }
+
+    self.after(list);
+    _setSelected(self, list);
+
+    list.delegate('li', 'click', { 'timepicker': self }, function(e) {
+      self.addClass('ui-timepicker-hideme');
+      self[0].focus();
+
+      // make sure only the clicked row is selected
+      list.find('li').removeClass('ui-timepicker-selected');
+      $(this).addClass('ui-timepicker-selected');
+
+      _selectValue(self);
+      list.hide();
+    });
+  };
+
+  function _findRow(self, list, value)
+  {
+    if (!value && value !== 0) {
+      return false;
+    }
+
+    var settings = self.data("settings");
+    var out = false;
+
+    // loop through the menu items
+    list.find('li').each(function(i, obj) {
+      var jObj = $(obj);
+
+      // check if the value is less than half a step from each row
+      if (Math.abs(jObj.data('time') - value) <= settings.step*30) {
+        out = jObj;
         return false;
       }
-      $("li", $tpDiv).removeClass(selectedClass);
-
-      // Position
-      var elmOffset = $(elm).offset();
-      $tpDiv.css({'top':elmOffset.top + elm.offsetHeight, 'left':elmOffset.left});
-
-      // Show picker. This has to be done before scrollTop is set since that
-      // can't be done on hidden elements.
-      $tpDiv.show();
-
-      // Try to find a time in the list that matches the entered time.
-      var time = elm.value ? timeStringToDate(elm.value, settings) : startTime;
-      var startMin = startTime.getHours() * 60 + startTime.getMinutes();
-      var min = (time.getHours() * 60 + time.getMinutes()) - startMin;
-      var steps = Math.round(min / settings.step);
-      var roundTime = normaliseTime(new Date(0, 0, 0, 0, (steps * settings.step + startMin), 0));
-      roundTime = (startTime < roundTime && roundTime <= endTime) ? roundTime : startTime;
-      var $matchedTime = $("li:contains(" + formatTime(roundTime, settings) + ")", $tpDiv);
-
-      if ($matchedTime.length) {
-        $matchedTime.addClass(selectedClass);
-        // Scroll to matched time.
-        $tpDiv[0].scrollTop = $matchedTime[0].offsetTop;
-      }
-      return true;
-    };
-    // Attach to click as well as focus so timePicker can be shown again when
-    // clicking on the input when it already has focus.
-    $(elm).focus(showPicker).click(showPicker);
-    // Hide timepicker on blur
-    $(elm).blur(function() {
-      if (!tpOver) {
-        $tpDiv.hide();
-      }
     });
-    // Keypress doesn't repeat on Safari for non-text keys.
-    // Keydown doesn't repeat on Firefox and Opera on Mac.
-    // Using kepress for Opera and Firefox and keydown for the rest seems to
-    // work with up/down/enter/esc.
-    var event = ($.browser.opera || $.browser.mozilla) ? 'keypress' : 'keydown';
-    $(elm)[event](function(e) {
-      var $selected;
-      keyDown = true;
-      var top = $tpDiv[0].scrollTop;
-      switch (e.keyCode) {
-        case 38: // Up arrow.
-          // Just show picker if it's hidden.
-          if (showPicker()) {
-            return false;
-          };
-          $selected = $(selectedSelector, $tpList);
-          var prev = $selected.prev().addClass(selectedClass)[0];
-          if (prev) {
-            $selected.removeClass(selectedClass);
-            // Scroll item into view.
-            if (prev.offsetTop < top) {
-              $tpDiv[0].scrollTop = top - prev.offsetHeight;
+
+    return out;
+  }
+
+  function _setSelected(self, list)
+  {
+    var timeValue = _time2int(self.val());
+
+    var selected = _findRow(self, list, timeValue);
+    if (selected) selected.addClass('ui-timepicker-selected');
+  }
+
+  function _keyhandler(e)
+  {
+    var self = $(this);
+    var list = self.siblings('.ui-timepicker-list');
+
+    if (!list.is(':visible')) {
+      if (e.keyCode == 40) {
+        self.focus();
+      } else {
+        return true;
+      }
+    };
+
+    switch (e.keyCode) {
+
+      case 13: // return
+        _selectValue(self);
+        methods.hide.apply(this);
+        e.preventDefault();
+        return false;
+        break;
+
+      case 38: // up
+        var selected = list.find('.ui-timepicker-selected');
+
+        if (!selected.length) {
+          var selected;
+          list.children().each(function(i, obj) {
+            if ($(obj).position().top > 0) {
+              selected = $(obj);
+              return false;
             }
+          });
+          selected.addClass('ui-timepicker-selected');
+
+        } else if (!selected.is(':first-child')) {
+          selected.removeClass('ui-timepicker-selected');
+          selected.prev().addClass('ui-timepicker-selected');
+
+          if (selected.prev().position().top < selected.outerHeight()) {
+            list.scrollTop(list.scrollTop() - selected.outerHeight());
           }
-          else {
-            // Loop to next item.
-            $selected.removeClass(selectedClass);
-            prev = $("li:last", $tpList).addClass(selectedClass)[0];
-            $tpDiv[0].scrollTop = prev.offsetTop - prev.offsetHeight;
-          }
-          return false;
-          break;
-        case 40: // Down arrow, similar in behaviour to up arrow.
-          if (showPicker()) {
-            return false;
-          };
-          $selected = $(selectedSelector, $tpList);
-          var next = $selected.next().addClass(selectedClass)[0];
-          if (next) {
-            $selected.removeClass(selectedClass);
-            if (next.offsetTop + next.offsetHeight > top + $tpDiv[0].offsetHeight) {
-              $tpDiv[0].scrollTop = top + next.offsetHeight;
+        }
+
+        break;
+
+      case 40: // down
+        var selected = list.find('.ui-timepicker-selected');
+
+        if (selected.length == 0) {
+          var selected;
+          list.children().each(function(i, obj) {
+            if ($(obj).position().top > 0) {
+              selected = $(obj);
+              return false;
             }
-          }
-          else {
-            $selected.removeClass(selectedClass);
-            next = $("li:first", $tpList).addClass(selectedClass)[0];
-            $tpDiv[0].scrollTop = 0;
-          }
-          return false;
-          break;
-        case 13: // Enter
-          if ($tpDiv.is(":visible")) {
-            var sel = $(selectedSelector, $tpList)[0];
-            setTimeVal(elm, sel, $tpDiv, settings);
-          }
-          return false;
-          break;
-        case 27: // Esc
-          $tpDiv.hide();
-          return false;
-          break;
-      }
-      return true;
-    });
-    $(elm).keyup(function(e) {
-      keyDown = false;
-    });
-    // Helper function to get an inputs current time as Date object.
-    // Returns a Date object.
-    this.getTime = function() {
-      return timeStringToDate(elm.value, settings);
-    };
-    // Helper function to set a time input.
-    // Takes a Date object or string.
-    this.setTime = function(time) {
-      elm.value = formatTime(timeToDate(time, settings), settings);
-      // Trigger element's change events.
-      $(elm).change();
-    };
+          });
 
-  }; // End fn;
+          selected.addClass('ui-timepicker-selected');
+        } else if (!selected.is(':last-child')) {
+          selected.removeClass('ui-timepicker-selected');
+          selected.next().addClass('ui-timepicker-selected');
 
-  // Plugin defaults.
-  $.fn.timePicker.defaults = {
-    step:30,
-    startTime: new Date(0, 0, 0, 0, 0, 0),
-    endTime: new Date(0, 0, 0, 23, 30, 0),
-    separator: ':',
-    show24Hours: true
+          if (selected.next().position().top + 2*selected.outerHeight() > list.outerHeight()) {
+            list.scrollTop(list.scrollTop() + selected.outerHeight());
+          }
+        }
+
+        break;
+
+      case 27: // escape
+        list.find('li').removeClass('ui-timepicker-selected');
+        list.hide();
+        break;
+
+      case 9:
+      case 16:
+      case 17:
+      case 18:
+      case 19:
+      case 20:
+      case 33:
+      case 34:
+      case 35:
+      case 36:
+      case 37:
+      case 39:
+      case 45:
+        return;
+
+      default:
+        list.find('li').removeClass('ui-timepicker-selected');
+        return;
+    }
   };
 
-  // Private functions.
+  function _selectValue(self)
+  {
+    var settings = self.data('settings')
+    var list = self.siblings('.ui-timepicker-list');
+    var timeValue = null;
 
-  function setTimeVal(elm, sel, $tpDiv, settings) {
-    // Update input field
-    elm.value = $(sel).text();
-    // Trigger element's change events.
-    $(elm).change();
-    // Keep focus for all but IE (which doesn't like it)
-    if (!$.browser.msie) {
-      elm.focus();
+    var cursor = list.find('.ui-timepicker-selected');
+
+    if (cursor.length) {
+      // selected value found
+      var timeValue = cursor.data('time');
+
+    } else if (self.val()) {
+
+      // no selected value; fall back on input value
+      var timeValue = _time2int(self.val());
+
+      _setSelected(self, list);
     }
-    // Hide picker
-    $tpDiv.hide();
-  }
 
-  function formatTime(time, settings) {
-    var h = time.getHours();
-    var hours = settings.show24Hours ? h : (((h + 11) % 12) + 1);
-    var minutes = time.getMinutes();
-    return formatNumber(hours) + settings.separator + formatNumber(minutes) + (settings.show24Hours ? '' : ((h < 12) ? 'am' : 'pm'));
-  }
+    if (timeValue !== null) {
+      var timeString = _int2time(timeValue, settings.timeFormat);
+      self.attr('value', timeString);
+    }
 
-  function formatNumber(value) {
-    return (value < 10 ? '0' : '') + value;
-  }
+    self.trigger('change').trigger('changeTime');
+  };
 
-  function timeToDate(input, settings) {
-    return (typeof input == 'object') ? normaliseTime(input) : timeStringToDate(input, settings);
-  }
+  function _int2duration(seconds)
+  {
+    var minutes = Math.round(seconds/60);
+    var duration;
 
-  function timeStringToDate(input, settings) {
-    if (input) {
-      var array = input.split(settings.separator);
-      var hours = parseFloat(array[0]);
-      var minutes = parseFloat(array[1]);
+    if (minutes < 60) {
+      duration = [minutes, _lang.mins];
+    } else if (minutes == 60) {
+      duration = ['1', _lang.hr];
+    } else {
+      var hours = (minutes/60).toFixed(1);
+      if (_lang.decimal != '.') hours = hours.replace('.', _lang.decimal);
+      duration = [hours, _lang.hrs];
+    }
 
-      // Convert AM/PM hour to 24-hour format.
-      if (!settings.show24Hours) {
-        if (hours === 12 && input.indexOf('AM') !== -1) {
-          hours = 0;
-        }
-        else if (hours !== 12 && input.indexOf('PM') !== -1) {
-          hours += 12;
-        }
+    return duration.join(' ');
+  };
+
+  function _int2time(seconds, format)
+  {
+    var time = new Date(_baseDate.valueOf() + (seconds*1000));
+    var output = '';
+
+    for (var i=0; i<format.length; i++) {
+
+      var code = format.charAt(i);
+      switch (code) {
+
+        case 'a':
+          output += (time.getHours() > 11) ? 'pm' : 'am';
+          break;
+
+        case 'A':
+          output += (time.getHours() > 11) ? 'PM' : 'AM';
+          break;
+
+        case 'g':
+          var hour = time.getHours() % 12;
+          output += (hour == 0) ? '12' : hour;
+          break;
+
+        case 'G':
+          output += time.getHours();
+          break;
+
+        case 'h':
+          var hour = time.getHours() % 12;
+
+          if (hour != 0 && hour < 10) {
+            hour = '0'+hour;
+          }
+
+          output += (hour == 0) ? '12' : hour;
+          break;
+
+        case 'H':
+          var hour = time.getHours();
+          output += (hour > 9) ? hour : '0'+hour;
+          break;
+
+        case 'i':
+          var minutes = time.getMinutes();
+          output += (minutes > 9) ? minutes : '0'+minutes;
+          break;
+
+        case 's':
+          var seconds = time.getSeconds();
+          output += (seconds > 9) ? seconds : '0'+seconds;
+          break;
+
+        default:
+          output += code;
       }
-      var time = new Date(0, 0, 0, hours, minutes, 0);
-      return normaliseTime(time);
     }
-    return null;
-  }
 
-  /* Normalise time object to a common date. */
-//  function normaliseTime(time) {
-//    time.setFullYear(2001);
-//    time.setMonth(0);
-//    time.setDate(0);
-//    return time;
-//  }
+    return output;
+  };
 
-function normaliseTime(time) {
-  var currentDate = new Date();
-  time.setFullYear(currentDate.getFullYear());
-  time.setMonth(currentDate.getMonth());
-  time.setDate(currentDate.getDate());
-  return time;
-}
+  function _time2int(timeString)
+  {
+    if (timeString == '') return null;
+    if (timeString+0 == timeString) return timeString;
 
+    if (typeof(timeString) == 'object') {
+      timeString = timeString.getHours()+':'+timeString.getMinutes();
+    }
+
+    var d = new Date(0);
+    var time = timeString.toLowerCase().match(/(\d+)(?::(\d\d))?\s*([pa]?)/);
+
+    if (!time) {
+      return null;
+    }
+
+    var hour = parseInt(time[1]*1);
+
+    if (time[3]) {
+      if (hour == 12) {
+        var hours = (time[3] == 'p') ? 12 : 0;
+      } else {
+        var hours = (hour + (time[3] == 'p' ? 12 : 0));
+      }
+
+    } else {
+      var hours = hour;
+    }
+
+    var minutes = ( time[2]*1 || 0 );
+    return hours*3600 + minutes*60;
+  };
+
+  // Plugin entry
+  $.fn.timepicker = function(method)
+  {
+    if(methods[method]) { return methods[method].apply(this, Array.prototype.slice.call(arguments, 1)); }
+    else if(typeof method === "object" || !method) { return methods.init.apply(this, arguments); }
+    else { $.error("Method "+ method + " does not exist on jQuery.timepicker"); }
+  };
 })(jQuery);

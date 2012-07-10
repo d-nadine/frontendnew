@@ -1,32 +1,50 @@
-/* Time Picker CSS https://github.com/perifer/timePicker */
-
-
-div.time-picker {
-  position: absolute;
-  height: auto;
-  width:4em; /* needed for IE */
-  overflow: auto;
+.ui-timepicker-list {
+  overflow-y: auto;
+  height: 150px;
+  width: 6.5em;
   background: #fff;
-  border: 1px solid #aaa;
-  z-index: 99;
-  margin: 0;
-}
-div.time-picker-12hours {
-  width:6em; /* needed for IE */
-}
-
-div.time-picker ul {
-  list-style-type: none;
+  border: 1px solid #ddd;
   margin: 0;
   padding: 0;
+  list-style: none;
+  -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+  -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+  box-shadow:0 5px 10px rgba(0,0,0,0.2);
+  outline: none;
 }
-div.time-picker li {
+
+.ui-timepicker-list.ui-timepicker-with-duration {
+  width: 11em;
+}
+
+.ui-timepicker-duration {
+  margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+  color: #888;
+}
+
+.ui-timepicker-list li {
+  padding: 3px 0 3px 5px;
   cursor: pointer;
-  height: 10px;
-  font: 12px/1 Helvetica, Arial, sans-serif;
-  padding: 4px 3px;
+  white-space: nowrap;
+  color: #000;
+  list-style: none;
+  margin: 0;
 }
-div.time-picker li.selected {
-  background: #0063CE;
-  color: #fff;
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+  background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list:hover .ui-timepicker-selected:hover {
+  background: #1980EC; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+  color: #ccc;
 }
