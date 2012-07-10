@@ -1,9 +1,6 @@
 <form class="well">
-  <fieldset>
-    {{view topicField label="Meeting Topic"}}
-
-  </fieldset>
-  <fieldset>
+  {{view topicField label="Meeting Topic"}}
+  <div>
     {{view inviteField label="Invite"}}
 
     {{#view selectedInvitees}}
@@ -13,8 +10,8 @@
       <div class="clearfix"></div>
     {{/view}}
 
-  </fieldset>
-  <div class="meeting-date-picker">
+  </div>
+  <div class="inline-date-picker">
     <div class="pull-left">
       <label for="date">Date</label>
       {{view meetingDateField}}
