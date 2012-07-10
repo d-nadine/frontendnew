@@ -30,6 +30,7 @@ Radium.PageScroller = Ember.Mixin.create(Ember.Evented, {
       var resources = data[options.resource]
 
       if(!resources || resources.length === 0){
+        self.set('canScroll', false);
         return;
       }
 

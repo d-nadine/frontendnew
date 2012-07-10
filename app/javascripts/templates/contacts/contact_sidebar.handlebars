@@ -1,0 +1,38 @@
+{{#with content}}
+<div id="sidebar" class="span3">
+  <div id="contact-info" class="module">
+    <div class="component">
+      <h4>{{inlineTextField name}} {{view Radium.LabelView contactBinding="this" labelBinding="status" class="pull-right"}}</h4>
+      <p>Assigned to: {{user.name}}</p>
+
+    </div>
+  </div> <!-- / #contact-info -->
+  {{#if addresses.length}}
+  <div id="contact-addresses" class="module">
+    {{#each addresses}}
+      <div class="component bordered">
+        <address>
+          <strong>{{name}}</strong><br>
+          {{street}}<br>
+          {{state}} {{zipCode}}<br>
+          {{country}}
+        </address>
+      </div>
+    {{/each}}
+  </div> <!-- / #contact-addresses -->
+  {{/if}}
+
+  {{#if groups.length}}
+    <div id="contact-groups" class="module">
+      <div class="component">
+        <h4>Groups</h4>
+        {{#each groups}}
+          <p>{{name}}</p>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+</div> <!-- /#sidebar -->
+{{/with}}
+

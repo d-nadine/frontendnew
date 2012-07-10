@@ -134,6 +134,7 @@ minispade.require('radium/templates/notifications/new.comment_notification');
 
 // Contacts
 minispade.require('radium/templates/contacts/contacts');
+minispade.require('radium/templates/contacts/contact_sidebar');
 minispade.require('radium/templates/contacts/contact');
 minispade.require('radium/templates/contacts/contact_card');
 minispade.require('radium/templates/contacts/lead');
