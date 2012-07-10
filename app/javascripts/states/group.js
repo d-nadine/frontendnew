@@ -4,8 +4,7 @@ Radium.States.Group = Ember.State.extend({
       ///groups/497:A,489,490,495,491,492,496,494,498,493
       this._super(manager, transition);
   
-      var self = this,
-          groupId = Radium.appController.get('params');
+      var groupId = Radium.appController.get('params');
 
       Radium.set('groupFeedController', Radium.GroupFeedController.create());
 

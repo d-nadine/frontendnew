@@ -26,7 +26,9 @@ Radium.ContactsPage = Ember.State.extend({
 
       var contact = Radium.store.find(Radium.Contact, Radium.appController.get('params'));
       
-      Radium.selectedContactController.set('content', contact);
+      Radium.set('selectedContactController', Radium.SelectedContactController.create());
+
+      Radium.get('selectedContactController').set('contact', contact);
 
       Radium.get('appController').set('sideBarView', Radium.ContactSidebar.create({
         content: contact
@@ -34,13 +36,11 @@ Radium.ContactsPage = Ember.State.extend({
 
       var contactsView = Radium.ContactPageView.create({});
       
-      Radium.selectedContactController.set('view', contactsView);
-
       Radium.get('appController').set('feedView', contactsView);
     },
     exit: function(manager) {
       this._super(manager);
-      Radium.selectedContactController.set('content', null);
+      Radium.selectedContactController.set('contact', null);
     },
     ready: Ember.State.create()
   }),

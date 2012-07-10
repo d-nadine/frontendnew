@@ -1,6 +1,6 @@
-Radium.ContactPageView = Ember.View.extend(Radium.EndlessScrolling, {
+Radium.ContactPageView = Ember.View.extend({
   templateName: 'contact',
-  contentBinding: 'Radium.selectedContactController.content',
+  contentBinding: 'Radium.selectedContactController.contact',
   addContactTodo: function() {
     Radium.get('formManager').send('showForm', {
       form: 'Todo',

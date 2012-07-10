@@ -18,6 +18,8 @@ Radium.Contact = Radium.Person.extend({
     }
   },
 
+  meta: DS.attr('object'),
+
   contactedAt: DS.attr('date', {
     key: 'contacted_at'
   }),

@@ -7,21 +7,8 @@
         <a href="#" class="btn btn-small" {{action "emailContact"}}>Email Contact</a>
         <a href="#" class="btn btn-small" {{action "addContactToGroup"}}>Add to Group</a>
       </div>
-      <h3>{{Radium.selectedContactController.content.name}} Feed</h3>
+      <h3>{{Radium.selectedContactController.contact.name}} Feed</h3>
     </div>
-    {{#if controller}}
-      {{#with controller}}
-        {{#each pastDates}}
-          {{#if content.length}}
-            <div class="page-header">
-              <h3>{{formatDate date}}</h3>
-            </div>
-            {{#each content}}
-              {{view Radium.HistoricalFeedView contentBinding="this"}}
-            {{/each}}
-          {{/if}}
-        {{/each}}
-      {{/with}}
-    {{/if}}
+    {{view Radium.ContactFeedView}}
   </div>
 </div>
