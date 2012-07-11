@@ -5,15 +5,15 @@
 
   {{view contactField label="Contact"}}
   
-  <fieldset class="control-group">
-    <label for="amount">Amount</label>
-    <input type="text" name="amount" id="amount" value="">
-  </fieldset>
+  <div class="form-inline">
+    <label for="date">Line Items</label>
+    {{view lineItemsContainer}}
+  </div>
 
   <div class="inline-date-picker">
     <div class="pull-left">
       <label for="date">Close Date</label>
-      {{view Radium.DatePickerField id="close-date" name="close-date" class="input-small"}}
+      {{view closeDateField}}
     </div>
     <div class="pull-left">
       {{view closeTimeField label="Close Time"}}

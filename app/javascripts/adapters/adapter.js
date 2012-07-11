@@ -24,7 +24,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var url = (type.url) ? type.url : this.pluralize(root);
 
     var success = function(json) {
-      this.sideload(store,type,json,root)
+      this.sideload(store,type,json,root);
       store.didCreateRecord(model, json[root]);
     };
     
@@ -50,7 +50,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     });
 
     var success = function(json) {
-      this.sideload(store,type,json,plural)
+      this.sideload(store,type,json,plural);
       store.didCreateRecords(type, models, json[plural]);
     };
 
@@ -75,7 +75,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     this.ajax(url, "PUT", {
       data: data,
       success: function(json) {
-      this.sideload(store,type,json,root)
+      this.sideload(store,type,json,root);
         store.didUpdateRecord(model, json && json[root]);
       }
     }, {
@@ -100,7 +100,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     this.ajax("/" + this.pluralize(root), "POST", {
       data: data,
       success: function(json) {
-      this.sideload(store,type,json,plural)
+      this.sideload(store,type,json,plural);
         store.didUpdateRecords(models, json[plural]);
       }
     });
@@ -248,7 +248,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
   findQuery: function(store, type, query, modelArray) {
     var self = this,
-        root = this.rootForType(type), 
+        root = this.rootForType(type),
         plural = (type.root) ? this.pluralize(type.root) : this.pluralize(root),
         currentPage = 1,
         loadedJSON = [],

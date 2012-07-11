@@ -23,6 +23,9 @@ Radium.Deal = Radium.Core.extend({
   products: DS.hasMany('Radium.Product'),
   activities: DS.hasMany('Radium.Activity'),
   overdue: DS.attr('boolean'),
+  line_item_attributes: DS.hasMany('Radium.LineItem', {
+    embedded: true
+  }),
 
   isPending: function() {
     return this.get('state') === 'pending';

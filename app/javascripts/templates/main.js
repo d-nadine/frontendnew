@@ -93,6 +93,7 @@ minispade.require('radium/templates/forms/form_layout');
 minispade.require('radium/templates/forms/fieldset');
 minispade.require('radium/templates/forms/call_list_form');
 minispade.require('radium/templates/forms/add_to_call_list');
+minispade.require('radium/templates/forms/deal_line_item');
 minispade.require('radium/templates/forms/deal_form');
 minispade.require('radium/templates/forms/discussion_form');
 minispade.require('radium/templates/forms/meeting_form');

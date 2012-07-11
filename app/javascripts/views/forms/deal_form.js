@@ -1,3 +1,10 @@
+Radium.StaticLineItem = Ember.Object.extend({
+  name: null,
+  quantity: null,
+  price: null,
+  currency: null
+});
+
 Radium.DealForm = Radium.FormView.extend({
   init: function() {
     this._super();
@@ -56,7 +63,7 @@ Radium.DealForm = Radium.FormView.extend({
   closeDateField: Radium.DatePickerField.extend({
     elementId: 'close-date',
     name: 'close-date',
-    viewName: 'FuckBalls',
+    viewName: 'closeDate',
     classNames: ['input-small'],
     valueBinding: Ember.Binding.dateTime('%Y-%m-%d').from('parentView.closeDateValue')
 
@@ -74,8 +81,37 @@ Radium.DealForm = Radium.FormView.extend({
     })
   }),
 
+  lineItemsContainer: Ember.CollectionView.extend({
+    viewName: 'lineItems',
+    itemViewClass: Radium.DealLineItemView,
+    isMultipleLineItems: function() {
+      return (this.getPath('content.length') > 1) ? true : false;
+    }.property('content.length'),
+    addLineItem: function(event) {
+      this.lineItem();
+      return false;
+    },
+    removeLineItem: function(event) {
+      this.get('content').removeObject(event.context);
+      return false;
+    },
+    init: function() {
+      this._super();
+      this.set('content', Ember.A([]));
+      this.lineItem();
+    },
+    lineItem: function() {
+      var lineItem = {
+        name: null,
+        quantity: null,
+        price: null,
+        currency: null
+      };
+      this.get('content').pushObject(lineItem);
+    }
+  }),
+
   submitForm: function() {
-    debugger;
     var self = this;
     var deal,
         contact = this.get('contactId'),
@@ -84,6 +120,7 @@ Radium.DealForm = Radium.FormView.extend({
         closeByDate = Ember.DateTime.parse(closeByValue, '%Y-%m-%d'),
         closeByTime = this.get('closeTimeValue'),
         userId = Radium.usersController.getPath('loggedInUser.id'),
+        lineItems = this.getPath('lineItems.content'),
         data = {
           description: description,
           close_by: closeByDate.adjust({
@@ -92,11 +129,19 @@ Radium.DealForm = Radium.FormView.extend({
           }),
           user_id: userId,
           contact_id: contact,
-          state: 'pending'
+          state: 'pending',
+          line_item_attributes: lineItems
         };
 
     deal = Radium.store.createRecord(Radium.Deal, data);
-    
 
+    Radium.Deal.reopenClass({
+      url: '/deals'
+    });
+
+    Radium.store.commit();
+
+    this.get('parentView').close();
+    return false;
   }
 });
