@@ -1,43 +1,25 @@
 <form class="well">
   <legend>Create a Deal</legend>
-  <fieldset>
-    <label for="description">Description</label>
-    <textarea name="description" id="description" class="span8"></textarea>
-  </fieldset>
-  <fieldset>
-    <label for="contact">Contact</label>
-    {{view Radium.AutocompleteTextField 
-      id="contact" class="input-xlarge"
-      sourceBinding="Radium.contactsController.contactNames"
-    }}
-    <input type="hidden" id="contact-id" name="contact-id" value="">
-  </fieldset>
-  <fieldset>
-    <label for="amount">Amount</label>
-    <input type="text" name="amount" id="amount" value="">
-  </fieldset>
-  <fieldset>
-    <label for="date">Close Date</label>
-    {{view Radium.DatePickerField id="close-date" name="close-date" class="input-small"}}
-    <label for="time">Close Time:</label>
-    <input type="text" id="close-time" name="close-time" class="input-small" placeholder="eg 1:00">
-    <select id="close-meridian" style="width: 60px;">
-      <option value="am">AM</option>
-      <option value="pm">PM</option>
-    </select>
-  </fieldset>
-  <fieldset>
-    <label for="state">State:</label>
-    <select id="state" name="state">
-      <option value="rejected">Rejected</option>
-      <option value="pending" selected="selected">Pending</option>
-      <option value="paid">Paid</option>
-      <option value="closed">Closed</option>
-    </select>
-  </fieldset>
+  
+  {{view dealDescriptionField label="Description"}}
 
-  <div class="form-actions">
-    {{#view submitButton class="btn btn-primary"}}Save{{/view}}
-    {{#view cancelFormButton class="btn"}}Cancel{{/view}}
+  {{view contactField label="Contact"}}
+  
+  <div class="form-inline">
+    <label for="date">Line Items</label>
+    {{view lineItemsContainer}}
+  </div>
+
+  <div class="inline-date-picker">
+    <div class="pull-left">
+      <label for="date">Close Date</label>
+      {{view closeDateField}}
+    </div>
+    <div class="pull-left">
+      {{view closeTimeField label="Close Time"}}
+    </div>
+    <div class="pull-left">
+      {{#view submitButton class="btn btn-primary"}}Save{{/view}}
+    </div>
   </div>
 </form>

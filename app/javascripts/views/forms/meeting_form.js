@@ -110,54 +110,49 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   startsAtField: Radium.Fieldset.extend({
     errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, {
+    formField: Ember.TextField.extend(Radium.FieldValidation, Radium.TimePicker, {
       classNames: ['input-small'],
       elementId: 'starts-at',
       nameBinding: 'parentView.fieldAttributes',
       placeholder: 'eg 1:00',
       rules: ['required'],
-      valueBinding: 'parentView.parentView.startsAtValue'
+      formValueBinding: 'parentView.parentView.startsAtValue'
     })
   }),
 
   endsAtField: Radium.Fieldset.extend({
     errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, {
+    formField: Ember.TextField.extend(Radium.FieldValidation, Radium.TimePicker, {
       classNames: ['input-small'],
       elementId: 'ends-at',
       nameBinding: 'parentView.fieldAttributes',
       placeholder: 'eg 1:00',
       rules: ['required'],
-      valueBinding: 'parentView.parentView.endsAtValue'
+      formValueBinding: 'parentView.parentView.endsAtValue'
     })
   }),
 
   submitForm: function() {
-    var meeting, 
+    var meeting,
         self = this,
         topic = this.get('topicValue'),
         location = this.get('locationValue'),
         day = this.getPath('meetingDate.value'),
         date = Ember.DateTime.parse(day, '%Y-%m-%d'),
         startsAt = this.get('startsAtValue'),
-        startsAtMeridian = this.$('#start-time-meridian').val(),
         endsAt = this.get('endsAtValue'),
         endsAtMeridian = this.$('#end-time-meridian').val(),
         invitees = this.getPath('inviteesList.selected'),
 
-        startsAtTimeArr = Radium.Utils.parseTimeString(startsAt, startsAtMeridian),
-        endsAtTimeArr = Radium.Utils.parseTimeString(endsAt, endsAtMeridian),
-
-
         data = {
           topic: topic,
           startsAt: date.adjust({
-            hour: endsAtTimeArr[0],
-            minute: endsAtTimeArr[0]
+            hour: startsAt.getHours(),
+            minute: startsAt.getMinutes()
           }),
           endsAt: date.adjust({
-            hour: startsAtTimeArr[0],
-            minute: startsAtTimeArr[0]
+            hour: endsAt.getHours(),
+            minute: endsAt.getMinutes()
           }),
           location: location,
           invite: invitees.map(function(invitee) {

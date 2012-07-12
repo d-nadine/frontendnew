@@ -9,7 +9,7 @@ Radium.Fieldset = Ember.View.extend({
   invalidFieldsBinding: 'parentView.invalidFields',
   attributeBindings: ['for'],
   fieldAttributes: function() {
-    return this.get('label').dasherize();
+    return this.get('label').dasherize() || "";
   }.property('label').cacheable(),
   templateName: 'fieldset'
 });

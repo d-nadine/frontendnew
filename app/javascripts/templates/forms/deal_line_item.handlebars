@@ -1,0 +1,8 @@
+{{view nameField valueBinding="content.name"}}
+{{view quantityField valueBinding="content.quantity"}}
+{{view priceField valueBinding="content.price"}}
+{{view currencySelect}}
+<a href="#" {{action "addLineItem" target="parentView"}}><i class="icon-plus"></i></a>
+{{#if collectionView.isMultipleLineItems}}
+<a href="#" {{action "removeLineItem" target="parentView" context="content"}}><i class="icon-minus"></i></a>
+{{/if}}

@@ -1,5 +1,6 @@
 Radium.FieldValidation = Ember.Mixin.create({
   didInsertElement: function() {
+    this._super();
     this.getPath('parentView.invalidFields').addObject(this);
   },
 
@@ -21,8 +22,8 @@ Radium.FieldValidation = Ember.Mixin.create({
   },
 
   keyUp: function(event) {
-    this.testRules();
     this._super(event);
+    this.testRules();
   },
 
   focusOut: function(event) {
