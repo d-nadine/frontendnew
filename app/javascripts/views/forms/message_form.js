@@ -33,15 +33,13 @@ Radium.MessageForm = Radium.FormView.extend({
     contentBinding: 'parentView.toEmailValues.selected'
   }),
 
-  toField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'to',
-      flagType: 'to',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.toEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  toField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'to',
+    flagType: 'to',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.toEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
   
   subjectField: Radium.Fieldset.extend({
@@ -86,26 +84,22 @@ Radium.MessageForm = Radium.FormView.extend({
     contentBinding: 'parentView.bccEmailValues.selected'
   }),
 
-  ccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'cc',
-      flagType: 'cc',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.ccEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  ccField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'cc',
+    flagType: 'cc',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.ccEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
 
-  bccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'bcc',
-      flagType: 'bcc',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.bccEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  bccField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'bcc',
+    flagType: 'bcc',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.bccEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
 
   isAttachmentVisible: false,

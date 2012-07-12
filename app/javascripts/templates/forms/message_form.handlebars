@@ -1,5 +1,3 @@
-<legend>Send a Message</legend>
-
 {{#if selection}}
   <label>To: 
   {{#if selection.length}}
@@ -11,34 +9,46 @@
   {{/if}}
   </label>
 {{else}}
-  {{view toField label="To"}}
-  {{#view selectedToEmails}}
-    {{#each content}}
-      {{view Radium.TokenView itemBinding="this"}}
-    {{/each}}
-    <div class="clearfix"></div>
-  {{/view}}
+  <fieldset class="control-group">
+    <label for="to">To:</label>
+    <div class="token-container">
+      {{#view selectedToEmails}}
+        {{#each content}}
+          {{view Radium.TokenView itemBinding="this"}}
+        {{/each}}
+      {{/view}}
+      {{view toField}}
+    </div>
+  </fieldset>
 {{/if}}
 
 {{view subjectField label="Subject"}}
 
 <p><a href="#" {{action "toggleOptional"}}>{{toggleText}} CC/BCC</a></p>
 {{#if isOptionalVisible}}
-  {{view ccField label="CC"}}
-  {{#view selectedCCEmails}}
-    {{#each content}}
-      {{view Radium.TokenView itemBinding="this"}}
-    {{/each}}
-    <div class="clearfix"></div>
-  {{/view}}
+  <fieldset class="control-group">
+    <label for="cc">CC:</label>
+    <div class="token-container">
+      {{#view selectedCCEmails}}
+        {{#each content}}
+          {{view Radium.TokenView itemBinding="this"}}
+        {{/each}}
+      {{/view}}
+      {{view ccField}}
+    </div>
+  </fieldset>
 
-  {{view bccField label="BCC"}}
-  {{#view selectedBCCEmails}}
-    {{#each content}}
-      {{view Radium.TokenView itemBinding="this"}}
-    {{/each}}
-    <div class="clearfix"></div>
-  {{/view}}
+  <fieldset class="control-group">
+    <label for="bcc">BCC:</label>
+    <div class="token-container">
+      {{#view selectedBCCEmails}}
+        {{#each content}}
+          {{view Radium.TokenView itemBinding="this"}}
+        {{/each}}
+      {{/view}}
+      {{view bccField}}
+    </div>
+  </fieldset>
 {{/if}}
 
 {{view messageField label="Message"}}

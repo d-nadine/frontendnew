@@ -1,14 +1,12 @@
-<legend>Add to Group</legend>
-<fieldset class="control-group" {{bindAttr class="isError:error"}}>
-  <label for="group-name">Group</label>
-  {{view groupSearchField}}
-</fieldset>
-{{#if willCreateNewGroup}}
-  <div class="alert alert-info">
-    A new group of {{newGroupName}} will be created.
-  </div>
-{{/if}}
-
-<div class="form-actions">
-  {{#view submitButton class="btn btn-primary"}}Add to Group{{/view}}
+<div class="form-inline">
+  <fieldset class="control-group" {{bindAttr class="isError:error"}}>
+    <label for="group-name">Group</label>
+    {{view groupSearchField}}
+    {{#view submitButton class="btn btn-primary"}}Add to Group{{/view}}
+  </fieldset>
+  {{#if willCreateNewGroup}}
+    <div class="alert alert-info">
+      A new group of {{newGroupName}} will be created.
+    </div>
+  {{/if}}
 </div>

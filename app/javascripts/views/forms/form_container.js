@@ -72,25 +72,30 @@ Radium.FormContainerView = Ember.ContainerView.create({
   showDiscussionForm: function(event) {
     var form = Radium.DiscussionForm.create();
     this.show(form);
+    return false;
   },
 
   showDealForm: function(event) {
     var form = Radium.DealForm.create();
     this.show(form);
+    return false;
   },
 
   showMeetingForm: function(event) {
     var form = Radium.MeetingForm.create();
     this.show(form);
+    return false;
   },
 
   showContactForm: function(event) {
     var form = Radium.ContactForm.create();
     this.show(form);
+    return false;
   },
 
   showAddToGroupForm: function(event) {
     var form = Radium.AddToGroupForm.create();
     this.show(form);
+    return false;
   }
 }).append();

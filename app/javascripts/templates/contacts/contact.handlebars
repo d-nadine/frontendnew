@@ -14,7 +14,11 @@
           {{action "showEmailForm" target="Radium.FormContainerView" context="controller.contact"}}>
           Email Contact
         </a>
-        <a href="#" class="btn btn-small" {{action "addContactToGroup"}}>Add to Group</a>
+        <a href="#" 
+          class="btn btn-small" 
+          {{action "showAddToGroupForm" target="Radium.FormContainerView" context="controller.contact"}}>
+          Add to Group
+        </a>
       </div>
     {{/if}}
       <h3>{{Radium.selectedContactController.contact.name}} Feed</h3>

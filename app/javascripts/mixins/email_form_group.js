@@ -1,4 +1,5 @@
 Radium.EmailFormGroup = Ember.Mixin.create({
+  classNames: ['token-field'],
   insertNewline: function(event) {
     event.preventDefault();
     var val = this.get('value');
