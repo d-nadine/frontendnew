@@ -61,11 +61,7 @@ Radium.ContactCardView = Ember.View.extend({
     attributeBindings: ['href'],
     href: function() {
       return '/contacts/%@'.fmt(this.getPath('content.id'))
-    }.property('content'),
-    click: function() {
-      var contact = this.get('content');
-      Radium.selectedContactController.set('content', contact);
-    }
+    }.property('content')
   }),
 
   sendContactMessage: function(event) {
