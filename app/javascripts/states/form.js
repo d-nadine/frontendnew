@@ -46,7 +46,6 @@ Radium.FormManager = Ember.StateManager.extend({
   }),
 
   open: Ember.State.create({
-
     closeForm: function(manager, context) {
       manager.setPath('rootView.currentView', null);
       manager.goToState('empty');

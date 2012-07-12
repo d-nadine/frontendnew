@@ -41,6 +41,7 @@ Radium.App = Ember.StateManager.create({
       usersControllerBinding: 'Radium.usersController',
       contactsControllerBinding: 'Radium.contactsController'
     }));
+    Radium.set('formManager', Radium.FormManager.create());
     this._super();
   },
 

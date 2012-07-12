@@ -1,11 +1,11 @@
 Radium.ContactPageView = Ember.View.extend({
   templateName: 'contact',
-  contentBinding: 'Radium.selectedContactController.contact',
+  contactBinding: 'Radium.selectedContactController.contact',
   addContactTodo: function() {
     Radium.get('formManager').send('showForm', {
       form: 'Todo',
       type: 'contacts',
-      target: this.get('content')
+      target: this.get('contact')
     });
     return false;
   },
@@ -14,7 +14,7 @@ Radium.ContactPageView = Ember.View.extend({
     Radium.get('formManager').send('showForm', {
       form: 'Message',
       type: 'contacts',
-      target: this.get('content')
+      target: this.get('contact')
     });
     return false;
   },
@@ -22,7 +22,7 @@ Radium.ContactPageView = Ember.View.extend({
   addContactToGroup: function() {
     Radium.get('formManager').send('showForm', {
       form: 'AddToGroup',
-      target: this.get('content')
+      target: this.get('contact')
     });
     return false;
   },
@@ -30,15 +30,8 @@ Radium.ContactPageView = Ember.View.extend({
   addContactToCompany: function() {
     Radium.get('formManager').send('showForm', {
       form: 'AddToCompany',
-      target: this.get('content')
+      target: this.get('contact')
     });
     return false;
-  },
-
-  // Endless scrolling properties
-  feedBinding: 'content.feed',
-  pageBinding: 'content.feed.page',
-  totalPagesBinding: 'content.feed.totalPages',
-  // targetIdBinding: 'content.id',
-  feedUrl: '/api/contacts/%@/feed'
+  }
 });
