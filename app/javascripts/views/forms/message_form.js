@@ -1,20 +1,28 @@
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
 
-  toEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+  init: function() {
+    this._super();
 
-  ccEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+    this.set('toEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
 
-  bccEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+    this.set('ccEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
+
+    this.set('bccEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
+    
+    this.getPath('toEmailValues.selected').pushObjects(
+      this.controller.get('to')
+    );
+  },
 
   // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
   isValid: function() {

@@ -13,7 +13,7 @@ Radium.FormContainerView = Ember.ContainerView.create({
       top: 0
     }, 'fast');
     
-    form.set('isGlobalLevelForm', false);  
+    form.set('isGlobalLevelForm', false);
     form.$().slideUp('fast', function() {
       self.set('currentView', null);
       form.destroy();
@@ -28,26 +28,19 @@ Radium.FormContainerView = Ember.ContainerView.create({
 
   // Individual Forms
   showEmailForm: function(event) {
-    var context = (event) ? event.context : null,
-        // Test if context is an array controller versus an object
-        isArray = Ember.Array.detect(context),
-        // If it is an array, we wanted the selected computed property,
-        // but if not, just pass the defined object along.
-        multipleBinding = {
-          source: context,
-          selectionBinding: 'source.selectedContacts'
-        },
-        singleBinding = {
-          selection: context
-        },
-        selection = (isArray) ? multipleBinding : singleBinding;
-
     var controller = Ember.Object.create({
-      to: Ember.A([]),
-      cc: Ember.A([]),
-      bcc: Ember.A([])
-    });
+          to: Ember.A([]),
+          cc: Ember.A([]),
+          bcc: Ember.A([])
+        }),
+        context = (event) ? event.context : null;
 
+    if (context) {
+      controller.get('to').pushObject({
+        name: context.get('name'),
+        email: context.get('email')
+      });
+    }
 
     this.show(Radium.MessageForm.create({
       controller: controller
@@ -99,5 +92,5 @@ Radium.FormContainerView = Ember.ContainerView.create({
   showAddToGroupForm: function(event) {
     var form = Radium.AddToGroupForm.create();
     this.show(form);
-  },
+  }
 }).append();

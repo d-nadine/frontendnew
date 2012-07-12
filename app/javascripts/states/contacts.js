@@ -25,7 +25,9 @@ Radium.ContactsPage = Ember.State.extend({
         content: contact
       }));
 
-      var contactsView = Radium.ContactPageView.create({});
+      var contactsView = Radium.ContactPageView.create({
+        controller: Radium.get('selectedContactController')
+      });
       
       Radium.get('appController').set('feedView', contactsView);
     },

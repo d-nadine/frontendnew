@@ -1,4 +1,4 @@
-Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, { 
+Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
   content: Ember.A(),
   contact: null,
   contactLoaded: function(){
@@ -10,7 +10,7 @@ Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, 
         currentDate = feed.current_date;
 
     if(!currentDate){
-      this.get('content').pushObject({message: "There is no activity for this contact."})
+      this.get('content').pushObject({message: "There is no activity for this contact."});
       return;
     }
   
@@ -25,7 +25,7 @@ Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, 
                       self.set('previous_activity_date', feed.previous_activity_date);
                       self.set('next_activity_date', feed.next_activity_date);
                     }
-                  }
+                  };
 
     this.loadFeed({direction: Radium.SCROLL_BACK}, options);
 
