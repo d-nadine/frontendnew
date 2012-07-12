@@ -46,22 +46,24 @@
          <i class="icon-remove-circle"></i> None
         {{/view}}
       </div>
-      {{#if Radium.contactsController.selectedContacts.length}}
-        <div class="btn-group">
-          <button {{action "showEmailForm" 
-            target="Radium.FormContainerView"
-            context="Radium.contactsController"
-          }} class="btn btn-small">Send Email</button>
-          <button {{action 
-              "showTodoForm" 
+      {{#with Radium.contactsController}}
+        {{#if selectedContacts.length}}
+          <div class="btn-group">
+            <button {{action "showEmailForm" 
               target="Radium.FormContainerView"
               context="Radium.contactsController"
-            }} class="btn btn-small">
-            Add Todo
-          </button>
-          <button {{action "showAddToGroupForm" target="Radium.FormContainerView"}} class="btn btn-small">Add to Group</button>
-        </div>
-      {{/if}}
+            }} class="btn btn-small">Send Email</button>
+            <button {{action 
+                "showTodoForm" 
+                target="Radium.FormContainerView"
+                context="Radium.contactsController"
+              }} class="btn btn-small">
+              Add Todo
+            </button>
+            <button {{action "showAddToGroupForm" target="Radium.FormContainerView" context="selectedContacts"}} class="btn btn-small">Add to Group</button>
+          </div>
+        {{/if}}
+      {{/with}}
     </div>
   </div>
   <div class="btn-toolbar pull-right">
