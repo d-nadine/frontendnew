@@ -1,3 +1,4 @@
+* [2012-07-12 15:47 -0700] 136ebb8 - Joshua Jones: Add bulk messages and todo to contacts page. Not hooked up to API yet.
 * [2012-07-11 22:01 -0700] 566ae84 - Paul Cowan: Merge branch 'master' into contact_feed
 * [2012-07-09 14:21 -0700] baf18b2 - Joshua Jones: Fix notification template trying to parse date before it's loaded.
 * [2012-07-04 11:24 +0200] 82001e9 - twinturbo: Merge branch 'master' of github.com:radiumsoftware/frontend
