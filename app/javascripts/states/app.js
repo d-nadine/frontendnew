@@ -33,10 +33,10 @@ Radium.App = Ember.StateManager.create({
     Radium.set('todosController', Radium.TodosController.create());
     Radium.set('usersController', Radium.UsersController.create());
     Radium.set('activityFeedController', Radium.ActivityFeedController.create());
-    Radium.set('overdueActivitiesController', Radium.OverdueActivitiesController.create());
-    Radium.set('scheduledActivitiesController', Radium.ScheduledActivitiesController.create());
+    Radium.set('datebookSectionController', Radium.DatebookSectionController.create());
     Radium.set('contactsController', Radium.ContactsController.create());
     Radium.set('notificationsController', Radium.NotificationsController.create());
+    Radium.set('callListsController', Radium.CallListsController.create());
     Radium.set('everyoneController', Radium.EveryoneController.create({
       usersControllerBinding: 'Radium.usersController',
       contactsControllerBinding: 'Radium.contactsController'

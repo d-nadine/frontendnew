@@ -10,8 +10,8 @@ Radium.ActivityFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
   },
 
   feedLoaded: function(){
-    this.set('previous_activity_date', Radium.getPath('appController.feed.previous_activity_date'));
-    this.set('next_activity_date', Radium.getPath('appController.feed.next_activity_date'));
+    this.set('previous_entry', Radium.getPath('appController.feed.previous_entry'));
+    this.set('next_entry', Radium.getPath('appController.feed.next_entry'));
   }.observes('Radium.appController.feed'),
 
   clustersLoaded: function(){

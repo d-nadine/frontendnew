@@ -8,8 +8,8 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
     this.set('content', Ember.A());
     this.set('view', Ember.ContainerView.create());
     this.RequestDate = {};
-    this.RequestDate[Radium.SCROLL_BACK] = 'previous_activity_date';
-    this.RequestDate[Radium.SCROLL_FORWARD] = 'next_activity_date';
+    this.RequestDate[Radium.SCROLL_BACK] = 'previous_entry';
+    this.RequestDate[Radium.SCROLL_FORWARD] = 'next_entry';
 
     this.RequestContent = {};
     this.RequestContent[Radium.SCROLL_BACK] = 'content';
@@ -23,8 +23,8 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
               url: url,
               requestDate: currentDate,
               newFeedCallBack: function(feed){
-                self.set('previous_activity_date', feed.previous_activity_date);
-                self.set('next_activity_date', feed.next_activity_date);
+                self.set('previous_entry', feed.previous_entry);
+                self.set('next_entry', feed.next_entry);
               }
             };
   },
@@ -50,25 +50,28 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
     var url = (isScroll) ? this.get('feedUrl')(getDate) : options.url;
 
     $.when($.ajax({url: url})).then(function(data){
-      if((data.feed.scheduled_activities.length > 0) || (data.feed.clusters.length > 0)){
-        var dateContent = Ember.Object.create({dateHeader: getDate});
+      var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section);
+
+      if((dateBookSection.length > 0) || (data.feed.historical_section.clusters.length > 0)){
+        var dateToDisplay = getDate || "Today"
+        var dateContent = Ember.Object.create({dateHeader: dateToDisplay});
         
-        self.get('dateHash')[getDate] = dateContent;
+        self.get('dateHash')[dateToDisplay] = dateContent;
         
         self.get(contentKey).pushObject(dateContent);
       }
 
-      if(data.feed.scheduled_activities.length > 0){
-        self.get(contentKey).pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
+      if(dateBookSection.length > 0){
+        self.get(contentKey).pushObject(dateBookSection);
       }
 
-      if(data.feed.clusters.length > 0){
-        self.get(contentKey).pushObjects(data.feed.clusters.map(function(data) { return Ember.Object.create(data); }));
+      if(data.feed.historical_section.clusters.length > 0){
+        self.get(contentKey).pushObjects(data.feed.historical_section.clusters.map(function(data) { return Ember.Object.create(data); }));
       }
 
-      if(data.feed.activities.length > 0){
-        Radium.store.loadMany(Radium.Activity, data.feed.activities);
-      }
+      // if(data.feed.activities.length > 0){
+      //   Radium.store.loadMany(Radium.Activity, data.feed.activities);
+      // }
 
       if(isScroll){
         self.set(self.RequestDate[scrollData.direction], data.feed[self.RequestDate[scrollData.direction]]);

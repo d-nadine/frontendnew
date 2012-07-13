@@ -5,17 +5,14 @@ Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, 
       return;
     }
 
-    var feed = this.getPath('contact.meta.feed'),
-        currentDate = feed.current_date;
+    var url =  Radium.get('appController').getFeedUrl('contacts', this.getPath('contact.id'));
 
-    if(!currentDate){
-      this.get('content').pushObject({message: "There is no activity for this contact."});
-      return;
-    }
-  
-    var url =  Radium.get('appController').getFeedUrl('contacts', this.getPath('contact.id'), currentDate);
+    // if(!currentDate){
+    //   this.get('content').pushObject({message: "There is no activity for this contact."});
+    //   return;
+    // }
 
-    var options = this.getFeedOptions.call(this, url, currentDate);
+    var options = this.getFeedOptions.call(this, url);
 
     this.loadFeed({direction: Radium.SCROLL_BACK}, options);
 

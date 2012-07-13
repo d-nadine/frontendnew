@@ -93,9 +93,11 @@ Radium.MeetingForm = Radium.FormView.extend({
       $.when($.ajax({url: url})).then(function(data){
         $('.progress').hide();
         daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
+        
+        var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section);
 
-        if(data.feed.scheduled_activities.length > 0){
-          daysSummary.pushObject(Radium.Utils.pluckReferences(data.feed.scheduled_activities));
+        if(dateBookSection.length > 0){
+          daysSummary.pushObject(dateBookSection);
         }else{
           daysSummary.pushObject(Ember.Object.create({message: "Nothing Scheduled."}));
         }

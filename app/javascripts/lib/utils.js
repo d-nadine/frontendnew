@@ -33,7 +33,23 @@ Radium.Utils = {
     
     return (time.length > 1) ? time : time.concat([0]);
   },
+  //TODO: find a better place to put this.  Reopen datastore?
+  loadDateBook: function (feed){
+    var dateBookSection = Ember.A();
 
+    [['call_lists', Radium.CallList], ['campaigns', Radium.Campaign],['deals', Radium.Deal], ['meetings', Radium.Meeting], ['todos', Radium.Todo]].forEach(function(dateBookItem){
+      var items = feed[dateBookItem[0]];
+      if(items.length > 0){
+        items.forEach(function(item){
+          Radium.store.load(dateBookItem[1], item);
+
+          dateBookSection.pushObject(Radium.store.find(dateBookItem[1], item.id));
+        });
+      }
+    });
+    
+    return dateBookSection;
+  },
   pluckReferences: function(feed, silent) {
     return feed.map(function(item){
       var kind = item.kind,

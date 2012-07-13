@@ -39,5 +39,4 @@ minispade.require('radium/controllers/feed/future_feed');
 minispade.require('radium/controllers/feed/activity_feed_controller');
 minispade.require('radium/controllers/feed/group_feed_controller');
 minispade.require('radium/controllers/feed/cluster_list_controller');
-minispade.require('radium/controllers/feed/scheduled_activities');
-minispade.require('radium/controllers/feed/overdue_activities');
+minispade.require('radium/controllers/feed/datebook_section');
