@@ -7,17 +7,9 @@ Radium.GroupFeedController = Ember.ArrayProxy.extend(Radium.FeedScroller, {
       return;
     }
 
-    var feed = this.getPath('group.meta.feed'),
-        currentDate = feed.current_date;
+    var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'));
 
-    if(!currentDate){
-      this.get('content').pushObject({message: "There is no activity for this group."})
-      return;
-    }
-  
-    var url =  Radium.get('appController').getFeedUrl('groups', this.getPath('group.id'), currentDate);
-
-    var options = this.getFeedOptions.call(this, url, currentDate);
+    var options = this.getFeedOptions.call(this, url);
 
     this.loadFeed({direction: Radium.SCROLL_BACK}, options);
     

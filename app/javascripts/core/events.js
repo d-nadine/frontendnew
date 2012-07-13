@@ -31,7 +31,7 @@ Radium.Events = Ember.Object.create({
     var model = Radium.store.find(details.model, details.reference.id);
 
     if(Ember.DateTime.isToday(date)){
-      Radium.getPath('scheduledActivitiesController.content').insertAt(0, model);
+      Radium.getPath('datebookSectionController.content').insertAt(0, model);
       return;
     }
 
