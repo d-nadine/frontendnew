@@ -15,6 +15,19 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
     this.RequestContent[Radium.SCROLL_BACK] = 'content';
     this.RequestContent[Radium.SCROLL_FORWARD] = 'forwardContent';
   },
+
+  getFeedOptions: function(url, currentDate){
+    var self = this;
+
+    return  {
+              url: url,
+              requestDate: currentDate,
+              newFeedCallBack: function(feed){
+                self.set('previous_activity_date', feed.previous_activity_date);
+                self.set('next_activity_date', feed.next_activity_date);
+              }
+            };
+  },
   shouldScroll: function(scrollData){
     return (this.get('canScroll') && (this.get(this.RequestDate[scrollData.direction])));
   },
