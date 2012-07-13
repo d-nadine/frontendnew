@@ -1,7 +1,8 @@
+/** @deprecated */
 Radium.FormContainer = Ember.ContainerView.create({
   classNames: ['create-form'],
   didInsertElement: function() {
-    this.$().hide().slideDown(300);
+    // this.$().hide().slideDown(300);
   },
   adjustPosition: function(position) {
     var viewportWidth = $(window).width(),

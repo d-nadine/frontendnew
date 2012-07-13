@@ -1,20 +1,28 @@
 Radium.MessageForm = Radium.FormView.extend({
   templateName: 'message_form',
 
-  toEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+  init: function() {
+    this._super();
 
-  ccEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+    this.set('toEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
 
-  bccEmailValues: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
+    this.set('ccEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
+
+    this.set('bccEmailValues', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
+    
+    this.getPath('toEmailValues.selected').pushObjects(
+      this.controller.get('to')
+    );
+  },
 
   // TODO: Move 'isValid' prop into other forms once validation kinks worked out.
   isValid: function() {
@@ -25,15 +33,13 @@ Radium.MessageForm = Radium.FormView.extend({
     contentBinding: 'parentView.toEmailValues.selected'
   }),
 
-  toField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'to',
-      flagType: 'to',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.toEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  toField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'to',
+    flagType: 'to',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.toEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
   
   subjectField: Radium.Fieldset.extend({
@@ -78,26 +84,22 @@ Radium.MessageForm = Radium.FormView.extend({
     contentBinding: 'parentView.bccEmailValues.selected'
   }),
 
-  ccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'cc',
-      flagType: 'cc',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.ccEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  ccField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'cc',
+    flagType: 'cc',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.ccEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
 
-  bccField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'bcc',
-      flagType: 'bcc',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.bccEmailValues',
-      sourceBinding: 'selectedGroup.content'
-    })
+  bccField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    elementId: 'bcc',
+    flagType: 'bcc',
+    classNames: ['span3'],
+    nameBinding: 'parentView.fieldAttributes',
+    selectedGroupBinding: 'parentView.bccEmailValues',
+    sourceBinding: 'selectedGroup.content'
   }),
 
   isAttachmentVisible: false,

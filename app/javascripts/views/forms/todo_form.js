@@ -135,7 +135,6 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   }),
 
   submitForm: function() {
-    // debugger;
     if (this.checkForEmpty(data)) {
       this.error("Something was filled incorrectly, try again?");
       return false;

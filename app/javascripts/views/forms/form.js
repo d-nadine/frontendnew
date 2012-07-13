@@ -28,7 +28,7 @@ Radium.FormView = Ember.View.extend({
       }, 'fast');
     }
 
-    this.$().hide().slideDown('fast');
+    // this.$().hide().slideDown('fast');
     this.$('fieldset:first').find('input:text, textarea').first().focus();
   },
 

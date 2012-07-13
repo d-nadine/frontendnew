@@ -2,11 +2,25 @@
   <div id="content" class="span9">
     <div id="form-container"></div>
     <div class="page-header">
+    {{#if controller.contact.isLoaded}}
       <div class="btn-group pull-right">
-        <a href="#" class="btn btn-small" {{action "addContactTodo"}}>Add todo</a>
-        <a href="#" class="btn btn-small" {{action "emailContact"}}>Email Contact</a>
-        <a href="#" class="btn btn-small" {{action "addContactToGroup"}}>Add to Group</a>
+        <a href="#" 
+          class="btn btn-small" 
+          {{action "showTodoForm" target="Radium.FormContainerView" context="controller.contact"}}>
+          Add todo
+        </a>
+        <a href="#" 
+          class="btn btn-small" 
+          {{action "showEmailForm" target="Radium.FormContainerView" context="controller.contact"}}>
+          Email Contact
+        </a>
+        <a href="#" 
+          class="btn btn-small" 
+          {{action "showAddToGroupForm" target="Radium.FormContainerView" context="controller.contact"}}>
+          Add to Group
+        </a>
       </div>
+    {{/if}}
       <h3>{{Radium.selectedContactController.contact.name}} Feed</h3>
     </div>
     {{view Radium.ContactFeedView}}

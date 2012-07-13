@@ -5,6 +5,7 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
   handler: null,
   init: function(){
     this._super();
+    this.set('content', Ember.A());
     this.set('view', Ember.ContainerView.create());
     this.RequestDate = {};
     this.RequestDate[Radium.SCROLL_BACK] = 'previous_activity_date';

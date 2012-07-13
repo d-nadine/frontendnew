@@ -2,7 +2,7 @@ Radium.TokenView = Ember.View.extend({
   didInsertElement: function() {
     this.$().hide().fadeIn();
   },
-  classNames: 'alert alert-info token'.w(),
+  classNames: 'token'.w(),
   removeEmail: function(event) {
     var self = this;
     this.$().fadeOut('fast', function() {
