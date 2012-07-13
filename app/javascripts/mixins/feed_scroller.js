@@ -53,7 +53,7 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
       var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section);
 
       if((dateBookSection.length > 0) || (data.feed.historical_section.clusters.length > 0)){
-        var dateToDisplay = getDate || "Today"
+        var dateToDisplay = getDate || data.feed.start_date;
         var dateContent = Ember.Object.create({dateHeader: dateToDisplay});
         
         self.get('dateHash')[dateToDisplay] = dateContent;

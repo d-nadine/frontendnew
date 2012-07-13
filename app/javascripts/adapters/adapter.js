@@ -169,8 +169,10 @@ DS.RadiumAdapter = DS.Adapter.extend({
       this.findRecursively(store, type, ids, plural);
     // Otherwise grab the first page of results and carry on.
     } else {
+      var qsIds = typeof ids === "string" ? ids : ids.toString();
+
       this.ajax("/" + plural, "GET", {
-        data: { ids: ids },
+        data: { ids: qsIds },
         success: function(json) {
           var arr = [];
           json[plural].forEach(function(item) {
