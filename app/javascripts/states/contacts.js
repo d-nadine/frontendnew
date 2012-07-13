@@ -18,6 +18,10 @@ Radium.ContactsPage = Ember.State.extend({
       var contact = Radium.store.find(Radium.Contact, Radium.appController.get('params'));
 
       Radium.set('selectedContactController', Radium.SelectedContactController.create({}));
+      
+      if(Radium.getPath('selectedContactController.content') && Radium.getPath('selectedContactController.content.length') > 0){
+        Radium.setPath('selectedContactController.content', Ember.A());
+      }
 
       Radium.get('selectedContactController').set('contact', contact);
 

@@ -1,5 +1,4 @@
 Radium.SelectedContactController = Ember.ArrayProxy.extend(Radium.FeedScroller, { 
-  content: Ember.A(),
   contact: null,
   contactLoaded: function(){
     if(!this.getPath('contact.isLoaded')){
