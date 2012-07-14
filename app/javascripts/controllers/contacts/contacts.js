@@ -87,7 +87,7 @@ Radium.ContactsController = Ember.ArrayProxy.extend(Radium.PageScroller, {
   usersContactInfo: function() {
     return this.map(function(item) {
       return {
-        label: item.get('name'), 
+        label: item.get('name'),
         value: item.get('id'),
         email: item.get('email'),
         phone: item.get('phone')
@@ -159,6 +159,20 @@ Radium.ContactsController = Ember.ArrayProxy.extend(Radium.PageScroller, {
   },
 
   /**
+    Select Actions
+    -------------------------------
+  */
+  selectAll: function(event) {
+    this.setEach('isSelected', true);
+    return false;
+  },
+
+  selectNone: function(event) {
+    this.setEach('isSelected', false);
+    return false;
+  },
+
+  /**
     Return all contacts selected on Contacts page.
     @binding {content.isSelected}
   */
@@ -204,5 +218,5 @@ Radium.ContactsController = Ember.ArrayProxy.extend(Radium.PageScroller, {
 
   clearSelected: function() {
     this.setEach('isSelected', false);
-  },
+  }
 });

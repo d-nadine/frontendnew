@@ -152,7 +152,8 @@ Radium.ContactsToolbarView = Ember.View.extend({
 
   /**
     Select all Contacts
-  */
+    @deprecated
+    Delete after the functionality works in Radium.contactsController.
   selectAllButton: Ember.View.extend({
     tagName: 'button',
     click: function() {
@@ -184,7 +185,7 @@ Radium.ContactsToolbarView = Ember.View.extend({
       }
     }
   }),
-
+  */
   /**
     Select all Contacts
   */

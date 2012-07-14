@@ -39,12 +39,12 @@
   <div id="contacts-bulk-toolbar" class="btn-toolbar" style="margin-bottom: 9px">
     <div class="pull-left">
       <div class="btn-group">
-        {{#view selectAllButton class="btn btn-small"}}
+        <button class="btn btn-small" {{action "selectAll" target="Radium.contactsController"}}>
           <i class="icon-ok-circle"></i> All
-        {{/view}}
-        {{#view selectNoneButton class="btn btn-small"}}
+        </button>
+        <button class="btn btn-small" {{action "selectNone" target="Radium.contactsController"}}>
          <i class="icon-remove-circle"></i> None
-        {{/view}}
+        </button>
       </div>
       {{#with Radium.contactsController}}
         {{#if selectedContacts.length}}
@@ -83,7 +83,7 @@
       </div>
     {{/if}}
   {{/with}}
-  {{collection contentBinding="Radium.contactsController.content" itemViewClass="Radium.ContactCardView"}}
+  {{collection contentBinding="Radium.contactsController.content" itemViewClass="Radium.ContactCardContainerView"}}
 </div>
 
 {{timeEnd "timing"}}

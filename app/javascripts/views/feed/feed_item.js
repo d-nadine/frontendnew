@@ -6,7 +6,10 @@
   Override this further for individual needs of the historical/scheduled 
   subclassed views
 */
-Radium.FeedItemView = Ember.ContainerView.extend({
+Radium.FeedItemView = Ember.ContainerView.extend(
+  Radium.InlineForm,
+  Radium.InlineTodoForm,
+  {
   classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded', 'hasDiscussions'],
   isActionsVisible: false,
@@ -30,19 +33,6 @@ Radium.FeedItemView = Ember.ContainerView.extend({
     }
   }.observes('isActionsVisible'),
 
-  showTodoForm: function(event) {
-    var childViews = this.get('childViews'),
-        todoForm = this.get('todoForm');
-    
-    if (childViews.indexOf(todoForm) === -1) {
-      childViews.pushObject(todoForm);
-    } else {
-      childViews.removeObject(todoForm);
-    }
-    
-    return false;
-  },
-
   edit: function(event) {
     var childViews = this.get('childViews'),
         editView = this.get('editView');
@@ -55,23 +45,8 @@ Radium.FeedItemView = Ember.ContainerView.extend({
     return false;
   },
 
-  close: function(event) {
-    var self = this,
-        todoForm = this.get('todoForm');
-
-    $.when(todoForm.$().slideUp('fast'))
-      .then(function() {
-        self.get('childViews').removeObject(todoForm);
-      });
-    return false;
-  },
-
   init: function() {
     this._super();
-    // Add Todo todoForm
-    this.set('todoForm', Radium.TodoForm.create({
-      selection: this.get('content')
-    }));
 
     // Assign the content in the subclassed views
     this.set('commentsController', Radium.InlineCommentsController.create({

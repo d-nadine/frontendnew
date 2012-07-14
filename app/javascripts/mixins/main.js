@@ -12,3 +12,6 @@ minispade.require('radium/mixins/infinite_scrolling');
 minispade.require('radium/mixins/page_scroller');
 minispade.require('radium/mixins/views/todo_view');
 minispade.require('radium/mixins/views/time_picker');
+minispade.require('radium/mixins/views/inline_forms');
+minispade.require('radium/mixins/views/inline_message_form');
+minispade.require('radium/mixins/views/inline_todo_form');

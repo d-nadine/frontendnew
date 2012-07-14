@@ -1,7 +1,4 @@
 Radium.ContactCardView = Ember.View.extend({
-  init: function(){
-    this._super();
-  },
   templateName: 'contact_card',
   classNames: "contact-card row span9".w(),
   classNameBindings: ['content.isSelected:selected'],
@@ -18,7 +15,7 @@ Radium.ContactCardView = Ember.View.extend({
     if (!selectedFilter) {
 
       if (selectedLetter) {
-        if (selectedLetter !== firstLetter) {          
+        if (selectedLetter !== firstLetter) {
           return false;
         }
       }
@@ -40,7 +37,7 @@ Radium.ContactCardView = Ember.View.extend({
       }
 
       if (selectedLetter) {
-        if (selectedLetter !== firstLetter) {          
+        if (selectedLetter !== firstLetter) {
           return false;
         }
       }
@@ -48,10 +45,10 @@ Radium.ContactCardView = Ember.View.extend({
 
     return true;
   }.property(
-    'selectedFilter', 
+    'selectedFilter',
     'selectedLetter',
-    'content.firstLetter', 
-    'content.status', 
+    'content.firstLetter',
+    'content.status',
     'content.unassigned',
     'content.todos'
   ).cacheable(),
@@ -60,7 +57,7 @@ Radium.ContactCardView = Ember.View.extend({
     tagName: 'a',
     attributeBindings: ['href'],
     href: function() {
-      return '/contacts/%@'.fmt(this.getPath('content.id'))
+      return '/contacts/%@'.fmt(this.getPath('content.id'));
     }.property('content')
   }),
 
@@ -69,7 +66,7 @@ Radium.ContactCardView = Ember.View.extend({
     contact.set('isSelected', true);
     Radium.App.send('addResource', {
       form: "ContactsMessage",
-      data: contact  
+      data: contact
     });
     return false;
   }

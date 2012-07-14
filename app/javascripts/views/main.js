@@ -87,6 +87,7 @@ minispade.require('radium/views/contacts/contact');
 minispade.require('radium/views/contacts/contact_sidebar');
 minispade.require('radium/views/contacts/toolbar');
 minispade.require('radium/views/contacts/feed_filter');
+minispade.require('radium/views/contacts/contact_card_container');
 minispade.require('radium/views/contacts/contact_card');
 minispade.require('radium/views/contacts/contact_label');
 

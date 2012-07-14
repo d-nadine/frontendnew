@@ -12,20 +12,14 @@
       {{Radium.contactsController.categoryFilter}}
 
       {{#each content.emailAddresses}}
-        <a href="#" {{action "showEmailForm" 
-          target="Radium.FormContainerView"
-          context="view.content"
-        }}><i class="icon-mail"></i></a>
+        <a href="#" {{action "showMessageForm" target="view.parentView"}}>
+          <i class="icon-mail"></i>
+        </a>
       {{/each}}
       {{#each content.phoneNumbers}}
         {{view Radium.TooltipView valueBinding="value" text="Call" icon="call"}}
       {{/each}}
-      <a href="#" 
-        {{action 
-          "showTodoForm" 
-          target="Radium.FormContainerView"
-          context="content"
-        }}>
+      <a href="#" {{action "showTodoForm" target="parentView"}}>
         <i class="icon-add-todo"></i>
       </a>
     </h4>
