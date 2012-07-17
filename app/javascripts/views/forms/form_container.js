@@ -42,14 +42,14 @@ Radium.FormContainerView = Ember.ContainerView.create({
         if (item.get('email')) return;
         return {
           name: item.get('displayName'),
-          email: item.get('email')
+          email: item.getPath('emailAddresses.firstObject.value')
         };
       });
       controller.get('to').pushObjects(selectedEmails);
     } else {
       controller.get('to').pushObject({
-        name: context.get('name'),
-        email: context.get('email')
+        name: context.get('displayName'),
+        email: context.getPath('emailAddresses.firstObject.value')
       });
     }
 

@@ -16,7 +16,7 @@ Radium.FormView = Ember.View.extend({
 
   keyUp: function(event) {
     if (event.keyCode === 27) {
-      this.close();
+      this.get('parentView').close();
     }
   },
 
@@ -82,6 +82,8 @@ Radium.FormView = Ember.View.extend({
     this.$().show();
   },
 
+  // Standalone view close. If using form in a ContainerView, override.
+  // See Radium.InlineForm mixin.
   close: function(event) {
     var self = this;
     this.$().slideUp('fast', function() {
@@ -154,6 +156,14 @@ Radium.FormView = Ember.View.extend({
       if (hash.hasOwnProperty(val)) {
         return hash[val] === null || hash[val] === undefined;
       }
+    }
+  },
+
+  submitForm: function() {
+    if (this.hasOwnProperty('close')) {
+      this.close();
+    } else {
+      this.get('parentView').close(this);
     }
   }
 });

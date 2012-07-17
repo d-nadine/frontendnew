@@ -22,8 +22,8 @@ Radium.InlineMessageForm = Ember.Mixin.create({
         });
 
     controller.get('to').pushObject({
-        name: content.get('name'),
-        email: content.get('email')
+        name: content.get('displayName'),
+        email: content.getPath('emailAddresses.firstObject.value')
       });
 
     this.set('messageForm', Radium.MessageForm.create({

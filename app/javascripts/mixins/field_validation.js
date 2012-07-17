@@ -12,8 +12,8 @@ Radium.FieldValidation = Ember.Mixin.create({
 
   methods: {
     required: function(val) {
-      var val = $.trim(val);
-      return val.length > 0;
+      var value = $.trim(val);
+      return value.length > 0;
     }
   },
 

@@ -143,20 +143,12 @@ Radium.MessageForm = Radium.FormView.extend({
           email = Radium.store.createRecord(Radium.Email, data);
       
       Radium.store.commit();
-
-      email.addObserver('isValid', function() {
-        if (this.get('isValid')) {
-          Radium.Email.reopenClass({
-            url: null,
-            root: null
-          });
-          self.success("Email sent");
-        } else {
-          self.fail();
-        }
+      Radium.Email.reopenClass({
+        url: null,
+        root: null
       });
 
-      this.close();
+      this._super();
     }
     return false;
   }
