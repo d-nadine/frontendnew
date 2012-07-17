@@ -39,8 +39,9 @@ Radium.FormContainerView = Ember.ContainerView.create({
       // TODO: Can't seem to send the selectedContacts property array through
       // the context via the action helper. Have to pass the controller instead.
       var selectedEmails = context.get('selectedContacts').map(function(item) {
+        if (item.get('email')) return;
         return {
-          name: item.get('name'),
+          name: item.get('displayName'),
           email: item.get('email')
         };
       });
