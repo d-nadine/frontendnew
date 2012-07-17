@@ -1,3 +1,4 @@
+* [2012-07-17 16:46 -0700] 01cd7c7 - Joshua Jones: Correctly point inline and outlying forms to submit todos, emails and close properly.
 * [2012-07-14 00:45 -0700] b563c87 - Joshua Jones: [Delivers #28993053 #28994511 #28972869 #28972297] Add inline todo, email forms for contacts page alongside bulk todo, email forms.
 * [2012-07-12 15:47 -0700] 136ebb8 - Joshua Jones: Add bulk messages and todo to contacts page. Not hooked up to API yet.
 * [2012-07-11 22:01 -0700] 566ae84 - Paul Cowan: Merge branch 'master' into contact_feed
