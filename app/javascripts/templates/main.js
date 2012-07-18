@@ -26,6 +26,7 @@ minispade.require('radium/templates/feed/scheduled/feed_todo_campaign');
 minispade.require('radium/templates/feed/scheduled/feed_todo_deal');
 minispade.require('radium/templates/feed/scheduled/feed_todo_email');
 minispade.require('radium/templates/feed/scheduled/feed_todo_group');
+minispade.require('radium/templates/feed/scheduled/feed_todo_todo');
 minispade.require('radium/templates/feed/scheduled/feed_todo_phone_call');
 minispade.require('radium/templates/feed/scheduled/feed_todo_contact');
 minispade.require('radium/templates/feed/scheduled/feed_todo_sms');
