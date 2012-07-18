@@ -17,7 +17,7 @@ Radium.UsersController = Ember.ArrayProxy.extend({
   usersContactInfo: function() {
     return this.map(function(item) {
       return {
-        label: item.get('name'), 
+        label: item.get('name'),
         value: item.get('id'),
         email: item.get('email'),
         phone: item.get('phone')
@@ -35,5 +35,5 @@ Radium.UsersController = Ember.ArrayProxy.extend({
         target: item
       };
     });
-  }.property('@each.emailAddresses').cacheable(),
+  }.property('@each.emailAddresses').cacheable()
 });

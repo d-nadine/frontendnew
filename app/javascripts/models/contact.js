@@ -73,7 +73,7 @@ Radium.Contact = Radium.Person.extend({
 
   firstLetter: function() {
     if (this.get('name')) {
-      return this.get('name').charAt(0).toUpperCase();  
+      return this.get('name').charAt(0).toUpperCase();
     } else {
       return "";
     }
@@ -85,6 +85,8 @@ Radium.Contact = Radium.Person.extend({
   }.property('displayName'),
 
   feed: null,
+
+  followers: DS.hasMany('Radium.User'),
 
   user_id: DS.attr('number'),
 
