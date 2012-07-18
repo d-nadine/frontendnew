@@ -1,4 +1,8 @@
 Radium.LoggedOutState = Ember.State.create({
+  enter: function() {
+    this._super();
+    $('body').removeClass('loaded');
+  },
   initialState: 'loginForm',
   loginForm: Ember.ViewState.create({
     view: Radium.LoginPane,

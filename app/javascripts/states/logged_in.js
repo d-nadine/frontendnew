@@ -18,9 +18,6 @@ Radium.LoggedIn = Ember.State.extend({
 
     manager.get('rootView').appendTo('#main');
   },
-  exit: function() {
-    $('body').removeClass('loaded');
-  },
   start: Ember.State.extend({
     enter: function(manager) {
       $('body').addClass('loaded');
