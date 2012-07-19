@@ -142,6 +142,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
 
     // User enteries
     var selectedContacts,
+        reminderTime,
         selection = this.get('selection'),
         plural = this.get('plural'),
         description = this.getPath('descriptionField.value'),
@@ -165,14 +166,16 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         };
 
     // TODO: Turn back on once API supports reminders.
-    // if (reminder) {
-    //   data = jQuery.extend(data, {
-    //     reminders_attributes: {
-    //         via: 'todo',
-    //         time: finishBy.advance({second: (reminder * -1)}).toISO8601()
-    //       }
-    //   });
-    // }
+    if (reminder) {
+      reminderTime = finishByValue.adjust({second: (reminder * -1)});
+      data = jQuery.extend(data, {
+        reminders_attributes: [{
+          via: 'sms',
+          time: reminderTime.toISO8601(),
+          user_id: assignedUserId
+        }]
+      });
+    }
     
     // Determine that if there are selected items, the todo is contact based
     Radium.Todo.reopenClass({
