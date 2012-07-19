@@ -141,6 +141,7 @@ minispade.require('radium/templates/contacts/contact_card');
 minispade.require('radium/templates/contacts/lead');
 
 // Users
+minispade.require('radium/templates/users/user_sidebar');
 minispade.require('radium/templates/users/users');
 minispade.require('radium/templates/users/user');
 

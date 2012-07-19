@@ -95,6 +95,7 @@ minispade.require('radium/views/contacts/contact_label');
 minispade.require('radium/views/groups/group_sidebar');
 
 // Users
+minispade.require('radium/views/users/user_sidebar');
 minispade.require('radium/views/users/users');
 minispade.require('radium/views/users/user');
 

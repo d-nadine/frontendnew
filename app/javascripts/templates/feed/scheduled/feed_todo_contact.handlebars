@@ -14,7 +14,7 @@
 {{view Radium.LabelView labelBinding="view.contact.status"}}
 
 
-<a href="/contacts/{{unbound view.contact.id}}">{{view.contact.feedDisplayName}}</a>
+<a {{bindAttr href="view.contact.url"}}>{{view.contact.feedDisplayName}}</a>
 {{#if description}}: 
   {{#if canEdit}}
     {{inlineTextField description}}

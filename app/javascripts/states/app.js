@@ -1,5 +1,5 @@
 /**
-  `Radium.App` is the application State Manager.
+    `Radium.App` is the application State Manager.
 
   The flow goes like this:
 
@@ -74,7 +74,7 @@ Radium.App = Ember.StateManager.create({
   dashboard: Radium.DashboardPage,
   contacts: Radium.ContactsPage.create(),
   groups: Radium.States.Group.create(),
-  // users: Radium.UsersPage.create(),
+  users: Radium.UsersPage.create(),
   // deals: Radium.DealsPage.create(),
   // pipeline: Radium.PipelinePage.create(),
   // campaigns: Radium.CampaignsPage.create(),
@@ -108,13 +108,13 @@ Radium.App = Ember.StateManager.create({
       currentPage: context.page,
       params: (context.param) ? context.param : null
     });
-
+    
     if (!Radium.get('_api')) {
       manager.transitionTo('loggedOut');
       return false;
     }
 
-    if (Radium.get('appController').get('account')) {
+    if (Radium.getPath('appController.account')) {
       manager.transitionTo(statePath);
     } else {
       manager.transitionTo('authenticate');

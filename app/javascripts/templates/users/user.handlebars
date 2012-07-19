@@ -1,18 +1,4 @@
-<div class="row">
-  {{#with content}}
-  <div id="sidebar" class="span3">
-    <div id="contact-info" class="module">
-      <div class="component">
-        <h4>{{inlineTextField name}}</h4>
-        <address>
-          <abbr>Email:</abbr> {{inlineTextField email}}<br>
-          <abbr>Phone:</abbr> {{inlineTextField phone}}<br>
-        </address>
-      </div>
-    </div>
-  </div> <!-- /#sidebar -->
-  <div id="content" class="span9">
-    <div id="form-container"></div>
+  {{#with controller.user}}
     <div class="page-header">
       <a href="#" class="btn btn-small pull-right" {{action "addUserTodo"}}>Add todo</a>
       <h3>{{name}} Feed</h3>
@@ -38,4 +24,3 @@
     {{/with}}
   </div>
   {{/with}}
-</div>

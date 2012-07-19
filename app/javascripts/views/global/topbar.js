@@ -35,7 +35,7 @@ Radium.TopbarView = Ember.View.extend({
         default:
           sectionText = "Contact";
           break;
-      };
+      }
       return sectionText;
     }.property('parentView.currentPage').cacheable(),
     isVisible: function() {

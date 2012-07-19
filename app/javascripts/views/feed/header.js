@@ -9,7 +9,7 @@ Radium.FeedHeaderView = Ember.View.extend({
   layoutName: 'feed_header_layout',
   isActionsVisibleBinding: 'parentView.isActionsVisible',
   click: function(event) {
-    event.stopPropagation();
+    // event.stopPropagation();
     this.toggleProperty('isActionsVisible');
   },
   // FIXME: This is a dirty, dirty hack. If Ember Data allows you to 
