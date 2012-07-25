@@ -1,1 +1,3 @@
-Email {{tag}} {{#each email.contacts}}{{unbound name}}{{/each}}: {{unbound reference.email.subject}}
+{{#with email}}
+  Email {{tag}} {{#each contacts}}{{unbound name}}{{/each}}: {{unbound reference.email.subject}}
+{{/with}}

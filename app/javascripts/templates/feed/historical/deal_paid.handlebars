@@ -1,2 +1,4 @@
-<i class="pull-left activity-icon icon-deal"></i>
-{{unbound reference.deal.name}} was paid. (<a href="/users/{{view.resource.user.id}}">{{view.resource.user.abbrName}}</a>)
+{{#with deal}}
+  <i class="pull-left activity-icon icon-deal"></i>
+  {{name}} was paid. (<a {{bindAttr href="user.url"}}>{{user.abbrName}}</a>)
+{{/with}}

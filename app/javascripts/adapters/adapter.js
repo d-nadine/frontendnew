@@ -27,7 +27,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
       this.sideload(store,type,json,root);
       store.didCreateRecord(model, json[root]);
     };
-    
+
     this.ajax("/" + url, "POST", {
       data: data,
       success: success
@@ -150,7 +150,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var root = this.rootForType(type);
 
     var url = ["", this.pluralize(root), id].join("/");
-    
+
     this.ajax(url, "GET", {
       success: function(json) {
         store.load(type, json[root]);
@@ -172,7 +172,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
       var qsIds = typeof ids === "string" ? ids : ids.toString();
 
       this.ajax("/" + plural, "GET", {
-        data: { ids: qsIds },
+        data: $.param({ids: ids}),
         success: function(json) {
           var arr = [];
           json[plural].forEach(function(item) {
@@ -199,7 +199,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     var fetchPage = function() {
       self.ajax("/"+plural, "GET", {
-        data: {ids: ids, page: currentPage},
+        data: $.param({ids: ids, page: currentPage}),
         success: function(json, status, xhr) {
           // On the last page, send to `pagesLoaded` to add to store.
           if (currentPage >= totalPages) {
@@ -234,15 +234,8 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
       this.ajax("/" + plural, "GET", {
         success: function(json, status, xhr) {
-          var controllerName = plural.camelize();
-
           store.loadMany(type, json[plural]);
           this.sideload(store,type,json,plural);
-
-          Radium.get(controllerName + 'Controller').setProperties({
-            currentPage: json.meta.pagination.current,
-            totalPages: json.meta.pagination.total
-          });
         }
       });
     }
@@ -259,20 +252,14 @@ DS.RadiumAdapter = DS.Adapter.extend({
     if (query.page) {
       var loadPages = function(query) {
         var paginatedQuery = (query.page === 'all') ? jQuery.extend({}, query, {page: currentPage}) : query;
-            
+
         self.ajax(url, "GET", {
           data: paginatedQuery,
           success: function(json) {
-            var controllerName = plural.camelize(),
-                current = json.meta.pagination.current,
+            var current = json.meta.pagination.current,
                 total = json.meta.pagination.total,
                 data = json[plural];
 
-            Radium.get(controllerName +'Controller').setProperties({
-              currentPage: current,
-              totalPages: total
-            });
-            
             loadedJSON = loadedJSON.concat(data);
 
             if (query.page === 'all' && current < total) {
@@ -288,7 +275,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
         loadPages(query);
     } else {
       this.ajax(url, "GET", {
-        data: query,
+        data: $.param(query),
         success: function(json) {
           var data = (type === Radium.Activity) ? self.normalize(json[plural]) : json[plural] ;
           modelArray.load(json[plural]);

@@ -1,5 +1,7 @@
-<i class="pull-left activity-icon icon-meeting"></i>
-{{reference.meeting.topic}} cancelled  
-{{#if view.resource.user}}
- (<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a>)
-{{/if}}
+{{#with meeting}}
+  <i class="pull-left activity-icon icon-meeting"></i>
+  {{topic}} cancelled
+  {{#if user}}
+   (<a {{bindAttr href="user.url"}}>{{user.abbrName}}</a>)
+  {{/if}}
+{{/with}}

@@ -1,1 +1,3 @@
-<a href="/users/{{unbound view.resource.user.id}}">{{unbound view.resource.user.abbrName}}</a> made a phone call.
+{{#with phone_call}}
+  <a {{bindAttr href="user.url"}}>{{user.abbrName}}</a> made a phone call.
+{{/with}}

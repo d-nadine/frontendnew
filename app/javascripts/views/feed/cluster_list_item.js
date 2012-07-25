@@ -4,23 +4,21 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
   classNameBindings: ['content.kind'],
   init: function() {
     this._super();
-    var self = this;
-
+    var activityIds = this.getPath('content.activities');
     //TODO: Can we use currentViewBinding for this
     //Computed property would be too expensive
-    if(this.getPath('content.activities')){
+    if (activityIds) {
       this.set('currentView', Radium.ClusterHeaderView.create());
-    }else if(this.getPath('content.dateHeader')){
+    } else if (this.getPath('content.dateHeader')) {
       this.set('currentView', Radium.DateHeaderView.create());
       this.classNames = [];
-    }else if(this.getPath('content.message')){
-      var self = this;
+    } else if (this.getPath('content.message')) {
       this.classNames = [];
       this.set('currentView', Ember.View.create({
-        content: self.get('content'),
+        content: this.get('content'),
         template: Ember.Handlebars.compile('<h4>{{content.message}}</h4>')
       }));
-    }else{
+    } else {
       this.set('currentView', Radium.ScheduledActivityView.create());
     }
   },
@@ -37,15 +35,22 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
     }
   },
 
-  loadActivities: function(ids) {
-    var activities = Radium.store.findMany(Radium.Activity, ids),
-        activityListController = Ember.ArrayProxy.create({
-            content: activities
-          }),
-      activitiesListView = Radium.ClusterActivityListView.create({
-          controller: activityListController,
-          contentBinding: 'controller.content'
-        });
-    this.get('childViews').pushObject(activitiesListView);
+  showActivities: function() {
+    var self = this,
+        activityIds = this.getPath('content.activities'),
+        resources = Radium.store.find(Radium.Activity, {ids: activityIds});
+
+    this.set('controller', Ember.ArrayProxy.create({
+      content: resources
+    }));
+
+    resources.addObserver('isLoaded', function() {
+      if (this.get('isLoaded')) {
+        var activitiesListView = Radium.ClusterActivityListView.create({
+              contentBinding: 'parentView.controller.content'
+            });
+        self.get('childViews').pushObject(activitiesListView);
+      }
+    });
   }
 });

@@ -1,1 +1,3 @@
-{{owner.user.name}} rescheduled <strong>{{reference.meeting.topic}}</strong> meeting at {{reference.meeting.location}}.
+{{#with meeting}}
+  {{user.name}} rescheduled <strong>{{topic}}</strong> meeting at{{#if location}} at {{location}}{{/if}}.
+{{/with}}

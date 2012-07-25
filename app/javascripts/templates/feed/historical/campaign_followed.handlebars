@@ -1,1 +1,3 @@
-{{owner.user.name}} started following <strong>{{reference.campaign.name}}</strong>
+{{#with campaign}}
+  {{user.name}} started following <strong>{{name}}</strong>
+{{/with}}

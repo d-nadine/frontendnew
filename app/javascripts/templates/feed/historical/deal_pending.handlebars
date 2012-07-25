@@ -1,2 +1,4 @@
-<i class="pull-left activity-icon icon-deal"></i>
-Deal {{unbound reference.deal.id}} was marked as pending (<a href="/users/{{view.resource.user.id}}">{{view.resource.user.abbrName}}</a>)
+{{#with deal}}
+  <i class="pull-left activity-icon icon-deal"></i>
+  Deal {{name}} was marked as pending (<a {{bindAttr href="user.url"}}>{{user.abbrName}}</a>)
+{{/with}}

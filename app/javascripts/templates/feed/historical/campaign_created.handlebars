@@ -1,1 +1,3 @@
-{{owner.user.name}} created a new campaign - <strong>{{reference.campaign.name}}</strong>
+{{#with campaign}}
+  {{user.name}} created a new campaign - <strong>{{name}}</strong>
+{{/with}}

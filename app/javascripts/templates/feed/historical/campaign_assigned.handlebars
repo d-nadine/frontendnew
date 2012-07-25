@@ -1,3 +1,5 @@
-<i class="ember-view pull-left activity-icon icon-campaign"></i> 
-<i class="ember-view pull-left activity-icon icon-assigned"></i>
-<strong>{{unbound reference.campaign.name}}</strong> assigned by {{view.resource.user.abbrName}}.
+{{#with campaign}}
+  <i class="ember-view pull-left activity-icon icon-campaign"></i>
+  <i class="ember-view pull-left activity-icon icon-assigned"></i>
+  <strong>{{campaign.name}}</strong> assigned by {{user.abbrName}}.
+{{/with}}

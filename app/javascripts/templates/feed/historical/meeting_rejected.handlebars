@@ -1,1 +1,3 @@
-{{owner.user.name}} rejected <strong>{{reference.meeting.topic}}</strong> meeting about at {{reference.meeting.location}}.
+{{#with meeting}}
+  {{user.name}} rejected <strong>{{topic}}</strong> meeting about{{#if location}} at {{location}}{{/if}}.
+{{/with}}

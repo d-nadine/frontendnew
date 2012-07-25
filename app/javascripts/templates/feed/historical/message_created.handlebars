@@ -1,1 +1,3 @@
-{{owner.user.name}} sent a message.
+{{#with message}}
+  <a {{bindAttr href="user.url"}}>{{user.abbrName}}</a> sent a message.
+{{/with}}

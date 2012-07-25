@@ -1,2 +1,4 @@
-<i class="pull-left activity-icon icon-meeting"></i>
-Meeting scheduled at {{unbound reference.meeting.location}}.
+{{#with meeting}}
+  <i class="pull-left activity-icon icon-meeting"></i>
+  Meeting scheduled{{#if location}} at {{location}}{{/if}}.
+{{/with}}

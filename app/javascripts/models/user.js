@@ -14,6 +14,9 @@ Radium.User = Radium.Person.extend({
   feed: null,
   campaign: DS.belongsTo('Radium.Campaign'),
   notes: DS.hasMany('Radium.Note', {embedded: true}),
+  url: function() {
+    return "/users/%@".fmt(this.get('id'));
+  }.property('id'),
   leads: function() {
     var contacts = this.get('contacts');
     return contacts.filterProperty('status', 'lead');

@@ -1,2 +1,4 @@
-<i class="pull-left activity-icon icon-contact"></i>
-{{unbound reference.contact.name}} created (<a href="/users/{{view.resource.user.id}}">{{view.resource.user.abbrName}}</a>)
+{{#with contact}}
+  <i class="pull-left activity-icon icon-contact"></i>
+  {{name}} created (<a {{bindAttr href="user.url"}}>{{user.abbrName}}</a>)
+{{/with}}

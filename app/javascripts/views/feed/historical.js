@@ -2,29 +2,44 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
   classNameBindings: ['content.kind'],
   init: function() {
     this._super();
+
     var content = this.get('content'),
-        kind = content.get('kind'),
+        kind = this.getPath('collectionView.parentView.content.kind'),
+        tag = this.getPath('collectionView.parentView.content.tag'),
         // Load the reference in through the store instead of accessing the nested object
-        referenceId = content.getPath('reference.' + kind + '.id'),
-        resource = Radium.store.find(Radium[Radium.Utils.stringToModel(kind)], referenceId);
+        referenceId = content.getPath('reference.' + kind),
+        modelString = Radium.Utils.stringToModel(kind);
+
+    // Set the
+    this.setProperties({
+      reference: Radium.store.find(Radium[modelString], referenceId),
+      tag: tag,
+      kind: kind
+    });
+  },
+  contentHasLoaded: function() {
+    if (!this.getPath('reference.isLoaded')) {
+      return false;
+    }
+
+    var content = this.get('content'),
+        kind = this.get('kind'),
+        tag = this.get('tag');
+
+    content.set(kind, this.get('reference'));
 
     // Set up the main row header
     this.set('currentView', Radium.FeedHeaderView.create({
       content: content,
-      resource: resource,
-      userBinding: 'resource.user',
       init: function() {
         this._super();
-        var kind = this.getPath('content.kind'),
-            tag = this.getPath('content.tag'),
-            templateName = [kind, tag].join('_');
+        var templateName = [kind, tag].join('_');
         this.set('templateName', templateName);
       }
     }));
 
     this.set('infoView', Ember.View.create({
       isVisibleBinding: 'parentView.isActionsVisible',
-      content: resource,
       layoutName: 'details_layout',
       templateName: kind + '_details'
     }));
@@ -36,5 +51,5 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
 
     // Assign the comments
     this.setPath('commentsController.content', this.getPath('content.comments'));
-  }
+  }.observes('reference.isLoaded')
 });

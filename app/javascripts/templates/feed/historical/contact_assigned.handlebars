@@ -1,2 +1,4 @@
-<i class="ember-view pull-left activity-icon icon-assigned"></i>
-{{unbound reference.contact.name}} reassigned (<a href="/users/{{view.resource.user.id}}">{{view.resource.user.abbrName}}</a>)
+{{#with contact}}
+  <i class="ember-view pull-left activity-icon icon-assigned"></i>
+  {{name}} reassigned (<a {{bindAttr href="user.url"}}>{{user.abbrName}}</a>)
+{{/with}}

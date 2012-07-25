@@ -1,1 +1,3 @@
-{{owner.user.name}} added a contact from <strong>{{reference.campaign.name}}</strong>
+{{#with campaign}}
+  {{user.name}} added a contact from <strong>{{name}}</strong>
+{{/with}}

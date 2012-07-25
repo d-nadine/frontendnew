@@ -12,8 +12,7 @@ Radium.ClusterHeaderView = Ember.View.extend({
     if (this.get('isActivitiesVisible')) {
       parentView.removeActivities();
     } else {
-      var activityIds = this.getPath('content.activities');
-      parentView.loadActivities(activityIds);
+      parentView.showActivities();
     }
 
     this.toggleProperty('isActivitiesVisible');
@@ -35,7 +34,7 @@ Radium.ClusterHeaderView = Ember.View.extend({
     } else {
       return this.formats[kindStr] || formatted;
     }
-    
+
   },
 
   actions: {
