@@ -1,3 +1,4 @@
+* [2012-07-25 16:50 -0700] 47a90a5 - Joshua Jones: Clean up historical feed templates, add phone call details and pass proper context into historical infoViews.
 * [2012-07-19 00:38 -0700] 472fcdb - Joshua Jones: [Delivers #32968239] Reminders hooked up.
 * [2012-07-17 16:46 -0700] 01cd7c7 - Joshua Jones: Correctly point inline and outlying forms to submit todos, emails and close properly.
 * [2012-07-14 00:45 -0700] b563c87 - Joshua Jones: [Delivers #28993053 #28994511 #28972869 #28972297] Add inline todo, email forms for contacts page alongside bulk todo, email forms.
