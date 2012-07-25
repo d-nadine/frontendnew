@@ -23,10 +23,11 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
     }
 
     var content = this.get('content'),
+        reference = this.get('reference'),
         kind = this.get('kind'),
         tag = this.get('tag');
 
-    content.set(kind, this.get('reference'));
+    content.set(kind, reference);
 
     // Set up the main row header
     this.set('currentView', Radium.FeedHeaderView.create({
@@ -39,6 +40,7 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
     }));
 
     this.set('infoView', Ember.View.create({
+      content: reference,
       isVisibleBinding: 'parentView.isActionsVisible',
       layoutName: 'details_layout',
       templateName: kind + '_details'

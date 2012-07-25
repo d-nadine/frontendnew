@@ -1,3 +1,6 @@
 {{#with phone_call}}
-  <a {{bindAttr href="user.url"}}>{{user.abbrName}}</a> made a phone call.
+  Phone call completed at {{formatTime createdAt}}.
+  {{#if outcome}}
+    {{outcome}}
+  {{/if}}
 {{/with}}

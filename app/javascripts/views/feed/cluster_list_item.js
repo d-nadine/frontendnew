@@ -24,13 +24,15 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
   },
 
   removeActivities: function() {
-    var childViews = this.get('childViews');
+    var childViews = this.get('childViews'),
+        activitiesListView = this.get('activitiesListView');
+
     if (childViews.get('length') === 2) {
       // NOTE: There doesn't seem to be a way to run an animation
       // when an Ember View is about to be destroyed, using jQuery.Deferred
       // as a work around until a better solution is found.
       $.when(childViews.objectAt(1).slideUp()).then(function() {
-        childViews.popObject();
+        childViews.removeObject(activitiesListView);
       });
     }
   },
@@ -38,19 +40,33 @@ Radium.ClusterListItemView = Ember.ContainerView.extend({
   showActivities: function() {
     var self = this,
         activityIds = this.getPath('content.activities'),
-        resources = Radium.store.find(Radium.Activity, {ids: activityIds});
+        resources;
 
-    this.set('controller', Ember.ArrayProxy.create({
-      content: resources
-    }));
+    function addChildView() {
+      this.get('childViews').pushObject(this.get('activitiesListView'));
+    }
 
-    resources.addObserver('isLoaded', function() {
-      if (this.get('isLoaded')) {
-        var activitiesListView = Radium.ClusterActivityListView.create({
-              contentBinding: 'parentView.controller.content'
-            });
-        self.get('childViews').pushObject(activitiesListView);
-      }
-    });
+    if (this.get('controller')) {
+      addChildView.call(this);
+    } else {
+      resources = Radium.store.find(Radium.Activity, {ids: activityIds});
+
+      this.set('controller', Ember.ArrayProxy.create({
+        content: resources
+      }));
+
+      this.set('isLoading', true);
+
+
+      resources.addObserver('isLoaded', function() {
+        if (this.get('isLoaded')) {
+          self.set('isLoading', false);
+          self.set('activitiesListView', Radium.ClusterActivityListView.create({
+            contentBinding: 'parentView.controller.content'
+          }));
+          addChildView.call(self);
+        }
+      });
+    }
   }
 });

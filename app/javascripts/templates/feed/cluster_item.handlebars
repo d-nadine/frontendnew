@@ -1,4 +1,10 @@
 <i {{bindAttr class=":feed-expand-icon :icon-plus isActivitiesVisible:icon-minus"}}></i>
 {{#with content}}
-{{activities.length}} {{view.contextString}}
+  {{activities.length}} {{view.contextString}}
 {{/with}}
+
+{{#if parentView.isLoading}}
+  <div class="pull-right">
+    loading...
+  </div>
+{{/if}}

@@ -1,0 +1,20 @@
+<div class="pull-left" style="width:50%">
+  <h5>Users</h5>
+  <ul class="unstyled">
+  {{#each users}}
+    <li>
+      <a {{bindAttr href="url"}}>{{name}}</a>
+    </li>
+  {{/each}}
+  </ul>
+</div>
+<div class="pull-left" style="width:50%">
+  <h5>Contacts</h5>
+  <ul class="unstyled">
+  {{#each contacts}}
+    <li>
+      <a {{bindAttr href="url"}}>{{name}}</a>
+    </li>
+  {{/each}}
+  </ul>
+</div>
