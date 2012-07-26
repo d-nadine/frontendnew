@@ -1,3 +1,4 @@
+* [2012-07-26 16:51 -0700] e7b2e25 - Joshua Jones: [Delivers #32972733] Refactor feed item view so that action items like editing or creating todos are all in a single container view, which slides up/down as one.
 * [2012-07-25 16:50 -0700] 47a90a5 - Joshua Jones: Clean up historical feed templates, add phone call details and pass proper context into historical infoViews.
 * [2012-07-19 00:38 -0700] 472fcdb - Joshua Jones: [Delivers #32968239] Reminders hooked up.
 * [2012-07-17 16:46 -0700] 01cd7c7 - Joshua Jones: Correctly point inline and outlying forms to submit todos, emails and close properly.
