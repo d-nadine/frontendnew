@@ -89,6 +89,7 @@ minispade.require('radium/templates/feed/details/deal_details');
 minispade.require('radium/templates/feed/details/campaign_details');
 minispade.require('radium/templates/feed/details/call_list_details');
 minispade.require('radium/templates/feed/details/phone_call_details');
+minispade.require('radium/templates/feed/details/contact_details');
 
 // Forms
 minispade.require('radium/templates/forms/form_layout');

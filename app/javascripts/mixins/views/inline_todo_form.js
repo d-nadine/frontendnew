@@ -1,22 +1,28 @@
 Radium.InlineTodoForm = Ember.Mixin.create({
   showTodoForm: function(event) {
     var childViews = this.get('childViews'),
-        todoForm = this.get('todoForm');
-    
-    if (childViews.indexOf(todoForm) === -1) {
-      childViews.pushObject(todoForm);
+        feedDetailsContainer = this.get('feedDetailsContainer'),
+        currentView = feedDetailsContainer.get('currentView'),
+        todoForm = this.get('todoForm'),
+        content = this.get('content'),
+        tag = content.get('tag'),
+        kind = content.get('kind'),
+        selection = (tag) ? content.get(kind) : content;
+
+    todoForm.set('selection', selection);
+
+    if (Ember.isEqual(currentView, todoForm)) {
+      feedDetailsContainer.set('currentView', null);
     } else {
-      childViews.removeObject(todoForm);
+      feedDetailsContainer.set('currentView', todoForm);
     }
-    
+
     return false;
   },
 
   init: function() {
     this._super();
     // Add Todo todoForm
-    this.set('todoForm', Radium.TodoForm.create({
-      selection: this.get('content')
-    }));
+    this.set('todoForm', Radium.TodoForm.create());
   }
 });

@@ -22,8 +22,8 @@ Radium.Meeting = Radium.Core.extend({
   // or /meetings/{id}/reschedule
   url: function() {
     return (this.get('cancelled')) ?
-       "/meetings/%@/cancel" : 
-       "/meetings/%@/reschedule"
+       "/meetings/%@/cancel" :
+       "/meetings/%@/reschedule";
   }.property('cancelled')
-  
+
 });

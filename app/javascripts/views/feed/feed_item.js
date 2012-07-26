@@ -6,10 +6,7 @@
   Override this further for individual needs of the historical/scheduled
   subclassed views
 */
-Radium.FeedItemView = Ember.ContainerView.extend(
-  Radium.InlineForm,
-  Radium.InlineTodoForm,
-  {
+Radium.FeedItemView = Ember.ContainerView.extend(Radium.InlineTodoForm, {
   classNames: 'row feed-item-container'.w(),
   classNameBindings: ['isActionsVisible:expanded', 'hasDiscussions'],
   isActionsVisible: false,
@@ -18,45 +15,32 @@ Radium.FeedItemView = Ember.ContainerView.extend(
     var self = this,
         childViews = this.get('childViews'),
         editView = this.get('editView'),
-        infoView = this.get('infoView'),
+        feedDetailsContainer = this.get('feedDetailsContainer'),
         commentsView = this.get('commentsView');
 
     if (this.get('isActionsVisible')) {
-      childViews.pushObjects([infoView, commentsView]);
-    } else if (childViews.get('length')) {
-      childViews.removeObject(editView);
-      $.when(commentsView.slideUp())
-        .then(function() {
-          childViews.removeObjects([commentsView, infoView]);
-          self.setPath('parentView.isEditMode', false);
-        });
+      childViews.pushObject(feedDetailsContainer);
+    } else {
+      feedDetailsContainer.slideUp(function() {
+        childViews.removeObject(feedDetailsContainer);
+        feedDetailsContainer.set('currentView', null);
+      });
     }
   }.observes('isActionsVisible'),
-
-  edit: function(event) {
-    var childViews = this.get('childViews'),
-        editView = this.get('editView');
-
-    if (childViews.indexOf(editView) === -1) {
-      childViews.pushObject(editView);
-    } else {
-      childViews.removeObject(editView);
-    }
-    return false;
-  },
 
   init: function() {
     this._super();
 
-    // Assign the content in the subclassed views
-    this.set('commentsController', Radium.InlineCommentsController.create({
-      activity: this.get('content')
+    var kind = this.getPath('content.type') || this.getPath('content.kind'),
+        content = (this.getPath('content.type')) ? this.get('content') : this.getPath('parentView.content');
+
+    this.set('controller', Radium.InlineCommentsController.create({
+      contentBinding: 'parentView.content'
     }));
 
-    // Add the comments view.
-    this.set('commentsView', Radium.InlineCommentsView.create({
-      controller: this.get('commentsController'),
-      contentBinding: 'controller.content'
+    this.set('feedDetailsContainer', Radium.FeedDetailsContainer.create(Radium.InlineForm, {
+      type: kind,
+      content: content
     }));
   }
 });

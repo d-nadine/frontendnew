@@ -1,6 +1,6 @@
 Radium.InlineCommentsView = Ember.View.extend({
   templateName: 'inline_comments',
-  isVisibleBinding: 'parentView.isCommentsVisible',
+  // isVisibleBinding: 'parentView.isCommentsVisible',
   commentBinding: 'controller.newComment',
   didInsertElement: function() {
     this.$().hide().slideDown('fast');

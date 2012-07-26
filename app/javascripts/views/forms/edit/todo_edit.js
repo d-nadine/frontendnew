@@ -1,4 +1,4 @@
-Radium.TodoEditView = Ember.View.extend({
+Radium.TodoEditView = Radium.FeedEditView.extend({
   templateName: 'todo_edit',
   editDueDateField: Radium.DatePickerField.extend({
     elementId: 'finish-by-date',
@@ -26,4 +26,4 @@ Radium.TodoEditView = Ember.View.extend({
       this._super();
     }
   })
-})
+});

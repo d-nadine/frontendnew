@@ -7,8 +7,8 @@ Radium.InlineCommentsController = Ember.ArrayProxy.extend({
     if (this.get('newComment') !== '') {
       var comment,
           commentText = this.get('newComment'),
-          id = this.getPath('activity.id'),
-          type = this.getPath('activity.type'),
+          id = this.getPath('content.id'),
+          type = this.getPath('content.type'),
           url;
 
       if (type) {
@@ -46,7 +46,7 @@ Radium.InlineCommentsController = Ember.ArrayProxy.extend({
           self.set('newComment', commentText);
         }
       });
-      
+
     } else {
       self.set('isError', true);
     }

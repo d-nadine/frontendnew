@@ -5,7 +5,7 @@ Radium.InlineForm = Ember.Mixin.create({
 
     $.when(form.$().slideUp('fast'))
       .then(function() {
-        self.get('childViews').removeObject(form);
+        self.set('currentView', null);
       });
     return false;
   }

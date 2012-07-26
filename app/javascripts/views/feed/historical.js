@@ -39,19 +39,12 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
       }
     }));
 
-    this.set('infoView', Ember.View.create({
-      content: reference,
-      isVisibleBinding: 'parentView.isActionsVisible',
-      layoutName: 'details_layout',
-      templateName: kind + '_details'
-    }));
-
     //TODO: Joshua there is not NoteFormView?
     // this.set('noteView', Radium.NoteFormView.create({
     //     content: resource
     // }));
 
     // Assign the comments
-    this.setPath('commentsController.content', this.getPath('content.comments'));
+    this.setPath('controller.content', this.getPath('content.comments'));
   }.observes('reference.isLoaded')
 });

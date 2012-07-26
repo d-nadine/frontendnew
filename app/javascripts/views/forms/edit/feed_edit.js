@@ -1,6 +1,6 @@
 Radium.FeedEditView = Ember.View.extend({
   classNames: ['well', 'form-inline'],
-  contentBinding: 'parentView.content',
+  contentBinding: 'parentView.parentVIew.content',
   classNameBindings: ['content.isSaving'],
   userSelect: Ember.Select.extend({
     init: function() {
@@ -15,10 +15,10 @@ Radium.FeedEditView = Ember.View.extend({
     optionLabelPath: 'content.name',
     optionValuePath: 'content.id',
     assignmentDidChange: function() {
-      var user = this.get('selection'), 
+      var user = this.get('selection'),
           reference = this.getPath('parentView.content'),
           oldUser = reference.get('user');
-          
+
       if (user.get('id') !== reference.getPath('user.id')) {
         reference.setProperties({
           user: user,

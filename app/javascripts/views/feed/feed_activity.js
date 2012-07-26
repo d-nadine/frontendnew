@@ -1,5 +1,19 @@
 Radium.FeedActivityView = Radium.FeedItemView.extend({
   classNameBindings: ['content.type'],
+
+  edit: function(event) {
+    var feedDetailsContainer = this.get('feedDetailsContainer'),
+        currentView = feedDetailsContainer.get('currentView'),
+        editView = this.get('editView');
+
+    if (Ember.isEqual(currentView, editView)) {
+      feedDetailsContainer.set('currentView', null);
+    } else {
+      feedDetailsContainer.set('currentView', editView);
+    }
+    return false;
+  },
+
   init: function() {
     this._super();
     var content = this.get('content'),
@@ -30,22 +44,17 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
       }
     }));
 
-    this.set('infoView', Ember.View.create({
-      isVisibleBinding: 'parentView.isActionsVisible',
-      content: this.get('content'),
-      layoutName: 'details_layout',
-      templateName: type + '_details'
-    }));
-    
     if (editableTypes.indexOf(type) === -1) {
       editView = Ember.View.create();
     } else {
-      editView = Radium[model+'EditView'].create();
+      editView = Radium[model+'EditView'].create({
+        contentBinding: 'parentView.content'
+      });
     }
 
     this.set('editView', editView);
 
     // Assign the comments
-    this.setPath('commentsController.content', this.getPath('content.comments'));
+    this.setPath('controller.content', this.getPath('content.comments'));
   }
 });
