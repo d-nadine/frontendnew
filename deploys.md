@@ -1,3 +1,4 @@
+* [2012-07-27 14:09 -0700] 5fe671f - Joshua Jones: Fix broken comments. Feed details view refactor broke them. Also made the comments property pare of the core model class.
 * [2012-07-27 12:52 -0700] 9bc0531 - Joshua Jones: [Delivers #32972949] Add bottom loading indicator back in.
 * [2012-07-26 16:53 -0700] 54ca688 - Joshua Jones: [Deploy]
 * [2012-07-26 16:51 -0700] e7b2e25 - Joshua Jones: [Delivers #32972733] Refactor feed item view so that action items like editing or creating todos are all in a single container view, which slides up/down as one.
