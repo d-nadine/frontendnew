@@ -34,9 +34,7 @@ Radium.FeedItemView = Ember.ContainerView.extend(Radium.InlineTodoForm, {
     var kind = this.getPath('content.type') || this.getPath('content.kind'),
         content = (this.getPath('content.type')) ? this.get('content') : this.getPath('parentView.content');
 
-    this.set('controller', Radium.InlineCommentsController.create({
-      contentBinding: 'parentView.content'
-    }));
+    this.set('controller', Radium.InlineCommentsController.create());
 
     this.set('feedDetailsContainer', Radium.FeedDetailsContainer.create(Radium.InlineForm, {
       type: kind,

@@ -6,9 +6,6 @@ Radium.Activity = Radium.Core.extend({
   user: DS.belongsTo('Radium.User'),
   // Embedded key only
   reference: DS.attr('object'),
-  comments: DS.hasMany('Radium.Comment', {
-    embedded: true
-  }),
 
   isCall: function() {
     if (this.get('reference').hasOwnProperty('todo')) {

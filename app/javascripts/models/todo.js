@@ -25,9 +25,6 @@ Radium.Todo = Radium.Core.extend({
     embedded: true
   }),
   contacts: DS.hasMany('Radium.Contact'),
-  comments: DS.hasMany('Radium.Comment', {
-    embedded: true
-  }),
   notes: DS.hasMany('Radium.Note', {embedded: true}),
   overdue: DS.attr('boolean'),
   reference: DS.attr('object'),

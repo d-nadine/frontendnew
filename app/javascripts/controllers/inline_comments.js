@@ -7,11 +7,11 @@ Radium.InlineCommentsController = Ember.ArrayProxy.extend({
     if (this.get('newComment') !== '') {
       var comment,
           commentText = this.get('newComment'),
-          id = this.getPath('content.id'),
-          type = this.getPath('content.type'),
+          id = this.getPath('reference.id'),
+          // Activities don't have a reference type, only distinguishing key ATM
+          type = this.getPath('reference.type') || this.getPath('reference.kind'),
           url;
-
-      if (type) {
+      if (this.getPath('reference.type')) {
         var plural = Radium.store.adapter.pluralize(type);
         url = '%@/%@/comments'.fmt(plural, id);
       } else {

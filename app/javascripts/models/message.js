@@ -7,7 +7,6 @@ Radium.Message = Radium.Core.extend({
   user: DS.belongsTo('Radium.User', {key: 'user'}),
   users: DS.hasMany('Radium.User'),
   contacts: DS.hasMany('Radium.Contact'),
-  comments: DS.hasMany('Radium.Comment'),
   attachments: DS.hasMany('Radium.Attachment'),
   todos: DS.hasMany('Radium.Todo')
 });

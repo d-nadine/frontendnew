@@ -1,6 +1,6 @@
 /**
   Core model class for all Radium models. Base attributes are `created_at` and `updated_at`
-  
+
 */
 
 Radium.Core = DS.Model.extend({
@@ -14,6 +14,10 @@ Radium.Core = DS.Model.extend({
   created_at: DS.attr('datetime'),
   notes_attributes: DS.attr('array', {
     defaultValue: []
+  }),
+  comments: DS.hasMany('Radium.Comment', {
+    embedded: true,
+    key: 'comments'
   })
 
   // @returns {Ember.DateTime}
@@ -37,7 +41,7 @@ Radium.Core = DS.Model.extend({
   //   return this.get('date').toFormattedString('%Y-%m');
   // }.property('date').cacheable(),
 
-  // // Bind to the `timestamp` property instead of `time` property so we can 
+  // // Bind to the `timestamp` property instead of `time` property so we can
   // // calculate what quarter we're in.
   // quarter: function() {
   //   var quarter,
@@ -49,7 +53,7 @@ Radium.Core = DS.Model.extend({
   //     if (month > 9 && month <= 12) { quarter = 4; }
   //   return this.get('date').toFormattedString('%Y-Q') + quarter;
   // }.property('updatedAt').cacheable(),
-  
+
   // year: function() {
   //   return this.get('date').toFormattedString('%Y');
   // }.property('date').cacheable()

@@ -3,6 +3,7 @@
 */
 
 Radium.Contact = Radium.Person.extend({
+  type: 'contact',
   namingConvention: {
     keyToJSONKey: function(key) {
       // TODO: Strip off `is` from the front. Example: `isHipster` becomes `hipster`
@@ -14,7 +15,7 @@ Radium.Contact = Radium.Person.extend({
       } else {
         return key;
       }
-      
+
     }
   },
 
@@ -37,9 +38,6 @@ Radium.Contact = Radium.Person.extend({
   }),
   becameDeadEndAt: DS.attr('date', {
     key: 'became_dead_end_at'
-  }),
-  comments: DS.hasMany('Radium.Comment', {
-    embedded: true
   }),
   status: DS.attr('string'),
   addresses: DS.hasMany('Radium.Address', {embedded: true}),
@@ -66,7 +64,7 @@ Radium.Contact = Radium.Person.extend({
   assigned: function() {
     return (this.get('user')) ? true : false;
   }.property('user').cacheable(),
-  
+
   noUpcomingTasks: function() {
     return (this.get('todos')) ? true : false;
   }.property('todos').cacheable(),

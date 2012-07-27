@@ -46,5 +46,6 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
 
     // Assign the comments
     this.setPath('controller.content', this.getPath('content.comments'));
+    this.setPath('controller.reference', this.get('content'));
   }.observes('reference.isLoaded')
 });
