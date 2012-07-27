@@ -1,6 +1,6 @@
 <div class="span9">
   <div class="alert alert-info" id="notifications">
-    <a class="close" {{action "hideNotifications"}}>×</a>
+    <a class="close" {{action "toggleNotifications" target="controller"}}>×</a>
     <ul class="unstyled">
       {{collection view.notificationsListView}}
     </ul>

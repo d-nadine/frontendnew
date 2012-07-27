@@ -1,4 +1,9 @@
 Radium.NotificationsController = Ember.ArrayController.extend({
+  isVisible: true,
+  toggleNotifications: function(event) {
+    this.toggleProperty('isVisible');
+    return false;
+  },
   dismiss: function(event) {
     var notification = event.view.content;
     this.get('content').removeObject(notification);
@@ -10,7 +15,7 @@ Radium.NotificationsController = Ember.ArrayController.extend({
     Radium.store.commit();
   },
   confirm: function(event) {
-    var notification = event.view.content
+    var notification = event.view.content,
         invitation = notification.get('invitation'),
         hashKey = invitation.get('hashKey'),
         content = this.get('content');
@@ -25,7 +30,7 @@ Radium.NotificationsController = Ember.ArrayController.extend({
     return false;
   },
   decline: function(event) {
-    var notification = event.view.content
+    var notification = event.view.content,
         invitation = notification.get('invitation'),
         hashKey = invitation.get('hashKey'),
         content = this.get('content');

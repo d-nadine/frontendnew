@@ -14,7 +14,7 @@ Radium.DashboardPage = Radium.State.extend({
       manager.set('notificationsView', Radium.NotificationsView.create({
         controller: Radium.get('notificationsController'),
         contentBinding: 'Radium.notificationsController.content'
-      }))
+      }));
     }
 
     Radium.get('notificationsController').set('notificationsView', manager.get('notificationsView'));
@@ -27,13 +27,13 @@ Radium.DashboardPage = Radium.State.extend({
       Radium.get('activityFeedController').set('feedUrl', function(date){
         var id = Radium.getPath('appController.current_user.id');
         var resource = 'users';
-        return Radium.get('appController').getFeedUrl(resource, id, date);       
+        return Radium.get('appController').getFeedUrl(resource, id, date);
       });
 
       if(!manager.get('dashboardFeedView')){
         manager.set('dashboardFeedView', Radium.DashboardFeedView.create({}));
       }
-    
+
       Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));
     }
   })
