@@ -41,11 +41,11 @@ Radium.InfiniteScroller = Ember.Mixin.create({
     return isUp;
   },
   isLoadingObserver: function() {
-    var self = this;
-    if (this.getPath('controller.isLoading')) {
-      $(window).off('scroll');
+    $(window).off('scroll');
 
-      if(self.get('scrollDirection') === Radium.SCROLL_FORWARD){
+    if (this.getPath('controller.isLoading')) {
+
+      if(this.get('scrollDirection') === Radium.SCROLL_FORWARD){
         Radium.LoadingManager.send('show');
       }else{
         Radium.LoadingManager.send('show');
@@ -53,7 +53,7 @@ Radium.InfiniteScroller = Ember.Mixin.create({
     } else {
       Radium.LoadingManager.send('hide');
 
-      $(window).on('scroll', $.proxy(self.infiniteLoading, self));
+      $(window).on('scroll', $.proxy(this.infiniteLoading, this));
     }
-  }.observes('controller.isLoading') 
+  }.observes('controller.isLoading')
 });

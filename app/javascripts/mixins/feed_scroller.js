@@ -40,7 +40,7 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
     }
 
     this.set('isLoading', true);
-    
+
     var getDate = (isScroll) ? this.get(this.RequestDate[scrollData.direction]) : options.requestDate;
 
     var self = this;
@@ -54,10 +54,35 @@ Radium.FeedScroller = Ember.Mixin.create(Ember.Evented, {
 
       if((dateBookSection.length > 0) || (data.feed.historical_section.clusters.length > 0)){
         var dateToDisplay = getDate || data.feed.start_date;
-        var dateContent = Ember.Object.create({dateHeader: dateToDisplay});
-        
+        var dateContent = Ember.Object.create({
+          dateHeader: dateToDisplay,
+          dateString: function() {
+            var dateHeader = this.get('dateHeader'),
+                dateTime = Ember.DateTime.parse(dateToDisplay, '%Y-%m-%D'),
+                today = Radium.appController.get('today'),
+                yesterday = today.advance({day: -1}),
+                tomorrow = today.advance({day: +1});
+
+            if (Ember.DateTime.compareDate(today, dateTime) === 0) {
+              return "Today";
+            }
+
+            else if (Ember.DateTime.compareDate(yesterday, dateTime) === 0) {
+              return "Yesterday";
+            }
+
+            else if (Ember.DateTime.compareDate(tomorrow, dateTime) === 0) {
+              return "Tomorrow";
+            }
+
+            else {
+              return dateTime.toFormattedString('%A, %B %D, %Y');
+            }
+          }.property('dateHeader')
+        });
+
         self.get('dateHash')[dateToDisplay] = dateContent;
-        
+
         self.get(contentKey).pushObject(dateContent);
       }
 
