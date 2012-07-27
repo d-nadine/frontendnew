@@ -19,18 +19,18 @@ Radium.LoadingManager = Ember.StateManager.create({
         this.set('direction', dir);
 
         this.$()
-          .css(fromTopLayout)
+          .css(layout)
           .show()
-          .animate(fromTop, 500);
+          .animate(settings, 500);
       },
       hide: function(dir) {
-        var dir = this.get('direction') || dir,
+        var direction = this.get('direction') || dir,
             fromTop = {top:-40},
             fromBottom = {bottom: -70},
-            settings = (dir > -1) ? fromTop : fromBottom;
+            settings = (direction > -1) ? fromTop : fromBottom;
 
         this.$()
-          .animate(fromTop, 500, function() {
+          .animate(settings, 500, function() {
             $(this).hide();
           });
       },
@@ -40,7 +40,7 @@ Radium.LoadingManager = Ember.StateManager.create({
     show: function(manager, context) {
       var view = this.get('view');
 
-      view.show();
+      view.show(context.direction);
     },
 
     hide: function(manager, context) {
