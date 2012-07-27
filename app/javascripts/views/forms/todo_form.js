@@ -5,7 +5,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     var selection = this.get('selection'),
         isArrayProxy = Ember.Array.detect(selection),
         testForRoot = (isArrayProxy) ? selection.objectAt(0) : selection;
-        
+
     return (selection) ? Radium.store.adapter.rootForType(testForRoot.constructor) : null;
   }.property('selection'),
 
@@ -53,7 +53,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         return "Add a Todo for %@".fmt(dateString);
       }
     }
-    
+
   }.property('finishBy', 'selection').cacheable(),
 
   descriptionText: Ember.TextArea.extend(Ember.TargetActionSupport, {
@@ -109,7 +109,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
   assignToSelect: Ember.Select.extend({
     elementId: 'assigned-to',
     contentBinding: 'Radium.usersController',
-    optionLabelPath: 'content.abbrName',
+    optionLabelPath: 'content.displayName',
     optionValuePath: 'content.id',
     didInsertElement: function() {
       var user = this.get('content').filterProperty('isLoggedIn', true)[0];
@@ -176,7 +176,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
         }]
       });
     }
-    
+
     // Determine that if there are selected items, the todo is contact based
     Radium.Todo.reopenClass({
       root: 'todo'
@@ -185,7 +185,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
     if (selection) {
       if (this.get('isBulk')) {
         // Until bulk commits are enabled, multiple POSTs must be made
-    
+
         selection.forEach(function(model) {
           // Determine the selection's type, id
           Radium.Todo.reopenClass({

@@ -43,7 +43,7 @@
 <label for="assigned-to">Assigned To</label>
 <select id="assigned-to" name="assigned-to">
   {{#each Radium.usersController}}
-  <option {{bindAttr value="id"}}>{{abbrName}}</option>
+  <option {{bindAttr value="id"}}>{{displayName}}</option>
   {{/each}}
 </select>
 

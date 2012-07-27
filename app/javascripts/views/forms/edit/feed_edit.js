@@ -12,7 +12,7 @@ Radium.FeedEditView = Ember.View.extend({
       this.$().focus();
     },
     contentBinding: 'Radium.usersController.content',
-    optionLabelPath: 'content.name',
+    optionLabelPath: 'content.displayName',
     optionValuePath: 'content.id',
     assignmentDidChange: function() {
       var user = this.get('selection'),

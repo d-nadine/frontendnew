@@ -5,6 +5,9 @@ Radium.User = Radium.Person.extend({
   apiKey: DS.attr('string', {
     key: 'api_key'
   }),
+  displayName: function() {
+    return (this.getPath('apiKey')) ? 'Me' : this.get('abbrName');
+  }.property('name'),
   avatar: DS.attr('object'),
   email: DS.attr('string'),
   phone: DS.attr('string'),
