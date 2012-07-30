@@ -31,7 +31,11 @@ Radium.DashboardPage = Radium.State.extend({
       });
 
       if(!manager.get('dashboardFeedView')){
-        manager.set('dashboardFeedView', Radium.DashboardFeedView.create({}));
+        manager.set('dashboardFeedView', Radium.DashboardFeedView.create({
+          contentBinding: 'Radium.activityFeedController.content',
+          controllerBinding: 'Radium.activityFeedController',
+          bootstrapBinding: 'Radium.appController'
+        }));
       }
 
       Radium.get('appController').set('feedView', manager.get('dashboardFeedView'));

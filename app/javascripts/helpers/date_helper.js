@@ -1,5 +1,5 @@
 /**
-  Formats a native JS Date object for now into the format of your choice. 
+  Formats a native JS Date object for now into the format of your choice.
   See `ember-datetime.js` at line 325 for more options.
 
   @param {Date} property
@@ -11,16 +11,14 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       view = options.data.view,
       value = Ember.getPath(this, property),
       type = Ember.typeOf(value),
-      optionFormat = Ember.getPath('options.hash.format'),
+      optionFormat = options.hash.format,
       format = (optionFormat) ? optionFormat : "%B %D, %Y";
-      
-  var parseDate = function(date) {
 
-    
+  var parseDate = function(date) {
     var tomorrow = Ember.DateTime.create().advance({day: 1});
     var today = Ember.DateTime.create();
     var yesterday = Ember.DateTime.create().advance({day: -1});
-    
+
     if (optionFormat) {
       return date.toFormattedString(format);
     }

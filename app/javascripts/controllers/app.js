@@ -37,7 +37,13 @@ Radium.AppController = Ember.Object.extend({
     });
   },
   bootstrap: function(data){
-    var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section);
+    var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section),
+        bootstrapDate = Ember.DateTime.parse(data.feed.start_date, '%Y-%m-%d'),
+        checkDate = Ember.DateTime.compareDate(bootstrapDate, this.get('today'));
+
+    if (checkDate === 0) {
+      this.set('isTodayBootstrapped', true);
+    }
 
     Radium.store.load(Radium.Account, data.account);
     var account = Radium.store.find(Radium.Account, data.account.id),
@@ -47,6 +53,7 @@ Radium.AppController = Ember.Object.extend({
     var notifications = Radium.store.findMany(Radium.Notification, data.notifications.mapProperty('id').uniq());
 
     //kick off observers
+    this.set('bootstrapDate', bootstrapDate);
     this.set('account', account);
     this.set('users', data.users);
     this.set('current_user', data.current_user);

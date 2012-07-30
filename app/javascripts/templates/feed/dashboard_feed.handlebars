@@ -1,16 +1,16 @@
 {{profile}}
 {{time "timing"}}
 {{collection contentBinding="Radium.activityFeedController.forwardContent.realContent" itemViewClass="Radium.ClusterListItemView"}}
-<div class="page-header">
-  <h3 class="today">Today</h3>
-</div>
-  {{collection 
-    contentBinding="Radium.overdueActivitiesController.content"
-    itemViewClass="Radium.FeedActivityView"
-    class="feed-item"
-  }}
 
-  {{collection Ember.CollectionView 
+<div class="page-header">
+  {{#if bootstrap.isTodayBootstrapped}}
+    <h3 class="today">Today</h3>
+  {{else}}
+    <h3>{{formatDate bootstrap.bootstrapDate format="%A, %B %D, %Y"}}</h3>
+  {{/if}}
+</div>
+
+  {{collection Ember.CollectionView
     contentBinding="Radium.datebookSectionController.content"
     itemViewClass="Radium.FeedActivityView"
     class="feed-item"
