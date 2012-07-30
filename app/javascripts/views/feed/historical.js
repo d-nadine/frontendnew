@@ -1,5 +1,6 @@
 Radium.HistoricalFeedView = Radium.FeedItemView.extend({
   classNameBindings: ['content.kind'],
+  _isHistorical: true,
   init: function() {
     this._super();
 
@@ -47,5 +48,6 @@ Radium.HistoricalFeedView = Radium.FeedItemView.extend({
     // Assign the comments
     this.setPath('controller.content', this.getPath('content.comments'));
     this.setPath('controller.reference', this.get('content'));
+    this.setPath('feedDetailsContainer.content', reference);
   }.observes('reference.isLoaded')
 });

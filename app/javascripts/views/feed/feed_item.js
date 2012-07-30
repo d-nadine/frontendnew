@@ -32,13 +32,14 @@ Radium.FeedItemView = Ember.ContainerView.extend(Radium.InlineTodoForm, {
     this._super();
 
     var kind = this.getPath('content.type') || this.getPath('content.kind'),
-        content = (this.getPath('content.type')) ? this.get('content') : this.getPath('parentView.content');
+        content = (this.getPath('content.type')) ? this.get('content') : this.getPath('parentView.content'),
+        reference = this.getPath('parentView.content.reference');
 
     this.set('controller', Radium.InlineCommentsController.create());
 
+    // Note: Set content in the subclassed View, either HistoricalFeedView or FeedActivityView
     this.set('feedDetailsContainer', Radium.FeedDetailsContainer.create(Radium.InlineForm, {
-      type: kind,
-      content: content
+      type: kind
     }));
   }
 });

@@ -57,5 +57,6 @@ Radium.FeedActivityView = Radium.FeedItemView.extend({
     // Assign the comments
     this.setPath('controller.content', this.getPath('content.comments'));
     this.setPath('controller.reference', this.get('content'));
+    this.setPath('feedDetailsContainer.content', this.get('content'));
   }
 });
