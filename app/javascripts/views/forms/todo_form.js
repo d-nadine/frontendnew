@@ -162,6 +162,7 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
           user_id: assignedUserId,
           user: assignedUser,
           created_at: Ember.DateTime.create(),
+          updated_at: Ember.DateTime.create(),
           hasAnimation: true
         };
 
@@ -182,6 +183,8 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
       root: 'todo'
     });
 
+    var todo;
+
     if (selection) {
       if (this.get('isBulk')) {
         // Until bulk commits are enabled, multiple POSTs must be made
@@ -192,22 +195,24 @@ Radium.TodoForm = Radium.FormView.extend(Radium.FormReminder, {
             url: '%@/%@/todos'.fmt(plural, model.get('id'))
           });
 
-          var bulkTodo = Radium.store.createRecord(Radium.Todo, data);
-          Radium.store.commit();
+          todo = Radium.store.createRecord(Radium.Todo, data);
         });
       } else {
         Radium.Todo.reopenClass({
           url: '%@/%@/todos'.fmt(plural, selection.get('id'))
         });
 
-        var singleTodo = Radium.store.createRecord(Radium.Todo, data);
+        todo = Radium.store.createRecord(Radium.Todo, data);
       }
     } else {
       Radium.Todo.reopenClass({
         url: 'todos'
       });
-      var todo = Radium.store.createRecord(Radium.Todo, data);
+      todo = Radium.store.createRecord(Radium.Todo, data);
     }
+
+    // TODO: When working, this will add the todo into the feed
+    // Radium.Events.createReference(todo);
 
     Radium.store.commit();
 

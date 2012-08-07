@@ -23,9 +23,15 @@ Radium.Events = Ember.Object.create({
 
     Radium.getPath('notificationsController.content').insertAt(0, notification);
   },
+
+  createReference: function(model) {
+    var dateString = model.get('createdAt').toFormattedString('%Y-%m-%d'),
+        feedContent = Radium.getPath('activityFeedController.forwardContent.realContent');
+  },
+
   insertReference: function(push){
     var details = this.getReferenceDetails(push),
-      date = Ember.DateTime.parse(details.reference.calendar_time, '%Y-%m-%d');
+        date = Ember.DateTime.parse(details.reference.calendar_time, '%Y-%m-%d');
 
     Radium.store.load(details.model, details.reference);
     var model = Radium.store.find(details.model, details.reference.id);
@@ -47,16 +53,16 @@ Radium.Events = Ember.Object.create({
     var nextIndex = (feedContent.indexOf(existingDate) + 1);
 
     var nextContent = feedContent[nextIndex];
-    
+
     if(Ember.isArray(nextContent)){
       nextContent.insertAt(0, model);
     }else{
       feedContent.insertAt(nextIndex, Ember.A([model]));
-    } 
+    }
   },
   insertActivity: function(activity){
     Radium.store.load(Radium.Activity, activity);
-    
+
     var model = Radium.store.find(Radium.Activity, activity.id),
         date = Ember.DateTime.parse(activity.timestamp, '%Y-%m-%d'),
         startIndex = 0,
@@ -76,7 +82,7 @@ Radium.Events = Ember.Object.create({
       }
 
       mainContent = Radium.getPath('activityFeedController.forwardContent.realContent');
-      
+
       startIndex = (mainContent.indexOf(existingDate) + 1);
     }
 
@@ -109,8 +115,7 @@ Radium.Events = Ember.Object.create({
     return Ember.Object.create({tag:activity.tag, kind: activity.kind, count :1,"meta":null, activities: [activity.id]});
   },
   getExistingDate: function(date){
-     var dateString = date.toFormattedString('%Y-%m-%d');
-
+    var dateString = date.toFormattedString('%Y-%m-%d');
     return Radium.getPath('activityFeedController.dateHash')[dateString];
   },
   getReferenceDetails: function(reference){
