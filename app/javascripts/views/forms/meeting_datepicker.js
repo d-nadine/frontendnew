@@ -1,8 +1,4 @@
 Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
-  init: function(){
-    this._super();
-    this.deleteSummary();
-  },
   didInsertElement: function() {
     this._super();
     this.fire('change');
@@ -14,13 +10,19 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
   minDate: function() {
     return new Date();
   }.property().cacheable(),
-  defaultDate: Ember.DateTime.create(),
-  valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
-                .from('defaultDate'),
+  value: function(key, value) {
+    if (arguments.length === 1) {
+      return this.getPath('controller.startsAtDateValue')
+                .toFormattedString('%Y-%m-%d');
+    } else {
+      var date = Ember.DateTime.parse(value, '%Y-%m-%d');
+      this.setPath('controller.startsAtDateValue', date);
+      return value;
+    }
+  }.property('controller.startsAtDateValue'),
   deleteSummary: function(){
-    var daysSummary = this.getPath('parentView.daysSummary');
-
-    var length = daysSummary.get('length');
+    var daysSummary = this.getPath('controller.daysSummary'),
+        length = daysSummary.get('length');
 
     for(var i = (length - 1); i >= 0; i--){
       daysSummary.removeObject(daysSummary[i]);
@@ -34,7 +36,7 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
     this.deleteSummary();
 
     var self = this,
-        daysSummary = this.getPath('parentView.daysSummary'),
+        daysSummary = this.getPath('controller.daysSummary'),
         date = Ember.DateTime.parse(this.get('value'), '%Y-%m-%d'),
         dateString = date.toFormattedString("%Y-%m-%d"),
         url = Radium.get('appController').getFeedUrl('users', Radium.getPath('appController.current_user.id'), dateString);
@@ -45,7 +47,7 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
       var meetingsData = Radium.store.loadMany(Radium.Meeting, data.feed.datebook_section.meetings),
           meetings = Radium.store.findMany(Radium.Meeting, meetingsData.ids);
 
-      self.setPath('parentView.daysSummary', meetings);
+      self.setPath('controller.daysSummary', meetings);
     });
   }
 });

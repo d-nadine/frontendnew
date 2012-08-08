@@ -4,6 +4,18 @@ Radium.MeetingForm = Radium.FormView.extend({
   init: function() {
     this._super();
 
+    this.set('controller', Ember.Object.create({
+      topicValue: null,
+      locationValue: null,
+      startsAtValue: null,
+      endsAtValue: null,
+      startsAtDateValue: Ember.DateTime.create(),
+      endsAtDateValue: function() {
+        return this.get('startsAtDateValue').advance({hour: 1});
+      }.property('startsAtDateValue'),
+      daysSummary: Ember.A([])
+    }));
+
     this.set('inviteesList', Ember.ArrayController.create({
       contentBinding: 'Radium.everyoneController.emails',
       selected: Ember.A([])
@@ -12,6 +24,7 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   willDestroyElement: function() {
     this.get('inviteesList').destroy();
+    this.get('controller').destroy();
   },
 
   topicValue: null,
@@ -26,12 +39,12 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   topicField: Ember.TextField.extend({
     placeholder: "Meeting description",
-    valueBinding: 'parentView.topicValue'
+    valueBinding: 'parentView.controller.topicValue'
   }),
 
   locationField: Ember.TextField.extend({
     placeholder: "Location",
-    valueBinding: 'parentView.locationValue'
+    valueBinding: 'parentView.controller.locationValue'
   }),
 
   inviteField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
@@ -48,19 +61,21 @@ Radium.MeetingForm = Radium.FormView.extend({
   }),
 
   meetingStartDateField: Radium.MeetingFormDatepicker.extend({
+    controllerBinding: 'parentView.controller',
     elementId: 'start-date',
     viewName: 'meetingStartDate',
     name: 'start-date'
   }),
 
   meetingEndDateField: Radium.MeetingFormDatepicker.extend({
+    controllerBinding: 'parentView.controller',
     elementId: 'end-date',
     viewName: 'meetingEndDate',
     name: 'end-date'
   }),
 
   daysActivities: Ember.CollectionView.extend({
-    contentBinding: "parentView.daysSummary",
+    contentBinding: "parentView.controller.daysSummary",
     classNames: ['other-meetings'],
     tagName: 'table',
     isVisible: function() {
@@ -79,13 +94,15 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   startsAtField: Ember.TextField.extend(Radium.TimePicker, {
     classNames: ['time'],
-    formValueBinding: 'parentView.startsAtValue'
+    dateBinding: 'parentView.controller.startsAtDateValue'
   }),
 
   endsAtField: Ember.TextField.extend(Radium.TimePicker, {
     classNames: ['time'],
-    placeholder: 'eg 1:00',
-    formValueBinding: 'parentView.endsAtValue'
+    dateBinding: 'parentView.controller.endsAtDateValue',
+    startsAtDidChange: function() {
+      // debugger;
+    }.observes('parentView.startsAtValue')
   }),
 
   submitForm: function() {

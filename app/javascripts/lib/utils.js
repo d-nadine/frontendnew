@@ -30,7 +30,7 @@ Radium.Utils = {
     if (meridian === "pm") {
       time[0] = time[0] + 12;
     }
-    
+
     return (time.length > 1) ? time : time.concat([0]);
   },
   //TODO: find a better place to put this.  Reopen datastore?
@@ -47,9 +47,15 @@ Radium.Utils = {
         });
       }
     });
-    
+
     return dateBookSection;
   },
+
+  checkIsToday: function(date) {
+    var today = Radium.appController.get('today');
+    return Ember.DateTime.compareDate(today, date);
+  },
+
   pluckReferences: function(feed, silent) {
     return feed.map(function(item){
       var kind = item.kind,
@@ -73,7 +79,7 @@ Radium.Utils = {
 
       item[kind] = reference;
     });
-    
+
     if(!feed.length || feed.length === 0){
       return Ember.A();
     }else{
