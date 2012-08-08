@@ -1,6 +1,19 @@
 Radium.MeetingForm = Radium.FormView.extend({
   templateName: 'meeting_form',
 
+  init: function() {
+    this._super();
+
+    this.set('inviteesList', Ember.ArrayController.create({
+      contentBinding: 'Radium.everyoneController.emails',
+      selected: Ember.A([])
+    }));
+  },
+
+  willDestroyElement: function() {
+    this.get('inviteesList').destroy();
+  },
+
   topicValue: null,
   locationValue: null,
   startsAtValue: null,
@@ -11,127 +24,68 @@ Radium.MeetingForm = Radium.FormView.extend({
     return (this.getPath('invalidFields.length')) ? false : true;
   }.property('invalidFields.@each').cacheable(),
 
-  topicField: Radium.Fieldset.extend({
-    errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, {
-      classNames: ['span8'],
-      elementId: 'topic',
-      nameBinding: 'parentView.fieldAttributes',
-      rules: ['required'],
-      valueBinding: 'parentView.parentView.topicValue'
-    })
+  topicField: Ember.TextField.extend({
+    placeholder: "Meeting description",
+    valueBinding: 'parentView.topicValue'
   }),
 
-  locationField: Radium.Fieldset.extend({
-    formField: Ember.TextField.extend({
-      classNames: ['span3'],
-      elementId: 'location',
-      nameBinding: 'parentView.fieldAttributes',
-      valueBinding: 'parentView.parentView.locationValue'
-    })
+  locationField: Ember.TextField.extend({
+    placeholder: "Location",
+    valueBinding: 'parentView.locationValue'
   }),
 
-  inviteesList: Ember.ArrayController.create({
-    contentBinding: 'Radium.everyoneController.emails',
-    selected: Ember.A([])
-  }),
-
-  inviteField: Radium.Fieldset.extend({
-    formField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
-      elementId: 'invite',
-      flagType: 'invite',
-      classNames: ['span3'],
-      nameBinding: 'parentView.fieldAttributes',
-      selectedGroupBinding: 'parentView.parentView.inviteesList',
-      sourceBinding: 'selectedGroup.content'
-    })
+  inviteField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
+    selectedGroupBinding: 'parentView.inviteesList',
+    sourceBinding: 'selectedGroup.content',
+    placeholder: function() {
+      var numOfInvitees = this.getPath('parentView.inviteesList.selected.length');
+      return (numOfInvitees) ? "" : "Invitees";
+    }.property('parentView.inviteesList.selected.length')
   }),
 
   selectedInvitees: Ember.View.extend({
     contentBinding: 'parentView.inviteesList.selected'
   }),
 
-  meetingDateField: Radium.DatePickerField.extend({
-    init: function(){
-      this._super();
-      this.deleteSummary();
-    },
+  meetingStartDateField: Radium.MeetingFormDatepicker.extend({
     elementId: 'start-date',
-    viewName: 'meetingDate',
-    name: 'start-date',
-    classNames: ['input-small'],
-    minDate: function() {
-      return new Date();
-    }.property().cacheable(),
-    defaultDate: Ember.DateTime.create(),
-    valueBinding: Ember.Binding.dateTime('%Y-%m-%d')
-                  .from('defaultDate'),
-    deleteSummary: function(){
-      var daysSummary = this.getPath('parentView.daysSummary');
+    viewName: 'meetingStartDate',
+    name: 'start-date'
+  }),
 
-      var length = daysSummary.get('length');
-
-      for(var i = (length - 1); i >= 0; i--){
-        daysSummary.removeObject(daysSummary[i]);
-      }
-    },
-    change: function(){
-      this._super();
-
-      $('.progress').show();
-
-      var daysSummary = this.getPath('parentView.daysSummary');
-
-      this.deleteSummary();
-
-      date = Ember.DateTime.parse(this.get('value'), '%Y-%m-%d');
-
-      dateString = date.toFormattedString("%Y-%m-%d");
-
-      var url =  Radium.get('appController').getFeedUrl('users', Radium.getPath('appController.current_user.id'), dateString);
-
-      $.when($.ajax({url: url})).then(function(data){
-        $('.progress').hide();
-        daysSummary.pushObject(Ember.Object.create({dateHeader: dateString}));
-        
-        var dateBookSection =  Radium.Utils.loadDateBook(data.feed.datebook_section);
-
-        if(dateBookSection.length > 0){
-          daysSummary.pushObject(dateBookSection);
-        }else{
-          daysSummary.pushObject(Ember.Object.create({message: "Nothing Scheduled."}));
-        }
-      });
-    }
+  meetingEndDateField: Radium.MeetingFormDatepicker.extend({
+    elementId: 'end-date',
+    viewName: 'meetingEndDate',
+    name: 'end-date'
   }),
 
   daysActivities: Ember.CollectionView.extend({
     contentBinding: "parentView.daysSummary",
-    itemViewClass: "Radium.ClusterListItemView"
-  }),
-
-  startsAtField: Radium.Fieldset.extend({
-    errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, Radium.TimePicker, {
-      classNames: ['input-small'],
-      elementId: 'starts-at',
-      nameBinding: 'parentView.fieldAttributes',
-      placeholder: 'eg 1:00',
-      rules: ['required'],
-      formValueBinding: 'parentView.parentView.startsAtValue'
+    classNames: ['other-meetings'],
+    tagName: 'table',
+    isVisible: function() {
+      return (this.getPath('parentView.daysSummary')) ? true : false;
+    }.property('parentView.daysSummary'),
+    emptyView: Ember.View.extend({
+      tagName: 'tr',
+      classNames: ['no-meetings'],
+      template: Ember.Handlebars.compile('<td colspan="2">No meetings scheduled.</td>')
+    }),
+    itemViewClass: Ember.View.extend({
+      tagName: 'tr',
+      template: Ember.Handlebars.compile('<td>{{formatTime content.startsAt}}</td><td>{{content.topic}}</td>')
     })
   }),
 
-  endsAtField: Radium.Fieldset.extend({
-    errors: Ember.A([]),
-    formField: Ember.TextField.extend(Radium.FieldValidation, Radium.TimePicker, {
-      classNames: ['input-small'],
-      elementId: 'ends-at',
-      nameBinding: 'parentView.fieldAttributes',
-      placeholder: 'eg 1:00',
-      rules: ['required'],
-      formValueBinding: 'parentView.parentView.endsAtValue'
-    })
+  startsAtField: Ember.TextField.extend(Radium.TimePicker, {
+    classNames: ['time'],
+    formValueBinding: 'parentView.startsAtValue'
+  }),
+
+  endsAtField: Ember.TextField.extend(Radium.TimePicker, {
+    classNames: ['time'],
+    placeholder: 'eg 1:00',
+    formValueBinding: 'parentView.endsAtValue'
   }),
 
   submitForm: function() {
@@ -139,7 +93,7 @@ Radium.MeetingForm = Radium.FormView.extend({
         self = this,
         topic = this.get('topicValue'),
         location = this.get('locationValue'),
-        day = this.getPath('meetingDate.value'),
+        day = this.getPath('meetingStartDate.value'),
         date = Ember.DateTime.parse(day, '%Y-%m-%d'),
         startsAt = this.get('startsAtValue'),
         endsAt = this.get('endsAtValue'),

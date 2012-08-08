@@ -26,11 +26,51 @@
   }
 }
 
+/* Layout helpers */
+hr {
+  margin: 5px 0;
+}
+
+.center {
+  margin: 0 0 0 160px;
+  display: inline-block;
+
+  > div {
+    text-align: left;
+  }
+}
+
+.long input {
+  width: 250px;
+}
+
+.date input {
+  width:  70px;
+  margin-bottom: 5px;
+}
+
+.options {
+  display: inline-block;
+  float: left;
+  clear: left;
+  margin: 7px 0 0;
+
+  .btn {
+    margin-right: 20px;
+  }
+
+  .more {
+    vertical-align: bottom;
+  }
+}
+
 /*
   Base Radium form
   ===================
 */
 .radium-form {
+  @include box-shadow(none);
+
   label.radium-control-label {
     width: auto;
     text-align: left;
@@ -46,6 +86,10 @@
   .inline-fieldset {
     display: inline-block;
     margin-right: 15px;
+  }
+
+  fieldset {
+    margin: 0px 5px 10px 0px;
   }
 
   select {
@@ -87,7 +131,7 @@
 }
 
 .token-container {
-  width: 618px;
+  width: 258px;
   float: left;
   clear: both;
   background: #fff;
@@ -96,9 +140,11 @@
 }
 
 input.token-field {
+  width: auto;
+  min-width: 25px;
+  height: 24px;
   padding: 0;
-  margin: 4px;
-  height: 35px;
+  margin: 2px 4px;
   border: none;
   @include box-shadow(none);
 
@@ -108,7 +154,7 @@ input.token-field {
 }
 
 .token {
-  padding: 8px 35px 8px 14px;
+  padding: 2px 18px 2px 4px;
   float: left;
   position: relative;
   margin: 4px;
@@ -119,8 +165,8 @@ input.token-field {
   @include text-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
 
   .close {
-    top: 5px;
-    right: 12px;
+    top: -1px;
+    right: 4px;
     position: absolute;
     background: transparent;
   }
@@ -162,5 +208,23 @@ fieldset legend {
     &.meridian-select {
       width: 55px;
     }
+  }
+}
+
+.other-meetings {
+  table {
+    font-size: 12px;
+    margin: 7px 0 10px 5px;
+  }
+
+  td {
+    &:first-child {
+      font-weight: bold;
+      width: 60px;
+    }
+  }
+
+  tr.no-meetings td {
+    width: 100%;
   }
 }

@@ -13,6 +13,15 @@ Radium.EmailFormGroup = Ember.Mixin.create({
       }
     }
   },
+  keyUp: function(event) {
+    this._super(event);
+    var value = this.get('value');
+    if (value) {
+      this.$().width(value.length * 8);
+    } else {
+      this.$().width('auto');
+    }
+  },
   select: function(event, ui) {
     event.preventDefault();
     this.getPath('selectedGroup.selected').pushObject(ui.item.target);

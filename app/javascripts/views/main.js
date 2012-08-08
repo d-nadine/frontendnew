@@ -32,6 +32,7 @@ minispade.require('radium/views/forms/contacts_message_form');
 minispade.require('radium/views/forms/contacts_sms_form');
 minispade.require('radium/views/forms/discussion_form');
 minispade.require('radium/views/forms/call_list_form');
+minispade.require('radium/views/forms/meeting_datepicker');
 minispade.require('radium/views/forms/meeting_form');
 minispade.require('radium/views/forms/deal_line_item');
 minispade.require('radium/views/forms/deal_form');
