@@ -12,14 +12,14 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
   }.property().cacheable(),
   value: function(key, value) {
     if (arguments.length === 1) {
-      return this.getPath('controller.startsAtDateValue')
+      return this.getPath('dateValue')
                 .toFormattedString('%Y-%m-%d');
     } else {
       var date = Ember.DateTime.parse(value, '%Y-%m-%d');
-      this.setPath('controller.startsAtDateValue', date);
+      this.setPath('dateValue', date);
       return value;
     }
-  }.property('controller.startsAtDateValue'),
+  }.property('dateValue'),
   deleteSummary: function(){
     var daysSummary = this.getPath('controller.daysSummary'),
         length = daysSummary.get('length');
