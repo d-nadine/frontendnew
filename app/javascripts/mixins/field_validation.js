@@ -1,3 +1,4 @@
+// NOTE: Likely will be depreciated
 Radium.FieldValidation = Ember.Mixin.create({
   didInsertElement: function() {
     this._super();

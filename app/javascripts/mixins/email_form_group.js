@@ -24,7 +24,7 @@ Radium.EmailFormGroup = Ember.Mixin.create({
   },
   select: function(event, ui) {
     event.preventDefault();
-    this.getPath('selectedGroup.selected').pushObject(ui.item.target);
+    this.get('selected').pushObject(ui.item.target);
     this.set('value', null);
     return false;
   },

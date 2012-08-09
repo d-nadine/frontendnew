@@ -54,8 +54,9 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
       $('.progress').hide();
       var meetingsData = Radium.store.loadMany(Radium.Meeting, data.feed.datebook_section.meetings),
           meetings = Radium.store.findMany(Radium.Meeting, meetingsData.ids);
-
-      self.setPath('controller.daysSummary', meetings);
+      if (self.get('state') === 'inDOM') {
+        self.setPath('controller.daysSummary', meetings);
+      }
     });
   }
 });

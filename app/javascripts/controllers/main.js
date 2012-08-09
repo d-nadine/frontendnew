@@ -18,6 +18,7 @@ minispade.require('radium/controllers/inline_comments');
 
 
 minispade.require('radium/controllers/forms/type_ahead');
+minispade.require('radium/controllers/forms/meeting');
 
 // minispade.require('radium/controllers/crossfilter/feed_by_kind');
 // minispade.require('radium/controllers/crossfilter/feed_by_kind');

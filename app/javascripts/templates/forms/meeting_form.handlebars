@@ -4,11 +4,9 @@
   </fieldset>
   <fieldset class="long">
     <div class="token-container">
-      {{#view selectedInvitees}}
-        {{#each content}}
-          {{view Radium.TokenView itemBinding="this"}}
-        {{/each}}
-      {{/view}}
+      {{#each controller.selectedInvitees}}
+        {{view Radium.TokenView itemBinding="this"}}
+      {{/each}}
       {{view inviteField}}
     </div>
   </fieldset>
@@ -31,8 +29,7 @@
     <button
       class="btn btn-success"
       {{bindAttr disabled="controller.isInvalid"}}
-      {{action "submit" target="controller"}}
-    >
+      {{action "submit" target="controller"}}>
       Save
     </button>
   </div>
