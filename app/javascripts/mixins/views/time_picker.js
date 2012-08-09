@@ -1,8 +1,4 @@
 Radium.TimePicker = Ember.Mixin.create({
-  init: function() {
-    this._super();
-    this.set('value', this.get('date'));
-  },
   defaultTime: function() {
     var date = this.get('date'),
         hours = date.get('hour'),

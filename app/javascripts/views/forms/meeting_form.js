@@ -1,48 +1,54 @@
+// TODO: Move this to it's own file once POC is completed
+Radium.MeetingFormController = Ember.Object.create({
+  topicValue: null,
+  locationValue: null,
+  startsAtValue: Ember.DateTime.create(),
+  endsAtValue: Ember.DateTime.create(),
+  // Transform the defaults to a rounded time
+  startsAtDateValue: function(key, value) {
+    // Getter
+    if (arguments.length === 1) {
+      var now = this.get('startsAtValue'),
+          hour = now.get('hour'),
+          minute = now.get('minute'),
+          start;
+
+      if (minute < 30) {
+        start = now.adjust({
+          minute: 30
+        });
+      } else {
+        start = now.adjust({
+          hour: hour+1,
+          minute: 0
+        });
+      }
+      return start;
+    // Setter
+    } else {
+      this.set('startsAtValue', value);
+      return value;
+    }
+  }.property('startsAtValue'),
+  endsAtDateValue: function(key, value) {
+    if (arguments.length === 1) {
+      return this.get('startsAtDateValue').advance({hour: 1});
+    } else {
+      this.set('endsAtValue', value);
+      return value;
+    }
+  }.property('startsAtDateValue'),
+  daysSummary: Ember.A([])
+});
+
+
 Radium.MeetingForm = Radium.FormView.extend({
   templateName: 'meeting_form',
 
   init: function() {
     this._super();
 
-    this.set('controller', Ember.Object.create({
-      topicValue: null,
-      locationValue: null,
-      startsAtValue: Ember.DateTime.create(),
-      endsAtValue: Ember.DateTime.create(),
-      startsAtDateValue: function(key, value) {
-
-        if (arguments.length === 1) {
-          var now = this.get('startsAtValue'),
-              hour = now.get('hour'),
-              minute = now.get('minute'),
-              start;
-
-          if (minute < 30) {
-            start = now.adjust({
-              minute: 30
-            });
-          } else {
-            start = now.adjust({
-              hour: hour+1,
-              minute: 0
-            });
-          }
-          return start;
-        } else {
-          this.set('startsAtValue', value);
-          return value;
-        }
-      }.property('startsAtValue'),
-      endsAtDateValue: function(key, value) {
-        if (arguments.length === 1) {
-          return this.get('startsAtDateValue').advance({hour: 1});
-        } else {
-          this.set('endsAtValue', value);
-          return value;
-        }
-      }.property('startsAtDateValue'),
-      daysSummary: Ember.A([])
-    }));
+    this.set('controller', Radium.MeetingFormController.create());
 
     this.set('inviteesList', Ember.ArrayController.create({
       contentBinding: 'Radium.everyoneController.emails',
@@ -132,7 +138,6 @@ Radium.MeetingForm = Radium.FormView.extend({
     dateBinding: 'parentView.controller.endsAtDateValue',
     dateDidChange: function() {
       var isoTime = this.get('date').toISO8601();
-      console.log('date change', this.getPath('date.hour'));
       if (this.$().timepicker().length) {
         this.$().timepicker('setTime', new Date(isoTime));
       }
