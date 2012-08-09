@@ -28,6 +28,12 @@
     <img alt="wait" src="/images/progress/progress.gif"/>
   </span>
   <div class="options">
-    {{#view submitButton class="btn btn-success"}}Submit{{/view}}
+    <button
+      class="btn btn-success"
+      {{bindAttr disabled="controller.isInvalid"}}
+      {{action "submit" target="controller"}}
+    >
+      Save
+    </button>
   </div>
 </div>

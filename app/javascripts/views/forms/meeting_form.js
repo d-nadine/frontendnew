@@ -1,5 +1,14 @@
 // TODO: Move this to it's own file once POC is completed
-Radium.MeetingFormController = Ember.Object.create({
+// TODO: Breakout validation methods/properties into Mixin or Class
+Radium.MeetingFormController = Ember.Object.extend({
+  init: function() {
+    this._super();
+    this.set('invalidFields', Ember.A([]));
+  },
+  isInvalid: function() {
+    // var childViews = this.getPath('view.childViews');
+    return (this.getPath('invalidFields.length')) ? true : false;
+  }.property('invalidFields.length'),
   topicValue: null,
   locationValue: null,
   startsAtValue: Ember.DateTime.create(),
@@ -38,17 +47,64 @@ Radium.MeetingFormController = Ember.Object.create({
       return value;
     }
   }.property('startsAtDateValue'),
-  daysSummary: Ember.A([])
+  daysSummary: Ember.A([]),
+
+  submit: function(event) {
+    return false;
+  }
+});
+
+Radium.Validate = Ember.Mixin.create({
+  // Requires a controller attached to the parent view.
+  controllerBinding: 'parentView.controller',
+  classNameBindings: ['isInvalid:is-error', 'isValid'],
+  didInsertElement: function() {
+    this._super();
+    this.getPath('controller.invalidFields').pushObject(this);
+  },
+  keyUp: function(event) {
+    this._super(event);
+    this.runValidation();
+  },
+  focusOut: function(event) {
+    this._super(event);
+    this.runValidation();
+  },
+  runValidation: function() {
+    var invalidFields = this.getPath('controller.invalidFields');
+    if (this.validate()) {
+      this.setProperties({
+        isInvalid: false,
+        isValid: true
+      });
+      invalidFields.removeObject(this);
+    } else {
+      this.setProperties({
+        isInvalid: true,
+        isValid: false
+      });
+      if (invalidFields.indexOf(this) === -1) {
+        invalidFields.pushObject(this);
+      }
+    }
+  }
 });
 
 
 Radium.MeetingForm = Radium.FormView.extend({
   templateName: 'meeting_form',
 
+  // Temp override, remove when ready
+  submit: function(event) {
+    event.preventDefault();
+  },
+
   init: function() {
     this._super();
 
-    this.set('controller', Radium.MeetingFormController.create());
+    this.set('controller', Radium.MeetingFormController.create({
+      view: this
+    }));
 
     this.set('inviteesList', Ember.ArrayController.create({
       contentBinding: 'Radium.everyoneController.emails',
@@ -67,18 +123,20 @@ Radium.MeetingForm = Radium.FormView.extend({
   endsAtValue: null,
   daysSummary: Ember.A(),
 
-  isValid: function() {
-    return (this.getPath('invalidFields.length')) ? false : true;
-  }.property('invalidFields.@each').cacheable(),
-
-  topicField: Ember.TextField.extend({
+  topicField: Ember.TextField.extend(Radium.Validate, {
     placeholder: "Meeting description",
-    valueBinding: 'parentView.controller.topicValue'
+    valueBinding: 'parentView.controller.topicValue',
+    validate: function() {
+      return this.get('value');
+    }
   }),
 
-  locationField: Ember.TextField.extend({
+  locationField: Ember.TextField.extend(Radium.Validate, {
     placeholder: "Location",
-    valueBinding: 'parentView.controller.locationValue'
+    valueBinding: 'parentView.controller.locationValue',
+    validate: function() {
+      return this.get('value');
+    }
   }),
 
   inviteField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
@@ -142,6 +200,17 @@ Radium.MeetingForm = Radium.FormView.extend({
         this.$().timepicker('setTime', new Date(isoTime));
       }
     }.observes('date')
+  }),
+
+  submitButton: Ember.View.extend(Ember.TargetActionSupport, {
+    tagName: 'button',
+    controllerBinding: 'parentView.controller',
+    target: 'controller',
+    action: 'submit',
+    disabled: function() {
+      return (this.getPath('controller.isValid')) ? false : true;
+    }.property('controller.isValid'),
+    template: Ember.Handlebars.compile('Save!')
   }),
 
   submitForm: function() {

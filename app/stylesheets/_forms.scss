@@ -65,6 +65,20 @@ hr {
 }
 
 /*
+  Validation
+  ===================
+*/
+.is-valid {
+  border: 1px solid #70AC62;
+  color: #448F33;
+}
+
+.is-error {
+  border: 1px solid red;
+  color: red;
+}
+
+/*
   Base Radium form
   ===================
 */

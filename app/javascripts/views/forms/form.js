@@ -40,7 +40,7 @@ Radium.FormView = Ember.View.extend({
     this.set('isSubmitting', true);
     this.$('input, select, textarea').prop('disabled', true);
   },
-  
+
   flash: function(type, message) {
     var self = this,
         $flashMessage = $('<div class="alert"/>')

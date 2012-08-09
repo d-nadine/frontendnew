@@ -9,13 +9,20 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
   classNames: ['input-small'],
   minDate: function() {
     return new Date();
-  }.property().cacheable(),
+  }.property(),
+  defaultDate: Ember.DateTime.create(),
   value: function(key, value) {
     if (arguments.length === 1) {
       return this.getPath('dateValue')
                 .toFormattedString('%Y-%m-%d');
     } else {
-      var date = Ember.DateTime.parse(value, '%Y-%m-%d');
+      var date;
+      if (value) {
+        date = Ember.DateTime.parse(value, '%Y-%m-%d');
+      } else {
+        date = this.get('defaultDate');
+      }
+
       this.setPath('dateValue', date);
       return value;
     }
@@ -28,6 +35,7 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
       daysSummary.removeObject(daysSummary[i]);
     }
   },
+
   change: function(){
     this._super();
 
