@@ -13,7 +13,9 @@ Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
           minute = now.get('minute'),
           start;
 
-      if (minute < 30) {
+      if (minute === 0) {
+        return now;
+      } else if (minute <= 29) {
         start = now.adjust({
           minute: 30
         });
@@ -32,7 +34,10 @@ Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
   }.property('startsAtValue'),
   endsAtDateValue: function(key, value) {
     if (arguments.length === 1) {
-      return this.get('startsAtDateValue').advance({hour: 1});
+      var startsAt = this.get('startsAtDateValue'),
+          minute = startsAt.get('minute');
+debugger;
+      return startsAt.advance({hour: 1});
     } else {
       this.set('endsAtValue', value);
       return value;
