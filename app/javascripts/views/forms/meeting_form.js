@@ -44,11 +44,11 @@ Radium.MeetingForm = Radium.FormView.extend({
   inviteField: Radium.AutocompleteTextField.extend(Radium.EmailFormGroup, {
     controllerBinding: 'parentView.controller',
     sourceBinding: 'controller.users',
-    selectedInviteesBinding: 'controller.selectedInvitees',
+    selectedBinding: 'controller.selectedInvitees',
     placeholder: function() {
-      var numOfInvitees = this.getPath('selectedInvitees.length');
+      var numOfInvitees = this.getPath('selected.length');
       return (numOfInvitees) ? "" : "Invitees";
-    }.property('selectedInvitees.length')
+    }.property('selected.length')
   }),
 
   meetingStartDateField: Radium.MeetingFormDatepicker.extend({

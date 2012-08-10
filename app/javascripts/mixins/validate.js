@@ -5,6 +5,7 @@ Radium.Validate = Ember.Mixin.create({
   didInsertElement: function() {
     this._super();
     this.getPath('controller.invalidFields').pushObject(this);
+    this.$().before('<span class="required">*</span>');
   },
   keyUp: function(event) {
     this._super(event);

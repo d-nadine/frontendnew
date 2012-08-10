@@ -40,8 +40,11 @@ hr {
   }
 }
 
-.long input {
-  width: 250px;
+.long {
+  position: relative;
+  input {
+    width: 250px;
+  }
 }
 
 .date input {
@@ -68,14 +71,21 @@ hr {
   Validation
   ===================
 */
+.required {
+  position: absolute;
+  left: -10px;
+  font-size: 20px;
+  line-height: 34px;
+  color: lightcoral;
+}
+
 .is-valid {
   border: 1px solid #70AC62;
   color: #448F33;
 }
 
 .is-error {
-  border: 1px solid red;
-  color: red;
+
 }
 
 /*
@@ -124,6 +134,13 @@ hr {
 
   .form-horizontal .control-group:last-child {
     margin-bottom: 0;
+  }
+
+  .btn-success.disabled,
+  .btn-success[disabled] {
+    border-color: lightGrey;
+    background: lightGrey;
+    text-shadow: none;
   }
 
 }

@@ -52,13 +52,13 @@ Radium.TimePicker = Ember.Mixin.create({
 
     this.$().timepicker({
       scrollDefaultNow: true,
-      minTime: start.toFormattedString('%h:%M%p'),
+      minTime: start.toFormattedString('%i:%M%p'),
       maxTime: "11:30pm"
     }).timepicker('setTime', now);
 
     this.$().on('changeTime', $.proxy(function() {
       var timeValue = this.get('value').toUpperCase(),
-          time = Ember.DateTime.parse(timeValue, '%h:%M%p'),
+          time = Ember.DateTime.parse(timeValue, '%i:%M%p'),
           newHour = time.get('hour'),
           newMin = time.get('minute'),
           dateObj = this.get('date');
@@ -69,33 +69,5 @@ Radium.TimePicker = Ember.Mixin.create({
 
   willDestroyElement: function() {
     this.$().off('changeTime');
-  },
-
-  // value: function(key, value) {
-  //   console.log('value binding updated');
-  //   if (arguments.length === 1) {
-  //     return this.get('date').toFormattedString('%h:%M%p');
-  //   } else {
-  //     var timeValue = value.toUpperCase(),
-  //         time = Ember.DateTime.parse(timeValue, '%h:%M%p'),
-  //         newHour = time.get('hour'),
-  //         newMin = time.get('minute'),
-  //         dateObj = this.get('date');
-
-  //     this.set('date', dateObj.adjust({hour: newHour, minute: newMin}));
-  //     console.log('new', newHour, dateObj.get('hour'));
-  //     return value;
-  //   }
-  // }.property('date'),
-
-  // valueDidChange: function() {
-    // var timeValue = this.get('value').toUpperCase(),
-    //     time = Ember.DateTime.parse(timeValue, '%h:%M%p'),
-    //     newHour = time.get('hour'),
-    //     newMin = time.get('minute'),
-    //     date = this.get('date');
-
-    // this.set('date', date.adjust({hour: newHour, minute: newMin}));
-    // console.log(this.get('value'))
-  // }.observes('value')
+  }
 });
