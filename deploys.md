@@ -1,3 +1,4 @@
+* [2012-08-09 17:20 -0700] 0583576 - Joshua Jones: Remove stray debugger.
 * [2012-07-30 16:38 -0700] 83761d3 - Joshua Jones: Fix bootstrap loaded date cluster only reading as Today.
 * [2012-07-30 12:10 -0700] 0c5bb70 - Joshua Jones: Fix context issues in individual historical feed items.
 * [2012-07-27 14:09 -0700] 5fe671f - Joshua Jones: Fix broken comments. Feed details view refactor broke them. Also made the comments property pare of the core model class.
