@@ -1,4 +1,3 @@
-// TODO: Breakout validation methods/properties into Mixin or Class
 Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
   topicValue: null,
   locationValue: null,
@@ -36,7 +35,6 @@ Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
     if (arguments.length === 1) {
       var startsAt = this.get('startsAtDateValue'),
           minute = startsAt.get('minute');
-debugger;
       return startsAt.advance({hour: 1});
     } else {
       this.set('endsAtValue', value);
