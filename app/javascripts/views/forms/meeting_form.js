@@ -94,9 +94,14 @@ Radium.MeetingForm = Radium.FormView.extend({
     classNames: ['time'],
     dateBinding: 'parentView.controller.endsAtDateValue',
     dateDidChange: function() {
-      var isoTime = this.get('date').toISO8601();
+      var minDate = this.get('date'),
+          minDateISO = minDate.toISO8601();
       if (this.$().timepicker().length) {
-        this.$().timepicker('setTime', new Date(isoTime));
+        this.$().timepicker({
+          scrollDefaultNow: true,
+          minTime: minDate.toFormattedString('%i:%M%p'),
+          maxTime: "11:30pm"
+        }).timepicker('setTime', new Date(minDateISO));
       }
     }.observes('date')
   }),
