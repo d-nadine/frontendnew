@@ -33,6 +33,31 @@ Radium.Utils = {
 
     return (time.length > 1) ? time : time.concat([0]);
   },
+
+  /**
+    Rounds time pickers DateTime objects to the nearest half hour.
+    @param {Ember.DateTime}
+    @return {Ember.DateTime}
+  */
+  roundTime: function(time) {
+    var hour = time.get('hour'),
+        minute = time.get('minute'),
+        newTime;
+    if (minute === 0) {
+      newTime = time;
+    } else if (minute <= 29) {
+      newTime = time.adjust({
+        minute: 30
+      });
+    } else {
+      newTime = time.adjust({
+        hour: hour+1,
+        minute: 0
+      });
+    }
+    return newTime;
+  },
+
   //TODO: find a better place to put this.  Reopen datastore?
   loadDateBook: function (feed){
     var dateBookSection = Ember.A();

@@ -1,46 +1,57 @@
+// Possible fix: set the rounded dates on init
+// Computed property only on ends at times (advance the hour based on the difference)
+// Just 2 properties: startTime (static) and endTime (computed based on offset)
 Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
+  init: function() {
+    var now = Ember.DateTime.create(),
+        hour = now.get('hour'),
+        minute = now.get('minute'),
+        start = Radium.Utils.roundTime(now);
+
+    this.setProperties({
+      startsAtValue: start,
+      endsAtValue: start.advance({hour: 1})
+    });
+  },
   topicValue: null,
   locationValue: null,
-  startsAtValue: Ember.DateTime.create(),
-  endsAtValue: Ember.DateTime.create(),
-  // Transform the defaults to a rounded time
-  startsAtDateValue: function(key, value) {
-    // Getter
-    if (arguments.length === 1) {
-      var now = this.get('startsAtValue'),
-          hour = now.get('hour'),
-          minute = now.get('minute'),
-          start;
+  startsAtValue: null,
+  endsAtValue: null,
+  // endsAtValue: function(key, value) {
+  //   var startsAt = this.get('startsAtValue'),
+  //       startsAtHour = startsAt.get('hour');
 
-      if (minute === 0) {
-        return now;
-      } else if (minute <= 29) {
-        start = now.adjust({
-          minute: 30
-        });
-      } else {
-        start = now.adjust({
-          hour: hour+1,
-          minute: 0
-        });
-      }
-      return start;
-    // Setter
-    } else {
-      this.set('startsAtValue', value);
-      return value;
-    }
-  }.property('startsAtValue'),
-  endsAtDateValue: function(key, value) {
-    if (arguments.length === 1) {
-      var startsAt = this.get('startsAtValue'),
-          minute = startsAt.get('minute');
-      return startsAt.advance({hour: 1});
-    } else {
-      this.set('endsAtValue', value);
-      return value;
-    }
-  }.property('startsAtValue'),
+  //   if (arguments.length === 1) {
+  //     if (startsAtHour)
+  //     return startsAt.advance({hour: 1});
+  //   } else {
+  //     return value.advance({hour: 1});
+  //   }
+  // }.property('startsAtValue'),
+
+  startsAtWillChange: function() {
+    var self = this;
+    Ember.run.next(function() {
+      self.set('_startsAtCache', self.get('startsAtValue'));
+    });
+  }.observesBefore('startsAtValue'),
+
+  startsAtDidChange: function() {
+    var self = this,
+        startsAt = this.get('startsAtValue'),
+        startsAtHour = startsAt.get('hour'),
+        cachedStartsAtHour = this.getPath('_startsAtCache.hour'),
+        endsAt = this.get('endsAtValue'),
+        endsAtHour = endsAt.get('hour'),
+        diff = (startsAtHour - cachedStartsAtHour);
+console.log(startsAtHour, cachedStartsAtHour, diff);
+    Ember.run.next(function() {
+      self.set('endsAtValue', endsAt.advance({
+        hour: (diff) ? diff : 0
+      }));
+    });
+  }.observes('startsAtValue'),
+
   daysSummary: Ember.A([]),
 
   submit: function(event) {

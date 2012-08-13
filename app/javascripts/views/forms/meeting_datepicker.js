@@ -13,17 +13,22 @@ Radium.MeetingFormDatepicker = Radium.DatePickerField.extend({
   defaultDate: Ember.DateTime.create(),
   value: function(key, value) {
     if (arguments.length === 1) {
-      return this.getPath('dateValue')
+      return this.get('dateValue')
                 .toFormattedString('%Y-%m-%d');
     } else {
-      var date;
+      var currentDate = this.get('dateValue'),
+          date;
       if (value) {
         date = Ember.DateTime.parse(value, '%Y-%m-%d');
       } else {
         date = this.get('defaultDate');
       }
 
-      this.setPath('dateValue', date);
+      this.set('dateValue', currentDate.adjust({
+        day: date.get('day'),
+        month: date.get('month'),
+        year: date.get('year')
+      }));
       return value;
     }
   }.property('dateValue'),

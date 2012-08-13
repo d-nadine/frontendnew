@@ -53,7 +53,7 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   meetingStartDateField: Radium.MeetingFormDatepicker.extend({
     controllerBinding: 'parentView.controller',
-    dateValueBinding: 'controller.startsAtDateValue',
+    dateValueBinding: 'controller.startsAtValue',
     elementId: 'start-date',
     viewName: 'meetingStartDate',
     name: 'start-date'
@@ -61,7 +61,7 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   meetingEndDateField: Radium.MeetingFormDatepicker.extend({
     controllerBinding: 'parentView.controller',
-    dateValueBinding: 'controller.endsAtDateValue',
+    dateValueBinding: 'controller.endsAtValue',
     elementId: 'end-date',
     viewName: 'meetingEndDate',
     name: 'end-date'
@@ -87,15 +87,16 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   startsAtField: Ember.TextField.extend(Radium.TimePicker, {
     classNames: ['time'],
-    dateBinding: 'parentView.controller.startsAtDateValue'
+    dateBinding: 'parentView.controller.startsAtValue'
   }),
 
   endsAtField: Ember.TextField.extend(Radium.TimePicker, {
     classNames: ['time'],
-    dateBinding: 'parentView.controller.endsAtDateValue',
+    dateBinding: 'parentView.controller.endsAtValue',
     dateDidChange: function() {
       var minDate = this.get('date'),
           minDateISO = minDate.toISO8601();
+
       if (this.$().timepicker().length) {
         this.$().timepicker({
           scrollDefaultNow: true,
