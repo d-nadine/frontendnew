@@ -1,8 +1,8 @@
-// Possible fix: set the rounded dates on init
-// Computed property only on ends at times (advance the hour based on the difference)
-// Just 2 properties: startTime (static) and endTime (computed based on offset)
+
 Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
   init: function() {
+    this._super();
+
     var now = Ember.DateTime.create(),
         hour = now.get('hour'),
         minute = now.get('minute'),
@@ -10,25 +10,25 @@ Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
 
     this.setProperties({
       startsAtValue: start,
-      endsAtValue: start.advance({hour: 1})
+      endsAtValue: start.advance({hour: 1}),
+      selectedInvitees: Ember.A([])
     });
+
   },
   topicValue: null,
   locationValue: null,
   startsAtValue: null,
   endsAtValue: null,
-  // endsAtValue: function(key, value) {
-  //   var startsAt = this.get('startsAtValue'),
-  //       startsAtHour = startsAt.get('hour');
 
-  //   if (arguments.length === 1) {
-  //     if (startsAtHour)
-  //     return startsAt.advance({hour: 1});
-  //   } else {
-  //     return value.advance({hour: 1});
-  //   }
-  // }.property('startsAtValue'),
+  locations: function() {
+    var contacts = this.get('selectedInvitees');
 
+    return contacts.map(function(contact) {
+      return contact.getPath('addresses.firstObject.name');
+    });
+  }.property('selectedInvitees.@each'),
+
+  // Cache the initial starts at value so we calculate the diff when adjusting endsAtValue
   startsAtWillChange: function() {
     var self = this;
     Ember.run.next(function() {
@@ -44,7 +44,7 @@ Radium.MeetingFormController = Ember.Object.extend(Radium.FormValidation, {
         endsAt = this.get('endsAtValue'),
         endsAtHour = endsAt.get('hour'),
         diff = (startsAtHour - cachedStartsAtHour);
-console.log(startsAtHour, cachedStartsAtHour, diff);
+
     Ember.run.next(function() {
       self.set('endsAtValue', endsAt.advance({
         hour: (diff) ? diff : 0

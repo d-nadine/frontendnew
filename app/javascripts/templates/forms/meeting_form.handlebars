@@ -1,12 +1,12 @@
 <div class="center">
   <fieldset class="long">
-    {{view view.topicField}}
+    {{view topicField}}
   </fieldset>
   <fieldset class="long">
     <div class="token-container">
-      {{#each controller.selectedInvitees}}
-        {{view Radium.TokenView itemBinding="this"}}
-      {{/each}}
+      {{#collection contentBinding="controller.selectedInvitees"}}
+        {{view Radium.TokenView contentBinding="content"}}
+      {{/collection}}
       {{view inviteField}}
     </div>
   </fieldset>

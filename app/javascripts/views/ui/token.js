@@ -4,12 +4,11 @@ Radium.TokenView = Ember.View.extend({
   },
   classNames: 'token'.w(),
   removeEmail: function(event) {
-    var self = this;
-    this.$().fadeOut('fast', function() {
-      self.getPath('parentView.content').removeObject(self.get('item'));
-    });
-    return false;
     event.preventDefault();
+    this.$().fadeOut('fast', $.proxy(function() {
+      this.getPath('collectionView.content').removeObject(this.get('content'));
+    }, this));
+    return false;
   },
   templateName: 'token'
 });

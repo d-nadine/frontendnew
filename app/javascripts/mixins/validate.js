@@ -1,9 +1,7 @@
 Radium.Validate = Ember.Mixin.create({
   // Requires a controller attached to the parent view.
-  controllerBinding: 'parentView.controller',
   classNameBindings: ['isInvalid:is-error', 'isValid'],
   didInsertElement: function() {
-    this._super();
     this.getPath('controller.invalidFields').pushObject(this);
     this.$().before('<span class="required">*</span>');
   },

@@ -1,5 +1,8 @@
 Radium.FormValidation = Ember.Mixin.create({
-  invalidFields: Ember.A([]),
+  init: function() {
+    this._super();
+    this.set('invalidFields', Ember.A([]));
+  },
 
   isInvalid: function() {
     return (this.getPath('invalidFields.length')) ? true : false;

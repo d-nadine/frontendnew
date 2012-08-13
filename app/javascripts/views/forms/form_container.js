@@ -1,6 +1,6 @@
 Radium.FormContainerView = Ember.ContainerView.create({
   elementId: 'form-container',
-  
+
   isVisible: function() {
     return (this.get('currentView')) ? true : false;
   }.property('currentView'),
@@ -12,7 +12,7 @@ Radium.FormContainerView = Ember.ContainerView.create({
     $('#main-feed').animate({
       top: 0
     }, 'fast');
-    
+
     form.set('isGlobalLevelForm', false);
     form.$().slideUp('fast', function() {
       self.set('currentView', null);
@@ -94,6 +94,9 @@ Radium.FormContainerView = Ember.ContainerView.create({
 
   showMeetingForm: function(event) {
     var form = Radium.MeetingForm.create();
+    form.set('controller', Radium.MeetingFormController.create({
+        usersBinding: 'Radium.everyoneController.emails'
+      }));
     this.show(form);
     return false;
   },

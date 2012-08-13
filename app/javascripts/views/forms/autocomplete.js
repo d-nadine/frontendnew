@@ -1,7 +1,4 @@
 Radium.AutocompleteTextField = Radium.TextField.extend(JQ.Widget, {
-  init: function() {
-    this._super();
-  },
   uiType: 'autocomplete',
   uiOptions: ['source'],
   uiEvents: ['select', 'focus', 'change', 'close'],

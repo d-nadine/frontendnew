@@ -6,19 +6,6 @@ Radium.MeetingForm = Radium.FormView.extend({
     event.preventDefault();
   },
 
-  init: function() {
-    this._super();
-
-    this.set('controller', Radium.MeetingFormController.create({
-      view: this,
-      usersBinding: 'Radium.everyoneController.emails',
-      init: function() {
-        this._super();
-        this.set('selectedInvitees', Ember.A([]));
-      }
-    }));
-  },
-
   topicValue: null,
   locationValue: null,
   startsAtValue: null,
@@ -27,15 +14,22 @@ Radium.MeetingForm = Radium.FormView.extend({
 
   topicField: Ember.TextField.extend(Radium.Validate, {
     placeholder: "Meeting description",
-    valueBinding: 'parentView.controller.topicValue',
+    controllerBinding: 'parentView.controller',
+    valueBinding: 'controller.topicValue',
     validate: function() {
       return this.get('value');
     }
   }),
 
-  locationField: Ember.TextField.extend(Radium.Validate, {
+  locationField: Radium.AutocompleteTextField.extend(Radium.Validate, {
     placeholder: "Location",
-    valueBinding: 'parentView.controller.locationValue',
+    controllerBinding: 'parentView.controller',
+    sourceBinding: 'controller.locations',
+    valueBinding: 'controller.locationValue',
+    keyUp: function(event) {
+      this._super(event);
+      console.log(this.get('source'));
+    },
     validate: function() {
       return this.get('value');
     }
