@@ -7,15 +7,8 @@ GIT
       thor
 
 GIT
-  remote: git://github.com/wycats/rake-pipeline-web-filters.git
-  revision: 51915f60889fbf54fc2e81b86b594bf4c7be4ea5
-  specs:
-    rake-pipeline-web-filters (0.6.0)
-      rack
-      rake-pipeline (~> 0.6)
-
-PATH
-  remote: /Users/drogus/code/radium/iridium
+  remote: git://github.com/radiumsoftware/iridium.git
+  revision: 2dd239014c10333c8c81637f4e92d5d906ca03c2
   specs:
     iridium (0.2.0)
       activesupport
@@ -34,6 +27,14 @@ PATH
       uglifier (~> 1.2.3)
       yui-compressor
 
+GIT
+  remote: git://github.com/wycats/rake-pipeline-web-filters.git
+  revision: 51915f60889fbf54fc2e81b86b594bf4c7be4ea5
+  specs:
+    rake-pipeline-web-filters (0.6.0)
+      rack
+      rake-pipeline (~> 0.6)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -49,12 +50,20 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    columnize (0.3.6)
     commonjs (0.2.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
     daemons (1.1.9)
+    debugger (1.2.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.3)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.3)
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -86,6 +95,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debugger
   iridium!
   rake-pipeline!
   rake-pipeline-web-filters!
