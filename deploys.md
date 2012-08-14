@@ -1,3 +1,4 @@
+* [2012-08-13 17:03 -0700] af81ca2 - Joshua Jones: Clean up some stray bindings in meeting form.
 * [2012-08-10 16:41 -0700] c36ce64 - Joshua Jones: Fix time validation 1.5 hour jumps.
 * [2012-08-09 17:20 -0700] 0583576 - Joshua Jones: Remove stray debugger.
 * [2012-07-30 16:38 -0700] 83761d3 - Joshua Jones: Fix bootstrap loaded date cluster only reading as Today.
