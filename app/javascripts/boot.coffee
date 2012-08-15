@@ -3,10 +3,15 @@
 # not called during unit tests. This is to prevent your app from booting
 # and paying costly initialization costs when you should only be testing
 # small parts in isolation.
-# 
+#
 # Here's an example:
 #
 #   require('radium/app')
 #   Radium.boot()
 #
 # Your boot code begins here...
+require 'radium/app'
+require 'radium/router'
+require 'radium/controllers/application_controller'
+
+Radium.initialize()

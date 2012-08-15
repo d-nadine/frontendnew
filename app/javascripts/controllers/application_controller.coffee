@@ -1,1 +1,4 @@
-Radium.ApplicationController = Em.Object.extend()
+require 'radium/views/application_view'
+
+Radium.ApplicationController = Em.Controller.extend()
+
