@@ -10,8 +10,6 @@
 #   Radium.boot()
 #
 # Your boot code begins here...
-require 'radium/app'
-require 'radium/router'
-require 'radium/controllers/application'
 
+require 'radium/app'
 Radium.initialize()
