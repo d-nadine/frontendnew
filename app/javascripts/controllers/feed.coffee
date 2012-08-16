@@ -1,3 +1,4 @@
 require 'radium/views/feed'
 
-Radium.FeedController = Em.Object.extend()
+Radium.FeedController = Em.Object.extend
+  foo: 'bar'

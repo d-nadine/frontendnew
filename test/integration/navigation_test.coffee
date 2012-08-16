@@ -1,5 +1,7 @@
-casper.start 'http://localhost:7777/', ->
-  @test.assertHttpStatus(200, 'Server is up')
+casper.start 'http://localhost:7777/'
+
+casper.waitForSelector '#feed', ->
+  @test.assertSelectorExists('#feed', 'feed renders')
 
 casper.run ->
   @test.done()

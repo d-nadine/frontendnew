@@ -18,7 +18,7 @@
 #
 #   iridium.scripts = [
 #     # load the unit test framework. This translates to: appliction_root/test/support/qunit.js
-#     "support/qunit", 
+#     "support/qunit",
 #
 #     # load the qunit adapter from Iridium's internal code base
 #     "iridium/qunit_adapter",
@@ -26,7 +26,7 @@
 #     # load custom mocks found in application_root/test/mocking.js
 #     "mocking",
 #
-#     # assume application_root/test/support/logging.coffee exists. 
+#     # assume application_root/test/support/logging.coffee exists.
 #     # The extension is not required.
 #     "support/logging",
 #
@@ -43,7 +43,7 @@
 # to require files outside of casper's library. It uses a traditional load path
 # like many other programming languages. It adds two directories to the
 # load path:
-# 
+#
 # 1. Iridium's internal JS directory
 # 2. Your app's /test folder.
 #
@@ -65,7 +65,7 @@
 #
 #   exports.casper = (options) ->
 #     _casper = iridium.casper(options)
-#     _casper.dump = dump  
+#     _casper.dump = dump
 #     # now you can call casper.dump(object) in your tests
 #     _casper
 #
@@ -75,7 +75,7 @@ iridium = requireExternal('iridium').create()
 
 exports.casper = (options) ->
   iridium.scripts = [
-    'support/qunit', 
+    'support/qunit',
     'iridium/qunit_adapter',
     'support/sinon'
   ]
