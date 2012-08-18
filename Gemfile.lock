@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 2dd239014c10333c8c81637f4e92d5d906ca03c2
+  revision: 7ed0c87358aa08128f4224adb79d608cb7b86d9e
   specs:
     iridium (0.2.0)
       activesupport
@@ -69,7 +69,7 @@ GEM
     rack (1.4.1)
     rack-rewrite (1.2.1)
     rake (0.9.2.2)
-    sass (3.2.0)
+    sass (3.2.1)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
     thin (1.4.1)
