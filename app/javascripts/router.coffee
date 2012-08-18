@@ -44,6 +44,9 @@ Radium.Router = Ember.Router.extend
 
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('main')
+      # TODO: it uses /api/bootstrap under the hood, we probably will want to get
+      #       rid of this soon
+      router.get('applicationController').bootstrap()
 
     dashboard: Ember.Route.extend
       route: '/dashboard'
