@@ -5,7 +5,7 @@ Radium.Todo = Radium.Core.extend
   # TODO: Can we just get this through Ember?
   type: "todo"
   referenceType: ( ->
-    ref = @getPath("data.reference")
+    ref = @get("data.reference")
     keys = (if (ref) then Ember.keys(ref) else [])
     (if (keys.length) then keys[0] else null)
   ).property("data.reference")
@@ -47,9 +47,9 @@ Radium.Todo = Radium.Core.extend
     Ember.DateTime.compareDate(today, finishBy) is 0
   ).property("finishBy")
   canComplete: ( ->
-    (if (@getPath("user.apiKey")) then true else false)
+    (if (@get("user.apiKey")) then true else false)
   ).property("user")
   canEdit: ( ->
-    (if (@getPath("user.apiKey") and not @get("finished")) then true else false)
+    (if (@get("user.apiKey") and not @get("finished")) then true else false)
   ).property("user", "finished")
   reminders_attributes: DS.attr("object")

@@ -6,7 +6,7 @@ Radium.User = Radium.Person.extend
     key: "api_key"
   )
   displayName: (->
-    (if (@getPath("apiKey")) then "Me" else @get("abbrName"))
+    (if (@get("apiKey")) then "Me" else @get("abbrName"))
   ).property("name")
   avatar: DS.attr("object")
   email: DS.attr("string")

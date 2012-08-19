@@ -1,4 +1,4 @@
-var get = Ember.get, set = Ember.set, getPath = Ember.getPath;
+var get = Ember.get, set = Ember.set;
 
 /**
 
@@ -65,7 +65,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var id = get(model, 'id');
     var root = (type.root) ? type.root : this.rootForType(type);
     var data = {};
-    data[root] = getPath(model, 'data.unsavedData');
+    data[root] = get(model, 'data.unsavedData');
     if (model.get('url')) {
       url = model.get('url').fmt(id);
     } else {
@@ -130,7 +130,7 @@ DS.RadiumAdapter = DS.Adapter.extend({
 
     var root = this.rootForType(type),
         plural = this.pluralize(root),
-        primaryKey = getPath(type, 'proto.primaryKey');
+        primaryKey = get(type, 'proto.primaryKey');
 
     var data = {};
     data[plural] = models.map(function(model) {
