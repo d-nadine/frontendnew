@@ -1,0 +1,143 @@
+/*
+  Components
+  =======================
+*/
+/* Extend bootstrap button for loading indicator */
+html {
+  overflow-y: scroll;
+  height: 101%;
+}
+
+.btn-primary {
+  i {display: none;}
+  &.is-submitting i {
+      display: inline-block;
+      margin-right: 5px;
+    }
+}
+
+span.progress {
+  display: none;
+}
+
+img.avatar {
+  border: solid 1px #ddd;
+  height: 32px;
+  width: 32px;
+  border-radius: 4px;
+}
+
+/* Inline edit textfield indicator */
+.editable {
+  cursor: pointer;
+  &:hover {
+    background-color: #FCF8E3;
+  }
+}
+
+.label {
+  -webkit-transition: background-color 0.25s ease-out;
+}
+
+#search-box {
+  color: black;
+  height: 32px;
+  font-size: 18px;
+}
+
+/*
+  Notifications
+  =======================
+*/
+#notifications {
+  ul {
+    margin-bottom: 0;
+  }
+
+  .time {
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+  }
+}
+
+/*
+  Comments
+  =======================
+*/
+i.comment-toggle-button {
+  cursor: pointer;
+}
+
+/* Comments form */
+.comments {
+  margin: 10px 0 15px;
+  display: inline-block;
+  
+  a.add-comment-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 30px;
+  }
+
+  textarea {
+    width: 97%;
+    margin: 5px 0;
+  }
+}
+
+ul.comments-list {
+  li {
+    width: 100%;
+    float: left;
+    margin: 0 0 1px;
+    clear: both;
+    color: #404040;
+    font-weight: normal;
+    vertical-align: top;
+
+    a.user-avatar {
+      float: left;
+      margin: 3px 10px 10px 0;
+
+      img {
+        height: 32px;
+        width: 32px;
+      }
+    }
+
+    .comment-text {
+      float: left;
+      margin: 0 0 0 5px;
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    small.time {
+      font-size: 11px;
+      color: #DDD;
+    }
+  }
+
+  .name {
+    font-weight: bold;
+  }
+}
+
+/*
+  Alphabetized list buttons
+  =============================
+*/
+#alpha .btn {
+  width: 28px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#alpha .btn:last-child {
+  width: 25px;
+}

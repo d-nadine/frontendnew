@@ -1,0 +1,124 @@
+/*
+  Base layout
+  =======================
+*/
+body {
+  padding-top: 60px;
+}
+
+.loaded {
+  background: #fff url('/images/base/bg-grey.gif') repeat-y center top;
+}
+
+/*
+  Banner/Navigation
+  =======================
+*/
+#search {
+  margin-bottom: 0
+}
+
+.navbar {
+  .nav {
+    > li {
+      line-height: 26px;
+      > a {
+        line-height: 26px;
+      }
+    }
+  }
+
+  .btn {
+    margin-top: 9px;
+  }
+}
+
+.topbar button {
+  float: right;
+  padding: 5px 30px;
+  margin-top: 5px;
+}
+
+/*
+  Notifications
+  =======================
+*/
+#sidebar {
+  position: fixed;
+  z-index: 10;
+  top: 60px;
+  bottom: 0;
+  overflow-y: hidden;
+  background: #eee;
+
+  &:hover {
+    overflow-y: scroll;
+  }
+}
+
+/*
+  Sidebar module boxes
+  =======================
+*/
+.module {
+  text-shadow: 0 1px 0 white;
+  border: 1px solid #EEE;
+  position: relative;
+  margin-bottom: 10px;
+  line-height: 16px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+
+  .component {
+    background-color: #F9F9F9;
+    padding: 12px;
+    line-height: 16px;
+  }
+
+  .bordered {
+    border-bottom: 1px solid #EEE;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  input.inline-edit {
+    width: 150px;
+  }
+}
+
+/* Fixes for {{#each}} lists with metamorph tags screwing everything up*/
+.nav-tabs.nav-stacked > li:first-of-type > a {
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs.nav-stacked > li:last-of-type > a {
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+
+/* Overlays */
+
+#mini-loader {
+  position: fixed;
+  left: 50%;
+  padding-right: 14px;
+}
+
+.global-error {
+  $width: 475px;
+  width: $width;
+  position: fixed;
+  top: -5px;
+  left: 50%;
+  margin-left: -($width / 2);
+  z-index: 9999;
+}
