@@ -21,6 +21,8 @@ require 'radium/lib/extended_record_array'
 
 require 'radium/router'
 
+require 'radium/helpers/date_helper'
+
 require 'radium/models/core'
 require 'radium/models/todo'
 require 'radium/models/account'
@@ -34,4 +36,7 @@ require 'radium/controllers/login'
 require 'radium/controllers/main'
 require 'radium/controllers/feed'
 
-require 'radium/helpers/date_helper'
+require 'radium/views/feed_activity_view'
+require 'radium/views/todo_view_mixin'
+require 'radium/views/feed_item_view'
+require 'radium/templates/feed/feed_todo'

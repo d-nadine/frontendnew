@@ -1,5 +1,5 @@
 feed
 
 {{#collection Em.CollectionView contentBinding="view.feed"}}
-  {{view.content.items.length}}
+  {{collection Em.CollectionView itemViewClass="Radium.FeedActivityView" contentBinding="view.content.items"}}
 {{/collection}}
