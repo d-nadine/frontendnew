@@ -25,6 +25,8 @@ require 'radium/models/core'
 require 'radium/models/todo'
 require 'radium/models/account'
 require 'radium/models/feed_section'
+require 'radium/models/person'
+require 'radium/models/user'
 
 require 'radium/controllers/application'
 require 'radium/controllers/me'
