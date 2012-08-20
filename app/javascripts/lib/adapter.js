@@ -408,13 +408,11 @@ DS.RadiumAdapter = DS.Adapter.extend({
       //['meetings', Radium.Meeting],
       ['todos', Radium.Todo]
     ].forEach(function(dateBookItem){
-      console.log(dateBookItem);
       var items = feed[dateBookItem[0]];
       if(items.length > 0) {
         items.forEach(function(item){
           Radium.store.load(dateBookItem[1], item);
 
-          console.log(dateBookItem[1], item.id)
           feedSection.pushItem(Radium.store.find(dateBookItem[1], item.id));
         });
       }
