@@ -1,6 +1,8 @@
 Radium.Router = Ember.Router.extend
+  location: 'history'
   enableLogging: true
   initialState: 'loading'
+
   showUser: Ember.Route.transitionTo('root.users.user')
 
   init: ->
@@ -43,8 +45,7 @@ Radium.Router = Ember.Router.extend
       router.get('applicationController').connectOutlet('topbar', 'topbar')
 
     dashboard: Ember.Route.extend
-      route: '/dashboard'
-
+      route: '/'
       connectOutlets: (router) ->
         sections = Radium.store.findAll(Radium.FeedSection)
         router.get('mainController').connectOutlet('content', 'feed', sections)
