@@ -66,6 +66,7 @@ require 'radium/templates/inline_comments'
 require 'radium/templates/comment'
 require 'radium/templates/user'
 require 'radium/templates/contacts'
+require 'radium/templates/empty_feed'
 
 require 'radium/templates/layouts/feed_item_layout'
 

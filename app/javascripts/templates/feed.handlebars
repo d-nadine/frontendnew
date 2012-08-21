@@ -1,9 +1,13 @@
-{{#collection Radium.FeedSectionsListView contentBinding="view.feed"}}
-  <div class="page-header">
-    {{#with view.content.date}}
-      {{! TODO: formatDate should handle lazy evaluation }}
-      <h3>{{formatDate this format="%A, %B %D, %Y"}}</h3>
-    {{/with}}
-  </div>
-  {{collection Em.CollectionView itemViewClass="Radium.FeedItemContainerView" contentBinding="view.content.items"}}
-{{/collection}}
+{{#if view.empty}}
+  {{view view.emptyView}}
+{{else}}
+  {{#collection Radium.FeedSectionsListView contentBinding="view.feed"}}
+    <div class="page-header">
+      {{#with view.content.date}}
+        {{! TODO: formatDate should handle lazy evaluation }}
+        <h3>{{formatDate this format="%A, %B %D, %Y"}}</h3>
+      {{/with}}
+    </div>
+    {{collection Em.CollectionView itemViewClass="Radium.FeedItemContainerView" contentBinding="view.content.items"}}
+  {{/collection}}
+{{/if}}
