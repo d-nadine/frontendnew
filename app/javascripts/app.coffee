@@ -43,6 +43,7 @@ require 'radium/controllers/feed_controller'
 require 'radium/controllers/topbar_controller'
 require 'radium/controllers/inline_comments_controller'
 require 'radium/controllers/user_controller'
+require 'radium/controllers/contacts_controller'
 
 require 'radium/views/application_view'
 require 'radium/views/login_view'
@@ -57,12 +58,14 @@ require 'radium/views/inline_comments_view'
 require 'radium/views/comment_view'
 require 'radium/views/feed_sections_list_view'
 require 'radium/views/user_view'
+require 'radium/views/contacts_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/topbar'
 require 'radium/templates/inline_comments'
 require 'radium/templates/comment'
 require 'radium/templates/user'
+require 'radium/templates/contacts'
 
 require 'radium/templates/layouts/feed_item_layout'
 

@@ -4,6 +4,7 @@ Radium.Router = Ember.Router.extend
   initialState: 'loading'
 
   showUser: Ember.Route.transitionTo('root.users.user')
+  showContacts: Ember.Route.transitionTo('root.contacts')
 
   init: ->
     @_super()
@@ -49,6 +50,11 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         sections = Radium.store.findAll(Radium.FeedSection)
         router.get('mainController').connectOutlet('content', 'feed', sections)
+
+    contacts: Ember.Route.extend
+      route: '/contacts'
+      connectOutlets: (router) ->
+          router.get('mainController').connectOutlet('content', 'contacts')
 
     users: Ember.Route.extend
       route: '/users'
