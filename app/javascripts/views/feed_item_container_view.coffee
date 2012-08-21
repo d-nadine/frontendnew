@@ -1,4 +1,5 @@
-Radium.FeedActivityView = Em.ContainerView.extend
+Radium.FeedItemContainerView = Em.ContainerView.extend
+  classNames: ['feed-item-container', 'row']
   init: ->
     @_super.apply(this, arguments)
 
