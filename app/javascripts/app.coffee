@@ -1,4 +1,3 @@
-require 'radium/lib/adapter'
 require 'radium/lib/store'
 require 'radium/lib/transforms'
 
