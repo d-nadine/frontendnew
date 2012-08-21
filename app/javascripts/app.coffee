@@ -1,3 +1,5 @@
+require 'radium/lib/transforms'
+
 Radium = Em.Application.create
   init: ->
     @_super()
