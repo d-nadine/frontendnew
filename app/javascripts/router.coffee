@@ -45,13 +45,11 @@ Radium.Router = Ember.Router.extend
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('main')
       router.get('applicationController').connectOutlet('topbar', 'topbar')
-      # TODO: it uses /api/bootstrap under the hood, we probably will want to get
-      #       rid of this soon
-      router.get('applicationController').bootstrap()
 
     dashboard: Ember.Route.extend
       route: '/dashboard'
 
       connectOutlets: (router) ->
-        router.get('mainController').connectOutlet('content', 'feed')
+        sections = Radium.store.findAll(Radium.FeedSection)
+        router.get('mainController').connectOutlet('content', 'feed', sections)
 

@@ -62,3 +62,5 @@ require 'radium/templates/inline_comments'
 require 'radium/templates/comment'
 
 require 'radium/templates/layouts/feed_item_layout'
+
+require 'radium/fixtures'

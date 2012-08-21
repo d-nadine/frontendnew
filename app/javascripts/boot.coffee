@@ -12,4 +12,5 @@
 # Your boot code begins here...
 
 require 'radium/app'
+
 Radium.initialize()

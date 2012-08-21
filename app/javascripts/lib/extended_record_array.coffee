@@ -7,7 +7,6 @@ Radium.ExtendedRecordArray = Ember.ArrayProxy.extend
   store: null
 
   init: ->
-    @set('content', Ember.A())
     @_super.apply(this, arguments)
 
   objectAtContent: (index) ->

@@ -1,3 +1,1 @@
-Radium.ApplicationController = Em.Controller.extend
-  bootstrap: ->
-    Radium.store.bootstrap()
+Radium.ApplicationController = Em.Controller.extend()
