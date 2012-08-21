@@ -53,3 +53,4 @@ require 'radium/views/topbar_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/topbar'
+require 'radium/templates/layouts/feed_item_layout'
