@@ -1,12 +1,6 @@
-Radium.Todo = Radium.Core.extend
+Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   isEditable: true
   hasAnimation: false
-
-  referenceType: ( ->
-    ref = @get("data.reference")
-    keys = (if (ref) then Ember.keys(ref) else [])
-    (if (keys.length) then keys[0] else null)
-  ).property("data.reference")
   kind: DS.attr("todoKind")
   description: DS.attr("string")
   finishBy: DS.attr("datetime",
@@ -46,4 +40,3 @@ Radium.Todo = Radium.Core.extend
   canEdit: ( ->
     (if (@get("user.apiKey") and not @get("finished")) then true else false)
   ).property("user", "finished")
-  reminders_attributes: DS.attr("object")

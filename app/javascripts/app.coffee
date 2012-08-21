@@ -27,6 +27,7 @@ require 'radium/mixins/views/slider'
 
 require 'radium/helpers/date_helper'
 
+require 'radium/models/comments_mixin'
 require 'radium/models/core'
 require 'radium/models/todo'
 require 'radium/models/account'

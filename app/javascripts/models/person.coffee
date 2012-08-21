@@ -2,7 +2,7 @@
 The base model class for any model that has a name, id, created_at and updated_at key
 @returns {Object}
 ###
-Radium.Person = Radium.Core.extend(
+Radium.Person = Radium.Core.extend
   name: DS.attr("string")
 
   # Computed name properties
@@ -33,4 +33,3 @@ Radium.Person = Radium.Core.extend(
   messages: DS.hasMany("Radium.Message")
   activities: DS.hasMany("Radium.Activity")
   followers: DS.hasMany("Radium.Follower")
-)
