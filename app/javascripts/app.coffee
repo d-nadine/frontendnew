@@ -21,6 +21,10 @@ require 'radium/lib/extended_record_array'
 
 require 'radium/router'
 
+require 'radium/states/error'
+
+require 'radium/mixins/views/slider'
+
 require 'radium/helpers/date_helper'
 
 require 'radium/models/core'
@@ -29,6 +33,7 @@ require 'radium/models/account'
 require 'radium/models/feed_section'
 require 'radium/models/person'
 require 'radium/models/user'
+require 'radium/models/comment'
 
 require 'radium/controllers/application_controller'
 require 'radium/controllers/me_controller'
