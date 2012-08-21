@@ -425,5 +425,9 @@ DS.RadiumAdapter = DS.Adapter.extend({
     var feedSection =  this.loadDateBook(data.feed.datebook_section);
     var feedController = Radium.router.get('feedController');
     feedController.pushObject(feedSection);
+
+    var meController = Radium.router.get('meController');
+    var currentUser = Radium.store.find(Radium.User, data.current_user.id);
+    meController.set('user', currentUser);
   }
 });

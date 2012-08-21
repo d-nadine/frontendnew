@@ -1,0 +1,16 @@
+<div class="comments">
+  <div class="span5 offset1">
+    {{#if view.content.length}}
+    <ul class="comments-list unstyled">
+      {{#each view.content}}
+        {{view Radium.CommentView commentBinding="this"}}
+      {{/each}}
+    </ul>
+    {{/if}}
+    {{#if view.isError}}
+    <p class="error">Hmm, something wasn't done correctly. Try again?</p>
+    {{/if}}
+    <div style="clear: both"></div>
+    {{view view.commentTextArea}}
+  </div>
+</div>

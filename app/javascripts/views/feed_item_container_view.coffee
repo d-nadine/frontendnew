@@ -1,7 +1,17 @@
 Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
+  classNameBindings: ['expanded']
+  type: (->
+    if content = @get('content')
+      content.contructor
+  ).property('content')
   init: ->
     @_super.apply(this, arguments)
+
+    feedDetailsContainer = Radium.FeedDetailsContainerView.create
+      typeBinding: 'parentView.type'
+
+    @set 'feedDetailsContainer', feedDetailsContainer
 
     # for now we can just use statically created view, it will be needed to
     # extend it later to handle more types, not just todo
@@ -16,3 +26,15 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
         @set('templateName', 'feed_todo')
 
     @set 'currentView', view
+
+  expandOrShrink: (->
+    feedDetailsContainer = @get('feedDetailsContainer')
+    childViews = @get('childViews')
+
+    if @get('expanded')
+      childViews.pushObject feedDetailsContainer
+    else
+      feedDetailsContainer.slideUp ->
+        childViews.removeObject(feedDetailsContainer)
+        feedDetailsContainer.set('currentView', null)
+  ).observes('expanded')
