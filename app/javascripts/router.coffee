@@ -1,6 +1,7 @@
 Radium.Router = Ember.Router.extend
   enableLogging: true
   initialState: 'loading'
+  showUser: Ember.Route.transitionTo('root.users.user')
 
   init: ->
     @_super()
@@ -34,12 +35,7 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('login')
 
-  authenticated: Ember.Route.extend
-    index: Ember.Route.extend
-      enter: (router) ->
-        router.transitionTo('main.dashboard')
-
-  main: Ember.Route.extend
+  root: Ember.Route.extend
     route: '/'
 
     connectOutlets: (router) ->
@@ -53,3 +49,26 @@ Radium.Router = Ember.Router.extend
         sections = Radium.store.findAll(Radium.FeedSection)
         router.get('mainController').connectOutlet('content', 'feed', sections)
 
+    users: Ember.Route.extend
+      route: '/users'
+
+      user: Ember.Route.extend
+        route: '/:user_id'
+
+        deserialize: (router, params) ->
+          # fixture adapter is pretty limited and works only with integer ids
+          # TODO: check if ember always assumes that id has integer type
+          params.user_id = parseInt(params.user_id)
+          @_super(router, params)
+
+        connectOutlets: (router, user) ->
+          router.get('mainController').connectOutlet('content', 'user', user)
+
+  authenticated: Ember.Route.extend
+    index: Ember.Route.extend
+      connectOutlets: (router) ->
+        if path = router.get('lastAttemptedPath')
+          router.transitionTo('root')
+          router.route(path)
+        else
+          router.transitionTo('root.dashboard')

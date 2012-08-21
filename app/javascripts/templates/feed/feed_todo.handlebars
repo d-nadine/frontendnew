@@ -9,22 +9,15 @@
 {{/if}}
 
 {{view view.checkboxView}}
-{{#if reference.contact}}
- {{view Radium.LabelView labelBinding="reference.contact.status"}}
-{{/if}}
 
-{{#if isCall}}
-  {{#if description}}
-    Call <a href="/contacts/{{unbound reference.contact.id}}">{{reference.contact.name}}</a> for {{description}}
-  {{else}}
-    Call <a href="/contacts/{{unbound reference.contact.id}}">{{unbound reference.contact.name}}</a>
-  {{/if}}
-{{else}}
-  {{#if canEdit}}
-    {{inlineTextField description}}
-  {{else}}
-    {{description}}
-  {{/if}}
-{{/if}}
+{{description}}
 
-(<a href="/users/{{unbound user.id}}">{{user.abbrName}}</a>)
+{{#with user}}
+  {{! TODO: action is not updated when binding changes, so I can't
+
+       use:
+         action showUser user
+       without this silly #with block. This seems like a bug in ember.
+  }}
+  <a {{action showUser this href=true}}>{{abbrName}}</a>
+{{/with}}
