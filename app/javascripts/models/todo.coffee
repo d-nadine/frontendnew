@@ -2,8 +2,6 @@ Radium.Todo = Radium.Core.extend
   isEditable: true
   hasAnimation: false
 
-  # TODO: Can we just get this through Ember?
-  type: "todo"
   referenceType: ( ->
     ref = @get("data.reference")
     keys = (if (ref) then Ember.keys(ref) else [])
@@ -35,10 +33,6 @@ Radium.Todo = Radium.Core.extend
     key: "user"
   )
   user_id: DS.attr("number")
-  activity: DS.belongsTo("Radium.Activity",
-    embedded: true
-  )
-
   # Turn on when todo's are created from the form
   hasNotificationAnim: DS.attr("boolean")
   isDueToday: ( ->
