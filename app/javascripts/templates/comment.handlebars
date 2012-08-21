@@ -1,15 +1,19 @@
 {{#with view.comment}}
-  <a href="/users/{{unbound user.id}}" class="user-avatar">
-    {{#if view.user.avatar.small_url}}
-    <img {{bindAttr src="user.avatar.small_url"}}>
-    {{else}}
-    <img src="/images/fallback/small_default.png">
-    {{/if}}
-  </a>
+  {{#with user}}
+    <a {{action showUser user}} class="user-avatar">
+      {{#if avatar.small_url}}
+      <img {{bindAttr src="avatar.small_url"}}>
+      {{else}}
+      <img src="/images/fallback/small_default.png">
+      {{/if}}
+    </a>
+  {{/with}}
 
   <div class="comment-text">
     <strong>
-      <a href="/users/{{unbound user.id}}">{{view.user.abbrName}}</a>
+      {{#with user}}
+        <a {{action showUser user}}>{{abbrName}}</a>
+      {{/with}}
     </strong><br>
     {{text}}
     <small class="time" {{bindAttr title="dateToISO8601"}}>
