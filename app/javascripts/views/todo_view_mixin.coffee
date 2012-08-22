@@ -1,14 +1,13 @@
 Radium.TodoViewMixin = Ember.Mixin.create
   classNames: ['todo']
-  classNameBindings: [
-    'content.isOverdue',
-    'content.finished'
-  ]
+  classNameBindings: ['isOverdue', 'finished']
+  finishedBinding: 'content.finished'
+  isOverdueBinding: 'content.isOverdue'
   checkboxView: Ember.Checkbox.extend
     updatedAtBinding: 'parentView.content.updatedAt'
-    finishedBinding: 'parentView.content.finished'
+    finishedBinding: 'parentView.finished'
     disabledBinding: 'parentView.content.isSaving'
-    checkedBinding: 'parentView.content.finished'
+    checkedBinding: 'parentView.finished'
     click: (event) ->
       event.stopPropagation()
 

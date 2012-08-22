@@ -14,13 +14,6 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   isCall: ( ->
     (if (@get('kind') is 'call') then true else false)
   ).property('kind')
-  contact: DS.belongsTo('Radium.Contact',
-    embedded: true
-  )
-  contacts: DS.hasMany('Radium.Contact')
-  notes: DS.hasMany('Radium.Note',
-    embedded: true
-  )
   overdue: DS.attr('boolean')
   reference: DS.attr('object')
   user: DS.belongsTo('Radium.User', key: 'user_id')
@@ -31,10 +24,3 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
     finishBy = @get('finishBy')
     Ember.DateTime.compareDate(today, finishBy) is 0
   ).property('finishBy')
-  canComplete: ( ->
-    (if (@get('user.apiKey')) then true else false)
-  ).property('user')
-  canEdit: ( ->
-    (if (@get('user.apiKey') and not @get('finished')) then true else false)
-  ).property('user', 'finished')
-
