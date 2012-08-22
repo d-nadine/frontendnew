@@ -5,6 +5,7 @@ Radium.Router = Ember.Router.extend
 
   showUser: Ember.Route.transitionTo('root.users.user')
   showContacts: Ember.Route.transitionTo('root.contacts')
+  showDashboard: Ember.Route.transitionTo('root.dashboard')
 
   init: ->
     @_super()

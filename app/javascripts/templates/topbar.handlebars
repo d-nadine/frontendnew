@@ -2,9 +2,9 @@
   <div class="fill">
     <div class="navbar-inner">
       <div id="navbar-container" class="container">
-        <a class="brand" href="/"><img src="/images/logo.png" alt="::radium"></a>
+        <a class="brand" {{action showDashboard href=true}}><img src="/images/logo.png" alt="::radium"></a>
         <ul id="main-nav" class="nav">
-          <li id="btn-dashboard"><a href="/" title="Dashboard">Dashboard</a></li>
+          <li id="btn-dashboard"><a {{action showDashboard href=true}}>Dashboard</a></li>
           <li id="btn-contacts" class="dropdown">
           <a {{action showContacts href=true}} class="dropdown-toggle" title="Contacts">Contacts</a>
           </li>
