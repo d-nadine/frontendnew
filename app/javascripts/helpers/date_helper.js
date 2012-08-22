@@ -9,7 +9,7 @@
 return Handlebars.registerHelper('formatDate', function(property, options) {
   var context = (options.context && options.context[0]) || this,
       view = options.data.view,
-      value = Ember.getPath(this, property),
+      value = Ember.get(this, property),
       type = Ember.typeOf(value),
       optionFormat = options.hash.format,
       format = (optionFormat) ? optionFormat : "%B %D, %Y";
@@ -43,7 +43,7 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       return;
     }
     // Compute new date and update the view.
-    var newValue = Ember.getPath(context, property),
+    var newValue = Ember.get(context, property),
         updatedDate = parseDate(newValue);
     view.$().text(updatedDate);
     view.rerender();
