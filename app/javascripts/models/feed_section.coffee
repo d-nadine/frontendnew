@@ -1,4 +1,5 @@
 Radium.FeedSection = DS.Model.extend
+  date: DS.attr('datetime')
   itemIds: DS.attr('array', key: 'item_ids')
   items: ( ->
     store = @get('store')

@@ -1,11 +1,8 @@
 Radium.FeedSection.FIXTURES = [
   {
-    # I'm not sure yet how to handle feed sections, as they will
-    # not be persisted in the database. Since all of the records should
-    # have id, we may just generate random uuids for now.
-    # This will matter the most when we will need to add more features to feed
-    # (like scrolling), so I would like to reveisit then when I have more info
-    id: '123-abc-def'
+    # TODO: think about the best way to handle id and lack of persistance here
+    id: '2012-08-14'
+    date: '2012-08-14T00:00:00Z'
     # I don't have any good idea on how to populate items array without
     # overwriting HasMany associations to update it whenever association
     # changes. This will take some time, so for now I'll leave it like this,

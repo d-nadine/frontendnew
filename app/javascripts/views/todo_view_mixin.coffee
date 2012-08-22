@@ -1,8 +1,8 @@
 Radium.TodoViewMixin = Ember.Mixin.create
   classNames: ['todo']
   classNameBindings: [
-    'content.isOverdue:overdue',
-    'content.finished:finished'
+    'content.isOverdue',
+    'content.finished'
   ]
   checkboxView: Ember.Checkbox.extend
     updatedAtBinding: 'parentView.content.updatedAt'
@@ -13,10 +13,10 @@ Radium.TodoViewMixin = Ember.Mixin.create
       event.stopPropagation()
 
     change: ->
-      this.set('updatedAt', Ember.DateTime.create())
-      this._super()
+      @set('updatedAt', Ember.DateTime.create())
+      @_super.apply(this, arguments)
 
     todoValueDidChange: (->
       Ember.run.next ->
-        Radium.store.commit();
+        Radium.store.commit()
     ).observes('checked')
