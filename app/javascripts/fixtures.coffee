@@ -26,6 +26,17 @@ Radium.Todo.FIXTURES = [
     'finished': false
     'calendar_time': '2012-08-14T22:00:00Z'
     'overdue': false
+    'comment_ids': [1]
+  }
+]
+
+Radium.Comment.FIXTURES = [
+  {
+    'id': 1
+    'created_at': '2012-06-23T17:44:53Z'
+    'updated_at': '2012-07-03T11:32:57Z'
+    'text': 'I like product drafts'
+    'user_id': 1
   }
 ]
 

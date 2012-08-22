@@ -4,5 +4,5 @@ Radium.Comment = Radium.Core.extend
   ).property('createdAt')
   text: DS.attr('string')
   user: DS.belongsTo 'Radium.User',
-    key: 'user'
+    key: 'user_id'
   attachments: DS.hasMany('Radium.Attachment')

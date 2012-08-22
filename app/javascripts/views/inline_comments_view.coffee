@@ -1,4 +1,5 @@
 Radium.InlineCommentsView = Ember.View.extend
+  commentsBinding: 'controller.comments'
   classNames: ['inline-comments']
   templateName: 'inline_comments'
   isErrorBinding: 'controller.isError'

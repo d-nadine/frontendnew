@@ -1,5 +1,6 @@
 Radium.InlineCommentsController = Ember.ArrayController.extend
-  contentBinding: 'feedItem.comments'
+  commentsBinding: 'feedItem.comments'
+  targetBinding: 'Ember.router'
 
   newComment: ""
   isError: false

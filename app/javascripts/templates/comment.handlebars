@@ -1,10 +1,10 @@
 {{#with view.comment}}
   {{#with user}}
-    <a {{action showUser user}} class="user-avatar">
+    <a {{action showUser this href=true}} class="user-avatar">
       {{#if avatar.small_url}}
-      <img {{bindAttr src="avatar.small_url"}}>
+        <img {{bindAttr src="avatar.small_url"}}>
       {{else}}
-      <img src="/images/fallback/small_default.png">
+        <img src="/images/fallback/small_default.png">
       {{/if}}
     </a>
   {{/with}}
@@ -12,7 +12,7 @@
   <div class="comment-text">
     <strong>
       {{#with user}}
-        <a {{action showUser user}}>{{abbrName}}</a>
+        <a {{action showUser this href=true}}>{{abbrName}}</a>
       {{/with}}
     </strong><br>
     {{text}}

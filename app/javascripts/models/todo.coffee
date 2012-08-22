@@ -37,3 +37,4 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   canEdit: ( ->
     (if (@get('user.apiKey') and not @get('finished')) then true else false)
   ).property('user', 'finished')
+
