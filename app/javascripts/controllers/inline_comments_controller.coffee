@@ -28,8 +28,7 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
 
       @set('isError', false)
       @set('newComment', '')
-      console.log(@get('content'))
-      @get('content').pushObject(comment)
+      @get('comments').pushObject(comment)
 
       Radium.store.commit()
 

@@ -7,3 +7,8 @@ Radium.MeController = Ember.Object.extend
       'switchToUnauthenticated'
 
     Radium.get('router').send event
+  # TODO: I hardcoded it for now, but we will have to somehow fetch current user's id
+  userId: 1
+  user: (->
+    Radium.store.find(Radium.User, @get('userId'))
+  ).property()
