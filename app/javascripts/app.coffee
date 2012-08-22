@@ -20,3 +20,5 @@ require 'radium/controllers/me'
 require 'radium/controllers/login'
 require 'radium/controllers/main'
 require 'radium/controllers/feed'
+
+require 'radium/helpers/date_helper'
