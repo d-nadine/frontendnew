@@ -11,20 +11,12 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       id = @get('feedItem.id')
       type = @get('feedItem.type') || @get('feedItem.kind')
 
-      if @get('feedItem.type')
-        plural = Radium.store.adapter.pluralize(type)
-        url = '%@/%@/comments'.fmt(plural, id)
-      else
-        url = 'activities/%@/comments'.fmt(id)
-
-      Radium.Comment.reopenClass
-        url: url
-        root: 'comment'
-
       comment = Radium.store.createRecord Radium.Comment,
         text: commentText
         createdAt: Ember.DateTime.create()
         user: Radium.router.get('meController.user')
+        commentableType: type
+        commentableId: id
 
       @set('isError', false)
       @set('newComment', '')
@@ -33,11 +25,7 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       Radium.store.commit()
 
       comment.addObserver 'isValid', ->
-        if @get('isValid')
-          Radium.Comment.reopenClass
-            url: null
-            root: null
-        else
+        unless @get('isValid')
           self.set('isError', true)
           self.set('newComment', commentText)
     else

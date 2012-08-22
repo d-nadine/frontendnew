@@ -8,6 +8,7 @@ Radium.InlineCommentsView = Ember.View.extend
     placeholder: "Add a comment"
     valueBinding: 'parentView.comment'
     classNameBindings: ['parentView.controller.isError:error']
+    classNames: ['new-comment']
     action: 'addComment'
     target: 'parentView.controller'
 
