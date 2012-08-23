@@ -37,6 +37,7 @@ require 'radium/models/person'
 require 'radium/models/user'
 require 'radium/models/comment'
 require 'radium/models/meeting'
+require 'radium/models/deal'
 
 require 'radium/controllers/application_controller'
 require 'radium/controllers/me_controller'
@@ -65,8 +66,10 @@ require 'radium/views/contacts_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_meeting'
+require 'radium/templates/feed/feed_deal'
 require 'radium/templates/feed/details/todo_details'
 require 'radium/templates/feed/details/meeting_details'
+require 'radium/templates/feed/details/deal_details'
 
 require 'radium/templates/topbar'
 require 'radium/templates/inline_comments'
