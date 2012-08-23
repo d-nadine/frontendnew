@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="span1">
+    <i {{bindAttr class=":feed-expand-icon :icon-plus expanded:icon-minus"}}></i>
+  </div>
+  <div class="span8">
+    <p>
+      {{#with view.content}}
+        <span class="content">{{yield}}</span>
+        {{#if comments.length}}
+          <i class="icon-comments"></i>
+          ({{comments.length}})
+        {{/if}}
+      {{/with}}
+    </p>
+  </div>
+</div>

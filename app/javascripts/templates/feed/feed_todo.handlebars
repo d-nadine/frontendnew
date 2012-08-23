@@ -1,0 +1,23 @@
+{{#if overdue}}
+  <i class="pull-left activity-icon icon-overdue"></i>
+{{/if}}
+
+{{#if isCall}}
+  <i class="pull-left activity-icon icon-call"></i>
+{{else}}
+  <i class="pull-left activity-icon icon-todo"></i>
+{{/if}}
+
+{{view view.checkboxView}}
+
+{{description}}
+
+{{#with user}}
+  {{! TODO: action is not updated when binding changes, so I can't
+
+       use:
+         action showUser user
+       without this silly #with block. This seems like a bug in ember.
+  }}
+  <a {{action showUser this href=true}}>{{abbrName}}</a>
+{{/with}}

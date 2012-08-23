@@ -1,6 +1,5 @@
 class Radium < Iridium::Application
-  config.load 'minispade', 'jquery', 'handlebars', 'ember', 'ember-data', 'ember-datetime',
-              'jquery-autoresize'
+  config.load 'minispade', 'jquery', 'handlebars', 'ember', 'ember-data'
 
   # Proxy the API so we can update it per ENV and hide access tokens
   # from Javscript

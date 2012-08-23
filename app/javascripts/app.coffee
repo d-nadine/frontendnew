@@ -1,6 +1,8 @@
+require 'radium/lib/store'
 require 'radium/lib/transforms'
 
 Radium = Em.Application.create
+  store: DS.RadiumStore.create()
   init: ->
     @_super()
     @set('_api', $.cookie('user_api_key'))
@@ -14,11 +16,58 @@ $.ajaxSetup
     "X-Radium-User-API-Key": Radium.get('_api')
     "Accept": "application/json"
 
+require 'radium/lib/extended_record_array'
+
 require 'radium/router'
-require 'radium/controllers/application'
-require 'radium/controllers/me'
-require 'radium/controllers/login'
-require 'radium/controllers/main'
-require 'radium/controllers/feed'
+
+require 'radium/states/error'
+
+require 'radium/mixins/views/slider'
 
 require 'radium/helpers/date_helper'
+
+require 'radium/models/comments_mixin'
+require 'radium/models/core'
+require 'radium/models/todo'
+require 'radium/models/account'
+require 'radium/models/feed_section'
+require 'radium/models/person'
+require 'radium/models/user'
+require 'radium/models/comment'
+
+require 'radium/controllers/application_controller'
+require 'radium/controllers/me_controller'
+require 'radium/controllers/login_controller'
+require 'radium/controllers/main_controller'
+require 'radium/controllers/feed_controller'
+require 'radium/controllers/topbar_controller'
+require 'radium/controllers/inline_comments_controller'
+require 'radium/controllers/user_controller'
+require 'radium/controllers/contacts_controller'
+
+require 'radium/views/application_view'
+require 'radium/views/login_view'
+require 'radium/views/main_view'
+require 'radium/views/feed_view'
+require 'radium/views/feed_item_container_view'
+require 'radium/views/todo_view_mixin'
+require 'radium/views/feed_item_view'
+require 'radium/views/topbar_view'
+require 'radium/views/feed_details_container_view'
+require 'radium/views/inline_comments_view'
+require 'radium/views/comment_view'
+require 'radium/views/feed_sections_list_view'
+require 'radium/views/user_view'
+require 'radium/views/contacts_view'
+
+require 'radium/templates/feed/feed_todo'
+require 'radium/templates/topbar'
+require 'radium/templates/inline_comments'
+require 'radium/templates/comment'
+require 'radium/templates/user'
+require 'radium/templates/contacts'
+require 'radium/templates/empty_feed'
+
+require 'radium/templates/layouts/feed_item_layout'
+
+require 'radium/fixtures'
