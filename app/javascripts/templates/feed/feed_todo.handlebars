@@ -10,14 +10,27 @@
 
 {{view view.checkboxView}}
 
-{{description}}
+{{! TODO: is reference always a contact? why isn't it belongsTo? }}
+{{#if reference.contact}}
+ {{view Radium.LabelView labelBinding="reference.contact.status"}}
+{{/if}}
+
+{{#if isCall}}
+  {{#with contact}}
+    Call <a {{action showContact this href=true}}">{{displayName}}</a>
+  {{/with}}
+  {{#if description}}
+    for {{description}}
+  {{/if}}
+{{else}}
+  {{description}}
+{{/if}}
 
 {{#with user}}
   {{! TODO: action is not updated when binding changes, so I can't
-
        use:
          action showUser user
        without this silly #with block. This seems like a bug in ember.
   }}
-  <a {{action showUser this href=true}}>{{abbrName}}</a>
+  (<a {{action showUser this href=true}}>{{abbrName}}</a>)
 {{/with}}

@@ -5,6 +5,7 @@ Radium.Router = Ember.Router.extend
 
   showUser: Ember.Route.transitionTo('root.users.user')
   showContacts: Ember.Route.transitionTo('root.contacts')
+  showContact: Ember.Route.transitionTo('root.contacts.contact')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
 
   init: ->
@@ -56,6 +57,15 @@ Radium.Router = Ember.Router.extend
       route: '/contacts'
       connectOutlets: (router) ->
           router.get('mainController').connectOutlet('content', 'contacts')
+
+      contact: Ember.Route.extend
+        route: '/:contact_id'
+        connectOutlets: (router, contact) ->
+          router.get('mainController').connectOutlet('content', 'contact', contact)
+
+        deserialize: (router, params) ->
+          params.contact_id = parseInt(params.contact_id)
+          @_super(router, params)
 
     users: Ember.Route.extend
       route: '/users'

@@ -7,7 +7,13 @@ Radium.FeedSection.FIXTURES = [
     # overwriting HasMany associations to update it whenever association
     # changes. This will take some time, so for now I'll leave it like this,
     # directly giving feed section what it needs
-    item_ids: [[Radium.Todo, 1], [Radium.Meeting, 1], [Radium.Deal, 1], [Radium.CallList, 1]]
+    item_ids: [
+      [Radium.Todo, 1]
+      [Radium.Meeting, 1]
+      [Radium.Deal, 1]
+      [Radium.CallList, 1]
+      [Radium.Todo, 3]
+    ]
   }, {
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
@@ -76,6 +82,26 @@ Radium.Todo.FIXTURES = [
     'finished': false
     'calendar_time': '2012-08-17T22:00:00Z'
     'overdue': false
+  },  {
+    'id': 3
+    'created_at': '2012-08-17T18:27:32Z'
+    'updated_at': '2012-08-17T18:27:32Z'
+    'user_id': 1
+    'kind': 'call'
+    'contact_id': 1
+    'description': 'discussing offer details'
+    'finish_by': '2012-08-17T22:00:00Z'
+    'finished': false
+    'calendar_time': '2012-08-17T22:00:00Z'
+    'overdue': false
+  }
+]
+
+Radium.Contact.FIXTURES = [
+  {
+    'id': 1
+    'display_name': 'Ralph'
+    'status': 'prospect'
   }
 ]
 
