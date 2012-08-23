@@ -65,6 +65,9 @@ require 'radium/views/contacts_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_meeting'
+require 'radium/templates/feed/details/todo_details'
+require 'radium/templates/feed/details/meeting_details'
+
 require 'radium/templates/topbar'
 require 'radium/templates/inline_comments'
 require 'radium/templates/comment'
@@ -73,5 +76,6 @@ require 'radium/templates/contacts'
 require 'radium/templates/empty_feed'
 
 require 'radium/templates/layouts/feed_item_layout'
+require 'radium/templates/layouts/feed_item_details_layout'
 
 require 'radium/fixtures'

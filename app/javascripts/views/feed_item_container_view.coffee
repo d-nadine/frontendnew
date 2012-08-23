@@ -1,19 +1,15 @@
 Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
   classNameBindings: ['expanded']
-  type: (->
-    if content = @get('content')
-      content.contructor
-  ).property('content')
   init: ->
     @_super.apply(this, arguments)
 
+    type = @get('content.type')
+
     feedDetailsContainer = Radium.FeedDetailsContainerView.create
-      typeBinding: 'parentView.type'
+      type: type
 
     @set 'feedDetailsContainer', feedDetailsContainer
-
-    type = @get('content.type')
 
     mixin = if type == 'todo'
       Radium.TodoViewMixin
