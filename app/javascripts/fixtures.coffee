@@ -13,6 +13,7 @@ Radium.FeedSection.FIXTURES = [
       [Radium.Deal, 1]
       [Radium.CallList, 1]
       [Radium.Todo, 3]
+      [Radium.Campaign, 1]
     ]
   }, {
     # TODO: think about the best way to handle id and lack of persistance here
@@ -102,6 +103,14 @@ Radium.Contact.FIXTURES = [
     'id': 1
     'display_name': 'Ralph'
     'status': 'prospect'
+  }
+]
+
+Radium.Campaign.FIXTURES = [
+  {
+    'id': 1
+    'name': 'Fall product campaign'
+    'user_id': 1
   }
 ]
 
