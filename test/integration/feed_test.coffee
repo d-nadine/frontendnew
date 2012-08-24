@@ -1,18 +1,17 @@
-casper.start 'http://localhost:7777/'
+test 'feed sections with dates should be displayed', ->
+  expect(1)
 
-casper.test.comment 'Feed sections with dates should be displayed'
+  section = Radium.store.find(Radium.FeedSection, '2012-08-14')
 
-casper.waitForSelector '.feed-section:nth-of-type(2)', ->
-  headers = @evaluate ->
+  waitForResource section, ->
     headers = jQuery('#feed .page-header h3').map (i, e) -> $(e).text()
-    headers.toArray().join(', ')
+    headers = headers.toArray().join(', ')
+    equal headers, 'Friday, August 17, 2012, Tuesday, August 14, 2012', 'headers'
 
-  @test.assertEquals headers, 'Friday, August 17, 2012, Tuesday, August 14, 2012'
+test 'feed sections should contain todo items', ->
+  expect(1)
 
-casper.test.comment 'Feed sections should contain todo items'
+  todo = Radium.store.find(Radium.Todo, 1)
 
-casper.waitForSelector '.feed-section:first-child .todo:first-child', ->
-  @test.assertTextExists 'Finish first product draft'
-
-casper.run ->
-  @test.done()
+  waitForResource todo, (el) ->
+    assertContains el, 'Finish first product draft'
