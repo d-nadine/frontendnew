@@ -15,6 +15,7 @@ Radium.FeedSection.FIXTURES = [
       [Radium.Todo, 6]
       [Radium.Todo, 7]
       [Radium.Todo, 8]
+      [Radium.Todo, 9]
       [Radium.Meeting, 1]
       [Radium.Deal, 1]
       [Radium.CallList, 1]
@@ -166,6 +167,19 @@ Radium.Todo.FIXTURES = [
     'finished': false
     'calendar_time': '2012-08-17T22:00:00Z'
     'overdue': false
+  },  {
+    'id': 9
+    'created_at': '2012-08-17T18:27:32Z'
+    'updated_at': '2012-08-17T18:27:32Z'
+    'user_id': 1
+    'kind': 'general'
+    'reference_id': 1
+    'reference_type': 'sms'
+    'description': 'product discussion'
+    'finish_by': '2012-08-17T22:00:00Z'
+    'finished': false
+    'calendar_time': '2012-08-17T22:00:00Z'
+    'overdue': false
   }
 ]
 
@@ -220,6 +234,15 @@ Radium.PhoneCall.FIXTURES = [
     'updated_at': '2012-07-03T11:32:57Z'
     'from_id': 1
     'to_id': 2
+  }
+]
+
+Radium.Sms.FIXTURES = [
+  {
+    'id': 1
+    'created_at': '2012-06-23T17:44:53Z'
+    'updated_at': '2012-07-03T11:32:57Z'
+    'sender_id': 2
   }
 ]
 
