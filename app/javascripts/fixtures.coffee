@@ -89,7 +89,8 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'call'
-    'contact_id': 1
+    'reference_id': 1
+    'reference_type': 'contact'
     'description': 'discussing offer details'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false

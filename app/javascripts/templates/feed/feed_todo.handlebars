@@ -10,13 +10,12 @@
 
 {{view view.checkboxView}}
 
-{{! TODO: is reference always a contact? why isn't it belongsTo? }}
-{{#if reference.contact}}
- {{view Radium.LabelView labelBinding="reference.contact.status"}}
+{{#if reference}}
+ {{view Radium.LabelView labelBinding="reference.status"}}
 {{/if}}
 
 {{#if isCall}}
-  {{#with contact}}
+  {{#with reference}}
     Call <a {{action showContact this href=true}}">{{displayName}}</a>
   {{/with}}
   {{#if description}}

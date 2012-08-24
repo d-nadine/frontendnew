@@ -11,9 +11,7 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
     (if (@get('kind') is 'call') then true else false)
   ).property('kind')
   overdue: DS.attr('boolean')
-
-  # TODO: why contact was inside the reference? Can reference be something else?
-  contact: DS.belongsTo('Radium.Contact', key: 'contact_id')
+  reference: DS.belongsTo('Radium.Contact', key: 'reference_id')
   user: DS.belongsTo('Radium.User', key: 'user_id')
   # Turn on when todo's are created from the form
   hasNotificationAnim: DS.attr('boolean')
