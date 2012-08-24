@@ -4,9 +4,8 @@ test 'feed sections with dates should be displayed', ->
   section = Radium.store.find(Radium.FeedSection, '2012-08-14')
 
   waitForResource section, ->
-    headers = jQuery('#feed .page-header h3').map (i, e) -> $(e).text()
-    headers = headers.toArray().join(', ')
-    equal headers, 'Friday, August 17, 2012, Tuesday, August 14, 2012', 'headers'
+    headers = jQuery('#feed .page-header h3')
+    assertContains headers, 'Friday, August 17, 2012.*Tuesday, August 14, 2012'
 
 test 'feed sections should contain todo items', ->
   expect(1)
