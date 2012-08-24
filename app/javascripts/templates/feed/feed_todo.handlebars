@@ -2,28 +2,11 @@
   <i class="pull-left activity-icon icon-overdue"></i>
 {{/if}}
 
-{{#if isCall}}
-  <i class="pull-left activity-icon icon-call"></i>
-{{else}}
-  <i class="pull-left activity-icon icon-todo"></i>
-{{/if}}
+<i class="pull-left activity-icon icon-todo"></i>
 
 {{view view.checkboxView}}
 
-{{#if reference}}
-  {{view Radium.LabelView labelBinding="reference.status"}}
-{{/if}}
-
-{{#if isCall}}
-  {{#with reference}}
-    Call <a {{action showContact this href=true}}">{{displayName}}</a>
-  {{/with}}
-  {{#if description}}
-    for {{description}}
-  {{/if}}
-{{else}}
-  {{description}}
-{{/if}}
+{{description}}
 
 {{#with user}}
   {{! TODO: action is not updated when binding changes, so I can't
