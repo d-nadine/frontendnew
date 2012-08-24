@@ -24,7 +24,16 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
       contextBinding: 'content'
       init: ->
         @_super.apply(this, arguments)
-        @set('templateName', "feed_#{type}")
+
+      # TODO: is there a better way to wait for loaded record before setting up template?
+      observeTemplateName: (->
+        type = @get('content.type')
+
+        referenceType = @get('content.referenceType')
+        referenceString = (if referenceType? then "_#{referenceType}" else '')
+        @set('templateName', "feed_#{type}#{referenceString}")
+        @rerender()
+      ).observes('content.referenceType')
 
     @set 'currentView', view
 

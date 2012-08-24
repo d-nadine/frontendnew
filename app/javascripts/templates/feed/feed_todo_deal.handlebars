@@ -1,0 +1,18 @@
+{{#if overdue}}
+  <i class="pull-left activity-icon icon-overdue"></i>
+{{/if}}
+
+<i class="pull-left activity-icon icon-todo"></i>
+
+{{#if canComplete}}
+  {{view view.checkboxView}}
+{{/if}}
+
+{{#with reference}}
+  <a {{action showDeal this href=true}}>{{name}}</a>:
+{{/with}}
+{{description}}
+
+{{#with user}}
+  (<a {{action showUser this href=true}}>{{abbrName}}</a>)
+{{/with}}
