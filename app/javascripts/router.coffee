@@ -7,6 +7,7 @@ Radium.Router = Ember.Router.extend
   showContacts: Ember.Route.transitionTo('root.contacts')
   showContact: Ember.Route.transitionTo('root.contacts.contact')
   showDeal: Ember.Route.transitionTo('root.deals.deal')
+  showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
 
   init: ->
@@ -64,6 +65,17 @@ Radium.Router = Ember.Router.extend
 
         deserialize: (router, params) ->
           params.deal_id = parseInt(params.deal_id)
+
+    campaigns: Ember.Route.extend
+      route: '/campaigns'
+
+      campaign: Ember.Route.extend
+        route: '/:campaign_id'
+        connectOutlets: (router, campaign) ->
+          router.get('mainController').connectOutlet('content', 'campaign', campaign)
+
+        deserialize: (router, params) ->
+          params.campaign_id = parseInt(params.campaign_id)
 
     contacts: Ember.Route.extend
       route: '/contacts'
