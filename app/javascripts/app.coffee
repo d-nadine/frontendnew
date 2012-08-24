@@ -23,8 +23,10 @@ require 'radium/router'
 require 'radium/states/error'
 
 require 'radium/mixins/views/slider'
+require 'radium/mixins/noop'
 
 require 'radium/helpers/date_helper'
+require 'radium/helpers/time_helper'
 
 require 'radium/models/comments_mixin'
 require 'radium/models/core'
@@ -34,6 +36,9 @@ require 'radium/models/feed_section'
 require 'radium/models/person'
 require 'radium/models/user'
 require 'radium/models/comment'
+require 'radium/models/meeting'
+require 'radium/models/deal'
+require 'radium/models/call_list'
 
 require 'radium/controllers/application_controller'
 require 'radium/controllers/me_controller'
@@ -61,6 +66,14 @@ require 'radium/views/user_view'
 require 'radium/views/contacts_view'
 
 require 'radium/templates/feed/feed_todo'
+require 'radium/templates/feed/feed_meeting'
+require 'radium/templates/feed/feed_deal'
+require 'radium/templates/feed/feed_call_list'
+require 'radium/templates/feed/details/todo_details'
+require 'radium/templates/feed/details/meeting_details'
+require 'radium/templates/feed/details/deal_details'
+require 'radium/templates/feed/details/call_list_details'
+
 require 'radium/templates/topbar'
 require 'radium/templates/inline_comments'
 require 'radium/templates/comment'
@@ -69,5 +82,6 @@ require 'radium/templates/contacts'
 require 'radium/templates/empty_feed'
 
 require 'radium/templates/layouts/feed_item_layout'
+require 'radium/templates/layouts/feed_item_details_layout'
 
 require 'radium/fixtures'

@@ -1,0 +1,6 @@
+<i class="pull-left activity-icon icon-meeting"></i>
+
+{{topic}}{{#if location}} @ {{location}}{{/if}}
+{{! TODO: make formatTime work with lazy evaluated values }}
+({{#with startsAt}}{{formatTime this}}{{/with}} -
+  {{#with endsAt}}{{formatTime this}}{{/with}})

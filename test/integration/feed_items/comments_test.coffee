@@ -3,10 +3,10 @@ casper.start 'http://localhost:7777/'
 casper.test.comment "Comments are displayed in item's details"
 
 # TODO: it would be nice to come up with some abstractions for elements
-casper.waitForSelector '.feed-section:first-child .todo:first-child', ->
-  @click('.feed-section:first-child .todo:first-child')
+casper.waitForSelector '.feed-section:last-of-type .todo:first-of-type', ->
+  @click('.feed-section:last-of-type .todo:first-of-type')
 
-  @waitForSelector '.feed-section:first-child .feed-item-container:first-child .comments', ->
+  @waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comments', ->
     @test.assertTextExists 'I like product drafts'
 
 casper.test.comment 'Comment can be added to feed item'
@@ -17,10 +17,10 @@ casper.then ->
     event.keyCode = 13
 
     # TODO: find a nicer way to do this using casper's API
-    textarea = $('.feed-section:first-child .feed-item-container:first-child textarea.new-comment')
+    textarea = $('.feed-section:last-of-type .feed-item-container:first-of-type textarea.new-comment')
     textarea.val('Nice!').change().trigger(event)
 
-casper.waitForSelector '.feed-section:first-child .feed-item-container:first-child .comment:nth-of-type(2)', ->
+casper.waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comment:nth-of-type(2)', ->
   @test.assertTextExists 'Nice!'
 
   id = @evaluate ->
