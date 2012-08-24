@@ -4,9 +4,7 @@
 
 <i class="pull-left activity-icon icon-todo"></i>
 
-{{#if canComplete}}
-  {{view view.checkboxView}}
-{{/if}}
+{{view view.checkboxView}}
 
 {{#with reference}}
   <a {{action showDeal this href=true}}>{{name}}</a>:

@@ -74,6 +74,7 @@ require 'radium/views/deal_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_todo_deal'
+require 'radium/templates/feed/feed_todo_contact'
 require 'radium/templates/feed/feed_meeting'
 require 'radium/templates/feed/feed_deal'
 require 'radium/templates/feed/feed_call_list'
