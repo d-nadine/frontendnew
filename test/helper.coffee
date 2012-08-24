@@ -77,7 +77,8 @@ exports.casper = (options) ->
   iridium.scripts = [
     'support/qunit',
     'iridium/qunit_adapter',
-    'support/sinon'
+    'support/sinon',
+    'support/helpers'
   ]
 
   iridium.casper(options)
