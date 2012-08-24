@@ -12,6 +12,7 @@ Radium.FeedSection.FIXTURES = [
       [Radium.Todo, 3]
       [Radium.Todo, 4]
       [Radium.Todo, 5]
+      [Radium.Todo, 6]
       [Radium.Meeting, 1]
       [Radium.Deal, 1]
       [Radium.CallList, 1]
@@ -124,6 +125,19 @@ Radium.Todo.FIXTURES = [
     'finished': false
     'calendar_time': '2012-08-17T22:00:00Z'
     'overdue': false
+  },  {
+    'id': 6
+    'created_at': '2012-08-17T18:27:32Z'
+    'updated_at': '2012-08-17T18:27:32Z'
+    'user_id': 1
+    'kind': 'general'
+    'reference_id': 1
+    'reference_type': 'email'
+    'description': 'write a nice response'
+    'finish_by': '2012-08-17T22:00:00Z'
+    'finished': false
+    'calendar_time': '2012-08-17T22:00:00Z'
+    'overdue': false
   }
 ]
 
@@ -150,6 +164,15 @@ Radium.Comment.FIXTURES = [
     'updated_at': '2012-07-03T11:32:57Z'
     'text': 'I like product drafts'
     'user_id': 1
+  }
+]
+
+Radium.Email.FIXTURES = [
+  {
+    'id': 1
+    'created_at': '2012-06-23T17:44:53Z'
+    'updated_at': '2012-07-03T11:32:57Z'
+    'sender_id': 2
   }
 ]
 
