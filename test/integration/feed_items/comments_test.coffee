@@ -1,32 +1,37 @@
-casper.start 'http://localhost:7777/'
+test "comments are displayed in item's details", ->
+  todo = Radium.store.find(Radium.Todo, 1)
 
-casper.test.comment "Comments are displayed in item's details"
+  waitForResource todo, (el) ->
+    el.click()
 
-# TODO: it would be nice to come up with some abstractions for elements
-casper.waitForSelector '.feed-section:last-of-type .todo:first-of-type', ->
-  @click('.feed-section:last-of-type .todo:first-of-type')
+    waitForSelector ['.comments', el], (comments)->
+      assertContains comments, 'I like product drafts'
 
-  @waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comments', ->
-    @test.assertTextExists 'I like product drafts'
+test 'comment can be added to feed item', ->
+  event = jQuery.Event("keypress")
+  event.keyCode = 13
 
-casper.test.comment 'Comment can be added to feed item'
+  todo = Radium.store.find(Radium.Todo, 1)
+  waitForResource todo, (el) ->
+    el.click()
 
-casper.then ->
-  @evaluate ->
-    event = jQuery.Event("keypress")
-    event.keyCode = 13
+    waitForSelector ['.comments', el], (comments) ->
+      # TODO: some abstraction for filling out such things would be cool
+      textarea = $('.new-comment', comments)
+      textarea.val('Nice!').change().trigger(event)
 
-    # TODO: find a nicer way to do this using casper's API
-    textarea = $('.feed-section:last-of-type .feed-item-container:first-of-type textarea.new-comment')
-    textarea.val('Nice!').change().trigger(event)
+      comments = $('.comment', el)
+      condition = -> comments.length == 2
+      waitFor condition, ->
+        assertContains comments, 'Nice!'
 
-casper.waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comment:nth-of-type(2)', ->
-  @test.assertTextExists 'Nice!'
-
-  id = @evaluate ->
-    Radium.store.find(Radium.Todo, 1).get('comments').objectAt(1).get('id')
-
-  @test.assert(!!id, 'comment is persisted')
-
-casper.run ->
-  @test.done()
+        #casper.waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comment:nth-of-type(2)', ->
+        #  @test.assertTextExists 'Nice!'
+        #
+        #  id = @evaluate ->
+        #    Radium.store.find(Radium.Todo, 1).get('comments').objectAt(1).get('id')
+        #
+        #  @test.assert(!!id, 'comment is persisted')
+        #
+        #casper.run ->
+        #  @test.done()

@@ -27,7 +27,8 @@ window.waitFor = (condition, callback, message) ->
   checkCondition()
 
 window.waitForSelector = (selector, callback, message) ->
-  condition = -> $(selector).length
+  selector = [selector] unless $.isArray(selector)
+  condition = -> $.apply($, selector).length
   message ?= "Waiting for '#{selector}' timed out"
 
   waitFor condition, callback, message
