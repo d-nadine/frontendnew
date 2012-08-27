@@ -16,6 +16,7 @@ $.ajaxSetup
     "X-Radium-User-API-Key": Radium.get('_api')
     "Accept": "application/json"
 
+require 'radium/lib/polymorphic'
 require 'radium/lib/extended_record_array'
 
 require 'radium/router'

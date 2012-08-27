@@ -96,8 +96,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'call'
-    'reference_id': 1
-    'reference_type': 'contact'
+    'reference': {
+      'id': 1
+      'type': 'contact'
+    }
     'description': 'discussing offer details'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -109,8 +111,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'deal'
+    'reference': {
+      'id': 1
+      'type': 'deal'
+    }
     'description': 'Close the deal'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -122,8 +126,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'campaign'
+    'reference': {
+      'id': 1
+      'type': 'campaign'
+    }
     'description': 'Prepare campaign plan'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -135,8 +141,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'email'
+    'reference': {
+      'id': 1
+      'type': 'email'
+    }
     'description': 'write a nice response'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -148,8 +156,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'group'
+    'reference': {
+      'id': 1
+      'type': 'group'
+    }
     'description': 'schedule group meeting'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -161,8 +171,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'phone_call'
+    'reference': {
+      'id': 1
+      'type': 'phone_call'
+    }
     'description': 'product discussion'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -174,8 +186,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'sms'
+    'reference': {
+      'id': 1
+      'type': 'sms'
+    }
     'description': 'product discussion'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -187,8 +201,10 @@ Radium.Todo.FIXTURES = [
     'updated_at': '2012-08-17T18:27:32Z'
     'user_id': 1
     'kind': 'general'
-    'reference_id': 1
-    'reference_type': 'todo'
+    'reference': {
+      'id': 1
+      'type': 'todo'
+    }
     'description': 'inception'
     'finish_by': '2012-08-17T22:00:00Z'
     'finished': false
@@ -228,7 +244,10 @@ Radium.Email.FIXTURES = [
     'id': 1
     'created_at': '2012-06-23T17:44:53Z'
     'updated_at': '2012-07-03T11:32:57Z'
-    'sender_id': 2
+    'sender': {
+      'id': 2
+      'type': 'user'
+    }
   }
 ]
 
@@ -246,8 +265,14 @@ Radium.PhoneCall.FIXTURES = [
     'id': 1
     'created_at': '2012-06-23T17:44:53Z'
     'updated_at': '2012-07-03T11:32:57Z'
-    'from_id': 1
-    'to_id': 2
+    'to': {
+      'id': 2
+      'type': 'user'
+    }
+    'from': {
+      'id': 1
+      'type': 'contact'
+    }
   }
 ]
 

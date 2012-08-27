@@ -3,4 +3,4 @@ Radium.Email = Radium.Message.extend
   from: DS.attr('array')
   subject: DS.attr('string')
   html: DS.attr('string')
-  sender: DS.belongsTo('Radium.User', key: 'sender_id')
+  sender: Radium.polymorphic('sender')

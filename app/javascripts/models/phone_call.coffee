@@ -4,5 +4,5 @@ Radium.PhoneCall = Radium.Core.extend
   kind: DS.attr('string')
   dialedAt: DS.attr('datetime', key: 'dialed_at')
   endedAt: DS.attr('datetime', key: 'ended_at')
-  to: DS.belongsTo('Radium.User', key: 'to_id')
-  from: DS.belongsTo('Radium.Contact', key: 'from_id')
+  to: Radium.polymorphic('to')
+  from: Radium.polymorphic('from')
