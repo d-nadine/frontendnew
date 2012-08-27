@@ -1,13 +1,17 @@
 test "comments are displayed in item's details", ->
+  expect(1)
+
   todo = Radium.store.find(Radium.Todo, 1)
 
   waitForResource todo, (el) ->
     el.click()
 
-    waitForSelector ['.comments', el], (comments)->
+    waitForSelector ['.comments', el.parent()], (comments)->
       assertContains comments, 'I like product drafts'
 
 test 'comment can be added to feed item', ->
+  expect(2)
+
   event = jQuery.Event("keypress")
   event.keyCode = 13
 
@@ -15,23 +19,15 @@ test 'comment can be added to feed item', ->
   waitForResource todo, (el) ->
     el.click()
 
-    waitForSelector ['.comments', el], (comments) ->
+    waitForSelector ['.comments', el.parent()], (commentsContainer) ->
       # TODO: some abstraction for filling out such things would be cool
-      textarea = $('.new-comment', comments)
+      textarea = $('.new-comment', commentsContainer)
+      ok textarea.length, "Comment box missing!"
+
       textarea.val('Nice!').change().trigger(event)
 
-      comments = $('.comment', el)
+      comments = $('.comment', commentsContainer)
       condition = -> comments.length == 2
+
       waitFor condition, ->
         assertContains comments, 'Nice!'
-
-        #casper.waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comment:nth-of-type(2)', ->
-        #  @test.assertTextExists 'Nice!'
-        #
-        #  id = @evaluate ->
-        #    Radium.store.find(Radium.Todo, 1).get('comments').objectAt(1).get('id')
-        #
-        #  @test.assert(!!id, 'comment is persisted')
-        #
-        #casper.run ->
-        #  @test.done()

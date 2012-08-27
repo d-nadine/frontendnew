@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: b0cec8cb3a785179eea50d24b02cea1e610b66d9
+  revision: ada46a4e95d4a4df82ea87d96ca542615cc80890
   specs:
     iridium (0.2.0)
       activesupport

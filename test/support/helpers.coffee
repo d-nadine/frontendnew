@@ -31,7 +31,10 @@ window.waitForSelector = (selector, callback, message) ->
   condition = -> $.apply($, selector).length
   message ?= "Waiting for '#{selector}' timed out"
 
-  waitFor condition, callback, message
+  callbackWithElement = ->
+    callback($.apply($, selector))
+
+  waitFor condition, callbackWithElement, message
 
 window.waitForResource = (resource, callback) ->
   id = resource.get('id')
@@ -39,9 +42,7 @@ window.waitForResource = (resource, callback) ->
   domClass = resource.get('domClass')
   selector = ".#{domClass}"
 
-  callbackWithElement = ->
-    callback($(selector))
-  waitForSelector selector, callbackWithElement, "Could not find #{type} with id #{id} on the page"
+  waitForSelector selector, callback, "Could not find #{type} with id #{id} on the page"
 
 window.elementFor = (resource) ->
   id = resource.get('id')
@@ -50,6 +51,9 @@ window.elementFor = (resource) ->
   $(".#{domClass}")
 
 window.assertContains = (element, text) ->
+  throw "Element undefined" unless element
+  throw "text is missing" unless element.text()
+
   r = new RegExp(text)
   result = r.test element.text()
   ok result, "Could not find '#{text}' inside #{element.text()}"
