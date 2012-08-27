@@ -44,6 +44,6 @@ test 'clustered array properly clears cluster after removing sufficient number o
   array.removeObject(Radium.store.find(Radium.Todo, 1))
   array.removeObject(Radium.store.find(Radium.Todo, 2))
 
-
   equal cluster.get('length'), 0, 'cluster should contain all of the items'
+  equal array.get('clusters').get('length'), 0, 'clusters are removed when emptied'
   equal array.get('unclustered.length'), 1, 'remaining items are moved to unclustered'

@@ -10,7 +10,13 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
   init: ->
     @_super.apply this, arguments
     @set 'content', Ember.A() unless @get 'content'
-    @set 'clusters', Ember.A()
+
+    @set 'clusters', Em.ArrayProxy.create
+      arrangedContent: (->
+        @get('content').filter (cluster) -> cluster.get('length')
+      ).property('content', 'content.@each.length')
+      content: Ember.A()
+
     @set 'unclustered', Radium.ExtendedRecordArray.create
       store: @get('store')
       content: Ember.A()
@@ -74,7 +80,7 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
     [idx, amt, objects]
 
   fetchCluster: (type) ->
-    cluster = @get('clusters').find (c) -> c.get('type') == type
+    cluster = @get('clusters.content').find (c) -> c.get('type') == type
 
     unless cluster
       cluster = DS.RecordArray.create
@@ -82,6 +88,6 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
         content: Ember.A([])
         store: @get('store')
 
-      @get('clusters').pushObject(cluster)
+      @get('clusters.content').pushObject(cluster)
 
     cluster
