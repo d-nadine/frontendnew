@@ -18,6 +18,7 @@ $.ajaxSetup
 
 require 'radium/lib/polymorphic'
 require 'radium/lib/extended_record_array'
+require 'radium/lib/clustered_record_array'
 
 require 'radium/router'
 
