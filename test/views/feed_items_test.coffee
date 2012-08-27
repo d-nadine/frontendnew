@@ -145,21 +145,3 @@ test 'campaign item', ->
 
   assertContains view.$(), 'Fall product campaign'
   assertContains view.$('a'), '(Aaron S.)'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
