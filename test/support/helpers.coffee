@@ -1,29 +1,32 @@
 defaultTimeout = 2000
 
+window.wait = (timeout, callback) ->
+  timeout ?= 2000
+  stop()
+  setTimeout( (->
+    callback()
+    start()
+  ), timeout)
+
+
 window.waitFor = (condition, callback, message) ->
   message ?= 'waitFor timed out'
-  finished = false
-  timedOut = false
 
-  timeout = ->
-    unless finished
-      timedOut = true
-      ok false, message
-      start()
-
-  setTimeout timeout, defaultTimeout
-
-  checkCondition = ->
-    return if timedOut
-
-    if condition()
-      finished = true
-      start()
-      callback()
-    else
-      setTimeout(checkCondition, 20)
+  startedAt = new Date().getTime()
 
   stop()
+
+  checkCondition = ->
+    delta = new Date().getTime() - startedAt
+    if delta > defaultTimeout
+      ok false, message
+    else
+      if condition()
+        start()
+        callback()
+      else
+        setTimeout(checkCondition, 20)
+
   checkCondition()
 
 window.waitForSelector = (selector, callback, message) ->
@@ -32,7 +35,11 @@ window.waitForSelector = (selector, callback, message) ->
   message ?= "Waiting for '#{selector}' timed out"
 
   callbackWithElement = ->
-    callback($.apply($, selector))
+    # don't ask me why, but such additional short timeout fixes some
+    # of the tests cases where there are problems with callbacks,
+    # it may be related to animations or Ember.bindings
+    wait 10, ->
+      callback($.apply($, selector))
 
   waitFor condition, callbackWithElement, message
 
