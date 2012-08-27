@@ -62,5 +62,6 @@ window.assertContains = (element, text) ->
   throw "text is missing" unless element.text()
 
   r = new RegExp(text)
-  result = r.test element.text()
-  ok result, "Could not find '#{text}' inside #{element.text()}"
+  elementText = element.text().replace(/[\n\s]+/g, ' ')
+  result = r.test elementText
+  ok result, "Could not find '#{text}' inside #{elementText}"

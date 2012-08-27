@@ -41,11 +41,18 @@ window.Fixtures = Fixtures = Ember.Object.create
 
     fixtures
 
-  loadAll: ->
+  loadAll: (options) ->
+    options ?= {}
+    now      = options.now
+
     @get('fixtures').forEach (type, fixtures) ->
       type.FIXTURES ?= []
       fixtures.forEach (name, fixture) ->
-        type.FIXTURES.pushObject(fixture.get('data'))
+        data = fixture.get('data')
+        if now
+          Radium.store.load(type, data.id, data)
+        else
+          type.FIXTURES.pushObject(data)
 
 window.F = F = Fixtures
 
@@ -133,7 +140,7 @@ Fixtures.add Radium.Todo,
     finished: false
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: true
-  contact:
+  call:
     id: 3
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
@@ -175,7 +182,7 @@ Fixtures.add Radium.Todo,
     finished: false
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
-  emai:
+  email:
     id: 6
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
