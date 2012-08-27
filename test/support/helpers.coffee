@@ -18,8 +18,8 @@ window.waitFor = (condition, callback, message) ->
 
     if condition()
       finished = true
-      callback()
       start()
+      callback()
     else
       setTimeout(checkCondition, 20)
 
