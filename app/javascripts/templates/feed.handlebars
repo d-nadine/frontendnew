@@ -8,6 +8,7 @@
         <h3>{{formatDate this format="%A, %B %D, %Y"}}</h3>
       {{/with}}
     </div>
-    {{collection Em.CollectionView itemViewClass="Radium.FeedItemContainerView" contentBinding="view.content.items"}}
+    {{collection Radium.FeedItemsListView contentBinding="view.content.items.unclustered"}}
+    {{collection Radium.ClusterListView contentBinding="view.content.items.clusters"}}
   {{/collection}}
 {{/if}}
