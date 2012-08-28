@@ -4,8 +4,8 @@ window.wait = (timeout, callback) ->
   timeout ?= 2000
   stop()
   setTimeout( (->
-    callback()
     start()
+    callback()
   ), timeout)
 
 
