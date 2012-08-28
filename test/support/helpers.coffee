@@ -58,11 +58,22 @@ window.elementFor = (resource) ->
   domClass = resource.get('domClass')
   $(".#{domClass}")
 
-window.assertContains = (element, text) ->
+contains = (element, text) ->
   throw "Element undefined" unless element
   throw "text is missing" unless element.text()
 
   r = new RegExp(text)
   elementText = element.text().replace(/[\n\s]+/g, ' ')
-  result = r.test elementText
-  ok result, "Could not find '#{text}' inside #{elementText}"
+  {
+    result: r.test elementText
+    text: elementText
+  }
+
+
+window.assertContains = (element, text) ->
+  match = contains(element, text)
+  ok match.result, "Could not find '#{text}' inside #{match.text}"
+
+window.assertNotContains = (element, text) ->
+  match = contains(element, text)
+  ok !match.result, "Found '#{text}' inside #{match.text}"
