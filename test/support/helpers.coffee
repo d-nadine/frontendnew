@@ -19,6 +19,7 @@ window.waitFor = (condition, callback, message) ->
   checkCondition = ->
     delta = new Date().getTime() - startedAt
     if delta > defaultTimeout
+      start()
       ok false, message
     else
       if condition()
