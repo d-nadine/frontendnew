@@ -1,0 +1,6 @@
+Radium.Group = Radium.Core.extend
+  meta: DS.attr('object')
+  name: DS.attr('string')
+  email: DS.attr('string')
+  phone: DS.attr('string')
+  isPublic: DS.attr('boolean', key: 'is_public')

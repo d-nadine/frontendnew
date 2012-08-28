@@ -6,13 +6,11 @@
 
 {{view view.checkboxView}}
 
+{{#with reference}}
+  <a {{action showCampaign this href=true}}>{{name}}</a>:
+{{/with}}
 {{description}}
 
 {{#with user}}
-  {{! TODO: action is not updated when binding changes, so I can't
-       use:
-         action showUser user
-       without this silly #with block. This seems like a bug in ember.
-  }}
   (<a {{action showUser this href=true}}>{{abbrName}}</a>)
 {{/with}}

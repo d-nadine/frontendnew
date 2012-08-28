@@ -1,32 +1,33 @@
-casper.start 'http://localhost:7777/'
+test "comments are displayed in item's details", ->
+  expect(1)
 
-casper.test.comment "Comments are displayed in item's details"
+  todo = Radium.store.find(Radium.Todo, 1)
 
-# TODO: it would be nice to come up with some abstractions for elements
-casper.waitForSelector '.feed-section:last-of-type .todo:first-of-type', ->
-  @click('.feed-section:last-of-type .todo:first-of-type')
+  waitForResource todo, (el) ->
+    el.click()
 
-  @waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comments', ->
-    @test.assertTextExists 'I like product drafts'
+    waitForSelector ['.comments', el.parent()], (comments)->
+      assertContains comments, 'I like product drafts'
 
-casper.test.comment 'Comment can be added to feed item'
+test 'comment can be added to feed item', ->
+  expect(2)
 
-casper.then ->
-  @evaluate ->
-    event = jQuery.Event("keypress")
-    event.keyCode = 13
+  event = jQuery.Event("keypress")
+  event.keyCode = 13
 
-    # TODO: find a nicer way to do this using casper's API
-    textarea = $('.feed-section:last-of-type .feed-item-container:first-of-type textarea.new-comment')
-    textarea.val('Nice!').change().trigger(event)
+  todo = Radium.store.find(Radium.Todo, 1)
+  waitForResource todo, (el) ->
+    el.click()
 
-casper.waitForSelector '.feed-section:last-of-type .feed-item-container:first-of-type .comment:nth-of-type(2)', ->
-  @test.assertTextExists 'Nice!'
+    waitForSelector ['.comments', el.parent()], (commentsContainer) ->
+      # TODO: some abstraction for filling out such things would be cool
+      textarea = $('.new-comment', commentsContainer)
+      ok textarea.length, "Comment box missing!"
 
-  id = @evaluate ->
-    Radium.store.find(Radium.Todo, 1).get('comments').objectAt(1).get('id')
+      textarea.val('Nice!').change().trigger(event)
 
-  @test.assert(!!id, 'comment is persisted')
+      comments = $('.comment', commentsContainer)
+      condition = -> comments.length == 2
 
-casper.run ->
-  @test.done()
+      waitFor condition, ->
+        assertContains comments, 'Nice!'

@@ -5,6 +5,10 @@ Radium.Router = Ember.Router.extend
 
   showUser: Ember.Route.transitionTo('root.users.user')
   showContacts: Ember.Route.transitionTo('root.contacts')
+  showContact: Ember.Route.transitionTo('root.contacts.contact')
+  showDeal: Ember.Route.transitionTo('root.deal')
+  showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
+  showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
 
   init: ->
@@ -52,10 +56,49 @@ Radium.Router = Ember.Router.extend
         sections = Radium.store.findAll(Radium.FeedSection)
         router.get('mainController').connectOutlet('content', 'feed', sections)
 
+    deal: Ember.Route.extend
+      route: '/deals/:deal_id'
+      connectOutlets: (router, deal) ->
+        router.get('mainController').connectOutlet('content', 'deal', deal)
+
+      deserialize: (router, params) ->
+        params.deal_id = parseInt(params.deal_id)
+
+    campaigns: Ember.Route.extend
+      route: '/campaigns'
+
+      campaign: Ember.Route.extend
+        route: '/:campaign_id'
+        connectOutlets: (router, campaign) ->
+          router.get('mainController').connectOutlet('content', 'campaign', campaign)
+
+        deserialize: (router, params) ->
+          params.campaign_id = parseInt(params.campaign_id)
+
+    groups: Ember.Route.extend
+      route: '/groups'
+
+      group: Ember.Route.extend
+        route: '/:group_id'
+        connectOutlets: (router, group) ->
+          router.get('mainController').connectOutlet('content', 'group', group)
+
+        deserialize: (router, params) ->
+          params.group_id = parseInt(params.group_id)
+
     contacts: Ember.Route.extend
       route: '/contacts'
       connectOutlets: (router) ->
           router.get('mainController').connectOutlet('content', 'contacts')
+
+      contact: Ember.Route.extend
+        route: '/:contact_id'
+        connectOutlets: (router, contact) ->
+          router.get('mainController').connectOutlet('content', 'contact', contact)
+
+        deserialize: (router, params) ->
+          params.contact_id = parseInt(params.contact_id)
+          @_super(router, params)
 
     users: Ember.Route.extend
       route: '/users'

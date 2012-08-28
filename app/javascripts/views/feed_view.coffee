@@ -7,6 +7,6 @@ Radium.FeedView = Em.View.extend
   empty: (->
     @get('feed.length') == 0 ||
       !@get('feed').find( (section) -> section.get('items.length') > 0 )
-  ).property('feed', 'feed.@each.items')
+  ).property('feed', 'feed.@each.items.@each.length')
   emptyView: Em.View.extend
     templateName: 'empty_feed'

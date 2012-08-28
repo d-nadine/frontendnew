@@ -4,15 +4,11 @@
 
 <i class="pull-left activity-icon icon-todo"></i>
 
+{{!TODO: duplicating this view feels wrong, feed_todo could be reused}}
 {{view view.checkboxView}}
 
 {{description}}
 
 {{#with user}}
-  {{! TODO: action is not updated when binding changes, so I can't
-       use:
-         action showUser user
-       without this silly #with block. This seems like a bug in ember.
-  }}
   (<a {{action showUser this href=true}}>{{abbrName}}</a>)
 {{/with}}
