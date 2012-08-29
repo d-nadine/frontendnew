@@ -15,7 +15,3 @@ Radium.Core.typeFromString = (str) ->
 
 Radium.Core.typeToString = (type) ->
   type.toString().split('.').slice(-1)[0].underscore()
-
-# TODO: prepare something similar to inflector
-Radium.Core.pluralize = (str) ->
-  "#{str}s"

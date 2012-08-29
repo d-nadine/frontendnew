@@ -33,7 +33,7 @@ window.Fixtures = Fixtures = Ember.Object.create
     unless fixtures
       fixtures = Ember.Map.create()
       map.set(type, fixtures)
-      Fixtures[Radium.Core.pluralize(Radium.Core.typeToString(type))] = (name) ->
+      Fixtures[Radium.Core.typeToString(type).pluralize()] = (name) ->
         fixture = Fixtures.fetch(type, name)
         data    = fixture.get('data')
         Radium.store.load(type, data.id, data)
