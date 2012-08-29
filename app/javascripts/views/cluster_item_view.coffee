@@ -1,7 +1,7 @@
 Radium.ClusterItemView = Ember.View.extend
   contentBinding: 'parentView.content'
   templateName: 'cluster_item'
-  classNames: 'alert'.w()
+  classNames: 'alert cluster-item'.w()
   classNameBindings: ['expanded']
   expandedBinding: 'parentView.expanded'
   click: ->
