@@ -66,9 +66,6 @@ Fixtures.add Radium.FeedSection,
     # changes. This will take some time, so for now I'll leave it like this,
     # directly giving feed section what it needs
     item_ids: [
-      [Radium.Todo, 1]
-      [Radium.Todo, 3]
-      [Radium.Todo, 4]
       [Radium.Todo, 5]
       [Radium.Todo, 6]
       [Radium.Todo, 7]
@@ -84,7 +81,12 @@ Fixtures.add Radium.FeedSection,
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
     date: '2012-08-17T00:00:00Z'
-    item_ids: [[Radium.Todo, 2]]
+    item_ids: [
+      [Radium.Todo, 1]
+      [Radium.Todo, 2]
+      [Radium.Todo, 3]
+      [Radium.Todo, 4]
+    ]
   feed_section_3:
     id: '2012-07-15'
     date: '2012-07-15T00:00:00Z'
@@ -315,7 +317,7 @@ Fixtures.add Radium.Group,
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Product 1 group'
   developers:
-    id: 1
+    id: 2
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Developers'

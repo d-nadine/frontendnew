@@ -1,7 +1,7 @@
 test "comments are displayed in item's details", ->
   expect(1)
 
-  todo = Radium.store.find(Radium.Todo, 1)
+  todo = F.todos('default')
 
   waitForResource todo, (el) ->
     el.click()
@@ -15,7 +15,8 @@ test 'comment can be added to feed item', ->
   event = jQuery.Event("keypress")
   event.keyCode = 13
 
-  todo = Radium.store.find(Radium.Todo, 1)
+  todo = F.todos('default')
+
   waitForResource todo, (el) ->
     el.click()
 
