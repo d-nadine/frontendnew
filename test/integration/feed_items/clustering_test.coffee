@@ -3,6 +3,7 @@ test 'clustering feed items', ->
 
   waitForResource section, (el) ->
     assertNotContains el, 'Finish first product draft'
+    assertContains el, '6 todos'
 
     cluster = $('.cluster-item', el)
     cluster.click()

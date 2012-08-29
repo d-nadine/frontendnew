@@ -8,9 +8,6 @@ Radium.ClusterItemView = Ember.View.extend
     @toggleProperty('expanded')
 
   contextString: ( (source) ->
-    count = @get('content.length')
-    if count > 1
-      "items of type #{@get('content.type')}"
-    else
-      "item of type #{@get('content.type')}"
-  ).property('content.length')
+    type = Radium.Core.typeToString @get('content.type')
+    type.pluralize().humanize()
+  ).property()
