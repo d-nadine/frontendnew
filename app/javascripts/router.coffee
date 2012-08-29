@@ -11,6 +11,13 @@ Radium.Router = Ember.Router.extend
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
 
+  jumpTo: (query) ->
+    query   ?= {}
+    sections = Radium.store.find(Radium.FeedSection, query)
+
+    @get('mainController').connectOutlet('content', 'feed', sections)
+    Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+
   init: ->
     @_super()
 
@@ -51,19 +58,13 @@ Radium.Router = Ember.Router.extend
     dashboard: Ember.Route.extend
       route: '/'
       connectOutlets: (router) ->
-        # I use empty object here to force store to use findQuery,
-        # this would not be needed with store other than fixtures,
-        # TODO: find better way to do this
-        sections = Radium.store.find(Radium.FeedSection, {})
-        router.get('mainController').connectOutlet('content', 'feed', sections)
+        router.jumpTo()
 
     # TODO: find out what's the best pattern to handle such things
     dashboardWithDate: Ember.Route.extend
       route: '/dashboard/:date'
       connectOutlets: (router, params) ->
-        sections = Radium.store.find(Radium.FeedSection, date: params.date)
-        router.get('mainController').connectOutlet('content', 'feed', sections)
-        Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{params.date}")
+        router.jumpTo(date: params.date)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'

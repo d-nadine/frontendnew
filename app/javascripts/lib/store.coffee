@@ -21,7 +21,7 @@ DS.RadiumStore = DS.Store.extend
             if a == b then 0 else ( if a > b then 1 else -1 )
 
           console.log(deltas)
-          deltas.slice(0, 10).map (delta) -> delta[1]
+          deltas.slice(0, 2).map (delta) -> delta[1]
         else
           fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
       else
