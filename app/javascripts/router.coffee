@@ -44,8 +44,6 @@ Radium.Router = Ember.Router.extend
         router.get('applicationController').connectOutlet('login')
 
   root: Ember.Route.extend
-    route: '/'
-
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('main')
       router.get('applicationController').connectOutlet('topbar', 'topbar')
@@ -118,8 +116,8 @@ Radium.Router = Ember.Router.extend
   authenticated: Ember.Route.extend
     index: Ember.Route.extend
       connectOutlets: (router) ->
-        if path = router.get('lastAttemptedPath')
-          router.transitionTo('root')
+        router.transitionTo('root')
+
+        path = router.get('lastAttemptedPath')
+        if path && path != '/'
           router.route(path)
-        else
-          router.transitionTo('root.dashboard')

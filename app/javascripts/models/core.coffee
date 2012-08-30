@@ -11,14 +11,7 @@ Radium.Core = DS.Model.extend
   ).property('type', 'id')
 
 Radium.Core.typeFromString = (str) ->
-  type = str.replace /_([a-z])|^([a-z])/g, (match, p1, p2) -> (p1 || p2).toUpperCase()
-  Radium[type]
+  Radium[Em.String.classify(str)]
 
 Radium.Core.typeToString = (type) ->
-  parts = type.toString().split('.')
-  type = parts[parts.length - 1]
-  type.replace(/([A-Z])/g, '_$1').toLowerCase().slice(1)
-
-# TODO: prepare something similar to inflector
-Radium.Core.pluralize = (str) ->
-  "#{str}s"
+  type.toString().split('.').slice(-1)[0].underscore()

@@ -10,7 +10,7 @@ test 'feed sections with dates should be displayed', ->
 test 'feed sections should contain todo items', ->
   expect(1)
 
-  todo = Radium.store.find(Radium.Todo, 1)
+  todo = F.todos('default')
 
   waitForResource todo, (el) ->
     assertContains el, 'Finish first product draft'

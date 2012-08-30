@@ -16,8 +16,10 @@ $.ajaxSetup
     "X-Radium-User-API-Key": Radium.get('_api')
     "Accept": "application/json"
 
+require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
 require 'radium/lib/extended_record_array'
+require 'radium/lib/clustered_record_array'
 
 require 'radium/router'
 
@@ -81,6 +83,9 @@ require 'radium/views/label_view'
 require 'radium/views/deal_view'
 require 'radium/views/campaign_view'
 require 'radium/views/group_view'
+require 'radium/views/feed_items_list_view'
+require 'radium/views/cluster_list_view'
+require 'radium/views/cluster_item_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_todo_deal'
@@ -111,6 +116,7 @@ require 'radium/templates/deal'
 require 'radium/templates/campaign'
 require 'radium/templates/group'
 require 'radium/templates/empty_feed'
+require 'radium/templates/cluster_item'
 
 require 'radium/templates/layouts/feed_item_layout'
 require 'radium/templates/layouts/feed_item_details_layout'

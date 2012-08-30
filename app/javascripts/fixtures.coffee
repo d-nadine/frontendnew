@@ -33,7 +33,7 @@ window.Fixtures = Fixtures = Ember.Object.create
     unless fixtures
       fixtures = Ember.Map.create()
       map.set(type, fixtures)
-      Fixtures[Radium.Core.pluralize(Radium.Core.typeToString(type))] = (name) ->
+      Fixtures[Radium.Core.typeToString(type).pluralize()] = (name) ->
         fixture = Fixtures.fetch(type, name)
         data    = fixture.get('data')
         Radium.store.load(type, data.id, data)
@@ -66,9 +66,6 @@ Fixtures.add Radium.FeedSection,
     # changes. This will take some time, so for now I'll leave it like this,
     # directly giving feed section what it needs
     item_ids: [
-      [Radium.Todo, 1]
-      [Radium.Todo, 3]
-      [Radium.Todo, 4]
       [Radium.Todo, 5]
       [Radium.Todo, 6]
       [Radium.Todo, 7]
@@ -84,7 +81,20 @@ Fixtures.add Radium.FeedSection,
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
     date: '2012-08-17T00:00:00Z'
-    item_ids: [[Radium.Todo, 2]]
+    item_ids: [
+      [Radium.Todo, 1]
+      [Radium.Todo, 2]
+      [Radium.Todo, 3]
+      [Radium.Todo, 4]
+    ]
+  feed_section_3:
+    id: '2012-07-15'
+    date: '2012-07-15T00:00:00Z'
+    item_ids: [[Radium.Meeting, 2]]
+  feed_section_4:
+    id: '2012-07-14'
+    date: '2012-07-14T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,
   default:
@@ -103,6 +113,14 @@ Fixtures.add Radium.Deal,
     state: 'pending'
     close_by: '2012-08-17T18:27:32Z'
     name: 'Great deal'
+  big_contract:
+    id: 2
+    created_at: '2012-07-15T15:27:32Z'
+    updated_at: '2012-07-15T15:27:32Z'
+    user_id: 1
+    state: 'pending'
+    close_by: '2012-07-15T18:27:32Z'
+    name: 'Big contract'
 
 Fixtures.add Radium.Meeting,
   default:
@@ -114,6 +132,16 @@ Fixtures.add Radium.Meeting,
     starts_at: '2012-08-17T18:27:32Z'
     ends_at: '2012-08-18T18:27:32Z'
     topic: 'Product discussion'
+    location: 'Radium HQ'
+  retrospection:
+    id: 2
+    created_at: '2012-07-15T18:27:32Z'
+    updated_at: '2012-07-15T18:27:32Z'
+    user_id: 2
+    user_ids: [1, 2]
+    starts_at: '2012-07-15T18:27:32Z'
+    ends_at: '2012-07-15T18:27:32Z'
+    topic: 'Retrospection'
     location: 'Radium HQ'
 
 Fixtures.add Radium.Todo,
@@ -288,6 +316,11 @@ Fixtures.add Radium.Group,
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Product 1 group'
+  developers:
+    id: 2
+    created_at: '2012-06-23T17:44:53Z'
+    updated_at: '2012-07-03T11:32:57Z'
+    name: 'Developers'
 
 Fixtures.add Radium.PhoneCall,
   default:
