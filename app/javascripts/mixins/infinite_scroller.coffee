@@ -34,7 +34,6 @@ Radium.InfiniteScroller = Ember.Mixin.create
     if !isUp && ($(window).scrollTop() > $(document).height() - $(window).height() - 300)
       @get('controller').loadFeed back: true
     else if isUp && $(window).scrollTop() < 5
-      console.log 'load'
       @get('controller').loadFeed forward: true
 
     @set 'didScroll', false

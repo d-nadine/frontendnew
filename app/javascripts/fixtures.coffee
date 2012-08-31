@@ -22,9 +22,28 @@ window.Fixtures = Fixtures = Ember.Object.create
   fetch: (type, name) ->
     @fixturesForType(type).get(name)
 
+  # TODO: extract this as some kind of hook
+  afterAdd: (type, fixtureSet, fixture) ->
+    if type == Radium.FeedSection
+      # automatically add next_date and previous_date
+      fixtures = []
+      fixtureSet.forEach (name, f) -> fixtures.pushObject(f)
+
+      fixtures = fixtures.sort (a, b) ->
+        if a.get('data').id > b.get('data').id then 1 else -1
+
+      fixtures.forEach (fixture, i) ->
+        if previous = fixtures.objectAt(i - 1)
+          previous.get('data').next_date = fixture.get('data').id
+          fixture.get('data').previous_date = previous.get('data').id
+        if next = fixtures.objectAt(i + 1)
+          next.get('data').previous_date = fixture.get('data').id
+          fixture.get('data').next_date = next.get('data').id
+
   addFixture: (type, fixture) ->
     fixtures = @fixturesForType(type)
     fixtures.set(fixture.get('name'), fixture)
+    @afterAdd(type, fixtures, fixture)
 
   fixturesForType: (type) ->
     map = @get('fixtures')
@@ -124,12 +143,12 @@ Fixtures.add Radium.FeedSection,
     date: '2012-07-07T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
   feed_section_12:
-    id: '2012-07-07'
-    date: '2012-07-07T00:00:00Z'
+    id: '2012-07-06'
+    date: '2012-07-06T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
   feed_section_13:
-    id: '2012-07-07'
-    date: '2012-07-07T00:00:00Z'
+    id: '2012-07-05'
+    date: '2012-07-05T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,

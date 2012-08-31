@@ -4,6 +4,23 @@
 Radium.ExpandableRecordArray = DS.RecordArray.extend
   isLoading: false
 
+  loadRecord: (record) ->
+    return if record.get('isLoaded')
+
+    @set 'isLoading', true
+    self = this
+
+    observer = ->
+      if @get 'isLoaded'
+        content = self.get 'content'
+
+        record.removeObserver 'isLoaded', observer
+        content.pushObject record.get('clientId')
+
+        self.set 'isLoading', false
+
+    record.addObserver 'isLoaded', observer
+
   load: (array) ->
     @set 'isLoading', true
     self = this

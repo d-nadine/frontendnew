@@ -15,15 +15,15 @@ Radium.FeedController = Em.ArrayController.extend
   loadFeed: (options) ->
     return unless @get 'canScroll'
 
-    query = null
-    item = null
+    date = null
     if options.forward
       item = @get('firstObject')
       if item
-        query = { after: item }
+        date = item.get('nextDate')
     else if options.back
       item = @get('lastObject')
       if item
-        query = { before: item }
+        date = item.get('previousDate')
 
-    @get('content').load Radium.store.find(Radium.FeedSection, query)
+    if date
+      @get('content').loadRecord Radium.store.find(Radium.FeedSection, date)
