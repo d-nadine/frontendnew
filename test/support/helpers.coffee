@@ -59,21 +59,26 @@ window.elementFor = (resource) ->
   $(".#{domClass}")
 
 contains = (element, text) ->
+  if typeof element == 'string'
+    text = element
+    element = $('body')
+
   throw "Element undefined" unless element
-  throw "text is missing" unless element.text()
+  throw "text is missing" unless text
 
   r = new RegExp(text)
   elementText = element.text().replace(/[\n\s]+/g, ' ')
   {
     result: r.test elementText
     text: elementText
+    queryText: text
   }
 
 
 window.assertContains = (element, text) ->
   match = contains(element, text)
-  ok match.result, "Could not find '#{text}' inside #{match.text}"
+  ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
 
 window.assertNotContains = (element, text) ->
   match = contains(element, text)
-  ok !match.result, "Found '#{text}' inside #{match.text}"
+  ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
