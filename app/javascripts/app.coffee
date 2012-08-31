@@ -13,11 +13,12 @@ $.ajaxSetup
   dataType: 'json'
   contentType: 'application/json'
   headers:
-    "X-Radium-User-API-Key": Radium.get('_api')
-    "Accept": "application/json"
+    'X-Radium-User-API-Key': Radium.get('_api')
+    'Accept': 'application/json'
 
 require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
+require 'radium/lib/expandable_record_array'
 require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
@@ -28,6 +29,7 @@ require 'radium/states/error'
 
 require 'radium/mixins/views/slider'
 require 'radium/mixins/noop'
+require 'radium/mixins/infinite_scroller'
 
 require 'radium/helpers/date_helper'
 require 'radium/helpers/time_helper'

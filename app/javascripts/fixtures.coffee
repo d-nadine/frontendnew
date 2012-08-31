@@ -95,6 +95,42 @@ Fixtures.add Radium.FeedSection,
     id: '2012-07-14'
     date: '2012-07-14T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
+  feed_section_5:
+    id: '2012-07-13'
+    date: '2012-07-13T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_6:
+    id: '2012-07-12'
+    date: '2012-07-12T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_7:
+    id: '2012-07-11'
+    date: '2012-07-11T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_8:
+    id: '2012-07-10'
+    date: '2012-07-10T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_9:
+    id: '2012-07-09'
+    date: '2012-07-09T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_10:
+    id: '2012-07-08'
+    date: '2012-07-08T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_11:
+    id: '2012-07-07'
+    date: '2012-07-07T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_12:
+    id: '2012-07-07'
+    date: '2012-07-07T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_13:
+    id: '2012-07-07'
+    date: '2012-07-07T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,
   default:
