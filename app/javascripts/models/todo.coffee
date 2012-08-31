@@ -3,9 +3,7 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   hasAnimation: false
   kind: DS.attr('todoKind')
   description: DS.attr('string')
-  finishBy: DS.attr('datetime',
-    key: 'finish_by'
-  )
+  finishBy: DS.attr('datetime', key: 'finish_by')
   finished: DS.attr('boolean')
   isCall: ( ->
     (if (@get('kind') is 'call') then true else false)
