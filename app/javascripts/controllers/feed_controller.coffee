@@ -4,6 +4,14 @@ Radium.FeedController = Em.ArrayController.extend
   canScroll: true
   isLoading: false
 
+  isLoadingObserver: (->
+    if @get 'content.isLoading'
+      @set 'isLoading', true
+    else if !@get 'rendering'
+      # stop loading only if rendering finished
+      @set 'isLoading', false
+  ).observes('content.isLoading', 'rendering')
+
   loadFeed: (options) ->
     return unless @get 'canScroll'
 
