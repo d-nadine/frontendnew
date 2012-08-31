@@ -22,7 +22,10 @@ Radium.FeedController = Em.ArrayController.extend
         date = item.get('nextDate')
     else if options.back
       item = @get('lastObject')
+      console.log @get 'length'
+      console.log 'item', item
       if item
+        console.log item.get('previousDate')
         date = item.get('previousDate')
 
     if date

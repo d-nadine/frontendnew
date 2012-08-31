@@ -1,6 +1,9 @@
 test 'user should be able to load any date for feed', ->
   expect(3)
 
+  Ember.run ->
+    Radium.get('router').transitionTo('root.dashboard')
+
   section = F.feed_sections('default')
 
   waitForResource section, ->

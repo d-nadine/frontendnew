@@ -1,4 +1,8 @@
 test 'clustering feed items', ->
+
+  Ember.run ->
+    Radium.get('router').transitionTo('root.dashboard')
+
   section = F.feed_sections('default')
 
   waitForResource section, (el) ->
