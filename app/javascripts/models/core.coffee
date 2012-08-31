@@ -10,8 +10,15 @@ Radium.Core = DS.Model.extend
     "#{@get('type')}_#{@get('id')}"
   ).property('type', 'id')
 
-Radium.Core.typeFromString = (str) ->
-  Radium[Em.String.classify(str)]
+Radium.Core.reopenClass
+  root: ->
+    if @superclass == Radium.Core
+      this
+    else
+      @superclass.root()
 
-Radium.Core.typeToString = (type) ->
-  type.toString().split('.').slice(-1)[0].underscore()
+  typeFromString: (str) ->
+    Radium[Em.String.classify(str)]
+
+  typeToString: (type) ->
+    type.toString().split('.').slice(-1)[0].underscore()
