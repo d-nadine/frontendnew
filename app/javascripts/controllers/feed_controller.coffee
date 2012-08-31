@@ -12,6 +12,21 @@ Radium.FeedController = Em.ArrayController.extend
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
 
+  pushItem: (item) ->
+    date = item.get('finishBy').toFormattedString('%Y-%m-%d')
+    section = @find (section) -> section.get('id') == date
+    unless section
+      # we don't want to commit sections, so just put them on separate
+      # transaction
+      transaction = Radium.store.transaction()
+      section = transaction.createRecord Radium.FeedSection,
+        id: date
+        date: Ember.DateTime.parse(date, '%Y-%m-%d')
+
+      Radium.FeedSection.fixLinks(section)
+
+    section.pushItem(item)
+
   loadFeed: (options) ->
     return unless @get 'canScroll'
 
@@ -22,10 +37,7 @@ Radium.FeedController = Em.ArrayController.extend
         date = item.get('nextDate')
     else if options.back
       item = @get('lastObject')
-      console.log @get 'length'
-      console.log 'item', item
       if item
-        console.log item.get('previousDate')
         date = item.get('previousDate')
 
     if date

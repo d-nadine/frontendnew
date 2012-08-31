@@ -37,6 +37,17 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
     @set 'currentView', view
 
+  toggleTodoForm: ->
+    feedDetailsContainer = @get('feedDetailsContainer')
+
+    if feedDetailsContainer.get 'currentView'
+      feedDetailsContainer.set 'currentView', null
+    else
+      todoFormView = Radium.TodoFormView.create()
+      todoFormView.set 'selection', @get('content')
+
+      feedDetailsContainer.set 'currentView', todoFormView
+
   expandOrShrink: (->
     feedDetailsContainer = @get('feedDetailsContainer')
     childViews = @get('childViews')

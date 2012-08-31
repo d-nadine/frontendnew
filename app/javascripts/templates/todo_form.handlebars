@@ -1,0 +1,31 @@
+<fieldset class="control-group">
+  {{view view.descriptionText}}
+  {{#if view.isError}}
+    <span class="help-inline">Can't create an empty todo.</span>
+  {{/if}}
+</fieldset>
+<fieldset class="control-group">
+  <label class="radium-control-label" for="assigned-to">Assigned To</label>
+  <div class="controls">
+    {{view view.assignToSelect}}
+    {{#if view.isContact}}
+    <div class="inline-fieldset">
+      <label>
+        {{view view.isCallCheckbox}} Is Call?
+      </label>
+    </div>
+    {{/if}}
+    <a href="#" {{action toggleOptions target="this"}}>{{view.toggleOptionsText}}</a>
+  </div>
+</fieldset>
+{{#if view.showOptions}}
+<div class="more-options form-inline">
+  <fieldset>
+    <div class="inline-fieldset">
+      <label for="date">Finish By:</label>
+      {{view view.finishByDateField}}
+    </div>
+  </fieldset>
+</div>
+{{/if}}
+{{view view.submitButton class="btn btn-primary pin-bottom-right"}}

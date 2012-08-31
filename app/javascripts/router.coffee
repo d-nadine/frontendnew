@@ -53,6 +53,10 @@ Radium.Router = Ember.Router.extend
 
   root: Ember.Route.extend
     connectOutlets: (router) ->
+      usersController = Radium.UsersController.create()
+      usersController.set 'content', Radium.store.findAll(Radium.User)
+      router.set 'usersController', usersController
+
       router.get('applicationController').connectOutlet('main')
       router.get('applicationController').connectOutlet('topbar', 'topbar')
 

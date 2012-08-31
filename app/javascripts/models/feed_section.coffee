@@ -5,3 +5,16 @@ Radium.FeedSection = Radium.Core.extend
   items: Radium.ClusteredRecordArray.attr(key: 'item_ids')
   pushItem: (item) ->
     @get('items').pushObject(item)
+
+Radium.FeedSection.reopenClass
+  fixLinks: (section) ->
+    sections = Radium.store.findAll(Radium.FeedSection)
+    sections = sections.toArray().sort (a, b) -> if a.get('id') > b.get('id') then 1 else -1
+
+    index = sections.indexOf(section)
+    if previous = sections.objectAt(index - 1)
+      previous.set 'nextDate', section.get('id')
+      section.set 'previousDate',  previous.get('id')
+    if next = sections.objectAt(index + 1)
+      next.set 'previousDate', section.get('id')
+      section.set 'nextDate', next.get('id')
