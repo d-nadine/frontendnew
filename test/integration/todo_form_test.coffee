@@ -24,4 +24,4 @@ test 'todo can be added', ->
           controller.loadFeed forward: true
 
           waitForResource Radium.store.find(Radium.FeedSection, '2012-09-01'), (el) ->
-            assertContains el, Saturday, 'September 1, 2012'
+            assertContains el, 'Saturday, September 1, 2012'
