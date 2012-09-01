@@ -11,6 +11,14 @@ Radium.Router = Ember.Router.extend
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
 
+  jumpTo: (query) ->
+    query   ?= {}
+    sections = Radium.store.expandableArrayFor Radium.FeedSection
+    sections.load Radium.store.find(Radium.FeedSection, query)
+
+    @get('mainController').connectOutlet('content', 'feed', sections)
+    Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+
   init: ->
     @_super()
 
@@ -51,8 +59,13 @@ Radium.Router = Ember.Router.extend
     dashboard: Ember.Route.extend
       route: '/'
       connectOutlets: (router) ->
-        sections = Radium.store.findAll(Radium.FeedSection)
-        router.get('mainController').connectOutlet('content', 'feed', sections)
+        router.jumpTo()
+
+    # TODO: find out what's the best pattern to handle such things
+    dashboardWithDate: Ember.Route.extend
+      route: '/dashboard/:date'
+      connectOutlets: (router, params) ->
+        router.jumpTo(date: params.date)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'

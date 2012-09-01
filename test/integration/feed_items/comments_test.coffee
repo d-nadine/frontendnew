@@ -1,6 +1,9 @@
 test "comments are displayed in item's details", ->
   expect(1)
 
+  Ember.run ->
+    Radium.get('router').transitionTo('root.dashboard')
+
   todo = F.todos('default')
 
   waitForResource todo, (el) ->
@@ -11,6 +14,9 @@ test "comments are displayed in item's details", ->
 
 test 'comment can be added to feed item', ->
   expect(2)
+
+  Ember.run ->
+    Radium.get('router').transitionTo('root.dashboard')
 
   event = jQuery.Event("keypress")
   event.keyCode = 13

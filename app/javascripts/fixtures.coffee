@@ -22,9 +22,28 @@ window.Fixtures = Fixtures = Ember.Object.create
   fetch: (type, name) ->
     @fixturesForType(type).get(name)
 
+  # TODO: extract this as some kind of hook
+  afterAdd: (type, fixtureSet, fixture) ->
+    if type == Radium.FeedSection
+      # automatically add next_date and previous_date
+      fixtures = []
+      fixtureSet.forEach (name, f) -> fixtures.pushObject(f)
+
+      fixtures = fixtures.sort (a, b) ->
+        if a.get('data').id > b.get('data').id then 1 else -1
+
+      fixtures.forEach (fixture, i) ->
+        if previous = fixtures.objectAt(i - 1)
+          previous.get('data').next_date = fixture.get('data').id
+          fixture.get('data').previous_date = previous.get('data').id
+        if next = fixtures.objectAt(i + 1)
+          next.get('data').previous_date = fixture.get('data').id
+          fixture.get('data').next_date = next.get('data').id
+
   addFixture: (type, fixture) ->
     fixtures = @fixturesForType(type)
     fixtures.set(fixture.get('name'), fixture)
+    @afterAdd(type, fixtures, fixture)
 
   fixturesForType: (type) ->
     map = @get('fixtures')
@@ -94,6 +113,42 @@ Fixtures.add Radium.FeedSection,
   feed_section_4:
     id: '2012-07-14'
     date: '2012-07-14T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_5:
+    id: '2012-07-13'
+    date: '2012-07-13T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_6:
+    id: '2012-07-12'
+    date: '2012-07-12T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_7:
+    id: '2012-07-11'
+    date: '2012-07-11T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_8:
+    id: '2012-07-10'
+    date: '2012-07-10T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_9:
+    id: '2012-07-09'
+    date: '2012-07-09T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_10:
+    id: '2012-07-08'
+    date: '2012-07-08T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_11:
+    id: '2012-07-07'
+    date: '2012-07-07T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_12:
+    id: '2012-07-06'
+    date: '2012-07-06T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  feed_section_13:
+    id: '2012-07-05'
+    date: '2012-07-05T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,
