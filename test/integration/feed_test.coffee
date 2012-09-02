@@ -22,7 +22,7 @@ test 'feed sections should contain todo items', ->
     assertContains el, 'Finish first product draft'
 
 test 'when scrolling back, feed loads older items', ->
-  expect 6
+  expect 5
 
   Ember.run ->
     Radium.get('router').transitionTo('root.dashboard')
@@ -38,7 +38,7 @@ test 'when scrolling back, feed loads older items', ->
     Ember.run ->
       controller.loadFeed back: true
 
-    equal $('#mini-loader').css('display'), 'block', 'loader should be visible while loading'
+    waitFor (-> $('#mini-loader').css('display') == 'block' ), (-> ), 'block', 'loader should be visible while loading'
 
     section = F.feed_sections('feed_section_3')
     waitForResource section, ->

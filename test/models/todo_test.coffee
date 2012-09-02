@@ -10,6 +10,6 @@ test 'reference property correctly sets reference.type and reference.id', ->
     todo.set 'reference', meeting
 
   equal todo.get('reference'), meeting, ''
-  equal todo.get('referenceType'), 'meeting', ''
   equal todo.get('data.reference.id'), meeting.get('id'), ''
+  equal todo.get('data.reference.type'), 'meeting', ''
 
