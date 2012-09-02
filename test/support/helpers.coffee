@@ -20,7 +20,7 @@ window.waitFor = (condition, callback, message) ->
     delta = new Date().getTime() - startedAt
     if delta > defaultTimeout
       start()
-      ok false, message
+      throw message
     else
       if condition()
         start()
@@ -44,13 +44,15 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
-window.waitForResource = (resource, callback) ->
+window.waitForResource = (resource, callback, message) ->
   id = resource.get('id')
   type = resource.constructor
   domClass = resource.get('domClass')
   selector = ".#{domClass}"
+  message ?= "Could not find #{type} with id #{id} on the page"
 
-  waitForSelector selector, callback, "Could not find #{type} with id #{id} on the page"
+
+  waitForSelector selector, callback, message
 
 window.elementFor = (resource) ->
   id = resource.get('id')
@@ -74,7 +76,6 @@ contains = (element, text) ->
     queryText: text
   }
 
-
 window.assertContains = (element, text) ->
   match = contains(element, text)
   ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
@@ -82,3 +83,17 @@ window.assertContains = (element, text) ->
 window.assertNotContains = (element, text) ->
   match = contains(element, text)
   ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
+
+window.fillIn = (selector, text) ->
+  # keyup with any char to trigger bindings sync
+  event = jQuery.Event("keyup")
+  event.keyCode = 46
+  $(selector).val(text).trigger(event)
+
+window.enterNewLine = (selector) ->
+  event = jQuery.Event("keypress")
+  event.keyCode = 13
+  $(selector).trigger(event)
+
+window.assertResource = (resource) ->
+  waitForResource resource, (-> )

@@ -14,7 +14,7 @@ Radium.Router = Ember.Router.extend
   jumpTo: (query) ->
     query   ?= {}
     sections = Radium.store.expandableArrayFor Radium.FeedSection
-    sections.load Radium.store.find(Radium.FeedSection, query)
+    sections.load Radium.FeedSection.find(query)
 
     @get('mainController').connectOutlet('content', 'feed', sections)
     Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")

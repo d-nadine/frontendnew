@@ -3,9 +3,11 @@
 Radium.Core = DS.Model.extend
   createdAt: DS.attr("datetime", key: "created_at")
   updatedAt: DS.attr("datetime", key: "updated_at")
+
   type: (->
     Radium.Core.typeToString(@constructor)
   ).property()
+
   domClass: (->
     "#{@get('type')}_#{@get('id')}"
   ).property('type', 'id')
@@ -22,3 +24,6 @@ Radium.Core.reopenClass
 
   typeToString: (type) ->
     type.toString().split('.').slice(-1)[0].underscore()
+
+  isInStore: (id)->
+    !!Radium.store.typeMapFor(this).idToCid[id]

@@ -4,13 +4,13 @@ Radium.Utils = Em.Object.create
       $(".#{className}").ScrollTo()
 
     observer = ->
-      if collection.get('isLoaded')
-        collection.removeObserver('isLoaded', observer)
+      if collection.get('isLoading')
+        collection.removeObserver('isLoading', observer)
         Ember.run.next this, scrollTo
 
-    if collection.get('isLoaded')
+    if collection.get('isLoading')
       scrollTo()
     else
-      collection.addObserver 'isLoaded', observer
+      collection.addObserver 'isLoading', observer
 
 

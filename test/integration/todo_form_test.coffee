@@ -18,18 +18,9 @@ test 'todo can be added', ->
         Ember.run ->
           $('.more-options', el).click()
 
-        # keyup with any char to trigger bindings sync
-        event = jQuery.Event("keyup")
-        event.keyCode = 46
-        $('#finish-by-date').val(tomorrow.get('id')).trigger(event)
-
-        event = jQuery.Event("keyup")
-        event.keyCode = 46
-        $('#description').val('New todo').trigger(event)
-
-        event = jQuery.Event("keypress")
-        event.keyCode = 13
-        $('#description').trigger(event)
+        fillIn '#finish-by-date', tomorrow.get('id')
+        fillIn '#description', 'New todo'
+        enterNewLine('#description')
 
         waitForResource tomorrow, (el) ->
           assertContains el, 'New todo'

@@ -68,10 +68,9 @@ window.Fixtures = Fixtures = Ember.Object.create
       type.FIXTURES ?= []
       fixtures.forEach (name, fixture) ->
         data = fixture.get('data')
+        type.FIXTURES.pushObject(data)
         if now
           Radium.store.load(type, data.id, data)
-        else
-          type.FIXTURES.pushObject(data)
 
 window.F = F = Fixtures
 
