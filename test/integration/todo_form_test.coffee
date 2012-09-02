@@ -13,15 +13,23 @@ test 'todo can be added', ->
       el.click()
 
       waitForSelector '.radium-form', (el) ->
-        $('#finish-by-date', el).val('2012-09-01')
+        tomorrow = F.feed_sections('tomorrow')
+
+        Ember.run ->
+          $('.more-options', el).click()
+
+        # keyup with any char to trigger bindings sync
+        event = jQuery.Event("keyup")
+        event.keyCode = 46
+        $('#finish-by-date').val(tomorrow.get('id')).trigger(event)
+
+        event = jQuery.Event("keyup")
+        event.keyCode = 46
+        $('#description').val('New todo').trigger(event)
 
         event = jQuery.Event("keypress")
         event.keyCode = 13
-        $('#description', el).val('New todo').trigger(event)
+        $('#description').trigger(event)
 
-        wait 100, ->
-          controller = Radium.get('router.feedController')
-          controller.loadFeed forward: true
-
-          waitForResource Radium.store.find(Radium.FeedSection, '2012-09-01'), (el) ->
-            assertContains el, 'Saturday, September 1, 2012'
+        waitForResource tomorrow, (el) ->
+          assertContains el, 'New todo'

@@ -33,8 +33,8 @@ DS.attr.transforms.dealState = {
   },
   to: function(deserialized) {
     var state;
-    
-    if (deserialized == null || 
+
+    if (deserialized == null ||
       ['pending', 'closed', 'paid', 'rejected'].indexOf(deserialized) < 0) {
       state = 'pending';
     } else {
@@ -55,8 +55,8 @@ DS.attr.transforms.todoKind = {
   },
   to: function(deserialized) {
     var kind = deserialized;
-    
-    if (deserialized == null || 
+
+    if (deserialized == null ||
       ['call', 'general', 'support'].indexOf(deserialized) < 0) {
       kind = 'pending';
     }

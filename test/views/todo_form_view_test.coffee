@@ -5,11 +5,13 @@ view = null
 # easier to just load it all at once
 Fixtures.loadAll(now: true)
 Radium.initialize()
+fakeController = Ember.Object.create
+  pushItem: ->
 
 module "Feed items",
   teardown: ->
     Ember.run ->
-      if view
+      if view && view.remove
         view.remove()
     view = null
 
@@ -17,16 +19,18 @@ test 'headerContext displays proper data', ->
   meeting = F.meetings('default')
 
   Ember.run ->
-    view = Radium.TodoFormView.create(selection: meeting)
+    view = Radium.TodoFormView.create(selection: meeting, controller: fakeController)
     view.append()
 
-  equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Saturday, 9/1/2012', ''
+  view.set 'finishBy', '2012-10-10'
+
+  equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Wednesday, 10/10/2012', ''
 
 test 'submiting form sets proper data and reference on todo', ->
   meeting = F.meetings('default')
 
   Ember.run ->
-    view = Radium.TodoFormView.create(selection: meeting)
+    view = Radium.TodoFormView.create(selection: meeting, controller: fakeController)
     view.append()
 
   view.set 'descriptionField.value', 'Get notes for a meeting'

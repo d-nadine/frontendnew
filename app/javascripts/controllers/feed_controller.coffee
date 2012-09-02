@@ -1,6 +1,7 @@
 Radium.FeedController = Em.ArrayController.extend
   sortAscending: false
   sortProperties: ['id']
+
   canScroll: true
   isLoading: false
 
@@ -13,19 +14,26 @@ Radium.FeedController = Em.ArrayController.extend
   ).observes('content.isLoading', 'rendering')
 
   pushItem: (item) ->
-    date = item.get('finishBy').toFormattedString('%Y-%m-%d')
-    section = @find (section) -> section.get('id') == date
-    unless section
-      # we don't want to commit sections, so just put them on separate
-      # transaction
-      transaction = Radium.store.transaction()
-      section = transaction.createRecord Radium.FeedSection,
-        id: date
-        date: Ember.DateTime.parse(date, '%Y-%m-%d')
+    # since we need to get feed section for given date from the API,
+    # we need to be sure that item is already added to a server
+    self = this
 
-      Radium.FeedSection.fixLinks(section)
+    addItem = ->
+      if !item.get('isNew')
+        date = item.get('finishBy').toFormattedString('%Y-%m-%d')
+        section = Radium.store.find Radium.FeedSection, date
 
-    section.pushItem(item)
+        self.get('content').loadRecord section
+
+        section.pushItem(item)
+
+        item.removeObserver 'isNew', addItem
+
+    if item.get('isNew')
+      item.addObserver 'isNew', addItem
+    else
+      addItem()
+
 
   loadFeed: (options) ->
     return unless @get 'canScroll'

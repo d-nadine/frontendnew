@@ -140,7 +140,10 @@ Radium.TodoFormView = Radium.FormView.extend
     if selection
       todo.set 'reference', selection
 
-    Radium.get('router.feedController').pushItem(todo)
+    # TODO: feed sections could automatically handle adding
+    # new items, but I'm not sure how would hat behave, it needs
+    # a check with API or a lot of items
+    @get('controller').pushItem(todo)
     Radium.store.commit()
 
     @_super()

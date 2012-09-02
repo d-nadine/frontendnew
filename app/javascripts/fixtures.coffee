@@ -150,6 +150,30 @@ Fixtures.add Radium.FeedSection,
     id: '2012-07-05'
     date: '2012-07-05T00:00:00Z'
     item_ids: [[Radium.Deal, 2]]
+  section_2012_08_31:
+    id: '2012-08-31'
+    date: '2012-08-31T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  today:
+    id: Ember.DateTime.create().toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  tomorrow:
+    id: Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  week_from_now:
+    id: Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  two_weeks_from_now:
+    id: Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  month_from_now:
+    id: Ember.DateTime.create().advance(day: 30).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 30).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,
   default:
