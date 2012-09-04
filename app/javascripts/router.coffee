@@ -10,6 +10,7 @@ Radium.Router = Ember.Router.extend
   showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard')
+  setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
   jumpTo: (query) ->
     query   ?= {}
@@ -58,12 +59,34 @@ Radium.Router = Ember.Router.extend
       router.set 'usersController', usersController
 
       router.get('applicationController').connectOutlet('main')
+      router.get('applicationController').connectOutlet('sidebar', 'sidebar')
       router.get('applicationController').connectOutlet('topbar', 'topbar')
 
     dashboard: Ember.Route.extend
       route: '/'
       connectOutlets: (router) ->
         router.jumpTo()
+
+      all: Ember.Route.extend
+        route: '/'
+        connectOutlets: (router) ->
+          router.get('feedController').set('typeFilter', null)
+
+      byType: Ember.Route.extend
+        route: '/type/:type'
+        connectOutlets: (router, type) ->
+          if type != 'all'
+            router.get('feedController').set('typeFilter', type)
+          else
+            router.transitionTo('root.dashboard.all')
+
+        # FIXME: for some weird reason, there is no url for this route,
+        #        even though I use href=true
+        serialize: (router, type) ->
+          {type: type}
+
+        deserialize: (router, params) ->
+          params.type
 
     # TODO: find out what's the best pattern to handle such things
     dashboardWithDate: Ember.Route.extend

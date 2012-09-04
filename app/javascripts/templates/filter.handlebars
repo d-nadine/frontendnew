@@ -1,0 +1,9 @@
+{{#with view.content}}
+  <a href="#" {{action setFilter type href=true}}>
+    {{label}}
+    {{#if view.isSelected}}
+      <i class="icon-ok pull-right"></i>
+    {{/if}}
+  </a>
+{{/with}}
+
