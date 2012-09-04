@@ -68,6 +68,10 @@ Radium.FeedController = Em.ArrayController.extend
     else
       addItem()
 
+  loadAfterSection: (section, limit) ->
+    @get('content').load Radium.FeedSection.find
+      after: section.get('id')
+      limit: limit
 
   loadFeed: (options) ->
     return unless @get 'canScroll'
@@ -83,4 +87,4 @@ Radium.FeedController = Em.ArrayController.extend
         date = item.get('previousDate')
 
     if date
-      @get('content').loadRecord Radium.store.find(Radium.FeedSection, date)
+      @get('content').loadRecord Radium.FeedSection.find(date)

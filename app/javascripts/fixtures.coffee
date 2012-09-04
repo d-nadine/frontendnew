@@ -95,7 +95,7 @@ Fixtures.add Radium.FeedSection,
       [Radium.CallList, 1]
       [Radium.Campaign, 1]
     ]
-  feed_section_2:
+  feed_section_2012_08_17:
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
     date: '2012-08-17T00:00:00Z'
@@ -170,8 +170,8 @@ Fixtures.add Radium.FeedSection,
     date: "#{Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')}T00:00:00Z"
     item_ids: [[Radium.Deal, 2]]
   month_from_now:
-    id: Ember.DateTime.create().advance(day: 30).toFormattedString('%Y-%m-%d')
-    date: "#{Ember.DateTime.create().advance(day: 30).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    id: Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
     item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,

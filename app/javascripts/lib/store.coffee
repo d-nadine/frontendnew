@@ -29,6 +29,22 @@ DS.RadiumStore = DS.Store.extend
             if a == b then 0 else ( if a > b then 1 else -1 )
 
           deltas.slice(0, 2).map (delta) -> delta[1]
+        else if item = (query.before || query.after)
+          date = Date.parse("#{item}T00:00:00Z")
+          fixtures = fixtures.filter (f) ->
+            fixtureDate = Date.parse(f.date)
+            if query.before
+              fixtureDate < date
+            else
+              fixtureDate > date
+
+          sort = if query.before then -1 else 1
+          fixtures = fixtures.sort (a, b) ->
+            a = Date.parse(a.date)
+            b = Date.parse(b.date)
+            if a == b then 0 else ( if a > b then sort else sort * -1 )
+
+          fixtures.slice(0, query.limit || 1)
         else
           fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
       else

@@ -1,6 +1,7 @@
 Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
   classNameBindings: ['expanded']
+
   init: ->
     @_super.apply(this, arguments)
 
