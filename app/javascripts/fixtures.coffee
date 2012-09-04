@@ -55,7 +55,7 @@ window.Fixtures = Fixtures = Ember.Object.create
       Fixtures[Radium.Core.typeToString(type).pluralize()] = (name) ->
         fixture = Fixtures.fetch(type, name)
         data    = fixture.get('data')
-        Radium.store.load(type, data.id, data)
+        Radium.store.load(type, data.id, data) unless type.isInStore(data.id)
         Radium.store.find(type, data.id)
 
     fixtures
