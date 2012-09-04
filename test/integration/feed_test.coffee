@@ -36,7 +36,7 @@ test 'when scrolling back, feed loads older items', ->
     Ember.run ->
       controller.loadFeed back: true
 
-    waitFor (-> console.log('wait'); $('#mini-loader').css('display') == 'block' ), (-> ), 'loader should be visible while loading'
+    waitFor (-> $('#mini-loader').css('display') == 'block' ), (-> ), 'loader should be visible while loading'
 
     section = F.feed_sections('feed_section_3')
     waitForResource section, ->
