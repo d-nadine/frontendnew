@@ -8,11 +8,14 @@ test 'gap element is shown when there is a gap', ->
 
   waitForResource section, ->
     addTodo item, month_from_now_section, ->
-      nextSection = F.feed_sections 'section_2012_08_31'
 
-      assertContains "Some of the items are not loaded"
-      ok !$(nextSection.get('domClass')).length, 'next section is not loaded'
+      # need to wait for store, gap items are not available through FIXTURES
+      wait 100, ->
+        nextSection = F.feed_sections 'section_2012_08_31'
 
-      $('.gap').click()
-      waitForResource nextSection, ->
-        ok true
+        assertContains "5 days are not loaded"
+        ok !$(nextSection.get('domClass')).length, 'next section is not loaded'
+
+        $('.gap').click()
+        waitForResource nextSection, ->
+          ok true

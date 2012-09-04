@@ -52,6 +52,7 @@ require 'radium/models/email'
 require 'radium/models/group'
 require 'radium/models/phone_call'
 require 'radium/models/sms'
+require 'radium/models/gap'
 
 require 'radium/controllers/application_controller'
 require 'radium/controllers/me_controller'

@@ -449,5 +449,7 @@ Fixtures.add Radium.User,
       huge_url: '/images/fallback/huge_default.png'
     account: 2
 
+Radium.Gap.FIXTURES = []
+
 
 Fixtures.loadAll()
