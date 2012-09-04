@@ -54,10 +54,12 @@ Radium.FeedController = Em.ArrayController.extend
         section = Radium.FeedSection.find date
 
         sections = self.get 'content'
-        sections.loadRecord section
-        Radium.Utils.scrollWhenLoaded sections, "feed_section_#{date}"
+        sections.loadRecord section unless sections.contains(section)
 
         section.pushItem(item)
+
+        Radium.Utils.scrollWhenLoaded sections, item.get('domClass'), ->
+          $(".#{item.get('domClass')}").effect("highlight", {}, 1000)
 
         item.removeObserver 'isNew', addItem
 
