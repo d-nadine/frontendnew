@@ -27,7 +27,7 @@ Radium.TodoFormView = Radium.FormView.extend
 
   headerContext: (->
     selection = @get('selection')
-    currentYear = Radium.get('router.applicationControllr.year')
+    currentYear = (new Date()).getFullYear()
     date = @get('finishBy')
     sameYearString = '%A, %e/%D'
     differentYearString = '%A, %e/%D/%Y'

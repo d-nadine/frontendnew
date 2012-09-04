@@ -15,6 +15,18 @@ module "Feed items",
         view.remove()
     view = null
 
+test 'headerContext displays year if year is other than current', ->
+  meeting = F.meetings('default')
+
+  Ember.run ->
+    view = Radium.TodoFormView.create(selection: meeting, controller: fakeController)
+    view.append()
+
+  view.set 'finishBy', '2013-01-01'
+
+  equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Tuesday, 1/1/2013', ''
+
+
 test 'headerContext displays proper data', ->
   meeting = F.meetings('default')
 
@@ -24,7 +36,7 @@ test 'headerContext displays proper data', ->
 
   view.set 'finishBy', '2012-10-10'
 
-  equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Wednesday, 10/10/2012', ''
+  equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Wednesday, 10/10', ''
 
 test 'submiting form sets proper data and reference on todo', ->
   meeting = F.meetings('default')
