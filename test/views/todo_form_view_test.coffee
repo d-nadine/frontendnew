@@ -3,8 +3,8 @@ view = null
 # loading too much data doesn't really matter for this file,
 # but fixtures can't load their dependencies yet, so it's
 # easier to just load it all at once
+app '/'
 Fixtures.loadAll(now: true)
-Radium.initialize()
 fakeController = Ember.Object.create
   pushItem: ->
 

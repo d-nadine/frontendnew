@@ -1,5 +1,7 @@
 module 'Radium.Core'
 
+app '/'
+
 test 'it returns type', ->
   Radium.SomeModel = Radium.Core.extend()
   record = Radium.store.createRecord(Radium.SomeModel, {})

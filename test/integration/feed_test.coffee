@@ -1,60 +1,53 @@
 test 'feed sections with dates should be displayed', ->
-  expect 1
+  app '/', ->
+    todo = F.todos('default')
 
-  Ember.run ->
-    Radium.get('router').transitionTo('root.dashboard')
-
-  section = F.feed_sections('default')
-
-  waitForResource section, ->
-    headers = $('#feed .page-header h3')
-    assertContains headers, 'Friday, August 17, 2012.*Tuesday, August 14, 2012'
+    waitForResource todo, ->
+      headers = $('#feed .page-header h3')
+      assertContains headers, 'Friday, August 17, 2012.*Tuesday, August 14, 2012'
 
 test 'feed sections should contain todo items', ->
-  expect 1
+  app '/', ->
 
-  Ember.run ->
-    Radium.get('router').transitionTo('root.dashboard')
+    todo = F.todos('default')
 
-  todo = F.todos('default')
-
-  waitForResource todo, (el) ->
-    assertContains el, 'Finish first product draft'
+    waitForResource todo, (el) ->
+      assertContains el, 'Finish first product draft'
 
 test 'when scrolling back, feed loads older items', ->
-  Ember.run ->
-    Radium.get('router').transitionTo('root.dashboard')
+  app '/', ->
 
-  controller = Radium.get('router.feedController')
+    controller = Radium.get('router.feedController')
 
-  waitFor (-> controller.get('length') > 0 ), ->
-    assertContains 'Friday, August 17, 2012.*Tuesday, August 14, 2012'
-    assertNotContains 'Sunday, July 15, 2012'
+    waitFor (-> controller.get('length') > 0 ), ->
+      assertContains 'Friday, August 17, 2012.*Tuesday, August 14, 2012'
+      assertNotContains 'Sunday, July 15, 2012'
 
-    equal $('#mini-loader').css('display'), 'none', 'loader should be hidden before loading'
+      equal $('#mini-loader').css('display'), 'none', 'loader should be hidden before loading'
 
-    Ember.run ->
-      controller.loadFeed back: true
+      Ember.run ->
+        controller.loadFeed back: true
 
-    waitFor (-> $('#mini-loader').css('display') == 'block' ), (-> ), 'loader should be visible while loading'
+      waitFor (-> $('#mini-loader').css('display') == 'block' ), (-> ), 'loader should be visible while loading'
 
-    section = F.feed_sections('feed_section_3')
-    waitForResource section, ->
-      assertContains 'Sunday, July 15, 2012'
-      waitFor (-> $('#mini-loader').css('display') == 'none' ), ->
-        ok true, 'loader should be hidden after data is loaded'
+      section = F.feed_sections('feed_section_2012_07_15')
+      waitForResource section, ->
+        assertContains 'Sunday, July 15, 2012'
+        waitFor (-> $('#mini-loader').css('display') == 'none' ), ->
+          ok true, 'loader should be hidden after data is loaded'
 
 test 'when scrolling forward, feed loads newer items', ->
-  expect 1
+  expect 2
 
-  Ember.run ->
-    Radium.get('router').transitionTo('dashboardWithDate', date: '2012-07-15')
+  app '/dashboard/2012-07-15', ->
 
-  section = F.feed_sections('feed_section_3')
-  waitForResource section, ->
-    controller = Radium.get('router.feedController')
-    controller.loadFeed forward: true
-
-    section = F.feed_sections('default')
+    section = F.feed_sections('feed_section_2012_07_15')
     waitForResource section, ->
-      assertContains 'Friday, August 17, 2012'
+      assertNotContains 'Tuesday, August 14, 2012'
+
+      controller = Radium.get('router.feedController')
+      controller.loadFeed forward: true
+
+      section = F.feed_sections('default')
+      waitFor (-> $('#main-feed').text().match(/Tuesday, August 14, 2012/) ), ->
+        assertContains 'Tuesday, August 14, 2012'

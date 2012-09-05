@@ -1,3 +1,4 @@
+app '/'
 Fixtures.loadAll(now: true)
 
 module 'Radium.Todo'

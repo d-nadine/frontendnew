@@ -26,11 +26,13 @@ Radium.FilteredCollectionMixin = Em.Mixin.create
   ).observes('content.arrangedContent.length')
 
   notifyCollectionChanged: ->
-    length = @get('content.arrangedContent.length')
-    if length > 0
-      @set 'parentView.justRendered', false
+    if parentView = @get('parentView')
+      length = @get('content.arrangedContent.length')
+      if length > 0
+        @set 'parentView.justRendered', false
 
-    @get('parentView').notifyCollectionChanged @toString(), length
+      if parentView.notifyCollectionChanged
+        parentView.notifyCollectionChanged @toString(), length
 
   filterObserver: (->
     @get('content').notifyPropertyChange('filterProperties')

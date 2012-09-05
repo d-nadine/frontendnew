@@ -39,8 +39,6 @@ require 'radium/lib/filtered_array'
 
 require 'radium/router'
 
-require 'radium/states/error'
-
 require 'radium/mixins/views/slider'
 require 'radium/mixins/noop'
 require 'radium/mixins/infinite_scroller'
@@ -159,5 +157,3 @@ require 'radium/templates/layouts/feed_item_details_layout'
 require 'radium/templates/layouts/form_layout'
 
 require 'radium/fixtures'
-
-Radium.createApp()
