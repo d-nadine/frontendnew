@@ -1,0 +1,8 @@
+<div class="page-header">
+  {{#with view.content.date}}
+    {{! TODO: formatDate should handle lazy evaluation }}
+    <h3>{{formatDate this format="%A, %B %D, %Y"}}</h3>
+  {{/with}}
+</div>
+{{collection Radium.FeedItemsListView collectionBinding="view.content.items.unclustered"}}
+{{collection Radium.ClusterListView collectionBinding="view.content.items.clusters"}}

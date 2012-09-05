@@ -13,7 +13,18 @@ DS.RadiumStore = DS.Store.extend
       @plurals[name] || name + "s"
 
     queryFixtures: (fixtures, query, type) ->
-      if type == Radium.FeedSection
+      if type == Radium.Gap
+        first = Date.parse "#{query.first}T00:00:00Z"
+        last  = Date.parse "#{query.last}T00:00:00Z"
+
+        sections = []
+        Radium.FeedSection.FIXTURES.forEach (fixture) ->
+          date = Date.parse fixture.date
+          sections.pushObject fixture.id if date > first && date < last
+
+        [{ id: "#{query.first}-#{query.last}", section_ids: sections }]
+
+      else if type == Radium.FeedSection
         if query.date
           # Chrome deals with parsing dates in format yyyy-mm-dd,
           # but phantom (and maybe some of the browsers) does not
@@ -29,6 +40,22 @@ DS.RadiumStore = DS.Store.extend
             if a == b then 0 else ( if a > b then 1 else -1 )
 
           deltas.slice(0, 2).map (delta) -> delta[1]
+        else if item = (query.before || query.after)
+          date = Date.parse("#{item}T00:00:00Z")
+          fixtures = fixtures.filter (f) ->
+            fixtureDate = Date.parse(f.date)
+            if query.before
+              fixtureDate < date
+            else
+              fixtureDate > date
+
+          sort = if query.before then -1 else 1
+          fixtures = fixtures.sort (a, b) ->
+            a = Date.parse(a.date)
+            b = Date.parse(b.date)
+            if a == b then 0 else ( if a > b then sort else sort * -1 )
+
+          fixtures.slice(0, query.limit || 1)
         else
           fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
       else

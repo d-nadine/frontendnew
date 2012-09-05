@@ -1,6 +1,7 @@
 Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
   classNameBindings: ['expanded']
+
   init: ->
     @_super.apply(this, arguments)
 
@@ -36,6 +37,17 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
       ).observes('content.referenceType')
 
     @set 'currentView', view
+
+  toggleTodoForm: ->
+    feedDetailsContainer = @get('feedDetailsContainer')
+
+    if feedDetailsContainer.get 'currentView'
+      feedDetailsContainer.set 'currentView', null
+    else
+      todoFormView = Radium.TodoFormView.create()
+      todoFormView.set 'selection', @get('content')
+
+      feedDetailsContainer.set 'currentView', todoFormView
 
   expandOrShrink: (->
     feedDetailsContainer = @get('feedDetailsContainer')

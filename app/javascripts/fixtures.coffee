@@ -55,7 +55,7 @@ window.Fixtures = Fixtures = Ember.Object.create
       Fixtures[Radium.Core.typeToString(type).pluralize()] = (name) ->
         fixture = Fixtures.fetch(type, name)
         data    = fixture.get('data')
-        Radium.store.load(type, data.id, data)
+        Radium.store.load(type, data.id, data) unless type.isInStore(data.id)
         Radium.store.find(type, data.id)
 
     fixtures
@@ -68,10 +68,9 @@ window.Fixtures = Fixtures = Ember.Object.create
       type.FIXTURES ?= []
       fixtures.forEach (name, fixture) ->
         data = fixture.get('data')
+        type.FIXTURES.pushObject(data)
         if now
           Radium.store.load(type, data.id, data)
-        else
-          type.FIXTURES.pushObject(data)
 
 window.F = F = Fixtures
 
@@ -96,7 +95,7 @@ Fixtures.add Radium.FeedSection,
       [Radium.CallList, 1]
       [Radium.Campaign, 1]
     ]
-  feed_section_2:
+  feed_section_2012_08_17:
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
     date: '2012-08-17T00:00:00Z'
@@ -149,6 +148,30 @@ Fixtures.add Radium.FeedSection,
   feed_section_13:
     id: '2012-07-05'
     date: '2012-07-05T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  section_2012_08_31:
+    id: '2012-08-31'
+    date: '2012-08-31T00:00:00Z'
+    item_ids: [[Radium.Deal, 2]]
+  today:
+    id: Ember.DateTime.create().toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  tomorrow:
+    id: Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  week_from_now:
+    id: Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  two_weeks_from_now:
+    id: Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  month_from_now:
+    id: Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')
+    date: "#{Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
     item_ids: [[Radium.Deal, 2]]
 
 Fixtures.add Radium.CallList,
@@ -425,6 +448,8 @@ Fixtures.add Radium.User,
       large_url: '/images/fallback/large_default.png'
       huge_url: '/images/fallback/huge_default.png'
     account: 2
+
+Radium.Gap.FIXTURES = []
 
 
 Fixtures.loadAll()

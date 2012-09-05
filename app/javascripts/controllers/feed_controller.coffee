@@ -1,6 +1,7 @@
 Radium.FeedController = Em.ArrayController.extend
   sortAscending: false
   sortProperties: ['id']
+
   canScroll: true
   isLoading: false
 
@@ -12,6 +13,66 @@ Radium.FeedController = Em.ArrayController.extend
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
 
+  pushItem: (item) ->
+    self = this
+
+    date = item.get('finishBy').toFormattedString('%Y-%m-%d')
+
+    # check if there is a straight way between new section and the
+    # first or last visible section
+    first = @get 'firstObject'
+    last  = @get 'lastObject'
+
+    current   = null
+    direction = null
+
+    if date > first.get 'id'
+      current   = first
+      direction = 'next'
+    else if date < last.get 'id'
+      current   = last
+      direction = 'previous'
+
+    if current
+      # this means that new section will be 'above' the first visible section
+      loadSection = (current) ->
+        nextDate = current.get "#{direction}Date"
+        if nextDate == date
+          true
+        else if Radium.FeedSection.isInStore nextDate
+          current = Radium.FeedSection.find nextDate
+          self.get('content').loadRecord current
+
+          loadSection current
+
+      loadSection current
+
+    # since we need to get feed section for given date from the API,
+    # we need to be sure that item is already added to a server
+    addItem = ->
+      if !item.get('isNew')
+        section = Radium.FeedSection.find date
+
+        sections = self.get 'content'
+        sections.loadRecord section unless sections.contains(section)
+
+        section.pushItem(item)
+
+        Radium.Utils.scrollWhenLoaded sections, item.get('domClass'), ->
+          $(".#{item.get('domClass')}").effect("highlight", {}, 1000)
+
+        item.removeObserver 'isNew', addItem
+
+    if item.get('isNew')
+      item.addObserver 'isNew', addItem
+    else
+      addItem()
+
+  loadAfterSection: (section, limit) ->
+    @get('content').load Radium.FeedSection.find
+      after: section.get('id')
+      limit: limit
+
   loadFeed: (options) ->
     return unless @get 'canScroll'
 
@@ -22,11 +83,8 @@ Radium.FeedController = Em.ArrayController.extend
         date = item.get('nextDate')
     else if options.back
       item = @get('lastObject')
-      console.log @get 'length'
-      console.log 'item', item
       if item
-        console.log item.get('previousDate')
         date = item.get('previousDate')
 
     if date
-      @get('content').loadRecord Radium.store.find(Radium.FeedSection, date)
+      @get('content').loadRecord Radium.FeedSection.find(date)

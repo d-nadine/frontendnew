@@ -9,8 +9,8 @@ window.wait = (timeout, callback) ->
   ), timeout)
 
 
-window.waitFor = (condition, callback, message) ->
-  message ?= 'waitFor timed out'
+window.waitFor = (condition, callback, messageOrCallback) ->
+  messageOrCallback ?= 'waitFor timed out'
 
   startedAt = new Date().getTime()
 
@@ -20,7 +20,10 @@ window.waitFor = (condition, callback, message) ->
     delta = new Date().getTime() - startedAt
     if delta > defaultTimeout
       start()
-      ok false, message
+      if messageOrCallback.call
+        messageOrCallback()
+      else
+        throw messageOrCallback
     else
       if condition()
         start()
@@ -44,13 +47,15 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
-window.waitForResource = (resource, callback) ->
+window.waitForResource = (resource, callback, message) ->
   id = resource.get('id')
   type = resource.constructor
   domClass = resource.get('domClass')
   selector = ".#{domClass}"
+  message ?= "Could not find #{type} with id #{id} on the page"
 
-  waitForSelector selector, callback, "Could not find #{type} with id #{id} on the page"
+
+  waitForSelector selector, callback, message
 
 window.elementFor = (resource) ->
   id = resource.get('id')
@@ -74,11 +79,34 @@ contains = (element, text) ->
     queryText: text
   }
 
-
 window.assertContains = (element, text) ->
-  match = contains(element, text)
-  ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
+  match = null
+  waitFor (->
+    match = contains(element, text)
+    match.result
+  ), (-> ok true ), (->
+    ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
+  )
 
 window.assertNotContains = (element, text) ->
-  match = contains(element, text)
-  ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
+  match = null
+  waitFor (->
+    match = contains(element, text)
+    !match.result
+  ), (-> ok true ), (->
+    ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
+  )
+
+window.fillIn = (selector, text) ->
+  # keyup with any char to trigger bindings sync
+  event = jQuery.Event("keyup")
+  event.keyCode = 46
+  $(selector).val(text).trigger(event)
+
+window.enterNewLine = (selector) ->
+  event = jQuery.Event("keypress")
+  event.keyCode = 13
+  $(selector).trigger(event)
+
+window.assertResource = (resource) ->
+  waitForResource resource, (-> )

@@ -7,7 +7,13 @@ Radium.reopen
   polymorphic: (key) ->
     idKey   = "data.#{key}.id"
     typeKey = "data.#{key}.type"
-    (->
+    ( (key, value) ->
+      if value
+        type = value.get 'type'
+        id   = value.get 'id'
+
+        @set "data.#{key}", { id: id, type: type }
+
       if type = @get(typeKey)
         type = Radium.Core.typeFromString(type)
         Radium.store.find type, @get(idKey)

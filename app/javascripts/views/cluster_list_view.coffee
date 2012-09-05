@@ -1,4 +1,4 @@
-Radium.ClusterListView = Ember.CollectionView.extend
+Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMixin,
   classNames: ['feed-cluster-list']
 
   itemViewClass: Ember.ContainerView.extend

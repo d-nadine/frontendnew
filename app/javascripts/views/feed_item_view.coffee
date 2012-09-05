@@ -6,5 +6,10 @@ Radium.FeedItemView = Em.View.extend
   titleBinding: Ember.Binding.oneWay('content.id')
   layoutName: 'feed_item_layout'
   expandedBinding: 'parentView.expanded'
+
   click: (event) ->
     @toggleProperty('expanded')
+
+  toggleTodoForm: (e) ->
+    e.stopPropagation()
+    @get('parentView').toggleTodoForm()

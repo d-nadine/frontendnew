@@ -1,16 +1,23 @@
 Radium.Utils = Em.Object.create
-  scrollWhenLoaded: (collection, className) ->
+  scrollWhenLoaded: (collection, className, callback) ->
     scrollTo = ->
-      $(".#{className}").ScrollTo()
+      Ember.run.next ->
+        element = $(".#{className}")
+
+        element.ScrollTo
+          duration: 500
+          offsetTop: 100
+          callback: ->
+            callback() if callback?
 
     observer = ->
-      if collection.get('isLoaded')
-        collection.removeObserver('isLoaded', observer)
-        Ember.run.next this, scrollTo
+      if !collection.get('isLoading')
+        collection.removeObserver('isLoading', observer)
+        scrollTo()
 
-    if collection.get('isLoaded')
-      scrollTo()
+    if collection.get('isLoading')
+      collection.addObserver 'isLoading', observer
     else
-      collection.addObserver 'isLoaded', observer
+      scrollTo()
 
 
