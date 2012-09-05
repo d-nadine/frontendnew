@@ -23,6 +23,7 @@ require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
 require 'radium/lib/filterable_mixin'
+require 'radium/lib/filtered_array'
 
 require 'radium/router'
 
@@ -142,7 +143,5 @@ require 'radium/templates/feed_section'
 require 'radium/templates/layouts/feed_item_layout'
 require 'radium/templates/layouts/feed_item_details_layout'
 require 'radium/templates/layouts/form_layout'
-
-Radium.FilteredArray = Ember.ArrayProxy.extend(Ember.FilterableMixin)
 
 require 'radium/fixtures'
