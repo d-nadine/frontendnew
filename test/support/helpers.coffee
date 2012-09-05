@@ -9,8 +9,8 @@ window.wait = (timeout, callback) ->
   ), timeout)
 
 
-window.waitFor = (condition, callback, message) ->
-  message ?= 'waitFor timed out'
+window.waitFor = (condition, callback, messageOrCallback) ->
+  messageOrCallback ?= 'waitFor timed out'
 
   startedAt = new Date().getTime()
 
@@ -20,7 +20,10 @@ window.waitFor = (condition, callback, message) ->
     delta = new Date().getTime() - startedAt
     if delta > defaultTimeout
       start()
-      throw message
+      if messageOrCallback.call
+        messageOrCallback()
+      else
+        throw messageOrCallback
     else
       if condition()
         start()
@@ -77,12 +80,22 @@ contains = (element, text) ->
   }
 
 window.assertContains = (element, text) ->
-  match = contains(element, text)
-  ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
+  match = null
+  waitFor (->
+    match = contains(element, text)
+    match.result
+  ), (-> ok true ), (->
+    ok match.result, "Could not find '#{match.queryText}' inside #{match.text}"
+  )
 
 window.assertNotContains = (element, text) ->
-  match = contains(element, text)
-  ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
+  match = null
+  waitFor (->
+    match = contains(element, text)
+    !match.result
+  ), (-> ok true ), (->
+    ok !match.result, "Found '#{match.queryText}' inside #{match.text}"
+  )
 
 window.fillIn = (selector, text) ->
   # keyup with any char to trigger bindings sync
