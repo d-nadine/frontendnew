@@ -85,6 +85,7 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
     unless cluster
       cluster = DS.RecordArray.create
         type: type
+        strType: Radium.Core.typeToString type
         content: Ember.A([])
         store: @get('store')
 

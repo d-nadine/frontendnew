@@ -7,6 +7,7 @@ Radium.Core = DS.Model.extend
   type: (->
     Radium.Core.typeToString(@constructor)
   ).property()
+  strTypeBinding: 'type'
 
   domClass: (->
     "#{@get('type')}_#{@get('id')}"

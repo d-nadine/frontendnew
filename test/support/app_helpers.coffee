@@ -1,6 +1,10 @@
 # helpers for interacting with the application through UI
 
-window.addTodo = (item, section, callback) ->
+window.addTodo = (item, section, options, callback) ->
+  if arguments.length == 3
+    callback = options
+    options = {}
+
   waitForResource item, (el) ->
     el.click()
 
@@ -12,8 +16,8 @@ window.addTodo = (item, section, callback) ->
           $('.more-options', el).click()
 
         fillIn '#finish-by-date', section.get('id')
-        fillIn '#description', 'New todo'
+        fillIn '#description', ( options.description || 'New todo' )
         enterNewLine('#description')
 
         waitForResource section, (el) ->
-          callback()
+          callback(el)

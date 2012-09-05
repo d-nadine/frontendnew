@@ -22,6 +22,7 @@ require 'radium/lib/expandable_record_array'
 require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
+require 'radium/lib/filterable_mixin'
 
 require 'radium/router'
 
@@ -30,6 +31,7 @@ require 'radium/states/error'
 require 'radium/mixins/views/slider'
 require 'radium/mixins/noop'
 require 'radium/mixins/infinite_scroller'
+require 'radium/mixins/filtered_collection_mixin'
 
 require 'radium/helpers/date_helper'
 require 'radium/helpers/time_helper'
@@ -140,5 +142,7 @@ require 'radium/templates/feed_section'
 require 'radium/templates/layouts/feed_item_layout'
 require 'radium/templates/layouts/feed_item_details_layout'
 require 'radium/templates/layouts/form_layout'
+
+Radium.FilteredArray = Ember.ArrayProxy.extend(Ember.FilterableMixin)
 
 require 'radium/fixtures'

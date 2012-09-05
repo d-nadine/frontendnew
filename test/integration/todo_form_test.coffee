@@ -24,3 +24,15 @@ test 'todo can be added', ->
 
         waitForResource tomorrow, (el) ->
           assertContains el, 'New todo'
+
+test 'todo is showed only once', ->
+
+  Ember.run ->
+    Radium.get('router').transitionTo('root.dashboard')
+
+  section = F.feed_sections('tomorrow')
+  todo = F.todos('call')
+
+  addTodo todo, section, { description: 'Nice todo' }, (sectionElement) ->
+    assertContains sectionElement, 'Nice todo'
+    assertNotContains sectionElement, 'Nice todo.*Nice todo'

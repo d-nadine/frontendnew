@@ -1,17 +1,5 @@
-Radium.ClusterListView = Ember.CollectionView.extend
+Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMixin,
   classNames: ['feed-cluster-list']
-
-  content: (->
-    if collection = @get('collection')
-      if type = @get('controller.typeFilter')
-        collection.filter (object) ->
-          # TODO: it could be unified with other filters, I think
-          #       I will need to change type to something else
-          #       ( get back to kind? )
-          object.get('type') == Radium.Core.typeFromString(type)
-      else
-        collection
-  ).property('collection.@each.type', 'controller.typeFilter')
 
   itemViewClass: Ember.ContainerView.extend
     childViews: []
