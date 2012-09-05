@@ -110,3 +110,19 @@ window.enterNewLine = (selector) ->
 
 window.assertResource = (resource) ->
   waitForResource resource, (-> )
+
+window.reset = ->
+  Em.run ->
+    if Radium.app
+      if Radium.store
+        Radium.store.destroy()
+      Radium.app.destroy()
+  $('#application').remove()
+  $('body').append( $('<div id="application"></div>') )
+
+window.app = (url) ->
+  reset()
+  Em.run ->
+    Radium.createApp()
+    Radium.app.initialize()
+    Radium.get('router').route(url)

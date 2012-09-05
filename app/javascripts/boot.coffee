@@ -13,4 +13,4 @@
 
 require 'radium/app'
 
-Radium.initialize()
+Radium.app.initialize()

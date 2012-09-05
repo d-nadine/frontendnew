@@ -1,13 +1,25 @@
 require 'radium/lib/store'
 require 'radium/lib/transforms'
 
-Radium = Em.Application.create
-  store: DS.RadiumStore.create()
+window.Radium = Em.Namespace.create
+  createApp: ->
+    app = Radium.App.create rootElement: $('#application')
+    $.each Radium, (key, value) ->
+      app[key] = value if value && value.isClass && key != 'constructor'
+
+    @app   = app
+    @store = app.store
+
+Radium.App = Em.Application.extend
+  initialize: ->
+    router = Radium.Router.create()
+    Radium.set('router', router)
+    @_super(router)
+
   init: ->
     @_super()
+    @store = DS.RadiumStore.create()
     @set('_api', $.cookie('user_api_key'))
-
-window.Radium = Radium
 
 $.ajaxSetup
   dataType: 'json'
@@ -145,3 +157,5 @@ require 'radium/templates/layouts/feed_item_details_layout'
 require 'radium/templates/layouts/form_layout'
 
 require 'radium/fixtures'
+
+Radium.createApp()
