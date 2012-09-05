@@ -28,7 +28,19 @@
 
 #feed {
 
+  .feed-section.hidden {
+    display: none;
+  }
+
+  .filtered-items-info {
+    cursor: default;
+  }
+
   .gap {
+    cursor: pointer;
+  }
+
+  .filtered-items-info, .gap {
     text-align: center;
     border-bottom: 1px dashed;
     border-top: 1px dashed;
@@ -36,7 +48,6 @@
     margin: 30px 0px 10px;
     border-color: #AAA;
     color: #666;
-    cursor: pointer;
   }
 
  .page-header h2 small {
