@@ -5,6 +5,9 @@ Radium.Inflector = Em.Object.create
   singularize: (str) ->
     str.replace(/s$/, '')
 
+  capitalize: (str) ->
+    str.replace(/^([a-z])/, (match) -> match.toUpperCase() )
+
   humanize: (lowerCaseAndUnderscoredWord) ->
     result = lowerCaseAndUnderscoredWord.toString()
     result = result.replace(/_id$/, "").
@@ -20,3 +23,6 @@ String.prototype.singularize = ->
 
 String.prototype.humanize = ->
   Radium.Inflector.humanize(this)
+
+String.prototype.capitalize = ->
+  Radium.Inflector.capitalize(this)
