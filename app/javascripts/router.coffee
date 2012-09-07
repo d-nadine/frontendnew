@@ -1,6 +1,6 @@
 Radium.Router = Ember.Router.extend
   location: 'history'
-  enableLogging: true
+  enableLogging: false
   initialState: 'loading'
 
   showUser: Ember.Route.transitionTo('root.users.user')

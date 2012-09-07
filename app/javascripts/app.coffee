@@ -1,13 +1,25 @@
 require 'radium/lib/store'
 require 'radium/lib/transforms'
 
-Radium = Em.Application.create
-  store: DS.RadiumStore.create()
+window.Radium = Em.Namespace.create
+  createApp: ->
+    app = Radium.App.create rootElement: $('#application')
+    $.each Radium, (key, value) ->
+      app[key] = value if value && value.isClass && key != 'constructor'
+
+    @app   = app
+    @store = app.store
+
+Radium.App = Em.Application.extend
+  initialize: ->
+    router = Radium.Router.create()
+    Radium.set('router', router)
+    @_super(router)
+
   init: ->
     @_super()
+    @store = DS.RadiumStore.create()
     @set('_api', $.cookie('user_api_key'))
-
-window.Radium = Radium
 
 $.ajaxSetup
   dataType: 'json'
@@ -23,10 +35,9 @@ require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
 require 'radium/lib/filterable_mixin'
+require 'radium/lib/filtered_array'
 
 require 'radium/router'
-
-require 'radium/states/error'
 
 require 'radium/mixins/views/slider'
 require 'radium/mixins/noop'
@@ -102,6 +113,7 @@ require 'radium/views/gap_view'
 require 'radium/views/feed_section_view'
 require 'radium/views/feed_filter_item_view'
 require 'radium/views/dashboard_feed_filter_view'
+require 'radium/views/filtered_items_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_todo_deal'
@@ -138,11 +150,10 @@ require 'radium/templates/cluster_item'
 require 'radium/templates/todo_form'
 require 'radium/templates/gap'
 require 'radium/templates/feed_section'
+require 'radium/templates/filtered_items_info'
 
 require 'radium/templates/layouts/feed_item_layout'
 require 'radium/templates/layouts/feed_item_details_layout'
 require 'radium/templates/layouts/form_layout'
-
-Radium.FilteredArray = Ember.ArrayProxy.extend(Ember.FilterableMixin)
 
 require 'radium/fixtures'

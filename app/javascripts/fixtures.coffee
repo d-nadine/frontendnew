@@ -105,7 +105,7 @@ Fixtures.add Radium.FeedSection,
       [Radium.Todo, 3]
       [Radium.Todo, 4]
     ]
-  feed_section_3:
+  feed_section_2012_07_15:
     id: '2012-07-15'
     date: '2012-07-15T00:00:00Z'
     item_ids: [[Radium.Meeting, 2]]

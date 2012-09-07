@@ -1,12 +1,13 @@
 view = null
 
-# loading too much data doesn't really matter for this file,
-# but fixtures can't load their dependencies yet, so it's
-# easier to just load it all at once
-Fixtures.loadAll(now: true)
-Radium.initialize()
-
 module "Feed items",
+  setup: ->
+    # loading too much data doesn't really matter for this file,
+    # but fixtures can't load their dependencies yet, so it's
+    # easier to just load it all at once
+    app '/'
+    Fixtures.loadAll(now: true)
+
   teardown: ->
     Ember.run ->
       view.remove()

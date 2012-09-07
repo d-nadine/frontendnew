@@ -1,3 +1,6 @@
+# TODO: I should not load app for unit tests...
+app('/')
+
 test 'clustered record array behaves as regular array when dealing with it', ->
   array = Radium.ClusteredRecordArray.create(store: Radium.store, clusterSize: 2)
 
