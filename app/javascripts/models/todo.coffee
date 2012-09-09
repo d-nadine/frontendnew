@@ -23,3 +23,5 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   canComplete: (->
     !!@get('user.apiKey')
   ).property('user')
+
+  feedDate: (-> @get 'finishBy' ).property('finishBy')

@@ -24,6 +24,11 @@ Radium.FormContainerView = Ember.ContainerView.extend
     form.set 'isGlobalLevelForm', true
     @set 'currentView', form
 
+  showMeetingForm: () ->
+    form = Radium.MeetingFormView.create()
+    form.set 'controller', Radium.MeetingFormController.create()
+    @show form
+
   showTodoForm: () ->
     @show Radium.TodoFormView.create()
 
