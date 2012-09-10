@@ -2,7 +2,9 @@ Radium.TodoFormView = Radium.FormView.extend
   templateName: 'todo_form'
 
   close: ->
-    if (view = @get('parentView')) && !@get('isDestroyed')
+    if @get('controller').close
+      @get('controller').close()
+    else if (view = @get('parentView')) && !@get('isDestroyed')
       view.set('currentView', null)
 
   isContact: (->
@@ -112,38 +114,52 @@ Radium.TodoFormView = Radium.FormView.extend
           finishBy.toFormattedString '%Y-%m-%d'
     ).property('parentView.finishBy')
 
+  moveFeed: (->
+    if @get 'isGlobalLevelForm'
+      date = @get('finishBy').toFormattedString '%Y-%m-%d'
+      Radium.get('router').transitionTo 'root.dashboardWithDate', date: date
+  ).observes('finishBy')
+
   submitForm: ->
-    selection = @get('selection')
-    description = @get('descriptionField.value')
-    isCall = @get('isCallCheckbox.checked')
+    doStuff = ->
+      selection = @get('selection')
+      description = @get('descriptionField.value')
+      isCall = @get('isCallCheckbox.checked')
 
-    # TODO: When support todos are added, add logic to toggle this from general to support
-    # TODO: is above todo still valid?
-    todoKind = 'general'
-    finishBy = @get('finishBy')
+      # TODO: When support todos are added, add logic to toggle this from general to support
+      # TODO: is above todo still valid?
+      todoKind = 'general'
+      finishBy = @get('finishBy')
 
-    assignedUser = @get('assignedUser')
-    assignedUserId = assignedUser.get('id')
+      assignedUser = @get('assignedUser')
+      assignedUserId = assignedUser.get('id')
 
-    data =
-      description: description
-      finishBy: finishBy
-      finished: false
-      kind: (if (isCall) then 'call' else todoKind)
-      user_id: assignedUserId
-      user: assignedUser
-      created_at: Ember.DateTime.create()
-      updated_at: Ember.DateTime.create()
-      hasAnimation: true
+      data =
+        description: description
+        finishBy: finishBy
+        finished: false
+        kind: (if (isCall) then 'call' else todoKind)
+        user_id: assignedUserId
+        user: assignedUser
+        created_at: Ember.DateTime.create()
+        updated_at: Ember.DateTime.create()
+        hasAnimation: true
 
-    todo = Radium.store.createRecord Radium.Todo, data
-    if selection
-      todo.set 'reference', selection
+      todo = Radium.store.createRecord Radium.Todo, data
+      if selection
+        todo.set 'reference', selection
 
-    # TODO: feed sections could automatically handle adding
-    # new items, but I'm not sure how would hat behave, it needs
-    # a check with API or a lot of items
-    @get('controller').pushItem(todo)
-    Radium.store.commit()
+      # TODO: feed sections could automatically handle adding
+      # new items, but I'm not sure how would hat behave, it needs
+      # a check with API or a lot of items
+      @get('controller').pushItem(todo)
+      Radium.store.commit()
 
-    @_super()
+      @close()
+
+    # TODO: I'm not sure how to handle this better at the moment, when
+    #       todo is added, the feed is scrolled to show it, if form is
+    #       closed at the same moment, feed goes further than it should
+    @$().slideUp('fast')
+    self = this
+    setTimeout (-> doStuff.apply(self) ), 200

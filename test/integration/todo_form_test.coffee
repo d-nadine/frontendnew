@@ -32,3 +32,21 @@ test 'todo is showed only once', ->
     addTodo todo, section, { description: 'Nice todo' }, (sectionElement) ->
       assertContains sectionElement, 'Nice todo'
       assertNotContains sectionElement, 'Nice todo.*Nice todo'
+
+test 'global todo form also works', ->
+  app '/', ->
+    waitForSelector '.filters .add-todo', (el) ->
+      el.click()
+
+      waitForSelector '#form-container', (el) ->
+        tomorrow = F.feed_sections('tomorrow')
+
+        Ember.run ->
+          $('.more-options', el).click()
+
+        fillIn '#finish-by-date', tomorrow.get('id')
+        fillIn '#description', 'New todo'
+        enterNewLine('#description')
+
+        waitForResource tomorrow, (el) ->
+          assertContains el, 'New todo'

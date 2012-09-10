@@ -5,6 +5,9 @@ Radium.FeedController = Em.ArrayController.extend
   canScroll: true
   isLoading: false
 
+  showForm: (type) ->
+    @set 'currentFormType', type
+
   isLoadingObserver: (->
     if @get 'content.isLoading'
       @set 'isLoading', true

@@ -4,8 +4,9 @@ Radium.FormView = Ember.View.extend
   layoutName: 'form_layout'
 
   isValid: false
+
   init: ->
-    @_super()
+    @_super.apply(this, arguments)
     @set 'showOptions', false
 
   keyUp: (event) ->
