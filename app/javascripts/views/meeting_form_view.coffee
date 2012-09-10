@@ -10,9 +10,9 @@ Radium.MeetingFormView = Radium.FormView.extend
   endsAtValue: null
 
   moveFeed: (->
-    date = @get('startsAt').toFormattedString '%Y-%m-%d'
-    Radium.get('router').transitionTo 'root.dashboardWithDate', date: date
-  ).observes('startsAt')
+    date = @get('controller.startsAtValue').toFormattedString '%Y-%m-%d'
+    Radium.get('router').transitionTo 'root.dashboardWithDate', date: date, disableScroll: true
+  ).observes('controller.startsAtValue')
 
   topicField: Ember.TextField.extend(Radium.Validate,
     elementId: 'description'
