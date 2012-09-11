@@ -1,7 +1,4 @@
 Radium.FeedController = Em.ArrayController.extend
-  sortAscending: false
-  sortProperties: ['id']
-
   canScroll: true
   isLoading: false
 
@@ -57,7 +54,7 @@ Radium.FeedController = Em.ArrayController.extend
         section = Radium.FeedSection.find date
 
         sections = self.get 'content'
-        sections.loadRecord section unless sections.contains(section)
+        sections.loadRecord section
 
         section.pushItem(item)
 
@@ -91,3 +88,5 @@ Radium.FeedController = Em.ArrayController.extend
 
     if date
       @get('content').loadRecord Radium.FeedSection.find(date)
+
+    date
