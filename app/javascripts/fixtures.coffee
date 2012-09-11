@@ -105,6 +105,9 @@ Fixtures.add Radium.FeedSection,
       [Radium.Todo, 3]
       [Radium.Todo, 4]
     ]
+    # this will normally not be needed, I just need it to easily filter
+    # items in FixtureAdapter
+    _associatedContactIds: [1]
   feed_section_2012_07_15:
     id: '2012-07-15'
     date: '2012-07-15T00:00:00Z'
@@ -172,7 +175,8 @@ Fixtures.add Radium.FeedSection,
   month_from_now:
     id: Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')
     date: "#{Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
-    item_ids: [[Radium.Deal, 2]]
+    item_ids: [[Radium.Deal, 2], [Radium.Todo, 11]]
+    _associatedContactIds: [1]
 
 Fixtures.add Radium.CallList,
   default:
@@ -358,11 +362,29 @@ Fixtures.add Radium.Todo,
     finished: false
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
+  call_ralph:
+    id: 11
+    created_at: '2012-08-17T18:27:32Z'
+    updated_at: '2012-08-17T18:27:32Z'
+    user_id: 1
+    kind: 'call'
+    reference:
+      id: 1
+      type: 'contact'
+    description: 'discussing offer details'
+    finish_by: '2012-08-17T22:00:00Z'
+    finished: false
+    calendar_time: '2012-08-17T22:00:00Z'
+    overdue: false
 
 Fixtures.add Radium.Contact,
   ralph:
     id: 1
     display_name: 'Ralph'
+    status: 'prospect'
+  john:
+    id: 2
+    display_name: 'John'
     status: 'prospect'
 
 Fixtures.add Radium.Campaign,

@@ -24,8 +24,16 @@ DS.RadiumStore = DS.Store.extend
 
         [{ id: "#{query.first}-#{query.last}", section_ids: sections }]
 
-      else if type == Radium.FeedSection
-        if query.date
+      else if type.root() == Radium.FeedSection
+        type = query.type
+
+        if type
+          capitalized = type.capitalize()
+          fixtures = fixtures.filter (f) ->
+            if ids = f["_associated#{capitalized}Ids"]
+              ids.find (id) -> id == query.id
+
+        fixtures = if query.date
           # Chrome deals with parsing dates in format yyyy-mm-dd,
           # but phantom (and maybe some of the browsers) does not
           chosenDate = Date.parse("#{query.date}T00:00:00Z")
@@ -58,6 +66,8 @@ DS.RadiumStore = DS.Store.extend
           fixtures.slice(0, query.limit || 1)
         else
           fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
+
+        fixtures
       else
         fixtures
 

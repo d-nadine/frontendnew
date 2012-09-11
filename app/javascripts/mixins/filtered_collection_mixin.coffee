@@ -4,7 +4,7 @@ Radium.FilteredCollectionMixin = Em.Mixin.create
     Radium.FilteredArray.create
       context: this
       contentBinding: 'context.collection'
-      filterProperties: ['type']
+      filterProperties: ['strType']
       filterValueBinding: 'context.controller.typeFilter'
       filterCondition: (item) ->
         if filterValue = @get('filterValue')

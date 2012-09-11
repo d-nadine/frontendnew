@@ -6,3 +6,5 @@ Radium.PhoneCall = Radium.Core.extend
   endedAt: DS.attr('datetime', key: 'ended_at')
   to: Radium.polymorphic('to')
   from: Radium.polymorphic('from')
+
+  associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'to', 'from')

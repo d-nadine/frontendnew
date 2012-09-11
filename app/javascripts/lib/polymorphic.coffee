@@ -18,3 +18,20 @@ Radium.reopen
         type = Radium.Core.typeFromString(type)
         Radium.store.find type, @get(idKey)
     ).property(idKey, typeKey)
+
+  defineFeedAssociation: ->
+    args = Array.prototype.slice.call(arguments)
+    type = args.shiftObject()
+
+    associated = ->
+      associatedRecords = []
+      self = this
+
+      args.forEach (propertyName) ->
+        if record = self.get(propertyName)
+          if record.constructor == type
+            associatedRecords.pushObject record
+
+      associatedRecords
+    associated = associated.property.apply(associated, args)
+    associated

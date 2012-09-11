@@ -1,6 +1,6 @@
 Radium.Router = Ember.Router.extend
   location: 'history'
-  enableLogging: false
+  enableLogging: true
   initialState: 'loading'
 
   showUser: Ember.Route.transitionTo('root.users.user')
@@ -14,10 +14,16 @@ Radium.Router = Ember.Router.extend
 
   jumpTo: (query) ->
     query   ?= {}
+
     sections = Radium.store.expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 
-    @get('mainController').connectOutlet('content', 'feed', sections)
+    if query.type
+      plural = query.type.pluralize()
+      @get('mainController').connectOutlet('content', "#{plural}Feed", sections)
+      Radium.router.set("#{plural}FeedController.contact_id", query.id)
+    else
+      @get('mainController').connectOutlet('content', 'feed', sections)
 
     unless query.disableScroll
       Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
@@ -134,7 +140,7 @@ Radium.Router = Ember.Router.extend
       contact: Ember.Route.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
-          router.get('mainController').connectOutlet('content', 'contact', contact)
+          router.jumpTo(type: 'contact', id: contact.get('id'))
 
         deserialize: (router, params) ->
           params.contact_id = parseInt(params.contact_id)
