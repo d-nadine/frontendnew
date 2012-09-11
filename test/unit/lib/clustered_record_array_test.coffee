@@ -2,7 +2,10 @@
 app('/')
 
 test 'clustered record array behaves as regular array when dealing with it', ->
-  array = Radium.ClusteredRecordArray.create(store: Radium.store, clusterSize: 2)
+  array = Em.ArrayProxy.create(Radium.ClusteredRecordArray,
+    store: Radium.store
+    clusterSize: 2
+  )
 
   array.pushObject(Radium.store.find(Radium.Todo, 1))
   array.pushObject(Radium.store.find(Radium.User, 1))
@@ -17,7 +20,10 @@ test 'clustered record array behaves as regular array when dealing with it', ->
   equal array.objectAt(3).get('id'), 3, 'array should allow to retrieve records'
 
 test 'clustered array adds records to clusters after reaching clusterSize', ->
-  array = Radium.ClusteredRecordArray.create(store: Radium.store, clusterSize: 2)
+  array = Em.ArrayProxy.create(Radium.ClusteredRecordArray,
+    store: Radium.store
+    clusterSize: 2
+  )
 
   array.pushObject(Radium.store.find(Radium.Todo, 1))
 
@@ -35,7 +41,10 @@ test 'clustered array adds records to clusters after reaching clusterSize', ->
   equal cluster.get('length'), 3, 'cluster should contain all of the items'
 
 test 'clustered array properly clears cluster after removing sufficient number of records', ->
-  array = Radium.ClusteredRecordArray.create(store: Radium.store, clusterSize: 2)
+  array = Em.ArrayProxy.create(Radium.ClusteredRecordArray,
+    store: Radium.store
+    clusterSize: 2
+  )
 
   array.pushObject(Radium.store.find(Radium.Todo, 1))
   array.pushObject(Radium.store.find(Radium.Todo, 2))

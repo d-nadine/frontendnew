@@ -3,7 +3,7 @@
 # given type is equal to clusterSize, items are moved to cluster.
 # Each additional item of type that's clustered, will be added to
 # a cluster.
-Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
+Radium.ClusteredRecordArray = Ember.Mixin.create
   clusterSize: 5
   store: null
 
@@ -21,6 +21,16 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
       store: @get('store')
       content: Ember.A()
 
+    self = this
+    if @get('content.length') > 0
+      @get('content').forEach (pairOrObject) ->
+        pair = if Ember.isArray pairOrObject
+          pairOrObject
+        else
+          [pairOrObject.constructor, pairOrObject.get('clientId')]
+
+        self.addRecord.apply self, pair
+
   addRecord: (type, clientId) ->
     unclustered = @get('unclustered')
     filtered = unclustered.withType(type)
@@ -35,7 +45,9 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
       if cluster.get('length')
         @addToCluster(type, clientId)
       else
-        unclustered.pushObject([type, clientId])
+        exists = unclustered.find (record) ->
+          record.constructor == type && record.get('clientId') == clientId
+        unclustered.pushObject([type, clientId]) unless exists
 
   removeRecord: (record) ->
     unclustered = @get('unclustered')
@@ -65,19 +77,36 @@ Radium.ClusteredRecordArray = Radium.ExtendedRecordArray.extend
     cluster = @fetchCluster type
     cluster.pushObject clientId
 
-  prepareForReplace: (idx, amt, objects) ->
-    self = this
-    [idx, amt, objects] = @_super.apply(this, arguments)
+  contentArrayDidChange: (array, idx, removedCount, addedCount) ->
+    addedObjects = array.slice(idx, idx+addedCount)
 
-    for object in objects
-      @addRecord.apply(this, object)
+    for object in addedObjects
+      type     = null
+      clientId = null
 
-    if amt
-      for i in [0..(amt-1)]
-        record = @objectAt(i + idx)
-        @removeRecord record
+      if Ember.isArray(object)
+        type     = object[0]
+        clientId = object[1]
+      else
+        type     = object.constructor
+        clientId = object.get('clientId')
 
-    [idx, amt, objects]
+      @addRecord(type, clientId)
+
+    removedObjects = array.slice(idx, idx+removedCount)
+    for object in removedObjects
+      record = null
+
+      if Ember.isArray(object)
+        type     = object[0]
+        clientId = object[1]
+        record   = type.findByClientId type, clientId
+      else
+        record = object
+
+      @removeRecord(record)
+
+    @_super.apply(this, arguments)
 
   fetchCluster: (type) ->
     cluster = @get('clusters.content').find (c) -> c.get('type') == type

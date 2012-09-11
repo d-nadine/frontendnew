@@ -24,7 +24,10 @@ Radium.FeedSection = Radium.Core.extend
     @get('previousSectionFilter.firstObject')
   ).property('previousSectionFilter.firstObject')
 
-  items: Radium.ClusteredRecordArray.attr(key: 'item_ids')
+  items: Radium.ExtendedRecordArray.attr(
+    key: 'item_ids'
+    mixins: [Radium.ClusteredRecordArray]
+  )
 
   pushItem: (item) ->
     @get('items').pushObject(item) unless @contains(item)

@@ -36,7 +36,7 @@ Radium.ExtendedRecordArray = Ember.ArrayProxy.extend
     [idx, amt, objects]
 
 # Allow to create attributes for extended record array,
-# usage is similar to attrs from data stor:
+# usage is similar to attrs from data store:
 #
 # items: Radium.ExtendedRecordArray.attr(key: 'item_ids')
 #
@@ -46,13 +46,10 @@ Radium.ExtendedRecordArray.reopenClass
     self = this
     options ?= {}
     key = options.key
+    mixins = options.mixins
 
     ( ->
       store = @get('store')
-
-      array = self.create
-        store: @get('store')
-        content: Ember.A()
 
       if ids = @get("data.#{key}")
         ids = ids.map (element) ->
@@ -60,11 +57,12 @@ Radium.ExtendedRecordArray.reopenClass
           record = store.find(type, id)
           [type, record.get('clientId')]
 
-        # I want to push objects *after* the array is created, to
-        # always run them through replaceContent()
-        array.pushObjects(ids)
+      args = mixins || []
+      args.pushObject
+        store: @get('store')
+        content: Ember.A(ids)
 
-      array
+      self.create.apply(self, args)
     ).property()
 
 
