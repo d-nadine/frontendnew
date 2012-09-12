@@ -1,4 +1,19 @@
 Radium.Utils = Em.Object.create
+  roundTime: (time) ->
+    hour = time.get("hour")
+    minute = time.get("minute")
+    newTime = undefined
+    if minute is 0
+      newTime = time
+    else if minute <= 29
+      newTime = time.adjust(minute: 30)
+    else
+      newTime = time.adjust(
+        hour: hour + 1
+        minute: 0
+      )
+    newTime
+
   scrollWhenLoaded: (collection, className, callback) ->
     scrollTo = ->
       Ember.run.next ->

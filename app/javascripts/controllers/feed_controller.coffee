@@ -19,7 +19,7 @@ Radium.FeedController = Em.ArrayController.extend
   pushItem: (item) ->
     self = this
 
-    date = item.get('finishBy').toFormattedString('%Y-%m-%d')
+    date = item.get('feedDate').toFormattedString('%Y-%m-%d')
 
     # check if there is a straight way between new section and the
     # first or last visible section
@@ -29,10 +29,10 @@ Radium.FeedController = Em.ArrayController.extend
     current   = null
     direction = null
 
-    if date > first.get 'id'
+    if first && date > first.get 'id'
       current   = first
       direction = 'next'
-    else if date < last.get 'id'
+    else if last && date < last.get 'id'
       current   = last
       direction = 'previous'
 

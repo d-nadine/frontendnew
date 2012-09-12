@@ -1,0 +1,23 @@
+<div class="center">
+  <fieldset class="long">
+    {{view view.topicField}}
+  </fieldset>
+  <fieldset class="date">
+    {{view view.meetingStartDateField}}
+    {{view view.startsAtField}}
+    <span>to</span>
+    {{view view.endsAtField}}
+    {{view view.meetingEndDateField}}
+  </fieldset>
+  <span class="progress">
+    <img alt="wait" src="/images/progress/progress.gif"/>
+  </span>
+  <div class="options">
+    <button
+      class="btn btn-success"
+      {{bindAttr disabled="controller.isInvalid"}}
+      {{action "submitForm" target="this"}}>
+      Save
+    </button>
+  </div>
+</div>

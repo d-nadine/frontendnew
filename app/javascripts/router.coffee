@@ -18,7 +18,9 @@ Radium.Router = Ember.Router.extend
     sections.load Radium.FeedSection.find(query)
 
     @get('mainController').connectOutlet('content', 'feed', sections)
-    Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+
+    unless query.disableScroll
+      Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
   init: ->
     @_super()
@@ -92,7 +94,7 @@ Radium.Router = Ember.Router.extend
     dashboardWithDate: Ember.Route.extend
       route: '/dashboard/:date'
       connectOutlets: (router, params) ->
-        router.jumpTo(date: params.date)
+        router.jumpTo(params)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'
