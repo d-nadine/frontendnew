@@ -96,6 +96,7 @@ Fixtures.add Radium.FeedSection,
       [Radium.Campaign, 1]
     ]
     _associatedUserIds: [1]
+    _associatedGroupIds: [1]
   feed_section_2012_08_17:
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'

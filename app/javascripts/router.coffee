@@ -131,10 +131,11 @@ Radium.Router = Ember.Router.extend
       group: Ember.Route.extend
         route: '/:group_id'
         connectOutlets: (router, group) ->
-          router.get('mainController').connectOutlet('content', 'group', group)
+          router.jumpTo(type: 'group', id: group.get('id'))
 
         deserialize: (router, params) ->
           params.group_id = parseInt(params.group_id)
+          @_super(router, params)
 
     contacts: Ember.Route.extend
       route: '/contacts'

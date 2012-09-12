@@ -31,3 +31,4 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
 
   associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'reference')
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
+  associatedGroups: Radium.defineFeedAssociation(Radium.Group, 'reference')
