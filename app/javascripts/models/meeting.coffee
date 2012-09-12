@@ -9,4 +9,6 @@ Radium.Meeting = Radium.Core.extend
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
 
+  associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
+
   feedDate: (-> @get 'startsAt' ).property('startsAt')

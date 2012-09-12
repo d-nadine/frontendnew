@@ -95,6 +95,7 @@ Fixtures.add Radium.FeedSection,
       [Radium.CallList, 1]
       [Radium.Campaign, 1]
     ]
+    _associatedUserIds: [1]
   feed_section_2012_08_17:
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-17'
@@ -108,6 +109,7 @@ Fixtures.add Radium.FeedSection,
     # this will normally not be needed, I just need it to easily filter
     # items in FixtureAdapter
     _associatedContactIds: [1]
+    _associatedUserIds: [1]
   feed_section_2012_07_15:
     id: '2012-07-15'
     date: '2012-07-15T00:00:00Z'

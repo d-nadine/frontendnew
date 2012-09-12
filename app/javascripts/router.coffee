@@ -20,8 +20,12 @@ Radium.Router = Ember.Router.extend
 
     if query.type
       plural = query.type.pluralize()
+      type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
+
       @get('mainController').connectOutlet('content', "#{plural}Feed", sections)
-      Radium.router.set("#{plural}FeedController.contact_id", query.id)
+      Radium.router.set("#{plural}FeedController.recordId", query.id)
+      Radium.router.set("#{plural}FeedController.recordType", type)
+      Radium.router.set("#{plural}FeedController.type", query.type)
     else
       @get('mainController').connectOutlet('content', 'feed', sections)
 
@@ -151,15 +155,14 @@ Radium.Router = Ember.Router.extend
 
       user: Ember.Route.extend
         route: '/:user_id'
+        connectOutlets: (router, user) ->
+          router.jumpTo(type: 'user', id: user.get('id'))
 
         deserialize: (router, params) ->
           # fixture adapter is pretty limited and works only with integer ids
           # TODO: check if ember always assumes that id has integer type
           params.user_id = parseInt(params.user_id)
           @_super(router, params)
-
-        connectOutlets: (router, user) ->
-          router.get('mainController').connectOutlet('content', 'user', user)
 
   authenticated: Ember.Route.extend
     index: Ember.Route.extend

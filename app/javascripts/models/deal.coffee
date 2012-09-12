@@ -30,3 +30,5 @@ Radium.Deal = Radium.Core.extend
     closeBy = new Date(@get('closeBy')).getTime()
     (if (closeBy <= d) then true else false)
   ).property('closeBy')
+
+  associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

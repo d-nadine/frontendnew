@@ -30,3 +30,4 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   feedDate: (-> @get 'finishBy' ).property('finishBy')
 
   associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'reference')
+  associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

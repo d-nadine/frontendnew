@@ -6,3 +6,5 @@ Radium.Campaign = Radium.Core.extend
   target: DS.attr('number')
   isPublic: DS.attr('boolean', key: 'is_public')
   user: DS.belongsTo('Radium.User', key: 'user_id')
+
+  associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
