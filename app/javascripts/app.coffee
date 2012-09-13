@@ -74,6 +74,7 @@ require 'radium/models/gap'
 require 'radium/models/contact_feed_section'
 require 'radium/models/user_feed_section'
 require 'radium/models/group_feed_section'
+require 'radium/models/grouped_feed_section'
 
 require 'radium/controllers/application_controller'
 require 'radium/controllers/me_controller'

@@ -29,11 +29,14 @@ Radium.FeedSection = Radium.Core.extend
     mixins: [Radium.ClusteredRecordArray]
   )
 
+  removeItem: (item) ->
+    @get('items').removeObject item
+
   pushItem: (item) ->
-    @get('items').pushObject(item) unless @contains(item)
+    @get('items').pushObject item unless @contains(item)
 
   contains: (item) ->
-    @get('items').contains(item)
+    @get('items').contains item
 
   # And again, for some weird reason regular bindings does not
   # work as intended (probably they're not updated), check with
