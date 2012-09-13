@@ -166,7 +166,7 @@ Fixtures.add Radium.FeedSection,
   tomorrow:
     id: Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')
     date: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
-    item_ids: [[Radium.Deal, 2]]
+    item_ids: [[Radium.Deal, 3]]
   week_from_now:
     id: Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')
     date: "#{Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')}T00:00:00Z"
@@ -206,6 +206,14 @@ Fixtures.add Radium.Deal,
     state: 'pending'
     close_by: '2012-07-15T18:27:32Z'
     name: 'Big contract'
+  small_contract:
+    id: 3
+    created_at: '2012-07-15T15:27:32Z'
+    updated_at: '2012-07-15T15:27:32Z'
+    user_id: 1
+    state: 'pending'
+    close_by: '2012-07-15T18:27:32Z'
+    name: 'Small contract'
 
 Fixtures.add Radium.Meeting,
   default:

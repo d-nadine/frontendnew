@@ -13,6 +13,21 @@ Radium.FeedController = Em.ArrayController.extend
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
 
+  arrangedContent: (->
+    if content = @get('content')
+      range = @get('range')
+      if range == 'daily'
+        content
+      else
+        # TODO: for now it does not track changes in content itself, which
+        #       means that if someone adds new section to controller, it will
+        #       not be added to arrangedContent. not sure if needed, but
+        #       worth checking
+        Radium.GroupedFeedSection.fromCollection content, range
+  ).property('content', 'range')
+
+  range: 'daily'
+
   pushItem: (item) ->
     self = this
 
