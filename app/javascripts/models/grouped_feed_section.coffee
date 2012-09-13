@@ -109,52 +109,77 @@ Radium.GroupedFeedSection = Radium.Core.extend
     sections
   ).property()
 
+
+Radium.GroupsCollection = Ember.ArrayProxy.extend
+  init: ->
+    @_super.apply this, arguments
+
+    self = this
+    dependentContent = @get 'dependentContent'
+    dependentContent.forEach (section) ->
+      self.pushSection section
+
+    dependentContent.addArrayObserver this,
+      didChange: 'dependentContentWillChange'
+      willChange: 'dependentContentDidChange'
+
+  pushSection: (section) ->
+    group = @groupFor section
+    group.get('sections').pushObject section
+
+  groupFor: (section) ->
+    range = @get('range')
+    id    = null
+
+    if range == 'weekly'
+      dayOfTheWeek = section.get('date').toFormattedString('%w')
+
+      if dayOfTheWeek == '0'
+        dayOfTheWeek = '7'
+
+      dayOfTheWeek = parseInt dayOfTheWeek
+
+      dayAdjustment = 1 - dayOfTheWeek
+      startOfWeek  = section.get('date').advance(day: dayAdjustment)
+
+      id      = "#{ startOfWeek.toFormattedString('%Y-%m-%d') }-week"
+      date    = startOfWeek
+      endDate = date.advance day: 7
+
+    else if range == 'monthly'
+      startOfMonth = section.get('date').adjust(day: 1)
+
+      id      = "#{ startOfMonth.toFormattedString('%Y-%m-%d') }-month"
+      date    = startOfMonth
+      endDate = date.advance(month: 1).advance(day: -1)
+
+    group = null
+    if Radium.GroupedFeedSection.isInStore id
+      group = Radium.GroupedFeedSection.find id
+    else
+      Radium.store.load Radium.GroupedFeedSection, id, {}
+      group = Radium.GroupedFeedSection.find id
+      group.setProperties
+        date: date
+        endDate: endDate
+
+    content = @get 'content'
+    content.pushObject group unless content.contains group
+
+    group
+
+
+  dependentContentWillChange: ->
+    true
+
+  dependentContentDidChange: (array, idx, removedCount, addedCount) ->
+    addedSections = array.slice(idx, idx + addedCount)
+    for section in addedSections
+      @pushSection section
+
 Radium.GroupedFeedSection.reopenClass
   fromCollection: (collection, range) ->
-    groups = []
-    if range == 'weekly'
-      weeks  = []
-      collection.forEach (section) ->
-        dayOfTheWeek = section.get('date').toFormattedString('%w')
-
-        if dayOfTheWeek == '0'
-          dayOfTheWeek = '7'
-
-        dayOfTheWeek = parseInt dayOfTheWeek
-
-        dayAdjustment = 1 - dayOfTheWeek
-        startOfWeek  = section.get('date').advance(day: dayAdjustment)
-        weeks.pushObject startOfWeek unless weeks.contains startOfWeek
-
-      self = this
-      weeks.forEach (startOfWeek) ->
-        id ="#{ startOfWeek.toFormattedString('%Y-%m-%d') }-week"
-        Radium.store.load self, id, {}
-        group = self.find id
-        group.setProperties
-          date: startOfWeek
-          endDate: startOfWeek.advance(day: 7)
-
-        groups.pushObject group
-    else if range == 'monthly'
-      months = []
-      collection.forEach (section) ->
-        startOfMonth = section.get('date').adjust(day: 1)
-
-        months.pushObject startOfMonth unless months.contains startOfMonth
-
-      self = this
-      months.forEach (startOfMonth) ->
-        id ="#{ startOfMonth.toFormattedString('%Y-%m-%d') }-month"
-        Radium.store.load self, id, {}
-        group = self.find id
-        group.setProperties
-          date: startOfMonth
-          endDate: startOfMonth.advance(month: 1).advance(day: -1)
-
-        groups.pushObject group
-
-
-    groups
-
-
+    Radium.GroupsCollection.create
+      dependentContent: collection
+      range: range
+      content: Ember.A([])

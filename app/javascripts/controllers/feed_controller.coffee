@@ -19,11 +19,6 @@ Radium.FeedController = Em.ArrayController.extend
       if range == 'daily'
         content
       else
-        # TODO: for now it does not track changes in content itself, which
-        #       means that if someone adds new section to controller, it will
-        #       not be added to arrangedContent. not sure if needed, but
-        #       worth checking. And it's probably not needed, cause grouped
-        #       sections should load new grouped sections when scrolling up/down
         Radium.GroupedFeedSection.fromCollection content, range
   ).property('content', 'range')
 
@@ -104,5 +99,28 @@ Radium.FeedController = Em.ArrayController.extend
 
     if date
       @get('content').loadRecord Radium.FeedSection.find(date)
+    else
+      range = @get('range')
+      # if we get here, it means that we're not sure what the next/prev records are, so we
+      # need to ask server, this is most of the time the case with specialized feed types
+      if options.forward
+        if item = @get('firstObject')
+          if date = item.get('date')
+            options =
+              after: date.toFormattedString('%Y-%m-%d')
+              limit: 1
+              type: @get('type')
+              id: @get('recordId')
+              range: range
+            @get('content').load Radium.FeedSection.find(options)
 
-    date
+      else if options.back
+        if item = @get('lastObject')
+          if date = item.get('date')
+            options =
+              before: date.toFormattedString('%Y-%m-%d')
+              limit: 1
+              type: @get('type')
+              id: @get('recordId')
+              range: range
+            @get('content').load Radium.FeedSection.find(options)

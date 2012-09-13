@@ -13,6 +13,7 @@ DS.RadiumStore = DS.Store.extend
       @plurals[name] || name + "s"
 
     queryFixtures: (fixtures, query, type) ->
+      console.log query
       if type == Radium.Gap
         first = Date.parse "#{query.first}T00:00:00Z"
         last  = Date.parse "#{query.last}T00:00:00Z"
