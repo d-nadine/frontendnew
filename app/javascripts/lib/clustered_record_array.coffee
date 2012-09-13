@@ -78,7 +78,7 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     cluster.pushObject clientId
 
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
-    addedObjects = array.slice(idx, idx+addedCount)
+    addedObjects = array.slice(idx, idx + addedCount)
 
     for object in addedObjects
       type     = null
@@ -93,7 +93,7 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
 
       @addRecord(type, clientId)
 
-    removedObjects = array.slice(idx, idx+removedCount)
+    removedObjects = array.slice(idx, idx + removedCount)
     for object in removedObjects
       record = null
 

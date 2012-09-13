@@ -33,7 +33,10 @@ DS.RadiumStore = DS.Store.extend
             if ids = f["_associated#{capitalized}Ids"]
               ids.find (id) -> id == query.id
 
-        fixtures = if query.date
+        fixtures = if query.dates
+          fixtures.filter (f) ->
+            query.dates.contains f.id
+        else if query.date
           # Chrome deals with parsing dates in format yyyy-mm-dd,
           # but phantom (and maybe some of the browsers) does not
           chosenDate = Date.parse("#{query.date}T00:00:00Z")

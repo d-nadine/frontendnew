@@ -63,15 +63,32 @@ Radium.GroupedFeedSection = Radium.Core.extend
       }
     )
 
+    sections = @get('sections')
+
+    @sectionsAdded collection, sections
+
+    sections.addArrayObserver this,
+      didChange: 'sectionsDidChange'
+      willChange: 'sectionsWillChange'
+
+    collection
+  ).property()
+
+  sectionsAdded: (collection, sections) ->
     self = this
-    @get('sections').forEach (section, i) ->
+    sections.forEach (section, i) ->
       items = section.get('items')
 
       self.addItemsProxy items
       collection.pushObjects items
 
-    collection
-  ).property()
+  sectionsDidChange: (array, idx, removedCount, addedCount) ->
+    items = @get 'items'
+
+    sections = array.slice(idx, idx + addedCount)
+    @sectionsAdded items, sections
+
+  sectionsWillChange: ->
 
   sections: (->
     dates = @get('dates')

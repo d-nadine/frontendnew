@@ -22,7 +22,8 @@ Radium.FeedController = Em.ArrayController.extend
         # TODO: for now it does not track changes in content itself, which
         #       means that if someone adds new section to controller, it will
         #       not be added to arrangedContent. not sure if needed, but
-        #       worth checking
+        #       worth checking. And it's probably not needed, cause grouped
+        #       sections should load new grouped sections when scrolling up/down
         Radium.GroupedFeedSection.fromCollection content, range
   ).property('content', 'range')
 
