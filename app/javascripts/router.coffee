@@ -9,7 +9,8 @@ Radium.Router = Ember.Router.extend
   showDeal: Ember.Route.transitionTo('root.deal')
   showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
   showGroup: Ember.Route.transitionTo('root.groups.group')
-  showDashboard: Ember.Route.transitionTo('root.dashboard')
+  showDashboard: Ember.Route.transitionTo('root.dashboard.all')
+  showCalendar: Ember.Route.transitionTo('root.calendar')
   setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
   jumpTo: (query) ->
@@ -18,7 +19,10 @@ Radium.Router = Ember.Router.extend
     sections = Radium.store.expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 
-    if query.type
+    if query.calendar
+      # TODO: this methods has too many concerns, it would be nice to refactor it later
+      @get('mainController').connectOutlet('content', 'calendarFeed', sections)
+    else if query.type
       plural = query.type.pluralize()
       type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
 
@@ -50,6 +54,15 @@ Radium.Router = Ember.Router.extend
 
   switchToUnauthenticated: Ember.State.transitionTo('unauthenticated.index')
   switchToAuthenticated: Ember.State.transitionTo('authenticated.index')
+
+  authenticated: Ember.Route.extend
+    index: Ember.Route.extend
+      connectOutlets: (router) ->
+        router.transitionTo('root')
+
+        path = router.get('lastAttemptedPath')
+        if path && path != '/'
+          router.route(path)
 
   unauthenticated: Ember.Route.extend
     index: Ember.Route.extend
@@ -165,11 +178,9 @@ Radium.Router = Ember.Router.extend
           params.user_id = parseInt(params.user_id)
           @_super(router, params)
 
-  authenticated: Ember.Route.extend
-    index: Ember.Route.extend
-      connectOutlets: (router) ->
-        router.transitionTo('root')
+    calendar: Ember.Route.extend
+      route: '/calendar'
 
-        path = router.get('lastAttemptedPath')
-        if path && path != '/'
-          router.route(path)
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('sidebar', 'calendarSidebar')
+        router.jumpTo(calendar: true)

@@ -47,13 +47,15 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
+selectorForResource = (resource) ->
+  domClass = resource.get('domClass')
+  ".#{domClass}"
+
 window.waitForResource = (resource, callback, message) ->
   id = resource.get('id')
   type = resource.constructor
-  domClass = resource.get('domClass')
-  selector = ".#{domClass}"
+  selector = selectorForResource(resource)
   message ?= "Could not find #{type} with id #{id} on the page"
-
 
   waitForSelector selector, callback, message
 
@@ -116,6 +118,9 @@ window.enterNewLine = (selector) ->
 
 window.assertResource = (resource) ->
   waitForResource resource, (-> )
+
+window.assertNoResource = (resource) ->
+  equal $(selectorForResource(resource)).length, 0, "Resource exists, while it shouldn't"
 
 window.reset = ->
   Em.run ->

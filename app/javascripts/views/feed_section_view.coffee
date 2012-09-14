@@ -5,6 +5,22 @@ Radium.FeedSectionView = Em.View.extend
   hiddenBinding: 'parentView.hidden'
   justRenderedBinding: 'parentView.justRendered'
 
+  unclustered: (->
+    if @get 'disableClusters'
+      @get 'content.items'
+    else
+      @get 'content.unclustered'
+  ).property('disableClusters')
+
+  clusters: (->
+    if @get 'disableClusters'
+      []
+    else
+      @get 'content.clusters'
+  ).property('disableClusters')
+
+  disableClustersBinding: 'controller.disableClusters'
+
   didInsertElement: ->
     @_super.apply(this, arguments)
 

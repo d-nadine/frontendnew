@@ -6,9 +6,12 @@ Radium.FilteredCollectionMixin = Em.Mixin.create
       contentBinding: 'context.collection'
       filterProperties: ['strType']
       filterValueBinding: 'context.controller.typeFilter'
+      filterValuesBinding: 'context.controller.typeFilters'
       filterCondition: (item) ->
         if filterValue = @get('filterValue')
           item.get('strType') == filterValue
+        else if filterValues = @get('filterValues')
+          filterValues.contains item.get('strType')
         else
           true
   ).property()
