@@ -112,6 +112,10 @@ Radium.FeedController = Em.ArrayController.extend
               type: @get('type')
               id: @get('recordId')
               range: range
+
+            if range != 'daily'
+              options.after = item.get('endDate').toFormattedString('%Y-%m-%d')
+
             @get('content').load Radium.FeedSection.find(options)
 
       else if options.back

@@ -110,7 +110,13 @@ Radium.GroupedFeedSection = Radium.Core.extend
   ).property()
 
 
-Radium.GroupsCollection = Ember.ArrayProxy.extend
+# TODO: since ids will never change, we could not use SortableMixin, but
+#       choose the right place when inserting object (just like in expandable
+#       record array), maybe create a mixin for that and use in both places?
+Radium.GroupsCollection = Ember.ArrayProxy.extend Ember.SortableMixin,
+  sortProperties: ['id']
+  sortAscending: false
+
   init: ->
     @_super.apply this, arguments
 
@@ -120,8 +126,8 @@ Radium.GroupsCollection = Ember.ArrayProxy.extend
       self.pushSection section
 
     dependentContent.addArrayObserver this,
-      didChange: 'dependentContentWillChange'
-      willChange: 'dependentContentDidChange'
+      willChange: 'dependentContentWillChange'
+      didChange: 'dependentContentDidChange'
 
   pushSection: (section) ->
     group = @groupFor section
@@ -130,34 +136,18 @@ Radium.GroupsCollection = Ember.ArrayProxy.extend
   groupFor: (section) ->
     range = @get('range')
     id    = null
+    [date, endDate] = Radium.Utils.rangeForDate(section.get('date'), range)
 
     if range == 'weekly'
-      dayOfTheWeek = section.get('date').toFormattedString('%w')
-
-      if dayOfTheWeek == '0'
-        dayOfTheWeek = '7'
-
-      dayOfTheWeek = parseInt dayOfTheWeek
-
-      dayAdjustment = 1 - dayOfTheWeek
-      startOfWeek  = section.get('date').advance(day: dayAdjustment)
-
-      id      = "#{ startOfWeek.toFormattedString('%Y-%m-%d') }-week"
-      date    = startOfWeek
-      endDate = date.advance day: 7
-
+      id      = "#{ date.toFormattedString('%Y-%m-%d') }-week"
     else if range == 'monthly'
-      startOfMonth = section.get('date').adjust(day: 1)
-
-      id      = "#{ startOfMonth.toFormattedString('%Y-%m-%d') }-month"
-      date    = startOfMonth
-      endDate = date.advance(month: 1).advance(day: -1)
+      id      = "#{ date.toFormattedString('%Y-%m-%d') }-month"
 
     group = null
     if Radium.GroupedFeedSection.isInStore id
       group = Radium.GroupedFeedSection.find id
     else
-      Radium.store.load Radium.GroupedFeedSection, id, {}
+      Radium.store.load Radium.GroupedFeedSection, id, {id: id}
       group = Radium.GroupedFeedSection.find id
       group.setProperties
         date: date

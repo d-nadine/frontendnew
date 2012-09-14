@@ -13,7 +13,6 @@ DS.RadiumStore = DS.Store.extend
       @plurals[name] || name + "s"
 
     queryFixtures: (fixtures, query, type) ->
-      console.log query
       if type == Radium.Gap
         first = Date.parse "#{query.first}T00:00:00Z"
         last  = Date.parse "#{query.last}T00:00:00Z"
@@ -67,7 +66,19 @@ DS.RadiumStore = DS.Store.extend
             b = Date.parse(b.date)
             if a == b then 0 else ( if a > b then sort else sort * -1 )
 
-          fixtures.slice(0, query.limit || 1)
+          if query.range && query.range != 'daily'
+            if first = fixtures[0]
+              date = Em.DateTime.parse first.id, '%Y-%m-%d'
+              [date, endDate] = Radium.Utils.rangeForDate(date, query.range)
+              date    = date.toFormattedString('%Y-%m-%d')
+              endDate = endDate.toFormattedString('%Y-%m-%d')
+
+              fixtures = fixtures.filter (f) ->
+                f.id <= endDate && f.id >= date
+
+            fixtures
+          else
+            fixtures.slice(0, query.limit || 1)
         else
           fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
 
