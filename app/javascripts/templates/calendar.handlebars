@@ -1,0 +1,30 @@
+{{#if view.monthly}}
+  <h3>{{view.currentYear}}</h3>
+  <a {{action switchToPreviousYear target="view"}}>{{view.previousYear}}</a>
+  <a {{action switchToNextYear target="view"}}>{{view.nextYear}}</a>
+
+  <ul class="months">
+    {{#each view.months}}
+      {{view view.MonthView monthBinding="this"}}
+    {{/each}}
+  </ul>
+
+{{else}}
+  <h3>{{view.currentMonth}}</h3>
+  <a {{action switchToPreviousMonth target="view"}}>{{view.previousMonth}}</a>
+  <a {{action switchToNextMonth target="view"}}>{{view.nextMonth}}</a>
+
+  <ul class="day-headers">
+    {{#each view.dayHeaders}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+
+  <ul class="calendar">
+    {{#each view.days}}
+      {{view view.DayView dayBinding="this"}}
+    {{/each}}
+  </ul>
+{{/if}}
+
+{{view Radium.RangeChangerView}}

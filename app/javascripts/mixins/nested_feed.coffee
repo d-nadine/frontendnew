@@ -1,4 +1,9 @@
 Radium.NestedFeed = Ember.Mixin.create
+  isFeedController: true
+
+  # TODO: it seems that this would be much better if it worked as
+  #       grouped content - by observing content array, rebuilding
+  #       it every time is a waste
   arrangedContent: (->
     recordType = @get 'recordType'
     recordId   = @get 'recordId'
@@ -14,3 +19,6 @@ Radium.NestedFeed = Ember.Mixin.create
         Radium.store.find recordType, id
 
   ).property('content', 'content.length')
+
+  findRelatedSection: (section) ->
+    @find (sectionWrapper) -> sectionWrapper.isRelatedTo section

@@ -1,4 +1,7 @@
 Radium.GroupedFeedSection = Radium.Core.extend
+  isRelatedTo: (section) ->
+    @get('sections').contains section
+
   clusters: (->
     @get 'items.clusters'
   ).property('items.clusters')

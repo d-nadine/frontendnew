@@ -1,4 +1,5 @@
 Radium.FeedController = Em.ArrayController.extend
+  isFeedController: true
   canScroll: true
   isLoading: false
 
@@ -83,6 +84,9 @@ Radium.FeedController = Em.ArrayController.extend
     @get('content').load Radium.FeedSection.find
       after: section.get('id')
       limit: limit
+
+  findRelatedSection: (other) ->
+    @find (section) -> section.isRelatedTo other
 
   loadFeed: (options) ->
     return unless @get 'canScroll'

@@ -43,6 +43,9 @@ Radium.NestedFeedSection = Ember.Mixin.create
   sectionFits: (section) ->
     section.get('items').find (item) -> @itemFits(item)
 
+  isRelatedTo: (section) ->
+    @get('section') == section
+
   nextDate: (->
     section = @get 'section.nextSection'
     while section

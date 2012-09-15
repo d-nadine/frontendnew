@@ -1,3 +1,20 @@
+# TODO such checking if date is loaded needs to be changed
+#      to work properly with grouped feed sections
+sectionLoaded = (date) ->
+  section = Radium.get('currentFeedController.content').find (s) -> s.get('id') == date
+  if section
+    Radium.get('currentFeedController').findRelatedSection section
+
+findNearBy = (date) ->
+  content = Radium.get('currentFeedController.content')
+  nearBy = content.find (section, i, collection) ->
+    nextSection = collection.objectAt(i + 1)
+    if nextSection
+      section.dateBetween date, nextSection
+
+  if nearBy
+    Radium.get('currentFeedController').findRelatedSection nearBy
+
 Radium.Router = Ember.Router.extend
   location: 'history'
   enableLogging: true
@@ -13,28 +30,36 @@ Radium.Router = Ember.Router.extend
   showCalendar: Ember.Route.transitionTo('root.calendar')
   setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
+  jumpToDate: (date) ->
+    @jumpTo date: date.toFormattedString('%Y-%m-%d')
+
   jumpTo: (query) ->
     query   ?= {}
 
-    sections = Radium.store.expandableArrayFor Radium.FeedSection
-    sections.load Radium.FeedSection.find(query)
-
-    if query.calendar
-      # TODO: this methods has too many concerns, it would be nice to refactor it later
-      @get('mainController').connectOutlet('content', 'calendarFeed', sections)
-    else if query.type
-      plural = query.type.pluralize()
-      type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
-
-      @get('mainController').connectOutlet('content', "#{plural}Feed", sections)
-      Radium.router.set("#{plural}FeedController.recordId", query.id)
-      Radium.router.set("#{plural}FeedController.recordType", type)
-      Radium.router.set("#{plural}FeedController.type", query.type)
+    if query.date && (section = sectionLoaded(query.date)) && !query.disableScroll
+      Radium.Utils.scroll(section.get('domClass'))
+    else if query.date && (nearBy = findNearBy(query.date)) && !query.disableScroll
+      Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
     else
-      @get('mainController').connectOutlet('content', 'feed', sections)
+      sections = Radium.store.expandableArrayFor Radium.FeedSection
+      sections.load Radium.FeedSection.find(query)
 
-    unless query.disableScroll
-      Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+      if query.calendar
+        # TODO: this methods has too many concerns, it would be nice to refactor it later
+        @get('mainController').connectOutlet('content', 'calendarFeed', sections)
+      else if query.type
+        plural = query.type.pluralize()
+        type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
+
+        @get('mainController').connectOutlet('content', "#{plural}Feed", sections)
+        Radium.router.set("#{plural}FeedController.recordId", query.id)
+        Radium.router.set("#{plural}FeedController.recordType", type)
+        Radium.router.set("#{plural}FeedController.type", query.type)
+      else
+        @get('mainController').connectOutlet('content', 'feed', sections)
+
+      unless query.disableScroll
+        Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
   init: ->
     @_super()
