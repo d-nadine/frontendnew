@@ -4,16 +4,6 @@ Radium.MeetingFormView = Radium.FormView.extend
   close: ->
     @get('controller').close()
 
-  topicValue: null
-  locationValue: null
-  startsAtValue: null
-  endsAtValue: null
-
-  moveFeed: (->
-    date = @get('controller.startsAtValue').toFormattedString '%Y-%m-%d'
-    Radium.get('router').transitionTo 'root.dashboardWithDate', date: date, disableScroll: true
-  ).observes('controller.startsAtValue')
-
   topicField: Ember.TextField.extend(Radium.Validate,
     elementId: 'description'
     placeholder: 'Meeting description'
@@ -23,14 +13,14 @@ Radium.MeetingFormView = Radium.FormView.extend
   )
 
   meetingStartDateField: Radium.MeetingFormDatepicker.extend(
-    dateValueBinding: 'controller.startsAtValue'
+    dateValueBinding: 'controller.startsAtDate'
     elementId: 'start-date'
     viewName: 'meetingStartDate'
     name: 'start-date'
   )
 
   meetingEndDateField: Radium.MeetingFormDatepicker.extend(
-    dateValueBinding: 'controller.endsAtValue'
+    dateValueBinding: 'controller.endsAtDate'
     elementId: 'end-date'
     viewName: 'meetingEndDate'
     name: 'end-date'
@@ -38,12 +28,12 @@ Radium.MeetingFormView = Radium.FormView.extend
 
   startsAtField: Ember.TextField.extend(Radium.TimePicker,
     classNames: ['time']
-    dateBinding: 'controller.startsAtValue'
+    dateBinding: 'controller.startsAt'
   )
 
   endsAtField: Ember.TextField.extend(Radium.TimePicker,
     classNames: ['time']
-    dateBinding: 'controller.endsAtValue'
+    dateBinding: 'controller.endsAt'
   )
 
   submitForm: ->
@@ -53,6 +43,9 @@ Radium.MeetingFormView = Radium.FormView.extend
 
       @close()
 
-    @$().slideUp('fast')
+    @hide()
     self = this
     setTimeout (-> doStuff.apply(self) ), 200
+
+  hide: ->
+    @$().slideUp('fast')

@@ -3,6 +3,28 @@ Radium.FeedController = Em.ArrayController.extend
   canScroll: true
   isLoading: false
 
+  currentDate: Ember.computed (key, value) ->
+    if arguments.length == 2
+      unless value.toFormattedString
+        value = Ember.DateTime.parse(value, '%Y-%m-%d')
+
+      @set('_currentDate', value)
+      value
+    else
+      @get('_currentDate', value)
+
+  currentDateDidChange: (->
+    previousDate = @get('previousCurrentDate')
+    currentDate  = @get('currentDate')
+
+    if !previousDate || previousDate.toFormattedString('%Y-%m-%d') != currentDate.toFormattedString('%Y-%m-%d')
+      Radium.get('router').send 'showDate', date: currentDate
+  ).observes('currentDate')
+
+  currentDateWillChange: (->
+    @set 'previousCurrentDate', @get('currentDate')
+  ).observesBefore('currentDate')
+
   showForm: (type) ->
     @set 'currentFormType', type
 
@@ -15,7 +37,6 @@ Radium.FeedController = Em.ArrayController.extend
   ).observes('content.isLoading', 'rendering')
 
   arrangedContent: (->
-    console.log 'range', @get('range')
     if content = @get('content')
       range = @get('range')
       if range == 'daily'

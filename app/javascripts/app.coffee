@@ -132,6 +132,7 @@ require 'radium/views/users_feed_view'
 require 'radium/views/calendar_feed_view'
 require 'radium/views/calendar_view'
 require 'radium/views/range_changer_view'
+require 'radium/views/sidebar_meeting_form_view'
 
 require 'radium/templates/feed/feed_todo'
 require 'radium/templates/feed/feed_todo_deal'

@@ -255,3 +255,19 @@ fieldset legend {
     width: 100%;
   }
 }
+
+#sidebar {
+  .center {
+    margin: 0;
+    display: block;
+  }
+
+  .long input {
+    width: 150px;
+  }
+
+  span.to {
+    display: block;
+    width: 100%;
+  }
+}

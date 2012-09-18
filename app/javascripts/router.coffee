@@ -1,3 +1,5 @@
+# TODO: move all that helpers somewhere
+#
 # TODO such checking if date is loaded needs to be changed
 #      to work properly with grouped feed sections
 sectionLoaded = (date) ->
@@ -16,6 +18,43 @@ findNearBy = (date) ->
   if nearBy
     Radium.get('currentFeedController').findRelatedSection nearBy
 
+jumpToDate = (date) ->
+  jumpTo date: date.toFormattedString('%Y-%m-%d')
+
+jumpTo = (query) ->
+  query   ?= {}
+
+  if query.date && query.date.toFormattedString
+    query.date = query.date.toFormattedString('%Y-%m-%d')
+
+  if query.date && (section = sectionLoaded(query.date)) && !query.disableScroll
+    Radium.Utils.scroll(section.get('domClass'))
+  else if query.date && (nearBy = findNearBy(query.date)) && !query.disableScroll
+    Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
+  else
+    sections = Radium.store.expandableArrayFor Radium.FeedSection
+    sections.load Radium.FeedSection.find(query)
+
+    if query.calendar
+      # TODO: this methods has too many concerns, it would be nice to refactor it later
+      Radium.router.get('mainController').connectOutlet('content', 'calendarFeed', sections)
+    else if query.type
+      plural = query.type.pluralize()
+      type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
+
+      Radium.router.get('mainController').connectOutlet('content', "#{plural}Feed", sections)
+      Radium.router.set("#{plural}FeedController.recordId", query.id)
+      Radium.router.set("#{plural}FeedController.recordType", type)
+      Radium.router.set("#{plural}FeedController.type", query.type)
+    else
+      Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
+
+    unless query.disableScroll
+      Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+
+  date = query.date || Ember.DateTime.create()
+  Radium.set 'currentFeedController.currentDate', date
+
 Radium.Router = Ember.Router.extend
   location: 'history'
   enableLogging: true
@@ -28,39 +67,10 @@ Radium.Router = Ember.Router.extend
   showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard.all')
-  showCalendar: Ember.Route.transitionTo('root.calendar')
+  showCalendar: Ember.Route.transitionTo('root.calendar.index')
   setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
-  jumpToDate: (date) ->
-    @jumpTo date: date.toFormattedString('%Y-%m-%d')
-
-  jumpTo: (query) ->
-    query   ?= {}
-
-    if query.date && (section = sectionLoaded(query.date)) && !query.disableScroll
-      Radium.Utils.scroll(section.get('domClass'))
-    else if query.date && (nearBy = findNearBy(query.date)) && !query.disableScroll
-      Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
-    else
-      sections = Radium.store.expandableArrayFor Radium.FeedSection
-      sections.load Radium.FeedSection.find(query)
-
-      if query.calendar
-        # TODO: this methods has too many concerns, it would be nice to refactor it later
-        @get('mainController').connectOutlet('content', 'calendarFeed', sections)
-      else if query.type
-        plural = query.type.pluralize()
-        type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
-
-        @get('mainController').connectOutlet('content', "#{plural}Feed", sections)
-        Radium.router.set("#{plural}FeedController.recordId", query.id)
-        Radium.router.set("#{plural}FeedController.recordType", type)
-        Radium.router.set("#{plural}FeedController.type", query.type)
-      else
-        @get('mainController').connectOutlet('content', 'feed', sections)
-
-      unless query.disableScroll
-        Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+  showDate: Ember.Route.transitionTo('root.dashboardWithDate')
 
   init: ->
     @_super()
@@ -110,13 +120,13 @@ Radium.Router = Ember.Router.extend
       router.set 'usersController', usersController
 
       router.get('applicationController').connectOutlet('main')
-      router.get('applicationController').connectOutlet('sidebar', 'sidebar')
       router.get('applicationController').connectOutlet('topbar', 'topbar')
 
     dashboard: Ember.Route.extend
       route: '/'
       connectOutlets: (router) ->
-        router.jumpTo()
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
+        jumpTo()
 
       all: Ember.Route.extend
         route: '/'
@@ -143,11 +153,13 @@ Radium.Router = Ember.Router.extend
     dashboardWithDate: Ember.Route.extend
       route: '/dashboard/:date'
       connectOutlets: (router, params) ->
-        router.jumpTo(params)
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
+        jumpTo(params)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'
       connectOutlets: (router, deal) ->
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
         router.get('mainController').connectOutlet('content', 'deal', deal)
 
       deserialize: (router, params) ->
@@ -155,6 +167,8 @@ Radium.Router = Ember.Router.extend
 
     campaigns: Ember.Route.extend
       route: '/campaigns'
+      connectOutlets: (router, params) ->
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
       campaign: Ember.Route.extend
         route: '/:campaign_id'
@@ -166,11 +180,13 @@ Radium.Router = Ember.Router.extend
 
     groups: Ember.Route.extend
       route: '/groups'
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
       group: Ember.Route.extend
         route: '/:group_id'
         connectOutlets: (router, group) ->
-          router.jumpTo(type: 'group', id: group.get('id'))
+          jumpTo(type: 'group', id: group.get('id'))
 
         deserialize: (router, params) ->
           params.group_id = parseInt(params.group_id)
@@ -179,12 +195,13 @@ Radium.Router = Ember.Router.extend
     contacts: Ember.Route.extend
       route: '/contacts'
       connectOutlets: (router) ->
-          router.get('mainController').connectOutlet('content', 'contacts')
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
+        router.get('mainController').connectOutlet('content', 'contacts')
 
       contact: Ember.Route.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
-          router.jumpTo(type: 'contact', id: contact.get('id'))
+          jumpTo(type: 'contact', id: contact.get('id'))
 
         deserialize: (router, params) ->
           params.contact_id = parseInt(params.contact_id)
@@ -192,11 +209,13 @@ Radium.Router = Ember.Router.extend
 
     users: Ember.Route.extend
       route: '/users'
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
       user: Ember.Route.extend
         route: '/:user_id'
         connectOutlets: (router, user) ->
-          router.jumpTo(type: 'user', id: user.get('id'))
+          jumpTo(type: 'user', id: user.get('id'))
 
         deserialize: (router, params) ->
           # fixture adapter is pretty limited and works only with integer ids
@@ -206,7 +225,19 @@ Radium.Router = Ember.Router.extend
 
     calendar: Ember.Route.extend
       route: '/calendar'
-
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'calendarSidebar')
-        router.jumpTo(calendar: true)
+
+      index: Ember.Route.extend
+        route: '/'
+        connectOutlets: (router) ->
+          jumpTo(calendar: true)
+
+      showDate: Ember.Route.transitionTo('withDate')
+
+      withDate: Ember.Route.extend
+        route: '/:date'
+        connectOutlets: (router, params) ->
+          jumpTo(params)
+
+

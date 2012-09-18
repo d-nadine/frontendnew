@@ -3,9 +3,9 @@ Radium.CalendarView = Em.View.extend
 
   init: ->
     @_super.apply this, arguments
-    @setCurrentDate Ember.DateTime.create()
 
   controllerBinding: 'Radium.currentFeedController'
+  currentDateBinding: 'controller.currentDate'
 
   monthly: (->
     @get('controller.range') == 'monthly'
@@ -32,7 +32,6 @@ Radium.CalendarView = Em.View.extend
   ).property('currentDate')
 
   nextMonth: (->
-    console.log @get('controller').toString()
     date = @get 'currentDate'
     date.advance(month: 1).toFormattedString '%B %Y'
   ).property('currentDate')
@@ -85,8 +84,7 @@ Radium.CalendarView = Em.View.extend
     @setCurrentDate @get('currentDate').advance(year: 1)
 
   setCurrentDate: (date) ->
-    @set 'currentDate', date
-    Radium.get('router').jumpToDate date
+    Radium.get('router').send 'showDate', date: date
 
   # TODO: MonthView and DayView could share a lot of functionality
   MonthView: Em.View.extend

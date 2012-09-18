@@ -13,6 +13,10 @@ Radium.Validate = Ember.Mixin.create(
     @_super event
     @runValidation()
 
+  checkValue: (->
+    @runValidation()
+  ).observes('value')
+
   runValidation: ->
     invalidFields = @get('controller.invalidFields')
     if @validate()
