@@ -106,9 +106,13 @@ Radium.CalendarView = Em.View.extend
 
   DayView: Em.View.extend
     template: Ember.Handlebars.compile('{{view.formattedDay}}')
-    classNameBindings: ['active', 'otherMonth']
+    classNameBindings: ['active', 'otherMonth', 'identifier']
     currentDateBinding: 'parentView.currentDate'
     tagName: 'li'
+
+    identifier: (->
+      "day-#{@get('day').toFormattedString('%d')}"
+    ).property('day')
 
     active: (->
       format = '%Y-%m-%d'

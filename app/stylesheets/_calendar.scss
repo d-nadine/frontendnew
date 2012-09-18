@@ -1,35 +1,37 @@
-.day-headers, .calendar {
-  padding: 0;
-  margin: 0;
-}
-
-.day-headers li, .calendar li {
-  list-style-type: none;
-  float: left;
-  width: 14%;
-  height: 1.5em;
-  margin: 0;
-  padding: 0;
-}
-
-.calendar li {
-  cursor: pointer;
-
-  &.active {
-    font-weight: bold;
+.calendar {
+  .day-headers, .days {
+    padding: 0;
+    margin: 0;
   }
 
-  &.other-month {
-    color: #aaa;
+  .day-headers li, .days li {
+    list-style-type: none;
+    float: left;
+    width: 14%;
+    height: 1.5em;
+    margin: 0;
+    padding: 0;
   }
-}
 
-.months li {
-  list-style-type: none;
-  float: left;
-  width: 49%;
-  height: 1.5em;
-  margin: 5px 0 0 0;
-  padding: 0;
-  cursor: pointer;
+  .days li {
+    cursor: pointer;
+
+    &.active {
+      font-weight: bold;
+    }
+
+    &.other-month {
+      color: #aaa;
+    }
+  }
+
+  .months li {
+    list-style-type: none;
+    float: left;
+    width: 49%;
+    height: 1.5em;
+    margin: 5px 0 0 0;
+    padding: 0;
+    cursor: pointer;
+  }
 }

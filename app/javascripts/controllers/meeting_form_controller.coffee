@@ -42,7 +42,7 @@ Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
     unless endsAtDate
       Ember.run.next this, ->
         @set 'endsAtDate', startsAtDate
-    else
+    else if cache
       diff = startsAtDate.get('day') - cache.get('day')
       if diff
         Ember.run.next this, ->

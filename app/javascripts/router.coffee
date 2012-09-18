@@ -238,6 +238,7 @@ Radium.Router = Ember.Router.extend
       withDate: Ember.Route.extend
         route: '/:date'
         connectOutlets: (router, params) ->
+          params.calendar = true
           jumpTo(params)
 
 

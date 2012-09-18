@@ -118,6 +118,7 @@ window.enterNewLine = (selector) ->
 
 window.assertResource = (resource) ->
   waitForResource resource, (-> )
+  ok true
 
 window.assertNoResource = (resource) ->
   equal $(selectorForResource(resource)).length, 0, "Resource exists, while it shouldn't"
