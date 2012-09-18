@@ -9,18 +9,6 @@
     <div id="main-feed" class="span9 offset3">
       {{view Radium.FormContainerView}}
 
-      <pre>view Ember.ContainerView currentViewBinding="Radium.notificationsController.notificationsView"</pre>
-
-      <div class="row" style="display:none">
-        <div class="span9">
-         {{#view Ember.View tagName="ul" class="nav nav-tabs"}}
-            <li class="active"><a href="#" {{bindAttr data-feed-group="today"}}>Daily</a></li>
-            <li><a href="#" {{bindAttr data-feed-group="week"}}>This Week</a></li>
-            <li><a href="#" {{bindAttr data-feed-group="month"}}>This Month</a></li>
-            <li><a href="#" {{bindAttr data-feed-group="quarter"}}>This Quarter</a></li>
-          {{/view}}
-        </div>
-      </div>
       <div class="row">
         <div class="span9">
           {{outlet}}

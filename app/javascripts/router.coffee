@@ -1,16 +1,17 @@
 # TODO such checking if date is loaded needs to be changed
 #      to work properly with grouped feed sections
 sectionLoaded = (date) ->
-  section = Radium.get('currentFeedController.content').find (s) -> s.get('id') == date
-  if section
-    Radium.get('currentFeedController').findRelatedSection section
+  if content = Radium.get('currentFeedController.content')
+    section = content.find (s) -> s.get('id') == date
+    if section
+      Radium.get('currentFeedController').findRelatedSection section
 
 findNearBy = (date) ->
-  content = Radium.get('currentFeedController.content')
-  nearBy = content.find (section, i, collection) ->
-    nextSection = collection.objectAt(i + 1)
-    if nextSection
-      section.dateBetween date, nextSection
+  if content = Radium.get('currentFeedController.content')
+    nearBy = content.find (section, i, collection) ->
+      nextSection = collection.objectAt(i + 1)
+      if nextSection
+        section.dateBetween date, nextSection
 
   if nearBy
     Radium.get('currentFeedController').findRelatedSection nearBy

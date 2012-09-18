@@ -15,6 +15,7 @@ Radium.FeedController = Em.ArrayController.extend
   ).observes('content.isLoading', 'rendering')
 
   arrangedContent: (->
+    console.log 'range', @get('range')
     if content = @get('content')
       range = @get('range')
       if range == 'daily'
