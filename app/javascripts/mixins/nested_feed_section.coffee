@@ -18,6 +18,11 @@ Radium.NestedFeedSection = Ember.Mixin.create
   ).property()
 
   items: (->
+    # TODO: I need to use ArrayProxy here because I need both clustering
+    #       and filtering, and both mixins override arrangedContent method.
+    #       At this point ember does not support calling super in computed
+    #       properties, so there is no other way to use 2 mixins that
+    #       override the same property.
     Ember.ArrayProxy.create(
       Radium.ClusteredRecordArray, {
         store: Radium.store

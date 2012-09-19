@@ -38,7 +38,7 @@ test 'headerContext displays proper data', ->
 
   equal view.get('headerContext'), 'Assign a Todo to “Product discussion” for Wednesday, 10/10', ''
 
-test 'submiting form sets proper data and reference on todo', ->
+test 'submitting form sets proper data and reference on todo', ->
   meeting = F.meetings('default')
 
   Ember.run ->
@@ -50,10 +50,12 @@ test 'submiting form sets proper data and reference on todo', ->
 
   view.submitForm()
 
-  todo = Radium.store.findAll(Radium.Todo).find (t) -> t.get('description') == 'Get notes for a meeting'
+  # Form waits to close before submitting, maybe it could be disabled for tests
+  wait 250, ->
+    todo = Radium.store.findAll(Radium.Todo).find (t) -> t.get('description') == 'Get notes for a meeting'
 
-  ok todo, 'todo was not created'
+    ok todo, 'todo was not created'
 
-  equal todo.get('reference'), meeting, ''
-  equal todo.get('finishBy').toFormattedString('%Y-%m-%d'), '2012-10-10', ''
-  equal todo.get('user'), Radium.get('router.meController.user'), ''
+    equal todo.get('reference'), meeting, ''
+    equal todo.get('finishBy').toFormattedString('%Y-%m-%d'), '2012-10-10', ''
+    equal todo.get('user'), Radium.get('router.meController.user'), ''

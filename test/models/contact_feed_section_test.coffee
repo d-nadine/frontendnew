@@ -8,7 +8,7 @@ test 'it forwards delegates items to section', ->
 
   attrs = {
     section_id: '2012-01-01'
-    contact_id: 1
+    record_id: 1
   }
 
   contact = F.contacts('ralph')
@@ -33,6 +33,7 @@ test 'it forwards delegates items to section', ->
 
   for i in [1..6]
     Radium.store.load Radium.Todo, i + 1000,
+      id: i + 1000
       reference:
         id:   1
         type: 'contact'

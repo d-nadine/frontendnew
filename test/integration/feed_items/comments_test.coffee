@@ -1,9 +1,11 @@
 test "comments are displayed in item's details", ->
   expect(1)
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     todo = F.todos('default')
-
     waitForResource todo, (el) ->
       el.click()
 
@@ -13,11 +15,14 @@ test "comments are displayed in item's details", ->
 test 'comment can be added to feed item', ->
   expect(2)
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
+
     event = jQuery.Event("keypress")
     event.keyCode = 13
 
     todo = F.todos('default')
-
     waitForResource todo, (el) ->
       el.click()
 

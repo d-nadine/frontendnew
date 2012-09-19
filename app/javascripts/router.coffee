@@ -52,8 +52,11 @@ jumpTo = (query) ->
     unless query.disableScroll
       Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
-  date = query.date || Ember.DateTime.create()
-  Radium.set 'currentFeedController.currentDate', date
+  if date = query.date
+    Radium.set 'currentFeedController.currentDate', date
+  else if ! Radium.get('currentFeedController.currentDate')
+    # set current date if no date is set yet
+    Radium.set 'currentFeedController.currentDate', Ember.DateTime.create()
 
 Radium.Router = Ember.Router.extend
   location: 'history'
@@ -187,12 +190,24 @@ Radium.Router = Ember.Router.extend
 
       group: Ember.Route.extend
         route: '/:group_id'
-        connectOutlets: (router, group) ->
-          jumpTo(type: 'group', id: group.get('id'))
+        initialState: 'index'
 
         deserialize: (router, params) ->
           params.group_id = parseInt(params.group_id)
           @_super(router, params)
+
+        connectOutlets: (router, group) ->
+          jumpTo(type: 'group', id: group.get('id'))
+
+        index: Ember.Route.extend
+          route: '/'
+
+        showDate: Ember.Route.transitionTo('withDate')
+
+        withDate: Ember.Route.extend
+          route: '/:date'
+          connectOutlets: (router, params) ->
+            #jumpTo(params)
 
     contacts: Ember.Route.extend
       route: '/contacts'
@@ -242,5 +257,3 @@ Radium.Router = Ember.Router.extend
         connectOutlets: (router, params) ->
           params.calendar = true
           jumpTo(params)
-
-
