@@ -1,5 +1,9 @@
 test 'feed sections with dates should be displayed', ->
   app '/', ->
+    section = F.feed_sections('default')
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
+
     todo = F.todos('default')
 
     waitForResource todo, ->
@@ -8,6 +12,9 @@ test 'feed sections with dates should be displayed', ->
 
 test 'feed sections should contain todo items', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     todo = F.todos('default')
 
@@ -16,6 +23,9 @@ test 'feed sections should contain todo items', ->
 
 test 'when scrolling back, feed loads older items', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     controller = Radium.get('router.feedController')
 
@@ -39,9 +49,11 @@ test 'when scrolling back, feed loads older items', ->
 test 'when scrolling forward, feed loads newer items', ->
   expect 2
 
-  app '/dashboard/2012-07-15', ->
+  app '/', ->
+    section = F.feed_sections 'feed_section_2012_07_15'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
-    section = F.feed_sections('feed_section_2012_07_15')
     waitForResource section, ->
       assertNotContains 'Tuesday, August 14, 2012'
 

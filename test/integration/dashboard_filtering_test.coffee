@@ -1,5 +1,9 @@
 test 'feed can be filtered', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
+
     item = F.call_lists('default')
 
     waitForResource item, ->
@@ -21,6 +25,9 @@ test 'feed can be filtered', ->
 
 test 'loading new items for the feed that should be hidden triggers showing "filtered info view" ', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     item = F.call_lists('default')
     waitForResource item, (el) ->
@@ -44,6 +51,9 @@ test 'loading new items for the feed that should be hidden triggers showing "fil
 
 test 'loading new items backwards that should be hidden triggers showing "filtered info view" ', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     item = F.call_lists('default')
     waitForResource item, (el) ->
@@ -66,6 +76,9 @@ test 'loading new items backwards that should be hidden triggers showing "filter
 
 test 'adding an item to filtered area should split the area', ->
   app '/', ->
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     item = F.todos('default')
     waitForResource item, (el) ->

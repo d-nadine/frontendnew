@@ -114,6 +114,7 @@ Radium.Router = Ember.Router.extend
         router.get('applicationController').connectOutlet('login')
 
   root: Ember.Route.extend
+    initialState: 'dashboard'
     connectOutlets: (router) ->
       usersController = Radium.UsersController.create()
       usersController.set 'content', Radium.store.findAll(Radium.User)
@@ -124,6 +125,7 @@ Radium.Router = Ember.Router.extend
 
     dashboard: Ember.Route.extend
       route: '/'
+      initialState: 'all'
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
         jumpTo()

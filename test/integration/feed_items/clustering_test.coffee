@@ -1,7 +1,8 @@
 test 'clustering feed items', ->
   app '/', ->
-
-    section = F.feed_sections('default')
+    section = F.feed_sections 'default'
+    Ember.run ->
+      Radium.router.send 'showDate', date: section.get('id')
 
     waitForResource section, (el) ->
       assertNotContains el, 'Finish first product draft'
