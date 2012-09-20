@@ -1,0 +1,50 @@
+#notifications {
+  position: fixed;
+  top: 60px;
+  left: -500px;
+  width: 300px;
+  border: 1px solid #444;
+  background-color: #888;
+  z-index: 100;
+  bottom: 0;
+  -webkit-transition: all 1.0s ease-in-out;
+
+  > .content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    overflow-y: auto;
+    min-width: 220px;
+    color: #fff;
+    max-width:300px;
+  }
+
+  li {
+    list-style-type: none;
+    max-width: 270px;
+    padding-right: 30px;
+    position: relative;
+  }
+
+  ul {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  h3 {
+    position: relative;
+    margin: 7px 0 5px 0;
+
+    .dismiss {
+      margin-top: -10px;
+    }
+  }
+
+  .dismiss {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -7px;
+  }
+}
