@@ -2,6 +2,8 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
   classNameBindings: ['expanded']
 
+  expandedItemBinding: 'controller.expandedItem'
+
   init: ->
     @_super.apply(this, arguments)
 
@@ -36,7 +38,12 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
         @rerender()
       ).observes('content.referenceType')
 
+      didInsertElement: ->
+        @set 'insertedElement', true
+
     @set 'currentView', view
+
+    @expandedItemDidChange()
 
   toggleTodoForm: ->
     feedDetailsContainer = @get('feedDetailsContainer')
@@ -60,3 +67,12 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
         childViews.removeObject(feedDetailsContainer)
         feedDetailsContainer.set('currentView', null)
   ).observes('expanded')
+
+  expandedItemDidChange: (->
+    if @get('expandedItem') == @get('content') && @get('currentView.insertedElement')
+      self = this
+      Ember.run.next ->
+        Radium.Utils.scroll self.get('currentView').$(), ->
+          self.set 'expanded', true
+          self.set 'expandedItem', null
+  ).observes('expandedItem', 'currentView.insertedElement')

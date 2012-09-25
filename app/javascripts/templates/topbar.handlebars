@@ -3,6 +3,7 @@
     <div class="navbar-inner">
       <div id="navbar-container" class="container">
         <a class="brand" {{action showDashboard href=true}}><img src="/images/logo.png" alt="::radium"></a>
+        {{view Radium.NotificationsLinkView}}
         <ul id="main-nav" class="nav">
           <li id="btn-dashboard"><a {{action showDashboard href=true}}>Dashboard</a></li>
           <li id="btn-calendar"><a {{action showCalendar href=true}}>Calendar</a></li>

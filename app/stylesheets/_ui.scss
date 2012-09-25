@@ -1,3 +1,6 @@
+a {
+  cursor: pointer;
+}
 /*
   Components
   =======================
@@ -74,7 +77,7 @@ i.comment-toggle-button {
 .comments {
   margin: 10px 0 15px;
   display: inline-block;
-  
+
   a.add-comment-btn {
     width: 100%;
     margin-bottom: 15px;

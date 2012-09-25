@@ -387,6 +387,15 @@ Fixtures.add Radium.Todo,
     finished: false
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
+  finish_by_tomorrow:
+    id: 12
+    created_at: '2012-08-17T18:27:32Z'
+    updated_at: '2012-08-17T18:27:32Z'
+    user_id: 1
+    description: 'Buy office equipment'
+    finish_by: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    finished: false
+    overdue: false
 
 Fixtures.add Radium.Contact,
   ralph:
@@ -481,6 +490,55 @@ Fixtures.add Radium.User,
       large_url: '/images/fallback/large_default.png'
       huge_url: '/images/fallback/huge_default.png'
     account: 2
+
+Fixtures.add Radium.Notification,
+  todo:
+    id: 1
+    reference:
+      id: 1
+      type: 'todo'
+    created_at: '2012-08-14T18:27:32Z'
+    updated_at: '2012-08-14T18:27:32Z'
+    tag: 'assigned.todo'
+  meeting_invitation:
+    id: 2
+    reference:
+      id: 1
+      type: 'invitation'
+    created_at: '2012-08-14T18:27:32Z'
+    updated_at: '2012-08-14T18:27:32Z'
+    tag: 'invited.meeting'
+
+Fixtures.add Radium.Invitation,
+  for_meeting_1:
+    id: 1
+    user_id: 1
+    meeting_id: 1
+
+Fixtures.add Radium.Reminder,
+  todo:
+    id: 1
+    time: '2012-08-14T18:27:32Z'
+    reference:
+      id: 1
+      type: 'todo'
+    created_at: '2012-08-14T18:27:32Z'
+    updated_at: '2012-08-14T18:27:32Z'
+  meeting:
+    id: 2
+    time: '2012-08-14T18:27:32Z'
+    reference:
+      id: 1
+      type: 'meeting'
+    created_at: '2012-08-14T18:27:32Z'
+    updated_at: '2012-08-14T18:27:32Z'
+
+Fixtures.add Radium.Message,
+  default:
+    id: 1
+    type: 'email'
+    sentAt: '2012-08-14T18:27:32Z'
+    message: 'Hey, what\'s up?'
 
 Radium.Gap.FIXTURES = []
 

@@ -119,12 +119,23 @@ Radium.Router = Ember.Router.extend
   root: Ember.Route.extend
     initialState: 'dashboard'
     connectOutlets: (router) ->
-      usersController = Radium.UsersController.create()
-      usersController.set 'content', Radium.store.findAll(Radium.User)
-      router.set 'usersController', usersController
+      # TODO: I would have thought that going from one action in the root.
+      #       state to the other one would not trigger connectOutlets for
+      #       root, investigate why that happens and where to put things
+      #       that should be done only once, unless you changet the parent state
+      unless router.get('initialized')
+        usersController = Radium.UsersController.create()
+        usersController.set 'content', Radium.store.findAll(Radium.User)
+        router.set 'usersController', usersController
 
-      router.get('applicationController').connectOutlet('main')
-      router.get('applicationController').connectOutlet('topbar', 'topbar')
+        router.get('applicationController').connectOutlet('main')
+        router.get('applicationController').connectOutlet('topbar', 'topbar')
+
+        router.get('notificationsController').set('content', Radium.Notification.find())
+        router.get('notificationsController').set('reminders', Radium.Reminder.find())
+        router.get('notificationsController').set('messages', Radium.Message.find())
+
+        router.set('initialized', true)
 
     dashboard: Ember.Route.extend
       route: '/'

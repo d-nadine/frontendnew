@@ -122,3 +122,22 @@ body {
   margin-left: -($width / 2);
   z-index: 9999;
 }
+
+/* Notifications */
+
+.notifications-link {
+  float: left;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #953B39;
+  border-radius: 8px;
+  line-height: 1.5em;
+  padding: 0 5px;
+  cursor: pointer;
+  margin-top: 13px;
+}
+.notifications-link:hover {
+  color: white;
+  text-decoration: none;
+}
