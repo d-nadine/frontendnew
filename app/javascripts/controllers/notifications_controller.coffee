@@ -1,5 +1,5 @@
 Radium.NotificationsController = Ember.ArrayController.extend
-  isVisible: true
+  isVisible: false
 
   count: (->
     messages = @get('messages.length') || 0

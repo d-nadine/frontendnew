@@ -1,4 +1,6 @@
 Radium.Groupable = Em.Mixin.create
+  groupType: Em.Object
+
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     addedObjects = array.slice(idx, idx + addedCount)
     for object in addedObjects
@@ -14,8 +16,7 @@ Radium.Groupable = Em.Mixin.create
       group = @groupFor object
       group.get('content').removeObject object
       if group.get('content.length') == 0
-        Ember.run.next this, ->
-          @get('groups').removeObject group
+        @get('groups').removeObject group
 
     @_super.apply(this, arguments)
 
