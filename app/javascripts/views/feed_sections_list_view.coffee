@@ -56,6 +56,14 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
 
       @set 'justRendered', true
 
+      @adjustScroll()
+
+    adjustScroll: ->
+      if @get('parentView.content.firstObject') == @get('content')
+        # we're the first element
+        scroll = document.body.scrollTop + this.$().height() + 2
+        window.scrollTo 0, scroll
+
     gapObserver: (->
       @checkGapView()
     ).observes('gap')

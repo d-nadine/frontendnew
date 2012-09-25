@@ -29,6 +29,7 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
       @$().hide()
 
     show: (dir) ->
+      dir = 1
       # TODO: Remove once it's 100% confirmed the loading icon
       # is only to be visible from the top of the page.
       fromTop = top: 40
@@ -47,6 +48,7 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
       @$().css(layout).show().animate settings, 500
 
     hide: (dir) ->
+      dir = 1
       direction = @get('direction') or dir
       fromTop = top: -40
       fromBottom = bottom: -70

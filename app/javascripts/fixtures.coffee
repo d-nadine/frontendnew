@@ -181,6 +181,18 @@ Fixtures.add Radium.FeedSection,
     item_ids: [[Radium.Deal, 2], [Radium.Todo, 11]]
     _associatedContactIds: [1]
 
+
+for i in [1..200]
+  date = Ember.DateTime.create().advance(day: 100 + i)
+  data = {}
+  data["additional_feed_section_in_future_#{i}"] = {
+    id: date.toFormattedString('%Y-%m-%d')
+    date: "#{date.toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    item_ids: [[Radium.Deal, 2]]
+  }
+  Fixtures.add Radium.FeedSection, data
+
+
 Fixtures.add Radium.CallList,
   default:
     id: 1

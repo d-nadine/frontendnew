@@ -50,7 +50,7 @@ DS.RadiumStore = DS.Store.extend
             b = b[0]
             if a == b then 0 else ( if a > b then 1 else -1 )
 
-          deltas.slice(0, 2).map (delta) -> delta[1]
+          deltas.slice(0, 4).map (delta) -> delta[1]
         else if item = (query.before || query.after)
           date = Date.parse("#{item}T00:00:00Z")
           fixtures = fixtures.filter (f) ->
