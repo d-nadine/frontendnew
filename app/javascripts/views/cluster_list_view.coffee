@@ -3,6 +3,7 @@ Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMi
 
   itemViewClass: Ember.ContainerView.extend
     childViews: []
+    expandedItemBinding: 'controller.expandedItem'
 
     init: ->
       @_super.apply(this, arguments)
@@ -23,3 +24,8 @@ Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMi
         view.slideUp ->
           childViews.removeObject(view)
     ).observes('expanded')
+
+    expandedItemDidChange: (->
+      if @get('content').contains @get('expandedItem')
+        @set 'expanded', true
+    ).observes('expandedItem')

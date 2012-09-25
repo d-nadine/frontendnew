@@ -23,8 +23,14 @@
   li {
     list-style-type: none;
     max-width: 270px;
-    padding-right: 30px;
     position: relative;
+    cursor: pointer;
+    padding: 3px 30px 3px 6px;
+    margin-right: 5px;
+  }
+
+  li:hover {
+    background-color: #666;
   }
 
   ul {

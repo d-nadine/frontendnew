@@ -22,6 +22,10 @@ Radium.NotificationItemView = Ember.ContainerView.extend
     @_super()
     @contentDidChange()
 
+  click: ->
+    reference = @get 'content.reference'
+    Radium.Utils.showItem reference
+
   itemViewClass: Ember.View.extend
     tagName: 'div'
     layoutName: 'notification_panel_item_layout'

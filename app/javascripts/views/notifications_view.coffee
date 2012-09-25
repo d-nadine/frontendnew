@@ -38,6 +38,10 @@ Radium.NotificationsView = Ember.View.extend
         @get('reference.topic') || @get('reference.description')
       ).property('reference.topic', 'reference.description')
 
+      click: ->
+        reference = @get 'content.reference'
+        Radium.Utils.showItem reference
+
   messagesListView:  Ember.CollectionView.extend
     contentBinding: 'parentView.messages'
     tagName: 'ul'
