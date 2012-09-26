@@ -1,0 +1,164 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "thor"
+
+ROOT = File.expand_path "../../", __FILE__
+
+LOG_FILE = "#{ROOT}/deploy.log"
+
+class Deploy < Thor
+  include Thor::Actions
+
+  class CommandFailed < StandardError ; end
+
+  no_tasks do
+    def run(command, options = {})
+      `echo "#{command}" > #{LOG_FILE}`
+
+      command = "#{command} > #{LOG_FILE} 2>&1" unless options[:capture]
+
+      options[:verbose] ||= false
+
+      super command, options
+    end
+
+    def run_with_status(command, options = {})
+      run command, options
+      $?
+    end
+
+    def success?(command, options = {})
+      run_with_status(command, options).success?
+    end
+
+    def run!(command, options = {})
+      raise CommandFailed, "Expected #{command} to return successfully, but didn't" unless success?(command, options)
+    end
+
+    def pass(message)
+      say_status "OK", message, :green
+      true
+    end
+
+    def abort_deploy(message)
+      say_status "ABORT", message, :red
+      say "Deploy Failed! Check log file #{LOG_FILE}"
+    end
+
+    def failure(message)
+      say_status "FAIL", message, :red
+      false
+    end
+  end
+
+  desc "deploy", "Tests prereqs and runs a deploy"
+  method_option :environment, :default => "production"
+  def deploy
+    say "Testing prereqs...."
+
+    prereqs = ensure_clean && 
+      ensure_github_connection &&
+      ensure_heroku_installed &&
+      ensure_heroku_connection &&
+      ensure_heroku_outdated &&
+      ensure_fast_forward &&
+      ensure_assets_compile
+
+    if !prereqs
+      abort_deploy "Preqs failed"
+      return false
+    end
+
+    say "Starting deploy..."
+
+    begin
+      inside ROOT do
+        run! "git push origin master"
+
+        say_status "Github", "Pushed"
+
+        run! "git push heroku master"
+
+        say_status "Heroku", "Pushed"
+      end
+
+      say_status "Deployed!", "PIZZA TIME!"
+    rescue CommandFailed => ex
+      abort_deploy "A command failed. Please fix things."
+      say ex
+    end
+  end
+
+  default_task :deploy
+
+  no_tasks do
+    def ensure_github_connection
+      if run_with_status("ssh -T git@github.com").exitstatus == 1
+        pass "Github connection"
+      else
+        failure "Github SSH keys incorrect"
+      end
+    end
+
+    def ensure_heroku_installed
+      if success? "which heroku"
+        pass "Heroku gem installed"
+      else
+        failure "Heroku gem is missing. Please install with: gem install heorku"
+      end
+    end
+
+    def ensure_heroku_connection
+      if success? "heroku config"
+        pass "Heroku connection"
+      else
+        failure %Q{SSH key missing or #{`whoami`.chomp} is not a collabator}
+      end
+    end
+
+    def ensure_clean
+      if success? "git diff --exit-code"
+        pass "Working directory clean"
+      else
+        failure "There are uncommited files"
+      end
+    end
+
+    def ensure_heroku_outdated
+      if !success? "git diff head heroku/master --exit-code"
+        pass "Code hasn't been deployed yet"
+      else
+        failure "This commit is already deployed"
+      end
+    end
+
+    def ensure_fast_forward
+      inside ROOT do
+        if success? "git pull origin master"
+          pass "Fast forwarded"
+          return true
+        else
+          run "git reset --hard HEAD"
+          failure "Could not merge. Changes reset"
+          return false
+        end
+      end
+    end
+
+    def ensure_assets_compile
+      inside ROOT do
+        if success? "bundle exec iridium compile"
+          run "git reset --hard HEAD"
+          pass "Asset compilation"
+          return true
+        else
+          failure "Asset compilation failed"
+          return false
+        end
+      end
+    end
+  end
+end
+
+Deploy.start
