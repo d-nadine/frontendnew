@@ -8,8 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 5d21fc155ee398f215e8562198cf46e5a743ebb6
-  ref: 5d21fc155ee398f215e8562198cf46e5a743ebb6
+  revision: 7e73b5207924b9bb2f8d15733953b5a76e732f20
   specs:
     iridium (0.2.0)
       activesupport
@@ -30,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/rake-pipeline-web-filters.git
-  revision: 51915f60889fbf54fc2e81b86b594bf4c7be4ea5
+  revision: e14e78ae70d0d25b1668c5273e80cd05a4ee52e6
   specs:
     rake-pipeline-web-filters (0.6.0)
       rack
@@ -73,7 +72,7 @@ GEM
     sass (3.2.1)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
-    thin (1.4.1)
+    thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)

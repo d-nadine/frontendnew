@@ -34,7 +34,7 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
         referenceType = @get('content.referenceType')
         referenceString = (if referenceType? then "_#{referenceType}" else '')
-        @set('templateName', "feed_#{type}#{referenceString}")
+        @set('templateName', "feed/#{type}#{referenceString}")
         @rerender()
       ).observes('content.referenceType')
 

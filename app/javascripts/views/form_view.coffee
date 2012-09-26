@@ -1,7 +1,7 @@
 Radium.FormView = Ember.View.extend
   tagName: 'form'
   classNames: 'well form-horizontal radium-form'.w()
-  layoutName: 'form_layout'
+  layoutName: 'layouts/form'
 
   isValid: false
 

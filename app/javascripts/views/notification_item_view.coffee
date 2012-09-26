@@ -11,7 +11,7 @@ Radium.NotificationItemView = Ember.ContainerView.extend
 
       options = {
         content: content
-        templateName: tag.replace('.', '_') + '_notification'
+        templateName: "notifications/#{tag.replace('.', '_')}"
       }
 
       view = @get('itemViewClass').create options
@@ -28,7 +28,7 @@ Radium.NotificationItemView = Ember.ContainerView.extend
 
   itemViewClass: Ember.View.extend
     tagName: 'div'
-    layoutName: 'notification_panel_item_layout'
+    layoutName: 'layouts/notification_panel_item'
     referenceBinding: 'content.reference'
 
     isMeetingInvite: (->
