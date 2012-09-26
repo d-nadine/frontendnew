@@ -12,7 +12,7 @@ Radium.FeedDetailsContainerView = Ember.ContainerView.extend Radium.Slider,
       layoutName: 'layouts/feed_item_details'
       init: ->
         @_super()
-        @set('templateName', type + '_details')
+        @set('templateName', "feed/details/#{type}")
 
     commentsView = Radium.InlineCommentsView.create
       controller: Radium.InlineCommentsController.create
