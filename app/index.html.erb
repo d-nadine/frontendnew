@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<% if app.config.pipeline.manifest %>
+  <html manifest="/cache.manifest">
+<% else %>
+  <html>
+<% end %>
   <head>
     <meta charset="utf-8">
     <title>Radium</title>

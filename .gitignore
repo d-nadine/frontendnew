@@ -1,3 +1,4 @@
 tmp/
 site/
 config/settings.yml
+!app/assets/images/icons
