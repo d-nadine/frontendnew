@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! $CASPERJS_VERSION ] ; then
+  echo "CASPERJS_VERSION missing!"
+  exit 1
+fi
+
+mkdir -p vendor/casperjs
+
+if [ -d vendor/casperjs ] ; then
+  rm -rf vendor/casperjs
+fi
+
+git clone --quiet git://github.com/n1k0/casperjs.git vendor/casperjs
+cd vendor/casperjs
+git checkout "tags/$CASPERJS_VERSION"
