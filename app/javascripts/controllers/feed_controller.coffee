@@ -13,13 +13,15 @@ Radium.FeedController = Em.ArrayController.extend
     else
       @get('_currentDate', value)
 
-  currentDateDidChange: (->
-    previousDate = @get('previousCurrentDate')
-    currentDate  = @get('currentDate')
-
-    if !previousDate || previousDate.toFormattedString('%Y-%m-%d') != currentDate.toFormattedString('%Y-%m-%d')
-      Radium.get('router').send 'showDate', date: currentDate
-  ).observes('currentDate')
+  # TODO: this code was supposed to change date in url when currentDate
+  #       in feed was changed
+  #  currentDateDidChange: (->
+  #    previousDate = @get('previousCurrentDate')
+  #    currentDate  = @get('currentDate')
+  #
+  #    if !previousDate || previousDate.toFormattedString('%Y-%m-%d') != currentDate.toFormattedString('%Y-%m-%d')
+  #      Radium.get('router').send 'showDate', date: currentDate
+  #  ).observes('currentDate')
 
   currentDateWillChange: (->
     @set 'previousCurrentDate', @get('currentDate')
