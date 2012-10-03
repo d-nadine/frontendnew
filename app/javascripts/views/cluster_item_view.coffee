@@ -11,3 +11,5 @@ Radium.ClusterItemView = Ember.View.extend
     type = Radium.Core.typeToString @get('content.type')
     type.pluralize().humanize()
   ).property()
+
+  lengthBinding: 'content.totalLength'

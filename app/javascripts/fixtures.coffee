@@ -90,6 +90,8 @@ Fixtures.add Radium.FeedSection,
       [Radium.Todo, 8]
       [Radium.Todo, 9]
       [Radium.Todo, 10]
+      [Radium.Todo, 11]
+      [Radium.Todo, 12]
       [Radium.Meeting, 1]
       [Radium.Deal, 1]
       [Radium.CallList, 1]
