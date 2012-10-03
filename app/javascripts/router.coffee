@@ -49,7 +49,9 @@ jumpTo = (query) ->
     else
       Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
 
-    unless query.disableScroll
+    if query.disableScroll
+      Radium.get('currentFeedController').disableScroll()
+    else
       Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
   if date = query.date

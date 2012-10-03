@@ -29,12 +29,23 @@ Radium.FeedController = Em.ArrayController.extend
     @set 'currentFormType', type
 
   isLoadingObserver: (->
-    if @get 'content.isLoading'
+
+    isLoading = @get 'content.isLoading'
+
+    @set 'loadingAdditionalFeedItems', isLoading
+
+    if isLoading
       @set 'isLoading', true
     else if !@get 'rendering'
       # stop loading only if rendering finished
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
+
+  disableScroll: ->
+    @set 'canScroll', false
+
+  enableScroll: ->
+    @set 'canScroll', true
 
   arrangedContent: (->
     if content = @get('content')
@@ -112,6 +123,12 @@ Radium.FeedController = Em.ArrayController.extend
 
   loadFeed: (options) ->
     return unless @get 'canScroll'
+
+    # we want to adjust feed by manipulating scroll when
+    # new items are laoded, but we want to do that *only*
+    # in such situation, so let's annotate this fact with
+    # this property:
+    @set 'loadingAdditionalFeedItems', true
 
     date = null
     if options.forward
