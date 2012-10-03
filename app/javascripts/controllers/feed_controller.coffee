@@ -34,12 +34,11 @@ Radium.FeedController = Em.ArrayController.extend
 
     isLoading = @get 'content.isLoading'
 
-    @set 'loadingAdditionalFeedItems', isLoading
-
     if isLoading
       @set 'isLoading', true
     else if !@get 'rendering'
       # stop loading only if rendering finished
+      @set 'loadingAdditionalFeedItems', false
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
 

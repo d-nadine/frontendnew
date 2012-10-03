@@ -1,9 +1,4 @@
 Radium.FeedSectionsListView = Ember.CollectionView.extend
-  contentWillChange: ->
-    @_super.apply(this, arguments)
-
-    @set 'controller.rendering', true
-
   arrayDidChange: ->
     @_super.apply(this, arguments)
 
@@ -15,6 +10,8 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
       previous = view
 
   arrayWillChange: ->
+    @set 'controller.rendering', true
+
     @_super.apply(this, arguments)
 
     previous = null
@@ -54,9 +51,9 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
       @checkGapView()
       @showOrHideFilteredView()
 
-      @set 'justRendered', true
-
       @adjustScroll()
+
+      @set 'justRendered', true
 
     adjustScroll: ->
       return unless @get 'controller.loadingAdditionalFeedItems'
