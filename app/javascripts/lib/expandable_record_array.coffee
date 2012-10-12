@@ -55,6 +55,11 @@ Radium.ExpandableRecordArray = DS.RecordArray.extend
     index = @_binarySearch id, 0, ids.length
     ids.insertAt index, clientId
 
+  limit: (limit) ->
+    if content = @get 'content'
+      if ( length = content.get('length') ) > limit
+        content.replace(limit, length - limit)
+
   _binarySearch: (item, low, high) ->
     return low  if low is high
     mid = low + Math.floor((high - low) / 2)

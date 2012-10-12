@@ -2,6 +2,7 @@ Radium.FeedController = Em.ArrayController.extend
   isFeedController: true
   canScroll: true
   isLoading: false
+  itemsLimit: 30
 
   currentDate: Ember.computed (key, value) ->
     if arguments.length == 2
@@ -23,9 +24,9 @@ Radium.FeedController = Em.ArrayController.extend
   #      Radium.get('router').send 'showDate', date: currentDate
   #  ).observes('currentDate')
 
-  currentDateWillChange: (->
-    @set 'previousCurrentDate', @get('currentDate')
-  ).observesBefore('currentDate')
+  #  currentDateWillChange: (->
+  #    @set 'previousCurrentDate', @get('currentDate')
+  #  ).observesBefore('currentDate')
 
   showForm: (type) ->
     @set 'currentFormType', type
@@ -50,6 +51,8 @@ Radium.FeedController = Em.ArrayController.extend
 
   arrangedContent: (->
     if content = @get('content')
+      content.limit 5
+
       range = @get('range')
       if range == 'daily'
         content

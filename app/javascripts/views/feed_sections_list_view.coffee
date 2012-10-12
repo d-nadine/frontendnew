@@ -1,6 +1,14 @@
 Radium.FeedSectionsListView = Ember.CollectionView.extend
-  arrayDidChange: ->
+  arrayDidChange: (content, start, removed, added) ->
     @_super.apply(this, arguments)
+
+    limit = @get('controller.itemsLimit')
+
+    if ( length = content.get('length') ) > limit
+      if start == 0
+        content.replace(limit, length - limit)
+      else if start == content.get('length') - 1
+        content.replace(0, length - limit)
 
     previous = null
     @get('childViews').forEach (view) ->
@@ -54,6 +62,13 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
       @adjustScroll()
 
       @set 'justRendered', true
+
+    willDestroyElement: ->
+      @_super.apply this, arguments
+
+      if @get('parentView.content.firstObject') == @get('content')
+        scroll = document.body.scrollTop - this.$().height() - 2
+        window.scrollTo 0, scroll
 
     adjustScroll: ->
       return unless @get 'controller.loadingAdditionalFeedItems'

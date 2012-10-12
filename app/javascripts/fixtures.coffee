@@ -190,7 +190,16 @@ for i in [1..200]
   data["additional_feed_section_in_future_#{i}"] = {
     id: date.toFormattedString('%Y-%m-%d')
     date: "#{date.toFormattedString('%Y-%m-%d')}T00:00:00Z"
-    item_ids: [[Radium.Deal, 2]]
+    item_ids: [
+      [Radium.Deal, 2]
+      [Radium.Todo, 8]
+      [Radium.Todo, 9]
+      [Radium.Todo, 10]
+      [Radium.Meeting, 1]
+      [Radium.Deal, 1]
+      [Radium.CallList, 1]
+      [Radium.Campaign, 1]
+    ]
   }
   Fixtures.add Radium.FeedSection, data
 
