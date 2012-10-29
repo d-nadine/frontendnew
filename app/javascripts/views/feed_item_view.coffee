@@ -4,7 +4,7 @@ Radium.FeedItemView = Em.View.extend
   classNameBindings: ['domClass']
   domClassBinding: 'content.domClass'
   titleBinding: Ember.Binding.oneWay('content.id')
-  layoutName: 'layouts/feed_item'
+  layoutName: 'radium/layouts/feed_item'
   expandedBinding: 'parentView.expanded'
 
   click: (event) ->

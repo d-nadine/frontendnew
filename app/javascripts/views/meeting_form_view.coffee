@@ -1,5 +1,5 @@
 Radium.MeetingFormView = Radium.FormView.extend
-  templateName: 'meeting_form'
+  templateName: 'radium/meeting_form'
 
   close: ->
     @get('controller').close()

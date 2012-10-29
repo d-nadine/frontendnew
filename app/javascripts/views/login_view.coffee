@@ -1,2 +1,2 @@
 Radium.LoginView = Em.View.extend
-  templateName: 'login'
+  templateName: 'radium/login'

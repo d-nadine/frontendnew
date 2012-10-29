@@ -1,5 +1,5 @@
 Radium.FeedSectionView = Em.View.extend
-  templateName: 'feed_section'
+  templateName: 'radium/feed_section'
   classNames: ['feed-section']
   classNameBindings: ['content.domClass', 'hidden']
   hiddenBinding: 'parentView.hidden'

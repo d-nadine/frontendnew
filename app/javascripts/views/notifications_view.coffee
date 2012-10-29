@@ -1,5 +1,5 @@
 Radium.NotificationsView = Ember.View.extend
-  templateName: 'notifications'
+  templateName: 'radium/notifications'
   controllerBinding: 'Radium.router.notificationsController'
   contentBinding: 'controller'
   remindersBinding: 'controller.reminders'
@@ -29,8 +29,8 @@ Radium.NotificationsView = Ember.View.extend
     tagName: 'ul'
     elementId: 'reminders'
     itemViewClass: Em.View.extend
-      templateName: 'reminder'
-      layoutName: 'layouts/notification_panel_item'
+      templateName: 'radium/reminder'
+      layoutName: 'radium/layouts/notification_panel_item'
       referenceBinding: 'content.reference'
       dateBinding: 'reference.feedDate'
 
@@ -47,8 +47,8 @@ Radium.NotificationsView = Ember.View.extend
     tagName: 'ul'
     elementId: 'messages'
     itemViewClass: Em.View.extend
-      templateName: 'message'
-      layoutName: 'layouts/notification_panel_item'
+      templateName: 'radium/message'
+      layoutName: 'radium/layouts/notification_panel_item'
 
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'

@@ -1,2 +1,2 @@
 Radium.TopbarView = Em.View.extend
-  templateName: 'topbar'
+  templateName: 'radium/topbar'

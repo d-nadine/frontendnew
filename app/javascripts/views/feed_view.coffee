@@ -1,5 +1,5 @@
 Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
-  templateName: 'feed'
+  templateName: 'radium/feed'
   elementId: 'feed'
   feedBinding: 'controller'
 
@@ -9,7 +9,7 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
   ).property('feed', 'feed.@each.items.@each.length')
 
   emptyView: Em.View.extend
-    templateName: 'empty_feed'
+    templateName: 'radium/empty_feed'
 
   show: (direction) ->
     if view = @get('loadingView')

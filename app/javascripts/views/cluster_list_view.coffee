@@ -9,7 +9,7 @@ Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMi
       @_super.apply(this, arguments)
       @set 'currentView', Radium.ClusterItemView.create()
       @set 'feedItemsListView', Em.View.create Radium.Slider,
-        templateName: 'cluster_items_list'
+        templateName: 'radium/cluster_items_list'
         contentBinding: 'parentView.content'
 
         showMore: ->

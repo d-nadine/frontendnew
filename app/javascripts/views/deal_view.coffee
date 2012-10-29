@@ -1,3 +1,3 @@
 Radium.DealView = Em.View.extend
-  templateName: 'deal'
+  templateName: 'radium/deal'
   dealBinding: 'controller.content'

@@ -1,5 +1,5 @@
 Radium.CalendarView = Em.View.extend
-  templateName: 'calendar'
+  templateName: 'radium/calendar'
 
   init: ->
     @_super.apply this, arguments

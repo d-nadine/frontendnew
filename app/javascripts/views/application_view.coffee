@@ -1,2 +1,2 @@
 Radium.ApplicationView = Em.View.extend
-  templateName: 'application'
+  templateName: 'radium/application'
