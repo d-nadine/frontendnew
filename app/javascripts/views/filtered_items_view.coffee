@@ -1,5 +1,5 @@
 Radium.FilteredItemsInfoView = Em.View.extend
-  templateName: 'filtered_items_info'
+  templateName: 'radium/filtered_items_info'
   classNames: ['filtered-items-info']
 
   contentBinding: 'parentView.content'

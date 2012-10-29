@@ -1,5 +1,5 @@
 Radium.RangeChangerView = Em.View.extend
-  templateName: 'range_changer'
+  templateName: 'radium/range_changer'
 
   setDailyRange: ->
     Radium.get('currentFeedController').set('range', 'daily')

@@ -1,5 +1,5 @@
 Radium.GapView = Em.View.extend
-  templateName: 'gap'
+  templateName: 'radium/gap'
   classNames: ['gap']
   loadLimit: 3
 

@@ -1,5 +1,5 @@
 Radium.TodoFormView = Radium.FormView.extend
-  templateName: 'todo_form'
+  templateName: 'radium/todo_form'
 
   close: ->
     if @get('controller').close

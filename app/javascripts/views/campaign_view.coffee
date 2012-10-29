@@ -1,3 +1,3 @@
 Radium.CampaignView = Em.View.extend
-  templateName: 'campaign'
+  templateName: 'radium/campaign'
   campaignBinding: 'controller.content'

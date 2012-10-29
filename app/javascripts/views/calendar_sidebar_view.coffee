@@ -1,2 +1,2 @@
 Radium.CalendarSidebarView = Em.View.extend
-  templateName: 'calendar_sidebar'
+  templateName: 'radium/calendar_sidebar'

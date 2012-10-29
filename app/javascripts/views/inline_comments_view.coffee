@@ -1,7 +1,7 @@
 Radium.InlineCommentsView = Ember.View.extend
   commentsBinding: 'controller.comments'
   classNames: ['inline-comments']
-  templateName: 'inline_comments'
+  templateName: 'radium/inline_comments'
   isErrorBinding: 'controller.isError'
   commentBinding: 'controller.newComment'
   commentTextArea: Ember.TextArea.extend(Ember.TargetActionSupport,

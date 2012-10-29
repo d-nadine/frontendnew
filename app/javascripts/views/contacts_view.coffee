@@ -1,2 +1,2 @@
 Radium.ContactsView = Em.View.extend
-  templateName: 'contacts'
+  templateName: 'radium/contacts'

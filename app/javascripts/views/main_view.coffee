@@ -1,2 +1,2 @@
 Radium.MainView = Em.View.extend
-  templateName: 'main'
+  templateName: 'radium/main'

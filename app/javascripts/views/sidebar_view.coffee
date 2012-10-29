@@ -1,2 +1,2 @@
 Radium.SidebarView = Em.View.extend
-  templateName: 'sidebar'
+  templateName: 'radium/sidebar'

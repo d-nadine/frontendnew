@@ -37,7 +37,7 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
         type = @get('content.type')
 
         referenceString = (if referenceType? then "_#{referenceType}" else '')
-        view.set('templateName', "feed/#{type}#{referenceString}")
+        view.set('templateName', "radium/feed/#{type}#{referenceString}")
         @set 'currentView', view
 
         @removeObserver('content.isLoaded', observer)
