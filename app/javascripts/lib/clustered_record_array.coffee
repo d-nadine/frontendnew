@@ -14,7 +14,21 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     @set 'clusters', Em.ArrayProxy.create
       arrangedContent: (->
         @get('content').filter (cluster) -> cluster.get('length')
-      ).property('content', 'content.@each.length')
+      ).property('content')
+
+      contentArrayDidChange: (array, idx, removedCount, addedCount) ->
+        self = this
+
+        observer = ->
+          if @get('length') == 0
+            self.get('arrangedContent').removeObject(this)
+          else if !self.get('arrangedContent').contains(this)
+            self.get('arrangedContent').pushObject(this)
+
+        addedObjects = array.slice(idx, idx + addedCount)
+        for object in addedObjects
+          object.addObserver 'length', observer
+
       content: Ember.A()
 
     @set 'unclustered', Radium.ExtendedRecordArray.create
@@ -112,11 +126,12 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     cluster = @get('clusters.content').find (c) -> c.get('type') == type
 
     unless cluster
-      cluster = DS.RecordArray.create
+      cluster = DS.RecordArray.create(Radium.LimitSupport, {
         type: type
         strType: Radium.Core.typeToString type
         content: Ember.A([])
         store: @get('store')
+      })
 
       @get('clusters.content').pushObject(cluster)
 

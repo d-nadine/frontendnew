@@ -37,6 +37,7 @@ require 'radium/lib/utils'
 require 'radium/lib/filterable_mixin'
 require 'radium/lib/filtered_array'
 require 'radium/lib/groupable'
+require 'radium/lib/limit_support'
 
 require 'radium/router'
 

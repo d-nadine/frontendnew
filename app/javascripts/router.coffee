@@ -27,10 +27,12 @@ jumpTo = (query) ->
   if query.date && query.date.toFormattedString
     query.date = query.date.toFormattedString('%Y-%m-%d')
 
-  if query.date && (section = sectionLoaded(query.date)) && !query.disableScroll
-    Radium.Utils.scroll(section.get('domClass'))
-  else if query.date && (nearBy = findNearBy(query.date)) && !query.disableScroll
-    Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
+  if query.date && (section = sectionLoaded(query.date))
+    if !query.disableScroll
+      Radium.Utils.scroll(section.get('domClass'))
+  else if query.date && (nearBy = findNearBy(query.date))
+    if !query.disableScroll
+      Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
   else
     sections = Radium.store.expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
@@ -49,7 +51,9 @@ jumpTo = (query) ->
     else
       Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
 
-    unless query.disableScroll
+    if query.disableScroll
+      Radium.get('currentFeedController').disableScroll()
+    else
       Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
   if date = query.date
@@ -74,6 +78,9 @@ Radium.Router = Ember.Router.extend
   setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
   showDate: Ember.Route.transitionTo('root.dashboardWithDate')
+
+  jumpTo: ->
+    jumpTo.apply this, arguments
 
   init: ->
     @_super()

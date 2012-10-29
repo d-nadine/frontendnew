@@ -6,7 +6,7 @@ Radium.Utils = Em.Object.create
       item = item.get('meeting')
 
     date = item.get('feedDate')
-    Radium.router.send 'showDate', date: date, disableScroll: true
+    Radium.router.jumpTo date: date, disableScroll: true
 
     # now we need to wait till feed is loaded and we can expand the
     # item

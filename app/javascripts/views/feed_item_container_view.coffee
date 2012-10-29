@@ -28,20 +28,24 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
       init: ->
         @_super.apply(this, arguments)
 
-      # TODO: is there a better way to wait for loaded record before setting up template?
-      observeTemplateName: (->
-        type = @get('content.type')
-
-        referenceType = @get('content.referenceType')
-        referenceString = (if referenceType? then "_#{referenceType}" else '')
-        @set('templateName', "feed/#{type}#{referenceString}")
-        @rerender()
-      ).observes('content.referenceType')
-
       didInsertElement: ->
         @set 'insertedElement', true
 
-    @set 'currentView', view
+    observer = ->
+      if @get('content.isLoaded')
+        referenceType = @get('content.referenceType')
+        type = @get('content.type')
+
+        referenceString = (if referenceType? then "_#{referenceType}" else '')
+        view.set('templateName', "feed_#{type}#{referenceString}")
+        @set 'currentView', view
+
+        @removeObserver('content.isLoaded', observer)
+
+    if @get('content.isLoaded')
+      observer.apply this
+    else
+      @addObserver('content.isLoaded', observer)
 
     @expandedItemDidChange()
 
@@ -75,4 +79,6 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
         Radium.Utils.scroll self.get('currentView').$(), ->
           self.set 'expanded', true
           self.set 'expandedItem', null
+          Ember.run.next ->
+            self.get('controller').enableScroll()
   ).observes('expandedItem', 'currentView.insertedElement')

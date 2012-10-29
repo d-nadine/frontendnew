@@ -1,11 +1,14 @@
 Radium.FeedSectionsListView = Ember.CollectionView.extend
-  contentWillChange: ->
+  arrayDidChange: (content, start, removed, added) ->
     @_super.apply(this, arguments)
 
-    @set 'controller.rendering', true
+    limit = @get('controller.itemsLimit')
 
-  arrayDidChange: ->
-    @_super.apply(this, arguments)
+    if ( length = content.get('length') ) > limit
+      if start == 0
+        content.replace(limit, length - limit)
+      else if start == content.get('length') - 1
+        content.replace(0, length - limit)
 
     previous = null
     @get('childViews').forEach (view) ->
@@ -15,6 +18,8 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
       previous = view
 
   arrayWillChange: ->
+    @set 'controller.rendering', true
+
     @_super.apply(this, arguments)
 
     previous = null
@@ -54,11 +59,20 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
       @checkGapView()
       @showOrHideFilteredView()
 
-      @set 'justRendered', true
-
       @adjustScroll()
 
+      @set 'justRendered', true
+
+    willDestroyElement: ->
+      @_super.apply this, arguments
+
+      if @get('parentView.content.firstObject') == @get('content')
+        scroll = document.body.scrollTop - this.$().height() - 2
+        window.scrollTo 0, scroll
+
     adjustScroll: ->
+      return unless @get 'controller.loadingAdditionalFeedItems'
+
       if @get('parentView.content.firstObject') == @get('content')
         # we're the first element
         scroll = document.body.scrollTop + this.$().height() + 2

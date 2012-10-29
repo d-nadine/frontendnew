@@ -2,6 +2,7 @@ Radium.FeedController = Em.ArrayController.extend
   isFeedController: true
   canScroll: true
   isLoading: false
+  itemsLimit: 30
 
   currentDate: Ember.computed (key, value) ->
     if arguments.length == 2
@@ -13,31 +14,45 @@ Radium.FeedController = Em.ArrayController.extend
     else
       @get('_currentDate', value)
 
-  currentDateDidChange: (->
-    previousDate = @get('previousCurrentDate')
-    currentDate  = @get('currentDate')
+  # TODO: this code was supposed to change date in url when currentDate
+  #       in feed was changed
+  #  currentDateDidChange: (->
+  #    previousDate = @get('previousCurrentDate')
+  #    currentDate  = @get('currentDate')
+  #
+  #    if !previousDate || previousDate.toFormattedString('%Y-%m-%d') != currentDate.toFormattedString('%Y-%m-%d')
+  #      Radium.get('router').send 'showDate', date: currentDate
+  #  ).observes('currentDate')
 
-    if !previousDate || previousDate.toFormattedString('%Y-%m-%d') != currentDate.toFormattedString('%Y-%m-%d')
-      Radium.get('router').send 'showDate', date: currentDate
-  ).observes('currentDate')
-
-  currentDateWillChange: (->
-    @set 'previousCurrentDate', @get('currentDate')
-  ).observesBefore('currentDate')
+  #  currentDateWillChange: (->
+  #    @set 'previousCurrentDate', @get('currentDate')
+  #  ).observesBefore('currentDate')
 
   showForm: (type) ->
     @set 'currentFormType', type
 
   isLoadingObserver: (->
-    if @get 'content.isLoading'
+
+    isLoading = @get 'content.isLoading'
+
+    if isLoading
       @set 'isLoading', true
     else if !@get 'rendering'
       # stop loading only if rendering finished
+      @set 'loadingAdditionalFeedItems', false
       @set 'isLoading', false
   ).observes('content.isLoading', 'rendering')
 
+  disableScroll: ->
+    @set 'canScroll', false
+
+  enableScroll: ->
+    @set 'canScroll', true
+
   arrangedContent: (->
     if content = @get('content')
+      content.limit 5
+
       range = @get('range')
       if range == 'daily'
         content
@@ -112,6 +127,12 @@ Radium.FeedController = Em.ArrayController.extend
 
   loadFeed: (options) ->
     return unless @get 'canScroll'
+
+    # we want to adjust feed by manipulating scroll when
+    # new items are laoded, but we want to do that *only*
+    # in such situation, so let's annotate this fact with
+    # this property:
+    @set 'loadingAdditionalFeedItems', true
 
     date = null
     if options.forward

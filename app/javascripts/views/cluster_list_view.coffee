@@ -9,10 +9,15 @@ Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMi
       @_super.apply(this, arguments)
       @set 'currentView', Radium.ClusterItemView.create()
       @set 'feedItemsListView', Em.View.create Radium.Slider,
-        # TODO: I don't want to have different views for FeedItemsListView,
-        #       but it seems there is no easy way to add collection view as
-        #       as child of container view, check this.
-        template: Em.Handlebars.compile('{{collection Radium.FeedItemsListView collectionBinding="view.parentView.content"}}')
+        templateName: 'cluster_items_list'
+        contentBinding: 'parentView.content'
+
+        showMore: ->
+          @get('content').showMore()
+
+        showMoreLink: (->
+          @get('content.length') < @get('content.totalLength')
+        ).property('content.length', 'content.totalLength')
 
     expandOrShrink: (->
       childViews = @get('childViews')
