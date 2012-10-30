@@ -1,0 +1,120 @@
+#!/usr/bin/env ruby
+
+ENV['IRIDIUM_ENV'] = 'test'
+
+require 'bundler/setup'
+
+require File.expand_path("../../config/environment.rb", __FILE__)
+
+require 'fileutils'
+require 'benchmark'
+require 'ruby-prof'
+require 'thor'
+require 'rack/test'
+
+class FakeServer < Iridium::Rack::DevServer
+  include Rack::Test::Methods
+end
+
+class Perfs < Thor
+  include FileUtils
+
+  class_option :clean, :type => :boolean, :default => true
+
+  desc "bench", "Benchmark building, rebuilding, and cleaning the given project"
+  method_option :times, :type => :numeric, :aliases => "-n", :default => 1
+  def bench
+    setup
+
+    invoke_time = Benchmark.realtime do
+      options[:times].times do 
+        project.invoke
+      end
+    end
+
+    clean_time = Benchmark.realtime do
+      project.clean
+    end
+
+    puts "invoke: #{invoke_time}"
+    puts "clean: #{clean_time}"
+  end
+
+  desc "profile", "Profile a clean build of the given project"
+  method_option :times, :type => :numeric, :aliases => "-n", :default => 1
+  def profile
+    setup
+
+    result = RubyProf.profile do
+      options[:times].times do 
+        project.invoke
+      end
+    end
+
+    printer = RubyProf::CallStackPrinter.new(result)
+    printer.print
+  end
+
+  desc "bench_build", "Benchmark building the pipipeline" 
+  def bench_build
+    setup
+
+    build_time = Benchmark.realtime do
+      project.output_files
+    end
+
+    puts "build: #{build_time}"
+  end
+
+  desc "profile_build", "Profile building the pipeline"
+  def profile_build
+    setup
+
+    result = RubyProf.profile do
+      project.output_files
+    end
+
+    printer = RubyProf::CallStackPrinter.new(result)
+    printer.print
+  end
+
+  desc "bench_server URL",
+    "Benchmark a GET request against the development server"
+  method_option :times, :type => :numeric, :aliases => "-n", :default => 1
+  def bench_server(url)
+    server = FakeServer.new
+    result = Benchmark.realtime do
+      options[:times].times do
+        server.get url
+      end
+    end
+
+    puts result
+  end
+
+  desc "profile_server URL",
+    "Profile a GET request against the development server"
+  method_option :times, :type => :numeric, :aliases => "-n", :default => 1
+  def profile_server(url)
+    server = FakeServer.new
+    result = RubyProf.profile do
+      options[:times].times do
+        server.get url
+      end
+    end
+
+    printer = RubyProf::CallStackPrinter.new(result)
+    printer.print
+  end
+
+  private
+  def setup
+    Iridium.application.clean!
+  end
+
+  def project
+    @project ||= Iridium.application.pipeline
+  end
+end
+
+Perfs.start
