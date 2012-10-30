@@ -1,4 +1,4 @@
 Radium.Message = Radium.Core.extend
   message: DS.attr('string')
-  sentAt: DS.attr('date', key: 'sent_at')
+  sentAt: DS.attr('date')
   type: DS.attr('string')

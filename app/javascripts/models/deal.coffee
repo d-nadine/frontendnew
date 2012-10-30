@@ -2,12 +2,12 @@ Radium.Deal = Radium.Core.extend
   isEditable: true
   name: DS.attr('string')
   description: DS.attr('string')
-  closeBy: DS.attr('date', key: 'close_by')
+  closeBy: DS.attr('date')
 
   # Can be `pending`, `closed`, `paid`, `rejected`
   state: DS.attr('dealState')
-  isPublic: DS.attr('boolean', key: 'public')
-  user: DS.belongsTo('Radium.User', key: 'user_id')
+  isPublic: DS.attr('boolean')
+  user: DS.belongsTo('Radium.User')
   isPending: (->
     @get('state') is 'pending'
   ).property('state')

@@ -3,4 +3,4 @@ Radium.Group = Radium.Core.extend
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')
-  isPublic: DS.attr('boolean', key: 'is_public')
+  isPublic: DS.attr('boolean')

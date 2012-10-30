@@ -1,5 +1,8 @@
-DS.RadiumStore = DS.Store.extend
-  revision: 4
+require 'radium/lib/adapter'
+require 'radium/lib/serializer'
+
+Radium.Store = DS.Store.extend
+  revision: 7
 
   expandableArrayFor: (type) ->
     recordArray = Radium.ExpandableRecordArray.create
@@ -7,12 +10,14 @@ DS.RadiumStore = DS.Store.extend
       content: Ember.A([])
       store: this
 
-  adapter: DS.FixtureAdapter.create
+  adapter: Radium.Adapter.create
+    serializer: Radium.Serializer
     plurals: {}
     pluralize: (name) ->
       @plurals[name] || name + "s"
 
     queryFixtures: (fixtures, query, type) ->
+      console.log 'queryFixtures'
       if type == Radium.Gap
         first = Date.parse "#{query.first}T00:00:00Z"
         last  = Date.parse "#{query.last}T00:00:00Z"

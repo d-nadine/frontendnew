@@ -6,5 +6,5 @@ Radium.Comment = Radium.Core.extend
   user: DS.belongsTo 'Radium.User',
     key: 'user_id'
   attachments: DS.hasMany('Radium.Attachment')
-  commentableId: DS.attr('number', key: 'commentable_id')
-  commentableType: DS.attr('string', key: 'commentable_type')
+  commentableId: DS.attr('number')
+  commentableType: DS.attr('string')
