@@ -1,7 +1,7 @@
 source :rubygems
 
-gem 'iridium', :github => 'radiumsoftware/iridium'
-gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
+gem 'iridium', :path => '../iridium'
+gem 'rake-pipeline', :github => 'twinturbo/rake-pipeline', :branch => 'tmp-error-fix'
 gem 'rake-pipeline-web-filters', :github => 'wycats/rake-pipeline-web-filters'
 
 group :production do
