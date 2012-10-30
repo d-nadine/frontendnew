@@ -13,8 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: e26682c35d47a506f3633dfe2123ad3e95722044
-  branch: hydrogen
+  revision: e88b908de61fc33c3a8695550ff69c841b6fce32
   specs:
     iridium (0.9.0.rc1)
       activesupport
