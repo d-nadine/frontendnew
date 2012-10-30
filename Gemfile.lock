@@ -7,13 +7,13 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium-ember.git
-  revision: 32f122ef158ded5fc2a64409853ca64c90ff3071
+  revision: 5b77059a03ea2f940e1ac4e8aad8395cfa898e37
   specs:
-    iridium-ember (0.0.1)
+    iridium-ember (0.1.0)
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 4d64c69892110136110e7f682be512464504904a
+  revision: 7282a068ba424da57f40faee51e2b2075a40c993
   branch: hydrogen
   specs:
     iridium (0.9.0.rc1)
@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: git://github.com/twinturbo/rake-pipeline.git
-  revision: 18563e62f8a3ed97d352f36bec0402d4bdd65f20
+  revision: 15486d7bcd619a0b32ab7f297c65200dd8610a5f
   branch: iridium
   specs:
     rake-pipeline (0.8.0)
@@ -64,12 +64,20 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    columnize (0.3.6)
     commonjs (0.2.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
     daemons (1.1.9)
+    debugger (1.2.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.4)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.4)
     eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -99,7 +107,7 @@ GEM
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
-    unicorn (4.3.1)
+    unicorn (4.4.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -110,6 +118,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debugger
   hydrogen!
   iridium!
   iridium-ember!

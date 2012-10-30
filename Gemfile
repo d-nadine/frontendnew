@@ -6,6 +6,8 @@ gem 'iridium-ember', :github => 'radiumsoftware/iridium-ember'
 gem 'thor', :github => 'wycats/thor'
 gem 'rake-pipeline', :github => 'twinturbo/rake-pipeline', :branch => 'iridium'
 
+gem 'debugger'
+
 group :production do
   gem "unicorn"
 end
