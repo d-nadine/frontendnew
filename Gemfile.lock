@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium-ember.git
-  revision: 5c7b02a74b588d9c46f3420236c9e1770ad3547e
+  revision: ef81145bf952f6bd6734a4fe4bb903454132d514
   specs:
     iridium-ember (0.1.0)
 
