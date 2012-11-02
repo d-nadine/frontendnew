@@ -42,16 +42,15 @@ Radium.ExtendedRecordArray = Ember.ArrayProxy.extend
 #
 # You need to pass key, it does not compute any default.
 Radium.ExtendedRecordArray.reopenClass
-  attr: (options) ->
+  attr: (name, options) ->
     self = this
     options ?= {}
-    key = options.key
     mixins = options.mixins
 
     ( ->
       store = @get('store')
 
-      if ids = @get("data.#{key}")
+      if ids = @get("data.attributes.#{name}")
         ids = ids.map (element) ->
           [type, id] = element
           record = store.find(type, id)
@@ -63,7 +62,11 @@ Radium.ExtendedRecordArray.reopenClass
         content: Ember.A(ids)
 
       self.create.apply(self, args)
-    ).property()
+      # using attribute in meta() ensures that this data will be available
+      # in data.attributes.
+      # TODO: check what happens when using isAssociation, maybe it will be better
+      # to actually treat it like that
+    ).property('data').meta(isAttribute: true, type: 'array')
 
 
 # I suck at naming, if you have better idea, please rename (the

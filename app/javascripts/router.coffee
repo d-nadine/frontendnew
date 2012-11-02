@@ -34,6 +34,7 @@ jumpTo = (query) ->
     if !query.disableScroll
       Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
   else
+    console.log 'bla'
     sections = Radium.store.expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 

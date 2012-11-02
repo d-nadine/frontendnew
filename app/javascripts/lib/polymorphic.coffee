@@ -5,8 +5,8 @@ Radium.reopen
   #
   # TODO: add polymorphic keys support to ember-data
   polymorphic: (key) ->
-    idKey   = "data.#{key}.id"
-    typeKey = "data.#{key}.type"
+    idKey   = "#{key}Data.id"
+    typeKey = "#{key}Data.type"
     ( (key, value) ->
       if value
         type = value.get 'type'

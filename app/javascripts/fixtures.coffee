@@ -206,7 +206,7 @@ for i in [1..200]
 
 Fixtures.add Radium.CallList,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-08-14T15:27:32Z'
     updated_at: '2012-08-14T15:27:32Z'
     user_id: 1
@@ -214,7 +214,7 @@ Fixtures.add Radium.CallList,
 
 Fixtures.add Radium.Deal,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-08-14T15:27:32Z'
     updated_at: '2012-08-14T15:27:32Z'
     user_id: 1
@@ -222,7 +222,7 @@ Fixtures.add Radium.Deal,
     close_by: '2012-08-17T18:27:32Z'
     name: 'Great deal'
   big_contract:
-    id: 2
+    id: '2'
     created_at: '2012-07-15T15:27:32Z'
     updated_at: '2012-07-15T15:27:32Z'
     user_id: 1
@@ -230,7 +230,7 @@ Fixtures.add Radium.Deal,
     close_by: '2012-07-15T18:27:32Z'
     name: 'Big contract'
   small_contract:
-    id: 3
+    id: '3'
     created_at: '2012-07-15T15:27:32Z'
     updated_at: '2012-07-15T15:27:32Z'
     user_id: 1
@@ -240,7 +240,7 @@ Fixtures.add Radium.Deal,
 
 Fixtures.add Radium.Meeting,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 2
@@ -250,7 +250,7 @@ Fixtures.add Radium.Meeting,
     topic: 'Product discussion'
     location: 'Radium HQ'
   retrospection:
-    id: 2
+    id: '2'
     created_at: '2012-07-15T18:27:32Z'
     updated_at: '2012-07-15T18:27:32Z'
     user_id: 2
@@ -262,7 +262,7 @@ Fixtures.add Radium.Meeting,
 
 Fixtures.add Radium.Todo,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
     user_id: 1
@@ -274,7 +274,7 @@ Fixtures.add Radium.Todo,
     overdue: false
     comment_ids: [1]
   overdue:
-    id: 2
+    id: '2'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 2
@@ -285,13 +285,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: true
   call:
-    id: 3
+    id: '3'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'call'
     reference:
-      id: 1
+      id: '1'
       type: 'contact'
     description: 'discussing offer details'
     finish_by: '2012-08-17T22:00:00Z'
@@ -299,13 +299,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   deal:
-    id: 4
+    id: '4'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'deal'
     description: 'Close the deal'
     finish_by: '2012-08-17T22:00:00Z'
@@ -313,13 +313,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   campaign:
-    id: 5
+    id: '5'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'campaign'
     description: 'Prepare campaign plan'
     finish_by: '2012-08-17T22:00:00Z'
@@ -327,13 +327,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   email:
-    id: 6
+    id: '6'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'email'
     description: 'write a nice response'
     finish_by: '2012-08-17T22:00:00Z'
@@ -341,13 +341,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   group:
-    id: 7
+    id: '7'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'group'
     description: 'schedule group meeting'
     finish_by: '2012-08-17T22:00:00Z'
@@ -355,13 +355,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   phone_call:
-    id: 8
+    id: '8'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'phone_call'
     description: 'product discussion'
     finish_by: '2012-08-17T22:00:00Z'
@@ -369,13 +369,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   sms:
-    id: 9
+    id: '9'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'sms'
     description: 'product discussion'
     finish_by: '2012-08-17T22:00:00Z'
@@ -383,13 +383,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   with_todo:
-    id: 10
+    id: '10'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'general'
     reference:
-      id: 1
+      id: '1'
       type: 'todo'
     description: 'inception'
     finish_by: '2012-08-17T22:00:00Z'
@@ -397,13 +397,13 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   call_ralph:
-    id: 11
+    id: '11'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
     kind: 'call'
     reference:
-      id: 1
+      id: '1'
       type: 'contact'
     description: 'discussing offer details'
     finish_by: '2012-08-17T22:00:00Z'
@@ -411,7 +411,7 @@ Fixtures.add Radium.Todo,
     calendar_time: '2012-08-17T22:00:00Z'
     overdue: false
   finish_by_tomorrow:
-    id: 12
+    id: '12'
     created_at: '2012-08-17T18:27:32Z'
     updated_at: '2012-08-17T18:27:32Z'
     user_id: 1
@@ -422,23 +422,23 @@ Fixtures.add Radium.Todo,
 
 Fixtures.add Radium.Contact,
   ralph:
-    id: 1
+    id: '1'
     display_name: 'Ralph'
     status: 'prospect'
   john:
-    id: 2
+    id: '2'
     display_name: 'John'
     status: 'prospect'
 
 Fixtures.add Radium.Campaign,
   default:
-    id: 1
+    id: '1'
     name: 'Fall product campaign'
     user_id: 1
 
 Fixtures.add Radium.Comment,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     text: 'I like product drafts'
@@ -446,47 +446,47 @@ Fixtures.add Radium.Comment,
 
 Fixtures.add Radium.Email,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     sender:
-      id: 2
+      id: '2'
       type: 'user'
 
 Fixtures.add Radium.Group,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Product 1 group'
   developers:
-    id: 2
+    id: '2'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Developers'
 
 Fixtures.add Radium.PhoneCall,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     to:
-      id: 2
+      id: '2'
       type: 'user'
     from:
-      id: 1
+      id: '1'
       type: 'contact'
 
 Fixtures.add Radium.Sms,
   default:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     sender_id: 2
 
 Fixtures.add Radium.User,
   aaron:
-    id: 1
+    id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Aaron Stephens'
@@ -500,7 +500,7 @@ Fixtures.add Radium.User,
       huge_url: '/images/fallback/huge_default.png'
     account: 1
   jerry:
-    id: 2
+    id: '2'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Jerry Parker'
@@ -516,17 +516,17 @@ Fixtures.add Radium.User,
 
 Fixtures.add Radium.Notification,
   todo:
-    id: 1
+    id: '1'
     reference:
-      id: 1
+      id: '1'
       type: 'todo'
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
     tag: 'assigned.todo'
   meeting_invitation:
-    id: 2
+    id: '2'
     reference:
-      id: 1
+      id: '1'
       type: 'invitation'
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
@@ -534,31 +534,31 @@ Fixtures.add Radium.Notification,
 
 Fixtures.add Radium.Invitation,
   for_meeting_1:
-    id: 1
+    id: '1'
     user_id: 1
     meeting_id: 1
 
 Fixtures.add Radium.Reminder,
   todo:
-    id: 1
+    id: '1'
     time: '2012-08-14T18:27:32Z'
     reference:
-      id: 1
+      id: '1'
       type: 'todo'
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
   meeting:
-    id: 2
+    id: '2'
     time: '2012-08-14T18:27:32Z'
     reference:
-      id: 1
+      id: '1'
       type: 'meeting'
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
 
 Fixtures.add Radium.Message,
   default:
-    id: 1
+    id: '1'
     type: 'email'
     sentAt: '2012-08-14T18:27:32Z'
     message: 'Hey, what\'s up?'

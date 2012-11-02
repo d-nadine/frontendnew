@@ -1,6 +1,3 @@
-require 'radium/lib/store'
-require 'radium/lib/transforms'
-
 window.Radium = Em.Namespace.create
   createApp: ->
     app = Radium.App.create rootElement: $('#application')
@@ -18,7 +15,7 @@ Radium.App = Em.Application.extend
 
   init: ->
     @_super()
-    @store = DS.RadiumStore.create()
+    @store = Radium.Store.create()
     @set('_api', $.cookie('user_api_key'))
 
 $.ajaxSetup
@@ -28,6 +25,8 @@ $.ajaxSetup
     'X-Radium-User-API-Key': Radium.get('_api')
     'Accept': 'application/json'
 
+require 'radium/lib/transforms'
+require 'radium/lib/store'
 require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
 require 'radium/lib/expandable_record_array'

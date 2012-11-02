@@ -27,9 +27,7 @@ Radium.Person = Radium.Core.extend
   reminders: DS.hasMany('Radium.Reminder')
   groups: DS.hasMany('Radium.Group')
   notes: DS.hasMany('Radium.Note')
-  phoneCalls: DS.hasMany('Radium.PhoneCall',
-    key: 'phone_calls'
-  )
+  phoneCalls: DS.hasMany('Radium.PhoneCall')
   messages: DS.hasMany('Radium.Message')
   activities: DS.hasMany('Radium.Activity')
   followers: DS.hasMany('Radium.Follower')

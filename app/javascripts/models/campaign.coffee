@@ -1,10 +1,10 @@
 Radium.Campaign = Radium.Core.extend
   isEditable: true
   name: DS.attr('string')
-  endsAt: DS.attr('date', key: 'ends_at')
+  endsAt: DS.attr('date')
   currency: DS.attr('string')
   target: DS.attr('number')
-  isPublic: DS.attr('boolean', key: 'is_public')
-  user: DS.belongsTo('Radium.User', key: 'user_id')
+  isPublic: DS.attr('boolean')
+  user: DS.belongsTo('Radium.User')
 
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

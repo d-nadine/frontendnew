@@ -11,10 +11,13 @@ Radium.FeedSection = Radium.Core.extend
   # when new records will be loaded in some other place
   nextSectionFilter: (->
     nextDate = @get('nextDate')
-    Radium.FeedSection.filter (data) -> nextDate == data.get('id')
+    Radium.FeedSection.filter (section) ->
+      nextDate == section.get('id')
   ).property('nextDate')
 
-  nextSectionBinding: 'nextSectionFilter.firstObject'
+  nextSection: (->
+    @get('nextSectionFilter.firstObject')
+  ).property('nextSectionFilter.firstObject')
 
   previousSectionFilter: (->
     previousDate = @get('previousDate')
@@ -27,10 +30,7 @@ Radium.FeedSection = Radium.Core.extend
     @get('previousSectionFilter.firstObject')
   ).property('previousSectionFilter.firstObject')
 
-  items: Radium.ExtendedRecordArray.attr(
-    key: 'item_ids'
-    mixins: [Radium.ClusteredRecordArray]
-  )
+  items: Radium.ExtendedRecordArray.attr('items', mixins: [Radium.ClusteredRecordArray])
 
   removeItem: (item) ->
     @get('items').removeObject item
