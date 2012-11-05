@@ -1,1 +1,13 @@
-Contacts
+<div id="contacts" class="row">
+  {{! TODO: remove absolute paths}}
+  {{#with Radium.router.contactsController}}
+    {{#if selectedCampaign}}
+      <div class="span9">
+        <div class="page-header">
+          <h3>{{selectedCampaign.name}}'s Contacts</h3>
+        </div>
+      </div>
+    {{/if}}
+  {{/with}}
+  {{collection contentBinding="Radium.router.contactsController.content" itemViewClass="Radium.ContactCardContainerView"}}
+</div>

@@ -69,14 +69,13 @@ Radium.Router = Ember.Router.extend
   initialState: 'loading'
 
   showUser: Ember.Route.transitionTo('root.users.user')
-  showContacts: Ember.Route.transitionTo('root.contacts')
+  showContacts: Ember.Route.transitionTo('root.contacts.index')
   showContact: Ember.Route.transitionTo('root.contacts.contact')
   showDeal: Ember.Route.transitionTo('root.deal')
   showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard.all')
   showCalendar: Ember.Route.transitionTo('root.calendar.index')
-  setFilter: Ember.Route.transitionTo('root.dashboard.byType')
 
   showDate: Ember.Route.transitionTo('root.dashboardWithDate')
 
@@ -157,22 +156,6 @@ Radium.Router = Ember.Router.extend
         connectOutlets: (router) ->
           router.get('feedController').set('typeFilter', null)
 
-      byType: Ember.Route.extend
-        route: '/type/:type'
-        connectOutlets: (router, type) ->
-          if type != 'all'
-            router.get('feedController').set('typeFilter', type)
-          else
-            router.transitionTo('root.dashboard.all')
-
-        # FIXME: for some weird reason, there is no url for this route,
-        #        even though I use href=true
-        serialize: (router, type) ->
-          {type: type}
-
-        deserialize: (router, params) ->
-          params.type
-
     # TODO: find out what's the best pattern to handle such things
     dashboardWithDate: Ember.Route.extend
       route: '/dashboard/:date'
@@ -231,8 +214,14 @@ Radium.Router = Ember.Router.extend
     contacts: Ember.Route.extend
       route: '/contacts'
       connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
+        router.get('applicationController').connectOutlet('sidebar', 'contactsSidebar')
         router.get('mainController').connectOutlet('content', 'contacts')
+        router.get('campaignsController').set('content', Radium.Campaign.find())
+
+      index: Ember.Route.extend
+        route: '/'
+        connectOutlets: (router) ->
+          router.get('contactsController').set('collection', Radium.Contact.find())
 
       contact: Ember.Route.extend
         route: '/:contact_id'

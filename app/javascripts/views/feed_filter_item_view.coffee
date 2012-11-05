@@ -3,8 +3,12 @@ Radium.FeedFilterItemView = Ember.View.extend
   templateName: 'filter'
   classNames: ['main-filter-item']
   classNameBindings: ['isSelected:active', 'type']
-  controllerBinding: 'Radium.router.feedController'
   typeBinding: 'content.type'
+
+  setFilter: (event) ->
+    type = if event.context == 'all' then null else event.context
+    console.log type, @get('controller').toString()
+    @get('controller').set('typeFilter', type)
 
   isSelected: (->
     @get('controller.typeFilter') == @get('content.type') ||
@@ -20,7 +24,8 @@ Radium.FeedFilterItemView = Ember.View.extend
       "add-#{ @get 'parentView.content.type' }"
     ).property('parentView.content.type')
     title: (->
-      type = @get('parentView.content.type').humanize()
+      if type = @get('parentView.content.type')
+        type = type.humanize()
       "Add a new #{type}"
     ).property()
     click: (event) ->

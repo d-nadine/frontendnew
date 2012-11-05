@@ -1,1 +1,1 @@
-Radium.ContactsController = Em.ArrayProxy.extend()
+Radium.ContactsController = Em.ArrayController.extend(Radium.FilteredContactsMixin)
