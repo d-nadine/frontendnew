@@ -3,3 +3,4 @@ site/
 config/settings.yml
 !app/assets/images/icons
 /vendor/cache
+.sass-cache
