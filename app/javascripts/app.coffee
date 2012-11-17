@@ -150,5 +150,6 @@ require 'radium/views/contacts_feed_filter_view'
 require 'radium/views/campaign_list_view'
 require 'radium/views/contact_card_container_view'
 require 'radium/views/contact_card_view'
+require 'radium/views/contacts_toolbar_view'
 
 require 'radium/fixtures'
