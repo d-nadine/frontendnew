@@ -8,10 +8,11 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   overdue: DS.attr('boolean')
 
   reference: Radium.polymorphic('reference')
-  referenceTypeBinding: 'referenceData.type'
+  referenceType: (-> @get('referenceData.type') ).property('referenceData.type')
   referenceData: DS.attr('object')
 
   user: DS.belongsTo('Radium.User')
+  contact: DS.belongsTo('Radium.Contact')
   # Turn on when todo's are created from the form
   hasNotificationAnim: DS.attr('boolean')
 

@@ -1,6 +1,5 @@
 <div id="main" class="container">
   {{outlet topbar}}
-  {{view Radium.FormContainerView}}
 
   <div class="row">
     {{view Radium.NotificationsView}}
@@ -9,6 +8,7 @@
     </div>
 
     <div id="main-feed" class="span9 offset3">
+      {{view Radium.FormContainerView}}
       <div class="row">
         <div class="span9">
           {{outlet}}

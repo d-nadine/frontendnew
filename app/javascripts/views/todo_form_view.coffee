@@ -41,7 +41,7 @@ Radium.TodoFormView = Radium.FormView.extend
       'Assign a Todo to “%@” for %@'.fmt name, dateString
     else
       'Add a Todo for %@'.fmt dateString
-  ).property('finishBy', 'selection').cacheable()
+  ).property('finishBy', 'selection', 'selection.name')
 
   descriptionText: Ember.TextArea.extend(Ember.TargetActionSupport,
     elementId: 'description'
@@ -123,6 +123,9 @@ Radium.TodoFormView = Radium.FormView.extend
   submitForm: ->
     doStuff = ->
       selection = @get('selection')
+      if !selection || !selection.get('length')
+        selection = [@get('assignedUser')]
+
       description = @get('descriptionField.value')
       isCall = @get('isCallCheckbox.checked')
 
@@ -131,29 +134,31 @@ Radium.TodoFormView = Radium.FormView.extend
       todoKind = 'general'
       finishBy = @get('finishBy')
 
-      assignedUser = @get('assignedUser')
-      assignedUserId = assignedUser.get('id')
+      self = this
+      selection.forEach (assignee) ->
+        assignedUser   = assignee
+        assignedUserId = assignee.get('id')
 
-      data =
-        description: description
-        finishBy: finishBy
-        finished: false
-        kind: (if (isCall) then 'call' else todoKind)
-        user_id: assignedUserId
-        user: assignedUser
-        created_at: Ember.DateTime.create()
-        updated_at: Ember.DateTime.create()
-        hasAnimation: true
+        data =
+          description: description
+          finishBy: finishBy
+          finished: false
+          kind: (if (isCall) then 'call' else todoKind)
+          user_id: assignedUserId
+          user: assignedUser
+          created_at: Ember.DateTime.create()
+          updated_at: Ember.DateTime.create()
+          hasAnimation: true
 
-      todo = Radium.store.createRecord Radium.Todo, data
-      if selection
-        todo.set 'reference', selection
+        todo = Radium.store.createRecord Radium.Todo, data
+        if selection
+          todo.set 'reference', selection
 
-      # TODO: feed sections could automatically handle adding
-      # new items, but I'm not sure how would hat behave, it needs
-      # a check with API or a lot of items
-      @get('controller').pushItem(todo)
-      Radium.store.commit()
+        # TODO: feed sections could automatically handle adding
+        # new items, but I'm not sure how would hat behave, it needs
+        # a check with API or a lot of items
+        self.get('controller').pushItem(todo)
+        Radium.store.commit()
 
       @close()
 

@@ -2,7 +2,7 @@ require 'radium/lib/adapter'
 require 'radium/lib/serializer'
 
 Radium.Store = DS.Store.extend
-  revision: 7
+  revision: 8
 
   expandableArrayFor: (type) ->
     recordArray = Radium.ExpandableRecordArray.create

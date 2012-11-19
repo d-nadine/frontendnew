@@ -17,3 +17,6 @@ Radium.Adapter.map 'Radium.Person',
 
 Radium.Adapter.map 'Radium.FeedSection',
   items: { key: 'item_ids' }
+
+Radium.Adapter.map 'Radium.FeedSection',
+  user: { key: 'user_id' }

@@ -6,10 +6,8 @@
 */
 #form-container {
   margin: 20px 0;
-  position: fixed;
-  right: 50%;
-  top: 40px;
-  margin-right: -470px;
+  background-color: white;
+  z-index: 100;
 
   .well {
     width: 660px;

@@ -3,8 +3,7 @@ Radium.Comment = Radium.Core.extend
     return this.get('createdAt').toISO8601()
   ).property('createdAt')
   text: DS.attr('string')
-  user: DS.belongsTo 'Radium.User',
-    key: 'user_id'
+  user: DS.belongsTo('Radium.User')
   attachments: DS.hasMany('Radium.Attachment')
   commentableId: DS.attr('number')
   commentableType: DS.attr('string')

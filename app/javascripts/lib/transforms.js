@@ -5,34 +5,34 @@
 Radium.transforms = {}
 
 Radium.transforms.array = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     return (Ember.isArray(serialized) ? serialized : null);
   },
-  toJSON: function(deserialized){
+  toData: function(deserialized){
     return (Ember.isArray(deserialized) ? deserialized : null);
   }
 };
 
 // Object transform
 Radium.transforms.object = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     return Ember.none(serialized) ? {} : serialized;
   },
 
-  toJSON: function(deserialized) {
+  toData: function(deserialized) {
     return Ember.none(deserialized) ? {} : deserialized;
   }
 };
 
 // Transform for validating the string states of a Deal state property
 Radium.transforms.dealState = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     if (serialized == null) {
       return 'pending';
     }
     return String(serialized);
   },
-  toJSON: function(deserialized) {
+  toData: function(deserialized) {
     var state;
 
     if (deserialized == null ||
@@ -48,13 +48,13 @@ Radium.transforms.dealState = {
 
 // Transform for validating the string states of a Todo kind property
 Radium.transforms.todoKind = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     if (serialized == null) {
       return 'general';
     }
     return String(serialized);
   },
-  toJSON: function(deserialized) {
+  toData: function(deserialized) {
     var kind = deserialized;
 
     if (deserialized == null ||
@@ -68,13 +68,13 @@ Radium.transforms.todoKind = {
 
 // Transform for validating the string states of an Invitation state property
 Radium.transforms.inviteState = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     if (serialized == null) {
       return 'pending';
     }
     return String(serialized);
   },
-  toJSON: function(deserialized) {
+  toData: function(deserialized) {
     var state = deserialized;
     if (['pending', 'confirmed', 'rejected'].indexOf(deserialized) < 0) {
       state = 'pending';
@@ -85,7 +85,7 @@ Radium.transforms.inviteState = {
 };
 
 Radium.transforms.datetime = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     var type = typeof serialized;
 
     if (type === "string" || type === "number") {
@@ -99,7 +99,7 @@ Radium.transforms.datetime = {
     }
   },
 
-  toJSON: function(deserialized) {
+  toData: function(deserialized) {
     if (deserialized instanceof Ember.DateTime) {
       var normalized = deserialized.advance({timezone: 0});
       return normalized.toFormattedString(Radium.transforms.datetime.format);
@@ -114,7 +114,7 @@ Radium.transforms.datetime = {
 };
 
 Radium.transforms.date = {
-  fromJSON: function(serialized) {
+  fromData: function(serialized) {
     var type = typeof serialized;
 
     if (type === "string" || type === "number") {
@@ -128,7 +128,7 @@ Radium.transforms.date = {
     }
   },
 
-  toJSON: function(date) {
+  toData: function(date) {
     var type = typeof date;
     if (type === "string") {
       return date;
