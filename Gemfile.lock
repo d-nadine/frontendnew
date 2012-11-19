@@ -13,17 +13,18 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: e88b908de61fc33c3a8695550ff69c841b6fce32
+  revision: f08fec6850a7a899dd5b1a35c07e76dae99836bd
   specs:
     iridium (0.9.0.rc1)
       activesupport
+      barber (~> 0.1.2)
       coffee-script
       compass
       execjs
       less
       rack
       rack-rewrite
-      rake-pipeline (= 0.8.0)
+      rake-pipeline (~> 0.8.0)
       rake-pipeline-web-filters (= 0.7.0)
       sass
       therubyracer
@@ -55,9 +56,11 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    activesupport (3.2.8)
+    activesupport (3.2.9)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    barber (0.1.2)
+      execjs
     chunky_png (1.2.6)
     coffee-script (2.2.0)
       coffee-script-source
@@ -79,10 +82,10 @@ GEM
     less (2.2.2)
       commonjs (~> 0.2.6)
     libv8 (3.3.10.4)
-    multi_json (1.3.6)
+    multi_json (1.3.7)
     open4 (1.3.0)
     rack (1.4.1)
-    rack-rewrite (1.3.0)
+    rack-rewrite (1.3.1)
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.10.0)
@@ -91,7 +94,7 @@ GEM
       rack
       rake-pipeline (~> 0.6)
     ruby-prof (0.11.2)
-    sass (3.2.1)
+    sass (3.2.3)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
     thin (1.5.0)

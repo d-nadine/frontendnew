@@ -30,7 +30,7 @@ Radium.FormContainerView = Ember.ContainerView.extend
     @show form
 
   showTodoForm: () ->
-    @show Radium.TodoFormView.create()
+    @show Radium.TodoFormView.create(selection: @get('controller.selection'))
 
   showOrHide: (->
     if type = @get('controller.type')

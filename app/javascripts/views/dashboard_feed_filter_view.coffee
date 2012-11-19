@@ -2,7 +2,7 @@ Radium.DashboardFeedFilterView = Em.CollectionView.extend
   tagName: 'ul'
   classNames: 'nav nav-tabs nav-stacked filters'.w(),
 
-  contollerBinding: 'Radium.router.feedController'
+  controllerBinding: 'Radium.router.feedController'
 
   content: [
     {label: 'Everything', type: 'all', addButton: false}

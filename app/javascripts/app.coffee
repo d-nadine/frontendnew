@@ -1,6 +1,3 @@
-require 'radium/lib/store'
-require 'radium/lib/transforms'
-
 window.Radium = Em.Namespace.create
   createApp: ->
     app = Radium.App.create rootElement: $('#application')
@@ -18,7 +15,7 @@ Radium.App = Em.Application.extend
 
   init: ->
     @_super()
-    @store = DS.RadiumStore.create()
+    @store = Radium.Store.create()
     @set('_api', $.cookie('user_api_key'))
 
 $.ajaxSetup
@@ -28,6 +25,8 @@ $.ajaxSetup
     'X-Radium-User-API-Key': Radium.get('_api')
     'Accept': 'application/json'
 
+require 'radium/lib/transforms'
+require 'radium/lib/store'
 require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
 require 'radium/lib/expandable_record_array'
@@ -46,6 +45,7 @@ require 'radium/mixins/views/time_picker'
 require 'radium/mixins/noop'
 require 'radium/mixins/infinite_scroller'
 require 'radium/mixins/filtered_collection_mixin'
+require 'radium/mixins/filtered_contacts_mixin'
 require 'radium/mixins/validate'
 require 'radium/mixins/form_validation'
 require 'radium/mixins/nested_feed'
@@ -101,6 +101,7 @@ require 'radium/controllers/users_feed_controller'
 require 'radium/controllers/groups_feed_controller'
 require 'radium/controllers/calendar_feed_controller'
 require 'radium/controllers/notifications_controller'
+require 'radium/controllers/campaigns_controller'
 
 require 'radium/views/application_view'
 require 'radium/views/login_view'
@@ -144,5 +145,11 @@ require 'radium/views/sidebar_meeting_form_view'
 require 'radium/views/notification_item_view'
 require 'radium/views/notifications_view'
 require 'radium/views/notifications_link_view'
+require 'radium/views/contacts_sidebar_view'
+require 'radium/views/contacts_feed_filter_view'
+require 'radium/views/campaign_list_view'
+require 'radium/views/contact_card_container_view'
+require 'radium/views/contact_card_view'
+require 'radium/views/contacts_toolbar_view'
 
 require 'radium/fixtures'
