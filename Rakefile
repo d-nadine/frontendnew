@@ -2,11 +2,14 @@ require 'bundler/setup'
 require File.expand_path("../application.rb", __FILE__)
 
 namespace :assets do
-  desc "compiles the application"
+  desc "Compiles the application"
   task :precompile do
     Iridium.application.compile
   end
 end
+
+desc "Compiles the application"
+task :compile => "assets:precompile"
 
 namespace :build do
   vendor_path = File.expand_path "../vendor/", __FILE__
