@@ -1,3 +1,4 @@
+// 67de84a (2012-11-20 09:13:01 -0800)
 (function() {
 window.DS = Ember.Namespace.create({
   CURRENT_API_REVISION: 8
@@ -256,7 +257,6 @@ DS.ManyArrayStateManager = Ember.StateManager.extend({
   decrement: function(count) {
     var counter = this.counter = this.counter - count;
 
-    Ember.assert("Somehow the ManyArray loaded counter went below 0. This is probably an ember-data bug. Please report it at https://github.com/emberjs/data/issues", counter >= 0);
 
     if (counter === 0) {
       this.send('becameLoaded');
@@ -344,7 +344,7 @@ DS.ManyArray = DS.RecordArray.extend({
   replaceContent: function(index, removed, added) {
     // Map the array of record objects into an array of  client ids.
     added = added.map(function(record) {
-      Ember.assert("You can only add records of " + (get(this, 'type') && get(this, 'type').toString()) + " to this association.", !get(this, 'type') || (get(this, 'type') === record.constructor));
+
       return record.get('clientId');
     }, this);
 
@@ -630,7 +630,7 @@ DS.Transaction = Ember.Object.extend({
     @param {DS.Model} record the record to add to the transaction
   */
   add: function(record) {
-    Ember.assert("You must pass a record into transaction.add()", record instanceof DS.Model);
+
 
     var recordTransaction = get(record, 'transaction'),
         defaultTransaction = get(this, 'store.defaultTransaction');
@@ -641,9 +641,8 @@ DS.Transaction = Ember.Object.extend({
     // XXX it should be possible to move a dirty transaction from the default transaction
 
     // we could probably make this work if someone has a valid use case. Do you?
-    Ember.assert("Once a record has changed, you cannot move it into a different transaction", !get(record, 'isDirty'));
 
-    Ember.assert("Models cannot belong to more than one transaction at a time.", recordTransaction === defaultTransaction);
+
 
     this.adoptRecord(record);
   },
@@ -1353,6 +1352,15 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     record.deleteRecord();
   },
 
+  /**
+    For symmetry, a record can be unloaded via the store.
+
+    @param {DS.Model} record
+  */
+  unloadRecord: function(record) {
+    record.unloadRecord();
+  },
+
   // ................
   // . FIND RECORDS .
   // ................
@@ -1961,6 +1969,17 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   },
 
   /**
+     This method allows the adapter to specify that a record
+     could not be saved because the server returned an unhandled
+     error.
+
+     @param {DS.Model} record
+  */
+  recordWasError: function(record) {
+    record.adapterDidError();
+  },
+
+  /**
     This is a lower-level API than `didSaveRecord` that allows an
     adapter to acknowledge the persistence of a single attribute.
 
@@ -2125,7 +2144,6 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
         clientId = get(record, 'clientId'),
         oldId = get(record, 'id');
 
-    Ember.assert("An adapter cannot assign a new id to a record that already has an id. " + record + " had id: " + oldId + " and you tried to update it with " + id + ". This likely happened because your server returned data in response to a find or update that had a different id than the one you sent.", oldId === undefined || id === oldId);
 
     typeMap.idToCid[id] = clientId;
     this.clientIdToId[clientId] = id;
@@ -2167,7 +2185,6 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
         type = record.constructor,
         id = this.preprocessData(type, data);
 
-    Ember.assert("An adapter cannot assign a new id to a record that already has an id. " + record + " had id: " + oldId + " and you tried to update it with " + id + ". This likely happened because your server returned data in response to a find or update that had a different id than the one you sent.", oldId === undefined || id === oldId);
 
     typeMap.idToCid[id] = clientId;
     this.clientIdToId[clientId] = id;
@@ -2572,6 +2589,23 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     return record;
   },
 
+  dematerializeRecord: function(record) {
+    var id = get(record, 'id'),
+        clientId = get(record, 'clientId'),
+        type = this.typeForClientId(clientId),
+        typeMap = this.typeMapFor(type);
+
+    record.updateRecordArrays();
+
+    delete this.recordCache[clientId];
+    delete this.clientIdToId[clientId];
+    delete this.clientIdToType[clientId];
+    delete this.clientIdToHash[clientId];
+    delete this.recordArraysByClientId[clientId];
+
+    if (id) { delete typeMap.idToCid[id]; }
+  },
+
   destroy: function() {
     if (get(DS, 'defaultStore') === this) {
       set(DS, 'defaultStore', null);
@@ -2638,7 +2672,7 @@ DS.Store.reopenClass({
     if (typeof key === 'string') {
       var transformedKey;
       transformedKey = get(Ember.lookup, key);
-      Ember.assert("Could not find model at path " + key, transformedKey);
+
       return transformedKey;
     } else {
       return key;
@@ -3214,6 +3248,11 @@ var states = {
           get(manager, 'record').clearRelationships();
         },
 
+        unloadRecord: function(manager) {
+          manager.transitionTo('deleted.saved');
+          get(manager, 'record').clearRelationships();
+        },
+
         willCommit: function(manager) {
           manager.transitionTo('relationshipsInFlight');
         },
@@ -3365,6 +3404,13 @@ var states = {
         // FLAGS
         isDirty: false,
 
+        setup: function(manager) {
+          var record = get(manager, 'record'),
+              store = get(record, 'store');
+
+          store.dematerializeRecord(record);
+        },
+
         invokeLifecycleCallbacks: function(manager) {
           var record = get(manager, 'record');
           record.trigger('didDelete', record);
@@ -3513,6 +3559,12 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     this.send('deleteRecord');
   },
 
+  unloadRecord: function() {
+
+
+    this.send('unloadRecord');
+  },
+
   clearRelationships: function() {
     this.eachAssociation(function(name, relationship) {
       if (relationship.kind === 'belongsTo') {
@@ -3591,7 +3643,7 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
   },
 
   materializeAttributes: function(attributes) {
-    Ember.assert("Must pass a hash of attributes to materializeAttributes", !!attributes);
+
     this._data.attributes = attributes;
   },
 
@@ -3806,8 +3858,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
 
   adapterDidDelete: function() {
     this.removeInFlightDirtyFactor('@deleted');
-
-    this.updateRecordArraysLater();
   },
 
   adapterDidCreate: function() {
@@ -3818,6 +3868,10 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
 
   adapterDidInvalidate: function(errors) {
     this.send('becameInvalid', errors);
+  },
+
+  adapterDidError: function() {
+    this.send('becameError');
   },
 
   /**
@@ -3873,7 +3927,7 @@ DS.Model.reopenClass({
 
     this.eachComputedProperty(function(name, meta) {
       if (meta.isAttribute) {
-        Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.toString(), name !== 'id');
+
 
         meta.name = name;
         map.set(name, meta);
@@ -3916,7 +3970,7 @@ DS.attr = function(type, options) {
     var data;
 
     if (arguments.length === 2) {
-      Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.toString(), key !== 'id');
+
       this.setProperty(key, value);
     } else {
       value = getAttr(this, options, key);
@@ -3967,7 +4021,7 @@ var hasAssociation = function(type, options, one) {
 };
 
 DS.belongsTo = function(type, options) {
-  Ember.assert("The type passed to DS.belongsTo must be defined", !!type);
+
   return hasAssociation(type, options);
 };
 
@@ -4039,7 +4093,7 @@ var hasAssociation = function(type, options) {
 };
 
 DS.hasMany = function(type, options) {
-  Ember.assert("The type passed to DS.hasMany must be defined", !!type);
+
   return hasAssociation(type, options);
 };
 
@@ -4205,7 +4259,7 @@ DS.OneToManyChange.forChildAndParent = function(childClientId, store, options) {
   var childType = store.typeForClientId(childClientId), key;
 
   if (options.parentType) {
-    key = inverseBelongsToForHasMany(options.parentType, childType, options.hasManyName);
+    key = inverseBelongsToName(options.parentType, childType, options.hasManyName);
   } else {
     key = options.belongsToName;
   }
@@ -4268,7 +4322,7 @@ DS.OneToManyChange.prototype = {
 
       var childType = store.typeForClientId(this.child);
       var inverseType = DS.inverseTypeFor(childType, this.belongsToName);
-      name = DS.inverseNameFor(inverseType, childType, 'hasMany');
+      name = inverseHasManyName(inverseType, childType, this.belongsToName);
       this.hasManyName = name;
     }
 
@@ -4386,7 +4440,7 @@ DS.OneToManyChange.prototype = {
     var transaction = transactions.reduce(function(prev, t) {
       if (!get(t, 'isDefault')) {
         if (prev === null) { return t; }
-        Ember.assert("All records in a changed relationship must be in the same transaction. You tried to change the relationship between records when one is in " + t + " and the other is in " + prev, t === prev);
+
       }
 
       return prev;
@@ -4538,7 +4592,7 @@ DS.OneToManyChange.prototype = {
   }
 };
 
-function inverseBelongsToForHasMany(parentType, childType, hasManyName) {
+function inverseBelongsToName(parentType, childType, hasManyName) {
   // Get the options passed to the parent's DS.hasMany()
   var options = parentType.metaForProperty(hasManyName).options;
   var belongsToName;
@@ -4548,6 +4602,17 @@ function inverseBelongsToForHasMany(parentType, childType, hasManyName) {
   }
 
   return DS.inverseNameFor(childType, parentType, 'belongsTo');
+}
+
+function inverseHasManyName(parentType, childType, belongsToName) {
+  var options = childType.metaForProperty(belongsToName).options;
+  var hasManyName;
+
+  if (hasManyName = options.inverse) {
+    return hasManyName;
+  }
+
+  return DS.inverseNameFor(parentType, childType, 'hasMany');
 }
 
 })();
@@ -4648,7 +4713,7 @@ DS.Transforms = Ember.Object.extend({
 
       if (type === "string" || type === "number") {
         // this is a fix for Safari 5.1.5 on Mac which does not accept timestamps as yyyy-mm-dd
-        if (serialized.search(/^\d{4}-\d{2}-\d{2}$/) !== -1){
+        if (type === "string" && serialized.search(/^\d{4}-\d{2}-\d{2}$/) !== -1){
           serialized += "T00:00:00Z";
         }
 
@@ -5155,7 +5220,6 @@ DS.Serializer = Ember.Object.extend({
   transformValueToData: function(value, attributeType) {
     var transform = this.transforms[attributeType];
 
-    Ember.assert("You tried to use an attribute type (" + attributeType + ") that has not been registered", transform);
     return transform.toData(value);
   },
 
@@ -5401,7 +5465,6 @@ DS.Serializer = Ember.Object.extend({
   transformValueFromData: function(value, attributeType) {
     var transform = this.transforms[attributeType];
 
-    Ember.assert("You tried to use a attribute type (" + attributeType + ") that has not been registered", transform);
     return transform.fromData(value);
   },
 
@@ -5534,7 +5597,7 @@ DS.Serializer = Ember.Object.extend({
     mappings.forEach(function(key, mapping) {
       if (typeof key === 'string') {
         var type = Ember.get(Ember.lookup, key);
-        Ember.assert("Could not find model at path" + key, type);
+
 
         reifiedMappings.set(type, mapping);
       } else {
@@ -5916,7 +5979,6 @@ DS.FixtureAdapter = DS.Adapter.extend({
   find: function(store, type, id) {
     var fixtures = this.fixturesForType(type);
 
-    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
 
     if (fixtures) {
       fixtures = fixtures.findProperty('id', id);
@@ -5932,7 +5994,6 @@ DS.FixtureAdapter = DS.Adapter.extend({
   findMany: function(store, type, ids) {
     var fixtures = this.fixturesForType(type);
 
-    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
 
     if (fixtures) {
       fixtures = fixtures.filter(function(item) {
@@ -5950,7 +6011,6 @@ DS.FixtureAdapter = DS.Adapter.extend({
   findAll: function(store, type) {
     var fixtures = this.fixturesForType(type);
 
-    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
 
     this.simulateRemoteCall(function() {
       store.loadMany(type, fixtures);
@@ -5961,7 +6021,6 @@ DS.FixtureAdapter = DS.Adapter.extend({
   findQuery: function(store, type, query, array) {
     var fixtures = this.fixturesForType(type);
 
-    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
 
     fixtures = this.queryFixtures(fixtures, query);
 
@@ -6064,6 +6123,9 @@ DS.RESTAdapter = DS.Adapter.extend({
       context: this,
       success: function(json) {
         this.didCreateRecord(store, type, record, json);
+      },
+      error: function(xhr) {
+        this.context.didError(store, type, record, xhr);
       }
     });
   },
@@ -6135,6 +6197,9 @@ DS.RESTAdapter = DS.Adapter.extend({
       context: this,
       success: function(json) {
         this.didUpdateRecord(store, type, record, json);
+      },
+      error: function(xhr) {
+        this.context.didError(store, type, record, xhr);
       }
     });
   },
@@ -6301,6 +6366,15 @@ DS.RESTAdapter = DS.Adapter.extend({
     store.loadMany(type, json[root]);
   },
 
+  didError: function(store, type, record, xhr) {
+    if (xhr.status === 422) {
+      var data = JSON.parse(xhr.responseText);
+      store.recordWasInvalid(record, data['errors']);
+    } else {
+      store.recordWasError(record);
+    }
+  },
+
   // HELPERS
 
   plurals: {},
@@ -6348,7 +6422,7 @@ DS.RESTAdapter = DS.Adapter.extend({
 
       if (!sideloadedType) {
         mappings = get(this, 'mappings');
-        Ember.assert("Your server returned a hash with the key " + prop + " but you have no mappings", !!mappings);
+
 
         sideloadedType = get(mappings, prop);
 
@@ -6356,7 +6430,6 @@ DS.RESTAdapter = DS.Adapter.extend({
           sideloadedType = get(window, sideloadedType);
         }
 
-        Ember.assert("Your server returned a hash with the key " + prop + " but you have no mapping for it", !!sideloadedType);
       }
 
       this.sideloadAssociations(store, sideloadedType, json, prop, loaded);
@@ -6392,9 +6465,8 @@ DS.RESTAdapter = DS.Adapter.extend({
   buildURL: function(record, suffix) {
     var url = [this.url];
 
-    Ember.assert("Namespace URL (" + this.namespace + ") must not start with slash", !this.namespace || this.namespace.toString().charAt(0) !== "/");
-    Ember.assert("Record URL (" + record + ") must not start with slash", !record || record.toString().charAt(0) !== "/");
-    Ember.assert("URL suffix (" + suffix + ") must not start with slash", !suffix || suffix.toString().charAt(0) !== "/");
+
+
 
     if (this.namespace !== undefined) {
       url.push(this.namespace);

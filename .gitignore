@@ -4,3 +4,5 @@ config/settings.yml
 !app/assets/images/icons
 deploy.log
 .sass-cache
+vendor/ember.js
+vendor/data

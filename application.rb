@@ -9,7 +9,7 @@ class Radium < Iridium::Application
   # Specify vendor load order. Files will be concatenated in the
   # declared order. Undeclared files will be concatentated after
   # all declared files
-  config.dependencies.load 'ember-data'
+  config.dependencies.insert_after :ember, 'ember-data'
 
   # Specify a different place to load your templates. All templates
   # will be added to Javascript array specified here:
