@@ -1,4 +1,6 @@
-Radium.Serializer = DS.RESTSerializer # this is an instance, should probably be class
+Radium.Serializer = DS.RESTSerializer.extend
+  init: ->
+    @_super.apply(this, arguments)
+    for name, transform of Radium.transforms
+      @registerTransform name, transform
 
-for name, transform of Radium.transforms
-  Radium.Serializer.registerTransform name, transform

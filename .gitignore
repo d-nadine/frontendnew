@@ -3,4 +3,4 @@ site/
 config/settings.yml
 !app/assets/images/icons
 deploy.log
-builds/
+.sass-cache

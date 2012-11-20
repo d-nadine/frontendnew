@@ -6,11 +6,9 @@ gem 'iridium-ember', :github => 'radiumsoftware/iridium-ember'
 gem 'thor', :github => 'wycats/thor'
 gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
 
+gem 'unicorn'
+
 group :test do
   gem 'ruby-prof'
   gem 'rack-test'
-end
-
-group :production do
-  gem "unicorn"
 end

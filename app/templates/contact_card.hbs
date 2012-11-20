@@ -1,0 +1,33 @@
+<div class="contact-card-inner">
+  <div class="contact-avatar">
+    <span class="inline-checkbox">
+      {{view Ember.Checkbox checkedBinding="view.content.isSelected"}}
+    </span>
+    <img {{bindAttr src="view.content.avatar.small_url" title="view.content.displayName"}}>
+  </div>
+  <div class="contact-details">
+    <h4 class="headline">
+      {{view.content.displayName}}
+      {{view Radium.LabelView contactBinding="view.content" labelBinding="view.content.status"}}
+
+      <a href="#" {{action "showTodoForm" target="parentView"}}>
+        <i class="icon-add-todo"></i>
+      </a>
+    </h4>
+    {{#if content.campaigns.length}}
+      <p><strong>Groups:</strong>
+        {{#each content.groups}}
+          {{name}}
+        {{/each}}
+      </p>
+    {{/if}}
+    {{#if content.campaigns.length}}
+      <p><strong>Campaigns:</strong>
+        {{#each content.campaigns}}
+          <a {{bindAttr href="url"}}>{{name}}</a>
+        {{/each}}
+      </p>
+    {{/if}}
+  </div>
+</div>
+
