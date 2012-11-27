@@ -8,6 +8,10 @@ gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
 
 gem 'unicorn'
 
+group :development do
+  gem 'dnote'
+end
+
 group :test do
   gem 'ruby-prof'
   gem 'rack-test'

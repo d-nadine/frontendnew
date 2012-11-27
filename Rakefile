@@ -40,3 +40,21 @@ end
 
 desc "Build Ember and Ember Data from local repos"
 task :build => ["build:ember", "build:ember_data"]
+
+namespace :notes do
+  files = proc { Dir['{app,test}/**/*.coffee'].select { |f| File.file? f }.join " " }
+
+  [:todo, :fixme, :optimize, :note].each do |tag|
+    desc "Print all #{tag.upcase} annotations"
+    task tag do
+      sh "bundle exec dnote --ignore assets/images --label #{tag.upcase} #{files.call}", :verbose => false
+    end
+  end
+
+  task :all do
+    sh "bundle exec dnote --ignore assets/images #{files.call}", :verbose => false
+  end
+end
+
+desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
+task :notes => "notes:all"
