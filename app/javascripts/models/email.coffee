@@ -8,3 +8,4 @@ Radium.Email = Radium.Message.extend
   associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'sender')
 
   user: DS.belongsTo('Radium.User', polymorphicFor: 'sender')
+  todos: DS.hasMany('Radium.Todo', inverse: 'email')

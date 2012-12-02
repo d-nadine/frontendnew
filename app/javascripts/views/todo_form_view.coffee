@@ -137,7 +137,7 @@ Radium.TodoFormView = Radium.FormView.extend
 
       self = this
       selection.forEach (object) ->
-        assignedUser   = self.get('assignedUser')
+        assignedUser = self.get('assignedUser')
         assignedUserId = assignedUser.get('id')
 
         data =
@@ -152,7 +152,7 @@ Radium.TodoFormView = Radium.FormView.extend
           hasAnimation: true
 
         todo = Radium.store.createRecord Radium.Todo, data
-        todo.set 'reference', object
+        todo.set 'reference', object if object
 
         # TODO: feed sections could automatically handle adding
         # new items, but I'm not sure how would hat behave, it needs
