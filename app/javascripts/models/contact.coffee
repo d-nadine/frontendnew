@@ -3,3 +3,5 @@ Radium.Contact = Radium.Person.extend
   # TODO: from discussion with Adam, displayName should be either
   #       name, email or phoneNumber
   displayName: DS.attr("string")
+
+  todos: DS.hasMany('Radium.Todo', inverse: 'contact')

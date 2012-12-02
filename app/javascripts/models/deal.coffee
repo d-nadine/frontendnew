@@ -4,6 +4,8 @@ Radium.Deal = Radium.Core.extend
   description: DS.attr('string')
   closeBy: DS.attr('date')
 
+  todos: DS.hasMany('Radium.Todo', inverse: 'deal')
+
   # Can be `pending`, `closed`, `paid`, `rejected`
   state: DS.attr('dealState')
   isPublic: DS.attr('boolean')

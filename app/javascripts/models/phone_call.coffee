@@ -15,3 +15,5 @@ Radium.PhoneCall = Radium.Core.extend
 
   fromUser: DS.belongsTo('Radium.User', polymorphicFor: 'from')
   fromContact: DS.belongsTo('Radium.Contact', polymorphicFor: 'from')
+
+  todos: DS.hasMany('Radium.Todo', inverse: 'phone_call')

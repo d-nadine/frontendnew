@@ -14,7 +14,6 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   # polymorphic types
   contact: DS.belongsTo('Radium.Contact', polymorphicFor: 'reference')
   todo: DS.belongsTo('Radium.Todo', polymorphicFor: 'reference', inverse: 'todos')
-  todos: DS.hasMany('Radium.Todo', inverse: 'todo')
   meeting: DS.belongsTo('Radium.Meeting', polymorphicFor: 'reference')
   campaign: DS.belongsTo('Radium.Campaign', polymorphicFor: 'reference')
   group: DS.belongsTo('Radium.Group', polymorphicFor: 'reference')
@@ -24,6 +23,7 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   email: DS.belongsTo('Radium.Email', polymorphicFor: 'reference')
   sms: DS.belongsTo('Radium.Sms', polymorphicFor: 'reference')
 
+  todos: DS.hasMany('Radium.Todo', inverse: 'todo')
   user: DS.belongsTo('Radium.User')
 
   # Turn on when todo's are created from the form

@@ -8,4 +8,6 @@ Radium.Campaign = Radium.Core.extend
   user: DS.belongsTo('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
 
+  todos: DS.hasMany('Radium.Todo', inverse: 'campaign')
+
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

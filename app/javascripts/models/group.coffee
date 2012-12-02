@@ -4,3 +4,5 @@ Radium.Group = Radium.Core.extend
   email: DS.attr('string')
   phone: DS.attr('string')
   isPublic: DS.attr('boolean')
+
+  todos: DS.hasMany('Radium.Todo', inverse: 'group')
