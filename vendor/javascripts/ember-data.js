@@ -1,6 +1,6 @@
 (function() {
 window.DS = Ember.Namespace.create({
-  CURRENT_API_REVISION: 8
+  CURRENT_API_REVISION: 9
 });
 
 })();
@@ -490,13 +490,6 @@ DS.ManyArray = DS.RecordArray.extend({
 var get = Ember.get, set = Ember.set, fmt = Ember.String.fmt,
     removeObject = Ember.EnumerableUtils.removeObject, forEach = Ember.EnumerableUtils.forEach;
 
-var RelationshipLink = function(parent, child) {
-  this.oldParent = parent;
-  this.child = child;
-};
-
-
-
 /**
   A transaction allows you to collect multiple records into a unit of work
   that can be committed or rolled back as a group.
@@ -697,6 +690,13 @@ DS.Transaction = Ember.Object.extend({
       if (adapter && adapter.commit) { adapter.commit(store, commitDetails); }
       else { throw fmt("Adapter is either null or does not implement `commit` method", this); }
     }
+
+    // Once we've committed the transaction, there is no need to
+    // keep the OneToManyChanges around. Destroy them so they
+    // can be garbage collected.
+    relationships.forEach(function(relationship) {
+      relationship.destroy();
+    });
   },
 
   /**
@@ -1237,7 +1237,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   _adapter: Ember.computed(function() {
     var adapter = get(this, 'adapter');
     if (typeof adapter === 'string') {
-      adapter = get(this, adapter, false) || get(window, adapter);
+      adapter = get(this, adapter, false) || get(Ember.lookup, adapter);
     }
 
     if (DS.Adapter.detect(adapter)) {
@@ -1351,6 +1351,15 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   */
   deleteRecord: function(record) {
     record.deleteRecord();
+  },
+
+  /**
+    For symmetry, a record can be unloaded via the store.
+
+    @param {DS.Model} record
+  */
+  unloadRecord: function(record) {
+    record.unloadRecord();
   },
 
   // ................
@@ -1872,18 +1881,9 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     @param {Object} data optional data (see above)
   */
   didSaveRecord: function(record, data) {
-    if (get(record, 'isNew')) {
-      this.didCreateRecord(record);
-    } else if (get(record, 'isDeleted')) {
-      this.didDeleteRecord(record);
-    }
+    record.adapterDidCommit();
 
     if (data) {
-      // We're about to replace all existing attributes and relationships
-      // because we have new data, so clear out any remaining unacknowledged
-      // changes.
-
-      record.removeInFlightDirtyFactorsForAttributes();
       this.updateId(record, data);
       this.updateRecordData(record, data);
     } else {
@@ -1914,32 +1914,6 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   },
 
   /**
-    TODO: Do we need this?
-  */
-  didDeleteRecord: function(record) {
-    record.adapterDidDelete();
-  },
-
-  /**
-    This method allows the adapter to acknowledge just that
-    a record was created, but defer acknowledging specific
-    attributes or relationships.
-
-    This is most useful for adapters that have a multi-step
-    creation process (first, create the record on the backend,
-    then make a separate request to add the attributes).
-
-    When acknowledging a newly created record using a more
-    fine-grained approach, you *must* call `didCreateRecord`,
-    or the record will remain in in-flight limbo forever.
-
-    @param {DS.Model} record
-  */
-  didCreateRecord: function(record) {
-    record.adapterDidCreate();
-  },
-
-  /**
     This method allows the adapter to specify that a record
     could not be saved because it had backend-supplied validation
     errors.
@@ -1958,6 +1932,17 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   */
   recordWasInvalid: function(record, errors) {
     record.adapterDidInvalidate(errors);
+  },
+
+  /**
+     This method allows the adapter to specify that a record
+     could not be saved because the server returned an unhandled
+     error.
+
+     @param {DS.Model} record
+  */
+  recordWasError: function(record) {
+    record.adapterDidError();
   },
 
   /**
@@ -2572,6 +2557,23 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     return record;
   },
 
+  dematerializeRecord: function(record) {
+    var id = get(record, 'id'),
+        clientId = get(record, 'clientId'),
+        type = this.typeForClientId(clientId),
+        typeMap = this.typeMapFor(type);
+
+    record.updateRecordArrays();
+
+    delete this.recordCache[clientId];
+    delete this.clientIdToId[clientId];
+    delete this.clientIdToType[clientId];
+    delete this.clientIdToData[clientId];
+    delete this.recordArraysByClientId[clientId];
+
+    if (id) { delete typeMap.idToCid[id]; }
+  },
+
   destroy: function() {
     if (get(DS, 'defaultStore') === this) {
       set(DS, 'defaultStore', null);
@@ -2626,6 +2628,38 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     if (adapter) { return adapter; }
 
     return this.get('_adapter');
+  },
+
+  // ..............................
+  // . RECORD CHANGE NOTIFICATION .
+  // ..............................
+  recordAttributeDidChange: function(record, attributeName, newValue, oldValue) {
+    var dirtySet = new Ember.OrderedSet(),
+        adapter = this.adapterForType(record.constructor);
+
+    if (adapter.dirtyRecordsForAttributeChange) {
+      adapter.dirtyRecordsForAttributeChange(dirtySet, record, attributeName, newValue, oldValue);
+    }
+
+    dirtySet.forEach(function(record) {
+      record.adapterDidDirty();
+    });
+  },
+
+  recordBelongsToDidChange: function(dirtySet, child, relationship) {
+    var adapter = this.adapterForType(child.constructor);
+
+    if (adapter.dirtyRecordsForBelongsToChange) {
+      adapter.dirtyRecordsForBelongsToChange(dirtySet, child, relationship);
+    }
+  },
+
+  recordHasManyDidChange: function(dirtySet, parent, relationship) {
+    var adapter = this.adapterForType(parent.constructor);
+
+    if (adapter.dirtyRecordsForHasManyChange) {
+      adapter.dirtyRecordsForHasManyChange(dirtySet, parent, relationship);
+    }
   }
 });
 
@@ -2841,18 +2875,13 @@ var didChangeData = function(manager) {
 };
 
 var setProperty = function(manager, context) {
-  var value = context.value,
+  var record = get(manager, 'record'),
+      store = get(record, 'store'),
       key = context.key,
-      record = get(manager, 'record'),
-      adapterValue = get(record, 'data.attributes')[key];
+      oldValue = context.oldValue,
+      newValue = context.value;
 
-  if (value === adapterValue) {
-    record.removeDirtyFactor(key);
-  } else {
-    record.addDirtyFactor(key);
-  }
-
-  updateRecordArrays(manager);
+  store.recordAttributeDidChange(record, key, newValue, oldValue);
 };
 
 // Whenever a property is set, recompute all dependent filters
@@ -2945,6 +2974,8 @@ var DirtyState = DS.State.extend({
     // EVENTS
     setProperty: setProperty,
 
+    becomeDirty: Ember.K,
+
     willCommit: function(manager) {
       manager.transitionTo('inFlight');
     },
@@ -2988,7 +3019,6 @@ var DirtyState = DS.State.extend({
       var dirtyType = get(this, 'dirtyType'),
           record = get(manager, 'record');
 
-      // create inFlightDirtyFactors
       record.becameInFlight();
 
       record.withTransaction(function (t) {
@@ -3013,8 +3043,6 @@ var DirtyState = DS.State.extend({
       var record = get(manager, 'record');
 
       set(record, 'errors', errors);
-
-      record.restoreDirtyFactors();
 
       manager.transitionTo('invalid');
       manager.send('invokeLifecycleCallbacks');
@@ -3061,6 +3089,8 @@ var DirtyState = DS.State.extend({
       setProperty(manager, context);
     },
 
+    becomeDirty: Ember.K,
+
     rollback: function(manager) {
       manager.send('becameValid');
       manager.send('rollback');
@@ -3085,18 +3115,7 @@ var createdState = DirtyState.create({
   dirtyType: 'created',
 
   // FLAGS
-  isNew: true,
-
-  // TRANSITIONS
-  setup: function(manager) {
-    var record = get(manager, 'record');
-    record.addDirtyFactor('@created');
-  },
-
-  exit: function(manager) {
-    var record = get(manager, 'record');
-    record.removeDirtyFactor('@created');
-  }
+  isNew: true
 });
 
 var updatedState = DirtyState.create({
@@ -3205,12 +3224,17 @@ var states = {
         didChangeData: didChangeData,
         loadedData: didChangeData,
 
-        becameDirty: function(manager) {
+        becomeDirty: function(manager) {
           manager.transitionTo('updated');
         },
 
         deleteRecord: function(manager) {
           manager.transitionTo('deleted');
+          get(manager, 'record').clearRelationships();
+        },
+
+        unloadRecord: function(manager) {
+          manager.transitionTo('deleted.saved');
           get(manager, 'record').clearRelationships();
         },
 
@@ -3278,15 +3302,7 @@ var states = {
         var record = get(manager, 'record'),
             store = get(record, 'store');
 
-        record.addDirtyFactor('@deleted');
-
         store.removeFromRecordArrays(record);
-      },
-
-      exit: function(manager) {
-        var record = get(manager, 'record');
-
-        record.removeDirtyFactor('@deleted');
       },
 
       // SUBSTATES
@@ -3313,6 +3329,8 @@ var states = {
           get(manager, 'record').rollback();
         },
 
+        becomeDirty: Ember.K,
+
         becameClean: function(manager) {
           var record = get(manager, 'record');
 
@@ -3336,7 +3354,6 @@ var states = {
         enter: function(manager) {
           var record = get(manager, 'record');
 
-          // create inFlightDirtyFactors
           record.becameInFlight();
 
           record.withTransaction(function (t) {
@@ -3364,6 +3381,13 @@ var states = {
       saved: DS.State.create({
         // FLAGS
         isDirty: false,
+
+        setup: function(manager) {
+          var record = get(manager, 'record'),
+              store = get(record, 'store');
+
+          store.dematerializeRecord(record);
+        },
 
         invokeLifecycleCallbacks: function(manager) {
           var record = get(manager, 'record');
@@ -3473,15 +3497,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
 
   setup: function() {
     this._relationshipChanges = {};
-    this._dirtyFactors = Ember.OrderedSet.create();
-    this._inFlightDirtyFactors = Ember.OrderedSet.create();
-    this._dirtyReasons = { hasMany: 0, belongsTo: 0, attribute: 0 };
-  },
-
-  willDestroy: function() {
-    if (!get(this, 'isDeleted')) {
-      this.deleteRecord();
-    }
   },
 
   send: function(name, context) {
@@ -3505,12 +3520,18 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     this.send('didChangeData');
   },
 
-  setProperty: function(key, value) {
-    this.send('setProperty', { key: key, value: value });
+  setProperty: function(key, value, oldValue) {
+    this.send('setProperty', { key: key, value: value, oldValue: oldValue });
   },
 
   deleteRecord: function() {
     this.send('deleteRecord');
+  },
+
+  unloadRecord: function() {
+    Ember.assert("You can only unload a loaded, non-dirty record.", !get(this, 'isDirty'));
+
+    this.send('unloadRecord');
   },
 
   clearRelationships: function() {
@@ -3542,6 +3563,12 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
       attributes[name] = get(this, name);
     }, this);
 
+    this.send('didCommit');
+    this.updateRecordArraysLater();
+  },
+
+  adapterDidDirty: function() {
+    this.send('becomeDirty');
     this.updateRecordArraysLater();
   },
 
@@ -3607,62 +3634,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     this._data.belongsTo[name] = id;
   },
 
-  // DIRTINESS FACTORS
-  //
-  // These methods allow the manipulation of various "dirtiness factors" on
-  // the current record. A dirtiness factor can be:
-  //
-  // * the name of a dirty attribute
-  // * the name of a dirty relationship
-  // * @created, if the record was created
-  // * @deleted, if the record was deleted
-  //
-  // This allows adapters to acknowledge updates to any of the dirtiness
-  // factors one at a time, and keeps the bookkeeping for full acknowledgement
-  // in the record itself.
-
-  addDirtyFactor: function(name) {
-    var dirtyFactors = this._dirtyFactors, becameDirty;
-    if (dirtyFactors.has(name)) { return; }
-
-    if (this._dirtyFactors.isEmpty()) { becameDirty = true; }
-
-    this._addDirtyFactor(name);
-
-    if (becameDirty && name !== '@created' && name !== '@deleted') {
-      this.send('becameDirty');
-    }
-  },
-
-  _addDirtyFactor: function(name) {
-    this._dirtyFactors.add(name);
-
-    var reason = get(this.constructor, 'fields').get(name);
-    this._dirtyReasons[reason]++;
-  },
-
-  removeDirtyFactor: function(name) {
-    var dirtyFactors = this._dirtyFactors, becameClean = true;
-    if (!dirtyFactors.has(name)) { return; }
-
-    this._dirtyFactors.remove(name);
-
-    var reason = get(this.constructor, 'fields').get(name);
-    this._dirtyReasons[reason]--;
-
-    if (!this._dirtyFactors.isEmpty()) { becameClean = false; }
-
-    if (becameClean && name !== '@created' && name !== '@deleted') {
-      this.send('becameClean');
-    }
-  },
-
-  removeDirtyFactors: function() {
-    this._dirtyFactors.clear();
-    this._dirtyReasons = { hasMany: 0, belongsTo: 0, attribute: 0 };
-    this.send('becameClean');
-  },
-
   rollback: function() {
     this.setup();
     this.send('becameClean');
@@ -3670,14 +3641,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     this.suspendAssociationObservers(function() {
       this.notifyPropertyChange('data');
     });
-  },
-
-  isDirtyBecause: function(reason) {
-    return this._dirtyReasons[reason] > 0;
-  },
-
-  isCommittingBecause: function(reason) {
-    return this._inFlightDirtyReasons[reason] > 0;
   },
 
   /**
@@ -3711,55 +3674,11 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
   },
 
   becameInFlight: function() {
-    this._inFlightDirtyFactors = this._dirtyFactors.copy();
-    this._inFlightDirtyReasons = this._dirtyReasons;
-    this._dirtyFactors.clear();
-    this._dirtyReasons = { hasMany: 0, belongsTo: 0, attribute: 0 };
-  },
-
-  restoreDirtyFactors: function() {
-    this._inFlightDirtyFactors.forEach(function(factor) {
-      this._addDirtyFactor(factor);
-    }, this);
-
-    this._inFlightDirtyFactors.clear();
-    this._inFlightDirtyReasons = null;
-  },
-
-  removeInFlightDirtyFactor: function(name) {
-    // It is possible for a record to have been materialized
-    // or loaded after the transaction was committed. This
-    // can happen with relationship changes involving
-    // unmaterialized records that subsequently load.
-    //
-    // XXX If a record is materialized after it was involved
-    // while it is involved in a relationship change, update
-    // it to be in the same state as if it had already been
-    // materialized.
-    //
-    // For now, this means that we have a blind spot where
-    // a record was loaded and its relationships changed
-    // while the adapter is in the middle of persisting
-    // a relationship change involving it.
-    if (this._inFlightDirtyFactors.has(name)) {
-      this._inFlightDirtyFactors.remove(name);
-      if (this._inFlightDirtyFactors.isEmpty()) {
-        this._inFlightDirtyReasons = null;
-        this.send('didCommit');
-      }
-    }
-  },
-
-  removeInFlightDirtyFactorsForAttributes: function() {
-    this.eachAttribute(function(name) {
-      this.removeInFlightDirtyFactor(name);
-    }, this);
   },
 
   // FOR USE DURING COMMIT PROCESS
 
   adapterDidUpdateAttribute: function(attributeName, value) {
-    this.removeInFlightDirtyFactor(attributeName);
 
     // If a value is passed in, update the internal attributes and clear
     // the attribute cache so it picks up the new value. Otherwise,
@@ -3777,8 +3696,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
   },
 
   adapterDidUpdateHasMany: function(name) {
-    this.removeInFlightDirtyFactor(name);
-
     var cachedValue = this.cacheFor(name),
         hasMany = get(this, 'data').hasMany,
         store = get(this, 'store');
@@ -3804,20 +3721,12 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     this.updateRecordArraysLater();
   },
 
-  adapterDidDelete: function() {
-    this.removeInFlightDirtyFactor('@deleted');
-
-    this.updateRecordArraysLater();
-  },
-
-  adapterDidCreate: function() {
-    this.removeInFlightDirtyFactor('@created');
-
-    this.updateRecordArraysLater();
-  },
-
   adapterDidInvalidate: function(errors) {
     this.send('becameInvalid', errors);
+  },
+
+  adapterDidError: function() {
+    this.send('becameError');
   },
 
   /**
@@ -3912,12 +3821,14 @@ DS.attr = function(type, options) {
     options: options
   };
 
-  return Ember.computed(function(key, value) {
+  return Ember.computed(function(key, value, oldValue) {
     var data;
 
-    if (arguments.length === 2) {
+    if (arguments.length > 1) {
+      // TODO: If there is a cached oldValue, use it [tomhuda]
+      oldValue = get(this, 'data.attributes')[key];
       Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.toString(), key !== 'id');
-      this.setProperty(key, value);
+      this.setProperty(key, value, oldValue);
     } else {
       value = getAttr(this, options, key);
     }
@@ -3944,7 +3855,9 @@ DS.attr = function(type, options) {
 var get = Ember.get, set = Ember.set,
     none = Ember.none;
 
-var hasAssociation = function(type, options, one) {
+DS.belongsTo = function(type, options) {
+  Ember.assert("The first argument DS.belongsTo must be a model type or string, like DS.belongsTo(App.Person)", !!type && (typeof type === 'string' || DS.Model.detect(type)));
+
   options = options || {};
 
   var meta = { type: type, isAssociation: true, options: options, kind: 'belongsTo' };
@@ -3958,17 +3871,12 @@ var hasAssociation = function(type, options, one) {
         store = get(this, 'store'), id;
 
     if (typeof type === 'string') {
-      type = get(this, type, false) || get(window, type);
+      type = get(this, type, false) || get(Ember.lookup, type);
     }
 
     id = data[key];
     return id ? store.find(type, id) : null;
   }).property('data').meta(meta);
-};
-
-DS.belongsTo = function(type, options) {
-  Ember.assert("The type passed to DS.belongsTo must be defined", !!type);
-  return hasAssociation(type, options);
 };
 
 /**
@@ -4026,7 +3934,7 @@ var hasAssociation = function(type, options) {
         ids, association;
 
     if (typeof type === 'string') {
-      type = get(this, type, false) || get(window, type);
+      type = get(this, type, false) || get(Ember.lookup, type);
     }
 
     ids = data[key];
@@ -4050,9 +3958,38 @@ DS.hasMany = function(type, options) {
 (function() {
 var get = Ember.get, set = Ember.set;
 
+/**
+  @private
+
+  This file defines several extensions to the base `DS.Model` class that
+  add support for one-to-many relationships.
+*/
+
 DS.Model.reopen({
+  // This Ember.js hook allows an object to be notified when a property
+  // is defined.
+  //
+  // In this case, we use it to be notified when an Ember Data user defines a
+  // belongs-to relationship. In that case, we need to set up observers for
+  // each one, allowing us to track relationship changes and automatically
+  // reflect changes in the inverse has-many array.
+  //
+  // This hook passes the class being set up, as well as the key and value
+  // being defined. So, for example, when the user does this:
+  //
+  //   DS.Model.extend({
+  //     parent: DS.belongsTo(App.User)
+  //   });
+  //
+  // This hook would be called with "parent" as the key and the computed
+  // property returned by `DS.belongsTo` as the value.
   didDefineProperty: function(proto, key, value) {
+    // Check if the value being set is a computed property.
     if (value instanceof Ember.Descriptor) {
+
+      // If it is, get the metadata for the association. This is
+      // populated by the `DS.belongsTo` helper when it is creating
+      // the computed property.
       var meta = value.meta();
 
       if (meta.isAssociation && meta.kind === 'belongsTo') {
@@ -4063,37 +4000,118 @@ DS.Model.reopen({
   }
 });
 
+/**
+  These DS.Model extensions add class methods that provide relationship
+  introspection abilities about relationships.
+
+  A note about the computed properties contained here:
+
+  **These properties are effectively sealed once called for the first time.**
+  To avoid repeatedly doing expensive iteration over a model's fields, these
+  values are computed once and then cached for the remainder of the runtime of
+  your application.
+
+  If your application needs to modify a class after its initial definition
+  (for example, using `reopen()` to add additional attributes), make sure you
+  do it before using your model with the store, which uses these properties
+  extensively.
+*/
+
 DS.Model.reopenClass({
+  /**
+    For a given relationship name, returns the model type of the relationship.
+
+    For example, if you define a model like this:
+
+        App.Post = DS.Model.extend({
+          comments: DS.hasMany(App.Comment)
+        });
+
+    Calling `App.Post.typeForAssociation('comments')` will return `App.Comment`.
+
+    @param {String} name the name of the association
+    @return {subclass of DS.Model} the type of the association, or undefined
+  */
   typeForAssociation: function(name) {
     var association = get(this, 'associationsByName').get(name);
     return association && association.type;
   },
 
+  /**
+    The model's associations as a map, keyed on the type of the
+    association. The value of each entry is an array containing a descriptor
+    for each association with that type, describing the name of the association
+    as well as the type.
+
+    For example, given the following model definition:
+
+        App.Blog = DS.Model.extend({
+          users: DS.hasMany(App.User),
+          owner: DS.belongsTo(App.User),
+
+          posts: DS.hasMany(App.Post)
+        });
+
+    This computed property would return a map describing these
+    associations, like this:
+
+        var associations = Ember.get(App.Blog, 'associations');
+        associatons.get(App.User);
+        //=> [ { name: 'users', kind: 'hasMany' },
+        //     { name: 'owner', kind: 'belongsTo' } ]
+        associations.get(App.Post);
+        //=> [ { name: 'posts', kind: 'hasMany' } ]
+
+    @type Ember.Map
+    @readOnly
+  */
   associations: Ember.computed(function() {
-    var map = Ember.Map.create();
+    var map = new Ember.MapWithDefault({
+      defaultValue: function() { return []; }
+    });
 
+    // Loop through each computed property on the class
     this.eachComputedProperty(function(name, meta) {
+
+      // If the computed property is an association, add
+      // it to the map.
       if (meta.isAssociation) {
-        var type = meta.type,
-            typeList = map.get(type);
-
-        if (typeof type === 'string') {
-          type = get(this, type, false) || get(window, type);
-          meta.type = type;
+        if (typeof meta.type === 'string') {
+          meta.type = Ember.get(Ember.lookup, meta.type);
         }
 
-        if (!typeList) {
-          typeList = [];
-          map.set(type, typeList);
-        }
+        var associationsForType = map.get(meta.type);
 
-        typeList.push({ name: name, kind: meta.kind });
+        associationsForType.push({ name: name, kind: meta.kind });
       }
     });
 
     return map;
   }),
 
+  /**
+    A hash containing lists of the model's associations, grouped
+    by the association kind. For example, given a model with this
+    definition:
+
+        App.Blog = DS.Model.extend({
+          users: DS.hasMany(App.User),
+          owner: DS.belongsTo(App.User),
+
+          posts: DS.hasMany(App.Post)
+        });
+
+    This property would contain the following:
+
+       var associationNames = Ember.get(App.Blog, 'associationNames');
+       associationNames.hasMany;
+       //=> ['users', 'posts']
+       associationNames.belongsTo;
+       //=> ['owner']
+
+    @type Object
+    @readOnly
+  */
   associationNames: Ember.computed(function() {
     var names = { hasMany: [], belongsTo: [] };
 
@@ -4106,6 +4124,31 @@ DS.Model.reopenClass({
     return names;
   }),
 
+  /**
+    A map whose keys are the associations of a model and whose values are
+    association descriptors.
+
+    For example, given a model with this
+    definition:
+
+        App.Blog = DS.Model.extend({
+          users: DS.hasMany(App.User),
+          owner: DS.belongsTo(App.User),
+
+          posts: DS.hasMany(App.Post)
+        });
+
+    This property would contain the following:
+
+       var associationsByName = Ember.get(App.Blog, 'associationsByName');
+       associationsByName.get('users');
+       //=> { key: 'users', kind: 'hasMany', type: App.User }
+       associationsByName.get('owner');
+       //=> { key: 'owner', kind: 'belongsTo', type: App.User }
+
+    @type Ember.Map
+    @readOnly
+  */
   associationsByName: Ember.computed(function() {
     var map = Ember.Map.create(), type;
 
@@ -4115,7 +4158,7 @@ DS.Model.reopenClass({
         type = meta.type;
 
         if (typeof type === 'string') {
-          type = get(this, type, false) || get(window, type);
+          type = get(this, type, false) || get(Ember.lookup, type);
           meta.type = type;
         }
 
@@ -4126,6 +4169,36 @@ DS.Model.reopenClass({
     return map;
   }),
 
+  /**
+    A map whose keys are the fields of the model and whose values are strings
+    describing the kind of the field. A model's fields are the union of all of its
+    attributes and relationships.
+
+    For example:
+
+        App.Blog = DS.Model.extend({
+          users: DS.hasMany(App.User),
+          owner: DS.belongsTo(App.User),
+
+          posts: DS.hasMany(App.Post),
+
+          title: DS.attr('string')
+        });
+
+        var fields = Ember.get(App.Blog, 'fields');
+        fields.forEach(function(field, kind) {
+          console.log(field, kind);
+        });
+
+        // prints:
+        // users, hasMany
+        // owner, belongsTo
+        // posts, hasMany
+        // title, attribute
+
+    @type Ember.Map
+    @readOnly
+  */
   fields: Ember.computed(function() {
     var map = Ember.Map.create(), type;
 
@@ -4140,6 +4213,14 @@ DS.Model.reopenClass({
     return map;
   }),
 
+  /**
+    Given a callback, iterates over each of the associations in the model,
+    invoking the callback with the name of each association and its association
+    descriptor.
+
+    @param {Function} callback the callback to invoke
+    @param {any} binding the value to which the callback's `this` should be bound
+  */
   eachAssociation: function(callback, binding) {
     get(this, 'associationsByName').forEach(function(name, association) {
       callback.call(binding, name, association);
@@ -4148,12 +4229,51 @@ DS.Model.reopenClass({
 });
 
 DS.Model.reopen({
+  /**
+    Given a callback, iterates over each of the associations in the model,
+    invoking the callback with the name of each association and its association
+    descriptor.
+
+    @param {Function} callback the callback to invoke
+    @param {any} binding the value to which the callback's `this` should be bound
+  */
   eachAssociation: function(callback, binding) {
     this.constructor.eachAssociation(callback, binding);
   }
 });
 
-DS.inverseNameFor = function(modelType, inverseModelType, inverseAssociationKind) {
+/**
+  @private
+
+  Helper method to look up the name of the inverse of an association.
+
+  In a has-many relationship, there are always two sides: the `belongsTo` side
+  and the `hasMany` side. When one side changes, the other side should be updated
+  automatically.
+
+  Given a model, the model of the inverse, and the kind of the association, this
+  helper returns the name of the association on the inverse.
+
+  For example, imagine the following two associated models:
+
+      App.Post = DS.Model.extend({
+        comments: DS.hasMany('App.Comment')
+      });
+
+      App.Comment = DS.Model.extend({
+        post: DS.belongsTo('App.Post')
+      });
+
+  If the `post` property of a `Comment` was modified, Ember Data would invoke
+  this helper like this:
+
+      DS._inverseNameFor(App.Comment, App.Post, 'hasMany');
+      //=> 'comments'
+
+  Ember Data uses the name of the association returned to reflect the changed
+  relationship on the other side.
+*/
+DS._inverseNameFor = function(modelType, inverseModelType, inverseAssociationKind) {
   var associationMap = get(modelType, 'associations'),
       possibleAssociations = associationMap.get(inverseModelType),
       possible, actual, oldValue;
@@ -4172,7 +4292,23 @@ DS.inverseNameFor = function(modelType, inverseModelType, inverseAssociationKind
   if (actual) { return actual.name; }
 };
 
-DS.inverseTypeFor = function(modelType, associationName) {
+/**
+  @private
+
+  Given a model and an association name, returns the model type of
+  the named association.
+
+      App.Post = DS.Model.extend({
+        comments: DS.hasMany('App.Comment')
+      });
+
+      DS._inverseTypeFor(App.Post, 'comments');
+      //=> App.Comment
+  @param {DS.Model class} modelType
+  @param {String} associationName
+  @return {DS.Model class}
+*/
+DS._inverseTypeFor = function(modelType, associationName) {
   var associations = get(modelType, 'associationsByName'),
       association = associations.get(associationName);
 
@@ -4202,12 +4338,19 @@ DS.OneToManyChange.create = function(options) {
 
 /** @private */
 DS.OneToManyChange.forChildAndParent = function(childClientId, store, options) {
+  // Get the type of the child based on the child's client ID
   var childType = store.typeForClientId(childClientId), key;
 
+  // If the name of the belongsTo side of the relationship is specified,
+  // use that
+  // If the type of the parent is specified, look it up on the child's type
+  // definition.
   if (options.parentType) {
-    key = inverseBelongsToForHasMany(options.parentType, childType, options.hasManyName);
-  } else {
+    key = inverseBelongsToName(options.parentType, childType, options.hasManyName);
+  } else if (options.belongsToName) {
     key = options.belongsToName;
+  } else {
+    Ember.assert("You must pass either a parentType or belongsToName option to OneToManyChange.forChildAndParent", false);
   }
 
   var change = store.relationshipChangeFor(childClientId, key);
@@ -4267,8 +4410,8 @@ DS.OneToManyChange.prototype = {
       if (!parent) { return; }
 
       var childType = store.typeForClientId(this.child);
-      var inverseType = DS.inverseTypeFor(childType, this.belongsToName);
-      name = DS.inverseNameFor(inverseType, childType, 'hasMany');
+      var inverseType = DS._inverseTypeFor(childType, this.belongsToName);
+      name = inverseHasManyName(inverseType, childType, this.belongsToName);
       this.hasManyName = name;
     }
 
@@ -4289,7 +4432,7 @@ DS.OneToManyChange.prototype = {
 
       var childType = store.typeForClientId(this.child);
       var parentType = store.typeForClientId(parent);
-      name = DS.inverseNameFor(childType, parentType, 'belongsTo', this.hasManyName);
+      name = DS._inverseNameFor(childType, parentType, 'belongsTo', this.hasManyName);
 
       this.belongsToName = name;
     }
@@ -4315,21 +4458,9 @@ DS.OneToManyChange.prototype = {
         belongsToName = this.getBelongsToName(),
         hasManyName = this.getHasManyName(),
         store = this.store,
-        child, oldParent, newParent, transaction;
+        child, oldParent, newParent, lastParent, transaction;
 
     store.removeRelationshipChangeFor(childClientId, belongsToName);
-
-    if (child = this.getChild()) {
-      child.removeDirtyFactor(belongsToName);
-    }
-
-    if (oldParent = this.getOldParent()) {
-      oldParent.removeDirtyFactor(hasManyName);
-    }
-
-    if (newParent = this.getNewParent()) {
-      newParent.removeDirtyFactor(hasManyName);
-    }
 
     if (transaction = this.transaction) {
       transaction.relationshipBecameClean(this);
@@ -4441,13 +4572,17 @@ DS.OneToManyChange.prototype = {
       // materialized lastParent.
       var lastParent = this.getLastParent();
       if (lastParent) {
-        get(lastParent, hasManyName).removeObject(child);
+        lastParent.suspendAssociationObservers(function() {
+          get(lastParent, hasManyName).removeObject(child);
+        });
       }
 
       // Don't do anything if the belongsTo is going from null back to null
       if (oldParent) {
         get(oldParent, hasManyName).addObject(child);
       }
+
+      set(child, belongsToName, oldParent);
 
       this.destroy();
       return;
@@ -4465,6 +4600,8 @@ DS.OneToManyChange.prototype = {
     // infinite loop.
 
 
+    var dirtySet = new Ember.OrderedSet();
+
     // If there is an `oldParent` and the `oldParent` is different to
     // the `newParent`, use the idempotent `removeObject` to ensure
     // that the record is no longer in its ManyArray. The `removeObject`
@@ -4476,8 +4613,13 @@ DS.OneToManyChange.prototype = {
     if (oldParent && oldParent !== newParent) {
       get(oldParent, hasManyName).removeObject(child);
 
+      // TODO: This implementation causes a race condition in key-value
+      // stores. The fix involves buffering changes that happen while
+      // a record is loading. A similar fix is required for other parts
+      // of ember-data, and should be done as new infrastructure, not
+      // a one-off hack. [tomhuda]
       if (get(oldParent, 'isLoaded')) {
-        oldParent.addDirtyFactor(hasManyName);
+        this.store.recordHasManyDidChange(dirtySet, oldParent, this);
       }
     }
 
@@ -4489,7 +4631,7 @@ DS.OneToManyChange.prototype = {
       get(newParent, hasManyName).addObject(child);
 
       if (get(newParent, 'isLoaded')) {
-        newParent.addDirtyFactor(hasManyName);
+        this.store.recordHasManyDidChange(dirtySet, newParent, this);
       }
     }
 
@@ -4501,10 +4643,12 @@ DS.OneToManyChange.prototype = {
         set(child, belongsToName, newParent);
       }
 
-      if (get(child, 'isLoaded')) {
-        child.addDirtyFactor(belongsToName);
-      }
+      this.store.recordBelongsToDidChange(dirtySet, child, this);
     }
+
+    dirtySet.forEach(function(record) {
+      record.adapterDidDirty();
+    });
 
     // If this change is later reversed (A->B followed by B->A),
     // we will need to remove the child from this parent. Save
@@ -4519,9 +4663,6 @@ DS.OneToManyChange.prototype = {
     var hasManyName = this.getHasManyName();
     var oldParent, newParent, child;
 
-    if (oldParent = this.getOldParent()) { oldParent.removeInFlightDirtyFactor(hasManyName); }
-    if (newParent = this.getNewParent()) { newParent.removeInFlightDirtyFactor(hasManyName); }
-    if (child = this.getChild())         { child.removeInFlightDirtyFactor(belongsToName); }
     this.destroy();
   },
 
@@ -4538,7 +4679,7 @@ DS.OneToManyChange.prototype = {
   }
 };
 
-function inverseBelongsToForHasMany(parentType, childType, hasManyName) {
+function inverseBelongsToName(parentType, childType, hasManyName) {
   // Get the options passed to the parent's DS.hasMany()
   var options = parentType.metaForProperty(hasManyName).options;
   var belongsToName;
@@ -4547,7 +4688,18 @@ function inverseBelongsToForHasMany(parentType, childType, hasManyName) {
     return belongsToName;
   }
 
-  return DS.inverseNameFor(childType, parentType, 'belongsTo');
+  return DS._inverseNameFor(childType, parentType, 'belongsTo');
+}
+
+function inverseHasManyName(parentType, childType, belongsToName) {
+  var options = childType.metaForProperty(belongsToName).options;
+  var hasManyName;
+
+  if (hasManyName = options.inverse) {
+    return hasManyName;
+  }
+
+  return DS._inverseNameFor(parentType, childType, 'hasMany');
 }
 
 })();
@@ -4563,11 +4715,43 @@ function inverseBelongsToForHasMany(parentType, childType, hasManyName) {
 (function() {
 var set = Ember.set;
 
+/**
+  This code registers an injection for Ember.Application.
+
+  If an Ember.js developer defines a subclass of DS.Store on their application,
+  this code will automatically instantiate it and make it available on the
+  router.
+
+  Additionally, after an application's controllers have been injected, they will
+  each have the store made available to them.
+
+  For example, imagine an Ember.js application with the following classes:
+
+  App.Store = DS.Store.extend({
+    adapter: 'App.MyCustomAdapter'
+  });
+
+  App.PostsController = Ember.ArrayController.extend({
+    // ...
+  });
+
+  When the application is initialized, `App.Store` will automatically be
+  instantiated, and the instance of `App.PostsController` will have its `store`
+  property set to that instance.
+
+  Note that this code will only be run if the `ember-application` package is
+  loaded. If Ember Data is being used in an environment other than a
+  typical application (e.g., node.js where only `ember-runtime` is available),
+  this code will be ignored.
+*/
+
 Ember.onLoad('Ember.Application', function(Application) {
   Application.registerInjection({
     name: "store",
     before: "controllers",
 
+    // If a store subclass is defined, like App.Store,
+    // instantiate it and inject it into the router.
     injection: function(app, stateManager, property) {
       if (!stateManager) { return; }
       if (property === 'Store') {
@@ -4580,6 +4764,8 @@ Ember.onLoad('Ember.Application', function(Application) {
     name: "giveStoreToControllers",
     after: ['store','controllers'],
 
+    // For each controller, set its `store` property
+    // to the DS.Store instance we created above.
     injection: function(app, stateManager, property) {
       if (!stateManager) { return; }
       if (/^[A-Z].*Controller$/.test(property)) {
@@ -4648,7 +4834,7 @@ DS.Transforms = Ember.Object.extend({
 
       if (type === "string" || type === "number") {
         // this is a fix for Safari 5.1.5 on Mac which does not accept timestamps as yyyy-mm-dd
-        if (serialized.search(/^\d{4}-\d{2}-\d{2}$/) !== -1){
+        if (type === "string" && serialized.search(/^\d{4}-\d{2}-\d{2}$/) !== -1){
           serialized += "T00:00:00Z";
         }
 
@@ -5610,8 +5796,31 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
 
     this._attributesMap = this.createInstanceMapFor('attributes');
 
+    this._outstandingOperations = new Ember.MapWithDefault({
+      defaultValue: function() { return 0; }
+    });
+
+    this._dependencies = new Ember.MapWithDefault({
+      defaultValue: function() { return new Ember.OrderedSet(); }
+    });
+
     this.registerSerializerTransforms(this.constructor, serializer, {});
     this.registerSerializerMappings(serializer);
+  },
+
+  dirtyRecordsForAttributeChange: function(dirtySet, record, attributeName, newValue, oldValue) {
+    // TODO: Custom equality checking [tomhuda]
+    if (newValue !== oldValue) {
+      dirtySet.add(record);
+    }
+  },
+
+  dirtyRecordsForBelongsToChange: function(dirtySet, child) {
+    dirtySet.add(child);
+  },
+
+  dirtyRecordsForHasManyChange: function(dirtySet, parent) {
+    dirtySet.add(parent);
   },
 
   /**
@@ -5768,10 +5977,6 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     }
   },
 
-  shouldCommit: function(record) {
-    return true;
-  },
-
   groupByType: function(enumerable) {
     var map = Ember.MapWithDefault.create({
       defaultValue: function() { return Ember.OrderedSet.create(); }
@@ -5784,24 +5989,13 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     return map;
   },
 
+  processRelationship: function(relationship) {
+    // TODO: Track changes to relationships made after a
+    // materialization request but before the adapter
+    // responds. [tomhuda]
+  },
+
   commit: function(store, commitDetails) {
-    // nº1: determine which records the adapter actually l'cares about
-    // nº2: for each relationship, give the adapter an opportunity to mark
-    //      related records as l'pending
-    // nº3: trigger l'save on l'non-pending records
-
-    var updated = Ember.OrderedSet.create();
-    commitDetails.updated.forEach(function(record) {
-      var shouldCommit = this.shouldCommit(record);
-
-      if (!shouldCommit) {
-        store.didSaveRecord(record);
-      } else {
-        updated.add(record);
-      }
-    }, this);
-
-    commitDetails.updated = updated;
     this.save(store, commitDetails);
   },
 
@@ -6047,12 +6241,6 @@ DS.RESTAdapter = DS.Adapter.extend({
 
   serializer: DS.RESTSerializer,
 
-  shouldCommit: function(record) {
-    if (record.isCommittingBecause('attribute') || record.isCommittingBecause('belongsTo')) {
-      return true;
-    }
-  },
-
   createRecord: function(store, type, record) {
     var root = this.rootForType(type);
 
@@ -6064,9 +6252,14 @@ DS.RESTAdapter = DS.Adapter.extend({
       context: this,
       success: function(json) {
         this.didCreateRecord(store, type, record, json);
+      },
+      error: function(xhr) {
+        this.didError(store, type, record, xhr);
       }
     });
   },
+
+  dirtyRecordsForHasManyChange: Ember.K,
 
   didSaveRecord: function(store, record, hash) {
     record.eachAssociation(function(name, meta) {
@@ -6135,6 +6328,9 @@ DS.RESTAdapter = DS.Adapter.extend({
       context: this,
       success: function(json) {
         this.didUpdateRecord(store, type, record, json);
+      },
+      error: function(xhr) {
+        this.didError(store, type, record, xhr);
       }
     });
   },
@@ -6299,6 +6495,15 @@ DS.RESTAdapter = DS.Adapter.extend({
 
     this.sideload(store, type, json, root);
     store.loadMany(type, json[root]);
+  },
+
+  didError: function(store, type, record, xhr) {
+    if (xhr.status === 422) {
+      var data = JSON.parse(xhr.responseText);
+      store.recordWasInvalid(record, data['errors']);
+    } else {
+      store.recordWasError(record);
+    }
   },
 
   // HELPERS
