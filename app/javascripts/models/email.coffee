@@ -1,4 +1,4 @@
-Radium.Email = Radium.Message.extend
+Radium.Email = Radium.Message.extend Radium.CommentsMixin,
   to: DS.attr('array')
   from: DS.attr('array')
   subject: DS.attr('string')

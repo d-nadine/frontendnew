@@ -1,4 +1,4 @@
-Radium.PhoneCall = Radium.Core.extend
+Radium.PhoneCall = Radium.Core.extend Radium.CommentsMixin,
   outcome: DS.attr('string')
   duration: DS.attr('number')
   kind: DS.attr('string')

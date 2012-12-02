@@ -1,4 +1,4 @@
-Radium.CallList = Radium.Core.extend
+Radium.CallList = Radium.Core.extend Radium.CommentsMixin,
   isEditable: true
   description: DS.attr("string")
   user: DS.belongsTo("Radium.User")

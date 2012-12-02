@@ -1,4 +1,4 @@
-Radium.Group = Radium.Core.extend
+Radium.Group = Radium.Core.extend Radium.CommentsMixin,
   meta: DS.attr('object')
   name: DS.attr('string')
   email: DS.attr('string')

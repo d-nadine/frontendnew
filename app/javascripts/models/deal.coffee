@@ -1,4 +1,4 @@
-Radium.Deal = Radium.Core.extend
+Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   isEditable: true
   name: DS.attr('string')
   description: DS.attr('string')
