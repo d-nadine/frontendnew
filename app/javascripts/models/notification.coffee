@@ -1,8 +1,12 @@
-Radium.Notification = DS.Model.extend
+Radium.Notification = Radium.Core.extend
   createdAt: DS.attr("datetime")
   updatedAt: DS.attr("datetime")
   tag: DS.attr("string")
 
-  reference: Radium.polymorphic('reference')
+  reference: Radium.polymorphicAttribute()
   referenceTypeBinding: 'referenceData.type'
   referenceData: DS.attr('object')
+
+  todo: DS.belongsTo('Radium.Todo', polymorphicFor: 'reference')
+  meeting: DS.belongsTo('Radium.Meeting', polymorphicFor: 'reference')
+  invitation: DS.belongsTo('Radium.Invitation', polymorphicFor: 'reference')

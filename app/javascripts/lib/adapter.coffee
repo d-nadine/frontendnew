@@ -1,7 +1,8 @@
 # TODO: this changes should be done only
 #       for API adapter, in FixtureAdapter
 #       we could just use resulting keys
-Radium.Adapter = DS.FixtureAdapter.extend()
+Radium.Adapter = DS.FixtureAdapter.extend
+  dirtyRecordsForHasManyChange: Ember.K,
 
 Radium.Adapter.map 'Radium.Meeting',
   users: { key: 'user_ids' }

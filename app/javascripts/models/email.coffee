@@ -3,6 +3,8 @@ Radium.Email = Radium.Message.extend
   from: DS.attr('array')
   subject: DS.attr('string')
   html: DS.attr('string')
-  sender: Radium.polymorphic('sender')
+  sender: Radium.polymorphicAttribute()
 
   associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'sender')
+
+  user: DS.belongsTo('Radium.User', polymorphicFor: 'sender')

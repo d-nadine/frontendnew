@@ -36,6 +36,8 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
 
   // Observer function, rerenders the view with the updated date.
   var observer = function() {
+    if(!elem) return;
+
     var elem = view.$();
     // Delete the observes if the view gets got.
     if (elem.length === 0) {

@@ -4,20 +4,30 @@ Radium.reopen
   # behave as real association.
   #
   # TODO: add polymorphic keys support to ember-data
-  polymorphic: (key) ->
-    idKey   = "#{key}Data.id"
-    typeKey = "#{key}Data.type"
-    ( (key, value) ->
-      if value
-        type = value.get 'type'
-        id   = value.get 'id'
+  polymorphicAttribute: ->
+    Ember.computed( (key, record) ->
+      if arguments.length == 1
+        record = null
+        find = (association) ->
+          record = @get(association.key)
 
-        @set "data.#{key}", { id: id, type: type }
+        Ember.get(@constructor, 'polymorphicAssociationsByName').get(key).find find, this
 
-      if type = @get(typeKey)
-        type = Radium.Core.typeFromString(type)
-        Radium.store.find type, @get(idKey)
-    ).property(idKey, typeKey)
+        record
+      else
+        find = (association) ->
+          association.type == record.constructor
+        clear = (association) ->
+          if @get(association.key) && association.type != record.constructor
+            @set association.key, null
+
+        associations = Ember.get(@constructor, 'polymorphicAssociationsByName').get(key)
+        associations.forEach clear, this
+        association = associations.find find, this
+        console.log 'set', association.key, record.toString()
+        @set association.key, record
+        record
+    ).property().meta(polymorphic: true)
 
   defineFeedAssociation: ->
     args = Array.prototype.slice.call(arguments)
