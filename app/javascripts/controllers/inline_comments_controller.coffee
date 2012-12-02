@@ -11,16 +11,16 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       id = @get('feedItem.id')
       type = @get('feedItem.type') || @get('feedItem.kind')
 
-      comment = Radium.store.createRecord Radium.Comment,
+      comment = @get('comments').createRecord
         text: commentText
         createdAt: Ember.DateTime.create()
         user: Radium.router.get('meController.user')
         commentableType: type
         commentableId: id
+        todo: @get('feedItem')
 
       @set('isError', false)
       @set('newComment', '')
-      @get('comments').pushObject(comment)
 
       Radium.store.commit()
 

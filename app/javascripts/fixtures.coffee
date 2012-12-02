@@ -443,6 +443,10 @@ Fixtures.add Radium.Comment,
     updated_at: '2012-07-03T11:32:57Z'
     text: 'I like product drafts'
     user_id: 1
+    commentable:
+      id: 1
+      type: 'todo'
+
 
 Fixtures.add Radium.Email,
   default:

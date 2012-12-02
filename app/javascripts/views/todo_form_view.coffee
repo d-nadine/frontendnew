@@ -123,8 +123,9 @@ Radium.TodoFormView = Radium.FormView.extend
   submitForm: ->
     doStuff = ->
       selection = @get('selection')
+      console.log selection.toString()
       if !selection || !selection.get('length')
-        selection = [@get('assignedUser')]
+        selection = [selection]
 
       description = @get('descriptionField.value')
       isCall = @get('isCallCheckbox.checked')
@@ -135,9 +136,9 @@ Radium.TodoFormView = Radium.FormView.extend
       finishBy = @get('finishBy')
 
       self = this
-      selection.forEach (assignee) ->
-        assignedUser   = assignee
-        assignedUserId = assignee.get('id')
+      selection.forEach (object) ->
+        assignedUser = self.get('assignedUser')
+        assignedUserId = assignedUser.get('id')
 
         data =
           description: description
@@ -151,8 +152,7 @@ Radium.TodoFormView = Radium.FormView.extend
           hasAnimation: true
 
         todo = Radium.store.createRecord Radium.Todo, data
-        if selection
-          todo.set 'reference', selection
+        todo.set 'reference', object if object
 
         # TODO: feed sections could automatically handle adding
         # new items, but I'm not sure how would hat behave, it needs

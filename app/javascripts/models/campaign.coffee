@@ -1,4 +1,4 @@
-Radium.Campaign = Radium.Core.extend
+Radium.Campaign = Radium.Core.extend Radium.CommentsMixin,
   isEditable: true
   name: DS.attr('string')
   endsAt: DS.attr('date')
@@ -7,5 +7,7 @@ Radium.Campaign = Radium.Core.extend
   isPublic: DS.attr('boolean')
   user: DS.belongsTo('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
+
+  todos: DS.hasMany('Radium.Todo', inverse: 'campaign')
 
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

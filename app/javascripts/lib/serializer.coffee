@@ -4,3 +4,26 @@ Radium.Serializer = DS.RESTSerializer.extend
     for name, transform of Radium.transforms
       @registerTransform name, transform
 
+
+  materializeFromData: (record, hash) ->
+    eachPolymorphicAttribute = (name, attribute) ->
+      polymorphicData = @extractAttribute(record.constructor, hash, name)
+      if polymorphicData
+        @materializePolymorphicAssociation(record, hash, name, polymorphicData)
+
+    if record.eachPolymorphicAttribute
+      record.eachPolymorphicAttribute eachPolymorphicAttribute, this
+
+    @_super record, hash
+
+  materializePolymorphicAssociation: (record, hash, name, polymorphicData) ->
+    type = record.constructor
+
+    associationType = Radium.Core.typeFromString(polymorphicData.type)
+    associations = Ember.get(type, 'associations').get(associationType).map (association) ->
+      Ember.get(type, 'associationsByName').get(association.name)
+
+    polymorphic = associations.find (association) -> association.options?.polymorphicFor == name
+
+    Ember.assert("Could not find association with type #{Radium.Core.typeFromString(polymorphicData.type)} for #{name} polymorphic association in #{record.constructor}", polymorphic)
+    hash["#{polymorphic.key}_id"] = polymorphicData.id

@@ -30,3 +30,4 @@ Radium.Person = Radium.Core.extend
   phoneCalls: DS.hasMany('Radium.PhoneCall')
   messages: DS.hasMany('Radium.Message')
   activities: DS.hasMany('Radium.Activity')
+  comments: DS.hasMany('Radium.Comment')

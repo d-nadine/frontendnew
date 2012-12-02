@@ -5,13 +5,9 @@
   {{/if}}
 </fieldset>
 <fieldset class="control-group">
-  {{#unless view.selection.multi}}
-    <label class="radium-control-label" for="assigned-to">Assigned To</label>
-  {{/unless}}
+  <label class="radium-control-label" for="assigned-to">Assigned To</label>
   <div class="controls">
-    {{#unless view.selection.multi}}
-      {{view view.assignToSelect}}
-    {{/unless}}
+    {{view view.assignToSelect}}
     {{#if view.isContact}}
     <div class="inline-fieldset">
       <label>
