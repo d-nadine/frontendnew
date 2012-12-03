@@ -153,3 +153,5 @@ require 'radium/views/contact_card_view'
 require 'radium/views/contacts_toolbar_view'
 
 require 'radium/fixtures'
+require 'radium/fixtures/factory'
+require 'radium/fixtures/fixture_manager'
