@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 00d125daf9c75f6d4d40513e18ffd08b03dd8950
+  revision: 5050ce899c668ae38b56b318fc5809e9304684bd
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -81,8 +81,7 @@ GEM
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
-    libv8 (3.3.10.4)
-    multi_json (1.3.7)
+    multi_json (1.4.0)
     open4 (1.3.0)
     rack (1.4.1)
     rack-rewrite (1.3.1)
@@ -93,10 +92,11 @@ GEM
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
+    ref (1.0.2)
     ruby-prof (0.11.2)
     sass (3.2.3)
-    therubyracer (0.10.2)
-      libv8 (~> 3.3.10)
+    therubyracer (0.11.0)
+      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
