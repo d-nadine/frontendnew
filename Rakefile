@@ -74,3 +74,87 @@ desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
 
 task :default => :test
+
+desc "Compile tests for browser"
+task :compile_tests do
+  output_dir = File.expand_path "../test_site", __FILE__
+
+  FileUtils.rm_rf output_dir if File.directory? output_dir
+  FileUtils.mkdir_p output_dir
+
+  loader_template = <<-erb
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Unit Tests</title>
+        <link rel="stylesheet" href="application.css">
+        <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css">
+
+        <script type="text/javascript" src="application.js"></script>
+        <script type="text/javascript" src="qunit.js"></script>
+
+        <script type="text/javascript">
+          QUnit.config.autorun = false
+        </script>
+
+        <% scripts.each do |script| %> 
+          <script type="text/javascript" src="<%= script %>"></script>
+        <% end %>
+      </head>
+
+      <body>
+        <div id="application"></div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <script type="text/javascript">
+          minispade.require('radium/boot');
+        </script>
+
+        <% scripts.each do |script| %> 
+          <script type="text/javascript" src="<%= script %>"></script>
+        <% end %>
+
+        <script type="text/javascript">
+          QUnit.load()
+        </script>
+      </body>
+    </html>
+  erb
+
+  sh "cp -r site/* #{output_dir}", :verbose => false
+
+  sh "cp -r test/* #{output_dir}", :verbose => false
+
+  # Now compile all the coffeescript stuff
+  Dir["#{output_dir}/**/*.coffee"].each do |test_file|
+    js_file = test_file.gsub /\.coffee$/, ".js"
+    File.open js_file, "w" do |js|
+      js.puts CoffeeScript.compile(File.read(test_file))
+      FileUtils.rm_rf test_file
+    end
+  end
+
+  # Copy qunit over
+  FileUtils.cp "#{Iridium.js_lib_path}/iridium/qunit.js", "#{output_dir}/qunit.js"
+
+  # Now organize all the scripts
+  scripts = []
+
+  Dir.chdir output_dir do
+    Dir["support/**/*.js"].each do |script|
+      scripts << script
+    end
+
+    Dir["integration/**/*.js"].each do |script|
+      scripts << script
+    end
+  end
+
+  puts scripts
+
+  File.open "#{output_dir}/integration_tests.html", "w" do |html|
+     html.puts ERB.new(loader_template).result(binding)
+  end
+end
