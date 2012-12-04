@@ -94,7 +94,7 @@ module 'Factory#GetDefinitions'
 
 test 'all definitions can be returned', ->
  defs = Factory.getDefinitions()
- equal 1, defs.length, '4 definitions in factory'
+ equal 1, defs.length, '1 definitions in factory'
 
 module 'Factory - abstract',
   setup: ->
