@@ -5,11 +5,14 @@ window.Factory = do($) ->
     @name = name
     @defaults = $.extend options.parent, options.defaults
     @plural = "#{name.toLowerCase().pluralize()}"
+    @sequences = options.sequences
     @
 
   define = (klass, options = {}) ->
     options.defaults ?= {}
     options.parent = if options.parent then build(options.parent) else {}
+
+    setSequence(options) if options.sequence
 
     def = new Definition(klass, options)
 
@@ -20,6 +23,14 @@ window.Factory = do($) ->
 
     unless f[def.plural].default
       f[def.plural].default = build(klass, def.defaults)
+
+  setSequence = (options) ->
+    options.sequences = {}
+    options.sequences.attr = options.sequence
+    options.defaults[options.sequence] = 0
+    options.sequences[options.sequence] = ->
+      nextSequence = ++options.defaults[options.sequence]
+      options.defaults[options.sequence] = nextSequence
 
   build = (klass, name, options = {}) ->
     unless f.hasOwnProperty klass
@@ -33,7 +44,12 @@ window.Factory = do($) ->
     definition = f[klass]
 
     instance = $.extend {}, definition.defaults, options
-    instance.def = f[klass]
+
+    def = f[klass]
+    instance.def = def
+
+    if def.sequences
+      instance[def.sequences.attr] = def.sequences[def.sequences.attr]()
 
     for k, v of instance when typeof v is 'function'
       #do we need to worry about context?

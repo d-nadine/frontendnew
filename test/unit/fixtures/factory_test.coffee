@@ -191,4 +191,32 @@ test 'an array of named instances can be embedded within another', ->
   equal 2, todo.users.length, 'call todo has 2 users'
   equal 'Paul Cowan', todo.users[0].name
 
+module 'Factory - sequence',
+  setup: ->
+    Factory.define 'User',
+      abstract: true
+      sequence: 'id'
 
+    Factory.define 'Contact',
+      abstract: true
+      sequence: 'id'
+
+  teardown: ->
+    Factory.tearDown()
+
+test 'attribute can autoincrement', ->
+  a = Factory.build 'User'
+  b = Factory.build 'User'
+  c = Factory.build 'User'
+
+  equal a.id, 1, 'user sequence one'
+  equal b.id, 2, 'user sequence two'
+  equal c.id, 3, 'user sequence three'
+
+  d = Factory.build 'Contact'
+  e = Factory.build 'Contact'
+  f = Factory.build 'Contact'
+
+  equal d.id, 1, 'contact sequence one'
+  equal e.id, 2, 'contact sequence two'
+  equal f.id, 3, 'contact sequence three'
