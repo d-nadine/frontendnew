@@ -11,6 +11,20 @@ end
 desc "Compiles the application"
 task :compile => "assets:precompile"
 
+namespace :test do
+  desc "Run all tests"
+  task :all do
+    sh "bundle exec iridium test"
+  end
+
+  desc "Run all tests in debugging mode"
+  task :debug do
+    sh "bundle exec iridium test --log-level=info"
+  end
+end
+
+task :test => 'test:all'
+
 namespace :build do
   vendor_path = File.expand_path "../vendor/", __FILE__
   vendor_js_path = File.expand_path "../vendor/javascripts", __FILE__
@@ -58,3 +72,5 @@ end
 
 desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
+
+task :default => :test
