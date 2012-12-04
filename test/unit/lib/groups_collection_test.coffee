@@ -1,4 +1,13 @@
-app('/')
+store = null
+fixtures = null
+
+module 'Radium.GroupsCollectionTest',
+  setup: ->
+    store = Radium.Store.create()
+    store.get('_adapter').set('simulateRemoteResponse', false)
+    fixtures = FixtureSet.create(store: store).loadAll()
+  teardown: ->
+    store.destroy()
 
 test 'groups collection automatically handles group management when sections are added', ->
   sections = Ember.A([])
@@ -7,10 +16,11 @@ test 'groups collection automatically handles group management when sections are
     dependentContent: sections
     range: 'weekly'
     content: Ember.A([])
+    store: store
 
-  s1 = F.feed_sections 'default'
-  s2 = F.feed_sections 'feed_section_2012_08_17'
-  s3 = F.feed_sections 'month_from_now'
+  s1 = fixtures.feed_sections 'default'
+  s2 = fixtures.feed_sections 'feed_section_2012_08_17'
+  s3 = fixtures.feed_sections 'month_from_now'
 
   equal groups.get('length'), 0, 'initially groups are empty'
 

@@ -1,24 +1,30 @@
-# we need bootstrapped store here
-app '/'
+store = null
+fixtures = null
 
 module 'Radium.ContactFeedSection'
+  setup: ->
+    store = Radium.Store.create()
+    store.get('_adapter').set('simulateRemoteResponse', false)
+    fixtures = FixtureSet.create(store: store).loadAll()
+  teardown: ->
+    store.destroy()
 
 test 'it forwards delegates items to section', ->
-  transaction = Radium.store.transaction()
+  transaction = store.transaction()
 
   attrs = {
     section_id: '2012-01-01'
     record_id: 1
   }
 
-  contact = F.contacts('ralph')
+  contact = fixtures.contacts('ralph')
 
-  Radium.store.load(Radium.FeedSection, '2012-01-01', { item_ids: [] })
+  store.load(Radium.FeedSection, '2012-01-01', { item_ids: [] })
   # TODO: extract this into fixtures to load it with one line
-  Radium.store.load(Radium.ContactFeedSection, '2012-01-01#1', attrs)
+  store.load(Radium.ContactFeedSection, '2012-01-01#1', attrs)
 
-  section = Radium.FeedSection.find('2012-01-01')
-  contact_section = Radium.ContactFeedSection.find('2012-01-01#1')
+  section = store.find(Radium.FeedSection, '2012-01-01')
+  contact_section = store.find(Radium.ContactFeedSection, '2012-01-01#1')
 
   todos = []
 
@@ -26,19 +32,19 @@ test 'it forwards delegates items to section', ->
   equal contact_section.get('items.unclustered.length'), 0, ''
 
   # check if adding new items to section will change contact section
-  section.pushItem F.todos('call')
+  section.pushItem fixtures.todos('call')
 
   equal contact_section.get('items.clusters.length'), 0, 'record added to section should populate contact section'
   equal contact_section.get('items.unclustered.length'), 1, ''
 
   for i in [1..6]
-    Radium.store.load Radium.Todo, i + 1000,
+    store.load Radium.Todo, i + 1000,
       id: i + 1000
       reference:
         id:   1
         type: 'contact'
 
-    todo = Radium.Todo.find i + 1000
+    todo = store.find(Radium.Todo, i + 1000)
     section.pushItem todo
 
   equal contact_section.get('items.clusters.length'), 1, 'contacts section items should be properly clustered'

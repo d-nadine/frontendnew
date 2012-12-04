@@ -33,8 +33,9 @@ Radium.Core.reopenClass
   typeToString: (type) ->
     type.toString().split('.').slice(-1)[0].underscore()
 
-  isInStore: (id)->
-    !!Radium.store.typeMapFor(this).idToCid[id]
+  isInStore: (id, store)->
+    store ?= Radium.store
+    store.isInStore this, id
 
   polymorphicAssociationsByName: Ember.computed( ->
     map  = Ember.Map.create()

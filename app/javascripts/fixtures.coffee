@@ -6,11 +6,24 @@ Fixture = Ember.Object.extend
 # records based on fixtures easily, for example:
 #
 #     F.todos('with_todo') #=> <Radium.Todo ... >
-window.Fixtures = Fixtures = Ember.Object.create
+window.FixtureSet = FixtureSet = Ember.Object.extend
   init: ->
     @set('fixtures', Ember.Map.create())
 
+    @_super()
+
+    for type, fixtures of FixtureSet.fixtures
+      @add(type, fixtures)
+
+  store: (->
+    if store = @get('_store')
+      store
+    else
+      Radium.store
+  ).property('_store')
+
   add: (type, fixtures) ->
+    type = Ember.get(Ember.lookup, type) if typeof(type) == 'string'
     for name, data of fixtures
       fixture = Fixture.create
         type: type
@@ -46,35 +59,43 @@ window.Fixtures = Fixtures = Ember.Object.create
     @afterAdd(type, fixtures, fixture)
 
   fixturesForType: (type) ->
+    store = @get('store')
     map = @get('fixtures')
 
     fixtures = map.get(type)
     unless fixtures
       fixtures = Ember.Map.create()
       map.set(type, fixtures)
-      Fixtures[Radium.Core.typeToString(type).pluralize()] = (name) ->
-        fixture = Fixtures.fetch(type, name)
+      self = this
+      this[Radium.Core.typeToString(type).pluralize()] = (name) ->
+        fixture = fixtures.get(name)
         data    = fixture.get('data')
-        Radium.store.load(type, data.id, data) unless type.isInStore(data.id)
-        Radium.store.find(type, data.id)
+        store.load(type, data.id, data) unless store.isInStore(type, data.id)
+        store.find(type, data.id)
 
     fixtures
 
   loadAll: (options) ->
     options ?= {}
     now      = options.now
+    store    = @get('store')
 
     @get('fixtures').forEach (type, fixtures) ->
-      type.FIXTURES ?= []
+      type.FIXTURES = []
       fixtures.forEach (name, fixture) ->
         data = fixture.get('data')
         type.FIXTURES.pushObject(data)
         if now
-          Radium.store.load(type, data.id, data)
+          store.load(type, data.id, data)
+    this
 
-window.F = F = Fixtures
+FixtureSet.reopenClass
+  add: (type, fixtures) ->
+    FixtureSet.fixtures ?= {}
+    FixtureSet.fixtures[type] ?= {}
+    $.extend FixtureSet.fixtures[type], fixtures
 
-Fixtures.add Radium.FeedSection,
+FixtureSet.add Radium.FeedSection,
   default:
     # TODO: think about the best way to handle id and lack of persistance here
     id: '2012-08-14'
@@ -201,10 +222,10 @@ for i in [1..200]
       [Radium.Campaign, 1]
     ]
   }
-  Fixtures.add Radium.FeedSection, data
+  FixtureSet.add Radium.FeedSection, data
 
 
-Fixtures.add Radium.CallList,
+FixtureSet.add Radium.CallList,
   default:
     id: '1'
     created_at: '2012-08-14T15:27:32Z'
@@ -212,7 +233,7 @@ Fixtures.add Radium.CallList,
     user_id: 1
     description: 'Call list'
 
-Fixtures.add Radium.Deal,
+FixtureSet.add Radium.Deal,
   default:
     id: '1'
     created_at: '2012-08-14T15:27:32Z'
@@ -238,7 +259,7 @@ Fixtures.add Radium.Deal,
     close_by: '2012-07-15T18:27:32Z'
     name: 'Small contract'
 
-Fixtures.add Radium.Meeting,
+FixtureSet.add Radium.Meeting,
   default:
     id: '1'
     created_at: '2012-08-17T18:27:32Z'
@@ -260,7 +281,7 @@ Fixtures.add Radium.Meeting,
     topic: 'Retrospection'
     location: 'Radium HQ'
 
-Fixtures.add Radium.Todo,
+FixtureSet.add Radium.Todo,
   default:
     id: '1'
     created_at: '2012-08-14T18:27:32Z'
@@ -420,7 +441,7 @@ Fixtures.add Radium.Todo,
     finished: false
     overdue: false
 
-Fixtures.add Radium.Contact,
+FixtureSet.add Radium.Contact,
   ralph:
     id: '1'
     display_name: 'Ralph'
@@ -430,13 +451,13 @@ Fixtures.add Radium.Contact,
     display_name: 'John'
     status: 'prospect'
 
-Fixtures.add Radium.Campaign,
+FixtureSet.add Radium.Campaign,
   default:
     id: '1'
     name: 'Fall product campaign'
     user_id: 1
 
-Fixtures.add Radium.Comment,
+FixtureSet.add Radium.Comment,
   default:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
@@ -448,7 +469,7 @@ Fixtures.add Radium.Comment,
       type: 'todo'
 
 
-Fixtures.add Radium.Email,
+FixtureSet.add Radium.Email,
   default:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
@@ -457,7 +478,7 @@ Fixtures.add Radium.Email,
       id: '2'
       type: 'user'
 
-Fixtures.add Radium.Group,
+FixtureSet.add Radium.Group,
   default:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
@@ -469,7 +490,7 @@ Fixtures.add Radium.Group,
     updated_at: '2012-07-03T11:32:57Z'
     name: 'Developers'
 
-Fixtures.add Radium.PhoneCall,
+FixtureSet.add Radium.PhoneCall,
   default:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
@@ -481,14 +502,14 @@ Fixtures.add Radium.PhoneCall,
       id: '1'
       type: 'contact'
 
-Fixtures.add Radium.Sms,
+FixtureSet.add Radium.Sms,
   default:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
     sender_id: 2
 
-Fixtures.add Radium.User,
+FixtureSet.add Radium.User,
   aaron:
     id: '1'
     created_at: '2012-06-23T17:44:53Z'
@@ -518,7 +539,7 @@ Fixtures.add Radium.User,
       huge_url: '/images/fallback/huge_default.png'
     account: 2
 
-Fixtures.add Radium.Notification,
+FixtureSet.add Radium.Notification,
   todo:
     id: '1'
     reference:
@@ -536,13 +557,13 @@ Fixtures.add Radium.Notification,
     updated_at: '2012-08-14T18:27:32Z'
     tag: 'invited.meeting'
 
-Fixtures.add Radium.Invitation,
+FixtureSet.add Radium.Invitation,
   for_meeting_1:
     id: '1'
     user_id: 1
     meeting_id: 1
 
-Fixtures.add Radium.Reminder,
+FixtureSet.add Radium.Reminder,
   todo:
     id: '1'
     time: '2012-08-14T18:27:32Z'
@@ -560,7 +581,7 @@ Fixtures.add Radium.Reminder,
     created_at: '2012-08-14T18:27:32Z'
     updated_at: '2012-08-14T18:27:32Z'
 
-Fixtures.add Radium.Message,
+FixtureSet.add Radium.Message,
   default:
     id: '1'
     type: 'email'
@@ -569,5 +590,9 @@ Fixtures.add Radium.Message,
 
 Radium.Gap.FIXTURES = []
 
+# TODO: initially fixtures were a singleton object, but that doesn't play
+#       nice with unit tests, so I changed it to a class FixtureSet,
+#       this should be probably reviewed and refactored
+window.F = F = window.Fixtures = Fixtures = FixtureSet.create()
 
 Fixtures.loadAll()

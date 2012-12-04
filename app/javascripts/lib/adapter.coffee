@@ -2,7 +2,7 @@
 #       for API adapter, in FixtureAdapter
 #       we could just use resulting keys
 Radium.Adapter = DS.FixtureAdapter.extend
-  dirtyRecordsForHasManyChange: Ember.K,
+  dirtyRecordsForHasManyChange: Ember.K
 
 Radium.Adapter.map 'Radium.Meeting',
   users: { key: 'user_ids' }
@@ -11,7 +11,7 @@ Radium.Adapter.map 'Radium.Notification',
   referenceData: { key: 'reference' }
 
 Radium.Adapter.map 'Radium.Todo',
-  referenceType: { key: 'reference.type' }
+  referenceData: { key: 'reference' }
 
 Radium.Adapter.map 'Radium.Person',
   phoneCalls: { key: 'phone_calls' }

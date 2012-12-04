@@ -1,3 +1,5 @@
+module 'Radium.Inflector'
+
 test 'humanize removes underscores and converts to lower case', ->
   hm = Radium.Inflector.humanize
   equal hm('THIS_is_SPARTA!'), 'this is sparta!', ''

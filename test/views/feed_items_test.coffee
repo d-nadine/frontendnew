@@ -1,20 +1,20 @@
 view = null
+store = null
+fixtures = null
 
 module "Feed items",
   setup: ->
-    # loading too much data doesn't really matter for this file,
-    # but fixtures can't load their dependencies yet, so it's
-    # easier to just load it all at once
-    app '/'
-    Fixtures.loadAll(now: true)
+    store = Radium.Store.create()
+    fixtures = FixtureSet.create(store: store).loadAll(now: true)
 
   teardown: ->
+    store.destroy()
     Ember.run ->
       view.remove()
     view = null
 
 test 'todo item', ->
-  item = F.todos('default')
+  item = fixtures.todos('default')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -24,7 +24,7 @@ test 'todo item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo call item', ->
-  item = F.todos('call')
+  item = fixtures.todos('call')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -35,7 +35,7 @@ test 'todo call item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo deal item', ->
-  item = F.todos('deal')
+  item = fixtures.todos('deal')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -46,7 +46,7 @@ test 'todo deal item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo campaign item', ->
-  item = F.todos('campaign')
+  item = fixtures.todos('campaign')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -57,7 +57,7 @@ test 'todo campaign item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo group item', ->
-  item = F.todos('group')
+  item = fixtures.todos('group')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -68,7 +68,7 @@ test 'todo group item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo phone call item', ->
-  item = F.todos('phone_call')
+  item = fixtures.todos('phone_call')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -78,7 +78,7 @@ test 'todo phone call item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo sms item', ->
-  item = F.todos('sms')
+  item = fixtures.todos('sms')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -89,7 +89,7 @@ test 'todo sms item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo with todo item', ->
-  item = F.todos('with_todo')
+  item = fixtures.todos('with_todo')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -99,7 +99,7 @@ test 'todo with todo item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'todo item', ->
-  item = F.todos('email')
+  item = fixtures.todos('email')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -110,7 +110,7 @@ test 'todo item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'meeting item', ->
-  item = F.meetings('default')
+  item = fixtures.meetings('default')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -119,7 +119,7 @@ test 'meeting item', ->
   assertContains view.$(), 'Product discussion @ Radium HQ'
 
 test 'deal item', ->
-  item = F.deals('default')
+  item = fixtures.deals('default')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -129,7 +129,7 @@ test 'deal item', ->
   assertContains view.$('a'), '(Aaron S.)'
 
 test 'call list item', ->
-  item = F.call_lists('default')
+  item = fixtures.call_lists('default')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
@@ -138,7 +138,7 @@ test 'call list item', ->
   assertContains view.$(), 'Call list'
 
 test 'campaign item', ->
-  item = F.campaigns('default')
+  item = fixtures.campaigns('default')
 
   Ember.run ->
     view = Radium.FeedItemContainerView.create(content: item)
