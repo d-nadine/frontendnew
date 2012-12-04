@@ -5,13 +5,13 @@
 # a cluster.
 Radium.ClusteredRecordArray = Ember.Mixin.create
   clusterSize: 5
-  store: null
 
   init: ->
     @_super.apply this, arguments
     @set 'content', Ember.A() unless @get 'content'
 
     @set 'clusters', Em.ArrayProxy.create
+      store: @get('store')
       arrangedContent: (->
         @get('content').filter (cluster) -> cluster.get('length')
       ).property('content')

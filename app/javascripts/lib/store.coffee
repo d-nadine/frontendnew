@@ -10,14 +10,16 @@ Radium.Store = DS.Store.extend
       content: Ember.A([])
       store: this
 
-  adapter: Radium.Adapter.create
+  isInStore: (type, id) ->
+    !!@typeMapFor(type).idToCid[id]
+
+  adapter: Radium.Adapter.extend
     serializer: Radium.Serializer
     plurals: {}
     pluralize: (name) ->
       @plurals[name] || name + "s"
 
     queryFixtures: (fixtures, query, type) ->
-      console.log 'queryFixtures'
       if type == Radium.Gap
         first = Date.parse "#{query.first}T00:00:00Z"
         last  = Date.parse "#{query.last}T00:00:00Z"

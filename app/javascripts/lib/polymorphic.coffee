@@ -72,7 +72,6 @@ Radium.reopen
         associations = Ember.get(@constructor, 'polymorphicAssociationsByName').get(key)
         associations.forEach clear, this
         association = associations.find find, this
-        console.log 'set', association.key, record.toString()
         @set association.key, record
         record
     ).property().meta(polymorphic: true)

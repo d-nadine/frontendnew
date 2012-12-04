@@ -57,11 +57,13 @@ Radium.GroupedFeedSection = Radium.Core.extend
     proxies.pushObject proxy
 
   items: (->
+    store = @get('store')
+
     collection = Ember.ArrayProxy.create(
       Radium.ClusteredRecordArray, {
-        store: Radium.store
+        store: store
         content: Radium.ExtendedRecordArray.create
-          store: Radium.store,
+          store: store,
           content: Ember.A([])
       }
     )
@@ -95,12 +97,13 @@ Radium.GroupedFeedSection = Radium.Core.extend
 
   sections: (->
     dates = @get('dates')
+    store = @get('store')
 
-    sections = Radium.store.expandableArrayFor Radium.FeedSection
+    sections = store.expandableArrayFor Radium.FeedSection
 
     dates = dates.filter (date) ->
       # if section is already in store, let's just add it
-      if Radium.FeedSection.isInStore date
+      if Radium.FeedSection.isInStore date, store
         sections.loadRecord Radium.FeedSection.find(date)
         false
       else
@@ -147,10 +150,10 @@ Radium.GroupsCollection = Ember.ArrayProxy.extend Ember.SortableMixin,
       id      = "#{ date.toFormattedString('%Y-%m-%d') }-month"
 
     group = null
-    if Radium.GroupedFeedSection.isInStore id
+    if Radium.GroupedFeedSection.isInStore id, @get('store')
       group = Radium.GroupedFeedSection.find id
     else
-      Radium.store.load Radium.GroupedFeedSection, id, {id: id}
+      @get('store').load Radium.GroupedFeedSection, id, {id: id}
       group = Radium.GroupedFeedSection.find id
       group.setProperties
         date: date

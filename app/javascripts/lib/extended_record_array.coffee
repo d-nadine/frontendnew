@@ -58,7 +58,7 @@ Radium.ExtendedRecordArray.reopenClass
 
       args = mixins || []
       args.pushObject
-        store: @get('store')
+        store: store
         content: Ember.A(ids)
 
       self.create.apply(self, args)
@@ -71,4 +71,3 @@ Radium.ExtendedRecordArray.reopenClass
 
 # I suck at naming, if you have better idea, please rename (the
 # same thing applies to ExtendedRecordArray)
-Radium.ClusteredExtendedArray = Radium.ExtendedRecordArray.extend()

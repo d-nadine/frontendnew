@@ -4,7 +4,7 @@ Radium.NestedFeedSection = Ember.Mixin.create
   filteredItems: (->
     Ember.ArrayProxy.create(
       Ember.FilterableMixin, {
-        store: Radium.store
+        store: @get('store')
         context: this
         section: @get('section')
         contentBinding: 'section.items'
@@ -25,7 +25,7 @@ Radium.NestedFeedSection = Ember.Mixin.create
     #       override the same property.
     Ember.ArrayProxy.create(
       Radium.ClusteredRecordArray, {
-        store: Radium.store
+        store: @get('store')
         content: @get('filteredItems')
       }
     )
