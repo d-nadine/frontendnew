@@ -8,6 +8,8 @@ module 'factory - default values',
         id: '1'
         display_name: 'Ralph'
         status: 'prospect'
+  teardown: ->
+    Factory.tearDown()
 
 test 'should create a default object with default values', ->
   contact = Factory.contacts.default
@@ -54,6 +56,8 @@ test 'should create named definition with overriden values', ->
 module 'Factory with no defaults',
   setup: ->
     Factory.define 'Test'
+  teardown: ->
+    Factory.tearDown()
 
 test 'can define a definition with no defaults', ->
   ok Factory.tests.default, 'default object with no defaults'
@@ -63,6 +67,8 @@ module 'Factory - Parent',
     Factory.define 'Human',
       defaults:
         sex: 'Male'
+  teardown: ->
+    Factory.tearDown()
 
 test 'a factory can define a parent and extend its defaults', ->
   Factory.define 'Paul',
@@ -81,10 +87,14 @@ test 'a factory can define a parent and extend its defaults', ->
   equal paul.def.name, 'Paul', 'definition on hash'
 
 module 'Factory#GetDefinitions'
+  setup: ->
+    Factory.define 'Test'
+  teardown: ->
+    Factory.tearDown()
 
 test 'all definitions can be returned', ->
  defs = Factory.getDefinitions()
- equal 4, defs.length, '4 definitions in factory'
+ equal 1, defs.length, '4 definitions in factory'
 
 module 'Factory - abstract',
   setup: ->
@@ -92,6 +102,27 @@ module 'Factory - abstract',
       abstract: true
       defaults:
         key: 'Value'
+   teardown: ->
+    Factory.tearDown()
 
 test 'no default instance is created for an abstract definition', ->
   equal null, Factory.bases.default, 'no base default'
+
+module 'Factory - function attributes',
+  setup: ->
+    a = 3
+    b = 4
+    Factory.define 'Func',
+      defaults:
+        result: ->
+          a * b
+        timestamp: ->
+          new Date()
+  teardown: ->
+    Factory.tearDown()
+
+test 'a function attribute will be evaluated', ->
+  func = Factory.funcs.default
+  ok func, 'func has been created'
+  equal 12, func.result, 'func result expression'
+  ok func.timestamp.getMonth, 'func date created'

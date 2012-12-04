@@ -35,6 +35,12 @@ window.Factory = do($) ->
     instance = $.extend {}, definition.defaults, options
     instance.def = f[klass]
 
+    for k, v of instance when typeof v is 'function'
+      #do we need to worry about context?
+      result = instance[k]()
+      delete instance[k]
+      instance[k] = result
+
     if typeof name == "string"
       f[definition.plural][name] = instance
 
@@ -46,8 +52,13 @@ window.Factory = do($) ->
       continue if value instanceof Definition
       value
 
+  tearDown = ->
+    for own key, value of f
+      continue if typeof value is "function"
+      delete f[key]
 
   f.define =  define
   f.build =  build
   f.getDefinitions = getDefinitions
+  f.tearDown = tearDown
   f
