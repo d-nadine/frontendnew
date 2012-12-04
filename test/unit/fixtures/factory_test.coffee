@@ -126,3 +126,69 @@ test 'a function attribute will be evaluated', ->
   ok func, 'func has been created'
   equal 12, func.result, 'func result expression'
   ok func.timestamp.getMonth, 'func date created'
+
+module 'Factory - Associations',
+  setup: ->
+    Factory.define 'User'
+
+    Factory.build 'User', 'Paul',
+      id: 1
+      name: 'Paul Cowan'
+
+    Factory.build 'User', 'Bob',
+      id: 2
+      name: 'Bob Robertson'
+
+    Factory.define 'Todo',
+      defaults:
+        kind: 'general'
+        finished: true
+
+  teardown: ->
+    Factory.tearDown()
+
+test 'a named factory instance can be associated with another', ->
+  Factory.build 'Todo', 'overdue',
+    finished: false
+    user: Factory.association('User', 'Paul')
+
+  equal Factory.todos.overdue.user.name, 'Paul Cowan', 'User set on Todo' 
+
+test 'a named instance can be referenced and have its values overriden', ->
+  Factory.build 'User', 'Robert',
+    id: 3
+    name: 'Robert Smith'
+    city: 'Glasgow'
+
+  equal 'Glasgow', Factory.users.Robert.city, 'precond - initial city set'
+
+  Factory.build 'Todo', 'deal',
+    kind: 'deal'
+    user: Factory.association('User', 'Robert', city: 'Belfast')
+
+  deal = Factory.todos.deal
+
+  equal 3, deal.user.id, 'user id maintained'
+  equal 'Robert Smith', deal.user.name, 'user name maintained'
+  equal 'Belfast', deal.user.city, 'user city overriden'
+
+test 'an array of ids from named instances can be embedded in another', ->
+  Factory.build 'Todo', 'Campaign',
+    kind: 'campaign'
+    users: Factory.association('User', ['Paul', 'Bob'])
+
+  campaign = Factory.todos.Campaign
+  equal 2, campaign.users.length, 'campaign todo has 2 users'
+  equal 1, campaign.users[0], 'caompaign first user is an id'
+  equal "1,2", campaign.users.join(','), 'campaign has user ids'
+
+test 'an array of named instances can be embedded within another', ->
+  Factory.build 'Todo', 'call',
+    kind: 'call'
+    users: Factory.association('User', ['Paul', 'Bob'], embedded: true)
+
+  todo = Factory.todos.call
+  equal 2, todo.users.length, 'call todo has 2 users'
+  equal 'Paul Cowan', todo.users[0].name
+
+
