@@ -60,7 +60,7 @@ desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
 
 desc "Compile tests and run them in phantom. Open site/tests.html in a browser if you like as well."
-task :test do
+task :test => :compile do 
   output_dir = File.expand_path "../site", __FILE__
 
   test_dir = "#{output_dir}/test"
