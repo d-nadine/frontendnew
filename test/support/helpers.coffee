@@ -122,22 +122,3 @@ window.assertResource = (resource) ->
 
 window.assertNoResource = (resource) ->
   equal $(selectorForResource(resource)).length, 0, "Resource exists, while it shouldn't"
-
-window.reset = ->
-  Em.run ->
-    if Radium.app
-      if Radium.store
-        Radium.store.destroy()
-      Radium.app.destroy()
-  $('#application').remove()
-  $('body').append( $('<div id="application"></div>') )
-
-window.app = (url, callback) ->
-  reset()
-  Em.run ->
-    Radium.createApp()
-    Radium.app.initialize()
-    Radium.get('router').route(url)
-  if callback
-    # app seems to need some time to initialize
-    wait 200, callback
