@@ -79,6 +79,9 @@ desc "Compile tests to site/tests.html"
 task :compile_tests do
   output_dir = File.expand_path "../site", __FILE__
 
+  test_dir = "#{output_dir}/test"
+  FileUtils.rm_rf test_dir if File.exist? test_dir
+
   loader_template = <<-erb
     <!DOCTYPE html>
     <html lang="en">
