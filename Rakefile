@@ -112,10 +112,6 @@ task :compile_tests do
           minispade.require('radium/boot');
         </script>
 
-        <% scripts.each do |script| %> 
-          <script type="text/javascript" src="<%= script %>"></script>
-        <% end %>
-
         <script type="text/javascript">
           QUnit.load()
         </script>
@@ -147,14 +143,12 @@ task :compile_tests do
       scripts << script
     end
 
-    Dir["integration/**/*.js"].each do |script|
+    Dir["**/*_test.js"].each do |script|
       scripts << script
     end
   end
 
-  puts scripts
-
-  File.open "#{output_dir}/integration_tests.html", "w" do |html|
+  File.open "#{output_dir}/tests.html", "w" do |html|
      html.puts ERB.new(loader_template).result(binding)
   end
 end
