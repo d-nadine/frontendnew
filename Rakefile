@@ -11,20 +11,6 @@ end
 desc "Compiles the application"
 task :compile => "assets:precompile"
 
-namespace :test do
-  desc "Run all tests"
-  task :all do
-    sh "bundle exec iridium test"
-  end
-
-  desc "Run all tests in debugging mode"
-  task :debug do
-    sh "bundle exec iridium test --log-level=info"
-  end
-end
-
-task :test => 'test:all'
-
 namespace :build do
   vendor_path = File.expand_path "../vendor/", __FILE__
   vendor_js_path = File.expand_path "../vendor/javascripts", __FILE__
@@ -73,10 +59,8 @@ end
 desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
 
-task :default => :test
-
-desc "Compile tests to site/tests.html"
-task :compile_tests do
+desc "Compile tests and run them in phantom. Open site/tests.html in a browser if you like as well."
+task :test do
   output_dir = File.expand_path "../site", __FILE__
 
   test_dir = "#{output_dir}/test"
@@ -150,5 +134,11 @@ task :compile_tests do
      html.puts ERB.new(loader_template).result(binding)
   end
 
-  sh "open #{output_dir}/tests.html"
+  if system("which phantomjs > /dev/null 2>&1")
+    sh %Q{phantomjs script/run-qunit.js "file://localhost#{output_dir}/tests.html" 70000}, :verbose => false
+  else
+    sh "open #{output_dir}/tests.html"
+  end
 end
+
+task :default => :test
