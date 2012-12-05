@@ -75,12 +75,9 @@ task :notes => "notes:all"
 
 task :default => :test
 
-desc "Compile tests for browser"
+desc "Compile tests to site/tests.html"
 task :compile_tests do
-  output_dir = File.expand_path "../test_site", __FILE__
-
-  FileUtils.rm_rf output_dir if File.directory? output_dir
-  FileUtils.mkdir_p output_dir
+  output_dir = File.expand_path "../site", __FILE__
 
   loader_template = <<-erb
     <!DOCTYPE html>
@@ -95,12 +92,8 @@ task :compile_tests do
         <script type="text/javascript" src="qunit.js"></script>
 
         <script type="text/javascript">
-          QUnit.config.autorun = false
+          QUnit.config.autostart = false;
         </script>
-
-        <% scripts.each do |script| %> 
-          <script type="text/javascript" src="<%= script %>"></script>
-        <% end %>
       </head>
 
       <body>
@@ -109,19 +102,21 @@ task :compile_tests do
         <div id="qunit-fixture"></div>
 
         <script type="text/javascript">
-          minispade.require('radium/boot');
+          minispade.require('radium/app');
         </script>
 
+        <% scripts.each do |script| %> 
+          <script type="text/javascript" src="<%= script %>"></script>
+        <% end %>
+
         <script type="text/javascript">
-          QUnit.load()
+          QUnit.start()
         </script>
       </body>
     </html>
   erb
 
-  sh "cp -r site/* #{output_dir}", :verbose => false
-
-  sh "cp -r test/* #{output_dir}", :verbose => false
+  sh "cp -rf test #{output_dir}", :verbose => false
 
   # Now compile all the coffeescript stuff
   Dir["#{output_dir}/**/*.coffee"].each do |test_file|
@@ -139,11 +134,11 @@ task :compile_tests do
   scripts = []
 
   Dir.chdir output_dir do
-    Dir["support/**/*.js"].each do |script|
+    Dir["test/support/**/*.js"].each do |script|
       scripts << script
     end
 
-    Dir["**/*_test.js"].each do |script|
+    Dir["test/**/*_test.js"].each do |script|
       scripts << script
     end
   end
@@ -151,4 +146,6 @@ task :compile_tests do
   File.open "#{output_dir}/tests.html", "w" do |html|
      html.puts ERB.new(loader_template).result(binding)
   end
+
+  sh "open #{output_dir}/tests.html"
 end
