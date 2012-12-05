@@ -7,4 +7,7 @@ Radium.configure do
 
   # Module format for minispade: :string or :function
   config.minispade.module_format = :string
+
+  # Also compile the tests for testing
+  config.pipeline.compile_tests = true
 end

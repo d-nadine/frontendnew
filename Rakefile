@@ -1,9 +1,13 @@
 require 'bundler/setup'
-require File.expand_path("../application.rb", __FILE__)
+
+desc "Loads the app environment"
+task :environment do
+  require File.expand_path("../environment.rb", __FILE__)
+end
 
 namespace :assets do
   desc "Compiles the application"
-  task :precompile do
+  task :precompile => :environment do
     Iridium.application.compile
   end
 end
@@ -59,85 +63,19 @@ end
 desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
 
-desc "Compile tests and run them in phantom. Open site/tests.html in a browser if you like as well."
-task :test => :compile do 
-  output_dir = File.expand_path "../site", __FILE__
+desc "Compile tests and run them through phantom"
+task :test do 
+  ENV['IRIDIUM_ENV'] = 'test'
+  require File.expand_path("../config/environment.rb", __FILE__)
 
-  test_dir = "#{output_dir}/test"
-  FileUtils.rm_rf test_dir if File.exist? test_dir
+  app = Iridium.application
 
-  loader_template = <<-erb
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <title>Unit Tests</title>
-        <link rel="stylesheet" href="application.css">
-        <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css">
-
-        <script type="text/javascript" src="application.js"></script>
-        <script type="text/javascript" src="qunit.js"></script>
-
-        <script type="text/javascript">
-          QUnit.config.autostart = false;
-        </script>
-      </head>
-
-      <body>
-        <div id="application"></div>
-        <div id="qunit"></div>
-        <div id="qunit-fixture"></div>
-
-        <script type="text/javascript">
-          minispade.require('radium/app');
-        </script>
-
-        <% scripts.each do |script| %> 
-          <script type="text/javascript" src="<%= script %>"></script>
-        <% end %>
-
-        <script type="text/javascript">
-          QUnit.start()
-        </script>
-      </body>
-    </html>
-  erb
-
-  sh "cp -rf test #{output_dir}", :verbose => false
-
-  # Now compile all the coffeescript stuff
-  Dir["#{output_dir}/**/*.coffee"].each do |test_file|
-    js_file = test_file.gsub /\.coffee$/, ".js"
-    File.open js_file, "w" do |js|
-      js.puts CoffeeScript.compile(File.read(test_file))
-      FileUtils.rm_rf test_file
-    end
-  end
-
-  # Copy qunit over
-  FileUtils.cp "#{Iridium.js_lib_path}/iridium/qunit.js", "#{output_dir}/qunit.js"
-
-  # Now organize all the scripts
-  scripts = []
-
-  Dir.chdir output_dir do
-    Dir["test/support/**/*.js"].each do |script|
-      scripts << script
-    end
-
-    Dir["test/**/*_test.js"].each do |script|
-      scripts << script
-    end
-  end
-
-  File.open "#{output_dir}/tests.html", "w" do |html|
-     html.puts ERB.new(loader_template).result(binding)
-  end
+  app.compile
 
   if system("which phantomjs > /dev/null 2>&1")
-    sh %Q{phantomjs script/run-qunit.js "file://localhost#{output_dir}/tests.html" 70000}, :verbose => false
+    sh %Q{phantomjs script/run-qunit.js "file://localhost#{app.site_path}/tests.html"}, :verbose => false
   else
-    sh "open #{output_dir}/tests.html"
+    sh "open #{app.site_path}/tests.html"
   end
 end
 
