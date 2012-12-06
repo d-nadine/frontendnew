@@ -2,13 +2,13 @@ Fixture = Ember.Object.extend
   type: null
   name: null
 
-window.FixtureManager = FixtureManager = Ember.Object.extend
+window.FixtureSet = FixtureManager = Ember.Object.extend
   init: ->
     @set('fixtures', Em.Map.create())
 
     @_super()
 
-    for type, fixtures of FixtureManager.fixtures
+    for type, fixtures of FixtureSet.fixtures
       @add(type, fixtures)
 
   store: ( ->
@@ -87,11 +87,11 @@ window.FixtureManager = FixtureManager = Ember.Object.extend
 
     this
 
-FixtureManager.reopenClass
+FixtureSet.reopenClass
   add: (type, fixture) ->
-    FixtureManager.fixtures ?= {}
-    FixtureManager.fixtures[type] ?= {}
-    $.extend FixtureManager.fixtures[type], fixture
+    FixtureSet.fixtures ?= {}
+    FixtureSet.fixtures[type] ?= {}
+    $.extend FixtureSet.fixtures[type], fixture
 
   load: ->
     for definition in Factory.getDefinitions()
@@ -100,13 +100,13 @@ FixtureManager.reopenClass
         delete value.def
         fixture = {}
         fixture[key] = value
-        FixtureManager.add type, fixture
+        FixtureSet.add type, fixture
 
-FixtureManager.load()
+FixtureSet.load()
 
 # TODO: initially fixtures were a singleton object, but that doesn't play
-#       nice with unit tests, so I changed it to a class FixtureManager,
+#       nice with unit tests, so I changed it to a class FixtureSet,
 #       this should be probably reviewed and refactored
-window.F = F = window.Fixtures = Fixtures = FixtureManager.create()
+window.F = F = window.Fixtures = Fixtures = FixtureSet.create()
 
 Fixtures.loadAll()
