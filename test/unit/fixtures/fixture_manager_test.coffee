@@ -1,19 +1,20 @@
+store = null
+fixtures = null
+
 module 'FixtureManager', setup: ->
-    Radium.store = Radium.Store.create()
+    store = Radium.Store.create()
+    store.get('_adapter').set('simulateRemoteResponse', false)
+    fixtures = FixtureSet.create(store: store).loadAll()
 
   teardown: ->
-    if Radium.store
-      Radium.store.destroy()
+    store.destroy()
 
 test 'should create todo factory', ->
-  FixtureManager.load()
-
-  f = FixtureManager.create()
-  f.loadAll(now: true)
-
   id = '1'
+  obj = null
 
-  obj =  Radium.Sms.find(id)
-  console.log "feed = #{obj.get('id')}"
+  obj =  store.find(Radium.Meeting, id)
+
+  console.log "feed = #{obj.get('topic')}"
 
   ok obj.get('isLoaded'), 'object is loaded'

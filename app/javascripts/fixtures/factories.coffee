@@ -45,6 +45,13 @@ Factory.build 'User', 'aaron',
   phone: '136127245078'
   account: 1
 
+Factory.build 'User', 'jerry',
+  pdated_at: '2012-07-03T11:32:57Z'
+  name: 'Jerry Parker'
+  email: 'jerry.parker@feed-demo.com'
+  phone: '136127245071'
+  account: 2
+
 Factory.define 'Contact',
   abstract: true
   parent: 'Core'
@@ -57,15 +64,6 @@ Factory.build 'Contact', 'ralph',
 
 Factory.build 'Contact', 'john',
   display_name: 'John'
-
-
-
-Factory.build 'User', 'jerry',
-  pdated_at: '2012-07-03T11:32:57Z'
-  name: 'Jerry Parker'
-  email: 'jerry.parker@feed-demo.com'
-  phone: '136127245071'
-  account: 2
 
 Factory.define 'Meeting',
   sequence: 'id'
@@ -249,6 +247,61 @@ Factory.define 'Sms',
   defaults:
     sender_id: 2
 
+Factory.define 'Notification',
+  abstract: true
+  sequence: 'id'
+  parent: 'Core'
+
+# Not loading correctly, polymorphism?
+Factory.build 'Notification', 'todo',
+  reference:
+    id: '1'
+    type: 'todo'
+  created_at: '2012-08-14T18:27:32Z'
+  updated_at: '2012-08-14T18:27:32Z'
+  tag: 'assigned.todo'
+
+Factory.build 'Notification', 'meeting_invitation',
+  reference:
+    id: '1'
+    type: 'invitation'
+  created_at: '2012-08-14T18:27:32Z'
+  updated_at: '2012-08-14T18:27:32Z'
+  tag: 'invited.meeting'
+
+Factory.define 'Invitation',
+  abstract: true
+  sequence: 'id'
+  parent: 'Core'
+
+Factory.build 'Invitation', 'for_meeting_1',
+  user_id: 1
+  meeting_id: 1
+
+Factory.define 'Reminder',
+  abstract: true
+  sequence: 'id'
+  parent: 'Core'
+
+Factory.build 'Reminder', 'todo',
+  time: '2012-08-14T18:27:32Z'
+  reference:
+    id: '1'
+    type: 'todo'
+
+Factory.build 'Reminder', 'meeting',
+  time: '2012-08-14T18:27:32Z'
+  reference:
+    id: '1'
+    type: 'meeting'
+
+Factory.define 'Message',
+  sequence: 'id'
+  parent: 'Core'
+  defaults:
+    type: 'email'
+    sentAt: '2012-08-14T18:27:32Z'
+    message: 'Hey, what\'s up?'
 
 Factory.define 'FeedSection',
   abstract: true
@@ -327,19 +380,19 @@ Factory.build 'FeedSection', 'feed_section_9',
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'feed_section_10',
-    id: '2012-07-08'
-    date: '2012-07-08T00:00:00Z'
-    item_ids: [[Radium.Deal, 2]]
+  id: '2012-07-08'
+  date: '2012-07-08T00:00:00Z'
+  item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'feed_section_11',
-    id: '2012-07-07'
-    date: '2012-07-07T00:00:00Z'
-    item_ids: [[Radium.Deal, 2]]
+  id: '2012-07-07'
+  date: '2012-07-07T00:00:00Z'
+  item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'feed_section_12',
-    id: '2012-07-06'
-    date: '2012-07-06T00:00:00Z'
-    item_ids: [[Radium.Deal, 2]]
+  id: '2012-07-06'
+  date: '2012-07-06T00:00:00Z'
+  item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'feed_section_13',
   id: '2012-07-05'
@@ -392,4 +445,6 @@ for i in [1..200]
       [Radium.CallList, 1]
       [Radium.Campaign, 1]
     ]
+
+Radium.Gap.FIXTURES = []
 

@@ -152,7 +152,7 @@ require 'radium/views/contact_card_container_view'
 require 'radium/views/contact_card_view'
 require 'radium/views/contacts_toolbar_view'
 
-require 'radium/fixtures'
 require 'radium/fixtures/factory'
 require 'radium/fixtures/factories'
+# require 'radium/fixtures'
 require 'radium/fixtures/fixture_manager'

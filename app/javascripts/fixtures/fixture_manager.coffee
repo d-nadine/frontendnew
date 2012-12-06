@@ -29,10 +29,29 @@ window.FixtureManager = FixtureManager = Ember.Object.extend
 
       @addFixture(type, fixture)
 
+  # TODO: extract this as some kind of hook
+  afterAdd: (type, fixtureSet, fixture) ->
+    if type == Radium.FeedSection
+      # automatically add next_date and previous_date
+      fixtures = []
+      fixtureSet.forEach (name, f) -> fixtures.pushObject(f)
+
+      fixtures = fixtures.sort (a, b) ->
+        if a.get('data').id > b.get('data').id then 1 else -1
+
+      fixtures.forEach (fixture, i) ->
+        if previous = fixtures.objectAt(i - 1)
+          previous.get('data').next_date = fixture.get('data').id
+          fixture.get('data').previous_date = previous.get('data').id
+        if next = fixtures.objectAt(i + 1)
+          next.get('data').previous_date = fixture.get('data').id
+          fixture.get('data').next_date = next.get('data').id
+
+
   addFixture: (type, fixture) ->
     fixtures = @fixturesForType(type)
     fixtures.set(fixture.get('name'), fixture)
-    #TODO: Add afterAdd hook either here or factory
+    @afterAdd(type, fixtures, fixture)
 
   fetch: (type, name) ->
     @fixturesForType(type).get(name)
@@ -82,3 +101,12 @@ FixtureManager.reopenClass
         fixture = {}
         fixture[key] = value
         FixtureManager.add type, fixture
+
+FixtureManager.load()
+
+# TODO: initially fixtures were a singleton object, but that doesn't play
+#       nice with unit tests, so I changed it to a class FixtureManager,
+#       this should be probably reviewed and refactored
+window.F = F = window.Fixtures = Fixtures = FixtureManager.create()
+
+Fixtures.loadAll()
