@@ -31,6 +31,7 @@ window.Factory = do($) ->
     options.sequences[options.sequence] = ->
       nextSequence = ++options.defaults[options.sequence]
       options.defaults[options.sequence] = nextSequence
+      "#{nextSequence}"
 
   build = (klass, name, options = {}) ->
     unless f.hasOwnProperty klass

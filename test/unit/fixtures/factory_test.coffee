@@ -209,14 +209,14 @@ test 'attribute can autoincrement', ->
   b = Factory.build 'User'
   c = Factory.build 'User'
 
-  equal a.id, 1, 'user sequence one'
-  equal b.id, 2, 'user sequence two'
-  equal c.id, 3, 'user sequence three'
+  strictEqual a.id, '1', 'user sequence one'
+  strictEqual b.id, '2', 'user sequence two'
+  strictEqual c.id, '3', 'user sequence three'
 
   d = Factory.build 'Contact'
   e = Factory.build 'Contact'
   f = Factory.build 'Contact'
 
-  equal d.id, 1, 'contact sequence one'
-  equal e.id, 2, 'contact sequence two'
-  equal f.id, 3, 'contact sequence three'
+  strictEqual d.id, '1', 'contact sequence one'
+  strictEqual e.id, '2', 'contact sequence two'
+  strictEqual f.id, '3', 'contact sequence three'
