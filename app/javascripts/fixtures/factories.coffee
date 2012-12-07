@@ -203,7 +203,7 @@ Factory.build 'Todo', 'call_ralph',
 
 Factory.build 'Todo', 'finish_by_tomorrow',
   description: 'Buy office equipment'
-  finish_by: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  finish_by: Ember.DateTime.create().advance(day: 1).toISO8601()
   finished: false
 
 Factory.define 'Campaign',
@@ -405,7 +405,7 @@ Factory.build 'FeedSection', 'section_2012_08_31',
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'today',
-  id: Ember.DateTime.create().toFormattedString('%Y-%m-%d')
+  id: Ember.DateTime.create().toYmdFormat()
   date: "#{Ember.DateTime.create().toFormattedString('%Y-%m-%d')}T00:00:00Z"
   item_ids: [[Radium.Deal, 2]]
 
