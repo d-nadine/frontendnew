@@ -63,20 +63,18 @@ end
 desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
 
-desc "Compile tests and run them through phantom"
-task :test do 
-  ENV['IRIDIUM_ENV'] = 'test'
-  require File.expand_path("../config/environment.rb", __FILE__)
+namespace :test do
+  desc "Compile tests and run them through phantom"
+  task :all do 
+    sh "bundle exec iridium test"
+  end
 
-  app = Iridium.application
-
-  app.compile
-
-  if system("which phantomjs > /dev/null 2>&1")
-    sh %Q{phantomjs script/run-qunit.js "file://localhost#{app.site_path}/tests.html"}, :verbose => false
-  else
-    sh "open #{app.site_path}/tests.html"
+  desc "Print console.log to stdout during tests"
+  task :debug do 
+    sh "bundle exec iridium test --debug"
   end
 end
+
+task :test => 'test:all'
 
 task :default => :test
