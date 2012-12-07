@@ -5,7 +5,7 @@ module 'Radium.GroupedFeedSection'
   setup: ->
     store = Radium.Store.create()
     store.get('_adapter').set('simulateRemoteResponse', false)
-    fixtures = FixtureSet.loadFixtures(['FeedSection', 'Deal', 'Todo', 'Meeting', 'CallList', 'Campaign'], store)
+    fixtures = FixtureSet.loadFixtures(['FeedSection', 'Deal'], store)
   teardown: ->
     store.destroy()
 

@@ -93,13 +93,23 @@ FixtureSet.reopenClass
     FixtureSet.fixtures[type] ?= {}
     $.extend FixtureSet.fixtures[type], fixture
 
-  addFixtureSet: (fixtureSet) ->
+  addFixtureSet: (fixtureSet, loadDependencies = false) ->
     for own key, value of fixtureSet
       type = Radium.Core.typeFromString(value.def.name)
       # delete value.def
       fixture = {}
       fixture[key] = value
       FixtureSet.add type, fixture
+
+      continue unless loadDependencies
+
+      for own k, v of value
+        continue unless $.isArray(v) and v.length > 0
+        continue unless $.isArray(v[0]) and Em.typeOf(v[0][0]) is "class"
+        for klass in v
+          factoryType = klass[0].toString().split('.').pop().pluralize().toLowerCase()
+          continue if klass[0].FIXTURES
+          FixtureSet.addFixtureSet(Factory[factoryType]) if Factory[factoryType]
 
   load: ->
     for definition in Factory.getDefinitions()
@@ -109,7 +119,7 @@ FixtureSet.reopenClass
     types = [types] unless $.isArray types
 
     for type in types
-      FixtureSet.addFixtureSet Factory[type.pluralize().toLowerCase()]
+      FixtureSet.addFixtureSet Factory[type.pluralize().toLowerCase()], true
 
     fixtures = FixtureSet.create(store: store).loadAll()
     fixtures
