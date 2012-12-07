@@ -4,6 +4,7 @@ module 'Radium.ExtendedRecordArray',
   setup: ->
     store = Radium.Store.create()
     store.get('_adapter').set('simulateRemoteResponse', false)
+    fixtures = FixtureSet.loadFixtures(['Todo', 'User'], store)
   teardown: ->
     store.destroy()
 

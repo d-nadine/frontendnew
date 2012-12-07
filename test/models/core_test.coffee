@@ -1,11 +1,9 @@
 store = null
-fixtures = null
 
 module 'Radium.Core'
   setup: ->
     store = Radium.Store.create()
     store.get('_adapter').set('simulateRemoteResponse', false)
-    fixtures = FixtureSet.create(store: store).loadAll()
   teardown: ->
     store.destroy()
 

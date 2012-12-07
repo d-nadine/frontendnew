@@ -93,20 +93,24 @@ FixtureSet.reopenClass
     FixtureSet.fixtures[type] ?= {}
     $.extend FixtureSet.fixtures[type], fixture
 
+  addFixtureSet: (fixtureSet) ->
+    for own key, value of fixtureSet
+      type = Radium.Core.typeFromString(value.def.name)
+      # delete value.def
+      fixture = {}
+      fixture[key] = value
+      FixtureSet.add type, fixture
+
   load: ->
     for definition in Factory.getDefinitions()
-      for own key, value of definition
-        type = Radium.Core.typeFromString(value.def.name)
-        delete value.def
-        fixture = {}
-        fixture[key] = value
-        FixtureSet.add type, fixture
+      FixtureSet.addFixtureSet definition
 
-FixtureSet.load()
+  loadFixtures: (types, store) ->
+    types = [types] unless $.isArray types
 
-# TODO: initially fixtures were a singleton object, but that doesn't play
-#       nice with unit tests, so I changed it to a class FixtureSet,
-#       this should be probably reviewed and refactored
-window.F = F = window.Fixtures = Fixtures = FixtureSet.create()
+    for type in types
+      FixtureSet.addFixtureSet Factory[type.pluralize().toLowerCase()]
 
-Fixtures.loadAll()
+    fixtures = FixtureSet.create(store: store).loadAll()
+    fixtures
+

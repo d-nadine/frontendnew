@@ -5,7 +5,7 @@ module 'Radium.ContactFeedSection'
   setup: ->
     store = Radium.Store.create()
     store.get('_adapter').set('simulateRemoteResponse', false)
-    fixtures = FixtureSet.create(store: store).loadAll()
+    fixtures = FixtureSet.loadFixtures(['FeedSection', 'Contact', 'Todo'], store)
   teardown: ->
     store.destroy()
 

@@ -5,7 +5,7 @@ module 'Radium.Todo'
   setup: ->
     store = Radium.Store.create()
     store.get('_adapter').set('simulateRemoteResponse', false)
-    fixtures = FixtureSet.create(store: store).loadAll()
+    fixtures = FixtureSet.loadFixtures(['Todo', 'Meeting'], store)
   teardown: ->
     store.destroy()
 

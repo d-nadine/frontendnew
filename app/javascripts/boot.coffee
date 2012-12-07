@@ -13,5 +13,13 @@
 
 require 'radium/app'
 
+FixtureSet.load()
+# TODO: initially fixtures were a singleton object, but that doesn't play
+#       nice with unit tests, so I changed it to a class FixtureSet,
+#       this should be probably reviewed and refactored
+window.F = F = window.Fixtures = Fixtures = FixtureSet.create()
+
+Fixtures.loadAll()
+
 Radium.createApp()
 Radium.app.initialize()
