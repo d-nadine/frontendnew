@@ -8,6 +8,7 @@ window.Radium = Em.Namespace.create
     @store = app.store
 
 Radium.App = Em.Application.extend
+  autoinit: false
   initialize: ->
     router = Radium.Router.create()
     Radium.set('router', router)
