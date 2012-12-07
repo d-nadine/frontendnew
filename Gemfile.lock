@@ -21,13 +21,8 @@ GIT
     iridium-ember (0.1.0)
 
 GIT
-  remote: git://github.com/wycats/thor.git
-  revision: 15eedc90f49981b992869f7f21387caa3555f267
-  specs:
-    thor (0.16.0)
-
-PATH
-  remote: ~/radium/iridium
+  remote: git://github.com/radiumsoftware/iridium.git
+  revision: e061478625f8897cb342b90fb9296e3c6dcc4f53
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -46,6 +41,12 @@ PATH
       thor
       uglifier (~> 1.2.3)
       yui-compressor
+
+GIT
+  remote: git://github.com/wycats/thor.git
+  revision: 15eedc90f49981b992869f7f21387caa3555f267
+  specs:
+    thor (0.16.0)
 
 GEM
   remote: http://rubygems.org/
