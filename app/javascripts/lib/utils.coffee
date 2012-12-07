@@ -65,14 +65,14 @@ Radium.Utils = Em.Object.create
       dayAdjustment = 1 - dayOfTheWeek
       startOfWeek  = date.advance(day: dayAdjustment)
 
-      id      = "#{ startOfWeek.toFormattedString('%Y-%m-%d') }-week"
+      id      = "#{startOfWeek.toDateFormat()}-week"
       date    = startOfWeek
       endDate = date.advance day: 6
 
     else if range == 'monthly'
       startOfMonth = date.adjust(day: 1)
 
-      id      = "#{ startOfMonth.toFormattedString('%Y-%m-%d') }-month"
+      id      = "#{startOfMonth.toDateFormat()}-month"
       date    = startOfMonth
       endDate = date.advance(month: 1).advance(day: -1)
 

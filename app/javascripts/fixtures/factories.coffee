@@ -203,7 +203,7 @@ Factory.build 'Todo', 'call_ralph',
 
 Factory.build 'Todo', 'finish_by_tomorrow',
   description: 'Buy office equipment'
-  finish_by: Ember.DateTime.create().advance(day: 1).toISO8601()
+  finish_by: Ember.DateTime.create().advance(day: 1).toFullFormat()
   finished: false
 
 Factory.define 'Campaign',
@@ -405,36 +405,36 @@ Factory.build 'FeedSection', 'section_2012_08_31',
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'today',
-  id: Ember.DateTime.create().toYmdFormat()
-  date: "#{Ember.DateTime.create().toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  id: Ember.DateTime.create().toDateFormat()
+  date: Ember.DateTime.create().toFullFormat()
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'tomorrow',
-  id: Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')
-  date: "#{Ember.DateTime.create().advance(day: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  id: Ember.DateTime.create().advance(day: 1).toDateFormat()
+  date: Ember.DateTime.create().advance(day: 1).toFullFormat()
   item_ids: [[Radium.Deal, 3]]
 
 Factory.build 'FeedSection', 'week_from_now',
-  id: Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')
-  date: "#{Ember.DateTime.create().advance(day: 7).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  id: Ember.DateTime.create().advance(day: 7).toDateFormat()
+  date: Ember.DateTime.create().advance(day: 7).toFullFormat()
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'two_weeks_from_now',
-  id: Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')
-  date: "#{Ember.DateTime.create().advance(day: 14).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  id: Ember.DateTime.create().advance(day: 14).toDateFormat()
+  date: Ember.DateTime.create().advance(day: 14).toFullFormat()
   item_ids: [[Radium.Deal, 2]]
 
 Factory.build 'FeedSection', 'month_from_now',
-  id: Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')
-  date: "#{Ember.DateTime.create().advance(month: 1).toFormattedString('%Y-%m-%d')}T00:00:00Z"
+  id: Ember.DateTime.create().advance(month: 1).toDateFormat()
+  date: Ember.DateTime.create().advance(month: 1).toFullFormat()
   item_ids: [[Radium.Deal, 2], [Radium.Todo, 11]]
   _associatedContactIds: [1]
 
 for i in [1..200]
   date = Ember.DateTime.create().advance(day: 100 + i)
   Factory.build 'FeedSection', "additional_feed_section_in_future_#{i}",
-    id: date.toFormattedString('%Y-%m-%d')
-    date: "#{date.toFormattedString('%Y-%m-%d')}T00:00:00Z"
+    id: date.toDateFormat()
+    date: date.toFullFormat()
     item_ids: [
       [Radium.Deal, 2]
       [Radium.Todo, 8]

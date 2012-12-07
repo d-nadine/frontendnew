@@ -34,8 +34,8 @@ test 'groups collection automatically handles group management when sections are
 
   group = groups.get('firstObject')
 
-  equal group.get('date').toFormattedString('%Y-%m-%d'), '2012-08-13', ''
-  equal group.get('endDate').toFormattedString('%Y-%m-%d'), '2012-08-19', ''
+  equal group.get('date').toDateFormat(), '2012-08-13'
+  equal group.get('endDate').toDateFormat(), '2012-08-19'
 
   sections.pushObject s3
 

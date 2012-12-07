@@ -19,13 +19,13 @@ findNearBy = (date) ->
     Radium.get('currentFeedController').findRelatedSection nearBy
 
 jumpToDate = (date) ->
-  jumpTo date: date.toFormattedString('%Y-%m-%d')
+  jumpTo date: date.toDateFormat()
 
 jumpTo = (query) ->
   query   ?= {}
 
-  if query.date && query.date.toFormattedString
-    query.date = query.date.toFormattedString('%Y-%m-%d')
+  if query.date && query.date.toDateFormat
+    query.date = query.date.toDateFormat()
 
   if query.date && (section = sectionLoaded(query.date))
     if !query.disableScroll

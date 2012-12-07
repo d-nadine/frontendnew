@@ -77,8 +77,8 @@ Radium.Store = DS.Store.extend
             if first = fixtures[0]
               date = Em.DateTime.parse first.id, '%Y-%m-%d'
               [date, endDate] = Radium.Utils.rangeForDate(date, query.range)
-              date    = date.toFormattedString('%Y-%m-%d')
-              endDate = endDate.toFormattedString('%Y-%m-%d')
+              date    = date.toDateFormat()
+              endDate = endDate.toDateFormat()
 
               fixtures = fixtures.filter (f) ->
                 f.id <= endDate && f.id >= date

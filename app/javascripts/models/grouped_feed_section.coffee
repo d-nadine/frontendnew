@@ -27,7 +27,7 @@ Radium.GroupedFeedSection = Radium.Core.extend
         endDate = Ember.DateTime.parse endDate, '%Y-%m-%d'
 
       while Ember.DateTime.compare(date, endDate) <= 0
-        dates.pushObject date.toFormattedString('%Y-%m-%d')
+        dates.pushObject date.toDateFormat()
         date = date.advance(day: 1)
 
       @set 'dates', dates
@@ -145,9 +145,9 @@ Radium.GroupsCollection = Ember.ArrayProxy.extend Ember.SortableMixin,
     [date, endDate] = Radium.Utils.rangeForDate(section.get('date'), range)
 
     if range == 'weekly'
-      id      = "#{ date.toFormattedString('%Y-%m-%d') }-week"
+      id      = "#{date.toDateFormat()}-week"
     else if range == 'monthly'
-      id      = "#{ date.toFormattedString('%Y-%m-%d') }-month"
+      id      = "#{date.toDateFormat()}-month"
 
     group = null
     if Radium.GroupedFeedSection.isInStore id, @get('store')

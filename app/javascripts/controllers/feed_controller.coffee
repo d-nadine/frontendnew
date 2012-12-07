@@ -65,7 +65,7 @@ Radium.FeedController = Em.ArrayController.extend
   pushItem: (item) ->
     self = this
 
-    date = item.get('feedDate').toFormattedString('%Y-%m-%d')
+    date = item.get('feedDate').toDateFormat()
 
     # check if there is a straight way between new section and the
     # first or last visible section
@@ -154,14 +154,14 @@ Radium.FeedController = Em.ArrayController.extend
         if item = @get('firstObject')
           if date = item.get('date')
             options =
-              after: date.toFormattedString('%Y-%m-%d')
+              after: date.toDateFormat()
               limit: 1
               type: @get('type')
               id: @get('recordId')
               range: range
 
             if range != 'daily'
-              options.after = item.get('endDate').toFormattedString('%Y-%m-%d')
+              options.after = item.get('endDate').toDateFormat()
 
             @get('content').load Radium.FeedSection.find(options)
 
@@ -169,7 +169,7 @@ Radium.FeedController = Em.ArrayController.extend
         if item = @get('lastObject')
           if date = item.get('date')
             options =
-              before: date.toFormattedString('%Y-%m-%d')
+              before: date.toDateFormat()
               limit: 1
               type: @get('type')
               id: @get('recordId')
