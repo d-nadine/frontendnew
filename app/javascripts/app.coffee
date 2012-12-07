@@ -26,6 +26,8 @@ $.ajaxSetup
     'X-Radium-User-API-Key': Radium.get('_api')
     'Accept': 'application/json'
 
+require 'radium/lib/ember/datetime'
+
 require 'radium/lib/transforms'
 require 'radium/lib/store'
 require 'radium/lib/inflector'
