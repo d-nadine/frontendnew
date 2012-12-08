@@ -192,19 +192,15 @@ test 'an array of named instances can be embedded within another', ->
   equal 'Paul Cowan', todo.users[0].name
 
 module 'Factory - sequence',
-  setup: ->
-    Factory.define 'User',
-      abstract: true
-      sequence: 'id'
-
-    Factory.define 'Contact',
-      abstract: true
-      sequence: 'id'
-
   teardown: ->
     Factory.tearDown()
 
 test 'attribute can autoincrement', ->
+  Factory.define 'User',
+    abstract: true
+    defaults:
+      id: Factory.sequence()
+
   a = Factory.build 'User'
   b = Factory.build 'User'
   c = Factory.build 'User'
@@ -213,10 +209,30 @@ test 'attribute can autoincrement', ->
   strictEqual b.id, '2', 'user sequence two'
   strictEqual c.id, '3', 'user sequence three'
 
-  d = Factory.build 'Contact'
-  e = Factory.build 'Contact'
-  f = Factory.build 'Contact'
+test 'sequences accept a callback', ->
+  Factory.define 'User',
+    abstract: true
+    defaults:
+      id: Factory.sequence (i) -> "User #{i}"
 
-  strictEqual d.id, '1', 'contact sequence one'
-  strictEqual e.id, '2', 'contact sequence two'
-  strictEqual f.id, '3', 'contact sequence three'
+  a = Factory.build 'User'
+  b = Factory.build 'User'
+  c = Factory.build 'User'
+
+  strictEqual a.id, 'User 1', 'user sequence one'
+  strictEqual b.id, 'User 2', 'user sequence two'
+  strictEqual c.id, 'User 3', 'user sequence three'
+
+test 'an id sequence is added by default', ->
+  Factory.define 'User'
+    abstract: true
+    defaults:
+      name: 'Adam'
+
+  a = Factory.build 'User'
+  b = Factory.build 'User'
+  c = Factory.build 'User'
+
+  strictEqual a.id, '1', 'rookie sequence one'
+  strictEqual b.id, '2', 'rookie sequence two'
+  strictEqual c.id, '3', 'rookie sequence three'

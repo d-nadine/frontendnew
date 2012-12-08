@@ -5,14 +5,12 @@ Factory.define 'Core',
     updated_at: '2012-08-14T18:27:32Z'
 
 Factory.define 'CallList',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     user_id: 1
     description: 'Call list'
 
 Factory.define 'Deal',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     user_id: 1
@@ -28,7 +26,6 @@ Factory.build 'Deal', 'small_contract',
 
 Factory.define 'User',
   abstract: true
-  sequence: 'id'
   defaults:
     created_at: '2012-06-23T17:44:53Z'
     updated_at: '2012-07-03T11:32:57Z'
@@ -55,7 +52,6 @@ Factory.build 'User', 'jerry',
 Factory.define 'Contact',
   abstract: true
   parent: 'Core'
-  sequence: 'id'
   defaults:
     status: 'prospect'
 
@@ -66,7 +62,6 @@ Factory.build 'Contact', 'john',
   display_name: 'John'
 
 Factory.define 'Meeting',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     user_id: 2
@@ -80,7 +75,6 @@ Factory.build 'Meeting','retrospection',
   topic: 'Retrospection'
 
 Factory.define 'Comment',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     id: '1'
@@ -95,7 +89,6 @@ Factory.define 'Comment',
 Factory.define 'Todo',
   abstract: true
   parent: 'Core'
-  sequence: 'id'
   defaults:
     user_id: 1
     kind: 'general'
@@ -207,14 +200,12 @@ Factory.build 'Todo', 'finish_by_tomorrow',
   finished: false
 
 Factory.define 'Campaign',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     name: 'Fall product campaign'
     user_id: 1
 
 Factory.define 'Email',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     sender:
@@ -222,7 +213,6 @@ Factory.define 'Email',
       type: 'user'
 
 Factory.define 'Group',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     name: 'Product 1 group'
@@ -231,7 +221,6 @@ Factory.build 'Group', 'developers',
   name: 'Developers'
 
 Factory.define 'PhoneCall',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     to:
@@ -242,14 +231,12 @@ Factory.define 'PhoneCall',
       type: 'contact'
 
 Factory.define 'Sms',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     sender_id: 2
 
 Factory.define 'Notification',
   abstract: true
-  sequence: 'id'
   parent: 'Core'
 
 # Not loading correctly, polymorphism?
@@ -271,7 +258,6 @@ Factory.build 'Notification', 'meeting_invitation',
 
 Factory.define 'Invitation',
   abstract: true
-  sequence: 'id'
   parent: 'Core'
 
 Factory.build 'Invitation', 'for_meeting_1',
@@ -280,7 +266,6 @@ Factory.build 'Invitation', 'for_meeting_1',
 
 Factory.define 'Reminder',
   abstract: true
-  sequence: 'id'
   parent: 'Core'
 
 Factory.build 'Reminder', 'todo',
@@ -296,7 +281,6 @@ Factory.build 'Reminder', 'meeting',
     type: 'meeting'
 
 Factory.define 'Message',
-  sequence: 'id'
   parent: 'Core'
   defaults:
     type: 'email'
