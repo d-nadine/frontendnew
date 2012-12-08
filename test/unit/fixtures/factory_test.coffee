@@ -223,6 +223,26 @@ test 'sequences accept a callback', ->
   strictEqual b.id, 'User 2', 'user sequence two'
   strictEqual c.id, 'User 3', 'user sequence three'
 
+test 'sequences defined in the parent work', ->
+  Factory.define 'Parent',
+    abstract: true
+    defaults:
+      uuid: Factory.sequence()
+
+  Factory.define 'Child',
+    abstract: true
+    parent: 'Parent',
+    defaults:
+      name: "Adam"
+
+  a = Factory.build 'Child'
+  b = Factory.build 'Child'
+  c = Factory.build 'Child'
+
+  strictEqual a.id, '1', 'child with parent sequence one'
+  strictEqual b.id, '2', 'child with parent sequence two'
+  strictEqual c.id, '3', 'child with parent sequence three'
+
 test 'an id sequence is added by default', ->
   Factory.define 'User'
     abstract: true
