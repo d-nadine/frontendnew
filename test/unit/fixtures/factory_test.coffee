@@ -136,18 +136,6 @@ test 'an id sequence is added by default', ->
 #  defs = Factory.getDefinitions()
 #  equal 1, defs.length, '1 definitions in factory'
 
-# module 'Factory - abstract',
-#   setup: ->
-#     Factory.define 'Base',
-#       abstract: true
-#       defaults:
-#         key: 'Value'
-#    teardown: ->
-#     Factory.tearDown()
-
-# test 'no default instance is created for an abstract definition', ->
-#   equal null, Factory.bases.default, 'no base default'
-
 # module 'Factory - Associations',
 #   setup: ->
 #     Factory.define 'User'
