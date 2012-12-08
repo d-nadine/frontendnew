@@ -46,7 +46,6 @@ window.Factory = do($) ->
     instance = $.extend {}, definition, attributes
 
     for k, v of instance when typeof v is 'function'
-      #do we need to worry about context?
       result = instance[k]()
       delete instance[k]
       instance[k] = result

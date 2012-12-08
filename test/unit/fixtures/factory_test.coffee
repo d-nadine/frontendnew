@@ -45,6 +45,13 @@ test 'attributes can be function', ->
 
   equal contact.company, 'Nokia'
 
+test 'attribute functions have access to the object', ->
+  contact = Factory.build 'Contact',
+    name: 'Adam'
+    email: -> "#{@name}@radiumcrm.com"
+
+  equal contact.email, "Adam@radiumcrm.com"
+
 module 'Factory - Parent',
   setup: ->
     Factory.define 'Human',
