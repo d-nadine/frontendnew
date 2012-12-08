@@ -50,7 +50,7 @@ class EmberDataAdapter
   # This will transform hasMany keys from objects to an array of FKS
   # This will transform belongsTo keys from objects to a FK
   # Parent is the record from previous call
-  loadRecord: (model, record, parent) ->
+  loadRecord: (model, record, parent, parentAssociation) ->
     associations = Ember.get(model, 'associationsByName')
 
     # Leaf node in tree, time to load data into
@@ -61,8 +61,6 @@ class EmberDataAdapter
       @store.load model, record
     else
       associations.forEach (name, association) =>
-        console.log association
-
         kind = association.kind
         type = association.type
 
@@ -72,11 +70,10 @@ class EmberDataAdapter
 
         switch kind
           when "belongsTo"
-            # One side of the belongs to has been set
             if associatedObject
-              @loadRecord type, associatedObject, record
               record[name] = associatedObject.id
-            else
+              @loadRecord type, associatedObject, record, name
+            else if parent[parentAssociation] == record.id
               record[name] = parent.id
 
       # Now all the associations in this node have been processed
@@ -145,9 +142,11 @@ test 'creating an object persists a belongsTo relationship', ->
   equal author.get('profile.text'), 'Profile 1', 'belongsTo relationship materialized on the parent'
   equal TestAuthor.FIXTURES.length, 1, 'Parent FIXTURES array updated'
   inMemoryRecord = TestAuthor.FIXTURES[0]
-  equal inMemoryRecord.profile, ['1'], 'belongsTo transformed into FK'
+  equal inMemoryRecord.profile, ['1'], 'Parent belongsTo transformed into FK'
 
   profile = store.find TestProfile, 1
   equal profile.get('text'), 'Profile 1', 'child record materialized correctly'
   equal TestProfile.FIXTURES.length, 1, 'child FIXTURES array updated'
+  inMemoryRecord = TestProfile.FIXTURES[0]
+  equal inMemoryRecord.author, ['1'], 'Child belongsTo transformed into FK'
   equal profile.get('author.name'), 'Author 1', 'belongsTo relationship materialized on the child'
