@@ -14,6 +14,9 @@ window.Factory = do($) ->
     -> callback(++counter)
 
   define = (klass, options = {}) ->
+    if f.hasOwnProperty klass
+      throw new Error("there is an existing factory definition for #{klass}")
+
     options.defaults ?= {}
     options.defaults.id ?= sequence()
 
@@ -32,7 +35,7 @@ window.Factory = do($) ->
 
   build = (klass, name, options = {}) ->
     unless f.hasOwnProperty klass
-      throw "there is no factory definition for #{klass}"
+      throw new Error("there is no factory definition for #{klass}")
 
     if arguments.length == 2 && typeof name == 'object'
       options = name

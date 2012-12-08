@@ -1,5 +1,14 @@
+module 'factory',
+  teardown: ->
+    Factory.tearDown()
+
 test 'raises exception for undefined factory', ->
   raises (-> Factory.build('Unkown')), "must throw error for unkown definition"
+
+test 'raise an error when redifining a factory', ->
+  Factory.define 'Contact'
+
+  raises (-> Factory.define('Contact', {})), "Redifining must throw an error"
 
 module 'factory - default values',
   setup: ->
