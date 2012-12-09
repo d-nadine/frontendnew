@@ -21,8 +21,6 @@ TestProfile.reopen
 TestAuthor.reopen
   profile: DS.belongsTo(TestProfile)
 
-window.TestAuthor = TestAuthor
-
 TestAuthor.FIXTURES = []
 TestProfile.FIXTURES = []
 TestTodo.FIXTURES = []
@@ -43,6 +41,7 @@ class EmberDataAdapter
       when "TestComment" then TestComment
       when "TestAuthor" then TestAuthor
       when "TestProfile" then TestProfile
+      when "TestTodo" then TestTodo
       else
         throw new Error("Cannot locate an ember data model for: #{type}")
 
@@ -125,10 +124,10 @@ test 'creating an object persists it in ember-data', ->
   todo = store.find TestTodo, 1
 
   equal todo.get('task'), 'Todo 1'
-  equal Todo.FIXTURES.length, 1, "FIXTURES array not updated"
+  equal TestTodo.FIXTURES.length, 1, "FIXTURES array not updated"
 
   # TODO: How to get the attribute has to compare?
-  inMemoryRecord = Todo.FIXTURES[0]
+  inMemoryRecord = TestTodo.FIXTURES[0]
   equal todo.get('task'), inMemoryRecord.task
 
 test 'creating an object persists a belongsTo relationship', ->
@@ -142,11 +141,11 @@ test 'creating an object persists a belongsTo relationship', ->
   equal author.get('profile.text'), 'Profile 1', 'belongsTo relationship materialized on the parent'
   equal TestAuthor.FIXTURES.length, 1, 'Parent FIXTURES array updated'
   inMemoryRecord = TestAuthor.FIXTURES[0]
-  equal inMemoryRecord.profile, ['1'], 'Parent belongsTo transformed into FK'
+  strictEqual inMemoryRecord.profile, '1', 'Parent belongsTo transformed into FK'
 
   profile = store.find TestProfile, 1
   equal profile.get('text'), 'Profile 1', 'child record materialized correctly'
   equal TestProfile.FIXTURES.length, 1, 'child FIXTURES array updated'
   inMemoryRecord = TestProfile.FIXTURES[0]
-  equal inMemoryRecord.author, ['1'], 'Child belongsTo transformed into FK'
+  strictEqual inMemoryRecord.author, '1', 'Child belongsTo transformed into FK'
   equal profile.get('author.name'), 'Author 1', 'belongsTo relationship materialized on the child'
