@@ -1,7 +1,3 @@
-TestAuthor = null
-TestProfile = null
-TestTodo = null
-
 TestTodo = DS.Model.extend
   primaryKey: 'id'
   task: DS.attr('string')
@@ -14,6 +10,14 @@ TestAuthor = DS.Model.extend
   primaryKey: 'id'
   name: DS.attr('string')
 
+TestPost = DS.Model.extend
+  primaryKey: 'id'
+  title: DS.attr('string')
+
+TestComment = DS.Model.extend
+  primaryKey: 'id'
+  text: DS.attr('string')
+
 # Reopen the classes and delcare the associations
 TestProfile.reopen
   author: DS.belongsTo(TestAuthor)
@@ -21,9 +25,17 @@ TestProfile.reopen
 TestAuthor.reopen
   profile: DS.belongsTo(TestProfile)
 
+TestPost.reopen
+  comments: DS.hasMany(TestComment)
+
+TestComment.reopen
+  post: DS.belongsTo(TestPost)
+
 TestAuthor.FIXTURES = []
 TestProfile.FIXTURES = []
 TestTodo.FIXTURES = []
+TestPost.FIXTURES = []
+TestComment.FIXTURES = []
 
 TestStore = DS.Store.extend
   revision: 9
@@ -72,8 +84,18 @@ class EmberDataAdapter
             if associatedObject
               record[name] = associatedObject.id
               @loadRecord type, associatedObject, record, name
+            else if Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
+              record[name] = parent.id
             else if parent[parentAssociation] == record.id
               record[name] = parent.id
+          when "hasMany"
+            if associatedObject
+              associatedObjects = Ember.A(associatedObject)
+              ids = associatedObject.map (o) -> o.id
+              record[name] = ids
+
+              associatedObjects.forEach (childRecord) =>
+                @loadRecord type, childRecord, record, name
 
       # Now all the associations in this node have been processed
       # it's safe to add the leaf node
@@ -108,6 +130,13 @@ module 'Ember-Data factory adapter',
     Factory.define 'TestAuthor'
       name: Factory.sequence (i) -> "Author #{i}"
       profile: Factory.build 'TestProfile'
+
+    Factory.define 'TestComment'
+      text: Factory.sequence (i) -> "Comment #{i}"
+
+    Factory.define 'TestPost'
+      title: Factory.sequence (i) -> "Post #{i}"
+      comments: [Factory.build('TestComment')]
 
   teardown: ->
     Factory.tearDown()
@@ -149,3 +178,27 @@ test 'creating an object persists a belongsTo relationship', ->
   inMemoryRecord = TestProfile.FIXTURES[0]
   strictEqual inMemoryRecord.author, '1', 'Child belongsTo transformed into FK'
   equal profile.get('author.name'), 'Author 1', 'belongsTo relationship materialized on the child'
+
+test 'creating an object persists a hasMany relationship', ->
+  equal TestPost.FIXTURES.length, 0, "Parent FIXTURES empty"
+  equal TestComment.FIXTURES.length, 0, "Child FIXTURES empty"
+
+  Factory.create 'TestPost'
+
+  post = store.find TestPost, 1
+
+  equal post.get('comments.length'), 1, 'Parent hasMany has correct # of children'
+  comment = post.get('comments.firstObject')
+
+  equal comment.get('text'), 'Comment 1', 'hasMany relationship materialized on the parent'
+  equal TestPost.FIXTURES.length, 1, 'Parent FIXTURES array updated'
+  inMemoryRecord = TestPost.FIXTURES[0]
+  equal Ember.typeOf(inMemoryRecord.comments), "array", "Fixture record hasMany stored as an array"
+  equal inMemoryRecord.comments[0], "1", 'Parent hasMany transformed into FK'
+
+  comment = store.find TestComment, 1
+  equal comment.get('text'), 'Comment 1', 'child record materialized correctly'
+  equal TestComment.FIXTURES.length, 1, 'child FIXTURES array updated'
+  inMemoryRecord = TestComment.FIXTURES[0]
+  strictEqual inMemoryRecord.post, '1', 'Child belongsTo transformed into FK'
+  equal comment.get('post.title'), 'Post 1', 'belongsTo relationship materialized on the child'
