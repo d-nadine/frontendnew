@@ -6,7 +6,6 @@ test 'raises exception for undefined factory', ->
   raises (-> Factory.build('Unkown')), "must throw error for unkown definition"
 
 test 'raise an error when redifining a factory', ->
-  debugger
   Factory.define 'Contact'
 
   raises (-> Factory.define('Contact', {})), "Redifining must throw an error"
@@ -22,8 +21,6 @@ module 'factory - default values',
     Factory.tearDown()
 
 test 'should create a default object with default values', ->
-  debugger
-
   contact = Factory.build 'Contact'
 
   equal contact.id, '1'
@@ -138,20 +135,12 @@ test 'an id sequence is added by default', ->
 
 # module 'Factory - Associations',
 #   setup: ->
-#     Factory.define 'User'
+#     Factory.define 'Post',
+#       title: 'Welcome',
+#       text: 'Lorem ipsum...'
 
-#     Factory.build 'User', 'Paul',
-#       id: 1
-#       name: 'Paul Cowan'
-
-#     Factory.build 'User', 'Bob',
-#       id: 2
-#       name: 'Bob Robertson'
-
-#     Factory.define 'Todo',
-#       defaults:
-#         kind: 'general'
-#         finished: true
+#     Factory.define 'Comment'
+#       text: 'Lorem ipsum...'
 
 #   teardown: ->
 #     Factory.tearDown()
