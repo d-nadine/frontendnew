@@ -44,9 +44,10 @@ TestStore = DS.Store.extend
 
 store = null
 
-class EmberDataAdapter
-  constructor: (@store) ->
-
+class TestAdapter extends Factory.EmberDataAdapter
+  # Override this since this is a different setup
+  # and not the standard ember namespacing
+  # stufff
   modelForType: (type) ->
     switch type
       when "TestPost" then TestPost
@@ -57,69 +58,11 @@ class EmberDataAdapter
       else
         throw new Error("Cannot locate an ember data model for: #{type}")
 
-  # Process the hash and recurse on associations.
-  # This will transform hasMany keys from objects to an array of FKS
-  # This will transform belongsTo keys from objects to a FK
-  # Parent is the record from previous call
-  loadRecord: (model, record, parent, parentAssociation) ->
-    associations = Ember.get(model, 'associationsByName')
-
-    # Leaf node in tree, time to load data into
-    # the store
-    if associations.keys.isEmpty()
-      model.FIXTURES ||= []
-      model.FIXTURES.push record
-      @store.load model, record
-    else
-      associations.forEach (name, association) =>
-        kind = association.kind
-        type = association.type
-
-        throw new Error("Cannot find a type for: #{model}.#{name}!") unless type
-
-        associatedObject = record[name]
-
-        switch kind
-          when "belongsTo"
-            if associatedObject
-              record[name] = associatedObject.id
-              @loadRecord type, associatedObject, record, name
-            else if Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
-              record[name] = parent.id
-            else if parent[parentAssociation] == record.id
-              record[name] = parent.id
-          when "hasMany"
-            if associatedObject
-              associatedObjects = Ember.A(associatedObject)
-              ids = associatedObject.map (o) -> o.id
-              record[name] = ids
-
-              associatedObjects.forEach (childRecord) =>
-                @loadRecord type, childRecord, record, name
-
-      # Now all the associations in this node have been processed
-      # it's safe to add the leaf node
-      model.FIXTURES ||= []
-      model.FIXTURES.push record
-      @store.load model, record
-
-  save: (type, record) ->
-    throw new Error("Cannot save without a store!") unless @store
-
-    model = @modelForType type
-    @loadRecord model, record
-    @store.find model, record.id
-
-# start hacking on an adapter that can be refactored later
-Factory.create = (klass, attributes = {}) ->
-  object = @build klass, attributes
-  @adapter.save klass, object
-
 module 'Ember-Data factory adapter',
   setup: ->
     store = TestStore.create()
 
-    Factory.adapter = new EmberDataAdapter(store)
+    Factory.adapter = new TestAdapter(store)
 
     Factory.define 'TestTodo'
       task: Factory.sequence (i) -> "Todo #{i}"

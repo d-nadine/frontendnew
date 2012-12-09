@@ -122,3 +122,23 @@ test 'an id sequence is added by default', ->
   strictEqual a.id, '1', 'rookie sequence one'
   strictEqual b.id, '2', 'rookie sequence two'
   strictEqual c.id, '3', 'rookie sequence three'
+
+module "Factory - Create",
+  setup: ->
+    Factory.adapter = new Factory.NullAdapter()
+
+    Factory.define 'TestTodo', 
+      name: 'Todo'
+
+  teardown: ->
+    Factory.adapter = new Factory.NullAdapter()
+    Factory.tearDown()
+
+test 'objects can be created with the null adapter', ->
+  todo = Factory.create 'TestTodo'
+  equal todo.name, "Todo"
+
+test 'create raise an error when there is no adapter', ->
+  Factory.adapter = undefined
+
+  raises (-> Factory.create('todo')), /adapter/i

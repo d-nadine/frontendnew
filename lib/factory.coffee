@@ -47,8 +47,87 @@ class Factory
 
     instance
 
+  create: (klass, attributes = {}) ->
+    throw new Error("Cannot create without an adapter!") unless @adapter
+
+    object = @build klass, attributes
+    @adapter.save klass, object
+
   tearDown: ->
     for k, v of @definitions
       delete @definitions[k]
 
-window.Factory = new Factory()
+class NullAdapter
+  save: (klass, record) ->
+    record
+
+class EmberDataAdapter
+  constructor: (@store) ->
+
+  modelForType: (type) ->
+    if typeof type == 'string'
+      Ember.get Ember.lookup, type
+    else
+      type
+
+  # Process the hash and recurse on associations.
+  # This will transform hasMany keys from objects to an array of FKS
+  # This will transform belongsTo keys from objects to a FK
+  # Parent is the record from previous call
+  loadRecord: (model, record, parent, parentAssociation) ->
+    associations = Ember.get(model, 'associationsByName')
+
+    # Leaf node in tree, time to load data into
+    # the store
+    if associations.keys.isEmpty()
+      model.FIXTURES ||= []
+      model.FIXTURES.push record
+      @store.load model, record
+    else
+      associations.forEach (name, association) =>
+        kind = association.kind
+        type = association.type
+
+        throw new Error("Cannot find a type for: #{model}.#{name}!") unless type
+
+        associatedObject = record[name]
+
+        switch kind
+          when "belongsTo"
+            if associatedObject
+              record[name] = associatedObject.id
+              @loadRecord type, associatedObject, record, name
+            else if Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
+              record[name] = parent.id
+            else if parent[parentAssociation] == record.id
+              record[name] = parent.id
+          when "hasMany"
+            if associatedObject
+              associatedObjects = Ember.A(associatedObject)
+              ids = associatedObject.map (o) -> o.id
+              record[name] = ids
+
+              associatedObjects.forEach (childRecord) =>
+                @loadRecord type, childRecord, record, name
+
+      # Now all the associations in this node have been processed
+      # it's safe to add the leaf node
+      model.FIXTURES ||= []
+      model.FIXTURES.push record
+      @store.load model, record
+
+  save: (type, record) ->
+    throw new Error("Cannot save without a store!") unless @store
+
+    model = @modelForType type
+    @loadRecord model, record
+    @store.find model, record.id
+
+runningFactory = new Factory()
+runningFactory.adapter = new NullAdapter()
+
+runningFactory.NullAdapter = NullAdapter
+runningFactory.EmberDataAdapter = EmberDataAdapter
+
+window.Factory = runningFactory
+
