@@ -202,3 +202,4 @@ test 'creating an object persists a hasMany relationship', ->
   inMemoryRecord = TestComment.FIXTURES[0]
   strictEqual inMemoryRecord.post, '1', 'Child belongsTo transformed into FK'
   equal comment.get('post.title'), 'Post 1', 'belongsTo relationship materialized on the child'
+
