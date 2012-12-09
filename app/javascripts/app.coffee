@@ -10,6 +10,8 @@ $.ajaxSetup
     'X-Radium-User-API-Key': Radium.get('_api')
     'Accept': 'application/json'
 
+require 'factory'
+
 require 'radium/lib/ember/datetime'
 
 require 'radium/lib/transforms'
@@ -139,7 +141,6 @@ require 'radium/views/contact_card_container_view'
 require 'radium/views/contact_card_view'
 require 'radium/views/contacts_toolbar_view'
 
-require 'radium/fixtures/factory'
-require 'radium/fixtures/factories'
+# require 'radium/fixtures/factories'
 # require 'radium/fixtures'
 require 'radium/fixtures/fixture_manager'
