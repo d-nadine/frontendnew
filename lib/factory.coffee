@@ -1,20 +1,15 @@
-window.Factory = do($) ->
-  f = {}
-  definitions = {}
+class Factory
+  constructor: ->
+    @definitions = {}
 
-  Definition = (name, attributes) ->
-    @name = name
-    @attributes = attributes
-    @
-
-  sequence = (callback) ->
+  sequence: (callback) ->
     counter = 0
     callback ?= (i) -> "#{i}"
 
     -> callback(++counter)
 
-  define = (klass, options, attributes) ->
-    if definitions.hasOwnProperty klass
+  define: (klass, options, attributes) ->
+    if @definitions.hasOwnProperty klass
       throw new Error("there is an existing factory definition for #{klass}")
 
     if arguments.length == 2
@@ -27,22 +22,22 @@ window.Factory = do($) ->
       attributes = {}
 
     attributes ||= {}
-    attributes.id ||= sequence()
+    attributes.id ||= @sequence()
 
     parent = options.from
 
-    if parent and definitions.hasOwnProperty(parent)
-      attributes = $.extend {}, definitions[parent].attributes, attributes
-    else if parent and !definiations.hasOwnProperty(parent)
+    if parent and @definitions.hasOwnProperty(parent)
+      attributes = $.extend {}, @definitions[parent].attributes, attributes
+    else if parent and !@definitions.hasOwnProperty(parent)
       throw new Error("Undefined factory: #{parent}")
 
-    definitions[klass] = attributes
+    @definitions[klass] = attributes
 
-  build = (klass, attributes = {}) ->
-    unless definitions.hasOwnProperty klass
+  build: (klass, attributes = {}) ->
+    unless @definitions.hasOwnProperty klass
       throw new Error("there is no factory definition for #{klass}")
 
-    definition = definitions[klass]
+    definition = @definitions[klass]
     instance = $.extend {}, definition, attributes
 
     for k, v of instance when typeof v is 'function'
@@ -52,12 +47,8 @@ window.Factory = do($) ->
 
     instance
 
-  tearDown = ->
-    for k, v of definitions
-      delete definitions[k]
+  tearDown: ->
+    for k, v of @definitions
+      delete @definitions[k]
 
-  f.define =  define
-  f.sequence = sequence
-  f.build =  build
-  f.tearDown = tearDown
-  f
+window.Factory = new Factory()
