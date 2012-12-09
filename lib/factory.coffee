@@ -52,32 +52,6 @@ window.Factory = do($) ->
 
     instance
 
-  # definitions = ->
-  #   for own key, value of f
-  #     continue if typeof value is "function"
-  #     continue if value instanceof Definition
-  #     value
-
-  # association = (klass) ->
-  #   unless f.hasOwnProperty klass
-  #     throw "there is no factory definition for #{klass}"
-
-  #   args = Array.prototype.slice.call(arguments)
-  #   type = klass.pluralize().toLowerCase()
-
-  #   if $.isArray args[1]
-  #     if args.length is 3 and typeof args[2] is "object" and args[2].embedded
-  #       return (f[type][instance] for instance in args[1])
-
-  #     return (f[type][instance].id for instance in args[1])
-
-  #   instance = f[type][args[1]]
-
-  #   if args.length is 3 and typeof args[2] is 'object'
-  #     instance = $.extend {}, instance, args[2]
-
-  #   instance
-
   tearDown = ->
     for k, v of definitions
       delete definitions[k]
@@ -85,6 +59,5 @@ window.Factory = do($) ->
   f.define =  define
   f.sequence = sequence
   f.build =  build
-  #f.association = association
   f.tearDown = tearDown
   f
