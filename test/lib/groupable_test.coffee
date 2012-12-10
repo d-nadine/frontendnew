@@ -1,3 +1,5 @@
+module 'Groupable'
+
 test 'clustered record array behaves as regular array when dealing with it', ->
   content = Ember.A([])
   array = Em.ArrayProxy.create Radium.Groupable,
