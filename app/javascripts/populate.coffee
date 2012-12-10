@@ -10,11 +10,11 @@ jerry = Factory.create 'user'
   email: 'jerry.parker@feed-demo.com'
   phone: '136127245071'
 
-# ralph = Factory.create 'contact',
-#   display_name: 'Ralph'
+ralph = Factory.create 'contact',
+  display_name: 'Ralph'
 
-# john = Factory.create 'contact'
-#   display_name: 'John'
+john = Factory.create 'contact'
+  display_name: 'John'
 
 # retrospection = Factory.create 'meeting',
 #   topic: 'Retrospection'
