@@ -63,7 +63,7 @@ jumpTo = (query) ->
     Radium.set 'currentFeedController.currentDate', Ember.DateTime.create()
 
 Radium.Router = Ember.Router.extend
-  location: 'history'
+  location: 'none'
   enableLogging: true
   initialState: 'loading'
 
