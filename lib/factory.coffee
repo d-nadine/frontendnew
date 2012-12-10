@@ -1,12 +1,16 @@
 class Factory
   constructor: ->
     @definitions = {}
+    @traits = {}
 
   sequence: (callback) ->
     counter = 0
     callback ?= (i) -> "#{i}"
 
     -> callback(++counter)
+
+  trait: (name, attributes) ->
+    @traits[name] = attributes
 
   define: (klass, options, attributes) ->
     if @definitions.hasOwnProperty klass
@@ -27,9 +31,17 @@ class Factory
     parent = options.from
 
     if parent and @definitions.hasOwnProperty(parent)
-      attributes = $.extend {}, @definitions[parent].attributes, attributes
+      attributes = $.extend {}, @definitions[parent], attributes
     else if parent and !@definitions.hasOwnProperty(parent)
       throw new Error("Undefined factory: #{parent}")
+
+    options.traits ||= []
+    options.traits = [options.traits] if typeof(options.traits) == 'string'
+
+    for trait in options.traits
+      unless @traits.hasOwnProperty trait
+        throw new Error("there is no trait definition for #{trait}")
+      attributes = $.extend {}, @traits[trait], attributes
 
     @definitions[klass] = attributes
 
@@ -56,6 +68,8 @@ class Factory
   tearDown: ->
     for k, v of @definitions
       delete @definitions[k]
+    for k, v of @traits
+      delete @traits[k]
 
 class NullAdapter
   save: (klass, record) ->
@@ -130,4 +144,3 @@ runningFactory.NullAdapter = NullAdapter
 runningFactory.EmberDataAdapter = EmberDataAdapter
 
 window.Factory = runningFactory
-

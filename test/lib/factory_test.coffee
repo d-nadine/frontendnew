@@ -56,17 +56,22 @@ module 'Factory - Parent',
   teardown: ->
     Factory.tearDown()
 
+test 'a factory can use a parent', ->
+  Factory.define 'Adam', from: 'Human',
+    name: 'Adam'
+
+  adam = Factory.build 'Adam'
+
+  equal adam.name, 'Adam', 'Defined attribute correct'
+  equal adam.sex, 'Male', 'Parent attribute correct'
+
 test 'a factory can define a parent and extend its defaults', ->
-  Factory.define 'Anne', from: 'Human',
-    first_name: 'Anne'
-    surname: 'Sauer'
+  Factory.define 'Female', from: 'Human',
     sex: 'Female'
 
-  paul = Factory.build 'Anne'
+  female = Factory.build 'Female'
 
-  equal paul.first_name, 'Anne', 'first name'
-  equal paul.surname, 'Sauer', 'surname'
-  equal paul.sex, 'Female', 'sex'
+  equal female.sex, 'Female', 'Parent attribute redefined'
 
 module 'Factory - sequence',
   teardown: ->
@@ -142,3 +147,41 @@ test 'create raise an error when there is no adapter', ->
   Factory.adapter = undefined
 
   raises (-> Factory.create('todo')), /adapter/i
+
+module 'Factory - traits',
+  setup: ->
+    Factory.trait 'timestamps',
+      created: 'yesterday',
+      updated: 'today'
+
+  teardown: ->
+    Factory.tearDown()
+
+test 'raise an errors on unknown traits', ->
+  Factory.define 'Todo',
+    task: 'Todo'
+
+  raises (-> Factory.define('Todo', traits: 'fooBar'))
+
+test 'traits can be used a definition time', ->
+
+  Factory.define 'Todo', traits: 'timestamps',
+    task: 'Todo'
+
+  todo = Factory.build 'Todo'
+
+  equal todo.task, 'Todo', 'Record build correctly'
+  equal todo.created, 'yesterday', 'Trait built correctly'
+
+test 'traits can be defined in parent classes', ->
+  Factory.define 'Task', traits: 'timestamps',
+    due: 'tomorrow'
+
+  Factory.define 'Todo', from: 'Task',
+    task: 'Todo'
+
+  todo = Factory.build 'Todo'
+
+  equal todo.task, 'Todo', 'Record build correctly'
+  equal todo.created, 'yesterday', 'Trait built correctly'
+  equal todo.updated, 'today', 'Trait built correctly'
