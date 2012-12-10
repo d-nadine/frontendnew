@@ -1,5 +1,4 @@
 module 'Application Factories'
-
 test 'builds a user', ->
   user = Factory.create 'user'
 
@@ -7,8 +6,6 @@ test 'builds a user', ->
   ok user.get('name'), 'Name exists'
 
 test 'builds a todo', ->
-  debugger
-
   todo = Factory.create 'todo'
 
   ok todo.get('id'), 'ID exists'
@@ -21,4 +18,17 @@ test 'builds a todo', ->
 
   ok !todo.get('overdue'), 'Todo is not overdue'
 
-  ok todo.get('user'), 'User set'
+  equal '1',  todo.get('user.id'), 'User set'
+
+test 'builds a call list', ->
+  callList = Factory.create 'call_list'
+
+  ok callList.get('id'), 'call list ID exists'
+  equal "Call List 1", callList.get('description'), 'call list description set'
+
+test 'builds a campaign', ->
+  campaign = Factory.create 'campaign'
+
+  ok campaign.get('id'), 'call list ID exists'
+  equal "Campaign 1", campaign.get('name'), 'campaign name'
+  equal '1',  todo.get('user.id'), 'User set'
