@@ -121,9 +121,8 @@ Radium.TodoFormView = Radium.FormView.extend
   ).observes('finishBy')
 
   submitForm: ->
-    doStuff = ->
+    createTodo = ->
       selection = @get('selection')
-      console.log selection.toString()
       if !selection || !selection.get('length')
         selection = [selection]
 
@@ -149,16 +148,8 @@ Radium.TodoFormView = Radium.FormView.extend
           user: assignedUser
           created_at: Ember.DateTime.create()
           updated_at: Ember.DateTime.create()
-          hasAnimation: true
 
-        todo = Radium.store.createRecord Radium.Todo, data
-        todo.set 'reference', object if object
-
-        # TODO: feed sections could automatically handle adding
-        # new items, but I'm not sure how would hat behave, it needs
-        # a check with API or a lot of items
-        self.get('controller').pushItem(todo)
-        Radium.store.commit()
+        self.get('controller').createFeedItem(Radium.Todo, data, object)
 
       @close()
 
@@ -167,4 +158,4 @@ Radium.TodoFormView = Radium.FormView.extend
     #       closed at the same moment, feed goes further than it should
     @$().slideUp('fast')
     self = this
-    setTimeout (-> doStuff.apply(self) ), 200
+    setTimeout (-> createTodo.apply(self) ), 200

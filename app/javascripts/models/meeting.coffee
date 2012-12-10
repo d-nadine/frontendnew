@@ -1,5 +1,4 @@
 Radium.Meeting = Radium.Core.extend Radium.CommentsMixin,
-  isEditable: true
   topic: DS.attr('string')
   location: DS.attr('string')
   startsAt: DS.attr('datetime')

@@ -1,5 +1,4 @@
 Radium.Campaign = Radium.Core.extend Radium.CommentsMixin,
-  isEditable: true
   name: DS.attr('string')
   endsAt: DS.attr('date')
   currency: DS.attr('string')

@@ -34,7 +34,8 @@ Radium.Core.reopenClass
     type.toString().split('.').slice(-1)[0].underscore()
 
   isInStore: (id, store)->
-    store ?= Radium.store
+    #should the model reference the store?
+    store ?= Radium.get('router.store')
     store.isInStore this, id
 
   polymorphicAssociationsByName: Ember.computed( ->
