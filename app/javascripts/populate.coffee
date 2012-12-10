@@ -16,13 +16,13 @@ ralph = Factory.create 'contact',
 john = Factory.create 'contact'
   display_name: 'John'
 
-# retrospection = Factory.create 'meeting',
-#   topic: 'Retrospection'
+retrospection = Factory.create 'meeting',
+  topic: 'Retrospection'
 
 # todo = Factory.create 'todo',
 #   description: 'Finish first product draft'
 
-# overdueTodo = Factory.build 'Todo', 'overdue',
+# overdueTodo = Factory.create 'overdueTodo',
 #   user: jerry,
 #   description: 'Prepare product presentation'
 

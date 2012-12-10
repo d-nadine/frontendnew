@@ -1,10 +1,11 @@
+# TODO: make ends_at calculated off starts_at
 Factory.define 'meeting', traits: 'timestamps',
-  starts_at: '2012-08-17T18:27:32Z'
-  ends_at: '2012-08-18T18:27:32Z'
+  starts_at: -> Ember.DateTime.create().toFullFormat()
+  ends_at: -> Ember.DateTime.create().advance(hours: 1).toFullFormat()
   topic: 'Product discussion'
   location: 'Radium HQ'
-  user_id: -> Factory.build 'user'
-  user_ids: -> [
+  user: -> Factory.build 'user'
+  users: -> [
     Factory.build 'user',
     Factory.build 'user'
   ]
