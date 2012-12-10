@@ -66,13 +66,13 @@ Radium.FeedController = Em.ArrayController.extend
     @get('store').commit()
 
   createFeedItem: (type, item, ref) ->
-    todo = @get('store').createRecord type,  item
-    todo.set 'reference', ref if ref
+    record = @get('store').createRecord type,  item
+    record.set 'reference', ref if ref
 
     # TODO: feed sections could automatically handle adding
     # new items, but I'm not sure how would hat behave, it needs
     # a check with API or a lot of items
-    @pushItem(todo)
+    @pushItem(record)
 
     @get('store').commit()
 
