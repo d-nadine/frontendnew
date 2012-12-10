@@ -44,25 +44,18 @@ TestStore = DS.Store.extend
 
 store = null
 
-class TestAdapter extends Factory.EmberDataAdapter
-  # Override this since this is a different setup
-  # and not the standard ember namespacing
-  # stufff
-  modelForType: (type) ->
-    switch type
-      when "TestPost" then TestPost
-      when "TestComment" then TestComment
-      when "TestAuthor" then TestAuthor
-      when "TestProfile" then TestProfile
-      when "TestTodo" then TestTodo
-      else
-        throw new Error("Cannot locate an ember data model for: #{type}")
+typeMap = Ember.Map.create()
+typeMap.set 'TestPost', TestPost
+typeMap.set 'TestComment', TestComment
+typeMap.set 'TestAuthor', TestAuthor
+typeMap.set 'TestProfile', TestProfile,
+typeMap.set 'TestTodo', TestTodo
 
 module 'Ember-Data factory adapter',
   setup: ->
     store = TestStore.create()
 
-    Factory.adapter = new TestAdapter(store)
+    Factory.adapter = new Factory.EmberDataAdapter(store, typeMap)
 
     Factory.define 'TestTodo'
       task: Factory.sequence (i) -> "Todo #{i}"

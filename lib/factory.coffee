@@ -76,13 +76,15 @@ class NullAdapter
     record
 
 class EmberDataAdapter
-  constructor: (@store) ->
+  constructor: (@store, @map) ->
 
   modelForType: (type) ->
-    if typeof type == 'string'
-      Ember.get Ember.lookup, type
+    if lookupResult = Ember.get(Ember.lookup, type)
+      lookupResult
+    else if @map and @map.get type
+      @map.get type
     else
-      type
+      throw new Error("Cannot find an Ember Data model for #{type}")
 
   # Process the hash and recurse on associations.
   # This will transform hasMany keys from objects to an array of FKS
