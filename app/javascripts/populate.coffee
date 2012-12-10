@@ -1,23 +1,23 @@
-Factory.adapter = new Factory.RadiumAdapter(Radium.get('router.store'))
+# Factory.adapter = new Factory.RadiumAdapter(Radium.get('router.store'))
 
-aaron = Factory.create 'user',
-  name: 'Aaron Stephens'
-  email: 'aaron.stephens13@feed-demo.com'
-  phone: '136127245078'
+# aaron = Factory.create 'user',
+#   name: 'Aaron Stephens'
+#   email: 'aaron.stephens13@feed-demo.com'
+#   phone: '136127245078'
 
-jerry = Factory.create 'user'
-  name: 'Jerry Parker'
-  email: 'jerry.parker@feed-demo.com'
-  phone: '136127245071'
+# jerry = Factory.create 'user'
+#   name: 'Jerry Parker'
+#   email: 'jerry.parker@feed-demo.com'
+#   phone: '136127245071'
 
-ralph = Factory.create 'contact',
-  display_name: 'Ralph'
+# ralph = Factory.create 'contact',
+#   display_name: 'Ralph'
 
-john = Factory.create 'contact'
-  display_name: 'John'
+# john = Factory.create 'contact'
+#   display_name: 'John'
 
-retrospection = Factory.create 'meeting',
-  topic: 'Retrospection'
+# retrospection = Factory.create 'meeting',
+#   topic: 'Retrospection'
 
 # todo = Factory.create 'todo',
 #   description: 'Finish first product draft'

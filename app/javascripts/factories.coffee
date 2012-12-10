@@ -1,24 +1,24 @@
-require 'radium/factories/traits'
+# require 'radium/factories/traits'
 
-require 'radium/factories/user'
+# require 'radium/factories/user'
 
-require 'radium/factories/call_list'
-require 'radium/factories/campaign'
-require 'radium/factories/comment'
-require 'radium/factories/contact'
-require 'radium/factories/deal'
-require 'radium/factories/email'
-require 'radium/factories/feed_section'
-require 'radium/factories/group'
-require 'radium/factories/invitation'
-require 'radium/factories/meeting'
-require 'radium/factories/notification'
-require 'radium/factories/phone_call'
-require 'radium/factories/reminder'
-require 'radium/factories/sms'
-require 'radium/factories/todo'
+# require 'radium/factories/call_list'
+# require 'radium/factories/campaign'
+# require 'radium/factories/comment'
+# require 'radium/factories/contact'
+# require 'radium/factories/deal'
+# require 'radium/factories/email'
+# require 'radium/factories/feed_section'
+# require 'radium/factories/group'
+# require 'radium/factories/invitation'
+# require 'radium/factories/meeting'
+# require 'radium/factories/notification'
+# require 'radium/factories/phone_call'
+# require 'radium/factories/reminder'
+# require 'radium/factories/sms'
+# require 'radium/factories/todo'
 
-class RadiumAdapter extends Factory.EmberDataAdapter
+class RadiumAdapter extends Foundry.EmberDataAdapter
   constructor: (store) ->
     @store = store
 
@@ -39,5 +39,16 @@ class RadiumAdapter extends Factory.EmberDataAdapter
     @map.set 'reminder', Radium.Reminder
     @map.set 'sms', Radium.Sms
     @map.set 'todo', Radium.Todo
+    @map.set 'overdueTodo', Radium.Todo
 
-Factory.RadiumAdapter = RadiumAdapter
+foundry = new Foundry
+foundry.adapter = new Foundry.EmberDataAdapter
+
+Ember.Application.registerInjection 
+  name: 'foundry'
+  after: 'store'
+  injection: (app, router, property) ->
+    if property == 'router'
+      Factory.adapter.store = app.get 'router.store'
+
+window.Factory = foundry

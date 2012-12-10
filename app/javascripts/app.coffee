@@ -10,7 +10,7 @@ $.ajaxSetup
     'X-Radium-User-API-Key': Radium.get('_api')
     'Accept': 'application/json'
 
-require 'factory'
+require 'foundry'
 require 'ember/datetime'
 
 require 'radium/lib/transforms'
