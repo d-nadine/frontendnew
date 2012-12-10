@@ -23,11 +23,11 @@ Radium.NotificationsController = Ember.ArrayController.extend
     collection.toArray().forEach (item) ->
       item.deleteRecord()
 
-    Radium.store.commit()
+    @get('store').commit()
 
   destroyItem: (item) ->
     item.deleteRecord()
-    Radium.store.commit()
+    @get('store').commit()
 
   confirm: (event) ->
     notification = event.view.content
@@ -43,12 +43,12 @@ Radium.NotificationsController = Ember.ArrayController.extend
         invitation.removeObserver 'isSaving', observer
 
         notification.deleteRecord()
-        Radium.store.commit()
+        @get('store').commit()
 
     invitation.addObserver 'isLoaded', observer
     invitation.addObserver 'isSaving', observer
 
-    Radium.store.commit()
+    @get('store').commit()
 
   decline: (event) ->
     notification = event.view.content
@@ -64,12 +64,12 @@ Radium.NotificationsController = Ember.ArrayController.extend
         invitation.removeObserver 'isSaving', observer
 
         notification.deleteRecord()
-        Radium.store.commit()
+        @get('store').commit()
 
     invitation.addObserver 'isLoaded', observer
     invitation.addObserver 'isSaving', observer
 
-    Radium.store.commit()
+    @get('store').commit()
 
   NotificationGroup: Em.ArrayProxy.extend
     humanName: (->

@@ -34,7 +34,7 @@ jumpTo = (query) ->
     if !query.disableScroll
       Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
   else
-    sections = Radium.store.expandableArrayFor Radium.FeedSection
+    sections = Radium.get('router.store').expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 
     if query.calendar
@@ -131,7 +131,7 @@ Radium.Router = Ember.Router.extend
       #       that should be done only once, unless you changet the parent state
       unless router.get('initialized')
         usersController = Radium.UsersController.create()
-        usersController.set 'content', Radium.store.findAll(Radium.User)
+        usersController.set 'content', router.get('store').findAll(Radium.User)
         router.set 'usersController', usersController
 
         router.get('applicationController').connectOutlet('main')

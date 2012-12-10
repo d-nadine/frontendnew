@@ -1,22 +1,6 @@
-window.Radium = Em.Namespace.create
-  createApp: ->
-    app = Radium.App.create rootElement: $('#application')
-    $.each Radium, (key, value) ->
-      app[key] = value if value && value.isClass && key != 'constructor'
-
-    @app   = app
-    @store = app.store
-
-Radium.App = Em.Application.extend
+window.Radium = Radium = Em.Application.create
   autoinit: false
-  initialize: ->
-    router = Radium.Router.create()
-    Radium.set('router', router)
-    @_super(router)
-
-  init: ->
-    @_super()
-    @store = Radium.Store.create()
+  ready: ->
     @set('_api', $.cookie('user_api_key'))
 
 $.ajaxSetup

@@ -1,7 +1,7 @@
 Radium.MeController = Ember.Object.extend
   fetch: ->
     # TODO: do I have to do anything more than checking a cookie?
-    event = if Radium.app.get('_api')
+    event = if Radium.get('_api')
       'switchToAuthenticated'
     else
       'switchToUnauthenticated'
@@ -10,5 +10,5 @@ Radium.MeController = Ember.Object.extend
   # TODO: I hardcoded it for now, but we will have to somehow fetch current user's id
   userId: 1
   user: (->
-    Radium.store.find(Radium.User, @get('userId'))
+    @get('store').find(Radium.User, @get('userId'))
   ).property()

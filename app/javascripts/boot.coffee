@@ -21,5 +21,4 @@ window.F = F = window.Fixtures = Fixtures = FixtureSet.create()
 
 Fixtures.loadAll()
 
-Radium.createApp()
-Radium.app.initialize()
+Radium.initialize()
