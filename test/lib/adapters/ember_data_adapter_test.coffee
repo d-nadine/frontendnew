@@ -51,40 +51,44 @@ typeMap.set 'TestAuthor', TestAuthor
 typeMap.set 'TestProfile', TestProfile,
 typeMap.set 'TestTodo', TestTodo
 
-module 'Ember-Data factory adapter',
+foundry = null
+
+module 'Ember-Data foundry adapter',
   setup: ->
     store = TestStore.create()
 
-    Factory.adapter = new Factory.EmberDataAdapter(store, typeMap)
+    foundry = new Foundry()
+    foundry.adapter = new Foundry.EmberDataAdapter(store, typeMap)
 
-    Factory.define 'TestTodo'
-      task: Factory.sequence (i) -> "Todo #{i}"
+    foundry.define 'TestTodo'
+      task: foundry.sequence (i) -> "Todo #{i}"
 
-    Factory.define 'TestProfile'
-      text: Factory.sequence (i) -> "Profile #{i}"
+    foundry.define 'TestProfile'
+      text: foundry.sequence (i) -> "Profile #{i}"
 
-    Factory.define 'TestAuthor'
-      name: Factory.sequence (i) -> "Author #{i}"
-      profile: Factory.build 'TestProfile'
+    foundry.define 'TestAuthor'
+      name: foundry.sequence (i) -> "Author #{i}"
+      profile: foundry.build 'TestProfile'
 
-    Factory.define 'TestComment'
-      text: Factory.sequence (i) -> "Comment #{i}"
+    foundry.define 'TestComment'
+      text: foundry.sequence (i) -> "Comment #{i}"
 
-    Factory.define 'TestPost'
-      title: Factory.sequence (i) -> "Post #{i}"
-      comments: [Factory.build('TestComment')]
+    foundry.define 'TestPost'
+      title: foundry.sequence (i) -> "Post #{i}"
+      comments: [foundry.build('TestComment')]
 
   teardown: ->
-    Factory.tearDown()
+    foundry.tearDown()
     TestTodo.FIXTURES.splice 0, TestTodo.FIXTURES.length
     TestAuthor.FIXTURES.splice 0, TestAuthor.FIXTURES.length
     TestProfile.FIXTURES.splice 0, TestProfile.FIXTURES.length
+    TestComment.FIXTURES.splice 0, TestComment.FIXTURES.length
     store.destroy()
 
 test 'creating an object persists it in ember-data', ->
   equal TestTodo.FIXTURES.length, 0
 
-  Factory.create 'TestTodo'
+  foundry.create 'TestTodo'
 
   todo = store.find TestTodo, 1
 
@@ -99,7 +103,7 @@ test 'creating an object persists a belongsTo relationship', ->
   equal TestAuthor.FIXTURES.length, 0, "Parent FIXTURES empty"
   equal TestProfile.FIXTURES.length, 0, "Child FIXTURES empty"
 
-  Factory.create 'TestAuthor'
+  foundry.create 'TestAuthor'
 
   author = store.find TestAuthor, 1
 
@@ -119,7 +123,7 @@ test 'creating an object persists a hasMany relationship', ->
   equal TestPost.FIXTURES.length, 0, "Parent FIXTURES empty"
   equal TestComment.FIXTURES.length, 0, "Child FIXTURES empty"
 
-  Factory.create 'TestPost'
+  foundry.create 'TestPost'
 
   post = store.find TestPost, 1
 

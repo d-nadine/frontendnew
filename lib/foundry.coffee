@@ -1,4 +1,4 @@
-class Factory
+class Foundry
   constructor: ->
     @definitions = {}
     @traits = {}
@@ -113,9 +113,9 @@ class EmberDataAdapter
             if associatedObject
               record[name] = associatedObject.id
               @loadRecord type, associatedObject, record, name
-            else if Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
+            else if parent && Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
               record[name] = parent.id
-            else if parent[parentAssociation] == record.id
+            else if parent && parent[parentAssociation] == record.id
               record[name] = parent.id
           when "hasMany"
             if associatedObject
@@ -139,10 +139,7 @@ class EmberDataAdapter
     @loadRecord model, record
     @store.find model, record.id
 
-runningFactory = new Factory()
-runningFactory.adapter = new NullAdapter()
+Foundry.NullAdapter = NullAdapter
+Foundry.EmberDataAdapter = EmberDataAdapter
 
-runningFactory.NullAdapter = NullAdapter
-runningFactory.EmberDataAdapter = EmberDataAdapter
-
-window.Factory = runningFactory
+window.Foundry = Foundry
