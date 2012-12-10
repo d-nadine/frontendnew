@@ -50,6 +50,7 @@ typeMap.set 'TestComment', TestComment
 typeMap.set 'TestAuthor', TestAuthor
 typeMap.set 'TestProfile', TestProfile,
 typeMap.set 'TestTodo', TestTodo
+typeMap.set 'TestCommentWithPost', TestComment
 
 foundry = null
 
@@ -76,6 +77,17 @@ module 'Ember-Data foundry adapter',
     foundry.define 'TestPost'
       title: foundry.sequence (i) -> "Post #{i}"
       comments: [foundry.build('TestComment')]
+
+    foundry.define 'TestCommentWithPost'
+      text: foundry.sequence (i) -> "Comment #{i}"
+      post: 
+        id: 1
+        title: "Post 1"
+
+    TestTodo.FIXTURES.splice 0, TestTodo.FIXTURES.length
+    TestAuthor.FIXTURES.splice 0, TestAuthor.FIXTURES.length
+    TestProfile.FIXTURES.splice 0, TestProfile.FIXTURES.length
+    TestComment.FIXTURES.splice 0, TestComment.FIXTURES.length
 
   teardown: ->
     foundry.tearDown()
@@ -142,4 +154,25 @@ test 'creating an object persists a hasMany relationship', ->
   inMemoryRecord = TestComment.FIXTURES[0]
   strictEqual inMemoryRecord.post, '1', 'Child belongsTo transformed into FK'
   equal comment.get('post.title'), 'Post 1', 'belongsTo relationship materialized on the child'
+
+test 'creating an object from the belongsTo side persists a hasMany relationship', ->
+  equal TestPost.FIXTURES.length, 0, "Parent FIXTURES empty"
+  equal TestComment.FIXTURES.length, 0, "Child FIXTURES empty"
+
+  foundry.create 'TestCommentWithPost'
+
+  comment = store.find TestComment, 1
+
+  equal comment.get('text'), 'Comment 1', 'hasMany relationship materialized on the parent'
+  equal TestComment.FIXTURES.length, 1, 'Child FIXTURES array updated'
+  inMemoryRecord = TestComment.FIXTURES[0]
+  equal inMemoryRecord.post, '1', 'child belongsTo transformed into FK'
+  ok comment.get('post'), "child belongsTo association loaded"
+
+  post = store.find TestPost, 1
+  equal post.get('title'), 'Post 1', 'parent record materialized correctly'
+  equal TestPost.FIXTURES.length, 1, 'Parent FIXTURES array updated'
+  inMemoryRecord = TestPost.FIXTURES[0]
+  equal inMemoryRecord.comments[0], '1', "Parent to child FK correct"
+  ok post.get('comments'), "hasMany association loaded correctly on the parent"
 

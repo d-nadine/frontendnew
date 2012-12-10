@@ -125,6 +125,9 @@ class EmberDataAdapter
 
               associatedObjects.forEach (childRecord) =>
                 @loadRecord type, childRecord, record, name
+            else if parent && parent[parentAssociation] = record.id
+              record[name] ||= []
+              record[name].push parent.id
 
       # Now all the associations in this node have been processed
       # it's safe to add the leaf node
