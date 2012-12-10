@@ -1,43 +1,30 @@
-Factory.adapter = new Factory.RadiumAdapter(Radium.get('store'))
+Factory.adapter = new Factory.RadiumAdapter(Radium.get('router.store'))
 
-# aaron = Factory.create 'user',
-#   name: 'Aaron Stephens'
-#   email: 'aaron.stephens13@feed-demo.com'
-#   phone: '136127245078'
+aaron = Factory.create 'user',
+  name: 'Aaron Stephens'
+  email: 'aaron.stephens13@feed-demo.com'
+  phone: '136127245078'
 
-# Factory.build 'User', 'aaron',
-#   account: 1
+jerry = Factory.create 'user'
+  name: 'Jerry Parker'
+  email: 'jerry.parker@feed-demo.com'
+  phone: '136127245071'
 
-# Factory.build 'User', 'jerry',
-#   pdated_at: '2012-07-03T11:32:57Z'
-#   name: 'Jerry Parker'
-#   email: 'jerry.parker@feed-demo.com'
-#   phone: '136127245071'
-#   account: 2
-
-# Factory.build 'Contact', 'ralph',
+# ralph = Factory.create 'contact',
 #   display_name: 'Ralph'
 
-# Factory.build 'Contact', 'john',
+# john = Factory.create 'contact'
 #   display_name: 'John'
 
-# Factory.build 'Meeting','retrospection',
+# retrospection = Factory.create 'meeting',
 #   topic: 'Retrospection'
 
-# Factory.build 'Todo', 'default',
+# todo = Factory.create 'todo',
 #   description: 'Finish first product draft'
-#   finish_by: '2012-08-14T22:00:00Z'
-#   finished: false
-#   calendar_time: '2012-08-14T22:00:00Z'
-#   comment_ids: Factory.association('Comment', ['default'])
 
-# Factory.build 'Todo', 'overdue',
-#   user_id: 2
+# overdueTodo = Factory.build 'Todo', 'overdue',
+#   user: jerry,
 #   description: 'Prepare product presentation'
-#   finish_by: '2012-08-17T22:00:00Z'
-#   finished: false
-#   calendar_time: '2012-08-17T22:00:00Z'
-#   overdue: true
 
 # Factory.build 'Todo', 'call',
 #   kind: 'call'
