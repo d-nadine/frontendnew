@@ -36,8 +36,11 @@ Radium.Store = DS.Store.extend
 
   adapter: Radium.Adapter.extend
     reset: ->
-      for k,v in Radium when k.hasOwnProperty('FIXTURES')
-        k.splice 0, v.length
+      properties = Ember.A(Ember.keys(Radium))
+
+      properties.forEach (property) ->
+        value = Radium.get property
+        value?.FIXTURES?.splice(0, value.FIXTURES.length)
 
     serializer: Radium.Serializer
     plurals: {}
