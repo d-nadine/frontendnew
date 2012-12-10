@@ -78,6 +78,10 @@ Radium.Router = Ember.Router.extend
 
   showDate: Ember.Route.transitionTo('root.dashboardWithDate')
 
+  reset: ->
+    @get('store').reset()
+    Ember.Route.transitionTo('root')
+
   jumpTo: ->
     jumpTo.apply this, arguments
 

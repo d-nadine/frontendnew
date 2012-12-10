@@ -4,6 +4,27 @@ require 'radium/lib/serializer'
 Radium.Store = DS.Store.extend
   revision: 9
 
+  reset: ->
+    @get('_adapter').reset()
+
+    # internal bookkeeping; not observable
+    @typeMaps = {}
+    @recordCache = []
+    @clientIdToId = {}
+    @clientIdToType = {}
+    @clientIdToData = {}
+    @recordArraysByClientId = {}
+    @relationshipChanges = {}
+
+    # Internally, we maintain a map of all unloaded IDs requested b
+    # a ManyArray. As the adapter loads data into the store, the
+    # store notifies any interested ManyArrays. When the ManyArray's
+    # total number of loading records drops to zero, it becomes
+    # `isLoaded` and fires a `didLoad` event.
+    @loadingRecordArrays = {}
+
+    Ember.set(@, 'defaultTransaction', @transaction())
+
   expandableArrayFor: (type) ->
     recordArray = Radium.ExpandableRecordArray.create
       type: type
@@ -14,6 +35,10 @@ Radium.Store = DS.Store.extend
     !!@typeMapFor(type).idToCid[id]
 
   adapter: Radium.Adapter.extend
+    reset: ->
+      for k,v in Radium when k.hasOwnProperty('FIXTURES')
+        k.splice 0, v.length
+
     serializer: Radium.Serializer
     plurals: {}
     pluralize: (name) ->
