@@ -6,7 +6,7 @@ Factory.define 'todo', traits: 'timestamps',
   finished: false
   overdue: false
   calendar_time: -> @finish_by
-  user_id: -> Factory.build 'user'
+  user: -> Factory.build 'user'
 
 Factory.define 'overdueTodo', from: 'todo',
   finish_by: -> Ember.DateTime.create().advance(days: -7).toFullFormat()
