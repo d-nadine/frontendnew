@@ -11,8 +11,7 @@ $.ajaxSetup
     'Accept': 'application/json'
 
 require 'factory'
-
-require 'radium/lib/ember/datetime'
+require 'ember/datetime'
 
 require 'radium/lib/transforms'
 require 'radium/lib/store'
@@ -141,6 +140,4 @@ require 'radium/views/contact_card_container_view'
 require 'radium/views/contact_card_view'
 require 'radium/views/contacts_toolbar_view'
 
-# require 'radium/fixtures/factories'
-# require 'radium/fixtures'
-require 'radium/fixtures/fixture_manager'
+require 'radium/factories'
