@@ -88,13 +88,14 @@ module 'Ember-Data foundry adapter',
     TestAuthor.FIXTURES.splice 0, TestAuthor.FIXTURES.length
     TestProfile.FIXTURES.splice 0, TestProfile.FIXTURES.length
     TestComment.FIXTURES.splice 0, TestComment.FIXTURES.length
+    TestPost.FIXTURES.splice 0, TestPost.FIXTURES.length
 
   teardown: ->
     foundry.tearDown()
     TestTodo.FIXTURES.splice 0, TestTodo.FIXTURES.length
     TestAuthor.FIXTURES.splice 0, TestAuthor.FIXTURES.length
     TestProfile.FIXTURES.splice 0, TestProfile.FIXTURES.length
-    TestComment.FIXTURES.splice 0, TestComment.FIXTURES.length
+    TestPost.FIXTURES.splice 0, TestPost.FIXTURES.length
     store.destroy()
 
 test 'creating an object persists it in ember-data', ->

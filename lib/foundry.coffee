@@ -1,3 +1,9 @@
+types = "Boolean Number String Function Array Date RegExp Object".split(" ")
+TYPE_MAP = []
+
+for type in types
+  TYPE_MAP[ "[object " + type + "]" ] = type.toLowerCase()
+
 class Foundry
   constructor: ->
     @definitions = {}
@@ -11,6 +17,12 @@ class Foundry
 
   trait: (name, attributes) ->
     @traits[name] = attributes
+
+  typeOf: (item) ->
+    if item == null or item == undefined
+      String(item) 
+    else
+      TYPE_MAP[Object::toString.call(item)] || 'object'
 
   define: (klass, options, attributes) ->
     if @definitions.hasOwnProperty klass
@@ -41,7 +53,7 @@ class Foundry
     for trait in options.traits
       unless @traits.hasOwnProperty trait
         throw new Error("there is no trait definition for #{trait}")
-      attributes = $.extend {}, @traits[trait], attributes
+      attributes = $.extend true, {}, @traits[trait], attributes
 
     @definitions[klass] = attributes
 
@@ -50,14 +62,25 @@ class Foundry
       throw new Error("there is no factory definition for #{klass}")
 
     definition = @definitions[klass]
-    instance = $.extend {}, definition, attributes
+    instance = $.extend true, {}, definition, attributes
 
-    for k, v of instance when typeof v is 'function'
-      result = instance[k]()
-      delete instance[k]
-      instance[k] = result
+    @_evaluateFunctions instance
 
-    instance
+
+  _evaluateFunctions: (record) ->
+    for k, v of record
+      switch @typeOf v
+        when 'function'
+          result = record[k]()
+          delete record[k]
+          record[k] = result
+        when 'object'
+          record[k] = @_evaluateFunctions v
+        else
+          record
+
+    record
+
 
   create: (klass, attributes = {}) ->
     throw new Error("Cannot create without an adapter!") unless @adapter

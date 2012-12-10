@@ -56,6 +56,32 @@ test 'attribute functions have access to the object', ->
 
   equal contact.email, "Adam@radiumcrm.com"
 
+test 'attribute can be nested', ->
+  foundry.define 'ContactWithAddress', from: 'Contact',
+    address:
+      street: '123 Foo Bar'
+      city: 'Baztown'
+
+  contact = foundry.build 'ContactWithAddress',
+    address:
+      street: '456 Qux'
+
+  equal contact.address.street, '456 Qux', 'Nested attributes override'
+  equal contact.address.city, 'Baztown', 'Nested attributes maintained'
+
+test 'function attributes can be nested', ->
+  foundry.define 'ContactWithAddress', from: 'Contact',
+    address:
+      street: '123 Foo Bar'
+      city: 'Baztown'
+
+  contact = foundry.build 'ContactWithAddress',
+    address:
+      street: -> '456 Qux'
+
+  equal contact.address.street, '456 Qux', 'Nested attributes override'
+  equal contact.address.city, 'Baztown', 'Nested attributes maintained'
+
 module 'foundry - Parent',
   setup: ->
     foundry = new Foundry()
