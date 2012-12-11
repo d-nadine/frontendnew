@@ -1,4 +1,13 @@
-module 'Application Factories'
+module 'Application Factories',
+  setup: ->
+    Factory.adapter.store = Radium.Store.create()
+
+test 'builds a campaign with associations', ->
+  campaign = Factory.create 'campaign'
+
+  equal campaign.get('id'), 1, 'campaign exists'
+  ok campaign.get('user.isLoaded'), 'user is loaded'
+
 test 'builds a user', ->
   user = Factory.create 'user'
 

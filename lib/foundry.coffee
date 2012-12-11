@@ -133,13 +133,14 @@ class EmberDataAdapter
 
         switch kind
           when "belongsTo"
+            parentKey = "#{name}_id"
             if associatedObject
-              record[name] = associatedObject.id
+              record[parentKey] = associatedObject.id
               @loadRecord type, associatedObject, record, name
             else if parent && Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
-              record[name] = parent.id
+              record[parentKey] = parent.id
             else if parent && parent[parentAssociation] == record.id
-              record[name] = parent.id
+              record[parentKey] = parent.id
           when "hasMany"
             if associatedObject
               associatedObjects = Ember.A(associatedObject)
