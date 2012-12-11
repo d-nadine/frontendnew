@@ -28,6 +28,7 @@ test 'builds a todo', ->
   ok !todo.get('overdue'), 'Todo is not overdue'
 
   ok todo.get('user.isLoaded'), 'user is loaded'
+  ok todo.get('reference.isLoaded'), 'polymorphic added'
 
 test 'builds a call list', ->
   callList = Factory.create 'call_list'
