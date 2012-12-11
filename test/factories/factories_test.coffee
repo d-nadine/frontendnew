@@ -27,7 +27,7 @@ test 'builds a todo', ->
 
   ok !todo.get('overdue'), 'Todo is not overdue'
 
-  equal '1',  todo.get('user.id'), 'User set'
+  ok todo.get('user.isLoaded'), 'user is loaded'
 
 test 'builds a call list', ->
   callList = Factory.create 'call_list'
@@ -35,9 +35,31 @@ test 'builds a call list', ->
   ok callList.get('id'), 'call list ID exists'
   equal "Call List 1", callList.get('description'), 'call list description set'
 
-test 'builds a campaign', ->
-  campaign = Factory.create 'campaign'
+test 'builds a contact', ->
+  contact = Factory.create 'contact'
 
-  ok campaign.get('id'), 'call list ID exists'
-  equal "Campaign 1", campaign.get('name'), 'campaign name'
-  equal '1',  todo.get('user.id'), 'User set'
+  ok contact.get('isLoaded'), 'contact is loaded'
+
+test 'builds a comment', ->
+  comment = Factory.create 'comment'
+
+  ok comment.get('isLoaded'), 'comment is loaded'
+  ok comment.get('user.isLoaded'), 'user is loaded'
+  ok comment.get('commentable.isLoaded'), 'polymorphic association added'
+  equal comment.get('commentable.type'), 'todo', 'correct polymorphic type added'
+
+test 'builds a deal', ->
+  deal = Factory.create 'deal'
+
+  ok deal.get('isLoaded'), 'deal is loaded'
+  ok deal.get('user.isLoaded'), 'user is loaded'
+
+test 'builds an email', ->
+  email = Factory.create 'email'
+
+  ok email.get('isLoaded'), 'eamil is loaded'
+  ok email.get('sender.isLoaded'), 'sender is loaded'
+
+
+
+

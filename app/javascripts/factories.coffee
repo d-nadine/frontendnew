@@ -26,7 +26,7 @@ Foundry.RadiumAdapter = RadiumAdapter
 foundry = new Foundry
 foundry.adapter = new RadiumAdapter
 
-Ember.Application.registerInjection 
+Ember.Application.registerInjection
   name: 'foundry'
   after: 'store'
   injection: (app, router, property) ->

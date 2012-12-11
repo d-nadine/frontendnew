@@ -1,6 +1,6 @@
 Factory.define 'comment', traits: 'timestamps',
   text: 'I like product drafts'
   commentable:
-    id: 1
+    id: -> Factory.build 'todo'
     type: 'todo'
   user: -> Factory.build 'user'

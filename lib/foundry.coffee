@@ -153,6 +153,18 @@ class EmberDataAdapter
               record[name] ||= []
               record[name].push parent.id
 
+      Ember.get(model, 'polymorphicAttributes').forEach (name, associations) =>
+        return unless  record[name]
+
+        associatedObject = record[name]
+        type = @modelForType(associatedObject.type)
+        #HACK: Until I get this working object is in the id
+        #e.g. id: -> Factory.build 'user'
+        @loadRecord type, associatedObject.id
+        id = associatedObject.id.id
+        delete associatedObject.id
+        associatedObject.id = id
+
       # Now all the associations in this node have been processed
       # it's safe to add the leaf node
       model.FIXTURES ||= []
