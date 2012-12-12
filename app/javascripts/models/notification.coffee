@@ -4,7 +4,7 @@ Radium.Notification = Radium.Core.extend
   tag: DS.attr("string")
 
   reference: Radium.polymorphicAttribute()
-  referenceTypeBinding: 'referenceData.type'
+  referenceType: (-> @get('referenceData.type') ).property('referenceData.type')
   referenceData: DS.attr('object')
 
   todo: DS.belongsTo('Radium.Todo', polymorphicFor: 'reference')

@@ -82,3 +82,10 @@ test 'build a meeting', ->
 
   ok meeting.get('isLoaded'), 'meeting is loaded'
   equal meeting.get('users.length'), 2, 'meeting users loaded'
+
+test 'build a notification', ->
+  notification = Factory.create 'notification'
+
+  ok notification.get('isLoaded'), 'notification is loaded'
+  ok notification.get('reference.isLoaded'), 'notification reference is loaded'
+  equal notification.get('reference.type'), 'todo', 'correct polymorphic type added'
