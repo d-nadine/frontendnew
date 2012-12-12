@@ -28,4 +28,4 @@ Radium.Serializer = DS.RESTSerializer.extend
     polymorphic = associations.find (association) -> association.options?.polymorphicFor == name
 
     Ember.assert("Could not find association with type #{@typeFromString(polymorphicData.type)} for #{name} polymorphic association in #{record.constructor}", polymorphic)
-    hash["#{polymorphic.key}_id"] = polymorphicData.id
+    hash["#{polymorphic.key.underscore()}_id"] = polymorphicData.id

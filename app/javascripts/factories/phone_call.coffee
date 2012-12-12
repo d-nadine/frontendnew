@@ -1,7 +1,7 @@
 Factory.define 'phone_call', traits: 'timestamps',
   to:
-    id: '2'
+    id: -> Factory.build 'user'
     type: 'user'
   from:
-    id: '1'
+    id: -> Factory.build 'user'
     type: 'contact'

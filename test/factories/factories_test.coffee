@@ -89,3 +89,10 @@ test 'build a notification', ->
   ok notification.get('isLoaded'), 'notification is loaded'
   ok notification.get('reference.isLoaded'), 'notification reference is loaded'
   equal notification.get('reference.type'), 'todo', 'correct polymorphic type added'
+
+test 'build a phone call', ->
+  phone_call = Factory.create 'phone_call'
+
+  ok phone_call.get('isLoaded'), 'phone call is loaded'
+  ok phone_call.get('to.isLoaded'), 'phone call to is loaded'
+  ok phone_call.get('from.isLoaded'), 'phone call from is loaded'
