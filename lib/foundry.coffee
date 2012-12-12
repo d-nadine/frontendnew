@@ -127,6 +127,8 @@ class EmberDataAdapter
         kind = association.kind
         type = association.type
 
+        mappings = @store.get('_adapter.serializer').mappingForType(model)
+
         throw new Error("Cannot find a type for: #{model}.#{name}!") unless type
 
         associatedObject = record[name]
@@ -148,11 +150,14 @@ class EmberDataAdapter
               record[name] = ids
 
               associatedObjects.forEach (childRecord) =>
-                @loadRecord type, childRecord, record, name
+                @loadRecord type, childRecord
             else if parent && parent[parentAssociation] = record.id
               record[name] ||= []
               record[name].push parent.id
 
+            if mappings?[name]?.key
+              record[mappings[name].key] = record[name]
+              delete record[name]
       Ember.get(model, 'polymorphicAttributes').forEach (name, associations) =>
         return unless  record[name]
 

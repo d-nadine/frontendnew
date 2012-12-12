@@ -61,6 +61,24 @@ test 'builds an email', ->
   ok email.get('isLoaded'), 'eamil is loaded'
   ok email.get('sender.isLoaded'), 'sender is loaded'
 
+test 'build a feed section', ->
+  feed_section = Factory.create 'feed_section'
 
+  ok feed_section.get('isLoaded'), 'FeedSection loaded'
+  #TODO add associated feed items
 
+test 'build a group section', ->
+  group = Factory.create 'group'
 
+  ok group.get('isLoaded'), 'group is loaded'
+
+test 'build an invitation', ->
+  invitation = Factory.create 'invitation'
+
+  ok invitation.get('isLoaded'), 'invitation is loaded'
+
+test 'build a meeting', ->
+  meeting = Factory.create 'meeting'
+
+  ok meeting.get('isLoaded'), 'meeting is loaded'
+  equal meeting.get('users.length'), 2, 'meeting users loaded'

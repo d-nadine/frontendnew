@@ -9,7 +9,10 @@ Radium.Core = DS.Model.extend
   type: (->
     Radium.Core.typeToString(@constructor)
   ).property()
-  strTypeBinding: 'type'
+
+  # TODO: Review causing records to be rematerialized
+  # used by FilteredCollectionMixin
+  # strTypeBinding: 'type'
 
   domClass: (->
     "#{@get('type')}_#{@get('id')}"

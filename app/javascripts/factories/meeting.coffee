@@ -6,6 +6,6 @@ Factory.define 'meeting', traits: 'timestamps',
   location: 'Radium HQ'
   user: -> Factory.build 'user'
   users: -> [
-    Factory.build 'user',
-    Factory.build 'user'
+    Factory.build('user'),
+    Factory.build('user')
   ]

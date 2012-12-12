@@ -3,7 +3,7 @@ window.Radium = Radium = Em.Application.create
   ready: ->
     @set('_api', $.cookie('user_api_key'))
   reset: ->
-    @get('router').reset() if @get('router') isnt undefined
+    @get('router')?.reset()
     @set('_api', undefined)
 
 $.ajaxSetup
