@@ -95,4 +95,18 @@ test 'build a phone call', ->
 
   ok phone_call.get('isLoaded'), 'phone call is loaded'
   ok phone_call.get('to.isLoaded'), 'phone call to is loaded'
+  equal phone_call.get('to').constructor, Radium.User, 'phone call to type correct'
   ok phone_call.get('from.isLoaded'), 'phone call from is loaded'
+  equal phone_call.get('from').constructor, Radium.Contact, 'phone call from type correct'
+
+test 'build a reminder', ->
+  reminder = Factory.create 'reminder'
+
+  ok reminder.get('isLoaded'), 'reminder is loaded'
+  ok reminder.get('reference.isLoaded'), 'polymorphic added'
+
+test 'builds an sms', ->
+  sms = Factory.create 'sms'
+
+  ok sms.get('isLoaded'), 'sms is loaded'
+  ok sms.get('sender.isLoaded'), 'sender is loaded'
