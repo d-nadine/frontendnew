@@ -147,7 +147,7 @@ class EmberDataAdapter
               record[name] = ids
 
               associatedObjects.forEach (childRecord) =>
-                @loadRecord type, childRecord
+                @loadRecord type, childRecord unless childRecord.constructor.isClass
             else if parent && parent[parentAssociation] = record.id
               record[name] ||= []
               record[name].push parent.id

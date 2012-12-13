@@ -3,7 +3,7 @@ class Populator
   @run: ->
     #TODO move this to store definition
     # Factory.adapter = new Foundry.RadiumAdapter(Radium.get('router.store'))
-    aaron = Factory.create 'user',
+    aaron = Factory.create 'user'
       name: 'Aaron Stephens'
       email: 'aaron.stephens13@feed-demo.com'
       phone: '136127245078'
@@ -21,6 +21,10 @@ class Populator
 
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'
+      users: -> [
+        aaron,
+        jerry
+      ]
 
     email = Factory.create 'email',
       sender:
@@ -50,6 +54,7 @@ class Populator
         id: -> Factory.build 'invitation'
         type: 'invitation'
       tag: 'invited.meeting'
+      meeting: -> retrospection
 
     Factory.create 'invitation'
 
@@ -135,7 +140,7 @@ class Populator
 
     Factory.create 'reminder',
       reference:
-        id: -> Factory.build 'meeting'
+        id: -> retrospection
         type: 'meeting'
 
     message = Factory.create 'message',

@@ -3,7 +3,8 @@ module 'Application Factories',
     Factory.adapter.store = Radium.Store.create()
 
 test 'builds a campaign with associations', ->
-  campaign = Factory.create 'campaign'
+  campaign = Factory.create 'campaign',
+    user: -> Factory.build 'user'
 
   equal campaign.get('id'), 1, 'campaign exists'
   ok campaign.get('user.isLoaded'), 'user is loaded'
@@ -15,7 +16,8 @@ test 'builds a user', ->
   ok user.get('name'), 'Name exists'
 
 test 'builds a todo', ->
-  todo = Factory.create 'todo'
+  todo = Factory.create 'todo',
+    user: -> Factory.build 'user'
 
   ok todo.get('id'), 'ID exists'
 
@@ -30,7 +32,8 @@ test 'builds a todo', ->
   ok todo.get('user.isLoaded'), 'user is loaded'
 
 test 'builds a call list', ->
-  callList = Factory.create 'call_list'
+  callList = Factory.create 'call_list',
+    user: -> Factory.build 'user'
 
   ok callList.get('id'), 'call list ID exists'
   equal "Call List 1", callList.get('description'), 'call list description set'
@@ -42,7 +45,11 @@ test 'builds a contact', ->
   ok contact.get('isLoaded'), 'contact is loaded'
 
 test 'builds a comment', ->
-  comment = Factory.create 'comment'
+  comment = Factory.create 'comment',
+    commentable:
+      id: -> Factory.build 'todo'
+      type: 'todo'
+    user: -> Factory.build 'user'
 
   ok comment.get('isLoaded'), 'comment is loaded'
   ok comment.get('user.isLoaded'), 'user is loaded'
@@ -50,7 +57,8 @@ test 'builds a comment', ->
   equal comment.get('commentable.type'), 'todo', 'correct polymorphic type added'
 
 test 'builds a deal', ->
-  deal = Factory.create 'deal'
+  deal = Factory.create 'deal',
+    user: -> Factory.build 'user'
 
   ok deal.get('isLoaded'), 'deal is loaded'
   ok deal.get('user.isLoaded'), 'user is loaded'
@@ -62,7 +70,10 @@ test 'builds an email', ->
   ok email.get('sender.isLoaded'), 'sender is loaded'
 
 test 'build a feed section', ->
-  feed_section = Factory.create 'feed_section'
+  feed_section = Factory.create 'feed_section',
+    item_ids: [
+      ['todo', Factory.build('todo')]
+    ]
 
   ok feed_section.get('isLoaded'), 'FeedSection loaded'
   equal feed_section.get('items.length'), 1, 'Feed section items loaded'
@@ -74,14 +85,21 @@ test 'build a group section', ->
   ok group.get('isLoaded'), 'group is loaded'
 
 test 'build an invitation', ->
-  invitation = Factory.create 'invitation'
+  invitation = Factory.create 'invitation',
+    user: -> Factory.build 'user',
+    meeting: Factory.build('meeting')
 
   ok invitation.get('isLoaded'), 'invitation is loaded'
   ok invitation.get('user.isLoaded'), 'user is loaded'
   ok invitation.get('meeting.isLoaded'), 'meeting is loaded'
 
 test 'build a meeting', ->
-  meeting = Factory.create 'meeting'
+  meeting = Factory.create 'meeting',
+    user: -> Factory.build 'user'
+    users: -> [
+      Factory.build('user'),
+      Factory.build('user')
+    ]
 
   ok meeting.get('isLoaded'), 'meeting is loaded'
   equal meeting.get('users.length'), 2, 'meeting users loaded'
