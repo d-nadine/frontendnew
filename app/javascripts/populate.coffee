@@ -1,8 +1,8 @@
-class FixtureCreator
-  @isInitialised: false
-  @populate: ->
+class Populator
+  @hasRun: false
+  @run: ->
     #TODO move this to store definition
-    Factory.adapter = new Foundry.RadiumAdapter(Radium.get('router.store'))
+    # Factory.adapter = new Foundry.RadiumAdapter(Radium.get('router.store'))
     aaron = Factory.create 'user',
       name: 'Aaron Stephens'
       email: 'aaron.stephens13@feed-demo.com'
@@ -144,14 +144,6 @@ class FixtureCreator
     feed_section = Factory.create 'feed_section'
 
     Radium.Gap.FIXTURES = []
-    FixtureCreator.isInitialised = true
+    Populator.hasRun = true
 
-Radium.FixtureCreator = FixtureCreator
-
-Ember.Application.registerInjection
-  name: 'populate'
-  after: 'foundry'
-  injection: (app, router, property) ->
-    FixtureCreator.populate() unless FixtureCreator.isInitialised
-
-
+Radium.Populator = Populator
