@@ -116,13 +116,7 @@ class EmberDataAdapter
   loadRecord: (model, record, parent, parentAssociation) ->
     associations = Ember.get(model, 'associationsByName')
 
-    # Leaf node in tree, time to load data into
-    # the store
-    if associations.keys.isEmpty()
-      model.FIXTURES ||= []
-      model.FIXTURES.push record
-      @store.load model, record
-    else
+    unless associations.keys.isEmpty()
       associations.forEach (name, association) =>
         kind = association.kind
         type = association.type
@@ -170,11 +164,17 @@ class EmberDataAdapter
         delete associatedObject.id
         associatedObject.id = id
 
-      # Now all the associations in this node have been processed
-      # it's safe to add the leaf node
-      model.FIXTURES ||= []
-      model.FIXTURES.push record
-      @store.load model, record
+    #hack to transform item_ids into expanded_record_array format
+    if record?.item_ids?.length > 0
+      record.item_ids.forEach (item, index) =>
+        itemType = @modelForType(item[0])
+        @loadRecord(itemType, item[1])
+        record.item_ids[0] = [itemType, item[1].id]
+    # Now all the associations in this node have been processed
+    # it's safe to add the leaf node
+    model.FIXTURES ||= []
+    model.FIXTURES.push record
+    @store.load model, record
 
   save: (type, record) ->
     throw new Error("Cannot save without a store!") unless @store

@@ -35,6 +35,7 @@ test 'builds a call list', ->
 
   ok callList.get('id'), 'call list ID exists'
   equal "Call List 1", callList.get('description'), 'call list description set'
+  ok callList.get('user.isLoaded'), 'call list user is loaded'
 
 test 'builds a contact', ->
   contact = Factory.create 'contact'
@@ -65,7 +66,8 @@ test 'build a feed section', ->
   feed_section = Factory.create 'feed_section'
 
   ok feed_section.get('isLoaded'), 'FeedSection loaded'
-  #TODO add associated feed items
+  equal feed_section.get('items.length'), 1, 'Feed section items loaded'
+  equal feed_section.get('items.firstObject').constructor, Radium.Todo, 'correct first item loaded'
 
 test 'build a group section', ->
   group = Factory.create 'group'
@@ -76,6 +78,8 @@ test 'build an invitation', ->
   invitation = Factory.create 'invitation'
 
   ok invitation.get('isLoaded'), 'invitation is loaded'
+  ok invitation.get('user.isLoaded'), 'user is loaded'
+  ok invitation.get('meeting.isLoaded'), 'meeting is loaded'
 
 test 'build a meeting', ->
   meeting = Factory.create 'meeting'
