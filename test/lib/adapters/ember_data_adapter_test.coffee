@@ -2,13 +2,13 @@ TestTodo = DS.Model.extend
   primaryKey: 'id'
   task: DS.attr('string')
 
-TestProfile = DS.Model.extend
-  primaryKey: 'id'
-  text: DS.attr('string')
-
 TestAuthor = DS.Model.extend
   primaryKey: 'id'
   name: DS.attr('string')
+
+TestProfile = DS.Model.extend
+  primaryKey: 'id'
+  text: DS.attr('string')
 
 TestPost = DS.Model.extend
   primaryKey: 'id'
@@ -80,7 +80,7 @@ module 'Ember-Data foundry adapter',
 
     foundry.define 'TestCommentWithPost'
       text: foundry.sequence (i) -> "Comment #{i}"
-      post: 
+      post:
         id: 1
         title: "Post 1"
 
@@ -129,7 +129,7 @@ test 'creating an object persists a belongsTo relationship', ->
   equal profile.get('text'), 'Profile 1', 'child record materialized correctly'
   equal TestProfile.FIXTURES.length, 1, 'child FIXTURES array updated'
   inMemoryRecord = TestProfile.FIXTURES[0]
-  strictEqual inMemoryRecord.author, '1', 'Child belongsTo transformed into FK'
+  strictEqual inMemoryRecord.author.id, '1', 'Child belongsTo transformed into FK'
   equal profile.get('author.name'), 'Author 1', 'belongsTo relationship materialized on the child'
 
 test 'creating an object persists a hasMany relationship', ->

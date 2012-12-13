@@ -132,7 +132,10 @@ class EmberDataAdapter
             parentKey = "#{name}_id"
             if associatedObject
               record[parentKey] = associatedObject.id
-              @loadRecord type, associatedObject, record, name
+              if associatedObject.constructor.isClass
+                delete record[name]
+              else
+                @loadRecord type, associatedObject, record, name
             else if parent && Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
               record[parentKey] = parent.id
             else if parent && parent[parentAssociation] == record.id
@@ -152,17 +155,21 @@ class EmberDataAdapter
             if mappings?[name]?.key
               record[mappings[name].key] = record[name]
               delete record[name]
-      Ember.get(model, 'polymorphicAttributes').forEach (name, associations) =>
-        return unless  record[name]
 
-        associatedObject = record[name]
-        type = @modelForType(associatedObject.type)
-        #HACK: Until I get this working object is in the id
-        #e.g. id: -> Factory.build 'user'
-        @loadRecord type, associatedObject.id
-        id = associatedObject.id.id
-        delete associatedObject.id
-        associatedObject.id = id
+      polymorphicAttributes = Ember.get(model, 'polymorphicAttributes')
+
+      if polymorphicAttributes
+        polymorphicAttributes.forEach (name, associations) =>
+          return unless  record[name]
+
+          associatedObject = record[name]
+          type = @modelForType(associatedObject.type)
+          #HACK: Until I get this working object is in the id
+          #e.g. id: -> Factory.build 'user'
+          @loadRecord type, associatedObject.id unless associatedObject.id.constructor.isClass
+          id = associatedObject.id.id
+          delete associatedObject.id
+          associatedObject.id = id
 
     #hack to transform item_ids into expanded_record_array format
     if record?.item_ids?.length > 0
@@ -170,6 +177,7 @@ class EmberDataAdapter
         itemType = @modelForType(item[0])
         @loadRecord(itemType, item[1])
         record.item_ids[0] = [itemType, item[1].id]
+
     # Now all the associations in this node have been processed
     # it's safe to add the leaf node
     model.FIXTURES ||= []

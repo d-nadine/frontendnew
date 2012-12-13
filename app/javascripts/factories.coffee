@@ -20,6 +20,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'sms', Radium.Sms
     @map.set 'todo', Radium.Todo
     @map.set 'overdueTodo', Radium.Todo
+    @map.set 'message', Radium.Message
 
 Foundry.RadiumAdapter = RadiumAdapter
 
@@ -50,6 +51,7 @@ require 'radium/factories/meeting'
 require 'radium/factories/invitation'
 require 'radium/factories/notification'
 require 'radium/factories/phone_call'
+require 'radium/factories/message'
 require 'radium/factories/reminder'
 require 'radium/factories/sms'
 require 'radium/factories/todo'

@@ -28,7 +28,6 @@ test 'builds a todo', ->
   ok !todo.get('overdue'), 'Todo is not overdue'
 
   ok todo.get('user.isLoaded'), 'user is loaded'
-  ok todo.get('reference.isLoaded'), 'polymorphic added'
 
 test 'builds a call list', ->
   callList = Factory.create 'call_list'
@@ -114,3 +113,8 @@ test 'builds an sms', ->
 
   ok sms.get('isLoaded'), 'sms is loaded'
   ok sms.get('sender.isLoaded'), 'sender is loaded'
+
+test 'builds a message', ->
+  message = Factory.create 'message'
+
+  ok message.get('isLoaded'), 'message is loaed'

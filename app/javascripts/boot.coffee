@@ -13,6 +13,7 @@
 
 require 'radium/app'
 
-# Radium.initialize()
-
 require 'radium/populate'
+
+Radium.initialize()
+
