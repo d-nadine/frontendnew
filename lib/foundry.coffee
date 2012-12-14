@@ -175,8 +175,8 @@ class EmberDataAdapter
     if record?.item_ids?.length > 0
       record.item_ids.forEach (item, index) =>
         itemType = @modelForType(item[0])
-        @loadRecord(itemType, item[1])
-        record.item_ids[0] = [itemType, item[1].id]
+        @loadRecord(itemType, item[1]) unless item[1].constructor.isClass
+        record.item_ids[index] = [itemType, item[1].id]
 
     # Now all the associations in this node have been processed
     # it's safe to add the leaf node

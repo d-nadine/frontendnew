@@ -115,7 +115,14 @@ Radium.Store = DS.Store.extend
           else
             fixtures.slice(0, query.limit || 1)
         else
-          fixtures.filter (f) -> f.id == '2012-08-14' || f.id == '2012-08-17'
+          startDates = [
+            Ember.DateTime.create().toDateFormat()
+            Ember.DateTime.create().advance(day: - 1).toDateFormat()
+            Ember.DateTime.create().advance(day: - 7).toDateFormat()
+            Ember.DateTime.create().advance(day: - 14).toDateFormat()
+          ]
+
+          fixtures.filter (f) -> startDates.contains(f.id)
 
         fixtures
       else
