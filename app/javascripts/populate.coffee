@@ -157,7 +157,9 @@ class Populator
     callList = Factory.create 'call_list',
       user: -> jerry
 
-     @createFeedSection(0, [
+    feeds = []
+
+    @createFeedSection(0, [
         ['todo', todo]
         ['deal', deal]
         ['meeting', retrospection]
@@ -172,28 +174,45 @@ class Populator
         ['todo', todoTodo]
         ['todo', callRalph]
         ['todo', finishByTomrrow]
-      ])
+      ], feeds)
 
     defaultFeedItems = [
       ['todo', todo]
       ['deal', deal]
+      ['meeting', retrospection]
     ]
 
-    @createFeedSection(1, defaultFeedItems)
-    @createFeedSection(7, defaultFeedItems)
-    @createFeedSection(14, defaultFeedItems)
+    @createFeedSection(1, defaultFeedItems, feeds)
+    @createFeedSection(7, defaultFeedItems, feeds)
+    @createFeedSection(14, defaultFeedItems, feeds)
+    @createFeedSection(30, defaultFeedItems, feeds)
+    @createFeedSection(60, defaultFeedItems, feeds)
+
+    sorted = feeds.sort (a, b) ->
+      if a.id > b.id then 1 else -1
+
+    sorted.forEach (item, i) ->
+      if previous = sorted[i - 1]
+        previous.next_date =  item.id
+        item.previous_date =  previous.id
+      if next = sorted.objectAt(i + 1)
+        next.previous_date = item.id
+        item.next_date =  next.id
+
+    for feed in feeds
+      Factory.create 'feed_section', feed
 
     Radium.Gap.FIXTURES = []
     Populator.hasRun = true
 
-  @createFeedSection: (advance, items) ->
+  @createFeedSection: (advance, items, feeds) ->
     advances = if advance == 0 then [advance] else [advance, (0 - advance)]
 
     for i in advances
       date = Ember.DateTime.create().advance(day: i)
-      Factory.create 'feed_section',
+      feeds.push
         id: date.toDateFormat()
-        date: date.toFullFormat() 
+        date: date.toFullFormat()
         item_ids: items
 
 Radium.Populator = Populator
