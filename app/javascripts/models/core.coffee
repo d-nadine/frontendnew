@@ -10,10 +10,6 @@ Radium.Core = DS.Model.extend
     Radium.Core.typeToString(@constructor)
   ).property()
 
-  # TODO: Review causing records to be rematerialized
-  # used by FilteredCollectionMixin
-  # strTypeBinding: 'type'
-
   domClass: (->
     "#{@get('type')}_#{@get('id')}"
   ).property('type', 'id')
@@ -36,8 +32,8 @@ Radium.Core.reopenClass
   typeToString: (type) ->
     type.toString().split('.').slice(-1)[0].underscore()
 
+  #TODO remove from the model
   isInStore: (id, store)->
-    #should the model reference the store?
     store ?= Radium.get('router.store')
     store.isInStore this, id
 

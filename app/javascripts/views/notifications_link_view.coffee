@@ -3,8 +3,8 @@ Radium.NotificationsLinkView = Em.View.extend
   template: Em.Handlebars.compile('{{view.count}}')
   tagName: 'a'
 
-  countBinding: 'controller.count'
   controllerBinding: 'Radium.router.notificationsController'
+  countBinding: 'controller.count'
 
   click: ->
     @get('controller').toggleNotifications()

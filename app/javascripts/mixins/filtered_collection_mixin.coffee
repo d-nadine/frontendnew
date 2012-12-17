@@ -4,14 +4,15 @@ Radium.FilteredCollectionMixin = Em.Mixin.create
     Radium.FilteredArray.create
       context: this
       contentBinding: 'context.collection'
-      filterProperties: ['strType']
+      filterProperties: ['type']
       filterValueBinding: 'context.controller.typeFilter'
       filterValuesBinding: 'context.controller.typeFilters'
       filterCondition: (item) ->
+        type = if item.get('type').isClass then Radium.Core.typeToString(item.get('type')) else item.get('type')
         if filterValue = @get('filterValue')
-          item.get('strType') == filterValue
+          type == filterValue
         else if filterValues = @get('filterValues')
-          filterValues.contains item.get('strType')
+          filterValues.contains type
         else
           true
   ).property()

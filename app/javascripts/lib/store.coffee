@@ -119,7 +119,7 @@ Radium.Store = DS.Store.extend
             Ember.DateTime.create().toDateFormat()
             Ember.DateTime.create().advance(day: - 1).toDateFormat()
             Ember.DateTime.create().advance(day: - 7).toDateFormat()
-            Ember.DateTime.create().advance(day: - 14).toDateFormat()
+            # Ember.DateTime.create().advance(day: - 14).toDateFormat()
           ]
 
           fixtures.filter (f) -> startDates.contains(f.id)

@@ -21,6 +21,7 @@ class Populator
 
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'
+      location: 'Radium HQ'
       users: -> [
         aaron,
         jerry
@@ -37,7 +38,7 @@ class Populator
     developers = Factory.create 'group',
       name: 'Developers'
 
-    phone_call = Factory.create 'phone_call',
+    phoneCall = Factory.create 'phone_call',
       to:
         id: -> aaron
         type: 'user'
@@ -46,17 +47,6 @@ class Populator
         type: 'contact'
 
     sms = Factory.create 'sms'
-
-    notification = Factory.create 'notification'
-
-    Factory.create 'notification',
-      reference:
-        id: -> Factory.build 'invitation'
-        type: 'invitation'
-      tag: 'invited.meeting'
-      meeting: -> retrospection
-
-    Factory.create 'invitation'
 
     deal = Factory.create 'deal',
       user: -> aaron
@@ -114,7 +104,7 @@ class Populator
       user: -> jerry,
       description: 'product discussion'
       reference:
-        id: -> phone_call
+        id: -> phoneCall
         type: 'phone_call'
 
     smsTodo = Factory.create 'todo',
@@ -144,7 +134,27 @@ class Populator
       user: -> jerry,
       finish_by: Ember.DateTime.create().advance(day: 1).toFullFormat()
 
+    invitation = Factory.create 'invitation'
+      user: -> aaron
+      meeting: -> retrospection
+
+    notification = Factory.create 'notification'
+      reference:
+        id: -> groupTodo
+        type: 'todo'
+      tag: 'assigned.todo'
+
+    Factory.create 'notification',
+      reference:
+        id: -> invitation
+        type: 'invitation'
+      tag: 'invited.meeting'
+
     reminder = Factory.create 'reminder'
+      reference:
+        id: -> finishByTomrrow
+        type: 'todo'
+      time: -> Ember.DateTime.create().advance(month: -1).toFullFormat()
 
     Factory.create 'reminder',
       reference:
@@ -152,9 +162,11 @@ class Populator
         type: 'meeting'
 
     message = Factory.create 'message',
+      message: 'here is a message'
       type: 'email'
 
     callList = Factory.create 'call_list',
+      description: 'This is a call list'
       user: -> jerry
 
     feeds = []
@@ -166,6 +178,7 @@ class Populator
         ['deal', deal]
         ['call_list', callList]
         ['campaign', campaign]
+        ['todo', overdue]
         ['todo', campaignTodo]
         ['todo', emailTodo]
         ['todo', groupTodo]
@@ -179,7 +192,7 @@ class Populator
     defaultFeedItems = [
       ['todo', todo]
       ['deal', deal]
-      ['meeting', retrospection]
+      ['todo', todoTodo]
     ]
 
     @createFeedSection(1, defaultFeedItems, feeds)
@@ -187,6 +200,8 @@ class Populator
     @createFeedSection(14, defaultFeedItems, feeds)
     @createFeedSection(30, defaultFeedItems, feeds)
     @createFeedSection(60, defaultFeedItems, feeds)
+    @createFeedSection(90, defaultFeedItems, feeds)
+    @createFeedSection(100, defaultFeedItems, feeds)
 
     sorted = feeds.sort (a, b) ->
       if a.id > b.id then 1 else -1
@@ -199,7 +214,7 @@ class Populator
         next.previous_date = item.id
         item.next_date =  next.id
 
-    for feed in feeds
+    for feed in sorted
       Factory.create 'feed_section', feed
 
     Radium.Gap.FIXTURES = []

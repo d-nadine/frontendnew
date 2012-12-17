@@ -128,7 +128,6 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     unless cluster
       cluster = DS.RecordArray.create(Radium.LimitSupport, {
         type: type
-        strType: Radium.Core.typeToString type
         content: Ember.A([])
         store: @get('store')
       })

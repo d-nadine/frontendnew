@@ -87,7 +87,7 @@ test 'build a group section', ->
 test 'build an invitation', ->
   invitation = Factory.create 'invitation',
     user: -> Factory.build 'user',
-    meeting: Factory.build('meeting')
+    meeting: -> Factory.build('meeting')
 
   ok invitation.get('isLoaded'), 'invitation is loaded'
   ok invitation.get('user.isLoaded'), 'user is loaded'
@@ -122,6 +122,10 @@ test 'build a phone call', ->
 
 test 'build a reminder', ->
   reminder = Factory.create 'reminder'
+    reference:
+      id: -> Factory.build 'todo'
+      type: 'todo'
+    time: -> Ember.DateTime.create().advance(month: -1).toFullFormat()
 
   ok reminder.get('isLoaded'), 'reminder is loaded'
   ok reminder.get('reference.isLoaded'), 'polymorphic added'
