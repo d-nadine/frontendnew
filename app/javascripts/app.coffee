@@ -5,6 +5,10 @@ window.Radium = Radium = Em.Application.create
   reset: ->
     @get('router')?.reset()
     @set('_api', undefined)
+    Ember.A(Ember.keys(Radium)).forEach (key) ->
+      type = Radium. Core.typeFromString(key)
+      type.FIXTURES ||= Ember.A() if DS.Model.detect(type)
+
 
 $.ajaxSetup
   dataType: 'json'

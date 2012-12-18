@@ -89,7 +89,9 @@ Radium.FeedController = Em.ArrayController.extend
     current   = null
     direction = null
 
-    if first && date > first.get 'id'
+    if !first && ! last # empty feed
+      Radium.FeedSection.loadSection(@get('store'), item.get('feedDate'))
+    else if first && date > first.get 'id'
       current   = first
       direction = 'next'
     else if last && date < last.get 'id'
