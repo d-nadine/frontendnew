@@ -81,9 +81,6 @@ Radium.Router = Ember.Router.extend
   reset: ->
     Ember.Route.transitionTo('root')
     @get('store').reset()
-    Ember.A(Ember.keys(Radium)).forEach (key) ->
-      type = Radium. Core.typeFromString(key)
-      type.FIXTURES ||= Ember.A() if DS.Model.detect(type)
 
   jumpTo: ->
     jumpTo.apply this, arguments
