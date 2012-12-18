@@ -1,5 +1,6 @@
 window.Radium = Radium = Em.Application.create
   autoinit: false
+  rootElement: '#application'
   ready: ->
     @set('_api', $.cookie('user_api_key'))
   reset: ->
