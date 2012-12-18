@@ -24,7 +24,7 @@ Radium.Store = DS.Store.extend
 
 
     if @typeMaps
-      #not sure what the implications are of this
+      #not sure what the implications of this are
       #worth keepin an eye on
       for key, map of @typeMaps
         delete map.idToCid
