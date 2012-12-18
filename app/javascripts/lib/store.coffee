@@ -8,7 +8,6 @@ Radium.Store = DS.Store.extend
     @get('_adapter').reset()
 
     # internal bookkeeping; not observable
-    @typeMaps = {}
     @recordCache = []
     @clientIdToId = {}
     @clientIdToType = {}
@@ -22,6 +21,25 @@ Radium.Store = DS.Store.extend
     # total number of loading records drops to zero, it becomes
     # `isLoaded` and fires a `didLoad` event.
     @loadingRecordArrays = {}
+
+
+    if @typeMaps
+      #not sure what the implications are of this
+      #worth keepin an eye on
+      for key, map of @typeMaps
+        delete map.idToCid
+        map.idToCid = {}
+        map.clientIds.clear()
+
+        continue if map.recordArrays.length == 0
+
+        type = map.recordArrays[0].type
+
+        map.recordArrays.clear()
+        array = DS.RecordArray.create({ type: type, content: Ember.A([]), store: this, isLoaded: true })
+        map.recordArrays.push array
+        @registerRecordArray(array, type)
+        map.findAllCache = array
 
     Ember.set(@, 'defaultTransaction', @transaction())
 
