@@ -1,9 +1,10 @@
 module 'Integration - Feed'
 
 test 'adding a meeting shows it in the feed', ->
-  expect(3)
+  # expect(3)
 
-  app -> Radium.reset()
+  # app -> Radium.reset()
+  Radium.reset()
 
   assertEmptyFeed()
 
@@ -28,7 +29,8 @@ test 'adding a meeting shows it in the feed', ->
 test 'todos appear in the feed', ->
   #expect(4)
 
-  app -> Radium.reset()
+  # app -> Radium.reset()
+  Radium.reset()
 
   assertEmptyFeed()
 

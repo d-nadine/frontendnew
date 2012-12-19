@@ -129,7 +129,6 @@ Radium.FeedController = Em.ArrayController.extend
         item.removeObserver 'isNew', addItem
 
     if item.get('isNew')
-      throw new Error("you shall not pass")
       item.addObserver 'isNew', addItem
     else
       addItem()
