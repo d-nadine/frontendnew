@@ -2,9 +2,9 @@ window.Radium = Radium = Em.Application.create
   autoinit: false
   rootElement: '#application'
   ready: ->
-    @set('_api', $.cookie('user_api_key'))
+    @set('_api', 'foo')
   reset: ->
-    @get('router')?.reset()
+    @get('router').route('/')
     @set('_api', undefined)
 
 $.ajaxSetup

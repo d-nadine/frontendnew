@@ -1,40 +1,46 @@
-module 'integration - feed - Empty feed'
+module 'Integration - Feed'
 
-test 'create a meeting and it appears in a feed with no feed sections', ->
+test 'adding a meeting shows it in the feed', ->
+  expect(3)
+
+  Radium.reset()
+
+  assertEmptyFeed()
+
   waitForSelector '.filters .add-meeting', (el) ->
     el.click()
 
     waitForSelector '#form-container', (el) ->
-      meetingDate = Ember.DateTime.create()
+      meetingDate = Ember.DateTime.create().advance(days: 7)
 
       fillIn '#start-date', meetingDate.toDateFormat()
       fillIn '#description', 'New meeting'
 
       $('.btn-success').click()
 
-      newFeedSectionSelector = ".feed_section_#{meetingDate.toDateFormat()}"
+      feedSelector = ".feed_section_#{meetingDate.toDateFormat()}"
 
-      waitForSelector newFeedSectionSelector, (el) ->
-        assertContains el, 'New meeting'
+      waitForSelector feedSelector, (el) ->
+        assertFeedItems(1)
+        assertText el, 'New meeting'
 
-feedSelector = null
+test 'todos appear in the feed', ->
+  expect(3)
 
-module 'integration - feed'
-  setup: ->
-    section = Factory.create 'feed_section'
-    meeting = Factory.create 'meeting'
-    todo = Factory.create 'todo',
-            description: 'Todo assertion'
+  Radium.reset()
 
-    Ember.run ->
-      Radium.get('router.feedController').pushItem meeting
-      Radium.get('router.feedController').pushItem todo
+  assertEmptyFeed()
 
-    feedSelector = ".feed_section_#{section.get('id')}"
+  section = Factory.create 'feed_section'
+  todo = Factory.create 'todo',
+          description: 'Finish programming radium'
 
-test 'meeting and todo can appear in the feed', ->
-  equal Radium.FeedSection.find().get('length'), 1, 'precond - there is 1 feed item'
+  Ember.run ->
+    Radium.get('router.feedController').pushItem todo
+
+  feedSelector = ".feed_section_#{section.get('id')}"
+
+  assertFeedItems 1
 
   waitForSelector feedSelector, (el) ->
-    assertContains el, 'Product discussion'
-    assertContains el, 'Todo assertion'
+    assertText el, 'Finish programming radium'

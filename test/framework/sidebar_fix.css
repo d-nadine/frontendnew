@@ -8,3 +8,8 @@
   z-index: 1000;
   position: relative;
 }
+
+#application {
+  height: 400px;
+  overflow: hidden;
+}

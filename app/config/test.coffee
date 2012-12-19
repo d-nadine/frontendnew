@@ -6,3 +6,5 @@ Ember.Application.registerInjection
   injection: (app, router, property) ->
     type = Radium.Core.typeFromString(property)
     type.FIXTURES ||= Ember.A() if DS.Model.detect(type)
+
+Ember.ENV.RAISE_ON_DEPRECATION = true

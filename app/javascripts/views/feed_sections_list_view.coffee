@@ -70,6 +70,7 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
         scroll = document.body.scrollTop - this.$().height() - 2
         window.scrollTo 0, scroll
 
+
     adjustScroll: ->
       return unless @get 'controller.loadingAdditionalFeedItems'
 
