@@ -11,7 +11,7 @@ test 'adding a meeting shows it in the feed', ->
     el.click()
 
     waitForSelector '#form-container', (el) ->
-      meetingDate = Ember.DateTime.create().advance(days: 7)
+      meetingDate = Ember.DateTime.create().advance(day: 7)
 
       fillIn '#start-date', meetingDate.toDateFormat()
       fillIn '#description', 'New meeting'
@@ -21,11 +21,12 @@ test 'adding a meeting shows it in the feed', ->
       feedSelector = ".feed_section_#{meetingDate.toDateFormat()}"
 
       waitForSelector feedSelector, (el) ->
-        assertFeedItems(1)
-        assertText el, 'New meeting'
+        wait 300, ->
+          assertFeedItems(1)
+          assertText el, 'New meeting'
 
 test 'todos appear in the feed', ->
-  expect(3)
+  #expect(4)
 
   app -> Radium.reset()
 
@@ -35,11 +36,25 @@ test 'todos appear in the feed', ->
   todo = Factory.create 'todo',
           description: 'Finish programming radium'
 
-  app -> Radium.get('router.feedController').pushItem todo
+  console.log 'TypeMap in test after create'
+  console.log Radium.get('router.store').typeMapFor(Radium.Todo)
+
+  Radium.Todo.find todo.get('id')
+
+  console.log 'TypeMap in test after create and find again'
+  console.log Radium.get('router.store').typeMapFor(Radium.Todo)
+
+  ok todo.get('isLoaded'), "Todo must be loaded"
+
+  console.log("Loaded state in test: #{todo.get('isLoaded')}")
+
+  app -> 
+    console.log("Pushing todo...")
+    Radium.get('router.feedController').pushItem todo
 
   feedSelector = ".feed_section_#{section.get('id')}"
 
-  assertFeedItems 1
-
   waitForSelector feedSelector, (el) ->
-    assertText el, 'Finish programming radium'
+    wait 300, ->
+      assertFeedItems 1
+      assertText el, 'Finish programming radium'

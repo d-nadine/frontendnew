@@ -4,7 +4,9 @@ window.Radium = Radium = Em.Application.create
   ready: ->
     @set('_api', 'foo')
   reset: ->
+    console.log('Resetting...')
     @get('router').route('/')
+    @get('router.store').reset()
     @set('_api', undefined)
 
 $.ajaxSetup

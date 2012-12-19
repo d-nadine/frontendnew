@@ -5,6 +5,6 @@ Ember.Application.registerInjection
   before: 'store'
   injection: (app, router, property) ->
     type = Radium.Core.typeFromString(property)
-    type.FIXTURES ||= Ember.A() if DS.Model.detect(type)
+    type.FIXTURES = [] if DS.Model.detect(type)
 
 Ember.ENV.RAISE_ON_DEPRECATION = true

@@ -92,8 +92,8 @@ Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
       endsAt:   endsAt
 
     meeting = Radium.Meeting.createRecord data
-    @pushItem meeting
     meeting.store.commit()
+    @pushItem meeting
 
   close: ->
     Radium.get('router.formController').close()

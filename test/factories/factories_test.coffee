@@ -1,6 +1,4 @@
-module 'Application Factories',
-  setup: ->
-    Factory.adapter.store = Radium.Store.create()
+module 'Application Factories'
 
 test 'builds a campaign with associations', ->
   campaign = Factory.create 'campaign',

@@ -49,6 +49,7 @@ Radium.FeedSection = Radium.Core.extend
   ).property('items.clusters')
 
   unclustered: (->
+    console.log('Recalculating unclustered content')
     @get 'items.unclustered'
   ).property('items.unclustered')
 

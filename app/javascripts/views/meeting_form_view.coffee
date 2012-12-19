@@ -38,14 +38,14 @@ Radium.MeetingFormView = Radium.FormView.extend
 
   submitForm: ->
     # TODO: extract doStuff into global form shared functionality
-    doStuff = ->
-      @get('controller').createMeeting()
+    #doStuff = ->
+    @get('controller').createMeeting()
 
-      @close()
+    @close()
 
-    @hide()
-    self = this
-    setTimeout (-> doStuff.apply(self) ), 200
+    # @hide()
+    # self = this
+    # setTimeout (-> doStuff.apply(self) ), 200
 
   hide: ->
     @$().slideUp('fast')

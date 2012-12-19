@@ -1,8 +1,17 @@
 require 'radium/lib/adapter'
 require 'radium/lib/serializer'
 
+storeCounter = 0
 Radium.Store = DS.Store.extend
   revision: 9
+
+  init: ->
+    ++storeCounter
+
+    throw new Error("Cannot have more than one store") if storeCounter > 1
+
+    console.log('Building store')
+    @_super.apply @, arguments
 
   reset: ->
     @get('_adapter').reset()
@@ -15,6 +24,8 @@ Radium.Store = DS.Store.extend
     @recordArraysByClientId = {}
     @relationshipChanges = {}
 
+    @clientIdCounter = 1
+
     # Internally, we maintain a map of all unloaded IDs requested b
     # a ManyArray. As the adapter loads data into the store, the
     # store notifies any interested ManyArrays. When the ManyArray's
@@ -22,24 +33,25 @@ Radium.Store = DS.Store.extend
     # `isLoaded` and fires a `didLoad` event.
     @loadingRecordArrays = {}
 
+    @typeMaps = {}
 
-    if @typeMaps
-      #not sure what the implications of this are
-      #worth keepin an eye on
-      for key, map of @typeMaps
-        delete map.idToCid
-        map.idToCid = {}
-        map.clientIds.clear()
+    # if @typeMaps
+    #   #not sure what the implications of this are
+    #   #worth keepin an eye on
+    #   for key, map of @typeMaps
+    #     delete map.idToCid
+    #     map.idToCid = {}
+    #     map.clientIds.clear()
 
-        continue if map.recordArrays.length == 0
+    #     continue if map.recordArrays.length == 0
 
-        type = map.recordArrays[0].type
+    #     type = map.recordArrays[0].type
 
-        map.recordArrays.clear()
-        array = DS.RecordArray.create({ type: type, content: Ember.A([]), store: this, isLoaded: true })
-        map.recordArrays.push array
-        @registerRecordArray(array, type)
-        map.findAllCache = array
+    #     map.recordArrays.clear()
+    #     array = DS.RecordArray.create({ type: type, content: Ember.A([]), store: this, isLoaded: true })
+    #     map.recordArrays.push array
+    #     @registerRecordArray(array, type)
+    #     map.findAllCache = array
 
     Ember.set(@, 'defaultTransaction', @transaction())
 
@@ -53,6 +65,7 @@ Radium.Store = DS.Store.extend
     !!@typeMapFor(type).idToCid[id]
 
   adapter: Radium.Adapter.extend
+    simulateRemoteResponse: false
     reset: ->
       properties = Ember.A(Ember.keys(Radium))
 
