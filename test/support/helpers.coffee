@@ -9,7 +9,6 @@ window.wait = (timeout, callback) ->
     callback()
   ), timeout)
 
-
 window.waitFor = (condition, callback, message) ->
   stop()
 
@@ -44,3 +43,6 @@ window.waitForSelector = (selector, callback, message) ->
       callback($.apply($, selector))
 
   waitFor condition, callbackWithElement, message
+
+window.app = (code) ->
+  Ember.run code

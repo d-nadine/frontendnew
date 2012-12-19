@@ -3,7 +3,7 @@ module 'Integration - Feed'
 test 'adding a meeting shows it in the feed', ->
   expect(3)
 
-  Radium.reset()
+  app -> Radium.reset()
 
   assertEmptyFeed()
 
@@ -27,7 +27,7 @@ test 'adding a meeting shows it in the feed', ->
 test 'todos appear in the feed', ->
   expect(3)
 
-  Radium.reset()
+  app -> Radium.reset()
 
   assertEmptyFeed()
 
@@ -35,8 +35,7 @@ test 'todos appear in the feed', ->
   todo = Factory.create 'todo',
           description: 'Finish programming radium'
 
-  Ember.run ->
-    Radium.get('router.feedController').pushItem todo
+  app -> Radium.get('router.feedController').pushItem todo
 
   feedSelector = ".feed_section_#{section.get('id')}"
 
