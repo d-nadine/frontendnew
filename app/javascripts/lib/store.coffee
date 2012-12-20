@@ -24,8 +24,6 @@ Radium.Store = DS.Store.extend
     @recordArraysByClientId = {}
     @relationshipChanges = {}
 
-    @clientIdCounter = 1
-
     # Internally, we maintain a map of all unloaded IDs requested b
     # a ManyArray. As the adapter loads data into the store, the
     # store notifies any interested ManyArrays. When the ManyArray's
