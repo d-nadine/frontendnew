@@ -83,13 +83,12 @@ Radium.Router = Ember.Router.extend
     @route('/authenticated')
     @get('store').reset()
 
-  jumpTo: ->
-    jumpTo.apply this, arguments
-
   init: ->
     @_super()
+    @set('user', 'foo')
 
-    @set('meController', Radium.MeController.create())
+  jumpTo: ->
+    jumpTo.apply this, arguments
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -100,7 +99,11 @@ Radium.Router = Ember.Router.extend
     # TODO: fix when ember is updated
     routePath: (router, path) ->
       router.set('lastAttemptedPath', path)
-      router.get('meController').fetch()
+
+      if router.get('user')
+        router.transitionTo('authenticated.index')
+      else
+        router.transitionTo('unauthenticated.index')
 
   switchToUnauthenticated: Ember.State.transitionTo('unauthenticated.index')
   switchToAuthenticated: Ember.State.transitionTo('authenticated.index')

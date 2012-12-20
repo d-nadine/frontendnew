@@ -1,13 +1,8 @@
 Radium = Em.Application.create
   autoinit: false
   rootElement: '#application'
-  ready: ->
-    @_super()
-    @set('_api', 'foo')
-
   reset: ->
     @get('router').reset()
-    @set('_api', undefined)
 
 window.Radium = Radium
 
@@ -72,7 +67,6 @@ require 'radium/models/message'
 require 'radium/models/invitation'
 
 require 'radium/controllers/application_controller'
-require 'radium/controllers/me_controller'
 require 'radium/controllers/login_controller'
 require 'radium/controllers/main_controller'
 require 'radium/controllers/feed_controller'
