@@ -1,4 +1,14 @@
 Radium.Utils = Em.Object.create
+  runWhenLoaded: (object, callback) ->
+    if object.get('isLoaded')
+      callback.apply object
+    else
+      observer = ->
+        callback()
+        object.removeObserver 'isLoaded', obsever
+
+      object.addObserver 'isLoaded', observer
+
   showItem: (item) ->
     if item.constructor == Radium.Invitation
       # TODO: that's definitely a code smell, this should be refactored,

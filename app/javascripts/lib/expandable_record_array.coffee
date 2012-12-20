@@ -1,3 +1,5 @@
+require 'radium/lib/utils'
+runWhenLoaded = Radium.Utils.runWhenLoaded
 # TODO: maybe it would be nice to handle queuing arrays added
 #       with load. for now it's handled in router, but this
 #       implementation is not bullet proof
@@ -18,32 +20,24 @@ Radium.ExpandableRecordArray = DS.RecordArray.extend
     @set 'isLoading', true
     self = this
 
-    observer = ->
-      if @get 'isLoaded'
-        content = self.get 'content'
+    runWhenLoaded record ->
+      content = self.get 'content'
 
-        record.removeObserver 'isLoaded', observer
-        self.pushObject record
+      self.pushObject record
 
-        self.set 'isLoading', false
-
-    record.addObserver 'isLoaded', observer
+      self.set 'isLoading', false
 
   load: (array) ->
     @set 'isLoading', true
     self = this
 
-    observer = ->
-      if @get 'isLoaded'
-        content = self.get 'content'
+    runWhenLoaded  array, ->
+      content = self.get 'content'
 
-        array.removeObserver 'isLoaded', observer
-        array.forEach (record) ->
-          self.pushObject record
+      array.forEach (record) ->
+        self.pushObject record
 
-        self.set 'isLoading', false
-
-    array.addObserver 'isLoaded', observer
+      self.set 'isLoading', false
 
   pushObject: (record) ->
     ids      = @get 'content'

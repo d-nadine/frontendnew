@@ -118,23 +118,23 @@ test 'build a phone call', ->
   ok phone_call.get('from.isLoaded'), 'phone call from is loaded'
   equal phone_call.get('from').constructor, Radium.Contact, 'phone call from type correct'
 
-# test 'build a reminder', ->
-#   reminder = Factory.create 'reminder'
-#     reference:
-#       id: -> Factory.build 'todo'
-#       type: 'todo'
-#     time: -> Ember.DateTime.create().advance(month: -1).toFullFormat()
-# 
-#   ok reminder.get('isLoaded'), 'reminder is loaded'
-#   ok reminder.get('reference.isLoaded'), 'polymorphic added'
-# 
+test 'build a reminder', ->
+  reminder = Factory.create 'reminder'
+    reference:
+      id: -> Factory.build 'todo'
+      type: 'todo'
+    time: -> Ember.DateTime.create().advance(month: -1).toFullFormat()
+
+  ok reminder.get('isLoaded'), 'reminder is loaded'
+  ok reminder.get('reference.isLoaded'), 'polymorphic added'
+
 test 'builds an sms', ->
   sms = Factory.create 'sms'
 
   ok sms.get('isLoaded'), 'sms is loaded'
   ok sms.get('sender.isLoaded'), 'sender is loaded'
 
-# test 'builds a message', ->
-#   message = Factory.create 'message'
-# 
-#   ok message.get('isLoaded'), 'message is loaed'
+test 'builds a message', ->
+  message = Factory.create 'message'
+
+  ok message.get('isLoaded'), 'message is loaed'
