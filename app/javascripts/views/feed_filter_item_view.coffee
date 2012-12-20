@@ -7,7 +7,6 @@ Radium.FeedFilterItemView = Ember.View.extend
 
   setFilter: (event) ->
     type = if event.context == 'all' then null else event.context
-    console.log type, @get('controller').toString()
     @get('controller').set('typeFilter', type)
 
   isSelected: (->

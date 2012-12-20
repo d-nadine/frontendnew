@@ -10,7 +10,6 @@ Radium.Store = DS.Store.extend
 
     throw new Error("Cannot have more than one store") if storeCounter > 1
 
-    console.log('Building store')
     @_super.apply @, arguments
 
   reset: ->
@@ -32,24 +31,6 @@ Radium.Store = DS.Store.extend
     @loadingRecordArrays = {}
 
     @typeMaps = {}
-
-    # if @typeMaps
-    #   #not sure what the implications of this are
-    #   #worth keepin an eye on
-    #   for key, map of @typeMaps
-    #     delete map.idToCid
-    #     map.idToCid = {}
-    #     map.clientIds.clear()
-
-    #     continue if map.recordArrays.length == 0
-
-    #     type = map.recordArrays[0].type
-
-    #     map.recordArrays.clear()
-    #     array = DS.RecordArray.create({ type: type, content: Ember.A([]), store: this, isLoaded: true })
-    #     map.recordArrays.push array
-    #     @registerRecordArray(array, type)
-    #     map.findAllCache = array
 
     Ember.set(@, 'defaultTransaction', @transaction())
 

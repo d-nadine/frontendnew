@@ -5,8 +5,6 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
   expandedItemBinding: 'controller.expandedItem'
 
   init: ->
-    console.log('Initialized')
-
     @_super.apply(this, arguments)
 
     type = @get('content.type')
@@ -32,12 +30,6 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
       didInsertElement: ->
         @set 'insertedElement', true
-
-    #debugger if @get('content').constructor == Radium.Todo
-
-    console.log 'TypeMap in view'
-    console.log Radium.get('router.store').typeMapFor(Radium.Todo)
-    console.log "View content isLoaded: #{@get('content.isLoaded')}"
 
     observer = ->
       if @get('content.isLoaded')
