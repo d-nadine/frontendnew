@@ -1,12 +1,16 @@
-window.Radium = Radium = Em.Application.create
+Radium = Em.Application.create
   autoinit: false
   rootElement: '#application'
   ready: ->
+    @_super()
     @set('_api', 'foo')
+
   reset: ->
     @get('router').route('/')
     @get('router.store').reset()
     @set('_api', undefined)
+
+window.Radium = Radium
 
 require 'foundry'
 require 'ember/datetime'

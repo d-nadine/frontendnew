@@ -1,5 +1,4 @@
 class Populator
-  @hasRun: false
   @run: ->
     #TODO move this to store definition
     # Factory.adapter = new Foundry.RadiumAdapter(Radium.get('router.store'))
@@ -218,7 +217,6 @@ class Populator
       Factory.create 'feed_section', feed
 
     Radium.Gap.FIXTURES = []
-    Populator.hasRun = true
 
   @createFeedSection: (advance, items, feeds) ->
     advances = if advance == 0 then [advance] else [advance, (0 - advance)]
