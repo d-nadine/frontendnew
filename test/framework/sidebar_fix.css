@@ -13,3 +13,8 @@
   height: 400px;
   overflow: hidden;
 }
+
+#app {
+  width: 100%;
+  height: 300px;
+}

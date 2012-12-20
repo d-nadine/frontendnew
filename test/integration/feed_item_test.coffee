@@ -1,41 +1,67 @@
 module 'Integration - Feed'
 
 test 'adding a meeting shows it in the feed', ->
-  expect(3)
+  document.getElementById('app').onload = ->
+    window.$F = document.getElementById('app').contentWindow.jQuery
+    window.$A = document.getElementById('app').contentWindow.Radium
+    window.$W = document.getElementById('app').contentWindow
 
-  assertEmptyFeed()
+    $A.ready = ->
+      expect(3)
 
-  waitForSelector '.filters .add-meeting', (el) ->
-    el.click()
+      assertEmptyFeed()
 
-    waitForSelector '#form-container', (el) ->
-      meetingDate = Ember.DateTime.create().advance(day: 7)
+      waitForSelector '.filters .add-meeting', (el) ->
+        el.click()
 
-      fillIn '#start-date', meetingDate.toDateFormat()
-      fillIn '#description', 'New meeting'
+        waitForSelector '#form-container', (el) ->
+          meetingDate = Ember.DateTime.create().advance(day: 7)
 
-      $('.btn-success').click()
+          fillIn '#start-date', meetingDate.toDateFormat()
+          fillIn '#description', 'New meeting'
 
-      feedSelector = ".feed_section_#{meetingDate.toDateFormat()}"
+          $F('.btn-success').click()
 
-      waitForSelector feedSelector, (el) ->
-        assertFeedItems(1)
-        assertText el, 'New meeting'
+          feedSelector = ".feed_section_#{meetingDate.toDateFormat()}"
+
+          waitForSelector feedSelector, (el) ->
+            assertFeedItems(1)
+            assertText el, 'New meeting'
+
+      start()
+
+  stop()
+
+  $W.location.reload()
 
 test 'todos appear in the feed', ->
-  expect(3)
+  document.getElementById('app').onload = ->
+    window.$F = document.getElementById('app').contentWindow.jQuery
+    window.$A = document.getElementById('app').contentWindow.Radium
+    window.$W = document.getElementById('app').contentWindow
 
-  assertEmptyFeed()
+    $A.ready = ->
+      expect(3)
 
-  section = $W.Factory.create 'feed_section'
-  todo = $W.Factory.create 'todo',
-          description: 'Finish programming radium'
+      assertEmptyFeed()
 
-  $W.Ember.run ->
-    $A.get('router.feedController').pushItem todo
+      section = $W.Factory.create 'feed_section'
+      todo = $W.Factory.create 'todo',
+              description: 'Finish programming radium'
 
-  feedSelector = ".feed_section_#{section.get('id')}"
+      $W.Ember.run ->
+        console.log $A.get('router')
+        $A.get('router.feedController').pushItem todo
 
-  waitForSelector feedSelector, (el) ->
-    assertFeedItems 1
-    assertText el, 'Finish programming radium'
+      feedSelector = ".feed_section_#{section.get('id')}"
+
+      waitForSelector feedSelector, (el) ->
+        assertFeedItems 1
+        assertText el, 'Finish programming radium'
+
+      start()
+
+  stop()
+
+  $W.location.reload()
+
