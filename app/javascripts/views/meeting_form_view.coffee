@@ -37,14 +37,9 @@ Radium.MeetingFormView = Radium.FormView.extend
   )
 
   submitForm: ->
-    doStuff = ->
-      @get('controller').createMeeting()
-
+    @get('controller').createMeeting()
     @close()
-
     @hide()
-    self = this
-    setTimeout (-> doStuff.apply(self) ), 200
 
   hide: ->
     @$().slideUp('fast')
