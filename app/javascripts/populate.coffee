@@ -1,7 +1,5 @@
 class Populator
   @run: ->
-    #TODO move this to store definition
-    # Factory.adapter = new Foundry.RadiumAdapter(Radium.get('router.store'))
     aaron = Factory.create 'user'
       name: 'Aaron Stephens'
       email: 'aaron.stephens13@feed-demo.com'
