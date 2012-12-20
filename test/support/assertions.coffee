@@ -1,6 +1,6 @@
 window.assertFeedItems = (expected, message) ->
   message ||= "Correct # of Feed Items"
-  equal $(".feed-item").length, expected, message 
+  equal $F(".feed-item").length, expected, message 
 
 window.assertEmptyFeed = ->
   assertFeedItems 0, "Feed is empty"

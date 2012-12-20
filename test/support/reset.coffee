@@ -1,2 +1,2 @@
-QUnit.testStart ->
-  app -> Radium.reset()
+# QUnit.testStart ->
+#   app -> Radium.reset()
