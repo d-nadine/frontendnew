@@ -6,8 +6,7 @@ Radium = Em.Application.create
     @set('_api', 'foo')
 
   reset: ->
-    @get('router').route('/')
-    @get('router.store').reset()
+    @get('router').reset()
     @set('_api', undefined)
 
 window.Radium = Radium
