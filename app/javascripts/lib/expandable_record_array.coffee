@@ -20,21 +20,16 @@ Radium.ExpandableRecordArray = DS.RecordArray.extend
     @set 'isLoading', true
     self = this
 
-    runWhenLoaded record ->
-      content = self.get 'content'
-
+    runWhenLoaded record, ->
       self.pushObject record
-
       self.set 'isLoading', false
 
   load: (array) ->
     @set 'isLoading', true
     self = this
 
-    runWhenLoaded  array, ->
-      content = self.get 'content'
-
-      array.forEach (record) ->
+    runWhenLoaded array, ->
+      @forEach (record) ->
         self.pushObject record
 
       self.set 'isLoading', false

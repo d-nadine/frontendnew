@@ -1,11 +1,12 @@
 Radium.Utils = Em.Object.create
   runWhenLoaded: (object, callback) ->
     if object.get('isLoaded')
-      callback.apply object
+      Ember.run.next ->
+        callback.apply object
     else
       observer = ->
-        callback()
-        object.removeObserver 'isLoaded', obsever
+        callback.apply object
+        object.removeObserver 'isLoaded', observer
 
       object.addObserver 'isLoaded', observer
 
