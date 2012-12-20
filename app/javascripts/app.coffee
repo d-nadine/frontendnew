@@ -8,13 +8,6 @@ window.Radium = Radium = Em.Application.create
     @get('router.store').reset()
     @set('_api', undefined)
 
-$.ajaxSetup
-  dataType: 'json'
-  contentType: 'application/json'
-  headers:
-    'X-Radium-User-API-Key': Radium.get('_api')
-    'Accept': 'application/json'
-
 require 'foundry'
 require 'ember/datetime'
 
