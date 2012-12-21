@@ -56,7 +56,7 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
     assertText el, '9 todos'
 
 integrationTest 'comment can be added to feed item', ->
-  expect(3)
+  expect(2)
 
   section = Factory.create 'feed_section'
   todo = Factory.create 'todo'
@@ -65,8 +65,6 @@ integrationTest 'comment can be added to feed item', ->
     Radium.get('router.feedController').pushItem todo
 
   waitForResource todo, (el) ->
-    ok true, 'got here'
-
     click el
 
     waitForSelector ['.comments', el.parent()], (commentsContainer) ->
