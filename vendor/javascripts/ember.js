@@ -11714,6 +11714,7 @@ Ember.Application = Ember.Namespace.extend(
 
     eventDispatcher.setup(customEvents);
 
+    this.ready();
 
     router = get(this, 'router');
 
@@ -11723,7 +11724,6 @@ Ember.Application = Ember.Namespace.extend(
       this.startRouting(router);
     }
 
-    this.ready();
   },
 
   createApplicationView: function (router) {

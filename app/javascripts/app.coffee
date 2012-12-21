@@ -3,6 +3,11 @@ Radium = Em.Application.create
   rootElement: '#application'
   reset: ->
     @get('router').reset()
+  didBecomeCompletelyReady: Ember.K
+  didBecomeReady: ->
+    @_super.apply @, arguments
+
+    @didBecomeCompletelyReady()
 
 window.Radium = Radium
 
