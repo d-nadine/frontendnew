@@ -21,3 +21,15 @@ window.assertText = (element, text, callback) ->
 window.clickFilterAndAssertFeedItems = (filterType, expected) ->
   clickFilter filterType, ->
     assertFeedItems expected, "#{expected} of #{filterType} expected"
+
+window.assertScrollingFeedHasDate = (controller, daysToJump, direction) ->
+  app ->
+    controller.loadFeed direction
+    controller.loadFeed direction
+
+  dateToTestFor = Ember.DateTime.create().advance(day: daysToJump)
+
+  waitForSelector ".feed_section_#{dateToTestFor.toDateFormat()}", (el) ->
+    assertText el, dateToTestFor.toFormattedString('%A, %B %D, %Y')
+
+

@@ -122,22 +122,5 @@ integrationTest 'a feed can retrieve new items from infinite scrolling in both d
   waitForSelector feedSelector, (el) ->
     assertFeedItems 1
 
-    app ->
-      controller.loadFeed forward: true
-      controller.loadFeed forward: true
-
-    nextDate = Ember.DateTime.create().advance(day: 14)
-
-    waitForSelector ".feed_section_#{nextDate.toDateFormat()}", (el) ->
-      assertText el, nextDate.toFormattedString('%A, %B %D, %Y')
-
-    app ->
-      controller.loadFeed back: true
-      controller.loadFeed back: true
-
-    previousDate = Ember.DateTime.create().advance(day: -14)
-
-    waitForSelector ".feed_section_#{previousDate.toDateFormat()}", (el) ->
-      assertText el, previousDate.toFormattedString('%A, %B %D, %Y')
-
-
+    assertScrollingFeedHasDate(controller, 14, forward: true)
+    assertScrollingFeedHasDate(controller, -14, back: true)
