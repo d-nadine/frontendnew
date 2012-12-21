@@ -12,9 +12,13 @@ window.fillIn = (selector, text) ->
     throw "Could not find #{selector}"
   $F(selector).val(text).trigger(event)
 
-window.enterNewLine = (selector) ->
+window.pressEnter = (selector) ->
   event = jQuery.Event("keypress")
   event.keyCode = 13
   if $F(selector).length == 0
     throw "Could not find #{selector}"
   $F(selector).trigger(event)
+
+window.fillInAndPressEnter = (selector, text) ->
+  fillIn(selector, text)
+  pressEnter(selector)

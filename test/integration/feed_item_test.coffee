@@ -44,12 +44,12 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
   expect(3)
   assertEmptyFeed()
 
-  section = $W.Factory.create 'feed_section'
+  section = Factory.create 'feed_section'
 
-  $W.Ember.run ->
+  app ->
     for i in [0..8]
-      todo = $W.Factory.create 'todo'
-      $A.get('router.feedController').pushItem todo
+      todo = Factory.create 'todo'
+      Radium.get('router.feedController').pushItem todo
 
   waitForResource section, (el) ->
     assertFeedItems 0
@@ -58,25 +58,22 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
 integrationTest 'comment can be added to feed item', ->
   expect(3)
 
-  section = $W.Factory.create 'feed_section'
-  todo = $W.Factory.create 'todo'
+  section = Factory.create 'feed_section'
+  todo = Factory.create 'todo'
 
-  $W.Ember.run ->
-    $A.get('router.feedController').pushItem todo
-
-  event = $F.Event("keypress")
-  event.keyCode = 13
+  app ->
+    Radium.get('router.feedController').pushItem todo
 
   waitForResource todo, (el) ->
     ok true, 'got here'
 
-    el.click()
+    click el
 
     waitForSelector ['.comments', el.parent()], (commentsContainer) ->
       textArea = $('.new-comment', commentsContainer)
       ok textArea.length, "Comments box missing"
 
-      textArea.val("Bravo!").change().trigger(event)
+      fillInAndPressEnter(textArea, "Bravo!")
 
       comments = $('.comments', commentsContainer)
       condition = -> comments.length == 2

@@ -1,3 +1,7 @@
+DS.Model.reopen
+  commit: ->
+    @store.commit()
+
 Ember.Application.reopen
   registerInitializer: (initializer) ->
     @constructor.registerInitializer initializer

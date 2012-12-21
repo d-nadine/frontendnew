@@ -22,7 +22,7 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       @set('isError', false)
       @set('newComment', '')
 
-      @get('store').commit()
+      comment.commit()
 
       comment.addObserver 'isValid', ->
         unless @get('isValid')
