@@ -40,6 +40,21 @@ integrationTest 'todos appear in the feed', ->
     assertFeedItems 1
     assertText el, 'Finish programming radium'
 
+integrationTest 'feed type gets clustered after reaching the cluster size', ->
+  expect(3)
+  assertEmptyFeed()
+
+  section = $W.Factory.create 'feed_section'
+
+  $W.Ember.run ->
+    for i in [0..8]
+      todo = $W.Factory.create 'todo'
+      $A.get('router.feedController').pushItem todo
+
+  waitForResource section, (el) ->
+    assertFeedItems 0
+    assertText el, '9 todos'
+
 integrationTest 'comment can be added to feed item', ->
   expect(3)
 
