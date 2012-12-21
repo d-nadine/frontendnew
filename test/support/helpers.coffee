@@ -44,3 +44,11 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
+window.waitForResource = (resource, callback, message) ->
+  id = resource.get('id')
+  type = resource.constructor
+  selector = ".#{type.toString().split('.').pop().underscore()}_#{id}"
+  message ?= "Could not find #{type} with id of #{id} on page"
+
+  waitForSelector selector, callback, message
+
