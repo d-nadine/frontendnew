@@ -124,3 +124,33 @@ integrationTest 'a feed can retrieve new items from infinite scrolling in both d
 
     assertScrollingFeedHasDate(controller, 14, forward: true)
     assertScrollingFeedHasDate(controller, -14, back: true)
+
+integrationTest 'a feed can jump to a specific date', ->
+  expect(3)
+
+  assertEmptyFeed()
+
+  loadFeedFixtures([8, 14, 27])
+
+  controller = Radium.get('router.feedController')
+  router = Radium.get('router')
+
+  app ->
+    controller.pushItem Factory.create 'todo'
+
+  feedSelector = ".feed_section_#{Ember.DateTime.create().toDateFormat()}"
+
+  waitForSelector feedSelector, (el) ->
+    assertFeedItems 1
+
+    futureDate = Ember.DateTime.create().advance(day: 27)
+
+    app ->
+      router.send 'showDate', date: futureDate.toDateFormat()
+
+    waitForSelector ".feed_section_#{futureDate.toDateFormat()}", (el) ->
+      assertText el, futureDate.toFormattedString('%A, %B %D, %Y')
+
+
+
+
