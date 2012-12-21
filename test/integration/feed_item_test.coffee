@@ -78,3 +78,32 @@ integrationTest 'comment can be added to feed item', ->
 
       waitForSelector ".comment-text", (coms)->
         assertText coms, "Bravo!"
+
+integrationTest 'a feed can be filtered by feed type', ->
+  expect(7)
+
+  assertEmptyFeed()
+
+  section = Factory.create 'feed_section'
+    item_ids: [
+      ['todo', Factory.build('todo')]
+      ['todo', Factory.build('todo')]
+      ['todo', Factory.build('todo')]
+      ['deal', Factory.build('deal')]
+      ['deal', Factory.build('deal')]
+      ['campaign', Factory.build('campaign')]
+      ['meeting', Factory.build('meeting')]
+    ]
+
+  app ->
+    Radium.get('router.feedController.content').pushObject section
+
+  waitForResource section, (el) ->
+    assertFeedItems(7)
+
+    clickFilterAndAssertFeedItems 'todo', 3
+    clickFilterAndAssertFeedItems 'deal', 2
+    clickFilterAndAssertFeedItems 'campaign', 1
+    clickFilterAndAssertFeedItems 'meeting', 1
+    clickFilterAndAssertFeedItems 'all', 7
+

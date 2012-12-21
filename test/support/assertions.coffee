@@ -17,3 +17,7 @@ window.assertText = (element, text, callback) ->
       "#{text}" should exist in this html:
       #{element.html()}
     """
+
+window.clickFilterAndAssertFeedItems = (filterType, expected) ->
+  clickFilter filterType, ->
+    assertFeedItems expected, "#{expected} of #{filterType} expected"

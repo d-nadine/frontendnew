@@ -22,3 +22,11 @@ window.pressEnter = (selector) ->
 window.fillInAndPressEnter = (selector, text) ->
   fillIn(selector, text)
   pressEnter(selector)
+
+window.clickFilter = (feedType, callback) ->
+  waitForSelector ".main-filter-item.#{feedType} a", (el) ->
+    app ->
+      click el
+
+    callback()
+
