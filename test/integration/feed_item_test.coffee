@@ -34,9 +34,7 @@ integrationTest 'todos appear in the feed', ->
   app ->
     Radium.get('router.feedController').pushItem todo
 
-  feedSelector = ".feed_section_#{section.get('id')}"
-
-  waitForSelector feedSelector, (el) ->
+  waitForResource section, (el) ->
     assertFeedItems 1
     assertText el, 'Finish programming radium'
 
@@ -106,3 +104,40 @@ integrationTest 'a feed can be filtered by feed type', ->
     clickFilterAndAssertFeedItems 'campaign', 1
     clickFilterAndAssertFeedItems 'meeting', 1
     clickFilterAndAssertFeedItems 'all', 7
+
+integrationTest 'a feed can retrieve new items from infinite scrolling in both directions', ->
+  expect(4)
+
+  assertEmptyFeed()
+
+  loadFeedFixtures([8, 14])
+
+  controller = Radium.get('router.feedController')
+
+  app ->
+    controller.pushItem Factory.create 'todo'
+
+  feedSelector = ".feed_section_#{Ember.DateTime.create().toDateFormat()}"
+
+  waitForSelector feedSelector, (el) ->
+    assertFeedItems 1
+
+    app ->
+      controller.loadFeed forward: true
+      controller.loadFeed forward: true
+
+    nextDate = Ember.DateTime.create().advance(day: 14)
+
+    waitForSelector ".feed_section_#{nextDate.toDateFormat()}", (el) ->
+      assertText el, nextDate.toFormattedString('%A, %B %D, %Y')
+
+    app ->
+      controller.loadFeed back: true
+      controller.loadFeed back: true
+
+    previousDate = Ember.DateTime.create().advance(day: -14)
+
+    waitForSelector ".feed_section_#{previousDate.toDateFormat()}", (el) ->
+      assertText el, previousDate.toFormattedString('%A, %B %D, %Y')
+
+
