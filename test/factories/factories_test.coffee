@@ -1,19 +1,19 @@
 module 'Application Factories'
 
-test 'builds a campaign with associations', ->
+integrationTest 'builds a campaign with associations', ->
   campaign = Factory.create 'campaign',
     user: -> Factory.build 'user'
 
   equal campaign.get('id'), 1, 'campaign exists'
   ok campaign.get('user.isLoaded'), 'user is loaded'
 
-test 'builds a user', ->
+integrationTest 'builds a user', ->
   user = Factory.create 'user'
 
   ok user.get('id'), 'ID exists'
   ok user.get('name'), 'Name exists'
 
-test 'builds a todo', ->
+integrationTest 'builds a todo', ->
   todo = Factory.create 'todo',
     user: -> Factory.build 'user'
 
@@ -29,7 +29,7 @@ test 'builds a todo', ->
 
   ok todo.get('user.isLoaded'), 'user is loaded'
 
-test 'builds a call list', ->
+integrationTest 'builds a call list', ->
   callList = Factory.create 'call_list',
     user: -> Factory.build 'user'
 
@@ -37,12 +37,12 @@ test 'builds a call list', ->
   equal "Call List 1", callList.get('description'), 'call list description set'
   ok callList.get('user.isLoaded'), 'call list user is loaded'
 
-test 'builds a contact', ->
+integrationTest 'builds a contact', ->
   contact = Factory.create 'contact'
 
   ok contact.get('isLoaded'), 'contact is loaded'
 
-test 'builds a comment', ->
+integrationTest 'builds a comment', ->
   comment = Factory.create 'comment',
     commentable:
       id: -> Factory.build 'todo'
@@ -54,20 +54,20 @@ test 'builds a comment', ->
   ok comment.get('commentable.isLoaded'), 'polymorphic association added'
   equal comment.get('commentable.type'), 'todo', 'correct polymorphic type added'
 
-test 'builds a deal', ->
+integrationTest 'builds a deal', ->
   deal = Factory.create 'deal',
     user: -> Factory.build 'user'
 
   ok deal.get('isLoaded'), 'deal is loaded'
   ok deal.get('user.isLoaded'), 'user is loaded'
 
-test 'builds an email', ->
+integrationTest 'builds an email', ->
   email = Factory.create 'email'
 
   ok email.get('isLoaded'), 'eamil is loaded'
   ok email.get('sender.isLoaded'), 'sender is loaded'
 
-test 'build a feed section', ->
+integrationTest 'build a feed section', ->
   feed_section = Factory.create 'feed_section',
     item_ids: [
       ['todo', Factory.build('todo')]
@@ -77,12 +77,12 @@ test 'build a feed section', ->
   equal feed_section.get('items.length'), 1, 'Feed section items loaded'
   equal feed_section.get('items.firstObject').constructor, Radium.Todo, 'correct first item loaded'
 
-test 'build a group section', ->
+integrationTest 'build a group section', ->
   group = Factory.create 'group'
 
   ok group.get('isLoaded'), 'group is loaded'
 
-test 'build an invitation', ->
+integrationTest 'build an invitation', ->
   invitation = Factory.create 'invitation',
     user: -> Factory.build 'user',
     meeting: -> Factory.build('meeting')
@@ -91,7 +91,7 @@ test 'build an invitation', ->
   ok invitation.get('user.isLoaded'), 'user is loaded'
   ok invitation.get('meeting.isLoaded'), 'meeting is loaded'
 
-test 'build a meeting', ->
+integrationTest 'build a meeting', ->
   meeting = Factory.create 'meeting',
     user: -> Factory.build 'user'
     users: -> [
@@ -102,14 +102,14 @@ test 'build a meeting', ->
   ok meeting.get('isLoaded'), 'meeting is loaded'
   equal meeting.get('users.length'), 2, 'meeting users loaded'
 
-test 'build a notification', ->
+integrationTest 'build a notification', ->
   notification = Factory.create 'notification'
 
   ok notification.get('isLoaded'), 'notification is loaded'
   ok notification.get('reference.isLoaded'), 'notification reference is loaded'
   equal notification.get('reference.type'), 'todo', 'correct polymorphic type added'
 
-test 'build a phone call', ->
+integrationTest 'build a phone call', ->
   phone_call = Factory.create 'phone_call'
 
   ok phone_call.get('isLoaded'), 'phone call is loaded'
@@ -118,7 +118,7 @@ test 'build a phone call', ->
   ok phone_call.get('from.isLoaded'), 'phone call from is loaded'
   equal phone_call.get('from').constructor, Radium.Contact, 'phone call from type correct'
 
-test 'build a reminder', ->
+integrationTest 'build a reminder', ->
   reminder = Factory.create 'reminder'
     reference:
       id: -> Factory.build 'todo'
@@ -128,13 +128,13 @@ test 'build a reminder', ->
   ok reminder.get('isLoaded'), 'reminder is loaded'
   ok reminder.get('reference.isLoaded'), 'polymorphic added'
 
-test 'builds an sms', ->
+integrationTest 'builds an sms', ->
   sms = Factory.create 'sms'
 
   ok sms.get('isLoaded'), 'sms is loaded'
   ok sms.get('sender.isLoaded'), 'sender is loaded'
 
-test 'builds a message', ->
+integrationTest 'builds a message', ->
   message = Factory.create 'message'
 
   ok message.get('isLoaded'), 'message is loaed'

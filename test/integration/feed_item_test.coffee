@@ -27,13 +27,12 @@ integrationTest 'todos appear in the feed', ->
 
   assertEmptyFeed()
 
-  section = $W.Factory.create 'feed_section'
-  todo = $W.Factory.create 'todo',
+  section = Factory.create 'feed_section'
+  todo = Factory.create 'todo',
           description: 'Finish programming radium'
 
-  $W.Ember.run ->
-    console.log $A.get('router')
-    $A.get('router.feedController').pushItem todo
+  app ->
+    Radium.get('router.feedController').pushItem todo
 
   feedSelector = ".feed_section_#{section.get('id')}"
 

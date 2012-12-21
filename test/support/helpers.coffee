@@ -44,5 +44,3 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
-window.app = (code) ->
-  Ember.run code
