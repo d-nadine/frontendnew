@@ -1,3 +1,9 @@
+window.click = (object) ->
+  if object.hasOwnProperty 'click'
+    object.click()
+  else
+    $F(object).click()
+
 window.fillIn = (selector, text) ->
   # keyup with any char to trigger bindings sync
   event = jQuery.Event("keyup")

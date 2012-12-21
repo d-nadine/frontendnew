@@ -6,7 +6,7 @@ integrationTest 'adding a meeting shows it in the feed', ->
   assertEmptyFeed()
 
   waitForSelector '.filters .add-meeting', (el) ->
-    el.click()
+    click el
 
     waitForSelector '#form-container', (el) ->
       meetingDate = Ember.DateTime.create().advance(day: 7)
@@ -14,7 +14,7 @@ integrationTest 'adding a meeting shows it in the feed', ->
       fillIn '#start-date', meetingDate.toDateFormat()
       fillIn '#description', 'New meeting'
 
-      $F('.btn-success').click()
+      click '.btn-success'
 
       feedSelector = ".feed_section_#{meetingDate.toDateFormat()}"
 
