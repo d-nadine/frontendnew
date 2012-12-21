@@ -85,17 +85,17 @@ integrationTest 'a feed can be filtered by feed type', ->
   assertEmptyFeed()
 
   section = Factory.create 'feed_section'
-    item_ids: [
-      ['todo', Factory.build('todo')]
-      ['todo', Factory.build('todo')]
-      ['todo', Factory.build('todo')]
-      ['deal', Factory.build('deal')]
-      ['deal', Factory.build('deal')]
-      ['campaign', Factory.build('campaign')]
-      ['meeting', Factory.build('meeting')]
-    ]
 
   app ->
+    for i in [0..2]
+      section.get('items').pushObject Factory.create 'todo'
+
+    for i in [0..1]
+      section.get('items').pushObject Factory.create 'deal'
+
+    section.get('items').pushObject Factory.create 'campaign'
+    section.get('items').pushObject Factory.create 'meeting'
+
     Radium.get('router.feedController.content').pushObject section
 
   waitForResource section, (el) ->
@@ -106,4 +106,3 @@ integrationTest 'a feed can be filtered by feed type', ->
     clickFilterAndAssertFeedItems 'campaign', 1
     clickFilterAndAssertFeedItems 'meeting', 1
     clickFilterAndAssertFeedItems 'all', 7
-
