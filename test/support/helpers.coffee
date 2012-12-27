@@ -44,11 +44,17 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
-window.waitForResource = (resource, callback, message) ->
-  id = resource.get('id')
-  type = resource.constructor
+window.domClass = (model) ->
+  id = model.get('id')
+  type = model.constructor
   selector = ".#{type.toString().split('.').pop().underscore()}_#{id}"
-  message ||= "Could not find #{type} with id of #{id} on page"
+
+window.waitForResource = (resource, callback, message) ->
+  selector = domClass(resource)
+  message ||= "#{selector} on page"
 
   waitForSelector selector, callback, message
 
+window.waitForFeedItem = (resource, callback, message) ->
+  selector = "#feed #{domClass(resource)}"
+  waitForSelector selector, callback, message
