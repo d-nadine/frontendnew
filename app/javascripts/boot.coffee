@@ -13,7 +13,4 @@
 
 require 'radium/app'
 
-require 'radium/populate'
-
 Radium.initialize()
-
