@@ -103,6 +103,19 @@ Radium.Router = Ember.Router.extend
   switchToUnauthenticated: Ember.State.transitionTo('unauthenticated.index')
   switchToAuthenticated: Ember.State.transitionTo('authenticated.index')
 
+  unauthenticated: Ember.Route.extend
+    index: Ember.Route.extend
+      route: '/'
+
+      connectOutlets: (router) ->
+        router.transitionTo('login')
+
+    login: Ember.Route.extend
+      route: '/login'
+
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('login')
+
   authenticated: Ember.Route.extend
     route: '/authenticated'
     index: Ember.Route.extend
@@ -122,19 +135,6 @@ Radium.Router = Ember.Router.extend
         path = router.get('lastAttemptedPath')
         if path && path != '/'
           router.route(path)
-
-  unauthenticated: Ember.Route.extend
-    index: Ember.Route.extend
-      route: '/'
-
-      connectOutlets: (router) ->
-        router.transitionTo('login')
-
-    login: Ember.Route.extend
-      route: '/login'
-
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('login')
 
   root: Ember.Route.extend
     initialState: 'dashboard'
