@@ -1,7 +1,7 @@
 Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   name: DS.attr('string')
   description: DS.attr('string')
-  closeBy: DS.attr('date')
+  closeBy: DS.attr('datetime')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'deal')
 
@@ -21,6 +21,10 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   isRejected: (->
     @get('state') is 'rejected'
   ).property('state')
+
+  feedDate: (->
+    @get('closeBy')
+  ).property('closeBy')
 
   ###
   Checks to see if the Deal has passed it's close by date.

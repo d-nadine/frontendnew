@@ -16,7 +16,7 @@ window.integrationTest = (testName, expected, callback) ->
       window.$F = $W.$
       window.Radium = $W.Radium
       window.Factory = $W.Factory
-      
+
       Radium.initialize()
 
       Radium.didBecomeCompletelyReady = ->
