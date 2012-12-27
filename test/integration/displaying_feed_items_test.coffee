@@ -1,7 +1,7 @@
 module 'Integration - Displaying Feed Items'
 
 integrationTest 'campaigns appear in the feed', ->
-  expect 3
+  expect 2
   assertEmptyFeed()
 
   campaign = Factory.create 'campaign'
@@ -9,12 +9,11 @@ integrationTest 'campaigns appear in the feed', ->
   app ->
     Radium.get('router.feedController').pushItem campaign
 
-  waitForFeedItem campaign, (el) ->
-    assertFeedItems 1
-    assertText el, campaign.get('name')
+  waitForFeedItem campaign, (feedItem) ->
+    assertText feedItem, campaign.get('name')
 
 integrationTest 'deals appear in the feed', ->
-  expect 3
+  expect 2
   assertEmptyFeed()
 
   deal = Factory.create 'deal'
@@ -22,12 +21,11 @@ integrationTest 'deals appear in the feed', ->
   app ->
     Radium.get('router.feedController').pushItem deal
 
-  waitForFeedItem deal, (el) ->
-    assertFeedItems 1
-    assertText el, deal.get('name')
+  waitForFeedItem deal, (feedItem) ->
+    assertText feedItem, deal.get('name')
 
 integrationTest 'meetings appear in the feed', ->
-  expect 3
+  expect 2
   assertEmptyFeed()
 
   meeting = Factory.create 'meeting'
@@ -35,12 +33,11 @@ integrationTest 'meetings appear in the feed', ->
   app ->
     Radium.get('router.feedController').pushItem meeting
 
-  waitForFeedItem meeting, (el) ->
-    assertFeedItems 1
-    assertText el, meeting.get('topic')
+  waitForFeedItem meeting, (feedItem) ->
+    assertText feedItem, meeting.get('topic')
 
 integrationTest 'todos appear in the feed', ->
-  expect 3
+  expect 2
   assertEmptyFeed()
 
   todo = Factory.create 'todo'
@@ -48,6 +45,5 @@ integrationTest 'todos appear in the feed', ->
   app ->
     Radium.get('router.feedController').pushItem todo
 
-  waitForFeedItem todo, (el) ->
-    assertFeedItems 1
-    assertText el, todo.get('description')
+  waitForFeedItem todo, (feedItem) ->
+    assertText feedItem, todo.get('description')
