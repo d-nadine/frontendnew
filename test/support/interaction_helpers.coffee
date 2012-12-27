@@ -30,3 +30,5 @@ window.clickFilter = (feedType, callback) ->
 
     callback()
 
+window.clickFeedItem = (feedItem) ->
+  $F(feedItem).find('.feed-header').click()

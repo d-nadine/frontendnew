@@ -1,4 +1,4 @@
-defaultTimeout = 500 
+defaultTimeout = 1000
 
 window.wait = (timeout, callback) ->
   timeout ||= defaultTimeout
@@ -57,4 +57,8 @@ window.waitForResource = (resource, callback, message) ->
 
 window.waitForFeedItem = (resource, callback, message) ->
   selector = "#feed #{domClass(resource)}"
-  waitForSelector selector, callback, message
+
+  callbackWithFeedItem = (feedItem) ->
+    callback(feedItem.parent())
+
+  waitForSelector selector, callbackWithFeedItem, message

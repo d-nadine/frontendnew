@@ -6,16 +6,12 @@ window.assertEmptyFeed = ->
   assertFeedItems 0, "Feed is empty"
 
 window.assertText = (element, text, callback) ->
-  elementText = element.text().replace(/[\n\s]+/g, ' ')
-
-  r = new RegExp(text)
-
-  if r.test(elementText)
+  if element.text().indexOf(text) != -1
     ok true, "\"#{element.text()}\" should say \"#{text}\""
   else
     ok false, """
-      "#{text}" should exist in this html:
-      #{element.html()}
+      "#{text}" should exist in this text:
+      #{element.text()}
     """
 
 window.clickFilterAndAssertFeedItems = (filterType, expected) ->

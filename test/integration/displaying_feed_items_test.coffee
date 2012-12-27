@@ -1,7 +1,7 @@
 module 'Integration - Displaying Feed Items'
 
 integrationTest 'campaigns appear in the feed', ->
-  expect 2
+  expect 3
   assertEmptyFeed()
 
   campaign = Factory.create 'campaign'
@@ -12,8 +12,14 @@ integrationTest 'campaigns appear in the feed', ->
   waitForFeedItem campaign, (feedItem) ->
     assertText feedItem, campaign.get('name')
 
+    clickFeedItem feedItem
+
+    fillInAndPressEnter $F('.new-comment', feedItem), 'Test Comment'
+
+    assertText feedItem, 'Test Comment'
+
 integrationTest 'deals appear in the feed', ->
-  expect 2
+  expect 3
   assertEmptyFeed()
 
   deal = Factory.create 'deal'
@@ -24,8 +30,14 @@ integrationTest 'deals appear in the feed', ->
   waitForFeedItem deal, (feedItem) ->
     assertText feedItem, deal.get('name')
 
+    clickFeedItem feedItem
+
+    fillInAndPressEnter $F('.new-comment', feedItem), 'Test Comment'
+
+    assertText feedItem, 'Test Comment'
+
 integrationTest 'meetings appear in the feed', ->
-  expect 2
+  expect 3
   assertEmptyFeed()
 
   meeting = Factory.create 'meeting'
@@ -36,8 +48,14 @@ integrationTest 'meetings appear in the feed', ->
   waitForFeedItem meeting, (feedItem) ->
     assertText feedItem, meeting.get('topic')
 
+    clickFeedItem feedItem
+
+    fillInAndPressEnter $F('.new-comment', feedItem), 'Test Comment'
+
+    assertText feedItem, 'Test Comment'
+
 integrationTest 'todos appear in the feed', ->
-  expect 2
+  expect 3
   assertEmptyFeed()
 
   todo = Factory.create 'todo'
@@ -47,3 +65,9 @@ integrationTest 'todos appear in the feed', ->
 
   waitForFeedItem todo, (feedItem) ->
     assertText feedItem, todo.get('description')
+
+    clickFeedItem feedItem
+
+    fillInAndPressEnter $F('.new-comment', feedItem), 'Test Comment'
+
+    assertText feedItem, 'Test Comment'
