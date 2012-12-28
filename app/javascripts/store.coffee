@@ -1,4 +1,4 @@
-require 'radium/lib/adapter'
+require 'radium/adapters/fixture_adapter'
 
 Radium.Store = DS.Store.extend
   revision: 9

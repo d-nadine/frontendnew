@@ -1,4 +1,4 @@
-Radium.Serializer = DS.RESTSerializer.extend
+Radium.FixtureSerializer = DS.RESTSerializer.extend
   init: ->
     @_super.apply(this, arguments)
     for name, transform of Radium.transforms

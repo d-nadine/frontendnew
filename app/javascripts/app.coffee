@@ -12,7 +12,6 @@ window.Radium = Radium
 require 'foundry'
 require 'ember/datetime'
 
-require 'radium/lib/store'
 require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
 require 'radium/lib/expandable_record_array'
@@ -23,6 +22,8 @@ require 'radium/lib/filterable_mixin'
 require 'radium/lib/filtered_array'
 require 'radium/lib/groupable'
 require 'radium/lib/limit_support'
+
+require 'radium/store'
 
 require 'radium/router'
 
