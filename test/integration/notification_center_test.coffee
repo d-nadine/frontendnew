@@ -1,18 +1,8 @@
 module 'Integration - Notification Center'
 
-# FIXME: The setup for this test is ABSOLUTELY unacceptable.
-# I don't know why this group nonsense is required. It 
-# is not related to the test in anyway. Seems this is the only
-# way to to get things to work
 integrationTest 'assigned todo notifications', ->
-  group = Factory.create 'group'
-    name: 'Product 1 group'
-
   todo = Factory.create 'todo'
     description: 'schedule group meeting'
-    reference:
-      id: -> group
-      type: 'group'
 
   notification = Factory.create 'notification'
     reference:
