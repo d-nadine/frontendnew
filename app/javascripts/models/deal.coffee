@@ -6,7 +6,7 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo', inverse: 'deal')
 
   # Can be `pending`, `closed`, `paid`, `rejected`
-  state: DS.attr('dealState')
+  state: DS.attr('string')
   isPublic: DS.attr('boolean')
   user: DS.belongsTo('Radium.User')
   isPending: (->

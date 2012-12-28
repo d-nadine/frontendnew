@@ -12,7 +12,6 @@ window.Radium = Radium
 require 'foundry'
 require 'ember/datetime'
 
-require 'radium/lib/transforms'
 require 'radium/lib/store'
 require 'radium/lib/inflector'
 require 'radium/lib/polymorphic'
