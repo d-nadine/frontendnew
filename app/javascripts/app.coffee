@@ -10,7 +10,10 @@ Radium = Em.Application.create
 window.Radium = Radium
 
 require 'foundry'
+
 require 'ember/datetime'
+require 'ember/filterable_mixin'
+
 require 'string/inflector'
 
 require 'radium/lib/polymorphic'
@@ -18,7 +21,6 @@ require 'radium/lib/expandable_record_array'
 require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
-require 'radium/lib/filterable_mixin'
 require 'radium/lib/filtered_array'
 require 'radium/lib/groupable'
 require 'radium/lib/limit_support'
