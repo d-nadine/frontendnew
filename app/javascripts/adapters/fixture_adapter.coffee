@@ -17,7 +17,8 @@ Radium.FixtureAdapter = DS.FixtureAdapter.extend
     else
       throw new Error("Implement #{queryMethod} to query #{type}!")
 
-  # TODO: fix queryFixtures in ember-data to pass type
+  # TODO: this can go when upgrading to revision 10
+  # https://github.com/emberjs/data/commit/23d40fb72fd600c39f10e9899e545ce8d78dd076
   findQuery: (store, type, query, array) ->
     fixtures = @fixturesForType(type)
 
