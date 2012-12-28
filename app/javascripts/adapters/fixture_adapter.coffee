@@ -1,8 +1,5 @@
 require 'radium/adapters/fixture_adapter/fixture_serializer'
 
-# TODO: this changes should be done only
-#       for API adapter, in FixtureAdapter
-#       we could just use resulting keys
 Radium.FixtureAdapter = DS.FixtureAdapter.extend
   simulateRemoteResponse: false
   dirtyRecordsForHasManyChange: Ember.K
