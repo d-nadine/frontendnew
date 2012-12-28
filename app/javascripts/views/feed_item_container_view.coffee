@@ -1,3 +1,5 @@
+noOp = Ember.Mixin.create()
+
 Radium.FeedItemContainerView = Em.ContainerView.extend
   classNames: ['feed-item-container', 'row']
   classNameBindings: ['expanded']
@@ -14,10 +16,7 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
     @set 'feedDetailsContainer', feedDetailsContainer
 
-    mixin = if type == 'todo'
-      Radium.TodoViewMixin
-    else
-      Radium.Noop
+    mixin = if type is 'todo' then Radium.TodoViewMixin else noOp
 
     view = Radium.FeedItemView.create mixin,
       contentBinding: 'parentView.content'
