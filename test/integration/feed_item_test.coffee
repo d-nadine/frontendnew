@@ -15,30 +15,6 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
     assertFeedItems 0
     assertText el, '9 todos'
 
-integrationTest 'comment can be added to feed item', ->
-  expect(2)
-
-  section = Factory.create 'feed_section'
-  todo = Factory.create 'todo'
-
-  app ->
-    Radium.get('router.feedController').pushItem todo
-
-  waitForResource todo, (el) ->
-    click el
-
-    waitForSelector ['.comments', el.parent()], (commentsContainer) ->
-      textArea = $('.new-comment', commentsContainer)
-      ok textArea.length, "Comments box missing"
-
-      fillInAndPressEnter(textArea, "Bravo!")
-
-      comments = $('.comments', commentsContainer)
-      condition = -> comments.length == 2
-
-      waitForSelector ".comment-text", (coms)->
-        assertText coms, "Bravo!"
-
 integrationTest 'a feed can be filtered by feed type', ->
   expect(7)
 
