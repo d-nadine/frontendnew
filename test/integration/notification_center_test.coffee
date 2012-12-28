@@ -15,6 +15,8 @@ integrationTest 'assigned todo notifications', ->
   app ->
     Radium.get('router.feedController').pushItem todo
 
+  assertNotifications 1
+
   click '.notifications-link'
 
   waitForSelector "#notifications", (notificationCenter) ->

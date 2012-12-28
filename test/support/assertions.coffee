@@ -30,3 +30,7 @@ window.assertScrollingFeedHasDate = (controller, daysToJump, direction) ->
 
 window.assertSelector = (selector, message) ->
   ok $F(selector).length > 0, "#{selector} exists"
+
+window.assertNotifications = (count) ->
+  waitForSelector '.notifications-link', (link) ->
+    equal link.text(), count.toString()
