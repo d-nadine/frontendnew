@@ -1,16 +1,8 @@
 require 'radium/lib/adapter'
 require 'radium/lib/serializer'
 
-storeCounter = 0
 Radium.Store = DS.Store.extend
   revision: 9
-
-  init: ->
-    ++storeCounter
-
-    throw new Error("Cannot have more than one store") if storeCounter > 1
-
-    @_super.apply @, arguments
 
   expandableArrayFor: (type) ->
     recordArray = Radium.ExpandableRecordArray.create
