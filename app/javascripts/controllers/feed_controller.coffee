@@ -115,18 +115,19 @@ Radium.FeedController = Em.ArrayController.extend
     # since we need to get feed section for given date from the API,
     # we need to be sure that item is already added to a server
     addItem = ->
-      if !item.get('isNew')
-        section = Radium.FeedSection.find date
+      return if item.get('isNew')
 
-        sections = self.get 'content'
-        sections.loadRecord section
+      section = Radium.FeedSection.find date
 
-        section.pushItem(item)
+      sections = self.get 'content'
+      sections.loadRecord section
 
-        Radium.Utils.scrollWhenLoaded sections, item.get('domClass'), ->
-          $(".#{item.get('domClass')}").effect("highlight", {}, 1000)
+      section.pushItem(item)
 
-        item.removeObserver 'isNew', addItem
+      Radium.Utils.scrollWhenLoaded sections, item.get('domClass'), ->
+        $(".#{item.get('domClass')}").effect("highlight", {}, 1000)
+
+      item.removeObserver 'isNew', addItem
 
     if item.get('isNew')
       item.addObserver 'isNew', addItem
