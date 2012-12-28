@@ -28,4 +28,5 @@ window.assertScrollingFeedHasDate = (controller, daysToJump, direction) ->
   waitForSelector ".feed_section_#{dateToTestFor.toDateFormat()}", (el) ->
     assertText el, dateToTestFor.toFormattedString('%A, %B %D, %Y')
 
-
+window.assertSelector = (selector, message) ->
+  ok $F(selector).length > 0, "#{selector} exists"

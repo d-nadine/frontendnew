@@ -1,4 +1,4 @@
-defaultTimeout = 1000
+defaultTimeout = 3000
 
 window.wait = (timeout, callback) ->
   timeout ||= defaultTimeout
