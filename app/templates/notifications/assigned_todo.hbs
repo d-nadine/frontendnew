@@ -1,4 +1,4 @@
 {{! FIXME: Why is this "view" and not content }}
 {{#with view.reference}}
-  Todo {{description}} has been assigned to you.
+  Todo <a {{action expandFeedItem this}}>{{description}}</a> has been assigned to you.
 {{/with}}

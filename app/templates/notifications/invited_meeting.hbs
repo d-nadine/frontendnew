@@ -1,6 +1,6 @@
 {{#with view.reference.meeting}}
   {{#if isLoaded}}
-    Meeting invitation for "{{topic}}"
+    Invited to meeting: <a {{action expandFeedItem this}}>{{topic}}</a>
     {{#if location}}
       @ {{location}}
     {{/if}}

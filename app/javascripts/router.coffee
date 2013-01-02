@@ -137,6 +137,9 @@ Radium.Router = Ember.Router.extend
           router.route(path)
 
   root: Ember.Route.extend
+    expandFeedItem: (router, event) ->
+      router.get('feedController').expandFeedItem event.context
+
     initialState: 'dashboard'
 
     dashboard: Ember.Route.extend

@@ -73,11 +73,11 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
   expandedItemDidChange: (->
     if @get('expandedItem') == @get('content') && @get('currentView.insertedElement')
-      self = this
-      Ember.run.next ->
-        Radium.Utils.scroll self.get('currentView').$(), ->
-          self.set 'expanded', true
-          self.set 'expandedItem', null
-          Ember.run.next ->
-            self.get('controller').enableScroll()
+      @get('currentView').$().ScrollTo
+        duration: 300
+        offsetTop: 100
+        callback: =>
+          @set 'expanded', true
+          @set 'expandedItem', null
+          @get('controller').enableScroll()
   ).observes('expandedItem', 'currentView.insertedElement')
