@@ -32,3 +32,6 @@ window.clickFilter = (feedType, callback) ->
 
 window.clickFeedItem = (feedItem) ->
   $F(feedItem).find('.feed-header').click()
+
+window.openNotifications = ->
+  click '.notifications-link'

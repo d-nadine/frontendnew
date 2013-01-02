@@ -17,7 +17,7 @@ integrationTest 'assigned todo notifications', ->
 
   assertNotifications 1
 
-  click '.notifications-link'
+  openNotifications()
 
   waitForSelector "#notifications", (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
