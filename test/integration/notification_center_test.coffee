@@ -103,6 +103,102 @@ integrationTest 'todo assignments appear', ->
     waitForSelector '.feed-info', ->
       ok true, 'Feed item expanded'
 
+integrationTest 'cancelled meeting notifications', ->
+  meeting = Factory.create 'meeting'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> meeting
+      type: 'meeting'
+    tag: 'cancelled.meeting'
+
+  # FIXME: having to manually push onto the feed controller
+  # after items are created seems like an anti pattern
+  app ->
+    Radium.get('router.feedController').pushItem meeting
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, meeting.get('topic')
+
+    clickNotification notification
+
+    waitForSelector '.feed-info', ->
+      ok true, 'Feed item expanded'
+
+integrationTest 'confirmed meeting notifications', ->
+  meeting = Factory.create 'meeting'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> meeting
+      type: 'meeting'
+    tag: 'confirmed.meeting'
+
+  # FIXME: having to manually push onto the feed controller
+  # after items are created seems like an anti pattern
+  app ->
+    Radium.get('router.feedController').pushItem meeting
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, meeting.get('topic')
+
+    clickNotification notification
+
+    waitForSelector '.feed-info', ->
+      ok true, 'Feed item expanded'
+
+integrationTest 'rejected meeting notifications', ->
+  meeting = Factory.create 'meeting'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> meeting
+      type: 'meeting'
+    tag: 'rejected.meeting'
+
+  # FIXME: having to manually push onto the feed controller
+  # after items are created seems like an anti pattern
+  app ->
+    Radium.get('router.feedController').pushItem meeting
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, meeting.get('topic')
+
+    clickNotification notification
+
+    waitForSelector '.feed-info', ->
+      ok true, 'Feed item expanded'
+
+integrationTest 'rescheduled meeting notifications', ->
+  meeting = Factory.create 'meeting'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> meeting
+      type: 'meeting'
+    tag: 'rescheduled.meeting'
+
+  # FIXME: having to manually push onto the feed controller
+  # after items are created seems like an anti pattern
+  app ->
+    Radium.get('router.feedController').pushItem meeting
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, meeting.get('topic')
+
+    clickNotification notification
+
+    waitForSelector '.feed-info', ->
+      ok true, 'Feed item expanded'
+
 integrationTest 'reminder notifications', ->
   todo = Factory.create 'todo'
 

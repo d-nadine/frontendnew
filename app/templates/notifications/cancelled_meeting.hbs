@@ -1,1 +1,3 @@
-{{view.reference.topic}} @ {{view.reference.location}} is cancelled.
+{{#with view.reference}}
+  <a {{action expandFeedItem this}}>{{topic}}</a> @ {{location}} is cancelled.
+{{/with}}
