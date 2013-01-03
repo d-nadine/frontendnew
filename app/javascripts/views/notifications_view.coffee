@@ -3,7 +3,6 @@ Radium.NotificationsView = Ember.View.extend
   controllerBinding: 'Radium.router.notificationsController'
   contentBinding: 'controller'
   remindersBinding: 'controller.reminders'
-  messagesBinding: 'controller.messages'
   notificationGroupsBinding: 'controller.notificationGroups'
   elementId: 'notifications'
 
@@ -42,14 +41,6 @@ Radium.NotificationsView = Ember.View.extend
       description: (->
         @get('reference.topic') || @get('reference.description')
       ).property('reference.topic', 'reference.description')
-
-  messagesListView:  Ember.CollectionView.extend
-    contentBinding: 'parentView.messages'
-    tagName: 'ul'
-    elementId: 'messages'
-    itemViewClass: Em.View.extend
-      templateName: 'radium/message'
-      layoutName: 'radium/layouts/notification_panel_item'
 
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'
