@@ -1,7 +1,6 @@
 Radium.Campaign = Radium.Core.extend Radium.CommentsMixin,
-  isEditable: true
   name: DS.attr('string')
-  endsAt: DS.attr('date')
+  endsAt: DS.attr('datetime')
   currency: DS.attr('string')
   target: DS.attr('number')
   isPublic: DS.attr('boolean')
@@ -11,3 +10,7 @@ Radium.Campaign = Radium.Core.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo', inverse: 'campaign')
 
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
+
+  feedDate: (->
+    @get('endsAt')
+  ).property('endsAt')

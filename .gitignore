@@ -6,3 +6,4 @@ deploy.log
 .sass-cache
 vendor/ember.js
 vendor/data
+test_site/

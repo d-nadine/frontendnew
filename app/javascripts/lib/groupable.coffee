@@ -31,10 +31,10 @@ Radium.Groupable = Em.Mixin.create
     @set 'groupsMap', groupsMap
     @set 'groups',    groups
 
-    self = this
-    collection.forEach (object) ->
-      group = @groupFor object
-      group.get('content').pushObject object
+    collection.forEach ((object) ->
+      group = @groupFor(object)
+      group.get("content").pushObject object
+    ), this
 
     groups
 

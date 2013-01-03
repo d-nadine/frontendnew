@@ -63,12 +63,12 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
 
       @set 'justRendered', true
 
-    willDestroyElement: ->
-      @_super.apply this, arguments
+    # willDestroyElement: ->
+    #   @_super.apply this, arguments
 
-      if @get('parentView.content.firstObject') == @get('content')
-        scroll = document.body.scrollTop - this.$().height() - 2
-        window.scrollTo 0, scroll
+    #   if @get('parentView.content.firstObject') == @get('content')
+    #     scroll = document.body.scrollTop - this.$().height() - 2
+    #     window.scrollTo 0, scroll
 
     adjustScroll: ->
       return unless @get 'controller.loadingAdditionalFeedItems'

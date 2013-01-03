@@ -19,13 +19,13 @@ findNearBy = (date) ->
     Radium.get('currentFeedController').findRelatedSection nearBy
 
 jumpToDate = (date) ->
-  jumpTo date: date.toFormattedString('%Y-%m-%d')
+  jumpTo date: date.toDateFormat()
 
 jumpTo = (query) ->
   query   ?= {}
 
-  if query.date && query.date.toFormattedString
-    query.date = query.date.toFormattedString('%Y-%m-%d')
+  if query.date && query.date.toDateFormat
+    query.date = query.date.toDateFormat()
 
   if query.date && (section = sectionLoaded(query.date))
     if !query.disableScroll
@@ -34,8 +34,7 @@ jumpTo = (query) ->
     if !query.disableScroll
       Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
   else
-    console.log 'bla'
-    sections = Radium.store.expandableArrayFor Radium.FeedSection
+    sections = Radium.get('router.store').expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 
     if query.calendar
@@ -64,7 +63,7 @@ jumpTo = (query) ->
     Radium.set 'currentFeedController.currentDate', Ember.DateTime.create()
 
 Radium.Router = Ember.Router.extend
-  location: 'history'
+  location: 'none'
   enableLogging: true
   initialState: 'loading'
 
@@ -79,13 +78,12 @@ Radium.Router = Ember.Router.extend
 
   showDate: Ember.Route.transitionTo('root.dashboardWithDate')
 
-  jumpTo: ->
-    jumpTo.apply this, arguments
-
   init: ->
     @_super()
+    @set('user', 'foo')
 
-    @set('meController', Radium.MeController.create())
+  jumpTo: ->
+    jumpTo.apply this, arguments
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -96,19 +94,14 @@ Radium.Router = Ember.Router.extend
     # TODO: fix when ember is updated
     routePath: (router, path) ->
       router.set('lastAttemptedPath', path)
-      router.get('meController').fetch()
+
+      if router.get('user')
+        router.transitionTo('authenticated.index')
+      else
+        router.transitionTo('unauthenticated.index')
 
   switchToUnauthenticated: Ember.State.transitionTo('unauthenticated.index')
   switchToAuthenticated: Ember.State.transitionTo('authenticated.index')
-
-  authenticated: Ember.Route.extend
-    index: Ember.Route.extend
-      connectOutlets: (router) ->
-        router.transitionTo('root')
-
-        path = router.get('lastAttemptedPath')
-        if path && path != '/'
-          router.route(path)
 
   unauthenticated: Ember.Route.extend
     index: Ember.Route.extend
@@ -123,17 +116,11 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('login')
 
-  root: Ember.Route.extend
-    initialState: 'dashboard'
-    connectOutlets: (router) ->
-      # TODO: I would have thought that going from one action in the root.
-      #       state to the other one would not trigger connectOutlets for
-      #       root, investigate why that happens and where to put things
-      #       that should be done only once, unless you changet the parent state
-      unless router.get('initialized')
-        usersController = Radium.UsersController.create()
-        usersController.set 'content', Radium.store.findAll(Radium.User)
-        router.set 'usersController', usersController
+  authenticated: Ember.Route.extend
+    route: '/authenticated'
+    index: Ember.Route.extend
+      connectOutlets: (router) ->
+        router.set 'usersController.content', router.get('store').findAll(Radium.User)
 
         router.get('applicationController').connectOutlet('main')
         router.get('applicationController').connectOutlet('topbar', 'topbar')
@@ -141,8 +128,16 @@ Radium.Router = Ember.Router.extend
         router.get('notificationsController').set('content', Radium.Notification.find())
         router.get('notificationsController').set('reminders', Radium.Reminder.find())
         router.get('notificationsController').set('messages', Radium.Message.find())
+        router.get('applicationController').connectOutlet('notifications', 'notifications')
 
-        router.set('initialized', true)
+        router.transitionTo('root')
+
+        path = router.get('lastAttemptedPath')
+        if path && path != '/'
+          router.route(path)
+
+  root: Ember.Route.extend
+    initialState: 'dashboard'
 
     dashboard: Ember.Route.extend
       route: '/'

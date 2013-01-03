@@ -13,5 +13,4 @@
 
 require 'radium/app'
 
-Radium.createApp()
-Radium.app.initialize()
+Radium.initialize()

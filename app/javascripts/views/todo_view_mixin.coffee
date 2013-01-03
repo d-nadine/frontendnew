@@ -16,6 +16,8 @@ Radium.TodoViewMixin = Ember.Mixin.create
       @_super.apply(this, arguments)
 
     todoValueDidChange: (->
+      self = this
+
       Ember.run.next ->
-        Radium.store.commit()
+        self.get('controller').commitTransaction()
     ).observes('checked')

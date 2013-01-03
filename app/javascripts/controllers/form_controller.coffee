@@ -6,5 +6,8 @@ Radium.FormController = Em.Object.extend
   pushItem: (item) ->
     Radium.get('router.feedController').pushItem(item)
 
+  createFeedItem: (type, item, ref) ->
+    Radium.get('router.feedController').createFeedItem(type, item, ref)
+
   close: ->
     @set 'type', null

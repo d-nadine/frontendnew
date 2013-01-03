@@ -11,11 +11,7 @@ Radium.DatePickerField = Ember.TextField.extend
       constrainInput: true
 
   willDestroyElement: ->
-    # jQuery UI doesn't seem to want to get rid of this
-    $('#ui-datepicker-div').hide()
-
-    # TODO: uncommenting next line causes an error, to investigate
-    # @$().datepicker 'destroy'
+    @$().datepicker 'destroy'
 
   focusOut: ->
     @_super()

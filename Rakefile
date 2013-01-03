@@ -1,29 +1,19 @@
 require 'bundler/setup'
-require File.expand_path("../application.rb", __FILE__)
+
+desc "Loads the app environment"
+task :environment do
+  require File.expand_path("../environment.rb", __FILE__)
+end
 
 namespace :assets do
   desc "Compiles the application"
-  task :precompile do
+  task :precompile => :environment do
     Iridium.application.compile
   end
 end
 
 desc "Compiles the application"
 task :compile => "assets:precompile"
-
-namespace :test do
-  desc "Run all tests"
-  task :all do
-    sh "bundle exec iridium test"
-  end
-
-  desc "Run all tests in debugging mode"
-  task :debug do
-    sh "bundle exec iridium test --log-level=info"
-  end
-end
-
-task :test => 'test:all'
 
 namespace :build do
   vendor_path = File.expand_path "../vendor/", __FILE__
@@ -72,5 +62,19 @@ end
 
 desc "Print all annotations (TODO,FIXME,NOTE,OPTIMIZE etc)"
 task :notes => "notes:all"
+
+namespace :test do
+  desc "Compile tests and run them through phantom"
+  task :all do 
+    sh "bundle exec iridium test"
+  end
+
+  desc "Print console.log to stdout during tests"
+  task :debug do 
+    sh "bundle exec iridium test --debug"
+  end
+end
+
+task :test => 'test:all'
 
 task :default => :test

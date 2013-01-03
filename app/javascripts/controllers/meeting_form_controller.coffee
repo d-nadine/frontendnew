@@ -81,8 +81,6 @@ Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
       date = date.adjust(hour: time.get('hour'), minute: time.get('minute'))
   ).property('endsAt', 'endsAtDate')
 
-
-
   createMeeting: (data)  ->
     topic    = @get 'topicValue'
     startsAt = @get 'startsAtValue'
@@ -93,9 +91,9 @@ Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
       startsAt: startsAt
       endsAt:   endsAt
 
-    meeting = Radium.store.createRecord Radium.Meeting, data
+    meeting = Radium.Meeting.createRecord data
+    meeting.store.commit()
     @pushItem meeting
-    Radium.store.commit()
 
   close: ->
     Radium.get('router.formController').close()

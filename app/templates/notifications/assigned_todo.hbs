@@ -1,1 +1,4 @@
-Todo {{todo.description}} has been assigned to you.
+{{! FIXME: Why is this "view" and not content }}
+{{#with view.reference}}
+  Todo {{description}} has been assigned to you.
+{{/with}}

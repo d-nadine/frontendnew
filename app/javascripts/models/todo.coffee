@@ -1,7 +1,5 @@
 Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
-  isEditable: true
-  hasAnimation: false
-  kind: DS.attr('todoKind')
+  kind: DS.attr('string')
   description: DS.attr('string')
   finishBy: DS.attr('datetime')
   finished: DS.attr('boolean')

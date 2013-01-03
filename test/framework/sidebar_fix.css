@@ -1,0 +1,20 @@
+/* 
+ * FIXME: Put the qunit results above everything else until the
+ * annoying application css can be sorted to work inside a div
+ * instead of the entire window
+ *
+ */
+#qunit {
+  z-index: 1000;
+  position: relative;
+}
+
+#application {
+  height: 400px;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 300px;
+}

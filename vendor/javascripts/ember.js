@@ -11716,7 +11716,6 @@ Ember.Application = Ember.Namespace.extend(
 
     this.ready();
 
-
     router = get(this, 'router');
 
     this.createApplicationView(router);
@@ -11724,6 +11723,7 @@ Ember.Application = Ember.Namespace.extend(
     if (router && router instanceof Ember.Router) {
       this.startRouting(router);
     }
+
   },
 
   createApplicationView: function (router) {

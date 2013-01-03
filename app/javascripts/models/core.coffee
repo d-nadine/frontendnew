@@ -9,7 +9,6 @@ Radium.Core = DS.Model.extend
   type: (->
     Radium.Core.typeToString(@constructor)
   ).property()
-  strTypeBinding: 'type'
 
   domClass: (->
     "#{@get('type')}_#{@get('id')}"
@@ -33,8 +32,9 @@ Radium.Core.reopenClass
   typeToString: (type) ->
     type.toString().split('.').slice(-1)[0].underscore()
 
+  #TODO remove from the model
   isInStore: (id, store)->
-    store ?= Radium.store
+    store ?= Radium.get('router.store')
     store.isInStore this, id
 
   polymorphicAssociationsByName: Ember.computed( ->

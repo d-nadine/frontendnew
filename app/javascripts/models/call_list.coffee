@@ -1,5 +1,4 @@
 Radium.CallList = Radium.Core.extend Radium.CommentsMixin,
-  isEditable: true
   description: DS.attr("string")
   user: DS.belongsTo("Radium.User")
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')

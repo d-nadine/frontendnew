@@ -1,48 +1,36 @@
-window.Radium = Em.Namespace.create
-  createApp: ->
-    app = Radium.App.create rootElement: $('#application')
-    $.each Radium, (key, value) ->
-      app[key] = value if value && value.isClass && key != 'constructor'
+Radium = Em.Application.create
+  autoinit: false
+  rootElement: '#application'
+  didBecomeCompletelyReady: Ember.K
+  didBecomeReady: ->
+    @_super.apply @, arguments
 
-    @app   = app
-    @store = app.store
+    @didBecomeCompletelyReady()
 
-Radium.App = Em.Application.extend
-  initialize: ->
-    router = Radium.Router.create()
-    Radium.set('router', router)
-    @_super(router)
+window.Radium = Radium
 
-  init: ->
-    @_super()
-    @store = Radium.Store.create()
-    @set('_api', $.cookie('user_api_key'))
+require 'foundry'
 
-$.ajaxSetup
-  dataType: 'json'
-  contentType: 'application/json'
-  headers:
-    'X-Radium-User-API-Key': Radium.get('_api')
-    'Accept': 'application/json'
+require 'ember/datetime'
+require 'ember/filterable_mixin'
 
-require 'radium/lib/transforms'
-require 'radium/lib/store'
-require 'radium/lib/inflector'
+require 'string/inflector'
+
 require 'radium/lib/polymorphic'
 require 'radium/lib/expandable_record_array'
 require 'radium/lib/extended_record_array'
 require 'radium/lib/clustered_record_array'
 require 'radium/lib/utils'
-require 'radium/lib/filterable_mixin'
 require 'radium/lib/filtered_array'
 require 'radium/lib/groupable'
 require 'radium/lib/limit_support'
+
+require 'radium/store'
 
 require 'radium/router'
 
 require 'radium/mixins/views/slider'
 require 'radium/mixins/views/time_picker'
-require 'radium/mixins/noop'
 require 'radium/mixins/infinite_scroller'
 require 'radium/mixins/filtered_collection_mixin'
 require 'radium/mixins/filtered_contacts_mixin'
@@ -83,7 +71,6 @@ require 'radium/models/message'
 require 'radium/models/invitation'
 
 require 'radium/controllers/application_controller'
-require 'radium/controllers/me_controller'
 require 'radium/controllers/login_controller'
 require 'radium/controllers/main_controller'
 require 'radium/controllers/feed_controller'
@@ -152,4 +139,4 @@ require 'radium/views/contact_card_container_view'
 require 'radium/views/contact_card_view'
 require 'radium/views/contacts_toolbar_view'
 
-require 'radium/fixtures'
+require 'radium/factories'

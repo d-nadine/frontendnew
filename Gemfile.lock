@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/livingsocial/rake-pipeline.git
-  revision: ae0795842a8958934d872a005d18b16161aa05fe
+  revision: 50b8d77b703c96539a433ee53a680c43542aaa75
   specs:
     rake-pipeline (0.8.0)
       json
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 5050ce899c668ae38b56b318fc5809e9304684bd
+  revision: 11dc34ba66f19934d99bb4bf0be2a9daa5685bec
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -58,7 +58,7 @@ GEM
     activesupport (3.2.9)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    barber (0.1.2)
+    barber (0.1.3)
       execjs
     chunky_png (1.2.6)
     coffee-script (2.2.0)
@@ -81,14 +81,14 @@ GEM
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
-    multi_json (1.4.0)
+    multi_json (1.5.0)
     open4 (1.3.0)
     rack (1.4.1)
-    rack-rewrite (1.3.1)
+    rack-rewrite (1.3.2)
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.10.0)
-    rake (0.9.5)
+    rake (0.9.6)
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
@@ -104,7 +104,7 @@ GEM
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
-    unicorn (4.4.0)
+    unicorn (4.5.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
