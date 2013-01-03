@@ -1,1 +1,3 @@
-<a href=\"/deals/{{unbound deal.id}}\">{{deal.name}}</a> has been assigned to you.
+{{#with view.reference}}
+  <a {{action expandFeedItem this}}>{{name}}</a> assigned to you.
+{{/with}}

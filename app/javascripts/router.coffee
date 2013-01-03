@@ -190,7 +190,6 @@ Radium.Router = Ember.Router.extend
 
       group: Ember.Route.extend
         route: '/:group_id'
-        initialState: 'index'
 
         deserialize: (router, params) ->
           params.group_id = parseInt(params.group_id)
@@ -198,9 +197,6 @@ Radium.Router = Ember.Router.extend
 
         connectOutlets: (router, group) ->
           jumpTo(type: 'group', id: group.get('id'))
-
-        index: Ember.Route.extend
-          route: '/'
 
         showDate: Ember.Route.transitionTo('withDate')
 

@@ -25,8 +25,13 @@ Radium.NotificationItemView = Ember.ContainerView.extend
   itemViewClass: Ember.View.extend
     tagName: 'div'
     layoutName: 'radium/layouts/notification_panel_item'
+    attributeBindings: ['dataNotificationId:data-notification-id']
     referenceBinding: 'content.reference'
 
     isMeetingInvite: (->
       @get('content.tag') == 'invited.meeting'
     ).property('content.tag')
+
+    dataNotificationId: (->
+      @get('content.id')
+    ).property('content')

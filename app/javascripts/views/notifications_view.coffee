@@ -29,18 +29,19 @@ Radium.NotificationsView = Ember.View.extend
     tagName: 'ul'
     elementId: 'reminders'
     itemViewClass: Em.View.extend
+      attributeBindings: ['dataReminderId:data-reminder-id']
       templateName: 'radium/reminder'
       layoutName: 'radium/layouts/notification_panel_item'
       referenceBinding: 'content.reference'
       dateBinding: 'reference.feedDate'
 
+      dataReminderId: (->
+        @get('content.id')
+      ).property('content')
+
       description: (->
         @get('reference.topic') || @get('reference.description')
       ).property('reference.topic', 'reference.description')
-
-      click: ->
-        reference = @get 'content.reference'
-        Radium.Utils.showItem reference
 
   messagesListView:  Ember.CollectionView.extend
     contentBinding: 'parentView.messages'

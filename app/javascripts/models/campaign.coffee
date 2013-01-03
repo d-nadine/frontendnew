@@ -8,6 +8,7 @@ Radium.Campaign = Radium.Core.extend Radium.CommentsMixin,
   contacts: DS.hasMany('Radium.Contact')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'campaign')
+  notifications: DS.hasMany('Radium.Notification', inverse: 'reference')
 
   associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
 

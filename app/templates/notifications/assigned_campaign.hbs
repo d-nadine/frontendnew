@@ -1,1 +1,3 @@
-<a href=\"/campaigns/{{unbound campaign.id}}\">{{campaign.name}}</a> has been assigned to you.
+{{#with view.reference}}
+  <a {{action showCampaign this href=true}}>{{name}}</a> assigned to you.
+{{/with}}

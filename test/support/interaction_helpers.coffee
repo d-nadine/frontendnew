@@ -35,3 +35,9 @@ window.clickFeedItem = (feedItem) ->
 
 window.openNotifications = ->
   click '.notifications-link'
+
+window.clickNotification = (notification) ->
+  click "div[data-notification-id=\"#{notification.get('id')}\"] .content a"
+
+window.clickReminder = (reminder) ->
+  click "li[data-reminder-id=\"#{reminder.get('id')}\"] .content a"
