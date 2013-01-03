@@ -7,5 +7,5 @@ Radium.InboxSidebarController = Em.ArrayController.extend
 
     @set('active', @get('firstObject'))
     @set('firstObject.isActive', true)
+    Radium.get('router').transitionTo('root.inbox.email', @get('active'))
   ).observes('content.isLoaded')
-

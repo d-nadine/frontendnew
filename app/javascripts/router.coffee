@@ -133,6 +133,11 @@ Radium.Router = Ember.Router.extend
         connectOutlets: (router) ->
           router.get('mainController').connectOutlet('content', 'inbox')
 
+      email: Em.Route.extend
+        route: '/:email_id'
+        connectOutlets: (router, email) ->
+          router.get('inboxController').connectOutlet('email', email)
+
     users: Ember.Route.extend
       route: '/users'
       connectOutlets: (router) ->

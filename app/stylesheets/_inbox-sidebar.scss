@@ -1,6 +1,6 @@
 ul.messages{
   list-style: none;
-  li {
+  li > div{
     @include transition-property(background, color);
     @include transition-duration(0.7s);
     color: $inbox-sidebar;

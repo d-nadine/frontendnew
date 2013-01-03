@@ -1,12 +1,14 @@
-<div>
-  <img src="/images/fallback/small_default.png"/>
-  {{view view.checkMailItem}}
-</div>
-<div>
-  <strong><a href="#">Steve Jobs</a></strong>, <a href="#">Apple</a>
-  <i class='icon-trash icon-large'></i>
-  <p>RE: Headline is very straight forward</p>
+<div {{action showEmail view.content href="true"}}>
   <div>
-    <span>11:25am</span>
+    <img src="/images/fallback/small_default.png"/>
+    {{view view.checkMailItem}}
+  </div>
+  <div>
+    <strong><a href="#">Steve Jobs</a></strong>, <a href="#">Apple</a>
+    <i class='icon-trash icon-large'></i>
+    <p>RE: Headline is very straight forward</p>
+    <div>
+      <span>11:25am</span>
+    </div>
   </div>
 </div>
