@@ -11,9 +11,7 @@ integrationTest 'campaign assignments appear', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, campaign.get('name')
 
     clickNotification notification
@@ -31,9 +29,7 @@ integrationTest 'contact assignment notifications', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, contact.get('name')
 
     clickNotification notification
@@ -56,9 +52,7 @@ integrationTest 'deal assignment notifications', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, deal.get('name')
 
     clickNotification notification
@@ -77,9 +71,7 @@ integrationTest 'group assignment notifications', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, group.get('name')
 
     clickNotification notification
@@ -103,9 +95,7 @@ integrationTest 'todo assignments appear', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
 
     clickNotification notification
@@ -129,9 +119,7 @@ integrationTest 'reminder notifications', ->
 
   assertNotifications 1
 
-  openNotifications()
-
-  waitForSelector "#notifications", (notificationCenter) ->
+  openNotifications (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
 
     clickReminder reminder
