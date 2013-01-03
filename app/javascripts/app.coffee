@@ -36,4 +36,12 @@ require 'radium/feed'
 
 require /radium\/helpers/
 
+require 'radium/views/inbox/sidebar_mailitem_view'
+require 'radium/views/inbox/inbox_sidebar_view'
+require 'radium/views/inbox/inbox_view'
+require 'radium/views/inbox/email_view'
+require 'radium/controllers/inbox/inbox_controller'
+require 'radium/controllers/inbox/inbox_sidebar_controller'
+require 'radium/controllers/inbox/email_controller'
+
 require 'radium/factories'

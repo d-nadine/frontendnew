@@ -141,3 +141,26 @@ body {
   color: white;
   text-decoration: none;
 }
+
+div.arrow {
+  @include css-arrow(right, 16px, transparent, 0, $sidebar-active-bg, solid);
+  position: absolute;
+  top: 44px;
+  left: -30px;
+}
+
+.fadeIn{
+  @include animate(fadeIn);
+}
+
+.fadeOut{
+  @include animate(fadeOut);
+}
+
+.flipInX{
+  @include animate(flipInX);
+}
+
+.flipOutX{
+  @include animate(flipOutX);
+}

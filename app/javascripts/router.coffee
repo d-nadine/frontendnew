@@ -16,6 +16,17 @@ Radium.Router = Ember.Router.extend
 
     @set('activeFeedController', @get(controllerName))
 
+  showUser: Ember.Route.transitionTo('root.users.user')
+  showContacts: Ember.Route.transitionTo('root.contacts.index')
+  showContact: Ember.Route.transitionTo('root.contacts.contact')
+  showDeal: Ember.Route.transitionTo('root.deal')
+  showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
+  showGroup: Ember.Route.transitionTo('root.groups.group')
+  showDashboard: Ember.Route.transitionTo('root.dashboard.all')
+  showCalendar: Ember.Route.transitionTo('root.calendar.index')
+  showInbox : Ember.Route.transitionTo('root.inbox.index')
+  showEmail : Ember.Route.transitionTo('root.inbox.email')
+
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
     # Ember.Router does not support cancelling routing, which prevents
@@ -108,6 +119,19 @@ Radium.Router = Ember.Router.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
           router.connectFeed contact, 'contactFeed'
+
+    inbox: Em.Route.extend
+      route: '/inbox'
+      connectOutlets: (router) ->
+        # content = Ember.A()
+        content = Radium.Email.find()
+        router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
+        router.get('inboxController').connectControllers('inboxSidebar')
+
+      index: Em.Route.extend
+        route: '/'
+        connectOutlets: (router) ->
+          router.get('mainController').connectOutlet('content', 'inbox')
 
     users: Ember.Route.extend
       route: '/users'

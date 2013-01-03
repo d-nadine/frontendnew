@@ -29,6 +29,21 @@ class Populator
         id: -> jerry
         type: 'user'
 
+    email1 = Factory.create 'email',
+      sender:
+        id: -> aaron
+        type: 'user'
+
+    email2 = Factory.create 'email',
+      sender:
+        id: -> ralph
+        type: 'contact'
+
+    email3 = Factory.create 'email',
+      sender:
+        id: -> john
+        type: 'contact'
+
     group = Factory.create 'group',
       name: 'Product 1 group'
 

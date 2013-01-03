@@ -1,0 +1,19 @@
+//sidebar
+$sidebar-bg: #eee;
+
+//inbox
+$sidebar-active-bg: darken($sidebar-bg, 8);
+$inbox-sidebar: #333;
+$inbox-bbotom: darken($sidebar-bg, 8);
+
+$inbox-li-hover-bg: lighten($sidebar-bg, 4);
+$inbox-li-hover: lighten($inbox-sidebar, 50);
+
+$sidebar-active-bg: darken($sidebar-bg, 8);
+$sidebar-active: darken($inbox-sidebar, 50);
+
+$sidebar-active-hover-bg: lighten($sidebar-bg, 4);
+$sidebar-active-hover: lighten($inbox-sidebar, 50);
+
+$sidebar-selected: #c2e1f5;
+$sidebar-selected-active: darken($sidebar-selected, 15);

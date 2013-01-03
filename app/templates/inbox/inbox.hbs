@@ -1,0 +1,17 @@
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <a href="#" class="btn btn-success" {{action showNewMailDialog target="view"}}>
+      New Message <i class="icon-plus icon-white"></i>
+    </a>
+  </div>
+  {{#if selectedMail.length}}
+  <div class="btn-group">
+    <a href="#" class="btn">
+      <i class="icon-trash"></i>
+    </a>
+  </div>
+  {{/if}}
+</div>
+<hr/>
+{{outlet}}
+{{view view.arrow}}
