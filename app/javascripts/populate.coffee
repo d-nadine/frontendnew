@@ -131,10 +131,6 @@ class Populator
       user: -> jerry,
       finish_by: Ember.DateTime.create().advance(day: 1).toFullFormat()
 
-    invitation = Factory.create 'invitation'
-      user: -> aaron
-      meeting: -> retrospection
-
     notification = Factory.create 'notification'
       reference:
         id: -> groupTodo
@@ -143,8 +139,8 @@ class Populator
 
     Factory.create 'notification',
       reference:
-        id: -> invitation
-        type: 'invitation'
+        id: -> retrospection
+        type: 'meeting'
       tag: 'invited.meeting'
 
     reminder = Factory.create 'reminder'
