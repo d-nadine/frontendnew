@@ -4,4 +4,4 @@ Radium.InboxSidebarView = Em.CollectionView.extend
   classNames: 'messages nav nav-tabs nav-stacked'
   itemViewClass: Radium.SidebarMailItemView
   emptyView: Ember.View.extend
-    template: Ember.Handlebars.compile("No mail today!")
+    templateName: 'radium/inbox/empty_sidebar'

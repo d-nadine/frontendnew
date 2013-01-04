@@ -1,5 +1,14 @@
 module 'Integration -  Inbox'
 
+integrationTest 'an empty inbox displays the correct messages', ->
+  # expect(2)
+  equal Radium.Email.find().get('length'), 0, 'precond - there are 0 emails'
+  app ->
+    Radium.get('router').transitionTo('root.inbox.index')
+
+  waitForSelector 'ul.messages li:first', (el) ->
+    assertText el, 'No mail'
+
 integrationTest 'a list of emails is displayed in the inbox', ->
   expect(5)
 
