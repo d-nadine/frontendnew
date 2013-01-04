@@ -23,7 +23,7 @@ Radium.Groupable = Em.Mixin.create
   arrangedContent: (->
     if content = @get 'content'
       @group(content)
-  ).property()
+  ).property('content')
 
   group: (collection) ->
     groupsMap = {}

@@ -9,17 +9,7 @@
     {{collection view.remindersListView}}
   {{/if}}
 
-  {{#if view.messages.length}}
-    <h3>
-      Messages
-      <a class="dismiss" {{action dismissAll view.messages target="controller"}}>
-        <i class="icon-remove-sign icon-white"></i>
-      </a>
-    </h3>
-    {{collection view.messagesListView}}
-  {{/if}}
-
-  {{#each group in view.notificationGroups}}
+  {{#each group in controller}}
     <h3>
       {{group.humanName}}
       <a class="dismiss" {{action dismissAll group.content target="controller"}}>

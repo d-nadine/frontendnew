@@ -14,6 +14,13 @@ Radium.FeedController = Em.ArrayController.extend
     else
       @get('_currentDate', value)
 
+  # This method takes a record that can appear in the feed
+  # (todo, deal, campaign, etc) and scrolls the feed 
+  # to that item. Its primairly used by the router. This
+  # method is used when click links that point to feed items.
+  expandFeedItem: (item) ->
+    @set 'expandedItem', item
+
   # TODO: this code was supposed to change date in url when currentDate
   #       in feed was changed
   #  currentDateDidChange: (->

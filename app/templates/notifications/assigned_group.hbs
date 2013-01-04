@@ -1,3 +1,5 @@
 {{#with view.reference}}
-  <a {{action showGroup this href=true}}>{{name}}</a> has been assigned to you.
+  <div {{action showGroup this}} class="content">
+    {{name}} assigned to you
+  </div>
 {{/with}}

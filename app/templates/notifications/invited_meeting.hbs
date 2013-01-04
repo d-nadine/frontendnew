@@ -1,12 +1,5 @@
-{{#with view.reference.meeting}}
-  {{#if isLoaded}}
-    Meeting invitation for "{{topic}}"
-    {{#if location}}
-      @ {{location}}
-    {{/if}}
-
-    ({{formatDate startsAt}})
-  {{else}}
-    Loading...
-  {{/if}}
+{{#with view.reference}}
+  <div {{action expandFeedItem this}} class="content">
+   Meeting Request: {{topic}}
+  </div>
 {{/with}}

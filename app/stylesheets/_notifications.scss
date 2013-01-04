@@ -15,18 +15,31 @@
     bottom: 0;
     top: 0;
     overflow-y: auto;
-    min-width: 220px;
+    width: 300px;
     color: #fff;
-    max-width:300px;
   }
 
   li {
     list-style-type: none;
-    max-width: 270px;
+    width: 300px;
     position: relative;
-    cursor: pointer;
-    padding: 3px 30px 3px 6px;
-    margin-right: 5px;
+    overflow: auto;
+    clear: both;
+    padding: 10px 0;
+  }
+
+  li .content {
+    width: 270px;
+    float: left;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  li .dismiss-button {
+    float: right;
+    width: 20px;
   }
 
   li:hover {
@@ -47,10 +60,10 @@
     }
   }
 
-  .dismiss {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -7px;
-  }
+  // .dismiss {
+  //   position: absolute;
+  //   right: 10px;
+  //   top: 50%;
+  //   margin-top: -7px;
+  // }
 }

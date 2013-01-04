@@ -33,5 +33,12 @@ window.clickFilter = (feedType, callback) ->
 window.clickFeedItem = (feedItem) ->
   $F(feedItem).find('.feed-header').click()
 
-window.openNotifications = ->
+window.openNotifications = (callback) ->
   click '.notifications-link'
+  waitForSelector "#notifications", callback
+
+window.clickNotification = (notification) ->
+  click "li[data-notification-id=\"#{notification.get('id')}\"] .content"
+
+window.clickReminder = (reminder) ->
+  click "li[data-reminder-id=\"#{reminder.get('id')}\"] .content"

@@ -3,7 +3,6 @@ Radium.NotificationsView = Ember.View.extend
   controllerBinding: 'Radium.router.notificationsController'
   contentBinding: 'controller'
   remindersBinding: 'controller.reminders'
-  messagesBinding: 'controller.messages'
   notificationGroupsBinding: 'controller.notificationGroups'
   elementId: 'notifications'
 
@@ -24,32 +23,37 @@ Radium.NotificationsView = Ember.View.extend
       notifications.css(left: -notifications.width() - 10)
   ).observes('controller.isVisible')
 
-  remindersListView:  Ember.CollectionView.extend
+  remindersListView: Ember.CollectionView.extend
     contentBinding: 'parentView.reminders'
     tagName: 'ul'
     elementId: 'reminders'
     itemViewClass: Em.View.extend
-      templateName: 'radium/reminder'
+      attributeBindings: ['dataReminderId:data-reminder-id']
+      templateName: 'radium/notifications/reminder'
       layoutName: 'radium/layouts/notification_panel_item'
       referenceBinding: 'content.reference'
       dateBinding: 'reference.feedDate'
+
+      dataReminderId: (->
+        @get('content.id')
+      ).property('content')
 
       description: (->
         @get('reference.topic') || @get('reference.description')
       ).property('reference.topic', 'reference.description')
 
-      click: ->
-        reference = @get 'content.reference'
-        Radium.Utils.showItem reference
-
-  messagesListView:  Ember.CollectionView.extend
-    contentBinding: 'parentView.messages'
-    tagName: 'ul'
-    elementId: 'messages'
-    itemViewClass: Em.View.extend
-      templateName: 'radium/message'
-      layoutName: 'radium/layouts/notification_panel_item'
-
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'
-    itemViewClass: Radium.NotificationItemView
+    itemViewClass: Ember.View.extend
+      layoutName: 'radium/layouts/notification_panel_item'
+      attributeBindings: ['dataNotificationId:data-notification-id']
+      referenceBinding: 'content.reference'
+
+      dataNotificationId: (->
+        @get('content.id')
+      ).property('content')
+
+      templateName: (->
+        tag = @get 'content.tag'
+        "radium/notifications/#{tag.replace('.', '_')}"
+      ).property('content.tag')

@@ -34,3 +34,6 @@ window.assertSelector = (selector, message) ->
 window.assertNotifications = (count) ->
   waitForSelector '.notifications-link', (link) ->
     equal link.text(), count.toString()
+
+window.assertOnPage = (path) ->
+  equal path, $W.Radium.get('router.currentPath')

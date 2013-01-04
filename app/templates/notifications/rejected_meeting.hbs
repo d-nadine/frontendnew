@@ -1,1 +1,5 @@
-Your meeting regarding {{view.reference.topic}} was rejected.
+{{#with view.reference}}
+  <div {{action expandFeedItem this}} class="content">
+   {{topic}} @ {{location}} was rejected
+  </div>
+{{/with}}
