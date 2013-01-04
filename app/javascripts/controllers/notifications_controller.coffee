@@ -2,10 +2,9 @@ Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
   isVisible: false
 
   count: (->
-    messages = @get('messages.length') || 0
     reminders = @get('reminders.length') || 0
-    messages + reminders + @get('length')
-  ).property('messages.length', 'reminders.length', 'length')
+    reminders + @get('length')
+  ).property('reminders.length', 'length')
 
   toggleNotifications: (event) ->
     @toggleProperty 'isVisible'
