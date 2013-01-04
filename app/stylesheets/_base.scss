@@ -145,7 +145,7 @@ body {
 div.arrow {
   @include css-arrow(right, 16px, transparent, 0, $sidebar-active-bg, solid);
   position: absolute;
-  top: 44px;
+  top: 25px;
   left: -30px;
 }
 

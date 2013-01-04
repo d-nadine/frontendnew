@@ -1,1 +1,19 @@
-
+img.avatar{
+  border-radius: 6px;
+}
+div.email{
+  div:first-child{
+    margin-bottom: 4px;
+  }
+  div:nth-child(2){
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #DADADA;
+    border-top: 1px solid #DADADA;
+    margin-bottom: 5px;
+    strong{
+      line-height: 1;
+      color: #999;
+      font-size: 20px;
+    }
+  }
+}

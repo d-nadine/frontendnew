@@ -15,6 +15,10 @@ Radium.Person = Radium.Core.extend
   ).property('name')
   avatar: DS.attr('object')
 
+  isContact: (->
+    this.constructor == Radium.Contact
+  ).property()
   # Default hasMany groups
   reminders: DS.hasMany('Radium.Reminder')
   comments: DS.hasMany('Radium.Comment')
+

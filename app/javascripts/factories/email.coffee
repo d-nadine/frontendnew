@@ -1,4 +1,4 @@
-Factory.define 'email', traits: 'timestamps',
+Factory.define 'email', traits: ['timestamps', 'html'],
   subject: Factory.sequence (i) -> "Email #{i}"
   sent_at: -> Ember.DateTime.create().toFullFormat()
   message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in

@@ -1,12 +1,22 @@
 ul.messages{
   list-style: none;
+  li{
+    position: relative;
+  }
   li > div{
     @include transition-property(background, color);
     @include transition-duration(0.7s);
     color: $inbox-sidebar;
     padding: 3px 1px;
-    margin-bottom: 4px;
+    margin: 0px;
     border-bottom: 1px solid $inbox-bbotom;
+    small{
+      font-size: 9px;
+      position: relative;
+      float: right;
+      top: -18px;
+      right: 4px;
+    }
     > div{
       display: table-cell;
       padding-left: 6px;
@@ -14,28 +24,27 @@ ul.messages{
     cursor: pointer;
     div:first-child{
       input[type=checkbox]{
-        position: relative;
-        top: -26px;
+        position: absolute;
+        top: 4px;
+        left: 2px;
         @include opacity-transition(0, 0.7s);
       }
       img{
-        @include opacity-transition(1, 0.3s);
         position: relative;
-        top: 9px;
+        top: 10px;
+        @include opacity-transition(1, 0.3s);
+        border-radius: 5px;
       }
     }
     div:nth-child(2){
       i{
+        position: absolute;
+        top: 4px;
+        right: 2px;
         @include opacity-transition(0, 0.7s);
       }
       p{
         word-wrap: break-word;
-        margin-bottom: 0;
-      }
-      div:last-child{
-        text-align: right;
-        font-size: 9px;
-        margin-right: 8px;
       }
     }
   }
@@ -46,15 +55,12 @@ ul.messages{
         @include opacity-transition(0, 0.7s);
       }
       input[type=checkbox]{
-        position: relative;
-        top: -26px;
         @include opacity-transition(1, 0.3s);
       }
     }
     div:nth-child(2){
       i{
         @include opacity-transition(1, 0.3s);
-        float: right;
       }
     }
   }

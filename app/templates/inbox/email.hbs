@@ -1,1 +1,23 @@
-{{content.subject}}
+<div class="well well-small">
+  <div>
+      {{#if sender.avatar.small_url}}
+        <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
+      {{else}}
+        <img src="/images/fallback/small_default.png">
+      {{/if}}
+      <strong>{{sender.displayName}}</strong>
+  </div>
+  <div>
+    <strong>{{subject}}</strong>
+  </div>
+</div>
+<div class="well well-large">
+  {{{html}}}
+</div>
+<div class="well well-small">
+  <div class="btn-group">
+    <a class="btn">
+      <i class="icon-reply"></i>
+    </a>
+  </div>
+</div>

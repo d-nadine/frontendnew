@@ -123,7 +123,6 @@ Radium.Router = Ember.Router.extend
     inbox: Em.Route.extend
       route: '/inbox'
       connectOutlets: (router) ->
-        # content = Ember.A()
         content = Radium.Email.find()
         router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
         router.get('inboxController').connectControllers('inboxSidebar')

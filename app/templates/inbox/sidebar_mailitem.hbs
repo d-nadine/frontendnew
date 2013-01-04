@@ -1,14 +1,25 @@
-<div {{action showEmail view.content href="true"}}>
+{{#with view.content}}
+<div {{action showEmail this href="true"}}>
   <div>
-    <img src="/images/fallback/small_default.png"/>
+    {{!TODO create handlebars helper for this?}}
+    {{#if sender.avatar.small_url}}
+      <img {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
+    {{else}}
+      <img src="/images/fallback/small_default.png">
+    {{/if}}
     {{view view.checkMailItem}}
   </div>
   <div>
-    <strong><a href="#">Steve Jobs</a></strong>, <a href="#">Apple</a>
-    <i class='icon-trash icon-large'></i>
-    <p>RE: Headline is very straight forward</p>
     <div>
-      <span>11:25am</span>
+      {{#if sender.isContact}}
+      <a {{action showContact sender href=true}}>{{unbound sender.displayName}}</a>
+      {{else}}
+        <a {{action showUser sender href=true}}>{{unbound sender.displayName}}</a>
+      {{/if}}
     </div>
+    <p>{{subject}}</p>
+    <i class='icon-trash icon-large'></i>
   </div>
+  <small>11:25</small>
 </div>
+{{/with}}

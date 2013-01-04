@@ -25,6 +25,7 @@ class Populator
       ]
 
     email = Factory.create 'email',
+      subject: 'Subject of the email'
       sender:
         id: -> jerry
         type: 'user'
