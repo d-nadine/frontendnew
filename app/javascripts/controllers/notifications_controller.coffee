@@ -1,4 +1,4 @@
-Radium.NotificationsController = Ember.ArrayController.extend
+Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
   isVisible: false
 
   count: (->
@@ -29,21 +29,11 @@ Radium.NotificationsController = Ember.ArrayController.extend
     item.deleteRecord()
     @get('store').commit()
 
-  NotificationGroup: Em.ArrayProxy.extend
+  groupBy: (item) ->
+    item.get('referenceType')
+
+  groupType: Em.ArrayProxy.extend
     humanName: (->
       groupId = @get('groupId')
-      if groupId == 'invitation'
-        'Meetings'
-      else
-        groupId.humanize().capitalize().pluralize()
+      groupId.humanize().capitalize().pluralize()
     ).property('groupId')
-
-  notificationGroups: (->
-    if content = @get 'content'
-      Ember.ArrayProxy.create(Radium.Groupable,
-        content: content
-        groupType: @get('NotificationGroup')
-        groupBy: (item) ->
-          item.get('referenceType')
-      )
-  ).property('content')
