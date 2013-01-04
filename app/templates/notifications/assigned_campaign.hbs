@@ -1,3 +1,5 @@
 {{#with view.reference}}
-  <a {{action showCampaign this href=true}}>{{name}}</a> assigned to you.
+  <div {{action showCampaign this}} class="content">
+    {{name}} assigned to you
+  </div>
 {{/with}}

@@ -1,3 +1,5 @@
 {{#with view.reference}}
-  <a {{action expandFeedItem this}}>{{name}}</a> assigned to you.
+  <div {{action expandFeedItem this}} class="content">
+    {{name}} assigned to you
+  </div>
 {{/with}}

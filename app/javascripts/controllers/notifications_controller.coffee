@@ -29,48 +29,6 @@ Radium.NotificationsController = Ember.ArrayController.extend
     item.deleteRecord()
     @get('store').commit()
 
-  confirm: (event) ->
-    notification = event.view.content
-    invitation = notification.get('reference')
-    invitation.set('state', 'confirmed')
-
-    observer = ->
-      if invitation.get('isLoaded') &&
-          !invitation.get('isSaving') &&
-          invitation.get('state') == 'confirmed'
-
-        invitation.removeObserver 'isLoaded', observer
-        invitation.removeObserver 'isSaving', observer
-
-        notification.deleteRecord()
-        @get('store').commit()
-
-    invitation.addObserver 'isLoaded', observer
-    invitation.addObserver 'isSaving', observer
-
-    @get('store').commit()
-
-  decline: (event) ->
-    notification = event.view.content
-    invitation = notification.get('reference')
-    invitation.set('state', 'rejected')
-
-    observer = ->
-      if invitation.get('isLoaded') &&
-          !invitation.get('isSaving') &&
-          invitation.get('state') == 'rejected'
-
-        invitation.removeObserver 'isLoaded', observer
-        invitation.removeObserver 'isSaving', observer
-
-        notification.deleteRecord()
-        @get('store').commit()
-
-    invitation.addObserver 'isLoaded', observer
-    invitation.addObserver 'isSaving', observer
-
-    @get('store').commit()
-
   NotificationGroup: Em.ArrayProxy.extend
     humanName: (->
       groupId = @get('groupId')

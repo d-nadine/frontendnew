@@ -1,21 +1,9 @@
-<div class="content">
-  {{yield}}
-</div>
+{{yield}}
 
 {{#with view.content}}
-  {{#if view.isMeetingInvite}}
-    {{#if reference.state}}
-      (<a href="#" {{action "confirm" target="view.controller"}}>
-        Confirm
-      </a>
-      |
-      <a href="#" {{action "decline" target="view.controller"}}>
-        Decline
-      </a>)
-    {{/if}}
-  {{else}}
+  <div class="dismiss-button">
     <a class="dismiss" {{action dismiss target="controller"}}>
       <i class="icon-remove-sign icon-white"></i>
     </a>
-  {{/if}}
+  </div>
 {{/with}}

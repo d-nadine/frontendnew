@@ -1,4 +1,5 @@
-{{! FIXME: Why is this "view" and not content }}
 {{#with view.reference}}
-  Todo <a {{action expandFeedItem this}}>{{description}}</a> assigned to you.
+  <div {{action expandFeedItem this}} class="content">
+    {{description}} assigned to you
+  </div>
 {{/with}}

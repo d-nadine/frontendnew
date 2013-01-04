@@ -1,3 +1,5 @@
 {{#with view.reference}}
-  <a {{action showContact this href=true}}>{{displayName}}</a> assigned to you.
+  <div {{action showContact this}} class="content">
+    {{displayName}} assigned to you
+  </div>
 {{/with}}

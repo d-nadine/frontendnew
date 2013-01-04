@@ -23,13 +23,13 @@ Radium.NotificationsView = Ember.View.extend
       notifications.css(left: -notifications.width() - 10)
   ).observes('controller.isVisible')
 
-  remindersListView:  Ember.CollectionView.extend
+  remindersListView: Ember.CollectionView.extend
     contentBinding: 'parentView.reminders'
     tagName: 'ul'
     elementId: 'reminders'
     itemViewClass: Em.View.extend
       attributeBindings: ['dataReminderId:data-reminder-id']
-      templateName: 'radium/reminder'
+      templateName: 'radium/notifications/reminder'
       layoutName: 'radium/layouts/notification_panel_item'
       referenceBinding: 'content.reference'
       dateBinding: 'reference.feedDate'
@@ -44,4 +44,16 @@ Radium.NotificationsView = Ember.View.extend
 
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'
-    itemViewClass: Radium.NotificationItemView
+    itemViewClass: Ember.View.extend
+      layoutName: 'radium/layouts/notification_panel_item'
+      attributeBindings: ['dataNotificationId:data-notification-id']
+      referenceBinding: 'content.reference'
+
+      dataNotificationId: (->
+        @get('content.id')
+      ).property('content')
+
+      templateName: (->
+        tag = @get 'content.tag'
+        "radium/notifications/#{tag.replace('.', '_')}"
+      ).property('content.tag')

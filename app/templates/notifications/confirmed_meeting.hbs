@@ -1,3 +1,6 @@
 {{#with view.reference}}
-  <a {{action expandFeedItem this}}>{{topic}}</a> @ {{location}} is confirmed.
+  <div {{action expandFeedItem this}} class="content">
+   {{topic}} @ {{location}} is confirmed
+  </div>
 {{/with}}
+
