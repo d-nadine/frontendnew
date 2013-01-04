@@ -9,7 +9,7 @@
     {{collection view.remindersListView}}
   {{/if}}
 
-  {{#each group in arrangedContent}}
+  {{#each group in controller}}
     <h3>
       {{group.humanName}}
       <a class="dismiss" {{action dismissAll group.content target="controller"}}>
