@@ -38,7 +38,7 @@ window.openNotifications = (callback) ->
   waitForSelector "#notifications", callback
 
 window.clickNotification = (notification) ->
-  click "div[data-notification-id=\"#{notification.get('id')}\"] .content a"
+  click "li[data-notification-id=\"#{notification.get('id')}\"] .content"
 
 window.clickReminder = (reminder) ->
-  click "li[data-reminder-id=\"#{reminder.get('id')}\"] .content a"
+  click "li[data-reminder-id=\"#{reminder.get('id')}\"] .content"

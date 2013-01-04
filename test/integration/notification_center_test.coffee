@@ -1,5 +1,23 @@
 module 'Integration - Notification Center'
 
+integrationTest 'lead notifications', ->
+  contact = Factory.create 'contact'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> contact
+      type: 'contact'
+    tag: 'new.lead'
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, contact.get('name')
+
+    clickNotification notification
+
+    assertOnPage contactPath(contact)
+
 integrationTest 'campaign assignments appear', ->
   campaign = Factory.create 'campaign'
 
@@ -97,6 +115,30 @@ integrationTest 'todo assignments appear', ->
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
+
+    clickNotification notification
+
+    waitForSelector '.feed-info', ->
+      ok true, 'Feed item expanded'
+
+integrationTest  'meeting invitation notifications', ->
+  meeting = Factory.create 'meeting'
+
+  notification = Factory.create 'notification'
+    reference:
+      id: -> meeting
+      type: 'meeting'
+    tag: 'invited.meeting'
+
+  # FIXME: having to manually push onto the feed controller
+  # after items are created seems like an anti pattern
+  app ->
+    Radium.get('router.feedController').pushItem meeting
+
+  assertNotifications 1
+
+  openNotifications (notificationCenter) ->
+    assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
 
