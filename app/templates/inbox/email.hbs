@@ -3,7 +3,7 @@
       {{#if sender.avatar.small_url}}
         <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
       {{else}}
-        <img src="/images/fallback/small_default.png">
+        <img class="avatar" src="/images/fallback/small_default.png">
       {{/if}}
       <strong>{{sender.displayName}}</strong>
   </div>
@@ -11,7 +11,7 @@
     <strong>{{subject}}</strong>
   </div>
 </div>
-<div class="well well-large">
+<div class="well well-large body">
   {{{html}}}
 </div>
 <div class="well well-small">
