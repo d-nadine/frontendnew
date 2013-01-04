@@ -5,7 +5,7 @@ div.email{
   div:first-child{
     margin-bottom: 4px;
   }
-  div:nth-child(2){
+  div:nth-child(2):not(.btn-group){
     padding: 5px 0 5px 0;
     border-bottom: 1px solid #DADADA;
     border-top: 1px solid #DADADA;
