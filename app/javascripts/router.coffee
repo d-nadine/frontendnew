@@ -125,12 +125,23 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         content = Radium.Email.find()
         router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
-        router.get('inboxController').connectControllers('inboxSidebar')
+        router.get('inboxController').set('content', content)
+
+        sidebarController = router.get('inboxSidebarController')
+
+        router.get('mainController').connectOutlet('content', 'inbox')
+
+        unless sidebarController.get('active')
+          runWhenLoaded content, ->
+            if content.get('length') > 0
+              active = content.get('firstObject')
+              sidebarController.setActive(active)
+              router.send('showEmail', active)
+        else
+          router.send('showEmail', sidebarController.get('active'))
 
       index: Em.Route.extend
         route: '/'
-        connectOutlets: (router) ->
-          router.get('mainController').connectOutlet('content', 'inbox')
 
       email: Em.Route.extend
         route: '/:email_id'
