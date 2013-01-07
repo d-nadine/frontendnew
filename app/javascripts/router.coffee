@@ -3,7 +3,6 @@ Radium.Router = Ember.Router.extend
   enableLogging: true
   initialState: 'loading'
 
-
   init: ->
     @_super()
     @set('currentUser', 'foo')
@@ -114,7 +113,16 @@ Radium.Router = Ember.Router.extend
           @_super(router, params)
 
         connectOutlets: (router, group) ->
-          jumpTo(type: 'group', id: group.get('id'))
+          feed = Radium.FeedSection.find
+            group: group
+            nearDate: Ember.DateTime.create()
+
+          router.get('mainController').connectOutlet 'content', 'groupsFeed', feed
+
+          router.set 'groupsFeedController.recordId', group.get('id')
+          # FIXME: this is bullshit
+          router.set 'groupsFeedController.recordType', Radium.GroupFeedSection
+          router.set 'groupsFeedController.type', 'user'
 
     contacts: Ember.Route.extend
       route: '/contacts'
@@ -131,7 +139,16 @@ Radium.Router = Ember.Router.extend
       contact: Ember.Route.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
-          jumpTo(type: 'contact', id: contact.get('id'))
+          feed = Radium.FeedSection.find
+            contact: contact
+            nearDate: Ember.DateTime.create()
+
+          router.get('mainController').connectOutlet 'content', 'contactsFeed', feed
+
+          router.set 'contactsFeedController.recordId', contact.get('id')
+          # FIXME: this is bullshit
+          router.set 'contactsFeedController.recordType', Radium.ContactFeedSection
+          router.set 'contactsFeedController.type', 'user'
 
         deserialize: (router, params) ->
           params.contact_id = parseInt(params.contact_id)
@@ -145,7 +162,16 @@ Radium.Router = Ember.Router.extend
       user: Ember.Route.extend
         route: '/:user_id'
         connectOutlets: (router, user) ->
-          jumpTo(type: 'user', id: user.get('id'))
+          feed = Radium.FeedSection.find
+            user: user
+            nearDate: Ember.DateTime.create()
+
+          router.get('mainController').connectOutlet 'content', 'usersFeed', feed
+
+          router.set 'usersFeedController.recordId', user.get('id')
+          # FIXME: this is bullshit
+          router.set 'usersFeedController.recordType', Radium.UserFeedSection
+          router.set 'usersFeedController.type', 'user'
 
         deserialize: (router, params) ->
           # fixture adapter is pretty limited and works only with integer ids
@@ -161,7 +187,7 @@ Radium.Router = Ember.Router.extend
       index: Ember.Route.extend
         route: '/'
         connectOutlets: (router) ->
-          jumpTo(calendar: true)
+          # jumpTo(calendar: true)
 
       showDate: Ember.Route.transitionTo('withDate')
 
@@ -169,4 +195,4 @@ Radium.Router = Ember.Router.extend
         route: '/:date'
         connectOutlets: (router, params) ->
           params.calendar = true
-          jumpTo(params)
+          # jumpTo(params)

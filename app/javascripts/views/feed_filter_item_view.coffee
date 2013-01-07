@@ -5,6 +5,7 @@ Radium.FeedFilterItemView = Ember.View.extend
   classNameBindings: ['isSelected:active', 'type']
   typeBinding: 'content.type'
 
+  # FIXME: why is this on the view instead of the controller?
   setFilter: (event) ->
     type = if event.context == 'all' then null else event.context
     @get('controller').set('typeFilter', type)

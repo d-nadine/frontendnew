@@ -58,6 +58,7 @@ Radium.FeedController = Em.ArrayController.extend
   commitTransaction: ->
     @get('store').commit()
 
+  # TODO: this code will be removed
   createFeedItem: (type, item, ref) ->
     record = @get('store').createRecord type,  item
     record.set 'reference', ref if ref

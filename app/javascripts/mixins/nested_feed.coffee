@@ -9,7 +9,7 @@ Radium.NestedFeed = Ember.Mixin.create
     recordId   = @get 'recordId'
 
     if content = @get 'content'
-      content.map (section) ->
+      content.map (section) =>
         id = "#{section.get('id')}##{recordId}"
         @get('store').load(recordType, id, {
           id: id
