@@ -8,12 +8,6 @@ Radium.SidebarMailItemView = Em.View.extend
     @get('content') == @get('controller.active')
   ).property('content', 'controller.active')
 
-  # isActiveDidChange: ( ->
-  #   return unless @get('isActive')
-
-  #   $('div.arrow').css(top: @$().offset().top - 35)
-  # ).observes('isActive')
-
   checkMailItem: Em.Checkbox.extend
     click: (e) ->
       e.stopPropagation()
