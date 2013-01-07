@@ -4,28 +4,30 @@ Radium.FeedController = Em.ArrayController.extend
   isLoading: false
   itemsLimit: 30
 
-  currentDate: Ember.computed (key, value) ->
-    if arguments.length == 2
-      unless value.toFormattedString
-        value = Ember.DateTime.parse(value, '%Y-%m-%d')
+  # The number of items to load when the infinite scroller
+  # fire
+  scrollingPageSize: 3
 
-      @set('_currentDate', value)
-      value
-    else
-      @get('_currentDate', value)
+  # This property is used to scroll the feed. Set it
+  # to an Ember.DateTime and the feed will adjust accordingly
+  currentDate: undefined
 
-  # This method takes a record that can appear in the feed
-  # (todo, deal, campaign, etc) and scrolls the feed 
-  # to that item. Its primairly used by the router. This
-  # method is used when click links that point to feed items.
-  expandFeedItem: (item) ->
-    @set 'expandedItem', item
+  # Set this property to an item that can appear in the feed.
+  # The feed will be loaded (if required).
+  expandedItem: undefined
+
+  nextPastDate: (->
+    @get 'content.lastObject.date'
+  ).property('content')
+
+  nextFutureDate: (->
+    @get 'content.firstObject.date'
+  ).property('content')
 
   showForm: (type) ->
     @set 'currentFormType', type
 
   isLoadingObserver: (->
-
     isLoading = @get 'content.isLoading'
 
     if isLoading
