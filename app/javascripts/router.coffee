@@ -1,79 +1,3 @@
-# TODO: move all that helpers somewhere
-#
-# TODO such checking if date is loaded needs to be changed
-#      to work properly with grouped feed sections
-sectionLoaded = (date) ->
-  if content = Radium.get('currentFeedController.content')
-    section = content.find (s) -> s.get('id') == date
-    if section
-      Radium.get('currentFeedController').findRelatedSection section
-
-findNearBy = (date) ->
-  if content = Radium.get('currentFeedController.content')
-    nearBy = content.find (section, i, collection) ->
-      nextSection = collection.objectAt(i + 1)
-      if nextSection
-        section.dateBetween date, nextSection
-
-  if nearBy
-    Radium.get('currentFeedController').findRelatedSection nearBy
-
-jumpToDate = (date) ->
-  jumpTo date: date.toDateFormat()
-
-jumpTo = (query) ->
-  query   ?= {}
-
-  # Normalize date to string. WHY?!
-  if query.date && query.date.toDateFormat
-    query.date = query.date.toDateFormat()
-
-  # Disable scroll is there to ensure the user does not fire
-  # the infinte scroller while the feed is scrolling itself
-  #
-  # Jump to a specific item. Not sure if this is still needed
-  if query.date && (section = sectionLoaded(query.date))
-    if !query.disableScroll
-      Radium.Utils.scroll(section.get('domClass'))
-  # Jump to a specific date. Not sure if this is still needed
-  else if query.date && (nearBy = findNearBy(query.date))
-    if !query.disableScroll
-      Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
-  else
-    sections = Radium.get('router.store').expandableArrayFor Radium.FeedSection
-    sections.load Radium.FeedSection.find(query)
-
-    # TODO: this methods has too many concerns, it would be nice to refactor it later
-    if query.calendar
-      Radium.router.get('mainController').connectOutlet('content', 'calendarFeed', sections)
-
-    # Used for connecting feeds on different pages: user/contact/group
-    else if query.type
-      plural = query.type.pluralize()
-      type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
-
-      Radium.router.get('mainController').connectOutlet('content', "#{plural}Feed", sections)
-      Radium.router.set("#{plural}FeedController.recordId", query.id)
-      Radium.router.set("#{plural}FeedController.recordType", type)
-      Radium.router.set("#{plural}FeedController.type", query.type)
-
-    # Dashboard feed
-    else
-      Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
-
-    if query.disableScroll
-      Radium.get('currentFeedController').disableScroll()
-
-      # This finally scrolls the feed
-    else
-      Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
-
-  if date = query.date
-    Radium.set 'currentFeedController.currentDate', date
-  else if ! Radium.get('currentFeedController.currentDate')
-    # set current date if no date is set yet
-    Radium.set 'currentFeedController.currentDate', Ember.DateTime.create()
-
 Radium.Router = Ember.Router.extend
   location: 'none'
   enableLogging: true
@@ -93,9 +17,6 @@ Radium.Router = Ember.Router.extend
   init: ->
     @_super()
     @set('user', 'foo')
-
-  jumpTo: ->
-    jumpTo.apply this, arguments
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -201,13 +122,6 @@ Radium.Router = Ember.Router.extend
 
         connectOutlets: (router, group) ->
           jumpTo(type: 'group', id: group.get('id'))
-
-        showDate: Ember.Route.transitionTo('withDate')
-
-        withDate: Ember.Route.extend
-          route: '/:date'
-          connectOutlets: (router, params) ->
-            #jumpTo(params)
 
     contacts: Ember.Route.extend
       route: '/contacts'
