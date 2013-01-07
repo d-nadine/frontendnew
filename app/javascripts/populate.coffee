@@ -45,6 +45,12 @@ class Populator
         id: -> john
         type: 'contact'
 
+    for i in [0..20]
+      Factory.create 'email',
+        sender:
+          id: -> jerry
+          type: 'user'
+
     group = Factory.create 'group',
       name: 'Product 1 group'
 

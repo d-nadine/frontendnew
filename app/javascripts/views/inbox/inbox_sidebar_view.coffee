@@ -5,3 +5,5 @@ Radium.InboxSidebarView = Em.CollectionView.extend
   itemViewClass: Radium.SidebarMailItemView
   emptyView: Ember.View.extend
     templateName: 'radium/inbox/empty_sidebar'
+  didInsertElement: ->
+    $('#sidebar').tinyscrollbar()
