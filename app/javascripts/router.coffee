@@ -3,14 +3,6 @@ Radium.Router = Ember.Router.extend
   enableLogging: true
   initialState: 'loading'
 
-  showUser: Ember.Route.transitionTo('root.users.user')
-  showContacts: Ember.Route.transitionTo('root.contacts.index')
-  showContact: Ember.Route.transitionTo('root.contacts.contact')
-  showDeal: Ember.Route.transitionTo('root.deal')
-  showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
-  showGroup: Ember.Route.transitionTo('root.groups.group')
-  showDashboard: Ember.Route.transitionTo('root.dashboard.all')
-  showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
   init: ->
     @_super()
@@ -67,6 +59,15 @@ Radium.Router = Ember.Router.extend
           router.route(path)
 
   root: Ember.Route.extend
+    showUser: Ember.Route.transitionTo('root.users.user')
+    showContacts: Ember.Route.transitionTo('root.contacts.index')
+    showContact: Ember.Route.transitionTo('root.contacts.contact')
+    showDeal: Ember.Route.transitionTo('root.deal')
+    showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
+    showGroup: Ember.Route.transitionTo('root.groups.group')
+    showDashboard: Ember.Route.transitionTo('root.dashboard.all')
+    showCalendar: Ember.Route.transitionTo('root.calendar.index')
+
     expandFeedItem: (router, event) ->
       router.get('feedController').expandFeedItem event.context
 
