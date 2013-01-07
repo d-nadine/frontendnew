@@ -27,14 +27,10 @@ Radium.InboxSidebarView = Em.CollectionView.extend
 
     $('.thumb').on('contentScrolled', (event, direction, distance) ->
       arrow = $('div.arrow')
-      arrow.hide()
       active = $('ul.messages li.active')
       return if active.length == 0
 
-      setTimeout(( ->
-        arrow.show()
-        arrow.css(top: active.offset().top - 35))
-        , 200)
+      arrow.css(top: active.offset().top - 35)
     )
 
   willDestroyElement: ->
