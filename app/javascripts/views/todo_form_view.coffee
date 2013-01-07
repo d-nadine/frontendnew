@@ -117,7 +117,7 @@ Radium.TodoFormView = Radium.FormView.extend
   moveFeed: (->
     if @get 'isGlobalLevelForm'
       date = @get('finishBy').toFormattedString '%Y-%m-%d'
-      Radium.get('router').transitionTo 'root.dashboardWithDate', date: date
+      Radium.get('router').send 'scrollFeedToDate', context: @get('finishBy')
   ).observes('finishBy')
 
   submitForm: ->
