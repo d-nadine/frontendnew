@@ -127,7 +127,6 @@ Radium.Router = Ember.Router.extend
 
         router.get('notificationsController').set('content', Radium.Notification.find())
         router.get('notificationsController').set('reminders', Radium.Reminder.find())
-        router.get('notificationsController').set('messages', Radium.Message.find())
         router.get('applicationController').connectOutlet('notifications', 'notifications')
 
         router.transitionTo('root')
