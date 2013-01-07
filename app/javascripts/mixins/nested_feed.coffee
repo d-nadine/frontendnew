@@ -19,6 +19,3 @@ Radium.NestedFeed = Ember.Mixin.create
         @get('store').find recordType, id
 
   ).property('content', 'content.length')
-
-  findRelatedSection: (section) ->
-    @find (sectionWrapper) -> sectionWrapper.isRelatedTo section
