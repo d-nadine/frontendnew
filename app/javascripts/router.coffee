@@ -12,8 +12,6 @@ Radium.Router = Ember.Router.extend
   showDashboard: Ember.Route.transitionTo('root.dashboard.all')
   showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
-  showDate: Ember.Route.transitionTo('root.dashboardWithDate')
-
   init: ->
     @_super()
     @set('currentUser', 'foo')
