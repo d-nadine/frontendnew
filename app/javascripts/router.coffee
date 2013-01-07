@@ -120,7 +120,7 @@ Radium.Router = Ember.Router.extend
     route: '/authenticated'
     index: Ember.Route.extend
       connectOutlets: (router) ->
-        router.set 'usersController.content', router.get('store').findAll(Radium.User)
+        router.set 'usersController.content', Radium.User.find()
 
         router.get('applicationController').connectOutlet('main')
         router.get('applicationController').connectOutlet('topbar', 'topbar')
