@@ -24,12 +24,18 @@ jumpToDate = (date) ->
 jumpTo = (query) ->
   query   ?= {}
 
+  # Normalize date to string. WHY?!
   if query.date && query.date.toDateFormat
     query.date = query.date.toDateFormat()
 
+  # Disable scroll is there to ensure the user does not fire
+  # the infinte scroller while the feed is scrolling itself
+  #
+  # Jump to a specific item. Not sure if this is still needed
   if query.date && (section = sectionLoaded(query.date))
     if !query.disableScroll
       Radium.Utils.scroll(section.get('domClass'))
+  # Jump to a specific date. Not sure if this is still needed
   else if query.date && (nearBy = findNearBy(query.date))
     if !query.disableScroll
       Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
@@ -37,9 +43,11 @@ jumpTo = (query) ->
     sections = Radium.get('router.store').expandableArrayFor Radium.FeedSection
     sections.load Radium.FeedSection.find(query)
 
+    # TODO: this methods has too many concerns, it would be nice to refactor it later
     if query.calendar
-      # TODO: this methods has too many concerns, it would be nice to refactor it later
       Radium.router.get('mainController').connectOutlet('content', 'calendarFeed', sections)
+
+    # Used for connecting feeds on different pages: user/contact/group
     else if query.type
       plural = query.type.pluralize()
       type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
@@ -48,11 +56,15 @@ jumpTo = (query) ->
       Radium.router.set("#{plural}FeedController.recordId", query.id)
       Radium.router.set("#{plural}FeedController.recordType", type)
       Radium.router.set("#{plural}FeedController.type", query.type)
+
+    # Dashboard feed
     else
       Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
 
     if query.disableScroll
       Radium.get('currentFeedController').disableScroll()
+
+      # This finally scrolls the feed
     else
       Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
 
@@ -152,13 +164,6 @@ Radium.Router = Ember.Router.extend
         route: '/'
         connectOutlets: (router) ->
           router.get('feedController').set('typeFilter', null)
-
-    # TODO: find out what's the best pattern to handle such things
-    dashboardWithDate: Ember.Route.extend
-      route: '/dashboard/:date'
-      connectOutlets: (router, params) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
-        jumpTo(params)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'

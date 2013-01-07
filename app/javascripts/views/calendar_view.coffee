@@ -4,6 +4,8 @@ Radium.CalendarView = Em.View.extend
   init: ->
     @_super.apply this, arguments
 
+  # FIXME: this should be bound to the calendar controller
+  # It would never be bound to any other feed controller
   controllerBinding: 'Radium.currentFeedController'
   currentDateBinding: 'controller.currentDate'
 
