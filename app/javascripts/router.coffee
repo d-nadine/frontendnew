@@ -16,8 +16,6 @@ Radium.Router = Ember.Router.extend
     # authentication and then redirect to correct state
     # TODO: fix when ember is updated
     routePath: (router, path) ->
-      router.set('lastAttemptedPath', path)
-
       if router.get('currentUser')
         router.transitionTo('authenticated.index')
       else
@@ -53,10 +51,6 @@ Radium.Router = Ember.Router.extend
         router.get('applicationController').connectOutlet('notifications', 'notifications')
 
         router.transitionTo('root')
-
-        path = router.get('lastAttemptedPath')
-        if path && path != '/'
-          router.route(path)
 
   root: Ember.Route.extend
     showUser: Ember.Route.transitionTo('root.users.user')
