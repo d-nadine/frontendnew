@@ -3,6 +3,7 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
   elementId: 'feed'
   feedBinding: 'controller'
 
+  # FIXME: this property is way to complicated
   empty: (->
     @get('feed.length') == 0 ||
       !@get('feed').find( (section) -> section.get('items.length') > 0 )
