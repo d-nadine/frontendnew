@@ -62,7 +62,9 @@ Radium.Router = Ember.Router.extend
     showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
     expandFeedItem: (router, event) ->
-      router.get('feedController').expandFeedItem event.context
+      router.set 'feedController.expandedItem', event.context
+    scrollFeedToDate: (router, event) ->
+      router.set 'feedController.currentDate', event.context
 
     initialState: 'dashboard'
 
@@ -72,8 +74,10 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
+        router.set 'feedController.scope', router.get('currentUser')
+
         feed = Radium.FeedSection.find 
-          user: router.get('currentUser')
+          scope: router.get('currentUser')
           nearDate: Ember.DateTime.create()
 
         router.get('mainController').connectOutlet 'content', 'feed', feed
@@ -113,16 +117,18 @@ Radium.Router = Ember.Router.extend
           @_super(router, params)
 
         connectOutlets: (router, group) ->
-          feed = Radium.FeedSection.find
-            group: group
-            nearDate: Ember.DateTime.create()
-
-          router.get('mainController').connectOutlet 'content', 'groupsFeed', feed
+          router.set 'groupsFeedController.scope', group
 
           router.set 'groupsFeedController.recordId', group.get('id')
           # FIXME: this is bullshit
           router.set 'groupsFeedController.recordType', Radium.GroupFeedSection
           router.set 'groupsFeedController.type', 'user'
+
+          feed = Radium.FeedSection.find
+            scope: group
+            nearDate: Ember.DateTime.create()
+
+          router.get('mainController').connectOutlet 'content', 'groupsFeed', feed
 
     contacts: Ember.Route.extend
       route: '/contacts'
@@ -139,8 +145,10 @@ Radium.Router = Ember.Router.extend
       contact: Ember.Route.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
+          router.set 'contactsFeedController.scope', contact
+
           feed = Radium.FeedSection.find
-            contact: contact
+            scope: contact
             nearDate: Ember.DateTime.create()
 
           router.get('mainController').connectOutlet 'content', 'contactsFeed', feed
@@ -162,8 +170,10 @@ Radium.Router = Ember.Router.extend
       user: Ember.Route.extend
         route: '/:user_id'
         connectOutlets: (router, user) ->
+          router.set 'usersFeedController.scope', user
+
           feed = Radium.FeedSection.find
-            user: user
+            scope: user
             nearDate: Ember.DateTime.create()
 
           router.get('mainController').connectOutlet 'content', 'usersFeed', feed
