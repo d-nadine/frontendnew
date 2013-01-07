@@ -1,67 +1,52 @@
 Radium.FixtureAdapter.reopen
+  # This method must simulate logic done by the server.
+  # It has two primary functions:
+  #
+  # 1. Load the feed for a given resource (user,contact,group)
+  # 2. Query the feed for laoding purposes (infinite scroller)
+  #
+  # Queries options
+  #
+  # * scope: the resource to load the feed for **REQUIRED**
+  # * nearDate: load the feed date closest to the given date
+  # * before: load the feed before this date
+  # * after: load the feed after this date
+  # * limit: the number of items to load
   queryFeedSectionFixtures: (fixtures, query) ->
-    type = query.type
+    throw new Error("Scope require to query the feed!") unless query.scope
 
-    if type
-      capitalized = type.capitalize()
-      fixtures = fixtures.filter (f) ->
-        if ids = f["_associated#{capitalized}Ids"]
-          ids.find (id) -> id == query.id
+    scoped = fixtures.filter (f) ->
+      true # FIXME: figure out why the feed association is not there
 
-    fixtures = if query.dates
-      fixtures.filter (f) ->
-        query.dates.contains f.id
-    else if query.date
-      # Chrome deals with parsing dates in format yyyy-mm-dd,
-      # but phantom (and maybe some of the browsers) does not
-      chosenDate = Date.parse("#{query.date}T00:00:00Z")
-      deltas = []
-      fixtures.forEach (f) ->
-        delta = Math.abs chosenDate - Date.parse(f.date)
-        deltas.pushObject [delta, f]
+    if query.nearDate
+      # First filter out everything newer than the given date
+      cutOff = query.nearDate.get 'milliseconds'
 
-      deltas = deltas.sort (a, b) ->
-        a = a[0]
-        b = b[0]
-        if a == b then 0 else ( if a > b then 1 else -1 )
+      scoped = scoped.filter (f) ->
+        Ember.compare(cutOff, Date.parse(f.date)) == 1
 
-      deltas.slice(0, 4).map (delta) -> delta[1]
-    else if item = (query.before || query.after)
-      date = Date.parse("#{item}T00:00:00Z")
-      fixtures = fixtures.filter (f) ->
-        fixtureDate = Date.parse(f.date)
-        if query.before
-          fixtureDate < date
-        else
-          fixtureDate > date
+      # Sort the rest in descending order
+      scoped = scoped.sort (f1, f2) ->
+        date1 = Date.parse f1.date
+        date2 = Date.parse f2.date
+        Ember.compare date2, date1
 
-      sort = if query.before then -1 else 1
-      fixtures = fixtures.sort (a, b) ->
-        a = Date.parse(a.date)
-        b = Date.parse(b.date)
-        if a == b then 0 else ( if a > b then sort else sort * -1 )
+      # take an arbitrary slice of it
+      scoped = scoped.slice 0, 5
 
-      if query.range && query.range != 'daily'
-        if first = fixtures[0]
-          date = Em.DateTime.parse first.id, '%Y-%m-%d'
-          [date, endDate] = Radium.Utils.rangeForDate(date, query.range)
-          date    = date.toDateFormat()
-          endDate = endDate.toDateFormat()
+    else if query.before
+      cutOff = query.before.get 'milliseconds'
 
-          fixtures = fixtures.filter (f) ->
-            f.id <= endDate && f.id >= date
+      scoped = scoped.filter (f) ->
+        Ember.compare(cutOff, Date.parse(f.date)) == 1
 
-        fixtures
-      else
-        fixtures.slice(0, query.limit || 1)
+    else if query.after
+      cutOff = query.after.get 'milliseconds'
+
+      scoped = scoped.filter (f) ->
+        Ember.compare(cutOff, Date.parse(f.date)) == -1
+
+    if query.limit
+      scoped.slice 0, query.limit
     else
-      startDates = [
-        Ember.DateTime.create().toDateFormat()
-        Ember.DateTime.create().advance(day: - 1).toDateFormat()
-        Ember.DateTime.create().advance(day: - 7).toDateFormat()
-        # Ember.DateTime.create().advance(day: - 14).toDateFormat()
-      ]
-
-      fixtures.filter (f) -> startDates.contains(f.id)
-
-    fixtures
+      scoped
