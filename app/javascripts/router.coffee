@@ -16,7 +16,7 @@ Radium.Router = Ember.Router.extend
 
   init: ->
     @_super()
-    @set('user', 'foo')
+    @set('currentUser', 'foo')
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -28,7 +28,7 @@ Radium.Router = Ember.Router.extend
     routePath: (router, path) ->
       router.set('lastAttemptedPath', path)
 
-      if router.get('user')
+      if router.get('currentUser')
         router.transitionTo('authenticated.index')
       else
         router.transitionTo('unauthenticated.index')
@@ -79,7 +79,12 @@ Radium.Router = Ember.Router.extend
       initialState: 'all'
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
-        jumpTo()
+
+        feed = Radium.FeedSection.find 
+          user: router.get('currentUser')
+          nearDate: Ember.DateTime.create()
+
+        router.get('mainController').connectOutlet 'content', 'feed', feed
 
       all: Ember.Route.extend
         route: '/'
