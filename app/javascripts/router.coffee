@@ -65,7 +65,7 @@ Radium.Router = Ember.Router.extend
     showDeal: Ember.Route.transitionTo('root.deal')
     showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
     showGroup: Ember.Route.transitionTo('root.groups.group')
-    showDashboard: Ember.Route.transitionTo('root.dashboard.all')
+    showDashboard: Ember.Route.transitionTo('root.dashboard')
     showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
     expandFeedItem: (router, event) ->
@@ -75,7 +75,7 @@ Radium.Router = Ember.Router.extend
 
     dashboard: Ember.Route.extend
       route: '/'
-      initialState: 'all'
+
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
@@ -84,11 +84,6 @@ Radium.Router = Ember.Router.extend
           nearDate: Ember.DateTime.create()
 
         router.get('mainController').connectOutlet 'content', 'feed', feed
-
-      all: Ember.Route.extend
-        route: '/'
-        connectOutlets: (router) ->
-          router.get('feedController').set('typeFilter', null)
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'
