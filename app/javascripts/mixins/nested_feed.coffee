@@ -1,6 +1,4 @@
 Radium.NestedFeed = Ember.Mixin.create
-  isFeedController: true
-
   # TODO: it seems that this would be much better if it worked as
   #       grouped content - by observing content array, rebuilding
   #       it every time is a waste

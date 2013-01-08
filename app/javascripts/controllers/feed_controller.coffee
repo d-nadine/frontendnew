@@ -1,5 +1,4 @@
 Radium.FeedController = Em.ArrayController.extend
-  isFeedController: true
   canScroll: true
   isLoading: false
   itemsLimit: 30
