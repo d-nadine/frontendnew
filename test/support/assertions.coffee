@@ -2,6 +2,10 @@ window.assertFeedItems = (expected, message) ->
   message ||= "Correct # of Feed Items"
   equal $F(".feed-item").length, expected, message 
 
+window.assertClusters = (expected, message) ->
+  message ||= "Correct # of clusters"
+  equal $F(".cluster-item").length, expected, message 
+
 window.assertEmptyFeed = ->
   assertFeedItems 0, "Feed is empty"
 

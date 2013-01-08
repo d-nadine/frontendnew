@@ -62,3 +62,9 @@ window.waitForFeedItem = (resource, callback, message) ->
     callback(feedItem.parent())
 
   waitForSelector selector, callbackWithFeedItem, message
+
+window.waitForFeedDate = (date, callback, message) ->
+  selector = '.feed-section[data-date="%@"]'.fmt(date.toDateFormat())
+  message ||= "#{date.toDateFormat()} present in the feed"
+
+  waitForSelector selector, callback

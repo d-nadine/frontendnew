@@ -1,19 +1,22 @@
 module 'Integration - Feed'
 
 integrationTest 'feed type gets clustered after reaching the cluster size', ->
-  expect(3)
+  expect(4)
   assertEmptyFeed()
 
-  section = Factory.create 'feed_section'
+  date = Ember.DateTime.create()
 
   app ->
     for i in [0..8]
       todo = Factory.create 'todo'
+        finish_by: date.toFullFormat()
+
       Radium.get('router.activeFeedController').pushItem todo
 
-  waitForResource section, (el) ->
+  waitForFeedDate date, (section) ->
     assertFeedItems 0
-    assertText el, '9 todos'
+    assertClusters 1
+    assertText section, '9 todos'
 
 integrationTest 'a feed can be filtered by feed type', ->
   expect(7)
