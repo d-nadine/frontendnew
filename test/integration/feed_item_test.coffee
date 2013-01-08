@@ -23,28 +23,31 @@ integrationTest 'a feed can be filtered by feed type', ->
 
   assertEmptyFeed()
 
-  section = Factory.create 'feed_section'
+  date = Ember.DateTime.create()
 
   app ->
-    for i in [0..2]
-      section.get('items').pushObject Factory.create 'todo'
+    controller = Radium.get('router.activeFeedController')
 
-    for i in [0..1]
-      section.get('items').pushObject Factory.create 'deal'
+    controller.pushItem Factory.create 'todo'
+      finish_by: date.toFullFormat()
 
-    section.get('items').pushObject Factory.create 'campaign'
-    section.get('items').pushObject Factory.create 'meeting'
+    controller.pushItem Factory.create 'deal'
+      close_by: date.toFullFormat()
 
-    Radium.get('router.activeFeedController.content').pushObject section
+    controller.pushItem Factory.create 'campaign'
+      ends_at: date.toFullFormat()
 
-  waitForResource section, (el) ->
-    assertFeedItems(7)
+    controller.pushItem Factory.create 'meeting'
+      starts_at: date.toFullFormat()
 
-    clickFilterAndAssertFeedItems 'todo', 3
-    clickFilterAndAssertFeedItems 'deal', 2
+  waitForFeedDate date, (el) ->
+    assertFeedItems(4)
+
+    clickFilterAndAssertFeedItems 'todo', 1
+    clickFilterAndAssertFeedItems 'deal', 1
     clickFilterAndAssertFeedItems 'campaign', 1
     clickFilterAndAssertFeedItems 'meeting', 1
-    clickFilterAndAssertFeedItems 'all', 7
+    clickFilterAndAssertFeedItems 'all', 4
 
 integrationTest 'a feed can retrieve new items from infinite scrolling in both directions', ->
   expect(4)
