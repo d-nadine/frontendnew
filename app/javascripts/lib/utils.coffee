@@ -10,19 +10,6 @@ Radium.Utils = Em.Object.create
 
       object.addObserver 'isLoaded', observer
 
-  showItem: (item) ->
-    if item.constructor == Radium.Invitation
-      # TODO: that's definitely a code smell, this should be refactored,
-      #       not sure what's the best way to do it at the moment
-      item = item.get('meeting')
-
-    date = item.get('feedDate')
-    Radium.router.jumpTo date: date, disableScroll: true
-
-    # now we need to wait till feed is loaded and we can expand the
-    # item
-    Radium.set 'currentFeedController.expandedItem', item
-
   scroll: (elementOrClassName, callback) ->
     Ember.run.next ->
       element = null
