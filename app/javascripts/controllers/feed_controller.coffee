@@ -67,9 +67,6 @@ Radium.FeedController = Em.ArrayController.extend
 
   range: 'daily'
 
-  commitTransaction: ->
-    @get('store').commit()
-
   pushItem: (item) ->
     self = this
 
