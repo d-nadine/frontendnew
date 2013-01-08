@@ -11,9 +11,12 @@
       </a>
     </div>
     <div class="btn-group">
-      <a class="btn btn-primary" href="#">Todo</a>
+      <a {{action toggleTodoForm target="view"}} class="btn btn-primary" href="#">Todo</a>
     </div>
   {{/if}}
+</div>
+<div class="rel">
+{{view view.formContainer}}
 </div>
 {{collection Radium.SelectedEmailListView contentBinding="selectedMail"}}
 {{outlet}}
