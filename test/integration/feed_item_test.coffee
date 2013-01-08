@@ -9,7 +9,7 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
   app ->
     for i in [0..8]
       todo = Factory.create 'todo'
-      Radium.get('router.feedController').pushItem todo
+      Radium.get('router.activeFeedController').pushItem todo
 
   waitForResource section, (el) ->
     assertFeedItems 0
@@ -32,7 +32,7 @@ integrationTest 'a feed can be filtered by feed type', ->
     section.get('items').pushObject Factory.create 'campaign'
     section.get('items').pushObject Factory.create 'meeting'
 
-    Radium.get('router.feedController.content').pushObject section
+    Radium.get('router.activeFeedController.content').pushObject section
 
   waitForResource section, (el) ->
     assertFeedItems(7)
@@ -50,7 +50,7 @@ integrationTest 'a feed can retrieve new items from infinite scrolling in both d
 
   loadFeedFixtures([8, 14])
 
-  controller = Radium.get('router.feedController')
+  controller = Radium.get('router.activeFeedController')
 
   app ->
     controller.pushItem Factory.create 'todo'
@@ -64,13 +64,13 @@ integrationTest 'a feed can retrieve new items from infinite scrolling in both d
     assertScrollingFeedHasDate(controller, -14, back: true)
 
 integrationTest 'a feed can jump to a specific date', ->
-  expect(3)
+  expect(2)
 
   assertEmptyFeed()
 
   loadFeedFixtures([8, 14, 27])
 
-  controller = Radium.get('router.feedController')
+  controller = Radium.get('router.activeFeedController')
   router = Radium.get('router')
 
   app ->
@@ -79,16 +79,10 @@ integrationTest 'a feed can jump to a specific date', ->
   feedSelector = ".feed_section_#{Ember.DateTime.create().toDateFormat()}"
 
   waitForSelector feedSelector, (el) ->
-    assertFeedItems 1
-
     futureDate = Ember.DateTime.create().advance(day: 27)
 
     app ->
-      router.send 'showDate', date: futureDate.toDateFormat()
+      router.send 'scrollFeedToDate', date: futureDate.toDateFormat()
 
     waitForSelector ".feed_section_#{futureDate.toDateFormat()}", (el) ->
       assertText el, futureDate.toFormattedString('%A, %B %D, %Y')
-
-
-
-

@@ -31,5 +31,3 @@ window.loadFeedFixtures = (dates)->
 
   for feed in sorted
     Factory.create 'feed_section', feed
-
-
