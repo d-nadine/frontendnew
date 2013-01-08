@@ -29,8 +29,8 @@ window.assertScrollingFeedHasDate = (controller, daysToJump, direction) ->
 
   dateToTestFor = Ember.DateTime.create().advance(day: daysToJump)
 
-  waitForSelector ".feed_section_#{dateToTestFor.toDateFormat()}", (el) ->
-    assertText el, dateToTestFor.toFormattedString('%A, %B %D, %Y')
+  waitForFeedDate dateToTestFor, ->
+    ok true, "#{dateToTestFor.toDateFormat()} in feed"
 
 window.assertSelector = (selector, message) ->
   ok $F(selector).length > 0, "#{selector} exists"

@@ -106,7 +106,7 @@ Radium.FeedController = Em.ArrayController.extend
 
   scrollBackward: ->
     return unless @get 'canScroll'
-    @loadFutureFeed()
+    @loadPastFeed()
 
   loadFeed: (options) ->
     # we want to adjust feed by manipulating scroll when
@@ -117,7 +117,7 @@ Radium.FeedController = Em.ArrayController.extend
 
     if options.forward
       @loadFutureFeed()
-    else if options.back
+    else if options.backward
       @loadPastFeed()
 
   loadFutureFeed: ->

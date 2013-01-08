@@ -1,22 +1,15 @@
 window.loadFeedFixtures = (dates)->
   feeds = []
 
-  feeds.push
-    id: Ember.DateTime.create().toDateFormat()
-    date: Ember.DateTime.create().toFullFormat()
-    item_ids: [
-      ['todo', Factory.create('todo')]
-    ]
+  for date in dates
+    todo = Factory.create('todo', finish_by: date.toFullFormat())
 
-  for i in dates
-    for advance in [i, (0 - i)]
-      date = Ember.DateTime.create().advance(day: advance)
-      feeds.push
-        id: date.toDateFormat()
-        date: date.toFullFormat()
-        item_ids: [
-          ['todo', Factory.create('todo')]
-        ]
+    feeds.push
+      id: date.toDateFormat()
+      date: date.toFullFormat()
+      item_ids: [
+        [Radium.Todo, todo.get('id')]
+      ]
 
   sorted = feeds.sort (a, b) ->
     if a.id > b.id then 1 else -1
@@ -30,4 +23,4 @@ window.loadFeedFixtures = (dates)->
       item.next_date =  next.id
 
   for feed in sorted
-    Factory.create 'feed_section', feed
+    Radium.FeedSection.FIXTURES.push feed

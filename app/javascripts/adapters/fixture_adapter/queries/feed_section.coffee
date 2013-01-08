@@ -45,7 +45,7 @@ Radium.FixtureAdapter.reopen
       cutOff = query.before.get 'milliseconds'
 
       scoped = scoped.filter (f) ->
-        Ember.compare(cutOff, Date.parse(f.date)) == 1
+        Ember.compare(cutOff, Date.parse(f.date)) != 0
 
     else if query.after
       cutOff = query.after.get 'milliseconds'

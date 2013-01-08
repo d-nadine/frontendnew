@@ -50,31 +50,32 @@ integrationTest 'a feed can be filtered by feed type', ->
     clickFilterAndAssertFeedItems 'all', 4
 
 integrationTest 'a feed can retrieve new items from infinite scrolling in both directions', ->
-  expect(4)
+  expect(3)
 
   assertEmptyFeed()
 
-  loadFeedFixtures([8, 14])
+  loadFeedFixtures [
+    Ember.DateTime.create().advance(day: -7),
+    Ember.DateTime.create(),
+    Ember.DateTime.create().advance(day: 7)
+  ]
 
   controller = Radium.get('router.activeFeedController')
 
-  app ->
-    controller.pushItem Factory.create 'todo'
+  todo = Factory.create 'todo'
 
-  feedSelector = ".feed_section_#{Ember.DateTime.create().toDateFormat()}"
+  app -> controller.pushItem todo
 
-  waitForSelector feedSelector, (el) ->
-    assertFeedItems 1
-
-    assertScrollingFeedHasDate(controller, 14, forward: true)
-    assertScrollingFeedHasDate(controller, -14, back: true)
+  waitForFeedItem todo, (el) ->
+    assertScrollingFeedHasDate(controller, 7, forward: true)
+    assertScrollingFeedHasDate(controller, -7, backward: true)
 
 integrationTest 'a feed can jump to a specific date', ->
-  expect(2)
-
+  expect(4)
   assertEmptyFeed()
 
-  loadFeedFixtures([14])
+  futureDate = Ember.DateTime.create().advance(day: 14)
+  loadFeedFixtures [futureDate]
 
   router = Radium.get('router')
 
@@ -84,10 +85,13 @@ integrationTest 'a feed can jump to a specific date', ->
     Radium.get('router.activeFeedController').pushItem todo
 
   waitForFeedItem todo, ->
-    futureDate = Ember.DateTime.create().advance(day: 14)
+    assertFeedItems 1
 
     app ->
-      router.send 'scrollFeedToDate', date: futureDate
+      # FIXME: why does this not worK? Or what is the proper way to use send?
+      # router.send 'scrollFeedToDate', date: futureDate
+      router.set 'activeFeedController.currentDate', futureDate
 
     waitForFeedDate futureDate, ->
+      assertFeedItems 2
       ok true, "#{futureDate.toDateFormat()} loaded via jumping"
