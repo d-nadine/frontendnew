@@ -69,10 +69,3 @@ Radium.FeedSection = Radium.Core.extend
     ( @isBefore(date) && otherSection.isAfter(date) ) ||
        ( @isAfter(date) && otherSection.isBefore(date) ) &&
        ( @get('nextSection') == otherSection || @get('previousSection') == otherSection )
-
-Radium.FeedSection.reopenClass
-  loadSection: (store, date) ->
-    store.load Radium.FeedSection,
-      id: date.toDateFormat()
-      date: date.toFullFormat()
-      item_ids: []
