@@ -86,7 +86,7 @@ Radium.TodoFormView = Radium.FormView.extend
     optionLabelPath: 'content.displayName'
     optionValuePath: 'content.id'
     didInsertElement: ->
-      user = Radium.get('router.meController.user')
+      user = Radium.get('router.currentUser')
       @set 'parentView.assignedUser', user
       @set 'selection', user
 
@@ -114,12 +114,6 @@ Radium.TodoFormView = Radium.FormView.extend
           finishBy.toFormattedString '%Y-%m-%d'
     ).property('parentView.finishBy')
 
-  moveFeed: (->
-    if @get 'isGlobalLevelForm'
-      date = @get('finishBy').toFormattedString '%Y-%m-%d'
-      Radium.get('router').send 'scrollFeedToDate', context: @get('finishBy')
-  ).observes('finishBy')
-
   submitForm: ->
     createTodo = ->
       selection = @get('selection')
@@ -139,6 +133,8 @@ Radium.TodoFormView = Radium.FormView.extend
         assignedUser = self.get('assignedUser')
         assignedUserId = assignedUser.get('id')
 
+        # FIXME: this should be created via ember-objects not JSON like
+        # data
         data =
           description: description
           finishBy: finishBy
@@ -148,6 +144,9 @@ Radium.TodoFormView = Radium.FormView.extend
           user: assignedUser
           created_at: Ember.DateTime.create()
           updated_at: Ember.DateTime.create()
+
+        todo = Radium.Todo.createRecord data
+        todo.commit()
 
         self.get('controller').createFeedItem(Radium.Todo, data, object)
 

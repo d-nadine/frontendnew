@@ -37,3 +37,9 @@ window.assertNotifications = (count) ->
 
 window.assertOnPage = (path) ->
   equal path, $W.Radium.get('router.currentPath')
+
+window.assertInFeed = (item) ->
+  selector = '[data-type="%@"][data-id="%@"]'.fmt item.get('constructor'), item.get('id')
+
+  waitForSelector selector, ->
+    ok true, "#{item.get('constructor')} #{item.get('id')} in feed"
