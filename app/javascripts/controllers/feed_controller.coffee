@@ -145,6 +145,11 @@ Radium.FeedController = Em.ArrayController.extend
       after: section.get('id')
       limit: limit
 
+  currentDateDidChange: (->
+    date = @get 'currentDate'
+    @load nearDate: date, =>
+      @set 'currentLoadedDate', date
+  ).observes('currentDate')
 
   scrollForward: ->
     return unless @get 'canScroll'
@@ -182,8 +187,10 @@ Radium.FeedController = Em.ArrayController.extend
       before: @get('nextPastDate')
       limit: @get('scrollingPageSize')
 
-  load: (query) ->
+  load: (query, callback) ->
     query.scope = @get 'scope'
 
     results = Radium.FeedSection.find query
     @get('content').load results
+
+    Radium.Utils.runWhenLoaded results, callback if callback

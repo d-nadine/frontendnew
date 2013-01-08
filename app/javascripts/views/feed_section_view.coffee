@@ -4,6 +4,8 @@ Radium.FeedSectionView = Em.View.extend
   classNameBindings: ['content.domClass', 'hidden']
   hiddenBinding: 'parentView.hidden'
   justRenderedBinding: 'parentView.justRendered'
+  attributeBindings: ['dataDate:data-date']
+  dataDateBinding: Ember.Binding.oneWay 'content.id'
 
   unclustered: (->
     if @get 'disableClusters'

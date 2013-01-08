@@ -62,9 +62,9 @@ Radium.Router = Ember.Router.extend
     showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
     expandFeedItem: (router, event) ->
-      router.set 'feedController.expandedItem', event.context
+      router.set 'activeFeedController.expandedItem', event.context
     scrollFeedToDate: (router, event) ->
-      router.set 'feedController.currentDate', event.context
+      router.set 'activeFeedController.currentDate', event.context
 
     initialState: 'dashboard'
 
@@ -82,6 +82,8 @@ Radium.Router = Ember.Router.extend
           controller: router.get('dashboardFeedController')
           viewClass: Radium.FeedView
           context: feed
+
+        router.set('activeFeedController', router.get('dashboardFeedController'))
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'

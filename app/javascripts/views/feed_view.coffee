@@ -2,6 +2,20 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
   templateName: 'radium/feed'
   elementId: 'feed'
   feedBinding: 'controller'
+  currentLoadedDateBinding: 'controller.currentLoadedDate'
+
+  currentLoadedDateDidChange: (->
+    date = @get('currentLoadedDate')
+    return unless date
+
+    # FIXME: this  needs to handle the case where the feed
+    # is pushed down by another div
+    Ember.run.next ->
+      @$("[data-date=\"#{date.toDateFormat()}\"]").ScrollTo
+        duration: 250
+        offsetTop: 200
+
+  ).observes('currentLoadedDate')
 
   # FIXME: this property is way to complicated
   empty: (->

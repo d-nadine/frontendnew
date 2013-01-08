@@ -11,6 +11,7 @@ Radium.FixtureAdapter.reopen
   # * nearDate: load the feed date closest to the given date
   # * before: load the feed before this date
   # * after: load the feed after this date
+  # * date: load the feed for a specific date
   # * limit: the number of items to load
   queryFeedSectionFixtures: (fixtures, query) ->
     throw new Error("Scope require to query the feed!") unless query.scope
@@ -33,6 +34,12 @@ Radium.FixtureAdapter.reopen
 
       # take an arbitrary slice of it
       scoped = scoped.slice 0, 5
+
+    else if query.date
+      formattedDate = query.date.toDateFormat()
+
+      scoped = scoped.filter (f) ->
+        f.id == formattedDate
 
     else if query.before
       cutOff = query.before.get 'milliseconds'
