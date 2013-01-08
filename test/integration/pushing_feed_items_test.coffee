@@ -1,4 +1,4 @@
-module 'Integration - Feed Events - feedController.pushItem'
+module 'Integration - Push Feed Items'
 
 integrationTest 'adds an item when there is no existing feed items', ->
   assertEmptyFeed()
@@ -9,7 +9,6 @@ integrationTest 'adds an item when there is no existing feed items', ->
     Radium.get('router.activeFeedController').pushItem(todo)
 
   assertInFeed todo 
-
 
 integrationTest 'adds an item when there is an existing feed item', ->
   assertEmptyFeed()
@@ -53,4 +52,3 @@ integrationTest 'adds an item and checks for more feed items', ->
 
   assertInFeed newTodo
   assertInFeed existingTodo
-

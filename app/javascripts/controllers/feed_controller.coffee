@@ -77,6 +77,7 @@ Radium.FeedController = Em.ArrayController.extend
     addItem = ->
       return if item.get('isNew')
 
+      # FIXME: this logic should be in the Feed class itself
       section = Radium.FeedSection.find date
 
       sections = self.get 'content'
