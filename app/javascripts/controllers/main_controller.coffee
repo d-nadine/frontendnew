@@ -1,2 +1,2 @@
-Radium.MainController = Ember.Controller.extend
+Radium.MainController = Ember.Controller.extend()
 
