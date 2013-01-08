@@ -32,9 +32,9 @@ Radium.InfiniteScroller = Ember.Mixin.create
       @set 'scrollDirection', Radium.SCROLL_BACK
 
     if !isUp && ($(window).scrollTop() > $(document).height() - $(window).height() - 600)
-      @get('controller').loadFeed back: true
+      @get('controller').scrollBackward()
     else if isUp && $(window).scrollTop() < 600
-      @get('controller').loadFeed forward: true
+      @get('controller').scrollForward()
 
     @set 'didScroll', false
 

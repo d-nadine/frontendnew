@@ -9,7 +9,7 @@ runWhenLoaded = Radium.Utils.runWhenLoaded
 #       back to controller to keeps things nicely organized when
 #       SortableMixin can play nicely with others (ie. when you
 #       can overwrite arrangedContent to add filtering or something else)
-Radium.ExpandableRecordArray = DS.RecordArray.extend
+UpdateableRecordArray = DS.RecordArray.extend
   isLoading: false
 
   loadRecord: (record) ->
@@ -59,3 +59,17 @@ Radium.ExpandableRecordArray = DS.RecordArray.extend
     else if item > midItem.get('id')
       return @_binarySearch(item, low, mid)
     mid
+
+Radium.Feed = Ember.Object.create
+  findFor: (record) ->
+    result = Radium.FeedSection.find
+      scope: record
+      nearDate: Ember.DateTime.create()
+
+    recordArray = UpdateableRecordArray.create
+      type: Radium.FeedSection
+      content: Ember.A()
+      store: Ember.get DS, 'defaultStore'
+
+    recordArray.load result
+    recordArray

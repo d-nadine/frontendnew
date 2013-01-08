@@ -74,13 +74,14 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
-        router.set 'feedController.scope', router.get('currentUser')
+        router.set 'dashboardFeedController.scope', router.get('currentUser')
+        feed = Radium.Feed.findFor router.get('currentUser')
 
-        feed = Radium.FeedSection.find 
-          scope: router.get('currentUser')
-          nearDate: Ember.DateTime.create()
-
-        router.get('mainController').connectOutlet 'content', 'feed', feed
+        router.get('mainController').connectOutlet 
+          outletName: 'content'
+          controller: router.get('dashboardFeedController')
+          viewClass: Radium.FeedView
+          context: feed
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'
@@ -122,7 +123,6 @@ Radium.Router = Ember.Router.extend
           router.set 'groupsFeedController.recordId', group.get('id')
           # FIXME: this is bullshit
           router.set 'groupsFeedController.recordType', Radium.GroupFeedSection
-          router.set 'groupsFeedController.type', 'user'
 
           feed = Radium.FeedSection.find
             scope: group
@@ -156,7 +156,6 @@ Radium.Router = Ember.Router.extend
           router.set 'contactsFeedController.recordId', contact.get('id')
           # FIXME: this is bullshit
           router.set 'contactsFeedController.recordType', Radium.ContactFeedSection
-          router.set 'contactsFeedController.type', 'user'
 
         deserialize: (router, params) ->
           params.contact_id = parseInt(params.contact_id)
@@ -181,7 +180,6 @@ Radium.Router = Ember.Router.extend
           router.set 'usersFeedController.recordId', user.get('id')
           # FIXME: this is bullshit
           router.set 'usersFeedController.recordType', Radium.UserFeedSection
-          router.set 'usersFeedController.type', 'user'
 
         deserialize: (router, params) ->
           # fixture adapter is pretty limited and works only with integer ids

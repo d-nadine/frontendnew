@@ -28,6 +28,8 @@ require 'radium/store'
 
 require 'radium/router'
 
+require 'radium/feed'
+
 require 'radium/mixins/views/slider'
 require 'radium/mixins/views/time_picker'
 require 'radium/mixins/infinite_scroller'
@@ -88,6 +90,7 @@ require 'radium/controllers/groups_feed_controller'
 require 'radium/controllers/calendar_feed_controller'
 require 'radium/controllers/notifications_controller'
 require 'radium/controllers/campaigns_controller'
+require 'radium/controllers/dashboard_feed_controller'
 
 require 'radium/views/application_view'
 require 'radium/views/login_view'

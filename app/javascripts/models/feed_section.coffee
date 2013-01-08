@@ -1,5 +1,3 @@
-require 'radium/lib/expandable_record_array'
-
 Radium.FeedSection = Radium.Core.extend
   date: DS.attr('datetime')
   nextDate: DS.attr('string')
@@ -78,20 +76,3 @@ Radium.FeedSection.reopenClass
       id: date.toDateFormat()
       date: date.toFullFormat()
       item_ids: []
-
-Radium.FeedSection.reopenClass
-  # Override find to return ExpandableRecordArrays
-  # when used for queries
-  find: (query) ->
-    if Ember.typeOf(query) == 'object'
-      result = @_super.apply @, arguments
-
-      recordArray = Radium.ExpandableRecordArray.create
-        type: @
-        content: Ember.A()
-        store: Ember.get DS, 'defaultStore'
-
-      recordArray.load result
-      recordArray
-    else
-      @_super.apply @, arguments
