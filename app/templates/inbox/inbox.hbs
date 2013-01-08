@@ -5,11 +5,14 @@
     </a>
   </div>
   {{#if selectedMail.length}}
-  <div class="btn-group">
-    <a class="btn btn-danger" href="#">
-      <i class="icon-trash icon-large icon-white"></i> Delete
-    </a>
-  </div>
+    <div class="btn-group">
+      <a class="btn btn-danger" href="#">
+        <i class="icon-trash icon-large icon-white"></i> Delete
+      </a>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-primary" href="#">Todo</a>
+    </div>
   {{/if}}
 </div>
 {{collection Radium.SelectedEmailListView contentBinding="selectedMail"}}

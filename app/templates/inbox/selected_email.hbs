@@ -1,5 +1,5 @@
 {{#with view.content}}
-  <button type="button" class="close" data-dismiss="alert">×</button>
+  <button {{action deselectEmail this  target="controller"}} type="button" class="close" data-dismiss="alert">×</button>
   <div class="span2">
     <strong>{{unbound sender.displayName}}</strong>
   </div>

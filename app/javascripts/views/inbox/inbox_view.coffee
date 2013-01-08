@@ -6,3 +6,4 @@ Radium.InboxView = Em.View.extend
     isVisible: ( ->
       @get('parentView.controller.length') > 0
     ).property('parentView.controller.length')
+
