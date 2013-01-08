@@ -1,5 +1,6 @@
 Radium.InboxView = Em.View.extend
   templateName: 'radium/inbox/inbox'
+  contentBinding: 'controller.content'
   arrow: Em.View.extend
     classNames: 'arrow'
     isVisible: ( ->
