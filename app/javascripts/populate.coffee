@@ -210,8 +210,6 @@ class Populator
     for feed in sorted
       Factory.create 'feed_section', feed
 
-    Radium.Gap.FIXTURES = []
-
   @createFeedSection: (advance, items, feeds) ->
     advances = if advance == 0 then [advance] else [advance, (0 - advance)]
 

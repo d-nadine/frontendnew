@@ -91,14 +91,25 @@ Radium.FeedSectionsListView = Ember.CollectionView.extend
           @get('childViews').removeObject gapView
 
     gap: (->
-      if content = @get('content')
-        @get('parentView.content.firstObject') != content &&
-          content.get('nextDate') && !content.get('nextSection')
+      content = @get 'content'
+      return unless content
+      return unless content.get 'nextDate'
+      return if @get('parentView.content.firstObject') == content
+
+      content.get('nextSection') is undefined
     ).property('content', 'content.nextSection', 'content.nextDate', 'parentView.content.firstObject')
 
     createGapView: ->
-      gapView = Radium.GapView.create()
+      sections = @get('parentView.content')
+      thisPosition = sections.indexOf @get('content')
+      nextSection = sections.objectAt thisPosition - 1
+
+      gapView = Radium.GapView.create
+       startDate: @get('content.date')
+       endDate: nextSection.get('date')
+
       @set 'gapView', gapView
+
       gapView
 
 

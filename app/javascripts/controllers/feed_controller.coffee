@@ -95,11 +95,6 @@ Radium.FeedController = Em.ArrayController.extend
     else
       addItem()
 
-  loadAfterSection: (section, limit) ->
-    @get('content').load Radium.FeedSection.find
-      after: section.get('id')
-      limit: limit
-
   currentDateDidChange: (->
     date = @get 'currentDate'
     @load nearDate: date, =>

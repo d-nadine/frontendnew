@@ -1,2 +1,1 @@
-Radium.Gap = DS.Model.extend
-  sectionIds: DS.attr('array')
+Radium.Gap = Ember.Object.extend()
