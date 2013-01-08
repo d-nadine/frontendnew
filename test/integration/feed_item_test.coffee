@@ -74,21 +74,20 @@ integrationTest 'a feed can jump to a specific date', ->
 
   assertEmptyFeed()
 
-  loadFeedFixtures([8, 14, 27])
+  loadFeedFixtures([14])
 
-  controller = Radium.get('router.activeFeedController')
   router = Radium.get('router')
 
+  todo = Factory.create 'todo'
+
   app ->
-    controller.pushItem Factory.create 'todo'
+    Radium.get('router.activeFeedController').pushItem todo
 
-  feedSelector = ".feed_section_#{Ember.DateTime.create().toDateFormat()}"
-
-  waitForSelector feedSelector, (el) ->
-    futureDate = Ember.DateTime.create().advance(day: 27)
+  waitForFeedItem todo, ->
+    futureDate = Ember.DateTime.create().advance(day: 14)
 
     app ->
-      router.send 'scrollFeedToDate', date: futureDate.toDateFormat()
+      router.send 'scrollFeedToDate', date: futureDate
 
-    waitForSelector ".feed_section_#{futureDate.toDateFormat()}", (el) ->
-      assertText el, futureDate.toFormattedString('%A, %B %D, %Y')
+    waitForFeedDate futureDate, ->
+      ok true, "#{futureDate.toDateFormat()} loaded via jumping"
