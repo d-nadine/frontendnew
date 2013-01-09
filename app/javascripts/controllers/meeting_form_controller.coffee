@@ -7,10 +7,9 @@ Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
     now = Ember.DateTime.create()
     hour = now.get('hour')
     minute = now.get('minute')
-    start = Radium.Utils.roundTime(now)
     @setProperties
-      startsAt: start
-      endsAt: start.advance(hour: 1)
+      startsAt: now
+      endsAt: now.advance(hour: 1)
       topicValue: ''
 
     if (date = @get 'startsAtDate') && !@get('endsAtDate')

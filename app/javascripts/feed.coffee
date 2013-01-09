@@ -1,5 +1,14 @@
-require 'radium/lib/utils'
-runWhenLoaded = Radium.Utils.runWhenLoaded
+runWhenLoaded = (object, callback) ->
+  if object.get('isLoaded')
+    Ember.run.next ->
+      callback.apply object
+  else
+    observer = ->
+      callback.apply object
+      object.removeObserver 'isLoaded', observer
+
+    object.addObserver 'isLoaded', observer
+
 # TODO: maybe it would be nice to handle queuing arrays added
 #       with load. for now it's handled in router, but this
 #       implementation is not bullet proof
@@ -134,7 +143,7 @@ Radium.Feed = Ember.ArrayProxy.extend
     results = Radium.FeedSection.find query
     @get('content').load results
 
-    Radium.Utils.runWhenLoaded results, callback if callback
+    runWhenLoaded results, callback if callback
 
   loadFutureFeed: ->
     futureDate = @get 'nextFutureDate'
