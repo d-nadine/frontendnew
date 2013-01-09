@@ -84,9 +84,6 @@ Radium.FeedController = Em.ArrayController.extend
 
       section.pushItem(item)
 
-      Radium.Utils.scrollWhenLoaded sections, item.get('domClass'), ->
-        $(".#{item.get('domClass')}").effect("highlight", {}, 1000)
-
       item.removeObserver 'isNew', addItem
 
     if item.get('isNew')

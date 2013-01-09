@@ -10,10 +10,6 @@ Radium.Core = DS.Model.extend
     Radium.Core.typeToString(@constructor)
   ).property()
 
-  domClass: (->
-    "#{@get('type')}_#{@get('id')}"
-  ).property('type', 'id')
-
   eachPolymorphicAttribute: (callback, binding) ->
     Ember.get(this.constructor, 'polymorphicAttributes').forEach( ( (name, meta) ->
       callback.call(binding, name, meta)

@@ -44,19 +44,8 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
-window.domClass = (model) ->
-  id = model.get('id')
-  type = model.constructor
-  selector = ".#{type.toString().split('.').pop().underscore()}_#{id}"
-
-window.waitForResource = (resource, callback, message) ->
-  selector = domClass(resource)
-  message ||= "#{selector} on page"
-
-  waitForSelector selector, callback, message
-
-window.waitForFeedItem = (resource, callback, message) ->
-  selector = "#feed #{domClass(resource)}"
+window.waitForFeedItem = (item, callback, message) ->
+  selector = '#main-feed [data-type="%@"][data-id="%@"]'.fmt item.get('constructor'), item.get('id')
 
   callbackWithFeedItem = (feedItem) ->
     callback(feedItem.parent())
