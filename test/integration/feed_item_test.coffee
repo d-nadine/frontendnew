@@ -19,7 +19,7 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
     assertText section, '9 todos'
 
 integrationTest 'a feed can be filtered by feed type', ->
-  expect(7)
+  expect(6)
 
   assertEmptyFeed()
 
@@ -34,20 +34,16 @@ integrationTest 'a feed can be filtered by feed type', ->
     controller.pushObject Factory.create 'deal'
       close_by: date.toFullFormat()
 
-    controller.pushObject Factory.create 'campaign'
-      ends_at: date.toFullFormat()
-
     controller.pushObject Factory.create 'meeting'
       starts_at: date.toFullFormat()
 
   waitForFeedDate date, (el) ->
-    assertFeedItems(4)
+    assertFeedItems(3)
 
     clickFilterAndAssertFeedItems 'todo', 1
     clickFilterAndAssertFeedItems 'deal', 1
-    clickFilterAndAssertFeedItems 'campaign', 1
     clickFilterAndAssertFeedItems 'meeting', 1
-    clickFilterAndAssertFeedItems 'all', 4
+    clickFilterAndAssertFeedItems 'all', 3
 
 integrationTest 'a feed can retrieve new items from infinite scrolling in both directions', ->
   expect(3)

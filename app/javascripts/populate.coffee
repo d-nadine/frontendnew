@@ -48,10 +48,6 @@ class Populator
     deal = Factory.create 'deal',
       user: -> aaron
 
-    campaign = Factory.create 'campaign',
-      name: 'Fall product campaign'
-      user: -> jerry
-
     todo = Factory.create 'todo',
       description: 'Finish first product draft',
       user: -> jerry
@@ -75,13 +71,6 @@ class Populator
       reference:
         id: -> email
         type: 'email'
-
-    campaignTodo = Factory.create 'todo',
-      description: 'Prepare campaign plan',
-      user: -> jerry,
-      reference:
-        id: -> campaign
-        type: 'campaign'
 
     emailTodo = Factory.create 'todo',
       description: 'write a nice response',
@@ -158,10 +147,6 @@ class Populator
       message: 'here is a message'
       type: 'email'
 
-    callList = Factory.create 'call_list',
-      description: 'This is a call list'
-      user: -> jerry
-
     feeds = []
 
     @createFeedSection(0, [
@@ -169,10 +154,7 @@ class Populator
         ['deal', deal]
         ['meeting', retrospection]
         ['deal', deal]
-        ['call_list', callList]
-        ['campaign', campaign]
         ['todo', overdue]
-        ['todo', campaignTodo]
         ['todo', emailTodo]
         ['todo', groupTodo]
         ['todo', phoneCallTodo]

@@ -18,24 +18,6 @@ integrationTest 'lead notifications', ->
 
     assertOnPage contactPath(contact)
 
-integrationTest 'campaign assignments appear', ->
-  campaign = Factory.create 'campaign'
-
-  notification = Factory.create 'notification'
-    reference:
-      id: -> campaign
-      type: 'campaign'
-    tag: 'assigned.campaign'
-
-  assertNotifications 1
-
-  openNotifications (notificationCenter) ->
-    assertText notificationCenter, campaign.get('name')
-
-    clickNotification notification
-
-    assertOnPage campaignPath(campaign)
-
 integrationTest 'contact assignment notifications', ->
   contact = Factory.create 'contact'
 

@@ -1,12 +1,5 @@
 module 'Application Factories'
 
-integrationTest 'builds a campaign with associations', ->
-  campaign = Factory.create 'campaign',
-    user: -> Factory.build 'user'
-
-  equal campaign.get('id'), 1, 'campaign exists'
-  ok campaign.get('user.isLoaded'), 'user is loaded'
-
 integrationTest 'builds a user', ->
   user = Factory.create 'user'
 
@@ -28,14 +21,6 @@ integrationTest 'builds a todo', ->
   ok !todo.get('overdue'), 'Todo is not overdue'
 
   ok todo.get('user.isLoaded'), 'user is loaded'
-
-integrationTest 'builds a call list', ->
-  callList = Factory.create 'call_list',
-    user: -> Factory.build 'user'
-
-  ok callList.get('id'), 'call list ID exists'
-  equal "Call List 1", callList.get('description'), 'call list description set'
-  ok callList.get('user.isLoaded'), 'call list user is loaded'
 
 integrationTest 'builds a contact', ->
   contact = Factory.create 'contact'

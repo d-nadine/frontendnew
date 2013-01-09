@@ -4,8 +4,6 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
 
     @map = Ember.Map.create()
     @map.set 'user', Radium.User
-    @map.set 'call_list', Radium.CallList
-    @map.set 'campaign', Radium.Campaign
     @map.set 'comment', Radium.Comment
     @map.set 'contact', Radium.Contact
     @map.set 'deal', Radium.Deal
@@ -40,8 +38,6 @@ require 'radium/factories/traits'
 
 require 'radium/factories/user'
 
-require 'radium/factories/call_list'
-require 'radium/factories/campaign'
 require 'radium/factories/comment'
 require 'radium/factories/contact'
 require 'radium/factories/deal'

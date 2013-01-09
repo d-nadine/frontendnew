@@ -68,7 +68,6 @@ Radium.Router = Ember.Router.extend
     showContacts: Ember.Route.transitionTo('root.contacts.index')
     showContact: Ember.Route.transitionTo('root.contacts.contact')
     showDeal: Ember.Route.transitionTo('root.deal')
-    showCampaign: Ember.Route.transitionTo('root.campaigns.campaign')
     showGroup: Ember.Route.transitionTo('root.groups.group')
     showDashboard: Ember.Route.transitionTo('root.dashboard')
     showCalendar: Ember.Route.transitionTo('root.calendar.index')
@@ -97,19 +96,6 @@ Radium.Router = Ember.Router.extend
       deserialize: (router, params) ->
         params.deal_id = parseInt(params.deal_id)
 
-    campaigns: Ember.Route.extend
-      route: '/campaigns'
-      connectOutlets: (router, params) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
-
-      campaign: Ember.Route.extend
-        route: '/:campaign_id'
-        connectOutlets: (router, campaign) ->
-          router.get('mainController').connectOutlet('content', 'campaign', campaign)
-
-        deserialize: (router, params) ->
-          params.campaign_id = parseInt(params.campaign_id)
-
     groups: Ember.Route.extend
       route: '/groups'
       connectOutlets: (router) ->
@@ -130,7 +116,6 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'contactsSidebar')
         router.get('mainController').connectOutlet('content', 'contacts')
-        router.get('campaignsController').set('content', Radium.Campaign.find())
 
       index: Ember.Route.extend
         route: '/'

@@ -7,7 +7,6 @@ Radium.Notification = Radium.Core.extend
   referenceType: (-> @get('referenceData.type') ).property('referenceData.type')
   referenceData: DS.attr('object')
 
-  campaign: DS.belongsTo('Radium.Campaign', polymorphicFor: 'reference')
   contact: DS.belongsTo('Radium.Contact', polymorphicFor: 'reference')
   deal: DS.belongsTo('Radium.Deal', polymorphicFor: 'reference')
   group: DS.belongsTo('Radium.Group', polymorphicFor: 'reference')

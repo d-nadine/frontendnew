@@ -21,7 +21,6 @@ Radium.Person = Radium.Core.extend
 
   # Default hasMany groups
   deals: DS.hasMany('Radium.Deal')
-  campaigns: DS.hasMany('Radium.Campaign')
   todos: DS.hasMany('Radium.Todo')
   meetings: DS.hasMany('Radium.Meeting')
   reminders: DS.hasMany('Radium.Reminder')

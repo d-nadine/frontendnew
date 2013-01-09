@@ -1,23 +1,5 @@
 module 'Integration - Displaying Feed Items'
 
-integrationTest 'campaigns appear in the feed', ->
-  expect 3
-  assertEmptyFeed()
-
-  campaign = Factory.create 'campaign'
-
-  app ->
-    Radium.get('router.activeFeedController').pushObject campaign
-
-  waitForFeedItem campaign, (feedItem) ->
-    assertText feedItem, campaign.get('name')
-
-    clickFeedItem feedItem
-
-    fillInAndPressEnter $F('.new-comment', feedItem), 'Test Comment'
-
-    assertText feedItem, 'Test Comment'
-
 integrationTest 'deals appear in the feed', ->
   expect 3
   assertEmptyFeed()
