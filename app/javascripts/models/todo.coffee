@@ -21,9 +21,6 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo', inverse: 'todo')
   user: DS.belongsTo('Radium.User')
 
-  # Turn on when todo's are created from the form
-  hasNotificationAnim: DS.attr('boolean')
-
   isCall: ( ->
     (if (@get('kind') is 'call') then true else false)
   ).property('kind')
