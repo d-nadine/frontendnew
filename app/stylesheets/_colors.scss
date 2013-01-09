@@ -2,7 +2,6 @@
 $sidebar-bg: #eee;
 
 //inbox
-$sidebar-active-bg: darken($sidebar-bg, 8);
 $inbox-sidebar: #333;
 $inbox-bbotom: darken($sidebar-bg, 8);
 
@@ -17,3 +16,6 @@ $sidebar-active-hover: lighten($inbox-sidebar, 50);
 
 $sidebar-selected: #c2e1f5;
 $sidebar-selected-active: darken($sidebar-selected, 15);
+
+$sidebar-read-bg: lighten($sidebar-bg, 3);
+$sidebar-read: #999;

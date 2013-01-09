@@ -1,8 +1,10 @@
 Radium.SidebarMailItemView = Em.View.extend
   tagName: 'li'
   templateName: 'radium/inbox/sidebar_mailitem'
-  classNameBindings: ['isActive:active', 'isSelected:selected']
+  classNameBindings: ['isActive:active', 'isSelected:selected', 'read']
   isSelectedBinding: 'content.isSelected'
+
+  readBinding: 'content.read'
 
   isActive: ( ->
     @get('content') == @get('controller.active')
