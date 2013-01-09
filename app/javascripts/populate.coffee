@@ -154,6 +154,7 @@ class Populator
         ['deal', deal]
         ['meeting', retrospection]
         ['deal', deal]
+        ['phone_call', phoneCall]
         ['todo', overdue]
         ['todo', emailTodo]
         ['todo', groupTodo]
