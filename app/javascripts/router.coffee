@@ -7,6 +7,18 @@ Radium.Router = Ember.Router.extend
     @_super()
     @set('currentUser', 'foo')
 
+  connectFeed: (scope, controller) ->
+    @set 'dashboardFeedController.scope', scope
+    feed = Radium.Feed.findFor scope
+
+    @get('mainController').connectOutlet 
+      outletName: 'content'
+      controller: @get "#{controller}Controller"
+      viewClass: Radium.FeedView
+      context: feed
+
+    @set('activeFeedController', @get("#{controller}Controller"))
+
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
     # Ember.Router does not support cancelling routing, which prevents
@@ -68,22 +80,14 @@ Radium.Router = Ember.Router.extend
 
     initialState: 'dashboard'
 
+
     dashboard: Ember.Route.extend
       route: '/'
 
       connectOutlets: (router) ->
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
-        router.set 'dashboardFeedController.scope', router.get('currentUser')
-        feed = Radium.Feed.findFor router.get('currentUser')
-
-        router.get('mainController').connectOutlet 
-          outletName: 'content'
-          controller: router.get('dashboardFeedController')
-          viewClass: Radium.FeedView
-          context: feed
-
-        router.set('activeFeedController', router.get('dashboardFeedController'))
+        router.connectFeed router.get('currentUser'), 'dashboardFeed'
 
     deal: Ember.Route.extend
       route: '/deals/:deal_id'
