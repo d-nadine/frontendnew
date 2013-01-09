@@ -30,7 +30,7 @@ Radium.FeedSection = Radium.Core.extend
     @get('previousSectionFilter.firstObject')
   ).property('previousSectionFilter.firstObject')
 
-  items: Radium.ExtendedRecordArray.attr('items', mixins: [Radium.ClusteredRecordArray])
+  items: Radium.ExtendedRecordArray.attr('items')
 
   removeItem: (item) ->
     @get('items').removeObject item
@@ -40,17 +40,6 @@ Radium.FeedSection = Radium.Core.extend
 
   contains: (item) ->
     @get('items').contains item
-
-  # And again, for some weird reason regular bindings does not
-  # work as intended (probably they're not updated), check with
-  # newer version
-  clusters: (->
-    @get 'items.clusters'
-  ).property('items.clusters')
-
-  unclustered: (->
-    @get 'items.unclustered'
-  ).property('items.unclustered')
 
   # Return true if section is before given date
   isBefore: (date) ->

@@ -1,3 +1,5 @@
+ClusteredArray = Ember.ArrayProxy.extend(Radium.ClusteredRecordArray)
+
 Radium.FeedSectionView = Em.View.extend
   templateName: 'radium/feed_section'
   classNames: ['feed-section']
@@ -7,21 +9,27 @@ Radium.FeedSectionView = Em.View.extend
   attributeBindings: ['dataDate:data-date']
   dataDateBinding: Ember.Binding.oneWay 'content.id'
 
+  disableClustersBinding: 'controller.disableClusters'
+
   unclustered: (->
     if @get 'disableClusters'
       @get 'content.items'
     else
-      @get 'content.unclustered'
+      @get 'clusteredArray.unclustered'
   ).property('disableClusters')
 
   clusters: (->
     if @get 'disableClusters'
       []
     else
-      @get 'content.clusters'
+      @get 'clusteredArray.clusters'
   ).property('disableClusters')
 
-  disableClustersBinding: 'controller.disableClusters'
+  clusteredArray: (->
+    ClusteredArray.create
+      store: @get('controller.store')
+      content: @get('content.items')
+  ).property('content.items')
 
   didInsertElement: ->
     @_super.apply(this, arguments)
