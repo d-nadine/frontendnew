@@ -116,8 +116,6 @@ Radium.TodoFormView = Radium.FormView.extend
           finishBy.toFormattedString '%Y-%m-%d'
     ).property('parentView.finishBy')
 
-<<<<<<< HEAD:app/javascripts/views/forms/todo_form_view.coffee
-=======
   moveFeed: (->
     if @get 'isGlobalLevelForm'
       date = @get('finishBy').toFormattedString '%Y-%m-%d'
@@ -131,7 +129,8 @@ Radium.TodoFormView = Radium.FormView.extend
   createTodo: (data, object) ->
     @get('controller').createFeedItem(Radium.Todo, data, object)
 
->>>>>>> add basic notifications and failing tests for email todos and delete:app/javascripts/views/todo_form_view.coffee
+  displayNotification: Ember.K
+
   submitForm: ->
     createTodo = ->
       selection = @get('selection')
@@ -158,15 +157,12 @@ Radium.TodoFormView = Radium.FormView.extend
           created_at: Ember.DateTime.create()
           updated_at: Ember.DateTime.create()
 
-<<<<<<< HEAD:app/javascripts/views/forms/todo_form_view.coffee
         todo = Radium.Todo.createRecord data
         todo.commit()
 
-        self.get('controller').createFeedItem(Radium.Todo, data, object)
-=======
         self.createTodo(data, object)
->>>>>>> add basic notifications and failing tests for email todos and delete:app/javascripts/views/todo_form_view.coffee
 
+      @displayNotification()
       @close()
 
     # TODO: I'm not sure how to handle this better at the moment, when

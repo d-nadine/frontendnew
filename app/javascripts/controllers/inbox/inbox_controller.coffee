@@ -11,8 +11,6 @@ Radium.InboxController = Em.ArrayController.extend
 
     #TODO Radium.get('router.activeFeedController').pushHitem todo
 
-    Radium.Utils.notify 'the todos have been created'
-
   markRead: (state) ->
     @markEmailRead(true)
 
@@ -37,4 +35,4 @@ Radium.InboxController = Em.ArrayController.extend
 
     @removeObjects(@get('selectedMail'))
 
-    Radium.Utils.notify "#{count} emails have been deleted."
+    Radium.Utils.notify "#{count} emails deleted."

@@ -17,6 +17,8 @@ Radium.InboxView = Em.View.extend
       selectionBinding: 'controller.selectedMail',
       kind: 'email'
       createTodo: @get('controller').createTodo
+      displayNotification: ->
+        Radium.Utils.notify 'todos created'
     )
 
     formContainer.set 'currentView', todoFormView
