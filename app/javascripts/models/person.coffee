@@ -21,4 +21,3 @@ Radium.Person = Radium.Core.extend
   # Default hasMany groups
   reminders: DS.hasMany('Radium.Reminder')
   comments: DS.hasMany('Radium.Comment')
-

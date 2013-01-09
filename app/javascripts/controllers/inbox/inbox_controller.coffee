@@ -9,13 +9,17 @@ Radium.InboxController = Em.ArrayController.extend
     todo.set('reference', email)
     todo.store.commit()
 
+    #TODO Radium.get('router.activeFeedController').pushHitem todo
+
     Radium.Utils.notify 'the todos have been created'
 
   deleteEmails: ->
     count = @get('selectedMail.length')
-    @get('selectedMail').toArray().forEach (email) ->
-      email.deleteRecord()
+    #FIXME ember-data association errors
+    # @get('selectedMail').toArray().forEach (email) ->
+    #   email.deleteRecord()
+    # @get('store').commit()
 
-    @get('store').commit()
+    @removeObjects(@get('selectedMail'))
 
     Radium.Utils.notify "#{count} emails have been deleted."

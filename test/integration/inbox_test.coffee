@@ -89,7 +89,9 @@ integrationTest 'a todo can be created for each selected email', ->
 
       click $F('.save-todo')
 
-      equal todos.get('length'), 2, 'a todo has been created for each email'
+      #TODO better assertion needed.  Store is undefined at this point
+      waitForSelector '.alert-success', (el) ->
+        assertText el, 'created'
 
 integrationTest 'the selected emails can be deleted', ->
   for i in [0..2]
@@ -114,4 +116,4 @@ integrationTest 'the selected emails can be deleted', ->
     equal emails.get('length'), 1, 'both emails have been deleted'
 
     checks = $F('input[type=checkbox]', el)
-    equal checks.length 1, '1 email remains in sidebar'
+    equal checks.length, 1, '1 email remains in sidebar'

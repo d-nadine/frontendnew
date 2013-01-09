@@ -18,6 +18,15 @@ Radium.FixtureSerializer = DS.RESTSerializer.extend
   typeFromString: (type) ->
     Radium.Core.typeFromString(type)
 
+  addBelongsTo: (hash, record, key, relationship) ->
+    if polymorphicFor = relationship.options.polymorphicFor
+      polymorphic = record.get(polymorphicFor)
+      hash[polymorphicFor] = {}
+      hash[polymorphicFor].id = polymorphic.get('id')
+      hash[polymorphicFor].type = polymorphic.get('type')
+    else
+      @_super.apply this, arguments
+
   materializePolymorphicAssociation: (record, hash, name, polymorphicData) ->
     type = record.constructor
 
