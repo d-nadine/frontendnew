@@ -8,8 +8,6 @@ Radium.PhoneCall = Radium.Core.extend Radium.CommentsMixin,
   to: Radium.polymorphicAttribute()
   from: Radium.polymorphicAttribute()
 
-  associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'to', 'from')
-
   toUser: DS.belongsTo('Radium.User', polymorphicFor: 'to')
   toContact: DS.belongsTo('Radium.Contact', polymorphicFor: 'to')
 

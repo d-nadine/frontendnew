@@ -10,6 +10,4 @@ Radium.Meeting = Radium.Core.extend Radium.CommentsMixin,
 
   todos: DS.hasMany('Radium.Todo', inverse: 'meeting')
 
-  associatedUsers: Radium.defineFeedAssociation(Radium.User, 'user')
-
   feedDate: (-> @get 'startsAt' ).property('startsAt')
