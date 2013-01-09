@@ -66,7 +66,7 @@ integrationTest 'deal assignment notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem deal
+    Radium.get('router.activeFeedController').pushObject deal
 
   assertNotifications 1
 
@@ -109,7 +109,7 @@ integrationTest 'todo assignments appear', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem todo
+    Radium.get('router.activeFeedController').pushObject todo
 
   assertNotifications 1
 
@@ -133,7 +133,7 @@ integrationTest  'meeting invitation notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   assertNotifications 1
 
@@ -157,7 +157,7 @@ integrationTest 'cancelled meeting notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   assertNotifications 1
 
@@ -181,7 +181,7 @@ integrationTest 'confirmed meeting notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   assertNotifications 1
 
@@ -205,7 +205,7 @@ integrationTest 'rejected meeting notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   assertNotifications 1
 
@@ -229,7 +229,7 @@ integrationTest 'rescheduled meeting notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   assertNotifications 1
 
@@ -253,7 +253,7 @@ integrationTest 'reminder notifications', ->
   # FIXME: having to manually push onto the feed controller
   # after items are created seems like an anti pattern
   app ->
-    Radium.get('router.activeFeedController').pushItem todo
+    Radium.get('router.activeFeedController').pushObject todo
 
   assertNotifications 1
 

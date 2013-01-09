@@ -42,8 +42,8 @@ integrationTest 'feed detects gaps', ->
   assertEmptyFeed()
 
   app ->
-    Radium.get('router.activeFeedController').pushItem todaysTodo
-    Radium.get('router.activeFeedController').pushItem nextWeeksTodo
+    Radium.get('router.activeFeedController').pushObject todaysTodo
+    Radium.get('router.activeFeedController').pushObject nextWeeksTodo
 
   waitForSelector "#main-feed .gap", (gap) ->
     ok true, "Gap present"

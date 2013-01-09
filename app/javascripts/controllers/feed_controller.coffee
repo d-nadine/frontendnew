@@ -21,6 +21,9 @@ Radium.FeedController = Em.ArrayController.extend
   loadPastFeed: ->
     @get('content').loadPastFeed()
 
+  pushObject: (item) ->
+    @get('content').pushObject item
+
   showForm: (type) ->
     @set 'currentFormType', type
 
@@ -40,31 +43,6 @@ Radium.FeedController = Em.ArrayController.extend
 
   enableScroll: ->
     @set 'canScroll', true
-
-  pushItem: (item) ->
-    self = this
-
-    date = item.get('feedDate').toDateFormat()
-
-    # since we need to get feed section for given date from the API,
-    # we need to be sure that item is already added to a server
-    addItem = ->
-      return if item.get('isNew')
-
-      # FIXME: this logic should be in the Feed class itself
-      section = Radium.FeedSection.find date
-
-      sections = self.get 'content'
-      sections.loadRecord section
-
-      section.pushItem(item)
-
-      item.removeObserver 'isNew', addItem
-
-    if item.get('isNew')
-      item.addObserver 'isNew', addItem
-    else
-      addItem()
 
   currentDateDidChange: (->
     date = @get 'currentDate'

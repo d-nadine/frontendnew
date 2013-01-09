@@ -11,7 +11,7 @@ integrationTest 'feed type gets clustered after reaching the cluster size', ->
       todo = Factory.create 'todo'
         finish_by: date.toFullFormat()
 
-      Radium.get('router.activeFeedController').pushItem todo
+      Radium.get('router.activeFeedController').pushObject todo
 
   waitForFeedDate date, (section) ->
     assertFeedItems 0
@@ -28,16 +28,16 @@ integrationTest 'a feed can be filtered by feed type', ->
   app ->
     controller = Radium.get('router.activeFeedController')
 
-    controller.pushItem Factory.create 'todo'
+    controller.pushObject Factory.create 'todo'
       finish_by: date.toFullFormat()
 
-    controller.pushItem Factory.create 'deal'
+    controller.pushObject Factory.create 'deal'
       close_by: date.toFullFormat()
 
-    controller.pushItem Factory.create 'campaign'
+    controller.pushObject Factory.create 'campaign'
       ends_at: date.toFullFormat()
 
-    controller.pushItem Factory.create 'meeting'
+    controller.pushObject Factory.create 'meeting'
       starts_at: date.toFullFormat()
 
   waitForFeedDate date, (el) ->
@@ -64,7 +64,7 @@ integrationTest 'a feed can retrieve new items from infinite scrolling in both d
 
   todo = Factory.create 'todo'
 
-  app -> controller.pushItem todo
+  app -> controller.pushObject todo
 
   waitForFeedItem todo, (el) ->
     assertScrollingFeedHasDate(controller, 7, forward: true)
@@ -82,7 +82,7 @@ integrationTest 'a feed can jump to a specific date', ->
   todo = Factory.create 'todo'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem todo
+    Radium.get('router.activeFeedController').pushObject todo
 
   waitForFeedItem todo, ->
     assertFeedItems 1

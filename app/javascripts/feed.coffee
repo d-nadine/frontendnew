@@ -82,6 +82,34 @@ Radium.Feed = Ember.ArrayProxy.extend
     recordArray
   ).property('scope')
 
+  # Overide push object to accept objects themselves
+  # and not the encapsulated FeedSection. This also
+  # handles more complex use cases. For example, pushing
+  # a new item will ensure the entire day is loaded
+  pushObject: (item) ->
+    self = this
+    date = item.get('feedDate')
+    Ember.assert "Item does not have a feed date!" unless date
+
+    # since we need to get feed section for given date from the API,
+    # we need to be sure that item is already added to a server
+    addItem = ->
+      return if item.get('isNew')
+
+      section = self.findDate date
+
+      content = self.get 'content'
+      content.loadRecord section
+
+      section.pushItem(item)
+
+      item.removeObserver 'isNew', addItem
+
+    if item.get('isNew')
+      item.addObserver 'isNew', addItem
+    else
+      addItem()
+
   nextPastDate: (->
     date = @get 'content.lastObject.previousDate'
 
@@ -106,7 +134,7 @@ Radium.Feed = Ember.ArrayProxy.extend
     results = Radium.FeedSection.find query
     @get('content').load results
 
-    Radium.Utils.runWhenLoaded array, callback if callback
+    Radium.Utils.runWhenLoaded results, callback if callback
 
   loadFutureFeed: ->
     futureDate = @get 'nextFutureDate'
@@ -123,3 +151,6 @@ Radium.Feed = Ember.ArrayProxy.extend
     @load
       before: pastDate
       limit: @get('scrollingPageSize')
+
+  findDate: (date) ->
+    Radium.FeedSection.find date.toDateFormat()

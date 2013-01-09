@@ -7,7 +7,7 @@ integrationTest 'campaigns appear in the feed', ->
   campaign = Factory.create 'campaign'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem campaign
+    Radium.get('router.activeFeedController').pushObject campaign
 
   waitForFeedItem campaign, (feedItem) ->
     assertText feedItem, campaign.get('name')
@@ -25,7 +25,7 @@ integrationTest 'deals appear in the feed', ->
   deal = Factory.create 'deal'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem deal
+    Radium.get('router.activeFeedController').pushObject deal
 
   waitForFeedItem deal, (feedItem) ->
     assertText feedItem, deal.get('name')
@@ -43,7 +43,7 @@ integrationTest 'meetings appear in the feed', ->
   meeting = Factory.create 'meeting'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem meeting
+    Radium.get('router.activeFeedController').pushObject meeting
 
   waitForFeedItem meeting, (feedItem) ->
     assertText feedItem, meeting.get('topic')
@@ -61,7 +61,7 @@ integrationTest 'todos appear in the feed', ->
   todo = Factory.create 'todo'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem todo
+    Radium.get('router.activeFeedController').pushObject todo
 
   waitForFeedItem todo, (feedItem) ->
     assertText feedItem, todo.get('description')

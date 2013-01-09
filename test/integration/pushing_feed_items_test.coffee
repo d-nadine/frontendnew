@@ -6,7 +6,7 @@ integrationTest 'adds an item when there is no existing feed items', ->
   todo = Factory.create 'todo'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem(todo)
+    Radium.get('router.activeFeedController').pushObject(todo)
 
   assertInFeed todo 
 
@@ -17,9 +17,10 @@ integrationTest 'adds an item when there is an existing feed item', ->
   todo2 = Factory.create 'todo'
 
   app ->
-    Radium.get('router.activeFeedController').pushItem todo1
-    Radium.get('router.activeFeedController').pushItem todo2
+    Radium.get('router.activeFeedController').pushObject todo1
+    Radium.get('router.activeFeedController').pushObject todo2
 
+  assertInFeed todo1
   assertInFeed todo2 
 
 integrationTest 'adds an item and checks for more feed items', ->
@@ -48,7 +49,7 @@ integrationTest 'adds an item and checks for more feed items', ->
     finish_by: nextWeek.toFullFormat()
 
   app ->
-    Radium.get('router.activeFeedController').pushItem newTodo
+    Radium.get('router.activeFeedController').pushObject newTodo
 
   assertInFeed newTodo
   assertInFeed existingTodo
