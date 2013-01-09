@@ -60,7 +60,10 @@ UpdateableRecordArray = DS.RecordArray.extend
       return @_binarySearch(item, low, mid)
     mid
 
-Radium.Feed = Ember.Object.create
+Radium.Feed = Ember.ArrayProxy.extend
+  # Set this to a user/contact/group
+  scope: undefined
+
   findFor: (record) ->
     result = Radium.FeedSection.find
       scope: record

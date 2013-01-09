@@ -80,7 +80,6 @@ Radium.Router = Ember.Router.extend
 
     initialState: 'dashboard'
 
-
     dashboard: Ember.Route.extend
       route: '/'
 
