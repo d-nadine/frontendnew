@@ -84,7 +84,8 @@ integrationTest 'a todo can be created for each selected email', ->
 
     waitForSelector '.radium-form', (el) ->
       fillIn '#description', 'a  todo'
-      $F('#assigned-to').val($F('#assigned-to option:first').val())
+
+      selectDropDownOption('#assigned-to', 0)
 
       click $F('.save-todo')
 

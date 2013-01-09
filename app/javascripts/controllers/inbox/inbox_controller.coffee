@@ -8,11 +8,12 @@ Radium.InboxController = Em.ArrayController.extend
     todo = Radium.Todo.createRecord(data)
     todo.set('reference', email)
     todo.store.commit()
+
     Radium.Utils.notify 'the todos have been created'
 
   deleteEmails: ->
     count = @get('selectedMail.length')
-    @get('selectedMail').forEach (email) ->
+    @get('selectedMail').toArray().forEach (email) ->
       email.deleteRecord()
 
     @get('store').commit()

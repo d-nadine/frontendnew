@@ -4,6 +4,13 @@ window.click = (object) ->
   else
     $F(object).click()
 
+window.selectDropDownOption = (selector, optionIndex) ->
+  if $F(selector).length == 0
+    throw "Could not find #{selector}"
+
+  $F(selector).val($F("#{selector} option:eq(#{optionIndex})").val())
+  $F(selector).trigger('change')
+
 window.fillIn = (selector, text) ->
   # keyup with any char to trigger bindings sync
   event = jQuery.Event("keyup")
