@@ -67,6 +67,10 @@ integrationTest 'a todo can be created for each selected email', ->
 
   equal Radium.Email.find().get('length'), 2, 'precond - there are 2 emails'
 
+  todos = Radium.Todo.find()
+
+  equal todos.get('length'), 0, 'precond - there are no todos'
+
   visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
@@ -84,13 +88,15 @@ integrationTest 'a todo can be created for each selected email', ->
 
       click $F('.save-todo')
 
-      equal Radium.Todo.find().get('length'), 2, 'a todo has been created for each email'
+      equal todos.get('length'), 2, 'a todo has been created for each email'
 
 integrationTest 'the selected emails can be deleted', ->
   for i in [0..2]
     Factory.create 'email'
 
-  equal Radium.Email.find().get('length'), 3, 'precond - there are 3 emails'
+  emails = Radium.Email.find()
+
+  equal emails.get('length'), 3, 'precond - there are 3 emails'
 
   visit '/inbox'
 
@@ -104,7 +110,7 @@ integrationTest 'the selected emails can be deleted', ->
 
     click $F('.delete-emails')
 
-    equal Radium.Email.find().get('length'), 1, 'both emails have been deleted'
+    equal emails.get('length'), 1, 'both emails have been deleted'
 
     checks = $F('input[type=checkbox]', el)
     equal checks.length 1, '1 email remains in sidebar'
