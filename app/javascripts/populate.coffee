@@ -134,10 +134,6 @@ class Populator
         id: -> retrospection
         type: 'meeting'
 
-    message = Factory.create 'message',
-      message: 'here is a message'
-      type: 'email'
-
     feeds = []
 
     @createFeedSection(0, [

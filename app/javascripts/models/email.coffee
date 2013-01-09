@@ -1,9 +1,12 @@
-Radium.Email = Radium.Message.extend Radium.CommentsMixin,
+Radium.Email = Radium.Core.extend Radium.CommentsMixin,
   to: DS.attr('array')
   from: DS.attr('array')
   subject: DS.attr('string')
   html: DS.attr('string')
   sender: Radium.polymorphicAttribute()
+
+  message: DS.attr('string')
+  sentAt: DS.attr('date')
 
   associatedContacts: Radium.defineFeedAssociation(Radium.Contact, 'sender')
 
