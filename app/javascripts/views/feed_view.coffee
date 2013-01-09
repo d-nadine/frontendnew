@@ -19,8 +19,9 @@ Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
 
   # FIXME: this property is way to complicated
   empty: (->
-    @get('feed.length') == 0 ||
-      !@get('feed').find( (section) -> section.get('items.length') > 0 )
+    return true if @get('feed.length') == 0
+
+    !@get('feed').find((section) -> section.get('items.length') > 0)
   ).property('feed', 'feed.@each.items.@each.length')
 
   emptyView: Em.View.extend

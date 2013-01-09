@@ -1,6 +1,11 @@
 Radium = Em.Application.create
   autoinit: false
   rootElement: '#application'
+  ready: ->
+    @_super()
+    # FIXME: Stub out authentication
+    @set 'router.currentUser', Radium.User.find(1)
+
   didBecomeCompletelyReady: Ember.K
   didBecomeReady: ->
     @_super.apply @, arguments
@@ -36,8 +41,6 @@ require 'radium/mixins/filtered_collection_mixin'
 require 'radium/mixins/filtered_contacts_mixin'
 require 'radium/mixins/validate'
 require 'radium/mixins/form_validation'
-require 'radium/mixins/nested_feed'
-require 'radium/mixins/nested_feed_section'
 
 require 'radium/helpers/date_helper'
 require 'radium/helpers/time_helper'
@@ -61,9 +64,6 @@ require 'radium/models/email'
 require 'radium/models/phone_call'
 require 'radium/models/sms'
 require 'radium/models/gap'
-require 'radium/models/contact_feed_section'
-require 'radium/models/user_feed_section'
-require 'radium/models/group_feed_section'
 require 'radium/models/notification'
 require 'radium/models/reminder'
 require 'radium/models/message'
@@ -82,9 +82,9 @@ require 'radium/controllers/campaign_controller'
 require 'radium/controllers/sidebar_controller'
 require 'radium/controllers/form_controller'
 require 'radium/controllers/meeting_form_controller'
-require 'radium/controllers/contacts_feed_controller'
-require 'radium/controllers/users_feed_controller'
-require 'radium/controllers/groups_feed_controller'
+require 'radium/controllers/contact_feed_controller'
+require 'radium/controllers/user_feed_controller'
+require 'radium/controllers/group_feed_controller'
 require 'radium/controllers/calendar_feed_controller'
 require 'radium/controllers/notifications_controller'
 require 'radium/controllers/campaigns_controller'
@@ -122,9 +122,6 @@ require 'radium/views/filtered_items_view'
 require 'radium/views/form_container_view'
 require 'radium/views/meeting_form_datepicker'
 require 'radium/views/meeting_form_view'
-require 'radium/views/contacts_feed_view'
-require 'radium/views/users_feed_view'
-require 'radium/views/groups_feed_view'
 require 'radium/views/calendar_feed_view'
 require 'radium/views/calendar_view'
 require 'radium/views/sidebar_meeting_form_view'

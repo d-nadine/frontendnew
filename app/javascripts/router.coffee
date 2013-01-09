@@ -5,19 +5,19 @@ Radium.Router = Ember.Router.extend
 
   init: ->
     @_super()
-    @set('currentUser', 'foo')
 
   connectFeed: (scope, controller) ->
-    @set 'dashboardFeedController.scope', scope
+    controllerName = "#{controller}Controller"
+
     feed = Radium.Feed.create scope: scope
 
     @get('mainController').connectOutlet 
       outletName: 'content'
-      controller: @get "#{controller}Controller"
+      controller: @get controllerName
       viewClass: Radium.FeedView
       context: feed
 
-    @set('activeFeedController', @get("#{controller}Controller"))
+    @set('activeFeedController', @get(controllerName))
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -123,17 +123,7 @@ Radium.Router = Ember.Router.extend
           @_super(router, params)
 
         connectOutlets: (router, group) ->
-          router.set 'groupsFeedController.scope', group
-
-          router.set 'groupsFeedController.recordId', group.get('id')
-          # FIXME: this is bullshit
-          router.set 'groupsFeedController.recordType', Radium.GroupFeedSection
-
-          feed = Radium.FeedSection.find
-            scope: group
-            nearDate: Ember.DateTime.create()
-
-          router.get('mainController').connectOutlet 'content', 'groupsFeed', feed
+          router.connectFeed group, 'groupFeed'
 
     contacts: Ember.Route.extend
       route: '/contacts'
@@ -150,17 +140,7 @@ Radium.Router = Ember.Router.extend
       contact: Ember.Route.extend
         route: '/:contact_id'
         connectOutlets: (router, contact) ->
-          router.set 'contactsFeedController.scope', contact
-
-          feed = Radium.FeedSection.find
-            scope: contact
-            nearDate: Ember.DateTime.create()
-
-          router.get('mainController').connectOutlet 'content', 'contactsFeed', feed
-
-          router.set 'contactsFeedController.recordId', contact.get('id')
-          # FIXME: this is bullshit
-          router.set 'contactsFeedController.recordType', Radium.ContactFeedSection
+          router.connectFeed contact, 'contactFeed'
 
         deserialize: (router, params) ->
           params.contact_id = parseInt(params.contact_id)
@@ -174,17 +154,7 @@ Radium.Router = Ember.Router.extend
       user: Ember.Route.extend
         route: '/:user_id'
         connectOutlets: (router, user) ->
-          router.set 'usersFeedController.scope', user
-
-          feed = Radium.FeedSection.find
-            scope: user
-            nearDate: Ember.DateTime.create()
-
-          router.get('mainController').connectOutlet 'content', 'usersFeed', feed
-
-          router.set 'usersFeedController.recordId', user.get('id')
-          # FIXME: this is bullshit
-          router.set 'usersFeedController.recordType', Radium.UserFeedSection
+          router.connectFeed user, 'userFeed'
 
         deserialize: (router, params) ->
           # fixture adapter is pretty limited and works only with integer ids
