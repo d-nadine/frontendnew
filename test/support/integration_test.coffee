@@ -1,6 +1,10 @@
 window.app = (code) ->
   $W.Ember.run code
 
+window.visit = (url) ->
+  app ->
+    Radium.get('router').route(url)
+
 window.integrationTest = (testName, expected, callback) ->
   if arguments.length == 2
     callback = expected

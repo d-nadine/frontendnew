@@ -5,8 +5,7 @@ integrationTest 'an empty inbox displays the correct messages', ->
 
   equal Radium.Email.find().get('length'), 0, 'precond - there are 0 emails'
 
-  app ->
-    Radium.get('router').transitionTo('root.inbox.index')
+  visit '/inbox'
 
   waitForSelector 'ul.messages li:first', (el) ->
     assertText el, 'No mail'
@@ -19,8 +18,7 @@ integrationTest 'a list of emails is displayed in the inbox', ->
 
   equal Radium.Email.find().get('length'), 5, 'precond - there are 5 emails'
 
-  app ->
-    Radium.get('router').transitionTo('root.inbox.index')
+  visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     sidebarEmails = $F('li', el)
@@ -44,8 +42,7 @@ integrationTest 'clicking on a sidebar email displays the correct email', ->
 
   equal Radium.Email.find().get('length'), 2, 'precond - there are 2 emails'
 
-  app ->
-    Radium.get('router').transitionTo('root.inbox.index')
+  visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     sidebarEmails = $F('li', el)
@@ -64,3 +61,50 @@ integrationTest 'clicking on a sidebar email displays the correct email', ->
       subject = $F('strong:eq(1)', el).html()
       equal 'Email 2', subject, 'Correct email is displayed'
 
+integrationTest 'a todo can be created for each selected email', ->
+  for i in [0..1]
+    Factory.create 'email'
+
+  equal Radium.Email.find().get('length'), 2, 'precond - there are 2 emails'
+
+  visit '/inbox'
+
+  waitForSelector 'ul.messages', (el) ->
+    checks = $F('input[type=checkbox]', el)
+
+    equal checks.length, 2, 'should have 2 emails to check'
+
+    click checks.first()
+
+    click $F('.multiple-todos')
+
+    waitForSelector '.radium-form', (el) ->
+      fillIn '#description', 'a  todo'
+      $F('#assigned-to').val($F('#assigned-to option:first').val())
+
+      click $F('.save-todo')
+
+      equal Radium.Todo.find().get('length'), 2, 'a todo has been created for each email'
+
+integrationTest 'the selected emails can be deleted', ->
+  for i in [0..2]
+    Factory.create 'email'
+
+  equal Radium.Email.find().get('length'), 3, 'precond - there are 3 emails'
+
+  visit '/inbox'
+
+  waitForSelector 'ul.messages', (el) ->
+    checks = $F('input[type=checkbox]', el)
+
+    equal checks.length, 3, 'should have 3 emails to check'
+
+    for i in [0..1]
+      click checks.eq(i)
+
+    click $F('.delete-emails')
+
+    equal Radium.Email.find().get('length'), 1, 'both emails have been deleted'
+
+    checks = $F('input[type=checkbox]', el)
+    equal checks.length 1, '1 email remains in sidebar'

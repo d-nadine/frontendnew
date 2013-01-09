@@ -116,6 +116,22 @@ Radium.TodoFormView = Radium.FormView.extend
           finishBy.toFormattedString '%Y-%m-%d'
     ).property('parentView.finishBy')
 
+<<<<<<< HEAD:app/javascripts/views/forms/todo_form_view.coffee
+=======
+  moveFeed: (->
+    if @get 'isGlobalLevelForm'
+      date = @get('finishBy').toFormattedString '%Y-%m-%d'
+      Radium.get('router').transitionTo 'root.dashboardWithDate', date: date
+  ).observes('finishBy')
+
+  kind: ( ->
+    if  @get('isCallCheckbox.checked') then 'call' else 'general'
+  ).property('isCallCheckbox.checked')
+
+  createTodo: (data, object) ->
+    @get('controller').createFeedItem(Radium.Todo, data, object)
+
+>>>>>>> add basic notifications and failing tests for email todos and delete:app/javascripts/views/todo_form_view.coffee
   submitForm: ->
     createTodo = ->
       selection = @get('selection')
@@ -123,11 +139,6 @@ Radium.TodoFormView = Radium.FormView.extend
         selection = [selection]
 
       description = @get('descriptionField.value')
-      isCall = @get('isCallCheckbox.checked')
-
-      # TODO: When support todos are added, add logic to toggle this from general to support
-      # TODO: is above todo still valid?
-      todoKind = 'general'
       finishBy = @get('finishBy')
 
       self = this
@@ -141,16 +152,20 @@ Radium.TodoFormView = Radium.FormView.extend
           description: description
           finishBy: finishBy
           finished: false
-          kind: (if (isCall) then 'call' else todoKind)
+          kind: self.get('kind')
           user_id: assignedUserId
           user: assignedUser
           created_at: Ember.DateTime.create()
           updated_at: Ember.DateTime.create()
 
+<<<<<<< HEAD:app/javascripts/views/forms/todo_form_view.coffee
         todo = Radium.Todo.createRecord data
         todo.commit()
 
         self.get('controller').createFeedItem(Radium.Todo, data, object)
+=======
+        self.createTodo(data, object)
+>>>>>>> add basic notifications and failing tests for email todos and delete:app/javascripts/views/todo_form_view.coffee
 
       @close()
 

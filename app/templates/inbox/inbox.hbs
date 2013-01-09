@@ -6,17 +6,17 @@
   </div>
   {{#if selectedMail.length}}
     <div class="btn-group">
-      <a class="btn btn-danger" href="#">
+      <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
         <i class="icon-trash icon-large icon-white"></i> Delete
       </a>
     </div>
     <div class="btn-group">
-      <a {{action toggleTodoForm target="view"}} class="btn btn-primary" href="#">Todo</a>
+      <a {{action toggleTodoForm target="view"}} class="btn btn-primary multiple-todos">Todo</a>
     </div>
   {{/if}}
 </div>
 <div class="rel">
-{{view view.formContainer}}
+{{view view.FormContainer viewName="formContainer"}}
 </div>
 {{collection Radium.SelectedEmailListView contentBinding="selectedMail"}}
 {{outlet}}
