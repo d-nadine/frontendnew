@@ -13,6 +13,11 @@
     <div class="btn-group">
       <a {{action toggleTodoForm target="view"}} class="btn btn-primary multiple-todos">Todo</a>
     </div>
+    {{#if view.displayMark}}
+    <div class="btn-group">
+      <a {{action markRead target="controller"}} class="btn btn-primary">{{view.readState}}</a>
+    </div>
+    {{/if}}
   {{/if}}
 </div>
 <div class="rel">
