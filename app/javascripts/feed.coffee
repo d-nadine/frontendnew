@@ -77,6 +77,10 @@ Radium.Feed = Ember.ArrayProxy.extend
   # fire
   scrollingPageSize: 1
 
+  sectionClass: (->
+    Radium.FeedSection
+  ).property()
+
   content: (->
     result = Radium.FeedSection.find
       scope: @get('scope')
@@ -140,7 +144,7 @@ Radium.Feed = Ember.ArrayProxy.extend
   load: (query, callback) ->
     query.scope = @get 'scope'
 
-    results = Radium.FeedSection.find query
+    results = @get('sectionClass').find query
     @get('content').load results
 
     runWhenLoaded results, callback if callback
@@ -162,4 +166,4 @@ Radium.Feed = Ember.ArrayProxy.extend
       limit: @get('scrollingPageSize')
 
   findDate: (date) ->
-    Radium.FeedSection.find date.toDateFormat()
+    @get('sectionClass').find date.toDateFormat()
