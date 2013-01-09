@@ -24,8 +24,10 @@ window.clickFilterAndAssertFeedItems = (filterType, expected) ->
 
 window.assertScrollingFeedHasDate = (controller, daysToJump, direction) ->
   app ->
-    controller.loadFeed direction
-    controller.loadFeed direction
+    if direction.forward
+      controller.loadFutureFeed()
+    else
+      controller.loadPastFeed()
 
   dateToTestFor = Ember.DateTime.create().advance(day: daysToJump)
 

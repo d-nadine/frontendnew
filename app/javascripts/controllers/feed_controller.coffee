@@ -105,18 +105,6 @@ Radium.FeedController = Em.ArrayController.extend
     return unless @get 'canScroll'
     @loadPastFeed()
 
-  loadFeed: (options) ->
-    # we want to adjust feed by manipulating scroll when
-    # new items are laoded, but we want to do that *only*
-    # in such situation, so let's annotate this fact with
-    # this property:
-    @set 'loadingAdditionalFeedItems', true
-
-    if options.forward
-      @loadFutureFeed()
-    else if options.backward
-      @loadPastFeed()
-
   loadFutureFeed: ->
     futureDate = @get 'nextFutureDate'
     return unless futureDate
@@ -135,6 +123,12 @@ Radium.FeedController = Em.ArrayController.extend
 
   load: (query, callback) ->
     query.scope = @get 'scope'
+
+    # we want to adjust feed by manipulating scroll when
+    # new items are laoded, but we want to do that *only*
+    # in such situation, so let's annotate this fact with
+    # this property:
+    @set 'loadingAdditionalFeedItems', true
 
     results = Radium.FeedSection.find query
     @get('content').load results
