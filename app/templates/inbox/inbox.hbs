@@ -11,13 +11,14 @@
       </a>
     </div>
     <div class="btn-group">
-      <a {{action toggleTodoForm target="view"}} class="btn btn-primary multiple-todos">Todo</a>
+      <button class="btn btn-primary dropdown-toggle email-action" data-toggle="dropdown">Action <span class="caret"></span></button^>
+      <ul class="dropdown-menu">
+        <li><a {{action toggleTodoForm target="view"}}>Todo</a></li>
+        <li class="divider"></li>
+        <li><a {{action markRead target="controller"}}>Mark Read</a></li>
+        <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
+      </ul>
     </div>
-    {{#if view.displayMark}}
-    <div class="btn-group">
-      <a {{action markRead target="controller"}} class="btn btn-primary">{{view.readState}}</a>
-    </div>
-    {{/if}}
   {{/if}}
 </div>
 <div class="rel">

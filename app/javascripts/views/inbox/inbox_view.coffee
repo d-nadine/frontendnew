@@ -3,31 +3,10 @@ Radium.InboxView = Em.View.extend
 
   FormContainer: Em.ContainerView.extend()
 
-  displayMark: ( ->
-    selected = @get('controller.selectedMail')
-
-    if selected.every( (email) -> email.get('read'))
-      return true
-    if selected.every( (email) -> !email.get('read'))
-      return true
-
-    false
-  ).property('controller.selectedMail')
-
-  readState: ( ->
-    selected = @get('controller.selectedMail')
-
-    if selected.every( (email) -> email.get('read'))
-      return "Mark as Unread"
-    if selected.every( (email) -> !email.get('read'))
-      return "Mark as read"
-
-    ""
-  ).property('controller.selectedMail.@each.read')
+  didInsertElement: ->
+    $('.email-action').dropdown()
 
   toggleTodoForm: (e) ->
-    e.stopPropagation()
-
     formContainer = @get('formContainer')
 
     if formContainer.get('currentView')

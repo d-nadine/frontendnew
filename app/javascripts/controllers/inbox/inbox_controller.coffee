@@ -13,12 +13,18 @@ Radium.InboxController = Em.ArrayController.extend
 
     Radium.Utils.notify 'the todos have been created'
 
-  markRead: ->
+  markRead: (state) ->
+    @markEmailRead(true)
+
+  markUnread: (state) ->
+    @markEmailRead(false)
+
+  markEmailRead: (isRead) ->
     selected = @get('selectedMail')
     return if selected.get('length') == 0
 
     selected.forEach (email) ->
-      email.set('read', not !!selected.get('firstObject.read'))
+      email.set('read', isRead) unless email.get('read') == isRead
 
     @get('store').commit()
 
