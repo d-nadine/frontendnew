@@ -14,6 +14,7 @@ return Handlebars.registerHelper('formatDate', function(property, options) {
       optionFormat = options.hash.format,
       format = (optionFormat) ? optionFormat : "%B %D, %Y";
 
+
   var parseDate = function(date) {
     var tomorrow = Ember.DateTime.create().advance({day: 1});
     var today = Ember.DateTime.create();

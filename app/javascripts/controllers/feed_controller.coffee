@@ -53,19 +53,6 @@ Radium.FeedController = Em.ArrayController.extend
   enableScroll: ->
     @set 'canScroll', true
 
-  arrangedContent: (->
-    if content = @get('content')
-      content.limit 5
-
-      range = @get('range')
-      if range == 'daily'
-        content
-      else
-        Radium.GroupedFeedSection.fromCollection content, range
-  ).property('content', 'range')
-
-  range: 'daily'
-
   pushItem: (item) ->
     self = this
 
