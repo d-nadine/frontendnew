@@ -43,8 +43,6 @@ class Populator
         id: -> ralph
         type: 'contact'
 
-    sms = Factory.create 'sms'
-
     deal = Factory.create 'deal',
       user: -> aaron
 
@@ -92,13 +90,6 @@ class Populator
       reference:
         id: -> phoneCall
         type: 'phone_call'
-
-    smsTodo = Factory.create 'todo',
-      description: 'product discussion',
-      user: -> jerry,
-      reference:
-        id: -> sms
-        type: 'sms'
 
     todoTodo = Factory.create 'todo',
       description: 'inception',
@@ -159,7 +150,6 @@ class Populator
         ['todo', emailTodo]
         ['todo', groupTodo]
         ['todo', phoneCallTodo]
-        ['todo', smsTodo]
         ['todo', todoTodo]
         ['todo', callRalph]
         ['todo', finishByTomrrow]

@@ -113,12 +113,6 @@ integrationTest 'build a reminder', ->
   ok reminder.get('isLoaded'), 'reminder is loaded'
   ok reminder.get('reference.isLoaded'), 'polymorphic added'
 
-integrationTest 'builds an sms', ->
-  sms = Factory.create 'sms'
-
-  ok sms.get('isLoaded'), 'sms is loaded'
-  ok sms.get('sender.isLoaded'), 'sender is loaded'
-
 integrationTest 'builds a message', ->
   message = Factory.create 'message'
 

@@ -17,7 +17,6 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   deal: DS.belongsTo('Radium.Deal', polymorphicFor: 'reference')
   phone_call: DS.belongsTo('Radium.PhoneCall', polymorphicFor: 'reference')
   email: DS.belongsTo('Radium.Email', polymorphicFor: 'reference')
-  sms: DS.belongsTo('Radium.Sms', polymorphicFor: 'reference')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'todo')
   user: DS.belongsTo('Radium.User')
