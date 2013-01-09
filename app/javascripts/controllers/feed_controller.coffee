@@ -3,9 +3,7 @@ Radium.FeedController = Em.ArrayController.extend
   isLoading: false
   itemsLimit: 30
 
-  # The number of items to load when the infinite scroller
-  # fire
-  scrollingPageSize: 1
+  scrollingPageSizeBinding: 'content.scrollingPageSize'
 
   # This property is used to scroll the feed. Set it
   # to an Ember.DateTime and the feed will adjust accordingly
@@ -15,23 +13,13 @@ Radium.FeedController = Em.ArrayController.extend
   # The feed will be loaded (if required).
   expandedItem: undefined
 
-  nextPastDate: (->
-    date = @get 'content.lastObject.previousDate'
+  # These methods are simple proxies to the underlying
+  # Feed object. They are here only to help out
+  loadFutureFeed: ->
+    @get('content').loadFutureFeed()
 
-    if date
-      Ember.DateTime.parse "#{date}T00:00:00Z"
-    else
-      undefined
-  ).property('content.lastObject')
-
-  nextFutureDate: (->
-    date = @get 'content.firstObject.nextDate'
-
-    if date
-      Ember.DateTime.parse "#{date}T00:00:00Z"
-    else
-      undefined
-  ).property('content.firstObject')
+  loadPastFeed: ->
+    @get('content').loadPastFeed()
 
   showForm: (type) ->
     @set 'currentFormType', type
@@ -92,32 +80,11 @@ Radium.FeedController = Em.ArrayController.extend
     return unless @get 'canScroll'
     @loadPastFeed()
 
-  loadFutureFeed: ->
-    futureDate = @get 'nextFutureDate'
-    return unless futureDate
-
-    @load
-      after: @get('nextFutureDate')
-      limit: @get('scrollingPageSize')
-
-  loadPastFeed: ->
-    pastDate = @get 'nextPastDate'
-    return unless pastDate
-
-    @load
-      before: @get('nextPastDate')
-      limit: @get('scrollingPageSize')
-
   load: (query, callback) ->
-    query.scope = @get 'scope'
-
     # we want to adjust feed by manipulating scroll when
     # new items are laoded, but we want to do that *only*
     # in such situation, so let's annotate this fact with
     # this property:
     @set 'loadingAdditionalFeedItems', true
 
-    results = Radium.FeedSection.find query
-    @get('content').load results
-
-    Radium.Utils.runWhenLoaded results, callback if callback
+    @get('content').load query, callback

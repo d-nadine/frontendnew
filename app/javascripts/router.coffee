@@ -9,7 +9,7 @@ Radium.Router = Ember.Router.extend
 
   connectFeed: (scope, controller) ->
     @set 'dashboardFeedController.scope', scope
-    feed = Radium.Feed.findFor scope
+    feed = Radium.Feed.create scope: scope
 
     @get('mainController').connectOutlet 
       outletName: 'content'

@@ -64,9 +64,13 @@ Radium.Feed = Ember.ArrayProxy.extend
   # Set this to a user/contact/group
   scope: undefined
 
-  findFor: (record) ->
+  # The number of items to load when the infinite scroller
+  # fire
+  scrollingPageSize: 1
+
+  content: (->
     result = Radium.FeedSection.find
-      scope: record
+      scope: @get('scope')
       nearDate: Ember.DateTime.create()
 
     recordArray = UpdateableRecordArray.create
@@ -76,3 +80,46 @@ Radium.Feed = Ember.ArrayProxy.extend
 
     recordArray.load result
     recordArray
+  ).property('scope')
+
+  nextPastDate: (->
+    date = @get 'content.lastObject.previousDate'
+
+    if date
+      Ember.DateTime.parse "#{date}T00:00:00Z"
+    else
+      undefined
+  ).property('content.lastObject')
+
+  nextFutureDate: (->
+    date = @get 'content.firstObject.nextDate'
+
+    if date
+      Ember.DateTime.parse "#{date}T00:00:00Z"
+    else
+      undefined
+  ).property('content.firstObject')
+
+  load: (query, callback) ->
+    query.scope = @get 'scope'
+
+    results = Radium.FeedSection.find query
+    @get('content').load results
+
+    Radium.Utils.runWhenLoaded array, callback if callback
+
+  loadFutureFeed: ->
+    futureDate = @get 'nextFutureDate'
+    return unless futureDate
+
+    @load
+      after: futureDate
+      limit: @get('scrollingPageSize')
+
+  loadPastFeed: ->
+    pastDate = @get 'nextPastDate'
+    return unless pastDate
+
+    @load
+      before: pastDate
+      limit: @get('scrollingPageSize')
