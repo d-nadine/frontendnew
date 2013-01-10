@@ -1,3 +1,6 @@
+require 'radium/views/feed_view'
+require 'radium/mixins/infinite_scroller'
+
 Radium.CalendarFeedView = Radium.FeedView.extend Radium.InfiniteScroller,
   empty: (->
     # TODO: since @each does not properly work when nested a few times, it would be

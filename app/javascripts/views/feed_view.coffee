@@ -1,3 +1,5 @@
+require 'radium/mixins/infinite_scroller'
+
 Radium.FeedView = Em.View.extend Radium.InfiniteScroller,
   templateName: 'radium/feed'
   elementId: 'feed'

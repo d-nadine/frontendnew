@@ -1,3 +1,5 @@
+require 'radium/views/contact_card_view'
+
 Radium.ContactCardContainerView = Ember.ContainerView.extend
   classNames: "contact-card-container".w()
   init: ->

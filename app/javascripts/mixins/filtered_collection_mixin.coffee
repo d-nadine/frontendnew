@@ -1,3 +1,5 @@
+require 'radium/filtered_array'
+
 Radium.FilteredCollectionMixin = Em.Mixin.create
   # NOTE: it may be slow, investigate if there are problems with filtering
   content: (->

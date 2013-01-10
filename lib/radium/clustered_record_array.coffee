@@ -1,3 +1,6 @@
+# FIXME this should not be a dependency
+require 'radium/limit_support'
+
 # Array keeping clusters of items. Items are kept in 'unclustered'
 # array (which can hold multiple record types). When items length for
 # given type is equal to clusterSize, items are moved to cluster.

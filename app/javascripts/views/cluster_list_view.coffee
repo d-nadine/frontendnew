@@ -1,3 +1,8 @@
+require 'radium/mixins/filtered_collection_mixin'
+require 'radium/mixins/views/slider'
+
+require 'radium/views/cluster_item_view'
+
 Radium.ClusterListView = Ember.CollectionView.extend Radium.FilteredCollectionMixin,
   classNames: ['feed-cluster-list']
 

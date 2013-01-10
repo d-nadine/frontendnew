@@ -1,18 +1,7 @@
+require 'radium/polymorphic'
+
 require 'radium/models/comments_mixin'
 require 'radium/models/core'
 require 'radium/models/person'
-require 'radium/models/contact'
-require 'radium/models/group'
-require 'radium/models/user'
-require 'radium/models/todo'
-require 'radium/models/account'
-require 'radium/models/feed_section'
-require 'radium/models/comment'
-require 'radium/models/meeting'
-require 'radium/models/deal'
-require 'radium/models/email'
-require 'radium/models/phone_call'
-require 'radium/models/gap'
-require 'radium/models/notification'
-require 'radium/models/reminder'
-require 'radium/models/invitation'
+
+requireAll /radium\/models/

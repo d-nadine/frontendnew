@@ -1,3 +1,5 @@
+require 'radium/mixins/form_validation'
+
 Radium.MeetingFormController = Ember.Object.extend Radium.FormValidation,
   init: ->
     @_super()

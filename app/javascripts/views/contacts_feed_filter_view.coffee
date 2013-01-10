@@ -1,3 +1,6 @@
+require 'radium/views/dashboard_feed_filter_view'
+require 'radium/views/feed_filter_item_view'
+
 Radium.ContactsFeedFilterView = Radium.DashboardFeedFilterView.extend
   controllerBinding: 'Radium.router.contactsController'
 

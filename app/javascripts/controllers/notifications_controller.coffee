@@ -1,3 +1,5 @@
+require 'radium/groupable'
+
 Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
   isVisible: false
 

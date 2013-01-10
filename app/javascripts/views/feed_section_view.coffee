@@ -1,3 +1,5 @@
+require 'radium/clustered_record_array'
+
 ClusteredArray = Ember.ArrayProxy.extend(Radium.ClusteredRecordArray)
 
 Radium.FeedSectionView = Em.View.extend

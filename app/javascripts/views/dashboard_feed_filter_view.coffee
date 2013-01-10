@@ -1,3 +1,5 @@
+require 'radium/views/feed_filter_item_view'
+
 Radium.DashboardFeedFilterView = Em.CollectionView.extend
   tagName: 'ul'
   classNames: 'nav nav-tabs nav-stacked filters'.w(),

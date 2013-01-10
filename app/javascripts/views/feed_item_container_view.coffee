@@ -1,3 +1,6 @@
+require 'radium/views/feed_details_container_view'
+require 'radium/views/todo_view_mixin'
+
 noOp = Ember.Mixin.create()
 
 Radium.FeedItemContainerView = Em.ContainerView.extend

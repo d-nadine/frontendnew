@@ -53,7 +53,7 @@ Radium.FixtureAdapter = DS.FixtureAdapter.extend
     if fixtures
       @simulateRemoteCall (-> array.load fixtures ), store, type
 
-require 'radium/adapters/fixture_adapter/queries/feed_section'
+require /radium\/adapters\/fixture_adapter\/queries/
 
 require 'radium/adapters/fixture_adapter/maps'
 require 'radium/adapters/fixture_adapter/transforms'

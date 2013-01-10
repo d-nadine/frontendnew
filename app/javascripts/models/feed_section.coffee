@@ -1,3 +1,5 @@
+require 'radium/extended_record_array'
+
 Radium.FeedSection = Radium.Core.extend
   date: DS.attr('datetime')
   nextDate: DS.attr('string')

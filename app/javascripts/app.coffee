@@ -14,21 +14,26 @@ Radium = Em.Application.create
 
 window.Radium = Radium
 
+# First off, require all the custom additions and code
+# we need to be available globally
+require 'ember/datetime'
+require 'string/inflector'
+
+require 'foundry'
+require 'ember/filterable_mixin'
+
 require 'radium/store'
 
 require 'radium/router'
 
-require 'radium/lib'
-
 require 'radium/mixins'
 
 require 'radium/models'
-require 'radium/views'
-require 'radium/controllers'
+requireAll /radium\/views/
+requireAll /radium\/controllers/
 
 require 'radium/feed'
 
-require 'radium/helpers/date_helper'
-require 'radium/helpers/time_helper'
+require /radium\/helpers/
 
 require 'radium/factories'

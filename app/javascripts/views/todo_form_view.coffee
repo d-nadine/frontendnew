@@ -1,3 +1,5 @@
+require 'radium/views/date_picker_field'
+
 Radium.TodoFormView = Radium.FormView.extend
   templateName: 'radium/todo_form'
 
