@@ -71,4 +71,14 @@ div.email{
   height: 16px;
 }
 
+#email-panel {
+  padding-bottom: 40px;
+}
 
+#remaining-emails {
+  #show-more {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

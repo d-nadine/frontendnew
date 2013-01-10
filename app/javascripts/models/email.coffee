@@ -9,6 +9,10 @@ Radium.Email = Radium.Core.extend Radium.CommentsMixin,
   message: DS.attr('string')
   sentAt: DS.attr('date')
 
+  hasAttachments: (->
+    true
+  ).property('attachments.length')
+
   user: DS.belongsTo('Radium.User', polymorphicFor: 'sender')
   contact: DS.belongsTo('Radium.Contact', polymorphicFor: 'sender')
   todos: DS.hasMany('Radium.Todo', inverse: 'email')

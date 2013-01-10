@@ -1,3 +1,5 @@
+require 'radium/views/inbox/sidebar_mail_item_view'
+
 Radium.InboxSidebarView = Em.CollectionView.extend
   contentBinding: 'controller'
   tagName: 'ul'

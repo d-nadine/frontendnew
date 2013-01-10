@@ -1,0 +1,20 @@
+<div id="remaining-emails">
+  <a id="show-more" class="btn btn-large" {{action showMore target="controller"}}>
+    <i class="icon-plus"></i>{{remainingContent.length}} Email(s) Remaining: Show More
+  </a>
+
+  <table class="table table-bordered table-striped">
+    {{#each remainingContent}}
+      <tr>
+        <td>{{subject}}</td>
+        <td>{{truncate message}}</td>
+        <td>{{formatTime sentAt}}</td>
+        <td>
+          {{#if hasAttachments}}
+          <i class="icon-paperclip">
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
