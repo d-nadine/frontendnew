@@ -27,6 +27,11 @@ Radium.LimitSupport = Ember.Mixin.create
     @get('content.length')
   ).property('content.length')
 
+  remainingContent: ( ->
+    if content = @get('content')
+      Ember.A(content.slice(@get('currentLimit') + 1, @get('content.length')))
+  ).property('content')
+
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     if addedCount
       for i in [idx..(idx + addedCount - 1)]

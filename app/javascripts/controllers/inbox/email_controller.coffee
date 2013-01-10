@@ -1,1 +1,1 @@
-Radium.EmailController = Em.ObjectController.extend()
+Radium.EmailController = Em.ArrayController.extend()

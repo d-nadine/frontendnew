@@ -1,3 +1,92 @@
+<<<<<<< HEAD
+=======
+# Normalize arguments. Supported arguments:
+#
+# name
+# name, context
+# outletName, name
+# outletName, name, context
+# options
+#
+# The options hash has the following keys:
+#
+#   name: the name of the controller and view
+#     to use. If this is passed, the name
+#     determines the view and controller.
+#   outletName: the name of the outlet to
+#     fill in. default: 'view'
+#   viewClass: the class of the view to instantiate
+#   controller: the controller instance to pass
+#     to the view
+#   context: an object that should become the
+#     controller's `content` and thus the
+#     template's context.
+runWhenLoaded = Radium.Utils.runWhenLoaded
+# TODO: move all that helpers somewhere
+#
+# TODO such checking if date is loaded needs to be changed
+#      to work properly with grouped feed sections
+sectionLoaded = (date) ->
+  if content = Radium.get('currentFeedController.content')
+    section = content.find (s) -> s.get('id') == date
+    if section
+      Radium.get('currentFeedController').findRelatedSection section
+
+findNearBy = (date) ->
+  if content = Radium.get('currentFeedController.content')
+    nearBy = content.find (section, i, collection) ->
+      nextSection = collection.objectAt(i + 1)
+      if nextSection
+        section.dateBetween date, nextSection
+
+  if nearBy
+    Radium.get('currentFeedController').findRelatedSection nearBy
+
+jumpToDate = (date) ->
+  jumpTo date: date.toDateFormat()
+
+jumpTo = (query) ->
+  query   ?= {}
+
+  if query.date && query.date.toDateFormat
+    query.date = query.date.toDateFormat()
+
+  if query.date && (section = sectionLoaded(query.date))
+    if !query.disableScroll
+      Radium.Utils.scroll(section.get('domClass'))
+  else if query.date && (nearBy = findNearBy(query.date))
+    if !query.disableScroll
+      Radium.Utils.scroll("feed_section_#{nearBy.get('id')}")
+  else
+    sections = Radium.get('router.store').expandableArrayFor Radium.FeedSection
+    sections.load Radium.FeedSection.find(query)
+
+    if query.calendar
+      # TODO: this methods has too many concerns, it would be nice to refactor it later
+      Radium.router.get('mainController').connectOutlet('content', 'calendarFeed', sections)
+    else if query.type
+      plural = query.type.pluralize()
+      type   = Radium["#{query.type.camelize().capitalize()}FeedSection"]
+
+      Radium.router.get('mainController').connectOutlet('content', "#{plural}Feed", sections)
+      Radium.router.set("#{plural}FeedController.recordId", query.id)
+      Radium.router.set("#{plural}FeedController.recordType", type)
+      Radium.router.set("#{plural}FeedController.type", query.type)
+    else
+      Radium.router.get('mainController').connectOutlet('content', 'feed', sections)
+
+    if query.disableScroll
+      Radium.get('currentFeedController').disableScroll()
+    else
+      Radium.Utils.scrollWhenLoaded(sections, "feed_section_#{query.date}")
+
+  if date = query.date
+    Radium.set 'currentFeedController.currentDate', date
+  else if ! Radium.get('currentFeedController.currentDate')
+    # set current date if no date is set yet
+    Radium.set 'currentFeedController.currentDate', Ember.DateTime.create()
+
+>>>>>>> start show email history
 Radium.Router = Ember.Router.extend
   location: 'none'
   enableLogging: true
@@ -146,7 +235,16 @@ Radium.Router = Ember.Router.extend
       email: Em.Route.extend
         route: '/:email_id'
         connectOutlets: (router, email) ->
-          router.get('inboxController').connectOutlet('email', email)
+          history = Radium.Email.find(historyFor: email)
+
+          router.get('inboxController').connectOutlet('emailSection', history)
+          router.get('emailSectionController').connectOutlet
+            controller: router.get('emailSectionController')
+            viewClass: Radium.EmailView
+          router.get('emailSectionController').connectOutlet
+            controller: router.get('emailSectionController')
+            viewClass: Radium.ShowMoreEmailsView
+            outletName: 'showmore'
 
     users: Ember.Route.extend
       route: '/users'

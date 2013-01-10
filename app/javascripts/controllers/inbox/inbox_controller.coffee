@@ -1,7 +1,11 @@
 Radium.InboxController = Em.ArrayController.extend
   selectedMail: ( ->
-    @filter (email) -> email.get('isSelected')
-  ).property('@each.isSelected')
+    Em.ArrayProxy.create Ember.FilterableMixin,
+      context: this
+      contentBinding: 'context.content'
+      filterProperties: ['isSelected']
+  ).property('content')
+
   deselectEmail: (event) ->
     event.context.set('isSelected', false)
   createTodo: (data, email) ->
@@ -27,12 +31,16 @@ Radium.InboxController = Em.ArrayController.extend
     @get('store').commit()
 
   deleteEmails: ->
-    count = @get('selectedMail.length')
+    selected = @get('content').filter (email) -> email.get('isSelected')
+
+    return if selected.get('count') == 0
+
+    count = selected.get('length')
     #FIXME ember-data association errors
     # @get('selectedMail').toArray().forEach (email) ->
     #   email.deleteRecord()
     # @get('store').commit()
 
-    @removeObjects(@get('selectedMail'))
+    @removeObjects(selected)
 
     Radium.Utils.notify "#{count} emails deleted."

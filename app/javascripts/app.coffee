@@ -37,13 +37,17 @@ require 'radium/feed'
 require /radium\/helpers/
 
 require 'radium/views/inbox/sidebar_mailitem_view'
+require 'radium/views/inbox/emailitem_view'
 require 'radium/views/inbox/inbox_sidebar_view'
 require 'radium/views/inbox/inbox_view'
-require 'radium/views/inbox/email_view'
+require 'radium/views/inbox/emails_view'
 require 'radium/views/inbox/selected_email_view'
 require 'radium/views/inbox/selected_email_list_view'
+require 'radium/views/inbox/showmoreemails_view'
 require 'radium/controllers/inbox/inbox_controller'
 require 'radium/controllers/inbox/inbox_sidebar_controller'
 require 'radium/controllers/inbox/email_controller'
+require 'radium/controllers/inbox/email_section_controller'
+require 'radium/views/inbox/email_section_view'
 
 require 'radium/factories'

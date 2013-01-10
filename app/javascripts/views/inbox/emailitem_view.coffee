@@ -1,4 +1,4 @@
-Radium.EmailView = Em.View.extend
+Radium.EmailItemView = Em.View.extend
   templateName: 'radium/inbox/email'
   classNames: 'email fadeIn'.w()
   didInsertElement: ->

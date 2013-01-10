@@ -8,6 +8,7 @@ Radium.InboxSidebarController = Em.ArrayController.extend
     return if email.get('read')
 
     email.set('read', true)
+
     @get('store').commit()
   ).observes('active')
 

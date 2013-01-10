@@ -13,7 +13,7 @@
     <div class="btn-group">
       <button class="btn btn-primary dropdown-toggle email-action" data-toggle="dropdown">Action <span class="caret"></span></button^>
       <ul class="dropdown-menu">
-        <li><a {{action toggleTodoForm target="view"}}>Todo</a></li>
+        <li><a class="multiple-todos" {{action toggleTodoForm target="view"}}>Todo</a></li>
         <li class="divider"></li>
         <li><a {{action markRead target="controller"}}>Mark Read</a></li>
         <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
@@ -24,6 +24,6 @@
 <div class="rel">
 {{view view.FormContainer viewName="formContainer"}}
 </div>
-{{collection Radium.SelectedEmailListView contentBinding="selectedMail"}}
+{{collection Radium.EmailView contentBinding="selectedMail"}}
 {{outlet}}
 {{view view.arrow}}
