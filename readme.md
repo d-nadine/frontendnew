@@ -36,6 +36,58 @@ all tests: `$ bundle exec iridium test`
 Deploying is easy: `$ ./script/deploy`. This will do some integrity
 checks and finally push the code upstream.
 
+# Conventions & Rules
+
+## Directory Structure
+
+The code is organized into 4 main directories: `app`, `lib`, `test`,
+`vendor`. Different types of code go into different places.
+
+* `app`: Application specific code: models, views, controllers,
+  templates
+* `lib`: Framework level code, or code that can be reused outside the
+  application
+* `test`: For tests bro.
+* `vendor`: Code written by other people. Can be CSS, JS, or other
+  assets
+
+The `app` directory is strictly organized. It is this way to handle
+the large number of classes and files. Ember apps' require a lot of
+classes. Each class has it's own file. All the code lives inside
+`app/javascripts`. That directory is also organized by responsiblity.
+
+* `adapters`: All the files to connect the store to various backends.
+* `controllers`: All the controllers.
+* `factories`: Model factories defined in this directory.
+* `helpers`: Bound and unbound helpers for Handlebars templates
+* `mixins`: Reusable modules. Loosely organized.
+* `models`: All sorts of models. Not just `DS.Store` models. These may 
+  also be domain models
+* `views`: Views only. There are a lot. There are subfolders for
+  different pages and responsibilities.
+
+## Rules
+
+1. These types of files must include their responsiblity in the class
+   name and file name: **Views, Controllers, Helpers, Adapters, and
+   Serializers**. EX: `DashboardController` and
+   `dashboard_controller.coffee`
+2. View subtypes **must** also include their responsiblity in the name.
+   Example: `MeetingFormView.coffee` and `view/forms/meeting_form.coffee`.
+3. Views **must** be placed into a subfolder for the page they're used
+   on. Example: `views/dashboard`, `views/calendar`.
+4. Reusable views **must** be placed into `views/shared`.
+5. A View's class name **should** match to a file in `templates/`.
+   This makes automatica `templateName` lookup possible. EX:
+   `DashboardView` becomes `templates/dashboard_view`.
+6. Tests must end in `_test`
+7. Test directory structure should mirror `app` and `lib`.
+8. Follow this [CoffeeScript Style Guide](https://github.com/polarmobile/coffeescript-style-guide)
+9. Exception to #8: Prefer `||=` over `or=`
+10. New code **must** follow these rules. Old code should be updated.
+11. `Ember.CollectionView` subclasses **should** contain "List" in the
+    name.
+
 # Code design
 
 ## Feed design
