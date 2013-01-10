@@ -1,7 +1,7 @@
-require 'radium/views/meeting_form_view'
+require 'radium/views/forms/meeting_form_view'
 require 'radium/controllers/meeting_form_controller'
 
-require 'radium/views/todo_form_view'
+require 'radium/views/forms/todo_form_view'
 
 Radium.FormContainerView = Ember.ContainerView.extend
   controllerBinding: 'Radium.router.formController'

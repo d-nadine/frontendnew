@@ -1,6 +1,6 @@
-require 'radium/views/feed_section_view'
-require 'radium/views/filtered_items_info_view'
-require 'radium/views/gap_view'
+require 'radium/views/feed/feed_section_view'
+require 'radium/views/feed/filtered_items_info_view'
+require 'radium/views/feed/gap_view'
 
 Radium.FeedSectionsListView = Ember.CollectionView.extend
   arrayDidChange: (content, start, removed, added) ->

@@ -1,5 +1,5 @@
-require 'radium/views/feed_details_container_view'
-require 'radium/views/todo_view_mixin'
+require 'radium/views/feed/feed_details_container_view'
+require 'radium/mixins/views/todo_view_mixin'
 
 noOp = Ember.Mixin.create()
 

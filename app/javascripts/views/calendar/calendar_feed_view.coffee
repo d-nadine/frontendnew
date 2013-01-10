@@ -1,4 +1,4 @@
-require 'radium/views/feed_view'
+require 'radium/views/feed/feed_view'
 require 'radium/mixins/infinite_scroller'
 
 Radium.CalendarFeedView = Radium.FeedView.extend Radium.InfiniteScroller,

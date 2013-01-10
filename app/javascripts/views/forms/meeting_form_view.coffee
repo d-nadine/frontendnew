@@ -1,8 +1,8 @@
-require 'radium/views/form_view'
 require 'radium/mixins/validate'
-
-require 'radium/views/meeting_form_datepicker'
 require 'radium/mixins/views/time_picker'
+
+require 'radium/views/forms/form_view'
+require 'radium/views/fields/meeting_form_datepicker'
 
 Radium.MeetingFormView = Radium.FormView.extend
   templateName: 'radium/meeting_form'
