@@ -36,3 +36,8 @@ Factory.define 'email', traits: ['timestamps', 'html'],
   sender:
     id: -> Factory.build 'user'
     type: 'user'
+  attachments: -> [
+    Factory.create 'attachment'
+    Factory.create 'attachment'
+    Factory.create 'attachment'
+  ]

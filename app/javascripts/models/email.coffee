@@ -9,6 +9,8 @@ Radium.Email = Radium.Core.extend Radium.CommentsMixin,
   message: DS.attr('string')
   sentAt: DS.attr('date')
 
+  attachments: DS.hasMany('Radium.Attachment')
+
   hasAttachments: (->
     true
   ).property('attachments.length')

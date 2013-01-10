@@ -13,8 +13,21 @@
   </div>
 </div>
 <div class="well well-large body">
-  {{{unbound html}}}
+  {{{unbound message}}}
+
+  <div class="attachments">
+    <ul class="thumbnails">
+      {{#each attachments}}
+        <li class="span2">
+          <a href="#" class="thumbnail">
+            <img class="img-polaroid" src="http://placehold.it/170x100" alt="">
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
+
 <div class="well well-small">
   <div class="btn-toolbar">
     <div class="btn-group">
