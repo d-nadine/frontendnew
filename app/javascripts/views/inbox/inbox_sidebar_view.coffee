@@ -7,6 +7,13 @@ Radium.InboxSidebarView = Em.CollectionView.extend
   itemViewClass: Radium.SidebarMailItemView
   emptyView: Ember.View.extend
     templateName: 'radium/inbox/empty_sidebar'
+  adjustArrowPosition: ->
+      arrow = $('div.arrow')
+      active = $('ul.messages li.active')
+      return unless active.length
+
+      arrow.css(top: active.offset().top - 35)
+
   didInsertElement: ->
     scrollbar = $("""
               <div class="scrollcontainer">
@@ -24,20 +31,22 @@ Radium.InboxSidebarView = Em.CollectionView.extend
     scroller = $('#sidebar').tinyscrollbar()
     @set('scroller', scroller )
 
+    arrow = $('div.arrow')
+    active = $('ul.messages li.active')
+
     $(window).on('resize', =>
       @get('scroller').tinyscrollbar_update()) if @get('scroller')
 
-    $('.thumb').on('contentScrolled', (event, direction, distance) ->
-      arrow = $('div.arrow')
-      active = $('ul.messages li.active')
-      return if active.length == 0
+    $(window).on 'scroll', =>
+      @get('adjustArrowPosition').apply()
 
-      arrow.css(top: active.offset().top - 35)
-    )
+    $('.thumb').on 'contentScrolled', (event, direction, distance) =>
+      @get('adjustArrowPosition').apply()
 
   willDestroyElement: ->
     $(window).off('resize')
     $('.thumb').off('contentScrolled')
+    $(window).off(@get('adjustArrowPosition'))
     @get('scroller').unbindAll() if @get('scroller')
     scrollContainer = $('.scrollcontainer')
     scrollContainer.find("*").andSelf().unbind()
