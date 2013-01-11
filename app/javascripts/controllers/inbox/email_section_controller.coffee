@@ -1,4 +1,4 @@
-require 'radium/pagination_support'
+require 'radium/pagination_mixin'
 
 Radium.EmailSectionController = Em.ArrayController.extend Radium.PaginationMixin,
   sortProperties: ['sentAt']

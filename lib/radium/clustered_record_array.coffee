@@ -1,5 +1,5 @@
 # FIXME this should not be a dependency
-require 'radium/limit_support'
+require 'radium/pagination_mixin'
 
 # Array keeping clusters of items. Items are kept in 'unclustered'
 # array (which can hold multiple record types). When items length for

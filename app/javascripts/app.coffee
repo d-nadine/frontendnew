@@ -22,6 +22,10 @@ require 'string/inflector'
 require 'foundry'
 require 'ember/filterable_mixin'
 
+require 'radium/run_when_loaded_mixin'
+
+require 'radium/utils'
+
 require 'radium/store'
 
 require 'radium/router'
@@ -29,7 +33,7 @@ require 'radium/router'
 require 'radium/mixins'
 
 require 'radium/models'
-requireAll /radium\/views/
+require 'radium/views'
 requireAll /radium\/controllers/
 
 require 'radium/feed'

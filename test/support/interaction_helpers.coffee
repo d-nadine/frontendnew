@@ -49,3 +49,6 @@ window.clickNotification = (notification) ->
 
 window.clickReminder = (reminder) ->
   click "li[data-reminder-id=\"#{reminder.get('id')}\"] .content"
+
+window.clickEmail = (email) ->
+  click "#sidebar [data-email-id=\"#{email.get('id')}\"]"

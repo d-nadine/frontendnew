@@ -34,26 +34,4 @@ window.Factory = foundry
 
 require 'radium/factories/traits'
 
-<<<<<<< HEAD
 requireAll /radium\/factories/
-=======
-require 'radium/factories/user'
-
-require 'radium/factories/attachment'
-require 'radium/factories/call_list'
-require 'radium/factories/campaign'
-require 'radium/factories/comment'
-require 'radium/factories/contact'
-require 'radium/factories/deal'
-require 'radium/factories/email'
-require 'radium/factories/group'
-require 'radium/factories/meeting'
-require 'radium/factories/invitation'
-require 'radium/factories/notification'
-require 'radium/factories/phone_call'
-require 'radium/factories/message'
-require 'radium/factories/reminder'
-require 'radium/factories/sms'
-require 'radium/factories/todo'
-require 'radium/factories/feed_section'
->>>>>>> Attachments

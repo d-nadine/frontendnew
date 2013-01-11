@@ -1,14 +1,3 @@
-runWhenLoaded = (object, callback) ->
-  if object.get('isLoaded')
-    Ember.run.next ->
-      callback.apply object
-  else
-    observer = ->
-      callback.apply object
-      object.removeObserver 'isLoaded', observer
-
-    object.addObserver 'isLoaded', observer
-
 # TODO: maybe it would be nice to handle queuing arrays added
 #       with load. for now it's handled in router, but this
 #       implementation is not bullet proof
@@ -18,7 +7,7 @@ runWhenLoaded = (object, callback) ->
 #       back to controller to keeps things nicely organized when
 #       SortableMixin can play nicely with others (ie. when you
 #       can overwrite arrangedContent to add filtering or something else)
-UpdateableRecordArray = DS.RecordArray.extend
+UpdateableRecordArray = DS.RecordArray.extend Radium.RunWhenLoadedMixin,
   isLoading: false
 
   loadRecord: (record) ->
@@ -29,7 +18,7 @@ UpdateableRecordArray = DS.RecordArray.extend
     @set 'isLoading', true
     self = this
 
-    runWhenLoaded record, ->
+    @runWhenLoaded record, ->
       self.pushObject record
       self.set 'isLoading', false
 
@@ -37,7 +26,7 @@ UpdateableRecordArray = DS.RecordArray.extend
     @set 'isLoading', true
     self = this
 
-    runWhenLoaded array, ->
+    @runWhenLoaded array, ->
       @forEach (record) ->
         self.pushObject record
 
@@ -69,7 +58,7 @@ UpdateableRecordArray = DS.RecordArray.extend
       return @_binarySearch(item, low, mid)
     mid
 
-Radium.Feed = Ember.ArrayProxy.extend
+Radium.Feed = Ember.ArrayProxy.extend Radium.RunWhenLoadedMixin,
   # Set this to a user/contact/group
   scope: undefined
 
@@ -147,7 +136,7 @@ Radium.Feed = Ember.ArrayProxy.extend
     results = @get('sectionClass').find query
     @get('content').load results
 
-    runWhenLoaded results, callback if callback
+    @runWhenLoaded results, callback if callback
 
   loadFutureFeed: ->
     futureDate = @get 'nextFutureDate'

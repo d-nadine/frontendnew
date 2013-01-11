@@ -21,6 +21,8 @@ Radium.FixtureSerializer = DS.RESTSerializer.extend
   addBelongsTo: (hash, record, key, relationship) ->
     if polymorphicFor = relationship.options.polymorphicFor
       polymorphic = record.get(polymorphicFor)
+      return unless polymorphic
+
       hash[polymorphicFor] = {}
       hash[polymorphicFor].id = polymorphic.get('id')
       hash[polymorphicFor].type = polymorphic.get('type')
@@ -29,6 +31,8 @@ Radium.FixtureSerializer = DS.RESTSerializer.extend
 
   materializePolymorphicAssociation: (record, hash, name, polymorphicData) ->
     type = record.constructor
+
+    return unless polymorphicData.type && polymorphicData.id
 
     associationType = @typeFromString(polymorphicData.type)
     associations = Ember.get(type, 'associations').get(associationType).map (association) ->

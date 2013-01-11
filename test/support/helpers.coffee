@@ -44,6 +44,18 @@ window.waitForSelector = (selector, callback, message) ->
 
   waitFor condition, callbackWithElement, message
 
+window.waitForResource = (item, callback, message) ->
+  selector = '[data-type="%@"][data-id="%@"]'.fmt item.get('constructor'), item.get('id')
+  message  ||= 'Could not find %@ %@'.fmt item.get('constructor'), item.get('id')
+
+  waitForSelector selector, callback, message
+
+window.waitForResourceIn = (item, scope, callback, message) ->
+  selector = '%@ [data-type="%@"][data-id="%@"]'.fmt scope, item.get('constructor'), item.get('id')
+  message  ||= 'Could not find %@ %@ in %@ (%@)'.fmt item.get('constructor'), item.get('id'), scope, selector
+
+  waitForSelector selector, callback, message
+
 window.waitForFeedItem = (item, callback, message) ->
   selector = '#main-feed [data-type="%@"][data-id="%@"]'.fmt item.get('constructor'), item.get('id')
 

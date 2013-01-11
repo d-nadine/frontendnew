@@ -1,4 +1,4 @@
-Radium.EmailItemView = Em.View.extend
+Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   templateName: 'radium/inbox/email'
   classNames: 'email'.w()
   didInsertElement: ->
