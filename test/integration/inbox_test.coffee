@@ -117,3 +117,23 @@ integrationTest 'the selected emails can be deleted', ->
 
     checks = $F('input[type=checkbox]', el)
     equal checks.length, 1, '1 email remains in sidebar'
+
+integrationTest 'a list of recent messages from a sender can be displayed', ->
+  bob = Factory.create 'user'
+  frank = Factory.create 'user'
+
+  [0..9].forEach (num) ->
+    user = if num % 2 is 0 then bob else frank
+    email1 = Factory.create 'email',
+      sender:
+        id: -> user
+        type: 'user'
+
+  emails = Radium.Email.find()
+
+  equal emails.get('length'), 10, 'precond - there are 10 emails'
+
+  visit '/inbox'
+
+  waitForSelector 'ul.messages', (el) ->
+    console.log 'wait'

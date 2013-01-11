@@ -8,3 +8,4 @@ Radium.Comment = Radium.Core.extend
   meeting: DS.belongsTo('Radium.Meeting', polymorphicFor: 'commentable')
   deal: DS.belongsTo('Radium.Deal', polymorphicFor: 'commentable')
   phoneCall: DS.belongsTo('Radium.PhoneCall', polymorphicFor: 'commentable')
+  email: DS.belongsTo('Radium.Email', polymorphicFor: 'commentable')

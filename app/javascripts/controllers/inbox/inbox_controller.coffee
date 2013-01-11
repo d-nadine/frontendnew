@@ -6,15 +6,6 @@ Radium.InboxController = Em.ArrayController.extend
       filterProperties: ['isSelected']
   ).property('content')
 
-  deselectEmail: (event) ->
-    event.context.set('isSelected', false)
-  createTodo: (data, email) ->
-    todo = Radium.Todo.createRecord(data)
-    todo.set('reference', email)
-    todo.store.commit()
-
-    #TODO Radium.get('router.activeFeedController').pushHitem todo
-
   markRead: (state) ->
     @markEmailRead(true)
 
@@ -30,6 +21,13 @@ Radium.InboxController = Em.ArrayController.extend
 
     @get('store').commit()
 
+  createTodo: (data, email) ->
+    todo = Radium.Todo.createRecord(data)
+    todo.set('reference', email)
+    todo.store.commit()
+
+    #TODO Radium.get('router.activeFeedController').pushHitem todo
+
   deleteEmails: ->
     selected = @get('content').filter (email) -> email.get('isSelected')
 
@@ -40,6 +38,7 @@ Radium.InboxController = Em.ArrayController.extend
     # @get('selectedMail').toArray().forEach (email) ->
     #   email.deleteRecord()
     # @get('store').commit()
+    selected.forEach (email) -> email.set('isSelected', false)
 
     @removeObjects(selected)
 

@@ -28,15 +28,16 @@ Handlebars.registerHelper "formatTime", (property, options) ->
     elem = view.$()
 
     # Delete the observes if the view gets got.
-    if elem.length is 0
+    if !elem || elem.length is 0
       Ember.removeObserver context, property, invoker
       return
     newValue = Ember.get(context, property)
 
     # type = Ember.typeOf(newValue),
     updatedDate = parseDate(newValue)
-    view.$().text updatedDate
-    view.rerender()
+    #FIXME NOT_FOUND_ERR: DOM Exception 8 
+    # view.$().text updatedDate
+    # view.rerender()
 
   invoker = ->
     Ember.run.once observer

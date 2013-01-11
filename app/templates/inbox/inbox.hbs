@@ -6,24 +6,11 @@
   </div>
   {{#if selectedMail.length}}
     <div class="btn-group">
-      <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
-        <i class="icon-trash icon-large icon-white"></i> Delete
+      <a {{action emailBulkAction href=true}} class="btn btn-primary">
+        <i class="icon-trash icon-large icon-white"></i> Action
       </a>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle email-action" data-toggle="dropdown">Action <span class="caret"></span></button^>
-      <ul class="dropdown-menu">
-        <li><a class="multiple-todos" {{action toggleTodoForm target="view"}}>Todo</a></li>
-        <li class="divider"></li>
-        <li><a {{action markRead target="controller"}}>Mark Read</a></li>
-        <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
-      </ul>
     </div>
   {{/if}}
 </div>
-<div class="rel">
-{{view view.FormContainer viewName="formContainer"}}
-</div>
-{{collection Radium.EmailView contentBinding="selectedMail"}}
 {{outlet}}
 {{view view.arrow}}

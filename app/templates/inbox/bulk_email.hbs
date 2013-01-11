@@ -1,0 +1,33 @@
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <a {{action showInbox}} class="btn">
+      Back 
+    </a>
+  </div>
+{{#if selectedMail.length}}
+  <div class="btn-group">
+    <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
+      <i class="icon-trash icon-large icon-white"></i> Delete
+    </a>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary dropdown-toggle email-action" data-toggle="dropdown">Action <span class="caret"></span></button^>
+    <ul class="dropdown-menu">
+      <li><a class="multiple-todos" {{action toggleTodoForm target="view"}}>Todo</a></li>
+      <li class="divider"></li>
+      <li><a {{action markRead target="controller"}}>Mark Read</a></li>
+      <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
+    </ul>
+  </div>
+{{/if}}
+</div>
+<div>
+{{selectedMail.length}} Email(s) Selected
+</div>
+<div class="rel">
+  {{view view.FormContainer viewName="formContainer"}}
+</div>
+<table class="table table-bordered table-striped">
+  {{each selectedMail itemViewClass="Radium.EmailListView"}}
+</table>
+

@@ -115,6 +115,7 @@ Radium.Router = Ember.Router.extend
   showCalendar: Ember.Route.transitionTo('root.calendar.index')
   showInbox : Ember.Route.transitionTo('root.inbox.index')
   showEmail : Ember.Route.transitionTo('root.inbox.email')
+  emailBulkAction: Em.Route.transitionTo('root.inbox.action')
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -214,23 +215,32 @@ Radium.Router = Ember.Router.extend
       connectOutlets: (router) ->
         content = Radium.Email.find()
         router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
-        router.get('inboxController').set('content', content)
-
-        sidebarController = router.get('inboxSidebarController')
-
-        router.get('mainController').connectOutlet('content', 'inbox')
-
-        unless sidebarController.get('active')
-          runWhenLoaded content, ->
-            if content.get('length') > 0
-              active = content.get('firstObject')
-              sidebarController.setActive(active)
-              router.send('showEmail', active)
-        else
-          router.send('showEmail', sidebarController.get('active'))
 
       index: Em.Route.extend
         route: '/'
+        connectOutlets: (router) ->
+          content = Radium.Email.find()
+          router.get('inboxController').set('content', content)
+          router.get('mainController').connectOutlet('content', 'inbox')
+
+          sidebarController = router.get('inboxSidebarController')
+
+          unless sidebarController.get('active')
+            runWhenLoaded content, ->
+              if content.get('length') > 0
+                active = content.get('firstObject')
+                sidebarController.setActive(active)
+                router.send('showEmail', active)
+          else
+            router.send('showEmail', sidebarController.get('active'))
+
+      action: Em.Route.extend
+        route: '/action'
+        connectOutlets: (router) ->
+          router.get('mainController').connectOutlet
+            controller: router.get('inboxController')
+            viewClass: Radium.BulkEmailActionView
+            outletName: 'content'
 
       email: Em.Route.extend
         route: '/:email_id'

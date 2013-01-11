@@ -18,8 +18,11 @@
       {{/if}}
     </div>
     <p>{{subject}}</p>
+    {{#if hasAttachments}}
+    <i class="icon-paperclip icon-large"></i>
+    {{/if}}
     <i class='icon-trash icon-large'></i>
   </div>
-  <small>11:25</small>
+  <small>{{formatTime sentAt}}</small>
 </div>
 {{/with}}

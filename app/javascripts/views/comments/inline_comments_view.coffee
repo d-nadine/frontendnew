@@ -4,6 +4,7 @@ Radium.InlineCommentsView = Ember.View.extend
   templateName: 'radium/inline_comments'
   isErrorBinding: 'controller.isError'
   commentBinding: 'controller.newComment'
+  autoresize: true
   commentTextArea: Ember.TextArea.extend(Ember.TargetActionSupport,
     placeholder: "Add a comment"
     valueBinding: 'parentView.comment'
@@ -15,7 +16,7 @@ Radium.InlineCommentsView = Ember.View.extend
     didInsertElement: ->
       self = this
       @_super()
-      @$().focus().autosize().css('resize','none')
+      @$().focus().autosize().css('resize','none') if @get('parentView.autoresize')
 
     willDestroyElement: ->
       $('html').off('click.autoresize')

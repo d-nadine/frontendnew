@@ -75,6 +75,20 @@ div.email{
   margin: 15px 0;
 }
 
+.email-actions {
+  table{
+    td:nth-child(1){
+      width: 35px !IMPORTANT;
+    }
+  }
+}
+
+.email-actions div.comments .comments div.span5{
+  position: relative;
+  left: -98px;
+  top: -20px;
+}
+
 #email-panel {
   padding-bottom: 40px;
 }

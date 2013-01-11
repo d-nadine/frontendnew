@@ -37,7 +37,12 @@ ul.messages{
       }
     }
     div:nth-child(2){
-      i{
+      i.icon-paperclip{
+        position: absolute;
+        top: 4px;
+        right: 2px;
+      }
+      i.icon-trash{
         position: absolute;
         top: 4px;
         right: 2px;
@@ -59,8 +64,11 @@ ul.messages{
       }
     }
     div:nth-child(2){
-      i{
-        @include opacity-transition(1, 0.3s);
+      i.icon-paperclip{
+        opacity: 0;
+      }
+      i.icon-trash{
+        opacity: 1;
       }
     }
   }

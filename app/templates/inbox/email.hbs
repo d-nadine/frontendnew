@@ -3,8 +3,7 @@
   <div>
       {{#if sender.avatar.small_url}}
         <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
-      {{else}}
-        <img class="avatar" src="/images/fallback/small_default.png">
+      {{else}} <img class="avatar" src="/images/fallback/small_default.png">
       {{/if}}
       <strong>{{unbound sender.displayName}}</strong>
   </div>
@@ -27,8 +26,7 @@
     </ul>
   </div>
 </div>
-
-<div class="well well-small">
+<div class="well well-small email-actions">
   <div class="btn-toolbar">
     <div class="btn-group">
       <a class="btn">
@@ -36,6 +34,9 @@
       </a>
       <a class="btn">
         <i class="icon-forward-2"></i> Forward
+      </a>
+      <a {{action showCommentsSection target="view"}} class="btn">
+        Add <i class="icon-plus"></i>
       </a>
     </div>
     <div class="btn-group pull-right">
@@ -45,6 +46,15 @@
       <a class="btn btn-danger">
         <i class="icon-trash icon-white"></i>
       </a>
+    </div>
+  </div>
+  {{#if view.showComments}}
+    <div>Actions</div>
+  {{/if}}
+  <div class="comments">
+    <h2>Comments</h2>
+    <div>
+      {{view view.FormContainer viewName="formContainer"}}
     </div>
   </div>
 </div>

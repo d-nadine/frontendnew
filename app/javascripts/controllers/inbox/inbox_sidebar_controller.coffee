@@ -5,7 +5,7 @@ Radium.InboxSidebarController = Em.ArrayController.extend
   activeDidChange: ( ->
     email = @get('active')
 
-    return if email.get('read')
+    # return if email.get('read')
 
     email.set('read', true)
 

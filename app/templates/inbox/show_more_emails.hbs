@@ -4,17 +4,6 @@
   </a>
 
   <table class="table table-bordered table-striped">
-    {{#each remainingContent}}
-      <tr>
-        <td>{{subject}}</td>
-        <td>{{truncate message}}</td>
-        <td>{{formatTime sentAt}}</td>
-        <td>
-          {{#if hasAttachments}}
-          <i class="icon-paperclip">
-          {{/if}}
-        </td>
-      </tr>
-    {{/each}}
+    {{each remainingContent itemViewClass="Radium.EmailListView"}}
   </table>
 </div>
