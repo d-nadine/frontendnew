@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/livingsocial/rake-pipeline.git
-  revision: 50b8d77b703c96539a433ee53a680c43542aaa75
+  revision: 27718232227eddd029466b2968f0880c10a18fb4
   specs:
     rake-pipeline (0.8.0)
       json
-      rake (~> 0.9.0)
+      rake (~> 10.0.0)
       thor
 
 GIT
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 11dc34ba66f19934d99bb4bf0be2a9daa5685bec
+  revision: 4129098575f9dbd745bb3c73fe567abec8378206
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -36,7 +36,6 @@ GIT
       rake-pipeline (~> 0.8.0)
       rake-pipeline-web-filters (= 0.7.0)
       sass
-      therubyracer
       thin
       thor
       uglifier (~> 1.2.3)
@@ -44,7 +43,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/thor.git
-  revision: 15eedc90f49981b992869f7f21387caa3555f267
+  revision: 95639f3590223a46ad622f5fe6c6a98e17c53929
   specs:
     thor (0.16.0)
 
@@ -55,12 +54,12 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    activesupport (3.2.9)
+    activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     barber (0.1.3)
       execjs
-    chunky_png (1.2.6)
+    chunky_png (1.2.7)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -77,26 +76,23 @@ GEM
       multi_json (~> 1.0)
     fssm (0.2.9)
     i18n (0.6.1)
-    json (1.7.5)
+    json (1.7.6)
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
     multi_json (1.5.0)
     open4 (1.3.0)
-    rack (1.4.1)
-    rack-rewrite (1.3.2)
+    rack (1.4.3)
+    rack-rewrite (1.3.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.10.0)
-    rake (0.9.6)
+    rake (10.0.3)
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
-    ref (1.0.2)
-    ruby-prof (0.11.2)
-    sass (3.2.3)
-    therubyracer (0.11.0)
-      ref
+    ruby-prof (0.12.0)
+    sass (3.2.5)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)

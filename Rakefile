@@ -2,7 +2,7 @@ require 'bundler/setup'
 
 desc "Loads the app environment"
 task :environment do
-  require File.expand_path("../environment.rb", __FILE__)
+  require File.expand_path("../config/environment.rb", __FILE__)
 end
 
 namespace :assets do
