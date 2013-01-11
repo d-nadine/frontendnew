@@ -20,7 +20,7 @@ div.email{
   div:first-child{
     margin-bottom: 4px;
   }
-  div:nth-child(2):not(.btn-group){
+  div:nth-child(2):not(.btn-group):not(.comments){
     padding: 5px 0 5px 0;
     border-bottom: 1px solid #DADADA;
     border-top: 1px solid #DADADA;
@@ -89,7 +89,7 @@ div.email{
   top: -20px;
 }
 
-#email-panel {
+email-panel {
   padding-bottom: 40px;
 }
 
