@@ -9,9 +9,9 @@ Radium.EmailItemView = Em.View.extend
       $('div.arrow').css(top: active.offset().top - 35))
       , 200)
 
-  showComments: false
-  showCommentsSection: ->
-    @toggleProperty('showComments')
+  showActions: false
+  showActionSection: ->
+    @toggleProperty('showActions')
   FormContainer: Em.ContainerView.extend
     init: ->
       @_super.apply this, arguments

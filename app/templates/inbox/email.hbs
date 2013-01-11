@@ -13,7 +13,6 @@
 </div>
 <div class="well well-large body">
   {{{unbound message}}}
-
   <div class="attachments">
     <ul class="thumbnails">
       {{#each attachments}}
@@ -35,7 +34,7 @@
       <a class="btn">
         <i class="icon-forward-2"></i> Forward
       </a>
-      <a {{action showCommentsSection target="view"}} class="btn">
+      <a {{action showActionSection  target="view"}} class="btn">
         Add <i class="icon-plus"></i>
       </a>
     </div>
@@ -48,11 +47,11 @@
       </a>
     </div>
   </div>
-  {{#if view.showComments}}
+  {{#if view.showActions}}
     <div>Actions</div>
   {{/if}}
   <div class="comments">
-    <h2>Comments</h2>
+    <h2>Comments {{#if comments.length}}({{comments.length}}){{/if}}</h2>
     <div>
       {{view view.FormContainer viewName="formContainer"}}
     </div>

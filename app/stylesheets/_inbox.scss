@@ -20,7 +20,7 @@ div.email{
   div:first-child{
     margin-bottom: 4px;
   }
-  div:nth-child(2):not(.btn-group):not(.comments){
+  div.subject{
     padding: 5px 0 5px 0;
     border-bottom: 1px solid #DADADA;
     border-top: 1px solid #DADADA;
@@ -86,7 +86,7 @@ div.email{
 .email-actions div.comments .comments div.span5{
   position: relative;
   left: -98px;
-  top: -20px;
+  top: -10px;
 }
 
 email-panel {
