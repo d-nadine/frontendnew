@@ -45,7 +45,7 @@ ul.messages{
       i.icon-trash{
         position: absolute;
         top: 4px;
-        right: 2px;
+        right: 20px;
         @include opacity-transition(0, 0.7s);
       }
       p{

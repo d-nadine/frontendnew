@@ -21,7 +21,9 @@
     {{#if hasAttachments}}
     <i class="icon-paperclip icon-large"></i>
     {{/if}}
-    <i class='icon-trash icon-large'></i>
+    <a {{action deleteEmail this target="controller"}}>
+      <i class='icon-trash icon-large'></i>
+    </a>
   </div>
   <small>{{formatTime sentAt}}</small>
 </div>

@@ -43,6 +43,17 @@ Radium.InboxController = Em.ArrayController.extend
     todo.store.commit()
 
     #TODO Radium.get('router.activeFeedController').pushHitem todo
+    #
+  deleteEmail: (email) ->
+    email.set('isSelected', false)
+    @removeObject(email)
+
+    Radium.Utils.notify "email deleted."
+    #FIXME ember-data association errors
+    # store = @get('store')
+
+    # email.deleteRecord()
+    # store.commit()
 
   deleteEmails: ->
     selected = @get('content').filter (email) -> email.get('isSelected')

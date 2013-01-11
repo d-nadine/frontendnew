@@ -7,8 +7,6 @@ Radium.InboxSidebarController = Em.ArrayController.extend
   activeDidChange: ( ->
     email = @get('active')
 
-    # return if email.get('read')
-
     email.set('read', true)
 
     @get('store').commit()
@@ -17,3 +15,8 @@ Radium.InboxSidebarController = Em.ArrayController.extend
   setActive: (email) ->
     @set('active', @get('firstObject'))
     @set('firstObject.isActive', true)
+
+  deleteEmail: (event) ->
+    email = event.context
+
+    Radium.get('router.inboxController').deleteEmail(email)
