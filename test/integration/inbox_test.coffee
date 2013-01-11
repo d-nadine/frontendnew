@@ -95,7 +95,7 @@ integrationTest 'the selected emails can be deleted', ->
   visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
-    checks = $F('input[type=checkbox]', el)
+    checks = $F(':checkbox', el)
 
     equal checks.length, 3, 'should have 3 emails to check'
 
