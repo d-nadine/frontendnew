@@ -21,7 +21,7 @@ Radium.FeedDetailsContainerView = Ember.ContainerView.extend Radium.Slider,
     commentsView = Radium.InlineCommentsView.create
       controller: Radium.InlineCommentsController.create
         context: this
-        feedItemBinding: 'context.content'
+        commentParentBinding: 'context.content'
 
     @get('childViews').pushObject infoView
     @get('childViews').pushObject commentsView

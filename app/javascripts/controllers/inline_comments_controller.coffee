@@ -1,5 +1,5 @@
 Radium.InlineCommentsController = Ember.ArrayController.extend
-  commentsBinding: 'feedItem.comments'
+  commentsBinding: 'commentParent.comments'
   targetBinding: 'Ember.router'
 
   newComment: ""
@@ -8,8 +8,8 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
   addComment: ->
     self = this
     if (commentText = @get('newComment')) != ''
-      id = @get('feedItem.id')
-      type = @get('feedItem.type') || @get('feedItem.kind')
+      id = @get('commentParent.id')
+      type = @get('commentParent.type') || @get('commentParent.kind')
 
       comment = @get('comments').createRecord
         text: commentText
@@ -17,7 +17,7 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
         user: Radium.get('router').user
         commentableType: type
         commentableId: id
-        todo: @get('feedItem')
+        todo: @get('commentParent')
 
       @set('isError', false)
       @set('newComment', '')

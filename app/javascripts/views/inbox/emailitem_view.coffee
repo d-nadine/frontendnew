@@ -20,6 +20,6 @@ Radium.EmailItemView = Em.View.extend
         autoresize: false
         controller: Radium.InlineCommentsController.create
           context: this
-          feedItemBinding: 'context.parentView.content'
+          commentParentBinding: 'context.parentView.content'
 
       @get('childViews').pushObject commentsView
