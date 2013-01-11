@@ -3,9 +3,6 @@ Radium.Router = Ember.Router.extend
   enableLogging: true
   initialState: 'loading'
 
-  init: ->
-    @_super()
-
   connectFeed: (scope, controller) ->
     controllerName = "#{controller}Controller"
 
@@ -93,10 +90,6 @@ Radium.Router = Ember.Router.extend
       group: Ember.Route.extend
         route: '/:group_id'
 
-        deserialize: (router, params) ->
-          params.group_id = parseInt(params.group_id)
-          @_super(router, params)
-
         connectOutlets: (router, group) ->
           router.connectFeed group, 'groupFeed'
 
@@ -116,10 +109,6 @@ Radium.Router = Ember.Router.extend
         connectOutlets: (router, contact) ->
           router.connectFeed contact, 'contactFeed'
 
-        deserialize: (router, params) ->
-          params.contact_id = parseInt(params.contact_id)
-          @_super(router, params)
-
     users: Ember.Route.extend
       route: '/users'
       connectOutlets: (router) ->
@@ -129,9 +118,3 @@ Radium.Router = Ember.Router.extend
         route: '/:user_id'
         connectOutlets: (router, user) ->
           router.connectFeed user, 'userFeed'
-
-        deserialize: (router, params) ->
-          # fixture adapter is pretty limited and works only with integer ids
-          # TODO: check if ember always assumes that id has integer type
-          params.user_id = parseInt(params.user_id)
-          @_super(router, params)
