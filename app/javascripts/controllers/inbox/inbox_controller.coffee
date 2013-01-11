@@ -6,6 +6,22 @@ Radium.InboxController = Em.ArrayController.extend
       filterProperties: ['isSelected']
   ).property('content')
 
+  previousSelectedMailCount: -1
+
+  selectedMailDidChange: ( ->
+    previous = @get('previousSelectedMailCount')
+    selectedMailLength = @get('selectedMail.length')
+
+    if(previous == 0 && selectedMailLength == 1)
+      Radium.get('router').send 'emailBulkAction'
+
+    if(previous > 0 && selectedMailLength == 0)
+      @set('previousSelectedMailCount', 0)
+      Radium.get('router').send 'showInbox'
+    else
+      @set('previousSelectedMailCount', previous + 1)
+  ).observes('selectedMail.length')
+
   markRead: (state) ->
     @markEmailRead(true)
 

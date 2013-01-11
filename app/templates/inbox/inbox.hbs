@@ -4,13 +4,6 @@
       New Message <i class="icon-plus icon-white"></i>
     </a>
   </div>
-  {{#if selectedMail.length}}
-    <div class="btn-group">
-      <a {{action emailBulkAction href=true}} class="btn btn-primary">
-        <i class="icon-trash icon-large icon-white"></i> Action
-      </a>
-    </div>
-  {{/if}}
 </div>
 {{outlet}}
 {{view view.arrow}}

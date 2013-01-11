@@ -17,4 +17,3 @@ Radium.BulkEmailActionView = Em.View.extend
     )
 
     formContainer.set 'currentView', todoFormView
-
