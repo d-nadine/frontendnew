@@ -69,3 +69,6 @@ window.waitForFeedDate = (date, callback, message) ->
   message ||= "#{date.toDateFormat()} present in the feed"
 
   waitForSelector selector, callback
+
+window.resourceTypeSelector = (resource) ->
+  "[data-type='#{resource.constructor}']"

@@ -13,28 +13,29 @@ integrationTest 'an empty inbox displays the correct messages', ->
 integrationTest 'a list of emails is displayed in the inbox', ->
   expect(5)
 
-  for i in [0..4]
-    Factory.create 'email'
+  email1 = Factory.create 'email'
+  email2 = Factory.create 'email'
+  email3 = Factory.create 'email'
+  email4 = Factory.create 'email'
+  email5 = Factory.create 'email'
 
   equal Radium.Email.find().get('length'), 5, 'precond - there are 5 emails'
 
   visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
-    sidebarEmails = $F('li', el)
+    resourceSelector = resourceTypeSelector(email1)
+    sidebarEmails = $F(resourceSelector, el)
 
     equal sidebarEmails.length, 5, '5 emails in the sidebar'
 
-    activeEmail =  $F('li.active', el)
+    activeEmail =  $F("#{resourceSelector}.active", el)
 
     equal activeEmail.length, 1, 'only 1 email is active'
 
-  waitForSelector 'div.email > div.well', (el) ->
-    userText = $F('strong:eq(0)', el).html()
-    subject = $F('strong:eq(1)', el).html()
-
-    equal 'User 1.', userText, "sender's name is displayed"
-    equal 'Email 1', subject, 'subject is displayed'
+  waitForResourceIn email1, "#email-panel", (panel) ->
+    assertText panel, email1.get('sender.displayName'), 'user name displayed'
+    equal 'Email 1', email1.get('subject'), 'subject is displayed'
 
 integrationTest 'clicking on a sidebar email displays the correct email', ->
   email1 = Factory.create 'email'
@@ -45,26 +46,14 @@ integrationTest 'clicking on a sidebar email displays the correct email', ->
   visit '/inbox'
 
   waitForSelector 'ul.messages', (el) ->
-    # sidebarEmails = $F('li', el)
-
-    # lastEmail = $F('li:last', el)
-
-    # equal sidebarEmails.length, 2, 'precond - 2 emails in the sidebar'
-
-    # ok !lastEmail.hasClass('active'), 'last email is not active'
-
     clickEmail email2
 
     waitForResourceIn email2, "#email-panel", (panel) ->
       assertText panel, email2.get('subject')
-      # ok lastEmail.hasClass('active'), 'last email is active'
-
-      # subject = $F('strong:eq(1)', el).html()
-      # equal 'Email 2', subject, 'Correct email is displayed'
 
 integrationTest 'a todo can be created for each selected email', ->
-  for i in [0..1]
-    Factory.create 'email'
+  email1 = Factory.create 'email'
+  email2 = Factory.create 'email'
 
   equal Radium.Email.find().get('length'), 2, 'precond - there are 2 emails'
 
@@ -95,8 +84,9 @@ integrationTest 'a todo can be created for each selected email', ->
         assertText el, 'created'
 
 integrationTest 'the selected emails can be deleted', ->
-  for i in [0..2]
-    Factory.create 'email'
+  email1 = Factory.create 'email'
+  email2 = Factory.create 'email'
+  email3 = Factory.create 'email'
 
   emails = Radium.Email.find()
 
@@ -116,9 +106,12 @@ integrationTest 'the selected emails can be deleted', ->
 
     equal emails.get('length'), 1, 'both emails have been deleted'
 
-    checks = $F('input[type=checkbox]', el)
-    equal checks.length, 1, '1 email remains in sidebar'
+    resourceSelector = resourceTypeSelector(email1)
+    sidebarEmails = $F(resourceSelector, el)
 
+    equal sidebarEmails.length, 1, '1 email remains in sidebar'
+
+#FIXME: Complete
 integrationTest 'a list of recent messages from a sender can be displayed', ->
   bob = Factory.create 'user'
   frank = Factory.create 'user'
