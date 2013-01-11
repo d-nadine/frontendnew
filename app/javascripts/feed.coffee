@@ -82,12 +82,12 @@ Radium.Feed = Ember.ArrayProxy.extend
   ).property()
 
   content: (->
-    result = Radium.FeedSection.find
+    result = @get('sectionClass').find
       scope: @get('scope')
       nearDate: Ember.DateTime.create()
 
     recordArray = UpdateableRecordArray.create
-      type: Radium.FeedSection
+      type: @get('sectionClass')
       content: Ember.A()
       store: Ember.get DS, 'defaultStore'
 
