@@ -1,4 +1,6 @@
 Radium.InboxSidebarController = Em.ArrayController.extend
+  sortProperties: ['sentAt']
+
   content: Ember.A()
   active: null
 

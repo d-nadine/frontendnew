@@ -95,14 +95,12 @@ div.email{
   }
 }
 
-email-panel {
+#email-panel {
   padding-bottom: 40px;
 }
 
-#remaining-emails {
-  #show-more {
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 20px;
-  }
+.btn-full-width {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
 }

@@ -248,6 +248,16 @@ Radium.Router = Ember.Router.extend
           history = Radium.Email.find(historyFor: email)
 
           router.get('inboxController').connectOutlet('emailSection', history)
+
+          router.set 'emailSectionController.email', email
+          router.set 'emailSectionController.currentPage', 1
+
+          router.set 'inboxSidebarController.active', email
+
+          router.get('emailSectionController').connectOutlet
+            controller: router.get('emailSectionController')
+            viewClass: Radium.ShowRecentEmailView
+            outletName: 'showRecent'
           router.get('emailSectionController').connectOutlet
             controller: router.get('emailSectionController')
             viewClass: Radium.EmailView
