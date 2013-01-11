@@ -31,7 +31,10 @@ Radium.EmailItemView = Em.View.extend
 
     form = Radium.MeetingFormView.create
       close: ->
-        @get('parentView.parentView').displayConfirmation('meeting created')
+        unless $(event.target).hasClass('close-form')
+          @get('parentView.parentView').displayConfirmation('meeting created')
+        else
+          @get('parentView').set('currentView', null)
 
     form.set 'controller', Radium.MeetingFormController.create()
 
