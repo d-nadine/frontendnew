@@ -35,7 +35,7 @@ integrationTest 'a list of emails is displayed in the inbox', ->
 
   waitForResourceIn email1, "#email-panel", (panel) ->
     assertText panel, email1.get('sender.displayName'), 'user name displayed'
-    equal 'Email 1', email1.get('subject'), 'subject is displayed'
+    assertText panel, email1.get('subject'), 'subject displayed'
 
 integrationTest 'clicking on a sidebar email displays the correct email', ->
   email1 = Factory.create 'email'
