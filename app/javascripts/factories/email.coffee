@@ -24,3 +24,4 @@ Factory.define 'email', traits: ['timestamps', 'html'],
     Factory.create 'attachment'
     Factory.create 'attachment'
   ]
+  isPublic: true

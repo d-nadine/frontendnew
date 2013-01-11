@@ -39,8 +39,12 @@
       </a>
     </div>
     <div class="btn-group pull-right">
-      <a class="btn">
+      <a {{action setVisibility this target="controller"}} class="btn">
+        {{#if isPublic}}
         <i class="icon-ban-circle"></i> Private
+        {{else}}
+        <i class="icon-ok-circle"></i> Public
+        {{/if}}
       </a>
       <a {{action deleteEmail this target="controller"}} class="btn btn-danger">
         <i class="icon-trash icon-white"></i>

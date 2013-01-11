@@ -16,7 +16,17 @@ Radium.EmailSectionController = Em.ArrayController.extend Radium.PaginationMixin
   hasRemainingItems: (->
     @get('remainingContent.length') > 0
   ).property('remainingContent.length')
+
   deleteEmail: (event) ->
     email = event.context
 
     Radium.get('router.inboxController').deleteEmail(email)
+
+  setVisibility: (event) ->
+    email = event.context
+
+    email.toggleProperty('isPublic')
+
+    #FIXME: commit change
+
+

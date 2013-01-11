@@ -5,6 +5,7 @@ Radium.Email = Radium.Core.extend Radium.CommentsMixin,
   html: DS.attr('string')
   sender: Radium.polymorphicAttribute()
   read: DS.attr('boolean')
+  isPublic: DS.attr('boolean')
 
   message: DS.attr('string')
   sentAt: DS.attr('date')
