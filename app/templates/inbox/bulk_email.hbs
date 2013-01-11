@@ -1,7 +1,7 @@
 <div class="btn-toolbar">
   <div class="btn-group">
     <a {{action showInbox}} class="btn">
-      Back 
+      Back
     </a>
   </div>
 {{#if selectedMail.length}}
@@ -21,13 +21,15 @@
   </div>
 {{/if}}
 </div>
-<div>
-{{selectedMail.length}} Email(s) Selected
+<div class="well well-small">
+  <div>
+    {{selectedMail.length}} Email(s) Selected
+  </div>
+  <div class="rel">
+    {{view view.FormContainer viewName="formContainer"}}
+  </div>
+  <table class="table table-bordered table-striped">
+    {{each selectedMail itemViewClass="Radium.EmailListView"}}
+  </table>
 </div>
-<div class="rel">
-  {{view view.FormContainer viewName="formContainer"}}
-</div>
-<table class="table table-bordered table-striped">
-  {{each selectedMail itemViewClass="Radium.EmailListView"}}
-</table>
 
