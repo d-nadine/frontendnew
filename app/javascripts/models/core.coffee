@@ -1,10 +1,7 @@
 #  Core model class for all Radium models. Base attributes are `created_at` and `updated_at`
 
-Radium.Core = DS.Model.extend
+Radium.Core = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
-
-  createdAt: DS.attr("datetime")
-  updatedAt: DS.attr("datetime")
 
   type: (->
     Radium.Core.typeToString(@constructor)

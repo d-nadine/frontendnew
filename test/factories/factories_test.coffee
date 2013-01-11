@@ -67,15 +67,6 @@ integrationTest 'build a group section', ->
 
   ok group.get('isLoaded'), 'group is loaded'
 
-integrationTest 'build an invitation', ->
-  invitation = Factory.create 'invitation',
-    user: -> Factory.build 'user',
-    meeting: -> Factory.build('meeting')
-
-  ok invitation.get('isLoaded'), 'invitation is loaded'
-  ok invitation.get('user.isLoaded'), 'user is loaded'
-  ok invitation.get('meeting.isLoaded'), 'meeting is loaded'
-
 integrationTest 'build a meeting', ->
   meeting = Factory.create 'meeting',
     user: -> Factory.build 'user'

@@ -1,7 +1,3 @@
-###
-The base model class for any model that has a name, id, created_at and updated_at key
-@returns {Object}
-###
 Radium.Person = Radium.Core.extend
   name: DS.attr('string')
 
@@ -20,11 +16,5 @@ Radium.Person = Radium.Core.extend
   avatar: DS.attr('object')
 
   # Default hasMany groups
-  deals: DS.hasMany('Radium.Deal')
-  todos: DS.hasMany('Radium.Todo')
-  meetings: DS.hasMany('Radium.Meeting')
   reminders: DS.hasMany('Radium.Reminder')
-  groups: DS.hasMany('Radium.Group')
-  phoneCalls: DS.hasMany('Radium.PhoneCall')
-  emails: DS.hasMany('Radium.Email')
   comments: DS.hasMany('Radium.Comment')

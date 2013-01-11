@@ -1,4 +1,4 @@
-Radium.Contact = Radium.Person.extend Radium.CommentsMixin,
+Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
   status: DS.attr("string")
 
   displayName: (->

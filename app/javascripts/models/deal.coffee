@@ -26,10 +26,6 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
     @get('closeBy')
   ).property('closeBy')
 
-  ###
-  Checks to see if the Deal has passed it's close by date.
-  @return {Boolean}
-  ###
   isOverdue: (->
     d = new Date().getTime()
     closeBy = new Date(@get('closeBy')).getTime()

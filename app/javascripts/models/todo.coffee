@@ -35,4 +35,6 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
     !!@get('user.apiKey')
   ).property('user')
 
-  feedDate: (-> @get 'finishBy' ).property('finishBy')
+  feedDate: (-> 
+    @get 'finishBy'
+  ).property('finishBy')
