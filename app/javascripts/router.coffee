@@ -70,7 +70,6 @@ Radium.Router = Ember.Router.extend
     showDeal: Ember.Route.transitionTo('root.deal')
     showGroup: Ember.Route.transitionTo('root.groups.group')
     showDashboard: Ember.Route.transitionTo('root.dashboard')
-    showCalendar: Ember.Route.transitionTo('root.calendar.index')
 
     expandFeedItem: (router, event) ->
       router.set 'activeFeedController.expandedItem', event.context
@@ -146,21 +145,3 @@ Radium.Router = Ember.Router.extend
           # TODO: check if ember always assumes that id has integer type
           params.user_id = parseInt(params.user_id)
           @_super(router, params)
-
-    calendar: Ember.Route.extend
-      route: '/calendar'
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'calendarSidebar')
-
-      index: Ember.Route.extend
-        route: '/'
-        connectOutlets: (router) ->
-          # jumpTo(calendar: true)
-
-      showDate: Ember.Route.transitionTo('withDate')
-
-      withDate: Ember.Route.extend
-        route: '/:date'
-        connectOutlets: (router, params) ->
-          params.calendar = true
-          # jumpTo(params)
