@@ -67,7 +67,6 @@ Radium.Router = Ember.Router.extend
     showUser: Ember.Route.transitionTo('root.users.user')
     showContacts: Ember.Route.transitionTo('root.contacts.index')
     showContact: Ember.Route.transitionTo('root.contacts.contact')
-    showDeal: Ember.Route.transitionTo('root.deal')
     showGroup: Ember.Route.transitionTo('root.groups.group')
     showDashboard: Ember.Route.transitionTo('root.dashboard')
 
@@ -85,15 +84,6 @@ Radium.Router = Ember.Router.extend
         router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
         router.connectFeed router.get('currentUser'), 'dashboardFeed'
-
-    deal: Ember.Route.extend
-      route: '/deals/:deal_id'
-      connectOutlets: (router, deal) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
-        router.get('mainController').connectOutlet('content', 'deal', deal)
-
-      deserialize: (router, params) ->
-        params.deal_id = parseInt(params.deal_id)
 
     groups: Ember.Route.extend
       route: '/groups'
