@@ -11,8 +11,6 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       id = @get('feedItem.id')
       type = @get('feedItem.type') || @get('feedItem.kind')
 
-      alert type
-
       comment = @get('comments').createRecord
         text: commentText
         createdAt: Ember.DateTime.create()
