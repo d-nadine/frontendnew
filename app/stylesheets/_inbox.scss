@@ -89,6 +89,12 @@ div.email{
   top: -10px;
 }
 
+.action-group{
+  .btn:first-child{
+    border: 1px solid red;
+  }
+}
+
 email-panel {
   padding-bottom: 40px;
 }

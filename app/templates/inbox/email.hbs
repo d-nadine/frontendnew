@@ -35,7 +35,7 @@
         <i class="icon-forward-2"></i> Forward
       </a>
       <a {{action showActionSection  target="view"}} class="btn">
-        Add <i class="icon-plus"></i>
+        Add {{#if view.showActions}}<i class="icon-minus"></i>{{else}}<i class="icon-plus"></i>{{/if}}
       </a>
     </div>
     <div class="btn-group pull-right">
@@ -48,7 +48,23 @@
     </div>
   </div>
   {{#if view.showActions}}
-    <div>Actions</div>
+  <div class='email-alert-area'></div>
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <a {{action toggleTodoForm target="view"}} class="btn">
+        Todo <i class="icon-plus"></i>
+      </a>
+      <a class="btn">
+        Meeting <i class="icon-plus"></i>
+      </a>
+      <a {{action showActionSection  target="view"}} class="btn">
+        Call <i class="icon-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div class="rel">
+    {{view view.ActionContainer viewName="actionContainer"}}
+  </div>
   {{/if}}
   <div class="comments">
     <h2>Comments {{#if comments.length}}({{comments.length}}){{/if}}</h2>
