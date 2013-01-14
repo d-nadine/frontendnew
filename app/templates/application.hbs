@@ -11,11 +11,13 @@
       </div>
     </div>
 
-    <div id="main-feed" class="span9 offset3">
+    <div id="main-panel" class="span9 offset3">
       {{view Radium.FormContainerView}}
+
       <div class="row">
         <div class="span9">
-          <div id='alert-area'></div>
+          <div id="alerts"></div>
+
           {{outlet}}
         </div>
       </div>
