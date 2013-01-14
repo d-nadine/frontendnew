@@ -86,6 +86,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
         router.get('applicationController').connectOutlet('main')
         router.get('applicationController').connectOutlet('topbar', 'topbar')
+        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
         router.get('notificationsController').set('content', Radium.Notification.find())
         router.get('notificationsController').set('reminders', Radium.Reminder.find())
@@ -111,7 +112,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       route: '/'
 
       connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
+        router.get('sidebarController').connectOutlet 
+          outletName: 'filters'
+          controller: router.get('dashboardFeedController')
+          viewClass: Radium.DashboardFeedFilterView
 
         router.connectFeed router.get('currentUser'), 'dashboardFeed'
 

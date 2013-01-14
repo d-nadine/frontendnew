@@ -1,1 +1,1 @@
-Radium.SidebarController = Em.Object.extend()
+Radium.SidebarController = Em.Controller.extend()

@@ -1,13 +1,2 @@
-{{#with view.content}}
-  <a href="#" {{action setFilter type target="view" href=true}}>
-    {{label}}
-    {{#if view.isSelected}}
-      <i class="icon-ok pull-right"></i>
-    {{/if}}
-
-    {{#if addButton}}
-      {{view view.addResourceButton}}
-    {{/if}}
-  </a>
-{{/with}}
-
+<i {{bindAttr class="icon"}}></i>
+<a href="#" {{action setFilter type target="view"}}>{{label}}</a>
