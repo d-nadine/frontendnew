@@ -6,5 +6,4 @@ Radium.DashboardFeedFilterView = Ember.View.extend
     Radium.Filters.todos
     Radium.Filters.deals
     Radium.Filters.meetings
-    Radium.Filters.discussions
   ]
