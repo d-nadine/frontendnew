@@ -27,7 +27,6 @@
 }
 
 #feed {
-
   .feed-section.hidden {
     display: none;
   }
@@ -48,6 +47,10 @@
     margin: 30px 0px 10px;
     border-color: #AAA;
     color: #666;
+  }
+
+  .page-header h3 {
+    color: $light-text
   }
 
  .page-header h2 small {
@@ -113,7 +116,6 @@
 
 .feed-section {
   width: 698px;
-  margin: 0 0 2px;
   border: 1px solid transparent;
 
   .inline-comments {

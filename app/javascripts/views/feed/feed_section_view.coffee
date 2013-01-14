@@ -4,7 +4,7 @@ ClusteredArray = Ember.ArrayProxy.extend(Radium.ClusteredRecordArray)
 
 Radium.FeedSectionView = Em.View.extend
   templateName: 'radium/feed_section'
-  classNames: ['feed-section']
+  classNames: ['feed-section block']
   classNameBindings: ['hidden']
   hiddenBinding: 'parentView.hidden'
   justRenderedBinding: 'parentView.justRendered'
