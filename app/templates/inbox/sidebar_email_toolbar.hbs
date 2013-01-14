@@ -1,3 +1,6 @@
+<div class="btn-group">
+  <span id="folder-name" class="label label-important">{{controller.folderLabel}} - ({{view.mail.length}})</span>
+</div>
 <div id="sidebar-email-actions" class="btn-toolbar">
   <div class="btn-group">
     <a href="#" class="btn btn-success">
@@ -6,6 +9,7 @@
     <a class="btn dropdown-toggle email-action" data-toggle="dropdown">
       <i class="icon-chevron-down"></i>
     </a>
+    {{#if view.mail.length}}
     <ul class="dropdown-menu">
       <li><a>All</a></li>
       <li><a>None</a></li>
@@ -13,11 +17,9 @@
       <li><a {{action markRead target="controller"}}>Mark Read</a></li>
       <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
     </ul>
+    {{/if}}
     <a {{action toggleFolders target="controller"}} class="btn">
       <i class="icon-folder-open"></i>
     </a>
-  </div>
-  <div class="btn-group">
-    <span id="folder-name" class="label label-important">{{controller.folderLabel}}</span>
   </div>
 </div>
