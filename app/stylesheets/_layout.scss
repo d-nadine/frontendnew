@@ -1,3 +1,21 @@
+body {
+  background-color: $background;
+}
+
 #main, #navbar-container {
   margin: 0 20px;
+}
+
+#sidebar {
+  position: fixed;
+  top: 40px;
+  bottom: 0;
+  margin-left: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  background-color: $dark-background;
+}
+
+#main-panel {
+  padding-top: 40px;
 }
