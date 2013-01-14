@@ -145,7 +145,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         route: '/:message_name'
         connectOutlets: (router, name) ->
           name ||= 'inbox'
-          console.log name
           content = Radium.Email.find(folder: name)
           router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
           router.get('applicationController').connectOutlet('sidebartoolbar', 'sidebarEmailToolbar')
@@ -155,17 +154,15 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         serialize: (router, message) ->
           {message_name: name}
 
-        deserialize: (router, message) ->
-          @_super.apply this, arguments
-
         index: Em.Route.extend
           route: '/'
           connectOutlets: (router) ->
-            content = Radium.Email.find()
+            sidebarController = router.get('inboxSidebarController')
+
+            content = sidebarController.get('content')
             router.get('inboxController').set('content', content)
             router.get('mainController').connectOutlet('content', 'inbox')
 
-            sidebarController = router.get('inboxSidebarController')
 
             unless sidebarController.get('active')
               router.runWhenLoaded content, ->
@@ -188,6 +185,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           route: 'messages_menu'
           connectOutlets: (router) ->
             router.get('mainController').connectOutlet('content', 'messages')
+            router.get('messagesController').connectControllers('sidebarEmailToolbar')
 
         email: Em.Route.extend
           route: '/:email_id'
