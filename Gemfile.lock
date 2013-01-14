@@ -80,6 +80,7 @@ GEM
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
+    libv8 (3.11.8.13)
     multi_json (1.5.0)
     open4 (1.3.0)
     rack (1.4.3)
@@ -91,8 +92,12 @@ GEM
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
+    ref (1.0.2)
     ruby-prof (0.12.0)
     sass (3.2.5)
+    therubyracer (0.11.2)
+      libv8 (~> 3.11.8.12)
+      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -118,5 +123,6 @@ DEPENDENCIES
   rack-test
   rake-pipeline!
   ruby-prof
+  therubyracer
   thor!
   unicorn
