@@ -121,30 +121,18 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
     groups: Ember.Route.extend
       route: '/groups'
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
       group: Ember.Route.extend
         route: '/:group_id'
 
-        connectOutlets: (router, group) ->
-          router.connectFeed group, 'groupFeed'
-
     contacts: Ember.Route.extend
       route: '/contacts'
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'contactsSidebar')
-        router.get('mainController').connectOutlet('content', 'contacts')
 
       index: Ember.Route.extend
         route: '/'
-        connectOutlets: (router) ->
-          router.get('contactsController').set('collection', Radium.Contact.find())
 
       contact: Ember.Route.extend
         route: '/:contact_id'
-        connectOutlets: (router, contact) ->
-          router.connectFeed contact, 'contactFeed'
 
     inbox: Em.Route.extend
       route: '/inbox'
@@ -204,10 +192,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
     users: Ember.Route.extend
       route: '/users'
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
       user: Ember.Route.extend
         route: '/:user_id'
-        connectOutlets: (router, user) ->
-          router.connectFeed user, 'userFeed'
