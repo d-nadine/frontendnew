@@ -1,15 +1,16 @@
 <div id="main" class="container">
   {{outlet topbar}}
-
   <div class="row">
     <div id="sidebar" class="span3">
-      <div class="viewport">
-        <div class="overview">
-          {{outlet sidebar}}
+      {{outlet sidebartoolbar}}
+      <div id="scrollarea">
+        <div class="viewport">
+          <div class="overview">
+            {{outlet sidebar}}
+          </div>
         </div>
       </div>
     </div>
-
     <div id="main-panel" class="offset3 span9">
       {{view Radium.FormContainerView}}
 

@@ -1,0 +1,14 @@
+<h2>Stack</h2>
+<ul class="nav nav-tabs nav-stacked filters">
+  {{#each content}}
+    {{#if selected}}
+    <li class="active">
+      <a disabled="disabled" class="active">{{label}}</a>
+    </li>
+    {{else}}
+    <li>
+      <a {{action showMessage this target="controller"}}>{{label}}</a>
+    </li>
+    {{/if}}
+  {{/each}}
+<ul>

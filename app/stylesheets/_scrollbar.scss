@@ -1,8 +1,14 @@
-#sidebar .scrollcontainer{
+#scrollarea{
+  height: 100%;
+  z-index: 88;
+  position: relative;
+  overflow: hidden;
+}
+#scrollarea .scrollcontainer{
   position: relative;
 }
 
-#sidebar .scrollbar{
+#scrollarea .scrollbar{
   position: absolute;
   right: 7px;
   width: 7px;
@@ -10,7 +16,7 @@
   z-index: 100;
 }
 
-#sidebar .thumb { 
+#scrollarea .thumb { 
   height: 1.250em; 
   width: 7px;
   cursor: pointer;
@@ -27,11 +33,11 @@
   -webkit-transition:opacity .2s linear;
 }
 
-#sidebar:hover .thumb {
+#scrollarea:hover .thumb {
   @include opacity(1);
 }
 
-#sidebar .viewport {
+#scrollarea .viewport {
   width: auto;
   height: 100%;
   // overflow: auto;
@@ -39,14 +45,14 @@
   position: relative;
 }
 
-#sidebar .overview{
+#scrollarea .overview{
   position: relative;
   height: auto;
   overflow: hidden;
   padding-bottom: 40px;
 }
 
-// #sidebar .disable {
+// #scrollarea .disable {
 //   display: none;
 // }
 // 

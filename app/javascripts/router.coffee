@@ -50,9 +50,12 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard.all')
   showCalendar: Ember.Route.transitionTo('root.calendar.index')
-  showInbox : Ember.Route.transitionTo('root.inbox.index')
-  showEmail : Ember.Route.transitionTo('root.inbox.email')
-  emailBulkAction: Em.Route.transitionTo('root.inbox.action')
+  showInbox : Ember.Route.transitionTo('root.messages.message.index')
+  showEmail : Ember.Route.transitionTo('root.messages.message.email')
+  emailBulkAction: Em.Route.transitionTo('root.messages.message.action')
+  showMessage: Em.Route.transitionTo('root.messages.message.index')
+  #FIXME: delete after messages drawer is complete
+  showMessagesMenu: Em.Route.transitionTo('root.messages.message.messagesMenu')
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -134,61 +137,81 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       contact: Ember.Route.extend
         route: '/:contact_id'
 
-    inbox: Em.Route.extend
-      route: '/inbox'
+    messages: Em.Route.extend
+      route: '/messages'
       connectOutlets: (router) ->
-        content = Radium.Email.find()
-        router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
 
-      index: Em.Route.extend
-        route: '/'
-        connectOutlets: (router) ->
-          content = Radium.Email.find()
-          router.get('inboxController').set('content', content)
-          router.get('mainController').connectOutlet('content', 'inbox')
+      message: Em.Route.extend
+        route: '/:message_name'
+        connectOutlets: (router, name) ->
+          name ||= 'inbox'
+          console.log name
+          content = Radium.Email.find(folder: name)
+          router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
+          router.get('applicationController').connectOutlet('sidebartoolbar', 'sidebarEmailToolbar')
+        exit: (router) ->
+          router.get('applicationController').disconnectOutlet('sidebartoolbar')
 
-          sidebarController = router.get('inboxSidebarController')
+        serialize: (router, message) ->
+          {message_name: name}
 
-          unless sidebarController.get('active')
-            router.runWhenLoaded content, ->
-              if content.get('length') > 0
-                active = content.get('firstObject')
-                sidebarController.setActive(active)
-                router.send('showEmail', active)
-          else
-            router.send('showEmail', sidebarController.get('active'))
+        deserialize: (router, message) ->
+          @_super.apply this, arguments
 
-      action: Em.Route.extend
-        route: '/action'
-        connectOutlets: (router) ->
-          router.get('mainController').connectOutlet
-            controller: router.get('inboxController')
-            viewClass: Radium.BulkEmailActionView
-            outletName: 'content'
+        index: Em.Route.extend
+          route: '/'
+          connectOutlets: (router) ->
+            content = Radium.Email.find()
+            router.get('inboxController').set('content', content)
+            router.get('mainController').connectOutlet('content', 'inbox')
 
-      email: Em.Route.extend
-        route: '/:email_id'
-        connectOutlets: (router, email) ->
-          history = Radium.Email.find(historyFor: email)
+            sidebarController = router.get('inboxSidebarController')
 
-          router.get('inboxController').connectOutlet('emailSection', history)
+            unless sidebarController.get('active')
+              router.runWhenLoaded content, ->
+                if content.get('length') > 0
+                  active = content.get('firstObject')
+                  sidebarController.setActive(active)
+                  router.send('showEmail', active)
+            else
+              router.send('showEmail', sidebarController.get('active'))
 
-          router.set 'emailSectionController.email', email
-          router.set 'emailSectionController.currentPage', 1
+        action: Em.Route.extend
+          route: '/action'
+          connectOutlets: (router) ->
+            router.get('mainController').connectOutlet
+              controller: router.get('inboxController')
+              viewClass: Radium.BulkEmailActionView
+              outletName: 'content'
 
-          router.set 'inboxSidebarController.active', email
+        messagesMenu: Em.Route.extend
+          route: 'messages_menu'
+          connectOutlets: (router) ->
+            router.get('mainController').connectOutlet('content', 'messages')
 
-          router.get('emailSectionController').connectOutlet
-            controller: router.get('emailSectionController')
-            viewClass: Radium.ShowRecentEmailView
-            outletName: 'showRecent'
-          router.get('emailSectionController').connectOutlet
-            controller: router.get('emailSectionController')
-            viewClass: Radium.EmailView
-          router.get('emailSectionController').connectOutlet
-            controller: router.get('emailSectionController')
-            viewClass: Radium.ShowMoreEmailsView
-            outletName: 'showmore'
+        email: Em.Route.extend
+          route: '/:email_id'
+          connectOutlets: (router, email) ->
+            history = Radium.Email.find(historyFor: email)
+
+            router.get('inboxController').connectOutlet('emailSection', history)
+
+            router.set 'emailSectionController.email', email
+            router.set 'emailSectionController.currentPage', 1
+
+            router.set 'inboxSidebarController.active', email
+
+            router.get('emailSectionController').connectOutlet
+              controller: router.get('emailSectionController')
+              viewClass: Radium.ShowRecentEmailView
+              outletName: 'showRecent'
+            router.get('emailSectionController').connectOutlet
+              controller: router.get('emailSectionController')
+              viewClass: Radium.EmailView
+            router.get('emailSectionController').connectOutlet
+              controller: router.get('emailSectionController')
+              viewClass: Radium.ShowMoreEmailsView
+              outletName: 'showmore'
 
     users: Ember.Route.extend
       route: '/users'

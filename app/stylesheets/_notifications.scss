@@ -3,11 +3,11 @@
   top: 60px;
   left: -500px;
   width: 300px;
-  border: 1px solid #444;
-  background-color: #888;
+  border: 1px solid $notifications-border;
+  background-color: $notifications-bg;
   z-index: 100;
   bottom: 0;
-  -webkit-transition: all 0.3s ease-in-out;
+  @include transition(all 0.3s ease-in-out);
 
   > .content {
     position: absolute;

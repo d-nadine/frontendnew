@@ -28,7 +28,7 @@ Radium.InboxSidebarView = Em.CollectionView.extend
 
     $('.viewport').before(scrollbar)
 
-    scroller = $('#sidebar').tinyscrollbar()
+    scroller = $('#scrollarea').tinyscrollbar()
     @set('scroller', scroller )
 
     arrow = $('div.arrow')
@@ -46,7 +46,7 @@ Radium.InboxSidebarView = Em.CollectionView.extend
   willDestroyElement: ->
     $(window).off('resize')
     $('.thumb').off('contentScrolled')
-    $(window).off(@get('adjustArrowPosition'))
+    $(window).off('scroll', @get('adjustArrowPosition'))
     @get('scroller').unbindAll() if @get('scroller')
     scrollContainer = $('.scrollcontainer')
     scrollContainer.find("*").andSelf().unbind()
