@@ -35,6 +35,11 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       viewClass: Radium.FeedView
       context: feed
 
+    @get('sidebarController').connectOutlet 
+      outletName: 'filters'
+      controller: @get controllerName
+      viewClass: Radium["#{controller.capitalize()}FilterView"]
+
     @set('activeFeedController', @get(controllerName))
 
   showUser: Ember.Route.transitionTo('root.users.user')
@@ -112,11 +117,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       route: '/'
 
       connectOutlets: (router) ->
-        router.get('sidebarController').connectOutlet 
-          outletName: 'filters'
-          controller: router.get('dashboardFeedController')
-          viewClass: Radium.DashboardFeedFilterView
-
         router.connectFeed router.get('currentUser'), 'dashboardFeed'
 
     groups: Ember.Route.extend
