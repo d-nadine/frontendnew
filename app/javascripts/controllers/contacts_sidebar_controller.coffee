@@ -1,1 +1,0 @@
-ContactsSidebarController = Em.Controller.extend()
