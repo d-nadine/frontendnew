@@ -1,12 +1,17 @@
+#folder-name{
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+#sidebar-email-actions{
+  padding: 0 0 5px 5px;
+}
 div.email-toolbar{
   margin: 0 0 0 25px;
-  padding: 10px 5px;
   background-color: darken($bright, 4);
   border-right: solid $sidebar-border-size $dark-background;
   position: relative;
   border-bottom: solid 1px $dark-background;
   border-top: solid 1px $dark-background;
-
 }
 ul.messages{
   list-style: none;
