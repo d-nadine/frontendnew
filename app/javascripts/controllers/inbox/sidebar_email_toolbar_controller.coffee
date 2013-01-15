@@ -33,7 +33,7 @@ Radium.SidebarEmailToolbarController = Em.ArrayController.extend
 
     unless @get('foldersOpen')
       @set('foldersOpen', true)
-      Radium.get('router').send('showMessagesMenu')
+      Radium.get('router').send('showFolderMenu')
       return
 
     folder = @get('folder')
@@ -42,7 +42,7 @@ Radium.SidebarEmailToolbarController = Em.ArrayController.extend
 
     @set('foldersOpen', false)
 
-    Radium.get('router').send('showMessage', folderName)
+    Radium.get('router').send('showFolder', folderName)
 
   setFolder: (folder) ->
     @set('foldersOpen', true)

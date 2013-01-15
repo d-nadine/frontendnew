@@ -13,7 +13,7 @@ Radium.MessagesController = Em.ArrayController.extend
   init: ->
     @set('firstObject.selected', true)
 
-  showMessage: (event) ->
+  showFolder: (event) ->
     event.stopPropagation()
 
     @every (item) -> item.set('selected', false)

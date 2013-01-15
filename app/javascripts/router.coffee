@@ -50,12 +50,12 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   showGroup: Ember.Route.transitionTo('root.groups.group')
   showDashboard: Ember.Route.transitionTo('root.dashboard.all')
   showCalendar: Ember.Route.transitionTo('root.calendar.index')
-  showInbox : Ember.Route.transitionTo('root.messages.message.index')
-  showEmail : Ember.Route.transitionTo('root.messages.message.email')
-  emailBulkAction: Em.Route.transitionTo('root.messages.message.action')
-  showMessage: Em.Route.transitionTo('root.messages.message.index')
+  showInbox : Ember.Route.transitionTo('root.folders.folder.index')
+  showEmail : Ember.Route.transitionTo('root.folders.folder.email')
+  emailBulkAction: Em.Route.transitionTo('root.folders.folder.action')
+  showFolder: Em.Route.transitionTo('root.folders.folder.index')
   #FIXME: delete after messages drawer is complete
-  showMessagesMenu: Em.Route.transitionTo('root.messages.message.messagesMenu')
+  showFolderMenu: Em.Route.transitionTo('root.folders.folder.foldersMenu')
 
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
@@ -138,12 +138,12 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       contact: Ember.Route.extend
         route: '/:contact_id'
 
-    messages: Em.Route.extend
+    folders: Em.Route.extend
       route: '/messages'
       connectOutlets: (router) ->
 
-      message: Em.Route.extend
-        route: '/:message_name'
+      folder: Em.Route.extend
+        route: '/:folder_name'
         connectOutlets: (router, name) ->
           name ||= 'inbox'
           content = Radium.Email.find(folder: name)
@@ -154,8 +154,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         exit: (router) ->
           router.get('applicationController').disconnectOutlet('sidebartoolbar')
 
-        serialize: (router, message) ->
-          {message_name: name}
+        serialize: (router, folder) ->
+          {folder_name: name}
 
         index: Em.Route.extend
           route: '/'
@@ -184,8 +184,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
               viewClass: Radium.BulkEmailActionView
               outletName: 'content'
 
-        messagesMenu: Em.Route.extend
-          route: 'messages_menu'
+        foldersMenu: Em.Route.extend
+          route: 'folders_menu'
           connectOutlets: (router) ->
             router.get('mainController').connectOutlet('content', 'messages')
             router.get('messagesController').connectControllers('sidebarEmailToolbar')
