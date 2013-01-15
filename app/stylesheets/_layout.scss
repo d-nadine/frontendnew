@@ -49,3 +49,14 @@ $sidebar-border-size: 8px;
   background-color: $bright;
   margin-bottom: 10px;
 }
+
+.block-arrow {
+  @include css-arrow(top, 20px, $bright, 1px, $bright, solid);
+  margin-top: 20px;
+
+  // move the arrow to a different position. There is no argument
+  // for this
+  &:after, &:before {
+    left: 5%;
+  }
+}
