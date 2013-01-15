@@ -5,13 +5,7 @@
     </a>
   </div>
   <div class="btn-group">
-    <button class="btn btn-primary dropdown-toggle email-action" data-toggle="dropdown">Action <span class="caret"></span></button^>
-    <ul class="dropdown-menu">
-      <li><a class="multiple-todos" {{action toggleTodoForm target="view"}}>Todo</a></li>
-      <li class="divider"></li>
-      <li><a {{action markRead target="controller"}}>Mark Read</a></li>
-      <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
-    </ul>
+    <a class="multiple-todos btn" {{action toggleTodoForm target="view"}}>Todo</a>
   </div>
 </div>
 <div class="well well-small">
