@@ -74,10 +74,10 @@ ul.messages{
       color: $sidebar-read;
     }
   }
-  li.selected, li.read.selected{
-    color: $sidebar-read-selected;
+  li.checked, li.read.checked{
+    color: $sidebar-read-checked;
   }
-  li.selected.active, li.selected.read.active{
+  li.checked.active, li.checked.read.active{
     color: $sidebar-read-active;
   }
 }
