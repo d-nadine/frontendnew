@@ -3,3 +3,7 @@ Radium.TodoFormView = Ember.View.extend
 
   expandForm: ->
     @toggleProperty 'expanded'
+
+  optionsLabel: (->
+    if @get('expanded') then 'hide' else 'options'
+  ).property('expanded')
