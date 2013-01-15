@@ -1,3 +1,13 @@
+div.email-toolbar{
+  margin: 0 0 0 25px;
+  padding: 10px 5px;
+  background-color: darken($bright, 4);
+  border-right: solid $sidebar-border-size $dark-background;
+  position: relative;
+  border-bottom: solid 1px $dark-background;
+  border-top: solid 1px $dark-background;
+
+}
 ul.messages{
   list-style: none;
   li{
@@ -9,8 +19,8 @@ ul.messages{
       font-size: 9px;
       position: relative;
       float: right;
-      top: -18px;
-      right: 4px;
+      top: -8px;
+      right: 0px;
     }
     > div{
       display: table-cell;
@@ -34,13 +44,13 @@ ul.messages{
     div:nth-child(2){
       i.icon-paperclip{
         position: absolute;
-        bottom: 20px;
-        right: 20px;
+        top: 8px;
+        right: 10px;
       }
       i.icon-trash{
         position: absolute;
         top: 4px;
-        right: 20px;
+        right: 10px;
         @include opacity-transition(0, 0.7s);
       }
       p{
@@ -75,9 +85,11 @@ ul.messages{
     }
   }
   li.checked, li.read.checked{
+    font-weight: bold;
     color: $sidebar-read-checked;
   }
   li.checked.active, li.checked.read.active{
+    font-weight: bold;
     color: $sidebar-read-active;
   }
 }
