@@ -66,4 +66,32 @@
   .reminder {
     display: none;
   }
+
+  .keyboard-shorcuts div {
+    display: inline-block;
+  }
+
+  .keyboard-shorcuts .line {
+    display: inline-block;
+    float: left;
+    clear: both;
+    margin: 5px 0;
+  }
+
+  .keyboard-shorcuts .line p,span {
+    display: inline-block;
+  }
+
+  .keyboard-shorcuts .line p {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px 5px;
+    background: white;
+    color: black;
+    font-weight: 500;
+  }
+
+  .keyboard-shorcuts .line span {
+    font-size: 12px;
+  }
 }

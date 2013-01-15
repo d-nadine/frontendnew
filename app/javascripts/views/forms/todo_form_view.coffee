@@ -7,3 +7,8 @@ Radium.TodoFormView = Ember.View.extend
   optionsLabel: (->
     if @get('expanded') then 'hide' else 'options'
   ).property('expanded')
+
+  didInsertElement: ->
+    @$('.shortcut').popover
+      html: true
+      content: @$().find('.shortcuts').html()
