@@ -29,8 +29,6 @@ $sidebar-active: darken($inbox-sidebar, 50);
 $sidebar-active-hover-bg: lighten($sidebar-bg, 4);
 $sidebar-active-hover: lighten($inbox-sidebar, 50);
 
-$sidebar-selected: #c2e1f5;
-$sidebar-selected-active: darken($sidebar-selected, 15);
-
-$sidebar-read-bg: lighten($sidebar-bg, 3);
 $sidebar-read: #999;
+$sidebar-read-selected: darken($sidebar-read, 30);
+$sidebar-read-active: darken($sidebar-read, 30);
