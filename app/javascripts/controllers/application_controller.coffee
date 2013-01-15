@@ -1,1 +1,4 @@
-Radium.ApplicationController = Em.Controller.extend()
+Radium.ApplicationController = Em.Controller.extend
+  development: (->
+    Iridium.env == 'development'
+  ).property()

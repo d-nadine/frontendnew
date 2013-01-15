@@ -15,3 +15,4 @@ Ember.Application.reopenClass
   registerInitializer: (initializer) ->
     initializers = Ember.get(@, 'initializers')
     initializers.push initializer
+

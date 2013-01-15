@@ -1,0 +1,65 @@
+.todo-form {
+  .adder {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 28px;
+  }
+
+  &.unexpanded {
+    .attn {
+      display: none;
+    }
+
+    .todo {
+      width: 435px;
+    }
+
+    .datejs {
+      display: none;
+    }
+
+    .typeahead {
+      display: none;
+    }
+  }
+
+  &.expanded {
+    .todo {
+      width: 220px;
+    }
+  }
+
+  // center the checkbox
+  .add-on input {
+    position: relative;
+    margin: 0;
+    top: -2px;
+  }
+
+  .todo {
+    @include transition(all 0.4s ease-in-out);
+  }
+
+  .datejs {
+    width: 90px;
+  }
+
+  .typeahead {
+    margin: 0;
+    width: 90px;
+  }
+
+  //FIXME: why does the prepended input not line up correctly?
+  .todo {
+    position: relative;
+    left: -4px;
+  }
+
+  .shortcuts {
+    display: none;
+  }
+
+  .reminder {
+    display: none;
+  }
+}

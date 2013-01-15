@@ -1,31 +1,100 @@
-<fieldset class="control-group">
-  {{view view.descriptionText}}
-  {{#if view.isError}}
-    <span class="help-inline">Can't create an empty todo.</span>
-  {{/if}}
-</fieldset>
-<fieldset class="control-group">
-  <label class="radium-control-label" for="assigned-to">Assigned To</label>
-  <div class="controls">
-    {{view view.assignToSelect}}
-    {{#if view.isContact}}
-    <div class="inline-fieldset">
-      <label>
-        {{view view.isCallCheckbox}} Is Call?
-      </label>
+<div {{bindAttr class="view.expanded:expanded:unexpanded :todo-form :block"}}>
+  <form class="form-inline">
+    <div class="wrap">
+      <div class="nav pull-right">
+        <a href="#" class="clickover"><i class="icon-question-sign"></i></a>
+        <a href="#"><i class="icon-remove"></i></a>				
+      </div>
+      <div class="adder">
+        <div class="input-prepend">
+          <span class="add-on">
+            <input type="checkbox" class="tab">
+          </span>
+          <input class="todo tab" placeholder="Todo item" type="text">
+        </div>
+        <input type="text" class="typeahead tab" placeholder="Assign to"/>				
+        <input type="text" class="datejs tab" placeholder="Due date" />
+        <a class="btn btn-default attn tab" href="#"><i class="icon-bell"></i></a>
+        <a class="btn btn-success submit tab" href="#"><i class="icon-plus icon-white"></i></a>
+        <a {{action expandForm target="view"}} class="more">options</a>
+      </div>
     </div>
-    {{/if}}
-    <a href="#" {{action toggleOptions target="this"}} class="more-options">{{view.toggleOptionsText}}</a>
+  </form>
+
+  <div class="shortcuts">
+    <h3>Keyboard shortcuts</h3>
+    <div class="keys">
+      <div class="line">
+        <div>
+          <p>Ctrl</p>
+          <span> + </span>
+          <p>M</p>
+        </div>
+        <div>
+          <span> = </span>
+          <span>more options</span>
+        </div>
+      </div>
+      <div class="line">
+        <div>
+          <p>Ctrl</p>
+          <span> + </span>
+          <p>[</p>
+        </div>
+        <div>
+          <span> = </span>
+          <span>previous input</span>
+        </div>
+      </div>
+      <div class="line">
+        <div>
+          <p>Ctrl</p>
+          <span> + </span>
+          <p>Del</p>
+        </div>
+        <div>
+          <span> = </span>
+          <span>clears input</span>
+        </div>
+      </div>
+      <div class="line">
+        <div>
+          <p>Ctrl</p>
+          <span> + </span>
+          <p>C</p>
+        </div>
+        <div>
+          <span> = </span>
+          <span>checks off todo</span>
+        </div>
+      </div>
+    </div>
   </div>
-</fieldset>
-{{#if view.showOptions}}
-<div class="more-options form-inline">
-  <fieldset>
-    <div class="inline-fieldset">
-      <label for="date">Finish By:</label>
-      {{view view.finishByDateField}}
+
+  <div class="reminder">
+    <div style="padding: 0 4px">
+      <select class="selector">
+        <option value="0">no reminder</option>
+        <option value="1"><b>2 hours</b> (3:00pm)</option>
+        <option value="2">5 hours (12:00pm)</option>
+        <option value="3">9 hours (9:00am)</option>
+        <option value="4">24 hours (5:00pm)</option>
+      </select>
+      <span style="padding-left: 5px">before</span>
     </div>
-  </fieldset>
+    <div class="notify">
+      <div>
+        <input type="checkbox" value="0">
+        <span>by Radium</span>
+      </div>
+      <div>
+        <input type="checkbox" value="1">
+        <span>by Email</span>
+      </div>
+      <div>
+        <input type="checkbox" value="2">
+        <span>by SMS</span>
+      </div>
+    </div>
+  </div>
 </div>
-{{/if}}
-{{view view.submitButton class="btn btn-primary pin-bottom-right save-todo"}}

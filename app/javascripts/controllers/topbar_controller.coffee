@@ -1,1 +1,1 @@
-Radium.TobbarController = Em.Object.extend()
+Radium.TobbarController = Em.Controller.extend()

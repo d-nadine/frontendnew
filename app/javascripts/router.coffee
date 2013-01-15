@@ -112,6 +112,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showGroup: Ember.Route.transitionTo('root.groups.group')
     showDashboard: Ember.Route.transitionTo('root.dashboard')
 
+    showTodoForm: (router, event) ->
+      router.get('applicationController').connectOutlet "form", "todoForm"
+
     expandFeedItem: (router, event) ->
       router.set 'activeFeedController.expandedItem', event.context
     scrollFeedToDate: (router, event) ->
