@@ -35,6 +35,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       viewClass: Radium.FeedView
       context: feed
 
+
+    @get('applicationController').connectOutlet('sidebar', 'sidebar')
+
     @get('sidebarController').connectOutlet 
       outletName: 'filters'
       controller: @get controllerName
@@ -121,7 +124,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
       connectOutlets: (router) ->
         router.connectFeed router.get('currentUser'), 'dashboardFeed'
-        router.get('applicationController').connectOutlet('sidebar', 'sidebar')
 
     groups: Ember.Route.extend
       route: '/groups'
