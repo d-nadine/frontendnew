@@ -48,15 +48,16 @@ $sidebar-border-size: 8px;
   padding: 15px;
   background-color: $bright;
   margin-bottom: 10px;
+  border: solid 1px $selected-item-border;
 }
 
 .block-arrow {
-  @include css-arrow(top, 20px, $bright, 1px, $bright, solid);
+  @include css-arrow(top, 20px, $bright, 1px, $selected-item-border, solid);
   margin-top: 20px;
 
   // move the arrow to a different position. There is no argument
   // for this
   &:after, &:before {
-    left: 5%;
+    left: 40px;
   }
 }
