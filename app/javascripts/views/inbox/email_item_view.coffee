@@ -1,15 +1,8 @@
 Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   templateName: 'radium/inbox/email'
   classNames: 'email'.w()
-  didInsertElement: ->
-    active = $('ul.messages li.active')
-    return if active.length == 0
-
-    setTimeout(( ->
-      $('div.arrow').css(top: active.offset().top - 35))
-      , 200)
-
   showActions: false
+
   showActionSection: ->
     @toggleProperty('showActions')
 

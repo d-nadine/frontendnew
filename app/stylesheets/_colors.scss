@@ -13,22 +13,6 @@ $dark-text: darken($text, 25);
 $notifications-bg: #888;
 $notifications-border: #444;
 
-//sidebar
-$sidebar-bg: #eee;
-
-//inbox
-$inbox-sidebar: #333;
-$inbox-bbotom: darken($sidebar-bg, 8);
-
-$inbox-li-hover-bg: lighten($sidebar-bg, 4);
-$inbox-li-hover: lighten($inbox-sidebar, 50);
-
-$sidebar-active-bg: darken($sidebar-bg, 8);
-$sidebar-active: darken($inbox-sidebar, 50);
-
-$sidebar-active-hover-bg: lighten($sidebar-bg, 4);
-$sidebar-active-hover: lighten($inbox-sidebar, 50);
-
 $sidebar-read: #999;
 $sidebar-read-selected: darken($sidebar-read, 30);
 $sidebar-read-active: darken($sidebar-read, 30);

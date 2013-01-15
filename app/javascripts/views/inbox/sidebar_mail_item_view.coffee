@@ -1,7 +1,7 @@
 Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
   templateName: 'radium/inbox/sidebar_mail_item'
-  classNameBindings: ['isActive:active', 'isSelected:selected', 'read']
+  classNameBindings: ['isActive:selected', 'isSelected:checked', 'read']
   isSelectedBinding: 'content.isSelected'
 
   readBinding: 'content.read'
