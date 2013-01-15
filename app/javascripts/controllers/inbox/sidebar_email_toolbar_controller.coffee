@@ -2,8 +2,33 @@ Radium.SidebarEmailToolbarController = Em.ArrayController.extend
   foldersOpen: false
   folderLabel: 'inbox'
   folder: null
+  selectedMailMailBinding: 'inboxController.selectedMail'
 
-  toggleFolders: (folder) ->
+  markSelected: ->
+    unselected = @get('inboxSidebarController').filter (email) -> !email.get('isSelected')
+
+    unselected.forEach (email) -> email.set('isSelected', true)
+  markUnSelected: ->
+    unselected = @get('inboxSidebarController').filter (email) -> email.get('isSelected')
+
+    unselected.forEach (email) -> email.set('isSelected', false)
+
+  markRead:->
+    @markEmailRead(true)
+
+  markUnread:->
+    @markEmailRead(false)
+
+  markEmailRead: (isRead) ->
+    selected = @get('inboxController.selectedMail')
+    return if selected.get('length') == 0
+
+    selected.forEach (email) ->
+      email.set('read', isRead) unless email.get('read') == isRead
+
+    @get('store').commit()
+
+  toggleFolders: () ->
     foldersOpen = @get('foldersOpen')
 
     unless @get('foldersOpen')
@@ -24,4 +49,4 @@ Radium.SidebarEmailToolbarController = Em.ArrayController.extend
     @set('folder', folder)
     @set('folderLabel', folder.label)
 
-    @toggleFolders(folder)
+    @toggleFolders()

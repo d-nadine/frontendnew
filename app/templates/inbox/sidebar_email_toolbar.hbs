@@ -6,20 +6,26 @@
     <a href="#" class="btn btn-success">
       <i class="icon-plus icon-white"></i>
     </a>
+    {{#if view.mail.length}}
     <a class="btn dropdown-toggle email-action" data-toggle="dropdown">
       <i class="icon-chevron-down"></i>
     </a>
-    {{#if view.mail.length}}
     <ul class="dropdown-menu">
-      <li><a>All</a></li>
-      <li><a>None</a></li>
-      <li class="divider"></li>
-      <li><a {{action markRead target="controller"}}>Mark Read</a></li>
-      <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
+      <li><a {{action markSelected target="controller"}}>All</a></li>
+      <li><a {{action markUnSelected target="controller"}}>None</a></li>
+      {{#if view.selectedMail.length}}
+        <li class="divider"></li>
+        <li><a {{action markRead target="controller"}}>Mark Read</a></li>
+        <li><a {{action markUnread target="controller"}}>Mark Unread</a></li>
+      {{/if}}
     </ul>
     {{/if}}
     <a {{action toggleFolders target="controller"}} class="btn">
+      {{#if controller.foldersOpen}}
+      <i class="icon-folder-close"></i>
+      {{else}}
       <i class="icon-folder-open"></i>
+      {{/if}}
     </a>
   </div>
 </div>

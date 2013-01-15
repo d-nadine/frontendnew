@@ -5,10 +5,11 @@ integrationTest 'an empty inbox displays the correct messages', ->
 
   equal Radium.Email.find().get('length'), 0, 'precond - there are 0 emails'
 
-  visit '/inbox'
+  visit '/messages/inbox'
 
-  waitForSelector 'ul.messages li:first', (el) ->
+  waitForSelector 'ul.messages', (el) ->
     assertText el, 'No mail'
+    # equal $F("[data-type='Radium.Email]").length, 0, 'no emails'
 
 integrationTest 'a list of emails is displayed in the inbox', ->
   expect(5)
@@ -21,7 +22,7 @@ integrationTest 'a list of emails is displayed in the inbox', ->
 
   equal Radium.Email.find().get('length'), 5, 'precond - there are 5 emails'
 
-  visit '/inbox'
+  visit '/messages/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     resourceSelector = resourceTypeSelector(email1)
@@ -43,7 +44,7 @@ integrationTest 'clicking on a sidebar email displays the correct email', ->
 
   equal Radium.Email.find().get('length'), 2, 'precond - there are 2 emails'
 
-  visit '/inbox'
+  visit '/messages/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     clickEmail email2
@@ -61,7 +62,7 @@ integrationTest 'a todo can be created for each selected email', ->
 
   equal todos.get('length'), 0, 'precond - there are no todos'
 
-  visit '/inbox'
+  visit '/messages/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     checks = $F('input[type=checkbox]', el)
@@ -92,7 +93,7 @@ integrationTest 'the selected emails can be deleted', ->
 
   equal emails.get('length'), 3, 'precond - there are 3 emails'
 
-  visit '/inbox'
+  visit '/messages/inbox'
 
   waitForSelector 'ul.messages', (el) ->
     checks = $F(':checkbox', el)

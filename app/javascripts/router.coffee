@@ -149,7 +149,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.get('applicationController').connectOutlet('sidebar', 'inboxSidebar', content)
           router.get('applicationController').connectOutlet('sidebartoolbar', 'sidebarEmailToolbar')
 
-          router.get('sidebarEmailToolbarController').connectControllers('inboxSidebar')
+          router.get('sidebarEmailToolbarController').connectControllers('inboxSidebar', 'inbox')
         exit: (router) ->
           router.get('applicationController').disconnectOutlet('sidebartoolbar')
 
@@ -162,8 +162,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
             sidebarController = router.get('inboxSidebarController')
 
             content = sidebarController.get('content')
-            router.get('inboxController').set('content', content)
-            router.get('mainController').connectOutlet('content', 'inbox')
+            router.get('mainController').connectOutlet('content', 'inbox', content)
+
+            router.get('inboxController').connectControllers('inboxSidebar')
 
             unless sidebarController.get('active')
               router.runWhenLoaded content, ->

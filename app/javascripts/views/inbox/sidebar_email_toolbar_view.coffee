@@ -4,3 +4,4 @@ Radium.SidebarEmailToolbarView = Em.View.extend
     $('.email-action').dropdown()
 
   mailBinding: 'controller.inboxSidebarController'
+  selectedMailBinding: 'controller.inboxController.selectedMail'
