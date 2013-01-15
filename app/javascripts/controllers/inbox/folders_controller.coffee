@@ -1,4 +1,4 @@
-Radium.MessagesController = Em.ArrayController.extend
+Radium.FoldersController = Em.ArrayController.extend
   content: [
     Em.Object.create({label: 'Inbox', name: 'inbox'})
     Em.Object.create({label: 'Sent items', name: 'sent'})

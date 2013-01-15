@@ -54,7 +54,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   showEmail : Ember.Route.transitionTo('root.folders.folder.email')
   emailBulkAction: Em.Route.transitionTo('root.folders.folder.action')
   showFolder: Em.Route.transitionTo('root.folders.folder.index')
-  #FIXME: delete after messages drawer is complete
+  #FIXME: delete after folders drawer is complete
   showFolderMenu: Em.Route.transitionTo('root.folders.folder.foldersMenu')
 
   loading: Ember.Route.extend
@@ -187,8 +187,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         foldersMenu: Em.Route.extend
           route: 'folders_menu'
           connectOutlets: (router) ->
-            router.get('mainController').connectOutlet('content', 'messages')
-            router.get('messagesController').connectControllers('sidebarEmailToolbar')
+            router.get('mainController').connectOutlet('content', 'folders')
+            router.get('foldersController').connectControllers('sidebarEmailToolbar')
 
         email: Em.Route.extend
           route: '/:email_id'
