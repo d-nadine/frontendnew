@@ -1,3 +1,4 @@
+{{log view.content.constructor}}
 <div {{bindAttr class="view.expanded:expanded:unexpanded :todo-form :block"}}>
   <form class="form-inline">
     <div class="wrap">
@@ -10,14 +11,14 @@
       <div class="adder">
         <div class="input-prepend">
           <span class="add-on">
-            <input type="checkbox" class="tab">
+            {{view view.checkbox}}
           </span>
-          <input class="todo tab" placeholder="Todo item" type="text">
+          {{view view.descriptionField}}
         </div>
         <input type="text" class="typeahead tab" placeholder="Assign to"/>				
         <input type="text" class="datejs tab" placeholder="Due date" />
         <a class="btn btn-default attn tab" href="#"><i class="icon-bell"></i></a>
-        <a class="btn btn-success submit tab" href="#"><i class="icon-plus icon-white"></i></a>
+        <a class="btn btn-success tab" href="#" {{action submit target="view"}}><i class="icon-plus icon-white"></i></a>
         <a {{action expandForm target="view"}} class="more">{{view.optionsLabel}}</a>
       </div>
     </div>
