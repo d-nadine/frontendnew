@@ -115,6 +115,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showTodoForm: (router, event) ->
       router.get('applicationController').connectOutlet "form", "todoForm"
 
+    closeForm: (router, event) ->
+      router.get('applicationController').disconnectOutlet "form"
+
     expandFeedItem: (router, event) ->
       router.set 'activeFeedController.expandedItem', event.context
     scrollFeedToDate: (router, event) ->
