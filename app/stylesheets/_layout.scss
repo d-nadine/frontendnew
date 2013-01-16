@@ -40,6 +40,7 @@ $sidebar-border-size: 8px;
       @include css-arrow(right, 14px, $selected-item, 1px, darken($selected-item-border, 5), solid);
       background-color: $selected-item;
       border-left: none;
+      z-index: 101;
     }
   }
 }
