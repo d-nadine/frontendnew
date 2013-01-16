@@ -45,7 +45,7 @@ Radium.TasksView = Em.View.extend
     submitForm =  @get('confirmTask')
     view = this
 
-    todoFormView = Radium.TodoFormView.create
+    todoFormView = Radium.TodoFormView.create Radium.Slider,
       close: ->
         @get('parentView.parentView').closeForm()
       controller: view.todoController.create
