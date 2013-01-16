@@ -13,11 +13,27 @@ Radium.BulkEmailActionView = Em.View.extend
       return
 
     todoFormView = Radium.TodoFormView.create(Radium.Slider,
-      selectionBinding: 'controller.selectedMail',
-      kind: 'email'
-      createTodo: @get('controller').createTodo
-      displayNotification: ->
-        Radium.Utils.notify 'todos created'
+      close: ->
+        @get('parentView.parentView').toggleTodoForm()
+      controller: Radium.TodoFormController.create
+        kind: 'email'
+        submit: ->
+          return unless @get('selection')
+
+          @get('selection').forEach (email) =>
+            todo = Radium.Todo.createRecord
+              kind: @get('kind')
+              finishBy: @get('finishBy')
+              user: Radium.get('router.currentUser')
+              description: @get('description')
+
+            todo.set('reference', email)
+
+          Radium.get('router.store').commit()
+
+          Radium.Utils.notify('Todos created', ele: $('#bulk-alert'))
     )
+
+    todoFormView.set('controller.selection', @get('controller.selectedMail'))
 
     formContainer.set 'currentView', todoFormView
