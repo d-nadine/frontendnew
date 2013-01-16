@@ -15,7 +15,7 @@ Radium.InlineCommentsView = Ember.View.extend
     didInsertElement: ->
       self = this
       @_super()
-      @$().focus().autosize().css('resize','none')
+      @$().autosize().css('resize','none')
 
     willDestroyElement: ->
       $('html').off('click.autoresize')
