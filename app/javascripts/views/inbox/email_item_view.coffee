@@ -3,10 +3,16 @@ Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   classNames: 'email'.w()
   showActions: false
 
-  tasksView: Radium.TasksView.extend()
+  tasksView: Radium.TasksView.extend
+    displayConfirmation: (text) ->
+      @get('parentView').displayConfirmation(text)
 
   showActionSection: ->
     @toggleProperty('showActions')
+
+  displayConfirmation: (text) ->
+    ele = $('.email-alert-area', @$())
+    Radium.Utils.notify text, ele: ele
 
   FormContainer: Em.ContainerView.extend
     init: ->

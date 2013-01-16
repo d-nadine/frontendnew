@@ -6,7 +6,15 @@ Radium.Utils =
 
     settings = $.extend({}, defaults, options)
 
-    settings.ele.notify(
-      message: { text: message }
-      type: settings.type
-    ).show()
+    notification = $("""
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              #{message}
+            </div>
+            """)
+    settings.ele.append(notification)
+
+    setTimeout(( ->
+      notification.fadeOut('slow', -> notfication.remove())
+    ), 1000)
+

@@ -1,5 +1,6 @@
 Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
+  displayConfirmation: Ember.K
 
   TasksContainer: Em.ContainerView.extend()
 
@@ -26,8 +27,11 @@ Radium.TasksView = Em.View.extend
 
     tasksContainer.set 'currentView', form
 
-  closeForm: ->
+  closeForm: (confirmation) ->
     @get('tasksContainer').set('currentView', null)
+
+  confirmTask: (text) ->
+    @displayConfirmation(text)
 
   showTodoForm: (kind, notification) ->
     tasksContainer = @get('tasksContainer')
@@ -35,10 +39,16 @@ Radium.TasksView = Em.View.extend
     if tasksContainer.get('currentView')
       tasksContainer.set('currentView', null)
 
+    submitForm =  @get('confirmTask')
+    view = this
+
     todoFormView = Radium.TodoFormView.create
       close: ->
         @get('parentView.parentView').closeForm()
       controller: Radium.TodoFormController.create
         kind: kind
+        submit: ->
+          @_super.apply this, arguments
+          submitForm.call(view, 'todo created!')
 
     tasksContainer.set('currentView', todoFormView)
