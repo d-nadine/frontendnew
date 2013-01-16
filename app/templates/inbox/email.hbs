@@ -50,8 +50,13 @@
         </a>
       </div>
     </div>
-    {{#if view.showActions}}
-    <div class='email-alert-area'></div>
+  </div>
+</div>
+
+<div class='email-alert-area'></div>
+
+{{#if view.showActions}}
+  <div class="block block-arrow block-connected">
     <div class="btn-toolbar">
       <div class="btn-group">
         <a {{action toggleTodoForm target="view"}} class="btn">
@@ -68,9 +73,8 @@
     <div class="rel">
       {{view view.ActionContainer viewName="actionContainer"}}
     </div>
-    {{/if}}
   </div>
-</div>
+{{/if}}
 <div class="block block-arrow">
   <div class="comments">
     <h2>Comments {{#if comments.length}}({{comments.length}}){{/if}}</h2>

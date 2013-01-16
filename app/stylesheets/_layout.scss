@@ -52,12 +52,16 @@ $sidebar-border-size: 8px;
 }
 
 .block-arrow {
-  @include css-arrow(top, 20px, $bright, 1px, $selected-item-border, solid);
-  margin-top: 20px;
+  @include css-arrow(top, 15px, $bright, 1px, $selected-item-border, solid);
+  margin-top: 15px;
 
   // move the arrow to a different position. There is no argument
   // for this
   &:after, &:before {
     left: 40px;
   }
+}
+
+.block-connected{
+  margin-top: -15px
 }
