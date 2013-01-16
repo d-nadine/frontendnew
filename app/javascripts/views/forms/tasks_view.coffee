@@ -1,6 +1,9 @@
+require 'radium/controllers/todo_form_controller'
+
 Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
   displayConfirmation: Ember.K
+  todoController: Radium.TodoFormController.extend()
 
   TasksContainer: Em.ContainerView.extend()
 
@@ -45,7 +48,7 @@ Radium.TasksView = Em.View.extend
     todoFormView = Radium.TodoFormView.create
       close: ->
         @get('parentView.parentView').closeForm()
-      controller: Radium.TodoFormController.create
+      controller: view.todoController.create
         kind: kind
         submit: ->
           @_super.apply this, arguments
