@@ -1,7 +1,5 @@
 Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
-  # init: ->
-  #   @set('controller', Radium.TasksController.create())
 
   TasksContainer: Em.ContainerView.extend()
 
@@ -28,6 +26,8 @@ Radium.TasksView = Em.View.extend
 
     tasksContainer.set 'currentView', form
 
+  closeForm: ->
+    @get('tasksContainer').set('currentView', null)
 
   showTodoForm: (kind, notification) ->
     tasksContainer = @get('tasksContainer')
@@ -35,6 +35,10 @@ Radium.TasksView = Em.View.extend
     if tasksContainer.get('currentView')
       tasksContainer.set('currentView', null)
 
-    todoFormView = Radium.TodoFormView.create()
+    todoFormView = Radium.TodoFormView.create
+      close: ->
+        @get('parentView.parentView').closeForm()
+      controller: Radium.TodoFormController.create
+        kind: kind
 
     tasksContainer.set('currentView', todoFormView)
