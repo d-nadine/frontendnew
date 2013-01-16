@@ -18,6 +18,11 @@ ul.messages{
   li{
     position: relative;
   }
+  li.selected > div{
+    i.icon-trash, i.icon-paperclip{
+      right: 17px !IMPORTANT;
+    }
+  }
   li > div{
     padding: 3px 1px;
     small{
