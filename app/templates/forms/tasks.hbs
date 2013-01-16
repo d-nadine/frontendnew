@@ -1,0 +1,19 @@
+<div class="block block-arrow block-connected">
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <a {{action toggleTodoForm target="view"}} class="btn">
+        Todo <i class="icon-plus"></i>
+      </a>
+      <a {{action toggleMeetingForm  target="view"}} class="btn">
+        Meeting <i class="icon-plus"></i>
+      </a>
+      <a {{action toggleFollowCall  target="view"}} class="btn">
+        Call <i class="icon-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div class="rel">
+    {{view view.TasksContainer viewName="tasksContainer"}}
+  </div>
+</div>
+
