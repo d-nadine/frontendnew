@@ -1,22 +1,19 @@
-<div class="btn-toolbar">
-  <div class="btn-group">
-    <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
-      <i class="icon-trash icon-large icon-white"></i> Delete
-    </a>
-  </div>
-  <div class="btn-group">
-    <a class="multiple-todos btn" {{action toggleTodoForm target="view"}}>Todo</a>
-  </div>
+<div class="block">
+  <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
+    <i class="icon-trash icon-large icon-white"></i> Delete
+  </a>
+  <a class="multiple-todos btn" {{action toggleTodoForm target="view"}}>Todo</a>
 </div>
-<div class="well well-small">
-  <div>
-    {{selectedMail.length}} Email(s) Selected
-  </div>
-  <div class="rel">
-    {{view view.FormContainer viewName="formContainer"}}
+
+<div class="block block-arrow block-connected">
+  {{view view.FormContainer viewName="formContainer"}}
+</div>
+
+<div class="block">
+  <div class="page-header">
+    <h3>{{selectedMail.length}} Email(s) Selected</h3>
   </div>
   <table class="table table-bordered table-striped">
     {{each selectedMail itemViewClass="Radium.EmailListView"}}
   </table>
 </div>
-

@@ -1,8 +1,12 @@
 Radium.BulkEmailActionView = Em.View.extend
   templateName: 'radium/inbox/bulk_email'
   FormContainer: Em.ContainerView.extend()
+  didInsertElement: ->
+    @$(".block-connected").hide()
   toggleTodoForm: (e) ->
     formContainer = @get('formContainer')
+
+    @$(".block-connected").toggle()
 
     if formContainer.get('currentView')
       formContainer.set('currentView', null)
