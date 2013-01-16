@@ -2,7 +2,7 @@
   height: 100%;
   z-index: 88;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
 }
 #scrollarea .scrollcontainer{
   position: relative;
@@ -41,7 +41,6 @@
 #scrollarea .viewport {
   width: auto;
   height: 100%;
-  // overflow: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
@@ -49,7 +48,7 @@
 #scrollarea .overview{
   position: relative;
   height: auto;
-  overflow: hidden;
+  // overflow: hidden;
   padding-bottom: 40px;
 }
 
