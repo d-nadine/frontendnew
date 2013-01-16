@@ -1,5 +1,5 @@
 Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
-  templateName: 'radium/inbox/email'
+  templateName: 'radium/inbox/email_item'
   classNames: 'email'.w()
   showActions: false
 

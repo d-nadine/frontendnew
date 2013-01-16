@@ -24,6 +24,13 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   enableLogging: true
   initialState: 'loading'
 
+  connectForm: (name) ->
+    @get('applicationController').connectOutlet "form", "mainForm"
+    @get('mainFormController').connectOutlet "#{name}Form"
+
+  disconnectForm: ->
+    @get('applicationController').disconnectOutlet "form"
+
   connectFeed: (scope, controller) ->
     controllerName = "#{controller}Controller"
 
@@ -113,10 +120,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showDashboard: Ember.Route.transitionTo('root.dashboard')
 
     showTodoForm: (router, event) ->
-      router.get('applicationController').connectOutlet "form", "todoForm"
+      router.connectForm "todo"
 
     closeForm: (router, event) ->
-      router.get('applicationController').disconnectOutlet "form"
+      router.disconnectForm()
 
     expandFeedItem: (router, event) ->
       router.set 'activeFeedController.expandedItem', event.context

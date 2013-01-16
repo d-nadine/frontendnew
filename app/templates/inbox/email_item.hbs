@@ -1,15 +1,15 @@
 {{#with view.content}}
 <div class="block">
-  <div>
+  <div class="page-header">
     {{#if sender.avatar.small_url}}
       <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
-    {{else}} <img class="avatar" src="/images/fallback/small_default.png">
+    {{else}} 
+      <img class="avatar" src="/images/fallback/small_default.png">
     {{/if}}
-    <strong>{{unbound sender.displayName}}</strong>
+
+    <h2>{{unbound subject}}</h2>
   </div>
-  <div class="subject">
-    <strong>{{unbound subject}}</strong>
-  </div>
+
   <div class="body">
     {{{unbound message}}}
     <div class="attachments">
