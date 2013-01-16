@@ -14,7 +14,7 @@ Radium.InlineCommentsController = Ember.ArrayController.extend
       comment = @get('comments').createRecord
         text: commentText
         createdAt: Ember.DateTime.create()
-        user: Radium.get('router').user
+        user: Radium.get('router.currentUser')
         commentableType: type
         commentableId: id
         todo: @get('commentParent')

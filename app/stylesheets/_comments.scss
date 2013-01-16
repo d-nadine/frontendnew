@@ -1,0 +1,23 @@
+.comments {
+  margin: 0;
+}
+
+.comment {
+  overflow: auto;
+  margin-bottom: 15px;
+
+  a.avatar {
+    float: left;
+  }
+
+  .text {
+    margin-left: 40px;
+  }
+}
+
+.new-comment {
+  width: 100%;
+  box-sizing: border-box;
+  height: 36px; // set initial height to one row of text
+  margin: 0;
+}

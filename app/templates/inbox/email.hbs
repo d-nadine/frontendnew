@@ -76,11 +76,6 @@
   </div>
 {{/if}}
 <div class="block block-arrow">
-  <div class="comments">
-    <h2>Comments {{#if comments.length}}({{comments.length}}){{/if}}</h2>
-    <div>
-      {{view view.FormContainer viewName="formContainer"}}
-    </div>
-  </div>
+  {{view view.FormContainer viewName="formContainer"}}
 </div>
 {{/with}}
