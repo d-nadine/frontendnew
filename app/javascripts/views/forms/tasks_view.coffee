@@ -47,7 +47,10 @@ Radium.TasksView = Em.View.extend
 
     getView = "get#{action}View"
 
-    form = if @get(getView) then @get(getView).call(this) else Radium.Core.typeFromString("#{action}FormView").create()
+    form = if @get(getView)
+              @get(getView).call(this)
+            else
+              Radium.Core.typeFromString("#{action}FormView").create()
 
     getController = "get#{action}Controller"
 
