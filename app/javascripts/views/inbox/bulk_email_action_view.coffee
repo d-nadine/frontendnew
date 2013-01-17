@@ -19,7 +19,6 @@ Radium.BulkEmailActionView = Em.View.extend
       controller: Radium.TodoFormController.create
         kind: 'email'
         submit: ->
-          debugger
           return unless @get('selection')
 
           @get('selection').forEach (email) =>
