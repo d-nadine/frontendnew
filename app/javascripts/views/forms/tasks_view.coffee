@@ -22,6 +22,8 @@ Radium.TasksView = Em.View.extend
   TasksContainer: Em.ContainerView.extend()
 
   toggleForm: (event) ->
+    @get('buttons').forEach (btn) -> btn.set('closed', true) unless btn == event.context
+
     button = event.context
     button.toggleProperty('closed')
 
