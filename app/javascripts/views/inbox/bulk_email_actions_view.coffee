@@ -3,6 +3,7 @@ require 'radium/views/forms/tasks_view'
 Radium.BulkEmailTasksFormView = Radium.TasksView.extend
   init: ->
     @_super.apply this, arguments
+
     @get('buttons').insertAt 0,
       Ember.Object.create
        action: "delete"
@@ -41,3 +42,8 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
     )
 
     tasksContainer.set 'currentView', todoFormView
+
+  destroy: ->
+    buttons = @get('buttons')
+    buttons.removeObject buttons.get('firstObject')
+    @_super.apply this, arguments
