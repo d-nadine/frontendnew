@@ -35,10 +35,10 @@ Radium.TasksView = Em.View.extend
 
       return
 
-    args = [].slice.apply(arguments)
-
     buttonAction = button.get('action')
     action = "toggle#{buttonAction.charAt(0).toUpperCase()}#{buttonAction.slice(1)}Form"
+
+    args = [].slice.apply(arguments)
 
     @get(action).apply(this, args)
 
@@ -53,7 +53,7 @@ Radium.TasksView = Em.View.extend
 
     form = Radium.MeetingFormView.create
       close: ->
-        @get('parentView').set('currentView', null)
+        @get('parentView.parentView').closeForm()
 
     form.set 'controller', Radium.MeetingFormController.create()
 
@@ -61,6 +61,7 @@ Radium.TasksView = Em.View.extend
 
   closeForm: (confirmation) ->
     @get('tasksContainer').set('currentView', null)
+    @get('buttons').forEach (btn) -> btn.set('closed', true)
 
   confirmTask: (text) ->
     @displayConfirmation(text)
