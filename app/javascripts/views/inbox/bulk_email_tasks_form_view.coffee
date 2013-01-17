@@ -8,6 +8,8 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
        action: "delete"
        label: "Delete"
        alwaysOpen: true
+       classes: 'btn btn-danger'
+       icons: 'icon-trash icon-large icon-white'
 
   deleteAction: (e) ->
     @get('controller').deleteEmails()
