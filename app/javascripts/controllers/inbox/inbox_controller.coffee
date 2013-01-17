@@ -22,13 +22,13 @@ Radium.InboxController = Em.ArrayController.extend
       email.set 'isChecked', !allChecked
 
   history: (->
-    return unless @get('selectedEmail')
-    Radium.Email.find historyFor: @get('selectedEmail')
-  ).property('selectedEmail')
+    return unless @get('selectedObject')
+    Radium.Email.find historyFor: @get('selectedObject')
+  ).property('selectedObject')
 
-  selectEmail: (event) ->
+  selectObject: (event) ->
     email = event.context
-    @set 'selectedEmail', email
+    @set 'selectedObject', email
 
   createTodo: (data, email) ->
     todo = Radium.Todo.createRecord(data)
