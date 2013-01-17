@@ -1,12 +1,12 @@
 <table class="table table-bordered table-striped">
-  {{#each}}
+  {{#each controller}}
     <tr>
       <td>{{subject}}</td>
       <td>{{truncate message}}</td>
       <td>{{formatTime sentAt}}</td>
       <td>
         {{#if hasAttachments}}
-        <i class="icon-paperclip"></i>
+          <i class="icon-paperclip"></i>
         {{/if}}
       </td>
     </tr>

@@ -5,7 +5,7 @@
     </a>
   {{/if}}
 
-  {{view view.EmailsListView}}
+  {{view view.emailsListView}}
 
   {{#if remainingContent}}
     <div id="remaining-emails">
@@ -13,7 +13,10 @@
         <i class="icon-plus"></i>{{remainingContent.length}} Email(s) Remaining: Show More
       </a>
     </div>
+
+    {{view view.remainingTableView}}
   {{/if}}
+
 {{else}}
   <div class="block">
     <h4>No Email Selected</h4>
