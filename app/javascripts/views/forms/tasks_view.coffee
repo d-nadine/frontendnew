@@ -41,8 +41,7 @@ Radium.TasksView = Em.View.extend
 
       return
 
-    buttonAction = button.get('action')
-    action = "toggle#{buttonAction.charAt(0).toUpperCase()}#{buttonAction.slice(1)}Form"
+    action = "toggle#{button.get('action').capitalize()}Form"
 
     args = [].slice.apply(arguments)
 
