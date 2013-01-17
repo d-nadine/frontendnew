@@ -28,11 +28,11 @@ Radium.InboxController = Em.ArrayController.extend
 
   createTodo: (data, email) ->
     todo = Radium.Todo.createRecord(data)
-    todo.set('reference', email)
+    todo.set 'reference', email
     todo.store.commit()
 
   deleteEmail: (email) ->
-    email.set('isSelected', false)
+    email.set 'isChecked'
     # FIXME: ember-data association errors, fake for now
     # store = @get('store')
 
@@ -43,8 +43,6 @@ Radium.InboxController = Em.ArrayController.extend
     Radium.Utils.notify "email deleted."
 
   deleteEmails: ->
-    selected = @get('content').filter (email) -> email.get('isSelected')
-
     return if selected.get('count') == 0
 
     count = selected.get('length')
