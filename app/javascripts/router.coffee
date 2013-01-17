@@ -160,16 +160,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         route: '/:contact_id'
 
     messages: Em.Route.extend
+      route: '/messages'
+
       toggleFolderDrawer: (router, event) ->
         router.toggleDrawer "folders"
-
-      route: '/messages'
-      connectOutlets: (router) ->
-        router.connectDrawerButtons 'inbox'
-
-      disconnectOutlets: (router) ->
-        router.disconnectDrawerButtons()
-        router.get('applicationController').disconnectOutlet 'sidebar'
 
       folder: Em.Route.extend
         route: '/:folder'
@@ -180,6 +174,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         connectOutlets: (router, folder) ->
           router.closeDrawer()
 
+          router.connectDrawerButtons 'inbox'
+
           content = Radium.Email.find folder: folder
 
           router.set 'inboxController.folder', folder
@@ -187,13 +183,25 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
           router.get('mainController').connectOutlet 'inbox'
 
+          router.get('applicationController').connectOutlet 'sidebar', 'inboxSidebar'
+          router.get('applicationController').connectOutlet 'sidebartoolbar', 'sidebarEmailToolbar'
+
           router.get('inboxSidebarController').connectControllers 'inbox'
           router.get('emailPanelController').connectControllers 'inbox'
           router.get('bulkEmailActionsController').connectControllers 'inbox'
           router.get('sidebarEmailToolbarController').connectControllers 'inboxSidebar', 'inbox'
 
-          router.get('applicationController').connectOutlet 'sidebar', 'inboxSidebar'
-          router.get('applicationController').connectOutlet 'sidebartoolbar', 'sidebarEmailToolbar'
+        exit: (router) ->
+          router.disconnectDrawerButtons()
+
+          router.set 'inboxController.folder', null
+          router.set 'inboxController.content', null
+
+          router.get('mainController').disconnectOutlet()
+
+          router.get('applicationController').disconnectOutlet 'sidebar'
+          router.get('applicationController').disconnectOutlet 'sidebartoolbar'
+
 
     users: Ember.Route.extend
       route: '/users'
