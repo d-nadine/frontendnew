@@ -10,4 +10,4 @@ Radium.EmailPanelView = Em.View.extend
     contentBinding: 'controller.limitedContent'
 
   remainingTableView: Radium.EmailTableView.extend
-    controllerBinding: 'parentView.controller'
+    contentBinding: 'parentView.controller.remainingContent'

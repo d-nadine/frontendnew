@@ -1,5 +1,11 @@
+require 'radium/views/inbox/email_table_view'
+
 Radium.BulkEmailActionsView = Em.View.extend
   templateName: 'radium/inbox/bulk_email'
+
+  checkedEmailTableView: Radium.EmailTableView.extend
+    contentBinding: 'parentView.controller'
+
   FormContainer: Em.ContainerView.extend()
   didInsertElement: ->
     @$(".block-connected").hide()
