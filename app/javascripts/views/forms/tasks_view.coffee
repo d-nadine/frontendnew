@@ -4,20 +4,50 @@ Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
   displayConfirmation: Ember.K
   todoController: Radium.TodoFormController.extend()
+  buttons: [
+    Ember.Object.create
+     action: "todo"
+     label: "Todo"
+     closed: true
+    Ember.Object.create
+     action: "meeting"
+     label: "Meeting"
+     closed: true
+    Ember.Object.create
+     action: "call"
+     label: "Call"
+     closed: true
+  ]
 
   TasksContainer: Em.ContainerView.extend()
+
+  toggleForm: (event) ->
+    button = event.context
+    button.toggleProperty('closed')
+
+    if button.get('closed')
+      tasksContainer = @get('tasksContainer')
+
+      if tasksContainer.get('currentView')
+        tasksContainer.set('currentView', null)
+
+      return
+
+    args = [].slice.apply(arguments)
+
+    buttonAction = button.get('action')
+    action = "toggle#{buttonAction.charAt(0).toUpperCase()}#{buttonAction.slice(1)}Form"
+
+    @get(action).apply(this, args)
 
   toggleTodoForm: (e) ->
     @showTodoForm('email', 'todo created')
 
-  toggleFollowCall: (e) ->
+  toggleCallForm: (e) ->
     @showTodoForm('call', 'follow up call created')
 
   toggleMeetingForm: (e) ->
     tasksContainer = @get('tasksContainer')
-
-    if tasksContainer.get('currentView')
-      tasksContainer.set('currentView', null)
 
     form = Radium.MeetingFormView.create
       close: ->
@@ -35,9 +65,6 @@ Radium.TasksView = Em.View.extend
 
   showTodoForm: (kind, notification) ->
     tasksContainer = @get('tasksContainer')
-
-    if tasksContainer.get('currentView')
-      tasksContainer.set('currentView', null)
 
     submitForm =  @get('confirmTask')
     view = this
