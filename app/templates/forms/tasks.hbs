@@ -4,8 +4,11 @@
       {{#each button in view.buttons}}
         {{#with button}}
           {{#if alwaysOpen}}
-            <a {{action taskAction this target="view"}} class="btn">
+            <a class="{{unbound classes}}" {{action taskAction this target="view"}} class="btn">
               {{label}}
+              {{#if icons}}
+              <i class="{{unbound icons}}"></i>
+              {{/if}}
             </a>
           {{else}}
             <a {{action toggleForm this target="view"}} class="btn">
