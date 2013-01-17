@@ -30,6 +30,8 @@ Radium.TasksView = Em.View.extend
   toggleForm: (event) ->
     @get('buttons').forEach (btn) -> btn.set('closed', true) unless btn == event.context
 
+    tasksContainer = @get('tasksContainer')
+
     button = event.context
     button.toggleProperty('closed')
 
@@ -41,28 +43,50 @@ Radium.TasksView = Em.View.extend
 
       return
 
-    action = "toggle#{button.get('action').capitalize()}Form"
+    action = button.get('action').capitalize()
 
-    args = [].slice.apply(arguments)
+    getView = "get#{action}View"
 
-    @get(action).apply(this, args)
+    form = if @get(getView) then @get(getView).call(this) else Radium.Core.typeFromString("#{action}FormView").create()
 
-  toggleTodoForm: (e) ->
-    @showTodoForm('email', 'todo created')
+    getController = "get#{action}Controller"
 
-  toggleCallForm: (e) ->
-    @showTodoForm('call', 'follow up call created')
+    controller = @get(getController).call(this, form) if @get(getController)
 
-  toggleMeetingForm: (e) ->
-    tasksContainer = @get('tasksContainer')
+    if !controller && Radium.Core.typeFromString("#{action}FormController")
+      controller = Radium.Core.typeFromString("#{action}FormController").create()
 
-    form = Radium.MeetingFormView.create
+    form.set('controller', controller) if controller
+
+    tasksContainer.set 'currentView', form
+
+  getCallController: (form) ->
+    controller = @getTodoController(form)
+    controller.set('kind', 'call')
+    controller
+
+  getMeetingView: ->
+    Radium.MeetingFormView.create
+      close: ->
+        @get('parentView').set('currentView', null)
+
+  getCallView: (button) ->
+    @getTodoView(button)
+
+  getTodoView: (button) ->
+    Radium.TodoFormView.create Radium.Slider,
       close: ->
         @get('parentView.parentView').closeForm()
 
-    form.set 'controller', Radium.MeetingFormController.create()
+  getTodoController: (form) ->
+    submitForm =  @get('confirmTask')
+    view = this
 
-    tasksContainer.set 'currentView', form
+    Radium.TodoFormController.create
+      kind: 'email'
+      submit: ->
+        @_super.apply this, arguments
+        submitForm.call(view, 'todo created!')
 
   closeForm: (confirmation) ->
     @get('tasksContainer').set('currentView', null)
@@ -70,20 +94,3 @@ Radium.TasksView = Em.View.extend
 
   confirmTask: (text) ->
     @displayConfirmation(text)
-
-  showTodoForm: (kind, notification) ->
-    tasksContainer = @get('tasksContainer')
-
-    submitForm =  @get('confirmTask')
-    view = this
-
-    todoFormView = Radium.TodoFormView.create Radium.Slider,
-      close: ->
-        @get('parentView.parentView').closeForm()
-      controller: view.todoController.create
-        kind: kind
-        submit: ->
-          @_super.apply this, arguments
-          submitForm.call(view, 'todo created!')
-
-    tasksContainer.set('currentView', todoFormView)
