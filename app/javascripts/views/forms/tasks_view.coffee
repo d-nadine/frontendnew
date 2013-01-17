@@ -36,10 +36,7 @@ Radium.TasksView = Em.View.extend
     button.toggleProperty('closed')
 
     if button.get('closed')
-      tasksContainer = @get('tasksContainer')
-
-      if tasksContainer.get('currentView')
-        tasksContainer.set('currentView', null)
+      tasksContainer.set('currentView', null)
 
       return
 
@@ -54,10 +51,10 @@ Radium.TasksView = Em.View.extend
 
     getController = "get#{action}Controller"
 
-    controller = @get(getController).call(this, form) if @get(getController)
-
-    if !controller && Radium.Core.typeFromString("#{action}FormController")
-      controller = Radium.Core.typeFromString("#{action}FormController").create()
+    controller =  if @get(getController)
+                    @get(getController).call(this, form)
+                  else if Radium.Core.typeFromString("#{action}FormController")
+                    Radium.Core.typeFromString("#{action}FormController").create()
 
     form.set('controller', controller) if controller
 
