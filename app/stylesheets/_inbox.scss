@@ -57,3 +57,21 @@ div.selection{
   width: 100%;
   margin-bottom: 20px;
 }
+
+#folders li {
+  display: block;
+  text-align: center;
+  margin-bottom: 30px;
+  color: $bright !important;
+
+  .thumbnail {
+    background-color: $background;
+    border-color: black;
+    box-shadow: 0 1px 15px black;
+    margin-bottom: 10px;
+  }
+
+  .label {
+    box-shadow: 0 1px 15px black;
+  }
+}

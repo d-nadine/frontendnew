@@ -9,16 +9,3 @@ Radium.FoldersController = Em.ArrayController.extend
     Em.Object.create({label: 'Leads', name: 'leads'})
     Em.Object.create({label: 'Prospects', name: 'prospects'})
   ]
-
-  init: ->
-    @set('firstObject.selected', true)
-
-  showFolder: (event) ->
-    event.stopPropagation()
-
-    @every (item) -> item.set('selected', false)
-
-    folder = event.context
-    folder.set('selected', true)
-
-    @get('sidebarEmailToolbarController').setFolder(folder)

@@ -1,33 +1,36 @@
 Radium.InboxController = Em.ArrayController.extend
-  selectedMail: ( ->
+  checkedContent: ( ->
     Em.ArrayProxy.create Ember.FilterableMixin,
       context: this
       contentBinding: 'context.content'
-      filterProperties: ['isSelected']
+      filterProperties: ['isChecked']
   ).property('content')
 
-  previousSelectedMailCount: -1
+  checkedContentDidChange: (->
+    checkedLength = @get 'checkedContent.length'
 
-  selectedMailDidChange: ( ->
-    previous = @get('previousSelectedMailCount')
-    selectedMailLength = @get('selectedMail.length')
-
-    if(previous == 0 && selectedMailLength == 1)
-      Radium.get('router').send 'emailBulkAction'
-
-    if(previous > 0 && selectedMailLength == 0)
-      @set('previousSelectedMailCount', 0)
-      Radium.get('router').send 'showInbox'
+    if checkedLength > 0
+      @connectOutlet "bulkEmailActions"
     else
-      @set('previousSelectedMailCount', previous + 1)
-  ).observes('selectedMail.length')
+      @connectOutlet "emailPanel"
+  ).observes('content', 'checkedContent.length')
+
+  toggleChecked: ->
+    allChecked = @get('checkedContent.length') == @get('length')
+
+    @get('content').forEach (email) ->
+      email.set 'isChecked', !allChecked
+
+  history: (->
+    return unless @get('selectedEmail')
+    Radium.Email.find historyFor: @get('selectedEmail')
+  ).property('selectedEmail')
 
   createTodo: (data, email) ->
     todo = Radium.Todo.createRecord(data)
     todo.set('reference', email)
     todo.store.commit()
 
-    # TODO: Radium.get('router.activeFeedController').pushHitem todo
   deleteEmail: (email) ->
     email.set('isSelected', false)
     # FIXME: ember-data association errors, fake for now

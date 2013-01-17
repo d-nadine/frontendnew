@@ -1,22 +1,8 @@
 Radium.InboxSidebarController = Em.ArrayController.extend
   sortProperties: ['sentAt']
+  contentBinding: 'inboxController'
+  selectedEmailBinding: 'inboxController.selectedEmail'
 
-  content: Ember.A()
-  active: null
-
-  activeDidChange: ( ->
-    email = @get('active')
-
-    email.set('read', true)
-
-    @get('store').commit()
-  ).observes('active')
-
-  setActive: (email) ->
-    @set('active', @get('firstObject'))
-    @set('firstObject.isActive', true)
-
-  deleteEmail: (event) ->
+  selectEmail: (event) ->
     email = event.context
-
-    Radium.get('router.inboxController').deleteEmail(email)
+    @set 'selectedEmail', email

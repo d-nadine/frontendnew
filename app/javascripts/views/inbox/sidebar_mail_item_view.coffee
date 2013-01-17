@@ -1,21 +1,24 @@
 Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
   templateName: 'radium/inbox/sidebar_mail_item'
-  classNameBindings: ['isActive:selected', 'isSelected:checked', 'read']
-  isSelectedBinding: 'content.isSelected'
+  classNameBindings: ['isActive:selected', 'isChecked:checked', 'read']
 
   readBinding: 'content.read'
+
+  isChecked: (->
+    @get('content.isChecked')
+  ).property('content.isChecked')
 
   isActive: ( ->
     @get('content') == @get('controller.active')
   ).property('content', 'controller.active')
 
   checkMailItem: Em.Checkbox.extend
-    checkedBinding: 'parentView.content.isSelected'
+    checkedBinding: 'parentView.content.isChecked'
     click: (e) ->
       e.stopPropagation()
     change: (e) ->
-      @set('parentView.content.isSelected', not @get('parentView.content.isSelected'))
+      @set('parentView.content.isChecked', not @get('parentView.content.isChecked'))
 
   click: (e) ->
     e.stopPropagation()

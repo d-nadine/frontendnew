@@ -1,4 +1,4 @@
-Radium.BulkEmailActionView = Em.View.extend
+Radium.BulkEmailActionsView = Em.View.extend
   templateName: 'radium/inbox/bulk_email'
   FormContainer: Em.ContainerView.extend()
   didInsertElement: ->

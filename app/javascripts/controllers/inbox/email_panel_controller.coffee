@@ -1,11 +1,12 @@
 require 'radium/pagination_mixin'
 
-Radium.EmailSectionController = Em.ArrayController.extend Radium.PaginationMixin,
+Radium.EmailPanelController = Em.ArrayController.extend Radium.PaginationMixin,
+  contentBinding: 'inboxController.history'
+  emailBinding: 'incboxController.active'
+
   sortProperties: ['sentAt']
 
   perPage: 3
-
-  content: Em.A()
 
   mostRecentEmailBinding: 'firstObject'
 
@@ -15,7 +16,7 @@ Radium.EmailSectionController = Em.ArrayController.extend Radium.PaginationMixin
 
   hasRemainingItems: (->
     @get('remainingContent.length') > 0
-  ).property('remainingContent.length')
+  ).property('remainingContent.length', 'email')
 
   deleteEmail: (event) ->
     email = event.context

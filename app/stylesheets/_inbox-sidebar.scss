@@ -45,12 +45,10 @@ ul.messages{
         position: absolute;
         top: 4px;
         left: 2px;
-        @include opacity-transition(0, 0.7s);
       }
       img{
         position: relative;
         top: 10px;
-        @include opacity-transition(1, 0.3s);
         border-radius: 5px;
       }
     }
@@ -64,7 +62,6 @@ ul.messages{
         position: absolute;
         top: 4px;
         right: 10px;
-        @include opacity-transition(0, 0.7s);
       }
       p{
         word-wrap: break-word;
@@ -72,14 +69,6 @@ ul.messages{
     }
   }
   li:hover{
-    div:first-child{
-      img{
-        @include opacity-transition(0, 0.7s);
-      }
-      input[type=checkbox]{
-        @include opacity-transition(1, 0.3s);
-      }
-    }
     div:nth-child(2){
       i.icon-paperclip{
         opacity: 0;

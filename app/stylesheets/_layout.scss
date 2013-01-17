@@ -11,22 +11,64 @@ body {
   top: 60px;
 }
 
+$sidebar-width: 240px; // span3 from bootstrap + the margin it includes
 $sidebar-border-size: 8px;
+$button-bar-width: 40px;
 
-#sidebar {
+#sidebar-container {
   position: fixed;
   top: 47px;
   bottom: 0;
+  width: $sidebar-width;
   margin-left: 0;
-  padding-left: 20px;
   background-color: $dark-background;
   border-right: solid 1px darken($dark-background, 25);
   // FIXME: why doesn't this work with the box shadow mixin?
   -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15)
 }
 
+#sidebar {
+  margin-left: $button-bar-width + $sidebar-border-size
+}
+
+.drawer {
+  position: fixed;
+  top: 47px;
+  bottom: 0;
+  padding: 30px 0;
+  padding-left: $button-bar-width + $sidebar-border-size;
+  width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
+  z-index: 99;
+  background-image: url('/images/backgrounds/linen.png');
+  border-right: solid 1px black;
+}
+
+#drawer-buttons {
+  position: fixed;
+  z-index: 1000; // FIXME: this shouldn't be required
+  width: $button-bar-width;
+
+  a {
+    display: block;
+    padding: 4px 12px;
+    margin-bottom: 6px;
+    background-color: $light-background;
+    height: 60px;
+
+    &:hover {
+      background-color: $bright;
+    }
+  }
+
+  [class^="icon-"], [class*=" icon-"] {
+    position: relative;
+    top: 20px;
+  }
+}
+
 #sidebar .selectable {
   list-style: none;
+  margin: 0;
 
   li {
     padding: 10px 5px;
@@ -71,3 +113,5 @@ $sidebar-border-size: 8px;
 .block-connected{
   margin-top: -15px
 }
+
+

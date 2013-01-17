@@ -4,7 +4,7 @@ Radium.PaginationMixin = Ember.Mixin.create
 
   currentLimit: (->
     @get('currentPage') * @get('perPage')
-  ).property('currentPage', 'perPage')
+  ).property('content', 'currentPage', 'perPage')
 
   limitedContent: (->
     currentLimit = @get 'currentLimit'
@@ -31,12 +31,12 @@ Radium.PaginationMixin = Ember.Mixin.create
 
   totalLength: (->
     @get('content.length')
-  ).property('content.length')
+  ).property('content', 'content.length')
 
   remainingContent: ( ->
     if content = @get('arrangedContent')
       Ember.A(content.slice(@get('currentLimit') + 1, @get('content.length')))
-  ).property('currentLimit')
+  ).property('arrangedContent', 'currentLimit')
 
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     if addedCount

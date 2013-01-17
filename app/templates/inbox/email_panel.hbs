@@ -1,0 +1,9 @@
+{{#if content}}
+  {{view Radium.ShowRecentEmailView}}
+  {{view Radium.EmailView}}
+  {{view Radium.ShowMoreEmailsView}}
+{{else}}
+  <div class="block">
+    <h4>No Email Selected</h4>
+  </div>
+{{/if}}
