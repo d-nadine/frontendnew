@@ -24,12 +24,22 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   enableLogging: true
   initialState: 'loading'
 
-  closeDrawer: ->
+  disconnectLayout: ->
+    @disconnectDrawer()
+    @disconnectDrawerButtons()
+
+    @get('mainController').disconnectOutlet()
+
+    @get('applicationController').disconnectOutlet 'sidebar'
+    @get('applicationController').disconnectOutlet 'sidebartoolbar'
+
+
+  disconnectDrawer: ->
     @get('drawerController').disconnectOutlet()
 
   toggleDrawer: (name) ->
     if @get('drawerController.view')
-      @closeDrawer()
+      @disconnectDrawer()
     else
       @get('drawerController').connectOutlet name
 
@@ -172,7 +182,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           { folder: name }
 
         connectOutlets: (router, folder) ->
-          router.closeDrawer()
+          router.disconnectDrawer()
 
           router.connectDrawerButtons 'inbox'
 
@@ -192,15 +202,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.get('sidebarEmailToolbarController').connectControllers 'inboxSidebar', 'inbox'
 
         exit: (router) ->
-          router.disconnectDrawerButtons()
+          router.disconnectLayout()
 
           router.set 'inboxController.folder', null
           router.set 'inboxController.content', null
-
-          router.get('mainController').disconnectOutlet()
-
-          router.get('applicationController').disconnectOutlet 'sidebar'
-          router.get('applicationController').disconnectOutlet 'sidebartoolbar'
 
 
     users: Ember.Route.extend
