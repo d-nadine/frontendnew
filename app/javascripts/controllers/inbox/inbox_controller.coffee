@@ -26,6 +26,10 @@ Radium.InboxController = Em.ArrayController.extend
     Radium.Email.find historyFor: @get('selectedEmail')
   ).property('selectedEmail')
 
+  selectEmail: (event) ->
+    email = event.context
+    @set 'selectedEmail', email
+
   createTodo: (data, email) ->
     todo = Radium.Todo.createRecord(data)
     todo.set 'reference', email

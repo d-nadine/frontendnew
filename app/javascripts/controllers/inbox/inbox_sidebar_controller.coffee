@@ -1,8 +1,5 @@
 Radium.InboxSidebarController = Em.ArrayController.extend
   sortProperties: ['sentAt']
-  contentBinding: 'inboxController'
-  selectedEmailBinding: 'inboxController.selectedEmail'
-
-  selectEmail: (event) ->
-    email = event.context
-    @set 'selectedEmail', email
+  contentBinding: Ember.Binding.oneWay 'inboxController'
+  targetBinding: Ember.Binding.oneWay 'inboxController'
+  selectedEmailBinding: Ember.Binding.oneWay 'inboxController.selectedEmail'

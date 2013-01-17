@@ -14,11 +14,12 @@ Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   ).property('content', 'controller.active')
 
   checkMailItem: Em.Checkbox.extend
-    checkedBinding: 'parentView.content.isChecked'
+    contentBinding: Ember.Binding.oneWay 'parentView.content'
+    checkedBinding: 'content.isChecked'
     click: (e) ->
       e.stopPropagation()
     change: (e) ->
-      @set('parentView.content.isChecked', not @get('parentView.content.isChecked'))
+      @set('content.isChecked', not @get('content.isChecked'))
 
   click: (e) ->
     e.stopPropagation()
