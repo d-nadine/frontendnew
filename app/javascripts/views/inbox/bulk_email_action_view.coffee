@@ -3,6 +3,7 @@ Radium.BulkEmailActionView = Em.View.extend
   FormContainer: Em.ContainerView.extend()
   didInsertElement: ->
     @$(".block-connected").hide()
+
   toggleTodoForm: (e) ->
     formContainer = @get('formContainer')
 
@@ -18,6 +19,7 @@ Radium.BulkEmailActionView = Em.View.extend
       controller: Radium.TodoFormController.create
         kind: 'email'
         submit: ->
+          debugger
           return unless @get('selection')
 
           @get('selection').forEach (email) =>
@@ -31,7 +33,7 @@ Radium.BulkEmailActionView = Em.View.extend
 
           Radium.get('router.store').commit()
 
-          Radium.Utils.notify('Todos created', ele: $('#bulk-alert'))
+          Radium.Utils.notify('Todos created')
     )
 
     todoFormView.set('controller.selection', @get('controller.selectedMail'))

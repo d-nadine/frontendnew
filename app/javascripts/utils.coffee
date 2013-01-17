@@ -1,7 +1,6 @@
 Radium.Utils =
   notify: (message, options) ->
     defaults =
-      ele: $('#alert-area')
       type: 'success'
 
     settings = $.extend({}, defaults, options)
@@ -12,9 +11,16 @@ Radium.Utils =
               #{message}
             </div>
             """)
+
+    if !settings.ele
+      settings.ele = $("<div id='alerts'></div>")
+      $('#main-panel > div > div').prepend(settings.ele)
+
     settings.ele.append(notification)
 
     setTimeout(( ->
-      notification.fadeOut('slow', -> notfication.remove())
+      notification.fadeOut('slow', ->
+        notification.remove() if notification
+      )
     ), 1000)
 

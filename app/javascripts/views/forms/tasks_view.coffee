@@ -21,10 +21,7 @@ Radium.TasksView = Em.View.extend
 
     form = Radium.MeetingFormView.create
       close: ->
-        unless $(event.target).hasClass('close-form')
-          @get('parentView.parentView').displayConfirmation('meeting created')
-        else
-          @get('parentView').set('currentView', null)
+        @get('parentView').set('currentView', null)
 
     form.set 'controller', Radium.MeetingFormController.create()
 
