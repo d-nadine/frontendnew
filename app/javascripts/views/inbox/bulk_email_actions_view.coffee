@@ -7,40 +7,38 @@ Radium.BulkEmailActionsView = Em.View.extend
     contentBinding: 'parentView.controller'
 
   FormContainer: Em.ContainerView.extend()
-  didInsertElement: ->
-    @$(".block-connected").hide()
+  tasksView: Radium.BulkActionsTaskView.extend()
+  # toggleTodoForm: (e) ->
+  #   formContainer = @get('formContainer')
 
-  toggleTodoForm: (e) ->
-    formContainer = @get('formContainer')
+  #   @$(".block-connected").toggle()
 
-    @$(".block-connected").toggle()
+  #   if formContainer.get('currentView')
+  #     formContainer.set('currentView', null)
+  #     return
 
-    if formContainer.get('currentView')
-      formContainer.set('currentView', null)
-      return
+  #   todoFormView = Radium.TodoFormView.create(Radium.Slider,
+  #     close: ->
+  #       @get('parentView.parentView').toggleTodoForm()
+  #     controller: Radium.TodoFormController.create
+  #       kind: 'email'
+  #       submit: ->
+  #         selectedMail = todoFormView.get('parentView.controller.selectedMail')
 
-    todoFormView = Radium.TodoFormView.create(Radium.Slider,
-      close: ->
-        @get('parentView.parentView').toggleTodoForm()
-      controller: Radium.TodoFormController.create
-        kind: 'email'
-        submit: ->
-          selectedMail = todoFormView.get('parentView.controller.selectedMail')
+  #         return unless selectedMail.get('.length')
 
-          return unless selectedMail.get('.length')
+  #         selectedMail.forEach (email) =>
+  #           todo = Radium.Todo.createRecord
+  #             kind: @get('kind')
+  #             finishBy: @get('finishBy')
+  #             user: Radium.get('router.currentUser')
+  #             description: @get('description')
 
-          selectedMail.forEach (email) =>
-            todo = Radium.Todo.createRecord
-              kind: @get('kind')
-              finishBy: @get('finishBy')
-              user: Radium.get('router.currentUser')
-              description: @get('description')
+  #           todo.set('reference', email)
 
-            todo.set('reference', email)
+  #         Radium.get('router.store').commit()
 
-          Radium.get('router.store').commit()
+  #         Radium.Utils.notify('Todos created!')
+  #   )
 
-          Radium.Utils.notify('Todos created!')
-    )
-
-    formContainer.set 'currentView', todoFormView
+  #   formContainer.set 'currentView', todoFormView

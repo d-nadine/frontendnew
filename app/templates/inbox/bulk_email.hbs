@@ -1,14 +1,4 @@
-<div class="block">
-  <a {{action deleteEmails target="controller"}} class="btn btn-danger delete-emails">
-    <i class="icon-trash icon-large icon-white"></i> Delete
-  </a>
-  <a class="multiple-todos btn" {{action toggleTodoForm target="view"}}>Todo</a>
-</div>
-
-<div class="block block-arrow block-connected">
-  {{view view.FormContainer viewName="formContainer"}}
-</div>
-
+{{view view.tasksView}}
 <div class="block">
   <div class="page-header">
     <h3>{{length}} Email(s) Selected</h3>
