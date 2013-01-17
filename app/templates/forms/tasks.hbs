@@ -3,14 +3,20 @@
     <div class="btn-group">
       {{#each button in view.buttons}}
         {{#with button}}
-          <a {{action toggleForm this target="view"}} class="btn">
-            {{label}}
-            {{#if closed}}
-              <i class="icon-plus"></i>
-            {{else}}
-              <i class="icon-minus"></i>
-            {{/if}}
-          </a>
+          {{#if alwaysOpen}}
+            <a {{action taskAction this target="view"}} class="btn">
+              {{label}}
+            </a>
+          {{else}}
+            <a {{action toggleForm this target="view"}} class="btn">
+              {{label}}
+              {{#if closed}}
+                <i class="icon-plus"></i>
+              {{else}}
+                <i class="icon-minus"></i>
+              {{/if}}
+            </a>
+          {{/if}}
         {{/with}}
       {{/each}}
     </div>

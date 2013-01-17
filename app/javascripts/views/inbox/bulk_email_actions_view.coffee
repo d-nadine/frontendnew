@@ -1,44 +1,41 @@
-require 'radium/views/inbox/email_table_view'
+require 'radium/views/forms/tasks_view'
 
-Radium.BulkEmailActionsView = Em.View.extend
-  templateName: 'radium/inbox/bulk_email'
+Radium.BulkEmailTasksFormView = Radium.TasksView.extend
+  init: ->
+    @_super.apply this, arguments
+    @get('buttons').insertAt 0,
+      Ember.Object.create
+       action: "delete"
+       label: "Delete"
+       alwaysOpen: true
 
-  checkedEmailTableView: Radium.EmailTableView.extend
-    contentBinding: 'parentView.controller'
+  deleteAction: (e) ->
+    @get('controller').deleteEmails()
 
-  FormContainer: Em.ContainerView.extend()
-  tasksView: Radium.BulkActionsTaskView.extend()
-  # toggleTodoForm: (e) ->
-  #   formContainer = @get('formContainer')
+  toggleTodoForm: (e) ->
+    tasksContainer = @get('tasksContainer')
+    todoFormView = Radium.TodoFormView.create(Radium.Slider,
+      close: ->
+        @get('parentView.parentView').closeForm()
+      controller: Radium.TodoFormController.create
+        kind: 'email'
+        submit: ->
+          selectedMail = todoFormView.get('parentView.controller.selectedMail')
 
-  #   @$(".block-connected").toggle()
+          return unless selectedMail.get('.length')
 
-  #   if formContainer.get('currentView')
-  #     formContainer.set('currentView', null)
-  #     return
+          selectedMail.forEach (email) =>
+            todo = Radium.Todo.createRecord
+              kind: @get('kind')
+              finishBy: @get('finishBy')
+              user: Radium.get('router.currentUser')
+              description: @get('description')
 
-  #   todoFormView = Radium.TodoFormView.create(Radium.Slider,
-  #     close: ->
-  #       @get('parentView.parentView').toggleTodoForm()
-  #     controller: Radium.TodoFormController.create
-  #       kind: 'email'
-  #       submit: ->
-  #         selectedMail = todoFormView.get('parentView.controller.selectedMail')
+            todo.set('reference', email)
 
-  #         return unless selectedMail.get('.length')
+          Radium.get('router.store').commit()
 
-  #         selectedMail.forEach (email) =>
-  #           todo = Radium.Todo.createRecord
-  #             kind: @get('kind')
-  #             finishBy: @get('finishBy')
-  #             user: Radium.get('router.currentUser')
-  #             description: @get('description')
+          Radium.Utils.notify('Todos created!')
+    )
 
-  #           todo.set('reference', email)
-
-  #         Radium.get('router.store').commit()
-
-  #         Radium.Utils.notify('Todos created!')
-  #   )
-
-  #   formContainer.set 'currentView', todoFormView
+    tasksContainer.set 'currentView', todoFormView
