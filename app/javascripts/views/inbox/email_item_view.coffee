@@ -14,7 +14,7 @@ Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
     ele = $('.email-alert-area', @$())
     Radium.Utils.notify text, ele: ele
 
-  FormContainer: Em.ContainerView.extend
+  CommentsContainer: Em.ContainerView.extend
     init: ->
       @_super.apply this, arguments
 
