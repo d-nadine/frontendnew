@@ -3,21 +3,21 @@ require 'radium/controllers/todo_form_controller'
 Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
   displayConfirmation: Ember.K
-  todoController: Radium.TodoFormController.extend()
   buttons: [
     Ember.Object.create
      action: "todo"
      label: "Todo"
-     closed: true
     Ember.Object.create
      action: "meeting"
      label: "Meeting"
-     closed: true
     Ember.Object.create
      action: "call"
      label: "Call"
-     closed: true
   ]
+
+  init: ->
+    @_super.apply this, arguments
+    @get('buttons').forEach (btn) -> btn.set('closed', true)
 
   TasksContainer: Em.ContainerView.extend()
 
