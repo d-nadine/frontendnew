@@ -19,9 +19,11 @@ Radium.BulkEmailActionView = Em.View.extend
       controller: Radium.TodoFormController.create
         kind: 'email'
         submit: ->
-          return unless @get('selection')
+          selectedMail = todoFormView.get('parentView.controller.selectedMail')
 
-          @get('selection').forEach (email) =>
+          return unless selectedMail.get('.length')
+
+          selectedMail.forEach (email) =>
             todo = Radium.Todo.createRecord
               kind: @get('kind')
               finishBy: @get('finishBy')
@@ -32,9 +34,7 @@ Radium.BulkEmailActionView = Em.View.extend
 
           Radium.get('router.store').commit()
 
-          Radium.Utils.notify('Todos created')
+          Radium.Utils.notify('Todos created!')
     )
-
-    todoFormView.set('controller.selection', @get('controller.selectedMail'))
 
     formContainer.set 'currentView', todoFormView
