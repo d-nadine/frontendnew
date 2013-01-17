@@ -15,33 +15,26 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
   deleteAction: (e) ->
     @get('controller').deleteEmails()
 
-  toggleTodoForm: (e) ->
-    tasksContainer = @get('tasksContainer')
-    todoFormView = Radium.TodoFormView.create(Radium.Slider,
-      close: ->
-        @get('parentView.parentView').closeForm()
-      controller: Radium.TodoFormController.create
-        kind: 'email'
-        submit: ->
-          selectedMail = todoFormView.get('parentView.controller.selectedMail')
+  getTodoController: (form) ->
+    Radium.TodoFormController.create
+      kind: 'email'
+      submit: ->
+        selectedMail = form.get('parentView.controller.selectedMail')
 
-          return unless selectedMail.get('.length')
+        return unless selectedMail.get('.length')
 
-          selectedMail.forEach (email) =>
-            todo = Radium.Todo.createRecord
-              kind: @get('kind')
-              finishBy: @get('finishBy')
-              user: Radium.get('router.currentUser')
-              description: @get('description')
+        selectedMail.forEach (email) =>
+          todo = Radium.Todo.createRecord
+            kind: @get('kind')
+            finishBy: @get('finishBy')
+            user: Radium.get('router.currentUser')
+            description: @get('description')
 
-            todo.set('reference', email)
+          todo.set('reference', email)
 
-          Radium.get('router.store').commit()
+        Radium.get('router.store').commit()
 
-          Radium.Utils.notify('Todos created!')
-    )
-
-    tasksContainer.set 'currentView', todoFormView
+        Radium.Utils.notify('Todos created!')
 
   destroy: ->
     buttons = @get('buttons')
