@@ -28,8 +28,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     @disconnectDrawer()
     @disconnectDrawerButtons()
 
-    @get('mainController').disconnectOutlet()
     @get('applicationController').disconnectOutlet 'sidebar'
+    @get('applicationController').disconnectOutlet()
 
   disconnectDrawer: ->
     @get('drawerPanelController').disconnectOutlet()
@@ -52,16 +52,13 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
     feed = Radium.Feed.create scope: scope
 
-    @get('mainController').connectOutlet 
-      outletName: 'content'
+    @get('applicationController').connectOutlet 
       controller: @get controllerName
       viewClass: Radium.FeedView
       context: feed
 
-    # @get('applicationController').connectOutlet('sidebar', 'sidebar')
-
-    @get('sidebarController').connectOutlet 
-      outletName: 'filters'
+    @get('applicationController').connectOutlet 
+      outletName: 'sidebar'
       controller: @get controllerName
       viewClass: Radium["#{controller.capitalize()}FilterView"]
 
@@ -102,7 +99,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       connectOutlets: (router) ->
         router.set 'usersController.content', Radium.User.find()
 
-        router.get('applicationController').connectOutlet 'main'
         router.get('applicationController').connectOutlet 'topbar', 'topbar' 
         router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
 
@@ -176,7 +172,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.set 'inboxController.folder', folder
           router.set 'inboxController.content', content
 
-          router.get('mainController').connectOutlet 'inbox'
+          router.get('applicationController').connectOutlet 'inbox'
 
           router.get('applicationController').connectOutlet 'sidebar', 'inboxSidebar'
 

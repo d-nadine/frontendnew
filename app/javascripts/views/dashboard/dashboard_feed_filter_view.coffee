@@ -1,4 +1,6 @@
-Radium.DashboardFeedFilterView = Ember.View.extend
+require 'radium/views/sidebar_view'
+
+Radium.DashboardFeedFilterView = Radium.SidebarView.extend
   templateName: 'radium/filters'
 
   filters: [
