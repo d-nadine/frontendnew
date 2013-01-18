@@ -16,9 +16,11 @@ Radium.Utils =
 
     $('#main-panel > div > div').append(notification)
 
+    notification.css
+
     notification.fadeIn('fast', ( ->
       setTimeout(( ->
-        notification.fadeOut('slow', ->
+        notification.fadeOut('fast', ->
           notification.remove() if notification
         )
       ), 1000)

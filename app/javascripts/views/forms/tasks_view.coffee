@@ -43,11 +43,10 @@ Radium.TasksView = Em.View.extend
 
     form = @get("#{action}View").create()
 
-    controller = @get("#{action}Controller").create() if @get("#{action}Controller")
-
-    controller.set('reference', @get('reference')) if @get('reference')
-
-    form.set('controller', controller) if controller
+    if @get("#{action}Controller")
+      controller = @get("#{action}Controller").create()
+      controller.set('reference', @get('reference')) if @get('reference')
+      form.set('controller', controller)
 
     tasksContainer.set 'currentView', form
 
@@ -68,9 +67,6 @@ Radium.TasksView = Em.View.extend
   todoController: (->
     Radium.TodoFormController.extend
       kind: 'email'
-      submit: ->
-        @_super.apply this, arguments
-        Radium.Utils.notify('Todo created!')
   ).property()
 
   closeForm: (confirmation) ->

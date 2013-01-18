@@ -14,6 +14,7 @@ Radium.TodoFormController = Ember.ObjectController.extend
   submit: ->
     return unless @get('isValid')
     @get('content').commit()
+    Radium.Utils.notify('Todo created!')
 
   reset: ->
     @set 'content', Radium.Todo.createRecord
