@@ -27,7 +27,6 @@ Radium.TasksView = Em.View.extend
     @get(action).apply(this, args)
 
   toggleForm: (event) ->
-    console.log @get('reference').constructor
     @get('buttons').forEach (btn) -> btn.set('closed', true) unless btn == event.context
 
     tasksContainer = @get('tasksContainer')
@@ -45,6 +44,8 @@ Radium.TasksView = Em.View.extend
     form = @get("#{action}View").create()
 
     controller = @get("#{action}Controller").create() if @get("#{action}Controller")
+
+    controller.set('reference', @get('reference')) if @get('reference')
 
     form.set('controller', controller) if controller
 
