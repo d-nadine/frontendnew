@@ -15,15 +15,18 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
   deleteAction: (e) ->
     @get('controller').deleteEmails()
 
-  getTodoController: (form) ->
-    Radium.TodoFormController.create
+  todoController: ( ->
+    Radium.TodoFormController.extend
       kind: 'email'
+      selection: null
+      selectionBinding: 'Radium.router.inboxController.selectedMail'
+
       submit: ->
-        selectedMail = form.get('parentView.controller.selectedMail')
+        selection = @get('selection')
 
-        return unless selectedMail.get('.length')
+        return unless selection.get('length')
 
-        selectedMail.forEach (email) =>
+        selection.forEach (email) =>
           todo = Radium.Todo.createRecord
             kind: @get('kind')
             finishBy: @get('finishBy')
@@ -35,6 +38,7 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
         Radium.get('router.store').commit()
 
         Radium.Utils.notify('Todos created!')
+  ).property()
 
   destroy: ->
     buttons = @get('buttons')
