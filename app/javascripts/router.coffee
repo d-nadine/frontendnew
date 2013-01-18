@@ -29,25 +29,13 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     @disconnectDrawerButtons()
 
     @get('mainController').disconnectOutlet()
-
     @get('applicationController').disconnectOutlet 'sidebar'
-    @get('applicationController').disconnectOutlet 'sidebartoolbar'
-
 
   disconnectDrawer: ->
     @get('drawerPanelController').disconnectOutlet()
 
-  toggleDrawer: (name) ->
-    if @get('drawerPanelController.view')
-      @disconnectDrawer()
-    else
-      @get('drawerPanelController').connectOutlet name
-
   connectDrawerButtons: (name) ->
-    @get('drawerPanelController').connectOutlet
-      outletName: 'buttons'
-      controller: @get('drawerPanelController')
-      viewClass: Radium.get "#{name.capitalize()}DrawerButtonsView"
+    @get('drawerPanelController').connectOutlet 'buttons', "#{name}DrawerButtons"
 
   disconnectDrawerButtons: ->
     @get('drawerPanelController').disconnectOutlet 'buttons'
@@ -142,6 +130,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
     expandFeedItem: (router, event) ->
       router.set 'activeFeedController.expandedItem', event.context
+
     scrollFeedToDate: (router, event) ->
       router.set 'activeFeedController.currentDate', event.context
 
@@ -171,9 +160,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     messages: Em.Route.extend
       route: '/messages'
 
-      toggleFolderDrawer: (router, event) ->
-        router.toggleDrawer "folders"
-
       folder: Em.Route.extend
         route: '/:folder'
 
@@ -193,12 +179,11 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.get('mainController').connectOutlet 'inbox'
 
           router.get('applicationController').connectOutlet 'sidebar', 'inboxSidebar'
-          router.get('applicationController').connectOutlet 'sidebartoolbar', 'sidebarEmailToolbar'
 
           router.get('inboxSidebarController').connectControllers 'inbox'
           router.get('emailPanelController').connectControllers 'inbox'
           router.get('bulkEmailActionsController').connectControllers 'inbox'
-          router.get('sidebarEmailToolbarController').connectControllers 'inboxSidebar', 'inbox'
+          router.get('inboxDrawerButtonsController').connectControllers 'inbox', 'drawerPanel'
 
         exit: (router) ->
           router.disconnectLayout()
