@@ -1,8 +1,6 @@
-require 'radium/views/forms/meeting_form_view'
-require 'radium/controllers/meeting_form_controller'
-
 require 'radium/views/forms/todo_form_view'
 
+#FIXME: Remove when new forms are implemented
 Radium.FormContainerView = Ember.ContainerView.extend
   controllerBinding: 'Radium.router.formController'
 
@@ -29,12 +27,11 @@ Radium.FormContainerView = Ember.ContainerView.extend
     form.set 'isGlobalLevelForm', true
     @set 'currentView', form
 
-  showMeetingForm: () ->
-    form = Radium.MeetingFormView.create()
-    form.set 'controller', Radium.MeetingFormController.create()
+  showMeetingForm: ->
+    form = Radium.UnimplementedView.create()
     @show form
 
-  showTodoForm: () ->
+  showTodoForm: ->
     @show Radium.TodoFormView.create(selection: @get('controller.selection'))
 
   showOrHide: (->

@@ -46,8 +46,10 @@ Radium.TasksView = Em.View.extend
 
     form = if @get(getView)
               @get(getView).call(this)
-            else
+            else if Radium.Core.typeFromString("#{action}FormView")
               Radium.Core.typeFromString("#{action}FormView").create()
+            else
+              Radium.UnimplementedView.create()
 
     getController = "get#{action}Controller"
 
@@ -59,19 +61,6 @@ Radium.TasksView = Em.View.extend
     form.set('controller', controller) if controller
 
     tasksContainer.set 'currentView', form
-
-  getCallController: (form) ->
-    controller = @getTodoController(form)
-    controller.set('kind', 'call')
-    controller
-
-  getMeetingView: ->
-    Radium.MeetingFormView.create
-      close: ->
-        @get('parentView').set('currentView', null)
-
-  getCallView: (button) ->
-    @getTodoView(button)
 
   getTodoView: (button) ->
     Radium.TodoFormView.create Radium.Slider,
