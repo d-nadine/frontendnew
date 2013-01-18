@@ -1,5 +1,5 @@
-require 'radium/views/inbox/bulk_email_tasks_form_view'
+require 'radium/views/forms/bulk_action_form_widget'
 
 Radium.BulkEmailActionView = Em.View.extend
   templateName: 'radium/inbox/bulk_email'
-  tasksView: Radium.BulkEmailTasksFormView.extend()
+  tasksView: Radium.BulkActionFormWidget.extend()
