@@ -19,21 +19,20 @@ Radium.BulkEmailTasksFormView = Radium.TasksView.extend
     Radium.TodoFormController.extend
       kind: 'email'
       selection: null
-      selectionBinding: 'Radium.router.inboxController.selectedMail'
 
       submit: ->
         selection = @get('selection')
 
-        return unless selection.get('length')
+        return unless selection?.get('length')
 
-        selection.forEach (email) =>
+        selection.forEach (reference) =>
           todo = Radium.Todo.createRecord
             kind: @get('kind')
             finishBy: @get('finishBy')
             user: Radium.get('router.currentUser')
             description: @get('description')
 
-          todo.set('reference', email)
+          todo.set('reference', reference)
 
         Radium.get('router.store').commit()
 
