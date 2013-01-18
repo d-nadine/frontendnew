@@ -6,21 +6,21 @@ Radium.Utils =
     settings = $.extend({}, defaults, options)
 
     notification = $("""
-            <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-              #{message}
+            <div id="alerts" class="span8">
+              <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                #{message}
+              </div>
             </div>
             """)
 
-    if !settings.ele
-      settings.ele = $("<div id='alerts'></div>")
-      $('#main-panel > div > div').prepend(settings.ele)
+    $('#main-panel > div > div').append(notification)
 
-    settings.ele.append(notification)
-
-    setTimeout(( ->
-      notification.fadeOut('slow', ->
-        notification.remove() if notification
-      )
-    ), 1000)
+    notification.fadeIn('fast', ( ->
+      setTimeout(( ->
+        notification.fadeOut('slow', ->
+          notification.remove() if notification
+        )
+      ), 1000)
+    ))
 

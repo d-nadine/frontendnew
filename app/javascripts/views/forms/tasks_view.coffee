@@ -2,7 +2,6 @@ require 'radium/controllers/todo_form_controller'
 
 Radium.TasksView = Em.View.extend
   templateName: 'radium/forms/tasks'
-  displayConfirmation: Ember.K
   buttons: [
     Ember.Object.create
      action: "todo"
@@ -28,6 +27,7 @@ Radium.TasksView = Em.View.extend
     @get(action).apply(this, args)
 
   toggleForm: (event) ->
+    console.log @get('reference').constructor
     @get('buttons').forEach (btn) -> btn.set('closed', true) unless btn == event.context
 
     tasksContainer = @get('tasksContainer')
@@ -40,46 +40,37 @@ Radium.TasksView = Em.View.extend
 
       return
 
-    action = button.get('action').capitalize()
+    action = button.get('action')
 
-    getView = "get#{action}View"
+    form = @get("#{action}View").create()
 
-    form = if @get(getView)
-              @get(getView).call(this)
-            else if Radium.Core.typeFromString("#{action}FormView")
-              Radium.Core.typeFromString("#{action}FormView").create()
-            else
-              Radium.UnimplementedView.create()
-
-    getController = "get#{action}Controller"
-
-    controller =  if @get(getController)
-                    @get(getController).call(this, form)
-                  else if Radium.Core.typeFromString("#{action}FormController")
-                    Radium.Core.typeFromString("#{action}FormController").create()
+    controller = @get("#{action}Controller").create() if @get("#{action}Controller")
 
     form.set('controller', controller) if controller
 
     tasksContainer.set 'currentView', form
 
-  getTodoView: (button) ->
-    Radium.TodoFormView.create Radium.Slider,
+  todoView: ( ->
+    Radium.TodoFormView.extend Radium.Slider,
       close: ->
         @get('parentView.parentView').closeForm()
+  ).property()
 
-  getTodoController: (form) ->
-    submitForm =  @get('confirmTask')
-    view = this
+  callView: ( ->
+    Radium.UnimplementedView.extend()
+  ).property()
 
-    Radium.TodoFormController.create
+  meetingView: ( ->
+    Radium.UnimplementedView.extend()
+  ).property()
+
+  todoController: (->
+    Radium.TodoFormController.extend
       kind: 'email'
       submit: ->
         @_super.apply this, arguments
-        submitForm.call(view, 'todo created!')
+        Radium.Utils.notify('Todo created!')
+  ).property()
 
   closeForm: (confirmation) ->
     @get('tasksContainer').set('currentView', null)
-    @get('buttons').forEach (btn) -> btn.set('closed', true)
-
-  confirmTask: (text) ->
-    @displayConfirmation(text)

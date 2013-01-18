@@ -2,13 +2,25 @@
   Base layout
   =======================
 */
+//FIXME: Move into variables/globals file?
+$alerts-layer: 1000;
+
 .loaded {
   background: #fff url('/images/base/bg-grey.gif') repeat-y center top;
+}
+
+#alerts{
+  display:none;
+  position: fixed;
+  top: 56px;
+  z-index: $alerts-layer;
+  text-align: center;
 }
 
 #unimplemented{
   text-align: center;
 }
+
 .rel{
   position: relative;
 }
