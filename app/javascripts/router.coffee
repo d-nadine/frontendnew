@@ -102,9 +102,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         router.get('applicationController').connectOutlet 'topbar', 'topbar' 
         router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
 
-        # router.get('notificationsController').set('content', Radium.Notification.find())
-        # router.get('notificationsController').set('reminders', Radium.Reminder.find())
-        # router.get('applicationController').connectOutlet('notifications', 'notifications')
+        router.get('notificationsController').set('content', Radium.Notification.find())
+        router.get('notificationsController').set('reminders', Radium.Reminder.find())
 
         router.transitionTo('root')
 
@@ -114,9 +113,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showContact: Ember.Route.transitionTo('root.contacts.contact')
     emailBulkAction: Em.Route.transitionTo('root.messages.folder.action')
     showMessages: Em.Route.transitionTo('root.messages.folder')
-
-    showNotifications: (router, event) ->
-      router.get('drawerPanelController').connectOutlet "stack"
 
     showTodoForm: (router, event) ->
       router.connectForm "todo"

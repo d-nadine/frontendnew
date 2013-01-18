@@ -1,23 +1,23 @@
-<div class="drawer span3">
-  <div class="content">
-    {{#if view.reminders.length}}
+<div id="notifications">
+  {{#if view.reminders.length}}
+    <div class="page-header">
       <h3>
         Reminders
         <a class="dismiss" {{action dismissAll view.reminders target="controller"}}>
           <i class="icon-remove-sign icon-white"></i>
         </a>
       </h3>
-      {{collection view.remindersListView}}
-    {{/if}}
+    </div>
+    {{collection view.remindersListView}}
+  {{/if}}
 
-    {{#each group in controller}}
-      <h3>
-        {{group.humanName}}
-        <a class="dismiss" {{action dismissAll group.content target="controller"}}>
-          <i class="icon-remove-sign icon-white"></i>
-        </a>
-      </h3>
-      {{collection view.notificationsListView contentBinding="group.content"}}
-    {{/each}}
-  </div>
+  {{#each group in controller}}
+    <h3>
+      {{group.humanName}}
+      <a class="dismiss" {{action dismissAll group.content target="controller"}}>
+        <i class="icon-remove-sign icon-white"></i>
+      </a>
+    </h3>
+    {{collection view.notificationsListView contentBinding="group.content"}}
+  {{/each}}
 </div>

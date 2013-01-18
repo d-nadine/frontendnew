@@ -4,3 +4,6 @@ Radium.DrawerPanelController = Ember.Controller.extend
       @disconnectOutlet()
     else
       @connectOutlet name
+
+  toggleNotifications: ->
+    @toggleDrawer 'notifications'
