@@ -1,42 +1,33 @@
 body {
   background-color: $background;
+  padding-top: 60px;
 }
 
-#main, #navbar-container {
-  margin: 0 20px;
-}
-
-#main-panel {
-  position: relative;
-  top: 60px;
+.main-row {
+  margin-left: 0;
 }
 
 $sidebar-width: 240px; // span3 from bootstrap + the margin it includes
 $sidebar-border-size: 8px;
 $button-bar-width: 40px;
 
-#sidebar-container {
+.sidebar-panel {
   position: fixed;
   top: 47px;
   bottom: 0;
-  width: $sidebar-width;
+  padding-left: $button-bar-width + $sidebar-border-size;
+  width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
   margin-left: 0;
+}
+
+.sidebar-panel-main {
   background-color: $dark-background;
   border-right: solid 1px darken($dark-background, 25);
   // FIXME: why doesn't this work with the box shadow mixin?
   -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15)
 }
 
-#sidebar {
-  margin-left: $button-bar-width + $sidebar-border-size
-}
-
-.drawer {
-  position: fixed;
-  top: 47px;
-  bottom: 0;
-  padding-left: $button-bar-width + $sidebar-border-size;
-  width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
+.sidebar-panel-drawer {
   z-index: 99;
   background-image: url('/images/backgrounds/linen.png');
   border-right: solid 1px black;

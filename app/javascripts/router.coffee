@@ -35,22 +35,22 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
 
   disconnectDrawer: ->
-    @get('drawerController').disconnectOutlet()
+    @get('drawerPanelController').disconnectOutlet()
 
   toggleDrawer: (name) ->
-    if @get('drawerController.view')
+    if @get('drawerPanelController.view')
       @disconnectDrawer()
     else
-      @get('drawerController').connectOutlet name
+      @get('drawerPanelController').connectOutlet name
 
   connectDrawerButtons: (name) ->
-    @get('drawerController').connectOutlet
+    @get('drawerPanelController').connectOutlet
       outletName: 'buttons'
-      controller: @get('drawerController')
+      controller: @get('drawerPanelController')
       viewClass: Radium.get "#{name.capitalize()}DrawerButtonsView"
 
   disconnectDrawerButtons: ->
-    @get('drawerController').disconnectOutlet 'buttons'
+    @get('drawerPanelController').disconnectOutlet 'buttons'
 
   connectForm: (name) ->
     @get('applicationController').connectOutlet "form", "mainForm"
@@ -70,7 +70,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       viewClass: Radium.FeedView
       context: feed
 
-    @get('applicationController').connectOutlet('sidebar', 'sidebar')
+    # @get('applicationController').connectOutlet('sidebar', 'sidebar')
 
     @get('sidebarController').connectOutlet 
       outletName: 'filters'
@@ -116,8 +116,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
         router.get('applicationController').connectOutlet 'main'
         router.get('applicationController').connectOutlet 'topbar', 'topbar' 
-        router.get('applicationController').connectOutlet 'sidebar', 'sidebar' 
-        router.get('applicationController').connectOutlet 'drawer', 'drawer'
+        router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
 
         # router.get('notificationsController').set('content', Radium.Notification.find())
         # router.get('notificationsController').set('reminders', Radium.Reminder.find())
@@ -133,7 +132,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showMessages: Em.Route.transitionTo('root.messages.folder')
 
     showNotifications: (router, event) ->
-      router.get('drawerController').connectOutlet "stack"
+      router.get('drawerPanelController').connectOutlet "stack"
 
     showTodoForm: (router, event) ->
       router.connectForm "todo"

@@ -1,4 +1,5 @@
-Radium.FoldersView = Em.View.extend Radium.SidebarScrollbarMixin,
-  layoutName: 'radium/layouts/drawer'
+require 'radium/views/drawer_view'
+
+Radium.FoldersView = Radium.DrawerView.extend
   templateName: 'radium/inbox/folders'
   contentBinding: 'controller.folders'

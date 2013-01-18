@@ -1,28 +1,10 @@
-<div id="main" class="container">
-  {{outlet topbar}}
-  <div class="row">
-    <div id="sidebar-container" class="span3">
-      {{outlet drawer}}
+{{outlet topbar}}
 
-      <div id="sidebar">
-        {{outlet sidebartoolbar}}
-        <div class="scroller">
-          <div class="viewport">
-            <div class="scrollcontainer">
-              <div class="scrollbar">
-                <div class="track">
-                  <div class="thumb">
-                    <div class="end"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="overview">
-              {{outlet sidebar}}
-            </div>
-          </div>
-        </div>
-      </div>
+<div id="main">
+  <div class="row main-row">
+    <div id="sidebar">
+      {{outlet drawerPanel}}
+      {{outlet sidebar}}
     </div>
     <div id="main-panel" class="offset3 span9">
       <div class="row">
