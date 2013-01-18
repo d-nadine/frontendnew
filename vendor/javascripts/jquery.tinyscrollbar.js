@@ -79,6 +79,7 @@
         {
             oViewport[ options.axis ] = oViewport.obj[0][ 'offset'+ sSize ];
             oContent[ options.axis ]  = oContent.obj[0][ 'scroll'+ sSize ];
+
             oContent.ratio            = oViewport[ options.axis ] / oContent[ options.axis ];
 
             oScrollbar.obj.toggleClass( 'disable', oContent.ratio >= 1 );

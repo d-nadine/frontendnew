@@ -1,3 +1,16 @@
 <div class="drawer">
-  {{yield}}
+  <div class="scroller">
+    <div class="scrollbar">
+      <div class="track">
+        <div class="thumb">
+          <div class="end"></div>
+        </div>
+      </div>
+    </div>
+    <div class="viewport">
+      <div class="overview">
+        {{yield}}
+      </div>
+    </div>
+  </div>
 </div>
