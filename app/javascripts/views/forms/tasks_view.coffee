@@ -45,7 +45,13 @@ Radium.TasksView = Em.View.extend
 
     if @get("#{action}Controller")
       controller = @get("#{action}Controller").create()
-      controller.set('reference', @get('reference')) if @get('reference')
+
+      Ember.keys(@).forEach (key) =>
+        re = /\b[A-Za-z]*Binding\b/
+        if key.match(re)
+          prop = key.replace('Binding', "")
+          controller.set(prop, @get(prop)) if @get(prop)
+
       form.set('controller', controller)
 
     tasksContainer.set 'currentView', form
