@@ -3,7 +3,7 @@ Radium.EmailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   classNames: 'email'.w()
   showActions: false
 
-  tasksView: Radium.TasksView.extend()
+  formWidget: Radium.FormWidgetView.extend()
 
   showActionSection: ->
     @toggleProperty('showActions')

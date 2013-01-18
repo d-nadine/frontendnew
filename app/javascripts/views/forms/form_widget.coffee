@@ -1,7 +1,7 @@
 require 'radium/controllers/todo_form_controller'
 
-Radium.TasksView = Em.View.extend
-  templateName: 'radium/forms/tasks'
+Radium.FormWidgetView = Em.View.extend
+  templateName: 'radium/forms/form_widget'
   buttons: [
     Ember.Object.create
      action: "todo"
