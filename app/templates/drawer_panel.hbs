@@ -1,6 +1,9 @@
 <div id="drawer-panel">
   <div id="drawer-buttons">
-    {{view Radium.NotificationDrawerButtonView}}
+    <a {{action showNotifications}}>
+      <i class="icon-bell"></i>
+    </a>
+
     {{outlet buttons}}
   </div>
 
