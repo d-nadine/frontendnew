@@ -54,12 +54,17 @@ Radium.FormWidgetView = Em.View.extend
 
       form.set('controller', controller)
 
+    form.one('onClose', this, ( (args) ->
+      @get('buttons').forEach (btn) -> btn.set('closed', true)
+      @get('tasksContainer').set('currentView', null)
+    ))
+
     tasksContainer.set 'currentView', form
 
   todoView: ( ->
     Radium.TodoFormView.extend Radium.Slider,
       close: ->
-        @get('parentView.parentView').closeForm()
+        @trigger 'onClose'
   ).property()
 
   callView: ( ->
@@ -74,6 +79,3 @@ Radium.FormWidgetView = Em.View.extend
     Radium.TodoFormController.extend
       kindBinding: 'parentView.parentView.kind'
   ).property()
-
-  closeForm: (confirmation) ->
-    @get('tasksContainer').set('currentView', null)
