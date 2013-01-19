@@ -50,6 +50,7 @@ $arrow-default-border-style : solid     !default;
     width: 0;
     position: absolute;
     pointer-events: none;
+    z-index: 1;
   }
   &:after {
     border-#{$arrow-orientation}-color: $color;

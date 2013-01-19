@@ -1,0 +1,73 @@
+@import "compass/utilities/lists/horizontal-list";
+
+$pipeline-arrow-border: #fff;
+$pipeline-nav: $dark-background;
+$pipeline-nav-current: #888;
+$pipeline-nav-color: #fff;
+
+$arrow-height: 29px;
+
+$pipeline-nav-fourth-bg: #e7e7e7;
+$pipeline-nav-fourth: $dark-text;
+$pipeline-nav-first-bg: darken($pipeline-nav-fourth-bg, 15);
+$pipeline-nav-second-bg: darken($pipeline-nav-fourth-bg, 10);
+$pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
+#pipeline{
+  div:first-child{
+    display: inline-block;
+  }
+  ul{
+    @include horizontal-list;
+    border-radius: 4px;
+    overflow: visible;
+    li{
+      padding-left: 2px !IMPORTANT;
+      background-color: $pipeline-nav;
+      h4{
+        padding: 10px 0 10px 0;
+        a{
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+    li:last-child{
+      h4{
+        a{
+          color: $pipeline-nav-fourth
+        }
+      }
+    }
+    > li:first-child:not(.current){
+      @include css-arrow(right, $arrow-height, $pipeline-nav-first-bg);
+    }
+    > li:nth-child(2):not(.current){
+      @include css-arrow(right, $arrow-height, $pipeline-nav-second-bg);
+    }
+    > li:nth-child(3):not(.current){
+      @include css-arrow(right, $arrow-height, $pipeline-nav-third-bg);
+    }
+    > li:last-child:not(.current){
+      @include css-arrow(right, $arrow-height, $pipeline-nav-fourth-bg);
+    }
+    li.current{
+      @include css-arrow(right, $arrow-height, $pipeline-nav-current);
+      background-color: $pipeline-nav-current;
+    }
+    li::before {
+      top: 51% !IMPORTANT;
+    }
+    li:not(:first-child){
+      padding-left:  $arrow-height + 8px !IMPORTANT;
+    }
+    li:last-child{
+      padding-right: 2px !IMPORTANT
+    }
+    li{
+      border: none !IMPORTANT;
+    }
+  }
+  div.status{
+    display: inline-block;
+  }
+}
