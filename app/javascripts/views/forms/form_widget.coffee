@@ -72,7 +72,7 @@ Radium.FormWidgetView = Em.View.extend
 
   todoController: (->
     Radium.TodoFormController.extend
-      kind: 'email'
+      kindBinding: 'parentView.parentView.kind'
   ).property()
 
   closeForm: (confirmation) ->
