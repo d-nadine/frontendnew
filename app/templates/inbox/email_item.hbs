@@ -56,7 +56,7 @@
 <div class='email-alert-area'></div>
 
 {{#if view.showActions}}
-  {{view view.formWidget referenceBinding="view.content" kind="email"}}
+  {{view view.FormWidget referenceBinding="view.content" kindBinding="view.kind"}}
 {{/if}}
 <div class="block block-arrow">
   {{view view.CommentsContainer viewName="commentsContainer"}}

@@ -17,7 +17,6 @@ Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
 
   todoController: ( ->
     Radium.TodoFormController.extend
-      kind: 'email'
       selection: null
 
       submit: ->

@@ -76,6 +76,5 @@ Radium.FormWidgetView = Em.View.extend
   ).property()
 
   todoController: (->
-    Radium.TodoFormController.extend
-      kindBinding: 'parentView.parentView.kind'
+    Radium.TodoFormController.extend()
   ).property()
