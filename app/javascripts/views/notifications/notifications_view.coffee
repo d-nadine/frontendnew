@@ -9,6 +9,7 @@ Radium.NotificationsView = Radium.DrawerView.extend
 
   remindersListView: Ember.CollectionView.extend
     contentBinding: 'parentView.reminders'
+    classNames: ['unstyled']
     tagName: 'ul'
     itemViewClass: Em.View.extend
       attributeBindings: ['dataReminderId:data-reminder-id']
@@ -27,6 +28,7 @@ Radium.NotificationsView = Radium.DrawerView.extend
 
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'
+    classNames: ['unstyled']
     itemViewClass: Ember.View.extend
       layoutName: 'radium/layouts/notification_panel_item'
       attributeBindings: ['dataNotificationId:data-notification-id']

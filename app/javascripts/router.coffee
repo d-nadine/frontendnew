@@ -132,7 +132,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       route: '/'
 
       connectOutlets: (router) ->
-        router.connectFeed router.get('currentUser'), 'dashboardFeed'
+        # router.connectFeed router.get('currentUser'), 'dashboardFeed'
 
     groups: Ember.Route.extend
       route: '/groups'

@@ -59,14 +59,16 @@ div.selection{
 }
 
 #folders {
+  width: 130px; // final width of the thumbnail
+  margin: 0 auto;
   padding: 30px 0;
 }
 
 #folders li {
   display: block;
   text-align: center;
+  margin: 0;
   margin-bottom: 30px;
-  color: $bright !important;
 
   // HACK: force heights so element height is calculated
   // correctly when it's inserted. This makes the scrollbar

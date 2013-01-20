@@ -3,7 +3,7 @@
     <div class="page-header">
       <h3>
         Reminders
-        <a class="dismiss" {{action dismissAll view.reminders target="controller"}}>
+        <a class="dismiss pull-right" {{action dismissAll view.reminders target="controller"}}>
           <i class="icon-remove-sign icon-white"></i>
         </a>
       </h3>
@@ -12,12 +12,14 @@
   {{/if}}
 
   {{#each group in controller}}
-    <h3>
-      {{group.humanName}}
-      <a class="dismiss" {{action dismissAll group.content target="controller"}}>
-        <i class="icon-remove-sign icon-white"></i>
-      </a>
-    </h3>
+    <div class="page-header">
+      <h3>
+        {{group.humanName}}
+        <a class="dismiss pull-right" {{action dismissAll group.content target="controller"}}>
+          <i class="icon-remove-sign icon-white"></i>
+        </a>
+      </h3>
+    </div>
     {{collection view.notificationsListView contentBinding="group.content"}}
   {{/each}}
 </div>

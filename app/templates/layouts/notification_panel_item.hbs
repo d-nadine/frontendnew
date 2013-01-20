@@ -1,9 +1,11 @@
-{{yield}}
+<div class="wrapper">
+  {{yield}}
 
-{{#with view.content}}
-  <div class="dismiss-button">
-    <a class="dismiss" {{action dismiss target="controller"}}>
-      <i class="icon-remove-sign icon-white"></i>
-    </a>
-  </div>
-{{/with}}
+  {{#with view.content}}
+    <div class="dismiss-button">
+      <a class="dismiss" {{action dismiss target="controller"}}>
+        <i class="icon-remove-sign icon-white"></i>
+      </a>
+    </div>
+  {{/with}}
+</div>

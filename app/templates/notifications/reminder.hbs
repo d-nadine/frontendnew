@@ -1,9 +1,13 @@
-<div {{action expandFeedItem view.reference}} class="content">
-  {{view.description}} at
+<div {{action expandFeedItem view.reference}}>
+  <span class="headline">
+    {{view.description}}
+  <span>
 
   {{! TODO: change this to 'time in words'}}
   {{#with view.date}}
-    {{formatTime this}}
-    {{formatDate this}}
+    <span class="time">
+      {{formatTime this}}
+      {{formatDate this}}
+    </span>
   {{/with}}
 </div>
