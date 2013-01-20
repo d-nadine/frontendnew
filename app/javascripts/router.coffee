@@ -32,7 +32,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     @get('applicationController').disconnectOutlet()
 
   disconnectDrawer: ->
-    @get('drawerPanelController').disconnectOutlet()
+    @get('drawerPanelController').disconnectDrawer()
 
   connectDrawerButtons: (name) ->
     @get('drawerPanelController').connectOutlet 'buttons', "#{name}DrawerButtons"
