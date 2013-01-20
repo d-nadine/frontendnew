@@ -18,6 +18,14 @@ $button-bar-width: 40px;
   padding-left: $button-bar-width + $sidebar-border-size;
   width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
   margin-left: 0;
+
+  .sidebar-panel-edge {
+    position: fixed;
+    top: 47px;
+    bottom: 0;
+    width: 252px;
+    box-sizing: border-box;
+  }
 }
 
 .sidebar-panel-main {
@@ -36,15 +44,10 @@ $button-bar-width: 40px;
     background-color: rgba(0,0,0, 0.5);
   }
 
-  .panel-edge {
+  .sidebar-panel-edge {
     background-image: url("/images/backgrounds/linen.png");
-    position: fixed;
-    top: 47px;
-    bottom: 0;
     border-left: solid 1px rgb(27, 27, 27);
     border-right: solid 1px rgb(27, 27, 27);
-    width: 252px;
-    box-sizing: border-box;
     box-shadow: -2px 0px 10px 2px rgba(0, 0, 0, 0.3);
   }
 }
