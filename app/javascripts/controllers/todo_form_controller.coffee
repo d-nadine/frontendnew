@@ -1,5 +1,5 @@
 Radium.TodoFormController = Ember.ObjectController.extend
-  kind: 'general'
+  kind: 'todo'
   init: ->
     @reset()
 
