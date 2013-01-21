@@ -1,15 +1,4 @@
 {{outlet topbar}}
 
-<div id="main">
-  <div class="row main-row">
-    <div id="sidebar">
-      {{outlet drawerPanel}}
-      {{outlet sidebar}}
-    </div>
-    <div id="main-panel" class="offset4 span8">
-      {{outlet form}}
-
-      {{outlet}}
-    </div>
-  </div>
-</div>
+{{outlet drawerPanel}}
+{{outlet}}

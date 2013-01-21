@@ -1,0 +1,10 @@
+<div class="row main-row two-column">
+  <div id="sidebar">
+    {{outlet sidebar}}
+  </div>
+  <div id="main-panel" class="offset4 span8">
+    {{outlet form}}
+
+    {{yield}}
+  </div>
+</div>

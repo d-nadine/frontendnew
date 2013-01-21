@@ -24,22 +24,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   enableLogging: true
   initialState: 'loading'
 
-  disconnectLayout: ->
-    @disconnectDrawer()
-    @disconnectDrawerButtons()
-
-    @get('applicationController').disconnectOutlet 'sidebar'
-    @get('applicationController').disconnectOutlet()
-
-  disconnectDrawer: ->
-    @get('drawerPanelController').disconnectDrawer()
-
-  connectDrawerButtons: (name) ->
-    @get('drawerPanelController').connectOutlet 'buttons', "#{name}DrawerButtons"
-
-  disconnectDrawerButtons: ->
-    @get('drawerPanelController').disconnectOutlet 'buttons'
-
   connectForm: (name) ->
     @get('applicationController').connectOutlet "form", "mainForm"
     @get('mainFormController').connectOutlet "#{name}Form"
@@ -100,7 +84,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         router.set 'usersController.content', Radium.User.find()
 
         router.get('applicationController').connectOutlet 'topbar', 'topbar' 
-        router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
 
         router.get('notificationsController').set('content', Radium.Notification.find())
         router.get('notificationsController').set('reminders', Radium.Reminder.find())
@@ -109,9 +92,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
   root: Ember.Route.extend
     showDashboard: Ember.Route.transitionTo('root.dashboard')
-    showUser: Ember.Route.transitionTo('root.users.user')
-    showContact: Ember.Route.transitionTo('root.contacts.contact')
-    emailBulkAction: Em.Route.transitionTo('root.messages.folder.action')
+    showUser: Ember.Route.transitionTo('root.user')
+    showContact: Ember.Route.transitionTo('root.contact')
     showMessages: Em.Route.transitionTo('root.messages.folder')
 
     showTodoForm: (router, event) ->
@@ -132,22 +114,28 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       route: '/'
 
       connectOutlets: (router) ->
-        # router.connectFeed router.get('currentUser'), 'dashboardFeed'
+        router.get('applicationController').connectOutlet viewClass: Radium.UnimplementedView
 
-    groups: Ember.Route.extend
-      route: '/groups'
+      exit: (router) ->
+        router.get('applicationController').disconnectOutlet()
 
-      group: Ember.Route.extend
-        route: '/:group_id'
+    contact: Ember.Route.extend
+      route: '/contacts/:contact_id'
 
-    contacts: Ember.Route.extend
-      route: '/contacts'
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet viewClass: Radium.UnimplementedView
 
-      index: Ember.Route.extend
-        route: '/'
+      exit: (router) ->
+        router.get('applicationController').disconnectOutlet()
 
-      contact: Ember.Route.extend
-        route: '/:contact_id'
+    user: Ember.Route.extend
+      route: '/users/:contact_id'
+
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet viewClass: Radium.UnimplementedView
+
+      exit: (router) ->
+        router.get('applicationController').disconnectOutlet()
 
     messages: Em.Route.extend
       route: '/messages'
@@ -159,10 +147,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           { folder: name }
 
         connectOutlets: (router, folder) ->
-          router.disconnectDrawer()
-
-          router.connectDrawerButtons 'inbox'
-
           content = Radium.Email.find folder: folder
 
           router.set 'inboxController.folder', folder
@@ -170,7 +154,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
           router.get('applicationController').connectOutlet 'inbox'
 
-          router.get('applicationController').connectOutlet 'sidebar', 'inboxSidebar'
+          router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
+          router.get('drawerPanelController').connectOutlet 'buttons', 'inboxDrawerButtons'
+
+          router.get('inboxController').connectOutlet 'sidebar', 'inboxSidebar'
 
           router.get('inboxSidebarController').connectControllers 'inbox'
           router.get('emailPanelController').connectControllers 'inbox'
@@ -178,14 +165,10 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.get('inboxDrawerButtonsController').connectControllers 'inbox', 'drawerPanel'
 
         exit: (router) ->
-          router.disconnectLayout()
+          router.get('drawerPanelController').disconnectOutlet()
+          router.get('drawerPanelController').disconnectOutlet 'buttons'
+
+          router.get('applicationController').disconnectOutlet()
 
           router.set 'inboxController.folder', null
           router.set 'inboxController.content', null
-
-
-    users: Ember.Route.extend
-      route: '/users'
-
-      user: Ember.Route.extend
-        route: '/:user_id'
