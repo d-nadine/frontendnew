@@ -1,5 +1,4 @@
 Radium.DrawerPanelController = Ember.Controller.extend
-
   toggleDrawer: (name) ->
     if @get('currentDrawer') == name
       @set 'currentDrawer', undefined

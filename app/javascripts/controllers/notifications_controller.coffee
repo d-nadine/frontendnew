@@ -1,8 +1,6 @@
 require 'radium/groupable'
 
 Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
-  isVisible: false
-
   count: (->
     reminders = @get('reminders.length') || 0
     reminders + @get('length')
