@@ -6,7 +6,3 @@ Radium.FeedItemView = Em.View.extend
 
   click: (event) ->
     @toggleProperty('expanded')
-
-  toggleTodoForm: (e) ->
-    e.stopPropagation()
-    @get('parentView').toggleTodoForm()

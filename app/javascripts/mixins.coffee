@@ -1,7 +1,4 @@
 require 'radium/mixins/views/slider'
-require 'radium/mixins/views/time_picker'
 require 'radium/mixins/infinite_scroller'
 require 'radium/mixins/filtered_collection_mixin'
 require 'radium/mixins/filtered_contacts_mixin'
-require 'radium/mixins/validate'
-require 'radium/mixins/form_validation'

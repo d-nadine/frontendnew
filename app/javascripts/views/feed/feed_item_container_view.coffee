@@ -1,5 +1,4 @@
 require 'radium/views/feed/feed_details_container_view'
-require 'radium/mixins/views/todo_view_mixin'
 
 noOp = Ember.Mixin.create()
 
@@ -25,9 +24,7 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
 
     @set 'feedDetailsContainer', feedDetailsContainer
 
-    mixin = if type is 'todo' then Radium.TodoViewMixin else noOp
-
-    view = Radium.FeedItemView.create mixin,
+    view = Radium.FeedItemView.create
       contentBinding: 'parentView.content'
       # TODO: most views from older client assume that content is also context,
       #       I'm doing it here too, but I'm not sure if this is the best thing
@@ -56,17 +53,6 @@ Radium.FeedItemContainerView = Em.ContainerView.extend
       @addObserver('content.isLoaded', observer)
 
     @expandedItemDidChange()
-
-  toggleTodoForm: ->
-    feedDetailsContainer = @get('feedDetailsContainer')
-
-    if feedDetailsContainer.get 'currentView'
-      feedDetailsContainer.set 'currentView', null
-    else
-      todoFormView = Radium.TodoFormView.create()
-      todoFormView.set 'selection', @get('content')
-
-      feedDetailsContainer.set 'currentView', todoFormView
 
   expandOrShrink: (->
     feedDetailsContainer = @get('feedDetailsContainer')
