@@ -14,7 +14,7 @@
             </a>
             <ul class="dropdown-menu">
               {{#each Radium.router.pipelineStatusController}}
-                <li><a {{action showPipeline this.name href=true }}>{{this.name}}</a></li>
+                <li><a {{action showPipeline this.name href=true }}>{{unbound this.name}}</a></li>
               {{/each}}
             </ul>
           </li>
