@@ -33,6 +33,7 @@ require 'radium/router'
 require 'radium/mixins'
 
 require 'radium/models'
+
 require 'radium/views'
 
 require 'radium/checkable_mixin'
