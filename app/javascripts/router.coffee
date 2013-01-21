@@ -96,6 +96,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showUser: Ember.Route.transitionTo('root.user')
     showContact: Ember.Route.transitionTo('root.contact')
     showMessages: Em.Route.transitionTo('root.messages.folder')
+    showPipeline: Em.Route.transitionTo('root.pipeline')
 
     showTodoForm: (router, event) ->
       router.connectForm "todo"
@@ -173,3 +174,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
           router.set 'inboxController.folder', null
           router.set 'inboxController.content', null
+    pipeline: Em.Route.extend
+      route: '/pipeline'
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('pipeline')
