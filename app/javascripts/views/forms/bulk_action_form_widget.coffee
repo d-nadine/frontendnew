@@ -16,7 +16,7 @@ Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
     @get('controller').deleteAll()
 
   todoController: ( ->
-    Radium.TodoFormController.extend()
+    Radium.BulkTodoFormController.extend()
   ).property()
 
   destroy: ->
