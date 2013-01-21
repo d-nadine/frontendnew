@@ -2,7 +2,7 @@ require 'radium/pagination_mixin'
 
 Radium.EmailPanelController = Em.ArrayController.extend Radium.PaginationMixin,
   contentBinding: 'inboxController.history'
-  emailBinding: 'inboxController.selectedObject'
+  emailBinding: 'inboxController.selectedContent'
   targetBinding: Ember.Binding.oneWay 'inboxController'
 
   sortProperties: ['sentAt']

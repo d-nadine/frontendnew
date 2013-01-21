@@ -36,6 +36,7 @@ require 'radium/models'
 require 'radium/views'
 
 require 'radium/checkable_mixin'
+require 'radium/selectable_mixin'
 
 requireAll /radium\/controllers/
 

@@ -10,8 +10,8 @@ Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   ).property('content.isChecked')
 
   isSelected: ( ->
-    @get('content') == @get('controller.selectedObject')
-  ).property('content', 'controller.selectedObject')
+    @get('content') == @get('controller.selectedContent')
+  ).property('content', 'controller.selectedContent')
 
   checkMailItem: Em.Checkbox.extend
     contentBinding: Ember.Binding.oneWay 'parentView.content'

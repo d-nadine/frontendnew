@@ -1,12 +1,8 @@
-Radium.InboxController = Em.ArrayController.extend Radium.CheckableMixin,
+Radium.InboxController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   history: (->
-    return unless @get('selectedObject')
-    Radium.Email.find historyFor: @get('selectedObject')
-  ).property('selectedObject')
-
-  selectObject: (event) ->
-    email = event.context
-    @set 'selectedObject', email
+    return unless @get('selectedContent')
+    Radium.Email.find historyFor: @get('selectedContent')
+  ).property('selectedContent')
 
   createTodo: (data, email) ->
     todo = Radium.Todo.createRecord(data)
