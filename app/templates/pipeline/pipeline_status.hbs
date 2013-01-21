@@ -3,7 +3,7 @@
     {{#each controller}}
     <li {{bindAttr class="isCurrent:current"}}>
       <h4>
-        <a href="#">
+        <a {{action showPipeline name href=true }}>
           {{unbound label}} (3)
         </a>
       </h4>
