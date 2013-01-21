@@ -13,7 +13,7 @@ Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
        icons: 'icon-trash icon-large icon-white'
 
   deleteAction: (e) ->
-    @get('controller').deleteEmails()
+    @get('controller').deleteAll()
 
   todoController: ( ->
     Radium.TodoFormController.extend
