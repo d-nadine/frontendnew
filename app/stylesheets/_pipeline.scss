@@ -31,7 +31,7 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
         }
       }
     }
-    > li:last-of-type{
+    > li:last-of-type:not(.current){
       h4{
         a{
           color: $pipeline-nav-fourth

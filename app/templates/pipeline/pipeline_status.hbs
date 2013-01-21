@@ -1,7 +1,7 @@
 <div>
   <ul id="status">
     {{#each controller}}
-    <li>
+    <li {{bindAttr class="isCurrent:current"}}>
       <h4>
         <a href="#">
           {{unbound label}} (3)

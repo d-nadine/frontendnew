@@ -187,3 +187,4 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           { status: name }
 
         connectOutlets: (router, status) ->
+          router.set('pipelineStatusController.status', status)
