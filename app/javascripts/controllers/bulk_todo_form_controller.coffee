@@ -15,6 +15,6 @@ Radium.BulkTodoFormController = Radium.TodoFormController.extend
 
       todo.set('reference', reference)
 
-    Radium.get('router.store').commit()
+    @get('content').store.commit()
 
     Radium.Utils.notify('Todos created!')
