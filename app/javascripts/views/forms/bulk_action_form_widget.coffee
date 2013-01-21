@@ -16,26 +16,7 @@ Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
     @get('controller').deleteAll()
 
   todoController: ( ->
-    Radium.TodoFormController.extend
-      selection: null
-
-      submit: ->
-        selection = @get('selection')
-
-        return unless selection?.get('length')
-
-        selection.forEach (reference) =>
-          todo = Radium.Todo.createRecord
-            kind: @get('kind')
-            finishBy: @get('finishBy')
-            user: Radium.get('router.currentUser')
-            description: @get('description')
-
-          todo.set('reference', reference)
-
-        Radium.get('router.store').commit()
-
-        Radium.Utils.notify('Todos created!')
+    Radium.TodoFormController.extend()
   ).property()
 
   destroy: ->
