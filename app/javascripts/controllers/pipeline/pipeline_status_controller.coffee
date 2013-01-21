@@ -1,4 +1,4 @@
-Radium.PipelineStatusController = Em.ArrayProxy.extend
+Radium.PipelineStatusController = Em.ArrayProxy.extend Radium.SelectableMixin,
   content: [
     Em.Object.create({label: 'Leads', name: 'leads'})
     Em.Object.create({label: 'Negotiating', name: 'negotiating'})
