@@ -88,7 +88,7 @@ $button-bar-width: 40px;
     border-bottom: solid 1px $dark-background;
     border-top: solid 1px $dark-background;
 
-    &.selected {
+    &.is-selected {
       @include css-arrow(right, 14px, $selected-item, 1px, darken($selected-item-border, 5), solid);
       background-color: $selected-item;
       border-left: none;

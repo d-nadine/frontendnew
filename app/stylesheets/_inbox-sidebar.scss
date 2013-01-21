@@ -18,7 +18,7 @@ ul.messages{
   li{
     position: relative;
   }
-  li.selected > div{
+  li.is-selected > div{
     i.icon-trash, i.icon-paperclip{
       right: 17px !IMPORTANT;
     }
@@ -78,7 +78,7 @@ ul.messages{
       }
     }
   }
-  li.active, li.active.read{
+  li.is-selected, li.is-selected.read{
     box-shadow: inset 0 3px 8px rgba(0, 0, 0, .05);
   }
   li.read{
@@ -86,12 +86,12 @@ ul.messages{
       color: $sidebar-read;
     }
   }
-  li.checked, li.read.checked{
+  li.is-checked, li.read.is-checked{
     font-weight: bold;
     color: $sidebar-read-checked;
   }
-  li.checked.active, li.checked.read.active{
+  li.is-checked.is-selected, li.is-checked.read.is-selected{
     font-weight: bold;
-    color: $sidebar-read-active;
+    color: $sidebar-read-selected;
   }
 }
