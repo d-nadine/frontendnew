@@ -176,6 +176,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           router.set 'inboxController.content', null
     pipeline: Em.Route.extend
       route: '/pipeline'
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('pipeline')
+        router.get('pipelineController').connectOutlet('status', 'pipelineStatus')
 
       status: Em.Route.extend
         route: '/:status'
@@ -184,5 +187,3 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
           { status: name }
 
         connectOutlets: (router, status) ->
-          debugger
-          router.get('applicationController').connectOutlet('pipeline')

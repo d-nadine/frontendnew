@@ -13,7 +13,7 @@ $pipeline-nav-first-bg: darken($pipeline-nav-fourth-bg, 15);
 $pipeline-nav-second-bg: darken($pipeline-nav-fourth-bg, 10);
 $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
 #pipeline{
-  div:first-child{
+  div:first-of-type{
     display: inline-block;
   }
   ul{
@@ -31,23 +31,23 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
         }
       }
     }
-    li:last-child{
+    > li:last-of-type{
       h4{
         a{
           color: $pipeline-nav-fourth
         }
       }
     }
-    > li:first-child:not(.current){
+    > li:first-of-type:not(.current){
       @include css-arrow(right, $arrow-height, $pipeline-nav-first-bg);
     }
-    > li:nth-child(2):not(.current){
+    > li:nth-of-type(2):not(.current){
       @include css-arrow(right, $arrow-height, $pipeline-nav-second-bg);
     }
-    > li:nth-child(3):not(.current){
+    > li:nth-of-type(3):not(.current){
       @include css-arrow(right, $arrow-height, $pipeline-nav-third-bg);
     }
-    > li:last-child:not(.current){
+    > li:last-of-type:not(.current){
       @include css-arrow(right, $arrow-height, $pipeline-nav-fourth-bg);
     }
     li.current{
@@ -57,7 +57,7 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
     li::before {
       top: 51% !IMPORTANT;
     }
-    li:not(:first-child){
+    li:not(:first-of-type){
       padding-left:  $arrow-height + 8px !IMPORTANT;
     }
     li:last-child{
