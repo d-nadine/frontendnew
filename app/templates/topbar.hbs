@@ -9,7 +9,14 @@
             <a {{action showMessages view.inboxFolderName href=true}} class="dropdown-toggle" title="Inbox">Inbox</a>
           </li>
           <li id="btn-pipeline" class="dropdown">
-            <a {{action showPipeline href=true}} class="dropdown-toggle" title="Pipeline">Pipeline</a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Pipeline<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              {{#each Radium.router.pipelineStatusController}}
+                <li><a {{action showPipeline this.name href=true }}>{{this.name}}</a></li>
+              {{/each}}
+            </ul>
           </li>
           <li id="btn-support">
             <a href="https://radium.flowdock.com/invitations/6d70fab64e2ff9222f15f60adb2e8d875ed72c61-support" title="Support">Support</a>
