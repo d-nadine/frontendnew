@@ -1,4 +1,4 @@
-@import "compass/utilities/lists/horizontal-list";
+@import "compass/typography/lists/horizontal-list";
 
 $pipeline-arrow-border: #fff;
 $pipeline-nav: $dark-background;
@@ -69,5 +69,13 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
   }
   div.status{
     display: inline-block;
+  }
+}
+
+#pipeline-results{
+  table{
+    td:first-of-type, th:first-of-type, td:last-of-type, th:last-of-type{
+      text-align: center;
+    }
   }
 }
