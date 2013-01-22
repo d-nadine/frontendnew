@@ -1,8 +1,8 @@
 <div class="pagination pull-right">
   <ul>
-    <li><a href="#">«</a></li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">»</a></li>
+    <li><a {{action showPreviousPage target="controller"}} href="#">«</a></li>
+    <li><a href="#">{{currentPage}}</a></li>
+    <li><a {{action showNextPage target="controller"}} href="#">»</a></li>
   </ul>
 </div>
 <table class="table table-striped table-bordered table-hover">

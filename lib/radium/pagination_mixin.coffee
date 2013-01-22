@@ -13,6 +13,49 @@ Radium.PaginationMixin = Ember.Mixin.create
       Ember.A(content.slice(0, currentLimit))
   ).property('content')
 
+  #FIXME: Should this go in a separate mixin
+  pagedContent: ( ->
+    currentPage = @get('currentPage')
+    contentLength = @get('content.length')
+    pageSize = @get('perPage')
+    start = @get('pageStart')
+
+    end = (start + pageSize)
+
+    if end > contentLength
+      end = contentLength
+      @set 'currentPage', @get('currentPage') - 1
+
+    @get('content').slice(start, end)
+  ).property('currentPage')
+
+  showPreviousPage: ->
+    return if @get('currentPage') <= 1
+
+    @set 'currentPage', @get('currentPage') - 1
+
+  pageStart: ( ->
+    currentPage = @get('currentPage')
+    pageSize = @get('perPage')
+    start = @getPageStart(currentPage)
+  ).property('currentPage')
+
+  canPageForward: ( ->
+    currentPage = @get('currentPage') + 1
+    pageSize = @get('perPage')
+    start = @getPageStart(currentPage)
+
+    end = (start + pageSize)
+    (end < @get('content.length'))
+  ).property('currentPage')
+
+  getPageStart: (startIndex) ->
+    pageSize = @get('perPage')
+    ((((startIndex - 1) * pageSize) + 1) - 1)
+
+  showNextPage: ->
+    @set('currentPage', @get('currentPage') + 1) if @get('canPageForward')
+
   showMore: ->
     currentLimit  = @get 'currentLimit'
     contentLength = @get 'arrangedContent.length'

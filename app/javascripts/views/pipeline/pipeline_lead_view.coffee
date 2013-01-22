@@ -1,6 +1,6 @@
 Radium.PipelineLeadView = Em.View.extend
   templateName: 'radium/pipeline/pipeline_lead'
-  contentBinding: 'controller.limitedContent'
+  contentBinding: 'controller.pagedContent'
   checkMailItem: Em.Checkbox.extend
     contentBinding: Ember.Binding.oneWay 'parentView.content'
     checkedBinding: 'content.isChecked'
