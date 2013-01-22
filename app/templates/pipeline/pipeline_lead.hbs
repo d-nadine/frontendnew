@@ -20,7 +20,11 @@
             {{avatarImg lead}}
             <a {{action showContact this href=true}}>{{unbound displayName}}</a>
           </td>
-          <td>Michael Bolton</td>
+          <td>
+            {{#if user}}
+              <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
+            {{/if}}
+          </td>
           <td>3 days</td>
           <td>Email Quote Tomorrow</td>
           <td>

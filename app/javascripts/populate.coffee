@@ -173,8 +173,7 @@ class Populator
         status: status
 
       if user =  users[ (3).randomize()]
-        hash['user'] =
-          user: -> user
+        hash.user = -> user
 
       Factory.create 'contact',
         hash
