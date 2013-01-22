@@ -32,13 +32,11 @@ Radium.PaginationMixin = Ember.Mixin.create
 
   pageStart: ( ->
     currentPage = @get('currentPage')
-    pageSize = @get('perPage')
     start = @getPageStart(currentPage)
   ).property('currentPage')
 
   canPageForward: ( ->
     currentPage = @get('currentPage') + 1
-    pageSize = @get('perPage')
     start = @getPageStart(currentPage) + 1
     contentLength = @get('content.length')
 
