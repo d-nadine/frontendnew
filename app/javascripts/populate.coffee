@@ -176,8 +176,6 @@ class Populator
         hash['user'] =
           user: -> user
 
-      console.log hash.user
-
       Factory.create 'contact',
         hash
 
