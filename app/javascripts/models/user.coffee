@@ -7,3 +7,4 @@ Radium.User = Radium.Person.extend
   ).property('name')
   email: DS.attr('string')
   phone: DS.attr('string')
+  contacts: DS.hasMany('Radium.Contact')

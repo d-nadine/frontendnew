@@ -1,3 +1,7 @@
+#FIXME: Move into lib?
+Number::randomize = ->
+  Math.floor(Math.random() * this)
+
 class Populator
   @run: ->
     aaron = Factory.create 'user'
@@ -157,6 +161,25 @@ class Populator
       reference:
         id: -> retrospection
         type: 'meeting'
+
+    [0..50].forEach (num) ->
+      users = [aaron, jerry]
+      tasks = [emailTodo, todo]
+      statuses = ['lead','negotiating','closed','lost']
+
+      status = statuses[(4).randomize()]
+
+      hash =
+        status: status
+
+      if user =  users[ (3).randomize()]
+        hash['user'] =
+          user: -> user
+
+      console.log hash.user
+
+      Factory.create 'contact',
+        hash
 
     feeds = []
 
