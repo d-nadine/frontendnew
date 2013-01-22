@@ -1,5 +1,5 @@
-Radium.PipelineLeadsView = Em.View.extend
-  templateName: 'radium/pipeline/pipeline_leads'
+Radium.PipelineLeadView = Em.View.extend
+  templateName: 'radium/pipeline/pipeline_lead'
   checkMailItem: Em.Checkbox.extend
     contentBinding: Ember.Binding.oneWay 'parentView.content'
     checkedBinding: 'content.isChecked'
