@@ -1,13 +1,15 @@
 <div>
   <ul id="status">
-    {{#each controller}}
-    <li {{bindAttr class="isCurrent:current"}}>
-      <h4>
-        <a {{action showPipeline name href=true }}>
-          {{unbound label}} (3)
-        </a>
-      </h4>
-    </li>
+    {{#each status in controller.statuses}}
+      {{#with status}}
+        <li {{bindAttr class="isCurrent:current"}}>
+          <h4>
+            <a {{action showPipeline name href=true }}>
+              {{unbound label}} ({{leadTotal name}})
+            </a>
+          </h4>
+        </li>
+      {{/with}}
     {{/each}}
   </ul>
 </div>

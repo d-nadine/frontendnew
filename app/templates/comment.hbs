@@ -1,7 +1,7 @@
 {{#with view.comment}}
   {{#with user}}
     <a {{action showUser this href=true}} class="avatar">
-      <img {{bindAttr src="avatar.small_url"}} class="avatar">
+      {{avatarImg user}}
     </a>
   {{/with}}
 

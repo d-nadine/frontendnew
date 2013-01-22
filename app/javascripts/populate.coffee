@@ -12,9 +12,11 @@ class Populator
 
     ralph = Factory.create 'contact',
       display_name: 'Ralph'
+      status: 'lead'
 
     john = Factory.create 'contact'
       display_name: 'John'
+      status: 'lead'
 
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'

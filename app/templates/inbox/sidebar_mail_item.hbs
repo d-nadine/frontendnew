@@ -1,12 +1,7 @@
 {{#with view.content}}
 <div {{action selectContent this}}>
   <div>
-    {{!TODO create handlebars helper for this?}}
-    {{#if sender.avatar.small_url}}
-      <img {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
-    {{else}}
-      <img src="/images/fallback/small_default.png">
-    {{/if}}
+    {{avatarImg sender}}
     {{view view.checkMailItem}}
   </div>
   <div>

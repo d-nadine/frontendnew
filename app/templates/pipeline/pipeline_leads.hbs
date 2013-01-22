@@ -1,0 +1,21 @@
+<div>
+  <table class="table table-striped table-bordered dataTable">
+    <thead>
+    <tr>
+      <th>Header</th>
+    </tr>
+    </thead>
+    <tbody>
+      {{#each lead in controller}}
+        {{#with lead}}
+          <tr>
+            <td>
+              {{avatarImg lead}}
+            </td>
+          </tr>
+        {{/with}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+

@@ -13,7 +13,7 @@
               Pipeline<b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              {{#each Radium.router.pipelineStatusController}}
+              {{#each Radium.router.pipelineStatusController.statuses}}
                 <li><a {{action showPipeline this.name href=true }}>{{unbound this.name}}</a></li>
               {{/each}}
             </ul>

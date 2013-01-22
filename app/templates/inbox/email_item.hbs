@@ -1,12 +1,7 @@
 {{#with view.content}}
 <div class="block">
   <div class="page-header">
-    {{#if sender.avatar.small_url}}
-      <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
-    {{else}} 
-      <img class="avatar" src="/images/fallback/small_default.png">
-    {{/if}}
-
+    {{avatarImg sender}}
     <h2>{{unbound subject}}</h2>
   </div>
 

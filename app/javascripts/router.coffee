@@ -177,9 +177,12 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     pipeline: Em.Route.extend
       route: '/pipeline'
       connectOutlets: (router) ->
+        contacts = Radium.Contact.find()
+        router.set('pipelineStatusController.content', contacts)
+        router.get('pipelineController').connectControllers('pipelineStatus')
+
         router.get('applicationController').connectOutlet('pipeline')
         router.get('pipelineController').connectOutlet('status', 'pipelineStatus')
-
       status: Em.Route.extend
         route: '/:status'
 
@@ -188,3 +191,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
         connectOutlets: (router, status) ->
           router.set('pipelineStatusController.status', status)
+          router.get('pipelineController').connectOutlet
+            outletName: 'leads'
+            viewClass: Radium["Pipeline#{status.capitalize()}View"]
+            controller: @get('pipelineController')
