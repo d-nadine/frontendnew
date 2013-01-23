@@ -1,4 +1,4 @@
-Ember.Handlebars.registerHelper 'avatarImg', (property, options) ->
+Ember.Handlebars.registerHelper 'avatar', (property, options) ->
   defaultSrc = '/images/fallback/small_default.png'
 
   src = if value = Ember.get(this, 'avatar')

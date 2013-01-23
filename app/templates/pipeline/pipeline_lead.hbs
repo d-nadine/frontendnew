@@ -17,12 +17,12 @@
             {{view view.checkLead contentBinding="lead"}}
           </td>
           <td>
-            {{avatarImg lead}}
+            {{avatar lead}}
             <a {{action showContact this href=true}}>{{unbound displayName}}</a>
           </td>
           <td>
             {{#if user}}
-              {{avatarImg user}}
+              {{avatar user}}
               <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
             {{/if}}
           </td>
