@@ -5,5 +5,13 @@
   </div>
 </div>
 <div id="pipeline-results">
+  <div class="pagination pull-right">
+    {{view Radium.PagerView}}
+  </div>
+  {{#if checkedContent.length}}
+    <div id="form-wdiget" class="block">
+      {{view view.FormWidget selectionBinding="checkedContent"}}
+    </div>
+  {{/if}}
   {{outlet leads}}
 </div>
