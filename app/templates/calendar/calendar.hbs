@@ -1,0 +1,27 @@
+<button class="btn" {{action showCalendar lastMonth href="true"}}>Last Month</button>
+<button class="btn" {{action showCalendar nextMonth href="true"}}>Next Month</button>
+<table class="calendar">
+  <colgroup class="weekdays">
+    <col class="monday" />
+    <col class="tuesday" />
+    <col class="wednesday" />
+    <col class="thrusday" />
+    <col class="friday" />
+  </colgroup>
+  <colgroup class="weekend">
+    <col class="saturday" />
+    <col class="sunday" />
+  </colgroup>
+
+  <thead>
+    {{#each dayNames tagName="tr"}}
+      <th>{{this}}</th>
+    {{/each}}
+  </thead>
+
+  {{#each weeks tagName="tbody"}}
+    {{#each this tagName="tr"}}
+      <td {{bindAttr class="isDifferentMonth"}}>{{formattedDate}}</td>
+    {{/each}}
+  {{/each}}
+</table>

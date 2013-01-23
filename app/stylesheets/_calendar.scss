@@ -1,0 +1,15 @@
+.calendar {
+  width: 100%;
+  border-spacing: 4px;
+  border-collapse: separate;
+
+  td {
+    border: solid 1px $dark-background;
+    background-color: $bright;
+  }
+
+  .is-different-month {
+    background-color: $dark-background;
+    border-color: darken($dark-background, 15);
+  }
+}
