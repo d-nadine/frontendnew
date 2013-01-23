@@ -11,3 +11,13 @@ Radium.PipelineTableController = Em.ArrayController.extend Radium.PaginationMixi
     @get('checkedContent').setEach('isChecked', false)
 
     Radium.Utils.notify 'Leads deleted'
+
+  deleteLead: (event) ->
+    lead = event.context
+    # FIXME: ember-data errors, fake for now
+    # lead.deleteRecord()
+    # @get('store').commit()
+
+    lead.set 'isChecked', false
+    Radium.Utils.notify "lead deleted."
+
