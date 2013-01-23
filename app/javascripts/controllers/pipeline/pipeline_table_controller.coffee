@@ -8,7 +8,7 @@ Radium.PipelineTableController = Em.ArrayController.extend Radium.PaginationMixi
     #   contact.deleteRecord()
 
     # @get('store').commit()
-    @get('checkedContent').setEach('isChecked', false)
+    @get('content').setEach('isChecked', false)
 
     Radium.Utils.notify 'Leads deleted'
 
