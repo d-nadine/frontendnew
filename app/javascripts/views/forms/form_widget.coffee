@@ -13,7 +13,7 @@ Radium.FormWidgetView = Em.View.extend
      action: "call"
      label: "Call"
   ]
-
+  additionalText: ""
   init: ->
     @_super.apply this, arguments
     @get('buttons').forEach (btn) -> btn.set('closed', true)

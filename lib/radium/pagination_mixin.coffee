@@ -23,7 +23,7 @@ Radium.PaginationMixin = Ember.Mixin.create
     end = (start + pageSize)
 
     @get('content').slice(start, end)
-  ).property('currentPage')
+  ).property('currentPage', 'content', 'content.length')
 
   showPreviousPage: ->
     return if @get('currentPage') <= 1
@@ -33,7 +33,7 @@ Radium.PaginationMixin = Ember.Mixin.create
   pageStart: ( ->
     currentPage = @get('currentPage')
     start = @getPageStart(currentPage)
-  ).property('currentPage')
+  ).property('currentPage', 'content', 'content.length')
 
   canPageForward: ( ->
     currentPage = @get('currentPage') + 1
@@ -41,7 +41,7 @@ Radium.PaginationMixin = Ember.Mixin.create
     contentLength = @get('content.length')
 
     (start <= contentLength)
-  ).property('currentPage')
+  ).property('currentPage', 'content', 'content.length')
 
   getPageStart: (startIndex) ->
     pageSize = @get('perPage')

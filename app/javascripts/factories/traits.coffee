@@ -1,6 +1,6 @@
 Factory.trait 'timestamps',
-  created_at: -> Ember.DateTime.create().advance(days: -2).toFullFormat()
-  updated_at: -> Ember.DateTime.create().advance(days: -1).toFullFormat()
+  created_at: -> Ember.DateTime.create().advance(day: -2).toFullFormat()
+  updated_at: -> Ember.DateTime.create().advance(day: -1).toFullFormat()
 
 Factory.trait 'avatar',
   avatar:

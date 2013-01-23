@@ -1,4 +1,4 @@
-Radium.PipelineController = Em.ArrayController.extend Radium.CheckableMixin,
+Radium.PipelineController = Em.ArrayController.extend
   content: ( ->
     status = @get('pipelineStatusController.status')
     return unless status
