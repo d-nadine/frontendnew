@@ -3,10 +3,17 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
   user: DS.belongsTo('Radium.User')
   todos: DS.hasMany('Radium.Todo')
   meetings: DS.hasMany('Radium.Meeting')
+  deals: DS.hasMany('Radium.Deal')
 
   displayName: (->
     @get('name') || @get('email') || @get('phoneNumber')
   ).property('name', 'email', 'phoneNumber')
+
+  latestDeal: ( ->
+    #FIXME: Is it safe to assume that
+    #deals will be ordered on the server?
+    @get('deals.firstObject')
+  ).property('deals')
 
   nextTask: ( ->
     todos = @get('todos')
@@ -42,8 +49,7 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
 
   isExpired: ( ->
     #FIXME: Arbitary cut off point
-    debugger
-    @get('daysSinceCreation') > 25
+    @get('daysSinceCreation') > 60
   ).property('createdAt')
 
 

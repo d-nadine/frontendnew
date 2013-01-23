@@ -183,6 +183,14 @@ class Populator
 
       hash.created_at = -> Ember.DateTime.create().advance(day: -(200).randomize()).toFullFormat()
 
+      user: -> aaron
+
+      hash.deals = -> [
+                      Factory.create 'deal',
+                        user: -> aaron
+                        value: -> (10000).randomize()
+                      ]
+
       Factory.create 'contact',
         hash
 

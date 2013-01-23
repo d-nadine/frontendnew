@@ -2,6 +2,7 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   name: DS.attr('string')
   description: DS.attr('string')
   closeBy: DS.attr('datetime')
+  value: DS.attr('number')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'deal')
 
