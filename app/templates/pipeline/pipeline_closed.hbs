@@ -1,1 +1,44 @@
-closed = {{controller.length}}
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>Lead</th>
+    <th>Assigned To</th>
+    <th>Value</th>
+    <th>Q1 - Q4</th>
+    <th>Age of Lead</th>
+    <th>Next Task</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+    {{#each lead in view.content}}
+      {{#with lead}}
+        <tr {{bindAttr class="isChecked:success"}}>
+          <td>
+            {{view view.checkLead contentBinding="lead"}}
+          </td>
+          <td>
+            {{avatarImg lead}}
+            <a {{action showContact this href=true}}>{{unbound displayName}}</a>
+          </td>
+          <td>
+            {{#if user}}
+              {{avatarImg user}}
+              <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
+            {{/if}}
+          </td>
+          <td>$2,500.00</td>
+          <td>&nbsp;</td>
+          <td>{{daysSinceText}}</td>
+          <td>Email Quote Tomorrow</td>
+          <td>
+            <a {{action deleteLead this target="controller"}}>
+              <i class="icon-trash"></i>
+            </a>
+          </td>
+        </tr>
+      {{/with}}
+    {{/each}}
+  </tbody>
+</table>

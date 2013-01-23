@@ -1,2 +1,2 @@
-Radium.PipelineNegotiatingView = Em.View.extend
+Radium.PipelineNegotiatingView = Radium.PipelineTableBaseView.extend
   templateName: 'radium/pipeline/pipeline_nogotiating'

@@ -1,2 +1,2 @@
-Radium.PipelineLostView = Em.View.extend
+Radium.PipelineLostView = Radium.PipelineTableBaseView.extend
   templateName: 'radium/pipeline/pipeline_lost'
