@@ -40,6 +40,13 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
     Ember.DateTime.differenceInDays(today, createdAt)
   ).property('created_at')
 
+  isExpired: ( ->
+    #FIXME: Arbitary cut off point
+    debugger
+    @get('daysSinceCreation') > 25
+  ).property('createdAt')
+
+
   daysSinceText: ( ->
     daysSinceCreation = @get('daysSinceCreation')
 

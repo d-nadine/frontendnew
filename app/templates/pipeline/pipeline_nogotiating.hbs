@@ -28,7 +28,9 @@
             {{/if}}
           </td>
           <td>$2,500.00</td>
-          <td>{{daysSinceText}}</td>
+          <td {{bindAttr class="isExpired"}}>
+            {{daysSinceText}}
+          </td>
           <td>
             {{#if nextTaskText}}
               {{nextTaskText}}

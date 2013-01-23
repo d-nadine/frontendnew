@@ -26,7 +26,9 @@
               <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
             {{/if}}
           </td>
-          <td>{{daysSinceText}}</td>
+          <td {{bindAttr class="isExpired"}}>
+            {{daysSinceText}}
+          </td>
           <td>
             {{#if nextTaskText}}
               {{nextTaskText}}
