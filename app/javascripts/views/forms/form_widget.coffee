@@ -2,19 +2,20 @@ require 'radium/controllers/todo_form_controller'
 
 Radium.FormWidgetView = Em.View.extend
   templateName: 'radium/forms/form_widget'
-  buttons: [
-    Ember.Object.create
-     action: "todo"
-     label: "Todo"
-    Ember.Object.create
-     action: "meeting"
-     label: "Meeting"
-    Ember.Object.create
-     action: "call"
-     label: "Call"
-  ]
+  buttons: []
   additionalText: ""
   init: ->
+    @get('buttons').pushObjects [
+      Ember.Object.create
+       action: "todo"
+       label: "Todo"
+      Ember.Object.create
+       action: "meeting"
+       label: "Meeting"
+      Ember.Object.create
+       action: "call"
+       label: "Call"
+    ]
     @_super.apply this, arguments
     @get('buttons').forEach (btn) -> btn.set('closed', true)
 
@@ -78,3 +79,7 @@ Radium.FormWidgetView = Em.View.extend
   todoController: (->
     Radium.TodoFormController.extend()
   ).property()
+
+  destroy: ->
+    @get('buttons').clear()
+    @_super.apply this, arguments

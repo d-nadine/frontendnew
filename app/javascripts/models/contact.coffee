@@ -1,6 +1,7 @@
 Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
   status: DS.attr("string")
   user: DS.belongsTo('Radium.User')
+  todos: DS.hasMany('Radium.Todo')
 
   displayName: (->
     @get('name') || @get('email') || @get('phoneNumber')

@@ -14,12 +14,12 @@ Radium.Utils =
             </div>
             """)
 
-    $('#main-panel > div > div').append(notification)
+    $('#main-panel').append(notification)
 
     notification.fadeIn('fast', ( ->
       setTimeout(( ->
         notification.fadeOut('fast', ->
-          notification.remove() if notification
+          $('#alerts').remove()
         )
       ), 1000)
     ))

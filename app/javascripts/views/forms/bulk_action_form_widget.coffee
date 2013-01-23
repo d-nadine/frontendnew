@@ -18,8 +18,3 @@ Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
   todoController: ( ->
     Radium.BulkTodoFormController.extend()
   ).property()
-
-  destroy: ->
-    buttons = @get('buttons')
-    buttons.removeObject buttons.get('firstObject')
-    @_super.apply this, arguments
