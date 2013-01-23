@@ -175,6 +175,12 @@ class Populator
       if user =  users[ (3).randomize()]
         hash.user = -> user
 
+      switch (3).randomize()
+        when 0
+          hash.todos = -> [todo]
+        when 1
+          hash.meetings = -> [retrospection]
+
       hash.created_at = -> Ember.DateTime.create().advance(day: -(200).randomize()).toFullFormat()
 
       Factory.create 'contact',

@@ -27,7 +27,13 @@
             {{/if}}
           </td>
           <td>{{daysSinceText}}</td>
-          <td>Email Quote Tomorrow</td>
+          <td>
+            {{#if nextTaskText}}
+              {{nextTaskText}}
+            {{else}}
+              <i class="icon-warning-sign"></i>
+            {{/if}}
+          </td>
           <td>
             <a {{action deleteLead this target="controller"}}>
               <i class="icon-trash"></i>
