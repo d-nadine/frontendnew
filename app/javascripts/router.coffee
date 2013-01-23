@@ -181,8 +181,20 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         router.set('pipelineStatusController.content', contacts)
         router.get('pipelineController').connectControllers('pipelineStatus')
 
+        router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
+        router.get('drawerPanelController').connectOutlet
+          outletName: 'buttons'
+          viewClass: Radium.PipelineDrawerButtonsView
+          controller: Radium.get('router.pipelineController')
+
         router.get('applicationController').connectOutlet('pipeline')
         router.get('pipelineController').connectOutlet('status', 'pipelineStatus')
+      exit: (router) ->
+        router.get('drawerPanelController').disconnectOutlet()
+        router.get('drawerPanelController').disconnectOutlet 'buttons'
+
+        router.get('applicationController').disconnectOutlet()
+
       status: Em.Route.extend
         route: '/:status'
 
