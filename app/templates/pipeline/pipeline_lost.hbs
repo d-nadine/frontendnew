@@ -27,9 +27,9 @@
               <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
             {{/if}}
           </td>
-          <td>$2,500.00</td>
-          <td>Reason</td>
-          <td>Lost During</td>
+          <td>{{currency latestDeal.value}}</td>
+          <td>{{latestDeal.reason}}</td>
+          <td>{{latestDeal.state}}</td>
           <td>
             <a {{action deleteLead this target="controller"}}>
               <i class="icon-trash"></i>

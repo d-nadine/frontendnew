@@ -185,10 +185,14 @@ class Populator
 
       user: -> aaron
 
+      dealStates = ['pending', 'closed', 'rejected', 'paid']
+
       hash.deals = -> [
                       Factory.create 'deal',
                         user: -> aaron
                         value: -> (10000).randomize()
+                        reason: "something happened"
+                        state: -> dealStates[(3).randomize()]
                       ]
 
       Factory.create 'contact',
