@@ -1,9 +1,5 @@
 <div class="pagination pull-right">
-  <ul>
-    <li><a {{action showPreviousPage target="controller"}} href="#">«</a></li>
-    <li><a href="#">{{currentPage}}</a></li>
-    <li><a {{action showNextPage target="controller"}} href="#">»</a></li>
-  </ul>
+  {{view Radium.PagerView}}
 </div>
 {{#if checkedContent.length}}
   <div id="form-wdiget" class="block">
