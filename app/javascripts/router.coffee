@@ -198,6 +198,9 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       status: Em.Route.extend
         route: '/:status'
 
+        exit: (router) ->
+          router.set('pipelineController.currentPage', 1)
+
         serialize: (router, name) ->
           { status: name }
 
