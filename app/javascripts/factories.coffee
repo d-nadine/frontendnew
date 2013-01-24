@@ -22,12 +22,11 @@ Foundry.RadiumAdapter = RadiumAdapter
 foundry = new Foundry
 foundry.adapter = new RadiumAdapter
 
-Ember.Application.registerInjection
-  name: 'foundry'
-  after: 'store'
-  injection: (app, router, property) ->
-    if property == 'router'
-      Factory.adapter.store = app.get 'router.store'
+# Ember.Application.initializer
+#   name: 'foundry'
+#   after: 'store'
+#   initialize: (container, application) ->
+#       Factory.adapter.store = app.get 'store'
 
 window.Factory = foundry
 

@@ -1,5 +1,5 @@
 require 'radium/adapters/fixture_adapter'
 
 Radium.Store = DS.Store.extend
-  revision: 9
+  revision: 11
   adapter: Radium.FixtureAdapter

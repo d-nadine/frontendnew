@@ -1,16 +1,6 @@
 Radium = Em.Application.create
   autoinit: false
   rootElement: '#application'
-  ready: ->
-    @_super()
-    # FIXME: Stub out authentication
-    @set 'router.currentUser', Radium.User.find(1)
-
-  didBecomeCompletelyReady: Ember.K
-  didBecomeReady: ->
-    @_super.apply @, arguments
-
-    @didBecomeCompletelyReady()
 
 window.Radium = Radium
 
