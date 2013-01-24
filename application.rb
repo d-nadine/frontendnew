@@ -37,6 +37,4 @@ class Radium < Iridium::Application
 
   # Add our API key to every API request going through the proxy
   config.middleware.add_header 'X-Radium-Developer-API-Key', '26233b7b68290c7c7d4eec03643d0cf3e9b88ba8', :url => /^\/api/
-
-  config.handlebars.namespace = "radium"
 end

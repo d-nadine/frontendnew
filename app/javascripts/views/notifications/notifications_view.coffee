@@ -1,7 +1,6 @@
 require 'radium/views/drawer_view'
 
 Radium.NotificationsView = Radium.DrawerView.extend
-  templateName: 'radium/notifications'
   contentBinding: 'controller'
 
   remindersBinding: 'controller.reminders'

@@ -6,10 +6,6 @@ Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
     reminders + @get('length')
   ).property('reminders.length', 'length')
 
-  toggleNotifications: (event) ->
-    @toggleProperty 'isVisible'
-    false
-
   dismiss: (event) ->
     item = event.view.content
     @destroyItem item

@@ -1,9 +1,3 @@
-Radium = Em.Application.create
-  autoinit: false
-  rootElement: '#application'
-
-window.Radium = Radium
-
 # First off, require all the custom additions and code
 # we need to be available globally
 require 'ember/datetime'
@@ -11,6 +5,12 @@ require 'string/inflector'
 
 require 'foundry'
 require 'ember/filterable_mixin'
+
+Radium = Em.Application.create
+  autoinit: false
+  rootElement: '#application'
+
+window.Radium = Radium
 
 require 'radium/run_when_loaded_mixin'
 

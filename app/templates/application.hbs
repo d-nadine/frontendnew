@@ -1,4 +1,32 @@
-{{outlet topbar}}
+<div id="topbar" role="header" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="fill">
+    <div class="navbar-inner">
+      <div id="navbar-container" class="container">
+        {{#linkTo "dashboard" class="brand"}}
+          <img src="/images/logo.png" alt="::radium">
+        {{/linkTo}}
 
+        <ul id="main-nav" class="nav">
+          <li id="btn-dashboard">
+            {{#linkTo "dashboard"}}Dashboard{{/linkTo}}
+          </li>
+
+          <li id="btn-inbox" class="dropdown">
+            {{#linkTo "messages"}}Inbox{{/linkTo}}
+          </li>
+          <li id="btn-support">
+            <a href="https://radium.flowdock.com/invitations/6d70fab64e2ff9222f15f60adb2e8d875ed72c61-support" title="Support">Support</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="drawer-panel">
 {{outlet drawerPanel}}
+</section>
+
+<section id="main">
 {{outlet}}
+</section>
