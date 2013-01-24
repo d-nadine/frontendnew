@@ -1,6 +1,6 @@
-Ember.DateTime.reopenClass
-  differenceInDays: (a, b) ->
-    timeDiff = a.get('_ms') - b.get('_ms')
+Ember.DateTime.reopen
+  differenceInDays: (other) ->
+    timeDiff = other.get('_ms') - @get('_ms')
     Math.ceil(timeDiff / (1000 * 3600 * 24))
 
   isToday: (date) ->

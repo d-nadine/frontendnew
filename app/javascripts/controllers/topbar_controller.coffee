@@ -1,1 +1,2 @@
-Radium.TobbarController = Em.Controller.extend()
+Radium.TopbarController = Em.Controller.extend
+  pipelineStatusesBinding: 'pipelineStatusController.statuses'

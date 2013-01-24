@@ -1,4 +1,4 @@
-#FIXME: use registerBoundHelper after upgraded
+# FIXME: use registerBoundHelper after upgraded
 Ember.Handlebars.registerHelper 'currency', (property, options) ->
   value = Ember.get(this, property)
   return if !value

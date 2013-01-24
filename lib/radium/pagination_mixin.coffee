@@ -13,7 +13,7 @@ Radium.PaginationMixin = Ember.Mixin.create
       Ember.A(content.slice(0, currentLimit))
   ).property('content')
 
-  #FIXME: Should this go in a separate mixin
+  # FIXME: Should this go in a separate mixin
   pagedContent: ( ->
     currentPage = @get('currentPage')
     contentLength = @get('content.length')

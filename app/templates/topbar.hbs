@@ -13,7 +13,7 @@
               Pipeline<b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              {{#each view.pipelineStatuses}}
+              {{#each pipelineStatuses}}
                 <li><a {{action showPipeline this.name href=true }}>{{unbound this.name}}</a></li>
               {{/each}}
             </ul>

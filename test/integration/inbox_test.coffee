@@ -80,7 +80,7 @@ integrationTest 'a todo can be created for each selected email', ->
 
       click $F('.save-todo')
 
-      #FIXME better assertion needed.  Store is undefined at this point
+      # FIXME better assertion needed.  Store is undefined at this point
       waitForSelector '.alert-success', (el) ->
         assertText el, 'created'
 

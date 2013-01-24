@@ -84,7 +84,8 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
       connectOutlets: (router) ->
         router.set 'usersController.content', Radium.User.find()
 
-        router.get('applicationController').connectOutlet 'topbar', 'topbar' 
+        router.get('applicationController').connectOutlet 'topbar', 'topbar'
+        router.get('topbarController').connectControllers('pipelineStatus')
 
         router.get('notificationsController').set('content', Radium.Notification.find())
         router.get('notificationsController').set('reminders', Radium.Reminder.find())
@@ -182,13 +183,12 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         router.get('pipelineController').connectControllers('pipelineStatus')
 
         router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
-        router.get('drawerPanelController').connectOutlet
-          outletName: 'buttons'
-          viewClass: Radium.PipelineDrawerButtonsView
-          controller: Radium.get('router.pipelineController')
+        router.get('drawerPanelController').connectOutlet 'buttons', 'pipelineDrawerButtons'
 
         router.get('applicationController').connectOutlet('pipeline')
         router.get('pipelineController').connectOutlet('status', 'pipelineStatus')
+
+        router.get('pipelineDrawerButtonsController').connectControllers 'pipeline', 'drawerPanel'
       exit: (router) ->
         router.get('drawerPanelController').disconnectOutlet()
         router.get('drawerPanelController').disconnectOutlet 'buttons'
@@ -207,6 +207,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         connectOutlets: (router, status) ->
           router.set('pipelineStatusController.status', status)
           router.get('pipelineController').connectOutlet
-            outletName: 'leads'
+            outletName: 'table'
             viewClass: Radium["Pipeline#{status.capitalize()}View"]
             controller: Radium.get('router.pipelineController')

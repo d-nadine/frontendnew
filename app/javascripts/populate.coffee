@@ -1,4 +1,4 @@
-#FIXME: Move into lib?
+# FIXME: Move into lib?
 Number::randomize = ->
   Math.floor(Math.random() * this)
 

@@ -10,7 +10,7 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
   ).property('name', 'email', 'phoneNumber')
 
   latestDeal: ( ->
-    #FIXME: Is it safe to assume that
+    # FIXME: Is it safe to assume that
     #deals will be ordered on the server?
     @get('deals.firstObject')
   ).property('deals')
@@ -44,11 +44,11 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
     today = Ember.DateTime.create()
     createdAt = @get('createdAt')
 
-    Ember.DateTime.differenceInDays(today, createdAt)
-  ).property('created_at')
+    createdAt.differenceInDays(today)
+  ).property('createdAt')
 
   isExpired: ( ->
-    #FIXME: Arbitary cut off point
+    # FIXME: Arbitary cut off point
     @get('daysSinceCreation') > 60
   ).property('createdAt')
 
