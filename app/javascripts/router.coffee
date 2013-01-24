@@ -1,25 +1,4 @@
-# Normalize arguments. Supported arguments:
-#
-# name
-# name, context
-# outletName, name
-# outletName, name, context
-# options
-#
-# The options hash has the following keys:
-#
-#   name: the name of the controller and view
-#     to use. If this is passed, the name
-#     determines the view and controller.
-#   outletName: the name of the outlet to
-#     fill in. default: 'view'
-#   viewClass: the class of the view to instantiate
-#   controller: the controller instance to pass
-#     to the view
-#   context: an object that should become the
-#     controller's `content` and thus the
-#     template's context.
-Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
+Radium.Router = Ember.Router.extend
   location: 'none'
   enableLogging: true
   initialState: 'loading'
