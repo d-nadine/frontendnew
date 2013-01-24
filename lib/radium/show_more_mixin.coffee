@@ -13,9 +13,6 @@ Radium.ShowMoreMixin = Ember.Mixin.create
       Ember.A(content.slice(0, currentLimit))
   ).property('content')
 
-  showNextPage: ->
-    @set('currentPage', @get('currentPage') + 1) if @get('canPageForward')
-
   showMore: ->
     currentLimit  = @get 'currentLimit'
     contentLength = @get 'arrangedContent.length'
