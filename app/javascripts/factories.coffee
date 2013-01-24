@@ -8,7 +8,6 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'contact', Radium.Contact
     @map.set 'deal', Radium.Deal
     @map.set 'email', Radium.Email
-    @map.set 'feed_section', Radium.FeedSection
     @map.set 'group', Radium.Group
     @map.set 'meeting', Radium.Meeting
     @map.set 'notification', Radium.Notification

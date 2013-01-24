@@ -16,7 +16,6 @@ Radium.NotificationsView = Radium.DrawerView.extend
       templateName: 'radium/notifications/reminder'
       layoutName: 'radium/layouts/notification_panel_item'
       referenceBinding: 'content.reference'
-      dateBinding: 'reference.feedDate'
 
       dataReminderId: (->
         @get('content.id')

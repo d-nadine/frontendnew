@@ -41,7 +41,6 @@ require 'radium/selectable_mixin'
 
 requireAll /radium\/controllers/
 
-require 'radium/feed'
 
 require /radium\/helpers/
 

@@ -22,10 +22,6 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
     @get('state') is 'rejected'
   ).property('state')
 
-  feedDate: (->
-    @get('closeBy')
-  ).property('closeBy')
-
   isOverdue: (->
     d = new Date().getTime()
     closeBy = new Date(@get('closeBy')).getTime()

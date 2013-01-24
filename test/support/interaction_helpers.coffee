@@ -30,16 +30,6 @@ window.fillInAndPressEnter = (selector, text) ->
   fillIn(selector, text)
   pressEnter(selector)
 
-window.clickFilter = (feedType, callback) ->
-  waitForSelector ".main-filter-item.#{feedType} a", (el) ->
-    app ->
-      click el
-
-    callback()
-
-window.clickFeedItem = (feedItem) ->
-  $F(feedItem).find('.feed-header').click()
-
 window.openNotifications = (callback) ->
   click '.notifications-link'
   waitForSelector "#notifications", callback

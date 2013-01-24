@@ -9,5 +9,3 @@ Radium.Meeting = Radium.Core.extend Radium.CommentsMixin,
   cancelled: DS.attr('boolean')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'meeting')
-
-  feedDate: (-> @get 'startsAt' ).property('startsAt')

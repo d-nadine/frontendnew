@@ -45,20 +45,10 @@ integrationTest 'deal assignment notifications', ->
       type: 'deal'
     tag: 'assigned.deal'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject deal
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, deal.get('name')
-
-    clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'group assignment notifications', ->
   group = Factory.create 'group'
@@ -88,20 +78,12 @@ integrationTest 'todo assignments appear', ->
       type: 'todo'
     tag: 'assigned.todo'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject todo
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest  'meeting invitation notifications', ->
   meeting = Factory.create 'meeting'
@@ -112,20 +94,12 @@ integrationTest  'meeting invitation notifications', ->
       type: 'meeting'
     tag: 'invited.meeting'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject meeting
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'cancelled meeting notifications', ->
   meeting = Factory.create 'meeting'
@@ -136,20 +110,12 @@ integrationTest 'cancelled meeting notifications', ->
       type: 'meeting'
     tag: 'cancelled.meeting'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject meeting
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'confirmed meeting notifications', ->
   meeting = Factory.create 'meeting'
@@ -160,20 +126,12 @@ integrationTest 'confirmed meeting notifications', ->
       type: 'meeting'
     tag: 'confirmed.meeting'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject meeting
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'rejected meeting notifications', ->
   meeting = Factory.create 'meeting'
@@ -184,20 +142,12 @@ integrationTest 'rejected meeting notifications', ->
       type: 'meeting'
     tag: 'rejected.meeting'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject meeting
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'rescheduled meeting notifications', ->
   meeting = Factory.create 'meeting'
@@ -208,20 +158,12 @@ integrationTest 'rescheduled meeting notifications', ->
       type: 'meeting'
     tag: 'rescheduled.meeting'
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject meeting
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, meeting.get('topic')
 
     clickNotification notification
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'
 
 integrationTest 'reminder notifications', ->
   todo = Factory.create 'todo'
@@ -232,17 +174,9 @@ integrationTest 'reminder notifications', ->
       type: 'todo'
     time: -> Ember.DateTime.create().toFullFormat()
 
-  # FIXME: having to manually push onto the feed controller
-  # after items are created seems like an anti pattern
-  app ->
-    Radium.get('router.activeFeedController').pushObject todo
-
   assertNotifications 1
 
   openNotifications (notificationCenter) ->
     assertText notificationCenter, todo.get('description')
 
     clickReminder reminder
-
-    waitForSelector '.feed-info', ->
-      ok true, 'Feed item expanded'

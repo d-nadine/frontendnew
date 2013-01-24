@@ -1,8 +1,0 @@
-{{#if view.empty}}
-  {{view view.emptyView}}
-{{else}}
-  {{collection Radium.FeedSectionsListView contentBinding="view.feed"}}
-{{/if}}
-
-{{! TODO: find a better way to inject loading view}}
-{{view view.LoadingView}}

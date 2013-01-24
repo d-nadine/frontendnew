@@ -2,7 +2,7 @@ module 'String Inflector'
 
 test 'humanize removes underscores and converts to lower case', ->
   equal ('THIS_is_SPARTA!').humanize(), 'this is sparta!'
-  equal ('1 feed_section').humanize(), '1 feed section'
+  equal ('1 camel_hump').humanize(), '1 camel hump'
 
 test 'pluralize converts word to plural', ->
   equal ('thing').pluralize(), 'things'

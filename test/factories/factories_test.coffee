@@ -52,16 +52,6 @@ integrationTest 'builds an email', ->
   ok email.get('isLoaded'), 'eamil is loaded'
   ok email.get('sender.isLoaded'), 'sender is loaded'
 
-integrationTest 'build a feed section', ->
-  feed_section = Factory.create 'feed_section',
-    item_ids: [
-      ['todo', Factory.build('todo')]
-    ]
-
-  ok feed_section.get('isLoaded'), 'FeedSection loaded'
-  equal feed_section.get('items.length'), 1, 'Feed section items loaded'
-  equal feed_section.get('items.firstObject').constructor, Radium.Todo, 'correct first item loaded'
-
 integrationTest 'build a group section', ->
   group = Factory.create 'group'
 

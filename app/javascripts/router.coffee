@@ -31,23 +31,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   disconnectForm: ->
     @get('applicationController').disconnectOutlet "form"
 
-  connectFeed: (scope, controller) ->
-    controllerName = "#{controller}Controller"
-
-    feed = Radium.Feed.create scope: scope
-
-    @get('applicationController').connectOutlet 
-      controller: @get controllerName
-      viewClass: Radium.FeedView
-      context: feed
-
-    @get('applicationController').connectOutlet 
-      outletName: 'sidebar'
-      controller: @get controllerName
-      viewClass: Radium["#{controller.capitalize()}FilterView"]
-
-    @set('activeFeedController', @get(controllerName))
-
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
     # Ember.Router does not support cancelling routing, which prevents
@@ -101,12 +84,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
 
     closeForm: (router, event) ->
       router.disconnectForm()
-
-    expandFeedItem: (router, event) ->
-      router.set 'activeFeedController.expandedItem', event.context
-
-    scrollFeedToDate: (router, event) ->
-      router.set 'activeFeedController.currentDate', event.context
 
     initialState: 'dashboard'
 

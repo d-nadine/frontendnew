@@ -2,12 +2,12 @@ class Populator
   @run: ->
     aaron = Factory.create 'user'
       name: 'Aaron Stephens'
-      email: 'aaron.stephens13@feed-demo.com'
+      email: 'aaron.stephens13@radiumcrm.com'
       phone: '136127245078'
 
     jerry = Factory.create 'user'
       name: 'Jerry Parker'
-      email: 'jerry.parker@feed-demo.com'
+      email: 'jerry.parker@radiumcrm.com'
       phone: '136127245071'
 
     ralph = Factory.create 'contact',
@@ -155,60 +155,5 @@ class Populator
       reference:
         id: -> retrospection
         type: 'meeting'
-
-    feeds = []
-
-    @createFeedSection(0, [
-        ['todo', todo]
-        ['deal', deal]
-        ['meeting', retrospection]
-        ['deal', deal]
-        ['phone_call', phoneCall]
-        ['todo', overdue]
-        ['todo', emailTodo]
-        ['todo', groupTodo]
-        ['todo', phoneCallTodo]
-        ['todo', todoTodo]
-        ['todo', callRalph]
-        ['todo', finishByTomrrow]
-      ], feeds)
-
-    defaultFeedItems = [
-      ['todo', todo]
-      ['deal', deal]
-      ['todo', todoTodo]
-    ]
-
-    @createFeedSection(1, defaultFeedItems, feeds)
-    @createFeedSection(7, defaultFeedItems, feeds)
-    @createFeedSection(14, defaultFeedItems, feeds)
-    @createFeedSection(30, defaultFeedItems, feeds)
-    @createFeedSection(60, defaultFeedItems, feeds)
-    @createFeedSection(90, defaultFeedItems, feeds)
-    @createFeedSection(100, defaultFeedItems, feeds)
-
-    sorted = feeds.sort (a, b) ->
-      if a.id > b.id then 1 else -1
-
-    sorted.forEach (item, i) ->
-      if previous = sorted[i - 1]
-        previous.next_date =  item.id
-        item.previous_date =  previous.id
-      if next = sorted.objectAt(i + 1)
-        next.previous_date = item.id
-        item.next_date =  next.id
-
-    for feed in sorted
-      Factory.create 'feed_section', feed
-
-  @createFeedSection: (advance, items, feeds) ->
-    advances = if advance == 0 then [advance] else [advance, (0 - advance)]
-
-    for i in advances
-      date = Ember.DateTime.create().advance(day: i)
-      feeds.push
-        id: date.toDateFormat()
-        date: date.toFullFormat()
-        item_ids: items
 
 Radium.Populator = Populator
