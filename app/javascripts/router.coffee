@@ -98,6 +98,7 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showContact: Ember.Route.transitionTo('root.contact')
     showMessages: Em.Route.transitionTo('root.messages.folder')
     showPipeline: Em.Route.transitionTo('root.pipeline.status')
+    showLeadSearch: Em.Route.transitionTo('root.pipeline.status')
 
     showTodoForm: (router, event) ->
       router.connectForm "todo"

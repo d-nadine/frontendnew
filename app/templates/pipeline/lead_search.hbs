@@ -2,7 +2,7 @@
   <li>
     {{#each contact in content}}
       {{#with contact}}
-        <a {{action showMessages this.name href=true }} class="thumbnail">
+        <a {{action showLeadSearch this href=true target="controller"}} class="thumbnail">
           {{avatar contact}}
           {{displayName}}
         </a>
