@@ -1,5 +1,9 @@
-<button class="btn" {{action showCalendar lastMonth href="true"}}>Last Month</button>
-<button class="btn" {{action showCalendar nextMonth href="true"}}>Next Month</button>
+<div class="calendar-navigation block">
+  <button class="btn pull-left" {{action showCalendar lastMonth href="true"}}>Last Month</button>
+  <button class="btn pull-right" {{action showCalendar nextMonth href="true"}}>Next Month</button>
+  <h3>{{calendarDate}}</h3>
+</div>
+
 <table class="calendar">
   <colgroup class="weekdays">
     <col class="monday" />
@@ -20,8 +24,24 @@
   </thead>
 
   {{#each weeks tagName="tbody"}}
-    {{#each this tagName="tr"}}
-      <td {{bindAttr class="isDifferentMonth"}}>{{formattedDate}}</td>
+    {{#each calendarDay in this tagName="tr"}}
+      <td {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday :day"}}>
+        <div class="wrapper">
+          {{log calendarDay.formattedDate}}
+
+          <span class="date">
+            {{calendarDay.day}}
+          </span>
+
+          {{#each calendarDay.limitedContent tagName="ul" class="unstyled"}}
+            <li>{{formatTime time}} - {{label}}</li>
+          {{/each}}
+
+          {{#if calendarDay.remainingContent}}
+            <button class="btn-slab" {{action showMore target="calendarDay"}}>Show More</button>
+          {{/if}}
+        </div>
+      </td>
     {{/each}}
   {{/each}}
 </table>

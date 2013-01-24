@@ -1,17 +1,48 @@
-Radium.CalendarController = Ember.ObjectController.extend
+Radium.CalendarController = Ember.Controller.extend
   showCalendar: (context) ->
     console.log context
 
-  date: null
+  calendarItem: Ember.ObjectProxy.extend
+    time: (->
+      @get('finishBy') || @get('startsAt')
+    ).property('content', 'finishBy', 'startsAt')
 
-  dayObject: Ember.Object.extend
-    formattedDate: (->
-      @get('date').toDateFormat()
-    ).property('date')
+    label: (->
+      @get('description') || @get('topic')
+    ).property('description', 'topic')
 
-    isDifferentMonth: (->
-      @get('date.month') != @get('calendarDate.month')
-    ).property('date')
+  items: (->
+    items = []
+
+    @get('todos').forEach (todo) -> items.pushObject todo
+    @get('meetings').forEach (meeting) -> items.pushObject meeting
+
+    items.map (item) =>
+      @get('calendarItem').create content: item
+
+  ).property('date')
+
+  todos: (->
+    startDate = @get 'startOfCalendar'
+    endDate = @get 'endOfCalendar'
+
+    Radium.Todo.filter (todo) ->
+      todo.get('finishBy').isBetween startDate, endDate
+  ).property('date')
+
+  meetings: (->
+    startDate = @get 'startOfCalendar'
+    endDate = @get 'endOfCalendar'
+
+    Radium.Meeting.filter (meeting) ->
+      meeting.get('startsAt').isBetween startDate, endDate
+  ).property('date')
+
+  # FIXME: Why does this only work with ArrayController and 
+  # not ArrayProxy
+  dayObject: Ember.ArrayController.extend Radium.PaginationMixin,
+    sortProperties: ['time']
+
 
   dayNames: (->
     firstDay = Ember.DateTime.create().get('lastMonday')
@@ -30,6 +61,10 @@ Radium.CalendarController = Ember.ObjectController.extend
 
   lastMonth: (->
     @get('date').copy().advance(month: -1)
+  ).property('date')
+
+  calendarDate: (->
+    @get('date').toFormattedString("%B '%y")
   ).property('date')
 
   startOfCalendar: (->
@@ -63,9 +98,36 @@ Radium.CalendarController = Ember.ObjectController.extend
     current = @get('startOfCalendar').copy()
 
     until current.get('milliseconds') > @get('endOfCalendar.milliseconds')
+      startOfDay = current.copy().atBeginningOfDay()
+      endOfDay = current.copy().atEndOfDay()
+
+      dailyItems = @get('items').filter (item) ->
+        item.get('time').isBetween startOfDay, endOfDay
+
       day = @dayObject.create
+        # FIXME this has to be here to override what's
+        # set in the paginagion mixin
+        perPage: 5
+
         date: current.copy()
         calendarDate: @get('date').copy()
+        content: dailyItems
+        formattedDate: (->
+          @get('date').toDateFormat()
+        ).property('date')
+
+        isDifferentMonth: (->
+          @get('date.month') != @get('calendarDate.month')
+        ).property('date')
+
+        isToday: (->
+          # FIXME: this should happen inside Ember.DateTime
+          @get('date').toDateFormat() == Ember.DateTime.create().toDateFormat()
+        ).property('date')
+
+        day: (->
+          @get('date.day')
+        ).property('date')
 
       days.push day
 

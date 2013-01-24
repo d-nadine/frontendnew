@@ -1,3 +1,3 @@
 Radium.CalendarView = Ember.View.extend
-  layoutName: 'radium/layouts/single_column'
+  layoutName: 'radium/layouts/calendar'
   templateName: 'radium/calendar/calendar'
