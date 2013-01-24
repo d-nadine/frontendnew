@@ -181,31 +181,31 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         contacts = Radium.Contact.find()
         router.set('pipelineStatusController.content', contacts)
         router.get('pipelineController').connectControllers('pipelineStatus')
-
-        router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
-        router.get('drawerPanelController').connectOutlet 'buttons', 'pipelineDrawerButtons'
-
         router.get('applicationController').connectOutlet('pipeline')
+        router.get('pipelineTableController').connectControllers('pipeline')
 
-        router.get('pipelineDrawerButtonsController').connectControllers 'pipeline', 'drawerPanel'
-      exit: (router) ->
-        router.get('drawerPanelController').disconnectOutlet()
-        router.get('drawerPanelController').disconnectOutlet 'buttons'
-
+      exit: ->
         router.get('applicationController').disconnectOutlet()
 
       status: Em.Route.extend
         route: '/:status'
 
         exit: (router) ->
-          router.set('pipelineController.currentPage', 1)
+          router.get('drawerPanelController').disconnectOutlet()
+          router.get('drawerPanelController').disconnectOutlet 'buttons'
 
         serialize: (router, name) ->
           { status: name }
 
         connectOutlets: (router, status) ->
           router.set('pipelineStatusController.status', status)
+          router.get('pipelineTableController').connectControllers('pipeline')
           router.get('pipelineController').connectOutlet
             outletName: 'table'
             viewClass: Radium["Pipeline#{status.capitalize()}View"]
-            controller: Radium.get('router.pipelineController')
+            controller: Radium.get('router.pipelineTableController')
+
+          router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
+          router.get('drawerPanelController').connectOutlet 'buttons', 'pipelineDrawerButtons'
+          router.get('pipelineDrawerButtonsController').connectControllers 'pipelineTable', 'drawerPanel'
+
