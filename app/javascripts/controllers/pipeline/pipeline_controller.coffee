@@ -1,4 +1,5 @@
 Radium.PipelineController = Em.ArrayController.extend Radium.PaginationMixin, Radium.CheckableMixin,
+  statusesBinding: 'pipelineStatusController.statuses'
   content: ( ->
     status = @get('pipelineStatusController.status')
     return unless status

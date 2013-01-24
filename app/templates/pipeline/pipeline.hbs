@@ -1,5 +1,20 @@
 <div id="pipeline">
   {{outlet status}}
+  <div>
+    <ul id="status">
+      {{#each status in statuses}}
+        {{#with status}}
+          <li {{bindAttr class="isCurrent:current"}}>
+            <h4>
+              <a {{action showPipeline name href=true }}>
+                {{unbound label}} ({{pipelineStatusTotal name}})
+              </a>
+            </h4>
+          </li>
+        {{/with}}
+      {{/each}}
+    </ul>
+  </div>
   <div class="status pull-right">
     <h4>4 New Leads/<br/><small>This Week</small></h4>
   </div>
