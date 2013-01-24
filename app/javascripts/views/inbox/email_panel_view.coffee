@@ -7,7 +7,7 @@ Radium.EmailPanelView = Em.View.extend
 
   emailsListView: Em.CollectionView.extend
     itemViewClass: Radium.EmailItemView
-    contentBinding: 'controller.limitedContent'
+    contentBinding: 'controller.visibleContent'
 
   remainingTableView: Radium.EmailTableView.extend
-    contentBinding: 'parentView.controller.remainingContent'
+    contentBinding: 'parentView.controller.hiddenContent'

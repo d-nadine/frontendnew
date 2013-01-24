@@ -1,6 +1,6 @@
 require 'radium/views/pipeline/remaining_deals_link_view'
 Radium.PipelineTableBaseView = Em.View.extend
-  contentBinding: 'controller.limitedContent'
+  contentBinding: 'controller.visibleContent'
   checkLead: Em.Checkbox.extend
     contentBinding: Ember.Binding.oneWay 'parentView.content'
     checkedBinding: 'content.isChecked'

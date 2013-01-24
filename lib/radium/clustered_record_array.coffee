@@ -129,7 +129,7 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     cluster = @get('clusters.content').find (c) -> c.get('type') == type
 
     unless cluster
-      cluster = DS.RecordArray.create(Radium.PaginationMixin, {
+      cluster = DS.RecordArray.create(Radium.ShowMoreMixin, {
         type: type
         content: Ember.A([])
         store: @get('store')
