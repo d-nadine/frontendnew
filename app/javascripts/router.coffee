@@ -24,13 +24,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
   enableLogging: true
   initialState: 'loading'
 
-  connectForm: (name) ->
-    @get('applicationController').connectOutlet "form", "mainForm"
-    @get('mainFormController').connectOutlet "#{name}Form"
-
-  disconnectForm: ->
-    @get('applicationController').disconnectOutlet "form"
-
   loading: Ember.Route.extend
     # overwrite routePath to not allow default behavior
     # Ember.Router does not support cancelling routing, which prevents
@@ -78,12 +71,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     showUser: Ember.Route.transitionTo('root.user')
     showContact: Ember.Route.transitionTo('root.contact')
     showMessages: Em.Route.transitionTo('root.messages.folder')
-
-    showTodoForm: (router, event) ->
-      router.connectForm "todo"
-
-    closeForm: (router, event) ->
-      router.disconnectForm()
 
     initialState: 'dashboard'
 
