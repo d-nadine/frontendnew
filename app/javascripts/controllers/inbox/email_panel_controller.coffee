@@ -1,4 +1,4 @@
-require 'radium/pagination_mixin'
+require 'radium/show_more_mixin'
 
 Radium.EmailPanelController = Em.ArrayController.extend Radium.ShowMoreMixin,
   contentBinding: 'inboxController.history'
