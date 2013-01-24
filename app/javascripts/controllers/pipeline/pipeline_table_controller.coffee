@@ -19,4 +19,3 @@ Radium.PipelineTableController = Em.ArrayController.extend Radium.ShowMoreMixin,
 
     lead.set 'isChecked', false
     Radium.Utils.notify "lead deleted."
-

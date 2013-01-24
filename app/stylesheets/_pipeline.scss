@@ -90,3 +90,11 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
 #form-wdiget{
   clear: both;
 }
+
+#lead-search{
+  @extend #folders;
+  img.avatar{
+    height: 34px;
+    width: 34px;
+  }
+}

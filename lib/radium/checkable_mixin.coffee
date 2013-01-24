@@ -18,6 +18,5 @@ Radium.CheckableMixin = Ember.Mixin.create
   toggleChecked: ->
     allChecked = @get('checkedContent.length') == @get('length')
 
-    @get('content').forEach (email) ->
-      email.set 'isChecked', !allChecked
-
+    @get('content').forEach (item) ->
+      item.toggleProperty 'isChecked'
