@@ -184,9 +184,6 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         router.get('applicationController').connectOutlet('pipeline')
         router.get('pipelineTableController').connectControllers('pipeline')
 
-      exit: ->
-        router.get('applicationController').disconnectOutlet()
-
       status: Em.Route.extend
         route: '/:status'
 
