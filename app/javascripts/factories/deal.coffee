@@ -1,4 +1,4 @@
 Factory.define 'deal', traits: 'timestamps',
-  state: 'pending'
+  status: 'pending'
   name: 'Great deal'
-  close_by: -> Ember.DateTime.create().advance(day: 7).toFullFormat()
+  pay_by: -> Ember.DateTime.create().advance(day: 7).toFullFormat()

@@ -11,15 +11,17 @@
   </tr>
   </thead>
   <tbody>
-    {{#each lead in view.content}}
-      {{#with lead}}
+    {{#each deal in view.content}}
+      {{#with deal}}
         <tr {{bindAttr class="isChecked:success"}}>
           <td>
-            {{view view.checkContent contentBinding="lead"}}
+            {{view view.checkContent contentBinding="deal"}}
           </td>
           <td>
-            {{avatar lead}}
-            <a {{action showContact this href=true}}>{{unbound displayName}}</a>
+            {{#with contact}}
+              {{avatar this}}
+              <a {{action showContact this href=true}}>{{unbound displayName}}</a>
+            {{/with}}
           </td>
           <td>
             {{#if user}}
@@ -27,7 +29,7 @@
               <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
             {{/if}}
           </td>
-          <td>{{currency latestDeal.value}}</td>
+          <td>{{currency value}}</td>
           <td {{bindAttr class="isExpired"}}>
             {{daysSinceText}}
           </td>

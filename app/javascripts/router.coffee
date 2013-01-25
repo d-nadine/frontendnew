@@ -179,8 +179,11 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
     pipeline: Em.Route.extend
       route: '/pipeline'
       connectOutlets: (router) ->
+        # FIXME: replace with real query
         contacts = Radium.Contact.find()
-        router.set('pipelineStatusController.content', contacts)
+        deals = Radium.Deal.find()
+        router.set('pipelineStatusController.contacts', contacts)
+        router.set('pipelineStatusController.deals', deals)
         router.get('pipelineController').connectControllers('pipelineStatus')
         router.get('applicationController').connectOutlet('pipeline')
         router.get('pipelineTableController').connectControllers('pipeline')
