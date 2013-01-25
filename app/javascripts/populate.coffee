@@ -181,6 +181,16 @@ class Populator
         when 1
           hash.meetings = -> [retrospection]
 
+      source = switch 5.randomize()
+        when 0
+          hash.source = "apple"
+        when 1
+          hash.source = "google"
+        when 2
+          hash.source = "facebook"
+        when 3
+          hash.source = "ibm"
+
       hash.created_at = -> Ember.DateTime.create().advance(day: -(200).randomize()).toFullFormat()
 
       user: -> aaron
