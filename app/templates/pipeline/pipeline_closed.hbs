@@ -4,9 +4,9 @@
     <th>&nbsp;</th>
     <th>Lead</th>
     <th>Assigned To</th>
-    <th>Value</th>
     <th>Age of Lead</th>
     <th>Next Task</th>
+    <th>Value</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -29,7 +29,6 @@
               <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
             {{/if}}
           </td>
-          <td>{{currency value}}</td>
           <td {{bindAttr class="isExpired"}}>
             {{daysSinceText}}
           </td>
@@ -40,6 +39,7 @@
               <i class="icon-warning-sign"></i>
             {{/if}}
           </td>
+          <td>{{currency value}}</td>
           <td>
             <a {{action deleteLead this target="controller"}}>
               <i class="icon-trash"></i>
@@ -48,6 +48,7 @@
         </tr>
       {{/with}}
     {{/each}}
+    {{view Radium.ValueTotalView}}
   </tbody>
 </table>
 {{view view.remainingDealsLink}}

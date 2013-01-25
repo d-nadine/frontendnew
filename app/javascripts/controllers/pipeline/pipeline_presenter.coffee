@@ -4,6 +4,15 @@ Radium.PipelinePresenter = Em.ObjectProxy.extend
     @get('daysSinceCreation') > 60
   ).property('createdAt')
 
+  value: ( ->
+    content = @get('content')
+
+    if @get('content').constructor == Radium.Deal
+      @get('content.value') || 0
+    else
+      @get('content.latestDeal.value') || 0
+  ).property('content')
+
   nextTaskText: ( ->
     nextTask = @get('nextTask')
 
