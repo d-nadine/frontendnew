@@ -11,8 +11,3 @@ Radium.Meeting = Radium.Core.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo', inverse: 'meeting')
 
   feedDate: (-> @get 'startsAt' ).property('startsAt')
-
-  # FIXME: Can we rename topic to description
-  description: ( ->
-    @get('topic')
-  ).property('topic')

@@ -18,7 +18,10 @@ Radium.PipelinePresenter = Em.ObjectProxy.extend
 
     return "" if !nextTask
 
-    nextTask.get('description')
+    if nextTask.constructor == Radium.Todo
+      nextTask.get('description')
+    else
+      nextTask.get('topic')
   ).property('nextTask')
 
   daysSinceCreation: ( ->
