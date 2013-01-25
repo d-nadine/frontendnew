@@ -5,6 +5,9 @@
 //FIXME: Move into variables/globals file?
 $alerts-layer: 1000;
 
+.tar{
+  text-align: right !IMPORTANT;
+}
 .loaded {
   background: #fff url('/images/base/bg-grey.gif') repeat-y center top;
 }
