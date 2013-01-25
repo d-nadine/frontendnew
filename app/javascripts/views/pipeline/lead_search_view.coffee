@@ -1,2 +1,2 @@
-Radium.LeadSearchView = Radium.DrawerView.extend
-  templateName: 'radium/pipeline/lead_search'
+require 'radium/views/pipeline/contact_search_view'
+Radium.LeadSearchView = Radium.ContactSearchView.extend()

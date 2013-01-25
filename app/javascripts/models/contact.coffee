@@ -32,32 +32,9 @@ Radium.Contact = Radium.Person.extend Radium.FollowableMixin,
     tasks.get('firstObject')
   ).property('meetings', 'meetings.length', 'todos', 'todos.length')
 
-  nextTaskText: ( ->
-    nextTask = @get('nextTask')
-
-    return "" if !nextTask
-
-    nextTask.get('description')
-  ).property('nextTask')
-
   daysSinceCreation: ( ->
     today = Ember.DateTime.create()
     createdAt = @get('createdAt')
 
     createdAt.differenceInDays(today)
   ).property('createdAt')
-
-  isExpired: ( ->
-    # FIXME: Arbitary cut off point
-    @get('daysSinceCreation') > 60
-  ).property('createdAt')
-
-
-  daysSinceText: ( ->
-    daysSinceCreation = @get('daysSinceCreation')
-
-    if daysSinceCreation <= 1
-      return "1 day"
-
-    "#{daysSinceCreation} days"
-  ).property('daysSinceCreation')

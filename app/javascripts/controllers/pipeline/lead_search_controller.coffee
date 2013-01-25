@@ -1,4 +1,2 @@
-Radium.LeadSearchController = Em.ArrayController.extend
-  contentBinding: 'pipelineTableController.visibleContent'
-  showLeadSearch: (event) ->
-    contact = event.context
+require 'radium/controllers/pipeline/contact_search_controller'
+Radium.LeadSearchController = Radium.ContactSearchController.extend()

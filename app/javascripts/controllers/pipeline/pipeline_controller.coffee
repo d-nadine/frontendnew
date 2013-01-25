@@ -3,5 +3,6 @@ Radium.PipelineController = Em.ArrayController.extend
   content: ( ->
     status = @get('pipelineStatusController.status')
     return unless status
-    Radium.Contact.find(statusFor: status)
+    Radium.Contact.find(statusFor: status).map (contact) ->
+      Radium.PipelinePresenter.create content: contact
   ).property('pipelineStatusController.status')
