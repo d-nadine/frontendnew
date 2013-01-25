@@ -193,6 +193,7 @@ class Populator
                         value: -> (10000).randomize()
                         reason: "something happened"
                         state: -> dealStates[(3).randomize()]
+                        close_by: -> Ember.DateTime.create().advance(day: -(200).randomize()).toFullFormat()
                       ]
 
       Factory.create 'contact',

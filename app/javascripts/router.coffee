@@ -198,14 +198,21 @@ Radium.Router = Ember.Router.extend Radium.RunWhenLoadedMixin,
         connectOutlets: (router, status) ->
           router.set('pipelineStatusController.status', status)
           router.get('pipelineTableController').connectControllers('pipeline')
+
+          pipelineTableController = Radium.get('router.pipelineTableController')
+
           router.get('pipelineController').connectOutlet
             outletName: 'table'
             viewClass: Radium["Pipeline#{status.capitalize()}View"]
-            controller: Radium.get('router.pipelineTableController')
+            controller: pipelineTableController 
+
+          router.get('pipelineController').connectOutlet
+            outletName: 'widget'
+            viewClass: Radium.PipelineWdigetView
+            controller: pipelineTableController 
 
           router.get("#{status}SearchController").connectControllers('pipelineTable')
 
           router.get('applicationController').connectOutlet 'drawerPanel', 'drawerPanel'
           router.get('drawerPanelController').connectOutlet 'buttons', 'pipelineDrawerButtons'
           router.get('pipelineDrawerButtonsController').connectControllers 'pipelineStatus', 'pipelineTable', 'drawerPanel'
-

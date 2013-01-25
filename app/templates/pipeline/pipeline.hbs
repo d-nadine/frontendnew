@@ -4,7 +4,7 @@
     <ul id="status">
       {{#each status in statuses}}
         {{#with status}}
-          <li {{bindAttr class="isCurrent:current"}}>
+          <li {{bindAttr class="isCurrent"}}>
             <h4>
               <a {{action showPipeline name href=true }}>
                 {{unbound label}} ({{pipelineStatusTotal name}})
@@ -20,10 +20,6 @@
   </div>
 </div>
 <div id="pipeline-results">
-  {{#if checkedContent.length}}
-    <div id="form-wdiget" class="block">
-      {{view view.FormWidget selectionBinding="checkedContent"}}
-    </div>
-  {{/if}}
+  {{outlet widget}}
   {{outlet table}}
 </div>
