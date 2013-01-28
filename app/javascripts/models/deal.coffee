@@ -3,12 +3,12 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   description: DS.attr('string')
   closeBy: DS.attr('datetime')
 
-  todos: DS.hasMany('Radium.Todo', inverse: 'deal')
-
   # Can be `pending`, `closed`, `paid`, `rejected`
   state: DS.attr('string')
   isPublic: DS.attr('boolean')
+
   user: DS.belongsTo('Radium.User')
+
   isPending: (->
     @get('state') is 'pending'
   ).property('state')

@@ -66,7 +66,6 @@ class Foundry
 
     @_evaluateFunctions instance
 
-
   _evaluateFunctions: (record) ->
     for k, v of record
       switch @typeOf v
@@ -80,7 +79,6 @@ class Foundry
           record
 
     record
-
 
   create: (klass, attributes = {}) ->
     throw new Error("Cannot create without an adapter!") unless @adapter
@@ -109,87 +107,13 @@ class EmberDataAdapter
     else
       throw new Error("Cannot find an Ember Data model for #{type}")
 
-  # Process the hash and recurse on associations.
-  # This will transform hasMany keys from objects to an array of FKS
-  # This will transform belongsTo keys from objects to a FK
-  # Parent is the record from previous call
-  loadRecord: (model, record, parent, parentAssociation) ->
-    associations = Ember.get(model, 'associationsByName')
-
-    unless associations.keys.isEmpty()
-      associations.forEach (name, association) =>
-        kind = association.kind
-        type = association.type
-
-        mappings = @store.get('_adapter.serializer').mappingForType(model)
-
-        throw new Error("Cannot find a type for: #{model}.#{name}!") unless type
-
-        associatedObject = record[name]
-
-        switch kind
-          when "belongsTo"
-            parentKey = "#{name}_id"
-            if associatedObject
-              record[parentKey] = associatedObject.id
-              if associatedObject.constructor.isClass
-                delete record[name]
-              else
-                @loadRecord type, associatedObject, record, name
-            else if parent && Ember.typeOf(parent[parentAssociation]) == "array" && parent[parentAssociation].indexOf(record.id) >= 0
-              record[parentKey] = parent.id
-            else if parent && parent[parentAssociation] == record.id
-              record[parentKey] = parent.id
-          when "hasMany"
-            if associatedObject
-              associatedObjects = Ember.A(associatedObject)
-              ids = associatedObject.map (o) -> o.id
-              record[name] = ids
-
-              associatedObjects.forEach (childRecord) =>
-                @loadRecord type, childRecord unless childRecord.constructor.isClass
-            else if parent && parent[parentAssociation] = record.id
-              record[name] ||= []
-              record[name].push parent.id
-
-            if mappings?[name]?.key
-              record[mappings[name].key] = record[name]
-              delete record[name]
-
-      polymorphicAttributes = Ember.get(model, 'polymorphicAttributes')
-
-      if polymorphicAttributes
-        polymorphicAttributes.forEach (name, associations) =>
-          return unless  record[name]
-
-          associatedObject = record[name]
-          type = @modelForType(associatedObject.type)
-          #HACK: Until I get this working object is in the id
-          #e.g. id: -> Factory.build 'user'
-          @loadRecord type, associatedObject.id unless associatedObject.id.constructor.isClass
-          id = associatedObject.id.id
-          delete associatedObject.id
-          associatedObject.id = id
-
-    #hack to transform item_ids into expanded_record_array format
-    if record?.item_ids?.length > 0
-      record.item_ids.forEach (item, index) =>
-        itemType = @modelForType(item[0])
-        @loadRecord(itemType, item[1]) unless item[1].constructor.isClass
-        record.item_ids[index] = [itemType, item[1].id]
-
-    # Now all the associations in this node have been processed
-    # it's safe to add the leaf node
-    model.FIXTURES ||= []
-    model.FIXTURES.push record
-    @store.load model, record
-
-  save: (type, record) ->
+  save: (type, hash) ->
     throw new Error("Cannot save without a store!") unless @store
 
-    model = @modelForType type
-    @loadRecord model, record
-    @store.find model, record.id
+    klass = @modelForType type
+    model = klass.createRecord hash
+    @store.commit()
+    model
 
 Foundry.NullAdapter = NullAdapter
 Foundry.EmberDataAdapter = EmberDataAdapter

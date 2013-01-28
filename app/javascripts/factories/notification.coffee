@@ -1,6 +1,4 @@
 Factory.define 'notification', traits: 'timestamps',
-  reference:
-    id: -> Factory.build 'todo'
-    type: 'todo'
+  reference: -> Factory.build 'todo'
   tag: 'assigned.todo'
 
