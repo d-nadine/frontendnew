@@ -5,7 +5,7 @@
     </a>
   {{/if}}
 
-  {{view view.emailsListView}}
+  {{each limitedContent itemViewClass="Radium.EmailItemView" itemController="emails_item"}}
 
   {{#if remainingContent}}
     <div id="remaining-emails">

@@ -8,8 +8,6 @@ Radium.CommentsController = Ember.ObjectController.extend
     @set 'comment', comment
 
   submit: ->
-    console.log @get('content.constructor')
-
     comment = @get 'comment'
 
     @get('comments').pushObject comment

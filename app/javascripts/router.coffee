@@ -38,7 +38,7 @@ Radium.DashboardRoute = Ember.Route.extend
     @render 'unimplemented'
 
 Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
-  events: 
+  events:
     selectFolder: (name) ->
       @controllerFor('emails').set 'folder', name
       @closeDrawer()
