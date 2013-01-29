@@ -4,7 +4,6 @@ Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
   classNameBindings: ['controller.isSelected', 'controller.isChecked', 'controller.isRead']
 
   checkMailItem: Em.Checkbox.extend
-    didInsertElement: ->
     checkedBinding: 'controller.isChecked'
     click: (e) ->
       e.stopPropagation()

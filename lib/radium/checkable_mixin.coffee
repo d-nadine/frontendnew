@@ -1,6 +1,8 @@
+require 'radium/filtered_array'
+
 Radium.CheckableMixin = Ember.Mixin.create
   checkedContent: (->
-    Em.ArrayProxy.create Ember.FilterableMixin,
+    Radium.FilteredArray.create
       context: this
       contentBinding: 'context.content'
       filterProperties: ['isChecked']
@@ -15,4 +17,3 @@ Radium.CheckableMixin = Ember.Mixin.create
 
     @get('content').forEach (email) ->
       email.set 'isChecked', !allChecked
-

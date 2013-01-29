@@ -53,7 +53,7 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
       into: 'emails'
       outlet: 'sidebar'
 
-    @render 'email/drawer_buttons'
+    @render 'emails/drawer_buttons'
       into: 'drawer_panel'
       outlet: 'buttons'
 
