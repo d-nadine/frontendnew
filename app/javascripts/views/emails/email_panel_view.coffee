@@ -1,7 +1,7 @@
 require 'radium/views/emails/email_item_view'
 require 'radium/views/emails/email_table_view'
 
-Radium.EmailPanelView = Em.View.extend
+Radium.EmailsEmailPanelView = Em.View.extend
   templateName: 'emails/email_panel'
   hasPreviousEmailBinding: 'controller.hasPreviousEmails'
 

@@ -1,6 +1,6 @@
 require 'radium/pagination_mixin'
 
-Radium.EmailPanelController = Em.ArrayController.extend Radium.PaginationMixin,
+Radium.EmailsEmailPanelController = Em.ArrayController.extend Radium.PaginationMixin,
   needs: ['emails']
 
   contentBinding: Ember.Binding.oneWay 'controllers.emails.history'

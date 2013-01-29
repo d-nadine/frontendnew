@@ -8,7 +8,6 @@ Radium.Router.reopen
 #     controller: 'blogPost'  // the controller to use for the template
 #   });
 # }
-#
 
 DrawerSupport = Ember.Mixin.create
   toggleDrawer: (name) ->
@@ -57,6 +56,7 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
     # FIXME this seems wrong. It uses drawer_panel for
     # some reason. This seems like an Ember bug
     @render into: 'application'
+
     @render 'emails/sidebar', 
       into: 'emails'
       outlet: 'sidebar'

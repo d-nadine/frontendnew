@@ -38,7 +38,7 @@ class Populator
       sender: john
 
     for i in [0..20]
-      Factory.create 'email',
+      email = Factory.create 'email',
         sender: jerry
 
     group = Factory.create 'group',
