@@ -20,6 +20,10 @@ DrawerSupport = Ember.Mixin.create
       @render name, into: 'drawer_panel'
       @set 'router.openDrawer', name
 
+  closeDrawer: ->
+    @render 'nothing', into: 'drawer_panel'
+    @set 'router.openDrawer', null
+
 
 Radium.ApplicationRoute = Ember.Route.extend DrawerSupport,
   events:
@@ -36,14 +40,18 @@ Radium.DashboardRoute = Ember.Route.extend
 
 Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
   events: 
+    selectFolder: (name) ->
+      @controllerFor('emails').set 'folder', name
+      @closeDrawer()
+
+    toggleFolders: ->
+      @toggleDrawer 'emails/folders'
+
     selectContent: (item) ->
       @controllerFor('emails').set 'selectedContent', item
 
-  serialize: (model, params) ->
-    folder: 'inbox'
-
   model: (params) ->
-    Radium.Email.find folder: params.folder
+    Radium.Email.find folder: 'inbox'
 
   renderTemplate: ->
     # FIXME this seems wrong. It uses drawer_panel for
@@ -59,4 +67,4 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
 
 Radium.Router.map ->
   @route 'dashboard'
-  @route 'emails', path: '/messages/:folder'
+  @route 'emails', path: '/messages'

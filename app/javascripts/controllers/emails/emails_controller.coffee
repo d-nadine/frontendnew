@@ -1,4 +1,19 @@
 Radium.EmailsController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+  folders: [
+    {label: 'Inbox', name: 'inbox'}
+    {label: 'Sent items', name: 'sent'}
+    {label: 'Attachments', name: 'attachments'}
+    {label: 'Meeting Invitations', name: 'meetings'}
+    {label: 'Clients', name: 'clients'}
+    {label: 'Opportunities', name: 'opportunities'}
+    {label: 'Leads', name: 'leads'}
+    {label: 'Prospects', name: 'prospects'}
+  ]
+
+  arrangedContent: (->
+    Radium.Email.find folder: @get('folder')
+  ).property('folder')
+
   history: (->
     return unless @get('selectedContent')
     Radium.Email.find historyFor: @get('selectedContent')

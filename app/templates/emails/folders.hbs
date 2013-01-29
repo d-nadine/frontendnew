@@ -1,7 +1,7 @@
 <ul class="unstyled thumbnails" id="folders">
-  {{#each content}}
+  {{#each folders}}
     <li>
-      <a {{action showMessages this.name href=true }} class="thumbnail">
+      <a {{action selectFolder this.name href=true }} class="thumbnail">
         <img src="http://placehold.it/120x120" />
       </a>
       <span class="label">{{label}}</span>
