@@ -22,11 +22,11 @@ Foundry.RadiumAdapter = RadiumAdapter
 foundry = new Foundry
 foundry.adapter = new RadiumAdapter
 
-# Ember.Application.initializer
-#   name: 'foundry'
-#   after: 'store'
-#   initialize: (container, application) ->
-#       Factory.adapter.store = app.get 'store'
+Ember.Application.initializer
+  name: 'foundry'
+  after: 'store'
+  initialize: (container, application) ->
+      Factory.adapter.store = container.lookup 'store:main'
 
 window.Factory = foundry
 

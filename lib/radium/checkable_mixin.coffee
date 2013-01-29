@@ -6,14 +6,9 @@ Radium.CheckableMixin = Ember.Mixin.create
       filterProperties: ['isChecked']
   ).property('content')
 
-  checkedContentDidChange: (->
-    checkedLength = @get 'checkedContent.length'
-
-    if checkedLength > 0
-      @connectOutlet "bulkEmailActions"
-    else
-      @connectOutlet "emailPanel"
-  ).observes('content', 'checkedContent.length')
+  hasCheckedContent: (->
+    !Ember.isEmpty(@get('checkedContent'))
+  ).property('checkedContent.length')
 
   toggleChecked: ->
     allChecked = @get('checkedContent.length') == @get('length')

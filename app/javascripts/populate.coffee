@@ -19,37 +19,27 @@ class Populator
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'
       location: 'Radium HQ'
-      users: -> [
+      users:  [
         aaron,
         jerry
       ]
 
     email = Factory.create 'email',
       subject: 'Subject of the email'
-      sender:
-        id: -> jerry
-        type: 'user'
+      sender: jerry
 
     email1 = Factory.create 'email',
-      sender:
-        id: -> aaron
-        type: 'user'
+      sender: aaron
 
     email2 = Factory.create 'email',
-      sender:
-        id: -> ralph
-        type: 'contact'
+      sender: ralph
 
     email3 = Factory.create 'email',
-      sender:
-        id: -> john
-        type: 'contact'
+      sender: john
 
     for i in [0..20]
       Factory.create 'email',
-        sender:
-          id: -> jerry
-          type: 'user'
+        sender: jerry
 
     group = Factory.create 'group',
       name: 'Product 1 group'
@@ -58,102 +48,69 @@ class Populator
       name: 'Developers'
 
     phoneCall = Factory.create 'phone_call',
-      to:
-        id: -> aaron
-        type: 'user'
-      from:
-        id: -> ralph
-        type: 'contact'
+      to:  aaron
+      from: ralph
 
     deal = Factory.create 'deal',
-      user: -> aaron
+      user: aaron
 
     todo = Factory.create 'todo',
       description: 'Finish first product draft',
-      user: -> jerry
+      user: jerry
 
     overdue = Factory.create 'todo',
       description: 'Prepare product presentation',
-      user: -> jerry
+      user: jerry
       overdue: true
 
     call = Factory.create 'todo',
       description: 'discussing offer details',
       finished: false,
-      user: -> jerry,
-      reference:
-        id: -> ralph
-        type: 'contact'
+      user: jerry,
+      reference: ralph
 
     dealTodo = Factory.create 'todo',
       description: 'Close the deal',
-      user: -> jerry,
-      reference:
-        id: -> email
-        type: 'email'
+      user: jerry,
+      reference: deal
 
     emailTodo = Factory.create 'todo',
       description: 'write a nice response',
-      user: -> jerry,
-      reference:
-        id: -> email
-        type: 'email'
+      user: jerry,
+      reference: email
 
     groupTodo = Factory.create 'todo',
       description: 'schedule group meeting',
-      user: -> jerry
-      reference:
-        id: -> group
-        type: 'group'
+      user: jerry
+      reference: group
 
     phoneCallTodo = Factory.create 'todo',
-      user: -> jerry,
+      user: jerry,
       description: 'product discussion'
-      reference:
-        id: -> phoneCall
-        type: 'phone_call'
+      reference: phoneCall
 
     todoTodo = Factory.create 'todo',
       description: 'inception',
-      user: -> jerry,
-      reference:
-        id: -> todo
-        type: 'todo'
+      user: jerry,
+      reference: todo
 
     callRalph = Factory.create 'todo',
       description: 'call ralph',
-      user: -> jerry,
+      user: jerry,
       kind: 'call'
-      reference:
-        id: -> ralph
-        type: 'contact'
+      reference: ralph
 
     finishByTomrrow = Factory.create 'todo',
       description: 'buy office equipment',
-      user: -> jerry,
-      finish_by: Ember.DateTime.create().advance(day: 1).toFullFormat()
+      user: jerry,
+      finishBy: Ember.DateTime.create().advance(day: 1)
 
-    notification = Factory.create 'notification'
-      reference:
-        id: -> groupTodo
-        type: 'todo'
+    Factory.create 'notification'
+      reference: groupTodo
       tag: 'assigned.todo'
 
     Factory.create 'notification',
-      reference:
-        id: -> retrospection
-        type: 'meeting'
+      reference: retrospection
       tag: 'invited.meeting'
-
-    reminder = Factory.create 'reminder'
-      reference:
-        id: -> finishByTomrrow
-        type: 'todo'
-      time: -> Ember.DateTime.create().advance(month: -1).toFullFormat()
-
-    Factory.create 'reminder',
-      reference:
-        id: -> retrospection
-        type: 'meeting'
 
 Radium.Populator = Populator

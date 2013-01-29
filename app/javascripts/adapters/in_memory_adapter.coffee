@@ -6,6 +6,9 @@ Radium.InMemoryAdapter = DS.FixtureAdapter.extend
     fixtureType = type.toString().split(".")[1]
     queryMethod = "query#{fixtureType}Records"
     if @get queryMethod
-      @get(queryMethod).call @, fixtures, query
+      @get(queryMethod).call @, records, query
     else
       throw new Error("Implement #{queryMethod} to query #{type}!")
+
+  queryEmailRecords: (records, query) ->
+    records

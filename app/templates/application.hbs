@@ -12,7 +12,7 @@
           </li>
 
           <li id="btn-inbox" class="dropdown">
-            {{#linkTo "messages"}}Inbox{{/linkTo}}
+            {{#linkTo "emails" "inbox"}}Inbox{{/linkTo}}
           </li>
           <li id="btn-support">
             <a href="https://radium.flowdock.com/invitations/6d70fab64e2ff9222f15f60adb2e8d875ed72c61-support" title="Support">Support</a>
@@ -23,10 +23,6 @@
   </div>
 </div>
 
-<section id="drawer-panel">
 {{outlet drawerPanel}}
-</section>
 
-<section id="main">
 {{outlet}}
-</section>

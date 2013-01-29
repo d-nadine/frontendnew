@@ -24,7 +24,7 @@ namespace :build do
     if File.directory? "#{vendor_path}/ember.js"
       sh "cd #{vendor_path}/ember.js && BUNDLE_GEMFILE=#{vendor_path}/ember.js/Gemfile rake dist"
       sh %Q{cd #{vendor_path}/ember.js && echo "// $(git log -n 1 --format='%h (%ci)')" > #{vendor_js_path}/ember.js}
-      sh %Q{cat #{vendor_path}/ember.js/dist/ember.prod.js >> #{vendor_js_path}/ember.js}
+      sh %Q{cat #{vendor_path}/ember.js/dist/ember.js >> #{vendor_js_path}/ember.js}
     else
       puts "vendor/emberjs does not exist!"
     end

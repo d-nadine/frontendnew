@@ -6,6 +6,7 @@ Radium.Todo = Radium.Core.extend Radium.CommentsMixin,
   overdue: DS.attr('boolean')
 
   reference: DS.attr('object')
+  user: DS.belongsTo('Radium.User')
 
   isCall: ( ->
     (if (@get('kind') is 'call') then true else false)

@@ -1,13 +1,22 @@
-types = "Boolean Number String Function Array Date RegExp Object".split(" ")
-TYPE_MAP = []
-
-for type in types
-  TYPE_MAP[ "[object " + type + "]" ] = type.toLowerCase()
-
 class Foundry
   constructor: ->
     @definitions = {}
     @traits = {}
+
+  merge: (base, object) ->
+    clone = {}
+
+    for name, value of base
+      clone[name] = value
+
+    for name, copy of object
+      if copy && copy.constructor == Object
+        newBase = base[name] || {}
+        clone[name] = @merge newBase, copy
+      else if copy
+        clone[name] = copy
+
+    clone
 
   sequence: (callback) ->
     counter = 0
@@ -17,12 +26,6 @@ class Foundry
 
   trait: (name, attributes) ->
     @traits[name] = attributes
-
-  typeOf: (item) ->
-    if item == null or item == undefined
-      String(item) 
-    else
-      TYPE_MAP[Object::toString.call(item)] || 'object'
 
   define: (klass, options, attributes) ->
     if @definitions.hasOwnProperty klass
@@ -43,7 +46,7 @@ class Foundry
     parent = options.from
 
     if parent and @definitions.hasOwnProperty(parent)
-      attributes = $.extend {}, @definitions[parent], attributes
+      attributes = @merge @definitions[parent], attributes
     else if parent and !@definitions.hasOwnProperty(parent)
       throw new Error("Undefined factory: #{parent}")
 
@@ -53,7 +56,7 @@ class Foundry
     for trait in options.traits
       unless @traits.hasOwnProperty trait
         throw new Error("there is no trait definition for #{trait}")
-      attributes = $.extend true, {}, @traits[trait], attributes
+      attributes = @merge @traits[trait], attributes
 
     @definitions[klass] = attributes
 
@@ -62,21 +65,19 @@ class Foundry
       throw new Error("there is no factory definition for #{klass}")
 
     definition = @definitions[klass]
-    instance = $.extend true, {}, definition, attributes
+    instance = @merge definition, attributes
 
     @_evaluateFunctions instance
 
+
   _evaluateFunctions: (record) ->
     for k, v of record
-      switch @typeOf v
-        when 'function'
-          result = record[k]()
-          delete record[k]
-          record[k] = result
-        when 'object'
-          record[k] = @_evaluateFunctions v
-        else
-          record
+      if v.constructor == Function
+        result = record[k]()
+        delete record[k]
+        record[k] = result
+      else if v.constructor == Object
+        record[k] = @_evaluateFunctions v
 
     record
 

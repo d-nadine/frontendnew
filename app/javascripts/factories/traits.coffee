@@ -1,6 +1,6 @@
 Factory.trait 'timestamps',
-  createdAt: -> Ember.DateTime.create().advance(days: -2).toFullFormat()
-  updatedAt: -> Ember.DateTime.create().advance(days: -1).toFullFormat()
+  createdAt: -> Ember.DateTime.create().advance(days: -2)
+  updatedAt: -> Ember.DateTime.create().advance(days: -1)
 
 Factory.trait 'avatar',
   avatar:
@@ -25,7 +25,7 @@ Factory.trait 'html',
     consectetur ornare eu a turpis.</p>"
 
 Factory.trait 'message',
-  sentAt: -> Ember.DateTime.create().toFullFormat()
+  sentAt: -> Ember.DateTime.create()
   message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in
     eros ante. Donec pellentesque pulvinar arcu nec eleifend. Nulla nulla diam,
     dignissim in bibendum vitae, viverra et quam. Nam vulputate convallis

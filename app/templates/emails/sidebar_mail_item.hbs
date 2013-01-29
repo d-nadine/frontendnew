@@ -1,5 +1,4 @@
-{{#with view.content}}
-<div {{action selectContent this}}>
+<div {{action selectContent content}}>
   <div>
     {{!TODO create handlebars helper for this?}}
     {{#if sender.avatar.small_url}}
@@ -27,4 +26,3 @@
   </div>
   <small>{{formatTime sentAt}}</small>
 </div>
-{{/with}}

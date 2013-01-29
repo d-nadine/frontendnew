@@ -1,4 +1,4 @@
-Radium.InboxController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+Radium.EmailsController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   history: (->
     return unless @get('selectedContent')
     Radium.Email.find historyFor: @get('selectedContent')

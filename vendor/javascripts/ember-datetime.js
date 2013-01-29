@@ -783,7 +783,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     // Note that this object was created in the local machine time zone, so when we set
     // its params later, it will be assuming these values to be in the same time zone as it is.
     // It's ok for start to be null, in which case we'll just keep whatever we had in 'd' before.
-    if (!Ember.none(start)) {
+    if (!Ember.isNone(start)) {
       d.setTime(start); // using milliseconds here specifies an absolute location in time, regardless of time zone, so that's nice
     }
 
@@ -801,16 +801,16 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     // the time options (hour, minute, sec, millisecond)
     // reset cascadingly (see documentation)
     if (resetCascadingly === undefined || resetCascadingly === true) {
-      if (!Ember.none(opts.hour) && Ember.none(opts.minute)) {
+      if (!Ember.isNone(opts.hour) && Ember.isNone(opts.minute)) {
         opts.minute = 0;
       }
-      if (!(Ember.none(opts.hour) && Ember.none(opts.minute)) &&
-          Ember.none(opts.second)) {
+      if (!(Ember.isNone(opts.hour) && Ember.isNone(opts.minute)) &&
+          Ember.isNone(opts.second)) {
         opts.second = 0;
       }
-      if (!(Ember.none(opts.hour) && Ember.none(opts.minute) &&
-          Ember.none(opts.second)) &&
-          Ember.none(opts.millisecond)) {
+      if (!(Ember.isNone(opts.hour) && Ember.isNone(opts.minute) &&
+          Ember.isNone(opts.second)) &&
+          Ember.isNone(opts.millisecond)) {
         opts.millisecond = 0;
       }
     }
@@ -820,13 +820,13 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     // according to javascript Date spec, you have to set year, month, and day together
     // if you're setting any one of them.  So we'll use the provided Date.UTC() method
     // to get milliseconds, and we need to get any missing values first...
-    if (Ember.none(opts.year))        opts.year = d.getUTCFullYear();
-    if (Ember.none(opts.month))       opts.month = d.getUTCMonth() + 1; // January is 0 in JavaScript
-    if (Ember.none(opts.day))         opts.day = d.getUTCDate();
-    if (Ember.none(opts.hour))        opts.hour = d.getUTCHours();
-    if (Ember.none(opts.minute))      opts.minute = d.getUTCMinutes();
-    if (Ember.none(opts.second))      opts.second = d.getUTCSeconds();
-    if (Ember.none(opts.millisecond)) opts.millisecond = d.getUTCMilliseconds();
+    if (Ember.isNone(opts.year))        opts.year = d.getUTCFullYear();
+    if (Ember.isNone(opts.month))       opts.month = d.getUTCMonth() + 1; // January is 0 in JavaScript
+    if (Ember.isNone(opts.day))         opts.day = d.getUTCDate();
+    if (Ember.isNone(opts.hour))        opts.hour = d.getUTCHours();
+    if (Ember.isNone(opts.minute))      opts.minute = d.getUTCMinutes();
+    if (Ember.isNone(opts.second))      opts.second = d.getUTCSeconds();
+    if (Ember.isNone(opts.millisecond)) opts.millisecond = d.getUTCMilliseconds();
 
     // Ask the JS Date to calculate milliseconds for us (still in redefined UTC).  It
     // is best to set them all together because, for example, a day value means different things
@@ -884,7 +884,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
 
     // Desired case: create with milliseconds if we have them.
     // If we don't, convert what we have to milliseconds and recurse.
-    if (!Ember.none(arg.milliseconds)) {
+    if (!Ember.isNone(arg.milliseconds)) {
 
       // quick implementation of a FIFO set for the cache
       var key = 'nu' + arg.milliseconds + timezone, cache = this._dt_cache;
@@ -939,7 +939,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
     var re = new RegExp('(?:%([aAbBcdDhHiIjmMpsSUWwxXyYZ%])|(.))', "g"),
       d, parts, opts = {}, check = {}, scanner = Scanner.create({string: str});
 
-    if (Ember.none(fmt)) fmt = Ember.DATETIME_ISO8601;
+    if (Ember.isNone(fmt)) fmt = Ember.DATETIME_ISO8601;
 
     try {
       while ((parts = re.exec(fmt)) !== null) {
@@ -989,7 +989,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
       return null;
     }
 
-    if (!Ember.none(opts.meridian) && !Ember.none(opts.hour)) {
+    if (!Ember.isNone(opts.meridian) && !Ember.isNone(opts.hour)) {
       if ((opts.meridian === 1 && opts.hour !== 12) ||
         (opts.meridian === 0 && opts.hour === 12)) {
           opts.hour = (opts.hour + 12) % 24;
@@ -997,16 +997,16 @@ Ember.DateTime.reopenClass(Ember.Comparable,
       delete opts.meridian;
     }
 
-   if (!Ember.none(opts.day) && (opts.day < 1 || opts.day > 31)){
+   if (!Ember.isNone(opts.day) && (opts.day < 1 || opts.day > 31)){
      return null;
    }
 
    // Check the month and day are valid and within bounds
-   if (!Ember.none(opts.month)){
+   if (!Ember.isNone(opts.month)){
      if (opts.month < 1 || opts.month > 12){
        return null;
      }
-     if (!Ember.none(opts.day)){
+     if (!Ember.isNone(opts.day)){
        if (opts.month === 2 && opts.day > 29){
          return null;
        }
@@ -1018,7 +1018,7 @@ Ember.DateTime.reopenClass(Ember.Comparable,
 
     d = this.create(opts);
 
-    if (!Ember.none(check.dayOfWeek) && get(d,'dayOfWeek') !== check.dayOfWeek) {
+    if (!Ember.isNone(check.dayOfWeek) && get(d,'dayOfWeek') !== check.dayOfWeek) {
       return null;
     }
 

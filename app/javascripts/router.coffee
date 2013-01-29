@@ -10,16 +10,21 @@ Radium.Router.reopen
 # }
 #
 
-Radium.ApplicationRoute = Ember.Route.extend
+DrawerSupport = Ember.Mixin.create
+  toggleDrawer: (name) ->
+    if @get('router.openDrawer') == name
+      # FIXME: find a way to disconnect this
+      @render 'nothing', into: 'drawer_panel'
+      @set 'router.openDrawer', null
+    else
+      @render name, into: 'drawer_panel'
+      @set 'router.openDrawer', name
+
+
+Radium.ApplicationRoute = Ember.Route.extend DrawerSupport,
   events:
     toggleDrawer: (name) ->
-      if @get('router.openDrawer') == name
-        # FIXME: find a way to disconnect this
-        @render 'nothing', into: 'drawer_panel'
-        @set 'router.openDrawer', null
-      else
-        @render name, into: 'drawer_panel'
-        @set 'router.openDrawer', name
+      @toggleDrawer name
 
   renderTemplate: ->
     @render()
@@ -29,6 +34,29 @@ Radium.DashboardRoute = Ember.Route.extend
   renderTemplate: ->
     @render 'unimplemented'
 
+Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
+  events: 
+    selectContent: (item) ->
+      @controllerFor('emails').set 'selectedContent', item
+
+  serialize: (model, params) ->
+    folder: 'inbox'
+
+  model: (params) ->
+    Radium.Email.find folder: params.folder
+
+  renderTemplate: ->
+    # FIXME this seems wrong. It uses drawer_panel for
+    # some reason. This seems like an Ember bug
+    @render into: 'application'
+    @render 'emails/sidebar', 
+      into: 'emails'
+      outlet: 'sidebar'
+
+    @render 'email/drawer_buttons'
+      into: 'drawer_panel'
+      outlet: 'buttons'
+
 Radium.Router.map ->
   @route 'dashboard'
-  @route 'messages'
+  @route 'emails', path: '/messages/:folder'
