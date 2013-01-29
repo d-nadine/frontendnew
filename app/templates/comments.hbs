@@ -2,7 +2,17 @@
   {{#if comments.length}}
     <ul class="comments-list unstyled">
       {{#each comments}}
-        <li>Place Holder</li>
+        <li class="comment">
+          {{#with user}}
+            <a {{action showUser this href=true}} class="avatar">
+              <img {{bindAttr src="avatar.small_url"}} class="avatar">
+            </a>
+          {{/with}}
+
+          <div class="text">
+            {{text}}
+          </div>
+        </li>
       {{/each}}
     </ul>
   {{/if}}
