@@ -1,5 +1,5 @@
 # FIXME this should not be a dependency
-require 'radium/pagination_mixin'
+require 'radium/show_more_mixin'
 
 # Array keeping clusters of items. Items are kept in 'unclustered'
 # array (which can hold multiple record types). When items length for
@@ -129,7 +129,7 @@ Radium.ClusteredRecordArray = Ember.Mixin.create
     cluster = @get('clusters.content').find (c) -> c.get('type') == type
 
     unless cluster
-      cluster = DS.RecordArray.create(Radium.PaginationMixin, {
+      cluster = DS.RecordArray.create(Radium.ShowMoreMixin, {
         type: type
         content: Ember.A([])
         store: @get('store')

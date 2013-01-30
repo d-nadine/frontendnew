@@ -1,6 +1,6 @@
-require 'radium/pagination_mixin'
+require 'radium/show_more_mixin'
 
-Radium.EmailsEmailPanelController = Em.ArrayController.extend Radium.PaginationMixin,
+Radium.EmailsEmailPanelController = Em.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['emails']
 
   contentBinding: Ember.Binding.oneWay 'controllers.emails.history'
@@ -17,5 +17,5 @@ Radium.EmailsEmailPanelController = Em.ArrayController.extend Radium.PaginationM
   ).property('firstObject', 'email')
 
   hasRemainingItems: (->
-    @get('remainingContent.length') > 0
-  ).property('remainingContent.length', 'email')
+    @get('hiddenContent.length') > 0
+  ).property('hiddenContent.length', 'email')

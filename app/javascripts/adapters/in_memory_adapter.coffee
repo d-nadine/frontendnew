@@ -12,3 +12,5 @@ Radium.InMemoryAdapter = DS.FixtureAdapter.extend
 
   queryEmailRecords: (records, query) ->
     records
+
+requireAll /radium\/adapters\/in_memory_adapter\/queries/

@@ -35,7 +35,7 @@ Handlebars.registerHelper "formatTime", (property, options) ->
 
     # type = Ember.typeOf(newValue),
     updatedDate = parseDate(newValue)
-    #FIXME NOT_FOUND_ERR: DOM Exception 8 
+    # FIXME NOT_FOUND_ERR: DOM Exception 8 
     # view.$().text updatedDate
     # view.rerender()
 

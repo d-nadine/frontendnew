@@ -1,3 +1,7 @@
+# FIXME: Move into lib?
+Number::randomize = ->
+  Math.floor(Math.random() * this)
+
 class Populator
   @run: ->
     aaron = Factory.create 'user'
@@ -12,9 +16,11 @@ class Populator
 
     ralph = Factory.create 'contact',
       display_name: 'Ralph'
+      status: 'lead'
 
     john = Factory.create 'contact'
       display_name: 'John'
+      status: 'lead'
 
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'
@@ -112,5 +118,57 @@ class Populator
     Factory.create 'notification',
       reference: retrospection
       tag: 'invited.meeting'
+
+    reminder = Factory.create 'reminder'
+      reference: finisByTomorrow
+      time: Ember.DateTime.create().advance(month: -1)
+
+    [0..50].forEach (num) ->
+      users = [aaron, jerry]
+      tasks = [emailTodo, todo]
+      statuses = ['lead','negotiating','closed','lost']
+
+      status = statuses[(4).randomize()]
+
+      hash =
+        status: status
+
+      if user =  users[(3).randomize()]
+        hash.user = user
+
+      switch (3).randomize()
+        when 0
+          hash.todos = [todo]
+        when 1
+          hash.meetings = [retrospection]
+
+      source = switch 5.randomize()
+        when 0
+          hash.source = "Lead form"
+        when 1
+          hash.source = "Marketing Convention"
+        when 2
+          hash.source = "Fake campaign"
+        when 3
+          hash.source = "Newsletter"
+
+      hash.createdAt = Ember.DateTime.random()
+
+      dealStatuses = ['published', 'negotiating', 'closed', 'paymentpending']
+
+      hash.deals = [
+                    Factory.create 'deal',
+                      user: -> users[(2).randomize()]
+                      value: -> (10000).randomize()
+                      reason: "something happened"
+                      status: -> dealStatuses[(3).randomize()]
+                      payBy: Ember.DateTime.random()
+                      contact: -> Radium.Contact.find().objectAt((Radium.Contact.find().get('length') - 1).randomize())
+                      createdAt: -> Ember.DateTime.random()
+                      todos: -> [todo] if hash.todos
+                      meetings: -> [retrospection] if hash.meetings
+                    ]
+
+      Factory.create 'contact', hash
 
 Radium.Populator = Populator

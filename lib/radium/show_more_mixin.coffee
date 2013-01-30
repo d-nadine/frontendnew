@@ -1,4 +1,4 @@
-Radium.PaginationMixin = Ember.Mixin.create
+Radium.ShowMoreMixin = Ember.Mixin.create
   perPage: 7
   currentPage: 1
 
@@ -6,7 +6,7 @@ Radium.PaginationMixin = Ember.Mixin.create
     @get('currentPage') * @get('perPage')
   ).property('content', 'currentPage', 'perPage')
 
-  limitedContent: (->
+  visibleContent: (->
     currentLimit = @get 'currentLimit'
 
     if content = @get('content')
@@ -16,7 +16,7 @@ Radium.PaginationMixin = Ember.Mixin.create
   showMore: ->
     currentLimit  = @get 'currentLimit'
     contentLength = @get 'arrangedContent.length'
-    length        = @get 'limitedContent.length'
+    length        = @get 'visibleContent.length'
 
     newLimit      = currentLimit + @get('perPage')
     newLimit      = contentLength if newLimit > contentLength
@@ -25,7 +25,7 @@ Radium.PaginationMixin = Ember.Mixin.create
 
     if length < newLimit
       for i in [(length)..(newLimit - 1)]
-        @get('limitedContent').pushObject( @objectAtContent(i) )
+        @get('visibleContent').pushObject( @objectAtContent(i) )
 
     @set 'currentPage', @get('currentPage') + 1
 
@@ -33,7 +33,7 @@ Radium.PaginationMixin = Ember.Mixin.create
     @get('content.length')
   ).property('content', 'content.length')
 
-  remainingContent: ( ->
+  hiddenContent: ( ->
     if content = @get('arrangedContent')
       Ember.A(content.slice(@get('currentLimit') + 1, @get('content.length')))
   ).property('arrangedContent', 'currentLimit')
@@ -41,15 +41,15 @@ Radium.PaginationMixin = Ember.Mixin.create
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     if addedCount
       for i in [idx..(idx + addedCount - 1)]
-        if @get('limitedContent.length') < @get('currentLimit')
-          @get('limitedContent').pushObject( @objectAtContent(i) )
+        if @get('visibleContent') < @get('currentLimit')
+          @get('visibleContent').pushObject( @objectAtContent(i) )
 
     @_super.apply(this, arguments)
 
   contentArrayWillChange: (array, idx, removedCount, addedCount) ->
     if removedCount
       for i in [idx..(idx + removedCount - 1)]
-        @get('limitedContent').removeObject( @objectAtContent(i) )
+        @get('visibleContent').removeObject( @objectAtContent(i) )
 
     @_super.apply(this, arguments)
 
