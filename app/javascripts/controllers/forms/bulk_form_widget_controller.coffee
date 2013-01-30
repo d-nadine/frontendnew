@@ -17,9 +17,6 @@ Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormW
     Ember.Object.create
       template: "unimplemented"
       label: "Call"
-    Ember.Object.create
-      template: "unimplemented"
-      label: "Call"
   ]
 
   executeAction: (button) ->
