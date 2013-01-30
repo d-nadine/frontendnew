@@ -1,7 +1,4 @@
 Radium.FormsTodoFormView = Ember.View.extend
-  close: ->
-    Radium.get('router').send('closeForm')
-
   expandForm: ->
     @toggleProperty 'expanded'
 
