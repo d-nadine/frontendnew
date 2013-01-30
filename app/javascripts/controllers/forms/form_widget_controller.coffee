@@ -1,7 +1,7 @@
 Radium.FormsFormWidgetController = Em.Controller.extend
   buttons: [
     Ember.Object.create
-     template: "forms.todo_form"
+     template: "forms/todo_form"
      label: "Todo"
     Ember.Object.create
      template: "unimplemented"
