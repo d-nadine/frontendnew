@@ -8,4 +8,4 @@ Radium.SidebarMailItemView = Em.View.extend Radium.ContentIdentificationMixin,
     click: (e) ->
       e.stopPropagation()
     change: (e) ->
-      @set('controller.isChecked', not @get('controller.isChecked'))
+      @toggleProperty 'checked'

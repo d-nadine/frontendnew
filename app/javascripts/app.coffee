@@ -20,8 +20,6 @@ require 'radium/store'
 
 require 'radium/router'
 
-require 'radium/mixins'
-
 require 'radium/models'
 
 require 'radium/views'
