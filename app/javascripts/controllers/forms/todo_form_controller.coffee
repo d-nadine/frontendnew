@@ -1,4 +1,4 @@
-Radium.TodoFormController = Ember.ObjectController.extend
+Radium.FormsTodoFormController = Ember.ObjectController.extend
   kind: 'todo'
   init: ->
     @reset()

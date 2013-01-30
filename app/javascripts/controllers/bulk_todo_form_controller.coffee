@@ -1,4 +1,5 @@
-Radium.BulkTodoFormController = Radium.TodoFormController.extend
+require 'radium/controllers/forms/todo_form_controller'
+Radium.BulkTodoFormController = Radium.FormsTodoFormController.extend
   selection: null
 
   submit: ->

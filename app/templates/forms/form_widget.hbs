@@ -11,7 +11,7 @@
               {{/if}}
             </a>
           {{else}}
-            <a {{action toggleForm this target="view"}} class="btn">
+            <a {{action toggleForm this}} class="btn">
               {{label}}
               {{#if closed}}
                 <i class="icon-plus"></i>
@@ -25,6 +25,8 @@
     </div>
   </div>
   <div class="rel">
-    {{view view.TasksContainer viewName="tasksContainer"}}
+    {{#if activeForm}}
+      {{dynamicControl activeForm model}}
+    {{/if}}
   </div>
 </div>

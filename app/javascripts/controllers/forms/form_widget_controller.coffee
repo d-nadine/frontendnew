@@ -1,7 +1,7 @@
 Radium.FormsFormWidgetController = Em.Controller.extend
   buttons: [
     Ember.Object.create
-     action: "todo"
+     template: "forms.todo_form"
      label: "Todo"
     Ember.Object.create
      action: "meeting"
@@ -10,5 +10,15 @@ Radium.FormsFormWidgetController = Em.Controller.extend
      action: "call"
      label: "Call"
   ]
+
+  activeForm: null
+
   init: ->
     @get('buttons').forEach (btn) -> btn.set('closed', true)
+
+  toggleForm: (button)  ->
+    if @get('activeForm') == button.template 
+      @set 'activeForm', null
+    else
+      @set 'activeForm', button.template
+
