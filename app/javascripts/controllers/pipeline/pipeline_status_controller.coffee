@@ -1,4 +1,5 @@
 Radium.PipelineStatusController = Em.ArrayController.extend
+  itemController: 'pipeline_status_item'
   status: null
   content: [
     Em.Object.create({label: 'Leads', name: 'lead'})

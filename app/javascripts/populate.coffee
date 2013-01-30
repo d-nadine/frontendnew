@@ -106,7 +106,7 @@ class Populator
       kind: 'call'
       reference: ralph
 
-    finishByTomrrow = Factory.create 'todo',
+    finishByTomorrow = Factory.create 'todo',
       description: 'buy office equipment',
       user: jerry,
       finishBy: Ember.DateTime.create().advance(day: 1)
@@ -118,10 +118,6 @@ class Populator
     Factory.create 'notification',
       reference: retrospection
       tag: 'invited.meeting'
-
-    reminder = Factory.create 'reminder'
-      reference: finisByTomorrow
-      time: Ember.DateTime.create().advance(month: -1)
 
     [0..50].forEach (num) ->
       users = [aaron, jerry]

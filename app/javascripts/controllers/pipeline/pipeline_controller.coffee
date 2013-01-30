@@ -1,7 +1,8 @@
 Radium.PipelineController = Em.ArrayController.extend
-  statusesBinding: 'pipelineStatusController'
-  statusBinding: 'pipelineStatusController.status'
-  currentTypeBinding: 'pipelineStatusController.currentType'
+  needs: ['pipelineStatus']
+  statusesBinding: 'controllers.pipelineStatus'
+  statusBinding: 'pipelineStatusController.status.status'
+  currentTypeBinding: 'pipelineStatusController.status.currentType'
 
   currentType: ( ->
     status = @get('status')

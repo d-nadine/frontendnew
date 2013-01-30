@@ -1,5 +1,5 @@
-require 'radium/views/forms/bulk_action_form_widget'
-Radium.BulkPipelineFormWidget = Radium.BulkActionFormWidget.extend
+require 'radium/views/forms/bulk_form_widget'
+Radium.BulkPipelineFormWidget = Radium.FormsBulkFormWidgetView.extend
   init: ->
     @_super.apply this, arguments
     buttons = @get('buttons')

@@ -2,15 +2,13 @@
   <div>
     <ul id="status">
       {{#each status in statuses}}
-        {{#with status}}
-          <li {{bindAttr class="isCurrent"}}>
-            <h4>
-              <a {{action showPipeline name href=true }}>
-                {{unbound label}} ({{pipelineStatusTotal name}})
-              </a>
-            </h4>
-          </li>
-        {{/with}}
+        <li {{bindAttr class="isCurrent"}}>
+          <h4>
+            <a {{action showPipeline name href=true }}>
+              {{statusText}}
+            </a>
+          </h4>
+        </li>
       {{/each}}
     </ul>
   </div>

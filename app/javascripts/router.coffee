@@ -31,7 +31,7 @@ Radium.ApplicationRoute = Ember.Route.extend DrawerSupport,
 
   renderTemplate: ->
     @render()
-    @render 'drawer_panel', 
+    @render 'drawer_panel',
       into: 'application'
       outlet: 'drawerPanel'
 
@@ -67,6 +67,14 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
       into: 'drawer_panel'
       outlet: 'buttons'
 
+Radium.PipelineLeadsRoute = Em.Route.extend
+  renderTemplate: ->
+    @render into: 'application'
 Radium.Router.map ->
   @route 'dashboard'
   @route 'emails', path: '/messages'
+  @resource 'pipeline', ->
+    @route 'leads'
+    @route 'negotiating'
+    @route 'closed'
+    @route 'lost'
