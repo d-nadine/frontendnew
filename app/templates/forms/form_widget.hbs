@@ -1,7 +1,7 @@
 <div class="block block-arrow block-connected">
   <div class="btn-toolbar">
     <div class="btn-group">
-      {{#each button in view.buttons}}
+      {{#each button in buttons}}
         {{#with button}}
           {{#if alwaysOpen}}
             <a class="{{unbound classes}}" {{action taskAction this target="view"}} class="btn">

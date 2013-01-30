@@ -1,1 +1,4 @@
-Radium.EmailsItemController = Em.ObjectController.extend()
+Radium.EmailsItemController = Em.ObjectController.extend
+  showActions: false
+  showActionSection: ->
+    @toggleProperty 'showActions'
