@@ -1,6 +1,6 @@
 require 'radium/views/forms/form_widget'
 
-Radium.BulkActionFormWidget = Radium.FormWidgetView.extend
+Radium.BulkActionFormWidget = Radium.FormsFormWidgetView.extend
   init: ->
     @_super.apply this, arguments
 

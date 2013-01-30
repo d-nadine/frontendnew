@@ -59,7 +59,7 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
     # some reason. This seems like an Ember bug
     @render into: 'application'
 
-    @render 'emails/sidebar', 
+    @render 'emails/sidebar',
       into: 'emails'
       outlet: 'sidebar'
 

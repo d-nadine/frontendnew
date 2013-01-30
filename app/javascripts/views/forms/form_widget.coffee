@@ -1,6 +1,6 @@
 require 'radium/controllers/todo_form_controller'
 
-Radium.FormWidgetView = Em.View.extend
+Radium.FormsFormWidgetView = Em.View.extend
   templateName: 'forms/form_widget'
   buttons: [
     Ember.Object.create
@@ -26,12 +26,11 @@ Radium.FormWidgetView = Em.View.extend
 
     @get(action).apply(this, args)
 
-  toggleForm: (event) ->
+  toggleForm: (button) ->
     @get('buttons').forEach (btn) -> btn.set('closed', true) unless btn == event.context
 
     tasksContainer = @get('tasksContainer')
 
-    button = event.context
     button.toggleProperty('closed')
 
     if button.get('closed')

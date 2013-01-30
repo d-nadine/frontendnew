@@ -1,5 +1,5 @@
 Radium.TodoFormView = Ember.View.extend
-  templateName: 'radium/todo_form'
+  templateName: 'todo_form'
 
   close: ->
     Radium.get('router').send('closeForm')

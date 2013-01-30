@@ -8,16 +8,16 @@ Radium.TodoFormController = Ember.ObjectController.extend
   ).property('isDescritionValid')
 
   isDescriptionValid: (->
-    !Ember.empty @get('description')
+    !Ember.isEmpty @get('description')
   ).property('description')
 
   submit: ->
     return unless @get('isValid')
-    @get('content').commit()
+    @get('model').commit()
     Radium.Utils.notify('Todo created!')
 
   reset: ->
-    @set 'content', Radium.Todo.createRecord
+    @set 'model', Radium.Todo.createRecord
       kind: @get('kind')
       finishBy: Ember.DateTime.create().advance(day: 1)
       user: Radium.get('router.currentUser')

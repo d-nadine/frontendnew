@@ -2,7 +2,7 @@
   <div class="page-header">
     {{#if sender.avatar.small_url}}
       <img class="avatar" {{bindAttr src="sender.avatar.small_url" title="sender.displayName"}}>
-    {{else}} 
+    {{else}}
       <img class="avatar" src="/images/fallback/small_default.png">
     {{/if}}
 
@@ -52,9 +52,10 @@
   </div>
 </div>
 
-<div class='email-alert-area'></div>
+{{#if showActions }}
+  {{control 'forms.form_widget' model}}
+{{/if}}
 
 <div class="block block-arrow">
-  {{!FIXME: figure out how to pass in the right thing}}
   {{control 'comments' model}}
 </div>
