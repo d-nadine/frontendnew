@@ -19865,7 +19865,6 @@ Ember.Handlebars.registerHelper('template', function(name, options) {
 });
 
 Ember.Handlebars.registerHelper('partial', function(name, options) {
-  console.log(options);
   var nameParts = name.split("/"),
       lastPart = nameParts[nameParts.length - 1];
 
