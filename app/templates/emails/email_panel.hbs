@@ -14,7 +14,9 @@
       </a>
     </div>
 
-    {{view view.remainingTableView}}
+    {{#with remainingContent}}
+      {{partial "emails/table"}}
+    {{/with}}
   {{/if}}
 {{else}}
   <div class="block">

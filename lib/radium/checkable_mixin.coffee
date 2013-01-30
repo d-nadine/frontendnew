@@ -9,7 +9,7 @@ Radium.CheckableMixin = Ember.Mixin.create
   ).property('content')
 
   hasCheckedContent: (->
-    Ember.isEmpty(@get('checkedContent'))
+    !Ember.isEmpty(@get('checkedContent'))
   ).property('checkedContent.length')
 
   toggleChecked: ->

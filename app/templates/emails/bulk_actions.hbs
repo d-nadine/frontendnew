@@ -1,8 +1,9 @@
-{{view view.FormWidget selectionBinding="controller"}}
 <div class="block">
   <div class="page-header">
     <h3>{{length}} Email(s) Selected</h3>
   </div>
 
-  {{view view.checkedEmailTableView}}
+  {{#with controller}}
+    {{partial "emails/table"}}
+  {{/with}}
 </div>

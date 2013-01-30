@@ -1,1 +1,5 @@
-{{control 'emails.email_panel' history}}
+{{#if hasCheckedContent}}
+  {{control 'emails.bulk_actions' checkedContent}}
+{{else}}
+  {{control 'emails.email_panel' history}}
+{{/if}}
