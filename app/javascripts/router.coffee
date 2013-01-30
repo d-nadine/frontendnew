@@ -31,7 +31,9 @@ Radium.ApplicationRoute = Ember.Route.extend DrawerSupport,
 
   renderTemplate: ->
     @render()
-    @render 'drawer_panel', outlet: 'drawerPanel'
+    @render 'drawer_panel', 
+      into: 'application'
+      outlet: 'drawerPanel'
 
 Radium.DashboardRoute = Ember.Route.extend
   renderTemplate: ->
