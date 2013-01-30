@@ -4,7 +4,7 @@
       {{#each button in buttons}}
         {{#with button}}
           {{#if alwaysOpen}}
-            <a class="{{unbound classes}}" {{action taskAction this target="view"}} class="btn">
+            <a class="{{unbound classes}}" {{action executeAction this}} class="btn">
               {{label}}
               {{#if icons}}
               <i class="{{unbound icons}}"></i>
