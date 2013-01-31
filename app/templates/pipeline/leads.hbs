@@ -21,12 +21,12 @@
         </td>
         <td>
           {{avatar this}}
-          <a {{action showContact this href=true}}>{{unbound name}}</a>
+          {{#linkTo contact this}}{{name}}{{/linkTo}}
         </td>
         <td>
           {{#if user}}
             {{avatar user}}
-            <a {{action showUser user href=true}}>{{unbound user.name}}</a>
+            {{#linkTo user user}}{{user.name}}{{/linkTo}}
           {{/if}}
         </td>
         <td {{bindAttr class="isExpired"}}>
