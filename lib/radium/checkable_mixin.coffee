@@ -4,9 +4,9 @@ Radium.CheckableMixin = Ember.Mixin.create
   checkedContent: (->
     Radium.FilteredArray.create
       context: this
-      contentBinding: 'context.content'
+      contentBinding: 'context.arrangedContent'
       filterProperties: ['isChecked']
-  ).property('content')
+  ).property('arrangedContent')
 
   hasCheckedContent: (->
     !Ember.isEmpty(@get('checkedContent'))

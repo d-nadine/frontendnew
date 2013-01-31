@@ -1,6 +1,6 @@
-Radium.EmailsSidebarItemView = Em.View.extend Radium.ContentIdentificationMixin,
+Radium.MessagesSidebarItemView = Em.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
-  templateName: 'emails/sidebar_item'
+  templateName: 'messages/sidebar_item'
   classNameBindings: ['controller.isSelected', 'controller.isChecked', 'controller.isRead']
 
   checkMailItem: Em.Checkbox.extend

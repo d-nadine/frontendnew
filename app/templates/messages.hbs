@@ -1,0 +1,7 @@
+{{#if hasCheckedContent}}
+  {{render 'messages/bulk_actions' checkedContent}}
+{{else}}
+  {{#with selectedContent}}
+    {{render 'messages/email_panel' this}}
+  {{/with}}
+{{/if}}

@@ -18,7 +18,8 @@ require 'radium/utils'
 
 require 'radium/store'
 
-require 'radium/router'
+require 'radium/routes'
+requireAll /radium\/routes/
 
 require 'radium/models'
 
@@ -28,7 +29,6 @@ require 'radium/checkable_mixin'
 require 'radium/selectable_mixin'
 
 requireAll /radium\/controllers/
-
 
 require /radium\/helpers/
 

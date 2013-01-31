@@ -1,0 +1,15 @@
+{{#each visibleContent itemController="emailItem"}}
+  {{template "messages/email_item"}}
+{{/each}}
+
+{{#if hiddenContent}}
+  <div id="remaining-emails">
+    <a class="btn btn-large btn-full-width" {{action showMore}}>
+      <i class="icon-plus"></i>{{hiddenContent.length}} Email(s) Remaining: Show More
+    </a>
+  </div>
+
+  {{#with hiddenContent}}
+    {{template "messages/table"}}
+  {{/with}}
+{{/if}}

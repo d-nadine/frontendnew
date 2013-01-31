@@ -10,7 +10,4 @@ Radium.InMemoryAdapter = DS.FixtureAdapter.extend
     else
       throw new Error("Implement #{queryMethod} to query #{type}!")
 
-  queryEmailRecords: (records, query) ->
-    records
-
 requireAll /radium\/adapters\/in_memory_adapter\/queries/

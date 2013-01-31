@@ -1,4 +1,6 @@
-Radium.EmailsController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+  sortProperties: ['sentAt']
+
   folders: [
     {label: 'Inbox', name: 'inbox'}
     {label: 'Sent items', name: 'sent'}
@@ -10,14 +12,9 @@ Radium.EmailsController = Em.ArrayController.extend Radium.CheckableMixin, Radiu
     {label: 'Prospects', name: 'prospects'}
   ]
 
-  arrangedContent: (->
+  content: (->
     Radium.Email.find folder: @get('folder')
   ).property('folder')
-
-  history: (->
-    return unless @get('selectedContent')
-    Radium.Email.find historyFor: @get('selectedContent')
-  ).property('selectedContent')
 
   deleteEmail: (email) ->
     email.set 'isChecked'
