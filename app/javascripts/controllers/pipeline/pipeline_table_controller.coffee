@@ -1,5 +1,6 @@
 Radium.PipelineTableController = Em.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   needs: ['pipeline']
+  itemController: 'pipeline_table_item'
   contentBinding: 'controllers.pipeline.items'
   perPage: 7
   deleteAll: ->

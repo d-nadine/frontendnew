@@ -18,6 +18,5 @@ Radium.PipelineController = Em.ArrayController.extend
     status = @get('status')
     return unless status
     # FIXME: replace with real query
-    @get('currentType').find(statusFor: status).map (item) ->
-      Radium.PipelinePresenter.create content: item
+    @get('currentType').find(statusFor: status)
   ).property('status', 'currentType')

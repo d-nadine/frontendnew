@@ -8,4 +8,3 @@ Radium.PipelineView = Em.View.extend
       e.stopPropagation()
     change: (e) ->
       @get('content').toggleProperty('isChecked')
-  remainingDealsLink: Radium.RemainingDealsLinkView.extend()
