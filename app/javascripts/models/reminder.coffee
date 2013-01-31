@@ -1,4 +1,4 @@
-Radium.Reminder = Radium.Core.extend
+Radium.Reminder = Radium.Model.extend
   via: DS.attr('string')
   time: DS.attr('datetime')
 

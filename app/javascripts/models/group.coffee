@@ -1,2 +1,2 @@
-Radium.Group = Radium.Core.extend Radium.FollowableMixin,
+Radium.Group = Radium.Model.extend Radium.FollowableMixin,
   name: DS.attr('string')

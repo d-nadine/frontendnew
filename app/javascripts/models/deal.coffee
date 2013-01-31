@@ -1,4 +1,4 @@
-Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
+Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radium.AttachmentsMixin,
   name: DS.attr('string')
   description: DS.attr('string')
   payBy: DS.attr('datetime')
@@ -7,7 +7,6 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
 
   # Can be `published`, `negotiating`, `closed`, `paymentpending`
   status: DS.attr('string')
-  isPublic: DS.attr('boolean')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'deal')
   meetings: DS.hasMany('Radium.Meeting')
@@ -15,6 +14,7 @@ Radium.Deal = Radium.Core.extend Radium.CommentsMixin,
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
 
+  # TODO: Replace with a computed alias
   isOverdue: (->
     d = new Date().getTime()
     payBy = new Date(@get('payBy')).getTime()

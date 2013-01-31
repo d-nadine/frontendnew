@@ -1,15 +1,8 @@
-Radium.Email = Radium.Core.extend Radium.CommentsMixin,
+Radium.Email = DS.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
   subject: DS.attr('string')
-  html: DS.attr('string')
+  message: DS.attr('string')
   read: DS.attr('boolean')
   isPublic: DS.attr('boolean')
-  message: DS.attr('string')
-  sentAt: DS.attr('date')
+  sentAt: DS.attr('datetime')
 
   sender: DS.attr('object')
-
-  attachments: DS.hasMany('Radium.Attachment')
-
-  hasAttachments: (->
-    true
-  ).property('attachments.length')

@@ -1,10 +1,6 @@
-###
-@extends {Class} Person
-###
-Radium.User = Radium.Person.extend
-  displayName: (->
-    (if (@get('apiKey')) then 'Me' else @get('abbrName'))
-  ).property('name')
+Radium.User = Radium.Model.extend Radium.FollowableMixin,
+  name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')
+
   contacts: DS.hasMany('Radium.Contact')

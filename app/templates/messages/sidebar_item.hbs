@@ -6,9 +6,9 @@
   <div>
     <div>
       {{#if sender.isContact}}
-      <a {{action showContact sender href=true}}>{{unbound sender.displayName}}</a>
+      <a {{action showContact sender href=true}}>{{unbound sender.name}}</a>
       {{else}}
-        <a {{action showUser sender href=true}}>{{unbound sender.displayName}}</a>
+        <a {{action showUser sender href=true}}>{{unbound sender.name}}</a>
       {{/if}}
     </div>
     <p>{{subject}}</p>

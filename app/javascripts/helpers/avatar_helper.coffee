@@ -11,6 +11,6 @@ Ember.Handlebars.registerHelper 'avatar', (property, options) ->
           else
             defaultSrc
 
-  title = Ember.get(this, 'displayName') || ""
+  title = Ember.get(this, 'name') || ""
 
   new Handlebars.SafeString("<img src='#{src}' title='#{title}' class='avatar'/>")

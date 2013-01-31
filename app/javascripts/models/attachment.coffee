@@ -1,4 +1,4 @@
-Radium.Attachment = Radium.Core.extend
+Radium.Attachment = Radium.Model.extend
   url: DS.attr('string')
   mimeType: DS.attr('string')
 

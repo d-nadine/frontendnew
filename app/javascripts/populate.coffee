@@ -15,7 +15,7 @@ class Populator
       phone: '136127245071'
 
     ralph = Factory.create 'contact',
-      display_name: 'Ralph'
+      name: 'Ralph'
       status: 'lead'
 
     john = Factory.create 'contact'
@@ -53,10 +53,6 @@ class Populator
     developers = Factory.create 'group',
       name: 'Developers'
 
-    phoneCall = Factory.create 'phone_call',
-      to:  aaron
-      from: ralph
-
     deal = Factory.create 'deal',
       user: aaron
 
@@ -89,11 +85,6 @@ class Populator
       description: 'schedule group meeting',
       user: jerry
       reference: group
-
-    phoneCallTodo = Factory.create 'todo',
-      user: jerry,
-      description: 'product discussion'
-      reference: phoneCall
 
     todoTodo = Factory.create 'todo',
       description: 'inception',

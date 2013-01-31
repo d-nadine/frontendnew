@@ -1,4 +1,4 @@
-Radium.Meeting = Radium.Core.extend Radium.CommentsMixin,
+Radium.Meeting = Radium.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
   topic: DS.attr('string')
   location: DS.attr('string')
   startsAt: DS.attr('datetime')
