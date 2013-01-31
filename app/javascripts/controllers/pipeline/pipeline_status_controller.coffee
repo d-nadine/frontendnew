@@ -1,7 +1,6 @@
 Radium.PipelineStatusController = Em.ArrayController.extend
   itemController: 'pipeline_status_item'
   status: null
-  current: null
   content: [
     Em.Object.create({label: 'Leads', name: 'lead'})
     Em.Object.create({label: 'Negotiating', name: 'negotiating'})
@@ -16,7 +15,6 @@ Radium.PipelineStatusController = Em.ArrayController.extend
     @setEach('isCurrent', false)
     current = @find (item) => item.get('name') == @get('status')
     current.set('isCurrent', true)
-    @set('current', current)
   ).observes('status')
 
   leadTotal: ( ->
