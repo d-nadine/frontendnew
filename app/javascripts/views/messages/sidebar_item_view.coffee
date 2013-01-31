@@ -7,5 +7,3 @@ Radium.MessagesSidebarItemView = Em.View.extend Radium.ContentIdentificationMixi
     checkedBinding: 'controller.isChecked'
     click: (e) ->
       e.stopPropagation()
-    change: (e) ->
-      @toggleProperty 'checked'
