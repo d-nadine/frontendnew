@@ -3,7 +3,7 @@ Radium.PipelineDealsControllerBase = Radium.PipelineBaseController.extend
     return 0 unless @get('visibleContent.length')
 
     sum = @get('visibleContent').reduce (preVal, item) ->
-      value = if preVal.constructor == Radium.Deal
+      value = if preVal.get
                 value = preVal.get('value')
               else
                 preVal
