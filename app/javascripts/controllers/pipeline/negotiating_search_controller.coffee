@@ -1,5 +1,4 @@
 require 'radium/controllers/pipeline/period_search_controller'
-Radium.NegotiatingSearchController = Radium.PeriodSearchController.extend
+Radium.PipelineNegotiatingSearchController = Radium.PeriodSearchController.extend
   needs: ['pipelineNegotiating']
-  dealsBinding: 'controllers.pipelineNegotiating.checkedContent'
-
+  dealsBinding: 'controllers.pipelineNegotiating.content'
