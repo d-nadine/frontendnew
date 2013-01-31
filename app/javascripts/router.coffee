@@ -87,6 +87,9 @@ Radium.PipelineLeadsRoute = Em.Route.extend DrawerSupport,
     toggleSearch: ->
       @toggleDrawer 'pipeline/lead_search'
 
+    toggleChecked: ->
+      @controllerFor('pipelineLeads').toggleChecked()
+
   setupController: ->
     @controllerFor('pipelineStatus').set('status', 'lead')
 
@@ -95,6 +98,24 @@ Radium.PipelineLeadsRoute = Em.Route.extend DrawerSupport,
 
   renderTemplate: ->
     @render 'pipeline/pipeline_lead'
+      into: 'pipeline'
+
+Radium.PipelineNegotiatingRoute = Em.Route.extend DrawerSupport,
+  events:
+    toggleSearch: ->
+      @toggleDrawer 'pipeline/negotiating_search'
+
+    toggleChecked: ->
+      @controllerFor('pipelineLeads').toggleChecked()
+
+  setupController: ->
+    @controllerFor('pipelineStatus').set('status', 'negotiating')
+
+  model: ->
+    Radium.Deal.find(statusFor: 'negotiating')
+
+  renderTemplate: ->
+    @render 'pipeline/pipeline_negotiating'
       into: 'pipeline'
 
 Radium.Router.map ->
