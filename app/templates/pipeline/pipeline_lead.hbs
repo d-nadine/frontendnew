@@ -10,7 +10,7 @@
   </tr>
   </thead>
   <tbody>
-    {{#each lead in view.content}}
+    {{#each lead in visibleContent}}
       {{#with lead}}
         <tr {{bindAttr class="isChecked:success"}}>
           <td>
@@ -43,7 +43,11 @@
           </td>
         </tr>
       {{/with}}
+    {{else}}
+      <tr>
+        <td colspan="6" class="tac">No leads</td>
+      </tr>
     {{/each}}
   </tbody>
 </table>
-{{view view.remainingDealsLink}}
+{{!view view.remainingDealsLink}}

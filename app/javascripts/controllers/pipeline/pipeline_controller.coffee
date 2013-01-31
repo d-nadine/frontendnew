@@ -1,8 +1,7 @@
 Radium.PipelineController = Em.ArrayController.extend
   needs: ['pipelineStatus']
   statusesBinding: 'controllers.pipelineStatus'
-  statusBinding: 'pipelineStatusController.status.status'
-  currentTypeBinding: 'pipelineStatusController.status.currentType'
+  statusBinding: 'controllers.pipelineStatus.status'
 
   currentType: ( ->
     status = @get('status')
@@ -15,10 +14,10 @@ Radium.PipelineController = Em.ArrayController.extend
       Radium.Deal
   ).property('status')
 
-  content: ( ->
+  items: ( ->
     status = @get('status')
     return unless status
     # FIXME: replace with real query
     @get('currentType').find(statusFor: status).map (item) ->
       Radium.PipelinePresenter.create content: item
-  ).property('status')
+  ).property('status', 'currentType')

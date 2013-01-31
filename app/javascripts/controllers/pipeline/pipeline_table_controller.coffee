@@ -1,5 +1,6 @@
 Radium.PipelineTableController = Em.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
-  contentBinding: 'pipelineController.content'
+  needs: ['pipeline']
+  contentBinding: 'controllers.pipeline.items'
   perPage: 7
   deleteAll: ->
     # FIXME: ember-data errors, fake for now

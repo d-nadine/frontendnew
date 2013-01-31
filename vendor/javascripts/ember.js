@@ -1,6 +1,5 @@
-// 32503f9 (2013-01-29 22:32:15 -0800)
-// Version: v1.0.0-pre.2-556-g96b56b1
-// Last commit: 96b56b1 (2013-01-29 11:19:52 -0800)
+// Version: v1.0.0-pre.4-135-g397bb75
+// Last commit: 397bb75 (2013-01-31 09:50:58 +0000)
 
 
 (function() {
@@ -151,8 +150,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-566-g32503f9
-// Last commit: 32503f9 (2013-01-29 22:32:15 -0800)
+// Version: v1.0.0-pre.4-135-g397bb75
+// Last commit: 397bb75 (2013-01-31 09:50:58 +0000)
 
 
 (function() {
@@ -6052,7 +6051,7 @@ define("container",
       this.resolver = parent && parent.resolver || function() {};
       this.registry = new InheritingDict(parent && parent.registry);
       this.cache = new InheritingDict(parent && parent.cache);
-      this.typeInjections = {};
+      this.typeInjections = new InheritingDict(parent && parent.typeInjections);
       this.injections = {};
       this._options = new InheritingDict(parent && parent._options);
       this._typeOptions = new InheritingDict(parent && parent._typeOptions);
@@ -6127,7 +6126,11 @@ define("container",
       typeInjection: function(type, property, fullName) {
         if (this.parent) { illegalChildOperation('typeInjection'); }
 
-        var injections = this.typeInjections[type] = this.typeInjections[type] || [];
+        var injections = this.typeInjections.get(type);
+        if (!injections) {
+          injections = [];
+          this.typeInjections.set(type, injections);
+        }
         injections.push({ property: property, fullName: fullName });
       },
 
@@ -6229,7 +6232,7 @@ define("container",
 
       if (factory) {
         var injections = [];
-        injections = injections.concat(container.typeInjections[type] || []);
+        injections = injections.concat(container.typeInjections.get(type) || []);
         injections = injections.concat(container.injections[fullName] || []);
 
         var hash = buildInjections(container, injections);
@@ -14903,7 +14906,7 @@ Ember.View = Ember.CoreView.extend(
     // element.
     // In the interim, we will just re-render if that happens. It is more
     // important than elements get garbage collected.
-    this.destroyElement();
+    if (!this.removedFromDOM) { this.destroyElement(); }
     this.invokeRecursively(function(view) {
       if (view.clearRenderedChildren) { view.clearRenderedChildren(); }
     });
@@ -15466,18 +15469,37 @@ Ember.View = Ember.CoreView.extend(
     var $el = this.$();
     if (!$el) { return; }
 
+    var self = this;
+
+    this.toggleVisibility(function(){
+      if (self._isAncestorHidden()) { return; }
+
+      self._notifyVisibilityChanged();
+    });
+
+  }, 'isVisible'),
+
+
+  /**
+    Override to provide different toggle visibility behaviour
+   **/
+  toggleVisibility: function(callback){
     var isVisible = get(this, 'isVisible');
 
-    $el.toggle(isVisible);
+    this.$().toggle(isVisible);
 
-    if (this._isAncestorHidden()) { return; }
+    callback();
+  },
+
+  _notifyVisibilityChanged: function(){
+    var isVisible = get(this, 'isVisible');
 
     if (isVisible) {
       this._notifyBecameVisible();
     } else {
       this._notifyBecameHidden();
     }
-  }, 'isVisible'),
+  },
 
   _notifyBecameVisible: function() {
     this.trigger('becameVisible');
@@ -16282,56 +16304,6 @@ var forEach = Ember.EnumerableUtils.forEach;
   </div>
   ```
 
-  Direct manipulation of `childViews` presence or absence in the DOM via calls
-  to `remove` or `removeFromParent` or calls to a container's `removeChild` may
-  not behave correctly.
-
-  Calling `remove()` on a child view will remove the view's HTML, but it will
-  remain as part of its container's `childView`s property.
-
-  Calling `removeChild()` on the container will remove the passed view instance
-  from the container's `childView`s but keep its HTML within the container's
-  rendered view.
-
-  Calling `removeFromParent()` behaves as expected but should be avoided in
-  favor of direct manipulation of a container as an array.
-
-  ```javascript
-  aContainer = Ember.ContainerView.create({
-    classNames: ['the-container'],
-    childViews: ['aView', 'bView'],
-    aView: Ember.View.create({
-      template: Ember.Handlebars.compile("A")
-    }),
-    bView: Ember.View.create({
-      template: Ember.Handlebars.compile("B")
-    })
-  });
-
-  aContainer.appendTo('body');
-  ```
-
-  Results in the HTML
-
-  ```html
-  <div class="ember-view the-container">
-    <div class="ember-view">A</div>
-    <div class="ember-view">B</div>
-  </div>
-  ```
-
-  Calling `aContainer.get('aView').removeFromParent()` will result in the
-  following HTML
-
-  ```html
-  <div class="ember-view the-container">
-    <div class="ember-view">B</div>
-  </div>
-  ```
-
-  And the `Ember.View` instance stored in `aContainer.aView` will be removed from `aContainer`'s
-  `childViews` array.
-
   ## Templates and Layout
 
   A `template`, `templateName`, `defaultTemplate`, `layout`, `layoutName` or
@@ -16462,9 +16434,15 @@ Ember.ContainerView = Ember.View.extend(Ember.MutableArray, {
 
     if (removed > 0) {
       var changedViews = views.slice(start, start+removed);
-      this.initializeViews(changedViews, null, null);
+      // transition to preRender before clearing parentView
       this.currentState.childViewsWillChange(this, views, start, removed);
+      this.initializeViews(changedViews, null, null);
     }
+  },
+
+  removeChild: function(child) {
+    this.removeObject(child);
+    return this;
   },
 
   /**
@@ -16509,7 +16487,6 @@ Ember.ContainerView = Ember.View.extend(Ember.MutableArray, {
     var currentView = get(this, 'currentView');
     if (currentView) {
       currentView.destroy();
-      this.removeObject(currentView);
     }
   }, 'currentView'),
 
@@ -26608,8 +26585,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-pre.2-566-g32503f9
-// Last commit: 32503f9 (2013-01-29 22:32:15 -0800)
+// Version: v1.0.0-pre.4-135-g397bb75
+// Last commit: 397bb75 (2013-01-31 09:50:58 +0000)
 
 
 (function() {
