@@ -1,4 +1,4 @@
-Radium.PipelinePipelineWidgetController = Ember.ArrayController.extend
+Radium.PipelinePipelineWidgetController = Radium.FormsBulkFormWidgetController.extend
   buttons: [
     Ember.Object.create
       template: "unimplemented"
