@@ -111,7 +111,7 @@ Radium.PipelineNegotiatingRoute = Em.Route.extend DrawerSupport,
   setupController: ->
     @controllerFor('pipelineStatus').set('status', 'negotiating')
 
-  model: ->
+  model: (params) ->
     Radium.Deal.find(statusFor: 'negotiating')
 
   renderTemplate: ->
