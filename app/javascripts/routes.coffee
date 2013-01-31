@@ -4,8 +4,17 @@ Radium.Router.reopen
 Radium.Router.map ->
   @route 'dashboard'
   @route 'messages'
+
   @resource 'pipeline', ->
     @route 'leads'
     @route 'negotiating'
     @route 'closed'
     @route 'lost'
+
+  @resource 'contacts'
+
+  @resource 'contact', path: '/contacts/:contact_id'
+
+  @resource 'user', path: '/users/:user_id'
+
+  @resource 'deal', path: '/deals/:deal_id'
