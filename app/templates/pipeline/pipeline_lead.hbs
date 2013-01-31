@@ -10,39 +10,37 @@
   </tr>
   </thead>
   <tbody>
-    {{#each lead in visibleContent}}
-      {{#with lead}}
-        <tr {{bindAttr class="isChecked:success"}}>
-          <td>
-            {{view view.checkContent contentBinding="lead"}}
-          </td>
-          <td>
-            {{avatar lead}}
-            <a {{action showContact this href=true}}>{{unbound name}}</a>
-          </td>
-          <td>
-            {{#if user}}
-              {{avatar user}}
-              <a {{action showUser user href=true}}>{{unbound user.name}}</a>
-            {{/if}}
-          </td>
-          <td {{bindAttr class="isExpired"}}>
-            {{daysSinceText}}
-          </td>
-          <td>
-            {{#if nextTaskText}}
-              {{nextTaskText}}
-            {{else}}
-              <i class="icon-warning-sign"></i>
-            {{/if}}
-          </td>
-          <td>
-            <a {{action deleteLead this target="controller"}}>
-              <i class="icon-trash"></i>
-            </a>
-          </td>
-        </tr>
-      {{/with}}
+    {{#each visibleContent itemController="pipeline_contact_item"}}
+      <tr {{bindAttr class="isChecked:success"}}>
+        <td>
+          {{view view.checkContent contentBinding="this"}}
+        </td>
+        <td>
+          {{avatar this}}
+          <a {{action showContact this href=true}}>{{unbound displayName}}</a>
+        </td>
+        <td>
+          {{#if user}}
+            {{avatar user}}
+            <a {{action showUser user href=true}}>{{unbound user.displayName}}</a>
+          {{/if}}
+        </td>
+        <td {{bindAttr class="isExpired"}}>
+          {{daysSinceText}}
+        </td>
+        <td>
+          {{#if nextTaskText}}
+            {{nextTaskText}}
+          {{else}}
+            <i class="icon-warning-sign"></i>
+          {{/if}}
+        </td>
+        <td>
+          <a {{action deleteLead this target="controller"}}>
+            <i class="icon-trash"></i>
+          </a>
+        </td>
+      </tr>
     {{else}}
       <tr>
         <td colspan="6" class="tac">No leads</td>

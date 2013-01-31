@@ -1,4 +1,4 @@
-Radium.PipelineTableItemController = Em.ObjectController.extend
+Radium.PipelineContactItemController = Em.ObjectController.extend
   isExpired: ( ->
     # FIXME: Arbitary cut off point
     @get('daysSinceCreation') > 60
