@@ -1,1 +1,3 @@
-Radium.FormsFormWidgetView = Em.View.extend()
+Radium.FormsFormWidgetView = Em.View.extend
+  classNames: ['block']
+  templateName: "forms/form_widget"

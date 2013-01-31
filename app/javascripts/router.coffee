@@ -85,7 +85,6 @@ Radium.PipelineLeadsRoute = Em.Route.extend
   renderTemplate: ->
     @render 'pipeline/pipeline_lead'
       into: 'pipeline'
-      outlet: 'table'
 
 Radium.Router.map ->
   @route 'dashboard'
