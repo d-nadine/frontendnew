@@ -1,5 +1,6 @@
 Radium.PipelineDrawerButtonsController = Em.Controller.extend
-  statusBinding: 'pipelineStatusController.status'
+  needs:['pipelineStatus']
+  statusBinding: 'controllers.pipelineStatus.status'
 
-  toggleSearch: (event, context) ->
-    @get('drawerPanelController').toggleDrawer "#{@get('status')}Search"
+  # toggleSearch: (event, context) ->
+  #   @get('drawerPanelController').toggleDrawer "#{@get('status')}Search"

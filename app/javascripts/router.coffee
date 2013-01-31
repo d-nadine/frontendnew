@@ -75,7 +75,18 @@ Radium.PipelineRoute = Ember.Route.extend
     @controllerFor('pipelineStatus').set('contacts', contacts)
     @controllerFor('pipelineStatus').set('deals', deals)
 
-Radium.PipelineLeadsRoute = Em.Route.extend
+  renderTemplate: ->
+    @render into: 'application'
+
+    @render 'pipeline/drawer_buttons'
+      into: 'drawer_panel'
+      outlet: 'buttons'
+
+Radium.PipelineLeadsRoute = Em.Route.extend DrawerSupport,
+  events:
+    toggleSearch: ->
+      @toggleDrawer 'pipeline/lead_search'
+
   setupController: ->
     @controllerFor('pipelineStatus').set('status', 'lead')
 
