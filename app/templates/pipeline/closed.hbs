@@ -1,35 +1,39 @@
 {{#if checkedContent.length}}
-  {{control 'pipeline/pipeline_widget' checkedContent}}
+  {{control 'pipeline/form_widget' checkedContent}}
 {{/if}}
+
 <table class="table table-striped table-bordered table-hover">
   <thead>
   <tr>
     <th>&nbsp;</th>
-    <th>Lead</th>
+    <th>&nbsp;</th>
+    <th>Deal</th>
     <th>Assigned To</th>
-    <th>Age of Lead</th>
+    <th>Value</th>
+    <th>Pay By</th>
     <th>Next Task</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>
-    {{#each visibleContent itemController="pipeline_contact_item"}}
+    {{#each visibleContent itemController="pipelineItem"}}
       <tr {{bindAttr class="isChecked:success"}}>
         <td>
           {{view Ember.Checkbox checkedBinding="isChecked"}}
         </td>
         <td>
-          {{avatar this}}
-          <a {{action showContact this href=true}}>{{unbound name}}</a>
+          {{#with contact}}
+            {{avatar this}}
+          {{/with}}
         </td>
+        <td>{{name}}</td>
         <td>
-          {{#if user}}
-            {{avatar user}}
-            <a {{action showUser user href=true}}>{{unbound user.name}}</a>
-          {{/if}}
+          {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
-        <td {{bindAttr class="isExpired"}}>
-          {{daysSinceText}}
+        <td>{{currency value}}</td>
+        <td {{bindAttr class="isOverdue"}}>
+          {{!FIXME this should be the pay by date}}
+          NOT IMPLEMENTED
         </td>
         <td>
           {{#if nextTaskText}}
@@ -46,9 +50,16 @@
       </tr>
     {{else}}
       <tr>
-        <td colspan="6" class="tac">No leads</td>
+        <td colspan="8" class="tac">No Deals</td>
       </tr>
     {{/each}}
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="8" class="tar">Total: {{currency valueTotal}}</td>
+    </tr>
+  </tfoot>
 </table>
-{{template "pipeline/remaining_deals_link"}}
+
+{{template "pipeline/show_more"}}
+

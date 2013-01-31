@@ -1,0 +1,22 @@
+<div id="pipeline">
+  <div>
+    <ul id="status">
+      <li>
+        {{#linkTo pipeline.leads}}Leads ({{leads}}){{/linkTo}}
+      </li>
+      <li>
+        {{#linkTo pipeline.negotiating}}Negotiating ({{negotiating}}){{/linkTo}}
+      </li>
+      <li>
+        {{#linkTo pipeline.closed}}Closed ({{closed}}){{/linkTo}}
+      </li>
+      <li>
+        {{#linkTo pipeline.lost}}Lost ({{lost}}){{/linkTo}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="pipeline-results">
+  {{outlet}}
+</div>
