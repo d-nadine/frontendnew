@@ -67,9 +67,16 @@ Radium.EmailsRoute = Ember.Route.extend DrawerSupport,
       into: 'drawer_panel'
       outlet: 'buttons'
 
-Radium.PipelineLeadsRoute = Em.Route.extend
-  renderTemplate: ->
-    @render into: 'application'
+Radium.PipelineRoute = Ember.Route.extend
+  setupController: ->
+    # FIXME: Replace with real query
+    contacts = Radium.Contact.all()
+    deals = Radium.Deal.all()
+    @controllerFor('pipelineStatus').set('contacts', contacts)
+    @controllerFor('pipelineStatus').set('deals', deals)
+
+Radium.PipelineLeadsRoute = Em.Route.extend()
+
 Radium.Router.map ->
   @route 'dashboard'
   @route 'emails', path: '/messages'
