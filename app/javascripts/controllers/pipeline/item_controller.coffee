@@ -9,13 +9,3 @@ Radium.PipelineItemController = Em.ObjectController.extend
     else
       @get('content.latestDeal.value') || 0
   ).property('content')
-
-  nextTask: ( ->
-    nextTask = @get('model.nextTask')
-    return null unless nextTask
-
-    if nextTask.description
-      nextTask.description
-    else
-      nextTask.topic
-  ).property('nextTask')

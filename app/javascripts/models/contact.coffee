@@ -1,4 +1,6 @@
-Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
+require 'radium/models/mixins/next_task_mixin'
+
+Radium.Contact = Radium.Model.extend Radium.FollowableMixin, Radium.NextTaskMixin, Radium.NextTaskMixin,
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')
@@ -12,8 +14,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal')
 
   user: DS.belongsTo('Radium.User')
-
-  nextTask: DS.attr('object')
 
   latestDeal: ( ->
     # FIXME: Is it safe to assume that

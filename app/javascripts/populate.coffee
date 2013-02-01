@@ -125,10 +125,10 @@ class Populator
       switch (3).randomize()
         when 0
           hash.todos = [todo]
-          hash.nextTask = Factory.build 'todo'
+          hash.nextTask = todo
         when 1
           hash.meetings = [retrospection]
-          hash.nextTask = Factory.build 'meeting'
+          hash.nextTask = retrospection
 
       source = switch 5.randomize()
         when 0
