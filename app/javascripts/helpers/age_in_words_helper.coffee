@@ -3,7 +3,7 @@ Ember.Handlebars.registerBoundHelper 'ageInWords', (value, options) ->
 
   now = Ember.DateTime.create()
 
-  days = now.daysApart value
+  days = value.daysApart now
 
   text = if days == 0
     "New"

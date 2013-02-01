@@ -30,9 +30,10 @@ Ember.DateTime.reopen
     @get('milliseconds') > Ember.DateTime.create().get('milliseconds')
 
 Ember.DateTime.reopenClass
-  random: ->
+  random: (alwaysPast = false) ->
     multipler = ->
-     if Math.random() > 0.5 then 1 else -1
+      return -1 if alwaysPast
+      if Math.random() > 0.5 then 1 else -1
 
     randomUpTo = (max) ->
       Math.floor((Math.random() * max) + 1)

@@ -140,7 +140,7 @@ class Populator
         when 3
           hash.source = "Newsletter"
 
-      hash.createdAt = Ember.DateTime.random()
+      hash.createdAt = Ember.DateTime.random(true)
 
       dealStatuses = ['published', 'negotiating', 'closed', 'paymentpending']
 
@@ -153,7 +153,7 @@ class Populator
                         status: -> dealStatuses[(3).randomize()]
                         payBy: -> Ember.DateTime.random()
                         contact: -> Radium.Contact.find().objectAt((Radium.Contact.find().get('length') - 1).randomize())
-                        createdAt: -> Ember.DateTime.random()
+                        createdAt: -> Ember.DateTime.random(true)
                         todos: -> [todo] if hash.todos
                         meetings: -> [retrospection] if hash.meetings
                         nextTask: -> hash.nextTask if hash.nextTask
