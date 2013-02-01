@@ -9,3 +9,10 @@ Radium.CalendarRoute = Ember.Route.extend
   model: (params) ->
     string = "#{params.year}-#{params.month}-#{params.day}"
     Ember.DateTime.parse string, "%Y-%m-%d"
+
+  renderTemplate: ->
+    @render()
+
+    @render 'calendar/sidebar', 
+      outlet: 'sidebar', 
+      into: 'calendar'
