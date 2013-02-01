@@ -4,9 +4,7 @@
 
 {{#if hiddenContent}}
   <div id="remaining-emails">
-    <a class="btn btn-large btn-full-width" {{action showMore}}>
-      <i class="icon-plus"></i>{{hiddenContent.length}} Email(s) Remaining: Show More
-    </a>
+    {{template "forms/show_more"}}
   </div>
 
   {{#with hiddenContent}}
