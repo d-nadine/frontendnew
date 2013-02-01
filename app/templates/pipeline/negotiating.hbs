@@ -32,8 +32,8 @@
           {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
         <td>{{currency value}}</td>
-        <td {{bindAttr class="isExpired"}}>
-          {{daysSinceText}}
+        <td>
+          {{ageInWords createdAt}}
         </td>
         <td>
           {{#if nextTaskText}}

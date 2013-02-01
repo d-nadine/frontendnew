@@ -11,3 +11,8 @@ Radium.computed.isPast = (dependentKey) ->
 Radium.computed.isFuture = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     @get(dependentKey).isFuture()
+
+Radium.computed.daysOld = (dependentKey, days) ->
+  Ember.computed dependentKey, (key) ->
+    now = Ember.DateTime.create()
+    @get(dependentKey).daysApart(now) >= days

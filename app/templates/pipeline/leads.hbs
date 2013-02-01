@@ -29,8 +29,8 @@
             {{#linkTo user user}}{{user.name}}{{/linkTo}}
           {{/if}}
         </td>
-        <td {{bindAttr class="isExpired"}}>
-          {{daysSinceText}}
+        <td>
+          {{ageInWords createdAt}}
         </td>
         <td>
           {{#if nextTaskText}}

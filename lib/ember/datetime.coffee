@@ -16,6 +16,10 @@ Ember.DateTime.reopen
   atBeginningOfDay: ->
     @adjust hour: 0, minute: 0, second: 0 
 
+  daysApart: (other) ->
+    timeDiff = other.get('milliseconds') - @get('milliseconds')
+    Math.ceil(timeDiff / (1000 * 3600 * 24))
+
   isToday: ->
     @toDateFormat() == Ember.DateTime.create().toDateFormat()
 
