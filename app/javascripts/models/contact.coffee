@@ -15,6 +15,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin, Radium.NextTaskMixi
 
   user: DS.belongsTo('Radium.User')
 
+  isExpired: Radium.computed.daysOld('createdAt', 60)
+
   latestDeal: ( ->
     # FIXME: Is it safe to assume that
     #deals will be ordered on the server?

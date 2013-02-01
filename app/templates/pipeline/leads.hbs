@@ -14,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-    {{#each visibleContent itemController="pipelineItem"}}
+    {{#each visibleContent}}
       <tr {{bindAttr class="isChecked:success"}}>
         <td>
           {{view Ember.Checkbox checkedBinding="isChecked"}}
@@ -29,7 +29,7 @@
             {{#linkTo user user}}{{user.name}}{{/linkTo}}
           {{/if}}
         </td>
-        <td>
+        <td {{bindAttr class="isExpired"}}>
           {{ageInWords createdAt}}
         </td>
         <td>

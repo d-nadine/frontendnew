@@ -16,7 +16,7 @@
   </tr>
   </thead>
   <tbody>
-    {{#each visibleContent itemController="pipelineItem"}}
+    {{#each visibleContent}}
       <tr {{bindAttr class="isChecked:success"}}>
         <td>
           {{view Ember.Checkbox checkedBinding="isChecked"}}
