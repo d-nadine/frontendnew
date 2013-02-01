@@ -1,7 +1,7 @@
-<div class="calendar-navigation block">
-  {{#linkTo calendar lastMonth class="btn pull-left"}}Last Month{{/linkTo}}
-  {{#linkTo calendar nextMonth class="btn pull-left"}}Next Month{{/linkTo}}
-  <h3>{{format date format="%B '%y"}}</h3>
+<div class="calendar-navigation">
+  {{#linkTo calendar lastMonth}}Last Month{{/linkTo}}
+  <h3>{{format date format="%B %Y"}}</h3>
+  {{#linkTo calendar nextMonth}}Next Month{{/linkTo}}
 </div>
 
 <table class="calendar">

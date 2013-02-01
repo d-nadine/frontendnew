@@ -1,0 +1,9 @@
+<ul class="unstyled thumbnail-list">
+  {{#each users}}
+    <li {{action selectUser this}}>
+      {{avatar this style="large" class="img-polaroid"}}
+      <br/>
+      {{label name}}
+    </li>
+  {{/each}}
+</ul>

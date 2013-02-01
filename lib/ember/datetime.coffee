@@ -16,6 +16,18 @@ Ember.DateTime.reopen
   atBeginningOfDay: ->
     @adjust hour: 0, minute: 0, second: 0 
 
+  atBeginningOfDay: ->
+    @adjust hour: 0, minute: 0, second: 0 
+
+  atBeginningOfMonth: ->
+    @adjust day: 1, hour: 0, minute: 0, second: 0
+
+  atEndOfMonth: ->
+    @advance(month: 1).
+      adjust(day: 1).
+      advance(day: -1).
+      adjust hour: 23, minute: 59, second: 59
+
   daysApart: (other) ->
     timeDiff = other.get('milliseconds') - @get('milliseconds')
     Math.ceil(timeDiff / (1000 * 3600 * 24))

@@ -1,0 +1,17 @@
+ul.thumbnail-list li {
+  display: block;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 30px;
+
+  img {
+    background-color: $background;
+    border-color: black;
+    box-shadow: 0 1px 15px black;
+    margin-bottom: 10px;
+  }
+
+  .label {
+    box-shadow: 0 1px 15px black;
+  }
+}

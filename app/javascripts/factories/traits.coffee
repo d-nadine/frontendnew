@@ -2,13 +2,6 @@ Factory.trait 'timestamps',
   createdAt: Ember.DateTime.create().advance(days: -2)
   updatedAt: Ember.DateTime.create().advance(days: -1)
 
-Factory.trait 'avatar',
-  avatar:
-    small_url: '/images/fallback/small_default.png'
-    medium_url: '/images/fallback/medium_default.png'
-    large_url: '/images/fallback/large_default.png'
-    huge_url: '/images/fallback/huge_default.png'
-
 Factory.trait 'html',
   html: "<p>Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Fusce in
     eros ante. Donec pellentesque pulvinar arcu nec eleifend. Nulla nulla diam,

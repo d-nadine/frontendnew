@@ -1,14 +1,10 @@
-Ember.Handlebars.registerHelper 'avatar', (property, options) ->
-  defaultSrc = '/images/fallback/small_default.png'
+Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
+  style = options.hash.style || 'small'
 
-  src = if value = Ember.get(this, 'avatar')
-          if small_url = value.small_url
-            small_url
-          else
-            defaultSrc
-        else
-          defaultSrc
+  avatar = person.get('avatar') || {}
 
-  title = Ember.get(this, 'name') || ""
+  url = avatar["#{style}_url"] || "/images/default_avatars/#{style}.png"
 
-  new Handlebars.SafeString("<img src='#{src}' title='#{title}' class='avatar'/>")
+  title = person.get 'name'
+
+  new Handlebars.SafeString("<img src='#{url}' title='#{title}' class='avatar avatar-#{style} #{options.hash.class}'/>")

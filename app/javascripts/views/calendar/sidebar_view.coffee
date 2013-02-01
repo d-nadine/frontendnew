@@ -1,3 +1,4 @@
 require 'radium/views/sidebar_view'
 
-Radium.CalendarSidebarView = Radium.SidebarView.extend()
+Radium.CalendarSidebarView = Radium.SidebarView.extend
+  classNameBindings: ['controller.isDifferentUser']

@@ -1,1 +1,12 @@
-<p>Place Holder</p>
+<div class="block">
+  {{avatar this style="medium"}}
+  <h3>{{name}}</h3>
+</div>
+
+{{#each day in days}}
+  <p>{{date day.date}}</p>
+
+  {{#each item in day}}
+    <div class="block">{{time item.time}} - {{item.label}}</div>
+  {{/each}}
+{{/each}}

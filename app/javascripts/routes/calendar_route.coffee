@@ -1,4 +1,14 @@
-Radium.CalendarRoute = Ember.Route.extend
+require 'radium/routes/drawer_support_mixin'
+
+Radium.CalendarRoute = Ember.Route.extend Radium.DrawerSupportMixin,
+  events: 
+    toggleCalendarDrawer: ->
+      @toggleDrawer 'calendar/select_user'
+
+    selectUser: (user) ->
+      @controllerFor('calendar').set 'user', user
+      @closeDrawer()
+
   serialize: (model) ->
     {
       year: model.get('year')
@@ -13,6 +23,10 @@ Radium.CalendarRoute = Ember.Route.extend
   renderTemplate: ->
     @render()
 
-    @render 'calendar/sidebar', 
-      outlet: 'sidebar', 
+    @render 'calendar/sidebar',
+      outlet: 'sidebar',
       into: 'calendar'
+
+    @render 'calendar/drawer_buttons',
+      outlet: 'buttons'
+      into: 'drawer_panel'

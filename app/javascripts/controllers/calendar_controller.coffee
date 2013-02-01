@@ -27,10 +27,13 @@ Day = Ember.ArrayController.extend Radium.ShowMoreMixin,
   ).property('date')
 
 Radium.CalendarController = Ember.Controller.extend
-  date: (-> @get 'content').property('content')
+  needs: ['users']
 
-  showCalendar: (context) ->
-    console.log context
+  users: (->
+    @get('controllers.users')
+  ).property('controllers.users')
+
+  date: (-> @get 'content').property('content')
 
   items: (->
     items = []
