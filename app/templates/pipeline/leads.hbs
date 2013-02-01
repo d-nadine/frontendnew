@@ -24,10 +24,8 @@
           {{#linkTo contact this}}{{name}}{{/linkTo}}
         </td>
         <td>
-          {{#if user}}
-            {{avatar user}}
-            {{#linkTo user user}}{{user.name}}{{/linkTo}}
-          {{/if}}
+          {{avatar user}}
+          {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
         <td {{bindAttr class="isExpired"}}>
           {{ageInWords createdAt}}

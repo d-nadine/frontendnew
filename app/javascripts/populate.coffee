@@ -119,8 +119,7 @@ class Populator
       hash =
         status: status
 
-      if user =  users[(3).randomize()]
-        hash.user = user
+      hash.user =  users[(2).randomize()]
 
       switch (3).randomize()
         when 0
@@ -159,7 +158,7 @@ class Populator
                         nextTask: -> hash.nextTask if hash.nextTask
                     ]
 
-      Factory.create 'contact', hash
+      contact = Factory.create 'contact', hash
 
     # For the calendar
     for i in [0..50]
