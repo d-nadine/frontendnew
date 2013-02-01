@@ -126,8 +126,10 @@ class Populator
       switch (3).randomize()
         when 0
           hash.todos = [todo]
+          hash.nextTask = Factory.build 'todo'
         when 1
           hash.meetings = [retrospection]
+          hash.nextTask = Factory.build 'meeting'
 
       source = switch 5.randomize()
         when 0
@@ -154,8 +156,10 @@ class Populator
                       createdAt: -> Ember.DateTime.random()
                       todos: -> [todo] if hash.todos
                       meetings: -> [retrospection] if hash.meetings
+                      nextTask: -> hash.nextTask if hash.nextTask
                     ]
 
       Factory.create 'contact', hash
+
 
 Radium.Populator = Populator

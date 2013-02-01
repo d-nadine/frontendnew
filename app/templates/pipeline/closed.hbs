@@ -36,11 +36,7 @@
           NOT IMPLEMENTED
         </td>
         <td>
-          {{#if nextTaskText}}
-            {{nextTaskText}}
-          {{else}}
-            <i class="icon-warning-sign"></i>
-          {{/if}}
+          {{nextTask nextTask}}
         </td>
         <td>
           <a {{action deleteObject this target="controller"}}>

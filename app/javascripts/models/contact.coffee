@@ -13,6 +13,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   user: DS.belongsTo('Radium.User')
 
+  nextTask: DS.attr('object')
+
   latestDeal: ( ->
     # FIXME: Is it safe to assume that
     #deals will be ordered on the server?
