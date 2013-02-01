@@ -1,1 +1,1 @@
-Radium.PipelineClosedController = Radium.PipelineDealsControllerBase.extend()
+Radium.PipelineClosedController = Radium.DealPipelineBaseController.extend()
