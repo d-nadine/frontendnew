@@ -10,7 +10,7 @@ Radium.PipelineBaseController = Em.ArrayController.extend Radium.ShowMoreMixin, 
 
     Radium.Utils.notify 'deleted!'
 
-  deleteLead: (event) ->
+  deleteObject: (event) ->
     pipelineItem = event.context
     # FIXME: ember-data errors, fake for now
     # pipelineItem.get('content').deleteRecord()
