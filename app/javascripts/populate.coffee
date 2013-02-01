@@ -158,7 +158,7 @@ class Populator
       Factory.create 'contact', hash
 
     # For the calendar
-    for i in [0..200]
+    for i in [0..50]
       Factory.create 'todo'
         user: jerry
         finishBy: Ember.DateTime.random()

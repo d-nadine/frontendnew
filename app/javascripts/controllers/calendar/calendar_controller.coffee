@@ -1,15 +1,40 @@
+require 'radium/show_more_mixin'
+
+CalendarItem = Ember.ObjectController.extend
+  time: (->
+    @get('finishBy') || @get('startsAt')
+  ).property('content', 'finishBy', 'startsAt')
+
+  label: (->
+    @get('description') || @get('topic')
+  ).property('description', 'topic')
+
+Day = Ember.ArrayController.extend Radium.ShowMoreMixin,
+  sortProperties: ['time']
+
+  formattedDate: (->
+    @get('date').toDateFormat()
+  ).property('date')
+
+  isDifferentMonth: (->
+    @get('date.month') != @get('calendarDate.month')
+  ).property('date')
+
+  isToday: (->
+    # FIXME: this should happen inside Ember.DateTime
+    @get('date').toDateFormat() == Ember.DateTime.create().toDateFormat()
+  ).property('date')
+
+  day: (->
+    @get('date.day')
+  ).property('date')
+
+
 Radium.CalendarController = Ember.Controller.extend
+  date: (-> @get 'content').property('content')
+
   showCalendar: (context) ->
     console.log context
-
-  calendarItem: Ember.ObjectProxy.extend
-    time: (->
-      @get('finishBy') || @get('startsAt')
-    ).property('content', 'finishBy', 'startsAt')
-
-    label: (->
-      @get('description') || @get('topic')
-    ).property('description', 'topic')
 
   items: (->
     items = []
@@ -17,9 +42,7 @@ Radium.CalendarController = Ember.Controller.extend
     @get('todos').forEach (todo) -> items.pushObject todo
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
-    items.map (item) =>
-      @get('calendarItem').create content: item
-
+    items.map (item) -> CalendarItem.create(content: item)
   ).property('date')
 
   todos: (->
@@ -40,9 +63,6 @@ Radium.CalendarController = Ember.Controller.extend
 
   # FIXME: Why does this only work with ArrayController and 
   # not ArrayProxy
-  dayObject: Ember.ArrayController.extend Radium.PaginationMixin,
-    sortProperties: ['time']
-
 
   dayNames: (->
     firstDay = Ember.DateTime.create().get('lastMonday')
@@ -104,30 +124,14 @@ Radium.CalendarController = Ember.Controller.extend
       dailyItems = @get('items').filter (item) ->
         item.get('time').isBetween startOfDay, endOfDay
 
-      day = @dayObject.create
+      day = Day.create
         # FIXME this has to be here to override what's
-        # set in the paginagion mixin
+        # set in the show more mixin
         perPage: 5
 
         date: current.copy()
         calendarDate: @get('date').copy()
         content: dailyItems
-        formattedDate: (->
-          @get('date').toDateFormat()
-        ).property('date')
-
-        isDifferentMonth: (->
-          @get('date.month') != @get('calendarDate.month')
-        ).property('date')
-
-        isToday: (->
-          # FIXME: this should happen inside Ember.DateTime
-          @get('date').toDateFormat() == Ember.DateTime.create().toDateFormat()
-        ).property('date')
-
-        day: (->
-          @get('date.day')
-        ).property('date')
 
       days.push day
 

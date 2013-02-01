@@ -1,6 +1,6 @@
 <div class="calendar-navigation block">
-  <button class="btn pull-left" {{action showCalendar lastMonth href="true"}}>Last Month</button>
-  <button class="btn pull-right" {{action showCalendar nextMonth href="true"}}>Next Month</button>
+  {{#linkTo calendar lastMonth class="btn pull-left"}}Last Month{{/linkTo}}
+  {{#linkTo calendar nextMonth class="btn pull-left"}}Next Month{{/linkTo}}
   <h3>{{calendarDate}}</h3>
 </div>
 
@@ -27,17 +27,15 @@
     {{#each calendarDay in this tagName="tr"}}
       <td {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday :day"}}>
         <div class="wrapper">
-          {{log calendarDay.formattedDate}}
-
           <span class="date">
             {{calendarDay.day}}
           </span>
 
-          {{#each calendarDay.limitedContent tagName="ul" class="unstyled"}}
+          {{#each calendarDay.visibleContent tagName="ul" class="unstyled"}}
             <li>{{formatTime time}} - {{label}}</li>
           {{/each}}
 
-          {{#if calendarDay.remainingContent}}
+          {{#if calendarDay.hiddenContent}}
             <button class="btn-slab" {{action showMore target="calendarDay"}}>Show More</button>
           {{/if}}
         </div>
