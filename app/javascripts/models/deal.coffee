@@ -1,6 +1,6 @@
 require 'radium/models/mixins/next_task_mixin'
 
-Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radium.AttachmentsMixin,
+Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radium.AttachmentsMixin, Radium.NextTaskMixin,
   name: DS.attr('string')
   description: DS.attr('string')
   payBy: DS.attr('datetime')
