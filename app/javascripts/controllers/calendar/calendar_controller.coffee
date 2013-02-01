@@ -20,15 +20,11 @@ Day = Ember.ArrayController.extend Radium.ShowMoreMixin,
     @get('date.month') != @get('calendarDate.month')
   ).property('date')
 
-  isToday: (->
-    # FIXME: this should happen inside Ember.DateTime
-    @get('date').toDateFormat() == Ember.DateTime.create().toDateFormat()
-  ).property('date')
+  isToday: Radium.computed.isToday('date')
 
   day: (->
     @get('date.day')
   ).property('date')
-
 
 Radium.CalendarController = Ember.Controller.extend
   date: (-> @get 'content').property('content')
@@ -81,10 +77,6 @@ Radium.CalendarController = Ember.Controller.extend
 
   lastMonth: (->
     @get('date').copy().advance(month: -1)
-  ).property('date')
-
-  calendarDate: (->
-    @get('date').toFormattedString("%B '%y")
   ).property('date')
 
   startOfCalendar: (->
