@@ -2,5 +2,12 @@ Radium.computed = {}
 
 Radium.computed.isToday = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
-    # FIXME: this should happen inside Ember.DateTime
-    @get(dependentKey).toDateFormat() == Ember.DateTime.create().toDateFormat()
+    @get(dependentKey).isToday()
+
+Radium.computed.isPast = (dependentKey) ->
+  Ember.computed dependentKey, (key) ->
+    @get(dependentKey).isPast()
+
+Radium.computed.isFuture = (dependentKey) ->
+  Ember.computed dependentKey, (key) ->
+    @get(dependentKey).isFuture()

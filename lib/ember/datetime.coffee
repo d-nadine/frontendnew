@@ -16,6 +16,15 @@ Ember.DateTime.reopen
   atBeginningOfDay: ->
     @adjust hour: 0, minute: 0, second: 0 
 
+  isToday: ->
+    @toDateFormat() == Ember.DateTime.create().toDateFormat()
+
+  isPast: ->
+    @get('milliseconds') < DateTime.create().get('milliseconds')
+
+  isFuture: ->
+    @get('milliseconds') > DateTime.create().get('milliseconds')
+
 Ember.DateTime.reopenClass
   random: ->
     multipler = ->
