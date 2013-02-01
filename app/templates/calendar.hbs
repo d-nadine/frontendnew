@@ -34,11 +34,10 @@
           {{#each calendarDay.visibleContent tagName="ul" class="unstyled"}}
             <li>{{time time}} - {{truncate label length="15"}}</li>
           {{/each}}
-
-          {{#if calendarDay.hiddenContent}}
-            <button class="btn-slab" {{action showMore target="calendarDay"}}>Show More</button>
-          {{/if}}
         </div>
+        {{#if calendarDay.hiddenContent}}
+          <a class="btn-slab" {{action showMore target="calendarDay"}}>. . .</a>
+        {{/if}}
       </td>
     {{/each}}
   {{/each}}
