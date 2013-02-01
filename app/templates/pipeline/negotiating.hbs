@@ -46,15 +46,17 @@
       </tr>
     {{else}}
       <tr>
-        <td colspan="8" class="tac">No Deals</td>
+        <td colspan="8">No Deals</td>
       </tr>
     {{/each}}
   </tbody>
+  {{#if visibleContent}}
   <tfoot>
     <tr>
-      <td colspan="8" class="tar">Total: {{currency valueTotal}}</td>
+      <td colspan="8" class="right-aligned">Total: {{currency valueTotal}}</td>
     </tr>
   </tfoot>
+  {{/if}}
 </table>
 
 {{template "pipeline/show_more"}}
