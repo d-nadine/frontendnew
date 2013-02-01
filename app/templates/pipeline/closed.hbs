@@ -31,9 +31,8 @@
           {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
         <td>{{currency value}}</td>
-        <td {{bindAttr class="isOverdue"}}>
-          {{!FIXME this should be the pay by date}}
-          NOT IMPLEMENTED
+        <td {{bindAttr class="isPastPayment:is-expired"}}>
+          {{formatDate payBy}}
         </td>
         <td>
           {{showWarningIfEmpty nextTask}}

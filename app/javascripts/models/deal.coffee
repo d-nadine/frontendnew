@@ -14,9 +14,4 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radi
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
 
-  # TODO: Replace with a computed alias
-  isOverdue: (->
-    d = new Date().getTime()
-    payBy = new Date(@get('payBy')).getTime()
-    (if (payBy <= d) then true else false)
-  ).property('payBy')
+  isPastPayment: Radium.computed.pastDate("payBy")
