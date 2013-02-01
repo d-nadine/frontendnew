@@ -33,7 +33,7 @@
           {{daysSinceText}}
         </td>
         <td>
-          {{nextTask nextTask}}
+          {{showWarningIfEmpty nextTask}}
         </td>
         <td>
           <a {{action deleteObject this target="controller"}}>
