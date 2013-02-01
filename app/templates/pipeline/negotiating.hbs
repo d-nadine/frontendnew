@@ -24,6 +24,7 @@
         <td>
           {{#with contact}}
             {{avatar this}}
+            {{#linkTo contact this}}{{name}}{{/linkTo}}
           {{/with}}
         </td>
         <td>{{name}}</td>
@@ -31,8 +32,8 @@
           {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
         <td>{{currency value}}</td>
-        <td {{bindAttr class="isExpired"}}>
-          {{daysSinceText}}
+        <td>
+          {{ageInWords createdAt}}
         </td>
         <td>
           {{showWarningIfEmpty nextTask}}

@@ -14,4 +14,4 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radi
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
 
-  isPastPayment: Radium.computed.pastDate("payBy")
+  isPastPayment: Radium.computed.isPast("payBy")

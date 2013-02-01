@@ -1,4 +1,3 @@
-# FIXME: Move into lib?
 Number::randomize = ->
   Math.floor(Math.random() * this)
 
@@ -162,5 +161,14 @@ class Populator
 
       Factory.create 'contact', hash
 
+    # For the calendar
+    for i in [0..50]
+      Factory.create 'todo'
+        user: jerry
+        finishBy: Ember.DateTime.random()
+
+      Factory.create 'meeting'
+        user: jerry
+        startsAt: Ember.DateTime.random()
 
 Radium.Populator = Populator

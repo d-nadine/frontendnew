@@ -1,8 +1,5 @@
 Radium.PipelineItemController = Em.ObjectController.extend
-  isExpired: ( ->
-    # FIXME: Arbitary cut off point
-    @get('daysSinceCreation') > 60
-  ).property('createdAt')
+  isExpired: Radium.computed.daysOld('createdAt', 60)
 
   value: ( ->
     content = @get('content')
@@ -12,22 +9,6 @@ Radium.PipelineItemController = Em.ObjectController.extend
     else
       @get('content.latestDeal.value') || 0
   ).property('content')
-
-  daysSinceCreation: ( ->
-    today = Ember.DateTime.create()
-    createdAt = @get('createdAt')
-
-    createdAt.differenceInDays(today)
-  ).property('createdAt')
-
-  daysSinceText: ( ->
-    daysSinceCreation = @get('daysSinceCreation')
-
-    if daysSinceCreation <= 1
-      return "1 day"
-
-    "#{daysSinceCreation} days"
-  ).property('daysSinceCreation')
 
   nextTask: ( ->
     nextTask = @get('model.nextTask')

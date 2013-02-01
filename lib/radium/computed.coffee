@@ -2,15 +2,17 @@ Radium.computed = {}
 
 Radium.computed.isToday = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
-    # FIXME: this should happen inside Ember.DateTime
-    @get(dependentKey).toDateFormat() == Ember.DateTime.create().toDateFormat()
+    @get(dependentKey).isToday()
 
-Radium.computed.pastDate = (dependentKey) ->
+Radium.computed.isPast = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
-    date = @get(dependentKey)
+    @get(dependentKey).isPast()
 
-    return false unless date
+Radium.computed.isFuture = (dependentKey) ->
+  Ember.computed dependentKey, (key) ->
+    @get(dependentKey).isFuture()
 
-    today = Ember.DateTime.create()
-
-    Ember.DateTime.compareDate(today, date) == 1
+Radium.computed.daysOld = (dependentKey, days) ->
+  Ember.computed dependentKey, (key) ->
+    now = Ember.DateTime.create()
+    @get(dependentKey).daysApart(now) >= days

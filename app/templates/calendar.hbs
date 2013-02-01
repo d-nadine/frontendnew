@@ -1,0 +1,45 @@
+<div class="calendar-navigation block">
+  {{#linkTo calendar lastMonth class="btn pull-left"}}Last Month{{/linkTo}}
+  {{#linkTo calendar nextMonth class="btn pull-left"}}Next Month{{/linkTo}}
+  <h3>{{format date format="%B '%y"}}</h3>
+</div>
+
+<table class="calendar">
+  <colgroup class="weekdays">
+    <col class="monday" />
+    <col class="tuesday" />
+    <col class="wednesday" />
+    <col class="thrusday" />
+    <col class="friday" />
+  </colgroup>
+  <colgroup class="weekend">
+    <col class="saturday" />
+    <col class="sunday" />
+  </colgroup>
+
+  <thead>
+    {{#each dayNames tagName="tr"}}
+      <th>{{this}}</th>
+    {{/each}}
+  </thead>
+
+  {{#each weeks tagName="tbody"}}
+    {{#each calendarDay in this tagName="tr"}}
+      <td {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday :day"}}>
+        <div class="wrapper">
+          <span class="date">
+            {{calendarDay.day}}
+          </span>
+
+          {{#each calendarDay.visibleContent tagName="ul" class="unstyled"}}
+            <li>{{time time}} - {{truncate label length="15"}}</li>
+          {{/each}}
+
+          {{#if calendarDay.hiddenContent}}
+            <button class="btn-slab" {{action showMore target="calendarDay"}}>Show More</button>
+          {{/if}}
+        </div>
+      </td>
+    {{/each}}
+  {{/each}}
+</table>

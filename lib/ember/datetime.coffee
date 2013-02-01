@@ -5,6 +5,30 @@ Ember.DateTime.reopen
   toFullFormat: ->
     @toISO8601()
 
+  isBetween: (start, end) ->
+    return false if Ember.DateTime.compareDate(this, start) == -1
+    return false if Ember.DateTime.compareDate(this, end) == 1
+    true
+
+  atEndOfDay: ->
+    @adjust hour: 23, minute: 59, second: 59
+
+  atBeginningOfDay: ->
+    @adjust hour: 0, minute: 0, second: 0 
+
+  daysApart: (other) ->
+    timeDiff = other.get('milliseconds') - @get('milliseconds')
+    Math.ceil(timeDiff / (1000 * 3600 * 24))
+
+  isToday: ->
+    @toDateFormat() == Ember.DateTime.create().toDateFormat()
+
+  isPast: ->
+    @get('milliseconds') < Ember.DateTime.create().get('milliseconds')
+
+  isFuture: ->
+    @get('milliseconds') > Ember.DateTime.create().get('milliseconds')
+
 Ember.DateTime.reopenClass
   random: ->
     multipler = ->
