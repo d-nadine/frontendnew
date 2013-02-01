@@ -1,5 +1,5 @@
 Radium.DealPipelineBaseController = Radium.PipelineBaseController.extend
-  valueTotal: ( ->
+  total: ( ->
     return 0 unless @get('visibleContent.length')
 
     sum = @get('visibleContent').reduce (preVal, item) ->
