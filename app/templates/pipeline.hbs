@@ -1,16 +1,16 @@
 <div id="pipeline">
   <div>
     <ul id="status">
-      <li>
+      <li class="leads">
         {{#linkTo pipeline.leads}}Leads ({{leads}}){{/linkTo}}
       </li>
-      <li>
+      <li class="negotiating">
         {{#linkTo pipeline.negotiating}}Negotiating ({{negotiating}}){{/linkTo}}
       </li>
-      <li>
+      <li class="closed">
         {{#linkTo pipeline.closed}}Closed ({{closed}}){{/linkTo}}
       </li>
-      <li>
+      <li class="lost">
         {{#linkTo pipeline.lost}}Lost ({{lost}}){{/linkTo}}
       </li>
     </ul>
