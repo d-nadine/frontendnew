@@ -4,14 +4,14 @@
       {{#with button}}
         {{#if alwaysOpen}}
           <a class="{{unbound classes}}" {{action executeAction this}} class="btn">
-            {{label}}
+            {{title}}
             {{#if icons}}
             <i class="{{unbound icons}}"></i>
             {{/if}}
           </a>
         {{else}}
           <a {{action toggleForm this}} class="btn">
-            {{label}}
+            {{title}}
             {{#if closed}}
               <i class="icon-plus"></i>
             {{else}}

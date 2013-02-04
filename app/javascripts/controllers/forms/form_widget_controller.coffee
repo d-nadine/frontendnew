@@ -4,11 +4,11 @@ Radium.FormsFormWidgetController = Em.Controller.extend Radium.FormWidgetMixin,
   buttons: [
     Ember.Object.create
       template: "forms/todo_form"
-      label: "Todo"
+      title: "Todo"
     Ember.Object.create
       template: "unimplemented"
-      label: "Meeting"
+      title: "Meeting"
     Ember.Object.create
       template: "unimplemented"
-      label: "Call"
+      title: "Call"
   ]

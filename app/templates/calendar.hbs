@@ -32,7 +32,7 @@
           </span>
 
           {{#each calendarDay.visibleContent tagName="ul" class="unstyled"}}
-            <li>{{time time}} - {{truncate label length="15"}}</li>
+            <li>{{time time}} - {{truncate title length="15"}}</li>
           {{/each}}
         </div>
         {{#if calendarDay.hiddenContent}}

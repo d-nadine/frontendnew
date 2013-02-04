@@ -5,7 +5,7 @@ CalendarItem = Ember.ObjectController.extend
     @get('finishBy') || @get('startsAt')
   ).property('content', 'finishBy', 'startsAt')
 
-  label: (->
+  title: (->
     @get('description') || @get('topic')
   ).property('description', 'topic')
 

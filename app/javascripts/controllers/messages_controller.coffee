@@ -2,14 +2,14 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
   sortProperties: ['sentAt']
 
   folders: [
-    {label: 'Inbox', name: 'inbox'}
-    {label: 'Sent items', name: 'sent'}
-    {label: 'Attachments', name: 'attachments'}
-    {label: 'Meeting Invitations', name: 'meetings'}
-    {label: 'Clients', name: 'clients'}
-    {label: 'Opportunities', name: 'opportunities'}
-    {label: 'Leads', name: 'leads'}
-    {label: 'Prospects', name: 'prospects'}
+    {title: 'Inbox', name: 'inbox'}
+    {title: 'Sent items', name: 'sent'}
+    {title: 'Attachments', name: 'attachments'}
+    {title: 'Meeting Invitations', name: 'meetings'}
+    {title: 'Clients', name: 'clients'}
+    {title: 'Opportunities', name: 'opportunities'}
+    {title: 'Leads', name: 'leads'}
+    {title: 'Prospects', name: 'prospects'}
   ]
 
   content: (->
