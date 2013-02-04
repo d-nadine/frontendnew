@@ -1,0 +1,8 @@
+#alerts{
+  display :none;
+  position: fixed;
+  top: 56px;
+  z-index: $alerts-layer;
+  text-align: center;
+}
+

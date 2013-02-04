@@ -1,3 +1,5 @@
+@import "routes/messages/sidebar";
+
 div.selection{
   div.alert{
     margin-bottom: 5px;
@@ -53,10 +55,4 @@ div.selection{
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 20px;
-}
-
-#folders {
-  width: 130px; // final width of the thumbnail
-  margin: 0 auto;
-  padding: 30px 0;
 }
