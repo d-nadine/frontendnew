@@ -5,9 +5,7 @@
     </a>
   {{/if}}
 
-  {{#with history}}
-    {{render 'messages/email_history' this}}
-  {{/with}}
+  {{render 'messages/email_history' history}}
 {{else}}
   <div class="block">
     <h4>No Email Selected</h4>
