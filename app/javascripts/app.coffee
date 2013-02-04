@@ -7,7 +7,6 @@ require 'foundry'
 require 'ember/filterable_mixin'
 
 Radium = Em.Application.create
-  currentUser: null
   autoinit: false
   rootElement: '#application'
 
