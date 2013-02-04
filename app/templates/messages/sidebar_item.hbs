@@ -5,10 +5,10 @@
   </div>
   <div>
     <div>
-      {{#if sender.isContact}}
-      <a {{action showContact sender href=true}}>{{unbound sender.name}}</a>
+      {{#if isContact}}
+        {{#linkTo contact sender}}{{sender.name}}{{/linkTo}}
       {{else}}
-        <a {{action showUser sender href=true}}>{{unbound sender.name}}</a>
+        {{#linkTo user sender}}{{sender.name}}{{/linkTo}}
       {{/if}}
     </div>
     <p>{{subject}}</p>

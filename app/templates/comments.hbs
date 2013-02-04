@@ -3,11 +3,7 @@
     <ul class="comments-list unstyled">
       {{#each comments}}
         <li class="comment">
-          {{#with user}}
-            <a {{action showUser this href=true}} class="avatar">
-              <img {{bindAttr src="avatar.small_url"}} class="avatar">
-            </a>
-          {{/with}}
+          {{#linkTo user user}}{{avatar user}}{{/linkTo}}
 
           <div class="text">
             {{text}}
