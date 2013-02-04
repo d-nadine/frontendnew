@@ -1,4 +1,6 @@
-Radium.DealPipelineBaseController = Radium.PipelineBaseController.extend
+require 'radium/controllers/pipeline/base_controller'
+
+Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   total: ( ->
     return 0 unless @get('visibleContent.length')
 

@@ -1,3 +1,3 @@
 require 'radium/controllers/pipeline/deals_controller'
 
-Radium.PipelineNegotiatingController = Radium.DealPipelineBaseController.extend()
+Radium.PipelineClosedController = Radium.PipelineDealsController.extend()
