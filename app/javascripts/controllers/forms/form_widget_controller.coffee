@@ -1,5 +1,3 @@
-require 'radium/mixins/controllers/form_widget_mixin'
-
 Radium.FormsFormWidgetController = Em.Controller.extend Radium.FormWidgetMixin,
   buttons: [
     Ember.Object.create

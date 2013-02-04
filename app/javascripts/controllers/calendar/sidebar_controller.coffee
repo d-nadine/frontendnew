@@ -1,7 +1,7 @@
 Day = Ember.ArrayProxy.extend()
 
-Radium.CalendarSidebarController = Ember.ObjectController.extend
-  needs: ['calendar', 'currentUser']
+Radium.CalendarSidebarController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+  needs: ['calendar']
   contentBinding: 'controllers.calendar.user'
 
   items: (->
@@ -11,10 +11,6 @@ Radium.CalendarSidebarController = Ember.ObjectController.extend
   date: (->
     @get 'controllers.calendar.date'
   ).property('controllers.calendar.date')
-
-  currentUser: (->
-    @get('controllers.currentUser.content')
-  ).property('controllers.currentUser.content')
 
   isDifferentUser: (->
     @get('content') != @get('currentUser')

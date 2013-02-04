@@ -1,4 +1,4 @@
-Radium.FormsTodoFormController = Ember.ObjectController.extend
+Radium.FormsTodoFormController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   kind: 'todo'
   init: ->
     @reset()
@@ -20,4 +20,4 @@ Radium.FormsTodoFormController = Ember.ObjectController.extend
     @set 'model', Radium.Todo.createRecord
       kind: @get('kind')
       finishBy: Ember.DateTime.create().advance(day: 1)
-      user: Radium.get('router.currentUser')
+      user: @get('currentUser')

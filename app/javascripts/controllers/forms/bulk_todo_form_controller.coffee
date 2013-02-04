@@ -12,7 +12,7 @@ Radium.FormsBulkTodoFormController = Radium.FormsTodoFormController.extend
       todo = Radium.Todo.createRecord
         kind: @get('kind')
         finishBy: @get('finishBy')
-        user: Radium.get('router.currentUser')
+        user: @get('currentUser')
         description: @get('description')
 
       todo.set('reference', reference)

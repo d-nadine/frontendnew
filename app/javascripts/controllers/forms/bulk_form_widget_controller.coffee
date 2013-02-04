@@ -1,5 +1,3 @@
-require 'radium/mixins/controllers/form_widget_mixin'
-
 Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormWidgetMixin,
   buttons: [
     Ember.Object.create
