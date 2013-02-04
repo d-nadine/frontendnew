@@ -1,4 +1,4 @@
-require 'radium/controllers/pipeline/base_controller'
+require 'controllers/pipeline/base_controller'
 
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   total: ( ->

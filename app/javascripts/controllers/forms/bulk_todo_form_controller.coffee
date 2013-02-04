@@ -1,4 +1,4 @@
-require 'radium/controllers/forms/todo_form_controller'
+require 'controllers/forms/todo_form_controller'
 
 Radium.FormsBulkTodoFormController = Radium.FormsTodoFormController.extend
   selection: null

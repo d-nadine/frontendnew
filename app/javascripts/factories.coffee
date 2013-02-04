@@ -29,6 +29,6 @@ Ember.Application.initializer
 
 window.Factory = foundry
 
-require 'radium/factories/traits'
+require 'factories/traits'
 
-requireAll /radium\/factories/
+requireAll /factories/

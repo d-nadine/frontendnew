@@ -6,11 +6,11 @@
 #
 # Here's an example:
 #
-#   require('radium/app')
+#   require('app')
 #   Radium.boot()
 #
 # Your boot code begins here...
 
-require 'radium/app'
+require 'app'
 
 Radium.initialize()

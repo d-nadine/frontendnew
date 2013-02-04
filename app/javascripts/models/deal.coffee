@@ -1,4 +1,4 @@
-require 'radium/models/mixins/next_task_mixin'
+require 'models/mixins/next_task_mixin'
 
 Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radium.AttachmentsMixin, Radium.NextTaskMixin,
   name: DS.attr('string')

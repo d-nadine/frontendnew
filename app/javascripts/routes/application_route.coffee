@@ -1,4 +1,4 @@
-require 'radium/routes/drawer_support_mixin'
+require 'routes/drawer_support_mixin'
 
 Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
   events:

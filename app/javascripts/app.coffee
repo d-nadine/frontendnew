@@ -1,10 +1,10 @@
 # First off, require all the custom additions and code
 # we need to be available globally
-require 'ember/datetime'
-require 'string/inflector'
+require 'lib/ember/datetime'
+require 'lib/string/inflector'
 
-require 'foundry'
-require 'ember/filterable_mixin'
+require 'lib/foundry'
+require 'lib/ember/filterable_mixin'
 
 Radium = Em.Application.create
   autoinit: false
@@ -12,26 +12,26 @@ Radium = Em.Application.create
 
 window.Radium = Radium
 
-require 'radium/computed'
+require 'lib/radium/computed'
 
-require 'radium/run_when_loaded_mixin'
+require 'lib/radium/run_when_loaded_mixin'
 
-require 'radium/utils'
+require 'utils'
 
-require 'radium/store'
+require 'store'
 
-require 'radium/routes'
-requireAll /radium\/routes/
+require 'routes'
+requireAll /routes/
 
-require 'radium/models'
+require 'models'
 
-require 'radium/views'
+require 'views'
 
-require 'radium/checkable_mixin'
-require 'radium/selectable_mixin'
+require 'lib/radium/checkable_mixin'
+require 'lib/radium/selectable_mixin'
 
-require 'radium/controllers'
+require 'controllers'
 
-require /radium\/helpers/
+require /helpers/
 
-require 'radium/factories'
+require 'factories'

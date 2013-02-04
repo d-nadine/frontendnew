@@ -1,3 +1,3 @@
 Ember.Application.registerInitializer ->
-  require 'radium/populate'
+  require 'populate'
   Radium.Populator.run()

@@ -1,3 +1,3 @@
-requireAll /radium\/mixins\/controllers/
+requireAll /mixins\/controllers/
 
-requireAll /radium\/controllers/
+requireAll /controllers/

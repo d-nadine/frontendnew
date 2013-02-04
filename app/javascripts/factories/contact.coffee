@@ -1,4 +1,4 @@
-require 'radium/factories/user'
+require 'factories/user'
 
 Factory.define 'contact', traits: ['timestamps'],
   name: Factory.sequence (i) -> "Contact #{i}"

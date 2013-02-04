@@ -1,4 +1,4 @@
-require 'radium/groupable'
+require 'lib/radium/groupable'
 
 Radium.NotificationsController = Ember.ArrayController.extend Radium.Groupable,
   count: (->

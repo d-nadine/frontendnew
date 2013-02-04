@@ -1,4 +1,4 @@
-require 'radium/show_more_mixin'
+require 'lib/radium/show_more_mixin'
 
 Radium.MessagesEmailPanelController = Em.ObjectController.extend
   history: (->

@@ -1,4 +1,4 @@
-require 'radium/content_identification_mixin'
-require 'radium/scrollable_mixin'
+require 'lib/radium/content_identification_mixin'
+require 'lib/radium/scrollable_mixin'
 
-require /radium\/views/
+require /views/

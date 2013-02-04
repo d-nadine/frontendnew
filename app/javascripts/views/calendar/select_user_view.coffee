@@ -1,3 +1,3 @@
-require 'radium/views/drawer_view'
+require 'views/drawer_view'
 
 Radium.CalendarSelectUserView = Radium.DrawerView.extend()

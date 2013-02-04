@@ -1,4 +1,4 @@
-require 'radium/views/drawer_view'
+require 'views/drawer_view'
 
 Radium.NotificationsView = Radium.DrawerView.extend
   contentBinding: 'controller'
@@ -12,8 +12,8 @@ Radium.NotificationsView = Radium.DrawerView.extend
     tagName: 'ul'
     itemViewClass: Em.View.extend
       attributeBindings: ['dataReminderId:data-reminder-id']
-      templateName: 'radium/notifications/reminder'
-      layoutName: 'radium/layouts/notification_panel_item'
+      templateName: 'notifications/reminder'
+      layoutName: 'layouts/notification_panel_item'
       referenceBinding: 'content.reference'
 
       dataReminderId: (->
@@ -28,7 +28,7 @@ Radium.NotificationsView = Radium.DrawerView.extend
     tagName: 'ul'
     classNames: ['unstyled']
     itemViewClass: Ember.View.extend
-      layoutName: 'radium/layouts/notification_panel_item'
+      layoutName: 'layouts/notification_panel_item'
       attributeBindings: ['dataNotificationId:data-notification-id']
       referenceBinding: 'content.reference'
 
@@ -38,5 +38,5 @@ Radium.NotificationsView = Radium.DrawerView.extend
 
       templateName: (->
         tag = @get 'content.tag'
-        "radium/notifications/#{tag.replace('.', '_')}"
+        "notifications/#{tag.replace('.', '_')}"
       ).property('content.tag')

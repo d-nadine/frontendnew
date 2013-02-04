@@ -1,4 +1,4 @@
-require 'radium/filtered_array'
+require 'lib/radium/filtered_array'
 
 Radium.CheckableMixin = Ember.Mixin.create
   checkedContent: (->
