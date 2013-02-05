@@ -3,6 +3,23 @@ Number::randomize = ->
 
 class Populator
   @run: ->
+    opportunity = Factory.create 'pipelinestatus',
+                      status: 'Opportunity'
+
+    sentProposal = Factory.create 'pipelinestatus',
+                      status: 'Sent Proposal'
+
+    pendingSignature = Factory.create 'pipelinestatus',
+                      status: 'Pending Signature'
+
+    # FIXME: The pipelineStatuses array is empty
+    settings = Factory.create 'settings',
+      pipelineStatuses: [
+        opportunity,
+        sentProposal,
+        pendingSignature
+      ]
+
     aaron = Factory.create 'user'
       name: 'Aaron Stephens'
       email: 'aaron.stephens13@radiumcrm.com'
@@ -141,7 +158,7 @@ class Populator
 
       hash.createdAt = Ember.DateTime.random(true)
 
-      dealStatuses = ['published', 'negotiating', 'closed', 'lost']
+      dealStatuses = ['published', 'Opportunity', 'Sent Proposal', 'Pending Signature', 'closed', 'lost']
 
       hash.deals = ->
                     [
@@ -149,7 +166,7 @@ class Populator
                         user: -> users[(2).randomize()]
                         value: -> (10000).randomize()
                         reason: "something happened"
-                        status: -> dealStatuses[(4).randomize()]
+                        status: -> dealStatuses[(6).randomize()]
                         payBy: -> Ember.DateTime.random()
                         contact: -> Radium.Contact.find().objectAt((Radium.Contact.find().get('length') - 1).randomize())
                         createdAt: -> Ember.DateTime.random(true)

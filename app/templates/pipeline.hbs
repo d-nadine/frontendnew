@@ -4,9 +4,13 @@
       <li class="leads">
         {{#linkTo pipeline.leads}}Leads ({{leads.length}}){{/linkTo}}
       </li>
-      <li class="negotiating">
-        {{#linkTo pipeline.negotiating}}Negotiating ({{negotiating.length}}){{/linkTo}}
-      </li>
+      <li class="divider">&nbsp;</li>
+      {{#each customStatuses}}
+        <li class="negotiating">
+          <a {{action showCustomStatus this}} href="#">{{status}} ({{deals.length}})</a>
+        </li>
+      {{/each}}
+      <li class="divider">&nbsp;</li>
       <li class="closed">
         {{#linkTo pipeline.closed}}Closed ({{closed.length}}){{/linkTo}}
       </li>

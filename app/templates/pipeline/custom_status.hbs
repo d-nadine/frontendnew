@@ -1,0 +1,61 @@
+{{#if checkedContent.length}}
+  {{control 'pipeline/form_widget' checkedContent}}
+{{/if}}
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>Deal</th>
+    <th>Assigned To</th>
+    <th>Value</th>
+    <th>Days Open</th>
+    <th>Next Task</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+    {{#each visibleContent}}
+      <tr {{bindAttr class="isChecked:success"}}>
+        <td>
+          {{view Ember.Checkbox checkedBinding="isChecked"}}
+        </td>
+        <td>
+          {{#with contact}}
+            {{avatar this}}
+            {{#linkTo contact this}}{{name}}{{/linkTo}}
+          {{/with}}
+        </td>
+        <td>{{name}}</td>
+        <td>
+          {{#linkTo user user}}{{user.name}}{{/linkTo}}
+        </td>
+        <td>{{currency value}}</td>
+        <td>
+          {{ageInWords createdAt}}
+        </td>
+        <td>
+          {{showWarningIfEmpty latestTask}}
+        </td>
+        <td>
+          <a {{action deleteObject this target="controller"}} class="btn btn-danger">
+            <i class="icon-trash icon-white"></i>
+          </a>
+        </td>
+      </tr>
+    {{else}}
+      <tr>
+        <td colspan="8">No Deals</td>
+      </tr>
+    {{/each}}
+  </tbody>
+  {{#if visibleContent}}
+  <tfoot>
+    <tr>
+      <td colspan="8">Total: {{currency total}}</td>
+    </tr>
+  </tfoot>
+  {{/if}}
+</table>
+{{template "shared/show_more"}}
