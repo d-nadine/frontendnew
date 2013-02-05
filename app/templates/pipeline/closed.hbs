@@ -4,16 +4,19 @@
 
 <table class="table table-striped table-bordered table-hover">
   <thead>
-  <tr>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th>Deal</th>
-    <th>Assigned To</th>
-    <th>Value</th>
-    <th>Pay By</th>
-    <th>Next Task</th>
-    <th>&nbsp;</th>
-  </tr>
+    <tr>
+      <th colspan="8">Total: {{currency total}}</th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>Deal</th>
+      <th>Assigned To</th>
+      <th>Pay By</th>
+      <th>Next Task</th>
+      <th>Value</th>
+      <th>&nbsp;</th>
+    </tr>
   </thead>
   <tbody>
     {{#each visibleContent}}
@@ -31,13 +34,13 @@
         <td>
           {{#linkTo user user}}{{user.name}}{{/linkTo}}
         </td>
-        <td>{{currency value}}</td>
         <td {{bindAttr class="isPastPayment"}}>
           {{date payBy}}
         </td>
         <td>
           {{showWarningIfEmpty latestTask}}
         </td>
+        <td>{{currency value}}</td>
         <td>
           <a {{action deleteObject this target="controller"}} class="btn btn-danger">
             <i class="icon-trash icon-white"></i>

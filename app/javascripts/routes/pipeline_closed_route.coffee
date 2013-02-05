@@ -4,7 +4,7 @@ Radium.PipelineClosedRoute = Em.Route.extend
       @controllerFor('pipelineClosed').toggleChecked()
 
   model: (params) ->
-    return Radium.Deal.find(statusFor: 'closed')
+    @controllerFor('pipeline').get('closed')
 
   renderTemplate: ->
     @render 'pipeline/closed'
