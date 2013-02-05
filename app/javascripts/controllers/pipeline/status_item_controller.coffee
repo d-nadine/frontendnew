@@ -14,6 +14,13 @@ Radium.StatusItemController = Em.ObjectController.extend
   expand: ->
     @toggleProperty 'isExpanded'
 
+  indexClass: ( ->
+    if @get('index') % 2 == 0
+      "lost"
+    else
+      "negotiating"
+  ).property()
+
   total: ( ->
     sum = @get('deals').reduce (preVal, item) ->
       value = if preVal.get
