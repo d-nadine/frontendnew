@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 77de2c820729ce533cb17d37e1484ac98968cce7
+  revision: 07453b3250c5d613d92ac4d0c6d5eaa74ab27b8f
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -36,7 +36,6 @@ GIT
       rake-pipeline (~> 0.8.0)
       rake-pipeline-web-filters (= 0.7.0)
       sass
-      thin
       thor
       uglifier (~> 1.2.3)
       yui-compressor
@@ -69,9 +68,7 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    daemons (1.1.9)
     dnote (1.7.1)
-    eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.10)
@@ -98,10 +95,6 @@ GEM
     therubyracer (0.11.3)
       libv8 (~> 3.11.8.12)
       ref
-    thin (1.5.0)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
