@@ -10,7 +10,7 @@ Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
     statuses = Em.ArrayProxy.create
                 content: []
 
-    @get('settings.pipelineStatuses').forEach (status, index) =>
+    @get('settings.negotiatingStatues').forEach (status, index) =>
       customStatus = Ember.Object.create
         index: index
         status: status
@@ -20,7 +20,7 @@ Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
       statuses.pushObject(customStatus)
 
     statuses
-  ).property('settings', 'settings.pipelineStatuses', 'model')
+  ).property('settings', 'settings.negotiatingStatues', 'model')
 
   customStatusesTotal: ( ->
     total = 0
