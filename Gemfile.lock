@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 07453b3250c5d613d92ac4d0c6d5eaa74ab27b8f
+  revision: b4f90b26e89235f26b641e7e9588132b8e0303bc
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/thor.git
-  revision: ccd8a2d8490ff9bb5231d56e3afe177ae8f12f45
+  revision: 5abc37782755e6d8dc544d59d430c0bc0a5a6771
   specs:
     thor (0.17.0)
 

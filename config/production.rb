@@ -19,4 +19,11 @@ Radium.configure do
 
   # Module format for minispade: :string or :function
   config.minispade.module_format = :function
+
+  # Override iridium-ember
+  config.handlebars.compiler = proc { |source|
+    "Ember.Handlebars.compile(#{source});"
+  }
+
+  config.handlebars.inline_compiler = nil
 end
