@@ -1,5 +1,5 @@
 Factory.define 'settings',
-  negotiatingStatues: [
+  negotiatingStatuses: [
     'Opportunity',
     'Sent Proposal',
     'Waiting Signature'

@@ -20,7 +20,7 @@ Radium.Groupable = Em.Mixin.create
 
     @_super.apply(this, arguments)
 
-  arrangedContent: (->
+  groupedContent: (->
     if content = @get 'content'
       @group(content)
   ).property('content')

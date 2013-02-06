@@ -1,29 +1,32 @@
-Radium.StatusItemController = Em.ObjectController.extend
+Radium.StatusItemController = Em.ArrayController.extend
   needs: ['pipeline']
 
-  statusDidChange: ( ->
-    status = @get('controllers.pipeline.currentStatus.status')
+  total: Ember.computed.alias('controllers.pipeline.negotiatingTotal')
+  status: Ember.computed.alias('controllers.pipeline.currentStatus')
 
+  expand: ->
+    @toggleProperty 'isExpanded'
+
+  statusDidChange: (->
+    status = @get 'status'
     return unless status
 
     @set('isExpanded', @get('status') == status)
   ).observes('controllers.pipeline.currentStatus')
 
-  percentage: ( ->
-    total = @get('controllers.pipeline.customStatusesTotal')
+  percentage: (->
+    total = @get 'total'
+    length = @get 'length'
 
-    return 0 unless total || total == 0 || status.get('deals.length') == 0
+    return 0 unless total || total == 0 || length == 0
 
-    Math.floor((@get('deals.length') / total) * 100)
-  ).property('deals', 'deals.length')
+    Math.floor((length / total) * 100)
+  ).property('total', 'content.length')
 
-  expand: ->
-    @toggleProperty 'isExpanded'
+  total: (->
+    return 0 if @get('length') == 0
 
-  total: ( ->
-    deals = @get('deals')
-
-    sum = deals.reduce (preVal, item) ->
+    sum = @reduce (preVal, item) ->
       value = if preVal.get
                 value = preVal.get('value')
               else
@@ -32,8 +35,8 @@ Radium.StatusItemController = Em.ObjectController.extend
       value + (item.get('value') || 0)
 
     sum
-  ).property('deals', 'deals.length')
+  ).property('length')
 
   title: ( ->
-    "#{@get('status')} - (#{@get('deals.length')})"
+    "#{@get('status')} - (#{@get('length')})"
   ).property('status', 'deals.length')

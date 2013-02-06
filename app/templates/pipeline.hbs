@@ -5,9 +5,9 @@
         {{#linkTo pipeline.leads}}Leads ({{leads.length}}){{/linkTo}}
       </li>
       <li class="divider">&nbsp;</li>
-      {{#each customStatuses}}
-        <li class="{{statusItemClass index}}">
-          <a {{action showCustomStatus this}} href="#">{{status}} ({{deals.length}})</a>
+      {{#each negotiatingGroups}}
+        <li class="negotiating">
+          <a {{action selectGroup this}} href="#">{{title}} ({{length}})</a>
         </li>
       {{/each}}
       <li class="divider">&nbsp;</li>

@@ -143,7 +143,7 @@ class Populator
 
       hash.createdAt = Ember.DateTime.random(true)
 
-      dealStatuses = ['published', 'closed', 'lost'].concat settings.get('negotiatingStatues')
+      dealStatuses = ['published', 'closed', 'lost'].concat settings.get('negotiatingStatuses')
 
       hash.deals = ->
                     [

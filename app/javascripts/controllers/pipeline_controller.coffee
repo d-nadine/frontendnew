@@ -1,35 +1,40 @@
-Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
+require 'lib/radium/groupable'
+
+NegotiatingGroup = Ember.ArrayProxy.extend
+  title: Ember.computed.alias('groupId')
+
+Radium.PipelineController = Em.ArrayController.extend Radium.SettingsMixin, Radium.Groupable,
+  negotiatingStatuses: Ember.computed.alias('controllers.settings.negotiatingStatuses')
+
   leads: (->
     Radium.Contact.filter (contact) ->
       contact.get('status') is 'lead'
   ).property()
 
-  customStatuses: ( ->
-    return unless @get('model')
+  # FIXME: replace with FilterableArray
+  negotiatingDeals: (->
+    model = @get 'model'
+    statuses = @get 'negotiatingStatuses'
 
-    statuses = Em.ArrayProxy.create
-                content: []
+    model.filter (deal) ->
+      statuses.indexOf(deal.get('status')) != -1
+  ).property('model', 'negotiatingStatuses')
 
-    @get('settings.negotiatingStatues').forEach (status, index) =>
-      customStatus = Ember.Object.create
-        index: index
-        status: status
-        deals: @get('model').filter (deal) -> 
-          deal.get('status') == status
+  negotiatingGroups: (->
+    deals = @get 'negotiatingDeals'
+    return unless deals
 
-      statuses.pushObject(customStatus)
+    @group deals
+  ).property('negotiatingDeals')
 
-    statuses
-  ).property('settings', 'settings.negotiatingStatues', 'model')
+  groupType: NegotiatingGroup
 
-  customStatusesTotal: ( ->
-    total = 0
+  groupBy: (deal) ->
+    deal.get('status').replace(/\W+/, "_")
 
-    @get('customStatuses').forEach (item) ->
-      total += item.get('deals.length')
-
-    total
-  ).property('customStatus', 'customStatus.length')
+  negotiatingTotal: (->
+    @get 'negotiatingDeals.length'
+  ).property('negotiatingDeals.length')
 
   closed: (->
     return unless @get('model')
