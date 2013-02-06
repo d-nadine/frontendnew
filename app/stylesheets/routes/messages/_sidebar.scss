@@ -8,6 +8,11 @@ div.email-toolbar{
 }
 ul.messages{
   list-style: none;
+
+  li.send-email{
+    text-align: center;
+  }
+
   li{
     position: relative;
   }
