@@ -1,20 +1,32 @@
 Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   sortProperties: ['sentAt']
+  emails: Ember.A()
+  discussions: Ember.A()
 
   folders: [
     {title: 'Inbox', name: 'inbox'}
     {title: 'Sent items', name: 'sent'}
     {title: 'Attachments', name: 'attachments'}
-    {title: 'Meeting Invitations', name: 'meetings'}
+    {title: 'Meeting Invitations', name: 'discussions'}
     {title: 'Clients', name: 'clients'}
     {title: 'Opportunities', name: 'opportunities'}
     {title: 'Leads', name: 'leads'}
     {title: 'Prospects', name: 'prospects'}
   ]
 
-  content: (->
-    Radium.Email.find folder: @get('folder')
-  ).property('folder')
+  folderDidChange: ( ->
+    @set('emails', Radium.Email.find folder: @get('folder'))
+    # @set('discussions', Radium.Discussion.find folder: @get('folder'))
+  ).observes('folder')
+
+  items: (->
+    items = []
+
+    @get('emails').forEach (email) -> items.pushObject email
+    @get('discussions').forEach (discussion) -> items.pushObject discussion
+
+    items
+  ).property('emails', 'emails.length', 'messages', 'messages.length')
 
   deleteEmail: (email) ->
     email.set 'isChecked'

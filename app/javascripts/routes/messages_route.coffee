@@ -15,8 +15,8 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     createEmail: ->
       @controllerFor('messages').toggleProperty 'createEmail'
 
-  model: (params) ->
-    Radium.Email.find()
+  setupController: ->
+    @controllerFor('messages').set 'folder', 'inbox'
 
   renderTemplate: ->
     # FIXME this seems wrong. It uses drawer_panel for
