@@ -1,8 +1,7 @@
 Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
   leads: (->
-    Radium.Contact.filter((contact) ->
+    Radium.Contact.filter (contact) ->
       contact.get('status') is 'lead'
-    )
   ).property()
 
   customStatuses: ( ->
@@ -35,15 +34,13 @@ Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
   closed: (->
     return unless @get('model')
 
-    @get('model').filter((deal) ->
+    @get('model').filter (deal) ->
       deal.get('status') is 'closed'
-    )
   ).property('model', 'model.length')
 
   lost: (->
     return unless @get('model')
 
-    @get('model').filter((contact) ->
+    @get('model').filter (contact) ->
       contact.get('status') is 'lost'
-    )
   ).property('model', 'model.length')
