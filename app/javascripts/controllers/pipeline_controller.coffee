@@ -1,7 +1,9 @@
 require 'lib/radium/groupable'
 
 NegotiatingGroup = Ember.ArrayProxy.extend
-  title: Ember.computed.alias('groupId')
+  title: (->
+    @get('firstObject.status')
+  ).property('firstObject.status')
 
 Radium.PipelineController = Em.ArrayController.extend Radium.SettingsMixin, Radium.Groupable,
   negotiatingStatuses: Ember.computed.alias('controllers.settings.negotiatingStatuses')
