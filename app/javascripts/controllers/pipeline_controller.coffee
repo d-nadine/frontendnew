@@ -16,6 +16,8 @@ Radium.PipelineController = Em.ArrayController.extend Radium.SettingsMixin, Radi
   # FIXME: replace with FilterableArray
   negotiatingDeals: (->
     model = @get 'model'
+    return unless model
+
     statuses = @get 'negotiatingStatuses'
 
     model.filter (deal) ->

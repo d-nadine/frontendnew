@@ -1,32 +1,33 @@
 <h3>Pipeline - Negotiating Flow</h3>
+
 <div id="pipeline-status">
-{{#each statuses itemController="statusItem"}}
-  <div class="item">
-    <div class="expand">
-      <a {{action expand}} href="#">
-      {{#if isExpanded}}
-        <i class="icon-minus"></i>
-      {{else}}
-        <i class="icon-plus"></i>
-      {{/if}}
-      </a>
-    </div>
-    <div class="title">
-      <a {{action expand}} href="#">
-        {{title}}
-      </a>
-    </div>
-    <div class="pull-right muted">
-      {{deals.length}} Total: {{currency total}}
-    </div>
-    <div class="statusProgress">
-      <div class="progress progress-info">
-        <div class="bar" style="width: {{unbound percentage}}%"></div>
+  {{#each controller itemController="pipelineNegotiatingGroup"}}
+    <div class="item">
+      <div class="expand">
+        <a {{action expand}} href="#">
+        {{#if isExpanded}}
+          <i class="icon-minus"></i>
+        {{else}}
+          <i class="icon-plus"></i>
+        {{/if}}
+        </a>
       </div>
+      <div class="title">
+        <a {{action expand}} href="#">
+          {{title}}
+        </a>
+      </div>
+      <div class="pull-right muted">
+        {{length}} Total: {{currency total}}
+      </div>
+      <div class="statusProgress">
+        <div class="progress progress-info">
+          <div class="bar" style="width: {{unbound percentage}}%"></div>
+        </div>
+      </div>
+      {{#if isExpanded}}
+        {{control 'pipeline/custom_status' deals}}
+      {{/if}}
     </div>
-    {{#if isExpanded}}
-      {{control 'pipeline/custom_status' deals}}
-    {{/if}}
-  </div>
-{{/each}}
+  {{/each}}
 </div>

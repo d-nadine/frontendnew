@@ -1,42 +1,38 @@
-Radium.StatusItemController = Em.ArrayController.extend
+Radium.PipelineNegotiatingGroupController = Em.ArrayController.extend
   needs: ['pipeline']
 
-  total: Ember.computed.alias('controllers.pipeline.negotiatingTotal')
-  status: Ember.computed.alias('controllers.pipeline.currentStatus')
+  negotiatingTotal: Ember.computed.alias('controllers.pipeline.negotiatingTotal')
+  selectedGroup: Ember.computed.alias('controllers.pipeline.selectedGroup')
+
+  deals: Ember.computed.alias('content')
 
   expand: ->
     @toggleProperty 'isExpanded'
 
-  statusDidChange: (->
-    status = @get 'status'
-    return unless status
+  selectedGroupDidChange: (->
+    selectedGroup = @get 'selectedGroup'
+    return unless selectedGroup
 
-    @set('isExpanded', @get('status') == status)
-  ).observes('controllers.pipeline.currentStatus')
+    @set('isExpanded', @get('content') == selectedGroup)
+  ).observes('selectedGroup')
 
   percentage: (->
-    total = @get 'total'
+    total = @get 'negotiatingTotal'
     length = @get 'length'
 
     return 0 unless total || total == 0 || length == 0
 
     Math.floor((length / total) * 100)
-  ).property('total', 'content.length')
+  ).property('negotiatingTotal', 'length')
 
   total: (->
     return 0 if @get('length') == 0
 
-    sum = @reduce (preVal, item) ->
-      value = if preVal.get
-                value = preVal.get('value')
-              else
-                preVal
-
-      value + (item.get('value') || 0)
-
-    sum
+    @reduce(((value, item) ->
+      value + item.get('value')
+    ), 0)
   ).property('length')
 
   title: ( ->
-    "#{@get('status')} - (#{@get('length')})"
+    "#{@get('content.title')} - (#{@get('length')})"
   ).property('status', 'deals.length')

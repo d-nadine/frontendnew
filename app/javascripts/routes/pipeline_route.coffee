@@ -1,7 +1,7 @@
 Radium.PipelineRoute = Ember.Route.extend
   events:
-    showCustomStatus: (status) ->
-      @controllerFor('pipeline').set('currentStatus', status)
+    selectGroup: (group) ->
+      @controllerFor('pipeline').set('selectedGroup', group)
       @transitionTo 'pipeline.negotiating'
 
   model: ->
