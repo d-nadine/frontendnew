@@ -3,5 +3,7 @@ Radium.PipelineLostRoute = Em.Route.extend
     toggleChecked: ->
       @controllerFor('pipelineLost').toggleChecked()
 
-  model: ->
-    Radium.Contact.find(statusFor: 'lost')
+  setupController: (controller) ->
+    content = @controllerFor('pipeline').get('lost')
+    controller.set 'model', content
+

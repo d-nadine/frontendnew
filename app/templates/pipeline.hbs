@@ -2,16 +2,20 @@
   <div>
     <ul id="status">
       <li class="leads">
-        {{#linkTo pipeline.leads}}Leads ({{leads}}){{/linkTo}}
+        {{#linkTo pipeline.leads}}Leads ({{leads.length}}){{/linkTo}}
       </li>
-      <li class="negotiating">
-        {{#linkTo pipeline.negotiating}}Negotiating ({{negotiating}}){{/linkTo}}
-      </li>
+      <li class="divider">&nbsp;</li>
+      {{#each negotiatingGroups}}
+        <li class="negotiating">
+          <a {{action selectGroup this}} href="#">{{title}} ({{length}})</a>
+        </li>
+      {{/each}}
+      <li class="divider">&nbsp;</li>
       <li class="closed">
-        {{#linkTo pipeline.closed}}Closed ({{closed}}){{/linkTo}}
+        {{#linkTo pipeline.closed}}Closed ({{closed.length}}){{/linkTo}}
       </li>
       <li class="lost">
-        {{#linkTo pipeline.lost}}Lost ({{lost}}){{/linkTo}}
+        {{#linkTo pipeline.lost}}Lost ({{lost.length}}){{/linkTo}}
       </li>
     </ul>
   </div>

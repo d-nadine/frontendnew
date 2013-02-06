@@ -7,6 +7,9 @@ Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
 
   setupController: ->
     @controllerFor('users').set 'model', Radium.User.find()
+    settings = Radium.Settings.find(1)
+
+    @controllerFor('settings').set 'model', settings
 
   renderTemplate: ->
     @render()

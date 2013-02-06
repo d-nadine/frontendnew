@@ -7,7 +7,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin, Radium.FollowableMixin, Radi
   value: DS.attr('number')
   reason: DS.attr('string')
 
-  # Can be `published`, `negotiating`, `closed`, `paymentpending`
+  lastStatus: DS.attr('string')
   status: DS.attr('string')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'deal')

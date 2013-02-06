@@ -3,6 +3,8 @@ Number::randomize = ->
 
 class Populator
   @run: ->
+    settings = Factory.create 'settings'
+
     aaron = Factory.create 'user'
       name: 'Aaron Stephens'
       email: 'aaron.stephens13@radiumcrm.com'
@@ -141,7 +143,7 @@ class Populator
 
       hash.createdAt = Ember.DateTime.random(true)
 
-      dealStatuses = ['published', 'negotiating', 'closed', 'paymentpending']
+      dealStatuses = ['published', 'closed', 'lost'].concat settings.get('negotiatingStatuses')
 
       hash.deals = ->
                     [
@@ -149,12 +151,13 @@ class Populator
                         user: -> users[(2).randomize()]
                         value: -> (10000).randomize()
                         reason: "something happened"
-                        status: -> dealStatuses[(3).randomize()]
+                        status: -> dealStatuses[(dealStatuses.length).randomize()]
                         payBy: -> Ember.DateTime.random()
                         contact: -> Radium.Contact.find().objectAt((Radium.Contact.find().get('length') - 1).randomize())
                         createdAt: -> Ember.DateTime.random(true)
                         todos: -> [todo] if hash.todos
                         meetings: -> [retrospection] if hash.meetings
+                        lastStatus: -> dealStatuses[(3).randomize()]
                         nextTask: -> hash.nextTask if hash.nextTask
                     ]
 
