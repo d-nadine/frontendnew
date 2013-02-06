@@ -1,8 +1,8 @@
-{{#if hasCheckedContent}}
-  {{render 'messages/bulk_actions' checkedContent}}
+{{#if createEmail}}
+  {{render 'messages/create_email'}}
 {{else}}
-  {{#if createEmail}}
-    {{render 'messages/create_email'}}
+  {{#if hasCheckedContent}}
+    {{render 'messages/bulk_actions' checkedContent}}
   {{else}}
     {{#with selectedContent}}
       {{render 'messages/email_panel' this}}
