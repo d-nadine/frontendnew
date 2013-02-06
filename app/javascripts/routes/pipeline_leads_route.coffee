@@ -3,5 +3,6 @@ Radium.PipelineLeadsRoute = Em.Route.extend
     toggleChecked: ->
       @controllerFor('pipelineLeads').toggleChecked()
 
-  model: ->
-    @controllerFor('pipeline').get('leads')
+  setupController: (controller) ->
+    content = @controllerFor('pipeline').get('leads')
+    controller.set 'model', content
