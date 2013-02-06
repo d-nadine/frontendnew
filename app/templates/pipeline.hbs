@@ -5,8 +5,9 @@
         {{#linkTo pipeline.leads}}Leads ({{leads.length}}){{/linkTo}}
       </li>
       <li class="divider">&nbsp;</li>
-      {{#each customStatuses itemController="statusItem"}}
-      <li {{bindAttr class="indexClass"}}>
+      {{#each customStatuses}}
+        <li class="{{statusItemClass index}}">
+        {{log controller.constructor}}
           <a {{action showCustomStatus this}} href="#">{{status}} ({{deals.length}})</a>
         </li>
       {{/each}}

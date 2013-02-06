@@ -1,1 +1,1 @@
-Radium.PipelineCustomStatusController = Radium.PipelineBaseController.extend()
+Radium.PipelineCustomStatusController = Radium.PipelineDealsController.extend()

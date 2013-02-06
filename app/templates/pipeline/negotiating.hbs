@@ -1,4 +1,4 @@
-<h3>Pipeline - Negotiating Flow this month</h3>
+<h3>Pipeline - Negotiating Flow</h3>
 <div id="pipeline-status">
 {{#each statuses itemController="statusItem"}}
   <div class="item">
@@ -12,10 +12,12 @@
       </a>
     </div>
     <div class="title">
-      {{title}}
+      <a {{action expand}} href="#">
+        {{title}}
+      </a>
     </div>
-    <div class="pull-right">
-      {{deals.length}} Total {{currency total}}
+    <div class="pull-right muted">
+      {{deals.length}} Total: {{currency total}}
     </div>
     <div class="statusProgress">
       <div class="progress progress-info">
@@ -23,7 +25,7 @@
       </div>
     </div>
     {{#if isExpanded}}
-    {{control 'pipeline/custom_status' deals}}
+      {{control 'pipeline/custom_status' deals}}
     {{/if}}
   </div>
 {{/each}}

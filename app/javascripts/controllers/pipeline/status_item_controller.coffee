@@ -1,7 +1,13 @@
 Radium.StatusItemController = Em.ObjectController.extend
-  isExpanded: false
-
   needs: ['pipeline']
+
+  statusDidChange: ( ->
+    status = @get('controllers.pipeline.currentStatus.status')
+
+    return unless status
+
+    @set('isExpanded', @get('status') == status)
+  ).observes('controllers.pipeline.currentStatus')
 
   percentage: ( ->
     total = @get('controllers.pipeline.customStatusesTotal')

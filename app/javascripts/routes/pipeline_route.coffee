@@ -1,7 +1,8 @@
 Radium.PipelineRoute = Ember.Route.extend
   events:
-    showCustomStatus: (status)->
-      console.log status.get('status')
+    showCustomStatus: (status) ->
+      @controllerFor('pipeline').set('currentStatus', status)
+      @transitionTo 'pipeline.negotiating'
 
   model: ->
     Radium.Deal.all()

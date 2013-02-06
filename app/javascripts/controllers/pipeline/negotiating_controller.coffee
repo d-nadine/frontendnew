@@ -6,4 +6,3 @@ Radium.PipelineNegotiatingController = Radium.PipelineDealsController.extend
   statuses: ( ->
     @get('controllers.pipeline.customStatuses')
   ).property('controllers.pipeline.customStatuses')
-

@@ -90,6 +90,9 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
 }
 
 #pipeline-status{
+  a:hover {
+    text-decoration: none;
+  }
   .item{
     width: 90%;
   }
