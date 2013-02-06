@@ -1,1 +1,6 @@
-Factory.define 'settings'
+Factory.define 'settings',
+  pipelineStatuses: [
+    'Opportunity',
+    'Sent Proposal',
+    'Waiting Signature'
+  ]

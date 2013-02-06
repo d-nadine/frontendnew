@@ -13,14 +13,14 @@ Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
     @get('settings.pipelineStatuses').forEach (status, index) =>
       customStatus = Ember.Object.create
         index: index
-        status: status.get('status')
-        deals: @get('model').filter (deal) -> deal.get('status') == status.get('status')
+        status: status
+        deals: @get('model').filter (deal) -> 
+          deal.get('status') == status
 
       statuses.pushObject(customStatus)
 
     statuses
   ).property('settings', 'settings.pipelineStatuses', 'model')
-
 
   customStatusesTotal: ( ->
     total = 0
