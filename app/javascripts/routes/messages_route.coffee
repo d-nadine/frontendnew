@@ -12,6 +12,9 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     selectContent: (item) ->
       @controllerFor('messages').set 'selectedContent', item
 
+    createEmail: ->
+      @controllerFor('messages').toggleProperty 'createEmail'
+
   model: (params) ->
     Radium.Email.find()
 
