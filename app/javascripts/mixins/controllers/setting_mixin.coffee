@@ -1,4 +1,4 @@
-Radium.AccountMixin = Ember.Mixin.create
+Radium.SettingsMixin = Ember.Mixin.create
   needs: ['settings']
 
   settings: ( ->

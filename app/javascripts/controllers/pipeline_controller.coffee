@@ -1,4 +1,4 @@
-Radium.PipelineController = Em.Controller.extend Radium.AccountMixin,
+Radium.PipelineController = Em.Controller.extend Radium.SettingsMixin,
   leads: (->
     Radium.Contact.filter((contact) ->
       contact.get('status') is 'lead'
