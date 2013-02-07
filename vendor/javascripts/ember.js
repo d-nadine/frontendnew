@@ -1,6 +1,5 @@
-// 1975aa3 (2013-02-03 23:11:50 -0800)
-// Version: v1.0.0-pre.2-609-g1975aa3
-// Last commit: 1975aa3 (2013-02-03 23:11:50 -0800)
+// Version: v1.0.0-pre.2-620-gd60c6c0
+// Last commit: d60c6c0 (2013-02-06 12:31:58 -0800)
 
 
 (function() {
@@ -151,8 +150,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-609-g1975aa3
-// Last commit: 1975aa3 (2013-02-03 23:11:50 -0800)
+// Version: v1.0.0-pre.2-620-gd60c6c0
+// Last commit: d60c6c0 (2013-02-06 12:31:58 -0800)
 
 
 (function() {
@@ -12390,20 +12389,22 @@ Ember.ArrayController = Ember.ArrayProxy.extend(Ember.ControllerMixin,
 
   objectAtContent: function(idx) {
     var length = get(this, 'length'),
-        object = get(this,'arrangedContent').objectAt(idx),
-        controllerClass = this.lookupItemController(object);
+        object = get(this,'arrangedContent').objectAt(idx);
 
-    if (controllerClass && idx < length) {
-      return this.controllerAt(idx, object, controllerClass);
-    } else {
-      // When controllerClass is falsy we have not opted in to using item
-      // controllers, so return the object directly.  However, when
-      // controllerClass is defined but the index is out of range,  we want to
-      // return the "out of range" value, whatever that might be.  Rather than
-      // make assumptions (e.g. guessing `null` or `undefined`) we defer this to
-      // `arrangedContent`.
-      return object;
+    if (idx < length) {
+      var controllerClass = this.lookupItemController(object);
+      if (controllerClass) {
+        return this.controllerAt(idx, object, controllerClass);
+      }
     }
+
+    // When `controllerClass` is falsy, we have not opted in to using item
+    // controllers, so return the object directly.
+
+    // When the index is out of range, we want to return the "out of range"
+    // value, whatever that might be.  Rather than make assumptions
+    // (e.g. guessing `null` or `undefined`) we defer this to `arrangedContent`.
+    return object;
   },
 
   arrangedContentDidChange: function() {
@@ -13028,7 +13029,7 @@ Ember._RenderBuffer.prototype =
       this.elementAttributes = null;
     }
 
-    if (value) {
+    if (value || typeof value === 'number') {
       buffer.push(' value="' + this._escapeAttribute(value) + '"');
 
       this.elementValue = null;
@@ -13088,7 +13089,7 @@ Ember._RenderBuffer.prototype =
       this.elementAttributes = null;
     }
 
-    if (value) {
+    if (value || typeof value === 'number') {
       $element.val(value);
 
       this.elementValue = null;
@@ -26674,8 +26675,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-pre.2-609-g1975aa3
-// Last commit: 1975aa3 (2013-02-03 23:11:50 -0800)
+// Version: v1.0.0-pre.2-620-gd60c6c0
+// Last commit: d60c6c0 (2013-02-06 12:31:58 -0800)
 
 
 (function() {
@@ -26686,4 +26687,5 @@ Ember
 */
 
 })();
+
 
