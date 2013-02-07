@@ -4,7 +4,6 @@ Radium.Message = Ember.ArrayProxy.extend
   content: (->
     items = []
 
-    # FIXME: wait for didLoad on rea data
     emails =  Radium.Email.find folder: @get('folder')
     discussions = Radium.Discussion.find folder: @get('folder')
 
