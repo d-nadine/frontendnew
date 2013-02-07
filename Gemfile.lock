@@ -22,11 +22,11 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: b4f90b26e89235f26b641e7e9588132b8e0303bc
+  revision: 6162fc3b3c04527d2ca1f43cef93225aa92daacd
   specs:
     iridium (0.9.0.rc1)
       activesupport
-      barber (~> 0.1.2)
+      barber (~> 0.2.0)
       coffee-script
       compass
       execjs
@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/thor.git
-  revision: 5abc37782755e6d8dc544d59d430c0bc0a5a6771
+  revision: 9c33a04b16941501bfe79fe787e25ffcc89a54a2
   specs:
     thor (0.17.0)
 
@@ -56,7 +56,7 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    barber (0.1.3)
+    barber (0.2.0)
       execjs
     chunky_png (1.2.7)
     coffee-script (2.2.0)

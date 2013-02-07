@@ -5,6 +5,14 @@ if defined?(Bundler)
   Bundler.require :default, Iridium.env
 end
 
+# Patch Iridium-Ember's precompilation until I can
+# write a real version of iridium-ember
+class Iridium::Ember::HandlebarsPrecompiler
+  def handlebars
+    @handlebars ||= File.new File.expand_path("../vendor/support/ember-template-compiler.js", __FILE__)
+  end
+end
+
 class Radium < Iridium::Application
   # Specify vendor load order. Files will be concatenated in the
   # declared order. Undeclared files will be concatentated after
