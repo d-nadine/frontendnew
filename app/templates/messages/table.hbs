@@ -1,14 +1,21 @@
-<table class="table table-bordered table-striped">
-  {{#each this}}
-    <tr>
-      <td>{{subject}}</td>
-      <td>{{truncate message}}</td>
-      <td>{{time sentAt}}</td>
-      <td>
-        {{#if hasAttachments}}
-          <i class="icon-paperclip"></i>
-        {{/if}}
-      </td>
-    </tr>
-  {{/each}}
-</table>
+{{#each this}}
+  <div class="block bulk-list">
+    <div class="sender">
+      <strong>{{sender.name}}</strong>
+    </div>
+    <div class="subject">
+      {{subject}}
+    </div>
+    <div class="message">
+      {{truncate message}}
+    </div>
+    <div>
+    {{time sentAt}}
+    </div>
+    <div class="pull-right">
+    {{!#if hasAttachments}}
+      <i class="icon-paperclip"></i>
+    {{!/if}}
+    </div>
+  </div>
+{{/each}}

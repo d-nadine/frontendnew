@@ -1,6 +1,11 @@
 Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormWidgetMixin,
   buttons: [
     Ember.Object.create
+      action: "cancelAll"
+      title: "Cancel"
+      alwaysOpen: true
+      classes: 'btn pull-right'
+    Ember.Object.create
       action: "deleteAll"
       title: "Delete"
       alwaysOpen: true
@@ -25,3 +30,8 @@ Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormW
     @forEach (record) =>
       record.deleteRecord()
       record.get('store').commit()
+
+  cancelAll: ->
+    # @setEach 'isChecked', false
+    @forEach (record) =>
+      record.set 'isChecked', false
