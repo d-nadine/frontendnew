@@ -5,7 +5,7 @@
     {{render 'messages/bulk_actions' checkedContent}}
   {{else}}
     {{#with selectedContent}}
-      {{render 'messages/email_panel' this}}
+      {{renderMailPanel this}}
     {{/with}}
   {{/if}}
 {{/if}}

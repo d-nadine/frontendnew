@@ -22,7 +22,7 @@
   <div class="email-actions">
     <div class="btn-toolbar">
       <div class="btn-group">
-        <a class="btn">
+        <a {{action showReplySection}} class="btn">
           <i class="icon-reply"></i> Reply
         </a>
         <a class="btn">
@@ -47,6 +47,11 @@
     </div>
   </div>
 </div>
+
+{{#if showReply }}
+  {{controller}}
+  {{view.constructor}}
+{{/if}}
 
 {{#if showActions }}
   {{control 'forms/form_widget' model}}

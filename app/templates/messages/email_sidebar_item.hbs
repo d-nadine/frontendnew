@@ -1,0 +1,21 @@
+<div>
+  {{avatar sender}}
+  {{view view.checkMailItem}}
+</div>
+<div>
+  <div>
+    {{#if isContact}}
+      {{#linkTo contact sender}}{{sender.name}}{{/linkTo}}
+    {{else}}
+      {{#linkTo user sender}}{{sender.name}}{{/linkTo}}
+    {{/if}}
+  </div>
+  <p>{{subject}}</p>
+  {{#if hasAttachments}}
+  <i class="icon-paperclip icon-large"></i>
+  {{/if}}
+  <a {{action deleteItem this target="controllers.messages"}}>
+    <i class='icon-trash icon-large'></i>
+  </a>
+</div>
+<small>{{time sentAt}}</small>

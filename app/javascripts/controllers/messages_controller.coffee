@@ -16,28 +16,28 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
 
   folderDidChange: ( ->
     @set('emails', Radium.Email.find folder: @get('folder'))
-    # @set('discussions', Radium.Discussion.find folder: @get('folder'))
+    @set('discussions', Radium.Discussion.find folder: @get('folder'))
   ).observes('folder')
 
   items: (->
     items = []
 
-    @get('emails').forEach (email) -> items.pushObject email
     @get('discussions').forEach (discussion) -> items.pushObject discussion
+    @get('emails').forEach (email) -> items.pushObject email
 
     items
   ).property('emails', 'emails.length', 'messages', 'messages.length')
 
-  deleteEmail: (email) ->
-    email.set 'isChecked'
+  deleteItem: (item) ->
+    item.set 'isChecked'
     # FIXME: ember-data association errors, fake for now
     # store = @get('store')
 
     # email.deleteRecord()
     # store.commit()
 
-    @removeObject(email)
-    Radium.Utils.notify "email deleted."
+    @removeObject(item)
+    Radium.Utils.notify "deleted."
 
   deleteEmails: ->
     return if selected.get('count') == 0

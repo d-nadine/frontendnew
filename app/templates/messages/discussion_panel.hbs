@@ -1,0 +1,33 @@
+<div class="block discussion">
+  <div><span class="label label-success">Discussion</span></div>
+  <div class="page-header">
+    <h2> {{unbound topic}}</h2>
+  </div>
+  <div>
+    <div class="with">
+      <span class="label label-important">With</span><br/>
+    </div>
+     <ul class="unstyled">
+      {{#each users}}
+        <li class="comment">
+          {{avatar this}}
+          {{#linkTo user this}}{{name}}{{/linkTo}}
+        </li>
+      {{else}}
+        <li class="comment">Nobody is talking yet!</li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="btn-toolbar">
+    <div class="btn-group pull-right">
+      <a {{action deleteDiscussion this target="controller"}} class="btn btn-danger">
+        <i class="icon-trash icon-white"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="block block-arrow">
+  {{control 'comments' model}}
+</div>
+
+

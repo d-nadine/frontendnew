@@ -1,0 +1,15 @@
+<div>
+  <img src="/images/icons/users.png" alt="discussion">
+</div>
+<div>
+  <div>
+    {{#each users}}
+      {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+    {{/each}}
+  </div>
+  <p>{{topic}}</p>
+  <a {{action deleteItem this target="controllers.messages"}}>
+    <i class='icon-trash icon-large'></i>
+  </a>
+</div>
+<small>{{time sentAt}}</small>

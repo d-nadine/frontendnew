@@ -1,23 +1,3 @@
 <div {{action selectContent content}}>
-  <div>
-    {{avatar sender}}
-    {{view view.checkMailItem}}
-  </div>
-  <div>
-    <div>
-      {{#if isContact}}
-        {{#linkTo contact sender}}{{sender.name}}{{/linkTo}}
-      {{else}}
-        {{#linkTo user sender}}{{sender.name}}{{/linkTo}}
-      {{/if}}
-    </div>
-    <p>{{subject}}</p>
-    {{#if hasAttachments}}
-    <i class="icon-paperclip icon-large"></i>
-    {{/if}}
-    <a {{action deleteEmail this target="controller"}}>
-      <i class='icon-trash icon-large'></i>
-    </a>
-  </div>
-  <small>{{time sentAt}}</small>
+  {{yield}}
 </div>
