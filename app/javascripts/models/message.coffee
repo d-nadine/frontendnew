@@ -8,7 +8,7 @@ Radium.Message = Ember.ArrayProxy.extend
     discussions = Radium.Discussion.find folder: @get('folder')
 
     emails.one 'didLoad', ->
-      emails.forEach (email) -> items.pushObject(email)
+      items.pushObjects(emails.toArray())
 
     discussions.one 'didLoad', ->
       items.pushObjects(discussions.toArray())
