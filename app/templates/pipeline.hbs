@@ -1,26 +1,24 @@
-<div id="pipeline">
-  <div>
-    <ul id="status">
-      <li class="leads">
-        {{#linkTo pipeline.leads}}Leads ({{leads.length}}){{/linkTo}}
+<div class="block">
+  <ul class="breadcrumb" id="pipeline-widget">
+    <li class="leads">
+      {{#linkTo pipeline.leads}}Leads{{/linkTo}} {{badge leads.length style="info"}}
+      <span class="divider">&gt;</span>
+    </li>
+    {{#each negotiatingGroups}}
+      <li class="negotiating">
+        <a {{action selectGroup this}} href="#">{{title}}</a> {{badge length style="warning"}}
+        <span class="divider">&gt;</span>
       </li>
-      <li class="divider">&nbsp;</li>
-      {{#each negotiatingGroups}}
-        <li class="negotiating">
-          <a {{action selectGroup this}} href="#">{{title}} ({{length}})</a>
-        </li>
-      {{/each}}
-      <li class="divider">&nbsp;</li>
-      <li class="closed">
-        {{#linkTo pipeline.closed}}Closed ({{closed.length}}){{/linkTo}}
-      </li>
-      <li class="lost">
-        {{#linkTo pipeline.lost}}Lost ({{lost.length}}){{/linkTo}}
-      </li>
-    </ul>
-  </div>
+    {{/each}}
+    <li class="closed">
+      {{#linkTo pipeline.closed}}Closed{{/linkTo}} {{badge closed.length style="closed"}}
+    </li>
+    <li class="lost pull-right">
+      {{#linkTo pipeline.lost}}Lost{{/linkTo}} {{badge lost.length style="important"}}
+    </li>
+  </ul>
 </div>
 
-<div id="pipeline-results">
+<div id="pipeline-results" class="block">
   {{outlet}}
 </div>

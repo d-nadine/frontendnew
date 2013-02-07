@@ -1,80 +1,20 @@
-@import "compass/typography/lists/horizontal-list";
+#pipeline-widget {
+  background: none;
 
-$pipeline-arrow-border: #fff;
-$pipeline-nav: $dark-background;
-$pipeline-nav-current: #888;
-$pipeline-nav-color: #fff;
-
-$arrow-height: 29px;
-
-$pipeline-nav-fourth-bg: #e7e7e7;
-$pipeline-nav-fourth: $dark-text;
-$pipeline-nav-first-bg: darken($pipeline-nav-fourth-bg, 15);
-$pipeline-nav-second-bg: darken($pipeline-nav-fourth-bg, 10);
-$pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
-
-.is-expired, .is-past-payment{
-  color: red;
-}
-#pipeline{
-  div:first-of-type{
-    display: inline-block;
+  .divider {
+    color: $dark-text;
   }
-  ul{
-    @include horizontal-list;
-    border-radius: 4px;
-    overflow: visible;
-    li{
-      padding-left: 2px !IMPORTANT;
-      background-color: $pipeline-nav;
-        padding: 19px 0 19px 0;
-      a{
-        color: #fff;
-        text-decoration: none;
-      }
-    }
-    > li.lost:not(.is-current){
-      a{
-        color: $pipeline-nav-fourth;
-      }
-    }
-    li.divider{
-      opacity: 0;
-    }
-    > li.leads:not(.divider){
-      @include css-arrow(right, $arrow-height, $pipeline-nav-first-bg);
-    }
-    > li.negotiating:not(.divider){
-      @include css-arrow(right, $arrow-height, $pipeline-nav-second-bg);
-    }
-    > li.closed:not(.divider){
-      @include css-arrow(right, $arrow-height, $pipeline-nav-third-bg);
-    }
-    > li.lost:not(.divider){
-      @include css-arrow(right, $arrow-height, $pipeline-nav-fourth-bg);
-    }
-    // FIXME: parent selector for active li
-    li! > a.active {
-      border: 1px solid red;
-      @include css-arrow(right, $arrow-height, $pipeline-nav-current);
-      background-color: $pipeline-nav-current;
-    }
-    li::before {
-      top: 51% !IMPORTANT;
-    }
-    li:not(.leads){
-      padding-left:  $arrow-height + 8px !IMPORTANT;
-    }
-    li.lost{
-      padding-right: 2px !IMPORTANT
-    }
-    li{
-      border: none !IMPORTANT;
-    }
+
+  li.leads {
+    margin-right: 15px;
+  }
+  li.closed {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 
-#pipeline-results{
+#pipeline-results {
   table{
     margin-top: 20px;
     td:first-of-type, th:first-of-type, td:last-of-type, th:last-of-type{
@@ -85,18 +25,24 @@ $pipeline-nav-third-bg: darken($pipeline-nav-fourth-bg, 5);
     width: 72%;
   }
 }
-#form-wdiget{
+
+#form-wdiget {
   clear: both;
 }
 
-#pipeline-status{
-  a:hover {
-    text-decoration: none;
+#negotiating-status {
+  .meta {
+    .expand, .title, .pull-right{
+      display: inline-block;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
   }
-  .item{
-    width: 90%;
+
+  .group {
+    margin-bottom: 20px;
   }
-  .expand, .title, .pull-right{
-    display: inline-block;
-  }
+
 }
