@@ -49,8 +49,9 @@
 </div>
 
 {{#if showReply }}
-  {{controller}}
-  {{view.constructor}}
+  <div class="block block-arrow">
+    {{control 'messages/reply' model}}
+  </div>
 {{/if}}
 
 {{#if showActions }}
