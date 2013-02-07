@@ -9,7 +9,7 @@ Radium.configure do
   config.pipeline.manifest = true
 
   # Swap out entire handlebars library for just the runtime
-  config.dependencies.swap :handlebars, "handlebars-runtime"
+  config.dependencies.swap :handlebars, "handlebars.runtime"
 
   # Module format for minispade: :string or :function
   config.minispade.module_format = :function

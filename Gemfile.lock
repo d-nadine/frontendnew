@@ -16,13 +16,13 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium-ember.git
-  revision: 754f51b4dede11a836f606381e8784219cdc8d2f
+  revision: c3093bc773920a65d3f34cdb0f052d15d8e74016
   specs:
     iridium-ember (0.1.0)
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 6162fc3b3c04527d2ca1f43cef93225aa92daacd
+  revision: 3f319251aa3ca5a20643dd9c5494a799cd40f41b
   specs:
     iridium (0.9.0.rc1)
       activesupport
