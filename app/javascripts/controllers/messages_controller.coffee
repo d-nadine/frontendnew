@@ -1,5 +1,6 @@
 Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   sortProperties: ['sentAt']
+  contentPath: 'items'
   emails: Ember.A()
   discussions: Ember.A()
 

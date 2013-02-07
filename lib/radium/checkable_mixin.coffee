@@ -1,10 +1,11 @@
 require 'lib/radium/filtered_array'
 
 Radium.CheckableMixin = Ember.Mixin.create
+  contentPath: 'arrangedContent'
   checkedContent: (->
     Radium.FilteredArray.create
       context: this
-      contentBinding: 'context.arrangedContent'
+      contentBinding: "context.#{@get('contentPath')}"
       filterProperties: ['isChecked']
   ).property('arrangedContent')
 
