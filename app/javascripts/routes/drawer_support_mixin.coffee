@@ -9,5 +9,5 @@ Radium.DrawerSupportMixin = Ember.Mixin.create
       @set 'router.openDrawer', name
 
   closeDrawer: ->
-    @render name, into: 'drawer_panel'
+    @render 'nothing', into: 'drawer_panel'
     @set 'router.openDrawer', name
