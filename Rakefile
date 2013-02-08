@@ -23,27 +23,28 @@ namespace :build do
   task :ember do
     if File.directory? "#{vendor_path}/ember.js"
       sh "cd #{vendor_path}/ember.js && BUNDLE_GEMFILE=#{vendor_path}/ember.js/Gemfile rake dist"
-      sh %Q{cd #{vendor_path}/ember.js && echo "// $(git log -n 1 --format='%h (%ci)')" > #{vendor_js_path}/ember.js}
-      sh %Q{cat #{vendor_path}/ember.js/dist/ember.js >> #{vendor_js_path}/ember.js}
+      sh %Q{cp #{vendor_path}/ember.js/dist/ember.js #{vendor_js_path}/ember.js}
+      sh %Q{cp #{vendor_path}/ember.js/dist/ember.min.js #{vendor_js_path}/ember.min.js}
+      sh %Q{cp #{vendor_path}/ember.js/dist/ember-template-compiler.js #{vendor_js_path}/ember-template-compiler.js}
     else
       puts "vendor/emberjs does not exist!"
     end
   end
 
-  desc "Build ember-data and copy into vendor/javascripts"
-  task :ember_data do
-    if File.directory? "#{vendor_path}/data"
-      sh "cd #{vendor_path}/data && BUNDLE_GEMFILE=#{vendor_path}/data/Gemfile rake dist"
-      sh %Q{cd #{vendor_path}/data && echo "// $(git log -n 1 --format='%h (%ci)')" > #{vendor_js_path}/ember-data.js}
-      sh %Q{cat #{vendor_path}/data/dist/ember-data.prod.js >> #{vendor_js_path}/ember-data.js}
-    else
-      puts "vendor/data does not exist!"
-    end
-  end
+  # desc "Build ember-data and copy into vendor/javascripts"
+  # task :ember_data do
+  #   if File.directory? "#{vendor_path}/data"
+  #     sh "cd #{vendor_path}/data && BUNDLE_GEMFILE=#{vendor_path}/data/Gemfile rake dist"
+  #     sh %Q{cp #{vendor_path}/data/dist/ember-data.js #{vendor_js_path}/ember-data.js}
+  #     sh %Q{cp #{vendor_path}/data/dist/ember-data.min.js #{vendor_js_path}/ember-data.min.js}
+  #   else
+  #     puts "vendor/data does not exist!"
+  #   end
+  # end
 end
 
 desc "Build Ember and Ember Data from local repos"
-task :build => ["build:ember", "build:ember_data"]
+task :build => ["build:ember"]
 
 namespace :notes do
   files = proc { Dir['{app,test}/**/*.coffee'].select { |f| File.file? f }.join " " }
