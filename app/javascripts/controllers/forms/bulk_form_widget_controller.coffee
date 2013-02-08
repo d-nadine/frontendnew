@@ -30,8 +30,3 @@ Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormW
     @forEach (record) =>
       record.deleteRecord()
       record.get('store').commit()
-
-  cancelAll: ->
-    # @setEach 'isChecked', false
-    @forEach (record) =>
-      record.set 'isChecked', false
