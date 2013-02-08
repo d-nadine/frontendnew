@@ -1,5 +1,6 @@
 Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   sortProperties: ['sentAt']
+  folderBinding: 'model.folder'
 
   folders: [
     {title: 'Inbox', name: 'inbox'}

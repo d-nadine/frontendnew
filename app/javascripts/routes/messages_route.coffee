@@ -3,6 +3,7 @@ require 'routes/drawer_support_mixin'
 Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
   events:
     selectFolder: (name) ->
+      @controllerFor('messages').set 'selectedContent', null
       @controllerFor('messages').set 'folder', name
       @closeDrawer()
 

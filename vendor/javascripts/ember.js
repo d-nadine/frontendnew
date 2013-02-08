@@ -150,8 +150,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-620-gd60c6c0
-// Last commit: d60c6c0 (2013-02-06 12:31:58 -0800)
+// Version: v1.0.0-pre.2-627-ge7b8206
+// Last commit: e7b8206 (2013-02-07 22:56:23 -0800)
 
 
 (function() {
@@ -12523,7 +12523,7 @@ Ember Runtime
 */
 
 var jQuery = Ember.imports.jQuery;
-Ember.assert("Ember Views require jQuery 1.7 (>= 1.7.2), 1.8 or 1.9", jQuery && (jQuery().jquery.match(/^1\.(7(?!$)(?!\.[01])|8|9)(\.\d+)?(pre|rc\d?)?/) || Ember.ENV.FORCE_JQUERY));
+Ember.assert("Ember Views require jQuery 1.8 or 1.9", jQuery && (jQuery().jquery.match(/^1\.(8|9)(\.\d+)?(pre|rc\d?)?/) || Ember.ENV.FORCE_JQUERY));
 
 /**
   Alias for jQuery
@@ -12803,17 +12803,19 @@ Ember._RenderBuffer.prototype =
   elementAttributes: null,
 
   /**
-    The value for this attribute. Values cannot be set via attr after
-    jQuery 1.9, they need to be set with val() instead.
+    A hash keyed on the name of the properties and whose value will be
+    applied to that property. For example, if you wanted to apply a
+    `checked=true` property to an element, you would set the
+    elementProperties hash to `{'checked':true}`.
 
-    You should not maintain this value yourself, rather, you should use
-    the `val()` method of `Ember.RenderBuffer`.
+    You should not maintain this hash yourself, rather, you should use
+    the `prop()` method of `Ember.RenderBuffer`.
 
-    @property elementValue
-    @type String
-    @default null
+    @property elementProperties
+    @type Hash
+    @default {}
   */
-  elementValue: null,
+  elementProperties: null,
 
   /**
     The tagname of the element an instance of `Ember.RenderBuffer` represents.
@@ -12924,26 +12926,6 @@ Ember._RenderBuffer.prototype =
   },
 
   /**
-    Adds an value which will be rendered to the element.
-
-    @method val
-    @param {String} value The value to set
-    @chainable
-    @return {Ember.RenderBuffer|String} this or the current value
-  */
-  val: function(value) {
-    var elementValue = this.elementValue;
-
-    if (arguments.length === 0) {
-      return elementValue;
-    } else {
-      this.elementValue = value;
-    }
-
-    return this;
-  },
-
-  /**
     Remove an attribute from the list of attributes to render.
 
     @method removeAttr
@@ -12953,6 +12935,41 @@ Ember._RenderBuffer.prototype =
   removeAttr: function(name) {
     var attributes = this.elementAttributes;
     if (attributes) { delete attributes[name]; }
+
+    return this;
+  },
+
+  /**
+    Adds an property which will be rendered to the element.
+
+    @method prop
+    @param {String} name The name of the property
+    @param {String} value The value to add to the property
+    @chainable
+    @return {Ember.RenderBuffer|String} this or the current property value
+  */
+  prop: function(name, value) {
+    var properties = this.elementProperties = (this.elementProperties || {});
+
+    if (arguments.length === 1) {
+      return properties[name];
+    } else {
+      properties[name] = value;
+    }
+
+    return this;
+  },
+
+  /**
+    Remove an property from the list of properties to render.
+
+    @method removeProp
+    @param {String} name The name of the property
+    @chainable
+  */
+  removeProp: function(name) {
+    var properties = this.elementProperties;
+    if (properties) { delete properties[name]; }
 
     return this;
   },
@@ -12990,9 +13007,9 @@ Ember._RenderBuffer.prototype =
         id = this.elementId,
         classes = this.classes,
         attrs = this.elementAttributes,
-        value = this.elementValue,
+        props = this.elementProperties,
         style = this.elementStyle,
-        prop;
+        attr, prop;
 
     buffer.push('<' + tagName);
 
@@ -13020,19 +13037,30 @@ Ember._RenderBuffer.prototype =
     }
 
     if (attrs) {
-      for (prop in attrs) {
-        if (attrs.hasOwnProperty(prop)) {
-          buffer.push(' ' + prop + '="' + this._escapeAttribute(attrs[prop]) + '"');
+      for (attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          buffer.push(' ' + attr + '="' + this._escapeAttribute(attrs[attr]) + '"');
         }
       }
 
       this.elementAttributes = null;
     }
 
-    if (value || typeof value === 'number') {
-      buffer.push(' value="' + this._escapeAttribute(value) + '"');
+    if (props) {
+      for (prop in props) {
+        if (props.hasOwnProperty(prop)) {
+          var value = props[prop];
+          if (typeof value === 'boolean') {
+            if (value) {
+              buffer.push(' ' + prop + '="' + prop + '"');
+            }
+          } else {
+            buffer.push(' ' + prop + '="' + this._escapeAttribute(props[prop]) + '"');
+          }
+        }
+      }
 
-      this.elementValue = null;
+      this.elementProperties = null;
     }
 
     buffer.push('>');
@@ -13054,9 +13082,9 @@ Ember._RenderBuffer.prototype =
         id = this.elementId,
         classes = this.classes,
         attrs = this.elementAttributes,
-        value = this.elementValue,
+        props = this.elementProperties,
         style = this.elementStyle,
-        styleBuffer = '', prop;
+        styleBuffer = '', attr, prop;
 
     if (id) {
       $element.attr('id', id);
@@ -13080,19 +13108,23 @@ Ember._RenderBuffer.prototype =
     }
 
     if (attrs) {
-      for (prop in attrs) {
-        if (attrs.hasOwnProperty(prop)) {
-          $element.attr(prop, attrs[prop]);
+      for (attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          $element.attr(attr, attrs[attr]);
         }
       }
 
       this.elementAttributes = null;
     }
 
-    if (value || typeof value === 'number') {
-      $element.val(value);
+    if (props) {
+      for (prop in props) {
+        if (props.hasOwnProperty(prop)) {
+          $element.prop(prop, props[prop]);
+        }
+      }
 
-      this.elementValue = null;
+      this.elementProperties = null;
     }
 
     return element;
@@ -15784,56 +15816,20 @@ Ember.View.views = {};
 Ember.View.childViewsProperty = childViewsProperty;
 
 Ember.View.applyAttributeBindings = function(elem, name, value) {
-  if (name === 'value') {
-    Ember.View.applyValueBinding(elem, value);
-  } else {
-    Ember.View.applyAttributeBinding(elem, name, value);
-  }
-};
-
-Ember.View.applyAttributeBinding = function(elem, name, value) {
   var type = Ember.typeOf(value);
-  var currentValue = elem.attr(name);
 
   // if this changes, also change the logic in ember-handlebars/lib/helpers/binding.js
-  if (
-    (
-      ( type === 'string' ) ||
-      ( type === 'number' && !isNaN(value) ) ||
-      ( type === 'boolean' && value )
-    ) && (
-      value !== currentValue
-    )
-  ) {
-    elem.attr(name, value);
-  } else if (!value) {
-    elem.removeAttr(name);
-  }
-};
-
-Ember.View.applyValueBinding = function(elem, value) {
-  var type = Ember.typeOf(value);
-  var currentValue = elem.val();
-
-  // if this changes, also change the logic in ember-handlebars/lib/helpers/binding.js
-  if (
-    (
-      ( type === 'string' ) ||
-      ( type === 'number' && !isNaN(value) ) ||
-      ( type === 'boolean' && value )
-    ) && (
-      value !== currentValue
-    )
-  ) {
-    if (elem.caretPosition) {
-      var caretPosition = elem.caretPosition();
-      elem.val(value);
-      elem.setCaretPosition(caretPosition);
-    } else {
-      elem.val(value);
+  if (name !== 'value' && (type === 'string' || (type === 'number' && !isNaN(value)))) {
+    if (value !== elem.attr(name)) {
+      elem.attr(name, value);
+    }
+  } else if (name === 'value' || type === 'boolean') {
+    if (value !== elem.prop(name)) {
+      // value and booleans should always be properties
+      elem.prop(name, value);
     }
   } else if (!value) {
-    elem.val('');
+    elem.removeAttr(name);
   }
 };
 
@@ -18528,14 +18524,14 @@ var EmberHandlebars = Ember.Handlebars, helpers = EmberHandlebars.helpers;
 
 // Binds a property into the DOM. This will create a hook in DOM that the
 // KVO system will look for and update if the property changes.
-function bind(property, options, preserveContext, shouldDisplay, valueNormalizer) {
+function bind(property, options, preserveContext, shouldDisplay, valueNormalizer, childProperties) {
   var data = options.data,
       fn = options.fn,
       inverse = options.inverse,
       view = data.view,
       currentContext = this,
       pathRoot, path, normalized,
-      observer;
+      observer, i;
 
   normalized = normalizePath(currentContext, property, data);
 
@@ -18591,6 +18587,11 @@ function bind(property, options, preserveContext, shouldDisplay, valueNormalizer
     // object ({{this}}) so updating it is not our responsibility.
     if (path !== '') {
       view.registerObserver(pathRoot, path, observer);
+      if (childProperties) {
+        for (i=0; i<childProperties.length; i++) {
+          view.registerObserver(pathRoot, path+'.'+childProperties[i], observer);
+        }
+      }
     }
   } else {
     // The object is not observable, so just render it out and
@@ -18736,14 +18737,14 @@ EmberHandlebars.registerHelper('boundIf', function(property, fn) {
     var truthy = result && get(result, 'isTruthy');
     if (typeof truthy === 'boolean') { return truthy; }
 
-    if (Ember.typeOf(result) === 'array') {
+    if (Ember.isArray(result)) {
       return get(result, 'length') !== 0;
     } else {
       return !!result;
     }
   };
 
-  return bind.call(context, property, fn, true, func, func);
+  return bind.call(context, property, fn, true, func, func, ['isTruthy', 'length']);
 });
 
 /**
@@ -22790,11 +22791,7 @@ Ember.Router = Ember.Object.extend({
   },
 
   send: function(name, context) {
-    if (Ember.$ && context instanceof Ember.$.Event) {
-      context = context.context;
-    }
-
-    this.router.trigger(name, context);
+    this.router.trigger.apply(this.router, arguments);
   },
 
   hasRoute: function(route) {
@@ -23497,6 +23494,12 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     replace: false,
     attributeBindings: ['href', 'title'],
     classNameBindings: 'active',
+
+    // Even though this isn't a virtual view, we want to treat it as if it is
+    // so that you can access the parent with {{view.prop}}
+    concreteView: Ember.computed(function() {
+      return get(this, 'parentView');
+    }).property('parentView').volatile(),
 
     active: Ember.computed(function() {
       var router = this.get('router'),
@@ -26675,8 +26678,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-pre.2-620-gd60c6c0
-// Last commit: d60c6c0 (2013-02-06 12:31:58 -0800)
+// Version: v1.0.0-pre.2-627-ge7b8206
+// Last commit: e7b8206 (2013-02-07 22:56:23 -0800)
 
 
 (function() {
