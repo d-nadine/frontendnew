@@ -4,3 +4,4 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   phone: DS.attr('string')
 
   contacts: DS.hasMany('Radium.Contact')
+  discussions: DS.hasMany('Radium.User')

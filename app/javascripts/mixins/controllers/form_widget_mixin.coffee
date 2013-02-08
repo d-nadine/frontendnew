@@ -5,10 +5,12 @@ Radium.FormWidgetMixin = Ember.Mixin.create
     @get('buttons').forEach (btn) -> btn.set('closed', true)
 
   toggleForm: (button)  ->
-    if @get('activeForm') && @get('activeForm') == button.template
-      @set 'activeForm', null
+    if @get('activeTemplate') && @get('activeTemplate') == button.template
+      @set 'activeTemplate', null
+      @send 'bulkFormClosed'
     else
-      @set 'activeForm', null
+      @set 'activeTemplate', null
       # FIXME: remove runloop next
       Ember.run.next =>
-        @set 'activeForm', button.template
+        @send 'bulkFormOpen', button.name
+        @set 'activeTemplate', button.template

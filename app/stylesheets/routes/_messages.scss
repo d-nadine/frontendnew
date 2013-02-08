@@ -1,24 +1,7 @@
 @import "routes/messages/sidebar";
 
-div.bulk-list{
-  width: 100%;
-  display: table;
-  > div{
-    display: table-cell;
-    vertical-align: top;
-  }
-  div.sender{
-    width: 20%;
-  }
-  div.subject{
-    width: 30%;
-  }
-  div.message{
-    width: 30%;
-  }
-  div.pull-right{
-    clear: right;
-  }
+.is-disabled{
+  color: blue;
 }
 
 div.selection{

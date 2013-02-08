@@ -14,12 +14,15 @@ Radium.FormsBulkFormWidgetController = Ember.ArrayController.extend Radium.FormW
     Ember.Object.create
       template: "forms/bulk_todo_form"
       title: "Todo"
+      name: 'todo'
     Ember.Object.create
       template: "unimplemented"
       title: "Meeting"
+      name: 'meeting'
     Ember.Object.create
       template: "unimplemented"
       title: "Call"
+      name: 'call'
   ]
 
   executeAction: (button) ->
