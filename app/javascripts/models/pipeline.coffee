@@ -21,7 +21,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
 
     content.filter (deal) ->
       statuses.indexOf(deal.get('status')) != -1
-  ).property('content', 'negotiatingStatuses', 'negotiatingStatuses.length')
+  ).property('content', 'negotiatingStatuses', 'negotiatingStatuses.length').volatile()
 
   negotiatingGroups: (->
     deals = @get 'negotiatingDeals'

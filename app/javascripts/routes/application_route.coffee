@@ -6,6 +6,7 @@ Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
       @toggleDrawer name
 
   setupController: ->
+    @controllerFor('currentUser').set 'model', Radium.User.find(1)
     @controllerFor('users').set 'model', Radium.User.find()
     settings = Radium.Settings.find(1)
 
