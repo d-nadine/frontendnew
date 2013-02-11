@@ -5,7 +5,9 @@ Radium.PipelineRoute = Ember.Route.extend
       @transitionTo 'pipeline.negotiating'
 
   model: ->
-    Radium.Deal.all()
+    Radium.Pipeline.create
+      content: Radium.Deal.all(),
+      settings: Radium.Settings.find(1)
 
   renderTemplate: ->
     @render into: 'application'

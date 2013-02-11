@@ -3,6 +3,5 @@ Radium.PipelineNegotiatingRoute = Em.Route.extend
     toggleChecked: ->
       @controllerFor('pipelineNegotiating').toggleChecked()
 
-  setupController: (controller) ->
-    content = @controllerFor('pipeline').get('negotiatingGroups')
-    controller.set 'model', content
+  model: ->
+    @modelFor('pipeline').get('negotiatingGroups')
