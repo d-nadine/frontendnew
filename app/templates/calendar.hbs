@@ -24,7 +24,7 @@
   </thead>
 
   {{#each weeks tagName="tbody"}}
-    {{#each calendarDay in this tagName="tr"}}
+    {{#each calendarDay in this tagName="tr" itemController="calendarDayItem"}}
       <td {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday :day"}}>
         <div class="wrapper">
           <span class="date">

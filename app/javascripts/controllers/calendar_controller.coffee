@@ -1,5 +1,3 @@
-require 'lib/radium/show_more_mixin'
-
 CalendarItem = Ember.ObjectController.extend
   time: (->
     @get('finishBy') || @get('startsAt')
@@ -8,23 +6,6 @@ CalendarItem = Ember.ObjectController.extend
   title: (->
     @get('description') || @get('topic')
   ).property('description', 'topic')
-
-Day = Ember.ArrayController.extend Radium.ShowMoreMixin,
-  sortProperties: ['time']
-
-  formattedDate: (->
-    @get('date').toDateFormat()
-  ).property('date')
-
-  isDifferentMonth: (->
-    @get('date.month') != @get('calendarDate.month')
-  ).property('date')
-
-  isToday: Radium.computed.isToday('date')
-
-  day: (->
-    @get('date.day')
-  ).property('date')
 
 Radium.CalendarController = Ember.Controller.extend
   needs: ['users']
@@ -119,11 +100,7 @@ Radium.CalendarController = Ember.Controller.extend
       dailyItems = @get('items').filter (item) ->
         item.get('time').isBetween startOfDay, endOfDay
 
-      day = Day.create
-        # FIXME this has to be here to override what's
-        # set in the show more mixin
-        perPage: 5
-
+      day = Ember.ArrayProxy.create
         date: current.copy()
         calendarDate: @get('date').copy()
         content: dailyItems
