@@ -7,7 +7,7 @@ Radium.PipelineRoute = Ember.Route.extend
   model: ->
     Radium.Pipeline.create
       content: Radium.Deal.all(),
-      settings: Radium.Settings.find(1)
+      settings: @controllerFor('settings')
 
   renderTemplate: ->
     @render into: 'application'
