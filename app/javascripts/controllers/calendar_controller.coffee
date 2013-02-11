@@ -102,7 +102,6 @@ Radium.CalendarController = Ember.Controller.extend
 
       day = Ember.ArrayProxy.create
         date: current.copy()
-        calendarDate: @get('date').copy()
         content: dailyItems
 
       days.push day
