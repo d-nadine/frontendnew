@@ -1,3 +1,3 @@
-require 'views/forms/todo_form_view'
+require 'views/forms/todo_view'
 
-Radium.FormsBulkTodoFormView = Radium.FormsTodoFormView.extend()
+Radium.FormsBulkTodoFormView = Radium.FormsTodoView.extend()

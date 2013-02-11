@@ -1,4 +1,4 @@
-Radium.FormsTodoFormController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   kind: 'todo'
   init: ->
     @reset()

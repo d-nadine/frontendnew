@@ -1,4 +1,4 @@
-Radium.FormsTodoFormView = Ember.View.extend
+Radium.FormsTodoView = Ember.View.extend
   expandForm: ->
     @toggleProperty 'expanded'
 
@@ -11,6 +11,8 @@ Radium.FormsTodoFormView = Ember.View.extend
   ).property('expanded')
 
   didInsertElement: ->
+    @get('controller').reset()
+
     @$('.shortcut').popover
       html: true
       content: @$().find('.shortcuts').html()
