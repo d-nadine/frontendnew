@@ -20,11 +20,11 @@
             <i class="icon-calendar"></i>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="#">Today</a></li>
-            <li><a href="#">Tomorrow</a></li>
-            <li><a href="#">Later This Week</a></li>
-            <li><a href="#">Next Week</a></li>
-            <li><a href="#">In a Month</a></li>
+            <li><a {{action setDate 'today' target=view href=true}}>Today</a></li>
+            <li><a {{action setDate 'tomorrow' target=view href=true}}>Tomorrow</a></li>
+            <li><a {{action setDate 'this_week' target=view href=true}}>Later This Week</a></li>
+            <li><a {{action setDate 'next_week' target=view href=true}}>Next Week</a></li>
+            <li><a {{action setDate 'next_month' target=view href=true}}>In a Month</a></li>
             <li>
               <a {{action showDatePicker target=view}}><i class="icon-calendar"></i>Pick a Date</a>
             </li>

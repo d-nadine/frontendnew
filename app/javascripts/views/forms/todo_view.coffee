@@ -3,6 +3,21 @@ Radium.FormsTodoView = Ember.View.extend
   #   return unless event.keyCode == 13
   #   @submit()
 
+  setDate: (key) ->
+    date = switch key
+      when 'today'
+        Ember.DateTime.create().atEndOfDay()
+      when 'tomorrow'
+        Ember.DateTime.create().advance(day: 1)
+      when 'this_week'
+        Ember.DateTime.create().atEndOfWeek()
+      when 'next_week'
+        Ember.DateTime.create().advance(day: 7)
+      when 'next_month'
+        Ember.DateTime.create().advance(month: 1)
+
+    @set 'controller.finishBy', date
+
   showDatePicker: ->
     @$('.date-control .text').click()
 
