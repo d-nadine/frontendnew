@@ -118,7 +118,7 @@ Radium.FormsTodoView = Ember.View.extend
     nameBinding: 'nameToUserTransform'
 
     nameToUserTransform: ((key, value) ->
-      if value
+      if arguments.length == 2
         result = Radium.User.all().find (user) =>
           user.get('name') is value
         @set 'user', result
