@@ -1,14 +1,4 @@
 Radium.FormsTodoView = Ember.View.extend
-  # keyPress: (event) ->
-  #   return unless event.keyCode == 13
-  #   @submit()
-
-  showDatePicker: ->
-    @$('.date-control .text').click()
-
-  changeDate: ->
-    console.log 'weee'
-
   checkbox: Ember.View.extend
     init: ->
       @_super.apply this, arguments
