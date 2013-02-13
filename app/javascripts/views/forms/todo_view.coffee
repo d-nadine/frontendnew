@@ -3,6 +3,9 @@ Radium.FormsTodoView = Ember.View.extend
   #   return unless event.keyCode == 13
   #   @submit()
 
+  setUser: (user) ->
+    @set 'controller.user', user
+
   setDate: (key) ->
     date = switch key
       when 'today'
@@ -61,7 +64,7 @@ Radium.FormsTodoView = Ember.View.extend
 
     template: Ember.Handlebars.compile """
     <span class="leader">{{view.leader}}</span>
-    <span class="formatted-date">
+    <span class="formatted-text">
       {{view.formattedDate}}
     </span>
     """
@@ -89,11 +92,17 @@ Radium.FormsTodoView = Ember.View.extend
         view.set 'object', Ember.DateTime.create(@date.getTime())
         @hide()
 
-  userSelector: Ember.Select.extend
-    contentBinding: 'controller.users'
-    valueBinding: 'controller.user'
-    optionLabelPath: 'content.meIfCurrent'
-    optionValuePath: 'content.content'
+  userSelector: Ember.View.extend
+    classNames: ['text']
+    objectBinding: 'controller.finishBy'
+    leader: "Assigned to"
+
+    template: Ember.Handlebars.compile """
+    <span class="leader">{{view.leader}}</span>
+    <span class="formatted-text">
+      {{user.name}}
+    </span>
+    """
 
   submit: ->
     return unless @get('controller.isValid')

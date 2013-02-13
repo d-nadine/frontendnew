@@ -13,6 +13,8 @@
 }
 
 .date-control {
+  display: inline-block;
+
   .btn-group, .btn-group.open, .btn.dropdown-toggle {
     .btn, .btn:hover {
       border-color: #c5c5c5;
@@ -33,7 +35,6 @@
     height: 20px;
     padding: 4px 6px;
     padding-left: 0;
-    border-radius-right: 4px;
     border-radius: 4px;
     vertical-align: middle;
     margin-left: -4px;
@@ -42,8 +43,56 @@
     color: $light-text;
     cursor: pointer;
 
-    .formatted-date {
+    .formatted-text {
       font-weight: bold;
+    }
+  }
+}
+
+.select-user-control {
+  position: relative;
+  display: inline-block;
+
+  .btn-group {
+    position: static;
+  }
+
+  .btn-group, .btn-group.open, .btn.dropdown-toggle {
+    .btn, .btn:hover {
+      border-color: #c5c5c5;
+      background-color: white;
+      background-image: none;
+      box-shadow: none;
+      border-left: none;
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+
+    .btn i {
+      opacity: 0.5;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+    }
+  }
+
+  div.text {
+    display: inline-block;
+    border: solid 1px #c5c5c5;
+    border-right: none;
+    background-color: white;
+    height: 20px;
+    padding: 4px 6px;
+    padding-right: 0;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: -4px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+
+    .leader {
+      color: $light-text;
     }
   }
 }
