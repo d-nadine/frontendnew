@@ -1,4 +1,19 @@
 Radium.FormsTodoView = Ember.View.extend
+  didInsertElement: ->
+    @$(window).on 'resize', @get('windowDidResize')
+    @resizeTodoBox()
+
+  willDestroyElement: ->
+    @$(window).off 'resize', @get('windowDidResize')
+
+  resizeTodoBox: ->
+    newWidth = @$('.main').width() - @$('.checker').width() - @$('.main a').width() - 70
+    @$('.todo').width(newWidth)
+
+  windowDidResize: (->
+    $.proxy @resizeTodoBox, this
+  ).property()
+
   checkbox: Ember.View.extend
     init: ->
       @_super.apply this, arguments
