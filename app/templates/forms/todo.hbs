@@ -4,11 +4,6 @@
 
     {{view view.todoField}}
 
-    <div {{bindAttr class="reference:has-selection :selector"}}>
-      <label><a {{action showAutocomplete href=true target=view}}>@</a></label>
-      {{view view.autocomplete}}
-    </div>
-
     <a tabindex="3" class="btn pull-right" {{action toggleExpanded}}>Options</a>
   </div>
 
@@ -20,8 +15,4 @@
       <button class="btn btn-primary pull-right" type="submit">Save</button>
     </div>
   {{/if}}
-
-  User: {{user}}
-  FinishBy: {{finishBy}}
-  Reference: {{reference}}
 </form>

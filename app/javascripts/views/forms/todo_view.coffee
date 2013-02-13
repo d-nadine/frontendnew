@@ -199,4 +199,3 @@ Radium.FormsTodoView = Ember.View.extend
     return unless @get('controller.isValid')
     @get('controller').submit()
     @get('controller').reset()
-    @focusDescription()
