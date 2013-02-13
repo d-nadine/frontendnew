@@ -27,9 +27,25 @@ Radium.FormsTodoView = Ember.View.extend
   changeDate: ->
     console.log 'weee'
 
-  checkbox: Ember.Checkbox.extend
+  checkbox: Ember.View.extend
+    init: ->
+      @_super.apply this, arguments
+      @on "change", this, this._updateElementValue
+
+    _updateElementValue: ->
+      @set 'checked', this.$('input').prop('checked')
+
     checkedBinding: 'controller.isFinished'
+    classNames: ['checker']
     tabindex: 4
+    checkBoxId: (->
+      "checker-#{@get('elementId')}"
+    ).property()
+
+    template: Ember.Handlebars.compile """
+      <input type="checkbox" id="{{unbound view.checkBoxId}}" />
+      <label for="{{unbound view.checkBoxId}}"></label>
+    """
 
   todoField: Ember.TextField.extend
     classNames: 'todo'

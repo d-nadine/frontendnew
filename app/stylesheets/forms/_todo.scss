@@ -12,6 +12,50 @@
   }
 }
 
+.checker {
+  position: relative;
+  display: inline-block;
+  width: 20px;	
+  height: 20px;
+
+  label {
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+  }
+
+  label::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 6px;
+    background: transparent;
+    top: 4px;
+    left: 4px;
+    border: 3px solid $light-text;
+    border-top: none;
+    border-right: none;
+
+    -webkit-transform: rotate(-45deg);
+  }
+
+  label:hover::after {
+    border-color: green;
+  }
+
+  input[type=checkbox] {
+    visibility: hidden;
+  }
+
+  input[type=checkbox]:checked + label:after {
+    border-color: green;
+    opacity: 1;
+  }
+}
+
 .date-control {
   display: inline-block;
 
@@ -123,6 +167,10 @@
 
   a:hover {
     text-decoration: none;
+  }
+
+  .checker {
+    margin-right: 10px;
   }
 
   .todo {
