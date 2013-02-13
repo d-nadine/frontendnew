@@ -152,6 +152,10 @@
     &.is-finished {
       background-color: $dark-background;
 
+      .checker label::after {
+        border-color: $light-text
+      }
+
       &::after {
         width: 96%;
         content: '';
@@ -176,6 +180,7 @@
   .todo {
     width: 340px;
     @include no-border;
+    background: none;
   }
 
   .selector {
@@ -191,6 +196,7 @@
       @include no-border;
       padding-left: 0;
       margin-left: 0;
+      background: none;
     }
   }
 
