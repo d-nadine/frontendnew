@@ -35,7 +35,10 @@ Radium.FormsTodoView = Ember.View.extend
     date: Ember.computed.alias('controller.finishBy')
 
     placeholder: (->
-      "Add a todo for #{@get('date').toHumanFormat()}"
+      if @get('date')
+        "Add a todo for #{@get('date').toHumanFormat()}"
+      else
+        "Add a todo..."
     ).property('date')
 
     tabindex: 1
@@ -66,7 +69,10 @@ Radium.FormsTodoView = Ember.View.extend
 
     textToDateTransform: ((key, value) ->
       if arguments.length == 2
-        # FIXME: replace this with date parsing
+        if value && /\d{4}-\d{2}-\d{2}/.test(value)
+          @set 'date', Ember.DateTime.parse(value, '%Y-%m-%d')
+        else
+          @set 'date', null
       else if !value && @get('date')
         @get('date').toHumanFormat()
       else

@@ -51,7 +51,7 @@ Ember.DateTime.reopen
     @get('milliseconds') > Ember.DateTime.create().get('milliseconds')
 
   toHumanFormat: ->
-    format = "%A, %B %d"
+    format = "%A, %B %D"
 
     if @isToday()
       "Today"
