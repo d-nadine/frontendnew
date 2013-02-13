@@ -24,16 +24,4 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
       @set 'reference', null
   ).observes('referenceName')
 
-  userNameDidChange: (->
-    result = Radium.User.all().find (user) =>
-      user.get('name') is @get('userName')
-
-    @set 'user', result if result
-  ).observes('userName')
-
-  userDidChange: (->
-    @set 'userName', @get('user.name')
-  ).observes('user')
-
   toggleExpanded: -> @toggleProperty 'isExpanded'
-

@@ -33,23 +33,7 @@
         {{view view.dueDateField}}
       </div>
 
-      <div class="select-user-control input-prepend input-append">
-        <span class="add-on">
-          Assigned To
-        </span>
-
-        {{view view.userSelector}}
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            <i class="icon-chevron-down"></i>
-          </button>
-          <ul class="dropdown-menu">
-            {{#each users}}
-              <li><a {{action setUser this.content target=view href=true}}>{{name}}</a></li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
+      {{view view.userSelector}}
 
       <button class="btn btn-primary pull-right" type="submit">Save</button>
     </div>

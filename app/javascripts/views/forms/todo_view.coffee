@@ -3,9 +3,6 @@ Radium.FormsTodoView = Ember.View.extend
   #   return unless event.keyCode == 13
   #   @submit()
 
-  setUser: (user) ->
-    @set 'controller.user', user
-
   setDate: (key) ->
     date = switch key
       when 'today'
@@ -108,15 +105,53 @@ Radium.FormsTodoView = Ember.View.extend
         view.set 'object', Ember.DateTime.create(@date.getTime())
         @hide()
 
-  userSelector: Ember.TextField.extend
+  userSelector: Ember.View.extend
+    classNames: ['select-user-control', 'input-prepend', 'input-append']
     userBinding: 'controller.user'
-    valueBinding: 'controller.userName'
-    didInsertElement: ->
-      @$().typeahead source: @source
 
-    # FIXME: make this async
-    source: (query, process) ->
-      Radium.User.all().map((c) -> c.get('name')).toArray()
+    nameBinding: 'nameToUserTransform'
+
+    nameToUserTransform: ((key, value) ->
+      if value
+        result = Radium.User.all().find (user) =>
+          user.get('name') is value
+        @set 'user', result
+      else if !value && @get('user')
+        @get 'user.name'
+      else
+        value
+    ).property()
+
+    template: Ember.Handlebars.compile """
+      <span class="add-on">
+        Assigned To
+      </span>
+
+      {{view view.textField}}
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each users}}
+            <li><a {{action setName this.name target=view href=true}}>{{name}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    """
+
+    setName: (name) ->
+      @set 'name', name
+
+    textField: Ember.TextField.extend
+      valueBinding: 'parentView.name'
+
+      didInsertElement: ->
+        @$().typeahead source: @source
+
+      # FIXME: make this async
+      source: (query, process) ->
+        Radium.User.all().map((c) -> c.get('name')).toArray()
 
   submit: ->
     return unless @get('controller.isValid')
