@@ -38,24 +38,24 @@ Radium.FormsTodoView = Ember.View.extend
     source: (query, process) ->
       Radium.Contact.all().map((c) -> c.get('name')).toArray()
 
-  dueDateField: Ember.TextField.extend
-    readonly: true
-    attributeBindings: ['readonly']
-    classNames: ['due-date']
+  dueDateField: Ember.View.extend
+    classNames: ['text']
     objectBinding: 'controller.finishBy'
 
-    placeholder: (->
-      "Due #{@get('object').toFormattedString('%A %B %d')}"
+    template: Ember.Handlebars.compile "{{view.formattedDate}}"
+
+    formattedDate: (->
+      @get('object').toFormattedString('%A %B %d')
     ).property('object')
 
-    didInsertElement: ->
-      @$().datepicker()
+    # didInsertElement: ->
+    #   @$().datepicker()
 
-      view = this
+    #   view = this
 
-      @$().data('datepicker').set = ->
-        view.set 'object', Ember.DateTime.create(@date.getTime())
-        view.$().blur()
+    #   @$().data('datepicker').set = ->
+    #     view.set 'object', Ember.DateTime.create(@date.getTime())
+    #     view.$().blur()
 
   userSelector: Ember.Select.extend
     contentBinding: 'controller.users'

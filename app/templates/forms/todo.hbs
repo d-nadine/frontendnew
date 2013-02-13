@@ -14,7 +14,7 @@
 
   {{#if isExpanded}}
     <div class="options">
-      <div class="date-control input-prepend">
+      <div class="date-control">
         <div class="btn-group">
           <button class="btn dropdown-toggle" data-toggle="dropdown">
             <i class="icon-calendar"></i>
@@ -33,10 +33,12 @@
         {{view view.dueDateField}}
       </div>
 
-      <div class="user-selector input-prepend ">
-        <label>Assigned To</label>
+      <!--
+      <div class="user-selector input-prepend">
+        <span>Assigned To</span>
         {{view view.userSelector}}
       </div>
+      -->
 
       <button class="btn btn-primary pull-right" type="submit">Save</button>
     </div>

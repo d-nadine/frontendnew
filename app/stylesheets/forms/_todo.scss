@@ -20,28 +20,25 @@
       background-image: none;
       box-shadow: none;
       border-right: none;
+      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0px;
     }
   }
 
-  input[readonly] {
-    cursor: pointer;
-  }
-
-  input {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  input, input:focus {
-    border-color: #c5c5c5;
+  div.text {
+    display: inline-block;
+    border: solid 1px #c5c5c5;
     border-left: none;
     background-color: white;
-    box-shadow: none;
-
-    &::-webkit-input-placeholder {
-      font-style: normal;
-      color: #333333;
-    }
+    height: 20px;
+    padding: 4px 6px;
+    padding-left: 0;
+    border-radius-right: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: -4px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
   }
 }
 
