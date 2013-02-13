@@ -145,6 +145,25 @@
   position: relative;
   display: inline-block;
 
+  // .text {
+  //   display: inline-block;
+  //   border: solid 1px #c5c5c5;
+  //   border-right: none;
+  //   background-color: white;
+  //   height: 20px;
+  //   padding: 4px 6px;
+  //   padding-right: 0;
+  //   border-radius: 4px;
+  //   vertical-align: middle;
+  //   margin-right: -4px;
+  //   border-bottom-right-radius: 0px;
+  //   border-top-right-radius: 0px;
+  // }
+
+  .add-on {
+    background-color: white;
+  }
+
   .btn-group {
     position: static;
   }
@@ -156,6 +175,9 @@
       background-image: none;
       box-shadow: none;
       border-left: none;
+      // FIXME: there is some hover style that is changing these
+      border-top-left-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
     }
 
     .btn i {
@@ -168,6 +190,7 @@
   }
 
   input, input:focus {
+    border-left: none;
     border-color: #c5c5c5;
     box-shadow: none;
     border-right: none;
