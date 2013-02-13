@@ -56,12 +56,35 @@
   }
 }
 
-.select-user-control {
+.control-box {
   position: relative;
   display: inline-block;
+  background-color: white;
+  padding: 0px 2px;
+  border: solid 1px $control-border-color;
+  @include transition(border linear 0.2s);
+
+  // take the bootstrap add-on but don't bring
+  // in all the crap related to it's styling
+  .text {
+    vertical-align: top;
+    display: inline-block;
+    width: auto;
+    height: 20px;
+    min-width: 16px;
+    padding: 4px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: center;
+    color: $light-text;
+  }
+
+  &.is-valid {
+    border-color: $valid-input-border;
+  }
 
   .add-on {
-    background-color: white;
     color: $light-text;
   }
 
@@ -69,15 +92,17 @@
     position: static;
   }
 
+  // everything that could possibly have
+  // a style brought in from bootstrap
+  .add-on, input, input:focus,
   .btn, .btn:hover, .btn:active,
-  .btn-group.open .btn {
-    border-color: $control-border-color;
+  .btn-group.open .btn, 
+  {
+    border: none !important;
+    border-radius: 0px !important;
     background-color: white;
     background-image: none;
     box-shadow: none;
-    border-left: none;
-    // FIXME: there is some hover style that is changing these
-    @include border-radius(0px 4px 4px 0px !important);
   }
 
   .btn-group {
@@ -87,26 +112,6 @@
 
     .dropdown-menu {
       width: 100%;
-    }
-  }
-
-  input, input:focus {
-    border-left: none;
-    border-color: $control-border-color;
-    box-shadow: none;
-    border-right: none;
-  }
-
-  input, .add-on, .btn, .btn:hover {
-    @include transition(border linear 0.2s);
-  }
-
-  &.is-valid {
-    input, .add-on, .btn, .btn:hover,
-    .btn-group.open .btn,
-    .btn-group.open .btn:hover,
-    {
-      border-color: $valid-input-border;
     }
   }
 }

@@ -108,9 +108,7 @@ Radium.FormsTodoView = Ember.View.extend
   userSelector: Ember.View.extend
     classNameBindings: [
       'user:is-valid', 
-      ':select-user-control',
-      ':input-prepend', 
-      ':input-append'
+      ':control-box'
     ]
 
     userBinding: 'controller.user'
@@ -129,7 +127,7 @@ Radium.FormsTodoView = Ember.View.extend
     ).property()
 
     template: Ember.Handlebars.compile """
-      <span class="add-on">
+      <span class="text">
         Assigned To
       </span>
 
