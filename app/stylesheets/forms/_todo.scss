@@ -116,6 +116,30 @@
   }
 }
 
+.datepicker-control-box {
+  .btn {
+    padding-right: 0px;
+  }
+
+  .text {
+    padding-right: 0px;
+  }
+
+  input {
+    padding-left: 0px;
+  }
+}
+
+.userpicker-control-box {
+  .text {
+    padding-right: 0px;
+  }
+
+  input {
+    padding-left: 0px;
+  }
+}
+
 .todo-form {
   .main {
     position: relative;

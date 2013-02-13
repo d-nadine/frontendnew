@@ -3,21 +3,6 @@ Radium.FormsTodoView = Ember.View.extend
   #   return unless event.keyCode == 13
   #   @submit()
 
-  setDate: (key) ->
-    date = switch key
-      when 'today'
-        Ember.DateTime.create().atEndOfDay()
-      when 'tomorrow'
-        Ember.DateTime.create().advance(day: 1)
-      when 'this_week'
-        Ember.DateTime.create().atEndOfWeek()
-      when 'next_week'
-        Ember.DateTime.create().advance(day: 7)
-      when 'next_month'
-        Ember.DateTime.create().advance(month: 1)
-
-    @set 'controller.finishBy', date
-
   showDatePicker: ->
     @$('.date-control .text').click()
 
@@ -69,46 +54,93 @@ Radium.FormsTodoView = Ember.View.extend
     source: (query, process) ->
       Radium.Contact.all().map((c) -> c.get('name')).toArray()
 
-  dueDateField: Ember.View.extend
-    attributeBindings: ['defaultDate:data-date']
-    classNames: ['text']
-    objectBinding: 'controller.finishBy'
-    leader: "Due"
+  datePicker: Ember.View.extend
+    classNameBindings: [
+      'date:is-valid', 
+      ':control-box',
+      ':datepicker-control-box'
+    ]
 
-    template: Ember.Handlebars.compile """
-    <span class="leader">{{view.leader}}</span>
-    <span class="formatted-text">
-      {{view.formattedDate}}
-    </span>
-    """
+    dateBinding: 'controller.finishBy'
+    textBinding: 'textToDateTransform'
 
-    defaultDate: (->
-      (@get('object') || Ember.DateTime.create()).toDateFormat()
+    textToDateTransform: ((key, value) ->
+      if arguments.length == 2
+        # FIXME: replace this with date parsing
+      else if !value && @get('date')
+        @get('date').toHumanFormat()
+      else
+        value
     ).property()
 
-    formattedDate: (->
-      @get('object').toFormattedString('%A %B %d')
-    ).property('object')
+    defaultDate: (->
+      Ember.DateTime.create().toDateFormat()
+    ).property()
 
     didInsertElement: ->
-      @$().datepicker()
+      @$('.datepicker-link').datepicker()
 
       view = this
 
-      @$().data('datepicker').place = ->
-        offset = if @component then @component.offset() else @element.offset()
+      @$('.datepicker-link').data('datepicker').place = ->
+        mainButton = view.$('.btn.dropdown-toggle')
+
+        offset = mainButton.offset()
+
         @picker.css
           top: offset.top + @height,
-          left: offset.left - 39
+          left: offset.left
 
-      @$().data('datepicker').set = ->
-        view.set 'object', Ember.DateTime.create(@date.getTime())
+      @$('.datepicker-link').data('datepicker').set = ->
+        view.set 'text', Ember.DateTime.create(@date.getTime()).toDateFormat()
         @hide()
+
+    template: Ember.Handlebars.compile """
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view href=true}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view href=true}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view href=true}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view href=true}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view href=true}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      {{view view.humanTextField}}
+    """
+
+    setDate: (key) ->
+      date = switch key
+        when 'today'
+          Ember.DateTime.create().atEndOfDay()
+        when 'tomorrow'
+          Ember.DateTime.create().advance(day: 1)
+        when 'this_week'
+          Ember.DateTime.create().atEndOfWeek()
+        when 'next_week'
+          Ember.DateTime.create().advance(day: 7)
+        when 'next_month'
+          Ember.DateTime.create().advance(month: 1)
+
+      @set 'text', date.toHumanFormat()
+
+    humanTextField: Ember.TextField.extend
+      valueBinding: 'parentView.text'
+
 
   userPicker: Ember.View.extend
     classNameBindings: [
       'user:is-valid', 
-      ':control-box'
+      ':control-box',
+      ':datepicker-control-box'
     ]
 
     userBinding: 'controller.user'
