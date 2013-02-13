@@ -64,6 +64,12 @@ Radium.FormsTodoView = Ember.View.extend
 
       view = this
 
+      @$().data('datepicker').place = ->
+        offset = if @component then @component.offset() else @element.offset()
+        @picker.css
+          top: offset.top + @height,
+          left: offset.left - 39
+
       @$().data('datepicker').set = ->
         view.set 'object', Ember.DateTime.create(@date.getTime())
         @hide()
