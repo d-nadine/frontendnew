@@ -145,21 +145,6 @@
   position: relative;
   display: inline-block;
 
-  // .text {
-  //   display: inline-block;
-  //   border: solid 1px #c5c5c5;
-  //   border-right: none;
-  //   background-color: white;
-  //   height: 20px;
-  //   padding: 4px 6px;
-  //   padding-right: 0;
-  //   border-radius: 4px;
-  //   vertical-align: middle;
-  //   margin-right: -4px;
-  //   border-bottom-right-radius: 0px;
-  //   border-top-right-radius: 0px;
-  // }
-
   .add-on {
     background-color: white;
   }
@@ -168,18 +153,18 @@
     position: static;
   }
 
-  .btn-group, .btn-group.open, .btn.dropdown-toggle {
-    .btn, .btn:hover {
-      border-color: #c5c5c5;
-      background-color: white;
-      background-image: none;
-      box-shadow: none;
-      border-left: none;
-      // FIXME: there is some hover style that is changing these
-      border-top-left-radius: 0px !important;
-      border-bottom-left-radius: 0px !important;
-    }
+  .btn, .btn:hover, .btn:active,
+  .btn-group.open .btn {
+    border-color: $control-border-color;
+    background-color: white;
+    background-image: none;
+    box-shadow: none;
+    border-left: none;
+    // FIXME: there is some hover style that is changing these
+    @include border-radius(0px 4px 4px 0px !important);
+  }
 
+  .btn-group {
     .btn i {
       opacity: 0.5;
     }
@@ -191,9 +176,22 @@
 
   input, input:focus {
     border-left: none;
-    border-color: #c5c5c5;
+    border-color: $control-border-color;
     box-shadow: none;
     border-right: none;
+  }
+
+  input, .add-on, .btn, .btn:hover {
+    @include transition(border linear 0.2s);
+  }
+
+  &.is-valid {
+    input, .add-on, .btn, .btn:hover,
+    .btn-group.open .btn,
+    .btn-group.open .btn:hover,
+    {
+      border-color: $valid-input-border;
+    }
   }
 }
 

@@ -106,7 +106,13 @@ Radium.FormsTodoView = Ember.View.extend
         @hide()
 
   userSelector: Ember.View.extend
-    classNames: ['select-user-control', 'input-prepend', 'input-append']
+    classNameBindings: [
+      'user:is-valid', 
+      ':select-user-control',
+      ':input-prepend', 
+      ':input-append'
+    ]
+
     userBinding: 'controller.user'
 
     nameBinding: 'nameToUserTransform'
