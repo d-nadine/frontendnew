@@ -4,7 +4,7 @@ Radium.FormsTodoView = Ember.View.extend
   #   @submit()
 
   showDatePicker: ->
-    @$('.due-date').focus()
+    @$('.date-control .text').click()
 
   changeDate: ->
     console.log 'weee'
