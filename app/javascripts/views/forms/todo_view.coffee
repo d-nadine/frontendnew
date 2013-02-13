@@ -108,17 +108,15 @@ Radium.FormsTodoView = Ember.View.extend
         view.set 'object', Ember.DateTime.create(@date.getTime())
         @hide()
 
-  userSelector: Ember.View.extend
-    classNames: ['text']
-    objectBinding: 'controller.finishBy'
-    leader: "Assigned to"
+  userSelector: Ember.TextField.extend
+    userBinding: 'controller.user'
+    valueBinding: 'controller.userName'
+    didInsertElement: ->
+      @$().typeahead source: @source
 
-    template: Ember.Handlebars.compile """
-    <span class="leader">{{view.leader}}</span>
-    <span class="formatted-text">
-      {{user.name}}
-    </span>
-    """
+    # FIXME: make this async
+    source: (query, process) ->
+      Radium.User.all().map((c) -> c.get('name')).toArray()
 
   submit: ->
     return unless @get('controller.isValid')
