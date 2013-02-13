@@ -1,101 +1,110 @@
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+@mixin no-border {
+  border: none;
+  box-shadow: none;
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.date-control {
+  .btn-group, .btn-group.open, .btn.dropdown-toggle {
+    .btn, .btn:hover {
+      border-color: #c5c5c5;
+      background-color: white;
+      background-image: none;
+      box-shadow: none;
+      border-right: none;
+    }
+  }
+
+  input[readonly] {
+    cursor: pointer;
+  }
+
+  input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  input, input:focus {
+    border-color: #c5c5c5;
+    border-left: none;
+    background-color: white;
+    box-shadow: none;
+
+    &::-webkit-input-placeholder {
+      font-style: normal;
+      color: #333333;
+    }
+  }
+}
+
 .todo-form {
-  form {
-    margin: 0;
-  }
-
-  .adder {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    height: 30px;
-  }
-
-  &.unexpanded {
-    .attn {
-      display: none;
-    }
-
-    .todo {
-      width: 435px;
-    }
-
-    .datejs {
-      display: none;
-    }
-
-    .typeahead {
-      display: none;
-    }
-  }
-
-  &.expanded {
-    .todo {
-      width: 220px;
-    }
-  }
-
-  // center the checkbox
-  .add-on input {
+  .main {
     position: relative;
-    margin: 0;
-    top: -2px;
+    background-color: white;
+    padding: 12px;
+    @include box-shadow($dark-background 2px 2px 10px);
+    border: solid 1px $dark-background;
+
+    &.is-finished {
+      background-color: $dark-background;
+
+      &::after {
+        width: 96%;
+        content: '';
+        position: absolute;
+        height: 2px;
+        background-color: black;
+        margin: 0 auto;
+        left: 2%;
+        top: 50%;
+      }
+    }
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 
   .todo {
-    @include transition(all 0.4s ease-in-out);
+    width: 340px;
+    @include no-border;
+  }
 
-    &.invalid {
-      border: 1px solid red;
+  .selector {
+    display: inline-block;
+
+    label {
+      position: relative;
+      top: 1px;
+      left: 3px;
+    }
+
+    input {
+      @include no-border;
+      padding-left: 0;
+      margin-left: 0;
     }
   }
 
-  .datejs {
-    width: 90px;
+  .selector.has-selection input {
+    font-weight: bold;
+    color: $blue;
   }
 
-  .typeahead {
-    margin: 0;
-    width: 90px;
-  }
-
-  //FIXME: why does the prepended input not line up correctly?
-  .todo {
-    position: relative;
-    left: -4px;
-  }
-
-  .shortcuts {
-    display: none;
-  }
-
-  .reminder {
-    display: none;
-  }
-
-  .keyboard-shorcuts div {
-    display: inline-block;
-  }
-
-  .keyboard-shorcuts .line {
-    display: inline-block;
-    float: left;
-    clear: both;
-    margin: 5px 0;
-  }
-
-  .keyboard-shorcuts .line p,span {
-    display: inline-block;
-  }
-
-  .keyboard-shorcuts .line p {
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 2px 5px;
-    background: white;
-    color: black;
-    font-weight: 500;
-  }
-
-  .keyboard-shorcuts .line span {
-    font-size: 12px;
+  .options {
+    background-color: $background;
+    border: solid 1px $dark-background;
+    border-top: none;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto;
   }
 }

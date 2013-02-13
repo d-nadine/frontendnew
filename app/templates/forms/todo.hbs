@@ -1,100 +1,44 @@
-<div {{bindAttr class="view.expanded:expanded:unexpanded :todo-form"}}>
-  <form class="form-inline">
-    <div class="wrap">
-      <div class="nav pull-right">
-        <a href="#" class="shortcut" data-placement="bottom" data-title="Shorcuts">
-          <i class="icon-question-sign"></i>
-        </a>
-      </div>
-      <div class="adder">
-        <div class="input-prepend">
-          <span class="add-on">
-            {{view view.checkbox}}
-          </span>
-          {{view view.descriptionField}}
-        </div>
-        <input type="text" class="typeahead tab" placeholder="Assign to"/>
-        <input type="text" class="datejs tab" placeholder="Due date" />
-        <a class="btn btn-default attn tab" href="#"><i class="icon-bell"></i></a>
-        <a class="btn btn-success tab" href="#" {{action submit target="view"}}><i class="icon-plus icon-white"></i></a>
-        <a {{action expandForm target="view"}} class="more">{{view.optionsLabel}}</a>
-      </div>
-    </div>
-  </form>
+<form class="form-inline todo-form">
+  <div {{bindAttr class="isFinished :main"}}>
+    {{view view.checkbox}}
 
-  <div class="shortcuts">
-    <div class="keyboard-shorcuts">
-      <div class="line">
-        <div>
-          <p>Ctrl</p>
-          <span> + </span>
-          <p>M</p>
-        </div>
-        <div>
-          <span> = </span>
-          <span>more options</span>
-        </div>
-      </div>
-      <div class="line">
-        <div>
-          <p>Ctrl</p>
-          <span> + </span>
-          <p>[</p>
-        </div>
-        <div>
-          <span> = </span>
-          <span>previous input</span>
-        </div>
-      </div>
-      <div class="line">
-        <div>
-          <p>Ctrl</p>
-          <span> + </span>
-          <p>Del</p>
-        </div>
-        <div>
-          <span> = </span>
-          <span>clears input</span>
-        </div>
-      </div>
-      <div class="line">
-        <div>
-          <p>Ctrl</p>
-          <span> + </span>
-          <p>C</p>
-        </div>
-        <div>
-          <span> = </span>
-          <span>checks off todo</span>
-        </div>
-      </div>
+    {{view view.todoField}}
+
+    <div {{bindAttr class="reference:has-selection :selector"}}>
+      <label><a {{action showAutocomplete href=true target=view}}>@</a></label>
+      {{view view.autocomplete}}
     </div>
+
+    <a tabindex="3" class="btn pull-right" {{action toggleExpanded}}>Options</a>
   </div>
 
-  <div class="reminder">
-    <div style="padding: 0 4px">
-      <select class="selector">
-        <option value="0">no reminder</option>
-        <option value="1"><b>2 hours</b> (3:00pm)</option>
-        <option value="2">5 hours (12:00pm)</option>
-        <option value="3">9 hours (9:00am)</option>
-        <option value="4">24 hours (5:00pm)</option>
-      </select>
-      <span style="padding-left: 5px">before</span>
+  {{#if isExpanded}}
+    <div class="options">
+      <div class="date-control input-prepend">
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-calendar"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Today</a></li>
+            <li><a href="#">Tomorrow</a></li>
+            <li><a href="#">Later This Week</a></li>
+            <li><a href="#">Next Week</a></li>
+            <li><a href="#">In a Month</a></li>
+            <li>
+              <a {{action showDatePicker target=view}}><i class="icon-calendar"></i>Pick a Date</a>
+            </li>
+          </ul>
+        </div>
+        {{view view.dueDateField}}
+      </div>
+
+      <div class="user-selector input-prepend ">
+        <label>Assigned To</label>
+        {{view view.userSelector}}
+      </div>
+
+      <button class="btn btn-primary pull-right" type="submit">Save</button>
     </div>
-    <div class="notify">
-      <div>
-        <input type="checkbox" value="0">
-        <span>by Radium</span>
-      </div>
-      <div>
-        <input type="checkbox" value="1">
-        <span>by Email</span>
-      </div>
-      <div>
-        <input type="checkbox" value="2">
-        <span>by SMS</span>
-      </div>
-    </div>
-  </div>
-</div>
+  {{/if}}
+</form>

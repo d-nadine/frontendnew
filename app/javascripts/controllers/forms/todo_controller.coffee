@@ -1,23 +1,25 @@
+Autocomplete =
+  lookup: (term) ->
+    @contacts().find (contact) ->
+      contact.get('name') is term
+
+  contacts: -> Radium.Contact.all()
+
 Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMixin,
-  kind: 'todo'
-  init: ->
-    @reset()
+  needs: ['users']
+  users: Ember.computed.alias('controllers.users')
 
-  isValid: (->
-    @get 'isDescriptionValid'
-  ).property('isDescritionValid')
+  referenceNameDidChange: (->
+    content = @get 'content'
+    return unless content
 
-  isDescriptionValid: (->
-    !Ember.isEmpty @get('description')
-  ).property('description')
+    term = @get 'referenceName'
 
-  submit: ->
-    return unless @get('isValid')
-    @get('model').commit()
-    Radium.Utils.notify('Todo created!')
+    if term
+      result = Autocomplete.lookup term
+      @set 'reference', result
+    else
+      @set 'reference', null
+  ).observes('referenceName')
 
-  reset: ->
-    @set 'model', Radium.Todo.createRecord
-      kind: @get('kind')
-      finishBy: Ember.DateTime.create().advance(day: 1)
-      user: @get('currentUser')
+  toggleExpanded: -> @toggleProperty 'isExpanded'

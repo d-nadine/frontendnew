@@ -35,11 +35,24 @@ Ember.DateTime.reopen
   isToday: ->
     @toDateFormat() == Ember.DateTime.create().toDateFormat()
 
+  isTomorrow: ->
+    @advance(day: 1).toDateFormat() == Ember.DateTime.create().advance(day: 1).toDateFormat()
+
   isPast: ->
     @get('milliseconds') < Ember.DateTime.create().get('milliseconds')
 
   isFuture: ->
     @get('milliseconds') > Ember.DateTime.create().get('milliseconds')
+
+  toHumanFormat: ->
+    format = "%A, %B %d"
+
+    if @isToday()
+      "today, #{@toFormattedString(format)}"
+    else if @isTomorrow()
+      "tomorrow, #{@toFormattedString(format)}"
+    else
+      "tomorrow, #{@toFormattedString(format)}"
 
 Ember.DateTime.reopenClass
   random: (alwaysPast = false) ->

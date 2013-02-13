@@ -1,39 +1,67 @@
 Radium.FormsTodoView = Ember.View.extend
-  expandForm: ->
-    @toggleProperty 'expanded'
+  # keyPress: (event) ->
+  #   return unless event.keyCode == 13
+  #   @submit()
 
-  keyPress: (event) ->
-    return unless event.keyCode == 13
-    @submit()
+  showDatePicker: ->
+    @$('.due-date').focus()
 
-  optionsLabel: (->
-    if @get('expanded') then 'hide' else 'options'
-  ).property('expanded')
-
-  didInsertElement: ->
-    @get('controller').reset()
-
-    @$('.shortcut').popover
-      html: true
-      content: @$().find('.shortcuts').html()
-    @focusDescription()
-
-  focusDescription: ->
-    @$('.todo').focus()
-
-  descriptionField: Ember.TextField.extend
-    valueBinding: 'controller.description'
-    classNames: ['todo']
-    classNameBindings: ['invalid']
-    invalid: (->
-      @get('controller.isDescriptionValid') == false
-    ).property('controller.isDescriptionValid')
-
-    placeHolder: "Todo..."
-
+  changeDate: ->
+    console.log 'weee'
 
   checkbox: Ember.Checkbox.extend
-    checkedBinding: 'controller.finished'
+    checkedBinding: 'controller.isFinished'
+    tabindex: 4
+
+  todoField: Ember.TextField.extend
+    classNames: 'todo'
+    valueBinding: 'controller.description'
+    date: Ember.computed.alias('controller.finishBy')
+
+    placeholder: (->
+      "Add a todo for #{@get('date').toHumanFormat()}"
+    ).property('date')
+
+    tabindex: 1
+
+  autocomplete: Ember.TextField.extend
+    valueBinding: 'controller.referenceName'
+
+    placeholder: "Type a name"
+
+    tabindex: 2
+
+    didInsertElement: ->
+      @$().typeahead source: @source
+
+    # FIXME: make this async
+    source: (query, process) ->
+      Radium.Contact.all().map((c) -> c.get('name')).toArray()
+
+  dueDateField: Ember.TextField.extend
+    readonly: true
+    attributeBindings: ['readonly']
+    classNames: ['due-date']
+    objectBinding: 'controller.finishBy'
+
+    placeholder: (->
+      "Due #{@get('object').toFormattedString('%A %B %d')}"
+    ).property('object')
+
+    didInsertElement: ->
+      @$().datepicker()
+
+      view = this
+
+      @$().data('datepicker').set = ->
+        view.set 'object', Ember.DateTime.create(@date.getTime())
+        view.$().blur()
+
+  userSelector: Ember.Select.extend
+    contentBinding: 'controller.users'
+    valueBinding: 'controller.user'
+    optionLabelPath: 'content.meIfCurrent'
+    optionValuePath: 'content.content'
 
   submit: ->
     return unless @get('controller.isValid')
