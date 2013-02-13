@@ -105,7 +105,7 @@ Radium.FormsTodoView = Ember.View.extend
         view.set 'object', Ember.DateTime.create(@date.getTime())
         @hide()
 
-  userSelector: Ember.View.extend
+  userPicker: Ember.View.extend
     classNameBindings: [
       'user:is-valid', 
       ':control-box'
