@@ -87,7 +87,6 @@
 		constructor: Datepicker,
 		
 		show: function(e) {
-      console.log('show');
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
 			this.place();
