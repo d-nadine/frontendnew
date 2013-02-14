@@ -1,43 +1,5 @@
-// Icons are manually added until compass spriting works
-.icon-call,
-.icon-todo,
-.icon-contact,
-.icon-assigned,
-.icon-add-todo,
-.icon-edit,
-.icon-comments,
-.icon-meeting,
-.icon-deal,
-.icon-mail,
-.icon-overdue,
-.icon-phone-call {
-  width: 16px;
-  height: 16px;
-  background: {
-     repeat: no-repeat;
-     position: 0 0;
-  }
-}
-
-.icon-edit {
-  background-image: url('/images/icons/edit.png');
-}
-
-.icon-inline-loading {
-  width: 16px;
-  height: 16px;
-  background-position: 0 0;
-  background-image: url('/images/icons/inline-loading.gif');
-}
-
-[class^="ember-view icon-"] {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  vertical-align: text-top;
-  background-image: url(images/vendor/glyphicons-halflings.png);
-  background-repeat: no-repeat;
-}
+@import "icons/*.png";
+@include all-icons-sprites;
 
 .icon-undo,.icon-redo,.icon-forward,.icon-reply,.icon-reply-2,.icon-attachment,.icon-forward-2,.icon-paperclip {
   display: inline-block;
