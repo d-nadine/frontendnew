@@ -38,6 +38,12 @@ Radium.FormsTodoView = Ember.View.extend
     classNameBindings: ['value:is-valid', ':todo']
     valueBinding: 'controller.description'
     rows: 1
+    disabled: (->
+      if(!@get('controller.isNew') && !@get('controller.isExpanded'))
+        true
+      else
+        false
+    ).property('controller.isNew', 'controller.isExpanded')
 
     didInsertElement: ->
       @$().autosize()

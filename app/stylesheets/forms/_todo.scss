@@ -194,6 +194,10 @@
     &.is-valid {
       color: black;
     }
+
+    &[disabled] {
+      cursor: pointer;
+    }
   }
 
   .options {
