@@ -13,6 +13,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'notification', Radium.Notification
     @map.set 'reminder', Radium.Reminder
     @map.set 'todo', Radium.Todo
+    @map.set 'call', Radium.Todo
     @map.set 'overdueTodo', Radium.Todo
     @map.set 'attachment', Radium.Attachment
     @map.set 'settings', Radium.Settings

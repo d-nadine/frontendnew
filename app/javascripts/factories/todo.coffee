@@ -5,5 +5,11 @@ Factory.define 'todo', traits: 'timestamps',
   finishBy: Ember.DateTime.create().advance(days: 7)
   finished: false
 
+Factory.define 'call', traits: 'timestamps',
+  kind: 'call'
+  description: Factory.sequence (i) -> "Call #{i}"
+  finishBy: Ember.DateTime.create().advance(days: 7)
+  reference: -> Factory.create('contact')
+
 Factory.define 'overdueTodo', from: 'todo',
   finishBy: -> Ember.DateTime.create().advance(days: -7)

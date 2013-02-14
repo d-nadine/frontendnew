@@ -1,3 +1,6 @@
+@import "icons/*.png";
+@include all-icons-sprites;
+
 ::-webkit-input-placeholder {
   font-style: italic;
 }
@@ -15,44 +18,25 @@
 .checker {
   position: relative;
   display: inline-block;
-  width: 20px;	
+  width: 30px;	
   height: 20px;
 
   label {
     cursor: pointer;
     position: absolute;
-    width: 20px;
+    width: 30px;
     height: 20px;
     top: 0;
     left: 0;
+    @include icons-sprite(todo-muted);
   }
 
-  input[type=checkbox] {
+  input:not([disabled]):not(:checked) + label:hover {
+    @include icons-sprite(todo-green);
+  }
+
+  input {
     visibility: hidden;
-  }
-
-  label::after {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 6px;
-    background: transparent;
-    top: 4px;
-    left: 4px;
-    border: 3px solid $light-text;
-    border-top: none;
-    border-right: none;
-
-    -webkit-transform: rotate(-45deg);
-  }
-
-  input[type=checkbox][disabled] + label:hover::after {
-    border-color: $light-text;
-  }
-
-  input[type=checkbox]:checked + label:after {
-    border-color: green;
-    opacity: 1;
   }
 }
 
@@ -172,6 +156,24 @@
     }
   }
 
+  &.is-call {
+    .checker {
+      label {
+        @include icons-sprite(call-muted);
+      }
+
+      input:not([disabled]) + label:hover {
+        @include icons-sprite(call-green);
+      }
+    }
+
+    .is-finished .checker {
+      label {
+        @include icons-sprite(call-muted);
+      }
+    }
+  }
+
   &.is-expandable .main, 
   &.is-expandable .todo[disabled] {
     cursor: pointer;
@@ -188,7 +190,13 @@
 
   .checker {
     margin-right: 10px;
-    vertical-align: top;
+    vertical-align: middle;
+  }
+
+  .is-finished .checker {
+    label {
+      @include icons-sprite(todo-muted);
+    }
   }
 
   .todo {
