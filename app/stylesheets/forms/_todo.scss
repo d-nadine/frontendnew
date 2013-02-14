@@ -168,6 +168,15 @@
     }
   }
 
+  .btn-link:hover {
+    text-decoration: none;
+  } 
+
+  .btn-link:focus {
+    outline: none;
+    border: none;
+  }
+
   .checker {
     margin-right: 10px;
     vertical-align: top;
