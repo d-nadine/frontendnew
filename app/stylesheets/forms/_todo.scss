@@ -168,7 +168,8 @@
     }
   }
 
-  &.is-expandable .main {
+  &.is-expandable .main, 
+  &.is-expandable .todo[disabled] {
     cursor: pointer;
   }
 
@@ -196,7 +197,7 @@
     }
 
     &[disabled] {
-      cursor: pointer;
+      cursor: default;
     }
   }
 

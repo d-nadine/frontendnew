@@ -10,8 +10,8 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
   users: Ember.computed.alias('controllers.users')
 
   isExpandable: (->
-    !@get('isNew')
-  ).property('isNew')
+    !@get('isNew') && !@get('isFinished')
+  ).property('isNew', 'isFinished')
 
   toggleExpanded: -> @toggleProperty 'isExpanded'
 
