@@ -10,6 +10,8 @@ class Radium < Iridium::Application
   # declared order. Undeclared files will be concatentated after
   # all declared files
   config.dependencies.insert_after :ember, 'ember-data'
+  config.dependencies.load :underscore
+  config.dependencies.insert_after :underscore, 'jquery-mentionsInput'
 
   # Specify a different place to load your templates. All templates
   # will be added to Javascript array specified here:
