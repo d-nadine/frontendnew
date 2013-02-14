@@ -16,3 +16,7 @@ Radium.computed.daysOld = (dependentKey, days) ->
   Ember.computed dependentKey, (key) ->
     now = Ember.DateTime.create()
     @get(dependentKey).daysApart(now) >= days
+
+Radium.computed.isPresent = (dependentKey) ->
+  Ember.computed dependentKey, (key) ->
+    !Ember.isEmpty(@get(dependentKey))

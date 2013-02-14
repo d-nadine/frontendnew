@@ -9,19 +9,14 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
 
-  userName: null
-
-  referenceNameDidChange: (->
-    content = @get 'content'
-    return unless content
-
-    term = @get 'referenceName'
-
-    if term
-      result = Autocomplete.lookup term
-      @set 'reference', result
-    else
-      @set 'reference', null
-  ).observes('referenceName')
+  isExpandable: (->
+    !@get('isNew')
+  ).property('isNew')
 
   toggleExpanded: -> @toggleProperty 'isExpanded'
+
+  expand: ->
+    return unless @get('isExpandable')
+    @toggleProperty 'isExpanded'
+
+  hasComments: Radium.computed.isPresent('comments')

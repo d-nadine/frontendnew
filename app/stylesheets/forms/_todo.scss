@@ -168,6 +168,10 @@
     }
   }
 
+  &.is-expandable .main {
+    cursor: pointer;
+  }
+
   .btn-link:hover {
     text-decoration: none;
   } 

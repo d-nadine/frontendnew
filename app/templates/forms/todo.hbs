@@ -1,16 +1,22 @@
-<form class="form-inline todo-form">
-  <div {{bindAttr class="isFinished :main"}}>
+<form {{bindAttr class="isExpandable :form-inline :todo-form"}}>
+  <div {{bindAttr class="isFinished :main"}} {{action expand}}>
     {{view view.checkbox}}
 
     {{view view.todoField}}
 
-    <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
-      {{#if isExpanded}}
-        Hide
-      {{else}}
-        Options
+    {{#if isNew}}
+      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
+        {{#if isExpanded}}
+          Hide
+        {{else}}
+          Options
+        {{/if}}
+      </a>
+    {{else}}
+      {{#if hasComments}}
+        <i class="icon-comment"></i>
       {{/if}}
-    </a>
+    {{/if}}
   </div>
 
   {{#if isExpanded}}
