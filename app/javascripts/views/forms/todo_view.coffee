@@ -130,13 +130,13 @@ Radium.FormsTodoView = Ember.View.extend
           <i class="icon-calendar"></i>
         </button>
         <ul class="dropdown-menu">
-          <li><a {{action setDate 'today' target=view href=true}}>Today</a></li>
-          <li><a {{action setDate 'tomorrow' target=view href=true}}>Tomorrow</a></li>
-          <li><a {{action setDate 'this_week' target=view href=true}}>Later This Week</a></li>
-          <li><a {{action setDate 'next_week' target=view href=true}}>Next Week</a></li>
-          <li><a {{action setDate 'next_month' target=view href=true}}>In a Month</a></li>
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
           <li>
-            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}">
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
               <i class="icon-calendar"></i>Pick a Date
             </a>
           </li>
