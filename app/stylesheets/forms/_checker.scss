@@ -1,0 +1,24 @@
+.checker {
+  position: relative;
+  display: inline-block;
+  width: 30px;	
+  height: 20px;
+
+  label {
+    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    @include icons-sprite(todo-muted);
+  }
+
+  input:not([disabled]):not(:checked) + label:hover {
+    @include icons-sprite(todo-green);
+  }
+
+  input {
+    visibility: hidden;
+  }
+}
