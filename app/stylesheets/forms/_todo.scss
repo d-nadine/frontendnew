@@ -168,10 +168,6 @@
     }
   }
 
-  a:hover {
-    text-decoration: none;
-  }
-
   .checker {
     margin-right: 10px;
     vertical-align: top;
@@ -185,12 +181,6 @@
     &.is-valid {
       color: black;
     }
-  }
-
-
-  .selector.has-selection input {
-    font-weight: bold;
-    color: $blue;
   }
 
   .options {
