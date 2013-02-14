@@ -2,7 +2,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
   kind: DS.attr('string')
   description: DS.attr('string')
   finishBy: DS.attr('datetime')
-  finished: DS.attr('boolean')
+  isFinished: DS.attr('boolean')
 
   # FIXME: this should be a computed property
   overdue: DS.attr('boolean')

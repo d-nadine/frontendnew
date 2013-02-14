@@ -15,8 +15,9 @@ Radium.FormsTodoView = Ember.View.extend
   ).property()
 
   checkbox: Ember.View.extend
+    disabled: Ember.computed.alias('controller.isDisabled')
     click: (event) ->
-      event.stopPropogation()
+      event.stopPropagation()
 
     init: ->
       @_super.apply this, arguments
@@ -33,7 +34,7 @@ Radium.FormsTodoView = Ember.View.extend
     ).property()
 
     template: Ember.Handlebars.compile """
-      <input type="checkbox" id="{{unbound view.checkBoxId}}" />
+      <input type="checkbox" id="{{unbound view.checkBoxId}}" {{bindAttr disabled=view.disabled}}/>
       <label for="{{unbound view.checkBoxId}}"></label>
     """
 
@@ -42,7 +43,9 @@ Radium.FormsTodoView = Ember.View.extend
     valueBinding: 'controller.description'
     rows: 1
     disabled: (->
-      if(!@get('controller.isNew') && !@get('controller.isExpanded'))
+      if @get('controller.isDisabled')
+        true
+      else if(!@get('controller.isNew') && !@get('controller.isExpanded'))
         true
       else
         false
@@ -63,20 +66,6 @@ Radium.FormsTodoView = Ember.View.extend
 
     tabindex: 1
 
-  autocomplete: Ember.TextField.extend
-    valueBinding: 'controller.referenceName'
-
-    placeholder: "Type a name"
-
-    tabindex: 2
-
-    didInsertElement: ->
-      @$().typeahead source: @source
-
-    # FIXME: make this async
-    source: (query, process) ->
-      Radium.Contact.all().map((c) -> c.get('name')).toArray()
-
   datePicker: Ember.View.extend
     classNameBindings: [
       'date:is-valid', 
@@ -86,6 +75,7 @@ Radium.FormsTodoView = Ember.View.extend
 
     dateBinding: 'controller.finishBy'
     textBinding: 'textToDateTransform'
+    disabled: Ember.computed.alias('controller.isDisabled')
 
     textToDateTransform: ((key, value) ->
       if arguments.length == 2
@@ -160,6 +150,7 @@ Radium.FormsTodoView = Ember.View.extend
 
     humanTextField: Ember.TextField.extend
       valueBinding: 'parentView.text'
+      disabledBinding: 'parentView.disabled'
 
 
   userPicker: Ember.View.extend
@@ -169,8 +160,8 @@ Radium.FormsTodoView = Ember.View.extend
       ':datepicker-control-box'
     ]
 
+    disabled: Ember.computed.alias('controller.isDisabled')
     userBinding: 'controller.user'
-
     nameBinding: 'nameToUserTransform'
 
     nameToUserTransform: ((key, value) ->
@@ -207,6 +198,7 @@ Radium.FormsTodoView = Ember.View.extend
 
     textField: Ember.TextField.extend
       valueBinding: 'parentView.name'
+      disabledBinding: 'parentView.disabled'
 
       didInsertElement: ->
         @$().typeahead source: @source

@@ -7,15 +7,17 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   existingTodo: (->
-    todo = Factory.create 'todo'
+    Factory.create 'todo'
       finishBy: Ember.DateTime.create()
       user: @get('currentUser')
       reference: Factory.create('contact')
+  ).property()
 
-    # todo.get('comments').pushObject Factory.create('comment')
-    # todo.get('comments').pushObject Factory.create('comment')
-    # todo.get('comments').pushObject Factory.create('comment')
-    # todo.get('comments').pushObject Factory.create('comment')
-
-    todo
+  uneditableTodo: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'todo'
+        finishBy: Ember.DateTime.create()
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: false
   ).property()
