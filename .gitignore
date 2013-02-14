@@ -2,6 +2,7 @@ tmp/
 site/
 config/settings.yml
 !app/assets/images/icons
+!app/sprites/icons
 deploy.log
 .sass-cache
 vendor/ember.js
