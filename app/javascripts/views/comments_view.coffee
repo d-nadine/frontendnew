@@ -11,7 +11,7 @@ Radium.CommentsView = Ember.View.extend
       @$().autosize().css('resize','none')
 
     willDestroyElement: ->
-      $('html').off('click.autoresize')
+      @$().off('autosize')
 
     click: (event) ->
       event.stopPropagation()

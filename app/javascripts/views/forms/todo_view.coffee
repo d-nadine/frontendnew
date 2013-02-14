@@ -34,9 +34,16 @@ Radium.FormsTodoView = Ember.View.extend
       <label for="{{unbound view.checkBoxId}}"></label>
     """
 
-  todoField: Ember.TextField.extend
+  todoField: Ember.TextArea.extend
     classNameBindings: ['value:is-valid', ':todo']
     valueBinding: 'controller.description'
+    rows: 1
+
+    didInsertElement: ->
+      @$().autosize()
+
+    willDestroyElement: ->
+      @$().off('autosize')
 
     placeholder: (->
       if @get('reference.name')

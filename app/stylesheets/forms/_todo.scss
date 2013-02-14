@@ -174,11 +174,13 @@
 
   .checker {
     margin-right: 10px;
+    vertical-align: top;
   }
 
   .todo {
     @include no-border;
     background: none;
+    resize: none;
 
     &.is-valid {
       color: black;
