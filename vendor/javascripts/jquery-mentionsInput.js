@@ -29,7 +29,7 @@
       autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
       mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
-      mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
+      mentionItemHighlight       : _.template('<strong><span>@<%= value %></span></strong>')
     }
   };
 
@@ -128,6 +128,10 @@
 
       mentionText = mentionText.replace(/\n/g, '<br />');
       mentionText = mentionText.replace(/ {2}/g, '&nbsp; ');
+
+      if(mentionsCollection.length > 0){
+        mentionText = mentionText.replace('@', '')
+      }
 
       elmInputBox.data('messageText', syntaxMessage);
       elmMentionsOverlay.find('div').html(mentionText);
