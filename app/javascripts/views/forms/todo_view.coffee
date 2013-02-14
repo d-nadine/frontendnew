@@ -35,9 +35,8 @@ Radium.FormsTodoView = Ember.View.extend
     """
 
   todoField: Ember.TextField.extend
-    classNames: 'todo'
+    classNameBindings: ['value:is-valid', ':todo']
     valueBinding: 'controller.description'
-    date: Ember.computed.alias('controller.finishBy')
 
     placeholder: (->
       if @get('reference.name')

@@ -179,7 +179,12 @@
   .todo {
     @include no-border;
     background: none;
+
+    &.is-valid {
+      color: black;
+    }
   }
+
 
   .selector.has-selection input {
     font-weight: bold;
