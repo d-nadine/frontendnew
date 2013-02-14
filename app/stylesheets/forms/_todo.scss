@@ -27,6 +27,10 @@
     left: 0;
   }
 
+  input[type=checkbox] {
+    visibility: hidden;
+  }
+
   label::after {
     content: '';
     position: absolute;
@@ -42,12 +46,8 @@
     -webkit-transform: rotate(-45deg);
   }
 
-  label:hover::after {
-    border-color: green;
-  }
-
-  input[type=checkbox] {
-    visibility: hidden;
+  input[type=checkbox][disabled] + label:hover::after {
+    border-color: $light-text;
   }
 
   input[type=checkbox]:checked + label:after {
