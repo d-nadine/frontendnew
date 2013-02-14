@@ -40,11 +40,11 @@ Radium.FormsTodoView = Ember.View.extend
     date: Ember.computed.alias('controller.finishBy')
 
     placeholder: (->
-      if @get('date')
-        "Add a todo for #{@get('date').toHumanFormat()}"
+      if @get('reference.name')
+        "Add a todo about #{@get('reference.name')}"
       else
         "Add a todo..."
-    ).property('date')
+    ).property('reference.name')
 
     tabindex: 1
 
