@@ -1,6 +1,4 @@
 <div class="block">
-  <h1>Forms Playground</h1>
-
   <h3>New Todo Form: No Context</h3>
   {{control "forms/todo" newTodo}}
 
@@ -10,6 +8,15 @@
   <h3>Uneditable Todo</h3>
   {{control "forms/todo" uneditableTodo}}
 
-  <h3>New Call: No Context</h3>
+</div>
+
+<div class="block">
+  <h3>New Call w/o Context</h3>
   {{control "forms/todo" callTodo}}
+
+  <h3>New Call w/ Context</h3>
+  {{control "forms/todo" callTodoWithContext}}
+
+  <h3>Existing call</h3>
+  {{control "forms/todo" existingCall}}
 </div>

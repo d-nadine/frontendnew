@@ -23,6 +23,23 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   callTodo: (->
+    Radium.Todo.createRecord
+      kind: 'call'
+      isNew: true
+      finishBy: Ember.DateTime.create()
+      user: @get('currentUser')
+  ).property()
+
+  callTodoWithContext: (->
+    Radium.Todo.createRecord
+      kind: 'call'
+      isNew: true
+      finishBy: Ember.DateTime.create()
+      user: @get('currentUser')
+      reference: Factory.create('contact')
+  ).property()
+
+  existingCall: (->
     Factory.create 'call'
       finishBy: Ember.DateTime.create()
       user: @get('currentUser')

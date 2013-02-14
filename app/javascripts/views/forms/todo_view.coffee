@@ -1,19 +1,19 @@
 Radium.FormsTodoView = Ember.View.extend
 
-  # didInsertElement: ->
-  #   @$(window).on 'resize', @get('windowDidResize')
-  #   @resizeTodoBox()
+  didInsertElement: ->
+    @$(window).on 'resize', @get('windowDidResize')
+    @resizeTodoBox()
 
-  # willDestroyElement: ->
-  #   @$(window).off 'resize', @get('windowDidResize')
+  willDestroyElement: ->
+    @$(window).off 'resize', @get('windowDidResize')
 
-  # resizeTodoBox: ->
-  #   newWidth = @$('.main').width() - @$('.checker').width() - @$('.main a').width() - 70
-  #   @$('.todo').width(newWidth)
+  resizeTodoBox: ->
+    newWidth = @$('.main').width() - @$('.checker').width() - @$('.main .btn-link').width() - @$('.call-control-box').width() - 70
+    @$('.todo').width(newWidth)
 
-  # windowDidResize: (->
-  #   $.proxy @resizeTodoBox, this
-  # ).property()
+  windowDidResize: (->
+    $.proxy @resizeTodoBox, this
+  ).property()
 
   checkbox: Ember.View.extend
     disabled: Ember.computed.alias('controller.isDisabled')
@@ -48,6 +48,10 @@ Radium.FormsTodoView = Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
     ).property('value', 'isSubmitted')
 
+    isCall: Ember.computed.alias('controller.isCall')
+    referenceName: Ember.computed.alias('controller.reference.name')
+    date: Ember.computed.alias('controller.finishBy')
+
     rows: 1
     disabled: (->
       if @get('controller.isDisabled')
@@ -65,10 +69,14 @@ Radium.FormsTodoView = Ember.View.extend
       @$().off('autosize')
 
     placeholder: (->
-      if @get('reference.name')
-        "Add a todo about #{@get('reference.name')}"
+      if @get('isCall') && @get('referenceName')
+        "Add a call to #{@get('referenceName')} for #{@get('date').toHumanFormat()}"
+      else if @get('isCall')
+        "Add a call for #{@get('date').toHumanFormat()}"
+      else if !@get('isCall') && @get('referenceName')
+        "Add a todo about #{@get('referenceName')} for #{@get('date').toHumanFormat()}"
       else
-        "Add a todo..."
+        "Add a todo for #{@get('date').toHumanFormat()}"
     ).property('reference.name')
 
     tabindex: 1
