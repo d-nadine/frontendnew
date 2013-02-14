@@ -9,6 +9,9 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
 
+  submit: ->
+    @set 'isSubmitted', true
+
   isExpandable: (->
     !@get('isNew') && !@get('isFinished')
   ).property('isNew', 'isFinished')

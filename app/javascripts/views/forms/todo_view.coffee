@@ -1,4 +1,5 @@
 Radium.FormsTodoView = Ember.View.extend
+
   didInsertElement: ->
     @$(window).on 'resize', @get('windowDidResize')
     @resizeTodoBox()
@@ -39,8 +40,14 @@ Radium.FormsTodoView = Ember.View.extend
     """
 
   todoField: Ember.TextArea.extend
-    classNameBindings: ['value:is-valid', ':todo']
+    classNameBindings: ['value:is-valid', 'isInvalid', ':todo']
     valueBinding: 'controller.description'
+
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    ).property('value', 'isSubmitted')
+
     rows: 1
     disabled: (->
       if @get('controller.isDisabled')
@@ -69,6 +76,7 @@ Radium.FormsTodoView = Ember.View.extend
   datePicker: Ember.View.extend
     classNameBindings: [
       'date:is-valid', 
+      'isInvalid'
       ':control-box',
       ':datepicker-control-box'
     ]
@@ -76,6 +84,11 @@ Radium.FormsTodoView = Ember.View.extend
     dateBinding: 'controller.finishBy'
     textBinding: 'textToDateTransform'
     disabled: Ember.computed.alias('controller.isDisabled')
+
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    ).property('value', 'isSubmitted')
 
     textToDateTransform: ((key, value) ->
       if arguments.length == 2
@@ -156,6 +169,7 @@ Radium.FormsTodoView = Ember.View.extend
   userPicker: Ember.View.extend
     classNameBindings: [
       'user:is-valid', 
+      'isInvalid',
       ':control-box',
       ':datepicker-control-box'
     ]
@@ -163,6 +177,11 @@ Radium.FormsTodoView = Ember.View.extend
     disabled: Ember.computed.alias('controller.isDisabled')
     userBinding: 'controller.user'
     nameBinding: 'nameToUserTransform'
+
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    ).property('value', 'isSubmitted')
 
     nameToUserTransform: ((key, value) ->
       if arguments.length == 2

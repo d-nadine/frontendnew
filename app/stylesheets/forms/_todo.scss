@@ -64,6 +64,10 @@
   border: solid 1px $control-border-color;
   @include transition(border linear 0.2s);
 
+  &.is-invalid {
+    border-color: red;
+  }
+
   // take the bootstrap add-on but don't bring
   // in all the crap related to it's styling
   .text {
@@ -194,6 +198,10 @@
 
     &.is-valid {
       color: black;
+    }
+
+    &.is-invalid {
+      outline: solid 1px red;
     }
 
     &[disabled] {
