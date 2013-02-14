@@ -28,7 +28,7 @@
       autocompleteListItemAvatar : _.template('<img src="<%= avatar %>" />'),
       autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
-      mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
+      mentionItemSyntax          : _.template('[@<%= value %>](<%= type %>:<%= id %>)'),
       mentionItemHighlight       : _.template('<strong><span>@<%= value %></span></strong>')
     }
   };
@@ -129,9 +129,8 @@
       mentionText = mentionText.replace(/\n/g, '<br />');
       mentionText = mentionText.replace(/ {2}/g, '&nbsp; ');
 
-      if(mentionsCollection.length > 0){
-        mentionText = mentionText.replace('@', '')
-      }
+      // FIXME: Hacky, use beter replace above in each loop
+      mentionText = mentionText.replace(/@<strong>/g, '<strong>');
 
       elmInputBox.data('messageText', syntaxMessage);
       elmMentionsOverlay.find('div').html(mentionText);
@@ -151,7 +150,6 @@
     }
 
     function addMention(mention) {
-
       var currentMessage = getInputBoxValue();
 
       // Using a regex to figure out positions
