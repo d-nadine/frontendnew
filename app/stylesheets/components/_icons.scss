@@ -1,6 +1,16 @@
 @import "icons/*.png";
 @include all-icons-sprites;
 
+// Style OUR icons
+[class^="icons-"], [class*=" icons-"] {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin-top: 1px;
+  line-height: 20px;
+  vertical-align: text-top;
+}
+
 .icon-undo,.icon-redo,.icon-forward,.icon-reply,.icon-reply-2,.icon-attachment,.icon-forward-2,.icon-paperclip {
   display: inline-block;
   width: 16px;

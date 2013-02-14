@@ -4,6 +4,24 @@
 
     {{view view.todoField}}
 
+    {{#if isCall}}
+      <div class="btn-group call-control-box">
+        <button class="btn btn-success">
+          <i class="icons-call-white"></i>
+        </button>
+        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+    {{/if}}
+
     {{#if isNew}}
       <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
         {{#if isExpanded}}
