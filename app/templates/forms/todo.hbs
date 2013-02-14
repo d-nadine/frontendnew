@@ -4,7 +4,13 @@
 
     {{view view.todoField}}
 
-    <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>Options</a>
+    <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
+      {{#if isExpanded}}
+        Hide
+      {{else}}
+        Options
+      {{/if}}
+    </a>
   </div>
 
   {{#if isExpanded}}
