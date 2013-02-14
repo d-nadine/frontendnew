@@ -15,6 +15,9 @@ Radium.FormsTodoView = Ember.View.extend
   ).property()
 
   checkbox: Ember.View.extend
+    click: (event) ->
+      event.stopPropogation()
+
     init: ->
       @_super.apply this, arguments
       @on "change", this, this._updateElementValue
