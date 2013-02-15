@@ -367,7 +367,6 @@
         initTextarea();
         initAutocomplete();
         initMentionsOverlay();
-        resetInput();
 
         if( settings.prefillMention ) {
           addMention( settings.prefillMention );
