@@ -1,4 +1,4 @@
-<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :todo-form"}}>
+<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :call-form"}}>
   <div {{bindAttr class="isFinished :main"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
@@ -17,7 +17,24 @@
     {{/if}}
 
     {{#if showSuccess}}
-      <span class="success pull-right">Todo added</span>
+      <span class="success pull-right">Call Added</span>
+    {{/if}}
+
+    {{#if showCallBox}}
+      <div class="btn-group call-control-box pull-right">
+        <button class="btn btn-success">
+          <i class="icons-call-white"></i>
+        </button>
+        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">138213947834</a></li>
+          <li><a href="#">329841932847</a></li>
+          <li><a href="#">132948738873</a></li>
+          <li><a href="#">Other Number</a></li>
+        </ul>
+      </div>
     {{/if}}
 
     {{view view.todoField classNames="field field-blend-in"}}

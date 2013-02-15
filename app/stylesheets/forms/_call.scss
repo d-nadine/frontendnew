@@ -1,40 +1,4 @@
-::-webkit-input-placeholder {
-  font-style: italic;
-}
-
-@mixin no-border {
-  border: none;
-  box-shadow: none;
-
-  &:focus {
-    border: none;
-    box-shadow: none;
-  }
-}
-
-form .dropdown-menu {
-  padding: 0;
-  border-radius: 0px;
-  border: solid 1px $control-border-color;
-
-  li {
-    border-bottom: solid 1px $control-border-color;
-
-    a:hover {
-      cursor: pointer;
-      background-color: $selected-item;
-      background-image: none;
-      color: inherit;
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-}
-
-
-.todo-form {
+.call-form {
   .main {
     position: relative;
     background-color: white;
@@ -85,52 +49,40 @@ form .dropdown-menu {
     cursor: pointer
   }
 
-  // style the todo's pointer
-  &.is-expandable .todo,
-  &.is-expandable .todo.is-disabled,
-  &.is-expandable .todo textarea,
-  &.is-expandable .todo textarea[disabled],
-  &.is-expandable:not(.is-editable) .todo textarea,
-  &.is-expandable:not(.is-expanded) .todo textarea {
-    cursor: pointer;
-  }
+  .call-control-box {
+    .dropdown-toggle {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
-  &.is-expanded.is-editable .todo,
-  &.is-expanded.is-editable .todo textarea {
-    cursor: text;
-  }
+    .caret {
+      height: 19px;
+    }
 
-  &:not(.is-expandable) .todo,
-  &:not(.is-expandable) .todo textarea,
-  &:not(.is-expandable) .todo textarea[disabled] {
-    cursor: default;
-  }
-
-  &.is-call {
-  }
-
-  .btn-link:hover {
-    text-decoration: none;
-  } 
-
-  .btn-link:focus {
-    outline: none;
-    border: none;
-  }
-
-  .is-finished .checker {
-    label {
-      @include icons-sprite(todo-muted);
+    .dropdown-toggle:focus {
+      outline: none;
     }
   }
 
   .checker {
-    margin-top: 6px;
+    label {
+      @include icons-sprite(call-muted);
+    }
+
+    input:not([disabled]) + label:hover {
+      @include icons-sprite(call-green);
+    }
+  }
+
+  .is-finished .checker {
+    label {
+      @include icons-sprite(call-muted);
+    }
   }
 
   .todo {
     margin-left: 40px;
-    margin-right: 140px;
+    margin-right: 160px;
 
     &.is-valid {
       color: black;

@@ -9,7 +9,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   editableTodo: (->
     Ember.ObjectProxy.create
       content: Factory.create 'todo'
-        finishBy: Ember.DateTime.create()
         user: @get('currentUser')
         reference: Factory.create('contact')
       isEditable: true
@@ -19,7 +18,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     Ember.ObjectProxy.create
       content: Factory.create 'todo'
         isFinished: true
-        finishBy: Ember.DateTime.create()
         user: @get('currentUser')
         reference: Factory.create('contact')
       isEditable: true
@@ -28,7 +26,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   uneditableTodo: (->
     Ember.ObjectProxy.create
       content: Factory.create 'todo'
-        finishBy: Ember.DateTime.create()
         user: @get('currentUser')
         reference: Factory.create('contact')
       isEditable: false
@@ -38,7 +35,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     Ember.ObjectProxy.create
       content: Factory.create 'todo'
         isFinished: true
-        finishBy: Ember.DateTime.create()
         user: @get('currentUser')
         reference: Factory.create('contact')
       isEditable: false
@@ -48,14 +44,13 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     Ember.ObjectProxy.create
       content: Factory.create 'todo'
         isFinished: false
-        finishBy: Ember.DateTime.create()
         user: @get('currentUser')
         reference: Factory.create('contact')
       isEditable: true
       justAdded: true
   ).property()
 
-  callTodo: (->
+  newCall: (->
     Radium.Todo.createRecord
       kind: 'call'
       isNew: true
@@ -63,18 +58,46 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       user: @get('currentUser')
   ).property()
 
-  callTodoWithContext: (->
-    Radium.Todo.createRecord
-      kind: 'call'
-      isNew: true
-      finishBy: Ember.DateTime.create()
-      user: @get('currentUser')
-      reference: Factory.create('contact')
+  editableCall: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'call'
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: true
   ).property()
 
-  existingCall: (->
-    Factory.create 'call'
-      finishBy: Ember.DateTime.create()
-      user: @get('currentUser')
-      reference: Factory.create('contact')
+  editableFinishedCall: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'call'
+        isFinished: true
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: true
+  ).property()
+
+  uneditableCall: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'call'
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: false
+  ).property()
+
+  uneditableFinishedCall: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'call'
+        isFinished: true
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: false
+  ).property()
+
+  justAddedCall: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'call'
+        isFinished: false
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: true
+      justAdded: true
   ).property()
