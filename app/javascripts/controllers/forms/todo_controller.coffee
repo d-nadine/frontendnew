@@ -44,9 +44,15 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
     @get('content.isEditable') is false
   ).property('isEditable')
 
-  showCallBox: (->
-    @get('isCall') && !@get('isNew')
-  ).property('isCall', 'isNew')
+  isPrimaryInputDisabled: (->
+    return false if @get('isNew')
+    return true unless @get('isExpanded')
+    @get 'isDisabled'
+  ).property('isDisabled', 'isExpanded', 'isNew')
+
+  canFinish: (->
+    @get('isDisabled') || @get('isNew')
+  ).property('isDisabled', 'isNew')
 
   toggleExpanded: -> @toggleProperty 'isExpanded'
 

@@ -1,14 +1,12 @@
 Radium.ComboboxView = Ember.View.extend
   classNameBindings: [
-    'user:is-valid'
+    'value:is-valid'
     'isInvalid'
     'disabled:is-disabled'
+    ':combobox'
     ':control-box'
-    ':datepicker-control-box'
   ]
-  valueBinding: 'controller.user'
 
-  disabled: Ember.computed.alias('controller.isDisabled')
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -37,7 +35,7 @@ Radium.ComboboxView = Ember.View.extend
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
-          {{#each source}}
+          {{#each view.source}}
             <li><a {{action setValue this target=view href=true}}>{{name}}</a></li>
           {{/each}}
         </ul>
@@ -49,7 +47,6 @@ Radium.ComboboxView = Ember.View.extend
     @set 'value', object
 
   # Begin typehead customization
-  source: null
   matcher: (item) ->
     string = item.get 'name'
     ~string.toLowerCase().indexOf(@query.toLowerCase())
@@ -81,6 +78,7 @@ Radium.ComboboxView = Ember.View.extend
   textField: Ember.TextField.extend
     valueBinding: 'parentView.query'
     disabledBinding: 'parentView.disabled'
+    placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
       @$().typeahead source: @get('parentView.source')

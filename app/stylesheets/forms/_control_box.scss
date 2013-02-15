@@ -6,8 +6,8 @@
 
   &.is-disabled,
   &.is-readonly,
-  input[disabled],
-  input[readonly] {
+  [disabled],
+  [readonly] {
     cursor: default;
   }
 
@@ -40,6 +40,14 @@
 
     .dropdown-toggle:focus, .dropdown-toggle:active {
       outline: none;
+    }
+  }
+
+  &.field-blend-in {
+    .add-on, input, input:focus,
+    .btn, .btn:hover, .btn:active,
+    .btn-group.open .btn {
+      background-color: transparent;
     }
   }
 

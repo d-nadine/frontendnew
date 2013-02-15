@@ -10,12 +10,4 @@ Radium.FormsTodoFieldView = Radium.MentionFieldView.extend
 
   referenceName: Ember.computed.alias('controller.reference.name')
 
-  disabled: (->
-    if @get('controller.isDisabled')
-      true
-    else if(!@get('controller.isNew') && !@get('controller.isExpanded'))
-      true
-    else
-      false
-  ).property('controller.isNew', 'controller.isExpanded')
-
+  disabled: Ember.computed.alias('controller.isPrimaryInputDisabled')

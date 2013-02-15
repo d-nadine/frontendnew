@@ -26,16 +26,22 @@
     }
   }
 
+  &.is-expandable:not(.is-editable) .todo textarea,
+  &.is-expandable:not(.is-expanded) .todo textarea {
+    cursor: pointer;
+  }
+
   &.just-added .main {
     background-color: darken($dark-background, 50);
 
     .checker label {
-      @include icons-sprite(todo-green);
+      @include icons-sprite(call-green);
     }
 
     .todo textarea,
     .todo .mentions,
-    .todo .mentions a {
+    .todo .mentions a,
+    .contact-picker input {
       color: $bright;
     }
 
@@ -65,6 +71,8 @@
   }
 
   .checker {
+    margin-top: 6px;
+
     label {
       @include icons-sprite(call-muted);
     }
@@ -80,21 +88,17 @@
     }
   }
 
+  .contact-picker {
+    float: left;
+
+    input {
+      width: 180px;
+    }
+  }
+
   .todo {
-    margin-left: 40px;
-    margin-right: 160px;
-
-    &.is-valid {
-      color: black;
-    }
-
-    &.is-invalid {
-      outline: solid 1px red;
-    }
-
-    &[disabled] {
-      cursor: default;
-    }
+    margin-left: 270px;
+    margin-right: 170px;
   }
 
   .options {

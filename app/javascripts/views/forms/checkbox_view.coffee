@@ -1,8 +1,5 @@
 Radium.FormsCheckboxView = Ember.View.extend
   checkedBinding: 'controller.isFinished'
-  disabled: (->
-    @get('controller.isDisabled') || @get('controller.isNew')
-  ).property('controller.isDisabled', 'controller.isNew')
 
   click: (event) ->
     event.stopPropagation()

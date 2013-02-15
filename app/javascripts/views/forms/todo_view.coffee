@@ -6,9 +6,11 @@ require 'views/forms/date_picker_view'
 Radium.FormsTodoView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend
     checkedBinding: 'controller.isFinished'
+    disabledBinding: 'controller.canFinish'
 
   todoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.description'
+    disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: (->
       if @get('referenceName')
         "Add a todo about #{@get('referenceName')} for #{@get('date').toHumanFormat()}"

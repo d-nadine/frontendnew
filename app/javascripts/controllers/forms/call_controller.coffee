@@ -4,3 +4,7 @@ Radium.FormsCallController = Radium.FormsTodoController.extend
   showCallBox: (->
     @get('reference') && @get('isEditable') && !@get('isFinished')
   ).property('reference', 'isEditable', 'isFinished')
+
+  contacts: (->
+    Radium.Contact.all()
+  ).property()

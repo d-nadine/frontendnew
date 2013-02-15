@@ -2,6 +2,25 @@
   <div {{bindAttr class="isFinished :main"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
+    {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
+
+    {{#if showCallBox}}
+      <div class="btn-group call-control-box pull-right">
+        <button class="btn btn-success">
+          <i class="icons-call-white"></i>
+        </button>
+        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">138213947834</a></li>
+          <li><a href="#">329841932847</a></li>
+          <li><a href="#">132948738873</a></li>
+          <li><a href="#">Other Number</a></li>
+        </ul>
+      </div>
+    {{/if}}
+
     {{#if showOptions}}
       <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
         {{#if isExpanded}}
@@ -20,22 +39,6 @@
       <span class="success pull-right">Call Added</span>
     {{/if}}
 
-    {{#if showCallBox}}
-      <div class="btn-group call-control-box pull-right">
-        <button class="btn btn-success">
-          <i class="icons-call-white"></i>
-        </button>
-        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">138213947834</a></li>
-          <li><a href="#">329841932847</a></li>
-          <li><a href="#">132948738873</a></li>
-          <li><a href="#">Other Number</a></li>
-        </ul>
-      </div>
-    {{/if}}
 
     {{view view.todoField classNames="field field-blend-in"}}
   </div>

@@ -31,14 +31,15 @@
     border-radius: 0px;
   }
 
-  &.field-blend-in {
-    textarea {
-      background-color: transparent;
-      border-color: transparent;
+  &.field-blend-in textarea {
+    background-color: transparent;
+    border-color: transparent;
+  }
 
-      &[disabled], &[readonly] {
-        color: $light-text;
-      }
+  &.field {
+    textarea[disabled], textarea[readonly] {
+      color: $light-text;
+      cursor: default;
     }
   }
 }
