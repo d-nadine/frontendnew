@@ -4,6 +4,13 @@
   background-color: white;
   padding: 0px 2px;
 
+  &.is-disabled,
+  &.is-readonly,
+  input[disabled],
+  input[readonly] {
+    cursor: default;
+  }
+
   &.is-invalid .text {
     color: red;
   }

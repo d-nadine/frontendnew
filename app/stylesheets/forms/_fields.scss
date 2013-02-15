@@ -49,6 +49,6 @@ input[type="color"].field,
   &.is-readonly,
   &[disabled],
   &[readonly] {
-    cursor: not-allowed;
+    cursor: default;
   }
 }

@@ -86,8 +86,8 @@ form .dropdown-menu {
   &.is-expandable .todo.is-disabled,
   &.is-expandable .todo textarea,
   &.is-expandable .todo textarea[disabled],
-  &.is-expandable:not(.is-editable),
-  &.is-expandable:not(.is-expanded) {
+  &.is-expandable:not(.is-editable) .todo textarea,
+  &.is-expandable:not(.is-expanded) .todo textarea {
     cursor: pointer;
   }
 
