@@ -16,6 +16,10 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
     !@get('isNew') && !@get('isFinished')
   ).property('isNew', 'isFinished')
 
+  isExpandableDidChange: (->
+    if !@get('isExpandable') then @set('isExpanded', false)
+  ).observes('isExpandable')
+
   isDisabled: (->
     @get('content.isEditable') is false
   ).property('isEditable')

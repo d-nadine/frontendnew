@@ -77,6 +77,31 @@ form .dropdown-menu {
     }
   }
 
+  &.is-expandable .main {
+    cursor: pointer
+  }
+
+  // style the todo's pointer
+  &.is-expandable .todo,
+  &.is-expandable .todo.is-disabled,
+  &.is-expandable .todo textarea,
+  &.is-expandable .todo textarea[disabled],
+  &.is-expandable:not(.is-editable),
+  &.is-expandable:not(.is-expanded) {
+    cursor: pointer;
+  }
+
+  &.is-expanded.is-editable .todo,
+  &.is-expanded.is-editable .todo textarea {
+    cursor: text;
+  }
+
+  &:not(.is-expandable) .todo,
+  &:not(.is-expandable) .todo textarea,
+  &:not(.is-expandable) .todo textarea[disabled] {
+    cursor: default;
+  }
+
   &.is-call {
     .checker {
       label {
@@ -93,11 +118,6 @@ form .dropdown-menu {
         @include icons-sprite(call-muted);
       }
     }
-  }
-
-  &.is-expandable .main, 
-  &.is-expandable .todo[disabled] {
-    cursor: pointer;
   }
 
   .btn-link:hover {

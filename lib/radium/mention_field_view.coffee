@@ -1,5 +1,5 @@
 Radium.MentionFieldView = Ember.View.extend
-  classNames: ['mention-field-view']
+  classNameBindings: ['disabled:is-disabled', ':mention-field-view']
 
   template: Ember.Handlebars.compile """
     {{view view.textArea}}
