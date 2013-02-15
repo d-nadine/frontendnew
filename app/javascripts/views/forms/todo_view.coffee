@@ -161,9 +161,10 @@ Radium.FormsTodoView = Ember.View.extend
 
   userPicker: Ember.View.extend
     classNameBindings: [
-      'user:is-valid', 
-      'isInvalid',
-      ':control-box',
+      'user:is-valid'
+      'isInvalid'
+      'disabled:is-disabled'
+      ':control-box'
       ':datepicker-control-box'
     ]
 
@@ -193,16 +194,19 @@ Radium.FormsTodoView = Ember.View.extend
       </span>
 
       {{view view.textField}}
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-chevron-down"></i>
-        </button>
-        <ul class="dropdown-menu">
-          {{#each users}}
-            <li><a {{action setName this.name target=view href=true}}>{{name}}</a></li>
-          {{/each}}
-        </ul>
-      </div>
+
+      {{#unless view.disabled}}
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu">
+            {{#each users}}
+              <li><a {{action setName this.name target=view href=true}}>{{name}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/unless}}
     """
 
     setName: (name) ->
