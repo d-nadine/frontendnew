@@ -5,13 +5,17 @@
   height: 20px;
 
   label {
-    cursor: pointer;
     position: absolute;
     width: 30px;
     height: 20px;
     top: 0;
     left: 0;
     @include icons-sprite(todo-muted);
+    cursor: default;
+  }
+
+  input:not([disabled]) + label:hover {
+    cursor: pointer;
   }
 
   input:not([disabled]):not(:checked) + label:hover {

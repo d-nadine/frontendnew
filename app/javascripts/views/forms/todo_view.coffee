@@ -1,6 +1,9 @@
 Radium.FormsTodoView = Ember.View.extend
   checkbox: Ember.View.extend
-    disabled: Ember.computed.alias('controller.isDisabled')
+    disabled: (->
+      @get('controller.isDisabled') || @get('controller.isNew')
+    ).property('controller.isDisabled', 'controller.isNew')
+
     click: (event) ->
       event.stopPropagation()
 
