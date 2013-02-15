@@ -56,11 +56,11 @@
     box-shadow: none;
   }
 
-  .btn-group {
-    .btn i, .dropdown-menu i  {
-      opacity: 0.5;
-    }
+  i {
+    opacity: 0.5;
+  }
 
+  .btn-group {
     .dropdown-menu {
       width: 100%;
     }

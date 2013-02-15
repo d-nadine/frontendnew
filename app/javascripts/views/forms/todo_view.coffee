@@ -61,9 +61,10 @@ Radium.FormsTodoView = Ember.View.extend
 
   datePicker: Ember.View.extend
     classNameBindings: [
-      'date:is-valid', 
+      'date:is-valid'
+      'disabled:is-disabled'
       'isInvalid'
-      ':control-box',
+      ':control-box'
       ':datepicker-control-box'
     ]
 
@@ -93,6 +94,8 @@ Radium.FormsTodoView = Ember.View.extend
     ).property()
 
     didInsertElement: ->
+      return if @$('.datepicker-link').length is 0
+
       @$('.datepicker-link').datepicker()
 
       view = this
@@ -111,23 +114,27 @@ Radium.FormsTodoView = Ember.View.extend
         @hide()
 
     template: Ember.Handlebars.compile """
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-calendar"></i>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a {{action setDate 'today' target=view}}>Today</a></li>
-          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
-          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
-          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
-          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
-          <li>
-            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
-              <i class="icon-calendar"></i>Pick a Date
-            </a>
-          </li>
-        </ul>
-      </div>
+      {{#if view.disabled}}
+        <i class="icon-calendar"></i>
+      {{else}}
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-calendar"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a {{action setDate 'today' target=view}}>Today</a></li>
+            <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+            <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+            <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+            <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+            <li>
+              <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+                <i class="icon-calendar"></i>Pick a Date
+              </a>
+            </li>
+          </ul>
+        </div>
+      {{/if}}
       <span class="text">Due</span>
       {{view view.humanTextField}}
     """

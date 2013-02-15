@@ -1,4 +1,8 @@
 .datepicker-control-box {
+  &.is-disabled > i { 
+    margin-left: 12px;
+  }
+
   .btn {
     padding-right: 0px;
   }
