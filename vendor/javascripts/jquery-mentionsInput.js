@@ -108,8 +108,52 @@
       elmMentionsOverlay.prependTo(elmWrapperBox);
     }
 
+    function checkForMatches(syntaxMessage){
+      var re = /@(\w+)(\s+){1}(\w+)?/g,
+          matches = syntaxMessage.match(re);
+
+      if(!matches || !matches.length){
+        return;
+      }
+
+      var matchesLength = matches.length;
+
+      for(var i = 0; i < matchesLength; i++){
+        var match = matches[i],
+            current = match.substr(1, match.length);
+
+        if(mentionsCollection.find(function(item){ return item.value == current; })){
+          continue;
+        }
+
+        settings.onDataRequest.call(this, 'search', current, function (responseData) {
+          if((!responseData) || (!responseData.length)){
+            return;
+          }
+
+          exact = responseData.find(function(item){ return item.name == current; });
+
+          if(!exact){
+            return;
+          }
+
+          addMention({
+                  avatar: exact.avatar,
+                  id: exact.id,
+                  name: exact.name,
+                  type: exact.type,
+                  value: exact.name,
+                });
+
+          hideAutoComplete();
+        });
+      }
+    }
+
     function updateValues() {
       var syntaxMessage = getInputBoxValue();
+
+      _.defer(_.bind(checkForMatches, this, syntaxMessage));
 
       _.each(mentionsCollection, function (mention) {
         var textSyntax = settings.templates.mentionItemSyntax(mention);
