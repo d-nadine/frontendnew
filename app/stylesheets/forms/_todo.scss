@@ -119,17 +119,17 @@ form .dropdown-menu {
   &.is-call {
     .checker {
       label {
-        // @include icons-sprite(call-muted);
+        @include icons-sprite(call-muted);
       }
 
       input:not([disabled]) + label:hover {
-        // @include icons-sprite(call-green);
+        @include icons-sprite(call-green);
       }
     }
 
     .is-finished .checker {
       label {
-        // @include icons-sprite(call-muted);
+        @include icons-sprite(call-muted);
       }
     }
   }
@@ -155,7 +155,7 @@ form .dropdown-menu {
 
   .is-finished .checker {
     label {
-      // @include icons-sprite(todo-muted);
+      @include icons-sprite(todo-muted);
     }
   }
 
