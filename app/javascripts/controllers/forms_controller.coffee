@@ -44,6 +44,17 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       isEditable: false
   ).property()
 
+  justAddedTodo: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'todo'
+        isFinished: false
+        finishBy: Ember.DateTime.create()
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: true
+      justAdded: true
+  ).property()
+
   callTodo: (->
     Radium.Todo.createRecord
       kind: 'call'

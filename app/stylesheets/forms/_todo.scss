@@ -77,6 +77,25 @@ form .dropdown-menu {
     }
   }
 
+  &.just-added .main {
+    background-color: darken($dark-background, 50);
+
+    .checker label {
+      @include icons-sprite(todo-green);
+    }
+
+    .todo textarea,
+    .todo .mentions,
+    .todo .mentions a {
+      color: $bright;
+    }
+
+    .success {
+      color: $success-green;
+      margin-top: 4px;
+    }
+  }
+
   &.is-expandable .main {
     cursor: pointer
   }
