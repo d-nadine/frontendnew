@@ -1,0 +1,44 @@
+.mention-field-view {
+  &.inline {
+    display: inline-block;
+  }
+
+  .mentions-input-box {
+    position: relative;
+  }
+
+  .mentions {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #555;
+    padding: 4px 6px;
+
+    a, a:active, a:hover {
+      font-weight: normal;
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    text-shadow: none;
+    resize: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+
+  &.field-blend-in {
+    textarea {
+      background-color: transparent;
+      border-color: transparent;
+
+      &[disabled], &[readonly] {
+        color: $light-text;
+      }
+    }
+  }
+}

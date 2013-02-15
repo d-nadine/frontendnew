@@ -1,20 +1,4 @@
 Radium.FormsTodoView = Ember.View.extend
-
-  didInsertElement: ->
-    @$(window).on 'resize', @get('windowDidResize')
-    @resizeTodoBox()
-
-  willDestroyElement: ->
-    @$(window).off 'resize', @get('windowDidResize')
-
-  resizeTodoBox: ->
-    newWidth = @$('.main').width() - @$('.checker').width() - @$('.main .btn-link').width() - @$('.call-control-box').width() - 70
-    @$('.todo').width(newWidth)
-
-  windowDidResize: (->
-    $.proxy @resizeTodoBox, this
-  ).property()
-
   checkbox: Ember.View.extend
     disabled: Ember.computed.alias('controller.isDisabled')
     click: (event) ->
@@ -39,7 +23,7 @@ Radium.FormsTodoView = Ember.View.extend
       <label for="{{unbound view.checkBoxId}}"></label>
     """
 
-  todoField: Ember.View.extend
+  todoField: Radium.MentionFieldView.extend
     classNameBindings: ['value:is-valid', 'isInvalid', ':todo']
     valueBinding: 'controller.description'
 
@@ -71,38 +55,6 @@ Radium.FormsTodoView = Ember.View.extend
       else
         "Add a todo for #{@get('date').toHumanFormat()}"
     ).property('reference.name')
-
-    template: Ember.Handlebars.compile """
-      {{view view.textArea}}
-    """
-
-    textArea: Ember.TextArea.extend
-      tabindex: 1
-      rows: 1
-      placeHolderBinding: 'parentView.placeholder'
-      disabledBinding: 'parentView.disabled'
-
-      didInsertElement: ->
-        @$().mentionsInput
-          elastic: false
-          onDataRequest:(mode, query, callback) ->
-            data = [
-              { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-              { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-              { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-              { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-              { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-              { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-            ]
-
-            data = _.filter(data, (item) -> item.name.toLowerCase().indexOf(query.toLowerCase()) > -1)
-
-            callback.call(this, data)
-        #@$().autosize()
-
-      willDestroyElement: ->
-        #@$().off('autosize')
-
 
   datePicker: Ember.View.extend
     classNameBindings: [

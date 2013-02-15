@@ -3,11 +3,9 @@
   display: inline-block;
   background-color: white;
   padding: 0px 2px;
-  border: solid 1px $control-border-color;
-  @include transition(border linear 0.2s);
 
-  &.is-invalid {
-    border-color: red;
+  &.is-invalid .text {
+    color: red;
   }
 
   // take the bootstrap add-on but don't bring
@@ -24,10 +22,6 @@
     line-height: 20px;
     text-align: center;
     color: $light-text;
-  }
-
-  &.is-valid {
-    border-color: $valid-input-border;
   }
 
   .add-on {

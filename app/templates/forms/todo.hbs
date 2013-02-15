@@ -1,10 +1,24 @@
 <form {{bindAttr class="isExpandable isEditable isCall :form-inline :todo-form"}}>
   <div {{bindAttr class="isFinished :main"}} {{action expand}}>
-    {{view view.checkbox}}
+    {{view view.checkbox classNames="pull-left"}}
 
-    {{view view.todoField}}
+    {{#if isNew}}
+      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
+        {{#if isExpanded}}
+          Hide
+        {{else}}
+          Options
+        {{/if}}
+      </a>
+    {{else}}
+      {{#if hasComments}}
+        <i class="icon-comment pull-right"></i>
+      {{/if}}
+    {{/if}}
 
-    {{#if showCallBox}}
+    {{view view.todoField classNames="field field-blend-in"}}
+
+    {{#if showCiallBox}}
       <div class="btn-group call-control-box pull-right">
         <button class="btn btn-success">
           <i class="icons-call-white"></i>
@@ -20,26 +34,12 @@
         </ul>
       </div>
     {{/if}}
-
-    {{#if isNew}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
-        {{#if isExpanded}}
-          Hide
-        {{else}}
-          Options
-        {{/if}}
-      </a>
-    {{else}}
-      {{#if hasComments}}
-        <i class="icon-comment"></i>
-      {{/if}}
-    {{/if}}
   </div>
 
   {{#if isExpanded}}
     <div class="options">
-      {{view view.datePicker}}
-      {{view view.userPicker}}
+      {{view view.datePicker class="field"}}
+      {{view view.userPicker class="field"}}
 
       <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
     </div>

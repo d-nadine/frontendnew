@@ -1,0 +1,54 @@
+// Bring in the crazy bootstrap selector
+// to override it
+textarea.field,
+input[type="text"].field,
+input[type="password"].field,
+input[type="datetime"].field,
+input[type="datetime-local"].field,
+input[type="date"].field,
+input[type="month"].field,
+input[type="time"].field,
+input[type="week"].field,
+input[type="number"].field,
+input[type="email"].field,
+input[type="url"].field,
+input[type="search"].field,
+input[type="tel"].field,
+input[type="color"].field,
+.uneditable-input.field,
+.field {
+  box-shadow: none;
+  border: solid 1px $control-border-color;
+  border-radius: 0px;
+  @include transition(border linear 0.2s);
+}
+
+.field {
+  &.is-valid {
+    border-color: $valid-input-border;
+  }
+
+  &.is-invalid {
+    border-color: red;
+  }
+
+  &.field-blend-in {
+    background-color: transparent;
+    border-color: transparent;
+
+    &[disabled], &[readonly] {
+      color: $light-text;
+    }
+
+    &.is-invalid {
+      border-color: red;
+    }
+  }
+
+  &.is-disabled,
+  &.is-readonly,
+  &[disabled],
+  &[readonly] {
+    cursor: not-allowed;
+  }
+}

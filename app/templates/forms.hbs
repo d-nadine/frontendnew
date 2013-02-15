@@ -1,14 +1,216 @@
 <div class="block">
-
-  <h3>Basic Textarea (unstyled)</h3>
-  <div class="mentions-test">
-    {{view Ember.TextArea}}
+  <div class="page-header">
+    <h1>Form Inputs</h1>
   </div>
 
-  <h3>TextArea w/o styling</h3>
-  <div class="mentions-test no-border">
-    {{view Ember.TextArea}}
-  </div>
+  <form class="form-horizontal">
+    <h2>Text Boxes</h2>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field" placeholder="Empty">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field" value="With text already" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field is-valid" placeholder="when valid">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field is-invalid" placeholder="when invalid">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field" value="Disabled" disabled />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field" value="Readonly" readonly />
+      </div>
+    </div>
+
+    <h2>Text Boxes that blend in</h2>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in" placeholder="Empty">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in" value="With text already" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in is-valid" placeholder="when valid">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in is-invalid" placeholder="when invalid">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in" value="Disabled" disabled />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" class="field field-blend-in" value="Readonly" readonly />
+      </div>
+    </div>
+
+    <h2>Control Boxes</h2>
+    <p>Basic control box</p>
+    <div class="control-box field">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      <input type="text" value="2010-05-05" />
+    </div>
+
+    <p>Valid control box</p>
+    <div class="control-box field is-valid">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      <input type="text" value="2010-05-05" />
+    </div>
+
+    <p>Invalid control box</p>
+    <div class="control-box field is-invalid">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      <input type="text" value="2010-05-05" />
+    </div>
+
+    <p>Disabled control box</p>
+    <div class="control-box field is-disabled">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      <input type="text" value="2010-05-05" />
+    </div>
+
+    <p>Readonly control box</p>
+    <div class="control-box field is-readonly">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-calendar"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a {{action setDate 'today' target=view}}>Today</a></li>
+          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
+          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
+          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
+          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
+          <li>
+            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
+              <i class="icon-calendar"></i>Pick a Date
+            </a>
+          </li>
+        </ul>
+      </div>
+      <span class="text">Due</span>
+      <input type="text" value="2010-05-05" />
+    </div>
+
+    <h2>Mentions</h2>
+    <div class="control-group">
+      <label class="control-label">Normal</label>
+      <div class="controls">
+        {{view Radium.MentionFieldView palceholder="Mentions" classNames="field"}}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Blend in</label>
+      <div class="controls">
+        {{view Radium.MentionFieldView palceholder="Mentions" classNames="field field-blend-in"}}
+      </div>
+    </div>
+  </form>
 </div>
 
 <div class="block">
@@ -20,9 +222,9 @@
 
   <h3>Uneditable Todo</h3>
   {{control "forms/todo" uneditableTodo}}
-
 </div>
 
+<!--
 <div class="block">
   <h3>New Call w/o Context</h3>
   {{control "forms/todo" callTodo}}
@@ -33,3 +235,4 @@
   <h3>Existing call</h3>
   {{control "forms/todo" existingCall}}
 </div>
+-->
