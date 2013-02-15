@@ -130,7 +130,6 @@
       mentionText = mentionText.replace(/ {2}/g, '&nbsp; ');
 
       // FIXME: Hacky, use beter replace above in each loop
-      console.log(mentionText);
       mentionText = mentionText.replace(/@<a[^>]+>/g, '<a>');
 
       elmInputBox.data('messageText', syntaxMessage);
