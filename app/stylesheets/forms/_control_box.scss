@@ -37,6 +37,10 @@
 
   .btn-group {
     position: static;
+
+    .dropdown-toggle:focus, .dropdown-toggle:active {
+      outline: none;
+    }
   }
 
   // everything that could possibly have
