@@ -101,3 +101,12 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       isEditable: true
       justAdded: true
   ).property()
+
+  source: (->
+    Ember.A([
+      Ember.Object.create(name: "Adam")
+      Ember.Object.create(name: "Paul")
+      Ember.Object.create(name: "Sami")
+      Ember.Object.create(name: "Riikka")
+    ])
+  ).property()
