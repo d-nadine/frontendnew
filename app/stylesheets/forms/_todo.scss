@@ -10,9 +10,9 @@
     color: #555;
     padding: 4px 6px;
 
-    strong {
+    a, a:active, a:hover {
       font-weight: normal;
-      resize: none;
+      text-decoration: none;
       color: $blue;
     }
   }
@@ -21,6 +21,7 @@
     box-sizing: border-box;
     width: 100%;
     text-shadow: none;
+    resize: none;
   }
 
   &.no-border {
