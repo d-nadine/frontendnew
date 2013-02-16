@@ -1,4 +1,4 @@
-Radium.FormsUserPickerView = Ember.View.extend
+Radium.UserPicker = Ember.View.extend
   classNameBindings: [
     'user:is-valid'
     'isInvalid'

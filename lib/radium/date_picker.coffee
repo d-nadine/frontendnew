@@ -1,4 +1,4 @@
-Radium.FormsDatePickerView = Ember.View.extend
+Radium.DatePicker = Ember.View.extend
   classNameBindings: [
     'date:is-valid'
     'disabled:is-disabled'

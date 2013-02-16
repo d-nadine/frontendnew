@@ -1,6 +1,4 @@
-Radium.FormsCheckboxView = Ember.View.extend
-  checkedBinding: 'controller.isFinished'
-
+Radium.Checkbox = Ember.View.extend
   click: (event) ->
     event.stopPropagation()
 

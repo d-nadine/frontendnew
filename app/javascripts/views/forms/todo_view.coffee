@@ -1,10 +1,10 @@
-require 'views/forms/checkbox_view'
+require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
-require 'views/forms/user_picker_view'
-require 'views/forms/date_picker_view'
+require 'lib/radium/user_picker'
+require 'lib/radium/date_picker'
 
 Radium.FormsTodoView = Ember.View.extend
-  checkbox: Radium.FormsCheckboxView.extend
+  checkbox: Radium.Checkbox.extend
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'
 
@@ -18,10 +18,10 @@ Radium.FormsTodoView = Ember.View.extend
         "Add a todo for #{@get('date').toHumanFormat()}"
     ).property('reference.name')
 
-  datePicker: Radium.FormsDatePickerView.extend
+  datePicker: Radium.DatePicker.extend
     dateBinding: 'controller.finishBy'
 
-  userPicker: Radium.FormsUserPickerView.extend()
+  userPicker: Radium.UserPicker.extend()
 
   submit: ->
     return unless @get('controller.isValid')
