@@ -7,6 +7,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin, Radium.NextTaskMixi
   status: DS.attr('string')
   source: DS.attr('string')
 
+  phoneNumbers: DS.attr('array')
+
   avatar: DS.attr('object')
 
   todos: DS.hasMany('Radium.Todo')

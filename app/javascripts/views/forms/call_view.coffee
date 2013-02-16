@@ -23,18 +23,20 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
       event.preventDefault()
       event.stopPropagation()
 
+    toggleDropdown: (event) ->
+      @$().toggleClass 'open'
+
     template: Ember.Handlebars.compile """
-      <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}}>
+      <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall}}>
         <i class="icons-call-white"></i>
       </button>
-      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" {{bindAttr tabindex="view.dropDownTabIndex"}}>
+      <button class="btn btn-success dropdown-toggle data-toggle="dropdown" {{action toggleDropdown target=view}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href="#">138213947834</a></li>
-        <li><a href="#">329841932847</a></li>
-        <li><a href="#">132948738873</a></li>
-        <li><a href="#">Other Number</a></li>
+        {{#each view.contact.phoneNumbers}}
+          <li><a href="#">{{name}}: {{number}}</a></li>
+        {{/each}}
       </ul>
     """
 
