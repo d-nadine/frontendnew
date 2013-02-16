@@ -1,5 +1,5 @@
-<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :todo-form"}}>
-  <div {{bindAttr class="isFinished :main"}} {{action expand}}>
+<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form"}}>
+  <div {{bindAttr class="isFinished :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if showOptions}}
@@ -17,14 +17,14 @@
     {{/if}}
 
     {{#if showSuccess}}
-      <span class="success pull-right">Todo added</span>
+      <span class="success-message pull-right">Todo added</span>
     {{/if}}
 
     {{view view.todoField classNames="field field-blend-in"}}
   </div>
 
   {{#if isExpanded}}
-    <div class="options">
+    <div class="secondary">
       {{view view.datePicker class="field"}}
       {{view view.userPicker class="field"}}
 

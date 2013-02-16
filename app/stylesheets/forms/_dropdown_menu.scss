@@ -1,0 +1,20 @@
+.form .dropdown-menu {
+  padding: 0;
+  border-radius: 0px;
+  border: solid 1px $control-border-color;
+
+  li {
+    border-bottom: solid 1px $control-border-color;
+
+    a:hover {
+      cursor: pointer;
+      background-color: $selected-item;
+      background-image: none;
+      color: inherit;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

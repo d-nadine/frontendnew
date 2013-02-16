@@ -114,6 +114,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   discussion: (->
     Ember.Object.create
       user: @get('currentUser')
+      isNew: true
   ).property()
 
   justAddedDiscussion: (->

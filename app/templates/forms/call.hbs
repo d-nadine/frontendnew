@@ -1,5 +1,5 @@
-<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :call-form"}}>
-  <div {{bindAttr class="isFinished :main"}} {{action expand}}>
+<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form :form-inline :call-form"}}>
+  <div {{bindAttr class="isFinished :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
@@ -23,7 +23,7 @@
     {{/if}}
 
     {{#if showSuccess}}
-      <span class="success pull-right">Call Added</span>
+      <span class="success-message pull-right">Call Added</span>
     {{/if}}
 
 
@@ -31,7 +31,7 @@
   </div>
 
   {{#if isExpanded}}
-    <div class="options">
+    <div class="secondary">
       {{view view.datePicker class="field"}}
       {{view view.userPicker class="field"}}
 

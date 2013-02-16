@@ -4,7 +4,8 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend
   ).property('justAdded')
 
   showSaveButton: (->
-    @get('justAdded') is false
+    return false if @get('justAdded') is false
+    @get 'isNew'
   ).property('justAdded')
 
   showSuccessMessage: (->
