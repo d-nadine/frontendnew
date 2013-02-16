@@ -1,3 +1,6 @@
 Radium.DealRoute = Ember.Route.extend
   renderTemplate: ->
-    @render 'unimplemented'
+    @render()
+    @render 'deal/sidebar'
+      into: 'deal'
+      outlet: 'sidebar'

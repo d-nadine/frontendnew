@@ -1,3 +1,7 @@
 Radium.UserRoute = Ember.Route.extend
   renderTemplate: ->
-    @render 'unimplemented'
+    @render()
+    @render 'user/sidebar'
+      into: 'user'
+      outlet: 'sidebar'
+
