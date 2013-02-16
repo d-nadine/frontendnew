@@ -1,0 +1,35 @@
+<div class="form-box">
+  <div class="icon-switcher">
+    {{#if todosAllowed}}
+      <a {{action showForm "todo"}} {{bindAttr class="showTodoForm:active :todo"}} href="#">
+        <i class="icons-todo-muted"></i>
+      </a>
+    {{/if}}
+
+    {{#if callsAllowed}}
+      <a {{action showForm "call"}} {{bindAttr class="showCallForm:active :call"}} href="#">
+        <i class="icons-call-muted"></i>
+      </a>
+    {{/if}}
+
+    {{#if discussionsAllowed}}
+    <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active :discussion"}} href="#">
+        <i class="icons-discussion-muted"></i>
+      </a>
+    {{/if}}
+  </div>
+
+  <div class="form-container">
+    {{#if showTodoForm}}
+      {{control "forms/todo" todo}}
+    {{/if}}
+
+    {{#if showCallForm}}
+      {{control "forms/call" call}}
+    {{/if}}
+
+    {{#if showDiscussionForm}}
+      {{control "forms/discussion" discussion}}
+    {{/if}}
+  </div>
+</div>

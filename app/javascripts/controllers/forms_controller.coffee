@@ -123,3 +123,14 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       text: "Big long text from the discussion"
       justAdded: true
   ).property()
+
+  formBox: (->
+    Ember.Object.create
+      activeForm: 'todo'
+      todosAllowed: true
+      callsAllowed: true
+      discussionsAllowed: true
+      todo: @get('newTodo')
+      call: @get('newCall')
+      discussion: @get('discussion')
+  ).property()

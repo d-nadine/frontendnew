@@ -1,5 +1,9 @@
 Radium.computed = {}
 
+Radium.computed.equal = (dependentKey, value) ->
+  Ember.computed dependentKey, (key) ->
+    @get(dependentKey) == value
+
 Radium.computed.isToday = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     @get(dependentKey).isToday()

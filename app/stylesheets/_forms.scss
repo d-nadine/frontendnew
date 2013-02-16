@@ -28,6 +28,40 @@
   }
 }
 
+.form-box {
+  .form-container {
+    margin-right: 130px;
+  }
+
+  .icon-switcher {
+    width: 100px;
+    float: right;
+    margin-top: 16px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  a.todo.active, a.todo:hover {
+    i {
+      @include icons-sprite(todo-black)
+    }
+  }
+
+  a.call.active, a.call:hover {
+    i {
+      @include icons-sprite(call-black)
+    }
+  }
+
+  a.discussion.active, a.discussion:hover {
+    i {
+      @include icons-sprite(discussion-black)
+    }
+  }
+}
+
 ::-webkit-input-placeholder {
   font-style: italic;
 }
