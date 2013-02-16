@@ -1,0 +1,9 @@
+.btn.btn-flat {
+  border-radius: 0px;
+  border: none;
+  text-shadow: none;
+
+  &:hover {
+    @include transition(none)
+  }
+}

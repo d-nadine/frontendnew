@@ -110,3 +110,15 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       Ember.Object.create(name: "Riikka")
     ])
   ).property()
+
+  discussion: (->
+    Ember.Object.create
+      user: @get('currentUser')
+  ).property()
+
+  justAddedDiscussion: (->
+    Ember.Object.create
+      user: @get('currentUser')
+      text: "Big long text from the discussion"
+      justAdded: true
+  ).property()

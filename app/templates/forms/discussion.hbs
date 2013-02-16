@@ -1,0 +1,20 @@
+<form {{bindAttr class="isEditable justAdded :discussion-form"}}>
+  <div class="primary">
+    <i class="icons-discussion-muted"></i>
+
+    {{#if showSuccess}}
+      <span class="succes">Discussion Added</span>
+    {{/if}}
+
+    {{view view.textbox classNames="textbox field field-blend-in"}}
+  </div>
+  <div class="secondary">
+    {{#if showSaveButton}}
+      <button {{action submit}} class="btn btn-inverse btn-flat pull-right">Save</button>
+    {{/if}}
+
+    {{#if showSuccessMessage}}
+      <span class="success pull-right">Discussion Saved</span>
+    {{/if}}
+  </div>
+</form>
