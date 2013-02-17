@@ -5,6 +5,11 @@ Radium.FormsCallController = Radium.FormsTodoController.extend
     @get('reference') && @get('isEditable') && !@get('isFinished')
   ).property('reference', 'isEditable', 'isFinished')
 
+  isContactPickerDisabled: (->
+    return true if @get('canChangeContact') is false
+    return @get('isPrimaryInputDisabled')
+  ).property('isPrimaryInputDisabled', 'canChangeContact')
+
   contacts: (->
     Radium.Contact.all()
   ).property()
