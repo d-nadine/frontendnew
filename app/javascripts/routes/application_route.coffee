@@ -8,8 +8,9 @@ Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
   setupController: ->
     @controllerFor('currentUser').set 'model', Radium.User.find(1)
     @controllerFor('users').set 'model', Radium.User.find()
-    settings = Radium.Settings.find(1)
+    @controllerFor('clock').set 'model', Ember.DateTime.create()
 
+    settings = Radium.Settings.find(1)
     @controllerFor('settings').set 'model', settings
 
   renderTemplate: ->
