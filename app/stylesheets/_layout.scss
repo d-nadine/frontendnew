@@ -56,6 +56,11 @@ $button-bar-width: 40px;
   }
 }
 
+.two-column #main-panel {
+  margin-left: 340px;
+  margin-right: 60px;
+}
+
 #drawer-buttons {
   position: fixed;
   z-index: 1000; // FIXME: this shouldn't be required
