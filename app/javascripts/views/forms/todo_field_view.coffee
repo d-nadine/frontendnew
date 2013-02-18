@@ -9,5 +9,3 @@ Radium.FormsTodoFieldView = Radium.MentionFieldView.extend
   ).property('value', 'isSubmitted')
 
   referenceName: Ember.computed.alias('controller.reference.name')
-
-  disabled: Ember.computed.alias('controller.isPrimaryInputDisabled')

@@ -7,7 +7,7 @@ Radium.FormsCallController = Radium.FormsTodoController.extend
 
   isContactPickerDisabled: (->
     return true if @get('canChangeContact') is false
-    return @get('isPrimaryInputDisabled')
+    @get('isPrimaryInputDisabled')
   ).property('isPrimaryInputDisabled', 'canChangeContact')
 
   contacts: (->

@@ -9,14 +9,12 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   editableTodo: (->
     Radium.TodoForm.create
-      isEditable: true
       content: Factory.create 'todo'
         reference: Factory.create('contact')
   ).property()
 
   editableFinishedTodo: (->
     Radium.TodoForm.create
-      isEditable: true
       content: Factory.create 'todo'
         isFinished: true
   ).property()
