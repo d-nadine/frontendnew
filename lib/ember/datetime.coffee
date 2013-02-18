@@ -1,4 +1,7 @@
 Ember.DateTime.reopen
+  toMeridianTime: ->
+    @toFormattedString('%i:%M %p')
+
   toDateFormat: ->
     @toFormattedString('%Y-%m-%d')
 

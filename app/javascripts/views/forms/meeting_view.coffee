@@ -16,4 +16,5 @@ Radium.FormsMeetingView = Ember.View.extend
 
   startsAt: Radium.TimePickerView.extend()
 
-  endsAt: Radium.TimePickerView.extend()
+  endsAt: Radium.TimePickerView.extend
+    dateBinding: 'controller.endsAt'
