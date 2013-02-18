@@ -23,7 +23,10 @@
   }
 
   &.is-expandable:not(.is-editable) .todo textarea,
-  &.is-expandable:not(.is-expanded) .todo textarea {
+  &.is-expandable:not(.is-expanded) .todo textarea,
+  &.is-expandable:not(.is-editable) .contact-picker input,
+  &.is-expandable:not(.is-expanded) .contact-picker input,
+  {
     cursor: pointer;
   }
 

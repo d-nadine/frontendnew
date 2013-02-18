@@ -31,7 +31,7 @@ Radium.Combobox = Ember.View.extend
 
     {{#unless view.disabled}}
       <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <button class="btn dropdown-toggle" {{action toggleDropdown target=view}}>
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
