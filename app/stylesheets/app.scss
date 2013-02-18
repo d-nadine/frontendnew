@@ -35,3 +35,11 @@
 #unimplemented{
   text-align: center;
 }
+
+// Twitter bootstrap does handle this correctly
+// it uses border size and turns it off. This 
+// may behave weirdly when turning borders/outlines
+// on off
+.btn-link {
+  border-width: 0px;
+}
