@@ -4,6 +4,7 @@ Factory.define 'todo', traits: 'timestamps',
   description: Factory.sequence (i) -> "Todo #{i}"
   finishBy: Ember.DateTime.create().advance(days: 7)
   finished: false
+  user: -> Factory.create 'user'
 
 Factory.define 'call', traits: 'timestamps',
   kind: 'call'

@@ -11,7 +11,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     Radium.TodoForm.create
       isEditable: true
       content: Factory.create 'todo'
-        user: @get('currentUser')
         reference: Factory.create('contact')
   ).property()
 
@@ -46,7 +45,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     Radium.CallForm.create
       content: Radium.Todo.createRecord
         finishBy: Ember.DateTime.create()
-        user: @get('currentUser')
       isNew: true
   ).property()
 
