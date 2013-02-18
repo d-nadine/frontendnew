@@ -1,6 +1,3 @@
-Radium.CallForm = Ember.Object.extend
+Radium.CallForm = Ember.ObjectProxy.extend
   isEditable: true
-  chanChangeContact: true
-
-  isFinished: false
-  finishBy: Ember.DateTime.create().advance(day: 1)
+  canChangeContact: true

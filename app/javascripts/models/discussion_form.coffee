@@ -1,1 +1,1 @@
-Radium.DiscussionForm = Ember.Object.extend()
+Radium.DiscussionForm = Ember.ObjectProxy.extend()

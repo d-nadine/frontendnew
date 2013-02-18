@@ -23,6 +23,24 @@ Radium.TaskListItemController = Ember.ObjectController.extend
     @get 'isCall'
   ).property('model')
 
+  todoForm: (->
+    Radium.TodoForm.create
+      isEditable: true
+      content: @get('model')
+  ).property('model')
+
+  callForm: (->
+    Radium.CallForm.create
+      isEditable: true
+      content: @get('model')
+  ).property('model')
+
+  meetingForm: (->
+    Radium.MeetingForm.create
+      isEditable: true
+      content: @get('model')
+  ).property('model')
+
 Radium.TaskListController = Ember.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,
   needs: 'clock'
   clock: Ember.computed.alias('controllers.clock')

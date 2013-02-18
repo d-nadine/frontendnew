@@ -1,4 +1,2 @@
-Radium.TodoForm = Ember.Object.extend
+Radium.TodoForm = Ember.ObjectProxy.extend
   isEditable: true
-  isFinished: false
-  finishBy: Ember.DateTime.create().advance(day: 1)
