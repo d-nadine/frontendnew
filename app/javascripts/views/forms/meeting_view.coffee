@@ -7,10 +7,11 @@ Radium.FormsMeetingView = Ember.View.extend
     valueBinding: 'controller.topic'
 
   topicField: Radium.MentionFieldView.extend
-    classNameBindings: [':meeting']
+    classNames: ['meeting']
     placeholder: 'Add meeting topic'
 
   datePicker: Radium.FormsDatePickerView.extend
+    classNames: ['starts-at']
     dateBinding: 'controller.startsAt'
     leader: 'When:'
 

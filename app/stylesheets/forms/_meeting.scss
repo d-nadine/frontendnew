@@ -57,5 +57,11 @@
     padding: 18px;
     width: 95%;
     margin: 0 auto;
+
+    .starts-at{
+      input[type=text]{
+        width: 90px;
+      }
+    }
   }
 }
