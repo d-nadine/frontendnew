@@ -1,2 +1,12 @@
+{{#if view.disabled}}
+  <i class="icon-time"></i>
+{{else}}
+  <div class="btn-group">
+    <a class="btn" href="#" {{action showTimes target="view"}}>
+      <i class="icon-time"></i>
+    </a>
+  </div>
+{{/if}}
+<span class="text">{{view.leader}}</span>
 {{view view.timeField}}
-<span class="add-on"><i class="icon-time"></i></span>
+

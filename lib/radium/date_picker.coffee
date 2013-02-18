@@ -21,6 +21,7 @@ Radium.DatePicker = Ember.View.extend
 
   textToDateTransform: ((key, value) ->
     if arguments.length == 2
+      # FIXME: needs to parse all dates from dropdown
       if value && /\d{4}-\d{2}-\d{2}/.test(value)
         @set 'date', Ember.DateTime.parse(value, '%Y-%m-%d')
       else

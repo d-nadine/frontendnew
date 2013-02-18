@@ -1,8 +1,22 @@
 Radium.TimePickerView = Ember.View.extend
   templateName: 'forms/time_picker'
-  classNames: ['input-append', 'bootstrap-timepicker']
+  classNameBindings: [
+    'date:is-valid'
+    'disabled:is-disabled'
+    'isInvalid'
+    ':control-box'
+    ':datepicker-control-box'
+    ':field'
+    ':bootstrap-timepicker'
+    ':input-append'
+  ]
 
+  leader: 'Starts at:'
   dateBinding: 'controller.startsAt'
+
+  isValid: ( ->
+    true
+  ).property()
 
   didInsertElement: ->
     element = @$('.timepicker')
@@ -21,3 +35,8 @@ Radium.TimePickerView = Ember.View.extend
 
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
+
+  showTimes: ->
+    @$('.timepicker').timepicker('showWidget')
+
+
