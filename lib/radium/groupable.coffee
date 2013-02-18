@@ -1,5 +1,5 @@
 Radium.Groupable = Em.Mixin.create
-  groupType: Em.Object
+  groupType: Ember.ArrayProxy
 
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     addedObjects = array.slice(idx, idx + addedCount)
@@ -21,9 +21,9 @@ Radium.Groupable = Em.Mixin.create
     @_super.apply(this, arguments)
 
   groupedContent: (->
-    if content = @get 'content'
+    if content = @get 'arrangedContent'
       @group(content)
-  ).property('content')
+  ).property('arrangedContent')
 
   group: (collection) ->
     groupsMap = {}
@@ -33,6 +33,8 @@ Radium.Groupable = Em.Mixin.create
 
     collection.forEach ((object) ->
       group = @groupFor(object)
+      return unless group
+
       group.get("content").pushObject object
     ), this
 
@@ -42,12 +44,14 @@ Radium.Groupable = Em.Mixin.create
     groupsMap = @get 'groupsMap'
     groups    = @get 'groups'
 
-    groupId = @groupBy(object)
-    group = groupsMap[groupId]
+    groupName = @groupBy(object)
+    return unless groupName
+
+    group = groupsMap[groupName]
     unless group
       groupType = @get 'groupType'
-      group = groupType.create content: Ember.A([]), groupId: groupId
-      groupsMap[groupId] = group
+      group = groupType.create content: Ember.A([]), name: groupName
+      groupsMap[groupName] = group
       groups.pushObject group
 
     group
