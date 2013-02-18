@@ -1,4 +1,5 @@
 Radium.DatePicker = Ember.View.extend
+  templateName: 'forms/date_picker'
   classNameBindings: [
     'date:is-valid'
     'disabled:is-disabled'
@@ -6,6 +7,8 @@ Radium.DatePicker = Ember.View.extend
     ':control-box'
     ':datepicker-control-box'
   ]
+
+  leader: 'Due'
 
   dateBinding: 'controller.finishBy'
   textBinding: 'textToDateTransform'
@@ -51,32 +54,6 @@ Radium.DatePicker = Ember.View.extend
     @$('.datepicker-link').data('datepicker').set = ->
       view.set 'text', Ember.DateTime.create(@date.getTime()).toDateFormat()
       @hide()
-
-  template: Ember.Handlebars.compile """
-    {{#if view.disabled}}
-      <i class="icon-calendar"></i>
-    {{else}}
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-calendar"></i>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a {{action setDate 'today' target=view}}>Today</a></li>
-          <li><a {{action setDate 'tomorrow' target=view}}>Tomorrow</a></li>
-          <li><a {{action setDate 'this_week' target=view}}>Later This Week</a></li>
-          <li><a {{action setDate 'next_week' target=view}}>Next Week</a></li>
-          <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
-          <li>
-            <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
-              <i class="icon-calendar"></i>Pick a Date
-            </a>
-          </li>
-        </ul>
-      </div>
-    {{/if}}
-    <span class="text">Due</span>
-    {{view view.humanTextField}}
-  """
 
   setDate: (key) ->
     date = switch key

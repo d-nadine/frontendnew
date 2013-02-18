@@ -22,6 +22,12 @@
 
 
     {{view view.topicField classNames="field field-blend-in"}}
-
   </div>
+  {{#if isExpanded}}
+    <div class="options">
+      {{view view.datePicker class="field"}}
+      {{view view.startsAt}}
+      {{view view.endsAt}}
+    </div>
+  {{/if}}
 </form>

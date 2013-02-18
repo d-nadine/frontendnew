@@ -1,7 +1,5 @@
+require 'views/forms/time_picker_view'
 Radium.FormsMeetingView = Ember.View.extend
-<<<<<<< HEAD
-  templateName: 'unimplemented'
-=======
   checkbox: Radium.FormsCheckboxView.extend()
 
   topicField: Radium.MentionFieldView.extend
@@ -11,4 +9,11 @@ Radium.FormsMeetingView = Ember.View.extend
   topicField: Radium.MentionFieldView.extend
     classNameBindings: [':meeting']
     placeholder: 'Add meeting topic'
->>>>>>> add top level meeting form
+
+  datePicker: Radium.FormsDatePickerView.extend
+    dateBinding: 'controller.startsAt'
+    leader: 'When:'
+
+  startsAt: Radium.TimePickerView.extend()
+
+  endsAt: Radium.TimePickerView.extend()
