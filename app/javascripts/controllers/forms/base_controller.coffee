@@ -1,17 +1,6 @@
-Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.FormsBaseController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
-
-  submit: ->
-    @set 'isSubmitted', true
-
-    Radium.Todo.createRecord
-      user: @get('user')
-      finishBy: @get('finishBy')
-      reference: @get('reference')
-      description: @get('description')
-
-    @set 'isExpanded', false
 
   justAdded: (->
     @get('content.justAdded') == true
@@ -28,7 +17,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
 
   isEditable: (->
     return false if @get('justAdded')
-    @get('content.isEditable') == true
+    @get('content.isEditable') != false
   ).property('content.isEditable')
 
   isExpandable: (->
@@ -40,10 +29,19 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
     if !@get('isExpandable') then @set('isExpanded', false)
   ).observes('isExpandable')
 
-  isDisabled: Ember.computed.not('isEditable')
+  isDisabled: (->
+    return true if @get('justAdded')
+    @get('content.isEditable') is false
+  ).property('isEditable')
 
-  isPrimaryInputDisabled: (->
-    return false if @get('isNew')
-    return true unless @get('isExpanded')
-    @get 'isDisabled'
-  ).property('isDisabled', 'isExpanded', 'isNew')
+  canFinish: (->
+    @get('isDisabled') || @get('isNew')
+  ).property('isDisabled', 'isNew')
+
+  toggleExpanded: -> @toggleProperty 'isExpanded'
+
+  expand: ->
+    return unless @get('isExpandable')
+    @toggleProperty 'isExpanded'
+
+  hasComments: Radium.computed.isPresent('comments')
