@@ -1,6 +1,6 @@
-require 'models/mixins/next_task_mixin'
+Radium.Contact = Radium.Model.extend Radium.FollowableMixin, 
+  Radium.HasTasksMixin,
 
-Radium.Contact = Radium.Model.extend Radium.FollowableMixin, Radium.NextTaskMixin,
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')

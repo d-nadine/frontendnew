@@ -8,3 +8,5 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin, Radium.AttachmentsMix
 
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
+
+  time: Ember.computed.alias('startsAt')

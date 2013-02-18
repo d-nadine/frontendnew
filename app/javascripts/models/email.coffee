@@ -1,4 +1,6 @@
-Radium.Email = DS.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
+Radium.Email = DS.Model.extend Radium.CommentsMixin,
+  Radium.AttachmentsMixin,
+
   subject: DS.attr('string')
   message: DS.attr('string')
   read: DS.attr('boolean')

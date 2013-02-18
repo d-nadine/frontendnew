@@ -1,0 +1,23 @@
+<h2>Tasks</h2>
+
+<div class="task-list">
+  {{#each group in arrangedGroups itemController="taskListGroupItem"}}
+    <h3>{{group.title}}</h3>
+
+    {{#each task in group}}
+      {{#if showTodoForm}}
+        {{control "forms/todo" task}}
+      {{/if}}
+
+      {{#if showCallForm}}
+        {{control "forms/call" task}}
+      {{/if}}
+
+      {{#if showMeetingForm}}
+        {{control "forms/meeting" task}}
+      {{/if}}
+    {{/each}}
+  {{/each}}
+
+  {{template "shared/show_more"}}
+</div>

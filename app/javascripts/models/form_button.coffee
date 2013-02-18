@@ -5,7 +5,6 @@ FormButton = Ember.Object.extend
     new_template = "#{parts[0]}/bulk_#{parts[1]}"
     set 'template', new_template
 
-
 Radium.FormButtons = {
   deleteAll: Ember.Object.create
     action: "deleteAll"

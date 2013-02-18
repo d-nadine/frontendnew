@@ -1,4 +1,6 @@
 Radium.User = Radium.Model.extend Radium.FollowableMixin,
+  Radium.HasTasksMixin,
+
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')

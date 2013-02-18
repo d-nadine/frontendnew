@@ -1,4 +1,6 @@
-Radium.Todo = Radium.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
+Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
+  Radium.AttachmentsMixin,
+
   kind: DS.attr('string')
   description: DS.attr('string')
   finishBy: DS.attr('datetime')
@@ -9,6 +11,8 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin, Radium.AttachmentsMixin,
 
   reference: DS.attr('object')
   user: DS.belongsTo('Radium.User')
+
+  time: Ember.computed.alias('finishBy')
 
   # TODO: replace with a computed alias
   isCall: ( ->

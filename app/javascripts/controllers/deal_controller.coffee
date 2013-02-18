@@ -36,3 +36,7 @@ Radium.DealController = Ember.Controller.extend Radium.CurrentUserMixin,
       reference: @get('model')
       user: @get('currentUser')
   ).property('model')
+
+  tasks: (->
+    Radium.Todo.all()
+  ).property()
