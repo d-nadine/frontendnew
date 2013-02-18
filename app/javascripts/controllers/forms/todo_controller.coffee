@@ -20,7 +20,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
 
   isEditable: (->
     return false if @get('justAdded')
-    @get('content.isEditable') != false
+    @get('content.isEditable') == true
   ).property('content.isEditable')
 
   isExpandable: (->
@@ -32,10 +32,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
     if !@get('isExpandable') then @set('isExpanded', false)
   ).observes('isExpandable')
 
-  isDisabled: (->
-    return true if @get('justAdded')
-    @get('content.isEditable') is false
-  ).property('isEditable')
+  isDisabled: Ember.computed.not('isEditable')
 
   isPrimaryInputDisabled: (->
     return false if @get('isNew')
