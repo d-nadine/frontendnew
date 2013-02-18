@@ -21,7 +21,8 @@ Radium.FormsTodoView = Ember.View.extend
   datePicker: Radium.DatePicker.extend
     dateBinding: 'controller.finishBy'
 
-  userPicker: Radium.UserPicker.extend()
+  userPicker: Radium.UserPicker.extend
+    disabledBinding: 'controller.isDisabled'
 
   submit: ->
     return unless @get('controller.isValid')

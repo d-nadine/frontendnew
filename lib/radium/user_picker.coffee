@@ -1,31 +1,15 @@
-Radium.UserPicker = Ember.View.extend
+require 'lib/radium/combobox'
+
+Radium.UserPicker = Radium.Combobox.extend
   classNameBindings: [
-    'user:is-valid'
-    'isInvalid'
-    'disabled:is-disabled'
-    ':control-box'
-    ':datepicker-control-box'
+    ':user-picker-control-box'
   ]
 
-  disabled: Ember.computed.alias('controller.isDisabled')
-  userBinding: 'controller.user'
-  nameBinding: 'nameToUserTransform'
+  valueBinding: 'controller.user'
+  sourceBinding: 'controller.users'
 
-  isSubmitted: Ember.computed.alias('controller.isSubmitted')
-  isInvalid: (->
-    Ember.isEmpty(@get('value')) && @get('isSubmitted')
-  ).property('value', 'isSubmitted')
-
-  nameToUserTransform: ((key, value) ->
-    if arguments.length == 2
-      result = Radium.User.all().find (user) =>
-        user.get('name') is value
-      @set 'user', result
-    else if !value && @get('user')
-      @get 'user.name'
-    else
-      value
-  ).property()
+  lookupQuery: (query) ->
+    @get('source').find (item) -> item.get('name') == query
 
   template: Ember.Handlebars.compile """
     <span class="text">
@@ -36,28 +20,14 @@ Radium.UserPicker = Ember.View.extend
 
     {{#unless view.disabled}}
       <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <button class="btn dropdown-toggle" {{action toggleDropdown target=view}}>
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
           {{#each users}}
-            <li><a {{action setName this.name target=view href=true}}>{{name}}</a></li>
+            <li><a {{action setValue this target=view href=true}}>{{name}}</a></li>
           {{/each}}
         </ul>
       </div>
     {{/unless}}
   """
-
-  setName: (name) ->
-    @set 'name', name
-
-  textField: Ember.TextField.extend
-    valueBinding: 'parentView.name'
-    disabledBinding: 'parentView.disabled'
-
-    didInsertElement: ->
-      @$().typeahead source: @source
-
-    # FIXME: make this async
-    source: (query, process) ->
-      Radium.User.all().map((c) -> c.get('name')).toArray()

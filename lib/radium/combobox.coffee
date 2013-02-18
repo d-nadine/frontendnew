@@ -42,6 +42,8 @@ Radium.Combobox = Ember.View.extend
       </div>
     {{/unless}}
   """
+  toggleDropdown: (event) ->
+    @$('.btn-group').toggleClass 'open'
 
   setValue: (object) ->
     @set 'value', object

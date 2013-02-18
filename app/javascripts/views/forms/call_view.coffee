@@ -30,7 +30,7 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
       <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall}}>
         <i class="icons-call-white"></i>
       </button>
-      <button class="btn btn-success dropdown-toggle data-toggle="dropdown" {{action toggleDropdown target=view}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
+      <button class="btn btn-success {{action toggleDropdown target=view}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
