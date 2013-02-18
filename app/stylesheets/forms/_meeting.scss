@@ -1,0 +1,61 @@
+// FIXME: Extract common styles from todo, call, meeting
+.meeting-form {
+  .main {
+    position: relative;
+    background-color: white;
+    padding: 12px;
+    @include box-shadow($dark-background 2px 2px 10px);
+    border: solid 1px $dark-background;
+
+    .checker label {
+      @include icons-sprite(discussion-muted);
+    }
+
+
+    &.is-finished {
+      background-color: $dark-background;
+
+      .checker label::after {
+        border-color: $light-text
+      }
+
+      &::after {
+        width: 96%;
+        content: '';
+        position: absolute;
+        height: 2px;
+        background-color: black;
+        margin: 0 auto;
+        left: 2%;
+        top: 50%;
+      }
+    }
+  }
+
+  .btn-link:hover {
+    text-decoration: none;
+  } 
+
+  .btn-link:focus {
+    outline: none;
+    border: none;
+  }
+
+  .checker {
+    margin-top: 6px;
+  }
+
+  .meeting {
+    margin-left: 40px;
+    margin-right: 140px;
+  }
+
+  .options {
+    background-color: $background;
+    border: solid 1px $dark-background;
+    border-top: none;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto;
+  }
+}

@@ -38,7 +38,8 @@ Radium.FormsBaseController = Ember.ObjectController.extend Radium.CurrentUserMix
     @get('isDisabled') || @get('isNew')
   ).property('isDisabled', 'isNew')
 
-  toggleExpanded: -> @toggleProperty 'isExpanded'
+  toggleExpanded: -> 
+    @toggleProperty 'isExpanded'
 
   expand: ->
     return unless @get('isExpandable')

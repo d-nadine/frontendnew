@@ -1,1 +1,1 @@
-Radium.FormsMeetingController = Ember.Controller.extend()
+Radium.FormsMeetingController = Radium.FormsBaseController.extend()
