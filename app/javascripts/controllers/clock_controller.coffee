@@ -4,11 +4,11 @@ Radium.ClockController = Ember.ObjectController.extend
 
   now: Ember.computed.alias('model')
 
-  beginningOfToday: (->
+  beginningOfDay: (->
     @get('model').atBeginningOfDay()
   ).property('model')
 
-  endOfToday: (->
+  endOfDay: (->
     @get('model').atEndOfDay()
   ).property('model')
 
