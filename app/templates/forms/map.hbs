@@ -1,0 +1,13 @@
+{{#if view.disabled}}
+  <i class="icon-map-marker"></i>
+{{else}}
+  <div class="btn-group">
+    <a class="btn" href="#" {{action showTimes target="view"}}>
+      <i class="icon-map-marker"></i>
+    </a>
+  </div>
+{{/if}}
+<span class="text">{{view.leader}}</span>
+{{view view.locationField}}
+<a class="btn btn-link pull-right" {{action showMap target="view"}}>Map</a>
+

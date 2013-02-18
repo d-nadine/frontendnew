@@ -63,5 +63,15 @@
         width: 90px;
       }
     }
+
+    .map{
+      width: 37%;
+      input[type=text]{
+        width: 90px;
+      }
+      a.pull-right{
+        margin-right: 3px;
+      }
+    }
   }
 }

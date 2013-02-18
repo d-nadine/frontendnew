@@ -22,3 +22,5 @@ Radium.FormsMeetingView = Ember.View.extend
     dateBinding: 'controller.endsAt'
     leader: 'Ends:'
 
+  location:  Radium.MapView.extend
+    leader: 'Meeting location'
