@@ -12,11 +12,11 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
     disabledBinding: 'controller.isContactPickerDisabled'
     expandedBinding: 'controller.isExpanded'
 
-    click: (event) ->
-      return unless @get('isExpanded')
+    # click: (event) ->
+    #   return unless @get('isExpanded')
 
-      event.preventDefault()
-      event.stopPropagation()
+    #   event.preventDefault()
+    #   event.stopPropagation()
 
   callBox: Ember.View.extend
     contactBinding: 'controller.reference'
@@ -26,18 +26,14 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
       @get('tabIndex') + 1
     ).property('tabIndex')
 
-    click: (event) ->
-      event.preventDefault()
-      event.stopPropagation()
-
     toggleDropdown: (event) ->
       @$().toggleClass 'open'
 
     template: Ember.Handlebars.compile """
-      <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall}}>
+      <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall bubbles=false}}>
         <i class="icons-call-white"></i>
       </button>
-      <button class="btn btn-success dropdown-toggle" {{action toggleDropdown target=view}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
+      <button class="btn btn-success dropdown-toggle" {{action toggleDropdown target=view bubbles=false}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">

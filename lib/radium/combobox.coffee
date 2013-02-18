@@ -27,26 +27,33 @@ Radium.Combobox = Ember.View.extend
   ).property('value')
 
   template: Ember.Handlebars.compile """
+    {{#if view.label}}
+      <span class="text">
+        {{view.label}}
+      </span>
+    {{/if}}
+
     {{view view.textField}}
 
     {{#unless view.disabled}}
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" {{action toggleDropdown target=view}}>
+      <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
+        <button class="btn dropdown-toggle">
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
           {{#each view.source}}
-            <li><a {{action setValue this target=view href=true}}>{{name}}</a></li>
+            <li><a {{action setValue this target=view href=true bubbles=false}}>{{name}}</a></li>
           {{/each}}
         </ul>
       </div>
     {{/unless}}
   """
   toggleDropdown: (event) ->
-    @$('.btn-group').toggleClass 'open'
+    @toggleProperty 'open'
 
   setValue: (object) ->
     @set 'value', object
+    @set 'open', false
 
   # Begin typehead customization
   matcher: (item) ->
