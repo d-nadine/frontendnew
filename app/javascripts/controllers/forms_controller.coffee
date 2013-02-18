@@ -1,99 +1,85 @@
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   newTodo: (->
     Radium.TodoForm.create
+      content: Radium.Todo.createRecord
+        finishBy: Ember.DateTime.create()
+        user: @get('currentUser')
       isNew: true
-      user: @get('currentUser')
   ).property()
 
   editableTodo: (->
     Radium.TodoForm.create
-      description: "Finish programming Radium"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: true
+      content: Factory.create 'todo'
+        user: @get('currentUser')
+        reference: Factory.create('contact')
   ).property()
 
   editableFinishedTodo: (->
     Radium.TodoForm.create
-      description: "Learn to make mistakes"
-      isFinished: true
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: true
+      content: Factory.create 'todo'
+        isFinished: true
   ).property()
 
   uneditableTodo: (->
     Radium.TodoForm.create
-      description: "Assign leads"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: false
+      content: Factory.create 'todo'
   ).property()
 
   uneditableFinishedTodo: (->
     Radium.TodoForm.create
-      isFinished: true
-      description: "Conquer the world"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: false
+      content: Factory.create 'todo'
+        isFinished: true
   ).property()
 
   justAddedTodo: (->
-    Radium.TodoForm.create
-      description: "Assign leads"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
+    Ember.ObjectProxy.create
+      content: Radium.TodoForm.create
+        content: Factory.create 'todo'
       justAdded: true
   ).property()
 
   newCall: (->
     Radium.CallForm.create
+      content: Radium.Todo.createRecord
+        finishBy: Ember.DateTime.create()
+        user: @get('currentUser')
       isNew: true
-      user: @get('currentUser')
   ).property()
 
   editableCall: (->
     Radium.CallForm.create
-      description: "Q4 sales"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: true
+      content: Factory.create 'call'
   ).property()
 
   editableFinishedCall: (->
     Radium.CallForm.create
       isEditable: true
-      isFinished: true
-      description: "Q4 sales"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
+      content: Factory.create 'call'
+        isFinished: true
   ).property()
 
   uneditableCall: (->
     Radium.CallForm.create
-      description: "Our trade secrets"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: false
+      content: Factory.create 'call'
   ).property()
 
   uneditableFinishedCall: (->
     Radium.CallForm.create
-      isFinished: true
-      description: "q3 strategy"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
       isEditable: false
+      content: Factory.create 'call'
+        finished: false
   ).property()
 
   justAddedCall: (->
-    Radium.CallForm.create
-      isFinished: false
-      description: "Secret sauce"
-      user: @get('currentUser')
-      reference: Factory.create('contact')
-      isEditable: true
+    Ember.ObjectProxy.create
+      content: Radium.CallForm.create
+        content: Factory.create 'call'
       justAdded: true
   ).property()
 
@@ -108,14 +94,15 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   discussion: (->
     Radium.DiscussionForm.create
-      user: @get('currentUser')
+      content: Radium.Discussion.createRecord()
       isNew: true
   ).property()
 
   justAddedDiscussion: (->
-    Radium.DiscussionForm.create
-      user: @get('currentUser')
-      text: "Big long text from the discussion"
+    Ember.ObjectProxy.create
+      content: Radium.DiscussionForm.create
+        content: Radium.Discussion.createRecord
+          text: "Big long text"
       justAdded: true
   ).property()
 
