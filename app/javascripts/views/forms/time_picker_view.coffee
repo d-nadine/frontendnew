@@ -34,7 +34,7 @@ Radium.TimePickerView = Ember.View.extend
     console.log @get('date').toDateFormat() + " " + @get('date').toMeridianTime()
 
   timeField: Ember.TextField.extend
-    classNames: 'input-small timepicker'
+    classNames: 'timepicker'
 
   showTimes: ->
     @$('.timepicker').timepicker('showWidget')
