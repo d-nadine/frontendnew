@@ -1,103 +1,98 @@
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   newTodo: (->
-    Radium.Todo.createRecord
+    Radium.TodoForm.create
       isNew: true
-      finishBy: Ember.DateTime.create()
       user: @get('currentUser')
   ).property()
 
   editableTodo: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'todo'
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.TodoForm.create
+      description: "Finish programming Radium"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: true
   ).property()
 
   editableFinishedTodo: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'todo'
-        isFinished: true
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.TodoForm.create
+      description: "Learn to make mistakes"
+      isFinished: true
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: true
   ).property()
 
   uneditableTodo: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'todo'
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.TodoForm.create
+      description: "Assign leads"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: false
   ).property()
 
   uneditableFinishedTodo: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'todo'
-        isFinished: true
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.TodoForm.create
+      isFinished: true
+      description: "Conquer the world"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: false
   ).property()
 
   justAddedTodo: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'todo'
-        isFinished: false
-        user: @get('currentUser')
-        reference: Factory.create('contact')
-      isEditable: true
+    Radium.TodoForm.create
+      description: "Assign leads"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       justAdded: true
   ).property()
 
   newCall: (->
-    Radium.Todo.createRecord
-      kind: 'call'
+    Radium.CallForm.create
       isNew: true
-      finishBy: Ember.DateTime.create()
       user: @get('currentUser')
   ).property()
 
   editableCall: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'call'
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.CallForm.create
+      description: "Q4 sales"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: true
   ).property()
 
   editableFinishedCall: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'call'
-        isFinished: true
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.CallForm.create
       isEditable: true
+      isFinished: true
+      description: "Q4 sales"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
   ).property()
 
   uneditableCall: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'call'
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.CallForm.create
+      description: "Our trade secrets"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: false
   ).property()
 
   uneditableFinishedCall: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'call'
-        isFinished: true
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.CallForm.create
+      isFinished: true
+      description: "q3 strategy"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: false
   ).property()
 
   justAddedCall: (->
-    Ember.ObjectProxy.create
-      content: Factory.create 'call'
-        isFinished: false
-        user: @get('currentUser')
-        reference: Factory.create('contact')
+    Radium.CallForm.create
+      isFinished: false
+      description: "Secret sauce"
+      user: @get('currentUser')
+      reference: Factory.create('contact')
       isEditable: true
       justAdded: true
   ).property()
@@ -112,22 +107,21 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   discussion: (->
-    Ember.Object.create
+    Radium.DiscussionForm.create
       user: @get('currentUser')
       isNew: true
   ).property()
 
   justAddedDiscussion: (->
-    Ember.Object.create
+    Radium.DiscussionForm.create
       user: @get('currentUser')
       text: "Big long text from the discussion"
       justAdded: true
   ).property()
 
   formBox: (->
-    Ember.Object.create
-      activeForm: 'todo'
-      todo: @get('newTodo')
-      call: @get('newCall')
-      discussion: @get('discussion')
+    Radium.FormBox.create
+      todoForm: @get('newTodo')
+      callForm: @get('newCall')
+      discussionForm: @get('discussion')
   ).property()

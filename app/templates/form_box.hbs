@@ -1,18 +1,18 @@
 <div class="form-box">
   <div class="icon-switcher">
-    {{#if todo}}
+    {{#if todoForm}}
       <a {{action showForm "todo"}} {{bindAttr class="showTodoForm:active :todo"}} href="#">
         <i class="icons-todo-muted"></i>
       </a>
     {{/if}}
 
-    {{#if call}}
+    {{#if callForm}}
       <a {{action showForm "call"}} {{bindAttr class="showCallForm:active :call"}} href="#">
         <i class="icons-call-muted"></i>
       </a>
     {{/if}}
 
-    {{#if discussion}}
+    {{#if discussionForm}}
     <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active :discussion"}} href="#">
         <i class="icons-discussion-muted"></i>
       </a>
@@ -21,15 +21,15 @@
 
   <div class="form-container">
     {{#if showTodoForm}}
-      {{control "forms/todo" todo}}
+      {{control "forms/todo" todoForm}}
     {{/if}}
 
     {{#if showCallForm}}
-      {{control "forms/call" call}}
+      {{control "forms/call" callForm}}
     {{/if}}
 
     {{#if showDiscussionForm}}
-      {{control "forms/discussion" discussion}}
+      {{control "forms/discussion" discussionForm}}
     {{/if}}
   </div>
 </div>

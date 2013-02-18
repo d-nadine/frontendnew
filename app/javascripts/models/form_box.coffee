@@ -2,7 +2,7 @@
 # Only properties with forms are disabled. They are
 # disabled by default.
 Radium.FormBox = Ember.ObjectProxy.extend
-  todo: null
-  call: null
-  discussion: null
-  meeting: null
+  todoForm: null
+  callForm: null
+  discussionForm: null
+  meetingForm: null
