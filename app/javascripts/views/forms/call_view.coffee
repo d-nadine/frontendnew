@@ -12,12 +12,6 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
     disabledBinding: 'controller.isContactPickerDisabled'
     expandedBinding: 'controller.isExpanded'
 
-    # click: (event) ->
-    #   return unless @get('isExpanded')
-
-    #   event.preventDefault()
-    #   event.stopPropagation()
-
   callBox: Ember.View.extend
     contactBinding: 'controller.reference'
     classNames: ['btn-group', 'call-control-box']
