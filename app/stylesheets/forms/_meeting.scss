@@ -2,6 +2,14 @@ ul.as-selections{
   margin-top: 10px;
   border-top: none;
 
+  li:hover.as-selection-item {
+    color: $dark-text;
+    background-color: $dark-background;
+    background-image: none;
+    border-color: $dark-text;
+    border-top-color: $dark-text;
+  }
+
   li input, input:focus{
     border: none !important;
     border-radius: 0px !important;

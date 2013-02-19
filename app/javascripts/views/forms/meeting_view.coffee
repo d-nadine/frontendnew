@@ -37,6 +37,8 @@ Radium.FormsMeetingView = Ember.View.extend
 
         value: user.get('id')
         name: name
+        avatar: "/images/default_avatars/small.png"
+        data: user
 
       retrieve = (query, callback) =>
         # FIXME: Change to real server query
@@ -44,7 +46,16 @@ Radium.FormsMeetingView = Ember.View.extend
 
         callback(result, query)
 
+      formatList = (data, elem) ->
+        content = """
+          <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
+          #{data.name}
+        """
+
+        elem.html(content)
+
       @$().autoSuggest {retrieve: retrieve},
                         selectedItemProp: "name"
                         searchObjProps: "name"
                         preFill: [mapUser(currentUser)]
+                        formatList: formatList

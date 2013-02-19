@@ -151,13 +151,13 @@ li.as-message {
 	cursor: default;
 }
 
-/* li.as-result-item.active { */
-	/* background-color: #3668d9; */
-	/* background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242))); */
-	/* border-color: #3342e8; */
-	/* color: #fff; */
-	/* text-shadow: 0 1px 2px #122042; */
-/* } */
+li.as-result-item.active {
+	background-color: #3668d9;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
+	border-color: #3342e8;
+	color: #fff;
+	text-shadow: 0 1px 2px #122042;
+}
 
 li.as-result-item em { 
 	font-style: normal; 
