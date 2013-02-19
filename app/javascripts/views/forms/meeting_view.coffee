@@ -60,9 +60,13 @@ Radium.FormsMeetingView = Ember.View.extend
 
         elem.html(content)
 
+      selectionClick = (ele) =>
+        console.log ele
+
       @$().autoSuggest {retrieve: retrieve},
                         selectedItemProp: "name"
                         searchObjProps: "name"
                         preFill: [mapUser(currentUser)]
                         formatList: formatList
                         getAvatar: getAvatar
+                        selectionClick: selectionClick
