@@ -23,4 +23,4 @@ Radium.FormsMeetingView = Ember.View.extend
     leader: 'Ends:'
 
   location:  Radium.MapView.extend
-    leader: 'Meeting location'
+    leader: 'location'
