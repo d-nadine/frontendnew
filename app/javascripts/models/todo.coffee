@@ -1,10 +1,3 @@
-typeMap = Ember.Map.create()
-
-typeMap.set 'Radium.Discussion', 'discussion'
-typeMap.set 'Radium.Deal', 'deal'
-typeMap.set 'Radium.Email', 'email'
-typeMap.set 'Radium.Todo', 'todo'
-
 Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
@@ -22,7 +15,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
-      property = typeMap.get value.constructor.toString()
+      property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
       @get('contact') || @get('deal') || @get('email')

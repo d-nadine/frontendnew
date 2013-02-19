@@ -1,11 +1,3 @@
-typeMap = Ember.Map.create()
-
-typeMap.set 'Radium.Email', 'email'
-typeMap.set 'Radium.Deal', 'deal'
-typeMap.set 'Radium.Discussion', 'discussion'
-typeMap.set 'Radium.Meeting', 'meeting'
-typeMap.set 'Radium.Todo', 'todo'
-
 Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
   email: DS.belongsTo('Radium.Email', inverse: 'comments')
   discussion: DS.belongsTo('Radium.Discussion', inverse: 'comments')
@@ -19,7 +11,7 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
 
   commentable: ((key, value) ->
     if arguments.length == 2 && value
-      property = typeMap.get value.constructor.toString()
+      property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
       @get('email') || @get('discussion') || @get('deal') || @get('meeting') || @get('todo')

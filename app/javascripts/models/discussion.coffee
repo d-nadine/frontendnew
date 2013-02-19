@@ -1,20 +1,15 @@
-typeMap = Ember.Map.create()
-
-typeMap.set 'Radium.Deal', 'deal'
-typeMap.set 'Radium.Contact', 'deal'
-
 Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
   user: DS.belongsTo('Radium.User')
-  deal: DS.belongsTo('Radium.Deal', inverse: 'discussions')
-  contact: DS.belongsTo('Radium.Contact', inverse: 'discussions')
+  deal: DS.belongsTo('Radium.Deal', inverse: null)
+  contact: DS.belongsTo('Radium.Contact', inverse: null)
 
   topic: DS.attr('string')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value
-      property = typeMap.get value.constructor.toString()
+      property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
       @get('deal') || @get('contact')
