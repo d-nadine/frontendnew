@@ -61,10 +61,14 @@ Ember.DateTime.reopen
       @toFormattedString(format)
 
 Ember.DateTime.reopenClass
-  random: (alwaysPast = false) ->
+  random: (options = {}) ->
     multipler = ->
-      return -1 if alwaysPast
-      if Math.random() > 0.5 then 1 else -1
+      if options.past
+        -1
+      else if options.future
+        1
+      else
+        if Math.random() > 0.5 then 1 else -1
 
     randomUpTo = (max) ->
       Math.floor((Math.random() * max) + 1)

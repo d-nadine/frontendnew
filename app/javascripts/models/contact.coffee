@@ -10,7 +10,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')
-  status: DS.attr('string')
+  isLead: DS.attr('boolean')
   source: DS.attr('string')
 
   phoneNumbers: DS.attr('array')

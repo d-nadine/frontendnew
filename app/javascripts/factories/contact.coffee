@@ -1,8 +1,10 @@
 require 'factories/user'
 
 Factory.define 'contact', traits: ['timestamps'],
-  name: Factory.sequence (i) -> "Contact #{i}"
-  status: 'prospect'
+  name: "#{Dictionaries.firstNames.random()} #{Dictionaries.lastNames.random()}"
+  isLead: -> Math.random() <= 0.30
+  source: -> Dictionaries.leadSources.random()
+
   user: -> Factory.build 'user'
 
   phoneNumbers: [

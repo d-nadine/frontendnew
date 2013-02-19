@@ -1,3 +1,5 @@
+require 'lib/dictionaries'
+
 class RadiumAdapter extends Foundry.EmberDataAdapter
   constructor: (store) ->
     @store = store

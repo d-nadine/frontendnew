@@ -8,7 +8,7 @@ Factory.define 'todo', traits: 'timestamps',
 
 Factory.define 'call', traits: 'timestamps',
   kind: 'call'
-  description: Factory.sequence (i) -> "Call #{i}"
+  description: -> Dictionaries.callDescriptions.random()
   finishBy: Ember.DateTime.create().advance(days: 7)
   reference: -> Factory.create('contact')
 
