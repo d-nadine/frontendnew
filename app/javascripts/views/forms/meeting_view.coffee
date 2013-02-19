@@ -27,12 +27,24 @@ Radium.FormsMeetingView = Ember.View.extend
 
   userList: Ember.TextField.extend
     didInsertElement: ->
+      currentUser = @get('controller.currentUser')
+
+      mapUser = (user) ->
+        name = if user.get('id') == currentUser.get('id')
+                  "#{user.get('name')} (Me)"
+               else
+                  user.get('name')
+
+        value: user.get('id')
+        name: name
+
       retrieve = (query, callback) =>
         # FIXME: Change to real server query
-        result = Radium.User.find().map (user) ->
-          value: user.get('id')
-          name: user.get('name')
+        result = Radium.User.find().map mapUser
 
         callback(result, query)
 
-      @$().autoSuggest({retrieve: retrieve}, {selectedItemProp: "name", searchObjProps: "name"});
+      @$().autoSuggest {retrieve: retrieve},
+                        selectedItemProp: "name"
+                        searchObjProps: "name"
+                        preFill: [mapUser(currentUser)]
