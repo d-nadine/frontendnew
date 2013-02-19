@@ -38,4 +38,8 @@ class Populator
         user: -> userDictionary.random()
         contact: -> contactDictionary.random()
 
+    for i in [0..30]
+      Factory.create 'email'
+        sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
+
 Radium.Populator = Populator

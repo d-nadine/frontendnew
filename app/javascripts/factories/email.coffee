@@ -1,6 +1,6 @@
 Factory.define 'email', traits: ['timestamps', 'html'],
   subject: Factory.sequence (i) -> "Email #{i}"
-  sentAt: -> Ember.DateTime.random()
+  sentAt: -> Ember.DateTime.random past: true
   message: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus
     felis. Maecenas lacinia risus pellentesque ipsum vehicula convallis.
@@ -16,9 +16,7 @@ Factory.define 'email', traits: ['timestamps', 'html'],
     In hac habitasse platea dictumst. Phasellus vel mi vel leo adipiscing
     dapibus vel auctor mauris.
   """
-  sender:
-    id: -> Factory.build 'user'
-    type: 'user'
+  sender: Factory.build 'user'
   attachments: -> [
     Factory.create 'attachment'
     Factory.create 'attachment'

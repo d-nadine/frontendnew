@@ -1,11 +1,11 @@
 Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
-  email: DS.belongsTo('Radium.Email', inverse: 'comments')
-  discussion: DS.belongsTo('Radium.Discussion', inverse: 'comments')
-  deal: DS.belongsTo('Radium.Deal', inverse: 'comments')
-  meeting: DS.belongsTo('Radium.Meeting', inverse: 'comments')
-  todo: DS.belongsTo('Radium.Todo', inverse: 'comments')
+  email: DS.belongsTo('Radium.Email')
+  discussion: DS.belongsTo('Radium.Discussion')
+  deal: DS.belongsTo('Radium.Deal')
+  meeting: DS.belongsTo('Radium.Meeting')
+  todo: DS.belongsTo('Radium.Todo')
 
-  user: DS.belongsTo('Radium.User', inverse: 'comments')
+  user: DS.belongsTo('Radium.User')
 
   text: DS.attr('string')
 
