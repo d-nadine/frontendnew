@@ -7,6 +7,8 @@ ul.as-selections{
     background-image: none;
     border: 1px solid $control-border-color;
     border-top-color: $control-border-color;
+    border-radius: 0px;
+    box-shadow: none;
 
     &.selected{
       border-color: $dark-text;

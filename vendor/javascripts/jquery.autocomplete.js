@@ -54,7 +54,8 @@
             beforeRetrieve: function(string){ return string; },
             retrieveComplete: function(data){ return data; },
             resultClick: function(data){},
-            resultsComplete: function(){}
+            resultsComplete: function(){},
+            getAvatar: function(){}
         };
         var opts = $.extend(defaults, options);
 
@@ -397,7 +398,9 @@
                             input.focus();
                             return false;
                         });
-                    org_li.before(item.html(data[opts.selectedItemProp]).prepend(close));
+
+                    // FIXME: custom code needs better abstracted if we go with this plugin
+                    org_li.before(item.html(opts.getAvatar(data) + " " + data[opts.selectedItemProp]).prepend(close));
                     opts.selectionAdded.call(this, org_li.prev(), data[opts.selectedValuesProp]);
                     return org_li.prev();
                 }

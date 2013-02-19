@@ -37,6 +37,7 @@ Radium.FormsMeetingView = Ember.View.extend
 
         value: user.get('id')
         name: name
+        # FIXME: Get real avatar
         avatar: "/images/default_avatars/small.png"
         data: user
 
@@ -46,9 +47,14 @@ Radium.FormsMeetingView = Ember.View.extend
 
         callback(result, query)
 
+      getAvatar = (data) ->
+        """
+          <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
+        """
+
       formatList = (data, elem) ->
         content = """
-          <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
+          #{getAvatar(data)}
           #{data.name}
         """
 
@@ -59,3 +65,4 @@ Radium.FormsMeetingView = Ember.View.extend
                         searchObjProps: "name"
                         preFill: [mapUser(currentUser)]
                         formatList: formatList
+                        getAvatar: getAvatar
