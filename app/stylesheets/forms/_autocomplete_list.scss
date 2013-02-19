@@ -1,0 +1,62 @@
+ul.as-selections{
+  margin-top: 10px;
+  border-top: none;
+
+  li.as-selection-item {
+    background-color: $dark-background;
+    background-image: none;
+    border: 1px solid $control-border-color;
+    border-top-color: $control-border-color;
+
+    &.selected{
+      border-color: $dark-text;
+    }
+
+    a.as-close{
+      text-shadow: none;
+      color: $light-text;
+    }
+  }
+
+  li:hover.as-selection-item {
+    color: $dark-text;
+    background-color: $dark-background;
+    background-image: none;
+    border-color: $dark-text;
+    border-top-color: $dark-text;
+  }
+
+  li input, input:focus{
+    border: none !important;
+    border-radius: none !important;
+    background-color: white;
+    background-image: none;
+    box-shadow: none;
+  }
+}
+li.as-result-item.active {
+  cursor: pointer;
+  background-color: $selected-item;
+  background-image: none;
+  color: inherit;
+}
+
+li.as-result-item, li.as-message {
+  margin: 0 0 0 0;
+  padding: 5px 12px;
+  background-color: transparent;
+  border: solid 1px $control-border-color;
+  cursor: pointer;
+  border-radius: none !important;
+}
+
+ul.as-list {
+  box-shadow: none;
+  border-radius: none;
+}
+
+li.as-result-item.active {
+  border: solid 1px $control-border-color;
+  color: $light-text;
+  text-shadow: none;
+}
