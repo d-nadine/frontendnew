@@ -15,7 +15,7 @@ Radium.DealController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   todoForm: (->
     Radium.TodoForm.create
-      content: Radium.Todo.createRecord
+      content: Ember.Object.create
         reference: @get('model')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
@@ -24,8 +24,7 @@ Radium.DealController = Ember.Controller.extend Radium.CurrentUserMixin,
   callForm: (->
     Radium.CallForm.create
       canChangeContact: false
-      content: Radium.Todo.createRecord
-        kind: 'call'
+      content: Ember.Object.create
         reference: @get('contact')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
@@ -33,7 +32,7 @@ Radium.DealController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   discussionForm: (->
     Radium.DiscussionForm.create
-      content: Radium.Discussion.createRecord
+      content: Ember.Object.create
         reference: @get('model')
         user: @get('currentUser')
   ).property('model')
