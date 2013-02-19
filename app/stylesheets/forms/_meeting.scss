@@ -1,4 +1,23 @@
-// FIXME: Extract common styles from todo, call, meeting
+ul.as-selections{
+  margin-top: 10px;
+  border-top: none;
+
+  li input, input:focus{
+    border: none !important;
+    border-radius: 0px !important;
+    background-color: white;
+    background-image: none;
+    box-shadow: none;
+  }
+}
+
+li.as-result-item.active {
+  cursor: pointer;
+  background-color: $selected-item;
+  background-image: none;
+  color: inherit;
+}
+
 .meeting-form {
   .main {
     position: relative;
