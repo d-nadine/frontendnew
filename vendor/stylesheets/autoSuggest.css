@@ -122,12 +122,6 @@ ul.as-list {
 	background-color: #fff;
 	background-color: rgba(255,255,255,0.95);
 	z-index: 2;
-	box-shadow: 0 2px 12px #222;
-	-webkit-box-shadow: 0 2px 12px #222;
-	-moz-box-shadow: 0 2px 12px #222;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 }
 
 li.as-result-item, li.as-message {
@@ -137,9 +131,6 @@ li.as-result-item, li.as-message {
 	border: 1px solid #fff;
 	border-bottom: 1px solid #ddd;
 	cursor: pointer;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 }
 
 li:first-child.as-result-item {
