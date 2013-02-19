@@ -38,6 +38,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
   negotiatingTotal: (->
     @get 'negotiatingDeals.length'
   ).property('negotiatingDeals.length')
+
   closed: (->
     return unless @get('content')
 
@@ -51,5 +52,9 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
     @get('content').filter (contact) ->
       contact.get('status') is 'lost'
   ).property('content', 'content.length')
+
+  leads: (->
+    Radium.Contact.filter (contact) -> contact.get('isLead')
+  ).property()
 
 
