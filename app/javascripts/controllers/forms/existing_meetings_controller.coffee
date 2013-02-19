@@ -1,1 +1,1 @@
-Radium.FormsExistingMeetingsController = Ember.ObjectController.extend()
+Radium.FormsExistingMeetingsController = Ember.ArrayController.extend()

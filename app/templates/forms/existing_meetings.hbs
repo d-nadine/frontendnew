@@ -1,5 +1,5 @@
 <table class="table table-striped table-bordered table-hover">
-  {{#with controller}}
+  {{#each controller}}
   <tr>
     <td>
       {{avatar controller}}
@@ -16,6 +16,10 @@
       Conflict
     </td>
   </tr>
-  {{/with}}
+  {{else}}
+  <tr>
+    <td colspan="4">No meeetings</td>
+  </tr>
+  {{/each}}
 </table>
 

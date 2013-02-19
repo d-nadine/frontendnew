@@ -33,8 +33,15 @@ Radium.FormsAutocompleteView = Ember.TextField.extend
 
       elem.html(content)
 
-    selectionClick = (ele) =>
-      console.log ele
+    selectionClick = (el) =>
+      console.log el
+
+    selectionAdded = (el) =>
+      @get('controller').addUserToMeeting el.data('value') + ""
+
+    selectionRemoved = (el) =>
+      @get('controller').removeUserFromMeeting el.data('value') + ""
+      el.remove()
 
     @$().autoSuggest {retrieve: retrieve},
                       selectedItemProp: "name"
@@ -43,3 +50,5 @@ Radium.FormsAutocompleteView = Ember.TextField.extend
                       formatList: formatList
                       getAvatar: getAvatar
                       selectionClick: selectionClick
+                      selectionAdded: selectionAdded
+                      selectionRemoved: selectionRemoved
