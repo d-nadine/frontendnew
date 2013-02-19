@@ -1,0 +1,21 @@
+<table class="table table-striped table-bordered table-hover">
+  {{#with controller}}
+  <tr>
+    <td>
+      {{avatar controller}}
+      {{#linkTo user this}}{{name}}{{/linkTo}}
+    </td>
+    <td>
+      9 AM to 11 AM
+    </td>
+    <td>
+      Sales Meeting with Ralph Fiennes
+    </td>
+    <td>
+      <i class="icon-tag"></i>
+      Conflict
+    </td>
+  </tr>
+  {{/with}}
+</table>
+

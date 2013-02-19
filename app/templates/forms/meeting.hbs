@@ -30,6 +30,29 @@
       {{view view.endsAt}}
       {{view view.location}}
       {{view view.userList}}
+      <div class="block calendars">
+        <div class="btn-group control-box">
+          <a {{action showCalendars}}class="btn">
+            <strong>Tuesday's Calendars</strong>
+            {{#if calendarsOpen}}
+              <i class="icon-chevron-up"></i>
+            {{else}}
+              <i class="icon-chevron-down"></i>
+            {{/if}}
+          </a>
+        </div>
+        <div class="save pull-right">
+          <div class="btn-group">
+            <button class="btn btn-primary">Save</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn">Cancel</button>
+          </div>
+        </div>
+        {{#if calendarsOpen}}
+          {{control 'forms/existing_meetings' controller.currentUser}}
+        {{/if}}
+      </div>
     </div>
   {{/if}}
 </form>
