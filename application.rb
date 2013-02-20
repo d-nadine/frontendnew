@@ -9,6 +9,7 @@ class Radium < Iridium::Application
   # Specify vendor load order. Files will be concatenated in the
   # declared order. Undeclared files will be concatentated after
   # all declared files
+  config.dependencies.skip 'ember-data.min'
   config.dependencies.insert_after :ember, 'ember-data'
   config.dependencies.load :underscore
   config.dependencies.insert_after :underscore, 'jquery-mentionsInput'

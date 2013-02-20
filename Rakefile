@@ -31,16 +31,16 @@ namespace :build do
     end
   end
 
-  # desc "Build ember-data and copy into vendor/javascripts"
-  # task :ember_data do
-  #   if File.directory? "#{vendor_path}/data"
-  #     sh "cd #{vendor_path}/data && BUNDLE_GEMFILE=#{vendor_path}/data/Gemfile rake dist"
-  #     sh %Q{cp #{vendor_path}/data/dist/ember-data.js #{vendor_js_path}/ember-data.js}
-  #     sh %Q{cp #{vendor_path}/data/dist/ember-data.min.js #{vendor_js_path}/ember-data.min.js}
-  #   else
-  #     puts "vendor/data does not exist!"
-  #   end
-  # end
+  desc "Build ember-data and copy into vendor/javascripts"
+  task :ember_data do
+    if File.directory? "#{vendor_path}/data"
+      sh "cd #{vendor_path}/data && BUNDLE_GEMFILE=#{vendor_path}/data/Gemfile rake dist"
+      sh %Q{cp #{vendor_path}/data/dist/ember-data.js #{vendor_js_path}/ember-data.js}
+      sh %Q{cp #{vendor_path}/data/dist/ember-data.min.js #{vendor_js_path}/ember-data.min.js}
+    else
+      puts "vendor/data does not exist!"
+    end
+  end
 end
 
 desc "Build Ember and Ember Data from local repos"
