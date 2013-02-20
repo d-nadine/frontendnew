@@ -1,11 +1,10 @@
 Radium.MeetingItem = Em.ObjectProxy.extend
   selectedUser: null
-  startsAt: null
-  endsAt: null
+  startTime: null
 
   hasConflict: ( ->
-    false
-  ).property('startsAt', 'endsAt')
+    @get('startTime').isBetweenExact @get('startsAt').advance(minute: -5), @get('endsAt').advance(minute: -5)
+  ).property('startTime', 'startsAt', 'endsAt')
 
   timeSpan: ( ->
     "#{@get('startsAt').toMeridianTime()} to #{@get('endsAt').toMeridianTime()}"

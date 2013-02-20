@@ -4,7 +4,6 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
     @_super.apply this, arguments
     @set 'users', Radium.MeetingUsers.create()
     @set 'users.startsAt', @get('startsAt')
-    @set 'users.endsAt', @get('endsAt')
 
   startsAtDidChange: ( ->
     @set('users.startsAt', @get('startsAt')) if @get('startsAt')

@@ -43,8 +43,7 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
             meetingItem = Radium.MeetingItem.create
               content: meeting
               selectedUser: user
-              startsAt: self.get('startsAt')
-              endsAt: self.get('endsAt')
+              startTime: self.get('startsAt')
 
             self.get('meetings').pushObject(meetingItem)
 

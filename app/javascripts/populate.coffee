@@ -28,9 +28,14 @@ class Populator
     userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
+    startsAt = Ember.DateTime.create().advance(hour: 1)
+    endsAt = Ember.DateTime.create().advance(hour: 3)
+
     retrospection = Factory.create 'meeting',
       topic: 'Retrospection'
       location: 'Radium HQ'
+      startsAt: startsAt
+      endsAt: endsAt
       users:  [
         aaron,
         jerry

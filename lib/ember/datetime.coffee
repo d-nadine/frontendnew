@@ -13,6 +13,11 @@ Ember.DateTime.reopen
     return false if Ember.DateTime.compareDate(this, end) == 1
     true
 
+  isBetweenExact: (start, end) ->
+    return false if Ember.DateTime.compare(this, start) == -1
+    return false if Ember.DateTime.compare(this, end) == 1
+    true
+
   atEndOfDay: ->
     @adjust hour: 23, minute: 59, second: 59
 
