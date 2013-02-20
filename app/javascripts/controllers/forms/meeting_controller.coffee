@@ -9,6 +9,24 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
     @set('users.startsAt', @get('startsAt')) if @get('startsAt')
   ).observes('startsAt')
 
+  usersDidChange: ( ->
+    return unless @get('users.length') && @get('startsAt')
+    return if @get('calendarsOpen')
+
+    self = this
+
+    @get('users').forEach (user) =>
+      meetings = Radium.Meeting.find(user: user, day: @get('startsAt'))
+                              .filter (meeting) ->
+                                return false if meeting.get('isNew')
+                                meeting.get('users').contains(user)
+
+      meetings.forEach (meeting) ->
+        if self.get('startsAt').isBetweenExact meeting.get('startsAt').advance(minute: -5), meeting.get('endsAt').advance(minute: -5)
+          self.set 'calendarsOpen', true
+
+  ).observes('users', 'users.length', 'startsAt')
+
   showCalendars: ->
     @toggleProperty 'calendarsOpen'
     false
