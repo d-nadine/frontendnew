@@ -1,4 +1,5 @@
-Radium.MeetingItemController = Em.ObjectController.extend
+Radium.MeetingItem = Em.ObjectProxy.extend
+  selectedUser: null
   hasConflict: ( ->
     false
   ).property('startsAt', 'endsAt')
