@@ -20,7 +20,6 @@
       <span class="success pull-right">Meeting Added</span>
     {{/if}}
 
-
     {{view view.topicField classNames="field field-blend-in"}}
   </div>
   {{#if isExpanded}}
@@ -33,7 +32,7 @@
       <div class="block calendars">
         <div class="btn-group control-box">
           <a {{action showCalendars}}class="btn">
-            <strong>Tuesday's Calendars</strong>
+            <strong>{{currentDate}}'s Calendars</strong>
             {{#if calendarsOpen}}
               <i class="icon-chevron-up"></i>
             {{else}}

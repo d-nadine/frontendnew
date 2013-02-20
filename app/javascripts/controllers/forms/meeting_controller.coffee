@@ -1,21 +1,36 @@
 Radium.FormsMeetingController = Radium.FormsBaseController.extend
   calendarsOpen: false
-  users: Ember.A()
+  init: ->
+    @_super.apply this, arguments
+    @set 'users', Radium.MeetingUsers.create()
+    @set 'users.startsAt', @get('startsAt')
+
+  startsAtDidChange: ( ->
+    @set('users.startsAt', @get('startsAt')) if @get('startsAt')
+  ).observes('startsAt')
 
   showCalendars: ->
     @toggleProperty 'calendarsOpen'
     false
 
   addUserToMeeting: (userId) ->
-    return if @users.find( (user) -> user.get('id') == userId )
+    users = @get('users')
+
+    return if users.find( (user) -> user.get('id') == userId )
 
     user = Radium.User.find(userId)
 
-    @users.pushObject user
+    users.pushObject user
 
   removeUserFromMeeting: (userId) ->
-    user =  @users.find( (user) -> user.get('id') == userId )
+    users = @get('users')
+
+    user =  users.find( (user) -> user.get('id') == userId )
 
     return unless user
 
-    @users.removeObject user
+    users.removeObject user
+
+  currentDate: ( ->
+    @get('startsAt').toHumanFormat()
+  ).property('startsAt')
