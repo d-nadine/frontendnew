@@ -5,6 +5,10 @@ NegotiatingGroup = Ember.ArrayProxy.extend
     @get('firstObject.status')
   ).property('firstObject.status')
 
+# FIXME: this should be an Ember.Object. The PipelineController 
+# has to each into content since properties on an array proxy 
+# don't work. Also there's never a case where the content is
+# not going to be Deal.all
 Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
   content: []
   settings: null
