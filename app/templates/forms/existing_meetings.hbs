@@ -1,24 +1,25 @@
 <table class="table table-striped table-bordered table-hover">
-  {{#each content.meetings itemController="meetingItem"}}
-  <tr>
-    <td>
-      {{avatar user}}
-      {{#linkTo user this}}{{user.name}}{{/linkTo}}
-    </td>
-    <td>
-      {{timeSpan}} 
-    </td>
-    <td>
-      {{topic}}
-      <!--Sales Meeting with Ralph Fiennes-->
-    </td>
-    <td>
-      {{#if hasConflict}}
-      <i class="icon-tag"></i>
-      Conflict
-      {{/if}}
-    </td>
-  </tr>
+  {{#each meeting in content.meetings itemController="meetingItem"}}
+    {{#each user in meeting.users}}
+      <tr>
+        <td>
+          {{avatar user}}
+          {{#linkTo user this}}{{user.name}}{{/linkTo}}
+        </td>
+        <td>
+          {{timeSpan}}
+        </td>
+        <td>
+          {{topic}}
+        </td>
+        <td>
+          {{#if hasConflict}}
+          <i class="icon-tag"></i>
+          Conflict
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
   {{else}}
   <tr>
     <td colspan="4">No meeetings</td>

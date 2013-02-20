@@ -5,7 +5,10 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
 
   startsAtDidChange: ( ->
     return unless @get('startsAt') && @get('content.length')
-    console.log @get('startsAt')
+    @get('meetings').clear()
+
+    @forEach (user) =>
+      @findMeetingsForUser(user)
   ).observes('startsAt')
 
   arrayContentDidChange: (startIdx, removeAmt, addAmt) ->
@@ -21,11 +24,16 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')
 
-    meetings = Radium.Meeting.find user: user, day: @get('startsAt')
+    meetings = Radium.Meeting.find(user: user, day: @get('startsAt'))
+                              .filter (meeting) ->
+                                return false if meeting.get('isNew') || !meeting.get('users.length')
+                                meeting.get('users').contains(user)
 
-    @get('meetings').pushObjects(meetings.toArray()) if meetings.get('length')
+    meetings.forEach (meeting) =>
+      @get('meetings').pushObject(meeting) unless @get('meetings').contains(meeting)
 
   removeMeetingsForUser: (user) ->
-    meetings = @get('meetings').filterProperty 'user', user
+    meetings = @get('meetings')
 
-    @get('meetings').removeObjects meetings if meetings.get('length')
+    meetings.forEach (meeting) ->
+      meetings.removeObject(meeting) if meeting.get('users').contains(user)

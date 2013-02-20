@@ -6,3 +6,7 @@ Radium.MeetingItemController = Em.ObjectController.extend
   timeSpan: ( ->
     "#{@get('startsAt').toMeridianTime()} to #{@get('startsAt').toMeridianTime()}"
   ).property('startsAt', 'endsAt')
+
+  topic: ( ->
+    @get('content.topic')
+  ).property('topic')
