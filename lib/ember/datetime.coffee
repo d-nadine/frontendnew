@@ -22,10 +22,10 @@ Ember.DateTime.reopen
     @adjust hour: 23, minute: 59, second: 59
 
   atBeginningOfDay: ->
-    @adjust hour: 0, minute: 0, second: 0 
+    @adjust hour: 0, minute: 0, second: 0
 
   atBeginningOfDay: ->
-    @adjust hour: 0, minute: 0, second: 0 
+    @adjust hour: 0, minute: 0, second: 0
 
   atBeginningOfMonth: ->
     @adjust day: 1, hour: 0, minute: 0, second: 0

@@ -71,6 +71,10 @@
         margin-top: 10px;
         td{
           line-height: 30px;
+
+          &.has-conflict{
+            color: red;
+          }
         }
         td:first-of-type{
           width: 20%;
@@ -91,3 +95,5 @@
     }
   }
 }
+
+

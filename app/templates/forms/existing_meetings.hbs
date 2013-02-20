@@ -5,7 +5,7 @@
         {{avatar selectedUser}}
         {{#linkTo user this}}{{selectedUser.name}}{{/linkTo}}
       </td>
-      <td>
+      <td {{bindAttr class="hasConflict"}}>
         {{timeSpan}}
       </td>
       <td>
