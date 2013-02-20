@@ -1,25 +1,23 @@
 <table class="table table-striped table-bordered table-hover">
-  {{#each meeting in content.meetings itemController="meetingItem"}}
-    {{#each user in meeting.users}}
-      <tr>
-        <td>
-          {{avatar user}}
-          {{#linkTo user this}}{{user.name}}{{/linkTo}}
-        </td>
-        <td>
-          {{timeSpan}}
-        </td>
-        <td>
-          {{topic}}
-        </td>
-        <td>
-          {{#if hasConflict}}
-          <i class="icon-tag"></i>
-          Conflict
-          {{/if}}
-        </td>
-      </tr>
-    {{/each}}
+  {{#each content.meetings}}
+    <tr>
+      <td>
+        {{avatar selectedUser}}
+        {{#linkTo user this}}{{selectedUser.name}}{{/linkTo}}
+      </td>
+      <td>
+        {{timeSpan}}
+      </td>
+      <td>
+        {{topic}}
+      </td>
+      <td>
+        {{#if hasConflict}}
+        <i class="icon-tag"></i>
+        Conflict
+        {{/if}}
+      </td>
+    </tr>
   {{else}}
   <tr>
     <td colspan="4">No meeetings</td>

@@ -21,6 +21,8 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
     if removeAmt > 0
       @removeMeetingsForUser @objectAt(startIdx)
 
+    @_super.apply this, arguments
+
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')
 
@@ -29,11 +31,34 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
                                 return false if meeting.get('isNew') || !meeting.get('users.length')
                                 meeting.get('users').contains(user)
 
-    meetings.forEach (meeting) =>
-      @get('meetings').pushObject(meeting) unless @get('meetings').contains(meeting)
+    self = this
+
+    meetings.forEach (meeting) ->
+      meeting.get('users').forEach (user) ->
+        if self.contains(user)
+          unless self.get('meetings').find((existing) -> existing.get('content') == meeting && existing.get('selectedUser') == user)
+            meetingItem = Radium.MeetingItem.create
+              content: meeting
+              selectedUser: user
+
+            self.get('meetings').pushObject(meetingItem)
 
   removeMeetingsForUser: (user) ->
     meetings = @get('meetings')
 
     meetings.forEach (meeting) ->
       meetings.removeObject(meeting) if meeting.get('users').contains(user)
+
+Radium.MeetingItem = Em.ObjectProxy.extend
+  selectedUser: null
+  hasConflict: ( ->
+    false
+  ).property('startsAt', 'endsAt')
+
+  timeSpan: ( ->
+    "#{@get('startsAt').toMeridianTime()} to #{@get('startsAt').toMeridianTime()}"
+  ).property('startsAt', 'endsAt')
+
+  topic: ( ->
+    @get('content.topic')
+  ).property('topic')
