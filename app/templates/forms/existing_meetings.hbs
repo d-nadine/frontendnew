@@ -10,6 +10,12 @@
       </td>
       <td>
         {{topic}}
+        {{#if meetingUsers}}
+          with
+          {{#each meetingUsers}}
+            {{#linkTo user this}}{{this.name}}{{/linkTo}}&nbsp;
+          {{/each}}
+        {{/if}}
       </td>
       <td>
         {{#if hasConflict}}
