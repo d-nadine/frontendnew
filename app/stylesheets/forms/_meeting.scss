@@ -1,4 +1,8 @@
 .meeting-form {
+  div.is-valid {
+    border: 1px solid $valid-input-border;
+  }
+
   .main {
     position: relative;
     background-color: white;

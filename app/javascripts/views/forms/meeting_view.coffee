@@ -3,7 +3,7 @@ Radium.FormsMeetingView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend()
 
   topicField: Radium.MentionFieldView.extend
-    classNameBindings: ['value:is-valid', 'isInvalid', ':meeting']
+    classNameBindings: ['isInvalid', ':meeting']
 
     placeholder: 'Add meeting topic'
     valueBinding: 'controller.topic'
