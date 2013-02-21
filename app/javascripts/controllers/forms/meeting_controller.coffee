@@ -5,6 +5,9 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
     @set 'users', Radium.MeetingUsers.create()
     @set 'users.startsAt', @get('startsAt')
 
+  submit: ->
+    @set 'isSubmitted', true
+
   startsAtDidChange: ( ->
     @set('users.startsAt', @get('startsAt')) if @get('startsAt')
   ).observes('startsAt')

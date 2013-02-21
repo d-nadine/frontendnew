@@ -18,6 +18,10 @@ Ember.DateTime.reopen
     return false if Ember.DateTime.compare(this, end) == 1
     true
 
+  isBeforeToday: ->
+    yesterDay = Ember.DateTime.create().advance(day: -1)
+    Ember.DateTime.compareDate(this, yesterDay) != 1
+
   atEndOfDay: ->
     @adjust hour: 23, minute: 59, second: 59
 

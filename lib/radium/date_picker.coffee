@@ -16,7 +16,7 @@ Radium.DatePicker = Ember.View.extend
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   isInvalid: (->
-    Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    Ember.isEmpty(@get('text')) && @get('isSubmitted')
   ).property('value', 'isSubmitted')
 
   textToDateTransform: ((key, value) ->
