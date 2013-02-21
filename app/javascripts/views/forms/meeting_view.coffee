@@ -42,7 +42,7 @@ Radium.FormsMeetingView = Ember.View.extend
       Ember.DateTime.compare(@get('controller.endsAt'), @get('controller.startsAt')) == -1
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
-    #nudge the date forward if less startsAt
+    #nudge the date forward if less than startsAt
     startsAtDidChange: ( ->
       startsAt = @get('controller.startsAt')
       endsAt = @get('controller.endsAt')

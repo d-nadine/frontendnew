@@ -2,6 +2,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
   classNameBindings: [
     'isInvalid'
     ':field'
+    ':autocomplete'
   ]
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')

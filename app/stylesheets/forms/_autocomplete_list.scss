@@ -1,5 +1,14 @@
-ul.as-selections{
+div.autocomplete{
   margin-top: 10px;
+  border: none;
+
+  &.is-invalid{
+    border: 1px solid red;
+  }
+}
+
+ul.as-selections{
+  margin-top: 0px;
   border-top: none;
 
   li.as-selection-item {
