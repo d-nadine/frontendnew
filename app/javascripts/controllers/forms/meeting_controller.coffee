@@ -1,10 +1,10 @@
-Radium.FormsMeetingController = Radium.FormsBaseController.extend
+Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   meetingUsers: null
   calendarsOpen: false
   init: ->
     @_super.apply this, arguments
-    @set 'meetingUsers', Radium.MeetingUsers.create()
-    @set 'meetingUsers.startsAt', @get('startsAt')
+    # @set 'meetingUsers', Radium.MeetingUsers.create()
+    # @set 'meetingUsers.startsAt', @get('startsAt')
 
   submit: ->
     @set 'isSubmitted', true
@@ -13,12 +13,12 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
     @set('users.startsAt', @get('startsAt')) if @get('startsAt')
   ).observes('startsAt')
 
-  # contentDidChange: (->
-  #   return unless @get('model.users.length')
+  contentDidChange: (->
+    return unless @get('model.users.length')
 
-  #   @get('model.users').forEach (user) =>
-  #     @addUserToMeeting user.get('id')
-  # ).observes('content')
+    @get('model.users').forEach (user) =>
+      @addUserToMeeting user.get('id')
+  ).observes('content')
 
   usersDidChange: ( ->
     return unless @get('users.length') && @get('startsAt')

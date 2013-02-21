@@ -68,10 +68,17 @@ Radium.FormsAutocompleteView = Ember.View.extend
         @get('controller').removeUserFromMeeting el.data('value') + ""
         el.remove()
 
+      preFill = if @get('controller.model.isNew')
+                  [mapUser(currentUser)]
+                else
+                  debugger
+                  @get('controller.model.users').map( (user) ->
+                    mapUser(user)).toArray()
+
       @$().autoSuggest {retrieve: retrieve},
                         selectedItemProp: "name"
                         searchObjProps: "name"
-                        preFill: [mapUser(currentUser)]
+                        preFill: preFill
                         formatList: formatList
                         getAvatar: getAvatar
                         selectionClick: selectionClick

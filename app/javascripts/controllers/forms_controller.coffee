@@ -1,11 +1,14 @@
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   newMeeting: (->
-    Radium.MeetingForm.create
+    meeting = Radium.MeetingForm.create
       content: Radium.Meeting.createRecord
         isNew: true
+        users: Em.ArrayProxy.create(content: [])
         user: @get('currentUser')
         startsAt: Ember.DateTime.create()
         endsAt: Ember.DateTime.create().advance({hour: 1})
+
+    meeting
   ).property()
 
   editableMeeting: ( ->
