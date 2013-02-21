@@ -8,6 +8,16 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         endsAt: Ember.DateTime.create().advance({hour: 1})
   ).property()
 
+  editableMeeting: ( ->
+    Ember.ObjectProxy.create
+      content: Factory.create 'meeting'
+        user: @get('currentUser')
+        startsAt: Ember.DateTime.create().advance(day: 7)
+        endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+
+      isEditable: true
+  ).property()
+
   newTodo: (->
     Radium.TodoForm.create
       content: Radium.Todo.createRecord
