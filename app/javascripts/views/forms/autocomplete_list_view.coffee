@@ -71,7 +71,6 @@ Radium.FormsAutocompleteView = Ember.View.extend
       preFill = if @get('controller.model.isNew')
                   [mapUser(currentUser)]
                 else
-                  debugger
                   @get('controller.model.users').map( (user) ->
                     mapUser(user)).toArray()
 
