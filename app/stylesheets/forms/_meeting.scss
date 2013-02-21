@@ -51,16 +51,13 @@
       text-align: right;
     }
 
-    .starts-at{
-      input[type=text]{
-        width: 90px;
-      }
-    }
-
     .map{
-      width: 37%;
+      width: 74.4%;
+      display: block;
+      margin-top: 10px;
       input[type=text]{
-        width: 170px;
+        box-sizing: border-box;
+        width: 74%;
       }
       a.pull-right{
         margin-right: 3px;

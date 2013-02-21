@@ -1,9 +1,10 @@
 Radium.FormsMeetingController = Radium.FormsBaseController.extend
+  meetingUsers: null
   calendarsOpen: false
   init: ->
     @_super.apply this, arguments
-    @set 'users', Radium.MeetingUsers.create()
-    @set 'users.startsAt', @get('startsAt')
+    @set 'meetingUsers', Radium.MeetingUsers.create()
+    @set 'meetingUsers.startsAt', @get('startsAt')
 
   submit: ->
     @set 'isSubmitted', true
@@ -11,6 +12,13 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
   startsAtDidChange: ( ->
     @set('users.startsAt', @get('startsAt')) if @get('startsAt')
   ).observes('startsAt')
+
+  # contentDidChange: (->
+  #   return unless @get('model.users.length')
+
+  #   @get('model.users').forEach (user) =>
+  #     @addUserToMeeting user.get('id')
+  # ).observes('content')
 
   usersDidChange: ( ->
     return unless @get('users.length') && @get('startsAt')
