@@ -1,54 +1,74 @@
-Radium.FormsAutocompleteView = Ember.TextField.extend
-  didInsertElement: ->
-    currentUser = @get('controller.currentUser')
+Radium.FormsAutocompleteView = Ember.View.extend
+  classNameBindings: [
+    'isInvalid'
+    ':field'
+  ]
 
-    mapUser = (user) ->
-      name = if user.get('id') == currentUser.get('id')
-                "#{user.get('name')} (Me)"
-             else
-                user.get('name')
+  isSubmitted: Ember.computed.alias('controller.isSubmitted')
+  users: Ember.computed.alias('controller.users')
 
-      value: user.get('id')
-      name: name
-      # FIXME: Get real avatar
-      avatar: "/images/default_avatars/small.png"
-      data: user
+  template: Ember.Handlebars.compile """
+    {{view view.autoCompleteList}}
+  """
 
-    retrieve = (query, callback) =>
-      # FIXME: Change to real server query
-      result = Radium.User.find().map mapUser
+  isInvalid: ( ->
+    return false unless @get('isSubmitted')
 
-      callback(result, query)
+    !@get('users.length') || @get('users.length') == 1
+  ).property('isSubmitted', 'users', 'users.length')
 
-    getAvatar = (data) ->
-      """
-        <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
-      """
 
-    formatList = (data, elem) ->
-      content = """
-        #{getAvatar(data)}
-        #{data.name}
-      """
+  autoCompleteList: Ember.TextField.extend
+    didInsertElement: ->
+      currentUser = @get('controller.currentUser')
 
-      elem.html(content)
+      mapUser = (user) ->
+        name = if user.get('id') == currentUser.get('id')
+                  "#{user.get('name')} (Me)"
+               else
+                  user.get('name')
 
-    selectionClick = (el) =>
-      console.log el
+        value: user.get('id')
+        name: name
+        # FIXME: Get real avatar
+        avatar: "/images/default_avatars/small.png"
+        data: user
 
-    selectionAdded = (el) =>
-      @get('controller').addUserToMeeting el.data('value') + ""
+      retrieve = (query, callback) =>
+        # FIXME: Change to real server query
+        result = Radium.User.find().map mapUser
 
-    selectionRemoved = (el) =>
-      @get('controller').removeUserFromMeeting el.data('value') + ""
-      el.remove()
+        callback(result, query)
 
-    @$().autoSuggest {retrieve: retrieve},
-                      selectedItemProp: "name"
-                      searchObjProps: "name"
-                      preFill: [mapUser(currentUser)]
-                      formatList: formatList
-                      getAvatar: getAvatar
-                      selectionClick: selectionClick
-                      selectionAdded: selectionAdded
-                      selectionRemoved: selectionRemoved
+      getAvatar = (data) ->
+        """
+          <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
+        """
+
+      formatList = (data, elem) ->
+        content = """
+          #{getAvatar(data)}
+          #{data.name}
+        """
+
+        elem.html(content)
+
+      selectionClick = (el) =>
+        console.log el
+
+      selectionAdded = (el) =>
+        @get('controller').addUserToMeeting el.data('value') + ""
+
+      selectionRemoved = (el) =>
+        @get('controller').removeUserFromMeeting el.data('value') + ""
+        el.remove()
+
+      @$().autoSuggest {retrieve: retrieve},
+                        selectedItemProp: "name"
+                        searchObjProps: "name"
+                        preFill: [mapUser(currentUser)]
+                        formatList: formatList
+                        getAvatar: getAvatar
+                        selectionClick: selectionClick
+                        selectionAdded: selectionAdded
+                        selectionRemoved: selectionRemoved
