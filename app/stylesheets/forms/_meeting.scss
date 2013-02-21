@@ -43,6 +43,10 @@
     width: 95%;
     margin: 0 auto;
 
+    .save{
+      text-align: right;
+    }
+
     .starts-at{
       input[type=text]{
         width: 90px;
@@ -63,7 +67,7 @@
       margin-top: 10px;
       padding: 10px;
 
-      strong, .btn-group, .save{
+      strong, .btn-group{
         display: inline-block;
       }
 

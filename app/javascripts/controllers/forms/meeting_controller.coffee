@@ -22,7 +22,10 @@ Radium.FormsMeetingController = Radium.FormsBaseController.extend
                                 meeting.get('users').contains(user)
 
       meetings.forEach (meeting) ->
-        if self.get('startsAt').isBetweenExact meeting.get('startsAt').advance(minute: -5), meeting.get('endsAt').advance(minute: -5)
+        startsAt = meeting.get('startsAt').advance(minute: -5)
+        endsAt = meeting.get('endsAt').advance(minute: 5)
+
+        if self.get('startsAt').isBetweenExact startsAt, endsAt
           self.set 'calendarsOpen', true
 
   ).observes('users', 'users.length', 'startsAt')
