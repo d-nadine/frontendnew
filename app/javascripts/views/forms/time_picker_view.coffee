@@ -11,6 +11,7 @@ Radium.TimePickerView = Ember.View.extend
     ':input-append'
   ]
 
+  isSubmitted: Ember.computed.alias('controller.isSubmitted')
   leader: 'Starts at:'
   dateBinding: 'controller.startsAt'
 
@@ -24,14 +25,11 @@ Radium.TimePickerView = Ember.View.extend
     element.on 'changeTime.timepicker', (e) =>
       @setDate e.time.value
 
-  dateDidChange: ( ->
-    @setDate $('.timepicker').timepicker().val()
-  ).observes('date')
-
   setDate: (time) ->
     dateString = "#{@get('date').toDateFormat()} #{time}"
     date = Ember.DateTime.parse dateString, "%Y-%m-%d %i:%M %p"
-    @set('date', date) if date
+    Ember.run =>
+      @set('date', date) if date
 
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
