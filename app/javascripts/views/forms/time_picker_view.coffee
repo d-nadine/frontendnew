@@ -42,3 +42,4 @@ Radium.TimePickerView = Ember.View.extend
       @$('.timepicker').timepicker('hideWidget')
 
     @toggleProperty 'showWidget'
+    false
