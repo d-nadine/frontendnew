@@ -15,10 +15,6 @@ Radium.TimePickerView = Ember.View.extend
   leader: 'Starts at:'
   dateBinding: 'controller.startsAt'
 
-  isValid: ( ->
-    true
-  ).property()
-
   didInsertElement: ->
     element = @$('.timepicker')
     element.timepicker(defaultTime: @get('date').toMeridianTime())
