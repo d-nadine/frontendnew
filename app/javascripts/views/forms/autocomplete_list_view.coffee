@@ -1,6 +1,7 @@
 Radium.FormsAutocompleteView = Ember.View.extend
   classNameBindings: [
     'isInvalid'
+    'hasUsers:is-valid'
     ':field'
     ':autocomplete'
   ]
@@ -15,9 +16,12 @@ Radium.FormsAutocompleteView = Ember.View.extend
   isInvalid: ( ->
     return false unless @get('isSubmitted')
 
-    !@get('users.length') || @get('users.length') == 1
+    not @get('hasUsers')
   ).property('isSubmitted', 'users', 'users.length')
 
+  hasUsers: ( ->
+    @get('users.length') && @get('users.length') > 1
+  ).property('users', 'users.length')
 
   autoCompleteList: Ember.TextField.extend
     didInsertElement: ->

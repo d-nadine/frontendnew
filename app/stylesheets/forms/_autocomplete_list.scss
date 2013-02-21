@@ -2,6 +2,10 @@ div.autocomplete{
   margin-top: 10px;
   border: none;
 
+  &.is-valid {
+    border: 1px solid $valid-input-border;
+  }
+
   &.is-invalid{
     border: 1px solid red;
   }
