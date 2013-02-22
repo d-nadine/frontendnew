@@ -72,6 +72,9 @@ Ember.DateTime.reopen
     else
       @toFormattedString(format)
 
+  toHumanFormatWithTime: ->
+    "#{@toHumanFormat()} #{@toMeridianTime()}"
+
 Ember.DateTime.reopenClass
   random: (options = {}) ->
     multipler = ->

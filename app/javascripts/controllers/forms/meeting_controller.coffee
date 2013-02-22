@@ -13,6 +13,15 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @get('startsAt').isBeforeToday()
   ).property('startsAt')
 
+  topic: ( ->
+    topic = @get('content.content.topic')
+
+    return topic if @get('isNew')
+
+    users = @get('users').map( (user) -> "@#{user.get('name')}").join(', ')
+    "#{topic} with #{users} at #{@get('startsAt').toHumanFormatWithTime()}"
+  ).property('topic', 'isNew')
+
   submit: ->
     @set 'isSubmitted', true
 
