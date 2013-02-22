@@ -26,6 +26,27 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     meeting
   ).property()
 
+  uneditableMeeting: (->
+    users = Radium.User.find()
+    Ember.ObjectProxy.create
+      content: Factory.create 'meeting'
+        topic: 'Uneditable Meeting'
+        user: @get('currentUser')
+        users: users
+        location: 'Apple Inc.'
+        startsAt: Ember.DateTime.create().advance(day: 7)
+        endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+      isEditable: false
+  ).property()
+
+  uneditableTodo: (->
+    Ember.ObjectProxy.create
+      content: Factory.create 'todo'
+        user: @get('currentUser')
+        reference: Factory.create('contact')
+      isEditable: false
+  ).property()
+
   newTodo: (->
     Radium.TodoForm.create
       content: Radium.Todo.createRecord
