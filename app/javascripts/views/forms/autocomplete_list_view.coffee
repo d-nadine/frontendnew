@@ -26,6 +26,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
   autoCompleteList: Ember.TextField.extend
     didInsertElement: ->
       currentUser = @get('controller.currentUser')
+      isNew = @get('controller.isNew')
 
       mapUser = (user) ->
         name = if user.get('id') == currentUser.get('id')
@@ -62,6 +63,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
         console.log el
 
       selectionAdded = (el) =>
+        unless isNew
+          $('.as-close', el).hide()
         @get('controller').addUserToMeeting el.data('value') + ""
 
       selectionRemoved = (el) =>
@@ -83,3 +86,4 @@ Radium.FormsAutocompleteView = Ember.View.extend
                         selectionClick: selectionClick
                         selectionAdded: selectionAdded
                         selectionRemoved: selectionRemoved
+                        resultsHighlight: true
