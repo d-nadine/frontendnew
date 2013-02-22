@@ -16,12 +16,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
         link<b class="caret"></b>
       </a>
       <ul class="attendeeMenu dropdown-menu">
-        <li>
-          <a id="ember9222" class="ember-view" href="/pipeline/leads">Leads</a>
-          <a id="ember9227" class="ember-view" href="/pipeline/negotiating">Negotiating</a>
-          <a id="ember9230" class="ember-view" href="/pipeline/closed">Closed</a>
-          <a id="ember9233" class="ember-view" href="/pipeline/lost">Lost</a>
-        </li>
+        <li><a href="#">Remove attendee</a></li>
+        <li><a href="#">Resend Invite</a></li>
       </ul>
     </div>
   """

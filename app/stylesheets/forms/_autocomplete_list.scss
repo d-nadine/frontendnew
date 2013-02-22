@@ -1,5 +1,6 @@
+@import "compass/utilities/lists/horizontal-list";
+@import "compass/utilities/lists/inline-block-list";
 div.autocomplete{
-  margin-top: 10px;
   border: none;
 
   &.is-valid {
@@ -13,6 +14,14 @@ div.autocomplete{
 div.attendeeDropdown{
   a.dropdown-toggle{
     display: none;
+  }
+  ul.attendeeMenu{
+    padding: 10px;
+    @include inline-block-list-container;
+    li{
+      float: left;
+      @include inline-block-list-item;
+    }
   }
 }
 
