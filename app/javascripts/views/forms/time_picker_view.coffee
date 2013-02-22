@@ -15,6 +15,8 @@ Radium.TimePickerView = Ember.View.extend
   leader: 'Starts at:'
   dateBinding: 'controller.startsAt'
 
+  disabled: Ember.computed.alias('controller.isDisabled')
+
   didInsertElement: ->
     element = @$('.timepicker')
     element.timepicker(defaultTime: @get('date').toMeridianTime())
@@ -29,6 +31,7 @@ Radium.TimePickerView = Ember.View.extend
 
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
+    disabledBinding: 'parentView.disabled'
 
   showWidget: true
   showTimes: ->

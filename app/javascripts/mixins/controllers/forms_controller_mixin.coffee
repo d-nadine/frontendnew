@@ -5,6 +5,12 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
 
   showOptions: Ember.computed.alias('isNew')
 
+  isPrimaryInputDisabled: (->
+    return false if @get('isNew')
+    return true unless @get('isExpanded')
+    @get 'isDisabled'
+  ).property('isDisabled', 'isExpanded', 'isNew')
+
   showComments: (->
     return false if @get('justAdded')
     @get 'hasComments'

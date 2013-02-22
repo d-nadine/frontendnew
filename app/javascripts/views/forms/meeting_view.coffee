@@ -4,7 +4,7 @@ Radium.FormsMeetingView = Ember.View.extend
 
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']
-
+    disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: 'Add meeting topic'
     valueBinding: 'controller.topic'
 

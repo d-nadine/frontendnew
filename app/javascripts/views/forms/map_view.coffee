@@ -8,17 +8,23 @@ Radium.MapView = Ember.View.extend
   ]
 
   leader: 'location'
+  disabled: Ember.computed.alias('controller.isDisabled')
 
-  locationField: Ember.TextField.extend()
+  locationField: Ember.TextField.extend
+    disabledBinding: 'parentView.disabled'
 
   showMap: (event) ->
-    $('.modal').modal(backdrop: true)
+    $("##{@get('modalId')}").parent().modal(backdrop: true)
     false
+
+  modalId: (->
+    "map-modal-#{@get('elementId')}"
+  ).property()
 
   mapModal: Ember.View.extend
     classNames: ['modal','hide','fade']
     template: Ember.Handlebars.compile """
-      <div class="modal-header">
+      <div id="{{unbound view.parentView.modalId}}" class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Modal</h3>
       </div>

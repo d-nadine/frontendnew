@@ -47,6 +47,10 @@
     width: 95%;
     margin: 0 auto;
 
+    .bootstrap-timepicker.is-disabled{
+      font-size: 9px;
+    }
+
     .save{
       text-align: right;
     }
