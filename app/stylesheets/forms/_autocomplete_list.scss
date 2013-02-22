@@ -10,6 +10,11 @@ div.autocomplete{
     border: 1px solid red;
   }
 }
+div.attendeeDropdown{
+  a.dropdown-toggle{
+    display: none;
+  }
+}
 
 ul.as-selections{
   margin-top: 0px;

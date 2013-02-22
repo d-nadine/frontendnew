@@ -11,6 +11,19 @@ Radium.FormsAutocompleteView = Ember.View.extend
 
   template: Ember.Handlebars.compile """
     {{view view.autoCompleteList}}
+    <div class="attendeeDropdown" class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        link<b class="caret"></b>
+      </a>
+      <ul class="attendeeMenu dropdown-menu">
+        <li>
+          <a id="ember9222" class="ember-view" href="/pipeline/leads">Leads</a>
+          <a id="ember9227" class="ember-view" href="/pipeline/negotiating">Negotiating</a>
+          <a id="ember9230" class="ember-view" href="/pipeline/closed">Closed</a>
+          <a id="ember9233" class="ember-view" href="/pipeline/lost">Lost</a>
+        </li>
+      </ul>
+    </div>
   """
 
   isInvalid: ( ->
@@ -60,7 +73,17 @@ Radium.FormsAutocompleteView = Ember.View.extend
         elem.html(content)
 
       selectionClick = (el) =>
-        console.log el
+        offset = el.offset()
+
+        dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
+
+        dropdown.css
+          position: "absolute",
+          top: offset.top + el.height() + 10 + "px",
+          left: offset.left + "px"
+
+        dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
+        event.stopPropagation()
 
       selectionAdded = (el) =>
         unless isNew
