@@ -8,7 +8,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'calendarsOpen', false
 
   hasElapsed: ( ->
-    return false unless @get('startsAt')
+    return unless @get('startsAt')
 
     @get('startsAt').isBeforeToday()
   ).property('startsAt')
