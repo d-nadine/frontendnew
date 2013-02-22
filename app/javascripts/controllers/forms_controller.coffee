@@ -13,7 +13,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   editableMeeting: ( ->
     users = Radium.User.find()
-    meeting = Ember.ObjectProxy.create
+    meeting = Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
         users: users
@@ -28,7 +28,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   uneditableMeeting: (->
     users = Radium.User.find()
-    Ember.ObjectProxy.create
+    Radium.MeetingForm.create
       content: Factory.create 'meeting'
         topic: 'Uneditable Meeting'
         user: @get('currentUser')

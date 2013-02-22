@@ -4,6 +4,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   init: ->
     @_super.apply this, arguments
     @set 'meetingUsers', Radium.MeetingUsers.create()
+    @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
 
   submit: ->
@@ -20,7 +21,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     self = this
 
     @get('users').forEach (user) =>
-      meetings = Radium.Meeting.find(user: user, day: @get('startsAt'))
+      meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
                               .filter (meeting) ->
                                 return false if meeting.get('isNew')
                                 meeting.get('users').contains(user)
