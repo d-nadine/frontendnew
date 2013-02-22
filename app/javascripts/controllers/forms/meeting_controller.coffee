@@ -7,6 +7,12 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
 
+  hasElapsed: ( ->
+    return false unless @get('startsAt')
+
+    @get('startsAt').isBeforeToday()
+  ).property('startsAt')
+
   submit: ->
     @set 'isSubmitted', true
 
@@ -15,8 +21,8 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).observes('startsAt')
 
   usersDidChange: ( ->
-    return unless @get('users.length') && @get('startsAt')
     return if @get('calendarsOpen')
+    return unless @get('users.length') && @get('startsAt')
 
     self = this
 

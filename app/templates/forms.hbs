@@ -5,7 +5,7 @@
   <div class="block">
     <!-- FIXME: Move with other forms-->
     <h1>Meeting Forms</h1>
-    <h3>New Meeting Form: No Context</h3>
+    <h3>New Meeting Form</h3>
     {{control "forms/meeting" newMeeting}}
 
     <h3>Editable Meeting</h3>
@@ -14,6 +14,14 @@
     <h3>Uneditable Meeting & Expandable</h3>
     {{control "forms/meeting" uneditableMeeting}}
 
+    <h3>Editable : Passed start date</h3>
+    {{control "forms/meeting" editablePassedMeeting}}
+
+    <h3>Uneditable Passed start date</h3>
+    {{control "forms/meeting" uneditablePassedMeeting}}
+
+    <h3>Meeting after adding</h3>
+    {{!control "forms/meeting" justAddedMeeting}}
   </div>
 </div>
 
