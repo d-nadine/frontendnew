@@ -1,7 +1,9 @@
 Radium.MeetingUsers = Ember.ArrayProxy.extend
-  content: []
-  meetings: []
-  startsAt: null
+  init: ->
+    @_super.apply this, arguments
+    @set 'content', Ember.A()
+    @set 'meetings', Ember.A()
+    @set 'startsAt', null
 
   startsAtDidChange: ( ->
     return unless @get('startsAt') && @get('content.length')
