@@ -1,9 +1,10 @@
 Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   meetingUsers: null
-  calendarsOpen: false
+  calendarsOpen: null
   init: ->
     @_super.apply this, arguments
     @set 'meetingUsers', Radium.MeetingUsers.create()
+    @set 'calendarsOpen', false
 
   submit: ->
     @set 'isSubmitted', true
