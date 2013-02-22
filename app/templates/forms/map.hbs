@@ -9,7 +9,7 @@
 {{/if}}
 <span class="text">{{view.leader}}</span>
 {{view view.locationField}}
-{{#unless disabled}}
+{{#unless view.disabled}}
   <a class="btn btn-link pull-right" {{action showMap target="view"}}>Map</a>
   {{view view.mapModal}}
 {{/unless}}
