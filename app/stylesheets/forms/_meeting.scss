@@ -31,6 +31,20 @@
     }
   }
 
+  &.just-added .main {
+    background-color: darken($dark-background, 50);
+
+    textarea{
+      color: $bright;
+    }
+
+    .success {
+      color: $success-green;
+      margin-top: 4px;
+    }
+  }
+
+
   .checker {
     label {
       background: url('/images/icons/meeting.png') no-repeat;

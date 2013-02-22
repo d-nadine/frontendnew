@@ -41,6 +41,11 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   ).observes('users', 'users.length', 'startsAt')
 
+  isExpandable: (->
+    return false if @get('justAdded')
+    !@get('isNew')
+  ).property('isNew')
+
   showCalendars: ->
     @toggleProperty 'calendarsOpen'
     false
