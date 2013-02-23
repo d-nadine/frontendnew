@@ -52,6 +52,8 @@ Radium.DatePicker = Ember.View.extend
         top: offset.top + @height,
         left: offset.left
 
+      event.preventDefault()
+
     @$('.datepicker-link').data('datepicker').set = ->
       view.set 'text', Ember.DateTime.create(@date.getTime()).toDateFormat()
       @hide()
