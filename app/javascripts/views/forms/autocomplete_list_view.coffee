@@ -41,6 +41,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
+
     selectionRemoved: (el) ->
       console.log 'yip'
       @get('controller').removeUserFromMeeting el.data('value') + ""
@@ -51,8 +52,15 @@ Radium.FormsAutocompleteView = Ember.View.extend
         $('.as-close', el).hide()
       @get('controller').addUserToMeeting el.data('value') + ""
 
+    canEdit: ->
+      return false if @get('controller.isNew')
+      return false unless @get('controller.isEditable')
+      return false if @get('controller.hasElapsed')
+      true
+
     selectionClick: (el) ->
-      return if @get('controller.isNew')
+      return unless @canEdit()
+
       offset = el.offset()
 
       dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
