@@ -3,7 +3,38 @@ Radium.FormsMeetingView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend()
 
   showCancelMeetingDialogue: ->
+    dialogue =  @$('.cancel-meeting')
+    parent = dialogue.parents('form:eq(0)')
+    offset = parent.offset()
+
+    dialogue.css
+      position: 'absolute'
+      top: offset.top + "px"
+      left: offset.left + "px"
+      width: parent.width() + "px"
+      height: parent.height() + "px"
+
+    dialogue.show()
     false
+
+  cancelMeetingDialogue: Ember.View.extend
+    classNames: ['cancel-meeting']
+    template: Ember.Handlebars.compile """
+      <div class="content">
+        <div>Are you sure you want to cancel meeting</div>
+        <div>{{controller.topic}}</div>
+        <div>
+          <button {{action cancel target="view"}} class="btn btn-no">No</button>
+          <button {{action cancelMeeting target="view"}} class="btn btn-success">YES, CANCEL</button>
+        </div>
+        <div>Notifications will be sent to attendees</div>
+      </div>
+    """
+    cancel: ->
+      @$().hide()
+
+    cancelMeeting: ->
+      @$().hide()
 
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']

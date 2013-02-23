@@ -3,6 +3,35 @@
     border: 1px solid $valid-input-border;
   }
 
+  .cancel-meeting{
+    display: none;
+    background-color: #000;
+    line-height: 30px;
+    opacity: 0.8;
+    color: #fff;
+    text-align: center;
+    .content{
+      margin-top: 10%;
+      > div{
+        margin: 10px 0 10px 0;
+        vertical-align: center;
+      }
+      div:first-of-type{
+        font-size: 18px;
+      }
+      div:nth-of-type(2){
+        font-size: 24px;
+      }
+      div:last-of-type{
+        font-size: 12px;
+      }
+
+      .btn{
+        opacity: 1;
+      }
+    }
+  }
+
   .main {
     position: relative;
     background-color: white;
