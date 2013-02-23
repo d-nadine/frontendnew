@@ -2,10 +2,20 @@ require 'views/forms/time_picker_view'
 Radium.FormsMeetingView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend()
 
+  didInsertElement: ->
+    $('html').on 'click.cancel-meeting', ->
+      $('cancel-meeting').hide()
+
+  willDestroyElement: ->
+    $('html').off 'click.cancel-meeting'
+
   showCancelMeetingDialogue: ->
     dialogue =  @$('.cancel-meeting')
     parent = dialogue.parents('form:eq(0)')
     offset = parent.offset()
+
+    $('html').on 'click.cancel-meeting', ->
+      dialogue.hide()
 
     dialogue.css
       position: 'absolute'
