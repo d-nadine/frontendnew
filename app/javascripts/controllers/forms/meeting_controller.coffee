@@ -7,6 +7,14 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
 
+  isEditable:( ->
+    return false if @get('isNew')
+    return false unless @get('content.isEditable')
+    return false if @get('justAdded')
+    return false if @get('hasElapsed')
+    true
+  ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
+
   hasElapsed: ( ->
     return unless @get('startsAt')
 
