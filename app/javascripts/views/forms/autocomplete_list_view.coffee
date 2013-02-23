@@ -74,7 +74,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
       true
 
     selectionClick: (el) ->
-      return unless @canEdit()
+      return false unless @canEdit()
 
       offset = el.offset()
 
@@ -121,5 +121,3 @@ Radium.FormsAutocompleteView = Ember.View.extend
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
-
-
