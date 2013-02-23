@@ -37,17 +37,32 @@ Radium.FormsAutocompleteView = Ember.View.extend
   ).property('users', 'users.length')
 
   autoCompleteList: Ember.TextField.extend
-    getAvatar: (data) ->
-      """
-        <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
-      """
+    didInsertElement: ->
+      preFill = if @get('controller.isNew')
+                  [@mapUser(@get('controller.currentUser'))]
+                else
+                  @get('controller.model.users').map( (user) =>
+                    @mapUser(user)).toArray()
+
+      @$().autoSuggest {retrieve: @retrieve.bind(this)},
+                        selectedItemProp: "name"
+                        searchObjProps: "name"
+                        preFill: preFill
+                        formatList: @formatList.bind(this)
+                        getAvatar: @getAvatar.bind(this)
+                        selectionClick: @selectionClick.bind(this)
+                        selectionAdded: @selectionAdded.bind(this)
+                        selectionRemoved: @selectionRemoved.bind(this)
+                        resultsHighlight: true
 
     selectionRemoved: (el) ->
-      console.log 'yip'
       @get('controller').removeUserFromMeeting el.data('value') + ""
       el.remove()
 
     selectionAdded: (el) ->
+      if @canEdit() && !el.hasClass('is-editable')
+        el.addClass('is-editable')
+
       unless @get('controller.isNew')
         $('.as-close', el).hide()
       @get('controller').addUserToMeeting el.data('value') + ""
@@ -73,18 +88,19 @@ Radium.FormsAutocompleteView = Ember.View.extend
       dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
       event.stopPropagation()
 
-    retrieve: (query, callback) ->
-      # FIXME: Change to real server query
-      result = Radium.User.find().map @mapUser
-
-      callback(result, query)
-
     formatList: (data, elem) ->
       content = """
-        #{getAvatar(data)}
+        #{@getAvatar(data)}
         #{data.name}
       """
       elem.html(content)
+
+    retrieve: (query, callback) ->
+      # FIXME: Change to real server query
+      result = Radium.User.find().map (user) =>
+                    @mapUser.call this, user
+
+      callback(result, query)
 
     mapUser: (user) ->
       currentUser = @get('controller.currentUser')
@@ -101,20 +117,9 @@ Radium.FormsAutocompleteView = Ember.View.extend
         avatar: "/images/default_avatars/small.png"
         data: user
 
-    didInsertElement: ->
-      preFill = if @get('controller.model.isNew')
-                  [@mapUser(@get('controller.currentUser'))]
-                else
-                  @get('controller.model.users').map( (user) =>
-                    @mapUser(user)).toArray()
+    getAvatar: (data) ->
+      """
+        <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
+      """
 
-      @$().autoSuggest {retrieve: $.proxy(@retrieve, this)},
-                        selectedItemProp: "name"
-                        searchObjProps: "name"
-                        preFill: preFill
-                        formatList: $.proxy(@formatList, this)
-                        getAvatar: $.proxy(@getAvatar, this)
-                        selectionClick: $.proxy(@selectionClick, this)
-                        selectionAdded: $.proxy(@selectionAdded, this)
-                        selectionRemoved: $.proxy( @selectionRemoved, this)
-                        resultsHighlight: true
+
