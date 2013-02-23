@@ -41,7 +41,7 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
     @get('isDisabled') || @get('isNew')
   ).property('isDisabled', 'isNew')
 
-  toggleExpanded: -> 
+  toggleExpanded: ->
     @toggleProperty 'isExpanded'
 
   expand: ->

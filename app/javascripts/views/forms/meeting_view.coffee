@@ -2,6 +2,9 @@ require 'views/forms/time_picker_view'
 Radium.FormsMeetingView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend()
 
+  showCancelMeetingDialogue: ->
+    false
+
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']
     disabledBinding: 'controller.isPrimaryInputDisabled'
