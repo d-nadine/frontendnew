@@ -56,7 +56,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
                         resultsHighlight: true
 
     selectionRemoved: (el) ->
-      @get('controller').removeUserFromMeeting el.data('value') + ""
+      @get('controller').removeUserFromMeeting el.data('object')
       el.remove()
 
     selectionAdded: (el) ->
@@ -65,7 +65,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
 
       unless @get('controller.isNew')
         $('.as-close', el).hide()
-      @get('controller').addUserToMeeting el.data('value') + ""
+
+      @get('controller').addUserToMeeting el.data('object')
 
     selectionClick: (el) ->
       return false unless @get('controller.isEditable')
