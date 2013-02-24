@@ -73,8 +73,8 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         user: @get('currentUser')
         users: users
         location: 'Apple Inc.'
-        startsAt: Ember.DateTime.create().advance(day: 7)
-        endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+        startsAt: Ember.DateTime.create().advance(day: 17)
+        endsAt: Ember.DateTime.create().advance(day: 17).advance(hour: 3)
 
       isEditable: false
       justAdded: true

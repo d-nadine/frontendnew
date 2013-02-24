@@ -15,6 +15,13 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     true
   ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
 
+  showTopicTextBox: ( ->
+    return true if @get('isNew')
+    return false if @get('notEditable')
+    return true if @get('isNew')
+    @get('isExpanded')
+  ).property('isNew', 'notEditable', 'isExpanded')
+
   notEditable: ( ->
     not @get('isEditable')
   ).property('isEditable')
@@ -25,14 +32,23 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @get('startsAt').isBeforeToday()
   ).property('startsAt')
 
-  topic: ( ->
+  showComments: (->
+    return false if @get('justAdded')
+    return false if @get('isNew')
+    true
+  ).property('isNew', 'justAdded')
+
+  cancellationText: ( ->
     topic = @get('content.content.topic')
 
-    return topic if @get('isNew')
-
     users = @get('users').map( (user) -> "@#{user.get('name')}").join(', ')
+
     "#{topic} with #{users} at #{@get('startsAt').toHumanFormatWithTime()}"
   ).property('topic', 'isNew')
+
+  readableStartsAt: ( ->
+    @get('startsAt').toHumanFormatWithTime()
+  ).property('startsAt')
 
   submit: ->
     @set 'isSubmitted', true

@@ -12,6 +12,7 @@ Radium.MapView = Ember.View.extend
 
   locationField: Ember.TextField.extend
     disabledBinding: 'parentView.disabled'
+    valueBinding: 'parentView.text'
 
   showMap: (event) ->
     $("##{@get('modalId')}").parent().modal(backdrop: true)

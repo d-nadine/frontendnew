@@ -32,7 +32,7 @@ Radium.FormsMeetingView = Ember.View.extend
     template: Ember.Handlebars.compile """
       <div class="content">
         <div>Are you sure you want to cancel meeting</div>
-        <div>{{controller.topic}}</div>
+        <div>{{controller.cancellationText}}</div>
         <div>
           <button {{action cancel target="view"}} class="btn btn-no">No</button>
           <button {{action cancelMeeting target="view"}} class="btn btn-success">YES, CANCEL</button>
@@ -53,6 +53,9 @@ Radium.FormsMeetingView = Ember.View.extend
     valueBinding: 'controller.topic'
 
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
+
+    click: (evt) ->
+      evt.stopPropagation()
 
     isInvalid: (->
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
@@ -102,5 +105,6 @@ Radium.FormsMeetingView = Ember.View.extend
 
   location:  Radium.MapView.extend
     leader: 'location'
+    textBinding: 'controller.location'
 
   userList: Radium.FormsAutocompleteView.extend()

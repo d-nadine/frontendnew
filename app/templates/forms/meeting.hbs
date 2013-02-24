@@ -1,5 +1,5 @@
 <form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :meeting-form"}}>
-  <div {{bindAttr class="topic:is-valid hasElapsed :main"}} {{action expand}}>
+  <div {{bindAttr class="topic:is-valid hasElapsed showTopicTextBox:open:closed :main"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if showOptions}}
@@ -12,15 +12,25 @@
       </a>
     {{/if}}
 
-    {{#if showComments}}
-      <i class="icon-comment pull-right"></i>
-    {{/if}}
-
     {{#if showSuccess}}
       <span class="success pull-right">Meeting Added</span>
     {{/if}}
 
-    {{view view.topicField classNames="field field-blend-in"}}
+    {{#if showTopicTextBox}}
+      {{view view.topicField classNames="field field-blend-in"}}
+    {{else}}
+      <span class="topic">
+        {{topic}} with
+        {{#each users}}
+          {{#linkTo user this}}@{{this.name}}{{/linkTo}}
+        {{/each}}
+        at {{readableStartsAt}}
+      </span>
+    {{/if}}
+
+    {{#if showComments}}
+      <i class="icon-comment pull-right"></i>
+    {{/if}}
   </div>
   {{#if isExpanded}}
     <div class="options">
@@ -34,9 +44,9 @@
           <a {{action showCalendars}}class="btn">
             <strong>{{currentDate}}'s Calendars</strong>
             {{#if calendarsOpen}}
-              <i class="icon-chevron-up"></i>
-            {{else}}
               <i class="icon-chevron-down"></i>
+            {{else}}
+              <i class="icon-chevron-up"></i>
             {{/if}}
           </a>
         </div>
@@ -52,6 +62,11 @@
           <button class="btn" {{action showCancelMeetingDialogue target="view"}} {{bindAttr disabled="controller.notEditable"}}>Cancel</button>
         </div>
       </div>
+      {{#unless isNew}}
+        <div class="block block-arrow">
+          {{control 'comments' model}}
+        </div>
+      {{/unless}}
     </div>
   {{/if}}
   {{view view.cancelMeetingDialogue}}
