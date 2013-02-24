@@ -12,7 +12,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   editableMeeting: ( ->
-    users = Radium.User.find()
+    users = Radium.User.find().slice(0, 2)
     meeting = Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
@@ -27,7 +27,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   uneditableMeeting: (->
-    users = Radium.User.find()
+    users = Radium.User.find().slice(3, 6)
     Radium.MeetingForm.create
       content: Factory.create 'meeting'
         topic: 'Uneditable Meeting'
@@ -40,7 +40,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   editablePassedMeeting: ( ->
-    users = Radium.User.find()
+    users = Radium.User.find().slice(4)
     Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
@@ -54,7 +54,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   uneditablePassedMeeting: ( ->
-    users = Radium.User.find()
+    users = Radium.User.find().slice(2, 4)
     Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
@@ -67,7 +67,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   justAddedMeeting: ( ->
-    users = Radium.User.find()
+    users = Radium.User.find().slice(4)
     Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
