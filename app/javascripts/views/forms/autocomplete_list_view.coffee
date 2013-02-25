@@ -54,6 +54,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
                         selectionAdded: @selectionAdded.bind(this)
                         selectionRemoved: @selectionRemoved.bind(this)
                         resultsHighlight: true
+                        canGenerateNewSelections: true
 
     selectionRemoved: (el) ->
       @get('controller').removeUserFromMeeting el.data('object')
@@ -66,7 +67,10 @@ Radium.FormsAutocompleteView = Ember.View.extend
       unless @get('controller.isNew')
         $('.as-close', el).hide()
 
-      @get('controller').addUserToMeeting el.data('object')
+      attendee = el.data('object')
+
+      # FIXME: Create new contact from unknown email address
+      @get('controller').addUserToMeeting attendee if attendee
 
     selectionClick: (el) ->
       return false unless @get('controller.isEditable')
@@ -113,6 +117,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
         data: user
 
     getAvatar: (data) ->
+      unless data.data
+        data.avatar = "/images/default_avatars/small.png"
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
