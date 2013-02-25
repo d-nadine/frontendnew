@@ -57,24 +57,27 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set('meetingUsers.startsAt', @get('startsAt')) if @get('startsAt')
   ).observes('startsAt')
 
+  # FIXME: Review when using real ember-data
   usersDidChange: ( ->
     return if @get('calendarsOpen')
+    return unless @get('isExpanded')
     return unless @get('users.length') && @get('startsAt')
 
     self = this
 
     @get('users').forEach (user) =>
-      meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
-                              .filter (meeting) ->
-                                return false if meeting.get('isNew')
-                                meeting.get('users').contains(user)
+      if user
+        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
+                                .filter (meeting) ->
+                                  return false if meeting.get('isNew')
+                                  meeting.get('users').contains(user)
 
-      meetings.forEach (meeting) ->
-        startsAt = meeting.get('startsAt').advance(minute: -5)
-        endsAt = meeting.get('endsAt').advance(minute: 5)
+        meetings.forEach (meeting) ->
+          startsAt = meeting.get('startsAt').copy().advance(minute: -5)
+          endsAt = meeting.get('endsAt').copy().advance(minute: 5)
 
-        if self.get('startsAt').isBetweenExact startsAt, endsAt
-          self.set 'calendarsOpen', true
+          if self.get('startsAt').isBetweenExact startsAt, endsAt
+            self.set 'calendarsOpen', true
 
   ).observes('users', 'users.length', 'startsAt')
 
