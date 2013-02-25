@@ -10,7 +10,8 @@ Radium.MapView = Ember.View.extend
   leader: 'location'
   disabled: Ember.computed.alias('controller.isDisabled')
 
-  locationField: Ember.TextField.extend
+  locationField: Radium.MentionFieldView.extend
+    classNameBindings: [':location']
     disabledBinding: 'parentView.disabled'
     valueBinding: 'parentView.text'
 

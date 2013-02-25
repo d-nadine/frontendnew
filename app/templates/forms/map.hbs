@@ -1,16 +1,16 @@
-{{#if view.disabled}}
-  <i class="icon-map-marker"></i>
-{{else}}
-  <div class="btn-group">
+<div class="pull-left">
+  {{#if view.disabled}}
+    <i class="icon-map-marker"></i>
+  {{else}}
     <a class="btn" href="#" {{action showMap target="view"}}>
       <i class="icon-map-marker"></i>
     </a>
-  </div>
-{{/if}}
-<span class="text">{{view.leader}}</span>
-{{view view.locationField}}
+  {{/if}}
+  {{unbound view.leader}}
+</div>
 {{#unless view.disabled}}
   <a class="btn btn-link pull-right" {{action showMap target="view"}}>Map</a>
   {{view view.mapModal}}
 {{/unless}}
+{{view view.locationField}}
 

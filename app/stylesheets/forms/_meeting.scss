@@ -155,6 +155,16 @@
       a.pull-right{
         margin-right: 3px;
       }
+
+      div.pull-left span{
+        position: relative;
+        top: 2px;
+      }
+
+      div.location{
+        margin-left: 80px;
+        margin-right: 60px;
+      }
     }
 
     .block.calendars{
