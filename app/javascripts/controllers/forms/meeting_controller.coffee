@@ -90,14 +90,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @toggleProperty 'calendarsOpen'
     false
 
-  addUserToMeeting: (user) ->
-    users = @get('users')
+  addSelection: (attendee) ->
+    resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
 
-    return if users.find( (item) -> item == user)
+    attendees = @get(resource)
 
-    users.pushObject user
+    return if attendees.find( (item) -> item == attendee)
 
-    @get('meetingUsers').pushObject user
+    attendees.pushObject attendees
+
+    @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
   removeUserFromMeeting: (user) ->
     users = @get('users')

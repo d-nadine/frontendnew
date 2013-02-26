@@ -54,12 +54,3 @@ Radium.TimePickerView = Ember.View.extend
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
     disabledBinding: 'parentView.disabled'
-
-  showTimes: ->
-    if @get('showWidget')
-      @$('.timepicker').timepicker('showWidget')
-    else
-      @$('.timepicker').timepicker('hideWidget')
-
-    @toggleProperty 'showWidget'
-    false

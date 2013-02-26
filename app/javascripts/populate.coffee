@@ -31,36 +31,6 @@ class Populator
     startsAt = Ember.DateTime.create().advance(hour: 1)
     endsAt = Ember.DateTime.create().advance(hour: 3)
 
-    retrospection = Factory.create 'meeting',
-      topic: 'Retrospection'
-      location: 'Radium HQ'
-      startsAt: startsAt
-      endsAt: endsAt
-      users:  [
-        aaron,
-        jerry
-      ]
-
-    discussion1 = Factory.create 'discussion',
-      topic: 'Discussion about the deal'
-      users:  [
-        aaron,
-        jerry
-      ]
-
-    email = Factory.create 'email',
-      subject: 'Subject of the email'
-      sender: jerry
-
-    email1 = Factory.create 'email',
-      sender: aaron
-
-    email2 = Factory.create 'email',
-      sender: ralph
-
-    email3 = Factory.create 'email',
-      sender: john
-
     for i in [0..20]
       Factory.create 'deal',
         user: -> userDictionary.random()

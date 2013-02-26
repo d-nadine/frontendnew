@@ -37,12 +37,13 @@ Radium.FormsAutocompleteView = Ember.View.extend
   ).property('users', 'users.length')
 
   autoCompleteList: Ember.TextField.extend
+    currentUser: Ember.computed.alias 'controller.currentUser'
     didInsertElement: ->
       preFill = if @get('controller.isNew')
-                  [@mapUser(@get('controller.currentUser'))]
+                  [@mapSearchResult(@get('currentUser'))]
                 else
                   @get('controller.model.users').map( (user) =>
-                    @mapUser(user)).toArray()
+                    @mapSearchResult(user)).toArray()
 
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         selectedItemProp: "name"
@@ -70,7 +71,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
       attendee = el.data('object')
 
       # FIXME: Create new contact from unknown email address
-      @get('controller').addUserToMeeting attendee if attendee
+      @get('controller').addSelection attendee if attendee
 
     selectionClick: (el) ->
       return false unless @get('controller.isEditable')
@@ -88,33 +89,54 @@ Radium.FormsAutocompleteView = Ember.View.extend
       event.stopPropagation()
 
     formatList: (data, elem) ->
+      name = if data.data.get('name')
+                "#{data.name} (#{data.data.get('email')})"
+             else
+               data.email
+
       content = """
         #{@getAvatar(data)}
-        #{data.name}
+        #{name}
       """
       elem.html(content)
 
     retrieve: (query, callback) ->
       # FIXME: Change to real server query
-      result = Radium.User.find().map (user) =>
-                    @mapUser.call this, user
+      result = Radium.AutoCompleteResult.find(userFor: @get('currentUser')).get('firstObject')
 
-      callback(result, query)
+      comparer = (a, b) ->
+                   sortA = a.get('name') || a.get('email')
+                   sortB = a.get('name') || a.get('email')
 
-    mapUser: (user) ->
-      currentUser = @get('controller.currentUser')
+                   if sortA > sortB
+                     return 1
+                   else if sortA < sortB
+                     return - 1
 
-      name = if user.get('id') == currentUser.get('id')
-                "#{user.get('name')} (Me)"
+                   0
+
+      results = result.get('users').toArray()
+        .concat(result.get('contacts').toArray())
+        .sort(comparer)
+        .map (item) =>
+                    @mapSearchResult.call this, item
+
+      callback(results, query)
+
+    mapSearchResult: (result) ->
+      currentUser = @get('currentUser')
+
+      name = if result.constructor == Radium.User && result.get('id') == currentUser.get('id')
+                "#{result.get('name')} (Me)"
              else
-                user.get('name')
+                result.get('name') || result.get('email')
 
-      user =
-        value: user.get('id')
+      result =
+        value: "#{result.constructor}-#{result.get('id')}"
         name: name
         # FIXME: Get real avatar
         avatar: "/images/default_avatars/small.png"
-        data: user
+        data: result
 
     getAvatar: (data) ->
       unless data.data
