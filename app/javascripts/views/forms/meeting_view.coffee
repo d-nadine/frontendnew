@@ -102,7 +102,7 @@ Radium.FormsMeetingView = Ember.View.extend
 
       @setDate advance.toMeridianTime()
 
-      $('.timepicker').timepicker().val(advance.toMeridianTime())
+      @$('.timepicker').val(advance.toMeridianTime())
     ).observes('controller.startsAt')
 
   location:  Radium.MapView.extend

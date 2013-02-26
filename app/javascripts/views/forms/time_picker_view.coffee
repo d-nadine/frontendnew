@@ -17,17 +17,35 @@ Radium.TimePickerView = Ember.View.extend
 
   disabled: Ember.computed.alias('controller.isDisabled')
 
+  willDestroyElement: ->
+    @$('.timepicker').timepicker('remove')
+
   didInsertElement: ->
     element = @$('.timepicker')
     element.timepicker
       showDuration: true
       scrollDefaultNow: true
       selectOnBlur: true
-    # element.timepicker(defaultTime: @get('date').toMeridianTime())
-    # element.on 'changeTime.timepicker', (e) =>
-    #   @setDate e.time.value
+      forceRoundTime: true
+      timeFormat: 'h:i A'
 
-  setDate: (time) ->
+    minutes = parseInt(@get('date').toFormattedString('%M'), 10)
+
+    roundUp = if minutes > 30
+                60 - minutes
+             else
+               30 - minutes
+
+    element.timepicker('setTime', @get('date').advance(minute: roundUp).toJSDate())
+    element.on 'changeTime', @setDate.bind(this)
+
+  setDate:  ->
+    time = @$('.timepicker').val()
+
+    unless time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/)
+      @$('.timepicker').val(@get('date').toMeridianTime())
+      return
+
     dateString = "#{@get('date').toDateFormat()} #{time}"
     date = Ember.DateTime.parse dateString, "%Y-%m-%d %i:%M %p"
     Ember.run =>

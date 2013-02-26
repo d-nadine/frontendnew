@@ -8,6 +8,11 @@ Ember.DateTime.reopen
   toFullFormat: ->
     @toISO8601()
 
+  toJSDate: ->
+    jsDate = new Date()
+    jsDate.setTime(@get('_ms'))
+    jsDate
+
   isBetween: (start, end) ->
     return false if Ember.DateTime.compareDate(this, start) == -1
     return false if Ember.DateTime.compareDate(this, end) == 1
