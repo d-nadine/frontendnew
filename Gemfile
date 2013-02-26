@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'hydrogen', :github => 'radiumsoftware/hydrogen'
 gem 'iridium', :github => 'radiumsoftware/iridium'
