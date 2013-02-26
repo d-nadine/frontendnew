@@ -16,19 +16,22 @@
       margin-top: 10%;
       width: 70%;
       > div{
-        margin: 10px 0 10px 0;
         vertical-align: center;
       }
       div:first-of-type{
         font-size: 18px;
+        margin-bottom: 30px;
       }
       div:nth-of-type(2){
         font-size: 24px;
+        div:first-of-type{
+          margin: 10px 0 10px 0;
+        }
+        margin-bottom: 40px;
       }
       div:last-of-type{
         font-size: 12px;
       }
-
       .btn{
         opacity: 1;
       }

@@ -34,8 +34,10 @@ Radium.FormsMeetingView = Ember.View.extend
         <div>Are you sure you want to cancel meeting</div>
         <div>{{controller.cancellationText}}</div>
         <div>
-          <button {{action cancel target="view"}} class="btn btn-no">No</button>
-          <button {{action cancelMeeting target="view"}} class="btn btn-success">YES, CANCEL</button>
+          <div>
+            <button {{action cancel target="view"}} class="btn btn-no">No</button>
+            <button {{action cancelMeeting target="view"}} class="btn btn-danger">YES, CANCEL</button>
+          </div>
         </div>
         <div>Notifications will be sent to attendees</div>
       </div>
