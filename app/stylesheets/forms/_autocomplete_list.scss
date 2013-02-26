@@ -93,10 +93,6 @@ ul.as-selections{
     border-radius: 0px;
     box-shadow: none;
 
-    &:hover{
-      cursor: default;
-    }
-
     &.selected{
       border-color: $dark-text;
     }

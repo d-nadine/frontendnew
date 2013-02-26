@@ -59,6 +59,9 @@ Radium.FormsMeetingView = Ember.View.extend
     click: (evt) ->
       evt.stopPropagation()
 
+    keyDown: (evt) ->
+      @set('controller.isExpanded', true) unless @get('controller.isExpanded')
+
     isInvalid: (->
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
     ).property('value', 'isSubmitted')

@@ -33,8 +33,8 @@ Radium.TimePickerView = Ember.View.extend
 
     roundUp = if minutes > 30
                 60 - minutes
-             else
-               30 - minutes
+              else
+                30 - minutes
 
     element.timepicker('setTime', @get('date').advance(minute: roundUp).toJSDate())
     element.on 'changeTime', @setDate.bind(this)
@@ -55,7 +55,6 @@ Radium.TimePickerView = Ember.View.extend
     classNames: 'input-small timepicker'
     disabledBinding: 'parentView.disabled'
 
-  showWidget: true
   showTimes: ->
     if @get('showWidget')
       @$('.timepicker').timepicker('showWidget')
