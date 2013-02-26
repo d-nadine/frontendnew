@@ -19,9 +19,13 @@ Radium.TimePickerView = Ember.View.extend
 
   didInsertElement: ->
     element = @$('.timepicker')
-    element.timepicker(defaultTime: @get('date').toMeridianTime())
-    element.on 'changeTime.timepicker', (e) =>
-      @setDate e.time.value
+    element.timepicker
+      showDuration: true
+      scrollDefaultNow: true
+      selectOnBlur: true
+    # element.timepicker(defaultTime: @get('date').toMeridianTime())
+    # element.on 'changeTime.timepicker', (e) =>
+    #   @setDate e.time.value
 
   setDate: (time) ->
     dateString = "#{@get('date').toDateFormat()} #{time}"
