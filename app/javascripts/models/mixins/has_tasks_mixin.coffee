@@ -3,7 +3,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
     tasks = Ember.A()
 
     @get('todos').forEach (todo) -> tasks.pushObject todo
-    @get('meetings').forEach (todo) -> tasks.pushObject todo
+    @get('meetings').forEach (meeting) -> tasks.pushObject meeting
 
     tasks
   ).property('meetings.[]', 'todos.[]')

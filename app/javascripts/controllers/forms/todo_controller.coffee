@@ -5,6 +5,14 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
   submit: ->
     @set 'isSubmitted', true
 
+    Radium.Todo.createRecord
+      user: @get('user')
+      finishBy: @get('finishBy')
+      reference: @get('reference')
+      description: @get('description')
+
+    @set 'isExpanded', false
+
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')

@@ -59,10 +59,11 @@ Radium.TaskListController = Ember.ArrayController.extend Radium.Groupable, Radiu
 
     displayable.sort (item1, item2) ->
       Ember.compare item1.get('time'), item2.get('time')
-  ).property('content', 'clock.now')
+  ).property('content.[]', 'clock.now')
 
   groupedContent: (->
     visibleContent = @get('visibleContent')
+
     return unless visibleContent
 
     @group visibleContent

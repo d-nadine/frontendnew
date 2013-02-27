@@ -1,8 +1,6 @@
-Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.ContactController = Ember.ObjectController.extend
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
-
-  contact: Ember.computed.alias('model.contact')
 
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
 
@@ -25,7 +23,7 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
     Radium.CallForm.create
       canChangeContact: false
       content: Ember.Object.create
-        reference: @get('contact')
+        reference: @get('model')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
   ).property('model', 'tomorrow')
