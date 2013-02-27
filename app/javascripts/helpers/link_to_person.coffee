@@ -8,8 +8,8 @@ Ember.Handlebars.registerHelper 'linkToPerson', (name) ->
           "user"
          else if this.constructor == Radium.Contact
            "contact"
-        else
-          throw new Error("#{this.constructor} is unknown type for linkToPerson")
+         else
+           throw new Error("#{this.constructor} is unknown type for linkToPerson")
 
   args.unshift name
 
