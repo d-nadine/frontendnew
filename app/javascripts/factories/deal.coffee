@@ -1,6 +1,6 @@
 Factory.define 'deal', traits: 'timestamps',
   status: 'pending'
-  name: 'Great deal'
+  name: Factory.sequence (i) -> "Deal #{i}"
   payBy: -> @createdAt.advance(month: 1)
   contact: -> Factory.create 'contact'
   value: -> Math.floor(Math.random() * 10000)
