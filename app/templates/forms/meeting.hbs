@@ -21,12 +21,8 @@
     {{else}}
       <span class="topic">
         {{topic}} with
-        <!-- FIXME: Should we create a custom linkTo that creates links to user, contacts, groups etc. -->
-        {{#each users}}
-          {{#linkTo user this}}@{{this.name}}{{/linkTo}}
-        {{/each}}
-        {{#each contacts}}
-          {{#linkTo contact this}}@{{this.name}}{{/linkTo}}
+        {{#each attendees}}
+          {{#linkToPerson this}}@{{this.name}}{{/linkToPerson}}
         {{/each}}
         at {{readableStartsAt}}
       </span>
