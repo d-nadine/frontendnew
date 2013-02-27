@@ -42,8 +42,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
       preFill = if @get('controller.isNew')
                   [@mapSearchResult(@get('currentUser'))]
                 else
-                  @get('controller.source').map( (user) =>
-                    @mapSearchResult(user)).toArray()
+                  @get('controller.source').map( (item) =>
+                    @mapSearchResult(item)).toArray()
 
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         selectedItemProp: "name"
@@ -106,7 +106,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
 
       return unless result.get('hasResults')
 
-      results = Radium.PeopleList.list(result.get('users'), result.get('contacts'))
+      results = Radium.PeopleList.listPeople(result.get('users'), result.get('contacts'))
                   .map (item) =>
                     @mapSearchResult.call this, item
 
