@@ -1,6 +1,5 @@
-div.autocomplete{
+.field.autocomplete {
   margin-top: 10px;
-  border: none;
 
   &.is-valid {
     border: 1px solid $valid-input-border;
@@ -10,6 +9,7 @@ div.autocomplete{
     border: 1px solid red;
   }
 }
+
 div.attendeeDropdown{
   a.dropdown-toggle{
     display: none;
@@ -83,7 +83,9 @@ div.attendeeDropdown{
 
 ul.as-selections{
   margin-top: 0px;
-  border-top: none;
+  border: none;
+  @include box-shadow(none);
+
 
   li.as-selection-item {
     background-color: $dark-background;
