@@ -42,7 +42,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
       preFill = if @get('controller.isNew')
                   [@mapSearchResult(@get('currentUser'))]
                 else
-                  @get('controller.model.users').map( (user) =>
+                  @get('controller.source').map( (user) =>
                     @mapSearchResult(user)).toArray()
 
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
@@ -104,20 +104,11 @@ Radium.FormsAutocompleteView = Ember.View.extend
       # FIXME: Change to real server query
       result = Radium.AutoCompleteResult.find(userFor: @get('currentUser')).get('firstObject')
 
-      comparer = (a, b) ->
-                   sortA = a.get('name') || a.get('email')
-                   sortB = a.get('name') || a.get('email')
-
-                   if sortA > sortB
-                     return 1
-                   else if sortA < sortB
-                     return - 1
-
-                   0
+      return unless result.get('hasResults')
 
       results = result.get('users').toArray()
         .concat(result.get('contacts').toArray())
-        .sort(comparer)
+        .sort(Radium.AutoCompleteResult.comparer)
         .map (item) =>
                     @mapSearchResult.call this, item
 

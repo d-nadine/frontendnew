@@ -4,6 +4,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Radium.Meeting.createRecord
         isNew: true
         users: Em.ArrayProxy.create(content: [])
+        contacts: Em.ArrayProxy.create(content: [])
         user: @get('currentUser')
         startsAt: Ember.DateTime.create()
         endsAt: Ember.DateTime.create().advance({hour: 1})
@@ -13,10 +14,12 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   editableMeeting: ( ->
     users = Radium.User.find().slice(0, 2)
+    contacts = Radium.Contact.find().filter (contact) -> contact.get('email')
     meeting = Radium.MeetingForm.create
       content: Factory.create 'meeting'
         user: @get('currentUser')
         users: users
+        contacts: contacts
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: 7)
         endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)

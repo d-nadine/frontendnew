@@ -24,6 +24,9 @@
         {{#each users}}
           {{#linkTo user this}}@{{this.name}}{{/linkTo}}
         {{/each}}
+        {{#each contacts}}
+          {{#linkTo contact this}}@{{this.name}}{{/linkTo}}
+        {{/each}}
         at {{readableStartsAt}}
       </span>
     {{/if}}
