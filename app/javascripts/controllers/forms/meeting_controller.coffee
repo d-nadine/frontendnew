@@ -18,10 +18,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
 
   attendees: ( ->
-    attendees = @get('users').toArray()
-    attendees = attendees.concat(@get('contacts')) if @get('contacts.length')
-
-    attendees.sort(Radium.AutoCompleteResult.comparer)
+    Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
   ).property('users', 'contacts', 'users.length', 'contacts.length')
 
   showTopicTextBox: ( ->

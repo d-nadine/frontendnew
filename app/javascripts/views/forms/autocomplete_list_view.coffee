@@ -106,10 +106,8 @@ Radium.FormsAutocompleteView = Ember.View.extend
 
       return unless result.get('hasResults')
 
-      results = result.get('users').toArray()
-        .concat(result.get('contacts').toArray())
-        .sort(Radium.AutoCompleteResult.comparer)
-        .map (item) =>
+      results = Radium.PeopleList.list(result.get('users'), result.get('contacts'))
+                  .map (item) =>
                     @mapSearchResult.call this, item
 
       callback(results, query)
