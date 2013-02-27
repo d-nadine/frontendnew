@@ -1,3 +1,3 @@
 Radium.InMemoryAdapter.reopen
-  queryDiscussionRecords: (records, query) ->
+  queryDiscussionFixtures: (records, query) ->
     records

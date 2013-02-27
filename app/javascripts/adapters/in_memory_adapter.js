@@ -121,8 +121,6 @@ Radium.InMemoryAdapter = DS.Adapter.extend({
   findQuery: function(store, type, query, array) {
     var fixtures = this.fixturesForType(type);
 
-    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
-
     fixtures = this.queryFixtures(fixtures, query, type);
 
     if (fixtures) {
@@ -210,9 +208,9 @@ Radium.InMemoryAdapter = DS.Adapter.extend({
 
   queryFixtures: function(records, query, type) {
     fixtureType = type.toString().split(".")[1];
-    queryMethod = "query" + fixtureType + "Records";
+    queryMethod = "query" + fixtureType + "Fixtures";
 
-    if(this.queryMethod) {
+    if(this[queryMethod]) {
       this[queryMethod].call(this, records, query);
     } else {
       throw new Error("Implement " + queryMethod + " to query " + type + "!");

@@ -1,3 +1,3 @@
 Radium.InMemoryAdapter.reopen
-  queryEmailRecords: (records, query) ->
+  queryEmailFixtures: (records, query) ->
     records
