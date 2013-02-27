@@ -21,7 +21,7 @@ class Populator
         name: name
         email: "#{name.split(' ')[0].toLowerCase()}@radiumcrm.com"
 
-    contacts = for i in [0..50]
+    contacts = for i in [0..20]
       Factory.create 'contact'
         user: -> users[(users.length).randomize()]
 
