@@ -16,10 +16,16 @@ Factory.define 'email', traits: ['timestamps', 'html'],
     In hac habitasse platea dictumst. Phasellus vel mi vel leo adipiscing
     dapibus vel auctor mauris.
   """
-  sender: Factory.build 'user'
+  sender: ->
+    if Math.random() <= 0.5
+      Factory.create 'user'
+    else
+      Factory.create 'contact'
+
   attachments: -> [
     Factory.create 'attachment'
     Factory.create 'attachment'
     Factory.create 'attachment'
   ]
+
   isPublic: true
