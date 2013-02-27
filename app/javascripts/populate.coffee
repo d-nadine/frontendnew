@@ -42,4 +42,6 @@ class Populator
       Factory.create 'email'
         sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
 
+    Factory.adapter.store.commit()
+
 Radium.Populator = Populator

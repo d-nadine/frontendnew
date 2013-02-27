@@ -113,7 +113,6 @@ class EmberDataAdapter
 
     klass = @modelForType type
     model = klass.createRecord hash
-    @store.commit()
     model
 
 Foundry.NullAdapter = NullAdapter
