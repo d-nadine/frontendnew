@@ -1,5 +1,5 @@
 <form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :meeting-form"}}>
-  <div {{bindAttr class="topic:is-valid hasElapsed showTopicTextBox:open:closed :main"}} {{action expand}}>
+  <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :main"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if showOptions}}
