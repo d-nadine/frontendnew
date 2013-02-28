@@ -1,8 +1,6 @@
 require 'views/forms/picker_view'
-Radium.FormsGroupPickerView = Radium.FormsPickerView.extend
-  leader: "location"
-  listBinding: 'controller.groups'
-
-    # FIXME: make this async
-  source: (query, process) ->
-    Radium.Group.all().map((c) -> c.get('name')).toArray()
+Radium.FormsGroupPickerView = Radium.Combobox.extend
+  label: "location"
+  sourceBinding: 'controller.locations'
+  valueBinding: 'controller.location'
+  queryBinding: 'controller.location'

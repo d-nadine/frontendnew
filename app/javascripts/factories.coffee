@@ -25,6 +25,10 @@ Foundry.RadiumAdapter = RadiumAdapter
 foundry = new Foundry
 foundry.adapter = new RadiumAdapter
 
+foundry.createObject = (klass, attributes) ->
+  hash = @build klass, attributes
+  Ember.Object.create hash
+
 Ember.Application.initializer
   name: 'foundry'
   after: 'store'

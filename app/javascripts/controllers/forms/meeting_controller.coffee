@@ -19,6 +19,10 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     true
   ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
 
+  locations: ( ->
+    @get('groups').map (group) -> "#{group.name}"
+  ).property()
+
   attendees: ( ->
     Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
   ).property('users', 'contacts', 'users.length', 'contacts.length')

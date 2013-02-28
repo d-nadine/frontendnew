@@ -70,7 +70,7 @@ Radium.FormsMeetingView = Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
     ).property('value', 'isSubmitted')
 
-  datePicker: Radium.FormsDatePickerView.extend
+  datePicker: Radium.DatePicker.extend
     classNames: ['starts-at']
     dateBinding: 'controller.startsAt'
     leader: 'When:'
