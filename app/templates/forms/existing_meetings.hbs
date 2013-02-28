@@ -6,7 +6,7 @@
         {{#linkTo user this}}{{selectedUser.name}}{{/linkTo}}
       </td>
       <td {{bindAttr class="hasConflict"}}>
-        {{timeSpan}}
+        {{format startsAt format="%i:%M %p"}} to {{format endsAt format="%i:%M %p"}}
       </td>
       <td>
         {{topic}}

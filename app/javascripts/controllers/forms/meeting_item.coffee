@@ -9,10 +9,6 @@ Radium.MeetingItem = Em.ObjectProxy.extend
     @get('startTime').isBetweenExact startsAt, endsAt
   ).property('startTime', 'startsAt', 'endsAt')
 
-  timeSpan: ( ->
-    "#{@get('startsAt').toMeridianTime()} to #{@get('endsAt').toMeridianTime()}"
-  ).property('startsAt', 'endsAt')
-
   topic: ( ->
     @get('content.topic')
   ).property('topic')
