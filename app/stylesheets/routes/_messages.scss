@@ -71,7 +71,27 @@ div.selection{
   }
 }
 
-.reply{
+.reply {
   width: 100%;
   box-sizing: border-box;
+}
+
+.table-list {
+  color: black;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+
+  td {
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    background-color: $secondary-selection;
+  }
+
+  tr td:first-child {
+    border-left: solid 1px #ddd
+  }
+
+  tr td:last-child {
+    border-right: solid 1px #ddd
+  }
 }

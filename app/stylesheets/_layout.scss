@@ -172,3 +172,8 @@ $button-bar-width: 40px;
 .upcase {
   text-transform: uppercase;
 }
+
+// override bootstrap's align top
+.table .th, .table td {
+  vertical-align: middle;
+}

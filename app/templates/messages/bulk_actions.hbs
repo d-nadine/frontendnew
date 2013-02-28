@@ -1,23 +1,29 @@
-{{control 'forms/bulk_form_widget' model}}
+<div id="messages-bulk-actions-panel">
+  <div class="page-header upcase">
+    <button class="btn pull-right" {{action cancel}}>Cancel</button>
 
-<div class="block">
-  <div class="page-header">
-    <h3>{{length}} Email(s) Selected</h3>
+    <h3>Create Tasks from Selected Emails</h3>
   </div>
 
-  <table class="table table-striped table-bordered table-hover">
-  {{#each controller}}
-    <tr {{bindAttr class="isDisabled:muted"}}>
-      <td>{{iconFor this}}</td>
-      <td><strong>{{person.name}}</strong></td>
-      <td>{{truncate summary}}</td>
-      <td>{{time timestamp}}</td>
-      <td>
-        {{#if hasAttachments}}
-        <i class="icon-paperclip"></i>
-        {{/if}}
-      </td>
-    </tr>
-  {{/each}}
-  </table>
+  <div class="block block-blue block-arrow-bottom">
+    {{control 'form_box' formBox}}
+  </div>
+
+  <div class="block block-connected">
+    <table class="table table-list">
+      {{#each controller}}
+        <tr {{bindAttr class="isDisabled:muted"}}>
+          <td>{{iconFor this}}</td>
+          <td><strong>{{person.name}}</strong></td>
+          <td>{{truncate summary}}</td>
+          <td>
+            {{#if hasAttachments}}
+            <i class="icon-paperclip"></i>
+            {{/if}}
+          </td>
+          <td>{{time timestamp}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
 </div>
