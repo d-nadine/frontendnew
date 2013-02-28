@@ -1,8 +1,18 @@
-<div class="calendar-navigation">
-  {{#linkTo calendar lastMonth}}Last Month{{/linkTo}}
-  <h3>{{format date format="%B %Y"}}</h3>
-  {{#linkTo calendar nextMonth}}Next Month{{/linkTo}}
+<div class="calendar-navigation block shadowed">
+  <h3>
+    {{#linkTo calendar lastMonth class="btn pull-left"}}
+      <i class="icon-chevron-left"></i>Last Month
+    {{/linkTo}}
+
+    {{format date format="%B %Y"}}
+
+    {{#linkTo calendar nextMonth class="btn pull-right"}}
+      Next Month<i class="icon-chevron-right"></i>
+    {{/linkTo}}
+  </h3>
 </div>
+
+{{control "form_box" formBox}}
 
 <table class="calendar">
   <colgroup class="weekdays">

@@ -1,8 +1,9 @@
 @import "compass/css3";
 
-@import "mixins/cssarrow";
-
 @import "variables";
+
+@import "mixins/cssarrow";
+@import "mixins/shadowed";
 
 @import "layout";
 
