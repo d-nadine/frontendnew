@@ -1,6 +1,6 @@
 <form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :meeting-form"}}>
   <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :main"}} {{action expand}}>
-    {{view view.checkbox classNames="pull-left"}}
+    <div class="checker pull-left"><label></label></div>
 
     {{#if showOptions}}
       <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>

@@ -1,7 +1,6 @@
 require 'views/forms/time_picker_view'
 Radium.FormsMeetingView = Ember.View.extend
   classNames: ['meeting']
-  checkbox: Radium.FormsCheckboxView.extend()
 
   readableStartsAt: ( ->
     @get('controller.startsAt').toHumanFormatWithTime()
