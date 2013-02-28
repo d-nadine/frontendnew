@@ -2,8 +2,11 @@ Radium.FormsPickerView = Ember.View.extend
   classNameBindings: [
     'disabled:is-disabled'
     ':control-box'
-    ':datepicker-control-box'
   ]
+
+  isInvalid: (->
+    Ember.isEmpty(@get('value')) && @get('isSubmitted')
+  ).property('value', 'isSubmitted')
 
   disabled: Ember.computed.alias('controller.isDisabled')
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
