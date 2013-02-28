@@ -7,7 +7,6 @@ Radium.Combobox = Ember.View.extend
     ':control-box'
   ]
 
-
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -43,7 +42,7 @@ Radium.Combobox = Ember.View.extend
         </button>
         <ul class="dropdown-menu">
           {{#each view.source}}
-            <li><a {{action setValue this target=view href=true bubbles=false}}>{{name}}</a></li>
+            <li><a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a></li>
           {{/each}}
         </ul>
       </div>
@@ -52,9 +51,12 @@ Radium.Combobox = Ember.View.extend
   toggleDropdown: (event) ->
     @toggleProperty 'open'
 
+  selectObject: (item) ->
+    @set 'open', false
+    @setValue item
+
   setValue: (object) ->
     @set 'value', object
-    @set 'open', false
 
   # Begin typehead customization
   matcher: (item) ->
@@ -94,9 +96,20 @@ Radium.Combobox = Ember.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: @get('parentView.source').toArray()
+      @$().typeahead source: @get('parentView.source')
 
       typeahead = @$().data('typeahead')
+
+      # make typeahead work with ember arrays
+      typeahead.process = (items) ->
+        items = items.filter (item) => @matcher(item)
+
+        items = @sorter(items)
+
+        if !items.get('length')
+          return if @shown then @hide() else this
+
+        @render(items.slice(0, @options.items)).show()
 
       typeahead.matcher = @get('parentView.matcher')
       typeahead.sorter = @get('parentView.sorter')
@@ -107,4 +120,5 @@ Radium.Combobox = Ember.View.extend
         @updater val
         @hide()
 
-      typeahead.updater = @get('parentView.updater')
+      typeahead.updater = (item) =>
+        @get('parentView').setValue item
