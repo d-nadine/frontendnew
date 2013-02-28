@@ -121,7 +121,7 @@ $button-bar-width: 40px;
   background-color: $associated-blue;
 }
 
-.block-arrow {
+.block-arrow-top {
   @include css-arrow(top, 15px, $bright, 1px, $selected-item-border, solid);
   margin-top: 15px;
 
@@ -132,7 +132,19 @@ $button-bar-width: 40px;
   }
 }
 
-.block-arrow.block-blue {
+.block-arrow-bottom {
+  @include css-arrow(bottom, 15px, $bright, 1px, $selected-item-border, solid);
+  margin-top: 15px;
+
+  // move the arrow to a different position. There is no argument
+  // for this
+  &:after, &:before {
+    left: 40px;
+  }
+}
+
+
+.block-arrow-top.block-blue {
   @include css-arrow(top, 15px, $associated-blue, 1px, $selected-item-border, solid);
 
   // move the arrow to a different position. There is no argument
@@ -142,6 +154,21 @@ $button-bar-width: 40px;
   }
 }
 
-.block-connected{
-  margin-top: -15px
+.block-arrow-bottom.block-blue {
+  @include css-arrow(bottom, 15px, $associated-blue, 1px, $selected-item-border, solid);
+
+  // move the arrow to a different position. There is no argument
+  // for this
+  &:after, &:before {
+    left: 40px;
+  }
+}
+
+.block-arrow-bottom + .block-connected {
+  margin-top: -15px;
+  padding-top: 30px;
+}
+
+.upcase {
+  text-transform: uppercase;
 }
