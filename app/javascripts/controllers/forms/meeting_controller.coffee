@@ -44,20 +44,27 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     true
   ).property('isNew', 'justAdded')
 
-  cancellationText: ( ->
-    topic = @get('content.content.topic')
-
-    users = @get('users').map( (user) -> "@#{user.get('name')}").join(', ')
-
-    "#{topic} with #{users} at #{@get('startsAt').toHumanFormatWithTime()}"
-  ).property('topic', 'isNew')
-
-  readableStartsAt: ( ->
-    @get('startsAt').toHumanFormatWithTime()
-  ).property('startsAt')
-
   submit: ->
     @set 'isSubmitted', true
+
+    unless @get('isNew')
+      @get('content.transaction').commit()
+      return
+
+    meeting = Radium.Meeting.createRecord
+      topic: @get('topic')
+      location: @get('location')
+      startsAt: @get('startAt')
+      endsAt: @get('endsAt')
+      user: @get('currentUser')
+
+    @get('users').forEach (user) ->
+      meeting.get('users').addObject user
+
+    @get('contacts').forEach (contact) ->
+      meeting.get('contacts').addObject contact
+
+    meeting.get('transaction').commit()
 
   startsAtDidChange: ( ->
     @set('meetingUsers.startsAt', @get('startsAt')) if @get('startsAt')

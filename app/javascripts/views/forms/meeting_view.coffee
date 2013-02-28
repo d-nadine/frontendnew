@@ -2,6 +2,10 @@ require 'views/forms/time_picker_view'
 Radium.FormsMeetingView = Ember.View.extend
   checkbox: Radium.FormsCheckboxView.extend()
 
+  readableStartsAt: ( ->
+    @get('controller.startsAt').toHumanFormatWithTime()
+  ).property('startsAt')
+
   didInsertElement: ->
     $('html').on 'click.cancel-meeting', ->
       $('cancel-meeting').hide()
@@ -32,7 +36,7 @@ Radium.FormsMeetingView = Ember.View.extend
     template: Ember.Handlebars.compile """
       <div class="content">
         <div>Are you sure you want to cancel meeting</div>
-        <div>{{controller.cancellationText}}</div>
+        <div>{{view.cancellationText}}</div>
         <div>
           <div>
             <button {{action cancel target="view"}} class="btn btn-no">No</button>
@@ -47,6 +51,14 @@ Radium.FormsMeetingView = Ember.View.extend
 
     cancelMeeting: ->
       @$().hide()
+
+    cancellationText: ( ->
+      topic = @get('controller.topic')
+
+      users = @get('controller.users').map( (user) -> "@#{user.get('name')}").join(', ')
+
+      "#{topic} with #{users} at #{@get('controller.startsAt').toHumanFormatWithTime()}"
+    ).property('topic', 'isNew')
 
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']

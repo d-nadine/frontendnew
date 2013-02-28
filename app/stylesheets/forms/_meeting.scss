@@ -152,9 +152,6 @@
       width: 74.4%;
       display: block;
       margin-top: 10px;
-      input[type=text]{
-        width: 74%;
-      }
       a.pull-right{
         margin-right: 3px;
       }
@@ -165,9 +162,11 @@
         top: 2px;
       }
 
-      div.location{
-        margin-left: 80px;
-        margin-right: 60px;
+      .datepicker-control-box{
+        width: 88%;
+        input[type=text]{
+          width: 74%;
+        }
       }
     }
 
