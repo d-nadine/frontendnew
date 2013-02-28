@@ -1,16 +1,6 @@
 var get = Ember.get;
 
-/**
-  `DS.FixtureAdapter` is an adapter that loads records from memory.
-  Its primarily used for development and testing. You can also use
-  `DS.FixtureAdapter` while working on the API but are not ready to
-  integrate yet. It is a fully functioning adapter. All CRUD methods
-  are implemented. You can also implement query logic that a remote
-  system would do. Its possible to do develop your entire application
-  with `DS.FixtureAdapter`.
-
-*/
-Radium.InMemoryAdapter = DS.Adapter.extend({
+Radium.InMemoryAdapter = DS.FixtureAdapter.extend({
   simulateRemoteResponse: false,
 
   latency: 50,
@@ -194,24 +184,12 @@ Radium.InMemoryAdapter = DS.Adapter.extend({
     });
   },
 
-  simulateRemoteCall: function(callback, context) {
-    function response() {
-      Ember.run(context, callback);
-    }
-
-    if (get(this, 'simulateRemoteResponse')) {
-      setTimeout(response, get(this, 'latency'));
-    } else {
-      response();
-    }
-  },
-
   queryFixtures: function(records, query, type) {
     fixtureType = type.toString().split(".")[1];
     queryMethod = "query" + fixtureType + "Fixtures";
 
     if(this[queryMethod]) {
-      this[queryMethod].call(this, records, query);
+      return this[queryMethod].call(this, records, query);
     } else {
       throw new Error("Implement " + queryMethod + " to query " + type + "!");
     }
