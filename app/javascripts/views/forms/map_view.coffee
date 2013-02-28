@@ -7,7 +7,6 @@ Radium.MapView = Ember.View.extend
     ':map'
   ]
 
-  leader: 'location'
   disabled: Ember.computed.alias('controller.isDisabled')
 
   locationField: Radium.FormsGroupPickerView.extend()

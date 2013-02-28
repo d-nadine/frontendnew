@@ -1,7 +1,9 @@
 Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
+  needs: ['groups']
+  groups: Ember.computed.alias('controllers.groups')
+  source: Ember.computed.alias 'attendees'
   meetingUsers: null
   calendarsOpen: null
-  source: Ember.computed.alias 'attendees'
 
   init: ->
     @_super.apply this, arguments
