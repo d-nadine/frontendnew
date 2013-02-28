@@ -6,19 +6,19 @@
   overflow: auto;
   margin-bottom: 15px;
 
-  a.avatar {
+  .avatar-container {
     float: left;
   }
 
   .text {
     margin-left: 40px;
-    margin-top: -20px;
   }
 }
 
 .new-comment {
   width: 100%;
   box-sizing: border-box;
-  height: 36px; // set initial height to one row of text
+  height: 30px; // set initial height to one row of text
   margin: 0;
+  resize: none;
 }

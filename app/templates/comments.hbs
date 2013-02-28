@@ -3,7 +3,9 @@
     <ul class="comments-list unstyled">
       {{#each comments}}
         <li class="comment">
-          {{#linkTo user user}}{{avatar user}}{{/linkTo}}
+          <div class="avatar-container">
+            {{#linkTo user user}}{{avatar user}}{{/linkTo}}
+          </div>
 
           <div class="text">
             {{text}}
