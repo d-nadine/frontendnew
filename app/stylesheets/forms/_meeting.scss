@@ -1,210 +1,216 @@
-.meeting-form {
-  div.is-valid {
-    border: 1px solid $valid-input-border;
-  }
-
-  .cancel-meeting{
-    display: none;
-    background-color: #000;
-    line-height: 30px;
-    opacity: 0.8;
-    color: #fff;
-    text-align: center;
-    z-index: 1000;
-    .content{
-      margin: 0 auto;
-      margin-top: 10%;
-      width: 70%;
-      > div{
-        vertical-align: center;
-      }
-      div:first-of-type{
-        font-size: 18px;
-        margin-bottom: 30px;
-      }
-      div:nth-of-type(2){
-        font-size: 24px;
-        div:first-of-type{
-          margin: 10px 0 10px 0;
-        }
-        margin-bottom: 30px;
-      }
-      div:last-of-type{
-        font-size: 12px;
-      }
-      .btn{
-        opacity: 1;
-      }
+.meeting{
+  position: relative;
+  .meeting-form {
+    div.is-valid {
+      border: 1px solid $valid-input-border;
     }
-  }
 
-  .main {
-    position: relative;
-    background-color: white;
-    padding: 12px;
-    @include box-shadow($dark-background 2px 2px 10px);
-    border: solid 1px $dark-background;
-
-    i.icon-comment{
+    .cancel-meeting{
       position: absolute;
-      right: 4px;
-      top: 3px;
-    }
-
-    &.has-elapsed {
-      // FIXME:  mixin with is-finished?
-      background-color: $dark-background;
-
-      .checker label::after {
-        border-color: $light-text
-      }
-
-      &::after {
-        width: 96%;
-        content: '';
-        position: absolute;
-        height: 2px;
-        background-color: black;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background-color: #000;
+      line-height: 30px;
+      opacity: 0.8;
+      color: #fff;
+      text-align: center;
+      z-index: 1000;
+      .content{
         margin: 0 auto;
-        left: 2%;
-        top: 50%;
-      }
-    }
-
-    span.topic{
-      cursor:pointer;
-
-      a:after{
-        content: ',';
-      }
-      a:last-of-type:after{
-        content: '';
-      }
-    }
-
-    &.closed{
-      padding: 17px 12px 17px 12px;
-      .checker label{
-        top: -5px;
-      }
-    }
-  }
-
-  &.just-added .main {
-    background-color: darken($dark-background, 50);
-
-    textarea, span.topic, a{
-      color: $bright;
-    }
-
-    .success {
-      color: $success-green;
-      margin-top: 4px;
-    }
-  }
-
-
-  .checker {
-    label {
-      background: url('/images/icons/meeting.png') no-repeat;
-    }
-
-    input:not([disabled]) + label:hover {
-      background: url('/images/icons/meeting.png') no-repeat !IMPORTANT;
-    }
-  }
-
-  .btn-link:hover {
-    text-decoration: none;
-  }
-
-  .btn-link:focus {
-    outline: none;
-    border: none;
-  }
-
-  .checker {
-    margin-top: 6px;
-  }
-
-  .meeting {
-    margin-left: 40px;
-    margin-right: 140px;
-  }
-
-  .options {
-    background-color: $background;
-    border: solid 1px $dark-background;
-    border-top: none;
-    padding: 18px;
-    width: 95%;
-    margin: 0 auto;
-
-    .bootstrap-timepicker.is-disabled{
-      font-size: 9px;
-    }
-
-    .save{
-      text-align: right;
-    }
-
-    .map{
-      width: 74.4%;
-      display: block;
-      margin-top: 10px;
-      a.pull-right{
-        margin-right: 3px;
-      }
-
-      div.pull-left span{
-        color: $light-text;
-        position: relative;
-        top: 2px;
-      }
-
-      .control-box{
-        width: 88%;
-        input[type=text]{
-          width: 74%;
+        margin-top: 10%;
+        width: 70%;
+        > div{
+          vertical-align: center;
+        }
+        div:first-of-type{
+          font-size: 18px;
+          margin-bottom: 30px;
+        }
+        div:nth-of-type(2){
+          font-size: 24px;
+          div:first-of-type{
+            margin: 10px 0 10px 0;
+          }
+          margin-bottom: 30px;
+        }
+        div:last-of-type{
+          font-size: 12px;
+        }
+        .btn{
+          opacity: 1;
         }
       }
     }
 
-    .block.calendars{
-      margin-top: 10px;
-      padding: 10px;
+    .main {
+      position: relative;
+      background-color: white;
+      padding: 12px;
+      @include box-shadow($dark-background 2px 2px 10px);
+      border: solid 1px $dark-background;
 
-      strong, .btn-group{
-        display: inline-block;
+      i.icon-comment{
+        position: absolute;
+        right: 4px;
+        top: 3px;
       }
 
-      table{
-        margin-top: 10px;
-        td{
-          line-height: 30px;
+      &.has-elapsed {
+        // FIXME:  mixin with is-finished?
+        background-color: $dark-background;
 
-          &.has-conflict{
-            color: red;
+        .checker label::after {
+          border-color: $light-text
+        }
+
+        &::after {
+          width: 96%;
+          content: '';
+          position: absolute;
+          height: 2px;
+          background-color: black;
+          margin: 0 auto;
+          left: 2%;
+          top: 50%;
+        }
+      }
+
+      span.topic{
+        cursor:pointer;
+
+        a:after{
+          content: ',';
+        }
+        a:last-of-type:after{
+          content: '';
+        }
+      }
+
+      &.closed{
+        padding: 17px 12px 17px 12px;
+        .checker label{
+          top: -5px;
+        }
+      }
+    }
+
+    &.just-added .main {
+      background-color: darken($dark-background, 50);
+
+      textarea, span.topic, a{
+        color: $bright;
+      }
+
+      .success {
+        color: $success-green;
+        margin-top: 4px;
+      }
+    }
+
+
+    .checker {
+      label {
+        background: url('/images/icons/meeting.png') no-repeat;
+      }
+
+      input:not([disabled]) + label:hover {
+        background: url('/images/icons/meeting.png') no-repeat !IMPORTANT;
+      }
+    }
+
+    .btn-link:hover {
+      text-decoration: none;
+    }
+
+    .btn-link:focus {
+      outline: none;
+      border: none;
+    }
+
+    .checker {
+      margin-top: 6px;
+    }
+
+    .meeting {
+      margin-left: 40px;
+      margin-right: 140px;
+    }
+
+    .options {
+      background-color: $background;
+      border: solid 1px $dark-background;
+      border-top: none;
+      padding: 18px;
+      width: 95%;
+      margin: 0 auto;
+
+      .bootstrap-timepicker.is-disabled{
+        font-size: 9px;
+      }
+
+      .save{
+        text-align: right;
+      }
+
+      .map{
+        width: 74.4%;
+        display: block;
+        margin-top: 10px;
+        a.pull-right{
+          margin-right: 3px;
+        }
+
+        div.pull-left span{
+          color: $light-text;
+          position: relative;
+          top: 2px;
+        }
+
+        .control-box{
+          width: 88%;
+          input[type=text]{
+            width: 74%;
           }
         }
-        td:first-of-type{
-          width: 20%;
+      }
+
+      .block.calendars{
+        margin-top: 10px;
+        padding: 10px;
+
+        strong, .btn-group{
+          display: inline-block;
         }
-        td:nth-of-type(2){
-          width: 20%;
-          text-align: center;
-        }
-        td:nth-of-type(3){
-          width: auto;
-        }
-        td:last-of-type{
-          text-align: center;
-          width: 10%;
-          color: red;
+
+        table{
+          margin-top: 10px;
+          td{
+            line-height: 30px;
+
+            &.has-conflict{
+              color: red;
+            }
+          }
+          td:first-of-type{
+            width: 20%;
+          }
+          td:nth-of-type(2){
+            width: 20%;
+            text-align: center;
+          }
+          td:nth-of-type(3){
+            width: auto;
+          }
+          td:last-of-type{
+            text-align: center;
+            width: 10%;
+            color: red;
+          }
         }
       }
     }
   }
 }
-
-
