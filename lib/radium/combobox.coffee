@@ -1,6 +1,5 @@
 Radium.Combobox = Ember.View.extend
   classNameBindings: [
-    'value:is-valid'
     'isInvalid'
     'disabled:is-disabled'
     ':combobox'
@@ -10,6 +9,7 @@ Radium.Combobox = Ember.View.extend
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
+
   isInvalid: (->
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
   ).property('value', 'isSubmitted')
@@ -27,10 +27,12 @@ Radium.Combobox = Ember.View.extend
   ).property('value')
 
   template: Ember.Handlebars.compile """
-    {{#if view.label}}
-      <span class="text">
-        {{view.label}}
-      </span>
+    {{#if view.leaderView}}
+      {{view view.leaderView tagName="span" classNames="text"}}
+    {{/if}}
+
+    {{#if view.leader}}
+      <span class="text">{{view.leader}}</span>
     {{/if}}
 
     {{view view.textField}}
@@ -47,6 +49,14 @@ Radium.Combobox = Ember.View.extend
         </ul>
       </div>
     {{/unless}}
+
+    {{#if view.footerView}}
+      {{view view.footerView tagName="span" classNames="text"}}
+    {{/if}}
+
+    {{#if view.footer}}
+      <span class="text">{{view.footer}}</span>
+    {{/if}}
   """
   toggleDropdown: (event) ->
     @toggleProperty 'open'
