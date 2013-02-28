@@ -193,6 +193,8 @@ Radium.InMemoryAdapter = DS.FixtureAdapter.extend({
   },
 
   queryFixtures: function(records, query, type) {
+    if(!records) return;
+
     fixtureType = type.toString().split(".")[1];
     queryMethod = "query" + fixtureType + "Fixtures";
 
