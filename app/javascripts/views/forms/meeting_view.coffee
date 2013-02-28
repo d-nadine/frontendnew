@@ -48,7 +48,7 @@ Radium.FormsMeetingView = Ember.View.extend
     cancellationText: ( ->
       topic = @get('controller.topic')
 
-      users = @get('controller.users').map( (user) -> "@#{user.get('name')}").join(', ')
+      users = @get('controller.attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
 
       "#{topic} with #{users} at #{@get('controller.startsAt').toHumanFormatWithTime()}"
     ).property('topic', 'isNew')
@@ -78,9 +78,9 @@ Radium.FormsMeetingView = Ember.View.extend
     isInvalid: (->
       return false unless @get('isSubmitted')
       return false if Ember.isEmpty(@get('text'))
-      return false unless @get('controller.startsAt')
+      return false unless @get('date')
 
-      @get('controller.startsAt').isBeforeToday()
+      @get('date').isBeforeToday()
     ).property('isSubmitted', 'controller.startsAt')
 
   startsAt: Radium.TimePickerView.extend
