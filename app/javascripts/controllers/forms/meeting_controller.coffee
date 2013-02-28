@@ -69,7 +69,18 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     meeting.get('transaction').commit()
 
   startsAtDidChange: ( ->
-    @set('meetingUsers.startsAt', @get('startsAt')) if @get('startsAt')
+    startsAt = @get('startsAt')
+    endsAt = @get('endsAt')
+
+    return unless startsAt
+
+    @set('meetingUsers.startsAt', startsAt)
+
+    return unless Ember.DateTime.compare(endsAt, startsAt) == -1
+
+    @set('endsAt', startsAt.advance(hour: 1))
+
+    console.log @get('endsAt').toMeridianTime()
   ).observes('startsAt')
 
   # FIXME: Review when using real ember-data

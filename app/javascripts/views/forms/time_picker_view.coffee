@@ -13,9 +13,21 @@ Radium.TimePickerView = Ember.View.extend
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   leader: 'Starts at:'
-  dateBinding: 'controller.startsAt'
 
   disabled: Ember.computed.alias('controller.isDisabled')
+
+  textBinding: 'textToTimeTransform'
+
+  textToTimeTransform: ((key, value) ->
+    if arguments.length == 2
+      if value && /^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/.test(value)
+        dateString = "#{@get('date').toDateFormat()} #{value}"
+        @set 'date', Ember.DateTime.parse dateString, "%Y-%m-%d %i:%M %p"
+    else if !value && @get('date')
+      @get('date').toMeridianTime()
+    else
+      value
+  ).property('date')
 
   willDestroyElement: ->
     @$('.timepicker').timepicker('remove')
@@ -37,20 +49,8 @@ Radium.TimePickerView = Ember.View.extend
                 30 - minutes
 
     element.timepicker('setTime', @get('date').advance(minute: roundUp).toJSDate())
-    element.on 'changeTime', @setDate.bind(this)
-
-  setDate:  ->
-    time = @$('.timepicker').val()
-
-    unless time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/)
-      @$('.timepicker').val(@get('date').toMeridianTime())
-      return
-
-    dateString = "#{@get('date').toDateFormat()} #{time}"
-    date = Ember.DateTime.parse dateString, "%Y-%m-%d %i:%M %p"
-    Ember.run =>
-      @set('date', date) if date
 
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
     disabledBinding: 'parentView.disabled'
+    valueBinding: 'parentView.text'

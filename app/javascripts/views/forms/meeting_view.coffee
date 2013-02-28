@@ -85,6 +85,7 @@ Radium.FormsMeetingView = Ember.View.extend
 
   startsAt: Radium.TimePickerView.extend
     leader: 'Starts:'
+    dateBinding: 'controller.startsAt'
     isInvalid: ( ->
       return false unless @get('isSubmitted')
       now = Ember.DateTime.create().advance(minute: -5)
@@ -100,18 +101,18 @@ Radium.FormsMeetingView = Ember.View.extend
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
     #nudge the date forward if less than startsAt
-    startsAtDidChange: ( ->
-      startsAt = @get('controller.startsAt')
-      endsAt = @get('controller.endsAt')
+    # startsAtDidChange: ( ->
+    #   startsAt = @get('controller.startsAt')
+    #   endsAt = @get('controller.endsAt')
 
-      return unless Ember.DateTime.compare(endsAt, startsAt) == -1
+    #   return unless Ember.DateTime.compare(endsAt, startsAt) == -1
 
-      advance = startsAt.advance(hour: 1)
+    #   advance = startsAt.advance(hour: 1)
 
-      @setDate advance.toMeridianTime()
+    #   @setDate advance.toMeridianTime()
 
-      @$('.timepicker').val(advance.toMeridianTime())
-    ).observes('controller.startsAt')
+    #   @$('.timepicker').val(advance.toMeridianTime())
+    # ).observes('controller.startsAt')
 
   location:  Radium.MapView.extend
     leader: 'location'
