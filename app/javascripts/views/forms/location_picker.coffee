@@ -1,21 +1,26 @@
 require 'lib/radium/combobox'
+
 Radium.LocationPicker = Radium.Combobox.extend
-  label: "location"
+  classNames: ['location-picker-control-box']
+
   sourceBinding: 'controller.locations'
   valueBinding: 'controller.location'
 
-  queryToValueTransform: ((key, value) ->
-    if arguments.length == 2
-      @set 'value', @lookupQuery(value)
-    else if !value && @get('value')
-      @get 'value'
-    else
-      value
-  ).property('value')
+  # No need to use the transform since
+  # we're just setting text and not worrying about
+  # looking up an ember object
+  queryBinding: 'controller.location'
 
   setValue: (object) ->
     @set 'value', object.get('name')
-    @set 'open', false
 
-  lookupQuery: (query) ->
-    @_super(query)?.get('name')
+  leaderView: Ember.View.extend
+    template: Ember.Handlebars.compile """
+      <i class="icon-map-marker"></i>
+    """
+
+  footerView: Ember.View.extend
+    classNames: ["pull-right"]
+    template: Ember.Handlebars.compile """
+      <a {{action openMap}} href="#">Map</a>
+    """

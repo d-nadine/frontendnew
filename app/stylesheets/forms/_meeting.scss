@@ -155,26 +155,10 @@
         text-align: right;
       }
 
-      .map{
+      .location-picker-control-box {
         width: 74.4%;
         display: block;
         margin-top: 10px;
-        a.pull-right{
-          margin-right: 3px;
-        }
-
-        div.pull-left span{
-          color: $light-text;
-          position: relative;
-          top: 2px;
-        }
-
-        .control-box{
-          width: 88%;
-          input[type=text]{
-            width: 74%;
-          }
-        }
       }
 
       .block.calendars{

@@ -113,8 +113,7 @@ Radium.FormsMeetingView = Ember.View.extend
     #   @$('.timepicker').val(advance.toMeridianTime())
     # ).observes('controller.startsAt')
 
-  location:  Radium.MapView.extend
-    leader: 'location'
-    textBinding: 'controller.location'
+  location: Radium.LocationPicker.extend
+    valueBinding: 'controller.location'
 
   userList: Radium.FormsAutocompleteView.extend()
