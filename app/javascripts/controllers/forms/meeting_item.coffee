@@ -6,7 +6,7 @@ Radium.MeetingItem = Em.ObjectProxy.extend
     startsAt = @get('startsAt').advance(minute: -5)
     endsAt = @get('endsAt').advance(minute: 5)
 
-    @get('startTime').isBetweenExact startsAt, endsAt
+    @get('startTime').isBetween startsAt, endsAt
   ).property('startTime', 'startsAt', 'endsAt')
 
   topic: ( ->

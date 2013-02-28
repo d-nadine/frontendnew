@@ -102,7 +102,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
           startsAt = meeting.get('startsAt').copy().advance(minute: -5)
           endsAt = meeting.get('endsAt').copy().advance(minute: 5)
 
-          if self.get('startsAt').isBetweenExact startsAt, endsAt
+          if self.get('startsAt').isBetween startsAt, endsAt
             self.set 'calendarsOpen', true
 
   ).observes('users', 'users.length', 'startsAt')

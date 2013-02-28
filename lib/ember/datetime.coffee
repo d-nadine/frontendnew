@@ -13,12 +13,12 @@ Ember.DateTime.reopen
     jsDate.setTime(@get('_ms'))
     jsDate
 
-  isBetween: (start, end) ->
+  isBetweenDates: (start, end) ->
     return false if Ember.DateTime.compareDate(this, start) == -1
     return false if Ember.DateTime.compareDate(this, end) == 1
     true
 
-  isBetweenExact: (start, end) ->
+  isBetween: (start, end) ->
     return false if Ember.DateTime.compare(this, start) == -1
     return false if Ember.DateTime.compare(this, end) == 1
     true

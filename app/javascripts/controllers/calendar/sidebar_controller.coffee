@@ -31,7 +31,7 @@ Radium.CalendarSidebarController = Ember.ObjectController.extend Radium.CurrentU
     endDate = @get 'endOfCalendar'
 
     dates = @get('items').filter((i) ->
-      i.get('time').isBetween(startDate, endDate)
+      i.get('time').isBetweenDates(startDate, endDate)
     ).map((i) -> 
       i.get('time').toDateFormat()
     ).uniq()

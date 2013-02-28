@@ -58,7 +58,7 @@ Radium.CalendarController = Ember.Controller.extend
     endDate = @get 'endOfCalendar'
 
     Radium.Todo.filter (todo) ->
-      todo.get('finishBy').isBetween startDate, endDate
+      todo.get('finishBy').isBetweenDates startDate, endDate
   ).property('date')
 
   meetings: (->
@@ -66,7 +66,7 @@ Radium.CalendarController = Ember.Controller.extend
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
-      meeting.get('startsAt').isBetween startDate, endDate
+      meeting.get('startsAt').isBetweenDates startDate, endDate
   ).property('date')
 
   # FIXME: Why does this only work with ArrayController and 
@@ -126,7 +126,7 @@ Radium.CalendarController = Ember.Controller.extend
       endOfDay = current.copy().atEndOfDay()
 
       dailyItems = @get('items').filter (item) ->
-        item.get('time').isBetween startOfDay, endOfDay
+        item.get('time').isBetweenDates startOfDay, endOfDay
 
       day = Ember.ArrayProxy.create
         date: current.copy()
