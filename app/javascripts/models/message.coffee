@@ -12,4 +12,3 @@ Radium.Message = Ember.ArrayProxy.extend
 
     items
   ).property('folder')
-

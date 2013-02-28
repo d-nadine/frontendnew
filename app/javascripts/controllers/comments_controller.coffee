@@ -1,14 +1,11 @@
 Radium.CommentsController = Ember.ObjectController.extend Radium.CurrentUserMixin,
-  contentDidChange: (->
-    @reset()
-  ).observes('content')
-
-  reset: ->
-    comment = Radium.Comment.createRecord commentable: @get('model'), user: @get('currentUser')
-    @set 'comment', comment
+  text: null
 
   submit: ->
-    comment = @get 'comment'
+    comment = @get('comments').createRecord
+      user: @get('currentUser')
+      text: @get('text')
 
-    @get('comments').pushObject comment
-    @reset()
+    @get('store').commit()
+
+    @set 'text', null
