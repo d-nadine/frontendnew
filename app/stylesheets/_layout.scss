@@ -117,9 +117,23 @@ $button-bar-width: 40px;
   }
 }
 
+.block.block-blue {
+  background-color: $associated-blue;
+}
+
 .block-arrow {
   @include css-arrow(top, 15px, $bright, 1px, $selected-item-border, solid);
   margin-top: 15px;
+
+  // move the arrow to a different position. There is no argument
+  // for this
+  &:after, &:before {
+    left: 40px;
+  }
+}
+
+.block-arrow.block-blue {
+  @include css-arrow(top, 15px, $associated-blue, 1px, $selected-item-border, solid);
 
   // move the arrow to a different position. There is no argument
   // for this

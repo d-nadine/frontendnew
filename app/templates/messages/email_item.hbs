@@ -48,14 +48,16 @@
   </div>
 </div>
 
-{{#if showReply }}
+{{#if showReply}}
   <div class="block block-arrow">
     {{control 'messages/reply' model}}
   </div>
 {{/if}}
 
-{{#if showActions }}
-  {{control 'forms/form_widget' model}}
+{{#if showActions}}
+  <div class="block block-connected block-arrow block-blue">
+    {{control "form_box" formBox}}
+  </div>
 {{/if}}
 
 <div class="block block-arrow">
