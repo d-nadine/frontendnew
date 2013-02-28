@@ -121,7 +121,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     return if attendees.find( (item) -> item == attendee)
 
-    attendees.pushObject attendee
+    attendees.addObject attendee
 
     @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
