@@ -7,6 +7,7 @@ Radium.Combobox = Ember.View.extend
     ':control-box'
   ]
 
+
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -59,6 +60,7 @@ Radium.Combobox = Ember.View.extend
   matcher: (item) ->
     string = item.get 'name'
     ~string.toLowerCase().indexOf(@query.toLowerCase())
+
   sorter: (items) ->
     beginswith = []
     caseSensitive = []
@@ -71,7 +73,7 @@ Radium.Combobox = Ember.View.extend
         beginswith.push(item)
       else if (~string.indexOf(@query))
         caseSensitive.push(item)
-      else 
+      else
         caseInsensitive.push(item)
 
     beginswith.concat caseSensitive, caseInsensitive
@@ -83,6 +85,8 @@ Radium.Combobox = Ember.View.extend
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
       "<strong>#{match}</strong>"
 
+  updater: (item) ->
+    @set 'value', item
 
   textField: Ember.TextField.extend
     valueBinding: 'parentView.query'
@@ -90,7 +94,7 @@ Radium.Combobox = Ember.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: @get('parentView.source')
+      @$().typeahead source: @get('parentView.source').toArray()
 
       typeahead = @$().data('typeahead')
 
@@ -103,6 +107,4 @@ Radium.Combobox = Ember.View.extend
         @updater val
         @hide()
 
-      typeahead.updater = (item) =>
-        @set 'parentView.value', item
-
+      typeahead.updater = @get('parentView.updater')

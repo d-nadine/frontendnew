@@ -9,7 +9,7 @@ Radium.MapView = Ember.View.extend
 
   disabled: Ember.computed.alias('controller.isDisabled')
 
-  locationField: Radium.FormsGroupPickerView.extend()
+  locationField: Radium.LocationPicker.extend()
 
   showMap: (event) ->
     $("##{@get('modalId')}").parent().modal(backdrop: true)
