@@ -17,6 +17,14 @@ Radium.InMemoryAdapter = DS.FixtureAdapter.extend({
     addBelongsTo: function(hash, record, key, relationship) {
       var id = get(record, relationship.key+'.id');
       if (!Ember.isNone(id)) { hash[key] = id; }
+    },
+
+    addHasMany: function(hash, record, key, relationship) {
+      var ids = get(record, relationship.key).map(function(item) {
+        return item.get('id');
+      });
+
+      hash[relationship.key] = ids;
     }
   }),
 
