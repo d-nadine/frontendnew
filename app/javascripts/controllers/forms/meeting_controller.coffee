@@ -79,8 +79,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     return unless Ember.DateTime.compare(endsAt, startsAt) == -1
 
     @set('endsAt', startsAt.advance(hour: 1))
-
-    console.log @get('endsAt').toMeridianTime()
   ).observes('startsAt')
 
   # FIXME: Review when using real ember-data
