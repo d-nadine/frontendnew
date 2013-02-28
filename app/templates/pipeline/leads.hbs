@@ -2,10 +2,6 @@
 <h1>Pipeline: Leads</h1>
 </div>
 
-{{#if checkedContent.length}}
-  {{control 'pipeline/form_widget' checkedContent}}
-{{/if}}
-
 <table class="table table-striped table-bordered table-hover">
   <thead>
   <tr>
@@ -50,4 +46,5 @@
     {{/each}}
   </tbody>
 </table>
+
 {{template "shared/show_more"}}
