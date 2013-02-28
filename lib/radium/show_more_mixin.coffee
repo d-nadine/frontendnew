@@ -32,3 +32,6 @@ Radium.ShowMoreMixin = Ember.Mixin.create
     if content = @get('arrangedContent')
       Ember.A(content.slice(@get('currentLimit') + 1, @get('arrangedContent.length')))
   ).property('arrangedContent.length', 'currentLimit')
+
+  contentArrayDidChange: (array, idx, removedCount, addedCount) ->
+    @set 'currentPage', 1
