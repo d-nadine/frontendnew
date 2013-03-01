@@ -1,7 +1,8 @@
 require 'lib/radium/time_picker_view'
 require 'lib/radium/location_picker'
+require 'lib/radium/autocomplete_list_view'
 Radium.FormsMeetingView = Ember.View.extend
-  classNames: ['meeting']
+  classNames: ['meeting-form-container']
 
   readableStartsAt: ( ->
     @get('controller.startsAt').toHumanFormatWithTime()
@@ -48,9 +49,9 @@ Radium.FormsMeetingView = Ember.View.extend
     cancellationText: ( ->
       topic = @get('controller.topic')
 
-      users = @get('controller.attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+      attendees = @get('controller.attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
 
-      "#{topic} with #{users} at #{@get('controller.startsAt').toHumanFormatWithTime()}"
+      "#{topic} with #{attendees} at #{@get('controller.startsAt').toHumanFormatWithTime()}"
     ).property('topic', 'isNew')
 
   topicField: Radium.MentionFieldView.extend
@@ -103,4 +104,4 @@ Radium.FormsMeetingView = Ember.View.extend
   location: Radium.LocationPicker.extend
     valueBinding: 'controller.location'
 
-  userList: Radium.FormsAutocompleteView.extend()
+  userList: Radium.AutocompleteView.extend()

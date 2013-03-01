@@ -1,4 +1,4 @@
-Radium.FormsAutocompleteView = Ember.View.extend
+Radium.AutocompleteView = Ember.View.extend
   classNameBindings: [
     'isInvalid'
     'hasUsers:is-valid'
