@@ -18,6 +18,10 @@ Radium.TimePickerView = Ember.View.extend
 
   textBinding: 'textToTimeTransform'
 
+  showTimePicker: ->
+    return if @get('disabled')
+    @$('.timepicker').trigger('click.timepicker')
+
   textToTimeTransform: ((key, value) ->
     if arguments.length == 2
       if value && /^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/.test(value)
