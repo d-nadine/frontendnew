@@ -160,6 +160,9 @@
         width: 74.4%;
         display: block;
         margin-top: 10px;
+        input[type=text]{
+          width: 79%;
+        }
       }
 
       .block.calendars{
