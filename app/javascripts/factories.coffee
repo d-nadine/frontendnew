@@ -5,6 +5,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @store = store
 
     @map = Ember.Map.create()
+    @map.set 'address', Radium.Address
     @map.set 'user', Radium.User
     @map.set 'comment', Radium.Comment
     @map.set 'contact', Radium.Contact

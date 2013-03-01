@@ -26,8 +26,9 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
 
   locations: ( ->
-    @get('groups').map (group) -> Ember.Object.create
+    @get('groups').map( (group) -> Ember.Object.create
                                     name: "#{group.get('name')} #{group.get('address')}"
+                      ) .sort (left, right) -> Ember.compare left.get('name'), right.get('name')
   ).property()
 
   attendees: ( ->
