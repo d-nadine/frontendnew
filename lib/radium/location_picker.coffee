@@ -2,6 +2,7 @@ require 'lib/radium/combobox'
 
 Radium.LocationPicker = Radium.Combobox.extend
   classNames: ['location-picker-control-box']
+  placeholder: 'location'
 
   sourceBinding: 'controller.locations'
   valueBinding: 'controller.location'
