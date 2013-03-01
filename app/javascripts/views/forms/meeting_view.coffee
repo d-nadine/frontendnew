@@ -1,4 +1,5 @@
-require 'views/forms/time_picker_view'
+require 'lib/radium/time_picker_view'
+require 'lib/radium/location_picker'
 Radium.FormsMeetingView = Ember.View.extend
   classNames: ['meeting']
 
@@ -98,20 +99,6 @@ Radium.FormsMeetingView = Ember.View.extend
       return false unless @get('isSubmitted')
       Ember.DateTime.compare(@get('controller.endsAt'), @get('controller.startsAt')) == -1
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
-
-    #nudge the date forward if less than startsAt
-    # startsAtDidChange: ( ->
-    #   startsAt = @get('controller.startsAt')
-    #   endsAt = @get('controller.endsAt')
-
-    #   return unless Ember.DateTime.compare(endsAt, startsAt) == -1
-
-    #   advance = startsAt.advance(hour: 1)
-
-    #   @setDate advance.toMeridianTime()
-
-    #   @$('.timepicker').val(advance.toMeridianTime())
-    # ).observes('controller.startsAt')
 
   location: Radium.LocationPicker.extend
     valueBinding: 'controller.location'
