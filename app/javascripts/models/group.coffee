@@ -7,12 +7,17 @@ Radium.Group = Radium.Model.extend Radium.FollowableMixin,
   zipcode: DS.attr('string')
 
   address: ( ->
-    [
+    parts = [
       @get('street')
       @get('state')
       @get('city')
       @get('country')
       @get('zipcode')
-    ].filter( (part) -> part).join(' ')
+    ].filter( (part) -> part)
+
+    if parts.length
+      parts.join ' '
+    else
+      ""
 
   ).property('street', 'state', 'city', 'country', 'zipcode')
