@@ -7,7 +7,7 @@ Radium.TimePickerView = Ember.View.extend
     ':control-box'
     ':datepicker-control-box'
     ':field'
-    ':bootstrap-timepicker'
+    ':timepicker'
     ':input-append'
   ]
 

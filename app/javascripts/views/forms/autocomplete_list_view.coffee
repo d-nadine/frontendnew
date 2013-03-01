@@ -33,7 +33,7 @@ Radium.FormsAutocompleteView = Ember.View.extend
   ).property('isSubmitted', 'users', 'users.length')
 
   hasUsers: ( ->
-    @get('users.length') && @get('users.length') > 1
+    @get('users.length')
   ).property('users', 'users.length')
 
   autoCompleteList: Ember.TextField.extend
@@ -76,16 +76,17 @@ Radium.FormsAutocompleteView = Ember.View.extend
     selectionClick: (el) ->
       return false unless @get('controller.isEditable')
 
-      offset = el.offset()
+      position = el.position()
 
       dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
 
       dropdown.css
         position: "absolute",
-        top: offset.top + el.height() + 7 + "px",
-        left: offset.left + "px"
+        left: position.left  + "px"
+        top: position.top + el.height() + 7 + "px"
 
       dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
+
       event.stopPropagation()
 
     formatList: (data, elem) ->
@@ -101,13 +102,11 @@ Radium.FormsAutocompleteView = Ember.View.extend
       elem.html(content)
 
     retrieve: (query, callback) ->
-      # FIXME: Change to real server query
-      result = Radium.AutoCompleteResult.find(userFor: @get('currentUser')).get('firstObject')
+      people = @get('controller.people')
 
-      return unless result.get('hasResults')
+      return unless people.get('length')
 
-      results = Radium.PeopleList.listPeople(result.get('users'), result.get('contacts'))
-                  .map (item) =>
+      results = people.map (item) =>
                     @mapSearchResult.call this, item
 
       callback(results, query)

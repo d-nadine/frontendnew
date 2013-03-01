@@ -1,7 +1,9 @@
 Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
-  needs: ['groups']
+  needs: ['groups','contacts','users']
   groups: Ember.computed.alias('controllers.groups')
   source: Ember.computed.alias 'attendees'
+  userList: Ember.computed.alias 'controllers.users'
+  contactList: Ember.computed.alias 'controllers.contacts'
   meetingUsers: null
   calendarsOpen: null
 
@@ -10,6 +12,10 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'meetingUsers', Radium.MeetingUsers.create()
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
+
+  people: ( ->
+    Radium.PeopleList.listPeople(@get('userList'), @get('contactList'))
+  ).property('userList', 'userList.length', 'contactList', 'contactList.length')
 
   isEditable:( ->
     return false if @get('isNew')
