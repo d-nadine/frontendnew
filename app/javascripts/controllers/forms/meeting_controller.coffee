@@ -54,20 +54,15 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).property('isNew', 'justAdded')
 
   submit: ->
-    return unless @get('isValid')
-
     @set 'isSubmitted', true
+
+    return unless @get('isValid')
 
     unless @get('isNew')
       @get('content.transaction').commit()
       return
 
-    meeting = Radium.Meeting.createRecord
-      topic: @get('topic')
-      location: @get('location')
-      startsAt: @get('startAt')
-      endsAt: @get('endsAt')
-      user: @get('currentUser')
+    meeting = Radium.Meeting.createRecord @get('data')
 
     @get('users').forEach (user) ->
       meeting.get('users').addObject user

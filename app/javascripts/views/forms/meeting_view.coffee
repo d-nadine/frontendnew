@@ -81,8 +81,7 @@ Radium.FormsMeetingView = Ember.View.extend
     dateBinding: 'controller.startsAt'
     isInvalid: ( ->
       return false unless @get('isSubmitted')
-      now = Ember.DateTime.create().advance(minute: -5)
-      Ember.DateTime.compare(@get('controller.startsAt'), now)  == -1
+      @get('controller.startsAtIsInvalid')
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
   endsAt: Radium.TimePickerView.extend
@@ -90,7 +89,7 @@ Radium.FormsMeetingView = Ember.View.extend
     leader: 'Ends:'
     isInvalid: ( ->
       return false unless @get('isSubmitted')
-      Ember.DateTime.compare(@get('controller.endsAt'), @get('controller.startsAt')) == -1
+      @get('controller.endsAtIsInvalid')
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
   location: Radium.LocationPicker.extend
