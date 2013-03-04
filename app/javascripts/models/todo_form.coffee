@@ -1,2 +1,2 @@
-Radium.TodoForm = Ember.ObjectProxy.extend
+Radium.TodoForm = Radium.Form.extend
   isEditable: true

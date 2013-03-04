@@ -1,1 +1,1 @@
-Radium.MeetingForm = Ember.ObjectProxy.extend()
+Radium.MeetingForm = Radium.Form.extend()
