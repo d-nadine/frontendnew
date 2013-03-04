@@ -28,6 +28,9 @@ class Populator
     userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
+    startsAt = Ember.DateTime.create().advance(hour: 1)
+    endsAt = Ember.DateTime.create().advance(hour: 3)
+
     for i in [0..20]
       Factory.create 'deal',
         user: -> userDictionary.random()
@@ -41,6 +44,9 @@ class Populator
     for i in [0..30]
       Factory.create 'email'
         sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
+
+    for i in [0..20]
+      Factory.create 'group'
 
     Factory.adapter.store.commit()
 

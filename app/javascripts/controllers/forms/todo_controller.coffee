@@ -1,6 +1,9 @@
-Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
+  canFinish: (->
+    @get('isDisabled') || @get('isNew')
+  ).property('isDisabled', 'isNew')
 
   submit: ->
     @set 'isSubmitted', true
@@ -47,15 +50,3 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.CurrentUserMix
     return true unless @get('isExpanded')
     @get 'isDisabled'
   ).property('isDisabled', 'isExpanded', 'isNew')
-
-  canFinish: (->
-    @get('isDisabled') || @get('isNew')
-  ).property('isDisabled', 'isNew')
-
-  toggleExpanded: -> @toggleProperty 'isExpanded'
-
-  expand: ->
-    return unless @get('isExpandable')
-    @toggleProperty 'isExpanded'
-
-  hasComments: Radium.computed.isPresent('comments')

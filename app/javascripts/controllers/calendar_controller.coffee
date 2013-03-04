@@ -11,14 +11,15 @@ Radium.CalendarController = Ember.Controller.extend
   needs: ['users', 'clock']
 
   clock: Ember.computed.alias('controllers.clock')
-
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
+  now: Ember.computed.alias('clock.now')
 
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
+      meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: (->
@@ -37,6 +38,17 @@ Radium.CalendarController = Ember.Controller.extend
         finishBy: @get('tomorrow')
         user: @get('currentUser')
   ).property('model', 'tomorrow')
+
+  meetingForm: ( ->
+    Radium.MeetingForm.create
+      content: Ember.Object.create
+        isNew: true
+        users: Em.ArrayProxy.create(content: [])
+        contacts: Em.ArrayProxy.create(content: [])
+        user: @get('currentUser')
+        startsAt: @get('now')
+        endsAt: @get('now').advance(hour: 1)
+  ).property('model', 'now')
 
   users: (->
     @get('controllers.users')
@@ -58,7 +70,7 @@ Radium.CalendarController = Ember.Controller.extend
     endDate = @get 'endOfCalendar'
 
     Radium.Todo.filter (todo) ->
-      todo.get('finishBy').isBetween startDate, endDate
+      todo.get('finishBy').isBetweenDates startDate, endDate
   ).property('date')
 
   meetings: (->
@@ -66,7 +78,7 @@ Radium.CalendarController = Ember.Controller.extend
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
-      meeting.get('startsAt').isBetween startDate, endDate
+      meeting.get('startsAt').isBetweenDates startDate, endDate
   ).property('date')
 
   # FIXME: Why does this only work with ArrayController and 
@@ -126,7 +138,7 @@ Radium.CalendarController = Ember.Controller.extend
       endOfDay = current.copy().atEndOfDay()
 
       dailyItems = @get('items').filter (item) ->
-        item.get('time').isBetween startOfDay, endOfDay
+        item.get('time').isBetweenDates startOfDay, endOfDay
 
       day = Ember.ArrayProxy.create
         date: current.copy()

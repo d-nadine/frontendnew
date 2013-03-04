@@ -1,0 +1,33 @@
+<table class="table table-striped table-bordered table-hover">
+  {{#each content.meetings}}
+    <tr>
+      <td>
+        {{avatar selectedUser}}
+        {{#linkTo user this}}{{selectedUser.name}}{{/linkTo}}
+      </td>
+      <td {{bindAttr class="hasConflict"}}>
+        {{format startsAt format="%i:%M %p"}} to {{format endsAt format="%i:%M %p"}}
+      </td>
+      <td>
+        {{topic}}
+        {{#if meetingUsers}}
+          with
+          {{#each meetingUsers}}
+            {{#linkTo user this}}{{this.name}}{{/linkTo}}&nbsp;
+          {{/each}}
+        {{/if}}
+      </td>
+      <td>
+        {{#if hasConflict}}
+        <i class="icon-tag"></i>
+        Conflict
+        {{/if}}
+      </td>
+    </tr>
+  {{else}}
+  <tr>
+    <td colspan="4">No meeetings</td>
+  </tr>
+  {{/each}}
+</table>
+

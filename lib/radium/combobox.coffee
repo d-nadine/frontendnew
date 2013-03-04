@@ -1,15 +1,21 @@
 Radium.Combobox = Ember.View.extend
   classNameBindings: [
-    'value:is-valid'
     'isInvalid'
     'disabled:is-disabled'
     ':combobox'
     ':control-box'
   ]
 
+  sortedSource: ( ->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      sortProperties: ['name']
+      content: @get('source')
+  ).property('source')
+
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
+
   isInvalid: (->
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
   ).property('value', 'isSubmitted')
@@ -27,10 +33,12 @@ Radium.Combobox = Ember.View.extend
   ).property('value')
 
   template: Ember.Handlebars.compile """
-    {{#if view.label}}
-      <span class="text">
-        {{view.label}}
-      </span>
+    {{#if view.leaderView}}
+      {{view view.leaderView tagName="span" classNames="text"}}
+    {{/if}}
+
+    {{#if view.leader}}
+      <span class="text">{{view.leader}}</span>
     {{/if}}
 
     {{view view.textField}}
@@ -41,24 +49,36 @@ Radium.Combobox = Ember.View.extend
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
-          {{#each view.source}}
-            <li><a {{action setValue this target=view href=true bubbles=false}}>{{name}}</a></li>
+          {{#each view.sortedSource}}
+            <li><a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a></li>
           {{/each}}
         </ul>
       </div>
     {{/unless}}
+
+    {{#if view.footerView}}
+      {{view view.footerView tagName="span" classNames="text"}}
+    {{/if}}
+
+    {{#if view.footer}}
+      <span class="text">{{view.footer}}</span>
+    {{/if}}
   """
   toggleDropdown: (event) ->
     @toggleProperty 'open'
 
+  selectObject: (item) ->
+    @set 'open', false
+    @setValue item
+
   setValue: (object) ->
     @set 'value', object
-    @set 'open', false
 
   # Begin typehead customization
   matcher: (item) ->
     string = item.get 'name'
     ~string.toLowerCase().indexOf(@query.toLowerCase())
+
   sorter: (items) ->
     beginswith = []
     caseSensitive = []
@@ -71,7 +91,7 @@ Radium.Combobox = Ember.View.extend
         beginswith.push(item)
       else if (~string.indexOf(@query))
         caseSensitive.push(item)
-      else 
+      else
         caseInsensitive.push(item)
 
     beginswith.concat caseSensitive, caseInsensitive
@@ -83,6 +103,8 @@ Radium.Combobox = Ember.View.extend
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
       "<strong>#{match}</strong>"
 
+  updater: (item) ->
+    @set 'value', item
 
   textField: Ember.TextField.extend
     valueBinding: 'parentView.query'
@@ -90,9 +112,20 @@ Radium.Combobox = Ember.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: @get('parentView.source')
+      @$().typeahead source: @get('parentView.sortedSource')
 
       typeahead = @$().data('typeahead')
+
+      # make typeahead work with ember arrays
+      typeahead.process = (items) ->
+        items = items.filter (item) => @matcher(item)
+
+        items = @sorter(items)
+
+        if !items.get('length')
+          return if @shown then @hide() else this
+
+        @render(items.slice(0, @options.items)).show()
 
       typeahead.matcher = @get('parentView.matcher')
       typeahead.sorter = @get('parentView.sorter')
@@ -104,5 +137,4 @@ Radium.Combobox = Ember.View.extend
         @hide()
 
       typeahead.updater = (item) =>
-        @set 'parentView.value', item
-
+        @get('parentView').setValue item

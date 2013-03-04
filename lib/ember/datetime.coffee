@@ -1,23 +1,40 @@
 Ember.DateTime.reopen
+  toMeridianTime: ->
+    @toFormattedString('%i:%M %p')
+
   toDateFormat: ->
     @toFormattedString('%Y-%m-%d')
 
   toFullFormat: ->
     @toISO8601()
 
-  isBetween: (start, end) ->
+  toJSDate: ->
+    jsDate = new Date()
+    jsDate.setTime(@get('_ms'))
+    jsDate
+
+  isBetweenDates: (start, end) ->
     return false if Ember.DateTime.compareDate(this, start) == -1
     return false if Ember.DateTime.compareDate(this, end) == 1
     true
+
+  isBetween: (start, end) ->
+    return false if Ember.DateTime.compare(this, start) == -1
+    return false if Ember.DateTime.compare(this, end) == 1
+    true
+
+  isBeforeToday: ->
+    yesterDay = Ember.DateTime.create().advance(day: -1)
+    Ember.DateTime.compareDate(this, yesterDay) != 1
 
   atEndOfDay: ->
     @adjust hour: 23, minute: 59, second: 59
 
   atBeginningOfDay: ->
-    @adjust hour: 0, minute: 0, second: 0 
+    @adjust hour: 0, minute: 0, second: 0
 
   atBeginningOfDay: ->
-    @adjust hour: 0, minute: 0, second: 0 
+    @adjust hour: 0, minute: 0, second: 0
 
   atBeginningOfMonth: ->
     @adjust day: 1, hour: 0, minute: 0, second: 0
@@ -59,6 +76,9 @@ Ember.DateTime.reopen
       "Tomorrow"
     else
       @toFormattedString(format)
+
+  toHumanFormatWithTime: ->
+    "#{@toHumanFormat()} #{@toMeridianTime()}"
 
 Ember.DateTime.reopenClass
   random: (options = {}) ->

@@ -1,1 +1,86 @@
+<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form-inline :meeting-form"}}>
+  <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :main"}} {{action expand}}>
+    <div class="checker pull-left"><label></label></div>
 
+    {{#if showOptions}}
+      <a tabindex="3" href="#" class="btn btn-link pull-right" {{action toggleExpanded}}>
+        {{#if isExpanded}}
+          Hide
+        {{else}}
+          Options
+        {{/if}}
+      </a>
+    {{/if}}
+
+    {{#if showSuccess}}
+      <span class="success pull-right">Meeting Added</span>
+    {{/if}}
+
+    {{#if showTopicTextBox}}
+      {{view view.topicField classNames="field field-blend-in"}}
+    {{else}}
+      <span class="topic">
+        {{topic}} with
+        {{#each attendees}}
+          {{#linkToPerson this}}@{{this.name}}{{/linkToPerson}}
+        {{/each}}
+        at {{view.readableStartsAt}}
+      </span>
+    {{/if}}
+
+    {{#if showComments}}
+      <i class="icon-comment pull-right"></i>
+    {{/if}}
+  </div>
+  {{#if isExpanded}}
+    <div class="options">
+      {{view view.datePicker class="field"}}
+      {{view view.startsAt class="field"}}
+      {{view view.endsAt class="field"}}
+      {{view view.location class="field"}}
+      {{#if isDisabled}}
+        <ul>
+        {{#each attendees}}
+        <li>
+          {{#linkToPerson this}}
+            {{avatar this}}
+            {{name}}
+          {{/linkToPerson}}
+        </li>
+        {{/each}}
+        </li>
+      {{else}}
+        {{view view.attendees class="field"}}
+      {{/if}}
+      <div class="block calendars">
+        <div class="btn-group control-box">
+          <a {{action showCalendars}}class="btn">
+            <strong>{{currentDate}}'s Calendars</strong>
+            {{#if calendarsOpen}}
+              <i class="icon-chevron-down"></i>
+            {{else}}
+              <i class="icon-chevron-up"></i>
+            {{/if}}
+          </a>
+        </div>
+        {{#if calendarsOpen}}
+          {{template 'forms/existing_meetings'}}
+        {{/if}}
+      </div>
+      <div class="save">
+        <div class="btn-group">
+          <button class="btn btn-primary" {{action submit}}>Save</button>
+        </div>
+        <div class="btn-group">
+          <button class="btn" {{action showCancelMeetingDialogue target="view"}} {{bindAttr disabled="controller.notEditable"}}>Cancel</button>
+        </div>
+      </div>
+      {{#unless isNew}}
+        <div class="block block-arrow">
+          {{control 'comments' model}}
+        </div>
+      {{/unless}}
+    </div>
+  {{/if}}
+  {{view view.cancelMeetingDialogue}}
+</form>

@@ -1,2 +1,3 @@
 Factory.define 'group', traits: 'timestamps',
-  name: Factory.sequence (i) -> "Group #{i}"
+  name: -> Dictionaries.companies.random()
+  address: -> Factory.create 'address'
