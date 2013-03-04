@@ -54,6 +54,8 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).property('isNew', 'justAdded')
 
   submit: ->
+    return unless @get('isValid')
+
     @set 'isSubmitted', true
 
     unless @get('isNew')

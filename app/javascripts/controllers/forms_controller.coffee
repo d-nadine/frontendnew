@@ -1,3 +1,8 @@
+require 'forms/call_form'
+require 'forms/discussion_form'
+require 'forms/meeting_form'
+require 'forms/todo_form'
+require 'forms/form_box'
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   newMeeting: (->
     meeting = Radium.MeetingForm.create
