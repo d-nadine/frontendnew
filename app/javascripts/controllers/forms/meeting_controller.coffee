@@ -36,14 +36,10 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   showTopicTextBox: ( ->
     return true if @get('isNew')
-    return false if @get('notEditable')
+    return false if @get('isDisabled')
     return true if @get('isNew')
     @get('isExpanded')
-  ).property('isNew', 'notEditable', 'isExpanded')
-
-  notEditable: ( ->
-    not @get('isEditable')
-  ).property('isEditable')
+  ).property('isNew', 'isDisabled', 'isExpanded')
 
   hasElapsed: ( ->
     return unless @get('startsAt')

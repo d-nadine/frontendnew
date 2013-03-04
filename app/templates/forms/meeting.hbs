@@ -38,7 +38,20 @@
       {{view view.startsAt class="field"}}
       {{view view.endsAt class="field"}}
       {{view view.location class="field"}}
-      {{view view.attendees class="field"}}
+      {{#if isDisabled}}
+        <ul>
+        {{#each attendees}}
+        <li>
+          {{#linkToPerson this}}
+            {{avatar this}}
+            {{name}}
+          {{/linkToPerson}}
+        </li>
+        {{/each}}
+        </li>
+      {{else}}
+        {{view view.attendees class="field"}}
+      {{/if}}
       <div class="block calendars">
         <div class="btn-group control-box">
           <a {{action showCalendars}}class="btn">
