@@ -4,6 +4,20 @@ require 'lib/radium/autocomplete_list_view'
 Radium.FormsMeetingView = Ember.View.extend
   classNames: ['meeting-form-container']
 
+  submit: ->
+    return unless @get('controller.isValid')
+
+    isNew = @get('controller.isNew')
+
+    @get('controller').submit()
+
+    return false unless isNew
+
+    @$('form')[0].reset()
+    @get('meetingTopic').reset()
+    @get('attendeeList').reset()
+    false
+
   readableStartsAt: ( ->
     @get('controller.startsAt').toHumanFormatWithTime()
   ).property('startsAt')

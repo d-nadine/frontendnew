@@ -20,7 +20,7 @@
       <span class="success-message pull-right">Todo added</span>
     {{/if}}
 
-    {{view view.todoField classNames="field field-blend-in"}}
+    {{view view.todoField classNames="field field-blend-in" viewName="todoDescription"}}
   </div>
 
   {{#if isExpanded}}
@@ -29,7 +29,7 @@
       {{view view.userPicker class="field"}}
 
       {{#if isEditable}}
-        <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
+        <button class="btn btn-primary pull-right" type="submit" {{action submit target="view"}}>Save</button>
       {{/if}}
     </div>
   {{/if}}

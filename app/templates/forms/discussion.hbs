@@ -7,11 +7,11 @@
         <span class="succes">Discussion Added</span>
       {{/if}}
 
-      {{view view.textbox classNames="textbox field field-blend-in"}}
+      {{view view.textbox classNames="textbox field field-blend-in" viewName="discussionText"}}
     </div>
     <div class="second-row">
       {{#if showSaveButton}}
-        <button {{action submit}} class="btn btn-primary">Save</button>
+        <button {{action submit target="view"}} class="btn btn-primary">Save</button>
       {{/if}}
 
       {{#if showSuccessMessage}}

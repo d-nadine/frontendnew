@@ -15,3 +15,16 @@ Radium.FormsDiscussionView = Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
     ).property('value', 'isSubmitted')
 
+  submit: ->
+    return unless @get('controller.isValid')
+
+    isNew = @get('controller.isNew')
+
+    @get('controller').submit()
+
+    return false unless isNew
+
+    @$('form')[0].reset()
+    @get('discussionText').reset()
+    false
+

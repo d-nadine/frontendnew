@@ -17,7 +17,7 @@
     {{/if}}
 
     {{#if showTopicTextBox}}
-      {{view view.topicField classNames="field field-blend-in"}}
+      {{view view.topicField classNames="field field-blend-in" viewName="meetingTopic"}}
     {{else}}
       <span class="topic">
         {{topic}} with
@@ -51,7 +51,7 @@
         {{/each}}
         </li>
       {{else}}
-        {{view view.attendees class="field"}}
+        {{view view.attendees class="field" viewName="attendeeList"}}
       {{/if}}
       <div class="block calendars">
         <div class="btn-group control-box">
@@ -70,7 +70,7 @@
       </div>
       <div class="save">
         <div class="btn-group">
-          <button class="btn btn-primary" {{action submit}}>Save</button>
+          <button class="btn btn-primary" {{action submit target="view"}}>Save</button>
         </div>
         <div class="btn-group">
           <button class="btn" {{action showCancelMeetingDialogue target="view"}} {{bindAttr disabled="controller.isDisabled"}}>Cancel</button>

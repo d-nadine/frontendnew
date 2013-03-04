@@ -26,5 +26,13 @@ Radium.FormsTodoView = Ember.View.extend
 
   submit: ->
     return unless @get('controller.isValid')
+
+    isNew = @get('controller.isNew')
+
     @get('controller').submit()
-    @get('controller').reset()
+
+    return false unless isNew
+
+    @$('form')[0].reset()
+    @get('todoDescription').reset()
+    false

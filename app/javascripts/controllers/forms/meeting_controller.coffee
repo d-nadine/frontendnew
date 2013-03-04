@@ -14,7 +14,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'calendarsOpen', false
 
   people: ( ->
-    Radium.PeopleList.listPeople(@get('userList'), @get('contactList'))
+    Radium.PeopleList.listPeople(@get('userList').mapProperty('content'), @get('contactList'))
   ).property('userList', 'userList.length', 'contactList', 'contactList.length')
 
   isEditable:( ->
