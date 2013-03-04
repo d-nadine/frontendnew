@@ -11,3 +11,16 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend
   showSuccessMessage: (->
     @get('justAdded') is true
   ).property('justAdded')
+
+  submit: ->
+    @set 'isSubmitted', true
+
+    return unless @get('isValid')
+
+    unless @get('isNew')
+      @get('content.transaction').commit()
+      return
+
+    discussion = Radium.Discussion.createRecord @get('data')
+
+    discussion.get('transaction').commit()
