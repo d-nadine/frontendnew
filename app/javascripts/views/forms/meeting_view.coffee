@@ -30,7 +30,7 @@ Radium.FormsMeetingView = Ember.View.extend
     template: Ember.Handlebars.compile """
       <div class="content">
         <div>Are you sure you want to cancel meeting</div>
-        <div>{{view.cancellationText}}</div>
+        <div>{{controller.cancellationText}}</div>
         <div>
           <div>
             <button {{action cancel target="view"}} class="btn btn-no">No</button>
@@ -45,14 +45,6 @@ Radium.FormsMeetingView = Ember.View.extend
 
     cancelMeeting: ->
       @$().hide()
-
-    cancellationText: ( ->
-      topic = @get('controller.topic')
-
-      attendees = @get('controller.attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
-
-      "#{topic} with #{attendees} at #{@get('controller.startsAt').toHumanFormatWithTime()}"
-    ).property('topic', 'isNew')
 
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']
@@ -103,5 +95,6 @@ Radium.FormsMeetingView = Ember.View.extend
 
   location: Radium.LocationPicker.extend
     valueBinding: 'controller.location'
+    isInvalid: false
 
   userList: Radium.AutocompleteView.extend()

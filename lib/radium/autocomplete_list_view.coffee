@@ -90,10 +90,14 @@ Radium.AutocompleteView = Ember.View.extend
       event.stopPropagation()
 
     formatList: (data, elem) ->
-      name = if data.data.get('name')
-                "#{data.name} (#{data.data.get('email')})"
+      email= data.data.get('email')
+
+      name = if data.name && email
+                "#{data.name} (#{email})"
+             else if data.name
+                data.name
              else
-               data.email
+               email
 
       content = """
         #{@getAvatar(data)}

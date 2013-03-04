@@ -19,6 +19,7 @@ Radium.CalendarController = Ember.Controller.extend
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
+      meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: (->
@@ -36,6 +37,17 @@ Radium.CalendarController = Ember.Controller.extend
         reference: @get('contact')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
+  ).property('model', 'tomorrow')
+
+  meetingForm: ( ->
+    Radium.MeetingForm.create
+      content: Ember.Object.create
+        isNew: true
+        users: Em.ArrayProxy.create(content: [])
+        contacts: Em.ArrayProxy.create(content: [])
+        user: @get('currentUser')
+        startsAt: Ember.DateTime.create()
+        endsAt: Ember.DateTime.create().advance({hour: 1})
   ).property('model', 'tomorrow')
 
   users: (->

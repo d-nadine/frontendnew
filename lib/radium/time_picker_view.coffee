@@ -10,6 +10,7 @@ Radium.TimePickerView = Ember.View.extend
     ':timepicker'
     ':input-append'
   ]
+  isOpen: false
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   leader: 'Starts at:'
@@ -20,7 +21,11 @@ Radium.TimePickerView = Ember.View.extend
 
   showTimePicker: ->
     return if @get('disabled')
-    @$('.timepicker').trigger('click.timepicker')
+
+    unless @get('isOpen')
+      @$('.timepicker').trigger('click.timepicker')
+
+    @toggleProperty('isOpen')
 
   textToTimeTransform: ((key, value) ->
     if arguments.length == 2

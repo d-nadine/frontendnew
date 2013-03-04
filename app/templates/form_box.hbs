@@ -13,8 +13,14 @@
     {{/if}}
 
     {{#if discussionForm}}
-    <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active :discussion"}} href="#">
+      <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active :discussion"}} href="#">
         <i class="icons-discussion-muted"></i>
+      </a>
+    {{/if}}
+
+    {{#if meetingForm}}
+      <a {{action showForm "meeting"}} {{bindAttr class="showMeetingForm:active :meeting"}} href="#">
+        <img src="/images/icons/meeting.png" alt="meeting"/>
       </a>
     {{/if}}
   </div>
@@ -30,6 +36,10 @@
 
     {{#if showDiscussionForm}}
       {{control "forms/discussion" discussionForm}}
+    {{/if}}
+
+    {{#if showMeetingForm}}
+      {{control "forms/meeting" meetingForm}}
     {{/if}}
   </div>
 </div>

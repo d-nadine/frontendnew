@@ -199,4 +199,5 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       todoForm: @get('newTodo')
       callForm: @get('newCall')
       discussionForm: @get('discussion')
+      meetingForm: @get('newMeeting')
   ).property()

@@ -80,6 +80,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     meeting.get('transaction').commit()
 
+    cancellationText: ( ->
+      return if @get('isNew')
+
+      topic = @get('topic')
+
+      attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+
+      "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
+    ).property('topic', 'isNew')
+
   startsAtDidChange: ( ->
     startsAt = @get('startsAt')
     endsAt = @get('endsAt')
