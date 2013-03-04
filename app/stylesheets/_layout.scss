@@ -15,27 +15,36 @@ $sidebar-border-size: 8px;
 $button-bar-width: 40px;
 
 .sidebar-panel {
-  position: fixed;
-  top: 47px;
-  bottom: 0;
   padding-left: $button-bar-width + $sidebar-border-size;
   width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
   margin-left: 0;
+  float: left;
+}
+
+.sidebar-panel-bordered {
+  .panel-content {
+    @include shadowed;
+    padding: 10px;
+  }
+}
+
+.sidebar-panel-fixed {
+  position: fixed;
+  top: 47px;
+  bottom: 0;
+
+  background-color: $dark-background;
+  border-right: solid 1px darken($dark-background, 25);
+  // FIXME: why doesn't this work with the box shadow mixin?
+  -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15);
 
   .sidebar-panel-edge {
     position: fixed;
     top: 47px;
     bottom: 0;
-    width: 252px;
+    width: 252px; //FIXME: what is this?
     box-sizing: border-box;
   }
-}
-
-.sidebar-panel-main {
-  background-color: $dark-background;
-  border-right: solid 1px darken($dark-background, 25);
-  // FIXME: why doesn't this work with the box shadow mixin?
-  -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15)
 }
 
 .sidebar-panel-drawer {
@@ -176,3 +185,4 @@ $button-bar-width: 40px;
 .table .th, .table td {
   vertical-align: middle;
 }
+

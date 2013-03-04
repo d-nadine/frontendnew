@@ -1,4 +1,4 @@
-require 'views/sidebar_view'
+require 'views/fixed_sidebar_view'
 
-Radium.CalendarSidebarView = Radium.SidebarView.extend
+Radium.CalendarSidebarView = Radium.FixedSidebarView.extend
   classNameBindings: ['controller.isDifferentUser']
