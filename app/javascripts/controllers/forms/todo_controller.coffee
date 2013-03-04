@@ -8,11 +8,15 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
   submit: ->
     @set 'isSubmitted', true
 
-    Radium.Todo.createRecord
-      user: @get('user')
-      finishBy: @get('finishBy')
-      reference: @get('reference')
-      description: @get('description')
+    return unless @get('isValid')
+
+    unless @get('isNew')
+      @get('content.transaction').commit()
+      return
+
+    todo = Radium.Todo.createRecord @get('data')
+
+    todo.get('transaction').commit()
 
     @set 'isExpanded', false
 

@@ -16,6 +16,8 @@ Radium.FormsMeetingView = Ember.View.extend
     $('html').off 'click.cancel-meeting'
 
   showCancelMeetingDialogue: ->
+    return if @get('controller.isNew')
+
     dialogue =  @$('.cancel-meeting')
 
     $('html').on 'click.cancel-meeting', ->
