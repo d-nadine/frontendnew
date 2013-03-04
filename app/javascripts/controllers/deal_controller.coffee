@@ -2,8 +2,6 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
 
-  contact: Ember.computed.alias('model.contact')
-
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
 
   now: Ember.computed.alias('clock.now')
