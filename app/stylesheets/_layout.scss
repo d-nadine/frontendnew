@@ -44,7 +44,7 @@ $button-bar-width: 40px;
     position: fixed;
     top: 47px;
     bottom: 0;
-    width: 252px; //FIXME: what is this?
+    width: $sidebar-width - $sidebar-border-size - $button-bar-width;
     box-sizing: border-box;
   }
 }
