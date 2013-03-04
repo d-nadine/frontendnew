@@ -11,8 +11,8 @@ Radium.CalendarController = Ember.Controller.extend
   needs: ['users', 'clock']
 
   clock: Ember.computed.alias('controllers.clock')
-
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
+  now: Ember.computed.alias('clock.now')
 
   formBox: (->
     Radium.FormBox.create
@@ -46,9 +46,9 @@ Radium.CalendarController = Ember.Controller.extend
         users: Em.ArrayProxy.create(content: [])
         contacts: Em.ArrayProxy.create(content: [])
         user: @get('currentUser')
-        startsAt: Ember.DateTime.create()
-        endsAt: Ember.DateTime.create().advance({hour: 1})
-  ).property('model', 'tomorrow')
+        startsAt: @get('now')
+        endsAt: @get('now').advance(hour: 1)
+  ).property('model', 'now')
 
   users: (->
     @get('controllers.users')

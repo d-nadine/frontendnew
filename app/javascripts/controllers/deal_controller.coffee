@@ -6,11 +6,14 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
 
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
 
+  now: Ember.computed.alias('clock.now')
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
+      meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: (->
@@ -36,3 +39,14 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
         reference: @get('model')
         user: @get('currentUser')
   ).property('model')
+
+  meetingForm: ( ->
+    Radium.MeetingForm.create
+      content: Ember.Object.create
+        isNew: true
+        users: Em.ArrayProxy.create(content: [])
+        contacts: Em.ArrayProxy.create(content: [])
+        user: @get('currentUser')
+        startsAt: @get('now')
+        endsAt: @get('now').advance(hour: 1)
+  ).property('model', 'tomorrow')
