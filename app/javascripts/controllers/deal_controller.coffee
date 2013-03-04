@@ -49,4 +49,4 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
         user: @get('currentUser')
         startsAt: @get('now')
         endsAt: @get('now').advance(hour: 1)
-  ).property('model', 'tomorrow')
+  ).property('model', 'now')
