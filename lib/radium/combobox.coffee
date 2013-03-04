@@ -6,6 +6,12 @@ Radium.Combobox = Ember.View.extend
     ':control-box'
   ]
 
+  sortedSource: ( ->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      sortProperties: ['name']
+      content: @get('source')
+  ).property('source')
+
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -43,7 +49,7 @@ Radium.Combobox = Ember.View.extend
           <i class="icon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu">
-          {{#each view.source}}
+          {{#each view.sortedSource}}
             <li><a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a></li>
           {{/each}}
         </ul>
@@ -106,7 +112,7 @@ Radium.Combobox = Ember.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: @get('parentView.source')
+      @$().typeahead source: @get('parentView.sortedSource')
 
       typeahead = @$().data('typeahead')
 

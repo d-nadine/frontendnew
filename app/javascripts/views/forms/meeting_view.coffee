@@ -97,4 +97,4 @@ Radium.FormsMeetingView = Ember.View.extend
     valueBinding: 'controller.location'
     isInvalid: false
 
-  userList: Radium.AutocompleteView.extend()
+  attendees: Radium.AutocompleteView.extend()

@@ -12,7 +12,7 @@ Radium.Address = Radium.Model.extend
       @get('city')
       @get('country')
       @get('zipcode')
-    ].filter( (part) -> part)
+    ].compact()
 
     if parts.length
       parts.join ' '
