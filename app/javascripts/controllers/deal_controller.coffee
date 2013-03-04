@@ -1,12 +1,15 @@
 require 'forms/todo_form'
 
 Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
-  needs: ['clock']
+  needs: ['clock', 'dealStatuses']
+
   clock: Ember.computed.alias('controllers.clock')
-
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-
   now: Ember.computed.alias('clock.now')
+
+  statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
+
+  contact: Ember.computed.alias('model.contact')
 
   formBox: (->
     Radium.FormBox.create
@@ -52,3 +55,8 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
   ).property('model', 'now')
+
+  statusDisabled: Ember.computed.not('isPublic')
+
+  toggleVisiblity: ->
+    @toggleProperty 'isPublic'
