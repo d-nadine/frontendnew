@@ -1,83 +1,79 @@
-<div id="deal-sidebar-panel">
-  <div class="panel-content">
-    <div class="page-header">
-      <h1>{{name}}</h1>
-    </div>
-
-    <div class="meta">
-      {{avatar contact size=medium class="img-polaroid"}}
-
-      <p>
-        <span class="name">{{contact.name}}</span></br></br>
-        <span class="title muted">{{contact.title}}</span>
-      </p>
-    </div>
-
-    <h2>Description</h2>
-
-    <p class="description">{{description}}</p>
-
-    <hr />
-
-    <h2>Status</h2>
-
-    {{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
-
-    <h2>Amount</h2>
-
-    <div class="amount">
-      <span class="text-success">
-        {{currency value}}
-      </span>
-    </div>
-
-    <hr />
-
-    <h2>Assigned To</h2>
-
-    <div class="assigned-to">
-      {{avatar user class="img-polaroid"}}
-      <p>
-        <span class="name">{{user.name}}</span></br>
-        <span class="title muted">{{user.title}}
-      </p>
-    </div>
-
-    <hr />
-
-    <h2 class="with-button">
-      Attachments
-      <button class="btn pull-right">Add File</button>
-    </h2>
-
-    {{#each attachment in attachments}}
-      Foo
-    {{/each}}
-
-    <h2 class="with-button">
-      Followers
-      <button class="btn pull-right">Follow</button>
-    </h2>
-
-    {{#each follower in followers tagName="ul"}}
-      <li>
-        {{avatar follower}}
-        {{follower.name}}</br>
-        {{follower.title}}
-      </li>
-    {{else}}
-      No followers yet!
-    {{/each}}
-
-    <hr />
-
-    <button class="btn btn-warning btn-block" {{action toggleVisiblity}}>
-      {{#if isPublic}}
-        Unpublish
-      {{else}}
-        Publish
-      {{/if}}
-    </button>
-    <button class="btn btn-danger btn-block" {{action delete}}>Delete</button>
-  </div>
+<div class="page-header">
+  <h1>{{name}}</h1>
 </div>
+
+<div class="meta">
+  {{avatar contact size=medium class="img-polaroid"}}
+
+  <p>
+    <span class="name">{{contact.name}}</span></br></br>
+    <span class="title muted">{{contact.title}}</span>
+  </p>
+</div>
+
+<h2>Description</h2>
+
+<p class="description">{{description}}</p>
+
+<hr />
+
+<h2>Status</h2>
+
+{{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
+
+<h2>Amount</h2>
+
+<div class="amount">
+  <span class="text-success">
+    {{currency value}}
+  </span>
+</div>
+
+<hr />
+
+<h2>Assigned To</h2>
+
+<div class="assigned-to">
+  {{avatar user class="img-polaroid"}}
+  <p>
+    <span class="name">{{user.name}}</span></br>
+    <span class="title muted">{{user.title}}
+  </p>
+</div>
+
+<hr />
+
+<h2 class="with-button">
+  Attachments
+  <button class="btn pull-right">Add File</button>
+</h2>
+
+{{#each attachment in attachments}}
+  Foo
+{{/each}}
+
+<h2 class="with-button">
+  Followers
+  <button class="btn pull-right">Follow</button>
+</h2>
+
+{{#each follower in followers tagName="ul"}}
+  <li>
+    {{avatar follower}}
+    {{follower.name}}</br>
+    {{follower.title}}
+  </li>
+{{else}}
+  No followers yet!
+{{/each}}
+
+<hr />
+
+<button class="btn btn-warning btn-block" {{action toggleVisiblity}}>
+  {{#if isPublic}}
+    Unpublish
+  {{else}}
+    Publish
+  {{/if}}
+</button>
+<button class="btn btn-danger btn-block" {{action delete}}>Delete</button>
