@@ -56,7 +56,7 @@ $button-bar-width: 40px;
 }
 
 .two-column #main-panel {
-  margin-left: 340px;
+  margin-left: $sidebar-width + 40px;
   margin-right: 60px;
 }
 
