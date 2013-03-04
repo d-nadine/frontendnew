@@ -1,6 +1,6 @@
 Radium.configure do
   # Minify JS and CSS
-  config.pipeline.minify = false
+  config.pipeline.minify = true
 
   # Generate GZip version of files along with regular version
   config.pipeline.gzip = true
