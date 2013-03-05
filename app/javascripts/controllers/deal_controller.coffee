@@ -1,6 +1,9 @@
 require 'forms/todo_form'
 
 Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+  # FIXME: this should be null and not an empty string
+  deletionToken: ''
+
   needs: ['clock', 'dealStatuses']
 
   clock: Ember.computed.alias('controllers.clock')
@@ -60,3 +63,7 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
 
   toggleVisiblity: ->
     @toggleProperty 'isPublic'
+
+  deletionNotConfirmed: (->
+    @get('deletionToken') isnt @get('name')
+  ).property('deletionToken')

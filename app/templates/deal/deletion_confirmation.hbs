@@ -1,0 +1,29 @@
+<div class="modal fade">
+  <div class="modal-header">
+    <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+    <h3>Are You Sure?</h3>
+  </div>
+
+  <div class="modal-body">
+    <p>This action cannot be undone! Deleting <strong>{{name}}</strong>
+    will delete the following items: </p>
+
+    <ul>
+      <li>Any Todos</li>
+      <li>Any Attachments</li>
+      <li>Any Discussions</li>
+      <li>Any Comments</li>
+      <li>Anything in the feed</li>
+    </ul>
+
+    <p>Type "<strong>{{name}}</strong>" as confirmation.</p>
+
+    {{view Ember.TextField class="field input-block-level" valueBinding="deletionToken" placeholder="Type the name to confirm..."}}
+
+    <button class="btn btn-large btn-danger btn-block" {{bindAttr disabled="deletionNotConfirmed"}} {{action deleteRecord}}>I understand the consequences, delete this deal</button>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn" {{action close}}>Cancel</a>
+  </div>
+</div>
