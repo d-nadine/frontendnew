@@ -19,7 +19,8 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend
         reference: @get('model')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
-  ).property('model', 'tomorrow')
+        reference: @get('model')
+  ).property('model.[]', 'tomorrow')
 
   callForm: (->
     Radium.CallForm.create
@@ -28,7 +29,8 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend
         reference: @get('contact')
         finishBy: @get('tomorrow')
         user: @get('currentUser')
-  ).property('model', 'tomorrow')
+        reference: @get('model')
+  ).property('model.[]', 'tomorrow')
 
   cancel: ->
     # FIXME: No idea why this did not work if toArray was not used
