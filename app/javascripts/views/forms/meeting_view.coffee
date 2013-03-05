@@ -10,7 +10,6 @@ Radium.FormsMeetingView = Ember.View.extend
     @get('controller').submit()
 
     return unless @get('controller.isValid')
-
     return false unless isNew
 
     @$('form')[0].reset()

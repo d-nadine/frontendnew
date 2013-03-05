@@ -35,11 +35,11 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).property('users.[]', 'contacts.[]')
 
   showTopicTextBox: ( ->
+    return false if @get('justAdded')
     return true if @get('isNew')
     return false if @get('isDisabled')
-    return true if @get('isNew')
     @get('isExpanded')
-  ).property('isNew', 'isDisabled', 'isExpanded')
+  ).property('isNew', 'isDisabled', 'isExpanded','justAdded')
 
   hasElapsed: ( ->
     return unless @get('startsAt')
@@ -53,24 +53,32 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     true
   ).property('isNew', 'justAdded')
 
-  submit: ->
+  submit: () ->
     @set 'isSubmitted', true
 
     return unless @get('isValid')
 
-    unless @get('isNew')
-      @get('content.transaction').commit()
-      return
+    @set 'isExpanded', false
+    @set 'justAdded', true
 
-    meeting = Radium.Meeting.createRecord @get('data')
+    meeting = if @get('isNew')
+                Radium.Meeting.createRecord @get('data')
+              else
+                @get('model')
 
     @get('users').forEach (user) ->
-      meeting.get('users').addObject user
+      meeting.get('users').addObject user unless meeting.get('users').contains user
 
     @get('contacts').forEach (contact) ->
-      meeting.get('contacts').addObject contact
+      meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
 
-    meeting.get('transaction').commit()
+    @get('store').commit()
+
+    setTimeout( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+      @set 'topic', ""
+    ), 1500)
 
   cancellationText: ( ->
     return if @get('isNew')
