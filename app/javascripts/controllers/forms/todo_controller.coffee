@@ -33,6 +33,13 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
       @set 'showOptions', true
     ), 1500)
 
+  confirmationText: ( ->
+    if @get('isNew')
+      "Added"
+    else
+      "Updated"
+  ).property('isNew')
+
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')
