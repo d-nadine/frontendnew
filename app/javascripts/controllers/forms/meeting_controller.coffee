@@ -14,7 +14,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'calendarsOpen', false
 
   people: ( ->
-    Radium.PeopleList.listPeople(@get('userList').mapProperty('content'), @get('contactList'))
+    Radium.PeopleList.listPeople(@get('userList').mapProperty('content'), @get('contactList')).filter (person) -> person.get('email')
   ).property('userList', 'userList.length', 'contactList', 'contactList.length')
 
   isEditable:( ->
@@ -72,15 +72,15 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     meeting.get('transaction').commit()
 
-    cancellationText: ( ->
-      return if @get('isNew')
+  cancellationText: ( ->
+    return if @get('isNew')
 
-      topic = @get('topic')
+    topic = @get('topic')
 
-      attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+    attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
 
-      "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
-    ).property('topic', 'isNew')
+    "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
+  ).property('topic', 'isNew')
 
   startsAtDidChange: ( ->
     startsAt = @get('startsAt')
@@ -96,14 +96,14 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).observes('startsAt')
 
   # FIXME: Review when using real ember-data
-  usersDidChange: ( ->
+  attendeesDidChange: ( ->
     return if @get('calendarsOpen')
     return unless @get('isExpanded')
     return unless @get('users.length') && @get('startsAt')
 
     self = this
 
-    @get('users').forEach (user) =>
+    @get('meetingUsers').forEach (user) =>
       if user
         meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
                                 .filter (meeting) ->
@@ -117,7 +117,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
           if self.get('startsAt').isBetween startsAt, endsAt
             self.set 'calendarsOpen', true
 
-  ).observes('users', 'users.length', 'startsAt')
+  ).observes('meetingUsers.[]', 'startsAt')
 
   isExpandable: (->
     return false if @get('justAdded')
@@ -139,7 +139,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
-  removeUserFromMeeting: (user) ->
+  removeSelection: (user) ->
     users = @get('users')
 
     users.removeObject user

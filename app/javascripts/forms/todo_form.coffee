@@ -15,4 +15,4 @@ Radium.TodoForm = Radium.Form.extend
     return unless @get('user')
 
     true
-  ).property()
+  ).property('description', 'finishBy', 'user')

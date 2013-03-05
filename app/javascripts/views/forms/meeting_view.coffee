@@ -5,11 +5,11 @@ Radium.FormsMeetingView = Ember.View.extend
   classNames: ['meeting-form-container']
 
   submit: ->
-    return unless @get('controller.isValid')
-
     isNew = @get('controller.isNew')
 
     @get('controller').submit()
+
+    return unless @get('controller.isValid')
 
     return false unless isNew
 
@@ -113,3 +113,7 @@ Radium.FormsMeetingView = Ember.View.extend
     isInvalid: false
 
   attendees: Radium.AutocompleteView.extend()
+
+  cancelMeetingDisabled: ( ->
+    @get('controller.isDisabled') || @get('controller.isNew')
+  ).property('controller.isDisabled', 'controller.isNew')

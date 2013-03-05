@@ -10,7 +10,7 @@ Radium.AutocompleteView = Ember.View.extend
   users: Ember.computed.alias('controller.users')
 
   template: Ember.Handlebars.compile """
-    {{view view.autoCompleteList viewName="autoComplete"}}
+    {{view view.autoCompleteList}}
     <div class="attendeeDropdown" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         link<b class="caret"></b>
@@ -25,8 +25,14 @@ Radium.AutocompleteView = Ember.View.extend
       </div>
     </div>
   """
+
+  #FIXME: autocomplete list should be ember bound list
   reset: ->
-    @get('autoComplete').reset()
+    currentUser = @get('controller.currentUser')
+
+    @$('li.as-selection-item').each ->
+      unless $(this).data('object') is currentUser
+        $(this).find('a').trigger('click')
 
   isInvalid: ( ->
     return false unless @get('isSubmitted')
@@ -58,13 +64,10 @@ Radium.AutocompleteView = Ember.View.extend
                         selectionRemoved: @selectionRemoved.bind(this)
                         resultsHighlight: true
                         canGenerateNewSelections: true
-
-    reset: ->
-      @$('as-selection-item a.close').each ->
-        $(this).trigger('click')
+                        retrieveLimit: 5
 
     selectionRemoved: (el) ->
-      @get('controller').removeUserFromMeeting el.data('object')
+      @get('controller').removeSelection el.data('object')
       el.remove()
 
     selectionAdded: (el) ->

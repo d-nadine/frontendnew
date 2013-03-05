@@ -25,11 +25,11 @@ Radium.FormsTodoView = Ember.View.extend
     disabledBinding: 'controller.isDisabled'
 
   submit: ->
-    return unless @get('controller.isValid')
-
     isNew = @get('controller.isNew')
 
     @get('controller').submit()
+
+    return unless @get('controller.isValid')
 
     return false unless isNew
 

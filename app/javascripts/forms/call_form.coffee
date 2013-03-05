@@ -18,4 +18,4 @@ Radium.CallForm = Radium.Form.extend
     return unless @get('user')
 
     true
-  ).property()
+  ).property('reference', 'description', 'finishBy', 'user')

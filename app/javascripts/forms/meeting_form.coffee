@@ -28,4 +28,4 @@ Radium.MeetingForm = Radium.Form.extend
     return unless attendees.length
 
     true
-  ).property()
+  ).property('topic', 'startsAt', 'endsAt', 'users.[]', 'contacts.[]')
