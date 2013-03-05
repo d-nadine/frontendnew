@@ -1,5 +1,6 @@
 Radium.MentionFieldView = Ember.View.extend
   classNameBindings: ['disabled:is-disabled', ':mention-field-view']
+  sourceBinding: 'controller.controllers.users'
 
   reset: ->
     @$('.mentions-input-box div.mentions').html('')
@@ -7,18 +8,20 @@ Radium.MentionFieldView = Ember.View.extend
   template: Ember.Handlebars.compile """
     {{view view.textArea}}
   """
+  getAvatar: (item) ->
+    unless item.get('avatar')
+      return "/images/default_avatars/small.png"
+
+    """
+      <img src="#{item.avatar}" title="#{item.name}" class="avatar avatar-small">
+    """
 
   search: (mode, query, callback) ->
-    data = [
-      { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-      { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-      { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-      { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-      { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-      { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-    ]
-
-    data = _.filter(data, (item) -> item.name.toLowerCase().indexOf(query.toLowerCase()) > -1)
+    data = @get('source').filter( (item) =>
+      item.get('name').toLowerCase().indexOf(query.toLowerCase()) > -1
+    ).map( (item) =>
+      id: item.get('id'), name: item.get('name'), avatar: @getAvatar(item), type: 'user'
+    ).toArray()
 
     callback.call(this, data)
 
@@ -31,4 +34,4 @@ Radium.MentionFieldView = Ember.View.extend
 
     didInsertElement: ->
       @$().mentionsInput
-        onDataRequest: @get('parentView').search
+        onDataRequest: @get('parentView').search.bind(@get('parentView'))

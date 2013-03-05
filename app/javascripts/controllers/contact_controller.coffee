@@ -1,5 +1,5 @@
 Radium.ContactController = Ember.ObjectController.extend
-  needs: ['clock']
+  needs: ['clock','users']
   clock: Ember.computed.alias('controllers.clock')
 
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
