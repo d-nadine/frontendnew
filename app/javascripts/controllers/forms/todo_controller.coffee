@@ -8,26 +8,30 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
   submit: ->
     @set 'isSubmitted', true
 
-    isNew = @get('isNew')
-    isBulk = @get('reference') && Em.isArray @get('reference')
-
     return unless @get('isValid')
 
-    unless isNew || isBulk
-      @get('content.transaction').commit()
-      return
+    @set 'isExpanded', false
+    @set 'justAdded', true
+    @set 'showOptions', false
+
+    isNew = @get('isNew')
+    isBulk = @get('reference') && Ember.isArray @get('reference')
+
+    if isNew
+      Radium.Todo.createRecord @get('data')
 
     if isBulk
       @get('reference').forEach (item) =>
         todo = Radium.Todo.createRecord @get('data')
         todo.set 'reference', item
 
-    if isNew
-      Radium.Todo.createRecord @get('data')
-
     @get('store').commit()
 
-    @set 'isExpanded', false
+    setTimeout( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+      @set 'showOptions', true
+    ), 1500)
 
   justAdded: (->
     @get('content.justAdded') == true
