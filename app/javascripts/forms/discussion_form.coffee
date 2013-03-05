@@ -5,5 +5,5 @@ Radium.DiscussionForm = Radium.Form.extend
   ).property().volatile()
 
   isValid: ( ->
-    not Ember.isEmpty('text')
-  ).property()
+    not Ember.isEmpty(@get('text'))
+  ).property('text','justAdded')

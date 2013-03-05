@@ -4,8 +4,9 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend
   ).property('justAdded')
 
   showSaveButton: (->
-    return false if @get('justAdded') is false
-    @get 'isNew'
+    return false if @get('justAdded')
+
+    @get('isNew')
   ).property('justAdded')
 
   showSuccessMessage: (->
@@ -17,10 +18,21 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend
 
     return unless @get('isValid')
 
-    unless @get('isNew')
-      @get('content.transaction').commit()
-      return
+    @set 'isExpanded', false
+    @set 'justAdded', true
+    @set 'showOptions', false
 
-    discussion = Radium.Discussion.createRecord @get('data')
+    if @get('isNew')
+      discussion = Radium.Discussion.createRecord @get('data')
 
-    discussion.get('transaction').commit()
+    @get('store').commit()
+
+    setTimeout( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+      @set 'showOptions', true
+      @set 'isExpanded', true
+      @set 'text', null
+    ), 1500)
+
+
