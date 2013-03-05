@@ -47,7 +47,7 @@ Radium.TimePickerView = Ember.View.extend
       showDuration: true
       scrollDefaultNow: true
       selectOnBlur: true
-      forceRoundTime: true
+      forceRoundTime: false
       timeFormat: 'h:i A'
 
     minutes = parseInt(@get('date').toFormattedString('%M'), 10)
