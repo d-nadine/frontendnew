@@ -32,7 +32,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   attendees: ( ->
     Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
-  ).property('users', 'contacts', 'users.length', 'contacts.length')
+  ).property('users.[]', 'contacts.[]')
 
   showTopicTextBox: ( ->
     return true if @get('isNew')

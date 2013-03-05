@@ -18,17 +18,8 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property()
 
   editableMeeting: ( ->
-    users = Radium.User.find().slice(0, 2)
-    contacts = Radium.Contact.find().filter (contact) -> contact.get('email')
     meeting = Radium.MeetingForm.create
-      content: Factory.createObject 'meeting'
-        user: @get('currentUser')
-        users: users
-        contacts: contacts
-        location: 'Apple Inc.'
-        startsAt: Ember.DateTime.create().advance(day: 7)
-        endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
-
+      content: Radium.Meeting.find(1)
       isEditable: true
 
     meeting

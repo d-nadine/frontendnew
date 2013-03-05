@@ -113,6 +113,12 @@ class EmberDataAdapter
 
     klass = @modelForType type
     model = klass.createRecord hash
+
+    model.eachRelationship (name, relationship) ->
+      if relationship.kind == "hasMany"
+        if hash[name] && hash[name].length
+          hash[name].forEach (item) ->
+            model.get(name).addObject item
     model
 
 Foundry.NullAdapter = NullAdapter

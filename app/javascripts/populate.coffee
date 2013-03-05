@@ -48,6 +48,13 @@ class Populator
     for i in [0..20]
       Factory.create 'group'
 
+    Factory.create 'meeting'
+      user: -> userDictionary.random()
+      users: -> [userDictionary.random()]
+      contacts: -> [contactDictionary.random()]
+      startsAt: Ember.DateTime.create().advance(day: 7)
+      endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
