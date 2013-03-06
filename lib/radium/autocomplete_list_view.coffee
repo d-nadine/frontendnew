@@ -12,8 +12,10 @@ Radium.AutocompleteView = Ember.View.extend
   template: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each source}}
-      <li class="as-selection-item blur">
+      <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
+        {{#unless controller.isEditable}}
         <a class="as-close" {{action removeSelection this}}>×</a>
+        {{/unless}}
         {{avatar this}}
         {{#if name}}
           {{name}}
@@ -40,6 +42,23 @@ Radium.AutocompleteView = Ember.View.extend
       </div>
     </div>
   """
+  showContextMenu: (attendee) ->
+    return false unless @get('controller.isEditable')
+
+    el = $(event.srcElement)
+
+    position = el.position()
+
+    dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
+
+    dropdown.css
+      position: "absolute",
+      left: position.left  + "px"
+      top: position.top + el.height() + 7 + "px"
+
+    dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
+
+    event.stopPropagation()
 
   didInsertElement: ->
     @get('controller').addSelection @get('controller.currentUser') if @get('controller.isNew')
@@ -52,7 +71,6 @@ Radium.AutocompleteView = Ember.View.extend
                         searchObjProps: "name"
                         formatList: @formatList.bind(this)
                         getAvatar: @getAvatar.bind(this)
-                        selectionClick: @selectionClick.bind(this)
                         selectionAdded: @selectionAdded.bind(this)
                         resultsHighlight: true
                         canGenerateNewSelections: true
@@ -65,22 +83,6 @@ Radium.AutocompleteView = Ember.View.extend
                   email: item
 
       @get('controller').addSelection item
-
-    selectionClick: (el) ->
-      return false unless @get('controller.isEditable')
-
-      position = el.position()
-
-      dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
-
-      dropdown.css
-        position: "absolute",
-        left: position.left  + "px"
-        top: position.top + el.height() + 7 + "px"
-
-      dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
-
-      event.stopPropagation()
 
     formatList: (data, elem) ->
       email= data.data.get('email')
