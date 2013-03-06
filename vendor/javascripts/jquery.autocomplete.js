@@ -129,7 +129,6 @@
                 $('li.as-original').attr('id', 'as-original-'+x);
 
                 var selections_holder = $("#as-selections-"+x);
-                // debugger;
                 var org_li = $("#as-original-"+x);
                 var results_holder = $('<div class="as-results" id="as-results-'+x+'"></div>').hide();
                 var results_ul =  $('<ul class="as-list"></ul>');
