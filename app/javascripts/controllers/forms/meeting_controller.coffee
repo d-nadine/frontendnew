@@ -15,7 +15,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   people: ( ->
     Radium.PeopleList.listPeople(@get('userList').mapProperty('content'), @get('contactList')).filter (person) -> person.get('email')
-  ).property('userList', 'userList.length', 'contactList', 'contactList.length')
+  ).property('userList.[]', 'contactList.[]')
 
   isEditable:( ->
     return false if @get('isNew')
@@ -157,12 +157,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
-  removeSelection: (user) ->
-    users = @get('users')
+  removeSelection: (attendee) ->
+    resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
 
-    users.removeObject user
+    attendees = @get(resource)
 
-    @get('meetingUsers').removeObject user
+    return unless attendees.find( (item) -> item == attendee)
+
+    attendees.removeObject attendee
+
+    @get('meetingUsers').removeObject attendee if attendee.constructor == Radium.User
 
   currentDate: ( ->
     @get('startsAt').toHumanFormat()

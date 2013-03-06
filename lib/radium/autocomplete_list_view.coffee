@@ -8,9 +8,24 @@ Radium.AutocompleteView = Ember.View.extend
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
-
+  source: Ember.computed.alias('controller.source')
   template: Ember.Handlebars.compile """
-    {{view view.autoCompleteList}}
+    <ul class="as-selections">
+    {{#each source}}
+      <li class="as-selection-item blur">
+        <a class="as-close" {{action removeSelection this}}>×</a>
+        {{avatar this}}
+        {{#if name}}
+          {{name}}
+        {{else}}
+          {{email}}
+        {{/if}}
+      </li>
+    {{/each}}
+      <li class="as-original">
+        {{view view.autocomplete}}
+      </li>
+    </ul>
     <div class="attendeeDropdown" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         link<b class="caret"></b>
@@ -26,53 +41,30 @@ Radium.AutocompleteView = Ember.View.extend
     </div>
   """
 
-  isInvalid: ( ->
-    return false unless @get('isSubmitted')
+  didInsertElement: ->
+    @get('controller').addSelection @get('controller.currentUser') if @get('controller.isNew')
 
-    not @get('hasUsers')
-  ).property('isSubmitted', 'users', 'users.length')
-
-  hasUsers: ( ->
-    @get('users.length')
-  ).property('users', 'users.length')
-
-  autoCompleteList: Ember.TextField.extend
+  autocomplete: Ember.TextField.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
     didInsertElement: ->
-      preFill = if @get('controller.isNew')
-                  [@mapSearchResult(@get('currentUser'))]
-                else
-                  @get('controller.source').map( (item) =>
-                    @mapSearchResult(item)).toArray()
-
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         selectedItemProp: "name"
                         searchObjProps: "name"
-                        preFill: preFill
                         formatList: @formatList.bind(this)
                         getAvatar: @getAvatar.bind(this)
                         selectionClick: @selectionClick.bind(this)
                         selectionAdded: @selectionAdded.bind(this)
-                        selectionRemoved: @selectionRemoved.bind(this)
                         resultsHighlight: true
                         canGenerateNewSelections: true
                         retrieveLimit: 5
 
-    selectionRemoved: (el) ->
-      @get('controller').removeSelection el.data('object')
-      el.remove()
+    selectionAdded: (item) ->
+      # FIXME create new contact while meeting is being saved
+      if typeof item == "string"
+        item = Ember.Object.create
+                  email: item
 
-    selectionAdded: (el) ->
-      if @get('controller.isEditable') && !el.hasClass('is-editable')
-        el.addClass('is-editable')
-
-      unless @get('controller.isNew')
-        $('.as-close', el).hide()
-
-      attendee = el.data('object')
-
-      # FIXME: Create new contact from unknown email address
-      @get('controller').addSelection attendee if attendee
+      @get('controller').addSelection item
 
     selectionClick: (el) ->
       return false unless @get('controller.isEditable')
@@ -111,8 +103,10 @@ Radium.AutocompleteView = Ember.View.extend
 
       return unless people.get('length')
 
-      results = people.map (item) =>
-                    @mapSearchResult.call this, item
+      results = people.filter( (item) =>
+                        @get('controller.source').indexOf(item) == -1
+                     ).map (item) =>
+                        @mapSearchResult.call this, item
 
       callback(results, query)
 
