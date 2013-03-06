@@ -2,8 +2,9 @@ require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
 require 'lib/radium/user_picker'
 require 'lib/radium/date_picker'
+require 'views/forms/form_view'
 
-Radium.FormsTodoView = Ember.View.extend
+Radium.FormsTodoView = Radium.FormView.extend
   checkbox: Radium.Checkbox.extend
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'

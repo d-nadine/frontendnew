@@ -30,6 +30,9 @@
     cursor: pointer;
   }
 
+  .icon-comment{
+    margin-left: 5px;
+  }
   &.just-added .primary {
     .checker label {
       @include icons-sprite(call-green);

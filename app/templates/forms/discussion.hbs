@@ -14,6 +14,10 @@
         <button {{action submit}} class="btn btn-primary">Save</button>
       {{/if}}
 
+      {{#if showComments}}
+        <i class="icon-comment pull-right"></i>
+      {{/if}}
+
       {{#if showSuccessMessage}}
         <span class="success-message">Discussion Saved</span>
       {{/if}}

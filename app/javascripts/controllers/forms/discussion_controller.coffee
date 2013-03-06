@@ -13,6 +13,13 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
     @get('justAdded') is true
   ).property('justAdded')
 
+  showComments: (->
+    return false if @get('justAdded')
+    return false if @get('isNew')
+    true
+  ).property('isNew', 'justAdded')
+
+
   submit: ->
     @set 'isSubmitted', true
 

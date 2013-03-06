@@ -76,11 +76,6 @@
           <button class="btn" {{action showCancelMeetingDialogue target="view"}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
         </div>
       </div>
-      {{#unless isNew}}
-        <div class="block block-arrow">
-          {{control 'comments' model}}
-        </div>
-      {{/unless}}
     </div>
   {{/if}}
   {{view view.cancelMeetingDialogue}}

@@ -50,11 +50,6 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
   showOptions: Ember.computed.alias('isNew')
 
-  showComments: (->
-    return false if @get('justAdded')
-    @get 'hasComments'
-  ).property('justAdded', 'comments.length')
-
   showSuccess: Ember.computed.alias('justAdded')
 
   isEditable: (->

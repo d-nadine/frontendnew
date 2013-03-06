@@ -13,8 +13,9 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.
 
   showComments: (->
     return false if @get('justAdded')
-    @get 'hasComments'
-  ).property('justAdded', 'comments.length')
+    return false if @get('isNew')
+    true
+  ).property('isNew', 'justAdded')
 
   showSuccess: Ember.computed.alias('justAdded')
 

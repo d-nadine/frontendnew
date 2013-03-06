@@ -47,12 +47,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @get('startsAt').isBeforeToday()
   ).property('startsAt')
 
-  showComments: (->
-    return false if @get('justAdded')
-    return false if @get('isNew')
-    true
-  ).property('isNew', 'justAdded')
-
   submit: () ->
     @set 'isSubmitted', true
 

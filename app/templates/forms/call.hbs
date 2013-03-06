@@ -4,6 +4,11 @@
 
     {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
 
+    {{#if showComments}}
+      <i class="icon-comment pull-right"></i>
+    {{/if}}
+
+
     {{#if showCallBox}}
       {{view view.callBox classNames="pull-right"}}
     {{/if}}
@@ -16,10 +21,6 @@
           Options
         {{/if}}
       </a>
-    {{/if}}
-
-    {{#if showComments}}
-      <i class="icon-comment pull-right"></i>
     {{/if}}
 
     {{#if showSuccess}}

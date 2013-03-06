@@ -1,4 +1,4 @@
-Radium.FormsDiscussionView = Ember.View.extend
+Radium.FormsDiscussionView = Radium.FormView.extend
   didInsertElement: ->
     @get('controller').on 'discussionUpdated', this, 'onDiscussionUpdated'
 

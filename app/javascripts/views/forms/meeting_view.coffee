@@ -1,7 +1,8 @@
 require 'lib/radium/time_picker_view'
 require 'lib/radium/location_picker'
 require 'lib/radium/autocomplete_list_view'
-Radium.FormsMeetingView = Ember.View.extend
+
+Radium.FormsMeetingView = Radium.FormView.extend
   classNames: ['meeting-form-container']
 
   onMeetingUpdated: ->
