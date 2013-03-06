@@ -1,3 +1,12 @@
 .inline-editor-text:hover { 
   cursor: pointer;
 }
+
+.inline-editor .icon-pencil {
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
