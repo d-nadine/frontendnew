@@ -1,5 +1,5 @@
 Radium.InlineEditorView = Ember.View.extend
-  classNameBindings: ['view.isEditing:inline-editor-open:inline-editor-closed', ':inline-editor']
+  classNameBindings: ['view.isEditing:inline-editor-open:inline-editor-closed', 'disabled:is-disabled:is-enabled', ':inline-editor']
   isEditing: false
 
   # Clicking on the view will activate the editor.
@@ -7,7 +7,8 @@ Radium.InlineEditorView = Ember.View.extend
   # via a button or other UI element
   activateOnClick: true
 
-  disabled: Ember.computed.not('isEditing')
+  isEditable: Ember.computed.alias('controller.isEditable')
+  disabled: Ember.computed.not('isEditable')
 
   didInsertElement: ->
     $('body').on 'click.inline', =>
@@ -19,6 +20,8 @@ Radium.InlineEditorView = Ember.View.extend
 
   click: (event) -> 
     return unless @get('activateOnClick')
+    return if @get('disabled')
+
     event.stopPropagation()
     @toggleEditor()
 

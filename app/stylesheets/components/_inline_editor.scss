@@ -1,5 +1,11 @@
-.inline-editor-text:hover { 
+.is-enabled .inline-editor-text:hover { 
   cursor: pointer;
+}
+
+.inline-editor.is-disabled {
+  .icon-pencil {
+    display: none;
+  }
 }
 
 .inline-editor .icon-pencil {
