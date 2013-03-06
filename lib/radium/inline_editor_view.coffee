@@ -1,5 +1,11 @@
 Radium.InlineEditorView = Ember.View.extend
+  classNameBindings: ['view.isEditing:inline-editor-open:inline-editor-closed', ':inline-editor']
   isEditing: false
+
+  # Clicking on the view will activate the editor.
+  # Disable this if you want to activate
+  # via a button or other UI element
+  activateOnClick: true
 
   disabled: Ember.computed.not('isEditing')
 
@@ -12,6 +18,7 @@ Radium.InlineEditorView = Ember.View.extend
     $('body').off 'click.inline'
 
   click: (event) -> 
+    return unless @get('activateOnClick')
     event.stopPropagation()
     @toggleEditor()
 
@@ -38,12 +45,18 @@ Radium.InlineEditorView = Ember.View.extend
     insertNewline: ->
       @get('parentView').toggleEditor()
 
-  template: """
-    <div {{bindAttr class="view.isEditing:inline-editor-open:inline-editor-closed :inline-editor"}}>
-      {{#if view.isEditing}}
-        {{view view.textField valueBinding=view.value}}
-      {{else}}
-        <span class="inline-editor-text">{{view.value}}</span>
-      {{/if}}
-    </div>
+  textArea: Ember.TextArea.extend
+    isEditing: Ember.computed.alias('parentView.isEditing')
+
+    placeholder: (-> @get('value')).property()
+
+    click: (event) ->
+      event.stopPropagation() if @get 'isEditing'
+
+  template: Ember.Handlebars.compile """
+    {{#if view.isEditing}}
+      {{view view.textField valueBinding=view.value}}
+    {{else}}
+      <span class="inline-editor-text">{{view.value}}</span>
+    {{/if}}
   """
