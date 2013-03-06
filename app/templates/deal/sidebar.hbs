@@ -25,14 +25,6 @@
 
 <hr />
 
-<h2>Status</h2>
-
-{{#unless isPublic}}
-  <p class="muted">Publish this deal to change its status</p>
-{{/unless}}
-
-{{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
-
 {{#view Radium.InlineEditorView valueBinding=value class="amount"}}
   <h2>Amount <i class="icon-pencil pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
@@ -49,6 +41,17 @@
     </span>
   {{/if}}
 {{/view}}
+
+<hr />
+
+<h2>Status</h2>
+
+{{#unless isPublic}}
+  <p class="muted">Publish this deal to change its status</p>
+{{/unless}}
+
+{{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
+
 
 <hr />
 
