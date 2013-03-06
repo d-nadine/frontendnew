@@ -1,5 +1,7 @@
 # First off, require all the custom additions and code
 # we need to be available globally
+require /lib\/patches/
+
 require 'lib/ember/datetime'
 require 'lib/string/inflector'
 
