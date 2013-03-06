@@ -4,7 +4,7 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   # FIXME: this should be null and not an empty string
   deletionToken: ''
 
-  needs: ['clock', 'dealStatuses']
+  needs: ['clock', 'dealStatuses', 'users']
 
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
