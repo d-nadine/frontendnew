@@ -116,8 +116,10 @@ Radium.Combobox = Ember.View.extend
 
       typeahead = @$().data('typeahead')
 
+      parentView = @get('parentView')
       # make typeahead work with ember arrays
       typeahead.process = (items) ->
+        parentView.set 'open', false
         items = items.filter (item) => @matcher(item)
 
         items = @sorter(items)
