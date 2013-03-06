@@ -5,7 +5,7 @@ require 'lib/radium/autocomplete_list_view'
 Radium.FormsMeetingView = Radium.FormView.extend
   classNames: ['meeting-form-container']
 
-  onMeetingUpdated: ->
+  onFormReset: ->
     @$('form')[0].reset()
 
   readableStartsAt: ( ->
@@ -16,7 +16,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
     $('html').on 'click.cancel-meeting', ->
       $('cancel-meeting').hide()
 
-    @get('controller').on 'meetingUpdated', this, 'onMeetingUpdated'
+    @get('controller').on 'formReset', this, 'onFormReset'
 
   willDestroyElement: ->
     $('html').off 'click.cancel-meeting'

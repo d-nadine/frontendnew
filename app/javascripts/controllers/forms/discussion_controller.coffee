@@ -1,6 +1,8 @@
 Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
   isDisabled: (->
-    @get('justAdded') is true
+    return true if @get('justAdded')
+    return true if @get('isSubmitted')
+    false
   ).property('justAdded')
 
   showSaveButton: (->
@@ -18,7 +20,6 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
     return false if @get('isNew')
     true
   ).property('isNew', 'justAdded')
-
 
   submit: ->
     @set 'isSubmitted', true
@@ -43,7 +44,7 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
       @set 'isExpanded', true
       @set 'text', null
 
-      @trigger 'discussionUpdated'
+      @trigger 'formReset'
     ), 1500)
 
 

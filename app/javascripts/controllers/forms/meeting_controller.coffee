@@ -14,10 +14,15 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'calendarsOpen', false
 
   people: ( ->
-    Radium.PeopleList.listPeople(@get('userList').mapProperty('content'), @get('contactList')).filter (person) -> person.get('email')
+    userList = @get('userList').mapProperty('content')
+    contactList = @get('contactList')
+
+    Radium.PeopleList.listPeople(userList, contactList)
+      .filter (person) -> person.get('email')
   ).property('userList.[]', 'contactList.[]')
 
   isEditable:( ->
+    return false if @get('isSubmitted')
     return false if @get('isNew')
     return false unless @get('content.isEditable')
     return false if @get('justAdded')
@@ -73,7 +78,10 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
-      @trigger 'meetingUpdated' if isNew
+
+      return unless isNew
+
+      @trigger 'formReset'
       @set 'topic', ""
     ), 1500)
 

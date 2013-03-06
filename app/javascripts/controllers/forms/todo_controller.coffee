@@ -34,7 +34,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
       @set 'showOptions', true
 
       if isNew || isBulk
-        @trigger('todoUpdated')
+        @trigger('formReset')
     ), 1500)
 
   confirmationText: ( ->
@@ -53,6 +53,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
   showSuccess: Ember.computed.alias('justAdded')
 
   isEditable: (->
+    return false if @get('isSubmitted')
     return false if @get('justAdded')
     @get('content.isEditable') == true
   ).property('content.isEditable')

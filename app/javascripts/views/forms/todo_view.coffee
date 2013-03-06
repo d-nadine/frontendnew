@@ -10,7 +10,7 @@ Radium.FormsTodoView = Radium.FormView.extend
     disabledBinding: 'controller.canFinish'
 
   didInsertElement: ->
-    @get('controller').on 'todoUpdated', this, 'onTodoUpdated'
+    @get('controller').on 'formReset', this, 'onFormReset'
 
   todoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.description'
@@ -28,7 +28,7 @@ Radium.FormsTodoView = Radium.FormView.extend
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
 
-  onTodoUpdated: ->
+  onFormReset: ->
     @$('form')[0].reset()
     @get('todoDescription').reset()
     false

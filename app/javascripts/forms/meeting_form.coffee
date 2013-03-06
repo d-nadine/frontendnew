@@ -23,9 +23,5 @@ Radium.MeetingForm = Radium.Form.extend
     return if @get('startsAt').isBeforeToday()
     return if @get('endsAtIsInvalid')
 
-    attendees = @get('users').toArray().concat(@get('contacts').toArray())
-
-    return unless attendees.length
-
     true
-  ).property('topic', 'startsAt', 'endsAt', 'users.[]', 'contacts.[]')
+  ).property('topic', 'startsAt', 'endsAt')

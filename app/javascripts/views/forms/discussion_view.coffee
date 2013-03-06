@@ -1,6 +1,6 @@
 Radium.FormsDiscussionView = Radium.FormView.extend
   didInsertElement: ->
-    @get('controller').on 'discussionUpdated', this, 'onDiscussionUpdated'
+    @get('controller').on 'formReset', this, 'onFormReset'
 
   textbox: Radium.MentionFieldView.extend
     classNameBindings: ['value:is-valid', 'isInvalid']
@@ -18,6 +18,6 @@ Radium.FormsDiscussionView = Radium.FormView.extend
       Ember.isEmpty(@get('value')) && @get('isSubmitted')
     ).property('value', 'isSubmitted')
 
-  onDiscussionUpdated: ->
+  onFormReset: ->
     @$('form')[0].reset()
     @get('discussionText').reset()
