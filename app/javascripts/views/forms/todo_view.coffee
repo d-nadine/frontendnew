@@ -8,6 +8,9 @@ Radium.FormsTodoView = Ember.View.extend
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'
 
+  didInsertElement: ->
+    @get('controller').on 'todoUpdated', this, 'onTodoUpdated'
+
   todoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
@@ -24,15 +27,7 @@ Radium.FormsTodoView = Ember.View.extend
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
 
-  submit: ->
-    isNew = @get('controller.isNew')
-
-    @get('controller').submit()
-
-    return unless @get('controller.isValid')
-
-    return false unless isNew
-
+  onTodoUpdated: ->
     @$('form')[0].reset()
     @get('todoDescription').reset()
     false

@@ -93,7 +93,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Ember.Object.create
         finishBy: Ember.DateTime.create()
         user: @get('currentUser')
-      isNew: true
+        isNew: true
   ).property()
 
   editableTodo: (->

@@ -1,4 +1,4 @@
-Radium.FormsDiscussionController = Ember.ObjectController.extend
+Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
   isDisabled: (->
     @get('justAdded') is true
   ).property('justAdded')
@@ -18,21 +18,25 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend
 
     return unless @get('isValid')
 
+    isNew = @get('isNew')
+
     @set 'isExpanded', false
     @set 'justAdded', true
     @set 'showOptions', false
 
-    if @get('isNew')
+    if isNew
       discussion = Radium.Discussion.createRecord @get('data')
 
     @get('store').commit()
 
-    setTimeout( ( =>
+    Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
       @set 'showOptions', true
       @set 'isExpanded', true
       @set 'text', null
+
+      @trigger 'discussionUpdated'
     ), 1500)
 
 

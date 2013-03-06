@@ -58,10 +58,12 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     return unless @get('isValid')
 
+    isNew = @get('isNew')
+
     @set 'isExpanded', false
     @set 'justAdded', true
 
-    meeting = if @get('isNew')
+    meeting = if isNew
                 Radium.Meeting.createRecord @get('data')
               else
                 @get('model')
@@ -74,9 +76,10 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     @get('store').commit()
 
-    setTimeout( ( =>
+    Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
+      @trigger 'meetingUpdated' if isNew
       @set 'topic', ""
     ), 1500)
 

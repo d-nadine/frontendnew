@@ -1,6 +1,7 @@
 Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
+
   canFinish: (->
     @get('isDisabled') || @get('isNew')
   ).property('isDisabled', 'isNew')
@@ -10,12 +11,12 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     return unless @get('isValid')
 
+    isNew = @get('isNew')
+    isBulk = @get('reference') && Ember.isArray @get('reference')
+
     @set 'isExpanded', false
     @set 'justAdded', true
     @set 'showOptions', false
-
-    isNew = @get('isNew')
-    isBulk = @get('reference') && Ember.isArray @get('reference')
 
     if isNew
       Radium.Todo.createRecord @get('data')
@@ -27,10 +28,13 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     @get('store').commit()
 
-    setTimeout( ( =>
+    Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
       @set 'showOptions', true
+
+      if isNew || isBulk
+        @trigger('todoUpdated')
     ), 1500)
 
   confirmationText: ( ->

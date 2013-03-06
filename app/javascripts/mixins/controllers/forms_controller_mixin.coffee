@@ -1,4 +1,4 @@
-Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
+Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')

@@ -26,14 +26,6 @@ Radium.AutocompleteView = Ember.View.extend
     </div>
   """
 
-  #FIXME: autocomplete list should be ember bound list
-  reset: ->
-    currentUser = @get('controller.currentUser')
-
-    @$('li.as-selection-item').each ->
-      unless $(this).data('object') is currentUser
-        $(this).find('a').trigger('click')
-
   isInvalid: ( ->
     return false unless @get('isSubmitted')
 
