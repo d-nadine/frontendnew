@@ -18,16 +18,22 @@ Radium.TodoForm = Radium.Form.extend
   ).property('description', 'finishBy', 'user')
 
   commit: ->
-    isBulk = @get('isBulk')
+    isBulk = Ember.isArray @get('reference')
     isNew = @get('isNew') && !isBulk
+
+    if isBulk
+      @get('reference').forEach (item) =>
+        todo = Radium.Todo.createRecord @get('data')
+        todo.set 'reference', item
+
+        if item == @get('reference').objectAt(@get('reference.length') - 1 )
+          todo.store.commit()
+
+      return
 
     todo =
         if isNew
           Radium.Todo.createRecord @get('data')
-        else if isBulk
-          @get('reference').forEach (item) =>
-            todo = Radium.Todo.createRecord @get('data')
-            todo.set 'reference', item
         else
           @get('content')
 
