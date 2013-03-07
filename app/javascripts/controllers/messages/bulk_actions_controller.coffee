@@ -7,6 +7,8 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.Curre
   itemController: 'messagesBulkActionItem'
 
   formBox: (->
+    @set('callForm.canChangeContact', false) if @get('callForm')
+
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
@@ -16,20 +18,21 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.Curre
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
+    description: null
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('model')
   ).property('model.[]', 'tomorrow', 'currentUser')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        reference: @get('contact')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
-        reference: @get('model')
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    description: null
+    reference: @get('contact')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    reference: @get('model')
   ).property('model.[]', 'tomorrow')
 
   cancel: ->

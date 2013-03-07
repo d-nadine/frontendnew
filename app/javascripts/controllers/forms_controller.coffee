@@ -6,18 +6,17 @@ require 'forms/form_box'
 
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   needs: ['users']
-  newMeeting: (->
-    meeting = Radium.MeetingForm.create
-      content:
-        isNew: true
-        users: Em.ArrayProxy.create(content: [])
-        contacts: Em.ArrayProxy.create(content: [])
-        user: @get('currentUser')
-        startsAt: Ember.DateTime.create()
-        endsAt: Ember.DateTime.create().advance({hour: 1})
 
-    meeting
-  ).property()
+  newMeeting: Radium.computed.newForm('meeting')
+
+  meetingFormDefaults: (->
+    isNew: true
+    users: Em.ArrayProxy.create(content: [])
+    contacts: Em.ArrayProxy.create(content: [])
+    user: @get('currentUser')
+    startsAt: Ember.DateTime.create()
+    endsAt: Ember.DateTime.create().advance({hour: 1})
+  ).property('currentUser')
 
   editableMeeting: ( ->
     meeting = Radium.MeetingForm.create
@@ -128,11 +127,11 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       justAdded: true
   ).property()
 
-  newCall: (->
-    Radium.CallForm.create
-      content: Ember.Object.create
-        finishBy: Ember.DateTime.create()
-      isNew: true
+  newCall: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    finishBy: Ember.DateTime.create()
+    isNew: true
   ).property()
 
   editableCall: (->
@@ -177,10 +176,11 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
     ])
   ).property()
 
-  discussion: (->
-    Radium.DiscussionForm.create
-      content: Ember.Object.create()
-      isNew: true
+  discussion: Radium.computed.newForm('discussion')
+
+  discussionFormDefaults: (->
+    content: Ember.Object.create()
+    isNew: true
   ).property()
 
   justAddedDiscussion: (->

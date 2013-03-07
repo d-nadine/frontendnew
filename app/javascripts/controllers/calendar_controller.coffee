@@ -43,7 +43,6 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   meetingFormDefaults: ( ->
     topic: null
-    location: ""
     isNew: true
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])

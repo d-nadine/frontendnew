@@ -9,12 +9,16 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   now: Ember.computed.alias('clock.now')
 
   formBox: (->
+    @set('callForm.canChangeContact', false) if @get('callForm')
+
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
+
+  todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
     description: null
@@ -24,31 +28,31 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
     isNew: true
   ).property('model', 'tomorrow')
 
-  todoForm: Radium.computed.newForm('todo')
+  callForm: Radium.computed.newForm('call')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        reference: @get('contact')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  callFormDefaults: (->
+    description: null
+    reference: @get('contact')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  discussionForm: (->
-    Radium.DiscussionForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        user: @get('currentUser')
+  discussionForm: Radium.computed.newForm('discussion')
+
+  discussionFormDefaults: (->
+    reference: @get('model')
+    user: @get('currentUser')
   ).property('model')
 
-  meetingForm: ( ->
-    Radium.MeetingForm.create
-      content: Ember.Object.create
-        isNew: true
-        users: Em.ArrayProxy.create(content: [])
-        contacts: Em.ArrayProxy.create(content: [])
-        user: @get('currentUser')
-        startsAt: @get('now')
-        endsAt: @get('now').advance(hour: 1)
-  ).property('now')
+  meetingForm: Radium.computed.newForm('meeting')
+
+  meetingFormDefaults: ( ->
+    topic: null
+    isNew: true
+    location: ""
+    users: Em.ArrayProxy.create(content: [])
+    contacts: Em.ArrayProxy.create(content: [])
+    user: @get('currentUser')
+    startsAt: @get('now')
+    endsAt: @get('now').advance(hour: 1)
+  ).property('model', 'tomorrow')

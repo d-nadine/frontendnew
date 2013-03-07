@@ -14,6 +14,8 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
     @toggleProperty 'showReply'
 
   formBox: (->
+    @set('callForm.canChangeContact', false) if @get('callForm')
+
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
@@ -27,10 +29,9 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
