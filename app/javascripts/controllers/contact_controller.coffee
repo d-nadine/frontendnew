@@ -7,6 +7,8 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
   now: Ember.computed.alias('clock.now')
 
   formBox: (->
+    @set('callForm.canChangeContact', false) if @get('callForm')
+
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
@@ -22,30 +24,31 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  discussionForm: (->
-    Radium.DiscussionForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        user: @get('currentUser')
+  discussionForm: Radium.computed.newForm('discussion')
+
+  discussionFormDefaults: (->
+    reference: @get('model')
+    user: @get('currentUser')
   ).property('model')
 
-  meetingForm: ( ->
-    Radium.MeetingForm.create
-      content: Ember.Object.create
-        isNew: true
-        users: Em.ArrayProxy.create(content: [])
-        contacts: Em.ArrayProxy.create(content: [])
-        user: @get('currentUser')
-        startsAt: @get('now')
-        endsAt: @get('now').advance(hour: 1)
+  meetingForm: Radium.computed.newForm('meeting')
+
+  meetingFormDefaults: ( ->
+    topic: null
+    location: ""
+    isNew: true
+    users: Em.ArrayProxy.create(content: [])
+    contacts: Em.ArrayProxy.create(content: [])
+    user: @get('currentUser')
+    startsAt: @get('now')
+    endsAt: @get('now').advance(hour: 1)
   ).property('model', 'now')
 

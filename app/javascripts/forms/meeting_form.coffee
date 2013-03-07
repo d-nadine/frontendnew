@@ -17,6 +17,13 @@ Radium.MeetingForm = Radium.Form.extend
     Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) == -1
   ).property('startsAt', 'endsAt')
 
+  reset: ->
+    @_super.apply this, arguments
+    @get('users').clear()
+    @get('contacts').clear()
+    @get('users').addObject(@get('user')) if @get('user')
+
+
   isValid: ( ->
     return if Ember.isEmpty(@get('topic'))
     return if @get('startsAtIsInvalid')

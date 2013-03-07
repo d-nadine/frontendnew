@@ -22,7 +22,7 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.
   isEditable: (->
     return false if @get('justAdded')
     @get('content.isEditable') != false
-  ).property('content.isEditable')
+  ).property('model', 'content.isEditable')
 
   isExpandable: (->
     return false if @get('justAdded')
@@ -36,7 +36,7 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.
   isDisabled: (->
     return true if @get('justAdded')
     @get('content.isEditable') is false
-  ).property('isEditable')
+  ).property('model', 'isEditable')
 
   toggleExpanded: ->
     @toggleProperty 'isExpanded'

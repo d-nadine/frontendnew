@@ -25,29 +25,31 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
+    description: null
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        reference: @get('contact')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    reference: @get('contact')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  meetingForm: ( ->
-    Radium.MeetingForm.create
-      content: Ember.Object.create
-        isNew: true
-        users: Em.ArrayProxy.create(content: [])
-        contacts: Em.ArrayProxy.create(content: [])
-        user: @get('currentUser')
-        startsAt: @get('now')
-        endsAt: @get('now').advance(hour: 1)
+  meetingForm: Radium.computed.newForm('meeting')
+
+  meetingFormDefaults: ( ->
+    topic: null
+    location: ""
+    isNew: true
+    users: Em.ArrayProxy.create(content: [])
+    contacts: Em.ArrayProxy.create(content: [])
+    user: @get('currentUser')
+    startsAt: @get('now')
+    endsAt: @get('now').advance(hour: 1)
   ).property('model', 'now')
 
   users: (->

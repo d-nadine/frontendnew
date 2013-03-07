@@ -23,12 +23,12 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   isEditable:( ->
     return false if @get('isSubmitted')
-    return false if @get('isNew')
+    return true if @get('isNew')
     return false unless @get('content.isEditable')
     return false if @get('justAdded')
     return false if @get('hasElapsed')
     true
-  ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
+  ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
   locations: ( ->
     @get('groups').map (group) -> Ember.Object.create
@@ -81,8 +81,8 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
       return unless isNew
 
+      @get('content').reset()
       @trigger 'formReset'
-      @set 'topic', ""
     ), 1500)
 
   confirmationText: ( ->

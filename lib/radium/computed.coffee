@@ -1,3 +1,6 @@
+require 'forms/call_form'
+require 'forms/discussion_form'
+require 'forms/meeting_form'
 require 'forms/todo_form'
 
 Radium.computed = {}

@@ -3,10 +3,10 @@ Radium.Form = Ember.ObjectProxy.extend
 
   init: ->
     if @get('isNew')
-      @setProperties @get('defaults')
+      @get('content').setProperties @get('defaults')
 
   reset: ->
-    @setProperties @get('defaults')
+    @get('content').setProperties @get('defaults')
 
   isValid: ( ->
     throw new Error('subclasses of form must override isValid')
