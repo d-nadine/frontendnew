@@ -85,13 +85,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
       @trigger 'formReset'
     ), 1500)
 
-  confirmationText: ( ->
-    if @get('isNew')
-      "Meeting Added"
-    else
-      "Meeting Updated"
-  ).property('isNew')
-
   cancellationText: ( ->
     return if @get('isNew')
 

@@ -39,7 +39,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
     ), 1500)
 
   isBulk: ( ->
-    @get('reference') && Ember.isArray @get('reference')
+    Ember.isArray @get('reference')
   ).property('reference')
 
   showComments: ( ->
@@ -49,13 +49,6 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     true
   ).property('isNew', 'justAdded', 'isBulk')
-
-  confirmationText: ( ->
-    if @get('isNew')
-      "Added"
-    else
-      "Updated"
-  ).property('isNew')
 
   justAdded: (->
     @get('content.justAdded') == true
