@@ -13,9 +13,10 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     @set 'isExpanded', false
     @set 'justAdded', true
-    @set 'showOptions', false
 
     @get('model').commit()
+
+    @set 'showOptions', false
 
     Ember.run.later( ( =>
       @set 'justAdded', false
