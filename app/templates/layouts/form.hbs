@@ -1,9 +1,9 @@
 {{yield}}
-{{#unless isNew}}
+{{#if showComments}}
   {{#if isExpanded}}
   <div class="block block-arrow">
     {{control 'comments' model}}
   </div>
   {{/if}}
-{{/unless}}
+{{/if}}
 

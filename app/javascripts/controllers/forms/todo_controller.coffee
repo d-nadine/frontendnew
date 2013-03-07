@@ -12,7 +12,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
     return unless @get('isValid')
 
     isNew = @get('isNew')
-    isBulk = @get('reference') && Ember.isArray @get('reference')
+    isBulk = @get('isBulk')
 
     @set 'isExpanded', false
     @set 'justAdded', true
@@ -36,6 +36,18 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
       if isNew || isBulk
         @trigger('formReset')
     ), 1500)
+
+  isBulk: ( ->
+    @get('reference') && Ember.isArray @get('reference')
+  ).property('reference')
+
+  showComments: ( ->
+    return false if @get('isBulk')
+    return false if @get('justAdded')
+    return false unless @get('id')
+
+    true
+  ).property('isNew', 'justAdded', 'isBulk')
 
   confirmationText: ( ->
     if @get('isNew')

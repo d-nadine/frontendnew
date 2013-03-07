@@ -10,7 +10,7 @@ Radium.Combobox = Ember.View.extend
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
       sortProperties: ['name']
       content: @get('source')
-  ).property('source')
+  ).property('source.[]')
 
   queryBinding: 'queryToValueTransform'
 
