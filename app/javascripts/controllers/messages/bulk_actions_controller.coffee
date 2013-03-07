@@ -13,13 +13,13 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.Curre
       discussionForm: @get('discussionForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
-        reference: @get('model')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    reference: @get('model')
   ).property('model.[]', 'tomorrow', 'currentUser')
 
   callForm: (->

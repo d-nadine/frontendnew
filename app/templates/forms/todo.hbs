@@ -3,7 +3,7 @@
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if showOptions}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded}}>
+      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded bubbles=false}}>
         {{#if isExpanded}}
           Hide
         {{else}}

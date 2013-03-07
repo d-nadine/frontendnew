@@ -19,12 +19,12 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
       callForm: @get('callForm')
   ).property('todoForm', 'callForm')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
   callForm: (->

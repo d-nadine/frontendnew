@@ -23,10 +23,11 @@ Radium.TaskListItemController = Ember.ObjectController.extend
     @get 'isCall'
   ).property('model')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      isEditable: true
-      content: @get('model')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    isEditable: true
+    content: @get('model')
   ).property('model')
 
   callForm: (->

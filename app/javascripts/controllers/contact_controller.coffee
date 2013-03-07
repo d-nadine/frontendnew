@@ -1,4 +1,4 @@
-Radium.ContactController = Ember.ObjectController.extend
+Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['clock','users']
   clock: Ember.computed.alias('controllers.clock')
 
@@ -14,12 +14,12 @@ Radium.ContactController = Ember.ObjectController.extend
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
   callForm: (->

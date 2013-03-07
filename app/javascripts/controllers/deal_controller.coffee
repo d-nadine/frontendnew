@@ -24,7 +24,7 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
     isNew: true
   ).property('model', 'tomorrow')
 
-  todoForm: Radium.TodoForm.generate()
+  todoForm: Radium.computed.newForm('todo')
 
   callForm: (->
     Radium.CallForm.create

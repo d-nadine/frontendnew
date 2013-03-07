@@ -89,7 +89,12 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       isEditable: false
   ).property()
 
-  newTodo: Radium.TodoForm.generate()
+  newTodo: Radium.computed.newForm('todo')
+
+  todoFormDefaults: ( ->
+    finishBy: Ember.DateTime.create()
+    user: @get('currentUser')
+  ).property('currentUser')
 
   editableTodo: (->
     Radium.TodoForm.create

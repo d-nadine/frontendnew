@@ -11,8 +11,8 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     return unless @get('isValid')
 
-    isNew = @get('isNew')
     isBulk = @get('isBulk')
+    isNew = @get('isNew') && !isBulk
 
     @set 'isExpanded', false
     @set 'justAdded', true
