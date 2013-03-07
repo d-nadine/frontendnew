@@ -32,3 +32,20 @@ Radium.MeetingForm = Radium.Form.extend
 
     true
   ).property('topic', 'startsAt', 'endsAt')
+
+  commit: ->
+    isNew = @get('isNew')
+
+    meeting = if isNew
+                Radium.Meeting.createRecord @get('data')
+              else
+                @get('model')
+
+    @get('users').forEach (user) ->
+      meeting.get('users').addObject user unless meeting.get('users').contains user
+
+    @get('contacts').forEach (contact) ->
+      meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
+
+    meeting.store.commit()
+

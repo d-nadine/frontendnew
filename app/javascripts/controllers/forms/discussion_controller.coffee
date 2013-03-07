@@ -26,16 +26,11 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
 
     return unless @get('isValid')
 
-    isNew = @get('isNew')
-
     @set 'isExpanded', false
     @set 'justAdded', true
     @set 'showOptions', false
 
-    if isNew
-      discussion = Radium.Discussion.createRecord @get('data')
-
-    @get('store').commit()
+    @get('model').commit()
 
     Ember.run.later( ( =>
       @set 'justAdded', false

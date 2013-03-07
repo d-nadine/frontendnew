@@ -7,3 +7,8 @@ Radium.DiscussionForm = Radium.Form.extend
   isValid: ( ->
     not Ember.isEmpty(@get('text'))
   ).property('text','justAdded')
+
+  commit: ->
+    discussion = Radium.Discussion.createRecord @get('data')
+
+    discussion.store.commit()

@@ -57,29 +57,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     return unless @get('isValid')
 
-    isNew = @get('isNew')
-
     @set 'isExpanded', false
     @set 'justAdded', true
 
-    meeting = if isNew
-                Radium.Meeting.createRecord @get('data')
-              else
-                @get('model')
-
-    @get('users').forEach (user) ->
-      meeting.get('users').addObject user unless meeting.get('users').contains user
-
-    @get('contacts').forEach (contact) ->
-      meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
-
-    @get('store').commit()
+    @get('model').commit()
 
     Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      return unless isNew
+      return unless @get('isNew')
 
       @get('content').reset()
       @trigger 'formReset'
@@ -118,7 +105,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     @get('meetingUsers').forEach (user) =>
       if user
-        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
+        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), exclude: self.get('id'))
                                 .filter (meeting) ->
                                   return false if meeting.get('isNew')
                                   meeting.get('users').contains(user)
