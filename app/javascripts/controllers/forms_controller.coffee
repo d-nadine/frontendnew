@@ -10,6 +10,8 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   newMeeting: Radium.computed.newForm('meeting')
 
   meetingFormDefaults: (->
+    topic: null
+    location: ""
     isNew: true
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
