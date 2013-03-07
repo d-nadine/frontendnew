@@ -1,3 +1,5 @@
+require 'forms/todo_form'
+
 Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
@@ -14,13 +16,15 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  todoFormDefaults: (->
+    description: null
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    isNew: true
   ).property('model', 'tomorrow')
+
+  todoForm: Radium.TodoForm.generate()
 
   callForm: (->
     Radium.CallForm.create

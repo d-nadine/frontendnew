@@ -34,6 +34,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
       @set 'showOptions', true
 
       if isNew || isBulk
+        @get('content').reset()
         @trigger('formReset')
     ), 1500)
 

@@ -16,3 +16,12 @@ Radium.TodoForm = Radium.Form.extend
 
     true
   ).property('description', 'finishBy', 'user')
+
+
+Radium.TodoForm.reopenClass
+  generate: ->
+     Ember.computed 'todoFormDefaults', ->
+       Radium.TodoForm.create
+        content: Ember.Object.create()
+        isNew: true
+        defaults: @get('todoFormDefaults')
