@@ -1,4 +1,4 @@
-Radium.EmailItemController = Em.ObjectController.extend
+Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
 

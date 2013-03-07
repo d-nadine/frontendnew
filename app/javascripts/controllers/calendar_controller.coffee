@@ -1,4 +1,4 @@
-CalendarItem = Ember.ObjectController.extend
+CalendarItem = Ember.ObjectController.extend Radium.CurrentUserMixin,
   time: (->
     @get('finishBy') || @get('startsAt')
   ).property('content', 'finishBy', 'startsAt')
@@ -20,6 +20,7 @@ Radium.CalendarController = Ember.Controller.extend
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
+        user: @get('currentUser')
   ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: (->

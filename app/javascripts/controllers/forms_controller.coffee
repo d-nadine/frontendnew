@@ -5,7 +5,7 @@ require 'forms/todo_form'
 require 'forms/form_box'
 
 Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
-  needs: ['users']
+  # needs: ['users']
   newMeeting: (->
     meeting = Radium.MeetingForm.create
       content:

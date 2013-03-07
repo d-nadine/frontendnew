@@ -1,4 +1,4 @@
-Radium.MessagesBulkActionsController = Ember.ArrayController.extend
+Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.CurrentUserMixin,
   needs: ['clock','users']
   clock: Ember.computed.alias('controllers.clock')
 
@@ -20,7 +20,7 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend
         finishBy: @get('tomorrow')
         user: @get('currentUser')
         reference: @get('model')
-  ).property('model.[]', 'tomorrow')
+  ).property('model.[]', 'tomorrow', 'currentUser')
 
   callForm: (->
     Radium.CallForm.create
