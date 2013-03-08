@@ -9,9 +9,6 @@ Radium.FormsTodoView = Radium.FormView.extend
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'
 
-  didInsertElement: ->
-    @get('controller').on 'formReset', this, 'onFormReset'
-
   todoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'

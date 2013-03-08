@@ -13,10 +13,10 @@ Radium.FormsMeetingView = Radium.FormView.extend
   ).property('startsAt')
 
   didInsertElement: ->
+    @_super.apply this, arguments
+
     $('html').on 'click.cancel-meeting', ->
       $('cancel-meeting').hide()
-
-    @get('controller').on 'formReset', this, 'onFormReset'
 
   willDestroyElement: ->
     $('html').off 'click.cancel-meeting'

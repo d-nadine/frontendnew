@@ -1,7 +1,4 @@
 Radium.FormsDiscussionView = Radium.FormView.extend
-  didInsertElement: ->
-    @get('controller').on 'formReset', this, 'onFormReset'
-
   textbox: Radium.MentionFieldView.extend
     classNameBindings: ['value:is-valid', 'isInvalid']
     valueBinding: 'controller.text'
