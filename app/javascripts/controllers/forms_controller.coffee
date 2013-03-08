@@ -33,6 +33,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         topic: 'Uneditable Meeting'
         user: @get('currentUser')
         users: users
+        contacts: []
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: 3)
         endsAt: Ember.DateTime.create().advance(day: 3).advance(hour: 3)
@@ -45,6 +46,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Factory.createObject 'meeting'
         user: @get('currentUser')
         users: users
+        contacts: []
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: -7)
         endsAt: Ember.DateTime.create().advance(day: -7).advance(hour: 3)
@@ -57,6 +59,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Factory.createObject 'meeting'
         user: @get('currentUser')
         users: users
+        contacts: []
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: -7)
         endsAt: Ember.DateTime.create().advance(day: -7).advance(hour: 3)
@@ -69,6 +72,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Factory.createObject 'meeting'
         user: @get('currentUser')
         users: users
+        contacts: []
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: 17)
         endsAt: Ember.DateTime.create().advance(day: 17).advance(hour: 3)
