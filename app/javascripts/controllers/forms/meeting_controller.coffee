@@ -107,7 +107,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
       if user
         meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), exclude: self.get('id'))
                                 .filter (meeting) ->
-                                  return false if meeting.get('isNew')
                                   meeting.get('users').contains(user)
 
         meetings.forEach (meeting) ->

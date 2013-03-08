@@ -26,7 +26,6 @@ Radium.TodoForm = Radium.Form.extend
         todo = Radium.Todo.createRecord @get('data')
         todo.set 'reference', item
 
-
         if item == @get('reference').slice().pop()
           todo.store.commit()
 
