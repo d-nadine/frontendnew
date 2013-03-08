@@ -106,8 +106,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @get('meetingUsers').forEach (user) =>
       if user
         meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), exclude: self.get('id'))
-                                .filter (meeting) ->
-                                  meeting.get('users').contains(user)
 
         meetings.forEach (meeting) ->
           startsAt = meeting.get('startsAt').copy().advance(minute: -5)
