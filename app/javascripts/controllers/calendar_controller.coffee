@@ -22,6 +22,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
+<<<<<<< HEAD
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->

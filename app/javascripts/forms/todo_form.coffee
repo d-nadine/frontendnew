@@ -19,22 +19,29 @@ Radium.TodoForm = Radium.Form.extend
 
   commit: ->
     isBulk = Ember.isArray @get('reference')
-    isNew = @get('isNew') && !isBulk
 
     if isBulk
-      @get('reference').forEach (item) =>
-        todo = Radium.Todo.createRecord @get('data')
-        todo.set 'reference', item
+      @bulkCommit()
+    else
+      @individualCommit()
 
-        if item == @get('reference').slice().pop()
-          todo.store.commit()
-
-      return
-
+  individualCommit: ->
     todo =
-        if isNew
+        if @get('isNew')
           Radium.Todo.createRecord @get('data')
         else
           @get('content')
 
     todo.store.commit()
+
+  bulkCommit: ->
+    last = @get('reference').slice().pop()
+    @get('reference').forEach (item) =>
+      todo = Radium.Todo.createRecord @get('data')
+      todo.set 'reference', item
+
+      if item == last
+        todo.store.commit()
+
+
+
