@@ -23,7 +23,11 @@ Radium.DealRoute = Ember.Route.extend
         into: 'application'
 
   renderTemplate: ->
-    @render()
-    @render 'deal/sidebar'
-      into: 'deal'
-      outlet: 'sidebar'
+    if @modelFor('deal').get('isDestroyed')
+      @render 'deal/deleted',
+        into: 'application'
+    else
+      @render()
+      @render 'deal/sidebar'
+        into: 'deal'
+        outlet: 'sidebar'
