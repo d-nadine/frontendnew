@@ -19,5 +19,4 @@ Radium.FormsDiscussionView = Radium.FormView.extend
     ).property('value', 'isSubmitted')
 
   onFormReset: ->
-    @$('form')[0].reset()
-    @get('discussionText').reset()
+    @get('text').reset()
