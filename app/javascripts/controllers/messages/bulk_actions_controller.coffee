@@ -21,13 +21,13 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.Curre
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('model')
-  ).property('model.[]', 'tomorrow', 'currentUser')
+  ).property('model.[]', 'tomorrow')
 
   callForm: Radium.computed.newForm('call', canChangeContact: true)
 
   callFormDefaults: (->
     description: null
-    reference: @get('contact')
+    reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('model')

@@ -19,7 +19,6 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
       callForm: @get('callForm')
   ).property('todoForm', 'callForm')
 
-
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
