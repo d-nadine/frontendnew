@@ -32,7 +32,7 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
 
   discussionForm: Radium.computed.newForm('discussion')
 
-  iscussionFormDefaults: (->
+  discussionFormDefaults: (->
     reference: @get('model')
     user: @get('currentUser')
   ).property('model')
