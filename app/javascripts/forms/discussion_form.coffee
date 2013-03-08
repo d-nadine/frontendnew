@@ -11,4 +11,4 @@ Radium.DiscussionForm = Radium.Form.extend
   commit: ->
     discussion = Radium.Discussion.createRecord @get('data')
 
-    discussion.store.commit()
+    @get('store').commit()

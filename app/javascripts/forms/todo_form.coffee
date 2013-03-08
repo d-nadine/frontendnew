@@ -25,6 +25,8 @@ Radium.TodoForm = Radium.Form.extend
     else
       @individualCommit()
 
+    @get('store').commit()
+
   individualCommit: ->
     todo =
         if @get('isNew')
@@ -32,16 +34,8 @@ Radium.TodoForm = Radium.Form.extend
         else
           @get('content')
 
-    todo.store.commit()
-
   bulkCommit: ->
     last = @get('reference').slice().pop()
     @get('reference').forEach (item) =>
       todo = Radium.Todo.createRecord @get('data')
       todo.set 'reference', item
-
-      if item == last
-        todo.store.commit()
-
-
-

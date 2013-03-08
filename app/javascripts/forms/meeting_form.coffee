@@ -47,5 +47,5 @@ Radium.MeetingForm = Radium.Form.extend
     @get('contacts').forEach (contact) ->
       meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
 
-    meeting.store.commit()
+    @get('store').commit()
 
