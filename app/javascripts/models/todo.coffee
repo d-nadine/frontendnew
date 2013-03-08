@@ -32,3 +32,4 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   toString: ->
     @get 'description'
+
