@@ -33,7 +33,6 @@ Radium.TodoForm = Radium.Form.extend
           @get('content')
 
   bulkCommit: ->
-    last = @get('reference').slice().pop()
     @get('reference').forEach (item) =>
       todo = Radium.Todo.createRecord @get('data')
       todo.set 'reference', item
