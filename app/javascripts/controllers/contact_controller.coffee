@@ -22,7 +22,7 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: Radium.computed.newForm('call', canChangeContact: true)
+  callForm: Radium.computed.newForm('call', canChangeContact: false)
 
   callFormDefaults: (->
     reference: @get('model')

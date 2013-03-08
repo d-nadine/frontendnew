@@ -27,7 +27,7 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: Radium.computed.newForm('call', canChangeContact: true)
+  callForm: Radium.computed.newForm('call', canChangeContact: false)
 
   callFormDefaults: (->
     finishBy: @get('tomorrow')

@@ -30,16 +30,14 @@ Radium.computed.isPresent = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     !Ember.isEmpty(@get(dependentKey))
 
-Radium.computed.newForm = (form, properties) ->
+Radium.computed.newForm = (form, properties = {}) ->
   defaultsName = "#{form}FormDefaults"
   type = Radium["#{form.capitalize()}Form"]
 
   Ember.computed defaultsName, ->
     Ember.assert "no #{defaultsName} specified", @get(defaultsName)
 
-    hash = $.extend({}, @get(defaultsName), properties)
-
-    type.create
+    type.create properties,
       content: Ember.Object.create()
       isNew: true
-      defaults: hash
+      defaults: @get(defaultsName)
