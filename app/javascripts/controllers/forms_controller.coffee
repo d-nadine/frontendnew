@@ -12,7 +12,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   meetingFormDefaults: (->
     topic: null
     location: ""
-    isNew: true
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
     user: @get('currentUser')
@@ -133,7 +132,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   callFormDefaults: (->
     finishBy: Ember.DateTime.create()
-    isNew: true
   ).property()
 
   editableCall: (->
@@ -182,7 +180,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   discussionFormDefaults: (->
     content: Ember.Object.create()
-    isNew: true
   ).property()
 
   justAddedDiscussion: (->
