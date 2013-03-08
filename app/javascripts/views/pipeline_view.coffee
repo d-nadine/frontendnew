@@ -1,6 +1,4 @@
 Radium.PipelineView = Ember.View.extend
-  elementId: 'pipeline-panel'
-
   layoutName: 'layouts/single_column'
 
   classNames: ['page-view']
