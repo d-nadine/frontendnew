@@ -30,16 +30,15 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
     @set 'justAdded', true
     @set 'showOptions', false
 
-    @get('model').commit()
-
-    Ember.run.later( ( =>
+    Ember.run.later(( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
       @set 'showOptions', true
       @set 'isExpanded', true
       @set 'text', null
 
+      @get('model').commit()
       @get('content').reset()
 
       @trigger 'formReset'
-    ), 1500)
+    ), 1200)

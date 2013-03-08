@@ -61,15 +61,15 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'isExpanded', false
     @set 'justAdded', true
 
-    @get('model').commit()
-
     Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
 
+      @get('model').commit()
       @get('model').reset()
+
       @trigger 'formReset'
-    ), 1500)
+    ), 1200)
 
   cancellationText: ( ->
     return if @get('isNew')

@@ -1,4 +1,5 @@
 require 'forms/form'
+
 Radium.TodoForm = Radium.Form.extend
   data: ( ->
     user: @get('user')
@@ -26,11 +27,9 @@ Radium.TodoForm = Radium.Form.extend
     @get('store').commit()
 
   individualCommit: ->
-    todo =
-        if @get('isNew')
-          Radium.Todo.createRecord @get('data')
-        else
-          @get('content')
+    return unless @get('isNew')
+
+    Radium.Todo.createRecord @get('data')
 
   bulkCommit: ->
     @get('reference').forEach (item) =>
