@@ -1,5 +1,6 @@
 Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['groups','contacts','users']
+  now: Ember.computed.alias('clock.now')
   groups: Ember.computed.alias('controllers.groups')
   source: Ember.computed.alias 'attendees'
   userList: Ember.computed.alias 'controllers.users'
@@ -50,7 +51,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     return unless @get('startsAt')
 
     @get('startsAt').isBeforeToday()
-  ).property('startsAt')
+  ).property('startsAt', 'now')
 
   submit: () ->
     @set 'isSubmitted', true
