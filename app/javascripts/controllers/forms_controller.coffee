@@ -179,7 +179,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   discussion: Radium.computed.newForm('discussion')
 
   discussionFormDefaults: (->
-    content: Ember.Object.create()
+    content: {}
   ).property()
 
   justAddedDiscussion: (->
