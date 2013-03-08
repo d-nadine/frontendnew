@@ -1,7 +1,7 @@
 Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
   Ember.assert 'Must pass a valid person', person
 
-  style = options.hash.style || 'small'
+  style = options.hash.style || options.hash.size || 'small'
 
   avatar = person.get('avatar') || {}
 

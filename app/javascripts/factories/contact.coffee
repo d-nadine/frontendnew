@@ -4,6 +4,7 @@ Factory.define 'contact', traits: ['timestamps'],
   name: -> "#{Dictionaries.firstNames.random()} #{Dictionaries.lastNames.random()}"
   isLead: -> Math.random() <= 0.30
   source: -> Dictionaries.leadSources.random()
+  title: -> Dictionaries.titles.random()
 
   user: -> Factory.build 'user'
 

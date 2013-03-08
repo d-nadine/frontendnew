@@ -15,6 +15,8 @@
 @import "components/scroller";
 @import "components/thumbnail_drawer";
 @import "components/buttons";
+@import "components/modal";
+@import "components/inline_editor";
 
 @import "forms";
 @import "forms/dropdown_menu";
@@ -34,6 +36,7 @@
 @import "routes/calendar";
 @import "routes/messages";
 @import "routes/pipeline";
+@import "routes/deal";
 
 #unimplemented{
   text-align: center;

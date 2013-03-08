@@ -1,6 +1,5 @@
 Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['users']
-  users: Ember.computed.alias('controllers.users')
 
   canFinish: (->
     @get('isDisabled') || @get('isNew')

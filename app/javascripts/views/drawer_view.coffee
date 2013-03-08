@@ -1,4 +1,2 @@
-require 'views/sidebar_view'
-
-Radium.DrawerView = Radium.SidebarView.extend
+Radium.DrawerView = Radium.FixedSidebarView.extend
   classNames: ['sidebar-panel-drawer']

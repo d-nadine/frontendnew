@@ -6,7 +6,7 @@ Radium.UserPicker = Radium.Combobox.extend
   ]
 
   valueBinding: 'controller.user'
-  sourceBinding: 'controller.users'
+  sourceBinding: 'controller.controllers.users'
   label: 'Assigned to'
 
   lookupQuery: (query) ->

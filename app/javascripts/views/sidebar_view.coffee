@@ -1,3 +1,7 @@
-Radium.SidebarView = Em.View.extend Radium.ScrollableMixin,
-  classNames: ['sidebar-panel', 'sidebar-panel-main']
-  layoutName: 'layouts/drawer'
+Radium.SidebarView = Ember.View.extend
+  classNames: ['sidebar-panel']
+  layout: Ember.Handlebars.compile """
+    <div class="panel-content">
+      {{yield}}
+    </div>
+  """

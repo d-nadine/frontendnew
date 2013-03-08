@@ -1,4 +1,11 @@
-<h1>Radium.Deal Route</h1>
+{{#unless isPublic}}
+  <div class="alert alert-info">
+    This Deal is <strong>not</strong> published yet!
+    No one else can see this deal until it's published. You can
+    continue to work on it in secret until you're ready to share
+    it with the rest of your company.
+  </div>
+{{/unless}}
 
 {{control "form_box" formBox}}
 

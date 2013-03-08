@@ -65,6 +65,11 @@
   }
 }
 
+.btn-block {
+  display: block;
+  box-sizing: border-box;
+}
+
 ::-webkit-input-placeholder {
   font-style: italic;
 }

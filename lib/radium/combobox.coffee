@@ -6,6 +6,9 @@ Radium.Combobox = Ember.View.extend
     ':control-box'
   ]
 
+  click: (event) ->
+    event.stopPropagation()
+
   sortedSource: ( ->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
       sortProperties: ['name']

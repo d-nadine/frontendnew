@@ -1,1 +1,1 @@
-Radium.MessagesSidebarView = Radium.SidebarView.extend()
+Radium.MessagesSidebarView = Radium.FixedSidebarView.extend()

@@ -1,9 +1,5 @@
 @import "routes/messages/sidebar";
 
-.is-disabled{
-  color: blue;
-}
-
 div.selection{
   div.alert{
     margin-bottom: 5px;
@@ -53,12 +49,6 @@ div.selection{
 
 #email-panel {
   padding-bottom: 40px;
-}
-
-.btn-full-width {
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 20px;
 }
 
 .discussion{
