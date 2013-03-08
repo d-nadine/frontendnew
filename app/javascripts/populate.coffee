@@ -28,9 +28,6 @@ class Populator
     userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
-    startsAt = Ember.DateTime.create().advance(hour: 1)
-    endsAt = Ember.DateTime.create().advance(hour: 3)
-
     for i in [0..20]
       Factory.create 'deal',
         user: -> userDictionary.random()
@@ -40,6 +37,7 @@ class Populator
       Factory.create 'call'
         user: -> userDictionary.random()
         contact: -> contactDictionary.random()
+        reference: -> contactDictionary.random()
 
     for i in [0..30]
       Factory.create 'email'
@@ -47,6 +45,13 @@ class Populator
 
     for i in [0..20]
       Factory.create 'group'
+
+    Factory.create 'meeting'
+      user: -> userDictionary.random()
+      users: -> [userDictionary.random()]
+      contacts: -> [contactDictionary.random()]
+      startsAt: Ember.DateTime.create().advance(day: 7)
+      endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
     Factory.adapter.store.commit()
 

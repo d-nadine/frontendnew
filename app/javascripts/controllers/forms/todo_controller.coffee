@@ -1,6 +1,7 @@
 Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['users']
   users: Ember.computed.alias('controllers.users')
+
   canFinish: (->
     @get('isDisabled') || @get('isNew')
   ).property('isDisabled', 'isNew')
@@ -8,13 +9,36 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
   submit: ->
     @set 'isSubmitted', true
 
-    Radium.Todo.createRecord
-      user: @get('user')
-      finishBy: @get('finishBy')
-      reference: @get('reference')
-      description: @get('description')
+    return unless @get('isValid')
 
     @set 'isExpanded', false
+    @set 'justAdded', true
+    @set 'showOptions', false
+
+    Ember.run.later(( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+      @set 'showOptions', true
+
+      @get('model').commit()
+
+      @get('model').reset()
+
+      if @get('isNew') || @get('isBulk')
+        @trigger('formReset')
+    ), 1200)
+
+  isBulk: ( ->
+    Ember.isArray @get('reference')
+  ).property('reference')
+
+  showComments: ( ->
+    return false if @get('isBulk')
+    return false if @get('justAdded')
+    return false unless @get('id')
+
+    true
+  ).property('isNew', 'justAdded', 'isBulk')
 
   justAdded: (->
     @get('content.justAdded') == true
@@ -22,15 +46,12 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
   showOptions: Ember.computed.alias('isNew')
 
-  showComments: (->
-    return false if @get('justAdded')
-    @get 'hasComments'
-  ).property('justAdded', 'comments.length')
-
   showSuccess: Ember.computed.alias('justAdded')
 
   isEditable: (->
+    return false if @get('isSubmitted')
     return false if @get('justAdded')
+    return true if @get('isNew')
     @get('content.isEditable') == true
   ).property('content.isEditable')
 

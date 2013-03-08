@@ -2,8 +2,9 @@ require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
 require 'lib/radium/user_picker'
 require 'lib/radium/date_picker'
+require 'views/forms/form_view'
 
-Radium.FormsTodoView = Ember.View.extend
+Radium.FormsTodoView = Radium.FormView.extend
   checkbox: Radium.Checkbox.extend
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'
@@ -24,7 +25,5 @@ Radium.FormsTodoView = Ember.View.extend
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
 
-  submit: ->
-    return unless @get('controller.isValid')
-    @get('controller').submit()
-    @get('controller').reset()
+  onFormReset: ->
+    @get('description').reset()

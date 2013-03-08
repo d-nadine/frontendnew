@@ -1,5 +1,6 @@
 Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsControllerMixin,
   needs: ['groups','contacts','users']
+  now: Ember.computed.alias('clock.now')
   groups: Ember.computed.alias('controllers.groups')
   source: Ember.computed.alias 'attendees'
   userList: Ember.computed.alias 'controllers.users'
@@ -14,16 +15,21 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
     @set 'calendarsOpen', false
 
   people: ( ->
-    Radium.PeopleList.listPeople(@get('userList'), @get('contactList'))
-  ).property('userList', 'userList.length', 'contactList', 'contactList.length')
+    userList = @get('userList').mapProperty('content')
+    contactList = @get('contactList')
+
+    Radium.PeopleList.listPeople(userList, contactList)
+      .filter (person) -> person.get('email')
+  ).property('userList.[]', 'contactList.[]')
 
   isEditable:( ->
-    return false if @get('isNew')
+    return false if @get('isSubmitted')
+    return true if @get('isNew')
     return false unless @get('content.isEditable')
     return false if @get('justAdded')
     return false if @get('hasElapsed')
     true
-  ).property('isNew', 'justAdded', 'hasElapsed', 'content.isEditable')
+  ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
   locations: ( ->
     @get('groups').map (group) -> Ember.Object.create
@@ -32,58 +38,48 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
   attendees: ( ->
     Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
-  ).property('users', 'contacts', 'users.length', 'contacts.length')
+  ).property('users.[]', 'contacts.[]')
 
   showTopicTextBox: ( ->
+    return false if @get('justAdded')
     return true if @get('isNew')
     return false if @get('isDisabled')
-    return true if @get('isNew')
     @get('isExpanded')
-  ).property('isNew', 'isDisabled', 'isExpanded')
+  ).property('isNew', 'isDisabled', 'isExpanded','justAdded')
 
   hasElapsed: ( ->
     return unless @get('startsAt')
 
     @get('startsAt').isBeforeToday()
-  ).property('startsAt')
+  ).property('startsAt', 'now')
 
-  showComments: (->
-    return false if @get('justAdded')
-    return false if @get('isNew')
-    true
-  ).property('isNew', 'justAdded')
-
-  submit: ->
+  submit: () ->
     @set 'isSubmitted', true
 
-    unless @get('isNew')
-      @get('content.transaction').commit()
-      return
+    return unless @get('isValid')
 
-    meeting = Radium.Meeting.createRecord
-      topic: @get('topic')
-      location: @get('location')
-      startsAt: @get('startAt')
-      endsAt: @get('endsAt')
-      user: @get('currentUser')
+    @set 'isExpanded', false
+    @set 'justAdded', true
 
-    @get('users').forEach (user) ->
-      meeting.get('users').addObject user
+    Ember.run.later( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
 
-    @get('contacts').forEach (contact) ->
-      meeting.get('contacts').addObject contact
+      @get('model').commit()
+      @get('model').reset()
 
-    meeting.get('transaction').commit()
+      @trigger 'formReset'
+    ), 1200)
 
-    cancellationText: ( ->
-      return if @get('isNew')
+  cancellationText: ( ->
+    return if @get('isNew')
 
-      topic = @get('topic')
+    topic = @get('topic')
 
-      attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+    attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
 
-      "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
-    ).property('topic', 'isNew')
+    "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
+  ).property('topic', 'isNew')
 
   startsAtDidChange: ( ->
     startsAt = @get('startsAt')
@@ -99,19 +95,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   ).observes('startsAt')
 
   # FIXME: Review when using real ember-data
-  usersDidChange: ( ->
+  attendeesDidChange: ( ->
     return if @get('calendarsOpen')
     return unless @get('isExpanded')
     return unless @get('users.length') && @get('startsAt')
 
     self = this
 
-    @get('users').forEach (user) =>
+    @get('meetingUsers').forEach (user) =>
       if user
-        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), meetingId: self.get('id'))
-                                .filter (meeting) ->
-                                  return false if meeting.get('isNew')
-                                  meeting.get('users').contains(user)
+        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), exclude: self.get('id'))
 
         meetings.forEach (meeting) ->
           startsAt = meeting.get('startsAt').copy().advance(minute: -5)
@@ -120,7 +113,7 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
           if self.get('startsAt').isBetween startsAt, endsAt
             self.set 'calendarsOpen', true
 
-  ).observes('users', 'users.length', 'startsAt')
+  ).observes('meetingUsers.[]', 'startsAt')
 
   isExpandable: (->
     return false if @get('justAdded')
@@ -142,12 +135,16 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
 
     @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
-  removeUserFromMeeting: (user) ->
-    users = @get('users')
+  removeSelection: (attendee) ->
+    resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
 
-    users.removeObject user
+    attendees = @get(resource)
 
-    @get('meetingUsers').removeObject user
+    return unless attendees.find( (item) -> item == attendee)
+
+    attendees.removeObject attendee
+
+    @get('meetingUsers').removeObject attendee if attendee.constructor == Radium.User
 
   currentDate: ( ->
     @get('startsAt').toHumanFormat()

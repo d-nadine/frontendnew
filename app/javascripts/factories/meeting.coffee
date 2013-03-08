@@ -4,3 +4,4 @@ Factory.define 'meeting', traits: 'timestamps',
   endsAt: -> Ember.DateTime.create().advance(hours: 1)
   topic: 'Product discussion'
   location: 'Radium HQ'
+  isEditable: true

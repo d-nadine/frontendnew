@@ -125,7 +125,9 @@
                 var input_focus = false;
 
                 // Setup basic elements and render them to the DOM
-                input.wrap('<ul class="as-selections" id="as-selections-'+x+'"></ul>').wrap('<li class="as-original" id="as-original-'+x+'"></li>');
+                $('ul.as-selections').attr('id', 'as-selections-'+x);
+                $('li.as-original').attr('id', 'as-original-'+x);
+
                 var selections_holder = $("#as-selections-"+x);
                 var org_li = $("#as-original-"+x);
                 var results_holder = $('<div class="as-results" id="as-results-'+x+'"></div>').hide();
@@ -395,28 +397,11 @@
                 }
 
                 function add_selected_item(data, num){
-                    values_input.val((values_input.val()||",")+data[opts.selectedValuesProp]+",");
-                    var item = $('<li class="as-selection-item" id="as-selection-'+num+'" data-value="' + data[opts.selectedValuesProp] + '"></li>').click(function(){
-                            opts.selectionClick.call(this, $(this));
-                            selections_holder.children().removeClass("selected");
-                            $(this).addClass("selected");
-                        }).mousedown(function(){ input_focus = false; });
-
-                    //FIXME: Do we want to change the source??
-                    item.data('object', data.data);
-
-                    var close = $('<a class="as-close">&times;</a>').click(function(){
-                            values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
-                            opts.selectionRemoved.call(this, item);
-                            input_focus = true;
-                            input.focus();
-                            return false;
-                        });
-
-                    // FIXME: custom code needs better abstracted if we go with this plugin
-                    org_li.before(item.html(opts.getAvatar(data) + " " + data[opts.selectedItemProp]).prepend(close));
-                    opts.selectionAdded.call(this, org_li.prev(), data[opts.selectedValuesProp]);
-                    return org_li.prev();
+                    if(data.data){
+                      opts.selectionAdded.call(this, data.data);
+                    }else{
+                      opts.selectionAdded.call(this, data.name);
+                    }
                 }
 
                 function moveSelection(direction){

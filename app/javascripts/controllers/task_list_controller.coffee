@@ -23,22 +23,26 @@ Radium.TaskListItemController = Ember.ObjectController.extend
     @get 'isCall'
   ).property('model')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      isEditable: true
-      content: @get('model')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    description: null
+    content: @get('model')
   ).property('model')
 
-  callForm: (->
-    Radium.CallForm.create
-      isEditable: true
-      content: @get('model')
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    description: null
+    content: @get('model')
   ).property('model')
 
-  meetingForm: (->
-    Radium.MeetingForm.create
-      isEditable: true
-      content: @get('model')
+  meetingForm: Radium.computed.newForm('meeting')
+
+  meetingFormDefaults: ( ->
+    topic: null
+    location: ""
+    content: @get('model')
   ).property('model')
 
 Radium.TaskListController = Ember.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,

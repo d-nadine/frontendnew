@@ -36,8 +36,3 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
         {{/each}}
       </ul>
     """
-
-  submit: ->
-    return unless @get('controller.isValid')
-    @get('controller').submit()
-    @get('controller').reset()

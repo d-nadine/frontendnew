@@ -1,3 +1,8 @@
+require 'forms/call_form'
+require 'forms/discussion_form'
+require 'forms/meeting_form'
+require 'forms/todo_form'
+
 Radium.computed = {}
 
 Radium.computed.equal = (dependentKey, value) ->
@@ -24,3 +29,15 @@ Radium.computed.daysOld = (dependentKey, days) ->
 Radium.computed.isPresent = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     !Ember.isEmpty(@get(dependentKey))
+
+Radium.computed.newForm = (form, properties = {}) ->
+  defaultsName = "#{form}FormDefaults"
+  type = Radium["#{form.capitalize()}Form"]
+
+  Ember.computed defaultsName, ->
+    Ember.assert "no #{defaultsName} specified", @get(defaultsName)
+
+    type.create properties,
+      content: Ember.Object.create()
+      isNew: true
+      defaults: @get(defaultsName)

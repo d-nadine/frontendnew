@@ -1,14 +1,20 @@
 require 'lib/radium/time_picker_view'
 require 'lib/radium/location_picker'
 require 'lib/radium/autocomplete_list_view'
-Radium.FormsMeetingView = Ember.View.extend
+
+Radium.FormsMeetingView = Radium.FormView.extend
   classNames: ['meeting-form-container']
+
+  onFormReset: ->
+    @$('form')[0].reset()
 
   readableStartsAt: ( ->
     @get('controller.startsAt').toHumanFormatWithTime()
   ).property('startsAt')
 
   didInsertElement: ->
+    @_super.apply this, arguments
+
     $('html').on 'click.cancel-meeting', ->
       $('cancel-meeting').hide()
 
@@ -16,6 +22,8 @@ Radium.FormsMeetingView = Ember.View.extend
     $('html').off 'click.cancel-meeting'
 
   showCancelMeetingDialogue: ->
+    return if @get('controller.isNew')
+
     dialogue =  @$('.cancel-meeting')
 
     $('html').on 'click.cancel-meeting', ->
@@ -81,8 +89,7 @@ Radium.FormsMeetingView = Ember.View.extend
     dateBinding: 'controller.startsAt'
     isInvalid: ( ->
       return false unless @get('isSubmitted')
-      now = Ember.DateTime.create().advance(minute: -5)
-      Ember.DateTime.compare(@get('controller.startsAt'), now)  == -1
+      @get('controller.startsAtIsInvalid')
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
   endsAt: Radium.TimePickerView.extend
@@ -90,7 +97,7 @@ Radium.FormsMeetingView = Ember.View.extend
     leader: 'Ends:'
     isInvalid: ( ->
       return false unless @get('isSubmitted')
-      Ember.DateTime.compare(@get('controller.endsAt'), @get('controller.startsAt')) == -1
+      @get('controller.endsAtIsInvalid')
     ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
   location: Radium.LocationPicker.extend
@@ -98,3 +105,7 @@ Radium.FormsMeetingView = Ember.View.extend
     isInvalid: false
 
   attendees: Radium.AutocompleteView.extend()
+
+  cancelMeetingDisabled: ( ->
+    @get('controller.isDisabled') || @get('controller.isNew')
+  ).property('controller.isDisabled', 'controller.isNew')

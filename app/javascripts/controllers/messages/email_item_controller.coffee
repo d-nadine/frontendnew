@@ -1,4 +1,4 @@
-Radium.EmailItemController = Em.ObjectController.extend
+Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
 
@@ -19,18 +19,17 @@ Radium.EmailItemController = Em.ObjectController.extend
       callForm: @get('callForm')
   ).property('todoForm', 'callForm')
 
-  todoForm: (->
-    Radium.TodoForm.create
-      content: Ember.Object.create
-        reference: @get('model')
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: (->
-    Radium.CallForm.create
-      canChangeContact: false
-      content: Ember.Object.create
-        finishBy: @get('tomorrow')
-        user: @get('currentUser')
+  callForm: Radium.computed.newForm('call', canChangeContact: false)
+
+  callFormDefaults: (->
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
   ).property('model', 'tomorrow')

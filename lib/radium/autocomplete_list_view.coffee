@@ -8,9 +8,26 @@ Radium.AutocompleteView = Ember.View.extend
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
-
+  source: Ember.computed.alias('controller.source')
   template: Ember.Handlebars.compile """
-    {{view view.autoCompleteList}}
+    <ul class="as-selections">
+    {{#each source}}
+      <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
+        {{#unless controller.isEditable}}
+        <a class="as-close" {{action removeSelection this}}>×</a>
+        {{/unless}}
+        {{avatar this}}
+        {{#if name}}
+          {{name}}
+        {{else}}
+          {{email}}
+        {{/if}}
+      </li>
+    {{/each}}
+      <li class="as-original">
+        {{view view.autocomplete}}
+      </li>
+    </ul>
     <div class="attendeeDropdown" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         link<b class="caret"></b>
@@ -25,69 +42,47 @@ Radium.AutocompleteView = Ember.View.extend
       </div>
     </div>
   """
+  showContextMenu: (attendee) ->
+    return false unless @get('controller.isEditable')
 
-  isInvalid: ( ->
-    return false unless @get('isSubmitted')
+    el = $(event.srcElement)
 
-    not @get('hasUsers')
-  ).property('isSubmitted', 'users', 'users.length')
+    position = el.position()
 
-  hasUsers: ( ->
-    @get('users.length')
-  ).property('users', 'users.length')
+    dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
 
-  autoCompleteList: Ember.TextField.extend
+    dropdown.css
+      position: "absolute",
+      left: position.left  + "px"
+      top: position.top + el.height() + 7 + "px"
+
+    dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
+
+    event.stopPropagation()
+
+  didInsertElement: ->
+    @get('controller').addSelection @get('controller.currentUser') if @get('controller.isNew')
+
+  autocomplete: Ember.TextField.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
     didInsertElement: ->
-      preFill = if @get('controller.isNew')
-                  [@mapSearchResult(@get('currentUser'))]
-                else
-                  @get('controller.source').map( (item) =>
-                    @mapSearchResult(item)).toArray()
-
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         selectedItemProp: "name"
                         searchObjProps: "name"
-                        preFill: preFill
                         formatList: @formatList.bind(this)
                         getAvatar: @getAvatar.bind(this)
-                        selectionClick: @selectionClick.bind(this)
                         selectionAdded: @selectionAdded.bind(this)
-                        selectionRemoved: @selectionRemoved.bind(this)
                         resultsHighlight: true
                         canGenerateNewSelections: true
+                        retrieveLimit: 5
 
-    selectionRemoved: (el) ->
-      @get('controller').removeUserFromMeeting el.data('object')
-      el.remove()
+    selectionAdded: (item) ->
+      # FIXME create new contact while meeting is being saved
+      if typeof item == "string"
+        item = Ember.Object.create
+                  email: item
 
-    selectionAdded: (el) ->
-      if @get('controller.isEditable') && !el.hasClass('is-editable')
-        el.addClass('is-editable')
-
-      unless @get('controller.isNew')
-        $('.as-close', el).hide()
-
-      attendee = el.data('object')
-
-      # FIXME: Create new contact from unknown email address
-      @get('controller').addSelection attendee if attendee
-
-    selectionClick: (el) ->
-      return false unless @get('controller.isEditable')
-
-      position = el.position()
-
-      dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
-
-      dropdown.css
-        position: "absolute",
-        left: position.left  + "px"
-        top: position.top + el.height() + 7 + "px"
-
-      dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
-
-      event.stopPropagation()
+      @get('controller').addSelection item
 
     formatList: (data, elem) ->
       email= data.data.get('email')
@@ -110,8 +105,10 @@ Radium.AutocompleteView = Ember.View.extend
 
       return unless people.get('length')
 
-      results = people.map (item) =>
-                    @mapSearchResult.call this, item
+      results = people.filter( (item) =>
+                        @get('controller.source').indexOf(item) == -1
+                     ).map (item) =>
+                        @mapSearchResult.call this, item
 
       callback(results, query)
 

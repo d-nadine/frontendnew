@@ -1,4 +1,4 @@
-Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
+Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')
@@ -13,15 +13,17 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
 
   showComments: (->
     return false if @get('justAdded')
-    @get 'hasComments'
-  ).property('justAdded', 'comments.length')
+    return false if @get('isNew')
+    true
+  ).property('isNew', 'justAdded')
 
   showSuccess: Ember.computed.alias('justAdded')
 
   isEditable: (->
     return false if @get('justAdded')
+    return true if @get('isNew')
     @get('content.isEditable') != false
-  ).property('content.isEditable')
+  ).property('model', 'content.isEditable')
 
   isExpandable: (->
     return false if @get('justAdded')
@@ -35,7 +37,7 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
   isDisabled: (->
     return true if @get('justAdded')
     @get('content.isEditable') is false
-  ).property('isEditable')
+  ).property('model', 'isEditable')
 
   toggleExpanded: ->
     @toggleProperty 'isExpanded'

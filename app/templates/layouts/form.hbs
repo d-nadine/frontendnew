@@ -1,0 +1,9 @@
+{{yield}}
+{{#if showComments}}
+  {{#if isExpanded}}
+  <div class="block block-arrow">
+    {{control 'comments' model}}
+  </div>
+  {{/if}}
+{{/if}}
+
