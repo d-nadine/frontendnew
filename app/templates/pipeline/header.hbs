@@ -1,0 +1,51 @@
+<div id="header" class="page-header">
+  <div id="title">
+    <h1>{{title}}</h1>
+  </div>
+  <div id="controls">
+    <div class="combobox field control-box">
+      <div class="btn-group">
+        <a class="btn btn-link" href="#">
+          <i class="icon-search"></i>
+        </a>
+        <input type="text"/>
+      </div>
+    </div>
+    <div class="combobox field control-box date-filter">
+      <div {{bindAttr class="dateFilterOpen:open"}}  {{action openMenu "dateFilter"}}>
+        <span class="muted">Filter by date</span>
+        <button class="btn dropdown-toggle">
+          <i class="icon-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li>Date Range 1</li>
+          <li>Date Range 2</li>
+        </ul>
+      </div>
+    </div>
+    <div class="combobox field control-box actions">
+      <div {{bindAttr class="actionsOpen:open"}}  {{action openMenu "actions"}}>
+        <span class="muted">Actions</span>
+        <button class="btn dropdown-toggle">
+          <i class="icon-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li>Assign</li>
+          <li>Todo</li>
+          <li>Call</li>
+          <li>Email</li>
+          <li>Change Status</li>
+          <li>Delete</li>
+        </ul>
+      </div>
+    </div>
+    <div class="combobox field control-box add-lead">
+      <div>
+        <button class="btn dropdown-toggle">
+          <i class="icon-plus"></i>
+        </button>
+        <span class="muted">Lead</span>
+      </div>
+    </div>
+  </div>
+</div>

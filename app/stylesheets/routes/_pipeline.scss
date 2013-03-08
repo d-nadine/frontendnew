@@ -40,6 +40,27 @@
   }
 }
 
+#header{
+  #title, #controls{
+    display: inline-block;
+  }
+
+  #controls{
+    float: right;
+    margin-top: 20px;
+
+    .date-filter, .actions, .add-lead{
+      padding: 0 10px 0 10px;
+    }
+    .actions{
+      padding: 0 20px 0 20px;
+    }
+    .add-lead{
+      padding-right: 40px;
+    }
+  }
+}
+
 #pipeline-results {
   .todo-form{
     width: 72%;

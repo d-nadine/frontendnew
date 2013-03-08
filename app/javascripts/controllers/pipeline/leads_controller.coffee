@@ -1,1 +1,2 @@
-Radium.PipelineLeadsController = Radium.PipelineBaseController.extend()
+Radium.PipelineLeadsController = Radium.PipelineBaseController.extend
+  title: 'Leads'

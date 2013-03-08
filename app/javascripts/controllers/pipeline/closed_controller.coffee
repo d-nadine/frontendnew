@@ -1,3 +1,4 @@
 require 'controllers/pipeline/deals_controller'
 
-Radium.PipelineClosedController = Radium.PipelineDealsController.extend()
+Radium.PipelineClosedController = Radium.PipelineDealsController.extend
+  title: 'Closed'

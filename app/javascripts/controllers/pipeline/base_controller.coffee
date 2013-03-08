@@ -1,5 +1,9 @@
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   perPage: 7
+
+  openMenu: (menu) ->
+    alert menu
+
   deleteAll: ->
     # FIXME: ember-data errors, fake for now
     # @get('checkedContent').forEach (pipelineItem) ->
