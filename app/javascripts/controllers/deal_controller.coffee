@@ -9,8 +9,6 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   now: Ember.computed.alias('clock.now')
 
   formBox: (->
-    @set('callForm.canChangeContact', false) if @get('callForm')
-
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
@@ -25,10 +23,9 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-    isNew: true
   ).property('model', 'tomorrow')
 
-  callForm: Radium.computed.newForm('call')
+  callForm: Radium.computed.newForm('call', canChangeContact: true)
 
   callFormDefaults: (->
     description: null
@@ -48,7 +45,6 @@ Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
 
   meetingFormDefaults: ( ->
     topic: null
-    isNew: true
     location: ""
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])

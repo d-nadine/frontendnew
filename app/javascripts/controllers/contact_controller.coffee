@@ -7,8 +7,6 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
   now: Ember.computed.alias('clock.now')
 
   formBox: (->
-    @set('callForm.canChangeContact', false) if @get('callForm')
-
     Radium.FormBox.create
       todoForm: @get('todoForm')
       callForm: @get('callForm')
@@ -24,7 +22,7 @@ Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin
     user: @get('currentUser')
   ).property('model', 'tomorrow')
 
-  callForm: Radium.computed.newForm('call')
+  callForm: Radium.computed.newForm('call', canChangeContact: true)
 
   callFormDefaults: (->
     reference: @get('model')

@@ -27,7 +27,6 @@ Radium.TaskListItemController = Ember.ObjectController.extend
 
   todoFormDefaults: (->
     description: null
-    isEditable: true
     content: @get('model')
   ).property('model')
 
@@ -35,7 +34,6 @@ Radium.TaskListItemController = Ember.ObjectController.extend
 
   callFormDefaults: (->
     description: null
-    isEditable: true
     content: @get('model')
   ).property('model')
 
@@ -44,7 +42,6 @@ Radium.TaskListItemController = Ember.ObjectController.extend
   meetingFormDefaults: ( ->
     topic: null
     location: ""
-    isEditable: true
     content: @get('model')
   ).property('model')
 

@@ -1,7 +1,5 @@
 require 'forms/form'
 Radium.TodoForm = Radium.Form.extend
-  isEditable: true
-
   data: ( ->
     user: @get('user')
     finishBy: @get('finishBy')

@@ -1,4 +1,5 @@
 require 'forms/form'
+
 Radium.MeetingForm = Radium.Form.extend
   data: ( ->
     topic: @get('topic')
