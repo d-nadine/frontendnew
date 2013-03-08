@@ -22,7 +22,6 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   editableMeeting: ( ->
     meeting = Radium.MeetingForm.create
       content: Radium.Meeting.find(1)
-      isEditable: true
 
     meeting
   ).property()
@@ -37,7 +36,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: 3)
         endsAt: Ember.DateTime.create().advance(day: 3).advance(hour: 3)
-      isEditable: false
+        isEditable: false
   ).property()
 
   editablePassedMeeting: ( ->
@@ -49,9 +48,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: -7)
         endsAt: Ember.DateTime.create().advance(day: -7).advance(hour: 3)
-
-      isEditable: true
-
+        isEditable: true
   ).property()
 
   uneditablePassedMeeting: ( ->
@@ -63,8 +60,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: -7)
         endsAt: Ember.DateTime.create().advance(day: -7).advance(hour: 3)
-
-      isEditable: false
+        isEditable: false
   ).property()
 
   justAddedMeeting: ( ->
@@ -76,8 +72,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
         location: 'Apple Inc.'
         startsAt: Ember.DateTime.create().advance(day: 17)
         endsAt: Ember.DateTime.create().advance(day: 17).advance(hour: 3)
-
-      isEditable: false
+        isEditable: false
       justAdded: true
   ).property()
 
@@ -86,7 +81,7 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
       content: Factory.createObject 'todo'
         user: @get('currentUser')
         reference: Factory.createObject('contact')
-      isEditable: false
+        isEditable: false
   ).property()
 
   newTodo: Radium.computed.newForm('todo')
@@ -110,15 +105,15 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   uneditableTodo: (->
     Radium.TodoForm.create
-      isEditable: false
       content: Factory.createObject 'todo'
+        isEditable: false
   ).property()
 
   uneditableFinishedTodo: (->
     Radium.TodoForm.create
-      isEditable: false
       content: Factory.createObject 'todo'
         isFinished: true
+        isEditable: false
   ).property()
 
   justAddedTodo: (->
@@ -136,28 +131,28 @@ Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
 
   editableCall: (->
     Radium.CallForm.create
-      isEditable: true
       content: Factory.createObject 'call'
+        isEditable: true
   ).property()
 
   editableFinishedCall: (->
     Radium.CallForm.create
-      isEditable: true
       content: Factory.createObject 'call'
         isFinished: true
+        isEditable: true
   ).property()
 
   uneditableCall: (->
     Radium.CallForm.create
-      isEditable: false
       content: Factory.createObject 'call'
+        isEditable: false
   ).property()
 
   uneditableFinishedCall: (->
     Radium.CallForm.create
-      isEditable: false
       content: Factory.createObject 'call'
         finished: false
+        isEditable: false
   ).property()
 
   justAddedCall: (->

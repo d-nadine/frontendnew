@@ -21,6 +21,7 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.
 
   isEditable: (->
     return false if @get('justAdded')
+    return true if @get('isNew')
     @get('content.isEditable') != false
   ).property('model', 'content.isEditable')
 

@@ -1,5 +1,4 @@
 Radium.Form = Ember.ObjectProxy.extend
-  isEditable: true
   defaults: {}
 
   init: ->

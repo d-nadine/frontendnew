@@ -50,6 +50,7 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
   isEditable: (->
     return false if @get('isSubmitted')
     return false if @get('justAdded')
+    return true if @get('isNew')
     @get('content.isEditable') == true
   ).property('content.isEditable')
 
