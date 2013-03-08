@@ -43,5 +43,3 @@ Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
 
       @trigger 'formReset'
     ), 1500)
-
-
