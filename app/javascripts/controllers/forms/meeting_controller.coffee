@@ -67,8 +67,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      return unless @get('isNew')
-
       @get('model').reset()
       @trigger 'formReset'
     ), 1500)
