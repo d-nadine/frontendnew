@@ -16,12 +16,9 @@ Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControlle
 
     @get('model').commit()
 
-    @set 'showOptions', false
-
     Ember.run.later( ( =>
       @set 'justAdded', false
       @set 'isSubmitted', false
-      @set 'showOptions', true
 
       if @get('isNew') || @get('isBulk')
         @trigger('formReset')
