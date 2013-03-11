@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="combobox field control-box date-filter">
-      <div {{bindAttr class="dateFilterOpen:open"}}  {{action openMenu "dateFilter"}}>
+      <div {{bindAttr class="dateFilterOpen:open"}}  {{action toggleDateFilter}}>
         <span class="muted">Filter by date</span>
         <button class="btn dropdown-toggle">
           <i class="icon-chevron-down"></i>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="combobox field control-box actions">
-      <div {{bindAttr class="actionsOpen:open"}}  {{action openMenu "actions"}}>
+      <div {{bindAttr class="actionsOpen:open"}}  {{action toggleActions}}>
         <span class="muted">Actions</span>
         <button class="btn dropdown-toggle">
           <i class="icon-chevron-down"></i>
