@@ -15,5 +15,5 @@ Radium.PipelineViewBase = Ember.View.extend
     if length == 1
       "#{prefix} THIS LEAD."
     else
-      "#{prefix} #{@get('controller.checkedContent.length')} SELECTED LEADS."
+      "#{prefix} THESE SELECTED #{@get('controller.checkedContent.length')} LEADS."
   ).property('controller.activeForm', 'controller.checkedContent.length')
