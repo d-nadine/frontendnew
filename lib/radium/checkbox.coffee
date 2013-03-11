@@ -1,4 +1,6 @@
 Radium.Checkbox = Ember.View.extend
+  classNameBindings: ['checked:checked:unchecked', ':checker']
+
   click: (event) ->
     event.stopPropagation()
 
@@ -9,8 +11,6 @@ Radium.Checkbox = Ember.View.extend
   _updateElementValue: ->
     @set 'checked', this.$('input').prop('checked')
 
-  classNames: ['checker']
-  tabindex: 4
   checkBoxId: (->
     "checker-#{@get('elementId')}"
   ).property()

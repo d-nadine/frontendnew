@@ -1,3 +1,4 @@
+// this is an inline checker (useful in forms)
 .checker {
   position: relative;
   display: inline-block;
@@ -24,5 +25,64 @@
 
   input {
     visibility: hidden;
+  }
+}
+
+// this is a block checker. Useful in lists and/or tables.
+.checker-block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  padding-left: 0;
+
+  input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    float: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  label {
+    margin-bottom: 0px;
+    top: 50%;
+    margin-top: -25%;
+  }
+
+  &.checked {
+    background-color: $dark-selected-item;
+
+    label {
+      @include icons-sprite(todo-white);
+    }
+
+    &:after {
+      position: absolute;
+      content: ' ';
+      top: 50%;
+      margin-top: -25%;
+      left: 100%;
+      width: 0; 
+      height: 0; 
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid $dark-selected-item;
+    }
+  }
+
+  &.unchecked {
+    label {
+      @include icons-sprite(todo-muted);
+
+      &:hover {
+        @include icons-sprite(todo-black);
+      }
+    }
   }
 }
