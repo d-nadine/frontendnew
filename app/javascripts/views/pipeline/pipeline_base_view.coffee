@@ -1,4 +1,4 @@
-Radium.PipelineLeadsView = Ember.View.extend
+Radium.PipelineViewBase = Ember.View.extend
   bulkLeader: ( ->
     form = @get('controller.activeForm')
     return unless form
