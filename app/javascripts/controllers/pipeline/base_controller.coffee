@@ -1,12 +1,6 @@
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   perPage: 7
 
-  toggleDateFilter: ->
-    @toggleProperty 'dateFilterOpen', true
-
-  toggleActions: ->
-    @toggleProperty 'actionsOpen', true
-
   deleteAll: ->
     # FIXME: ember-data errors, fake for now
     # @get('checkedContent').forEach (pipelineItem) ->
