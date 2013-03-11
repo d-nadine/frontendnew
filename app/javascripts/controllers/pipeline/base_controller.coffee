@@ -13,6 +13,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
       item.set('user', @get('assignToUser'))
 
     @get('store').commit()
+    @set('showAssignTodo', false)
 
   toggleAssignTodo: ->
     @toggleProperty 'showAssignTodo'
