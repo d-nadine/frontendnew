@@ -1,4 +1,12 @@
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
+  needs: ['users']
+  users: Ember.computed.alias 'controllers.users'
+
+  showAssignTodo: false
+
+  toggleAssignTodo: ->
+    @toggleProperty 'showAssignTodo'
+
   perPage: 7
   activeForm: null
 

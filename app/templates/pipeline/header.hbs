@@ -67,9 +67,16 @@
   {{#if showAssignForm}}
     <div class="assign">
       {{view Radium.Combobox classNames="field" sourceBinding="users"}}
-      <div class="assign-todo">
-        {{control "forms/todo" assignTodoForm}}
-      </div>
+      {{#unless showAssignTodo }}
+        <a href="#" {{action toggleAssignTodo}} class="btn btn-primary">
+          <i class="icon-plus icon-white"></i>
+          Related Todo?
+        </a>
+      {{else}}
+        <div class="assign-todo">
+          {{control "forms/todo" assignTodoForm}}
+        </div>
+      {{/unless}}
       <div class="reassign">
         <a href="#" class="btn btn-medium btn-success">
           <i class="icon-plus icon-white"></i>
