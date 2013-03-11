@@ -18,30 +18,36 @@
       </button>
     </div>
     <div class="field control-box actions">
-      <span class="muted">Actions</span>
+      <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
       <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-chevron-down"></i>
+        {{#if hasCheckedContent}}
+          <i class="icon-chevron-down"></i>
+        {{else}}
+          <i class="icon-chevron-up"></i>
+        {{/if}}
       </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a href="#">Assign</a>
-        </li>
-        <li>
-          <a href="#">Todo</a>
-        </li>
-        <li>
-          <a href="#">Call</a>
-        </li>
-        <li>
-          <a href="#">Email</a>
-        </li>
-        <li>
-          <a href="#">Change Status</a>
-        </li>
-        <li>
-          <a href="#">Delete</a>
-        </li>
-      </ul>
+      {{#if hasCheckedContent}}
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#">Assign</a>
+          </li>
+          <li>
+            <a href="#">Todo</a>
+          </li>
+          <li>
+            <a href="#">Call</a>
+          </li>
+          <li>
+            <a href="#">Email</a>
+          </li>
+          <li>
+            <a href="#">Change Status</a>
+          </li>
+          <li>
+            <a href="#">Delete</a>
+          </li>
+        </ul>
+      {{/if}}
     </div>
     <div class="add-lead">
       <a href="#" class="btn btn-medium btn-info">
