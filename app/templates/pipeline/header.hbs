@@ -32,10 +32,10 @@
             <a href="#">Assign</a>
           </li>
           <li>
-            <a href="#">Todo</a>
+            <a href="#" {{action showForm 'todo'}}>Todo</a>
           </li>
           <li>
-            <a href="#">Call</a>
+            <a href="#" {{action showForm 'call'}}>Call</a>
           </li>
           <li>
             <a href="#">Email</a>
@@ -57,3 +57,14 @@
     </div>
   </div>
 </div>
+{{#if hasActiveForm}}
+<div class="block block-connected block-arrow block-blue">
+  {{#if showTodoForm}}
+    {{control "forms/todo" todoForm}}
+  {{/if}}
+
+  {{#if showCallForm}}
+    {{control "forms/call" callForm}}
+  {{/if}}
+</div>
+{{/if}}

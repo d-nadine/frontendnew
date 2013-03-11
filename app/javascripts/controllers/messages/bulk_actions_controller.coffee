@@ -16,7 +16,6 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
 
   todoFormDefaults: (->
     description: null
-    reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('model')

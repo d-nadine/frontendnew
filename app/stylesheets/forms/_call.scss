@@ -21,6 +21,9 @@
       }
     }
   }
+  .success-message {
+    margin-right: 10px;
+  }
 
   &.is-expandable:not(.is-editable) .todo textarea,
   &.is-expandable:not(.is-expanded) .todo textarea,
