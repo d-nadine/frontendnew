@@ -6,4 +6,3 @@ Factory.define 'discussion', traits: 'timestamps',
   attachments: -> [
     Factory.create 'attachment'
   ]
-

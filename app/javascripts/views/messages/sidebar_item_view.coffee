@@ -1,7 +1,16 @@
 Radium.MessagesSidebarItemView = Em.View.extend
   tagName: 'li'
   layoutName: 'messages/sidebar_item'
-  classNameBindings: ['controller.isSelected', 'controller.isChecked', 'controller.isRead']
+  classNameBindings: [
+    'itemClass'
+    'controller.isSelected'
+    'controller.isChecked'
+    'controller.hasTasks'
+  ]
+
+  itemClass: (->
+    "#{@templateMap[@get('content.content.constructor')]}-item"
+  ).property()
 
   templateMap:
     'Radium.Email': 'email'
@@ -12,7 +21,6 @@ Radium.MessagesSidebarItemView = Em.View.extend
     "messages/#{part}_sidebar_item"
   ).property('content')
 
-  checkMailItem: Em.Checkbox.extend
+  checker: Radium.Checkbox.extend
+    classNames: ['checker-block']
     checkedBinding: 'controller.isChecked'
-    click: (e) ->
-      e.stopPropagation()

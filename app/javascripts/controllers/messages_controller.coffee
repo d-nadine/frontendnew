@@ -37,3 +37,7 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     @removeObjects(selected)
 
     Radium.Utils.notify "#{count} emails deleted."
+
+  canSelectItems: (->
+    @get('checkedContent.length') == 0
+  ).property('checkedContent.length')

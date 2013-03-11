@@ -1,87 +1,64 @@
-@import "routes/messages/sidebar";
+.messages-sidebar-view {
+  .checker {
+    border-right: solid 2px $dark-background;
+  }
 
-div.selection{
-  div.alert{
-    margin-bottom: 5px;
-    > div{
-      display: table-cell;
+  .is-selected .content,
+  .content:hover {
+    .delete { 
+      display: inline;
     }
-    div:nth-child(6){
-      width: 150px;
-      text-align: right;
-    }
-  }
-  div.alert:last-child{
-    margin-bottom: 18px;
-  }
-}
 
-.email {
-  .avatar {
-    float: left;
-    margin-right: 15px;
-  }
-}
-
-.attachments {
-  margin: 15px 0;
-}
-
-.email-actions {
-  table{
-    td:nth-child(1){
-      width: 35px !IMPORTANT;
+    .icon-tag {
+      display: inline;
     }
   }
-}
 
-.email-actions div.comments .comments div.span5{
-  position: relative;
-  left: -98px;
-  top: -10px;
-}
-
-.action-group{
-  .btn:first-child{
-    border: 1px solid red;
-  }
-}
-
-#email-panel {
-  padding-bottom: 40px;
-}
-
-.discussion{
-  .with{
-    margin-bottom: 10px;
-  }
-  .btn-group.pull-right{
-    display: relative;
-    top: -30px;
-  }
-}
-
-.reply {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.table-list {
-  color: black;
-  border-collapse: separate;
-  border-spacing: 0 10px;
-
-  td {
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    background-color: $secondary-selection;
+  .has-tasks .content:after {
+    position: absolute;
+    content: ' ';
+    left: -33px;
+    height: 0;
+    width: 0;
+    bottom: -30px;
+    border: solid 20px transparent;
+    border-top-color: $associated-blue;
+    @include rotate(45deg);
   }
 
-  tr td:first-child {
-    border-left: solid 1px #ddd
+  .content {
+    margin-left: 40px;
+    position: relative;
   }
 
-  tr td:last-child {
-    border-right: solid 1px #ddd
+  .content.is-selectable:hover {
+    cursor: pointer;
+  }
+
+  .icon-tag {
+    display: none;
+  }
+
+  .delete {
+    display: none;
+  }
+
+  .footer {
+    overflow: auto;
+  }
+
+  .discussion-item {
+    [class^="icons-discussion"] {
+      float: left;
+    }
+
+    .text-container {
+      margin-left: 40px;
+      margin-right: 15px;
+    }
+
+    .user-list {
+      margin-bottom: 10px;
+    }
   }
 }

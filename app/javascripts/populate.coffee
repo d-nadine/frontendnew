@@ -53,6 +53,10 @@ class Populator
       startsAt: Ember.DateTime.create().advance(day: 7)
       endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
+    for i in [0..5]
+      Factory.create 'discussion'
+        users: [userDictionary.random(), userDictionary.random()]
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
