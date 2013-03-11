@@ -2,7 +2,17 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   needs: ['users']
   users: Ember.computed.alias 'controllers.users'
 
+  init: ->
+    @_super.apply this, arguments
+    @set 'assignToUser', @get('currentUser')
+
   showAssignTodo: false
+
+  reassign: ->
+    @get('checkedContent').forEach (item) =>
+      item.set('user', @get('assignToUser'))
+
+    @get('store').commit()
 
   toggleAssignTodo: ->
     @toggleProperty 'showAssignTodo'

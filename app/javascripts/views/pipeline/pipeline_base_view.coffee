@@ -1,4 +1,8 @@
 Radium.PipelineViewBase = Ember.View.extend
+  userPicker: Radium.UserPicker.extend
+    disabledBinding: 'controller.isDisabled'
+    valueBinding: 'controller.assignToUser'
+
   bulkLeader: ( ->
     form = @get('controller.activeForm')
     return unless form
@@ -13,7 +17,7 @@ Radium.PipelineViewBase = Ember.View.extend
         else
           throw new Error("Unknown #{form} for bulkLeader")
 
-    result = 
+    result =
       if length == 1
         "#{prefix} THIS LEAD"
       else
