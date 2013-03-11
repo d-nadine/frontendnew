@@ -1,4 +1,4 @@
-Radium.MessagesSidebarItemView = Em.View.extend Radium.ContentIdentificationMixin,
+Radium.MessagesSidebarItemView = Em.View.extend
   tagName: 'li'
   layoutName: 'messages/sidebar_item'
   classNameBindings: ['controller.isSelected', 'controller.isChecked', 'controller.isRead']
