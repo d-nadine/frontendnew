@@ -57,8 +57,9 @@
     </div>
   </div>
 </div>
-{{#if hasActiveForm}}
+{{#if showFormArea}}
 <div class="block block-connected block-arrow block-blue">
+  <div>{{view.bulkLeader}}</div>
   {{#if showTodoForm}}
     {{control "forms/todo" todoForm}}
   {{/if}}

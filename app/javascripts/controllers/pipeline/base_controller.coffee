@@ -12,6 +12,10 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
 
   todoForm: Radium.computed.newForm('todo')
 
+  showFormArea: ( ->
+    @get('hasCheckedContent') && @get('hasActiveForm')
+  ).property('hasCheckedContent', 'hasActiveForm')
+
   todoFormDefaults: (->
     description: null
     finishBy: @get('tomorrow')
