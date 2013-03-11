@@ -4,6 +4,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
 
   showTodoForm: Radium.computed.equal('activeForm', 'todo')
   showCallForm: Radium.computed.equal('activeForm', 'call')
+  showAssignForm: Radium.computed.equal('activeForm', 'assign')
 
   hasActiveForm: Radium.computed.isPresent('activeForm')
 
@@ -11,6 +12,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     @set 'activeForm', form
 
   todoForm: Radium.computed.newForm('todo')
+  assignTodoForm: Radium.computed.newForm('todo')
 
   showFormArea: ( ->
     @get('hasCheckedContent') && @get('hasActiveForm')

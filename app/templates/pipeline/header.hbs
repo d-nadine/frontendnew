@@ -13,23 +13,27 @@
     </div>
     <div class="field control-box date-filter">
       <span class="muted">Filter by date</span>
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-chevron-down"></i>
-      </button>
+      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-chevron-down"></i>
+        </button>
+      </div>
     </div>
     <div class="field control-box actions">
       <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
-        {{#if hasCheckedContent}}
-          <i class="icon-chevron-down"></i>
-        {{else}}
-          <i class="icon-chevron-up"></i>
-        {{/if}}
-      </button>
+      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
+        <button class="btn">
+          {{#if hasCheckedContent}}
+            <i class="icon-chevron-down"></i>
+          {{else}}
+            <i class="icon-chevron-up"></i>
+          {{/if}}
+        </button>
+      </div>
       {{#if hasCheckedContent}}
         <ul class="dropdown-menu">
           <li>
-            <a href="#">Assign</a>
+            <a href="#" {{action showForm 'assign'}}>Assign</a>
           </li>
           <li>
             <a href="#" {{action showForm 'todo'}}>Todo</a>
@@ -60,6 +64,20 @@
 {{#if showFormArea}}
 <div class="block block-connected block-arrow block-blue">
   <div class="bulk-leader">{{view.bulkLeader}}</div>
+  {{#if showAssignForm}}
+    <div class="assign">
+      {{view Radium.Combobox classNames="field" sourceBinding="users"}}
+      <div class="assign-todo">
+        {{control "forms/todo" assignTodoForm}}
+      </div>
+      <div class="reassign">
+        <a href="#" class="btn btn-medium btn-success">
+          <i class="icon-plus icon-white"></i>
+          Reassign
+        </a>
+      </div>
+    </div>
+  {{/if}}
   {{#if showTodoForm}}
     {{control "forms/todo" todoForm}}
   {{/if}}

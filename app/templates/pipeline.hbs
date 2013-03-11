@@ -1,4 +1,4 @@
-<div class="block">
+<div id="widget-block" class="block">
   <ul class="breadcrumb" id="pipeline-widget">
     <li class="leads">
       {{#linkTo pipeline.leads}}Leads{{/linkTo}} {{badge leads.length style="info"}}
@@ -13,7 +13,7 @@
     <li class="closed">
       {{#linkTo pipeline.closed}}Closed{{/linkTo}} {{badge closed.length style="success"}}
     </li>
-    <li class="lost pull-right">
+    <li class="lost">
       {{#linkTo pipeline.lost}}Lost{{/linkTo}} {{badge lost.length style="important"}}
     </li>
   </ul>
