@@ -17,7 +17,8 @@ Radium.PipelineViewBase = Ember.View.extend
     @$('.action-forms form').each  ->
       @reset()
 
-    @get('assignTodo').reset()
+    @get('assignTodo').reset() if @get('assignTodo')
+    @get('statusTodo').reset() if @get('statusTodo')
 
   statusPicker: Ember.Select.extend
     contentBinding: 'controller.statuses'
@@ -28,7 +29,7 @@ Radium.PipelineViewBase = Ember.View.extend
     placeholder: "Add related todo?"
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend
-    valueBinding: 'controller.changeStatusTodo'
+    valueBinding: 'controller.statusTodo'
     placeholder: "Add related todo?"
 
   bulkLeader: ( ->

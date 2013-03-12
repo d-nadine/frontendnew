@@ -1,3 +1,4 @@
+require 'forms/change_status'
 require 'forms/reassign_form'
 
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
@@ -6,27 +7,8 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   reassignTodo: null
   changedStatus: null
-  changeStatusTodo: null
+  statusTodo: null
   justAdded: false
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'assignToUser', @get('currentUser')
-
-  reassign: ->
-    return unless @get('reassignForm.isValid')
-
-    @set 'justAdded', true
-
-    Ember.run.later(( =>
-      @set 'justAdded', false
-
-      @get('reassignForm').commit()
-      @get('reassignForm').reset()
-
-      @trigger 'formReset'
-    ), 1200)
-
 
   perPage: 7
   activeForm: null
@@ -38,8 +20,45 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
 
   hasActiveForm: Radium.computed.isPresent('activeForm')
 
+  init: ->
+    @_super.apply this, arguments
+    @set 'assignToUser', @get('currentUser')
+
+  changeStatus: ->
+    @set 'changeStatusForm.statusTodo', @get('statusTodo')
+    @submit @get('changeStatusForm')
+
+  reassign: ->
+    @submit @get('reassignForm')
+
+  submit: (form) ->
+    return unless form.get('isValid')
+
+    @set 'justAdded', true
+
+    Ember.run.later(( =>
+      @set 'justAdded', false
+
+      form.commit()
+      form.reset()
+
+      @trigger 'formReset'
+    ), 1200)
+
   showForm: (form) ->
     @set 'activeForm', form
+
+  changeStatusForm: Radium.computed.newForm('changeStatus')
+
+  changeStatusFormDefaults: ( ->
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    deals: @get('checkedContent')
+    finishBy: @get('tomorrow')
+    status: @get('changedStatus')
+    statusTodo: @get('statusTodo')
+  ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status')
+
 
   reassignForm: Radium.computed.newForm('reassign')
 
