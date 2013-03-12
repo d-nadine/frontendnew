@@ -7,8 +7,8 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
   showActions: false
   showReply: false
 
-  showActionSection: ->
-    @toggleProperty 'showActions'
+  toggleFormBox: ->
+    @toggleProperty 'showFormBox'
 
   showReplySection: ->
     @toggleProperty 'showReply'

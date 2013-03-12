@@ -140,7 +140,7 @@ $button-bar-width: 40px;
     width: 60px;
     height: 60px;
 
-    .icon-plus {
+    i {
       position: absolute;
       bottom: 5px;
       left: 23px;
@@ -160,6 +160,10 @@ $button-bar-width: 40px;
       border-bottom-color: $associated-blue;
     }
   }
+}
+
+.block-gray {
+  background-color: $light-background;
 }
 
 .block-connected {
