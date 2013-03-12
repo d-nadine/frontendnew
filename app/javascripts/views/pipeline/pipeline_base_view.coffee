@@ -19,8 +19,16 @@ Radium.PipelineViewBase = Ember.View.extend
 
     @get('assignTodo').reset()
 
+  statusPicker: Ember.Select.extend
+    contentBinding: 'controller.statuses'
+    valueBinding: 'controller.changedStatus'
+
   assignTodoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.reassignTodo'
+    placeholder: "Add related todo?"
+
+  changeStatusTodo: Radium.FormsTodoFieldView.extend
+    valueBinding: 'controller.changeStatusTodo'
     placeholder: "Add related todo?"
 
   bulkLeader: ( ->
@@ -34,6 +42,7 @@ Radium.PipelineViewBase = Ember.View.extend
         when "assign" then "REASSIGN "
         when "todo" then "ADD A TODO ABOUT  "
         when "call" then "CREATE AND ASSIGN A CALL FROM  "
+        when "status" then "CHANGE STATUS ON "
         else
           throw new Error("Unknown #{form} for bulkLeader")
 

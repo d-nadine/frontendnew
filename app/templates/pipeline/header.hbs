@@ -45,7 +45,7 @@
             <a href="#">Email</a>
           </li>
           <li>
-            <a href="#">Change Status</a>
+            <a href="#" {{action showForm 'status'}}>Change Status</a>
           </li>
           <li>
             <a href="#">Delete</a>
@@ -73,11 +73,29 @@
             <label></label>
           </div>
         </div>
-          {{view view.assignTodoField viewName="assignTodo"}}
+        {{view view.assignTodoField viewName="assignTodo"}}
         <div class="reassign pull-right">
           <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action reassign}}>
             <i class="icon-plus icon-white"></i>
             Reassign
+          </a>
+        </div>
+      </div>
+    </form>
+  {{/if}}
+  {{#if showChangeStatusForm}}
+    <form>
+      <div class="change-status">
+        {{view view.statusPicker}}
+        <div class="control-box todo-label">
+          <div class="pull-left">
+            <label></label>
+          </div>
+        </div>
+        {{view view.changeStatusTodo viewName="changeStatusTodo"}}
+        <div class="reassign pull-right">
+          <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action reassign}}>
+            OK
           </a>
         </div>
       </div>

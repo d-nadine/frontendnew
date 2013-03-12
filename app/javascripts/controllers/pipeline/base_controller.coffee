@@ -3,7 +3,10 @@ require 'forms/reassign_form'
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   needs: ['users']
   users: Ember.computed.alias 'controllers.users'
+  statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   reassignTodo: null
+  changedStatus: null
+  changeStatusTodo: null
   justAdded: false
 
   init: ->
@@ -17,7 +20,6 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
 
     Ember.run.later(( =>
       @set 'justAdded', false
-      @set 'activeForm', null
 
       @get('reassignForm').commit()
       @get('reassignForm').reset()
@@ -32,6 +34,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   showTodoForm: Radium.computed.equal('activeForm', 'todo')
   showCallForm: Radium.computed.equal('activeForm', 'call')
   showAssignForm: Radium.computed.equal('activeForm', 'assign')
+  showChangeStatusForm: Radium.computed.equal('activeForm', 'status')
 
   hasActiveForm: Radium.computed.isPresent('activeForm')
 
