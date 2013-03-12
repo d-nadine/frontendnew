@@ -44,6 +44,11 @@
   text-align: center;
 }
 
+.fixme {
+  color: red;
+  font-weight: bold;
+}
+
 // Twitter bootstrap does handle this correctly
 // it uses border size and turns it off. This 
 // may behave weirdly when turning borders/outlines

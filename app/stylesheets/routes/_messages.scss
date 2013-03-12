@@ -63,17 +63,16 @@
   }
 }
 
-.messages-view .email {
-  padding: 50px;
-  padding-bottom: 0px;
+.messages-view .context {
+  display: table;
+  box-sizing: border-box;
+  width: 100%;
 
-  .header {
-    margin-bottom: 30px;
+  .deal-info, .task-info, .sender-info {
+    display: table-cell;
   }
 
   .sender-info {
-    margin-bottom: 30px;
-
     .avatar {
       float: left;
       margin-right: 20px;
@@ -81,13 +80,34 @@
 
     p { 
       color: $dark-text;
-      font-size: 24px;
-      line-height: 40px;
+      font-size: 16px;
+      line-height: 30px;
     }
 
-    .from { 
+    .name { 
       font-weight: bold;
     }
+  }
+
+  h2 {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    margin-bottom: 15px;
+    color: $dark-text;
+  }
+
+  table {
+    width: 100%;
+  }
+}
+
+.messages-view .email {
+  padding: 50px;
+  padding-bottom: 0px;
+
+  .header {
+    margin-bottom: 30px;
   }
 
   hr {

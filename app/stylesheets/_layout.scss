@@ -226,8 +226,11 @@ $button-bar-width: 40px;
   text-transform: uppercase;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 // override bootstrap's align top
 .table .th, .table td {
   vertical-align: middle;
 }
-

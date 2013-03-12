@@ -1,3 +1,49 @@
+<div class="block context">
+  <div class="sender-info">
+    {{avatar sender style="medium" class="img-polaroid"}}
+    <p>
+      <span class="name">{{sender.name}}</span></br>
+      <span class="title">{{sender.title}}</span>
+    </p>
+  </div>
+
+  <div class="deal-info">
+    <h2 class="upcase">Status</h2>
+
+    <table>
+      <tbody>
+        {{#if activeDeal}}
+          <tr>
+            <td>
+              <strong>
+                {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
+              </strong>
+            </td>
+            <td class="capitalize">{{activeDeal.status}}</td>
+            <td class="text-success">{{currency activeDeal.value}}</td>
+          </tr>
+        {{else}}
+          <tr colspan="3">
+            <td class="muted">No deals yet</td>
+          </tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-info">
+    <h2 class="upcase">Next Task</h2>
+
+    <table>
+      <tbody>
+        <tr colspan="3">
+          <td class="muted upcase fixme">unimplemented</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {{#each visibleContent itemController="emailItem"}}
   {{template "messages/email_item"}}
 {{/each}}
