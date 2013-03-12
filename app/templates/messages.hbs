@@ -12,4 +12,10 @@
   {{#if showEmails}}
     {{render 'messages/email_panel' history}}
   {{/if}}
+
+  {{#if noSelection}}
+    <div class="block">
+      <p>Nothing selected!</p>
+    </div>
+  {{/if}}
 {{/if}}
