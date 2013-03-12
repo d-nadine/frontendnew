@@ -3,9 +3,13 @@
 {{else}}
   {{#if hasCheckedContent}}
     {{render 'messages/bulk_actions' checkedContent}}
-  {{else}}
-    {{#with selectedContent}}
-      {{renderMailPanel this}}
-    {{/with}}
+  {{/if}}
+
+  {{#if showDiscussion}}
+    {{render 'messages/discussion_panel' selectedContent}}
+  {{/if}}
+
+  {{#if showEmails}}
+    {{render 'messages/email_panel' history}}
   {{/if}}
 {{/if}}

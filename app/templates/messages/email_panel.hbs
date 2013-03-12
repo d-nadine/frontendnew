@@ -1,5 +1,13 @@
 {{#if content}}
-  {{render 'messages/email_history' history}}
+  {{#each visibleContent itemController="emailItem"}}
+    {{template "messages/email_item"}}
+  {{/each}}
+
+  {{#if hiddenContent}}
+    <div id="remaining-emails">
+      {{template "shared/show_more"}}
+    </div>
+  {{/if}}
 {{else}}
   <div class="block">
     <h4>No Email Selected</h4>
