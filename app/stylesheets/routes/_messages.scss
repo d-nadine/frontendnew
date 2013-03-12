@@ -62,3 +62,69 @@
     }
   }
 }
+
+.messages-view .email {
+  padding: 50px;
+  padding-bottom: 0px;
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .sender-info {
+    margin-bottom: 30px;
+
+    .avatar {
+      float: left;
+      margin-right: 20px;
+    }
+
+    p { 
+      color: $dark-text;
+      font-size: 24px;
+      line-height: 40px;
+    }
+
+    .from { 
+      font-weight: bold;
+    }
+  }
+
+  hr {
+    border-top-width: 2px;
+    border-bottom: none;
+    margin: 0px;
+  }
+
+  .subject {
+    border: none;
+    margin: 0px;
+
+    h1 {
+      font-size: 18px;
+
+      small {
+        font-size: 16px;
+      }
+    }
+
+    h1, small {
+      line-height: 26px;
+    }
+  }
+
+  .message {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+  }
+
+  .body-text {
+    margin-bottom: 30px;
+  }
+
+  .email-actions {
+    margin-top: 40px;
+    text-align: right;
+  }
+}
