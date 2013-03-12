@@ -4,15 +4,27 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   needs: ['users']
   users: Ember.computed.alias 'controllers.users'
   reassignTodo: null
+  justAdded: false
 
   init: ->
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
   reassign: ->
-    return unless @get('isValid')
+    return unless @get('reassignForm.isValid')
 
-    @get('reassignForm').commit()
+    @set 'justAdded', true
+
+    Ember.run.later(( =>
+      @set 'justAdded', false
+      @set 'activeForm', null
+
+      @get('reassignForm').commit()
+      @get('reassignForm').reset()
+
+      @trigger 'formReset'
+    ), 1200)
+
 
   perPage: 7
   activeForm: null

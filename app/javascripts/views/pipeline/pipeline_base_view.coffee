@@ -10,6 +10,15 @@ Radium.PipelineViewBase = Ember.View.extend
     change: (event) ->
       @get('controller').toggleChecked()
 
+  didInsertElement: ->
+    @get('controller').on 'formReset', this, 'onFormReset'
+
+  onFormReset: ->
+    @$('.action-forms form').each  ->
+      @reset()
+
+    @get('assignTodo').reset()
+
   assignTodoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.reassignTodo'
     placeholder: "Add related todo?"

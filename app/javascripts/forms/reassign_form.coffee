@@ -9,7 +9,11 @@ Radium.ReassignForm = Radium.Form.extend
 
   isValid: ( ->
     @get('assignToUser')
-  ).property('user')
+  ).property('assignToUser')
+
+  reset: ->
+    @_super.apply this, arguments
+    @set('reassignTodo', null)
 
   commit: ->
     @get('selectedContent').forEach (item) =>
