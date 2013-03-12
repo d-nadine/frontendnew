@@ -121,9 +121,37 @@ $button-bar-width: 40px;
   background-color: $bright;
   margin-bottom: 10px;
   border: solid 1px $selected-item-border;
+  position: relative;
 
   :last-child {
     margin-bottom: 0;
+  }
+
+  .adder {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+
+    .icon-plus {
+      position: absolute;
+      bottom: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      content: ' ';
+      height: 0;
+      width: 0;
+      bottom: 0px;
+      left: -23px;
+      border: solid 30px transparent;
+      border-bottom-color: $associated-blue;
+    }
   }
 }
 
