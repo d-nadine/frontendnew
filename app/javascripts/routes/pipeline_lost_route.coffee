@@ -5,4 +5,3 @@ Radium.PipelineLostRoute = Em.Route.extend
 
   model: ->
     @modelFor('pipeline').get('lost')
-

@@ -59,7 +59,6 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     statusTodo: @get('statusTodo')
   ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status')
 
-
   reassignForm: Radium.computed.newForm('reassign')
 
   reassignFormDefaults: ( ->
@@ -91,6 +90,10 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     user: @get('currentUser')
     reference: @get('model')
   ).property('model.[]', 'tomorrow')
+
+  isLeads: ( ->
+    @get('title') == 'Leads'
+  ).property('title')
 
   deleteAll: ->
     # FIXME: ember-data errors, fake for now

@@ -20,12 +20,9 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
 
     return unless statuses
 
-    content = @get 'content'
-    return unless content
-
-    content.filter (deal) ->
+    Radium.Deal.filter (deal) ->
       statuses.indexOf(deal.get('status')) != -1
-  ).property('content', 'negotiatingStatuses', 'negotiatingStatuses.length')
+  ).property('negotiatingStatuses.[]')
 
   negotiatingGroups: (->
     deals = @get 'negotiatingDeals'
@@ -44,21 +41,15 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
   ).property('negotiatingDeals.length')
 
   closed: (->
-    return unless @get('content')
-
-    @get('content').filter (deal) ->
-      deal.get('status') is 'closed'
-  ).property('content', 'content.length')
+    Radium.Deal.filter (deal) ->
+      deal.get('status') == 'closed'
+  ).property('closed.[]')
 
   lost: (->
-    return unless @get('content')
-
-    @get('content').filter (contact) ->
-      contact.get('status') is 'lost'
-  ).property('content', 'content.length')
+    Radium.Deal.filter (deal) ->
+      deal.get('status') == 'lost'
+  ).property('lost.[]')
 
   leads: (->
     Radium.Contact.filter (contact) -> contact.get('isLead')
   ).property()
-
-

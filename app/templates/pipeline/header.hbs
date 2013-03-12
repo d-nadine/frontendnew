@@ -44,9 +44,11 @@
           <li>
             <a href="#">Email</a>
           </li>
+          {{#unless isLeads}}
           <li>
             <a href="#" {{action showForm 'status'}}>Change Status</a>
           </li>
+          {{/unless}}
           <li>
             <a href="#">Delete</a>
           </li>
