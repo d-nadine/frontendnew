@@ -3,12 +3,15 @@ require 'forms/reassign_form'
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   needs: ['users']
   users: Ember.computed.alias 'controllers.users'
+  reassignTodo: null
 
   init: ->
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
   reassign: ->
+    return unless @get('isValid')
+
     @get('reassignForm').commit()
 
   perPage: 7
@@ -28,7 +31,9 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   reassignFormDefaults: ( ->
     assignToUser: @get('assignToUser')
     selectedContent: @get('checkedContent')
-  ).property('assignToUser', 'checkedContent')
+    reassignTodo: @get('reassignTodo')
+    finishBy: @get('tomorrow')
+  ).property('assignToUser', 'checkedContent', 'reassignTodo', 'tomorrow')
 
   todoForm: Radium.computed.newForm('todo')
 
