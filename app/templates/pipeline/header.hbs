@@ -62,22 +62,18 @@
   </div>
 </div>
 {{#if showFormArea}}
-<div class="block block-connected block-arrow-down block-blue">
+<div class="block block-blue block-arrow-bottom">
   <div class="upcase">{{view.bulkLeader}}</div>
   {{#if showAssignForm}}
     <div class="assign">
-      {{view view.userPicker class="field"}}
-      {{#unless showAssignTodo }}
-        <a href="#" {{action toggleAssignTodo}} class="btn btn-primary">
-          <i class="icon-plus icon-white"></i>
-          Related Todo?
-        </a>
-      {{else}}
-        <div class="assign-todo">
-          {{control "forms/todo" assignTodoForm}}
+      {{view view.userPicker}}
+      <div class="control-box todo-label">
+        <div class="pull-left">
+          <label></label>
         </div>
-      {{/unless}}
-      <div class="reassign">
+      </div>
+        {{view view.assignTodoField}}
+      <div class="reassign pull-right">
         <a href="#" class="btn btn-medium btn-success" {{action reassign}}>
           <i class="icon-plus icon-white"></i>
           Reassign

@@ -10,6 +10,10 @@ Radium.PipelineViewBase = Ember.View.extend
     change: (event) ->
       @get('controller').toggleChecked()
 
+  assignTodoField: Radium.FormsTodoFieldView.extend
+    valueBinding: 'controller.description'
+    placeholder: "Add related todo?"
+
   bulkLeader: ( ->
     form = @get('controller.activeForm')
     return unless form

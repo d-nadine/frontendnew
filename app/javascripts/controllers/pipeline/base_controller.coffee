@@ -15,9 +15,6 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     @get('store').commit()
     @set('showAssignTodo', false)
 
-  toggleAssignTodo: ->
-    @toggleProperty 'showAssignTodo'
-
   perPage: 7
   activeForm: null
 
