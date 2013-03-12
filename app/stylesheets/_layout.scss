@@ -130,12 +130,13 @@ $button-bar-width: 40px;
   .adder {
     position: absolute;
     bottom: 0;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
 
     .icon-plus {
       position: absolute;
       bottom: 5px;
+      left: 23px;
 
       &:hover {
         cursor: pointer;
