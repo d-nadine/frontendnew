@@ -7,21 +7,19 @@
 
   label {
     position: absolute;
-    width: 30px;
-    height: 20px;
     top: 0;
     left: 0;
-    @include icons-sprite(todo-muted);
     cursor: default;
+    color: $light-text;
   }
 
   input:not([disabled]) + label:hover {
     cursor: pointer;
   }
 
-  input:not([disabled]):not(:checked) + label:hover {
-    @include icons-sprite(todo-green);
-  }
+  // input:not([disabled]):not(:checked) + label:hover {
+  //   @include icons-sprite(todo-green);
+  // }
 
   input {
     visibility: hidden;
@@ -53,14 +51,12 @@
     margin-bottom: 0px;
     top: 50%;
     margin-top: -25%;
+    left: 50%;
+    margin-left: -25%;
   }
 
   &.checked {
     background-color: $dark-selected-item;
-
-    label {
-      @include icons-sprite(todo-white);
-    }
 
     &:after {
       position: absolute;
@@ -77,11 +73,17 @@
   }
 
   &.unchecked {
+    label:hover {
+      color: $dark-text;
+    }
+  }
+
+  &.checked {
     label {
-      @include icons-sprite(todo-muted);
+      color: $bright;
 
       &:hover {
-        @include icons-sprite(todo-black);
+        color: $dark-text;
       }
     }
   }

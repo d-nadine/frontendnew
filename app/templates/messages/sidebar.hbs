@@ -1,10 +1,8 @@
 {{#if content}}
   <ul class="selectable">
     <li class="send-email">
-      <a {{action createEmail}} href="#" class="btn btn-large btn-success">
-        <i class="icon-plus icon-white"></i>
-        <i class="icon-envelope icon-white"></i>
-        Send
+      <a {{action createEmail}} href="#" class="btn btn-block btn-success">
+        Send Email
       </a>
     </li>
     {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}

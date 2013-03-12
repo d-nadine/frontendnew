@@ -2,14 +2,14 @@
 
 <div {{bindAttr class="isSelectable :content"}} {{action selectContent content}}>
   {{#if hasAttachments}}
-    <i class="icon-tag pull-right"></i>
+    <i class="icon-attachments pull-right"></i>
   {{/if}}
 
   {{yield}}
 
   <div class="footer">
-    <a {{action deleteItem this target="controllers.messages"}} href="#" class="delete">
-      <i class='icon-trash'></i>
+    <a {{action deleteItem this target="controllers.messages"}} href="#" class="btn-icon delete">
+      <i class='icon-delete'></i>
     </a>
 
     {{time timestamp class="muted upcase pull-right"}}

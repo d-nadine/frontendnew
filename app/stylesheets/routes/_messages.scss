@@ -9,7 +9,7 @@
       display: inline;
     }
 
-    .icon-tag {
+    .icon-attachments {
       display: inline;
     }
   }
@@ -35,7 +35,7 @@
     cursor: pointer;
   }
 
-  .icon-tag {
+  .icon-attachments {
     display: none;
   }
 
@@ -48,7 +48,7 @@
   }
 
   .discussion-item {
-    [class^="icons-discussion"] {
+    [class^="icon-discussion"] {
       float: left;
     }
 

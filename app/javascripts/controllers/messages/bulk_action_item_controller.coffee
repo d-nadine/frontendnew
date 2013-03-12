@@ -1,7 +1,7 @@
 Radium.MessagesBulkActionItemController = Ember.ObjectController.extend
   summary: (->
-    @get('message') || @get('topic')
-  ).property('message')
+    @get('subject') || @get('topic')
+  ).property('subject', 'topic')
 
   person: (->
     @get('sender') || @get('user')
@@ -10,3 +10,7 @@ Radium.MessagesBulkActionItemController = Ember.ObjectController.extend
   timestamp: (->
     @get('sentAt') || @get('createdAt')
   ).property('sentAt', 'createdAt')
+
+  isEmail: (->
+    @get('content') instanceof Radium.Email
+  ).property()

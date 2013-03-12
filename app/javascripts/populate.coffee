@@ -55,6 +55,7 @@ class Populator
 
     for i in [0..5]
       Factory.create 'discussion'
+        user: userDictionary.random()
         users: [userDictionary.random(), userDictionary.random()]
 
     Factory.adapter.store.commit()

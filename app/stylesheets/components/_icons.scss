@@ -1,0 +1,19 @@
+[class^="icon-"] {
+  margin: 0 5px;
+}
+
+a[class^="icon-"],
+a:hover [class^="icon-"],
+.btn-icon,
+.btn-icon:hover,
+.btn-link,
+.btn-link:hover
+{
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn [class^="icon-"] {
+  display: inline-block;
+  vertical-align: middle;
+}

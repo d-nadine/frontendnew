@@ -23,9 +23,9 @@
   }
 
   &.just-added .primary {
-    .checker label {
-      @include icons-sprite(todo-green);
-    }
+    // .checker label {
+    //   @include icons-sprite(todo-green);
+    // }
 
     .todo textarea,
     .todo .mentions,
@@ -58,9 +58,9 @@
   }
 
   .is-finished .checker {
-    label {
-      @include icons-sprite(todo-muted);
-    }
+    // label {
+    //   @include icons-sprite(todo-muted);
+    // }
   }
 
   .checker {

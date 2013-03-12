@@ -34,9 +34,9 @@
     margin-left: 5px;
   }
   &.just-added .primary {
-    .checker label {
-      @include icons-sprite(call-green);
-    }
+    // .checker label {
+    //   @include icons-sprite(call-green);
+    // }
 
     .todo textarea,
     .todo .mentions,
@@ -72,20 +72,20 @@
   .checker {
     margin-top: 6px;
 
-    label {
-      @include icons-sprite(call-muted);
-    }
+    // label {
+    //   @include icons-sprite(call-muted);
+    // }
 
-    input:not([disabled]) + label:hover {
-      @include icons-sprite(call-green);
-    }
+    // input:not([disabled]) + label:hover {
+    //   @include icons-sprite(call-green);
+    // }
   }
 
-  .is-finished .checker {
-    label {
-      @include icons-sprite(call-muted);
-    }
-  }
+  // .is-finished .checker {
+  //   label {
+  //     @include icons-sprite(call-muted);
+  //   }
+  // }
 
   .contact-picker {
     float: left;
