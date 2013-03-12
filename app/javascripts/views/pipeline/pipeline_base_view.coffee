@@ -11,7 +11,7 @@ Radium.PipelineViewBase = Ember.View.extend
       @get('controller').toggleChecked()
 
   didInsertElement: ->
-    @get('controller').on 'formReset', this, 'onFormReset'
+    @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
 
   onFormReset: ->
     @$('.action-forms form').each  ->

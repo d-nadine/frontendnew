@@ -1,5 +1,6 @@
 require 'forms/change_status'
 require 'forms/reassign_form'
+require 'controllers/pipeline/pipeline_item_controller'
 
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   needs: ['users']
