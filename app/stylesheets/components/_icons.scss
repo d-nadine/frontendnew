@@ -10,39 +10,3 @@
   line-height: 20px;
   vertical-align: text-top;
 }
-
-.icon-undo,.icon-redo,.icon-forward,.icon-reply,.icon-reply-2,.icon-attachment,.icon-forward-2,.icon-paperclip {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-image: url(/images/icons/email.png);
-  background-repeat: no-repeat;
-}
-.icon-undo {
-  background-position: 0 0;
-}
-.icon-redo {
-  background-position: -32px 0;
-}
-.icon-forward {
-  background-position: -64px 0;
-}
-.icon-reply {
-  background-position: -96px 0;
-}
-.icon-reply-2 {
-  background-position: -128px 0;
-  width: 18px;
-}
-.icon-attachment {
-  background-position: -160px 0;
-  height: 15px;
-}
-.icon-forward-2 {
-  background-position: -192px 0;
-}
-.icon-paperclip {
-  background-position: -224px 0;
-  height: 16px;
-}
-
