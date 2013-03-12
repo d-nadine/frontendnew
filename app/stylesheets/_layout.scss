@@ -1,5 +1,13 @@
-#application {
-  padding-top: 60px;
+html {
+  background-color: $background;
+}
+
+body {
+  background: none;
+}
+
+.page-view {
+  padding: 60px 0;
 }
 
 #main-panel {
@@ -9,7 +17,6 @@
 .main-row {
   margin-left: 0;
   overflow: auto;
-  padding-bottom: 60px;
 }
 
 $sidebar-width: 340px;
@@ -149,11 +156,14 @@ $button-bar-width: 40px;
       height: 0;
       width: 0;
       bottom: 0px;
-      left: -23px;
       border: solid 30px transparent;
       border-bottom-color: $associated-blue;
     }
   }
+}
+
+.block-connected {
+  margin-top: -11px;
 }
 
 .block.block-blue {
