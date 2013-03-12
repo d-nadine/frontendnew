@@ -1,3 +1,5 @@
+require 'forms/reassign_form'
+
 Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   needs: ['users']
   users: Ember.computed.alias 'controllers.users'
@@ -6,14 +8,8 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
-  showAssignTodo: false
-
   reassign: ->
-    @get('checkedContent').forEach (item) =>
-      item.set('user', @get('assignToUser'))
-
-    @get('store').commit()
-    @set('showAssignTodo', false)
+    @get('reassignForm').commit()
 
   perPage: 7
   activeForm: null
@@ -27,8 +23,14 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   showForm: (form) ->
     @set 'activeForm', form
 
+  reassignForm: Radium.computed.newForm('reassign')
+
+  reassignFormDefaults: ( ->
+    assignToUser: @get('assignToUser')
+    selectedContent: @get('checkedContent')
+  ).property('assignToUser', 'checkedContent')
+
   todoForm: Radium.computed.newForm('todo')
-  assignTodoForm: Radium.computed.newForm('todo')
 
   showFormArea: ( ->
     @get('hasCheckedContent') && @get('hasActiveForm')
