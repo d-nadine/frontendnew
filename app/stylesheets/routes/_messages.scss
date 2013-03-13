@@ -148,3 +148,9 @@
     text-align: right;
   }
 }
+
+.messages-view #bulk-actions {
+  .table-list tr {
+    background-color: $secondary-selection;
+  }
+}

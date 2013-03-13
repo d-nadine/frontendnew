@@ -1,3 +1,5 @@
+require 'forms/form_box'
+
 Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.CurrentUserMixin,
   needs: ['clock','users']
   clock: Ember.computed.alias('controllers.clock')
