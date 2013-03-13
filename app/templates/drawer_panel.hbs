@@ -5,7 +5,17 @@
     </a>
 
     {{outlet buttons}}
+
+    <a id="admin-menu" href="#">
+      <i class="icon-menu"></i>
+    </a>
   </div>
 
   {{outlet}}
+</div>
+
+<div id="admin-popover" style="display:none">
+  <ul class="unstyled">
+    <li>{{#linkTo development.forms}}Forms{{/linkTo}}</li>
+  </ul>
 </div>

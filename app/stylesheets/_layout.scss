@@ -84,7 +84,7 @@ $button-bar-width: 40px;
   z-index: 1000; // FIXME: this shouldn't be required
   width: $button-bar-width;
 
-  a {
+  > a {
     display: block;
     position: relative;
     padding: 4px 12px;

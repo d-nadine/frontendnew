@@ -4,7 +4,7 @@ require 'forms/meeting_form'
 require 'forms/todo_form'
 require 'forms/form_box'
 
-Radium.FormsController = Ember.Controller.extend Radium.CurrentUserMixin,
+Radium.DevelopmentFormsController = Ember.Controller.extend Radium.CurrentUserMixin,
   needs: ['users']
 
   newMeeting: Radium.computed.newForm('meeting')
