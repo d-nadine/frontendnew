@@ -29,3 +29,4 @@ Radium.Router.map ->
     @route 'callForm'
     @route 'meetingForm'
     @route 'discussionForm'
+    @route 'widgets'
