@@ -5,8 +5,8 @@ NegotiatingGroup = Ember.ArrayProxy.extend
     @get('firstObject.status')
   ).property('firstObject.status')
 
-# FIXME: this should be an Ember.Object. The PipelineController 
-# has to each into content since properties on an array proxy 
+# FIXME: this should be an Ember.Object. The PipelineController
+# has to each into content since properties on an array proxy
 # don't work. Also there's never a case where the content is
 # not going to be Deal.all
 Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
@@ -24,14 +24,13 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
 
     Radium.Deal.filter (deal) ->
       statuses.indexOf(deal.get('status')) != -1
-  ).property('negotiatingStatuses.[]')
+  ).property('negotiatingStatuses.[]', 'negotiatingDeals.[]', 'negotiatingDeals.@each.status')
 
   negotiatingGroups: (->
     deals = @get 'negotiatingDeals'
     return unless deals
 
-    Ember.ArrayProxy.create
-      content: @group deals
+    @group deals
   ).property('negotiatingDeals.[]')
 
   groupType: NegotiatingGroup

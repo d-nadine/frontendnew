@@ -8,13 +8,14 @@ Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
 
   expand: ->
     @toggleProperty 'isExpanded'
+    @set 'selectedGroup', @get('content.title') if @get('isExpanded')
 
   selectedGroupDidChange: (->
     selectedGroup = @get 'selectedGroup'
     return unless selectedGroup
 
-    @set('isExpanded', @get('content') == selectedGroup)
-  ).observes('selectedGroup')
+    @set('isExpanded', @get('content.title') == selectedGroup)
+  ).observes('selectedGroup', 'deals.[]')
 
   percentage: (->
     total = @get 'negotiatingTotal'
