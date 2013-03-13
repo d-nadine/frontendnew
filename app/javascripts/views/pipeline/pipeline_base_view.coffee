@@ -7,8 +7,9 @@ Radium.PipelineViewBase = Ember.View.extend
     @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
 
   onFormReset: ->
-    @$('.action-forms form').each  ->
-      @reset()
+    if @$('.action-forms form')
+      @$('.action-forms form').each  ->
+        @reset()
 
     @get('assignTodo').reset() if @get('assignTodo')
     @get('statusTodo').reset() if @get('statusTodo')
