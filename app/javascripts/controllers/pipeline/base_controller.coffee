@@ -18,6 +18,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   showCallForm: Radium.computed.equal('activeForm', 'call')
   showAssignForm: Radium.computed.equal('activeForm', 'assign')
   showChangeStatusForm: Radium.computed.equal('activeForm', 'status')
+  showEmailForm: Radium.computed.equal('activeForm', 'email')
 
   hasActiveForm: Radium.computed.isPresent('activeForm')
 

@@ -29,7 +29,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
     return unless deals
 
     @group deals
-  ).property('negotiatingDeals')
+  ).property('negotiatingDeals.[]')
 
   groupType: NegotiatingGroup
 

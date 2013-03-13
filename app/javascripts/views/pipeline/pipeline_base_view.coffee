@@ -44,6 +44,7 @@ Radium.PipelineViewBase = Ember.View.extend
         when "todo" then "ADD A TODO ABOUT  "
         when "call" then "CREATE AND ASSIGN A CALL FROM  "
         when "status" then "CHANGE STATUS ON "
+        when "email" then "EMAIL "
         else
           throw new Error("Unknown #{form} for bulkLeader")
 

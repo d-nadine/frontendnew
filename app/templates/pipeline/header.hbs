@@ -42,7 +42,7 @@
             <a href="#" {{action showForm 'call'}}>Call</a>
           </li>
           <li>
-            <a href="#">Email</a>
+            <a href="#" {{action showForm "email"}}>Email</a>
           </li>
           {{#unless isLeads}}
           <li>
@@ -103,6 +103,11 @@
       </div>
     </form>
   {{/if}}
+
+  {{#if showEmailForm}}
+    {{template 'unimplemented'}}
+  {{/if}}
+
   {{#if showTodoForm}}
     {{control "forms/todo" todoForm}}
   {{/if}}
