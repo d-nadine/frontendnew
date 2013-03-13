@@ -12,7 +12,9 @@ NegotiatingGroup = Ember.ArrayProxy.extend
 Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
   content: []
   settings: null
-  negotiatingStatusesBinding: 'settings.negotiatingStatuses'
+  negotiatingStatuses: ( ->
+    @get('settings.negotiatingStatuses')
+  ).property('settings.model', 'settings.negotiatingStatuses')
 
   # FIXME: replace with FilterableArray
   negotiatingDeals: (->
@@ -28,7 +30,8 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
     deals = @get 'negotiatingDeals'
     return unless deals
 
-    @group deals
+    Ember.ArrayProxy.create
+      content: @group deals
   ).property('negotiatingDeals.[]')
 
   groupType: NegotiatingGroup
