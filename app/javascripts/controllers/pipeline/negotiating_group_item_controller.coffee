@@ -36,3 +36,10 @@ Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
   title: ( ->
     "#{@get('content.title')} - (#{@get('length')})"
   ).property('status', 'deals.length')
+
+  deleteObject: (record) ->
+    record.deleteRecord()
+
+    @get('store').commit()
+
+    Radium.Utils.notify "deleted!"
