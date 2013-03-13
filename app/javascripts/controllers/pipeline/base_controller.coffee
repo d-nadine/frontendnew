@@ -106,11 +106,3 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     @get('store').commit()
 
     Radium.Utils.notify 'deleted!'
-
-  deleteObject: (record) ->
-    record.deleteRecord()
-
-    @get('store').commit()
-
-    Radium.Utils.notify "deleted!"
-
