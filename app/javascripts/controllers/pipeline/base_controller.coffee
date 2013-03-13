@@ -98,19 +98,19 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   ).property('title')
 
   deleteAll: ->
-    # FIXME: ember-data errors, fake for now
-    # @get('checkedContent').forEach (pipelineItem) ->
-    #   pipelineItem.get('content').deleteRecord()
+    checkedContent = @get('checkedContent').toArray()
 
-    # @get('store').commit()
-    @get('content').setEach('isChecked', false)
+    for i in [checkedContent.length-1..0] by -1
+      checkedContent[i].deleteRecord()
+
+    @get('store').commit()
 
     Radium.Utils.notify 'deleted!'
 
-  deleteObject: (pipelineItem) ->
-    # FIXME: ember-data errors, fake for now
-    # pipelineItem.get('content').deleteRecord()
-    # @get('store').commit()
+  deleteObject: (record) ->
+    record.deleteRecord()
 
-    pipelineItem.set 'isChecked', false
+    @get('store').commit()
+
     Radium.Utils.notify "deleted!"
+

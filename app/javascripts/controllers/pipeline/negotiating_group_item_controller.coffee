@@ -1,7 +1,7 @@
 Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
   needs: ['pipeline']
 
-  negotiatingTotal: Ember.computed.alias('controllers.pipeline.negotiatingTotal')
+  negotiatingTotal: Ember.computed.alias('controllers.pipeline.content.negotiatingTotal')
   selectedGroup: Ember.computed.alias('controllers.pipeline.selectedGroup')
 
   deals: Ember.computed.alias('content')
