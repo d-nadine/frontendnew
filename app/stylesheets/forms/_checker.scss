@@ -55,36 +55,49 @@
     margin-left: -25%;
   }
 
+  &:after {
+    display: none;
+    position: absolute;
+    content: ' ';
+    top: 50%;
+    margin-top: -25%;
+    left: 100%;
+    width: 0; 
+    height: 0; 
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
   &.checked {
     background-color: $dark-selected-item;
 
-    &:after {
-      position: absolute;
-      content: ' ';
-      top: 50%;
-      margin-top: -25%;
-      left: 100%;
-      width: 0; 
-      height: 0; 
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
+    &:after,
+    &:hover:after {
+      display: block;
       border-left: 8px solid $dark-selected-item;
     }
-  }
 
-  &.unchecked {
-    label:hover {
-      color: $dark-text;
-    }
-  }
-
-  &.checked {
     label {
       color: $bright;
 
       &:hover {
         color: $dark-text;
       }
+    }
+  }
+
+  &.unchecked {
+    &:hover:after {
+      display: block;
+      border-left: 8px solid $background;
+    }
+
+    label:hover {
+      color: $dark-text;
+    }
+
+    &:hover {
+      background-color: $background;
     }
   }
 }

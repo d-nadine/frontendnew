@@ -2,63 +2,65 @@
   <h1>Pipeline: Closed Deals</h1>
 </div>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="table table-list">
+  <colgroup>
+    <col class="checkbox">
+    <col class="deal">
+    <col class="assigned-to">
+    <col class="pay-by">
+    <col class="next-task">
+    <col class="status">
+    <col class="value">
+  </colgroup>
   <thead>
     <tr>
-      <th colspan="8">Total: {{currency total}}</th>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
       <th>&nbsp;</th>
       <th>Deal</th>
       <th>Assigned To</th>
       <th>Pay By</th>
       <th>Next Task</th>
-      <th>Value</th>
-      <th>&nbsp;</th>
+      <th>Status</th>
+      <th class="text-center">Value</th>
     </tr>
   </thead>
   <tbody>
     {{#each visibleContent}}
-      <tr {{bindAttr class="isChecked:success"}}>
+      <tr {{bindAttr class="isChecked"}}>
         <td>
-          {{view Ember.Checkbox checkedBinding="isChecked"}}
+          {{view Radium.Checkbox class="checker-block" checkedBinding="isChecked"}}
         </td>
         <td>
-          {{#with contact}}
-            {{avatar this}}
-            {{#linkTo contact this}}{{name}}{{/linkTo}}
-          {{/with}}
+          <p>
+            <big>{{#linkTo deal this}}{{name}}</big>{{/linkTo}}<br/>
+            {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}<br/>
+            {{contact.title}}
+          </p>
         </td>
-        <td>{{#linkTo deal this}}{{name}}{{/linkTo}}</td>
         <td>
-          {{#linkTo user user}}{{user.name}}{{/linkTo}}
+          <p>
+            <big class="name">{{#linkTo user user}}{{user.name}}{{/linkTo}}</big></br>
+            <span class="title">{{user.title}}</span>
+          <p>
         </td>
         <td {{bindAttr class="isPastPayment"}}>
-          {{date payBy}}
+          {{time payBy format=date}}
         </td>
         <td>
-          {{showWarningIfEmpty nextTask}}
+          {{#if nextTask}}
+            <span class="fixme upcase">unimplemented</span>
+          {{else}}
+            <i class="icon-warning"></i>
+          {{/if}}
         </td>
-        <td>{{currency value}}</td>
-        <td>
-          <a {{action deleteObject this target="controller"}} class="btn btn-danger">
-            <i class="icon-trash icon-white"></i>
-          </a>
-        </td>
+        <td><span class="fixme upcase">unimplemented</span></td>
+        <td class="text-right">{{currency value}}</td>
       </tr>
     {{else}}
       <tr>
-        <td colspan="8">No Deals</td>
+        <td colspan="7">No Deals</td>
       </tr>
     {{/each}}
   </tbody>
-  {{#if visibleContent}}
-  <tfoot>
-    <tr>
-      <td colspan="8">Total: {{currency total}}</td>
-    </tr>
-  </tfoot>
-  {{/if}}
 </table>
+
 {{template "shared/show_more"}}

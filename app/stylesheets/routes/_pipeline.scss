@@ -1,3 +1,29 @@
+.pipeline-view {
+  .table-list tbody td:first-child {
+    position: relative;
+
+    & + td {
+      padding-left: 15px;
+    }
+  }
+
+  .table-list .is-checked {
+    background-color: $secondary-selection;
+  }
+
+  .delete {
+    visibility: hidden;
+  }
+
+  .is-checked .delete {
+    visibility: visible;
+  }
+
+  .is-past-payment {
+    color: red;
+  }
+}
+
 #pipeline-widget {
   background: none;
 
@@ -15,12 +41,6 @@
 }
 
 #pipeline-results {
-  table{
-    margin-top: 20px;
-    td:first-of-type, th:first-of-type, td:last-of-type, th:last-of-type{
-      text-align: center;
-    }
-  }
   .todo-form{
     width: 72%;
   }

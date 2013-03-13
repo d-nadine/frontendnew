@@ -3,17 +3,23 @@
   border-collapse: separate;
   border-spacing: 0 10px;
 
-  td {
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    background-color: $secondary-selection;
+  th {
+    color: $light-text;
+    padding: 0 8px;
   }
 
-  tr td:first-child {
-    border-left: solid 1px #ddd
-  }
+  tbody {
+    td {
+      border-top: solid 1px #ddd;
+      border-bottom: solid 1px #ddd;
+    }
 
-  tr td:last-child {
-    border-right: solid 1px #ddd
+    tr td:first-child {
+      border-left: solid 1px #ddd
+    }
+
+    tr td:last-child {
+      border-right: solid 1px #ddd
+    }
   }
 }
