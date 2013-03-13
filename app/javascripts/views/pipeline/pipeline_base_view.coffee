@@ -40,21 +40,21 @@ Radium.PipelineViewBase = Ember.View.extend
 
     prefix =
       switch form
-        when "assign" then "REASSIGN "
-        when "todo" then "ADD A TODO ABOUT  "
-        when "call" then "CREATE AND ASSIGN A CALL FROM  "
-        when "status" then "CHANGE STATUS ON "
-        when "email" then "EMAIL "
+        when "assign" then "reassign "
+        when "todo" then "add a todo about  "
+        when "call" then "create and assign a call from  "
+        when "status" then "change status on "
+        when "email" then "email "
         else
           throw new Error("Unknown #{form} for bulkLeader")
 
     result =
       if length == 1
-        "#{prefix} THIS LEAD"
+        "#{prefix} this lead"
       else
-        "#{prefix} THESE SELECTED #{@get('controller.checkedContent.length')} LEADS"
+        "#{prefix} these selected #{@get('controller.checkedContent.length')} leads"
 
     return result unless form == "assign"
 
-    result += " TO"
+    result += " to"
   ).property('controller.activeForm', 'controller.checkedContent.length')

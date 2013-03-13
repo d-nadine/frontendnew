@@ -5,7 +5,7 @@ Radium.ChangeStatusForm = Radium.Form.extend
     user: @get('user')
     finishBy: @get('finishBy')
     status: @get('status')
-    description: @get('statusTodo')
+    description: @get('todo')
   ).property().volatile()
 
   isValid: ( ->
@@ -14,13 +14,13 @@ Radium.ChangeStatusForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
-    @set('statusTodo', null)
+    @set('todo', null)
 
   commit: ->
     @get('deals').forEach (item) =>
       item.set('status', @get('status'))
 
-      unless Ember.isEmpty @get('statusTodo')
+      unless Ember.isEmpty @get('todo')
         todo = Radium.Todo.createRecord @get('data')
         todo.set 'reference', item
 

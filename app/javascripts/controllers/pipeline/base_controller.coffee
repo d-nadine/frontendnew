@@ -27,7 +27,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     @set 'assignToUser', @get('currentUser')
 
   changeStatus: ->
-    @set 'changeStatusForm.statusTodo', @get('statusTodo')
+    @set 'changeStatusForm.todo', @get('statusTodo')
     @submit @get('changeStatusForm')
 
   reassign: ->
@@ -58,7 +58,7 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
     deals: @get('checkedContent')
     finishBy: @get('tomorrow')
     status: @get('changedStatus')
-    statusTodo: @get('statusTodo')
+    todo: @get('statusTodo')
   ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status')
 
   reassignForm: Radium.computed.newForm('reassign')
