@@ -1,6 +1,7 @@
 require 'lib/radium/filtered_array'
 
 Radium.CheckableMixin = Ember.Mixin.create
+  allChecked: false
   checkedContent: (->
     Radium.FilteredArray.create
       context: this
@@ -17,3 +18,7 @@ Radium.CheckableMixin = Ember.Mixin.create
 
     @get('content').forEach (item) ->
       item.set 'isChecked', !allChecked
+
+  allCheckedDidChange: (  ->
+    @toggleChecked()
+  ).observes('allChecked')

@@ -3,13 +3,6 @@ Radium.PipelineViewBase = Ember.View.extend
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.assignToUser'
 
-  checkAll: Ember.Checkbox.extend
-    click: (event) ->
-      event.stopPropagation()
-
-    change: (event) ->
-      @get('controller').toggleChecked()
-
   didInsertElement: ->
     @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
 
