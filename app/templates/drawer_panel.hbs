@@ -6,16 +6,10 @@
 
     {{outlet buttons}}
 
-    <a id="admin-menu" href="#">
+    {{#linkTo development}}
       <i class="icon-menu"></i>
-    </a>
+    {{/linkTo}}
   </div>
 
   {{outlet}}
-</div>
-
-<div id="admin-popover" style="display:none">
-  <ul class="unstyled">
-    <li>{{#linkTo development.forms}}Forms{{/linkTo}}</li>
-  </ul>
 </div>

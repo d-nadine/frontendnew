@@ -25,3 +25,7 @@ Radium.Router.map ->
 
   @resource 'development', ->
     @route 'forms'
+    @route 'todoForm'
+    @route 'callForm'
+    @route 'meetingForm'
+    @route 'discussionForm'
