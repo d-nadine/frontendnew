@@ -1,9 +1,9 @@
-Radium.PipelineNegotiatingController = Ember.ArrayController.extend
+Radium.PipelineNegotiatingController = Ember.ObjectController.extend
   title: 'Negotiating'
 
   groups: ( ->
-    return [] unless @get('model.negotiatingGroups.length')
+    return [] unless @get('negotiatingGroups.length')
 
     Ember.ArrayProxy.create
-      content: @get('model.negotiatingGroups')
-  ).property('model.negotiatingGroups')
+      content: @get('negotiatingGroups')
+  ).property('negotiatingGroups')
