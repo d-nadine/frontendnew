@@ -27,7 +27,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"]:before {
 */
-.icon-call:before, .icon-location:before, .icon-calendar:before, .icon-forward:before, .icon-reply:before, .icon-comment:before, .icon-discussion:before, .icon-menu:before, .icon-cloud:before, .icon-attachments:before, .icon-todo:before, .icon-plus:before, .icon-minus:before, .icon-arrow-up:before, .icon-arrow-left:before, .icon-arrow-down:before, .icon-arrow-right:before, .icon-delete:before, .icon-public:before, .icon-private:before, .icon-notification:before, .icon-help:before, .icon-close:before, .icon-bell:before, .icon-notifications:before, .icon-coins:before, .icon-tag:before, .icon-edit:before, .icon-mail:before, .icon-stack:before, .icon-warning:before {
+.icon-call:before, .icon-location:before, .icon-calendar:before, .icon-forward:before, .icon-reply:before, .icon-comment:before, .icon-discussion:before, .icon-menu:before, .icon-cloud:before, .icon-attachment:before, .icon-todo:before, .icon-plus:before, .icon-minus:before, .icon-arrow-up:before, .icon-arrow-left:before, .icon-arrow-down:before, .icon-arrow-right:before, .icon-delete:before, .icon-public:before, .icon-private:before, .icon-notification:before, .icon-help:before, .icon-close:before, .icon-bell:before, .icon-notifications:before, .icon-coins:before, .icon-tag:before, .icon-edit:before, .icon-mail:before, .icon-stack:before, .icon-warning:before {
 	font-family: 'icomoon-ultimate';
 	speak: none;
 	font-style: normal;
@@ -64,7 +64,7 @@ you can use the generic selector below, but it's slower:
 .icon-cloud:before {
 	content: "\e00a";
 }
-.icon-attachments:before {
+.icon-attachment:before {
 	content: "\e00c";
 }
 .icon-todo:before {
@@ -130,4 +130,3 @@ you can use the generic selector below, but it's slower:
 .icon-warning:before {
 	content: "\e017";
 }
-
