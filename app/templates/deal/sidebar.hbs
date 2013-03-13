@@ -12,7 +12,7 @@
 </div>
 
 {{#view Radium.InlineEditorView valueBinding=description}}
-  <h2>Description <i class="icon-pencil pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+  <h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
   {{#if view.isEditing}}
     {{view view.textArea valueBinding=view.value classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
@@ -26,7 +26,7 @@
 <hr />
 
 {{#view Radium.InlineEditorView valueBinding=value class="amount"}}
-  <h2>Amount <i class="icon-pencil pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+  <h2>Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
   {{#if view.isEditing}}
     <div {{bindAttr class="view.isValid:success:error :control-group"}}>
@@ -56,7 +56,7 @@
 <hr />
 
 {{#view view.userInlineEditor valueBinding=user}}
-  <h2>Assigned To <i class="icon-pencil pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+  <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
   <div class="assigned-to">
     {{#with view.value}}

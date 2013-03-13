@@ -3,12 +3,12 @@
 }
 
 .inline-editor.is-disabled {
-  .icon-pencil {
+  .icon-edit {
     display: none;
   }
 }
 
-.inline-editor .icon-pencil {
+.inline-editor .icon-edit {
   opacity: 0.3;
 
   &:hover {
