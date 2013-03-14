@@ -1,4 +1,4 @@
-Radium.PipelineView = Ember.View.extend
+Radium.PipelineView = Ember.View.extend Radium.LightBackgroundMixin,
   layoutName: 'layouts/single_column'
 
   classNames: ['page-view']

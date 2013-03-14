@@ -25,6 +25,14 @@ $valid-input-border: #999898;
 
 $alerts-layer: 1000;
 
+.gray-background {
+  background-color: $background;
+}
+
+.bright-background {
+  background-color: $bright;
+}
+
 .blue {
   color: $blue;
 }
