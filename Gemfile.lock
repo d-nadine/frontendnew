@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/livingsocial/rake-pipeline.git
-  revision: ee992cbcda5172075062be035bcbef2cf1b0ff5d
+  revision: 65b1e744defa208e313703d89f3453447cc103b2
   specs:
     rake-pipeline (0.8.0)
       json
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: 41f9b7cba4ba51d1e9ed88cc56eaa86cca87baff
+  revision: bc02eddb1d1f18cd64598f55f52da87d1a87df8c
   specs:
     iridium (0.9.0.rc1)
       activesupport
@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/thor.git
-  revision: e6cd78c274a97cced19fe2b21f971a4eb66c5b04
+  revision: 09896be3035485de4356b5dd126ddc756a8fc8f9
   specs:
     thor (0.17.0)
 
@@ -62,7 +62,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.4.0)
+    coffee-script-source (1.6.1)
     commonjs (0.2.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
@@ -72,10 +72,10 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.10)
-    i18n (0.6.1)
+    i18n (0.6.4)
     json (1.7.7)
     kgio (2.8.0)
-    less (2.2.2)
+    less (2.3.1)
       commonjs (~> 0.2.6)
     libv8 (3.11.8.13)
     multi_json (1.6.1)
@@ -91,7 +91,7 @@ GEM
       rake-pipeline (~> 0.6)
     ref (1.0.2)
     ruby-prof (0.12.1)
-    sass (3.2.5)
+    sass (3.2.7)
     therubyracer (0.11.3)
       libv8 (~> 3.11.8.12)
       ref

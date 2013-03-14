@@ -13,30 +13,33 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     {title: 'Prospects', name: 'prospects'}
   ]
 
-  deleteItem: (item) ->
-    item.set 'isChecked'
-    # FIXME: ember-data association errors, fake for now
-    # store = @get('store')
+  destroy: ->
+    console.log 'weee'
 
-    # email.deleteRecord()
-    # store.commit()
+  # deleteItem: (item) ->
+  #   item.set 'isChecked'
+  #   # FIXME: ember-data association errors, fake for now
+  #   # store = @get('store')
 
-    @removeObject(item)
-    Radium.Utils.notify "deleted."
+  #   # email.deleteRecord()
+  #   # store.commit()
 
-  deleteEmails: ->
-    return if selected.get('count') == 0
+  #   @removeObject(item)
+  #   Radium.Utils.notify "deleted."
 
-    count = selected.get('length')
-    # FIXME: ember-data association errors, fake for now
-    # @get('selectedMail').toArray().forEach (email) ->
-    #   email.deleteRecord()
-    # @get('store').commit()
-    selected.forEach (email) -> email.set('isSelected', false)
+  # deleteEmails: ->
+  #   return if selected.get('count') == 0
 
-    @removeObjects(selected)
+  #   count = selected.get('length')
+  #   # FIXME: ember-data association errors, fake for now
+  #   # @get('selectedMail').toArray().forEach (email) ->
+  #   #   email.deleteRecord()
+  #   # @get('store').commit()
+  #   selected.forEach (email) -> email.set('isSelected', false)
 
-    Radium.Utils.notify "#{count} emails deleted."
+  #   @removeObjects(selected)
+
+  #   Radium.Utils.notify "#{count} emails deleted."
 
   canSelectItems: (->
     @get('checkedContent.length') == 0
