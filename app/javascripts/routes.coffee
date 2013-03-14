@@ -14,6 +14,11 @@ Radium.Router.map ->
     @route 'closed'
     @route 'lost'
 
+  @resource 'leads', ->
+    @route 'new'
+
+  @resource 'contacts'
+
   @resource 'contact', path: '/contacts/:contact_id'
 
   @resource 'user', path: '/users/:user_id'

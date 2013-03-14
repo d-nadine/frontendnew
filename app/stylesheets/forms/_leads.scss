@@ -1,0 +1,27 @@
+.leads-view{
+  h1{
+    margin-bottom: 40px;
+  }
+  a.btn-large{
+    margin-right: 20px;
+  }
+  a.single{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  fieldset{
+    margin-top: 30px;
+    margin-left: 2px;
+    .control-group{
+      margin-bottom: 10px;
+    }
+    .control-label{
+      text-align: left;
+      width: 100px;
+    }
+    .controls{
+      margin-left: 0;
+    }
+  }
+}
