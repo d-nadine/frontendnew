@@ -46,23 +46,23 @@
     }
   }
 
-  // a.todo.active, a.todo:hover {
-  //   i {
-  //     @include icons-sprite(todo-black)
-  //   }
-  // }
+  a.todo.active, a.todo:hover {
+    i {
+      color: $black;
+    }
+  }
 
-  // a.call.active, a.call:hover {
-  //   i {
-  //     @include icons-sprite(call-black)
-  //   }
-  // }
+  a.call.active, a.call:hover {
+    i {
+      color: $black;
+    }
+  }
 
-  // a.discussion.active, a.discussion:hover {
-  //   i {
-  //     @include icons-sprite(discussion-black)
-  //   }
-  // }
+  a.discussion.active, a.discussion:hover {
+    i {
+      color: $black;
+    }
+  }
 }
 
 .btn-block {
