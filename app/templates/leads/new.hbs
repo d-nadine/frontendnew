@@ -19,6 +19,7 @@
           <input type="text" class="field" placeholder="Company">
         </div>
       </div>
+      {{#if view.isNewLead}}
       <div class="control-group">
         <label class="control-label">Email</label>
         <div class="controls">
@@ -26,6 +27,13 @@
         </div>
       </div>
       {{view view.phoneNumbers}}
+      <div class="control-group">
+        <label class="control-label">Assigned To</label>
+        <div class="controls assigned">
+          {{#linkTo user assignedTo}}{{assignedTo.name}}{{/linkTo}}
+        </div>
+      </div>
+      {{/if}}
       {{#if view.contactExists}}
       <div class="existing">
         <span>{{selectedContact.name}}</span> is already an existing customer. Do you want to add a deal?

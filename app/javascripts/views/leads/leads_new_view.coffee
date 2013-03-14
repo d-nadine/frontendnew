@@ -4,6 +4,7 @@ Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
   contactExists: Ember.computed.bool 'value'
   valueBinding: 'controller.selectedContact'
+  isNewLead: false
 
   phoneNumbers: Radium.MultipleField.extend
     classNames: ['control-group']
@@ -20,6 +21,22 @@ Radium.LeadsNewView = Ember.View.extend
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
     sourceBinding: 'controller.contacts'
+    timeoutId: null
+    keyDown: (evt) ->
+      timeoutId = @get('timeoutId')
+      if timeoutId
+        clearTimeout timeoutId
+
+      timeoutId = setTimeout(( =>
+        parentView = @get('parentView')
+        value = @get('value')
+
+        if parentView.get('value') || value?.length < 3
+          parentView.set('isNewLead', false)
+          return
+
+        parentView.set('isNewLead', true)
+      ), 800)
 
   setValue: (object) ->
     @set 'value', object

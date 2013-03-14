@@ -31,6 +31,12 @@
     }
     .controls{
       margin-left: 0;
+      &.assigned{
+        a{
+          position: relative;
+          top: 6px;
+        }
+      }
     }
     .existing{
       margin-top: 20px;
