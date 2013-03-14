@@ -1,3 +1,12 @@
+.multiple-field{
+  border: 1px solid red;
+  display: inline-block;
+
+  .btn, .btn:focus {
+    outline: none;
+  }
+
+}
 .leads-view{
   h1{
     margin-bottom: 40px;
@@ -18,10 +27,24 @@
     }
     .control-label{
       text-align: left;
-      width: 100px;
+      width: 110px;
     }
     .controls{
       margin-left: 0;
+    }
+    .existing{
+      margin-top: 20px;
+      margin-left: 102px;
+      span{
+        color: $blue;
+      }
+      > div{
+        margin-top: 10px;
+      }
+      .btn-success{
+        padding-left: 20px;
+        padding-right: 20px;
+      }
     }
   }
 }
