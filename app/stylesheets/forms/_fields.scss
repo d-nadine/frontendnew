@@ -37,7 +37,7 @@ input[type="color"].field,
     border-color: transparent;
 
     &[disabled], &[readonly] {
-      color: $light-text;
+      color: $muted;
     }
 
     &.is-invalid {

@@ -9,12 +9,10 @@ $selected-item-border: #dbdbdb;
 $dark-selected-item: #666666;
 
 $text: #262626;
-$light-text: lighten($text, 35);
-$dark-text: darken($text, 25);
-
 $blue: #0088cc;
 $green: #00e710;
 $muted: #ccc;
+$dark: darken($text, 25);
 $black: black;
 
 $associated-blue: #d5f7ff;
@@ -23,9 +21,33 @@ $secondary-selection: #eff3fb;
 // Forms
 $control-border-color: #c5c5c5;
 $valid-input-border: #999898;
-$success-green: #09E409;
-
-//notifications
-$notifications-border: #444;
 
 $alerts-layer: 1000;
+
+.blue {
+  color: $blue;
+}
+
+.green {
+  color: $green;
+}
+
+.muted {
+  color: $muted;
+}
+
+.dark {
+  color: $dark;
+}
+
+.black {
+  color: $black;
+}
+
+.associated-blue {
+  background-color: $associated-blue;
+}
+
+.secondary-selection {
+  background-color: $secondary-selection;
+}

@@ -6,7 +6,7 @@
       background-color: $dark-background;
 
       .checker label::after {
-        border-color: $light-text
+        border-color: $muted
       }
 
       &::after {
