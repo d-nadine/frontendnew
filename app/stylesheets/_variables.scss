@@ -11,6 +11,7 @@ $dark-selected-item: #666666;
 $text: #262626;
 $blue: #0088cc;
 $green: #00e710;
+$money: #468847;
 $muted: #ccc;
 $dark: darken($text, 25);
 $black: black;
@@ -30,6 +31,10 @@ $alerts-layer: 1000;
 
 .green {
   color: $green;
+}
+
+.money {
+  color: $money;
 }
 
 .muted {
