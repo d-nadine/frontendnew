@@ -29,6 +29,19 @@
       text-align: left;
       width: 110px;
     }
+
+    .control-box{
+      border: solid 1px #c5c5c5;
+      border-bottom: 1px solid #c5c5c5;
+
+      > div{
+        display: inline-block;
+        background-color: white;
+        color: $success-green;
+        margin-right: 5px;
+      }
+    }
+
     .controls{
       margin-left: 0;
       &.assigned{
