@@ -2,6 +2,7 @@ $bright: #fff;
 $background: #f3f3f3;
 $dark-background: #d9dada;
 $light-background: #ededed;
+
 $selected-item: #e7e7e7;
 $selected-item-border: #dbdbdb;
 
@@ -10,8 +11,6 @@ $dark-selected-item: #666666;
 $text: #262626;
 $light-text: lighten($text, 35);
 $dark-text: darken($text, 25);
-
-$attention: rgb(250, 220, 173);
 
 $blue: #0088cc;
 $green: #00e710;
