@@ -9,7 +9,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
   ).property('meetings.[]', 'todos.[]')
 
   hasTasks: (->
-    @get('todos.length') > 0
+    @get('todos.length')
   ).property('todos.length')
 
   nextTask: (->
