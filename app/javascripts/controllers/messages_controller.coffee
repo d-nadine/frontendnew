@@ -43,9 +43,9 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
   ).property('checkedContent.length')
 
   history: (->
-    return unless @get('content')
-    Radium.Email.find historyFor: @get('content')
-  ).property('content')
+    return unless @get('selectedContent')
+    Radium.Email.find historyFor: @get('selectedContent')
+  ).property('selectedContent')
 
   showDiscussion: (->
     return if @get('hasCheckedContent')
