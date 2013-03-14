@@ -1,0 +1,11 @@
+ul.comma-separated,
+ol.comma-separated {
+  > li {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  li:not(:last-of-type):after {
+    content: ', '
+  }
+}

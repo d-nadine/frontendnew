@@ -1,3 +1,17 @@
-<div {{action selectContent content}}>
+{{view view.checker}}
+
+<div {{bindAttr class="isSelectable :content"}} {{action selectContent content}}>
+  {{#if hasAttachments}}
+    <i class="icon-attachments pull-right"></i>
+  {{/if}}
+
   {{yield}}
+
+  <div class="footer">
+    <a {{action deleteItem this target="controllers.messages"}} href="#" class="btn-icon delete">
+      <i class='icon-delete'></i>
+    </a>
+
+    {{time timestamp class="muted upcase pull-right"}}
+  </div>
 </div>

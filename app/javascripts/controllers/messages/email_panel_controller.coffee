@@ -1,15 +1,9 @@
 require 'lib/radium/show_more_mixin'
 
-Radium.MessagesEmailPanelController = Em.ObjectController.extend
-  history: (->
-    return unless @get('content')
-    Radium.Email.find historyFor: @get('content')
-  ).property('content')
+Radium.MessagesEmailPanelController = Ember.ArrayController.extend Radium.ShowMoreMixin,
+  perPage: 3
 
-  hasNewerEmail: (->
-    @get('history.firstObject') != @get('content')
-  ).property('history', 'content')
+  activeDeal: Ember.computed.alias('sender.deals.firstObject')
+  nextTask: Ember.computed.alias('sender.nextTask')
 
-  newestEmail: (->
-    @get('history.firstObject')
-  ).property('history')
+  sender: Ember.computed.alias('firstObject.sender')

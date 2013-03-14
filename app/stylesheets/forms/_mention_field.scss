@@ -39,7 +39,7 @@
 
   &.field {
     textarea[disabled], textarea[readonly] {
-      color: $light-text;
+      color: $muted;
       cursor: default;
     }
   }

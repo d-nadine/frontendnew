@@ -1,87 +1,150 @@
-@import "routes/messages/sidebar";
+.messages-sidebar-view {
+  .checker {
+    border-right: solid 2px $dark-background;
+  }
 
-div.selection{
-  div.alert{
-    margin-bottom: 5px;
-    > div{
-      display: table-cell;
+  .is-selected .content,
+  .content:hover {
+    .delete { 
+      display: inline;
     }
-    div:nth-child(6){
-      width: 150px;
-      text-align: right;
-    }
-  }
-  div.alert:last-child{
-    margin-bottom: 18px;
-  }
-}
 
-.email {
-  .avatar {
-    float: left;
-    margin-right: 15px;
-  }
-}
-
-.attachments {
-  margin: 15px 0;
-}
-
-.email-actions {
-  table{
-    td:nth-child(1){
-      width: 35px !IMPORTANT;
+    .icon-attachments {
+      display: inline;
     }
   }
-}
 
-.email-actions div.comments .comments div.span5{
-  position: relative;
-  left: -98px;
-  top: -10px;
-}
+  .has-tasks .content:after {
+    position: absolute;
+    content: ' ';
+    left: -33px;
+    height: 0;
+    width: 0;
+    bottom: -32px;
+    border: solid 20px transparent;
+    border-top-color: $associated-blue;
+    @include rotate(45deg);
+  }
 
-.action-group{
-  .btn:first-child{
-    border: 1px solid red;
+  .content {
+    margin-left: 40px;
+    position: relative;
+  }
+
+  .content.is-selectable:hover {
+    cursor: pointer;
+  }
+
+  .icon-attachments {
+    display: none;
+  }
+
+  .delete {
+    display: none;
+  }
+
+  .footer {
+    overflow: auto;
+  }
+
+  .discussion-item {
+    [class^="icon-discussion"] {
+      float: left;
+    }
+
+    .text-container {
+      margin-left: 40px;
+      margin-right: 15px;
+    }
+
+    .user-list {
+      margin-bottom: 10px;
+    }
   }
 }
 
-#email-panel {
-  padding-bottom: 40px;
-}
-
-.discussion{
-  .with{
-    margin-bottom: 10px;
-  }
-  .btn-group.pull-right{
-    display: relative;
-    top: -30px;
-  }
-}
-
-.reply {
-  width: 100%;
+.messages-view .context {
+  display: table;
   box-sizing: border-box;
+  width: 100%;
+
+  .deal-info, .task-info, .sender-info {
+    display: table-cell;
+  }
+
+  .sender-info {
+    .avatar {
+      float: left;
+      margin-right: 20px;
+    }
+
+    p { 
+      color: $dark;
+      font-size: 16px;
+      line-height: 30px;
+    }
+
+    .name { 
+      font-weight: bold;
+    }
+  }
+
+  h2 {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    margin-bottom: 15px;
+    color: $dark;
+  }
+
+  table {
+    width: 100%;
+  }
 }
 
-.table-list {
-  color: black;
-  border-collapse: separate;
-  border-spacing: 0 10px;
+.messages-view .email {
+  padding: 50px;
+  padding-bottom: 0px;
 
-  td {
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    background-color: $secondary-selection;
+  .header {
+    margin-bottom: 30px;
   }
 
-  tr td:first-child {
-    border-left: solid 1px #ddd
+  hr {
+    border-top-width: 2px;
+    border-bottom: none;
+    margin: 0px;
   }
 
-  tr td:last-child {
-    border-right: solid 1px #ddd
+  .subject {
+    border: none;
+    margin: 0px;
+
+    h1 {
+      font-size: 18px;
+
+      small {
+        font-size: 16px;
+      }
+    }
+
+    h1, small {
+      line-height: 26px;
+    }
+  }
+
+  .message {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+  }
+
+  .body-text {
+    margin-bottom: 30px;
+  }
+
+  .email-actions {
+    margin-top: 40px;
+    text-align: right;
   }
 }

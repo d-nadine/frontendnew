@@ -10,13 +10,17 @@
 @import "components/alerts";
 @import "components/avatars";
 @import "components/comments";
-@import "components/icons";
 @import "components/notifications";
 @import "components/scroller";
 @import "components/thumbnail_drawer";
 @import "components/buttons";
 @import "components/modal";
 @import "components/inline_editor";
+@import "components/table_list";
+@import "components/comma_separated";
+@import "components/icon_font";
+@import "components/icons";
+@import "components/tables";
 
 @import "forms";
 @import "forms/dropdown_menu";
@@ -40,6 +44,11 @@
 
 #unimplemented{
   text-align: center;
+}
+
+.fixme {
+  color: red;
+  font-weight: bold;
 }
 
 // Twitter bootstrap does handle this correctly

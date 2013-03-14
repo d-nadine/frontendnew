@@ -1,48 +1,19 @@
-@import "icons/*.png";
-@include all-icons-sprites;
+[class^="icon-"] {
+  margin: 0 5px;
+}
 
-// Style OUR icons
-[class^="icons-"], [class*=" icons-"] {
+a[class^="icon-"],
+a:hover [class^="icon-"],
+.btn-icon,
+.btn-icon:hover,
+.btn-link,
+.btn-link:hover
+{
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn [class^="icon-"] {
   display: inline-block;
-  width: 30px;
-  height: 20px;
-  margin-top: 1px;
-  line-height: 20px;
-  vertical-align: text-top;
+  vertical-align: middle;
 }
-
-.icon-undo,.icon-redo,.icon-forward,.icon-reply,.icon-reply-2,.icon-attachment,.icon-forward-2,.icon-paperclip {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-image: url(/images/icons/email.png);
-  background-repeat: no-repeat;
-}
-.icon-undo {
-  background-position: 0 0;
-}
-.icon-redo {
-  background-position: -32px 0;
-}
-.icon-forward {
-  background-position: -64px 0;
-}
-.icon-reply {
-  background-position: -96px 0;
-}
-.icon-reply-2 {
-  background-position: -128px 0;
-  width: 18px;
-}
-.icon-attachment {
-  background-position: -160px 0;
-  height: 15px;
-}
-.icon-forward-2 {
-  background-position: -192px 0;
-}
-.icon-paperclip {
-  background-position: -224px 0;
-  height: 16px;
-}
-

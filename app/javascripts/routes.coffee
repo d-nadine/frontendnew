@@ -21,4 +21,12 @@ Radium.Router.map ->
 
   @resource 'calendar', path: '/:year/:month/:day'
 
-  @resource 'forms'
+  @route 'unimplemented'
+
+  @resource 'development', ->
+    @route 'forms'
+    @route 'todoForm'
+    @route 'callForm'
+    @route 'meetingForm'
+    @route 'discussionForm'
+    @route 'widgets'

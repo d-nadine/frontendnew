@@ -37,3 +37,28 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     @removeObjects(selected)
 
     Radium.Utils.notify "#{count} emails deleted."
+
+  canSelectItems: (->
+    @get('checkedContent.length') == 0
+  ).property('checkedContent.length')
+
+  history: (->
+    return unless @get('selectedContent')
+    Radium.Email.find historyFor: @get('selectedContent')
+  ).property('selectedContent')
+
+  showDiscussion: (->
+    return if @get('hasCheckedContent')
+    @get('selectedContent') instanceof Radium.Discussion
+  ).property('hasCheckedContent', 'selectedContent')
+
+  showEmails: (->
+    return if @get('hasCheckedContent')
+    @get('selectedContent') instanceof Radium.Email
+  ).property('hasCheckedContent', 'selectedContent')
+
+  noSelection: (->
+    return false if @get('selectedContent')
+    return false if @get('hasCheckedContent')
+    true
+  ).property('hasCheckedContent', 'selectedContent')

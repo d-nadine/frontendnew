@@ -1,0 +1,134 @@
+@font-face {
+	font-family: 'icomoon-ultimate';
+	src:url('fonts/icomoon-ultimate.eot');
+	src:url('fonts/icomoon-ultimate.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon-ultimate.woff') format('woff'),
+		url('fonts/icomoon-ultimate.ttf') format('truetype'),
+		url('fonts/icomoon-ultimate.svg#icomoon-ultimate') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon-ultimate';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"]:before {
+*/
+.icon-call:before, .icon-location:before, .icon-calendar:before, .icon-forward:before, .icon-reply:before, .icon-comment:before, .icon-discussion:before, .icon-menu:before, .icon-cloud:before, .icon-attachment:before, .icon-todo:before, .icon-plus:before, .icon-minus:before, .icon-arrow-up:before, .icon-arrow-left:before, .icon-arrow-down:before, .icon-arrow-right:before, .icon-delete:before, .icon-public:before, .icon-private:before, .icon-notification:before, .icon-help:before, .icon-close:before, .icon-bell:before, .icon-notifications:before, .icon-coins:before, .icon-tag:before, .icon-edit:before, .icon-mail:before, .icon-stack:before, .icon-warning:before, .icon-attachments:before {
+	font-family: 'icomoon-ultimate';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-call:before {
+	content: "\e000";
+}
+.icon-location:before {
+	content: "\e003";
+}
+.icon-calendar:before {
+	content: "\e004";
+}
+.icon-forward:before {
+	content: "\e005";
+}
+.icon-reply:before {
+	content: "\e006";
+}
+.icon-comment:before {
+	content: "\e007";
+}
+.icon-discussion:before {
+	content: "\e008";
+}
+.icon-menu:before {
+	content: "\e009";
+}
+.icon-cloud:before {
+	content: "\e00a";
+}
+.icon-attachment:before,
+.icon-attachments:before,
+{
+	content: "\e00c";
+}
+.icon-todo:before {
+	content: "\e00b";
+}
+.icon-plus:before {
+	content: "\e00d";
+}
+.icon-minus:before {
+	content: "\e00e";
+}
+.icon-arrow-up:before {
+	content: "\e00f";
+}
+.icon-arrow-left:before {
+	content: "\e010";
+}
+.icon-arrow-down:before {
+	content: "\e011";
+}
+.icon-arrow-right:before {
+	content: "\e012";
+}
+.icon-delete:before {
+	content: "\e014";
+}
+.icon-public:before {
+	content: "\e015";
+}
+.icon-private:before {
+	content: "\e016";
+}
+.icon-notification:before {
+	content: "\e019";
+}
+.icon-help:before {
+	content: "\e01a";
+}
+.icon-close:before {
+	content: "\e01b";
+}
+.icon-bell:before {
+	content: "\e01c";
+}
+.icon-notifications:before {
+	content: "\e01d";
+}
+.icon-coins:before {
+	content: "\e018";
+}
+.icon-tag:before {
+	content: "\e001";
+}
+.icon-edit:before {
+	content: "\e013";
+}
+.icon-mail:before {
+	content: "\e01e";
+}
+.icon-stack:before {
+	content: "\e002";
+}
+.icon-warning:before {
+	content: "\e017";
+}

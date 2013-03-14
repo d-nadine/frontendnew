@@ -19,10 +19,6 @@
     margin: 0 auto;
   }
 
-  .success-message {
-    color: $success-green;
-  }
-
   &.just-added {
     .primary {
       background-color: darken($dark-background, 50);
@@ -48,19 +44,19 @@
 
   a.todo.active, a.todo:hover {
     i {
-      @include icons-sprite(todo-black)
+      color: $black;
     }
   }
 
   a.call.active, a.call:hover {
     i {
-      @include icons-sprite(call-black)
+      color: $black;
     }
   }
 
   a.discussion.active, a.discussion:hover {
     i {
-      @include icons-sprite(discussion-black)
+      color: $black;
     }
   }
 }

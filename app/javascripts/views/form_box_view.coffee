@@ -1,1 +1,0 @@
-RadiumFormBoxView = Ember.View.extend()

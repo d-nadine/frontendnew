@@ -1,12 +1,28 @@
-<div class="block">
-  <div class="page-header">
-    {{avatar sender}}
-
-    <h2>{{unbound subject}}</h2>
+<div class="block email">
+  <div class="adder">
+    <div class="arrow"></div>
+    {{#if showFormBox}}
+      <i class="icon-minus" {{action toggleFormBox}}></i>
+    {{else}}
+      <i class="icon-plus" {{action toggleFormBox}}></i>
+    {{/if}}
   </div>
 
-  <div class="body">
-    {{{unbound message}}}
+  <div class="header">
+    <div class="subject page-header">
+      <h1>{{subject}} <small>{{time sentAt format="full" class="pull-right"}}</small></h1>
+    </div>
+
+    <hr/>
+  </div>
+
+  <div class="message">
+    <div class="body-text">
+      <p>
+        {{unbound message}}
+      </p>
+    </div>
+
     <div class="attachments">
       <ul class="thumbnails">
         {{#each attachments}}
@@ -18,48 +34,33 @@
         {{/each}}
       </ul>
     </div>
-  </div>
-  <div class="email-actions">
-    <div class="btn-toolbar">
-      <div class="btn-group">
-        <a {{action showReplySection}} class="btn">
-          <i class="icon-reply"></i> Reply
-        </a>
-        <a class="btn">
-          <i class="icon-forward-2"></i> Forward
-        </a>
-        <a {{action showActionSection}} class="btn">
-          Add {{#if showActions}}<i class="icon-minus"></i>{{else}}<i class="icon-plus"></i>{{/if}}
-        </a>
-      </div>
-      <div class="btn-group pull-right">
-        <a {{action setVisibility this target="controller"}} class="btn">
-          {{#if isPublic}}
-          <i class="icon-ban-circle"></i> Private
-          {{else}}
-          <i class="icon-ok-circle"></i> Public
-          {{/if}}
-        </a>
-        <a {{action deleteEmail this target="controller"}} class="btn btn-danger">
-          <i class="icon-trash icon-white"></i>
-        </a>
-      </div>
+
+    <hr />
+
+    <div class="email-actions text-right">
+      <a {{action showReplySection}} class="btn btn-link">
+        <i class="icon-reply"></i>Reply
+      </a>
+
+      <a class="btn btn-link">
+        <i class="icon-forward"></i>Forward
+      </a>
+
+      <a class="btn btn-link">
+        <i class="icon-private"></i>Make Private
+      </a>
+
+      <a class="btn btn-link"><i class="icon-delete"></i></a>
     </div>
   </div>
 </div>
 
-{{#if showReply}}
-  <div class="block block-arrow">
-    {{control 'messages/reply' model}}
-  </div>
-{{/if}}
-
-{{#if showActions}}
-  <div class="block block-connected block-arrow block-blue">
+{{#if showFormBox}}
+  <div class="block block-connected block-blue">
     {{control "form_box" formBox}}
   </div>
 {{/if}}
 
-<div class="block block-arrow">
+<div class="block block-gray">
   {{control 'comments' model}}
 </div>

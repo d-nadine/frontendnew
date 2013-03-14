@@ -2,31 +2,65 @@ $bright: #fff;
 $background: #f3f3f3;
 $dark-background: #d9dada;
 $light-background: #ededed;
+
 $selected-item: #e7e7e7;
 $selected-item-border: #dbdbdb;
 
+$dark-selected-item: #666666;
+
 $text: #262626;
-$light-text: lighten($text, 35);
-$dark-text: darken($text, 25);
-
-$attention: rgb(250, 220, 173);
-
 $blue: #0088cc;
+$green: #00e710;
+$money: #468847;
+$muted: #ccc;
+$dark: darken($text, 25);
+$black: black;
 
 $associated-blue: #d5f7ff;
-$secondary-selection: #f9fcff;
+$secondary-selection: #eff3fb;
 
 // Forms
 $control-border-color: #c5c5c5;
 $valid-input-border: #999898;
-$success-green: #09E409;
-
-//notifications
-$notifications-bg: #888;
-$notifications-border: #444;
-
-$sidebar-read: #999;
-$sidebar-read-checked: darken($sidebar-read, 30);
-$sidebar-read-selected: darken($sidebar-read, 30);
 
 $alerts-layer: 1000;
+
+.gray-background {
+  background-color: $background;
+}
+
+.bright-background {
+  background-color: $bright;
+}
+
+.blue {
+  color: $blue;
+}
+
+.green {
+  color: $green;
+}
+
+.money {
+  color: $money;
+}
+
+.muted {
+  color: $muted;
+}
+
+.dark {
+  color: $dark;
+}
+
+.black {
+  color: $black;
+}
+
+.associated-blue {
+  background-color: $associated-blue;
+}
+
+.secondary-selection {
+  background-color: $secondary-selection;
+}

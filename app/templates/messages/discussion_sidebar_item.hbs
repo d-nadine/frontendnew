@@ -1,15 +1,11 @@
-<div>
-  <img src="/images/icons/users.png" alt="discussion">
-</div>
-<div>
-  <div>
+<i class="icon-discussion"></i>
+
+<div class="text-container">
+  <ul class="unstyled inline comma-separated user-list">
     {{#each users}}
-      {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+      <li><strong>{{name}}</strong></li>
     {{/each}}
-  </div>
-  <p>{{topic}}</p>
-  <a {{action deleteItem this target="controllers.messages"}}>
-    <i class='icon-trash icon-large'></i>
-  </a>
+  </ul>
+
+  <p>{{truncate topic}}</p>
 </div>
-<small>{{time sentAt}}</small>

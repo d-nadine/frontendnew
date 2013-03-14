@@ -6,7 +6,7 @@
       background-color: $dark-background;
 
       .checker label::after {
-        border-color: $light-text
+        border-color: $muted
       }
 
       &::after {
@@ -35,7 +35,7 @@
   }
   &.just-added .primary {
     .checker label {
-      @include icons-sprite(call-green);
+      color: $green;
     }
 
     .todo textarea,
@@ -73,17 +73,17 @@
     margin-top: 6px;
 
     label {
-      @include icons-sprite(call-muted);
+      color: $muted;
     }
 
     input:not([disabled]) + label:hover {
-      @include icons-sprite(call-green);
+      color: $green;
     }
   }
 
   .is-finished .checker {
     label {
-      @include icons-sprite(call-muted);
+      color: $muted;
     }
   }
 

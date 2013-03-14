@@ -58,7 +58,7 @@
         background-color: $dark-background;
 
         .checker label::after {
-          border-color: $light-text
+          border-color: $muted
         }
 
         &::after {
@@ -100,7 +100,6 @@
       }
 
       .success {
-        color: $success-green;
         margin-top: 4px;
       }
     }

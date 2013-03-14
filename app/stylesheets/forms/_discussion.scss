@@ -23,7 +23,7 @@
     }
 
     .primary i {
-      @include icons-sprite(discussion-white);
+      color: $green;
     }
   }
 }

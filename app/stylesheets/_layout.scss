@@ -1,5 +1,9 @@
-#application {
-  padding-top: 60px;
+body {
+  background: none;
+}
+
+.page-view {
+  padding: 60px 0;
 }
 
 #main-panel {
@@ -9,7 +13,6 @@
 .main-row {
   margin-left: 0;
   overflow: auto;
-  padding-bottom: 60px;
 }
 
 $sidebar-width: 340px;
@@ -73,24 +76,37 @@ $button-bar-width: 40px;
 
 #drawer-buttons {
   position: fixed;
+  top: 60px;
   z-index: 1000; // FIXME: this shouldn't be required
   width: $button-bar-width;
 
-  a {
+  > a {
     display: block;
+    position: relative;
     padding: 4px 12px;
     margin-bottom: 6px;
     background-color: $light-background;
     height: 60px;
+    color: inherit;
+    text-decoration: none;
+
+    i {
+      position: absolute;
+      top: 50%;
+      margin-top: -25%;
+      left: 50%;
+      margin-left: -20%;
+
+      color: darken($light-background, 45);
+    }
 
     &:hover {
       background-color: $bright;
-    }
-  }
 
-  [class^="icon-"], [class*=" icon-"] {
-    position: relative;
-    top: 20px;
+      i { 
+        color: $dark;
+      }
+    }
   }
 }
 
@@ -98,8 +114,8 @@ $button-bar-width: 40px;
   list-style: none;
   margin: 0;
 
-  li {
-    padding: 10px 5px;
+  > li {
+    padding: 5px;
     background-color: $bright;
     border-right: solid $sidebar-border-size $dark-background;
     position: relative;
@@ -121,10 +137,48 @@ $button-bar-width: 40px;
   background-color: $bright;
   margin-bottom: 10px;
   border: solid 1px $selected-item-border;
+  position: relative;
 
   :last-child {
     margin-bottom: 0;
   }
+
+  .adder {
+    position: absolute;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+
+    i {
+      position: absolute;
+      bottom: 0;
+      left: 18px;
+
+      color: darken($associated-blue, 20);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      content: ' ';
+      height: 0;
+      width: 0;
+      bottom: 0px;
+      border: solid 30px transparent;
+      border-bottom-color: $associated-blue;
+    }
+  }
+}
+
+.block-gray {
+  background-color: $light-background;
+}
+
+.block-connected {
+  margin-top: -11px;
 }
 
 .block.block-blue {
@@ -175,7 +229,7 @@ $button-bar-width: 40px;
 }
 
 .block-arrow-bottom + .block-connected {
-  margin-top: -15px;
+  margin-top: -11px;
   padding-top: 30px;
 }
 
@@ -183,8 +237,11 @@ $button-bar-width: 40px;
   text-transform: uppercase;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 // override bootstrap's align top
 .table .th, .table td {
   vertical-align: middle;
 }
-

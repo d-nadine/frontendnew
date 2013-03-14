@@ -1,3 +1,4 @@
+// this is an inline checker (useful in forms)
 .checker {
   position: relative;
   display: inline-block;
@@ -6,23 +7,101 @@
 
   label {
     position: absolute;
-    width: 30px;
-    height: 20px;
     top: 0;
     left: 0;
-    @include icons-sprite(todo-muted);
     cursor: default;
+    color: $muted;
   }
 
   input:not([disabled]) + label:hover {
     cursor: pointer;
   }
 
-  input:not([disabled]):not(:checked) + label:hover {
-    @include icons-sprite(todo-green);
+  &.checked label {
+    color: $black;
+  }
+
+  input:not([disabled]):not([checked]) + label:hover {
+    color: $green;
   }
 
   input {
     visibility: hidden;
+  }
+}
+
+// this is a block checker. Useful in lists and/or tables.
+.checker-block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  padding-left: 0;
+
+  input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    float: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  label {
+    margin-bottom: 0px;
+    top: 50%;
+    margin-top: -25%;
+    left: 50%;
+    margin-left: -25%;
+  }
+
+  &:after {
+    display: none;
+    position: absolute;
+    content: ' ';
+    top: 50%;
+    margin-top: -25%;
+    left: 100%;
+    width: 0; 
+    height: 0; 
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+  &.checked {
+    background-color: $dark-selected-item;
+
+    &:after,
+    &:hover:after {
+      display: block;
+      border-left: 8px solid $dark-selected-item;
+    }
+
+    label {
+      color: $bright;
+
+      &:hover {
+        color: $dark;
+      }
+    }
+  }
+
+  &.unchecked {
+    &:hover:after {
+      display: block;
+      border-left: 8px solid $background;
+    }
+
+    label:hover {
+      color: $dark;
+    }
+
+    &:hover {
+      background-color: $background;
+    }
   }
 }

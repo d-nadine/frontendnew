@@ -1,6 +1,8 @@
-<div id="messages-bulk-actions-panel">
+<div id="bulk-actions">
   <div class="page-header upcase">
-    <button class="btn pull-right" {{action cancel}}>Cancel</button>
+    <button class="btn pull-right" {{action cancel}}>
+      Cancel
+    </button>
 
     <h3>Create Tasks from Selected Emails</h3>
   </div>
@@ -12,16 +14,22 @@
   <div class="block block-connected">
     <table class="table table-list">
       {{#each controller}}
-        <tr>
-          <td>{{iconFor this}}</td>
-          <td><strong>{{person.name}}</strong></td>
-          <td>{{truncate summary}}</td>
+        <tr class="secondary-selection">
           <td>
-            {{#if hasAttachments}}
-            <i class="icon-paperclip"></i>
+            {{#if isEmail}}
+              <i class="icon-mail"></i>
+            {{else}}
+              <i class="icon-discussion"></i>
             {{/if}}
           </td>
-          <td>{{time timestamp}}</td>
+          <td><strong>{{person.name}}</strong></td>
+          <td>{{truncate summary}}</td>
+          <td class="muted">{{time timestamp}}</td>
+          <td>
+            {{#if hasAttachments}}
+              <i class="icon-attachments"></i>
+            {{/if}}
+          </td>
         </tr>
       {{/each}}
     </table>
