@@ -1,51 +1,83 @@
-<form class="form form-horizontal">
-  <div class="secondary">
-    <h1>Lead</h1>
-    <div>
-      <a href="#" class="btn btn-large btn-primary single">Single Lead</a>
-      <a href="#" class="btn btn-large">Import Leads from file</a>
-      <a href="#" class="btn btn-large">From Social Network</a>
-    </div>
-    <fieldset>
-      <div class="control-group">
-        <label class="control-label">Name</label>
-        <div class="controls control-box">
-          {{view view.existingContactChecker}}
-          <div>
-            Existing Customer
+<div>
+  <h1>Lead</h1>
+  <div class="tabbable">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a href="#single" data-toggle="tab">Single Lead</a>
+      </li>
+      <li>
+        <a href="#file" data-toggle="tab">Import leads from file</a>
+      </li>
+      <li>
+        <a href="#social" data-toggle="tab">From Social Network</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="single" class="tab-pane active">
+        <form class="form form-horizontal">
+          <div class="secondary">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label">Name</label>
+                <div class="controls control-box">
+                  {{view view.existingContactChecker}}
+                  <div class="contact-status">
+                    Existing Customer
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Company</label>
+                <div class="controls">
+                  <input type="text" class="field" placeholder="Company">
+                </div>
+              </div>
+              {{#if view.isNewLead}}
+              <div class="control-group">
+                <label class="control-label">Email</label>
+                <div class="controls">
+                  <input type="text" class="field" placeholder="Email">
+                </div>
+              </div>
+              {{view view.phoneNumbers}}
+              <div class="control-group">
+                <label class="control-label">Assigned To</label>
+                <div class="controls assigned">
+                  {{view view.userPicker}}
+                </div>
+              </div>
+              {{/if}}
+              {{#if view.contactExists}}
+              <div class="existing">
+                <span>{{selectedContact.name}}</span> is already an existing customer. Do you want to add a deal?
+                <div>
+                  <a href="#" class="btn">Cancel</a>
+                  <a href="#" class="btn btn-success">Yes</a>
+                </div>
+              </div>
+              {{/if}}
+            </fieldset>
           </div>
-        </div>
+        </form>
       </div>
-      <div class="control-group">
-        <label class="control-label">Company</label>
-        <div class="controls">
-          <input type="text" class="field" placeholder="Company">
-        </div>
+      <div id="file" class="tab-pane">
+        <form class="form form-horizontal">
+          <div class="secondary">
+            <fieldset>
+              <h1>File Upload</h1>
+            </fieldset>
+          </div>
+        </form>
       </div>
-      {{#if view.isNewLead}}
-      <div class="control-group">
-        <label class="control-label">Email</label>
-        <div class="controls">
-          <input type="text" class="field" placeholder="Email">
-        </div>
+      <div id="social" class="tab-pane">
+        <form class="form form-horizontal">
+          <div class="secondary">
+            <fieldset>
+              <h1>Social Network</h1>
+            </fieldset>
+          </div>
+        </form>
       </div>
-      {{view view.phoneNumbers}}
-      <div class="control-group">
-        <label class="control-label">Assigned To</label>
-        <div class="controls assigned">
-          {{#linkTo user assignedTo}}{{assignedTo.name}}{{/linkTo}}
-        </div>
-      </div>
-      {{/if}}
-      {{#if view.contactExists}}
-      <div class="existing">
-        <span>{{selectedContact.name}}</span> is already an existing customer. Do you want to add a deal?
-        <div>
-          <a href="#" class="btn">Cancel</a>
-          <a href="#" class="btn btn-success">Yes</a>
-        </div>
-      </div>
-      {{/if}}
-    </fieldset>
+    </div>
   </div>
 </div>

@@ -6,8 +6,12 @@ Radium.LeadsNewView = Ember.View.extend
   valueBinding: 'controller.selectedContact'
   isNewLead: false
 
+  didInsertElement: ->
+    @$('.name').focus()
+
   phoneNumbers: Radium.MultipleField.extend
     classNames: ['control-group']
+    leader: 'Phone Number'
     # FIXME: use real data
     source: [
       { name: "Mobile", value: "+1348793247" }
@@ -15,8 +19,12 @@ Radium.LeadsNewView = Ember.View.extend
       { name: "Home", value: "+35832478388" }
     ]
 
+  userPicker: Radium.UserPicker.extend
+    disabledBinding: 'controller.isDisabled'
+    valueBinding: 'controller.assignedTo'
+
   existingContactChecker: Radium.Typeahead.extend
-    classNames: 'field input-xlarge'
+    classNames: ['field', 'input-xlarge', 'name']
     valueBinding: 'parentView.query'
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
@@ -39,6 +47,7 @@ Radium.LeadsNewView = Ember.View.extend
       ), 800)
 
   setValue: (object) ->
+    @set 'isNewLead', false
     @set 'value', object
 
   queryBinding: 'queryToValueTransform'

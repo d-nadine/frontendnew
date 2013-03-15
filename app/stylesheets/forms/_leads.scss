@@ -1,6 +1,20 @@
 .multiple-field{
-  border: 1px solid red;
-  display: inline-block;
+
+  div{
+    display: inline-block;
+  }
+
+  label{
+    display: inline;
+  }
+
+  input[type=radio]{
+    position: relative;
+    top: -4px;
+    padding: 0 5px 0px 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 
   .btn, .btn:focus {
     outline: none;
@@ -19,6 +33,26 @@
     padding-right: 50px;
   }
 
+  ul.nav-pills{
+    li:first-of-type a{
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
+    li a{
+      font-size: 17.5px;
+    }
+  }
+
+  .tab-content{
+    margin-top: -15px;
+    overflow: visible;
+  }
+
+  .secondary{
+    margin: 0;
+  }
+
   fieldset{
     margin-top: 30px;
     margin-left: 2px;
@@ -34,7 +68,7 @@
       border: solid 1px #c5c5c5;
       border-bottom: 1px solid #c5c5c5;
 
-      > div{
+      .contact-status{
         display: inline-block;
         background-color: white;
         color: $success-green;
