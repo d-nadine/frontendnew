@@ -8,8 +8,8 @@ Radium.MultipleField = Ember.View.extend
   didInsertElement: ->
     @set 'current', @get('source.firstObject')
 
-  template: Ember.Handlebars.compile """
-    <label class="control-label">{{view.leader}}</label>
+  layout: Ember.Handlebars.compile """
+    {{yield}}
     <div class="controls">
       {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
       <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
@@ -27,6 +27,10 @@ Radium.MultipleField = Ember.View.extend
       </div>
       {{view view.primaryRadio}}
     </div>
+  """
+
+  template: Ember.Handlebars.compile """
+    <label class="control-label">{{view.leader}}</label>
   """
 
   primaryRadio: Radium.Radiobutton.extend
