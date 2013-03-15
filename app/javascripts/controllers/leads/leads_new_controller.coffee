@@ -24,7 +24,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   contactFormDefaults: ( ->
     name: null
-    type: 'lead'
     status: 'lead'
     phoneNumbers: [
       Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),

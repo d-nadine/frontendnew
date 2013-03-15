@@ -11,6 +11,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   name: DS.attr('string')
   phoneNumbers: DS.attr('array')
   emailAddresses: DS.attr('array')
+  status: DS.attr('string')
 
   source: DS.attr('string')
 
@@ -35,3 +36,4 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   isLead: ( ->
     @get('status') == 'lead'
   ).property('status')
+

@@ -34,6 +34,16 @@ Radium.LeadsNewView = Ember.View.extend
       </ul>
     """
 
+  notes: Ember.TextArea.extend
+    placeholder: 'What is the lead interested in buying' 
+    valueBinding: 'controller.notes'
+    didInsertElement: ->
+      @_super()
+      @$().elastic()
+
+    willDestroyElement: ->
+      @$().off('elastic')
+
   existingContactChecker: Radium.Typeahead.extend
     classNames: ['field', 'input-xlarge', 'name']
     valueBinding: 'parentView.query'
