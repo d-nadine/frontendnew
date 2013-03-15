@@ -26,11 +26,10 @@ Radium.LeadsNewView = Ember.View.extend
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']
     sourceBinding: 'controller.leadStatus'
-    valueBinding: 'controller.status'
     template: Ember.Handlebars.compile """
       <ul>
       {{#each view.source}}
-        {{view Radium.Radiobutton name="type" leaderBinding="name" valueBinding="value" tagName="li"}}
+        {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leaderBinding="name" valueBinding="value" tagName="li"}}
       {{/each}}
       </ul>
     """
