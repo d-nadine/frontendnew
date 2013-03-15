@@ -35,7 +35,8 @@ Radium.LeadsNewView = Ember.View.extend
     """
 
   notes: Ember.TextArea.extend
-    placeholder: 'What is the lead interested in buying' 
+    classNames: ['field', 'text-area','input-xxlarge']
+    placeholder: 'What is the lead interested in buying'
     valueBinding: 'controller.notes'
     didInsertElement: ->
       @_super()

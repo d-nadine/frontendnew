@@ -13,6 +13,12 @@
     }
   }
 }
+.text-area{
+  box-sizing: border-box;
+  height: 30px; // set initial height to one row of text
+  margin: 0;
+  resize: none;
+}
 .multiple-field{
   div{
     display: inline-block;
