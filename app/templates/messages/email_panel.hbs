@@ -38,7 +38,9 @@
       <tbody>
         <tr colspan="3">
           <td>
-            {{control 'next_task' nextTask}}
+            {{#with nextTask}}
+              {{control 'next_task' this}}
+            {{/with}}
           </td>
         </tr>
       </tbody>
