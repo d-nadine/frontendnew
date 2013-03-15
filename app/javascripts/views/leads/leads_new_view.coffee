@@ -4,7 +4,7 @@ Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
   contactExists: Ember.computed.bool 'value'
   valueBinding: 'controller.selectedContact'
-  isNewLead: false
+  isNewLeadBinding: 'controller.isNewLead'
 
   didInsertElement: ->
     @$('.name').focus()
@@ -12,12 +12,7 @@ Radium.LeadsNewView = Ember.View.extend
   phoneNumbers: Radium.MultipleField.extend
     classNames: ['control-group']
     leader: 'Phone Number'
-    # FIXME: use real data
-    source: [
-      { name: "Mobile", value: "+1348793247" }
-      { name: "Work", value: "+934728783" }
-      { name: "Home", value: "+35832478388" }
-    ]
+    sourceBinding: 'controller.phoneNumbers'
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'

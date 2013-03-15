@@ -32,6 +32,13 @@ Radium.MultipleField = Ember.View.extend
   primaryRadio: Radium.Radiobutton.extend
     leader: 'Make Primary'
 
+    isChecked: Ember.computed.bool 'parentView.current.isPrimary'
+
+    click: (evt) ->
+      evt.stopPropagation()
+      @get('parentView.source').setEach('isPrimary', false)
+      @set('parentView.current.isPrimary', true)
+
   selectValue: (object) ->
     @set('current', object)
 

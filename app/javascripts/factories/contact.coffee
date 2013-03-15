@@ -12,7 +12,7 @@ Factory.define 'contact', traits: ['timestamps'],
   user: -> Factory.create 'user'
 
   phoneNumbers: [
-    { name: "Mobile", number: "+1348793247" }
-    { name: "Work", number: "+934728783" }
-    { name: "Home", number: "+35832478388" }
+    { name: "Mobile", value: "+1348793247" }
+    { name: "Work", value: "+934728783" }
+    { name: "Home", value: "+35832478388" }
   ]
