@@ -9,9 +9,9 @@ Radium.MultipleField = Ember.View.extend
     @set 'current', @get('source.firstObject')
 
   layout: Ember.Handlebars.compile """
-    {{yield}}
+    <label class="control-label">{{view.leader}}</label>
     <div class="controls">
-      {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
+      {{yield}}
       <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
         <button class="btn" {{action toggleDropdown target="view" bubbles="false"}}>
           {{view.current.name}}
@@ -30,7 +30,7 @@ Radium.MultipleField = Ember.View.extend
   """
 
   template: Ember.Handlebars.compile """
-    <label class="control-label">{{view.leader}}</label>
+    {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
   """
 
   primaryRadio: Radium.Radiobutton.extend
