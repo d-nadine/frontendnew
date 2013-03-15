@@ -1,0 +1,47 @@
+<a class="btn next-task-widget">
+  {{#if content}}
+    {{#if isTodo}}
+      <i class="icon-todo green"></i>
+    {{/if}}
+
+    {{#if isCall}}
+      <i class="icon-call green"></i>
+    {{/if}}
+
+    {{#if isMeeting}}
+      <i class="icon-calendar"></i>
+    {{/if}}
+
+    <span class="text">
+      {{#if isTodo}}
+        {{truncate description}}
+      {{/if}}
+
+      {{#if isCall}}
+        Call {{reference.name}}
+      {{/if}}
+
+      {{#if isMeeting}}
+        {{truncate topic}}
+      {{/if}}
+    </span>
+
+    <small class="dark">
+      {{#if isTodo}}
+        {{time finishBy format=date}}
+      {{/if}}
+
+      {{#if isCall}}
+        {{time finishBy format=date}}
+      {{/if}}
+
+      {{#if isMeeting}}
+        {{time startsAt format=date}}
+      {{/if}}
+    </small>
+  {{else}}
+    <small class="dark">
+      No Tasks Yet!
+    </small>
+  {{/if}}
+</a>
