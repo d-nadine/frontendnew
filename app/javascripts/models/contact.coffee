@@ -11,6 +11,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   name: DS.attr('string')
   phoneNumbers: DS.attr('array')
   emailAddresses: DS.attr('array')
+  addresses: DS.attr('array')
   status: DS.attr('string')
 
   source: DS.attr('string')

@@ -19,6 +19,9 @@
   margin: 0;
   resize: none;
 }
+.selector{
+  vertical-align: top;
+}
 .multiple-field{
   div{
     display: inline-block;
@@ -107,6 +110,20 @@
     label.type{
       position: relative;
       top: -2px;
+    }
+
+    .addresses{
+      div:nth-of-type(-n+2){
+        display: block;
+      }
+      div:nth-of-type(3){
+        input:first-of-type{
+          width: 125px;
+        }
+        input:last-of-type{
+          width: 127px;
+        }
+      }
     }
 
     .existing{

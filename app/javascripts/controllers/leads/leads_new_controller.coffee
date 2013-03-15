@@ -22,6 +22,13 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   contactForm:  Radium.computed.newForm('contact')
 
+  addressDefaults: ->
+    street: null
+    city: null
+    state: null
+    zipcode: null
+    country: null
+
   contactFormDefaults: ( ->
     name: null
     status: 'lead'
@@ -34,4 +41,9 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       Ember.Object.create({name: 'Work', value: null, isPrimary: true}),
       Ember.Object.create({name: 'Home', value: null}),
     ]
+    addresses: [
+      Ember.Object.create({name: 'Office', value: Ember.Object.create(@addressDefaults()), isPrimary: true}),
+      Ember.Object.create({name: 'Home', value:  Ember.Object.create(@addressDefaults())}),
+    ]
+
   ).property('isNewLead')

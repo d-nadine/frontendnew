@@ -12,6 +12,8 @@ Radium.MultipleField = Ember.View.extend
     <label class="control-label">{{view.leader}}</label>
     <div class="controls">
       {{yield}}
+    </div>
+    <div class="controls selector">
       <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
         <button class="btn" {{action toggleDropdown target="view" bubbles="false"}}>
           {{view.current.name}}
@@ -44,7 +46,8 @@ Radium.MultipleField = Ember.View.extend
       @set('parentView.current.isPrimary', true)
 
   selectValue: (object) ->
-    @set('current', object)
+    Ember.run =>
+      @set('current', object)
 
   toggleDropdown: ->
     @toggleProperty 'open'
