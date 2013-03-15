@@ -6,6 +6,15 @@ Radium.LeadsNewView = Ember.View.extend
   valueBinding: 'controller.selectedContact'
   isNewLeadBinding: 'controller.isNewLead'
 
+  statusDescription: ( ->
+    currentStatus = @get('controller.status')
+    return "" unless currentStatus
+
+    @get('controller.leadStatus').find((status) ->
+      status.value == currentStatus
+    ).name
+  ).property('controller.status')
+
   didInsertElement: ->
     @$('.name').focus()
 

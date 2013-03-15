@@ -9,7 +9,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   leadStatus: [
     {name: "None", value: "none"}
-    {name: "lead", value: "lead"}
+    {name: "Lead", value: "lead"}
     {name: "Existing Customer", value: "existing"}
     {name: "Exclude From Pipeline", value: "exclude"}
   ]
