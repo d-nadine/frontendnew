@@ -23,6 +23,18 @@ Radium.LeadsNewView = Ember.View.extend
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.assignedTo'
 
+  contactType: Ember.View.extend
+    classNames: ['controls-group','radio-group']
+    sourceBinding: 'controller.leadStatus'
+    valueBinding: 'controller.status'
+    template: Ember.Handlebars.compile """
+      <ul>
+      {{#each view.source}}
+        {{view Radium.Radiobutton name="type" leaderBinding="name" valueBinding="value" tagName="li"}}
+      {{/each}}
+      </ul>
+    """
+
   existingContactChecker: Radium.Typeahead.extend
     classNames: ['field', 'input-xlarge', 'name']
     valueBinding: 'parentView.query'

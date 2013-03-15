@@ -7,6 +7,13 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   isNewLead: false
   modelBinding: 'contactForm'
 
+  leadStatus: [
+    {name: "None", value: "none"}
+    {name: "lead", value: "lead"}
+    {name: "Existing Customer", "existing"}
+    {name: "Exclude From Pipeline", value: "exclude"}
+  ]
+
   init: ->
     @_super.apply this, arguments
     @set 'assignedTo', @get('currentUser')
@@ -17,6 +24,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   contactFormDefaults: ( ->
     name: null
+    type: 'lead'
+    status: 'lead'
     phoneNumbers: [
       Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),
       Ember.Object.create({name: 'Work', value: null}),

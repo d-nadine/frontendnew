@@ -1,11 +1,29 @@
+.radio-group{
+  ul li{
+    display: inline-block;
+    list-style: none;
+    label{
+      display: inline;
+      margin-right: 10px;
+      position: relative;
+      top: 3px;
+    }
+    input[type=radio]{
+      margin-right: 10px;
+    }
+  }
+}
 .multiple-field{
-
   div{
     display: inline-block;
   }
 
   label{
     display: inline;
+  }
+
+  button.btn{
+    width: 100px;
   }
 
   input[type=radio]{
@@ -85,6 +103,12 @@
         }
       }
     }
+
+    label.type{
+      position: relative;
+      top: -2px;
+    }
+
     .existing{
       margin-top: 20px;
       margin-left: 102px;
