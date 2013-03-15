@@ -46,8 +46,7 @@ Radium.MultipleField = Ember.View.extend
       @set('parentView.current.isPrimary', true)
 
   selectValue: (object) ->
-    Ember.run =>
-      @set('current', object)
+    @set('current', object)
 
   toggleDropdown: ->
     @toggleProperty 'open'
