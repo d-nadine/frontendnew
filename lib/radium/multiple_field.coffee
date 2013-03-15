@@ -11,7 +11,7 @@ Radium.MultipleField = Ember.View.extend
   template: Ember.Handlebars.compile """
     <label class="control-label">{{view.leader}}</label>
     <div class="controls">
-      {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholder="Phone Number"}}
+      {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
       <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
         <button class="btn" {{action toggleDropdown target="view" bubbles="false"}}>
           {{view.current.name}}

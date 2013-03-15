@@ -22,4 +22,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       Ember.Object.create({name: 'Work', value: null}),
       Ember.Object.create({name: 'Home', value: null})
     ]
+    emailAddresses: [
+      Ember.Object.create({name: 'Work', value: null, isPrimary: true}),
+      Ember.Object.create({name: 'Home', value: null}),
+    ]
   ).property('isNewLead')

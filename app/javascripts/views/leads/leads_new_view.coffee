@@ -14,6 +14,11 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Phone Number'
     sourceBinding: 'controller.phoneNumbers'
 
+  emailAddresses: Radium.MultipleField.extend
+    classNames: ['control-group']
+    leader: 'Email'
+    sourceBinding: 'controller.emailAddresses'
+
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.assignedTo'
