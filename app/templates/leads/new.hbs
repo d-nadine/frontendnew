@@ -61,7 +61,7 @@
                 </div>
                 {{view view.addresses}}
                 <div class="commit">
-                  <a href="#" class="btn">Cancel</a>
+                  {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
                   <a href="#" {{action submit}} class="btn btn-success">Lead</a>
                 </div>
               {{!/if}}
