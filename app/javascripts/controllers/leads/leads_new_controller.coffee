@@ -1,4 +1,4 @@
-Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin, Ember.Evented,
+Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['contacts', 'users']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
@@ -61,8 +61,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      @get('model').commit()
-      @get('model').reset()
-
-      @trigger 'formReset'
+      # FIXME: Highly controversial but it gets round the form objects
+      # not being initialised like a controller.  We need to review this.
+      @get('model').commit (contact) =>
+        @transitionTo 'contact', contact
     ), 1200)

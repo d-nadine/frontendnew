@@ -18,7 +18,7 @@ Radium.ContactForm = Radium.Form.extend
     true
   ).property('name', 'emailAddresses.[]')
 
-  commit: ->
+  commit: (transitionTo) ->
     contact = Radium.Contact.createRecord @get('data')
 
     @get('phoneNumbers').forEach (phoneNumber) =>
@@ -30,11 +30,10 @@ Radium.ContactForm = Radium.Form.extend
     @get('addresses').forEach (address) =>
       contact.get('addresses').addObject Radium.EmailAddress.createRecord address
 
+    contact.one 'didCreate', ->
+      transitionTo contact
+
     @get('store').commit()
 
   reset: ->
     @_super.apply this, arguments
-    # @get('phoneNumbers').clear()
-    # @get('emailAddresses').clear()
-    # @get('addresses').clear()
-    @set('status', 'lead')

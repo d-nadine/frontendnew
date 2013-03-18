@@ -6,13 +6,6 @@ Radium.LeadsNewView = Ember.View.extend
   valueBinding: 'controller.selectedContact'
   isNewLeadBinding: 'controller.isNewLead'
 
-  didInsertElement: ->
-    @_super.apply this, arguments
-    @get('controller').on 'formReset', this, 'onFormReset'
-
-  onFormReset: ->
-    @$('form')[0].reset()
-
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
