@@ -118,7 +118,6 @@ Radium.LeadsNewView = Ember.View.extend
 
 
   setValue: (object) ->
-    alert object.get('name')
     @set 'value', object
 
   queryBinding: 'queryToValueTransform'
