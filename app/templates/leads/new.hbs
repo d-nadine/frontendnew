@@ -19,8 +19,8 @@
             <fieldset>
               <div class="control-group">
                 <label class="control-label">Name</label>
-                <div class="controls control-box">
-                  {{view view.existingContactChecker}}
+                <div {{bindAttr class="view.leadName.isInvalid:is-invalid :controls :control-box"}}>
+                  {{view view.contactName viewName="leadName"}}
                   <div class="contact-status">
                     {{view.statusDescription}}
                   </div>
@@ -53,14 +53,24 @@
                     {{view view.notes}}
                   </div>
                 </div>
+                <div class="control-group">
+                  <label class="control-label type">Lead Source</label>
+                  <div class="controls">
+                    {{view view.source}}
+                  </div>
+                </div>
                 {{view view.addresses}}
+                <div class="commit">
+                  <a href="#" class="btn">Cancel</a>
+                  <a href="#" {{action submit}} class="btn btn-success">Lead</a>
+                </div>
               {{!/if}}
               {{#if view.contactExists}}
               <div class="existing">
                 <span>{{selectedContact.name}}</span> is already an existing customer. Do you want to add a deal?
                 <div>
-                  <a href="#" class="btn">Cancel</a>
-                  <a href="#" class="btn btn-success">Yes</a>
+                  <a href="#" class="btn btn-medium">Cancel</a>
+                  <a href="#" class="btn btn-success btn-medium">Yes</a>
                 </div>
               </div>
               {{/if}}

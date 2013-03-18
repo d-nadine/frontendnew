@@ -7,7 +7,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   isNewLead: false
   modelBinding: 'contactForm'
 
-  leadStatus: [
+  leadStatuses: [
     {name: "None", value: "none"}
     {name: "Lead", value: "lead"}
     {name: "Existing Customer", value: "existing"}
@@ -32,6 +32,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   contactFormDefaults: ( ->
     name: null
     status: 'lead'
+    notes: null
+    source: ''
     phoneNumbers: [
       Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),
       Ember.Object.create({name: 'Work', value: null}),
@@ -47,3 +49,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     ]
 
   ).property('isNewLead')
+
+  submit: ->
+    @set 'isSubmitted', true
+
+    return unless @get('isValid')

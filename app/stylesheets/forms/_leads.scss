@@ -48,6 +48,7 @@
   }
 
 }
+
 .leads-view{
   h1{
     margin-bottom: 40px;
@@ -92,8 +93,8 @@
     }
 
     .control-box{
-      border: solid 1px #c5c5c5;
-      border-bottom: 1px solid #c5c5c5;
+      border: solid 1px $control-border-color;
+      border-bottom: 1px solid $control-border-color;
 
       .contact-status{
         display: inline-block;
@@ -101,6 +102,10 @@
         color: $success-green;
         margin-right: 5px;
       }
+    }
+
+    .control-box.is-invalid{
+      border-color: red;
     }
 
     .controls{
@@ -126,6 +131,14 @@
       }
     }
 
+    .commit{
+      width: 200px;
+      margin: 0 auto;
+      .btn-success{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
     .existing{
       margin-top: 20px;
       margin-left: 102px;

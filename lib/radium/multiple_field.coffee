@@ -4,13 +4,15 @@ Radium.MultipleField = Ember.View.extend
   classNames: ['multiple-field']
   open: false
   leader: 'field'
+  type: 'text'
+  isInvalid: false
 
   didInsertElement: ->
     @set 'current', @get('source.firstObject')
 
   layout: Ember.Handlebars.compile """
     <label class="control-label">{{view.leader}}</label>
-    <div class="controls">
+    <div class="controls control-box" {{bindAttr class="view.isInvalid:is-invalid"}}>
       {{yield}}
     </div>
     <div class="controls selector">
@@ -32,7 +34,7 @@ Radium.MultipleField = Ember.View.extend
   """
 
   template: Ember.Handlebars.compile """
-    {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
+    {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
   """
 
   primaryRadio: Radium.Radiobutton.extend

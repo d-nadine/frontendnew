@@ -6,17 +6,47 @@ Radium.LeadsNewView = Ember.View.extend
   valueBinding: 'controller.selectedContact'
   isNewLeadBinding: 'controller.isNewLead'
 
+  contactName: Radium.Typeahead.extend
+    classNameBindings: ['isInvalid', ':field', ':input-xlarge']
+    valueBinding: 'parentView.query'
+    disabledBinding: 'parentView.disabled'
+    placeholderBinding: 'parentView.placeholder'
+    sourceBinding: 'controller.contacts'
+    timeoutId: null
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+
+    didInsertElement: ->
+      @_super.apply this, arguments
+      @$().focus()
+
+    isInvalid: ( ->
+      Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    ).property('value', 'isSubmitted')
+
+    keyDown: (evt) ->
+      timeoutId = @get('timeoutId')
+      if timeoutId
+        clearTimeout timeoutId
+
+      timeoutId = setTimeout(( =>
+        parentView = @get('parentView')
+        value = @get('value')
+
+        if parentView.get('value') || value?.length < 3
+          parentView.set('isNewLead', false)
+          return
+
+        parentView.set('isNewLead', true)
+      ), 800)
+
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
 
-    @get('controller.leadStatus').find((status) ->
+    @get('controller.leadStatuses').find((status) ->
       status.value == currentStatus
     ).name
   ).property('controller.status')
-
-  didInsertElement: ->
-    @$('.name').focus()
 
   phoneNumbers: Radium.MultipleField.extend
     classNames: ['control-group']
@@ -24,9 +54,17 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.phoneNumbers'
 
   emailAddresses: Radium.MultipleField.extend
-    classNames: ['control-group']
+    classNameBindings: [':control-group']
+    isSubmitted: Ember.computed.alias 'controller.isSubmitted'
+    type: 'email'
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
+    isInvalid: ( ->
+      return false unless @get('isSubmitted')
+
+      not @get('controller.emailAddresses').someProperty 'value'
+    ).property('controller.emailAddresses.[]', 'isSubmitted')
+
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
@@ -34,7 +72,7 @@ Radium.LeadsNewView = Ember.View.extend
 
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']
-    sourceBinding: 'controller.leadStatus'
+    sourceBinding: 'controller.leadStatuses'
     template: Ember.Handlebars.compile """
       <ul>
       {{#each view.source}}
@@ -45,7 +83,7 @@ Radium.LeadsNewView = Ember.View.extend
 
   notes: Ember.TextArea.extend
     classNames: ['field', 'text-area','input-xxlarge']
-    placeholder: 'What is the lead interested in buying'
+    placeholder: 'What is the lead interested in buying?'
     valueBinding: 'controller.notes'
     didInsertElement: ->
       @_super()
@@ -53,6 +91,11 @@ Radium.LeadsNewView = Ember.View.extend
 
     willDestroyElement: ->
       @$().off('elastic')
+
+  source: Ember.TextField.extend
+    classNames: ['field', 'input-xxlarge']
+    placeholder: 'Where is this lead from?'
+    valueBinding: 'controller.source'
 
   addresses: Radium.MultipleField.extend
     classNames: ['control-group']
@@ -72,29 +115,6 @@ Radium.LeadsNewView = Ember.View.extend
         </div>
       </div>
     """
-
-  existingContactChecker: Radium.Typeahead.extend
-    classNames: ['field', 'input-xlarge', 'name']
-    valueBinding: 'parentView.query'
-    disabledBinding: 'parentView.disabled'
-    placeholderBinding: 'parentView.placeholder'
-    sourceBinding: 'controller.contacts'
-    timeoutId: null
-    keyDown: (evt) ->
-      timeoutId = @get('timeoutId')
-      if timeoutId
-        clearTimeout timeoutId
-
-      timeoutId = setTimeout(( =>
-        parentView = @get('parentView')
-        value = @get('value')
-
-        if parentView.get('value') || value?.length < 3
-          parentView.set('isNewLead', false)
-          return
-
-        parentView.set('isNewLead', true)
-      ), 800)
 
   setValue: (object) ->
     @set 'isNewLead', false
