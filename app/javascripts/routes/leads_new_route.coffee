@@ -12,10 +12,12 @@ Radium.LeadsNewRoute = Ember.Route.extend
     country: null
 
   contactFormDefaults: ( ->
+    isNew: true
     name: ''
     status: 'lead'
     notes: null
     source: ''
+    assignedTo: null
     phoneNumbers: [
       Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),
       Ember.Object.create({name: 'Work', value: null}),
@@ -29,5 +31,4 @@ Radium.LeadsNewRoute = Ember.Route.extend
       Ember.Object.create({name: 'Office', value: Ember.Object.create(@addressDefaults()), isPrimary: true}),
       Ember.Object.create({name: 'Home', value:  Ember.Object.create(@addressDefaults())}),
     ]
-
   ).property()

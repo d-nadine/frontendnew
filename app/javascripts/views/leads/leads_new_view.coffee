@@ -3,7 +3,7 @@ require 'lib/radium/typeahead_textfield'
 
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
-  isNewLeadBinding: 'controller.isNewLead'
+  isNewBinding: 'controller.isNewLead'
 
   statusDescription: ( ->
     currentStatus = @get('controller.status')
@@ -107,6 +107,6 @@ Radium.LeadsNewView = Ember.View.extend
     #     parentView.set('isNewLead', true)
     #   ), 800)
 
-  setValue: (object) ->
-    @set 'value', object
-    @set 'selectedContact', object
+    setValue: (object) ->
+      @set 'value', object
+      @set 'controller.model', object
