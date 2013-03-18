@@ -5,7 +5,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   selectedContact: null
   assignedTo: null
   isNewLead: false
-  modelBinding: 'contactForm'
   showDetail: false
 
   init: ->
@@ -23,36 +22,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     {name: "Existing Customer", value: "existing"}
     {name: "Exclude From Pipeline", value: "exclude"}
   ]
-
-  contactForm:  Radium.computed.newForm('contact')
-
-  addressDefaults: ->
-    street: null
-    city: null
-    state: null
-    zipcode: null
-    country: null
-
-  contactFormDefaults: ( ->
-    name: ''
-    status: 'lead'
-    notes: null
-    source: ''
-    phoneNumbers: [
-      Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),
-      Ember.Object.create({name: 'Work', value: null}),
-      Ember.Object.create({name: 'Home', value: null})
-    ]
-    emailAddresses: [
-      Ember.Object.create({name: 'Work', value: null, isPrimary: true}),
-      Ember.Object.create({name: 'Home', value: null}),
-    ]
-    addresses: [
-      Ember.Object.create({name: 'Office', value: Ember.Object.create(@addressDefaults()), isPrimary: true}),
-      Ember.Object.create({name: 'Home', value:  Ember.Object.create(@addressDefaults())}),
-    ]
-
-  ).property('isNewLead')
 
   submit: ->
     @set 'isSubmitted', true

@@ -53,6 +53,9 @@
                 </div>
                 {{#if showDetail}}
                   <div class="control-group">
+                    <a href="#" {{action toggleDetail bubbles="false"}}>- Collapse</a>
+                  </div>
+                  <div class="control-group">
                     <label class="control-label type">Lead Source</label>
                     <div class="controls">
                       {{view view.source}}
@@ -61,9 +64,6 @@
                   <hr/>
                   {{view view.addresses}}
                   <hr/>
-                  <div class="control-group">
-                    <a href="#" {{action toggleDetail bubbles="false"}}>- Collapse</a>
-                  </div>
                 {{else}}
                   <div class="control-group">
                     <a href="#" {{action toggleDetail bubbles="false"}}>+ Address and more</a>
