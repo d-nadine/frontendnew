@@ -58,7 +58,16 @@
                       {{view view.source}}
                     </div>
                   </div>
+                  <hr/>
                   {{view view.addresses}}
+                  <hr/>
+                  <div class="control-group">
+                    <a href="#" {{action toggleDetail bubbles="false"}}>- Collapse</a>
+                  </div>
+                {{else}}
+                  <div class="control-group">
+                    <a href="#" {{action toggleDetail bubbles="false"}}>+ Address and more</a>
+                  </div>
                 {{/if}}
                 <div class="commit">
                   {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}

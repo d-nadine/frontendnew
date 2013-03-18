@@ -6,6 +6,16 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   assignedTo: null
   isNewLead: false
   modelBinding: 'contactForm'
+  showDetail: false
+
+  init: ->
+    @_super.apply this, arguments
+    @set 'assignedTo', @get('currentUser')
+    # FIXME: development hack
+    @set 'isNewLead', true
+
+  toggleDetail: ->
+    @toggleProperty 'showDetail'
 
   leadStatuses: [
     {name: "None", value: "none"}
@@ -13,12 +23,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     {name: "Existing Customer", value: "existing"}
     {name: "Exclude From Pipeline", value: "exclude"}
   ]
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'assignedTo', @get('currentUser')
-    # FIXME: development hack
-    @set 'isNewLead', true
 
   contactForm:  Radium.computed.newForm('contact')
 
