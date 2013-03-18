@@ -1,4 +1,5 @@
 require 'lib/radium/multiple_field'
+require 'lib/radium/typeahead_textfield'
 
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
@@ -83,7 +84,7 @@ Radium.LeadsNewView = Ember.View.extend
       </div>
     """
 
-  contactName: Radium.Typeahead.extend
+  contactName: Radium.TypeaheadTextField.extend
     classNameBindings: ['isInvalid', ':field', ':input-xlarge']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
@@ -95,10 +96,6 @@ Radium.LeadsNewView = Ember.View.extend
     didInsertElement: ->
       @_super.apply this, arguments
       @$().focus()
-
-    isInvalid: ( ->
-      Ember.isEmpty(@get('value')) && @get('isSubmitted')
-    ).property('value', 'isSubmitted')
 
     keyDown: (evt) ->
       timeoutId = @get('timeoutId')
@@ -116,23 +113,5 @@ Radium.LeadsNewView = Ember.View.extend
         parentView.set('isNewLead', true)
       ), 800)
 
-
   setValue: (object) ->
     @set 'value', object
-
-  queryBinding: 'queryToValueTransform'
-
-  lookupQuery: (query) ->
-    @get('contacts').find (item) -> item.get('name') == query
-
-  queryToValueTransform: ((key, value) ->
-    if arguments.length == 2
-      if lookUp = @lookupQuery(value)
-        @set 'value', @lookupQuery(value)
-      else
-        @set 'value', value
-    else if !value && @get('value')
-      @get 'value.name'
-    else
-      value
-  ).property('value')

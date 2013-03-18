@@ -19,11 +19,9 @@
             <fieldset>
               <div class="control-group">
                 <label class="control-label">Name</label>
-                <div {{bindAttr class="view.leadName.isInvalid:is-invalid :controls :control-box"}}>
-                  {{view view.contactName viewName="leadName"}}
-                  <div class="contact-status">
-                    {{view.statusDescription}}
-                  </div>
+                {{view view.contactName}}
+                <div class="contact-status">
+                  {{view.statusDescription}}
                 </div>
               </div>
               <div class="control-group">

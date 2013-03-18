@@ -92,16 +92,22 @@
       width: 110px;
     }
 
-    .control-box{
+    .control-box, .contact-status{
       border: solid 1px $control-border-color;
       border-bottom: 1px solid $control-border-color;
+    }
 
-      .contact-status{
-        display: inline-block;
-        background-color: white;
-        color: $success-green;
-        margin-right: 5px;
-      }
+    .name{
+      border-right: 1px solid $bright;
+      padding-right: 0;
+    }
+
+    .contact-status{
+      display: inline-block;
+      background-color: white;
+      color: $success-green;
+      padding: 3px 10px 5px 0;
+      margin-left: -5px;
     }
 
     .controls.is-invalid input[type=email],
