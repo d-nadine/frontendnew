@@ -12,7 +12,7 @@ Radium.MultipleField = Ember.View.extend
 
   layout: Ember.Handlebars.compile """
     <label class="control-label">{{view.leader}}</label>
-    <div class="controls control-box" {{bindAttr class="view.isInvalid:is-invalid"}}>
+    <div class="controls" {{bindAttr class="view.isInvalid:is-invalid"}}>
       {{yield}}
     </div>
     <div class="controls selector">

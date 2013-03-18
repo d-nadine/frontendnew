@@ -104,6 +104,7 @@
       }
     }
 
+    .controls.is-invalid input[type=email],
     .control-box.is-invalid{
       border-color: red;
     }
@@ -139,6 +140,7 @@
         padding-right: 15px;
       }
     }
+
     .existing{
       margin-top: 20px;
       margin-left: 102px;
