@@ -6,38 +6,12 @@ Radium.LeadsNewView = Ember.View.extend
   valueBinding: 'controller.selectedContact'
   isNewLeadBinding: 'controller.isNewLead'
 
-  contactName: Radium.Typeahead.extend
-    classNameBindings: ['isInvalid', ':field', ':input-xlarge']
-    valueBinding: 'parentView.query'
-    disabledBinding: 'parentView.disabled'
-    placeholderBinding: 'parentView.placeholder'
-    sourceBinding: 'controller.contacts'
-    timeoutId: null
-    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @get('controller').on 'formReset', this, 'onFormReset'
 
-    didInsertElement: ->
-      @_super.apply this, arguments
-      @$().focus()
-
-    isInvalid: ( ->
-      Ember.isEmpty(@get('value')) && @get('isSubmitted')
-    ).property('value', 'isSubmitted')
-
-    keyDown: (evt) ->
-      timeoutId = @get('timeoutId')
-      if timeoutId
-        clearTimeout timeoutId
-
-      timeoutId = setTimeout(( =>
-        parentView = @get('parentView')
-        value = @get('value')
-
-        if parentView.get('value') || value?.length < 3
-          parentView.set('isNewLead', false)
-          return
-
-        parentView.set('isNewLead', true)
-      ), 800)
+  onFormReset: ->
+    @$('form')[0].reset()
 
   statusDescription: ( ->
     currentStatus = @get('controller.status')
@@ -116,8 +90,42 @@ Radium.LeadsNewView = Ember.View.extend
       </div>
     """
 
+  contactName: Radium.Typeahead.extend
+    classNameBindings: ['isInvalid', ':field', ':input-xlarge']
+    valueBinding: 'controller.name'
+    disabledBinding: 'parentView.disabled'
+    placeholderBinding: 'parentView.placeholder'
+    sourceBinding: 'controller.contacts'
+    timeoutId: null
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+
+    didInsertElement: ->
+      @_super.apply this, arguments
+      @$().focus()
+
+    isInvalid: ( ->
+      Ember.isEmpty(@get('value')) && @get('isSubmitted')
+    ).property('value', 'isSubmitted')
+
+    keyDown: (evt) ->
+      timeoutId = @get('timeoutId')
+      if timeoutId
+        clearTimeout timeoutId
+
+      timeoutId = setTimeout(( =>
+        parentView = @get('parentView')
+        value = @get('value')
+
+        if parentView.get('value') || value?.length < 3
+          parentView.set('isNewLead', false)
+          return
+
+        parentView.set('isNewLead', true)
+      ), 800)
+
+
   setValue: (object) ->
-    @set 'isNewLead', false
+    alert object.get('name')
     @set 'value', object
 
   queryBinding: 'queryToValueTransform'
@@ -126,8 +134,12 @@ Radium.LeadsNewView = Ember.View.extend
     @get('contacts').find (item) -> item.get('name') == query
 
   queryToValueTransform: ((key, value) ->
+    debugger if value?.length > 3
     if arguments.length == 2
-      @set 'value', @lookupQuery(value)
+      if lookUp = @lookupQuery(value)
+        @set 'value', @lookupQuery(value)
+      else
+        @set 'value', value
     else if !value && @get('value')
       @get 'value.name'
     else

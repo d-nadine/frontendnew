@@ -1,4 +1,4 @@
-Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin, Ember.Evented,
   needs: ['contacts', 'users']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
@@ -30,7 +30,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     country: null
 
   contactFormDefaults: ( ->
-    name: null
+    name: ''
     status: 'lead'
     notes: null
     source: ''
@@ -54,3 +54,15 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     @set 'isSubmitted', true
 
     return unless @get('isValid')
+
+    @set 'justAdded', true
+
+    Ember.run.later( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+
+      @get('model').commit()
+      @get('model').reset()
+
+      @trigger 'formReset'
+    ), 1200)
