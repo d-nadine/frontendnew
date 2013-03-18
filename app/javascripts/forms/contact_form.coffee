@@ -19,7 +19,6 @@ Radium.ContactForm = Radium.Form.extend
   ).property('name', 'emailAddresses.[]')
 
   commit: ->
-    debugger
     contact = Radium.Contact.createRecord @get('data')
 
     @get('phoneNumbers').forEach (phoneNumber) =>

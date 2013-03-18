@@ -134,7 +134,6 @@ Radium.LeadsNewView = Ember.View.extend
     @get('contacts').find (item) -> item.get('name') == query
 
   queryToValueTransform: ((key, value) ->
-    debugger if value?.length > 3
     if arguments.length == 2
       if lookUp = @lookupQuery(value)
         @set 'value', @lookupQuery(value)
