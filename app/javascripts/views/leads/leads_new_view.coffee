@@ -5,6 +5,10 @@ Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
   isNewBinding: 'controller.isNewLead'
 
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @$('name').focus()
+
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
@@ -90,22 +94,6 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.contacts'
     timeoutId: null
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
-
-    # keyDown: (evt) ->
-    #   timeoutId = @get('timeoutId')
-    #   if timeoutId
-    #     clearTimeout timeoutId
-
-    #   timeoutId = setTimeout(( =>
-    #     parentView = @get('parentView')
-    #     value = @get('value')
-
-    #     if parentView.get('value') || value?.length < 3
-    #       parentView.set('isNewLead', false)
-    #       return
-
-    #     parentView.set('isNewLead', true)
-    #   ), 800)
 
     setValue: (object) ->
       @set 'value', object
