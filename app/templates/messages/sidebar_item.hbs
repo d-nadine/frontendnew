@@ -1,6 +1,6 @@
 {{view view.checker}}
 
-<div {{bindAttr class="isSelectable :content"}} {{action selectContent content}}>
+{{#linkTo messages.email content tagName="div" class="content"}}
   {{#if hasAttachments}}
     <i class="icon-attachments pull-right"></i>
   {{/if}}
@@ -14,4 +14,4 @@
 
     {{time timestamp class="muted upcase pull-right"}}
   </div>
-</div>
+{{/linkTo}}

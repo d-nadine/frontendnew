@@ -10,9 +10,6 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     toggleFolders: ->
       @toggleDrawer 'messages/folders'
 
-    createEmail: ->
-      @controllerFor('messages').toggleProperty 'createEmail'
-
   model: ->
     Radium.Message.create folder: 'inbox'
 

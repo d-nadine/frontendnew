@@ -3,7 +3,10 @@ Radium.Router.reopen
 
 Radium.Router.map ->
   @route 'dashboard'
-  @route 'messages'
+
+  @resource 'messages', ->
+    @route 'email', path: '/emails/:email_id'
+    @resource 'discussion'
 
   @resource 'pipeline', ->
     @route 'leads'

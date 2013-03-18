@@ -48,12 +48,4 @@
   </div>
 </div>
 
-{{#each visibleContent itemController="emailItem"}}
-  {{template "messages/email_item"}}
-{{/each}}
-
-{{#if hiddenContent}}
-  <div id="remaining-emails">
-    {{template "shared/show_more"}}
-  </div>
-{{/if}}
+{{render 'messages/email_history' history}}

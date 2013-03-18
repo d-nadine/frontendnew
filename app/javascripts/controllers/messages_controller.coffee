@@ -13,42 +13,9 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     {title: 'Prospects', name: 'prospects'}
   ]
 
-  destroy: ->
-    console.log 'weee'
-
-  # deleteItem: (item) ->
-  #   item.set 'isChecked'
-  #   # FIXME: ember-data association errors, fake for now
-  #   # store = @get('store')
-
-  #   # email.deleteRecord()
-  #   # store.commit()
-
-  #   @removeObject(item)
-  #   Radium.Utils.notify "deleted."
-
-  # deleteEmails: ->
-  #   return if selected.get('count') == 0
-
-  #   count = selected.get('length')
-  #   # FIXME: ember-data association errors, fake for now
-  #   # @get('selectedMail').toArray().forEach (email) ->
-  #   #   email.deleteRecord()
-  #   # @get('store').commit()
-  #   selected.forEach (email) -> email.set('isSelected', false)
-
-  #   @removeObjects(selected)
-
-  #   Radium.Utils.notify "#{count} emails deleted."
-
   canSelectItems: (->
     @get('checkedContent.length') == 0
   ).property('checkedContent.length')
-
-  history: (->
-    return unless @get('selectedContent')
-    Radium.Email.find historyFor: @get('selectedContent')
-  ).property('selectedContent')
 
   showDiscussion: (->
     return if @get('hasCheckedContent')
