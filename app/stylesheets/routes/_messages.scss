@@ -152,3 +152,31 @@
     text-align: right;
   }
 }
+
+ul.sentence, ol.sentence {
+  list-style: none;
+  margin: 0;
+  display: inline;
+
+  li { 
+    display: inline;
+  }
+
+  li:not(:last-of-type):after {
+    content: ','
+  }
+}
+
+.discussion-item {
+  .header {
+    i { 
+      float: left;
+      margin-right: 40px;
+      font-size: 32px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

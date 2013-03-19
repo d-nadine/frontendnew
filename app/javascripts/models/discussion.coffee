@@ -1,7 +1,7 @@
 Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
-  hasMany: DS.hasMany('Radium.Users')
+  users: DS.hasMany('Radium.User')
 
   user: DS.belongsTo('Radium.User', inverse: null)
   deal: DS.belongsTo('Radium.Deal', inverse: null)

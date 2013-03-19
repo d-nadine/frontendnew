@@ -28,10 +28,12 @@ class Populator
     userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
-    for i in [0..20]
+    deals = for i in [0..20]
       Factory.create 'deal',
         user: -> userDictionary.random()
         contact: -> contactDictionary.random()
+
+    dealDictionary = new Dictionary(deals)
 
     for i in [0..20]
       Factory.create 'call',
@@ -53,10 +55,15 @@ class Populator
       startsAt: Ember.DateTime.create().advance(day: 7)
       endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
-    for i in [0..5]
+    for i in [0..10]
       Factory.create 'discussion',
         user: userDictionary.random()
         users: [userDictionary.random(), userDictionary.random()]
+        reference: ->
+          if Math.random() >= 0.5
+            contactDictionary.random()
+          else
+            dealDictionary.random()
 
     Factory.adapter.store.commit()
 
