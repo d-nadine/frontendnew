@@ -5,10 +5,27 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   showDetail: false
   assignedTo: null
   form: null
+  isNewContact: false
 
   init: ->
     @_super.apply this, arguments
     @set 'assignedTo', @get('currentUser')
+
+  isExistingContact: ( ->
+    return false unless @get('model')
+
+    unless @get('model.isNew')
+      @set 'isNewContact', false
+      return true
+
+    false
+  ).property('model', 'isNewContact')
+
+  modelDidChange: ( ->
+    return if @get('form') || !@get('model')
+
+    @set 'form', @get('model') if @get('model.isNew')
+  ).observes('model')
 
   toggleDetail: ->
     @toggleProperty 'showDetail'
@@ -22,6 +39,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   cancel: ->
     @set 'model', @get('form')
+    @set 'isNewContact', true
 
   submit: ->
     @set 'isSubmitted', true

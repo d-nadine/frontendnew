@@ -104,8 +104,14 @@
     }
 
     .name{
-      border-right: 1px solid $bright;
-      padding-right: 0;
+      padding-right: 9px;
+    }
+
+    .is-existing-contact{
+      .name{
+        border-right: 1px solid $bright;
+        padding-right: 0;
+      }
     }
 
     .contact-status{

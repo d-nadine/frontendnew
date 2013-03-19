@@ -4,10 +4,6 @@ require 'lib/radium/typeahead_textfield'
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
 
-  didInsertElement: ->
-    @_super.apply this, arguments
-    @$('name').focus()
-
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
@@ -89,12 +85,36 @@ Radium.LeadsNewView = Ember.View.extend
     classNameBindings: ['isInvalid', ':field', ':input-xlarge']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
-    placeholderBinding: 'parentView.placeholder'
+    placeholder: 'Type a name'
     sourceBinding: 'controller.contacts'
     timeoutId: null
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    isExistingContact: Ember.computed.alias 'controller.isExistingContact'
+    isNewContactBinding: 'controller.isNewContact'
+
+    didInsertElement: ->
+      @_super.apply this, arguments
+      @$('input[type=text]').focus()
 
     setValue: (object) ->
       @set 'value', object
-      @set('controller.form', @get('controller.model'))
       @set 'controller.model', object
+
+    timeoutId: null
+    keyDown: (evt) ->
+      return if @get('controller.isExistingContact') || @get('controller.isNewContact')
+
+      timeoutId = @get('timeoutId')
+      if timeoutId
+        clearTimeout timeoutId
+
+      timeoutId = setTimeout(( =>
+        parentView = @get('parentView')
+        value = @get('value')
+
+        if parentView.get('value') || value?.length < 3
+          parentView.set('controller.isNewContact', false)
+          return
+
+        parentView.set('controller.isNewContact', true)
+      ), 800)
