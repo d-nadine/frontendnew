@@ -102,19 +102,19 @@ Radium.LeadsNewView = Ember.View.extend
 
     timeoutId: null
     keyDown: (evt) ->
-      return if @get('controller.isExistingContact') || @get('controller.isNewContact')
+      return if @get('isExistingContact') || @get('isNewContact')
 
       timeoutId = @get('timeoutId')
       if timeoutId
         clearTimeout timeoutId
 
       timeoutId = setTimeout(( =>
-        parentView = @get('parentView')
-        value = @get('value')
+        value = @$('input[type=text]').val()
 
-        if parentView.get('value') || value?.length < 3
-          parentView.set('controller.isNewContact', false)
+        if value?.length < 3
+          @set('isNewContact', false)
+
           return
 
-        parentView.set('controller.isNewContact', true)
+        @set('isNewContact', true)
       ), 800)
