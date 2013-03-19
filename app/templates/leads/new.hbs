@@ -75,9 +75,9 @@
                 </div>
                 {{else}}
               <div class="existing">
-                <span>{{name}}</span> is already an existing customer. Do you want to add a deal?
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is already an existing customer. Do you want to add a deal?
                 <div>
-                  <a href="#" class="btn btn-medium">Cancel</a>
+                  <a href="#" {{action cancel}} class="btn btn-medium">Cancel</a>
                   <a href="#" class="btn btn-success btn-medium">Yes</a>
                 </div>
               </div>

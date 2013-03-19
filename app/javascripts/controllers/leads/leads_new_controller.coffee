@@ -4,6 +4,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   users: Ember.computed.alias 'controllers.users'
   showDetail: false
   assignedTo: null
+  form: null
 
   init: ->
     @_super.apply this, arguments
@@ -19,6 +20,9 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     {name: "Exclude From Pipeline", value: "exclude"}
   ]
 
+  cancel: ->
+    @set 'model', @get('form')
+
   submit: ->
     @set 'isSubmitted', true
 
@@ -33,5 +37,5 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       # FIXME: Highly controversial but it gets round the form objects
       # not being initialised like a controller.  We need to review this.
       @get('model').commit (contact) =>
-        @transitionTo 'contact', contact
+        @transitionToRoute 'contact', contact
     ), 1200)

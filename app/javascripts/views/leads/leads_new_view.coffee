@@ -96,4 +96,5 @@ Radium.LeadsNewView = Ember.View.extend
 
     setValue: (object) ->
       @set 'value', object
+      @set('controller.form', @get('controller.model'))
       @set 'controller.model', object
