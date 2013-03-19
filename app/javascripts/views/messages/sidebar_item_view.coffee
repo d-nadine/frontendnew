@@ -24,3 +24,7 @@ Radium.MessagesSidebarItemView = Em.View.extend
   checker: Radium.Checkbox.extend
     classNames: ['checker-block']
     checkedBinding: 'controller.isChecked'
+
+    click: (event) ->
+      event.stopPropagation()
+      @get('controller').send('check', @get('controller.content'))

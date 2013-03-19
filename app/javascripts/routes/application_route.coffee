@@ -17,7 +17,10 @@ Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
       else
         return
 
-      @transitionTo lastPage[0], lastPage[1]
+      if lastPage[1]
+        @transitionTo lastPage[0], lastPage[1]
+      else
+        @transitionTo lastPage[0]
 
   setupController: ->
     @controllerFor('currentUser').set 'model', Radium.User.find(1)

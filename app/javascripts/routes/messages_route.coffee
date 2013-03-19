@@ -16,6 +16,19 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
       else if item instanceof Radium.Discussion
         @transitionTo 'messages.discussion', item
 
+    check: (item) ->
+      item.toggleProperty 'isChecked'
+
+      currentPath = @controllerFor('application').get('currentPath')
+      onBulkActions = currentPath is 'messages.bulk_actions'
+
+      itemsChecked = @controllerFor('messages').get('hasCheckedContent')
+
+      if !onBulkActions && itemsChecked
+        @transitionTo 'messages.bulk_actions'
+      else if !itemsChecked
+        @send 'back'
+
   model: ->
     Radium.Message.create folder: 'inbox'
 

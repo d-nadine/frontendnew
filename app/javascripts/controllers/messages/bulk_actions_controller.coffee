@@ -34,8 +34,3 @@ Radium.MessagesBulkActionsController = Ember.ArrayController.extend Radium.Curre
     user: @get('currentUser')
     reference: @get('model')
   ).property('model.[]', 'tomorrow')
-
-  cancel: ->
-    # FIXME: No idea why this did not work if toArray was not used
-    @get('model').toArray().forEach (item) ->
-      item.set('isChecked', false)

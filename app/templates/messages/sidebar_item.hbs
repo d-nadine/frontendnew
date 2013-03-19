@@ -1,4 +1,10 @@
-{{view view.checker}}
+<button {{action check this}}>
+  {{#if isChecked}}
+    [*]
+  {{else}}
+    [ ]
+  {{/if}}
+</button>
 
 <div class="content" {{action selectItem this}}>
   {{#if hasAttachments}}
