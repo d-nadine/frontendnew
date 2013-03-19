@@ -1,9 +1,5 @@
-<button {{action check this}}>
-  {{#if isChecked}}
-    [*]
-  {{else}}
-    [ ]
-  {{/if}}
+<button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
+  <i class="icon-todo"></i>
 </button>
 
 <div class="content" {{action selectItem this}}>
