@@ -19,15 +19,24 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     check: (item) ->
       item.toggleProperty 'isChecked'
 
-      currentPath = @controllerFor('application').get('currentPath')
-      onBulkActions = currentPath is 'messages.bulk_actions'
+      @transitionToBulkOrBack()
 
+    checkAll: ->
       itemsChecked = @controllerFor('messages').get('hasCheckedContent')
+      @controllerFor('messages').setEach 'isChecked', !itemsChecked
 
-      if !onBulkActions && itemsChecked
-        @transitionTo 'messages.bulk_actions'
-      else if !itemsChecked
-        @send 'back'
+      @transitionToBulkOrBack()
+
+  transitionToBulkOrBack: ->
+    currentPath = @controllerFor('application').get('currentPath')
+    onBulkActions = currentPath is 'messages.bulk_actions'
+
+    itemsChecked = @controllerFor('messages').get('hasCheckedContent')
+
+    if !onBulkActions && itemsChecked
+      @transitionTo 'messages.bulk_actions'
+    else if !itemsChecked
+      @send 'back'
 
   model: ->
     Radium.Message.create folder: 'inbox'
