@@ -38,13 +38,7 @@
       <tbody>
         <tr colspan="3">
           <td>
-            {{#if nextTask}}
-              {{#with nextTask}}
-                {{control 'next_task' this}}
-              {{/with}}
-            {{else}}
-              {{control 'next_task'}}
-            {{/if}}
+            {{template "shared/next_task"}}
           </td>
         </tr>
       </tbody>
