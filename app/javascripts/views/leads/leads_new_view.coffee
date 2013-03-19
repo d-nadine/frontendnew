@@ -82,7 +82,7 @@ Radium.LeadsNewView = Ember.View.extend
     """
 
   contactName: Radium.TypeaheadTextField.extend
-    classNameBindings: ['isInvalid', ':field', ':input-xlarge']
+    classNameBindings: ['isInvalid', 'open', ':field', ':input-xlarge']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Type a name'
@@ -96,12 +96,18 @@ Radium.LeadsNewView = Ember.View.extend
       @_super.apply this, arguments
       @$('input[type=text]').focus()
 
+    clearValue: ->
+      @get('controller').cancel()
+
     setValue: (object) ->
-      @set 'value', object
+      @set 'value', object.get('name')
       @set 'controller.model', object
 
     timeoutId: null
-    keyDown: (evt) ->
+
+    keyPress: (evt) ->
+      return if $('ul.typeahead:visible').length
+
       return if @get('isExistingContact') || @get('isNewContact')
 
       timeoutId = @get('timeoutId')
