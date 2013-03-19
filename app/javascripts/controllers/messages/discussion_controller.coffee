@@ -13,3 +13,6 @@ Radium.MessagesDiscussionController = Ember.ObjectController.extend
     else
       null
   ).property('reference')
+
+  # FIXME: figure out how to implement this correctly
+  nextTask: null
