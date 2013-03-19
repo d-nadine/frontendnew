@@ -5,6 +5,20 @@ Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     toggleDrawer: (name) ->
       @toggleDrawer name
 
+    back: ->
+      history = @get('router.history')
+
+      if history.length > 2
+        history.pop()
+        lastPage = history.pop()
+      else if history.length == 2
+        lastPage = history.shift()
+        history.clear()
+      else
+        return
+
+      @transitionTo lastPage[0], lastPage[1]
+
   setupController: ->
     @controllerFor('currentUser').set 'model', Radium.User.find(1)
     @controllerFor('users').set 'model', Radium.User.find()
