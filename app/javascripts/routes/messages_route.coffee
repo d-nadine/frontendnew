@@ -55,7 +55,4 @@ Radium.MessagesRoute = Ember.Route.extend
       into: 'application'
       outlet: 'buttons'
 
-    @render 'nothing',
-      into: 'application',
-      outlet: 'drawer'
-
+    @send 'closeDrawer'
