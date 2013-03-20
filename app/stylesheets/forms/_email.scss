@@ -29,7 +29,7 @@
   }
 
   .autocomplete{
-    margin-left: 45px;
+    margin-left: 26px;
     margin-right: 70px;
 
     &.field{
@@ -50,6 +50,10 @@
     }
   }
 
+  .bcclist .autocomplete{
+    margin-left: 37px;
+  }
+
   .bboptions{
     background-color: $bright;
     position: absolute;
@@ -60,4 +64,31 @@
     font-size: 17px;
     top: 7px;
   }
+
+  .subject, .body{
+    padding: 2px 5px 2px 5px;
+    div:first-of-type{
+      position: absolute;
+      top: 9px;
+      left: 3px;
+    }
+    textarea{
+      width: 100%;
+      padding-left: 30px;
+      border-color: transparent;
+      box-sizing: border-box;
+      height: 30px;
+      margin: 0;
+      resize: none;
+      outline: none;
+    }
+  }
+
+  .body{
+    textarea{
+      padding-left: 5px;
+      height: 110px;
+    }
+  }
 }
+

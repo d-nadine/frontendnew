@@ -1,5 +1,5 @@
-<div class="email-container block context">
-  <form {{bindAttr class=":form"}}>
+<form {{bindAttr class=":form"}}>
+  <div class="block context">
     <div class="recipients">
       <div class="to">
         <span>To</span>
@@ -8,10 +8,14 @@
       <div class="bboptions">
         <span>
           {{#unless showCc}}
-            <a href="#" {{action expandList 'cc'}}>+CC</a>
+            <a href="#" {{action expandList 'cc'}}>
+              +CC
+            </a>
           {{/unless}}
           {{#unless showBcc}}
-            <a href="#" {{action expandList 'bcc'}}>+BCC</a>
+            <a href="#" {{action expandList 'bcc'}}>
+              +BCC
+            </a>
           {{/unless}}
         </span>
       </div>
@@ -27,12 +31,21 @@
     {{/if}}
     {{#if showBcc }}
       <hr/>
-      <div class="recipients">
+      <div class="recipients bcclist">
         <div class="to">
           <span>BCC</span>
         </div>
         {{view view.bcc class="field" viewName="bcc"}}
       </div>
     {{/if}}
-  </form>
-</div>
+  </div>
+  <div class="block subject">
+    <div>
+      <i class="icon-plus"></i>
+    </div>
+    {{view view.subject}}
+  </div>
+  <div class="block body">
+    {{view view.body}}
+  </div>
+</form>
