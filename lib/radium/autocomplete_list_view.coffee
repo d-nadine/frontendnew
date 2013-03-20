@@ -14,7 +14,7 @@ Radium.AutocompleteView = Ember.View.extend
     {{#each view.source}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
         {{#unless controller.isEditable}}
-        <a class="as-close" {{action removeSelection this}}>×</a>
+        <a class="as-close" {{action removeSelection this target="view"}}>×</a>
         {{/unless}}
         {{#if view.showAvatar}}
           {{avatar this}}
@@ -64,6 +64,9 @@ Radium.AutocompleteView = Ember.View.extend
 
   addSelection: (item) ->
     @get('source').addObject item
+
+  removeSelection: (item) ->
+    @get('source').removeObject item
 
   didInsertElement: ->
     if @get('addCurrentUser')

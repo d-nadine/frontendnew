@@ -109,6 +109,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
     sourceBinding: 'controller.attendees'
     addSelection: (item) ->
       @get('controller').addSelection item
+    removeSelection: (item) ->
+      @get('controller').removeSelection item
 
   cancelMeetingDisabled: ( ->
     @get('controller.isDisabled') || @get('controller.isNew')
