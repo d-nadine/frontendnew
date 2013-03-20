@@ -14,6 +14,10 @@
     margin: 0;
   }
 
+  .recipients{
+    position: relative;
+  }
+
   .to{
     position: absolute;
     font-weight: bold;
@@ -41,6 +45,6 @@
 
   .to, .bboptions{
     font-size: 17px;
-    top: 17px;
+    top: 7px;
   }
 }
