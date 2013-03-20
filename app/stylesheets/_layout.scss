@@ -20,9 +20,9 @@ $sidebar-border-size: 8px;
 $button-bar-width: 40px;
 
 .sidebar-panel {
-  padding-left: $button-bar-width + $sidebar-border-size;
-  width: $sidebar-width - ($button-bar-width + $sidebar-border-size);
-  margin-left: 0;
+  padding-left: $sidebar-border-size;
+  width: $sidebar-width - $sidebar-border-size;
+  margin-left: $button-bar-width;
   float: left;
 }
 
@@ -42,35 +42,25 @@ $button-bar-width: 40px;
   border-right: solid 1px darken($dark-background, 25);
   // FIXME: why doesn't this work with the box shadow mixin?
   -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15);
-
-  .sidebar-panel-edge {
-    position: fixed;
-    top: 47px;
-    bottom: 0;
-    width: $sidebar-width - $sidebar-border-size - $button-bar-width;
-    box-sizing: border-box;
-  }
 }
 
 .sidebar-panel-drawer {
   z-index: 99;
   color: white;
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.64);
+  background-image: url("/images/backgrounds/linen.png");
+  border-left: solid 1px rgb(27, 27, 27);
+  border-right: solid 1px rgb(27, 27, 27);
+  padding-left: 0;
+  margin-left: $button-bar-width + $sidebar-border-size;
 
   .scroller .thumb {
     background-color: rgba(0,0,0, 0.5);
   }
-
-  .sidebar-panel-edge {
-    background-image: url("/images/backgrounds/linen.png");
-    border-left: solid 1px rgb(27, 27, 27);
-    border-right: solid 1px rgb(27, 27, 27);
-    box-shadow: -2px 0px 10px 2px rgba(0, 0, 0, 0.3);
-  }
 }
 
 .two-column #main-panel {
-  margin-left: $sidebar-width + 40px;
+  margin-left: $sidebar-width + 60px;
   margin-right: 60px;
 }
 
@@ -78,7 +68,6 @@ $button-bar-width: 40px;
   position: fixed;
   top: 48px;
   bottom: 0;
-  z-index: 1000; // FIXME: this shouldn't be required
   width: $button-bar-width;
   background-color: $black;
 
