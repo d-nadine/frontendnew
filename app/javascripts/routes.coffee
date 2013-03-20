@@ -8,6 +8,7 @@ Radium.Router.map ->
     @route 'email', path: '/emails/:email_id'
     @route 'discussion', path: '/discussions/:discussion_id'
     @route 'bulk_actions'
+    @route 'send'
 
   @resource 'pipeline', ->
     @route 'leads'
