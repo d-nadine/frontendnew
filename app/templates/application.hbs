@@ -5,18 +5,15 @@
     {{/linkTo}}
 
     <ul class="nav">
-      <li id="btn-dashboard">
-        {{#linkTo dashboard}}Dashboard{{/linkTo}}
+      <li class="dropdown">
+        {{#linkTo messages}}Messages{{/linkTo}}
       </li>
 
-      <li id="btn-contacts">
-        {{#linkTo contacts}}Contacts{{/linkTo}}
-      </li>
+      <li>{{#linkTo calendar today}}Calendar{{/linkTo}}</li>
 
-      <li id="btn-inbox" class="dropdown">
-        {{#linkTo messages}}Inbox{{/linkTo}}
-      </li>
-      <li id="btn-pipeline" class="dropdown">
+      <li>{{#linkTo unimplemented}}Todos{{/linkTo}}</li>
+
+      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           Pipeline<b class="caret"></b>
         </a>
@@ -30,7 +27,9 @@
         </ul>
       </li>
 
-      <li>{{#linkTo calendar today}}Calendar{{/linkTo}}</li>
+      <li>
+        {{#linkTo unimplemented}}Address Book{{/linkTo}}
+      </li>
     </ul>
 
     <ul class="nav pull-right">
