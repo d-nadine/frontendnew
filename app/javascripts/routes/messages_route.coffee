@@ -50,3 +50,8 @@ Radium.MessagesRoute = Ember.Route.extend
       into: 'messages'
       outlet: 'sidebar'
 
+  deactivate: ->
+    @render 'nothing', 
+      into: 'application'
+      outlet: 'buttons'
+
