@@ -77,6 +77,7 @@ Radium.AutocompleteView = Ember.View.extend
     sourceBinding: 'parentView.source'
     didInsertElement: ->
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
+                        asHtmlID: @get('elementId')
                         selectedItemProp: "name"
                         searchObjProps: "name"
                         formatList: @formatList.bind(this)
@@ -84,6 +85,7 @@ Radium.AutocompleteView = Ember.View.extend
                         selectionAdded: @selectionAdded.bind(this)
                         resultsHighlight: true
                         canGenerateNewSelections: true
+                        usePlaceholder: true
                         retrieveLimit: 5
 
     selectionAdded: (item) ->
