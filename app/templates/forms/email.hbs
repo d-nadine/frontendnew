@@ -48,22 +48,33 @@
   <div class="block body">
     {{view view.body}}
     <div>
-      {{#unless showCheckForResponse}}
-        <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
-          Check for response?
-        </a>
-      {{else}}
-        Check for response?
-      {{/unless}}
-      {{#if showCheckForResponse}}
-        <span>in</span>
-        {{view view.reminderLength}}
-        <span>Days</span>
-        <a href="#" class="btn btn-success">OK</a>
-        <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
-          Cancel
-        </a>
-      {{/if}}
+      <div class="check-response">
+        {{#unless showCheckForResponse}}
+          <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
+            Check for response?
+          </a>
+        {{/unless}}
+        {{#if showCheckForResponse}}
+          <div>
+            <span>Check for response in</span>
+            {{view view.reminderLength}}
+            <span>Days</span>
+            <a href="#" class="btn btn-success">OK</a>
+            <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
+              Cancel
+            </a>
+          </div>
+        {{/if}}
+      </div>
+      <div class="signature">
+        {{#unless view.signatureAdded}}
+          <a href="#" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
+        {{/unless}}
+      </div>
+    </div>
+    <hr/>
+    <div class="send">
+      <a hef="#" class="btn btn-success btn-large">Send</a>
     </div>
   </div>
 </form>

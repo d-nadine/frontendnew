@@ -48,3 +48,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     type: 'number'
     value: 5
 
+  addSignature: ->
+    textArea = $('.body textarea')
+    textArea.val("#{textArea.val()}\n\nPaul Cowan\nSomething else")
+    textArea.height("+=50")
+    @set 'signatureAdded', true

@@ -95,6 +95,29 @@
     textarea{
       padding-left: 5px;
       height: 110px;
+      margin-bottom: 30px;
+    }
+
+    .check-response{
+      position: absolute;
+      bottom: 61px;
+    }
+
+    .signature{
+      position: absolute;
+      right: 20px;
+      bottom: 63px;
+    }
+
+    .send{
+      text-align: right;
+      margin-right: 15px;
+
+      .btn{
+        border-radius: 0;
+        padding-left: 27px;
+        padding-right: 27px;
+      }
     }
 
     input[type=number]{
@@ -103,9 +126,14 @@
       top: 4px;
     }
 
+    hr{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
     a.btn{
       position: relative;
-      top: -1px;
+      top: -3px;
     }
   }
 }
