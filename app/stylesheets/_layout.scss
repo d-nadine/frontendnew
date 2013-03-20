@@ -6,6 +6,23 @@ body {
   padding: 60px 0;
 }
 
+#topbar {
+  .navbar-inner {
+    padding: 0 60px;
+    background: $black;
+    border: none;
+    @include box-shadow(none);
+  }
+
+  .nav {
+    top: 2px;
+  }
+
+  .navbar-search {
+    margin-top: 9px;
+  }
+}
+
 #main-panel {
   padding-bottom: 20px;
 }
