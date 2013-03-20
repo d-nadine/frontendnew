@@ -7,10 +7,30 @@
       {{view view.to class="field" viewName="to"}}
       <div class="bboptions">
         <span>
-          <a href="#">+CC</a>
-          <a href="#">+BCC</a>
+          {{#unless showCc}}
+            <a href="#" {{action expandList 'cc'}}>+CC</a>
+          {{/unless}}
+          {{#unless showBcc}}
+            <a href="#" {{action expandList 'bcc'}}>+BCC</a>
+          {{/unless}}
         </span>
       </div>
     </div>
+    {{#if showCc }}
+    <div class="recipients">
+      <div class="to">
+        <span>CC</span>
+      </div>
+      {{view view.cc class="field" viewName="cc"}}
+    </div>
+    {{/if}}
+    {{#if showBcc }}
+      <div class="recipients">
+        <div class="to">
+          <span>BCC</span>
+        </div>
+        {{view view.bcc class="field" viewName="bcc"}}
+      </div>
+    {{/if}}
   </form>
 </div>
