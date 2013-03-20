@@ -4,4 +4,7 @@ Radium.FormsEmailView = Radium.FormView.extend
   onFormReset: ->
     @$('form')[0].reset()
 
-  attendees: Radium.AutocompleteView.extend()
+  to: Radium.AutocompleteView.extend
+    addCurrentUser: false
+    sourceBinding: 'controller.to'
+    showAvatar: false

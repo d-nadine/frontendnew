@@ -6,17 +6,19 @@ Radium.AutocompleteView = Ember.View.extend
     ':autocomplete'
   ]
 
+  showAvatar: true
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
-  source: Ember.computed.alias('controller.source')
   template: Ember.Handlebars.compile """
     <ul class="as-selections">
-    {{#each source}}
+    {{#each view.source}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
         {{#unless controller.isEditable}}
         <a class="as-close" {{action removeSelection this}}>×</a>
         {{/unless}}
-        {{avatar this}}
+        {{#if view.showAvatar}}
+          {{avatar this}}
+        {{/if}}
         {{#if name}}
           {{name}}
         {{else}}
@@ -60,11 +62,16 @@ Radium.AutocompleteView = Ember.View.extend
 
     event.stopPropagation()
 
+  addSelection: (item) ->
+    @get('source').addObject item
+
   didInsertElement: ->
-    @get('controller').addSelection @get('controller.currentUser') if @get('controller.isNew')
+    if @get('addCurrentUser')
+      @addSelection @get('controller.currentUser') if @get('controller.isNew')
 
   autocomplete: Ember.TextField.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
+    sourceBinding: 'parentView.source'
     didInsertElement: ->
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         selectedItemProp: "name"
@@ -82,7 +89,7 @@ Radium.AutocompleteView = Ember.View.extend
         item = Ember.Object.create
                   email: item
 
-      @get('controller').addSelection item
+      @get('parentView').addSelection item
 
     formatList: (data, elem) ->
       email= data.data.get('email')
@@ -106,7 +113,7 @@ Radium.AutocompleteView = Ember.View.extend
       return unless people.get('length')
 
       results = people.filter( (item) =>
-                        @get('controller.source').indexOf(item) == -1
+                        @get('source').indexOf(item) == -1
                      ).map (item) =>
                         @mapSearchResult.call this, item
 

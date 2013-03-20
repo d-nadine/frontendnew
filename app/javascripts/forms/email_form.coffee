@@ -6,6 +6,8 @@ Radium.EmailForm = Radium.Form.extend
     message: @get('message')
     sender: @get('user')
     to: []
+    cc: []
+    bcc: []
   ).property().volatile()
 
 

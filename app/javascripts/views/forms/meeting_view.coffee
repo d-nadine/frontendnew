@@ -104,7 +104,11 @@ Radium.FormsMeetingView = Radium.FormView.extend
     valueBinding: 'controller.location'
     isInvalid: false
 
-  attendees: Radium.AutocompleteView.extend()
+  attendees: Radium.AutocompleteView.extend
+    addCurrentUser: true
+    sourceBinding: 'controller.attendees'
+    addSelection: (item) ->
+      @get('controller').addSelection item
 
   cancelMeetingDisabled: ( ->
     @get('controller.isDisabled') || @get('controller.isNew')
