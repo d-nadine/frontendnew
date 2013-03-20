@@ -25,6 +25,22 @@ Radium.MessagesRoute = Ember.Route.extend
 
       @transitionToBulkOrBack()
 
+    delete: (item) ->
+      @animateDelete item, =>
+        item.deleteRecord()
+        @get('store').commit()
+
+  # TODO: figure out a better way to do this
+  animateDelete: (item, callback) ->
+    duration = 600
+
+    modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
+    $("#main-panel #{modelSelector}").fadeOut duration
+    $("#sidebar #{modelSelector}").animate {left: "-120%", height: 0}, duration, ->
+      $(this).hide()
+
+    Ember.run.later this, callback, duration
+
   transitionToBulkOrBack: ->
     currentPath = @controllerFor('application').get('currentPath')
     onBulkActions = currentPath is 'messages.bulk_actions'
