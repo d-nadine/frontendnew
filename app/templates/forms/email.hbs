@@ -1,0 +1,16 @@
+<div class="email-container block context">
+  <form {{bindAttr class=":form"}}>
+    <div>
+      <div class="to">
+        <span>To</span>
+      </div>
+      {{view view.attendees class="field" viewName="attendeeList"}}
+      <div class="bboptions">
+        <span>
+          <a href="#">+BB</a>
+          <a href="#">+CC</a>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>

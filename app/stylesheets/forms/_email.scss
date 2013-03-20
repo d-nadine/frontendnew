@@ -1,0 +1,46 @@
+.forms-email-view{
+  background-color: $light-background;
+  padding: 5px;
+
+  .block.context{
+    padding: 0;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  .form{
+    margin: 0;
+  }
+
+  .to{
+    position: absolute;
+    font-weight: bold;
+    left: 5px;
+  }
+
+  .autocomplete{
+    margin-left: 24px;
+    margin-right: 70px;
+
+    &.field{
+      border: 0;
+    }
+
+    ul.as-selections.loading{
+      background-color: $bright;
+    }
+  }
+
+  .bboptions{
+    background-color: $bright;
+    position: absolute;
+    right: 10px;
+  }
+
+  .to, .bboptions{
+    font-size: 17px;
+    top: 17px;
+  }
+}
