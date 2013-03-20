@@ -32,8 +32,13 @@
       border: 0;
     }
 
-    ul.as-selections.loading{
-      background-color: $bright;
+    ul.as-selections{
+      &.loading{
+        background-color: $bright;
+      }
+      li.as-selection-item{
+        margin-top: -1px;
+      }
     }
   }
 
