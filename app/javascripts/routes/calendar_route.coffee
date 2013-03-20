@@ -1,6 +1,4 @@
-require 'routes/drawer_support_mixin'
-
-Radium.CalendarRoute = Ember.Route.extend Radium.DrawerSupportMixin,
+Radium.CalendarRoute = Ember.Route.extend
   events: 
     toggleCalendarDrawer: ->
       @toggleDrawer 'calendar/select_user'

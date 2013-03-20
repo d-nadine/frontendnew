@@ -43,8 +43,28 @@
   </div>
 </div>
 
-{{outlet modal}}
+<div id="drawer-buttons">
+  <a {{action toggleDrawer notificationsDrawerName}} href="#">
+    <i class="icon-notifications"></i>
+  </a>
 
-{{outlet drawerPanel}}
+  <a {{action back}} href="#">
+    <i class="icon-back"></i>
+  </a>
+
+  {{outlet buttons}}
+
+  {{#linkTo development}}
+    <i class="icon-menu"></i>
+  {{/linkTo}}
+
+  {{#linkTo unimplemented class="settings"}}
+    <i class="icon-menu"></i>
+  {{/linkTo}}
+</div>
+
+{{outlet drawer}}
+
+{{outlet modal}}
 
 {{outlet}}

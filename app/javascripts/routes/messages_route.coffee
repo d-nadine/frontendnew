@@ -1,14 +1,12 @@
-require 'routes/drawer_support_mixin'
-
-Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
+Radium.MessagesRoute = Ember.Route.extend
   events:
+    toggleFolders: ->
+      @send 'toggleDrawer', 'messages/folders'
+
     selectFolder: (name) ->
       @controllerFor('messages').set 'selectedContent', null
       @controllerFor('messages').set 'folder', name
       @closeDrawer()
-
-    toggleFolders: ->
-      @toggleDrawer 'messages/folders'
 
     selectItem: (item) ->
       if item instanceof Radium.Email
@@ -42,6 +40,8 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
     Radium.Message.create folder: 'inbox'
 
   renderTemplate: ->
+    @render 'messages/drawer_buttons', outlet: 'buttons'
+
     # FIXME this seems wrong. It uses drawer_panel for
     # some reason. This seems like an Ember bug
     @render into: 'application'
@@ -50,6 +50,3 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
       into: 'messages'
       outlet: 'sidebar'
 
-    @render 'messages/drawer_buttons',
-      into: 'drawer_panel'
-      outlet: 'buttons'
