@@ -22,7 +22,7 @@
     </div>
     {{#if showCc }}
     <hr/>
-    <div class="recipients">
+    <div class="recipients cclist">
       <div class="to">
         <span>CC</span>
       </div>
@@ -47,5 +47,23 @@
   </div>
   <div class="block body">
     {{view view.body}}
+    <div>
+      {{#unless showCheckForResponse}}
+        <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
+          Check for response?
+        </a>
+      {{else}}
+        Check for response?
+      {{/unless}}
+      {{#if showCheckForResponse}}
+        <span>in</span>
+        {{view view.reminderLength}}
+        <span>Days</span>
+        <a href="#" class="btn btn-success">OK</a>
+        <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
+          Cancel
+        </a>
+      {{/if}}
+    </div>
   </div>
 </form>

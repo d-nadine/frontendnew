@@ -43,3 +43,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     willDestroyElement: ->
       @$().off('elastic')
 
+  reminderLength: Ember.TextField.extend
+    classNames: ['field']
+    type: 'number'
+    value: 5
+

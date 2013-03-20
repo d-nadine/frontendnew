@@ -14,3 +14,6 @@ Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMi
 
   expandList: (section) ->
     @set("show#{section.capitalize()}", true)
+
+  expandCheckForResponse: ->
+    @toggleProperty 'showCheckForResponse'
