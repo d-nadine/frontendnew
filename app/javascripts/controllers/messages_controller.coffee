@@ -7,6 +7,7 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     { title: 'Sent items', name: 'sent' }
     { title: 'Discussions', name: 'discussions' }
     { title: 'All Emails', name: 'emails' }
+    { title: 'Untracked', name: 'untracked' }
   ]
 
   canSelectItems: (->

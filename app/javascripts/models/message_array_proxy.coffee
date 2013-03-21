@@ -32,3 +32,5 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend
   filterEmails: (item) ->
     item instanceof Radium.Email
 
+  filterUntracked: (item) ->
+    item.get('isTracked') is false
