@@ -1,10 +1,10 @@
 <form {{bindAttr class=":form"}}>
   <div class="block context">
-    <div class="recipients">
+    <div {{bindAttr class="view.toList.isInvalid:is-invalid :recipients"}}>
       <div class="to">
         <span>To</span>
       </div>
-      {{view view.to class="field" viewName="to"}}
+      {{view view.to class="field" viewName="toList"}}
       <div class="bboptions">
         <span>
           {{#unless showCc}}
@@ -77,7 +77,7 @@
     <hr/>
     <div class="send">
       <a hef="#" class="btn btn-danger btn-large">Discard</a>
-      <a hef="#" class="btn btn-success btn-large">Send</a>
+      <a hef="#" {{action submit bubbles="false"}} class="btn btn-success btn-large">Send</a>
     </div>
   </div>
 </form>

@@ -6,6 +6,7 @@ Radium.DevelopmentEmailFormController = Ember.Controller.extend Radium.CurrentUs
   newEmail: Radium.computed.newForm('email')
 
   emailFormDefaults: ( ->
+    isNew: true
     subject: ''
     message: ''
     sender: @get('user')
@@ -13,5 +14,3 @@ Radium.DevelopmentEmailFormController = Ember.Controller.extend Radium.CurrentUs
     cc: []
     bcc: []
   ).property('currentUser')
-
-

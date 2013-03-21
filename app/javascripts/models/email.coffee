@@ -11,3 +11,5 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   sender: DS.attr('object')
   to: DS.attr('array')
+  cc: DS.attr('array')
+  bcc: DS.attr('array')

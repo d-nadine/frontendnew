@@ -49,4 +49,3 @@ Radium.MeetingForm = Radium.Form.extend
       meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
 
     @get('store').commit()
-

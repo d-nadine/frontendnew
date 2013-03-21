@@ -18,3 +18,20 @@ Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMi
 
   expandCheckForResponse: ->
     @toggleProperty 'showCheckForResponse'
+
+  submit: ->
+    @set 'isSubmitted', true
+
+    return unless @get('isValid')
+
+    @set 'justAdded', true
+
+    Ember.run.later( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+
+      @get('model').commit()
+    ), 1200)
+
+
+

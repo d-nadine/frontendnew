@@ -15,7 +15,11 @@
   }
 
   .recipients{
+    border: 1px solid transparent;
     position: relative;
+    &.is-invalid{
+      border: 1px solid red;
+    }
   }
 
   hr{
@@ -66,7 +70,7 @@
 
   .to, .bboptions{
     font-size: 17px;
-    top: 7px;
+    top: 17px;
   }
 
   .subject, .body{

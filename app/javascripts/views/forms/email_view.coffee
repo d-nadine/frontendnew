@@ -1,19 +1,17 @@
 require 'lib/radium/autocomplete_list_view'
 
-Radium.NoRecipientLitMixin = Ember.Mixin.create
-  isSubmitted: Ember.computed.alias('controller.isSubmitted')
-  isInvalid: ( ->
-    return unless @get('isSubmitted')
-
-    @get('controller.to.length') ||@get('controller.cc.length') || @get('controller.bcc.length')
-
-  ).property('to.[]', 'cc.[]', 'bcc.[]')
-
 Radium.FormsEmailView = Radium.FormView.extend
   onFormReset: ->
     @$('form')[0].reset()
 
-  to: Radium.AutocompleteView.extend Radium.NoRecipientLitMixin,
+  to: Radium.AutocompleteView.extend
+    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    isInvalid: ( ->
+      return unless @get('isSubmitted')
+
+      not (@get('controller.to.length') > 0 || @get('controller.cc.length') > 0 ||  @get('controller.bcc.length') > 0)
+    ).property('isSubmitted', 'controller.to.[]', 'controller.cc.[]', 'controller.bcc.[]')
+
     addCurrentUser: false
     sourceBinding: 'controller.to'
     showAvatar: false
