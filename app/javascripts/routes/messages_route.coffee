@@ -25,6 +25,6 @@ Radium.MessagesRoute = Ember.Route.extend Radium.DrawerSupportMixin,
       into: 'messages'
       outlet: 'sidebar'
 
-    @render 'messages/drawer_buttons'
+    @render 'messages/drawer_buttons',
       into: 'drawer_panel'
       outlet: 'buttons'

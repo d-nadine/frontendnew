@@ -17,12 +17,12 @@ class Populator
     ]
 
     users = names.map (name) ->
-      Factory.create 'user'
+      Factory.create 'user',
         name: name
         email: "#{name.split(' ')[0].toLowerCase()}@radiumcrm.com"
 
     contacts = for i in [0..20]
-      Factory.create 'contact'
+      Factory.create 'contact',
         user: -> users[(users.length).randomize()]
 
     userDictionary = new Dictionary(users)
@@ -34,19 +34,19 @@ class Populator
         contact: -> contactDictionary.random()
 
     for i in [0..20]
-      Factory.create 'call'
+      Factory.create 'call',
         user: -> userDictionary.random()
         contact: -> contactDictionary.random()
         reference: -> contactDictionary.random()
 
     for i in [0..30]
-      Factory.create 'email'
+      Factory.create 'email',
         sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
 
     for i in [0..20]
       Factory.create 'group'
 
-    Factory.create 'meeting'
+    Factory.create 'meeting',
       user: -> userDictionary.random()
       users: -> [userDictionary.random()]
       contacts: -> [contactDictionary.random()]
@@ -54,7 +54,7 @@ class Populator
       endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
     for i in [0..5]
-      Factory.create 'discussion'
+      Factory.create 'discussion',
         user: userDictionary.random()
         users: [userDictionary.random(), userDictionary.random()]
 

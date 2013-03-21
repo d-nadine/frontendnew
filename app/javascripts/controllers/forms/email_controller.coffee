@@ -1,4 +1,4 @@
-Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMixin,  Ember.Evented,
+Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMixin,
   needs: ['groups','contacts','users','clock','settings']
   now: Ember.computed.alias('clock.now')
   users: Ember.computed.alias 'controllers.users'

@@ -28,6 +28,6 @@ Radium.DealRoute = Ember.Route.extend
         into: 'application'
     else
       @render()
-      @render 'deal/sidebar'
+      @render 'deal/sidebar',
         into: 'deal'
         outlet: 'sidebar'

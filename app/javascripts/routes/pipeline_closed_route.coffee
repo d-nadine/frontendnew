@@ -7,5 +7,5 @@ Radium.PipelineClosedRoute = Em.Route.extend
     @modelFor('pipeline').get('closed')
 
   renderTemplate: ->
-    @render 'pipeline/closed'
+    @render 'pipeline/closed',
       into: 'pipeline'

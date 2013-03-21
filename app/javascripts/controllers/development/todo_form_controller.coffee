@@ -12,25 +12,25 @@ Radium.DevelopmentTodoFormController = Ember.Controller.extend Radium.CurrentUse
 
   editableTodo: (->
     Radium.TodoForm.create
-      content: Factory.createObject 'todo'
+      content: Factory.createObject 'todo',
         reference: Factory.createObject('contact')
   ).property()
 
   editableFinishedTodo: (->
     Radium.TodoForm.create
-      content: Factory.createObject 'todo'
+      content: Factory.createObject 'todo',
         isFinished: true
   ).property()
 
   uneditableTodo: (->
     Radium.TodoForm.create
-      content: Factory.createObject 'todo'
+      content: Factory.createObject 'todo',
         isEditable: false
   ).property()
 
   uneditableFinishedTodo: (->
     Radium.TodoForm.create
-      content: Factory.createObject 'todo'
+      content: Factory.createObject 'todo',
         isFinished: true
         isEditable: false
   ).property()
@@ -38,6 +38,6 @@ Radium.DevelopmentTodoFormController = Ember.Controller.extend Radium.CurrentUse
   justAddedTodo: (->
     Ember.ObjectProxy.create
       content: Radium.TodoForm.create
-        content: Factory.createObject 'todo'
+        content: Factory.createObject 'todo',
       justAdded: true
   ).property()
