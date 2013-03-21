@@ -2,146 +2,63 @@
   background-color: $light-background;
   padding: 5px;
 
-  .block.context{
-    padding: 0;
-  }
-
-  a{
+  a {
     text-decoration: none;
   }
 
-  .form{
-    margin: 0;
-  }
+  .recipients {
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
 
-  .recipients{
-    border: 1px solid transparent;
-    position: relative;
-    &.is-invalid{
-      border: 1px solid red;
-    }
-  }
-
-  hr{
-    margin: 0;
-  }
-
-  .to{
-    position: absolute;
-    font-weight: bold;
-    left: 5px;
-  }
-
-  .autocomplete{
-    margin-left: 26px;
-    margin-right: 70px;
-
-    &.field{
-      border: 0;
+    label {
+      cursor: default;
+      width: 40px;
     }
 
-    ul.as-selections{
-      &.loading{
-        background-color: $bright;
-      }
-      li.as-selection-item{
-        margin-top: -1px;
-      }
-    }
-
-    ul.as-list{
-      margin-top: -10px;
-    }
-  }
-
-  .cclist .autocomplete{
-    margin-left: 35px;
-  }
-
-  .bcclist .autocomplete{
-    margin-left: 45px;
-  }
-
-  .bboptions{
-    background-color: $bright;
-    position: absolute;
-    right: 10px;
-  }
-
-  .to, .bboptions{
-    font-size: 17px;
-    top: 17px;
-  }
-
-  .subject, .body{
-    padding: 2px 5px 2px 5px;
-    textarea{
-      width: 100%;
-      padding-left: 30px;
-      border-color: transparent;
-      box-sizing: border-box;
-      height: 30px;
-      margin: 0;
-      resize: none;
-      outline: none;
-    }
-  }
-
-  .subject{
-    div:first-of-type{
-      position: absolute;
-      top: 9px;
-      left: 3px;
-    }
-  }
-
-  .body{
-    textarea{
-      padding-left: 5px;
-      height: 110px;
-      margin-bottom: 30px;
-    }
-
-    .check-response{
-      position: absolute;
-      bottom: 61px;
-    }
-
-    .signature{
-      position: absolute;
-      right: 20px;
-      bottom: 63px;
-    }
-
-    .send{
+    .toggles {
+      width: 100px;
       text-align: right;
-      margin-right: 13px;
-
-      .btn{
-        border-radius: 0;
-      }
-
-      .btn-success{
-        padding-left: 27px;
-        padding-right: 27px;
-      }
     }
 
-    input[type=number]{
-      width: 35px;
-      position: relative;
-      top: 4px;
+    label, .autocomplete, .toggles {
+      display: table-cell;
+      margin: 0;
+      vertical-align: middle;
     }
 
-    hr{
-      margin-top: 10px;
-      margin-bottom: 10px;
+  }
+
+  .subject {
+    margin-bottom: 10px;
+  }
+
+  .body textarea {
+    min-height: 200px;
+    resize: none;
+  }
+
+  .check-response {
+    display: inline-block;
+  }
+
+  .reminder-form {
+    background-color: $light-background;
+    border: solid 1px $selected-item-border;
+    padding: 15px;
+
+    input[type=number] {
+      width: 30px;
     }
 
-    a.btn{
-      position: relative;
-      top: -3px;
+    label {
+      margin-right: 20px;
     }
+  }
+
+  .footer {
+    text-align: right;
   }
 }
-

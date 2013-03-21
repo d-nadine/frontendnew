@@ -24,6 +24,10 @@ input[type="color"].field,
   @include transition(border linear 0.2s);
 }
 
+.field-block {
+  display: block;
+}
+
 .field {
   &.is-valid {
     border-color: $valid-input-border;
