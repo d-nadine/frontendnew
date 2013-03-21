@@ -28,4 +28,4 @@ Factory.define 'email', traits: ['timestamps', 'html'],
     Factory.create 'attachment'
   ]
 
-  isPublic: true
+  isTracked: -> Math.random() >= 0.7
