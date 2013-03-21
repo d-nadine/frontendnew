@@ -26,13 +26,21 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend
   filterSent: (item) ->
     item.get('sender') is @get('currentUser')
 
+  filterDiscussions: (item) ->
+    item instanceof Radium.Discussion
+
+  filterEmails: (item) ->
+    item instanceof Radium.Email
+
 Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   sortProperties: ['sentAt']
   folderBinding: 'model.folder'
 
   folders: [
-    {title: 'Inbox', name: 'inbox'}
-    {title: 'Sent items', name: 'sent'}
+    { title: 'Inbox', name: 'inbox' }
+    { title: 'Sent items', name: 'sent' }
+    { title: 'Discussions', name: 'discussions' }
+    { title: 'All Emails', name: 'emails' }
   ]
 
   canSelectItems: (->
