@@ -6,7 +6,7 @@ Radium.MessagesRoute = Ember.Route.extend
     selectFolder: (name) ->
       @controllerFor('messages').set 'selectedContent', null
       @controllerFor('messages').set 'folder', name
-      @closeDrawer()
+      @send 'closeDrawer'
 
     selectItem: (item) ->
       if item instanceof Radium.Email
@@ -52,8 +52,11 @@ Radium.MessagesRoute = Ember.Route.extend
     else if !itemsChecked
       @send 'back'
 
-  model: ->
-    Radium.Message.create folder: 'inbox'
+  setupController: (controller) ->
+    messages = Radium.MessageArrayProxy.create
+      currentUser: @controllerFor('currentUser').get('model')
+
+    controller.set 'model', messages
 
   renderTemplate: ->
     @render 'messages/drawer_buttons', outlet: 'buttons'

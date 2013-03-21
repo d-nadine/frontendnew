@@ -43,7 +43,7 @@ class Populator
 
     for i in [0..30]
       Factory.create 'email',
-        sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
+        sender: -> if Math.random() >= 0.5 then userDictionary.random() else contactDictionary.random()
 
     for i in [0..20]
       Factory.create 'group'
