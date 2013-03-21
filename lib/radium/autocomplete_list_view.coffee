@@ -2,7 +2,6 @@ Radium.AutocompleteView = Ember.View.extend
   classNameBindings: [
     'isInvalid'
     'hasUsers:is-valid'
-    ':field'
     ':autocomplete'
   ]
 
@@ -75,6 +74,8 @@ Radium.AutocompleteView = Ember.View.extend
   autocomplete: Ember.TextField.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
     sourceBinding: 'parentView.source'
+    placeholderBinding: 'parentView.placeholder'
+
     didInsertElement: ->
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
                         asHtmlID: @get('elementId')
@@ -87,6 +88,7 @@ Radium.AutocompleteView = Ember.View.extend
                         canGenerateNewSelections: true
                         usePlaceholder: true
                         retrieveLimit: 5
+                        startText: @get('placeholder')
 
     selectionAdded: (item) ->
       # FIXME create new contact while meeting is being saved
