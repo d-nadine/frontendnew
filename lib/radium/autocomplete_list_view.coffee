@@ -67,30 +67,9 @@ Radium.AutocompleteView = Ember.View.extend
   removeSelection: (item) ->
     @get('source').removeObject item
 
-  sourceDidChange: (->
-   @resizeInputBox()
-  ).observes('source.[]')
-
-  # FIXME: change the markup to use a div so we
-  # can use block level like normal
-  resizeInputBox: ->
-    Ember.run.next =>
-      totalWidth = @$().width()
-
-      selectionWidth = 0
-
-      @$('li.as-selection-item').each ->
-        selectionWidth = selectionWidth + $(this).outerWidth()
-
-      inputWidth = totalWidth - selectionWidth - 40
-
-      $('li.as-original input').width inputWidth
-
   didInsertElement: ->
     if @get('addCurrentUser')
       @addSelection @get('controller.currentUser') if @get('controller.isNew')
-
-    @resizeInputBox()
 
   autocomplete: Ember.TextField.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
