@@ -8,26 +8,22 @@
       <div class="bboptions">
         <span>
           {{#unless showCc}}
-            <a href="#" {{action expandList 'cc'}}>
-              +CC
-            </a>
+            <a href="#" {{action expandList 'cc'}}>CC</a>
           {{/unless}}
           {{#unless showBcc}}
-            <a href="#" {{action expandList 'bcc'}}>
-              +BCC
-            </a>
+            <a href="#" {{action expandList 'bcc'}}>BCC</a>
           {{/unless}}
         </span>
       </div>
     </div>
     {{#if showCc }}
-    <hr/>
-    <div class="recipients cclist">
-      <div class="to">
-        <span>CC</span>
+      <hr/>
+      <div class="recipients cclist">
+        <div class="to">
+          <span>CC</span>
+        </div>
+        {{view view.cc class="field" viewName="cc"}}
       </div>
-      {{view view.cc class="field" viewName="cc"}}
-    </div>
     {{/if}}
     {{#if showBcc }}
       <hr/>
