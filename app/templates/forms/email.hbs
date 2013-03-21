@@ -29,12 +29,12 @@
     {{/if}}
   </div>
 
-  <div class="subject">
+  <div {{bindAttr class=":subject view.noContent:is-invalid :field"}}>
     {{view view.subject class="field input-block-level"}}
   </div>
 
   <div class="block body">
-    {{view view.body class="field field-blend-in input-block-level"}}
+    {{view view.body}}
     <div>
       <div class="check-response">
         {{#unless showCheckForResponse}}

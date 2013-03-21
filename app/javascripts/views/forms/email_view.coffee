@@ -1,23 +1,21 @@
 require 'lib/radium/autocomplete_list_view'
 
 Radium.FormsEmailView = Radium.FormView.extend
-  isInvalid: ( ->
+  noContent: ( ->
     return unless @get('controller.isSubmitted')
 
-    not ((@get('controller.to.length') == 0) && (@get('controller.subject.length') || @get('controller.message')))
-  ).property('controller.isSubmitted', 'controller.to.[]', 'controller.subject', 'controller.message')
+    not (@get('controller.subject') || @get('controller.message'))
+  ).property('controller.isSubmitted', 'controller.subject', 'controller.message')
 
   to: Radium.AutocompleteView.extend
-    isSubmitted: Ember.computed.alias('controller.isSubmitted')
-    isInvalid: ( ->
-      return unless @get('isSubmitted')
-
-      not (@get('controller.to.length') > 0 & @get('controller.cc.length') > 0 ||  @get('controller.bcc.length') > 0)
-    ).property('isSubmitted', 'controller.to.[]', 'controller.cc.[]', 'controller.bcc.[]')
-
     addCurrentUser: false
     sourceBinding: 'controller.to'
     showAvatar: false
+    isInvalid: ( ->
+      return unless @get('controller.isSubmitted')
+
+      @get('controller.to.length') == 0
+    ).property('controller.isSubmitted', 'controller.to.[]')
 
   cc: Radium.AutocompleteView.extend
     addCurrentUser: false
@@ -34,6 +32,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     placeholder: 'Subject'
 
   body: Ember.TextArea.extend
+    classNameBindings: ['parentView.noContent:is-invalid',':field',':field-blend-in',':input-block-level']
     valueBinding: 'controller.message'
     placeholder: 'Message'
 

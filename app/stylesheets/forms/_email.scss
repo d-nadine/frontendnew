@@ -28,11 +28,17 @@
       margin: 0;
       vertical-align: middle;
     }
+  }
 
+  .autocomplete.is-invalid{
+    border: none;
   }
 
   .subject {
     margin-bottom: 10px;
+    input{
+      border: none;
+    }
   }
 
   .body textarea {
