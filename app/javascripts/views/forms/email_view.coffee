@@ -1,4 +1,5 @@
 require 'lib/radium/autocomplete_list_view'
+require 'lib/radium/text_area'
 
 Radium.FormsEmailView = Radium.FormView.extend
   noContent: ( ->
@@ -35,13 +36,6 @@ Radium.FormsEmailView = Radium.FormView.extend
     classNameBindings: ['parentView.noContent:is-invalid',':field',':field-blend-in',':input-block-level']
     valueBinding: 'controller.message'
     placeholder: 'Message'
-
-    didInsertElement: ->
-      @_super()
-      @$().elastic()
-
-    willDestroyElement: ->
-      @$().off('elastic')
 
   reminderLength: Ember.TextField.extend
     classNames: ['field']
