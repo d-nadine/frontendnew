@@ -3,7 +3,7 @@ Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMi
   now: Ember.computed.alias('clock.now')
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
-  signature: Ember.computed.alias 'controllers.settings.signature'
+  signature: Ember.computed.alias 'controllers.settings.user.signature'
 
   people: ( ->
     users = @get('users').mapProperty('content')

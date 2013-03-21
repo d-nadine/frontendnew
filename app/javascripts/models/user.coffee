@@ -14,3 +14,5 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   title: DS.attr('string')
 
   avatar: DS.attr('object')
+
+  settings: DS.attr('object')

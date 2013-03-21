@@ -51,7 +51,6 @@ Radium.FormsEmailView = Radium.FormView.extend
   addSignature: ->
     textArea = $('.body textarea')
     currentLength = textArea.val()?.length || 0
-    # FIXME: retrieve signature
     textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
     textArea.height("+=50")
     textArea.setCursorPosition(currentLength)
