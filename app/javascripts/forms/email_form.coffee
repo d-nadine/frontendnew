@@ -18,19 +18,14 @@ Radium.EmailForm = Radium.Form.extend
     @get('bcc').clear()
 
   isValid: ( ->
-    @get('to.length') && (@get('subject.length') || @get('message.length'))
+    @get('to.length') && (@get('subject') || @get('message.length'))
   ).property('to.[]', 'subject', 'message')
 
   commit: ->
     email = Radium.Email.createRecord @get('data')
 
-    @get('to').forEach (recipient) ->
-      email.get('to').addObject recipient.get('email')
-
-    @get('cc').forEach (recipient) ->
-      email.get('cc').addObject recipient.get('email')
-
-    @get('bcc').forEach (recipient) ->
-      email.get('bcc').addObject recipient.get('email')
+    email.set 'to', @get('to').mapProperty 'email'
+    email.set 'cc', @get('cc').mapProperty 'email'
+    email.set 'bcc', @get('bcc').mapProperty 'email'
 
     @get('store').commit()
