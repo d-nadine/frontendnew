@@ -1,10 +1,19 @@
 require 'lib/radium/autocomplete_list_view'
 
+Radium.NoRecipientLitMixin = Ember.Mixin.create
+  isSubmitted: Ember.computed.alias('controller.isSubmitted')
+  isInvalid: ( ->
+    return unless @get('isSubmitted')
+
+    @get('controller.to.length') ||@get('controller.cc.length') || @get('controller.bcc.length')
+
+  ).property('to.[]', 'cc.[]', 'bcc.[]')
+
 Radium.FormsEmailView = Radium.FormView.extend
   onFormReset: ->
     @$('form')[0].reset()
 
-  to: Radium.AutocompleteView.extend
+  to: Radium.AutocompleteView.extend Radium.NoRecipientLitMixin,
     addCurrentUser: false
     sourceBinding: 'controller.to'
     showAvatar: false
@@ -50,6 +59,9 @@ Radium.FormsEmailView = Radium.FormView.extend
 
   addSignature: ->
     textArea = $('.body textarea')
-    textArea.val("#{textArea.val()}\n\nPaul Cowan\nSomething else")
+    currentLength = textArea.val()?.length || 0
+    # FIXME: retrieve signature
+    textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
     textArea.height("+=50")
+    textArea.setCursorPosition(currentLength)
     @set 'signatureAdded', true

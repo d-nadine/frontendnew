@@ -4,3 +4,4 @@ Factory.define 'settings',
     'Sent Proposal',
     'Waiting Signature'
   ]
+  signature: "User Signature\nRadium Software"

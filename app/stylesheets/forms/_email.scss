@@ -111,10 +111,13 @@
 
     .send{
       text-align: right;
-      margin-right: 15px;
+      margin-right: 13px;
 
       .btn{
         border-radius: 0;
+      }
+
+      .btn-success{
         padding-left: 27px;
         padding-right: 27px;
       }

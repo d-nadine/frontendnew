@@ -67,13 +67,16 @@
         {{/if}}
       </div>
       <div class="signature">
-        {{#unless view.signatureAdded}}
-          <a href="#" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
-        {{/unless}}
+        {{#if signature}}
+          {{#unless view.signatureAdded}}
+            <a href="#" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
+          {{/unless}}
+        {{/if}}
       </div>
     </div>
     <hr/>
     <div class="send">
+      <a hef="#" class="btn btn-danger btn-large">Discard</a>
       <a hef="#" class="btn btn-success btn-large">Send</a>
     </div>
   </div>
