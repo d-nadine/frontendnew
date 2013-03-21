@@ -1,6 +1,4 @@
-.field.autocomplete {
-  margin-top: 10px;
-
+.autocomplete {
   &.is-valid {
     border: 1px solid $valid-input-border;
   }
@@ -9,19 +7,41 @@
     border: 1px solid red;
   }
 
-  ul.as-selections{
-    margin-top: 0px;
+  ul.as-selections {
+    margin: 0;
+    padding: 0;
     border: none;
     @include box-shadow(none);
 
+    li {
+      margin: 0;
+    }
+
+    li.as-selection-item,
+    li.as-selection-item.blur {
+      border: solid 1px $control-border-color;
+      background-color: $light-background;
+      color: inherit;
+    }
+
+    li.as-selection-item:hover,
+    li.as-selection-item.selected {
+      border-color: darken($control-border-color, 25%);
+    }
+
+    li.as-selection-item:hover .as-close {
+      color: darken($control-border-color, 25%);
+    }
 
     li.as-selection-item {
-      background-color: $dark-background;
       background-image: none;
-      border: 1px solid $control-border-color;
-      border-top-color: $control-border-color;
-      border-radius: 0px;
-      box-shadow: none;
+      @include border-radius(4px);
+      @include box-shadow(none);
+      font-size: inherit;
+      padding: 4px 6px;
+      margin-right: 10px;
+      font-family: inherit;
+      text-shadow: none;
 
       &.selected{
         border-color: $dark;
@@ -39,21 +59,27 @@
       }
     }
 
-    li:hover.as-selection-item {
-      color: $dark;
-      background-color: $dark-background;
-      background-image: none;
-      border-color: $dark;
-      border-top-color: $dark;
+    li.as-original input {
+      height: auto;
+      font-size: inherit;
+      padding: 4px 6px;
     }
 
-    li input, input:focus{
-      border: none !important;
-      border-radius: none !important;
-      background-color: white;
-      background-image: none;
-      box-shadow: none;
-    }
+    // li.as-selection-item:hover {
+    //   color: $dark;
+    //   background-color: $dark-background;
+    //   background-image: none;
+    //   border-color: $dark;
+    //   border-top-color: $dark;
+    // }
+
+    // li input, input:focus{
+    //   border: none !important;
+    //   border-radius: none !important;
+    //   background-color: white;
+    //   background-image: none;
+    //   box-shadow: none;
+    // }
   }
 
   div.attendeeDropdown{
@@ -126,6 +152,10 @@
       }
     }
   }
+}
+
+.control-box .autocomplete {
+  padding: 4px 0;
 }
 
 li.as-result-item.active {
