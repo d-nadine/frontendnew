@@ -4,6 +4,7 @@ Radium.Attachment = Radium.Model.extend
 
   url: DS.attr('string')
   mimeType: DS.attr('string')
+  name: DS.attr('string')
 
   attachable: ((key, value) ->
     if arguments.length == 2 && value
