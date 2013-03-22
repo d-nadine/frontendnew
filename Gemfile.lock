@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/wycats/thor.git
-  revision: 09896be3035485de4356b5dd126ddc756a8fc8f9
+  revision: 97efbf6a14b44061eddb85757a5f8553804f0606
   specs:
     thor (0.17.0)
 
@@ -53,8 +53,8 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    activesupport (3.2.12)
-      i18n (~> 0.6)
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
       multi_json (~> 1.0)
     barber (0.2.1)
       execjs
@@ -62,7 +62,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.1)
+    coffee-script-source (1.6.2)
     commonjs (0.2.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
@@ -72,13 +72,13 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.10)
-    i18n (0.6.4)
+    i18n (0.6.1)
     json (1.7.7)
     kgio (2.8.0)
     less (2.3.1)
       commonjs (~> 0.2.6)
     libv8 (3.11.8.13)
-    multi_json (1.6.1)
+    multi_json (1.7.1)
     open4 (1.3.0)
     rack (1.5.2)
     rack-rewrite (1.3.3)
@@ -89,16 +89,16 @@ GEM
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
-    ref (1.0.2)
-    ruby-prof (0.12.1)
+    ref (1.0.4)
+    ruby-prof (0.13.0)
     sass (3.2.7)
-    therubyracer (0.11.3)
+    therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
-    unicorn (4.5.0)
+    unicorn (4.6.2)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
