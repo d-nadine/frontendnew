@@ -47,6 +47,7 @@
 
   input[type="checkbox"] + div:before {
     content: 'On';
+    text-align: left;
     float: left;
     width: 1.65em;
     height: 1.65em;
@@ -79,6 +80,7 @@
 
   input[type="checkbox"] + div:after {
     content: 'Off';
+    text-align: left;
     float: left;
     text-indent: .5em;
     color: rgba(0,0,0,.45);
