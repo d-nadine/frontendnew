@@ -70,13 +70,14 @@ Radium.FormsEmailView = Radium.FormView.extend
     @set 'signatureAdded', true
 
   signature: Radium.TextArea.extend
+    classNameBindings: ['isInvalid']
     placeholder: 'Signature'
     valueBinding: 'controller.signature'
     isInvalid: ( ->
       return unless @get('controller.signatureSubmited')
 
-      @get('value.length')
-    ).property('value', 'signatureSubmited')
+      @get('value').length == 0
+    ).property('value', 'controller.signatureSubmited')
 
   onSignatureAdded: ->
     @appendSignature()
