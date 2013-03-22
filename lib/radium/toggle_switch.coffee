@@ -19,3 +19,5 @@ Radium.ToggleSwitch = Ember.View.extend
   _updateElementValue: ->
     @set 'checked', @$('input').prop('checked')
 
+Radium.TrackingSwitch = Radium.ToggleSwitch.extend
+  classNames: ['tracking-switch', 'green-yellow']
