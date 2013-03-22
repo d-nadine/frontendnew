@@ -111,29 +111,18 @@
   padding-bottom: 0px;
 
   .header {
-    margin-bottom: 30px;
-  }
+    margin-bottom: 15px;
 
-  hr {
-    border-top-width: 2px;
-    border-bottom: none;
-    margin: 0px;
-  }
-
-  .subject {
-    border: none;
-    margin: 0px;
-
-    h1 {
-      font-size: 18px;
-
-      small {
-        font-size: 16px;
-      }
+    .more {
+      margin-right: 15px;
     }
 
-    h1, small {
-      line-height: 26px;
+    .sender {
+      margin-right: 10px;
+    }
+
+    .subject {
+      margin-left: 10px;
     }
   }
 

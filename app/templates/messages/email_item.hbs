@@ -9,12 +9,15 @@
   </div>
 
   <div class="header">
-    <div class="subject page-header">
-      <h1>{{subject}} <small>{{time sentAt format="full" class="pull-right"}}</small></h1>
-    </div>
+    {{view view.trackedToggleSwitch label="Tracked" class="pull-right"}}
 
-    <hr/>
+    <p>
+      <big class="sender">{{#linkToPerson sender}}{{sender.name}}{{/linkToPerson}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      <a href="#" class="more muted pull-right" {{action toggleEmailInfo}}><small>More</small></a>
+    </p>
   </div>
+
+  <hr/>
 
   <div class="message">
     <div class="body-text">
@@ -38,6 +41,8 @@
     <hr />
 
     <div class="email-actions text-right">
+      <!--<small>{{time sentAt format="full" class="muted pull-right"}}</small>-->
+
       <a {{action showReplySection}} class="btn btn-link">
         <i class="icon-reply"></i>Reply
       </a>
@@ -46,9 +51,6 @@
         <i class="icon-forward"></i>Forward
       </a>
 
-      <a class="btn btn-link">
-        <i class="icon-private"></i>Make Private
-      </a>
 
       <a class="btn btn-link" {{action delete this}}>
         <i class="icon-delete"></i>
