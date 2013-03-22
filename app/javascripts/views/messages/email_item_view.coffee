@@ -1,3 +1,3 @@
 Radium.MessagesEmailItemView = Ember.View.extend Radium.ContentIdentificationMixin,
-  trackedToggleSwitch: Radium.ToggleSwitch.extend
+  trackedToggleSwitch: Radium.TrackingSwitch.extend
     checkedBinding: 'controller.isTracked'
