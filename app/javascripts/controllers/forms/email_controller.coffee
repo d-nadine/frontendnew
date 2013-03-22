@@ -1,9 +1,10 @@
-Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMixin, Ember.Evented,
   needs: ['groups','contacts','users','clock','settings']
   now: Ember.computed.alias('clock.now')
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
   signature: Ember.computed.alias 'controllers.settings.user.signature'
+  user: Ember.computed.alias 'controllers.currentUser'
 
   people: ( ->
     users = @get('users').mapProperty('content')
@@ -33,5 +34,13 @@ Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMi
       @get('model').commit()
     ), 1200)
 
+  createSignature: ->
+    @set 'signatureSubmited', true
 
+    return unless @get('signature.length')
 
+    @set 'signatureSubmited', false
+
+    @get('store').commit()
+
+    @trigger 'signatureAdded'

@@ -2,6 +2,12 @@ require 'lib/radium/autocomplete_list_view'
 require 'lib/radium/text_area'
 
 Radium.FormsEmailView = Radium.FormView.extend
+  settings: Ember.computed.alias 'controller.controllers.settings'
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @get('controller').on('signatureAdded', this, 'onSignatureAdded')
+
   noContent: ( ->
     return unless @get('controller.isSubmitted')
 
@@ -65,3 +71,13 @@ Radium.FormsEmailView = Radium.FormView.extend
 
   signature: Radium.TextArea.extend
     placeholder: 'Signature'
+    valueBinding: 'controller.signature'
+    isInvalid: ( ->
+      return unless @get('controller.signatureSubmited')
+
+      @get('value.length')
+    ).property('value', 'signatureSubmited')
+
+  onSignatureAdded: ->
+    @appendSignature()
+    @closeModal()
