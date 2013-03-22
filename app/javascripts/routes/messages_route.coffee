@@ -4,9 +4,11 @@ Radium.MessagesRoute = Ember.Route.extend
       @send 'toggleDrawer', 'messages/folders'
 
     selectFolder: (name) ->
-      @controllerFor('messages').set 'selectedContent', null
       @controllerFor('messages').set 'folder', name
       @send 'closeDrawer'
+
+      Ember.run.next =>
+        @send 'selectItem', @controllerFor('messages').get('firstObject')
 
     selectItem: (item) ->
       if item instanceof Radium.Email
