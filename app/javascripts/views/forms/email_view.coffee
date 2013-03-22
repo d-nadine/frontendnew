@@ -33,7 +33,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     placeholder: 'Subject'
 
   body: Ember.TextArea.extend
-    classNameBindings: ['parentView.noContent:is-invalid',':field',':field-blend-in',':input-block-level']
+    classNameBindings: ['parentView.noContent:is-invalid']
     valueBinding: 'controller.message'
     placeholder: 'Message'
 
