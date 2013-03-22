@@ -42,6 +42,9 @@ Radium.FormsEmailView = Radium.FormView.extend
     type: 'number'
     value: 5
 
+  closeModal: ->
+    @$('.modal').removeClass 'open'
+
   addSignature: ->
     @$('.modal').addClass 'open'
     # textArea = $('.body textarea')
