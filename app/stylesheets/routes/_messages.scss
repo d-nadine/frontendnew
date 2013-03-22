@@ -63,6 +63,10 @@
   }
 }
 
+.messages-view .hud + div {
+  padding-top: 120px;
+}
+
 .messages-view .context {
   display: table;
   box-sizing: border-box;

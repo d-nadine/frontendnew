@@ -35,6 +35,7 @@ body {
 $sidebar-width: 340px;
 $sidebar-border-size: 8px;
 $button-bar-width: 40px;
+$two-column-gutter: 60px;
 
 .sidebar-panel {
   padding-left: $sidebar-border-size;
@@ -77,8 +78,33 @@ $button-bar-width: 40px;
 }
 
 .two-column #main-panel {
-  margin-left: $sidebar-width + 60px;
-  margin-right: 60px;
+  margin-left: $sidebar-width + $two-column-gutter;
+  margin-right: $two-column-gutter;
+}
+
+.hud {
+  position: fixed;
+  z-index: 1;
+  top: 47px;
+  left: 0;
+  right: 0;
+  padding-top: 10px;
+}
+
+.two-column {
+  .hud {
+    margin-left: $sidebar-width + $two-column-gutter;
+    margin-right: $two-column-gutter;
+  }
+}
+
+.gray-background .hud {
+  background-color: $background;
+}
+
+.hud > div {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 #drawer-buttons {

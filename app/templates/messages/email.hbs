@@ -1,49 +1,53 @@
-<div class="block context">
-  <div class="sender-info">
-    {{avatar sender style="medium" class="img-polaroid"}}
-    <p>
-      <span class="name">{{sender.name}}</span></br>
-      <span class="title">{{sender.title}}</span>
-    </p>
-  </div>
+<div class="hud">
+  <div class="block context">
+    <div class="sender-info">
+      {{avatar sender style="medium" class="img-polaroid"}}
+      <p>
+        <span class="name">{{sender.name}}</span></br>
+        <span class="title">{{sender.title}}</span>
+      </p>
+    </div>
 
-  <div class="deal-info">
-    <h2 class="upcase">Status</h2>
+    <div class="deal-info">
+      <h2 class="upcase">Status</h2>
 
-    <table>
-      <tbody>
-        {{#if activeDeal}}
-          <tr>
-            <td>
-              <strong>
-                {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
-              </strong>
-            </td>
-            <td class="capitalize">{{activeDeal.status}}</td>
-            <td class="money">{{currency activeDeal.value}}</td>
-          </tr>
-        {{else}}
+      <table>
+        <tbody>
+          {{#if activeDeal}}
+            <tr>
+              <td>
+                <strong>
+                  {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
+                </strong>
+              </td>
+              <td class="capitalize">{{activeDeal.status}}</td>
+              <td class="money">{{currency activeDeal.value}}</td>
+            </tr>
+          {{else}}
+            <tr colspan="3">
+              <td class="muted">No deals yet</td>
+            </tr>
+          {{/if}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="task-info">
+      <h2 class="upcase">Next Task</h2>
+
+      <table>
+        <tbody>
           <tr colspan="3">
-            <td class="muted">No deals yet</td>
+            <td>
+              {{template "shared/next_task"}}
+            </td>
           </tr>
-        {{/if}}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="task-info">
-    <h2 class="upcase">Next Task</h2>
-
-    <table>
-      <tbody>
-        <tr colspan="3">
-          <td>
-            {{template "shared/next_task"}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
-{{render 'messages/email_history' history}}
+<div class="email-history">
+  {{render 'messages/email_history' history}}
+</div>

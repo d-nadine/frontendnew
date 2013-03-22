@@ -1,73 +1,77 @@
-<div class="block context">
-  <div class="deal-info">
-    <h2 class="upcase">Status</h2>
+<div class="hud">
+  <div class="block context">
+    <div class="deal-info">
+      <h2 class="upcase">Status</h2>
 
-    <table>
-      <tbody>
-        {{#if activeDeal}}
-          <tr>
-            <td>
-              <strong>
-                {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
-              </strong>
-            </td>
-            <td class="capitalize">{{activeDeal.status}}</td>
-            <td class="money">{{currency activeDeal.value}}</td>
-          </tr>
-        {{else}}
+      <table>
+        <tbody>
+          {{#if activeDeal}}
+            <tr>
+              <td>
+                <strong>
+                  {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
+                </strong>
+              </td>
+              <td class="capitalize">{{activeDeal.status}}</td>
+              <td class="money">{{currency activeDeal.value}}</td>
+            </tr>
+          {{else}}
+            <tr colspan="3">
+              <td class="muted">No deals yet</td>
+            </tr>
+          {{/if}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="task-info">
+      <h2 class="upcase">Next Task</h2>
+
+      <table>
+        <tbody>
           <tr colspan="3">
-            <td class="muted">No deals yet</td>
+            <td>
+              {{template "shared/next_task"}}
+            </td>
           </tr>
-        {{/if}}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="task-info">
-    <h2 class="upcase">Next Task</h2>
-
-    <table>
-      <tbody>
-        <tr colspan="3">
-          <td>
-            {{template "shared/next_task"}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="block discussion-item">
-  <div class="header">
-    <i class="icon-discussion"></i>
-    <p><big><strong>
-      {{#if aboutDeal}}
-        Discussion about the {{#linkTo deal reference}}{{reference.name}}{{/linkTo}} deal
-      {{/if}}
-
-      {{#if aboutContact}}
-        Discussion about {{#linkTo contact reference}}{{reference.name}}{{/linkTo}} ({{reference.title}})
-      {{/if}}
-      </strong></big>
-    </p>
-
-    <div class="users">
-      With
-      <ul class="sentence">
-        {{#each users}}
-          <li>{{#linkTo user this}}{{name}}{{/linkTo}}</li>
-        {{/each}}
-      </ul>
+        </tbody>
+      </table>
     </div>
   </div>
-  <hr/>
-  <div class="text">
-    {{topic}}
-  </div>
-  <hr/>
 </div>
 
-<div class="block block-gray">
-  {{control 'comments' model}}
+<div>
+  <div class="block discussion-item">
+    <div class="header">
+      <i class="icon-discussion"></i>
+      <p><big><strong>
+        {{#if aboutDeal}}
+          Discussion about the {{#linkTo deal reference}}{{reference.name}}{{/linkTo}} deal
+        {{/if}}
+
+        {{#if aboutContact}}
+          Discussion about {{#linkTo contact reference}}{{reference.name}}{{/linkTo}} ({{reference.title}})
+        {{/if}}
+        </strong></big>
+      </p>
+
+      <div class="users">
+        With
+        <ul class="sentence">
+          {{#each users}}
+            <li>{{#linkTo user this}}{{name}}{{/linkTo}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <hr/>
+    <div class="text">
+      {{topic}}
+    </div>
+    <hr/>
+  </div>
+
+  <div class="block block-gray">
+    {{control 'comments' model}}
+  </div>
 </div>
