@@ -61,22 +61,30 @@
         <a href="#" class="pull-right" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
       {{/unless}}
     </div>
-
     <hr/>
-
     <div class="footer">
       <a hef="#" {{action submit bubbles="false"}} class="btn btn-primary">Send</a>
     </div>
   </div>
 </form>
-<aside class="modal">
-  <header>
-    <h2>Modal Heading</h2>
-  </header>
-  <section>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </section>
-  <footer class="cf">
-  <a href="#" {{action closeModal target="view"}} class="btn">Cancel</a>
-  </footer>
-</aside>
+<div class="modal">
+  <div class="header">
+    <h2>Add Signature?</h2>
+  </div>
+  <form class="form form-horizontal">
+    <div class="main">
+      <p>Add a signature that can be appended onto the end of each email.</p>
+      <fieldset>
+        <div class="control-group">
+          <div class="controls">
+            {{view view.signature class="field input-block-level"}}
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="footer">
+      <a href="#" {{action closeModal target="view" bubbles="false"}} class="btn">Cancel</a>
+      <a href="#" {{action createSignature target="view" bubbles="false"}} class="btn btn-primary">Create</a>
+    </div>
+  </form>
+</div>

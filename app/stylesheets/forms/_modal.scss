@@ -1,7 +1,6 @@
 .modal {
   background:#fff;
-  left:50%;
-  margin:-250px 0 0 -40%;
+  margin-top:-250px;
   position:absolute;
   top:-50%;
   width:80%;
@@ -14,28 +13,22 @@
     @include transition(all 0.4s ease-in-out);
   }
 
-  header, footer{
-    background:#f7f7f7;
+  .header, .footer{
+    background: $light-background;
     border-bottom: 1px solid #e7e7e7;
-    @include border-radius(5px 5px 0 0);
+    border-radius: 5px 5px 0 0;
   }
 
-  footer {
-    border:none;
-    border-top: 1px solid #e7e7e7;
-    @include border-radius(5px 5px 0 0);
+  .footer{
+    @include border-radius(0px 0px 5px 5px);
   }
 
-  section, header, footer{
+  .main, .header, .footer{
     padding:15px;
     z-index:200;
   }
 
   h2{
     margin:0;
-  }
-
-  .btn{
-    float:right;
   }
 }

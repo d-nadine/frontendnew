@@ -46,10 +46,22 @@ Radium.FormsEmailView = Radium.FormView.extend
     @$('.modal').removeClass 'open'
 
   addSignature: ->
-    @$('.modal').addClass 'open'
-    # textArea = $('.body textarea')
-    # currentLength = textArea.val()?.length || 0
-    # textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
-    # textArea.height("+=50")
-    # textArea.setCursorPosition(currentLength)
-    # @set 'signatureAdded', true
+    signature = @get('controller.signature')
+
+    unless signature
+      @$('.modal').addClass 'open'
+      @$('.modal textarea').focus()
+      return
+
+    @appendSignature()
+
+  appendSignature: ->
+    textArea = $('.body textarea')
+    currentLength = textArea.val()?.length || 0
+    textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
+    textArea.height("+=50")
+    textArea.setCursorPosition(currentLength)
+    @set 'signatureAdded', true
+
+  signature: Radium.TextArea.extend
+    placeholder: 'Signature'
