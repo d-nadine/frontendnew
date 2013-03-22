@@ -1,8 +1,7 @@
-.switch-container{
-  label{
-    font: bold 110% sans-serif;
+.toggle-switch {
+  label {
+    font: bold 100% sans-serif;
     display: inline;
-    border: 1px solid red;
   }
 
   input[type="checkbox"] { /* :root here acting as a filter for older browsers */
@@ -10,7 +9,7 @@
     opacity: 0;
   }
 
-  input[type="checkbox"].ios-switch + div {
+  input[type="checkbox"] + div {
     display: inline-block;
     vertical-align: middle;
     width: 3em;
@@ -32,13 +31,13 @@
     font-size: 150%; /* change this and see how they adjust! */
   }
 
-  input[type="checkbox"].ios-switch:checked + div {
+  input[type="checkbox"]:checked + div {
     padding-left: 2em;
     width: 1em;
     background-position: 0 0;
   }
 
-  input[type="checkbox"].ios-switch + div:before {
+  input[type="checkbox"] + div:before {
     content: 'On';
     float: left;
     width: 1.65em;
@@ -54,23 +53,23 @@
     text-indent: -2.5em;
   }
 
-  input[type="checkbox"].ios-switch:active + div:before {
+  input[type="checkbox"]:active + div:before {
     background-color: #eee;
   }
 
-  input[type="checkbox"].ios-switch:focus + div {
+  input[type="checkbox"]:focus + div {
     -webkit-box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,
                 0 .45em 0 .1em rgba(0,0,0,.05) inset,
                 0 0 .4em 1px rgba(255,0,0,.5);
   }
 
-  input[type="checkbox"].ios-switch + div:before,
-  input[type="checkbox"].ios-switch + div:after {
+  input[type="checkbox"] + div:before,
+  input[type="checkbox"] + div:after {
     font: bold 60%/1.9 sans-serif;
     text-transform: uppercase;
   }
 
-  input[type="checkbox"].ios-switch + div:after {
+  input[type="checkbox"] + div:after {
     content: 'Off';
     float: left;
     text-indent: .5em;

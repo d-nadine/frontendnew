@@ -3,13 +3,18 @@
 
   <h3>Switches</h3>
 
-  <div class="switch-container">
+  <p>Basic Switch</p>
+  <div class="toggle-switch">
     <label>
       Something
-      <input type="checkbox" class="ios-switch">
+      <input type="checkbox">
       <div class="switch"></div>
     </label>
   </div>
+
+  <p>Switch View ({{switchEnabled}})</p>
+  {{view Radium.ToggleSwitch label="Binding Test" checkedBinding="switchEnabled"}}
+  <p><button class="btn" {{action toggleSwitch}}>Toggle Switch via bindings</button></p>
 
   <h3>Text Boxes</h3>
 

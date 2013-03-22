@@ -4,6 +4,8 @@ require 'lib/radium/content_identification_mixin'
 require 'lib/radium/mention_field_view'
 require 'lib/radium/inline_editor_view'
 
+require 'lib/radium/toggle_switch'
+
 require 'views/sidebar_view'
 require 'views/fixed_sidebar_view'
 
