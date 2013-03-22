@@ -19,7 +19,7 @@
             <fieldset>
               <div {{bindAttr class="isExistingContact :control-group"}}>
                 <label class="control-label">Name</label>
-                {{view view.contactName}}
+                {{view view.contactName class="input-xlarge"}}
                 {{#if isExistingContact}}
                   <div class="contact-status">
                     {{view.statusDescription}}
@@ -50,7 +50,7 @@
                 <div class="control-group">
                   <label class="control-label type">Notes</label>
                   <div class="controls">
-                    {{view view.notes}}
+                    {{view view.notes class="input-xxlarge"}}
                   </div>
                 </div>
                 {{#if showDetail}}
@@ -60,7 +60,7 @@
                   <div class="control-group">
                     <label class="control-label type">Lead Source</label>
                     <div class="controls">
-                      {{view view.source}}
+                      {{view view.source class="input-xxlarge"}}
                     </div>
                   </div>
                   <hr/>

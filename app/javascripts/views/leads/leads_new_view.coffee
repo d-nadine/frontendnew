@@ -47,7 +47,7 @@ Radium.LeadsNewView = Ember.View.extend
     """
 
   notes: Ember.TextArea.extend
-    classNames: ['field', 'text-area','input-xxlarge']
+    classNames: ['field', 'text-area']
     placeholder: 'What is the lead interested in buying?'
     valueBinding: 'controller.notes'
     didInsertElement: ->
@@ -58,7 +58,7 @@ Radium.LeadsNewView = Ember.View.extend
       @$().off('elastic')
 
   source: Ember.TextField.extend
-    classNames: ['field', 'input-xxlarge']
+    classNames: ['field']
     placeholder: 'Where is this lead from?'
     valueBinding: 'controller.source'
 
@@ -82,7 +82,7 @@ Radium.LeadsNewView = Ember.View.extend
     """
 
   contactName: Radium.TypeaheadTextField.extend
-    classNameBindings: ['isInvalid', 'open', ':field', ':input-xlarge']
+    classNameBindings: ['isInvalid', 'open', ':field']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Type a name'
