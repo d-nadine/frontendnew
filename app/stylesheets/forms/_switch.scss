@@ -28,7 +28,15 @@
     -webkit-transition-duration: .4s;
     -webkit-transition-property: padding, width, background-position, text-indent;
     box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset, 0 .45em 0 .1em rgba(0,0,0,.05) inset;
-    font-size: 150%; /* change this and see how they adjust! */
+    font-size: 130%; /* change this and see how they adjust! */
+  }
+
+  &.large input[type="checkbox"] + div {
+    font-size: 170%;
+  }
+
+  &.xxlarge input[type="checkbox"] + div {
+    font-size: 190%;
   }
 
   input[type="checkbox"]:checked + div {
