@@ -1,7 +1,8 @@
 Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin,
-  needs: ['contacts', 'users']
+  needs: ['contacts', 'users','leadStatuses']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
+  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   showDetail: false
   form: null
   isNewContact: false
@@ -24,13 +25,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   toggleDetail: ->
     @toggleProperty 'showDetail'
-
-  leadStatuses: [
-    {name: "None", value: "none"}
-    {name: "Lead", value: "lead"}
-    {name: "Existing Customer", value: "existing"}
-    {name: "Exclude From Pipeline", value: "exclude"}
-  ]
 
   cancel: ->
     @set 'model', @get('form')

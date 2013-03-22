@@ -9,9 +9,11 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   user: DS.belongsTo('Radium.User')
 
   name: DS.attr('string')
-  phoneNumbers: DS.attr('array')
-  emailAddresses: DS.attr('array')
-  addresses: DS.attr('array')
+
+  phoneNumbers: DS.hasMany('Radium.PhoneNumber')
+  emailAddresses: DS.hasMany('Radium.EmailAddress')
+  addresses: DS.attr('Radium.Address')
+
   status: DS.attr('string')
 
   source: DS.attr('string')
@@ -19,8 +21,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   status: DS.attr('string')
 
   title: DS.attr('string')
-
-  phoneNumbers: DS.attr('array')
 
   avatar: DS.attr('object')
 
