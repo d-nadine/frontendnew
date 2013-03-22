@@ -68,15 +68,15 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.addresses'
     template: Ember.Handlebars.compile """
       <div class="addresses">
-        <div class="control-group">
+        <div class="control-group whole">
           {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value.street" placeholderBinding="view.leader"}}
         </div>
-        <div class="control-group">
-          {{view Ember.TextField  valueBinding="view.current.value.city" classNames="field input-xlarge" placeholder="City"}}
+        <div class="control-group whole">
+          {{view Ember.TextField  valueBinding="view.current.value.city" classNames="field input-xlarge city" placeholder="City"}}
         </div>
-        <div class="control-group">
-          {{view Ember.TextField valueBinding="view.current.value.state" classNames="field" placeholder="State" }}
-          {{view Ember.TextField valueBinding="view.current.value.zipcode" classNames="field" placeholder="Zip code"}}
+        <div class="control-group broken">
+          {{view Ember.TextField valueBinding="view.current.value.state" classNames="field state" placeholder="State" }}
+          {{view Ember.TextField valueBinding="view.current.value.zipcode" classNames="field zip" placeholder="Zip code"}}
         </div>
       </div>
     """

@@ -111,14 +111,14 @@
     }
 
     .addresses{
-      div:nth-of-type(-n+2){
+      .whole{
         display: block;
       }
-      div:nth-of-type(3){
-        input:first-of-type{
+      .broken{
+        input.state{
           width: 125px;
         }
-        input:last-of-type{
+        input.zip{
           width: 127px;
         }
       }
