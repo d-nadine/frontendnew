@@ -7,34 +7,34 @@
   width:80%;
   @include border-radius(5px);
   @include box-shadow(rgba(0,0,0,.25) 0 3px 7px);
-}
 
-.modal.open {
-  top:50%;
-  @include transition(all 0.4s ease-in-out);
-}
+  &.open{
+    top:50%;
+    @include transition(all 0.4s ease-in-out);
+  }
 
-.modal header,.modal footer {
-  background:#f7f7f7;
-  border-bottom: 1px solid #e7e7e7;
-  @include border-radius(5px 5px 0 0);
-}
+  header, footer{
+    background:#f7f7f7;
+    border-bottom: 1px solid #e7e7e7;
+    @include border-radius(5px 5px 0 0);
+  }
 
-.modal footer {
-  border:none;
-  border-top: 1px solid #e7e7e7;
-  @include border-radius(5px 5px 0 0);
-}
+  footer {
+    border:none;
+    border-top: 1px solid #e7e7e7;
+    @include border-radius(5px 5px 0 0);
+  }
 
-.modal section,.modal header, .modal footer {
-  padding:15px;
-  z-index:200;
-}
+  section, header, footer{
+    padding:15px;
+    z-index:200;
+  }
 
-.modal h2 {
-  margin:0;
-}
+  h2{
+    margin:0;
+  }
 
-.modal .btn {
-  float:right;
+  .btn{
+    float:right;
+  }
 }
