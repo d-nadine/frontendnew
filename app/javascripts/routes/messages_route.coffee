@@ -27,6 +27,11 @@ Radium.MessagesRoute = Ember.Route.extend
 
     delete: (item) ->
       @animateDelete item, =>
+        controller = @controllerFor('messages')
+
+        if item == controller.get('selectedContent')
+          controller.set 'selectedContent', controller.get('nextItem')
+
         item.deleteRecord()
         @get('store').commit()
 
