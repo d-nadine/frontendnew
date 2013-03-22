@@ -1,7 +1,13 @@
 .toggle-switch {
   label {
-    font: bold 100% sans-serif;
+    font-size: 100%;
     display: inline;
+  }
+
+  &.muted {
+    label {
+      color: $muted;
+    }
   }
 
   input[type="checkbox"] { /* :root here acting as a filter for older browsers */
