@@ -1,0 +1,26 @@
+.multiple-field{
+  div{
+    display: inline-block;
+  }
+
+  label{
+    display: inline;
+  }
+
+  button.btn{
+    width: 100px;
+  }
+
+  input[type=radio]{
+    position: relative;
+    top: -4px;
+    padding: 0 5px 0px 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .btn, .btn:focus {
+    outline: none;
+  }
+
+}
