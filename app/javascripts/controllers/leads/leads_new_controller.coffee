@@ -3,13 +3,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
   showDetail: false
-  assignedTo: null
   form: null
   isNewContact: false
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'assignedTo', @get('currentUser')
 
   isExistingContact: ( ->
     return false unless @get('model')
