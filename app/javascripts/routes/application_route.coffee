@@ -22,6 +22,11 @@ Radium.ApplicationRoute = Ember.Route.extend
 
       @set 'router.openDrawer', null
 
+    closeModal: ->
+      @render 'nothing', 
+        into: 'application'
+        outlet: 'modal'
+
     back: ->
       history = @get('router.history')
 

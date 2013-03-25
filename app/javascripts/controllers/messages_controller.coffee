@@ -19,3 +19,9 @@ Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Rad
     return false if @get('hasCheckedContent')
     true
   ).property('hasCheckedContent', 'selectedContent')
+
+  clear: ->
+    @get('content').clear()
+
+  load: ->
+    @get('content').load()

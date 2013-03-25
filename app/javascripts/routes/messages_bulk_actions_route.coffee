@@ -4,6 +4,33 @@ Radium.MessagesBulkActionsRoute = Ember.Route.extend
       @deactivate()
       @send 'back'
 
+    confirmDeletion: ->
+      @render 'messages/bulk_deletion_confirmation',
+        into: 'application',
+        outlet: 'modal'
+
+    close: ->
+      @render 'nothing',
+        into: 'application',
+        outlet: 'modal'
+
+    delete: ->
+      controller = @controllerFor('messages')
+
+      items = controller.get('checkedContent').toArray()
+
+      controller.clear()
+
+      transaction = @get('store').transaction() 
+
+      items.toArray().forEach (item) -> 
+        transaction.add item
+        item.deleteRecord()
+
+      controller.load()
+      @send 'closeModal'
+
+
   setupController: (controller) ->
     checkedContent = @controllerFor('messages').get('checkedContent')
     controller.set 'model', checkedContent
