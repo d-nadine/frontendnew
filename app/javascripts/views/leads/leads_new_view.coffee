@@ -13,9 +13,9 @@ Radium.LeadsNewView = Ember.View.extend
     ).name
   ).property('controller.status')
 
-  phoneNumbers: Radium.MultipleField.extend
-    classNames: ['control-group']
-    leader: 'Phone Number'
+  phoneNumbers: Radium.MultipleFields.extend
+    leader: 'Phone'
+    type: 'text'
     sourceBinding: 'controller.phoneNumbers'
 
   emailAddresses: Radium.MultipleFields.extend
