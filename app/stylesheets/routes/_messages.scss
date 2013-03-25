@@ -110,13 +110,37 @@
   }
 }
 
-.messages-view .email {
+.messages-view .message-card {
   padding: 50px;
   padding-bottom: 0px;
 
   .header {
     margin-bottom: 15px;
+  }
 
+  .content {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+
+    .text {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.messages-view .discussion-card  {
+  .header {
+    i { 
+      float: left;
+      margin-right: 40px;
+      font-size: 32px;
+    }
+  }
+}
+
+.messages-view .email-card {
+  .header {
     .more {
       margin-right: 15px;
     }
@@ -129,22 +153,8 @@
       margin-left: 10px;
     }
   }
-
-  .message {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 15px;
-  }
-
-  .body-text {
-    margin-bottom: 30px;
-  }
-
-  .email-actions {
-    margin-top: 40px;
-    text-align: right;
-  }
 }
+
 
 ul.sentence, ol.sentence {
   list-style: none;
@@ -160,36 +170,16 @@ ul.sentence, ol.sentence {
   }
 }
 
-.discussion-item {
-  .header {
-    i { 
-      float: left;
-      margin-right: 40px;
-      font-size: 32px;
-    }
+// .discussion-item {
+//   .header {
+//     i { 
+//       float: left;
+//       margin-right: 40px;
+//       font-size: 32px;
+//     }
 
-    p {
-      margin-bottom: 0;
-    }
-  }
-}
-
-ul.attachments {
-  list-style: none;
-  margin: 0;
-
-  li {
-    display: inline-block;
-    position: relative;
-    margin-right: 30px;
-
-    i {
-      position: absolute;
-      margin: 0;
-      top: -2px;
-      left: -5px;
-      margin: 0;
-      font-size: 120%;
-    }
-  }
-}
+//     p {
+//       margin-bottom: 0;
+//     }
+//   }
+// }

@@ -41,7 +41,7 @@
 </div>
 
 <div>
-  <div class="block discussion-item">
+  <div class="block discussion-card message-card">
     <div class="header">
       <i class="icon-discussion"></i>
       <p><big><strong>
@@ -65,15 +65,21 @@
       </div>
     </div>
     <hr/>
-    <div class="text">
-      {{topic}}
-    </div>
-    <hr/>
 
-    <div class="footer text-right">
-      <a class="btn btn-link" {{action delete this}}>
-        <i class="icon-delete"></i>
-      </a>
+    <div class="content">
+      <div class="text">
+        {{topic}}
+      </div>
+
+      {{template "shared/attachments"}}
+
+      <hr/>
+
+      <div class="footer text-right">
+        <a class="btn btn-link" {{action delete this}}>
+          <i class="icon-delete"></i>
+        </a>
+      </div>
     </div>
   </div>
 
