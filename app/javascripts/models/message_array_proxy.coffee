@@ -1,14 +1,19 @@
 require 'lib/radium/aggregate_array_proxy'
 
-Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend
-  init: ->
-    @_super()
+Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin,
+  load: ->
+    return if @get('isLoaded')
 
-    @add Radium.Email.all()
-    @add Radium.Discussion.all()
+    Radium.Email.all().then (emails) =>
+      @add emails
+      Radium.Discussion.all().then (discussions) =>
+        @add discussions
+        @set 'isLoaded', true
+        @resolve this
 
   folder: 'inbox'
   currentUser: null
+  isLoaded: false
 
   arrangedContent: (->
     content = @get('content')

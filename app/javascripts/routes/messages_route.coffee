@@ -59,13 +59,15 @@ Radium.MessagesRoute = Ember.Route.extend
     else if !itemsChecked
       @send 'back'
 
-  setupController: (controller) ->
-    messages = Radium.MessageArrayProxy.create
+  model: ->
+     messages = Radium.MessageArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')
 
-    controller.set 'model', messages
+     messages.load()
 
-  renderTemplate: ->
+     messages
+
+  renderTemplate: (controller, context) ->
     @render 'messages/drawer_buttons', outlet: 'buttons'
 
     # FIXME this seems wrong. It uses drawer_panel for
@@ -82,3 +84,11 @@ Radium.MessagesRoute = Ember.Route.extend
       outlet: 'buttons'
 
     @send 'closeDrawer'
+
+Radium.MessagesIndexRoute = Ember.Route.extend
+  redirect: ->
+    messages = @modelFor('messages')
+    item = messages.get('firstObject')
+    return unless item
+
+    @send 'selectItem', item
