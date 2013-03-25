@@ -29,6 +29,7 @@ Radium.MessagesBulkActionsRoute = Ember.Route.extend
 
       controller.load()
       @send 'closeModal'
+      @transitionTo 'messages'
 
 
   setupController: (controller) ->
@@ -38,3 +39,6 @@ Radium.MessagesBulkActionsRoute = Ember.Route.extend
   deactivate: ->
     @controllerFor('messages').forEach (item) =>
       item.set 'isChecked', false
+
+    # FIXME: why is this reuqired?
+    @render 'nothing', into: 'messages'
