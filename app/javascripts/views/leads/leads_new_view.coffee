@@ -29,7 +29,7 @@ Radium.LeadsNewView = Ember.View.extend
       return false unless @get('isSubmitted')
 
       not @get('controller.emailAddresses').someProperty 'value'
-    ).property('controller.emailAddresses.[]', 'isSubmitted')
+    ).property('controller.emailAddresses.[]', 'controller.isSubmitted')
 
 
   userPicker: Radium.UserPicker.extend

@@ -14,7 +14,6 @@ Radium.ContactForm = Radium.Form.extend
 
   isValid: ( ->
     return if Ember.isEmpty(@get('name'))
-    return unless @get('emailAddresses').someProperty 'value'
     true
   ).property('name', 'emailAddresses.[]')
 
