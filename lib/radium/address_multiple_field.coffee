@@ -19,5 +19,9 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return false if index == sourceLength
     return false if @get('parentView.currentIndex') == sourceLength
 
-    true
+    return true if @get('current.value.street.length') > 1
+    return true if @get('current.value.city.length') > 1
+    return true if @get('current.value.state.length') > 1
+    return true if @get('current.value.zip.length') > 1
+    false
   ).property('showdropdown', 'parentView.currentIndex','current.value.street', 'current.value.city', 'current.value.state', 'current.value.zip')
