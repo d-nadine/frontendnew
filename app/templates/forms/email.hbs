@@ -38,7 +38,7 @@
     <div>
       <div class="check-response">
         {{#unless showCheckForResponse}}
-          <a href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
+          <a href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
             Check for response?
           </a>
         {{/unless}}
@@ -50,9 +50,8 @@
 
             {{view view.reminderLength}}
             <label>Days</label>
-            <button href="#" class="btn">OK</button>
-            <button href="#" class="btn" {{action expandCheckForResponse bubbles="false"}}>
-              Cancel
+            <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
+              Done
             </button>
           </div>
         {{/if}}
