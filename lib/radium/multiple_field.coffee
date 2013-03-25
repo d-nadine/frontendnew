@@ -17,13 +17,14 @@ Radium.MultipleField = Ember.View.extend
   ).property('parentView.childViews.[]')
 
   showAddNew: ( ->
+    name = @get('current.name')
     index = @get('index')
     sourceLength = (@get('source.length') - 1)
     return false if index == sourceLength
     return false if @get('parentView.currentIndex') == sourceLength
 
     @get('current.value.length') > 1
-  ).property('current.value', 'showdropdown', 'parentview.currentindex')
+  ).property('current.value', 'showdropdown', 'parentView.currentIndex')
 
   label: ( ->
     "#{@get('current.name')} #{@get('leader')}"

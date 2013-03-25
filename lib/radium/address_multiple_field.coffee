@@ -20,4 +20,4 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return false if @get('parentView.currentIndex') == sourceLength
 
     true
-  ).property('showdropdown', 'parentview.currentindex','current.value.street', 'current.value.city', 'current.value.state', 'current.value.zip')
+  ).property('showdropdown', 'parentView.currentIndex','current.value.street', 'current.value.city', 'current.value.state', 'current.value.zip')
