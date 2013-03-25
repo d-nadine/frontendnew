@@ -32,10 +32,16 @@ Radium.MessagesRoute = Ember.Route.extend
         controller = @controllerFor('messages')
 
         if item == controller.get('selectedContent')
-          controller.set 'selectedContent', controller.get('nextItem')
+          nextItem = controller.get('nextItem')
 
-        item.deleteRecord()
-        @get('store').commit()
+          item.deleteRecord()
+          @get('store').commit()
+
+          @send 'selectItem', controller.get('nextItem')
+        else
+          item.deleteRecord()
+          @get('store').commit()
+
 
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
