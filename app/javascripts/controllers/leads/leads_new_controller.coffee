@@ -41,8 +41,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      # FIXME: Highly controversial but it gets round the form objects
-      # not being initialised like a controller.  We need to review this.
       contact = @get('model').commit (contact)
       @transitionToRoute 'contact', contact
     ), 1200)
