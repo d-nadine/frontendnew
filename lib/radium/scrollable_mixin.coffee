@@ -1,6 +1,6 @@
 Radium.ScrollableMixin = Em.Mixin.create
   didInsertElement: ->
-    @shouldScroll()
+    Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
 
     @$(window).on 'resize', @get('windowDidResize')
 
@@ -26,5 +26,5 @@ Radium.ScrollableMixin = Em.Mixin.create
   # a variable we can pass to `off` later to remove
   # the specific event handler.
   windowDidResize: (->
-    $.proxy @shouldScroll, this
+    @shouldScroll.bind this
   ).property()
