@@ -1,6 +1,6 @@
 Radium.ScrollableMixin = Em.Mixin.create
   didInsertElement: ->
-    Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
+    @shouldScroll()
 
     @$(window).on 'resize', @get('windowDidResize')
 
