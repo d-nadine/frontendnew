@@ -18,8 +18,7 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Phone Number'
     sourceBinding: 'controller.phoneNumbers'
 
-  emailAddresses: Radium.MultipleField.extend
-    classNameBindings: [':control-group']
+  emailAddresses: Radium.MultipleFields.extend
     isSubmitted: Ember.computed.alias 'controller.isSubmitted'
     type: 'email'
     leader: 'Email'

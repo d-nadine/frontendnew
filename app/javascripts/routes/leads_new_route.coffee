@@ -1,7 +1,6 @@
 Radium.LeadsNewRoute = Ember.Route.extend
   setupController: (controller) ->
     controller.set 'model', @get 'contactForm'
-    controller.set 'model.assignedTo', @controllerFor('currentUser').get('model')
 
   contactForm:  Radium.computed.newForm('contact')
 
