@@ -4,6 +4,7 @@ Radium.MultipleFields = Ember.ContainerView.extend
   currentIndex: -1
   didInsertElement: ->
     @_super.apply this, arguments
+    @set('source.firstObject.isPrimary', true) if @get('source.length')
     @addNew()
 
   addNew: ->
@@ -78,6 +79,9 @@ Radium.MultipleField = Ember.View.extend
 
   primaryRadio: Radium.Radiobutton.extend
     leader: 'Make Primary'
+
+    didInsertElement: ->
+      @set('checked', true) if @get('parentView.current.isPrimary')
 
     isChecked: Ember.computed.bool 'parentView.current.isPrimary'
 
