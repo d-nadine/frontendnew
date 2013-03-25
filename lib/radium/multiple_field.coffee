@@ -7,6 +7,30 @@ Radium.MultipleFields = Ember.ContainerView.extend
     @set('source.firstObject.isPrimary', true) if @get('source.length')
     @addNew()
 
+  removeSelection: (view) ->
+    view.set('current.value', null)
+
+    currentViewIsPrimary = view.get('current.isPrimary')
+
+    view.set('current.isPrimary', false)
+
+    @get('source').removeObject(view.get('current'))
+    @get('source').pushObject(view.get('current'))
+
+    @removeObject view
+
+    newIndex = 0
+
+    @get('childViews').forEach (childView) ->
+      childView.set('index', newIndex)
+      newIndex += 1
+
+      if currentViewIsPrimary
+        childView.set('current.isPrimary', true)
+        currentViewIsPrimary = false
+
+    @set('currentIndex', @get('currentIndex') - 1)
+
   addNew: ->
     @set('currentIndex', @get('currentIndex') + 1)
     @pushObject(Radium.MultipleField.create
@@ -24,34 +48,37 @@ Radium.MultipleField = Ember.View.extend
   didInsertElement: ->
     @set 'current', @get('source').objectAt(@get('index'))
     @set('current.value', "") unless @get('current.value')
-
     @set('showDropDown', @get('index') != 0)
 
   addNew: ->
     @get('parentView').addNew()
     @set 'showDropDown', true
 
+  showDelete: ( ->
+    @get('parentView.childViews.length') > 1
+  ).property('parentView.childViews.[]')
+
   showAddNew: ( ->
-    return false if @get('showDropDown')
-    return false if @get('index') == (@get('source.length') - 1)
+    index = @get('index')
+    sourceLength = (@get('source.length') - 1)
+    return false if index == sourceLength
+    return false if @get('parentView.currentIndex') == sourceLength
 
     @get('current.value.length') > 1
-  ).property('current.value', 'showDropDown')
+  ).property('current.value', 'showDropDown', 'parentView.currentIndex')
 
   label: ( ->
     "#{@get('current.name')} #{@get('leader')}"
   ).property('leader', 'current.name')
+
+  removeSelection: ->
+    @get('parentView').removeSelection this
 
   layout: Ember.Handlebars.compile """
     <label class="control-label">{{view.label}}</label>
     <div class="controls" {{!bindAttr class="view.isInvalid:is-invalid"}}>
       {{yield}}
     </div>
-    {{#if view.showAddNew}}
-      <div>
-        <a href="#" {{action addNew target="view" bubbles="false"}}>add new</a>
-      </div>
-    {{/if}}
     {{#if view.showDropDown}}
       <div class="controls selector">
         <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
@@ -68,10 +95,20 @@ Radium.MultipleField = Ember.View.extend
           </ul>
         </div>
         {{view view.primaryRadio}}
+        {{#if view.showDelete}}
+          <a href="#">
+            <i {{action removeSelection target="view" bubbles="false"}} class="icon-trash"></i>
+          </a>
+        {{/if}}
       </div>
     {{/if}}
-  """
+    {{#if view.showAddNew}}
+      <div>
+        <a href="#" {{action addNew target="view" bubbles="false"}}>add new</a>
+      </div>
+    {{/if}}
 
+  """
 
   template: Ember.Handlebars.compile """
     {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
