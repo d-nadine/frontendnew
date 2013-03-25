@@ -6,7 +6,7 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   shouldScroll: ->
     if @get 'scroller'
-      @get('scroller').tinyscrollbar_update()
+      @get('scroller').tinyscrollbar_update('relative')
     else
       scroller = @$('.scroller').tinyscrollbar()
       @set 'scroller', scroller
