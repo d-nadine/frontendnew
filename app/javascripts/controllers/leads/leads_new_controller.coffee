@@ -43,6 +43,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
       # FIXME: Highly controversial but it gets round the form objects
       # not being initialised like a controller.  We need to review this.
-      @get('model').commit (contact) =>
-        @transitionToRoute 'contact', contact
+      contact = @get('model').commit (contact)
+      @transitionToRoute 'contact', contact
     ), 1200)
