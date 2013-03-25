@@ -152,6 +152,26 @@
     .subject {
       margin-left: 10px;
     }
+
+    dl {
+      dt, dd {
+        margin-bottom: 5px;
+      }
+
+      dt {
+        width: 50px;
+        float: left;
+        font-weight: normal;
+
+        &:after {
+          content: ':'
+        }
+      }
+
+      dd {
+        margin-left: 60px;
+      }
+    }
   }
 }
 
@@ -166,6 +186,12 @@ ul.sentence, ol.sentence {
   }
 
   li:not(:last-of-type):after {
+    content: ','
+  }
+}
+
+span.sentence {
+  span:not(:last-of-type):after {
     content: ','
   }
 }

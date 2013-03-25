@@ -10,6 +10,8 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   sentAt: DS.attr('datetime')
 
   sender: DS.attr('object')
-  to: DS.attr('array')
+
+  # FIXME: find a better way to handle this
+  # once we get the API connntected
   cc: DS.attr('array')
   bcc: DS.attr('array')

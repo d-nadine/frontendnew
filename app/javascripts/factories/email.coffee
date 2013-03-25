@@ -1,6 +1,7 @@
 Factory.define 'email', traits: ['timestamps', 'html'],
   subject: Factory.sequence (i) -> "Email #{i}"
   sentAt: -> Ember.DateTime.random past: true
+  isTracked: -> Math.random() >= 0.7
   message: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus
     felis. Maecenas lacinia risus pellentesque ipsum vehicula convallis.
@@ -21,11 +22,23 @@ Factory.define 'email', traits: ['timestamps', 'html'],
       Factory.create 'user'
     else
       Factory.create 'contact'
+  to: -> [
+    Factory.create 'user'
+    Factory.create 'contact'
+  ]
+
+  cc: -> [
+    Factory.create 'user'
+    Factory.create 'contact'
+  ]
+
+  bcc: -> [
+    Factory.create 'user'
+    Factory.create 'contact'
+  ]
 
   attachments: -> [
     Factory.create 'attachment'
     Factory.create 'attachment'
     Factory.create 'attachment'
   ]
-
-  isTracked: -> Math.random() >= 0.7
