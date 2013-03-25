@@ -1,4 +1,6 @@
+require 'lib/radium/multiple_fields'
 require 'lib/radium/multiple_field'
+require 'lib/radium/address_multiple_field'
 require 'lib/radium/typeahead_textfield'
 
 Radium.LeadsNewView = Ember.View.extend
@@ -61,24 +63,10 @@ Radium.LeadsNewView = Ember.View.extend
     placeholder: 'Where is this lead from?'
     valueBinding: 'controller.source'
 
-  addresses: Radium.MultipleField.extend
-    classNames: ['control-group']
+  addresses: Radium.MultipleFields.extend
     leader: 'Address'
     sourceBinding: 'controller.addresses'
-    template: Ember.Handlebars.compile """
-      <div class="addresses">
-        <div class="control-group whole">
-          {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value.street" placeholderBinding="view.leader"}}
-        </div>
-        <div class="control-group whole">
-          {{view Ember.TextField  valueBinding="view.current.value.city" classNames="field input-xlarge city" placeholder="City"}}
-        </div>
-        <div class="control-group broken">
-          {{view Ember.TextField valueBinding="view.current.value.state" classNames="field state" placeholder="State" }}
-          {{view Ember.TextField valueBinding="view.current.value.zipcode" classNames="field zip" placeholder="Zip code"}}
-        </div>
-      </div>
-    """
+    viewType: Radium.AddressMultipleField
 
   contactName: Radium.TypeaheadTextField.extend
     classNameBindings: ['isInvalid', 'open', ':field']

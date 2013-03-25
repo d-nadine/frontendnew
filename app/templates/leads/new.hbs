@@ -32,7 +32,7 @@
                   <input type="text" class="field input-xlarge" placeholder="Company">
                 </div>
               </div>
-              {{#if isNewContact}}
+              {{!#if isNewContact}}
                 {{view view.emailAddresses}}
                 {{view view.phoneNumbers}}
                 <div class="control-group">
@@ -64,7 +64,7 @@
                     </div>
                   </div>
                   <hr/>
-                  {{!view view.addresses}}
+                  {{view view.addresses}}
                   <hr/>
                 {{else}}
                   <div class="control-group">
@@ -75,7 +75,7 @@
                   {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
                   <a href="#" {{action submit}} class="btn btn-success">Lead</a>
                 </div>
-              {{/if}}
+              {{!/if}}
               {{#if isExistingContact}}
               <div class="existing">
                 <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is already an existing customer. Do you want to add a deal?

@@ -5,11 +5,11 @@ Radium.LeadsNewRoute = Ember.Route.extend
   contactForm:  Radium.computed.newForm('contact')
 
   addressDefaults: ->
-    street: null
-    city: null
-    state: null
-    zipcode: null
-    country: null
+    street: ''
+    city: ''
+    state: ''
+    zipcode: ''
+    country: ''
 
   contactFormDefaults: ( ->
     isNew: true
@@ -19,13 +19,13 @@ Radium.LeadsNewRoute = Ember.Route.extend
     source: ''
     assignedTo: null
     phoneNumbers: [
-      Ember.Object.create({name: 'Mobile', value: null, isPrimary: true}),
-      Ember.Object.create({name: 'Work', value: null}),
-      Ember.Object.create({name: 'Home', value: null})
+      Ember.Object.create({name: 'Mobile', value: '', isPrimary: true}),
+      Ember.Object.create({name: 'Work', value: ''}),
+      Ember.Object.create({name: 'Home', value: ''})
     ]
     emailAddresses: [
-      Ember.Object.create({name: 'Work', value: null, isPrimary: true}),
-      Ember.Object.create({name: 'Home', value: null}),
+      Ember.Object.create({name: 'Work', value: '', isPrimary: true}),
+      Ember.Object.create({name: 'Home', value: ''}),
     ]
     addresses: [
       Ember.Object.create({name: 'Office', value: Ember.Object.create(@addressDefaults()), isPrimary: true}),

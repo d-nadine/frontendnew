@@ -22,4 +22,13 @@
   .btn, .btn:focus {
     outline: none;
   }
+
+  .add-new{
+    vertical-align: top;
+    position: relative;
+    top: 3px;
+    a{
+      text-decoration: none;
+    }
+  }
 }

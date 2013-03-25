@@ -1,53 +1,11 @@
 require 'lib/radium/radio'
 
-Radium.MultipleFields = Ember.ContainerView.extend
-  currentIndex: -1
-  didInsertElement: ->
-    @_super.apply this, arguments
-    @set('source.firstObject.isPrimary', true) if @get('source.length')
-    @addNew()
-
-  removeSelection: (view) ->
-    view.set('current.value', null)
-
-    currentViewIsPrimary = view.get('current.isPrimary')
-
-    view.set('current.isPrimary', false)
-
-    @get('source').removeObject(view.get('current'))
-    @get('source').pushObject(view.get('current'))
-
-    @removeObject view
-
-    newIndex = 0
-
-    @get('childViews').forEach (childView) ->
-      childView.set('index', newIndex)
-      newIndex += 1
-
-      if currentViewIsPrimary
-        childView.set('current.isPrimary', true)
-        currentViewIsPrimary = false
-
-    @set('currentIndex', @get('currentIndex') - 1)
-
-  addNew: ->
-    @set('currentIndex', @get('currentIndex') + 1)
-    @pushObject(Radium.MultipleField.create
-      classNameBindings: [':control-group']
-      source: @get('source')
-      leader: @get('leader')
-      type: @get('type')
-      index: @get('currentIndex')
-    )
-
 Radium.MultipleField = Ember.View.extend
   classNames: ['multiple-field']
   open: false
 
   didInsertElement: ->
     @set 'current', @get('source').objectAt(@get('index'))
-    @set('current.value', "") unless @get('current.value')
     @set('showDropDown', @get('index') != 0)
 
   addNew: ->
@@ -65,7 +23,7 @@ Radium.MultipleField = Ember.View.extend
     return false if @get('parentView.currentIndex') == sourceLength
 
     @get('current.value.length') > 1
-  ).property('current.value', 'showDropDown', 'parentView.currentIndex')
+  ).property('current.value', 'showdropdown', 'parentview.currentindex')
 
   label: ( ->
     "#{@get('current.name')} #{@get('leader')}"
@@ -103,7 +61,7 @@ Radium.MultipleField = Ember.View.extend
       </div>
     {{/if}}
     {{#if view.showAddNew}}
-      <div>
+      <div class="add-new">
         <a href="#" {{action addNew target="view" bubbles="false"}}>add new</a>
       </div>
     {{/if}}
