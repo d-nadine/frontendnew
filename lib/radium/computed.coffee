@@ -4,6 +4,7 @@ require 'forms/meeting_form'
 require 'forms/todo_form'
 require 'lib/radium/aggregate_array_proxy'
 require 'lib/radium/task_list'
+require 'forms/deal_form'
 
 Radium.computed = {}
 

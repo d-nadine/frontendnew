@@ -44,6 +44,10 @@ Radium.ApplicationRoute = Radium.Route.extend
       else
         @transitionTo lastPage[0]
 
+    createDealFromContact: (contact) ->
+      @controllerFor('deals.new').set('model.contact', contact)
+      @transitionTo 'deals.new'
+
   setupController: ->
     @controllerFor('currentUser').set 'model', Radium.User.find(1)
     @controllerFor('users').set 'model', Radium.User.find()
@@ -54,6 +58,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     settings = Radium.Settings.find(1)
     @controllerFor('settings').set 'model', settings
+    @controllerFor('deals.new').set 'model', @get('dealForm')
 
   renderTemplate: ->
     @render()
@@ -61,3 +66,10 @@ Radium.ApplicationRoute = Radium.Route.extend
     @render 'drawer_panel',
       into: 'application'
       outlet: 'drawerPanel'
+
+  dealForm:  Radium.computed.newForm('deal')
+
+  dealFormDefaults: ( ->
+    name: ''
+    contact: null
+  ).property()
