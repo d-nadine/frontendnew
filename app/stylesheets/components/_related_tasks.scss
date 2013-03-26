@@ -2,7 +2,20 @@ ol.related-tasks {
   list-style: none;
 
   li {
+    position: relative;
     margin-bottom: 10px;
+
+    &.is-finished:after {
+      position: absolute;
+      width: 100%;
+      content: '';
+      height: 2px;
+      background-color: $dark;
+      margin: 0 auto;
+      margin-top: -1px;
+      left: 0;
+      top: 50%;
+    }
   }
 
   i {

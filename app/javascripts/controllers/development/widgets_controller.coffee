@@ -18,5 +18,9 @@ Radium.DevelopmentWidgetsController = Ember.Controller.extend
   ).property()
 
   tasks: (->
-    [@get('todo'), @get('call'), @get('meeting')]
+    [
+      @get('todo'), @get('call'), @get('meeting'),
+      Factory.create('todo', isFinished: true),
+      Factory.create('call', isFinished: true)
+    ]
   ).property()
