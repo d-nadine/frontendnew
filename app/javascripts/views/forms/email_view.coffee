@@ -49,13 +49,13 @@ Radium.FormsEmailView = Radium.FormView.extend
     value: 5
 
   closeModal: ->
-    @$('.modal').removeClass 'open'
+    @$('#addSignatureModal').modal('hide')
 
   addSignature: ->
     signature = @get('controller.signature')
 
     unless signature
-      @$('.modal').addClass 'open'
+      @$('#addSignatureModal').modal()
       @$('.modal textarea').focus()
       return
 
