@@ -18,7 +18,9 @@ Radium.Router.map ->
 
   @resource 'user', path: '/users/:user_id'
 
-  @resource 'deal', path: '/deals/:deal_id'
+  @resource 'deals', ->
+    @route 'new'
+    @resource 'deal', path: '/:deal_id'
 
   @resource 'calendar', path: '/:year/:month/:day'
 
