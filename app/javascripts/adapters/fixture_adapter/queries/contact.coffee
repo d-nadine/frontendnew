@@ -1,4 +1,4 @@
-Radium.InMemoryAdapter.reopen
+Radium.FixtureAdapter.reopen
   queryContactFixtures: (fixtures, query) ->
 
     if query.statusFor

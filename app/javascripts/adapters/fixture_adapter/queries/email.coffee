@@ -1,3 +1,3 @@
-Radium.InMemoryAdapter.reopen
+Radium.FixtureAdapter.reopen
   queryEmailFixtures: (records, query) ->
     records

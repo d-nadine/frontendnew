@@ -11,7 +11,6 @@ require 'lib/string/inflector'
 require 'lib/foundry'
 
 Radium = Em.Application.create
-  autoinit: false
   rootElement: '#application'
 
 window.Radium = Radium

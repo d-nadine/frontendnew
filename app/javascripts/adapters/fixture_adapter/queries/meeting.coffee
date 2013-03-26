@@ -1,4 +1,4 @@
-Radium.InMemoryAdapter.reopen
+Radium.FixtureAdapter.reopen
   queryMeetingFixtures: (records, query) ->
     if query.user && query.day
       return records.filter (meeting) ->
