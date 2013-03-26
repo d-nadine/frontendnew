@@ -21,11 +21,12 @@ class Populator
         name: name
         email: "#{name.split(' ')[0].toLowerCase()}@radiumcrm.com"
 
+    userDictionary = new Dictionary(users)
+
     contacts = for i in [0..20]
       Factory.create 'contact',
-        user: -> users[(users.length).randomize()]
+        user: -> userDictionary.random()
 
-    userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
     deals = for i in [0..20]
