@@ -63,7 +63,8 @@
   }
 }
 
-.messages-view .hud + div {
+.messages-view .hud + div, 
+.messages-view  .email-history.show-hud {
   padding-top: 120px;
 }
 

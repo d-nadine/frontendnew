@@ -21,7 +21,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   tasks: Radium.computed.tasks('todos', 'meetings')
 
-  poeple: Radium.computed.aggregate('to','cc')
+  people: Radium.computed.aggregate('to','cc')
 
   contact: (->
     if @get('sender') instanceof Radium.Contact

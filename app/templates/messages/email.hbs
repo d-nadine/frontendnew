@@ -1,5 +1,7 @@
-{{template 'messages/hud'}}
+{{#if showHud}}
+  {{template 'messages/hud'}}
+{{/if}}
 
-<div class="email-history">
+<div {{bindAttr class="showHud :email-history"}}>
   {{render 'messages/email_history' history}}
 </div>
