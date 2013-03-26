@@ -74,7 +74,15 @@ class Populator
             contactDictionary.random()
           else
             dealDictionary.random()
-
+        todos: -> [
+          Factory.create('todo')
+          Factory.create('call')
+          Factory.create('todo', isFinished: true)
+          Factory.create('call', isFinished: true)
+        ]
+        meetings: -> [
+          Factory.create('meeting')
+        ]
 
     Factory.adapter.store.commit()
 

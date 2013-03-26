@@ -1,7 +1,6 @@
-require 'lib/radium/task_list'
-
 Radium.Email = DS.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
+  Radium.HasTasksMixin,
 
   todos: DS.hasMany('Radium.Todo')
   meetings: DS.hasMany('Radium.Meeting')

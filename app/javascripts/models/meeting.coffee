@@ -28,8 +28,8 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('contact') || @get('deal') || @get('email')
-  ).property('contact', 'deal', 'email')
+      @get('todo') || @get('deal') || @get('email')
+  ).property('todo', 'deal', 'email')
 
   time: Ember.computed.alias('startsAt')
 
