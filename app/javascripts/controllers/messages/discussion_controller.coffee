@@ -11,8 +11,17 @@ Radium.MessagesDiscussionController = Ember.ObjectController.extend
     if @get('aboutDeal')
       @get('reference')
     else
-      null
+      @get('latestDeal')
   ).property('reference')
 
-  # FIXME: figure out how to implement this correctly
-  nextTask: null
+  nextTask: (->
+    @get('reference.nextTask')
+  ).property('reference.nextTask')
+
+  contact: (->
+    if @get('aboutDeal')
+      @get('reference.contact')
+    else
+      @get('reference')
+  ).property('reference')
+

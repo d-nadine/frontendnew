@@ -16,7 +16,16 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   # FIXME: find a better way to handle this
   # once we get the API connntected
+  to: DS.attr('array')
   cc: DS.attr('array')
-  bcc: DS.attr('array')
 
   tasks: Radium.computed.tasks('todos', 'meetings')
+
+  poeple: Radium.computed.aggregate('to','cc')
+
+  contact: (->
+    if @et('sender') instanceof Radium.Contact
+      @get('sender')
+    else
+      @get('people').find (person) -> person instanceof Radium.Contact
+  ).property()

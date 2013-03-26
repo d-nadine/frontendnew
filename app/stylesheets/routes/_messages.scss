@@ -72,11 +72,11 @@
   box-sizing: border-box;
   width: 100%;
 
-  .deal-info, .task-info, .sender-info {
+  .deal-info, .task-info, .contact-info {
     display: table-cell;
   }
 
-  .sender-info {
+  .contact-info {
     .avatar {
       float: left;
       margin-right: 20px;

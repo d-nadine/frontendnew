@@ -75,6 +75,7 @@ class Populator
           else
             dealDictionary.random()
 
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
