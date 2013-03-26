@@ -1,0 +1,16 @@
+ol.related-tasks {
+  list-style: none;
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  i {
+    font-size: larger;
+  }
+
+  span.time {
+    float: right;
+    font-size: smaller;
+  }
+}

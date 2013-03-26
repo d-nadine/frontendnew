@@ -1,0 +1,60 @@
+{{#if tasks}}
+  <ol class="related-tasks unstyled">
+    {{#each tasks itemController="relatedTaskItem"}}
+      <li>
+        {{#if isTodo}}
+          <i class="icon-todo"></i>
+          {{#linkTo unimplemented}}{{description}}{{/linkTo}}
+          <span class="time">
+            Due
+            {{#linkTo unimplemented}}
+              {{time time format="date"}}
+            {{/linkTo}}
+          </span>
+        {{/if}}
+
+        {{#if isCall}}
+          <i class="icon-call"></i>
+          {{#linkTo unimplemented}}Call{{/linkTo}}
+          with 
+          {{#linkTo user user}}{{user.name}}{{/linkTo}}
+          and
+          {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}
+
+          <span class="time">
+            on
+            {{#linkTo unimplemented}}
+              {{time time format="date"}}
+            {{/linkTo}}
+            at
+            {{#linkTo unimplemented}}
+              {{time time format="short"}}
+            {{/linkTo}}
+          </span>
+        {{/if}}
+
+        {{#if isMeeting}}
+          <i class="icon-calendar"></i>
+          {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
+          with
+          <span class="sentence">
+            {{#each people}}
+              <span>{{#linkToPerson this}}{{this.name}}{{/linkToPerson}}</span>
+            {{/each}}
+          </span>
+
+          <span class="time">
+            on
+            {{#linkTo unimplemented}}
+              {{time time format="date"}}
+            {{/linkTo}}
+            at
+            {{#linkTo unimplemented}}
+              {{time time format="short"}}
+            {{/linkTo}}
+          </span>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+{{/if}}
