@@ -2,7 +2,7 @@
   <ol class="related-tasks unstyled">
     {{#each tasks itemController="relatedTaskItem"}}
       {{#if isTodo}}
-        <li {{bindAttr class="isFinished"}}>
+        <li {{bindAttr class="isFinished isOverdue"}}>
           <i class="icon-todo"></i>
           {{#linkTo unimplemented}}{{description}}{{/linkTo}}
           <span class="time">
@@ -15,7 +15,7 @@
       {{/if}}
 
       {{#if isCall}}
-        <li {{bindAttr class="isFinished"}}>
+        <li {{bindAttr class="isFinished isOverdue"}}>
           <i class="icon-call"></i>
           {{#linkTo unimplemented}}Call{{/linkTo}}
           with 

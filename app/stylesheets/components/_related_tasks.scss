@@ -5,12 +5,20 @@ ol.related-tasks {
     position: relative;
     margin-bottom: 10px;
 
+    &.is-finished, &.is-finished a {
+      color: $muted;
+    }
+
+    &.is-overdue .time, &.is-overdue .time a {
+      color: $red;
+    }
+
     &.is-finished:after {
       position: absolute;
       width: 100%;
       content: '';
       height: 2px;
-      background-color: $dark;
+      background-color: $muted;
       margin: 0 auto;
       margin-top: -1px;
       left: 0;
