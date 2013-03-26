@@ -26,6 +26,8 @@ class Populator
     contacts = for i in [0..20]
       Factory.create 'contact',
         user: -> userDictionary.random()
+        meetings: -> [Factory.create('meeting')]
+        todos: -> [Factory.create('todo'), Factory.create('call')]
 
     contactDictionary = new Dictionary(contacts)
 
