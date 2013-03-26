@@ -7,10 +7,6 @@ require 'lib/radium/task_list'
 
 Radium.computed = {}
 
-Radium.computed.equal = (dependentKey, value) ->
-  Ember.computed dependentKey, (key) ->
-    @get(dependentKey) == value
-
 Radium.computed.isToday = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     @get(dependentKey).isToday()
@@ -27,10 +23,6 @@ Radium.computed.daysOld = (dependentKey, days) ->
   Ember.computed dependentKey, (key) ->
     now = Ember.DateTime.create()
     @get(dependentKey).daysApart(now) >= days
-
-Radium.computed.isPresent = (dependentKey) ->
-  Ember.computed dependentKey, (key) ->
-    !Ember.isEmpty(@get(dependentKey))
 
 Radium.computed.newForm = (form, properties = {}) ->
   defaultsName = "#{form}FormDefaults"
