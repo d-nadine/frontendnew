@@ -26,3 +26,5 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     #deals will be ordered on the server?
     @get('deals.firstObject')
   ).property('deals')
+
+  tasks: Radium.computed.tasks('todos', 'meetings')

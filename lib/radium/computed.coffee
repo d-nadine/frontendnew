@@ -3,6 +3,7 @@ require 'forms/discussion_form'
 require 'forms/meeting_form'
 require 'forms/todo_form'
 require 'lib/radium/aggregate_array_proxy'
+require 'lib/radium/task_list'
 
 Radium.computed = {}
 
@@ -50,3 +51,15 @@ Radium.computed.aggregate = ->
     aggregate = Radium.AggregateArrayProxy.create()
     arrays.forEach (array) => aggregate.add @get(array)
     aggregate
+
+Radium.computed.tasks = ->
+  arrays = Array.prototype.slice.call arguments
+
+  Ember.computed ->
+    aggregate = Radium.AggregateArrayProxy.create()
+    arrays.forEach (array) => aggregate.add @get(array)
+    aggregate
+
+Radium.computed.required = ->
+  Ember.computed ->
+    throw new Error("#{@constructor} does not implement the tasks interface")

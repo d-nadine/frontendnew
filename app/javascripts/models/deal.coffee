@@ -4,6 +4,8 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   Radium.HasTasksMixin,
 
   todos: DS.hasMany('Radium.Todo')
+  meetings: DS.hasMany('Meetings')
+
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
 
@@ -18,4 +20,4 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   isPastPayment: Radium.computed.isPast("payBy")
 
-  tasks: Ember.computed.alias('todos') 
+  tasks: Ember.computed.alias('todos')

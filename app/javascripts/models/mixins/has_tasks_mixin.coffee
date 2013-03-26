@@ -1,16 +1,9 @@
 Radium.HasTasksMixin = Ember.Mixin.create
-  tasks: (->
-    tasks = Ember.A()
-
-    @get('todos').forEach (todo) -> tasks.pushObject todo
-    @get('meetings').forEach (meeting) -> tasks.pushObject meeting
-
-    tasks
-  ).property('meetings.[]', 'todos.[]')
+  tasks: Radium.computed.required()
 
   hasTasks: (->
-    @get('todos.length')
-  ).property('todos.length')
+    @get('tasks.length')
+  ).property('tasks.length')
 
   nextTask: (->
     @get 'tasks.firstObject'

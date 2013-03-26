@@ -127,6 +127,10 @@
       margin-bottom: 30px;
     }
   }
+
+  .related-tasks {
+    padding: 20px 0;
+  }
 }
 
 .messages-view .discussion-card  {
@@ -175,23 +179,3 @@
   }
 }
 
-
-ul.sentence, ol.sentence {
-  list-style: none;
-  margin: 0;
-  display: inline;
-
-  li { 
-    display: inline;
-  }
-
-  li:not(:last-of-type):after {
-    content: ','
-  }
-}
-
-span.sentence {
-  span:not(:last-of-type):after {
-    content: ','
-  }
-}

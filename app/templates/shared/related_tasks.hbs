@@ -1,8 +1,8 @@
 {{#if tasks}}
   <ol class="related-tasks unstyled">
     {{#each tasks itemController="relatedTaskItem"}}
-      <li>
-        {{#if isTodo}}
+      {{#if isTodo}}
+        <li {{bindAttr class="isFinished"}}>
           <i class="icon-todo"></i>
           {{#linkTo unimplemented}}{{description}}{{/linkTo}}
           <span class="time">
@@ -11,9 +11,11 @@
               {{time time format="date"}}
             {{/linkTo}}
           </span>
-        {{/if}}
+        </li>
+      {{/if}}
 
-        {{#if isCall}}
+      {{#if isCall}}
+        <li {{bindAttr class="isFinished"}}>
           <i class="icon-call"></i>
           {{#linkTo unimplemented}}Call{{/linkTo}}
           with 
@@ -31,9 +33,11 @@
               {{time time format="short"}}
             {{/linkTo}}
           </span>
-        {{/if}}
+        </li>
+      {{/if}}
 
-        {{#if isMeeting}}
+      {{#if isMeeting}}
+        <li>
           <i class="icon-calendar"></i>
           {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
           with
@@ -53,8 +57,9 @@
               {{time time format="short"}}
             {{/linkTo}}
           </span>
-        {{/if}}
-      </li>
+        </li>
+      {{/if}}
+    </li>
     {{/each}}
   </ol>
 {{/if}}

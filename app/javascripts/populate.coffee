@@ -45,6 +45,15 @@ class Populator
     for i in [0..30]
       Factory.create 'email',
         sender: -> if Math.random() >= 0.5 then userDictionary.random() else contactDictionary.random()
+        todos: -> [
+          Factory.create('todo')
+          Factory.create('call')
+          Factory.create('todo', isFinished: true)
+          Factory.create('call', isFinished: true)
+        ]
+        meetings: -> [
+          Factory.create('meeting')
+        ]
 
     for i in [0..20]
       Factory.create 'group'

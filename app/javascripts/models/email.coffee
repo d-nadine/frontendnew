@@ -1,7 +1,10 @@
+require 'lib/radium/task_list'
+
 Radium.Email = DS.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
+  meetings: DS.hasMany('Radium.Meeting')
 
   subject: DS.attr('string')
   message: DS.attr('string')
@@ -15,3 +18,5 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   # once we get the API connntected
   cc: DS.attr('array')
   bcc: DS.attr('array')
+
+  tasks: Radium.computed.tasks('todos', 'meetings')
