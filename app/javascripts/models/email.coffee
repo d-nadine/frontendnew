@@ -24,7 +24,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   poeple: Radium.computed.aggregate('to','cc')
 
   contact: (->
-    if @et('sender') instanceof Radium.Contact
+    if @get('sender') instanceof Radium.Contact
       @get('sender')
     else
       @get('people').find (person) -> person instanceof Radium.Contact
