@@ -26,6 +26,27 @@
     }
   }
 
+  .checklist-items{
+    table{
+      display: inline-block;
+      tr{
+        td{
+          padding: 5px;
+
+          &.check{
+            input[type=checkbox]{
+              position: relative;
+              top: -3px;
+            }
+          }
+          &.is-finished{
+            color: #5bb75b;
+          }
+        }
+      }
+    }
+  }
+
   .btn-success{
     padding: 3px 40px 3px 40px;
   }

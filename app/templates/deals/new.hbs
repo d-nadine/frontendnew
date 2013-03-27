@@ -10,15 +10,19 @@
   </div>
 </div>
 <div class="block checklist-items">
-  <table>
-    {{#each checklistItem in checklist.checklistItems}}
-      {{#with checklistItem}}
-        <tr>
-          <td>{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
-          <td>{{description}}</td>
-        </tr>
-      {{/with}}
-    {{/each}}
+  <table class="">
+    <tbody>
+      {{#each checklistItem in checklist.checklistItems itemController="checklistItem"}}
+        {{#with checklistItem}}
+          <tr>
+            <td><i {{bindAttr class="checklistItemIcon"}}></i></td>
+            <td class="check">{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
+            <td>{{description}}</td>
+            <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
+          </tr>
+        {{/with}}
+      {{/each}}
+    </tbody>
   </table>
 </div>
 <form class="form form-horizontal">
