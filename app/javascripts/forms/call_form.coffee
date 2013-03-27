@@ -1,13 +1,8 @@
 require 'forms/todo_form'
 
 Radium.CallForm = Radium.TodoForm.extend
+  kind: 'call'
   canChangeContact: true
-
-  data: (->
-    hash = @_super()
-    hash.kind = 'call'
-    hash
-  ).property().volatile()
 
   isValid: (->
     return unless @_super()

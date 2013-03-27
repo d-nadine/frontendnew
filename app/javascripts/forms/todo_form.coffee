@@ -1,11 +1,14 @@
 require 'forms/form'
 
 Radium.TodoForm = Radium.Form.extend
+  kind: 'general'
+
   data: ( ->
     user: @get('user')
     finishBy: @get('finishBy')
     reference: @get('reference')
     description: @get('description')
+    kind: @get('kind')
   ).property().volatile()
 
   isValid: ( ->
