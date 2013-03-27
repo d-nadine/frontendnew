@@ -1,0 +1,48 @@
+.deals-new-view{
+  .checklist.block{
+    margin-bottom: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    > div{
+      display: inline-block;
+    }
+    .checklist-title{
+      vertical-align: bottom;
+      span.checklist{
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+    .show-checklist{
+      margin-top: -4px;
+    }
+  }
+
+  .btn-success{
+    padding: 3px 40px 3px 40px;
+  }
+
+  .secondary{
+    margin: 0;
+    width: auto;
+
+    h3 i{
+      font-size: 20px;
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  fieldset{
+    margin-top: 30px;
+    margin-left: 2px;
+  }
+
+  .controls{
+    margin-left: 0;
+  }
+
+  .control-label{
+    text-align: left;
+    width: 110px;
+  }
+}
