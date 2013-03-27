@@ -62,7 +62,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     dealForm = @get('dealForm')
 
     dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
-                                                                          checkListItem.serialize()
+                                                                          Ember.Object.create(checkListItem.serialize())
 
     @controllerFor('deals.new').set 'model', dealForm
 

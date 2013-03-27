@@ -2,7 +2,7 @@
   .checklist.block{
     margin-bottom: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    > div{
+    .checklist-title,.checklist-total{
       display: inline-block;
     }
     .checklist-title{
@@ -12,8 +12,17 @@
         font-size: 18px;
       }
     }
-    .show-checklist{
-      margin-top: -4px;
+    .checklist-total{
+      position: relative;
+      top: -11px;
+      h1{
+        display: inline;
+        margin-right: 20px;
+      }
+      button{
+        position: relative;
+        top: -10px;
+      }
     }
   }
 

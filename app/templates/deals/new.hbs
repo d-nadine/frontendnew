@@ -2,11 +2,24 @@
   <div class="checklist-title">
     <span class="checklist">Deal Checklist</span>
   </div>
-  <div class="show-checklist pull-right">
+  <div class="checklist-total pull-right">
+    <h1>0%</h1>
     <button class="btn btn-success">
       <i class="icon-plus"></i>
     </button>
   </div>
+</div>
+<div class="block checklist-items">
+  <table>
+    {{#each checklistItem in checklist.checklistItems}}
+      {{#with checklistItem}}
+        <tr>
+          <td>{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
+          <td>{{description}}</td>
+        </tr>
+      {{/with}}
+    {{/each}}
+  </table>
 </div>
 <form class="form form-horizontal">
   <div class="secondary">
