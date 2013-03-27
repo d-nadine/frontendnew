@@ -58,7 +58,13 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     settings = Radium.Settings.find(1)
     @controllerFor('settings').set 'model', settings
-    @controllerFor('deals.new').set 'model', @get('dealForm')
+
+    dealForm = @get('dealForm')
+
+    dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
+                                                                          checkListItem.serialize()
+
+    @controllerFor('deals.new').set 'model', dealForm
 
   renderTemplate: ->
     @render()
@@ -72,4 +78,6 @@ Radium.ApplicationRoute = Radium.Route.extend
   dealFormDefaults: ( ->
     name: ''
     contact: null
+    checklist:
+      checklistItems: []
   ).property()
