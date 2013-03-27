@@ -28,6 +28,9 @@
   }
 
   .checklist-items{
+    label{
+      display: inline;
+    }
     .checks, .forecast{
       display: inline-block;
     }

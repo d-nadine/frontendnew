@@ -13,12 +13,16 @@
   <div class="checks">
     <table class="">
       <tbody>
-        {{#each checklistItem in checklist.checklistItems itemController="checklistItem"}}
+        {{#each checklistItem in checklist.checklistItems}}
           {{#with checklistItem}}
             <tr>
-              <td><i {{bindAttr class="checklistItemIcon"}}></i></td>
-              <td class="check">{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
-              <td>{{description}}</td>
+              <td><i class="icon-{{unbound kind}}"></i></td>
+              <td class="check">
+                {{view Ember.Checkbox checkedBinding="isFinished"}}
+                <label {{action  selectChecklistItem this bubbles="false"}}>
+                  {{description}}
+                </label>
+              </td>
               <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
             </tr>
           {{/with}}
@@ -34,12 +38,12 @@
       <h2 class="muted">0% Done</h2>
     </div>
     <div class="current">
-      improve your forecast by 25 % by <br/>
-      sending a quote to your client
+      improve your forecast by {{selectedCheckboxItem.weight}}% by <br/>
+      {{selectedCheckboxItem.description}}
     </div>
     <div class="button">
       <button class="btn btn-success">
-        Finish Todo
+        Finish {{capitalize selectedCheckboxItem.kind}}
       </button>
     </div>
   </div>

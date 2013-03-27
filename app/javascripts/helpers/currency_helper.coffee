@@ -1,4 +1,3 @@
-# FIXME: use registerBoundHelper after upgraded
 Ember.Handlebars.registerBoundHelper 'currency', (value, options) ->
   return if !value
 
