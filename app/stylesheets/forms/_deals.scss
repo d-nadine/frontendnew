@@ -1,4 +1,9 @@
 .deals-new-view{
+  span.checklist{
+    font-weight: bold;
+    font-size: 18px;
+  }
+
   .checklist.block{
     margin-bottom: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -7,10 +12,6 @@
     }
     .checklist-title{
       vertical-align: bottom;
-      span.checklist{
-        font-weight: bold;
-        font-size: 18px;
-      }
     }
     .checklist-total{
       position: relative;
@@ -27,6 +28,17 @@
   }
 
   .checklist-items{
+    .checks, .forecast{
+      display: inline-block;
+    }
+    .forecast{
+      vertical-align: top;
+      text-align: center;
+      margin-right: 8px;
+      .completed, .current{
+        margin: 10px 0 10px 0;
+      }
+    }
     table{
       display: inline-block;
       tr{
@@ -40,11 +52,15 @@
             }
           }
           &.is-finished{
-            color: #5bb75b;
+            color: $green;
           }
         }
       }
     }
+  }
+
+  form.form{
+    margin-top: -30px;
   }
 
   .btn-success{

@@ -10,20 +10,40 @@
   </div>
 </div>
 <div class="block checklist-items">
-  <table class="">
-    <tbody>
-      {{#each checklistItem in checklist.checklistItems itemController="checklistItem"}}
-        {{#with checklistItem}}
-          <tr>
-            <td><i {{bindAttr class="checklistItemIcon"}}></i></td>
-            <td class="check">{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
-            <td>{{description}}</td>
-            <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
-          </tr>
-        {{/with}}
-      {{/each}}
-    </tbody>
-  </table>
+  <div class="checks">
+    <table class="">
+      <tbody>
+        {{#each checklistItem in checklist.checklistItems itemController="checklistItem"}}
+          {{#with checklistItem}}
+            <tr>
+              <td><i {{bindAttr class="checklistItemIcon"}}></i></td>
+              <td class="check">{{view Ember.Checkbox checkedBinding="isFinished"}}</td>
+              <td>{{description}}</td>
+              <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
+            </tr>
+          {{/with}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="forecast pull-right">
+    <div>
+      <span class="checklist">Deal Forecast</span>
+    </div>
+    <div class="completed">
+      <h2 class="muted">0% Done</h2>
+    </div>
+    <div class="current">
+      improve your forecast by 25 % by <br/>
+      sending a quote to your client
+    </div>
+    <div class="button">
+      <button class="btn btn-success">
+        Finish Todo
+      </button>
+    </div>
+  </div>
+  <div class="clearfix"></div>
 </div>
 <form class="form form-horizontal">
   <div class="secondary">
