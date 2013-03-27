@@ -24,6 +24,10 @@ Radium.FormsEmailView = Radium.FormView.extend
       @get('controller.to.length') == 0
     ).property('controller.isSubmitted', 'controller.to.[]')
 
+    isValid: ( ->
+      @get('controller.to.length') > 0
+    ).property('controller.to.[]')
+
   cc: Radium.AutocompleteView.extend
     addCurrentUser: false
     sourceBinding: 'controller.cc'
