@@ -2,25 +2,25 @@
   <div class="icon-switcher">
     {{#if todoForm}}
       <a {{action showForm "todo"}} {{bindAttr class="showTodoForm:active :todo"}} href="#">
-        <i class="icons-todo-muted"></i>
+        <i class="icon-todo"></i>
       </a>
     {{/if}}
 
     {{#if callForm}}
       <a {{action showForm "call"}} {{bindAttr class="showCallForm:active :call"}} href="#">
-        <i class="icons-call-muted"></i>
+        <i class="icon-call"></i>
       </a>
     {{/if}}
 
     {{#if discussionForm}}
       <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active :discussion"}} href="#">
-        <i class="icons-discussion-muted"></i>
+        <i class="icon-discussion"></i>
       </a>
     {{/if}}
 
     {{#if meetingForm}}
       <a {{action showForm "meeting"}} {{bindAttr class="showMeetingForm:active :meeting"}} href="#">
-        <img src="/images/icons/meeting.png" alt="meeting"/>
+        <i class="icon-calendar">
       </a>
     {{/if}}
   </div>
