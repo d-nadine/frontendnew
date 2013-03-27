@@ -49,17 +49,21 @@ Radium.FormsEmailView = Radium.FormView.extend
     value: 5
 
   closeModal: ->
-    @$('#addSignatureModal').modal('hide')
+    @$().one $.support.transition.end, =>
+      @set 'showSignatureModal', false
+
+    @$('.modal').removeClass('in')
 
   addSignature: ->
     signature = @get('controller.signature')
 
-    unless signature
-      @$('#addSignatureModal').modal()
-      @$('.modal textarea').focus()
-      return
-
-    @appendSignature()
+    if signature
+      @appendSignature
+    else
+      @set 'showSignatureModal', true
+      Ember.run.next =>
+        @$('.modal').addClass 'in'
+        @$('.modal textarea').focus()
 
   appendSignature: ->
     textArea = $('.body textarea')
