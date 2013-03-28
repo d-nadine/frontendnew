@@ -6,7 +6,7 @@ Radium.configure do
   config.pipeline.gzip = true
 
   # Generate an HTML5 Cache Manifest for offline support
-  config.pipeline.manifest = true
+  config.pipeline.manifest = false
 
   # Swap out entire handlebars library for just the runtime
   config.dependencies.swap :handlebars, "handlebars.runtime"
