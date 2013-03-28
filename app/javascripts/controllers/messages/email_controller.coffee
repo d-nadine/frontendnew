@@ -7,5 +7,6 @@ Radium.MessagesEmailController = Ember.ObjectController.extend
   ).property('contact')
 
   history: (->
-    Radium.Email.find historyFor: @get('model')
+    Radium.Email.filter (otherEmail) => 
+      @get('model').isIncludedInConversation otherEmail
   ).property('model')

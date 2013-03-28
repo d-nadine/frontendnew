@@ -22,20 +22,11 @@ Factory.define 'email', traits: ['timestamps', 'html'],
       Factory.create 'user'
     else
       Factory.create 'contact'
-  to: -> [
-    Factory.create 'user'
-    Factory.create 'contact'
-  ]
-
-  cc: -> [
-    Factory.create 'user'
-    Factory.create 'contact'
-  ]
-
-  bcc: -> [
-    Factory.create 'user'
-    Factory.create 'contact'
-  ]
+  to: ->
+    if @sender instanceof Radium.User
+      [Factory.create('contact')]
+    else
+      [Factory.create('user')]
 
   attachments: -> [
     Factory.create 'attachment'

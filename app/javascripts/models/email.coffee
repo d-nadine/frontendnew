@@ -29,3 +29,13 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
     else
       @get('people').find (person) -> person instanceof Radium.Contact
   ).property()
+
+  # FIXME: determine how this should work?
+  isIncludedInConversation: (email) ->
+    sender = @get 'sender'
+
+    return true if email.get('sender') is sender
+    return true if email.get('to').indexOf(sender) != -1
+    false
+
+

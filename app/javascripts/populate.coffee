@@ -53,6 +53,14 @@ class Populator
           Factory.create('todo', isFinished: true)
           Factory.create('call', isFinished: true)
         ]
+        to: -> 
+          if @sender instanceof Radium.User
+            [contactDictionary.random()]
+          else
+            [userDictionary.random()]
+        cc: -> [userDictionary.random(), contactDictionary.random()]
+        bcc: -> [userDictionary.random(), contactDictionary.random()]
+
         meetings: -> [
           Factory.create('meeting')
         ]
