@@ -79,7 +79,6 @@ Feature: View an Email on the Inbox
     When I go to Jane's page
     Then I should see the todo
 
-  @review
   Scenario: Make a todo about an inter-company email
     Given Paul is another user
     And Paul sends me an email
@@ -97,7 +96,6 @@ Feature: View an Email on the Inbox
     When I go to Bob's page
     Then I should see the call
 
-  @review @possible-implementation
   Scenario: Make a call about an email sent to multiple contacts
     Given Bob and Jane are contacts
     And I sent an email to Bob and Jane
@@ -107,19 +105,6 @@ Feature: View an Email on the Inbox
     Then I should see a call to Jane under the email's related tasks
     When I go to Janes's page
     Then I should see the call
-
-  @review @possible-implementation
-  Scenario: Make a call about an email sent to multiple contacts
-    Given Bob and Jane are contacts
-    And I sent an email to Bob and Jane
-    When I go to the email
-    And I make a call about the email
-    Then I should see a call to Bob under the email's related tasks
-    And I should see a call to Jane under the email's related tasks
-    When I go to Bob's page
-    Then I should see a call
-    When I go to Jane's page
-    Then I should see a call
 
   Scenario: Add a meeting about an email
     Given Paul is another user
@@ -134,7 +119,6 @@ Feature: View an Email on the Inbox
     When I go to Bob's page
     Then I should see the meeting
 
-  @review @possible-implementation
   Scenario: Add a meeting about an email sent to multiple contacts
     Given Bob and Jane are contacts
     And I sent an email to Bob and Jane
@@ -147,19 +131,6 @@ Feature: View an Email on the Inbox
     When I go to Jane's page
     Then I should see the meeting
 
-  @review @possible-implementation
-  Scenario: Add a meeting about an email sent to multiple contacts
-    Given Bob and Jane are contacts
-    And I sent an email to Bob and Jane
-    When I go to the email
-    And I make a meeting about the email
-    Then I should have to choose who to invite
-    When I invite Bob to the meeting
-    Then I should see a meeting with Bob under the email's related tasks
-    When I go to Bob's page
-    Then I should see the meeting
-
-  @review @possible-implementation
   Scenario: Add a deal to an email with a contact
     Given Bob is a contact
     And Bob sent me an email
@@ -169,7 +140,6 @@ Feature: View an Email on the Inbox
     And the form should be prefilled with Bob's information
     And the email should be mentioned on the form
 
-  @review @possible-implementation
   Scenario: Add a deal to an email sent to multiple contacts
     Given Bob and Jane are contacts
     And I sent an email to Bob and Jane
@@ -179,7 +149,6 @@ Feature: View an Email on the Inbox
     And I should have to choose who the deal is with
     And the email should be mentioned on the form
 
-  @review @possible-implementation
   Scenario: Add a deal about an inter-company email
     Given Paul is another user
     And Paul sent me an email
@@ -189,13 +158,15 @@ Feature: View an Email on the Inbox
     And I should have to choose who the deal is with
     And the email should be mentioned on the form
 
-  @review
+
   # should we be able to change to/cc/bcc/subject stuff
   # when replying?
   Scenario: Reply to an email
     Given Bob is a contact
     And Bob sent me an email about "Next week"
     And I go to the email
+    And I click show details I can edit to/cc/bcc/subject
+    And I add a CC to John Smith
     When I press the reply button
     Then I see only a place to type my response
     When I press send
@@ -205,7 +176,6 @@ Feature: View an Email on the Inbox
     And the app should smooth scroll to the top
     Then Bob should receive a "RE: Next week" email
 
-  @review
   # are people allowed to write part of the email
   # when forwarding?
   Scenario: Forward an email
@@ -214,12 +184,12 @@ Feature: View an Email on the Inbox
     When I press the forward button
     Then I should see the to field
     And I type some people to forward it to
+    And I type a note above the forwarded text
     And I press send
     Then I should see a confirmation
     And the form should go away
     Then they should recieve a "FWD: Next Week" email
 
-  @reivew
   Scenario: User tries to forward an email to the person who sent it
     Given I have an email from Bob
     And I'm a noob
