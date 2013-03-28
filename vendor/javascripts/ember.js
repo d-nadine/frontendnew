@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-920-g2f07ae3
-// Last commit: 2f07ae3 (2013-03-25 19:54:41 -0700)
+// Version: v1.0.0-pre.2-938-g8a4e6af
+// Last commit: 8a4e6af (2013-03-28 08:40:09 -0700)
 
 
 (function() {
@@ -13201,9 +13201,11 @@ var setInnerHTML = function(element, html) {
   if (canSetInnerHTML(tagName)) {
     setInnerHTMLWithoutFix(element, html);
   } else {
-    Ember.assert("Can't set innerHTML on "+element.tagName+" in this browser", element.outerHTML);
+    // Firefox versions < 11 do not have support for element.outerHTML.
+    var outerHTML = element.outerHTML || new XMLSerializer().serializeToString(element);
+    Ember.assert("Can't set innerHTML on "+element.tagName+" in this browser", outerHTML);
 
-    var startTag = element.outerHTML.match(new RegExp("<"+tagName+"([^>]*)>", 'i'))[0],
+    var startTag = outerHTML.match(new RegExp("<"+tagName+"([^>]*)>", 'i'))[0],
         endTag = '</'+tagName+'>';
 
     var wrapper = document.createElement('div');
@@ -13686,7 +13688,9 @@ Ember._RenderBuffer.prototype =
   */
   string: function() {
     if (this._element) {
-      return this.element().outerHTML;
+      // Firefox versions < 11 do not have support for element.outerHTML.
+      return this.element().outerHTML ||
+        new XMLSerializer().serializeToString(this.element());
     } else {
       return this.innerString();
     }
@@ -18008,7 +18012,7 @@ if(!Handlebars && typeof require === 'function') {
   Handlebars = require('handlebars');
 }
 
-Ember.assert("Ember Handlebars requires Handlebars 1.0.0-rc.3 or greater", Handlebars && Handlebars.VERSION.match(/^1\.0\.[0-9](\.rc\.[23456789]+)?/));
+Ember.assert("Ember Handlebars requires Handlebars 1.0.0-rc.3 or greater. Include a SCRIPT tag in the HTML HEAD linking to the Handlebars file before you link to Ember.", Handlebars && Handlebars.COMPILER_REVISION === 2);
 
 /**
   Prepares the Handlebars templating library for use inside Ember's view
@@ -23490,20 +23494,6 @@ function getHandlerFunction(router) {
   };
 }
 
-function handlerIsActive(router, handlerName) {
-  var routeName = 'route:' + handlerName,
-      handler = router.container.lookup(routeName),
-      currentHandlerInfos = router.router.currentHandlerInfos,
-      handlerInfo;
-
-  for (var i=0, l=currentHandlerInfos.length; i<l; i++) {
-    handlerInfo = currentHandlerInfos[i];
-    if (handlerInfo.handler === handler) { return true; }
-  }
-
-  return false;
-}
-
 function routePath(handlerInfos) {
   var path = [];
 
@@ -23774,6 +23764,13 @@ Ember.Route = Ember.Object.extend({
       class is `App.Post`)
     * The find method is called on the model class with the value of
       the dynamic segment.
+
+    Note that for routes with dynamic segments, this hook is only
+    executed when entered via the URL. If the route is entered
+    through a transition (e.g. when using the `linkTo` Handlebars
+    helper), then a model context is already provided and this hook
+    is not called. Routes without dynamic segments will always
+    execute the model hook.
 
     @method model
     @param {Object} params the parameters extracted from the URL
@@ -24757,7 +24754,6 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
         contexts = a_slice.call(arguments, 1, -1);
 
     var hash = options.hash,
-        view = options.data.view,
         controller;
 
     // create a hash to pass along to registerAction
@@ -24771,7 +24767,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
       params: contexts
     };
 
-    action.view = view = get(view, 'concreteView');
+    action.view = options.data.view;
 
     var root, target;
 
@@ -26010,15 +26006,13 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
   scheduleInitialize: function() {
     var self = this;
 
-    function initialize(){
-      if (self.isDestroyed) { return; }
-      Ember.run.schedule('actions', self, 'initialize');
-    }
-
     if (!this.$ || this.$.isReady) {
-      initialize();
+      Ember.run.schedule('actions', self, 'initialize');
     } else {
-      this.$().ready(initialize);
+      this.$().ready(function(){
+        if (self.isDestroyed) { return; }
+        Ember.run(self, 'initialize');
+      });
     }
   },
 
@@ -26122,7 +26116,7 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
     @method initialize
   */
   initialize: function() {
-    Ember.assert("Application initialize may only be called once", !this.isInitialized);
+    Ember.assert("Application initialize may only be called once. Note: calling initialize in application code is no longer required.", !this.isInitialized);
     Ember.assert("Cannot initialize a destroyed application", !this.isDestroyed);
     this.isInitialized = true;
 
@@ -27739,8 +27733,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-pre.2-920-g2f07ae3
-// Last commit: 2f07ae3 (2013-03-25 19:54:41 -0700)
+// Version: v1.0.0-pre.2-938-g8a4e6af
+// Last commit: 8a4e6af (2013-03-28 08:40:09 -0700)
 
 
 (function() {
