@@ -18,7 +18,7 @@
             <tr>
               <td><i class="icon-{{unbound kind}}"></i></td>
               <td class="check">
-                {{view Ember.Checkbox checkedBinding="isFinished"}}
+                {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
                 <label {{action  selectChecklistItem this bubbles="false"}}>
                   {{description}}
                 </label>
