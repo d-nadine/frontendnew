@@ -10,3 +10,6 @@ Radium.DealsNewController = Ember.ObjectController.extend
 
     total
   ).property('checklist.checklistItems.@each.isFinished')
+
+  toggleIsFinished: ->
+    @toggleProperty 'selectedCheckboxItem.isFinished'

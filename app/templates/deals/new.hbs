@@ -43,7 +43,7 @@
         {{description}}
       </div>
       <div class="button">
-        <button {{bindAttr class=":btn isFinished:btn-danger:btn-success"}}>
+        <button {{action toggleIsFinished}} {{bindAttr class=":btn isFinished:btn-danger:btn-success"}}>
           {{#unless isFinished}}
             Finish {{capitalize kind}}
           {{else}}
