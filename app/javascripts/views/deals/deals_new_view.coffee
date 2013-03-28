@@ -12,3 +12,11 @@ Radium.DealsNewView= Ember.View.extend
     div = @$('.checklist-items').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
 
+  name: Ember.TextField.extend
+    valueBinding: 'controller.name'
+    didInsertElement: ->
+      @$().focus()
+
+  contactPicker: Radium.Combobox.extend
+    sourceBinding: 'controller.contacts'
+    valueBinding: 'controller.contact'

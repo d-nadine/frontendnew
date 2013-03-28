@@ -62,7 +62,13 @@
       <div class="control-group">
         <label class="control-label">Deal Name</label>
         <div class="controls">
-          <input type="text" class="field input-xlarge" placeholder="Deal Name">
+          {{view view.name class="field input-xlarge" placeholder="Deal Name"}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Contact</label>
+        <div class="controls">
+          {{view view.contactPicker}}
         </div>
       </div>
     </fieldset>
