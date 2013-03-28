@@ -1,6 +1,8 @@
 require 'forms/form'
 
 Radium.EmailForm = Radium.Form.extend
+  includeReminder: true
+
   data: ( ->
     subject: @get('subject')
     message: @get('message')

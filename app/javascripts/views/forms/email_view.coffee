@@ -1,5 +1,6 @@
 require 'lib/radium/autocomplete_list_view'
 require 'lib/radium/text_area'
+require 'lib/radium/toggle_switch'
 
 Radium.FormsEmailView = Radium.FormView.extend
   settings: Ember.computed.alias 'controller.controllers.settings'
@@ -44,10 +45,13 @@ Radium.FormsEmailView = Radium.FormView.extend
     valueBinding: 'controller.message'
     placeholder: 'Message'
 
+  reminderSwitch: Radium.ToggleSwitch.extend
+    checkedBinding: 'controller.includeReminder'
+
   reminderLength: Ember.TextField.extend
-    classNames: ['field']
     type: 'number'
     value: 5
+    disabled: Ember.computed.not('controller.includeReminder')
 
   closeModal: ->
     @$().one $.support.transition.end, =>
