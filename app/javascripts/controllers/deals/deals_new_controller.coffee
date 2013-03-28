@@ -13,3 +13,6 @@ Radium.DealsNewController = Ember.ObjectController.extend
 
   toggleIsFinished: ->
     @toggleProperty 'selectedCheckboxItem.isFinished'
+
+  toggleChecklist: ->
+    @toggleProperty 'showChecklistItems'
