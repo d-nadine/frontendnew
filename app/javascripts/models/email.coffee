@@ -17,6 +17,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   # once we get the API connntected
   to: DS.attr('array')
   cc: DS.attr('array')
+  bcc: DS.attr('array')
 
   tasks: Radium.computed.tasks('todos', 'meetings')
 
