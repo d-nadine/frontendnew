@@ -16,17 +16,18 @@ GIT
 
 GIT
   remote: git://github.com/radiumsoftware/iridium-ember.git
-  revision: f9b43d8f3d1cb9783b618c921e5e59120d22ee5f
+  revision: 954de63905962bf9995a3624d2b196f7b84fc0f5
   specs:
     iridium-ember (0.1.0)
+      barber (~> 0.4.0)
 
 GIT
   remote: git://github.com/radiumsoftware/iridium.git
-  revision: bc02eddb1d1f18cd64598f55f52da87d1a87df8c
+  revision: d6ff8a72f012ce381b7d61e4f5a25bb6bdf16b74
   specs:
     iridium (0.9.0.rc1)
       activesupport
-      barber (~> 0.2.0)
+      barber
       coffee-script
       compass
       execjs
@@ -41,10 +42,20 @@ GIT
       yui-compressor
 
 GIT
-  remote: git://github.com/wycats/thor.git
-  revision: 97efbf6a14b44061eddb85757a5f8553804f0606
+  remote: git://github.com/tchak/barber.git
+  revision: 1a418303d7acbe01bcdc544e483f5fc3c7bda0d1
+  branch: quoted-argument-fix
   specs:
-    thor (0.17.0)
+    barber (0.4.1)
+      ember-source
+      execjs
+      handlebars-source
+
+GIT
+  remote: git://github.com/wycats/thor.git
+  revision: dc96d00377d00e90fcea3721d715136dd638df67
+  specs:
+    thor (0.18.0)
 
 GEM
   remote: https://rubygems.org/
@@ -56,8 +67,6 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    barber (0.2.1)
-      execjs
     chunky_png (1.2.7)
     coffee-script (2.2.0)
       coffee-script-source
@@ -69,23 +78,26 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     dnote (1.7.1)
+    ember-source (0.0.3)
+      handlebars-source (>= 1.0.0.rc3, < 1.0.0.rc4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.10)
+    handlebars-source (1.0.0.rc3)
     i18n (0.6.1)
     json (1.7.7)
     kgio (2.8.0)
     less (2.3.1)
       commonjs (~> 0.2.6)
-    libv8 (3.11.8.13)
-    multi_json (1.7.1)
+    libv8 (3.11.8.17)
+    multi_json (1.7.2)
     open4 (1.3.0)
     rack (1.5.2)
     rack-rewrite (1.3.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.10.0)
-    rake (10.0.3)
+    rake (10.0.4)
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
@@ -109,6 +121,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barber!
   dnote
   hydrogen!
   iridium!
