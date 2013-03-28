@@ -45,7 +45,9 @@ Radium.ApplicationRoute = Radium.Route.extend
         @transitionTo lastPage[0]
 
     createDealFromContact: (contact) ->
-      @controllerFor('deals.new').set('model.contact', contact)
+      controller = @controllerFor('deals.new')
+      controller.set('model.contact', contact)
+      controller.set('model.source', 'Lead Form')
       @transitionTo 'deals.new'
 
   setupController: ->
@@ -63,6 +65,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem.serialize())
+    dealForm.set 'user', @controllerFor('currentUser').get('model')
 
     @controllerFor('deals.new').set 'model', dealForm
 
@@ -77,7 +80,11 @@ Radium.ApplicationRoute = Radium.Route.extend
 
   dealFormDefaults: ( ->
     name: ''
+    user: null
     contact: null
+    todo: null
+    email: null
+    source: ''
     checklist:
       checklistItems: []
   ).property()

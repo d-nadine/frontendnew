@@ -71,6 +71,40 @@
           {{view view.contactPicker}}
         </div>
       </div>
+      <div class="control-group">
+        <label class="control-label">Assigned To</label>
+        <div class="controls">
+          {{view view.userPicker}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Description</label>
+        <div class="controls">
+          {{view view.description placeholder="Description" classNames="field input-xxlarge"}}
+        </div>
+      </div>
+      {{#if reference}}
+        <div class="control-group">
+          <label class="control-label">Related to</label>
+          <div class="controls">
+            <!-- FIXME : create linkToResource -->
+            {{#linkTo unimplemented}}{{view.referenceName}}{{/linkTo}}
+          </div>
+        </div>
+      {{/if}}
+      <div class="control-group">
+        <label class="control-label">Source</label>
+        <div class="controls">
+          {{view Ember.TextField valueBinding="source" class="field input-xxlarge"}}
+        </div>
+      </div>
+      <hr/>
+      <div class="control-group">
+        <label class="control-label">Deal Status</label>
+        <div class="controls">
+        </div>
+      </div>
+      <hr/>
     </fieldset>
   </form>
 </div>

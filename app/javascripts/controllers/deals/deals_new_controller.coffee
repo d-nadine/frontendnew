@@ -1,5 +1,5 @@
 Radium.DealsNewController = Ember.ObjectController.extend
-  needs: ['contacts']
+  needs: ['contacts','users']
   contacts: Ember.computed.alias 'controllers.contacts'
   selectChecklistItem: (checklistItem) ->
     @set 'selectedCheckboxItem', checklistItem
@@ -15,3 +15,8 @@ Radium.DealsNewController = Ember.ObjectController.extend
 
   toggleIsFinished: ->
     @toggleProperty 'selectedCheckboxItem.isFinished'
+
+  reference: ( ->
+    @get('contact') || @get('email') || @get('todo')
+  ).property('contact', 'email', 'todo')
+
