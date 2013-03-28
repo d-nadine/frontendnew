@@ -30,7 +30,6 @@ Feature: View a Discussion on the Inbox
     And I should see Bob's current deal in the HUD
     And I should see the next task about Bob in the HUD
 
-  @review
   Scenario: Add a todo about a deal discussion
     Given there's an Imacs deal
     And I'm particpating in a discussion about Imacs
@@ -41,7 +40,6 @@ Feature: View a Discussion on the Inbox
     Then I should see the todo 
     And the discussion should be mentioned with the todo
 
-  @review
   Scenario: Add a call about a deal discussion
     Given Bob is a contact
     And I made an deal for Imacs with Bob
@@ -53,7 +51,6 @@ Feature: View a Discussion on the Inbox
     Then I should see the call
     And the discussion should be mentioned with the call
 
-  @review
   Scenario: Add a meeting about a deal discussion
     Given Bob is a contact
     And I made a deal for Imacs with Bob
@@ -67,7 +64,6 @@ Feature: View a Discussion on the Inbox
     Then I should see the meeting
     And the discussion should be mentioned with the meeting
 
-  @review
   Scenario: Add a todo about a contact discussion
     Given Bob is a contact
     And there's a discussion about Bob
@@ -78,7 +74,6 @@ Feature: View a Discussion on the Inbox
     Then I should see the todo
     And the discussion should be mentioned with the todo
 
-  @review
   Scenario: Add a todo about a contact discussion
     Given Bob is a contact
     And there's a discussion about Bob
@@ -89,7 +84,6 @@ Feature: View a Discussion on the Inbox
     Then I should see the call
     And the discussion should be mentioned with the call
 
-  @review
   Scenario: Add a meeting about a contact discussion
     Given Bob is a contact
     And Paul and Sami are other users
