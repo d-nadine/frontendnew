@@ -28,6 +28,10 @@
   }
 
   .checklist-items{
+    display: none;
+    margin-bottom: 0;
+    position: relative;
+    width: 97%;
     label{
       display: inline;
     }
@@ -62,10 +66,6 @@
     }
   }
 
-  form.form{
-    margin-top: -30px;
-  }
-
   .btn-success{
     padding: 3px 40px 3px 40px;
   }
@@ -73,6 +73,11 @@
   .secondary{
     margin: 0;
     width: auto;
+    background-color: $background;
+    border: solid 1px $dark-background;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto;
 
     h3{
       margin-left: -5px;
@@ -85,7 +90,6 @@
   }
 
   fieldset{
-    margin-top: 30px;
     margin-left: 2px;
   }
 
