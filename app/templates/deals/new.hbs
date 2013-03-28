@@ -3,7 +3,7 @@
     <span class="checklist">Deal Checklist</span>
   </div>
   <div class="checklist-total pull-right">
-    <h1>0%</h1>
+    <h1>{{total}}%</h1>
     <button class="btn btn-success">
       <i class="icon-plus"></i>
     </button>
@@ -35,7 +35,7 @@
       <span class="checklist">Deal Forecast</span>
     </div>
     <div class="completed">
-      <h2 class="muted">0% Done</h2>
+      <h2>{{total}}<span class="muted">% Done</span></h2>
     </div>
     <div class="current">
       improve your forecast by {{selectedCheckboxItem.weight}}% by <br/>
