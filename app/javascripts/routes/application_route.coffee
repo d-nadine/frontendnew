@@ -1,9 +1,48 @@
-require 'routes/drawer_support_mixin'
-
-Radium.ApplicationRoute = Ember.Route.extend Radium.DrawerSupportMixin,
+Radium.ApplicationRoute = Ember.Route.extend
   events:
     toggleDrawer: (name) ->
-      @toggleDrawer name
+      if @get('router.openDrawer') == name
+        @send 'closeDrawer'
+      else
+        route = name.split('/')[0]
+
+        Ember.assert("Could not find a matching controller for: #{name}", route)
+
+        @render name, 
+          outlet: 'drawer'
+          into: 'application'
+          controller: @controllerFor(route)
+
+        @set 'router.openDrawer', name
+
+    closeDrawer: ->
+      @render 'nothing', 
+        into: 'application'
+        outlet: 'drawer'
+
+      @set 'router.openDrawer', null
+
+    closeModal: ->
+      @render 'nothing', 
+        into: 'application'
+        outlet: 'modal'
+
+    back: ->
+      history = @get('router.history')
+
+      if history.length > 2
+        history.pop()
+        lastPage = history.pop()
+      else if history.length == 2
+        lastPage = history.shift()
+        history.clear()
+      else
+        return
+
+      if lastPage[1]
+        @transitionTo lastPage[0], lastPage[1]
+      else
+        @transitionTo lastPage[0]
 
   setupController: ->
     @controllerFor('currentUser').set 'model', Radium.User.find(1)

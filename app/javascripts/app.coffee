@@ -2,14 +2,16 @@
 # we need to be available globally
 require /lib\/patches/
 
+require 'lib/ember/arrangable_mixin'
+require 'lib/ember/filterable_mixin'
 require 'lib/ember/datetime'
+require 'lib/ember/computed'
+
 require 'lib/string/inflector'
 
 require 'lib/foundry'
-require 'lib/ember/filterable_mixin'
 
 Radium = Em.Application.create
-  autoinit: false
   rootElement: '#application'
 
 window.Radium = Radium

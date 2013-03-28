@@ -40,22 +40,12 @@
     a {
       text-decoration: none;
     }
-  }
-
-  a.todo.active, a.todo:hover {
-    i {
-      color: $black;
+    a {
+      color: $muted;
+      font-size: 140%;
     }
-  }
 
-  a.call.active, a.call:hover {
-    i {
-      color: $black;
-    }
-  }
-
-  a.discussion.active, a.discussion:hover {
-    i {
+    a:hover, a.active {
       color: $black;
     }
   }

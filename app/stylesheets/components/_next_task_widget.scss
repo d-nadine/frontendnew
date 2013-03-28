@@ -1,0 +1,15 @@
+.next-task-widget {
+  &:hover {
+    .icon-call, .icon-todo {
+      color: $green;
+    }
+  }
+
+  i {
+    margin-right: 20px;
+  }
+
+  .text {
+    margin-right: 20px;
+  }
+}

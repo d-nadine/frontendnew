@@ -4,3 +4,23 @@ Radium.DevelopmentWidgetsController = Ember.Controller.extend
   date: Ember.DateTime.create()
 
   user: null
+
+  todo: (->
+    Factory.create 'todo'
+  ).property()
+
+  call: (->
+    Factory.create 'call'
+  ).property()
+
+  meeting: (->
+    Factory.create 'meeting'
+  ).property()
+
+  tasks: (->
+    [
+      @get('todo'), @get('call'), @get('meeting'),
+      Factory.create('todo', isFinished: true),
+      Factory.create('call', isFinished: true)
+    ]
+  ).property()

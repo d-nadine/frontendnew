@@ -5,3 +5,6 @@ Factory.define 'meeting', traits: 'timestamps',
   topic: 'Product discussion'
   location: 'Radium HQ'
   isEditable: true
+  user: -> Factory.create 'user'
+  users: -> [ @user ]
+  contacts: -> [ Factory.create 'contact' ]

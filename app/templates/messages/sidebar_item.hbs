@@ -1,14 +1,16 @@
-{{view view.checker}}
+<button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
+  <i class="icon-todo"></i>
+</button>
 
-<div {{bindAttr class="isSelectable :content"}} {{action selectContent content}}>
-  {{#if hasAttachments}}
-    <i class="icon-attachments pull-right"></i>
-  {{/if}}
-
+<div class="content" {{action selectItem this}}>
   {{yield}}
 
   <div class="footer">
-    <a {{action deleteItem this target="controllers.messages"}} href="#" class="btn-icon delete">
+    {{#if hasAttachments}}
+      <i class="icon-attachments"></i>
+    {{/if}}
+
+    <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
       <i class='icon-delete'></i>
     </a>
 

@@ -6,6 +6,7 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
 
   showActions: false
   showReply: false
+  showMeta : false
 
   toggleFormBox: ->
     @toggleProperty 'showFormBox'
@@ -33,3 +34,6 @@ Radium.EmailItemController = Em.ObjectController.extend Radium.CurrentUserMixin,
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
+
+  toggleMeta: -> @toggleProperty 'showMeta'
+

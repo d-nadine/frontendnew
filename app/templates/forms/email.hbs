@@ -44,12 +44,16 @@
         {{/unless}}
         {{#if showCheckForResponse}}
           <div class="reminder-form form-inline">
-            <label class="checkbox">
-              <input type="checkbox"> Check for response in
-            </label>
+            Check for response?
 
-            {{view view.reminderLength}}
-            <label>Days</label>
+            {{view view.reminderSwitch class="inline"}}
+
+            in
+
+            {{view view.reminderLength class="field"}}
+
+            days
+
             <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
               Done
             </button>

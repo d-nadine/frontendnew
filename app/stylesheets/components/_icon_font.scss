@@ -25,9 +25,9 @@
 /*
 Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
-[class*="icon-"]:before {
+[class*="icon-"] {
 */
-.icon-call:before, .icon-location:before, .icon-calendar:before, .icon-forward:before, .icon-reply:before, .icon-comment:before, .icon-discussion:before, .icon-menu:before, .icon-cloud:before, .icon-attachment:before, .icon-todo:before, .icon-plus:before, .icon-minus:before, .icon-arrow-up:before, .icon-arrow-left:before, .icon-arrow-down:before, .icon-arrow-right:before, .icon-delete:before, .icon-public:before, .icon-private:before, .icon-notification:before, .icon-help:before, .icon-close:before, .icon-bell:before, .icon-notifications:before, .icon-coins:before, .icon-tag:before, .icon-edit:before, .icon-mail:before, .icon-stack:before, .icon-warning:before, .icon-attachments:before {
+.icon-call, .icon-location, .icon-calendar, .icon-forward, .icon-reply, .icon-comment, .icon-discussion, .icon-menu, .icon-cloud, .icon-attachments, .icon-todo, .icon-plus, .icon-minus, .icon-arrow-up, .icon-arrow-left, .icon-arrow-down, .icon-arrow-right, .icon-delete, .icon-public, .icon-private, .icon-notification, .icon-help, .icon-close, .icon-bell, .icon-notifications, .icon-coins, .icon-tag, .icon-edit, .icon-mail, .icon-stack, .icon-warning, .icon-search, .icon-user, .icon-send, .icon-new, .icon-stack-list, .icon-back {
 	font-family: 'icomoon-ultimate';
 	speak: none;
 	font-style: normal;
@@ -64,9 +64,7 @@ you can use the generic selector below, but it's slower:
 .icon-cloud:before {
 	content: "\e00a";
 }
-.icon-attachment:before,
-.icon-attachments:before,
-{
+.icon-attachments:before {
 	content: "\e00c";
 }
 .icon-todo:before {
@@ -132,3 +130,22 @@ you can use the generic selector below, but it's slower:
 .icon-warning:before {
 	content: "\e017";
 }
+.icon-search:before {
+	content: "\e020";
+}
+.icon-user:before {
+	content: "\e021";
+}
+.icon-send:before {
+	content: "\e023";
+}
+.icon-new:before {
+	content: "\e024";
+}
+.icon-stack-list:before {
+	content: "\e025";
+}
+.icon-back:before {
+	content: "\e01f";
+}
+

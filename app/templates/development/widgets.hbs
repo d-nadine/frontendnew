@@ -11,3 +11,29 @@
     {{view Radium.UserPicker class="field"}}
   </p>
 </div>
+
+<div class="block">
+  <h2>Next Task Widgets</h2>
+
+  <p>Todo</br>
+  {{control 'next_task' todo}}
+  </p>
+
+  <p>Call</br>
+  {{control 'next_task' call}}
+  </p>
+
+  <p>Meeting</br>
+  {{control 'next_task' meeting}}
+  </p>
+
+  <p>No Tasks</br>
+  {{control 'next_task' nada}}
+  </p>
+</div>
+
+<div class="block">
+  <h2>Related Tasks</h2>
+
+  {{template 'shared/related_tasks'}}
+</div>

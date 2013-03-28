@@ -21,17 +21,22 @@ class Populator
         name: name
         email: "#{name.split(' ')[0].toLowerCase()}@radiumcrm.com"
 
+    userDictionary = new Dictionary(users)
+
     contacts = for i in [0..20]
       Factory.create 'contact',
-        user: -> users[(users.length).randomize()]
+        user: -> userDictionary.random()
+        meetings: -> [Factory.create('meeting')]
+        todos: -> [Factory.create('todo'), Factory.create('call')]
 
-    userDictionary = new Dictionary(users)
     contactDictionary = new Dictionary(contacts)
 
-    for i in [0..20]
+    deals = for i in [0..20]
       Factory.create 'deal',
         user: -> userDictionary.random()
         contact: -> contactDictionary.random()
+
+    dealDictionary = new Dictionary(deals)
 
     for i in [0..20]
       Factory.create 'call',
@@ -41,7 +46,24 @@ class Populator
 
     for i in [0..30]
       Factory.create 'email',
-        sender: -> if Math.random() >= 50 then userDictionary.random() else contactDictionary.random()
+        sender: -> if Math.random() >= 0.5 then userDictionary.random() else contactDictionary.random()
+        todos: -> [
+          Factory.create('todo')
+          Factory.create('call')
+          Factory.create('todo', isFinished: true)
+          Factory.create('call', isFinished: true)
+        ]
+        to: -> 
+          if @sender instanceof Radium.User
+            [contactDictionary.random()]
+          else
+            [userDictionary.random()]
+        cc: -> [userDictionary.random(), contactDictionary.random()]
+        bcc: -> [userDictionary.random(), contactDictionary.random()]
+
+        meetings: -> [
+          Factory.create('meeting')
+        ]
 
     for i in [0..20]
       Factory.create 'group'
@@ -53,10 +75,24 @@ class Populator
       startsAt: Ember.DateTime.create().advance(day: 7)
       endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
-    for i in [0..5]
+    for i in [0..10]
       Factory.create 'discussion',
         user: userDictionary.random()
         users: [userDictionary.random(), userDictionary.random()]
+        reference: ->
+          if Math.random() >= 0.5
+            contactDictionary.random()
+          else
+            dealDictionary.random()
+        todos: -> [
+          Factory.create('todo')
+          Factory.create('call')
+          Factory.create('todo', isFinished: true)
+          Factory.create('call', isFinished: true)
+        ]
+        meetings: -> [
+          Factory.create('meeting')
+        ]
 
     Factory.adapter.store.commit()
 

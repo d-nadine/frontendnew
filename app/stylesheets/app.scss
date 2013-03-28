@@ -21,6 +21,10 @@
 @import "components/icon_font";
 @import "components/icons";
 @import "components/tables";
+@import "components/next_task_widget";
+@import "components/attachments";
+@import "components/sentence";
+@import "components/related_tasks";
 
 @import "forms";
 @import "forms/dropdown_menu";
@@ -37,6 +41,7 @@
 @import "forms/discussion";
 @import "forms/meeting";
 @import "forms/email";
+@import "forms/switch";
 
 @import "routes/calendar";
 @import "routes/messages";
@@ -58,4 +63,12 @@
 // on off
 .btn-link {
   border-width: 0px;
+}
+
+.inline {
+  display: inline;
+}
+
+a:hover {
+  text-decoration: none;
 }

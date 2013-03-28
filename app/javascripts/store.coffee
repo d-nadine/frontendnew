@@ -1,5 +1,5 @@
-require 'adapters/in_memory_adapter'
+require 'adapters/fixture_adapter'
 
 Radium.Store = DS.Store.extend
-  revision: 11
-  adapter: Radium.InMemoryAdapter
+  revision: 12
+  adapter: Radium.FixtureAdapter

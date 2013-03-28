@@ -4,6 +4,8 @@ Factory.define 'discussion', traits: 'timestamps',
   isEditable: true
   attachments: -> [
     Factory.create 'attachment'
+    Factory.create 'attachment'
+    Factory.create 'attachment'
   ]
   topic: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus

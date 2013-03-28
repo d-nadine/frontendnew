@@ -1,0 +1,37 @@
+ol.related-tasks {
+  list-style: none;
+
+  li {
+    position: relative;
+    margin-bottom: 10px;
+
+    &.is-finished, &.is-finished a {
+      color: $muted;
+    }
+
+    &.is-overdue .time, &.is-overdue .time a {
+      color: $red;
+    }
+
+    &.is-finished:after {
+      position: absolute;
+      width: 100%;
+      content: '';
+      height: 2px;
+      background-color: $muted;
+      margin: 0 auto;
+      margin-top: -1px;
+      left: 0;
+      top: 50%;
+    }
+  }
+
+  i {
+    font-size: larger;
+  }
+
+  span.time {
+    float: right;
+    font-size: smaller;
+  }
+}

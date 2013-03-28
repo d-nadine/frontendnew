@@ -1,0 +1,19 @@
+ul.sentence, ol.sentence {
+  list-style: none;
+  margin: 0;
+  display: inline;
+
+  li { 
+    display: inline;
+  }
+
+  li:not(:last-of-type):after {
+    content: ','
+  }
+}
+
+span.sentence {
+  span:not(:last-of-type):after {
+    content: ','
+  }
+}

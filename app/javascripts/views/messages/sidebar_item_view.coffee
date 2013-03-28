@@ -1,4 +1,4 @@
-Radium.MessagesSidebarItemView = Em.View.extend
+Radium.MessagesSidebarItemView = Em.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
   layoutName: 'messages/sidebar_item'
   classNameBindings: [
@@ -24,3 +24,7 @@ Radium.MessagesSidebarItemView = Em.View.extend
   checker: Radium.Checkbox.extend
     classNames: ['checker-block']
     checkedBinding: 'controller.isChecked'
+
+    click: (event) ->
+      event.stopPropagation()
+      @get('controller').send('check', @get('controller.content'))

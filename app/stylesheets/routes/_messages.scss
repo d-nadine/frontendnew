@@ -63,16 +63,21 @@
   }
 }
 
+.messages-view .hud + div, 
+.messages-view  .email-history.show-hud {
+  padding-top: 120px;
+}
+
 .messages-view .context {
   display: table;
   box-sizing: border-box;
   width: 100%;
 
-  .deal-info, .task-info, .sender-info {
+  .deal-info, .task-info, .contact-info {
     display: table-cell;
   }
 
-  .sender-info {
+  .contact-info {
     .avatar {
       float: left;
       margin-right: 20px;
@@ -89,6 +94,10 @@
     }
   }
 
+  .task-info {
+    text-align: right;
+  }
+
   h2 {
     font-size: 12px;
     line-height: 12px;
@@ -102,49 +111,72 @@
   }
 }
 
-.messages-view .email {
+.messages-view .message-card {
   padding: 50px;
   padding-bottom: 0px;
 
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
 
-  hr {
-    border-top-width: 2px;
-    border-bottom: none;
-    margin: 0px;
-  }
-
-  .subject {
-    border: none;
-    margin: 0px;
-
-    h1 {
-      font-size: 18px;
-
-      small {
-        font-size: 16px;
-      }
-    }
-
-    h1, small {
-      line-height: 26px;
-    }
-  }
-
-  .message {
+  .content {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 15px;
+
+    .text {
+      margin-bottom: 30px;
+    }
   }
 
-  .body-text {
-    margin-bottom: 30px;
-  }
-
-  .email-actions {
-    margin-top: 40px;
-    text-align: right;
+  .related-tasks {
+    padding: 20px 0;
   }
 }
+
+.messages-view .discussion-card  {
+  .header {
+    i { 
+      float: left;
+      margin-right: 40px;
+      font-size: 32px;
+    }
+  }
+}
+
+.messages-view .email-card {
+  .header {
+    .more {
+      margin-right: 15px;
+    }
+
+    .sender {
+      margin-right: 10px;
+    }
+
+    .subject {
+      margin-left: 10px;
+    }
+
+    dl {
+      dt, dd {
+        margin-bottom: 5px;
+      }
+
+      dt {
+        width: 50px;
+        float: left;
+        font-weight: normal;
+
+        &:after {
+          content: ':'
+        }
+      }
+
+      dd {
+        margin-left: 60px;
+      }
+    }
+  }
+}
+

@@ -1,6 +1,7 @@
 Factory.define 'email', traits: ['timestamps', 'html'],
   subject: Factory.sequence (i) -> "Email #{i}"
   sentAt: -> Ember.DateTime.random past: true
+  isTracked: -> Math.random() >= 0.7
   message: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus
     felis. Maecenas lacinia risus pellentesque ipsum vehicula convallis.
@@ -21,11 +22,14 @@ Factory.define 'email', traits: ['timestamps', 'html'],
       Factory.create 'user'
     else
       Factory.create 'contact'
+  to: ->
+    if @sender instanceof Radium.User
+      [Factory.create('contact')]
+    else
+      [Factory.create('user')]
 
   attachments: -> [
     Factory.create 'attachment'
     Factory.create 'attachment'
     Factory.create 'attachment'
   ]
-
-  isPublic: true

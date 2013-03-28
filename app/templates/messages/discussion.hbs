@@ -1,0 +1,51 @@
+{{template 'messages/hud'}}
+
+<div>
+  <div class="block discussion-card message-card">
+    <div class="header">
+      <i class="icon-discussion"></i>
+      <p><big><strong>
+        {{#if aboutDeal}}
+          Discussion about the {{#linkTo deal reference}}{{reference.name}}{{/linkTo}} deal
+        {{/if}}
+
+        {{#if aboutContact}}
+          Discussion about {{#linkTo contact reference}}{{reference.name}}{{/linkTo}} ({{reference.title}})
+        {{/if}}
+        </strong></big>
+      </p>
+
+      <div class="users">
+        With
+        <ul class="sentence">
+          {{#each users}}
+            <li>{{#linkTo user this}}{{name}}{{/linkTo}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="content">
+      <div class="text">
+        {{topic}}
+      </div>
+
+      {{template "shared/attachments"}}
+
+      <hr/>
+
+      {{template 'shared/related_tasks'}}
+
+      <div class="actions text-right">
+        <a class="btn btn-link" {{action delete this}}>
+          <i class="icon-delete"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="block block-gray">
+    {{control 'comments' model}}
+  </div>
+</div>

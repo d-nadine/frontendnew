@@ -46,4 +46,4 @@ Radium.FormsControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.
     return unless @get('isExpandable')
     @toggleProperty 'isExpanded'
 
-  hasComments: Radium.computed.isPresent('comments')
+  hasComments: Ember.computed.present('comments')

@@ -1,16 +1,18 @@
-Ember.Handlebars.registerHelper 'linkToPerson', (name) ->
+Ember.Handlebars.registerHelper 'linkToPerson', (objectPath) ->
+  object = Ember.Handlebars.get this, objectPath
+
   args = [].slice.apply arguments
 
   args[1].contexts.push this
   args[1].types.push "ID"
 
-  name = if this.constructor == Radium.User
+  route = if object.constructor == Radium.User
           "user"
-         else if this.constructor == Radium.Contact
+         else if object.constructor == Radium.Contact
            "contact"
          else
-           throw new Error("#{this.constructor} is unknown type for linkToPerson")
+           throw new Error("#{object.constructor} is unknown type for linkToPerson")
 
-  args.unshift name
+  args.unshift route
 
   Ember.Handlebars.helpers.linkTo.apply this, args

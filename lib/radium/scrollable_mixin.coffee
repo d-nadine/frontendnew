@@ -6,7 +6,7 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   shouldScroll: ->
     if @get 'scroller'
-      @get('scroller').tinyscrollbar_update()
+      @get('scroller').tinyscrollbar_update('relative')
     else
       scroller = @$('.scroller').tinyscrollbar()
       @set 'scroller', scroller
@@ -26,5 +26,5 @@ Radium.ScrollableMixin = Em.Mixin.create
   # a variable we can pass to `off` later to remove
   # the specific event handler.
   windowDidResize: (->
-    $.proxy @shouldScroll, this
+    @shouldScroll.bind this
   ).property()
