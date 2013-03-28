@@ -1,3 +1,3 @@
-Factory.define 'attachment'
+Factory.define 'attachment',
   mimeType: 'image/jpeg'
   url: '/foo.jpg'

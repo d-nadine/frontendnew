@@ -1,0 +1,89 @@
+<form class="form">
+  <div class="addresses">
+    <div {{bindAttr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+      <label>To</label>
+      {{view view.to placeholder="Names or email addresses" viewName="toList"}}
+
+      <span class="toggles">
+        {{#unless showCc}}
+          <a href="#" {{action expandList 'cc'}}>CC</a>
+        {{/unless}}
+        {{#unless showBcc}}
+          <a href="#" {{action expandList 'bcc'}}>BCC</a>
+        {{/unless}}
+      </span>
+    </div>
+
+    {{#if showCc }}
+      <div class="field control-box control-box-block-level recipients cc">
+        <label class="muted">CC</label>
+        {{view view.cc placeholder="Names or email addresses" viewName="cc"}}
+      </div>
+    {{/if}}
+
+    {{#if showBcc }}
+      <div class="field control-box control-box-block-level recipients bcc">
+        <label class="muted">BCC</label>
+        {{view view.bcc placeholder="Names or email addresses" viewName="bcc"}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div {{bindAttr class=":subject view.noContent:is-invalid :field"}}>
+    {{view view.subject class="field input-block-level"}}
+  </div>
+
+  <div class="block body">
+    {{view view.body class="field field-blend-in input-block-level"}}
+    <div>
+      <div class="check-response">
+        {{#unless showCheckForResponse}}
+          <a href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
+            Check for response?
+          </a>
+        {{/unless}}
+        {{#if showCheckForResponse}}
+          <div class="reminder-form form-inline">
+            <label class="checkbox">
+              <input type="checkbox"> Check for response in
+            </label>
+
+            {{view view.reminderLength}}
+            <label>Days</label>
+            <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
+              Done
+            </button>
+          </div>
+        {{/if}}
+      </div>
+      {{#unless view.signatureAdded}}
+        <a href="#" class="pull-right btn btn-link" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
+      {{/unless}}
+    </div>
+    <hr/>
+    <div class="footer">
+      <a hef="#" {{action submit bubbles="false"}} class="btn btn-primary">Send</a>
+    </div>
+  </div>
+</form>
+
+{{#if view.showSignatureModal}}
+  <div class="modal-backdrop">
+    <div class="modal fade">
+      <div class="modal-header">
+        <button type="button" {{action closeModal target="view" bubbles="false"}} class="close">×</button>
+        <h2>Add Signature?</h2>
+      </div>
+      <div class="modal-body">
+        <form class="form">
+          <p>Add a signature that can be appended onto the end of each email.</p>
+          {{view view.signature class="field input-block-level"}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#" {{action closeModal target="view" bubbles="false"}} class="btn">Cancel</a>
+        <a href="#" {{action createSignature bubbles="false"}} class="btn btn-primary">Done</a>
+      </div>
+    </div>
+  </div>
+{{/if}}

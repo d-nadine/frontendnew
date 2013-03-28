@@ -125,8 +125,9 @@
                 var input_focus = false;
 
                 // Setup basic elements and render them to the DOM
-                $('ul.as-selections').attr('id', 'as-selections-'+x);
-                $('li.as-original').attr('id', 'as-original-'+x);
+                var index = $('ul.as-selections').length -1;
+                $('ul.as-selections').eq(index).attr('id', 'as-selections-'+x);
+                $('li.as-original').eq(index).attr('id', 'as-original-'+x);
 
                 var selections_holder = $("#as-selections-"+x);
                 var org_li = $("#as-original-"+x);

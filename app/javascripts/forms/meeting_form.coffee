@@ -22,7 +22,7 @@ Radium.MeetingForm = Radium.Form.extend
     @_super.apply this, arguments
     @get('users').clear()
     @get('contacts').clear()
-    @get('users').addObject(@get('user')) if @get('user')
+    @get('users').addObject(@get('user')) if @get('user') && @get('isNew')
 
 
   isValid: ( ->
@@ -49,4 +49,3 @@ Radium.MeetingForm = Radium.Form.extend
       meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
 
     @get('store').commit()
-

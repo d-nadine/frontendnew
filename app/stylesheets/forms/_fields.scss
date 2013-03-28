@@ -16,11 +16,16 @@ input[type="search"].field,
 input[type="tel"].field,
 input[type="color"].field,
 .uneditable-input.field,
+
 .field {
   box-shadow: none;
   border: solid 1px $control-border-color;
   border-radius: 0px;
   @include transition(border linear 0.2s);
+}
+
+.field-block {
+  display: block;
 }
 
 .field {

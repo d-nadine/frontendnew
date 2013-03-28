@@ -1,0 +1,70 @@
+.forms-email-view{
+  background-color: $light-background;
+  padding: 6px;
+
+  a {
+    text-decoration: none;
+  }
+
+  .recipients {
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+
+    label {
+      cursor: default;
+      width: 40px;
+    }
+
+    .toggles {
+      width: 100px;
+      text-align: right;
+    }
+
+    label, .autocomplete, .toggles {
+      display: table-cell;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .autocomplete.is-invalid{
+    border: none;
+  }
+
+  .subject {
+    margin-bottom: 10px;
+    input{
+      border: none;
+    }
+  }
+
+  .body textarea {
+    min-height: 200px;
+    resize: none;
+  }
+
+  .check-response {
+    display: inline-block;
+  }
+
+  .reminder-form {
+    background-color: $light-background;
+    border: solid 1px $selected-item-border;
+    padding: 15px;
+
+    input[type=number] {
+      width: 30px;
+    }
+
+    label {
+      margin-right: 20px;
+    }
+  }
+
+  .footer {
+    text-align: right;
+  }
+}

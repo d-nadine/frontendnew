@@ -2,7 +2,6 @@ Radium.FormsMeetingController = Ember.ObjectController.extend Radium.FormsContro
   needs: ['groups','contacts','users']
   now: Ember.computed.alias('clock.now')
   groups: Ember.computed.alias('controllers.groups')
-  source: Ember.computed.alias 'attendees'
   userList: Ember.computed.alias 'controllers.users'
   contactList: Ember.computed.alias 'controllers.contacts'
   meetingUsers: null
