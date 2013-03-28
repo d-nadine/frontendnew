@@ -35,17 +35,23 @@
       <span class="checklist">Deal Forecast</span>
     </div>
     <div class="completed">
-      <h2>{{total}}<span class="muted">% Done</span></h2>
+      <h2><span class="muted">{{total}}% Done</span></h2>
     </div>
-    <div class="current">
-      improve your forecast by {{selectedCheckboxItem.weight}}% by <br/>
-      {{selectedCheckboxItem.description}}
-    </div>
-    <div class="button">
-      <button class="btn btn-success">
-        Finish {{capitalize selectedCheckboxItem.kind}}
-      </button>
-    </div>
+    {{#with selectedCheckboxItem}}
+      <div class="current">
+        improve your forecast by {{weight}}% by <br/>
+        {{description}}
+      </div>
+      <div class="button">
+        <button {{bindAttr class=":btn isFinished:btn-danger:btn-success"}}>
+          {{#unless isFinished}}
+            Finish {{capitalize kind}}
+          {{else}}
+            Not Completed
+          {{/unless}}
+        </button>
+      </div>
+    {{/with}}
   </div>
   <div class="clearfix"></div>
 </div>
