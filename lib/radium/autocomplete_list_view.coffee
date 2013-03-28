@@ -86,9 +86,6 @@ Radium.AutocompleteView = Ember.View.extend
     @$('li.as-original input').width inputWidth
 
   didInsertElement: ->
-    if @get('addCurrentUser')
-      @addSelection @get('controller.currentUser') if @get('controller.isNew')
-
     @resizeInputBox()
 
   autocomplete: Ember.TextField.extend
