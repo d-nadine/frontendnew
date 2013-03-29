@@ -1,9 +1,6 @@
 Radium.DealsNewController = Ember.ObjectController.extend
   needs: ['contacts','users']
   contacts: Ember.computed.alias 'controllers.contacts'
-  selectChecklistItem: (checklistItem) ->
-    @set 'selectedCheckboxItem', checklistItem
-
   total: ( ->
     total = 0
 

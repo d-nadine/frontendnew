@@ -65,8 +65,8 @@
                     <tr>
                       <td><i class="icon-{{unbound kind}}"></i></td>
                       <td class="check">
-                        {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
-                        <label {{action  selectChecklistItem this bubbles="false"}}>
+                        <label>
+                          {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
                           {{description}}
                         </label>
                       </td>

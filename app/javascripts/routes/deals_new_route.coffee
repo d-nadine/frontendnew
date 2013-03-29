@@ -1,9 +1,4 @@
 Radium.DealsNewRoute = Ember.Route.extend
-  setupController: (controller) ->
-    checklistItems = controller.get('checklist.checklistItems')
-    if checklistItems.length
-      controller.set 'selectedCheckboxItem', checklistItems.objectAt(0)
-
   setup: (context) ->
     @transitioned = false
     @redirect context
