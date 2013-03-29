@@ -9,7 +9,7 @@ Radium.DealsNewView= Ember.View.extend
       @set('controller.selectedCheckboxItem', @get('selected'))
 
   toggleChecklist: (evt) ->
-    @$('.checklist-items').slideToggle('medium')
+    @$('.checklist-items-container').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
 
   name: Ember.TextField.extend

@@ -19,10 +19,21 @@
   .checklist-total{
     label{
       display: inline-block;
+      position: relative;
+      top: 3px;
       width: 40px;
       font-weight: bold;
       font-size: 18px;
     }
+  }
+
+  .total{
+    margin-bottom: 2px;
+  }
+
+  .checklist-items-container{
+    margin-left: 110px;
+    display: none;
   }
 
   .checklist-items{
