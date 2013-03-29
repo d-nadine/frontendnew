@@ -88,7 +88,7 @@
               <tr>
                 <td>Percentage</td>
                 <td>
-                  {{view Ember.TextField type="number" valueBinding="additionalChecklistItem.description" class="field input-mini"}}%
+                  {{view Ember.TextField type="number" valueBinding="additionalChecklistItem.weight" class="field input-mini"}}%
                 </td>
               </tr>
             </tbody>
@@ -98,7 +98,33 @@
           </div>
         </div>
       </div>
+      <div class="control-group">
+        <label class="control-label">Negotiating For</label>
+        <div class="controls">
+          <strong class="dollar">$</strong>
+          {{view Ember.TextField type="number" valueBinding="value" class="field input-medium negotitating"}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Add Files</label>
+        <div class="controls">
+          <button class="btn add-files">
+            <!-- FIXME: get add folder font -->
+            Add Files
+          </button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">PO Number</label>
+        <div class="controls">
+          {{view Ember.TextField valueBinding="poNumber" class="field input-xxlarge"}}
+        </div>
+      </div>
       <hr/>
+      <div class="control-group actions pull-right">
+        <a href="#" class="btn cancel">Cancel</a>
+        <a href="#" class="btn btn-success publish">Publish</a>
+      </div>
     </fieldset>
   </form>
 </div>

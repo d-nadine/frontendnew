@@ -90,6 +90,8 @@ Radium.ApplicationRoute = Radium.Route.extend
     email: null
     source: ''
     status: null
+    value: 0
     checklist:
       checklistItems: []
+    poNumber: ''
   ).property()

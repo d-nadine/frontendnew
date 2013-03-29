@@ -30,10 +30,6 @@ select:focus{
     }
   }
 
-  .total{
-    margin-bottom: 2px;
-  }
-
   .checklist-items-container{
     margin-left: 110px;
     display: none;
@@ -45,6 +41,10 @@ select:focus{
     padding: 5px;
   }
 
+  .negotitating{
+    position: relative;
+    top: -1px;
+  }
 
   .checklist-items{
     background-color: $bright;
@@ -80,8 +80,8 @@ select:focus{
     border-bottom: 1px solid $dark-background;
   }
 
-  .btn-success{
-    padding: 3px 40px 3px 40px;
+  .add-files{
+    padding: 3px 60px 3px 60px;
   }
 
   .controls {
@@ -116,5 +116,10 @@ select:focus{
   .control-label{
     text-align: left;
     width: 110px;
+  }
+
+  .actions{
+    width: 50%;
+    margin-right: 41px;
   }
 }
