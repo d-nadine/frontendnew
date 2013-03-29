@@ -30,6 +30,10 @@ Radium.DealsNewView= Ember.View.extend
     valueBinding: 'controller.description'
     rows: 3
 
+  dealStatuses: Ember.Select.extend
+    contentBinding: 'controller.statuses'
+    valueBinding: 'controller.status'
+
   progressBar: Radium.ProgressBar.extend
     percentage: ( ->
       @get('controller.total')

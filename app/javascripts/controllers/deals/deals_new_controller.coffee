@@ -1,7 +1,8 @@
 Radium.DealsNewController = Ember.ObjectController.extend
-  needs: ['contacts','users']
+  needs: ['contacts','users', 'dealStatuses']
   contacts: Ember.computed.alias 'controllers.contacts'
   checklistItems: Ember.computed.alias 'checklist.checklistItems'
+  statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
 
   total: ( ->
     total = 0
