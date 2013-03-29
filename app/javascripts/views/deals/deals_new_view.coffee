@@ -9,7 +9,7 @@ Radium.DealsNewView= Ember.View.extend
       @set('controller.selectedCheckboxItem', @get('selected'))
 
   toggleChecklist: (evt) ->
-    div = @$('.checklist-items').slideToggle('medium')
+    @$('.checklist-items').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
 
   name: Ember.TextField.extend
@@ -29,6 +29,7 @@ Radium.DealsNewView= Ember.View.extend
     rows: 3
 
   referenceName: ( ->
+    # FIXME : can we use toString on the models?
     reference = @get('controller.reference')
 
     return unless reference

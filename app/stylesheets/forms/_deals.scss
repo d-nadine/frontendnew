@@ -1,53 +1,39 @@
 .deals-new-view{
   span.checklist{
-    font-weight: bold;
-    font-size: 18px;
   }
 
   .checklist.block{
+    padding-top: 5px;
     margin-bottom: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    .checklist-title,.checklist-total{
-      display: inline-block;
-    }
-    .checklist-title{
-      vertical-align: bottom;
-    }
-    .checklist-total{
-      position: relative;
-      top: -11px;
-      h1{
-        display: inline;
-        margin-right: 20px;
-      }
-      button{
+    h3{
+      margin-left: -5px;
+      i{
+        font-size: 20px;
         position: relative;
-        top: -10px;
+        top: -1px;
       }
+    }
+  }
+
+  .checklist-total{
+    label{
+      display: inline-block;
+      width: 40px;
+      font-weight: bold;
+      font-size: 18px;
     }
   }
 
   .checklist-items{
-    display: none;
+    background-color: $bright;
+    border: 1px solid $dark-background;
     margin-bottom: 0;
-    width: 97%;
     margin: 0 auto;
     label{
       display: inline;
     }
-    .checks, .forecast{
-      display: inline-block;
-    }
-    .forecast{
-      vertical-align: top;
-      text-align: center;
-      margin-right: 8px;
-      .completed, .current{
-        margin: 10px 0 10px 0;
-      }
-    }
     table{
-      display: inline-block;
       tr{
         td{
           padding: 5px;
@@ -90,15 +76,6 @@
     padding: 10px;
     width: 95%;
     margin: 0 auto;
-
-    h3{
-      margin-left: -5px;
-      i{
-        font-size: 20px;
-        position: relative;
-        top: -1px;
-      }
-    }
   }
 
   .combobox{

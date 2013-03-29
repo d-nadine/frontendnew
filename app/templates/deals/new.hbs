@@ -1,64 +1,9 @@
 <div class="checklist block">
-  <div class="checklist-title">
-    <span class="checklist">Deal Checklist</span>
-  </div>
-  <div class="checklist-total pull-right">
-    <h1>{{total}}%</h1>
-    <button class="btn btn-success" {{action toggleChecklist target="view" bubbles="false"}}>
-      <i {{bindAttr class="view.showChecklistItems:icon-minus:icon-plus"}}></i>
-    </button>
-  </div>
-</div>
-<div class="block checklist-items">
-  <div class="checks">
-    <table class="">
-      <tbody>
-        {{#each checklistItem in checklist.checklistItems}}
-          {{#with checklistItem}}
-            <tr>
-              <td><i class="icon-{{unbound kind}}"></i></td>
-              <td class="check">
-                {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
-                <label {{action  selectChecklistItem this bubbles="false"}}>
-                  {{description}}
-                </label>
-              </td>
-              <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
-            </tr>
-          {{/with}}
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-  <div class="forecast pull-right">
-    <div>
-      <span class="checklist">Deal Forecast</span>
-    </div>
-    <div class="completed">
-      <h2><span class="muted">{{total}}% Done</span></h2>
-    </div>
-    {{#with selectedCheckboxItem}}
-      <div class="current">
-        improve your forecast by {{weight}}% by <br/>
-        {{description}}
-      </div>
-      <div class="button">
-        <button {{action toggleIsFinished}} {{bindAttr class=":btn isFinished:btn-danger:btn-success"}}>
-          {{#unless isFinished}}
-            Finish {{capitalize kind}}
-          {{else}}
-            Not Completed
-          {{/unless}}
-        </button>
-      </div>
-    {{/with}}
-  </div>
-  <div class="clearfix"></div>
+  <h3><i class="icon-plus"></i>New Deal</h3>
 </div>
 <div class="secondary">
   <form class="form form-horizontal">
     <fieldset>
-      <h3><i class="icon-plus"></i>New Deal</h3>
       <div class="control-group">
         <label class="control-label">Deal Name</label>
         <div class="controls">
@@ -102,6 +47,36 @@
       <div class="control-group">
         <label class="control-label">Deal Status</label>
         <div class="controls">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" {{action toggleChecklist target="view" bubbles="false"}}>Checklist <i {{bindAttr class="view.showChecklistItems:icon-minus:icon-plus"}}></i></label>
+        <div class="checklist-total">
+          <label>{{total}}%</label>
+        </div>
+        <div>
+          <div class="checklist-items">
+            <div class="checks">
+              <table class="">
+                <tbody>
+                  {{#each checklistItem in checklist.checklistItems}}
+                    {{#with checklistItem}}
+                      <tr>
+                        <td><i class="icon-{{unbound kind}}"></i></td>
+                        <td class="check">
+                          {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
+                          <label {{action  selectChecklistItem this bubbles="false"}}>
+                            {{description}}
+                          </label>
+                        </td>
+                        <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
+                      </tr>
+                    {{/with}}
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
       <hr/>
