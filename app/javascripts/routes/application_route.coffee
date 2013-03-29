@@ -8,7 +8,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
         Ember.assert("Could not find a matching controller for: #{name}", route)
 
-        @render name, 
+        @render name,
           outlet: 'drawer'
           into: 'application'
           controller: @controllerFor(route)
@@ -16,14 +16,14 @@ Radium.ApplicationRoute = Radium.Route.extend
         @set 'router.openDrawer', name
 
     closeDrawer: ->
-      @render 'nothing', 
+      @render 'nothing',
         into: 'application'
         outlet: 'drawer'
 
       @set 'router.openDrawer', null
 
     closeModal: ->
-      @render 'nothing', 
+      @render 'nothing',
         into: 'application'
         outlet: 'modal'
 
@@ -66,6 +66,10 @@ Radium.ApplicationRoute = Radium.Route.extend
     dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem.serialize())
     dealForm.set 'user', @controllerFor('currentUser').get('model')
+
+    dealForm.set 'additionalChecklistItem', Ember.Object.create
+                                                description: ''
+                                                weight: 0
 
     @controllerFor('deals.new').set 'model', dealForm
 

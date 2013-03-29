@@ -36,15 +36,25 @@
     display: none;
   }
 
+  .extra-checklist-item{
+    border-top: 1px solid $dark-background;
+    border-bottom: 1px solid $dark-background;
+    padding: 5px;
+  }
+
+
   .checklist-items{
     background-color: $bright;
     border: 1px solid $dark-background;
     margin-bottom: 0;
-    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
     label{
       display: inline;
     }
     table{
+      margin-top: 10px;
+      margin-bottom: 10px;
       tr{
         td{
           padding: 5px;
@@ -62,7 +72,6 @@
       }
     }
   }
-
   hr{
     border-top: 1px solid $dark-background;
     border-bottom: 1px solid $dark-background;
