@@ -12,3 +12,18 @@ Radium.DealsNewController = Ember.ObjectController.extend
 
     total
   ).property('checklist.checklistItems.@each.isFinished')
+
+  submit: ->
+    @set 'isSubmitted', true
+
+    return unless @get('isValid')
+
+    @set 'justAdded', true
+
+    Ember.run.later( ( =>
+      @set 'justAdded', false
+      @set 'isSubmitted', false
+
+      deal = @get('model').commit()
+      @transitionToRoute 'deal', deal
+    ), 1200)

@@ -121,5 +121,8 @@ select:focus{
   .actions{
     width: 50%;
     margin-right: 41px;
+    .btn{
+      padding: 5px 60px 5px 60px;
+    }
   }
 }

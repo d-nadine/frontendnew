@@ -52,7 +52,7 @@ Radium.FormsMeetingController = Radium.FormController.extend
     @get('startsAt').isBeforeToday()
   ).property('startsAt', 'now')
 
-  submit: () ->
+  submit:  ->
     @set 'isSubmitted', true
 
     return unless @get('isValid')
