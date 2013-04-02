@@ -7,5 +7,4 @@ Radium.ProgressBar = Ember.View.extend
 
   template: Ember.Handlebars.compile """
     <div class="bar" {{bindAttr style="view.style"}}></div>
-
   """
