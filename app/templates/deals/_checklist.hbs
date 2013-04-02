@@ -1,0 +1,43 @@
+<div class="control-group checklist-items-container">
+  <div class="checklist-items">
+    <table>
+      <tbody>
+        {{#each checklistItem in checklist.checklistItems}}
+          {{#with checklistItem}}
+            <tr>
+              <td>{{checklistKind kind}}</td>
+              <td class="check">
+                <label>
+                  {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
+                  {{description}}
+                </label>
+              </td>
+              <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
+            </tr>
+          {{/with}}
+        {{/each}}
+      </tbody>
+    </table>
+    <p class="extra-checklist-item muted">FIXME:  Supply some copy that describes why there are fields for an extra check list item</p>
+    <table>
+      <tbody>
+        <tr>
+          <td>Description</td>
+          <td>
+            {{view Ember.TextField valueBinding="additionalChecklistItem.description" class="field input-xxlarge"}}
+          </td>
+        </tr>
+        <tr>
+          <td>Percentage</td>
+          <td>
+            {{view Ember.TextField type="number" valueBinding="additionalChecklistItem.weight" class="field input-mini"}}%
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="checklist-progress">
+      {{view view.progressBar percentageBinding="total"}}
+    </div>
+  </div>
+</div>
+
