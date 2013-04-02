@@ -119,3 +119,4 @@ class Populator
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
+
