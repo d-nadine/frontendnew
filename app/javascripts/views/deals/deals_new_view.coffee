@@ -41,8 +41,6 @@ Radium.DealsNewView= Ember.View.extend
     contentBinding: 'controller.statuses'
     valueBinding: 'controller.status'
 
-  progressBar: Radium.ProgressBar.extend()
-
   referenceName: ( ->
     # FIXME : can we use toString on the models?
     reference = @get('controller.reference')
