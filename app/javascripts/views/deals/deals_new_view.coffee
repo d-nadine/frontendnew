@@ -5,11 +5,6 @@ Radium.DealsNewView= Ember.View.extend
   layoutName: 'layouts/single_column'
   showChecklistItems: false
 
-  isFinished: Ember.Checkbox.extend
-    click: (evt) ->
-      evt.stopPropagation()
-      @set('controller.selectedCheckboxItem', @get('selected'))
-
   toggleChecklist: (evt) ->
     @$('.checklist-items-container').slideToggle('medium')
     @toggleProperty 'showChecklistItems'

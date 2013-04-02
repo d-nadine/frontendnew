@@ -8,7 +8,7 @@
               <td>{{checklistKind kind}}</td>
               <td class="check">
                 <label>
-                  {{view view.isFinished checkedBinding="isFinished" selectedBinding="this"}}
+                  {{view Ember.Checkbox checkedBinding="isFinished"}}
                   {{description}}
                 </label>
               </td>
@@ -19,7 +19,7 @@
       </tbody>
     </table>
     <p class="extra-checklist-item muted">FIXME:  Supply some copy that describes why there are fields for an extra check list item</p>
-    <table>
+    <table class="extra-checklist-item">
       <tbody>
         <tr>
           <td>Description</td>

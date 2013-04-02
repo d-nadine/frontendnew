@@ -10,6 +10,10 @@ Radium.DealController = Radium.ObjectController.extend
 
   contact: Ember.computed.alias('model.contact')
 
+  checklistTotal: ( ->
+    25
+  ).property()
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

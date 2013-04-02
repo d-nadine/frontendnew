@@ -6,6 +6,43 @@
     }
   }
 
+  .forecast{
+    position: relative;
+    hr{
+      margin: 0;
+    }
+    .progress.progress-info{
+      display: inline-block;
+      width: 80%;
+      height: 31px;
+    }
+
+    .checklist-plus{
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .total{
+      position: absolute;
+      top: 56px;
+      left: 3px;
+      font-size: 24px;
+
+      &.white{
+        color: #fff;
+      }
+    }
+  }
+
+  #checklistModal{
+    .extra-checklist-item{
+      display: none;
+    }
+    .checklist-progress{
+      display: none;
+    }
+  }
+
   .meta {
     overflow: auto;
 

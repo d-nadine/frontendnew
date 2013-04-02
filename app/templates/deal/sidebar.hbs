@@ -11,6 +11,33 @@
   </p>
 </div>
 
+<div class="forecast">
+  <hr />
+  <h2>Forecast {{view.constructor}}</h2>
+  {{view Radium.ProgressBar percentageBinding="checklistTotal"}}
+  <div class="checklist-plus">
+    <a href="#checklistModal" class="btn btn-success" data-toggle="modal">
+      <i class="icon-plus"></i>
+    </a>
+  </div>
+  <div {{bindAttr class=":total checklistTotal:white"}}>15%</div>
+  <hr />
+</div>
+<div id="checklistModal" class="modal fade">
+  <div class="modal-header">
+    <button type="button"  data-dismiss="modal" class="close">×</button>
+    <h2>Checklist</h2>
+  </div>
+  <div class="modal-body">
+    <form class="form">
+      {{partial 'deals/checklist'}}
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    <a href="#" {{action createSignature bubbles="false"}} class="btn btn-primary">Done</a>
+  </div>
+</div>
 {{#view Radium.InlineEditorView valueBinding=description}}
   <h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
