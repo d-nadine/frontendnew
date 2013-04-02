@@ -10,9 +10,20 @@ Radium.DealController = Radium.ObjectController.extend
 
   contact: Ember.computed.alias('model.contact')
 
+  commit: ->
+    @get('store').commit()
+
+  rollback: ->
+    @get('model.transaction').rollback()
+
   checklistTotal: ( ->
-    25
-  ).property()
+    total = 0
+
+    @get('checklist.checklistItems').forEach (item) ->
+      total += item.get('weight') if item.get('isFinished')
+
+    total
+  ).property('checklist.checklistItems.@each.isFinished')
 
   formBox: (->
     Radium.FormBox.create

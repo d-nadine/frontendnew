@@ -1,0 +1,46 @@
+.checklist-total{
+  label{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 40px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+.extra-checklist-item.muted{
+  border-top: 1px solid $dark-background;
+  border-bottom: 1px solid $dark-background;
+  padding: 5px;
+}
+
+.checklist-items{
+  background-color: $bright;
+  border: 1px solid $dark-background;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  label{
+    display: inline;
+  }
+  table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    tr{
+      td{
+        padding: 5px;
+
+        &.check{
+          input[type=checkbox]{
+            position: relative;
+            top: -3px;
+          }
+        }
+        &.is-finished{
+          color: $green;
+        }
+      }
+    }
+  }
+}
