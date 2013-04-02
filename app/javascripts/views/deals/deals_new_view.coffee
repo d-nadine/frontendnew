@@ -15,15 +15,23 @@ Radium.DealsNewView= Ember.View.extend
     @toggleProperty 'showChecklistItems'
 
   name: Ember.TextField.extend
+    classNameBindings: ['isInvalid',':field']
     valueBinding: 'controller.name'
     didInsertElement: ->
       @$().focus()
 
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
+    ).property('value', 'controller.isSubmitted')
+
+
   contactPicker: Radium.Combobox.extend
+    classNames: ['field']
     sourceBinding: 'controller.contacts'
     valueBinding: 'controller.contact'
 
   userPicker: Radium.UserPicker.extend
+    classNames: ['field']
     leader: null
 
   description: Radium.TextArea.extend
@@ -51,3 +59,7 @@ Radium.DealsNewView= Ember.View.extend
 
     ""
   ).property('controller.reference')
+
+  publishedSwitch: Radium.ToggleSwitch.extend
+    classNames: ['published-switch']
+    checkedBinding: 'controller.isPublished'

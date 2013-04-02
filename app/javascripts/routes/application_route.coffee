@@ -86,11 +86,13 @@ Radium.ApplicationRoute = Radium.Route.extend
     name: ''
     user: null
     contact: null
+    description: ''
     todo: null
     email: null
     source: ''
     status: null
     value: 0
+    isPublished: true
     checklist:
       checklistItems: []
     poNumber: ''

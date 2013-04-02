@@ -34,7 +34,7 @@ input[type="color"].field,
   }
 
   &.is-invalid {
-    border-color: red;
+    border-color: red !IMPORTANT;
   }
 
   &.field-blend-in {

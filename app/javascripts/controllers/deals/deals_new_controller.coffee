@@ -25,5 +25,7 @@ Radium.DealsNewController = Ember.ObjectController.extend
       @set 'isSubmitted', false
 
       deal = @get('model').commit()
+      @get('model').reset()
+
       @transitionToRoute 'deal', deal
     ), 1200)

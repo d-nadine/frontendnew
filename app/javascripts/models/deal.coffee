@@ -11,6 +11,8 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   user: DS.belongsTo('Radium.User')
   email: DS.belongsTo('Radium.Email')
   todo: DS.belongsTo('Radium.Todo')
+  checklist: DS.belongsTo('Radium.Checklist')
+  isPublished: DS.attr('boolean')
 
   # FIXME : SHould we make a mixin?
   reference: ((key, value) ->
