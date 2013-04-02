@@ -24,7 +24,6 @@ Radium.DealsNewView= Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
     ).property('value', 'controller.isSubmitted')
 
-
   contactPicker: Radium.Combobox.extend
     classNames: ['field']
     sourceBinding: 'controller.contacts'

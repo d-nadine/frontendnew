@@ -6,7 +6,7 @@ Factory.define 'contact', traits: ['timestamps'],
   source: -> Dictionaries.leadSources.random()
   title: -> Dictionaries.titles.random()
 
-  user: -> Factory.build 'user'
+  user: -> Factory.create 'user'
 
   phoneNumbers: [
     { name: "Mobile", number: "+1348793247" }
