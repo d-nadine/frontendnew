@@ -24,19 +24,19 @@
         <tr>
           <td>Description</td>
           <td>
-            {{view Ember.TextField valueBinding="additionalChecklistItem.description" class="field input-xxlarge"}}
+            {{view Ember.TextField valueBinding="" class="field input-xxlarge"}}
           </td>
         </tr>
         <tr>
           <td>Percentage</td>
           <td>
-            {{view Ember.TextField type="number" valueBinding="additionalChecklistItem.weight" class="field input-mini"}}%
+            {{view Ember.TextField type="number" valueBinding="" class="field input-mini"}}%
           </td>
         </tr>
       </tbody>
     </table>
     <div class="checklist-progress">
-      {{view Radium.ProgressBar percentageBinding="total"}}
+      {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
     </div>
   </div>
 </div>

@@ -14,13 +14,13 @@
 <div class="forecast">
   <hr />
   <h2>Forecast</h2>
-  {{view Radium.ProgressBar percentageBinding="checklistTotal"}}
+  {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
   <div class="checklist-plus">
     <a href="#checklistModal" class="btn btn-success" data-toggle="modal">
       <i class="icon-plus"></i>
     </a>
   </div>
-  <div {{bindAttr class=":total checklistTotal:white"}}>{{checklistTotal}}%</div>
+  <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
   <hr />
 </div>
 <div id="checklistModal" class="modal fade">

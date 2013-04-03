@@ -56,7 +56,7 @@
       <div class="control-group total">
         <label class="control-label" {{action toggleChecklist target="view" bubbles="false"}}>Checklist <i {{bindAttr class="view.showChecklistItems:icon-minus:icon-plus"}}></i></label>
         <div class="checklist-total">
-          <label>{{total}}%</label>
+          <label>{{checklist.total}}%</label>
         </div>
       </div>
       {{partial 'deals/checklist'}}

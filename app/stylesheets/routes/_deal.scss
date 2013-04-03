@@ -20,6 +20,9 @@
     .checklist-plus{
       display: inline-block;
       vertical-align: top;
+      .btn, .btn:focus {
+        outline: none;
+      }
     }
 
     .total{
@@ -44,6 +47,7 @@
   }
 
   .meta {
+    margin-bottom: 10px;
     overflow: auto;
 
     .avatar {
@@ -66,7 +70,7 @@
   }
 
   .assigned-to {
-    .avatar { 
+    .avatar {
       float: left;
       margin-right: 10px;
     }

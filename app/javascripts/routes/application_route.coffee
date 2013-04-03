@@ -64,14 +64,11 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('settings').set 'model', settings
 
     dealForm = @get('dealForm')
-
+    dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
+    dealForm.set('checklist.checklistItems', Ember.A())
     dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem.serialize())
     dealForm.set 'user', @controllerFor('currentUser').get('model')
-
-    dealForm.set 'additionalChecklistItem', Ember.Object.create
-                                                description: ''
-                                                weight: 0
 
     @controllerFor('deals.new').set 'model', dealForm
 
@@ -95,7 +92,5 @@ Radium.ApplicationRoute = Radium.Route.extend
     status: null
     value: 0
     isPublished: true
-    checklist:
-      checklistItems: []
     poNumber: ''
   ).property()

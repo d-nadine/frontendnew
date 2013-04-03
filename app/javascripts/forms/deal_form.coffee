@@ -1,4 +1,5 @@
 require 'forms/form'
+require 'lib/radium/checklist_total_mixin'
 
 Radium.DealForm = Radium.Form.extend
   data: ( ->
@@ -24,12 +25,11 @@ Radium.DealForm = Radium.Form.extend
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
-    @set 'additionalChecklistItem', Ember.Object.create
-                                                description: ''
-                                                weight: 0
 
+    return unless @get('checklist.checklistItems')
 
-    return unless @get('checklist')
+    @get('checklist.checklistItems').forEach (item) =>
+      item.set('isFinished', false)
 
   isValid: ( ->
     return if Ember.isEmpty(@get('name'))
@@ -47,11 +47,6 @@ Radium.DealForm = Radium.Form.extend
     @get('checklist.checklistItems').forEach (item) =>
       deal.get('checklist.checklistItems').addObject Radium.ChecklistItem.createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
 
-    unless Ember.isEmpty @get('additionalChecklistItem.description')
-      deal.get('checklistItems.checklistItems').addObject Radium.ChecklistItem.createRecord
-                                                            description: @get('additionalChecklistItem.description')
-                                                            weight: @get('additionalChecklistItem.weight')
-                                                            isFinished: true
     @get('store').commit()
 
     deal

@@ -2,9 +2,9 @@ require 'factories/user'
 
 Factory.define 'contact', traits: ['timestamps'],
   name: -> "#{Dictionaries.firstNames.random()} #{Dictionaries.lastNames.random()}"
-  isLead: -> Math.random() <= 0.30
   source: -> Dictionaries.leadSources.random()
   title: -> Dictionaries.titles.random()
+  status: -> Dictionaries.leadStatuses.random()
 
   user: -> Factory.create 'user'
 
