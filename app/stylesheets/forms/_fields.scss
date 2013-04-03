@@ -50,8 +50,8 @@ input[type="color"].field,
   &[readonly] {
     cursor: default;
   }
-}
 
-.field-block {
-  display: block;
+  &.field-block {
+    display: block;
+  }
 }
