@@ -48,8 +48,8 @@ Radium.ApplicationRoute = Radium.Route.extend
       controller = @controllerFor('deals.new')
       controller.get('model').reset()
       controller.set 'user', @controllerFor('currentUser').get('model')
-      controller.set('model.contact', contact)
-      controller.set('model.source', 'Lead Form')
+      controller.set('contact', contact)
+      controller.set('source', 'Lead Form')
       @transitionTo 'deals.new'
 
   setupController: ->
