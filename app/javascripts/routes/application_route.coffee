@@ -82,6 +82,7 @@ Radium.ApplicationRoute = Radium.Route.extend
   dealForm:  Radium.computed.newForm('deal')
 
   dealFormDefaults: ( ->
+    isNew: true
     name: ''
     user: null
     contact: null

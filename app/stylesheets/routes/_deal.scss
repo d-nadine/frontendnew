@@ -38,11 +38,13 @@
   }
 
   #checklistModal{
-    .extra-checklist-item{
-      display: none;
-    }
+    width: 60%;
     .checklist-progress{
       display: none;
+    }
+    a.btn{
+      position: relative;
+      top: -7px;
     }
   }
 

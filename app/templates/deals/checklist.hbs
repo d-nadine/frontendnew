@@ -18,19 +18,22 @@
         {{/each}}
       </tbody>
     </table>
-    <p class="extra-checklist-item muted">FIXME:  Supply some copy that describes why there are fields for an extra check list item</p>
+    <p class="extra-checklist-item muted">FIXME:  Supply some copy that describes why there are fields below for an extra check list item</p>
     <table class="extra-checklist-item">
       <tbody>
         <tr>
           <td>Description</td>
           <td>
-            {{view Ember.TextField valueBinding="" class="field input-xxlarge"}}
+            {{view view.newItemDescription class="field input-xxlarge" viewName="itemDescription"}}
           </td>
         </tr>
         <tr>
           <td>Percentage</td>
           <td>
-            {{view Ember.TextField type="number" valueBinding="" class="field input-mini"}}%
+            {{view view.newItemWeight type="number" class="field input-mini" viewName="itemWeight"}}%
+            <a href="#" {{action createNewItem target="view"}} class="btn">
+              <i class="icon-plus"></i>
+            </a>
           </td>
         </tr>
       </tbody>
