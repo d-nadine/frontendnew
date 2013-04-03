@@ -22,19 +22,13 @@ input[type="color"].field,
   border: solid 1px $control-border-color;
   border-radius: 0px;
   @include transition(border linear 0.2s);
-}
 
-.field-block {
-  display: block;
-}
-
-.field {
   &.is-valid {
     border-color: $valid-input-border;
   }
 
   &.is-invalid {
-    border-color: red !IMPORTANT;
+    border-color: red;
   }
 
   &.field-blend-in {
@@ -56,4 +50,8 @@ input[type="color"].field,
   &[readonly] {
     cursor: default;
   }
+}
+
+.field-block {
+  display: block;
 }
