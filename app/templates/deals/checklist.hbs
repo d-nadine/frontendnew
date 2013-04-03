@@ -2,19 +2,24 @@
   <div class="checklist-items">
     <table>
       <tbody>
-        {{#each checklistItem in checklist.checklistItems}}
-          {{#with checklistItem}}
-            <tr>
-              <td>{{checklistKind kind}}</td>
-              <td class="check">
-                <label>
-                  {{view Ember.Checkbox checkedBinding="isFinished"}}
-                  {{description}}
-                </label>
-              </td>
-              <td {{bindAttr class="isFinished:is-finished:muted"}}>{{weight}}%</td>
-            </tr>
-          {{/with}}
+        {{#each checklist.checklistItems itemController="checklistItem"}}
+          <tr>
+            <td>{{checklistKind kind}}</td>
+            <td class="check">
+              <label>
+                {{view Ember.Checkbox checkedBinding="isFinished"}}
+                {{description}}
+              </label>
+            </td>
+            <td {{bindAttr class="isFinished:is-finished:muted"}}>
+              {{weight}}%
+              {{#if isAdditional}}
+                <a href="#" {{action removeAdditionalItem this bubbles="false"}}>
+                  delete
+                </a>
+              {{/if}}
+            </td>
+          </tr>
         {{/each}}
       </tbody>
     </table>
@@ -30,7 +35,7 @@
         <tr>
           <td>Percentage</td>
           <td>
-            {{view view.newItemWeight type="number" class="field input-mini" viewName="itemWeight"}}%
+            {{view view.newItemWeight type="number" value="0" class="field input-mini" viewName="itemWeight"}}%
             <a href="#" {{action createNewItem target="view"}} class="btn">
               <i class="icon-plus"></i>
             </a>

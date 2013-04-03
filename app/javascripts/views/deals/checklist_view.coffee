@@ -25,13 +25,16 @@ Radium.ChecklistView = Ember.View.extend
             weight: weight
             isFinished: true
             kind: 'additional'
+            checklist: checklist
 
     newRecord = if @get('controller.isNew')
                   Ember.Object.create(newItem)
                 else
-                  Radium.ChecklistItem.createRecord(newItem)
+                  @get('checklist.checklistItems').createRecord(newItem)
 
-    @get('checklist.checklistItems').addObject newRecord
+    if @get('controller.isNew')
+      @get('checklist.checklistItems').addObject newRecord
+
     @set('itemDescription.value', '')
     @set('itemWeight.value', '0')
     @get('itemDescription').$().focus()
