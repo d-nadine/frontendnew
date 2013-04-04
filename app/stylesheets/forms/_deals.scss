@@ -79,46 +79,6 @@ select:focus{
     }
   }
 
-  .switch-container{
-    display: inline-block;
-    .toggle-switch{
-      input[type="checkbox"] + div {
-        width: 6em;
-      }
-
-      input[type="checkbox"] + div:before {
-        content: 'Published';
-        text-indent: -6.5em;
-      }
-
-      input[type="checkbox"] + div:after{
-        content: 'Draft';
-      }
-
-      input[type="checkbox"]:checked + div {
-        // these numbers must add up to the width
-        // of the unchecked div
-        padding-left: 5em;
-        width: 1em;
-      }
-
-      input[type="checkbox"]:checked + div {
-        background-image: -webkit-linear-gradient(rgba(0,0,0,.1), transparent),
-          -webkit-linear-gradient(0deg, #30F567 50%, transparent 50%);
-      }
-
-      input[type="checkbox"] + div {
-        background-image: -webkit-linear-gradient(rgba(0,0,0,.1), transparent),
-          -webkit-linear-gradient(0deg, #FFF500 50%, transparent 50%);
-        background-position: 0, 0;
-      }
-
-      input[type="checkbox"] + div:after {
-        color: #494949;
-      }
-    }
-  }
-
   .secondary{
     margin: 0;
     width: auto;

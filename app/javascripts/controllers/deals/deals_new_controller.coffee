@@ -4,9 +4,16 @@ Radium.DealsNewController = Ember.ObjectController.extend
   checklistItems: Ember.computed.alias 'checklist.checklistItems'
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
 
+  saveAsDraft: ->
+    @set 'isPublished', false
+    @submit()
+
+  publish: ->
+    @set 'isPublished', true
+    @submit()
+
   submit: ->
     @set 'isSubmitted', true
-
     return unless @get('isValid')
 
     @set 'justAdded', true

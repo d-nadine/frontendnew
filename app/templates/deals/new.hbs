@@ -23,9 +23,6 @@
         <label class="control-label">Deal Name</label>
         <div class="controls">
           {{view view.name class="field input-xlarge" placeholder="Deal Name"}}
-          <div class="switch-container">
-            {{view view.publishedSwitch}}
-          </div>
         </div>
       </div>
       <div class="control-group">
@@ -58,7 +55,7 @@
       <div class="control-group">
         <label class="control-label">Source</label>
         <div class="controls">
-          {{view Ember.TextField valueBinding="source" class="field input-xxlarge"}}
+          {{view view.source class="field input-xxlarge"}}
         </div>
       </div>
       <hr/>
@@ -93,7 +90,8 @@
       <hr/>
       <div class="control-group actions pull-right">
         <a href="#" class="btn cancel" {{action back}}>Cancel</a>
-        <a href="#" class="btn btn-success publish" {{action submit}}>Publish</a>
+        <a href="#" class="btn btn-info publish" {{action saveAsDraft}}>Save as draft</a>
+        <a href="#" class="btn btn-success publish" {{action publish}}>Publish</a>
       </div>
     </fieldset>
   </form>

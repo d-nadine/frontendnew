@@ -29,8 +29,20 @@ Radium.DealsNewView= Ember.View.extend
     leader: null
 
   description: Radium.TextArea.extend
-    valueBinding: 'controller.description'
+    classNameBindings: ['isInvalid']
     rows: 3
+    valueBinding: 'controller.description'
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
+    ).property('value', 'controller.isSubmitted')
+
+  source: Ember.TextField.extend
+    classNameBindings: ['isInvalid']
+    valueBinding: 'controller.source'
+    isInvalid: (->
+      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
+    ).property('value', 'controller.isSubmitted')
+
 
   dealStatuses: Ember.Select.extend
     contentBinding: 'controller.statuses'
@@ -48,7 +60,3 @@ Radium.DealsNewView= Ember.View.extend
 
     ""
   ).property('controller.reference')
-
-  publishedSwitch: Radium.ToggleSwitch.extend
-    classNames: ['published-switch']
-    checkedBinding: 'controller.isPublished'
