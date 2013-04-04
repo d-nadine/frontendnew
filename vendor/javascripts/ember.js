@@ -3610,20 +3610,8 @@ Ember.rewatch = function(obj) {
 var NODE_STACK = [];
 
 /**
-<<<<<<< HEAD
   Tears down the meta on an object so that it can be garbage collected.
   Multiple calls will have no effect.
-=======
-  @method computed.bool
-  @for Ember
-  @param {String} dependentKey
-*/
-Ember.computed.bool = function(dependentKey) {
-  return Ember.computed(dependentKey, function(key) {
-    return !!get(this, dependentKey);
-  });
-};
->>>>>>> undo
 
   @method destroy
   @for Ember
