@@ -1,7 +1,22 @@
 <div class="checklist block">
-  <h3><i class="icon-plus"></i>New Deal</h3>
+  <div class="checklist-forecast">
+    <h1>Forecast</h1>
+    <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
+    {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
+    <div class="checklist-plus">
+      <a href="#checklistModal" class="btn btn-success" {{action toggleChecklist target="view" bubbles=false}}>
+        {{#if view.showChecklistItems}}
+          <i class="icon-minus"></i>
+        {{else}}
+          <i class="icon-plus"></i>
+        {{/if}}
+      </a>
+    </div>
+  </div>
+  {{view Radium.ChecklistView}}
 </div>
 <div class="secondary">
+  <h3><i class="icon-plus"></i>New Deal</h3>
   <form class="form form-horizontal">
     <fieldset>
       <div class="control-group">
@@ -53,13 +68,6 @@
           {{view view.dealStatuses}}
         </div>
       </div>
-      <div class="control-group total">
-        <label class="control-label" {{action toggleChecklist target="view" bubbles="false"}}>Checklist <i {{bindAttr class="view.showChecklistItems:icon-minus:icon-plus"}}></i></label>
-        <div class="checklist-total">
-          <label>{{checklist.total}}%</label>
-        </div>
-      </div>
-      {{view Radium.ChecklistView}}
       <div class="control-group">
         <label class="control-label">Negotiating For</label>
         <div class="controls">

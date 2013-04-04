@@ -40,6 +40,12 @@
         &.is-finished{
           color: $green;
         }
+
+        a.btn{
+          position: relative;
+          top: -7px;
+        }
+
       }
     }
   }

@@ -2,26 +2,60 @@ select:focus{
   outline: none;
 }
 .deals-new-view{
-  span.checklist{
-  }
-
   .checklist.block{
+    padding-bottom: 0;
     padding-top: 5px;
     margin-bottom: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    h3{
-      margin-left: -5px;
-      i{
-        font-size: 20px;
-        position: relative;
-        top: -1px;
+
+    .checklist-forecast{
+      position: relative;
+      top: 10px;
+    }
+    h1{
+      display: inline-block;
+      vertical-align: top;
+      font-size: 26px;
+      line-height: 26px;
+      text-transform: uppercase;
+      position: relative;
+      top: -9px;
+      margin-right: 5px;
+      color: $muted;
+    }
+
+    .progress.progress-info{
+      display: inline-block;
+      width: 40%;
+      height: 31px;
+    }
+
+    .checklist-plus{
+      display: inline-block;
+      vertical-align: top;
+      .btn{
+        height: 22px;
+      }
+      .btn, .btn:focus {
+        outline: none;
+      }
+    }
+
+    .total{
+      position: absolute;
+      top: 5px;
+      left: 155px;
+      font-size: 24px;
+
+      &.white{
+        color: #fff;
       }
     }
   }
 
   .checklist-items-container{
-    margin-left: 110px;
     display: none;
+    margin-bottom: 16px;
   }
 
   .negotitating{
@@ -93,6 +127,14 @@ select:focus{
     padding: 10px;
     width: 95%;
     margin: 0 auto;
+    h3{
+      margin-left: -5px;
+      i{
+        font-size: 20px;
+        position: relative;
+        top: -1px;
+      }
+    }
   }
 
   .combobox{
