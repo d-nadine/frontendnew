@@ -2,9 +2,10 @@ formats = {
   full: "%B %d, %Y %i:%M %p"
   short: "%i:%M%p"
   date: "%B, %D %Y"
+  monthYear: "%B %Y"
 }
 
-Ember.Handlebars.registerBoundHelper 'time', (value, options) ->
+Ember.Handlebars.registerBoundHelper 'formatDateTime', (value, options) ->
   return unless value
 
   options.hash.format ||= 'short'

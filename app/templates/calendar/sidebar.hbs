@@ -4,9 +4,9 @@
 </div>
 
 {{#each day in days}}
-  <p>{{time day.date format=date}}</p>
+  <p>{{formatDateTime day.date format=date}}</p>
 
   {{#each item in day}}
-    <div class="block">{{time item.time}} - {{item.title}}</div>
+    <div class="block">{{formatDateTime item.time}} - {{item.title}}</div>
   {{/each}}
 {{/each}}

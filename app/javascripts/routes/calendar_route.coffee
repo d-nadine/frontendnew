@@ -1,7 +1,7 @@
 Radium.CalendarRoute = Ember.Route.extend
-  events: 
+  events:
     toggleCalendarDrawer: ->
-      @toggleDrawer 'calendar/select_user'
+      @send 'toggleDrawer', 'calendar/select_user'
 
     selectUser: (user) ->
       @controllerFor('calendar').set 'user', user
@@ -27,4 +27,4 @@ Radium.CalendarRoute = Ember.Route.extend
 
     @render 'calendar/drawer_buttons',
       outlet: 'buttons'
-      into: 'drawer_panel'
+      into: 'application'

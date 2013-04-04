@@ -4,7 +4,7 @@
       <i class="icon-chevron-left"></i>Last Month
     {{/linkTo}}
 
-    {{format date format="%B %Y"}}
+    {{formatDateTime date format="monthYear"}}
 
     {{#linkTo calendar nextMonth class="btn pull-right"}}
       Next Month<i class="icon-chevron-right"></i>
@@ -42,7 +42,7 @@
           </span>
 
           {{#each calendarDay.visibleContent tagName="ul" class="unstyled"}}
-            <li>{{time time}} - {{truncate title length="15"}}</li>
+            <li>{{formatDateTime time}} - {{truncate title length="15"}}</li>
           {{/each}}
         </div>
         {{#if calendarDay.hiddenContent}}

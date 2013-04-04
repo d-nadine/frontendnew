@@ -13,5 +13,5 @@ Radium.PipelineRoute = Ember.Route.extend
     @render into: 'application'
 
     @render 'pipeline/drawer_buttons',
-      into: 'drawer_panel'
       outlet: 'buttons'
+      into: 'application'

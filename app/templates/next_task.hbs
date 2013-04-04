@@ -28,15 +28,15 @@
 
     <small class="dark">
       {{#if isTodo}}
-        {{time finishBy format=date}}
+        {{formatDateTime finishBy format=date}}
       {{/if}}
 
       {{#if isCall}}
-        {{time finishBy format=date}}
+        {{formatDateTime finishBy format=date}}
       {{/if}}
 
       {{#if isMeeting}}
-        {{time startsAt format=date}}
+        {{formatDateTime startsAt format=date}}
       {{/if}}
     </small>
   {{else}}

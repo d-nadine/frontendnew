@@ -43,7 +43,7 @@
           <p>
         </td>
         <td {{bindAttr class="isPastPayment"}}>
-          {{time payBy format=date}}
+          {{formatDateTime payBy format=date}}
         </td>
         <td>
           {{#if nextTask}}
