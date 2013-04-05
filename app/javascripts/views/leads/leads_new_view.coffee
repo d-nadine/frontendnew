@@ -118,6 +118,15 @@ Radium.LeadsNewView = Ember.View.extend
       existingArea.slideUp('medium')
   ).observes('controller.isExistingContact')
 
+  showDetailDidChange: ( ->
+    addressArea = @$('.address-section')
+
+    return unless addressArea && addressArea.length > 0
+
+    addressArea.slideToggle('medium')
+
+    @$('.showdetails-link i').toggleClass('icon-arrow-down icon-arrow-up')
+  ).observes('controller.showDetail')
 
   contactName: Radium.TypeaheadTextField.extend
     classNameBindings: ['isInvalid', 'open', ':field']
