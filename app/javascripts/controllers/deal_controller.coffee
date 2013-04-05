@@ -7,6 +7,8 @@ Radium.DealController = Radium.ObjectController.extend
   needs: ['dealStatuses', 'users']
 
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
+  newItemDescription: ''
+  newItemWeight: 0
 
   contact: Ember.computed.alias('model.contact')
 

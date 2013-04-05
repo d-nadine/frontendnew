@@ -36,13 +36,13 @@ Radium.DealsNewView= Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
     ).property('value', 'controller.isSubmitted')
 
-  source: Ember.TextField.extend
+  source: Radium.Combobox.extend
     classNameBindings: ['isInvalid']
+    sourceBinding: 'controller.controllers.dealSources.dealSources'
     valueBinding: 'controller.source'
     isInvalid: (->
-      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
+      Ember.isEmpty(@get('controller.source')) && @get('controller.isSubmitted')
     ).property('value', 'controller.isSubmitted')
-
 
   dealStatuses: Ember.Select.extend
     contentBinding: 'controller.statuses'

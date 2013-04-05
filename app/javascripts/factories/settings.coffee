@@ -6,4 +6,11 @@ Factory.define 'settings',
     'Sent Proposal',
     'Waiting Signature'
   ]
+  dealSources: [
+    'Lead Form'
+    'Website'
+    'In Person'
+    'Tradeshow'
+    'Cold Call'
+  ]
   checklist: -> Factory.create 'checklist'

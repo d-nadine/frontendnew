@@ -4,3 +4,4 @@ Radium.Settings = DS.Model.extend
   # that is separate from the global settings?
   signature: DS.attr('string')
   checklist: DS.belongsTo('Radium.Checklist')
+  dealSources: DS.attr('array')
