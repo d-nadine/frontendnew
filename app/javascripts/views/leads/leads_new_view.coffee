@@ -8,6 +8,35 @@ require 'lib/radium/typeahead_textfield'
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
 
+  isNewContactDidChange: ( ->
+    newContactArea = @$('.new-contact')
+    existingArea = @$('.existing')
+
+    return unless newContactArea && newContactArea.length > 0
+
+    existingArea.hide()
+
+    if @get('controller.isNewContact')
+      newContactArea.slideDown('medium')
+    else
+      newContactArea.slideUp('medium')
+  ).observes('controller.isNewContact')
+
+  isExistingContactDidChange: ( ->
+    newContactArea = @$('.new-contact')
+    existingArea = @$('.existing')
+
+    return unless existingArea && existingArea.length > 0
+
+    newContactArea.hide()
+
+    if @get('controller.isExistingContact')
+      existingArea.slideDown('medium')
+    else
+      existingArea.slideUp('medium')
+  ).observes('controller.isExistingContact')
+
+
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
@@ -47,7 +76,6 @@ Radium.LeadsNewView = Ember.View.extend
 
       not @get('controller.emailAddresses').someProperty 'value'
     ).property('controller.emailAddresses.[]', 'controller.isSubmitted')
-
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'

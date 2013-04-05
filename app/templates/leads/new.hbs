@@ -32,7 +32,7 @@
                   <input type="text" class="field input-xlarge" placeholder="Company">
                 </div>
               </div>
-              {{#if isNewContact}}
+              <div class="new-contact">
                 {{view view.emailAddresses}}
                 {{view view.phoneNumbers}}
                 <div class="control-group">
@@ -75,8 +75,7 @@
                   {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
                   <a href="#" {{action submit}} class="btn btn-success">Lead</a>
                 </div>
-              {{/if}}
-              {{#if isExistingContact}}
+              </div>
               <div class="existing">
                 <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is {{view.existingContactText}}. Do you want to add a deal?
                 <div>
@@ -84,7 +83,6 @@
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
                 </div>
               </div>
-              {{/if}}
             </fieldset>
           </div>
         </form>
