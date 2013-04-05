@@ -63,7 +63,7 @@ Radium.MultipleField = Ember.View.extend
     {{/if}}
     {{#if view.showAddNew}}
       <div class="add-new">
-        <a href="#" {{action addNew target="view" bubbles="false"}}>add new</a>
+        <a href="#" {{action addNew target="view" bubbles="false"}}><i class="icon-plus"></i></a>
       </div>
     {{/if}}
 
