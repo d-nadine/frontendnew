@@ -57,6 +57,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()
     @controllerFor('groups').set 'model', Radium.Group.find()
+    @controllerFor('companies').set 'model', Radium.Company.find()
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()
 
@@ -83,6 +84,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
   dealFormDefaults: ( ->
     isNew: true
+    company: null
     name: ''
     user: null
     contact: null

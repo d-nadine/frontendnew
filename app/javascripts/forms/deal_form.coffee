@@ -25,6 +25,7 @@ Radium.DealForm = Radium.Form.extend
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
+    @set('company', null)
 
     return unless @get('checklist.checklistItems')
 

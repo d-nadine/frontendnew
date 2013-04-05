@@ -24,6 +24,13 @@ Radium.DealsNewView= Ember.View.extend
     sourceBinding: 'controller.contacts'
     valueBinding: 'controller.contact'
 
+  companyPicker: Radium.Combobox.extend
+    valueBinding: 'controller.company'
+    sourceBinding: 'controller.controllers.companies'
+    placeholder: 'Company'
+    lookupQuery: (query) ->
+      @get('source').find (item) -> item.get('name') == query
+
   userPicker: Radium.UserPicker.extend
     classNames: ['field']
     leader: null
