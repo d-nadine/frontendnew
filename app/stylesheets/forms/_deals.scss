@@ -3,27 +3,25 @@ select:focus{
 }
 .deals-new-view{
   .checklist.block{
-    padding-bottom: 0;
-    padding-top: 5px;
+    padding-top: 7px;
     margin-bottom: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 
-    .checklist-forecast{
-      position: relative;
-      top: 10px;
-    }
     h1{
       display: inline-block;
       vertical-align: top;
       font-size: 26px;
       line-height: 26px;
-      text-transform: uppercase;
-      position: relative;
-      top: -9px;
       margin-right: 5px;
-      color: $muted;
+      i{
+        font-size: 20px;
+      }
     }
 
+  }
+
+  .checklist-forecast{
+    position: relative;
     .progress.progress-info{
       display: inline-block;
       width: 40%;
@@ -33,6 +31,8 @@ select:focus{
     .checklist-plus{
       display: inline-block;
       vertical-align: top;
+      position: relative;
+      top: -4px;
       .btn{
         height: 22px;
       }
@@ -44,13 +44,31 @@ select:focus{
     .total{
       position: absolute;
       top: 5px;
-      left: 155px;
+      left: 115px;
       font-size: 24px;
 
       &.white{
         color: #fff;
       }
     }
+  }
+
+  .checklist-items{
+    table{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      tr{
+        td{
+          a.btn{
+            position: static;
+          }
+        }
+      }
+    }
+  }
+
+  .checklist-view{
+    margin-left: 111px;
   }
 
   .checklist-items-container{

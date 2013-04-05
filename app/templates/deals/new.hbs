@@ -1,22 +1,7 @@
 <div class="checklist block">
-  <div class="checklist-forecast">
-    <h1>Forecast</h1>
-    <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
-    {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
-    <div class="checklist-plus">
-      <a href="#checklistModal" class="btn btn-success" {{action toggleChecklist target="view" bubbles=false}}>
-        {{#if view.showChecklistItems}}
-          <i class="icon-minus"></i>
-        {{else}}
-          <i class="icon-plus"></i>
-        {{/if}}
-      </a>
-    </div>
-  </div>
-  {{view Radium.ChecklistView}}
+  <h1><i class="icon-plus"></i>New Deal</h1>
 </div>
 <div class="secondary">
-  <h3><i class="icon-plus"></i>New Deal</h3>
   <form class="form form-horizontal">
     <fieldset>
       <div class="control-group">
@@ -58,6 +43,25 @@
           {{view view.source class="field input-xxlarge"}}
         </div>
       </div>
+      <div class="control-group">
+        <label class="control-label">Forecast</label>
+        <div class="controls">
+          <div class="checklist-forecast">
+            <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
+            {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
+            <div class="checklist-plus">
+              <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
+                {{#if view.showChecklistItems}}
+                  <i class="icon-arrow-up"></i>
+                {{else}}
+                  <i class="icon-arrow-down"></i>
+                {{/if}}
+              </a>
+            </div>
+          </div>
+        </div>
+        {{view Radium.ChecklistView}}
+      </div>
       <hr/>
       <div class="control-group">
         <label class="control-label">Deal Status</label>
@@ -90,7 +94,7 @@
       <hr/>
       <div class="control-group actions">
         <a href="#" class="btn cancel" {{action back}}>Cancel</a>
-        <a href="#" class="btn btn-info publish" {{action saveAsDraft}}>Save as draft</a>
+        <a href="#" class="btn publish" {{action saveAsDraft}}>Save as draft</a>
         <a href="#" class="btn btn-success publish" {{action publish}}>Publish</a>
       </div>
     </fieldset>

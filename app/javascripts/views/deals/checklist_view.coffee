@@ -10,7 +10,18 @@ Radium.ChecklistView = Ember.View.extend
 
   newItemDescription: Ember.TextField.extend(Radium.ChecklistItemMixin)
 
-  newItemWeight: Ember.TextField.extend(Radium.ChecklistItemMixin)
+  newItemWeight: Ember.TextField.extend Radium.ChecklistItemMixin,
+    attributeBindings: ['min', 'max']
+
+  showAddButton: ( ->
+    description = @get('itemDescription.value')
+    weight = @get('itemWeight.value')
+
+    return unless /^\d+$/.test weight
+    return unless parseInt(weight) <= 100
+
+    (description.length > 0)
+  ).property('itemDescription.value', 'itemWeight.value')
 
   createNewItem: ->
     description = @get('itemDescription.value')
