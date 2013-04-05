@@ -22,7 +22,7 @@
                 {{view view.contactName class="input-xlarge"}}
                 {{#if isExistingContact}}
                   <div class="contact-status">
-                    {{view.statusDescription}}
+                    <span>{{view.statusDescription}}</span>
                   </div>
                 {{/if}}
               </div>
@@ -78,7 +78,7 @@
               {{/if}}
               {{#if isExistingContact}}
               <div class="existing">
-                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is already an existing customer. Do you want to add a deal?
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is {{view.existingContactText}}. Do you want to add a deal?
                 <div>
                   <a href="#" {{action cancel}} class="btn">Cancel</a>
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}

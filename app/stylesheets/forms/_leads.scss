@@ -75,6 +75,7 @@
     .control-box, .contact-status{
       border: solid 1px $control-border-color;
       border-bottom: 1px solid $control-border-color;
+      padding-bottom: 1px;
     }
 
     .name{
@@ -83,17 +84,23 @@
 
     .is-existing-contact{
       .name{
-        border-right: 1px solid $bright;
+        border-right: none;
         padding-right: 0;
       }
     }
 
     .contact-status{
+      position: relative;
+      left: -5px;
       display: inline-block;
       background-color: white;
       color: $green;
-      padding: 3px 10px 5px 0;
-      margin-left: -5px;
+      padding: 3px 10px 6px 0;
+      border-left: none;
+      span{
+        position: relative;
+        top: 2px;
+      }
     }
 
     .controls.is-invalid input[type=email],
@@ -131,6 +138,11 @@
         padding-left: 15px;
         padding-right: 15px;
       }
+    }
+
+    span.text{
+      position: relative;
+      top: 0.5px;
     }
 
     .existing{

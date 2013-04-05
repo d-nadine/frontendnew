@@ -15,6 +15,20 @@ Radium.LeadsNewView = Ember.View.extend
     ).name
   ).property('controller.status')
 
+  existingContactText: ( ->
+    return unless @get('controller.isExistingContact')
+
+    status = @get('controller.status')
+
+    if status == "lead"
+      "a lead"
+    else if status == "exclude"
+      "excluded from the pipeline"
+    else
+      "an existing customer"
+
+  ).property('controller.isExistingContact')
+
   phoneNumbers: Radium.MultipleFields.extend
     leader: 'Phone'
     type: 'text'
