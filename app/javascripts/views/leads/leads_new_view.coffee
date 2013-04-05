@@ -23,17 +23,17 @@ Radium.LeadsNewView = Ember.View.extend
     status = @get('controller.status')
 
     if status == "lead"
-      "a lead"
-    else if status == "exclude"
-      "excluded from the pipeline"
-    else
-      "an existing customer"
+      "is a lead"
+    else if status == "existing"
+      "is an existing customer"
 
+    ""
   ).property('controller.isExistingContact')
 
   companyPicker: Radium.Combobox.extend
     valueBinding: 'controller.company'
     sourceBinding: 'controller.controllers.companies'
+    placeholder: 'Company'
     lookupQuery: (query) ->
       @get('source').find (item) -> item.get('name') == query
 

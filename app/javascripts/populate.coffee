@@ -17,8 +17,9 @@ class Populator
     ]
 
     companies =for i in [0..20]
-      Factory.create 'company',
-        name: -> Dictionaries.companies.random()
+      Factory.create 'company'
+
+    companiesDictionary = new Dictionary(companies)
 
     users = names.map (name) ->
       Factory.create 'user',

@@ -73,7 +73,7 @@
                 </div>
               </div>
               <div class="existing">
-                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}</span> is {{view.existingContactText}}. Do you want to add a deal?
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}. Do you want to add a deal?
                 <div>
                   <a href="#" {{action cancel}} class="btn">Cancel</a>
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
