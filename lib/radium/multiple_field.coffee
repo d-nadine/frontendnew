@@ -55,8 +55,8 @@ Radium.MultipleField = Ember.View.extend
         </div>
         {{view view.primaryRadio}}
         {{#if view.showDelete}}
-          <a href="#">
-            <i {{action removeSelection target="view" bubbles="false"}} class="icon-trash"></i>
+          <a href="#" {{action removeSelection target="view" bubbles="false"}} >
+            <i class="icon-trash"></i>
           </a>
         {{/if}}
       </div>
