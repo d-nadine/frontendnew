@@ -19,11 +19,11 @@ Radium.MultipleField = Ember.View.extend
   showAddNew: ( ->
     name = @get('current.name')
     index = @get('index')
+    currentIndex = @get('parentView.currentIndex')
     sourceLength = (@get('source.length') - 1)
-    return false if index == sourceLength
-    return false if @get('parentView.currentIndex') == sourceLength
+    return false if currentIndex == sourceLength
 
-    @get('current.value.length') > 1
+    @get('current.value.length') > 1 && index == currentIndex
   ).property('current.value', 'showdropdown', 'parentView.currentIndex')
 
   label: ( ->
@@ -56,7 +56,7 @@ Radium.MultipleField = Ember.View.extend
         {{view view.primaryRadio}}
         {{#if view.showDelete}}
           <a href="#" {{action removeSelection target="view" bubbles="false"}} >
-            <i class="icon-trash"></i>
+            <i class="icon-delete"></i>
           </a>
         {{/if}}
       </div>
