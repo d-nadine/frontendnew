@@ -54,7 +54,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <a href="#" class="showdetails-link" {{action toggleDetail bubbles=false}}><i class="icon-arrow-down"></i></a>
+                  <a href="#" class="btn showdetails-link" {{action toggleDetail bubbles=false}}><i class="icon-arrow-down"></i></a>
                 </div>
                 <div class="address-section">
                   <div class="control-group">
@@ -69,11 +69,11 @@
                 </div>
                 <div class="commit">
                   {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
-                  <a href="#" {{action submit}} class="btn btn-success">Lead</a>
+                  <a href="#" {{action submit}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
                 </div>
               </div>
               <div class="existing">
-                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}. Do you want to add a deal?
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span>{{view.existingContactText}}.  Do you want to add a deal?
                 <div>
                   <a href="#" {{action cancel}} class="btn">Cancel</a>
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}

@@ -136,8 +136,13 @@
       width: 200px;
       margin: 0 auto;
       .btn-success{
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 8px;
+        padding-right: 13px;
+        i{
+          font-size: 10px;
+          position: relative;
+          top: -2px;
+        }
       }
     }
 
