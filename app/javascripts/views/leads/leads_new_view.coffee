@@ -8,35 +8,6 @@ require 'lib/radium/typeahead_textfield'
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
 
-  isNewContactDidChange: ( ->
-    newContactArea = @$('.new-contact')
-    existingArea = @$('.existing')
-
-    return unless newContactArea && newContactArea.length > 0
-
-    existingArea.hide()
-
-    if @get('controller.isNewContact')
-      newContactArea.slideDown('medium')
-    else
-      newContactArea.slideUp('medium')
-  ).observes('controller.isNewContact')
-
-  isExistingContactDidChange: ( ->
-    newContactArea = @$('.new-contact')
-    existingArea = @$('.existing')
-
-    return unless existingArea && existingArea.length > 0
-
-    newContactArea.hide()
-
-    if @get('controller.isExistingContact')
-      existingArea.slideDown('medium')
-    else
-      existingArea.slideUp('medium')
-  ).observes('controller.isExistingContact')
-
-
   statusDescription: ( ->
     currentStatus = @get('controller.status')
     return "" unless currentStatus
@@ -59,6 +30,12 @@ Radium.LeadsNewView = Ember.View.extend
       "an existing customer"
 
   ).property('controller.isExistingContact')
+
+  companyPicker: Radium.Combobox.extend
+    valueBinding: 'controller.company'
+    sourceBinding: 'controller.controllers.companies'
+    lookupQuery: (query) ->
+      @get('source').find (item) -> item.get('name') == query
 
   phoneNumbers: Radium.MaskedMultipleFields.extend
     leader: 'Phone'
@@ -112,6 +89,35 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Address'
     sourceBinding: 'controller.addresses'
     viewType: Radium.AddressMultipleField
+
+  isNewContactDidChange: ( ->
+    newContactArea = @$('.new-contact')
+    existingArea = @$('.existing')
+
+    return unless newContactArea && newContactArea.length > 0
+
+    existingArea.hide()
+
+    if @get('controller.isNewContact')
+      newContactArea.slideDown('medium')
+    else
+      newContactArea.slideUp('medium')
+  ).observes('controller.isNewContact')
+
+  isExistingContactDidChange: ( ->
+    newContactArea = @$('.new-contact')
+    existingArea = @$('.existing')
+
+    return unless existingArea && existingArea.length > 0
+
+    newContactArea.hide()
+
+    if @get('controller.isExistingContact')
+      existingArea.slideDown('medium')
+    else
+      existingArea.slideUp('medium')
+  ).observes('controller.isExistingContact')
+
 
   contactName: Radium.TypeaheadTextField.extend
     classNameBindings: ['isInvalid', 'open', ':field']

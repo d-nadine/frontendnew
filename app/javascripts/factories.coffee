@@ -24,6 +24,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'settings', Radium.Settings
     @map.set 'company', Radium.Company
     @map.set 'phoneNumber', Radium.PhoneNumber
+    @map.set 'company', Radium.Company
 
 Foundry.RadiumAdapter = RadiumAdapter
 

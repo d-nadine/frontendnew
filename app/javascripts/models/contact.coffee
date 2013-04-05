@@ -7,6 +7,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal')
   followers: DS.hasMany('Radium.User', inverse: null)
   user: DS.belongsTo('Radium.User')
+  company: DS.belongsTo('Radium.Company')
 
   name: DS.attr('string')
 

@@ -16,6 +16,10 @@ class Populator
       'Riikka Tarkainen'
     ]
 
+    companies =for i in [0..20]
+      Factory.create 'company',
+        name: -> Dictionaries.companies.random()
+
     users = names.map (name) ->
       Factory.create 'user',
         name: name
