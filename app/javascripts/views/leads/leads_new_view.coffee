@@ -44,15 +44,16 @@ Radium.LeadsNewView = Ember.View.extend
     mask: '+1 (999) 999-9999? x99999'
 
   emailAddresses: Radium.MultipleFields.extend
+    classNameBindings: ['isInvalid']
     isSubmitted: Ember.computed.alias 'controller.isSubmitted'
     type: 'email'
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
     isInvalid: ( ->
-      return false unless @get('isSubmitted')
+      return unless @get('controller.isSubmitted')
 
-      not @get('controller.emailAddresses').someProperty 'value'
-    ).property('controller.emailAddresses.[]', 'controller.isSubmitted')
+      not @get('controller.emailAddresses').someProperty('value')
+    ).property('controller.isSubmitted','controller.emailAddresses.@each.value')
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'
@@ -138,6 +139,12 @@ Radium.LeadsNewView = Ember.View.extend
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isExistingContact: Ember.computed.alias 'controller.isExistingContact'
     isNewContactBinding: 'controller.isNewContact'
+
+    isInvalid: ( ->
+      return unless @get('controller.isSubmitted')
+
+      Ember.isEmpty(@get('value'))
+    ).property('value', 'controller.isSubmitted')
 
     didInsertElement: ->
       @_super.apply this, arguments

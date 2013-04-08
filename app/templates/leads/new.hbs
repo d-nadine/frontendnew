@@ -67,6 +67,7 @@
                   {{view view.addresses}}
                   <hr/>
                 </div>
+                {{partial 'validation_error_message'}}
                 <div class="commit">
                   {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
                   <a href="#" {{action submit}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>

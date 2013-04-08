@@ -3,6 +3,7 @@ require 'forms/form'
 Radium.ContactForm = Radium.Form.extend
   data: ( ->
     name: @get('name')
+    company: @get('company')
     assignedTo: @get('assignedTo')
     notes: @get('notes')
     source: @get('source')
@@ -14,8 +15,10 @@ Radium.ContactForm = Radium.Form.extend
 
   isValid: ( ->
     return if Ember.isEmpty(@get('name'))
+    return false unless @get('emailAddresses').someProperty 'value'
+    return if Ember.isEmpty(@get('company'))
     true
-  ).property('name', 'emailAddresses.[]')
+  ).property('name', 'emailAddresses.@each.value')
 
   commit:  ->
     contact = Radium.Contact.createRecord @get('data')
@@ -35,3 +38,6 @@ Radium.ContactForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
+    @set 'name', ''
+    @set 'notes', ''
+    @set 'source', ''

@@ -35,7 +35,7 @@ Radium.MultipleField = Ember.View.extend
 
   layout: Ember.Handlebars.compile """
     <label class="control-label">{{view.label}}</label>
-    <div class="controls" {{!bindAttr class="view.isInvalid:is-invalid"}}>
+    <div class="controls" {{bindAttr class="view.parentView.isInvalid:is-invalid"}}>
       {{yield}}
     </div>
     {{#if view.showDropDown}}
