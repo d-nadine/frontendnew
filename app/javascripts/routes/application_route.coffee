@@ -49,7 +49,7 @@ Radium.ApplicationRoute = Radium.Route.extend
       controller.get('model').reset()
       controller.set 'user', @controllerFor('currentUser').get('model')
       controller.set('contact', contact)
-      controller.set('source', Ember.Object.create(name: 'Lead Form'))
+      controller.set('source', 'Lead Form')
       @transitionTo 'deals.new'
 
   setupController: ->
