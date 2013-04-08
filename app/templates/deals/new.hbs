@@ -59,8 +59,8 @@
         <label class="control-label">Forecast</label>
         <div class="controls">
           <div class="checklist-forecast">
-            <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
             {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
+            <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
             <div class="checklist-plus">
               <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
                 {{#if view.showChecklistItems}}
