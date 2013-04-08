@@ -57,7 +57,7 @@
         // FIXME:  mixin with is-finished?
         background-color: $dark-background;
 
-        .checker label::after {
+        .icon i::after {
           border-color: $muted
         }
 
@@ -104,16 +104,6 @@
       }
     }
 
-    .checker {
-      label {
-        background: url('/images/icons/meeting.png') no-repeat;
-      }
-
-      input:not([disabled]) + label:hover {
-        background: url('/images/icons/meeting.png') no-repeat !IMPORTANT;
-      }
-    }
-
     .btn-link:hover {
       text-decoration: none;
     }
@@ -123,7 +113,7 @@
       border: none;
     }
 
-    .checker {
+    .icon {
       margin-top: 6px;
     }
 
@@ -182,6 +172,14 @@
             width: 10%;
             color: red;
           }
+        }
+      }
+
+      .autocomplete{
+        margin-top: 10px;
+        padding: 5px;
+        ul{
+          padding: 3px;
         }
       }
     }

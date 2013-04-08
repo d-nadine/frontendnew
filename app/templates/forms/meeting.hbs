@@ -1,6 +1,8 @@
 <form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :primary"}} {{action expand}}>
-    <div class="checker pull-left"><label></label></div>
+    <div class="icon pull-left">
+      <i class="icon-calendar"></i>
+    </div>
 
     {{#if showOptions}}
       <a tabindex="3" href="#" class="btn btn-link pull-right" {{action toggleExpanded bubble=false}}>

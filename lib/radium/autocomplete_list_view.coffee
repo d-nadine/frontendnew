@@ -12,9 +12,9 @@ Radium.AutocompleteView = Ember.View.extend
     <ul class="as-selections">
     {{#each view.source}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
-        {{#unless controller.isEditable}}
+        {{#if controller.isEditable}}
         <a class="as-close" {{action removeSelection this target="view"}}>×</a>
-        {{/unless}}
+        {{/if}}
         {{#if view.showAvatar}}
           {{avatar this}}
         {{/if}}
@@ -89,6 +89,7 @@ Radium.AutocompleteView = Ember.View.extend
     @resizeInputBox()
 
   autocomplete: Ember.TextField.extend
+    classNameBindings: [':field']
     currentUser: Ember.computed.alias 'controller.currentUser'
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
