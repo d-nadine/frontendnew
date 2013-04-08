@@ -19,11 +19,11 @@ Radium.MeetingForm = Radium.Form.extend
   ).property('startsAt', 'endsAt')
 
   reset: ->
+    return unless @get('isNew')
     @_super.apply this, arguments
     @get('users').clear()
     @get('contacts').clear()
     @get('users').addObject(@get('user')) if @get('user') && @get('isNew')
-
 
   isValid: ( ->
     return if Ember.isEmpty(@get('topic'))
