@@ -17,10 +17,11 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
   ).property('currentUser')
 
   editableMeeting: ( ->
-    meeting = Radium.MeetingForm.create
-      content: Radium.Meeting.find(1)
-
-    meeting
+    meeting = Radium.Meeting.find().toArray().find (m) ->
+        m.get("users.length") > 1
+    debugger
+    Radium.MeetingForm.create
+      content: meeting
   ).property()
 
   uneditableMeeting: (->

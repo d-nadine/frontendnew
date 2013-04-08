@@ -23,10 +23,16 @@ class Populator
 
     userDictionary = new Dictionary(users)
 
+    meetingHash =
+      user: -> userDictionary.random()
+      users: -> [userDictionary.set[0], userDictionary.set[1]]
+      startsat: Ember.DateTime.create().advance(day: 7)
+      endsat: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+
     contacts = for i in [0..20]
       Factory.create 'contact',
         user: -> userDictionary.random()
-        meetings: -> [Factory.create('meeting')]
+        meetings: -> [Factory.create 'meeting', meetingHash]
         todos: -> [Factory.create('todo'), Factory.create('call')]
 
     contactDictionary = new Dictionary(contacts)
@@ -62,18 +68,13 @@ class Populator
         bcc: -> [userDictionary.random(), contactDictionary.random()]
 
         meetings: -> [
-          Factory.create('meeting')
+          Factory.create 'meeting', meetingHash
         ]
 
     for i in [0..20]
       Factory.create 'group'
 
-    Factory.create 'meeting',
-      user: -> userDictionary.random()
-      users: -> [userDictionary.random()]
-      contacts: -> [contactDictionary.random()]
-      startsAt: Ember.DateTime.create().advance(day: 7)
-      endsAt: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+    Factory.create 'meeting', meetingHash
 
     for i in [0..10]
       Factory.create 'discussion',
@@ -91,7 +92,7 @@ class Populator
           Factory.create('call', isFinished: true)
         ]
         meetings: -> [
-          Factory.create('meeting')
+          Factory.create 'meeting', meetingHash
         ]
 
     Factory.adapter.store.commit()
