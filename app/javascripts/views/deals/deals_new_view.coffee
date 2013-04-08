@@ -43,17 +43,57 @@ Radium.DealsNewView= Ember.View.extend
       Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
     ).property('value', 'controller.isSubmitted')
 
-  source: Ember.TextField.extend
-    classNameBindings: ['isInvalid']
+  # FIXME: refactor after agreeing on approach
+  source: Ember.View.extend
+    classNameBindings: [
+      'isInvalid'
+      'disabled:is-disabled'
+      ':combobox'
+      ':control-box'
+    ]
     sourceBinding: 'controller.controllers.dealSources.dealSources'
     valueBinding: 'controller.source'
+    queryBinding: 'queryToValueTransform'
+    placeholder: 'Source'
 
-    didInsertElement: ->
-      @$().typeahead source: @get('source')
+    queryToValueTransform: ((key, value) ->
+      if arguments.length == 2
+        @set 'value', value
+      else if !value && @get('value')
+        @get 'value'
+      else
+        value
+    ).property('value')
 
-    isInvalid: (->
-      Ember.isEmpty(@get('controller.source')) && @get('controller.isSubmitted')
-    ).property('value', 'controller.isSubmitted')
+    template: Ember.Handlebars.compile """
+      {{view view.textField}}
+
+      {{#unless view.disabled}}
+        <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
+          <button class="btn dropdown-toggle" tabindex="-1">
+            <i class="icon-arrow-down"></i>
+          </button>
+          <ul class="dropdown-menu">
+            {{#each item in view.source}}
+              <li><a {{action selectItem item target=view href=true bubbles=false}}>{{item}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/unless}}
+    """
+
+    textField: Ember.TextField.extend
+      valueBinding: 'parentView.query'
+      placeholderBinding: 'parentView.placeholder'
+      didInsertElement: ->
+        @$().typeahead source: @get('parentView.source')
+
+    toggleDropdown: (event) ->
+      @toggleProperty 'open'
+
+    selectItem: (text) ->
+      @set 'open', false
+      @set 'value', text
 
   dealStatuses: Ember.Select.extend
     contentBinding: 'controller.statuses'
