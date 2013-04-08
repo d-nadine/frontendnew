@@ -33,12 +33,15 @@ Radium.DealForm = Radium.Form.extend
       item.set('isFinished', false)
 
   isValid: ( ->
-    return if Ember.isEmpty(@get('name'))
-    return if Ember.isEmpty(@get('contact'))
-    return if Ember.isEmpty(@get('user'))
+    return false if Ember.isEmpty(@get('name'))
+    return false if Ember.isEmpty(@get('contact'))
+    return false if Ember.isEmpty(@get('user'))
+    return false if Ember.isEmpty(@get('company'))
+    return false if Ember.isEmpty(@get('source'))
+    return false if Ember.isEmpty(@get('description'))
 
     true
-  ).property('name','contact','user')
+  ).property('name','contact','user','company','source','description')
 
   commit:  ->
     deal = Radium.Contact.createRecord @get('data')
