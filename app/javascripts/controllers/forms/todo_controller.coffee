@@ -1,6 +1,6 @@
 require 'controllers/forms/form_controller'
 
-Radium.FormsTodoController = Radium.FormController.extend Radium.FormsControllerMixin,
+Radium.FormsTodoController = Radium.FormController.extend
   needs: ['users']
 
   canFinish: (->

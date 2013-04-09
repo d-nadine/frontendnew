@@ -1,4 +1,4 @@
-Radium.FormsMeetingController = Radium.FormController.extend Radium.FormsControllerMixin,
+Radium.FormsMeetingController = Radium.FormController.extend
   needs: ['groups','contacts','users']
   now: Ember.computed.alias('clock.now')
   groups: Ember.computed.alias('controllers.groups')
