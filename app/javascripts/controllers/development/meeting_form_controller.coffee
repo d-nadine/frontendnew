@@ -39,8 +39,8 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
   ).property()
 
   editablePassedMeeting: ( ->
-    users = Radium.User.find().slice(4)
-    Radium.MeetingForm.create
+    users = Radium.User.find().slice(4, 7)
+    meeting = Radium.MeetingForm.create
       content: Factory.createObject 'meeting',
         user: @get('currentUser')
         users: users
@@ -49,6 +49,7 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
         startsAt: Ember.DateTime.create().advance(day: -7)
         endsAt: Ember.DateTime.create().advance(day: -7).advance(hour: 3)
         isEditable: true
+    meeting
   ).property()
 
   uneditablePassedMeeting: ( ->
@@ -65,7 +66,7 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
   ).property()
 
   justAddedMeeting: ( ->
-    users = Radium.User.find().slice(4)
+    users = Radium.User.find().slice(2, 4)
     Radium.MeetingForm.create
       content: Factory.createObject 'meeting',
         user: @get('currentUser')

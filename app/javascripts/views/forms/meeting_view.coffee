@@ -15,9 +15,6 @@ Radium.FormsMeetingView = Radium.FormView.extend
   didInsertElement: ->
     @_super.apply this, arguments
 
-    $('html').on 'click.cancel-meeting', ->
-      $('cancel-meeting').hide()
-
   willDestroyElement: ->
     $('html').off 'click.cancel-meeting'
 
@@ -26,11 +23,14 @@ Radium.FormsMeetingView = Radium.FormView.extend
 
     dialogue =  @$('.cancel-meeting')
 
+    dialogue.show()
+
+    event.stopPropagation()
+
     $('html').on 'click.cancel-meeting', ->
       $('html').off 'click.cancel-meeting'
       dialogue.hide()
 
-    dialogue.show()
     false
 
   cancelMeetingDialogue: Ember.View.extend
@@ -41,8 +41,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
         <div>{{controller.cancellationText}}</div>
         <div>
           <div>
-            <button {{action cancel target="view"}} class="btn btn-no">No</button>
-            <button {{action cancelMeeting target="view"}} class="btn btn-danger">YES, CANCEL</button>
+            <button class="btn btn-no">No</button>
+            <button {{action showCancelMeetingDialogue target="view" bubbles=false}} class="btn btn-danger">YES, CANCEL</button>
           </div>
         </div>
         <div>Notifications will be sent to attendees</div>
