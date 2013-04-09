@@ -41,8 +41,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
         <div>{{controller.cancellationText}}</div>
         <div>
           <div>
-            <button class="btn btn-no">No</button>
-            <button {{action showCancelMeetingDialogue target="view" bubbles=false}} class="btn btn-danger">YES, CANCEL</button>
+            <button {{action cancel target="view" bubbles=false}} class="btn btn-no">No</button>
+            <button {{action cancelMeeting target="view" bubbles=false}} class="btn btn-danger">YES, CANCEL</button>
           </div>
         </div>
         <div>Notifications will be sent to attendees</div>
