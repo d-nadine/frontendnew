@@ -67,7 +67,7 @@
           </a>
         </div>
         {{#if calendarsOpen}}
-          {{template 'forms/existing_meetings'}}
+          {{partial 'forms/existing_meetings'}}
         {{/if}}
       </div>
       <div class="save">
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      {{template 'shared/related_tasks'}}
+      {{partial 'shared/related_tasks'}}
       {{partial 'add_action'}}
     </div>
   {{/if}}
