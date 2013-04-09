@@ -22,6 +22,12 @@
     }
   }
 
+  &:not(.is-new){
+    .secondary{
+      padding-bottom: 33px;
+    }
+  }
+
   &.just-added .primary {
     .checker label {
       color: $green;

@@ -1,4 +1,4 @@
-Radium.MessagesDiscussionController = Ember.ObjectController.extend
+Radium.MessagesDiscussionController = Radium.FormController.extend
   aboutDeal: (->
     @get('reference') instanceof Radium.Deal
   ).property('reference')

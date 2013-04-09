@@ -1,4 +1,6 @@
-Radium.FormsTodoController = Ember.ObjectController.extend Radium.FormsControllerMixin,
+require 'controllers/forms/form_controller'
+
+Radium.FormsTodoController = Radium.FormController.extend Radium.FormsControllerMixin,
   needs: ['users']
 
   canFinish: (->

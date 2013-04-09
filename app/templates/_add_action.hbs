@@ -1,0 +1,10 @@
+{{#if showAddAction }}
+  <div class="adder">
+    <div class="arrow"></div>
+    {{#if showFormBox}}
+      <i class="icon-minus" {{action toggleFormBox}}></i>
+    {{else}}
+      <i class="icon-plus" {{action toggleFormBox}}></i>
+    {{/if}}
+  </div>
+{{/if}}

@@ -11,6 +11,7 @@
   }
 
   .secondary {
+    position: relative;
     background-color: $background;
     border: solid 1px $dark-background;
     border-top: none;
@@ -24,6 +25,14 @@
       background-color: darken($dark-background, 50);
       color: $bright
     }
+  }
+
+  &.block-blue{
+    width: 94.1%;
+    margin: 0 auto;
+    margin-top: -20px;
+    border-top: none;
+    margin-bottom: 10px;
   }
 }
 

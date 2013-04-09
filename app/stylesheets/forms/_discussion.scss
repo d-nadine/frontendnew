@@ -1,5 +1,6 @@
 .discussion-form {
   .primary {
+    position: relative;
     i {
       display: block;
       float: left;
@@ -12,7 +13,14 @@
   }
 
   .second-row {
+    position: relative;
     text-align: right;
+  }
+
+  &:not(.is-new){
+    .second-row{
+      padding-bottom: 33px;
+    }
   }
 
   &.just-added {

@@ -1,4 +1,4 @@
-<form {{bindAttr class="isExpandable isEditable isExpanded justAdded :form :form-inline :call-form"}}>
+<form {{bindAttr class="isExpandable isEditable isNew isExpanded justAdded :form :form-inline :call-form"}}>
   <div {{bindAttr class="isFinished :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
@@ -39,6 +39,7 @@
       {{#if isEditable}}
         <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
       {{/if}}
+      {{partial 'add_action'}}
     </div>
   {{/if}}
 </form>

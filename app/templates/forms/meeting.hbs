@@ -78,6 +78,7 @@
           <button class="btn" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
         </div>
       </div>
+      {{partial 'add_action'}}
     </div>
   {{/if}}
   {{view view.cancelMeetingDialogue}}

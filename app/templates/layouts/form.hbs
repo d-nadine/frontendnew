@@ -1,4 +1,9 @@
 {{yield}}
+{{#if showFormBox}}
+  <div class="form block block-connected block-blue">
+    {{render "form_box" formBox}}
+  </div>
+{{/if}}
 {{#if showComments}}
   {{#if isExpanded}}
   <div class="block block-arrow">
