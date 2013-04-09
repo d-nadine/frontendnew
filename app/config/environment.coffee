@@ -1,3 +1,1 @@
 window.ENV = {}
-
-ENV.EXPERIMENTAL_CONTROL_HELPER = true

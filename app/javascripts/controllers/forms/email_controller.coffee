@@ -5,6 +5,7 @@ Radium.FormsEmailController = Ember.ObjectController.extend Radium.CurrentUserMi
   contacts: Ember.computed.alias 'controllers.contacts'
   signature: Ember.computed.alias 'controllers.settings.user.signature'
   user: Ember.computed.alias 'controllers.currentUser'
+  isEditable: true
 
   people: ( ->
     users = @get('users').mapProperty('content')

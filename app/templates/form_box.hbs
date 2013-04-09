@@ -27,19 +27,19 @@
 
   <div class="form-container">
     {{#if showTodoForm}}
-      {{control "forms/todo" todoForm}}
+      {{render "forms/todo" todoForm}}
     {{/if}}
 
     {{#if showCallForm}}
-      {{control "forms/call" callForm}}
+      {{render "forms/call" callForm}}
     {{/if}}
 
     {{#if showDiscussionForm}}
-      {{control "forms/discussion" discussionForm}}
+      {{render "forms/discussion" discussionForm}}
     {{/if}}
 
     {{#if showMeetingForm}}
-      {{control "forms/meeting" meetingForm}}
+      {{render "forms/meeting" meetingForm}}
     {{/if}}
   </div>
 </div>

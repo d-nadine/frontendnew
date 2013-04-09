@@ -6,15 +6,15 @@
 
     {{#each task in group}}
       {{#if showTodoForm}}
-        {{control "forms/todo" task}}
+        {{render "forms/todo" task}}
       {{/if}}
 
       {{#if showCallForm}}
-        {{control "forms/call" task}}
+        {{render "forms/call" task}}
       {{/if}}
 
       {{#if showMeetingForm}}
-        {{control "forms/meeting" task}}
+        {{render "forms/meeting" task}}
       {{/if}}
     {{/each}}
   {{/each}}
