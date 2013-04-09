@@ -18,7 +18,7 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
 
   editableMeeting: ( ->
     meeting = Radium.Meeting.find().toArray().find (m) ->
-        m.get("users.length") > 1
+        m.get("todos.length") > 1
 
     Radium.MeetingForm.create
       content: meeting

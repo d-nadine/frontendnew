@@ -1,7 +1,8 @@
 require 'lib/radium/aggregate_array_proxy'
 
-Radium.Meeting = Radium.Model.extend Radium.CommentsMixin, 
+Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
+  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
   users: DS.hasMany('Radium.User')
@@ -22,6 +23,12 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   deal: DS.belongsTo('Radium.Deal')
   email: DS.belongsTo('Radium.Email')
   todo: DS.belongsTo('Radium.Todo')
+  discussion: DS.belongsTo('Radium.Discussion')
+
+  todos: DS.hasMany('Radium.Todo')
+
+  tasks: Radium.computed.tasks('todos', 'meetings')
+
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

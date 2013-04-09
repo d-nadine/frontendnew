@@ -20,6 +20,12 @@
     margin: 0 auto;
   }
 
+  .related-tasks{
+    margin: 12px 0 4px 0;
+    background-color: $bright;
+    padding: 5px;
+  }
+
   &.just-added {
     .primary {
       background-color: darken($dark-background, 50);

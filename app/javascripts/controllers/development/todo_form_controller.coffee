@@ -11,9 +11,11 @@ Radium.DevelopmentTodoFormController = Ember.Controller.extend Radium.CurrentUse
   ).property('currentUser')
 
   editableTodo: (->
+    todo = Radium.Todo.find().toArray().find (t) ->
+        t.get("todos.length") > 1
+
     Radium.TodoForm.create
-      content: Factory.createObject 'todo',
-        reference: Factory.createObject('contact')
+      content: todo
   ).property()
 
   editableFinishedTodo: (->
