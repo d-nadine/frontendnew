@@ -92,15 +92,17 @@
   <button class="btn pull-right">Follow</button>
 </h2>
 
-{{#each follower in followers tagName="ul"}}
-  <li>
-    {{avatar follower}}
-    {{follower.name}}</br>
-    {{follower.title}}
-  </li>
-{{else}}
-  No followers yet!
-{{/each}}
+<ul>
+  {{#each follower in followers}}
+    <li>
+      {{avatar follower}}
+      {{follower.name}}</br>
+      {{follower.title}}
+    </li>
+  {{else}}
+    No followers yet!
+  {{/each}}
+</ul>
 
 <hr />
 
