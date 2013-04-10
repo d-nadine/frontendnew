@@ -16,6 +16,8 @@ Radium = Em.Application.create
 
 window.Radium = Radium
 
+require /lib\/base/
+
 require 'lib/radium/computed'
 
 require 'lib/radium/run_when_loaded_mixin'

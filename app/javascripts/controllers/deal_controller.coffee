@@ -1,14 +1,10 @@
 require 'forms/todo_form'
 
-Radium.DealController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.DealController = Radium.ObjectController.extend Radium.CurrentUserMixin,
   # FIXME: this should be null and not an empty string
   deletionToken: ''
 
-  needs: ['clock', 'dealStatuses', 'users']
-
-  clock: Ember.computed.alias('controllers.clock')
-  tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-  now: Ember.computed.alias('clock.now')
+  needs: ['dealStatuses', 'users']
 
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
 
