@@ -21,21 +21,16 @@
             </td>
           </tr>
         {{/each}}
-      </tbody>
-    </table>
-    <p class="extra-checklist-item muted">FIXME:  Supply some copy that describes why there are fields below for an extra check list item</p>
-    <table class="extra-checklist-item">
-      <tbody>
         <tr>
-          <td>Description</td>
+          <td>&nbsp;</td>
           <td>
-            {{view view.newItemDescription class="field input-xxlarge" viewName="itemDescription"}}
+            <label>
+              {{view Ember.Checkbox checkedBinding="controller.newItemFinished" class="additional-check"}}
+            </label>
+            {{view view.newItemDescription class="field input-xlarge" viewName="itemDescription"}}
           </td>
-        </tr>
-        <tr>
-          <td>Percentage</td>
           <td>
-            {{view view.newItemWeight type="number" max="100" value="0" class="field input-mini" viewName="itemWeight"}}%
+            {{view view.newItemWeight type="number" max="100" value="0" class="field input-mini"}}%
             {{#if view.showAddButton }}
             <a href="#" {{action createNewItem target="view"}} class="btn">
               <i class="icon-plus"></i>

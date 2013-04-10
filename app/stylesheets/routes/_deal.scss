@@ -6,6 +6,11 @@
     }
   }
 
+  .additional-check{
+    position: relative;
+    top: -7px;
+  }
+
   .forecast{
     position: relative;
     hr{
@@ -23,7 +28,7 @@
       .btn, .btn:focus {
         outline: none;
       }
-    }
+    } 
 
     .total{
       position: absolute;

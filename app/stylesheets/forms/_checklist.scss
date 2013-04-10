@@ -8,11 +8,9 @@
     font-size: 18px;
   }
 }
-
-.extra-checklist-item.muted{
-  border-top: 1px solid $dark-background;
-  border-bottom: 1px solid $dark-background;
-  padding: 5px;
+.additional-check{
+  position: relative;
+  top: -3px;
 }
 
 .checklist-items{
@@ -44,8 +42,7 @@
         a.btn{
           position: relative;
           top: -7px;
-        }
-
+        } 
       }
     }
   }

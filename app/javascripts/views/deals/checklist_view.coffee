@@ -20,14 +20,15 @@ Radium.ChecklistView = Ember.View.extend
     weight = @get('controller.newItemWeight')
 
     return unless /^\d+$/.test weight
-    return unless parseInt(weight) <= 100
+    return unless parseInt(weight) <= 100 && parseInt(weight) > 0
 
     (description.length > 0)
   ).property('controller.newItemDescription', 'controller.newItemWeight')
 
   createNewItem: ->
-    description = @get('itemDescription.value')
-    weight = parseInt(@get('itemWeight.value'))
+    description = @get('controller.newItemDescription')
+    weight = parseInt(@get('controller.newItemWeight'))
+    finished = @get('controller.newItemFinished')
     return if Ember.isEmpty(description)
     return if Ember.isEmpty(weight)
 
@@ -36,7 +37,7 @@ Radium.ChecklistView = Ember.View.extend
     newItem =
             description: description
             weight: weight
-            isFinished: true
+            isFinished: finished
             kind: 'additional'
             checklist: checklist
 
@@ -48,7 +49,8 @@ Radium.ChecklistView = Ember.View.extend
     if @get('controller.isNew')
       @get('checklist.checklistItems').addObject newRecord
 
-    @set('itemDescription.value', '')
-    @set('itemWeight.value', '0')
+    @set('controller.newItemDescription', '')
+    @set('controller.newItemWeight', '0')
+    @set('controller.newItemFinished',false)
     @get('itemDescription').$().focus()
 
