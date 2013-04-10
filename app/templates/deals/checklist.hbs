@@ -14,7 +14,7 @@
             <td {{bindAttr class="isFinished:is-finished:muted"}}>
               {{weight}}%
               {{#if isAdditional}}
-                <a href="#" {{action removeAdditionalItem this bubbles="false"}}>
+                <a href="#" class="additional" {{action removeAdditionalItem this bubbles="false"}}>
                   delete
                 </a>
               {{/if}}

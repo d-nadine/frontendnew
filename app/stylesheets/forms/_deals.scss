@@ -22,6 +22,7 @@ select:focus{
 
   .checklist-forecast{
     position: relative;
+    margin-bottom: -20px;
     .progress.progress-info{
       display: inline-block;
       width: 40%;
@@ -30,8 +31,6 @@ select:focus{
     }
 
     .checklist-plus{
-      display: inline-block;
-      vertical-align: top;
       position: relative;
       top: -4px;
       .btn{
@@ -60,7 +59,7 @@ select:focus{
       margin-bottom: 10px;
       tr{
         td{
-          a.btn{
+          a.btn, a.additional{
             position: static;
           }
         }
@@ -68,13 +67,10 @@ select:focus{
     }
   }
 
-  .checklist-view{
-    margin-left: 111px;
-  }
-
   .checklist-items-container{
     display: none;
-    margin-bottom: 16px;
+    margin-top: 10px;
+    margin-bottom: 0;
   }
 
   input[type=number].negotitating{
@@ -153,7 +149,7 @@ select:focus{
   }
 
   .actions{
-    margin-left: 112px;
+    margin-left: 200px;
     .btn{
       padding: 5px 60px 5px 60px;
     }

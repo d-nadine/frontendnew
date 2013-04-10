@@ -7,6 +7,8 @@ Radium.DealsNewView= Ember.View.extend
   disabled: Ember.computed.not 'controller.hasContact'
 
   toggleChecklist: (evt) ->
+    return if @get('disabled')
+
     @$('.checklist-items-container').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
 
