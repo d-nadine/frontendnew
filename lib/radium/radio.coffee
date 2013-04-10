@@ -19,10 +19,10 @@ Radium.Radiobutton =  Ember.View.extend
     value = radio.val()
 
     if !Ember.isEmpty(selectedValue) && selectedValue == value
-      radio.attr('checked', true)
+      radio.prop('checked', true)
       @updateElementValue()
     else
-      radio.attr('checked', false)
+      radio.prop('checked', false)
   ).observes('selectedValue')
 
   change: (evt) ->

@@ -6,6 +6,13 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   showDetail: false
   form: null
   isNewContact: false
+  showExisting: false
+  existingDetailsShown: false
+
+  changeExisting: ->
+    @set 'model.status', 'lead'
+    @set 'existingDetailsShown', false
+    @set 'showExisting', true
 
   isExistingContact: ( ->
     return false unless @get('model')
@@ -22,6 +29,13 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
     @set 'form', @get('model') if @get('model.isNew')
   ).observes('model')
+
+  isCustomer: ( ->
+    status = @get('model.status')
+    return false unless status
+
+    status == "lead" || status == "existing"
+  ).property('model.status')
 
   toggleDetail: ->
     @toggleProperty 'showDetail'
@@ -41,6 +55,12 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      contact = @get('model').commit (contact)
-      @transitionToRoute 'contact', contact
+      debugger
+
+      if @get('isNew')
+        contact = @get('model').commit (contact)
+        @transitionToRoute 'contact', contact
+      else
+        @get('store').commit()
+        @transitionToRoute 'contact', @get('model')
     ), 1200)

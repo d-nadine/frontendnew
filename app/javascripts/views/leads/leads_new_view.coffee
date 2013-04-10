@@ -23,11 +23,11 @@ Radium.LeadsNewView = Ember.View.extend
     status = @get('controller.status')
 
     if status == "lead"
-      "is a lead"
+      return "is a lead.  Do you want to add a deal?"
     else if status == "existing"
-      "is an existing customer"
+      return "is an existing customer.  Do you want to add a deal?"
 
-    ""
+    "is not a lead, do you want to update their status to lead?"
   ).property('controller.isExistingContact')
 
   companyPicker: Radium.Combobox.extend
@@ -52,11 +52,13 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.emailAddresses'
     isInvalid: ( ->
       return unless @get('controller.isSubmitted')
+      return unless @get('controller.isNew')
 
       not @get('controller.emailAddresses').someProperty('value')
     ).property('controller.isSubmitted','controller.emailAddresses.@each.value')
 
   userPicker: Radium.UserPicker.extend
+    classNameBindings: [':field']
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.model.assignedTo'
 
@@ -92,7 +94,7 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.addresses'
     viewType: Radium.AddressMultipleField
 
-  isNewContactDidChange: ( ->
+  contactDidChange: ( ->
     newContactArea = @$('.new-contact')
     existingArea = @$('.existing')
 
@@ -100,11 +102,11 @@ Radium.LeadsNewView = Ember.View.extend
 
     existingArea.hide()
 
-    if @get('controller.isNewContact')
+    if @get('controller.isNewContact') || @get('controller.showExisting')
       newContactArea.slideDown('medium')
     else
       newContactArea.slideUp('medium')
-  ).observes('controller.isNewContact')
+  ).observes('controller.isNewContact','controller.showExisting')
 
   isExistingContactDidChange: ( ->
     newContactArea = @$('.new-contact')
@@ -119,6 +121,14 @@ Radium.LeadsNewView = Ember.View.extend
     else
       existingArea.slideUp('medium')
   ).observes('controller.isExistingContact')
+
+  showExistingDetails: ->
+    newContactArea = @$('.new-contact')
+
+    return unless newContactArea && newContactArea.length > 0
+
+    newContactArea.slideToggle('medium')
+    @toggleProperty 'controller.existingDetailsShown'
 
   showDetailDidChange: ( ->
     addressArea = @$('.address-section')
@@ -158,24 +168,7 @@ Radium.LeadsNewView = Ember.View.extend
       @set 'value', object.get('name')
       @set 'controller.model', object
 
-    timeoutId: null
-
-    keyPress: (evt) ->
-      return if $('ul.typeahead:visible').length
-
+    blur: ->
       return if @get('isExistingContact') || @get('isNewContact')
-
-      timeoutId = @get('timeoutId')
-      if timeoutId
-        clearTimeout timeoutId
-
-      timeoutId = setTimeout(( =>
-        value = @$('input[type=text]').val()
-
-        if value?.length < 3
-          @set('isNewContact', false)
-
-          return
-
-        @set('isNewContact', true)
-      ), 800)
+      return if @get('value')?.length < 3
+      @set('isNewContact', true)

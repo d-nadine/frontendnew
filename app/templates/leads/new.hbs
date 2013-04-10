@@ -1,6 +1,6 @@
 <div>
-  <h1>Lead</h1>
   <div class="tabbable">
+    <h1><i class="icon-plus"></i>Lead</h1>
     <ul class="nav nav-pills">
       <li class="active">
         <a href="#single" data-toggle="tab">Single Lead</a>
@@ -16,6 +16,7 @@
       <div id="single" class="tab-pane active">
         <form class="form form-horizontal">
           <div class="secondary">
+            {{#linkTo unimplemented classNames="close"}}x{{/linkTo}}
             <fieldset>
               <div {{bindAttr class="isExistingContact :control-group"}}>
                 <label class="control-label">Name</label>
@@ -70,20 +71,31 @@
                   <hr/>
                 </div>
                 {{partial 'validation_error_message'}}
+                {{#unless existingDetailsShown}}
                 <div class="commit">
-                  {{#linkTo unimplemented classNames="btn"}}Cancel{{/linkTo}}
                   <a href="#" {{action submit}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
                 </div>
+                {{/unless}}
               </div>
               <div class="existing">
-                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span>{{view.existingContactText}}.  Do you want to add a deal?
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
                 <div>
-                  <a href="#" {{action cancel}} class="btn">Cancel</a>
+                {{#if isCustomer}}
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
+                {{else}}
+                  <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
+                    {{#unless existingDetailsShown}}
+                      <i class="icon-arrow-down"></i>
+                    {{else}}
+                      <i class="icon-arrow-up"></i>
+                    {{/unless}}
+                  </a>
+                  <a href="#" {{action changeExisting bubbles=false}} class="btn btn-success">Yes</a>
+                {{/if}}
                 </div>
               </div>
-            </fieldset>
-          </div>
+              </fieldset>
+            </div>
         </form>
       </div>
       <div id="file" class="tab-pane">
