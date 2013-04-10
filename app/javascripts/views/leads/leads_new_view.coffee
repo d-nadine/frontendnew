@@ -33,6 +33,7 @@ Radium.LeadsNewView = Ember.View.extend
   companyPicker: Radium.Combobox.extend
     valueBinding: 'controller.company'
     sourceBinding: 'controller.controllers.companies'
+    disabledBinding: 'controller.isExistingContact'
     placeholder: 'Company'
     lookupQuery: (query) ->
       @get('source').find (item) -> item.get('name') == query

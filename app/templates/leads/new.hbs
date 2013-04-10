@@ -19,17 +19,19 @@
             <fieldset>
               <div {{bindAttr class="isExistingContact :control-group"}}>
                 <label class="control-label">Name</label>
-                {{view view.contactName class="input-xlarge"}}
-                {{#if isExistingContact}}
-                  <div class="contact-status">
-                    <span>{{view.statusDescription}}</span>
+                <div class="controls">
+                  <div class="control-box field contact-name">
+                    {{view view.contactName}}
+                    {{#if isExistingContact}}
+                      <span class="text">{{view.statusDescription}}</span>
+                    {{/if}}
                   </div>
-                {{/if}}
+                </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Company</label>
                 <div class="controls">
-                  {{view view.companyPicker}}
+                  {{view view.companyPicker class="field"}}
                 </div>
               </div>
               <div class="new-contact">
@@ -54,15 +56,15 @@
                   </div>
                 </div>
                 <div class="control-group">
+                  <label class="control-label type">Lead Source</label>
+                  <div class="controls">
+                    {{view view.source class="input-xxlarge"}}
+                  </div>
+                </div>
+                <div class="control-group">
                   <a href="#" class="btn showdetails-link" {{action toggleDetail bubbles=false}}><i class="icon-arrow-down"></i></a>
                 </div>
                 <div class="address-section">
-                  <div class="control-group">
-                    <label class="control-label type">Lead Source</label>
-                    <div class="controls">
-                      {{view view.source class="input-xxlarge"}}
-                    </div>
-                  </div>
                   <hr/>
                   {{view view.addresses}}
                   <hr/>
