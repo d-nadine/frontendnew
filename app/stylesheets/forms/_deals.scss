@@ -85,13 +85,20 @@ select:focus{
     border-left: none;
   }
 
+  input.company{
+    min-width: 300px;
+    &:not([disabled]){
+      background-color: $bright;
+    }
+  }
+
   .dollar{
-    position: relative;
-    padding: 6px 7px 5px 5px;
-    border-left: 1px solid $control-border-color;
-    border-bottom: 1px solid $control-border-color;
-    border-top: 1px solid $control-border-color;
-    background-color: $bright;
+    font-weight: bold;
+    padding: 3px 0;
+  }
+
+  .controls.add-files{
+    margin-left: 51px;
   }
 
   hr{

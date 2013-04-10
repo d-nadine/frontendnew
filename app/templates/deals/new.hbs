@@ -19,7 +19,7 @@
       <div class="control-group">
         <label class="control-label">Company</label>
         <div class="controls">
-          {{view view.companyPicker class="field"}}
+          <input type="text" class="field company" {{bindAttr value="contact.company.name" disabled="view.disabled"}} readonly="readonly"/>
         </div>
       </div>
       <div class="control-group">
@@ -78,13 +78,14 @@
       <div class="control-group">
         <label class="control-label">Negotiating For</label>
         <div class="controls">
-          <strong class="dollar">$</strong>
-          {{view Ember.TextField type="number" valueBinding="value" class="field input-medium negotitating"}}
+          <div {{bindAttr class="view.disabled:is-disabled :field :control-box"}}>
+            <span  class="text dollar">$</span>
+            {{view Ember.TextField type="number" valueBinding="value" disabledBinding="view.disabled" class="field input-medium negotitating"}}
+          </div>
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label">Add Files</label>
-        <div class="controls">
+        <div class="controls add-files">
           <button class="btn add-files">
             <!-- FIXME: get add folder font -->
             Add Files
@@ -94,7 +95,7 @@
       <div class="control-group">
         <label class="control-label">PO Number</label>
         <div class="controls">
-          {{view Ember.TextField valueBinding="poNumber" class="field input-xxlarge"}}
+          {{view Ember.TextField valueBinding="poNumber" disabledBinding="view.disabled" class="field input-xxlarge"}}
         </div>
       </div>
       <hr/>

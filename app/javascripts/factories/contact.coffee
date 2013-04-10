@@ -5,7 +5,9 @@ Factory.define 'contact', traits: ['timestamps'],
   source: -> Dictionaries.leadSources.random()
   title: -> Dictionaries.titles.random()
   status: -> Dictionaries.leadStatuses.random()
-  company: -> Dictionaries.companies.random()
+  company: ->
+    Factory.create 'company',
+      name: Dictionaries.companies.random()
 
   user: -> Factory.create 'user'
 

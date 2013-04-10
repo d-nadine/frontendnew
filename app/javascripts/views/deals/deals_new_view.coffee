@@ -4,6 +4,7 @@ Radium.DealsNewView= Ember.View.extend
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
   showChecklistItems: false
+  disabled: Ember.computed.not 'controller.hasContact'
 
   toggleChecklist: (evt) ->
     @$('.checklist-items-container').slideToggle('medium')
@@ -12,6 +13,7 @@ Radium.DealsNewView= Ember.View.extend
   name: Ember.TextField.extend
     classNameBindings: ['isInvalid',':field']
     valueBinding: 'controller.name'
+    disabledBinding: 'parentView.disabled'
     didInsertElement: ->
       @$().focus()
 
@@ -24,19 +26,14 @@ Radium.DealsNewView= Ember.View.extend
     sourceBinding: 'controller.contacts'
     valueBinding: 'controller.contact'
 
-  companyPicker: Radium.Combobox.extend
-    valueBinding: 'controller.company'
-    sourceBinding: 'controller.controllers.companies'
-    placeholder: 'Company'
-    lookupQuery: (query) ->
-      @get('source').find (item) -> item.get('name') == query
-
   userPicker: Radium.UserPicker.extend
     classNames: ['field']
+    disabledBinding: 'parentView.disabled'
     leader: null
 
   description: Radium.TextArea.extend
     classNameBindings: ['isInvalid']
+    disabledBinding: 'parentView.disabled'
     rows: 3
     valueBinding: 'controller.description'
     isInvalid: (->
@@ -54,6 +51,7 @@ Radium.DealsNewView= Ember.View.extend
     sourceBinding: 'controller.controllers.dealSources.dealSources'
     valueBinding: 'controller.source'
     queryBinding: 'queryToValueTransform'
+    disabledBinding: 'parentView.disabled'
     placeholder: 'Source'
 
     queryToValueTransform: ((key, value) ->
@@ -85,6 +83,7 @@ Radium.DealsNewView= Ember.View.extend
     textField: Ember.TextField.extend
       valueBinding: 'parentView.query'
       placeholderBinding: 'parentView.placeholder'
+      disabledBinding: 'parentView.disabled'
       didInsertElement: ->
         @$().typeahead source: @get('parentView.source')
 
