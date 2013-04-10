@@ -86,11 +86,12 @@ select:focus{
   }
 
   .dollar{
+    position: relative;
+    padding: 6px 7px 5px 5px;
     border-left: 1px solid $control-border-color;
     border-bottom: 1px solid $control-border-color;
     border-top: 1px solid $control-border-color;
     background-color: $bright;
-    padding: 4.2px 4px 7px 5px;
   }
 
   hr{
