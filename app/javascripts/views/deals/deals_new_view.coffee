@@ -1,4 +1,5 @@
 require 'lib/radium/progress_bar'
+require 'lib/radium/radio'
 
 Radium.DealsNewView= Ember.View.extend
   classNames: ['page-view']
@@ -96,10 +97,14 @@ Radium.DealsNewView= Ember.View.extend
       @set 'open', false
       @set 'value', text
 
-  dealStatuses: Ember.Select.extend
-    contentBinding: 'controller.statuses'
-    valueBinding: 'controller.status'
-
+  dealStatuses: Ember.View.extend
+    template: Ember.Handlebars.compile """
+      <ul>
+      {{#each controller.statuses}}
+        {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leaderBinding="this" valueBinding="this" tagName="li"}}
+      {{/each}}
+      </ul>
+    """
   referenceName: ( ->
     # FIXME : can we use toString on the models?
     reference = @get('controller.reference')

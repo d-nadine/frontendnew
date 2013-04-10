@@ -7,6 +7,13 @@ Radium.DealsNewController = Ember.ObjectController.extend
   newItemWeight: 0
   hasContact: Ember.computed.bool 'contact'
 
+  statusesDidChange: ( ->
+    return unless @get('statuses.length')
+    return if @get('status')
+
+    @set('status', @get('statuses.firstObject'))
+  ).observes('statuses.[]')
+
   saveAsDraft: ->
     @set 'isPublished', false
     @submit()
