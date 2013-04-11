@@ -55,8 +55,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      debugger
-
       if @get('isNew')
         contact = @get('model').commit (contact)
         @transitionToRoute 'contact', contact
