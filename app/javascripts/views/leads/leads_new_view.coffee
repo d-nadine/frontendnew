@@ -34,6 +34,7 @@ Radium.LeadsNewView = Ember.View.extend
   companyPicker: Ember.View.extend
     classNameBindings: [
       'isInvalid'
+      'isValid'
       'disabled:is-disabled'
       ':combobox'
       ':control-box'
@@ -48,6 +49,12 @@ Radium.LeadsNewView = Ember.View.extend
 
       Ember.isEmpty(@get('value'))
     ).property('value', 'controller.isSubmitted')
+
+    isValid: (->
+      value = @get 'value'
+      return unless value
+      true
+    ).property('value')
 
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
@@ -88,6 +95,7 @@ Radium.LeadsNewView = Ember.View.extend
     selectItem: (text) ->
       @set 'open', false
       @set 'value', text
+
   phoneNumbers: Radium.MaskedMultipleFields.extend
     leader: 'Phone'
     type: 'text'
@@ -95,17 +103,10 @@ Radium.LeadsNewView = Ember.View.extend
     mask: '+9? (9?99) 999-9999 x99999'
 
   emailAddresses: Radium.MultipleFields.extend
-    classNameBindings: ['isInvalid']
     isSubmitted: Ember.computed.alias 'controller.isSubmitted'
     type: 'email'
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
-    isInvalid: ( ->
-      return unless @get('controller.isSubmitted')
-      return unless @get('controller.isNew')
-
-      not @get('controller.emailAddresses').someProperty('value')
-    ).property('controller.isSubmitted','controller.emailAddresses.@each.value')
 
   userPicker: Radium.UserPicker.extend
     classNameBindings: [':field']

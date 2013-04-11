@@ -21,7 +21,7 @@
               <div {{bindAttr class="isExistingContact :control-group"}}>
                 <label class="control-label">Name</label>
                 <div class="controls">
-                  <div class="control-box field contact-name">
+                  <div {{bindAttr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
                     {{view view.contactName}}
                     {{#if isExistingContact}}
                       <span class="text">{{view.statusDescription}}</span>
