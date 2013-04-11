@@ -247,6 +247,7 @@ $.fn.extend({
 			function writeBuffer() { input.val(buffer.join('')); }
 
 			function checkVal(allow) {
+        allow = true;
 				//try to place characters where they belong
 				var test = input.val(),
 					lastMatch = -1,

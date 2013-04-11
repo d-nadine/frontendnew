@@ -32,4 +32,8 @@
       text-decoration: none;
     }
   }
+
+  input[type=text].masked.is-invalid{
+    border: 1px solid red;
+  }
 }
