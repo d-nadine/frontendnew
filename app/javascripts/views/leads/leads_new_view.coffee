@@ -109,9 +109,12 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.emailAddresses'
 
   userPicker: Radium.UserPicker.extend
-    classNameBindings: [':field']
+    classNameBindings: ['isValid',':field']
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.model.assignedTo'
+    isValid: ( ->
+      !!@get('controller.assignedTo')
+    ).property('controller.assignedTo')
 
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']
