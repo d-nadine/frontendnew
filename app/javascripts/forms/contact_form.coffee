@@ -15,10 +15,10 @@ Radium.ContactForm = Radium.Form.extend
 
   isValid: ( ->
     return if Ember.isEmpty(@get('name'))
-    return false unless @get('emailAddresses').someProperty 'value'
-    return if Ember.isEmpty(@get('company'))
+    return if Ember.isEmpty(@get('companyName'))
+    return unless @get('assignedTo')
     true
-  ).property('name', 'emailAddresses.@each.value')
+  ).property('name', 'companyName', 'assignedTo')
 
   commit:  ->
     contact = Radium.Contact.createRecord @get('data')
