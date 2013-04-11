@@ -36,7 +36,7 @@ Radium.MaskedMultipleField = Radium.MultipleField.extend
 
       return true unless /^(\+|0{2})/.test value
 
-      return false if  /^[+\-\s0-8]{5,}$/.test value
+      return false if  /^[+\-\s0-9]{5,}$/.test value
 
       true
     ).property('value')
