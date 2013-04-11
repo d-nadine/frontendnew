@@ -42,7 +42,7 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Phone'
     type: 'text'
     sourceBinding: 'controller.phoneNumbers'
-    mask: '+1 (999) 999-9999? x99999'
+    mask: '+9? (9?99) 999-9999 x99999'
 
   emailAddresses: Radium.MultipleFields.extend
     classNameBindings: ['isInvalid']

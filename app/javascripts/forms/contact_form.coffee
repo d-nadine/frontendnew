@@ -3,7 +3,7 @@ require 'forms/form'
 Radium.ContactForm = Radium.Form.extend
   data: ( ->
     name: @get('name')
-    company: @get('company')
+    companyName: @get('companyName')
     assignedTo: @get('assignedTo')
     notes: @get('notes')
     source: @get('source')
