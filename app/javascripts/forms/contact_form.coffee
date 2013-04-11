@@ -41,3 +41,4 @@ Radium.ContactForm = Radium.Form.extend
     @set 'name', ''
     @set 'notes', ''
     @set 'source', ''
+    @set 'companyName', ''
