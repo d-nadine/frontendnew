@@ -30,14 +30,64 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isExistingContact')
 
-  companyPicker: Radium.Combobox.extend
-    valueBinding: 'controller.company'
-    sourceBinding: 'controller.controllers.companies'
-    disabledBinding: 'controller.isExistingContact'
+  # FIXME: refactor after agreement
+  companyPicker: Ember.View.extend
+    classNameBindings: [
+      'isInvalid'
+      'disabled:is-disabled'
+      ':combobox'
+      ':control-box'
+    ]
+    sourceBinding: 'controller.companyNames'
+    valueBinding: 'controller.companyName'
+    queryBinding: 'queryToValueTransform'
+    disabledBinding: 'parentView.disabled'
     placeholder: 'Company'
-    lookupQuery: (query) ->
-      @get('source').find (item) -> item.get('name') == query
+    isInvalid: ( ->
+      return unless @get('controller.isSubmitted')
 
+      Ember.isEmpty(@get('value'))
+    ).property('value', 'controller.isSubmitted')
+
+    queryToValueTransform: ((key, value) ->
+      if arguments.length == 2
+        @set 'value', value
+      else if !value && @get('value')
+        @get 'value'
+      else
+        value
+    ).property('value')
+
+    template: Ember.Handlebars.compile """
+      {{view view.textField}}
+
+      {{#unless view.disabled}}
+        <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
+          <button class="btn dropdown-toggle" tabindex="-1">
+            <i class="icon-arrow-down"></i>
+          </button>
+          <ul class="dropdown-menu">
+            {{#each item in view.source}}
+              <li><a {{action selectItem item target=view href=true bubbles=false}}>{{item}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/unless}}
+    """
+
+    textField: Ember.TextField.extend
+      valueBinding: 'parentView.query'
+      placeholderBinding: 'parentView.placeholder'
+      disabledBinding: 'parentView.disabled'
+      didInsertElement: ->
+        @$().typeahead source: @get('parentView.source')
+
+    toggleDropdown: (event) ->
+      @toggleProperty 'open'
+
+    selectItem: (text) ->
+      @set 'open', false
+      @set 'value', text
   phoneNumbers: Radium.MaskedMultipleFields.extend
     leader: 'Phone'
     type: 'text'
