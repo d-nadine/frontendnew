@@ -8,8 +8,8 @@ Radium.FixtureAdapter = DS.FixtureAdapter.extend({
   queryFixtures: function(records, query, type) {
     if(!records) return;
 
-    fixtureType = type.toString().split(".")[1];
-    queryMethod = "query" + fixtureType + "Fixtures";
+    var fixtureType = type.toString().split(".")[1];
+    var queryMethod = "query" + fixtureType + "Fixtures";
 
     if(this[queryMethod]) {
       return this[queryMethod].call(this, records, query);
