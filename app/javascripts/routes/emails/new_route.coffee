@@ -9,10 +9,11 @@ Radium.EmailsNewRoute = Ember.Route.extend
         outlet: 'modal'
 
       email = Radium.Email.createRecord form.get('data')
+      email.set 'sender', @controllerFor('currentUser').get('model')
 
       email.on 'didCreate', =>
         Ember.run.later(this, (->
           @transitionTo 'emails.sent', email
-        ), 1200)
+        ), 1500)
 
       @store.commit()
