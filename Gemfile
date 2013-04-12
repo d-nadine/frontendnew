@@ -12,6 +12,7 @@ gem 'unicorn'
 group :development do
   gem 'dnote'
   gem 'therubyracer'
+  gem 'thin'
 end
 
 group :test do
