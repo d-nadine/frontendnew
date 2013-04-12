@@ -2,14 +2,14 @@
   <div class="addresses">
     <div {{bindAttr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
       <label>To</label>
-      {{view view.to placeholder="Names or email addresses" viewName="toList"}}
+      {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
 
       <span class="toggles">
         {{#unless showCc}}
-          <a href="#" {{action expandList 'cc'}}>CC</a>
+          <a href="#" tabindex="7" {{action expandList 'cc'}}>CC</a>
         {{/unless}}
         {{#unless showBcc}}
-          <a href="#" {{action expandList 'bcc'}}>BCC</a>
+          <a href="#" tabIndex="7" {{action expandList 'bcc'}}>BCC</a>
         {{/unless}}
       </span>
     </div>
@@ -17,30 +17,30 @@
     {{#if showCc }}
       <div class="field control-box control-box-block-level recipients cc">
         <label class="muted">CC</label>
-        {{view view.cc placeholder="Names or email addresses" viewName="cc"}}
+        {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
       </div>
     {{/if}}
 
     {{#if showBcc }}
       <div class="field control-box control-box-block-level recipients bcc">
         <label class="muted">BCC</label>
-        {{view view.bcc placeholder="Names or email addresses" viewName="bcc"}}
+        {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
       </div>
     {{/if}}
   </div>
 
   <div>
-    {{view view.subject class="subject field input-block-level"}}
+    {{view view.subject tabindex=2 class="subject field input-block-level"}}
   </div>
 
   <div class="block body">
-    {{view view.body class="field field-blend-in input-block-level"}}
+    {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
     <div>
       <div class="check-response">
         {{#unless showCheckForResponse}}
-          <a href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
+          <button class="btn" tabindex="6" {{action toggleReminderForm bubbles="false"}}>
             Check for response?
-          </a>
+          </button>
         {{/unless}}
         {{#if showCheckForResponse}}
           <div class="reminder-form form-inline">
@@ -61,12 +61,12 @@
         {{/if}}
       </div>
       {{#unless view.signatureAdded}}
-        <a href="#" class="pull-right btn btn-link" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
+        <a href="#" tabindex="4" class="pull-right btn btn-link" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
       {{/unless}}
     </div>
     <hr/>
     <div class="footer">
-      <a hef="#" {{action submit this bubbles="false"}} class="btn btn-primary">Send</a>
+      <button tabindex="5" {{action submit this bubbles="false"}} class="btn btn-primary">Send</button>
     </div>
   </div>
 </form>
