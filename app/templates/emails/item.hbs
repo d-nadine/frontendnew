@@ -60,10 +60,15 @@
   <hr/>
 
   <div class="content">
-    <div class="text">
-      <p>
-        {{unbound message}}
-      </p>
+    <div {{bindAttr class="message::empty :text"}}>
+      {{#if message}}
+        <p>
+          {{!FIXME: This needs to some formatting}}
+          {{unbound message}}
+        </p>
+      {{else}}
+        <p>(No Message)</p>
+      {{/if}}
     </div>
 
     {{partial "shared/attachments"}}

@@ -126,6 +126,12 @@
 
     .text {
       margin-bottom: 30px;
+
+      &.empty p {
+        color: $muted;
+        text-align: center;
+        font-style: italic;
+      }
     }
   }
 
