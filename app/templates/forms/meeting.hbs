@@ -24,7 +24,7 @@
       <span class="topic">
         {{topic}} with
         {{#each attendees}}
-          {{#linkToPerson this}}@{{this.name}}{{/linkToPerson}}
+          {{link  this}}
         {{/each}}
         at {{view.readableStartsAt}}
       </span>
@@ -46,10 +46,8 @@
           <ul>
           {{#each attendees}}
           <li>
-            {{#linkToPerson this}}
-              {{avatar this}}
-              {{name}}
-            {{/linkToPerson}}
+            {{avatar this}}
+            {{name}}
           </li>
           {{/each}}
           </li>
