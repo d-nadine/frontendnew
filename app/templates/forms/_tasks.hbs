@@ -1,0 +1,11 @@
+{{#if tasks}}
+  <div class="tasks-container">
+    <p>Related Tasks</p>
+    <hr />
+    {{partial 'shared/related_tasks'}}
+  </div>
+{{/if}}
+
+{{#if showAddAction}}
+  {{partial 'add_action'}}
+{{/if}}

@@ -22,12 +22,6 @@
     }
   }
 
-  &:not(.is-new){
-    .secondary{
-      padding-bottom: 37px;
-    }
-  }
-
   &.is-expandable:not(.is-editable) .todo textarea,
   &.is-expandable:not(.is-expanded) .todo textarea,
   &.is-expandable:not(.is-editable) .contact-picker input,

@@ -1,4 +1,4 @@
-<div class="comments">
+<div class="block block-arrow-top comments">
   <ul class="comments-list unstyled">
     {{#each comments}}
       <li class="comment">
@@ -13,12 +13,17 @@
     {{/each}}
 
     <li class="comment">
+      {{#linkTo unimplemented}}
+        <i class="icon-attachments">
+        </i>
+      {{/linkTo}}
+
       <div class="avatar-container">
         {{avatar currentUser}}
       </div>
 
       <div class="text">
-        {{view view.commentTextArea class="field field-blend-in"}}
+        {{view view.commentTextArea class="field"}}
       </div>
     </li>
   </ul>

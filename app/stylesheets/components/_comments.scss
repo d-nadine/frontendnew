@@ -1,5 +1,15 @@
 .comments {
-  margin: 0;
+  border: solid 1px darken($dark-background, 10%);
+  background-color: $dark-background;
+  margin-top: 30px;
+
+  &:after {
+    border-bottom-color: $dark-background;
+  }
+
+  &:before {
+    border-bottom-color: darken($dark-background, 20%);
+  }
 }
 
 .comment {
@@ -10,8 +20,19 @@
     float: left;
   }
 
+  a { 
+    float: right;
+    font-size: 130%;
+    margin-top: 6px;
+
+    &, &:active, a:hover, a:visited {
+      color: inherit;
+    }
+  }
+
   .text {
     margin-left: 40px;
+    margin-right: 60px;
   }
 }
 

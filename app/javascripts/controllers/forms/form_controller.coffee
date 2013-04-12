@@ -51,9 +51,7 @@ Radium.FormController = Ember.ObjectController.extend Ember.Evented,
     @toggleProperty 'isExpanded'
 
   hasComments: Ember.computed.present('comments')
-  showAddAction: ( ->
-    not @get('isNew')
-  ).property('isNew')
+  showAddAction: Ember.computed.not('isNew')
 
   toggleFormBox: ->
     @toggleProperty 'showFormBox'

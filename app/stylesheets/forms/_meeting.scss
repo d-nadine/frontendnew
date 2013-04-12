@@ -2,22 +2,22 @@
   position: relative;
 
   .meeting-form {
-    &.is-new{
-      .icon {
-        margin-top: 6px;
-      }
-    }
-    &:not(.is-new){
-      .icon {
-        margin-top: 1px;
-      }
-      &.is-expanded{
-        .icon {
-          position: relative;
-          top: 4.9px;
-        }
-      }
-    }
+    // &.is-new{
+    //   .icon {
+    //     margin-top: 6px;
+    //   }
+    // }
+    // &:not(.is-new){
+    //   .icon {
+    //     margin-top: 1px;
+    //   }
+    //   &.is-expanded{
+    //     .icon {
+    //       position: relative;
+    //       top: 4.9px;
+    //     }
+    //   }
+    // }
 
     div.is-valid {
       border: 1px solid $valid-input-border;
@@ -195,9 +195,6 @@
           padding: 3px;
         }
       }
-    }
-    .related-tasks{
-      margin: 12px 0 24px 0;
     }
   }
 }
