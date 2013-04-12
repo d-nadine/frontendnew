@@ -1,7 +1,9 @@
 Radium.ModalView = Radium.View.extend
   layout: Ember.Handlebars.compile """
     <div class="modal-backdrop">
-      {{yield}}
+      <div class="modal fade">
+        {{yield}}
+      </div>
     </div>
   """
 
