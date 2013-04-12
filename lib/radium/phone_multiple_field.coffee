@@ -1,6 +1,6 @@
 require 'lib/radium/multiple_field'
 
-Radium.MaskedMultipleField = Radium.MultipleField.extend
+Radium.PhoneMultipleField = Radium.MultipleField.extend
   classNameBindings: ['isInvalid']
   valueBinding: 'current.value'
   template: Ember.Handlebars.compile """
@@ -36,7 +36,7 @@ Radium.MaskedMultipleField = Radium.MultipleField.extend
 
       return true unless /^(\+|0{2})/.test value
 
-      return false if  /^[+\-\s0-9]{5,}$/.test value
+      return false if  /^[+\-\sx0-9]{5,}$/.test value
 
       true
     ).property('value')

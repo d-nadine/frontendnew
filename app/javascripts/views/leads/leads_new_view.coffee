@@ -1,7 +1,6 @@
 require 'lib/radium/multiple_fields'
 require 'lib/radium/multiple_field'
-require 'lib/radium/masked_multiple_field'
-require 'lib/radium/masked_multiple_fields'
+require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/typeahead_textfield'
 
@@ -96,11 +95,11 @@ Radium.LeadsNewView = Ember.View.extend
       @set 'open', false
       @set 'value', text
 
-  phoneNumbers: Radium.MaskedMultipleFields.extend
+  phoneNumbers: Radium.MultipleFields.extend
     leader: 'Phone'
     type: 'text'
     sourceBinding: 'controller.phoneNumbers'
-    mask: '+9? (9?99) 999-9999 x99999'
+    viewType: Radium.PhoneMultipleField
 
   emailAddresses: Radium.MultipleFields.extend
     isSubmitted: Ember.computed.alias 'controller.isSubmitted'
