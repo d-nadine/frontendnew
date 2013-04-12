@@ -38,5 +38,3 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
     return true if email.get('sender') is sender
     return true if email.get('to').indexOf(sender) != -1
     false
-
-
