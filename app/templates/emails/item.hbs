@@ -14,7 +14,12 @@
     {{/if}}
 
     <p>
-      <big class="sender">{{link  sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      {{#if subject}}
+        <big class="sender">{{link sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      {{else}}
+        Email from <big class="sender">{{link sender}}</big>
+      {{/if}}
+
       <a href="#" class="more muted pull-right" {{action toggleMeta}}><small>
           {{#if showMeta}}
             Less
