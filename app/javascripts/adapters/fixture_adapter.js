@@ -18,14 +18,14 @@ Radium.FixtureAdapter = DS.FixtureAdapter.extend({
     }
   },
 
-});
+  willCreateRecord: function(type, record, transaction) {
+    var recordType = type.toString().split(".")[1];
+    createMethod = "willCreate" + recordType;
 
-Radium.FixtureAdapter.reopenClass({
-  getCreateMethodForType: function(type){
-    var typeName = type.toString().split('.').pop();
-
-    return "createPreFilter" + typeName;
-  },
+    if(this[createMethod]) {
+      this[createMethod].call(this, record, transaction);
+    }
+  }
 });
 
 requireAll(/adapters\/fixture_adapter\/queries/);
