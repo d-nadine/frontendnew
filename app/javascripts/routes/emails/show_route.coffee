@@ -1,3 +1,3 @@
-Radium.MessagesEmailRoute = Radium.Route.extend
+Radium.EmailsShowRoute = Radium.Route.extend
   setupController: (controller, model) ->
     @controllerFor('messages').set 'selectedContent', model

@@ -1,0 +1,25 @@
+<div class="block email-confirmation-view">
+  <div class="adder">
+    <div class="arrow"></div>
+    <i class="icon-plus" {{action addTask}}></i>
+  </div>
+
+  <div class="subject">
+    {{#if subject}}
+      <p>Your email &quot;{{#linkTo emails.show this}}{{subject}}{{/linkTo}}&quot; sent to</p>
+    {{else}}
+      <p>Sent an email to</p>
+    {{/if}}
+  </div>
+
+  <div class="recipients">
+    <ul class="sentence">
+      {{#each to}}
+        <li>{{link this}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+<div {{action addTask model}} class="block block-connected block-blue related-task-prompt">
+  <p>Add Related Task?</p>
+</div>

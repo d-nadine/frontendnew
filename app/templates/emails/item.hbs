@@ -12,7 +12,7 @@
     {{view view.trackedToggleSwitch class="pull-right"}}
 
     <p>
-      <big class="sender">{{#linkToPerson sender}}{{sender.name}}{{/linkToPerson}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      <big class="sender">{{link  sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
       <a href="#" class="more muted pull-right" {{action toggleMeta}}><small>
           {{#if showMeta}}
             Less
@@ -29,7 +29,7 @@
           <dd>
             <span class="sentence">
               {{#each to}}
-                <span>{{#linkToPerson this}}{{name}}{{/linkToPerson}}</span>
+                <span>{{link  this}}</span>
               {{/each}}
             </span>
           </dd>
@@ -37,7 +37,7 @@
           <dd>
             <span class="sentence">
               {{#each cc}}
-                <span>{{#linkToPerson this}}{{name}}{{/linkToPerson}}</span>
+                <span>{{link  this}}</span>
               {{/each}}
             </span>
           </dd>

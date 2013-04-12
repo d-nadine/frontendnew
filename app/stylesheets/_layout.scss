@@ -195,10 +195,10 @@ $two-column-gutter: 60px;
 
     i {
       position: absolute;
-      bottom: 0;
+      bottom: 4px;
       left: 18px;
 
-      color: darken($associated-blue, 20);
+      color: #37aed4;
 
       &:hover {
         cursor: pointer;

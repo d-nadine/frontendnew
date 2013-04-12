@@ -6,7 +6,13 @@ Radium.Router.map ->
     @route 'email', path: '/emails/:email_id'
     @route 'discussion', path: '/discussions/:discussion_id'
     @route 'bulk_actions'
-    @route 'send'
+    @resource 'emails', ->
+      @route 'show', path: '/:email_id'
+      @route 'new'
+      # FIXME: this should be a routless state
+      # The path is only here so the email can be 
+      # passed with transitionTo
+      @route 'sent', path: '/sent/:email_id'
 
   @resource 'pipeline', ->
     @route 'leads'

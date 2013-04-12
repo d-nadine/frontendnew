@@ -180,3 +180,40 @@
   }
 }
 
+.modal-loading {
+  text-align: center;
+  padding: 30px 15px;
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  p {
+    color: $muted;
+    margin: 0;
+  }
+}
+
+.email-confirmation-view {
+  padding: 30px 15px;
+
+  .subject { 
+    text-align: center;
+    color: $muted;
+  }
+
+  .recipients {
+    text-align: center;
+    font-size: 150%;
+  }
+}
+
+.related-task-prompt {
+  text-align: center;
+  color: #37aed4;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

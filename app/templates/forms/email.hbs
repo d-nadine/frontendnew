@@ -29,8 +29,8 @@
     {{/if}}
   </div>
 
-  <div {{bindAttr class=":subject view.noContent:is-invalid :field"}}>
-    {{view view.subject class="field input-block-level"}}
+  <div>
+    {{view view.subject class="subject field input-block-level"}}
   </div>
 
   <div class="block body">
@@ -66,7 +66,7 @@
     </div>
     <hr/>
     <div class="footer">
-      <a hef="#" {{action submit bubbles="false"}} class="btn btn-primary">Send</a>
+      <a hef="#" {{action submit this bubbles="false"}} class="btn btn-primary">Send</a>
     </div>
   </div>
 </form>
