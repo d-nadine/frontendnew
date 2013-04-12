@@ -8,9 +8,10 @@ Radium.EmailForm = Radium.Form.extend
     message: @get('message')
     sender: @get('user')
     sentAt: Ember.DateTime.create()
-    to: []
-    cc: []
-    bcc: []
+    addresses: 
+      to: @get('to').mapProperty 'email'
+      cc: @get('cc').mapProperty 'email'
+      bcc: @get('bcc').mapProperty 'email'
   ).property().volatile()
 
   reset: ->
@@ -22,12 +23,3 @@ Radium.EmailForm = Radium.Form.extend
   isValid: ( ->
     @get('to.length') && (@get('subject') || @get('message.length'))
   ).property('to.[]', 'subject', 'message')
-
-  commit: ->
-    email = Radium.Email.createRecord @get('data')
-
-    email.set 'to', @get('to').mapProperty 'email'
-    email.set 'cc', @get('cc').mapProperty 'email'
-    email.set 'bcc', @get('bcc').mapProperty 'email'
-
-    @get('store').commit()
