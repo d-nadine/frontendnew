@@ -48,6 +48,9 @@ Radium.AutocompleteView = Radium.View.extend
     </div>
   """
 
+  focus: ->
+    @$('li.as-original input').focus()
+
   showContextMenu: (attendee) ->
     return false unless @get('isEditable')
 

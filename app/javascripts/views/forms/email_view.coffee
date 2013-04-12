@@ -9,6 +9,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
 
+    @get('toList').focus()
+
   noContent: ( ->
     return unless @get('controller.isSubmitted')
 
