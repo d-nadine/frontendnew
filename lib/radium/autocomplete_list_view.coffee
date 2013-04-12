@@ -100,6 +100,7 @@ Radium.AutocompleteView = Radium.View.extend
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
     listBinding: 'parentView.list'
+    tabindexBinding: 'parentView.tabindex'
 
     didInsertElement: ->
       options =
