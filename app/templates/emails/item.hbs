@@ -35,14 +35,16 @@
               {{/each}}
             </span>
           </dd>
-          <dt>CC</dt>
-          <dd>
-            <span class="sentence">
-              {{#each cc}}
-                <span>{{link  this}}</span>
-              {{/each}}
-            </span>
-          </dd>
+          {{#if cc}}
+            <dt>CC</dt>
+            <dd>
+              <span class="sentence">
+                {{#each cc}}
+                  <span>{{link  this}}</span>
+                {{/each}}
+              </span>
+            </dd>
+          {{/if}}
           <dt>Time</dt>
           <dd>{{formatDateTime sentAt format="full"}}</dd>
         </dl>
