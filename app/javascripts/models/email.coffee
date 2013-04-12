@@ -24,6 +24,8 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   people: Radium.computed.aggregate('to','cc')
 
+  trackable: Ember.computed.present('contact')
+
   contact: (->
     if @get('sender') instanceof Radium.Contact
       @get('sender')

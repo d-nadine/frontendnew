@@ -9,7 +9,9 @@
   </div>
 
   <div class="header">
-    {{view view.trackedToggleSwitch class="pull-right"}}
+    {{#if trackable}}
+      {{view view.trackedToggleSwitch class="pull-right"}}
+    {{/if}}
 
     <p>
       <big class="sender">{{link  sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
