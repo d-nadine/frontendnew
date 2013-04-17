@@ -30,6 +30,11 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isExistingContact')
 
+  changeExisting: ->
+    @set 'controller.status', 'lead'
+    @set 'controlller.existingDetailsShown', false
+    @set 'controller.showExisting', true
+
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
@@ -142,20 +147,31 @@ Radium.LeadsNewView = Ember.View.extend
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isExistingContact: Ember.computed.alias 'controller.isExistingContact'
     isNewContactBinding: 'controller.isNewContact'
+    lookupQuery: (query) ->
+      @get('source').find (item) -> item.get('name') == query
+
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
-        lookup = @lookupQuery(value)
-        if lookup
-          @set 'value', @lookupQuery(value)
-          return
-
-        unless @get('isExistingContact')
+        lookUp =  @lookupQuery(value)
+        if lookUp
+          @$('input[type=text]').blur()
+          @clearValue()
+        else
+          if @get('isExistingContact')
+            @clearValue()
           @set 'value', value
       else if !value && @get('value')
-        @get 'value.name'
+        @get 'value'
       else
         value
     ).property('value')
+
+    clearValue: ->
+      @get('controller').cancel()
+
+    setValue: (object) ->
+      @set 'value', object.get('name')
+      @set 'controller.model', object
 
     didInsertElement: ->
       @_super.apply this, arguments
@@ -165,6 +181,6 @@ Radium.LeadsNewView = Ember.View.extend
       @get('controller').cancel()
 
     blur: ->
-      return if @get('isExistingContact') || @get('isNewContact')
+      return if @get('isNewContact')
       return if @get('value')?.length < 3
       @set('isNewContact', true)

@@ -17,11 +17,6 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     @get('companies').mapProperty('name')
   ).property('companies.[]')
 
-  changeExisting: ->
-    @set 'model.status', 'lead'
-    @set 'existingDetailsShown', false
-    @set 'showExisting', true
-
   isExistingContact: ( ->
     return false unless @get('model')
 
@@ -33,6 +28,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   ).property('model', 'isNewContact')
 
   modelDidChange: ( ->
+    @set('companyName', @get('model.company.name')) if @get('model') && ! @get('model.isNew')
+
     return if @get('form') || !@get('model')
 
     @set 'form', @get('model') if @get('model.isNew')
