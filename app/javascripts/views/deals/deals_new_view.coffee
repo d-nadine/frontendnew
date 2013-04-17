@@ -1,5 +1,6 @@
 require 'lib/radium/progress_bar'
 require 'lib/radium/radio'
+require 'lib/radium/value_validation_mixin'
 
 Radium.DealsNewView= Ember.View.extend
   classNames: ['page-view']
@@ -13,40 +14,38 @@ Radium.DealsNewView= Ember.View.extend
     @$('.checklist-items-container').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
 
-  name: Ember.TextField.extend
-    classNameBindings: ['isInvalid',':field']
+  name: Ember.TextField.extend Radium.ValueValidationMixin,
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     didInsertElement: ->
       @$().focus()
 
-    isInvalid: (->
-      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
-    ).property('value', 'controller.isSubmitted')
-
-  contactPicker: Radium.Combobox.extend
-    classNames: ['field']
-    sourceBinding: 'controller.contacts'
+  contactPicker: Radium.Combobox.extend Radium.ValueValidationMixin,
+    sourceBinding: 'controller.contactsWithCompany'
     valueBinding: 'controller.contact'
+    setValue: (object) ->
+      @set 'value', object.get('contact')
+    queryToValueTransform: ((key, value) ->
+      if arguments.length == 2
+        @set 'value', @lookupQuery(value)
+      else if !value && @get('value')
+        "#{@get('value.name')} (#{@get('value.company.name')})"
+      else
+        value
+    ).property('value')
 
-  userPicker: Radium.UserPicker.extend
-    classNames: ['field']
+  userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
     leader: null
 
-  description: Radium.TextArea.extend
-    classNameBindings: ['isInvalid']
+  description: Radium.TextArea.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
     rows: 3
     valueBinding: 'controller.description'
-    isInvalid: (->
-      Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
-    ).property('value', 'controller.isSubmitted')
 
   # FIXME: refactor after agreeing on approach
-  source: Ember.View.extend
+  source: Ember.View.extend Radium.ValueValidationMixin,
     classNameBindings: [
-      'isInvalid'
       'disabled:is-disabled'
       ':combobox'
       ':control-box'
@@ -56,7 +55,6 @@ Radium.DealsNewView= Ember.View.extend
     queryBinding: 'queryToValueTransform'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Source'
-
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
         @set 'value', value
@@ -65,7 +63,6 @@ Radium.DealsNewView= Ember.View.extend
       else
         value
     ).property('value')
-
     template: Ember.Handlebars.compile """
       {{view view.textField}}
 
