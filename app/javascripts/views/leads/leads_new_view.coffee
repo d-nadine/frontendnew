@@ -4,6 +4,7 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/typeahead_textfield'
 require 'lib/radium/text_combobox'
+require 'lib/radium/value_validation_mixin'
 
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
@@ -96,7 +97,7 @@ Radium.LeadsNewView = Ember.View.extend
     classNameBindings: [
       'disabled:is-disabled'
     ]
-    sourceBinding: 'controller.controllers.dealSources.dealSources'
+    sourceBinding: 'controller.leadSources'
     valueBinding: 'controller.source'
     placeholder: 'Where is this lead from?'
     valueBinding: 'controller.source'
