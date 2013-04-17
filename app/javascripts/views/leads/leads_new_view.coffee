@@ -3,6 +3,7 @@ require 'lib/radium/multiple_field'
 require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/typeahead_textfield'
+require 'lib/radium/text_combobox'
 
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
@@ -29,19 +30,13 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isExistingContact')
 
-  # FIXME: refactor after agreement
-  companyPicker: Ember.View.extend
+  companyPicker: Radium.TextCombobox.extend
     classNameBindings: [
       'isInvalid'
       'isValid'
-      'disabled:is-disabled'
-      ':combobox'
-      ':control-box'
     ]
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
-    queryBinding: 'queryToValueTransform'
-    disabledBinding: 'parentView.disabled'
     placeholder: 'Company'
     isInvalid: ( ->
       return unless @get('controller.isSubmitted')
@@ -54,46 +49,6 @@ Radium.LeadsNewView = Ember.View.extend
       return unless value
       true
     ).property('value')
-
-    queryToValueTransform: ((key, value) ->
-      if arguments.length == 2
-        @set 'value', value
-      else if !value && @get('value')
-        @get 'value'
-      else
-        value
-    ).property('value')
-
-    template: Ember.Handlebars.compile """
-      {{view view.textField}}
-
-      {{#unless view.disabled}}
-        <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
-          <button class="btn dropdown-toggle" tabindex="-1">
-            <i class="icon-arrow-down"></i>
-          </button>
-          <ul class="dropdown-menu">
-            {{#each item in view.source}}
-              <li><a {{action selectItem item target=view href=true bubbles=false}}>{{item}}</a></li>
-            {{/each}}
-          </ul>
-        </div>
-      {{/unless}}
-    """
-
-    textField: Ember.TextField.extend
-      valueBinding: 'parentView.query'
-      placeholderBinding: 'parentView.placeholder'
-      disabledBinding: 'parentView.disabled'
-      didInsertElement: ->
-        @$().typeahead source: @get('parentView.source')
-
-    toggleDropdown: (event) ->
-      @toggleProperty 'open'
-
-    selectItem: (text) ->
-      @set 'open', false
-      @set 'value', text
 
   phoneNumbers: Radium.MultipleFields.extend
     leader: 'Phone'
