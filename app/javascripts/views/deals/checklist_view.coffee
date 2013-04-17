@@ -39,7 +39,7 @@ Radium.ChecklistView = Ember.View.extend
     newItem =
             description: description
             weight: weight
-            isFinished: finished
+            isFinished: true
             kind: 'additional'
             checklist: checklist
 
