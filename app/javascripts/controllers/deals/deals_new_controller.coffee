@@ -4,7 +4,7 @@ Radium.DealsNewController = Ember.ObjectController.extend
   checklistItems: Ember.computed.alias 'checklist.checklistItems'
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   newItemDescription: ''
-  newItemWeight: 0
+  newItemWeight: null
   newItemFinished: false
   hasContact: Ember.computed.bool 'contact'
 

@@ -30,7 +30,7 @@
             {{view view.newItemDescription class="field input-xlarge" viewName="itemDescription"}}
           </td>
           <td>
-            {{view view.newItemWeight type="number" max="100" value="0" class="field input-mini"}}%
+            {{view view.newItemWeight type="number" max="100" class="field input-mini"}}%
             {{#if view.showAddButton }}
             <a href="#" {{action createNewItem target="view"}} class="btn">
               <i class="icon-plus"></i>

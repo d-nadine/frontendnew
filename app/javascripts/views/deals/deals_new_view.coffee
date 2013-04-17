@@ -6,6 +6,7 @@ Radium.DealsNewView= Ember.View.extend
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
   showChecklistItems: false
+  showDetail: false
   disabled: Ember.computed.not 'controller.hasContact'
 
   toggleChecklist: (evt) ->
@@ -13,6 +14,11 @@ Radium.DealsNewView= Ember.View.extend
 
     @$('.checklist-items-container').slideToggle('medium')
     @toggleProperty 'showChecklistItems'
+
+  toggleDetail: (evt) ->
+    @$('#deal-detail').slideToggle('medium')
+    @toggleProperty 'showDetail'
+
 
   name: Ember.TextField.extend Radium.ValueValidationMixin,
     valueBinding: 'controller.name'
