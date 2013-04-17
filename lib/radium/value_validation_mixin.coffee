@@ -8,4 +8,3 @@ Radium.ValueValidationMixin = Ember.Mixin.create
   isInvalid: (->
     Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
   ).property('value', 'controller.isSubmitted')
-

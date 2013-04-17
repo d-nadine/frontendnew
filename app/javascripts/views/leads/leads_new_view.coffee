@@ -92,8 +92,12 @@ Radium.LeadsNewView = Ember.View.extend
     willDestroyElement: ->
       @$().off('elastic')
 
-  source: Ember.TextField.extend
-    classNames: ['field']
+  source: Radium.TextCombobox.extend Radium.ValueValidationMixin,
+    classNameBindings: [
+      'disabled:is-disabled'
+    ]
+    sourceBinding: 'controller.controllers.dealSources.dealSources'
+    valueBinding: 'controller.source'
     placeholder: 'Where is this lead from?'
     valueBinding: 'controller.source'
 
