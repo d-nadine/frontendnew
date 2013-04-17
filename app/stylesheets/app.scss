@@ -76,3 +76,12 @@
 a:hover {
   text-decoration: none;
 }
+
+.required{
+  &:after{
+    content: " *";
+    color: red;
+    margin-left: 4px;
+    vertical-align: top;
+  }
+}

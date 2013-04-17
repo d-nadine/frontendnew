@@ -19,7 +19,6 @@ Radium.DealsNewView= Ember.View.extend
     @$('#deal-detail').slideToggle('medium')
     @toggleProperty 'showDetail'
 
-
   name: Ember.TextField.extend Radium.ValueValidationMixin,
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
