@@ -36,9 +36,31 @@ Radium.ContactForm = Radium.Form.extend
 
     contact
 
+  addressDefaults: ->
+    street: ''
+    city: ''
+    state: ''
+    zipcode: ''
+    country: ''
+
   reset: ->
     @_super.apply this, arguments
+    @set 'isNew', true
     @set 'name', ''
     @set 'notes', ''
     @set 'source', ''
     @set 'companyName', ''
+    @set 'status', 'lead'
+    @set('phoneNumbers', [
+      Ember.Object.create({name: 'Mobile', value: '', isPrimary: true}),
+      Ember.Object.create({name: 'Work', value: ''}),
+      Ember.Object.create({name: 'Home', value: ''})
+    ])
+    @set('emailAddresses', [
+      Ember.Object.create({name: 'Work', value: '', isPrimary: true}),
+      Ember.Object.create({name: 'Home', value: ''}),
+    ])
+    @set('addresses', [
+      Ember.Object.create({name: 'Office', value: Ember.Object.create(@addressDefaults()), isPrimary: true}),
+      Ember.Object.create({name: 'Home', value:  Ember.Object.create(@addressDefaults())}),
+    ])

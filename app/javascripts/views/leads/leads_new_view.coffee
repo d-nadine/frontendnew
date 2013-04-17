@@ -2,7 +2,6 @@ require 'lib/radium/multiple_fields'
 require 'lib/radium/multiple_field'
 require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
-require 'lib/radium/typeahead_textfield'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
 
@@ -31,25 +30,10 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isExistingContact')
 
-  companyPicker: Radium.TextCombobox.extend
-    classNameBindings: [
-      'isInvalid'
-      'isValid'
-    ]
+  companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
     placeholder: 'Company'
-    isInvalid: ( ->
-      return unless @get('controller.isSubmitted')
-
-      Ember.isEmpty(@get('value'))
-    ).property('value', 'controller.isSubmitted')
-
-    isValid: (->
-      value = @get 'value'
-      return unless value
-      true
-    ).property('value')
 
   phoneNumbers: Radium.MultipleFields.extend
     leader: 'Phone'
@@ -63,13 +47,9 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
 
-  userPicker: Radium.UserPicker.extend
-    classNameBindings: ['isValid',':field']
+  userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'controller.isDisabled'
     valueBinding: 'controller.model.assignedTo'
-    isValid: ( ->
-      !!@get('controller.assignedTo')
-    ).property('controller.assignedTo')
 
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']
@@ -153,22 +133,29 @@ Radium.LeadsNewView = Ember.View.extend
     @$('.showdetails-link i').toggleClass('icon-arrow-down icon-arrow-up')
   ).observes('controller.showDetail')
 
-  contactName: Radium.TypeaheadTextField.extend
-    classNameBindings: ['isInvalid', 'open', ':field']
+  contactName: Radium.Combobox.extend Radium.ValueValidationMixin,
+    classNameBindings: ['open']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Type a name'
     sourceBinding: 'controller.contacts'
-    timeoutId: null
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isExistingContact: Ember.computed.alias 'controller.isExistingContact'
     isNewContactBinding: 'controller.isNewContact'
+    queryToValueTransform: ((key, value) ->
+      if arguments.length == 2
+        lookup = @lookupQuery(value)
+        if lookup
+          @set 'value', @lookupQuery(value)
+          return
 
-    isInvalid: ( ->
-      return unless @get('controller.isSubmitted')
-
-      Ember.isEmpty(@get('value'))
-    ).property('value', 'controller.isSubmitted')
+        unless @get('isExistingContact')
+          @set 'value', value
+      else if !value && @get('value')
+        @get 'value.name'
+      else
+        value
+    ).property('value')
 
     didInsertElement: ->
       @_super.apply this, arguments
@@ -176,10 +163,6 @@ Radium.LeadsNewView = Ember.View.extend
 
     clearValue: ->
       @get('controller').cancel()
-
-    setValue: (object) ->
-      @set 'value', object.get('name')
-      @set 'controller.model', object
 
     blur: ->
       return if @get('isExistingContact') || @get('isNewContact')
