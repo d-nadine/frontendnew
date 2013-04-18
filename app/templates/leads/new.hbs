@@ -85,14 +85,16 @@
                 {{#if isCustomer}}
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
                 {{else}}
-                  <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
-                    {{#unless existingDetailsShown}}
-                      <i class="icon-arrow-down"></i>
-                    {{else}}
-                      <i class="icon-arrow-up"></i>
-                    {{/unless}}
-                  </a>
-                  <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
+                  {{#unless isNew}}
+                    <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
+                      {{#unless existingDetailsShown}}
+                        <i class="icon-arrow-down"></i>
+                      {{else}}
+                        <i class="icon-arrow-up"></i>
+                      {{/unless}}
+                    </a>
+                    <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
+                  {{/unless}}
                 {{/if}}
                 </div>
               </div>

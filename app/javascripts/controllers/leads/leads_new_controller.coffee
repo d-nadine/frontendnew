@@ -23,11 +23,13 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   ).observes('model')
 
   isCustomer: ( ->
+    return false if @get('isNew')
+
     status = @get('model.status')
     return false unless status
 
     status == "lead" || status == "existing"
-  ).property('model.status')
+  ).property('model.status', 'isNew')
 
   cancel: ->
     @set 'model', @get('form')
