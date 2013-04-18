@@ -9,6 +9,23 @@ Radium.MultipleFields = Ember.ContainerView.extend
     @set('source.firstObject.isPrimary', true) if @get('source.length')
     @addNew()
 
+  sourceDidChange: ( ->
+    return unless @get('source')
+
+    @clear()
+
+    @set('currentIndex', -1)
+
+    @get('source').forEach (source) =>
+      if source.get('value')
+        Ember.run =>
+          @addNew()
+
+    unless @get('childViews.length')
+      @addNew()
+
+  ).observes('source.[]')
+
   removeSelection: (view) ->
     view.set('current.value', null)
 
@@ -42,5 +59,3 @@ Radium.MultipleFields = Ember.ContainerView.extend
       type: @get('type')
       index: @get('currentIndex')
     )
-
-

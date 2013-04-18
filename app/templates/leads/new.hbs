@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="contact-detail">
-                {{view view.emailAddresses}}
+                {{!view view.emailAddresses}}
                 {{view view.phoneNumbers}}
                 <div class="control-group">
                   <label class="control-label">Assigned To</label>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="address-section">
                   <hr/>
-                  {{view view.addresses}}
+                  {{!view view.addresses}}
                   <hr/>
                 </div>
                 {{partial 'validation_error_message'}}
@@ -82,20 +82,20 @@
                   <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
                 {{/unless}}
                 <div>
-                {{#if isCustomer}}
-                  {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
-                {{else}}
-                  {{#unless isNew}}
-                    <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
-                      {{#unless existingDetailsShown}}
-                        <i class="icon-arrow-down"></i>
-                      {{else}}
-                        <i class="icon-arrow-up"></i>
-                      {{/unless}}
-                    </a>
-                    <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
-                  {{/unless}}
-                {{/if}}
+                  {{#if isCustomer}}
+                    {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
+                  {{else}}
+                    {{#unless isNew}}
+                      <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
+                        {{#unless existingDetailsShown}}
+                          <i class="icon-arrow-down"></i>
+                        {{else}}
+                          <i class="icon-arrow-up"></i>
+                        {{/unless}}
+                      </a>
+                      <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
+                    {{/unless}}
+                  {{/if}}
                 </div>
               </div>
               </fieldset>

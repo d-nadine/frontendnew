@@ -5,6 +5,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   companies: Ember.computed.alias 'controllers.companies'
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   leadSources: Ember.computed.alias 'controllers.leadSources.leadSources'
+  changingStatus: false
   form: null
   existingDetailsShown: false
 

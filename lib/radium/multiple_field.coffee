@@ -6,11 +6,15 @@ Radium.MultipleField = Ember.View.extend
 
   didInsertElement: ->
     @set 'current', @get('source').objectAt(@get('index'))
-    @set('showDropDown', @get('index') != 0)
+    # @set('showDropDown', @get('index') != 0)
 
   addNew: ->
     @get('parentView').addNew()
-    @set 'showDropDown', true
+    # @set 'showDropDown', true
+
+  showDropDown: ( ->
+    @get('parentView.childViews.length') > 1
+  ).property('parentView.childViews.[]')
 
   showDelete: ( ->
     @get('parentView.childViews.length') > 1

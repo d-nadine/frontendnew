@@ -31,12 +31,10 @@ Radium.LeadsNewView = Ember.View.extend
   ).property('controller.isNew')
 
   changeExisting: ->
+    @set 'controller.changingStatus', true
     @set 'controller.status', 'lead'
-    contactDetails = @$('.contact-detail')
-    existingArea = @$('.existing')
-
-    existingArea.slideUp('medium', ->
-      contactDetails.slideDown('medium'))
+    @set 'controller.existingDetailsShown', false
+    @showExistingDetails()
 
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
@@ -96,6 +94,8 @@ Radium.LeadsNewView = Ember.View.extend
     viewType: Radium.AddressMultipleField
 
   contactDidChange: ( ->
+    return if @get('controller.changingStatus')
+
     contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
 
