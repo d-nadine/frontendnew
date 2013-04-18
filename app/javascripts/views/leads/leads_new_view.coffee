@@ -32,6 +32,11 @@ Radium.LeadsNewView = Ember.View.extend
 
   changeExisting: ->
     @set 'controller.status', 'lead'
+    contactDetails = @$('.contact-detail')
+    existingArea = @$('.existing')
+
+    existingArea.slideUp('medium', ->
+      contactDetails.slideDown('medium'))
 
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
