@@ -23,7 +23,6 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   deal: DS.belongsTo('Radium.Deal')
   email: DS.belongsTo('Radium.Email')
   todo: DS.belongsTo('Radium.Todo')
-  discussion: DS.belongsTo('Radium.Discussion')
 
   todos: DS.hasMany('Radium.Todo')
 
