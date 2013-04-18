@@ -24,7 +24,6 @@ Radium.MultipleFields = Ember.ContainerView.extend
     unless @get('childViews.length')
       @addNew()
     else
-      debugger
       isPrimary = @get('source').find (item) ->
         item.get('isPrimary')
 
