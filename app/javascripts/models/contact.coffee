@@ -14,7 +14,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   phoneNumbers: DS.hasMany('Radium.PhoneNumber')
   emailAddresses: DS.hasMany('Radium.EmailAddress')
-  addresses: DS.attr('Radium.Address')
+  addresses: DS.hasMany('Radium.Address')
 
   status: DS.attr('string')
 

@@ -43,16 +43,19 @@ Radium.LeadsNewView = Ember.View.extend
     placeholder: 'Company'
 
   phoneNumbers: Radium.MultipleFields.extend
+    labels: ['Mobile','Work','Home']
     leader: 'Phone'
-    type: 'text'
     sourceBinding: 'controller.phoneNumbers'
     viewType: Radium.PhoneMultipleField
+    type: Radium.PhoneNumber
 
   emailAddresses: Radium.MultipleFields.extend
+    labels: ['Work','Home']
     isSubmitted: Ember.computed.alias 'controller.isSubmitted'
-    type: 'email'
+    inputType: 'email'
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
+    type: Radium.EmailAddress
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'controller.isDisabled'
@@ -90,9 +93,11 @@ Radium.LeadsNewView = Ember.View.extend
     valueBinding: 'controller.source'
 
   addresses: Radium.MultipleFields.extend
+    labels: ['Office','Home']
     leader: 'Address'
     sourceBinding: 'controller.addresses'
     viewType: Radium.AddressMultipleField
+    type: Radium.Address
 
   contactDidChange: ( ->
     return if @get('changingStatus')

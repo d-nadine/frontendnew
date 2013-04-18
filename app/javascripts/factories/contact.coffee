@@ -21,3 +21,8 @@ Factory.define 'contact', traits: ['timestamps'],
       name: "Home"
       value: "+35832478388"
   ]
+
+  emailAddresses: ->[
+    Factory.create 'emailAddress',
+      value: "#{@name}@#{@company.get('name')}.com"
+  ]

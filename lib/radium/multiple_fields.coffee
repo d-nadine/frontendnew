@@ -3,6 +3,7 @@ require 'lib/radium/address_multiple_field'
 
 Radium.MultipleFields = Ember.ContainerView.extend
   currentIndex: -1
+  inputType: 'text'
   viewType: Radium.MultipleField
   didInsertElement: ->
     @_super.apply this, arguments
@@ -11,6 +12,18 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
   sourceDidChange: ( ->
     return unless @get('source')
+
+    index = 0
+
+    @get('labels').forEach (label) =>
+      existing = @get('source').find (item) ->
+        item.get('name') == label
+
+      unless existing
+        record = @get('type').createRecord({name: label, value: ''})
+        @get('source').insertAt(index, record)
+
+      index++
 
     @clear()
 
@@ -62,6 +75,6 @@ Radium.MultipleFields = Ember.ContainerView.extend
       classNameBindings: [':control-group']
       source: @get('source')
       leader: @get('leader')
-      type: @get('type')
+      type: @get('inputType')
       index: @get('currentIndex')
     )
