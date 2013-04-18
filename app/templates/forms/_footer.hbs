@@ -1,0 +1,9 @@
+{{#if showFormBox}}
+  <div class="block block-connected block-blue">
+    {{render "form_box" formBox}}
+  </div>
+{{/if}}
+
+{{#if showComments}}
+  {{render 'comments' model}}
+{{/if}}

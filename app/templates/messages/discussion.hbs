@@ -1,4 +1,4 @@
-{{template 'messages/hud'}}
+{{partial 'messages/hud'}}
 
 <div>
   <div class="block discussion-card message-card">
@@ -31,11 +31,11 @@
         {{topic}}
       </div>
 
-      {{template "shared/attachments"}}
+      {{partial "shared/attachments"}}
 
       <hr/>
 
-      {{template 'shared/related_tasks'}}
+      {{partial 'shared/related_tasks'}}
 
       <div class="actions text-right">
         <a class="btn btn-link" {{action delete this}}>

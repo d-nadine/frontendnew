@@ -1,5 +1,6 @@
 Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
+  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
 
@@ -11,7 +12,14 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   contact: DS.belongsTo('Radium.Contact')
   deal: DS.belongsTo('Radium.Deal')
   email: DS.belongsTo('Radium.Email')
+  discussion: DS.belongsTo('Radium.Discussion')
   todo: DS.belongsTo('Radium.Todo')
+  meeting: DS.belongsTo('Radium.Meeting')
+
+  todos: DS.hasMany('Radium.Todo')
+  meetings: DS.hasMany('Radium.Meeting')
+
+  tasks: Radium.computed.tasks('todos', 'meetings')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

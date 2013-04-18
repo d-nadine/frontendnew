@@ -29,6 +29,14 @@ class Populator
       startsat: Ember.DateTime.create().advance(day: 7)
       endsat: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
 
+    todoList = -> [
+          Factory.create('todo')
+          Factory.create('call')
+          Factory.create('todo', isFinished: true)
+          Factory.create('call', isFinished: true)
+        ]
+
+
     contacts = for i in [0..20]
       Factory.create 'contact',
         user: -> userDictionary.random()
@@ -53,13 +61,8 @@ class Populator
     for i in [0..30]
       Factory.create 'email',
         sender: -> if Math.random() >= 0.5 then userDictionary.random() else contactDictionary.random()
-        todos: -> [
-          Factory.create('todo')
-          Factory.create('call')
-          Factory.create('todo', isFinished: true)
-          Factory.create('call', isFinished: true)
-        ]
-        to: -> 
+        todos: todoList
+        to: ->
           if @sender instanceof Radium.User
             [contactDictionary.random()]
           else
@@ -77,6 +80,22 @@ class Populator
     Factory.create 'meeting', meetingHash
 
     for i in [0..10]
+      Factory.create 'todo',
+        user: userDictionary.random()
+        todos: todoList
+        meetings: -> [
+          Factory.create 'meeting', meetingHash
+        ]
+
+    for i in [0..10]
+      Factory.create 'meeting',
+        user: -> userDictionary.random()
+        users: -> [userDictionary.set[0], userDictionary.set[1]]
+        startsat: Ember.DateTime.create().advance(day: 7)
+        endsat: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
+        todos: todoList
+
+    for i in [0..10]
       Factory.create 'discussion',
         user: userDictionary.random()
         users: [userDictionary.random(), userDictionary.random()]
@@ -85,12 +104,7 @@ class Populator
             contactDictionary.random()
           else
             dealDictionary.random()
-        todos: -> [
-          Factory.create('todo')
-          Factory.create('call')
-          Factory.create('todo', isFinished: true)
-          Factory.create('call', isFinished: true)
-        ]
+        todos: todoList
         meetings: -> [
           Factory.create 'meeting', meetingHash
         ]

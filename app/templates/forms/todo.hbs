@@ -25,13 +25,18 @@
 
   {{#if isExpanded}}
     <div class="secondary">
-      {{view view.datePicker class="field"}}
-      {{view view.userPicker class="field"}}
+      <div {{bindAttr class="showAddAction:add-tasks :block"}}>
+        {{view view.datePicker class="field"}}
+        {{view view.userPicker class="field"}}
 
-      {{#if isEditable}}
-        <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
-      {{/if}}
-      {{partial 'add_action'}}
+        {{#if isEditable}}
+          <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
+        {{/if}}
+
+        {{partial 'forms/tasks'}}
+      </div>
+
+      {{partial 'forms/footer'}}
     </div>
   {{/if}}
 </form>
