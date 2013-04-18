@@ -31,10 +31,11 @@ Radium.LeadsNewView = Ember.View.extend
   ).property('controller.isNew')
 
   changeExisting: ->
-    @set 'controller.changingStatus', true
-    @set 'controller.status', 'lead'
     @set 'controller.existingDetailsShown', false
-    @showExistingDetails()
+    @showContactDetails()
+    @set 'changingStatus', true
+    @set 'controller.status', 'lead'
+    @set 'changingStatus', false
 
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
@@ -94,7 +95,7 @@ Radium.LeadsNewView = Ember.View.extend
     viewType: Radium.AddressMultipleField
 
   contactDidChange: ( ->
-    return if @get('controller.changingStatus')
+    return if @get('changingStatus')
 
     contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
@@ -106,6 +107,7 @@ Radium.LeadsNewView = Ember.View.extend
   ).observes('controller.isNew')
 
   showContactDetails: ->
+    @$('.commit').show()
     contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
 
@@ -116,13 +118,9 @@ Radium.LeadsNewView = Ember.View.extend
     @$('.address-section').slideToggle('medium')
 
   showExistingDetails: ->
-    contactDetails = @$('.contact-detail')
-    if @get('controller.existingDetailsShown')
-      contactDetails.slideUp('medium')
-      @set('controller.existingDetailsShown', false)
-    else
-      contactDetails.slideDown('medium')
-      @set('controller.existingDetailsShown', true)
+    @$('.commit').hide()
+    @$('.contact-detail').slideToggle('medium')
+    @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
   contactName: Radium.Combobox.extend Radium.ValueValidationMixin,
     classNameBindings: ['open']

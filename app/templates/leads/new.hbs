@@ -71,30 +71,22 @@
                   <hr/>
                 </div>
                 {{partial 'validation_error_message'}}
-                {{#unless existingDetailsShown}}
                 <div class="commit">
                   <a href="#" {{action submit}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
                 </div>
-                {{/unless}}
               </div>
               <div class="existing">
                 {{#unless isNew}}
-                  <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
+                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
                 {{/unless}}
                 <div>
                   {{#if isCustomer}}
                     {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
                   {{else}}
-                    {{#unless isNew}}
-                      <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
-                        {{#unless existingDetailsShown}}
-                          <i class="icon-arrow-down"></i>
-                        {{else}}
-                          <i class="icon-arrow-up"></i>
-                        {{/unless}}
-                      </a>
-                      <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
-                    {{/unless}}
+                    <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
+                      <i id="existingToggle" class="icon-arrow-down"></i>
+                    </a>
+                    <a href="#" {{action changeExisting target="view" bubbles=false}} class="btn btn-success">Yes</a>
                   {{/if}}
                 </div>
               </div>
