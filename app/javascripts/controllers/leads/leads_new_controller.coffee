@@ -5,10 +5,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   companies: Ember.computed.alias 'controllers.companies'
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   leadSources: Ember.computed.alias 'controllers.leadSources.leadSources'
-  showDetail: false
   form: null
-  isNewContact: false
-  showExisting: false
   existingDetailsShown: false
 
   companyNames: ( ->
@@ -17,18 +14,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     @get('companies').mapProperty('name')
   ).property('companies.[]')
 
-  isExistingContact: ( ->
-    return false unless @get('model')
-
-    unless @get('model.isNew')
-      @set 'isNewContact', false
-      return true
-
-    false
-  ).property('model', 'isNewContact')
-
   modelDidChange: ( ->
-    @set('companyName', @get('model.company.name')) if @get('model') && ! @get('model.isNew')
+    @set('companyName', @get('model.company.name')) if @get('model') && !@get('model.isNew')
 
     return if @get('form') || !@get('model')
 
@@ -42,12 +29,8 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
     status == "lead" || status == "existing"
   ).property('model.status')
 
-  toggleDetail: ->
-    @toggleProperty 'showDetail'
-
   cancel: ->
     @set 'model', @get('form')
-    @set 'isNewContact', true
 
   submit: ->
     @set 'isSubmitted', true

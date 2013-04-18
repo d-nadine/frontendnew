@@ -18,7 +18,7 @@ Radium.LeadsNewView = Ember.View.extend
   ).property('controller.status')
 
   existingContactText: ( ->
-    return unless @get('controller.isExistingContact')
+    return if @get('controller.isNew')
 
     status = @get('controller.status')
 
@@ -28,12 +28,10 @@ Radium.LeadsNewView = Ember.View.extend
       return "is an existing customer.  Do you want to add a deal?"
 
     "is not a lead, do you want to update their status to lead?"
-  ).property('controller.isExistingContact')
+  ).property('controller.isNew')
 
   changeExisting: ->
     @set 'controller.status', 'lead'
-    @set 'controlller.existingDetailsShown', false
-    @set 'controller.showExisting', true
 
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.companyNames'
@@ -93,50 +91,33 @@ Radium.LeadsNewView = Ember.View.extend
     viewType: Radium.AddressMultipleField
 
   contactDidChange: ( ->
-    newContactArea = @$('.new-contact')
+    contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
 
-    return unless newContactArea && newContactArea.length > 0
+    return unless contactDetails && contactDetails.length > 0
+
+    contactDetails.slideUp('medium', ->
+      existingArea.slideDown('medium'))
+  ).observes('controller.isNew')
+
+  showContactDetails: ->
+    contactDetails = @$('.contact-detail')
+    existingArea = @$('.existing')
 
     existingArea.hide()
+    contactDetails.slideDown('medium')
 
-    if @get('controller.isNewContact') || @get('controller.showExisting')
-      newContactArea.slideDown('medium')
-    else
-      newContactArea.slideUp('medium')
-  ).observes('controller.isNewContact','controller.showExisting')
-
-  isExistingContactDidChange: ( ->
-    newContactArea = @$('.new-contact')
-    existingArea = @$('.existing')
-
-    return unless existingArea && existingArea.length > 0
-
-    newContactArea.hide()
-
-    if @get('controller.isExistingContact')
-      existingArea.slideDown('medium')
-    else
-      existingArea.slideUp('medium')
-  ).observes('controller.isExistingContact')
+  toggleDetail: ->
+    @$('.address-section').slideToggle('medium')
 
   showExistingDetails: ->
-    newContactArea = @$('.new-contact')
-
-    return unless newContactArea && newContactArea.length > 0
-
-    newContactArea.slideToggle('medium')
-    @toggleProperty 'controller.existingDetailsShown'
-
-  showDetailDidChange: ( ->
-    addressArea = @$('.address-section')
-
-    return unless addressArea && addressArea.length > 0
-
-    addressArea.slideToggle('medium')
-
-    @$('.showdetails-link i').toggleClass('icon-arrow-down icon-arrow-up')
-  ).observes('controller.showDetail')
+    contactDetails = @$('.contact-detail')
+    if @get('controller.existingDetailsShown')
+      contactDetails.slideUp('medium')
+      @set('controller.existingDetailsShown', false)
+    else
+      contactDetails.slideDown('medium')
+      @set('controller.existingDetailsShown', true)
 
   contactName: Radium.Combobox.extend Radium.ValueValidationMixin,
     classNameBindings: ['open']
@@ -145,8 +126,7 @@ Radium.LeadsNewView = Ember.View.extend
     placeholder: 'Type a name'
     sourceBinding: 'controller.contacts'
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
-    isExistingContact: Ember.computed.alias 'controller.isExistingContact'
-    isNewContactBinding: 'controller.isNewContact'
+    isNew: Ember.computed.alias 'controller.isNew'
     lookupQuery: (query) ->
       @get('source').find (item) -> item.get('name') == query
 
@@ -157,7 +137,7 @@ Radium.LeadsNewView = Ember.View.extend
           @$('input[type=text]').blur()
           @clearValue()
         else
-          if @get('isExistingContact')
+          unless @get('isNew')
             @clearValue()
           @set 'value', value
       else if !value && @get('value')
@@ -181,6 +161,5 @@ Radium.LeadsNewView = Ember.View.extend
       @get('controller').cancel()
 
     blur: ->
-      return if @get('isNewContact')
       return if @get('value')?.length < 3
-      @set('isNewContact', true)
+      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')

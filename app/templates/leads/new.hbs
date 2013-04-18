@@ -1,6 +1,8 @@
 <div>
   <div class="tabbable">
     <h1><i class="icon-plus"></i>Lead</h1>
+    <h1>{{isNew}}</h1>
+    <h1>{{view.contactDetailsVisible}}</h1>
     <ul class="nav nav-pills">
       <li class="active">
         <a href="#single" data-toggle="tab">Single Lead</a>
@@ -18,14 +20,14 @@
           <div class="secondary">
             {{#linkTo unimplemented classNames="close"}}x{{/linkTo}}
             <fieldset>
-              <div {{bindAttr class="isExistingContact :control-group"}}>
+              <div class="control-group">
                 <label class="control-label">Name</label>
                 <div class="controls">
                   <div {{bindAttr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
                     {{view view.contactName}}
-                    {{#if isExistingContact}}
+                    {{#unless isNew}}
                       <span class="text">{{view.statusDescription}}</span>
-                    {{/if}}
+                    {{/unless}}
                   </div>
                 </div>
               </div>
@@ -35,7 +37,7 @@
                   {{view view.companyPicker class="field"}}
                 </div>
               </div>
-              <div class="new-contact">
+              <div class="contact-detail">
                 {{view view.emailAddresses}}
                 {{view view.phoneNumbers}}
                 <div class="control-group">
@@ -63,7 +65,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <a href="#" class="btn showdetails-link" {{action toggleDetail bubbles=false}}><i class="icon-arrow-down"></i></a>
+                  <a href="#" class="btn showdetails-link" {{action toggleDetail target="view" bubbles=false}}><i class="icon-arrow-down"></i></a>
                 </div>
                 <div class="address-section">
                   <hr/>
@@ -78,7 +80,9 @@
                 {{/unless}}
               </div>
               <div class="existing">
-                <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
+                {{#unless isNew}}
+                  <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
+                {{/unless}}
                 <div>
                 {{#if isCustomer}}
                   {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
