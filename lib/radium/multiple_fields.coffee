@@ -11,7 +11,6 @@ Radium.MultipleFields = Ember.ContainerView.extend
     @addNew()
 
   sourceDidChange: ( ->
-    console.log @get('readonly')
     return unless @get('source')
 
     index = 0

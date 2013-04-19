@@ -124,6 +124,7 @@ Radium.LeadsNewView = Ember.View.extend
 
   toggleDetail: ->
     @$('.address-section').slideToggle('medium')
+    @$('#detailToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
   showExistingDetails: ->
     @$('.commit').hide()
