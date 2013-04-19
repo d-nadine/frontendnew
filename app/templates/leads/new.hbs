@@ -21,7 +21,7 @@
               <div class="control-group">
                 <label class="control-label">Name</label>
                 <div class="controls">
-                  <div {{bindAttr class="controller.name.length:is-valid view.nameField.isInvalid:is-invalid :control-box :field :contact-name"}}>
+                  <div>
                     {{view view.contactName viewName="nameField"}}
                     {{#unless isNew}}
                       <span class="text">{{view.statusDescription}}</span>

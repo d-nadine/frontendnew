@@ -158,7 +158,7 @@ Radium.LeadsNewView = Ember.View.extend
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
   contactName: Radium.Combobox.extend Radium.ContactCompanyMixin,
-    classNameBindings: ['open']
+    classNameBindings: ['open', ':contact-name']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Type a name'
