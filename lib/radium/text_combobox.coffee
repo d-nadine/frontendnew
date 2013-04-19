@@ -7,7 +7,6 @@ Radium.TextCombobox = Ember.View.extend
     ':control-box'
   ]
   queryBinding: 'queryToValueTransform'
-  disabledBinding: 'parentView.disabled'
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
@@ -19,6 +18,7 @@ Radium.TextCombobox = Ember.View.extend
   ).property('value')
 
   template: Ember.Handlebars.compile """
+    {{log view.disabled}}
     {{view view.textField}}
 
     {{#unless view.disabled}}

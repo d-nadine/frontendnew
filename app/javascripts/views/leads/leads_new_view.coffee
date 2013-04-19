@@ -38,6 +38,7 @@ Radium.LeadsNewView = Ember.View.extend
     @set 'changingStatus', false
 
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
+    disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
     placeholder: 'Company'
@@ -60,7 +61,7 @@ Radium.LeadsNewView = Ember.View.extend
     readonly: Ember.computed.not 'controller.isNew'
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
-    disabledBinding: 'controller.isDisabled'
+    disabled: Ember.computed.not 'controller.isNew'
     valueBinding: 'controller.model.assignedTo'
 
   contactType: Ember.View.extend
@@ -75,9 +76,11 @@ Radium.LeadsNewView = Ember.View.extend
     """
 
   notes: Ember.TextArea.extend
+    attributeBindings: ['readonly']
     classNames: ['field', 'text-area']
     placeholder: 'What is the lead interested in buying?'
     valueBinding: 'controller.notes'
+    readonly: Ember.computed.not 'controller.isNew'
     didInsertElement: ->
       @_super()
       @$().elastic()
@@ -89,6 +92,7 @@ Radium.LeadsNewView = Ember.View.extend
     classNameBindings: [
       'disabled:is-disabled'
     ]
+    disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.leadSources'
     valueBinding: 'controller.source'
     placeholder: 'Where is this lead from?'
