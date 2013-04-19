@@ -30,13 +30,6 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isNew')
 
-  changeExisting: ->
-    @set 'controller.existingDetailsShown', false
-    @showContactDetails()
-    @set 'changingStatus', true
-    @set 'controller.status', 'lead'
-    @set 'changingStatus', false
-
   companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.companyNames'
@@ -107,8 +100,6 @@ Radium.LeadsNewView = Ember.View.extend
     readonly: Ember.computed.not 'controller.isNew'
 
   contactDidChange: ( ->
-    return if @get('changingStatus')
-
     contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
 
