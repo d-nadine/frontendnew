@@ -5,7 +5,9 @@ Radium.AutocompleteView = Radium.View.extend
     ':autocomplete'
   ]
 
+  listBinding: 'controller.people'
   showAvatar: true
+  showAvatarInResults: true
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
   template: Ember.Handlebars.compile """
@@ -86,6 +88,7 @@ Radium.AutocompleteView = Radium.View.extend
     @$('li.as-original input').width inputWidth
 
   didInsertElement: ->
+    @$('input[type=text]').addClass('field')
     @resizeInputBox()
 
   autocomplete: Ember.TextField.extend
@@ -93,6 +96,7 @@ Radium.AutocompleteView = Radium.View.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
+    listBinding: 'parentView.list'
 
     didInsertElement: ->
       @$().autoSuggest {retrieve: @retrieve.bind(this)},
@@ -126,18 +130,26 @@ Radium.AutocompleteView = Radium.View.extend
              else
                email
 
-      content = """
-        #{@getAvatar(data)}
-        #{name}
-      """
+      content = ""
+
+      if @get('parentView.showAvatarInResults')
+        content = """
+          #{@getAvatar(data)}
+          #{name}
+        """
+      else
+        content = """
+          #{name}
+        """
+
       elem.html(content)
 
     retrieve: (query, callback) ->
-      people = @get('controller.people')
+      list = @get('list')
 
-      return unless people.get('length')
+      return unless list.get('length')
 
-      results = people.filter( (item) =>
+      results = list.filter( (item) =>
                         @get('source').indexOf(item) == -1
                      ).map (item) =>
                         @mapSearchResult.call this, item

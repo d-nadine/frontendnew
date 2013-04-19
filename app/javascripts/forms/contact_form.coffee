@@ -11,6 +11,7 @@ Radium.ContactForm = Radium.Form.extend
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
     addresses: Ember.A()
+    groups: Ember.A()
   ).property().volatile()
 
   isValid: ( ->
@@ -22,6 +23,8 @@ Radium.ContactForm = Radium.Form.extend
 
   commit:  ->
     contact = Radium.Contact.createRecord @get('data')
+
+    contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
     @get('phoneNumbers').forEach (phoneNumber) =>
       contact.get('phoneNumbers').addObject Radium.PhoneNumber.createRecord phoneNumber
@@ -51,6 +54,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'source', ''
     @set 'companyName', ''
     @set 'status', 'lead'
+    @set 'groups', Ember.A()
     @set('phoneNumbers', [
       Ember.Object.create({name: 'Mobile', value: '', isPrimary: true}),
       Ember.Object.create({name: 'Work', value: ''}),

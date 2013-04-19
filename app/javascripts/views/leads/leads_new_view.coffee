@@ -4,9 +4,14 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
+require 'lib/radium/autocomplete_list_view'
 
 Radium.LeadsNewView = Ember.View.extend
   contacts: Ember.computed.alias 'controller.contacts'
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @$('.contact-name').focus()
 
   statusDescription: ( ->
     currentStatus = @get('controller.status')
@@ -59,6 +64,24 @@ Radium.LeadsNewView = Ember.View.extend
     return "contact name" if Ember.isEmpty(@get('controller.name'))
     return "company" if Ember.isEmpty(@get('controller.companyName'))
   ).property('controller.name', 'controller.companyName', 'showModal')
+
+  groups: Radium.AutocompleteView.extend
+    sourceBinding: 'controller.groups'
+    listBinding: 'controller.controllers.groups'
+    showAvatar: false
+    showAvatarInResults: false
+    resizeInputBox: ->
+      totalWidth = @$().outerWidth(true)
+
+      selectionWidth = 0
+
+      @$('li.as-selection-item').each ->
+        selectionWidth = selectionWidth + $(this).outerWidth(true)
+
+      inputWidth = totalWidth - selectionWidth - 157
+
+      @$('li.as-original input').width inputWidth
+
 
   companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin, Radium.ContactCompanyMixin,
     classNameBindings: [':company-name']

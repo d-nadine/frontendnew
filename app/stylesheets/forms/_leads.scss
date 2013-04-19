@@ -44,6 +44,13 @@
     margin-right: 50px;
   }
 
+  .autocomplete{
+    ul.as-selections{
+      padding: 5px;
+      border: 1px solid $control-border-color;
+    }
+  }
+
   ul.nav-pills{
     li:first-of-type a{
       padding-left: 50px;

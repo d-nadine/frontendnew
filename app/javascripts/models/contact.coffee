@@ -18,6 +18,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   status: DS.attr('string')
 
+  groups: DS.hasMany('Radium.Group')
+
   source: DS.attr('string')
 
   status: DS.attr('string')
