@@ -170,6 +170,7 @@ Radium.LeadsNewView = Ember.View.extend
 
     existingArea.hide()
     contactDetails.slideDown('medium')
+    @get('tags').resizeInputBox()
 
   toggleDetail: ->
     @$('.address-section').slideToggle('medium')

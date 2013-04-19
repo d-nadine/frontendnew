@@ -45,6 +45,11 @@ Radium.AutocompleteView = Radium.View.extend
       </div>
     </div>
   """
+
+  sourceDidChange: ( ->
+    alert 'it changed'
+  ).observes('source')
+
   showContextMenu: (attendee) ->
     return false unless @get('controller.isEditable')
 
