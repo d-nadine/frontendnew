@@ -30,7 +30,7 @@ Radium.ContactForm = Radium.Form.extend
       contact.get('emailAddresses').addObject Radium.EmailAddress.createRecord email
 
     @get('addresses').forEach (address) =>
-      contact.get('addresses').addObject Radium.EmailAddress.createRecord address
+      contact.get('addresses').addObject Radium.Address.createRecord address
 
     @get('store').commit()
 
