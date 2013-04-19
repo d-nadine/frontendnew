@@ -48,6 +48,7 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.phoneNumbers'
     viewType: Radium.PhoneMultipleField
     type: Radium.PhoneNumber
+    readonly: Ember.computed.not 'controller.isNew'
 
   emailAddresses: Radium.MultipleFields.extend
     labels: ['Work','Home']
@@ -56,6 +57,7 @@ Radium.LeadsNewView = Ember.View.extend
     leader: 'Email'
     sourceBinding: 'controller.emailAddresses'
     type: Radium.EmailAddress
+    readonly: Ember.computed.not 'controller.isNew'
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'controller.isDisabled'
@@ -98,6 +100,7 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.addresses'
     viewType: Radium.AddressMultipleField
     type: Radium.Address
+    readonly: Ember.computed.not 'controller.isNew'
 
   contactDidChange: ( ->
     return if @get('changingStatus')

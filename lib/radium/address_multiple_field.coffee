@@ -2,18 +2,19 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
   template: Ember.Handlebars.compile """
     <div class="addresses">
       <div class="control-group whole">
-        {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value.street" placeholderBinding="view.leader"}}
+        {{view Ember.TextField classNames="field input-xlarge" valueBinding="view.current.value.street" placeholderBinding="view.leader" readonlyBinding="view.readonly"}}
       </div>
       <div class="control-group whole">
-        {{view Ember.TextField  valueBinding="view.current.value.city" classNames="field input-xlarge city" placeholder="City"}}
+        {{view Ember.TextField  valueBinding="view.current.value.city" classNames="field input-xlarge city" placeholder="City" readonlyBinding="view.readonly"}}
       </div>
       <div class="control-group broken">
-        {{view Ember.TextField valueBinding="view.current.value.state" classNames="field state" placeholder="State" }}
-        {{view Ember.TextField valueBinding="view.current.value.zipcode" classNames="field zip" placeholder="Zip code"}}
+        {{view Ember.TextField valueBinding="view.current.value.state" classNames="field state" placeholder="State" readonlyBinding="view.readonly" }}
+        {{view Ember.TextField valueBinding="view.current.value.zipcode" classNames="field zip" placeholder="Zip code" readonlyBinding="view.readonly"}}
       </div>
     </div>
   """
   showAddNew: ( ->
+    return if @get('readonly')
     index = @get('index')
     sourceLength = (@get('source.length') - 1)
     return false if index == sourceLength

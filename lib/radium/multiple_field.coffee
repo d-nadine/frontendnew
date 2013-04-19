@@ -3,24 +3,26 @@ require 'lib/radium/radio'
 Radium.MultipleField = Ember.View.extend
   classNames: ['multiple-field']
   open: false
+  readonly: Ember.computed.alias 'parentView.readonly'
 
   didInsertElement: ->
     @set 'current', @get('source').objectAt(@get('index'))
-    # @set('showDropDown', @get('index') != 0)
 
   addNew: ->
     @get('parentView').addNew()
-    # @set 'showDropDown', true
 
   showDropDown: ( ->
-   @get('parentView.childViews.length') > 1
-  ).property('parentView.childViews.[]')
+    return false if @get('readonly')
+    @get('parentView.childViews.length') > 1
+  ).property('parentView.childViews.[]', 'readonly')
 
   showDelete: ( ->
+    return false if @get('readonly')
     @get('parentView.childViews.length') > 1
-  ).property('parentView.childViews.[]')
+  ).property('parentView.childViews.[]', 'readonly')
 
   showAddNew: ( ->
+    return false if @get('readonly')
     name = @get('current.name')
     index = @get('index')
     currentIndex = @get('parentView.currentIndex')
@@ -74,7 +76,7 @@ Radium.MultipleField = Ember.View.extend
   """
 
   template: Ember.Handlebars.compile """
-    {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader"}}
+    {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader" readonlyBinding="view.readonly" readonlyBinding="view.readonly"}}
   """
 
   primaryRadio: Radium.Radiobutton.extend
