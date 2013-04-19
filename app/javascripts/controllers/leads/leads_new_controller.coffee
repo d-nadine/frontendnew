@@ -41,6 +41,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   ).property('model.status', 'isNew')
 
   cancel: ->
+    @get('form').reset()
     @set 'model', @get('form')
 
   submit: ->
