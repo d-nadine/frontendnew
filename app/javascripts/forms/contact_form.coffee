@@ -14,8 +14,7 @@ Radium.ContactForm = Radium.Form.extend
   ).property().volatile()
 
   isValid: ( ->
-    return if Ember.isEmpty(@get('name'))
-    return if Ember.isEmpty(@get('companyName'))
+    return if Ember.isEmpty(@get('name')) && Ember.isEmpty(@get('companyName'))
     return if Ember.isEmpty(@get('source'))
     return unless @get('assignedTo')
     true

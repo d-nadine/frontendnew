@@ -18,7 +18,6 @@ Radium.TextCombobox = Ember.View.extend
   ).property('value')
 
   template: Ember.Handlebars.compile """
-    {{log view.disabled}}
     {{view view.textField}}
 
     {{#unless view.disabled}}

@@ -21,8 +21,8 @@
               <div class="control-group">
                 <label class="control-label">Name</label>
                 <div class="controls">
-                  <div {{bindAttr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
-                    {{view view.contactName}}
+                  <div {{bindAttr class="controller.name.length:is-valid view.nameField.isInvalid:is-invalid :control-box :field :contact-name"}}>
+                    {{view view.contactName viewName="nameField"}}
                     {{#unless isNew}}
                       <span class="text">{{view.statusDescription}}</span>
                     {{/unless}}
@@ -88,7 +88,7 @@
                 </div>
                 {{partial 'validation_error_message'}}
                 <div class="commit">
-                  <a href="#" {{action submit}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
+                  <a href="#" {{action submit target="view" bubbles=false}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
                 </div>
               </div>
               </fieldset>
@@ -116,3 +116,22 @@
     </div>
   </div>
 </div>
+{{#if view.showModal}}
+<div class="modal-backdrop">
+  <div class="modal fade">
+    <div class="modal-header">
+      <button type="button" {{action cancelSubmit target="view" bubbles="false"}} class="close">×</button>
+      <h2>Add {{view.missingDetail}}?</h2>
+    </div>
+    <div class="modal-body">
+      <form class="form">
+        <p>You are about to create a contact without a {{view.missingDetail}}, do you want to do this?</p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#" {{action cancelSubmit target="view" bubbles="false"}} class="btn">Cancel</a>
+      <a href="#" {{action submit bubbles="false"}} class="btn btn-primary">Proceed</a>
+    </div>
+  </div>
+</div>
+{{/if}}

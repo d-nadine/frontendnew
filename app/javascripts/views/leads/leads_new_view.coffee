@@ -30,7 +30,38 @@ Radium.LeadsNewView = Ember.View.extend
     "is not a lead, do you want to update their status to lead?"
   ).property('controller.isNew')
 
-  companyPicker: Radium.TextCombobox.extend Radium.ValueValidationMixin,
+  submit: ->
+    @set 'controller.isSubmitted', true
+
+    return unless @get('controller.isValid')
+
+    if Ember.isEmpty( @get('controller.name')) || Ember.isEmpty( @get('controller.companyName'))
+      @set 'showModal', true
+      Ember.run.next =>
+        @$('.modal').addClass 'in'
+      return
+
+    @get('controller').submit()
+
+  cancelSubmit: ->
+    @$().one $.support.transition.end, =>
+      @set 'showModal', false
+
+    @$('.modal').removeClass('in')
+
+    if Ember.isEmpty 'controller.name'
+      @$('.contact-name input[type=text]').focus()
+      return
+
+    @$('.company-name input[type=text]').focus()
+
+  missingDetail: ( ->
+    return "contact name" if Ember.isEmpty(@get('controller.name'))
+    return "company" if Ember.isEmpty(@get('controller.companyName'))
+  ).property('controller.name', 'controller.companyName', 'showModal')
+
+  companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin, Radium.ContactCompanyMixin,
+    classNameBindings: [':company-name']
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
@@ -126,7 +157,7 @@ Radium.LeadsNewView = Ember.View.extend
     @$('.contact-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  contactName: Radium.Combobox.extend Radium.ValueValidationMixin,
+  contactName: Radium.Combobox.extend Radium.ContactCompanyMixin,
     classNameBindings: ['open']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
@@ -168,5 +199,6 @@ Radium.LeadsNewView = Ember.View.extend
       @get('controller').cancel()
 
     blur: ->
+      return unless @get('isNew')
       return if @get('value')?.length < 3
       @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
