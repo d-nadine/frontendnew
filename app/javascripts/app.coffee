@@ -16,7 +16,7 @@ Radium = Em.Application.create
 
 window.Radium = Radium
 
-require /lib\/base/
+require /lib\/radium\/base/
 
 require 'lib/radium/computed'
 
