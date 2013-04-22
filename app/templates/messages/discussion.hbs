@@ -3,7 +3,10 @@
 <div>
   <div class="block discussion-card message-card">
     <div class="header">
+      {{formatDateTime createdAt format="full" class="muted pull-right"}}
+
       <i class="icon-discussion"></i>
+
       <p><big><strong>
         {{#if aboutDeal}}
           Discussion about the {{#linkTo deal reference}}{{reference.name}}{{/linkTo}} deal
