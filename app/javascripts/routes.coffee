@@ -12,7 +12,7 @@ Radium.Router.map ->
       # FIXME: this should be a routless state
       # The path is only here so the email can be 
       # passed with transitionTo
-      @route 'sent', path: '/sent/:email_id'
+      @route 'sent', path: '/:email_id/sent'
 
   @resource 'pipeline', ->
     @route 'leads'

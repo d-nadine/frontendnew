@@ -203,6 +203,14 @@
 .email-confirmation-view {
   padding: 30px 15px;
 
+  .sending {
+    text-align: center;
+
+    img {
+      margin-bottom: 30px;
+    }
+  }
+
   .subject { 
     text-align: center;
     color: $muted;
