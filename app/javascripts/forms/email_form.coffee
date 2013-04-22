@@ -1,7 +1,8 @@
 require 'forms/form'
 
 Radium.EmailForm = Radium.Form.extend
-  includeReminder: true
+  includeReminder: false
+  reminderTime: 5
 
   data: ( ->
     subject: @get('subject')

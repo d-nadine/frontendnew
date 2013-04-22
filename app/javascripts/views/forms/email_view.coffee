@@ -52,7 +52,7 @@ Radium.FormsEmailView = Radium.FormView.extend
 
   reminderLength: Ember.TextField.extend
     type: 'number'
-    value: 5
+    valueBinding: 'controller.reminderTime'
     disabled: Ember.computed.not('controller.includeReminder')
 
   closeModal: ->

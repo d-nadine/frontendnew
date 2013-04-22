@@ -39,7 +39,11 @@
       <div class="check-response">
         {{#unless showCheckForResponse}}
           <button class="btn" tabindex="6" {{action toggleReminderForm bubbles="false"}}>
-            Check for response?
+            {{#if includeReminder}}
+              Checking for response in {{reminderTime}} day(s)
+            {{else}}
+              Check for response?
+            {{/if}}
           </button>
         {{/unless}}
         {{#if showCheckForResponse}}
