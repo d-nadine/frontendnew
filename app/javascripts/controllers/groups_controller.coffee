@@ -1,1 +1,1 @@
-Radium.GroupsController = Ember.ArrayController.extend()
+Radium.GroupsController = Radium.ArrayController.extend()

@@ -1,4 +1,4 @@
-Radium.MessagesBulkActionItemController = Ember.ObjectController.extend
+Radium.MessagesBulkActionItemController = Radium.ObjectController.extend
   summary: (->
     @get('subject') || @get('topic')
   ).property('subject', 'topic')

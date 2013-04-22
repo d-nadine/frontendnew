@@ -1,4 +1,4 @@
-Radium.CommentsController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.CommentsController = Radium.ObjectController.extend
   text: null
 
   submit: ->

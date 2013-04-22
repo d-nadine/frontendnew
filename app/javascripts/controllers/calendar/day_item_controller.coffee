@@ -1,6 +1,6 @@
 require 'lib/radium/show_more_mixin'
 
-Radium.CalendarDayItemController = Ember.ArrayController.extend Radium.ShowMoreMixin,
+Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['calendar']
   calendarDate: Ember.computed.alias('controllers.calendar.date')
 

@@ -1,4 +1,4 @@
-Radium.NextTaskController = Ember.ObjectController.extend
+Radium.NextTaskController = Radium.ObjectController.extend
   isCall: (->
     @get('kind') is 'call'
   ).property('content')

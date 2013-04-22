@@ -1,4 +1,4 @@
-Radium.FormBoxController = Ember.ObjectController.extend
+Radium.FormBoxController = Radium.ObjectController.extend
   activeForm: 'todo'
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')

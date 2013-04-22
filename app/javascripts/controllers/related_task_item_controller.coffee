@@ -1,4 +1,4 @@
-Radium.RelatedTaskItemController = Ember.ObjectController.extend
+Radium.RelatedTaskItemController = Radium.ObjectController.extend
   isTodo: (->
     @get('kind') is 'general'
   ).property('content.kind')

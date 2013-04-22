@@ -1,3 +1,3 @@
 require 'lib/base/controller_mixin'
 
-Radium.ArrayController = Ember.ObjectController.extend Radium.ControllerMixin
+Radium.ArrayController = Ember.ArrayController.extend Radium.ControllerMixin

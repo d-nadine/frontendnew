@@ -1,4 +1,4 @@
-Radium.PipelineBaseController = Em.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
+Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
   perPage: 7
   deleteAll: ->
     # FIXME: ember-data errors, fake for now

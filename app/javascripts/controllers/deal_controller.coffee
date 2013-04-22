@@ -1,6 +1,6 @@
 require 'forms/todo_form'
 
-Radium.DealController = Radium.ObjectController.extend Radium.CurrentUserMixin,
+Radium.DealController = Radium.ObjectController.extend
   # FIXME: this should be null and not an empty string
   deletionToken: ''
 

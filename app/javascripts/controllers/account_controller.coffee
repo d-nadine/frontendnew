@@ -1,2 +1,2 @@
-Radium.AccountController = Ember.ObjectController.extend
+Radium.AccountController = Radium.ObjectController.extend
   needs: ['settings']
