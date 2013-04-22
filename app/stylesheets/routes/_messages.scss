@@ -5,11 +5,7 @@
 
   .is-selected .content,
   .content:hover {
-    .delete { 
-      display: inline;
-    }
-
-    .icon-attachments {
+    .delete, .icon-comment { 
       display: inline;
     }
   }
@@ -35,11 +31,7 @@
     cursor: pointer;
   }
 
-  .icon-attachments {
-    display: none;
-  }
-
-  .delete {
+  .delete, .icon-comment {
     display: none;
   }
 

@@ -10,6 +10,10 @@
       <i class="icon-attachments"></i>
     {{/if}}
 
+    {{#if hasComments}}
+      <i class="icon-comment"></i>
+    {{/if}}
+
     <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
       <i class='icon-delete'></i>
     </a>
