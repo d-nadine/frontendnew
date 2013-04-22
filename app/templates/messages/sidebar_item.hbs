@@ -2,7 +2,7 @@
   <i class="icon-todo"></i>
 </button>
 
-<div class="content" {{action selectItem this}}>
+<div {{bindAttr class="isSelectable :content"}} {{action selectItem this}}>
   {{yield}}
 
   <div class="footer">
