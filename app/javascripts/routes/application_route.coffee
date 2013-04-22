@@ -1,4 +1,4 @@
-Radium.ApplicationRoute = Ember.Route.extend
+Radium.ApplicationRoute = Radium.Route.extend
   events:
     toggleDrawer: (name) ->
       if @get('router.openDrawer') == name

@@ -1,4 +1,4 @@
-Radium.MessagesBulkActionsRoute = Ember.Route.extend
+Radium.MessagesBulkActionsRoute = Radium.Route.extend
   events:
     cancel: ->
       @deactivate()

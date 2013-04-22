@@ -1,4 +1,4 @@
-Radium.MessagesRoute = Ember.Route.extend
+Radium.MessagesRoute = Radium.Route.extend
   events:
     toggleFolders: ->
       @send 'toggleDrawer', 'messages/folders'
@@ -91,7 +91,7 @@ Radium.MessagesRoute = Ember.Route.extend
 
     @send 'closeDrawer'
 
-Radium.MessagesIndexRoute = Ember.Route.extend
+Radium.MessagesIndexRoute = Radium.Route.extend
   redirect: ->
     messages = @modelFor('messages')
     item = messages.get('firstObject')

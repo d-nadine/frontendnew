@@ -1,4 +1,4 @@
-Radium.DealRoute = Ember.Route.extend
+Radium.DealRoute = Radium.Route.extend
   events:
     confirmDeletion: ->
       @render 'deal/deletion_confirmation',

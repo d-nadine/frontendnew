@@ -1,4 +1,4 @@
-Radium.ContactRoute = Ember.Route.extend
+Radium.ContactRoute = Radium.Route.extend
   renderTemplate: ->
     @render()
     @render 'contact/sidebar',
