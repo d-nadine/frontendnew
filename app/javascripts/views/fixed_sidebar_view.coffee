@@ -1,4 +1,4 @@
-Radium.FixedSidebarView = Em.View.extend Radium.ScrollableMixin,
+Radium.FixedSidebarView = Radium.View.extend Radium.ScrollableMixin,
   classNames: ['sidebar-panel', 'sidebar-panel-fixed']
 
   layout: Ember.Handlebars.compile """

@@ -1,3 +1,3 @@
-Radium.DealView = Ember.View.extend Radium.LightBackgroundMixin,
+Radium.DealView = Radium.View.extend Radium.LightBackgroundMixin,
   classNames: ['page-view']
   layoutName: 'layouts/two_column'

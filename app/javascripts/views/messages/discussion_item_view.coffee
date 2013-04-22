@@ -1,1 +1,1 @@
-Radium.MessagesDiscussionItemView = Ember.View.extend Radium.ContentIdentificationMixin
+Radium.MessagesDiscussionItemView = Radium.View.extend Radium.ContentIdentificationMixin

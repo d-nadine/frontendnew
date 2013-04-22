@@ -1,4 +1,4 @@
-Radium.DatePicker = Ember.View.extend
+Radium.DatePicker = Radium.View.extend
   templateName: 'forms/date_picker'
   classNameBindings: [
     'date:is-valid'

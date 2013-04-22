@@ -1,3 +1,3 @@
-Radium.MessagesView = Em.View.extend Radium.DarkBackgroundMixin,
+Radium.MessagesView = Radium.View.extend Radium.DarkBackgroundMixin,
   classNames: ['page-view']
   layoutName: 'layouts/two_column'

@@ -1,4 +1,4 @@
-Radium.Combobox = Ember.View.extend
+Radium.Combobox = Radium.View.extend
   classNameBindings: [
     'isInvalid'
     'disabled:is-disabled'

@@ -1,4 +1,4 @@
-Radium.SidebarView = Ember.View.extend
+Radium.SidebarView = Radium.View.extend
   classNames: ['sidebar-panel']
   layout: Ember.Handlebars.compile """
     <div class="panel-content">

@@ -15,12 +15,12 @@ Radium.LocationPicker = Radium.Combobox.extend
   setValue: (object) ->
     @set 'value', object.get('name')
 
-  leaderView: Ember.View.extend
+  leaderView: Radium.View.extend
     template: Ember.Handlebars.compile """
       <i class="icon-map-marker"></i>
     """
 
-  footerView: Ember.View.extend
+  footerView: Radium.View.extend
     classNames: ["pull-right"]
     template: Ember.Handlebars.compile """
       <a {{action openMap}} href="#">Map</a>
