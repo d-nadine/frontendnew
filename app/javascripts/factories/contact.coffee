@@ -26,3 +26,8 @@ Factory.define 'contact', traits: ['timestamps'],
     Factory.create 'emailAddress',
       value: "#{@name}@#{@company.get('name')}.com"
   ]
+
+  groups: -> [
+    Factory.create 'group',
+      name: Dictionaries.companies.random()
+  ]

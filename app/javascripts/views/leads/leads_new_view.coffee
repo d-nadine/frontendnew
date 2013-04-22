@@ -68,6 +68,7 @@ Radium.LeadsNewView = Ember.View.extend
   groups: Radium.AutocompleteView.extend
     sourceBinding: 'controller.groups'
     listBinding: 'controller.controllers.groups'
+    isEditableBinding: 'controller.isNew'
     showAvatar: false
     showAvatarInResults: false
     resizeInputBox: ->

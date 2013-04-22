@@ -6,15 +6,23 @@ Radium.AutocompleteView = Radium.View.extend
   ]
 
   listBinding: 'controller.people'
+  isEditableBinding: 'controller.isEditable'
   showAvatar: true
   showAvatarInResults: true
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
+
   template: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
+<<<<<<< HEAD
       <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
         {{#if controller.isEditable}}
+=======
+      {{log view.isEditable}}
+      <li {{action showContextMenu this target="view"}} {{bindAttr class="view.isEditable :as-selection-item :blur"}}>
+        {{#if view.isEditable}}
+>>>>>>> readonly mode for groups
         <a class="as-close" {{action removeSelection this target="view"}}>×</a>
         {{/if}}
         {{#if view.showAvatar}}
@@ -46,12 +54,8 @@ Radium.AutocompleteView = Radium.View.extend
     </div>
   """
 
-  sourceDidChange: ( ->
-    alert 'it changed'
-  ).observes('source')
-
   showContextMenu: (attendee) ->
-    return false unless @get('controller.isEditable')
+    return false unless @get('isEditable')
 
     el = $(event.srcElement)
 
