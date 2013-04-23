@@ -41,14 +41,12 @@ Radium.DealForm = Radium.Form.extend
     true
   ).property('name','contact','user','source','description')
 
-  commit:  ->
+  create:  ->
     deal = Radium.Contact.createRecord @get('data')
 
     deal.set('checklist', Radium.Checklist.createRecord())
 
     @get('checklist.checklistItems').forEach (item) =>
       deal.get('checklist.checklistItems').addObject Radium.ChecklistItem.createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
-
-    @get('store').commit()
 
     deal
