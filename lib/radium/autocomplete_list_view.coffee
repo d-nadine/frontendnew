@@ -108,18 +108,26 @@ Radium.AutocompleteView = Radium.View.extend
     listBinding: 'parentView.list'
 
     didInsertElement: ->
-      @$().autoSuggest {retrieve: @retrieve.bind(this)},
-                        asHtmlID: @get('elementId')
-                        selectedItemProp: "name"
-                        searchObjProps: "name"
-                        formatList: @formatList.bind(this)
-                        getAvatar: @getAvatar.bind(this)
-                        selectionAdded: @selectionAdded.bind(this)
-                        resultsHighlight: true
-                        canGenerateNewSelections: true
-                        usePlaceholder: true
-                        retrieveLimit: 5
-                        startText: @get('placeholder')
+      options =
+            asHtmlID: @get('elementId')
+            selectedItemProp: "name"
+            searchObjProps: "name"
+            formatList: @formatList.bind(this)
+            getAvatar: @getAvatar.bind(this)
+            selectionAdded: @selectionAdded.bind(this)
+            resultsHighlight: true
+            canGenerateNewSelections: true
+            usePlaceholder: true
+            retrieveLimit: 5
+            startText: @get('placeholder')
+
+      if @get('parentView').newItemCriteria
+        options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)
+
+      if @get('parentView').selectionAdded
+        options = $.extend {}, options, selectionAdded: @get('parentView').selectionAdded.bind(this)
+
+      @$().autoSuggest {retrieve: @retrieve.bind(this)}, options
 
     selectionAdded: (item) ->
       # FIXME create new contact while meeting is being saved
