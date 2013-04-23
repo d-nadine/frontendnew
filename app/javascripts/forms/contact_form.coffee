@@ -35,7 +35,13 @@ Radium.ContactForm = Radium.Form.extend
     @get('addresses').forEach (address) =>
       contact.get('addresses').addObject Radium.Address.createRecord address
 
-    @get('store').commit()
+    @get('groups').forEach (group) =>
+      groups = contact.get('groups')
+
+      if group.get('id')
+        groups.addObject group unless contact.get('groups').contains group
+      else
+        groups.addObject Radium.Group.createRecord group.get('name')
 
     contact
 

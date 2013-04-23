@@ -49,7 +49,7 @@ Radium.LeadsNewView = Ember.View.extend
     @set 'showModal', false
     @$('.modal').removeClass 'in'
 
-    @get('controller').send 'submit'
+    @get('controller').submit()
 
   cancelSubmit: ->
     @$().one $.support.transition.end, =>
@@ -85,7 +85,6 @@ Radium.LeadsNewView = Ember.View.extend
       inputWidth = totalWidth - selectionWidth - 157
 
       @$('li.as-original input').width inputWidth
-
 
   companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin, Radium.ContactCompanyMixin,
     classNameBindings: [':company-name']
