@@ -5,6 +5,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
+  calls: DS.hasMany('Radium.Call', inverse: 'user')
   meetings: DS.hasMany('Radium.Meeting')
 
   name: DS.attr('string')
@@ -17,5 +18,5 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   settings: DS.attr('object')
 
-  tasks: Radium.computed.tasks('todos', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 

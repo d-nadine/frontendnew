@@ -1,10 +1,10 @@
 Radium.NextTaskController = Radium.ObjectController.extend
   isCall: (->
-    @get('kind') is 'call'
+    @get('content') instanceof Radium.Call
   ).property('content')
 
   isTodo: (->
-    @get('kind') is 'general'
+    @get('content') instanceof Radium.Todo
   ).property('content')
 
   isMeeting: (->

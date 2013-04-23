@@ -25,9 +25,9 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   todo: DS.belongsTo('Radium.Todo')
 
   todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
 
-  tasks: Radium.computed.tasks('todos', 'meetings')
-
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

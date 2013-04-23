@@ -7,12 +7,6 @@ Factory.define 'todo', traits: 'timestamps',
   user: -> Factory.create 'user'
   isEditable: true
 
-Factory.define 'call', traits: 'timestamps', from: 'todo',
-  kind: 'call'
-  description: -> Dictionaries.callDescriptions.random()
-  reference: -> Factory.create('contact')
-  isEditable: true
-
 Factory.define 'overdueTodo', from: 'todo',
   isFinished: false
   finishBy: -> Ember.DateTime.random past: true
