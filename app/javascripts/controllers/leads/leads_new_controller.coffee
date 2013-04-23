@@ -9,6 +9,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
   makeLead: ->
     @set 'status', 'lead'
+
     @get('store').commit()
 
   companyNames: ( ->
@@ -35,6 +36,7 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
   ).observes('model')
 
   isCustomer: ( ->
+    return false if @get('isSaving')
     return false if @get('isNew')
 
     status = @get('model.status')
@@ -52,12 +54,9 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
     return unless @get('isValid')
 
-    @set 'isSaving', true
-
     contact = @get('model').create()
 
     contact.one 'didCreate', =>
-      @set 'isSaving', false
       @transitionToRoute 'contact', contact
 
     @get('store').commit()
