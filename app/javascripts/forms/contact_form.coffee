@@ -21,7 +21,7 @@ Radium.ContactForm = Radium.Form.extend
     true
   ).property('name', 'companyName', 'assignedTo', 'source')
 
-  commit:  ->
+  create:  ->
     contact = Radium.Contact.createRecord @get('data')
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))

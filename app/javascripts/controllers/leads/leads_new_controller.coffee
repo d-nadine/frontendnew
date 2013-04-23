@@ -52,16 +52,12 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
 
     return unless @get('isValid')
 
-    @set 'justAdded', true
+    @set 'isSaving', true
 
-    Ember.run.later( ( =>
-      @set 'justAdded', false
-      @set 'isSubmitted', false
+    contact = @get('model').create()
 
-      if @get('isNew')
-        contact = @get('model').commit (contact)
-        @transitionToRoute 'contact', contact
-      else
-        @get('store').commit()
-        @transitionToRoute 'contact', @get('model')
-    ), 1200)
+    contact.one 'didCreate', =>
+      @set 'isSaving', false
+      @transitionToRoute 'contact', contact
+
+    @get('store').commit()

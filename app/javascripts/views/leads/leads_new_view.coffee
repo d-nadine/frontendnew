@@ -46,7 +46,10 @@ Radium.LeadsNewView = Ember.View.extend
         @$('.modal').addClass 'in'
       return
 
-    @get('controller').submit()
+    @set 'showModal', false
+    @$('.modal').removeClass 'in'
+
+    @get('controller').send 'submit'
 
   cancelSubmit: ->
     @$().one $.support.transition.end, =>

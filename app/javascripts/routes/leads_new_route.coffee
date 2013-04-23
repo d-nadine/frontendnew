@@ -9,4 +9,6 @@ Radium.LeadsNewRoute = Ember.Route.extend
   # FIXME: Should we not just use reset?
   contactFormDefaults: ( ->
     isNew: true
+    isSubmitted: false
+    isSaving: false
   ).property()
