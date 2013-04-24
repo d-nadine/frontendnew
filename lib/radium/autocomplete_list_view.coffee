@@ -15,15 +15,9 @@ Radium.AutocompleteView = Radium.View.extend
   template: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
-<<<<<<< HEAD
-      <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
-        {{#if controller.isEditable}}
-=======
-      {{log view.isEditable}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="view.isEditable :as-selection-item :blur"}}>
         {{#if view.isEditable}}
->>>>>>> readonly mode for groups
-        <a class="as-close" {{action removeSelection this target="view"}}>×</a>
+          <a class="as-close" {{action removeSelection this target="view"}}>×</a>
         {{/if}}
         {{#if view.showAvatar}}
           {{avatar this}}
