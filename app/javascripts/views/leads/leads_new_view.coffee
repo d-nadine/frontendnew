@@ -109,18 +109,12 @@ Radium.LeadsNewView = Ember.View.extend
       </ul>
     """
 
-  notes: Ember.TextArea.extend
+  notes: Radium.TextArea.extend
     attributeBindings: ['readonly']
     classNames: ['field', 'text-area']
     placeholder: 'What is the lead interested in buying?'
     valueBinding: 'controller.notes'
     readonly: Ember.computed.not 'controller.isNew'
-    didInsertElement: ->
-      @_super()
-      @$().elastic()
-
-    willDestroyElement: ->
-      @$().off('elastic')
 
   source: Radium.TextCombobox.extend Radium.ValueValidationMixin,
     classNameBindings: [
