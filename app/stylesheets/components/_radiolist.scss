@@ -1,0 +1,15 @@
+.radio-group{
+  ul li{
+    display: inline-block;
+    list-style: none;
+    label{
+      display: inline;
+      margin-right: 10px;
+      position: relative;
+      top: 3px;
+    }
+    input[type=radio]{
+      margin-right: 10px;
+    }
+  }
+}
