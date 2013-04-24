@@ -1,1 +1,1 @@
-Radium.NextTaskView = Ember.View.extend()
+Radium.NextTaskView = Radium.View.extend()

@@ -1,1 +1,1 @@
-Radium.ContactsController = Ember.ArrayController.extend()
+Radium.ContactsController = Radium.ArrayController.extend()

@@ -1,4 +1,4 @@
-Radium.MessagesCreateEmailController = Em.ObjectController.extend
+Radium.MessagesCreateEmailController = Radium.ObjectController.extend
   needs: ['messages']
 
   cancel: ->

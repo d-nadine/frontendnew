@@ -1,2 +1,2 @@
-Radium.DealDeletedView = Ember.View.extend
+Radium.DealDeletedView = Radium.View.extend
   layoutName: 'layouts/single_column'

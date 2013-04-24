@@ -1,4 +1,4 @@
-Radium.FormsDiscussionController = Ember.ObjectController.extend Ember.Evented,
+Radium.FormsDiscussionController = Radium.ObjectController.extend Ember.Evented,
   isDisabled: (->
     return true if @get('justAdded')
     return true if @get('isSubmitted')

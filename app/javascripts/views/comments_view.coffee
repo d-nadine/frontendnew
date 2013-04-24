@@ -1,6 +1,6 @@
 require 'lib/radium/text_area'
 
-Radium.CommentsView = Ember.View.extend
+Radium.CommentsView = Radium.View.extend
   commentTextArea: Radium.TextArea.extend(Ember.TargetActionSupport,
     placeholder: 'Add a comment'
     valueBinding: 'controller.text'

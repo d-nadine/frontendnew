@@ -1,4 +1,4 @@
-Radium.PipelineController = Em.ArrayController.extend
+Radium.PipelineController = Radium.ArrayController.extend
   negotiatingGroups: Ember.computed.alias 'content.negotiatingGroups'
   leads: Ember.computed.alias 'content.leads'
   closed: Ember.computed.alias 'content.closed'

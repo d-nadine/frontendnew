@@ -12,7 +12,7 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
     disabledBinding: 'controller.isContactPickerDisabled'
     expandedBinding: 'controller.isExpanded'
 
-  callBox: Ember.View.extend
+  callBox: Radium.View.extend
     contactBinding: 'controller.reference'
     classNames: ['btn-group', 'call-control-box']
     dropDownTabIndex: (->

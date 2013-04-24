@@ -27,7 +27,7 @@ Radium.NotificationsView = Radium.DrawerView.extend
   notificationsListView: Ember.CollectionView.extend
     tagName: 'ul'
     classNames: ['unstyled']
-    itemViewClass: Ember.View.extend
+    itemViewClass: Radium.View.extend
       layoutName: 'layouts/notification_panel_item'
       attributeBindings: ['dataNotificationId:data-notification-id']
       referenceBinding: 'content.reference'

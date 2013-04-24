@@ -1,4 +1,4 @@
-Radium.MessagesEmailController = Ember.ObjectController.extend
+Radium.MessagesEmailController = Radium.ObjectController.extend
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')
 

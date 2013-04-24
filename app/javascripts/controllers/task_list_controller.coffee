@@ -1,14 +1,14 @@
 require 'lib/radium/groupable'
 require 'lib/radium/show_more_mixin'
 
-Radium.TaskListGroupItemController = Ember.ArrayController.extend
+Radium.TaskListGroupItemController = Radium.ArrayController.extend
   itemController: 'taskListItem'
 
   title: (->
     @get('content.name').capitalize()
   ).property('content.name')
 
-Radium.TaskListItemController = Ember.ObjectController.extend
+Radium.TaskListItemController = Radium.ObjectController.extend
   showMeetingForm: (->
     @get('model.constructor') is Radium.Meeting
   ).property('model')
@@ -45,7 +45,7 @@ Radium.TaskListItemController = Ember.ObjectController.extend
     content: @get('model')
   ).property('model')
 
-Radium.TaskListController = Ember.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,
+Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,
   needs: 'clock'
   clock: Ember.computed.alias('controllers.clock')
 

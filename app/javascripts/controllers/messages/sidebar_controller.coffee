@@ -1,4 +1,4 @@
-Radium.MessagesSidebarController = Em.ArrayController.extend
+Radium.MessagesSidebarController = Radium.ArrayController.extend
   needs: ['messages']
 
   contentBinding: Ember.Binding.oneWay 'controllers.messages'

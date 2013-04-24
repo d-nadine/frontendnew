@@ -1,1 +1,1 @@
-Radium.PipelineNegotiatingController = Ember.ArrayController.extend()
+Radium.PipelineNegotiatingController = Radium.ArrayController.extend()

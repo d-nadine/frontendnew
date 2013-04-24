@@ -1,11 +1,5 @@
-Radium.ContactController = Ember.ObjectController.extend Radium.CurrentUserMixin,
-  needs: ['clock','users']
-  clock: Ember.computed.alias('controllers.clock')
-
-  tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-
-  now: Ember.computed.alias('clock.now')
-
+Radium.ContactController = Radium.ObjectController.extend
+  needs: ['users']
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

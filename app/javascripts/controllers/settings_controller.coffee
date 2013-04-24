@@ -1,2 +1,2 @@
-Radium.SettingsController = Ember.ObjectController.extend Radium.CurrentUserMixin, Ember.Evented,
+Radium.SettingsController = Radium.ObjectController.extend Ember.Evented,
   user: Ember.computed.alias 'controllers.currentUser.settings'

@@ -1,6 +1,6 @@
 Day = Ember.ArrayProxy.extend()
 
-Radium.CalendarSidebarController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.CalendarSidebarController = Radium.ObjectController.extend
   needs: ['calendar']
   contentBinding: 'controllers.calendar.user'
 

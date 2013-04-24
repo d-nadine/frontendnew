@@ -1,4 +1,4 @@
-Radium.PipelineNegotiatingGroupController = Em.ArrayController.extend
+Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
   needs: ['pipeline']
 
   negotiatingTotal: Ember.computed.alias('controllers.pipeline.negotiatingTotal')

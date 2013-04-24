@@ -1,4 +1,4 @@
-Radium.Checkbox = Ember.View.extend
+Radium.Checkbox = Radium.View.extend
   classNameBindings: ['checked:checked:unchecked', ':checker']
 
   click: (event) ->

@@ -33,7 +33,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
 
     false
 
-  cancelMeetingDialogue: Ember.View.extend
+  cancelMeetingDialogue: Radium.View.extend
     classNames: ['cancel-meeting']
     template: Ember.Handlebars.compile """
       <div class="content">

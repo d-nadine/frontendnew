@@ -1,4 +1,4 @@
-Radium.UserItemController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.UserItemController = Radium.ObjectController.extend
   meIfCurrent: (->
     content = @get 'content'
 
@@ -8,5 +8,5 @@ Radium.UserItemController = Ember.ObjectController.extend Radium.CurrentUserMixi
       content.get 'name'
   ).property('name', 'currentUser')
 
-Radium.UsersController = Ember.ArrayController.extend
+Radium.UsersController = Radium.ArrayController.extend
   itemController: 'userItem'

@@ -1,4 +1,4 @@
-Radium.TimePickerView = Ember.View.extend
+Radium.TimePickerView = Radium.View.extend
   templateName: 'forms/time_picker'
   classNameBindings: [
     'date:is-valid'

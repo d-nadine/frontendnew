@@ -1,4 +1,4 @@
-Radium.MessagesController = Em.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   sortProperties: ['sentAt']
   folderBinding: 'model.folder'
 

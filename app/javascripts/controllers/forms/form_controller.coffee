@@ -1,8 +1,4 @@
-Radium.FormController = Ember.ObjectController.extend Ember.Evented, Radium.CurrentUserMixin,
-  needs: ['clock']
-  clock: Ember.computed.alias('controllers.clock')
-  tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-
+Radium.FormController = Radium.ObjectController.extend Ember.Evented,
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')

@@ -1,4 +1,4 @@
-Radium.ModalView = Ember.View.extend
+Radium.ModalView = Radium.View.extend
   layout: Ember.Handlebars.compile """
     <div class="modal-backdrop">
       {{yield}}

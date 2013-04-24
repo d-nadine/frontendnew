@@ -1,4 +1,4 @@
-Radium.MentionFieldView = Ember.View.extend
+Radium.MentionFieldView = Radium.View.extend
   classNameBindings: ['disabled:is-disabled', ':mention-field-view']
   sourceBinding: 'controller.controllers.users'
 

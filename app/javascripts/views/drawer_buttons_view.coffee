@@ -1,2 +1,2 @@
-Radium.DrawerButtonsView = Ember.View.extend
+Radium.DrawerButtonsView = Radium.View.extend
   templateName: 'drawer_buttons'

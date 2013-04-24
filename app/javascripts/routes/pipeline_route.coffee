@@ -1,4 +1,4 @@
-Radium.PipelineRoute = Ember.Route.extend
+Radium.PipelineRoute = Radium.Route.extend
   events:
     selectGroup: (group) ->
       @controllerFor('pipeline').set('selectedGroup', group)

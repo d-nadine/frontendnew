@@ -1,1 +1,1 @@
-Radium.NotificationsController = Ember.ArrayController.extend()
+Radium.NotificationsController = Radium.ArrayController.extend()

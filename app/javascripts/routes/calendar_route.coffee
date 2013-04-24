@@ -1,4 +1,4 @@
-Radium.CalendarRoute = Ember.Route.extend
+Radium.CalendarRoute = Radium.Route.extend
   events:
     toggleCalendarDrawer: ->
       @send 'toggleDrawer', 'calendar/select_user'
