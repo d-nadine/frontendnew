@@ -14,13 +14,11 @@ Radium.TaskListItemController = Radium.ObjectController.extend
   ).property('model')
 
   showTodoForm: (->
-    return unless @get('model.constructor') is Radium.Todo
-    !@get('isCall')
+    @get('model.constructor') is Radium.Todo
   ).property('model')
 
   showCallForm: (->
-    return unless @get('model.constructor') is Radium.Todo
-    @get 'isCall'
+    @get('model.constructor') is Radium.Call
   ).property('model')
 
   todoForm: Radium.computed.newForm('todo')

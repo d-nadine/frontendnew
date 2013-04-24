@@ -2,6 +2,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
   todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
   deals: DS.hasMany('Radium.Deal')
   followers: DS.hasMany('Radium.User', inverse: null)
@@ -27,4 +28,4 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     @get('deals.firstObject')
   ).property('deals')
 
-  tasks: Radium.computed.tasks('todos', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

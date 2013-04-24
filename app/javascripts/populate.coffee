@@ -31,17 +31,20 @@ class Populator
 
     todoList = -> [
           Factory.create('todo')
-          Factory.create('call')
           Factory.create('todo', isFinished: true)
-          Factory.create('call', isFinished: true)
         ]
 
+    callList = -> [
+        Factory.create('call')
+        Factory.create('call', isFinished: true)
+      ]
 
     contacts = for i in [0..20]
       Factory.create 'contact',
         user: -> userDictionary.random()
         meetings: -> [Factory.create 'meeting', meetingHash]
-        todos: -> [Factory.create('todo'), Factory.create('call')]
+        todos: -> [Factory.create('todo')]
+        calls: -> [Factory.create('call')]
 
     contactDictionary = new Dictionary(contacts)
 
@@ -62,6 +65,7 @@ class Populator
       Factory.create 'email',
         sender: -> if Math.random() >= 0.5 then userDictionary.random() else contactDictionary.random()
         todos: todoList
+        calls: callList
         to: ->
           if @sender instanceof Radium.User
             [contactDictionary.random()]
@@ -83,6 +87,7 @@ class Populator
       Factory.create 'todo',
         user: userDictionary.random()
         todos: todoList
+        calls: callList
         meetings: -> [
           Factory.create 'meeting', meetingHash
         ]
@@ -94,6 +99,7 @@ class Populator
         startsat: Ember.DateTime.create().advance(day: 7)
         endsat: Ember.DateTime.create().advance(day: 7).advance(hour: 3)
         todos: todoList
+        calls: callList
 
     for i in [0..10]
       Factory.create 'discussion',
@@ -105,6 +111,7 @@ class Populator
           else
             dealDictionary.random()
         todos: todoList
+        calls: callList
         meetings: -> [
           Factory.create 'meeting', meetingHash
         ]

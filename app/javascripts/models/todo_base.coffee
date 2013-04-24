@@ -1,9 +1,10 @@
-Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
+Radium.TodoBase = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
 
+  kind: DS.attr('string')
   description: DS.attr('string')
   finishBy: DS.attr('datetime')
   isFinished: DS.attr('boolean')

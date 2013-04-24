@@ -3,6 +3,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   Radium.HasTasksMixin,
 
   todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
 
   subject: DS.attr('string')
@@ -19,7 +20,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   cc: DS.attr('array')
   bcc: DS.attr('array')
 
-  tasks: Radium.computed.tasks('todos', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   people: Radium.computed.aggregate('to','cc')
 

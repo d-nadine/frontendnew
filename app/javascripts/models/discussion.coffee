@@ -5,6 +5,7 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   users: DS.hasMany('Radium.User')
 
   todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
 
   user: DS.belongsTo('Radium.User', inverse: null)
@@ -21,4 +22,4 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
       @get('deal') || @get('contact')
   ).property('deal', 'contact')
 
-  tasks: Radium.computed.tasks('todos', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
