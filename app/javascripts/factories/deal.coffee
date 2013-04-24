@@ -17,3 +17,4 @@ Factory.define 'deal', traits: 'timestamps',
   lastStatus: ->
     if @status is 'lost'
       Dictionaries.dealStatuses.random()
+  checklist: -> Factory.create 'checklist'

@@ -1,4 +1,4 @@
-Radium.Contact = Radium.Model.extend Radium.FollowableMixin, 
+Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
   todos: DS.hasMany('Radium.Todo')
@@ -11,8 +11,9 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   name: DS.attr('string')
   email: DS.attr('string')
   phone: DS.attr('string')
-  isLead: DS.attr('boolean')
   source: DS.attr('string')
+
+  status: DS.attr('string')
 
   title: DS.attr('string')
 
@@ -29,3 +30,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   ).property('deals')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+
+  isLead: ( ->
+    @get('status') == 'lead'
+  ).property('status')

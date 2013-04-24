@@ -26,6 +26,7 @@
 @import "components/attachments";
 @import "components/sentence";
 @import "components/related_tasks";
+@import "components/radiolist";
 
 @import "forms";
 @import "forms/dropdown_menu";
@@ -43,11 +44,14 @@
 @import "forms/meeting";
 @import "forms/email";
 @import "forms/switch";
+@import "forms/deals";
 
 @import "routes/calendar";
 @import "routes/messages";
 @import "routes/pipeline";
 @import "routes/deal";
+
+@import "forms/checklist";
 
 #unimplemented{
   text-align: center;
@@ -72,4 +76,13 @@
 
 a:hover {
   text-decoration: none;
+}
+
+.required{
+  &:after{
+    content: " *";
+    color: red;
+    margin-left: 4px;
+    vertical-align: top;
+  }
 }

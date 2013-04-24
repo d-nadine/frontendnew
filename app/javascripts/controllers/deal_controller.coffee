@@ -7,8 +7,17 @@ Radium.DealController = Radium.ObjectController.extend
   needs: ['dealStatuses', 'users']
 
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
+  newItemDescription: ''
+  newItemWeight: 0
+  newItemFinished: false
 
   contact: Ember.computed.alias('model.contact')
+
+  commit: ->
+    @get('store').commit()
+
+  rollback: ->
+    @get('model.transaction').rollback()
 
   formBox: (->
     Radium.FormBox.create

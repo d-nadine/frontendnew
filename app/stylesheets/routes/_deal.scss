@@ -1,12 +1,56 @@
-.deal-sidebar-view {
-  .page-header {
-    h1 {
-      font-size: 26px;
-      line-height: 26px;
+  .deal-sidebar-view {
+    .page-header {
+      h1 {
+        font-size: 26px;
+        line-height: 26px;
+    }
+  }
+
+  .additional-check{
+    position: relative;
+    top: -7px;
+  }
+
+  .forecast{
+    position: relative;
+    hr{
+      margin: 0;
+    }
+    .progress.progress-info{
+      display: inline-block;
+      width: 80%;
+      height: 31px;
+    }
+
+    .checklist-plus{
+      display: inline-block;
+      vertical-align: top;
+      .btn, .btn:focus {
+        outline: none;
+      }
+    } 
+
+    .total{
+      position: absolute;
+      top: 56px;
+      left: 3px;
+      font-size: 24px;
+
+      &.white{
+        color: #fff;
+      }
+    }
+  }
+
+  #checklistModal{
+    width: 60%;
+    .checklist-progress{
+      display: none;
     }
   }
 
   .meta {
+    margin-bottom: 10px;
     overflow: auto;
 
     .avatar {
@@ -29,7 +73,7 @@
   }
 
   .assigned-to {
-    .avatar { 
+    .avatar {
       float: left;
       margin-right: 10px;
     }

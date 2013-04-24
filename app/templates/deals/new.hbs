@@ -1,0 +1,115 @@
+<div class="checklist block">
+  <h1><i class="icon-plus"></i>New Deal</h1>
+</div>
+<div class="secondary">
+  <form class="form form-horizontal">
+    {{partial "saving"}}
+    <fieldset>
+      <div class="control-group">
+        <label class="control-label">Deal Name</label>
+        <div class="controls required">
+          {{view view.name class="field input-xlarge" placeholder="Deal Name"}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Contact</label>
+        <div class="controls required">
+          {{view view.contactPicker}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Assigned To</label>
+        <div class="controls required">
+          {{view view.userPicker}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Description</label>
+        <div class="controls required">
+          {{view view.description valueBinding="description" placeholder="Description" classNames="field input-xxlarge"}}
+        </div>
+      </div>
+      {{#if reference}}
+        <div class="control-group">
+          <label class="control-label">Related to</label>
+          <div class="controls">
+            <!-- FIXME : create linkToResource -->
+            {{#linkTo unimplemented}}{{view.referenceName}}{{/linkTo}}
+          </div>
+        </div>
+      {{/if}}
+      <div class="control-group">
+        <label class="control-label">Source</label>
+        <div class="controls required">
+          {{view view.source class="field"}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Forecast</label>
+        <div class="controls">
+          <div class="checklist-forecast">
+            {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
+            <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
+            <div class="checklist-plus">
+              <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
+                {{#if view.showChecklistItems}}
+                  <i class="icon-arrow-up"></i>
+                {{else}}
+                  <i class="icon-arrow-down"></i>
+                {{/if}}
+              </a>
+            </div>
+          </div>
+          {{view Radium.ChecklistView}}
+        </div>
+      </div>
+      <div class="detail-plus">
+        <a href="#checklistModal" class="btn" {{action toggleDetail target="view" bubbles=false}}>
+          {{#if view.showDetail}}
+            <i class="icon-arrow-up"></i>
+          {{else}}
+            <i class="icon-arrow-down"></i>
+          {{/if}}
+        </a>
+      </div>
+      <div id="deal-detail">
+        <hr/>
+        <div class="control-group">
+          <label class="control-label">Deal Status</label>
+          <div class="controls radio-group">
+            {{view view.dealStatuses}}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Negotiating For</label>
+          <div class="controls">
+            <div {{bindAttr class="view.disabled:is-disabled :field :control-box"}}>
+              <span  class="text dollar">$</span>
+              {{view Ember.TextField type="number" valueBinding="value" disabledBinding="view.disabled" class="field input-medium negotitating"}}
+            </div>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls add-files">
+            <button class="btn add-files" {{bindAttr disabled="view.disabled"}}>
+              <!-- FIXME: get add folder font -->
+              Add Files
+            </button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">PO Number</label>
+          <div class="controls">
+            {{view Ember.TextField valueBinding="poNumber" disabledBinding="view.disabled" class="field input-xxlarge"}}
+          </div>
+        </div>
+      </div>
+      <hr/>
+      {{partial 'validation_error_message'}}
+      <div class="control-group actions">
+        <button href="#" class="btn publish" {{bindAttr disabled="view.disabled"}} {{action saveAsDraft}}>Save as draft</button>
+        <button href="#" class="btn btn-success publish"  {{bindAttr disabled="view.disabled"}} {{action publish}}>Publish</button>
+      </div>
+    </fieldset>
+  </form>
+</div>

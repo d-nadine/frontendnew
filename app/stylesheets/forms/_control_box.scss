@@ -9,6 +9,7 @@
   [disabled],
   [readonly] {
     cursor: default;
+    background-color: $disabled;
   }
 
   &.is-invalid .text {

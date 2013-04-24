@@ -18,7 +18,7 @@ Radium.InlineEditorView = Radium.View.extend
   willDestroyElement: ->
     $('body').off 'click.inline'
 
-  click: (event) -> 
+  click: (event) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
 

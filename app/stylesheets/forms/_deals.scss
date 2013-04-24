@@ -1,0 +1,166 @@
+.deals-new-view{
+  .checklist.block{
+    padding-top: 7px;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+    h1{
+      display: inline-block;
+      vertical-align: top;
+      font-size: 26px;
+      line-height: 26px;
+      margin-right: 5px;
+      i{
+        font-size: 20px;
+      }
+    }
+
+  }
+
+  .checklist-forecast{
+    position: relative;
+    margin-bottom: -20px;
+    .progress.progress-info{
+      display: inline-block;
+      width: 40%;
+      height: 31px;
+      overflow: visible;
+    }
+
+    .checklist-plus{
+      display: inline-block;
+      position: absolute;
+      top: -4px;
+      .btn{
+        height: 22px;
+      }
+      .btn, .btn:focus {
+        outline: none;
+      }
+    }
+
+    .total{
+      position: absolute;
+      top: 5px;
+      left: 115px;
+      font-size: 24px;
+
+      &.white{
+        color: #fff;
+      }
+    }
+  }
+
+  #deal-detail{
+    display: none;
+  }
+
+  .checklist-items{
+    table{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      tr{
+        td{
+          a.btn, a.additional{
+            position: static;
+          }
+        }
+      }
+    }
+  }
+
+  .checklist-items-container{
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  input[type=number].negotitating{
+    position: relative;
+    top: -1px;
+    left: -5px;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  input.company{
+    min-width: 300px;
+    &:not([disabled]){
+      background-color: $bright;
+    }
+  }
+
+  .dollar{
+    font-weight: bold;
+    padding: 3px 0;
+  }
+
+  .controls.add-files{
+    margin-left: 51px;
+  }
+
+  hr{
+    border-top: 1px solid $dark-background;
+    border-bottom: 1px solid $dark-background;
+  }
+
+  .add-files{
+    padding: 3px 60px 3px 60px;
+  }
+
+  .controls {
+    a{
+      position: relative;
+      top: 5px;
+    }
+  }
+
+  .secondary{
+    margin: 0;
+    width: auto;
+    background-color: $background;
+    border: solid 1px $dark-background;
+    padding: 10px;
+    width: 95%;
+    margin: 0 auto;
+
+    .saving{
+      margin-left: auto;
+      margin-right: auto;
+      width: 63%;
+    }
+
+    h3{
+      margin-left: -5px;
+      i{
+        font-size: 20px;
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+
+  .combobox{
+    line-height: 23px;
+  }
+
+  fieldset{
+    margin-left: 2px;
+  }
+
+  .controls{
+    margin-left: 0;
+  }
+
+  .control-label{
+    text-align: left;
+    width: 110px;
+  }
+
+  .actions{
+    margin-left: 200px;
+    .btn{
+      padding: 5px 60px 5px 60px;
+    }
+  }
+}

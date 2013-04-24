@@ -18,8 +18,11 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'call', Radium.Call
     @map.set 'overdueTodo', Radium.Todo
     @map.set 'attachment', Radium.Attachment
-    @map.set 'settings', Radium.Settings
     @map.set 'discussion', Radium.Discussion
+    @map.set 'checklist', Radium.Checklist
+    @map.set 'checklist_item', Radium.ChecklistItem
+    @map.set 'settings', Radium.Settings
+    @map.set 'company', Radium.Company
 
 Foundry.RadiumAdapter = RadiumAdapter
 

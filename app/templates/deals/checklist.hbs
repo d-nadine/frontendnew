@@ -1,0 +1,45 @@
+<div class="control-group checklist-items-container">
+  <div class="checklist-items">
+    <table>
+      <tbody>
+        {{#each checklist.checklistItems itemController="checklistItem"}}
+          <tr>
+            <td>{{checklistKind kind}}</td>
+            <td class="check">
+              <label>
+                {{view Ember.Checkbox checkedBinding="isFinished"}}
+                {{description}}
+              </label>
+            </td>
+            <td {{bindAttr class="isFinished:is-finished:muted"}}>
+              {{weight}}%
+              {{#if isAdditional}}
+                <a href="#" class="additional" {{action removeAdditionalItem this bubbles="false"}}>
+                  delete
+                </a>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <label>
+              {{view Ember.Checkbox disabled=true checkedBinding="controller.newItemFinished" class="additional-check"}}
+            </label>
+            {{view view.newItemDescription class="field input-xlarge" viewName="itemDescription"}}
+          </td>
+          <td>
+            {{view view.newItemWeight type="number" max="100" class="field input-mini"}}%
+            {{#if view.showAddButton }}
+            <a href="#" {{action createNewItem target="view"}} class="btn">
+              <i class="icon-plus"></i>
+            </a>
+            {{/if}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
