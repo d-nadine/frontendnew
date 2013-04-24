@@ -38,11 +38,10 @@
         &.is-finished{
           color: $green;
         }
-
-        a.btn{
+        .icon-plus{
           position: relative;
-          top: -7px;
-        } 
+          top: -2px;
+        }
       }
     }
   }
