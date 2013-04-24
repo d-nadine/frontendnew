@@ -6,6 +6,7 @@ Factory.define 'settings',
     'Sent Proposal',
     'Waiting Signature'
   ]
+
   dealSources: [
     'Lead Form'
     'Website'
@@ -14,3 +15,5 @@ Factory.define 'settings',
     'Cold Call'
   ]
   checklist: -> Factory.create 'checklist'
+  leadSources: ->
+    Dictionaries.leadSources.set

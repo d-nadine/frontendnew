@@ -7,7 +7,6 @@ Radium.TextCombobox = Ember.View.extend
     ':control-box'
   ]
   queryBinding: 'queryToValueTransform'
-  disabledBinding: 'parentView.disabled'
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2

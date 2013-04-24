@@ -1,0 +1,181 @@
+.radio-group{
+  ul li{
+    display: inline-block;
+    list-style: none;
+    label{
+      display: inline;
+      margin-right: 10px;
+      position: relative;
+      top: 3px;
+    }
+    input[type=radio]{
+      margin-right: 10px;
+    }
+  }
+}
+
+.text-area{
+  box-sizing: border-box;
+  height: 30px; // set initial height to one row of text
+  margin: 0;
+  resize: none;
+}
+
+.selector{
+  vertical-align: top;
+}
+
+.leads-view{
+  margin-top: 45px;
+  h1{
+    i{
+      font-size: 28px;
+    }
+  }
+  a.btn-large{
+    margin-right: 20px;
+  }
+  a.single{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .saving{
+    margin-left: auto;
+    margin-right: auto;
+    width: 63%;
+  }
+
+  #makeLead{
+    margin-right: 50px;
+  }
+
+  .autocomplete{
+    ul.as-selections{
+      padding: 5px;
+      border: 1px solid $control-border-color;
+    }
+  }
+
+  ul.nav-pills{
+    li:first-of-type a{
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
+    li a{
+      font-size: 17.5px;
+    }
+  }
+
+  .tab-content{
+    margin-top: -15px;
+    overflow: visible;
+  }
+
+  .secondary{
+    margin: 0;
+  }
+
+  fieldset{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 2px;
+
+    a.close{
+      position: absolute;
+      right: 5px;
+      top: 0px;
+    }
+
+    hr{
+      border-top: 1px solid $dark-background;
+      border-bottom: 1px solid $dark-background;
+    }
+
+    .control-group{
+      margin-bottom: 10px;
+    }
+    .control-label{
+      text-align: left;
+      width: 110px;
+    }
+
+    .contact-name{
+      .control-box{
+        border: none;
+      }
+      span.text{
+        color: $green;
+      }
+    }
+
+    .controls.is-invalid input[type=email],
+    .control-box.is-invalid{
+      border-color: red;
+    }
+
+    .controls{
+      margin-left: 0;
+    }
+
+    label.type{
+      position: relative;
+      top: -2px;
+    }
+
+    .addresses{
+      .whole{
+        display: block;
+      }
+      .broken{
+        input.state{
+          width: 125px;
+        }
+        input.zip{
+          width: 127px;
+        }
+      }
+    }
+
+    .commit{
+      width: 200px;
+      margin: 0 auto;
+      .btn-success{
+        padding-left: 8px;
+        padding-right: 13px;
+        i{
+          font-size: 10px;
+          position: relative;
+          top: -2px;
+        }
+      }
+    }
+
+    span.text{
+      position: relative;
+      top: 0.5px;
+    }
+
+    .contact-detail,.address-section{
+      display: none;
+    }
+
+    .existing{
+      display: none;
+      margin-top: 20px;
+      margin-left: 113px;
+      margin-bottom: 10px;
+      span{
+        color: $blue;
+      }
+      > div{
+        margin-top: 10px;
+      }
+      .btn-success{
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+  }
+}

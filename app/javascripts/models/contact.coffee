@@ -7,17 +7,24 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal')
   followers: DS.hasMany('Radium.User', inverse: null)
   user: DS.belongsTo('Radium.User')
+  company: DS.belongsTo('Radium.Company')
+  companyName: DS.attr('string')
 
   name: DS.attr('string')
-  email: DS.attr('string')
-  phone: DS.attr('string')
+
+  phoneNumbers: DS.hasMany('Radium.PhoneNumber')
+  emailAddresses: DS.hasMany('Radium.EmailAddress')
+  addresses: DS.hasMany('Radium.Address')
+
+  status: DS.attr('string')
+
+  groups: DS.hasMany('Radium.Group')
+
   source: DS.attr('string')
 
   status: DS.attr('string')
 
   title: DS.attr('string')
-
-  phoneNumbers: DS.attr('array')
 
   avatar: DS.attr('object')
 
@@ -34,3 +41,4 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   isLead: ( ->
     @get('status') == 'lead'
   ).property('status')
+

@@ -5,15 +5,19 @@ Radium.AutocompleteView = Radium.View.extend
     ':autocomplete'
   ]
 
+  listBinding: 'controller.people'
+  isEditableBinding: 'controller.isEditable'
   showAvatar: true
+  showAvatarInResults: true
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
+
   template: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
-      <li {{action showContextMenu this target="view"}} {{bindAttr class="controller.isEditable :as-selection-item :blur"}}>
-        {{#if controller.isEditable}}
-        <a class="as-close" {{action removeSelection this target="view"}}>×</a>
+      <li {{action showContextMenu this target="view"}} {{bindAttr class="view.isEditable :as-selection-item :blur"}}>
+        {{#if view.isEditable}}
+          <a class="as-close" {{action removeSelection this target="view"}}>×</a>
         {{/if}}
         {{#if view.showAvatar}}
           {{avatar this}}
@@ -43,8 +47,9 @@ Radium.AutocompleteView = Radium.View.extend
       </div>
     </div>
   """
+
   showContextMenu: (attendee) ->
-    return false unless @get('controller.isEditable')
+    return false unless @get('isEditable')
 
     el = $(event.srcElement)
 
@@ -86,6 +91,7 @@ Radium.AutocompleteView = Radium.View.extend
     @$('li.as-original input').width inputWidth
 
   didInsertElement: ->
+    @$('input[type=text]').addClass('field')
     @resizeInputBox()
 
   autocomplete: Ember.TextField.extend
@@ -93,20 +99,29 @@ Radium.AutocompleteView = Radium.View.extend
     currentUser: Ember.computed.alias 'controller.currentUser'
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
+    listBinding: 'parentView.list'
 
     didInsertElement: ->
-      @$().autoSuggest {retrieve: @retrieve.bind(this)},
-                        asHtmlID: @get('elementId')
-                        selectedItemProp: "name"
-                        searchObjProps: "name"
-                        formatList: @formatList.bind(this)
-                        getAvatar: @getAvatar.bind(this)
-                        selectionAdded: @selectionAdded.bind(this)
-                        resultsHighlight: true
-                        canGenerateNewSelections: true
-                        usePlaceholder: true
-                        retrieveLimit: 5
-                        startText: @get('placeholder')
+      options =
+            asHtmlID: @get('elementId')
+            selectedItemProp: "name"
+            searchObjProps: "name"
+            formatList: @formatList.bind(this)
+            getAvatar: @getAvatar.bind(this)
+            selectionAdded: @selectionAdded.bind(this)
+            resultsHighlight: true
+            canGenerateNewSelections: true
+            usePlaceholder: true
+            retrieveLimit: 5
+            startText: @get('placeholder')
+
+      if @get('parentView').newItemCriteria
+        options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)
+
+      if @get('parentView').selectionAdded
+        options = $.extend {}, options, selectionAdded: @get('parentView').selectionAdded.bind(this)
+
+      @$().autoSuggest {retrieve: @retrieve.bind(this)}, options
 
     selectionAdded: (item) ->
       # FIXME create new contact while meeting is being saved
@@ -126,18 +141,26 @@ Radium.AutocompleteView = Radium.View.extend
              else
                email
 
-      content = """
-        #{@getAvatar(data)}
-        #{name}
-      """
+      content = ""
+
+      if @get('parentView.showAvatarInResults')
+        content = """
+          #{@getAvatar(data)}
+          #{name}
+        """
+      else
+        content = """
+          #{name}
+        """
+
       elem.html(content)
 
     retrieve: (query, callback) ->
-      people = @get('controller.people')
+      list = @get('list')
 
-      return unless people.get('length')
+      return unless list.get('length')
 
-      results = people.filter( (item) =>
+      results = list.filter( (item) =>
                         @get('source').indexOf(item) == -1
                      ).map (item) =>
                         @mapSearchResult.call this, item

@@ -13,6 +13,8 @@ require 'lib/foundry'
 
 Radium = Em.Application.create
   rootElement: '#application'
+  customEvents:
+    blur: 'blur'
 
 window.Radium = Radium
 

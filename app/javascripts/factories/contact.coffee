@@ -1,4 +1,5 @@
 require 'factories/user'
+require 'factories/phone_number'
 
 Factory.define 'contact', traits: ['timestamps'],
   name: -> "#{Dictionaries.firstNames.random()} #{Dictionaries.lastNames.random()}"
@@ -11,8 +12,22 @@ Factory.define 'contact', traits: ['timestamps'],
 
   user: -> Factory.create 'user'
 
-  phoneNumbers: [
-    { name: "Mobile", number: "+1348793247" }
-    { name: "Work", number: "+934728783" }
-    { name: "Home", number: "+35832478388" }
+  phoneNumbers: -> [
+    Factory.create 'phoneNumber'
+    Factory.create 'phoneNumber',
+      name: "Work"
+      value: "+934728783"
+    Factory.create 'phoneNumber',
+      name: "Home"
+      value: "+35832478388"
+  ]
+
+  emailAddresses: ->[
+    Factory.create 'emailAddress',
+      value: "#{@name}@#{@company.get('name')}.com"
+  ]
+
+  groups: -> [
+    Factory.create 'group',
+      name: Dictionaries.companies.random()
   ]

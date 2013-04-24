@@ -16,7 +16,17 @@ Radium.FixtureAdapter = DS.FixtureAdapter.extend({
     } else {
       throw new Error("Implement " + queryMethod + " to query " + type + "!");
     }
-  }
+  },
+
+});
+
+Radium.FixtureAdapter.reopenClass({
+  getCreateMethodForType: function(type){
+    var typeName = type.toString().split('.').pop();
+
+    return "createPreFilter" + typeName;
+  },
 });
 
 requireAll(/adapters\/fixture_adapter\/queries/);
+requireAll(/adapters\/fixture_adapter\/create/);
