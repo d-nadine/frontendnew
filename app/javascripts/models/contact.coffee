@@ -37,3 +37,5 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     @get('status') == 'lead'
   ).property('status')
 
+  primaryEmail: Radium.computed.primary 'emailAddresses'
+  primaryPhone: Radium.computed.primary 'phoneNumbers'

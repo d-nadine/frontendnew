@@ -1,4 +1,11 @@
 .form {
+  button.btn{
+    i[class^="icon-"]{
+      font-size: 19px;
+      position: relative;
+      top: -2px;
+    }
+  }
   .primary {
     background-color: white;
     padding: 12px;

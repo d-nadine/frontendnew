@@ -50,11 +50,14 @@
 @import "forms/deals";
 @import "forms/leads";
 
+@import "sidebar";
+
 @import "routes/calendar";
 @import "routes/messages";
 @import "routes/pipeline";
 @import "routes/deal";
 @import "routes/activities";
+@import "routes/contact";
 
 @import "forms/checklist";
 

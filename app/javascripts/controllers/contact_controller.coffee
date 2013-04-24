@@ -1,5 +1,7 @@
 Radium.ContactController = Radium.ObjectController.extend
-  needs: ['users']
+  needs: ['users', 'leadStatuses']
+  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

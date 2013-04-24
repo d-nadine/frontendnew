@@ -1,1 +1,47 @@
-Contact Sidebar
+<form class="form">
+  <div class="meta">
+    {{avatar this size=medium class="img-polaroid"}}
+
+    <p>
+      <span class="type muted">contact</span><br/>
+      <span class="name">{{name}}</span><br/>
+      <span class="title muted">{{title}}</span>
+      <span class="company">
+        {{#if company}}
+         {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}
+        {{/if}}
+      </span>
+    </p>
+
+    <hr />
+    <div class="contact-type">
+      <div class="type-label">
+        <h2>Type</h2>
+      </div>
+      <div class="status">
+        <h2>{{view.statusText}}</h2>
+      </div>
+    </div>
+    <hr />
+      {{#if primaryEmail }}
+        <div class="email">
+          <div>
+            <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if primaryPhone}}
+        <div class="phone">
+          <div>
+            {{primaryPhone.value}}
+          </div>
+          <div>
+            <button class="btn btn-success">
+              <i class="icon-call"></i>
+            </button>
+          </div>
+        </div>
+      {{/if}}
+    </table>
+  </div>
+</form>

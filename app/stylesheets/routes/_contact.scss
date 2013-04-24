@@ -1,0 +1,23 @@
+.contact-sidebar-view{
+  .meta{
+    line-height: 26px;
+    .company, .type{
+      text-transform: uppercase;
+    }
+  }
+
+  hr{
+    margin: 0;
+  }
+
+  .contact-type, .email, .phone{
+    @include display-box;
+    @include box-pack(justify);
+    width: 100%;
+    .status{
+      h2{
+        color: $blue;
+      }
+    }
+  }
+}

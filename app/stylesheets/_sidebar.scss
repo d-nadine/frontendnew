@@ -1,0 +1,24 @@
+.sidebar-panel-bordered{
+  .meta {
+    overflow: auto;
+
+    .avatar {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .title {
+      font-style: italic;
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+}
