@@ -1,6 +1,5 @@
 # TODO: overdue should be dynamic
 Factory.define 'todo', traits: 'timestamps',
-  kind: 'general'
   description: Factory.sequence (i) -> "Todo #{i}"
   finishBy: -> Ember.DateTime.random()
   finished: false

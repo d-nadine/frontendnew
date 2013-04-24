@@ -13,10 +13,6 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   startsAt: DS.attr('datetime')
   endsAt: DS.attr('datetime')
 
-  user: DS.belongsTo('Radium.User')
-  users: DS.hasMany('Radium.User')
-  contacts: DS.hasMany('Radium.Contact')
-
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
 
@@ -27,7 +23,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

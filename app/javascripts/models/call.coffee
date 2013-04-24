@@ -1,4 +1,3 @@
-require 'models/todo_base'
+require 'models/todo'
 
-Radium.Call = Radium.TodoBase.extend
-  kind: 'call'
+Radium.Call = Radium.Todo.extend()
