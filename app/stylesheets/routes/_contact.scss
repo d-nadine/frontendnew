@@ -1,3 +1,9 @@
+// FIXME: remember to remove
+.two-column #main-panel {
+  margin-left: 390px;
+  margin-right: 55px;
+}
+
 .contact-sidebar-view{
   .form{
     margin-right: 5px;
@@ -62,6 +68,31 @@
     margin-top: 10px;
     a{
       margin-left: 3px;
+    }
+  }
+
+  .show-more{
+    margin-bottom: 10px;
+  }
+
+  .group-picker{
+    margin-top: 10px;
+    margin-bottom: 6px;
+
+    .autocomplete{
+      margin-bottom: -11px;
+    }
+
+    i.icon-plus{
+      font-size: 10px;
+    }
+
+    h2{
+      color: $blue;
+    }
+
+    .group-label{
+      margin-bottom: -15px;
     }
   }
 }

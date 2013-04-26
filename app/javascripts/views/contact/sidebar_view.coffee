@@ -1,4 +1,5 @@
 require 'lib/radium/combobox'
+require 'lib/radium/group_autocomplete'
 
 Radium.ContactSidebarView = Radium.SidebarView.extend
   classNames: ['sidebar-panel-bordered']
@@ -25,3 +26,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
 
     highlightSelection: ->
       @$('input').select()
+
+  groups: Radium.GroupAutoComplete.extend
+    isEditableBinding: 'controller.isEditable'

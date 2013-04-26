@@ -1,5 +1,5 @@
 Radium.ContactController = Radium.ObjectController.extend
-  needs: ['users', 'leadStatuses']
+  needs: ['users', 'leadStatuses', 'groups']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
 
   # FIXME: How do we determine this?
