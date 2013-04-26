@@ -7,3 +7,5 @@ Radium.Company = Radium.Model.extend
   primaryAddress: Radium.computed.primary 'addresses'
 
   name: DS.attr('string')
+  website: DS.attr('string')
+  address: DS.belongsTo('Radium.Address')

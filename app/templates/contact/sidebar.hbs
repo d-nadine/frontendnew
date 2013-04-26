@@ -1,7 +1,7 @@
+{{log view.constructor}}
 <form class="form">
   <div class="meta">
     {{avatar this size=medium class="img-polaroid"}}
-
     <p>
       <span class="type muted">contact</span><br/>
       <span class="name">{{name}}</span><br/>
@@ -12,36 +12,39 @@
         {{/if}}
       </span>
     </p>
-
     <hr />
     <div class="contact-type">
       <div class="type-label">
         <h2>Type</h2>
       </div>
       <div class="status">
-        <h2>{{view.statusText}}</h2>
+        <div>{{view view.statusSelect}}</div>
       </div>
     </div>
     <hr />
-      {{#if primaryEmail }}
-        <div class="email">
-          <div>
-            <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
-          </div>
+    <div class="company-website">
+      <div>
+        <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
+      </div>
+    </div>
+    {{#if primaryEmail }}
+      <div class="email">
+        <div>
+          <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
         </div>
-      {{/if}}
-      {{#if primaryPhone}}
-        <div class="phone">
-          <div>
-            {{primaryPhone.value}}
-          </div>
-          <div>
-            <button class="btn btn-success">
-              <i class="icon-call"></i>
-            </button>
-          </div>
+      </div>
+    {{/if}}
+    {{#if primaryPhone}}
+      <div class="phone">
+        <div>
+          {{primaryPhone.value}}
         </div>
-      {{/if}}
-    </table>
+        <div>
+          <button class="btn btn-success">
+            <i class="icon-call"></i>
+          </button>
+        </div>
+      </div>
+    {{/if}}
   </div>
 </form>

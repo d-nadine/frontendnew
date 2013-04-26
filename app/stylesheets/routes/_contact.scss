@@ -1,4 +1,8 @@
 .contact-sidebar-view{
+  .form{
+    margin-right: 5px;
+  }
+
   .meta{
     line-height: 26px;
     .company, .type{
@@ -10,7 +14,7 @@
     margin: 0;
   }
 
-  .contact-type, .email, .phone{
+  .company-website, .contact-type, .email, .phone{
     @include display-box;
     @include box-pack(justify);
     width: 100%;
@@ -19,5 +23,22 @@
         color: $blue;
       }
     }
+    margin-bottom: 5px;
+  }
+
+  .contact-type{
+    > div{
+      position: relative;
+      top: 5px;
+    }
+
+    select{
+      position: relative;
+      top: 4px;
+    }
+  }
+
+  .company-website{
+    margin-top: 10px;
   }
 }

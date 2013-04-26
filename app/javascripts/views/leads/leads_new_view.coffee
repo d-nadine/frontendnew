@@ -70,7 +70,7 @@ Radium.LeadsNewView = Ember.View.extend
 
   tags: Radium.TagAutoComplete.extend()
 
-  companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin, Radium.ContactCompanyMixin,
+  companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin,
     classNameBindings: [':company-name']
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.companyNames'
