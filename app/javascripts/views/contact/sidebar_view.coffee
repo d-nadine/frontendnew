@@ -1,14 +1,14 @@
 require 'lib/radium/combobox'
 require 'lib/radium/group_autocomplete'
 Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
-  click:  (evt) ->
+  toggleEditor:  (evt) ->
     @_super.apply this, arguments
 
     return unless @get 'isEditing'
     Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
 
   highlightSelection: ->
-    @$('input:first').select()
+    @$('input[type=text],textarea').filter(':first').select()
 
 Radium.ContactSidebarView = Radium.SidebarView.extend
   classNames: ['sidebar-panel-bordered']
@@ -30,7 +30,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          {{input value=company.website class="field" placeholder="Company Website"}}
+          {{input type="text" value=company.website class="field" placeholder="Company Website"}}
         </div>
         <div>&nbsp;</div>
       {{else}}
@@ -47,11 +47,13 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     template: Ember.Handlebars.compile """
       <div>
         {{#if view.isEditing}}
-          {{view Radium.TextArea class="field" valueBinding=view.value placeholder="About"}}
+          <div>
+            {{view Radium.TextArea class="field" valueBinding=view.value placeholder="About"}}
+          </div>
         {{else}}
           <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
           <div class="not-editing">
-            {{about}}
+            <span>{{about}}
           </div>
         {{/if}}
       </div>

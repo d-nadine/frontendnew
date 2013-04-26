@@ -34,7 +34,7 @@
       margin-bottom: 10px;
       position: relative;
 
-      input, textarea{
+      input{
         background-color: transparent;
         border-color: transparent;
         position: static;
@@ -119,6 +119,20 @@
     .btn-primary{
       padding-left: 56px;
       padding-right: 70px;
+    }
+  }
+
+  .about{
+    textarea.field{
+      background-color: transparent;
+      border-color: transparent;
+    }
+    .not-editing{
+      span{
+        position: relative;
+        left: 7px;
+        top: 2px;
+      }
     }
   }
 }
