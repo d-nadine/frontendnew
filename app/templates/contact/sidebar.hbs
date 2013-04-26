@@ -80,7 +80,17 @@
           </div>
         </div>
       {{/each}}
-      <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
+      <div class="deal-links">
+        <div>
+          <div>
+            <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
+          </div>
+          <div>
+            <!-- FIXME: Where should this go -->
+            {{#linkTo unimplemented}}All Deals{{/linkTo}}
+          </div>
+        </div>
+      </div>
     </div>
     <hr/>
     <div class="about">
