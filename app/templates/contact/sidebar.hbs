@@ -1,4 +1,3 @@
-{{log view.constructor}}
 <form class="form">
   <div class="meta">
     {{avatar this size=medium class="img-polaroid"}}
@@ -14,18 +13,27 @@
     </p>
     <hr />
     <div class="contact-type">
-      <div class="type-label">
-        <h2>Type</h2>
-      </div>
-      <div class="status">
-        <div>{{view view.statusSelect}}</div>
+      <div>
+        <div class="type-label">
+          <h2>Type</h2>
+        </div>
+        <div class="status">
+          <div>{{view view.statusSelect}}</div>
+        </div>
       </div>
     </div>
     <hr />
     <div class="company-website">
-      <div>
-        <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
-      </div>
+      {{#view view.contactInlineEditor valueBinding=company.website}}
+        {{#if view.isEditing}}
+          {{input value=company.website}}
+        {{else}}
+          <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+          <div class="not-editing">
+            <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
+          </div>
+        {{/if}}
+      {{/view}}
     </div>
     {{#if primaryEmail }}
       <div class="email">
@@ -37,12 +45,14 @@
     {{#if primaryPhone}}
       <div class="phone">
         <div>
-          {{primaryPhone.value}}
-        </div>
-        <div>
-          <button class="btn btn-success">
-            <i class="icon-call"></i>
-          </button>
+          <div>
+            {{primaryPhone.value}}
+          </div>
+          <div>
+            <button class="btn btn-success">
+              <i class="icon-call"></i>
+            </button>
+          </div>
         </div>
       </div>
     {{/if}}

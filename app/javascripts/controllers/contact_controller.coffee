@@ -2,6 +2,9 @@ Radium.ContactController = Radium.ObjectController.extend
   needs: ['users', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
 
+  # FIXME: How do we determine this?
+  isEditable: true
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

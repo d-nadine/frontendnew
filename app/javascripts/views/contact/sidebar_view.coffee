@@ -15,3 +15,13 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     optionValuePath: 'content.value'
     optionLabelPath: 'content.name'
     valueBinding: 'controller.status'
+
+  contactInlineEditor: Radium.InlineEditorView.extend
+    click:  (evt) ->
+      @_super.apply this, arguments
+
+      return unless @get 'isEditing'
+      Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
+
+    highlightSelection: ->
+      @$('input').select()

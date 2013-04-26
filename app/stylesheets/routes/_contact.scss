@@ -15,15 +15,35 @@
   }
 
   .company-website, .contact-type, .email, .phone{
-    @include display-box;
-    @include box-pack(justify);
     width: 100%;
-    .status{
-      h2{
-        color: $blue;
+    position: relative;
+    > div{
+      @include display-box;
+      @include box-pack(justify);
+      .status{
+        h2{
+          color: $blue;
+        }
+      }
+      margin-bottom: 10px;
+      i.icon-edit{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+
+      .not-editing{
+        position: relative;
+        top: 1px;
+        margin-bottom: 1px;
+      }
+
+      input{
+        outline: none;
+        background-color: transparent;
+        border-color: transparent;
       }
     }
-    margin-bottom: 5px;
   }
 
   .contact-type{
@@ -40,5 +60,8 @@
 
   .company-website{
     margin-top: 10px;
+    a{
+      margin-left: 3px;
+    }
   }
 }
