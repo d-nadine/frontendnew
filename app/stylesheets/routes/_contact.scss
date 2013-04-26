@@ -27,26 +27,27 @@
   .company-website, .contact-type, .email, .phone, .deals-won, .open-deals .deal{
     width: 100%;
     position: relative;
+
     > div{
       @include display-box;
       @include box-pack(justify);
       margin-bottom: 10px;
-      i.icon-edit{
-        position: absolute;
-        top: 5px;
-        right: 5px;
+      position: relative;
+
+      input, textarea{
+        background-color: transparent;
+        border-color: transparent;
+        position: static;
+        padding: 0;
+        margin-bottom: 0;
       }
 
       .not-editing{
-        position: relative;
-        top: 1px;
-        margin-bottom: 1px;
-      }
-
-      input{
-        outline: none;
-        background-color: transparent;
-        border-color: transparent;
+        a{
+          position: relative;
+          left: 1px;
+          top: 1px;
+        }
       }
     }
   }
@@ -65,9 +66,6 @@
 
   .company-website{
     margin-top: 10px;
-    a{
-      margin-left: 3px;
-    }
   }
 
   .show-more{

@@ -24,16 +24,7 @@
     </div>
     <hr />
     <div class="company-website">
-      {{#view view.contactInlineEditor valueBinding=company.website}}
-        {{#if view.isEditing}}
-          {{input value=company.website placeholder="Company Website"}}
-        {{else}}
-          <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-          <div class="not-editing">
-            <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
-          </div>
-        {{/if}}
-      {{/view}}
+      {{view view.contactInlineEditor valueBinding=company.website}}
     </div>
     <div class="email">
       <div>
@@ -92,5 +83,9 @@
       <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
     </div>
     <hr/>
+    <div class="about">
+      <h2>About</h2>
+      {{view view.aboutInlineEditor valueBinding=about}}
+    </div>
   </div>
 </form>
