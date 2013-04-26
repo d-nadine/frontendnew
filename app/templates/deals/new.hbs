@@ -63,6 +63,15 @@
           {{view Radium.ChecklistView}}
         </div>
       </div>
+      <div class="control-group">
+        <label class="control-label">Negotiating For</label>
+        <div class="controls">
+          <div {{bindAttr class="view.disabled:is-disabled :field :control-box"}}>
+            <span  class="text dollar">$</span>
+            {{view Ember.TextField type="number" valueBinding="value" disabledBinding="view.disabled" class="field input-medium negotitating"}}
+          </div>
+        </div>
+      </div>
       <div class="detail-plus">
         <a href="#checklistModal" class="btn" {{action toggleDetail target="view" bubbles=false}}>
           {{#if view.showDetail}}
@@ -78,15 +87,6 @@
           <label class="control-label">Deal Status</label>
           <div class="controls radio-group">
             {{view view.dealStatuses}}
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">Negotiating For</label>
-          <div class="controls">
-            <div {{bindAttr class="view.disabled:is-disabled :field :control-box"}}>
-              <span  class="text dollar">$</span>
-              {{view Ember.TextField type="number" valueBinding="value" disabledBinding="view.disabled" class="field input-medium negotitating"}}
-            </div>
           </div>
         </div>
         <div class="control-group">
