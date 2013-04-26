@@ -58,12 +58,39 @@
       </a>
     </div>
     <hr/>
-      <div class="group-picker">
-        {{view view.groups placeholder="Add" viewName="tags"}}
-        <div class="group-label">
-          <h2><i class="icon-plus"></i> Group</h2>
-        </div>
+    <div class="group-picker">
+      {{view view.groups placeholder="Add" viewName="tags"}}
+      <div class="group-label">
+        <h2 class="blue"><i class="icon-plus"></i> Group</h2>
       </div>
+    </div>
+    <hr/>
+    <div class="deals-won">
+      <div>
+        <div>
+          <h2 class="blue">Total Deals Won</h2>
+        </div>
+        <div class="amount">$1.000,000.00</div>
+      </div>
+    </div>
+    <hr/>
+    <div class="open-deals">
+      <h2>Open Deals ({{deals.length}})</h2>
+      {{#each deals}}
+        <div class="deal">
+          <div>
+            <div>
+              {{#linkTo deal this}}{{name}}{{/linkTo}}
+            </div>
+            <div class="deal-value">
+              {{currency value}}<br/>
+              <i>{{status}}</i>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+      <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
+    </div>
     <hr/>
   </div>
 </form>
