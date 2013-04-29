@@ -20,21 +20,10 @@
     {{view view.contactInlineEditor valueBinding=company.website}}
   </div>
   <div class="email">
-    <div>
-      <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
-    </div>
+    {{view view.emailAddressInlineEditor}}
   </div>
   <div class="phone">
-    <div>
-      <div>
-        {{primaryPhone.value}}
-      </div>
-      <div>
-        <button class="btn btn-success">
-          <i class="icon-call"></i>
-        </button>
-      </div>
-    </div>
+    {{view view.phoneInlineEditor}}
   </div>
   <div class="show-more">
     <a href="#" class="btn" {{action showMore bubbles=false target="view"}}>

@@ -13,6 +13,12 @@
     margin-right: 5px;
   }
 
+  .multiple-field{
+    label{
+      display: none;
+    }
+  }
+
   .control-label{
     font-weight: bold;
   }
@@ -34,6 +40,13 @@
     position: static;
     padding: 0;
     margin-bottom: 0;
+  }
+
+  .phone{
+    .not-editing{
+      position: relative;
+      top: 3px;
+    }
   }
 
   .header,
@@ -59,11 +72,15 @@
           left: 1px;
           top: 1px;
         }
+        span{
+          font-style: italic; 
+        }
       }
     }
   }
 
   .about,
+  .email,
   .inline-editor{
     .icon-edit{
       opacity: 0;

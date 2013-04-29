@@ -1,8 +1,13 @@
 require 'lib/radium/combobox'
 require 'lib/radium/group_autocomplete'
 require 'lib/radium/text_combobox'
+require 'lib/radium/multiple_fields'
+require 'lib/radium/multiple_field'
+require 'lib/radium/phone_multiple_field'
+require 'lib/radium/address_multiple_field'
 
 Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
+  isValid: true
   toggleEditor:  (evt) ->
     @_super.apply this, arguments
 
@@ -44,8 +49,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
 
       evt.preventDefault()
       evt.stopPropagation()
-
-    isValid: true
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
@@ -102,10 +105,59 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         <div>&nbsp;</div>
       {{else}}
         <div class="not-editing">
-          <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
+          {{#if company.website}}
+            <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
+          {{else}}
+            <span>Company Website</span>
+          {{/if}}
         </div>
         <div>
           <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+        </div>
+      {{/if}}
+    """
+
+  emailAddressInlineEditor: Radium.HighlightInlineEditor.extend
+    template: Ember.Handlebars.compile """
+      {{#if view.isEditing}}
+        <div>
+          {{input type="text" value=primaryEmail.value class="field" placeholder="Primary Email"}}
+        </div>
+      {{else}}
+        <div class="not-editing">
+          {{#if primaryEmail.value}}
+            <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
+          {{else}}
+            <span>Primary Email</span>
+          {{/if}}
+        </div>
+        <div>
+          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+        </div>
+      {{/if}}
+    """
+
+  phoneInlineEditor: Radium.HighlightInlineEditor.extend
+    template: Ember.Handlebars.compile """
+      {{#if view.isEditing}}
+        <div>
+          {{input type="text" value=primaryPhone.value class="field" placeholder="Primary phone number"}}
+        </div>
+      {{else}}
+        <div class="not-editing">
+          {{#if primaryEmail.value}}
+            <div>
+              {{primaryPhone.value}}
+            </div>
+          {{else}}
+            <span>Primary phone number</span>
+          {{/if}}
+        </div>
+        <div>
+          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+          <button class="btn btn-success">
+            <i class="icon-call"></i>
+          </button>
         </div>
       {{/if}}
     """
