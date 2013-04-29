@@ -53,7 +53,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         {{else}}
           <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
           <div class="not-editing">
-            <span>{{about}}
+            <span>{{about}}</span>
           </div>
         {{/if}}
       </div>

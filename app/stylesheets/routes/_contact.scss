@@ -24,6 +24,7 @@
     margin: 10px 2px 10px 2px;
   }
 
+  .header,
   .company-website,
   .contact-type,
   .email,
@@ -55,6 +56,12 @@
           top: 1px;
         }
       }
+    }
+  }
+
+  .header{
+    .icon-edit{
+      opacity: 0.3;
     }
   }
 

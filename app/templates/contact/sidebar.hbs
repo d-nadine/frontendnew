@@ -1,15 +1,25 @@
 <form class="form">
   <div class="meta">
     {{avatar this size=medium class="img-polaroid"}}
-    <p>
-      <span class="type muted">contact</span><br/>
-      <span class="name">{{name}}</span><br/>
+    <div class="header">
+      <div>
+        <div>
+          <span class="type muted">contact</span>
+        </div>
+        <div>
+          <i class="icon-edit"></i>
+        </div>
+      </div>
+    </div>
+    <div class="name">{{name}}</div>
+    <div>
       <span class="title muted">{{title}}</span>
       <span class="company">
         {{#if company}}
-         {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}
+          {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}
         {{/if}}
       </span>
+    </div>
     </p>
   </div>
   <div>
