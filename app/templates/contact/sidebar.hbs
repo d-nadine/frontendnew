@@ -1,27 +1,8 @@
+{{log companyNames.length}}
 <form class="form">
   <div class="meta">
-    {{avatar this size=medium class="img-polaroid"}}
-    <div class="header">
-      <div>
-        <div>
-          <span class="type muted">contact</span>
-        </div>
-        <div>
-          <i class="icon-edit"></i>
-        </div>
-      </div>
-    </div>
-    <div class="name">{{name}}</div>
-    <div>
-      <span class="title muted">{{title}}</span>
-      <span class="company">
-        {{#if company}}
-          {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}
-        {{/if}}
-      </span>
-    </div>
-    </p>
-  </div>
+    {{view view.headerInlineEditor}}
+   </div>
   <div>
     <hr />
     <div class="contact-type">

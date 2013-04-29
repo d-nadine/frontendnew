@@ -1,6 +1,24 @@
 Radium.ContactController = Radium.ObjectController.extend
-  needs: ['users', 'leadStatuses', 'groups']
+  needs: ['users', 'leadStatuses', 'groups', 'companies']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  companies: Ember.computed.alias 'controllers.companies'
+
+  companyNames: ( ->
+    return unless @get('companies.length')
+
+    @get('companies').mapProperty('name')
+  ).property('companies.[]')
+
+  companyName: ( (key, value) ->
+    if arguments.length == 1
+      if @get('isNew')
+        @get('model.companyName')
+      else
+        @get('company.name')
+    else
+      @set('model.companyName', value)
+      value
+  ).property('companyName', 'isNew', 'model')
 
   # FIXME: How do we determine this?
   isEditable: true

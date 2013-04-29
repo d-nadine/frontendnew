@@ -13,8 +13,27 @@
     margin-right: 5px;
   }
 
+  .control-label{
+    font-weight: bold;
+  }
+
+  .contact-detail{
+    .detail{
+      width: 267px;
+      padding: 4px 0 4px 0;
+    }
+  }
+
   hr{
     margin: 10px 2px 10px 2px;
+  }
+
+  input{
+    background-color: transparent;
+    border-color: transparent;
+    position: static;
+    padding: 0;
+    margin-bottom: 0;
   }
 
   .header,
@@ -33,14 +52,6 @@
       @include box-pack(justify);
       margin-bottom: 10px;
       position: relative;
-
-      input{
-        background-color: transparent;
-        border-color: transparent;
-        position: static;
-        padding: 0;
-        margin-bottom: 0;
-      }
 
       .not-editing{
         a{
