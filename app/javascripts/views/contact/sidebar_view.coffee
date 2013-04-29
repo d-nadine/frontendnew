@@ -35,6 +35,16 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       valueBinding: 'controller.companyName'
       placeholder: 'Company'
 
+    click: (evt) ->
+      console.log evt.target.tagName
+
+      unless evt.target.tagName.toLowerCase() == 'input'
+        @_super.apply this, arguments
+        return
+
+      evt.preventDefault()
+      evt.stopPropagation()
+
     isValid: true
 
     template: Ember.Handlebars.compile """
