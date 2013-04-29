@@ -44,11 +44,6 @@ class Populator
         Factory.create('call', isFinished: true)
       ]
 
-    companies =for i in [0..20]
-      Factory.create 'company'
-
-    companiesDictionary = new Dictionary(companies)
-
     contacts = for i in [0..20]
       Factory.create 'contact',
         user: -> userDictionary.random()
