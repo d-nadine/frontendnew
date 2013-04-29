@@ -41,7 +41,7 @@
                 <span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo unimplemented}}{{company.name}}{{/linkTo}}{{/if}}</span> {{view.existingContactText}}
                 <div>
                   {{#if isCustomer}}
-                    {{#linkTo unimplemented classNames="btn btn-success"}}Yes{{/linkTo}}
+                    <a href="#" {{action createDealFromContact this}} class="btn btn-success">Yes</a>
                   {{else}}
                     <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
                       <i id="existingToggle" class="icon-arrow-down"></i>
