@@ -63,19 +63,16 @@
     }
   }
 
-  .meta,
-  .company-website{
-    .inline-editor{
-      .icon-edit{
-        opacity: 0;
-      }
+  .inline-editor{
+    .icon-edit{
+      opacity: 0;
+    }
 
-      &:hover{
-        .icon-edit{
-          opacity: 0.3;
-          &:hover{
-            opacity: 1;
-          }
+    &:hover{
+      .icon-edit{
+        opacity: 0.3;
+        &:hover{
+          opacity: 1;
         }
       }
     }
@@ -168,13 +165,6 @@
     textarea.field{
       background-color: transparent;
       border-color: transparent;
-    }
-    .not-editing{
-      span{
-        position: relative;
-        left: 7px;
-        top: 2px;
-      }
     }
   }
 }

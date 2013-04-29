@@ -71,25 +71,25 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         </div>
       {{else}}
         {{avatar this size=medium class="img-polaroid"}}
-         <div class="header">
+        <div class="header">
+          <div>
             <div>
-              <div>
-                <span class="type muted">contact</span>
-              </div>
-              <div>
-                <i class="icon-edit"></i>
-              </div>
+              <span class="type muted">contact</span>
+            </div>
+            <div>
+              <i class="icon-edit"></i>
             </div>
           </div>
-          <div class="name">{{name}}</div>
-          <div>
-            <span class="title muted">{{title}}</span>
-            <span class="company">
-              {{#if company}}
-                {{#linkTo unimplemented}}{{companyName}}{{/linkTo}}
-              {{/if}}
-            </span>
-          </div>
+        </div>
+        <div class="name">{{name}}</div>
+        <div>
+          <span class="title muted">{{title}}</span>
+          <span class="company">
+            {{#if company}}
+              {{#linkTo unimplemented}}{{companyName}}{{/linkTo}}
+            {{/if}}
+          </span>
+        </div>
       {{/if}}
     """
 
@@ -120,7 +120,11 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         {{else}}
           <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
           <div class="not-editing">
+            {{#if about}}
             <span>{{about}}</span>
+            {{else}}
+            <span>&nbsp;</span>
+            {{/if}}
           </div>
         {{/if}}
       </div>

@@ -4,91 +4,90 @@
     {{view view.headerInlineEditor}}
    </div>
   <div>
-    <hr />
-    <div class="contact-type">
-      <div>
-        <div class="type-label">
-          <h2>Type</h2>
-        </div>
-        <div class="status">
-          <div>{{view view.statusSelect}}</div>
-        </div>
+  <hr />
+  <div class="contact-type">
+    <div>
+      <div class="type-label">
+        <h2>Type</h2>
+      </div>
+      <div class="status">
+        <div>{{view view.statusSelect}}</div>
       </div>
     </div>
-    <hr />
-    <div class="company-website">
-      {{view view.contactInlineEditor valueBinding=company.website}}
+  </div>
+  <hr />
+  <div class="company-website">
+    {{view view.contactInlineEditor valueBinding=company.website}}
+  </div>
+  <div class="email">
+    <div>
+      <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
     </div>
-    <div class="email">
+  </div>
+  <div class="phone">
+    <div>
       <div>
-        <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
+        {{primaryPhone.value}}
+      </div>
+      <div>
+        <button class="btn btn-success">
+          <i class="icon-call"></i>
+        </button>
       </div>
     </div>
-    <div class="phone">
+  </div>
+  <div class="show-more">
+    <a href="#" class="btn" {{action showMore bubbles=false target="view"}}>
+      <i id="existingToggle" class="icon-arrow-down"></i>
+    </a>
+  </div>
+  <hr/>
+  <div class="group-picker">
+    {{view view.groups placeholder="Add" viewName="tags"}}
+    <div class="group-label">
+      <h2 class="blue"><i class="icon-plus"></i> Group</h2>
+    </div>
+  </div>
+  <hr/>
+  <div class="deals-won">
+    <div>
       <div>
+        <h2 class="blue">Total Deals Won</h2>
+      </div>
+      <div class="amount">$1.000,000.00</div>
+    </div>
+  </div>
+  <hr/>
+  <div class="open-deals">
+    <h2>Open Deals ({{deals.length}})</h2>
+    {{#each deals}}
+      <div class="deal">
         <div>
-          {{primaryPhone.value}}
-        </div>
-        <div>
-          <button class="btn btn-success">
-            <i class="icon-call"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="show-more">
-      <a href="#" class="btn" {{action showMore bubbles=false target="view"}}>
-        <i id="existingToggle" class="icon-arrow-down"></i>
-      </a>
-    </div>
-    <hr/>
-    <div class="group-picker">
-      {{view view.groups placeholder="Add" viewName="tags"}}
-      <div class="group-label">
-        <h2 class="blue"><i class="icon-plus"></i> Group</h2>
-      </div>
-    </div>
-    <hr/>
-    <div class="deals-won">
-      <div>
-        <div>
-          <h2 class="blue">Total Deals Won</h2>
-        </div>
-        <div class="amount">$1.000,000.00</div>
-      </div>
-    </div>
-    <hr/>
-    <div class="open-deals">
-      <h2>Open Deals ({{deals.length}})</h2>
-      {{#each deals}}
-        <div class="deal">
           <div>
-            <div>
-              {{#linkTo deal this}}{{name}}{{/linkTo}}
-            </div>
-            <div class="deal-value">
-              {{currency value}}<br/>
-              <i>{{status}}</i>
-            </div>
+            {{#linkTo deal this}}{{name}}{{/linkTo}}
           </div>
-        </div>
-      {{/each}}
-      <div class="deal-links">
-        <div>
-          <div>
-            <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
-          </div>
-          <div>
-            <!-- FIXME: Where should this go -->
-            {{#linkTo unimplemented}}All Deals{{/linkTo}}
+          <div class="deal-value">
+            {{currency value}}<br/>
+            <i>{{status}}</i>
           </div>
         </div>
       </div>
+    {{/each}}
+    <div class="deal-links">
+      <div>
+        <div>
+          <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
+        </div>
+        <div>
+          <!-- FIXME: Where should this go -->
+          {{#linkTo unimplemented}}All Deals{{/linkTo}}
+        </div>
+      </div>
     </div>
-    <hr/>
-    <div class="about">
-      <h2>About</h2>
-      {{view view.aboutInlineEditor valueBinding=about}}
-    </div>
+  </div>
+  <hr/>
+  <div class="about">
+    <h2>About</h2>
+    {{view view.aboutInlineEditor valueBinding=about}}
   </div>
 </form>
