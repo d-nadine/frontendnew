@@ -26,11 +26,14 @@
     {{view view.phoneInlineEditor}}
   </div>
   <div class="show-more">
-    <a href="#" class="btn" {{action showMore bubbles=false target="view"}}>
+    <a href="#" class="btn" {{action showExtraContactDetail bubbles=false target="view"}}>
       <i id="existingToggle" class="icon-arrow-down"></i>
     </a>
   </div>
   <hr/>
+  <div class="additional-detail">
+    What goes here
+  </div>
   <div class="group-picker">
     {{view view.groups placeholder="Add" viewName="tags"}}
     <div class="group-label">

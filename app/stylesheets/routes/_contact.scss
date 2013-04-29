@@ -47,6 +47,14 @@
       position: relative;
       top: 3px;
     }
+    .btn-success{
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  .additional-detail{
+    display: none;
   }
 
   .header,
@@ -73,7 +81,7 @@
           top: 1px;
         }
         span{
-          font-style: italic; 
+          font-style: italic;
         }
       }
     }

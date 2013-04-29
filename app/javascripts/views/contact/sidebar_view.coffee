@@ -33,6 +33,13 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     optionLabelPath: 'content.name'
     valueBinding: 'controller.status'
 
+  groups: Radium.GroupAutoComplete.extend
+    isEditableBinding: 'controller.isEditable'
+
+  showExtraContactDetail: ->
+    @$('.additional-detail').slideToggle('medium')
+    @$('#detailToggle').toggleClass('icon-arrow-up icon-arrow-down')
+
   headerInlineEditor: Radium.HighlightInlineEditor.extend
     companyPicker: Radium.TextCombobox.extend
       classNameBindings: [':company-name']
@@ -118,10 +125,26 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     """
 
   emailAddressInlineEditor: Radium.HighlightInlineEditor.extend
+    emailAddresses: Radium.MultipleFields.extend
+      labels: ['Work','Home']
+      inputType: 'email'
+      leader: 'Email'
+      sourceBinding: 'controller.emailAddresses'
+      type: Radium.EmailAddress
+      showEditFields: true
+      showAddNew: ( ->
+        @get('childViews.length') < 2
+      ).property('childViews.[]')
+      showDelete: ( ->
+        @get('childViews.length') > 1
+      ).property('childViews.[]')
+      showDropdown: false
+
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          {{input type="text" value=primaryEmail.value class="field" placeholder="Primary Email"}}
+          {{view view.emailAddresses}}
+          {{!input type="text" value=primaryEmail.value class="field" placeholder="Primary Email"}}
         </div>
       {{else}}
         <div class="not-editing">
@@ -181,6 +204,3 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         {{/if}}
       </div>
     """
-
-  groups: Radium.GroupAutoComplete.extend
-    isEditableBinding: 'controller.isEditable'

@@ -9,6 +9,14 @@ Radium.MultipleField = Ember.View.extend
     Ember.A(@get('parentView.labels'))
   ).property('parentView.labels.[]')
 
+  showEditFields: Ember.computed.alias 'parentView.showEditFields'
+  showDelete: Ember.computed.alias 'parentView.showDelete'
+  showAddNew: Ember.computed.alias 'parentView.showAddNew'
+  showDropdown: Ember.computed.alias 'parentView.showDropdown'
+
+  didInsertElement: ->
+    @set 'current', @get('source').objectAt(@get('index'))
+
   addNew: ->
     @get('parentView').addNew()
 
@@ -45,8 +53,9 @@ Radium.MultipleField = Ember.View.extend
     <div class="controls" {{bindAttr class="view.parentView.isInvalid:is-invalid"}}>
       {{yield}}
     </div>
-    {{#if view.showDropDown}}
+    {{#if view.showEditFields}}
       <div class="controls selector">
+        {{#if showDropdown}}
         <div class="btn-group mutiple-field" {{bindAttr class="view.open:open"}}>
           <button class="btn" {{action toggleDropdown target="view" bubbles="false"}}>
             {{view.current.name}}
@@ -60,8 +69,9 @@ Radium.MultipleField = Ember.View.extend
             {{/each}}
           </ul>
         </div>
-        {{view view.primaryRadio}}
+        {{/if}}
         {{#if view.showDelete}}
+          {{view view.primaryRadio}}
           <a href="#" {{action removeSelection target="view" bubbles="false"}} >
             <i class="icon-delete"></i>
           </a>
