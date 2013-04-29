@@ -1,3 +1,3 @@
 Factory.define 'group', traits: 'timestamps',
-  name: -> Dictionaries.companies.random()
+  name: -> Dictionaries.groups.random()
   address: -> Factory.create 'address'
