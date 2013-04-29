@@ -13,13 +13,6 @@
     margin-right: 5px;
   }
 
-  .meta{
-    line-height: 26px;
-    .company, .type{
-      text-transform: uppercase;
-    }
-  }
-
   hr{
     margin: 10px 2px 10px 2px;
   }
@@ -59,9 +52,16 @@
     }
   }
 
+  .meta{
+    line-height: 26px;
+    .company, .type{
+      text-transform: uppercase;
+    }
+  }
+
   .header{
-    .icon-edit{
-      opacity: 0.3;
+    > div{
+      margin-bottom: 0;
     }
   }
 
