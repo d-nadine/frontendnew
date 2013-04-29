@@ -1,5 +1,4 @@
 Factory.define 'deal', traits: 'timestamps',
-  status: 'pending'
   name: Factory.sequence (i) -> "Deal #{i}"
   payBy: -> @createdAt.advance(month: 1)
   contact: -> Factory.create 'contact'
@@ -7,7 +6,7 @@ Factory.define 'deal', traits: 'timestamps',
   createdAt: -> Ember.DateTime.random past: true
   reason: -> Dictionaries.failureReasons.random()
   status: -> Dictionaries.dealStatuses.random()
-  isPublic: -> Math.random() <= 0.15
+  isPublic: -> Math.random() >= 0.25
   description: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus
     felis. Maecenas lacinia risus pellentesque ipsum vehicula convallis.

@@ -31,21 +31,35 @@ class Populator
     groups = for i in [1..5]
       Factory.create 'group'
 
-    groupsDictionary = new Dictionary(groups)
+    groupDictionary = new Dictionary(groups)
 
     contacts = for i in [1..10]
       Factory.create 'contact',
         user: -> userDictionary.random()
         company: -> companiesDictionary.random()
         groups: -> [
-          groupsDictionary.random()
-          groupsDictionary.random()
+          groupDictionary.random()
+          groupDictionary.random()
         ]
+
+    contactDictionary = new Dictionary(contacts)
 
     settings = Factory.create 'settings'
 
     settings.get('negotiatingStatuses').forEach (status) ->
       Dictionaries.dealStatuses.add status
+
+    Factory.create 'deal',
+      contact: contactDictionary.random()
+      user: userDictionary.random()
+
+    Factory.create 'email',
+      sender: userDictionary.random()
+      to: [contactDictionary.random()]
+
+    Factory.create 'email',
+      to: [userDictionary.random()]
+      sender: contactDictionary.random()
 
     Factory.adapter.store.commit()
 
