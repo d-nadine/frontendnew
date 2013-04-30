@@ -137,7 +137,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       {{#if view.isEditing}}
         <div>
           {{view view.emailAddresses}}
-          {{!input type="text" value=primaryEmail.value class="field" placeholder="Primary Email"}}
         </div>
       {{else}}
         <div class="control-group">
@@ -152,26 +151,39 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     """
 
   phoneInlineEditor: Radium.HighlightInlineEditor.extend
+    phoneNumbers: Radium.MultipleFields.extend
+      labels: ['Mobile','Work','Home']
+      leader: 'Phone'
+      sourceBinding: 'controller.phoneNumbers'
+      viewType: Radium.PhoneMultipleField
+      type: Radium.PhoneNumber
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          {{input type="text" value=primaryPhone.value class="field" placeholder="Primary phone number"}}
+          {{view view.phoneNumbers}}
         </div>
       {{else}}
-        <div class="not-editing">
+        <div class="control-group">
+          <label class="control-label primary-item">Phone</label>
+          <div class="phone-section">
+          <div>
+            {{#if primaryPhone.value}}
+                {{primaryPhone.value}}
+            {{else}}
+              <span>Primary phone number</span>
+            {{/if}}
+          </div>
+          <div>
+            <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+          </div>
           {{#if primaryPhone.value}}
             <div>
-              {{primaryPhone.value}}
+              <button class="btn btn-success">
+                <i class="icon-call"></i>
+              </button>
             </div>
-          {{else}}
-            <span>Primary phone number</span>
           {{/if}}
-        </div>
-        <div>
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-          <button class="btn btn-success">
-            <i class="icon-call"></i>
-          </button>
+          </div>
         </div>
       {{/if}}
     """

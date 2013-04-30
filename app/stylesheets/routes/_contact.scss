@@ -49,7 +49,7 @@
   .header,
   .company-website,
   .contact-type,
-  .phone,
+  .phone .control-group,
   .deals-won,
   .open-deals .deal,
   .open-deals .deal-links{
@@ -85,10 +85,11 @@
     }
   }
 
+  .email,
   .company-website{
     .icon-edit{
       position: relative;
-      top: 7px;
+      top: 5px;
     }
   }
 
