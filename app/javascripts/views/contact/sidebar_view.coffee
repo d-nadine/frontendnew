@@ -8,8 +8,18 @@ require 'lib/radium/address_multiple_field'
 
 Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
   isValid: true
+
+  click: (evt) ->
+    tagName = evt.target.tagName.toLowerCase()
+
+    if ['input', 'button', 'span',  'i', 'a'].indexOf(tagName) == -1
+      @_super.apply this, arguments
+      return
+
+    evt.preventDefault()
+    evt.stopPropagation()
+
   toggleEditor:  (evt) ->
-    console.log @get('isEditing')
     @_super.apply this, arguments
 
     return unless @get 'isEditing'
@@ -47,16 +57,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       sourceBinding: 'controller.companyNames'
       valueBinding: 'controller.companyName'
       placeholder: 'Company'
-
-    click: (evt) ->
-      console.log evt.target.tagName
-
-      unless evt.target.tagName.toLowerCase() == 'input'
-        @_super.apply this, arguments
-        return
-
-      evt.preventDefault()
-      evt.stopPropagation()
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
@@ -132,14 +132,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       leader: 'Email'
       sourceBinding: 'controller.emailAddresses'
       type: Radium.EmailAddress
-      showEditFields: true
-      showAddNew: ( ->
-        @get('childViews.length') < 2
-      ).property('childViews.[]')
-      showDelete: ( ->
-        @get('childViews.length') > 1
-      ).property('childViews.[]')
-      showDropdown: false
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
@@ -167,7 +159,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         </div>
       {{else}}
         <div class="not-editing">
-          {{#if primaryEmail.value}}
+          {{#if primaryPhone.value}}
             <div>
               {{primaryPhone.value}}
             </div>

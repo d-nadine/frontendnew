@@ -30,13 +30,15 @@
 
   input{
     padding-left: 0;
-    // padding: 0;
-    // margin-bottom: 0;
   }
 
-  .multiple-field{
-    label{
-      margin-bottom: 8px;
+  .email{
+    position: relative;
+    .multiple-field{
+      .add-new{
+        position: absolute;
+        top: 2px;
+      }
     }
   }
 

@@ -11,6 +11,11 @@ Radium.InlineEditorView = Radium.View.extend
   isEditable: Ember.computed.alias('controller.isEditable')
   disabled: Ember.computed.not('isEditable')
 
+  isEditingDidChange:( ->
+    unless @get('isEditing')
+      @get('controller.store').commit() if @get('controller.isDirty')
+  ).observes('isEditing')
+
   didInsertElement: ->
     $('body').on 'click.inline', =>
       return unless @get('isEditing')
