@@ -9,7 +9,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
 
-    @get('toList').focus()
+    @get('toList').focus() if @get('controller.showAddresses')
 
   noContent: ( ->
     return unless @get('controller.isSubmitted')
@@ -42,7 +42,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     valueBinding: 'controller.subject'
     placeholder: 'Subject'
 
-  body: Ember.TextArea.extend
+  body: Radium.TextArea.extend
     classNameBindings: ['parentView.noContent:is-invalid']
     valueBinding: 'controller.message'
     placeholder: 'Message'

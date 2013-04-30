@@ -12,13 +12,22 @@ class AddressBook
     callback contact
     contact
 
+processAddresses = (email, transaction) ->
+  return unless email.get('addresses')
+
+  addressBook = new AddressBook
+
+  email.set 'to', email.get('addresses.to').map (address) ->
+    addressBook.lookup address, (contact) ->
+      contact.set 'user', email.get('sender')
+      transaction.add contact
+
+simulateSending = (email) ->
+  Ember.run.later this, (->
+    email.set 'isSending', false
+  ), 2200
+
 Radium.FixtureAdapter.reopen
   willCreateEmail: (email, transaction) ->
-    return unless email.get('addresses')
-
-    addressBook = new AddressBook
-
-    email.set 'to', email.get('addresses.to').map (address) ->
-      addressBook.lookup address, (contact) ->
-        contact.set 'user', email.get('sender')
-        transaction.add contact
+    processAddresses email, transaction
+    simulateSending email

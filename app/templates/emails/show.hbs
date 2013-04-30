@@ -3,5 +3,6 @@
 {{/if}}
 
 <div {{bindAttr class="showHud :email-history"}}>
+  <div id="new-email-placeholder" class="hidden"></div>
   {{render 'emails/history' history}}
 </div>

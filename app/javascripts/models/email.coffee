@@ -14,6 +14,11 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   sender: DS.attr('object')
 
+  senderArray: (->
+    Ember.ArrayProxy.create
+      content: [ @get('sender') ]
+  ).property('sender')
+
   # FIXME: find a better way to handle this
   # once we get the API connntected
   to: DS.attr('array')
@@ -22,7 +27,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
-  people: Radium.computed.aggregate('to','cc')
+  people: Radium.computed.aggregate('to','cc', 'senderArray')
 
   trackable: Ember.computed.present('contact')
 

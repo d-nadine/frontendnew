@@ -178,7 +178,7 @@ $two-column-gutter: 60px;
   border: solid 1px $selected-item-border;
   position: relative;
 
-  :last-child {
+  & > :last-child {
     margin-bottom: 0;
   }
 

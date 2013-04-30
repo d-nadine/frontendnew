@@ -17,9 +17,6 @@ Radium.EmailForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
-    @get('to').clear()
-    @get('cc').clear()
-    @get('bcc').clear()
 
   isValid: ( ->
     @get('to.length') && (@get('subject') || @get('message.length'))

@@ -20,20 +20,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   toggleReminderForm: ->
     @toggleProperty 'showCheckForResponse'
 
-  # submit: ->
-  #   @set 'isSubmitted', true
-
-  #   return unless @get('isValid')
-
-  #   @set 'justAdded', true
-
-  #   Ember.run.later( ( =>
-  #     @set 'justAdded', false
-  #     @set 'isSubmitted', false
-
-  #     @get('model').commit()
-  #   ), 1200)
-
   createSignature: ->
     @set 'signatureSubmited', true
 
