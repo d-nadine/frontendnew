@@ -9,6 +9,7 @@ require 'lib/radium/address_multiple_field'
 Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
   isValid: true
   toggleEditor:  (evt) ->
+    console.log @get('isEditing')
     @_super.apply this, arguments
 
     return unless @get 'isEditing'
@@ -113,7 +114,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       {{else}}
         <div class="not-editing">
           {{#if company.website}}
-            <a href="mailto:{{unbound company.website}}">{{company.website}}</a>
+            <a href="{{unbound company.website}}" target="_blank">{{company.website}}</a>
           {{else}}
             <span>Company Website</span>
           {{/if}}
@@ -147,15 +148,13 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
           {{!input type="text" value=primaryEmail.value class="field" placeholder="Primary Email"}}
         </div>
       {{else}}
-        <div class="not-editing">
+        <div class="control-group">
+          <label class="control-label primary-item">Email <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           {{#if primaryEmail.value}}
             <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
           {{else}}
             <span>Primary Email</span>
           {{/if}}
-        </div>
-        <div>
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
         </div>
       {{/if}}
     """

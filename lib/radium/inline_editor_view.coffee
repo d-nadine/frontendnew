@@ -1,5 +1,6 @@
-Radium.InlineEditorView = Ember.View.extend
-  classNameBindings: ['view.isEditing:inline-editor-open:inline-editor-closed', 'disabled:is-disabled:is-enabled', ':inline-editor']
+Radium.InlineEditorView = Radium.View.extend
+  classNameBindings: ['isEditing:inline-editor-open:inline-editor-closed', 'disabled:is-disabled:is-enabled', ':inline-editor']
+
   isEditing: false
 
   # Clicking on the view will activate the editor.

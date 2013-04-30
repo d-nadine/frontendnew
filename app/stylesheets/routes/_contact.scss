@@ -13,12 +13,6 @@
     margin-right: 5px;
   }
 
-  .multiple-field{
-    label{
-      display: none;
-    }
-  }
-
   .control-label{
     font-weight: bold;
   }
@@ -35,21 +29,14 @@
   }
 
   input{
-    background-color: transparent;
-    border-color: transparent;
-    position: static;
-    padding: 0;
-    margin-bottom: 0;
+    padding-left: 0;
+    // padding: 0;
+    // margin-bottom: 0;
   }
 
-  .phone{
-    .not-editing{
-      position: relative;
-      top: 3px;
-    }
-    .btn-success{
-      position: relative;
-      top: -3px;
+  .multiple-field{
+    label{
+      margin-bottom: 8px;
     }
   }
 
@@ -60,7 +47,6 @@
   .header,
   .company-website,
   .contact-type,
-  .email,
   .phone,
   .deals-won,
   .open-deals .deal,
@@ -71,10 +57,20 @@
     > div{
       @include display-box;
       @include box-pack(justify);
-      margin-bottom: 10px;
       position: relative;
 
+      &.inline-editor-closed{
+        margin-bottom: 10px;
+      }
+
+      &.inline-editor-open{
+        margin-bottom: -7px;
+      }
+
       .not-editing{
+        height: 22px;
+        position: relative;
+        top: 4px;
         a{
           position: relative;
           left: 1px;
@@ -84,6 +80,13 @@
           font-style: italic;
         }
       }
+    }
+  }
+
+  .company-website{
+    .icon-edit{
+      position: relative;
+      top: 7px;
     }
   }
 
@@ -127,10 +130,6 @@
       position: relative;
       top: 4px;
     }
-  }
-
-  .company-website{
-    margin-top: 10px;
   }
 
   .show-more{
