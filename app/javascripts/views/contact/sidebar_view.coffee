@@ -164,7 +164,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         </div>
       {{else}}
         <div class="control-group">
-          <label class="control-label primary-item">Phone</label>
+          <label class="control-label primary-item">Phone <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           <div class="phone-section">
           <div>
             {{#if primaryPhone.value}}
@@ -172,9 +172,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
             {{else}}
               <span>Primary phone number</span>
             {{/if}}
-          </div>
-          <div>
-            <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
           </div>
           {{#if primaryPhone.value}}
             <div>

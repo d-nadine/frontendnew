@@ -33,6 +33,10 @@
   }
 
   .email{
+    .inline-editor-open{
+      margin-bottom: -15px;
+    }
+
     position: relative;
     .multiple-field{
       .add-new{
@@ -86,19 +90,11 @@
   }
 
   .email,
+  .phone,
   .company-website{
     .icon-edit{
       position: relative;
       top: 5px;
-    }
-  }
-
-  .phone{
-    .icon-edit{
-      text-align: right;
-      margin-left: 129px;
-      position: relative;
-      top: 2px;
     }
   }
 
