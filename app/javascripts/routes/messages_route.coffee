@@ -12,7 +12,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     selectItem: (item) ->
       if item instanceof Radium.Email
-        @transitionTo 'messages.email', item
+        @transitionTo 'emails.show', item
       else if item instanceof Radium.Discussion
         @transitionTo 'messages.discussion', item
 

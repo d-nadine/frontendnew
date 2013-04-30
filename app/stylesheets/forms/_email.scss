@@ -1,7 +1,4 @@
-.forms-email-view{
-  background-color: $light-background;
-  padding: 6px;
-
+.forms-email-view {
   a {
     text-decoration: none;
   }
@@ -32,13 +29,6 @@
 
   .autocomplete.is-invalid{
     border: none;
-  }
-
-  .subject {
-    margin-bottom: 10px;
-    input{
-      border: none;
-    }
   }
 
   .body textarea {

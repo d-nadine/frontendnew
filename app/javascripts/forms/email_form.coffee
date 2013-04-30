@@ -1,33 +1,20 @@
 require 'forms/form'
 
 Radium.EmailForm = Radium.Form.extend
-  includeReminder: true
+  includeReminder: false
+  reminderTime: 5
 
   data: ( ->
     subject: @get('subject')
     message: @get('message')
     sender: @get('user')
     sentAt: Ember.DateTime.create()
-    to: []
-    cc: []
-    bcc: []
+    addresses: 
+      to: @get('to').mapProperty 'email'
+      cc: @get('cc').mapProperty 'email'
+      bcc: @get('bcc').mapProperty 'email'
   ).property().volatile()
-
-  reset: ->
-    @_super.apply this, arguments
-    @get('to').clear()
-    @get('cc').clear()
-    @get('bcc').clear()
 
   isValid: ( ->
     @get('to.length') && (@get('subject') || @get('message.length'))
   ).property('to.[]', 'subject', 'message')
-
-  commit: ->
-    email = Radium.Email.createRecord @get('data')
-
-    email.set 'to', @get('to').mapProperty 'email'
-    email.set 'cc', @get('cc').mapProperty 'email'
-    email.set 'bcc', @get('bcc').mapProperty 'email'
-
-    @get('store').commit()

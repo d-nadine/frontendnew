@@ -1,3 +1,5 @@
+Radium.Route = Ember.Route.extend()
+
 Radium.Router.reopen
   location: 'history'
 
@@ -6,7 +8,13 @@ Radium.Router.map ->
     @route 'email', path: '/emails/:email_id'
     @route 'discussion', path: '/discussions/:discussion_id'
     @route 'bulk_actions'
-    @route 'send'
+    @resource 'emails', ->
+      @route 'show', path: '/:email_id'
+      @route 'new'
+      # FIXME: this should be a routless state
+      # The path is only here so the email can be 
+      # passed with transitionTo
+      @route 'sent', path: '/:email_id/sent'
 
   @resource 'pipeline', ->
     @route 'leads'
@@ -18,8 +26,9 @@ Radium.Router.map ->
     @route 'new'
 
   @resource 'contacts'
-
   @resource 'contact', path: '/contacts/:contact_id'
+
+  @resource 'company', path: '/companies/:company_id'
 
   @resource 'user', path: '/users/:user_id'
 
@@ -37,5 +46,5 @@ Radium.Router.map ->
     @route 'callForm'
     @route 'meetingForm'
     @route 'discussionForm'
-    @route 'emailForm'
+    @route 'emailForms'
     @route 'widgets'

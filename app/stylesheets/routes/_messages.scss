@@ -5,11 +5,7 @@
 
   .is-selected .content,
   .content:hover {
-    .delete { 
-      display: inline;
-    }
-
-    .icon-attachments {
+    .delete, .icon-comment { 
       display: inline;
     }
   }
@@ -29,17 +25,14 @@
   .content {
     margin-left: 40px;
     position: relative;
+    cursor: poin
   }
 
   .content.is-selectable:hover {
     cursor: pointer;
   }
 
-  .icon-attachments {
-    display: none;
-  }
-
-  .delete {
+  .delete, .icon-comment {
     display: none;
   }
 
@@ -126,6 +119,12 @@
 
     .text {
       margin-bottom: 30px;
+
+      &.empty p {
+        color: $muted;
+        text-align: center;
+        font-style: italic;
+      }
     }
   }
 
@@ -180,3 +179,53 @@
   }
 }
 
+.modal-loading {
+  text-align: center;
+  padding: 30px 15px;
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  p {
+    color: $muted;
+    margin: 0;
+  }
+}
+
+.email-confirmation-view {
+  padding: 30px 15px;
+
+  .sending {
+    text-align: center;
+
+    img {
+      margin-bottom: 30px;
+    }
+  }
+
+  .subject { 
+    text-align: center;
+    color: $muted;
+  }
+
+  .recipients {
+    text-align: center;
+    font-size: 150%;
+  }
+}
+
+.related-task-prompt {
+  text-align: center;
+  color: #37aed4;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.message-card.is-sending {
+  text-align: center;
+  padding: 50px;
+}

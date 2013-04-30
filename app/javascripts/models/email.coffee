@@ -14,6 +14,11 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   sender: DS.attr('object')
 
+  senderArray: (->
+    Ember.ArrayProxy.create
+      content: [ @get('sender') ]
+  ).property('sender')
+
   # FIXME: find a better way to handle this
   # once we get the API connntected
   to: DS.attr('array')
@@ -22,7 +27,9 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
-  people: Radium.computed.aggregate('to','cc')
+  people: Radium.computed.aggregate('to','cc', 'senderArray')
+
+  trackable: Ember.computed.present('contact')
 
   contact: (->
     if @get('sender') instanceof Radium.Contact
@@ -31,12 +38,13 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
       @get('people').find (person) -> person instanceof Radium.Contact
   ).property()
 
-  # FIXME: determine how this should work?
   isIncludedInConversation: (email) ->
-    sender = @get 'sender'
+    return true if email == this
 
-    return true if email.get('sender') is sender
-    return true if email.get('to').indexOf(sender) != -1
-    false
+    people = @get 'people'
+    otherPeople = email.get 'people'
 
+    return false if people.get('length') != otherPeople.get('length')
 
+    otherPeople.every (person) ->
+      people.contains person

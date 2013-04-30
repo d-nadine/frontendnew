@@ -1,13 +1,11 @@
-Radium.EmailItemController = Radium.ObjectController.extend
-  showActions: false
-  showReply: false
-  showMeta : false
+Radium.EmailsSentController = Ember.ObjectController.extend
+  needs: ['clock']
+  clock: Ember.computed.alias('controllers.clock')
+
+  tomorrow: Ember.computed.alias('clock.endOfTomorrow')
 
   toggleFormBox: ->
     @toggleProperty 'showFormBox'
-
-  showReplySection: ->
-    @toggleProperty 'showReply'
 
   formBox: (->
     Radium.FormBox.create
@@ -29,6 +27,3 @@ Radium.EmailItemController = Radium.ObjectController.extend
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
-
-  toggleMeta: -> @toggleProperty 'showMeta'
-

@@ -1,4 +1,4 @@
-Radium.ToggleSwitch = Radium.View.extend
+Radium.ToggleSwitch = Ember.View.extend
   classNames: ['toggle-switch']
   template: Ember.Handlebars.compile """
     <label for="{{unbound view.checkBoxId}}">

@@ -2,12 +2,16 @@
   <i class="icon-todo"></i>
 </button>
 
-<div class="content" {{action selectItem this}}>
+<div {{bindAttr class="isSelectable :content"}} {{action selectItem this}}>
   {{yield}}
 
   <div class="footer">
     {{#if hasAttachments}}
       <i class="icon-attachments"></i>
+    {{/if}}
+
+    {{#if hasComments}}
+      <i class="icon-comment"></i>
     {{/if}}
 
     <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">

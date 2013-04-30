@@ -1,0 +1,15 @@
+.forms-reply-view.forms-email-view {
+  h5 {
+    font-weight: normal;
+  }
+
+  .body {
+    border: none;
+    padding: 0;
+
+    textarea {
+      padding: 0;
+      min-height: 30px;
+    }
+  }
+}

@@ -1,26 +1,24 @@
-<div class="modal fade">
-  <div class="modal-header">
-    <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
-    <h3>Are You Sure Want to Delete {{length}} Item(s)?</h3>
-  </div>
+<div class="modal-header">
+  <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+  <h3>Are You Sure Want to Delete {{length}} Item(s)?</h3>
+</div>
 
-  <div class="modal-body">
-    <p>This action cannot be undone! This will delete the following items: </p>
+<div class="modal-body">
+  <p>This action cannot be undone! This will delete the following items: </p>
 
-    <ul>
-      <li>Any Todos</li>
-      <li>Any Attachments</li>
-      <li>Any Discussions</li>
-      <li>Any Comments</li>
-      <li>Anything in the feed</li>
-    </ul>
+  <ul>
+    <li>Any Todos</li>
+    <li>Any Attachments</li>
+    <li>Any Discussions</li>
+    <li>Any Comments</li>
+    <li>Anything in the feed</li>
+  </ul>
 
-    <button class="btn btn-large btn-danger btn-block" {{action delete}}>
-      I understand the consequences, delete {{length}} item(s)
-    </button>
-  </div>
+  <button class="btn btn-large btn-danger btn-block" {{action delete}}>
+    I understand the consequences, delete {{length}} item(s)
+  </button>
+</div>
 
-  <div class="modal-footer">
-    <a href="#" class="btn" {{action close}}>Cancel</a>
-  </div>
+<div class="modal-footer">
+  <a href="#" class="btn" {{action close}}>Cancel</a>
 </div>

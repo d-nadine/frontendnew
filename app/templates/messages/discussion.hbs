@@ -3,7 +3,10 @@
 <div>
   <div class="block discussion-card message-card">
     <div class="header">
+      {{formatDateTime createdAt format="full" class="muted pull-right"}}
+
       <i class="icon-discussion"></i>
+
       <p><big><strong>
         {{#if aboutDeal}}
           Discussion about the {{#linkTo deal reference}}{{reference.name}}{{/linkTo}} deal
@@ -35,7 +38,7 @@
 
       <hr/>
 
-      {{partial 'shared/related_tasks'}}
+      {{render 'related_tasks' tasks}}
 
       <div class="actions text-right">
         <a class="btn btn-link" {{action delete this}}>
@@ -45,7 +48,5 @@
     </div>
   </div>
 
-  <div class="block block-gray">
-    {{render 'comments' model}}
-  </div>
+  {{render 'comments' model}}
 </div>

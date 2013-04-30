@@ -48,6 +48,9 @@ Radium.AutocompleteView = Radium.View.extend
     </div>
   """
 
+  focus: ->
+    @$('li.as-original input').focus()
+
   showContextMenu: (attendee) ->
     return false unless @get('isEditable')
 
@@ -100,20 +103,21 @@ Radium.AutocompleteView = Radium.View.extend
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
     listBinding: 'parentView.list'
+    tabindexBinding: 'parentView.tabindex'
 
     didInsertElement: ->
       options =
-            asHtmlID: @get('elementId')
-            selectedItemProp: "name"
-            searchObjProps: "name"
-            formatList: @formatList.bind(this)
-            getAvatar: @getAvatar.bind(this)
-            selectionAdded: @selectionAdded.bind(this)
-            resultsHighlight: true
-            canGenerateNewSelections: true
-            usePlaceholder: true
-            retrieveLimit: 5
-            startText: @get('placeholder')
+        asHtmlID: @get('elementId')
+        selectedItemProp: "name"
+        searchObjProps: "name"
+        formatList: @formatList.bind(this)
+        getAvatar: @getAvatar.bind(this)
+        selectionAdded: @selectionAdded.bind(this)
+        resultsHighlight: true
+        canGenerateNewSelections: true
+        usePlaceholder: true
+        retrieveLimit: 5
+        startText: @get('placeholder')
 
       if @get('parentView').newItemCriteria
         options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)

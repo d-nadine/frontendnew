@@ -1,6 +1,6 @@
 require 'forms/email_form'
 
-Radium.DevelopmentEmailFormController = Ember.Controller.extend Radium.CurrentUserMixin,
+Radium.EmailsNewController = Ember.Controller.extend Radium.CurrentUserMixin,
   needs: ['users']
 
   newEmail: Radium.computed.newForm('email')

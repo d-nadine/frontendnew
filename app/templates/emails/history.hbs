@@ -1,0 +1,9 @@
+{{#each controller itemController="emailsItem" itemViewClass="Radium.EmailsItemView"}}
+  {{template "emails/item"}}
+{{/each}}
+
+{{#if hiddenContent}}
+  <div id="remaining-emails">
+    {{partial "shared/show_more"}}
+  </div>
+{{/if}}

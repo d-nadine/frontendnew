@@ -1,0 +1,37 @@
+<div class="block email-confirmation-view">
+  {{#unless isSaving}}
+    <div class="adder">
+      <div class="arrow"></div>
+      <i class="icon-plus" {{action addTask}}></i>
+    </div>
+  {{/unless}}
+
+  {{#if isSaving}}
+    <div class="sending">
+      <p><img src="/images/loading.gif"></p>
+      <p class="muted">Sending</p>
+    </div>
+  {{else}}
+    <div class="subject">
+      {{#if subject}}
+        <p>Your email &quot;{{#linkTo emails.show this}}{{subject}}{{/linkTo}}&quot; sent to</p>
+      {{else}}
+        <p>Sent an email to</p>
+      {{/if}}
+    </div>
+
+    <div class="recipients">
+      <ul class="sentence">
+        {{#each to}}
+          <li>{{link this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</div>
+
+{{#unless isSaving}}
+  <div {{action addTask model}} class="block block-connected block-blue related-task-prompt">
+    <p>Add Related Task?</p>
+  </div>
+{{/unless}}

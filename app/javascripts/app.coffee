@@ -33,6 +33,8 @@ requireAll /routes/
 
 require 'models'
 
+require /^forms/
+
 require 'views'
 
 require 'lib/radium/checkable_mixin'

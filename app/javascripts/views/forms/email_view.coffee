@@ -9,6 +9,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
 
+    @get('toList').focus() if @get('controller.showAddresses')
+
   noContent: ( ->
     return unless @get('controller.isSubmitted')
 
@@ -40,7 +42,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     valueBinding: 'controller.subject'
     placeholder: 'Subject'
 
-  body: Ember.TextArea.extend
+  body: Radium.TextArea.extend
     classNameBindings: ['parentView.noContent:is-invalid']
     valueBinding: 'controller.message'
     placeholder: 'Message'
@@ -50,7 +52,7 @@ Radium.FormsEmailView = Radium.FormView.extend
 
   reminderLength: Ember.TextField.extend
     type: 'number'
-    value: 5
+    valueBinding: 'controller.reminderTime'
     disabled: Ember.computed.not('controller.includeReminder')
 
   closeModal: ->

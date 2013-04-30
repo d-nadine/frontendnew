@@ -3,8 +3,20 @@
     <div class="contact-info">
       {{avatar contact style="medium" class="img-polaroid"}}
       <p>
-        <span class="name">{{contact.name}}</span></br>
-        <span class="title">{{contact.title}}</span>
+        <span class="name">
+          {{#if contact.name}}
+            {{contact.name}}
+          {{else}}
+            <span class="muted">No Name</span>
+          {{/if}}
+        </span></br>
+        <span class="title">
+          {{#if contact.title}}
+            {{contact.title}}
+          {{else}}
+            <span class="muted">No Title</span>
+          {{/if}}
+        </span>
       </p>
     </div>
 
