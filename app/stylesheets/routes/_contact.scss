@@ -206,6 +206,10 @@
     }
   }
 
+  .deal-links{
+    margin-top: 20px;
+  }
+
   .about{
     h2{
       margin-bottom: 0;
@@ -227,6 +231,13 @@
     textarea{
       width: 92%;
       padding-left: 0;
+    }
+  }
+
+  .address{
+    .icon-edit{
+      position: relative;
+      top: 13px;
     }
   }
 }

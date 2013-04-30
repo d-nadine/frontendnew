@@ -39,3 +39,13 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
+  primaryAddress: Radium.computed.primary 'addresses'
+
+  contactAddresses: ( ->
+    return @get('addresses') if @get('addresses.length')
+
+    if @get('company.addresses.length')
+      return @get('company.addresses')
+
+    return Ember.A()
+  ).property('addresses.[]', 'company.addresses.[]')

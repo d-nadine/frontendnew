@@ -8,4 +8,5 @@ Radium.Company = Radium.Model.extend
 
   name: DS.attr('string')
   website: DS.attr('string')
-  address: DS.belongsTo('Radium.Address')
+  addresses: DS.hasMany('Radium.Address')
+  primaryAddress: Radium.computed.primary 'addresses'
