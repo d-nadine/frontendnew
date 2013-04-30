@@ -1,3 +1,5 @@
+Radium.Route = Ember.Route.extend()
+
 Radium.Router.reopen
   location: 'history'
 
@@ -44,5 +46,5 @@ Radium.Router.map ->
     @route 'callForm'
     @route 'meetingForm'
     @route 'discussionForm'
-    @route 'emailForm'
+    @route 'emailForms'
     @route 'widgets'
