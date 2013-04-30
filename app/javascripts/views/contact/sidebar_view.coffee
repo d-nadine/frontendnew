@@ -168,7 +168,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
           <div class="phone-section">
           <div>
             {{#if primaryPhone.value}}
-                {{primaryPhone.value}}
+              <a href="tel:{{unbound primaryPhone.value}}">{{primaryPhone.value}}</a>
             {{else}}
               <span>Primary phone number</span>
             {{/if}}
@@ -186,15 +186,23 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     """
 
   aboutInlineEditor: Radium.HighlightInlineEditor.extend
+    textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
+       click: (event) ->
+        event.stopPropagation()
+
+      insertNewline: ->
+        @get('parentView').toggleEditor()
+    )
     template: Ember.Handlebars.compile """
       <div>
         {{#if view.isEditing}}
+          <h2>About</h2>
           <div>
-            {{view Radium.TextArea class="field" valueBinding=view.value placeholder="About"}}
+            {{view view.textArea class="field" valueBinding=view.value placeholder="About"}}
           </div>
         {{else}}
-          <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-          <div class="not-editing">
+          <h2>About <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+          <div>
             {{#if about}}
             <span>{{about}}</span>
             {{else}}

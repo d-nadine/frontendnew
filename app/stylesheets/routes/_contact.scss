@@ -32,12 +32,20 @@
     padding-left: 0;
   }
 
+  .phone,
   .email{
+     position: relative;
+    .inline-editor-closed{
+    a{
+        position: relative;
+        left: 1px;
+        top: 1px;
+      }
+    }
     .inline-editor-open{
       margin-bottom: -15px;
     }
 
-    position: relative;
     .multiple-field{
       .add-new{
         position: absolute;
@@ -195,9 +203,26 @@
   }
 
   .about{
-    textarea.field{
-      background-color: transparent;
-      border-color: transparent;
+    h2{
+      margin-bottom: 0;
+    }
+
+    .icon-edit{
+      position: relative;
+      top: 19px;
+    }
+
+    .inline-editor-closed{
+      span{
+        position: relative;
+        top: 5px;
+        left: 1px;
+      }
+    }
+
+    textarea{
+      width: 92%;
+      padding-left: 0;
     }
   }
 }
