@@ -1,0 +1,35 @@
+<div class="block block-arrow-top">
+  <form class="form">
+    <div class="separator">
+      <h5>
+        Foward: {{email.subject}}
+        <a class="pull-right" href="#" {{action expand}}>Expand</a>
+      </h5>
+    </div>
+
+    <div class="separator">
+      <table class="addresses">
+        <tr>
+          <td><label>To</label></td>
+          <td>{{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}</td>
+        </tr>
+      </table>
+    </div>
+
+    {{#if isExpanded}}
+      <div class="separator">
+        {{view view.subject tabindex=2 class="field field-blend-in input-block-level"}}
+      </div>
+    {{/if}}
+
+    {{#if isExpanded}}
+      <div class="separator">
+        {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
+      </div>
+    {{/if}}
+
+    <div class="footer">
+      <button tabindex="5" {{action forward this controller bubbles="false"}} class="btn btn-primary">Send</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,54 @@
+.forms-forward-email-view {
+  .block {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .separator {
+    border-bottom: solid 1px #DBDBDB;
+    padding: 6px 6px;
+
+    input.field, textarea.field {
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .footer {
+    padding: 10px 0;
+  }
+
+  h5 {
+    margin: 0;
+  }
+
+  .labels {
+    padding-right: 15px;
+    background-color: green;
+  }
+
+  textarea {
+    min-height: 200px;
+  }
+
+  .addresses {
+    td {
+      vertical-align: middle;
+    }
+
+    label {
+      margin: 0;
+      padding: 0 15px 0 0;
+    }
+
+    .autocomplete ul.as-selections li.as-original input {
+      margin: 0;
+    }
+  }
+
+  .footer {
+    padding: 6px 6px;
+    text-align: right;
+  }
+}

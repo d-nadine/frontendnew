@@ -32,8 +32,14 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
   toggleMeta: -> @toggleProperty 'showMeta'
   toggleReplyForm: -> @toggleProperty 'showReplyForm'
+  toggleForwardForm: -> @toggleProperty 'showForwardForm'
 
   replyEmail: (->
     Radium.ReplyForm.create
+      email: @get('model')
+  ).property('model')
+
+  forwardEmail: (->
+    Radium.ForwardEmailForm.create
       email: @get('model')
   ).property('model')

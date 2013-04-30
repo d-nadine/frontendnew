@@ -88,7 +88,7 @@
           <i class="icon-reply"></i>Reply
         </a>
 
-        <a class="btn btn-link">
+        <a {{action toggleForwardForm}} class="btn btn-link">
           <i class="icon-forward"></i>Forward
         </a>
 
@@ -103,6 +103,10 @@
     <div class="block block-arrow-top">
       {{render "forms/reply" replyEmail}}
     </div>
+  {{/if}}
+
+  {{#if showForwardForm}}
+    {{render "forms/forward_email" forwardEmail}}
   {{/if}}
 
   {{#if showFormBox}}
