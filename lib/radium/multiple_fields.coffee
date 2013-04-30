@@ -101,3 +101,4 @@ Radium.MultipleFields = Ember.ContainerView.extend
       index: @get('source.length') - 1
       current: record
     )
+
