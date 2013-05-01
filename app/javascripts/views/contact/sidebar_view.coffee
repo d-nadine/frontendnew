@@ -254,20 +254,34 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
       <div>
         {{#if view.isEditing}}
           <h2>Assigned To</h2>
-          <h2>{{user.name}}</h2>
           <div>
             {{view view.userPicker}}
+          </div>
+          <div class="source">
+            <label class="control-label">Source</label>
+            {{view Radium.LeadSourcesView}}
           </div>
         {{else}}
           <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
           {{#linkTo user this}}
             {{avatar this class="img-polaroid"}}
           {{/linkTo}}
-
           <p>
             {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
             <span class="title muted">{{title}}</span>
           </p>
+          <div class="source">
+            <div>
+              <div><label class="control-label">Source</label></div>
+              <div>{{source}}</div>
+            </div>
+          </div>
         {{/if}}
+        <div class="createdAt">
+          <div>
+            <div><label class="control-label">Client Since</label></div>
+            <div>{{formatDateTime createdAt format="date"}}</div>
+          </div>
+        </div>
       </div>
     """

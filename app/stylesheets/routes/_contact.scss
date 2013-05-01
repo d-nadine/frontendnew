@@ -68,6 +68,8 @@
   .phone .control-group,
   .deals-won,
   .open-deals .deal,
+  .assigned-to .createdAt,
+  .assigned-to .source,
   .open-deals .deal-links{
     width: 100%;
     position: relative;
@@ -179,6 +181,13 @@
     }
   }
 
+  .assigned-to,
+  .open-deals{
+    h2{
+      margin: 0;
+    }
+  }
+
   .open-deals{
     h2{
       margin: 0;
@@ -277,17 +286,32 @@
   }
 
   .assigned-to {
+    label{
+      text-transform: uppercase;
+      color: $muted;
+    }
+
     .icon-edit{
       position: relative;
-      top: 13px;
+      top: 20px;
     }
 
     span.text{
       display: none;
     }
+
     .avatar {
       float: left;
       margin-right: 10px;
+    }
+
+    .user-picker-control-box{
+      border: solid 1px $control-border-color;
+    }
+
+    .source,
+    .createdAt{
+      margin-top: 10px;
     }
   }
 

@@ -1,0 +1,17 @@
+<h2 class="with-button">
+  Followers
+  <button class="btn pull-right">Follow</button>
+</h2>
+
+<ul>
+  {{#each follower in followers}}
+    <li>
+      {{avatar follower}}
+      {{follower.name}}</br>
+      {{follower.title}}
+    </li>
+  {{else}}
+    No followers yet!
+  {{/each}}
+</ul>
+

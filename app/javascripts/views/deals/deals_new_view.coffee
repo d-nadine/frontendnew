@@ -49,12 +49,7 @@ Radium.DealsNewView= Ember.View.extend
     rows: 3
     valueBinding: 'controller.description'
 
-  source: Radium.TextCombobox.extend Radium.ValueValidationMixin,
-    classNameBindings: [
-      'disabled:is-disabled'
-    ]
-    sourceBinding: 'controller.controllers.dealSources.dealSources'
-    valueBinding: 'controller.source'
+  source: Radium.DealSourcesView.extend()
 
   dealStatuses: Ember.View.extend
     template: Ember.Handlebars.compile """

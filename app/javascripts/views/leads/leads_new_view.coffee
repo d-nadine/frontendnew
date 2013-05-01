@@ -122,15 +122,9 @@ Radium.LeadsNewView = Ember.View.extend
     valueBinding: 'controller.notes'
     readonly: Ember.computed.not 'controller.isNew'
 
-  source: Radium.TextCombobox.extend Radium.ValueValidationMixin,
-    classNameBindings: [
-      'disabled:is-disabled'
-    ]
+  source: Radium.LeadSourcesView.extend
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.leadSources'
-    valueBinding: 'controller.source'
-    placeholder: 'Where is this lead from?'
-    valueBinding: 'controller.source'
 
   addresses: Radium.MultipleFields.extend
     labels: ['Office','Home']
