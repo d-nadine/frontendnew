@@ -30,7 +30,10 @@
   </div>
   <hr/>
   <div class="additional-detail">
-    What goes here
+    <div class="address">
+      {{view view.addressInlineEditor}}
+    </div>
+    <hr/>
   </div>
   <div class="group-picker">
     {{view view.groups placeholder="Add" viewName="tags"}}
@@ -78,10 +81,6 @@
   <hr/>
   <div class="about">
     {{view view.aboutInlineEditor valueBinding=about}}
-  </div>
-  <hr/>
-  <div class="address">
-    {{view view.addressInlineEditor}}
   </div>
   <hr/>
   <div class="control-group">
