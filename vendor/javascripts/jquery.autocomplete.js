@@ -188,6 +188,9 @@
                         $("li.as-selection-item", selections_holder).removeClass("blur");
                         if($(this).val() != ""){
                             results_ul.css("width",selections_holder.outerWidth());
+                            //markerxx
+                            console.log('in focus');
+                            positionResults();
                             results_holder.show();
                         }
                     }
@@ -388,10 +391,18 @@
                     }
                     selections_holder.removeClass("loading");
                     results_ul.css("width", selections_holder.outerWidth());
+                    positionResults();
                     if (matchCount > 0 || !opts.showResultListWhenNoMatch) {
                         results_holder.show();
                     }
                     opts.resultsComplete.call(this);
+                }
+
+                function positionResults(){
+                    console.log(values_input.position().top);
+                    results_ul.css("position", "absolute");
+                    results_ul.css("left", selections_holder.position().left);
+                    results_ul.css("top", selections_holder.position().top + 42);
                 }
 
                 function add_selected_item(data, num){

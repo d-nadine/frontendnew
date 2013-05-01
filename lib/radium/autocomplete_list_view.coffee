@@ -82,16 +82,16 @@ Radium.AutocompleteView = Radium.View.extend
   # FIXME: change the markup to use a div so we
   # can use block level like normal
   resizeInputBox: ->
-    totalWidth = @$().outerWidth(true)
+    # totalWidth = @$('as-selections').outerWidth(true)
 
-    selectionWidth = 0
+    # selectionWidth = 0
 
-    @$('li.as-selection-item').each ->
-      selectionWidth = selectionWidth + $(this).outerWidth(true)
+    # @$('li.as-selection-item').each ->
+    #   selectionWidth = selectionWidth + $(this).outerWidth(true)
 
-    inputWidth = totalWidth - selectionWidth - 41
+    # inputWidth = totalWidth - selectionWidth - 41
 
-    @$('li.as-original input').width inputWidth
+    # @$('li.as-original input').width inputWidth
 
   didInsertElement: ->
     @$('input[type=text]').addClass('field')

@@ -16,15 +16,3 @@ Radium.GroupAutoComplete = Radium.AutocompleteView.extend
                 name: item
 
     @get('parentView').addSelection item
-
-  resizeInputBox: ->
-    totalWidth = @$().outerWidth(true)
-
-    selectionWidth = 0
-
-    @$('li.as-selection-item').each ->
-      selectionWidth = selectionWidth + $(this).outerWidth(true)
-
-    inputWidth = totalWidth - selectionWidth - 157
-
-    @$('li.as-original input').width inputWidth
