@@ -217,7 +217,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     addresses: Radium.MultipleFields.extend
       labels: ['Office','Home']
       leader: 'Address'
-      sourceBinding: 'controller.contactAddresses'
+      sourceBinding: 'controller.addresses'
       viewType: Radium.AddressMultipleField
       type: Radium.Address
     template: Ember.Handlebars.compile """
@@ -230,9 +230,17 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
         {{else}}
           <h2>Address <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
           {{#if primaryAddress}}
-            <div>
-              address goes here
-            </div>
+            {{#with primaryAddress}}
+              <div class="readonly">
+                <div>{{street}}</div>
+                <div>{{city}}</div>
+                <div>{{state}}</div>
+                <div>{{zipcode}}</div>
+                <div class="location">
+                  <a href="#"><i class="icon-location"></i></a>
+                </div>
+              </div>
+            {{/with}}
           {{/if}}
         {{/if}}
       </div>

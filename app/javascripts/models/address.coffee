@@ -6,6 +6,7 @@ Radium.Address = Radium.Model.extend
   city: DS.attr('string')
   country: DS.attr('string')
   zipcode: DS.attr('string')
+
   value: ( ->
     return if @get('isNew')
 

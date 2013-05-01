@@ -192,6 +192,10 @@
     }
 
     .deal{
+      > div{
+        margin-bottom: 10px
+      }
+
       .deal-value{
         text-align: right;
         i{
@@ -235,9 +239,44 @@
   }
 
   .address{
+    h2{
+      margin: 0;
+    }
+
     .icon-edit{
       position: relative;
       top: 13px;
     }
+
+    .readonly{
+      margin-left: 10px;
+    }
+
+    .location{
+      margin-top: 10px;
+    }
+
+    .multiple-field{
+      .control-label{
+        display: block;
+        margin-bottom: 10px;
+      }
+      .control-group{
+        margin-bottom: 0;
+      }
+
+      .add-new{
+        width: 100%;
+        .icon-plus{
+          position: absolute;
+          right: 0;
+          top: -25px;
+        }
+      }
+    }
+  }
+
+  .btn-block{
+    width: 100%;
   }
 }
