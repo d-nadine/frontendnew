@@ -50,7 +50,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
 
   showExtraContactDetail: ->
     @$('.additional-detail').slideToggle('medium')
-    @$('#detailToggle').toggleClass('icon-arrow-up icon-arrow-down')
+    @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
   headerInlineEditor: Radium.HighlightInlineEditor.extend
     companyPicker: Radium.TextCombobox.extend
