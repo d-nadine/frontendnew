@@ -276,6 +276,21 @@
     }
   }
 
+  .assigned-to {
+    .icon-edit{
+      position: relative;
+      top: 13px;
+    }
+
+    span.text{
+      display: none;
+    }
+    .avatar {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
   .btn-block{
     width: 100%;
   }

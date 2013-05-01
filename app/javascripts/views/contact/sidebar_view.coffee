@@ -5,6 +5,7 @@ require 'lib/radium/multiple_fields'
 require 'lib/radium/multiple_field'
 require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
+require 'lib/radium/user_picker'
 
 Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
   isValid: true
@@ -242,6 +243,31 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
               </div>
             {{/with}}
           {{/if}}
+        {{/if}}
+      </div>
+    """
+
+  assignedToInlineEditor: Radium.HighlightInlineEditor.extend
+    userPicker: Radium.UserPicker.extend
+      isSubmitted: true
+    template: Ember.Handlebars.compile """
+      <div>
+        {{#if view.isEditing}}
+          <h2>Assigned To</h2>
+          <h2>{{user.name}}</h2>
+          <div>
+            {{view view.userPicker}}
+          </div>
+        {{else}}
+          <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+          {{#linkTo user this}}
+            {{avatar this class="img-polaroid"}}
+          {{/linkTo}}
+
+          <p>
+            {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+            <span class="title muted">{{title}}</span>
+          </p>
         {{/if}}
       </div>
     """
