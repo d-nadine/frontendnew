@@ -26,7 +26,7 @@ class Populator
     companies = for i in [1..5]
       Factory.create 'company'
 
-    companiesDictionary = new Dictionary(companies)
+    companyDictionary = new Dictionary(companies)
 
     groups = for i in [1..5]
       Factory.create 'group'
@@ -36,7 +36,7 @@ class Populator
     contacts = for i in [1..10]
       Factory.create 'contact',
         user: -> userDictionary.random()
-        company: -> companiesDictionary.random()
+        company: -> companyDictionary.random()
         groups: -> [
           groupDictionary.random()
           groupDictionary.random()
@@ -49,17 +49,51 @@ class Populator
     settings.get('negotiatingStatuses').forEach (status) ->
       Dictionaries.dealStatuses.add status
 
-    Factory.create 'deal',
+    deal = Factory.create 'deal',
       contact: contactDictionary.random()
       user: userDictionary.random()
 
-    Factory.create 'email',
+    dealDictionary = new Dictionary([deal])
+
+    email1 = Factory.create 'email',
       sender: userDictionary.random()
       to: [contactDictionary.random()]
 
-    Factory.create 'email',
+    email2 = Factory.create 'email',
       to: [userDictionary.random()]
       sender: contactDictionary.random()
+
+    emailDictionary = new Dictionary([email1, email2])
+
+    Factory.create 'activity',
+      tag: 'follow'
+      meta:
+        follower: userDictionary.random()
+        following: userDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'follow'
+      meta:
+        follower: userDictionary.random()
+        following: contactDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'follow'
+      meta:
+        follower: userDictionary.random()
+        following: companyDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'follow'
+      meta:
+        follower: userDictionary.random()
+        following: groupDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'follow'
+      meta:
+        follower: userDictionary.random()
+        following: dealDictionary.random()
 
     Factory.adapter.store.commit()
 

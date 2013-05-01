@@ -1,0 +1,17 @@
+<div class="row activity">
+  <div class="span1"><i class="icon-todo"></i></div>
+  <div class="span5">
+    <p>
+      {{link follower}} is now following
+
+      {{#if useQuotes}}
+        "{{link following}}"
+      {{else}}
+        {{link following}}
+      {{/if}}
+    </p>
+
+    {{render "comments" comments}}
+  </div>
+  <div class="span2">{{ageInWords createdAt}}</div>
+</div>

@@ -16,6 +16,10 @@
   overflow: auto;
   margin-bottom: 15px;
 
+  &.new-comment {
+    margin-bottom: 0;
+  }
+
   .avatar-container {
     float: left;
   }

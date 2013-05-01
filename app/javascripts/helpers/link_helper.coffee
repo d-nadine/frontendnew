@@ -1,26 +1,20 @@
+Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#linkTo user view.content}}{{view.displayName}}{{/linkTo}}"
+Ember.TEMPLATES['links/contact'] = Ember.Handlebars.compile """
+  {{#linkTo contact view.content}}{{view.displayName}}{{/linkTo}}
+
+  {{#if view.company}}
+    ({{#linkTo company view.company}}{{view.company.name}}){{/linkTo}}
+  {{/if}}
+"""
+Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#linkTo company view.content}}{{view.content.name}}{{/linkTo}}"
+Ember.TEMPLATES['links/group'] = Ember.Handlebars.compile "{{#linkTo unimplemented}}{{view.content.name}}{{/linkTo}}"
+Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#linkTo deal view.content}}{{view.content.name}}{{/linkTo}}"
+
 Radium.LinkView = Ember.View.extend
   tagName: "span"
 
-  template: Ember.Handlebars.compile """
-    {{#if view.isUser}}
-      {{#linkTo user view.content}}{{view.displayName}}{{/linkTo}}
-    {{/if}}
-
-    {{#if view.isContact}}
-      {{#linkTo contact view.content}}{{view.displayName}}{{/linkTo}}
-
-      {{#if view.company}}
-        ({{#linkTo company view.company}}{{view.company.name}}){{/linkTo}}
-      {{/if}}
-    {{/if}}
-  """
-
-  isUser: (->
-    @get('content') instanceof Radium.User
-  ).property('content')
-
-  isContact: (->
-    @get('content') instanceof Radium.Contact
+  templateName: (->
+    "links/#{@get('content.constructor').toString().split('.')[1].underscore()}"
   ).property('content')
 
   displayName: (->
