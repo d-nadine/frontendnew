@@ -288,6 +288,7 @@
                             }
                             if(opts.neverSubmit || active.length > 0){
                                 e.preventDefault();
+                                e.stopPropagation();
                             }
                             break;
                         // ignore if the following keys are pressed: [escape] [shift] [capslock]
