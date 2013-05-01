@@ -188,8 +188,6 @@
                         $("li.as-selection-item", selections_holder).removeClass("blur");
                         if($(this).val() != ""){
                             results_ul.css("width",selections_holder.outerWidth());
-                            //markerxx
-                            console.log('in focus');
                             positionResults();
                             results_holder.show();
                         }
