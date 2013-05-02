@@ -1,22 +1,23 @@
 class Populator
   @run: ->
     names = [
-      'Adam Hawkins'
-      'Paul Cowan'
-      'Joshua Jones'
-      'Sami Asikainen'
-      'Riikka Tarkainen'
+      ['Adam', 'Hawkins']
+      ['Paul', 'Cowan']
+      ['Joshua', 'Jones']
+      ['Sami',  'Asikainen']
+      ['Riikka', 'Tarkainen']
     ]
 
     users = names.map (name) ->
       Factory.create 'user',
-        name: name
-        email: "#{name.split(' ')[0].toLowerCase()}@radiumcrm.com"
+        firstName: name[0]
+        lastName: name[1]
+        email: "#{name[0].toLowerCase()}@radiumcrm.com"
 
     userDictionary = new Dictionary(users)
 
     users.forEach (user) ->
-      nameKey = user.get('name').split(' ')[0].underscore()
+      nameKey = user.get('firstName').underscore()
       userDictionary[nameKey] = user
 
     # globalize it so other populators can access the 

@@ -1,4 +1,4 @@
-Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#linkTo user view.content}}{{view.displayName}}{{/linkTo}}"
+Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#linkTo user view.content}}{{view.content.firstName}}{{/linkTo}}"
 Ember.TEMPLATES['links/contact'] = Ember.Handlebars.compile """
   {{#linkTo contact view.content}}{{view.displayName}}{{/linkTo}}
 
