@@ -3,8 +3,11 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
   isDelete: Ember.computed.is 'meta.event', 'delete'
   isAssign: Ember.computed.is 'meta.event', 'assign'
   isStatusChange: Ember.computed.is 'meta.event', 'status_change'
+  isPublish: Ember.computed.is 'meta.event', 'publish'
 
   deal: Ember.computed.alias 'reference'
+  value: Ember.computed.alias 'deal.value'
+
   contact: Ember.computed.alias 'reference.contact'
   reassignedTo: Ember.computed.alias 'meta.user'
   status: Ember.computed.alias 'meta.status'

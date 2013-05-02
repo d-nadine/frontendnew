@@ -293,31 +293,37 @@ class Populator
     #   meta:
     #     event: 'delete'
 
-    Factory.create 'activity',
-      tag: 'deal'
-      user: userDictionary.random()
-      reference: dealDictionary.random()
-      meta:
-        event: 'status_change'
-        status: 'closed'
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'closed'
+
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'lost'
+
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     negotiating: true
+    #     status: 'waiting for signature'
 
     Factory.create 'activity',
       tag: 'deal'
       user: userDictionary.random()
       reference: dealDictionary.random()
       meta:
-        event: 'status_change'
-        status: 'lost'
-
-    Factory.create 'activity',
-      tag: 'deal'
-      user: userDictionary.random()
-      reference: dealDictionary.random()
-      meta:
-        event: 'status_change'
-        negotiating: true
-        status: 'waiting for signature'
-
+        event: 'publish'
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
