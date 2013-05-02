@@ -81,7 +81,8 @@ Radium.AutocompleteView = Radium.View.extend
 
     inputWidth = totalWidth - left
 
-    inputWidth = totalWidth - 50 if inputWidth < 100
+    inputWidth = totalWidth if inputWidth < 100
+    inputWidth = 200 if inputWidth < 100
 
     @$('li.as-original input').width inputWidth
 
