@@ -7,28 +7,6 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 
-Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
-  isValid: true
-
-  click: (evt) ->
-    tagName = evt.target.tagName.toLowerCase()
-
-    if ['input', 'button', 'span',  'i', 'a'].indexOf(tagName) == -1
-      @_super.apply this, arguments
-      return
-
-    evt.preventDefault()
-    evt.stopPropagation()
-
-  toggleEditor:  (evt) ->
-    @_super.apply this, arguments
-
-    return unless @get 'isEditing'
-    Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
-
-  highlightSelection: ->
-    @$('input[type=text],textarea').filter(':first').select()
-
 Radium.ContactSidebarView = Radium.SidebarView.extend
   classNames: ['sidebar-panel-bordered']
 
@@ -263,11 +241,11 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
           </div>
         {{else}}
           <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-          {{#linkTo user this}}
-            {{avatar this class="img-polaroid"}}
+          {{#linkTo user user}}
+            {{avatar user class="img-polaroid"}}
           {{/linkTo}}
           <p>
-            {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+            {{#linkTo user user}}{{user.name}}{{/linkTo}}<br/>
             <span class="title muted">{{title}}</span>
           </p>
           <div class="source">

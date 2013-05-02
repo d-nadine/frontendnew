@@ -15,16 +15,18 @@ Radium.ContactController = Radium.ObjectController.extend
 
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->
-        preVal + item.get('value')
+      value = if item.get('status') == 'closed' then item.get('value') else 0
+
+      preVal + value
     , 0, 'value')
   ).property('deals.[]')
 
   companyName: ( (key, value) ->
     if arguments.length == 1
-      if @get('isNew')
-        @get('model.companyName')
-      else
-        @get('company.name')
+      if !@get('model.companyName') && @get('company.name')
+        @set('model.companyName', @get('company.name'))
+
+      @get('model.companyName')
     else
       @set('model.companyName', value)
       value
