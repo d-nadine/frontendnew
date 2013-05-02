@@ -1,0 +1,25 @@
+<div class="row activity">
+  <div class="span1"><i class="icon-attachments"></i></div>
+  <div class="span5">
+    <p>
+      {{#if forContact}}
+        {{partial "activities/attachment/contact"}}
+      {{/if}}
+
+      {{#if forDeal}}
+        {{partial "activities/attachment/deal"}}
+      {{/if}}
+
+      {{#if forDiscussion}}
+        {{partial "activities/attachment/discussion"}}
+      {{/if}}
+
+      <br />
+      by {{link user}}
+    </p>
+
+    {{render "comments" comments}}
+  </div>
+  <div class="span2">{{ageInWords timestamp}}</div>
+</div>
+

@@ -72,39 +72,68 @@ class Populator
 
     discussionDictionary = new Dictionary([discussion])
 
-    Factory.create 'activity',
-      tag: 'follow'
-      meta:
-        follower: userDictionary.random()
-        following: userDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'follow'
+    #   meta:
+    #     follower: userDictionary.random()
+    #     following: userDictionary.random()
 
-    Factory.create 'activity',
-      tag: 'follow'
-      meta:
-        follower: userDictionary.random()
-        following: contactDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'follow'
+    #   meta:
+    #     follower: userDictionary.random()
+    #     following: contactDictionary.random()
 
-    Factory.create 'activity',
-      tag: 'follow'
-      meta:
-        follower: userDictionary.random()
-        following: companyDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'follow'
+    #   meta:
+    #     follower: userDictionary.random()
+    #     following: companyDictionary.random()
 
-    Factory.create 'activity',
-      tag: 'follow'
-      meta:
-        follower: userDictionary.random()
-        following: groupDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'follow'
+    #   meta:
+    #     follower: userDictionary.random()
+    #     following: groupDictionary.random()
 
-    Factory.create 'activity',
-      tag: 'follow'
-      meta:
-        follower: userDictionary.random()
-        following: dealDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'follow'
+    #   meta:
+    #     follower: userDictionary.random()
+    #     following: dealDictionary.random()
 
-    Factory.create 'activity',
-      tag: 'discussion'
-      reference: discussionDictionary.random()
+    # Factory.create 'activity',
+    #   tag: 'discussion'
+    #   reference: discussionDictionary.random()
+    #
+
+    [contactDictionary, discussionDictionary, dealDictionary].forEach (dict) ->
+      Factory.create 'activity',
+        tag: 'attachment'
+        reference: Factory.create 'attachment',
+          reference: dict.random()
+          user: userDictionary.random()
+        user: userDictionary.random()
+        meta:
+          event: 'create'
+
+      Factory.create 'activity',
+        tag: 'attachment'
+        reference: Factory.create 'attachment',
+          reference: dict.random()
+          user: userDictionary.random()
+        user: userDictionary.random()
+        meta:
+          event: 'update'
+
+      Factory.create 'activity',
+        tag: 'attachment'
+        reference: Factory.create 'attachment',
+          reference: dict.random()
+          user: userDictionary.random()
+        user: userDictionary.random()
+        meta:
+          event: 'delete'
 
     Factory.adapter.store.commit()
 

@@ -57,3 +57,7 @@ Radium.computed.tasks = ->
 Radium.computed.required = ->
   Ember.computed ->
     throw new Error("#{@constructor} does not implement the tasks interface")
+
+Radium.computed.kindOf = (property, type) ->
+  Ember.computed property, (key) ->
+    @get(property) instanceof type
