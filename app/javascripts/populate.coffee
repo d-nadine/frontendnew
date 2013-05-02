@@ -79,6 +79,13 @@ class Populator
 
     meetingDictionary = new Dictionary([meeting])
 
+    todos = for i in [0..10]
+      Factory.create 'todo',
+        user: userDictionary.random()
+        reference: contactDictionary.random()
+
+    todoDictionary = new Dictionary(todos)
+
     # Factory.create 'activity',
     #   tag: 'follow'
     #   meta:
@@ -339,34 +346,49 @@ class Populator
     #   meta:
     #     event: 'publish'
 
-    Factory.create 'activity',
-      tag: 'meeting'
-      user: userDictionary.random()
-      reference: meetingDictionary.random()
-      meta:
-        event: 'reschedule'
-        time: Ember.DateTime.create()
+    # Factory.create 'activity',
+    #   tag: 'meeting'
+    #   user: userDictionary.random()
+    #   reference: meetingDictionary.random()
+    #   meta:
+    #     event: 'reschedule'
+    #     time: Ember.DateTime.create()
+
+    # Factory.create 'activity',
+    #   tag: 'meeting'
+    #   user: userDictionary.random()
+    #   reference: meetingDictionary.random()
+    #   meta:
+    #     event: 'cancel'
+
+    # Factory.create 'activity',
+    #   tag: 'meeting'
+    #   user: userDictionary.random()
+    #   reference: meetingDictionary.random()
+    #   meta:
+    #     event: 'create'
+
+    # Factory.create 'activity',
+    #   tag: 'meeting'
+    #   user: userDictionary.random()
+    #   reference: meetingDictionary.random()
+    #   meta:
+    #     event: 'update'
 
     Factory.create 'activity',
-      tag: 'meeting'
+      tag: 'todo'
       user: userDictionary.random()
-      reference: meetingDictionary.random()
+      reference: todoDictionary.random()
       meta:
-        event: 'cancel'
+        event: 'finish'
 
     Factory.create 'activity',
-      tag: 'meeting'
+      tag: 'todo'
       user: userDictionary.random()
-      reference: meetingDictionary.random()
+      reference: todoDictionary.random()
       meta:
-        event: 'create'
-
-    Factory.create 'activity',
-      tag: 'meeting'
-      user: userDictionary.random()
-      reference: meetingDictionary.random()
-      meta:
-        event: 'update'
+        event: 'assign'
+        user: userDictionary.random()
 
     Factory.adapter.store.commit()
 

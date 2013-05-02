@@ -39,3 +39,6 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
     finishBy = @get('finishBy')
     Ember.DateTime.compareDate(today, finishBy) is 0
   ).property('finishBy')
+
+  toString: ->
+    @get 'description'

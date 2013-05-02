@@ -1,0 +1,16 @@
+<div class="row activity">
+  <div class="span1"><i class="icon-todo"></i></div>
+  <div class="span5">
+    {{#if isFinish}}
+      {{partial "activities/todo/finish"}}
+    {{/if}}
+
+    {{#if isAssign}}
+      {{partial "activities/todo/assign"}}
+    {{/if}}
+
+    {{render "comments" comments}}
+  </div>
+  <div class="span2">{{ageInWords timestamp}}</div>
+</div>
+
