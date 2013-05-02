@@ -195,3 +195,4 @@ Radium.AutocompleteView = Radium.View.extend
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
+
