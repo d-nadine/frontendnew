@@ -70,6 +70,13 @@ Radium.AutocompleteView = Radium.View.extend
     @get('source').removeObject item
 
   resizeInputBox: ->
+    input = @$('li.as-original input')
+
+    if @get('isEditable')
+      input.show()
+    else
+      input.hide()
+
     totalWidth = @$('.as-selections').outerWidth(true)
 
     last = @$('.as-selections li.as-selection-item:last')
@@ -82,9 +89,8 @@ Radium.AutocompleteView = Radium.View.extend
     inputWidth = totalWidth - left
 
     inputWidth = totalWidth if inputWidth < 100
-    inputWidth = 200 if inputWidth < 100
 
-    @$('li.as-original input').width inputWidth
+    input.width inputWidth
 
   didInsertElement: ->
     @$('input[type=text]').addClass('field')
