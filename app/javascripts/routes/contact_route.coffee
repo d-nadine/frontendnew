@@ -1,7 +1,7 @@
 Radium.ContactRoute = Radium.Route.extend
   events:
     confirmDeletion: ->
-      @render 'deal/deletion_confirmation',
+      @render 'contact/deletion_confirmation',
         into: 'application'
         outlet: 'modal'
 
@@ -10,6 +10,17 @@ Radium.ContactRoute = Radium.Route.extend
         into: 'application'
         outlet: 'modal'
 
+    deleteRecord: ->
+      contact = @modelFor 'contact'
+
+      contact.deleteRecord()
+
+      @render 'nothing',
+        into: 'application'
+        outlet: 'modal'
+
+      @render 'contact/deleted',
+        into: 'application'
 
   renderTemplate: ->
     @render()

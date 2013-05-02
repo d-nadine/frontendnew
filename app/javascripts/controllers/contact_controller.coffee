@@ -9,6 +9,10 @@ Radium.ContactController = Radium.ObjectController.extend
     @get('companies').mapProperty('name')
   ).property('companies.[]')
 
+  deletionNotConfirmed: (->
+    @get('deletionToken') isnt @get('name')
+  ).property('deletionToken')
+
   companyName: ( (key, value) ->
     if arguments.length == 1
       if @get('isNew')
