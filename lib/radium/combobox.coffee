@@ -35,7 +35,7 @@ Radium.Combobox = Radium.View.extend
       value
   ).property('value')
 
-  template: Ember.Handlebars.compile """
+  layout: Ember.Handlebars.compile """
     {{#if view.leaderView}}
       {{view view.leaderView tagName="span" classNames="text"}}
     {{/if}}
@@ -53,7 +53,9 @@ Radium.Combobox = Radium.View.extend
         </button>
         <ul class="dropdown-menu">
           {{#each view.sortedSource}}
-            <li><a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a></li>
+            <li>
+              {{yield}}
+            </li>
           {{/each}}
         </ul>
       </div>
@@ -67,6 +69,11 @@ Radium.Combobox = Radium.View.extend
       <span class="text">{{view.footer}}</span>
     {{/if}}
   """
+
+  template: Ember.Handlebars.compile """
+    <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a>
+  """
+
   toggleDropdown: (event) ->
     @toggleProperty 'open'
 

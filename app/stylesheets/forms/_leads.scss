@@ -50,6 +50,29 @@
     margin-right: 50px;
   }
 
+  ul.dropdown-menu{
+    li{
+      position: relative;
+      padding: 2px;
+      a{
+        img{
+          position: absolute;
+          right: 7px;
+          top: 2px;
+        }
+      }
+    }
+  }
+
+  .typeahead{
+    &.dropdown-menu{
+      width: 200px;
+      img{
+        margin-left: 5px;
+      }
+    }
+  }
+
   .autocomplete{
     ul.as-selections{
       width: 519px;

@@ -172,6 +172,23 @@ Radium.LeadsNewView = Ember.View.extend
     lookupQuery: (query) ->
       @get('source').find (item) -> item.get('name') == query
 
+    template: Ember.Handlebars.compile """
+      <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}{{contactSourceImage status class="img-polaroid"}}</a>
+    """
+
+    highlighter: (item) ->
+      string = item.get 'name'
+
+      query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+      result = string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
+        "<strong>#{match}</strong>"
+
+      # FIXME: determine image src from status
+      url = "http://placehold.it/16x16"
+
+      result += "<img src='#{url}' class='img-polaroid' alt=#{item.get('source')}/>"
+      result
+
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
         lookUp =  @lookupQuery(value)
