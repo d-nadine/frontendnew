@@ -4,3 +4,5 @@ Radium.ActivitiesTodoController = Radium.ObjectController.extend
 
   todo: Ember.computed.alias 'reference'
   assignedTo: Ember.computed.alias 'meta.user'
+
+  icon: 'todo'

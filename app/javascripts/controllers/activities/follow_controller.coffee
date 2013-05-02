@@ -5,3 +5,5 @@ Radium.ActivitiesFollowController = Radium.ObjectController.extend
   useQuotes: (->
     (@get('following') instanceof Radium.Group) || (@get('following') instanceof Radium.Deal)
   ).property('following')
+
+  icon: 'twitter'

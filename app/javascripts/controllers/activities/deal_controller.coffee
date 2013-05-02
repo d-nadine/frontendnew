@@ -11,3 +11,12 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
   reassignedTo: Ember.computed.alias 'meta.user'
   status: Ember.computed.alias 'meta.status'
   isNegotiating: Ember.computed.alias 'meta.negotiating'
+
+  icon: (->
+    switch @get('event')
+      when 'delete' then 'delete'
+      when 'assign' then 'switch'
+      when 'status_change' then 'chart'
+      when 'publish' then 'quill'
+  ).property('event')
+

@@ -9,3 +9,5 @@ Radium.ActivitiesAttachmentController = Radium.ObjectController.extend
   isCreate: Ember.computed.equal 'event', 'create'
   isUpdate: Ember.computed.equal 'event', 'update'
   isDelete: Ember.computed.equal 'event', 'delete'
+
+  icon: 'attachments'

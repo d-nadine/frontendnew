@@ -7,3 +7,5 @@ Radium.ActivitiesMeetingController = Radium.ObjectController.extend
   meeting: Ember.computed.alias 'reference'
   participants: Ember.computed.alias 'reference.participants'
   newTime: Ember.computed.alias 'meta.time'
+
+  icon: 'calendar'
