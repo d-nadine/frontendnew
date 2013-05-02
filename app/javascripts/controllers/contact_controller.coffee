@@ -13,6 +13,12 @@ Radium.ContactController = Radium.ObjectController.extend
     @get('deletionToken') isnt @get('name')
   ).property('deletionToken')
 
+  dealsTotal: ( ->
+    @get('deals').reduce((preVal, item) ->
+        preVal + item.get('value')
+    , 0, 'value')
+  ).property('deals.[]')
+
   companyName: ( (key, value) ->
     if arguments.length == 1
       if @get('isNew')

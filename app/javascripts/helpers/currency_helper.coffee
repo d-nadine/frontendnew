@@ -1,5 +1,5 @@
 Ember.Handlebars.registerBoundHelper 'currency', (value, options) ->
-  return if !value
+  return if (!value) && (value != 0)
 
   value = parseFloat(value).toFixed(2)
 
