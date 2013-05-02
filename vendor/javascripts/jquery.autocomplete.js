@@ -398,7 +398,6 @@
                 }
 
                 function positionResults(){
-                    console.log(values_input.position().top);
                     results_ul.css("position", "absolute");
                     position = input.position()
                     results_ul.css("left", position.left);
