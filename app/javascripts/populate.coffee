@@ -123,271 +123,254 @@ class Populator
     [contactDictionary, discussionDictionary, dealDictionary].forEach (dict) ->
       Factory.create 'activity',
         tag: 'attachment'
+        event: 'create'
         reference: Factory.create 'attachment',
           reference: dict.random()
           user: userDictionary.random()
         user: userDictionary.random()
-        meta:
-          event: 'create'
 
       Factory.create 'activity',
         tag: 'attachment'
+        event: 'update'
         reference: Factory.create 'attachment',
           reference: dict.random()
           user: userDictionary.random()
         user: userDictionary.random()
-        meta:
-          event: 'update'
 
       Factory.create 'activity',
         tag: 'attachment'
+        event: 'delete'
         reference: Factory.create 'attachment',
           reference: dict.random()
           user: userDictionary.random()
         user: userDictionary.random()
-        meta:
-          event: 'delete'
 
     Factory.create 'activity',
       tag: 'call'
+      event: 'create'
       user: userDictionary.random()
       reference: Factory.create 'call',
         reference: contactDictionary.random()
         user: userDictionary.random()
         description: null
-      meta:
-        event: 'create'
 
     Factory.create 'activity',
       tag: 'call'
+      event: 'create'
       user: userDictionary.random()
       reference: Factory.create 'call',
         reference: contactDictionary.random()
         user: userDictionary.random()
         description: "Ask about the fall line up"
-      meta:
-        event: 'create'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'primary_contact'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
         company: companyDictionary.random()
-        event: 'primary_contact'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'delete'
       user: userDictionary.random()
       reference: dealDictionary.random()
-      meta:
-        event: 'delete'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'assign'
       user: userDictionary.random()
       reference: dealDictionary.random()
       meta:
-        event: 'assign'
         user: userDictionary.random()
 
     Factory.create 'activity',
       tag: 'company'
+      event: 'create'
       user: userDictionary.random()
       reference: companyDictionary.random()
-      meta:
-        event: 'create'
 
     Factory.create 'activity',
       tag: 'company'
+      event: 'update'
       user: userDictionary.random()
       reference: companyDictionary.random()
-      meta:
-        event: 'update'
 
     Factory.create 'activity',
       tag: 'company'
+      event: 'assign'
       user: userDictionary.random()
       reference: companyDictionary.random()
       meta:
-        event: 'assign'
         user: userDictionary.random()
-    
-    Factory.create 'activity',
-      tag: 'contact'
-      user: userDictionary.random()
-      reference: contactDictionary.random()
-      meta:
-        event: 'update'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'update'
+      user: userDictionary.random()
+      reference: contactDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'contact'
+      event: 'status_change'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'status_change'
         status: 'contact'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'status_change'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'status_change'
         status: 'lead'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'status_change'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'status_change'
         status: 'prospect'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'status_change'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'status_change'
         status: 'customer'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'assign'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'assign'
         user: userDictionary.random()
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'status_change'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'status_change'
         status: 'contact'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'create'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'create'
         status: 'none'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'create'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'create'
         status: 'lead'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'create'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'create'
         status: 'customer'
 
     Factory.create 'activity',
       tag: 'contact'
+      event: 'delete'
       user: userDictionary.random()
       reference: contactDictionary.random()
-      meta:
-        event: 'delete'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'status_change'
       user: userDictionary.random()
       reference: dealDictionary.random()
       meta:
-        event: 'status_change'
         status: 'closed'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'status_change'
       user: userDictionary.random()
       reference: dealDictionary.random()
       meta:
-        event: 'status_change'
         status: 'lost'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'status_change'
       user: userDictionary.random()
       reference: dealDictionary.random()
       meta:
-        event: 'status_change'
         negotiating: true
         status: 'waiting for signature'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'publish'
       user: userDictionary.random()
       reference: dealDictionary.random()
-      meta:
-        event: 'publish'
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'publish'
       user: userDictionary.random()
       reference: dealDictionary.random()
-      meta:
-        event: 'publish'
 
     Factory.create 'activity',
       tag: 'meeting'
+      event: 'reschedule'
       user: userDictionary.random()
       reference: meetingDictionary.random()
       meta:
-        event: 'reschedule'
         time: Ember.DateTime.create()
 
     Factory.create 'activity',
       tag: 'meeting'
+      event: 'cancel'
       user: userDictionary.random()
       reference: meetingDictionary.random()
-      meta:
-        event: 'cancel'
 
     Factory.create 'activity',
       tag: 'meeting'
+      event: 'create'
       user: userDictionary.random()
       reference: meetingDictionary.random()
-      meta:
-        event: 'create'
 
     Factory.create 'activity',
       tag: 'meeting'
+      event: 'update'
       user: userDictionary.random()
       reference: meetingDictionary.random()
-      meta:
-        event: 'update'
 
     Factory.create 'activity',
       tag: 'todo'
+      event: 'finish'
       user: userDictionary.random()
       reference: todoDictionary.random()
-      meta:
-        event: 'finish'
 
     Factory.create 'activity',
       tag: 'todo'
+      event: 'assign'
       user: userDictionary.random()
       reference: todoDictionary.random()
       meta:
-        event: 'assign'
         user: userDictionary.random()
 
     Factory.create 'activity', 
       tag: 'email'
+      event: 'send'
       user: userDictionary.random()
       reference: emailDictionary.random()
-      meta:
-        event: 'send'
 
     Factory.adapter.store.commit()
 

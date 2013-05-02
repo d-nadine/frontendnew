@@ -1,6 +1,6 @@
 Radium.ActivitiesTodoController = Radium.ObjectController.extend
-  isFinish: Ember.computed.is 'meta.event', 'finish'
-  isAssign: Ember.computed.is 'meta.event', 'assign'
+  isFinish: Ember.computed.is 'event', 'finish'
+  isAssign: Ember.computed.is 'event', 'assign'
 
   todo: Ember.computed.alias 'reference'
   assignedTo: Ember.computed.alias 'meta.user'

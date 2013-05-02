@@ -1,10 +1,10 @@
 Radium.ActivitiesContactController = Radium.ObjectController.extend
-  isPrimaryContact: Ember.computed.is 'meta.event', 'primary_contact'
-  isCreate: Ember.computed.is 'meta.event', 'create'
-  isUpdate: Ember.computed.is 'meta.event', 'update'
-  isStatusChange: Ember.computed.is 'meta.event', 'status_change'
-  isAssign: Ember.computed.is 'meta.event', 'assign'
-  isDelete: Ember.computed.is 'meta.event', 'delete'
+  isCreate: Ember.computed.is 'event', 'create'
+  isUpdate: Ember.computed.is 'event', 'update'
+  isAssign: Ember.computed.is 'event', 'assign'
+  isDelete: Ember.computed.is 'event', 'delete'
+  isStatusChange: Ember.computed.is 'event', 'status_change'
+  isPrimaryContact: Ember.computed.is 'event', 'primary_contact'
 
   contact: Ember.computed.alias 'reference'
   company: Ember.computed.alias 'meta.company'

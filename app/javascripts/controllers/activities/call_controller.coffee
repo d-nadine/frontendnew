@@ -1,5 +1,5 @@
 Radium.ActivitiesCallController = Radium.ObjectController.extend
-  isCreate: Ember.computed.is 'meta.event', 'create'
+  isCreate: Ember.computed.is 'event', 'create'
 
   call: Ember.computed.alias 'reference'
   description: Ember.computed.alias 'reference.description'
