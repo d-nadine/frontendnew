@@ -207,12 +207,91 @@ class Populator
     #     event: 'assign'
     #     user: userDictionary.random()
     #
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'update'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'contact'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'lead'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'prospect'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'customer'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'assign'
+    #     user: userDictionary.random()
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'status_change'
+    #     status: 'contact'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'create'
+    #     status: 'none'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'create'
+    #     status: 'lead'
+
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'create'
+    #     status: 'customer'
+
     Factory.create 'activity',
       tag: 'contact'
       user: userDictionary.random()
       reference: contactDictionary.random()
       meta:
-        event: 'update'
+        event: 'delete'
 
     Factory.adapter.store.commit()
 
