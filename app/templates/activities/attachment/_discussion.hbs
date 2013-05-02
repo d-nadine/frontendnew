@@ -1,11 +1,11 @@
 {{#if isCreate}}
-  "{{link attachment}}" added to a {{#linkTo unimplemented}}discussion{{/linkTo}}
+  "{{link attachment}}" added to discussion about {{link attachedTo}}
 {{/if}}
 
 {{#if isUpdate}}
-  "{{link attachment}}" file changed for a {{#linkTo unimplemented}}discussion{{/linkTo}}
+  "{{link attachment}}" file changed on the discussion about {{link attachedTo}}
 {{/if}}
 
 {{#if isDelete}}
-  "{{link attachment}}" file removed form a {{#linkTo unimplemented}}discussion{{/linkTo}}
+  "{{link attachment}}" file removed form the discussion about {{link attachedTo}}
 {{/if}}
