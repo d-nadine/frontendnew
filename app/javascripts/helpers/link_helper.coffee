@@ -3,7 +3,7 @@ Ember.TEMPLATES['links/contact'] = Ember.Handlebars.compile """
   {{#linkTo contact view.content}}{{view.displayName}}{{/linkTo}}
 
   {{#if view.company}}
-    ({{#linkTo company view.company}}{{view.company.name}}){{/linkTo}}
+    ({{#linkTo company view.company}}{{view.company.name}}{{/linkTo}})
   {{/if}}
 """
 Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#linkTo company view.content}}{{view.content.name}}{{/linkTo}}"
