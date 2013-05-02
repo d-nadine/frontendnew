@@ -15,6 +15,7 @@ Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
 Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
   {{#linkTo unimplemented}}{{truncate view.content.topic length=20}}{{/linkTo}}
 """
+Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo unimplemented}}{{view.content.topic}}{{/linkTo}}"
 
 Radium.LinkView = Ember.View.extend
   tagName: "span"

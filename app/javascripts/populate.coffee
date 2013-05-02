@@ -72,6 +72,13 @@ class Populator
 
     discussionDictionary = new Dictionary([discussion])
 
+    meeting = Factory.create 'meeting',
+      user: userDictionary.random()
+      users: [userDictionary.random(), userDictionary.random()]
+      contacts: [contactDictionary.random()]
+
+    meetingDictionary = new Dictionary([meeting])
+
     # Factory.create 'activity',
     #   tag: 'follow'
     #   meta:
@@ -318,12 +325,49 @@ class Populator
     #     negotiating: true
     #     status: 'waiting for signature'
 
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
+    #     event: 'publish'
+
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
+    #     event: 'publish'
+
     Factory.create 'activity',
-      tag: 'deal'
+      tag: 'meeting'
       user: userDictionary.random()
-      reference: dealDictionary.random()
+      reference: meetingDictionary.random()
       meta:
-        event: 'publish'
+        event: 'reschedule'
+        time: Ember.DateTime.create()
+
+    Factory.create 'activity',
+      tag: 'meeting'
+      user: userDictionary.random()
+      reference: meetingDictionary.random()
+      meta:
+        event: 'cancel'
+
+    Factory.create 'activity',
+      tag: 'meeting'
+      user: userDictionary.random()
+      reference: meetingDictionary.random()
+      meta:
+        event: 'create'
+
+    Factory.create 'activity',
+      tag: 'meeting'
+      user: userDictionary.random()
+      reference: meetingDictionary.random()
+      meta:
+        event: 'update'
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
