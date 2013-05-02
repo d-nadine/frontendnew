@@ -345,7 +345,7 @@ class Populator
 
     Factory.create 'activity',
       tag: 'deal'
-      event: 'publish'
+      event: 'reopen'
       user: userDictionary.random()
       reference: dealDictionary.random()
 

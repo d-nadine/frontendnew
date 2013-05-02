@@ -39,6 +39,30 @@
   }
 }
 
+.activity.deal.lost {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: solid 1px #EED3D7;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+    color: #B94A48;
+  }
+}
+
 .activity.meeting.cancelled {
   .headline {
     text-decoration: line-through;
