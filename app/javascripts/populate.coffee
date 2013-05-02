@@ -316,6 +316,18 @@ class Populator
 
     Factory.create 'activity',
       tag: 'deal'
+      event: 'close'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'deal'
+      event: 'lose'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'deal'
       event: 'publish'
       user: userDictionary.random()
       reference: dealDictionary.random()

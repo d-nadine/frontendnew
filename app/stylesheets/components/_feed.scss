@@ -1,0 +1,35 @@
+.activity.row {
+  width: 720px;
+  padding: 8px 0;
+}
+
+.activity i.event {
+  font-size: 18px;
+}
+
+.activity .headline p {
+  margin-bottom: 0;
+}
+
+.activity.deal.closed {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: solid 1px #D6E9C6;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+  }
+}
