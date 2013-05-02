@@ -1,24 +1,15 @@
-<div class="row activity">
-  <div class="span1"><i class="icon-calendar"></i></div>
-  <div class="span5">
-    {{#if isReschedule}}
-      {{partial "activities/meeting/reschedule"}}
-    {{/if}}
+{{#if isReschedule}}
+  {{partial "activities/meeting/reschedule"}}
+{{/if}}
 
-    {{#if isCancel}}
-      {{partial "activities/meeting/cancel"}}
-    {{/if}}
+{{#if isCancel}}
+  {{partial "activities/meeting/cancel"}}
+{{/if}}
 
-    {{#if isCreate}}
-      {{partial "activities/meeting/create"}}
-    {{/if}}
+{{#if isCreate}}
+  {{partial "activities/meeting/create"}}
+{{/if}}
 
-    {{#if isUpdate}}
-      {{partial "activities/meeting/update"}}
-    {{/if}}
-
-    {{render "comments" comments}}
-  </div>
-  <div class="span2">{{ageInWords timestamp}}</div>
-</div>
-
+{{#if isUpdate}}
+  {{partial "activities/meeting/update"}}
+{{/if}}

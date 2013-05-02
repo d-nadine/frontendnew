@@ -35,4 +35,5 @@ Ember.Handlebars.registerBoundHelper 'link', (model, options) ->
   hash = options.hash
   hash.content = model
 
+  return unless model
   return Ember.Handlebars.helpers.view.call(this, Radium.LinkView, options)

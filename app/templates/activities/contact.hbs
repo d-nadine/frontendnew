@@ -1,32 +1,23 @@
-<div class="row activity">
-  <div class="span1"><i class="icon-company"></i></div>
-  <div class="span5">
-    {{#if isPrimaryContact}}
-      {{partial "activities/contact/primary_contact"}}
-    {{/if}}
+{{#if isPrimaryContact}}
+  {{partial "activities/contact/primary_contact"}}
+{{/if}}
 
-    {{#if isStatusChange}}
-      {{partial "activities/contact/status_change"}}
-    {{/if}}
+{{#if isStatusChange}}
+  {{partial "activities/contact/status_change"}}
+{{/if}}
 
-    {{#if isCreate}}
-      {{partial "activities/contact/create"}}
-    {{/if}}
+{{#if isCreate}}
+  {{partial "activities/contact/create"}}
+{{/if}}
 
-    {{#if isUpdate}}
-      {{partial "activities/contact/update"}}
-    {{/if}}
+{{#if isUpdate}}
+  {{partial "activities/contact/update"}}
+{{/if}}
 
-    {{#if isDelete}}
-      {{partial "activities/contact/delete"}}
-    {{/if}}
+{{#if isDelete}}
+  {{partial "activities/contact/delete"}}
+{{/if}}
 
-    {{#if isAssign}}
-      {{partial "activities/contact/assign"}}
-    {{/if}}
-
-    {{render "comments" comments}}
-  </div>
-  <div class="span2">{{ageInWords timestamp}}</div>
-</div>
-
+{{#if isAssign}}
+  {{partial "activities/contact/assign"}}
+{{/if}}

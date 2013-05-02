@@ -1,20 +1,11 @@
-<div class="row activity">
-  <div class="span1"><i class="icon-company"></i></div>
-  <div class="span5">
-    {{#if isCreate}}
-      {{partial "activities/company/create"}}
-    {{/if}}
+{{#if isCreate}}
+  {{partial "activities/company/create"}}
+{{/if}}
 
-    {{#if isUpdate}}
-      {{partial "activities/company/create"}}
-    {{/if}}
+{{#if isUpdate}}
+  {{partial "activities/company/create"}}
+{{/if}}
 
-    {{#if isAssign}}
-      {{partial "activities/company/assign"}}
-    {{/if}}
-
-    {{render "comments" comments}}
-  </div>
-  <div class="span2">{{ageInWords timestamp}}</div>
-</div>
-
+{{#if isAssign}}
+  {{partial "activities/company/assign"}}
+{{/if}}

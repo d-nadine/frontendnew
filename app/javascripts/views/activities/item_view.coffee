@@ -1,4 +1,7 @@
 Radium.ActivitiesItemView = Radium.View.extend
+  classNameBindings: ['controller.tag', ':activity', ':row']
+  layoutName: 'activity'
+
   templateName: (->
-    "activities/#{@get('content.tag')}"
-  ).property('content.tag')
+    "activities/#{@get('controller.tag')}"
+  ).property('controller.tag')
