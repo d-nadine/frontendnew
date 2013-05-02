@@ -12,3 +12,7 @@ Radium.ActivitiesPhoneCallController = Radium.ObjectController.extend
       when 'finish' then 'call'
       when 'miss' then 'missed-call'
   ).property('event')
+
+  eventName: (->
+    "#{@get('event')}ed"
+  ).property('event')

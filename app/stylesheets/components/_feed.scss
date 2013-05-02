@@ -4,7 +4,7 @@
 }
 
 .activity i.event {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .activity .headline p {
@@ -45,5 +45,17 @@
     a {
       color: inherit;
     }
+  }
+}
+
+.activity.phone_call.missed {
+  i.event {
+    color: $red;
+  }
+}
+
+.activity.todo.finished {
+  i.event {
+    color: $green;
   }
 }

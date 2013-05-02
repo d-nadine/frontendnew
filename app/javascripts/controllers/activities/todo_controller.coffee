@@ -5,4 +5,12 @@ Radium.ActivitiesTodoController = Radium.ObjectController.extend
   todo: Ember.computed.alias 'reference'
   assignedTo: Ember.computed.alias 'meta.user'
 
-  icon: 'todo'
+  icon: (->
+    switch @get('event')
+      when 'finish' then 'todo'
+      when 'assign' then 'switch'
+  ).property('event')
+
+  eventName: (->
+    "#{@get('event')}ed"
+  ).property('event')
