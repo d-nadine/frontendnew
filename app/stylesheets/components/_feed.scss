@@ -11,6 +11,10 @@
   margin-bottom: 0;
 }
 
+.activity .timestamp time {
+  color: $muted;
+}
+
 .activity.deal.closed {
   color: #468847;
   background-color: #DFF0D8;
@@ -31,5 +35,15 @@
   .timestamp time {
     position: relative;
     top: 10px;
+    color: #468847;
+  }
+}
+
+.activity.meeting.cancelled {
+  .headline {
+    text-decoration: line-through;
+    a {
+      color: inherit;
+    }
   }
 }

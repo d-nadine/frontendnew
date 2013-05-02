@@ -9,3 +9,9 @@ Radium.ActivitiesMeetingController = Radium.ObjectController.extend
   newTime: Ember.computed.alias 'meta.time'
 
   icon: 'calendar'
+
+  eventName: (->
+    switch @get('event')
+      when 'cancel' then 'cancelled'
+      else @get('event')
+  ).property('event')
