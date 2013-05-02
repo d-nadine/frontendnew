@@ -415,6 +415,11 @@ class Populator
         from: contactDictionary.random()
         to: userDictionary.random()
 
+    Factory.create 'activity',
+      tag: 'system'
+      event: 'lead_received'
+      reference: contactDictionary.random()
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator

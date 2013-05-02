@@ -32,5 +32,3 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
       when 'lose' then 'lost'
       else @get('event')
   ).property('event')
-
-

@@ -83,3 +83,27 @@
     color: $green;
   }
 }
+
+.activity.system.lead_received {
+  color: #3A87AD;
+  background-color: #D9EDF7;
+  border: solid 1px #BCE8F1;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+    color: #3A87AD;
+  }
+}
