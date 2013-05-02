@@ -27,7 +27,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-call, .icon-location, .icon-calendar, .icon-forward, .icon-reply, .icon-comment, .icon-discussion, .icon-menu, .icon-cloud, .icon-attachments, .icon-todo, .icon-plus, .icon-minus, .icon-arrow-up, .icon-arrow-left, .icon-arrow-down, .icon-arrow-right, .icon-delete, .icon-public, .icon-private, .icon-notification, .icon-help, .icon-close, .icon-bell, .icon-notifications, .icon-coins, .icon-tag, .icon-edit, .icon-stack, .icon-warning, .icon-search, .icon-user, .icon-send, .icon-new, .icon-stack-list, .icon-back, .icon-spinner, .icon-settings, .icon-share, .icon-office, .icon-address-book, .icon-switch, .icon-chart, .icon-twitter, .icon-pulse, .icon-contact-cancel, .icon-user-plus, .icon-contact-plus, .icon-mail, .icon-money, .icon-quill {
+.icon-call, .icon-location, .icon-calendar, .icon-forward, .icon-reply, .icon-comment, .icon-discussion, .icon-menu, .icon-cloud, .icon-attachments, .icon-todo, .icon-plus, .icon-minus, .icon-arrow-up, .icon-arrow-left, .icon-arrow-down, .icon-arrow-right, .icon-delete, .icon-public, .icon-private, .icon-notification, .icon-help, .icon-close, .icon-bell, .icon-notifications, .icon-coins, .icon-tag, .icon-edit, .icon-stack, .icon-warning, .icon-search, .icon-user, .icon-send, .icon-new, .icon-stack-list, .icon-back, .icon-spinner, .icon-settings, .icon-share, .icon-office, .icon-address-book, .icon-switch, .icon-chart, .icon-twitter, .icon-pulse, .icon-contact-cancel, .icon-user-plus, .icon-contact-plus, .icon-mail, .icon-money, .icon-quill, .icon-voice-mail, .icon-missed-call {
 	font-family: 'icomoon-ultimate';
 	speak: none;
 	font-style: normal;
@@ -189,5 +189,11 @@ you can use the generic selector below, but it's slower:
 }
 .icon-quill:before {
 	content: "\e032";
+}
+.icon-voice-mail:before {
+	content: "\e033";
+}
+.icon-missed-call:before {
+	content: "\e034";
 }
 
