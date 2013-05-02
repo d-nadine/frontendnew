@@ -375,20 +375,27 @@ class Populator
     #   meta:
     #     event: 'update'
 
-    Factory.create 'activity',
-      tag: 'todo'
-      user: userDictionary.random()
-      reference: todoDictionary.random()
-      meta:
-        event: 'finish'
+    # Factory.create 'activity',
+    #   tag: 'todo'
+    #   user: userDictionary.random()
+    #   reference: todoDictionary.random()
+    #   meta:
+    #     event: 'finish'
 
-    Factory.create 'activity',
-      tag: 'todo'
+    # Factory.create 'activity',
+    #   tag: 'todo'
+    #   user: userDictionary.random()
+    #   reference: todoDictionary.random()
+    #   meta:
+    #     event: 'assign'
+    #     user: userDictionary.random()
+
+    Factory.create 'activity', 
+      tag: 'email'
       user: userDictionary.random()
-      reference: todoDictionary.random()
+      reference: emailDictionary.random()
       meta:
-        event: 'assign'
-        user: userDictionary.random()
+        event: 'send'
 
     Factory.adapter.store.commit()
 

@@ -28,6 +28,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   people: Radium.computed.aggregate('to','cc', 'senderArray')
+  recipients: Radium.computed.aggregate('to','cc')
 
   trackable: Ember.computed.present('contact')
 
