@@ -1,6 +1,6 @@
 require 'lib/radium/time_picker_view'
 require 'lib/radium/location_picker'
-require 'lib/radium/autocomplete_list_view'
+require 'lib/radium/meeting_autocomplete_view'
 
 Radium.FormsMeetingView = Radium.FormView.extend
   classNames: ['meeting-form-container']
@@ -104,7 +104,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
     valueBinding: 'controller.location'
     isInvalid: false
 
-  attendees: Radium.AutocompleteView.extend
+  attendees: Radium.MeetingAutocompleteView.extend
     sourceBinding: 'controller.attendees'
     addSelection: (item) ->
       @get('controller').addSelection item

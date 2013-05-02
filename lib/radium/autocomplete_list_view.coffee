@@ -12,7 +12,7 @@ Radium.AutocompleteView = Radium.View.extend
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
 
-  template: Ember.Handlebars.compile """
+  layout: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="view.isEditable :as-selection-item :blur"}}>
@@ -33,19 +33,11 @@ Radium.AutocompleteView = Radium.View.extend
         {{view view.autocomplete}}
       </li>
     </ul>
-    <div class="attendeeDropdown" class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        link<b class="caret"></b>
-      </a>
-      <div class="attendeeMenu dropdown-menu">
-        <table>
-          <tr>
-            <td><a href="#">Remove Attendee</a></td>
-            <td><a href="#">Resend Invite</a></td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    {{yield}}
+  """
+
+  template: Ember.Handlebars.compile """
+    <!-- override to add context menu -->
   """
 
   focus: ->
@@ -56,9 +48,11 @@ Radium.AutocompleteView = Radium.View.extend
 
     el = $(event.srcElement)
 
-    position = el.position()
+    dropdown = el.parents('div.autocomplete:eq(0)').find('.contextMenu')
 
-    dropdown = el.parents('div.autocomplete:eq(0)').find('.attendeeDropdown')
+    return unless dropdown.length
+
+    position = el.position()
 
     dropdown.css
       position: "absolute",
