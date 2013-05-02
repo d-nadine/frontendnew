@@ -1,0 +1,12 @@
+<div class="row activity">
+  <div class="span1"><i class="icon-call"></i></div>
+  <div class="span5">
+    {{#if isCreate}}
+      {{partial "activities/call/create"}}
+    {{/if}}
+
+    {{render "comments" comments}}
+  </div>
+  <div class="span2">{{ageInWords timestamp}}</div>
+</div>
+

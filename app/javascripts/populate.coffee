@@ -107,33 +107,61 @@ class Populator
     #   reference: discussionDictionary.random()
     #
 
-    [contactDictionary, discussionDictionary, dealDictionary].forEach (dict) ->
-      Factory.create 'activity',
-        tag: 'attachment'
-        reference: Factory.create 'attachment',
-          reference: dict.random()
-          user: userDictionary.random()
-        user: userDictionary.random()
-        meta:
-          event: 'create'
+    # [contactDictionary, discussionDictionary, dealDictionary].forEach (dict) ->
+    #   Factory.create 'activity',
+    #     tag: 'attachment'
+    #     reference: Factory.create 'attachment',
+    #       reference: dict.random()
+    #       user: userDictionary.random()
+    #     user: userDictionary.random()
+    #     meta:
+    #       event: 'create'
 
-      Factory.create 'activity',
-        tag: 'attachment'
-        reference: Factory.create 'attachment',
-          reference: dict.random()
-          user: userDictionary.random()
-        user: userDictionary.random()
-        meta:
-          event: 'update'
+    #   Factory.create 'activity',
+    #     tag: 'attachment'
+    #     reference: Factory.create 'attachment',
+    #       reference: dict.random()
+    #       user: userDictionary.random()
+    #     user: userDictionary.random()
+    #     meta:
+    #       event: 'update'
 
-      Factory.create 'activity',
-        tag: 'attachment'
-        reference: Factory.create 'attachment',
-          reference: dict.random()
-          user: userDictionary.random()
-        user: userDictionary.random()
-        meta:
-          event: 'delete'
+    #   Factory.create 'activity',
+    #     tag: 'attachment'
+    #     reference: Factory.create 'attachment',
+    #       reference: dict.random()
+    #       user: userDictionary.random()
+    #     user: userDictionary.random()
+    #     meta:
+    #       event: 'delete'
+
+    # Factory.create 'activity',
+    #   tag: 'call'
+    #   user: userDictionary.random()
+    #   reference: Factory.create 'call',
+    #     reference: contactDictionary.random()
+    #     user: userDictionary.random()
+    #     description: null
+    #   meta:
+    #     event: 'create'
+
+    # Factory.create 'activity',
+    #   tag: 'call'
+    #   user: userDictionary.random()
+    #   reference: Factory.create 'call',
+    #     reference: contactDictionary.random()
+    #     user: userDictionary.random()
+    #     description: "Ask about the fall line up"
+    #   meta:
+    #     event: 'create'
+
+    Factory.create 'activity',
+      tag: 'contact'
+      user: userDictionary.random()
+      reference: contactDictionary.random()
+      meta:
+        company: companyDictionary.random()
+        event: 'primary_contact'
 
     Factory.adapter.store.commit()
 
