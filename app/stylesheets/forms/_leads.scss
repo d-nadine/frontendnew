@@ -103,6 +103,9 @@
     }
 
     .contact-name{
+      &.is-valid{
+        border-color: $valid-input-border;
+      }
       .control-box{
         border: none;
       }
