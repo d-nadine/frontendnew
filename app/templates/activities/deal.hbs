@@ -5,6 +5,10 @@
       {{partial "activities/deal/create"}}
     {{/if}}
 
+    {{#if isDelete}}
+      {{partial "activities/deal/delete"}}
+    {{/if}}
+
     {{#if isAssign}}
       {{partial "activities/deal/assign"}}
     {{/if}}

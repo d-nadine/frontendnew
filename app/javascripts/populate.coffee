@@ -175,6 +175,13 @@ class Populator
     #   user: userDictionary.random()
     #   reference: dealDictionary.random()
     #   meta:
+    #     event: 'delete'
+
+    # Factory.create 'activity',
+    #   tag: 'deal'
+    #   user: userDictionary.random()
+    #   reference: dealDictionary.random()
+    #   meta:
     #     event: 'assign'
     #     user: userDictionary.random()
 
