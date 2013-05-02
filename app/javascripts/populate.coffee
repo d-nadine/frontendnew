@@ -155,13 +155,29 @@ class Populator
     #   meta:
     #     event: 'create'
 
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     company: companyDictionary.random()
+    #     event: 'primary_contact'
+
     Factory.create 'activity',
-      tag: 'contact'
+      tag: 'deal'
       user: userDictionary.random()
-      reference: contactDictionary.random()
+      reference: dealDictionary.random()
       meta:
-        company: companyDictionary.random()
-        event: 'primary_contact'
+        event: 'create'
+
+    Factory.create 'activity',
+      tag: 'deal'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+      meta:
+        event: 'assign'
+        user: userDictionary.random()
+
 
     Factory.adapter.store.commit()
 
