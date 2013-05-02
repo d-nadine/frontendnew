@@ -1,0 +1,16 @@
+<div class="row activity">
+  <div class="span1"><i class="icon-discussion"></i></div>
+  <div class="span5">
+    <blockquote>
+      {{truncate topic length=300}}
+
+      <br />
+      <span class="pull-right">- Posted by {{link poster}}</span>
+    </blockquote>
+
+    <p>With: {{list participants}}</p>
+
+    {{render "comments" comments}}
+  </div>
+  <div class="span2">{{ageInWords timestamp}}</div>
+</div>

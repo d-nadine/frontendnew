@@ -65,6 +65,13 @@ class Populator
 
     emailDictionary = new Dictionary([email1, email2])
 
+    discussion = Factory.create 'discussion',
+      user: userDictionary.random()
+      users: [userDictionary.random(), userDictionary.random()]
+      reference: contactDictionary.random()
+
+    discussionDictionary = new Dictionary([discussion])
+
     Factory.create 'activity',
       tag: 'follow'
       meta:
@@ -94,6 +101,10 @@ class Populator
       meta:
         follower: userDictionary.random()
         following: dealDictionary.random()
+
+    Factory.create 'activity',
+      tag: 'discussion'
+      reference: discussionDictionary.random()
 
     Factory.adapter.store.commit()
 

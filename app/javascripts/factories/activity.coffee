@@ -1,1 +1,2 @@
-Factory.define 'activity', traits: 'timestamps', {}
+Factory.define 'activity',
+  timestamp: -> Ember.DateTime.random past: true
