@@ -400,8 +400,9 @@
                 function positionResults(){
                     console.log(values_input.position().top);
                     results_ul.css("position", "absolute");
-                    results_ul.css("left", selections_holder.position().left);
-                    results_ul.css("top", selections_holder.position().top + 42);
+                    position = input.position()
+                    results_ul.css("left", position.left);
+                    results_ul.css("top", position.top + 29);
                 }
 
                 function add_selected_item(data, num){
