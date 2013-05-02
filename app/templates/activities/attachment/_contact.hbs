@@ -1,0 +1,11 @@
+{{#if isCreate}}
+  "{{link attachment}}" uploaded to {{link attachedTo}}
+{{/if}}
+
+{{#if isUpdate}}
+  "{{link attachment}}" file changed for {{link attachedTo}}
+{{/if}}
+
+{{#if isDelete}}
+  "{{link attachment}}" file removed form {{link attachedTo}}
+{{/if}}

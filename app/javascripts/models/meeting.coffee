@@ -35,4 +35,4 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   time: Ember.computed.alias('startsAt')
 
-  people: Radium.computed.aggregate('users', 'contacts')
+  participants: Radium.computed.aggregate('users', 'contacts')

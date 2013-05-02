@@ -1,0 +1,16 @@
+<p>
+  {{#if forContact}}
+    {{partial "activities/attachment/contact"}}
+  {{/if}}
+
+  {{#if forDeal}}
+    {{partial "activities/attachment/deal"}}
+  {{/if}}
+
+  {{#if forDiscussion}}
+    {{partial "activities/attachment/discussion"}}
+  {{/if}}
+
+  <br />
+  by {{link user}}
+</p>

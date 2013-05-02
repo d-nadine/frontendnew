@@ -1,0 +1,23 @@
+{{#if isPrimaryContact}}
+  {{partial "activities/contact/primary_contact"}}
+{{/if}}
+
+{{#if isStatusChange}}
+  {{partial "activities/contact/status_change"}}
+{{/if}}
+
+{{#if isCreate}}
+  {{partial "activities/contact/create"}}
+{{/if}}
+
+{{#if isUpdate}}
+  {{partial "activities/contact/update"}}
+{{/if}}
+
+{{#if isDelete}}
+  {{partial "activities/contact/delete"}}
+{{/if}}
+
+{{#if isAssign}}
+  {{partial "activities/contact/assign"}}
+{{/if}}

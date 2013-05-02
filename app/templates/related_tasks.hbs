@@ -42,11 +42,7 @@
             <i class="icon-calendar"></i>
             {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
             with
-            <span class="sentence">
-              {{#each people}}
-                <span>{{link  this}}</span>  
-              {{/each}}
-            </span>
+            {{list participants}}
 
             <span class="time">
               on

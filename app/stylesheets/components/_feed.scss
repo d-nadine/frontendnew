@@ -1,0 +1,109 @@
+.activity.row {
+  width: 720px;
+  padding: 8px 0;
+}
+
+.activity i.event {
+  font-size: 20px;
+}
+
+.activity .headline p {
+  margin-bottom: 0;
+}
+
+.activity .timestamp time {
+  color: $muted;
+}
+
+.activity.deal.closed {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: solid 1px #D6E9C6;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+    color: #468847;
+  }
+}
+
+.activity.deal.lost {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: solid 1px #EED3D7;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+    color: #B94A48;
+  }
+}
+
+.activity.meeting.cancelled {
+  .headline {
+    text-decoration: line-through;
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.activity.phone_call.missed {
+  i.event {
+    color: $red;
+  }
+}
+
+.activity.todo.finished {
+  i.event {
+    color: $green;
+  }
+}
+
+.activity.system.lead_received {
+  color: #3A87AD;
+  background-color: #D9EDF7;
+  border: solid 1px #BCE8F1;
+  @include border-radius(4px);
+  font-weight: bold;
+
+  i.event {
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+  }
+
+  a, a:active, a:visited, a:hover {
+    color: $dark;
+  }
+
+  .timestamp time {
+    position: relative;
+    top: 10px;
+    color: #3A87AD;
+  }
+}

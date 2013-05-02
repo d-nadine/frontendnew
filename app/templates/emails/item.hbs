@@ -39,22 +39,11 @@
         <div class="meta">
           <dl>
             <dt>To</dt>
-            <dd>
-              <span class="sentence">
-                {{#each to}}
-                  <span>{{link  this}}</span>
-                {{/each}}
-              </span>
+            <dd>{{list to}}
             </dd>
             {{#if cc}}
               <dt>CC</dt>
-              <dd>
-                <span class="sentence">
-                  {{#each cc}}
-                    <span>{{link  this}}</span>
-                  {{/each}}
-                </span>
-              </dd>
+              <dd>{{list cc}}</dd>
             {{/if}}
             <dt>Time</dt>
             <dd>{{formatDateTime sentAt format="full"}}</dd>
