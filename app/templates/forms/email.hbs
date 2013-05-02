@@ -2,11 +2,8 @@
   {{#if isReply}}
     <h5>
       Reply to
-      <span class="sentence">
-        {{#each email.to}}
-          <span>{{link this}}</span>
-        {{/each}}
-      </span>
+
+      {{list email.to}}
 
       <a class="pull-right" href="#" {{action expand}}>Expand</a>
     </h5>

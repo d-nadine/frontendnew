@@ -1,5 +1,5 @@
 Radium.ActivitiesController = Radium.ArrayController.extend
-  sortProperties: ['created_at']
+  sortProperties: ['timestamp']
   sortAscending: false
 
   lookupItemController: (activity) ->
