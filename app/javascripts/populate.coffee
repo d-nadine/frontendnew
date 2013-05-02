@@ -286,12 +286,37 @@ class Populator
     #     event: 'create'
     #     status: 'customer'
 
+    # Factory.create 'activity',
+    #   tag: 'contact'
+    #   user: userDictionary.random()
+    #   reference: contactDictionary.random()
+    #   meta:
+    #     event: 'delete'
+
     Factory.create 'activity',
-      tag: 'contact'
+      tag: 'deal'
       user: userDictionary.random()
-      reference: contactDictionary.random()
+      reference: dealDictionary.random()
       meta:
-        event: 'delete'
+        event: 'status_change'
+        status: 'closed'
+
+    Factory.create 'activity',
+      tag: 'deal'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+      meta:
+        event: 'status_change'
+        status: 'lost'
+
+    Factory.create 'activity',
+      tag: 'deal'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+      meta:
+        event: 'status_change'
+        negotiating: true
+        status: 'waiting for signature'
 
     Factory.adapter.store.commit()
 

@@ -13,6 +13,10 @@
       {{partial "activities/deal/assign"}}
     {{/if}}
 
+    {{#if isStatusChange}}
+      {{partial "activities/deal/status_change"}}
+    {{/if}}
+
     {{render "comments" comments}}
   </div>
   <div class="span2">{{ageInWords timestamp}}</div>
