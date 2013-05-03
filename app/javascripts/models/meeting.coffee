@@ -16,10 +16,6 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
 
-  deal: DS.belongsTo('Radium.Deal')
-  email: DS.belongsTo('Radium.Email')
-  todo: DS.belongsTo('Radium.Todo')
-
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
 
@@ -30,8 +26,11 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('todo') || @get('deal') || @get('email')
+      @get('_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
   ).property('todo', 'deal', 'email')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
+  _referenceEmail: DS.belongsTo('Radium.Email')
+  _referenceTodo: DS.belongsTo('Radium.Todo')
 
   time: Ember.computed.alias('startsAt')
 

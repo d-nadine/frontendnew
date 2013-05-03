@@ -8,13 +8,6 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   finishBy: DS.attr('datetime')
   isFinished: DS.attr('boolean')
 
-  contact: DS.belongsTo('Radium.Contact')
-  deal: DS.belongsTo('Radium.Deal')
-  email: DS.belongsTo('Radium.Email')
-  discussion: DS.belongsTo('Radium.Discussion')
-  todo: DS.belongsTo('Radium.Todo')
-  meeting: DS.belongsTo('Radium.Meeting')
-
   todos: DS.hasMany('Radium.Todo')
   meetings: DS.hasMany('Radium.Meeting')
 
@@ -25,8 +18,13 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('contact') || @get('deal') || @get('email')
+      @get('_referenceContact') || @get('_referenceDeal') || @get('_referenceEmail') || @get('_referenceDiscussion') || @get('_referenceMeeting')
   ).property('contact', 'deal', 'email')
+  _referenceContact: DS.belongsTo('Radium.Contact')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
+  _referenceEmail: DS.belongsTo('Radium.Email')
+  _referenceDiscussion: DS.belongsTo('Radium.Discussion')
+  _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
   # FIXME: this should be a computed property
   overdue: DS.attr('boolean')

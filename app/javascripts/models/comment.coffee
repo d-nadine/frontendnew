@@ -1,10 +1,4 @@
 Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
-  email: DS.belongsTo('Radium.Email')
-  discussion: DS.belongsTo('Radium.Discussion')
-  deal: DS.belongsTo('Radium.Deal')
-  meeting: DS.belongsTo('Radium.Meeting')
-  todo: DS.belongsTo('Radium.Todo')
-
   user: DS.belongsTo('Radium.User')
 
   text: DS.attr('string')
@@ -14,6 +8,11 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('email') || @get('discussion') || @get('deal') || @get('meeting') || @get('todo')
+      @get('email') || @get('discussion') || @get('deal') || @get('meeting') || @get('todo') || @get('activity')
   ).property('email', 'discussion', 'deal', 'meeting', 'todo')
-
+  activity: DS.belongsTo('Radium.Activity')
+  email: DS.belongsTo('Radium.Email')
+  deal: DS.belongsTo('Radium.Deal')
+  discussion: DS.belongsTo('Radium.Discussion')
+  meeting: DS.belongsTo('Radium.Meeting')
+  todo: DS.belongsTo('Radium.Todo')

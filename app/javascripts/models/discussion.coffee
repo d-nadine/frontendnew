@@ -9,8 +9,6 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   meetings: DS.hasMany('Radium.Meeting')
 
   user: DS.belongsTo('Radium.User', inverse: null)
-  deal: DS.belongsTo('Radium.Deal', inverse: null)
-  contact: DS.belongsTo('Radium.Contact', inverse: null)
 
   topic: DS.attr('string')
 
@@ -19,7 +17,9 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('deal') || @get('contact')
-  ).property('deal', 'contact')
+      @get('_referenceDeal') || @get('_referenceContact')
+  ).property('_referenceDeal', '_referenceContact')
+  _referenceDeal: DS.belongsTo('Radium.Deal', inverse: null)
+  _referenceContact: DS.belongsTo('Radium.Contact', inverse: null)
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

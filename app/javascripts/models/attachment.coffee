@@ -1,7 +1,4 @@
 Radium.Attachment = Radium.Model.extend
-  deal: DS.belongsTo('Radium.Deal')
-  discussion: DS.belongsTo('Radium.Discussion')
-
   url: DS.attr('string')
   mimeType: DS.attr('string')
   name: DS.attr('string')
@@ -11,5 +8,8 @@ Radium.Attachment = Radium.Model.extend
       property = value.constructor.split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('discussion') || @get('deal')
-  ).property()
+      @get('_attachableDiscussion') || @get('_attachableDeal') || @get('_attachableEmail')
+  ).property('_attachableDiscussion', '_attachableDeal', '_attachableEmail')
+  _attachableDeal: DS.belongsTo('Radium.Deal')
+  _attachableEmail: DS.belongsTo('Radium.Email')
+  _attachableDiscussion: DS.belongsTo('Radium.Discussion')

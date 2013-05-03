@@ -9,7 +9,6 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
-  email: DS.belongsTo('Radium.Email')
   todo: DS.belongsTo('Radium.Todo')
   checklist: DS.belongsTo('Radium.Checklist')
   isPublished: DS.attr('boolean')
@@ -19,9 +18,9 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('contact') || @get('deal') || @get('email')
-  ).property('contact', 'deal', 'email')
-
+      @get('_referenceEmail')
+  ).property('_referenceEmail')
+  _referenceEmail: DS.belongsTo('Radium.Email')
 
   name: DS.attr('string')
   description: DS.attr('string')
