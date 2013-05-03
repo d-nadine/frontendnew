@@ -57,7 +57,7 @@ Radium.LeadsNewView = Ember.View.extend
 
     @$('.modal').removeClass('in')
 
-    if Ember.isEmpty 'controller.name'
+    if Ember.isEmpty @get('controller.name')
       @$('.contact-name input[type=text]').focus()
       return
 
