@@ -5,7 +5,7 @@ Radium.Company = Radium.Model.extend
 
   tags: DS.hasMany('Radium.Tag')
 
-  primaryContact: DS.belongsTo('Radium.Contact')
+  primaryContact: DS.belongsTo('Radium.Contact', inverse: null)
   primaryAddress: Radium.computed.primary 'addresses'
 
   name: DS.attr('string')

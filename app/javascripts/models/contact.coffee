@@ -13,7 +13,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   addresses: DS.hasMany('Radium.Address')
 
   user: DS.belongsTo('Radium.User')
-  company: DS.belongsTo('Radium.Company')
+  company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
   companyName: DS.attr('string')
   name: DS.attr('string')
