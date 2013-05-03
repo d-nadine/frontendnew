@@ -8,7 +8,7 @@ Radium.DealsNewView= Ember.View.extend
   layoutName: 'layouts/single_column'
   showChecklistItems: false
   showDetail: false
-  disabled: Ember.computed.not 'controller.hasContact'
+  disabled: false
 
   toggleChecklist: (evt) ->
     return if @get('disabled')
