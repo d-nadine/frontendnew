@@ -17,8 +17,9 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
       @get('_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
   ).property('todo', 'deal', 'email')

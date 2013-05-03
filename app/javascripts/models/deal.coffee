@@ -7,6 +7,8 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Meetings')
 
+  activities: DS.hasMany('Radium.Activity')
+
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
   todo: DS.belongsTo('Radium.Todo')
@@ -15,8 +17,9 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
       @get('_referenceEmail')
   ).property('_referenceEmail')

@@ -13,8 +13,9 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
 
   reference: ((key, value) ->
     if arguments.length == 2 && value
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
       @get('_referenceAttachment') ||
         @get('_referenceCall') ||
@@ -37,5 +38,5 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
   _referencePhoneCall: DS.belongsTo('Radium.PhoneCall')
-  _referenceTodo: DS.belongsto('Radium.Todo')
-  _referenceVoiceMail: DS.belongsto('Radium.VoiceMail')
+  _referenceTodo: DS.belongsTo('Radium.Todo')
+  _referenceVoiceMail: DS.belongsTo('Radium.VoiceMail')
