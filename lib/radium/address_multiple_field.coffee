@@ -1,4 +1,5 @@
 Radium.AddressMultipleField = Radium.MultipleField.extend
+  sourceBinding: 'parentView.source'
   template: Ember.Handlebars.compile """
     {{#with view.current}}
       <div class="addresses">
@@ -25,27 +26,54 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     if @get('source.length') > 1
       return @get('current') == @get('source')[@get('source.length') - 1]
 
+    @hasValue()
+  ).property('source.[]', 'showdropdown', 'current.street', 'current.city', 'current.state', 'current.zip')
+
+  hasValue: ->
     return true if @get('current.street.length') > 1
     return true if @get('current.city.length') > 1
     return true if @get('current.state.length') > 1
-    return true if @get('current.zip.length') > 1
-  ).property('source.[]', 'showdropdown', 'current.street', 'current.city', 'current.state', 'current.zip')
+    return true if @get('current.zipcode.length') > 1
+
+  companyDidChange: ( ->
+    return if !@get('controller.companyPrimaryAddress')
+    return if @get('parentView.source.length') > 1
+
+    current = @get('current')
+    companyAddress = @get('controller.companyPrimaryAddress')
+
+    current.set('street', companyAddress.get('street'))
+    current.set('city', companyAddress.get('city'))
+    current.set('state', companyAddress.get('state'))
+    current.set('zipcode', companyAddress.get('zipcode'))
+    current.set('country', companyAddress.get('country'))
+  ).observes('controller.companyPrimaryAddress')
 
 Radium.AddressMultipleField.reopenClass
   getNewRecord: (label) ->
     isPrimary = @get('source.length') == 0
 
+    address = @get('controller.companyPrimaryAddress')
+
     addressDefaults =
-      street: ''
-      city: ''
-      state: ''
-      zipcode: ''
-      country: ''
-      isPrimary: isPrimary
-      name: label
+      if @get('source.length') ==  0 && address?.get('value')
+        street: address.get('street')
+        city: address.get('city')
+        state: address.get('state')
+        zipcode: address.get('zipcode')
+        country: address.get('country')
+        isPrimary: true
+        name: label
+      else
+        street: ''
+        city: ''
+        state: ''
+        zipcode: ''
+        country: ''
+        isPrimary: isPrimary
+        name: label
 
     if @get('source').createRecord
        @get('source').createRecord(addressDefaults)
     else
-       isPrimary = @get('source.length') == 0
        Ember.Object.create(addressDefaults)

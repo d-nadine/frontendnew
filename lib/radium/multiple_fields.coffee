@@ -37,7 +37,11 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     @set('currentIndex', -1)
 
-    if @get('controller.model.isNew')
+    if @get('controller.isNew')
+      @addNew()
+      return
+
+    unless @get('source.length')
       @addNew()
       return
 
@@ -82,9 +86,9 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     label = @get('labels')[@get('currentIndex')]
 
-    record = @get('viewType').getNewRecord.call this, label
-
     @set('isUpdating', true)
+
+    record = @get('viewType').getNewRecord.call this, label
 
     @get('source').pushObject(record)
 

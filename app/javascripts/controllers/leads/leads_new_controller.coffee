@@ -29,6 +29,12 @@ Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin
       value
   ).property('companyName', 'isNew', 'model')
 
+  companyPrimaryAddress: ( ->
+    company = @get('controllers.companies').findProperty 'name', @get('companyName')
+
+    company?.get('primaryAddress')
+  ).property('companyName')
+
   modelDidChange: ( ->
     return if @get('form') || !@get('model')
 

@@ -13,7 +13,8 @@ Factory.define 'contact', traits: ['timestamps'],
   user: -> Factory.create 'user'
 
   phoneNumbers: -> [
-    Factory.create 'phoneNumber'
+    Factory.create 'phoneNumber',
+      isPrimary: true
     Factory.create 'phoneNumber',
       name: "Work"
       value: "+934728783"
@@ -24,5 +25,19 @@ Factory.define 'contact', traits: ['timestamps'],
 
   emailAddresses: ->[
     Factory.create 'emailAddress',
-      value: "#{@name}@#{@company.get('name')}.com"
+      value: "#{@name.replace(/\s/, '.')}@#{@company.get('name')}.com".toLowerCase()
+      isPrimary: true
   ]
+
+  groups: -> [
+    Factory.create 'group',
+      name: Dictionaries.companies.random()
+  ]
+
+  addresses: -> [
+    Factory.create 'address',
+      name: 'Office'
+      isPrimary: true
+  ]
+
+  about: -> "Bio of #{@name}"

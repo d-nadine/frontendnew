@@ -35,7 +35,7 @@ Radium.ContactForm = Radium.Form.extend
         contact.get('emailAddresses').addObject Radium.EmailAddress.createRecord email
 
     @get('addresses').forEach (address) =>
-      if address.get('value')
+      if @addressHasValue(address)
         contact.get('addresses').addObject Radium.Address.createRecord address
 
     @get('tags').forEach (tag) =>
@@ -47,6 +47,12 @@ Radium.ContactForm = Radium.Form.extend
         tags.addObject Radium.Tag.createRecord tag.get('name')
 
     contact
+
+  addressHasValue: (address) ->
+    return true if address.get('street.length') > 1
+    return true if address.get('state.length') > 1
+    return true if address.get('city.length') > 1
+    return true if address.get('zipcode.length') > 1
 
   reset: ->
     @_super.apply this, arguments
