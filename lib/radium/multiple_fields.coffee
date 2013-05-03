@@ -9,9 +9,8 @@ Radium.MultipleFields = Ember.ContainerView.extend
   didInsertElement: ->
     @_super.apply this, arguments
     @get('source').forEach (source) =>
-      if source.get('value')
-        Ember.run =>
-          @addNew()
+      Ember.run =>
+        @addExisting(source)
 
     @addNew() unless @get('childViews.length')
 
@@ -30,40 +29,24 @@ Radium.MultipleFields = Ember.ContainerView.extend
     if !@get('source').findProperty('isPrimary') && @get('source.length')
       @set('source.firstObject.isPrimary', true)
 
-  # sourceDidChange: ( ->
-  #   return unless @get('canReset')
-  #   return unless @get('source')
+  sourceDidChange: ( ->
+    return unless @get('canReset')
+    return if @get('isUpdating')
 
-  #   index = 0
+    @clear()
 
-  #   @get('labels').forEach (label) =>
-  #     existing = @get('source').find (item) ->
-  #       item.get('name') == label
+    @set('currentIndex', -1)
 
-  #     unless existing
-  #       record = @get('type').createRecord({name: label, value: ''})
-  #       @get('source').insertAt(index, record)
+    if @get('controller.model.isNew')
+      @addNew()
+      return
 
-  #     index++
+    @get('source').forEach (source) =>
+      Ember.run.next =>
+        console.log source.get('value')
+        @addExisting(source)
 
-  #   @clear()
-
-  #   @set('currentIndex', -1)
-
-  #   @get('source').forEach (source) =>
-  #     if source.get('value')
-  #       Ember.run =>
-  #         @addNew()
-
-  #   unless @get('childViews.length')
-  #     @addNew()
-  #   else
-  #     isPrimary = @get('source').findProperty 'isPrimary'
-
-  #     unless isPrimary
-  #       @set('source.firstObject.isPrimary', true)
-
-  # ).observes('source.[]')
+  ).observes('source.[]')
 
   removeSelection: (view) ->
     if view.get('current').deleteRecord
@@ -72,7 +55,11 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     @set('currentIndex', @get('currentIndex') - 1)
 
+    @set('isUpdating', true)
+
     @get('source').removeObject(view.get('current'))
+
+    @set('isUpdating', false)
 
     @removeObject view
 
@@ -86,6 +73,15 @@ Radium.MultipleFields = Ember.ContainerView.extend
        isPrimary = @get('source.length') == 0
        Ember.Object.create({name: label, value: '', isPrimary: isPrimary})
 
+  addExisting: (record) ->
+    @pushObject(@get('viewType').create
+      classNameBindings: [':control-group']
+      leader: @get('leader')
+      type: @get('inputType')
+      index: @get('source.length') - 1
+      current: record
+    )
+
   addNew: ->
     @set('currentIndex', @get('currentIndex') + 1)
 
@@ -96,7 +92,11 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     record = @getNewRecord(label)
 
+    @set('isUpdating', true)
+
     @get('source').pushObject(record)
+
+    @set('isUpdating', false)
 
     @pushObject(@get('viewType').create
       classNameBindings: [':control-group']
