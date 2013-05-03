@@ -1,7 +1,7 @@
 Radium.FormsMeetingController = Radium.FormController.extend
-  needs: ['groups','contacts','users']
+  needs: ['tags','contacts','users']
   now: Ember.computed.alias('clock.now')
-  groups: Ember.computed.alias('controllers.groups')
+  tags: Ember.computed.alias('controllers.tags')
   userList: Ember.computed.alias 'controllers.users'
   contactList: Ember.computed.alias 'controllers.contacts'
   meetingUsers: null
@@ -31,7 +31,7 @@ Radium.FormsMeetingController = Radium.FormController.extend
   ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
   locations: ( ->
-    @get('groups').map (group) -> Ember.Object.create
+    @get('tags').map (group) -> Ember.Object.create
                                     name: "#{group.get('name')}, #{group.get('address')}"
   ).property()
 

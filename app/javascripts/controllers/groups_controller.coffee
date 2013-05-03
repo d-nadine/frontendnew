@@ -1,1 +1,1 @@
-Radium.GroupsController = Radium.ArrayController.extend()
+Radium.TagsController = Radium.ArrayController.extend()

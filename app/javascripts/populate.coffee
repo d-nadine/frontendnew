@@ -29,18 +29,18 @@ class Populator
 
     companyDictionary = new Dictionary(companies)
 
-    groups = for i in [1..5]
-      Factory.create 'group'
+    tags = for i in [1..5]
+      Factory.create 'tag'
 
-    groupDictionary = new Dictionary(groups)
+    tagDictionary = new Dictionary(tags)
 
     contacts = for i in [1..10]
       Factory.create 'contact',
         user: -> userDictionary.random()
         company: -> companyDictionary.random()
-        groups: -> [
-          groupDictionary.random()
-          groupDictionary.random()
+        tags: -> [
+          tagDictionary.random()
+          tagDictionary.random()
         ]
 
     contactDictionary = new Dictionary(contacts)
@@ -128,7 +128,7 @@ class Populator
       tag: 'follow'
       meta:
         follower: userDictionary.random()
-        following: groupDictionary.random()
+        following: tagDictionary.random()
 
     Factory.create 'activity',
       tag: 'follow'

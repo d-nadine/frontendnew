@@ -1,4 +1,4 @@
-groups = [
+tags = [
   'Developers'
   'Sales'
   'Marketing'
@@ -8,4 +8,4 @@ groups = [
   'Journalism'
 ]
 
-Dictionaries.groups = new Dictionary(groups)
+Dictionaries.tags = new Dictionary(tags)

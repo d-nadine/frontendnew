@@ -35,13 +35,13 @@ Radium.ContactForm = Radium.Form.extend
     @get('addresses').forEach (address) =>
       contact.get('addresses').addObject Radium.Address.createRecord address
 
-    @get('groups').forEach (group) =>
-      groups = contact.get('groups')
+    @get('tags').forEach (tag) =>
+      tags = contact.get('tags')
 
-      if group.get('id')
-        groups.addObject group unless contact.get('groups').contains group
+      if tag.get('id')
+        tag.addObject group unless contact.get('tags').contains group
       else
-        groups.addObject Radium.Group.createRecord group.get('name')
+        tags.addObject Radium.Tag.createRecord tag.get('name')
 
     contact
 
@@ -60,7 +60,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'source', ''
     @set 'companyName', ''
     @set 'status', 'lead'
-    @set 'groups', Ember.A()
+    @set 'tags', Ember.A()
     @set('phoneNumbers', [
       Ember.Object.create({name: 'Mobile', value: '', isPrimary: true}),
       Ember.Object.create({name: 'Work', value: ''}),

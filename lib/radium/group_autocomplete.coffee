@@ -1,8 +1,8 @@
 require 'lib/radium/autocomplete_list_view'
 
-Radium.GroupAutoComplete = Radium.AutocompleteView.extend
-  sourceBinding: 'controller.groups'
-  listBinding: 'controller.controllers.groups'
+Radium.TagAutoComplete = Radium.AutocompleteView.extend
+  sourceBinding: 'controller.tags'
+  listBinding: 'controller.controllers.tags'
   isEditableBinding: 'controller.isNew'
   showAvatar: false
   showAvatarInResults: false

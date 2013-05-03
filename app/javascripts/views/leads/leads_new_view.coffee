@@ -68,7 +68,7 @@ Radium.LeadsNewView = Ember.View.extend
     return "company" if Ember.isEmpty(@get('controller.companyName'))
   ).property('controller.name', 'controller.companyName', 'showModal')
 
-  groups: Radium.GroupAutoComplete.extend()
+  tags: Radium.TagAutoComplete.extend()
 
   companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin, Radium.ContactCompanyMixin,
     classNameBindings: [':company-name']

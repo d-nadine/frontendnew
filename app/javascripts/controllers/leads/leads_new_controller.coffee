@@ -1,5 +1,5 @@
 Radium.LeadsNewController= Ember.ObjectController.extend Radium.CurrentUserMixin,
-  needs: ['contacts', 'users','companies', 'leadStatuses', 'leadSources', 'groups']
+  needs: ['contacts', 'users','companies', 'leadStatuses', 'leadSources', 'tags']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
   companies: Ember.computed.alias 'controllers.companies'

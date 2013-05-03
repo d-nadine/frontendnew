@@ -56,7 +56,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('currentUser').set 'model', Radium.User.find(1)
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()
-    @controllerFor('groups').set 'model', Radium.Group.find()
+    @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()
