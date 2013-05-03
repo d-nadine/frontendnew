@@ -22,7 +22,8 @@ Radium.MultipleFields = Ember.ContainerView.extend
                 not item.get('value')
 
     unsaved.forEach (item) ->
-      item.deleteRecord()
+      if item.deleteRecord
+        item.deleteRecord()
 
     @get('source').removeObjects unsaved
 
@@ -75,6 +76,16 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     @removeObject view
 
+    unless @get('source').findProperty 'isPrimary'
+      @set('source.firstObject.isPrimary', true)
+
+  getNewRecord: (label) ->
+    if @get('source').createRecord
+       @get('source').createRecord({name: label, value: ''})
+    else
+       isPrimary = @get('source.length') == 0
+       Ember.Object.create({name: label, value: '', isPrimary: isPrimary})
+
   addNew: ->
     @set('currentIndex', @get('currentIndex') + 1)
 
@@ -83,11 +94,7 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     label = @get('labels')[@get('currentIndex')]
 
-    record = if @get('source').createRecord
-               @get('source').createRecord({name: label, value: ''})
-            else
-               isPrimary = @get('source.length') == 0
-               Ember.Object.create({name: label, value: '', isPrimary: isPrimary})
+    record = @getNewRecord(label)
 
     @get('source').pushObject(record)
 
