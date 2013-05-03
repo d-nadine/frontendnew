@@ -19,17 +19,17 @@
             {{#linkTo unimplemented classNames="close"}}x{{/linkTo}}
             {{partial "saving"}}
             <fieldset>
-              <div class="control-group">
-                <label class="control-label">Name</label>
-                <div class="controls">
-                  <div {{bindAttr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
-                    {{view view.contactName viewName="nameField"}}
-                    {{#unless isNew}}
-                      <span class="text">{{view.statusDescription}}</span>
-                    {{/unless}}
-                  </div>
+            <div class="control-group">
+              <label class="control-label">Name</label>
+              <div class="controls">
+                <div {{bindAttr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
+                  {{view view.contactName viewName="nameField"}}
+                  {{#unless isNew}}
+                    <span class="text">{{view.statusDescription}}</span>
+                  {{/unless}}
                 </div>
               </div>
+            </div>
               <div class="control-group">
                 <label class="control-label">Company</label>
                 <div class="controls">
@@ -54,7 +54,7 @@
               </div>
               <div class="contact-detail">
                 {{view view.emailAddresses}}
-                {{view view.phoneNumbers}}
+                {{!view view.phoneNumbers}}
                 <div class="control-group">
                   <label class="control-label">Assigned To</label>
                   <div class="controls">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="address-section">
                   <hr/>
-                  {{view view.addresses}}
+                  {{!view view.addresses}}
                   <hr/>
                 </div>
                 {{partial 'validation_error_message'}}

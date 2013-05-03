@@ -4,9 +4,10 @@ Radium.MultipleField = Ember.View.extend
   classNames: ['multiple-field']
   open: false
   readonly: Ember.computed.alias 'parentView.readonly'
-
-  didInsertElement: ->
-    @set 'current', @get('source').objectAt(@get('index'))
+  sourceBinding: 'parentView.source'
+  labels: ( ->
+    Ember.A(@get('parentView.labels'))
+  ).property('parentView.labels.[]')
 
   addNew: ->
     @get('parentView').addNew()
@@ -23,14 +24,11 @@ Radium.MultipleField = Ember.View.extend
 
   showAddNew: ( ->
     return false if @get('readonly')
-    name = @get('current.name')
-    index = @get('index')
-    currentIndex = @get('parentView.currentIndex')
-    # sourceLength = (@get('parentView.labels.length') - 1)
-    # return false if currentIndex == sourceLength
 
-    @get('current.value.length') > 1 && index == currentIndex
-  ).property('current.value', 'showdropdown', 'parentView.currentIndex')
+    return if @get('source.length') <= 1 && @get('current.value.length') < 2
+
+    return @get('current') == @get('source')[@get('source.length') - 1 ]
+  ).property('source.[]', 'current.value', 'showdropdown')
 
   label: ( ->
     "#{@get('current.name')} #{@get('leader')}"
@@ -57,8 +55,8 @@ Radium.MultipleField = Ember.View.extend
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            {{#each view.source}}
-              <li><a {{action selectValue this target="view"}}href="#">{{unbound name}}</a></li>
+            {{#each view.labels}}
+              <li><a {{action selectValue this target="view"}}href="#">{{unbound this}}</a></li>
             {{/each}}
           </ul>
         </div>
@@ -95,8 +93,8 @@ Radium.MultipleField = Ember.View.extend
       @get('parentView.source').setEach('isPrimary', false)
       @set('parentView.current.isPrimary', true)
 
-  selectValue: (object) ->
-    @set('current', object)
+  selectValue: (value) ->
+    @set('current.name', value)
 
   toggleDropdown: ->
     @toggleProperty 'open'

@@ -29,82 +29,72 @@ Radium.MultipleFields = Ember.ContainerView.extend
     if !@get('source').findProperty('isPrimary') && @get('source.length')
       @set('source.firstObject.isPrimary', true)
 
-  sourceDidChange: ( ->
-    return unless @get('canReset')
-    return unless @get('source')
+  # sourceDidChange: ( ->
+  #   return unless @get('canReset')
+  #   return unless @get('source')
 
-    index = 0
+  #   index = 0
 
-    @get('labels').forEach (label) =>
-      existing = @get('source').find (item) ->
-        item.get('name') == label
+  #   @get('labels').forEach (label) =>
+  #     existing = @get('source').find (item) ->
+  #       item.get('name') == label
 
-      unless existing
-        record = @get('type').createRecord({name: label, value: ''})
-        @get('source').insertAt(index, record)
+  #     unless existing
+  #       record = @get('type').createRecord({name: label, value: ''})
+  #       @get('source').insertAt(index, record)
 
-      index++
+  #     index++
 
-    @clear()
+  #   @clear()
 
-    @set('currentIndex', -1)
+  #   @set('currentIndex', -1)
 
-    @get('source').forEach (source) =>
-      if source.get('value')
-        Ember.run =>
-          @addNew()
+  #   @get('source').forEach (source) =>
+  #     if source.get('value')
+  #       Ember.run =>
+  #         @addNew()
 
-    unless @get('childViews.length')
-      @addNew()
-    else
-      isPrimary = @get('source').findProperty 'isPrimary'
+  #   unless @get('childViews.length')
+  #     @addNew()
+  #   else
+  #     isPrimary = @get('source').findProperty 'isPrimary'
 
-      unless isPrimary
-        @set('source.firstObject.isPrimary', true)
+  #     unless isPrimary
+  #       @set('source.firstObject.isPrimary', true)
 
-  ).observes('source.[]')
+  # ).observes('source.[]')
 
   removeSelection: (view) ->
-    view.set('current.value', null)
-
-    currentViewIsPrimary = view.get('current.isPrimary')
-
-    view.set('current.isPrimary', false)
-
-    @get('source').removeObject(view.get('current'))
-    @get('source').pushObject(view.get('current'))
-
-    @removeObject view
-
-    newIndex = 0
-
-    @get('childViews').forEach (childView) ->
-      childView.set('index', newIndex)
-      newIndex += 1
-
-      if currentViewIsPrimary
-        childView.set('current.isPrimary', true)
-        currentViewIsPrimary = false
+    if view.get('current').deleteRecord
+      view.get('current').deleteRecord()
+      @get('controller.store').commit()
 
     @set('currentIndex', @get('currentIndex') - 1)
+
+    @get('source').removeObject(view.get('current'))
+
+    @removeObject view
 
   addNew: ->
     @set('currentIndex', @get('currentIndex') + 1)
 
-    currentIndex = @get('currentIndex')
+    if @get('currentIndex') >= @get('labels.length') || @get('currentIndex') < 0
+      @set('currentIndex', 0)
 
-    label = @get('labels')[currentIndex]
+    label = @get('labels')[@get('currentIndex')]
 
-    existing = @get('source').findProperty 'name', label
+    record = if @get('source').createRecord
+               @get('source').createRecord({name: label, value: ''})
+            else
+               isPrimary = @get('source.length') == 0
+               Ember.Object.create({name: label, value: '', isPrimary: isPrimary})
 
-    unless existing
-      record = @get('type').createRecord({name: label, value: ''})
-      @get('source').insertAt(currentIndex, record)
+    @get('source').pushObject(record)
 
     @pushObject(@get('viewType').create
       classNameBindings: [':control-group']
-      source: @get('source')
       leader: @get('leader')
       type: @get('inputType')
-      index: @get('currentIndex')
+      index: @get('source.length') - 1
+      current: record
     )
