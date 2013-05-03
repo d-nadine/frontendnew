@@ -76,6 +76,10 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.companyNames'
     valueBinding: 'controller.companyName'
     placeholder: 'Company'
+    blur: ->
+      return unless @get('controller.isNew')
+      return if @get('value')?.length < 3
+      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
 
   phoneNumbers: Radium.MultipleFields.extend
     labels: ['Mobile','Work','Home']
