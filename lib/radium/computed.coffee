@@ -58,6 +58,17 @@ Radium.computed.required = ->
   Ember.computed ->
     throw new Error("#{@constructor} does not implement the tasks interface")
 
+<<<<<<< HEAD
 Radium.computed.kindOf = (property, type) ->
   Ember.computed property, (key) ->
     @get(property) instanceof type
+=======
+Radium.computed.primary = (collection) ->
+  dependentKey = "#{collection}.@each.isPrimary"
+
+  Ember.computed dependentKey, ->
+    return unless @get(collection).get('length')
+
+    @get(collection).find (item) ->
+      item.get('isPrimary')
+>>>>>>> address to company
