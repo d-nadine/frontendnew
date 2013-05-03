@@ -53,8 +53,8 @@
                 {{/unless}}
               </div>
               <div class="contact-detail">
-                {{!view view.emailAddresses}}
-                {{!view view.phoneNumbers}}
+                {{view view.emailAddresses}}
+                {{view view.phoneNumbers}}
                 <div class="control-group">
                   <label class="control-label">Assigned To</label>
                   <div class="controls">
@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Groups</label>
+                  <label class="control-label">Tags</label>
                   <div class="controls">
                     {{view view.tags placeholder="Tags..." viewName="tags"}}
                   </div>

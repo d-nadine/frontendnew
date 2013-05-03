@@ -30,7 +30,7 @@ Factory.define 'contact', traits: ['timestamps'],
   ]
 
   groups: -> [
-    Factory.create 'group',
+    Factory.create 'tag',
       name: Dictionaries.companies.random()
   ]
 
