@@ -11,6 +11,10 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   firstName: DS.attr('string')
   lastName: DS.attr('string')
 
+  name: ( ->
+    "#{@get("firstName")} #{@get("lastName")}"
+  ).property('firstName', 'lastName')
+
   email: DS.attr('string')
   phone: DS.attr('string')
 
