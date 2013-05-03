@@ -2,12 +2,12 @@ Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#linkTo user view.co
 Ember.TEMPLATES['links/contact'] = Ember.Handlebars.compile """
   {{#linkTo contact view.content}}{{view.displayName}}{{/linkTo}}
 
-  {{#if view.company}}
+t {{#if view.company}}
     ({{#linkTo company view.company}}{{view.company.name}}{{/linkTo}})
   {{/if}}
 """
 Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#linkTo company view.content}}{{view.content.name}}{{/linkTo}}"
-Ember.TEMPLATES['links/group'] = Ember.Handlebars.compile "{{#linkTo unimplemented}}{{view.content.name}}{{/linkTo}}"
+Ember.TEMPLATES['links/tag'] = Ember.Handlebars.compile "{{#linkTo tag view.content}}{{view.content.name}}{{/linkTo}}"
 Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#linkTo deal view.content}}{{view.content.name}}{{/linkTo}}"
 Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
   <a href="{{unbound url}}" target="_new">{{view.content.name}}</a>

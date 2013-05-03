@@ -50,3 +50,4 @@ Radium.Router.map ->
     @route 'discussionForm'
     @route 'emailForms'
     @route 'widgets'
+    @route 'masterFeed'
