@@ -2,7 +2,6 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
-  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
   users: DS.hasMany('Radium.User')
@@ -15,11 +14,6 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
-
-  todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
-
-  tasks: Radium.computed.tasks('todos', 'calls')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

@@ -1,17 +1,11 @@
 Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
-  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
 
   description: DS.attr('string')
   finishBy: DS.attr('datetime')
   isFinished: DS.attr('boolean')
-
-  todos: DS.hasMany('Radium.Todo')
-  meetings: DS.hasMany('Radium.Meeting')
-
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

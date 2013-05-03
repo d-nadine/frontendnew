@@ -1,6 +1,5 @@
 Radium.Call = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
-  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
 
@@ -9,11 +8,6 @@ Radium.Call = Radium.Model.extend Radium.CommentsMixin,
   isFinished: DS.attr('boolean')
 
   contact: DS.belongsTo('Radium.Contact')
-
-  todos: DS.hasMany('Radium.Todo')
-  meetings: DS.hasMany('Radium.Meeting')
-
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
