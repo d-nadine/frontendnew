@@ -48,13 +48,6 @@ Radium.ContactForm = Radium.Form.extend
 
     contact
 
-  addressDefaults: ->
-    street: ''
-    city: ''
-    state: ''
-    zipcode: ''
-    country: ''
-
   reset: ->
     @_super.apply this, arguments
     @set 'isNew', true

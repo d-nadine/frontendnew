@@ -43,7 +43,6 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     @get('source').forEach (source) =>
       Ember.run.next =>
-        console.log source.get('value')
         @addExisting(source)
 
   ).observes('source.[]')
@@ -66,13 +65,6 @@ Radium.MultipleFields = Ember.ContainerView.extend
     unless @get('source').findProperty 'isPrimary'
       @set('source.firstObject.isPrimary', true)
 
-  getNewRecord: (label) ->
-    if @get('source').createRecord
-       @get('source').createRecord({name: label, value: ''})
-    else
-       isPrimary = @get('source.length') == 0
-       Ember.Object.create({name: label, value: '', isPrimary: isPrimary})
-
   addExisting: (record) ->
     @pushObject(@get('viewType').create
       classNameBindings: [':control-group']
@@ -90,7 +82,7 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     label = @get('labels')[@get('currentIndex')]
 
-    record = @getNewRecord(label)
+    record = @get('viewType').getNewRecord.call this, label
 
     @set('isUpdating', true)
 

@@ -98,3 +98,11 @@ Radium.MultipleField = Ember.View.extend
 
   toggleDropdown: ->
     @toggleProperty 'open'
+
+Radium.MultipleField.reopenClass
+  getNewRecord: (label) ->
+    isPrimary = @get('source.length') == 0
+    if @get('source').createRecord
+       @get('source').createRecord({name: label, value: '', isPrimary})
+    else
+       Ember.Object.create({name: label, value: '', isPrimary: isPrimary})

@@ -21,14 +21,31 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
 
   showAddNew: ( ->
     return if @get('readonly')
-    index = @get('index')
-    sourceLength = (@get('parentView.labels.length') - 1)
-    return false if index == sourceLength
-    return false if @get('parentView.currentIndex') == sourceLength
+
+    if @get('source.length') > 1
+      return @get('current') == @get('source')[@get('source.length') - 1]
 
     return true if @get('current.street.length') > 1
     return true if @get('current.city.length') > 1
     return true if @get('current.state.length') > 1
     return true if @get('current.zip.length') > 1
-    false
-  ).property('showdropdown', 'parentView.currentIndex','current.street', 'current.city', 'current.state', 'current.zip')
+  ).property('source.[]', 'showdropdown', 'current.street', 'current.city', 'current.state', 'current.zip')
+
+Radium.AddressMultipleField.reopenClass
+  getNewRecord: (label) ->
+    isPrimary = @get('source.length') == 0
+
+    addressDefaults =
+      street: ''
+      city: ''
+      state: ''
+      zipcode: ''
+      country: ''
+      isPrimary: isPrimary
+      name: label
+
+    if @get('source').createRecord
+       @get('source').createRecord(addressDefaults)
+    else
+       isPrimary = @get('source.length') == 0
+       Ember.Object.create(addressDefaults)
