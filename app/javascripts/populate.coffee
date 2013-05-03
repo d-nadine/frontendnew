@@ -105,6 +105,7 @@ class Populator
       users: -> [userDictionary.random(), userDictionary.random(), userDictionary.random()]
       contacts: -> [contactDictionary.random(), contactDictionary.random(), contactDictionary.random()]
       companies: -> [companyDictionary.random(), companyDictionary.random(), companyDictionary.random()]
+      tags: -> [tagDictionary.random(), tagDictionary.random(), tagDictionary.random()]
 
     Factory.create 'activity',
       tag: 'follow'
