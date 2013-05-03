@@ -97,6 +97,15 @@ class Populator
 
     phoneCallDictionary = new Dictionary([phoneCall1, phoneCall2])
 
+    # Define a factory here so all the activities created
+    # will be added to everything's feed
+    Factory.adapter.map.set 'activity', Radium.Activity
+    Factory.define 'activity',
+      timestamp: -> Ember.DateTime.random past: true
+      users: -> [userDictionary.random(), userDictionary.random(), userDictionary.random()]
+      contacts: -> [contactDictionary.random(), contactDictionary.random(), contactDictionary.random()]
+      companies: -> [companyDictionary.random(), companyDictionary.random(), companyDictionary.random()]
+
     Factory.create 'activity',
       tag: 'follow'
       meta:

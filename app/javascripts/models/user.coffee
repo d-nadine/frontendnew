@@ -8,6 +8,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   calls: DS.hasMany('Radium.Call', inverse: 'user')
   meetings: DS.hasMany('Radium.Meeting')
 
+  activities: DS.hasMany('Radium.Activity')
+
   firstName: DS.attr('string')
   lastName: DS.attr('string')
 
@@ -25,4 +27,3 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   settings: DS.attr('object')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
-
