@@ -5,12 +5,32 @@ Radium.MultipleFields = Ember.ContainerView.extend
   currentIndex: -1
   inputType: 'text'
   viewType: Radium.MultipleField
+  canReset: false
   didInsertElement: ->
     @_super.apply this, arguments
-    @set('source.firstObject.isPrimary', true) if @get('source.length')
-    @addNew()
+    @get('source').forEach (source) =>
+      if source.get('value')
+        Ember.run =>
+          @addNew()
+
+    @addNew() unless @get('childViews.length')
+
+  willDestroyElement: ->
+    @_super.apply this, arguments
+
+    unsaved = @get('source').filter (item) ->
+                not item.get('value')
+
+    unsaved.forEach (item) ->
+      item.deleteRecord()
+
+    @get('source').removeObjects unsaved
+
+    if !@get('source').findProperty('isPrimary') && @get('source.length')
+      @set('source.firstObject.isPrimary', true)
 
   sourceDidChange: ( ->
+    return unless @get('canReset')
     return unless @get('source')
 
     index = 0
@@ -37,8 +57,7 @@ Radium.MultipleFields = Ember.ContainerView.extend
     unless @get('childViews.length')
       @addNew()
     else
-      isPrimary = @get('source').find (item) ->
-        item.get('isPrimary')
+      isPrimary = @get('source').findProperty 'isPrimary'
 
       unless isPrimary
         @set('source.firstObject.isPrimary', true)
@@ -71,6 +90,17 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
   addNew: ->
     @set('currentIndex', @get('currentIndex') + 1)
+
+    currentIndex = @get('currentIndex')
+
+    label = @get('labels')[currentIndex]
+
+    existing = @get('source').findProperty 'name', label
+
+    unless existing
+      record = @get('type').createRecord({name: label, value: ''})
+      @get('source').insertAt(currentIndex, record)
+
     @pushObject(@get('viewType').create
       classNameBindings: [':control-group']
       source: @get('source')

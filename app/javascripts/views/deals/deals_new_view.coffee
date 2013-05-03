@@ -64,6 +64,16 @@ Radium.DealsNewView= Ember.View.extend
       {{/each}}
       </ul>
     """
+
+  valueField: Ember.TextField.extend
+    valueBinding: 'value'
+    disabledBinding: 'disabled'
+    focusIn: (evt) ->
+      @$().parents('.control-box:eq(0)').addClass('active')
+
+    focusOut: (evt) ->
+      @$().parents('.control-box:eq(0)').removeClass('active')
+
   referenceName: ( ->
     # FIXME : can we use toString on the models?
     reference = @get('controller.reference')

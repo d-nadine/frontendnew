@@ -1,3 +1,5 @@
+require 'lib/radium/add_active_to_parent_mixin'
+
 Radium.Combobox = Radium.View.extend
   classNameBindings: [
     'isInvalid'
@@ -116,12 +118,12 @@ Radium.Combobox = Radium.View.extend
   updater: (item) ->
     @set 'value', item
 
-  textField: Ember.TextField.extend
+  textField: Ember.TextField.extend Radium.AddActiveToParentMixin,
     valueBinding: 'parentView.query'
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
-
     didInsertElement: ->
+
       @$().typeahead source: @get('parentView.sortedSource')
 
       typeahead = @$().data('typeahead')

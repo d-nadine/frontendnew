@@ -84,6 +84,7 @@ Radium.LeadsNewView = Ember.View.extend
     viewType: Radium.PhoneMultipleField
     type: Radium.PhoneNumber
     readonly: Ember.computed.not 'controller.isNew'
+    canReset: true
 
   emailAddresses: Radium.MultipleFields.extend
     labels: ['Work','Home']
@@ -93,6 +94,7 @@ Radium.LeadsNewView = Ember.View.extend
     sourceBinding: 'controller.emailAddresses'
     type: Radium.EmailAddress
     readonly: Ember.computed.not 'controller.isNew'
+    canReset: true
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
@@ -133,6 +135,7 @@ Radium.LeadsNewView = Ember.View.extend
     viewType: Radium.AddressMultipleField
     type: Radium.Address
     readonly: Ember.computed.not 'controller.isNew'
+    canReset: true
 
   contactDidChange: ( ->
     contactDetails = @$('.contact-detail')

@@ -26,8 +26,8 @@ Radium.MultipleField = Ember.View.extend
     name = @get('current.name')
     index = @get('index')
     currentIndex = @get('parentView.currentIndex')
-    sourceLength = (@get('source.length') - 1)
-    return false if currentIndex == sourceLength
+    # sourceLength = (@get('parentView.labels.length') - 1)
+    # return false if currentIndex == sourceLength
 
     @get('current.value.length') > 1 && index == currentIndex
   ).property('current.value', 'showdropdown', 'parentView.currentIndex')
@@ -38,6 +38,9 @@ Radium.MultipleField = Ember.View.extend
 
   removeSelection: ->
     @get('parentView').removeSelection this
+
+  toggleDropdown: ->
+    @$('.dropdown-toggle').dropdown()
 
   layout: Ember.Handlebars.compile """
     <label class="control-label">{{view.label}}</label>
@@ -50,7 +53,7 @@ Radium.MultipleField = Ember.View.extend
           <button class="btn" {{action toggleDropdown target="view" bubbles="false"}}>
             {{view.current.name}}
           </button>
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" {{action toggleDropdown target="view"}}>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
@@ -76,7 +79,7 @@ Radium.MultipleField = Ember.View.extend
   """
 
   template: Ember.Handlebars.compile """
-    {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader" readonlyBinding="view.readonly" readonlyBinding="view.readonly"}}
+    {{view Ember.TextField typeBinding="view.type" classNames="field input-xlarge" valueBinding="view.current.value" placeholderBinding="view.leader" readonlyBinding="view.readonly"}}
   """
 
   primaryRadio: Radium.Radiobutton.extend
