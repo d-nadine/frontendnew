@@ -1,5 +1,10 @@
 Radium.ApplicationRoute = Radium.Route.extend
   events:
+    # Fired whenever the application enters
+    # a new route
+    didTransition: ->
+      @send 'closeDrawer'
+
     toggleNotifications: ->
       if @get('router.openDrawer') == name
         $('body').removeClass 'drawer-open'
