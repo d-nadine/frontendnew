@@ -8,6 +8,9 @@
 
 @import "layout";
 
+@import "layouts/fixed_two_column";
+@import "layouts/two_column";
+
 @import "components/alerts";
 @import "components/avatars";
 @import "components/comments";
@@ -86,11 +89,24 @@ a:hover {
   text-decoration: none;
 }
 
-.required{
-  &:after{
+.required {
+  &:after {
     content: " *";
     color: red;
     margin-left: 4px;
     vertical-align: top;
   }
+}
+
+.upcase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+// override bootstrap's align top
+.table .th, .table td {
+  vertical-align: middle;
 }

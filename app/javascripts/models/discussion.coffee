@@ -6,20 +6,20 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
-  meetings: DS.hasMany('Radium.Meeting')
 
   user: DS.belongsTo('Radium.User', inverse: null)
-  deal: DS.belongsTo('Radium.Deal', inverse: null)
-  contact: DS.belongsTo('Radium.Contact', inverse: null)
 
   topic: DS.attr('string')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
-      @get('deal') || @get('contact')
-  ).property('deal', 'contact')
+      @get('_referenceDeal') || @get('_referenceContact')
+  ).property('_referenceDeal', '_referenceContact')
+  _referenceContact: DS.belongsTo('Radium.Contact', inverse: null)
+  _referenceDeal: DS.belongsTo('Radium.Deal', inverse: null)
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'calls')

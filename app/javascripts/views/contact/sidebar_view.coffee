@@ -7,9 +7,7 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 
-Radium.ContactSidebarView = Radium.SidebarView.extend
-  classNames: ['sidebar-panel-bordered']
-
+Radium.ContactSidebarView = Radium.View.extend
   statuses: ( ->
     @get('controller.leadStatuses').map (status) ->
       Ember.Object.create

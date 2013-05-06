@@ -8,7 +8,6 @@ require 'lib/radium/toggle_switch'
 
 Radium.View = Ember.View.extend()
 
-require 'views/sidebar_view'
 require 'views/fixed_sidebar_view'
 
 require /views/

@@ -7,21 +7,23 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Meetings')
 
+  activities: DS.hasMany('Radium.Activity')
+
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
-  email: DS.belongsTo('Radium.Email')
   todo: DS.belongsTo('Radium.Todo')
   checklist: DS.belongsTo('Radium.Checklist')
   isPublished: DS.attr('boolean')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
-      @get('contact') || @get('deal') || @get('email')
-  ).property('contact', 'deal', 'email')
-
+      @get('_referenceEmail')
+  ).property('_referenceEmail')
+  _referenceEmail: DS.belongsTo('Radium.Email')
 
   name: DS.attr('string')
   description: DS.attr('string')

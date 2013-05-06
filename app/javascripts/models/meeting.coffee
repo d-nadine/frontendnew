@@ -2,7 +2,6 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
-  Radium.HasTasksMixin,
 
   user: DS.belongsTo('Radium.User')
   users: DS.hasMany('Radium.User')
@@ -16,22 +15,17 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
 
-  deal: DS.belongsTo('Radium.Deal')
-  email: DS.belongsTo('Radium.Email')
-  todo: DS.belongsTo('Radium.Todo')
-
-  todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
-
-  tasks: Radium.computed.tasks('todos', 'calls')
-
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
-      property = value.constructor.toString().split('.')[1].toLowerCase()
-      @set property, value
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
     else
-      @get('todo') || @get('deal') || @get('email')
+      @get('_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
   ).property('todo', 'deal', 'email')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
+  _referenceEmail: DS.belongsTo('Radium.Email')
+  _referenceTodo: DS.belongsTo('Radium.Todo')
 
   time: Ember.computed.alias('startsAt')
 

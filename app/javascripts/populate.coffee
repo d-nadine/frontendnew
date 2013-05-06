@@ -171,7 +171,7 @@ class Populator
       event: 'create'
       user: userDictionary.random()
       reference: Factory.create 'call',
-        reference: contactDictionary.random()
+        contact: contactDictionary.random()
         user: userDictionary.random()
         description: null
 
@@ -180,7 +180,7 @@ class Populator
       event: 'create'
       user: userDictionary.random()
       reference: Factory.create 'call',
-        reference: contactDictionary.random()
+        contact: contactDictionary.random()
         user: userDictionary.random()
         description: "Ask about the fall line up"
 

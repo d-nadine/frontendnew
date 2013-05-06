@@ -1,12 +1,32 @@
 Radium.ApplicationRoute = Radium.Route.extend
   events:
+    # Fired whenever the application enters
+    # a new route
+    didTransition: ->
+      @send 'closeDrawer'
+
+    toggleNotifications: ->
+      if @get('router.openDrawer') == name
+        @send 'closeDrawer'
+      else
+        $('body').addClass 'drawer-open'
+
+        @render 'notifications',
+          outlet: 'drawer'
+          into: 'application'
+
+        @set 'router.openDrawer', name
+
     toggleDrawer: (name) ->
       if @get('router.openDrawer') == name
+        $('body').removeClass 'drawer-open'
         @send 'closeDrawer'
       else
         route = name.split('/')[0]
 
         Ember.assert("Could not find a matching controller for: #{name}", route)
+
+        $('body').addClass 'drawer-open'
 
         @render name,
           outlet: 'drawer'
@@ -21,6 +41,7 @@ Radium.ApplicationRoute = Radium.Route.extend
         outlet: 'drawer'
 
       @set 'router.openDrawer', null
+      $('body').removeClass 'drawer-open'
 
     closeModal: ->
       @render 'nothing',
