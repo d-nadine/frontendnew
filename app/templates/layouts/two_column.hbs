@@ -1,8 +1,11 @@
-<div class="main-row two-column">
-  <div id="sidebar">
-    {{outlet sidebar}}
-  </div>
-  <div id="main-panel">
-    {{yield}}
+<div class="two-column container">
+  <div class="row">
+    <div class="span4">
+      {{outlet sidebar}}
+    </div>
+
+    <div class="span8">
+      {{yield}}
+    </div>
   </div>
 </div>

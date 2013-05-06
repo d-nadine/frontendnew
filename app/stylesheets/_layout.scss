@@ -27,22 +27,22 @@ body {
   padding-bottom: 20px;
 }
 
-.main-row {
-  margin-left: 0;
-  overflow: auto;
-}
+// .main-row {
+//   margin-left: 0;
+//   overflow: auto;
+// }
 
 $sidebar-width: 340px;
 $sidebar-border-size: 8px;
 $button-bar-width: 40px;
 $two-column-gutter: 60px;
 
-.sidebar-panel {
-  padding-left: $sidebar-border-size;
-  width: $sidebar-width - $sidebar-border-size;
-  margin-left: $button-bar-width;
-  float: left;
-}
+// .sidebar-panel {
+//   padding-left: $sidebar-border-size;
+//   width: $sidebar-width - $sidebar-border-size;
+//   margin-left: $button-bar-width;
+//   float: left;
+// }
 
 .sidebar-panel-bordered {
   .panel-content {
@@ -77,10 +77,10 @@ $two-column-gutter: 60px;
   }
 }
 
-.two-column #main-panel {
-  margin-left: $sidebar-width + $two-column-gutter;
-  margin-right: $two-column-gutter;
-}
+// .two-column #main-panel {
+//   margin-left: $sidebar-width + $two-column-gutter;
+//   margin-right: $two-column-gutter;
+// }
 
 .hud {
   position: fixed;
@@ -107,10 +107,10 @@ $two-column-gutter: 60px;
   margin-top: 0;
 }
 
-.single-column{
-  margin-left: 50px;
-  margin-right: 60px;
-}
+// .single-column{
+//   margin-left: 50px;
+//   margin-right: 60px;
+// }
 
 #drawer-buttons {
   position: fixed;
