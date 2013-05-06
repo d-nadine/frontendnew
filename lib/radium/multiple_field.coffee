@@ -27,7 +27,9 @@ Radium.MultipleField = Ember.View.extend
 
     return if @get('source.length') <= 1 && @get('current.value.length') < 2
 
-    return ((@get('current') == @get('source')[@get('source.length') - 1 ]) && (@get('current.value.length') >= 2))
+    lastIndex = @get('source.length') - 1
+
+    return ((@get('current') == @get('source').objectAt(lastIndex)) && (@get('current.value.length') >= 2))
   ).property('source.[]', 'current.value', 'showdropdown')
 
   label: ( ->

@@ -129,6 +129,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
       leader: 'Email'
       sourceBinding: 'controller.emailAddresses'
       type: Radium.EmailAddress
+      canReset: false
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
@@ -154,6 +155,8 @@ Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
       sourceBinding: 'controller.phoneNumbers'
       viewType: Radium.PhoneMultipleField
       type: Radium.PhoneNumber
+      canReset: false
+
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>

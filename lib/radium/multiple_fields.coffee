@@ -53,6 +53,7 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
   removeSelection: (view) ->
     if view.get('current').deleteRecord
+      view.get('current').set('isPrimary', false)
       view.get('current').deleteRecord()
       @get('controller.store').commit()
 
@@ -60,14 +61,17 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     @set('isUpdating', true)
 
-    @get('source').removeObject(view.get('current'))
+    @get('source').removeObject(view.get('current')) unless view.get('current.isDeleted')
 
     @set('isUpdating', false)
 
     @removeObject view
 
     unless @get('source').findProperty 'isPrimary'
-      @set('source.firstObject.isPrimary', true)
+      nextPrimary = @get('source').find (item) =>
+        not item.get('isDeleted')
+
+      nextPrimary.set 'isPrimary', true
 
   addExisting: (record) ->
     @pushObject(@get('viewType').create
@@ -90,7 +94,8 @@ Radium.MultipleFields = Ember.ContainerView.extend
 
     record = @get('viewType').getNewRecord.call this, label
 
-    @get('source').pushObject(record)
+    if @get('controller.isNew')
+      @get('source').pushObject(record)
 
     @set('isUpdating', false)
 

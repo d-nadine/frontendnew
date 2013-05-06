@@ -32,21 +32,13 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     return unless @get('controller.isValid')
 
     if Ember.isEmpty( @get('controller.name')) || Ember.isEmpty( @get('controller.companyName'))
-      @set 'showModal', true
-      Ember.run.next =>
-        @$('.modal').addClass 'in'
+      @$('.modal').modal backdrop: false
       return
-
-    @set 'showModal', false
-    @$('.modal').removeClass 'in'
 
     @get('controller').submit()
 
   cancelSubmit: ->
-    @$().one $.support.transition.end, =>
-      @set 'showModal', false
-
-    @$('.modal').removeClass('in')
+    @$('.modal').modal 'hide'
 
     if Ember.isEmpty @get('controller.name')
       @$('.contact-name input[type=text]').focus()
@@ -73,8 +65,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     companyDidChange: ( ->
       return unless @get('controller.isNew')
-
-      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
 
       return unless @get('controller.companyTags.length')
 

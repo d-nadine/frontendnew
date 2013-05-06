@@ -17,6 +17,15 @@
     font-weight: bold;
   }
 
+
+  .inline-editor-open{
+    // margin-bottom: 1px;
+  }
+
+  .multiple-field{
+    position: relative;
+  }
+
   .contact-detail{
     .detail{
       width: 267px;
@@ -35,15 +44,20 @@
   .phone,
   .email{
      position: relative;
+
+    .control-label{
+      visibility: hidden;
+    }
+
     .inline-editor-closed{
     a{
         position: relative;
         left: 1px;
-        top: 1px;
       }
     }
+
     .inline-editor-open{
-      margin-bottom: -15px;
+      // margin-bottom: -15px;
     }
 
     .multiple-field{
@@ -54,7 +68,7 @@
       }
 
       .controls.selector:last-of-type{
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
       }
     }
   }
@@ -81,11 +95,11 @@
       position: relative;
 
       &.inline-editor-closed{
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
       }
 
       &.inline-editor-open{
-        margin-bottom: -7px;
+        // margin-bottom: -7px;
       }
 
       .not-editing{
@@ -143,7 +157,7 @@
 
   .header{
     > div{
-      margin-bottom: 0;
+      // margin-bottom: 0;
     }
   }
 
@@ -164,11 +178,11 @@
   }
 
   .group-picker{
-    margin-top: 10px;
-    margin-bottom: 6px;
+    // margin-top: 10px;
+    // margin-bottom: 6px;
 
     .autocomplete{
-      margin-bottom: -11px;
+      // margin-bottom: -11px;
     }
 
     i.icon-plus{
@@ -176,38 +190,35 @@
     }
 
     .group-label{
-      margin-bottom: -15px;
+      // margin-bottom: -15px;
     }
   }
 
   .deals-won{
     .amount{
-      margin-top: 9px;
+      // margin-top: 9px;
     }
   }
 
   .assigned-to,
   .open-deals{
     h2{
-      margin: 0;
+      // margin: 0;
     }
   }
 
   .open-deals{
-    h2{
-      margin: 0;
-    }
     > div{
       text-transform: uppercase;
       font-weight: bold;
       h2{
-        margin: 0;
+        // margin: 0;
       }
     }
 
     .deal{
       > div{
-        margin-bottom: 10px
+        // margin-bottom: 10px
       }
 
       .deal-value{
@@ -225,12 +236,12 @@
   }
 
   .deal-links{
-    margin-top: 20px;
+    // margin-top: 20px;
   }
 
   .about{
     h2{
-      margin-bottom: 0;
+      // margin-bottom: 0;
     }
 
     .icon-edit{
@@ -254,7 +265,7 @@
 
   .address{
     h2{
-      margin: 0;
+      // margin: 0;
     }
 
     .icon-edit{
@@ -267,16 +278,16 @@
     }
 
     .location{
-      margin-top: 10px;
+      // margin-top: 10px;
     }
 
     .multiple-field{
       .control-label{
         display: block;
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
       }
       .control-group{
-        margin-bottom: 0;
+        // margin-bottom: 0;
       }
 
       .add-new{
@@ -316,7 +327,7 @@
 
     .source,
     .createdAt{
-      margin-top: 20px;
+      // margin-top: 20px;
     }
   }
 
