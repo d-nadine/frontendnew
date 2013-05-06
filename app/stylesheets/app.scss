@@ -88,11 +88,24 @@ a:hover {
   text-decoration: none;
 }
 
-.required{
-  &:after{
+.required {
+  &:after {
     content: " *";
     color: red;
     margin-left: 4px;
     vertical-align: top;
   }
+}
+
+.upcase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+// override bootstrap's align top
+.table .th, .table td {
+  vertical-align: middle;
 }
