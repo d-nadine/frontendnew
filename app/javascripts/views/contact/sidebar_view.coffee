@@ -23,7 +23,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend
     optionLabelPath: 'content.name'
     valueBinding: 'controller.status'
 
-  groups: Radium.GroupAutoComplete.extend
+  groups: Radium.TagAutoComplete.extend
     isEditableBinding: 'controller.isEditable'
 
   showExtraContactDetail: ->
