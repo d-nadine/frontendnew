@@ -1,4 +1,5 @@
 require 'lib/radium/add_active_to_parent_mixin'
+require 'lib/radium/toggle_dropdown_mixin'
 
 Radium.TextCombobox = Ember.View.extend
   classNameBindings: [
@@ -36,7 +37,7 @@ Radium.TextCombobox = Ember.View.extend
     {{/unless}}
   """
 
-  textField: Ember.TextField.extend Radium.AddActiveToParentMixin,
+  textField: Ember.TextField.extend Radium.AddActiveToParentMixin, Radium.ToggleDropdownMixin,
     valueBinding: 'parentView.query'
     placeholderBinding: 'parentView.placeholder'
     disabledBinding: 'parentView.disabled'
