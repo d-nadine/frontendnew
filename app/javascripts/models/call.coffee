@@ -25,12 +25,5 @@ Radium.Call = Radium.Model.extend Radium.CommentsMixin,
 
   time: Ember.computed.alias('finishBy')
 
-  # TODO: replace with a computed alias
-  isDueToday: ( ->
-    today = Ember.DateTime.create()
-    finishBy = @get('finishBy')
-    Ember.DateTime.compareDate(today, finishBy) is 0
-  ).property('finishBy')
-
   toString: ->
     @get 'description'
