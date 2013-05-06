@@ -7,7 +7,6 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     toggleNotifications: ->
       if @get('router.openDrawer') == name
-        $('body').removeClass 'drawer-open'
         @send 'closeDrawer'
       else
         $('body').addClass 'drawer-open'
@@ -42,6 +41,7 @@ Radium.ApplicationRoute = Radium.Route.extend
         outlet: 'drawer'
 
       @set 'router.openDrawer', null
+      $('body').removeClass 'drawer-open'
 
     closeModal: ->
       @render 'nothing',
