@@ -6,21 +6,12 @@ require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
 require 'lib/radium/group_autocomplete'
 
-Radium.LeadsNewView = Ember.View.extend
+Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   contacts: Ember.computed.alias 'controller.contacts'
 
   didInsertElement: ->
     @_super.apply this, arguments
     @$('.contact-name').focus()
-
-  statusDescription: ( ->
-    currentStatus = @get('controller.status')
-    return "" unless currentStatus
-
-    @get('controller.leadStatuses').find((status) ->
-      status.value == currentStatus
-    ).name
-  ).property('controller.status')
 
   existingContactText: ( ->
     return if @get('controller.isNew')

@@ -148,14 +148,12 @@
   }
 
   .contact-type{
-    > div{
+    height: 30px;
+    h2{
+      font-size: 15px;
       position: relative;
-      top: 5px;
-    }
-
-    select{
-      position: relative;
-      top: 4px;
+      top: -6px;
+      left: 7px;
     }
   }
 

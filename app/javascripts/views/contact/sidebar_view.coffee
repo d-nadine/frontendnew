@@ -7,19 +7,15 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 
-Radium.ContactSidebarView = Radium.View.extend
+Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
+  classNames: ['sidebar-panel-bordered']
+
   statuses: ( ->
     @get('controller.leadStatuses').map (status) ->
       Ember.Object.create
-        name: status.name
+        name: status.name.toUpperCase()
         value: status.value
   ).property('controller.leadStatuses.[]')
-
-  statusSelect: Ember.Select.extend
-    contentBinding: 'parentView.statuses'
-    optionValuePath: 'content.value'
-    optionLabelPath: 'content.name'
-    valueBinding: 'controller.status'
 
   groups: Radium.TagAutoComplete.extend
     isEditableBinding: 'controller.isEditable'
@@ -77,6 +73,30 @@ Radium.ContactSidebarView = Radium.View.extend
               {{#linkTo unimplemented}}{{companyName}}{{/linkTo}}
             {{/if}}
           </span>
+        </div>
+      {{/if}}
+    """
+
+  contactStatusInlineEditor: Radium.HighlightInlineEditor.extend
+    statusesBinding: 'parentView.statuses'
+    statusDescriptionBinding: 'parentView.statusDescription'
+    statusSelect: Ember.Select.extend
+      contentBinding: 'parentView.statuses'
+      optionValuePath: 'content.value'
+      optionLabelPath: 'content.name'
+      valueBinding: 'controller.status'
+
+    template: Ember.Handlebars.compile """
+      {{#if view.isEditing}}
+        <div>{{view view.statusSelect}}</div>
+        <div>&nbsp;</div>
+      {{else}}
+        <div>
+          {{log view.statusDescription}}
+          <h2>{{view.statusDescription}}</h2>
+        </div>
+        <div>
+          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
         </div>
       {{/if}}
     """
