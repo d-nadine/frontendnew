@@ -6,8 +6,9 @@ require 'lib/radium/multiple_field'
 require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
+require 'views/contact/contact_view_mixin'
 
-Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
+Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
 
   statuses: ( ->
