@@ -1,6 +1,8 @@
 Radium.AddressMultipleField = Radium.MultipleField.extend
   sourceBinding: 'parentView.source'
+
   template: Ember.Handlebars.compile """
+    {{log view.current.street}}
     {{#with view.current}}
       <div class="addresses">
         <div class="control-group whole">
@@ -24,7 +26,8 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return if @get('readonly')
 
     if @get('source.length') > 1
-      return ((@get('current') == @get('source')[@get('source.length') - 1]) && (@hasValue()))
+      lastIndex = @get('source.length') - 1
+      return ((@get('current') == @get('source').objectAt(lastIndex)) && (@hasValue()))
 
     @hasValue()
   ).property('source.[]', 'showdropdown', 'current.street', 'current.city', 'current.state', 'current.zip')
@@ -36,6 +39,7 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return true if @get('current.zipcode.length') > 1
 
   clearValue: ->
+    return unless @get('controller.isNew')
     @set('current.street', '')
     @set('current.city', '')
     @set('current.state', '')

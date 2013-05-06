@@ -9,6 +9,7 @@ Radium.MultipleField = Ember.View.extend
     Ember.A(@get('parentView.labels'))
   ).property('parentView.labels.[]')
 
+
   addNew: ->
     @get('parentView').addNew()
 
