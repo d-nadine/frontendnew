@@ -42,7 +42,7 @@ Radium.ContactForm = Radium.Form.extend
       tags = contact.get('tags')
 
       if tag.get('id')
-        tag.addObject tag unless contact.get('tags').contains group
+        tags.addObject tag unless contact.get('tags').contains tag
       else
         tags.addObject Radium.Tag.createRecord tag.get('name')
 
