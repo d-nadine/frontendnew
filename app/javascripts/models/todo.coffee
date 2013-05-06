@@ -15,14 +15,14 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
     else
       @get('_referenceContact') ||
         @get('_referenceDeal') ||
-        @get('_referenceEmail') ||
         @get('_referenceDiscussion') ||
+        @get('_referenceEmail') ||
         @get('_referenceMeeting')
   ).property('contact', 'deal', 'email')
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
-  _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
+  _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
   # FIXME: this should be a computed property
