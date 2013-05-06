@@ -107,7 +107,6 @@ Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
         <div>
           {{input type="text" value=company.website class="field" placeholder="Company Website"}}
         </div>
-        <div>&nbsp;</div>
       {{else}}
         <div class="not-editing">
           {{#if company.website}}
@@ -138,7 +137,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
         </div>
       {{else}}
         <div class="control-group">
-          <label class="control-label primary-item">Email <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+          <label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           {{#if primaryEmail.value}}
             <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
           {{else}}
@@ -164,7 +163,7 @@ Radium.ContactSidebarView = Radium.SidebarView.extend Radium.ContactViewMixin,
         </div>
       {{else}}
         <div class="control-group">
-          <label class="control-label primary-item">Phone <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+          <label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           <div class="phone-section">
           <div>
             {{#if primaryPhone.value}}

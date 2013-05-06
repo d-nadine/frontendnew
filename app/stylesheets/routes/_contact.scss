@@ -17,9 +17,10 @@
     font-weight: bold;
   }
 
-
   .inline-editor-open{
-    // margin-bottom: 1px;
+    input{
+      margin-bottom: 0;
+    }
   }
 
   .multiple-field{
@@ -45,19 +46,11 @@
   .email{
      position: relative;
 
-    .control-label{
-      visibility: hidden;
-    }
-
     .inline-editor-closed{
     a{
         position: relative;
         left: 1px;
       }
-    }
-
-    .inline-editor-open{
-      // margin-bottom: -15px;
     }
 
     .multiple-field{
@@ -67,8 +60,8 @@
         right: 2px;
       }
 
-      .controls.selector:last-of-type{
-        // margin-bottom: 20px;
+      input{
+        margin-bottom: 5px;
       }
     }
   }
@@ -94,14 +87,6 @@
       @include box-pack(justify);
       position: relative;
 
-      &.inline-editor-closed{
-        // margin-bottom: 10px;
-      }
-
-      &.inline-editor-open{
-        // margin-bottom: -7px;
-      }
-
       .not-editing{
         height: 22px;
         position: relative;
@@ -121,10 +106,31 @@
     }
   }
 
+  .company-website{
+    margin-bottom: 10px;
+    .inline-editor-closed{
+      margin-bottom: 18px;
+    }
+  }
+
+  .email{
+    margin-bottom: 20px;
+  }
+
+  .phone{
+    margin-top: 1px;
+  }
+
+  .show-more{
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
   .email,
   .phone,
   .company-website{
     .icon-edit{
+      opacity: 1;
       position: relative;
       top: 5px;
     }
@@ -155,12 +161,6 @@
     overflow: visible;
   }
 
-  .header{
-    > div{
-      // margin-bottom: 0;
-    }
-  }
-
   .contact-type{
     height: 30px;
     h2{
@@ -172,38 +172,15 @@
     }
   }
 
-  .show-more{
-    margin-top: 30px;
-    margin-bottom: 10px;
-  }
-
   .group-picker{
-    // margin-top: 10px;
-    // margin-bottom: 6px;
-
-    .autocomplete{
-      // margin-bottom: -11px;
-    }
-
     i.icon-plus{
       font-size: 10px;
-    }
-
-    .group-label{
-      // margin-bottom: -15px;
     }
   }
 
   .deals-won{
     .amount{
-      // margin-top: 9px;
-    }
-  }
-
-  .assigned-to,
-  .open-deals{
-    h2{
-      // margin: 0;
+      margin-top: 9px;
     }
   }
 
@@ -211,14 +188,11 @@
     > div{
       text-transform: uppercase;
       font-weight: bold;
-      h2{
-        // margin: 0;
-      }
     }
 
     .deal{
       > div{
-        // margin-bottom: 10px
+        margin-bottom: 10px
       }
 
       .deal-value{
@@ -236,14 +210,10 @@
   }
 
   .deal-links{
-    // margin-top: 20px;
+    margin-top: 20px;
   }
 
   .about{
-    h2{
-      // margin-bottom: 0;
-    }
-
     .icon-edit{
       position: relative;
       top: 19px;
@@ -264,10 +234,6 @@
   }
 
   .address{
-    h2{
-      // margin: 0;
-    }
-
     .icon-edit{
       position: relative;
       top: 13px;
@@ -277,19 +243,7 @@
       margin-left: 10px;
     }
 
-    .location{
-      // margin-top: 10px;
-    }
-
     .multiple-field{
-      .control-label{
-        display: block;
-        // margin-bottom: 10px;
-      }
-      .control-group{
-        // margin-bottom: 0;
-      }
-
       .add-new{
         width: 100%;
         .icon-plus{
@@ -327,7 +281,7 @@
 
     .source,
     .createdAt{
-      // margin-top: 20px;
+      margin-top: 20px;
     }
   }
 
