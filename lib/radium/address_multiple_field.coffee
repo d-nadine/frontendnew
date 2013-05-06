@@ -24,7 +24,7 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return if @get('readonly')
 
     if @get('source.length') > 1
-      return @get('current') == @get('source')[@get('source.length') - 1]
+      return ((@get('current') == @get('source')[@get('source.length') - 1]) && (@hasValue()))
 
     @hasValue()
   ).property('source.[]', 'showdropdown', 'current.street', 'current.city', 'current.state', 'current.zip')
@@ -35,12 +35,23 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     return true if @get('current.state.length') > 1
     return true if @get('current.zipcode.length') > 1
 
+  clearValue: ->
+    @set('current.street', '')
+    @set('current.city', '')
+    @set('current.state', '')
+    @set('current.zipcode', '')
+
   companyDidChange: ( ->
-    return if !@get('controller.companyPrimaryAddress')
+    # return if !@get('controller.companyPrimaryAddress')
     return if @get('parentView.source.length') > 1
+
+    if ((!@get('controller.company')) || (!@get('controller.companyPrimaryAddress')))
+      @clearValue()
 
     current = @get('current')
     companyAddress = @get('controller.companyPrimaryAddress')
+
+    return unless companyAddress
 
     current.set('street', companyAddress.get('street'))
     current.set('city', companyAddress.get('city'))
