@@ -2,7 +2,6 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
   sourceBinding: 'parentView.source'
 
   template: Ember.Handlebars.compile """
-    {{log view.current.street}}
     {{#with view.current}}
       <div class="addresses">
         <div class="control-group whole">

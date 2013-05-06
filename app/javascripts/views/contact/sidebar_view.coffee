@@ -93,7 +93,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
         <div>&nbsp;</div>
       {{else}}
         <div>
-          {{log view.statusDescription}}
           <h2>{{view.statusDescription}}</h2>
         </div>
         <div>
