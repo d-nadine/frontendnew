@@ -141,9 +141,17 @@
 
 li.as-result-item.active {
   cursor: pointer;
-  background-color: $selected-item;
-  background-image: none;
-  color: inherit;
+	color: #fff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
 }
 
 li.as-result-item, li.as-message {
@@ -158,10 +166,4 @@ li.as-result-item, li.as-message {
 ul.as-list {
   box-shadow: none;
   border-radius: none;
-}
-
-li.as-result-item.active {
-  border: solid 1px $control-border-color;
-  color: $muted;
-  text-shadow: none;
 }

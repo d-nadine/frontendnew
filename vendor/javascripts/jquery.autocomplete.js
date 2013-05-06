@@ -375,7 +375,7 @@
                             }
 
                             if(opts.resultsHighlight && query.length > 0){
-                                this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<em>$1</em>");
+                                this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<strong>$1</strong>");
                             }
                             if(!opts.formatList){
                                 formatted = formatted.html(this_data[opts.selectedItemProp]);
