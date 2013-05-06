@@ -56,21 +56,22 @@
   }
 }
 
-.messages-view .hud + div, 
-.messages-view  .email-history.show-hud {
-  padding-top: 120px;
-}
-
 .messages-view .context {
-  display: table;
-  box-sizing: border-box;
-  width: 100%;
+  .context-container {
+    padding: 15px 0;
+    border: solid 1px $selected-item-border;
+    background-color: $bright;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
 
-  .deal-info, .task-info, .contact-info {
-    display: table-cell;
+  .task-info-container {
+    margin-left: 0;
   }
 
   .contact-info {
+    padding-left: 15px;
+
     .avatar {
       float: left;
       margin-right: 20px;
@@ -87,8 +88,18 @@
     }
   }
 
+  .deal-info {
+    table {
+      width: 100%;
+    }
+  }
+
   .task-info {
     text-align: right;
+
+    table {
+      width: 100%;
+    }
   }
 
   h2 {
@@ -99,9 +110,6 @@
     color: $dark;
   }
 
-  table {
-    width: 100%;
-  }
 }
 
 .messages-view .message-card {

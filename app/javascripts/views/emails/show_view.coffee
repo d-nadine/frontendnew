@@ -8,11 +8,8 @@ Radium.EmailsShowView = Radium.View.extend
       modelSelector = "[data-model='#{model.constructor}'][data-id='#{model.get('id')}']"
 
       emailCard = @$(modelSelector)
-      mainRow = $('.main-row')
+      mainRow = $('.container')
 
       topOfMainColumn = emailCard.offset().top - mainRow.offset().top
-
-      if @$('.hud').length != 0
-        topOfMainColumn = topOfMainColumn - @$('.hud').height()
 
       $.scrollTo topOfMainColumn

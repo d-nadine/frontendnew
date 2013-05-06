@@ -1,0 +1,21 @@
+.fixed-sidebar-layout {
+  .sidebar-panel {
+    padding-left: $sidebar-border-size;
+    width: $sidebar-width - $sidebar-border-size;
+    margin-left: $button-bar-width;
+    float: left;
+
+    position: fixed;
+    top: 47px;
+    bottom: 0;
+
+    background-color: $dark-background;
+    border-right: solid 1px darken($dark-background, 25);
+    // FIXME: why doesn't this work with the box shadow mixin?
+    -webkit-box-shadow: 3px 0px 5px -2px darken($dark-background, 15);
+  }
+
+  .container {
+     margin-left: $button-bar-width + $sidebar-border-size;
+  }
+}

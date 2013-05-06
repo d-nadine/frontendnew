@@ -1,61 +1,70 @@
-<div class="hud">
-  <div class="block context">
-    <div class="contact-info">
-      {{avatar contact style="medium" class="img-polaroid"}}
-      <p>
-        <span class="name">
-          {{#if contact.name}}
-            {{contact.name}}
-          {{else}}
-            <span class="muted">No Name</span>
-          {{/if}}
-        </span></br>
-        <span class="title">
-          {{#if contact.title}}
-            {{contact.title}}
-          {{else}}
-            <span class="muted">No Title</span>
-          {{/if}}
-        </span>
-      </p>
-    </div>
+<!-- columns must add up to 8 -->
+<div class="row context">
+  <div class="span8 context-container">
+    <div class="row">
+      <div class="span3 contact-info-container">
+        <div class="contact-info">
+          {{avatar contact style="medium" class="img-polaroid"}}
+          <p>
+            <span class="name">
+              {{#if contact.name}}
+                {{contact.name}}
+              {{else}}
+                <span class="muted">No Name</span>
+              {{/if}}
+            </span></br>
+            <span class="title">
+              {{#if contact.title}}
+                {{contact.title}}
+              {{else}}
+                <span class="muted">No Title</span>
+              {{/if}}
+            </span>
+          </p>
+        </div>
+      </div>
 
-    <div class="deal-info">
-      <h2 class="upcase">Current Deal</h2>
+      <div class="span2 deal-info-container">
+        <div class="deal-info">
+          <h2 class="upcase">Current Deal</h2>
 
-      <table>
-        <tbody>
-          {{#if activeDeal}}
-            <tr>
-              <td>
-                <strong>
-                  {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
-                </strong>
-              </td>
-              <td class="capitalize">{{activeDeal.status}}</td>
-              <td class="money">{{currency activeDeal.value}}</td>
-            </tr>
-          {{else}}
-            <tr colspan="3">
-              <td class="muted">No deals yet</td>
-            </tr>
-          {{/if}}
-        </tbody>
-      </table>
-    </div>
+          <table>
+            <tbody>
+              {{#if activeDeal}}
+                <tr>
+                  <td>
+                    <strong>
+                      {{#linkTo deal activeDeal}}{{activeDeal.name}}{{/linkTo}}
+                    </strong>
+                  </td>
+                  <td class="capitalize">{{activeDeal.status}}</td>
+                  <td class="money">{{currency activeDeal.value}}</td>
+                </tr>
+              {{else}}
+                <tr colspan="3">
+                  <td class="muted">No deals yet</td>
+                </tr>
+              {{/if}}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-    <div class="task-info">
-      <h2 class="upcase">Next Task</h2>
+      <div class="span3 task-info-container">
+        <div class="task-info">
+          <h2 class="upcase">Next Task</h2>
 
-      <table>
-        <tbody>
-          <tr colspan="3">
-            <td>
-              {{render "next_task" nextTask}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <table>
+            <tbody>
+              <tr colspan="3">
+                <td>
+                  {{render "next_task" nextTask}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

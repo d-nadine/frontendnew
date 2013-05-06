@@ -2,7 +2,6 @@
   {{partial 'messages/hud'}}
 {{/if}}
 
-<div {{bindAttr class="showHud :email-history"}}>
-  <div id="new-email-placeholder" class="hidden"></div>
+<div class="email-history">
   {{render 'emails/history' history}}
 </div>
