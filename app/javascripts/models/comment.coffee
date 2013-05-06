@@ -17,6 +17,7 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
         @get('activity')
   ).property('email', 'discussion', 'deal', 'meeting', 'todo', 'call', 'activity')
   activity: DS.belongsTo('Radium.Activity')
+  call: DS.belongsTo('Radium.Call')
   email: DS.belongsTo('Radium.Email')
   deal: DS.belongsTo('Radium.Deal')
   discussion: DS.belongsTo('Radium.Discussion')
