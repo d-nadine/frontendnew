@@ -65,7 +65,7 @@ Radium.ContactSidebarView = Radium.View.extend
               <span class="type muted">contact</span>
             </div>
             <div>
-              <i class="icon-edit"></i>
+              <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
             </div>
           </div>
         </div>
