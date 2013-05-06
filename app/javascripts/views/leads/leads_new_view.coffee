@@ -68,7 +68,30 @@ Radium.LeadsNewView = Ember.View.extend
     return "company" if Ember.isEmpty(@get('controller.companyName'))
   ).property('controller.name', 'controller.companyName', 'showModal')
 
-  tags: Radium.TagAutoComplete.extend()
+  tags: Radium.TagAutoComplete.extend
+    init: ->
+      @_super.apply this, arguments
+      Ember.addBeforeObserver this, 'controller.companyTags', null, 'sourceWillChange'
+
+    sourceWillChange: ->
+      return unless @get('controller.isNew')
+      return unless @get('controller.companyTags.length')
+
+      @get('source').removeObjects @get('source').filter (tag) =>
+        @get('source').mapProperty('name').contains (tag.get('name'))
+
+    companyDidChange: ( ->
+      return unless @get('controller.isNew')
+
+      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
+
+      return unless @get('controller.companyTags.length')
+
+      companyTags = @get('controller.companyTags').toArray().reject (tag) =>
+        @get('source').mapProperty('name').contains (tag.get('name'))
+
+      @get('source').addObjects(companyTags)
+    ).observes('controller.companyTags')
 
   companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin,
     classNameBindings: [':company-name']

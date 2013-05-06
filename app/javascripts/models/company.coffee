@@ -3,6 +3,8 @@ Radium.Company = Radium.Model.extend
   addresses: DS.hasMany('Radium.Address')
   activities: DS.hasMany('Radium.Activity')
 
+  tags: DS.hasMany('Radium.Tag')
+
   primaryContact: DS.belongsTo('Radium.Contact')
   primaryAddress: Radium.computed.primary 'addresses'
 

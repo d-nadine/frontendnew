@@ -8,3 +8,10 @@ Factory.define 'company', traits: 'timestamps',
       name: 'Office'
       isPrimary: true
   ]
+
+  tags: -> [
+    Factory.create 'tag',
+      name: Dictionaries.tags.random()
+  ]
+
+

@@ -42,7 +42,6 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     @set('current.zipcode', '')
 
   companyDidChange: ( ->
-    # return if !@get('controller.companyPrimaryAddress')
     return if @get('parentView.source.length') > 1
 
     if ((!@get('controller.company')) || (!@get('controller.companyPrimaryAddress')))
