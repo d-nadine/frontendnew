@@ -1,5 +1,5 @@
-.fixed-sidebar-layout {
-  .sidebar-panel {
+.fixed-two-column-layout {
+  .sidebar-view {
     padding-left: $sidebar-border-size;
     width: $sidebar-width - $sidebar-border-size;
     margin-left: $button-bar-width;
@@ -38,6 +38,18 @@
         border-left: none;
         z-index: 101;
       }
+    }
+  }
+}
+
+.drawer-open {
+  .fixed-two-column-layout {
+    .sidebar-panel {
+      left: $drawer-width + $sidebar-border-size;
+    }
+
+    .container {
+      margin-left: $drawer-width + $button-bar-width;
     }
   }
 }

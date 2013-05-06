@@ -1,8 +1,6 @@
 require 'lib/radium/user_picker'
 
-Radium.DealSidebarView = Radium.SidebarView.extend
-  classNames: ['sidebar-panel-bordered']
-
+Radium.DealSidebarView = Radium.View.extend
   userInlineEditor: Radium.InlineEditorView.extend
     activateOnClick: false
 

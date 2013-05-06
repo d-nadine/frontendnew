@@ -1,0 +1,14 @@
+.two-column-layout {
+  margin-left: $button-bar-width + $sidebar-border-size;
+
+  .sidebar {
+    @include shadowed;
+    padding: 10px;
+  }
+}
+
+.drawer-open {
+  .two-column-layout {
+    margin-left: $drawer-width + $button-bar-width + ($two-column-gutter/2);
+  }
+}

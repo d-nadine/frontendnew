@@ -1,21 +1,4 @@
-Radium.FixedSidebarView = Radium.View.extend Radium.ScrollableMixin,
-  classNames: ['sidebar-panel', 'sidebar-panel-fixed']
+require 'lib/radium/scrollable_mixin'
 
-  layout: Ember.Handlebars.compile """
-    <div class="scroller">
-      <div class="scrollbar">
-        <div class="track">
-          <div class="thumb">
-            <div class="end"></div>
-          </div>
-        </div>
-      </div>
-      <div class="viewport">
-        <div class="overview">
-          <div class="panel-content">
-            {{yield}}
-          </div>
-        </div>
-      </div>
-    </div>
-  """
+Radium.FixedSidebarView = Radium.View.extend Radium.ScrollableMixin,
+  classNames: ['sidebar-view']
