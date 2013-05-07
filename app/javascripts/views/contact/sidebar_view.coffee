@@ -1,5 +1,4 @@
 require 'lib/radium/combobox'
-require 'lib/radium/group_autocomplete'
 require 'lib/radium/text_combobox'
 require 'lib/radium/multiple_fields'
 require 'lib/radium/multiple_field'
@@ -8,6 +7,7 @@ require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
 require 'lib/radium/company_picker'
+require 'views/contact/contact_tag_autocomplete'
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
@@ -19,8 +19,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
         value: status.value
   ).property('controller.leadStatuses.[]')
 
-  groups: Radium.TagAutoComplete.extend
-    isEditableBinding: 'controller.isEditable'
+  tags: Radium.ContactTagAutocomplete.extend
+    onlyOnNew: false
 
   showExtraContactDetail: ->
     @$('.additional-detail').slideToggle('medium')

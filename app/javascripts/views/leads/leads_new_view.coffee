@@ -4,8 +4,8 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
-require 'lib/radium/group_autocomplete'
 require 'lib/radium/company_picker'
+require 'views/contact/contact_tag_autocomplete'
 
 Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   contacts: Ember.computed.alias 'controller.contacts'
@@ -52,28 +52,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     return "company" if Ember.isEmpty(@get('controller.companyName'))
   ).property('controller.name', 'controller.companyName', 'showModal')
 
-  tags: Radium.TagAutoComplete.extend
-    init: ->
-      @_super.apply this, arguments
-      Ember.addBeforeObserver this, 'controller.companyTags', null, 'sourceWillChange'
-
-    sourceWillChange: ->
-      return unless @get('controller.isNew')
-      return unless @get('controller.companyTags.length')
-
-      @get('source').removeObjects @get('source').filter (tag) =>
-        @get('source').mapProperty('name').contains (tag.get('name'))
-
-    companyDidChange: ( ->
-      return unless @get('controller.isNew')
-
-      return unless @get('controller.company.tags.length')
-
-      companyTags = @get('controller.company.tags').toArray().reject (tag) =>
-        @get('source').mapProperty('name').contains (tag.get('name'))
-
-      @get('source').addObjects(companyTags)
-    ).observes('controller.company')
+  tags: Radium.ContactTagAutocomplete.extend()
 
   companyPicker: Radium.CompanyPicker.extend Radium.ContactCompanyMixin,
     disabled: Ember.computed.not 'controller.isNew'
