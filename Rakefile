@@ -44,7 +44,7 @@ namespace :build do
 end
 
 desc "Build Ember and Ember Data from local repos"
-task :build => ["build:ember"]
+task :build => ["build:ember", "build:ember_data"]
 
 namespace :notes do
   files = proc { Dir['{app,test}/**/*.coffee'].select { |f| File.file? f }.join " " }
