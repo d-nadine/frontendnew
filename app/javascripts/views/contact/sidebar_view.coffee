@@ -7,6 +7,7 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
+require 'lib/radium/company_picker'
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
@@ -26,11 +27,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
   headerInlineEditor: Radium.HighlightInlineEditor.extend
-    companyPicker: Radium.TextCombobox.extend
-      classNameBindings: [':company-name']
-      sourceBinding: 'controller.companyNames'
-      valueBinding: 'controller.companyName'
-      placeholder: 'Company'
+    companyPicker: Radium.CompanyPicker.extend()
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}

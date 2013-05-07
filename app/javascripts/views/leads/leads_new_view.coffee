@@ -5,6 +5,7 @@ require 'lib/radium/address_multiple_field'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
 require 'lib/radium/group_autocomplete'
+require 'lib/radium/company_picker'
 
 Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   contacts: Ember.computed.alias 'controller.contacts'
@@ -66,23 +67,20 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     companyDidChange: ( ->
       return unless @get('controller.isNew')
 
-      return unless @get('controller.companyTags.length')
+      return unless @get('controller.company.tags.length')
 
-      companyTags = @get('controller.companyTags').toArray().reject (tag) =>
+      companyTags = @get('controller.company.tags').toArray().reject (tag) =>
         @get('source').mapProperty('name').contains (tag.get('name'))
 
       @get('source').addObjects(companyTags)
-    ).observes('controller.companyTags')
+    ).observes('controller.company')
 
-  companyPicker: Radium.TextCombobox.extend Radium.ContactCompanyMixin,
-    classNameBindings: [':company-name']
+  companyPicker: Radium.CompanyPicker.extend Radium.ContactCompanyMixin,
     disabled: Ember.computed.not 'controller.isNew'
-    sourceBinding: 'controller.companyNames'
-    valueBinding: 'controller.companyName'
-    placeholder: 'Company'
+
     blur: ->
       return unless @get('controller.isNew')
-      return if @get('value')?.length < 3
+      return if @get('controller.companyName')?.length < 3
       @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
 
   phoneNumbers: Radium.MultipleFields.extend

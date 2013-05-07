@@ -1,5 +1,6 @@
 Radium.AddressMultipleField = Radium.MultipleField.extend
   sourceBinding: 'parentView.source'
+  companyBinding: 'controller.company'
 
   template: Ember.Handlebars.compile """
     {{#with view.current}}
@@ -47,11 +48,11 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
   companyDidChange: ( ->
     return if @get('parentView.source.length') > 1
 
-    if ((!@get('controller.company')) || (!@get('controller.companyPrimaryAddress')))
+    if ((!@get('company')) || (!@get('company.primaryAddress')))
       @clearValue()
 
     current = @get('current')
-    companyAddress = @get('controller.companyPrimaryAddress')
+    companyAddress = @get('company.primaryAddress')
 
     return unless companyAddress
 
@@ -60,13 +61,13 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
     current.set('state', companyAddress.get('state'))
     current.set('zipcode', companyAddress.get('zipcode'))
     current.set('country', companyAddress.get('country'))
-  ).observes('controller.companyPrimaryAddress')
+  ).observes('company')
 
 Radium.AddressMultipleField.reopenClass
   getNewRecord: (label) ->
     isPrimary = @get('source.length') == 0
 
-    address = @get('controller.companyPrimaryAddress')
+    address = @get('company.primaryAddress')
 
     addressDefaults =
       if @get('source.length') ==  0 && address?.get('value')
