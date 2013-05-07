@@ -32,6 +32,12 @@
     font-style: italic;
   }
 
+  .icon-call,
+  .icon-mail{
+    position: relative;
+    top: 1px;
+  }
+
   .multiple-field{
     position: relative;
   }
@@ -101,6 +107,17 @@
 
   .company-website{
     margin-bottom: 10px;
+    input{
+      position: relative;
+      top: -1px;
+    }
+    .inline-editor-open{
+      .icon-cloud{
+        position: relative;
+        left: 1px;
+      }
+    }
+
     .inline-editor-closed{
       margin-bottom: 18px;
 

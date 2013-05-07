@@ -102,12 +102,12 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          {{input type="text" value=company.website class="field" placeholder="Add company website"}}
+          <i class="icon-cloud"></i>{{input type="text" value=company.website class="field" placeholder="Add company website"}}
         </div>
       {{else}}
         <div class="not-editing">
           {{#if company.website}}
-            <a href="{{unbound company.website}}" target="_blank">{{company.website}}</a>
+            <a href="{{unbound company.website}}" target="_blank"><i class="icon-cloud"></i>{{company.website}}</a>
           {{else}}
             <span class="empty">Add company website</span>
           {{/if}}
@@ -134,9 +134,9 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
         </div>
       {{else}}
         <div class="control-group">
-          <label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+          </id><label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           {{#if primaryEmail.value}}
-            <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
+            <a href="mailto:{{unbound primaryEmail.value}}"><i class="icon-mail"></i>{{primaryEmail.value}} </a>
           {{else}}
             <span class="empty">Add email here</span>
           {{/if}}
@@ -164,7 +164,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
           <div class="phone-section">
           <div>
             {{#if primaryPhone.value}}
-              <a href="tel:{{unbound primaryPhone.value}}">{{primaryPhone.value}}</a>
+              <a href="tel:{{unbound primaryPhone.value}}"><i class="icon-call"></i>{{primaryPhone.value}}</a>
             {{else}}
               <span class="empty">Add phone number here</span>
             {{/if}}
@@ -245,6 +245,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
           {{#if primaryAddress}}
             {{#with primaryAddress}}
               <div class="readonly">
+                <i class="icon-office pull-right"></i>
                 <div>{{street}}</div>
                 <div>{{view.primaryAddress}}</div>
                 <div>{{country}}</div>
