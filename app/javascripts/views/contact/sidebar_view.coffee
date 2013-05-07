@@ -227,6 +227,12 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       @get('controller.addresses').createRecord(@get('company.primaryAddress').serialize())
     ).observes('company')
 
+    primaryAddress: ( ->
+      address = @get('controller.primaryAddress')
+
+      [address.get('state'), address.get('city'), address.get('zipcode')].join(', ')
+    ).property('controller.primaryAddress')
+
     template: Ember.Handlebars.compile """
       <div>
         {{#if view.isEditing}}
@@ -240,9 +246,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
             {{#with primaryAddress}}
               <div class="readonly">
                 <div>{{street}}</div>
-                <div>{{city}}</div>
-                <div>{{state}}</div>
-                <div>{{zipcode}}</div>
+                <div>{{view.primaryAddress}}</div>
                 <div>{{country}}</div>
                 <div class="location">
                   <a href="#"><i class="icon-location"></i></a>
