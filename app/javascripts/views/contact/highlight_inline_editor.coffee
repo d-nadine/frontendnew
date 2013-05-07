@@ -8,7 +8,7 @@ Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
 
     tagName = evt.target.tagName.toLowerCase()
 
-    if ['input', 'button', 'span',  'i', 'a'].indexOf(tagName) == -1
+    if ['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1
       @_super.apply this, arguments
       return
 
