@@ -27,6 +27,11 @@
     }
   }
 
+  span.empty{
+    color: $muted;
+    font-style: italic;
+  }
+
   .multiple-field{
     position: relative;
   }
@@ -70,6 +75,7 @@
     }
   }
 
+
   .additional-detail{
     display: none;
   }
@@ -89,7 +95,14 @@
     > div{
       @include display-box;
       @include box-pack(justify);
-      position: relative;
+      position: relative; 
+    }
+  }
+
+  .company-website{
+    margin-bottom: 10px;
+    .inline-editor-closed{
+      margin-bottom: 18px;
 
       .not-editing{
         height: 22px;
@@ -101,19 +114,11 @@
           top: 1px;
         }
         span{
-          font-style: italic;
           position: relative;
           top: 1px;
           left: 1px;
         }
       }
-    }
-  }
-
-  .company-website{
-    margin-bottom: 10px;
-    .inline-editor-closed{
-      margin-bottom: 18px;
     }
   }
 

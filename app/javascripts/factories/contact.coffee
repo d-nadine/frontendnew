@@ -12,22 +12,22 @@ Factory.define 'contact', traits: ['timestamps'],
 
   user: -> Factory.create 'user'
 
-  phoneNumbers: -> [
-    Factory.create 'phoneNumber',
-      isPrimary: true
-    Factory.create 'phoneNumber',
-      name: "Work"
-      value: "+934728783"
-    Factory.create 'phoneNumber',
-      name: "Home"
-      value: "+35832478388"
-  ]
+  # phoneNumbers: -> [
+  #   Factory.create 'phoneNumber',
+  #     isPrimary: true
+  #   Factory.create 'phoneNumber',
+  #     name: "Work"
+  #     value: "+934728783"
+  #   Factory.create 'phoneNumber',
+  #     name: "Home"
+  #     value: "+35832478388"
+  # ]
 
-  emailAddresses: ->[
-    Factory.create 'emailAddress',
-      value: "#{@name.replace(/\s/, '.')}@#{@company.get('name')}.com".toLowerCase()
-      isPrimary: true
-  ]
+  # emailAddresses: ->[
+  #   Factory.create 'emailAddress',
+  #     value: "#{@name.replace(/\s/, '.')}@#{@company.get('name')}.com".toLowerCase()
+  #     isPrimary: true
+  # ]
 
   tags: -> [
     Factory.create 'tag',

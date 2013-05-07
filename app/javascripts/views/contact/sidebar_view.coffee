@@ -105,14 +105,14 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          {{input type="text" value=company.website class="field" placeholder="Company Website"}}
+          {{input type="text" value=company.website class="field" placeholder="Add company website"}}
         </div>
       {{else}}
         <div class="not-editing">
           {{#if company.website}}
             <a href="{{unbound company.website}}" target="_blank">{{company.website}}</a>
           {{else}}
-            <span>Company Website</span>
+            <span class="empty">Add company website</span>
           {{/if}}
         </div>
         <div>
@@ -141,7 +141,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
           {{#if primaryEmail.value}}
             <a href="mailto:{{unbound primaryEmail.value}}">{{primaryEmail.value}}</a>
           {{else}}
-            <span>Primary Email</span>
+            <span class="empty">Add email here</span>
           {{/if}}
         </div>
       {{/if}}
@@ -169,7 +169,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
             {{#if primaryPhone.value}}
               <a href="tel:{{unbound primaryPhone.value}}">{{primaryPhone.value}}</a>
             {{else}}
-              <span>Primary phone number</span>
+              <span class="empty">Add phone number here</span>
             {{/if}}
           </div>
           {{#if primaryPhone.value}}

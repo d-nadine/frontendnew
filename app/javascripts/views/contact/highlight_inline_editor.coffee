@@ -2,6 +2,10 @@ Radium.HighlightInlineEditor = Radium.InlineEditorView.extend
   isValid: true
 
   click: (evt) ->
+    unless @get('isEditing')
+      @_super.apply this, arguments
+      return
+
     tagName = evt.target.tagName.toLowerCase()
 
     if ['input', 'button', 'span',  'i', 'a'].indexOf(tagName) == -1

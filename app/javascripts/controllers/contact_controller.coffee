@@ -9,10 +9,6 @@ Radium.ContactController = Radium.ObjectController.extend
     @get('companies').mapProperty('name')
   ).property('companies.[]')
 
-  deletionNotConfirmed: (->
-    @get('deletionToken') isnt @get('name')
-  ).property('deletionToken')
-
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->
       value = if item.get('status') == 'closed' then item.get('value') else 0

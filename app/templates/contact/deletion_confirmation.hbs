@@ -5,14 +5,9 @@
   </div>
 
   <div class="modal-body">
-    <p>This action cannot be undone! Deleting <strong>{{name}}</strong>
-    will be permanent.</p>
+    <p>This action cannot be undone! Deleting <strong>{{name}}</strong> will be permanent.</p>
 
-    <p>Type "<strong>{{name}}</strong>" as confirmation.</p>
-
-    {{view Ember.TextField class="field input-block-level" valueBinding="deletionToken" placeholder="Type the name to confirm..."}}
-
-    <button class="btn btn-large btn-danger btn-block" {{bindAttr disabled="deletionNotConfirmed"}} {{action deleteRecord}}>I understand the consequences, delete this deal</button>
+    <button class="btn btn-large btn-danger btn-block" {{action deleteRecord}}>I understand the consequences, delete this contact.</button>
   </div>
 
   <div class="modal-footer">
