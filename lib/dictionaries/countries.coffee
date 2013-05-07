@@ -1,7 +1,8 @@
 countries = [
+  'USA'
   'Canada'
   'UK'
-  'USA'
+  'Germany'
 ]
 
 Dictionaries.countries = new Dictionary(countries)

@@ -1,6 +1,7 @@
 Radium.AddressMultipleField = Radium.MultipleField.extend
   sourceBinding: 'parentView.source'
   companyBinding: 'controller.company'
+  countries: Ember.computed.alias 'controller.controllers.countries'
 
   template: Ember.Handlebars.compile """
     {{#with view.current}}
@@ -14,6 +15,9 @@ Radium.AddressMultipleField = Radium.MultipleField.extend
         <div class="control-group broken">
           {{view Ember.TextField valueBinding="state" classNames="field state" placeholder="State" readonlyBinding="view.readonly" }}
           {{view Ember.TextField valueBinding="zipcode" classNames="field zip" placeholder="Zip code" readonlyBinding="view.readonly"}}
+        </div>
+        <div class="control-group whole">
+          {{view Ember.Select contentBinding="view.countries" valueBinding="country"}}
         </div>
       </div>
       <div>

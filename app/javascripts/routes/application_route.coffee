@@ -80,6 +80,9 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
 
+    # FIXME: Where are we getting the county list from
+    @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
+
     @controllerFor('clock').set 'model', Ember.DateTime.create()
 
     settings = Radium.Settings.find(1)

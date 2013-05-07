@@ -243,6 +243,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
                 <div>{{city}}</div>
                 <div>{{state}}</div>
                 <div>{{zipcode}}</div>
+                <div>{{country}}</div>
                 <div class="location">
                   <a href="#"><i class="icon-location"></i></a>
                 </div>
