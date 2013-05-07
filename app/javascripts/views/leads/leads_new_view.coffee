@@ -104,7 +104,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
-    valueBinding: 'controller.model.assignedTo'
 
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']

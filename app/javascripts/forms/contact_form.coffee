@@ -4,7 +4,7 @@ Radium.ContactForm = Radium.Form.extend
   data: ( ->
     name: @get('name')
     companyName: @get('companyName')
-    assignedTo: @get('assignedTo')
+    user: @get('user')
     notes: @get('notes')
     source: @get('source')
     status: @get('status')
@@ -17,9 +17,9 @@ Radium.ContactForm = Radium.Form.extend
   isValid: ( ->
     return if Ember.isEmpty(@get('name')) && Ember.isEmpty(@get('companyName'))
     return if Ember.isEmpty(@get('source'))
-    return unless @get('assignedTo')
+    return unless @get('user')
     true
-  ).property('name', 'companyName', 'assignedTo', 'source')
+  ).property('name', 'companyName', 'user', 'source')
 
   create:  ->
     contact = Radium.Contact.createRecord @get('data')
