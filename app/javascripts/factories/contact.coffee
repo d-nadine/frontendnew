@@ -34,10 +34,10 @@ Factory.define 'contact', traits: ['timestamps'],
       name: Dictionaries.tags.random()
   ]
 
-  # addresses: -> [
-  #   Factory.create 'address',
-  #     name: 'Office'
-  #     isPrimary: true
-  # ]
+  addresses: -> [
+    Factory.create 'address',
+      name: 'Office'
+      isPrimary: true
+  ]
 
   about: -> "Bio of #{@name}"

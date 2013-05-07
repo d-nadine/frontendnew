@@ -13,12 +13,6 @@ Radium.Address = Radium.Model.extend
     !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode'))
   ).property('isNew', 'street', 'state', 'city', 'country', 'zipcode')
 
-  value: ( ->
-    return if @get('isNew')
-
-    !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode'))
-  ).property('isNew', 'street', 'state', 'city', 'country', 'zipcode')
-
   toString:  ->
     parts = [
       @get('street')

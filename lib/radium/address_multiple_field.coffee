@@ -71,13 +71,7 @@ Radium.AddressMultipleField.reopenClass
 
     addressDefaults =
       if @get('source.length') ==  0 && address?.get('value')
-        street: address.get('street')
-        city: address.get('city')
-        state: address.get('state')
-        zipcode: address.get('zipcode')
-        country: address.get('country')
-        isPrimary: true
-        name: label
+        street: address.serialize()
       else
         street: ''
         city: ''

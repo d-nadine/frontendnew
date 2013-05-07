@@ -210,12 +210,23 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     """
 
   addressInlineEditor: Radium.HighlightInlineEditor.extend
+    companyBinding: 'controller.company'
     addresses: Radium.MultipleFields.extend
       labels: ['Office','Home']
       leader: 'Address'
       sourceBinding: 'controller.addresses'
       viewType: Radium.AddressMultipleField
       type: Radium.Address
+
+    companyDidChange: ( ->
+      return if @get('company.addresses.length') > 1
+      return if !@get('company') || !@get('company.primaryAddress')
+
+      @get('controller.addresses').clear()
+
+      @get('controller.addresses').createRecord(@get('company.primaryAddress').serialize())
+    ).observes('company')
+
     template: Ember.Handlebars.compile """
       <div>
         {{#if view.isEditing}}
