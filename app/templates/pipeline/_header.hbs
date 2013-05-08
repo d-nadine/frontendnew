@@ -15,7 +15,7 @@
       <span class="muted">Filter by date</span>
       <div class="pull-right dropdown-toggle" data-toggle="dropdown">
         <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-arrow-down"></i>
         </button>
       </div>
     </div>
@@ -24,9 +24,9 @@
       <div class="pull-right dropdown-toggle" data-toggle="dropdown">
         <button class="btn">
           {{#if hasCheckedContent}}
-            <i class="icon-chevron-down"></i>
+            <i class="icon-arrow-down"></i>
           {{else}}
-            <i class="icon-chevron-up"></i>
+            <i class="icon-arrow-up"></i>
           {{/if}}
         </button>
       </div>
@@ -56,10 +56,17 @@
       {{/if}}
     </div>
     <div class="add-lead">
-      <a href="#" class="btn btn-medium btn-info">
-        <i class="icon-plus icon-white"></i>
-        {{#if isLeads}}Lead{{else}}Deal{{/if}}
-      </a>
+      {{#if isLeads}}
+        {{#linkTo leads.new class="btn btn-medium btn-info"}}
+          <i class="icon-plus icon-white"></i>
+          Lead
+        {{/linkTo}}
+      {{else}}
+        {{#linkTo deals.new class="btn btn-medium btn-info"}}
+          <i class="icon-plus icon-white"></i>
+          Deal
+        {{/linkTo}}
+      {{/if}}
     </div>
   </div>
 </div>
@@ -70,12 +77,10 @@
     <form>
       <div class="assign">
         {{view view.userPicker}}
-        <div class="control-box todo-label">
-          <div class="pull-left">
-            <label></label>
-          </div>
+        <div class="assign-todo">
+          <i class="icon-todo"></i>
+          {{view view.assignTodoField viewName="assignTodo"}}
         </div>
-        {{view view.assignTodoField viewName="assignTodo"}}
         <div class="reassign pull-right">
           <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action reassign}}>
             <i class="icon-plus icon-white"></i>
@@ -89,13 +94,11 @@
     <form>
       <div class="change-status">
         {{view view.statusPicker}}
-        <div class="control-box todo-label">
-          <div class="pull-left">
-            <label></label>
-          </div>
+        <div class="assign-todo">
+          <i class="icon-todo"></i>
+          {{view view.changeStatusTodo viewName="statusTodo"}}
         </div>
-        {{view view.changeStatusTodo viewName="statusTodo"}}
-        <div class="reassign pull-right">
+        <div>
           <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action changeStatus}}>
             OK
           </a>
@@ -109,11 +112,11 @@
   {{/if}}
 
   {{#if showTodoForm}}
-    {{control "forms/todo" todoForm}}
+    {{render "forms/todo" todoForm}}
   {{/if}}
 
   {{#if showCallForm}}
-    {{control "forms/call" callForm}}
+    {{render "forms/call" callForm}}
   {{/if}}
 </div>
 {{/if}}

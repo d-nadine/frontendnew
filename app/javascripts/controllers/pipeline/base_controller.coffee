@@ -2,8 +2,11 @@ require 'forms/change_status'
 require 'forms/reassign_form'
 require 'controllers/pipeline/pipeline_item_controller'
 
-Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, Radium.CheckableMixin,
-  needs: ['users']
+Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMixin, 
+  Radium.CheckableMixin,
+  Ember.Evented,
+
+  needs: ['users', 'dealStatuses']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   reassignTodo: null

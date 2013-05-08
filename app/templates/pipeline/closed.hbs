@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Pipeline: Closed Deals</h1>
-</div>
+{{partial 'pipeline/header'}}
 
 <table class="table table-list">
   <colgroup>
@@ -14,18 +12,11 @@
   </colgroup>
   <thead>
     <tr>
-      <th colspan="8">Total: {{currency total}}</th>
-    </tr>
-    <tr>
-      <th>
-        {{view Ember.Checkbox checkedBinding="allChecked"}}
-      </th>
       <th>&nbsp;</th>
       <th>Deal</th>
       <th>Assigned To</th>
       <th>Pay By</th>
       <th>Next Task</th>
-      <th>Status</th>
       <th class="text-center">Value</th>
     </tr>
   </thead>
@@ -58,7 +49,6 @@
             <i class="icon-warning"></i>
           {{/if}}
         </td>
-        <td><span class="fixme upcase">unimplemented</span></td>
         <td class="text-right">{{currency value}}</td>
       </tr>
     {{else}}

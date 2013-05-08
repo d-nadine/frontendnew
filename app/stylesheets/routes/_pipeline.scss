@@ -1,4 +1,7 @@
 .pipeline-view {
+  .table-list{
+    margin-top: 15px;
+  }
   .table-list tbody td:first-child {
     position: relative;
 
@@ -41,8 +44,113 @@
 }
 
 #pipeline-results {
-  .todo-form{
-    width: 72%;
+  padding: 0 5px 0 5px;
+
+  .upcase{
+    margin-bottom: 20px;
+  }
+
+  .action-forms{
+    padding-bottom: 0;
+  }
+
+  table{
+    margin-top: 20px;
+  }
+
+  form.just-added {
+    label {
+      color: $green;
+    }
+
+    background-color: darken($dark-background, 50);
+    .control-box,
+    textarea,
+    input[type=text],
+    select,
+    .control-box,
+    .btn-group,
+    .btn,
+    .mentions,
+    .mentions a {
+      background-color: darken($dark-background, 50);
+      color: $bright;
+    }
+  }
+
+  .bulk-leader{
+    padding: 4px 0 10px 4px;
+  }
+
+  .assign, .change-status{
+    position: relative;
+
+    .btn-primary, .btn-success{
+      border-radius: 0;
+    }
+
+    > div{
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    label {
+      position: relative;
+      top: 5px;
+      width: 30px;
+      height: 20px;
+      color: $muted;
+      cursor: default;
+    }
+  }
+
+  .change-status,
+  .assign{
+    .combobox,
+    .assign-todo{
+      position: relative;
+      border: 1px solid $dark-background;
+    }
+
+    .assign-todo{
+      width: 54%;
+      padding-bottom: 2px;
+      background-color: $bright;
+      .todo{
+        margin-left: 20px;
+      }
+
+      .icon-todo{
+        position: absolute;
+        top: 7px;
+      }
+    }
+
+    .assign-todo,
+    .reassign{
+      .btn{
+        padding-right: 25px;
+      }
+    }
+
+    .success {
+      position: relative;
+      top: 4px;
+      right: 5px;
+      color: $bright;
+    }
+  }
+
+  .change-status{
+    .mention-field-view{
+      width: 67%;
+    }
+    .success {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+      color: $bright;
+    }
   }
 }
 
@@ -67,3 +175,47 @@
 
 }
 
+#header{
+  margin: 0;
+  padding-bottom: 15px;
+
+  .btn{
+    outline: none;
+  }
+  #title, #controls{
+    display: inline-block;
+  }
+
+  #controls{
+    position: relative;
+    float: right;
+    margin-top: 20px;
+
+    .date-filter, .actions, .add-lead{
+      padding: 0 10px 0 15px;
+    }
+    .date-filter, .actions{
+      vertical-align: middle;
+      span{
+        position: relative;
+        top: 4px;
+      }
+    }
+    .date-filter{
+      width: 250px;
+    }
+    .actions{
+      padding: 0 10px 0 20px;
+      width: 150px;
+    }
+    .add-lead{
+      display: inline-block;
+      margin-left: -10px;
+      a.btn{
+        padding-right: 27px;
+        padding-left: 20px;
+        border-radius: 0;
+      }
+    }
+  }
+}
