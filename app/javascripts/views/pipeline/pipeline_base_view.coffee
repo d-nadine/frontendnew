@@ -42,11 +42,13 @@ Radium.PipelineViewBase = Ember.View.extend
         else
           throw new Error("Unknown #{form} for bulkLeader")
 
+    resource = if @get('controller.checkedContent.firstObject').constructor == Radium.Deal then 'deal' else 'lead'
+
     result =
       if length == 1
-        "#{prefix} this lead"
+        "#{prefix} this #{resource}"
       else
-        "#{prefix} these selected #{@get('controller.checkedContent.length')} leads"
+        "#{prefix} these selected #{@get('controller.checkedContent.length')} #{resource}s"
 
     return result unless form == "assign"
 
