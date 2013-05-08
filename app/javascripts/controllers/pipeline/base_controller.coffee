@@ -14,13 +14,13 @@ Radium.PipelineBaseController = Radium.ArrayController.extend Radium.ShowMoreMix
   perPage: 7
   activeForm: null
 
-  showTodoForm: Radium.computed.equal('activeForm', 'todo')
-  showCallForm: Radium.computed.equal('activeForm', 'call')
-  showAssignForm: Radium.computed.equal('activeForm', 'assign')
-  showChangeStatusForm: Radium.computed.equal('activeForm', 'status')
-  showEmailForm: Radium.computed.equal('activeForm', 'email')
+  showTodoForm: Ember.computed.equal('activeForm', 'todo')
+  showCallForm: Ember.computed.equal('activeForm', 'call')
+  showAssignForm: Ember.computed.equal('activeForm', 'assign')
+  showChangeStatusForm: Ember.computed.equal('activeForm', 'status')
+  showEmailForm: Ember.computed.equal('activeForm', 'email')
 
-  hasActiveForm: Radium.computed.isPresent('activeForm')
+  hasActiveForm: Ember.computed.notEmpty('activeForm')
 
   init: ->
     @_super.apply this, arguments
