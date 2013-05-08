@@ -200,6 +200,10 @@
     .date-filter, .actions, .add-lead{
       padding: 0 10px 0 15px;
     }
+
+    .date-filter,{
+    }
+
     .date-filter, .actions{
       vertical-align: middle;
       span{
@@ -207,13 +211,19 @@
         top: 4px;
       }
     }
+
     .date-filter{
       width: 250px;
+      padding-top: 1px;
+      padding-bottom: 1px;
     }
+
     .actions{
-      padding: 0 10px 0 20px;
+      padding: 1px 10px 1px 20px;
+
       width: 150px;
     }
+
     .add-lead{
       display: inline-block;
       margin-left: -10px;
