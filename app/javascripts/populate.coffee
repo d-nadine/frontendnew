@@ -53,6 +53,17 @@ class Populator
     deal = Factory.create 'deal',
       contact: contactDictionary.random()
       user: userDictionary.random()
+      status: "Opportunity"
+
+    Factory.create 'deal',
+      contact: contactDictionary.random()
+      user: userDictionary.random()
+      status: "Waiting Signature"
+
+    Factory.create 'deal',
+      contact: contactDictionary.random()
+      user: userDictionary.random()
+      status: "Sent Proposal"
 
     dealDictionary = new Dictionary([deal])
 

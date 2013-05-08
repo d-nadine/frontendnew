@@ -16,7 +16,6 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
     @get('settings.negotiatingStatuses')
   ).property('settings.model', 'settings.negotiatingStatuses')
 
-  # FIXME: replace with FilterableArray
   negotiatingDeals: (->
     statuses = @get 'negotiatingStatuses'
 
