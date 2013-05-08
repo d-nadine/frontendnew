@@ -4,7 +4,7 @@ Radium.ReassignForm = Radium.Form.extend
   data: ( ->
     user: @get('assignToUser')
     finishBy: @get('finishBy')
-    description: @get('reassignTodo')
+    description: @get('todo')
   ).property().volatile()
 
   isValid: ( ->
@@ -13,13 +13,13 @@ Radium.ReassignForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
-    @set('reassignTodo', null)
+    @set('todo', null)
 
   commit: ->
     @get('selectedContent').forEach (item) =>
       item.set('user', @get('assignToUser'))
 
-      unless Ember.isEmpty @get('reassignTodo')
+      unless Ember.isEmpty @get('todo')
         todo = Radium.Todo.createRecord @get('data')
         todo.set 'reference', item
 

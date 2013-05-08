@@ -15,6 +15,7 @@ Radium.ChangeStatusForm = Radium.Form.extend
   reset: ->
     @_super.apply this, arguments
     @set('todo', null)
+    @get('deals').setEach 'isChecked', false
 
   commit: ->
     @get('deals').forEach (item) =>

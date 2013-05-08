@@ -25,10 +25,14 @@ Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
 
   changeStatus: ->
     @set 'changeStatusForm.todo', @get('statusTodo')
-    @submit @get('changeStatusForm')
+    @get('changeStatusForm').commit()
+    @set('statusTodo', '')
+    @trigger 'formReset'
 
   reassign: ->
-    @submit @get('reassignForm')
+    @set 'reassignForm.todo', @get('reassignTodo')
+    @get('reassignForm').commit()
+    @trigger 'formReset'
 
   submit: (form) ->
     return unless form.get('isValid')
@@ -63,7 +67,7 @@ Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
   reassignFormDefaults: ( ->
     assignToUser: @get('assignToUser')
     selectedContent: @get('checkedContent')
-    reassignTodo: @get('reassignTodo')
+    todo: @get('reassignTodo')
     finishBy: @get('tomorrow')
   ).property('assignToUser', 'checkedContent', 'reassignTodo', 'tomorrow')
 
