@@ -95,10 +95,8 @@ Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
   ).property('model.[]', 'tomorrow')
 
   deleteAll: ->
-    checkedContent = @get('checkedContent').toArray()
-
-    for i in [checkedContent.length-1..0] by -1
-      checkedContent[i].deleteRecord()
+    @get('checkedContent').forEach (record) ->
+      record.deleteRecord()
 
     @get('store').commit()
 

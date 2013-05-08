@@ -42,7 +42,6 @@ Radium.MessagesRoute = Radium.Route.extend
           item.deleteRecord()
           @get('store').commit()
 
-
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
     duration = 600
