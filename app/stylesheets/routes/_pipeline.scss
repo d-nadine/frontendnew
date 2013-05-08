@@ -142,9 +142,14 @@
   }
 
   .change-status{
+    #change-status-action{
+      margin-top: 1px;
+    }
+
     .mention-field-view{
       width: 67%;
     }
+
     .success {
       position: absolute;
       right: 10px;
