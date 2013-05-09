@@ -136,7 +136,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
         <div class="control-group">
           </id><label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           {{#if primaryEmail.value}}
-            <a href="mailto:{{unbound primaryEmail.value}}"><i class="icon-mail"></i>{{primaryEmail.value}} </a>
+            {{#linkTo emails.mailTo this}}<i class="icon-mail"></i>{{primaryEmail.value}}{{/linkTo}}
           {{else}}
             <span class="empty">Add email here</span>
           {{/if}}

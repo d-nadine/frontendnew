@@ -13,4 +13,6 @@ Radium.EmailsNewController = Ember.Controller.extend Radium.CurrentUserMixin,
     to: []
     cc: []
     bcc: []
+    showAddresses: false
+    showSubject: false
   ).property('currentUser')

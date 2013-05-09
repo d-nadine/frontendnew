@@ -15,6 +15,16 @@ Radium.EmailForm = Radium.Form.extend
       bcc: @get('bcc').mapProperty 'email'
   ).property().volatile()
 
+  reset: ->
+    @_super.apply this, arguments
+    @set 'subject', '' 
+    @set 'message', '' 
+    @get('to').clear()
+    @get('cc').clear()
+    @get('bcc').clear()
+    @set('showAddresses', false)
+    @set('showSubject', false)
+
   isValid: ( ->
     @get('to.length') && (@get('subject') || @get('message.length'))
   ).property('to.[]', 'subject', 'message')

@@ -11,6 +11,7 @@ Radium.Router.map ->
     @resource 'emails', ->
       @route 'show', path: '/:email_id'
       @route 'new'
+      @route 'mailTo', path: 'mailto/:recipient_type/:recipient_id'
       # FIXME: this should be a routless state
       # The path is only here so the email can be 
       # passed with transitionTo
