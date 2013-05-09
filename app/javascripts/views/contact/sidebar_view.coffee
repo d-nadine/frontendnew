@@ -26,7 +26,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  headerInlineEditor: Radium.HighlightInlineEditor.extend
+  headerInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     companyPicker: Radium.CompanyPicker.extend()
 
     template: Ember.Handlebars.compile """
@@ -75,7 +76,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  contactStatusInlineEditor: Radium.HighlightInlineEditor.extend
+  contactStatusInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     statusesBinding: 'parentView.statuses'
     statusDescriptionBinding: 'parentView.statusDescription'
     statusSelect: Ember.Select.extend
@@ -98,7 +100,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  contactInlineEditor: Radium.HighlightInlineEditor.extend
+  contactInlineEditor: Radium.InlineEditorView.extend
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
@@ -118,7 +120,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  emailAddressInlineEditor: Radium.HighlightInlineEditor.extend
+  emailAddressInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     emailAddresses: Radium.MultipleFields.extend
       labels: ['Work','Home']
       inputType: 'email'
@@ -144,7 +147,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  phoneInlineEditor: Radium.HighlightInlineEditor.extend
+  phoneInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     phoneNumbers: Radium.MultipleFields.extend
       labels: ['Mobile','Work','Home']
       leader: 'Phone'
@@ -181,7 +185,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  aboutInlineEditor: Radium.HighlightInlineEditor.extend
+  aboutInlineEditor: Radium.InlineEditorView.extend
     textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
        click: (event) ->
         event.stopPropagation()
@@ -209,7 +213,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       </div>
     """
 
-  addressInlineEditor: Radium.HighlightInlineEditor.extend
+  addressInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     companyBinding: 'controller.company'
     addresses: Radium.MultipleFields.extend
       labels: ['Office','Home']
@@ -259,7 +264,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       </div>
     """
 
-  assignedToInlineEditor: Radium.HighlightInlineEditor.extend
+  assignedToInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     userPicker: Radium.UserPicker.extend
       isSubmitted: true
     template: Ember.Handlebars.compile """

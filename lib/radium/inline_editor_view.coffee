@@ -53,14 +53,21 @@ Radium.InlineEditorView = Ember.View.extend
     Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
 
   highlightSelection: ->
-    @$('input[type=text],textarea').filter(':first').select()
-
+    @$('input[type=text],textarea').filter(':first').focus()
+    @$('input[type=text]').filter(':first').select()
 
   isValid: (->
     value = @get 'value'
     return unless value
     true
   ).property('value')
+
+  keyDown: (evt) ->
+    return unless evt.target.tagName.toLowerCase() == 'input'
+
+    return if [13, 9].indexOf(evt.keyCode) == -1
+
+    @toggleEditor()
 
   textField: Ember.TextField.extend
     isEditing: Ember.computed.alias('parentView.isEditing')
