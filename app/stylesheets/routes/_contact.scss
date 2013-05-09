@@ -156,26 +156,8 @@
   .phone,
   .company-website{
     .icon-edit{
-      opacity: 1;
       position: relative;
       top: 5px;
-    }
-  }
-
-  .about,
-  .email,
-  .inline-editor{
-    .icon-edit{
-      opacity: 0;
-    }
-
-    &:hover{
-      .icon-edit{
-        opacity: 0.3;
-        &:hover{
-          opacity: 1;
-        }
-      }
     }
   }
 

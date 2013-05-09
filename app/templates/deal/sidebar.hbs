@@ -1,128 +1,134 @@
-<div class="page-header">
-  <h1>{{name}}</h1>
-</div>
-
-<div class="meta">
-  {{avatar contact size=medium class="img-polaroid"}}
-
-  <p>
-    <span class="name">{{contact.name}}</span></br></br>
-    <span class="title muted">{{contact.title}}</span>
-  </p>
-</div>
-
-<div class="forecast">
-  <hr />
-  <h2>Forecast</h2>
-  {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
-  <div class="checklist-plus">
-    <a href="#checklistModal" class="btn btn-success" data-toggle="modal">
-      <i class="icon-plus"></i>
-    </a>
-  </div>
-  <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
-  <hr />
-</div>
-<div id="checklistModal" class="modal fade">
-  <div class="modal-header">
-    <button type="button"  {{action rollback bubbles="false"}} data-dismiss="modal" class="close">×</button>
-    <h2>Checklist</h2>
-  </div>
-  <div class="modal-body">
-    <form class="form">
-      {{view Radium.ChecklistView}}
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a href="#"  {{action rollback bubbles="false"}} class="btn" data-dismiss="modal">Cancel</a>
-    <a href="#" {{action commit bubbles="false"}} data-dismiss="modal" class="btn btn-primary">Done</a>
-  </div>
-</div>
-{{#view Radium.InlineEditorView valueBinding=description}}
-  <h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-  {{#if view.isEditing}}
-    {{view view.textArea valueBinding=view.value classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
-  {{else}}
-    <p class="inline-editor-text">
-      {{view.value}}
-    </p>
-  {{/if}}
-{{/view}}
-
-<hr />
-
-{{#view Radium.InlineEditorView valueBinding=value class="amount"}}
-  <h2>Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-  {{#if view.isEditing}}
-    <div {{bindAttr class="view.isValid:success:error :control-group"}}>
-      <div class="input-prepend">
-        <span class="add-on">$</span>
-        {{view view.textField valueBinding=view.value class="span2" type="number" min="0"}}
-      </div>
-    </div>
-  {{else}}
-    <span class="money inline-editor-text">
-      {{currency view.value}}
-    </span>
-  {{/if}}
-{{/view}}
-
-<hr />
-
-<h2>Status</h2>
-
-{{#unless isPublic}}
-  <p class="muted">Publish this deal to change its status</p>
-{{/unless}}
-
-{{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
-
-
-<hr />
-
-{{#view view.userInlineEditor valueBinding=user}}
-  <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-  <div class="assigned-to">
-    {{#with view.value}}
+<form class="form">
+  <div class="page-header">
+    {{#view Radium.InlineEditorView valueBinding=name}}
       {{#if view.isEditing}}
-        {{view view.userPicker class="field"}}
+        {{input value=name}}
       {{else}}
-        {{#linkTo user this}}
-          {{avatar this class="img-polaroid"}}
-        {{/linkTo}}
-
-        <p>
-          {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
-          <span class="title muted">{{title}}</span>
-        </p>
+        <h1>{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
       {{/if}}
-    {{/with}}
+    {{/view}}
   </div>
-{{/view}}
 
-<hr />
+  <div class="meta">
+    {{avatar contact size=medium class="img-polaroid"}}
 
-<h2 class="with-button">
-  Attachments
-  <button class="btn pull-right">Add File</button>
-</h2>
+    <p>
+      <span class="name">{{contact.name}}</span></br></br>
+      <span class="title muted">{{contact.title}}</span>
+    </p>
+  </div>
 
-{{#each attachment in attachments}}
-  Foo
-{{/each}}
+  <div class="forecast">
+    <hr />
+    <h2>Forecast</h2>
+    {{view Radium.ProgressBar percentageBinding="checklist.percentage"}}
+    <div class="checklist-plus">
+      <a href="#checklistModal" class="btn btn-success" data-toggle="modal">
+        <i class="icon-plus"></i>
+      </a>
+    </div>
+    <div {{bindAttr class=":total checklist.total:white"}}>{{checklist.total}}%</div>
+    <hr />
+  </div>
+  <div id="checklistModal" class="modal fade">
+    <div class="modal-header">
+      <button type="button"  {{action rollback bubbles="false"}} data-dismiss="modal" class="close">×</button>
+      <h2>Checklist</h2>
+    </div>
+    <div class="modal-body">
+      {{view Radium.ChecklistView}}
+    </div>
+    <div class="modal-footer">
+      <a href="#"  {{action rollback bubbles="false"}} class="btn" data-dismiss="modal">Cancel</a>
+      <a href="#" {{action commit bubbles="false"}} data-dismiss="modal" class="btn btn-primary">Done</a>
+    </div>
+  </div>
+  {{#view Radium.InlineEditorView valueBinding=description}}
+    <h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
-{{partial 'shared/followers'}}
+    {{#if view.isEditing}}
+      {{view view.textArea valueBinding=view.value classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
+    {{else}}
+      <p class="inline-editor-text">
+        {{view.value}}
+      </p>
+    {{/if}}
+  {{/view}}
 
-<hr />
+  <hr />
 
-<button class="btn btn-warning btn-block" {{action toggleVisiblity}}>
-  {{#if isPublic}}
-    Unpublish
-  {{else}}
-    Publish
-  {{/if}}
-</button>
-<button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+  {{#view Radium.InlineEditorView valueBinding=value class="amount"}}
+    <h2>Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+
+    {{#if view.isEditing}}
+      <div {{bindAttr class="view.isValid:success:error :control-group"}}>
+        <div class="input-prepend">
+          <span class="add-on">$</span>
+          {{view view.textField valueBinding=view.value class="span2" type="number" min="0"}}
+        </div>
+      </div>
+    {{else}}
+      <span class="money inline-editor-text">
+        {{currency view.value}}
+      </span>
+    {{/if}}
+  {{/view}}
+
+  <hr />
+
+  <h2>Status</h2>
+
+  {{#unless isPublic}}
+    <p class="muted">Publish this deal to change its status</p>
+  {{/unless}}
+
+  {{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
+
+
+  <hr />
+
+  {{#view view.userInlineEditor valueBinding=user}}
+    <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+
+    <div class="assigned-to">
+      {{#with view.value}}
+        {{#if view.isEditing}}
+          {{view view.userPicker class="field"}}
+        {{else}}
+          {{#linkTo user this}}
+            {{avatar this class="img-polaroid"}}
+          {{/linkTo}}
+
+          <p>
+            {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+            <span class="title muted">{{title}}</span>
+          </p>
+        {{/if}}
+      {{/with}}
+    </div>
+  {{/view}}
+
+  <hr />
+
+  <h2 class="with-button">
+    Attachments
+    <button class="btn pull-right">Add File</button>
+  </h2>
+
+  {{#each attachment in attachments}}
+    Foo
+  {{/each}}
+
+  {{partial 'shared/followers'}}
+
+  <hr />
+
+  <button class="btn btn-warning btn-block" {{action toggleVisiblity}}>
+    {{#if isPublic}}
+      Unpublish
+    {{else}}
+      Publish
+    {{/if}}
+  </button>
+  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+</form>
