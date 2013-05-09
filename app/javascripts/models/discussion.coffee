@@ -10,6 +10,7 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   user: DS.belongsTo('Radium.User', inverse: null)
 
   topic: DS.attr('string')
+  isRead: DS.attr('boolean')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value

@@ -9,8 +9,9 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   subject: DS.attr('string')
   message: DS.attr('string')
   read: DS.attr('boolean')
-  isTracked: DS.attr('boolean')
   sentAt: DS.attr('datetime')
+  isTracked: DS.attr('boolean')
+  isRead: DS.attr('boolean')
 
   sender: DS.attr('object')
 

@@ -63,4 +63,7 @@ Radium.EmailsShowRoute = Radium.Route.extend
       @transitionTo 'emails.show', email
 
   setupController: (controller, model) ->
+    model.set 'isRead', true
+    @store.commit()
+
     @controllerFor('messages').set 'selectedContent', model
