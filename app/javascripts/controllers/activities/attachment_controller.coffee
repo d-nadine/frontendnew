@@ -11,3 +11,5 @@ Radium.ActivitiesAttachmentController = Radium.ObjectController.extend
   isDelete: Ember.computed.equal 'event', 'delete'
 
   icon: 'attachments'
+
+  company: Ember.computed.alias('attachedTo.company')
