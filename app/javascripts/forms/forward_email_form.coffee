@@ -1,7 +1,6 @@
 Radium.ForwardEmailForm = Radium.EmailForm.extend
   isNew: true
 
-  content: Ember.Object.create()
   email: null
 
   defaults: (->

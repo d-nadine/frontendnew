@@ -4,6 +4,10 @@ Radium.EmailForm = Radium.Form.extend
   includeReminder: false
   reminderTime: 5
 
+  init: ->
+    @set 'content', Ember.Object.create()
+    @_super()
+
   data: ( ->
     subject: @get('subject')
     message: @get('message')
@@ -14,16 +18,6 @@ Radium.EmailForm = Radium.Form.extend
       cc: @get('cc').mapProperty 'email'
       bcc: @get('bcc').mapProperty 'email'
   ).property().volatile()
-
-  reset: ->
-    @_super.apply this, arguments
-    @set 'subject', '' 
-    @set 'message', '' 
-    @get('to').clear()
-    @get('cc').clear()
-    @get('bcc').clear()
-    @set('showAddresses', false)
-    @set('showSubject', false)
 
   isValid: ( ->
     @get('to.length') && (@get('subject') || @get('message.length'))

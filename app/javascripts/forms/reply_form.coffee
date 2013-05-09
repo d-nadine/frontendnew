@@ -4,12 +4,10 @@ Radium.ReplyForm = Radium.EmailForm.extend
   showAddresses: false
   showSubject: false
 
-  content: Ember.Object.create()
-
   email: null
 
   defaults: (->
-    hash = 
+    hash =
       subject: "RE: #{@get('email.subject')}"
       message: ''
       to: []

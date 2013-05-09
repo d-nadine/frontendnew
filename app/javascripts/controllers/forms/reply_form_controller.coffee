@@ -3,5 +3,5 @@ Radium.FormsReplyController = Radium.FormsEmailController.extend
     @send 'sendReply', replyForm
 
   expand: ->
-    @toggleProperty 'showAddresses', true
-    @toggleProperty 'showSubject', true
+    @toggleProperty 'showAddresses'
+    @toggleProperty 'showSubject'
