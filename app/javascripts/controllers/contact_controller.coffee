@@ -3,6 +3,9 @@ Radium.ContactController = Radium.ObjectController.extend
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
 
+  # FIXME: How do we determine this?
+  isEditable: true
+
   companyNames: ( ->
     return unless @get('companies.length')
 
@@ -16,9 +19,6 @@ Radium.ContactController = Radium.ObjectController.extend
       preVal + value
     , 0, 'value')
   ).property('deals.[]')
-
-  # FIXME: How do we determine this?
-  isEditable: true
 
   formBox: (->
     Radium.FormBox.create

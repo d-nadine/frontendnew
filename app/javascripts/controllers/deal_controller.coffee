@@ -1,10 +1,13 @@
 require 'forms/todo_form'
 
 Radium.DealController = Radium.ObjectController.extend
+  needs: ['dealStatuses', 'users']
+
   # FIXME: this should be null and not an empty string
   deletionToken: ''
 
-  needs: ['dealStatuses', 'users']
+  # FIXME: How do we determine this?
+  isEditable: true
 
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   newItemDescription: ''
