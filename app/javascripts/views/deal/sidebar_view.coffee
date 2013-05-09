@@ -41,7 +41,7 @@ Radium.DealSidebarView = Radium.View.extend
       </div>
     """
 
-  dealStatusInlineEditor: Radium.HighlightInlineEditor.extend
+  dealStatusInlineEditor: Radium.InlineEditorView.extend
     statusSelect: Ember.Select.extend
       contentBinding: 'controller.statuses'
       valueBinding: 'controller.status'

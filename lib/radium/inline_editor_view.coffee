@@ -24,18 +24,37 @@ Radium.InlineEditorView = Ember.View.extend
   willDestroyElement: ->
     $('body').off 'click.inline'
 
-  click: (event) ->
+  click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
 
-    event.stopPropagation()
-    @toggleEditor()
+    unless @get('isEditing')
+      event.stopPropagation()
+      @toggleEditor()
+      return
+
+    tagName = evt.target.tagName.toLowerCase()
+
+    if ['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1
+      event.stopPropagation()
+      @toggleEditor()
+      return
+
+    evt.preventDefault()
+    evt.stopPropagation()
 
   toggleEditor: (event) ->
     if @get('isEditing') and @get('isValid')
       @set 'isEditing', false
     else
       @set 'isEditing', true
+
+    return unless @get 'isEditing'
+    Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
+
+  highlightSelection: ->
+    @$('input[type=text],textarea').filter(':first').select()
+
 
   isValid: (->
     value = @get 'value'
