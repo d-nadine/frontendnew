@@ -11,9 +11,14 @@
 
   <div class="meta">
     {{avatar contact size=medium class="img-polaroid"}}
-
     <p>
-      <span class="name">{{contact.name}}</span></br></br>
+      {{#view view.contactInlineEditor valueBinding=contact.name class="contact"}}
+        {{#if view.isEditing}}
+          {{view view.contactPicker}}
+        {{else}}
+          <span class="name">{{contact.name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></span></br></br>
+        {{/if}}
+      {{/view}}
       <span class="title muted">{{contact.title}}</span>
     </p>
   </div>

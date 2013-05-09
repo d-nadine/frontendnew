@@ -7,9 +7,21 @@
     }
   }
 
+  .page-header{
+    input{
+      font-size: 26px;
+      font-weight: bold;
+      height: 29px;
+      position: relative;
+      top: -7px;
+      left: -7px;
+    }
+  }
+
   .inline-editor{
     .icon-edit{
       opacity: 0;
+      font-size: 12px;
     }
 
     &:hover{

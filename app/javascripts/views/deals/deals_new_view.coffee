@@ -29,8 +29,10 @@ Radium.DealsNewView= Ember.View.extend
   contactPicker: Radium.Combobox.extend Radium.ValueValidationMixin,
     sourceBinding: 'controller.contactsWithCompany'
     valueBinding: 'controller.contact'
+
     setValue: (object) ->
       @set 'value', object.get('contact')
+
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
         @set 'value', @lookupQuery(value)

@@ -1,11 +1,32 @@
 .deal-sidebar-view {
   .page-header {
+    margin-bottom: 11px;
     h1 {
       font-size: 26px;
       line-height: 26px;
       .icon-edit{
         font-size: 12px;
       }
+    }
+  }
+
+  .inline-editor.inline-editor-closed.contact{
+    margin-bottom: 8px;
+  }
+
+  .contact-picker{
+    width: 250px;
+    position: relative;
+    left: -8px;
+    top: -5px;
+    input{
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .btn-group{
+      float: right;
+      position: absolute;
     }
   }
 
@@ -54,7 +75,6 @@
 
   .meta {
     margin-bottom: 10px;
-    overflow: auto;
 
     .avatar {
       float: left;
