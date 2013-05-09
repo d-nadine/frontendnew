@@ -380,6 +380,12 @@ class Populator
       reference: dealDictionary.random()
 
     Factory.create 'activity',
+      tag: 'deal'
+      event: 'pay'
+      user: userDictionary.random()
+      reference: dealDictionary.random()
+
+    Factory.create 'activity',
       tag: 'meeting'
       event: 'reschedule'
       user: userDictionary.random()

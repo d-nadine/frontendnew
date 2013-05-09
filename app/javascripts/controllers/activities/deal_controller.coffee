@@ -6,6 +6,7 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
   isClose: Ember.computed.is 'event', 'close'
   isLose: Ember.computed.is 'event', 'lose'
   isReopen: Ember.computed.is 'event', 'reopen'
+  isPay: Ember.computed.is 'event', 'pay'
 
   deal: Ember.computed.alias 'reference'
   value: Ember.computed.alias 'deal.value'
@@ -22,6 +23,7 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
       when 'status_change' then 'chart'
       when 'close' then 'money'
       when 'lose' then 'money'
+      when 'pay' then 'money'
       when 'publish' then 'quill'
       when 'reopen' then 'spinner'
   ).property('event')

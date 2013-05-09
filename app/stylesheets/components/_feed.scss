@@ -15,7 +15,8 @@
   color: $muted;
 }
 
-.activity.deal.closed {
+.activity.deal.closed,
+.activity.deal.pay {
   color: #468847;
   background-color: #DFF0D8;
   border: solid 1px #D6E9C6;
