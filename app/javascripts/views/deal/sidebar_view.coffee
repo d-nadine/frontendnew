@@ -14,3 +14,23 @@ Radium.DealSidebarView = Radium.View.extend
 
     userPicker: Radium.UserPicker.extend
       isSubmitted: true
+
+  dealStatusInlineEditor: Radium.HighlightInlineEditor.extend
+    statusSelect: Ember.Select.extend
+      contentBinding: 'controller.statuses'
+      valueBinding: 'controller.status'
+      disabledBinding: 'controller.statusDisabled'
+
+    template: Ember.Handlebars.compile """
+      {{#if view.isEditing}}
+        <div>{{view view.statusSelect}}</div>
+      {{else}}
+        <div>
+          <h2>{{status}}</h2>
+        </div>
+        <div class="status-icon">
+          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+        </div>
+      {{/if}}
+    """
+

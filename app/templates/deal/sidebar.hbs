@@ -81,14 +81,11 @@
 
   <hr />
 
-  <h2>Status</h2>
-
   {{#unless isPublic}}
     <p class="muted">Publish this deal to change its status</p>
   {{/unless}}
 
-  {{view Ember.Select contentBinding="statuses" valueBinding="status" disabledBinding="statusDisabled"}}
-
+  {{view view.dealStatusInlineEditor class="deal-status"}}
 
   <hr />
 
