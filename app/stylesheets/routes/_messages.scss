@@ -1,3 +1,8 @@
+// FIXME: this should not be required
+.fixed-two-column-layout #sidebar .selectable > li.is-untracked {
+  background-color: #FFF9CA;
+}
+
 .messages-sidebar-view {
   .checker {
     border-right: solid 2px $dark-background;
@@ -12,6 +17,10 @@
 
   .is-unread .teaser {
     font-weight: bold;
+  }
+
+  .is-untracked {
+    background-color: blue;
   }
 
   .has-tasks .content:after {
