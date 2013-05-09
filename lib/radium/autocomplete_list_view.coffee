@@ -72,6 +72,8 @@ Radium.AutocompleteView = Radium.View.extend
   resizeInputBox: ->
     input = @$('li.as-original input')
 
+    return unless input
+
     if @get('isEditable')
       input.show()
     else
