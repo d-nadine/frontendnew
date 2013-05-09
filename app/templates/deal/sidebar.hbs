@@ -89,26 +89,7 @@
 
   <hr />
 
-  {{#view view.userInlineEditor valueBinding=user}}
-    <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-    <div class="assigned-to">
-      {{#with view.value}}
-        {{#if view.isEditing}}
-          {{view view.userPicker class="field"}}
-        {{else}}
-          {{#linkTo user this}}
-            {{avatar this class="img-polaroid"}}
-          {{/linkTo}}
-
-          <p>
-            {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
-            <span class="title muted">{{title}}</span>
-          </p>
-        {{/if}}
-      {{/with}}
-    </div>
-  {{/view}}
+  {{view view.userInlineEditor valueBinding=user}}
 
   <hr />
 

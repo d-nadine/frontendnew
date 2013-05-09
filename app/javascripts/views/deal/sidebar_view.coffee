@@ -14,6 +14,32 @@ Radium.DealSidebarView = Radium.View.extend
 
     userPicker: Radium.UserPicker.extend
       isSubmitted: true
+      leader: ''
+
+    template: Ember.Handlebars.compile """
+      <h2>Assigned To</h2>
+
+      <div class="assigned-to">
+        {{#with view.value}}
+          {{#if view.isEditing}}
+            {{#linkTo user this}}
+              {{avatar this class="img-polaroid"}}
+            {{/linkTo}}
+            {{view view.userPicker class="field"}}
+          {{else}}
+            {{#linkTo user this}}
+              {{avatar this class="img-polaroid"}}
+            {{/linkTo}}
+
+            <p>
+              {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
+              <span class="title muted">{{title}}</span>
+              <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+            </p>
+          {{/if}}
+        {{/with}}
+      </div>
+    """
 
   dealStatusInlineEditor: Radium.HighlightInlineEditor.extend
     statusSelect: Ember.Select.extend
