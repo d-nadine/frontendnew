@@ -4,7 +4,7 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
-require 'lib/radium/company_picker'
+require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
 
 Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
@@ -55,7 +55,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   tags: Radium.ContactTagAutocomplete.extend
     isEditableBinding: 'controller.isNew'
 
-  companyPicker: Radium.CompanyPicker.extend Radium.ContactCompanyMixin,
+  companyPicker: Radium.ContactCompanyPicker.extend Radium.ContactCompanyMixin,
     disabled: Ember.computed.not 'controller.isNew'
 
     blur: ->

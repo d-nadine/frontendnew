@@ -1,0 +1,24 @@
+.company-sidebar-view{
+  .meta {
+    margin-bottom: -6px;
+    .avatar {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 30px;
+      padding-top: 5px;
+    }
+
+    .website{
+      margin-top: 28px;
+      .edit{
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}

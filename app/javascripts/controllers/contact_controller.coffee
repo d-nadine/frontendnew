@@ -6,12 +6,6 @@ Radium.ContactController = Radium.ObjectController.extend
   # FIXME: How do we determine this?
   isEditable: true
 
-  companyNames: ( ->
-    return unless @get('companies.length')
-
-    @get('companies').mapProperty('name')
-  ).property('companies.[]')
-
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->
       value = if item.get('status') == 'closed' then item.get('value') else 0

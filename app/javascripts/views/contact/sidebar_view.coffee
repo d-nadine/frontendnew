@@ -6,7 +6,7 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
-require 'lib/radium/company_picker'
+require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
@@ -28,7 +28,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
 
   headerInlineEditor: Radium.InlineEditorView.extend
     isValid: true
-    companyPicker: Radium.CompanyPicker.extend()
+    companyPicker: Radium.ContactCompanyPicker.extend()
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
@@ -57,19 +57,20 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
         <div class="header">
           <div>
             <div>
-              <span class="type muted">contact</span>
+              <span class="name">{{name}}</span>
             </div>
             <div>
               <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
             </div>
           </div>
         </div>
-        <div class="name">{{name}}</div>
-        <div>
+        <div class="company-title">
           <span class="title muted">{{title}}</span>
           <span class="company">
             {{#if company}}
-              {{#linkTo unimplemented}}{{companyName}}{{/linkTo}}
+              {{#linkTo company company}}{{company.name}}{{/linkTo}}
+            {{else}}
+              {{companyName}}
             {{/if}}
           </span>
         </div>

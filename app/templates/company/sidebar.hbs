@@ -1,1 +1,14 @@
-<p>Company Sidebar</p>
+<form class="form">
+  <div class="meta">
+    {{avatar this size=medium class="img-polaroid"}}
+    {{#view view.companyInlineEditor valueBinding=contact.name class="contact"}}
+      {{#if view.isEditing}}
+        {{view view.companyPicker}}
+      {{else}}
+      <div class="name">{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></div>
+      {{/if}}
+    {{/view}}
+    {{view view.websiteInlineEditor class="website"}}
+  </div>
+  <hr />
+</form>
