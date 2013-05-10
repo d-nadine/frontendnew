@@ -27,6 +27,7 @@ Radium.DealSidebarView = Radium.View.extend
             {{/linkTo}}
             {{view view.userPicker class="field"}}
           {{else}}
+            <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
             {{#linkTo user this}}
               {{avatar this class="img-polaroid"}}
             {{/linkTo}}
@@ -34,7 +35,6 @@ Radium.DealSidebarView = Radium.View.extend
             <p>
               {{#linkTo user this}}{{name}}{{/linkTo}}<br/>
               <span class="title muted">{{title}}</span>
-              <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
             </p>
           {{/if}}
         {{/with}}
@@ -42,6 +42,7 @@ Radium.DealSidebarView = Radium.View.extend
     """
 
   dealStatusInlineEditor: Radium.InlineEditorView.extend
+    isValid: true
     statusSelect: Ember.Select.extend
       contentBinding: 'controller.statuses'
       valueBinding: 'controller.status'
@@ -49,13 +50,10 @@ Radium.DealSidebarView = Radium.View.extend
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
-        <div>{{view view.statusSelect}}</div>
+        <div>{{view view.statusSelect class="status-select"}}</div>
       {{else}}
-        <div>
-          <h2>{{status}}</h2>
-        </div>
-        <div class="status-icon">
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+        <div class="deal-status">
+          <h2>{{status}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
         </div>
       {{/if}}
     """
