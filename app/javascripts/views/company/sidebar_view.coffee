@@ -7,8 +7,7 @@ require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 require 'lib/radium/company_picker'
 require 'lib/radium/tag_autocomplete'
-require 'views/sidebar/about_view'
-require 'views/sidebar/user_inline_editor'
+requireAll /views\/sidebar/
 
 Radium.CompanySidebarView = Radium.View.extend
   companyInlineEditor: Radium.InlineEditorView.extend
@@ -40,3 +39,5 @@ Radium.CompanySidebarView = Radium.View.extend
   aboutInlineEditor: Radium.AboutInlineEditor.extend()
 
   userInlineEditor: Radium.UserInlineEditor.extend()
+
+  addressInlineEditor: Radium.AddressInlineEditor.extend()
