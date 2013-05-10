@@ -10,5 +10,15 @@
     {{/view}}
     {{view view.websiteInlineEditor class="website"}}
   </div>
-  <hr />
+  <hr class="first"/>
+  <div class="tag-picker">
+    <div class="tag-label">
+      <h2 class="blue">Tags</h2>
+    </div>
+    {{view view.tags placeholder="Add" viewName="tags"}}
+  </div>
+  <hr/>
+  <div class="about">
+    {{view view.aboutInlineEditor valueBinding=about}}
+  </div>
 </form>

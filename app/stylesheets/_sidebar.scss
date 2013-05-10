@@ -65,4 +65,26 @@
       top: -3px;
     }
   }
+
+  .about{
+    .icon-edit{
+      position: relative;
+      top: 19px;
+    }
+
+    .inline-editor-closed{
+      span{
+        position: relative;
+        top: 5px;
+        left: 1px;
+      }
+    }
+
+    textarea{
+      width: 92%;
+      padding-left: 0;
+    }
+  }
+
+
 }

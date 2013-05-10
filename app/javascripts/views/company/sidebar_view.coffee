@@ -6,6 +6,8 @@ require 'lib/radium/phone_multiple_field'
 require 'lib/radium/address_multiple_field'
 require 'lib/radium/user_picker'
 require 'lib/radium/company_picker'
+require 'lib/radium/tag_autocomplete'
+require 'views/sidebar/about_view'
 
 Radium.CompanySidebarView = Radium.View.extend
   companyInlineEditor: Radium.InlineEditorView.extend
@@ -31,3 +33,7 @@ Radium.CompanySidebarView = Radium.View.extend
         </div>
       {{/if}}
     """
+
+  tags: Radium.TagAutoComplete.extend()
+
+  aboutInlineEditor: Radium.AboutInlineEditor.extend()

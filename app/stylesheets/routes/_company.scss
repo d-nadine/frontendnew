@@ -40,4 +40,17 @@
       }
     }
   }
+
+  hr.first{
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+  hr:not(.first){
+    margin: 5px 0 5px 0;
+  }
+  .tag-picker{
+    h2{
+      margin: 0;
+    }
+  }
 }

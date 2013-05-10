@@ -8,6 +8,7 @@ require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
 require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
+require 'views/sidebar/about_view'
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
@@ -186,33 +187,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  aboutInlineEditor: Radium.InlineEditorView.extend
-    textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
-       click: (event) ->
-        event.stopPropagation()
-
-      insertNewline: ->
-        @get('parentView').toggleEditor()
-    )
-    template: Ember.Handlebars.compile """
-      <div>
-        {{#if view.isEditing}}
-          <h2>About</h2>
-          <div>
-            {{view view.textArea class="field" valueBinding=view.value placeholder="About"}}
-          </div>
-        {{else}}
-          <h2>About <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-          <div>
-            {{#if about}}
-            <span>{{about}}</span>
-            {{else}}
-            <span>&nbsp;</span>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-    """
+  aboutInlineEditor: Radium.AboutInlineEditor.extend()
 
   addressInlineEditor: Radium.InlineEditorView.extend
     isValid: true
