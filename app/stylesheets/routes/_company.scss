@@ -1,22 +1,41 @@
 .company-sidebar-view{
   .meta {
-    margin-bottom: -6px;
-    .avatar {
-      float: left;
-      margin-right: 10px;
+    .company{
+      h1{
+        text-transform: uppercase;
+      }
+
+      input{
+        font-weight: bold;
+        font-size: 18px;
+        padding-left: 5px;
+        padding-top: 3px;
+      }
+
+      .icon-edit{
+        position: relative;
+        top: 10px;
+      }
     }
 
-    .name {
-      font-weight: bold;
-      font-size: 30px;
-      padding-top: 5px;
+    .inline-editor-open.company{
+      margin-top: 10px;
     }
 
-    .website{
-      margin-top: 28px;
-      .edit{
+    .inline-editor-closed.company{
+      margin-bottom: 13px;
+    }
+
+    .website {
+      position: relative; 
+      top: 5px;
+
+      input{
+        margin-bottom: -8px;
+      }
+      .icon-edit{
         position: absolute;
-        top: 0;
+        top: 5px;
         right: 0;
       }
     }

@@ -9,14 +9,14 @@ require 'lib/radium/company_picker'
 
 Radium.CompanySidebarView = Radium.View.extend
   companyInlineEditor: Radium.InlineEditorView.extend
-    companyPicker: Radium.CompanyPicker.extend()
+    valueBinding: 'controller.name'
 
   websiteInlineEditor: Radium.InlineEditorView.extend
     valueBinding: 'controller.website'
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
         <div>
-          <i class="icon-cloud"></i>{{input type="text" value=view.value class="field" placeholder="Add company website"}}
+          {{input type="text" value=view.value class="field" placeholder="Add company website"}}
         </div>
       {{else}}
         <div class="not-editing">

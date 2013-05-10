@@ -1,11 +1,11 @@
 <form class="form">
   <div class="meta">
     {{avatar this size=medium class="img-polaroid"}}
-    {{#view view.companyInlineEditor valueBinding=contact.name class="contact"}}
+    {{#view view.companyInlineEditor valueBinding=name class="company"}}
       {{#if view.isEditing}}
-        {{view view.companyPicker}}
+        {{input value=name class="field company-name"}}
       {{else}}
-      <div class="name">{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></div>
+        <h1>{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
       {{/if}}
     {{/view}}
     {{view view.websiteInlineEditor class="website"}}
