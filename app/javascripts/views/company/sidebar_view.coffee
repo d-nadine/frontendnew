@@ -8,6 +8,7 @@ require 'lib/radium/user_picker'
 require 'lib/radium/company_picker'
 require 'lib/radium/tag_autocomplete'
 require 'views/sidebar/about_view'
+require 'views/sidebar/user_inline_editor'
 
 Radium.CompanySidebarView = Radium.View.extend
   companyInlineEditor: Radium.InlineEditorView.extend
@@ -37,3 +38,5 @@ Radium.CompanySidebarView = Radium.View.extend
   tags: Radium.TagAutoComplete.extend()
 
   aboutInlineEditor: Radium.AboutInlineEditor.extend()
+
+  userInlineEditor: Radium.UserInlineEditor.extend()

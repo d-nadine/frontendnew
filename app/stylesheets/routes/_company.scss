@@ -45,12 +45,30 @@
     margin-top: 30px;
     margin-bottom: 0;
   }
+
   hr:not(.first){
     margin: 5px 0 5px 0;
   }
+
   .tag-picker{
     h2{
       margin: 0;
     }
+  }
+
+  .assigned-to {
+    .avatar {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  .control-group.files{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .user-picker-control-box{
+    margin-bottom: 10px;
   }
 }

@@ -21,4 +21,19 @@
   <div class="about">
     {{view view.aboutInlineEditor valueBinding=about}}
   </div>
+  <hr/>
+
+  {{view view.userInlineEditor valueBinding=user}}
+
+  <hr />
+
+  {{partial 'shared/add_files'}}
+
+  <hr/>
+
+  {{partial 'shared/followers'}}
+  <hr/>
+
+  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+
 </form>

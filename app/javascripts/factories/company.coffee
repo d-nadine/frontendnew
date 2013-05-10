@@ -14,4 +14,4 @@ Factory.define 'company', traits: 'timestamps',
       name: Dictionaries.tags.random()
   ]
 
-
+  about: -> "Information about #{@name}"

@@ -7,6 +7,7 @@ Radium.Company = Radium.Model.extend
   addresses: DS.hasMany('Radium.Address')
 
   primaryContact: DS.belongsTo('Radium.Contact', inverse: null)
+  user: DS.belongsTo('Radium.User')
 
   name: DS.attr('string')
   website: DS.attr('string')

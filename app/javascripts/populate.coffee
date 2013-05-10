@@ -25,7 +25,8 @@ class Populator
     Dictionary.users = userDictionary
 
     companies = for i in [1..5]
-      Factory.create 'company'
+      Factory.create 'company',
+        user: -> userDictionary.random()
 
     companyDictionary = new Dictionary(companies)
 
