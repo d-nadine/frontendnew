@@ -8,9 +8,18 @@
         <h1>{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
       {{/if}}
     {{/view}}
+
+
     {{view view.websiteInlineEditor class="website"}}
   </div>
   <hr class="first"/>
+
+  <button class="btn btn-block add-contact" {{action addContact this}}><i class="add icon-plus"></i>Add Contact</button>
+  <hr/>
+
+  <div class="company-type">
+    {{view view.statusInlineEditor}}
+  </div> 
   <div class="tag-picker">
     <div class="tag-label">
       <h2 class="blue">Tags</h2>
@@ -21,6 +30,7 @@
   <div class="about">
     {{view view.aboutInlineEditor valueBinding=about}}
   </div>
+
   <hr/>
 
   {{view view.userInlineEditor valueBinding=user}}

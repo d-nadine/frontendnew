@@ -13,13 +13,6 @@ requireAll /views\/sidebar/
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
 
-  statuses: ( ->
-    @get('controller.leadStatuses').map (status) ->
-      Ember.Object.create
-        name: status.name.toUpperCase()
-        value: status.value
-  ).property('controller.leadStatuses.[]')
-
   tags: Radium.ContactTagAutocomplete.extend
     onlyOnNew: false
 
@@ -78,29 +71,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
       {{/if}}
     """
 
-  contactStatusInlineEditor: Radium.InlineEditorView.extend
-    isValid: true
-    statusesBinding: 'parentView.statuses'
-    statusDescriptionBinding: 'parentView.statusDescription'
-    statusSelect: Ember.Select.extend
-      contentBinding: 'parentView.statuses'
-      optionValuePath: 'content.value'
-      optionLabelPath: 'content.name'
-      valueBinding: 'controller.status'
-
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div>{{view view.statusSelect}}</div>
-        <div>&nbsp;</div>
-      {{else}}
-        <div>
-          <h2>{{view.statusDescription}}</h2>
-        </div>
-        <div>
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-        </div>
-      {{/if}}
-    """
+  contactStatusInlineEditor: Radium.StatusInlineEditorView.extend()
 
   contactInlineEditor: Radium.InlineEditorView.extend
     template: Ember.Handlebars.compile """

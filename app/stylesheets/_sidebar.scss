@@ -47,6 +47,18 @@
     }
   }
 
+  .company-type,
+  .contact-type{
+    height: 30px;
+    h2{
+      font-weight: normal;
+      font-size: 15px;
+      position: relative;
+      top: -6px;
+      left: 7px;
+    }
+  }
+
   h2 {
     text-transform: uppercase;
     font-size: 12px;
