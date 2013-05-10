@@ -1,4 +1,18 @@
 .company-sidebar-view{
+  .control-label{
+    font-weight: bold;
+  }
+
+  .inline-editor-open{
+    input{
+      margin-bottom: 0;
+    }
+
+    input.zip{
+      margin-top: 10px;
+    }
+  }
+
   .meta {
     .company{
       h1{
