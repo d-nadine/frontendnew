@@ -143,6 +143,16 @@
     }
   }
 
+  .contact-type{
+    h2{
+      font-weight: normal;
+      font-size: 15px;
+      position: relative;
+      top: -6px;
+      left: 7px;
+    }
+  }
+
   .email{
     margin-bottom: 20px;
   }
@@ -169,17 +179,6 @@
     line-height: 26px;
     .company, .type{
       text-transform: uppercase;
-    }
-  }
-
-  .contact-type{
-    height: 30px;
-    h2{
-      font-weight: normal;
-      font-size: 15px;
-      position: relative;
-      top: -6px;
-      left: 7px;
     }
   }
 

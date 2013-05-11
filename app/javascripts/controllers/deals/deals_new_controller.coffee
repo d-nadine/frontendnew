@@ -1,4 +1,4 @@
-Radium.DealsNewController = Ember.ObjectController.extend
+Radium.DealsNewController = Radium.ObjectController.extend
   needs: ['contacts','users', 'dealStatuses', 'dealSources']
   contacts: Ember.computed.alias 'controllers.contacts'
   checklistItems: Ember.computed.alias 'checklist.checklistItems'

@@ -50,6 +50,10 @@
       &.inline-editor-closed{
         margin-bottom: 32px;
       }
+      a{
+        position: relative;
+        top: 4px;
+      }
     }
 
     .website {
@@ -64,6 +68,23 @@
         top: 5px;
         right: 0;
       }
+    }
+  }
+
+  .company-type{
+    h2{
+      font-weight: normal;
+      font-size: 15px;
+      position: relative;
+      top: -4px;
+      left: 7px;
+      margin: 0;
+    }
+
+    .icon-edit{
+      position: absolute;
+      right: 0;
+      top: 7px;
     }
   }
 

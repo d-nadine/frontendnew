@@ -1,4 +1,4 @@
-Radium.PipelineItemController = Ember.ObjectController.extend
+Radium.PipelineItemController = Radium.ObjectController.extend
   deleteObject: (record) ->
     record.get('content').deleteRecord()
 

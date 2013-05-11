@@ -1,5 +1,14 @@
 Radium.CompanyRoute = Radium.Route.extend
   events:
+    addContact: (company) ->
+      debugger
+      controller = @controllerFor('leads.new')
+      controller.get('model').reset()
+      controller.set 'user', @controllerFor('currentUser').get('model')
+      controller.set('company', company)
+      controller.set('status', company.get('status'))
+      @transitionTo 'leads.new'
+
     confirmDeletion: ->
       @render 'company/deletion_confirmation',
         into: 'application'

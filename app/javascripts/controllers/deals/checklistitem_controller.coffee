@@ -1,4 +1,4 @@
-Radium.ChecklistItemController = Ember.ObjectController.extend
+Radium.ChecklistItemController = Radium.ObjectController.extend
   isAdditional: ( ->
     @get('kind') == 'additional'
   ).property('kind')

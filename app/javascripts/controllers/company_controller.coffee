@@ -4,3 +4,9 @@ Radium.CompanyController = Radium.ObjectController.extend
 
   # FIXME: How do we determine this?
   isEditable: true
+
+  changeStatus: ->
+    # @set('changingStatus', true)
+    @get('contacts').setEach 'status', @get('status')
+    @get('store').commit()
+

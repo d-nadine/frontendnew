@@ -35,7 +35,42 @@ Radium.CompanySidebarView = Radium.View.extend  Radium.ContactViewMixin,
       {{/if}}
     """
 
-  statusInlineEditor: Radium.StatusInlineEditorView.extend()
+  cancelChangeStatus: ->
+    @get('statusChange').cancelChange()
+
+  changeStatus: ->
+    @$('.modal').modal 'hide'
+    @get('controller').changeStatus()
+    @get('statusChange').toggleEditor()
+
+  statusInlineEditor: Radium.StatusInlineEditorView.extend
+    init: ->
+      @_super.apply this, arguments
+      Ember.run.scheduleOnce 'afterRender', this, 'addStatusBeforeObserver'
+
+    addStatusBeforeObserver: ->
+      Ember.addBeforeObserver this, 'controller.status', this, 'statusWillChange'
+      Ember.addObserver this, 'controller.status', this, 'statusDidChange'
+
+    statusWillChange: (obj, key) ->
+      @set('previousStatus', @get('controller.status'))
+
+    cancelChange: ->
+      @get('controller.transaction').rollback()
+      @toggleEditor()
+      @get('parentView').$('.modal').modal 'hide'
+
+    destroy: ->
+      Ember.removeBeforeObserver this, 'controller.status', this, 'statusWillChange'
+      Ember.removeObserver this, 'controller.status', this, 'statusDidChange'
+
+    statusDidChange: ->
+      previous = @get('previousStatus')
+      current = @get('controller.status')
+
+      return if previous == current
+
+      @get('parentView').$('.modal').modal backdrop: false
 
   tags: Radium.TagAutoComplete.extend()
 
