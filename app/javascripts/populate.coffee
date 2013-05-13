@@ -8,11 +8,18 @@ class Populator
       ['Riikka', 'Tarkainen']
     ]
 
+    teams = for i in Dictionaries.teams.set
+      Factory.create 'team',
+        name: Dictionaries.teams.set[i]
+
+    teamDictionary = new Dictionary(teams)
+
     users = names.map (name) ->
       Factory.create 'user',
         firstName: name[0]
         lastName: name[1]
         email: "#{name[0].toLowerCase()}@radiumcrm.com"
+        team:  teamDictionary.random()
 
     userDictionary = new Dictionary(users)
 

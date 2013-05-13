@@ -10,9 +10,14 @@ requireAll /views\/sidebar/
 Radium.UserSidebarView = Radium.View.extend
   headerInlineEditor: Radium.InlineEditorView.extend
     isValid: true
+    teamPicker: Radium.Combobox.extend
+      sourceBinding: 'controller.controllers.teams'
+      valueBinding: 'controller.team'
+      placeholder: 'Add Team'
 
     template: Ember.Handlebars.compile """
-      {{#if view.isEditing}} <div class="contact-detail">
+      {{#if view.isEditing}} 
+        <div class="contact-detail">
           <div class="control-group">
             <label class="control-label">Name</label>
             <div class="controls">
@@ -23,6 +28,12 @@ Radium.UserSidebarView = Radium.View.extend
             <label class="control-label">Title</label>
             <div class="controls">
               {{input value=title class="field detail" placeholder="Title"}}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Team</label>
+            <div class="controls">
+              {{view view.teamPicker class="field"}}
             </div>
           </div>
         </div>
@@ -41,6 +52,11 @@ Radium.UserSidebarView = Radium.View.extend
         <div class="title">
           <span class="title muted">{{title}}</span>
         </div>
+        {{#if team}}
+          <div class="team">
+            {{#linkTo unimplemented}}{{team.name}}{{/linkTo}}
+          </div>
+        {{/if}}
       {{/if}}
     """
 

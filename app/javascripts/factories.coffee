@@ -28,6 +28,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'company', Radium.Company
     @map.set 'phone_call', Radium.PhoneCall
     @map.set 'voice_mail', Radium.VoiceMail
+    @map.set 'team', Radium.Team
 
 Foundry.RadiumAdapter = RadiumAdapter
 

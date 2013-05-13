@@ -1,4 +1,5 @@
 Radium.UserController = Radium.ObjectController.extend
+  needs: ['teams']
   # FIXME: only allow current user to update their own details
   isEditable: true
 
