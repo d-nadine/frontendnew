@@ -13,6 +13,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   firstName: DS.attr('string')
   lastName: DS.attr('string')
 
+  following: DS.hasMany('Radium.User')
+
   name: ( ->
     "#{@get("firstName")} #{@get("lastName")}"
   ).property('firstName', 'lastName')
@@ -27,3 +29,22 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   settings: DS.attr('object')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+
+  salesGoal: DS.attr('number')
+
+  leads: ( ->
+    @get('contacts').filterProperty 'status', 'lead'
+  ).property('contact.[]'),
+
+  negotiatingDeals: ( ->
+    @get('deals').filter (deal) ->
+      deal.get('status') != 'closed' || deal.get('status') != 'lost'
+  ).property('deals.[]')
+
+  closedDeals: ( ->
+    @get('deals').filterProperty 'status', 'closed'
+  ).property('deals.[]')
+
+  lostDeals: ( ->
+    @get('deals').filterProperty 'status', 'lost'
+  ).property('deals.[]')

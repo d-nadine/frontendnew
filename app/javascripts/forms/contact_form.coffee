@@ -66,3 +66,4 @@ Radium.ContactForm = Radium.Form.extend
     @set 'emailAddresses', Ember.A()
     @set 'phoneNumbers', Ember.A()
     @set 'addresses', Ember.A()
+    @set 'expandImmediately', false

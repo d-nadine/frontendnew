@@ -25,6 +25,7 @@ Radium.Router.map ->
 
   @resource 'leads', ->
     @route 'new'
+    @route 'fromCompany', path: '/new/companies/:company_id'
 
   @resource 'contacts'
   @resource 'contact', path: '/contacts/:contact_id'

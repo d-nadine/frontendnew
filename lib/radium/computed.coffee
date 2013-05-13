@@ -70,3 +70,14 @@ Radium.computed.primary = (collection) ->
 
     @get(collection).find (item) ->
       item.get('isPrimary')
+
+Radium.computed.total = (collection, key = 'value') ->
+  dependentKey = "#{collection}.[]"
+
+  Ember.computed dependentKey, ->
+    return 0 unless @get(collection).get('length')
+
+    @get(collection).reduce((preVal, item) ->
+      preVal + item.get(key) || 0
+    , 0, key)
+

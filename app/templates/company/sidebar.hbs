@@ -13,8 +13,7 @@
     {{view view.websiteInlineEditor class="website"}}
   </div>
   <hr class="first"/>
-
-  <button class="btn btn-block add-contact" {{action addContact this}}><i class="add icon-plus"></i>Add Contact</button>
+  {{#linkTo leads.fromCompany this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
   <hr />
   <div class="company-type">
     {{view view.statusInlineEditor viewName="statusChange"}}

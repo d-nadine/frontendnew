@@ -1,1 +1,99 @@
-User Sidebar
+<form class="form">
+  <div class="meta">
+    {{view view.headerInlineEditor}}
+  </div>
+  <hr />
+  <div class="email">
+    {{view view.emailInlineEditor}}
+  </div>
+  <div class="phone">
+    {{view view.phoneInlineEditor}}
+  </div>
+  <hr/>
+  {{#if contacts.length}}
+    <div class="assigned-contacts">
+      <div>
+        <div>
+          {{#linkTo unimplemented}}My Assigned Contacts{{/linkTo}}
+        </div>
+        <div>
+          <span {{bindAttr class=":assigned-count :badge contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="no-contacts">
+      <label class="control-label">No contacts have been assigned.</label>
+    </div>
+  {{/if}}
+  <hr/>
+  <h2>Sales Goal</h2>
+  <div id="sales-goal">
+    <div id="totals">
+      <div class="pull-left">
+        <label class="control-label">{{currentMonth}}</label>
+      </div>
+      <div id="sales-total" class="pull-right">
+        <label class="control-label blue">{{currency salesGoal}}</label>
+      </div>
+      <div class="clearfix"></div>
+      <div class="sales-forecast">
+        {{view Radium.ProgressBar percentageBinding="salesGoalPercentage"}}
+        <div {{bindAttr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <h2>My Pipeline</h2>
+  <table class="table table-striped table-bordered table-hover totals">
+    <tbody>
+      <tr>
+        <td><label class="control-label">Leads</td>
+          <td><label {{bindAttr class=":badge leads.length:badge-success:badge-important"}}>{{leads.length}}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><label class="control-label">Negotiating</td>
+        <td><label {{bindAttr class=":badge negotiatingDeals.length:badge-success:badge-important"}}>{{negotiatingDeals.length}}</td>
+        <td><label>{{currency negotiatingDealsTotal}}</td>
+      </tr>
+      <tr>
+        <td><label class="control-label">Closed</td>
+        <td><label {{bindAttr class=":badge closedDeals.length:badge-success:badge-important"}}>{{closedDeals.length}}</td>
+        <td><label>{{currency closedDealsTotal}}</td>
+      </tr>
+      <tr>
+        <td><label class="control-label">Negotiating</td>
+        <td><label {{bindAttr class=":badge lostDeals.length:badge-success:badge-important"}}>{{lostDeals.length}}</td>
+        <td><label>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="deal-links">
+    <div>
+      <div>
+        {{#linkTo deals.new class="btn btn-primary"}}<i class="icon-plus"></i> Deal{{/linkTo}}
+      </div>
+      <div>
+        <!-- FIXME: Where should this go -->
+        {{#linkTo unimplemented}}All Deals{{/linkTo}}
+      </div>
+    </div>
+  </div>
+  <hr/>
+  {{partial 'shared/followers'}}
+  <hr/>
+  <h2>Following</h2>
+  <ul>
+    {{#each person in following}}
+      <li>
+        {{avatar person}}
+        {{person.name}}</br>
+        {{person.title}}
+      </li>
+    {{else}}
+      Not following anybody yet!
+    {{/each}}
+  </ul>
+  <hr />
+</form>

@@ -13,6 +13,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   didInsertElement: ->
     @_super.apply this, arguments
     @$('.contact-name').focus()
+    @$('.contact-detail').slideDown('medium') if @get('controller.expandImmediately')
 
   existingContactText: ( ->
     return if @get('controller.isNew')

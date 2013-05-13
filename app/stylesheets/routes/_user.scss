@@ -1,0 +1,125 @@
+.user-sidebar-view{
+
+  .control-label{
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  span.empty{
+    font-style: italic;
+    color: $muted;
+  }
+
+  .assigned-contacts{
+    text-transform: uppercase;
+  }
+
+  .meta{
+    .title{
+      margin-top: 23px;
+    }
+  }
+
+  .deal-links,
+  .assigned-contacts,
+  .header{
+    width: 100%;
+    position: relative;
+
+    > div{
+      @include display-box;
+      @include box-pack(justify);
+      position: relative; 
+    }
+  }
+
+  .email{
+    .inline-editor-closed{
+      margin-bottom: 25px;
+    }
+  }
+
+  .phone,
+  .email{
+     position: relative;
+
+    .inline-editor-closed{
+    a{
+        position: relative;
+        left: 1px;
+      }
+    }
+
+    input{
+      position: relative;
+      top: -5px;
+      left: 18px;
+      width: 300px;
+    }
+  }
+
+  .phone{
+    span.empty{
+      margin-left: 7px;
+    }
+  }
+
+  #sales-goal{
+    #sales-total{
+      margin-right: 30px;
+    }
+  }
+
+  .sales-forecast{
+    position: relative;
+    margin-bottom: -20px;
+    .progress.progress-info{
+      display: inline-block;
+      width: 100%;
+      height: 31px;
+      overflow: visible;
+    }
+    .total{
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      font-size: 24px;
+
+      &.white{
+        color: #fff;
+      }
+    }
+  }
+
+  .assigned-count{
+    margin-right: 30px;
+    font-size: 18px;
+    padding-bottom: 3px;
+    .label-info{
+      font-size: 18px;
+      padding-bottom: 3px;
+    }
+  }
+
+  table.totals{
+    tr{
+      td:nth-child(2),
+      td:nth-child(3){
+        text-align: center;
+      }
+      td{
+
+        label{
+          display: inline;
+        }
+      }
+    }
+  }
+
+  .deal-links{
+    .btn-primary{
+      padding-left: 56px;
+      padding-right: 70px;
+    }
+  }
+}
