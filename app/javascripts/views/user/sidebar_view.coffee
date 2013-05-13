@@ -19,9 +19,15 @@ Radium.UserSidebarView = Radium.View.extend
       {{#if view.isEditing}} 
         <div class="contact-detail">
           <div class="control-group">
-            <label class="control-label">Name</label>
+            <label class="control-label">First Name</label>
             <div class="controls">
-              {{input value=name class="field detail" placeholder="Name"}}
+              {{input value=firstName class="field detail" placeholder="First Name"}}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Surname</label>
+            <div class="controls">
+              {{input value=lastName class="field detail" placeholder="Surname"}}
             </div>
           </div>
           <div class="control-group">

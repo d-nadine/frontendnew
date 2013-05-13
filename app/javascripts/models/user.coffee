@@ -1,19 +1,19 @@
 Radium.User = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
-  contacts: DS.hasMany('Radium.Contact')
+  contacts: DS.hasMany('Radium.Contact', inverse: 'user')
   deals: DS.hasMany('Radium.Deal')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
   calls: DS.hasMany('Radium.Call', inverse: 'user')
-  meetings: DS.hasMany('Radium.Meeting')
+  meetings: DS.hasMany('Radium.Meeting', inverse: 'users')
 
-  activities: DS.hasMany('Radium.Activity')
+  activities: DS.hasMany('Radium.Activity', inverse: 'user')
 
   firstName: DS.attr('string')
   lastName: DS.attr('string')
   title: DS.attr('string')
-  team: DS.belongsTo('Radium.Team', inverse: 'users')
+  team: DS.belongsTo('Radium.Team')
 
   following: DS.hasMany('Radium.User')
 

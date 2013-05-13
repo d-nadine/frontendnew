@@ -1,6 +1,5 @@
 Radium.CompanyRoute = Radium.Route.extend
   events:
-
     confirmDeletion: ->
       @render 'company/deletion_confirmation',
         into: 'application'
