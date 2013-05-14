@@ -1,7 +1,7 @@
 Radium.Company = Radium.Model.extend
   contacts: DS.hasMany('Radium.Contact')
   addresses: DS.hasMany('Radium.Address')
-  activities: DS.hasMany('Radium.Activity')
+  activities: DS.hasMany('Radium.Activity', inverse: 'companies')
 
   tags: DS.hasMany('Radium.Tag')
   addresses: DS.hasMany('Radium.Address')

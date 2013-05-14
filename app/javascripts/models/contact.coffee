@@ -8,9 +8,9 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   followers: DS.hasMany('Radium.User', inverse: 'contacts')
   tags: DS.hasMany('Radium.Tag', inverse: 'contacts')
   activities: DS.hasMany('Radium.Activity', inverse: 'contacts')
-  # phoneNumbers: DS.hasMany('Radium.PhoneNumber', inverse: null)
-  # emailAddresses: DS.hasMany('Radium.EmailAddress')
-  # addresses: DS.hasMany('Radium.Address')
+  phoneNumbers: DS.hasMany('Radium.PhoneNumber')
+  emailAddresses: DS.hasMany('Radium.EmailAddress')
+  addresses: DS.hasMany('Radium.Address')
 
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
