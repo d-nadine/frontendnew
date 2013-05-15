@@ -1,0 +1,41 @@
+<div id="header" class="page-header">
+  <div id="title">
+    <h1>{{title}}</h1>
+  </div>
+  <div id="controls">
+    <div id="search-filter" class="field control-box date-filter">
+      <span class="muted">{{view.selectedFilterText}}</span>
+      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-arrow-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each filters}}
+            <li><a {{action changeFilter name}} href="#">{{text}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="field control-box">
+      <div class="btn-group">
+        <a class="btn btn-link" href="#">
+          <i class="icon-search"></i>
+        </a>
+        <input type="text"/>
+      </div>
+    </div>
+    <div class="field control-box actions">
+      <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
+      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
+        <button class="btn">
+          {{#if hasCheckedContent}}
+            <i class="icon-arrow-down"></i>
+          {{else}}
+            <i class="icon-arrow-up"></i>
+          {{/if}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{{each controller itemViewClass="Radium.SearchResultItemView"}}

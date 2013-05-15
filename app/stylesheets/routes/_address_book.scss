@@ -1,0 +1,41 @@
+.address-book-view{
+  #header{
+    margin-bottom: 10px;
+    #controls{
+      float: none;
+
+      #search-filter{
+        .dropdown-menu{
+          width: 274px;
+        }
+      }
+    }
+  }
+
+  .search-result{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $disabled;
+  }
+
+  .company-title{
+    text-transform: uppercase;
+  }
+
+  .header,
+  .avatar{
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .header{
+    position: relative;
+    .name{
+      font-size: 16px;
+    }
+
+    .company-title{
+      margin-top: 1px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="search-result">
+  <div class="meta">
+    {{avatar this size=small class="img-polaroid"}}
+    <div class="header">
+      <div class="contact-name">
+        <span class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</span>
+      </div>
+      <div class="company-title">
+        <span class="title muted">{{title}}</span>
+        {{#if company}}
+        <span class="company">
+          {{#linkTo company company}}{{company.name}}{{/linkTo}}
+        </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
