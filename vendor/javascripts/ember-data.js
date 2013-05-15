@@ -1,4 +1,4 @@
-// Last commit: 3e3953a (2013-05-13 14:14:01 -0400)
+// Last commit: dfeb9e6 (2013-05-14 03:17:52 -0700)
 
 
 (function() {
@@ -4796,7 +4796,7 @@ function clearUnmaterializedHasMany(record, relationship) {
 
   var inverse = record.constructor.inverseFor(relationship.key);
 
-  if(inverse){
+  if (inverse) {
     forEach(references, function(reference) {
       var childRecord;
 

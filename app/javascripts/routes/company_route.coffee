@@ -15,6 +15,8 @@ Radium.CompanyRoute = Radium.Route.extend
 
       company.deleteRecord()
 
+      @get('store').commit()
+
       @render 'nothing',
         into: 'application'
         outlet: 'modal'

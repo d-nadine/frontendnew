@@ -1,5 +1,5 @@
-// Version: v1.0.0-pre.2-1315-ge031b24
-// Last commit: e031b24 (2013-05-05 08:06:37 -0700)
+// Version: v1.0.0-rc.3-1-g451f24c
+// Last commit: 451f24c (2013-04-21 12:40:06 -0400)
 
 
 (function() {
@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-1315-ge031b24
-// Last commit: e031b24 (2013-05-05 08:06:37 -0700)
+// Version: v1.0.0-rc.3-214-g9607c2e
+// Last commit: 9607c2e (2013-05-13 16:58:32 -0700)
 
 
 (function() {
@@ -827,7 +827,7 @@ Ember.guidFor = function guidFor(obj) {
   if (obj === undefined) return "(undefined)";
   if (obj === null) return "(null)";
 
-  var cache, ret;
+  var ret;
   var type = typeof obj;
 
   // Don't allow prototype changes to String etc. to change the guidFor
@@ -1228,7 +1228,7 @@ if (needsFinallyFix) {
 */
 if (needsFinallyFix) {
   Ember.tryCatchFinally = function(tryable, catchable, finalizer, binding) {
-    var result, finalResult, finalError, finalReturn;
+    var result, finalResult, finalError;
 
     binding = binding || this;
 
@@ -2124,7 +2124,7 @@ var o_create = Ember.create,
     metaFor = Ember.meta,
     META_KEY = Ember.META_KEY,
     /* listener flags */
-    ONCE = 1, SUSPENDED = 2, IMMEDIATE = 4;
+    ONCE = 1, SUSPENDED = 2;
 
 /*
   The event system uses a series of nested hashes to store listeners on an
@@ -2745,7 +2745,7 @@ var endPropertyChanges = Ember.endPropertyChanges = function() {
   @param {Function} callback
   @param [binding]
 */
-var changeProperties = Ember.changeProperties = function(cb, binding){
+Ember.changeProperties = function(cb, binding){
   beginPropertyChanges();
   tryFinally(cb, endPropertyChanges, binding);
 };
@@ -2950,7 +2950,7 @@ var MANDATORY_SETTER = Ember.ENV.MANDATORY_SETTER;
   @private
   @constructor
 */
-var Descriptor = Ember.Descriptor = function() {};
+Ember.Descriptor = function() {};
 
 // ..........................................................
 // DEFINING PROPERTIES API
@@ -3511,7 +3511,7 @@ Ember.watchPath = function(obj, keyPath) {
 };
 
 Ember.unwatchPath = function(obj, keyPath) {
-  var m = metaFor(obj), watching = m.watching, desc;
+  var m = metaFor(obj), watching = m.watching;
 
   if (watching[keyPath] === 1) {
     watching[keyPath] = 0;
@@ -4377,8 +4377,6 @@ Ember.computed.defaultTo = function(defaultPath) {
 
 var AFTER_OBSERVERS = ':change';
 var BEFORE_OBSERVERS = ':before';
-
-var guidFor = Ember.guidFor;
 
 function changeEvent(keyName) {
   return keyName+AFTER_OBSERVERS;
@@ -5837,14 +5835,6 @@ function mergeMixins(mixins, m, descs, values, base, keys) {
       if (mixin._without) { a_forEach.call(mixin._without, removeKeys); }
     }
   }
-}
-
-function writableReq(obj) {
-  var m = Ember.meta(obj), req = m.required;
-  if (!req || !m.hasOwnProperty('required')) {
-    req = m.required = req ? o_create(req) : {};
-  }
-  return req;
 }
 
 var IS_BINDING = Ember.IS_BINDING = /^.+Binding$/;
@@ -7505,7 +7495,7 @@ var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'n
   @constructor
 */
 Ember.Error = function() {
-  var tmp = Error.prototype.constructor.apply(this, arguments);
+  var tmp = Error.apply(this, arguments);
 
   // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
   for (var idx = 0; idx < errorProps.length; idx++) {
@@ -10022,7 +10012,7 @@ var get = Ember.get, set = Ember.set;
   For example:
 
   ```javascript
-  Ember.Object.create({
+  Ember.Object.extend({
     valueObserver: function() {
       // Executes whenever the "value" property changes
     }.observes('value')
@@ -10041,8 +10031,8 @@ var get = Ember.get, set = Ember.set;
   object.addObserver('propertyKey', targetObject, targetAction)
   ```
 
-  This will call the `targetAction` method on the `targetObject` to be called
-  whenever the value of the `propertyKey` changes.
+  This will call the `targetAction` method on the `targetObject` whenever
+  the value of the `propertyKey` changes.
 
   Note that if `propertyKey` is a computed property, the observer will be
   called when any of the property dependencies are changed, even if the
@@ -10461,7 +10451,7 @@ Ember.Observable = Ember.Mixin.create(/** @scope Ember.Observable.prototype */ {
     current value.
 
     ```javascript
-    starship.toggleProperty('warpDriveEnaged');
+    starship.toggleProperty('warpDriveEngaged');
     ```
 
     @method toggleProperty
@@ -13097,15 +13087,12 @@ Ember.ControllerMixin = Ember.Mixin.create({
   model: Ember.computed.alias('content'),
 
   send: function(actionName) {
-    var args = [].slice.call(arguments, 1), target,
-        bubble = true;
+    var args = [].slice.call(arguments, 1), target;
 
     if (this[actionName]) {
       Ember.assert("The controller " + this + " does not have the action " + actionName, typeof this[actionName] === 'function');
-      bubble = this[actionName].apply(this, args) === true;
-    } 
-    
-    if (bubble && (target = get(this, 'target'))) {
+      this[actionName].apply(this, args);
+    } else if(target = get(this, 'target')) {
       Ember.assert("The target for controller " + this + " (" + target + ") did not define a `send` method", typeof target.send === 'function');
       target.send.apply(target, arguments);
     }
@@ -13665,7 +13652,7 @@ if (Ember.$) {
 @submodule ember-views
 */
 
-/*** BEGIN METAMORPH HELPERS ***/
+/* BEGIN METAMORPH HELPERS */
 
 // Internet Explorer prior to 9 does not allow setting innerHTML if the first element
 // is a "zero-scope" element. This problem can be worked around by making
@@ -13738,7 +13725,7 @@ var setInnerHTMLWithoutFix = function(element, html) {
   }
 };
 
-/*** END METAMORPH HELPERS */
+/* END METAMORPH HELPERS */
 
 
 var innerHTMLTags = {};
@@ -19181,6 +19168,10 @@ Ember.Handlebars.registerHelper('helperMissing', function(path, options) {
   In this example, if the name property changes, the helper
   will not re-render.
 
+  ## Use with blocks not supported
+
+  Bound helpers do not support use with Handlebars blocks or
+  the addition of child views of any kind.
 
   @method registerBoundHelper
   @for Ember.Handlebars
@@ -19203,6 +19194,8 @@ Ember.Handlebars.registerBoundHelper = function(name, fn) {
       normalized,
       pathRoot, path,
       loc, hashOption;
+
+    Ember.assert("registerBoundHelper-generated helpers do not support use with Handlebars blocks.", !options.fn);
 
     // Detect bound options (e.g. countBinding="otherCount")
     hash.boundOptions = {};
@@ -21594,7 +21587,7 @@ Ember.Handlebars.registerHelper('partial', function(name, options) {
   var view = options.data.view,
       underscoredName = nameParts.join("/"),
       template = view.templateForName(underscoredName),
-      deprecatedTemplate = view.templateForName(name);
+      deprecatedTemplate = !template && view.templateForName(name);
 
   Ember.deprecate("You tried to render the partial " + name + ", which should be at '" + underscoredName + "', but Ember found '" + name + "'. Please use a leading underscore in your partials", template);
   Ember.assert("Unable to find partial with name '"+name+"'.", template || deprecatedTemplate);
@@ -23675,6 +23668,8 @@ define("router",
         var targetHandlerInfos = this.targetHandlerInfos,
             found = false, names, object, handlerInfo, handlerObj;
 
+        if (!targetHandlerInfos) { return; }
+
         for (var i=targetHandlerInfos.length-1; i>=0; i--) {
           handlerInfo = targetHandlerInfos[i];
           if (handlerInfo.name === handlerName) { found = true; }
@@ -25120,7 +25115,7 @@ function teardownView(route) {
 */
 
 
-/**
+/*
   A TransitionEvent is passed as the argument for `transitionTo`
   events and contains information about an attempted transition 
   that can be modified or decorated by leafier `transitionTo` event
@@ -25132,7 +25127,7 @@ function teardownView(route) {
  */
 Ember.TransitionEvent = Ember.Object.extend({
 
-  /**
+  /*
     The Ember.Route method used to perform the transition.  Presently, 
     the only valid values are 'transitionTo' and 'replaceWith'.
    */
@@ -25146,7 +25141,7 @@ Ember.TransitionEvent = Ember.Object.extend({
     this.contexts = this.contexts || [];
   },
 
-  /**
+  /*
     Convenience method that returns an array that can be used for
     legacy `transitionTo` and `replaceWith`.
    */
@@ -25157,7 +25152,7 @@ Ember.TransitionEvent = Ember.Object.extend({
 
 
 Ember.TransitionEvent.reopenClass({
-  /**
+  /*
     This is the default transition event handler that will be injected
     into ApplicationRoute. The context, like all route event handlers in
     the events hash, will be an `Ember.Route`.
@@ -25813,7 +25808,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     aView.appendTo('body');
     ```
 
-    Will results in the following rendered HTML
+    Will result in the following rendered HTML
 
     ```html
     <div class="ember-view">
@@ -26176,6 +26171,14 @@ Ember.View.reopen({
   },
 
   connectOutlet: function(outletName, view) {
+    if (this._pendingDisconnections) {
+      delete this._pendingDisconnections[outletName];
+    }
+
+    if (this._hasEquivalentView(outletName, view)) {
+      return;
+    }
+
     var outlets = get(this, '_outlets'),
         container = get(this, 'container'),
         router = container && container.lookup('router:main'),
@@ -26188,10 +26191,30 @@ Ember.View.reopen({
     }
   },
 
-  disconnectOutlet: function(outletName) {
-    var outlets = get(this, '_outlets');
+  _hasEquivalentView: function(outletName, view) {
+    var existingView = get(this, '_outlets.'+outletName);
+    return existingView &&
+      existingView.prototype === view.prototype &&
+      existingView.get('template') === view.get('template') &&
+      existingView.get('context') === view.get('context');
+  },
 
-    set(outlets, outletName, null);
+  disconnectOutlet: function(outletName) {
+    if (!this._pendingDisconnections) {
+      this._pendingDisconnections = {};
+    }
+    this._pendingDisconnections[outletName] = true;
+    Ember.run.once(this, '_finishDisconnections');
+  },
+
+  _finishDisconnections: function() {
+    var outlets = get(this, '_outlets');
+    var pendingDisconnections = this._pendingDisconnections;
+    this._pendingDisconnections = null;
+
+    for (var outletName in pendingDisconnections) {
+      set(outlets, outletName, null);
+    }
   }
 });
 
@@ -29123,6 +29146,74 @@ Ember.Test = {
   */
   onInjectHelpers: function(callback) {
     injectHelpersCallbacks.push(callback);
+  },
+
+  /**
+    @public
+
+    This returns a thenable tailored
+    for testing.  It catches failed
+    `onSuccess` callbacks and invokes
+    the `Ember.Test.failure` function
+    in the last chained then.
+
+    This method should be returned
+    by async helpers such as `wait`.
+
+    @method promise
+    @param resolver {Function}
+  */
+  promise: function(resolver) {
+    var promise = new Ember.RSVP.Promise(resolver);
+    var thenable = {
+      chained: false
+    };
+    thenable.then = function(onSuccess, onFailure) {
+      var self = this, thenPromise, nextPromise;
+      thenable.chained = true;
+      thenPromise = promise.then(onSuccess, onFailure);
+      // this is to ensure all downstream fulfillment
+      // handlers are wrapped in the error handling
+      nextPromise = Ember.Test.promise(function(resolve) {
+        resolve(thenPromise);
+      });
+      thenPromise.then(null, function(reason) {
+        // ensure this is the last promise in the chain
+        // if not, ignore and the exception will propagate
+        // this prevents the same error from being fired multiple times
+        if (!nextPromise.chained) {
+          Ember.Test.failure(reason);
+        }
+      });
+      return nextPromise;
+    };
+    return thenable;
+  },
+
+  /**
+    @public
+
+    Override this method with your
+    testing framework's false assertion
+    This function is called whenever
+    an exception occurs causing the testing
+    promise to fail.
+
+    QUnit example:
+
+    ```javascript
+    Ember.Test.failure = function(reason) {
+      ok(false, reason);
+    }
+    ```
+
+    @method failure
+    @param reason {String}
+  */
+  failure: function(error) {
+    setTimeout(function() {
+      throw error;
+    });
   }
 };
 
@@ -29173,8 +29264,7 @@ Ember.Application.reopen({
 
 
 (function() {
-var Promise = Ember.RSVP.Promise,
-    get = Ember.get,
+var get = Ember.get,
     helper = Ember.Test.registerHelper,
     pendingAjaxRequests = 0;
 
@@ -29206,7 +29296,7 @@ function click(app, selector) {
 function fillIn(app, selector, text) {
   var $el = find(app, selector);
   Ember.run(function() {
-    $el.val(text);
+    $el.val(text).change();
   });
   return wait(app);
 }
@@ -29216,7 +29306,7 @@ function find(app, selector) {
 }
 
 function wait(app, value) {
-  return new Promise(function(resolve) {
+  return Ember.Test.promise(function(resolve) {
     stop();
     var watcher = setInterval(function() {
       var routerIsLoading = app.__container__.lookup('router:main').router.isLoading;
@@ -29248,8 +29338,8 @@ helper('wait', wait);
 
 
 })();
-// Version: v1.0.0-pre.2-1315-ge031b24
-// Last commit: e031b24 (2013-05-05 08:06:37 -0700)
+// Version: v1.0.0-rc.3-214-g9607c2e
+// Last commit: 9607c2e (2013-05-13 16:58:32 -0700)
 
 
 (function() {

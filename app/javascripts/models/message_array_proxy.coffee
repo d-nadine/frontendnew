@@ -2,8 +2,8 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin,
   folder: 'inbox'
-  currentUser: null
-  isLoaded: false
+  currentuser: null
+  isloaded: false
 
   load: ->
     return if @get('isLoaded')
