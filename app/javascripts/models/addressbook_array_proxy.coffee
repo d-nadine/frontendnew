@@ -4,6 +4,8 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   selectedFilter: null
   currentuser: null
   isloaded: false
+  isInitialised: false
+  searchText: null
 
   load: ->
     return if @get('isLoaded')
@@ -17,7 +19,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
         Radium.Tag.all().then (tags) =>
           @set 'isLoaded', true
           @add tags
-          @set 'selectedFilter', 'initial'
+          @set 'selectedFilter', 'all'
           @resolve this
 
   clear: ->
@@ -30,14 +32,41 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
 
     return Ember.A() if !@get('isLoaded') || !@get('selectedFilter')
 
-    if @get('selectedFilter') == 'initial'
+    if @get('selectedFilter') == 'all' && !@get('isInitialised')
+      @set 'isInitialised', true
       return @filterInitital()
 
+    content = content.filter @filterFunction.bind(this)
+
+    if searchText = @get('searchText')
+      beginsWith = content.filter (item) ->
+                    ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
+
+      return beginsWith
+
     content
-  ).property('content.[]', 'selectedFilter')
+  ).property('content.[]', 'selectedFilter', 'searchText')
 
   filterFunction: (item) ->
     @["filter#{@get('selectedFilter').classify()}"](item)
+
+  filterAssigned: (item) ->
+    item.get('user') == @get('currentuser')
+
+  filterAll: (item) ->
+    item
+
+  filterCompanies: (item) ->
+    item.constructor is Radium.Company
+
+  filterExisting: (item) ->
+    ((item.constructor is Radium.Contact) && (item.get('status') == 'existing'))
+
+  filterExclude: (item) ->
+    ((item.constructor is Radium.Contact) && (item.get('status') == 'exclude'))
+
+  filterLead: (item) ->
+    ((item.constructor is Radium.Contact) && (item.get('status') == 'lead'))
 
   filterInitital: (item) ->
     @get('content').filter((item) ->
@@ -45,4 +74,3 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     ).sort((a, b) ->
       Ember.DateTime.compare(a.get('updatedAt'), b.get('updatedAt'))
     ).slice(0, 10)
-

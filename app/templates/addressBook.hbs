@@ -21,7 +21,7 @@
         <a class="btn btn-link" href="#">
           <i class="icon-search"></i>
         </a>
-        <input type="text"/>
+        {{input value=model.searchText type="text" class="field"}}
       </div>
     </div>
     <div class="field control-box actions">
@@ -38,4 +38,4 @@
     </div>
   </div>
 </div>
-{{each controller itemViewClass="Radium.SearchResultItemView"}}
+{{each controller itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
