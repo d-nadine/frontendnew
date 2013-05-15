@@ -6,9 +6,10 @@ Radium.AddressBookController = Radium.ArrayController.extend
     {name: 'all', text: 'All'}
     {name: 'assigned', text: 'Assigned To'}
     {name: 'lead', text: 'Lead'}
-    {name: 'companies', text: 'Companies'}
     {name: 'existing', text: 'Existing Customers'}
     {name: 'exclude', text: 'Excluded from Pipeline'}
+    {name: 'companies', text: 'Companies'}
+    {name: 'tags', text: 'Tags'}
   ]
 
   changeFilter: (filter) ->

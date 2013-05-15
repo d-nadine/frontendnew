@@ -39,16 +39,24 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     content = content.filter @filterFunction.bind(this)
 
     if searchText = @get('searchText')
-      beginsWith = content.filter (item) ->
+      content = content.filter (item) ->
                     ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
 
-      return beginsWith
-
     content
+
+    # FIXME: how are we sorting?
+    content.sort @sortResults.bind(this)
+
   ).property('content.[]', 'selectedFilter', 'searchText')
+
+  sortResults: (left, right) ->
+    Ember.compare left.get('name'), right.get('name')
 
   filterFunction: (item) ->
     @["filter#{@get('selectedFilter').classify()}"](item)
+
+  filterTags: (item) ->
+    item.constructor is Radium.Tag
 
   filterAssigned: (item) ->
     item.get('user') == @get('currentuser')
@@ -71,6 +79,5 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   filterInitital: (item) ->
     @get('content').filter((item) ->
       item.constructor == Radium.Contact
-    ).sort((a, b) ->
-      Ember.DateTime.compare(a.get('updatedAt'), b.get('updatedAt'))
-    ).slice(0, 10)
+    ).sort(@sortResults.bind(this))
+    .slice(0, 10)
