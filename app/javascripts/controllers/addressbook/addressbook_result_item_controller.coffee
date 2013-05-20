@@ -10,8 +10,14 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
     @get('model') instanceof Radium.Contact
   ).property('model')
 
+  isTag: ( ->
+    @get('model') instanceof Radium.Tag
+  ).property('model')
+
   openDeals: ( ->
+    return if @get('isTag')
     return @companyOpenDeals() if @get('isCompany')
+
     @get('deals').filter (deal) ->
       deal.status != 'closed' || deals.status != 'lost'
   ).property('deals.[]')
@@ -20,6 +26,11 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
     return Ember.A() unless @get('isCompany')
 
     @get('contacts').filterProperty 'isLead'
+  ).property('contacts.[]')
+
+  truncatedContacts: ( ->
+    @get('contacts').toArray().sort((left, right) ->
+      Ember.compare(left.get('name'), right.get('name'))).slice(0, 3)
   ).property('contacts.[]')
 
   companyOpenDeals: ->
@@ -45,4 +56,12 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
     return unless leads
 
     if leads == 1 then "1 Lead" else "#{leads} Leads"
+  ).property('openDeals.[]')
+
+  membersText: ( ->
+    contacts = @get('contacts.length')
+
+    return unless contacts
+
+    if contacts == 1 then "1 Member" else "#{contacts} Members"
   ).property('openDeals.[]')

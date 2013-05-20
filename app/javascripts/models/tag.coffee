@@ -4,7 +4,11 @@ Radium.Tag = Radium.Model.extend Radium.FollowableMixin,
   activities: DS.hasMany('Radium.Activity')
   users: DS.hasMany('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
+  companies: DS.hasMany('Radium.Company')
+  user: DS.belongsTo('Radium.User')
+
   name: DS.attr('string')
+  description: DS.attr('string')
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')

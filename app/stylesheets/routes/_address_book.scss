@@ -56,6 +56,27 @@
       }
     }
 
+    .members{
+      margin-top: 8px;
+      min-width: 180px;
+    }
+
+    &.tag{
+      .header .name{
+        margin-top: 15px;
+        font-size: 30px;
+      }
+
+      .description,
+      .created-by{
+        margin-top: 20px;
+      }
+
+      .members{
+        margin-top: 25px;
+      }
+    }
+
     .deals,
     .tags{
       label{
@@ -87,6 +108,11 @@
           }
         }
       }
+    }
+
+    .members{
+      display: inline-block;
+      vertical-align: top;
     }
 
     .delete{
@@ -132,7 +158,7 @@
 
   .tasks{
     position: relative;
-    width: 350px;
+    width: 260px;
     margin-top: 5px;
     .next-task{
       margin-top: 20px;

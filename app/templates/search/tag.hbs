@@ -1,9 +1,20 @@
-<div class="search-result">
+<div {{bindAttr class="isChecked :search-result :tag"}}>
   <div class="meta">
+    {{partial 'shared/check_button'}}
     <div class="header">
-      <div class="contact-name">
+      <div class="name">
         <span class="name">{{#linkTo unimplemented}}{{name}}{{/linkTo}}</span>
+      </div>
+      <div class="created-by">
+        <label>Created By</label>
+        {{#linkTo user user}}{{user.name}}{{/linkTo}}
+      </div>
+      <div class="description">
+        {{description}}
       </div>
     </div>
   </div>
+  <div class="tasks">&nbsp;</div>
+  {{partial 'search/members'}}
+  {{partial 'search/delete'}}
 </div>

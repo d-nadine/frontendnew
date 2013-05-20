@@ -1,0 +1,16 @@
+<div class="members">
+  {{#if contacts.length}}
+    <a href="#">{{membersText}}</a>
+    {{#each truncatedContacts}}
+      <div class="contact">
+        {{avatar this size=small class="img-polaroid"}}
+        {{name}}
+      </div>
+    {{/each}}
+  {{else}}
+    <label> No Members</label>
+  {{/if}}
+  {{#if isTag}}
+    {{#linkTo unimplemented class="btn btn-block"}}Follow{{/linkTo}}
+  {{/if}}
+</div>

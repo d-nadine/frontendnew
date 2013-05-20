@@ -31,7 +31,8 @@ class Populator
     companyDictionary = new Dictionary(companies)
 
     tags = for i in [1..5]
-      Factory.create 'tag'
+      Factory.create 'tag',
+        user: userDictionary.random()
 
     tagDictionary = new Dictionary(tags)
 
@@ -43,6 +44,10 @@ class Populator
           tagDictionary.random()
           tagDictionary.random()
         ]
+
+    contacts.forEach (contact) ->
+      contact.get('tags').forEach (tag) ->
+        tag.get('contacts').addObject contact
 
     contactDictionary = new Dictionary(contacts)
 
