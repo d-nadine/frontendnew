@@ -1,18 +1,38 @@
 <div class="search-result">
+  <button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
+    <i class="icon-todo"></i>
+  </button>
   <div class="meta">
-    {{avatar this size=small class="img-polaroid"}}
+    {{avatar this size=medium class="img-polaroid"}}
     <div class="header">
       <div class="contact-name">
         <span class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</span>
       </div>
       <div class="company-title">
-        <span class="title muted">{{title}}</span>
+        <div class="title muted">{{title}}</div>
         {{#if company}}
-        <span class="company">
+        <div class="company">
           {{#linkTo company company}}{{company.name}}{{/linkTo}}
-        </span>
+        </div>
         {{/if}}
       </div>
+    </div>
+    <div class="links">
+      <div class="deals">
+        <a href="#">1 Open Deal</a>
+      </div>
+      <div class="tags">
+        <label>Tags</label>
+        <a href="#">AAA Companies</a>
+      </div>
+    </div>
+  </div>
+  <div class="tasks">
+    <div class="last-activity">
+      <label>Last Activity</label>
+    </div>
+    <div>
+      {{#linkTo unimplemented}}<i class="icon-mail"></i> 5 days ago{{/linkTo}}
     </div>
   </div>
 </div>

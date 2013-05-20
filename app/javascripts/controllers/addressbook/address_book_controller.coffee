@@ -1,7 +1,6 @@
-Radium.AddressBookController = Radium.ArrayController.extend
-  lookupItemController: (model) ->
-    "search.#{model.typeName()}"
+require 'lib/radium/show_more_mixin'
 
+Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   filters: [
     {name: 'all', text: 'All'}
     {name: 'assigned', text: 'Assigned To'}

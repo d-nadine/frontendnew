@@ -1,4 +1,9 @@
-.address-book-view{
+.addressbook-view{
+  label{
+    text-transform: uppercase;
+    color: $muted;
+  }
+
   #header{
     margin-bottom: 10px;
     #controls{
@@ -12,10 +17,38 @@
     }
   }
 
+  #results{
+    div:first-of-type .search-result{
+      border-top: 1px solid $disabled;
+      padding-top: 10px;
+    }
+  }
+
   .search-result{
-    margin-bottom: 10px;
+    position: relative;
+    margin-bottom: 1px;
+    margin-top: 5px;
     padding-bottom: 10px;
     border-bottom: 1px solid $disabled;
+
+    .meta{
+      margin-left: 45px;
+      img.avatar{
+        margin-top: 2px;
+      }
+      .links{
+        margin-left: 85px;
+        .deals{
+          margin-bottom: 10px;
+        }
+        .tags{
+          label{
+            display: inline;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
   }
 
   .company-title{
@@ -23,6 +56,8 @@
   }
 
   .header,
+  .tasks,
+  .meta,
   .avatar{
     display: inline-block;
     vertical-align: top;
@@ -30,12 +65,19 @@
 
   .header{
     position: relative;
+    margin-top: 5px;
+    margin-left: 5px;
     .name{
-      font-size: 16px;
+      font-size: 20px;
     }
 
     .company-title{
       margin-top: 1px;
     }
+  }
+  
+  .tasks{
+    margin-top: 5px;
+    margin-left: 30px;
   }
 }

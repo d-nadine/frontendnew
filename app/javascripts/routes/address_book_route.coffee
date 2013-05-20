@@ -1,4 +1,4 @@
-Radium.AddressBookRoute = Radium.Route.extend
+Radium.AddressbookRoute = Radium.Route.extend
   model: ->
     addressBookProxy = Radium.AddressBookArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')

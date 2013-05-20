@@ -38,4 +38,10 @@
     </div>
   </div>
 </div>
-{{each controller itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
+{{#if visibleContent.length}}
+<a href="#" {{action checkAll}}>Select All</a>
+{{/if}}
+<div id="results">
+{{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
+</div>
+
