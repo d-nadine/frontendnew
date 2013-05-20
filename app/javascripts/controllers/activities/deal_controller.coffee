@@ -12,6 +12,7 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
   value: Ember.computed.alias 'deal.value'
 
   contact: Ember.computed.alias 'reference.contact'
+  contact: Ember.computed.alias 'reference.company'
   reassignedTo: Ember.computed.alias 'meta.user'
   status: Ember.computed.alias 'meta.status'
   isNegotiating: Ember.computed.alias 'meta.negotiating'
