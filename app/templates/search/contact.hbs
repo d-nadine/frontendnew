@@ -18,21 +18,38 @@
       </div>
     </div>
     <div class="links">
+      {{#if openDeals.length}}
       <div class="deals">
-        <a href="#">1 Open Deal</a>
+        <a href="#">{{openDealsText}}</a>
       </div>
+      {{/if}}
+      {{#if tags.length}}
       <div class="tags">
         <label>Tags</label>
-        <a href="#">AAA Companies</a>
+        {{#each tags}}
+          {{#linkTo unimplemented}}{{name}}{{/linkTo}}
+        {{/each}}
       </div>
+      {{/if}}
     </div>
   </div>
   <div class="tasks">
     <div class="last-activity">
       <label>Last Activity</label>
+      <div>
+        {{#linkTo unimplemented}}<i class="icon-mail"></i> 5 days ago{{/linkTo}}
+      </div>
     </div>
-    <div>
-      {{#linkTo unimplemented}}<i class="icon-mail"></i> 5 days ago{{/linkTo}}
+    {{#if hasTasks}}
+    <div class="next-task">
+      <label>Next Task</label>
+      {{render "next_task" nextTask}}
     </div>
+    {{/if}}
+  </div>
+  <div class="delete">
+    {{#linkTo unimplemented class="delete btn-link"}}
+      <i class="icon-delete"></i>
+    {{/linkTo}}
   </div>
 </div>
