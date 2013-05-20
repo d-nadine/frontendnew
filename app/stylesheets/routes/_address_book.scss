@@ -31,6 +31,10 @@
     padding-bottom: 10px;
     border-bottom: 1px solid $disabled;
 
+    &.is-checked{
+      background-color: $secondary-selection;
+    }
+
     .deals,
     .tags{
       label{
