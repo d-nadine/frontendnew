@@ -1,4 +1,4 @@
-Radium.Company = Radium.Model.extend
+Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   contacts: DS.hasMany('Radium.Contact')
   addresses: DS.hasMany('Radium.Address')
   activities: DS.hasMany('Radium.Activity', inverse: 'companies')
@@ -15,3 +15,8 @@ Radium.Company = Radium.Model.extend
   status: DS.attr('string')
 
   primaryAddress: Radium.computed.primary 'addresses'
+
+  todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
+  meetings: DS.hasMany('Radium.Meeting')
+  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

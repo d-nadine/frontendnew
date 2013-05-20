@@ -1,0 +1,13 @@
+{{#if primaryAddress}}
+  {{#with primaryAddress}}
+    <div class="readonly readonly-address">
+      <i class="icon-office pull-right"></i>
+      <div>{{street}}</div>
+      <div>{{formatted}}</div>
+      <div>{{country}}</div>
+      <div class="location">
+        <a href="#"><i class="icon-location"></i></a>
+      </div>
+    </div>
+  {{/with}}
+{{/if}}

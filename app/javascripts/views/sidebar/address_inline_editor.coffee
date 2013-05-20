@@ -17,12 +17,6 @@ Radium.AddressInlineEditor = Radium.InlineEditorView.extend
     @get('controller.addresses').createRecord(@get('company.primaryAddress').serialize())
   ).observes('company')
 
-  primaryAddress: ( ->
-    address = @get('controller.primaryAddress')
-
-    [address.get('state'), address.get('city'), address.get('zipcode')].join(', ')
-  ).property('controller.primaryAddress')
-
   template: Ember.Handlebars.compile """
     <div>
       {{#if view.isEditing}}
@@ -32,19 +26,7 @@ Radium.AddressInlineEditor = Radium.InlineEditorView.extend
         </div>
       {{else}}
         <h2>Address <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-        {{#if primaryAddress}}
-          {{#with primaryAddress}}
-            <div class="readonly">
-              <i class="icon-office pull-right"></i>
-              <div>{{street}}</div>
-              <div>{{view.primaryAddress}}</div>
-              <div>{{country}}</div>
-              <div class="location">
-                <a href="#"><i class="icon-location"></i></a>
-              </div>
-            </div>
-          {{/with}}
-        {{/if}}
+        {{partial 'shared/address'}}
       {{/if}}
     </div>
   """

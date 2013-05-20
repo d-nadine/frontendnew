@@ -1,11 +1,9 @@
 <div {{bindAttr class="isChecked :search-result"}}>
-  <button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
-    <i class="icon-todo"></i>
-  </button>
+  {{partial 'shared/check_button'}}
   <div class="meta">
     {{avatar this size=medium class="img-polaroid"}}
     <div class="header">
-      <div class="contact-name">
+      <div class="name">
         <span class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</span>
       </div>
       <div class="company-title">
@@ -17,39 +15,8 @@
         {{/if}}
       </div>
     </div>
-    <div class="links">
-      {{#if openDeals.length}}
-      <div class="deals">
-        <a href="#">{{openDealsText}}</a>
-      </div>
-      {{/if}}
-      {{#if tags.length}}
-      <div class="tags">
-        <label>Tags</label>
-        {{#each tags}}
-          {{#linkTo unimplemented}}{{name}}{{/linkTo}}
-        {{/each}}
-      </div>
-      {{/if}}
-    </div>
+    {{partial 'search/links'}}
   </div>
-  <div class="tasks">
-    <div class="last-activity">
-      <label>Last Activity</label>
-      <div>
-        {{#linkTo unimplemented}}<i class="icon-mail"></i> 5 days ago{{/linkTo}}
-      </div>
-    </div>
-    {{#if hasTasks}}
-    <div class="next-task">
-      <label>Next Task</label>
-      {{render "next_task" nextTask}}
-    </div>
-    {{/if}}
-  </div>
-  <div class="delete">
-    {{#linkTo unimplemented class="delete btn-link"}}
-      <i class="icon-delete"></i>
-    {{/linkTo}}
-  </div>
+  {{partial 'search/tasks'}}
+  {{partial 'search/delete'}}
 </div>

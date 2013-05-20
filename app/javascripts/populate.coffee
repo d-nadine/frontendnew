@@ -46,6 +46,12 @@ class Populator
 
     contactDictionary = new Dictionary(contacts)
 
+    contactDictionary.set.forEach (contact) =>
+      contact.get('deals').addObject Factory.create 'deal',
+                                       contact: contactDictionary.random()
+                                       user: userDictionary.random()
+                                       status: 'published'
+
     settings = Factory.create 'settings'
 
     settings.get('negotiatingStatuses').forEach (status) ->

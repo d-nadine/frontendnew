@@ -7,6 +7,10 @@ Radium.Address = Radium.Model.extend
   country: DS.attr('string')
   zipcode: DS.attr('string')
 
+  formatted: ( ->
+    [@get('state'), @get('city'), @get('zipcode')].join(', ')
+  ).property('street', 'state', 'city', 'country', 'zipcode')
+
   value: ( ->
     return if @get('isNew')
 

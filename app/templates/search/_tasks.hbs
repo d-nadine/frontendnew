@@ -1,0 +1,14 @@
+<div class="tasks">
+  <div class="last-activity">
+    <label>Last Activity</label>
+    <div>
+      {{#linkTo unimplemented}}<i class="icon-mail"></i> 5 days ago{{/linkTo}}
+    </div>
+  </div>
+  {{#if hasTasks}}
+  <div class="next-task">
+    <label>Next Task</label>
+    {{render "next_task" nextTask}}
+  </div>
+  {{/if}}
+</div>

@@ -1,0 +1,20 @@
+<div class="links">
+  <div class="deals">
+    {{#if openDeals.length}}
+      <a href="#">{{openDealsText}}</a>
+    {{/if}}
+    {{#if leads.length}}
+      <a href="#">{{leadsText}}</a>
+    {{/if}}
+  </div>
+  {{#if tags.length}}
+  <div class="tags">
+    <label>Tags</label>
+    {{#each tags}}
+      {{#linkTo unimplemented}}{{name}}{{/linkTo}}
+    {{else}}
+      <label>None</label>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>

@@ -1,13 +1,15 @@
-<div class="search-result">
-  <button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
-    <i class="icon-todo"></i>
-  </button>
+<div {{bindAttr class="isChecked :search-result :company"}}>
+  {{partial 'shared/check_button'}}
   <div class="meta">
-    <img src="http://placehold.it/42x42" class="img-polaroid" alt="">
+    <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
     <div class="header">
-      <div class="contact-name">
-        <span class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</span>
+      <div class="name">
+        <span class="name">{{#linkTo company this}}{{name}}{{/linkTo}}</span>
       </div>
+      {{partial 'shared/address'}}
     </div>
+    {{partial 'search/links'}}
   </div>
+  {{partial 'search/tasks'}}
+  {{partial 'search/delete'}}
 </div>

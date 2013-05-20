@@ -26,13 +26,34 @@
 
   .search-result{
     position: relative;
+    min-height: 148px;
     margin-bottom: 1px;
     margin-top: 5px;
     padding-bottom: 10px;
     border-bottom: 1px solid $disabled;
 
+    &:not(.company){
+      .meta .links{
+        margin-left: 85px;
+      }
+    }
+
+    &.company{
+      .meta .links{
+        margin-left: 94px;
+      }
+    }
+
     &.is-checked{
       background-color: $secondary-selection;
+    }
+
+    &:hover{
+      .delete{
+        .icon-delete{
+          opacity: 1;
+        }
+      }
     }
 
     .deals,
@@ -56,7 +77,6 @@
         margin-top: 2px;
       }
       .links{
-        margin-left: 85px;
         .deals{
           margin-bottom: 10px;
         }
@@ -72,11 +92,15 @@
     .delete{
       display: inline-block;
       vertical-align: bottom;
+      .icon-delete{
+        opacity: 0;
+      }
     }
   }
 
   .company-title{
     text-transform: uppercase;
+    margin-top: 1px;
   }
 
   .header,
@@ -91,15 +115,21 @@
     position: relative;
     margin-top: 5px;
     margin-left: 5px;
+    width: 235px;
     .name{
       font-size: 20px;
     }
 
-    .company-title{
-      margin-top: 1px;
+    .readonly-address{
+      margin-bottom: 10px;
+      .icon-office{
+        position: absolute;
+        right: 0;
+        top: 27px;
+      }
     }
   }
-  
+
   .tasks{
     position: relative;
     width: 350px;
