@@ -37,3 +37,5 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   isPastPayment: Radium.computed.isPast("payBy")
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+
+  company: Ember.computed.alias('contact.company')
