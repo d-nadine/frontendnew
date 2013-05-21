@@ -3,7 +3,16 @@ Radium.ShowMoreMixin = Ember.Mixin.create
   currentPage: 1
 
   currentLimit: (->
-    @get('currentPage') * @get('perPage')
+    currentLimit = @get('currentPage') * @get('perPage')
+
+    return currentLimit if @get('currentPage') == 1
+
+    contentLength = @get('arrangedContent.length')
+
+    if currentLimit > contentLength
+      contentLength
+    else
+      currentLimit
   ).property('currentPage', 'perPage')
 
   visibleContent: (->
@@ -14,14 +23,6 @@ Radium.ShowMoreMixin = Ember.Mixin.create
   ).property('arrangedContent.length', 'currentLimit')
 
   showMore: ->
-    currentLimit  = @get 'currentLimit'
-    contentLength = @get 'arrangedContent.length'
-    length        = @get 'visibleContent.length'
-
-    newLimit      = currentLimit + @get('perPage')
-    newLimit      = contentLength if newLimit > contentLength
-
-    @set 'currentLimit', newLimit
     @set 'currentPage', @get('currentPage') + 1
 
   totalLength: (->

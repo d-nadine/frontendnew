@@ -76,6 +76,9 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   filterLead: (item) ->
     ((item.constructor is Radium.Contact) && (item.get('status') == 'lead'))
 
+  filterPeople: (item) ->
+    item.constructor is Radium.Contact
+
   filterInitital: (item) ->
     @get('content').filter((item) ->
       item.constructor == Radium.Contact
