@@ -4,7 +4,6 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   selectedFilter: null
   currentuser: null
   isloaded: false
-  isInitialised: false
   searchText: null
 
   load: ->
@@ -19,7 +18,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
         Radium.Tag.all().then (tags) =>
           @set 'isLoaded', true
           @add tags
-          @set 'selectedFilter', 'all'
+          @set 'selectedFilter', 'people'
           @resolve this
 
   clear: ->
@@ -31,10 +30,6 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     return unless content
 
     return Ember.A() if !@get('isLoaded') || !@get('selectedFilter')
-
-    if @get('selectedFilter') == 'all' && !@get('isInitialised')
-      @set 'isInitialised', true
-      return @filterInitital()
 
     content = content.filter @filterFunction.bind(this)
 
