@@ -30,11 +30,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @set('statusTodo', '')
     @trigger 'formReset'
 
-  reassign: ->
-    @set 'reassignForm.todo', @get('reassignTodo')
-    @get('reassignForm').commit()
-    @trigger 'formReset'
-
   submit: (form) ->
     return unless form.get('isValid')
 
@@ -116,9 +111,13 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   showEmail: ->
     form = @get('newEmail')
     form.reset()
-    form.get('to').pushObjects(@get('checkedContent').toArray())
-    @showForm 'email'
 
+    contacts = @get('checkedContent').filter((contact) ->
+      contact instanceof Radium.Contact).toArray()
+
+    form.get('to').pushObjects(contacts)
+
+    @showForm 'email'
 
   deleteAll: ->
     @get('checkedContent').forEach (record) ->

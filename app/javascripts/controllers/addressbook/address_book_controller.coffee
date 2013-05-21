@@ -1,5 +1,5 @@
 require 'lib/radium/show_more_mixin'
-require 'controllers/mixins/bulk_action_controller_mixin'
+require 'mixins/controllers/bulk_action_controller_mixin'
 
 Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   Radium.CheckableMixin,
@@ -33,3 +33,12 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   changeFilter: (filter) ->
     @set('currentPage', 1)
     @set 'model.selectedFilter', filter
+
+  hasContacts: ( ->
+    checkedContent = @get('checkedContent')
+
+    return unless checkedContent.get('length')
+
+    checkedContent.some (item) ->
+      item instanceof Radium.Contact
+  ).property('checkedContent.[]')

@@ -37,15 +37,22 @@
       </div>
       {{#if hasCheckedContent}}
         <ul class="dropdown-menu">
+          {{#if hasContacts}}
+            <li>
+              <a href="#" {{action showForm 'assign'}}>Assign</a>
+            </li>
+          {{/if}}
           <li>
             <a href="#" {{action showForm 'todo'}}>Todo</a>
           </li>
           <li>
             <a href="#" {{action showForm 'call'}}>Call</a>
           </li>
-          <li>
-            <a href="#" {{action showEmail}}>Email</a>
-          </li>
+          {{#if hasContacts}}
+            <li>
+              <a href="#" {{action showEmail}}>Email</a>
+            </li>
+          {{/if}}
         </ul>
       {{/if}}
     </div>
@@ -55,6 +62,7 @@
 {{#if showFormArea}}
   <div class="block block-blue block-arrow-bottom action-forms">
     <div class="upcase">{{view.bulkLeader}}</div>
+    {{partial 'bulk_actions/reassign'}}
     {{#if showEmailForm}}
       {{render "forms/email" newEmail}}
     {{/if}}

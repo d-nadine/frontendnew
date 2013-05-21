@@ -1,6 +1,6 @@
-require 'routes/mixins/email_events_mixin'
+require 'mixins/routes/bulk_action_events_mixin'
 
-Radium.AddressbookRoute = Radium.Route.extend Radium.EmailEventsMixin,
+Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: ->
     addressBookProxy = Radium.AddressBookArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')

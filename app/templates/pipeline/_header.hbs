@@ -75,23 +75,7 @@
 {{#if showFormArea}}
 <div class="block block-blue block-arrow-bottom action-forms">
   <div class="upcase">{{view.bulkLeader}}</div>
-  {{#if showAssignForm}}
-    <form>
-      <div class="assign">
-        {{view view.userPicker}}
-        <div class="assign-todo">
-          <i class="icon-todo"></i>
-          {{view view.assignTodoField viewName="assignTodo"}}
-        </div>
-        <div class="reassign pull-right">
-          <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action reassign}}>
-            <i class="icon-plus icon-white"></i>
-            Reassign
-          </a>
-        </div>
-      </div>
-    </form>
-  {{/if}}
+  {{partial 'bulk_actions/reassign'}}
   {{#if showChangeStatusForm}}
     <form>
       <div class="change-status">

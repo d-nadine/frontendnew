@@ -1,4 +1,4 @@
-require 'controllers/mixins/bulk_action_controller_mixin'
+require 'mixins/controllers/bulk_action_controller_mixin'
 
 Radium.PipelineNegotiatingController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   needs: ['pipelineNegotiatingGroup']

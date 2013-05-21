@@ -89,65 +89,6 @@
     padding: 4px 0 10px 4px;
   }
 
-  .assign, .change-status{
-    position: relative;
-
-    .btn-primary, .btn-success{
-      border-radius: 0;
-    }
-
-    > div{
-      display: inline-block;
-      vertical-align: top;
-    }
-
-    label {
-      position: relative;
-      top: 5px;
-      width: 30px;
-      height: 20px;
-      color: $muted;
-      cursor: default;
-    }
-  }
-
-  .change-status,
-  .assign{
-    .combobox,
-    .assign-todo{
-      position: relative;
-      border: 1px solid $dark-background;
-    }
-
-    .assign-todo{
-      width: 54%;
-      padding-bottom: 2px;
-      background-color: $bright;
-      .todo{
-        margin-left: 20px;
-      }
-
-      .icon-todo{
-        position: absolute;
-        top: 7px;
-      }
-    }
-
-    .assign-todo,
-    .reassign{
-      .btn{
-        padding-right: 25px;
-      }
-    }
-
-    .success {
-      position: relative;
-      top: 4px;
-      right: 5px;
-      color: $bright;
-    }
-  }
-
   .change-status{
     #change-status-action{
       margin-top: 1px;

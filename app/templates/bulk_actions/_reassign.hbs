@@ -1,0 +1,17 @@
+{{#if showAssignForm}}
+  <form>
+    <div class="assign">
+      {{view view.userPicker}}
+      <div class="assign-todo">
+        <i class="icon-todo"></i>
+        {{view view.assignTodoField viewName="assignTodo"}}
+      </div>
+      <div class="reassign pull-right">
+        <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action reassign this}}>
+          <i class="icon-plus icon-white"></i>
+          Reassign
+        </a>
+      </div>
+    </div>
+  </form>
+{{/if}}

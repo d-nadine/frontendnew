@@ -1,26 +1,9 @@
-Radium.PipelineViewBase = Ember.View.extend
-  userPicker: Radium.UserPicker.extend
-    disabledBinding: 'controller.isDisabled'
-    valueBinding: 'controller.assignToUser'
+require 'mixins/views/bulk_action_view_mixin'
 
-  didInsertElement: ->
-    @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
-
-  onFormReset: ->
-    if @$('.action-forms form')
-      @$('.action-forms form').each  ->
-        @reset()
-
-    @get('assignTodo').reset() if @get('assignTodo')
-    @get('statusTodo').reset() if @get('statusTodo')
-
+Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   statusPicker: Ember.Select.extend
     contentBinding: 'controller.statuses'
     valueBinding: 'controller.changedStatus'
-
-  assignTodoField: Radium.FormsTodoFieldView.extend
-    valueBinding: 'controller.reassignTodo'
-    placeholder: "Add related todo?"
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.statusTodo'
@@ -53,4 +36,4 @@ Radium.PipelineViewBase = Ember.View.extend
     return result unless form == "assign"
 
     result += " to"
-  ).property('controller.activeForm', 'controller.checkedContent.length')
+  ).property('controller.activeForm', 'controller.checkedContent.[]')
