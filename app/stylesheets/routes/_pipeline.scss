@@ -2,6 +2,13 @@
   .table-list{
     margin-top: 15px;
   }
+
+  .email-confirmation-view {
+    .close{
+      display: block;
+    }
+  }
+
   .table-list tbody td:first-child {
     position: relative;
 
