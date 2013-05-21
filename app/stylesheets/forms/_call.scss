@@ -71,6 +71,13 @@
       font-size: 23px;
     }
 
+    .btn-success{
+      &:not(.dropdown-toggle){
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
     .dropdown-toggle:focus {
       outline: none;
     }

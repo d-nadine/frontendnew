@@ -35,11 +35,40 @@
           {{/if}}
         </button>
       </div>
+      {{#if hasCheckedContent}}
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" {{action showForm 'todo'}}>Todo</a>
+          </li>
+          <li>
+            <a href="#" {{action showForm 'call'}}>Call</a>
+          </li>
+          <li>
+            <a href="#" {{action showForm "email"}}>Email</a>
+          </li>
+        </ul>
+      {{/if}}
     </div>
   </div>
 </div>
 {{#if visibleContent.length}}
-<a href="#" {{action checkAll}}>Select All</a>
+  <a href="#" {{action checkAll}}>Select All</a>
+{{/if}}
+{{#if showFormArea}}
+  <div class="block block-blue block-arrow-bottom action-forms">
+    <div class="upcase">{{view.bulkLeader}}</div>
+    {{#if showEmailForm}}
+      {{template 'unimplemented'}}
+    {{/if}}
+
+    {{#if showTodoForm}}
+      {{render "forms/todo" todoForm}}
+    {{/if}}
+
+    {{#if showCallForm}}
+      {{render "forms/call" callForm}}
+    {{/if}}
+  </div>
 {{/if}}
 <div id="results">
 {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}

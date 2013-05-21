@@ -14,9 +14,43 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'tags', text: 'Tags'}
   ]
 
+  hasCheckedContent: Ember.computed.bool 'checkedContent.length'
+  activeForm: null
+
+  showTodoForm: Ember.computed.equal('activeForm', 'todo')
+  showCallForm: Ember.computed.equal('activeForm', 'call')
+  showEmailForm: Ember.computed.equal('activeForm', 'email')
+
+  hasActiveForm: Ember.computed.notEmpty('activeForm')
+
+  todoForm: Radium.computed.newForm('todo')
+
+  showFormArea: ( ->
+    @get('hasCheckedContent') && @get('hasActiveForm')
+  ).property('hasCheckedContent', 'hasActiveForm')
+
+  todoFormDefaults: (->
+    description: null
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    reference: @get('checkedContent')
+  ).property('checkedContent.[]', 'tomorrow')
+
+  callForm: Radium.computed.newForm('call', canChangeContact: false)
+
+  callFormDefaults: (->
+    description: null
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    reference: @get('model')
+  ).property('model.[]', 'tomorrow')
+
+  showForm: (form) ->
+    @set 'activeForm', form
+
   checkAll: ->
-    hasCheckedContent = !!@get('checkedContent.length')
-    @get('visibleContent').setEach 'isChecked', !hasCheckedContent
+    @get('visibleContent').setEach 'isChecked', !@get('hasCheckedContent')
 
   changeFilter: (filter) ->
     @set('currentPage', 1)

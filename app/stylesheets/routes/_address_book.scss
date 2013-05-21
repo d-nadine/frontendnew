@@ -17,6 +17,13 @@
     }
   }
 
+  .block-blue{
+    margin-bottom: 22px;
+    .upcase{
+      margin-bottom: 10px;
+    }
+  }
+
   #results{
     div:first-of-type .search-result{
       border-top: 1px solid $disabled;
