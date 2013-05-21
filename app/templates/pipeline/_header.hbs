@@ -41,13 +41,15 @@
           <li>
             <a href="#" {{action showForm 'call'}}>Call</a>
           </li>
-          <li>
-            <a href="#" {{action showForm "email"}}>Email</a>
-          </li>
+          {{#if isLeads}}
+            <li>
+              <a href="#" {{action showEmail}}>Email</a>
+            </li>
+          {{/if}}
           {{#unless isLeads}}
-          <li>
-            <a href="#" {{action showForm 'status'}}>Change Status</a>
-          </li>
+            <li>
+              <a href="#" {{action showForm 'status'}}>Change Status</a>
+            </li>
           {{/unless}}
           <li>
             <a href="#" {{action deleteAll}}>Delete</a>
@@ -108,7 +110,7 @@
   {{/if}}
 
   {{#if showEmailForm}}
-    {{template 'unimplemented'}}
+    {{render "forms/email" newEmail}}
   {{/if}}
 
   {{#if showTodoForm}}

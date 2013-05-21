@@ -1,4 +1,4 @@
-Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
+Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   needs: ['users', 'dealStatuses']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
@@ -16,6 +16,7 @@ Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
   showAssignForm: Ember.computed.equal('activeForm', 'assign')
   showChangeStatusForm: Ember.computed.equal('activeForm', 'status')
   showEmailForm: Ember.computed.equal('activeForm', 'email')
+  hasCheckedContent: Ember.computed.bool 'checkedContent.length'
 
   hasActiveForm: Ember.computed.notEmpty('activeForm')
 
@@ -93,6 +94,31 @@ Radium.PipelineControllerMixin = Ember.Mixin.create Ember.Evented,
     user: @get('currentUser')
     reference: @get('model')
   ).property('model.[]', 'tomorrow')
+
+  newEmail: (->
+    Radium.EmailForm.create
+      showAddresses: true
+      showSubject: true
+      showEmailCancel: true
+      subject: ''
+      message: ''
+      to: []
+      cc: []
+      bcc: []
+  ).property()
+
+  checkAll: ->
+    @get('visibleContent').setEach 'isChecked', !@get('hasCheckedContent')
+
+  cancelSendEmail: ->
+    @set 'activeForm', null
+
+  showEmail: ->
+    form = @get('newEmail')
+    form.reset()
+    form.get('to').pushObjects(@get('checkedContent').toArray())
+    @showForm 'email'
+
 
   deleteAll: ->
     @get('checkedContent').forEach (record) ->

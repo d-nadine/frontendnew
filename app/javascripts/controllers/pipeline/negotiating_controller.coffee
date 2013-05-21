@@ -1,6 +1,6 @@
-require 'controllers/pipeline/pipeline_controller_mixin'
+require 'controllers/mixins/bulk_action_controller_mixin'
 
-Radium.PipelineNegotiatingController = Radium.ObjectController.extend Radium.PipelineControllerMixin,
+Radium.PipelineNegotiatingController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   needs: ['pipelineNegotiatingGroup']
   selectedGroup: Ember.computed.alias 'controllers.pipelineNegotiatingGroup.selectedGroup'
 
