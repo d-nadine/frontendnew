@@ -7,6 +7,7 @@ Radium.BulkActionViewMixin = Ember.Mixin.create
     valueBinding: 'controller.assignToUser'
 
   didInsertElement: ->
+    @_super.apply this, arguments
     @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
 
   onFormReset: ->

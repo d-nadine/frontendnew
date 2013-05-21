@@ -27,7 +27,9 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       reassignForm = @controller.get('reassignForm')
       reassignForm.set('todo', @controller.get('reassignTodo'))
       reassignForm.commit()
-      # @trigger 'formReset'
+      @controller.set('reassignTodo', null)
+      reassignForm.reset()
+      @controller.trigger 'formReset'
       @resetForm()
       @render 'bulk_actions/reassigned',
         into: @getTemplate()
