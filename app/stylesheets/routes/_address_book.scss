@@ -4,6 +4,12 @@
     color: $muted;
   }
 
+  .email-confirmation-view {
+    .close{
+      display: block;
+    }
+  }
+
   #header{
     margin-bottom: 10px;
     #controls{

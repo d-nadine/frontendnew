@@ -217,6 +217,10 @@
 .email-confirmation-view {
   padding: 30px 15px;
 
+  .close{
+    display: none;
+  }
+
   .sending {
     text-align: center;
 

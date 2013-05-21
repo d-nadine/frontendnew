@@ -44,21 +44,19 @@
             <a href="#" {{action showForm 'call'}}>Call</a>
           </li>
           <li>
-            <a href="#" {{action showForm "email"}}>Email</a>
+            <a href="#" {{action showEmail}}>Email</a>
           </li>
         </ul>
       {{/if}}
     </div>
   </div>
 </div>
-{{#if visibleContent.length}}
-  <a href="#" {{action checkAll}}>Select All</a>
-{{/if}}
+{{outlet confirmation}}
 {{#if showFormArea}}
   <div class="block block-blue block-arrow-bottom action-forms">
     <div class="upcase">{{view.bulkLeader}}</div>
     {{#if showEmailForm}}
-      {{template 'unimplemented'}}
+      {{render "forms/email" newEmail}}
     {{/if}}
 
     {{#if showTodoForm}}
@@ -70,7 +68,10 @@
     {{/if}}
   </div>
 {{/if}}
+{{#if visibleContent.length}}
+  <a href="#" {{action checkAll}}>Select All</a>
+{{/if}}
 <div id="results">
-{{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
-{{partial 'shared/show_more'}}
+  {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
+  {{partial 'shared/show_more'}}
 </div>

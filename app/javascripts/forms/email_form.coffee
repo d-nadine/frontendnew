@@ -8,6 +8,14 @@ Radium.EmailForm = Radium.Form.extend
     @set 'content', Ember.Object.create()
     @_super()
 
+  reset: ->
+    @_super.apply this, arguments
+    @set('subject', '')
+    @set('message', '')
+    @get('to').clear()
+    @get('cc').clear()
+    @get('bcc').clear()
+
   data: ( ->
     subject: @get('subject')
     message: @get('message')

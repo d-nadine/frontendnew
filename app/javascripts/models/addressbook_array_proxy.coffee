@@ -37,6 +37,8 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
       content = content.filter (item) ->
                     ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
 
+    content.setEach 'isChecked', false
+
     content
 
     # FIXME: how are we sorting?

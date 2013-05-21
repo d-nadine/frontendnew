@@ -3,15 +3,29 @@ require 'lib/radium/show_more_mixin'
 Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   Radium.CheckableMixin,
 
+  init: ->
+    @_super.apply this, arguments
+    @get('checkedContent').addArrayObserver(this)
+
+  arrayWillChange:  (start, removeCount, addCount) ->
+    @set 'activeForm', null
+
+  arrayDidChange: (start, removeCount, addCount) ->
+    null
+
+  destroy: ->
+    @_super.apply this, arguments
+    @get('checkedContent').removeArrayObserver(this)
+
   filters: [
-    {name: 'all', text: 'All'}
     {name: 'people', text: 'People'}
+    {name: 'tags', text: 'Tags'}
     {name: 'assigned', text: 'Assigned To'}
     {name: 'lead', text: 'Lead'}
     {name: 'existing', text: 'Existing Customers'}
     {name: 'exclude', text: 'Excluded from Pipeline'}
     {name: 'companies', text: 'Companies'}
-    {name: 'tags', text: 'Tags'}
+    {name: 'all', text: 'All'}
   ]
 
   hasCheckedContent: Ember.computed.bool 'checkedContent.length'
@@ -45,6 +59,27 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     user: @get('currentUser')
     reference: @get('model')
   ).property('model.[]', 'tomorrow')
+
+  newEmail: (->
+    Radium.EmailForm.create
+      showAddresses: true
+      showSubject: true
+      showEmailCancel: true
+      subject: ''
+      message: ''
+      to: []
+      cc: []
+      bcc: []
+  ).property()
+
+  cancelSendEmail: ->
+    @set 'activeForm', null
+
+  showEmail: ->
+    form = @get('newEmail')
+    form.reset()
+    form.get('to').pushObjects(@get('checkedContent').toArray())
+    @showForm 'email'
 
   showForm: (form) ->
     @set 'activeForm', form
