@@ -49,6 +49,9 @@
     }
 
     &:hover{
+      &:not(.is-checked){
+        background-color: lighten($secondary-selection, 4);
+      }
       .delete{
         .icon-delete{
           opacity: 1;
@@ -67,9 +70,21 @@
         font-size: 30px;
       }
 
+      .header label{
+        display: inline;
+      }
+
+      .btn-block,
       .description,
       .created-by{
         margin-top: 20px;
+      }
+
+      .btn-block{
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $muted;
+        width: 187px;
       }
 
       .members{
@@ -79,6 +94,7 @@
 
     .deals,
     .tags{
+      margin-top: 10px;
       label{
         display: inline;
         margin-right: 10px;
@@ -126,7 +142,10 @@
 
   .company-title{
     text-transform: uppercase;
-    margin-top: 1px;
+    margin-top: 10px;
+    > div{
+      margin-top: 10px;
+    }
   }
 
   .header,
@@ -148,6 +167,7 @@
 
     .readonly-address{
       margin-bottom: 10px;
+      margin-top: 10px;
       .icon-office{
         position: absolute;
         right: 0;
