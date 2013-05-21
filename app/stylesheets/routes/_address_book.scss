@@ -62,6 +62,11 @@
     .members{
       margin-top: 8px;
       min-width: 180px;
+
+      a{
+        display: block;
+        margin-bottom: 5px;
+      }
     }
 
     &.tag{
@@ -88,7 +93,7 @@
       }
 
       .members{
-        margin-top: 25px;
+        margin-top: 10px;
       }
     }
 

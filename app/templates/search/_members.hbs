@@ -7,6 +7,9 @@
         {{name}}
       </div>
     {{/each}}
+    {{#if hasMoreContacts}}
+      <strong>...</strong>
+    {{/if}}
   {{else}}
     <label> No Members</label>
   {{/if}}

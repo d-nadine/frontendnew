@@ -33,6 +33,14 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
       Ember.compare(left.get('name'), right.get('name'))).slice(0, 3)
   ).property('contacts.[]')
 
+  hasMoreContacts: ( ->
+    contacts = @get('contacts.length')
+
+    return unless contacts
+
+    contacts > @get('truncatedContacts.length')
+  ).property('contacts.[]', 'truncatedContacts')
+
   companyOpenDeals: ->
     openDeals = Ember.A()
 
