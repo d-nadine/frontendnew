@@ -123,5 +123,3 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
   resetForm: ->
     controller = if this.constructor == Radium.PipelineLeadsRoute then 'pipelineLeads' else 'addressbook'
     @controllerFor(controller).set 'activeForm', null
-
-

@@ -4,7 +4,7 @@
       <a href="#">{{openDealsText}}</a>
     {{/if}}
     {{#if leads.length}}
-      <a href="#">{{leadsText}}</a>
+      <a href="#" {{action displayLeads leads}}>{{leadsText}}</a>
     {{/if}}
   </div>
   {{#if tags.length}}

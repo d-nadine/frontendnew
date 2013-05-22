@@ -72,3 +72,8 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     Ember.run.next =>
       @set('model.selectedResource', null)
+
+  displayLeads: (leads) ->
+    @get('controllers.pipelineLeads').set('filteredLeads', leads)
+    @transitionToRoute 'pipeline.leads'
+
