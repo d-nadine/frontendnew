@@ -56,9 +56,7 @@
           <a href="#" {{action createDealFromContact this}} class="btn">Add Deal</a>
         </td>
         <td class="text-right">
-          {{#linkTo unimplemented class="delete btn-link"}}
-            <i class="icon-delete"></i>
-          {{/linkTo}}
+          {{partial 'search/delete'}}
         </td>
       </tr>
     {{else}}
