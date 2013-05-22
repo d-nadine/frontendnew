@@ -61,13 +61,61 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
       @send 'close'
 
-    confirmSingleDelete: ->
+      Radium.Utils.notify "Records have been deleted."
+
+    confirmSingleDelete: (record) ->
+      @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
+
       @render 'bulk_actions/single_delete_confirmation',
         into: 'application'
         outlet: 'modal'
 
     deleteRecord: (record) ->
       record.deleteRecord()
+
+      @send 'close'
+
+      Radium.Utils.notify "Record has been deleted."
+
+    addTags: ->
+      addTagsForm = @controller.get('addTagsForm')
+      addTagsForm.addTags()
+
+      @get('store').commit()
+      addTagsForm.reset()
+
+      @resetForm()
+      Radium.Utils.notify "Selected tags added"
+
+    confirmDeletion: ->
+      @render 'bulk_actions/deletion_confirmation',
+        into: 'application'
+        outlet: 'modal'
+
+    close: ->
+      @render 'nothing',
+        into: 'application'
+        outlet: 'modal'
+
+    deleteAll: ->
+      @controller.get('checkedContent').toArray().forEach (record) ->
+        record.deleteRecord()
+
+      @get('store').commit()
+
+      @send 'close'
+
+    confirmSingleDelete: (record) ->
+      @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
+
+      @render 'bulk_actions/single_delete_confirmation',
+        into: 'application'
+        outlet: 'modal'
+
+    deleteRecord: (record) ->
+      record.deleteRecord()
+
+      @send 'close'
 
   getTemplate: ->
     if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'
