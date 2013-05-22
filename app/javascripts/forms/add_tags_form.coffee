@@ -26,4 +26,3 @@ Radium.AddTagsForm = Radium.Form.extend
         else
           item.get('tags').createRecord 
             name: tag.get('name')
-

@@ -118,11 +118,3 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     form.get('to').pushObjects(contacts)
 
     @showForm 'email'
-
-  deleteAll: ->
-    @get('checkedContent').forEach (record) ->
-      record.deleteRecord()
-
-    @get('store').commit()
-
-    Radium.Utils.notify 'deleted!'
