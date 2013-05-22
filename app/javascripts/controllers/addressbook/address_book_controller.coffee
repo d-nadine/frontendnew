@@ -5,6 +5,8 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   Radium.CheckableMixin,
   Radium.BulkActionControllerMixin,
 
+  isEditable: true
+
   init: ->
     @_super.apply this, arguments
     @get('checkedContent').addArrayObserver(this)
@@ -29,6 +31,24 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'tags', text: 'Tags'}
     {name: 'all', text: 'All'}
   ]
+
+  assignableContent: ( ->
+    checkedContent = @get('checkedContent')
+
+    return unless checkedContent.get('length')
+
+    checkedContent.some (item) ->
+      item instanceof Radium.Contact || item instanceof Radium.Company
+  ).property('checkedContent.[]')
+
+  showAddTags: Ember.computed.equal('activeForm', 'addTags')
+
+  addTagsForm: Radium.computed.newForm('addTags')
+
+  addTagsFormDefaults: ( ->
+    tags: Ember.A()
+    selectedContent: @get('checkedContent')
+  ).property('checkedContent.[]')
 
   changeFilter: (filter) ->
     @set('currentPage', 1)

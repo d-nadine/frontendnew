@@ -31,9 +31,17 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       reassignForm.reset()
       @controller.trigger 'formReset'
       @resetForm()
-      @render 'bulk_actions/reassigned',
-        into: @getTemplate()
-        outlet: 'confirmation'
+      Radium.Utils.notify "Selected Items have been reassigned."
+
+    addTags: ->
+      addTagsForm = @controller.get('addTagsForm')
+      addTagsForm.addTags()
+
+      @get('store').commit()
+      addTagsForm.reset()
+
+      @resetForm()
+      Radium.Utils.notify "Selected tags added"
 
   getTemplate: ->
     if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'

@@ -10,6 +10,20 @@
     }
   }
 
+  .autocomplete{
+    border: 1px solid $control-border-color;
+    ul li{
+      margin: 2px;
+    }
+  }
+
+  #add-tags{
+    margin-top: 10px;
+    font-weight: bold;
+    color: $muted;
+    text-transform: uppercase;
+  }
+
   #header{
     margin-bottom: 10px;
     #controls{

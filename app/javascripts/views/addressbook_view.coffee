@@ -1,3 +1,4 @@
+require 'lib/radium/tag_autocomplete'
 require 'mixins/views/bulk_action_view_mixin'
 
 Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
@@ -25,6 +26,7 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
         when "todo" then "add a todo"
         when "call" then "create and assign a call"
         when "email" then "email "
+        when "addTags" then "Add Tags"
         else
           throw new Error("Unknown #{form} for bulkLeader")
 
@@ -32,3 +34,7 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
 
     result += " to"
   ).property('controller.activeForm', 'controller.checkedContent.[]')
+
+  tags: Radium.TagAutoComplete.extend
+    sourceBinding: 'controller.addTagsForm.tags'
+    placeholder: 'Add Tags'

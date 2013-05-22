@@ -1,6 +1,8 @@
 require 'lib/radium/tag_autocomplete'
+
 Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
   onlyOnNew: true
+
   init: ->
     @_super.apply this, arguments
     Ember.addBeforeObserver this, 'controller.company.tags', null, 'sourceWillChange'

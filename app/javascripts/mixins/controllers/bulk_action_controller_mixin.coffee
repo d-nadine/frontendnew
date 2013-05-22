@@ -1,5 +1,5 @@
 Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
-  needs: ['users', 'dealStatuses']
+  needs: ['users', 'dealStatuses', 'tags']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.dealStatuses.inOrder')
   assignToUser: null
@@ -65,7 +65,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     selectedContent: @get('checkedContent')
     todo: @get('reassignTodo')
     finishBy: @get('tomorrow')
-  ).property('assignToUser', 'checkedContent', 'reassignTodo', 'tomorrow')
+  ).property('assignToUser', 'checkedContent.[]', 'reassignTodo', 'tomorrow')
 
   todoForm: Radium.computed.newForm('todo')
 
