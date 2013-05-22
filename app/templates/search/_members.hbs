@@ -1,6 +1,6 @@
 <div class="members">
   {{#if contacts.length}}
-    <a href="#">{{membersText}}</a>
+    <a href="#" {{action showMembers this}}>{{membersText}}</a>
     {{#each truncatedContacts}}
       <div class="contact">
         {{avatar this size=small class="img-polaroid"}}
@@ -8,7 +8,7 @@
       </div>
     {{/each}}
     {{#if hasMoreContacts}}
-      <strong>...</strong>
+      <strong><a href="#" {{action showMembers this}}>...</a></strong>
     {{/if}}
   {{else}}
     <label> No Members</label>

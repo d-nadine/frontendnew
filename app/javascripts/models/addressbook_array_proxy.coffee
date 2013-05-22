@@ -34,8 +34,9 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     content = content.filter @filterFunction.bind(this)
 
     if searchText = @get('searchText')
-      content = content.filter (item) ->
-                    ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
+      unless @get('selectedResource')
+        content = content.filter (item) ->
+                      ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
 
     content.setEach 'isChecked', false
 
@@ -43,7 +44,6 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
 
     # FIXME: how are we sorting?
     content.sort @sortResults.bind(this)
-
   ).property('content.[]', 'selectedFilter', 'searchText')
 
   sortResults: (left, right) ->
@@ -72,6 +72,14 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
 
   filterLead: (item) ->
     ((item.constructor is Radium.Contact) && (item.get('status') == 'lead'))
+
+  filterResource: (item) ->
+    selectedResource = @get('selectedResource')
+
+    if selectedResource instanceof Radium.Company
+      item.get('company') is selectedResource
+    else
+      item.get('tags').contains selectedResource if item.get('tags')
 
   filterPeople: (item) ->
     item.constructor is Radium.Contact

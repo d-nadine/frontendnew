@@ -5,10 +5,20 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
 
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @get('controller').on('selectedResourceChanged', this, 'onSelectedResourceChanged') if @get('controller').on
+
+  onSelectedResourceChanged: (resource) ->
+    @$('.search-text').val(resource.get('name'))
+
   selectedFilterText: ( ->
     selectedFilter = @get('controller.model.selectedFilter')
 
     return 'All' unless selectedFilter
+
+    return 'Companies' if selectedFilter == "resource" && @get('controller.model.selectedResource') instanceof Radium.Company
+    return 'Tags' if selectedFilter == "resource" && @get('controller.model.selectedResource') instanceof Radium.Tag
 
     @get('controller.filters').findProperty('name', selectedFilter).text
   ).property('controller.model.selectedFilter')
