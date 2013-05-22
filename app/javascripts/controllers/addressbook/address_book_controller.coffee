@@ -61,6 +61,14 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
   changeFilter: (filter) ->
     @set('currentPage', 1)
+    if ['companies', 'tags', 'people'].indexOf(filter) != -1
+      if filter == 'people'
+        @transitionToRoute 'addressbook.contacts'
+        return
+
+      @transitionToRoute "addressbook.#{filter}"
+      return
+
     @set 'model.selectedFilter', filter
 
   showMembers: (resource) ->

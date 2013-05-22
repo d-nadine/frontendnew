@@ -10,6 +10,7 @@
           <i class="icon-arrow-down"></i>
         </button>
         <ul class="dropdown-menu">
+          <li>
           {{#each filters}}
             <li><a {{action changeFilter name}} href="#">{{text}}</a></li>
           {{/each}}

@@ -43,7 +43,10 @@ Radium.Router.map ->
 
   @resource 'calendar', path: '/:year/:month/:day'
 
-  @resource 'addressbook'
+  @resource 'addressbook', ->
+    @route 'companies'
+    @route 'contacts'
+    @route 'tags'
 
   @route 'unimplemented'
 
