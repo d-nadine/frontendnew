@@ -77,3 +77,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @get('controllers.pipelineLeads').set('filteredLeads', leads)
     @transitionToRoute 'pipeline.leads'
 
+  displayOpenDeals: (deals) ->
+    @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
+    @transitionToRoute 'pipeline.opendeals'

@@ -1,7 +1,7 @@
 <div class="links">
   <div class="deals">
     {{#if openDeals.length}}
-      <a href="#">{{openDealsText}}</a>
+      <a href="#" {{action displayOpenDeals openDeals}}>{{openDealsText}}</a>
     {{/if}}
     {{#if leads.length}}
       <a href="#" {{action displayLeads leads}}>{{leadsText}}</a>

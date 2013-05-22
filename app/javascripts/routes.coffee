@@ -22,6 +22,7 @@ Radium.Router.map ->
     @route 'negotiating'
     @route 'closed'
     @route 'lost'
+    @route 'opendeals'
 
   @resource 'leads', ->
     @route 'new'

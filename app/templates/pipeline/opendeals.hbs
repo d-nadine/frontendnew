@@ -1,0 +1,65 @@
+<table class="table table-list">
+  <colgroup>
+    <col class="checkbox">
+    <col class="deal">
+    <col class="assigned-to">
+    <col class="pay-by">
+    <col class="next-task">
+    <col class="status">
+    <col class="value">
+    <col class="delete">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Deal</th>
+      <th>Assigned To</th>
+      <th>Last Activity</th>
+      <th>Next Task</th>
+      <th>Status</th>
+      <th class="text-center">Value</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each controller}}
+      <tr {{bindAttr class="isChecked"}}>
+        <td>
+          {{view Radium.Checkbox class="checker-block" checkedBinding="isChecked"}}
+        </td>
+        <td>
+          <p>
+            <big>{{#linkTo deal this}}{{name}}</big>{{/linkTo}}<br/>
+            {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}<br/>
+            {{contact.title}}
+          </p>
+        </td>
+        <td>
+          <p>
+            <big class="name">{{#linkTo user user}}{{user.name}}{{/linkTo}}</big></br>
+            <span class="title">{{user.title}}</span>
+          <p>
+        </td>
+        <td>
+          {{formatDateTime updatedAt format=date}}
+        </td>
+        <td>
+          {{#if nextTask}}
+            <span class="fixme upcase">unimplemented</span>
+          {{else}}
+            <i class="icon-warning"></i>
+          {{/if}}
+        </td>
+        <td><span class="fixme upcase">unimplemented</span></td>
+        <td class="text-right">{{currency value}}</td>
+        <td class="text-right">
+          {{partial 'search/delete'}}
+        </td>
+      </tr>
+    {{else}}
+      <tr>
+        <td colspan="7">No Deals</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
