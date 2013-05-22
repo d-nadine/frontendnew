@@ -18,6 +18,7 @@ Radium.FormsEmailView = Radium.FormView.extend
   ).property('controller.isSubmitted', 'controller.subject', 'controller.message')
 
   to: Radium.AutocompleteView.extend
+    classNameBindings: [':email']
     sourceBinding: 'controller.to'
     showAvatar: false
     isInvalid: ( ->
@@ -31,10 +32,12 @@ Radium.FormsEmailView = Radium.FormView.extend
     ).property('controller.to.[]')
 
   cc: Radium.AutocompleteView.extend
+    classNameBindings: [':email']
     sourceBinding: 'controller.cc'
     showAvatar: false
 
   bcc: Radium.AutocompleteView.extend
+    classNameBindings: [':email']
     sourceBinding: 'controller.bcc'
     showAvatar: false
 

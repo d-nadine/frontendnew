@@ -11,9 +11,11 @@
   }
 
   .autocomplete{
-    border: 1px solid $control-border-color;
-    ul li{
-      margin: 2px;
+    &:not(.email){
+      border: 1px solid $control-border-color;
+      ul li{
+        margin: 2px;
+      }
     }
   }
 
