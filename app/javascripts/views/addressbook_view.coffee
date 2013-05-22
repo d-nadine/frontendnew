@@ -10,7 +10,7 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
     @get('controller').on('selectedResourceChanged', this, 'onSelectedResourceChanged') if @get('controller').on
 
   onSelectedResourceChanged: (resource) ->
-    @$('.search-text').val(resource.get('name'))
+    @$('input[type=text]').val(resource.get('name')) if @$('input[type=text]')
 
   selectedFilterText: ( ->
     selectedFilter = @get('controller.model.selectedFilter')
