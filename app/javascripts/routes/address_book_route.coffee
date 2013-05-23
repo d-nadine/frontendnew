@@ -11,7 +11,9 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
 
 Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   setupController: (controller, model) ->
-    @controllerFor('addressbook').set('model.selectedFilter', model)
+    addressbookController = @controllerFor('addressbook')
+    addressbookController.set 'searchText', ''
+    addressbookController.set('model.selectedFilter', model)
 
   serialize: (filter) ->
     filter: filter
@@ -22,6 +24,7 @@ Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEvents
 Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
+    addressbookController.set 'searchText', ''
     addressbookController.set('currentPage', 1)
     Ember.run =>
       addressbookController.set('model.selectedResource', model)

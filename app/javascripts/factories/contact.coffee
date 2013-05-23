@@ -29,11 +29,6 @@ Factory.define 'contact', traits: ['timestamps'],
       isPrimary: true
   ]
 
-  tags: -> [
-    Factory.create 'tag',
-      name: Dictionaries.tags.random()
-  ]
-
   addresses: -> [
     Factory.create 'address',
       name: 'Office'

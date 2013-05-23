@@ -18,7 +18,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
         Radium.Tag.all().then (tags) =>
           @set 'isLoaded', true
           @add tags
-          @set 'selectedFilter', 'people'
+          @set 'selectedFilter', 'all'
           @resolve this
 
   clear: ->

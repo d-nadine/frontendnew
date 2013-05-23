@@ -10,9 +10,4 @@ Factory.define 'company', traits: 'timestamps',
       isPrimary: true
   ]
 
-  tags: -> [
-    Factory.create 'tag',
-      name: Dictionaries.tags.random()
-  ]
-
   about: -> "Information about #{@name}"

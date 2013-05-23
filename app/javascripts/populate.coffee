@@ -30,8 +30,9 @@ class Populator
 
     companyDictionary = new Dictionary(companies)
 
-    tags = for i in [1..5]
+    tags = Dictionaries.tags.set.map (tag) =>
       Factory.create 'tag',
+        name: tag
         user: userDictionary.random()
 
     tagDictionary = new Dictionary(tags)
