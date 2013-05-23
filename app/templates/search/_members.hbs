@@ -1,6 +1,10 @@
 <div class="members">
   {{#if contacts.length}}
-    <a href="#" {{action showMembers this}}>{{membersText}}</a>
+    {{#if isTag}}
+      {{#linkTo addressbook.members this}}{{membersText}}{{/linkTo}}
+    {{else}}
+      {{#linkTo addressbook.employees this}}{{membersText}}{{/linkTo}}
+    {{/if}}
     {{#each truncatedContacts}}
       <div class="contact">
         {{avatar this size=small class="img-polaroid"}}

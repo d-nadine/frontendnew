@@ -71,5 +71,7 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
 
     return unless contacts
 
-    if contacts == 1 then "1 Member" else "#{contacts} Members"
+    group = if @get('isTag') then "Member" else "Employee"
+
+    if contacts == 1 then "1 #{group}" else "#{contacts} #{group}s"
   ).property('openDeals.[]')

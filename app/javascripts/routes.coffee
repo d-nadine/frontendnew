@@ -44,9 +44,9 @@ Radium.Router.map ->
   @resource 'calendar', path: '/:year/:month/:day'
 
   @resource 'addressbook', ->
-    @route 'companies'
-    @route 'contacts'
-    @route 'tags'
+    @route 'filter', path: '/:filter'
+    @route 'members', path: '/tags/:tag_id/members'
+    @route 'employees', path: '/companies/:tag_id/employees'
 
   @route 'unimplemented'
 
