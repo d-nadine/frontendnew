@@ -33,16 +33,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       @resetForm()
       Radium.Utils.notify "Selected Items have been reassigned."
 
-    addTags: ->
-      addTagsForm = @controller.get('addTagsForm')
-      addTagsForm.addTags()
-
-      @get('store').commit()
-      addTagsForm.reset()
-
-      @resetForm()
-      Radium.Utils.notify "Selected tags added"
-
     confirmDeletion: ->
       @render 'bulk_actions/deletion_confirmation',
         into: 'application'
@@ -52,16 +42,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       @render 'nothing',
         into: 'application'
         outlet: 'modal'
-
-    deleteAll: ->
-      @controller.get('checkedContent').toArray().forEach (record) ->
-        record.deleteRecord()
-
-      @get('store').commit()
-
-      Radium.Utils.notify "Records have been deleted."
-
-      @send 'close'
 
     confirmSingleDelete: (record) ->
       @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
@@ -88,6 +68,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       Radium.Utils.notify "Selected tags added"
 
     confirmDeletion: ->
+      @controllerFor('bulkActionsDeletionConfirmation').set('model', @getController().get('checkedContent'))
       @render 'bulk_actions/deletion_confirmation',
         into: 'application'
         outlet: 'modal'
@@ -98,7 +79,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         outlet: 'modal'
 
     deleteAll: ->
-      @controller.get('checkedContent').toArray().forEach (record) ->
+      @getController().get('checkedContent').toArray().forEach (record) ->
         record.deleteRecord()
 
       @get('store').commit()
@@ -116,6 +97,12 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       record.deleteRecord()
 
       @send 'close'
+
+  getController: ->
+    if /addressbook/.test this.controller.constructor.toString()
+      @controllerFor "addressbook"
+    else
+      this.controller
 
   getTemplate: ->
     if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'

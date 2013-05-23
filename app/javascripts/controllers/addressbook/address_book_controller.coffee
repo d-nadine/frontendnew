@@ -71,15 +71,15 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     @set 'model.selectedFilter', filter
 
-  showMembers: (resource) ->
-    @set('currentPage', 1)
-    Ember.run =>
-      @set('model.selectedResource', resource)
-      @trigger 'selectedResourceChanged', resource
-      @set 'model.selectedFilter', 'resource'
+  addTags: ->
+    addTagsForm = @get('addTagsForm')
+    addTagsForm.addTags()
 
-    Ember.run.next =>
-      @set('model.selectedResource', null)
+    @get('store').commit()
+    addTagsForm.reset()
+
+    @set 'activeForm', null
+    Radium.Utils.notify "Selected tags added"
 
   displayLeads: (leads) ->
     @get('controllers.pipelineLeads').set('filteredLeads', leads)
