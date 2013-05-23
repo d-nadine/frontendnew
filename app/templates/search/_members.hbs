@@ -12,7 +12,11 @@
       </div>
     {{/each}}
     {{#if hasMoreContacts}}
-      <strong><a href="#" {{action showMembers this}}>...</a></strong>
+      {{#if isTag}}
+        {{#linkTo addressbook.members this}}...{{/linkTo}}
+      {{else}}
+        {{#linkTo addressbook.employees this}}...{{/linkTo}}
+      {{/if}}
     {{/if}}
   {{else}}
     <label> No Members</label>
