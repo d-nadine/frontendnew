@@ -24,12 +24,13 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         outlet: 'confirmation'
 
     reassign: (form) ->
-      reassignForm = @controller.get('reassignForm')
+      controller = @getController()
+      reassignForm = controller.get('reassignForm')
       reassignForm.set('todo', @controller.get('reassignTodo'))
       reassignForm.commit()
-      @controller.set('reassignTodo', null)
+      controller.set('reassignTodo', null)
       reassignForm.reset()
-      @controller.trigger 'formReset'
+      controller.trigger 'formReset'
       @resetForm()
       Radium.Utils.notify "Selected Items have been reassigned."
 
@@ -108,5 +109,4 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
     if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'
 
   resetForm: ->
-    controller = if this.constructor == Radium.PipelineLeadsRoute then 'pipelineLeads' else 'addressbook'
-    @controllerFor(controller).set 'activeForm', null
+    @getController().set 'activeForm', null
