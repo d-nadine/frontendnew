@@ -1,7 +1,8 @@
 Radium.User = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
-  contacts: DS.hasMany('Radium.Contact', inverse: 'user')
+  account: DS.belongsTo('Radium.Account')
+  contacts: DS.hasMany('Radium.Contact')
   deals: DS.hasMany('Radium.Deal')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
@@ -19,9 +20,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   email: DS.attr('string')
   phone: DS.attr('string')
 
-  avatar: DS.attr('object')
+  # avatar: DS.attr('object')
 
-  settings: DS.attr('object')
+  # settings: DS.attr('object')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
@@ -47,3 +48,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   lostDeals: ( ->
     @get('deals').filterProperty 'status', 'lost'
   ).property('deals.[]')
+
+Radium.User.reopenClass
+  current: ->
+    Radium.User.find(name: 'me')

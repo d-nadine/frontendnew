@@ -5,7 +5,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
-  meetings: DS.hasMany('Meetings')
+  meetings: DS.hasMany('Radium.Meeting')
 
   activities: DS.hasMany('Radium.Activity')
 
