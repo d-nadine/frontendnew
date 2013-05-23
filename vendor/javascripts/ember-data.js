@@ -1,4 +1,4 @@
-// Last commit: 76b93ba (2013-05-16 10:35:14 -0700)
+// Last commit: 9be8e6d (2013-05-22 20:51:23 -0700)
 
 
 (function() {
@@ -1020,7 +1020,7 @@ var transformMapValue = function(key, value) {
 
 DS._Mappable = Ember.Mixin.create({
   createInstanceMapFor: function(mapName) {
-    var instanceMeta = Ember.metaPath(this, ['DS.Mappable'], true);
+    var instanceMeta = getMappableMeta(this);
 
     instanceMeta.values = instanceMeta.values || {};
 
@@ -1040,7 +1040,7 @@ DS._Mappable = Ember.Mixin.create({
   },
 
   _copyMap: function(mapName, klass, instanceMap) {
-    var classMeta = Ember.metaPath(klass, ['DS.Mappable'], true);
+    var classMeta = getMappableMeta(klass);
 
     var classMap = classMeta[mapName];
     if (classMap) {
@@ -1067,7 +1067,8 @@ DS._Mappable = Ember.Mixin.create({
 
 DS._Mappable.generateMapFunctionFor = function(mapName, transform) {
   return function(key, value) {
-    var meta = Ember.metaPath(this, ['DS.Mappable'], true);
+    var meta = getMappableMeta(this);
+
     var map = meta[mapName] || Ember.MapWithDefault.create({
       defaultValue: function() { return {}; }
     });
@@ -1077,6 +1078,20 @@ DS._Mappable.generateMapFunctionFor = function(mapName, transform) {
     meta[mapName] = map;
   };
 };
+
+function getMappableMeta(obj) {
+  var meta = Ember.meta(obj, true),
+      keyName = 'DS.Mappable',
+      value = meta[keyName];
+
+  if (!value) { meta[keyName] = {}; }
+
+  if (!meta.hasOwnProperty(keyName)) {
+    meta[keyName] = Ember.create(meta[keyName]);
+  }
+
+  return meta[keyName];
+}
 
 })();
 
@@ -8113,7 +8128,7 @@ DS.FixtureSerializer = DS.Serializer.extend({
 
   extractBelongsTo: function(type, hash, key) {
     var val = hash[key];
-    if (val !== null && val !== undefined) {
+    if (val != null) {
       val = val + '';
     }
     return val;
