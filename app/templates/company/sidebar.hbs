@@ -14,11 +14,13 @@
   </div>
   <hr class="first"/>
   {{#linkTo leads.fromCompany this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
-  <hr />
-  <div class="company-type">
-    {{view view.statusInlineEditor viewName="statusChange"}}
-  </div> 
-  <hr />
+  {{#if contacts.length}}
+    <hr />
+    <div class="company-type">
+      <h2>{{maxContactsStatus}}</h2>
+    </div> 
+    <hr />
+  {{/if}}
   <div class="tag-picker">
     <div class="tag-label">
       <h2 class="blue">Tags</h2>
@@ -50,19 +52,4 @@
   <hr/>
 
   <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
-  <div class="modal hide fade">
-    <div class="modal-header">
-      <button type="button" {{action cancelStatusChange target="view" bubbles="false"}} class="close">×</button>
-      <h2>Change Satus?</h2>
-    </div>
-    <div class="modal-body">
-      <form class="form">
-        <p>You are about to change the status to <strong>{{status}}</strong>, this will change all the contacts for this company to <strong>{{status}}</strong>, do you want to do this?</p>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <a href="#" {{action cancelChangeStatus target="view" bubbles="false"}} class="btn">Cancel</a>
-      <a href="#" {{action changeStatus target="view" bubbles="false"}} class="btn btn-primary">Proceed</a>
-    </div>
-  </div>
 </form>
