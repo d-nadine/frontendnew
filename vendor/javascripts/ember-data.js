@@ -7149,7 +7149,6 @@ DS.JSONSerializer = DS.Serializer.extend({
   */
   sideload: function(loader, type, json, root) {
     var sideloadedType;
-
     this.configureSideloadMappingForType(type);
 
     for (var prop in json) {
@@ -7157,10 +7156,6 @@ DS.JSONSerializer = DS.Serializer.extend({
           prop === root ||
           !!this.metadataMapping.get(prop)) {
         continue;
-      }
-
-      if(prop === "0"){
-        debugger;
       }
 
       sideloadedType = this.typeFromAlias(prop);
@@ -7708,7 +7703,8 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
       recordArray.load(data);
     };
 
-    get(this, 'serializer').extractMany(loader, payload, type);
+    var serializer = get(this, 'serializer')
+    serializer.extractMany(loader, payload, type);
   },
 
   /**

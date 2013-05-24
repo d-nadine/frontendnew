@@ -20,9 +20,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   email: DS.attr('string')
   phone: DS.attr('string')
 
-  # avatar: DS.attr('object')
+  avatar: DS.attr('object')
 
-  # settings: DS.attr('object')
+  settings: DS.attr('object')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 

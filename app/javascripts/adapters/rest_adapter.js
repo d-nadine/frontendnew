@@ -35,11 +35,11 @@ Radium.RESTAdapter.configure('plurals',{
 
 Radium.RESTAdapter.registerTransform('object', {
  deserialize: function(serialized) {
-   return isNone(serialized) ? null : JSON.parse(serialized);
+   return serialized;
  },
 
  serialize: function(deserialized) {
-   return isNone(deserialized) ? null : JSON.stringify(deserialized);
+   return Ember.isNone(deserialized) ? null : JSON.stringify(deserialized);
  }
 });
 
