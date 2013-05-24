@@ -9,6 +9,12 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
 
     addressBookProxy
 
+  deactivate: ->
+    model = @controllerFor('addressbook').get('model')
+    model.destroy()
+    model = null
+    @currentModel = null
+
 Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
