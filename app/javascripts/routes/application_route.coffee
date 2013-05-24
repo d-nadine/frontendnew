@@ -79,7 +79,6 @@ Radium.ApplicationRoute = Radium.Route.extend
       @controllerFor('currentUser').set 'model', user
       settings = user.get('account.settings')
 
-      console.log settings
       @controllerFor('settings').set 'model', settings
 
       dealForm = @get('dealForm')
