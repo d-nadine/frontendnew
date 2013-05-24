@@ -7159,6 +7159,10 @@ DS.JSONSerializer = DS.Serializer.extend({
         continue;
       }
 
+      if(prop === "0"){
+        debugger;
+      }
+
       sideloadedType = this.typeFromAlias(prop);
       Ember.assert("Your server returned a hash with the key " + prop + " but you have no mapping for it", !!sideloadedType);
 

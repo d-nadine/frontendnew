@@ -77,27 +77,28 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.User.current().then (users) =>
       user = users.get('firstObject')
       @controllerFor('currentUser').set 'model', user
-      @controllerFor('settings').set 'model', user.get('account.settings')
+      settings = user.get('account.settings')
 
-    # @controllerFor('users').set 'model', Radium.User.find()
-    # @controllerFor('contacts').set 'model', Radium.Contact.find()
-    # @controllerFor('tags').set 'model', Radium.Tag.find()
-    # @controllerFor('companies').set 'model', Radium.Company.find()
+      console.log settings
+      @controllerFor('settings').set 'model', settings
 
-    # # FIXME: Where are we getting the county list from
-    # @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
+      dealForm = @get('dealForm')
+      dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
+      dealForm.set('checklist.checklistItems', Ember.A())
+      dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
+                                                                            Ember.Object.create(checkListItem.serialize())
+      dealForm.set 'user', @controllerFor('currentUser').get('model')
+      @controllerFor('deals.new').set 'model', dealForm
 
-    # @controllerFor('clock').set 'model', Ember.DateTime.create()
+    @controllerFor('users').set 'model', Radium.User.find()
+    @controllerFor('contacts').set 'model', Radium.Contact.find()
+    @controllerFor('tags').set 'model', Radium.Tag.find()
+    @controllerFor('companies').set 'model', Radium.Company.find()
 
+    # FIXME: Where are we getting the county list from
+    @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
 
-    # dealForm = @get('dealForm')
-    # dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
-    # dealForm.set('checklist.checklistItems', Ember.A())
-    # dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
-    #                                                                       Ember.Object.create(checkListItem.serialize())
-    # dealForm.set 'user', @controllerFor('currentUser').get('model')
-
-    # @controllerFor('deals.new').set 'model', dealForm
+    @controllerFor('clock').set 'model', Ember.DateTime.create() 
 
   renderTemplate: ->
     @render()

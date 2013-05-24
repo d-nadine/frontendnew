@@ -22,13 +22,15 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         });
       });
     }else{
-      base.apply(this, arguments);
+      var args = Array.prototype.call(arguments, 0, -1);
+      base.apply(this, args);
     }
   }
 });
 
 Radium.RESTAdapter.configure('plurals',{
-  settings: 'settings'
+  settings: 'settings',
+  company: 'companies'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
