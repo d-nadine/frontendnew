@@ -75,7 +75,13 @@
         width: 75px;
       }
       label.blue{
+        position: relative;
         margin-bottom: 30px;
+        .icon-edit{
+          position: absolute;
+          top: 2px;
+          left: 78px;
+        }
       }
     }
   }

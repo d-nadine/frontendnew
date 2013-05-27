@@ -1,7 +1,7 @@
 Radium.UserInlineEditor = Radium.InlineEditorView.extend
   activateOnClick: true
 
-  userPicker: Radium.UserPicker.extend
+  userPicker: Radium.UserPicker.extend Radium.ComboboxSelectMixin,
     isSubmitted: true
     leader: ''
 

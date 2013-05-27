@@ -3,7 +3,7 @@ require 'views/sidebar/user_inline_editor'
 
 Radium.DealSidebarView = Radium.View.extend
   contactInlineEditor: Radium.InlineEditorView.extend
-    contactPicker: Radium.Combobox.extend
+    contactPicker: Radium.Combobox.extend Radium.ComboboxSelectMixin,
       classNameBindings: [':contact-picker']
       sourceBinding: 'controller.controllers.contacts'
       valueBinding: 'controller.contact'

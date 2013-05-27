@@ -1,3 +1,5 @@
+require 'lib/radium/value_validation_mixin'
+
 Radium.LeadSourcesView = Radium.TextCombobox.extend Radium.ValueValidationMixin,
   disabledBinding: 'parentView.disabled'
   classNameBindings: [

@@ -43,7 +43,7 @@
               </div>
             </div>
           {{else}}
-            <label class="control-label blue money">{{currency salesGoal}}</label>
+            <label class="control-label blue money">{{currency salesGoal}} <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label> 
           {{/if}}
         {{/view}}
       </div>

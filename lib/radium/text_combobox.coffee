@@ -52,4 +52,5 @@ Radium.TextCombobox = Ember.View.extend
 
   selectItem: (text) ->
     @set 'open', false
-    @set 'value', text
+    Ember.run =>
+      @set 'value', text

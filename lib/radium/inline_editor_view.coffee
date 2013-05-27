@@ -24,6 +24,9 @@ Radium.InlineEditorView = Ember.View.extend
   willDestroyElement: ->
     $('body').off 'click.inline'
 
+  change: (evt) ->
+    @$().trigger 'click' if evt.target.tagName == 'SELECT'
+
   click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
