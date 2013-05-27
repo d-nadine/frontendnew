@@ -7,8 +7,10 @@ Ember.Application.initializer
 
     Radium.User.find('me').then(((user) =>
       currentUserController = container.lookup('controller:currentUser')
-
       currentUserController.set 'model', user
+
+      settingsController = container.lookup('controller:settings')
+      settingsController.set('model', user.get('settings'))
 
       Radium.advanceReadiness()
     ), errHanler)

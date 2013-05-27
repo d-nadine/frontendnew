@@ -73,18 +73,7 @@ Radium.ApplicationRoute = Radium.Route.extend
       controller.set('source', 'Lead Form')
       @transitionTo 'deals.new'
 
-  model: ->
-    console.log('application model hook')
-    Factory.create 'current_user'
-
   setupController: (controller, currentUser) ->
-    console.log('application setup controler route')
-
-    @controllerFor('currentUser').set 'model', currentUser
-    settings = currentUser.get('account.settings')
-
-    @controllerFor('settings').set 'model', settings
-
     # dealForm = @get('dealForm')
     # dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
     # dealForm.set('checklist.checklistItems', Ember.A())
