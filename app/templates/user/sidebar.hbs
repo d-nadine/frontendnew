@@ -33,8 +33,19 @@
       <div class="pull-left">
         <label class="control-label">{{currentMonth}}</label>
       </div>
-      <div id="sales-total" class="pull-right">
-        <label class="control-label blue">{{currency salesGoal}}</label>
+      <div class="sales-total pull-right">
+        {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
+          {{#if view.isEditing}}
+            <div {{bindAttr class="view.isValid:success:error :control-group"}}>
+              <div class="input-prepend">
+                <span class="add-on">$</span>
+                {{input type="number" value=view.value class="field span2" min="0"}}
+              </div>
+            </div>
+          {{else}}
+            <label class="control-label blue money">{{currency salesGoal}}</label>
+          {{/if}}
+        {{/view}}
       </div>
       <div class="clearfix"></div>
       <div class="sales-forecast">

@@ -65,8 +65,18 @@
   }
 
   #sales-goal{
-    #sales-total{
+    .sales-total{
       margin-right: 30px;
+      .control-group{
+        position: relative;
+        top: -6px;
+      }
+      input[type=number]{
+        width: 75px;
+      }
+      label.blue{
+        margin-bottom: 30px;
+      }
     }
   }
 

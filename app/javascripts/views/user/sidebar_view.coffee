@@ -58,7 +58,7 @@ Radium.UserSidebarView = Radium.View.extend
         {{input type="email" value=view.value class="field"}}
       {{else}}
         <div class="control-group">
-          </id><label class="control-label"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+          <label class="control-label"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
           {{#if email}}
             {{#linkTo emails.mailTo this}}<i class="icon-mail"></i>{{email}}{{/linkTo}}
           {{else}}
