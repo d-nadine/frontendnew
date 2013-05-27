@@ -48,5 +48,3 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   lostDeals: ( ->
     @get('deals').filterProperty 'status', 'lost'
   ).property('deals.[]')
-
-Radium.CurrentUser = Radium.User.extend()

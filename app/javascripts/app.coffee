@@ -18,6 +18,8 @@ Radium = Em.Application.create
 
 window.Radium = Radium
 
+Radium.deferReadiness()
+
 require /lib\/radium\/base/
 
 require 'lib/radium/computed'
