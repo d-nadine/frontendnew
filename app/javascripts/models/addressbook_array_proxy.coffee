@@ -56,7 +56,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     item.constructor is Radium.Tag
 
   filterAssigned: (item) ->
-    item.get('user') == @get('currentuser')
+    item.get('user') == @get('currentUser')
 
   filterAll: (item) ->
     item

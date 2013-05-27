@@ -1,4 +1,9 @@
 Radium.RESTAdapter = DS.RESTAdapter.extend({
+  createRecord: function(store, type, record) {
+    if(type == Radium.CurentUser) return;
+
+    this._super.apply(this, arguments);
+  }
 });
 
 Radium.RESTAdapter.configure('plurals',{
@@ -25,4 +30,12 @@ Radium.RESTAdapter.registerTransform('datetime',  {
  serialize: function(deserialized) {
    return null;
  }
+});
+
+Radium.RESTAdapter.map('Radium.Contact', {
+  user: { key: 'assigned_to_id' }
+});
+
+Radium.RESTAdapter.map('Radium.Company', {
+  user: { key: 'assigned_to_id' }
 });

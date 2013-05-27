@@ -74,9 +74,12 @@ Radium.ApplicationRoute = Radium.Route.extend
       @transitionTo 'deals.new'
 
   model: ->
-    Radium.User.current()
+    console.log('application model hook')
+    Factory.create 'current_user'
 
-  setupController: (controller, currentUser)->
+  setupController: (controller, currentUser) ->
+    console.log('application setup controler route')
+
     @controllerFor('currentUser').set 'model', currentUser
     settings = currentUser.get('account.settings')
 

@@ -6195,6 +6195,8 @@ DS.Serializer = Ember.Object.extend({
     }
 
     this.materializeAttributes(record, serialized, prematerialized);
+
+
     this.materializeRelationships(record, serialized, prematerialized);
   },
 

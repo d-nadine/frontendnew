@@ -23,7 +23,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
   filters: [
     {name: 'people', text: 'People'}
-    {name: 'assigned', text: 'Assigned To'}
+    {name: 'assigned', text: 'Assigned To Me'}
     {name: 'lead', text: 'Lead'}
     {name: 'existing', text: 'Existing Customers'}
     {name: 'exclude', text: 'Excluded from Pipeline'}

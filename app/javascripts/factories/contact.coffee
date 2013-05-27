@@ -2,7 +2,9 @@ require 'factories/user'
 require 'factories/phone_number'
 
 Factory.define 'contact', traits: ['timestamps'],
-  name: -> "#{Dictionaries.firstNames.random()} #{Dictionaries.lastNames.random()}"
+  firstName: -> Dictionaries.firstNames.random() 
+  lastName: -> Dictionaries.lastNames.random()
+
   source: -> Dictionaries.leadSources.random()
   title: -> Dictionaries.titles.random()
   status: -> Dictionaries.leadStatuses.random()
