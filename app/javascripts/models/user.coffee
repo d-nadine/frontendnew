@@ -51,4 +51,4 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
 Radium.User.reopenClass
   current: ->
-    Radium.User.find(name: 'me')
+    Radium.User.find 'me'

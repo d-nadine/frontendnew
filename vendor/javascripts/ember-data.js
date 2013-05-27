@@ -8673,8 +8673,12 @@ DS.RESTAdapter = DS.Adapter.extend({
   find: function(store, type, id) {
     var root = this.rootForType(type), adapter = this;
 
-    return this.ajax(this.buildURL(root, id), "GET").then(function(json){
+    var promise = this.ajax(this.buildURL(root, id), "GET");
+
+    return promise.then(function(json){
       return Ember.run(adapter,'didFindRecord', store, type, json, id);
+    }).then(null, function(error) {
+      throw error;
     });
   },
 
@@ -8688,6 +8692,8 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: this.sinceQuery(since)
     }).then(function(json) {
       Ember.run(adapter,'didFindAll', store, type, json);
+    }).then(null, function(error) {
+      console.error(error.message);
     });
   },
 
@@ -8701,6 +8707,8 @@ DS.RESTAdapter = DS.Adapter.extend({
       Ember.run(adapter, function(){
         this.didFindQuery(store, type, json, recordArray);
       });
+    }).then(null, function(error) {
+      console.error(error.message);
     });
   },
 
@@ -8714,6 +8722,8 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: {ids: ids}
     }).then(function(json) {
       return Ember.run(adapter,'didFindMany', store, type, json);
+    }).then(null, function(error) {
+      console.error(error.message);
     });
   },
 

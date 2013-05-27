@@ -49,8 +49,10 @@ if (!('MANDATORY_SETTER' in Ember.ENV)) {
     falsy, an exception will be thrown.
 */
 Ember.assert = function(desc, test) {
-  if(!test) console.log(desc, test);
-  if (!test) throw new Error("assertion failed: "+desc);
+  // if(!test) { console.error(desc); }
+  if (!test) {
+    throw new Error("assertion failed: "+desc);
+  }
 };
 
 
@@ -6774,6 +6776,7 @@ define("rsvp/promise",
           value = callback(event.detail);
           succeeded = true;
         } catch(e) {
+          // Errors from here may not be handled correctly
           failed = true;
           error = e;
         }
