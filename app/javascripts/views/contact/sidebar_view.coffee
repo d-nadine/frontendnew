@@ -23,7 +23,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
 
   headerInlineEditor: Radium.InlineEditorView.extend
     isValid: true
-    companyPicker: Radium.ContactCompanyPicker.extend()
+    companyPicker: Radium.ContactCompanyPicker.extend(Radium.ComboboxSelectMixin)
 
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}
