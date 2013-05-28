@@ -1,7 +1,4 @@
-Radium.DealStatusesController = Ember.Controller.extend
-  needs: ['settings']
-  negotiatingStatuses: Ember.computed.alias('controllers.settings.negotiatingStatuses')
-
+Radium.AccountSettingsController = Radium.ObjectController.extend
   postNegotiatingStatuses: [
     'closed'
     'lost'

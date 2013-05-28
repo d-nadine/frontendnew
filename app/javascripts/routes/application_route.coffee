@@ -82,10 +82,10 @@ Radium.ApplicationRoute = Radium.Route.extend
     # dealForm.set 'user', @controllerFor('currentUser').get('model')
     # @controllerFor('deals.new').set 'model', dealForm
 
-    @controllerFor('users').set 'model', Radium.User.find()
-    @controllerFor('contacts').set 'model', Radium.Contact.find()
-    @controllerFor('tags').set 'model', Radium.Tag.find()
-    @controllerFor('companies').set 'model', Radium.Company.find()
+    # @controllerFor('users').set 'model', Radium.User.find()
+    # @controllerFor('contacts').set 'model', Radium.Contact.find()
+    # @controllerFor('tags').set 'model', Radium.Tag.find()
+    # @controllerFor('companies').set 'model', Radium.Company.find()
 
     # FIXME: Where are we getting the county list from
     @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])

@@ -1,6 +1,6 @@
 Radium.CompanyController = Radium.ObjectController.extend
-  needs: ['users', 'leadStatuses',  'tags', 'companies', 'countries']
-  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  needs: ['users', 'accountSettings',  'tags', 'companies', 'countries']
+  leadStatuses: Ember.computed.alias 'controllers.accountSettings.leadStatuses'
 
   # FIXME: How do we determine this?
   isEditable: true

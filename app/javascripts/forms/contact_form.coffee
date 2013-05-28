@@ -59,7 +59,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'isNew', true
     @set 'name', ''
     @set 'notes', ''
-    @set 'source', ''
+    @set 'source', 'From Website'
     @set 'companyName', ''
     @set 'status', 'lead'
     @set 'tags', Ember.A()

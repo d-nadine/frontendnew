@@ -6,5 +6,5 @@ Radium.DealSourcesView = Radium.TextCombobox.extend Radium.ValueValidationMixin,
   classNameBindings: [
     'disabled:is-disabled'
   ]
-  sourceBinding: 'controller.controllers.dealSources.dealSources'
+  sourceBinding: 'controller.controllers.accountSettings.dealSources.dealSources'
   valueBinding: 'controller.source'

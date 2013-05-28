@@ -1,5 +1,5 @@
-// Version: v1.0.0-pre.2-1315-ge031b24
-// Last commit: e031b24 (2013-05-05 08:06:37 -0700)
+// Version: v1.0.0-rc.3-1-g451f24c
+// Last commit: 451f24c (2013-04-21 12:40:06 -0400)
 
 
 (function() {
@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-pre.2-1460-gb693795
-// Last commit: b693795 (2013-05-26 05:45:32 -0700)
+// Version: v1.0.0-rc.4-2-g6c53d40
+// Last commit: 6c53d40 (2013-05-27 21:56:22 -0400)
 
 
 (function() {
@@ -169,11 +169,18 @@ var define, requireModule;
     if (seen[name]) { return seen[name]; }
     seen[name] = {};
 
-    var mod = registry[name],
-        deps = mod.deps,
-        callback = mod.callback,
-        reified = [],
-        exports;
+    var mod, deps, callback, reified, exports;
+
+    mod = registry[name];
+
+    if (!mod) {
+      throw new Error("Module '" + name + "' not found.");
+    }
+
+    deps = mod.deps;
+    callback = mod.callback;
+    reified = [];
+    exports;
 
     for (var i=0, l=deps.length; i<l; i++) {
       if (deps[i] === 'exports') {
@@ -212,7 +219,7 @@ var define, requireModule;
 
   @class Ember
   @static
-  @version 1.0.0-rc.3
+  @version 1.0.0-rc.4
 */
 
 if ('undefined' === typeof Ember) {
@@ -239,10 +246,10 @@ Ember.toString = function() { return "Ember"; };
 /**
   @property VERSION
   @type String
-  @default '1.0.0-rc.3'
+  @default '1.0.0-rc.4'
   @final
 */
-Ember.VERSION = '1.0.0-rc.3';
+Ember.VERSION = '1.0.0-rc.4';
 
 /**
   Standard environmental variables. You can define these in a global `ENV`
@@ -5056,15 +5063,17 @@ var Backburner = requireModule('backburner').Backburner,
 */
 Ember.run = function(target, method) {
   var ret;
-  try {
-    ret = backburner.run.apply(backburner, arguments);
-  } catch (e) {
-    if (Ember.onerror) {
+
+  if (Ember.onerror) {
+    try {
+      ret = backburner.run.apply(backburner, arguments);
+    } catch (e) {
       Ember.onerror(e);
-    } else {
-      throw e;
     }
+  } else {
+    ret = backburner.run.apply(backburner, arguments);
   }
+
   return ret;
 };
 
@@ -14712,7 +14721,10 @@ Ember.EventDispatcher = Ember.Object.extend(/** @scope Ember.EventDispatcher.pro
         var actionId = Ember.$(evt.currentTarget).attr('data-ember-action'),
             action   = Ember.Handlebars.ActionHelper.registeredActions[actionId];
 
-        if (action.eventName === eventName) {
+        // We have to check for action here since in some cases, jQuery will trigger
+        // an event on `removeChild` (i.e. focusout) after we've already torn down the
+        // action handlers for the view.
+        if (action && action.eventName === eventName) {
           return action.handler(evt);
         }
       }, this);
@@ -14749,14 +14761,9 @@ Ember.EventDispatcher = Ember.Object.extend(/** @scope Ember.EventDispatcher.pro
   },
 
   _bubbleEvent: function(view, evt, eventName) {
-    // this works around an issue caused when simulated events
-    // are triggerd. Simulated events occure synchronously rather
-    // then on next tick. This causes an unexpected nested run-loop,
-    // resulting in negative behaviour.
-    //
-    // for reference:
-    // https://github.com/emberjs/ember.js/commit/aafb5eb5693dccf04dd0951385b4c6bb6db7ae46
-    return Ember.run.join(view, 'handleEvent', eventName, evt);
+    return Ember.run(function() {
+      return view.handleEvent(eventName, evt);
+    });
   },
 
   destroy: function() {
@@ -15564,7 +15571,7 @@ class:
     eventManager: Ember.Object.create({
       mouseEnter: function(event, view){
         // view might be instance of either
-        // OutsideView or InnerView depending on
+        // OuterView or InnerView depending on
         // where on the page the user interaction occured
       }
     })
@@ -27347,7 +27354,7 @@ DeprecatedContainer.deprecate = function(method) {
   return function() {
     var container = this._container;
 
-    Ember.deprecate('Using the defaultContainer is no longer supported. [defaultContainer#' + method + ']', false);
+    Ember.deprecate('Using the defaultContainer is no longer supported. [defaultContainer#' + method + '] see: http://git.io/EKPpnA', false);
     return container[method].apply(container, arguments);
   };
 };
@@ -29793,7 +29800,7 @@ function visit(app, url) {
 function click(app, selector, context) {
   var $el = find(app, selector, context);
   Ember.run(function() {
-    app.$(selector).click();
+    $el.click();
   });
   return wait(app);
 }
@@ -29906,8 +29913,8 @@ helper('wait', wait);
 
 
 })();
-// Version: v1.0.0-pre.2-1460-gb693795
-// Last commit: b693795 (2013-05-26 05:45:32 -0700)
+// Version: v1.0.0-rc.4-2-g6c53d40
+// Last commit: 6c53d40 (2013-05-27 21:56:22 -0400)
 
 
 (function() {

@@ -1,8 +1,8 @@
 Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
-  needs: ['tags','contacts','users','settings']
+  needs: ['tags','contacts','users','userSettings']
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
-  signature: Ember.computed.alias 'controllers.settings.user.signature'
+  signature: Ember.computed.alias 'controllers.userSettings.signature'
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
 

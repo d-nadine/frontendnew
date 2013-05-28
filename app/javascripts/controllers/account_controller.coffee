@@ -1,2 +1,1 @@
-Radium.AccountController = Radium.ObjectController.extend
-  needs: ['settings']
+Radium.AccountController = Radium.ObjectController.extend()

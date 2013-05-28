@@ -16,18 +16,13 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
   companyName: DS.attr('string')
-  firstName: DS.attr('string')
-  lastName: DS.attr('string')
+  name: DS.attr('string')
   status: DS.attr('string')
   source: DS.attr('string')
   status: DS.attr('string')
   title: DS.attr('string')
   avatar: DS.attr('object')
   about: DS.attr('string')
-
-  name: (->
-    "#{@get('firstName')} #{@get('lastName')}"
-  ).property('firstName', 'lastName')
 
   isExpired: Radium.computed.daysOld('createdAt', 60)
 
