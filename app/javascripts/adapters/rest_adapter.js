@@ -1,4 +1,20 @@
+Radium.RESTSerializer = DS.RESTSerializer.extend({
+  addAttribute: function(hash, key, value) {
+    switch(key){
+      case 'created_at':
+      case 'updated_at':
+        return;
+      case 'tag_names':
+        hash['tags'] = value;
+      default:
+        this._super.apply(this, arguments);
+    }
+  },
+});
+
 Radium.RESTAdapter = DS.RESTAdapter.extend({
+  serializer: Radium.RESTSerializer,
+
   createRecord: function(store, type, record) {
     if(type == Radium.CurentUser) return;
 
@@ -64,6 +80,15 @@ Radium.RESTAdapter.registerTransform('object', {
 
     return camelized;
   }
+});
+
+Radium.RESTAdapter.registerTransform('array', {
+  serialize: function(deserialized){
+    return deserialized;
+  },
+  deserialize: function(serialized){
+    return serialized;
+  },
 });
 
 

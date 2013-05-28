@@ -1,14 +1,9 @@
 Radium.CompanyController = Radium.ObjectController.extend
-  needs: ['users', 'accountSettings',  'tags', 'companies', 'countries']
-  leadStatuses: Ember.computed.alias 'controllers.accountSettings.leadStatuses'
+  needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'leadStatuses']
+  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
 
   # FIXME: How do we determine this?
   isEditable: true
-
-  changeStatus: ->
-    # @set('changingStatus', true)
-    @get('contacts').setEach 'status', @get('status')
-    @get('store').commit()
 
   maxContactsStatus: ( ->
     contacts = @get('contacts')

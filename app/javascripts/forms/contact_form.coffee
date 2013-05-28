@@ -39,12 +39,7 @@ Radium.ContactForm = Radium.Form.extend
         contact.get('addresses').addObject Radium.Address.createRecord address
 
     @get('tags').forEach (tag) =>
-      tags = contact.get('tags')
-
-      if tag.get('id')
-        tags.addObject tag unless contact.get('tags').contains tag
-      else
-        tags.addObject Radium.Tag.createRecord tag.get('name')
+      contact.get('tagNames').push tag.get('name')
 
     contact
 
@@ -63,6 +58,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'companyName', ''
     @set 'status', 'lead'
     @set 'tags', Ember.A()
+    @set 'tagNames', Ember.A()
     @set 'emailAddresses', Ember.A()
     @set 'phoneNumbers', Ember.A()
     @set 'addresses', Ember.A()

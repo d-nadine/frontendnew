@@ -1,16 +1,6 @@
-Radium.Tag = Radium.Model.extend Radium.FollowableMixin,
-  Radium.HasTasksMixin,
-
-  activities: DS.hasMany('Radium.Activity')
-  users: DS.hasMany('Radium.User')
+Radium.Tag = Radium.Model.extend
   contacts: DS.hasMany('Radium.Contact')
   companies: DS.hasMany('Radium.Company')
-  user: DS.belongsTo('Radium.User')
 
   name: DS.attr('string')
   description: DS.attr('string')
-
-  todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
-  meetings: DS.hasMany('Radium.Meeting')
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

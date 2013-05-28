@@ -1,4 +1,5 @@
-// Last commit: 8d7ed99 (2013-05-27 22:04:13 -0400)
+// Version: v0.13
+// Last commit: 610cfec (2013-05-28 08:04:23 -0400)
 
 
 (function() {
@@ -8460,7 +8461,7 @@ DS.RESTSerializer = DS.JSONSerializer.extend({
 var get = Ember.get, set = Ember.set;
 
 function rejectionHandler(reason) {
-  Ember.Logger.error(reason);
+  Ember.Logger.error(reason, reason.message);
   throw reason;
 }
 

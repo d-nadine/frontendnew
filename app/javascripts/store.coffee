@@ -2,6 +2,6 @@ require 'adapters/fixture_adapter'
 require 'adapters/rest_adapter'
 
 Radium.Store = DS.Store.extend
-  revision: 12
+  revision: 13
   adapter: Radium.RESTAdapter.extend
-    url: 'http://42ru.localtunnel.com'
+    url: 'http://localhost:9292'
