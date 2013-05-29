@@ -11,7 +11,7 @@ Radium.ContactForm = Radium.Form.extend
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
     addresses: Ember.A()
-    groups: Ember.A()
+    tags: Ember.A()
   ).property().volatile()
 
   isValid: ( ->
@@ -22,21 +22,22 @@ Radium.ContactForm = Radium.Form.extend
   ).property('name', 'companyName', 'user', 'source')
 
   create:  ->
-    contact = Radium.Contact.createRecord @get('data')
+    contact = Radium.CreateContact.createRecord @get('data')
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
     @get('phoneNumbers').forEach (phoneNumber) =>
-      if phoneNumber.get('value.length')
-        contact.get('phoneNumbers').addObject Radium.PhoneNumber.createRecord phoneNumber
+      number = phoneNumber.get('value')
+      if number.length && number != "+1"
+        contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
 
     @get('emailAddresses').forEach (email) =>
       if email.get('value.length')
-        contact.get('emailAddresses').addObject Radium.EmailAddress.createRecord email
+        contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
 
     @get('addresses').forEach (address) =>
       if @addressHasValue(address)
-        contact.get('addresses').addObject Radium.Address.createRecord address
+        contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
 
     @get('tags').forEach (tag) =>
       contact.get('tagNames').push tag.get('name')
@@ -56,6 +57,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'notes', ''
     @set 'source', 'From Website'
     @set 'companyName', ''
+    @set 'company', ''
     @set 'status', 'lead'
     @set 'tags', Ember.A()
     @set 'tagNames', Ember.A()

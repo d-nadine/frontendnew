@@ -37,9 +37,9 @@ Radium.LeadsNewController= Radium.ObjectController.extend
 
     return unless @get('isValid')
 
-    contact = @get('model').create()
+    createContact = @get('model').create()
 
-    contact.one 'didCreate', =>
-      @transitionToRoute 'contact', contact
+    createContact.one 'didCreate', =>
+      @transitionToRoute 'contact', createContact.get('contact')
 
     @get('store').commit()
