@@ -15,6 +15,13 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
 
+  ajax: function(url, type, hash) {
+    hash = hash || {};
+    hash.headers = hash.headers || {};
+    hash.headers['X-Ember-Compat'] = "true";
+    return this._super(url, type, hash);
+  },
+
   createRecord: function(store, type, record) {
     if(type == Radium.CurentUser) return;
 
