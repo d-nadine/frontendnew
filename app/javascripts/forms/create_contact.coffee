@@ -8,10 +8,7 @@ Radium.CreateContact = Radium.Model.extend
   source: DS.attr('string')
   status: DS.attr('string')
 
-  phoneNumbers: DS.attr('array')
-  emailAddresses: DS.attr('array')
-  addresses: DS.attr('array')
-  tagNames: DS.attr('array', defaultValue: [])
-
-Radium.CreateContact.toString = ->
-  "Contact"
+  # phoneNumbers: DS.attr('array')
+  # emailAddresses: DS.attr('array')
+  # addresses: DS.attr('array')
+  tags: DS.attr('array', defaultValue: [])

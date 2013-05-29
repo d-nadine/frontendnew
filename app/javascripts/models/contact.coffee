@@ -7,7 +7,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal')
   followers: DS.hasMany('Radium.User', inverse: 'contacts')
   tags: DS.hasMany('Radium.Tag', inverse: 'contacts')
-  tagNames: DS.attr('array', defaultValue: [])
   activities: DS.hasMany('Radium.Activity', inverse: 'contacts')
   phoneNumbers: DS.hasMany('Radium.PhoneNumber')
   emailAddresses: DS.hasMany('Radium.EmailAddress')
@@ -16,7 +15,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
-  companyName: DS.attr('string')
   name: DS.attr('string')
   status: DS.attr('string')
   source: DS.attr('string')

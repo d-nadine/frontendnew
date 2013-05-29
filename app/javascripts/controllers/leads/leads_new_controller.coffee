@@ -39,7 +39,9 @@ Radium.LeadsNewController= Radium.ObjectController.extend
 
     createContact = @get('model').create()
 
+    # FIXME: should not have to call Ember.run.next
     createContact.one 'didCreate', =>
-      @transitionToRoute 'contact', createContact.get('contact')
+      Ember.run.next =>
+        @transitionToRoute 'contact', createContact.get('contact')
 
     @get('store').commit()

@@ -13,7 +13,7 @@ Radium.InlineEditorView = Ember.View.extend
 
   isEditingDidChange:( ->
     unless @get('isEditing')
-      @get('controller.store').commit() if @get('controller.isDirty')
+      @get('controller.store').commit() #if @get('controller.isDirty')
   ).observes('isEditing')
 
   didInsertElement: ->

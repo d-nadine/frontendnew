@@ -7,9 +7,8 @@ require 'models/mixins/has_tasks_mixin'
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
-  typeName: ( ->
+  typeName: ->
     @constructor.toString().split('.').pop().toLowerCase()
-  ).property()
 
 requireAll /models/
 

@@ -22,11 +22,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     return this._super(url, type, hash);
   },
 
-  createRecord: function(store, type, record) {
-    if(type == Radium.CurentUser) return;
-
-    this._super.apply(this, arguments);
-  },
   findQuery: function(store, type, query, recordArray) {
     var recordType = type.toString().split(".")[1];
     var queryMethod = "query" + recordType + "Records";
@@ -110,7 +105,9 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 });
 
 Radium.RESTAdapter.map('Radium.Contact', {
-  user: { key: 'assigned_to_id' }
+  user: { key: 'assigned_to_id' },
+  phoneNumbers: {embedded: 'always'},
+  emailAddresses: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Company', {

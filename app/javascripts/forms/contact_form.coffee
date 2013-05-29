@@ -26,21 +26,21 @@ Radium.ContactForm = Radium.Form.extend
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
-    @get('phoneNumbers').forEach (phoneNumber) =>
-      number = phoneNumber.get('value')
-      if number.length && number != "+1"
-        contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
+    # @get('phoneNumbers').forEach (phoneNumber) =>
+    #   number = phoneNumber.get('value')
+    #   if number.length && number != "+1"
+    #     contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
 
-    @get('emailAddresses').forEach (email) =>
-      if email.get('value.length')
-        contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
+    # @get('emailAddresses').forEach (email) =>
+    #   if email.get('value.length')
+    #     contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
 
-    @get('addresses').forEach (address) =>
-      if @addressHasValue(address)
-        contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
+    # @get('addresses').forEach (address) =>
+    #   if @addressHasValue(address)
+    #     contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
 
     @get('tags').forEach (tag) =>
-      contact.get('tagNames').push tag.get('name')
+      contact.get('tags').push tag.get('name')
 
     contact
 
