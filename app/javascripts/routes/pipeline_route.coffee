@@ -6,7 +6,7 @@ Radium.PipelineRoute = Radium.Route.extend
 
   model: ->
     Radium.Pipeline.create
-      settings: @controllerFor('settings')
+      settings: @controllerFor('accountSettings')
 
   renderTemplate: ->
     @render into: 'application'

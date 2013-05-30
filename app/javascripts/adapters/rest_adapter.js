@@ -96,11 +96,15 @@ Radium.RESTAdapter.registerTransform('array', {
 
 Radium.RESTAdapter.registerTransform('datetime',  {
  deserialize: function(serialized) {
-   return null;
+   if(serialized){
+      return Ember.DateTime.parse(serialized);
+    }
  },
 
  serialize: function(deserialized) {
-   return null;
+   if(deserialized){
+      return deserialized.toFullFormat();
+    }
  }
 });
 
