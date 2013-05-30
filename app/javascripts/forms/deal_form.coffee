@@ -35,14 +35,13 @@ Radium.DealForm = Radium.Form.extend
     return false if Ember.isEmpty(@get('name'))
     return false if Ember.isEmpty(@get('contact'))
     return false if Ember.isEmpty(@get('user'))
-    return false if Ember.isEmpty(@get('source'))
     return false if Ember.isEmpty(@get('description'))
 
     true
   ).property('name','contact','user','source','description')
 
   create:  ->
-    deal = Radium.Contact.createRecord @get('data')
+    deal = Radium.Deal.createRecord @get('data')
 
     deal.set('checklist', Radium.Checklist.createRecord())
 

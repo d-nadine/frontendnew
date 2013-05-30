@@ -13,7 +13,6 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   user: DS.belongsTo('Radium.User')
   todo: DS.belongsTo('Radium.Todo')
   checklist: DS.belongsTo('Radium.Checklist')
-  isPublished: DS.attr('boolean')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
@@ -39,3 +38,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   company: Ember.computed.alias('contact.company')
+
+  isPublished: ( ->
+    @get('status') == 'published'
+  )

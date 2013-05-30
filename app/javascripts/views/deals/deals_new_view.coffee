@@ -51,8 +51,6 @@ Radium.DealsNewView= Ember.View.extend
     rows: 3
     valueBinding: 'controller.description'
 
-  source: Radium.DealSourcesView.extend()
-
   dealStatuses: Ember.View.extend
     template: Ember.Handlebars.compile """
       <ul>
@@ -61,8 +59,6 @@ Radium.DealsNewView= Ember.View.extend
       {{/each}}
       </ul>
     """
-
-  valueField: Ember.TextField.extend()
 
   referenceName: ( ->
     # FIXME : can we use toString on the models?

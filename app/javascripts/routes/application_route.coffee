@@ -74,13 +74,13 @@ Radium.ApplicationRoute = Radium.Route.extend
       @transitionTo 'deals.new'
 
   setupController: (controller, currentUser) ->
-    # dealForm = @get('dealForm')
-    # dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
-    # dealForm.set('checklist.checklistItems', Ember.A())
+    dealForm = @get('dealForm')
+    dealForm.set('checklist', Ember.Object.createWithMixins(Radium.ChecklistTotalMixin))
+    dealForm.set('checklist.checklistItems', Ember.A())
     # dealForm.get('checklist.checklistItems').pushObjects settings.get('checklist.checklistItems').map (checkListItem) ->
     #                                                                       Ember.Object.create(checkListItem.serialize())
-    # dealForm.set 'user', @controllerFor('currentUser').get('model')
-    # @controllerFor('deals.new').set 'model', dealForm
+    dealForm.set 'user', @controllerFor('currentUser').get('model')
+    @controllerFor('deals.new').set 'model', dealForm
 
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()

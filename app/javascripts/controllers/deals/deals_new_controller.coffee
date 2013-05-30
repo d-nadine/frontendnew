@@ -10,8 +10,13 @@ Radium.DealsNewController = Radium.ObjectController.extend
 
   contactsWithCompany: ( ->
     @get('contacts').map (contact) ->
+      name = if contact.get('company.name')
+               "#{contact.get('name')} (#{contact.get('company.name')})"
+             else
+               contact.get('name')
+
       Ember.Object.create
-        name: "#{contact.get('name')} (#{contact.get('company.name')})"
+        name: name
         contact: contact
   ).property('contacts.[]')
 

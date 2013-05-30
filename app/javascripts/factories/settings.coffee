@@ -7,13 +7,6 @@ Factory.define 'settings',
     'Waiting Signature'
   ]
 
-  dealSources: [
-    'Lead Form'
-    'Website'
-    'In Person'
-    'Tradeshow'
-    'Cold Call'
-  ]
   checklist: -> Factory.create 'checklist'
   leadSources: ->
     Dictionaries.leadSources.set

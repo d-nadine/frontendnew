@@ -39,12 +39,6 @@
         </div>
       {{/if}}
       <div class="control-group">
-        <label class="control-label">Source</label>
-        <div class="controls required">
-          {{view view.source class="field"}}
-        </div>
-      </div>
-      <div class="control-group">
         <label class="control-label">Forecast</label>
         <div class="controls">
           <div class="checklist-forecast">
@@ -68,7 +62,7 @@
         <div class="controls">
           <div {{bindAttr class="view.disabled:is-disabled :field :control-box"}}>
             <span  class="text dollar">$</span>
-            {{view view.valueField type="number" class="field input-medium negotitating"}}
+            {{input type="number" value=value class="field input-medium negotitating"}}
           </div>
         </div>
       </div>
