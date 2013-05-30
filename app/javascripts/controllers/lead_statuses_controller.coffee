@@ -1,5 +1,6 @@
 Radium.LeadStatusesController = Ember.ArrayProxy.extend
   content: [
+    { name: "Personal", value: "personal" }
     { name: "None", value: "none" }
     { name: "Lead", value: "lead" }
     { name: "Existing Customer", value: "existing" }
