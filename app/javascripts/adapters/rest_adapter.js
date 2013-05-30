@@ -110,6 +110,28 @@ Radium.RESTAdapter.map('Radium.Contact', {
   emailAddresses: {embedded: 'always'}
 });
 
+Radium.RESTAdapter.map('Radium.Todo', {
+  user: { key: 'assigned_to_id' },
+});
+
+Radium.RESTAdapter.map('Radium.Deal', {
+  user: { key: 'assigned_to_id' },
+});
+
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' }
+});
+
+Radium.RESTAdapter.map('Radium.PhoneNumber', {
+  value: { key: 'number' },
+  isPrimary: { key: 'primary'},
+});
+
+Radium.RESTAdapter.map('Radium.EmailAddress', {
+  value: { key: 'address' },
+  isPrimary: { key: 'primary'},
+});
+
+Radium.RESTAdapter.map('Radium.Address', {
+  isPrimary: { key: 'primary'},
 });
