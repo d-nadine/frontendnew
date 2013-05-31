@@ -33,4 +33,10 @@ Radium.DealsNewController = Radium.ObjectController.extend
       Ember.run.next =>
         @transitionToRoute 'deal', deal
 
+    deal.one 'becameInvalid', (result) =>
+      console.log deal.get('errors')
+
+    deal.one 'becameError', (result)  ->
+      console.log deal.get('errors')
+
     @get('store').commit()

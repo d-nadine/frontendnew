@@ -32,6 +32,10 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
       this._super.apply(this, arguments);
     }
   },
+
+  didError: function(store, type, record) {
+    store.recordWasError(record);
+  },
   queryUserRecords: function(store, type, query, recordArray, base){
     if(query.name === "me"){
       var adapter = this;
@@ -121,6 +125,8 @@ Radium.RESTAdapter.map('Radium.Todo', {
 Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
+  reason: { key: 'lost_because' },
+  checklist: { embedded: 'always' },
 });
 
 Radium.RESTAdapter.map('Radium.Company', {

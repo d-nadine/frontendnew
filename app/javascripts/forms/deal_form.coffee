@@ -21,7 +21,7 @@ Radium.DealForm = Radium.Form.extend
     @set('contact', null)
     @set('user', null)
     @set('source', '')
-    @set('status', null)
+    @set('status', 'published')
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
