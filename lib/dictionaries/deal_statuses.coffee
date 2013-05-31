@@ -1,7 +1,7 @@
-statuses = [
+states = [
   'published'
   'closed'
   'lost'
 ]
 
-Dictionaries.dealStatuses = new Dictionary(statuses)
+Dictionaries.dealStates = new Dictionary(states)

@@ -5,7 +5,7 @@ Factory.define 'deal', traits: 'timestamps',
   value: -> Math.floor(Math.random() * 10000)
   createdAt: -> Ember.DateTime.random past: true
   reason: -> Dictionaries.failureReasons.random()
-  status: -> Dictionaries.dealStatuses.random()
+  status: -> Dictionaries.dealStates.random()
   isPublic: -> Math.random() >= 0.25
   description: """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a tempus
@@ -15,5 +15,5 @@ Factory.define 'deal', traits: 'timestamps',
   """
   lastStatus: ->
     if @status is 'lost'
-      Dictionaries.dealStatuses.random()
+      Dictionaries.dealStates.random()
   checklist: -> Factory.create 'checklist'

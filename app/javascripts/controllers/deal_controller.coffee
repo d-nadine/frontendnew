@@ -9,7 +9,7 @@ Radium.DealController = Radium.ObjectController.extend
   # FIXME: How do we determine this?
   isEditable: true
 
-  statuses: Ember.computed.alias('controllers.accountSettings.dealStatuses.inOrder')
+  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   newItemDescription: ''
   newItemWeight: 0
   newItemFinished: false

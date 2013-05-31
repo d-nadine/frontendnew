@@ -64,7 +64,7 @@ class Populator
     settings = Factory.create 'settings'
 
     settings.get('negotiatingStatuses').forEach (status) ->
-      Dictionaries.dealStatuses.add status
+      Dictionaries.dealStates.add status
 
     deal = Factory.create 'deal',
       contact: contactDictionary.random()

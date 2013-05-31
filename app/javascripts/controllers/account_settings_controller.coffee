@@ -1,12 +1,17 @@
 Radium.AccountSettingsController = Radium.ObjectController.extend
-  postNegotiatingStatuses: [
+  preNegotiatingStates: [
+    'unpublished'
+    'published'
+  ]
+  postNegotiatingStates: [
     'closed'
     'lost'
   ]
 
-  inOrder: (->
-    negotiatingStatuses = @get 'negotiatingStatuses'
-    postNegotiatingStatuses = @get 'postNegotiatingStatuses'
+  dealStates: (->
+    preNegotiatingStates = @get 'preNegotiatingStates'
+    negotiatingStates = @get('negotiatingStates') || []
+    postNegotiatingStates = @get 'postNegotiatingStates'
 
-    negotiatingStatuses.concat(postNegotiatingStatuses)
-  ).property('negotiatingStatuses')
+    preNegotiatingStates.concat(negotiatingStates.concat(postNegotiatingStates))
+  ).property('negotiatingStates.[]')

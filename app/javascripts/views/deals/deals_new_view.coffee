@@ -43,7 +43,7 @@ Radium.DealsNewView= Ember.View.extend
     rows: 3
     valueBinding: 'controller.description'
 
-  dealStatuses: Ember.View.extend
+  dealStates: Ember.View.extend
     template: Ember.Handlebars.compile """
       <ul>
       {{#each controller.statuses}}

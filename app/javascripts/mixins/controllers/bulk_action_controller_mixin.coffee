@@ -1,7 +1,7 @@
 Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
-  statuses: Ember.computed.alias('controllers.accountSettings.dealStatuses.inOrder')
+  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   assignToUser: null
   reassignTodo: null
   changedStatus: null
