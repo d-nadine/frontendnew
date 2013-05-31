@@ -11,7 +11,6 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
-  todo: DS.belongsTo('Radium.Todo')
   checklist: DS.belongsTo('Radium.Checklist')
 
   reference: ((key, value) ->
@@ -30,7 +29,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   value: DS.attr('number')
   reason: DS.attr('string')
 
-  lastStatus: DS.attr('string')
+  lostDuring: DS.attr('string')
   status: DS.attr('string')
 
   isPastPayment: Radium.computed.isPast("payBy")

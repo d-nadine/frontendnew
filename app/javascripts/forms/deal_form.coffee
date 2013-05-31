@@ -37,8 +37,15 @@ Radium.DealForm = Radium.Form.extend
     return false if Ember.isEmpty(@get('user'))
     return false if Ember.isEmpty(@get('description'))
 
+    dealValue =@get('value')
+
+    return false if Ember.isEmpty(dealValue)
+    return false if parseInt(dealValue) == 0
+    # FIXME: move into helper
+    return false unless /^(?=.*[1-9])\d{0,5}(\.\d{1,2})?$/.test dealValue
+
     true
-  ).property('name','contact','user','source','description')
+  ).property('name','contact','user','source','description', 'value')
 
   create:  ->
     deal = Radium.Deal.createRecord @get('data')

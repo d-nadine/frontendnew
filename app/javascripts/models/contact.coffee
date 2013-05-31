@@ -40,3 +40,10 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
+
+  nameWithCompany: ( ->
+    if @get('company.name')
+      "#{@get('name')} (#{@get('company.name')})"
+    else
+      @get('name')
+  ).property('name', 'company.name')

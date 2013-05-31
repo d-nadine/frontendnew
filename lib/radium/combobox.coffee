@@ -9,12 +9,14 @@ Radium.Combobox = Radium.View.extend
     ':control-box'
   ]
 
+  field: 'name'
+
   click: (event) ->
     event.stopPropagation()
 
   sortedSource: ( ->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
-      sortProperties: ['name']
+      sortProperties: [@field]
       content: @get('source')
   ).property('source.[]')
 
@@ -27,13 +29,13 @@ Radium.Combobox = Radium.View.extend
   ).property('value', 'isSubmitted')
 
   lookupQuery: (query) ->
-    @get('source').find (item) -> item.get('name') == query
+    @get('source').find (item) => item.get(@field) == query
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
       @set 'value', @lookupQuery(value)
     else if !value && @get('value')
-      @get 'value.name'
+      @get "value.#{@field}"
     else
       value
   ).property('value')
@@ -89,7 +91,7 @@ Radium.Combobox = Radium.View.extend
 
   # Begin typehead customization
   matcher: (item) ->
-    string = item.get 'name'
+    string = item.get @field
     ~string.toLowerCase().indexOf(@query.toLowerCase())
 
   sorter: (items) ->
@@ -98,7 +100,7 @@ Radium.Combobox = Radium.View.extend
     caseInsensitive = []
 
     items.forEach (item) =>
-      string = item.get 'name'
+      string = item.get @field
 
       if !string.toLowerCase().indexOf(@query.toLowerCase())
         beginswith.push(item)
@@ -110,7 +112,7 @@ Radium.Combobox = Radium.View.extend
     beginswith.concat caseSensitive, caseInsensitive
 
   highlighter: (item) ->
-    string = item.get 'name'
+    string = item.get @field
 
     query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
@@ -125,7 +127,6 @@ Radium.Combobox = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-
       @$().typeahead source: @get('parentView.sortedSource')
 
       typeahead = @$().data('typeahead')
@@ -143,9 +144,9 @@ Radium.Combobox = Radium.View.extend
 
         @render(items.slice(0, @options.items)).show()
 
-      typeahead.matcher = @get('parentView.matcher')
-      typeahead.sorter = @get('parentView.sorter')
-      typeahead.highlighter = @get('parentView.highlighter')
+      typeahead.matcher = @get('parentView.matcher').bind(@get('parentView'))
+      typeahead.sorter = @get('parentView.sorter').bind(@get('parentView'))
+      typeahead.highlighter = @get('parentView.highlighter').bind(@get('parentView'))
 
       typeahead.select = ->
         val = @$menu.find('.active').data('typeahead-value')

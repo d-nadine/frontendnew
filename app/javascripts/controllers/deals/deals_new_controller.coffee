@@ -8,18 +8,6 @@ Radium.DealsNewController = Radium.ObjectController.extend
   newItemFinished: true
   hasContact: Ember.computed.bool 'contact'
 
-  contactsWithCompany: ( ->
-    @get('contacts').map (contact) ->
-      name = if contact.get('company.name')
-               "#{contact.get('name')} (#{contact.get('company.name')})"
-             else
-               contact.get('name')
-
-      Ember.Object.create
-        name: name
-        contact: contact
-  ).property('contacts.[]')
-
   statusesDidChange: ( ->
     return unless @get('statuses.length')
     return if @get('status')

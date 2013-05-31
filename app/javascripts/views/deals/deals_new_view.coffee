@@ -27,20 +27,12 @@ Radium.DealsNewView= Ember.View.extend
       @$().focus()
 
   contactPicker: Radium.Combobox.extend Radium.ValueValidationMixin,
-    sourceBinding: 'controller.contactsWithCompany'
+    field: 'nameWithCompany'
+    sourceBinding: 'controller.contacts'
     valueBinding: 'controller.contact'
-
-    setValue: (object) ->
-      @set 'value', object.get('contact')
-
-    queryToValueTransform: ((key, value) ->
-      if arguments.length == 2
-        @set 'value', @lookupQuery(value)
-      else if !value && @get('value')
-        "#{@get('value.name')} (#{@get('value.company.name')})"
-      else
-        value
-    ).property('value')
+    template: Ember.Handlebars.compile """
+      <a {{action selectObject this target=view href=true bubbles=false}}>{{nameWithCompany}}</a>
+    """
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
@@ -59,6 +51,24 @@ Radium.DealsNewView= Ember.View.extend
       {{/each}}
       </ul>
     """
+
+  dealValue: Ember.TextField.extend
+    classNameBindings: ['isValid','isInvalid',':field']
+    valueBinding: 'controller.value'
+
+    isValid: ( ->
+      value = @get('value')
+
+      return false if Ember.isEmpty value
+      return false if parseInt(value) == 0
+
+      # FIXME: move into helper
+      /^(?=.*[1-9])\d{0,5}(\.\d{1,2})?$/.test value
+    ).property('value', 'isSubmitted')
+
+    isInvalid: ( ->
+      (not @get('isValid')) && @get('controller.isSubmitted')
+    ).property('value', 'controller.isSubmitted')
 
   referenceName: ( ->
     # FIXME : can we use toString on the models?

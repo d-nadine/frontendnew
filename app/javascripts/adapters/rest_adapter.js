@@ -119,6 +119,7 @@ Radium.RESTAdapter.map('Radium.Todo', {
 });
 
 Radium.RESTAdapter.map('Radium.Deal', {
+  isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
 });
 
