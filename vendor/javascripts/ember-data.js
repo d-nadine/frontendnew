@@ -1,5 +1,5 @@
-// Version: v0.13
-// Last commit: 610cfec (2013-05-28 08:04:23 -0400)
+// Version: v0.13-8-g91b7adb
+// Last commit: 91b7adb (2013-05-29 12:02:58 -0700)
 
 
 (function() {
@@ -7347,7 +7347,6 @@ DS.loaderFor = loaderFor;
   To tell your store which adapter to use, set its `adapter` property:
 
       App.store = DS.Store.create({
-        revision: 3,
         adapter: App.MyAdapter.create()
       });
 
@@ -8793,10 +8792,10 @@ DS.RESTAdapter = DS.Adapter.extend({
       };
 
       hash.error = function(jqXHR, textStatus, errorThrown) {
-        Ember.run(null, reject, errorThrown);
+        Ember.run(null, reject, jqXHR);
       };
 
-      jQuery.ajax(hash);
+      Ember.$.ajax(hash);
     });
   },
 
