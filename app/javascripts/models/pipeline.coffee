@@ -1,4 +1,5 @@
 require 'lib/radium/groupable'
+require 'lib/radium/groupable_with_defaults'
 
 NegotiatingGroup = Ember.ArrayProxy.extend
   title: (->
@@ -9,7 +10,7 @@ NegotiatingGroup = Ember.ArrayProxy.extend
 # has to each into content since properties on an array proxy
 # don't work. Also there's never a case where the content is
 # not going to be Deal.all
-Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
+Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   content: []
   settings: null
   negotiatingStates: ( ->
@@ -26,10 +27,13 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.Groupable,
   ).property('negotiatingStates.[]', 'negotiatingDeals.[]', 'negotiatingDeals.@each.status')
 
   negotiatingGroups: (->
+    #FIXME: Potential memory leak.  Nothing getting destroyed
     deals = @get 'negotiatingDeals'
     return unless deals
 
-    @group deals
+    states = @get('settings.negotiatingStates')
+
+    @group deals, states
   ).property('negotiatingDeals.[]')
 
   groupType: NegotiatingGroup

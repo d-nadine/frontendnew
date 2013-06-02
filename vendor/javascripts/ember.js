@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-rc.4-17-gc70ab3a
-// Last commit: c70ab3a (2013-05-31 04:54:39 -0700)
+// Version: v1.0.0-rc.5-7-g610589a
+// Last commit: 610589a (2013-06-01 16:12:43 -0700)
 
 
 (function() {
@@ -219,7 +219,7 @@ var define, requireModule;
 
   @class Ember
   @static
-  @version 1.0.0-rc.4
+  @version 1.0.0-rc.5
 */
 
 if ('undefined' === typeof Ember) {
@@ -246,10 +246,10 @@ Ember.toString = function() { return "Ember"; };
 /**
   @property VERSION
   @type String
-  @default '1.0.0-rc.4'
+  @default '1.0.0-rc.5'
   @final
 */
-Ember.VERSION = '1.0.0-rc.4';
+Ember.VERSION = '1.0.0-rc.5';
 
 /**
   Standard environmental variables. You can define these in a global `ENV`
@@ -4758,7 +4758,7 @@ define("backburner",
       },
 
       cancel: function(timer) {
-        if (typeof timer === 'object' && timer.queue && timer.method) { // we're cancelling a deferOnce
+        if (timer && typeof timer === 'object' && timer.queue && timer.method) { // we're cancelling a deferOnce
           return timer.queue.cancel(timer);
         } else if (typeof timer === 'function') { // we're cancelling a setTimeout
           for (var i = 0, l = timers.length; i < l; i += 2) {
@@ -4767,6 +4767,8 @@ define("backburner",
               return true;
             }
           }
+        } else {
+          return; // timer was null or not a timer
         }
       }
     };
@@ -5004,7 +5006,6 @@ define("backburner/queue",
 
     __exports__.Queue = Queue;
   });
-
 })();
 
 
@@ -19074,7 +19075,7 @@ function makeBindings(options) {
 Ember.Handlebars.helper = function(name, value) {
   if (Ember.View.detect(value)) {
     Ember.Handlebars.registerHelper(name, function(options) {
-      Ember.assert("You can only pass attributes as parameters to a application-defined helper", arguments.length < 3);
+      Ember.assert("You can only pass attributes as parameters (not values) to a application-defined helper", arguments.length < 2);
       makeBindings(options);
       return Ember.Handlebars.helpers.view.call(this, value, options);
     });
@@ -26291,7 +26292,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     Alternatively, a `target` option can be provided to the helper to change
     which object will receive the method call. This option must be a path
-    path to an object, accessible in the current context:
+    to an object, accessible in the current context:
 
     ```handlebars
     <script type="text/x-handlebars" data-template-name='a-template'>

@@ -15,6 +15,8 @@ Radium.computed.isToday = (dependentKey) ->
 
 Radium.computed.isPast = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
+    return unless @get(dependentKey)
+
     @get(dependentKey).isPast()
 
 Radium.computed.isFuture = (dependentKey) ->

@@ -13,5 +13,5 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
     negotiatingStates = @get('negotiatingStates') || []
     postNegotiatingStates = @get 'postNegotiatingStates'
 
-    preNegotiatingStates.concat(negotiatingStates.concat(postNegotiatingStates))
+    negotiatingStates.concat(postNegotiatingStates)
   ).property('negotiatingStates.[]')

@@ -1,7 +1,7 @@
 (function() {
 var Ember = { assert: function() {} };
-// Version: v1.0.0-rc.4-17-gc70ab3a
-// Last commit: c70ab3a (2013-05-31 04:54:39 -0700)
+// Version: v1.0.0-rc.5-7-g610589a
+// Last commit: 610589a (2013-06-01 16:12:43 -0700)
 
 
 (function() {
@@ -58,7 +58,7 @@ function makeBindings(options) {
 Ember.Handlebars.helper = function(name, value) {
   if (Ember.View.detect(value)) {
     Ember.Handlebars.registerHelper(name, function(options) {
-      Ember.assert("You can only pass attributes as parameters to a application-defined helper", arguments.length < 3);
+      Ember.assert("You can only pass attributes as parameters (not values) to a application-defined helper", arguments.length < 2);
       makeBindings(options);
       return Ember.Handlebars.helpers.view.call(this, value, options);
     });

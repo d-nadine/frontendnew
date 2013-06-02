@@ -5,14 +5,12 @@ Radium.PipelineRoute = Radium.Route.extend
       @transitionTo 'pipeline.negotiating'
 
   model: ->
+    model = @modelFor 'pipeline'
+
+    return model if model
+
     Radium.Pipeline.create
       settings: @controllerFor('accountSettings')
-
-  deactivate: ->
-    model = @controllerFor('pipeline').get('model')
-    model.destroy()
-    model = null
-    @currentModel = null
 
   renderTemplate: ->
     @render into: 'application'
