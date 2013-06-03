@@ -28,6 +28,8 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       reassignForm = controller.get('reassignForm')
       reassignForm.set('todo', @controller.get('reassignTodo'))
       reassignForm.commit()
+      controller.get('checkedContent').forEach (item) =>
+        item.set('isChecked', false)
       controller.set('reassignTodo', null)
       reassignForm.reset()
       controller.trigger 'formReset'
