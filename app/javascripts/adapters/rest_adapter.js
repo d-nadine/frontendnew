@@ -126,7 +126,7 @@ Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   reason: { key: 'lost_because' },
-  checklist: { embedded: 'always' },
+  checklistItems: { embedded: 'always' },
 });
 
 Radium.RESTAdapter.map('Radium.Company', {

@@ -1,7 +1,7 @@
 require 'forms/form'
 require 'lib/radium/checklist_total_mixin'
 
-Radium.DealForm = Radium.Form.extend
+Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
   data: ( ->
     name: @get('name')
     contact: @get('contact')
@@ -26,9 +26,9 @@ Radium.DealForm = Radium.Form.extend
     @set('poNumber', '')
     @set('isPublished', true)
 
-    return unless @get('checklist.checklistItems')
+    return unless @get('checklistItems')
 
-    @get('checklist.checklistItems').forEach (item) =>
+    @get('checklistItems').forEach (item) =>
       item.set('isFinished', false)
 
   isValid: ( ->
@@ -50,9 +50,7 @@ Radium.DealForm = Radium.Form.extend
   create:  ->
     deal = Radium.Deal.createRecord @get('data')
 
-    deal.set('checklist', Radium.Checklist.createRecord())
-
-    @get('checklist.checklistItems').forEach (item) =>
-      deal.get('checklist.checklistItems').addObject Radium.ChecklistItem.createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
+    @get('checklistItems').forEach (item) =>
+      deal.get('checklistItems').addObject Radium.ChecklistItem.createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
 
     deal

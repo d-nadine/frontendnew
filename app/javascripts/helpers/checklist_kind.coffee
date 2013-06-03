@@ -6,4 +6,7 @@ Ember.Handlebars.registerBoundHelper 'checklistKind', (kind, options) ->
          else
            "icon-#{kind}"
 
-  new Handlebars.SafeString("<i class='#{icon}'></i>")
+  if kind == 'deal'
+    new Handlebars.SafeString('<img src="http://placehold.it/14x14" alt="">')
+  else
+    new Handlebars.SafeString("<i class='#{icon}'></i>")

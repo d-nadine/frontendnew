@@ -1,7 +1,10 @@
+require 'lib/radium/checklist_total_mixin'
+
 Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   Radium.FollowableMixin,
   Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
+  Radium.ChecklistTotalMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
@@ -11,7 +14,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
-  checklist: DS.belongsTo('Radium.Checklist')
+  checklistItems: DS.hasMany('Radium.ChecklistItem')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

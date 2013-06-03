@@ -1,6 +1,7 @@
 require 'forms/todo_form'
+require 'controllers/deals/checklist_mixin'
 
-Radium.DealController = Radium.ObjectController.extend
+Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
   needs: ['accountSettings', 'users', 'contacts']
 
   # FIXME: this should be null and not an empty string
