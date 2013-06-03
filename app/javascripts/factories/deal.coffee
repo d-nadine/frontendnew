@@ -17,7 +17,7 @@ Factory.define 'deal', traits: 'timestamps',
     if @status is 'lost'
       Dictionaries.dealStates.random()
 
-  checklistItems: -> [
+  forecast: -> [
     Factory.create 'checklist_item',
       kind: 'call'
       description: 'Had a call with client'

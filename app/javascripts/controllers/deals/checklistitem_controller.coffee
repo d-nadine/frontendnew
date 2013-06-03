@@ -4,4 +4,4 @@ Radium.ChecklistItemController = Radium.ObjectController.extend
   ).property('kind')
 
   removeAdditionalItem: (item) ->
-    item.get('checklistItems').removeObject item
+    item.get('forecast').removeObject item

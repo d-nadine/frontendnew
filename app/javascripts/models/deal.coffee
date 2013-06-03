@@ -14,7 +14,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
-  checklistItems: DS.hasMany('Radium.ChecklistItem')
+  forecast: DS.hasMany('Radium.ChecklistItem')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

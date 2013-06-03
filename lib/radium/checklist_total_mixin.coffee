@@ -1,11 +1,11 @@
 Radium.ChecklistTotalMixin = Ember.Mixin.create
   total: ( ->
-    @get('checklistItems').reduce((preVal, item) ->
+    @get('forecast').reduce((preVal, item) ->
       weight = if item.get('isFinished') then item.get('weight') else 0
 
       preVal + weight
     , 0, 'weight')
-  ).property('checklistItems.@each.isFinished')
+  ).property('forecast.@each.isFinished')
 
   percentage: ( ->
     total = @get('total')

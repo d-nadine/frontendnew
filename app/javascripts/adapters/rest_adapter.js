@@ -113,6 +113,7 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 });
 
 Radium.RESTAdapter.map('Radium.Contact', {
+  isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'}
@@ -126,7 +127,11 @@ Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   reason: { key: 'lost_because' },
-  checklistItems: { embedded: 'always' },
+  forecast: { embedded: 'always' },
+});
+
+Radium.RESTAdapter.map('Radium.ChecklistItem', {
+  isFinished: {key: 'finished'},
 });
 
 Radium.RESTAdapter.map('Radium.Company', {

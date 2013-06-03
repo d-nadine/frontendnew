@@ -79,8 +79,8 @@ Radium.ApplicationRoute = Radium.Route.extend
   setupController: (controller, deals) ->
     settings = @controllerFor('accountSettings')
     dealForm = @get('dealForm')
-    dealForm.set('checklistItems', Ember.A())
-    dealForm.get('checklistItems').pushObjects settings.get('dealChecklist').map (checkListItem) ->
+    dealForm.set('forecast', Ember.A())
+    dealForm.get('forecast').pushObjects settings.get('dealChecklist').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem)
     dealForm.set 'user', @controllerFor('currentUser').get('model')
     @controllerFor('deals.new').set 'model', dealForm
