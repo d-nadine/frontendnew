@@ -9,8 +9,18 @@ Radium.PipelineRoute = Radium.Route.extend
 
     return model if model
 
-    Radium.Pipeline.create
-      settings: @controllerFor('accountSettings')
+    settings = @controllerFor('accountSettings')
+
+    Ember.Deferred.promise (deferred) ->
+      Radium.Deal.find({}).then( (deals) ->
+        pipeline =  Radium.Pipeline.create
+                          settings: settings 
+
+        deferred.resolve pipeline
+      ).then(null, (error) ->
+        Ember.Logger.error(error)
+        throw error
+      )
 
   renderTemplate: ->
     @render into: 'application'
