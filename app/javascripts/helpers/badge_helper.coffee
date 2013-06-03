@@ -1,5 +1,5 @@
 Ember.Handlebars.registerBoundHelper 'badge', (value, options) ->
-  return unless value
+  return if value == undefined
 
   formatted = Handlebars.Utils.escapeExpression value
 
