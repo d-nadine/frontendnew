@@ -10,15 +10,25 @@ Radium.GroupableWithDefaults = Ember.Mixin.create Radium.Groupable,
     @_super.apply(this, arguments)
 
   group: (collection, defaults = []) ->
-    groups = @_super collection
+    groups = Ember.A([])
+    groupsMap = {}
+    groups    = Ember.A([])
+    @set 'groupsMap', groupsMap
+    @set 'groups',    groups
 
     for index in [0..defaults.length - 1]
       name = defaults[index]
-      continue if groups.find (group) -> group.get('name') == name
 
       groupType = @get 'groupType'
       group = groupType.create content: Ember.A([]), name: name, title: name
       @get('groupsMap')[name] = group
       groups.insertAt index, group
+
+    collection.forEach ((object) ->
+      group = @groupFor(object)
+      return unless group
+
+      group.get("content").pushObject object
+    ), this
 
     groups

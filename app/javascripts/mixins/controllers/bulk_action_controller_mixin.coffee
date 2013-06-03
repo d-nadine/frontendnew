@@ -24,9 +24,14 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
+  clearChecked: ->
+    @get('checkedContent').forEach (item) =>
+      item.set('isChecked', false)
+
   changeStatus: ->
     @set 'changeStatusForm.todo', @get('statusTodo')
     @get('changeStatusForm').commit()
+    @clearChecked()
     @set('statusTodo', '')
     @trigger 'formReset'
 
