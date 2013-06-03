@@ -23,5 +23,3 @@ Factory.define 'checklist',
       description: 'Client signed the deal'
       weight: 40
   ]
-
-

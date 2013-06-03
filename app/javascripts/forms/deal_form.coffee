@@ -37,7 +37,7 @@ Radium.DealForm = Radium.Form.extend
     return false if Ember.isEmpty(@get('user'))
     return false if Ember.isEmpty(@get('description'))
 
-    dealValue =@get('value')
+    dealValue = @get('value')
 
     return false if Ember.isEmpty(dealValue)
     return false if parseInt(dealValue) == 0
