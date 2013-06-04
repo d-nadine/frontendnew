@@ -7,6 +7,10 @@ Radium.ContactCompanyPicker = Radium.Combobox.extend
   placeholder: 'Company'
   companyNameBinding: 'controller.companyName'
 
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @set 'companyName', @get('value.name') if @get('value.name')
+
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
       lookUp = @lookupQuery(value)
