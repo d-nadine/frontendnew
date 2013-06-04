@@ -6,7 +6,6 @@ Radium.Form = Ember.ObjectProxy.extend
 
   reset: ->
     return unless @get('isNew')
-    @set('isSubmitted', false)
     @get('content').setProperties @get('defaults')
 
   isValid: ( ->

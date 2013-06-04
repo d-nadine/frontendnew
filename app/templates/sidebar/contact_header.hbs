@@ -1,0 +1,44 @@
+{{#if view.isEditing}}
+  <div class="contact-detail">
+    <div class="control-group">
+      <label class="control-label">Name</label>
+      <div class="controls">
+        {{input value=form.name classNameBindings=":field controller.isValid::is-invalid :detail" placeholder="Name"}}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Title</label>
+      <div class="controls">
+        {{input value=form.title class="field detail" placeholder="Title"}}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Company</label>
+      <div class="controls">
+        {{view view.companyPicker class="field"}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  {{avatar this size=medium class="img-polaroid"}}
+  <div class="header">
+    <div>
+      <div>
+        <span class="name">{{name}}</span>
+      </div>
+      <div>
+        <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+      </div>
+    </div>
+  </div>
+  <div class="company-title">
+    <span class="title muted">{{title}}</span>
+    <span class="company">
+      {{#if company}}
+        {{#linkTo company company}}{{company.name}}{{/linkTo}}
+      {{else}}
+        {{companyName}}
+      {{/if}}
+    </span>
+  </div>
+{{/if}}

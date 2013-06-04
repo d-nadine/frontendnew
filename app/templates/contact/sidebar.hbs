@@ -1,20 +1,20 @@
 <form class="form">
   <div class="meta">
-    {{view view.headerInlineEditor}}
+    {{render 'sidebar/contact_header' model}}
   </div>
   <hr />
   <div class="contact-type">
-    {{view view.contactStatusInlineEditor}}
+    {{!view view.contactStatusInlineEditor}}
   </div>
   <hr />
   <div class="company-website">
-    {{view view.contactInlineEditor valueBinding=company.website}}
+    {{!view view.contactInlineEditor valueBinding=company.website}}
   </div>
   <div class="email">
-    {{view view.emailAddressInlineEditor}}
+    {{!view view.emailAddressInlineEditor}}
   </div>
   <div class="phone">
-    {{view view.phoneInlineEditor}}
+    {{!view view.phoneInlineEditor}}
   </div>
   <div class="show-more">
     <a href="#" class="btn" {{action showExtraContactDetail bubbles=false target="view"}}>
@@ -24,7 +24,7 @@
   <hr/>
   <div class="additional-detail">
     <div class="address">
-      {{view view.addressInlineEditor}}
+      {{!view view.addressInlineEditor}}
     </div>
     <hr/>
   </div>
@@ -32,7 +32,7 @@
     <div class="tag-label">
       <h2 class="blue">Tags</h2>
     </div>
-    {{view view.tags placeholder="Add" viewName="tags"}}
+    {{!view view.tags placeholder="Add" viewName="tags"}}
   </div>
   <hr/>
   <div class="deals-won">
@@ -74,7 +74,7 @@
   <hr/>
 
   <div class="about">
-    {{view view.aboutInlineEditor valueBinding=about}}
+    {{!view view.aboutInlineEditor valueBinding=about}}
   </div>
   <hr/>
 
@@ -83,7 +83,7 @@
   <hr/>
 
   <div class="assigned-to control-group">
-    {{view view.assignedToInlineEditor}}
+    {{!view view.assignedToInlineEditor}}
   </div>
 
   <hr/>

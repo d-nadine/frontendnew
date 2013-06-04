@@ -21,57 +21,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  headerInlineEditor: Radium.InlineEditorView.extend
-    isValid: true
-    companyPicker: Radium.ContactCompanyPicker.extend(Radium.ComboboxSelectMixin)
-
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div class="contact-detail">
-          <div class="control-group">
-            <label class="control-label">Name</label>
-            <div class="controls">
-              {{input value=name class="field detail" placeholder="Name"}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Title</label>
-            <div class="controls">
-              {{input value=title class="field detail" placeholder="Title"}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Company</label>
-            <div class="controls">
-              {{view view.companyPicker class="field"}}
-            </div>
-          </div>
-        </div>
-      {{else}}
-        {{avatar this size=medium class="img-polaroid"}}
-        <div class="header">
-          <div>
-            <div>
-              <span class="name">{{name}}</span>
-            </div>
-            <div>
-              <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-            </div>
-          </div>
-        </div>
-        <div class="company-title">
-          <span class="title muted">{{title}}</span>
-          <span class="company">
-            {{#if company}}
-              {{#linkTo company company}}{{company.name}}{{/linkTo}}
-            {{else}}
-              {{companyName}}
-            {{/if}}
-          </span>
-        </div>
-      {{/if}}
-    """
-
   contactStatusInlineEditor: Radium.StatusInlineEditorView.extend()
 
   contactInlineEditor: Radium.InlineEditorView.extend
