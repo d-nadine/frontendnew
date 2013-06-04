@@ -60,10 +60,7 @@
       <div class="control-group">
         <label class="control-label">Deal Value</label>
         <div class="controls">
-          <div {{bindAttr class="view.disabled:is-disabled :field :control-box view.valueField.isInvalid:is-invalid view.valueField.isValid:is-valid"}}>
-            <span  class="text dollar">$</span>
-            {{view view.dealValue type="number" class="field input-medium negotitating" viewName="valueField"}}
-          </div>
+          {{view view.dealValue}}
         </div>
       </div>
       <div class="detail-plus">

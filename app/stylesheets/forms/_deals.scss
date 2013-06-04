@@ -172,6 +172,17 @@
     }
   }
 
+  .deal-value{
+    &.value-invalid{
+      background-color: $error-background;
+      border: 1px solid $error-border;
+
+      span{
+        color: #9e0b0f;
+      }
+    }
+  }
+
   .combobox{
     line-height: 23px;
   }

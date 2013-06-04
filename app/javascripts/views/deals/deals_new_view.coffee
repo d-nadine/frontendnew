@@ -52,23 +52,38 @@ Radium.DealsNewView= Ember.View.extend
       </ul>
     """
 
-  dealValue: Ember.TextField.extend
-    classNameBindings: ['isValid','isInvalid',':field']
-    valueBinding: 'controller.value'
+  dealValue: Ember.View.extend
+    classNameBindings: ['isValid','isInvalid', 'valueInvalid', ':deal-value', ':field', ':control-box']
+
+    template: Ember.Handlebars.compile """
+      <span  class="text dollar">$</span>
+      {{input value=controller.value type="number" class="field input-medium negotitating"}}
+      {{#if view.valueInvalid}}
+        <span class="error"><i class="icon-warning icon-white"></i>Value must be greater than 0.</span>
+      {{/if}}
+    """
+
+    valueInvalid: ( ->
+      return false unless @get('controller.isSubmitted')
+      value = @get('controller.value')
+
+      return true if Ember.isEmpty value
+
+      parseInt(value) == 0
+    ).property('controller.value', 'controller.isSubmitted')
 
     isValid: ( ->
-      value = @get('value')
+      value = @get('controller.value')
 
       return false if Ember.isEmpty value
-      return false if parseInt(value) == 0
 
       # FIXME: move into helper
       /^(?=.*[1-9])\d{0,5}(\.\d{1,2})?$/.test value
-    ).property('value', 'isSubmitted')
+    ).property('controller.value', 'controller.isSubmitted')
 
     isInvalid: ( ->
       (not @get('isValid')) && @get('controller.isSubmitted')
-    ).property('value', 'controller.isSubmitted')
+    ).property('controller.value', 'controller.isSubmitted')
 
   referenceName: ( ->
     # FIXME : can we use toString on the models?
