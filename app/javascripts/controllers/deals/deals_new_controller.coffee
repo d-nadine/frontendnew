@@ -15,6 +15,7 @@ Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin
   ).observes('statuses.[]')
 
   saveAsDraft: ->
+    @set 'status', 'unpublished'
     @set 'isPublished', false
     @submit()
 
