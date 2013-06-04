@@ -10,6 +10,11 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
   # FIXME: How do we determine this?
   isEditable: true
 
+  contacts: ( ->
+    @get('controllers.contacts').filter (contact) ->
+      contact.get('status') != 'personal'
+  ).property('controllers.contacts.[]')
+
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   newItemDescription: ''
   newItemWeight: 0

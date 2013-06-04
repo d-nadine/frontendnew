@@ -5,6 +5,7 @@ Radium.LeadStatusesController = Ember.ArrayProxy.extend
     { name: "Lead", value: "lead" }
     { name: "Existing Customer", value: "existing" }
     { name: "Exclude From Pipeline", value: "exclude" }
+    { name: "Customer", value: "customer" }
   ]
 
   statuses: ( ->

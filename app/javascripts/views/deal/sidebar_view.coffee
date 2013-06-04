@@ -5,7 +5,7 @@ Radium.DealSidebarView = Radium.View.extend
   contactInlineEditor: Radium.InlineEditorView.extend
     contactPicker: Radium.Combobox.extend Radium.ComboboxSelectMixin,
       classNameBindings: [':contact-picker']
-      sourceBinding: 'controller.controllers.contacts'
+      sourceBinding: 'controller.contacts'
       valueBinding: 'controller.contact'
       placeholder: 'Choose a contact'
       isSubmitted: true
