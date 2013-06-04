@@ -8,7 +8,6 @@ require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
 require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
-require 'views/leads/lead_sources_view'
 requireAll /views\/sidebar/
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
@@ -20,26 +19,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   showExtraContactDetail: ->
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
-
-  contactInlineEditor: Radium.InlineEditorView.extend
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div>
-          <i class="icon-cloud"></i>{{input type="text" value=company.website class="field" placeholder="Add company website"}}
-        </div>
-      {{else}}
-        <div class="not-editing">
-          {{#if company.website}}
-            <a href="{{unbound company.website}}" target="_blank"><i class="icon-cloud"></i>{{company.website}}</a>
-          {{else}}
-            <span class="empty">Add company website</span>
-          {{/if}}
-        </div>
-        <div>
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-        </div>
-      {{/if}}
-    """
 
   emailAddressInlineEditor: Radium.InlineEditorView.extend
     isValid: true
@@ -112,12 +91,8 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
 
   assignedToInlineEditor: Radium.InlineEditorView.extend
     isValid: true
-    userPicker: Radium.UserPicker.extend Radium.ComboboxSelectMixin,
+    userPicker: Radium.UserPicker.extend
       isSubmitted: true
-
-    leadSourcesPicker: Radium.LeadSourcesView.extend Radium.ComboboxSelectMixin,
-      isSubmitted: true
-
     template: Ember.Handlebars.compile """
       <div>
         {{#if view.isEditing}}
@@ -127,7 +102,7 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
           </div>
           <div class="source">
             <label class="control-label">Source</label>
-            {{view view.leadSourcesPicker}}
+            {{view Radium.LeadSourcesView}}
           </div>
         {{else}}
           <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>

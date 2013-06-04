@@ -8,11 +8,10 @@
   </div>
   <hr />
   <div class="company-website">
-    {{render "sidebar/company_website" model}}
-    {{!view view.contactInlineEditor valueBinding=company.website}}
+    {{render "sidebar/company_website" model.company}}
   </div>
   <div class="email">
-    {{!view view.emailAddressInlineEditor}}
+    {{render "sidebar/email_addresses" model}}
   </div>
   <div class="phone">
     {{!view view.phoneInlineEditor}}
