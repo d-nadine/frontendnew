@@ -62,7 +62,7 @@
     <div class="deal-links">
       <div>
         <div>
-          <a href="#" {{action createDealFromContact model}} class="btn btn-primary"><i class="icon-plus"></i> Deal</a>
+          {{#linkTo deals.fromContact model class="btn btn-primary"}}<i class="icon-plus"></i> Deal{{/linkTo}}
         </div>
         <div>
           <!-- FIXME: Where should this go -->

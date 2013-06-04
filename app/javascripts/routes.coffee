@@ -40,6 +40,7 @@ Radium.Router.map ->
   @resource 'deals', ->
     @resource 'deal', path: '/:deal_id'
     @route 'new'
+    @route 'fromContact', path: 'contacts/:contact_id'
 
   @resource 'calendar', path: '/:year/:month/:day'
 

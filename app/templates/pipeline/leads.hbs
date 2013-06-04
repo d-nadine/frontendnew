@@ -53,7 +53,7 @@
           {{/if}}
         </td>
         <td class="text-center">
-          <a href="#" {{action createDealFromContact this}} class="btn">Add Deal</a>
+          {{#linkTo deals.fromContact this class="btn"}}Add Deal{{/linkTo}}
         </td>
         <td class="text-right">
           {{partial 'search/delete'}}

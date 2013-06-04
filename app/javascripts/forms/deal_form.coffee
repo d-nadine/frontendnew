@@ -25,6 +25,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
+    @get('forecast').clear()
 
     return unless @get('form')
 

@@ -1,19 +1,19 @@
 Radium.DealsNewRoute = Ember.Route.extend
-  setup: (context) ->
-    @transitioned = false
-    @redirect context
-    return false  if @transitioned
-    controller = @controllerFor(@routeName)
+  setupController: (controller) ->
+    dealForm = @get 'dealForm'
+    controller.set 'model', dealForm 
+    controller.get('model').reset()
+    controller.set 'model.user', @controllerFor('currentUser').get('model')
+    dealForm.get('forecast').pushObjects @controllerFor('accountSettings').get('dealChecklist').map (checkListItem) ->
+                                                                          Ember.Object.create(checkListItem)
 
-    @controller = controller if controller
+  dealForm:  Radium.computed.newForm('deal')
 
-    if @setupControllers
-      Ember.deprecate "Ember.Route.setupControllers is deprecated. Please use Ember.Route.setupController(controller, model) instead."
-      @setupControllers controller, context
-    else
-      @setupController controller, context
-    if @renderTemplates
-      Ember.deprecate "Ember.Route.renderTemplates is deprecated. Please use Ember.Route.renderTemplate(controller, model) instead."
-      @renderTemplates context
-    else
-      @renderTemplate controller, context
+  dealFormDefaults: ( ->
+    isNew: true
+    contact: null
+    description: ''
+    todo: null
+    email: null
+    forecast: Ember.A()
+  ).property()

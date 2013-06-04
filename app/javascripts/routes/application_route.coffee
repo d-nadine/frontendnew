@@ -65,26 +65,10 @@ Radium.ApplicationRoute = Radium.Route.extend
       else
         @transitionTo lastPage[0]
 
-    createDealFromContact: (contact) ->
-      controller = @controllerFor('deals.new')
-      controller.get('model').reset()
-      controller.set 'user', @controllerFor('currentUser').get('model')
-      controller.set('contact', contact)
-      controller.set('source', 'Lead Form')
-      @transitionTo 'deals.new'
-
   model: ->
     Radium.Deal.find({})
 
   setupController: (controller, deals) ->
-    settings = @controllerFor('accountSettings')
-    dealForm = @get('dealForm')
-    dealForm.set('forecast', Ember.A())
-    dealForm.get('forecast').pushObjects settings.get('dealChecklist').map (checkListItem) ->
-                                                                          Ember.Object.create(checkListItem)
-    dealForm.set 'user', @controllerFor('currentUser').get('model')
-    @controllerFor('deals.new').set 'model', dealForm
-
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()
     @controllerFor('tags').set 'model', Radium.Tag.find()
@@ -101,21 +85,3 @@ Radium.ApplicationRoute = Radium.Route.extend
     @render 'drawer_panel',
       into: 'application'
       outlet: 'drawerPanel'
-
-  dealForm:  Radium.computed.newForm('deal')
-
-  dealFormDefaults: ( ->
-    isNew: true
-    company: null
-    name: ''
-    user: null
-    contact: null
-    description: ''
-    todo: null
-    email: null
-    source: ''
-    status: null
-    value: 0
-    isPublished: true
-    poNumber: ''
-  ).property()
