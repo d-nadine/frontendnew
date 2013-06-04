@@ -15,7 +15,7 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
       contact.get('status') != 'personal'
   ).property('controllers.contacts.[]')
 
-  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
+  statuses: Ember.computed.alias('controllers.accountSettings.negotiatingStates')
   newItemDescription: ''
   newItemWeight: 0
   newItemFinished: false
