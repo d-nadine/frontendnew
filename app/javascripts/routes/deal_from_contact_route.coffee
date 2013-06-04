@@ -7,6 +7,7 @@ Radium.DealsFromContactRoute = Radium.Route.extend
     dealsController.get('model.forecast').pushObjects @controllerFor('accountSettings').get('dealChecklist').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem)
     dealsController.set 'contact', model
+    dealsController.set 'status', @controllerFor('accountSettings').get('dealStates.firstObject')
 
   renderTemplate: ->
     @render 'deals.new',

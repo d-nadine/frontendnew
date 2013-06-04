@@ -6,6 +6,7 @@ Radium.DealsNewRoute = Ember.Route.extend
     controller.set 'model.user', @controllerFor('currentUser').get('model')
     dealForm.get('forecast').pushObjects @controllerFor('accountSettings').get('dealChecklist').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem)
+    dealsController.set 'status', @controllerFor('accountSettings').get('dealStates.firstObject')
 
   dealForm:  Radium.computed.newForm('deal')
 
