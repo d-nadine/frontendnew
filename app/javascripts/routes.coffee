@@ -19,6 +19,7 @@ Radium.Router.map ->
 
   @resource 'pipeline', ->
     @route 'leads'
+    @route 'unpublished'
     @route 'negotiating'
     @route 'closed'
     @route 'lost'

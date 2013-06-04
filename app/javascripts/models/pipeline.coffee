@@ -55,6 +55,11 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
       deal.get('status') == 'lost'
   ).property('lost.[]')
 
+  unpublished: (->
+    Radium.Deal.filter (deal) ->
+      deal.get('status') == 'unpublished'
+  ).property('unpublished.[]')
+
   leads: (->
     Radium.Contact.filter (contact) -> contact.get('isLead')
   ).property()

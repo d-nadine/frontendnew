@@ -41,13 +41,10 @@
     color: $dark;
   }
 
-  li{
+  li:not(.unpublished){
     width: 10%;
   }
 
-  li.leads {
-    margin-right: 15px;
-  }
   li.closed {
     margin-left: 15px;
     margin-right: 15px;

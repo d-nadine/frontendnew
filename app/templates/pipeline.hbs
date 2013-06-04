@@ -4,6 +4,10 @@
       {{#linkTo pipeline.leads}}Leads{{/linkTo}} {{badge leads.length style="info"}}
       <span class="divider">&gt;</span>
     </li>
+    <li class="unpublished">
+      {{#linkTo pipeline.unpublished}}Unpublished{{/linkTo}} {{badge unpublished.length style="info"}}
+      <span class="divider">&gt;</span>
+    </li>
     {{#each negotiatingGroups}}
       <li class="negotiating">
         <a {{action selectGroup this}} href="#">{{title}}</a> {{badge length style="warning"}}
