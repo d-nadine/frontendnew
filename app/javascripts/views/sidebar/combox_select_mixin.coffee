@@ -1,5 +1,5 @@
 Radium.ComboboxSelectMixin = Ember.Mixin.create
-  selectObject: ->
+  selectValue: ->
     @_super.apply this, arguments
     @get('parentView').$().trigger 'click'
 

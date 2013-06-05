@@ -1,0 +1,21 @@
+{{#if company}}
+  {{#if view.isEditing}}
+    <div>
+      <i class="icon-cloud"></i>{{input type="text" value=companyWebsite class="field" placeholder="Add company website"}}
+    </div>
+  {{else}}
+    <div class="not-editing">
+      {{#if company.website}}
+        <a href="{{unbound company.website}}" target="_blank"><i class="icon-cloud"></i>{{company.website}}</a>
+      {{else}}
+        <i class="icon-cloud"></i><span class="empty">Add company website</span>
+      {{/if}}
+    </div>
+    <div>
+      <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+    </div>
+  {{/if}}
+{{else}}
+      <i class="icon-cloud"></i><span class="empty">Please assign a company.</span>
+{{/if}}
+

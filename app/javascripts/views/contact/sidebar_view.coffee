@@ -21,8 +21,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  contactStatusInlineEditor: Radium.StatusInlineEditorView.extend()
-
   contactInlineEditor: Radium.InlineEditorView.extend
     template: Ember.Handlebars.compile """
       {{#if view.isEditing}}

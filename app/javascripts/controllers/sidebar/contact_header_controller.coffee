@@ -16,7 +16,6 @@ Radium.ContactHeaderForm = Radium.Form.extend
 
 Radium.SidebarContactHeaderController = Radium.SidebarBaseController.extend
   needs: ['companies']
-  isEditable: true
 
   isValid: ( ->
     return unless @get('isEditing')
@@ -24,18 +23,11 @@ Radium.SidebarContactHeaderController = Radium.SidebarBaseController.extend
     @get('form.name.length') >= 3
   ).property('form.name', 'isEditing')
 
-  startEditing: ->
-    return if @get('isSaving')
-    @get('form').reset()
+  setForm: ->
     @set 'form.name', @get('model.name')
     @set 'form.title', @get('model.title')
     @set 'form.company', @get('model.company')
     @set 'form.companyName', @get('model.companyName')
-
-  stopEditing: ->
-    return if @get('isSaving')
-    return unless @get('isValid')
-    @commit()
 
   form: ( ->
     Radium.ContactHeaderForm.create()

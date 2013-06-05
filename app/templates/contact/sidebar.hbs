@@ -4,10 +4,11 @@
   </div>
   <hr />
   <div class="contact-type">
-    {{!view view.contactStatusInlineEditor}}
+    {{render 'sidebar/contact_status' model}}
   </div>
   <hr />
   <div class="company-website">
+    {{render "sidebar/company_website" model}}
     {{!view view.contactInlineEditor valueBinding=company.website}}
   </div>
   <div class="email">
