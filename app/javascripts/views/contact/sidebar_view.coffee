@@ -20,33 +20,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  emailAddressInlineEditor: Radium.InlineEditorView.extend
-    isValid: true
-    emailAddresses: Radium.MultipleFields.extend
-      labels: ['Work','Home']
-      inputType: 'email'
-      leader: 'Email'
-      sourceBinding: 'controller.emailAddresses'
-      type: Radium.EmailAddress
-      canReset: false
-
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div>
-          {{view view.emailAddresses}}
-        </div>
-      {{else}}
-        <div class="control-group">
-          </id><label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-          {{#if primaryEmail.value}}
-            {{#linkTo emails.mailTo this}}<i class="icon-mail"></i>{{primaryEmail.value}}{{/linkTo}}
-          {{else}}
-            <span class="empty">Add email here</span>
-          {{/if}}
-        </div>
-      {{/if}}
-    """
-
   phoneInlineEditor: Radium.InlineEditorView.extend
     isValid: true
     phoneNumbers: Radium.MultipleFields.extend
