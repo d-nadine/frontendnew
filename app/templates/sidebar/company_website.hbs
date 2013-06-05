@@ -1,7 +1,7 @@
-{{#if company}}
+{{#if model}}
   {{#if view.isEditing}}
     <div>
-      <i class="icon-cloud"></i>{{input type="text" value=companyWebsite class="field" placeholder="Add company website"}}
+      <i class="icon-cloud"></i>{{input type="text" value=form.website class="field" placeholder="Add company website"}}
     </div>
   {{else}}
     <div class="not-editing">
@@ -16,6 +16,6 @@
     </div>
   {{/if}}
 {{else}}
-      <i class="icon-cloud"></i><span class="empty">Please assign a company.</span>
+  <i class="icon-cloud"></i><span class="empty">Please assign a company.</span>
 {{/if}}
 
