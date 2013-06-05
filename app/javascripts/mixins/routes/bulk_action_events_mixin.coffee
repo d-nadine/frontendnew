@@ -12,6 +12,8 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
       @controllerFor('emailsSent').set('model', form)
 
+      @store.commit()
+
       @render 'emails/sent',
         into: @getTemplate()
         outlet: 'confirmation'

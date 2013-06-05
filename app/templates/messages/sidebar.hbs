@@ -1,12 +1,12 @@
-{{#if content}}
-  <ul class="selectable">
-    <li class="send-email">
-      {{#linkTo emails.new class="btn btn-block btn-success"}}
-          Send Email
-      {{/linkTo}}
-    </li>
+<ul class="selectable">
+  <li class="send-email">
+    {{#linkTo emails.new class="btn btn-block btn-success"}}
+        Send Email
+    {{/linkTo}}
+  </li>
+  {{#if content}}
     {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}
-  </ul>
-{{else}}
-  <p>No Emails!</p>
-{{/if}}
+  {{else}}
+    <p>No Emails!</p>
+  {{/if}}
+</ul>

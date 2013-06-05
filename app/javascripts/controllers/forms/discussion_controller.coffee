@@ -1,4 +1,5 @@
 Radium.FormsDiscussionController = Radium.ObjectController.extend Ember.Evented,
+  needs: ['users']
   isDisabled: (->
     return true if @get('justAdded')
     return true if @get('isSubmitted')
@@ -31,11 +32,11 @@ Radium.FormsDiscussionController = Radium.ObjectController.extend Ember.Evented,
     @set 'showOptions', false
 
     Ember.run.later(( =>
+
       @set 'justAdded', false
       @set 'isSubmitted', false
       @set 'showOptions', true
       @set 'isExpanded', true
-      @set 'text', null
 
       @get('model').commit()
       @get('content').reset()

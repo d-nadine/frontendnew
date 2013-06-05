@@ -117,6 +117,10 @@ Radium.RESTAdapter.map('Radium.Contact', {
   emailAddresses: {embedded: 'always'}
 });
 
+Radium.RESTAdapter.map('Radium.Discussion', {
+  user: {key: 'posted_by'},
+});
+
 Radium.RESTAdapter.map('Radium.Todo', {
   user: { key: 'assigned_to_id' },
 });

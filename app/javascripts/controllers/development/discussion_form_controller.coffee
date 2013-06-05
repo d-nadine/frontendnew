@@ -5,13 +5,14 @@ Radium.DevelopmentDiscussionFormController = Ember.Controller.extend Radium.Curr
   discussion: Radium.computed.newForm('discussion')
 
   discussionFormDefaults: (->
-    content: {}
+    user: @get('currentUser')
+    topic: ''
   ).property()
 
   justAddedDiscussion: (->
     Ember.ObjectProxy.create
       content: Radium.DiscussionForm.create
         content: Ember.Object.create
-          text: "Big long text"
+          topic: "Big long text"
       justAdded: true
   ).property()
