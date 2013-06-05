@@ -33,9 +33,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     }
   },
 
-  didError: function(store, type, record) {
-    store.recordWasError(record);
-  },
   queryUserRecords: function(store, type, query, recordArray, base){
     if(query.name === "me"){
       var adapter = this;
