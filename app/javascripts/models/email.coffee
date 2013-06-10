@@ -5,6 +5,12 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
+  toContacts: DS.hasMany('Radium.Contact')
+  toUsers: DS.hasMany('Radium.User')
+  ccContacts: DS.hasMany('Radium.Contact')
+  ccUsers: DS.hasMany('Radium.User')
+  bccContacts: DS.hasMany('Radium.Contact')
+  bccUsers: DS.hasMany('Radium.User')
 
   subject: DS.attr('string')
   message: DS.attr('string')
@@ -26,16 +32,18 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
       content: [ @get('sender') ]
   ).property('sender')
 
-  # FIXME: find a better way to handle this
-  # once we get the API connntected
+  toList: Radium.computed.aggregate('toUsers', 'toContacts')
+  ccList: Radium.computed.aggregate('ccUsers', 'ccUsers')
+  bccList: Radium.computed.aggregate('bccUsers', 'bccContacts')
+
   to: DS.attr('array')
   cc: DS.attr('array')
   bcc: DS.attr('array')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
-  people: Radium.computed.aggregate('to','cc', 'senderArray')
-  recipients: Radium.computed.aggregate('to','cc')
+  people: Radium.computed.aggregate('toList','ccList', 'senderArray')
+  recipients: Radium.computed.aggregate('toList','ccList')
 
   trackable: Ember.computed.present('contact')
 
