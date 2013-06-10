@@ -43,7 +43,7 @@ Radium.InlineEditorView = Ember.View.extend
     evt.preventDefault()
     evt.stopPropagation()
 
-  toggleEditor: (event) ->
+  toggleEditor:  ->
     if @get('isEditing') and @get('isValid')
       @get('controller').stopEditing()
       @set 'isEditing', false

@@ -9,7 +9,6 @@ Radium.MultipleField = Ember.View.extend
     Ember.A(@get('parentView.labels'))
   ).property('parentView.labels.[]')
 
-
   addNew: ->
     @get('parentView').addNew()
 
@@ -85,6 +84,8 @@ Radium.MultipleField = Ember.View.extend
 
   primaryRadio: Radium.Radiobutton.extend
     leader: 'Make Primary'
+
+    isChecked: Ember.computed.bool 'isPrimary'
 
     didInsertElement: ->
       @set('checked', true) if @get('parentView.current.isPrimary')

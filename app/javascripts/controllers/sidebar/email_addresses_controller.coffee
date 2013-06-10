@@ -8,12 +8,28 @@ Radium.EmailAddressesForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
+    @set 'emailAddresses', Ember.A()
 
 Radium.SidebarEmailAddressesController = Radium.SidebarBaseController.extend
   isValid: true
 
+  commit: ->
+    console.log 'temporary override'
+
   setForm: ->
-    console.log 'emails'
+    emailAddresses = @get('emailAddresses')
+    formEmailAddress = @get('form.emailAddresses')
+
+    unless emailAddresses.get('length')
+      formEmailAddress.pushObject Ember.Object.create
+        isPrimary: true, name: 'Work', value:''
+
+      return
+
+    emailAddresses.forEach (email) =>
+      formEmailAddress.pushObject Ember.Object.create(
+        isPrimary: email.get('isPrimary'), name: email.get('name'), value: email.get('value'), record: email
+      )
 
   form: ( ->
     Radium.EmailAddressesForm.create()
