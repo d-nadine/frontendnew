@@ -145,6 +145,13 @@ Radium.RESTAdapter.map('Radium.PhoneNumber', {
   isPrimary: { key: 'primary'},
 });
 
+Radium.RESTAdapter.map('Radium.Email', {
+  message: {key: 'body'},
+  isPublic: {key: 'public'},
+  isTracked: {key: 'personal'},
+  isRead: {key: 'read'},
+});
+
 Radium.RESTAdapter.map('Radium.EmailAddress', {
   value: { key: 'address' },
   isPrimary: { key: 'primary'},

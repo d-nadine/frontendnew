@@ -10,8 +10,8 @@ Radium.PeopleList = Ember.ArrayProxy.extend
     .sort(@comparer)
 
   comparer: (a, b) ->
-    sortA = a.get('name') || a.get('email')
-    sortB = a.get('name') || a.get('email')
+    sortA = a.get('name') || a.get('email') || a.get('primaryEmail.value')
+    sortB = b.get('name') || b.get('email') || b.get('primaryEmail.value')
 
     if sortA > sortB
      return 1

@@ -11,7 +11,7 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
     contacts = @get('contacts')
 
     Radium.PeopleList.listPeople(users, contacts)
-      .filter (person) -> person.get('email')
+      .filter (person) -> person.get('email') || person.get('primaryEmail.value')
   ).property('users.[]', 'contacts.[]')
 
   expandList: (section) ->
