@@ -3,7 +3,8 @@ Radium.MultipleEmailAddressController = Radium.ArrayController.extend
   addNew: ->
     currentIndex = @get('length')
     label = @get('labels')[currentIndex % @get('labels.length')]
-    @get('content').pushObject Ember.Object.create isPrimary: false, name: label, value: ''
+    item = Ember.Object.create isPrimary: false, name: label, value: ''
+    @get('content').pushObject  item
 
   removeSelection: (item) ->
     if item.hasOwnProperty 'record'

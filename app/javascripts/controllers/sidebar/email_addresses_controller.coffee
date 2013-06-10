@@ -14,7 +14,13 @@ Radium.SidebarEmailAddressesController = Radium.SidebarBaseController.extend
   isValid: true
 
   commit: ->
-    console.log 'temporary override'
+    @get('form.emailAddresses').forEach (email) =>
+      if email.hasOwnProperty 'record'
+        email.record.setProperties(name: email.get('name'), value: email.get('value'), isPrimary: email.get('isPrimary'))
+      else
+        @get('content.emailAddresses').createRecord email.getProperties('name', 'value', 'isPrimary')
+
+    @get('content.transaction').commit()
 
   setForm: ->
     emailAddresses = @get('emailAddresses')
