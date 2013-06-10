@@ -296,6 +296,9 @@
                             abortRequest();
                             results_holder.hide();
                             break;
+                        default:
+                          // FIXME: Should not need to trigger this
+                          $(this).trigger('focus');
                     }
                 });
 

@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-rc.5-7-g610589a
-// Last commit: 610589a (2013-06-01 16:12:43 -0700)
+// Version: v1.0.0-rc.5-32-g579661a
+// Last commit: 579661a (2013-06-07 06:14:51 -0700)
 
 
 (function() {
@@ -5442,6 +5442,38 @@ Ember.run.cancel = function(timer) {
   return backburner.cancel(timer);
 };
 
+/**
+  Execute the passed method in a specified amount of time, reset timer
+  upon additional calls.
+
+  ```javascript
+    var myFunc = function() { console.log(this.name + ' ran.'); };
+    var myContext = {name: 'debounce'};
+
+    Ember.run.debounce(myContext, myFunc, 150);
+
+    // less than 150ms passes
+
+    Ember.run.debounce(myContext, myFunc, 150);
+
+    // 150ms passes
+    // myFunc is invoked with context myContext
+    // console logs 'debounce ran.' one time.
+  ```
+
+  @method debounce
+  @param {Object} [target] target of method to invoke
+  @param {Function|String} method The method to invoke.
+    May be a function or a string. If you pass a string
+    then it will be looked up on the passed target.
+  @param {Object} [args*] Optional arguments to pass to the timeout.
+  @param {Number} wait Number of milliseconds to wait.
+  @return {void}
+*/
+Ember.run.debounce = function() {
+  return backburner.debounce.apply(backburner, arguments);
+};
+
 // Make sure it's not an autorun during testing
 function checkAutoRun() {
   if (!Ember.run.currentRunLoop) {
@@ -9449,15 +9481,15 @@ Ember.Array = Ember.Mixin.create(Ember.Enumerable, /** @scope Ember.Array.protot
     Adds an array observer to the receiving array. The array observer object
     normally must implement two methods:
 
-    * `arrayWillChange(start, removeCount, addCount)` - This method will be
+    * `arrayWillChange(observedObj, start, removeCount, addCount)` - This method will be
       called just before the array is modified.
-    * `arrayDidChange(start, removeCount, addCount)` - This method will be
+    * `arrayDidChange(observedObj, start, removeCount, addCount)` - This method will be
       called just after the array is modified.
 
-    Both callbacks will be passed the starting index of the change as well a
-    a count of the items to be removed and added. You can use these callbacks
-    to optionally inspect the array during the change, clear caches, or do
-    any other bookkeeping necessary.
+    Both callbacks will be passed the observed object, starting index of the
+    change as well a a count of the items to be removed and added. You can use
+    these callbacks to optionally inspect the array during the change, clear
+    caches, or do any other bookkeeping necessary.
 
     In addition to passing a target, you can also include an options hash
     which you can use to override the method names that will be invoked on the
@@ -15856,7 +15888,7 @@ Ember.View = Ember.CoreView.extend(
     If a value that affects template rendering changes, the view should be
     re-rendered to reflect the new value.
 
-    @method _displayPropertyDidChange
+    @method _contextDidChange
   */
   _contextDidChange: Ember.observer(function() {
     this.rerender();
@@ -18547,7 +18579,6 @@ Ember.ViewTargetActionSupport = Ember.Mixin.create(Ember.TargetActionSupport, {
 
 
 (function() {
-/*globals jQuery*/
 /**
 Ember Views
 
@@ -19072,6 +19103,59 @@ function makeBindings(options) {
   }
 }
 
+/**
+  Register a bound helper or custom view helper.
+
+  ## Simple bound helper example
+
+  ```javascript
+  Ember.Handlebars.helper('capitalize', function(value) {
+    return value.toUpperCase();
+  });
+  ```
+
+  The above bound helper can be used inside of templates as follows:
+
+  ```handlebars
+  {{capitalize name}}
+  ```
+
+  In this case, when the `name` property of the template's context changes,
+  the rendered value of the helper will update to reflect this change.
+
+  For more examples of bound helpers, see documentation for
+  `Ember.Handlebars.registerBoundHelper`.
+
+  ## Custom view helper example
+
+  Assuming a view subclass named `App.CalenderView` were defined, a helper
+  for rendering instances of this view could be registered as follows:
+
+  ```javascript
+  Ember.Handlebars.helper('calendar', App.CalendarView):
+  ```
+
+  The above bound helper can be used inside of templates as follows:
+
+  ```handlebars
+  {{calendar}}
+  ```
+
+  Which is functionally equivalent to:
+
+  ```handlebars
+  {{view App.CalendarView}}
+  ```
+
+  Options in the helper will be passed to the view in exactly the same
+  manner as with the `view` helper.
+
+  @method helper
+  @for Ember.Handlebars
+  @param {String} name
+  @param {Function|Ember.View} function or view class constructor
+  @param {String} dependentKeys*
+*/
 Ember.Handlebars.helper = function(name, value) {
   if (Ember.View.detect(value)) {
     Ember.Handlebars.registerHelper(name, function(options) {
@@ -24571,7 +24655,7 @@ Ember.Router = Ember.Object.extend({
   location: 'hash',
 
   init: function() {
-    this.router = this.constructor.router;
+    this.router = this.constructor.router || this.constructor.map(Ember.K);
     this._activeViews = {};
     setupLocation(this);
   },
@@ -26044,8 +26128,12 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     view = container.lookup('view:' + name) || container.lookup('view:default');
 
-    if (controller = options.hash.controller) {
-      controller = container.lookup('controller:' + controller, lookupOptions);
+    var controllerName = options.hash.controller;
+
+    // Look up the controller by name, if provided.
+    if (controllerName) {
+      controller = container.lookup('controller:' + controllerName, lookupOptions);
+      Ember.assert("The controller name you supplied '" + controllerName + "' did not resolve to a controller.", !!controller);
     } else {
       controller = Ember.controllerFor(container, name, context, lookupOptions);
     }
@@ -26594,7 +26682,7 @@ Ember.View.reopen({
   _hasEquivalentView: function(outletName, view) {
     var existingView = get(this, '_outlets.'+outletName);
     return existingView &&
-      existingView.prototype === view.prototype &&
+      existingView.constructor === view.constructor &&
       existingView.get('template') === view.get('template') &&
       existingView.get('context') === view.get('context');
   },
@@ -28217,6 +28305,8 @@ Ember.ControllerMixin.reopen({
     this.get('controllers.post'); // instance of App.PostController
     ```
 
+    This is only available for singleton controllers.
+
     @property {Array} needs
     @default []
   */
@@ -29632,7 +29722,7 @@ Ember.Test = {
       chained: false
     };
     thenable.then = function(onSuccess, onFailure) {
-      var self = this, thenPromise, nextPromise;
+      var thenPromise, nextPromise;
       thenable.chained = true;
       thenPromise = promise.then(onSuccess, onFailure);
       // this is to ensure all downstream fulfillment
@@ -29859,7 +29949,7 @@ function find(app, selector, context) {
 }
 
 function wait(app, value) {
-  var promise, obj = {}, helperName;
+  var promise;
 
   promise = Ember.Test.promise(function(resolve) {
     if (++countAsync === 1) {

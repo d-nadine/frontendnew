@@ -14,8 +14,8 @@ Radium.ReplyForm = Radium.EmailForm.extend
       cc: []
       bcc: []
 
-    @get('email.to').forEach (person) -> hash.to.pushObject person
+    @get('email.toList').forEach (person) -> hash.to.pushObject person
 
     hash
-  ).property('email', 'email.subject', 'email.to')
+  ).property('email', 'email.subject', 'email.toList.[]')
 

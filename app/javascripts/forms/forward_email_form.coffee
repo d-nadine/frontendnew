@@ -12,7 +12,7 @@ Radium.ForwardEmailForm = Radium.EmailForm.extend
     to: []
     cc: []
     bcc: []
-  ).property('email.to', 'email.message')
+  ).property('email.toList.[]', 'email.message')
 
   isValid: ( ->
     @get('to.length') && @get('subject') && @get('message.length')

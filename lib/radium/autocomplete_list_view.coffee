@@ -111,6 +111,9 @@ Radium.AutocompleteView = Radium.View.extend
     tabindexBinding: 'parentView.tabindex'
 
     didInsertElement: ->
+      Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'
+
+    addAutocomplete: ->
       options =
         asHtmlID: @get('elementId')
         selectedItemProp: "name"
@@ -123,6 +126,7 @@ Radium.AutocompleteView = Radium.View.extend
         usePlaceholder: true
         retrieveLimit: 5
         startText: @get('placeholder')
+        keyDelay: 100
 
       if @get('parentView').newItemCriteria
         options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)
