@@ -5,7 +5,6 @@ Radium.EmailsShowRoute = Radium.Route.extend
       return unless form.get('isValid')
 
       email = Radium.Email.createRecord form.get('data')
-      email.set 'sender', @controllerFor('currentUser').get('model')
 
       # Set the time so things sort correctly. It will be updated
       # by the server when the email is actually sent
@@ -39,7 +38,6 @@ Radium.EmailsShowRoute = Radium.Route.extend
       return unless form.get('isValid')
 
       email = Radium.Email.createRecord form.get('data')
-      email.set 'sender', @controllerFor('currentUser').get('model')
 
       # Set the time so things sort correctly. It will be updated
       # by the server when the email is actually sent

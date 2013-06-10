@@ -13,7 +13,13 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   isTracked: DS.attr('boolean')
   isRead: DS.attr('boolean')
 
-  sender: DS.attr('object')
+  sender: ( ->
+    @get('_senderUser') ||
+    @get('_senderContact')
+  ).property('_senderUser', '_senderContact')
+
+  _senderUser: DS.belongsTo('Radium.User')
+  _senderContact: DS.belongsTo('Radium.Contact')
 
   senderArray: (->
     Ember.ArrayProxy.create

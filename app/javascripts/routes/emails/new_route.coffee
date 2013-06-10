@@ -7,13 +7,14 @@ Radium.EmailsNewRoute = Ember.Route.extend
       email = Radium.Email.createRecord form.get('data')
 
       email.one 'didCreate', =>
-        @transitionTo 'emails.sent', email
+        Ember.run.next =>
+          @transitionTo 'emails.sent', email
 
       email.one 'becameInvalid', =>
-        Radium.generateErrorSummary email
+        Radium.Utils.generateErrorSummary email
 
       email.one 'becameError', =>
-        Radium.notifyError 'An error has occurred and the eamil has not been sent'
+        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 

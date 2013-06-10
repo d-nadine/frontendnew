@@ -29,7 +29,7 @@ notify: (message, options) ->
   notifyError: (message) ->
     @notify message,
               type: 'alert-error'
-              delay: 2000
+              delay: 8000
 
   generateErrorSummary: (object) ->
     return "" if object.get('errors').length == 0
