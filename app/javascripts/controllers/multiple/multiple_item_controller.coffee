@@ -10,12 +10,12 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     @toggleProperty 'open'
 
   selectValue: (value) ->
-    @set('name', value.toString())
+    @set('model.name', value.toString())
     @toggleOpen()
 
   name: ( ->
     @get('content.name').capitalize()
-  ).property('name')
+  ).property('content.name')
 
   showAddNew: ( ->
     return if @get('parent.length') <= 1 && @get('value.length') < 2
