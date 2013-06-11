@@ -74,6 +74,9 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
 
+    Radium.Email.find()
+    Radium.Discussion.find()
+
     # FIXME: Where are we getting the county list from
     @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
 
