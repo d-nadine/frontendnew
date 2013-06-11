@@ -20,44 +20,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  phoneInlineEditor: Radium.InlineEditorView.extend
-    isValid: true
-    phoneNumbers: Radium.MultipleFields.extend
-      labels: ['Mobile','Work','Home']
-      leader: 'Phone'
-      sourceBinding: 'controller.phoneNumbers'
-      viewType: Radium.PhoneMultipleField
-      type: Radium.PhoneNumber
-      canReset: false
-
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div>
-          {{view view.phoneNumbers}}
-        </div>
-      {{else}}
-        <div class="control-group">
-          <label class="control-label primary-item"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-          <div class="phone-section">
-          <div>
-            {{#if primaryPhone.value}}
-              <a href="tel:{{unbound primaryPhone.value}}"><i class="icon-call"></i>{{primaryPhone.value}}</a>
-            {{else}}
-              <span class="empty">Add phone number here</span>
-            {{/if}}
-          </div>
-          {{#if primaryPhone.value}}
-            <div>
-              <button class="btn btn-success">
-                <i class="icon-call"></i>
-              </button>
-            </div>
-          {{/if}}
-          </div>
-        </div>
-      {{/if}}
-    """
-
   aboutInlineEditor: Radium.AboutInlineEditor.extend()
 
   addressInlineEditor: Radium.AddressInlineEditor.extend()

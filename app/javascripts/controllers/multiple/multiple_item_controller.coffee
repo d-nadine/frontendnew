@@ -1,7 +1,7 @@
 Radium.MultipleItemController = Radium.ObjectController.extend
-  leader: 'Email'
   parent: Ember.computed.alias 'target.target'
   labels: Ember.computed.alias 'parent.labels'
+  leader: Ember.computed.alias 'parent.leader'
   typeLabel: ( ->
     "#{@get('name')} #{@get('leader')}"
   ).property('leader', 'name')

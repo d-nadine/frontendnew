@@ -1,1 +1,3 @@
-Radium.MultiplePhoneNumberView = Radium.View.extend()
+require 'views/multiple/multiple_base_view'
+
+Radium.MultiplePhoneNumberView = Radium.MultipleBaseView.extend()
