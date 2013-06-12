@@ -22,8 +22,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
 
   aboutInlineEditor: Radium.AboutInlineEditor.extend()
 
-  addressInlineEditor: Radium.AddressInlineEditor.extend()
-
   assignedToInlineEditor: Radium.InlineEditorView.extend
     isValid: true
     userPicker: Radium.UserPicker.extend

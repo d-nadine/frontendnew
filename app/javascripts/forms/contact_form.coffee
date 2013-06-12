@@ -26,18 +26,18 @@ Radium.ContactForm = Radium.Form.extend
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
-    # @get('phoneNumbers').forEach (phoneNumber) =>
-    #   number = phoneNumber.get('value')
-    #   if number.length && number != "+1"
-    #     contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
+    @get('phoneNumbers').forEach (phoneNumber) =>
+      number = phoneNumber.get('value')
+      if number.length && number != "+1"
+        contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
 
-    # @get('emailAddresses').forEach (email) =>
-    #   if email.get('value.length')
-    #     contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
+    @get('emailAddresses').forEach (email) =>
+      if email.get('value.length')
+        contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
 
-    # @get('addresses').forEach (address) =>
-    #   if @addressHasValue(address)
-    #     contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
+    @get('addresses').forEach (address) =>
+      if @addressHasValue(address)
+        contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
 
     @get('tags').forEach (tag) =>
       contact.get('tags').push tag.get('name')
@@ -61,6 +61,6 @@ Radium.ContactForm = Radium.Form.extend
     @set 'status', 'lead'
     @set 'tags', Ember.A()
     @set 'tagNames', Ember.A()
-    @set 'emailAddresses', Ember.A()
-    @set 'phoneNumbers', Ember.A()
-    @set 'addresses', Ember.A()
+    @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+    @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+    @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: '')])

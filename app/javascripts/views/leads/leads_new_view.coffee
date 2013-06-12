@@ -64,25 +64,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       return if @get('controller.companyName')?.length < 3
       @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
 
-  phoneNumbers: Radium.MultipleFields.extend
-    labels: ['Mobile','Work','Home']
-    leader: 'Phone'
-    sourceBinding: 'controller.phoneNumbers'
-    viewType: Radium.PhoneMultipleField
-    type: Radium.PhoneNumber
-    readonly: Ember.computed.not 'controller.isNew'
-    canReset: true
-
-  emailAddresses: Radium.MultipleFields.extend
-    labels: ['Work','Home']
-    isSubmitted: Ember.computed.alias 'controller.isSubmitted'
-    inputType: 'email'
-    leader: 'Email'
-    sourceBinding: 'controller.emailAddresses'
-    type: Radium.EmailAddress
-    readonly: Ember.computed.not 'controller.isNew'
-    canReset: true
-
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
 
@@ -107,15 +88,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   source: Radium.LeadSourcesView.extend
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.leadSources'
-
-  addresses: Radium.MultipleFields.extend
-    labels: ['Office','Home']
-    leader: 'Address'
-    sourceBinding: 'controller.addresses'
-    viewType: Radium.AddressMultipleField
-    type: Radium.Address
-    readonly: Ember.computed.not 'controller.isNew'
-    canReset: true
 
   contactDidChange: ( ->
     contactDetails = @$('.contact-detail')

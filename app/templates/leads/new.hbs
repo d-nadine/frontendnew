@@ -51,8 +51,8 @@
             {{/unless}}
           </div>
           <div class="contact-detail">
-            {{view view.emailAddresses}}
-            {{view view.phoneNumbers}}
+            {{render 'multiple/email_address' emailAddresses}}
+            {{render 'multiple/phone_number' phoneNumbers}}
             <div class="control-group">
               <label class="control-label">Assigned To</label>
               <div class="controls">
@@ -88,7 +88,7 @@
             </div>
             <div class="address-section">
               <hr/>
-              {{view view.addresses}}
+              {{render 'multiple/address' addresses}}
               <hr/>
             </div>
             {{partial 'validation_error_message'}}

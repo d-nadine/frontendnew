@@ -39,5 +39,3 @@ Radium.CompanySidebarView = Radium.View.extend  Radium.ContactViewMixin,
   aboutInlineEditor: Radium.AboutInlineEditor.extend()
 
   userInlineEditor: Radium.UserInlineEditor.extend()
-
-  addressInlineEditor: Radium.AddressInlineEditor.extend()
