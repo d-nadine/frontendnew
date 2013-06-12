@@ -1,7 +1,3 @@
-require 'lib/radium/multiple_fields'
-require 'lib/radium/multiple_field'
-require 'lib/radium/phone_multiple_field'
-require 'lib/radium/address_multiple_field'
 require 'lib/radium/text_combobox'
 require 'lib/radium/value_validation_mixin'
 require 'lib/radium/contact_company_picker'
@@ -97,6 +93,15 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     contactDetails.slideUp('medium', ->
       existingArea.slideDown('medium'))
+
+    disabled = if @get('controller.isNew') then false else true
+
+    @$('.multiple-field input').attr('readonly', disabled)
+    @$('.multiple-field select').attr('readonly', disabled)
+
+    unless @get('controller.isNew')
+      @$('.multiple-field .icon-plus').hide()
+
   ).observes('controller.isNew')
 
   showContactDetails: ->

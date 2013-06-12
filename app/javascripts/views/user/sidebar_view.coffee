@@ -1,9 +1,5 @@
 require 'lib/radium/combobox'
 require 'lib/radium/text_combobox'
-require 'lib/radium/multiple_fields'
-require 'lib/radium/multiple_field'
-require 'lib/radium/phone_multiple_field'
-require 'lib/radium/address_multiple_field'
 require 'lib/radium/phone_input'
 requireAll /views\/sidebar/
 
