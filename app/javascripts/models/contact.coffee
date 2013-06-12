@@ -22,7 +22,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   status: DS.attr('string')
   title: DS.attr('string')
   avatar: DS.attr('object')
-  about: DS.attr('string')
+  notes: DS.attr('string')
 
   isExpired: Radium.computed.daysOld('createdAt', 60)
 

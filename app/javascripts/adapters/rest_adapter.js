@@ -115,7 +115,6 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 Radium.RESTAdapter.map('Radium.Contact', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
-  about: { key: 'notes' },
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'},
   addresses: {embedded: 'always'},

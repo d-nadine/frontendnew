@@ -2,13 +2,13 @@
   {{#if view.isEditing}}
     <h2>About</h2>
     <div>
-      {{view view.textArea class="field" valueBinding=about placeholder="About"}}
+      {{view view.textArea class="field" valueBinding=form.notes placeholder="About"}}
     </div>
   {{else}}
     <h2>About <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
     <div>
-      {{#if about}}
-      <span>{{about}}</span>
+      {{#if notes}}
+      <span>{{notes}}</span>
       {{else}}
       <span>&nbsp;</span>
       {{/if}}

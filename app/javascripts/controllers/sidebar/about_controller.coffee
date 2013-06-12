@@ -5,17 +5,17 @@ Radium.AboutForm = Radium.Form.extend
     @set 'content', Ember.Object.create()
     @_super.apply this, arguments
 
-  properties: ['about']
+  properties: ['notes']
 
   reset: ->
     @_super.apply this, arguments
-    @set 'about', ''
+    @set 'notes', ''
 
 Radium.SidebarAboutController = Radium.SidebarBaseController.extend
   isValid: true
 
   setForm: ->
-    @set 'form.about', @get('model.about')
+    @set 'form.notes', @get('model.notes')
 
   form: ( ->
     Radium.AboutForm.create()
