@@ -13,7 +13,7 @@ Radium.Router.map ->
       @route 'new'
       @route 'mailTo', path: 'mailto/:recipient_type/:recipient_id'
       # FIXME: this should be a routless state
-      # The path is only here so the email can be 
+      # The path is only here so the email can be
       # passed with transitionTo
       @route 'sent', path: '/:email_id/sent'
 
@@ -52,6 +52,10 @@ Radium.Router.map ->
     @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:company_id/employees'
+
+  @resource 'settings', ->
+    @route 'account'
+    @route 'empty'
 
   @route 'unimplemented'
 

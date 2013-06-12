@@ -1,0 +1,13 @@
+.settings-sidebar {
+  float: left;
+
+  a.active {
+    color: #555555;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+    border-color: #ddd transparent #ddd #ddd;
+    *border-right-color: #ffffff;
+  }
+}
