@@ -3,14 +3,11 @@ require 'lib/radium/text_combobox'
 require 'lib/radium/user_picker'
 require 'views/contact/contact_view_mixin'
 require 'lib/radium/contact_company_picker'
-require 'views/contact/contact_tag_autocomplete'
+require 'lib/radium/tag_autocomplete'
 requireAll /views\/sidebar/
 
 Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
-
-  tags: Radium.ContactTagAutocomplete.extend
-    onlyOnNew: false
 
   showExtraContactDetail: ->
     @$('.additional-detail').slideToggle('medium')

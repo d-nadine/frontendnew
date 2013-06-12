@@ -11,6 +11,9 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
     re.test text
 
   selectionAdded: (item) ->
+    return if @get('source').find (existing) ->
+      existing.get('name') == item.get('name')
+
     if typeof item == "string"
       if @get('controller.isNew') || (!@get('source').createRecord)
         item = Ember.Object.create

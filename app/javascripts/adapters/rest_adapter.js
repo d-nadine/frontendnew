@@ -10,6 +10,11 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
         this._super.apply(this, arguments);
     }
   },
+
+  // FIXME: Remove
+  addHasMany: function(hash, record, key, relationship) {
+    this._super.apply(this, arguments);
+  },
 });
 
 Radium.RESTAdapter = DS.RESTAdapter.extend({
@@ -115,7 +120,8 @@ Radium.RESTAdapter.map('Radium.Contact', {
   about: { key: 'notes' },
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'},
-  addresses: {embedded: 'always'}
+  addresses: {embedded: 'always'},
+  tagNames: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {
