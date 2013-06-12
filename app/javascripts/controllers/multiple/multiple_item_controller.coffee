@@ -20,10 +20,22 @@ Radium.MultipleItemController = Radium.ObjectController.extend
   showAddNew: ( ->
     return if @get('parent.length') <= 1 && @get('value.length') < 2
 
+    (@isLastElement() && (@get('value.length') >= 2))
+  ).property('parent.[]', 'value')
+
+  isLastElement: ->
     lastIndex = @get('parent.length') - 1
 
-    return ((@get('model') == @get('parent').objectAt(lastIndex)) && (@get('value.length') >= 2))
-  ).property('parent.[]', 'value')
+    @get('model') == @get('parent').objectAt(lastIndex)
+
+  showAddNewAddress: ( ->
+    return unless @isLastElement()
+
+    return true if @get('street.length') > 1
+    return true if @get('city.length') > 1
+    return true if @get('state.length') > 1
+    return true if @get('zipcode.length') > 1
+  ).property('parent.[]', 'street', 'city', 'state', 'zip')
 
   showDropDown: ( ->
     @get('parent.length') > 1

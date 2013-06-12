@@ -114,7 +114,8 @@ Radium.RESTAdapter.map('Radium.Contact', {
   user: { key: 'assigned_to_id' },
   about: { key: 'notes' },
   phoneNumbers: {embedded: 'always'},
-  emailAddresses: {embedded: 'always'}
+  emailAddresses: {embedded: 'always'},
+  addresses: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {

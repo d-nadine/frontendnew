@@ -1,0 +1,12 @@
+{{#if view.isEditing}}
+  <div>
+    {{render 'multiple/address' form.addresses}}
+  </div>
+{{else}}
+  <h2>Address <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+  {{#if primaryAddress}}
+    {{partial 'shared/address'}}
+  {{else}}
+    <span class="empty">Add address here</span>
+  {{/if}}
+{{/if}}

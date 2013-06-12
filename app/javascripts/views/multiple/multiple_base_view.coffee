@@ -51,6 +51,11 @@ Radium.MultipleBaseView = Radium.View.extend
             <a href="#" {{action addNew bubbles="false"}}><i class="icon-plus"></i></a>
           </div>
         {{/if}}
+        {{#if showAddNewAddress}}
+          <div class="add-new">
+            <a href="#" {{action addNew bubbles="false"}}><i class="icon-plus"></i></a>
+          </div>
+        {{/if}}
       </div>
     {{/each}}
   """

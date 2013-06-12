@@ -6,7 +6,7 @@ Radium.MultipleBaseController = Radium.SidebarBaseController.extend
       if item.hasOwnProperty 'record'
         item.record.setProperties(name: item.get('name'), value: item.get('value'), isPrimary: item.get('isPrimary'))
       else
-        if item.get('value.length') && item.get('value') != " +1"
+        if item.get('value.length') && item.get('value') != "+1"
           @get("content.#{@recordArray}").createRecord item.getProperties('name', 'value', 'isPrimary')
 
     @get('content.transaction').commit()
