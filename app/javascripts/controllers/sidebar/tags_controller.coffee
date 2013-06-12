@@ -3,11 +3,16 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
   isEditable: true
 
   addTag: (tag) ->
-    return if @get('tagNames').find (existing) ->
-      existing.get('name') == tag.get('name')
+    name = if typeof tag == "string" then tag else tag.get('name')
 
-    @get('tagNames').createRecord
-      name: tag.get('name')
+    return if @get('tags').find (existing) ->
+      existing.get('name') == name
+
+    if typeof tag == "string"
+      @get('tags').createRecord
+        name: name
+    else
+      @get('tags').addObject tag
 
     @get('store').commit()
 
@@ -15,6 +20,6 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
     return unless @get('tags').find (existing) ->
       existing.get('name') == tag.get('name')
 
-    @get('tagNames').removeObject(tag)
+    @get('tags').removeObject(tag)
 
     @get('store').commit()

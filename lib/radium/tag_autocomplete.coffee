@@ -10,16 +10,18 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
     re = /^(?=.*[^\W_])[\w ]{3,}$/
     re.test text
 
-  selectionAdded: (item) ->
+  selectionAdded: (tag) ->
+    name = if typeof tag == "string" then tag else tag.get('name')
+
     return if @get('source').find (existing) ->
-      existing.get('name') == item.get('name')
+      existing.get('name') == name
 
-    if typeof item == "string"
+    if typeof tag == "string"
       if @get('controller.isNew') || (!@get('source').createRecord)
-        item = Ember.Object.create
-                  name: item
+        tag = Ember.Object.create
+                  name: tag
       else
-        item = @get('source').createRecord
-            name: item
+        tag = @get('source').createRecord
+            name: tag
 
-    @get('parentView').addSelection item
+    @get('parentView').addSelection tag

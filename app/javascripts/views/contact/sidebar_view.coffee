@@ -13,8 +13,6 @@ Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
     @$('.additional-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  aboutInlineEditor: Radium.AboutInlineEditor.extend()
-
   assignedToInlineEditor: Radium.InlineEditorView.extend
     isValid: true
     userPicker: Radium.UserPicker.extend

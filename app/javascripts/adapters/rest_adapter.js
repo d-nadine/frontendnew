@@ -4,8 +4,6 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
       case 'created_at':
       case 'updated_at':
         return;
-      case 'tag_names':
-        hash['tags'] = value;
       default:
         this._super.apply(this, arguments);
     }
@@ -121,7 +119,7 @@ Radium.RESTAdapter.map('Radium.Contact', {
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'},
   addresses: {embedded: 'always'},
-  tagNames: {embedded: 'always'}
+  tags: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {

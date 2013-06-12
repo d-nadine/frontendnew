@@ -60,7 +60,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'company', ''
     @set 'status', 'lead'
     @set 'tags', Ember.A()
-    @set 'tagNames', Ember.A()
+    @set 'tags', Ember.A()
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: '')])

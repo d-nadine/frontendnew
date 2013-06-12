@@ -32,6 +32,4 @@ Radium.CompanySidebarView = Radium.View.extend  Radium.ContactViewMixin,
     """
   tags: Radium.TagAutoComplete.extend()
 
-  aboutInlineEditor: Radium.AboutInlineEditor.extend()
-
   userInlineEditor: Radium.UserInlineEditor.extend()
