@@ -10,26 +10,4 @@ Radium.CompanySidebarView = Radium.View.extend  Radium.ContactViewMixin,
   companyInlineEditor: Radium.InlineEditorView.extend
     valueBinding: 'controller.name'
 
-  websiteInlineEditor: Radium.InlineEditorView.extend
-    valueBinding: 'controller.website'
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}}
-        <div>
-          {{input type="text" value=view.value class="field" placeholder="Add company website"}}
-        </div>
-      {{else}}
-        <div class="not-editing">
-          {{#if website}}
-            <a href="{{unbound view.value}}" target="_blank"><i class="icon-cloud"></i>{{view.value}}</a>
-          {{else}}
-            <span class="empty">Add company website</span>
-          {{/if}}
-        </div>
-        <div class="edit">
-          <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-        </div>
-      {{/if}}
-    """
-  tags: Radium.TagAutoComplete.extend()
-
   userInlineEditor: Radium.UserInlineEditor.extend()

@@ -141,7 +141,9 @@ Radium.RESTAdapter.map('Radium.ChecklistItem', {
 });
 
 Radium.RESTAdapter.map('Radium.Company', {
-  user: { key: 'assigned_to_id' }
+  user: { key: 'assigned_to_id' },
+  addresses: {embedded: 'always'},
+  tags: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.PhoneNumber', {

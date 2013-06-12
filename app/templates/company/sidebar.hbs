@@ -1,16 +1,9 @@
 <form class="form">
   <div class="meta">
     <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
-    {{#view view.companyInlineEditor valueBinding=name class="company"}}
-      {{#if view.isEditing}}
-        {{input value=name class="field company-name"}}
-      {{else}}
-        <h1>{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
-      {{/if}}
-    {{/view}}
+    {{render 'sidebar/company_name' model}}
 
-
-    {{view view.websiteInlineEditor class="website"}}
+    {{render "sidebar/company_website" model}}
   </div>
   <hr class="first"/>
   {{#linkTo leads.fromCompany this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
@@ -25,7 +18,7 @@
     <div class="tag-label">
       <h2 class="blue">Tags</h2>
     </div>
-    {{view view.tags placeholder="Add" viewName="tags"}}
+    {{render 'sidebar/tags' model}}
   </div>
   <hr/>
   <div class="about">
@@ -34,7 +27,7 @@
 
   <hr/>
 
-  {{view view.userInlineEditor valueBinding=user}}
+  {{render 'sidebar/user' model}}
 
   <hr />
 
@@ -43,7 +36,7 @@
   <hr/>
 
   <div class="address">
-    {{!view view.addressInlineEditor}}
+    {{render "sidebar/addresses" model}}
   </div>
 
   <hr/>

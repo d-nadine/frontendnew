@@ -1,1 +1,2 @@
-Radium.SidebarCompanyWebsiteView = Radium.InlineEditorView.extend()
+Radium.SidebarCompanyWebsiteView = Radium.InlineEditorView.extend
+  classNameBindings: [':website']
