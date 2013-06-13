@@ -1,12 +1,6 @@
 <form class="form">
   <div class="page-header">
-    {{#view Radium.InlineEditorView valueBinding=name}}
-      {{#if view.isEditing}}
-        {{input value=name class="field deal-name"}}
-      {{else}}
-        <h1>{{name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
-      {{/if}}
-    {{/view}}
+    {{render 'sidebar/company_name' model}}
   </div>
 
   <div class="meta">
