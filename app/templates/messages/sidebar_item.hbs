@@ -18,6 +18,8 @@
       <i class='icon-delete'></i>
     </a>
 
-    {{formatDateTime timestamp class="muted upcase pull-right"}}
+    {{#if timestamp}}
+      {{formatDateTime timestamp class="muted upcase pull-right"}}
+    {{/if}}
   </div>
 </div>
