@@ -6,6 +6,8 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       email = Radium.Email.createRecord form.get('data')
 
+      email.set 'sentAt', Ember.DateTime.create()
+
       email.one 'didCreate', =>
         Ember.run.next =>
           @transitionTo 'emails.sent', email
