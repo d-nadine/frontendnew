@@ -1,0 +1,37 @@
+{{#if view.isEditing}} 
+  <div class="contact-detail">
+    <div class="control-group">
+      <label class="control-label">First Name</label>
+      <div class="controls">
+        {{input value=form.firstName class="field detail" placeholder="First Name"}}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Surname</label>
+      <div class="controls">
+        {{input value=form.lastName class="field detail" placeholder="Surname"}}
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Title</label>
+      <div class="controls">
+        {{input value=form.title class="field detail" placeholder="Title"}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  {{avatar this size=medium class="img-polaroid"}}
+  <div class="header">
+    <div>
+      <div>
+        <span class="name">{{name}}</span>
+      </div>
+      <div>
+        <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
+      </div>
+    </div>
+  </div>
+  <div class="title">
+    <span class="title muted">{{title}}</span>
+  </div>
+{{/if}}

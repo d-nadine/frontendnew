@@ -4,49 +4,6 @@ require 'lib/radium/phone_input'
 requireAll /views\/sidebar/
 
 Radium.UserSidebarView = Radium.View.extend
-  headerInlineEditor: Radium.InlineEditorView.extend
-    isValid: true
-
-    template: Ember.Handlebars.compile """
-      {{#if view.isEditing}} 
-        <div class="contact-detail">
-          <div class="control-group">
-            <label class="control-label">First Name</label>
-            <div class="controls">
-              {{input value=firstName class="field detail" placeholder="First Name"}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Surname</label>
-            <div class="controls">
-              {{input value=lastName class="field detail" placeholder="Surname"}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Title</label>
-            <div class="controls">
-              {{input value=title class="field detail" placeholder="Title"}}
-            </div>
-          </div>
-        </div>
-      {{else}}
-        {{avatar this size=medium class="img-polaroid"}}
-        <div class="header">
-          <div>
-            <div>
-              <span class="name">{{name}}</span>
-            </div>
-            <div>
-              <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-            </div>
-          </div>
-        </div>
-        <div class="title">
-          <span class="title muted">{{title}}</span>
-        </div>
-      {{/if}}
-    """
-
   emailInlineEditor: Radium.InlineEditorView.extend
     valueBinding: 'controller.email'
     template: Ember.Handlebars.compile """
