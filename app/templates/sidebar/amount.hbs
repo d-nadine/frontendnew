@@ -1,0 +1,14 @@
+<h2>{{amount}} Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+
+{{#if view.isEditing}}
+  <div {{bindAttr class="isValid:success:error :control-group"}}>
+    <div class="input-prepend">
+      <span class="add-on">$</span>
+      {{input value=form.value class="span2" type="number" min="0"}}
+    </div>
+  </div>
+{{else}}
+  <span class="money inline-editor-text">
+    {{currency value}}
+  </span>
+{{/if}}

@@ -1,18 +1,12 @@
 <form class="form">
   <div class="page-header">
-    {{render 'sidebar/company_name' model}}
+    {{render 'sidebar/name' model}}
   </div>
 
   <div class="meta">
     {{avatar contact size=medium class="img-polaroid"}}
     <p>
-      {{#view view.contactInlineEditor valueBinding=contact.name class="contact"}}
-        {{#if view.isEditing}}
-          {{view view.contactPicker}}
-        {{else}}
-          <span class="name">{{contact.name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></span></br></br>
-        {{/if}}
-      {{/view}}
+      {{render 'sidebar/contact_picker' model}}
       <span class="title muted">{{contact.title}}</span>
     </p>
   </div>
@@ -42,36 +36,12 @@
       <a href="#" {{action commit bubbles="false"}} data-dismiss="modal" class="btn btn-primary">Done</a>
     </div>
   </div>
-  {{#view Radium.InlineEditorView valueBinding=description}}
-    <h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
-    {{#if view.isEditing}}
-      {{view view.textArea valueBinding=view.value classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
-    {{else}}
-      <p class="inline-editor-text">
-        {{view.value}}
-      </p>
-    {{/if}}
-  {{/view}}
+  {{render 'sidebar/description' model}}
 
   <hr />
 
-  {{#view Radium.InlineEditorView valueBinding=value class="amount"}}
-    <h2>Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-    {{#if view.isEditing}}
-      <div {{bindAttr class="view.isValid:success:error :control-group"}}>
-        <div class="input-prepend">
-          <span class="add-on">$</span>
-          {{view view.textField valueBinding=view.value class="span2" type="number" min="0"}}
-        </div>
-      </div>
-    {{else}}
-      <span class="money inline-editor-text">
-        {{currency view.value}}
-      </span>
-    {{/if}}
-  {{/view}}
+  {{render 'sidebar/amount' model}}
 
   <hr />
 
@@ -79,7 +49,7 @@
     <p class="muted">Publish this deal to change its status</p>
   {{/unless}}
 
-  {{view view.dealStatusInlineEditor class="deal-status"}}
+  {{render 'sidebar/deal_status' model}}
 
   <hr />
 

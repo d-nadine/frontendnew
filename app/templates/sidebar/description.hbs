@@ -1,0 +1,9 @@
+<h2>Description <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
+
+{{#if view.isEditing}}
+  {{view view.textArea valueBinding=form.description classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
+{{else}}
+  <p class="inline-editor-text">
+    {{description}}
+  </p>
+{{/if}}

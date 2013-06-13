@@ -1,0 +1,7 @@
+{{#if view.isEditing}}
+  <div>{{view view.statusSelect class="status-select"}}</div>
+{{else}}
+  <div class="deal-status">
+    <h2>{{status}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
+  </div>
+{{/if}}
