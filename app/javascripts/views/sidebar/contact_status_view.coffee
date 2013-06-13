@@ -6,5 +6,3 @@ Radium.SidebarContactStatusView = Radium.InlineEditorView.extend
     optionValuePath: 'content.value'
     optionLabelPath: 'content.name'
     valueBinding: 'controller.form.status'
-    change: (evt) ->
-      @get('parentView').toggleEditor()
