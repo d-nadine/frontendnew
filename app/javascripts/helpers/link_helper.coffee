@@ -31,9 +31,10 @@ Radium.LinkView = Ember.View.extend
 
   company: Ember.computed.alias('content.company')
 
-Ember.Handlebars.registerBoundHelper 'link', (model, options) ->
-  hash = options.hash
-  hash.content = model
+# FIXME: Use regiserBoundHelper if a fix appears
+Ember.Handlebars.registerHelper 'link', (path, options) ->
+  model = options.contexts[0].get path
+  options.hash.content = model
 
   return unless model
   return Ember.Handlebars.helpers.view.call(this, Radium.LinkView, options)
