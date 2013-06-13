@@ -1,3 +1,13 @@
+.settings-view {
+  .page-header > .company-logo {
+    margin-right: 20px;
+
+    & + h3 {
+      line-height: 50px;
+    }
+  }
+}
+
 .settings-sidebar {
   float: left;
 
@@ -9,5 +19,85 @@
     cursor: default;
     border-color: #ddd transparent #ddd #ddd;
     *border-right-color: #ffffff;
+  }
+}
+
+// Forms
+.settings-form {
+  fieldset {
+    margin: 0 0 20px;
+    border-bottom: 1px solid rgba(black, 0.1);
+  }
+}
+
+.user-edit-avatar {
+  width: 134px;
+  float: left;
+  position: relative;
+
+  .user-change-avatar {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+  }
+
+  .user-change-avatar {
+    padding: 0;
+  }
+}
+
+.settings-user-details {
+  input {
+    border: none;
+    @include box-shadow(none);
+
+    &:focus {
+      @include box-shadow(none);
+      background: lightyellow;
+    }
+
+    &.user-fullname {
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 30px;
+      height: auto;
+    }
+  }
+}
+
+.settings-users-list {
+  border-top: 1px solid rgba(black, 0.1);
+
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(black, 0.1);
+
+    &:hover .user-actions {
+      opacity: 1;
+    }
+  }
+
+  .user-avatar {
+    margin-right: 20px;
+  }
+
+
+  .user-meta {
+
+  }
+
+  .name {
+    margin: 0;
+  }
+
+  .user-actions {
+    margin-top: 6px;
+    opacity: 0;
+    @include transition(opacity 0.25s);
+
+    > .btn {
+      vertical-align: middle;
+    }
   }
 }
