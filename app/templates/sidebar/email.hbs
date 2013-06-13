@@ -1,0 +1,12 @@
+{{#if view.isEditing}}
+  {{input type="email" value=form.email class="field"}}
+{{else}}
+  <div class="control-group">
+    <label class="control-label"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+    {{#if email}}
+      {{#linkTo emails.mailTo this}}<i class="icon-mail"></i>{{email}}{{/linkTo}}
+    {{else}}
+      <i class="icon-mail"></i><span class="empty">Add email here</span>
+    {{/if}}
+  </div>
+{{/if}}

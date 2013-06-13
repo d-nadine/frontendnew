@@ -1,0 +1,12 @@
+{{#if view.isEditing}}
+  {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
+{{else}}
+  <div class="control-group">
+    <label class="control-label"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+    {{#if phone}}
+        <a href="tel:{{unbound phone}}"><i class="icon-call"></i>{{phone}}</a>
+    {{else}}
+      <i class="icon-call"></i><span class="empty">Add phone here</span>
+    {{/if}}
+  </div>
+{{/if}}

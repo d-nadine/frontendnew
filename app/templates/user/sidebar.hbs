@@ -4,10 +4,10 @@
   </div>
   <hr />
   <div class="email">
-    {{view view.emailInlineEditor}}
+    {{render 'sidebar/email' model}}
   </div>
   <div class="phone">
-    {{view view.phoneInlineEditor}}
+    {{render 'sidebar/phone' model}}
   </div>
   <hr/>
   {{#if contacts.length}}
