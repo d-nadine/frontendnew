@@ -22,12 +22,6 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
 
   contact: Ember.computed.alias('model.contact')
 
-  commit: ->
-    @get('store').commit()
-
-  rollback: ->
-    @get('model.transaction').rollback()
-
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

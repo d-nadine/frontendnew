@@ -22,6 +22,19 @@ Radium.DealRoute = Radium.Route.extend
       @render 'deal/deleted',
         into: 'application'
 
+    showChecklist: ->
+      @render 'deal/checklist',
+        into: 'application'
+        outlet: 'modal'
+
+    saveChecklist: ->
+      @get('store').commit()
+      @send 'close'
+
+    cancelChecklistSave: (model)->
+      model.get('transaction').rollback()
+      @send 'close'
+
   renderTemplate: ->
     if @modelFor('deal').get('isDestroyed')
       @render 'deal/deleted',
