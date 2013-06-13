@@ -1,5 +1,4 @@
 require 'lib/radium/user_picker'
-require 'views/sidebar/user_inline_editor'
 
 Radium.DealSidebarView = Radium.View.extend
   contactInlineEditor: Radium.InlineEditorView.extend
@@ -9,8 +8,6 @@ Radium.DealSidebarView = Radium.View.extend
       valueBinding: 'controller.contact'
       placeholder: 'Choose a contact'
       isSubmitted: true
-
-  userInlineEditor: Radium.UserInlineEditor.extend()
 
   dealStatusInlineEditor: Radium.InlineEditorView.extend
     isValid: true
