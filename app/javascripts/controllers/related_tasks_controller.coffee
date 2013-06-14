@@ -10,6 +10,13 @@ Radium.RelatedTasksController = Ember.ArrayController.extend Radium.Groupable,
     # get the groups to assign the internal variables
     @get 'groupedContent'
 
+    groupsMap = @get('groupsMap')
+
+    groupsMap['unfinished'] ||= @get('groupType').create content: Ember.A([]), name: 'unfinished'
+    groupsMap['finished'] ||= @get('groupType').create content: Ember.A([]), name: 'finished'
+
+    @get('groupsMap')['unfinished'] 
+
     Ember.A([
       @get('groupsMap')['unfinished']
       @get('groupsMap')['finished']

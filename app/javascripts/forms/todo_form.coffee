@@ -11,6 +11,10 @@ Radium.TodoForm = Radium.Form.extend
     kind: @get('kind')
   ).property().volatile()
 
+  reset: ->
+    @_super.apply this, arguments
+    @set 'description', ''
+
   isValid: ( ->
     return if Ember.isEmpty(@get('description'))
     return if @get('finishBy').isBeforeToday()

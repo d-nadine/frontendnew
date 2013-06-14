@@ -10,6 +10,8 @@ Radium.Groupable = Em.Mixin.create
       unless groups.contains group
         groups.pushObject group
 
+    @_super array, idx, removedCount, addedObjects
+
   contentArrayWillChange: (array, idx, removedCount, addedCount) ->
     removedObjects = array.slice(idx, idx + removedCount)
     for object in removedObjects
