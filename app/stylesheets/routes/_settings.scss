@@ -30,6 +30,17 @@
   }
 }
 
+input.inline-field {
+  border: none;
+  @include box-shadow(none);
+
+  &:hover,
+  &:focus {
+    @include box-shadow(none);
+    background: lightyellow;
+  }
+}
+
 .user-edit-avatar {
   width: 134px;
   float: left;
@@ -48,21 +59,11 @@
 }
 
 .settings-user-details {
-  input {
-    border: none;
-    @include box-shadow(none);
-
-    &:focus {
-      @include box-shadow(none);
-      background: lightyellow;
-    }
-
-    &.user-fullname {
-      font-size: 30px;
-      font-weight: bold;
-      line-height: 30px;
-      height: auto;
-    }
+  .user-fullname {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px;
+    height: auto;
   }
 }
 
@@ -117,6 +118,8 @@
   }
 
   .account-actions {
-    form {margin:0;}
+    form {
+      margin:0;
+    }
   }
 }
