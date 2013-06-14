@@ -1,4 +1,4 @@
-Radium.LeadsNewController= Radium.ObjectController.extend
+Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'leadStatuses']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
@@ -39,9 +39,17 @@ Radium.LeadsNewController= Radium.ObjectController.extend
 
     createContact = @get('model').create()
 
+    @trigger 'hideModal'
+
     # FIXME: should not have to call Ember.run.next
     createContact.one 'didCreate', =>
       Ember.run.next =>
         @transitionToRoute 'contact', createContact.get('contact')
+
+    createContact.one 'becameError', (result) =>
+      Radium.Utils.notifyError 'An error has occurred and the contact could not be created.'
+
+    createContact.one 'becameInvalid', (result) =>
+      Radium.Utils.generateErrorSummary createContact
 
     @get('store').commit()

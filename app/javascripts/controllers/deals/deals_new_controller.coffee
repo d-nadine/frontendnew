@@ -38,9 +38,9 @@ Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin
         @transitionToRoute 'deal', deal
 
     deal.one 'becameInvalid', (result) =>
-      console.log deal.get('errors')
+      Radium.Utils.generateErrorSummary deal
 
     deal.one 'becameError', (result)  ->
-      console.log deal.get('errors')
+      Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
 
     @get('store').commit()
