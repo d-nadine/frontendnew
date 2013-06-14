@@ -63,6 +63,8 @@ Radium.Router.map ->
     @route 'mobile'
     @route 'calls'
     @route 'api'
+    @route 'customFields', path: 'custom-fields'
+    @route 'pipelineStates', path: 'pipeline-states'
     @route 'empty'
 
   @route 'unimplemented'
