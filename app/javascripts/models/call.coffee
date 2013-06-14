@@ -15,10 +15,17 @@ Radium.Call = Radium.Model.extend Radium.CommentsMixin,
       associationName = "_reference#{property}"
       @set associationName, value
     else
-      @get('_referenceDeal') || @get('_referenceEmail')
-  ).property('_referenceDeal', '_referenceEmail', '_referenceDiscussion')
+      @get('_referenceContact') ||
+        @get('_referenceDeal') ||
+        @get('_referenceDiscussion') ||
+        @get('_referenceEmail') ||
+        @get('_referenceMeeting')
+  ).property('contact', 'deal', 'email')
+  _referenceContact: DS.belongsTo('Radium.Contact')
+  _referenceDeal: DS.belongsTo('Radium.Deal', inverse: 'todo')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')
+  _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
   # FIXME: this should be a computed property
   overdue: DS.attr('boolean')
