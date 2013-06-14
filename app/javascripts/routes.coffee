@@ -65,6 +65,7 @@ Radium.Router.map ->
     @route 'api'
     @route 'customFields', path: 'custom-fields'
     @route 'pipelineStates', path: 'pipeline-states'
+    @route 'remindersAlerts', path: 'reminders-alerts'
     @route 'empty'
 
   @route 'unimplemented'
