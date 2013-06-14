@@ -1,5 +1,4 @@
-require 'controllers/forms/form_controller'
-
+require 'controllers/forms/form_controller' 
 Radium.FormsTodoController = Radium.FormController.extend
   needs: ['users']
 

@@ -42,7 +42,16 @@ Radium.Groupable = Em.Mixin.create
 
   groupFor: (object) ->
     groupsMap = @get 'groupsMap'
+
+    unless groupsMap
+      groupsMap = {}
+      @set 'groupsMap', groupsMap
+
     groups    = @get 'groups'
+
+    unless groups
+      groups = Ember.A([])
+      @set 'groups', groups
 
     groupName = @groupBy(object)
     return unless groupName

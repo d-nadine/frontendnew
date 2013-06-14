@@ -166,3 +166,8 @@ Radium.RESTAdapter.map('Radium.EmailAddress', {
 Radium.RESTAdapter.map('Radium.Address', {
   isPrimary: { key: 'primary'},
 });
+
+Radium.RESTAdapter.map('Radium.Todo', {
+  isFinished: {key: 'finished'},
+  finishBy: {key: 'time'},
+});
