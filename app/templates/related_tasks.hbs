@@ -1,7 +1,6 @@
 {{#if model.length}}
   <ol class="related-tasks unstyled">
     {{#each group in sortedGroups}}
-      {{log group}}
       {{#each tasks in group itemController="relatedTaskItem"}}
         {{#if isTodo}}
           <li {{bindAttr class="isFinished isOverdue"}}>
