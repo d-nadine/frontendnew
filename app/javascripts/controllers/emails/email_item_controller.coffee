@@ -27,7 +27,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   callFormDefaults: (->
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-    reference: @get('contact')
+    contat: @get('contact')
   ).property('model', 'tomorrow', 'contact')
 
   toggleMeta: -> @toggleProperty 'showMeta'

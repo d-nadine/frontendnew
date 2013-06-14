@@ -33,7 +33,7 @@ Radium.ContactController = Radium.ObjectController.extend
   callForm: Radium.computed.newForm('call', canChangeContact: false)
 
   callFormDefaults: (->
-    reference: @get('model')
+    contact: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')

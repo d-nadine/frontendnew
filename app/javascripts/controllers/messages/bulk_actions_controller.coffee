@@ -25,6 +25,7 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
 
   callFormDefaults: (->
     description: null
+    contact: @get('contact')
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')

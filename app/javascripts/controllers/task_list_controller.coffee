@@ -32,7 +32,7 @@ Radium.TaskListItemController = Radium.ObjectController.extend
 
   callFormDefaults: (->
     description: null
-    content: @get('model')
+    reference: @get('model')
   ).property('model')
 
   meetingForm: Radium.computed.newForm('meeting')

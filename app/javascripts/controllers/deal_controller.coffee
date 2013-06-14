@@ -43,7 +43,7 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
 
   callFormDefaults: (->
     description: null
-    reference: @get('contact')
+    contact: @get('contact')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')

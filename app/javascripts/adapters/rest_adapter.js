@@ -125,10 +125,6 @@ Radium.RESTAdapter.map('Radium.Discussion', {
   user: {key: 'posted_by'},
 });
 
-Radium.RESTAdapter.map('Radium.Todo', {
-  user: { key: 'assigned_to_id' },
-});
-
 Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
@@ -170,4 +166,11 @@ Radium.RESTAdapter.map('Radium.Address', {
 Radium.RESTAdapter.map('Radium.Todo', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
+  user: { key: 'assigned_to_id' },
+});
+
+Radium.RESTAdapter.map('Radium.Call', {
+  isFinished: {key: 'finished'},
+  finishBy: {key: 'time'},
+  user: { key: 'assigned_to_id' },
 });

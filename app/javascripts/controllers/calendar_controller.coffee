@@ -34,7 +34,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   callForm: Radium.computed.newForm('call')
 
   callFormDefaults: (->
-    reference: @get('contact')
+    contact: @get('contact')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
