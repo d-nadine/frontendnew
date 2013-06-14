@@ -1,5 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
-  sortProperties: ['sentAt']
+  sortProperties: ['time']
   sortAscending: false
 
   folderBinding: 'model.folder'

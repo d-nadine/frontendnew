@@ -23,3 +23,5 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   _referenceDeal: DS.belongsTo('Radium.Deal', inverse: null)
 
   tasks: Radium.computed.tasks('todos', 'calls')
+
+  time: Ember.computed.alias 'createdAt'

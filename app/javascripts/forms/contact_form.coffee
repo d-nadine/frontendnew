@@ -26,14 +26,22 @@ Radium.ContactForm = Radium.Form.extend
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
+    contact.set('companyName', null) if Ember.isEmpty(contact.get('companyName'))
+
     @get('phoneNumbers').forEach (phoneNumber) =>
       number = phoneNumber.get('value')
       if number.length && number != "+1"
-        contact.get('phoneNumbers').push  phoneNumber.getProperties('name', 'value', 'isPrimary')
+        contact.get('phoneNumbers').push  
+          name: phoneNumber.get('name')
+          number: phoneNumber.get('value')
+          primary: phoneNumber.get('isPrimary')
 
     @get('emailAddresses').forEach (email) =>
       if email.get('value.length')
-        contact.get('emailAddresses').push  email.getProperties('name', 'value', 'isPrimary')
+        contact.get('emailAddresses').push
+          name: email.get('name')
+          address: email.get('value')
+          primary: email.get('isPrimary')
 
     @get('addresses').forEach (address) =>
       if @addressHasValue(address)
@@ -56,7 +64,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'name', ''
     @set 'notes', ''
     @set 'source', 'From Website'
-    @set 'companyName', ''
+    @set 'companyName', null
     @set 'company', ''
     @set 'status', 'lead'
     @set 'tags', Ember.A()

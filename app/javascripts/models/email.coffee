@@ -64,3 +64,5 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
 
     otherPeople.every (person) ->
       people.contains person
+
+  time: Ember.computed.alias 'sentAt'
