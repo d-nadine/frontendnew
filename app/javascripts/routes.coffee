@@ -57,6 +57,7 @@ Radium.Router.map ->
     @route 'account'
     @route 'teamMembers', path: 'team-members'
     @route 'billing'
+    @route 'accounts'
     @route 'empty'
 
   @route 'unimplemented'
