@@ -62,6 +62,7 @@ Radium.Router.map ->
     @route 'calendar'
     @route 'mobile'
     @route 'calls'
+    @route 'api'
     @route 'empty'
 
   @route 'unimplemented'
