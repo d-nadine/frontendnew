@@ -1,0 +1,31 @@
+.pricing-table {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid lightgray;
+
+  li {
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(black, 0.1);
+    @include box-sizing(border-box);
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .description {
+    padding: {
+      top: 15px;
+      bottom: 15px;
+    }
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 18px;
+    color: #666;
+  }
+}
