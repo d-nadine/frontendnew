@@ -60,6 +60,8 @@ Radium.Router.map ->
     @route 'accounts'
     @route 'email'
     @route 'calendar'
+    @route 'mobile'
+    @route 'calls'
     @route 'empty'
 
   @route 'unimplemented'
