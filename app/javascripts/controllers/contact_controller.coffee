@@ -1,5 +1,5 @@
 Radium.ContactController = Radium.ObjectController.extend
-  needs: ['users', 'tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
+  needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
 

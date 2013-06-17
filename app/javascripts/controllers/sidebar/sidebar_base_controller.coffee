@@ -27,12 +27,9 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
     return unless model.get('isDirty')
 
     model.one 'becameInvalid', (result) ->
-      console.log model.get('errors.length')
+      Radium.Utils.generateErrorSummary result
 
     model.one 'bacameError', ->
-      console.log model.get('errors.length')
-
-    model.one 'didUpdate', (result) ->
-      console.log 'didUpdate'
+      Radium.Utils.notifyError 'An error has occurred and the update did not occurr.'
 
     @get('store').commit()

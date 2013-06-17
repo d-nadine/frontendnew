@@ -18,7 +18,6 @@ Radium.FormsMeetingController = Radium.FormController.extend
     contactList = @get('contactList')
 
     Radium.PeopleList.listPeople(userList, contactList)
-      .filter (person) -> person.get('email')
   ).property('userList.[]', 'contactList.[]')
 
   isEditable:( ->
@@ -31,8 +30,11 @@ Radium.FormsMeetingController = Radium.FormController.extend
   ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
   locations: ( ->
-    @get('companies').map (company) -> Ember.Object.create
-                                    name: "#{company.get('name')}, #{company.get('address')}"
+    @get('companies').map (company) -> 
+      name = company.get('name')
+      name += ", #{company.get('address')}" if company.get('address')
+
+      Ember.Object.create(name: name)
   ).property('companies.[]')
 
   attendees: ( ->

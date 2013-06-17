@@ -7,6 +7,7 @@ Radium.PeopleList = Ember.ArrayProxy.extend
     users = if @get('users.length') then @get('users').toArray() else []
     contacts = if @get('contacts.length') then @get('contacts').toArray() else []
     users.concat(contacts)
+    .filter((person) -> person.get('email') || person.get('primaryEmail.value'))
     .sort(@comparer)
 
   comparer: (a, b) ->
