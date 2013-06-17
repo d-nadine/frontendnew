@@ -56,5 +56,6 @@ Radium.ContactController = Radium.ObjectController.extend
     user: @get('currentUser')
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
+    invitations: Ember.A()
   ).property('model', 'now')
 

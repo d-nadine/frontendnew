@@ -137,7 +137,7 @@ Radium.AutocompleteView = Radium.View.extend
       @$().autoSuggest {retrieve: @retrieve.bind(this)}, options
 
     selectionAdded: (item) ->
-      # FIXME create new contact while meeting is being saved
+      # create a simple object and let the controller/form how to handle what happens
       if typeof item == "string"
         item = Ember.Object.create
                   email: item

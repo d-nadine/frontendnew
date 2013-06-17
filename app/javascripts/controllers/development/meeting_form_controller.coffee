@@ -14,6 +14,7 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
     user: @get('currentUser')
     startsAt: Ember.DateTime.create()
     endsAt: Ember.DateTime.create().advance({hour: 1})
+    invitations: Ember.A()
   ).property('currentUser')
 
   editableMeeting: ( ->

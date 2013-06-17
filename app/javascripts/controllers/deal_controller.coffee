@@ -65,6 +65,7 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
     user: @get('currentUser')
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
+    invitations: Ember.A()
   ).property('model', 'now')
 
   statusDisabled: Ember.computed.not('isPublic')

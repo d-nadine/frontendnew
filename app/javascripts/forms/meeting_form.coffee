@@ -7,6 +7,7 @@ Radium.MeetingForm = Radium.Form.extend
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
     user: @get('user')
+    invitations: Ember.A()
   ).property().volatile()
 
   startsAtIsInvalid: ( ->
@@ -23,6 +24,7 @@ Radium.MeetingForm = Radium.Form.extend
     @_super.apply this, arguments
     @get('users').clear()
     @get('contacts').clear()
+    @get('invitations').clear()
     @get('users').addObject(@get('user')) if @get('user') && @get('isNew')
 
   isValid: ( ->
@@ -38,14 +40,18 @@ Radium.MeetingForm = Radium.Form.extend
     isNew = @get('isNew')
 
     meeting = if isNew
-                Radium.Meeting.createRecord @get('data')
+                Radium.CreateMeeting.createRecord @get('data')
               else
                 @get('model')
 
-    @get('users').forEach (user) ->
-      meeting.get('users').addObject user unless meeting.get('users').contains user
+    if isNew
+      @get('users').forEach (user) =>
+        meeting.get('invitations').addObject person: type: 'user', id: user.get('id')
 
-    @get('contacts').forEach (contact) ->
-      meeting.get('contacts').addObject contact unless meeting.get('contacts').contains contact
+      @get('contacts').forEach (contact) =>
+        if contact.get('id')
+          meeting.get('invitations').addObject person: type: 'contact', id: contact.get('id')
+        else
+          meeting.get('invitations').addObject email: contact.get('email')
 
     @get('store').commit()

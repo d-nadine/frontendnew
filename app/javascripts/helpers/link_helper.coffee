@@ -17,12 +17,15 @@ Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
 """
 Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo unimplemented}}{{view.content.topic}}{{/linkTo}}"
 Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile "{{#linkTo emails.show view.content}}{{view.content.subject}}{{/linkTo}}"
+Ember.TEMPLATES['links/default'] = Ember.Handlebars.compile "{{view.displayName}}"
 
 Radium.LinkView = Ember.View.extend
   tagName: "span"
 
   templateName: (->
-    "links/#{@get('content.constructor').toString().split('.')[1].underscore()}"
+    name = "links/#{@get('content.constructor').toString().split('.')[1].underscore()}"
+    name = "links/default" unless Ember.TEMPLATES[name]
+    name
   ).property('content')
 
   displayName: (->

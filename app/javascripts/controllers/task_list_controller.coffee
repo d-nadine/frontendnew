@@ -41,6 +41,7 @@ Radium.TaskListItemController = Radium.ObjectController.extend
     topic: null
     location: ""
     content: @get('model')
+    invitations: Ember.A()
   ).property('model')
 
 Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,

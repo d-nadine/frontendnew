@@ -1,18 +1,14 @@
 require 'lib/radium/aggregate_array_proxy'
 
-Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
-  Radium.AttachmentsMixin,
-
-  user: DS.belongsTo('Radium.User')
-  invitations: DS.hasMany('Radium.Invitation')
+Radium.CreateMeeting = Radium.Model.extend
+  meeting: DS.belongsTo 'Radium.Meeting'
+  user: DS.belongsTo 'Radium.User'
+  invitations: DS.attr('array')
 
   topic: DS.attr('string')
   location: DS.attr('string')
   startsAt: DS.attr('datetime')
   endsAt: DS.attr('datetime')
-
-  # Client side only, so user can choose to decline a meeting.
-  cancelled: DS.attr('boolean')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
@@ -27,5 +23,3 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   _referenceTodo: DS.belongsTo('Radium.Todo')
 
   time: Ember.computed.alias('startsAt')
-
-  participants: Radium.computed.aggregate('users', 'contacts')
