@@ -6,7 +6,7 @@ Radium.MeetingForm = Radium.Form.extend
     location: @get('location')
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
-    user: @get('user')
+    organizer: @get('user')
     invitations: Ember.A()
   ).property().volatile()
 
@@ -25,7 +25,7 @@ Radium.MeetingForm = Radium.Form.extend
     @get('users').clear()
     @get('contacts').clear()
     @get('invitations').clear()
-    @get('users').addObject(@get('user')) if @get('user') && @get('isNew')
+    @get('users').addObject(@get('organizer')) if @get('organizer') && @get('isNew')
 
   isValid: ( ->
     return if Ember.isEmpty(@get('topic'))

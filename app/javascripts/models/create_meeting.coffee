@@ -2,7 +2,7 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.CreateMeeting = Radium.Model.extend
   meeting: DS.belongsTo 'Radium.Meeting'
-  user: DS.belongsTo 'Radium.User'
+  organizer: DS.belongsTo 'Radium.User'
   invitations: DS.attr('array')
 
   topic: DS.attr('string')

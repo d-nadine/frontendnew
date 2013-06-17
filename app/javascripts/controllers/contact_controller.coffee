@@ -53,7 +53,7 @@ Radium.ContactController = Radium.ObjectController.extend
     isNew: true
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    user: @get('currentUser')
+    organizer: @get('currentUser')
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
