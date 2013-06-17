@@ -8,17 +8,32 @@
       <label class="control-label">Mobile Phone</label>
       <div class="controls">
         <input type="text" name="" id="" class="inline-field" value="+1 555 555 5555">
+        <button class="btn btn-mini btn-danger"><i class="icon-delete"></i></button>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Add Another Phone</label>
       <div class="controls">
-        <input type="text" placeholder="Mobile Number">
-        <select>
-          <option value="">Office</option>
-          <option value="">Home</option>
-          <option value="">Other</option>
-        </select>
+        <div class="input-prepend">
+          <div class="btn-group">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+              Type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Office</a>
+              </li>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">Other</a>
+              </li>
+            </ul>
+          </div>
+          <input class="span2" id="prependedDropdownButton" type="text">
+        </div>
         <button class="btn">Add</button>
       </div>
     </div>

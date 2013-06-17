@@ -10,17 +10,34 @@
       <div class="controls">
         <input type="text" name="" id="" class="inline-field" value="Michael@gmail.com">
         <div class="label label-success"><i class="icon-todo"></i> Confirmed</div>
+        <button class="btn btn-mini btn-danger"><i class="icon-delete"></i></button>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Add Another Calendar</label>
       <div class="controls">
-        <input type="text" placeholder="Calendar identifier?">
+        <div class="input-prepend">
+          <div class="btn-group">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+              Type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">GCalendar</a>
+                <a href="#">Microsoft Exchange</a>
+                <a href="#">iCal</a>
+                <a href="#">Zoho</a>
+              </li>
+            </ul>
+          </div>
+          <input class="span2" id="prependedDropdownButton" type="text">
+        </div>
         <button class="btn">Add</button>
       </div>
     </div>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
   </fieldset>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
 </form>

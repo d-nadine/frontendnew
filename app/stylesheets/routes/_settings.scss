@@ -27,6 +27,11 @@
   fieldset {
     margin: 0 0 20px;
     border-bottom: 1px solid rgba(black, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+      margin: 0;
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 <div class="page-header">
-  <button class="btn btn-success pull-right">Save</button>
   <h3>My Profile</h3>
 </div>
 <form class="form-horizontal settings-form">
@@ -12,9 +11,9 @@
         <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
       </div>
       <div class="controls settings-user-details">
-        <input type="text" value="Michael Bolton" class="input-block-level user-fullname"><br>
-        <input type="email" value="Michael@initech.com" class="input-block-level user-email"><br>
-        <input type="text" value="Initech Inc." class="input-block-level">
+        <input type="text" value="Michael Bolton" class="input-block-level inline-field user-fullname"><br>
+        <input type="email" value="Michael@initech.com" class="input-block-level inline-field user-email"><br>
+        <input type="text" value="Initech Inc." class="input-block-level inline-field">
         <a href="#" class="btn btn-small">Login Settings</a>
       </div>
     </div>
@@ -26,7 +25,9 @@
       <div class="controls">
         <input type="text" id="phoneNumber" placeholder="Phone Number">
         <br>
-        <a href="#" class="btn btn-small">Mobile Settings</a>
+        {{#linkTo settings.mobile class="btn btn-small"}}
+          <i class="icon-call"></i> Mobile Settings
+        {{/linkTo}}
       </div>
     </div>
   </fieldset>
@@ -85,4 +86,7 @@
       </div>
     </div>
   </fieldset>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
 </form>
