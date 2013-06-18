@@ -2,7 +2,6 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.CreateMeeting = Radium.Model.extend
   meeting: DS.belongsTo 'Radium.Meeting'
-  organizer: DS.belongsTo 'Radium.User'
   invitations: DS.attr('array')
 
   topic: DS.attr('string')
@@ -16,9 +15,8 @@ Radium.CreateMeeting = Radium.Model.extend
       associationName = "_reference#{property}"
       @set associationName, value
     else
-      @get('_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
-  ).property('todo', 'deal', 'email')
-  _referenceDeal: DS.belongsTo('Radium.Deal')
+      @get('_referenceTodo') || @get('_referenceEmail')
+  ).property('_referenceEmail', '_referenceTodo')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceTodo: DS.belongsTo('Radium.Todo')
 

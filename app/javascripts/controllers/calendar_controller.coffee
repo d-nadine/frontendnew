@@ -45,7 +45,6 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     topic: null
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    organizer: @get('currentUser')
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()

@@ -3,7 +3,7 @@ require 'lib/radium/aggregate_array_proxy'
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
-  user: DS.belongsTo('Radium.User')
+  organizer: DS.belongsTo('Radium.User')
   invitations: DS.hasMany('Radium.Invitation')
 
   topic: DS.attr('string')

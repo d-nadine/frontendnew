@@ -105,7 +105,7 @@ Radium.FormsMeetingController = Radium.FormController.extend
 
     @get('meetingUsers').forEach (user) =>
       if user
-        meetings = Radium.Meeting.find(user: user, day: @get('startsAt'), exclude: self.get('id'))
+        meetings = Radium.Meeting.find(user_id: user.get('id'), day: @get('startsAt').toDateFormat())
 
         meetings.forEach (meeting) ->
           startsAt = meeting.get('startsAt').copy().advance(minute: -5)

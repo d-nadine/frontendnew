@@ -62,7 +62,6 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
     location: ""
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    organizer: @get('currentUser')
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()

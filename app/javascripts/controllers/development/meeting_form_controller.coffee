@@ -11,7 +11,6 @@ Radium.DevelopmentMeetingFormController = Ember.Controller.extend Radium.Current
     location: ""
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    organizer: @get('currentUser')
     startsAt: Ember.DateTime.create()
     endsAt: Ember.DateTime.create().advance({hour: 1})
     invitations: Ember.A()
