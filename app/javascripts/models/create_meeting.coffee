@@ -15,9 +15,9 @@ Radium.CreateMeeting = Radium.Model.extend
       associationName = "_reference#{property}"
       @set associationName, value
     else
-      @get('_referenceTodo') || @get('_referenceEmail')
+      @get('_referenceEmail') || @get('_referenceDeal')
   ).property('_referenceEmail', '_referenceTodo')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceEmail: DS.belongsTo('Radium.Email')
-  _referenceTodo: DS.belongsTo('Radium.Todo')
 
   time: Ember.computed.alias('startsAt')

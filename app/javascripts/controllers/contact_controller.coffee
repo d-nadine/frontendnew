@@ -51,6 +51,7 @@ Radium.ContactController = Radium.ObjectController.extend
     topic: null
     location: ""
     isNew: true
+    reference: @get('model')
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
     startsAt: @get('now')

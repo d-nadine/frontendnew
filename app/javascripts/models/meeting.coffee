@@ -1,4 +1,4 @@
-require 'lib/radium/aggregate_array_proxy'
+require 'lib/radium/aggregate_array_proxy' 
 
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
@@ -20,8 +20,9 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       associationName = "_reference#{property}"
       @set associationName, value
     else
-      @get('_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
+      @get('_referenceContact', '_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
   ).property('todo', 'deal', 'email')
+  _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceTodo: DS.belongsTo('Radium.Todo')

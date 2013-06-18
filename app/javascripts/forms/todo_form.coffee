@@ -36,7 +36,7 @@ Radium.TodoForm = Radium.Form.extend
   individualCommit: ->
     return unless @get('isNew')
 
-    Radium.Todo.createRecord @get('data')
+    todo = Radium.Todo.createRecord @get('data')
 
   bulkCommit: ->
     @get('reference').forEach (item) =>

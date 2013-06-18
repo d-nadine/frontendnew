@@ -52,4 +52,7 @@ Radium.MeetingForm = Radium.Form.extend
         else
           meeting.get('invitations').addObject email: contact.get('email')
 
+      if @get('reference') && @get('reference.constructor') is Radium.Contact
+          meeting.get('invitations').addObject person: type: 'contact', id: @get('reference.id')
+
     @get('store').commit()
