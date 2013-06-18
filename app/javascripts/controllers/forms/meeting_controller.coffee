@@ -23,9 +23,10 @@ Radium.FormsMeetingController = Radium.FormController.extend
   isEditable:( ->
     return false if @get('isSubmitted')
     return true if @get('isNew')
-    return false unless @get('content.isEditable')
     return false if @get('justAdded')
     return false if @get('hasElapsed')
+    return true if @get('currentUser') is @get('organizer')
+    @get('invitations').find((invitation) -> invitation.get('person') == @get('currentUser'))
     true
   ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
