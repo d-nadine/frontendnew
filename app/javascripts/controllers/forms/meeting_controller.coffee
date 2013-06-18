@@ -27,7 +27,6 @@ Radium.FormsMeetingController = Radium.FormController.extend
     return false if @get('hasElapsed')
     return true if @get('currentUser') is @get('organizer')
     @get('invitations').find((invitation) -> invitation.get('person') == @get('currentUser'))
-    true
   ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
 
   locations: ( ->
