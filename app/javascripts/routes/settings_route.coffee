@@ -2,4 +2,4 @@ Radium.SettingsRoute = Radium.Route.extend()
 
 Radium.SettingsIndexRoute = Radium.Route.extend
   redirect: ->
-    @.transitionTo 'settings.account'
+    @.transitionTo 'settings.profile'

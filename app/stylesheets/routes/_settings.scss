@@ -44,6 +44,13 @@ input.inline-field {
     @include box-shadow(none);
     background: lightyellow;
   }
+
+  &.large-inline-field {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px;
+    height: auto;
+  }
 }
 
 input.api-field {
@@ -64,15 +71,6 @@ input.api-field {
 
   .user-change-avatar {
     padding: 0;
-  }
-}
-
-.settings-user-details {
-  .user-fullname {
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 30px;
-    height: auto;
   }
 }
 

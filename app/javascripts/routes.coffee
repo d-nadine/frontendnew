@@ -54,19 +54,13 @@ Radium.Router.map ->
     @route 'employees', path: '/companies/:company_id/employees'
 
   @resource 'settings', ->
-    @route 'account'
-    @route 'teamMembers', path: 'team-members'
+    @route 'profile'
+    @route 'company'
     @route 'billing'
-    @route 'accounts'
-    @route 'email'
-    @route 'calendar'
-    @route 'mobile'
-    @route 'calls'
     @route 'api'
     @route 'customFields', path: 'custom-fields'
     @route 'pipelineStates', path: 'pipeline-states'
     @route 'remindersAlerts', path: 'reminders-alerts'
-    @route 'empty'
 
   @route 'unimplemented'
 
