@@ -1,7 +1,8 @@
 <div class="page-header">
   <h3>My Profile</h3>
 </div>
-<form class="form-horizontal settings-form">
+<form class="form-horizontal settings-form" {{action "save" on="submit"}}>
+  {{#with controller.currentUser}}
   <fieldset>
     <div class="control-group">
       <div class="user-edit-avatar">
@@ -11,8 +12,12 @@
         <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
       </div>
       <div class="controls settings-user-details">
-        <input type="text" value="Michael Bolton" class="input-block-level inline-field large-inline-field"><br>
-        <input type="email" value="Michael@initech.com" class="input-block-level inline-field user-email"><br>
+        {{input value=name class="input-block-level inline-field large-inline-field"}}
+        <br>
+        {{input type="email" value=email class="input-block-level inline-field user-email"}}
+        <br>
+        {{input type="tel" value=phone placeholder="Phone Number" class="input-block-level inline-field user-phone"}}
+        <br>
         <input type="text" value="Initech Inc." class="input-block-level inline-field">
       </div>
     </div>
@@ -33,18 +38,6 @@
         </span>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label" for="emailAddress">Email</label>
-      <div class="controls">
-        <input type="email" id="emailAddress" placeholder="Email Address">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="phoneNumber">Phone Number</label>
-      <div class="controls">
-        <input type="tel" id="phoneNumber" placeholder="Phone Number">
-      </div>
-    </div>
   </fieldset>
     <fieldset>
     <div class="control-group">
@@ -62,6 +55,7 @@ Sent from RadiumCRM</textarea>
       </div>
     </div>
   </fieldset>
+  {{/with}}
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
