@@ -8,74 +8,49 @@
         <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
       </div>
       <div class="controls settings-user-details">
-        <input type="text" value="Initech Inc." class="input-block-level inline-field large-inline-field">
+        {{input value=companyName class="input-block-level inline-field large-inline-field"}}
       </div>
     </div>
   </fieldset>
 </form>
 
-<form class="form-inline">
-  <input type="text" class="input-xlarge" placeholder="Add a member by Email">
-  <button class="btn btn-success">Connect</button>
-</form>
+{{render "inviteUser"}}
 
 <h6>Team</h6>
 <ul class="unstyled settings-list settings-users-list">
-  <li>
-    <div class="pull-left user-avatar">
-      <img src="/images/default_avatars/small.png" alt="" class="img-polaroid">
-    </div>
-    <div class="clearfix">
-      <div class="pull-right user-actions">
-        <button class="btn btn-link"><i class="icon-edit"></i></button>
-        <button class="btn btn-link"><i class="icon-delete"></i></button>
+  {{#each controller.users}}
+    <li>
+      <div class="pull-left user-avatar">
+        <img src="/images/default_avatars/small.png" alt="" class="img-polaroid">
       </div>
-      <div class="user-meta">
-        <h5 class="name">Chris Cox <a href="#">Chris@initech.com</a></h5>
-        <div class="message muted">
-          <small>LAST LOGIN 02/08/2013</small>
+      <div class="clearfix">
+        <div class="pull-right user-actions">
+          <button class="btn btn-link"><i class="icon-edit"></i></button>
+          <button class="btn btn-link"><i class="icon-delete"></i></button>
+          {{#unless isActive}}
+            <button class="btn btn-warning">Resend Invite</button>
+          {{/unless}}
+        </div>
+        <div class="user-meta">
+          <h5 class="name">
+            {{name}} {{email}}
+            {{#if isAdmin}}
+              <span class="label label-info">Admin</span>
+            {{/if}}
+          </h5>
+          {{#if isActive}}
+            <div class="message muted">
+              <small>LAST LOGIN 02/08/2013</small>
+            </div>
+          {{else}}
+            <div class="message text-warning">
+              <small><i class="icon-warning"></i> NEVER LOGGED IN</small>
+            </div>
+          {{/if}}
         </div>
       </div>
-    </div>
-  </li>
-
-  <li>
-    <div class="pull-left user-avatar">
-      <img src="/images/default_avatars/small.png" alt="" class="img-polaroid">
-    </div>
-    <div class="clearfix">
-      <div class="pull-right user-actions">
-        <button class="btn btn-link"><i class="icon-edit"></i></button>
-        <button class="btn btn-link"><i class="icon-delete"></i></button>
-      </div>
-      <div class="user-meta">
-        <h5 class="name">
-          Chris Cox <a href="#">Chris@initech.com</a>
-          <span class="label label-info">Admin</span>
-        </h5>
-        <div class="message muted">
-          <small>LAST LOGIN 02/08/2013</small>
-        </div>
-      </div>
-    </div>
-  </li>
-
-  <li>
-    <div class="pull-left user-avatar">
-      <img src="/images/default_avatars/small.png" alt="" class="img-polaroid">
-    </div>
-    <div class="clearfix">
-      <div class="pull-right user-actions">
-        <button class="btn btn-link"><i class="icon-edit"></i></button>
-        <button class="btn btn-link"><i class="icon-delete"></i></button>
-        <button class="btn btn-warning">Resend Invite</button>
-      </div>
-      <div class="user-meta">
-        <h5 class="name">Chris Cox <a href="#">Chris@initech.com</a></h5>
-        <div class="message text-warning">
-          <small><i class="icon-warning"></i> NEVER LOGGED IN</small>
-        </div>
-      </div>
-    </div>
-  </li>
+    </li>
+  {{else}}
+    <li>Invite some users</li>
+  {{/each}}
 </ul>

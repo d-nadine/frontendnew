@@ -10,3 +10,5 @@ Factory.define 'settings',
   checklist: -> Factory.create 'checklist'
   leadSources: ->
     Dictionaries.leadSources.set
+  companyName: 'Initech Inc'
+  companyAvatar: {}

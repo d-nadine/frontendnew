@@ -1,0 +1,9 @@
+<form {{bindAttr class=":form-inline didInvite:success"}} {{action "inviteUser" on="submit"}}>
+  {{input value=newUserEmail class="input-xlarge" placeholder="Add a member by Email"}}
+  <button class="btn btn-success" {{bindAttr disabled="controller.isValidEmail"}}>
+    Invite
+  </button>
+  {{#if didInvite}}
+    <span class="help-inline">New user added!</span>
+  {{/if}}
+</form>
