@@ -1,4 +1,4 @@
-Radium.UserItemController = Radium.ObjectController.extend
+Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
   meIfCurrent: (->
     content = @get 'content'
 

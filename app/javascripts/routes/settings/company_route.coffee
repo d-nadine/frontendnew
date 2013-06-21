@@ -7,3 +7,6 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
       c = confirm("Are you sure you want to delete #{user.get('name')}? This cannot be undone")
 
       user.deleteRecord() if c
+
+    resendInvite: (user) ->
+      user.trigger('resendInvite')
