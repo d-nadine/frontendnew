@@ -3,74 +3,78 @@
   <h3>Initech, Inc.</h3>
 </div>
 
-<form class="form-horizontal">
-  <fieldset>
-    <legend>Billing Information</legend>
-    <p class="text-warning">You need to be admin to change the settings.</p>
+{{#if isNewCard}}
+  <form class="form-horizontal">
+    <fieldset>
+      <legend>Billing Information</legend>
+      <p class="text-warning">You need to be admin to change the settings.</p>
 
-    <div class="control-group">
-      <label for="organizationName" class="control-label">Organization Name</label>
-      <div class="controls">
-        <input type="text" id="organizationName" class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name.">
+      <div class="control-group">
+        <label for="organizationName" class="control-label">Organization Name</label>
+        <div class="controls">
+          <input type="text" id="organizationName" class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name.">
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label for="billingEmail" class="control-label">Billing Email</label>
-      <div class="controls">
-        <input type="text" id="billingEmail" class="input-block-level" placeholder="Email address where the receipts are sent to">
+      <div class="control-group">
+        <label for="billingEmail" class="control-label">Billing Email</label>
+        <div class="controls">
+          <input type="text" id="billingEmail" class="input-block-level" placeholder="Email address where the receipts are sent to">
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label for="yourReference" class="control-label">Your Reference</label>
-      <div class="controls">
-        <input type="text" id="yourReference" class="input-block-level" placeholder="Your internal reference shown on the receipts.">
+      <div class="control-group">
+        <label for="yourReference" class="control-label">Your Reference</label>
+        <div class="controls">
+          <input type="text" id="yourReference" class="input-block-level" placeholder="Your internal reference shown on the receipts.">
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label for="phoneNumber" class="control-label">Phone Number</label>
-      <div class="controls">
-        <input type="text" id="phoneNumber" class="input-large">
+      <div class="control-group">
+        <label for="phoneNumber" class="control-label">Phone Number</label>
+        <div class="controls">
+          <input type="text" id="phoneNumber" class="input-large">
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label for="country" class="control-label">Country</label>
-      <div class="controls">
-        <select id="country">
-          <option value=""></option>
-        </select>
+      <div class="control-group">
+        <label for="country" class="control-label">Country</label>
+        <div class="controls">
+          <select id="country">
+            <option value=""></option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label for="billingEmail" class="control-label">VAT ID</label>
-      <div class="controls">
-        <input type="text" id="billingEmail" class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID">
+      <div class="control-group">
+        <label for="billingEmail" class="control-label">VAT ID</label>
+        <div class="controls">
+          <input type="text" id="billingEmail" class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID">
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label class="control-label">Credit Card</label>
-      <div class="controls">
-        <label class="radio inline">
-          <input type="radio" name="creditCards" id="visa" value="visa">
-            Visa
-        </label>
-        <label class="radio inline">
-          <input type="radio" name="creditCards" id="paypal" value="paypal">
-            PayPal
-        </label>
+      <div class="control-group">
+        <label class="control-label">Credit Card</label>
+        <div class="controls">
+          <label class="radio inline">
+            <input type="radio" name="creditCards" id="visa" value="visa">
+              Visa
+          </label>
+          <label class="radio inline">
+            <input type="radio" name="creditCards" id="paypal" value="paypal">
+              PayPal
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-  </fieldset>
-</form>
-
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn" {{action "cancel"}}>Cancel</button>
+      </div>
+    </fieldset>
+  </form>
+{{else}}
+  <a href="#" class="btn btn-link" {{action "changeBilling"}}>Update Billing Info</a>
+{{/if}}
 <div class="upgrade-plan">
   <div class="page-header">
     <h4>Upgrate Account</h4>
