@@ -7,22 +7,36 @@
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess.
 </p>
-
-<form class="form-horizontal settings-form">
-  <fieldset>
-    <div class="control-group">
-      <label for="" class="control-label">Custom Field</label>
-      <div class="controls">
-        <input type="text" value="Example Field Name" class="inline-field">
-        <button class="btn btn-mini btn-danger"><i class="icon-delete"></i></button>
+<ul class="unstyled settings-list">
+  {{#each controller}}
+    <li>
+      <div class="pull-left">
+        <p>Custom Field</p>
       </div>
+      <div class="clearfix">
+        {{input value=key class="inline-field"}}
+        <button class="btn btn-mini btn-danger" {{action "removeCustomField" this}}>
+          <i class="icon-delete"></i>
+        </button>
+      </div>
+  </li>
+  {{else}}
+  <li>
+    <div class="alert alert-warning">
+      You have no custom fields, add some below
     </div>
-  </fieldset>
+  </li>
+  {{/each}}
+</ul>
+<form class="form-horizontal settings-form" {{action createCustomField on="submit"}}>
   <fieldset>
     <div class="control-group">
       <label for="" class="control-label">Add a Custom Field</label>
       <div class="controls">
-        <input type="text" placeholder="Field Name"> <button class="btn btn-success">Add</button>
+        {{input type="text" value=newCustomField}}
+        <button class="btn btn-success" {{bindAttr disabled="isValidCustomField"}}>
+          Add
+        </button>
       </div>
     </div>
   </fieldset>

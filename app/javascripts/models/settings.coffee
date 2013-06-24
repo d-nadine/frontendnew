@@ -8,3 +8,4 @@ Radium.Settings = DS.Model.extend
   companyName: DS.attr('string')
   companyAvatar: DS.attr('object')
   currentPlan: DS.attr('string')
+  customFields: DS.attr('array')

@@ -13,3 +13,6 @@ Factory.define 'settings',
   companyName: 'Initech Inc'
   companyAvatar: {}
   currentPlan: 2
+  customFields: [
+    key: "test"
+  ]
