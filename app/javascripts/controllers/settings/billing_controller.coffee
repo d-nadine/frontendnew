@@ -1,5 +1,5 @@
 Radium.SettingsBillingController = Ember.ArrayController.extend
-  needs: 'users'
+  needs: ['settings', 'users']
   isNewCard: false
 
   changeBilling: ->
@@ -24,3 +24,4 @@ Radium.SettingsBillingController = Ember.ArrayController.extend
   upgradePlan: (model) ->
     @get('content').setEach('isCurrent', false)
     model.set('isCurrent', true)
+    @set('controllers.settings.currentPlan', model.get('id'))
