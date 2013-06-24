@@ -7,3 +7,4 @@ Radium.Settings = DS.Model.extend
   dealSources: DS.attr('array')
   companyName: DS.attr('string')
   companyAvatar: DS.attr('object')
+  currentPlan: DS.attr('string')

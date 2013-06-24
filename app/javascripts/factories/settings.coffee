@@ -12,3 +12,4 @@ Factory.define 'settings',
     Dictionaries.leadSources.set
   companyName: 'Initech Inc'
   companyAvatar: {}
+  currentPlan: 2

@@ -4,115 +4,40 @@
 </div>
 
 {{#if isNewCard}}
-  <form class="form-horizontal">
-    <fieldset>
-      <legend>Billing Information</legend>
-      <p class="text-warning">You need to be admin to change the settings.</p>
-
-      <div class="control-group">
-        <label for="organizationName" class="control-label">Organization Name</label>
-        <div class="controls">
-          <input type="text" id="organizationName" class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name.">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="billingEmail" class="control-label">Billing Email</label>
-        <div class="controls">
-          <input type="text" id="billingEmail" class="input-block-level" placeholder="Email address where the receipts are sent to">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="yourReference" class="control-label">Your Reference</label>
-        <div class="controls">
-          <input type="text" id="yourReference" class="input-block-level" placeholder="Your internal reference shown on the receipts.">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="phoneNumber" class="control-label">Phone Number</label>
-        <div class="controls">
-          <input type="text" id="phoneNumber" class="input-large">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="country" class="control-label">Country</label>
-        <div class="controls">
-          <select id="country">
-            <option value=""></option>
-          </select>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="billingEmail" class="control-label">VAT ID</label>
-        <div class="controls">
-          <input type="text" id="billingEmail" class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label">Credit Card</label>
-        <div class="controls">
-          <label class="radio inline">
-            <input type="radio" name="creditCards" id="visa" value="visa">
-              Visa
-          </label>
-          <label class="radio inline">
-            <input type="radio" name="creditCards" id="paypal" value="paypal">
-              PayPal
-          </label>
-        </div>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button class="btn" {{action "cancel"}}>Cancel</button>
-      </div>
-    </fieldset>
-  </form>
+  {{partial 'settings/billing_form'}}
 {{else}}
-  <a href="#" class="btn btn-link" {{action "changeBilling"}}>Update Billing Info</a>
+  <a href="#" class="btn" {{action "changeBilling"}}>Update Billing Info</a>
 {{/if}}
 <div class="upgrade-plan">
   <div class="page-header">
     <h4>Upgrate Account</h4>
   </div>
-  <h2 class="text-center">14/15 Users To add users Lorem Ipsum</h2>
+  <h2 class="text-center">
+    {{controllers.users.length}}/{{controller.currentPlan.totalUsers}} Users to add users
+  </h2>
 
   <div class="row">
-    <div class="span3">
-      <ul class="pricing-table">
-        <li class="title">Plan A</li>
-        <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
-        <li class="price">$9.99/User</li>
-        <li class="cta-button">
-          <a class="btn btn-success btn-block" href="#">Upgrade</a>
-        </li>
-      </ul>
-    </div>
 
+    {{#each controller}}
     <div class="span3">
-      <ul class="pricing-table">
-        <li class="title">Plan B</li>
-       <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
-        <li class="price">$12.99/User</li>
-        <li class="cta-button">
-          <a class="btn btn-success btn-block" href="#">Upgrade</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="span3">
-      <ul class="pricing-table">
-        <li class="title">Plan C</li>
+      <ul {{bindAttr class=":pricing-table isCurrent"}}>
+        <li class="title">{{unbound title}}</li>
         <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
-        <li class="price">$19.99/User</li>
+        <li class="price">${{unbound price}}/User</li>
         <li class="cta-button">
-          <a class="btn btn-success btn-block" href="#">Upgrade</a>
+          <button
+            {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="isCurrent"}}
+            {{action "upgradePlan" this}}>
+            {{#if isCurrent}}
+              Your plan
+            {{else}}
+              Upgrade
+            {{/if}}
+          </button>
         </li>
       </ul>
     </div>
+    {{/each}}
+
   </div>
 </div>
