@@ -1,4 +1,5 @@
 require 'factories/checklist'
+# require 'factories/notification_settings'
 
 Factory.define 'settings',
   negotiatingStatuses: [
@@ -16,3 +17,5 @@ Factory.define 'settings',
   customFields: [
     key: "test"
   ]
+
+  reminders: -> Factory.create 'notificationSettings'

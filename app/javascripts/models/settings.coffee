@@ -9,3 +9,4 @@ Radium.Settings = DS.Model.extend
   companyAvatar: DS.attr('object')
   currentPlan: DS.attr('string')
   customFields: DS.attr('array')
+  reminders: DS.belongsTo('Radium.NotificationSettings')

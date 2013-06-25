@@ -5,16 +5,24 @@
 <form action="" class="form-horizontal settings-form">
   <fieldset>
     <legend>Reminders</legend>
+
     <div class="control-group">
       <span class="help-block">Send me a reminder when I have an overdue task:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
-        <input class="input-mini" type="number" placeholder="1">
-        <select name="" class="span1">
-          <option value="">Day</option>
-        </select>
+        {{input type="number" value=overdueTaskDays placeholder="1" class="input-mini"}}
+        {{view Ember.Select class="span1"
+          contentBinding='controller.dayOptions'
+          valueBinding='reminders.overdueTask.dateType'
+          disabledBinding='overdueTaskEnabled'
+        }}
         <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
+          <div class="toggle-switch">
+            <label>
+              {{input type="checkbox" value=overdueTaskEnabled}}
+              <div class="switch"></div>
+            </label>
+          </div>
         </label>
       </div>
     </div>
@@ -23,12 +31,18 @@
       <span class="help-block">Send me a reminder when I create a task for someone else:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
-        <input class="input-mini" type="number" placeholder="1">
-        <select name="" class="span1">
-          <option value="">Day</option>
-        </select>
+        {{input type="number" value=reminders.overdueUserTask.lengthOfTime placeholder="1" class="input-mini"}}
+        {{view Ember.Select class="span1"
+          contentBinding='controller.dayOptions'
+          valueBinding='reminders.overdueUserTask.dateType'
+        }}
         <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
+          <div class="toggle-switch">
+            <label>
+              {{input type="checkbox" value=reminders.overdueUserTask.enabled}}
+              <div class="switch"></div>
+            </label>
+          </div>
         </label>
       </div>
     </div>

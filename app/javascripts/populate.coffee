@@ -8,7 +8,7 @@ class Populator
       ['Riikka', 'Tarkainen']
     ]
 
-    users = names.map (name) ->
+    users = names.map (name, idx) ->
       Factory.create 'user',
         firstName: name[0]
         lastName: name[1]
@@ -20,7 +20,7 @@ class Populator
       nameKey = user.get('firstName').underscore()
       userDictionary[nameKey] = user
 
-    # globalize it so other populators can access the 
+    # globalize it so other populators can access the
     # predefined set of users
     Dictionary.users = userDictionary
 
@@ -441,7 +441,7 @@ class Populator
       meta:
         user: userDictionary.random()
 
-    Factory.create 'activity', 
+    Factory.create 'activity',
       tag: 'email'
       event: 'send'
       user: userDictionary.random()
