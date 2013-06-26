@@ -57,6 +57,14 @@ input.api-field {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.control-disabled {
+  color: lightgray;
+
+  .help-block {
+    color: lightgray;
+  }
+}
+
 .user-edit-avatar {
   width: 134px;
   float: left;

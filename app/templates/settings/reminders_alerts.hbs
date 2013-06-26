@@ -1,100 +1,100 @@
 <div class="page-header">
   <h3>Reminders & Alerts</h3>
 </div>
-
-<form action="" class="form-horizontal settings-form">
+<form class="form-horizontal settings-form" {{action "save" on="submit"}}>
+  {{#with reminders}}
   <fieldset>
     <legend>Reminders</legend>
 
-    <div class="control-group">
+    <div {{bindAttr class=":control-group controller.overdueTaskDisabled:control-disabled"}}>
       <span class="help-block">Send me a reminder when I have an overdue task:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
-        {{input type="number" value=overdueTaskDays placeholder="1" class="input-mini"}}
-        {{view Ember.Select class="span1"
-          contentBinding='controller.dayOptions'
-          valueBinding='reminders.overdueTask.dateType'
-          disabledBinding='overdueTaskEnabled'
-        }}
-        <label class="checkbox inline">
-          <div class="toggle-switch">
-            <label>
-              {{input type="checkbox" value=overdueTaskEnabled}}
-              <div class="switch"></div>
-            </label>
-          </div>
-        </label>
+        {{input type="number"
+          value=overdueTaskDays
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="controller.overdueTaskDisabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="overdueTaskEnabled"}}
       </div>
     </div>
 
-    <div class="control-group">
+    <div {{bindAttr class=":control-group controller.assignedOverdueTaskDisabled:control-disabled"}}>
       <span class="help-block">Send me a reminder when I create a task for someone else:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
-        {{input type="number" value=reminders.overdueUserTask.lengthOfTime placeholder="1" class="input-mini"}}
-        {{view Ember.Select class="span1"
-          contentBinding='controller.dayOptions'
-          valueBinding='reminders.overdueUserTask.dateType'
-        }}
-        <label class="checkbox inline">
-          <div class="toggle-switch">
-            <label>
-              {{input type="checkbox" value=reminders.overdueUserTask.enabled}}
-              <div class="switch"></div>
-            </label>
-          </div>
-        </label>
+        {{input type="number"
+          value=assignedOverdueTaskDays
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="controller.assignedOverdueTaskDisabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="assignedOverdueTaskEnabled"}}
       </div>
     </div>
 
-    <div class="control-group">
+    <div {{bindAttr class=":control-group controller.localMeetingDisabled:control-disabled"}}>
       <span class="help-block">Send me a reminder when a meeting is in my office/office building:</span>
       <label for="" class="control-label">When meeting is in</label>
       <div class="controls">
-        <input class="input-mini" type="number" placeholder="1">
-        <select name="" class="span1">
-          <option value="">Day</option>
-        </select>
-        <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
-        </label>
+        {{input type="number"
+          value=localMeetingDays
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="controller.localMeetingDisabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="localMeetingEnabled"}}
       </div>
     </div>
 
-    <div class="control-group">
+    <div {{bindAttr class=":control-group controller.outOfOfficeDisabled:control-disabled"}}>
       <span class="help-block">Send me a reminder when a meeting is not in my office/office building:</span>
       <label for="" class="control-label">When meeting is</label>
       <div class="controls">
-        <input class="input-mini" type="number" placeholder="1">
-        <select name="" class="span1">
-          <option value="">Day</option>
-        </select>
-        <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
-        </label>
+        {{input type="number"
+          value=outOfOfficeDays
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="controller.outOfOfficeDisabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="outOfOfficeEnabled"}}
       </div>
     </div>
   </fieldset>
 
   <fieldset>
     <legend>Alerts</legend>
-    <p>
-      If a lead is ignored for more than <input type="number" name="" id="" class="input-mini" value="1"> days highlight that lead <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
-        </label>
+    <p {{bindAttr class="controller.leadIgnoredDisabled:control-disabled"}}>
+      If a lead is ignored for more than {{input type="number"
+        value=leadIgnoredDays
+        placeholder="1"
+        class="input-mini"
+        disabledBinding="controller.leadIgnoredDisabled"}}
+         days highlight that lead
+      {{view Radium.FormEnabledSwitchView isCheckedBinding="leadIgnoredEnabled"}}
     </p>
-    <p>
-      If a client is ignored for more than <input type="number" name="" id="" class="input-mini" value="1"> days highlight that lead <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
-        </label>
+    <p {{bindAttr class="clientIgnoredDisabled:control-disabled"}}>
+      If a client is ignored for more than
+      {{input type="number"
+        value=clientIgnoredDays
+        placeholder="1"
+        class="input-mini"
+        disabledBinding="controller.clientIgnoredDisabled"}}
+       days highlight that lead
+
+      {{view Radium.FormEnabledSwitchView isCheckedBinding="clientIgnoredEnabled"}}
     </p>
-    <p>
-      If a task is ignored for more than <input type="number" name="" id="" class="input-mini" value="1"> days highlight that lead <label class="checkbox inline">
-          <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Enabled
-        </label>
+    <p {{bindAttr class="taskIgnoredDisabled:control-disabled"}}>
+      If a task is ignored for more than
+      {{input type="number"
+        value=taskIgnoredDays
+        placeholder="1"
+        class="input-mini"
+        disabledBinding="controller.taskIgnoredDisabled"}}
+       days highlight that lead
+      {{view Radium.FormEnabledSwitchView isCheckedBinding="taskIgnoredEnabled"}}
     </p>
   </fieldset>
+  {{/with}}
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
+    <button class="btn" {{action "cancel"}}>Cancel</button>
   </div>
 </form>
