@@ -1,7 +1,7 @@
 <div class="page-header">
   <h3>Reminders & Alerts</h3>
 </div>
-<form class="form-horizontal settings-form" {{action "save" on="submit"}}>
+<form class="form-horizontal settings-form" {{action "save" controller.content on="submit"}}>
   {{#with reminders}}
   <fieldset>
     <legend>Reminders</legend>
@@ -95,6 +95,6 @@
   {{/with}}
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <button class="btn" {{action "cancel"}}>Cancel</button>
+    <button class="btn" {{action "cancel" controller}}>Cancel</button>
   </div>
 </form>
