@@ -1,6 +1,7 @@
 <form {{bindAttr class=":form-inline didInvite:success"}} {{action "inviteUser" on="submit"}}>
+  {{input value=newUserName class="input-xlarge" placeholder="Who are you going to invite?"}}
   {{input value=newUserEmail class="input-xlarge" placeholder="Add a member by Email"}}
-  <button class="btn btn-success" {{bindAttr disabled="controller.isValidEmail"}}>
+  <button class="btn btn-success" {{bindAttr disabled="controller.isDisabled"}}>
     Invite
   </button>
   {{#if didInvite}}
