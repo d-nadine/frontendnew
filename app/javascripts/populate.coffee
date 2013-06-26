@@ -13,6 +13,8 @@ class Populator
         firstName: name[0]
         lastName: name[1]
         email: "#{name[0].toLowerCase()}@radiumcrm.com"
+        isAdmin: if idx is 0 then true else false
+        isOwner: if idx is 0 then true else false
 
     userDictionary = new Dictionary(users)
 

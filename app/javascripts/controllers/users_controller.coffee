@@ -8,5 +8,11 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
       content.get 'name'
   ).property('name', 'currentUser')
 
+  makeAdmin: ->
+    @set('isAdmin', true)
+
+  removeAsAdmin: ->
+    @set('isAdmin', false)
+
 Radium.UsersController = Radium.ArrayController.extend
   itemController: 'userItem'
