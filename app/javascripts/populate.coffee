@@ -15,6 +15,7 @@ class Populator
         email: "#{name[0].toLowerCase()}@radiumcrm.com"
         isAdmin: if idx is 0 then true else false
         isOwner: if idx is 0 then true else false
+        signature: "Sent by RadiumCRM"
 
     userDictionary = new Dictionary(users)
 

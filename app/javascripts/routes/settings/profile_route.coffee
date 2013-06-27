@@ -1,3 +1,15 @@
 Radium.SettingsProfileRoute = Radium.Route.extend
   model: ->
-    @get("controller.currentUser")
+    Ember.run.next(=>
+      currentUser = @get("controller.currentUser")
+      transaction = @store.transaction()
+      transaction.add(currentUser)
+      currentUser
+    )
+
+  events:
+    save: (user) ->
+      user.get('transaction').commit()
+
+    cancel: (user) ->
+      user.get('transaction').rollback()

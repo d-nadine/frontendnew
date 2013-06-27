@@ -1,7 +1,7 @@
 <div class="page-header">
   <h3>My Profile</h3>
 </div>
-<form class="form-horizontal settings-form" {{action "save" on="submit"}}>
+<form class="form-horizontal settings-form" {{action "save" controller.currentUser on="submit"}}>
   {{#with controller.currentUser}}
   <fieldset>
     <div class="control-group">
@@ -12,7 +12,8 @@
         <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
       </div>
       <div class="controls settings-user-details">
-        {{input value=name class="input-block-level inline-field large-inline-field"}}
+        {{input value=firstName placeholder="First Name" class="input-block-level inline-field large-inline-field"}}
+        {{input value=lastName placeholder="Last Name" class="input-block-level inline-field large-inline-field"}}
         <br>
         {{input type="email" value=email class="input-block-level inline-field user-email"}}
         <br>
@@ -51,6 +52,6 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <button class="btn">Cancel</button>
+    <button class="btn" {{action "cancel" controller.currentUser}}>Cancel</button>
   </div>
 </form>

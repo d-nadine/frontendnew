@@ -24,6 +24,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   avatar: DS.attr('object')
 
+  signature: DS.attr('string')
   settings: DS.attr('object')
   lastLogin: DS.attr('date')
 
