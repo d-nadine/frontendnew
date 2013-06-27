@@ -16,3 +16,4 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
 
 Radium.UsersController = Radium.ArrayController.extend
   itemController: 'userItem'
+  sortProperties: ['lastName']

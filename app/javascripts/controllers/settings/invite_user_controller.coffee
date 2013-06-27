@@ -7,11 +7,13 @@ Radium.InviteUserController = Ember.ObjectController.extend Radium.CurrentUserMi
   didInvite: false
 
   inviteUser: ->
-    user = Radium.User.createRecord
+    user = Radium.UserInvite.createRecord
       email: @get('newUserEmail')
       name: @get('newUserName')
+      inviteDate: Ember.DateTime.create()
 
     @setProperties
+      newUserName: null
       newUserEmail: null
       didInvite: true
 

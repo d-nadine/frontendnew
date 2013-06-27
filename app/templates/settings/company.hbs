@@ -24,3 +24,18 @@
 {{else}}
   <p>No users added yet, invite one now! ^</p>
 {{/if}}
+
+{{#if controller.pendingUsers.length}}
+<h6>Awaiting Confirmation</h6>
+  <ul class="unstyled settings-list settings-users-list">
+    {{#each controller.pendingUsers}}
+      <li>
+        <div class="pull-right user-actions">
+          <button class="btn btn-danger" {{action "cancelInvite" this}}>Cancel Invite</button>
+          <button class="btn btn-warning" {{action "resendInvite" this}}>Resend Invite</button>
+        </div>
+        <p>{{name}} – {{email}}</p>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
