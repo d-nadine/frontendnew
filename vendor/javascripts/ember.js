@@ -2777,14 +2777,14 @@ Map.create = function() {
 Map.prototype = {
   /**
     This property will change as the number of objects in the map changes.
-   
+
     @property length
     @type number
     @default 0
   */
   length: 0,
-    
-    
+
+
   /**
     Retrieve the value associated with a given key.
 
@@ -4368,7 +4368,7 @@ Ember.computed.alias = function(dependentKey) {
   @return {Ember.ComputedProperty} computed property which creates an
   one way computed property to the original value for property.
 
-  Where `computed.alias` aliases `get` and `set`, and allows for bidirectional 
+  Where `computed.alias` aliases `get` and `set`, and allows for bidirectional
   data flow, `computed.oneWay` only provides an aliased `get`. The `set` will
   not mutate the upstream property, rather causes the current property to
   become the value set. This causes the downstream property to permentantly
@@ -22898,7 +22898,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
-  
+
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("<option value=\"\">");
   hashTypes = {};
@@ -22909,7 +22909,7 @@ function program1(depth0,data) {
   }
 
 function program3(depth0,data) {
-  
+
   var hashContexts, hashTypes;
   hashContexts = {'contentBinding': depth0};
   hashTypes = {'contentBinding': "STRING"};
@@ -22927,7 +22927,7 @@ function program3(depth0,data) {
   stack1 = helpers.each.call(depth0, "view.content", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   return buffer;
-  
+
 }),
   attributeBindings: ['multiple', 'disabled', 'tabindex', 'name'],
 
@@ -25587,7 +25587,7 @@ function teardownView(route) {
 
 /*
   A TransitionEvent is passed as the argument for `transitionTo`
-  events and contains information about an attempted transition 
+  events and contains information about an attempted transition
   that can be modified or decorated by leafier `transitionTo` event
   handlers before the actual transition is committed by ApplicationRoute.
 
@@ -25598,7 +25598,7 @@ function teardownView(route) {
 Ember.TransitionEvent = Ember.Object.extend({
 
   /*
-    The Ember.Route method used to perform the transition.  Presently, 
+    The Ember.Route method used to perform the transition.  Presently,
     the only valid values are 'transitionTo' and 'replaceWith'.
    */
   transitionMethod: 'transitionTo',
@@ -25734,7 +25734,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     disabled: Ember.computed(function(key, value) {
       if (value !== undefined) { this.set('_isDisabled', value); }
-      
+
       return value ? this.get('disabledClass') : false;
     }),
 
@@ -25757,7 +25757,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
       event.preventDefault();
       if (this.bubbles === false) { event.stopPropagation(); }
-      
+
       if (get(this, '_isDisabled')) { return false; }
 
       var router = this.get('router');
@@ -25826,7 +25826,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     </li>
     ```
 
-    To override this option for your entire application, see 
+    To override this option for your entire application, see
     "Overriding Application-wide Defaults".
 
     ### Handling `href`
@@ -25873,7 +25873,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     </a>
     ```
 
-    To override this option for your entire application, see 
+    To override this option for your entire application, see
     "Overriding Application-wide Defaults".
 
     ### Supplying a model
@@ -26496,7 +26496,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 @submodule ember-routing
 */
 
-if (Ember.ENV.EXPERIMENTAL_CONTROL_HELPER) {
+// if (Ember.ENV.EXPERIMENTAL_CONTROL_HELPER) {
   var get = Ember.get, set = Ember.set;
 
   /**
@@ -26564,7 +26564,7 @@ if (Ember.ENV.EXPERIMENTAL_CONTROL_HELPER) {
 
     Ember.Handlebars.helpers.view.call(this, childView, options);
   });
-}
+// }
 
 })();
 
@@ -26597,7 +26597,7 @@ Ember.ControllerMixin.reopen({
     Optionally supply a model for the route in question. The model
     will be serialized into the URL using the `serialize` hook of
     the route:
-    
+
     ```javascript
       aController.transitionToRoute('blogPost', aPost);
     ```
@@ -28299,11 +28299,11 @@ Ember.ControllerMixin.reopen({
       needs: ['post']
     });
     ```
-    
+
     The application's single instance of these other
     controllers are accessible by name through the
     `controllers` property:
-    
+
     ```javascript
     this.get('controllers.post'); // instance of App.PostController
     ```

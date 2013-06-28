@@ -475,13 +475,17 @@ class Populator
       event: 'lead_received'
       reference: contactDictionary.random()
 
-    # companyDictionary = new Dictionary(companies)
+    pipelineChecklists = for i in [1..4]
+      Factory.create 'pipelineChecklist',
+        weight: Math.floor(Math.random() * 100)
+
+    pipelineChecklistDictionary = new Dictionary(pipelineChecklists)
 
     pipelineStates = for i in [1..2]
       Factory.create 'pipelineState',
         name: "Pipeline State #{i}"
         position: i
-        # checklists: -> pipelineChecklistDictionary.random()
+        checklists: -> [pipelineChecklistDictionary.random()]
 
 
 

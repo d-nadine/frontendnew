@@ -30,6 +30,7 @@ class RadiumAdapter extends Foundry.EmberDataAdapter
     @map.set 'voice_mail', Radium.VoiceMail
     @map.set 'notificationSettings', Radium.NotificationSettings
     @map.set 'userInvite', Radium.UserInvite
+    @map.set 'pipelineChecklist', Radium.PipelineChecklist
     @map.set 'pipelineState', Radium.PipelineState
 
 Foundry.RadiumAdapter = RadiumAdapter

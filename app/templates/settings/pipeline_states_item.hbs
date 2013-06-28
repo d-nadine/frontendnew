@@ -17,48 +17,6 @@
   </div>
 </div>
 <div class="span8">
-  <div class="controls-row pipeline-checklist-item">
-    <div class="input-prepend">
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          Type
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Todo</a></li>
-          <li><a href="#">Meeting</a></li>
-          <li><a href="#">Call</a></li>
-        </ul>
-      </div>
-      <input id="prependedDropdownButton" type="text" value="Had a call with client">
-    </div>
-    <div class="input-append">
-      <input type="number" class="span1" value="10">
-      <span class="add-on">%</span>
-    </div>
-    <button class="btn btn-danger">
-      <i class="icon-delete"></i>
-    </button>
-  </div>
-  <div class="controls-row pipeline-checklist-item">
-    <div class="input-prepend input-append">
-      <div class="btn-group">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          Type
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Todo</a></li>
-          <li><a href="#">Meeting</a></li>
-          <li><a href="#">Call</a></li>
-        </ul>
-      </div>
-      <input id="prependedDropdownButton" type="text" placeholder="Add additional item">
-    </div>
-    <div class="input-append">
-      <input type="number" class="span1" value="0">
-      <span class="add-on">%</span>
-    </div>
-    <button class="btn btn-success"><i class="icon-plus"></i></button>
-  </div>
+  {{each checklists itemViewClass="Radium.PipelineChecklistItemView" itemController="pipelineChecklistItem"}}
+  {{render pipelineChecklistItem controller.newChecklistItem}}
 </div>

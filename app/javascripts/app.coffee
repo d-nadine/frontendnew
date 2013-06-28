@@ -10,7 +10,6 @@ require 'lib/ember/computed'
 require 'lib/string/inflector'
 
 require 'lib/foundry'
-
 Radium = Em.Application.create
   rootElement: '#application'
   customEvents:
