@@ -1,0 +1,64 @@
+<div class="span2">
+  {{input value=name class="inline-field"}}
+  <div class="btn-toolbar">
+    {{#if parentController.hasMultipleItems}}
+    <div class="btn-group">
+      <button class="btn btn-mini"
+        {{bindAttr disabled="isFirstItem"}}
+        {{action "movePipelineStateUp" this}}>▲</button>
+      <button class="btn btn-mini"
+      {{bindAttr disabled="isLastItem"}}
+      {{action "movePipelineStateDown" this}}>▼</button>
+    </div>
+    {{/if}}
+    <div class="btn btn-mini btn-danger" {{action "deletePipelineState" this}}>
+      <i class="icon-delete"></i>
+    </div>
+  </div>
+</div>
+<div class="span8">
+  <div class="controls-row pipeline-checklist-item">
+    <div class="input-prepend">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          Type
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Todo</a></li>
+          <li><a href="#">Meeting</a></li>
+          <li><a href="#">Call</a></li>
+        </ul>
+      </div>
+      <input id="prependedDropdownButton" type="text" value="Had a call with client">
+    </div>
+    <div class="input-append">
+      <input type="number" class="span1" value="10">
+      <span class="add-on">%</span>
+    </div>
+    <button class="btn btn-danger">
+      <i class="icon-delete"></i>
+    </button>
+  </div>
+  <div class="controls-row pipeline-checklist-item">
+    <div class="input-prepend input-append">
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          Type
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Todo</a></li>
+          <li><a href="#">Meeting</a></li>
+          <li><a href="#">Call</a></li>
+        </ul>
+      </div>
+      <input id="prependedDropdownButton" type="text" placeholder="Add additional item">
+    </div>
+    <div class="input-append">
+      <input type="number" class="span1" value="0">
+      <span class="add-on">%</span>
+    </div>
+    <button class="btn btn-success"><i class="icon-plus"></i></button>
+  </div>
+</div>

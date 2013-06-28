@@ -1,112 +1,14 @@
 <div class="page-header">
   <h3>Pipeline States</h3>
 </div>
-<form action="" class="settings-form">
-  <fieldset>
-    <div class="controls-row">
-      <div class="input-prepend">
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            Type
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Todo</a></li>
-            <li><a href="#">Meeting</a></li>
-            <li><a href="#">Call</a></li>
-          </ul>
-        </div>
-        <input id="prependedDropdownButton" type="text" value="Had a call with client">
-      </div>
-      <div class="input-append">
-        <input type="number" class="span1" value="10">
-        <span class="add-on">%</span>
-      </div>
+<div class="pipeline-states-list">
+  {{each controller itemViewClass="Radium.PipelineStatesItemView"}}
+
+  <div class="row">
+    <div class="span5 pipeline-state-create">
+      <button class="btn btn-large btn-success" {{action "createPipelineState"}}>
+        Add Pipeline State
+      </button>
     </div>
-    <div class="controls-row">
-      <div class="input-prepend input-append">
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            Type
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Todo</a></li>
-            <li><a href="#">Meeting</a></li>
-            <li><a href="#">Call</a></li>
-          </ul>
-        </div>
-        <input id="prependedDropdownButton" type="text" value="Had a meeting with client">
-      </div>
-      <div class="input-append">
-        <input type="number" class="span1" value="20">
-        <span class="add-on">%</span>
-      </div>
-    </div>
-    <div class="controls-row">
-      <div class="input-prepend input-append">
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            Type
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Todo</a></li>
-            <li><a href="#">Meeting</a></li>
-            <li><a href="#">Call</a></li>
-          </ul>
-        </div>
-        <input id="prependedDropdownButton" type="text" value="Client signed the deal">
-      </div>
-      <div class="input-append">
-        <input type="number" class="span1" value="10">
-        <span class="add-on">%</span>
-      </div>
-    </div>
-    <div class="controls-row">
-      <div class="input-prepend input-append">
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            Type
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Todo</a></li>
-            <li><a href="#">Meeting</a></li>
-            <li><a href="#">Call</a></li>
-          </ul>
-        </div>
-        <input id="prependedDropdownButton" type="text" value="Client signed the deal">
-      </div>
-      <div class="input-append">
-        <input type="number" class="span1" value="50">
-        <span class="add-on">%</span>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset>
-    <div class="controls-row">
-      <div class="input-prepend input-append">
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            Type
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Todo</a></li>
-            <li><a href="#">Meeting</a></li>
-            <li><a href="#">Call</a></li>
-          </ul>
-        </div>
-        <input id="prependedDropdownButton" type="text" placeholder="Add additional item">
-      </div>
-      <div class="input-append">
-        <input type="number" class="span1" value="0">
-        <span class="add-on">%</span>
-      </div>
-      <span class="help-inline">
-        <button class="btn btn-success"><i class="icon-plus"></i></button>
-      </span>
-    </div>
-  </fieldset>
-</form>
+  </div>
+</div> <!-- /.pipeline-states-list -->

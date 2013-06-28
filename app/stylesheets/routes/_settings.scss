@@ -142,3 +142,23 @@ input.api-field {
     }
   }
 }
+
+// Pipeline States
+.pipeline-state-item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(black, 0.1);
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.pipeline-checklist-item {
+  .btn {
+    vertical-align: top;
+  }
+}
+
+.pipeline-state-create {
+  margin: 20px;
+}

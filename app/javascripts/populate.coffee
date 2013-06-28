@@ -475,6 +475,16 @@ class Populator
       event: 'lead_received'
       reference: contactDictionary.random()
 
+    # companyDictionary = new Dictionary(companies)
+
+    pipelineStates = for i in [1..2]
+      Factory.create 'pipelineState',
+        name: "Pipeline State #{i}"
+        position: i
+        # checklists: -> pipelineChecklistDictionary.random()
+
+
+
     Factory.adapter.store.commit()
 
 Radium.Populator = Populator
