@@ -1,8 +1,11 @@
 #alerts{
-  display :none;
   position: fixed;
-  top: 56px;
+  width: 80%;
+  top: 40px;
+  padding: 1em;
   z-index: $alerts-layer;
+  text-align: center;
+  margin-right: 50px;
 }
 
 .delete-confirmation{

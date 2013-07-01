@@ -3,12 +3,12 @@ Radium.Utils =
 notify: (message, options) ->
     defaults =
       type: 'alert-success'
-      delay: 1000
+      delay: 3000
 
     settings = $.extend({}, defaults, options)
 
     notification = $("""
-            <div id="alerts" class="offset4 span8">
+            <div id="alerts" class="offset1">
               <div class="alert #{settings.type}">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 #{message}
@@ -20,9 +20,9 @@ notify: (message, options) ->
 
     notification.fadeIn('fast', ( ->
       setTimeout(( ->
-        notification.fadeOut('fast', ->
-          $('#alerts').remove()
-        )
+        # notification.fadeOut('fast', ->
+        #   $('#alerts').remove()
+        # )
       ), settings.delay)
     ))
 

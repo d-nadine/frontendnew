@@ -22,6 +22,7 @@ Radium.EmailsShowRoute = Radium.Route.extend
 
       email.one 'didCreate', =>
         form.reset()
+
         Ember.run.next =>
           if !currentlyViewing.isIncludedInConversation(email)
             @transitionTo 'emails.show', email
