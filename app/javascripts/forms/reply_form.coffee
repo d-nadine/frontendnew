@@ -6,16 +6,16 @@ Radium.ReplyForm = Radium.EmailForm.extend
 
   email: null
 
+  reset: ->
+    @_super.apply this, arguments
+    @set 'subject', "RE: #{@get('email.subject')}"
+    @get('email.toList').forEach (person) => @get('to').pushObject person
+
   defaults: (->
-    hash =
-      subject: "RE: #{@get('email.subject')}"
-      message: ''
-      to: []
-      cc: []
-      bcc: []
-
-    @get('email.toList').forEach (person) -> hash.to.pushObject person
-
-    hash
+    subject: '' 
+    message: ''
+    to: []
+    cc: []
+    bcc: []
   ).property('email', 'email.subject', 'email.toList.[]')
 

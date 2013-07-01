@@ -22,16 +22,26 @@ Radium.EmailsShowRoute = Radium.Route.extend
       # that for now.
       form.set('email.showReplyForm', false)
 
-      form.reset()
-
       currentlyViewing = @modelFor 'emails.show'
 
-      @store.commit()
+      email.one 'didCreate', =>
+        email.set 'isSending', false
 
-      if !currentlyViewing.isIncludedInConversation(email)
-        @transitionTo 'emails.show', email
-      else
-        $.scrollTo 0, duration: 300
+        Ember.run.next =>
+          if !currentlyViewing.isIncludedInConversation(email)
+            @transitionTo 'emails.show', email
+          else
+            $.scrollTo 0, duration: 300
+
+      email.one 'becameInvalid', =>
+        email.set 'isSending', false
+        Radium.Utils.generateErrorSummary email
+
+      email.one 'becameError', =>
+        email.set 'isSending', false
+        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+
+      @store.commit()
 
     forward: (form) ->
       form.set 'isSubmitted', true

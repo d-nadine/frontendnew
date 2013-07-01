@@ -30,3 +30,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
     @get('store').commit()
 
     @trigger 'signatureAdded'
+
+  submit: (form) ->
+    @send 'sendEmail', form

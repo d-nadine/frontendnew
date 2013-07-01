@@ -31,5 +31,5 @@ Radium.EmailForm = Radium.Form.extend
   ).property().volatile()
 
   isValid: ( ->
-    @get('to.length') && (@get('subject') || @get('message.length'))
-  ).property('to.[]', 'subject', 'message')
+    @get('to.length') && @get('message.length')
+  ).property('to.[]', 'message')

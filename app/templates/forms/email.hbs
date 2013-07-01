@@ -2,7 +2,6 @@
   {{#if isReply}}
     <h5>
       Reply to
-
       {{list email.toList}}
 
       <a class="pull-right" href="#" {{action expand}}>More Options</a>
@@ -87,7 +86,7 @@
       {{#if showEmailCancel}}
         <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
       {{/if}}
-      <button tabindex="6" {{action sendEmail this controller bubbles="false"}} class="btn btn-primary">Send</button>
+      <button tabindex="6" {{action submit this controller bubbles="false"}} class="btn btn-primary">Send</button>
     </div>
   </div>
 </form>
