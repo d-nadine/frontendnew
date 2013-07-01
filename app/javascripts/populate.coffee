@@ -476,8 +476,11 @@ class Populator
       reference: contactDictionary.random()
 
     pipelineChecklists = for i in [1..4]
+      ranges = [0, 1, 2, 7]
+      randomDate = Math.floor(Math.random() * ranges.length) - 1
       Factory.create 'pipelineChecklist',
         weight: Math.floor(Math.random() * 100)
+        date: ranges[randomDate]
 
     pipelineChecklistDictionary = new Dictionary(pipelineChecklists)
 

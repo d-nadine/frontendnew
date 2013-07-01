@@ -11,6 +11,7 @@ Radium.PipelineStateItemController = Ember.ObjectController.extend
       description: null
       weight: null
       kind: 'Call'
+      date: 1
 
   isFirstItem: (->
     Ember.isEqual(@, @get('parentController.firstObject'))
@@ -29,7 +30,7 @@ Radium.PipelineStateItemController = Ember.ObjectController.extend
       description: null
       weight: null
       kind: 'Call'
-      date: Ember.DateTime.create()
+      date: 1
 
   deleteChecklist: (checklist) ->
     checklist.deleteRecord()

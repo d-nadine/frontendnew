@@ -11,19 +11,36 @@
         {{/each}}
       </ul>
     </div>
-    {{input type="text" value=content.description placeholder="Add additional item"}}
+    {{input type="text" value=description placeholder="Add additional item"}}
   </div>
+
   <div class="input-append">
     {{input type="number" class="span1" value=content.weight min="0" max="100"}}
     <span class="add-on">%</span>
   </div>
+
+  <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      {{selectedDateString}}
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#" {{action "setNone"}}>None</a></li>
+      <li><a href="#" {{action "setOneDay"}}>1 day</a></li>
+      <li><a href="#" {{action "setTwoDays"}}>2 days</a></li>
+      <li><a href="#" {{action "setOneWeek"}}>1 week</a></li>
+    </ul>
+  </div>
+
 {{else}}
   <div class="pipeline-checklist-item-read">
     <span class="checklist-kind">{{kind}}</span>
     <span class="checklist-description">{{description}} </span>
     <span class="checklist-weight">{{weight}}%</span>
+    <span class="checklist-dates"> – {{selectedDateString}}</span>
   </div>
 {{/if}}
+
 
 <div class="checklist-controls">
   {{#if content.isNewItem}}
