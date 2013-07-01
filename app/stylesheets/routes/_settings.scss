@@ -151,6 +151,15 @@ input.api-field {
   h4 {
     margin-top: 0;
   }
+
+  .pipeline-delete-btn {
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover .pipeline-delete-btn {
+    opacity: 1;
+  }
 }
 
 .pipeline-checklist-item {
@@ -166,7 +175,10 @@ input.api-field {
     @include transition(opacity 0.25s);
   }
 
-  &:hover .checklist-controls {
+  &:hover .checklist-controls,
+  &.is-new-item .checklist-controls,
+  &.is-valid .checklist-controls,
+  &.is-editing .checklist-controls {
     opacity: 1;
   }
 }
@@ -200,5 +212,6 @@ input.api-field {
 }
 
 .checklist-weight {
+  width: 200px;
   color: #333;
 }

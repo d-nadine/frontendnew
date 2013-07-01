@@ -43,8 +43,8 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
 
   createPipelineState: ->
     Radium.PipelineState.createRecord
-      name: "Untitled State"
-      position: this.get('length') + 1
+      name: "Pipeline State #{this.get('length') + 1}"
+      position: @get('length') + 1
 
   deletePipelineState: (ps) ->
     ps.deleteRecord()
