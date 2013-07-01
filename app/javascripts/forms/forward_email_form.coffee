@@ -3,16 +3,22 @@ Radium.ForwardEmailForm = Radium.EmailForm.extend
 
   email: null
 
-  defaults: (->
-    subject: "FWD: #{@get('email.subject')}"
-    message: """
+  reset: ->
+    @_super.apply this, arguments
+    @set('subject', "FWD: #{@get('email.subject')}")
+    message = """
     >>>> Forward Email
     #{@get('email.message')}
     """
+    @set('message', message)
+
+  defaults: (->
+    subject: '' 
+    message: ''
     to: []
     cc: []
     bcc: []
-  ).property('email.toList.[]', 'email.message')
+  ).property('email')
 
   isValid: ( ->
     @get('to.length') && @get('subject') && @get('message.length')

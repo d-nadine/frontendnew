@@ -10,10 +10,6 @@ Radium.EmailsShowRoute = Radium.Route.extend
       # by the server when the email is actually sent
       email.set 'sentAt', Ember.DateTime.create()
 
-      # This is used to indicate when the email is actually sent.
-      # It is independant of 'isSaving'
-      email.set 'isSending', true
-
       # FIXME: hax to close the form. The UI property should be
       # kept on the item controller but there is no way 
       # to pass the item controller along from a separate
@@ -25,8 +21,7 @@ Radium.EmailsShowRoute = Radium.Route.extend
       currentlyViewing = @modelFor 'emails.show'
 
       email.one 'didCreate', =>
-        email.set 'isSending', false
-
+        form.reset()
         Ember.run.next =>
           if !currentlyViewing.isIncludedInConversation(email)
             @transitionTo 'emails.show', email
@@ -34,11 +29,9 @@ Radium.EmailsShowRoute = Radium.Route.extend
             $.scrollTo 0, duration: 300
 
       email.one 'becameInvalid', =>
-        email.set 'isSending', false
         Radium.Utils.generateErrorSummary email
 
       email.one 'becameError', =>
-        email.set 'isSending', false
         Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
@@ -56,19 +49,18 @@ Radium.EmailsShowRoute = Radium.Route.extend
       # FIXME: hax for the same reason as above
       form.set 'email.showForwardForm', false
 
-      # This is used to indicate when the email is actually sent.
-      # It is independant of 'isSaving'
-      email.set 'isSending', true
+      email.one 'didCreate', =>
+        form.reset()
+        Ember.run.next =>
+          @transitionTo 'emails.show', email
 
-      Ember.run.next this, (->
-        form.set('isSending', false)
-      ), 2000
+      email.one 'becameInvalid', =>
+        Radium.Utils.generateErrorSummary email
 
-      form.reset()
+      email.one 'becameError', =>
+        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
-
-      @transitionTo 'emails.show', email
 
   setupController: (controller, model) ->
     model.set 'isRead', true
