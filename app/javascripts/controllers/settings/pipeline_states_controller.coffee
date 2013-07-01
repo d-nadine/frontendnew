@@ -37,7 +37,6 @@ Radium.PipelineStateItemController = Ember.ObjectController.extend
     @store.commit()
 
 
-
 Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
   itemController: 'pipelineStateItem'
   sortProperties: ['position']

@@ -1,29 +1,50 @@
-<div class="input-prepend input-append">
-  <div class="btn-group">
-    <button class="btn dropdown-toggle" data-toggle="dropdown">
-      {{kind}}
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      {{#each controller.kinds}}
-        <li><a href="#" {{action "setKind" this}}>{{this}}</a></li>
-      {{/each}}
-    </ul>
+{{#if isEditing}}
+  <div class="input-prepend input-append">
+    <div class="btn-group">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        {{kind}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        {{#each controller.kinds}}
+          <li><a href="#" {{action "setKind" this}}>{{this}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+    {{input type="text" value=content.description placeholder="Add additional item"}}
   </div>
-  {{input type="text" value=content.description placeholder="Add additional item"}}
-</div>
-<div class="input-append">
-  {{input type="number" class="span1" value=content.weight min="0" max="100"}}
-  <span class="add-on">%</span>
-</div>
-{{#if content.isNewItem}}
-  {{#if isValid}}
-    <button class="btn btn-success" {{action "createChecklist"}}>
-      <i class="icon-plus"></i>
-    </button>
-  {{/if}}
+  <div class="input-append">
+    {{input type="number" class="span1" value=content.weight min="0" max="100"}}
+    <span class="add-on">%</span>
+  </div>
 {{else}}
-  <button class="btn btn-danger" {{action "deleteChecklist" this}}>
-    <i class="icon-delete"></i>
-  </button>
+  <div class="pipeline-checklist-item-read">
+    <span class="checklist-kind">{{kind}}</span>
+    <span class="checklist-description">{{description}} </span>
+    <span class="checklist-weight">{{weight}}%</span>
+  </div>
 {{/if}}
+
+<div class="checklist-controls">
+  {{#if content.isNewItem}}
+    {{#if isValid}}
+      <button class="btn btn-success" {{action "createChecklist"}}>
+        <i class="icon-plus"></i>
+      </button>
+    {{/if}}
+  {{else}}
+    <button class="btn btn-danger" {{action "deleteChecklist" this}}>
+      <i class="icon-delete"></i>
+    </button>
+
+    {{#if isEditing}}
+      <button class="btn" {{action "cancel" this}}>Cancel</button>
+    {{else}}
+      <button class="btn" {{action "edit" this}}>Edit</button>
+    {{/if}}
+
+    {{#if isValid}}
+      <button class="btn btn-success" {{action "save" this}}>Save</button>
+    {{/if}}
+  {{/if}}
+</div>

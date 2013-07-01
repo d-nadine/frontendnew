@@ -154,11 +154,51 @@ input.api-field {
 }
 
 .pipeline-checklist-item {
+  margin: 0 0 5px;
+  border-bottom: 1px solid rgba(black, 0.1);
+
   .btn {
+    vertical-align: top;
+  }
+
+  .checklist-controls {
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover .checklist-controls {
+    opacity: 1;
+  }
+}
+
+.checklist-controls {
+  display: inline-block;
+  vertical-align: middle;
+
+  .is-editing & {
     vertical-align: top;
   }
 }
 
+.pipeline-checklist-item-read {
+  padding: 5px 0;
+  display: inline-block;
+  line-height: 30px;
+}
+
 .pipeline-state-create {
   margin: 20px;
+}
+
+.checklist-kind {
+  width: 120px;
+  color: #333;
+}
+
+.checklist-description {
+  margin: 0 20px;
+}
+
+.checklist-weight {
+  color: #333;
 }
