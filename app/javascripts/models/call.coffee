@@ -27,8 +27,9 @@ Radium.Call = Radium.Model.extend Radium.CommentsMixin,
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
-  # FIXME: this should be a computed property
-  overdue: DS.attr('boolean')
+  overdue: (->
+    @get('finishBy').isBeforeToday()
+  ).property('finishBy')
 
   time: Ember.computed.alias('finishBy')
 

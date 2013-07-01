@@ -44,4 +44,4 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin
     item instanceof Radium.Email
 
   filterUntracked: (item) ->
-    item.get('isTracked') is false
+    item.get('isPersonal') is false

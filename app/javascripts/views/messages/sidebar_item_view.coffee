@@ -6,7 +6,7 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     'controller.isSelected'
     'controller.isChecked'
     'controller.hasTasks'
-    'controller.isTracked:is-tracked:is-untracked'
+    'controller.isPersonal:is-personal:is-impersonal'
     'controller.isRead:is-read:is-unread'
   ]
 

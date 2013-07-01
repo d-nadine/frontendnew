@@ -16,8 +16,9 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   message: DS.attr('string')
   read: DS.attr('boolean')
   sentAt: DS.attr('datetime')
-  isTracked: DS.attr('boolean')
+  isPersonal: DS.attr('boolean')
   isRead: DS.attr('boolean')
+  isPersonal: DS.attr('boolean')
 
   sender: ( ->
     @get('_senderUser') ||

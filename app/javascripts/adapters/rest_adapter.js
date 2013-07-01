@@ -66,9 +66,12 @@ Radium.RESTAdapter.configure('plurals',{
 
 Radium.RESTAdapter.registerTransform('object', {
   serialize: function(deserialized) {
-    if(Ember.isNone(deserialized)) return null;
+    if(Ember.isNone(deserialized)){
+      return null;
+    }
 
-    var underscored = {}
+    var underscored = {};
+
     for(var key in deserialized) {
       underscored[key.underscore()] = deserialized[key];
     }
@@ -129,7 +132,7 @@ Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   reason: { key: 'lost_because' },
-  forecast: { embedded: 'always' },
+  checklist: { embedded: 'always' },
 });
 
 Radium.RESTAdapter.map('Radium.ChecklistItem', {
@@ -150,8 +153,8 @@ Radium.RESTAdapter.map('Radium.PhoneNumber', {
 Radium.RESTAdapter.map('Radium.Email', {
   message: {key: 'body'},
   isPublic: {key: 'public'},
-  isTracked: {key: 'personal'},
   isRead: {key: 'read'},
+  isPersonal: {key: 'personal'},
 });
 
 Radium.RESTAdapter.map('Radium.EmailAddress', {

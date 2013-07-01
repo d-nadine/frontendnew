@@ -25,11 +25,11 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
-    @get('forecast').clear()
+    @get('checklist').clear()
 
     return unless @get('form')
 
-    @get('forecast').forEach (item) =>
+    @get('checklist').forEach (item) =>
       item.set('isFinished', false)
 
   isValid: ( ->
@@ -51,7 +51,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
   create:  ->
     deal = Radium.Deal.createRecord @get('data')
 
-    @get('forecast').forEach (item) =>
-      deal.get('forecast').createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
+    @get('checklist').forEach (item) =>
+      deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
 
     deal

@@ -5,6 +5,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
   showMeta : false
 
+  isPersonalDidChange: ( ->
+    return if @get('isNew')
+    return if @get('isSaving')
+    @get('store').commit()
+  ).observes('isPersonal')
+
   toggleFormBox: ->
     @toggleProperty 'showFormBox'
 

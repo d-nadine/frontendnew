@@ -4,7 +4,7 @@ Radium.DealsNewRoute = Ember.Route.extend
     controller.set 'model', dealForm 
     controller.get('model').reset()
     controller.set 'model.user', @controllerFor('currentUser').get('model')
-    dealForm.get('forecast').pushObjects @controllerFor('accountSettings').get('dealChecklist').map (checkListItem) ->
+    dealForm.get('checklist').pushObjects @controllerFor('accountSettings').get('dealChecklist').map (checkListItem) ->
                                                                           Ember.Object.create(checkListItem)
     controller.set 'status', @controllerFor('accountSettings').get('negotiatingStates.firstObject')
 
@@ -16,5 +16,5 @@ Radium.DealsNewRoute = Ember.Route.extend
     description: ''
     todo: null
     email: null
-    forecast: Ember.A()
+    checklist: Ember.A()
   ).property()

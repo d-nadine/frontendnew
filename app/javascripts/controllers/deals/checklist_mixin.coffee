@@ -15,10 +15,10 @@ Radium.ChecklistMixin = Ember.Mixin.create
     newRecord = if @get('isNew')
                   Ember.Object.create(newItem)
                 else
-                  @get('forecast').createRecord(newItem)
+                  @get('checklist').createRecord(newItem)
 
     if @get('isNew')
-      @get('forecast').addObject newRecord
+      @get('checklist').addObject newRecord
 
     @set('newItemDescription', '')
     @set('newItemWeight', '')

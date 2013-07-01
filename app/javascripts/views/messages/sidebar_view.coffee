@@ -13,7 +13,7 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
 
   scrollToItem: (item) ->
     modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
-    element = @$(modelSelector)
+    element = Ember.$(modelSelector)
 
     position = element.offset().top
     scroller = @$('.scroller')

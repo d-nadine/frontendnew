@@ -5,14 +5,16 @@
   </div>
 {{else}}
   <div class="block email-card message-card">
-    <div class="adder">
-      <div class="arrow"></div>
-      {{#if showFormBox}}
-        <i class="icon-minus" {{action toggleFormBox}}></i>
-      {{else}}
-        <i class="icon-plus" {{action toggleFormBox}}></i>
-      {{/if}}
-    </div>
+    {{#unless isPersonal}}
+      <div class="adder">
+        <div class="arrow"></div>
+        {{#if showFormBox}}
+          <i class="icon-minus" {{action toggleFormBox}}></i>
+        {{else}}
+          <i class="icon-plus" {{action toggleFormBox}}></i>
+        {{/if}}
+      </div>
+    {{/unless}}
 
     <div class="header">
       {{#if trackable}}
@@ -70,7 +72,9 @@
 
       <hr />
 
-      {{render 'related_tasks' tasks}}
+      {{#unless isPersonal}}
+        {{render 'related_tasks' tasks}}
+      {{/unless}}
 
       <div class="actions text-right">
         <a {{action toggleReplyForm}} class="btn btn-link">
