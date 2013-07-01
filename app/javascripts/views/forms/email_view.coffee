@@ -14,8 +14,8 @@ Radium.FormsEmailView = Radium.FormView.extend
   noContent: ( ->
     return unless @get('controller.isSubmitted')
 
-    not (@get('controller.subject') || @get('controller.message'))
-  ).property('controller.isSubmitted', 'controller.subject', 'controller.message')
+    not @get('controller.message.length')
+  ).property('controller.isSubmitted', 'controller.message')
 
   to: Radium.AutocompleteView.extend
     classNameBindings: [':email']
