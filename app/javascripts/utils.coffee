@@ -20,9 +20,9 @@ notify: (message, options) ->
 
     notification.fadeIn('fast', ( ->
       setTimeout(( ->
-        # notification.fadeOut('fast', ->
-        #   $('#alerts').remove()
-        # )
+        notification.fadeOut('fast', ->
+          $('#alerts').remove()
+        )
       ), settings.delay)
     ))
 
