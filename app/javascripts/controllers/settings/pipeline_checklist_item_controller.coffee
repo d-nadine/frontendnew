@@ -16,6 +16,10 @@ Radium.PipelineChecklistItemController = Ember.ObjectController.extend
   save: (checklist) ->
     checklist.get('transaction').commit()
     @set('isEditing', false)
+    @send('flashMessage',
+      type: 'alert-success'
+      message: "Pipeline checklist updated!"
+    )
 
   cancel: (checklist) ->
     @get('content.transaction').rollback()

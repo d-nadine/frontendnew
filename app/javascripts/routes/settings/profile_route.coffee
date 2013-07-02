@@ -9,6 +9,10 @@ Radium.SettingsProfileRoute = Radium.Route.extend
 
   events:
     save: (user) ->
+      @send('flashMessage',
+        type: 'alert-success'
+        message: "Profile settings saved!"
+      )
       user.get('transaction').commit()
 
     cancel: (user) ->
