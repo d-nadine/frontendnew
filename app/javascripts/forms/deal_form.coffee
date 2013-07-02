@@ -16,6 +16,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
 
   reset: ->
     @_super.apply this, arguments
+    @set('isSubmitted', false)
     @set('name', '')
     @set('description', '')
     @set('contact', null)

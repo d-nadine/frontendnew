@@ -14,7 +14,7 @@ Radium.DealStatusForm = Radium.Form.extend
 
 Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   needs: ['accountSettings']
-  statuses: Ember.computed.alias('controllers.accountSettings.negotiatingStates')
+  statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
   isValid: true
 
   setForm: ->

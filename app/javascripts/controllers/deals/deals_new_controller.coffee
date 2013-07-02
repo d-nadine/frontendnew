@@ -1,14 +1,6 @@
-Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin,
+Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   needs: ['contacts','users', 'accountSettings']
   statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
-  pipelineStateChecklists: Ember.computed.alias('controllers.accountSettings.pipelineStateChecklists')
-  newItemDescription: ''
-  newItemWeight: null
-  newItemFinished: true
-  newItemDate: 0
-  newItemKind: 'todo'
-  hasContact: Ember.computed.bool 'contact'
-
   contacts: ( ->
     @get('controllers.contacts').filter (contact) ->
       contact.get('status') != 'personal'
