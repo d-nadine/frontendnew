@@ -1,6 +1,6 @@
 Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin,
   needs: ['contacts','users', 'accountSettings']
-  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
+  statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
   pipelineStateChecklists: Ember.computed.alias('controllers.accountSettings.pipelineStateChecklists')
   newItemDescription: ''
   newItemWeight: null
@@ -21,7 +21,7 @@ Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin
                                                 Ember.Object.create checkListItem.serialize()
 
     checklist
-  ).property('state')
+  ).property('status')
 
   statusesDidChange: ( ->
     return unless @get('statuses.length')
