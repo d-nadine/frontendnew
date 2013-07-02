@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+  <h3>Are You Sure?</h3>
+</div>
+
+<div class="modal-body">
+  <p>Are you sure you want to change the status?  Changing the status will remove the current checklist.</p>
+  <button class="btn btn-large btn-danger btn-block" {{action confirmStatusChange}}>Change Status</button>
+</div>
+
+<div class="modal-footer">
+  <a href="#" class="btn" {{action close}}>Cancel</a>
+</div>

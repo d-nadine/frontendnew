@@ -27,6 +27,20 @@ Radium.DealRoute = Radium.Route.extend
         into: 'application'
         outlet: 'modal'
 
+    confirmStatusChange: ->
+      commit = @get('statusChangeCommit')
+      controller = @get('statusChangeController')
+      commit.call controller
+      @send 'close'
+
+    showStatusChangeConfirm: (controller, commit) ->
+      # FIXME: hacky way of holding the commit method for later
+      @set 'statusChangeController', controller
+      @set 'statusChangeCommit', commit
+      @render 'deal/confirm_status_change',
+        into: 'application'
+        outlet: 'modal'
+
     saveChecklist: (deal) ->
       deal.one 'becameInvalid', =>
         Radium.Utils.generateErrorSummary deal

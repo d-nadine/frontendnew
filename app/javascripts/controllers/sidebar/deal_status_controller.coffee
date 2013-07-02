@@ -17,6 +17,13 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
   isValid: true
 
+  commit: ->
+    if @get('model.status') == @get('form.status')
+      @set 'isEditing', false
+      return
+
+    @send 'showStatusChangeConfirm', this, @_super
+
   setForm: ->
     @set 'form.status', @get('model.status')
 
