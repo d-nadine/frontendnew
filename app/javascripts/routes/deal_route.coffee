@@ -27,7 +27,13 @@ Radium.DealRoute = Radium.Route.extend
         into: 'application'
         outlet: 'modal'
 
-    saveChecklist: ->
+    saveChecklist: (deal) ->
+      deal.one 'becameInvalid', =>
+        Radium.Utils.generateErrorSummary deal
+
+      deal.one 'becameError', =>
+        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+
       @get('store').commit()
       @send 'close'
 

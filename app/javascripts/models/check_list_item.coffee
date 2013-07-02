@@ -3,3 +3,4 @@ Radium.ChecklistItem = Radium.Model.extend
   description: DS.attr('string')
   weight: DS.attr('number')
   date: DS.attr('number')
+  isFinished: DS.attr('boolean')
