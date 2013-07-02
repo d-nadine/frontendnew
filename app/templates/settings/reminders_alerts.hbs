@@ -61,16 +61,15 @@
 
   <fieldset>
     <legend>Alerts</legend>
-    <p {{bindAttr class="controller.leadIgnoredDisabled:control-disabled"}}>
+    <p {{bindAttr class=":control-inline-text controller.leadIgnoredDisabled:control-disabled"}}>
       If a lead is ignored for more than {{input type="number"
         value=leadIgnoredDays
         placeholder="1"
         class="input-mini"
         disabledBinding="controller.leadIgnoredDisabled"}}
          days highlight that lead
-      {{view Radium.FormEnabledSwitchView isCheckedBinding="leadIgnoredEnabled"}}
-    </p>
-    <p {{bindAttr class="clientIgnoredDisabled:control-disabled"}}>
+    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="leadIgnoredEnabled"}}
+    <p {{bindAttr class=":control-inline-text controller.clientIgnoredDisabled:control-disabled"}}>
       If a client is ignored for more than
       {{input type="number"
         value=clientIgnoredDays
@@ -78,10 +77,8 @@
         class="input-mini"
         disabledBinding="controller.clientIgnoredDisabled"}}
        days highlight that lead
-
-      {{view Radium.FormEnabledSwitchView isCheckedBinding="clientIgnoredEnabled"}}
-    </p>
-    <p {{bindAttr class="taskIgnoredDisabled:control-disabled"}}>
+    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="clientIgnoredEnabled"}}
+    <p {{bindAttr class=":control-inline-text controller.taskIgnoredDisabled:control-disabled"}}>
       If a task is ignored for more than
       {{input type="number"
         value=taskIgnoredDays
@@ -89,8 +86,7 @@
         class="input-mini"
         disabledBinding="controller.taskIgnoredDisabled"}}
        days highlight that lead
-      {{view Radium.FormEnabledSwitchView isCheckedBinding="taskIgnoredEnabled"}}
-    </p>
+    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="taskIgnoredEnabled"}}
   </fieldset>
   {{/with}}
   <div class="form-actions">
