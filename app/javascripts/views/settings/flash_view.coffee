@@ -7,12 +7,18 @@ Radium.SettingsFlashView = Ember.View.extend
   templateName: 'settings/flash'
 
   didInsertElement: ->
-    @$()[0].outerHeight
+    @$()[0].offsetWidth
     @$().addClass('in')
 
-    setTimeout(=>
+    timer = setTimeout(=>
       @close()
     , 4000)
+
+    @set('timer', timer)
+
+  willDestroyElement: ->
+    clearTimeout(@get('timer'))
+    @$().off($.support.transition.end)
 
   # For this to work, ensure that the flash message is placed in a `flash` outlet
   close: ->
