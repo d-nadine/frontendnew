@@ -1,17 +1,37 @@
 Radium.AccountSettingsController = Radium.ObjectController.extend
-  preNegotiatingStates: [
+  checklistMap: Ember.Map.create()
+
+  destroy: ->
+    @get('checklistMap').destroy() if @get('checklistMap')
+    @_super.apply this, arguments
+
+  preStates: [
     'unpublished'
   ]
 
-  postNegotiatingStates: [
+  postStates: [
     'closed'
     'lost'
   ]
 
-  dealStates: (->
-    preNegotiatingStates = @get 'preNegotiatingStates'
-    negotiatingStates = @get('negotiatingStates') || []
-    postNegotiatingStates = @get 'postNegotiatingStates'
+  pipelineStateChecklists: ( ->
+    checklistMap = @get('checklistMap')
+    @get('workflow').forEach (state) =>
+      checklistMap.set(state.get('name').toLowerCase(), state.get('checklist'))
 
-    preNegotiatingStates.concat(negotiatingStates.concat(postNegotiatingStates))
-  ).property('negotiatingStates.[]')
+    checklistMap
+  ).property('workflow.[]')
+
+  workflowStates: ( ->
+    @get('workflow').map((state) =>
+      state.get('name')
+    ) || []
+  ).property('workflow.[]')
+
+
+  dealStates: (->
+    postStates = @get 'postStates'
+    workflowStates = @get 'workflowStates'
+
+    workflowStates.concat(postStates).map (state) -> state.capitalize()
+  ).property('workflowStates.[]')

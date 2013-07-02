@@ -22,7 +22,7 @@ Ember.Application.initializer
       accountController.set('model', user.get('account'))
 
       accountSettingsController = container.lookup('controller:accountSettings')
-      accountSettingsController.set('model', user.get('account.settings'))
+      accountSettingsController.set('model', user.get('account'))
 
       Radium.advanceReadiness()
     ), errHanler).then(null, errHanler)

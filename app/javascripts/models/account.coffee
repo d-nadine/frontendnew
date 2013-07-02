@@ -1,3 +1,3 @@
 Radium.Account = Radium.Model.extend
-  settings: DS.attr('object')
+  workflow: DS.hasMany('Radium.Workflow')
   users: DS.hasMany('Radium.User')

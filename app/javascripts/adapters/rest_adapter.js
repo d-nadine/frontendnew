@@ -100,7 +100,6 @@ Radium.RESTAdapter.registerTransform('array', {
   },
 });
 
-
 Radium.RESTAdapter.registerTransform('datetime',  {
  deserialize: function(serialized) {
    if(serialized){
@@ -113,6 +112,14 @@ Radium.RESTAdapter.registerTransform('datetime',  {
       return deserialized.toFullFormat();
     }
  }
+});
+
+Radium.RESTAdapter.map('Radium.Account', {
+  workflow: {embedded: 'always'},
+});
+
+Radium.RESTAdapter.map('Radium.Workflow', {
+  checklist: {key: 'check_list', embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Contact', {
