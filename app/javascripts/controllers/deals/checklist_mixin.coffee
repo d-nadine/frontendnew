@@ -48,6 +48,8 @@ Radium.ChecklistMixin = Ember.Mixin.create
 
     if @get('isNew')
       @get('checklist').addObject newRecord
+    else
+      @get('store').commit()
 
     @set('newItemDescription', '')
     @set('newItemWeight', '')

@@ -19,6 +19,8 @@ Radium.DealController = Radium.ObjectController.extend Radium.ChecklistMixin,
   newItemDescription: ''
   newItemWeight: 0
   newItemFinished: false
+  newItemDate: 0
+  newItemKind: 'todo'
 
   contact: Ember.computed.alias('model.contact')
 
