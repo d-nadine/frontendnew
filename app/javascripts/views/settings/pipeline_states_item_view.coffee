@@ -3,4 +3,8 @@ Radium.PipelineStatesItemView = Ember.View.extend
   templateName: 'settings/pipeline_states_item'
 
   didInsertElement: ->
-    @$('.inline-field').focus() if @get('content.isNew')
+    if @get('content.isNew')
+      @$().addClass('new')
+      @$()[0].offsetWidth
+      @$().addClass('out')
+      @$('.inline-field').focus()

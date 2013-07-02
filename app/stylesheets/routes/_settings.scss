@@ -166,7 +166,7 @@ input.api-field {
   margin: 0 0 5px;
   border-bottom: 1px solid rgba(black, 0.1);
 
-  .btn {
+  .btn, .btn-group {
     vertical-align: top;
   }
 
@@ -185,7 +185,7 @@ input.api-field {
 
 .checklist-controls {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
 
   .is-editing & {
     vertical-align: top;
@@ -215,4 +215,14 @@ input.api-field {
 .checklist-dates {
   width: 200px;
   color: #333;
+}
+
+// Break me into my own file
+.new {
+  background-color: lightyellow;
+  @include transition(background-color 0.75s ease-out);
+
+  &.out {
+    background-color: #fff;
+  }
 }
