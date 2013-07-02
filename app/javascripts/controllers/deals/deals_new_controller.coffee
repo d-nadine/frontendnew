@@ -5,6 +5,8 @@ Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin
   newItemDescription: ''
   newItemWeight: null
   newItemFinished: true
+  newItemDate: 0
+  newItemKind: 'todo'
   hasContact: Ember.computed.bool 'contact'
 
   contacts: ( ->
@@ -56,3 +58,6 @@ Radium.DealsNewController = Radium.ObjectController.extend Radium.ChecklistMixin
       Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
 
     @get('store').commit()
+
+  removeAdditionalItem: (item) ->
+    @get('checklist').removeObject item

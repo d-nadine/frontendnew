@@ -96,6 +96,15 @@
       margin-top: 10px;
       margin-bottom: 10px;
       tr{
+        td.kind{
+          text-align: right;
+          width: 93px;
+          ul.dropdown-menu{
+            li a{
+              text-align: left;
+            }
+          }
+        }
         td{
           a.btn, a.additional{
             position: static;

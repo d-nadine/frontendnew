@@ -2,9 +2,9 @@
   <div class="checklist-items">
     <table>
       <tbody>
-        {{#each checklist itemController="checklistItem"}}
+        {{#each checklist}}
           <tr>
-            <td>{{checklistKind kind}}</td>
+            <td class="kind">{{checklistKind kind}}</td>
             <td class="check">
               <label>
                 {{view Ember.Checkbox checkedBinding="isFinished"}}
@@ -22,7 +22,19 @@
           </tr>
         {{/each}}
         <tr>
-          <td>&nbsp;</td>
+          <td class="kind">
+            <div class="btn-group">
+              <button class="btn dropdown-toggle" data-toggle="dropdown">
+                {{newItemKind}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                {{#each controller.kinds}}
+                  <li><a href="#" {{action setKind this}}>{{this}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+          </td>
           <td>
             <label>
               {{view Ember.Checkbox disabled=true checkedBinding="controller.newItemFinished" class="additional-check"}}
@@ -31,6 +43,22 @@
           </td>
           <td>
             {{view view.newItemWeight type="number" max="100" class="field input-mini"}}%
+          </td>
+          <td>
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                {{selectedDateText}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#" {{action setItemDate 0}}>None</a></li>
+                <li><a href="#" {{action setItemDate 1}}>1 day</a></li>
+                <li><a href="#" {{action setItemDate 2}}>2 days</a></li>
+                <li><a href="#" {{action setItemDate 7}}>1 week</a></li>
+              </ul>
+            </div>
+          </td>
+          <td>
             {{#if view.showAddButton }}
             <a href="#" {{action createNewItem target="view"}} class="btn">
               <i class="icon-plus"></i>
