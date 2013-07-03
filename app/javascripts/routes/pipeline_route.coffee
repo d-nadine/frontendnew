@@ -2,7 +2,7 @@ Radium.PipelineRoute = Radium.Route.extend
   events:
     selectGroup: (group) ->
       @controllerFor('pipeline').set('selectedGroup', group.get('title'))
-      @transitionTo 'pipeline.workflow'
+      @transitionTo 'pipeline.index'
 
   model: ->
     model = @modelFor 'pipeline'

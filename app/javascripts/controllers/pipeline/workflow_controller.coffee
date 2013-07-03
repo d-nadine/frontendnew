@@ -1,6 +1,6 @@
 require 'mixins/controllers/bulk_action_controller_mixin'
 
-Radium.PipelineWorkflowController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
+Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   needs: ['workflowGroupItem']
   filteredDeals: null
 

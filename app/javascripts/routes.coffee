@@ -18,9 +18,8 @@ Radium.Router.map ->
       @route 'sent', path: '/:email_id/sent'
 
   @resource 'pipeline', ->
-    @route 'leads'
+    @route 'index'
     @route 'unpublished'
-    @route 'workflow'
     @route 'closed'
     @route 'lost'
     @route 'opendeals'
