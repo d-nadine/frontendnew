@@ -32,8 +32,15 @@
   .is-past-payment {
     color: red;
   }
-
+  .show-results{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    top: 20px;
+  }
   table.totals{
+    display: inline-block;
+    width: 95%;
     th:not(.title), td:not(.title){
       text-align: center;
       width: 10%;

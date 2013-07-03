@@ -34,6 +34,19 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
     ), 0)
   ).property('length')
 
+  isWorkflow: ( ->
+    title = @get('content.title')
+    not ['closed', 'lost', 'unpublished'].contains(title)
+  ).property('content.title')
+
+  isClosed: ( ->
+    @get('content.title').toLowerCase() == 'closed'
+  ).property('content.title')
+
+  isLost: ( ->
+    @get('content.title').toLowerCase() == 'lost'
+  ).property('content.title')
+
   title: ( ->
     "#{@get('content.title')} - (#{@get('length')})"
   ).property('status', 'deals.length')
