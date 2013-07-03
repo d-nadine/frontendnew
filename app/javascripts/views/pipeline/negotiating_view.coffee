@@ -1,2 +1,2 @@
 require 'views/pipeline/pipeline_base_view'
-Radium.PipelineNegotiatingView = Radium.PipelineViewBase.extend()
+Radium.PipelineWorkflowView = Radium.PipelineViewBase.extend()

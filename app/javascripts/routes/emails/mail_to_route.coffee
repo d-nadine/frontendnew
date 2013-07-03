@@ -23,4 +23,3 @@ Radium.EmailsMailToRoute = Ember.Route.extend
     form.set 'showSubject', true
     form.get('to').pushObject(model)
     @transitionTo 'emails.new'
-

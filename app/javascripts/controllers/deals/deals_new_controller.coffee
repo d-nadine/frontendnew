@@ -7,7 +7,15 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
   ).property('controllers.contacts.[]')
 
   checklist: ( ->
-    selectedChecklist = @get('pipelineStateChecklists').get(@get('status').toLowerCase())
+    status = @get('status').toLowerCase()
+
+    Ember.assert("No pipeline state checklists exist", !!@get('pipelineStateChecklists.length'))
+
+    selectedChecklist = if status == 'unpublished'
+                          @get('pipelineStateChecklists').get(@get('statuses.firstObject').toLowerCase())
+                        else
+                          @get('pipelineStateChecklists').get(status)
+
     checklist = @get('model.checklist')
     checklist.clear()
 
@@ -49,6 +57,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     deal.one 'becameError', (result)  ->
       Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
 
+    debugger
     @get('store').commit()
 
   removeAdditionalItem: (item) ->

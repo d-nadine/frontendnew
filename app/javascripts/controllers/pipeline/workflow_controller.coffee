@@ -1,12 +1,12 @@
 require 'mixins/controllers/bulk_action_controller_mixin'
 
-Radium.PipelineNegotiatingController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
-  needs: ['pipelineNegotiatingGroup']
+Radium.PipelineWorkflowController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
+  needs: ['workflowGroupItem']
   filteredDeals: null
 
-  selectedGroup: Ember.computed.alias 'controllers.pipelineNegotiatingGroup.selectedGroup'
+  selectedGroup: Ember.computed.alias 'controllers.workflowGroupItem.selectedGroup'
 
-  title: 'Negotiating'
+  title: 'Pipeline State'
 
   currentDeals: ( ->
     return unless @get('workflowDeals.length')

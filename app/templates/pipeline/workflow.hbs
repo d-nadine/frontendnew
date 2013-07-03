@@ -1,6 +1,6 @@
 {{partial 'pipeline/header'}}
-<div id="negotiating-status">
-  {{#each groups itemController="pipelineNegotiatingGroup"}}
+<div id="workflow-status">
+  {{#each groups itemController="workflowGroupItem"}}
     <div class="group">
       <div class="meta">
         <div class="expand">
@@ -28,7 +28,7 @@
       </div>
       <div class="deals">
         {{#if isExpanded}}
-          {{render 'pipeline/negotiating_deals' deals}}
+          {{render 'pipeline/workflow_deals' deals}}
         {{/if}}
       </div>
     </div>

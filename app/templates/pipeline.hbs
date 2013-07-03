@@ -1,11 +1,7 @@
 <div id="widget-block" class="block">
   <ul class="breadcrumb" id="pipeline-widget">
-    <li class="unpublished">
-      {{#linkTo pipeline.unpublished}}Unpublished{{/linkTo}} {{badge unpublished.length style="info"}}
-      <span class="divider">&gt;</span>
-    </li>
     {{#each workflowGroups}}
-      <li class="negotiating">
+      <li class="workflow">
         <a {{action selectGroup this}} href="#">{{title}}</a> {{badge length style="warning"}}
         <span class="divider">&gt;</span>
       </li>
@@ -16,6 +12,10 @@
     </li>
     <li class="lost">
       {{#linkTo pipeline.lost}}Lost{{/linkTo}} {{badge lost.length style="important"}}
+      <span class="divider">&gt;</span>
+    </li>
+    <li class="unpublished">
+      {{#linkTo pipeline.unpublished}}Unpublished{{/linkTo}} {{badge unpublished.length style="info"}}
     </li>
   </ul>
 </div>

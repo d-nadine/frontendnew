@@ -1,4 +1,4 @@
-Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
+Radium.WorkflowGroupItemController = Radium.ArrayController.extend
   needs: ['pipeline']
 
   workflowTotal: Ember.computed.alias('controllers.pipeline.content.workflowTotal')
