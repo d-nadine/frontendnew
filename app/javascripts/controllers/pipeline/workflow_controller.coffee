@@ -6,7 +6,7 @@ Radium.PipelineWorkflowController = Radium.ObjectController.extend Radium.BulkAc
 
   selectedGroup: Ember.computed.alias 'controllers.workflowGroupItem.selectedGroup'
 
-  title: 'Pipeline State'
+  title: 'PIPELINE'
 
   currentDeals: ( ->
     return unless @get('workflowDeals.length')

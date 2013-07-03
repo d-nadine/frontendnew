@@ -32,6 +32,17 @@
   .is-past-payment {
     color: red;
   }
+
+  table.totals{
+    th:not(.title), td:not(.title){
+      text-align: center;
+      width: 10%;
+    }
+    td.title{
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
 
 #pipeline-widget {
