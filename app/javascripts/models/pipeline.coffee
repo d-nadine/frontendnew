@@ -15,7 +15,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   settings: null
   workflowStates: ( ->
     @get('settings.workflowStates')
-  ).property('settings.model', 'settings.workflowStates')
+  ).property('settings.model', 'settings.workflowStates.[]')
 
   workflowDeals: (->
     statuses = @get 'workflowStates'
@@ -27,7 +27,6 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   ).property('workflowStates.[]', 'workflowDeals.[]', 'workflowDeals.@each.status')
 
   workflowGroups: (->
-    #FIXME: Potential memory leak.  Nothing getting destroyed
     deals = @get 'workflowDeals'
     return unless deals
 

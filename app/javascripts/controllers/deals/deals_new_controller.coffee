@@ -57,7 +57,6 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     deal.one 'becameError', (result)  ->
       Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
 
-    debugger
     @get('store').commit()
 
   removeAdditionalItem: (item) ->

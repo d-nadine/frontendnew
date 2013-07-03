@@ -17,12 +17,32 @@ Radium.ChangeStatusForm = Radium.Form.extend
     @set('todo', null)
     # @get('deals').setEach 'isChecked', false
 
-  commit: ->
-    @get('deals').forEach (item) =>
-      item.set('status', @get('status'))
+  commit:  ->
+    promise = Ember.Deferred.promise (deferred) =>
+      deferred.resolve() unless @get('deals.length')
 
-      unless Ember.isEmpty @get('todo')
-        todo = Radium.Todo.createRecord @get('data')
-        todo.set 'reference', item
+      transaction = @get('store').transaction()
 
-    @get('store').commit()
+      @get('deals').forEach (item) =>
+        item.set('status', @get('status'))
+
+        unless Ember.isEmpty @get('todo')
+          todo = Radium.Todo.createRecord @get('data')
+          todo.set 'reference', item
+
+        item.one 'didUpdate', =>
+          deferred.resolve() if item == @get('deals.lastObject')
+
+        item.one 'becameInvalid', (result) =>
+          Radium.Utils.generateErrorSummary deal
+          deferred.reject()
+
+        item.one 'becameError', (result)  ->
+          Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
+          deferred.reject()
+
+        transaction.add item
+
+      transaction.commit()
+
+    promise
