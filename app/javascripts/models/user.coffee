@@ -36,7 +36,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
     @get('contacts').filterProperty 'status', 'lead'
   ).property('contact.[]'),
 
-  negotiatingDeals: ( ->
+  workflowDeals: ( ->
     @get('deals').filter (deal) ->
       deal.get('status') != 'closed' || deal.get('status') != 'lost'
   ).property('deals.[]')

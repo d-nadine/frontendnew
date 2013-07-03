@@ -2,7 +2,7 @@ Radium.UserController = Radium.ObjectController.extend
   # FIXME: only allow current user to update their own details
   isEditable: true
 
-  negotiatingDealsTotal: Radium.computed.total 'negotiatingDeals'
+  workflowDealsTotal: Radium.computed.total 'workflowDeals'
 
   closedDealsTotal: Radium.computed.total 'closedDeals'
 

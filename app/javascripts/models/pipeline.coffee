@@ -1,7 +1,7 @@
 require 'lib/radium/groupable'
 require 'lib/radium/groupable_with_defaults'
 
-NegotiatingGroup = Ember.ArrayProxy.extend
+WorkflowGroup = Ember.ArrayProxy.extend
   title: (->
     @get('firstObject.status')
   ).property('firstObject.status')
@@ -13,37 +13,37 @@ NegotiatingGroup = Ember.ArrayProxy.extend
 Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   content: []
   settings: null
-  negotiatingStates: ( ->
-    @get('settings.negotiatingStates')
-  ).property('settings.model', 'settings.negotiatingStates')
+  workflowStates: ( ->
+    @get('settings.workflowStates')
+  ).property('settings.model', 'settings.workflowStates')
 
-  negotiatingDeals: (->
-    statuses = @get 'negotiatingStates'
+  workflowDeals: (->
+    statuses = @get 'workflowStates'
 
     return unless statuses
 
     Radium.Deal.filter (deal) ->
       statuses.indexOf(deal.get('status')) != -1
-  ).property('negotiatingStates.[]', 'negotiatingDeals.[]', 'negotiatingDeals.@each.status')
+  ).property('workflowStates.[]', 'workflowDeals.[]', 'workflowDeals.@each.status')
 
-  negotiatingGroups: (->
+  workflowGroups: (->
     #FIXME: Potential memory leak.  Nothing getting destroyed
-    deals = @get 'negotiatingDeals'
+    deals = @get 'workflowDeals'
     return unless deals
 
-    states = @get('settings.negotiatingStates')
+    states = @get('settings.workflowStates')
 
     @group deals, states
-  ).property('negotiatingDeals.[]')
+  ).property('workflowDeals.[]')
 
-  groupType: NegotiatingGroup
+  groupType: WorkflowGroup
 
   groupBy: (deal) ->
     deal.get('status').replace(/\W+/, "_")
 
-  negotiatingTotal: (->
-    @get 'negotiatingDeals.length'
-  ).property('negotiatingDeals.length')
+  workflowTotal: (->
+    @get 'workflowDeals.length'
+  ).property('workflowDeals.length')
 
   closed: (->
     Radium.Deal.filter (deal) ->

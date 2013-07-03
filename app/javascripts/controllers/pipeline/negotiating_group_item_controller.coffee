@@ -1,7 +1,7 @@
 Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
   needs: ['pipeline']
 
-  negotiatingTotal: Ember.computed.alias('controllers.pipeline.content.negotiatingTotal')
+  workflowTotal: Ember.computed.alias('controllers.pipeline.content.workflowTotal')
   selectedGroup: Ember.computed.alias('controllers.pipeline.selectedGroup')
 
   deals: Ember.computed.alias('content')
@@ -18,13 +18,13 @@ Radium.PipelineNegotiatingGroupController = Radium.ArrayController.extend
   ).observes('selectedGroup', 'deals.[]')
 
   percentage: (->
-    total = @get 'negotiatingTotal'
+    total = @get 'workflowTotal'
     length = @get 'length'
 
     return 0 unless total || total == 0 || length == 0
 
     Math.floor((length / total) * 100)
-  ).property('negotiatingTotal', 'length')
+  ).property('workflowTotal', 'length')
 
   total: (->
     return 0 if @get('length') == 0

@@ -9,21 +9,21 @@ Radium.PipelineNegotiatingController = Radium.ObjectController.extend Radium.Bul
   title: 'Negotiating'
 
   currentDeals: ( ->
-    return unless @get('negotiatingDeals.length')
+    return unless @get('workflowDeals.length')
 
-    @get('negotiatingDeals').filter (deal) =>
+    @get('workflowDeals').filter (deal) =>
       deal.get('status') == @get('selectedGroup')
-  ).property('selectedGroup', 'negotiatingDeals.[]')
+  ).property('selectedGroup', 'workflowDeals.[]')
 
   checkedContent: ( ->
-    @get('negotiatingDeals').filterProperty 'isChecked'
+    @get('workflowDeals').filterProperty 'isChecked'
   ).property('currentDeals.@each.isChecked')
 
   hasCheckedContent: Ember.computed.bool 'checkedContent.length'
 
   groups: ( ->
-    return [] unless @get('negotiatingGroups.length')
+    return [] unless @get('workflowGroups.length')
 
     Ember.ArrayProxy.create
-      content: @get('negotiatingGroups')
-  ).property('negotiatingGroups')
+      content: @get('workflowGroups')
+  ).property('workflowGroups')
