@@ -14,7 +14,9 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   content: []
   settings: null
   workflowStates: ( ->
-    @get('settings.workflowStates')
+    statuses = @get('settings.workflowStates')
+    statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
+    statuses
   ).property('settings.model', 'settings.workflowStates.[]')
 
   workflowDeals: (->

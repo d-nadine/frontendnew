@@ -35,10 +35,12 @@ Radium.ChangeStatusForm = Radium.Form.extend
 
         item.one 'becameInvalid', (result) =>
           Radium.Utils.generateErrorSummary deal
+          transaction.rollback()
           deferred.reject()
 
         item.one 'becameError', (result)  ->
           Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
+          transaction.rollback()
           deferred.reject()
 
         transaction.add item
