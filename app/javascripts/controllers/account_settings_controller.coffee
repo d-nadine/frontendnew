@@ -30,8 +30,5 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
 
 
   dealStates: (->
-    postStates = @get 'postStates'
-    workflowStates = @get 'workflowStates'
-
-    workflowStates.concat(postStates).map (state) -> state.capitalize()
+    @get('workflowStates').map (state) -> state.capitalize()
   ).property('workflowStates.[]')

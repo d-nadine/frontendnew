@@ -5,3 +5,4 @@ Radium.Store = DS.Store.extend
   revision: 13
   adapter: Radium.RESTAdapter.extend
     url: 'http://localhost:9292'
+    bulkCommit: true
