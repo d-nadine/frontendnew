@@ -33,6 +33,7 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
   reason: DS.attr('string')
 
   lostDuring: DS.attr('string')
+  lostBecause: DS.attr('string')
   status: DS.attr('string')
 
   isPastPayment: Radium.computed.isPast("payBy")

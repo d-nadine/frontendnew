@@ -6,11 +6,14 @@ Radium.ChangeStatusForm = Radium.Form.extend
     finishBy: @get('finishBy')
     status: @get('status')
     description: @get('todo')
+    lostBecause: @get('lostBecause')
   ).property().volatile()
 
   isValid: ( ->
+    if @get('status').toLowerCase() == 'lost' && !@get('lostBecause.length')
+      return false
     @get('status')
-  ).property('status')
+  ).property('status', 'lostBecause')
 
   reset: ->
     @_super.apply this, arguments

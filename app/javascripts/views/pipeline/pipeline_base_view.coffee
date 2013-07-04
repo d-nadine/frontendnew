@@ -5,6 +5,20 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
     contentBinding: 'controller.statuses'
     valueBinding: 'controller.changedStatus'
 
+  lostBecause: Radium.TextArea.extend(Ember.TargetActionSupport,
+    placeholder: 'Supply a reason why this deal was lost.'
+    valueBinding: 'controller.lostBecause'
+    classNames: ['new-comment']
+    target: 'controller'
+    action: 'submit'
+
+    click: (event) ->
+      event.stopPropagation()
+
+    insertNewline: ->
+      @triggerAction()
+  )
+
   changeStatusTodo: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.statusTodo'
     placeholder: "Add related todo?"

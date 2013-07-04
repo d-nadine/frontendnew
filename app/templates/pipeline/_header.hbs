@@ -90,6 +90,11 @@
           </a>
         </div>
       </div>
+      {{#if isLost}}
+        <div>
+          {{view view.lostBecause}}
+        </div>
+      {{/if}}
     </form>
   {{/if}}
 
