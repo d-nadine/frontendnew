@@ -1,8 +1,16 @@
 <div id="widget-block" class="block">
   <ul class="breadcrumb" id="pipeline-widget">
-    {{#each workflowGroups}}
+    {{#each workflowGroups itemController="workflowGroupItem"}}
       <li class="workflow">
-        <a {{action selectGroup this}} href="#">{{title}}</a> {{pipelineBadge this}}
+        {{#if isWorkflow}}
+          {{#linkTo pipeline.workflow content.title}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+        {{/if}}
+        {{#if isClosed}}
+          {{#linkTo pipeline.closed}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+        {{/if}}
+        {{#if isLost}}
+          {{#linkTo pipeline.lost}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+        {{/if}}
         <span class="divider">&gt;</span>
       </li>
     {{/each}}

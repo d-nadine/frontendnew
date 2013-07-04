@@ -1,9 +1,9 @@
 Ember.Handlebars.registerBoundHelper 'pipelineBadge', (group, options) ->
   return if group == undefined
 
-  style = if group.name == "closed"
+  style = if group == "closed"
             "success"
-          else if group.name =="lost"
+          else if group =="lost"
             "important"
           else
             "warning"

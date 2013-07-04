@@ -1,4 +1,23 @@
-{{partial 'pipeline/header'}}
+<div id="header" class="page-header">
+  <div id="title">
+    <h1>{{title}}</h1>
+  </div>
+  <div id="controls">
+    <div class="add-lead">
+      {{#if isLeads}}
+        {{#linkTo leads.new class="btn btn-medium btn-info"}}
+          <i class="icon-plus icon-white"></i>
+          Lead
+        {{/linkTo}}
+      {{else}}
+        {{#linkTo deals.new class="btn btn-medium btn-info"}}
+          <i class="icon-plus icon-white"></i>
+          Deal
+        {{/linkTo}}
+      {{/if}}
+    </div>
+  </div>
+</div>
 <div class="show-results">
   <a href="#" class="btn" {{action toggleResultsTable target="view" bubbles=false}}>
     {{#if view.showResults}}
@@ -22,7 +41,7 @@
     <tr>
       <td class="title">
         {{#if isWorkflow}}
-          {{#linkTo pipeline.closed}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+          {{#linkTo pipeline.workflow content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
         {{/if}}
         {{#if isClosed}}
           {{#linkTo pipeline.closed}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}

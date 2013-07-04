@@ -19,10 +19,11 @@ Radium.Router.map ->
 
   @resource 'pipeline', ->
     @route 'index'
-    @route 'unpublished'
+    @route 'workflow', path: '/:pipeline_state'
     @route 'closed'
     @route 'lost'
     @route 'opendeals'
+    @route 'unpublished'
 
   @resource 'leads', ->
     @route 'new'

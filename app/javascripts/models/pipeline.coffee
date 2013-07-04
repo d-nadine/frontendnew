@@ -15,6 +15,14 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   settings: null
   workflowStates: ( ->
     statuses = @get('settings.workflowStates')
+
+    statuses.forEach (state) =>
+      unless @get(state)
+        Ember.defineProperty this, state, Ember.computed( ->
+          Radium.Deal.filter (deal) ->
+            deal.get('status') == state
+        ).property("#{state}.[]")
+
     statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
     statuses
   ).property('settings.model', 'settings.workflowStates.[]')
@@ -60,7 +68,3 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
     Radium.Deal.filter (deal) ->
       deal.get('status') == 'unpublished'
   ).property('unpublished.[]')
-
-  leads: (->
-    Radium.Contact.filter (contact) -> contact.get('isLead')
-  ).property()
