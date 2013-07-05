@@ -6,7 +6,7 @@ Radium.ChangeStatusForm = Radium.Form.extend
     finishBy: @get('finishBy')
     status: @get('status')
     description: @get('todo')
-    lostBecause: @get('lostBecause')
+    kind: 'deal'
   ).property().volatile()
 
   isValid: ( ->
@@ -19,7 +19,7 @@ Radium.ChangeStatusForm = Radium.Form.extend
     @_super.apply this, arguments
     @set('todo', null)
     @set('lostBecause', null)
-    @get('deals').setEach 'isChecked', false
+    # @get('deals').setEach 'isChecked', false
 
   commit:  ->
     promise = Ember.Deferred.promise (deferred) =>

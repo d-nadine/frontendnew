@@ -5,6 +5,7 @@ Radium.ReassignForm = Radium.Form.extend
     user: @get('assignToUser')
     finishBy: @get('finishBy')
     description: @get('todo')
+    kind: 'deal'
   ).property().volatile()
 
   isValid: ( ->
