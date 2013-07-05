@@ -17,11 +17,35 @@ Radium.ReassignForm = Radium.Form.extend
     @set('todo', null)
 
   commit: ->
-    @get('selectedContent').forEach (item) =>
-      item.set('user', @get('assignToUser'))
+    promise = Ember.Deferred.promise (deferred) =>
+      deferred.resolve() unless @get('selectedContent.length')
 
-      unless Ember.isEmpty @get('todo')
-        todo = Radium.Todo.createRecord @get('data')
-        todo.set 'reference', item
+      transaction = @get('store').transaction()
 
-    @get('store').commit()
+      @get('selectedContent').forEach (deal) =>
+        deal.set('user', @get('assignToUser'))
+
+        unless Ember.isEmpty @get('todo')
+          todo = Radium.Todo.createRecord @get('data')
+          todo.set 'reference', deal
+          transaction.add todo
+
+        deal.one 'didUpdate', =>
+          deal.set 'isChecked', false
+          deferred.resolve() unless @get('deals.length')
+
+        deal.one 'becameInvalid', (result) =>
+          Radium.Utils.generateErrorSummary deal
+          transaction.rollback()
+          deferred.reject()
+
+        deal.one 'becameError', (result)  ->
+          Radium.Utils.notifyError 'An error has occurred and the deals could not be reassigned.'
+          transaction.rollback()
+          deferred.reject()
+
+        transaction.add deal
+
+      transaction.commit()
+
+    promise

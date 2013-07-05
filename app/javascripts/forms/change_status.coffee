@@ -19,7 +19,6 @@ Radium.ChangeStatusForm = Radium.Form.extend
     @_super.apply this, arguments
     @set('todo', null)
     @set('lostBecause', null)
-    # @get('deals').setEach 'isChecked', false
 
   commit:  ->
     promise = Ember.Deferred.promise (deferred) =>
@@ -27,34 +26,36 @@ Radium.ChangeStatusForm = Radium.Form.extend
 
       transaction = @get('store').transaction()
 
-      @get('deals').forEach (item) =>
+      @get('deals').forEach (deal) =>
         if @get('status').toLowerCase() == 'lost'
-          item.set('lostDuring', item.get('status'))
-          item.set('lostBecause', @get('lostBecause'))
+          deal.set('lostDuring', deal.get('status'))
+          deal.set('lostBecause', @get('lostBecause'))
         else
-          item.set('lostDuring', null)
-          item.set('lostBecause', null)
+          deal.set('lostDuring', null)
+          deal.set('lostBecause', null)
 
-        item.set('status', @get('status'))
+        deal.set('status', @get('status'))
 
         unless Ember.isEmpty @get('todo')
           todo = Radium.Todo.createRecord @get('data')
-          todo.set 'reference', item
+          todo.set 'reference', deal
+          transaction.add todo
 
-        item.one 'didUpdate', =>
+        deal.one 'didUpdate', =>
+          deal.set 'isChecked', false
           deferred.resolve() unless @get('deals.length')
 
-        item.one 'becameInvalid', (result) =>
+        deal.one 'becameInvalid', (result) =>
           Radium.Utils.generateErrorSummary deal
           transaction.rollback()
           deferred.reject()
 
-        item.one 'becameError', (result)  ->
-          Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
+        deal.one 'becameError', (result)  ->
+          Radium.Utils.notifyError 'An error has occurred and the selected deals status could not be changed.'
           transaction.rollback()
           deferred.reject()
 
-        transaction.add item
+        transaction.add deal
 
       transaction.commit()
 

@@ -29,14 +29,12 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       controller = @getController()
       reassignForm = controller.get('reassignForm')
       reassignForm.set('todo', @controller.get('reassignTodo'))
-      reassignForm.commit()
-      controller.get('checkedContent').forEach (item) =>
-        item.set('isChecked', false)
-      controller.set('reassignTodo', null)
-      reassignForm.reset()
-      controller.trigger 'formReset'
-      @resetForm()
-      Radium.Utils.notify "Selected Items have been reassigned."
+      reassignForm.commit().then =>
+        controller.set('reassignTodo', null)
+        reassignForm.reset()
+        controller.trigger 'formReset'
+        @resetForm()
+        Radium.Utils.notify "Selected Items have been reassigned."
 
     confirmDeletion: ->
       @render 'bulk_actions/deletion_confirmation',

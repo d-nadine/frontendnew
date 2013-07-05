@@ -1,4 +1,4 @@
-Radium.PipelineWorkflowRoute = Radium.Route.extend
+Radium.PipelineWorkflowRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: (params) ->
     params.pipeline_state
 
