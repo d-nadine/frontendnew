@@ -74,7 +74,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   filterLead: (item) ->
     ((item.constructor is Radium.Contact) && (item.get('status') == 'lead'))
 
-  filterAssigned: (item) ->
+  filterUsersContacts: (item) ->
     Ember.assert "An assigned user must be set to filter in the addressbook", @get('assignedUser')
     ((item.constructor is Radium.Contact) && (item.get('user') == @get('assignedUser')))
 

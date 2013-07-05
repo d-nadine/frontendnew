@@ -2,7 +2,15 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
   account: DS.belongsTo('Radium.Account')
-  deals: DS.hasMany('Radium.Deal')
+
+  # FIXME: Temporary hack
+  # deals: DS.hasMany('Radium.Deal')
+
+  # FIXME: Temporary hack
+  deals: ( ->
+    Radium.Deal.filter (deal) =>
+      deal.get('user') == this
+  ).property()
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
   calls: DS.hasMany('Radium.Call', inverse: 'user')
@@ -40,17 +48,4 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
     # @get('deals').map((deal) =>
     #   deal.get('contact') unless deal.get('isUnpublished')
     # ).uniq()
-  ).property('deals.[]')
-
-  workflowDeals: ( ->
-    @get('deals').filter (deal) ->
-      deal.get('status') != 'closed' || deal.get('status') != 'lost'
-  ).property('deals.[]')
-
-  closedDeals: ( ->
-    @get('deals').filterProperty 'status', 'closed'
-  ).property('deals.[]')
-
-  lostDeals: ( ->
-    @get('deals').filterProperty 'status', 'lost'
   ).property('deals.[]')

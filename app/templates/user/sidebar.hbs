@@ -58,26 +58,13 @@
   <h2>My Pipeline</h2>
   <table class="table table-striped table-bordered table-hover totals">
     <tbody>
-      <tr>
-        <td><label class="control-label">Leads</td>
-          <td><label {{bindAttr class=":badge leads.length:badge-success:badge-important"}}>{{leads.length}}</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td><label class="control-label">Negotiating</td>
-        <td><label {{bindAttr class=":badge workflowDeals.length:badge-success:badge-important"}}>{{workflowDeals.length}}</td>
-        <td><label>{{currency workflowDealsTotal}}</td>
-      </tr>
-      <tr>
-        <td><label class="control-label">Closed</td>
-        <td><label {{bindAttr class=":badge closedDeals.length:badge-success:badge-important"}}>{{closedDeals.length}}</td>
-        <td><label>{{currency closedDealsTotal}}</td>
-      </tr>
-      <tr>
-        <td><label class="control-label">Negotiating</td>
-        <td><label {{bindAttr class=":badge lostDeals.length:badge-success:badge-important"}}>{{lostDeals.length}}</td>
-        <td><label>&nbsp;</td>
-      </tr>
+      {{#each statuses itemController="userDealTotalsItem"}}
+        <tr>
+          <td><label class="control-label">{{this.model}}</td>
+          <td><label {{bindAttr class=":badge dealsTotal:badge-success:badge-important"}}>{{dealsTotal}}</td>
+          <td><label>{{currency dealsValue}}</td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
   <div class="deal-links">

@@ -37,7 +37,7 @@ Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEven
     addressbookController = @controllerFor('addressbook')
     Ember.run.next =>
       addressbookController.set 'model.assignedUser', model
-      addressbookController.set('model.selectedFilter', 'assigned')
+      addressbookController.set('model.selectedFilter', 'usersContacts')
 
 Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   setupController: (controller, model) ->

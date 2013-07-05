@@ -1,10 +1,13 @@
 Radium.UserController = Radium.ObjectController.extend
+  needs: ['accountSettings']
+  statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
   # FIXME: only allow current user to update their own details
   isEditable: true
 
-  workflowDealsTotal: Radium.computed.total 'workflowDeals'
-
-  closedDealsTotal: Radium.computed.total 'closedDeals'
+  closedDealsTotal: ( ->
+    @get('deals').filter (deal) ->
+      deal.get('status') == 'closed'
+  ).property('deals.[]')
 
   currentMonth: ( ->
     Ember.DateTime.create().toFormattedString('%B')
