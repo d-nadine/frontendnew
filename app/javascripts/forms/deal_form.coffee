@@ -14,7 +14,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     isPublished: @get('isPublished')
   ).property().volatile()
 
-  reset: ->
+  reset: () ->
     @_super.apply this, arguments
     @set('isSubmitted', false)
     @set('name', '')
@@ -22,7 +22,6 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     @set('contact', null)
     @set('user', null)
     @set('source', '')
-    @set('status', 'published')
     @set('value', 0)
     @set('poNumber', '')
     @set('isPublished', true)
