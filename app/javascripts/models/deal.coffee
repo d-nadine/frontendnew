@@ -42,6 +42,6 @@ Radium.Deal = DS.Model.extend Radium.CommentsMixin,
 
   company: Ember.computed.alias('contact.company')
 
-  isPublished: ( ->
-    @get('status') == 'published'
-  )
+  isUnpublished: ( ->
+    @get('status') == 'unpublished'
+  ).property('status')

@@ -14,7 +14,7 @@
     <div class="assigned-contacts">
       <div>
         <div>
-          {{#linkTo unimplemented}}My Assigned Contacts{{/linkTo}}
+          {{#linkTo addressbook.assigned this}}My Assigned Contacts{{/linkTo}}
         </div>
         <div>
           <span {{bindAttr class=":assigned-count :badge contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>

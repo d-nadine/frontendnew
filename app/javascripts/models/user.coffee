@@ -2,7 +2,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
   account: DS.belongsTo('Radium.Account')
-  contacts: DS.hasMany('Radium.Contact')
   deals: DS.hasMany('Radium.Deal')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
@@ -32,9 +31,16 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
     "#{@get("firstName")} #{@get("lastName")}"
   ).property('firstName', 'lastName')
 
-  leads: ( ->
-    @get('contacts').filterProperty 'status', 'lead'
-  ).property('contact.[]'),
+  contacts: ( ->
+    # FIXME: remove filter when deals are populated
+    Radium.Contact.filter (contact) =>
+      contact.get('user') == this
+    # return unless @get('deals.length')
+
+    # @get('deals').map((deal) =>
+    #   deal.get('contact') unless deal.get('isUnpublished')
+    # ).uniq()
+  ).property('deals.[]')
 
   workflowDeals: ( ->
     @get('deals').filter (deal) ->

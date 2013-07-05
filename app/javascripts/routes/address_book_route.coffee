@@ -32,6 +32,16 @@ Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEvents
   deserialize: (params) ->
     params.filter
 
+Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
+  model: (params) ->
+    Radium.User.find params.user_id
+
+  setupController: (controller, model) ->
+    addressbookController = @controllerFor('addressbook')
+    Ember.run.next =>
+      addressbookController.set 'model.assignedUser', model
+      addressbookController.set('model.selectedFilter', 'assigned')
+
 Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
@@ -48,4 +58,3 @@ Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEv
 Radium.AddressbookMembersRoute = Radium.AddressbookMemberBaseRoute.extend()
 
 Radium.AddressbookEmployeesRoute = Radium.AddressbookMemberBaseRoute.extend()
-

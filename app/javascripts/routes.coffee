@@ -47,6 +47,7 @@ Radium.Router.map ->
 
   @resource 'addressbook', ->
     @route 'filter', path: '/:filter'
+    @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:tag_id/employees'
 
