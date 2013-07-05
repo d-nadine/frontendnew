@@ -6,7 +6,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   reassignTodo: null
   changedStatus: null
   statusTodo: null
-  lostBecause: null
   justAdded: false
 
   perPage: 7
@@ -36,11 +35,18 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       item.set('isChecked', false)
 
   changeStatus: ->
+    @set 'isSubmitted', true
+    if @get('isLost')
+      @set 'changeStatusForm.lostBecause', @get('lostBecause')
+
     return unless @get('changeStatusForm.isValid')
     @set 'changeStatusForm.todo', @get('statusTodo')
-    @get('changeStatusForm').commit().then ->
+    @get('changeStatusForm').commit().then =>
       @clearChecked()
       @set('statusTodo', '')
+      @set 'isSubmitted', false
+      @get('changeStatusForm').reset()
+      @set 'lostBecause', ''
       @trigger 'formReset'
 
   submit: (form) ->
@@ -70,7 +76,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     status: @get('changedStatus')
     todo: @get('statusTodo')
     lostBecause: @get('lostBecause')
-  ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status')
+  ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status', 'lostBecause')
 
   reassignForm: Radium.computed.newForm('reassign')
 
