@@ -6,11 +6,13 @@ Radium.DealStatusForm = Radium.Form.extend
     @_super.apply this, arguments
     @reset()
 
-  properties: ['status']
+  properties: ['status', 'lostBecause', 'lostDuring']
 
   reset: ->
     @_super.apply this, arguments
     @set 'status', null
+    @set 'lostBecause', null
+    @set 'lostDuring', null
 
 Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   needs: ['accountSettings','pipeline']
@@ -22,6 +24,15 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
     @get('form.status').toLowerCase() == 'lost'
   ).property('form.status')
 
+  setProperties: ->
+    if @get('isLost') && @get('model.isDirty')
+      @set 'form.lostDuring', @get('model.status')
+    else
+      @set 'form.lostBecause', null
+      @set 'form.lostDuring', null
+
+    @_super.apply this, arguments
+
   commit: ->
     if @get('model.status') == @get('form.status')
       @set 'isEditing', false
@@ -31,6 +42,7 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
 
   setForm: ->
     @set 'form.status', @get('model.status')
+    @set 'lostBecause', null
 
   form: ( ->
     Radium.DealStatusForm.create()

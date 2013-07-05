@@ -3,10 +3,5 @@
 {{else}}
   <div class="deal-status">
     <h2>{{status}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
-    {{#if isLost}}
-      <div>
-        {{view view.lostBecause class="field" viewName="because"}}
-      </div>
-    {{/if}}
   </div>
 {{/if}}

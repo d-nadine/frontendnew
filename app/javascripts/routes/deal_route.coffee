@@ -37,6 +37,9 @@ Radium.DealRoute = Radium.Route.extend
       # FIXME: hacky way of holding the commit method for later
       @set 'statusChangeController', controller
       @set 'statusChangeCommit', commit
+      statusChangeController = @controllerFor('dealConfirmStatusChange')
+      statusChangeController.set('model', controller.get('form'))
+      statusChangeController.set 'isSubmitted', false
       @render 'deal/confirm_status_change',
         into: 'application'
         outlet: 'modal'

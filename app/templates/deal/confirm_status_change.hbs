@@ -5,7 +5,14 @@
 
 <div class="modal-body">
   <p>Are you sure you want to change the status?  Changing the status will remove the current checklist.</p>
-  <button class="btn btn-large btn-danger btn-block" {{action confirmStatusChange}}>Change Status</button>
+  {{#if isLost}}
+    <p>Because you are changing the deal status to lost, you must give a reason for the change.</p>
+    <div>
+      {{view view.lostBecause class="field" viewName="because"}}
+    </div>
+    <br/>
+  {{/if}}
+  <button class="btn btn-large btn-danger btn-block" {{action confirm}}>Change Status</button>
 </div>
 
 <div class="modal-footer">
