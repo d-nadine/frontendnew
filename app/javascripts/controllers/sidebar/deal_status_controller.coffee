@@ -25,7 +25,7 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   ).property('form.status')
 
   setProperties: ->
-    if @get('isLost') && @get('model.isDirty')
+    if @get('isLost')
       @set 'form.lostDuring', @get('model.status')
     else
       @set 'form.lostBecause', null

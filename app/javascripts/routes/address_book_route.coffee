@@ -20,17 +20,14 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
     @currentModel = null
 
 Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
+  model: (params) ->
+    params.filter
+
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
     addressbookController.set 'searchText', ''
     Ember.run.next =>
       addressbookController.set('model.selectedFilter', model)
-
-  serialize: (filter) ->
-    filter: filter
-
-  deserialize: (params) ->
-    params.filter
 
 Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: (params) ->
