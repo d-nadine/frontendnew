@@ -20,7 +20,7 @@ Radium.FormsTodoController = Radium.FormController.extend
       @set 'isSubmitted', false
       @set 'showOptions', true
 
-      done = ->
+      done = =>
         @get('model').reset()
         @trigger('formReset')
 

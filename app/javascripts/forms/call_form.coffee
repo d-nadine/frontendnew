@@ -3,6 +3,10 @@ require 'forms/todo_form'
 Radium.CallForm = Radium.TodoForm.extend
   canChangeContact: true
 
+  type: ( ->
+    Radium.Call
+  ).property()
+
   data: ( ->
     user: @get('user')
     finishBy: @get('finishBy')
@@ -17,13 +21,3 @@ Radium.CallForm = Radium.TodoForm.extend
 
     true
   ).property('contact', 'description', 'finishBy', 'user')
-
-  individualCommit: ->
-    return unless @get('isNew')
-
-    Radium.Call.createRecord @get('data')
-
-  bulkCommit: ->
-    @get('reference').forEach (item) =>
-      call = Radium.Call.createRecord @get('data')
-      call.set 'reference', item

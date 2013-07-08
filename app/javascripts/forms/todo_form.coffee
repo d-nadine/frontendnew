@@ -8,6 +8,14 @@ Radium.TodoForm = Radium.Form.extend
     description: @get('description')
   ).property().volatile()
 
+  type: ( ->
+    Radium.Todo
+  ).property()
+
+  typeName: ( ->
+    @get('type').toString().humanize()
+  ).property('type')
+
   reset: ->
     @_super.apply this, arguments
     @set 'description', ''
@@ -36,32 +44,32 @@ Radium.TodoForm = Radium.Form.extend
   individualCommit: (deferred) ->
     return unless @get('isNew')
 
-    todo = Radium.Todo.createRecord @get('data')
+    record = @get('type').createRecord @get('data')
 
-    todo.one 'didCreate', =>
+    record.one 'didCreate', =>
       deferred.resolve()
 
-    todo.one 'becameInvalid', (result) =>
+    record.one 'becameInvalid', (result) =>
       Radium.Utils.generateErrorSummary result
       deferred.reject()
 
-    todo.one 'becameError', (result)  ->
-      Radium.Utils.notifyError 'An error has occurred and the todo could not be created.'
+    record.one 'becameError', (result)  ->
+      Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
       deferred.reject()
 
   bulkCommit: ->
     @get('reference').forEach (item) =>
-      todo = Radium.Todo.createRecord @get('data')
-      todo.set 'reference', item
+      record = @get('type').createRecord @get('data')
+      record.set 'reference', item
 
-    todo.one 'didCreate', (todo) =>
+    record.one 'didCreate', (record) =>
       if item == @get('reference.lastObject')
         deferred.resolve()
 
-    todo.one 'becameInvalid', (result) =>
+    record.one 'becameInvalid', (result) =>
       Radium.Utils.generateErrorSummary result
       deferred.reject()
 
-    todo.one 'becameError', (result)  ->
-      Radium.Utils.notifyError 'An error has occurred and the todo could not be created.'
+    record.one 'becameError', (result)  ->
+      Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
       deferred.reject()
