@@ -24,6 +24,7 @@ Radium.Router.map ->
     @route 'lost'
     @route 'opendeals'
     @route 'unpublished'
+    @route 'userDeals', path: '/users/:user_id/deals'
 
   @resource 'leads', ->
     @route 'new'
@@ -42,6 +43,7 @@ Radium.Router.map ->
     @resource 'deal', path: '/:deal_id'
     @route 'new'
     @route 'fromContact', path: '/new/contacts/:contact_id'
+    @route 'fromUser', path: '/new/users/:user_id'
 
   @resource 'calendar', path: '/:year/:month/:day'
 
@@ -49,7 +51,7 @@ Radium.Router.map ->
     @route 'filter', path: '/:filter'
     @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
-    @route 'employees', path: '/companies/:tag_id/employees'
+    @route 'employees', path: '/companies/:company_id/employees'
 
   @route 'unimplemented'
 

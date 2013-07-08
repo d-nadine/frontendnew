@@ -1,14 +1,13 @@
 require 'routes/deal_new_base_route'
 
-Radium.DealsFromContactRoute = Radium.DealNewBaseRoute.extend
+Radium.DealsFromUserRoute = Radium.DealNewBaseRoute.extend
   model: (params) ->
-    Radium.Contact.find(params.contact_id)
+    Radium.User.find(params.user_id)
 
   setupController: (controller, model) ->
     controller = @controllerFor 'dealsNew'
     @_super.call this, controller, model
-    controller.set 'contact', model
-    controller.set 'model.user', @controllerFor('currentUser').get('model')
+    controller.set 'user', model
 
   renderTemplate: ->
     @render 'deals.new',

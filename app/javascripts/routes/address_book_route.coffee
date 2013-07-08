@@ -49,9 +49,10 @@ Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEv
       addressbookController.trigger 'selectedResourceChanged', model
       addressbookController.set 'model.selectedFilter', 'resource'
 
-    Ember.run.next =>
-      addressbookController.set('model.selectedResource', null)
+Radium.AddressbookMembersRoute = Radium.AddressbookMemberBaseRoute.extend
+  model: (params) ->
+    Radium.Tag.find(params.tag_id)
 
-Radium.AddressbookMembersRoute = Radium.AddressbookMemberBaseRoute.extend()
-
-Radium.AddressbookEmployeesRoute = Radium.AddressbookMemberBaseRoute.extend()
+Radium.AddressbookEmployeesRoute = Radium.AddressbookMemberBaseRoute.extend
+  model: (params) ->
+    Radium.Company.find(params.company_id)

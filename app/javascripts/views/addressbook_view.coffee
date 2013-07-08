@@ -20,7 +20,9 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
     return 'Companies' if selectedFilter == "resource" && @get('controller.model.selectedResource') instanceof Radium.Company
     return 'Tags' if selectedFilter == "resource" && @get('controller.model.selectedResource') instanceof Radium.Tag
 
-    @get('controller.filters').findProperty('name', selectedFilter).text
+    filter = @get('controller.filters').findProperty('name', selectedFilter)
+
+    filter.text if filter
   ).property('controller.model.selectedFilter')
 
 
