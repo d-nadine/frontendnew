@@ -29,7 +29,7 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
   ).property('workflow.[]')
 
   dealStates: (->
-    statuses = @get('workflowStates')
+    statuses = @get('workflowStates').slice()
     statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
     statuses
   ).property('workflowStates.[]')

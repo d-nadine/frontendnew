@@ -20,11 +20,10 @@ Radium.FormsTodoController = Radium.FormController.extend
       @set 'isSubmitted', false
       @set 'showOptions', true
 
-      done = =>
-        @get('model').reset()
-        @trigger('formReset')
+      @get('model').commit()
 
-      @get('model').commit().then(done, done)
+      @get('model').reset()
+      @trigger('formReset')
     ), 1200)
 
   isBulk: ( ->

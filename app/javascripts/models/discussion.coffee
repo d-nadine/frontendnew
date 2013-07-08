@@ -19,8 +19,8 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
     else
       @get('_referenceDeal') || @get('_referenceContact')
   ).property('_referenceDeal', '_referenceContact')
-  _referenceContact: DS.belongsTo('Radium.Contact', inverse: null)
-  _referenceDeal: DS.belongsTo('Radium.Deal', inverse: null)
+  _referenceContact: DS.belongsTo('Radium.Contact')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
 
   tasks: Radium.computed.tasks('todos', 'calls')
 

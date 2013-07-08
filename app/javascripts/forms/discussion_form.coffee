@@ -3,6 +3,7 @@ Radium.DiscussionForm = Radium.Form.extend
   data: ( ->
     user: @get('user')
     topic: @get('topic')
+    reference: @get('reference')
   ).property().volatile()
 
   isValid: ( ->
@@ -15,8 +16,5 @@ Radium.DiscussionForm = Radium.Form.extend
 
   commit: ->
     discussion = Radium.Discussion.createRecord @get('data')
-
-    # FIXME: hack to set referene
-    discussion.set('_referenceContact', Radium.Contact.find().get('firstObject'))
 
     @get('store').commit()
