@@ -6,7 +6,6 @@ Radium.ChangeStatusForm = Radium.Form.extend
     finishBy: @get('finishBy')
     status: @get('status')
     description: @get('todo')
-    kind: 'deal'
   ).property().volatile()
 
   isValid: ( ->

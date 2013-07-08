@@ -3,6 +3,17 @@ Radium.ContactController = Radium.ObjectController.extend
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
 
+  makeContactPublic: (contact) ->
+    contact.set 'status', 'pipeline'
+
+    contact.one 'becameInvalid', =>
+      Radium.Utils.generateErrorSummary deal
+
+    contact.one 'becameError', =>
+      Radium.Utils.notifyError 'An error has occurred and the contact cannot be updated.'
+
+    @get('store').commit()
+
   # FIXME: How do we determine this?
   isEditable: true
 

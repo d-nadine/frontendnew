@@ -45,9 +45,6 @@ Radium.TaskListItemController = Radium.ObjectController.extend
   ).property('model')
 
 Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radium.ShowMoreMixin,
-  needs: 'clock'
-  clock: Ember.computed.alias('controllers.clock')
-
   # FIXME: I have a feeling this is broken, but defining
   # arrangedContent is the only way to get everything working
   arrangedContent: (->
@@ -65,12 +62,15 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
   ).property('content.[]', 'clock.now')
 
   groupedContent: (->
-    visibleContent = @get('visibleContent')
+    # FIXME: we want to dispose of models in an isError state,
+    # this filter should be removed and the @each dependentKey should
+    # be removed when the model can be destroyed
+    visibleContent = @get('visibleContent').filter (item) -> !item.get('isError')
 
     return unless visibleContent
 
     @group visibleContent
-  ).property('visibleContent.length')
+  ).property('visibleContent.length', 'visibleContent.@each.isError')
 
   arrangedGroups: (->
     return unless @get('groupedContent')

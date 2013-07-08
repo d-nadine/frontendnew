@@ -39,6 +39,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   callFormDefaults: (->
     description: null
     contact: @get('contact')
+    reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
@@ -55,11 +56,14 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   meetingFormDefaults: ( ->
     topic: null
     location: ""
+    isNew: true
+    reference: @get('model')
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
+    reference: @get('model')
   ).property('model', 'now')
 
   statusDisabled: Ember.computed.not('isPublic')

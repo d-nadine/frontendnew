@@ -21,7 +21,7 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
     total = @get 'workflowTotal'
     length = @get 'length'
 
-    return 0 unless total || total == 0 || length == 0
+    return 0 unless total && length
 
     Math.floor((length / total) * 100)
   ).property('workflowTotal', 'length')

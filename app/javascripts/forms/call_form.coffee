@@ -1,7 +1,6 @@
 require 'forms/todo_form'
 
 Radium.CallForm = Radium.TodoForm.extend
-  kind: 'call'
   canChangeContact: true
 
   data: ( ->
