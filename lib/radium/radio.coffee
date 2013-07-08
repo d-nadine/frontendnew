@@ -3,7 +3,7 @@ Radium.Radiobutton =  Ember.View.extend
   selectedValue: null
   template: Ember.Handlebars.compile """
     <input type="radio" {{bindAttr name="view.name"}} {{bindAttr value="view.value"}} id="{{unbound view.radioId}}" {{bindAttr checked=view.isChecked}} {{bindAttr disabled=view.disabled}}/>
-    <label for="{{unbound view.radioId}}">{{unbound view.leader}}</label>
+    <label class="capitalize" for="{{unbound view.radioId}}">{{unbound view.leader}}</label>
   """
 
   didInsertElement: ->

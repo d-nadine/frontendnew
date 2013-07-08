@@ -16,7 +16,7 @@ Radium.DealStatusForm = Radium.Form.extend
 
 Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   needs: ['accountSettings','pipeline']
-  statuses: Ember.computed.alias('controllers.pipeline.workflowStates')
+  statuses: Ember.computed.alias('controllers.pipeline.dealStates')
   isValid: true
 
   isLost: ( ->

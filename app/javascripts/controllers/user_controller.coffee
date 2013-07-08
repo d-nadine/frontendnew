@@ -1,6 +1,6 @@
 Radium.UserController = Radium.ObjectController.extend
   needs: ['accountSettings']
-  statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
+  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   # FIXME: only allow current user to update their own details
   isEditable: true
 

@@ -1,5 +1,6 @@
 Radium.PipelineController = Radium.ObjectController.extend
   needs: ['accountSettings']
+  dealStates: Ember.computed.alias 'controllers.accountSettings.dealStates'
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   workflowGroups: Ember.computed.alias 'content.workflowGroups'
   leads: Ember.computed.alias 'content.leads'

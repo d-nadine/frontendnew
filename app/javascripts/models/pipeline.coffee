@@ -14,7 +14,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   content: []
   settings: null
   workflowStates: ( ->
-    statuses = @get('settings.workflowStates')
+    statuses = @get('settings.dealStates')
 
     statuses.forEach (state) =>
       unless @get(state)
@@ -24,7 +24,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
         ).property("#{state}.[]")
 
     statuses
-  ).property('settings.model', 'settings.workflowStates.[]')
+  ).property('settings.model', 'settings.dealStates.[]')
 
   workflowDeals: (->
     statuses = @get 'workflowStates'
@@ -39,7 +39,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
     deals = @get 'workflowDeals'
     return unless deals
 
-    states = @get('settings.workflowStates')
+    states = @get('settings.dealStates')
 
     @group deals, states
   ).property('workflowDeals.[]')

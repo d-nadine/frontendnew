@@ -23,15 +23,13 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
   ).property('workflow.[]')
 
   workflowStates: ( ->
-    statuses = @get('workflow').map((state) =>
+    Ember.A(@get('workflow').map((state) =>
       state.get('name')
-    ) || []
-
-    statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
-    statuses
+    ) || [])
   ).property('workflow.[]')
 
-
   dealStates: (->
-    @get('workflowStates').map (state) -> state.capitalize()
+    statuses = @get('workflowStates')
+    statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
+    statuses
   ).property('workflowStates.[]')
