@@ -1,3 +1,3 @@
 Radium.EmailsItemView = Radium.View.extend Radium.ContentIdentificationMixin,
-  trackedToggleSwitch: Radium.TrackingSwitch.extend
-    checkedBinding: 'controller.isPersonal'
+  publicToggleSwitch: Radium.PublicSwitch.extend
+    checkedBinding: 'controller.isPublic'

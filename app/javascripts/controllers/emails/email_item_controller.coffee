@@ -1,15 +1,11 @@
 Radium.EmailsItemController = Radium.ObjectController.extend
-  clock: Ember.computed.alias('controllers.clock')
-
-  tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-
   showMeta : false
 
-  isPersonalDidChange: ( ->
+  toggleSwtich: ->
     return if @get('isNew')
-    return if @get('isSaving')
+    return if @get('model.isSaving')
+    @set('isPersonal', !@get('isPersonal'))
     @get('store').commit()
-  ).observes('isPersonal')
 
   toggleFormBox: ->
     @toggleProperty 'showFormBox'

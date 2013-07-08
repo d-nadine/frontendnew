@@ -3,7 +3,7 @@ Radium.ToggleSwitch = Ember.View.extend
   template: Ember.Handlebars.compile """
     <label for="{{unbound view.checkBoxId}}">
       {{view.label}}
-      <input id="{{unbound view.checkBoxId}}" type="checkbox" {{bindAttr checked="view.checked"}}>
+      <input id="{{unbound view.checkBoxId}}" {{action toggleSwtich}} type="checkbox" {{bindAttr checked="view.checked"}}>
       <div class="switch"></div>
     </label>
   """
@@ -19,5 +19,5 @@ Radium.ToggleSwitch = Ember.View.extend
   _updateElementValue: ->
     @set 'checked', @$('input').prop('checked')
 
-Radium.TrackingSwitch = Radium.ToggleSwitch.extend
-  classNames: ['tracking-switch', 'green-yellow']
+Radium.PublicSwitch = Radium.ToggleSwitch.extend
+  classNames: ['public-switch', 'green-yellow']

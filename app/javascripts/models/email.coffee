@@ -16,7 +16,6 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   message: DS.attr('string')
   read: DS.attr('boolean')
   sentAt: DS.attr('datetime')
-  isPersonal: DS.attr('boolean')
   isRead: DS.attr('boolean')
   isPersonal: DS.attr('boolean')
 
@@ -40,6 +39,8 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   to: DS.attr('array')
   cc: DS.attr('array')
   bcc: DS.attr('array')
+
+  isPublic: Ember.computed.not 'isPersonal'
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 

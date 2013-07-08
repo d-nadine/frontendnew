@@ -93,18 +93,18 @@
     text-shadow: none;
   }
 
-  &.tracking-switch {
+  &.public-switch {
     input[type="checkbox"] + div {
       width: 6em;
     }
 
     input[type="checkbox"] + div:before {
-      content: 'Tracked';
+      content: 'Public';
       text-indent: -6.5em;
     }
 
     input[type="checkbox"] + div:after{
-      content: 'Untracked';
+      content: 'Personal';
     }
 
     input[type="checkbox"]:checked + div {

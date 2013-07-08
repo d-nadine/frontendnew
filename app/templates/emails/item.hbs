@@ -18,7 +18,7 @@
 
     <div class="header">
       {{#if trackable}}
-        {{view view.trackedToggleSwitch class="pull-right"}}
+        {{view view.publicToggleSwitch class="pull-right"}}
       {{/if}}
 
       <p>
@@ -89,6 +89,14 @@
           <i class="icon-delete"></i>
         </a>
       </div>
+      {{#if isPersonal}}
+        <div class="alert alert-info">
+          This email is a personal email.  Would you like to add this email to Radium?
+        </div>
+        <div>
+          <button {{action toggleSwtich}} {{bindAttr disabled=isSaving}} class="btn btn-block btn-large btn-info">ADD EMAIL TO RADIUM</button>
+        </div>
+      {{/if}}
     </div>
   </div>
 
