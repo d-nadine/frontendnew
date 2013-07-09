@@ -24,7 +24,7 @@ Radium.Router.map ->
     @route 'lost'
     @route 'opendeals'
     @route 'unpublished'
-    @route 'userDeals', path: '/users/:user_id/deals'
+    @route 'resourceDeals', path: '/:resource_type/:resource_id/deals'
 
   @resource 'leads', ->
     @route 'new'
