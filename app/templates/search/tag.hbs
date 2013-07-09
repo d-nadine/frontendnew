@@ -7,7 +7,8 @@
       </div>
       <div class="created-by">
         <label>Created By</label>
-        {{#linkTo user user}}{{user.name}}{{/linkTo}}
+        <!-- FIXME: uncomment when API has user -->
+        {{!#linkTo user user}}{{!user.name}}{{!/linkTo}}
       </div>
       <div class="description">
         {{description}}
