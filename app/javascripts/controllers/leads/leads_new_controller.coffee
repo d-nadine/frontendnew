@@ -5,10 +5,11 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   companies: Ember.computed.alias 'controllers.companies'
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   leadSources: Ember.computed.alias 'controllers.accountSettings.leadSources'
+  workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null
 
   makeLead: ->
-    @set 'status', 'lead'
+    @set 'status', 'pipeline'
 
     @get('store').commit()
 
@@ -18,15 +19,18 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
     @set 'form', @get('model') if @get('model.isNew')
   ).observes('model')
 
-  isCustomer: ( ->
-    return false if @get('isSaving')
-    return false if @get('isNew')
+  contactDeals: ( ->
+    return if !@get('model') || @get('model.isNew')
+    return unless @get('model.isLead')
 
-    status = @get('model.status')
-    return false unless status
+    # FIXME: Is there a better way?
+    Radium.Deal.all().filter (deal) =>
+      deal.get('status') != 'lost' && deal.get('contact') == @get('model')
+  ).property('model')
 
-    status == "lead" || status == "existing"
-  ).property('model.status', 'isNew')
+  isNewLead: ( ->
+    @get('model.isNew') && @get('status') == 'pipeline'
+  ).property('model.isNew', 'status')
 
   cancel: ->
     @get('form').reset()

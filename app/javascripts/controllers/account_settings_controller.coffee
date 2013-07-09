@@ -14,6 +14,12 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
     'lost'
   ]
 
+  leadSources: ( ->
+    return unless @get('model.leadSources')
+
+    @get('model.leadSources')
+  ).property('model.leadSources')
+
   pipelineStateChecklists: ( ->
     checklistMap = @get('checklistMap')
     @get('workflow').forEach (state) =>

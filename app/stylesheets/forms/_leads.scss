@@ -30,6 +30,13 @@
     width: 63%;
   }
 
+  table.deals{
+    width: 50%;
+    th:nth-of-type(2), td:nth-of-type(2){
+      text-align: center;
+    }
+  }
+
   #makeLead{
     margin-right: 50px;
   }

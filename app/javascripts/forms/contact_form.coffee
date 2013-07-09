@@ -8,6 +8,7 @@ Radium.ContactForm = Radium.Form.extend
     notes: @get('notes')
     source: @get('source')
     status: @get('status')
+    dealState: @get('dealState')
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
     addresses: Ember.A()
@@ -66,8 +67,8 @@ Radium.ContactForm = Radium.Form.extend
     @set 'source', 'From Website'
     @set 'companyName', null
     @set 'company', ''
-    @set 'status', 'lead'
-    @set 'tags', Ember.A()
+    @set 'status', @get('initialStatus')
+    @set 'dealState', @get('initialDealState')
     @set 'tags', Ember.A()
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])

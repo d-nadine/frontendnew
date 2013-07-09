@@ -15,19 +15,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   onHideModal: ->
     @$('.modal').modal 'hide' if @$('.modal')
 
-  existingContactText: ( ->
-    return if @get('controller.isNew')
-
-    status = @get('controller.status')
-
-    if status == "lead"
-      return "is a lead.  Do you want to add a deal?"
-    else if status == "existing"
-      return "is an existing customer.  Do you want to add a deal?"
-
-    "is not a lead, do you want to update their status to lead?"
-  ).property('controller.isNew')
-
   submit: ->
     @set 'controller.isSubmitted', true
 
@@ -74,6 +61,17 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       <ul>
       {{#each view.source}}
         {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leaderBinding="name" valueBinding="value" tagName="li"}}
+      {{/each}}
+      </ul>
+    """
+
+  workflowStates: Ember.View.extend
+    classNames: ['controls-group','radio-group']
+    sourceBinding: 'controller.workflowStates'
+    template: Ember.Handlebars.compile """
+      <ul>
+      {{#each view.source}}
+        {{view Radium.Radiobutton selectedValueBinding="controller.dealState" name="dealState" leaderBinding="this" valueBinding="this" tagName="li"}}
       {{/each}}
       </ul>
     """

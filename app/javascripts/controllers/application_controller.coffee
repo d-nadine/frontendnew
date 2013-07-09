@@ -1,2 +1,2 @@
-Radium.ApplicationController = Ember.Controller.extend
+Radium.ApplicationController = Radium.ObjectController.extend
   today: Ember.DateTime.create()

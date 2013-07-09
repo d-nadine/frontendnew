@@ -37,7 +37,15 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   isLead: ( ->
-    @get('status') == 'lead'
+    @get('status') == 'pipeline'
+  ).property('status')
+
+  isPersonal: ( ->
+    @get('status') == 'personal'
+  ).property('status')
+
+  isExcluded: ( ->
+    @get('status') == 'exclude'
   ).property('status')
 
   primaryEmail: Radium.computed.primary 'emailAddresses'
