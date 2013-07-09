@@ -2,6 +2,12 @@ Radium.AddressBookResultItemController = Radium.ObjectController.extend
   check: (item) ->
     item.toggleProperty 'isChecked'
 
+  contacts: ( ->
+    return @get('model.contacts') unless @get('isTag')
+
+    Radium.Contact.all().filter (contact) => contact.get('tags').contains @get('model')
+  ).property('model')
+
   isCompany: ( ->
     @get('model') instanceof Radium.Company
   ).property('model')

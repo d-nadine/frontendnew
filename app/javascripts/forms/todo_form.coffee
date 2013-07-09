@@ -62,14 +62,14 @@ Radium.TodoForm = Radium.Form.extend
       record = @get('type').createRecord @get('data')
       record.set 'reference', item
 
-    record.one 'didCreate', (record) =>
-      if item == @get('reference.lastObject')
-        deferred.resolve()
+      record.one 'didCreate', (record) =>
+        if item == @get('reference.lastObject')
+          deferred.resolve()
 
-    record.one 'becameInvalid', (result) =>
-      Radium.Utils.generateErrorSummary result
-      deferred.reject()
+      record.one 'becameInvalid', (result) =>
+        Radium.Utils.generateErrorSummary result
+        deferred.reject()
 
-    record.one 'becameError', (result)  ->
-      Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
-      deferred.reject()
+      record.one 'becameError', (result)  ->
+        Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
+        deferred.reject()
