@@ -47,15 +47,6 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   people: Radium.computed.aggregate('toList','ccList', 'senderArray')
   recipients: Radium.computed.aggregate('toList','ccList')
 
-  trackable: Ember.computed.present('contact')
-
-  contact: (->
-    if @get('sender') instanceof Radium.Contact
-      @get('sender')
-    else
-      @get('people').find (person) -> person instanceof Radium.Contact
-  ).property()
-
   isIncludedInConversation: (email) ->
     return true if email == this
 
