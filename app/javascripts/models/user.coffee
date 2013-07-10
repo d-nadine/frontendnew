@@ -3,14 +3,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   account: DS.belongsTo('Radium.Account')
 
-  # FIXME: Temporary hack
-  # deals: DS.hasMany('Radium.Deal')
-
-  # FIXME: Temporary hack
-  deals: ( ->
-    Radium.Deal.filter (deal) =>
-      deal.get('user') == this
-  ).property()
+  deals: DS.hasMany('Radium.Deal')
 
   todos: DS.hasMany('Radium.Todo', inverse: 'user')
   calls: DS.hasMany('Radium.Call', inverse: 'user')
@@ -40,12 +33,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   ).property('firstName', 'lastName')
 
   contacts: ( ->
-    # FIXME: remove filter when deals are populated
-    Radium.Contact.filter (contact) =>
+    Radium.Contact.all().filter (contact) =>
       contact.get('user') == this
-    # return unless @get('deals.length')
-
-    # @get('deals').map((deal) =>
-    #   deal.get('contact') unless deal.get('isUnpublished')
-    # ).uniq()
   ).property('deals.[]')

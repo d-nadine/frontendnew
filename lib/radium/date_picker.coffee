@@ -21,11 +21,17 @@ Radium.DatePicker = Radium.View.extend
 
   textToDateTransform: ((key, value) ->
     if arguments.length == 2
-      # FIXME: needs to parse all dates from dropdown
       if value && /\d{4}-\d{2}-\d{2}/.test(value)
         @set 'date', Ember.DateTime.parse(value, '%Y-%m-%d')
+      else if value && /^([a-z]+), ([a-z]+) (\d{1,2}) (\d{4})$/i.test(value)
+        @set 'date', Ember.DateTime.parse(value, "%A, %B %D %Y")
+      else if value && value.toLowerCase() == 'tomorrow'
+        @set 'date', Ember.DateTime.create().advance(day: 1)
+      else if value && value.toLowerCase() == 'today'
+        @set 'date', Ember.DateTime.create()
       else
         @set 'date', null
+      console.log @get('date.timezone')
     else if !value && @get('date')
       @get('date').toHumanFormat()
     else
@@ -55,7 +61,11 @@ Radium.DatePicker = Radium.View.extend
       event.preventDefault()
 
     @$('.datepicker-link').data('datepicker').set = ->
-      view.set 'text', Ember.DateTime.create(@date.getTime()).toDateFormat()
+      target = $(event.target)
+      return if target.hasClass('next') || target.hasClass('prev')
+
+      view.set 'text', Ember.DateTime.create(@date.getTime()).toHumanFormat()
+
       @hide()
 
   setDate: (key) ->
