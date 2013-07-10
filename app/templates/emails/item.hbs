@@ -1,120 +1,113 @@
-{{#if isSaving}}
-  <div class="block email-card message-card is-sending">
-    <p><img src="/images/loading.gif"></p>
-    <p class="muted">Sending</p>
-  </div>
-{{else}}
-  <div class="block email-card message-card">
-    {{#unless isPersonal}}
-      <div class="adder">
-        <div class="arrow"></div>
-        {{#if showFormBox}}
-          <i class="icon-minus" {{action toggleFormBox}}></i>
-        {{else}}
-          <i class="icon-plus" {{action toggleFormBox}}></i>
-        {{/if}}
+<div class="block email-card message-card">
+  {{#unless isPersonal}}
+    <div class="adder">
+      <div class="arrow"></div>
+      {{#if showFormBox}}
+        <i class="icon-minus" {{action toggleFormBox}}></i>
+      {{else}}
+        <i class="icon-plus" {{action toggleFormBox}}></i>
+      {{/if}}
+    </div>
+  {{/unless}}
+
+  <div class="header">
+    {{#if trackable}}
+      {{view view.publicToggleSwitch class="pull-right"}}
+    {{/if}}
+
+    <p>
+      {{#if subject}}
+        <big class="sender">{{link sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      {{else}}
+        Email from <big class="sender">{{link sender}}</big>
+      {{/if}}
+
+      <a href="#" class="more muted pull-right" {{action toggleMeta}}><small>
+          {{#if showMeta}}
+            Less
+          {{else}}
+            More
+          {{/if}}
+      </small></a>
+    </p>
+
+    {{#if showMeta}}
+      <div class="meta">
+        <dl>
+          <dt>To</dt>
+          <dd>{{list toList}}
+          </dd>
+          {{#if cc}}
+            <dt>CC</dt>
+            <dd>{{list ccList}}</dd>
+          {{/if}}
+          <dt>Time</dt>
+          <dd>{{formatDateTime sentAt format="full"}}</dd>
+        </dl>
       </div>
+    {{/if}}
+  </div>
+
+  <hr/>
+
+  <div class="content">
+    <div {{bindAttr class="message::empty :text"}}>
+      {{#if message}}
+        <p>
+          {{!FIXME: This needs to some formatting}}
+          {{unbound message}}
+        </p>
+      {{else}}
+        <p>(No Message)</p>
+      {{/if}}
+    </div>
+
+    {{partial "shared/attachments"}}
+
+    <hr />
+
+    {{#unless isPersonal}}
+      {{render 'related_tasks' tasks}}
     {{/unless}}
 
-    <div class="header">
-      {{#if trackable}}
-        {{view view.publicToggleSwitch class="pull-right"}}
-      {{/if}}
+    <div class="actions text-right">
+      <a {{action toggleReplyForm}} class="btn btn-link">
+        <i class="icon-reply"></i>Reply
+      </a>
 
-      <p>
-        {{#if subject}}
-          <big class="sender">{{link sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
-        {{else}}
-          Email from <big class="sender">{{link sender}}</big>
-        {{/if}}
+      <a {{action toggleForwardForm}} class="btn btn-link">
+        <i class="icon-forward"></i>Forward
+      </a>
 
-        <a href="#" class="more muted pull-right" {{action toggleMeta}}><small>
-            {{#if showMeta}}
-              Less
-            {{else}}
-              More
-            {{/if}}
-        </small></a>
-      </p>
-
-      {{#if showMeta}}
-        <div class="meta">
-          <dl>
-            <dt>To</dt>
-            <dd>{{list toList}}
-            </dd>
-            {{#if cc}}
-              <dt>CC</dt>
-              <dd>{{list ccList}}</dd>
-            {{/if}}
-            <dt>Time</dt>
-            <dd>{{formatDateTime sentAt format="full"}}</dd>
-          </dl>
-        </div>
-      {{/if}}
+      <a class="btn btn-link" {{action delete this}}>
+        <i class="icon-delete"></i>
+      </a>
     </div>
-
-    <hr/>
-
-    <div class="content">
-      <div {{bindAttr class="message::empty :text"}}>
-        {{#if message}}
-          <p>
-            {{!FIXME: This needs to some formatting}}
-            {{unbound message}}
-          </p>
-        {{else}}
-          <p>(No Message)</p>
-        {{/if}}
+    {{#if isPersonal}}
+      <div class="alert alert-info">
+        This email is a personal email.  Would you like to add this email to Radium?
       </div>
-
-      {{partial "shared/attachments"}}
-
-      <hr />
-
-      {{#unless isPersonal}}
-        {{render 'related_tasks' tasks}}
-      {{/unless}}
-
-      <div class="actions text-right">
-        <a {{action toggleReplyForm}} class="btn btn-link">
-          <i class="icon-reply"></i>Reply
-        </a>
-
-        <a {{action toggleForwardForm}} class="btn btn-link">
-          <i class="icon-forward"></i>Forward
-        </a>
-
-        <a class="btn btn-link" {{action delete this}}>
-          <i class="icon-delete"></i>
-        </a>
+      <div>
+        <button {{action toggleSwitch}} {{bindAttr disabled=isSaving}} class="btn btn-block btn-large btn-info">ADD EMAIL TO RADIUM</button>
       </div>
-      {{#if isPersonal}}
-        <div class="alert alert-info">
-          This email is a personal email.  Would you like to add this email to Radium?
-        </div>
-        <div>
-          <button {{action toggleSwtich}} {{bindAttr disabled=isSaving}} class="btn btn-block btn-large btn-info">ADD EMAIL TO RADIUM</button>
-        </div>
-      {{/if}}
-    </div>
+    {{/if}}
   </div>
+</div>
 
-  {{#if showReplyForm}}
-    <div class="block block-arrow-top">
-      {{render "forms/reply" replyEmail}}
-    </div>
-  {{/if}}
-
-  {{#if showForwardForm}}
-    {{render "forms/forward_email" forwardEmail}}
-  {{/if}}
-
-  {{#if showFormBox}}
-    <div class="block block-connected block-blue">
-      {{render "form_box" formBox}}
-    </div>
-  {{/if}}
-
-  {{render 'comments' model}}
+{{#if showReplyForm}}
+  <div class="block block-arrow-top">
+    {{render "forms/reply" replyEmail}}
+  </div>
 {{/if}}
+
+{{#if showForwardForm}}
+  {{render "forms/forward_email" forwardEmail}}
+{{/if}}
+
+{{#if showFormBox}}
+  <div class="block block-connected block-blue">
+    {{render "form_box" formBox}}
+  </div>
+{{/if}}
+
+{{render 'comments' model}}

@@ -1,7 +1,7 @@
 Radium.EmailsItemController = Radium.ObjectController.extend
   showMeta : false
 
-  toggleSwtich: ->
+  toggleSwitch: ->
     return if @get('isNew')
     return if @get('model.isSaving')
     @set('isPersonal', !@get('isPersonal'))

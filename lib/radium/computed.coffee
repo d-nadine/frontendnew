@@ -43,10 +43,16 @@ Radium.computed.newForm = (form, properties = {}) ->
 Radium.computed.aggregate = ->
   arrays = Array.prototype.slice.call arguments
 
-  Ember.computed ->
+  args = arrays.map (prop) => "#{prop}.[]"
+
+  func = ->
     aggregate = Radium.AggregateArrayProxy.create()
     arrays.forEach (array) => aggregate.add @get(array)
     aggregate
+
+  args.push func
+
+  Ember.computed.apply this, args
 
 Radium.computed.tasks = ->
   arrays = Array.prototype.slice.call arguments

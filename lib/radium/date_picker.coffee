@@ -31,7 +31,6 @@ Radium.DatePicker = Radium.View.extend
         @set 'date', Ember.DateTime.create()
       else
         @set 'date', null
-      console.log @get('date.timezone')
     else if !value && @get('date')
       @get('date').toHumanFormat()
     else
