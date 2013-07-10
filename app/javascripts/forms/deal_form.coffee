@@ -52,9 +52,6 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     deal = Radium.Deal.createRecord @get('data')
 
     @get('checklist').forEach (item) =>
-      if item.get('isAdditional')
-        deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'date', 'isFinished')
-      else
-        deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'isFinished')
+      deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'date', 'isFinished')
 
     deal

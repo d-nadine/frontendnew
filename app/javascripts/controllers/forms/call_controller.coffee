@@ -11,5 +11,5 @@ Radium.FormsCallController = Radium.FormsTodoController.extend
   ).property('isPrimaryInputDisabled', 'canChangeContact')
 
   contacts: (->
-    Radium.Contact.all()
+    Radium.Contact.all().filter (contact) => contact.get('isPublic')
   ).property()

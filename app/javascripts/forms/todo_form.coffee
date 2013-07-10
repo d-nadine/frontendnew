@@ -55,6 +55,7 @@ Radium.TodoForm = Radium.Form.extend
 
     record.one 'becameError', (result)  ->
       Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
+      result.get('transaction').rollback()
       deferred.reject()
 
   bulkCommit: ->
