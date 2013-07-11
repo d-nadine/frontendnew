@@ -50,6 +50,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   sortResults: (left, right) ->
     Ember.compare left.get('name'), right.get('name')
 
+  filterFunction: (item) ->
     @["filter#{@get('selectedFilter').classify()}"](item)
 
   filterTags: (item) ->

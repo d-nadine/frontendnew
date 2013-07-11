@@ -25,8 +25,6 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
                   else
                     ~item.get(selectedFilter).get('name').toLowerCase().indexOf(searchText.toLowerCase())
 
-    console.log content.get('length') 
-
     content
   ).property('content.[]', 'selectedFilter', 'searchText')
 
