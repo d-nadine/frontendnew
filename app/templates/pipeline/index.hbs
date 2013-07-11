@@ -4,14 +4,15 @@
   </div>
   <div id="controls">
     <div class="add-lead">
-      {{#linkTo deals.new class="btn btn-medium btn-info"}}
-        <i class="icon-plus icon-white"></i>
-        Deal
-      {{/linkTo}}
-      {{#linkTo leads.new class="btn btn-medium btn-info"}}
-        <i class="icon-plus icon-white"></i>
-        Lead
-      {{/linkTo}}
+      <div class="dropdown-toggle" data-toggle="dropdown">
+        <a class="btn btn-medium btn-info dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-plus icon-white"></i> NEW
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li>{{#linkTo deals.new}}Deal{{/linkTo}}</li>
+          <li>{{#linkTo leads.new}}Lead{{/linkTo}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
