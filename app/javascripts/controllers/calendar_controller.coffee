@@ -63,7 +63,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
     items.map (item) -> CalendarItem.create(content: item)
-  ).property('date')
+  ).property('date', 'todos.[]', 'meetings.[]')
 
   todos: (->
     startDate = @get 'startOfCalendar'
@@ -154,4 +154,4 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       counter += 1
 
     weeks
-  ).property('date')
+  ).property('date', 'items.[]')
