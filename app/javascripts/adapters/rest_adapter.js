@@ -129,10 +129,12 @@ Radium.RESTAdapter.map('Radium.Contact', {
   emailAddresses: {embedded: 'always'},
   addresses: {embedded: 'always'},
   tagNames: {embedded: 'always'},
+  comments: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {
   user: {key: 'posted_by'},
+  comments: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Deal', {
@@ -140,6 +142,7 @@ Radium.RESTAdapter.map('Radium.Deal', {
   user: { key: 'assigned_to_id' },
   reason: { key: 'lost_because' },
   checklist: { key: 'check_list' ,embedded: 'always' },
+  comments: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.ChecklistItem', {
@@ -162,6 +165,7 @@ Radium.RESTAdapter.map('Radium.Email', {
   isPublic: {key: 'public'},
   isRead: {key: 'read'},
   isPersonal: {key: 'personal'},
+  comments: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.EmailAddress', {
@@ -177,10 +181,19 @@ Radium.RESTAdapter.map('Radium.Todo', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
   user: { key: 'assigned_to_id' },
+  comments: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Call', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
   user: { key: 'assigned_to_id' },
+  comments: {embedded: 'always'},
+});
+
+Radium.RESTAdapter.map('Radium.Meeting', {
+  isFinished: {key: 'finished'},
+  finishBy: {key: 'time'},
+  user: { key: 'assigned_to_id' },
+  comments: {embedded: 'always'},
 });
