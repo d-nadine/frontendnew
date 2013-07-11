@@ -11,6 +11,11 @@ Radium.PipelineWorkflowRoute = Radium.Route.extend Radium.BulkActionEmailEventsM
           deal.get('status') == state
       ).property("#{state}.[]")
 
-
+    controller = @controllerFor('pipelineWorkflowDeals')
     controller.set('title', state)
     controller.set('model', pipeline.get(state))
+    controller.set 'showHeader', true
+
+  renderTemplate: ->
+    @render 'pipeline/workflow_deals',
+      into: 'pipeline'

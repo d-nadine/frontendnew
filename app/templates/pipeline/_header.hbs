@@ -8,16 +8,27 @@
         <a class="btn btn-link" href="#">
           <i class="icon-search"></i>
         </a>
-        <input type="text"/>
+        {{input type=text value=searchText}}
       </div>
     </div>
     <div class="field control-box date-filter">
-      <span class="muted">Filter by date</span>
+      <span {{bindAttr class="visibleContent.length::muted"}}>{{selectedFilterText}}</span>
       <div class="pull-right dropdown-toggle" data-toggle="dropdown">
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-arrow-down"></i>
+        <button class="btn">
+          {{#if visibleContent.length}}
+            <i class="icon-arrow-down"></i>
+          {{else}}
+            <i class="icon-arrow-up"></i>
+          {{/if}}
         </button>
       </div>
+      <ul class="dropdown-menu">
+        {{#each filters}}
+          <li>
+            <a href="#" {{action changeFilter name}}>{{name}}</a>
+          </li>
+        {{/each}}
+      </ul>
     </div>
     <div class="field control-box actions">
       <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
