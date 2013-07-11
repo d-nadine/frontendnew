@@ -8,6 +8,11 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null
 
+  addTag: (tag) ->
+    return if @get('tags').mapProperty('name').contains tag
+
+    @get('tags').addObject Ember.Object.create name: tag
+
   makeLead: ->
     @set 'status', 'pipeline'
 

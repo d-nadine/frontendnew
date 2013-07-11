@@ -15,9 +15,9 @@ Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
   companyDidChange: ( ->
     return unless @get('controller.isNew')
 
-    return unless @get('controller.company.tags.length')
+    return unless @get('controller.company.tagNames.length')
 
-    companyTags = @get('controller.company.tags').toArray().reject (tag) =>
+    companyTags = @get('controller.company.tagNames').toArray().reject (tag) =>
       @get('source').mapProperty('name').contains (tag.get('name'))
 
     @get('source').addObjects(companyTags)

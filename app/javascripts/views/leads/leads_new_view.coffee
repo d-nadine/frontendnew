@@ -42,6 +42,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   tags: Radium.ContactTagAutocomplete.extend
     isEditableBinding: 'controller.isNew'
+    sourceBinding: 'controller.tags'
 
   companyPicker: Radium.ContactCompanyPicker.extend Radium.ContactCompanyMixin,
     disabled: Ember.computed.not 'controller.isNew'

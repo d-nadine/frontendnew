@@ -58,17 +58,14 @@
       {{/if}}
     </div>
     <div class="add-lead">
-      {{#if isLeads}}
-        {{#linkTo leads.new class="btn btn-medium btn-info"}}
-          <i class="icon-plus icon-white"></i>
-          Lead
-        {{/linkTo}}
-      {{else}}
-        {{#linkTo deals.new class="btn btn-medium btn-info"}}
-          <i class="icon-plus icon-white"></i>
-          Deal
-        {{/linkTo}}
-      {{/if}}
+      {{#linkTo deals.new class="btn btn-medium btn-info"}}
+        <i class="icon-plus icon-white"></i>
+        Deal
+      {{/linkTo}}
+      {{#linkTo leads.new class="btn btn-medium btn-info"}}
+        <i class="icon-plus icon-white"></i>
+        Lead
+      {{/linkTo}}
     </div>
   </div>
 </div>

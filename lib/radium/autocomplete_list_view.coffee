@@ -15,6 +15,7 @@ Radium.AutocompleteView = Radium.View.extend
   layout: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
+      {{log view.source.length}}
       <li {{action showContextMenu this target="view"}} {{bindAttr class="view.isEditable :as-selection-item :blur"}}>
         {{#if view.isEditable}}
           <a class="as-close" {{action removeSelection this target="view"}}>×</a>

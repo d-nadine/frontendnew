@@ -128,6 +128,7 @@ Radium.RESTAdapter.map('Radium.Contact', {
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'},
   addresses: {embedded: 'always'},
+  tagNames: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {
@@ -148,6 +149,7 @@ Radium.RESTAdapter.map('Radium.ChecklistItem', {
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
   addresses: {embedded: 'always'},
+  tagNames: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.PhoneNumber', {
