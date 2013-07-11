@@ -4,6 +4,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   toggleSwitch: ->
     return if @get('isNew')
     return if @get('model.isSaving')
+    return if @get('model.isSending')
     @set('isPersonal', !@get('isPersonal'))
     @get('store').commit()
 

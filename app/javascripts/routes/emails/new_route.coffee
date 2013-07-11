@@ -8,20 +8,20 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       email.set 'sentAt', Ember.DateTime.create()
 
-      form.set 'isSaving', true
+      form.set 'isSending', true
 
       email.one 'didCreate', =>
         Ember.run.next =>
           form.set 'isSubmitted', false
-          form.set 'isSaving', false
+          form.set 'isSending', false
           @transitionTo 'emails.sent', email
 
       email.one 'becameInvalid', =>
-        form.set 'isSaving', false
+        form.set 'isSending', false
         Radium.Utils.generateErrorSummary email
 
       email.one 'becameError', =>
-        form.set 'isSaving', false
+        form.set 'isSending', false
         Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
 
       @store.commit()

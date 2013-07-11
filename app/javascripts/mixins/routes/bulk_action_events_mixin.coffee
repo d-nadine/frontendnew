@@ -8,9 +8,27 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
       email.set 'sender', @controllerFor('currentUser').get('model')
 
+      email.set 'sentAt', Ember.DateTime.create()
+
+      form.set 'isSending', true
+
       @resetForm()
 
       @controllerFor('emailsSent').set('model', form)
+
+      email.one 'didCreate', =>
+        Ember.run.next =>
+          form.set 'isSubmitted', false
+          form.set 'isSending', false
+          @transitionTo 'emails.sent', email
+
+      email.one 'becameInvalid', =>
+        form.set 'isSending', false
+        Radium.Utils.generateErrorSummary email
+
+      email.one 'becameError', =>
+        form.set 'isSending', false
+        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 
