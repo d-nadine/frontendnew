@@ -9,9 +9,9 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   form: null
 
   addTag: (tag) ->
-    return if @get('tags').mapProperty('name').contains tag
+    return if @get('tagNames').mapProperty('name').contains tag
 
-    @get('tags').addObject Ember.Object.create name: tag
+    @get('tagNames').addObject Ember.Object.create name: tag
 
   makeLead: ->
     @set 'status', 'pipeline'
@@ -53,12 +53,17 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
     # FIXME: should not have to call Ember.run.next
     createContact.one 'didCreate', =>
       Ember.run.next =>
+        @set 'isSaving', false
         @transitionToRoute 'contact', createContact.get('contact')
 
     createContact.one 'becameError', (result) =>
+      @set 'isSaving', false
       Radium.Utils.notifyError 'An error has occurred and the contact could not be created.'
 
     createContact.one 'becameInvalid', (result) =>
+      @set 'isSaving', false
       Radium.Utils.generateErrorSummary createContact
+
+    @set 'isSaving', true
 
     @get('store').commit()

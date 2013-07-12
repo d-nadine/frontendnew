@@ -120,7 +120,13 @@
             </div>
             {{partial 'validation_error_message'}}
             <div class="commit">
-              <a href="#" {{action submit target="view" bubbles=false}} class="btn btn-success"><i class="icon-plus"></i>Lead</a>
+              <a href="#" {{action submit target="view" bubbles=false}} {{bindAttr disabled=isSaving}} class="btn btn-success">
+                {{#if isSaving}}
+                  <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
+                {{else}}
+                  <i class="icon-plus"></i> Submit
+                {{/if}}
+              </a>
             </div>
           </div>
           </fieldset>

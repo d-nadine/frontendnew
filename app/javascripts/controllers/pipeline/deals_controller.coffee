@@ -4,6 +4,12 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   selectedFilter: 'name'
   searchText: null
 
+  toggleChecked: ->
+    allChecked = @get('checkedContent.length') == @get('length')
+
+    @get('content').forEach (item) ->
+      item.set 'isChecked', !allChecked
+
   arrangedContent: ( ->
     content = @get('content')
 

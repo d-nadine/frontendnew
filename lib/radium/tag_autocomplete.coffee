@@ -1,7 +1,7 @@
 require 'lib/radium/autocomplete_list_view'
 
 Radium.TagAutoComplete = Radium.AutocompleteView.extend
-  sourceBinding: 'controller.tags'
+  sourceBinding: 'controller.tagNames'
   listBinding: 'controller.controllers.tags'
   isEditable: true
   showAvatar: false

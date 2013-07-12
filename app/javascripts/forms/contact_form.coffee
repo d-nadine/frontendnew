@@ -12,7 +12,7 @@ Radium.ContactForm = Radium.Form.extend
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
     addresses: Ember.A()
-    tags: Ember.A()
+    tagNames: Ember.A()
   ).property().volatile()
 
   isValid: ( ->
@@ -48,8 +48,8 @@ Radium.ContactForm = Radium.Form.extend
       if @addressHasValue(address)
         contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
 
-    @get('tags').forEach (tag) =>
-      contact.get('tags').push tag.get('name')
+    @get('tagNames').forEach (tag) =>
+      contact.get('tagNames').push tag.get('name')
 
     contact
 
@@ -69,7 +69,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'company', ''
     @set 'status', @get('initialStatus')
     @set 'dealState', @get('initialDealState')
-    @set 'tags', Ember.A()
+    @set 'tagNames', Ember.A()
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: '')])

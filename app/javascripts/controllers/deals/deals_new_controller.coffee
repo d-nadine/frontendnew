@@ -49,13 +49,18 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
     deal.one 'didCreate', =>
       Ember.run.next =>
+        @set 'isSaving', false
         @transitionToRoute 'deal', deal
 
     deal.one 'becameInvalid', (result) =>
+      @set 'isSaving', false
       Radium.Utils.generateErrorSummary deal
 
     deal.one 'becameError', (result)  ->
+      @set 'isSaving', false
       Radium.Utils.notifyError 'An error has occurred and the deal could not be created.'
+
+    @set 'isSaving', true
 
     @get('store').commit()
 

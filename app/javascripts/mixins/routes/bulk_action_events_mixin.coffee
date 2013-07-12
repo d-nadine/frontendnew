@@ -1,5 +1,16 @@
 Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
   events:
+    toggleChecked: ->
+      controller = if @controller.constructor is Radium.PipelineWorkflowController
+                     @controllerFor 'pipelineWorkflowDeals'
+                   else
+                     this.controller
+
+      allChecked = controller.get('checkedContent.length') == controller.get('visibleContent.length')
+
+      controller.get('visibleContent').forEach (item) ->
+        item.set 'isChecked', !allChecked
+
     sendEmail: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')
