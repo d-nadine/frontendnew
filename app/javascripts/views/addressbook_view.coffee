@@ -48,5 +48,5 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
   ).property('controller.activeForm', 'controller.checkedContent.[]')
 
   tags: Radium.TagAutoComplete.extend
-    sourceBinding: 'controller.addTagsForm.tags'
+    sourceBinding: 'controller.addTagsForm.tagNames'
     placeholder: 'Add Tags'

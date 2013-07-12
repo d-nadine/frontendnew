@@ -2,12 +2,12 @@ require 'forms/form'
 
 Radium.AddTagsForm = Radium.Form.extend
   data: ( ->
-    tags: @get('tags')
+    tagNames: @get('tagNames')
   ).property().volatile()
 
   reset: ->
     @_super.apply this, arguments
-    @set 'tags', Ember.A()
+    @set 'tagNames', Ember.A()
 
   addTags: ->
     selectedContent = @get('selectedContent').filter (item) ->
@@ -15,16 +15,11 @@ Radium.AddTagsForm = Radium.Form.extend
 
     return unless selectedContent.length
 
-    tags = @get('data.tags')
+    tagNames = @get('data.tagNames')
 
-    return unless tags.length
+    return unless tagNames.length
 
     selectedContent.forEach (item) =>
-      tags.forEach (tag) =>
-        if tag.get('id')
-          item.get('tags').addObject tag unless item.get('tags').contains tag
-        else
-          item.get('tags').createRecord 
-            name: tag.get('name')
-
-    @get('store').commit()
+      tagNames.forEach (tag) =>
+        unless item.get('tagNames').mapProperty('name').contains(tag.get('name'))
+          item.get('tagNames').addObject Radium.TagName.createRecord name: tag.get('name')

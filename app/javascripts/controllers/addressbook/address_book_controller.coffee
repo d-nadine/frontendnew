@@ -81,6 +81,13 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @set 'activeForm', null
     Radium.Utils.notify "Selected tags added"
 
+  addTag: (tag) ->
+    tagNames = @get('addTagsForm.tagNames')
+
+    return if tagNames.contains tag
+
+    tagNames.addObject Ember.Object.create name: tag
+
   displayLeads: (leads) ->
     @get('controllers.pipelineLeads').set('filteredLeads', leads)
     @transitionToRoute 'pipeline.leads'

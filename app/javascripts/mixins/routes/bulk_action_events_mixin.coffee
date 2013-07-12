@@ -89,16 +89,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
       @send 'close'
 
-    addTags: ->
-      addTagsForm = @controller.get('addTagsForm')
-      addTagsForm.addTags()
-
-      @get('store').commit()
-      addTagsForm.reset()
-
-      @resetForm()
-      Radium.Utils.notify "Selected tags added"
-
     confirmDeletion: ->
       @controllerFor('bulkActionsDeletionConfirmation').set('model', @getController().get('checkedContent'))
       @render 'bulk_actions/deletion_confirmation',
