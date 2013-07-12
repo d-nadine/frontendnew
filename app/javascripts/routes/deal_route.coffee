@@ -15,12 +15,21 @@ Radium.DealRoute = Radium.Route.extend
 
       deal.deleteRecord()
 
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
+      @get('store').commit()
 
-      @render 'deal/deleted',
-        into: 'application'
+      deal.one 'didDelete', =>
+        @render 'nothing',
+          into: 'application'
+          outlet: 'modal'
+
+        @render 'deal/deleted',
+          into: 'application'
+
+      deal.one 'becameInvalid', =>
+        debugger
+
+      deal.one 'becameError', =>
+        debugger
 
     showChecklist: ->
       @render 'deal/checklist',

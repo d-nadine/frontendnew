@@ -1,4 +1,5 @@
 Radium.PipelineWorkflowRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
+  Radium.ClearCheckedMixin,
   model: (params) ->
     params.pipeline_state
 
@@ -15,7 +16,11 @@ Radium.PipelineWorkflowRoute = Radium.Route.extend Radium.BulkActionEmailEventsM
     controller.set('title', state)
     controller.set('model', pipeline.get(state))
     controller.set 'showHeader', true
+    @clearChecked()
 
   renderTemplate: ->
     @render 'pipeline/workflow_deals',
       into: 'pipeline'
+
+  deactivate: ->
+    @clearChecked()

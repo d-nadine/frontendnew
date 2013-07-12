@@ -1,6 +1,7 @@
 require 'mixins/routes/bulk_action_events_mixin'
 
 Radium.PipelineClosedRoute = Em.Route.extend Radium.BulkActionEmailEventsMixin,
+  Radium.ClearCheckedMixin,
   model: ->
     @modelFor('pipeline').get('closed')
 
