@@ -17,7 +17,33 @@ Radium.CallForm = Radium.TodoForm.extend
 
   isValid: (->
     return unless @_super()
-    return unless @get('contact')
+
+    return if !@get('contact') && !@get('isBulk')
+
+    if @get('isBulk') && @get('reference.length') && @get('reference').some((item) -> item.constructor is Radium.Contact)
+      return true
 
     true
   ).property('contact', 'description', 'finishBy', 'user')
+
+  bulkCommit: ->
+    @get('reference').forEach (item) =>
+      if @get('contact') || item.constructor is Radium.Contact
+        record = @get('type').createRecord @get('data')
+
+        if !record.get('contact') && item.constructor is Radium.Contact
+          record.set('contact', item)
+        else
+          record.set 'reference', item
+
+        record.one 'didCreate', (record) =>
+          if item == @get('reference.lastObject')
+            deferred.resolve()
+
+        record.one 'becameInvalid', (result) =>
+          Radium.Utils.generateErrorSummary result
+          deferred.reject()
+
+        record.one 'becameError', (result)  ->
+          Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
+          deferred.reject()

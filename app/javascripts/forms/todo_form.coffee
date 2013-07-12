@@ -28,6 +28,10 @@ Radium.TodoForm = Radium.Form.extend
     true
   ).property('description', 'finishBy', 'user')
 
+  isBulk: ( ->
+    Ember.isArray @get('reference')
+  ).property('reference')
+
   commit: ->
     promise = Ember.Deferred.promise (deferred) =>
       isBulk = Ember.isArray @get('reference')

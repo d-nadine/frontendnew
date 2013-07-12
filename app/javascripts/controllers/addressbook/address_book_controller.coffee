@@ -46,7 +46,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   addTagsForm: Radium.computed.newForm('addTags')
 
   addTagsFormDefaults: ( ->
-    tags: Ember.A()
+    tagNames: Ember.A()
     selectedContent: @get('checkedContent')
   ).property('checkedContent.[]')
 
@@ -79,6 +79,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     addTagsForm.reset()
 
     @set 'activeForm', null
+
     Radium.Utils.notify "Selected tags added"
 
   addTag: (tag) ->

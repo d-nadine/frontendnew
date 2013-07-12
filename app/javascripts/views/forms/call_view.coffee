@@ -13,13 +13,16 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
     disabledBinding: 'controller.isContactPickerDisabled'
     expandedBinding: 'controller.isExpanded'
     isValid: (->
-      @get('controller.contact')
-    ).property('controller.controller')
+      not @get('isInvalid')
+    ).property('controller.controller', 'isInvalid')
     isInvalid: ( ->
       return unless @get('controller.isSubmitted')
 
-      not @get('controller.contact')
-    ).property('controller.isSubmitted', 'controller.contact')
+      return false if @get('controller.contact')
+
+      if @get('controller.isBulk') && @get('controller.reference.length') && @get('controller.reference').some((item) -> item.constructor is Radium.Contact)
+        return false
+    ).property('controller.isSubmitted', 'controller.contact', 'controller.description')
 
   callBox: Radium.View.extend
     contactBinding: 'controller.reference'

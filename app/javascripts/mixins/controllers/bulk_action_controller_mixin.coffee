@@ -107,7 +107,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-    reference: @get('model')
+    reference: @get('checkedContent')
   ).property('model.[]', 'tomorrow')
 
   newEmail: (->
