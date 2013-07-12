@@ -57,7 +57,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
     reassign: (form) ->
       controller = @getController()
       reassignForm = controller.get('reassignForm')
-      reassignForm.set('todo', @controller.get('reassignTodo'))
+      reassignForm.set('todo', controller.get('reassignTodo'))
       reassignForm.commit().then =>
         controller.set('reassignTodo', null)
         reassignForm.reset()
@@ -123,6 +123,8 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
   getController: ->
     if /addressbook/.test this.controller.constructor.toString()
       @controllerFor "addressbook"
+    else if @controller.constructor is Radium.PipelineWorkflowController
+      @controllerFor "pipelineWorkflowDeals"
     else
       this.controller
 
