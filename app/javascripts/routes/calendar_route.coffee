@@ -5,7 +5,7 @@ Radium.CalendarRoute = Radium.Route.extend
 
     selectUser: (user) ->
       @controllerFor('calendar').set 'user', user
-      @closeDrawer()
+      @send 'closeDrawer'
 
   serialize: (model) ->
     {

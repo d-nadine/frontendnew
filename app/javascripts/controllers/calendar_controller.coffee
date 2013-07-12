@@ -50,9 +50,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     invitations: Ember.A()
   ).property('model', 'now')
 
-  users: (->
-    @get('controllers.users')
-  ).property('controllers.users')
+  users: Ember.computed.alias 'controllers.users'
 
   date: (-> @get 'content').property('content')
 
@@ -62,8 +60,13 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     @get('todos').forEach (todo) -> items.pushObject todo
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
+    if user = @get('user')
+      items = items.filter (item) =>
+        item.constructor is Radium.Todo && item.get('user') == user ||
+        item.constructor is Radium.Meeting && item.get('users').contains user
+
     items.map (item) -> CalendarItem.create(content: item)
-  ).property('date', 'todos.[]', 'meetings.[]')
+  ).property('date', 'todos.[]', 'meetings.[]', 'user')
 
   todos: (->
     startDate = @get 'startOfCalendar'
@@ -154,4 +157,4 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       counter += 1
 
     weeks
-  ).property('date', 'items.[]')
+  ).property('date', 'items.[]', 'user')
