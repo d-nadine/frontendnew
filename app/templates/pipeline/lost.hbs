@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each visibleContent}}
+    {{#each visibleContent itemController="pipelineItem"}}
       <tr {{bindAttr class="isChecked"}}>
         <td>
           {{view Radium.Checkbox class="checker-block" checkedBinding="isChecked"}}
