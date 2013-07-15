@@ -102,6 +102,9 @@ Radium.AutocompleteView = Radium.View.extend
     Ember.run.scheduleOnce 'afterRender', this, "resizeInputBox"
   ).observes('source.[]')
 
+  filterResults: (item) ->
+    !@get('source').contains(item)
+
   autocomplete: Ember.TextField.extend
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'controller.currentUser'
@@ -173,9 +176,8 @@ Radium.AutocompleteView = Radium.View.extend
 
       return unless list.get('length')
 
-      results = list.filter( (item) =>
-                        @get('source').indexOf(item) == -1
-                     ).map (item) =>
+      results = list.filter(@get('parentView').filterResults.bind(this))
+                     .map (item) =>
                         @mapSearchResult.call this, item
 
       callback(results, query)
