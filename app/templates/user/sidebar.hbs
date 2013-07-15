@@ -35,7 +35,7 @@
       </div>
       <div class="sales-total pull-right">
         {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
-          {{#if view.isEditing}}
+          {{#if isEditing}}
             <div {{bindAttr class="view.isValid:success:error :control-group"}}>
               <div class="input-prepend">
                 <span class="add-on">$</span>

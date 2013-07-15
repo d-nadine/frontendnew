@@ -1,6 +1,6 @@
 <h2>{{amount}} Amount <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
 
-{{#if view.isEditing}}
+{{#if isEditing}}
   <div {{bindAttr class="isValid:success:error :control-group"}}>
     <div class="input-prepend">
       <span class="add-on">$</span>

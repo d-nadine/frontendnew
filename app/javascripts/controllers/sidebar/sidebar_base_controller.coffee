@@ -6,9 +6,11 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
     return if @get('isSaving')
     return unless @get('isValid')
     @commit()
+    @set 'isEditing', false
 
   startEditing: ->
     return if @get('isSaving')
+    @set 'isEditing', true
     @get('form').reset()
     @setForm()
 

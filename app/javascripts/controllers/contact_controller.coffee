@@ -3,6 +3,9 @@ Radium.ContactController = Radium.ObjectController.extend
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
 
+  removeMultiple: (relationship, item) ->
+    @get(relationship).removeObject item
+
   makeContactPublic: (contact) ->
     contact.set 'status', 'pipeline'
 

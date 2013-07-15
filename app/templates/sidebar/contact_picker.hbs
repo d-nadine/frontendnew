@@ -1,4 +1,4 @@
-{{#if view.isEditing}}
+{{#if isEditing}}
   {{view view.contactPicker}}
 {{else}}
   <span class="name">{{contact.name}}<i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></span></br></br>
