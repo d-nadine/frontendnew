@@ -13,7 +13,6 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   name: DS.attr('string')
   website: DS.attr('string')
   notes: DS.attr('string')
-  status: DS.attr('string')
 
   primaryAddress: Radium.computed.primary 'addresses'
 

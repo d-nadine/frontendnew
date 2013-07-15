@@ -2,6 +2,8 @@ Radium.ContactController = Radium.ObjectController.extend
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
+  # FIXME: How do we determine this?
+  isEditable: true
 
   removeMultiple: (relationship, item) ->
     @get(relationship).removeObject item
@@ -9,16 +11,18 @@ Radium.ContactController = Radium.ObjectController.extend
   makeContactPublic: (contact) ->
     contact.set 'status', 'pipeline'
 
-    contact.one 'becameInvalid', =>
-      Radium.Utils.generateErrorSummary deal
+    transaction = @get('store').transaction()
 
-    contact.one 'becameError', =>
+    transaction.add(contact)
+
+    contact.one 'becameInvalid', (result) =>
+      Radium.Utils.generateErrorSummary contact
+
+    contact.one 'becameError', (result) =>
+      transaction.rollback()
       Radium.Utils.notifyError 'An error has occurred and the contact cannot be updated.'
 
-    @get('store').commit()
-
-  # FIXME: How do we determine this?
-  isEditable: true
+    transaction.commit()
 
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->
