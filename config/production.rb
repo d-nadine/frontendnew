@@ -1,12 +1,6 @@
-class Finalizer < Rake::Pipeline::Filters::PrependFilter
-  def prepend
-    "// Time: #{Time.now}\n// SHA: #{`git rev-parse --short HEAD`}\n"
-  end
-end
-
 Radium.configure do
   # Minify JS and CSS
-  config.pipeline.minify = true
+  config.pipeline.minify = false
 
   # Generate GZip version of files along with regular version
   config.pipeline.gzip = true
@@ -22,12 +16,5 @@ Radium.configure do
 
   config.middleware.use Rack::Auth::Basic do |username, password|
     password == 'whynotactinium' && username == 'radium'
-  end
-
-  # Add the git commit info to the final assets
-  finalize do |pipeline, app|
-    pipeline.match "application.{js,css}" do
-      filter Finalizer
-    end
   end
 end

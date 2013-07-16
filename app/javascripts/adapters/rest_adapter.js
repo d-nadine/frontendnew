@@ -22,6 +22,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     hash = hash || {};
     hash.headers = hash.headers || {};
     hash.headers['X-Ember-Compat'] = "true";
+    hash.headers['X-User-Token'] = '41220a2ebad940629d979a792ab8274d';
     return this._super(url, type, hash);
   },
 
