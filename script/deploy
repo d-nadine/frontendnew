@@ -59,7 +59,6 @@ class Deploy < Thor
 
     prereqs = ensure_clean && 
       ensure_github_connection &&
-      ensure_heroku_installed &&
       ensure_heroku_connection &&
       ensure_heroku_outdated &&
       ensure_fast_forward &&
@@ -98,14 +97,6 @@ class Deploy < Thor
         pass "Github connection"
       else
         failure "Github SSH keys incorrect"
-      end
-    end
-
-    def ensure_heroku_installed
-      if success? "which heroku"
-        pass "Heroku gem installed"
-      else
-        failure "Heroku gem is missing. Please install with: gem install heorku"
       end
     end
 
