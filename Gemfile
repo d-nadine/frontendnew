@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'hydrogen', :github => 'radiumsoftware/hydrogen'
 gem 'iridium', :github => 'radiumsoftware/iridium'
 gem 'iridium-ember', :github => 'radiumsoftware/iridium-ember'
