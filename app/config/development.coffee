@@ -1,6 +1,8 @@
-# Ember.Application.initializer
-#   name: 'populator'
-#   after: 'foundry'
-#   initialize: (container, application) ->
-#       require 'populate'
-#       Radium.Populator.run()
+Ember.Application.initializer
+  name: 'adapterUrl'
+  after: 'store'
+  initialize: (container, application) ->
+    store = container.lookup('store:main')
+
+    store.get('_adapter').reopen
+      url: 'http://localhost:9292'
