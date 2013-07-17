@@ -106,6 +106,10 @@ Radium.RESTAdapter.registerTransform('datetime',  {
    if(serialized){
       var date = Ember.DateTime.parse(serialized);
       date.adjust({timezone: Radium.timezone});
+      console.log(serialized);
+      console.log(date);
+      console.log(date.timezone);
+      console.log(date.toFullFormat());
       return date;
     }
  },
