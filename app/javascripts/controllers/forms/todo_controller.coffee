@@ -6,6 +6,18 @@ Radium.FormsTodoController = Radium.FormController.extend
     @get('isDisabled') || @get('isNew')
   ).property('isDisabled', 'isNew')
 
+  isFinished: ((key, value) ->
+    model = @get('content')
+
+    if arguments.length == 2
+      model.set('isFinished', value)
+
+      unless model.get('isNew')
+        @get('store').commit()
+    else
+      model.get('isFinished')
+  ).property('content.isFinished')
+
   submit: ->
     @set 'isSubmitted', true
 
@@ -50,7 +62,8 @@ Radium.FormsTodoController = Radium.FormController.extend
     return false if @get('isSubmitted')
     return false if @get('justAdded')
     return true if @get('isNew')
-    @get('content.isEditable') == true
+    true
+    # @get('content.isEditable') == true
   ).property('content.isEditable')
 
   isExpandable: (->
