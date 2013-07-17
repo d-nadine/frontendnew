@@ -63,6 +63,3 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     @set 'isSaving', true
 
     @get('store').commit()
-
-  removeAdditionalItem: (item) ->
-    @get('checklist').removeObject item

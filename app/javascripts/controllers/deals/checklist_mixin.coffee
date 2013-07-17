@@ -17,6 +17,9 @@ Radium.ChecklistMixin = Ember.Mixin.create
     @get('dateMap').get(@get('newItemDate'))
   ).property('newItemDate')
 
+  removeAdditionalItem: (item) ->
+    @get('checklist').removeObject item
+
   setItemDate: (date) ->
     @set 'newItemDate', date
 

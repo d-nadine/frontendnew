@@ -3,6 +3,10 @@ require 'controllers/deals/checklist_mixin'
 
 Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   needs: ['accountSettings', 'users', 'contacts']
+  firstState: Ember.computed.alias('controllers.accountSettings.firstState')
+
+  isPublic: Ember.computed.not 'isUnpublished'
+  statusDisabled: Ember.computed.not('isPublic')
 
   # FIXME: this should be null and not an empty string
   deletionToken: ''
@@ -66,10 +70,15 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
     reference: @get('model')
   ).property('model', 'now')
 
-  statusDisabled: Ember.computed.not('isPublic')
+  togglePublished: ->
+    status = if @get('isPublic')
+               "unpublished"
+             else
+               @get('firstState')
 
-  toggleVisiblity: ->
-    @toggleProperty 'isPublic'
+    @set 'status', status
+
+    @get('store').commit()
 
   deletionNotConfirmed: (->
     @get('deletionToken') isnt @get('name')

@@ -7,4 +7,4 @@ Ember.Application.initializer
     Ember.assert 'store found in adapterUrl initializer', store
 
     store.get('_adapter').reopen
-      url: 'http://api.radiumcrm.com/'
+      url: 'http://api.radiumcrm.com'

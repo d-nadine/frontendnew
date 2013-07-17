@@ -57,12 +57,12 @@
 
   <hr />
 
-  <button class="btn btn-warning btn-block" {{action toggleVisiblity}}>
+  <button class="btn btn-warning btn-block" {{action togglePublished}} {{bindAttr disabled=isSaving}}>
     {{#if isPublic}}
       Unpublish
     {{else}}
       Publish
     {{/if}}
   </button>
-  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+  <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bindAttr disabled=isSaving}}>Delete</button>
 </form>

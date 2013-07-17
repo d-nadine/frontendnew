@@ -39,3 +39,11 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
     statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
     statuses
   ).property('workflowStates.[]')
+
+  firstState: ( ->
+    dealStates = @get('dealStates')
+    Ember.assert 'There are dealStates', dealStates.get('length')
+    dealStates.get('firstObject')
+  ).property('workflowStates.[]')
+
+
