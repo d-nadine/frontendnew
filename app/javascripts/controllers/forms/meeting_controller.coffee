@@ -21,13 +21,14 @@ Radium.FormsMeetingController = Radium.FormController.extend
   ).property('userList.[]', 'contactList.[]')
 
   isEditable:( ->
+    return false if @get('isSaving')
     return false if @get('isSubmitted')
     return true if @get('isNew')
     return false if @get('justAdded')
     return false if @get('hasElapsed')
     return true if @get('currentUser') is @get('organizer')
     @get('invitations').find((invitation) -> invitation.get('person') == @get('currentUser'))
-  ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed')
+  ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed', 'isSaving')
 
   locations: ( ->
     @get('companies').map (company) -> 
