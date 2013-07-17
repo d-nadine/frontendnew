@@ -15,6 +15,7 @@ Radium = Em.Application.create
   rootElement: '#application'
   customEvents:
     blur: 'blur'
+  timezone: Ember.DateTime.create().get('timezone')
 
 window.Radium = Radium
 

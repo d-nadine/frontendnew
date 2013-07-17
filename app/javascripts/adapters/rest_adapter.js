@@ -103,7 +103,9 @@ Radium.RESTAdapter.registerTransform('array', {
 Radium.RESTAdapter.registerTransform('datetime',  {
  deserialize: function(serialized) {
    if(serialized){
-      Ember.DateTime.parse(serialized, '%Z');
+      var date = Ember.DateTime.parse(serialized);
+      date.adjust({timezone: Radium.timezone});
+      return date;
     }
  },
 
