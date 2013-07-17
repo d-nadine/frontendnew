@@ -9,12 +9,15 @@ gem 'thor', :github => 'wycats/thor'
 gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
 gem 'barber'
 
-gem 'unicorn'
+gem 'thin'
 gem 'therubyracer'
 
 group :development do
   gem 'dnote'
-  gem 'thin'
+end
+
+group :production do
+  gem 'unicorn'
 end
 
 group :test do
