@@ -8,10 +8,10 @@ gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
 gem 'barber'
 
 gem 'unicorn'
+gem 'therubyracer'
 
 group :development do
   gem 'dnote'
-  gem 'therubyracer'
   gem 'thin'
 end
 
