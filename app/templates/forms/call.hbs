@@ -2,7 +2,11 @@
   <div {{bindAttr class="isFinished :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
-    {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
+    {{#if isExpanded}}
+      {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
+    {{else}}
+      {{#linkTo contact contact class="pull-left"}}{{contact.name}}{{/linkTo}}
+    {{/if}}
 
     {{#if showComments}}
       <i class="icon-comment pull-right"></i>
