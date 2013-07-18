@@ -38,6 +38,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       Ember.Object.create(name: name)
   ).property('companies.[]')
 
+  invited: ( ->
+     @get('invitations').map (invitation) -> invitation.get('person')
+  ).property('invitations.[]')
+
   attendees: ( ->
     Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
   ).property('users.[]', 'contacts.[]')
@@ -62,7 +66,17 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return if @get('endsAtIsInvalid')
 
     true
-  ).property('topic', 'startsAt', 'endsAt')
+  ).property('topic', 'startsAt', 'endsAt', 'startsAtIsInvalid', 'endsAtIsInvalid')
+
+  startsAtIsInvalid: ( ->
+    now = Ember.DateTime.create().advance(minute: -5)
+    Ember.DateTime.compare(@get('startsAt'), now)  == -1
+  ).property('startsAt')
+
+  endsAtIsInvalid: ( ->
+    Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) == -1
+  ).property('startsAt', 'endsAt')
+
 
   submit:  ->
     @set 'isSubmitted', true
@@ -156,6 +170,11 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
 
   removeSelection: (attendee) ->
+    if @get('invited').contains attendee
+      alert 'No API for existing attendees'
+      event.preventDefault()
+      return
+
     resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
 
     attendees = @get(resource)

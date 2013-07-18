@@ -9,15 +9,6 @@ Radium.MeetingForm = Radium.Form.extend
     invitations: Ember.A()
   ).property().volatile()
 
-  startsAtIsInvalid: ( ->
-    now = Ember.DateTime.create().advance(minute: -5)
-    Ember.DateTime.compare(@get('startsAt'), now)  == -1
-  ).property('startsAt')
-
-  endsAtIsInvalid: ( ->
-    Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) == -1
-  ).property('startsAt', 'endsAt')
-
   reset: ->
     return unless @get('isNew')
     @_super.apply this, arguments
