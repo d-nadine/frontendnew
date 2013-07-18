@@ -88,9 +88,9 @@ Radium.FormsMeetingView = Radium.FormView.extend
     leader: 'Starts:'
     dateBinding: 'controller.startsAt'
     isInvalid: ( ->
-      return false unless @get('isSubmitted')
+      return false unless @get('controller.isSubmitted')
       @get('controller.startsAtIsInvalid')
-    ).property('isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
+    ).property('controller.isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date')
 
   endsAt: Radium.TimePickerView.extend
     dateBinding: 'controller.endsAt'

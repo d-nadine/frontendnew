@@ -87,6 +87,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
       return unless @get('isNew')
 
+      @get('model').reset()
       @trigger 'formReset'
     ), 1200)
 
