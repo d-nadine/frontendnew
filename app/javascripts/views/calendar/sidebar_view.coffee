@@ -1,2 +1,2 @@
 Radium.CalendarSidebarView = Radium.FixedSidebarView.extend
-  classNameBindings: ['controller.isDifferentUser']
+  classNameBindings: ['controller.isDifferentUser', ':calendar-sidebar']

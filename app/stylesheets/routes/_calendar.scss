@@ -9,6 +9,12 @@
   }
 }
 
+.calendar-sidebar{
+  .selected{
+    border: 1px solid $blue;
+  }
+}
+
 .calendar {
   width: 100%;
   border-spacing: 4px;
@@ -26,7 +32,7 @@
     }
   }
 
-  .is-today {
+  .is-selected-date {
     background-color: #c3e3ba;
 
     .btn-slab {

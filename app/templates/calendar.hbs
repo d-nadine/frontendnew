@@ -38,7 +38,7 @@
     {{#each weeks}}
       <tr>
         {{#each calendarDay in this itemController="calendarDayItem"}}
-          <td {{action selectDay calendarDay bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday :day"}}>
+          <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isSelectedDate :day"}}>
             <div class="wrapper">
               <span class="date">
                 {{calendarDay.day}}
@@ -46,7 +46,9 @@
 
               <ul>
                 {{#each calendarDay.visibleContent class="unstyled"}}
-                  <li>{{formatDateTime time}} - {{truncate title length="15"}}</li>
+                <li>
+                  <a href="#" {{action selectCalendarTask this target="calendarDay"}}>{{formatDateTime time}} - {{truncate title length="15"}}</a>
+                </i>
                 {{/each}}
               </ul>
             </div>

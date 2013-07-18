@@ -14,9 +14,9 @@
   <p><button class="btn btn-block" {{action selectDay}}>BACK</button></p>
   <p>{{formatDateTime selectedDay.date format=date}}</p>
 
-  {{#each item in selectedDay}}
-    <div class="block">{{formatDateTime item.time}} - {{item.title}}</div>
+  {{#if selectedDay.length}}
+    {{each item in selectedDay itemController="calendarTaskItem" itemViewClass="Radium.CalendarTaskItemView"}}
   {{else}}
     <div class="block">No tasks for this day</div>
-  {{/each}}
+  {{/if}}
 {{/unless}}

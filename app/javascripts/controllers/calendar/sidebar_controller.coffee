@@ -1,9 +1,10 @@
 Day = Ember.ArrayProxy.extend()
 
 Radium.CalendarSidebarController = Radium.ObjectController.extend
-  needs: ['calendar']
+  needs: ['calendar', 'calendarSidebar']
   contentBinding: 'controllers.calendar.user'
 
+  selectedTask: null
   selectedDay: null
 
   items: (->
