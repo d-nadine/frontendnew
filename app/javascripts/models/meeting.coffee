@@ -33,7 +33,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   contacts: ( ->
     @get('invitations')
-        .filter((invitation) -> invitation.get('person').constructor is Radium.Contact)
+        .filter((invitation) -> invitation?.get('person').constructor is Radium.Contact)
         .map((invitation) -> invitation.get('person'))
   ).property('invitations.[]')
 
