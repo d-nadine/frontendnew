@@ -17,6 +17,23 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
     @set('isExpanded', @get('content.title') == selectedGroup)
   ).observes('selectedGroup', 'deals.[]')
 
+  percentage: (->
+    total = @get 'workflowTotal'
+    length = @get 'length'
+
+    return 0 unless total && length
+
+    Math.floor((length / total) * 100)
+  ).property('workflowTotal', 'length')
+
+  total: (->
+    return 0 if @get('length') == 0
+
+    @reduce(((value, item) ->
+      value + item.get('value')
+    ), 0)
+  ).property('length')
+
   isWorkflow: ( ->
     title = @get('content.title')
     not ['closed', 'lost', 'unpublished'].contains(title)
