@@ -24,7 +24,7 @@
     float: left;
   }
 
-  a { 
+  a {
     float: right;
     font-size: 130%;
     margin-top: 6px;
@@ -43,7 +43,6 @@
 .new-comment {
   width: 100%;
   box-sizing: border-box;
-  height: 30px; // set initial height to one row of text
   margin: 0;
   resize: none;
 }
