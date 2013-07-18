@@ -31,7 +31,8 @@ Radium.DealRoute = Radium.Route.extend
       deal.one 'becameError', =>
         debugger
 
-    showChecklist: ->
+    showChecklist: (deal) ->
+      @controllerFor('dealChecklist').set('model', deal)
       @render 'deal/checklist',
         into: 'application'
         outlet: 'modal'

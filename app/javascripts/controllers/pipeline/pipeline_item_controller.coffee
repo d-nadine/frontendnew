@@ -1,4 +1,4 @@
-Radium.PipelineItemController = Radium.ObjectController.extend
+Radium.PipelineItemController = Radium.ObjectController.extend Radium.ChecklistTotalMixin,
   deleteObject: (record) ->
     record.get('content').deleteRecord()
 
