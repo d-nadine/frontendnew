@@ -20,14 +20,6 @@ Radium.TodoForm = Radium.Form.extend
     @_super.apply this, arguments
     @set 'description', ''
 
-  isValid: ( ->
-    return if Ember.isEmpty(@get('description'))
-    return if @get('finishBy').isBeforeToday()
-    return unless @get('user')
-
-    true
-  ).property('description', 'finishBy', 'user')
-
   isBulk: ( ->
     Ember.isArray @get('reference')
   ).property('reference')

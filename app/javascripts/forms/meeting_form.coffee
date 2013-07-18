@@ -25,15 +25,6 @@ Radium.MeetingForm = Radium.Form.extend
     @get('contacts').clear()
     @get('invitations').clear()
 
-  isValid: ( ->
-    return if Ember.isEmpty(@get('topic'))
-    return if @get('startsAtIsInvalid')
-    return if @get('startsAt').isBeforeToday()
-    return if @get('endsAtIsInvalid')
-
-    true
-  ).property('topic', 'startsAt', 'endsAt')
-
   commit: ->
     isNew = @get('isNew')
 

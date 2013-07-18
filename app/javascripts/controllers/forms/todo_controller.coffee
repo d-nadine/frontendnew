@@ -1,5 +1,7 @@
 require 'controllers/forms/form_controller' 
-Radium.FormsTodoController = Radium.FormController.extend
+require 'lib/radium/buffered_proxy'
+
+Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   needs: ['users']
 
   canFinish: (->
@@ -18,6 +20,14 @@ Radium.FormsTodoController = Radium.FormController.extend
       model.get('isFinished')
   ).property('content.isFinished')
 
+  isValid: ( ->
+    return if Ember.isEmpty(@get('description'))
+    return if @get('finishBy').isBeforeToday()
+    return unless @get('user')
+
+    true
+  ).property('description', 'finishBy', 'user')
+
   submit: ->
     @set 'isSubmitted', true
 
@@ -32,7 +42,16 @@ Radium.FormsTodoController = Radium.FormController.extend
       @set 'isSubmitted', false
       @set 'showOptions', true
 
-      @get('model').commit()
+      @applyBufferedChanges()
+
+      if @get('isNew')
+        @get('model').commit() 
+      else
+        @get('store').commit()
+
+      @discardBufferedChanges()
+
+      return unless @get('isNew')
 
       @get('model').reset()
       @trigger('formReset')

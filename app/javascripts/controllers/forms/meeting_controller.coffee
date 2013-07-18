@@ -1,4 +1,4 @@
-Radium.FormsMeetingController = Radium.FormController.extend
+Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   needs: ['companies','contacts','users']
   now: Ember.computed.alias('clock.now')
   companies: Ember.computed.alias('controllers.companies')
@@ -55,6 +55,15 @@ Radium.FormsMeetingController = Radium.FormController.extend
     @get('startsAt').isBeforeToday()
   ).property('startsAt', 'now')
 
+  isValid: ( ->
+    return if Ember.isEmpty(@get('topic'))
+    return if @get('startsAtIsInvalid')
+    return if @get('startsAt').isBeforeToday()
+    return if @get('endsAtIsInvalid')
+
+    true
+  ).property('topic', 'startsAt', 'endsAt')
+
   submit:  ->
     @set 'isSubmitted', true
 
@@ -67,8 +76,16 @@ Radium.FormsMeetingController = Radium.FormController.extend
       @set 'justAdded', false
       @set 'isSubmitted', false
 
-      @get('model').commit()
-      @get('model').reset()
+      @applyBufferedChanges()
+
+      if @get('isNew')
+        @get('model').commit() 
+      else
+        @get('store').commit()
+
+      @discardBufferedChanges()
+
+      return unless @get('isNew')
 
       @trigger 'formReset'
     ), 1200)
