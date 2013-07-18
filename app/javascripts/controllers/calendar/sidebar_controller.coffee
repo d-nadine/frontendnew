@@ -4,6 +4,8 @@ Radium.CalendarSidebarController = Radium.ObjectController.extend
   needs: ['calendar']
   contentBinding: 'controllers.calendar.user'
 
+  selectedDay: null
+
   items: (->
     @get 'controllers.calendar.items'
   ).property('controllers.calendar.items')

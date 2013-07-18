@@ -7,6 +7,9 @@ Radium.CalendarRoute = Radium.Route.extend
       @controllerFor('calendar').set 'user', user
       @send 'closeDrawer'
 
+    selectDay: (calendarDay) ->
+      @controllerFor('calendarSidebar').set('selectedDay', calendarDay)
+
   serialize: (model) ->
     {
       year: model.get('year')
@@ -20,6 +23,8 @@ Radium.CalendarRoute = Radium.Route.extend
 
   renderTemplate: ->
     @render()
+
+    @controllerFor('calendarSidebar').set('selectedDay', null)
 
     @render 'calendar/sidebar',
       outlet: 'sidebar',

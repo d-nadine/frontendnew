@@ -2,11 +2,21 @@
   {{avatar this style="medium"}}
   <h3>{{name}}</h3>
 </div>
+{{#unless selectedDay.date}}
+  {{#each day in days}}
+    <p>{{formatDateTime day.date format=date}}</p>
 
-{{#each day in days}}
-  <p>{{formatDateTime day.date format=date}}</p>
-
-  {{#each item in day}}
-    <div class="block">{{formatDateTime item.time}} - {{item.title}}</div>
+    {{#each item in day}}
+      <div class="block">{{formatDateTime item.time}} - {{item.title}}</div>
+    {{/each}}
   {{/each}}
-{{/each}}
+{{else}}
+  <p><button class="btn btn-block" {{action selectDay}}>BACK</button></p>
+  <p>{{formatDateTime selectedDay.date format=date}}</p>
+
+  {{#each item in selectedDay}}
+    <div class="block">{{formatDateTime item.time}} - {{item.title}}</div>
+  {{else}}
+    <div class="block">No tasks for this day</div>
+  {{/each}}
+{{/unless}}
