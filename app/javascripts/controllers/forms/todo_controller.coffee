@@ -1,4 +1,4 @@
-require 'controllers/forms/form_controller' 
+require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
@@ -21,7 +21,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   ).property('content.isFinished')
 
   isValid: ( ->
-    return if Ember.isEmpty(@get('description'))
+    return if Ember.isEmpty(@get('description').trim())
     return if @get('finishBy').isBeforeToday()
     return unless @get('user')
 
@@ -30,7 +30,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   submit: ->
     @set 'isSubmitted', true
-
     return unless @get('isValid')
 
     @set 'isExpanded', false
@@ -45,7 +44,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       @applyBufferedChanges()
 
       if @get('isNew')
-        @get('model').commit() 
+        @get('model').commit()
       else
         @get('store').commit()
 

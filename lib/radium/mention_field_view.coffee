@@ -32,6 +32,13 @@ Radium.MentionFieldView = Ember.View.extend
     disabledBinding: 'parentView.disabled'
     valueBinding: 'parentView.value'
 
+    keyDown: (event) ->
+      if event.keyCode is 13
+        event.preventDefault()
+
+    insertNewline: (event) ->
+      this.get('controller').submit()
+
     didInsertElement: ->
       @$().mentionsInput
         onDataRequest: @get('parentView').search.bind(@get('parentView'))
