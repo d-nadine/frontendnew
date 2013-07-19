@@ -21,5 +21,7 @@ Radium.CompanyController = Radium.ObjectController.extend
       if index > maxStatus
         maxStatus = index
 
+    maxStatus = if maxStatus == -1 then 0 else maxStatus
+
     @get('leadStatuses').objectAt(maxStatus).name
   ).property('contacts.[]')

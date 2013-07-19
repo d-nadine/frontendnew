@@ -55,13 +55,17 @@ Radium.computed.aggregate = ->
   Ember.computed.apply this, args
 
 Radium.computed.tasks = ->
-  arrays = Array.prototype.slice.call arguments
+  properties = Array.prototype.slice.call arguments
 
-  args = arrays.map (prop) => "#{prop}.[]"
+  args = properties.map (prop) => "#{prop}.[]"
 
   func = ->
     aggregate = Radium.AggregateArrayProxy.create()
-    arrays.forEach (array) => aggregate.add @get(array)
+    arrays = properties.map (array) => @get(array)
+
+    Ember.RSVP.all(arrays).then ->
+      arrays.forEach (array) => aggregate.add array
+
     aggregate
 
   args.push func

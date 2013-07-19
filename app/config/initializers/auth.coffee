@@ -2,10 +2,12 @@ Ember.Application.initializer
   name: 'auth'
   after: 'store'
   initialize: (container, application) ->
-    errHanler = (e) =>
-      Ember.Logger.error e
-      console.error 'The "me" user was not found for some reason!'
-      throw e
+    errHandler = (e) =>
+      debugger
+      location.replace('http://api.radiumcrm.com/sessions/new')
+      # Ember.Logger.error e
+      # console.error 'The "me" user was not found for some reason!'
+      # throw e
 
     Radium.User.find(name: 'me').then(((records) =>
       user = records.get('firstObject')
@@ -25,4 +27,4 @@ Ember.Application.initializer
       accountSettingsController.set('model', user.get('account'))
 
       Radium.advanceReadiness()
-    ), errHanler).then(null, errHanler)
+    ), errHandler).then(null, errHandler)
