@@ -1,7 +1,8 @@
 require 'lib/radium/groupable'
 
 Radium.RelatedTasksController = Ember.ArrayController.extend Radium.Groupable,
-  sortProperties: ['time']
+  # FIXME: sortable mixin blitzing arrangedContent WTF!!!
+  # sortProperties: ['time']
 
   groupBy: (task) ->
     if task.get('isFinished') then 'finished' else 'unfinished'
@@ -15,11 +16,15 @@ Radium.RelatedTasksController = Ember.ArrayController.extend Radium.Groupable,
     groupsMap['unfinished'] ||= @get('groupType').create content: Ember.A([]), name: 'unfinished'
     groupsMap['finished'] ||= @get('groupType').create content: Ember.A([]), name: 'finished'
 
-    @get('groupsMap')['unfinished'] 
+    for name in ['unfinished', 'finished']
+      group = groupsMap[name]
+      if group.get('length')
+        group = group.get('content').sort (a, b) ->
+          Ember.DateTime.compare a.get('time'), b.get('time')
 
     Ember.A([
       @get('groupsMap')['unfinished']
       @get('groupsMap')['finished']
     ])
-  ).property('groupedContent')
+  ).property('groupedContent.[]')
 

@@ -1,61 +1,67 @@
 {{#if model.length}}
   <ol class="related-tasks unstyled">
     {{#each group in sortedGroups}}
-      {{#each tasks in group itemController="relatedTaskItem"}}
-        {{#if isTodo}}
-          <li {{bindAttr class="isFinished isOverdue"}}>
-            <i class="icon-todo"></i>
-            {{#linkTo unimplemented}}{{description}}{{/linkTo}}
-            <span class="time">
-              Due
-              {{#linkTo unimplemented}}
-                {{formatDateTime time format="date"}}
-              {{/linkTo}}
-            </span>
-          </li>
-        {{/if}}
+      {{#each task in group itemController="relatedTaskItem"}}
+        {{#with task}}
+          {{#if isSaving}}
+            <strong>Saving.....</strong>
+          {{else}}
+            {{#if isTodo}}
+              <li {{bindAttr class="isFinished isOverdue"}}>
+                <i class="icon-todo"></i>
+                {{#linkTo unimplemented}}{{description}}{{/linkTo}}
+                <span class="time">
+                  Due
+                  {{#linkTo unimplemented}}
+                    {{formatDateTime time format="date"}}
+                  {{/linkTo}}
+                </span>
+              </li>
+            {{/if}}
 
-        {{#if isCall}}
-          <li {{bindAttr class="isFinished isOverdue"}}>
-            <i class="icon-call"></i>
-            {{#linkTo unimplemented}}Call{{/linkTo}}
-            with 
-            {{#linkTo user user}}{{user.name}}{{/linkTo}}
-            and
-            {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}
+            {{#if isCall}}
+              <li {{bindAttr class="isFinished isOverdue"}}>
+                <i class="icon-call"></i>
+                {{#linkTo unimplemented}}Call{{/linkTo}}
+                with 
+                {{#linkTo user user}}{{user.name}}{{/linkTo}}
+                and
+                {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}
 
-            <span class="time">
-              on
-              {{#linkTo unimplemented}}
-                {{formatDateTime time format="date"}}
-              {{/linkTo}}
-              at
-              {{#linkTo unimplemented}}
-                {{formatDateTime time format="short"}}
-              {{/linkTo}}
-            </span>
-          </li>
-        {{/if}}
+                <span class="time">
+                  on
+                  {{#linkTo unimplemented}}
+                    {{formatDateTime time format="date"}}
+                  {{/linkTo}}
+                  at
+                  {{#linkTo unimplemented}}
+                    {{formatDateTime time format="short"}}
+                  {{/linkTo}}
+                </span>
+              </li>
+            {{/if}}
 
-        {{#if isMeeting}}
-          <li>
-            <i class="icon-calendar"></i>
-            {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
-            with
-            {{list participants}}
+            {{#if isMeeting}}
+              <li>
+                <i class="icon-calendar"></i>
+                {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
+                with
+                {{list participants}}
 
-            <span class="time">
-              on
-              {{#linkTo unimplemented}}
-                {{formatDateTime time format="date"}}
-              {{/linkTo}}
-              at
-              {{#linkTo unimplemented}}
-                {{formatDateTime time format="short"}}
-              {{/linkTo}}
-            </span>
-          </li>
-        {{/if}}
+                <span class="time">
+                  on
+                  {{#linkTo unimplemented}}
+                    {{formatDateTime time format="date"}}
+                  {{/linkTo}}
+                  at
+                  {{#linkTo unimplemented}}
+                    {{formatDateTime time format="short"}}
+                  {{/linkTo}}
+                </span>
+              </li>
+            {{/if}}
+          {{/if}}
+        {{/with}}
       </li>
       {{/each}}
     {{/each}}
