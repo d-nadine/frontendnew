@@ -1,5 +1,9 @@
 body {
   background: none;
+
+  @include breakpoint(portrait) {
+    padding: 0;
+  };
 }
 
 .page-view {

@@ -1,5 +1,7 @@
 #topbar {
+
   .navbar-inner {
+    height: 47px;
     padding: 0 60px;
     background: $black;
     border: none;
@@ -12,5 +14,9 @@
 
   .navbar-search {
     margin-top: 9px;
+  }
+
+  a.active {
+    color: #fff;
   }
 }

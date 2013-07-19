@@ -1,12 +1,9 @@
-<div class="two-column-layout container">
+<div class="two-column-layout">
+  <div class="sidebar">
+    {{outlet sidebar}}
+  </div>
   <div class="row">
-    <div class="span4">
-      <div class="sidebar">
-        {{outlet sidebar}}
-      </div>
-    </div>
-
-    <div class="span8">
+    <div class="span8 offset4">
       {{yield}}
     </div>
   </div>

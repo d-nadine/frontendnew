@@ -5,10 +5,9 @@
 
 @import "mixins/cssarrow";
 @import "mixins/shadowed";
+@import "mixins/breakpoints";
 
 @import "layout";
-
-@import "layouts/fixed_two_column";
 @import "layouts/two_column";
 
 @import "components/alerts";
@@ -78,7 +77,7 @@
 }
 
 // Twitter bootstrap does handle this correctly
-// it uses border size and turns it off. This 
+// it uses border size and turns it off. This
 // may behave weirdly when turning borders/outlines
 // on off
 .btn-link {

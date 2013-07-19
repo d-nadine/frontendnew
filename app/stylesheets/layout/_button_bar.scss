@@ -1,8 +1,9 @@
 #drawer-buttons {
+  width: $button-bar-width;
   position: fixed;
   top: 48px;
   bottom: 0;
-  width: $button-bar-width;
+  z-index: 100;
   background-color: $black;
 
   > a {
