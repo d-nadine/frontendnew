@@ -70,7 +70,9 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
         item.constructor is Radium.Todo && item.get('user') == user ||
         item.constructor is Radium.Meeting && item.get('users').contains user
 
-    items.map (item) -> CalendarItem.create(content: item)
+    items.sort((a, b) ->
+        Ember.DateTime.compare a.get('time'), b.get('time')
+      ).map (item) -> CalendarItem.create(content: item)
   ).property('date', 'todos.[]', 'meetings.[]', 'user')
 
   todos: (->
