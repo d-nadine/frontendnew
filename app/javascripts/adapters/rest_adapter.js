@@ -51,8 +51,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
           this.didFindQuery(store, type, json, recordArray);
         });
       }).then(null, function(error){
-        Ember.Logger.error(error);
-        throw error;
+        location.replace('http://api.radiumcrm.com/sessions/new');
       });
     }else{
       var args = Array.prototype.call(arguments, 0, -1);

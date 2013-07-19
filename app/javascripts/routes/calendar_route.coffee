@@ -4,11 +4,13 @@ Radium.CalendarRoute = Radium.Route.extend
       @send 'toggleDrawer', 'calendar/select_user'
 
     selectUser: (user) ->
+      @controllerFor('calendarSidebar').set('selectedDay', calendarDay)
       @controllerFor('calendar').set 'user', user
       @send 'closeDrawer'
 
     selectDay: (calendarDay) ->
-      @controllerFor('calendarSidebar').set('selectedDay', calendarDay)
+      calendarSidebarController = @controllerFor('calendarSidebar')
+      calendarSidebarController.set('selectedDay', calendarDay)
 
   serialize: (model) ->
     {

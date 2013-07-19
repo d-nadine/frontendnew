@@ -8,11 +8,12 @@ CalendarItem = Ember.ObjectController.extend
   ).property('description', 'topic')
 
 Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
-  needs: ['users', 'clock']
+  needs: ['users', 'clock', 'calendarSidebar']
 
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
+  selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
 
   formBox: (->
     Radium.FormBox.create
@@ -22,22 +23,26 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
+  taskStartDate: ( ->
+    @get('selectedDay.date') || @get('tomorrow')
+  ).property('tomorrow', 'selectedDay', 'date')
+
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
     description: null
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: @get('taskStartDate')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
+  ).property('model', 'tomorrow', 'taskStartDate')
 
   callForm: Radium.computed.newForm('call')
 
   callFormDefaults: (->
     contact: @get('contact')
-    finishBy: @get('tomorrow')
+    finishBy: @get('taskStartDate')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
+  ).property('model', 'tomorrow', 'taskStartDate')
 
   meetingForm: Radium.computed.newForm('meeting')
 
