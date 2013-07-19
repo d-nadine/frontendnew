@@ -1,5 +1,17 @@
+.calendar-container {
+  padding: 0 20px 0 420px;
+
+  @include breakpoint(landscape) {
+    padding-left: 350px;
+  }
+
+  @include breakpoint(large-handheld) {
+    padding-left: 60px;
+  }
+}
+
 .calendar-navigation {
-  h3 { 
+  h3 {
     text-align: center;
     margin: 0 auto;
 
@@ -15,12 +27,57 @@
   }
 }
 
+.events-list-back-button {
+  padding: 0 0 10px 20px;
+}
+
+._events-list {
+  padding: 0 20px;
+  line-height: 25px;
+
+}
+
+.events-list-header {
+  @extend ._events-list;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.events-list-item {
+  @extend ._events-list;
+  padding: {
+    top: 5px;
+    bottom: 5px;
+  }
+  background: #fff;
+  border-bottom: 1px solid rgba(black, 0.1);
+
+  &.is-selected {
+    background: lightblue;
+  }
+}
+
+.events-list-empty {
+  text-align: center;
+}
+
+.events-list-item-timestamp {
+  float: left;
+}
+
+.events-list-item-description {
+  padding: 0 0 0 20px;
+  overflow: hidden;
+}
+
 .calendar {
   width: 100%;
   border-spacing: 4px;
   border-collapse: separate;
 
   td {
+    width: 14%;
     background-color: $bright;
   }
 

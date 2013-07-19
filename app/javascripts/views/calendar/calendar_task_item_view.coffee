@@ -1,4 +1,6 @@
 Radium.CalendarTaskItemView = Radium.View.extend
+  classNames: 'events-list-item'
+  classNameBindings: ['controller.isSelected']
   templateName: 'calendar/calendar_task_item'
 
   isSelectedDidChange: ( ->

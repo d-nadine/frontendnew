@@ -1,63 +1,69 @@
-<div class="calendar-navigation block shadowed">
-  <h3>
-    {{#linkTo calendar lastMonth class="btn pull-left"}}
-      <i class="icon-arrow-left"></i>Last Month
-    {{/linkTo}}
-
-    {{formatDateTime date format="monthYear"}}
-
-    {{#linkTo calendar nextMonth class="btn pull-right"}}
-      Next Month<i class="icon-arrow-right"></i>
-    {{/linkTo}}
-  </h3>
+<div class="sidebar">
+  {{outlet sidebar}}
 </div>
 
-{{render "form_box" formBox}}
+<div class="calendar-container">
+  <div class="calendar-navigation block shadowed">
+    <h3>
+      {{#linkTo calendar lastMonth class="btn pull-left"}}
+        <i class="icon-arrow-left"></i>Last Month
+      {{/linkTo}}
 
-<table class="calendar">
-  <colgroup class="weekdays">
-    <col class="monday" />
-    <col class="tuesday" />
-    <col class="wednesday" />
-    <col class="thrusday" />
-    <col class="friday" />
-  </colgroup>
-  <colgroup class="weekend">
-    <col class="saturday" />
-    <col class="sunday" />
-  </colgroup>
+      {{formatDateTime date format="monthYear"}}
 
-  <thead>
-    <tr>
-      {{#each dayNames}}
-        <th>{{this}}</th>
-      {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#each weeks}}
+      {{#linkTo calendar nextMonth class="btn pull-right"}}
+        Next Month<i class="icon-arrow-right"></i>
+      {{/linkTo}}
+    </h3>
+  </div>
+
+  {{render "form_box" formBox}}
+
+  <table class="calendar">
+    <colgroup class="weekdays">
+      <col class="monday" />
+      <col class="tuesday" />
+      <col class="wednesday" />
+      <col class="thrusday" />
+      <col class="friday" />
+    </colgroup>
+    <colgroup class="weekend">
+      <col class="saturday" />
+      <col class="sunday" />
+    </colgroup>
+
+    <thead>
       <tr>
-        {{#each calendarDay in this itemController="calendarDayItem"}}
-          <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isSelectedDate :day"}}>
-            <div class="wrapper">
-              <span class="date">
-                {{calendarDay.day}}
-              </span>
-
-              <ul>
-                {{#each calendarDay.visibleContent class="unstyled"}}
-                <li>
-                  <a href="#" {{action selectCalendarTask this target="calendarDay"}}>{{formatDateTime time}} - {{truncate title length="15"}}</a>
-                </i>
-                {{/each}}
-              </ul>
-            </div>
-            {{#if calendarDay.hiddenContent}}
-              <a class="btn-slab" {{action showMore target="calendarDay"}}>. . .</a>
-            {{/if}}
-          </td>
+        {{#each dayNames}}
+          <th>{{this}}</th>
         {{/each}}
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each weeks}}
+        <tr>
+          {{#each calendarDay in this itemController="calendarDayItem"}}
+            <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isSelectedDate :day"}}>
+              <div class="wrapper">
+                <span class="date">
+                  {{calendarDay.day}}
+                </span>
+
+                <ul>
+                  {{#each calendarDay.visibleContent class="unstyled"}}
+                  <li>
+                    <a href="#" {{action selectCalendarTask this target="calendarDay"}}>{{formatDateTime time}} - {{truncate title length="15"}}</a>
+                  </i>
+                  {{/each}}
+                </ul>
+              </div>
+              {{#if calendarDay.hiddenContent}}
+                <a class="btn-slab" {{action showMore target="calendarDay"}}>. . .</a>
+              {{/if}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
