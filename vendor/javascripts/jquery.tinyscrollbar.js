@@ -11,9 +11,8 @@
  * @author Maarten Baijs
  *
  */
-( function( $ ) 
+;( function( $ ) 
 {
-
     $.tiny = $.tiny || { };
 
     $.tiny.scrollbar = {
@@ -34,7 +33,7 @@
         
         this.each( function()
         { 
-            $( this ).data('tsb', new Scrollbar( $( this ), options ) );
+            $( this ).data('tsb', new Scrollbar( $( this ), options ) ); 
         });
 
         return this;
@@ -42,12 +41,13 @@
 
     $.fn.tinyscrollbar_update = function(sScroll)
     {
-        return $( this ).data( 'tsb' ).update( sScroll );
+        return $( this ).data( 'tsb' ).update( sScroll ); 
     };
 
     $.fn.unbindAll = function(){
       return $( this ).data( 'tsb' ).unbindAllEvents();
     }
+
 
     function Scrollbar( root, options )
     {
@@ -79,19 +79,18 @@
         {
             oViewport[ options.axis ] = oViewport.obj[0][ 'offset'+ sSize ];
             oContent[ options.axis ]  = oContent.obj[0][ 'scroll'+ sSize ];
-
             oContent.ratio            = oViewport[ options.axis ] / oContent[ options.axis ];
 
             oScrollbar.obj.toggleClass( 'disable', oContent.ratio >= 1 );
 
             oTrack[ options.axis ] = options.size === 'auto' ? oViewport[ options.axis ] : options.size;
             oThumb[ options.axis ] = Math.min( oTrack[ options.axis ], Math.max( 0, ( options.sizethumb === 'auto' ? ( oTrack[ options.axis ] * oContent.ratio ) : options.sizethumb ) ) );
-
+        
             oScrollbar.ratio = options.sizethumb === 'auto' ? ( oContent[ options.axis ] / oTrack[ options.axis ] ) : ( oContent[ options.axis ] - oViewport[ options.axis ] ) / ( oTrack[ options.axis ] - oThumb[ options.axis ] );
-
+            
             iScroll = ( sScroll === 'relative' && oContent.ratio <= 1 ) ? Math.min( ( oContent[ options.axis ] - oViewport[ options.axis ] ), Math.max( 0, iScroll )) : 0;
             iScroll = ( sScroll === 'bottom' && oContent.ratio <= 1 ) ? ( oContent[ options.axis ] - oViewport[ options.axis ] ) : isNaN( parseInt( sScroll, 10 ) ) ? iScroll : parseInt( sScroll, 10 );
-
+            
             setSize();
         };
 
@@ -127,7 +126,7 @@
             else
             {
                 oViewport.obj[0].ontouchstart = function( event )
-                {
+                {   
                     if( 1 === event.touches.length )
                     {
                         start( event.touches[ 0 ] );
@@ -140,6 +139,9 @@
             {
                 oWrapper[0].addEventListener( 'DOMMouseScroll', wheel, false );
                 oWrapper[0].addEventListener( 'mousewheel', wheel, false );
+                oWrapper[0].addEventListener( 'MozMousePixelScroll', function( event ){
+                    event.preventDefault();
+                }, false);
             }
             else if( options.scroll )
             {
@@ -154,7 +156,7 @@
             var oThumbDir   = parseInt( oThumb.obj.css( sDirection ), 10 );
             iMouse.start    = sAxis ? event.pageX : event.pageY;
             iPosition.start = oThumbDir == 'auto' ? 0 : oThumbDir;
-
+            
             if( ! touchEvents )
             {
                 $( document ).bind( 'mousemove', drag );
@@ -168,7 +170,7 @@
                     event.preventDefault();
                     drag( event.touches[ 0 ] );
                 };
-                document.ontouchend = end;
+                document.ontouchend = end;        
             }
         }
 
@@ -188,7 +190,6 @@
 
                 if( options.lockscroll || ( iScroll !== ( oContent[ options.axis ] - oViewport[ options.axis ] ) && iScroll !== 0 ) )
                 {
-                    oThumb.obj.trigger('contentScrolled', [sDirection, iScroll]);
                     oEvent = $.event.fix( oEvent );
                     oEvent.preventDefault();
                 }
@@ -213,7 +214,7 @@
                 oThumb.obj.css( sDirection, iPosition.now );
             }
         }
-
+        
         function end()
         {
             $( "body" ).removeClass( "noSelect" );

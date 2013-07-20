@@ -15,6 +15,29 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   now: Ember.computed.alias('clock.now')
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
 
+  # FIXME: use afterModel hook when we upgrade to rc6?
+  dateDidChange: ( ->
+    startOfCalendar = @get('startOfCalendar')
+    endOfCalendar = @get('endOfCalendar')
+
+    return if !startOfCalendar || !endOfCalendar
+
+    params =
+      start_date: startOfCalendar.toDateFormat()
+      end_date: endOfCalendar.toDateFormat()
+
+    todos = Radium.Todo.find(params)
+    meetings = Radium.Meeting.find(params)
+    calls = Radium.Call.find(params)
+
+    @set 'isLoading', true
+
+    Ember.RSVP.all([todos, meetings]).then( =>
+      @set 'isLoading', false
+    ).then ->
+      debugger
+  ).observes('date')
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')

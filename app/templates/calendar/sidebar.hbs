@@ -2,6 +2,9 @@
   {{avatar this style="medium"}}
   <h3>{{name}}</h3>
 </div>
+{{#if isLoading}}
+  {{partial 'is_loading'}}
+{{/if}}
 {{#unless selectedDay.date}}
   {{#each day in days}}
     <div class="events-list-header">{{formatDateTime day.date format=date}}</div>

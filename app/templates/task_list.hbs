@@ -1,23 +1,26 @@
 <h2>Tasks</h2>
 
 <div class="task-list">
-  {{#each group in arrangedGroups itemController="taskListGroupItem"}}
-    <h3>{{group.title}}</h3>
+  {{#if model.isLoading}}
+    {{partial 'is_loading'}}
+  {{else}}
+    {{#each group in arrangedGroups itemController="taskListGroupItem"}}
+      <h3>{{group.title}}</h3>
 
-    {{#each task in group}}
-      {{#if showTodoForm}}
-        {{render "forms/todo" task}}
-      {{/if}}
+      {{#each task in group}}
+        {{#if showTodoForm}}
+          {{render "forms/todo" task}}
+        {{/if}}
 
-      {{#if showCallForm}}
-        {{render "forms/call" task}}
-      {{/if}}
+        {{#if showCallForm}}
+          {{render "forms/call" task}}
+        {{/if}}
 
-      {{#if showMeetingForm}}
-        {{render "forms/meeting" task}}
-      {{/if}}
+        {{#if showMeetingForm}}
+          {{render "forms/meeting" task}}
+        {{/if}}
+      {{/each}}
     {{/each}}
-  {{/each}}
-
-  {{partial "shared/show_more"}}
+    {{partial "shared/show_more"}}
+  {{/if}}
 </div>

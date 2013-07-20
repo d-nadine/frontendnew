@@ -33,7 +33,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     if(this[queryMethod]) {
       return this[queryMethod].call(this, store, type, query, recordArray, this._super);
     } else {
-      this._super.apply(this, arguments);
+      return this._super.apply(this, arguments);
     }
   },
 
