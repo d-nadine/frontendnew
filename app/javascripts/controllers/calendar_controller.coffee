@@ -15,8 +15,18 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   now: Ember.computed.alias('clock.now')
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
 
+  init: ->
+    @_super.apply this, arguments
+    @set 'map', Ember.Map.create()
+
   # FIXME: use afterModel hook when we upgrade to rc6?
   dateDidChange: ( ->
+    date = @get('date')
+
+    return if @get('map').has date
+
+    @get('map').set date, date
+
     startOfCalendar = @get('startOfCalendar')
     endOfCalendar = @get('endOfCalendar')
 
@@ -159,6 +169,8 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   ).property('date')
 
   weeks: (->
+    return [] if @get('isLoading')
+
     weeks = []
     counter = 1
     days = []
@@ -169,7 +181,6 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       endOfDay = current.copy().atEndOfDay()
 
       dailyItems = @get('items').filter (item) ->
-        debugger if item.get('isLoading')
         item.get('time').isBetweenDates startOfDay, endOfDay
 
       day = Ember.ArrayProxy.create
@@ -186,4 +197,4 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       counter += 1
 
     weeks
-  ).property('date', 'items.[]', 'user')
+  ).property('date', 'items.[]', 'user', 'isLoading')
