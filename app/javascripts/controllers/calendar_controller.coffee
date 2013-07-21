@@ -14,10 +14,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'map', Ember.Map.create()
+  map: Ember.Map.create()
 
   # FIXME: use afterModel hook when we upgrade to rc6?
   dateDidChange: ( ->
