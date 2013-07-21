@@ -8,7 +8,7 @@ Radium.EmailsShowView = Radium.View.extend
       modelSelector = "[data-model='#{model.constructor}'][data-id='#{model.get('id')}']"
 
       emailCard = @$(modelSelector)
-      mainRow = $('.container')
+      mainRow = Ember.$('.two-column-layout')
 
       topOfMainColumn = emailCard.offset().top - mainRow.offset().top
 
