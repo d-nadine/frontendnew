@@ -32,10 +32,8 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
 
     @set 'isLoading', true
 
-    Ember.RSVP.all([todos, meetings]).then( =>
+    Ember.RSVP.all([todos, meetings]).then =>
       @set 'isLoading', false
-    ).then ->
-      debugger
   ).observes('date')
 
   formBox: (->
@@ -171,6 +169,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
       endOfDay = current.copy().atEndOfDay()
 
       dailyItems = @get('items').filter (item) ->
+        debugger if item.get('isLoading')
         item.get('time').isBetweenDates startOfDay, endOfDay
 
       day = Ember.ArrayProxy.create
