@@ -1,0 +1,17 @@
+.single-column-container {
+  width: 100%;
+  max-width: 1135px;
+  margin: 0 auto;
+
+  @include breakpoint(smallscreen) {
+    max-width: 724px;
+  }
+
+  @include breakpoint(portrait) {
+    max-width: 90%;
+  }
+}
+
+.single-column-row {
+  margin-left: -35px;
+}

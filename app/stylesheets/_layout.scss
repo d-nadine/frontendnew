@@ -7,7 +7,8 @@ body {
 }
 
 .page-view {
-  padding: 60px 0;
+  padding: 60px 0 60px 40px;
+  @include box-sizing(border-box);
 }
 
 $sidebar-width: 370px;
