@@ -13,8 +13,4 @@ Radium.configure do
 
   # Module format for minispade: :string or :function
   config.minispade.module_format = :function
-
-  config.middleware.use Rack::Auth::Basic do |username, password|
-    password == 'whynotactinium' && username == 'radium'
-  end
 end

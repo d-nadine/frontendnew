@@ -8,14 +8,6 @@ Radium.TodoForm = Radium.Form.extend
     description: @get('description')
   ).property().volatile()
 
-  type: ( ->
-    Radium.Todo
-  ).property()
-
-  typeName: ( ->
-    @get('type').toString().humanize()
-  ).property('type')
-
   reset: ->
     @_super.apply this, arguments
     @set 'description', ''

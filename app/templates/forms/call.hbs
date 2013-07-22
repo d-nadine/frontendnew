@@ -5,7 +5,10 @@
     {{#if isExpanded}}
       {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
     {{else}}
-      {{#linkTo contact contact class="pull-left"}}{{contact.name}}{{/linkTo}}
+      {{#if contact}}
+        {{#linkTo contact contact class="pull-left"}}{{contact.name}}{{/linkTo}}
+      {{else}}
+      {{/if}}
     {{/if}}
 
     {{#if showComments}}
