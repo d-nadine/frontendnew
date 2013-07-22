@@ -4,3 +4,4 @@ Radium.ChecklistItem = Radium.Model.extend
   weight: DS.attr('number')
   date: DS.attr('number')
   isFinished: DS.attr('boolean')
+  taskId: DS.attr('number')

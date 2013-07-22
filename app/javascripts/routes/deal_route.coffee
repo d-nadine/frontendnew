@@ -26,10 +26,10 @@ Radium.DealRoute = Radium.Route.extend
           into: 'application'
 
       deal.one 'becameInvalid', =>
-        debugger
+        console.error 'deal becameInvalid'
 
       deal.one 'becameError', =>
-        debugger
+        console.error 'deal becameError'
 
     showChecklist: (deal) ->
       @controllerFor('dealChecklist').set('model', deal)

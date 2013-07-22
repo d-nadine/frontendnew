@@ -108,7 +108,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     endDate = @get 'endOfCalendar'
 
     Radium.Todo.filter (todo) ->
-      todo.get('finishBy').isBetweenDates startDate, endDate
+      todo.get('finishBy').isBetweenDates(startDate, endDate) && !todo.get('isLoading')
   ).property('date')
 
   meetings: (->

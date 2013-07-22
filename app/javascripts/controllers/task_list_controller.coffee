@@ -91,7 +91,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
   ).property('groupedContent')
 
   groupBy: (task) ->
-    debugger if task.get('isLoading')
+    # debugger if task.get('isLoading')
     today    = @get 'clock.endOfDay'
     tomorrow = @get 'clock.endOfTomorrow'
     thisWeek = @get 'clock.endOfThisWeek'
