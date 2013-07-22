@@ -50,6 +50,7 @@ Radium.TodoForm = Radium.Form.extend
       deferred.reject()
 
     record.one 'becameError', (result)  ->
+      debugger
       Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
       result.get('transaction').rollback()
       deferred.reject()

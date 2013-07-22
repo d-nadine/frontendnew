@@ -47,11 +47,7 @@
           {{formatDateTime updatedAt format=date}}
         </td>
         <td>
-          {{#if nextTask}}
-            <span class="fixme upcase">{{render next_task nextTask}}</span>
-          {{else}}
-            <i class="icon-warning"></i>
-          {{/if}}
+          {{partial 'pipeline/pipeline_next_task'}}
         </td>
         <td>
           <span class="upcase">

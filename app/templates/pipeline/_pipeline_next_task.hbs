@@ -1,0 +1,9 @@
+{{#if tasks.isLoading}}
+  {{partial is_loading}}
+{{else}}
+  {{#if nextTask}}
+    <span class="fixme upcase">{{render next_task nextTask}}</span>
+  {{else}}
+    <i class="icon-warning"></i>
+  {{/if}}
+{{/if}}
