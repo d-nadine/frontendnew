@@ -2,18 +2,18 @@
 
 <div class="assigned-to">
   {{#if isEditing}}
-    {{#linkTo user this}}
+    {{#linkTo user user}}
       {{avatar this class="img-polaroid"}}
     {{/linkTo}}
     {{view view.userPicker class="field"}}
   {{else}}
     <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-    {{#linkTo user this}}
+    {{#linkTo user user}}
       {{avatar this class="img-polaroid"}}
     {{/linkTo}}
 
     <p>
-      {{#linkTo user this}}{{user.name}}{{/linkTo}}<br/>
+      {{#linkTo user user}}{{user.name}}{{/linkTo}}<br/>
       <span class="title muted">{{user.title}}</span>
     </p>
   {{/if}}

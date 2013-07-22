@@ -3,10 +3,6 @@ require 'forms/todo_form'
 Radium.CallForm = Radium.TodoForm.extend
   canChangeContact: true
 
-  type: ( ->
-    Radium.Call
-  ).property()
-
   data: ( ->
     user: @get('user')
     finishBy: @get('finishBy')

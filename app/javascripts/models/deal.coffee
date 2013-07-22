@@ -5,6 +5,7 @@ Radium.Deal = DS.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
   Radium.ChecklistTotalMixin,
 
+  user: DS.belongsTo('Radium.User')
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')

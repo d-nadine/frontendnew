@@ -9,7 +9,7 @@ Radium.TodoForm = Radium.Form.extend
   ).property().volatile()
 
   type: ( ->
-    Radium.Todo
+    if this.constructor is Radium.TodoForm then Radium.Todo else Radium.Call
   ).property()
 
   typeName: ( ->

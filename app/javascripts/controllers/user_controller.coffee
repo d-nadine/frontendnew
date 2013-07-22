@@ -6,7 +6,11 @@ Radium.UserController = Radium.ObjectController.extend
   isEditable: true
 
   closedDealsTotal: ( ->
-    @get('deals').filter (deal) ->
+    deals = @get('deals')
+
+    return unless deals
+
+    deals.filter (deal) ->
       deal.get('status') == 'closed'
   ).property('deals.[]')
 

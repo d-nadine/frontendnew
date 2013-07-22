@@ -18,6 +18,7 @@ Radium.Model.reopenClass
     contacts: Radium.Contact
     users: Radium.User
     companies: Radium.Company
+    deals: Radium.Deal
 
   keyFromValue: (klass) ->
     (for key of @mappings
