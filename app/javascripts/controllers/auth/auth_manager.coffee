@@ -10,7 +10,7 @@ Radium.AuthManager = Ember.Object.extend
       return
 
     @get('_token')
-  ).property('_token')
+  ).property('_token').volatile()
 
   tokenDidChange: ( ->
     token = @get('_token')
