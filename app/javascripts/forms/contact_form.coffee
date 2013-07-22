@@ -46,7 +46,7 @@ Radium.ContactForm = Radium.Form.extend
 
     @get('addresses').forEach (address) =>
       if @addressHasValue(address)
-        contact.get('addresses').push address.getProperties('name', 'isPrimary', 'street', 'state', 'city', 'country', 'zipcode')
+        contact.get('addresses').push address.getProperties('name', 'primary', 'street', 'state', 'city', 'country', 'zipcode')
 
     @get('tagNames').forEach (tag) =>
       contact.get('tagNames').push tag.get('name')

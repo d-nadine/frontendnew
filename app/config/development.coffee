@@ -8,3 +8,9 @@ Ember.Application.initializer
 
     store.get('_adapter').reopen
       url: 'http://localhost:9292'
+
+Ember.Application.initializer
+  name: 'developmentCookie'
+  after: 'store'
+  initialize: (container, application) ->
+    Ember.$.cookie 'token', 'development'

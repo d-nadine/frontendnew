@@ -2,8 +2,9 @@ Ember.Application.initializer
   name: 'auth'
   after: 'store'
   initialize: (container, application) ->
+    Radium.set('authManager', Radium.AuthManager.create())
+
     errHandler = (e) =>
-      debugger
       location.replace('http://api.radiumcrm.com/sessions/new')
       # Ember.Logger.error e
       # console.error 'The "me" user was not found for some reason!'

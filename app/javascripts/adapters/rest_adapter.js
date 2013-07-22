@@ -22,7 +22,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     hash = hash || {};
     hash.headers = hash.headers || {};
     hash.headers['X-Ember-Compat'] = "true";
-    hash.headers['X-User-Token'] = '41220a2ebad940629d979a792ab8274d';
+    hash.headers['X-User-Token'] = Radium.get('authManager.token');
     return this._super(url, type, hash);
   },
 
@@ -50,9 +50,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         Ember.run(adapter, function(){
           this.didFindQuery(store, type, json, recordArray);
         });
-      }).then(null, function(error){
-        location.replace('http://api.radiumcrm.com/sessions/new');
-      });
+      }).then(DS.rejectionHandler);
     }else{
       var args = Array.prototype.call(arguments, 0, -1);
       base.apply(this, args);
