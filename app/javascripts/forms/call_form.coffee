@@ -28,7 +28,14 @@ Radium.CallForm = Radium.TodoForm.extend
 
   bulkCommit: ->
     @get('reference').forEach (item) =>
-      if @get('contact') || item.constructor is Radium.Contact
+      contact = if @get('contact')
+                  contact
+                else if item.constructor is Radium.Contact
+                  item
+                else if item.get('contact')
+                  item.get('contact')
+
+      if contact
         record = @get('type').createRecord @get('data')
 
         if !record.get('contact') && item.constructor is Radium.Contact
