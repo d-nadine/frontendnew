@@ -51,9 +51,25 @@ Radium.computed.tasks = ->
 
     aggregate.set 'isLoading', true
 
-    Ember.RSVP.all(arrays).then ->
-      arrays.forEach (array) => aggregate.add array
+    errHandler = (error) =>
+      console.log error.message
       aggregate.set 'isLoading', false
+
+    Ember.RSVP.all(arrays).then((=>
+      arrays.forEach (array) => 
+        loading = array.filterProperty('isLoaded', false)
+        aggregate.add array.filter((item) -> return !loading.contains(item))
+
+        loading.forEach (task) =>
+          observer = =>
+            if task.get('isLoaded')
+              aggregate.add [task]
+              task.removeObserver task
+
+          task.addObserver 'isLoaded', observer
+      aggregate.set 'isLoading', false
+    ), errHandler)
+    .then(null, errHandler)
 
     aggregate
 
