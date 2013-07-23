@@ -108,7 +108,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     endDate = @get 'endOfCalendar'
 
     Radium.Todo.filter (todo) ->
-      todo.get('finishBy').isBetweenDates(startDate, endDate) && !todo.get('isLoading')
+      todo.get('isLoaded') && todo.get('finishBy').isBetweenDates(startDate, endDate)
   ).property('date')
 
   meetings: (->
@@ -116,7 +116,7 @@ Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
-      meeting.get('startsAt').isBetweenDates startDate, endDate
+      meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate)
   ).property('date')
 
   # FIXME: Why does this only work with ArrayController and 
