@@ -46,27 +46,26 @@ Radium.TodoForm = Radium.Form.extend
       deferred.resolve()
 
     record.one 'becameInvalid', (result) =>
-      Radium.Utils.generateErrorSummary result
-      deferred.reject()
+      deferred.reject(result)
 
     record.one 'becameError', (result)  ->
-      Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
       result.get('transaction').rollback()
-      deferred.reject()
+      typeName = @get('type').toString().humanize()
+      deferred.reject("An error has occurred and the #{typeName} could not be created.")
 
   bulkCommit: ->
+    typeName = @get('type').toString().humanize()
+
     @get('reference').forEach (item) =>
       record = @get('type').createRecord @get('data')
       record.set 'reference', item
 
       record.one 'didCreate', (record) =>
         if item == @get('reference.lastObject')
-          deferred.resolve()
+          deferred.resolve("The todos have been created")
 
       record.one 'becameInvalid', (result) =>
-        Radium.Utils.generateErrorSummary result
-        deferred.reject()
+        deferred.reject(result)
 
       record.one 'becameError', (result)  ->
-        Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
-        deferred.reject()
+        deferred.reject("An error has occurred and the #{typeName} could not be created.")

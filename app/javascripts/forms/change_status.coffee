@@ -45,14 +45,12 @@ Radium.ChangeStatusForm = Radium.Form.extend
           deferred.resolve() unless @get('deals.length')
 
         deal.one 'becameInvalid', (result) =>
-          Radium.Utils.generateErrorSummary deal
           transaction.rollback()
-          deferred.reject()
+          deferred.reject(result)
 
         deal.one 'becameError', (result)  ->
-          Radium.Utils.notifyError 'An error has occurred and the selected deals status could not be changed.'
           transaction.rollback()
-          deferred.reject()
+          deferred.reject('An error has occurred and the selected deals status could not be changed.')
 
         transaction.add deal
 

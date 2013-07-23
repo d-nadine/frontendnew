@@ -35,11 +35,11 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
-        Radium.Utils.generateErrorSummary email
+        @send 'flashError', email
 
       email.one 'becameError', =>
         form.set 'isSending', false
-        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+        @send 'flashError', 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 
@@ -63,7 +63,9 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         reassignForm.reset()
         controller.trigger 'formReset'
         @resetForm()
-        Radium.Utils.notify "Selected Items have been reassigned."
+        @send "flashSuccess", "Selected Items have been reassigned.",
+      (error) =>
+        @send 'flashError', error
 
     confirmDeletion: ->
       @render 'bulk_actions/deletion_confirmation',
@@ -85,7 +87,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
     deleteRecord: (record) ->
       record.deleteRecord()
 
-      Radium.Utils.notify "Record has been deleted."
+      @send "flashSuccess", "Record has been deleted."
 
       @send 'close'
 

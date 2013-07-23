@@ -1,10 +1,7 @@
-# Note: This could be moved into the global folder, but just to all
-# the files in this branch contained to primarily settings folders
-# I've set this up in here for now. Move at your own discretion
-Radium.SettingsFlashView = Ember.View.extend
+Radium.FlashView = Ember.View.extend
   classNames: 'alert fade'
   classNameBindings: 'controller.type'
-  templateName: 'settings/flash'
+  templateName: 'flash'
 
   didInsertElement: ->
     @$()[0].offsetWidth

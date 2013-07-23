@@ -80,7 +80,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     @set 'activeForm', null
 
-    Radium.Utils.notify "Selected tags added"
+    @send 'flashSuccess', 'Selected tags added'
 
   addTag: (tag) ->
     tagNames = @get('addTagsForm.tagNames')

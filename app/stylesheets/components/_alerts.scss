@@ -5,7 +5,8 @@
   padding: 1em;
   z-index: $alerts-layer;
   text-align: center;
-  margin-right: 50px;
+  margin: 0 0 0 -40%;
+  left:50%;
 }
 
 .delete-confirmation{

@@ -1,0 +1,10 @@
+<button type="button" class="close" {{action "close" target="view"}}>&times;</button>
+{{#if message}}
+  {{message}}
+{{else}}
+  <ul>
+    {{#each errors}}
+      <li>{{name}} {{error}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

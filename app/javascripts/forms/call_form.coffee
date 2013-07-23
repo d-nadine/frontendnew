@@ -22,7 +22,7 @@ Radium.CallForm = Radium.TodoForm.extend
     true
   ).property('contact', 'description', 'finishBy', 'user')
 
-  bulkCommit: ->
+  bulkCommit: (deferred) ->
     @get('reference').forEach (item) =>
       contact = if @get('contact')
                   contact
@@ -41,12 +41,10 @@ Radium.CallForm = Radium.TodoForm.extend
 
         record.one 'didCreate', (record) =>
           if item == @get('reference.lastObject')
-            deferred.resolve()
+            deferred.resolve('The calls have been created')
 
         record.one 'becameInvalid', (result) =>
-          Radium.Utils.generateErrorSummary result
-          deferred.reject()
+          deferred.reject(result)
 
         record.one 'becameError', (result)  ->
-          Radium.Utils.notifyError "An error has occurred and the #{@get('typeName')} could not be created."
-          deferred.reject()
+          deferred.reject("An error has occurred and the calls could not be created.")

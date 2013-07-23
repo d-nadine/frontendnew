@@ -30,10 +30,10 @@ Radium.EmailsShowRoute = Radium.Route.extend
             $.scrollTo 0, duration: 300
 
       email.one 'becameInvalid', =>
-        Radium.Utils.generateErrorSummary email
+        @send 'flashError', email
 
       email.one 'becameError', =>
-        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+        @send 'flashError', 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 
@@ -56,10 +56,10 @@ Radium.EmailsShowRoute = Radium.Route.extend
           @transitionTo 'emails.show', email
 
       email.one 'becameInvalid', =>
-        Radium.Utils.generateErrorSummary email
+        @send 'flashError',  email
 
       email.one 'becameError', =>
-        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+        @send 'flashError', 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 
