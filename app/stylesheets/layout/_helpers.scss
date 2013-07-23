@@ -1,0 +1,7 @@
+.vert-center {
+  height: 100%;
+  @include display-box;
+  @include box-orient(vertical);
+  @include box-align(stretch);
+  @include box-pack(center);
+}

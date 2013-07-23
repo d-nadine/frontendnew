@@ -1,209 +1,31 @@
-.pipeline-view {
-  .table-list{
-    margin-top: 15px;
-  }
+.add-lead {
+  display: inline-block;
+}
 
-  .email-confirmation-view {
-    .close{
-      display: block;
-    }
-  }
+.pipeline-workflows-list-item {
+  margin: 0 0 50px;
+}
 
-  .table-list tbody td:first-child {
-    position: relative;
+.pipeline-workflows-total {
+  width: 25%;
+  padding: 0 20px;
+  float: right;
+  vertical-align: middle;
+  background: #e9e9e9;
 
-    & + td {
-      padding-left: 15px;
-    }
-  }
-
-  .table-list .is-checked {
-    background-color: $secondary-selection;
-  }
-
-  .delete {
-    visibility: hidden;
-  }
-
-  .is-checked .delete {
-    visibility: visible;
-  }
-
-  .is-past-payment {
-    color: red;
-  }
-  .show-results{
+  small {
+    line-height: 60px;
     display: inline-block;
-    vertical-align: top;
-    position: relative;
-    top: 20px;
-    margin-bottom: 12px;
-  }
-  table.totals{
-    display: inline-block;
-    width: 95%;
-    th:not(.title), td:not(.title){
-      text-align: center;
-      width: 10%;
-    }
-    td.title{
-      font-weight: bold;
-      text-transform: uppercase;
-    }
+    color: #888;
   }
 }
 
-#pipeline-widget {
-  background: none;
-  width: 100%;
-  display: table;
+.pipeline-workflow-deals-list {
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
 
-  li{
-    margin-left:50px;
-    display: table-cell;
-  }
-
-  .divider {
-    color: $dark;
-  }
-}
-
-#pipeline-results {
-  padding: 0 5px 0 5px;
-
-  .upcase{
-    margin-bottom: 20px;
-  }
-
-  .action-forms{
-    padding-bottom: 0;
-  }
-
-  table{
-    margin-top: 20px;
-  }
-
-  form.just-added {
-    label {
-      color: $green;
-    }
-
-    background-color: darken($dark-background, 50);
-    .control-box,
-    textarea,
-    input[type=text],
-    select,
-    .control-box,
-    .btn-group,
-    .btn,
-    .mentions,
-    .mentions a {
-      background-color: darken($dark-background, 50);
-      color: $bright;
-    }
-  }
-
-  .bulk-leader{
-    padding: 4px 0 10px 4px;
-  }
-
-  .change-status{
-    #change-status-action{
-      margin-top: 1px;
-    }
-
-    .mention-field-view{
-      width: 67%;
-    }
-
-    .success {
-      position: absolute;
-      right: 10px;
-      top: 9px;
-      color: $bright;
-    }
-  }
-}
-
-#form-wdiget {
-  clear: both;
-}
-
-#workflow-status {
-  margin-top: 20px;
-  .meta {
-    .expand, .title, .pull-right{
-      display: inline-block;
-    }
-
-    a:hover {
-      text-decoration: none;
-    }
-  }
-
-  .group {
-    margin-bottom: 20px;
-  }
-
-}
-
-#header{
-  h1{
-    text-transform: uppercase;
-  }
-  margin: 0;
-  padding-bottom: 15px;
-
-  .btn{
-    outline: none;
-  }
-  #title, #controls{
-    display: inline-block;
-  }
-
-  #controls{
-    position: relative;
-    float: right;
-    margin-top: 20px;
-
-    .date-filter, .actions, .add-lead{
-      padding: 0 10px 0 15px;
-    }
-
-    .date-filter,{
-    }
-
-    .date-filter, .actions{
-      vertical-align: middle;
-      span{
-        position: relative;
-        top: 4px;
-      }
-    }
-
-    .date-filter{
-      width: 250px;
-      padding-top: 1px;
-      padding-bottom: 1px;
-    }
-
-    .actions{
-      padding: 1px 10px 1px 20px;
-
-      width: 150px;
-    }
-
-    .add-lead{
-      display: inline-block;
-      margin-left: -10px;
-      a.btn{
-        padding-right: 27px;
-        padding-left: 20px;
-        border-radius: 0;
-      }
-      ul li{
-        text-align: center;
-      }
-    }
+  th {
+    text-align: left;
+    color: #6e6e6e;
   }
 }

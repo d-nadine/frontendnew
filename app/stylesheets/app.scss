@@ -8,9 +8,11 @@
 @import "mixins/breakpoints";
 
 @import "layout";
+@import "layout/helpers";
 @import "layouts/single_column";
 @import "layouts/two_column";
 
+@import "components/page-header";
 @import "components/alerts";
 @import "components/avatars";
 @import "components/comments";
@@ -31,6 +33,7 @@
 @import "components/radiolist";
 @import "components/feed";
 @import "components/pricing_table";
+@import "components/pipeline-breadcrumb";
 
 @import "forms";
 @import "forms/dropdown_menu";

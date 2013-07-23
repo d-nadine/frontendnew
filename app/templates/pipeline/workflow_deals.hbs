@@ -1,7 +1,7 @@
 {{#if showHeader}}
   {{partial 'pipeline/header'}}
 {{/if}}
-<table class="table table-list">
+<table class="table table-hover pipeline-workflow-deals-list">
   <colgroup>
     <col class="checkbox">
     <col class="deal">
@@ -19,6 +19,7 @@
       <th>Assigned To</th>
       <th>Last Activity</th>
       <th>Next Task</th>
+      <th>Change Status</th>
       <th>Forecast</th>
       <th class="text-center">Value</th>
       <th>&nbsp;</th>
@@ -50,6 +51,21 @@
           {{partial 'pipeline/pipeline_next_task'}}
         </td>
         <td>
+          <div class="btn-group">
+            <button class="btn">{{status}}</button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Lead</a></li>
+              <li><a href="#">Negotiating</a></li>
+              <li><a href="#">Closed</a></li>
+              <li><a href="#">Paid</a></li>
+              <li><a href="#">Lost</a></li>
+            </ul>
+          </div>
+        </td>
+        <td>
           <span class="upcase">
             <a href="#" {{action showChecklist this bubbles=false}}>{{percentage}}%</a>
           </span>
@@ -61,9 +77,14 @@
       </tr>
     {{else}}
       <tr>
-        <td colspan="7">No Deals</td>
+        <td colspan="9">No Deals</td>
       </tr>
     {{/each}}
+    <tr>
+      <td colspan="9">
+        {{partial "shared/show_more"}}
+      </td>
+    </tr>
   </tbody>
 </table>
-{{partial "shared/show_more"}}
+{{partial "pipeline/totals"}}

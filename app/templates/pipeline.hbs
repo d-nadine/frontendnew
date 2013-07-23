@@ -1,26 +1,60 @@
-<div id="widget-block" class="block">
-  <ul class="breadcrumb" id="pipeline-widget">
+<div class="pipeline-breadcrumb">
+  <ol class="pipeline-breadcrumb-list">
     {{#each workflowGroups itemController="workflowGroupItem"}}
-      <li class="workflow">
+      <li class="pipeline-breadcrumb-item">
         {{#if isWorkflow}}
-          {{#linkTo pipeline.workflow content.title}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+          {{#linkTo pipeline.workflow content.title class="pipeline-breadcrumb-button"}}
+            <div class="vert-center">
+              <h4 class="pipeline-state-title">
+                {{capitalize content.title}}
+                <div class="pipeline-badge">
+                  {{pipelineBadge content.title}} new
+                </div>
+              </h4>
+              <p class="pipeline-state-numbers">{{total}} / {{currency total}}</p>
+            </div>
+          {{/linkTo}}
         {{/if}}
         {{#if isClosed}}
-          {{#linkTo pipeline.closed}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+          {{#linkTo pipeline.closed class="pipeline-breadcrumb-button"}}
+            <div class="vert-center">
+              <h4 class="pipeline-state-title">
+                {{capitalize content.title}}
+                <div class="pipeline-badge">
+                  {{pipelineBadge content.title}}
+                </div>
+              </h4>
+              <p class="pipeline-state-numbers">{{total}} / {{currency total}}</p>
+            </div>
+          {{/linkTo}}
         {{/if}}
         {{#if isLost}}
-          {{#linkTo pipeline.lost}}{{capitalize content.title}} {{pipelineBadge content.title}}{{/linkTo}}
+          {{#linkTo pipeline.lost class="pipeline-breadcrumb-button"}}
+            <div class="vert-center">
+              <h4 class="pipeline-state-title pipeline-state-lost">
+                {{capitalize content.title}}
+                <div class="pipeline-badge">
+                  {{pipelineBadge content.title}}
+                </div>
+              </h4>
+              <p class="pipeline-state-numbers">{{total}} / {{currency total}}</p>
+            </div>
+          {{/linkTo}}
         {{/if}}
-        <span class="divider">&gt;</span>
       </li>
     {{/each}}
-    <li class="unpublished">
-      {{#linkTo pipeline.unpublished}}Unpublished{{/linkTo}} {{badge unpublished.length style="info"}}
+    <li class="pipeline-breadcrumb-item">
+      {{#linkTo pipeline.unpublished class="pipeline-breadcrumb-button"}}
+        <div class="vert-center">
+          <h5 class="pipeline-state-title pipeline-state-empty">Unpublished</h5>
+          <p class="pipeline-state-numbers">{{unpublished.length}}</p>
+        </div>
+      {{/linkTo}}
     </li>
-  </ul>
+  </ol>
 </div>
 
-<div id="pipeline-results" class="block">
+<div id="pipeline-results" class="">
   {{outlet confirmation}}
   {{outlet}}
 </div>

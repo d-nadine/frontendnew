@@ -12,20 +12,6 @@
       <i class="icon-calendar"></i>
     {{/if}}
 
-    <span class="text">
-      {{#if isTodo}}
-        {{truncate description}}
-      {{/if}}
-
-      {{#if isCall}}
-        Call {{reference.name}}
-      {{/if}}
-
-      {{#if isMeeting}}
-        {{truncate topic}}
-      {{/if}}
-    </span>
-
     <small class="dark">
       {{#if isTodo}}
         {{formatDateTime finishBy format=date}}
@@ -39,6 +25,20 @@
         {{formatDateTime startsAt format=date}}
       {{/if}}
     </small>
+
+    <span class="text">
+      {{#if isTodo}}
+        {{truncate description}}
+      {{/if}}
+
+      {{#if isCall}}
+        Call {{reference.name}}
+      {{/if}}
+
+      {{#if isMeeting}}
+        {{truncate topic}}
+      {{/if}}
+    </span>
   {{else}}
     <small class="dark">
       No Tasks Yet!

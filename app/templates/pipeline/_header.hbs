@@ -1,8 +1,5 @@
 <div id="header" class="page-header">
-  <div id="title">
-    <h1>{{title}}</h1>
-  </div>
-  <div id="controls">
+  <div class="pipeline-state-controls pull-right">
     <div class="field control-box">
       <div class="btn-group">
         <a class="btn btn-link" href="#">
@@ -11,13 +8,14 @@
         {{input type=text value=searchText}}
       </div>
     </div>
-    <div class="field control-box date-filter">
-      <span {{bindAttr class="visibleContent.length::muted"}}>{{selectedFilterText}}</span>
-      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
-        <button class="btn">
-          <i class="icon-arrow-down"></i>
-        </button>
-      </div>
+
+    {{partial "pipeline/add_lead_btn"}}
+
+    <div class="btn-group">
+      <button class="btn">{{selectedFilterText}}</button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
       <ul class="dropdown-menu">
         {{#each filters}}
           <li>
@@ -26,18 +24,12 @@
         {{/each}}
       </ul>
     </div>
-    <div class="field control-box actions">
-      <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
-      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
-        <button class="btn">
-          {{#if hasCheckedContent}}
-            <i class="icon-arrow-down"></i>
-          {{else}}
-            <i class="icon-arrow-up"></i>
-          {{/if}}
+
+    {{#if hasCheckedContent}}
+      <div class="btn-group">
+        <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+          Actions <span class="caret"></span>
         </button>
-      </div>
-      {{#if hasCheckedContent}}
         <ul class="dropdown-menu">
           <li>
             <a href="#" {{action showForm 'assign'}}>Assign</a>
@@ -62,19 +54,12 @@
             <a href="#" {{action confirmDeletion}}>Delete</a>
           </li>
         </ul>
-      {{/if}}
-    </div>
-    <div class="add-lead">
-      <div class="dropdown-toggle" data-toggle="dropdown">
-        <a class="btn btn-medium btn-info dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-plus icon-white"></i> NEW
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li>{{#linkTo deals.new}}Deal{{/linkTo}}</li>
-          <li>{{#linkTo leads.new}}Lead{{/linkTo}}</li>
-        </ul>
       </div>
-    </div>
+    {{/if}}
+  </div>
+
+  <div id="title">
+    <h1>{{title}}</h1>
   </div>
 </div>
 {{#if showFormArea}}

@@ -2,7 +2,7 @@
   {{partial is_loading}}
 {{else}}
   {{#if nextTask}}
-    <span class="fixme upcase">{{render next_task nextTask}}</span>
+    {{render next_task nextTask}}
   {{else}}
     <i class="icon-warning"></i>
   {{/if}}
