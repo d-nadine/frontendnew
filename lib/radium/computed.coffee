@@ -64,7 +64,7 @@ Radium.computed.tasks = ->
           observer = =>
             if task.get('isLoaded')
               aggregate.add [task]
-              task.removeObserver task
+              task.removeObserver 'isLoaded', observer
 
           task.addObserver 'isLoaded', observer
       aggregate.set 'isLoading', false
