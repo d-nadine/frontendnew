@@ -7,10 +7,10 @@ Radium.ChecklistEvents =
 
   saveChecklist: (deal) ->
     deal.one 'becameInvalid', =>
-      Radium.Utils.generateErrorSummary deal
+      @send 'flashError', deal
 
     deal.one 'becameError', =>
-      Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+      @send 'flashError', 'An error has occurred and the eamil has not been sent'
 
     @get('store').commit()
     @send 'close'

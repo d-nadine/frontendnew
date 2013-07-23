@@ -65,6 +65,37 @@ Radium.ApplicationRoute = Radium.Route.extend
       else
         @transitionTo lastPage[0]
 
+    flashMessage: (options) ->
+      controller = @controllerFor 'flash'
+      content = if !options.message
+                  "Settings saved!"
+                else if options.message && typeof options.message == "string"
+                  options.message
+                else
+                  null
+
+      model = if content then null else options.message
+
+      controller.setProperties
+        type: options.type ? null
+        message: content
+        model: model
+
+      @render 'flash',
+        into: 'application'
+        outlet: 'flash'
+        controller: controller
+
+    flashSuccess: (message) ->
+      @send 'flashMessage',
+        type: 'alert-success'
+        message: message
+
+    flashError: (error) ->
+      @send 'flashMessage',
+        type: 'alert-error'
+        message: error
+
   model: ->
     Radium.Deal.find({})
 

@@ -56,4 +56,4 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
 
     @get('store').commit()
 
-    Radium.Utils.notify "deleted!"
+    @send "flashSuccess", "deleted!"

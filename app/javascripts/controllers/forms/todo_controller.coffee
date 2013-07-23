@@ -44,7 +44,12 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       @applyBufferedChanges()
 
       if @get('isNew')
-        @get('model').commit()
+        @get('model').commit().then(( (confirmation) =>
+          @send('flashSuccess', confirmation) if confirmation
+        ),
+        ((error) =>
+          @send 'flashError', error
+        ))
       else
         @get('store').commit()
 

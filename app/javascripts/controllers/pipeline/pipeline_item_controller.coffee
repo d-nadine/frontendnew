@@ -4,4 +4,4 @@ Radium.PipelineItemController = Radium.ObjectController.extend Radium.ChecklistT
 
     @get('store').commit()
 
-    Radium.Utils.notify "deleted!"
+    @send "flashSuccess", "deleted!"

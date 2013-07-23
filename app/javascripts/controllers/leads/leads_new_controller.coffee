@@ -58,11 +58,11 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
     createContact.one 'becameError', (result) =>
       @set 'isSaving', false
-      Radium.Utils.notifyError 'An error has occurred and the contact could not be created.'
+      @send 'flashError', 'An error has occurred and the contact could not be created.'
 
     createContact.one 'becameInvalid', (result) =>
       @set 'isSaving', false
-      Radium.Utils.generateErrorSummary createContact
+      @send 'flashError', createContact
 
     @set 'isSaving', true
 

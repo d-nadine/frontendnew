@@ -18,11 +18,11 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
-        Radium.Utils.generateErrorSummary email
+        @send 'flashError', email
 
       email.one 'becameError', =>
         form.set 'isSending', false
-        Radium.Utils.notifyError 'An error has occurred and the eamil has not been sent'
+        @send 'flashError', 'An error has occurred and the eamil has not been sent'
 
       @store.commit()
 

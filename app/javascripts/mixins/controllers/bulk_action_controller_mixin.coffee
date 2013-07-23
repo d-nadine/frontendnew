@@ -42,11 +42,14 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     return unless @get('changeStatusForm.isValid')
     @set 'changeStatusForm.todo', @get('statusTodo')
     @get('changeStatusForm').commit().then =>
+      @send 'flashSuccess', "Deal's status succesfully changed"
       @set('statusTodo', '')
       @set 'isSubmitted', false
       @get('changeStatusForm').reset()
       @set 'lostBecause', ''
       @trigger 'formReset'
+      , (error) =>
+        @send 'flashError', error
 
   submit: (form) ->
     return unless form.get('isValid')
