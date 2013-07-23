@@ -1,13 +1,9 @@
 <div id="header" class="page-header">
   <div class="pipeline-state-controls pull-right">
-    <div class="field control-box">
-      <div class="btn-group">
-        <a class="btn btn-link" href="#">
-          <i class="icon-search"></i>
-        </a>
-        {{input type=text value=searchText}}
-      </div>
-    </div>
+    <form class="form-search pipeline-search">
+      <i class="icon-search"></i>
+      {{input type=text value=searchText class="input-medium"}}
+    </form>
 
     {{partial "pipeline/add_lead_btn"}}
 
