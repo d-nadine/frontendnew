@@ -59,7 +59,8 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 });
 
 Radium.RESTAdapter.configure('plurals',{
-  company: 'companies'
+  company: 'companies',
+  settings: 'settings'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
