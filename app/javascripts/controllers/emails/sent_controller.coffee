@@ -27,3 +27,9 @@ Radium.EmailsSentController = Ember.ObjectController.extend
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
+
+  showTasksButton: ( ->
+    return if @get('isSaving') || @get('isPersonal')
+
+    true
+  ).property('isSaving', 'isPersonal')

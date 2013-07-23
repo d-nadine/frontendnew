@@ -2,11 +2,18 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   showMeta : false
 
   toggleSwitch: ->
+    @toggleProperty 'isPersonal'
+
+  isPersonal: ( (key, value) ->
     return if @get('isNew')
     return if @get('model.isSaving')
     return if @get('model.isSending')
-    @set('isPersonal', !@get('isPersonal'))
-    @get('store').commit()
+    if arguments.length == 2
+      @set('model.isPersonal', value)
+      @get('model.transaction').commit()
+    else
+      @get('model.isPersonal')
+  ).property('model.isPersonal')
 
   toggleFormBox: ->
     @toggleProperty 'showFormBox'

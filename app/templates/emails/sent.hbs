@@ -1,11 +1,11 @@
 <div class="block email-confirmation-view">
   <button type="button" {{action closeEmailConfirmation bubbles="false"}} class="close">×</button>
-  {{#unless isSaving}}
+  {{#if showTasksButton}}
     <div class="adder">
       <div class="arrow"></div>
       <i class="icon-plus" {{action addTask this}}></i>
     </div>
-  {{/unless}}
+  {{/if}}
 
   {{#if isSaving}}
     <div class="sending">
@@ -27,8 +27,8 @@
   {{/if}}
 </div>
 
-{{#unless isSaving}}
+{{#if showTasksButton}}
   <div {{action addTask model}} class="block block-connected block-blue related-task-prompt">
     <p>Add Related Task?</p>
   </div>
-{{/unless}}
+{{/if}}
