@@ -3,21 +3,23 @@
 </div>
 
 <div class="calendar-container">
-  <div class="calendar-navigation block shadowed">
+  <div class="calendar-toolbar">
+    <div class="pull-right">
+      {{#linkTo calendar lastMonth class="btn calendar-month-btn"}}
+        <i class="icon-arrow-left"></i> Last Month
+      {{/linkTo}}
+
+      {{#linkTo calendar nextMonth class="btn calendar-month-btn"}}
+        Next Month <i class="icon-arrow-right"></i>
+      {{/linkTo}}
+    </div>
     <h3>
-      {{#linkTo calendar lastMonth class="btn pull-left"}}
-        <i class="icon-arrow-left"></i>Last Month
-      {{/linkTo}}
-
       {{formatDateTime date format="monthYear"}}
-
-      {{#linkTo calendar nextMonth class="btn pull-right"}}
-        Next Month<i class="icon-arrow-right"></i>
-      {{/linkTo}}
     </h3>
   </div>
-
-  {{render "form_box" formBox}}
+  <div>
+    {{render "form_box" formBox}}
+  </div>
 
   {{#if isLoading}}
     {{partial 'is_loading'}}
@@ -55,14 +57,17 @@
 
                 <ul>
                   {{#each calendarDay.visibleContent class="unstyled"}}
-                  <li>
-                    <a href="#" {{action selectCalendarTask this target="calendarDay"}}>{{formatDateTime time}} - {{truncate title length="15"}}</a>
+                  <li class="day-event-item">
+                    <a href="#" {{action selectCalendarTask this target="calendarDay"}}>
+                      {{formatDateTime time}}
+                      <span class="day-event-item-description">{{title}}</span>
+                    </a>
                   </i>
                   {{/each}}
                 </ul>
               </div>
               {{#if calendarDay.hiddenContent}}
-                <a class="btn-slab" {{action showMore target="calendarDay"}}>. . .</a>
+                <a class="btn-slab" {{action showMore target="calendarDay"}}>▪▪▪</a>
               {{/if}}
             </td>
           {{/each}}

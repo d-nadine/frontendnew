@@ -1,13 +1,19 @@
-<div class="block">
-  {{avatar this style="medium"}}
-  <h3>{{name}}</h3>
-</div>
+{{#if controllers.calendar.user}}
+  <div class="block events-user-details">
+    <div class="user-avatar">
+      {{avatar this style="medium"}}
+    </div>
+    <h3 class="events-user-name">{{controllers.calendar.user.name}}</h3>
+  </div>
+{{/if}}
 {{#if isLoading}}
   {{partial 'is_loading'}}
 {{/if}}
 {{#unless selectedDay.date}}
   {{#each day in days}}
-    <div class="events-list-header">{{formatDateTime day.date format=date}}</div>
+    <div class="events-list-header">
+      {{formatDateTime day.date format="calendar"}}
+    </div>
     {{each item in day itemController="calendarTaskItem" itemViewClass="Radium.CalendarTaskItemView"}}
   {{/each}}
 {{else}}

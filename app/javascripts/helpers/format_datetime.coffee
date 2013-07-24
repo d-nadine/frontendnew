@@ -1,8 +1,9 @@
 formats = {
   full: "%B %d, %Y %i:%M %p"
-  short: "%i:%M%p"
+  short: "%i:%M %p"
   date: "%B, %D %Y"
   monthYear: "%B %Y"
+  calendar: "%A, %B %D %Y"
 }
 
 Ember.Handlebars.registerBoundHelper 'formatDateTime', (value, options) ->

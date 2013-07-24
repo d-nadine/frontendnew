@@ -1,3 +1,5 @@
+$calendar-off: #d8d9d9;
+
 .calendar-container {
   padding: 0 20px 0 420px;
 
@@ -10,14 +12,9 @@
   }
 }
 
-.calendar-navigation {
-  h3 {
-    text-align: center;
-    margin: 0 auto;
-
-    // related to centering the header vertically
-    margin-bottom: 5px;
-    line-height: 24.5px;
+.calendar-month-btn {
+  i {
+    font-size: 9px;
   }
 }
 
@@ -27,43 +24,62 @@
   }
 }
 
+.events-user-details {
+  margin: 0;
+  overflow: hidden;
+
+  .user-avatar {
+    margin-right: 10px;
+    float: left;
+  }
+}
+
+.events-user-name {
+  margin-top: 0;
+}
+
 .events-list-back-button {
   padding: 0 0 10px 20px;
 }
 
 ._events-list {
   padding: 0 20px;
-  line-height: 25px;
 
 }
 
 .events-list-header {
   @extend ._events-list;
   font-size: 12px;
-  text-transform: uppercase;
   font-weight: bold;
+  line-height: 32px;
+  background-color: #e9e9e9;
 }
 
 .events-list-item {
   @extend ._events-list;
   padding: {
-    top: 5px;
-    bottom: 5px;
+    top: 8px;
+    bottom: 8px;
   }
+  font-size: 14px;
+  line-height: 18px;
   background: #fff;
   border-bottom: 1px solid rgba(black, 0.1);
+  color: #6e6e6e;
 
   &.is-selected {
     background: lightblue;
+  }
+
+  time {
+    float: left;
+    font-weight: bold;
+    text-transform: lowercase;
   }
 }
 
 .events-list-empty {
   text-align: center;
-}
-
-.events-list-item-timestamp {
-  float: left;
 }
 
 .events-list-item-description {
@@ -75,25 +91,44 @@
   width: 100%;
   border-spacing: 4px;
   border-collapse: separate;
+  table-layout: fixed;
 
   td {
-    width: 14%;
+    vertical-align: top;
     background-color: $bright;
+  }
+
+  tr {
+    td:last-of-type,
+    td:nth-of-type(6) {
+      color: darken($calendar-off, 20%);
+      background-color: lighten($calendar-off, 2%);
+
+      .date {
+        color: darken($calendar-off, 8%);
+      }
+    }
+
+    th:last-of-type,
+    th:nth-of-type(6) {
+      color: darken($calendar-off, 20%);
+    }
   }
 
   .is-different-month {
     background-color: $dark-background;
-
-    .btn-slab {
-      border-color: darken($dark-background, 15);
-    }
   }
 
   .is-selected-date {
-    background-color: #c3e3ba;
+    background-color: $calendar-active;
+    border: 1px solid #bcbcbc;
 
     .btn-slab {
-      border-color: darken(#adde9f, 15);
+      color: darken($calendar-active, 20%);
+    }
+
+    .date {
+      color: darken($calendar-active, 25%);
     }
   }
 
@@ -102,30 +137,51 @@
     font-weight: bold;
     font-size: 11px;
     color: lighten($dark, 45);
-    line-height: 11px;
+    line-height: 20px;
   }
 
   .wrapper {
-    padding: 4px;
+    padding: 4px 10px;
     min-height: 100px;
   }
 
   .day ul {
     list-style: none;
     margin: 0;
-
-    li {
-      font-size: 11px;
-      line-height: 11px;
-    }
   }
 
   .btn-slab {
-    border-top: solid 1px $dark-background;
     display: block;
     font-weight: bold;
     text-align: center;
-    color: black;
+    letter-spacing: 1px;
     text-decoration: none;
   }
+}
+
+.day-event-item {
+  font-size: 12px;
+  line-height: 18px;
+  color: #6e6e6e;
+
+  a {
+    color: inherit;
+  }
+
+  time {
+    width: 60px;
+    display: block;
+    font-weight: bold;
+    float: left;
+    clear: left;
+  }
+}
+
+.day-event-item-description {
+  max-width: 200px;
+  display: block;
+  margin-left: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

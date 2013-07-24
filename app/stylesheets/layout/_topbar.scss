@@ -16,7 +16,15 @@
     margin-top: 9px;
   }
 
-  a.active {
-    color: #fff;
+  a {
+    i {
+      color: #008fe5;
+      text-shadow: 0 1px 0 rgba(black, 0.25);
+    }
+
+    &.active {
+      color: #fff;
+    }
   }
+
 }

@@ -6,17 +6,33 @@
     <div class="container">
       <ul class="nav">
         <li class="dropdown">
-          {{#linkTo messages}}Messages{{/linkTo}}
+          {{#linkTo messages}}
+            Messages
+          {{/linkTo}}
         </li>
 
-        <li>{{#linkTo calendar today}}Calendar{{/linkTo}}</li>
-
-        <li>{{#linkTo user currentUser}}Tasks{{/linkTo}}</li>
-
-        <li>{{#linkTo pipeline.index}}Pipeline{{/linkTo}}</li>
+        <li>
+          {{#linkTo calendar today}}
+            Calendar
+          {{/linkTo}}
+        </li>
 
         <li>
-          {{#linkTo addressbook.filter 'all'}}Address Book{{/linkTo}}
+          {{#linkTo user currentUser}}
+            Tasks
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo pipeline.index}}
+            Pipeline
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo addressbook.filter 'all'}}
+            Address Book
+          {{/linkTo}}
         </li>
       </ul>
 
