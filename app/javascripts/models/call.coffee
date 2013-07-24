@@ -27,8 +27,10 @@ Radium.Call = Radium.Model.extend Radium.CommentsMixin,
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
-  overdue: (->
-    @get('finishBy').isBeforeToday()
+  overdue: ( ->
+    now = Ember.DateTime.create()
+
+    @get('finishBy') < now  && !@get('isFinished')
   ).property('finishBy')
 
   time: Ember.computed.alias('finishBy')
