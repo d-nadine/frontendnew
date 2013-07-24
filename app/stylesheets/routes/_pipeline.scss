@@ -30,6 +30,18 @@
   }
 }
 
+.pipeline-workflow-deals-row {
+  a.delete {
+    color: #b6b6b6;
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover a.delete {
+    opacity: 1;
+  }
+}
+
 .pipeline-search {
   margin: 0;
   display: inline-block;

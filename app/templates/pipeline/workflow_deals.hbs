@@ -27,7 +27,7 @@
   </thead>
   <tbody>
     {{#each visibleContent itemController="pipelineItem"}}
-      <tr {{bindAttr class="isChecked"}}>
+      <tr {{bindAttr class=":pipeline-workflow-deals-row isChecked"}}>
         <td>
           {{view Radium.Checkbox class="checker-block" checkedBinding="isChecked"}}
         </td>

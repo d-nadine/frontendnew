@@ -1,4 +1,4 @@
-<div id="header" class="page-header">
+<div class="page-header">
   <div class="pipeline-state-controls pull-right">
     <form class="form-search pipeline-search">
       <i class="icon-search"></i>
@@ -6,20 +6,21 @@
     </form>
 
     {{partial "pipeline/add_lead_btn"}}
-
-    <div class="btn-group">
-      <button class="btn">{{selectedFilterText}}</button>
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        {{#each filters}}
-          <li>
-            <a href="#" {{action changeFilter name}}>{{text}}</a>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+    {{#if selectedFilterText}}
+      <div class="btn-group">
+        <button class="btn">{{selectedFilterText}}</button>
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each filters}}
+            <li>
+              <a href="#" {{action changeFilter name}}>{{text}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
 
     {{#if hasCheckedContent}}
       <div class="btn-group">
