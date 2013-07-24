@@ -44,11 +44,7 @@
           {{formatDateTime payBy format=date}}
         </td>
         <td>
-          {{#if nextTask}}
-            <span class="fixme upcase">unimplemented</span>
-          {{else}}
-            <i class="icon-warning"></i>
-          {{/if}}
+          {{partial 'pipeline/pipeline_next_task'}}
         </td>
         <td class="text-right">{{currency value}}</td>
       </tr>
