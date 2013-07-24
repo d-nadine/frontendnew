@@ -1,35 +1,36 @@
-Radium.InviteUserController = Ember.ObjectController.extend Radium.CurrentUserMixin,
+Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserMixin,
   needs: 'users'
   users: Ember.computed.alias 'controllers.users'
-  newUserName: null,
   newUserEmail: null,
-  isUnique: true
-  didInvite: false
 
   inviteUser: ->
-    user = Radium.UserInvite.createRecord
+    user = Radium.UserInvitation.createRecord
       email: @get('newUserEmail')
-      name: @get('newUserName')
-      inviteDate: Ember.DateTime.create()
 
-    @setProperties
-      newUserName: null
-      newUserEmail: null
-      didInvite: true
+    user.one 'didCreate', =>
+      @send 'flashSuccess', 'The invitation has been sent'
+      @set 'newUserEmail', null
+
+    user.one 'becameInvalid', =>
+      @send 'flashError', user
+      user.deleteRecord()
+
+    user.one 'becameError', =>
+      @send 'flashError', 'An error has occurred and the invitation cannot be sent.'
+      user.deleteRecord()
+
+    user.get('transaction').commit()
+
+  # FIXME: Should be done on the server and return 422
+  isDuplicate: ( ->
+    email = @get('newUserEmail')
+    !!@get('users').filterProperty('email', email).get('length')
+  ).property('newUserEmail')
 
   isValidEmail: (->
     email = @get('newUserEmail')
-    isUnique = @get('users').filterProperty('email', email).get('length')
+    isValid = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test email
+    isValid and not @get('isDuplicate')
+  ).property('newUserEmail', 'isDuplicate')
 
-    isValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test email
-    true if isValid and isUnique is 0
-  ).property('newUserEmail')
-
-  isDisabled: (->
-    username = $.trim(@get('newUserName'))
-    isValidUsername = Ember.isEmpty username
-    true if @get('isValidEmail') isnt true or Ember.isEmpty username
-  ).property('isValidEmail', 'newUserName')
-
-  reset: ->
-    @set 'didInvite', false
+  isDisabled: Ember.computed.not 'isValidEmail'

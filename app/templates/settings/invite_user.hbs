@@ -1,10 +1,11 @@
 <form {{bindAttr class=":form-inline didInvite:success"}} {{action "inviteUser" on="submit"}}>
-  {{input value=newUserName class="input-xlarge" placeholder="Who are you going to invite?"}}
+  {{#if isDuplicate}}
+    <div class="alert alert-warning">
+      A user with this email address has already registered.
+    </div>
+  {{/if}}
   {{input value=newUserEmail class="input-xlarge" placeholder="Add a member by Email"}}
   <button class="btn btn-success" {{bindAttr disabled="controller.isDisabled"}}>
     Invite
   </button>
-  {{#if didInvite}}
-    <span class="help-inline">New user added!</span>
-  {{/if}}
 </form>

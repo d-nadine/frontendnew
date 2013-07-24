@@ -1,9 +1,9 @@
 Radium.SettingsCompanyRoute = Radium.Route.extend
   model: ->
-    Radium.Settings.find(1)
+    Radium.UserInvitation.find()
 
   setupController: (controller, model) ->
-    this.controllerFor('usersInvites').set('content', Radium.UserInvite.find())
+    this.controllerFor('usersInvites').set('content', model)
 
   events:
     deleteUser: (user) ->
@@ -15,9 +15,9 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
       details = user.getProperties('name', 'email')
       details.invitedAt = Ember.DateTime.create()
       resend = Radium.ResendUserInvite.createRecord(details)
-      resend.one('didCreate', (item) =>
+      resend.one 'didCreate', (item) =>
         @send('didResendInvite', item.get('email'))
-      )
+
       @store.commit()
 
     didResendInvite: (email) ->

@@ -196,3 +196,11 @@ Radium.RESTAdapter.map('Radium.Meeting', {
   user: { key: 'assigned_to_id' },
   comments: {embedded: 'load'},
 });
+
+Radium.RESTAdapter.map('Radium.UserInvitation', {
+  email: {key: 'address'},
+});
+
+Radium.RESTAdapter.map('Radium.User', {
+  isAdmin: {key: 'admin'},
+});
