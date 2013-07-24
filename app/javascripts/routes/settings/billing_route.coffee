@@ -22,6 +22,5 @@ Radium.SettingsBillingRoute = Radium.Route.extend
 
   setupController: (controller, models) ->
     settings = @controllerFor('settings').get('content')
-    models.forEach((item) =>
+    models.forEach (item) =>
       item.set('isCurrent', true) if item.get('id') is settings.get('currentPlan')
-    )

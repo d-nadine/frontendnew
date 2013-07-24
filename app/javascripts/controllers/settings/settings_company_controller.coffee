@@ -4,7 +4,7 @@ Radium.SettingsCompanyController = Ember.ObjectController.extend Radium.CurrentU
   pendingUsers: ( ->
     @get('controllers.usersInvites').filter (invite) ->
       !invite.get('isNew') || !invite.get('isError')
-  ).property('controllers.usersInvites')
+  ).property('controllers.usersInvites.[]')
 
   didReInvite: false
 

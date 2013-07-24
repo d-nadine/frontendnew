@@ -8,8 +8,17 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
       content.get 'name'
   ).property('name', 'currentUser')
 
-  makeAdmin: ->
-    @set('isAdmin', true)
+  isAdmin: ( ->
+    if arguments.length == 2
+      @set('model.isAdmin', true)
+      @get('store').commit() 
+    else
+      @get('model.isAdmin')
+  ).property('model.isAdmin')
+
+  toggleIsAdmin: ->
+    return if @get('isSaving')
+    @toggleProperty('isAdmin')
 
   removeAsAdmin: ->
     @set('isAdmin', false)

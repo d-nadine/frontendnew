@@ -28,7 +28,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   overdue: ( ->
     now = Ember.DateTime.create()
 
-    @get('finishBy') < now  && !@get('isFinished')
+    (@get('finishBy') < now)  && (!@get('isFinished'))
   ).property('finishBy')
 
   time: Ember.computed.alias('finishBy')
