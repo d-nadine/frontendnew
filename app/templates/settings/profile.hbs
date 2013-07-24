@@ -12,14 +12,11 @@
         <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
       </div>
       <div class="controls settings-user-details">
-        {{input value=firstName placeholder="First Name" class="input-block-level inline-field large-inline-field"}}
-        {{input value=lastName placeholder="Last Name" class="input-block-level inline-field large-inline-field"}}
-        <br>
-        {{input type="email" value=email class="input-block-level inline-field user-email"}}
+        {{view view.firstName value=firstName placeholder="First Name" class="input-block-level inline-field large-inline-field"}}
+        {{view view.lastName placeholder="Last Name" class="input-block-level inline-field large-inline-field"}}
         <br>
         {{input type="tel" value=phone placeholder="Phone Number" class="input-block-level inline-field user-phone"}}
         <br>
-        <input type="text" value="Initech Inc." class="input-block-level inline-field">
       </div>
     </div>
   </fieldset>
@@ -29,14 +26,11 @@
       <label class="control-label">Gmail</label>
       <div class="controls">
         <div class="input-prepend input-append">
-          <input class="span2" id="appendedPrependedInput" type="text" value="MichaelB@gmail.com" readonly>
+          <input class="span2" id="appendedPrependedInput" type="text" {{bindAttr value=email}} readonly>
           <span class="add-on">
             <span class="label label-success"><i class="icon-todo"></i> Connected</span>
           </span>
         </div>
-        <span class="help-inline">
-          <button class="btn btn-small btn-warning">Disconnect</button>
-        </span>
       </div>
     </div>
   </fieldset>

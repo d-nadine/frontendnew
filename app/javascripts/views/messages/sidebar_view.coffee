@@ -13,23 +13,24 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
 
   scrollToItem: (item) ->
     modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
-    element = Ember.$(modelSelector)
+    # FIXME: do we need the tinyscrollbar?
+    # element = Ember.$(modelSelector)
 
-    return unless element.length
+    # return unless element.length
 
-    position = element.offset().top
-    scroller = @$('.scroller')
+    # position = element.offset().top
+    # scroller = @$('.scroller')
 
-    boundingBoxTop = scroller.offset().top
-    boundingBoxBottom = boundingBoxTop + scroller.outerHeight()
+    # boundingBoxTop = scroller.offset().top
+    # boundingBoxBottom = boundingBoxTop + scroller.outerHeight()
 
-    return if position >= boundingBoxTop && position <= boundingBoxBottom
+    # return if position >= boundingBoxTop && position <= boundingBoxBottom
 
-    outside = @$('.overview').position().top + @$('.scroller').offset().top
-    distanceToCenter = outside + (0.5 * (@$('.scroller').height() - element.outerHeight()))
-    distanceToElement = element.offset().top
+    # outside = @$('.overview').position().top + @$('.scroller').offset().top
+    # distanceToCenter = outside + (0.5 * (@$('.scroller').height() - element.outerHeight()))
+    # distanceToElement = element.offset().top
 
-    top = distanceToElement - distanceToCenter
-    return if top < 0
+    # top = distanceToElement - distanceToCenter
+    # return if top < 0
 
-    @get('scroller').tinyscrollbar_update top
+    # @get('scroller').tinyscrollbar_update top

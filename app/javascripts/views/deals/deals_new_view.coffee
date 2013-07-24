@@ -65,7 +65,7 @@ Radium.DealsNewView= Ember.View.extend
 
     valueInvalid: ( ->
       return false unless @get('controller.isSubmitted')
-      value = @get('controller.value')
+      value = @get('value')
 
       return true if Ember.isEmpty value
 

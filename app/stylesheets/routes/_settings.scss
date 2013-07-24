@@ -36,7 +36,7 @@
 }
 
 input.inline-field {
-  border: none;
+  border: 1px solid transparent;
   @include box-shadow(none);
 
   &:hover,
@@ -51,7 +51,13 @@ input.inline-field {
     line-height: 30px;
     height: auto;
   }
+
+  &.is-invalid {
+    border-color: red;
+  }
 }
+
+
 
 input.api-field {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;

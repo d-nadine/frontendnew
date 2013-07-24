@@ -1,6 +1,4 @@
-Radium.SettingsRoute = Radium.Route.extend
-  model: ->
-    Radium.Settings.find(1)
+Radium.SettingsRoute = Radium.Route.extend()
 
 Radium.SettingsIndexRoute = Radium.Route.extend
   redirect: ->
