@@ -1,6 +1,6 @@
 Radium.UserInvitation = Radium.Model.extend
   email: DS.attr('string')
+  sentAt: DS.attr('datetime')
 
-Radium.ResendUserInvite = Radium.Model.extend
-  inviteSent: DS.attr('date')
-  email: DS.attr('string')
+Radium.UserInvitationDelivery = Radium.Model.extend
+  userInvitation: DS.belongsTo('Radium.UserInvitation')

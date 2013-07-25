@@ -34,7 +34,7 @@
           <button class="btn btn-danger" {{action "cancelInvite" this}}>Cancel Invite</button>
           <button class="btn btn-warning" {{action "resendInvite" this}}>Resend Invite</button>
         </div>
-        <p>{{email}}</p>
+        <p>{{email}} - sent at - {{formatDateTime sentAt format=full}}</p>
       </li>
     {{/each}}
   </ul>
