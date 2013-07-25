@@ -45,14 +45,18 @@ Radium.computed.tasks = ->
 
   args = properties.map (prop) => "#{prop}.[]"
 
-  func = ->
+  func = (propName) ->
     aggregate = Radium.AggregateArrayProxy.create()
-    arrays = properties.map (array) => @get(array)
+    arrays = properties.map((array) => 
+      @get(array)
+    ).filter((array) =>
+      array.get('length')
+    )
 
     aggregate.set 'isLoading', true
 
     errHandler = (error) =>
-      console.log error.message
+      console.error error
       aggregate.set 'isLoading', false
 
     Ember.RSVP.all(arrays).then((=>

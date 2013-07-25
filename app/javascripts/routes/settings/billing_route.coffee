@@ -20,7 +20,7 @@ Radium.SettingsBillingRoute = Radium.Route.extend
 
     models = Ember.A([planA, planB, planC])
 
-  setupController: (controller, models) ->
-    settings = @controllerFor('settings').get('content')
-    models.forEach (item) =>
-      item.set('isCurrent', true) if item.get('id') is settings.get('currentPlan')
+  # FIXME: currentPlan needs set on account in API
+  # setupController: (controller, models) ->
+  #   models.forEach (item) =>
+  #     item.set('isCurrent', true) if item.get('id') is settings.get('currentPlan')

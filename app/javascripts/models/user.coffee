@@ -31,6 +31,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   salesGoal: DS.attr('number')
 
+  token: DS.attr('string')
+
   name: ( ->
     "#{@get("firstName")} #{@get("lastName")}"
   ).property('firstName', 'lastName')

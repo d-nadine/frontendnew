@@ -15,7 +15,7 @@
   {{else}}
     <div class="subject">
       {{#if subject}}
-        <p>Your email &quot;{{#linkTo emails.show this}}{{subject}}{{/linkTo}}&quot; sent to</p>
+        <p>Your email &quot;{{#linkTo emails.show this}}{{subject}}{{/linkTo}}&quot; sent to {{partial 'emails/sent_list'}}
       {{else}}
         <p>Sent an email to</p>
       {{/if}}

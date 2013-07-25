@@ -33,7 +33,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   ).property('sender')
 
   toList: Radium.computed.aggregate('toUsers', 'toContacts')
-  ccList: Radium.computed.aggregate('ccUsers', 'ccUsers')
+  ccList: Radium.computed.aggregate('ccUsers', 'ccContacts')
   bccList: Radium.computed.aggregate('bccUsers', 'bccContacts')
 
   to: DS.attr('array')
