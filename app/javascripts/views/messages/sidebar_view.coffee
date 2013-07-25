@@ -1,8 +1,9 @@
 Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
-  itemsDidChange: (->
-    return unless @state is 'inDOM'
-    Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
-  ).observes('controller.length')
+  # FIXME: Need to review whether the tinyscrollbar is needed
+  # itemsDidChange: (->
+  #   return unless @state is 'inDOM'
+  #   Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
+  # ).observes('controller.length')
 
   selectionDidChange: (->
     selectedItem = @get 'controller.selectedContent'
