@@ -1,16 +1,22 @@
-<div {{bindAttr class="isChecked :search-result :company"}}>
-  {{partial 'shared/check_button'}}
-  <div class="meta">
-    <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
-    <div class="header">
-      <div class="name">
-        <span class="name">{{#linkTo company this}}{{name}}{{/linkTo}}</span>
-      </div>
-      {{partial 'shared/address'}}
-    </div>
-    {{partial 'search/links'}}
+{{partial 'shared/check_button'}}
+<div class="pull-left">
+  <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
+</div>
+<div class="clearfix">
+  <div class="pull-right">
+    {{partial 'search/delete'}}
   </div>
-  {{partial 'search/tasks'}}
-  {{partial 'search/members'}}
-  {{partial 'search/delete'}}
+  <div class="span3">
+    <h4 class="search-list-item-title">{{#linkTo company this}}{{name}}{{/linkTo}}</h4>
+    {{partial 'search/links'}}
+    <address>
+      {{partial 'shared/address'}}
+    </address>
+  </div>
+  <div class="span2">
+    {{partial 'search/tasks'}}
+  </div>
+  <div class="span2">
+    {{partial 'search/members'}}
+  </div>
 </div>

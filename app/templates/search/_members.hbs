@@ -1,16 +1,21 @@
 <div class="members">
   {{#if contacts.length}}
-    {{#if isTag}}
-      {{#linkTo addressbook.members this}}{{membersText}}{{/linkTo}}
-    {{else}}
-      {{#linkTo addressbook.employees this}}{{membersText}}{{/linkTo}}
-    {{/if}}
-    {{#each truncatedContacts}}
-      <div class="contact">
-        {{avatar this size=small class="img-polaroid"}}
-        {{name}}
-      </div>
-    {{/each}}
+    <h5>
+      {{#if isTag}}
+        {{#linkTo addressbook.members this}}{{membersText}}{{/linkTo}}
+      {{else}}
+        {{#linkTo addressbook.employees this}}{{membersText}}{{/linkTo}}
+      {{/if}}
+    </h5>
+    <div class="clearfix">
+      <ul class="inline contact">
+        {{#each truncatedContacts}}
+          <li class="contact-tooltip" data-toggle="tooltip" {{bindAttr title="name"}}>
+            {{avatar this size=small class="img-polaroid"}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
     {{#if hasMoreContacts}}
       {{#if isTag}}
         {{#linkTo addressbook.members this}}...{{/linkTo}}

@@ -1,23 +1,29 @@
-<div {{bindAttr class="isChecked :search-result"}}>
-  {{partial 'shared/check_button'}}
-  <div class="meta">
-    {{avatar this size=medium class="img-polaroid"}}
-    <div class="header">
-      <div class="name">
-        <span class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</span>
+{{partial 'shared/check_button'}}
+<div class="pull-left">
+  {{avatar this size=medium class="img-polaroid"}}
+</div>
+<div class="clearfix">
+  <div class="pull-right">
+    {{partial 'search/delete'}}
+  </div>
+  <div class="span3">
+    <div class="name">
+      <h4 class="search-list-item-title">{{#linkTo contact this}}{{name}}{{/linkTo}}</h4>
+    </div>
+    <div class="company-title">
+      <div class="title muted">{{title}}</div>
+      {{#if company}}
+      <div class="company">
+        {{#linkTo company company}}{{company.name}}{{/linkTo}}
       </div>
-      <div class="company-title">
-        <div class="title muted">{{title}}</div>
-        {{#if company}}
-        <div class="company">
-          {{#linkTo company company}}{{company.name}}{{/linkTo}}
-        </div>
-        {{/if}}
-      </div>
+      {{/if}}
     </div>
     {{partial 'search/links'}}
   </div>
-  {{partial 'search/tasks'}}
-  <div class="members">&nbsp;</div>
-  {{partial 'search/delete'}}
+  <div class="span2">
+    {{partial 'search/last_activity'}}
+  </div>
+  <div class="span3">
+    {{partial 'search/tasks'}}
+  </div>
 </div>

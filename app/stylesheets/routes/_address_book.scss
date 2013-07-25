@@ -1,221 +1,41 @@
-.addressbook-view{
-  label{
-    text-transform: uppercase;
-    color: $muted;
+.search-result-list {
+
+}
+
+.address-book-list-switch {
+  border-bottom: 1px solid $border;
+}
+
+.search-result-list-item {
+  padding: 10px 0 10px 50px;
+  position: relative;
+  border-bottom: 1px solid $border;
+  @include box-sizing(border-box);
+
+  &.is-checked {
+    background-color: $associated-blue;
   }
 
-  .email-confirmation-view {
-    .close{
-      display: block;
-    }
+  .delete {
+    margin-top: 25px;
+    opacity: 0;
+    @include transition(opacity 0.25s);
   }
 
-  .autocomplete{
-    &:not(.email){
-      border: 1px solid $control-border-color;
-      ul li{
-        margin: 2px;
-      }
-    }
+  &:hover .delete {
+    opacity: 1;
   }
 
-  #add-tags{
-    margin-top: 10px;
-    font-weight: bold;
-    color: $muted;
-    text-transform: uppercase;
-  }
-
-  #header{
-    margin-bottom: 10px;
-    #controls{
-      float: none;
-
-      #search-filter{
-        .dropdown-menu{
-          width: 274px;
-        }
-      }
-    }
-  }
-
-  .block-blue{
-    margin-bottom: 22px;
-    .upcase{
-      margin-bottom: 10px;
-    }
-  }
-
-  #results{
-    div:first-of-type .search-result{
-      border-top: 1px solid $disabled;
-      padding-top: 10px;
-    }
-  }
-
-  .search-result{
-    position: relative;
-    min-height: 160px;
-    margin-bottom: 1px;
-    margin-top: 5px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $disabled;
-
-    &:not(.company){
-      .meta .links{
-        margin-left: 85px;
-      }
-    }
-
-    &.company{
-      .meta .links{
-        margin-left: 94px;
-      }
-    }
-
-    &.is-checked{
-      background-color: $secondary-selection;
-    }
-
-    &:hover{
-      &:not(.is-checked){
-        background-color: lighten($secondary-selection, 4);
-      }
-      .delete{
-        .icon-delete{
-          opacity: 1;
-        }
-      }
-    }
-
-    .members{
-      margin-top: 8px;
-      min-width: 180px;
-
-      a{
-        display: block;
-        margin-bottom: 5px;
-      }
-    }
-
-    &.tag{
-      .header .name{
-        margin-top: 15px;
-        font-size: 30px;
-      }
-
-      .header label{
-        display: inline;
-      }
-
-      .btn-block,
-      .description,
-      .created-by{
-        margin-top: 20px;
-      }
-
-      .btn-block{
-        font-weight: bold;
-        text-transform: uppercase;
-        color: $muted;
-        width: 187px;
-      }
-
-      .members{
-        margin-top: 10px;
-      }
-    }
-
-    .deals,
-    .tags{
-      margin-top: 10px;
-      label{
-        display: inline;
-        margin-right: 10px;
-      }
-      a:after{
-        content: ', ';
-      }
-      a:last-of-type:after{
-        content: '';
-      }
-    }
-
-    .meta{
-      margin-left: 45px;
-      width: 350px;
-      img.avatar{
-        margin-top: 2px;
-      }
-      .links{
-        .deals{
-          margin-bottom: 10px;
-        }
-        .tags{
-          label{
-            display: inline;
-            margin-right: 10px;
-          }
-        }
-      }
-    }
-
-    .members{
-      display: inline-block;
-      vertical-align: top;
-    }
-
-    .delete{
-      display: inline-block;
-      vertical-align: bottom;
-      .icon-delete{
-        opacity: 0;
-      }
-    }
-  }
-
-  .company-title{
-    text-transform: uppercase;
-    margin-top: 10px;
-    > div{
-      margin-top: 10px;
-    }
-  }
-
-  .header,
-  .tasks,
-  .meta,
-  .avatar{
+  .avatar {
     display: inline-block;
-    vertical-align: top;
   }
 
-  .header{
-    position: relative;
-    margin-top: 5px;
-    margin-left: 5px;
-    width: 235px;
-    .name{
-      font-size: 20px;
-    }
-
-    .readonly-address{
-      margin-bottom: 10px;
-      margin-top: 10px;
-      .icon-office{
-        position: absolute;
-        right: 0;
-        top: 27px;
-      }
-    }
+  .links a,
+  .search-list-item-title a {
+    color: #333;
   }
+}
 
-  .tasks{
-    position: relative;
-    width: 260px;
-    margin-top: 5px;
-    .next-task{
-      margin-top: 20px;
-    }
-  }
+.search-list-item-title {
+  margin-top: 0;
 }

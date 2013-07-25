@@ -1,13 +1,49 @@
-<div id="header" class="page-header">
-  <div id="title">
-    <h1>{{title}}</h1>
-  </div>
-  <div id="controls">
-    <div id="search-filter" class="field control-box date-filter">
-      <span class="muted">{{view.selectedFilterText}}</span>
-      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
+<div class="page-header">
+  <div class="address-book-controls">
+    <div class="pull-right">
+      {{#linkTo leads.new class="btn btn-primary"}}
+        <i class="icon-plus"></i> New Contact
+      {{/linkTo}}
+      {{#if hasCheckedContent}}
+        <div class="btn-group">
+          <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+            Actions <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            {{#if hasContacts}}
+              <li>
+                <a href="#" {{action showForm 'assign'}}>Assign</a>
+              </li>
+            {{/if}}
+            <li>
+              <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
+            </li>
+            <li>
+              <a href="#" {{action showForm 'call'}}>Call</a>
+            </li>
+            {{#if hasContacts}}
+              <li>
+                <a href="#" {{action showEmail}}>Email</a>
+              </li>
+            {{/if}}
+            {{#if assignableContent}}
+              <li>
+                <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
+              </li>
+            {{/if}}
+            <li>
+              <a href="#" {{action confirmDeletion}}>Delete</a>
+            </li>
+          </ul>
+        </div>
+      {{/if}}
+    </div>
+
+    <div>
+      <div class="btn-group">
+        <button class="btn">{{view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-arrow-down"></i>
+          <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
           {{#each filters}}
@@ -15,55 +51,12 @@
           {{/each}}
         </ul>
       </div>
-    </div>
-    <div class="field control-box">
-      <div class="btn-group">
-        <a class="btn btn-link" href="#">
-          <i class="icon-search"></i>
-        </a>
+      <form class="form-search pipeline-search">
+        <i class="icon-search"></i>
         {{input value=model.searchText type="text" class="field search-text"}}
-      </div>
+      </form>
     </div>
-    <div class="field control-box actions">
-      <span {{bindAttr class="controller.hasCheckedContent::muted"}}>Actions</span>
-      <div class="pull-right dropdown-toggle" data-toggle="dropdown">
-        <button class="btn">
-          {{#if hasCheckedContent}}
-            <i class="icon-arrow-down"></i>
-          {{else}}
-            <i class="icon-arrow-up"></i>
-          {{/if}}
-        </button>
-      </div>
-      {{#if hasCheckedContent}}
-        <ul class="dropdown-menu">
-          {{#if hasContacts}}
-            <li>
-              <a href="#" {{action showForm 'assign'}}>Assign</a>
-            </li>
-          {{/if}}
-          <li>
-            <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
-          </li>
-          <li>
-            <a href="#" {{action showForm 'call'}}>Call</a>
-          </li>
-          {{#if hasContacts}}
-            <li>
-              <a href="#" {{action showEmail}}>Email</a>
-            </li>
-          {{/if}}
-          {{#if assignableContent}}
-            <li>
-              <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
-            </li>
-          {{/if}}
-          <li>
-            <a href="#" {{action confirmDeletion}}>Delete</a>
-          </li>
-        </ul>
-      {{/if}}
-    </div>
+
   </div>
 </div>
 {{outlet confirmation}}
@@ -89,10 +82,13 @@
     {{/if}}
   </div>
 {{/if}}
-{{#if visibleContent.length}}
-  <a href="#" {{action checkAll}}>Select All</a>
-{{/if}}
-<div id="results">
+
+<div class="search-result-list">
+  {{#if visibleContent.length}}
+    <div class="address-book-list-switch">
+      <a href="#" {{action checkAll}}>Select All</a>
+    </div>
+  {{/if}}
   {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
   {{partial 'shared/show_more'}}
 </div>
