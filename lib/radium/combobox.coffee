@@ -14,11 +14,11 @@ Radium.Combobox = Radium.View.extend
   click: (event) ->
     event.stopPropagation()
 
-  sortedSource: ( ->
-    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
-      sortProperties: [@field]
-      content: @get('source')
-  ).property('source.[]')
+  # sortedSource: ( ->
+  #   Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+  #     sortProperties: [@field]
+  #     content: @get('source')
+  # ).property('source.[]')
 
   queryBinding: 'queryToValueTransform'
 
@@ -63,7 +63,7 @@ Radium.Combobox = Radium.View.extend
             </li>
           {{/each}}
         </ul>
-      </div>
+     </div>
     {{/unless}}
 
     {{#if view.footerView}}
@@ -127,22 +127,32 @@ Radium.Combobox = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: @get('parentView.sortedSource')
+      errHandler = (error) =>
+        console.error error
+
+      @$().typeahead source: (query, process) =>
+        Radium.AutocompleteResult.find(autocomplete: {name: query}).then((results) =>
+          process results
+        , errHandler)
+        .then(null, errHandler)
+
+        null
 
       typeahead = @$().data('typeahead')
 
       parentView = @get('parentView')
       # make typeahead work with ember arrays
       typeahead.process = (items) ->
-        parentView.set 'open', false
-        items = items.filter (item) => @matcher(item)
+        items.then =>
+          parentView.set 'open', false
+          items = items.filter (item) => @matcher(item)
 
-        items = @sorter(items)
+          items = @sorter(items)
 
-        if !items.get('length')
-          return if @shown then @hide() else this
+          if !items.get('length')
+            return if @shown then @hide() else this
 
-        @render(items.slice(0, @options.items)).show()
+          @render(items.slice(0, @options.items)).show()
 
       typeahead.matcher = @get('parentView.matcher').bind(@get('parentView'))
       typeahead.sorter = @get('parentView.sorter').bind(@get('parentView'))
