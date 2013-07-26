@@ -14,11 +14,11 @@ Radium.Combobox = Radium.View.extend
   click: (event) ->
     event.stopPropagation()
 
-  # sortedSource: ( ->
-  #   Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
-  #     sortProperties: [@field]
-  #     content: @get('source')
-  # ).property('source.[]')
+  sortedSource: ( ->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      sortProperties: [@field]
+      content: @get('source')
+  ).property('source.[]')
 
   queryBinding: 'queryToValueTransform'
 
@@ -52,17 +52,10 @@ Radium.Combobox = Radium.View.extend
     {{view view.textField}}
 
     {{#unless view.disabled}}
-      <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
-        <button class="btn dropdown-toggle" tabindex="-1">
+      <div class="btn-group">
+        <button class="btn" tabindex="-1" disabled="disabled">
           <i class="icon-arrow-down"></i>
         </button>
-        <ul class="dropdown-menu">
-          {{#each view.sortedSource}}
-            <li>
-              {{yield}}
-            </li>
-          {{/each}}
-        </ul>
      </div>
     {{/unless}}
 
@@ -127,14 +120,11 @@ Radium.Combobox = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      errHandler = (error) =>
-        console.error error
-
       @$().typeahead source: (query, process) =>
         Radium.AutocompleteResult.find(autocomplete: {name: query}).then((results) =>
           process results
-        , errHandler)
-        .then(null, errHandler)
+        , Radium.rejectionHandler)
+        .then(null, Radium.rejectionHandler)
 
         null
 

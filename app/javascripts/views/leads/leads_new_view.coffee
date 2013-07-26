@@ -131,12 +131,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     sourceBinding: 'controller.contacts'
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isNew: Ember.computed.alias 'controller.isNew'
-    lookupQuery: (query) ->
-      @get('source').find (item) -> item.get('name') == query
-
-    template: Ember.Handlebars.compile """
-      <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}{{contactSourceImage status class="img-polaroid"}}</a>
-    """
 
     highlighter: (item) ->
       string = item.get 'name'
@@ -150,25 +144,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
       result += "<img src='#{url}' class='img-polaroid' alt=#{item.get('source')}/>"
       result
-
-    queryToValueTransform: ((key, value) ->
-      if arguments.length == 2
-        lookUp =  @lookupQuery(value)
-        if lookUp
-          @$('input[type=text]').blur()
-          @clearValue()
-        else
-          unless @get('isNew')
-            @clearValue()
-          @set 'value', value
-      else if !value && @get('value')
-        @get 'value'
-      else
-        value
-    ).property('value')
-
-    clearValue: ->
-      @get('controller').cancel()
 
     setValue: (searchResult) ->
       contact = searchResult.get('contact')

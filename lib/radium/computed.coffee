@@ -56,8 +56,8 @@ Radium.computed.tasks = ->
     aggregate.set 'isLoading', true
 
     errHandler = (error) =>
-      console.error error
       aggregate.set 'isLoading', false
+      Radium.rejectionHandler error
 
     Ember.RSVP.all(arrays).then((=>
       arrays.forEach (array) => 
