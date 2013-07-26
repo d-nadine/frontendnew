@@ -1,5 +1,5 @@
 .datepicker-control-box {
-  &.is-disabled > i { 
+  &.is-disabled > i {
     margin-left: 12px;
   }
 
@@ -12,6 +12,7 @@
   }
 
   input {
+    width: auto;
     padding-left: 0px;
   }
 }

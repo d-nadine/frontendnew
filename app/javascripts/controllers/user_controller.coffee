@@ -1,6 +1,7 @@
 Radium.UserController = Radium.ObjectController.extend
   needs: ['accountSettings']
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
+  compactFormButtons: true
 
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   isEditable: true
@@ -29,6 +30,7 @@ Radium.UserController = Radium.ObjectController.extend
 
   formBox: (->
     Radium.FormBox.create
+      compactFormButtons: true
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')

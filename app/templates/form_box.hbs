@@ -1,30 +1,62 @@
 <div class="form-box">
-  <div class="icon-switcher">
-    {{#if todoForm}}
-      <a {{action showForm "todo"}} {{bindAttr class="showTodoForm:active"}} href="#">
-        <i class="icon-todo"></i>
-      </a>
-    {{/if}}
+  <div class="pull-right">
+    {{#if compactFormButtons}}
+      <div class="btn-group form-switcher-small">
+        <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-plus"></i> New
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#if todoForm}}
+          <li>
+            <a href="#" {{action showForm "todo"}}><i class="icon-todo"></i> Todo</a>
+          </li>
+          {{/if}}
+          {{#if callForm}}
+          <li>
+            <a href="#" {{action showForm "call"}}><i class="icon-call"></i> Call</a>
+          </li>
+          {{/if}}
+          {{#if discussionForm}}
+          <li>
+            <a href="#" {{action showForm "discussion"}}><i class="icon-discussion"></i> Discussion</a>
+          </li>
+          {{/if}}
+          {{#if meetingForm}}
+          <li>
+            <a href="#" {{action showForm "meeting"}}><i class="icon-calendar"></i> Meeting</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    {{else}}
+      <div class="form-switcher">
+        {{#if todoForm}}
+          <button {{action showForm "todo"}} {{bindAttr class=":btn :btn-action showTodoForm:active"}}>
+            <i class="icon-todo"></i>
+          </button>
+        {{/if}}
 
-    {{#if callForm}}
-      <a {{action showForm "call"}} {{bindAttr class="showCallForm:active"}} href="#">
-        <i class="icon-call"></i>
-      </a>
-    {{/if}}
+        {{#if callForm}}
+          <button {{action showForm "call"}} {{bindAttr class=":btn :btn-action showCallForm:active"}}>
+            <i class="icon-call"></i>
+          </button>
+        {{/if}}
 
-    {{#if discussionForm}}
-      <a {{action showForm "discussion"}} {{bindAttr class="showDiscussionForm:active"}} href="#">
-        <i class="icon-discussion"></i>
-      </a>
-    {{/if}}
+        {{#if discussionForm}}
+          <button {{action showForm "discussion"}} {{bindAttr class=":btn :btn-action showDiscussionForm:active"}}>
+            <i class="icon-discussion"></i>
+          </button>
+        {{/if}}
 
-    {{#if meetingForm}}
-      <a {{action showForm "meeting"}} {{bindAttr class="showMeetingForm:active"}} href="#">
-        <i class="icon-calendar"></i>
-      </a>
+        {{#if meetingForm}}
+          <button {{action showForm "meeting"}} {{bindAttr class=":btn :btn-action showMeetingForm:active"}}>
+            <i class="icon-calendar"></i>
+          </button>
+        {{/if}}
+      </div>
     {{/if}}
   </div>
-
   <div class="form-container">
     {{#if showTodoForm}}
       {{render "forms/todo" todoForm}}

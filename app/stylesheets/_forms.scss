@@ -62,31 +62,10 @@
     .icon-comment {
       margin-top: 8px;
     }
-  }
 
-  .secondary {
-    position: relative;
-    background-color: $background;
-    border: solid 1px $dark-background;
-    border-top: none;
-    padding: 5px;
-    margin: 0 10px;
-
-    .block.add-tasks {
-      position: relative;
-      padding-bottom: 38px;
-    }
-
-    .block:last-of-type {
-      margin-bottom: 0;
-    }
-
-    .tasks-container {
-      margin: 30px 0 10px 0;
-
-      hr {
-        margin: 10px 0;
-      }
+    i,
+    label[class^="icon"] {
+      font-size: 20px;
     }
   }
 
@@ -100,13 +79,17 @@
 
 .form-box {
   .form-container {
-    margin-right: 130px;
+    overflow: hidden;
   }
 
-  .icon-switcher {
-    width: 122px;
+  .form-switcher,
+  .form-switcher-small {
+    margin-left: 10px;
+  }
+
+  .form-switcher {
     float: right;
-    margin-top: 16px;
+    margin-top: 12px;
 
     a {
       text-decoration: none;
@@ -120,13 +103,42 @@
       color: $black;
     }
   }
+
+  .form-switcher-small {
+    margin-top: 5px;
+  }
+}
+
+.expanded-fields {
+  position: relative;
+  background-color: $secondary-selection;
+  padding: 20px;
+  margin: 0 10px;
+  overflow: hidden;
+  @include box-shadow(0 2px 1px rgba(black, 0.25));
+
+  .field-group {
+    margin: 5px 0;
+    clear: both;
+  }
+
+  .tasks-container {
+    margin: 30px 0 10px 0;
+
+    hr {
+      margin: 10px 0;
+    }
+  }
+}
+
+
+.form-buttons {
+  margin: 10px 0 0;
+  clear: both;
+  overflow: hidden;
 }
 
 .btn-block {
   display: block;
   box-sizing: border-box;
-}
-
-::-webkit-input-placeholder {
-  font-style: italic;
 }

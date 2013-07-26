@@ -34,6 +34,7 @@ Radium.ContactController = Radium.ObjectController.extend
 
   formBox: (->
     Radium.FormBox.create
+      compactFormButtons: true
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')

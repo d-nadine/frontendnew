@@ -47,6 +47,10 @@ Radium.Combobox = Radium.View.extend
   ).property('value')
 
   layout: Ember.Handlebars.compile """
+    {{#if view.footerView}}
+      {{view view.footerView tagName="span" classNames="text"}}
+    {{/if}}
+
     {{#if view.leaderView}}
       {{view view.leaderView tagName="span" classNames="text"}}
     {{/if}}
@@ -64,10 +68,6 @@ Radium.Combobox = Radium.View.extend
         </button>
      </div>
     {{/unless}}
-
-    {{#if view.footerView}}
-      {{view view.footerView tagName="span" classNames="text"}}
-    {{/if}}
 
     {{#if view.footer}}
       <span class="text">{{view.footer}}</span>

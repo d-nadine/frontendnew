@@ -38,18 +38,19 @@
   </div>
 
   {{#if isExpanded}}
-    <div class="secondary">
-      <div {{bindAttr class="showAddAction:add-tasks :block"}}>
+    <div class="expanded-fields">
+      <div>
         {{view view.datePicker class="field"}}
         {{view view.userPicker class="field"}}
-
-        {{#if isEditable}}
-          <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
-        {{/if}}
-
-        {{partial 'forms/tasks'}}
       </div>
 
+      {{#if isEditable}}
+        <div class="form-buttons">
+          <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
+        </div>
+      {{/if}}
+
+      {{partial 'forms/tasks'}}
       {{partial 'forms/footer'}}
     </div>
   {{/if}}

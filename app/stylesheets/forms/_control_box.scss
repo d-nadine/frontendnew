@@ -3,6 +3,7 @@
   display: inline-block;
   background-color: white;
   padding: 1px 2px;
+  @include border-radius(3px);
 
   &.is-disabled,
   &.is-readonly,
@@ -56,7 +57,7 @@
   // a style brought in from bootstrap
   .add-on, input, input:focus,
   .btn, .btn:hover, .btn:active,
-  .btn-group.open .btn, 
+  .btn-group.open .btn,
   {
     border: none !important;
     border-radius: 0px !important;
@@ -76,6 +77,7 @@
   }
 
   input {
+    width: auto;
     margin-bottom: 0;
   }
 }
