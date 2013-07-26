@@ -146,8 +146,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
-        lookUp =  @lookupQuery(value)
-        if lookUp
+        if @matchesSelection()
           @$('input[type=text]').blur()
           @clearValue()
         else

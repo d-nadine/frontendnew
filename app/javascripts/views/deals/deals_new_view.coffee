@@ -27,12 +27,8 @@ Radium.DealsNewView= Ember.View.extend
       @$().focus()
 
   contactPicker: Radium.Combobox.extend Radium.ValueValidationMixin,
-    field: 'nameWithCompany'
-    sourceBinding: 'controller.contacts'
+    field: 'name'
     valueBinding: 'controller.contact'
-    template: Ember.Handlebars.compile """
-      <a {{action selectObject this target=view href=true bubbles=false}}>{{nameWithCompany}}</a>
-    """
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
@@ -65,7 +61,7 @@ Radium.DealsNewView= Ember.View.extend
 
     valueInvalid: ( ->
       return false unless @get('controller.isSubmitted')
-      value = @get('value')
+      value = @get('controller.value')
 
       return true if Ember.isEmpty value
 

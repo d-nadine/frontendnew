@@ -13,13 +13,6 @@ Radium.Combobox = Radium.View.extend
 
   click: (event) ->
     event.stopPropagation()
-
-  sortedSource: ( ->
-    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
-      sortProperties: [@field]
-      content: @get('source')
-  ).property('source.[]')
-
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -28,12 +21,25 @@ Radium.Combobox = Radium.View.extend
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
   ).property('value', 'isSubmitted')
 
-  lookupQuery: (query) ->
-    @get('source').find (item) => item.get(@field) == query
+  matchesSelection: (value) ->
+    return unless value
+    active  = @$('.typeahead .active')
+    selected = active.text() if active.is(':visible')
+    return unless selected
+    value?.toLowerCase() == selected?.toLowerCase()
+
+  select: ->
+    typeahead = @get('childViews.firstObject').$().data('typeahead')
+    typeahead.select()
+    typeahead.hide()
+    @$('input[type=text]').blur()
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
-      @set 'value', @lookupQuery(value)
+      if  @matchesSelection(value)
+        @select()
+      else
+        @set 'value', null
     else if !value && @get('value')
       @get "value.#{@field}"
     else
@@ -68,19 +74,11 @@ Radium.Combobox = Radium.View.extend
     {{/if}}
   """
 
-  template: Ember.Handlebars.compile """
-    <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a>
-  """
-
   toggleDropdown: (event) ->
     @toggleProperty 'open'
 
-  selectObject: (item) ->
-    @set 'open', false
-    @setValue item
-
   setValue: (object) ->
-    @set 'value', object
+    @set 'value', object.get('contact')
 
   # Begin typehead customization
   matcher: (item) ->
