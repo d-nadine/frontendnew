@@ -74,9 +74,6 @@ Radium.Combobox = Radium.View.extend
     {{/if}}
   """
 
-  toggleDropdown: (event) ->
-    @toggleProperty 'open'
-
   setValue: (object) ->
     @set 'value', object.get('contact')
 
