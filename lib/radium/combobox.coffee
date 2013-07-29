@@ -13,6 +13,13 @@ Radium.Combobox = Radium.View.extend
 
   click: (event) ->
     event.stopPropagation()
+
+  sortedSource: ( ->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      sortProperties: [@field]
+      content: @get('source')
+  ).property('source.[]')
+
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
@@ -21,25 +28,12 @@ Radium.Combobox = Radium.View.extend
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
   ).property('value', 'isSubmitted')
 
-  matchesSelection: (value) ->
-    return unless value
-    active  = @$('.typeahead .active')
-    selected = active.text() if active.is(':visible')
-    return unless selected
-    value?.toLowerCase() == selected?.toLowerCase()
-
-  select: ->
-    typeahead = @get('childViews.firstObject').$().data('typeahead')
-    typeahead.select()
-    typeahead.hide()
-    @$('input[type=text]').blur()
+  lookupQuery: (query) ->
+    @get('source').find (item) => item.get(@field) == query
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
-      if  @matchesSelection(value)
-        @select()
-      else
-        @set 'value', null
+      @set 'value', @lookupQuery(value)
     else if !value && @get('value')
       @get "value.#{@field}"
     else
@@ -47,10 +41,6 @@ Radium.Combobox = Radium.View.extend
   ).property('value')
 
   layout: Ember.Handlebars.compile """
-    {{#if view.footerView}}
-      {{view view.footerView tagName="span" classNames="text"}}
-    {{/if}}
-
     {{#if view.leaderView}}
       {{view view.leaderView tagName="span" classNames="text"}}
     {{/if}}
@@ -62,20 +52,42 @@ Radium.Combobox = Radium.View.extend
     {{view view.textField}}
 
     {{#unless view.disabled}}
-      <div class="btn-group">
-        <button class="btn" tabindex="-1" disabled="disabled">
+      <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
+        <button class="btn dropdown-toggle" tabindex="-1">
           <i class="icon-arrow-down"></i>
         </button>
-     </div>
+        <ul class="dropdown-menu">
+          {{#each view.sortedSource}}
+            <li>
+              {{yield}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
     {{/unless}}
+
+    {{#if view.footerView}}
+      {{view view.footerView tagName="span" classNames="text"}}
+    {{/if}}
 
     {{#if view.footer}}
       <span class="text">{{view.footer}}</span>
     {{/if}}
   """
 
+  template: Ember.Handlebars.compile """
+    <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a>
+  """
+
+  toggleDropdown: (event) ->
+    @toggleProperty 'open'
+
+  selectObject: (item) ->
+    @set 'open', false
+    @setValue item
+
   setValue: (object) ->
-    @set 'value', object.get('contact')
+    @set 'value', object
 
   # Begin typehead customization
   matcher: (item) ->
@@ -115,29 +127,22 @@ Radium.Combobox = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      @$().typeahead source: (query, process) =>
-        Radium.AutocompleteResult.find(autocomplete: {name: query}).then((results) =>
-          process results
-        , Radium.rejectionHandler)
-        .then(null, Radium.rejectionHandler)
-
-        null
+      @$().typeahead source: @get('parentView.sortedSource')
 
       typeahead = @$().data('typeahead')
 
       parentView = @get('parentView')
       # make typeahead work with ember arrays
       typeahead.process = (items) ->
-        items.then =>
-          parentView.set 'open', false
-          items = items.filter (item) => @matcher(item)
+        parentView.set 'open', false
+        items = items.filter (item) => @matcher(item)
 
-          items = @sorter(items)
+        items = @sorter(items)
 
-          if !items.get('length')
-            return if @shown then @hide() else this
+        if !items.get('length')
+          return if @shown then @hide() else this
 
-          @render(items.slice(0, @options.items)).show()
+        @render(items.slice(0, @options.items)).show()
 
       typeahead.matcher = @get('parentView.matcher').bind(@get('parentView'))
       typeahead.sorter = @get('parentView.sorter').bind(@get('parentView'))

@@ -1,11 +1,11 @@
 require 'lib/radium/company_picker'
 
-Radium.ContactCompanyPicker = Radium.Combobox.extend
+Radium.ContactCompanyPicker = Radium.AutocompleteCombobox.extend
   classNameBindings: [':company-name']
-  sourceBinding: 'controller.controllers.companies'
   valueBinding: 'controller.company'
   placeholder: 'Company'
   companyNameBinding: 'controller.companyName'
+  autocompleteResultType: Radium.AutocompleteCompany
 
   didInsertElement: ->
     @_super.apply this, arguments
@@ -13,9 +13,11 @@ Radium.ContactCompanyPicker = Radium.Combobox.extend
 
   queryToValueTransform: ((key, value) ->
     if arguments.length == 2
-      lookUp = @lookupQuery(value)
-      @set 'companyName', if lookUp then lookUp.get('name') else value
-      @set 'value', @lookupQuery(lookUp)
+      if @matchesSelection(value)
+        @set 'companyName', value
+        @select()
+      else
+        @set 'companyName', value
     else if !value && @get('value')
       @get 'value.name'
     else

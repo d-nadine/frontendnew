@@ -1,4 +1,4 @@
-require 'lib/radium/text_combobox'
+require 'lib/radium/autocomplete_combobox'
 require 'lib/radium/value_validation_mixin'
 require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
@@ -123,14 +123,14 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     @$('.contact-detail').slideToggle('medium')
     @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
 
-  contactName: Radium.Combobox.extend Radium.ContactCompanyMixin,
+  contactName: Radium.AutocompleteCombobox.extend Radium.ContactCompanyMixin,
     classNameBindings: ['open', ':contact-name']
     valueBinding: 'controller.name'
     disabledBinding: 'parentView.disabled'
     placeholder: 'Type a name'
-    sourceBinding: 'controller.contacts'
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isNew: Ember.computed.alias 'controller.isNew'
+    autocompleteResultType: Radium.AutocompleteContact
     highlighter: (item) ->
       string = item.get 'name'
 
@@ -146,9 +146,10 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     queryToValueTransform: ((key, value) ->
       if arguments.length == 2
-        if @matchesSelection()
+        if @matchesSelection(value)
           @$('input[type=text]').blur()
           @clearValue()
+          @set 'controller.name', value
         else
           unless @get('isNew')
             @clearValue()
