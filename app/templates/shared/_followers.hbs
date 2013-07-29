@@ -1,17 +1,18 @@
-<h2 class="with-button">
-  Followers
-  <button class="btn pull-right">Follow</button>
-</h2>
-
-<ul>
-  {{#each follower in followers}}
-    <li>
-      {{avatar follower}}
-      {{follower.name}}</br>
-      {{follower.title}}
-    </li>
-  {{else}}
-    No followers yet!
-  {{/each}}
-</ul>
-
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <h6 class="sidebar-panel-title">Followers</h6>
+  </div>
+  <div class="sidebar-panel-content">
+    <ul class="unstyled">
+      {{#each follower in followers}}
+        <li>
+          {{avatar follower}}
+          {{follower.name}}</br>
+          {{follower.title}}
+        </li>
+      {{else}}
+        <li class="text-center">No followers yet!</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

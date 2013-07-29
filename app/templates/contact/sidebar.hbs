@@ -1,93 +1,116 @@
 <form class="form">
-  <div class="meta">
-    {{render 'sidebar/contact_header' model}}
-  </div>
-  <hr />
-  <div class="contact-type">
-    {{render 'sidebar/contact_status' model}}
-  </div>
-  <hr />
-  <div class="company-website">
-    {{render "sidebar/company_website" model.company}}
-  </div>
-  <div class="email">
-    {{render "sidebar/email_addresses" model}}
-  </div>
-  <div class="phone">
-    {{render "sidebar/phone_numbers" model}}
-  </div>
-  <div class="show-more">
-    <a href="#" class="btn" {{action showExtraContactDetail bubbles=false target="view"}}>
-      <i id="existingToggle" class="icon-arrow-down"></i>
-    </a>
-  </div>
-  <hr/>
-  <div class="additional-detail">
-    <div class="address">
-      {{render "sidebar/addresses" model}}
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/contact_header' model}}
     </div>
-    <hr/>
   </div>
-  <div class="tag-picker">
-    <div class="tag-label">
-      <h2 class="blue">Tags</h2>
-    </div>
-    {{render 'sidebar/tags' model}}
-  </div>
-  <hr/>
-  <div class="deals-won">
-    <div>
-      <div>
-        <h2 class="blue">Total Deals Won</h2>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <div class="contact-type">
+        {{render 'sidebar/contact_status' model}}
       </div>
-      <div class="amount">{{currency dealsTotal}}</div>
     </div>
   </div>
-  <hr/>
-  <div class="open-deals">
-    <h2>Open Deals ({{deals.length}})</h2>
-    {{#each deals}}
-      <div class="deal">
-        <div>
-          <div>
-            {{#linkTo deal this}}{{name}}{{/linkTo}}
-          </div>
-          <div class="deal-value">
-            {{currency value}}<br/>
-            <i>{{status}}</i>
-          </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <div class="company-website">
+        {{render "sidebar/company_website" model.company}}
+      </div>
+      <div class="email">
+        {{render "sidebar/email_addresses" model}}
+      </div>
+      <div class="phone">
+        {{render "sidebar/phone_numbers" model}}
+      </div>
+      <div class="show-more">
+        <a href="#" class="btn" {{action showExtraContactDetail bubbles=false target="view"}}>
+          <i id="existingToggle" class="icon-arrow-down"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <div class="additional-detail">
+        <div class="address">
+          {{render "sidebar/addresses" model}}
         </div>
       </div>
-    {{/each}}
-    <div class="deal-links">
-      <div>
-        <div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6>Tags</h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="tag-picker">
+        {{render 'sidebar/tags' model}}
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6>Total Deals Won</h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="deals-won">
+        <div class="amount">{{currency dealsTotal}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6>Open Deals <span class="mark">{{deals.length}}</span></h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="open-deals">
+        {{#each deals}}
+          <div class="deal">
+            <div>
+              <div>
+                {{#linkTo deal this}}{{name}}{{/linkTo}}
+              </div>
+              <div class="deal-value">
+                {{currency value}}<br/>
+                <i>{{status}}</i>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        <div class="deal-links">
+          <!-- FIXME: Where should this go -->
+          {{#linkTo pipeline.resourceDeals this class="btn btn-link pull-right"}}
+            All Deals
+          {{/linkTo}}
           {{#linkTo deals.fromContact model class="btn btn-primary"}}<i class="icon-plus"></i> Deal{{/linkTo}}
         </div>
-        <div>
-          <!-- FIXME: Where should this go -->
-          {{#linkTo pipeline.resourceDeals this}}All Deals{{/linkTo}}
-        </div>
       </div>
     </div>
   </div>
-  <hr/>
 
-  <div class="about">
-    {{render 'sidebar/about' model}}
-  </div>
-  <hr/>
 
-  {{partial 'shared/add_files'}}
+  {{render 'sidebar/about' model}}
 
-  <hr/>
-
-  <div class="assigned-to control-group">
-    {{render 'sidebar/assigned_to' model}}
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      {{partial 'shared/add_files'}}
+    </div>
   </div>
 
-  <hr/>
+  {{render 'sidebar/assigned_to' model}}
+
   {{partial 'shared/followers'}}
-  <hr/>
-  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+    </div>
+  </div>
 </form>

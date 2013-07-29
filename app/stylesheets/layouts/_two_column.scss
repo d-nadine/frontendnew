@@ -1,10 +1,7 @@
 .two-column-layout {
+  padding: 60px 0 60px 40px;
   margin-left: $button-bar-width + $sidebar-border-size;
-
-  .sidebar {
-    @include shadowed;
-    padding: 10px;
-  }
+  background: #f3f3f3;
 }
 
 .drawer-open {

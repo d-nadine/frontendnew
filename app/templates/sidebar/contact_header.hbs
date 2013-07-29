@@ -20,25 +20,23 @@
     </div>
   </div>
 {{else}}
-  {{avatar this size=medium class="img-polaroid"}}
-  <div class="header">
-    <div>
-      <div>
-        <span class="name">{{name}}</span>
-      </div>
-      <div>
-        <i class="icon-edit" {{action toggleEditor target=view bubbles=false}}></i>
-      </div>
-    </div>
+  <div class="user-avatar pull-left">
+    {{avatar this size=medium}}
   </div>
-  <div class="company-title">
-    <span class="title muted">{{title}}</span>
-    <span class="company">
-      {{#if company}}
-        {{#linkTo company company}}{{company.name}}{{/linkTo}}
-      {{else}}
-        {{companyName}}
-      {{/if}}
-    </span>
+  <div class="clearfix">
+    <h4 class="name">
+      <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{name}}
+    </h4>
+    <div class="company-title">
+      <span class="title muted">{{title}}</span>
+      <span class="company">
+        {{#if company}}
+          {{#linkTo company company}}{{company.name}}{{/linkTo}}
+        {{else}}
+          {{companyName}}
+        {{/if}}
+      </span>
+    </div>
   </div>
 {{/if}}

@@ -10,10 +10,6 @@
     color: $muted;
   }
 
-  .assigned-contacts{
-    text-transform: uppercase;
-  }
-
   .meta{
     .title{
       margin-top: 14px;
@@ -29,7 +25,7 @@
     > div{
       @include display-box;
       @include box-pack(justify);
-      position: relative; 
+      position: relative;
     }
   }
 
@@ -104,16 +100,6 @@
       &.white{
         color: #fff;
       }
-    }
-  }
-
-  .assigned-count{
-    margin-right: 30px;
-    font-size: 18px;
-    padding-bottom: 3px;
-    .label-info{
-      font-size: 18px;
-      padding-bottom: 3px;
     }
   }
 

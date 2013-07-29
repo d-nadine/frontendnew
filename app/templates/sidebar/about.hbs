@@ -1,17 +1,22 @@
-<div>
-  {{#if isEditing}}
-    <h2>About</h2>
-    <div>
-      {{view view.textArea class="field" valueBinding=form.notes placeholder="About"}}
-    </div>
-  {{else}}
-    <h2>About <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-    <div>
-      {{#if notes}}
-      <span>{{notes}}</span>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <h6>About  <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h6>
+  </div>
+  <div class="sidebar-panel-content">
+    <div class="about">
+      {{#if isEditing}}
+        <div>
+          {{view view.textArea class="field" valueBinding=form.notes placeholder="About"}}
+        </div>
       {{else}}
-      <span>&nbsp;</span>
+        <div>
+          {{#if notes}}
+          <span>{{notes}}</span>
+          {{else}}
+          <span>&nbsp;</span>
+          {{/if}}
+        </div>
       {{/if}}
     </div>
-  {{/if}}
+  </div>
 </div>

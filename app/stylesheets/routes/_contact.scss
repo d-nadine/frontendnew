@@ -9,10 +9,6 @@
 }
 
 .contact-sidebar-view{
-  .form{
-    margin-right: 5px;
-  }
-
   .control-label{
     font-weight: bold;
   }
@@ -25,10 +21,6 @@
     input.zip{
       margin-top: 10px;
     }
-  }
-
-  .company-title{
-    margin-top: 23px;
   }
 
   span.empty{
@@ -98,7 +90,7 @@
     > div{
       @include display-box;
       @include box-pack(justify);
-      position: relative; 
+      position: relative;
     }
   }
 

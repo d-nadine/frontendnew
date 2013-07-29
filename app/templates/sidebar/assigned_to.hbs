@@ -1,33 +1,39 @@
-<div>
-  {{#if isEditing}}
-    <h2>Assigned To</h2>
-    <div>
-      {{view view.userPicker}}
-    </div>
-    <div class="source">
-      <label class="control-label">Source</label>
-      {{view view.leadSources}}
-    </div>
-  {{else}}
-    <h2>Assigned To <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-    {{#linkTo user user}}
-      {{avatar user class="img-polaroid"}}
-    {{/linkTo}}
-    <p>
-      {{#linkTo user user}}{{user.name}}{{/linkTo}}<br/>
-      <span class="title muted">{{title}}</span>
-    </p>
-    <div class="source">
-      <div>
-        <div><label class="control-label">Source</label></div>
-        <div>{{source}}</div>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+    <h6>Assigned To</h6>
+  </div>
+  <div class="sidebar-panel-content">
+    <div class="assigned-to control-group">
+      {{#if isEditing}}
+        <div>
+          {{view view.userPicker}}
+        </div>
+        <div class="source">
+          <label class="control-label">Source</label>
+          {{view view.leadSources}}
+        </div>
+      {{else}}
+        {{#linkTo user user}}
+          {{avatar user class="img-polaroid"}}
+        {{/linkTo}}
+        <p>
+          {{#linkTo user user}}{{user.name}}{{/linkTo}}<br/>
+          <span class="title muted">{{title}}</span>
+        </p>
+        <div class="source">
+          <div>
+            <div><label class="control-label">Source</label></div>
+            <div>{{source}}</div>
+          </div>
+        </div>
+      {{/if}}
+      <div class="createdAt">
+        <div>
+          <div><label class="control-label">Client Since</label></div>
+          <div>{{formatDateTime createdAt format="date"}}</div>
+        </div>
       </div>
-    </div>
-  {{/if}}
-  <div class="createdAt">
-    <div>
-      <div><label class="control-label">Client Since</label></div>
-      <div>{{formatDateTime createdAt format="date"}}</div>
     </div>
   </div>
 </div>

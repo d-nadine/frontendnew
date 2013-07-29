@@ -1,97 +1,122 @@
 <form class="form">
-  <div class="meta">
-    {{render 'sidebar/user_header' model}}
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/user_header' model}}
+    </div>
   </div>
-  <hr />
-  <div class="email">
-    {{render 'sidebar/email' model}}
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6>Contact</h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <ul class="unstyled">
+        <li class="email">
+          {{render 'sidebar/email' model}}
+        </li>
+        <li class="phone">
+          {{render 'sidebar/phone' model}}
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="phone">
-    {{render 'sidebar/phone' model}}
-  </div>
-  <hr/>
-  {{#if contacts.length}}
-    <div class="assigned-contacts">
-      <div>
-        <div>
-          {{#linkTo addressbook.assigned this}}My Assigned Contacts{{/linkTo}}
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">My Assigned Contacts <span class="mark">{{contacts.length}}</span></h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{#if contacts.length}}
+        <div class="assigned-contacts">
+          {{#linkTo addressbook.assigned this}}
+            <span {{bindAttr class=":assigned-count :badge :pull-right contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
+            My Assigned Contacts
+          {{/linkTo}}
         </div>
-        <div>
-          <span {{bindAttr class=":assigned-count :badge contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
+      {{else}}
+        <p class="text-center">No contacts have been assigned.</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">Sales</h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div id="sales-goal">
+        <div id="totals">
+          <div class="pull-left">
+            <label class="control-label">{{currentMonth}}</label>
+          </div>
+          <div class="sales-total pull-right">
+            {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
+              {{#if isEditing}}
+                <div {{bindAttr class="view.isValid:success:error :control-group"}}>
+                  <div class="input-prepend">
+                    <span class="add-on">$</span>
+                    {{input type="number" value=view.value class="field span2" min="0"}}
+                  </div>
+                </div>
+              {{else}}
+                <label class="control-label blue money">{{currency salesGoal}} <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+              {{/if}}
+            {{/view}}
+          </div>
+          <div class="clearfix"></div>
+          <div class="sales-forecast">
+            {{view Radium.ProgressBar percentageBinding="salesGoalPercentage"}}
+            <div {{bindAttr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>
+          </div>
         </div>
       </div>
     </div>
-  {{else}}
-    <div class="no-contacts">
-      <label class="control-label">No contacts have been assigned.</label>
+
+    <div class="sidebar-panel-content">
+      <table class="table table-striped table-bordered table-hover totals">
+        <tbody>
+          {{#each statuses itemController="userDealTotalsItem"}}
+            <tr>
+              <td><label class="control-label">{{this.model}}</td>
+              <td><label {{bindAttr class=":badge dealsTotal:badge-success:badge-important"}}>{{dealsTotal}}</td>
+              <td><label>{{currency dealsValue}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
-  {{/if}}
-  <hr/>
-  <h2>Sales Goal</h2>
-  <div id="sales-goal">
-    <div id="totals">
-      <div class="pull-left">
-        <label class="control-label">{{currentMonth}}</label>
-      </div>
-      <div class="sales-total pull-right">
-        {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
-          {{#if isEditing}}
-            <div {{bindAttr class="view.isValid:success:error :control-group"}}>
-              <div class="input-prepend">
-                <span class="add-on">$</span>
-                {{input type="number" value=view.value class="field span2" min="0"}}
-              </div>
-            </div>
-          {{else}}
-            <label class="control-label blue money">{{currency salesGoal}} <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label> 
-          {{/if}}
-        {{/view}}
-      </div>
-      <div class="clearfix"></div>
-      <div class="sales-forecast">
-        {{view Radium.ProgressBar percentageBinding="salesGoalPercentage"}}
-        <div {{bindAttr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>
-      </div>
-    </div>
-  </div>
-  <hr/>
-  <h2>My Pipeline</h2>
-  <table class="table table-striped table-bordered table-hover totals">
-    <tbody>
-      {{#each statuses itemController="userDealTotalsItem"}}
-        <tr>
-          <td><label class="control-label">{{this.model}}</td>
-          <td><label {{bindAttr class=":badge dealsTotal:badge-success:badge-important"}}>{{dealsTotal}}</td>
-          <td><label>{{currency dealsValue}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-  <div class="deal-links">
-    <div>
-      <div>
+    <div class="sidebar-panel-content">
+      <div class="deal-links">
+        {{#linkTo pipeline.resourceDeals this class="btn btn-link pull-right"}}
+          All Deals
+        {{/linkTo}}
         {{#linkTo deals.fromUser this class="btn btn-primary"}}<i class="icon-plus"></i> Deal{{/linkTo}}
       </div>
-      <div>
-        {{#linkTo pipeline.resourceDeals this}}All Deals{{/linkTo}}
-      </div>
     </div>
   </div>
-  <hr/>
+
   {{partial 'shared/followers'}}
-  <hr/>
-  <h2>Following</h2>
-  <ul>
-    {{#each person in following}}
-      <li>
-        {{avatar person}}
-        {{person.name}}</br>
-        {{person.title}}
-      </li>
-    {{else}}
-      Not following anybody yet!
-    {{/each}}
-  </ul>
-  <hr/>
-  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">Following</h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <ul class="unstyled">
+        {{#each person in following}}
+          <li>
+            {{avatar person}}
+            {{person.name}}</br>
+            {{person.title}}
+          </li>
+        {{else}}
+          <li class="text-center">Not following anybody yet!</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+    </div>
+  </div>
 </form>
