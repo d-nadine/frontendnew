@@ -1,11 +1,12 @@
 require 'views/forms/todo_view'
 require 'lib/radium/combobox'
+require 'lib/radium/contact_picker'
 
 Radium.FormsCallView = Radium.FormsTodoView.extend
   todoField: Radium.FormsTodoFieldView.extend
     placeholder: 'about...'
 
-  contactPicker: Radium.Combobox.extend
+  contactPicker: Radium.ContactPicker.extend
     classNameBindings: ['isValid', 'isInvalid', ':field']
     sourceBinding: 'controller.contacts'
     valueBinding: 'controller.contact'

@@ -58,7 +58,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
   """
 
   setValue: (object) ->
-    @set 'value', object.get(@get('autocompleteType.result'))
+    @set 'value', object.get(@get('autocompleteResultType.property'))
 
   textField: Ember.TextField.extend Radium.AddActiveToParentMixin, Radium.ToggleDropdownMixin,
     valueBinding: 'parentView.query'

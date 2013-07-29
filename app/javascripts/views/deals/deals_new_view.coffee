@@ -1,6 +1,8 @@
 require 'lib/radium/progress_bar'
 require 'lib/radium/radio'
 require 'lib/radium/text_combobox'
+require 'lib/radium/autocomplete_combobox'
+require 'lib/radium/contact_picker'
 require 'lib/radium/value_validation_mixin'
 
 Radium.DealsNewView= Ember.View.extend
@@ -26,9 +28,7 @@ Radium.DealsNewView= Ember.View.extend
     didInsertElement: ->
       @$().focus()
 
-  contactPicker: Radium.Combobox.extend Radium.ValueValidationMixin,
-    field: 'name'
-    valueBinding: 'controller.contact'
+  contactPicker: Radium.ContactPicker.extend(Radium.ValueValidationMixin)
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
