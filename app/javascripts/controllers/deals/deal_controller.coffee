@@ -23,6 +23,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
 
   formBox: (->
     Radium.FormBox.create
+      compactFormButtons: true
       todoForm: @get('todoForm')
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
