@@ -11,6 +11,7 @@
     left: 0;
     cursor: default;
     color: $muted;
+    font-size: 18px;
   }
 
   input:not([disabled]) + label:hover {
@@ -59,8 +60,8 @@
       top: 50%;
       margin-top: -25%;
       left: 100%;
-      width: 0; 
-      height: 0; 
+      width: 0;
+      height: 0;
       border: 5px solid transparent;
       border-left: 5px solid $dark-selected-item;
     }

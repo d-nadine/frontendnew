@@ -40,19 +40,19 @@ Radium.MultipleBaseView = Radium.View.extend
             {{view view.primaryRadio}}
             {{#if showDelete}}
               <a href="#" {{action removeSelection this bubbles="false"}} >
-                <i class="icon-delete"></i>
+                <i class="ss-symbolicons-block ss-trash"></i>
               </a>
             {{/if}}
           </div>
         {{/if}}
         {{#if showAddNew}}
           <div class="add-new">
-            <a href="#" {{action addNew bubbles="false"}}><i class="icon-plus"></i></a>
+            <a href="#" {{action addNew bubbles="false"}}><i class="ss-standard ss-plus"></i></a>
           </div>
         {{/if}}
         {{#if showAddNewAddress}}
           <div class="add-new">
-            <a href="#" {{action addNew bubbles="false"}}><i class="icon-plus"></i></a>
+            <a href="#" {{action addNew bubbles="false"}}><i class="ss-standard ss-plus"></i></a>
           </div>
         {{/if}}
       </div>

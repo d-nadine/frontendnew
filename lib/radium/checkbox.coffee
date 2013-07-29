@@ -17,5 +17,5 @@ Radium.Checkbox = Radium.View.extend
 
   template: Ember.Handlebars.compile """
     <input type="checkbox" id="{{unbound view.checkBoxId}}" {{bindAttr disabled=view.disabled}}/>
-    <label for="{{unbound view.checkBoxId}}" class="icon-todo"></label>
+    <label for="{{unbound view.checkBoxId}}" class="ss-standard ss-check"></label>
   """

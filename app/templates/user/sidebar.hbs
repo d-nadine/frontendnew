@@ -58,7 +58,7 @@
                   </div>
                 </div>
               {{else}}
-                <label class="control-label blue money">{{currency salesGoal}} <i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+                <label class="control-label blue money">{{currency salesGoal}} <i class="ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
               {{/if}}
             {{/view}}
           </div>
@@ -89,7 +89,7 @@
         {{#linkTo pipeline.resourceDeals this class="btn btn-link pull-right"}}
           All Deals
         {{/linkTo}}
-        {{#linkTo deals.fromUser this class="btn btn-primary"}}<i class="icon-plus"></i> Deal{{/linkTo}}
+        {{#linkTo deals.fromUser this class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
       </div>
     </div>
   </div>

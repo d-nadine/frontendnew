@@ -38,7 +38,7 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
 
     template: Ember.Handlebars.compile """
       <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall bubbles=false}}>
-        <i class="icon-call"></i>
+        <i class="ss-standard ss-phone"></i>
       </button>
       <button class="btn btn-success dropdown-toggle" {{action toggleDropdown target=view bubbles=false}} {{bindAttr tabindex="view.dropDownTabIndex"}}>
         <span class="caret"></span>

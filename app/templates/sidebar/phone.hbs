@@ -2,11 +2,11 @@
   {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
 {{else}}
   <div class="control-group">
-    <label class="control-label"><i class="icon-edit pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+    <label class="control-label"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
     {{#if phone}}
-        <a href="tel:{{unbound phone}}"><i class="icon-call"></i>{{phone}}</a>
+        <a href="tel:{{unbound phone}}"><i class="ss-standard ss-phone"></i>{{phone}}</a>
     {{else}}
-      <i class="icon-call"></i><span class="empty">Add phone here</span>
+      <i class="ss-standard ss-phone"></i> <span class="empty">Add phone here</span>
     {{/if}}
   </div>
 {{/if}}

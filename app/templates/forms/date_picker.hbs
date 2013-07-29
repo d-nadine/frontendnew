@@ -1,9 +1,9 @@
 {{#if view.disabled}}
-  <i class="icon-calendar"></i>
+  <i class="ss-standard ss-calendar"></i>
 {{else}}
   <div class="btn-group">
     <button class="btn dropdown-toggle" data-toggle="dropdown">
-      <i class="icon-calendar"></i>
+      <i class="ss-standard ss-calendar"></i>
     </button>
     <ul class="dropdown-menu">
       <li><a {{action setDate 'today' target=view}}>Today</a></li>
@@ -13,7 +13,7 @@
       <li><a {{action setDate 'next_month' target=view}}>In a Month</a></li>
       <li>
         <a class="datepicker-link" data-date="{{unbound view.defaultDate}}" href="#">
-          <i class="icon-calendar"></i>Pick a Date
+          <i class="ss-standard ss-calendar"></i>Pick a Date
         </a>
       </li>
     </ul>

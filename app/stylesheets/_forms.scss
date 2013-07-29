@@ -1,9 +1,8 @@
 .form {
   button.btn{
-    i[class^="icon-"]{
+    i[class^="ss-"] {
       font-size: 19px;
       position: relative;
-      top: -2px;
     }
   }
 
@@ -34,13 +33,14 @@
 
   .inline-editor{
     position: relative;
-    .icon-edit{
+
+    .ss-write {
       opacity: 0;
       font-size: 12px;
     }
 
     &:hover{
-      .icon-edit{
+      .ss-write {
         opacity: 0.3;
         &:hover{
           opacity: 1;
@@ -64,7 +64,7 @@
     }
 
     i,
-    label[class^="icon"] {
+    label[class^="ss-"] {
       font-size: 20px;
     }
   }
@@ -114,7 +114,6 @@
   background-color: $secondary-selection;
   padding: 20px;
   margin: 0 10px;
-  overflow: hidden;
   @include box-shadow(0 2px 1px rgba(black, 0.25));
 
   .field-group {

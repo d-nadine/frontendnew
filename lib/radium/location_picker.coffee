@@ -17,7 +17,7 @@ Radium.LocationPicker = Radium.Combobox.extend
 
   leaderView: Radium.View.extend
     template: Ember.Handlebars.compile """
-      <i class="icon-map-marker"></i>
+      <i class="ss-icon ss-location"></i>
     """
 
   footerView: Radium.View.extend

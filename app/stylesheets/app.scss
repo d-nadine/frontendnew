@@ -2,6 +2,7 @@
 
 @import "reset";
 @import "variables";
+@import "symbolset";
 
 @import "mixins/cssarrow";
 @import "mixins/shadowed";
@@ -11,6 +12,7 @@
 @import "layout/helpers";
 @import "layouts/single_column";
 @import "layouts/two_column";
+
 
 @import "components/page-header";
 @import "components/alerts";
@@ -24,8 +26,8 @@
 @import "components/inline_editor";
 @import "components/table_list";
 @import "components/comma_separated";
-@import "components/icon_font";
-@import "components/icons";
+/*@import "components/icon_font";*/
+/*@import "components/icons";*/
 @import "components/tables";
 @import "components/search";
 @import "components/next_task_widget";

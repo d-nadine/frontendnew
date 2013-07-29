@@ -2,8 +2,8 @@ Ember.Handlebars.registerBoundHelper 'checklistKind', (kind, options) ->
   style = options.hash.style || options.hash.size || 'small'
 
   icon = if kind == 'meeting'
-           "icon-calendar"
+           "ss-standard ss-calendar"
          else
-           "icon-#{kind}"
+           "ss-#{kind}"
 
   new Handlebars.SafeString("<i class='#{icon}'></i>")
