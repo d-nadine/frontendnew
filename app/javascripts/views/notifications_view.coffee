@@ -1,3 +1,4 @@
 require 'views/drawer_view'
 
-Radium.NotificationsView = Radium.DrawerView.extend()
+Radium.NotificationsView = Radium.DrawerView.extend
+  classNames: 'notifications'
