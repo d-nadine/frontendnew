@@ -1,5 +1,5 @@
 <div class="checklist block">
-  <h1><i class="icon-plus"></i>New Deal</h1>
+  <h1><i class="ss-standard ss-plus"></i>New Deal</h1>
 </div>
 <div class="secondary">
   <form class="form form-horizontal">
@@ -47,9 +47,9 @@
             <div class="checklist-plus">
               <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
                 {{#if view.showChecklistItems}}
-                  <i class="icon-arrow-up"></i>
+                  <i class="ss-standard ss-navigateup"></i>
                 {{else}}
-                  <i class="icon-arrow-down"></i>
+                  <i class="ss-standard ss-navigatedown"></i>
                 {{/if}}
               </a>
             </div>
@@ -66,9 +66,9 @@
       <div class="detail-plus">
         <a href="#checklistModal" class="btn" {{action toggleDetail target="view" bubbles=false}}>
           {{#if view.showDetail}}
-            <i class="icon-arrow-up"></i>
+            <i class="ss-standard ss-navigateup"></i>
           {{else}}
-            <i class="icon-arrow-down"></i>
+            <i class="ss-standard ss-navigatedown"></i>
           {{/if}}
         </a>
       </div>
@@ -83,7 +83,7 @@
         <div class="control-group">
           <div class="controls add-files">
             <button class="btn add-files" {{bindAttr disabled="view.disabled"}}>
-              Add Files <i class="icon-attachments"></i>
+              Add Files <i class="ss-standard ss-attach"></i>
             </button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 <button {{action check this bubbles=false}} {{bindAttr class="isChecked:checked:unchecked :btn-checker"}}>
-  <i class="icon-todo"></i>
+  <i class="ss-standard ss-todo"></i>
 </button>
 
 <div {{bindAttr class="isSelectable :content"}} {{action selectItem this}}>
@@ -7,15 +7,15 @@
 
   <div class="footer">
     {{#if hasAttachments}}
-      <i class="icon-attachments"></i>
+      <i class="ss-standard ss-attach"></i>
     {{/if}}
 
     {{#if hasComments}}
-      <i class="icon-comment"></i>
+      <i class="ss-symbolicons-block ss-chat"></i>
     {{/if}}
 
     <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
-      <i class='icon-delete'></i>
+      <i class='ss-symbolicons-blcok ss-trash'></i>
     </a>
 
     {{formatDateTime timestamp class="muted upcase pull-right"}}

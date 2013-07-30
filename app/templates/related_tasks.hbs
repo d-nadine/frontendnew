@@ -8,7 +8,7 @@
           {{else}}
             {{#if isTodo}}
               <li {{bindAttr class="isFinished isOverdue"}}>
-                <i class="icon-todo"></i>
+                <i class="ss-standard ss-check"></i>
                 {{#linkTo unimplemented}}{{description}}{{/linkTo}}
                 <span class="time">
                   Due
@@ -21,9 +21,9 @@
 
             {{#if isCall}}
               <li {{bindAttr class="isFinished isOverdue"}}>
-                <i class="icon-call"></i>
+                <i class="ss-standard ss-phone"></i>
                 {{#linkTo unimplemented}}Call{{/linkTo}}
-                with 
+                with
                 {{#linkTo user user}}{{user.name}}{{/linkTo}}
                 and
                 {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}
@@ -43,7 +43,7 @@
 
             {{#if isMeeting}}
               <li>
-                <i class="icon-calendar"></i>
+                <i class="ss-standard ss-calendar"></i>
                 {{#linkTo unimplemented}}Meeting {{topic}}{{/linkTo}}
                 with
                 {{list participants}}

@@ -3,28 +3,28 @@
     {{#if compactFormButtons}}
       <div class="btn-group form-switcher-small">
         <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-plus"></i> New
+          <i class="ss-standard ss-plus"></i> New
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
           {{#if todoForm}}
           <li>
-            <a href="#" {{action showForm "todo"}}><i class="icon-todo"></i> Todo</a>
+            <a href="#" {{action showForm "todo"}}><i class="ss-standard ss-check"></i> Todo</a>
           </li>
           {{/if}}
           {{#if callForm}}
           <li>
-            <a href="#" {{action showForm "call"}}><i class="icon-call"></i> Call</a>
+            <a href="#" {{action showForm "call"}}><i class="ss-standard ss-phone"></i> Call</a>
           </li>
           {{/if}}
           {{#if discussionForm}}
           <li>
-            <a href="#" {{action showForm "discussion"}}><i class="icon-discussion"></i> Discussion</a>
+            <a href="#" {{action showForm "discussion"}}><i class="ss-standard ss-chat"></i> Discussion</a>
           </li>
           {{/if}}
           {{#if meetingForm}}
           <li>
-            <a href="#" {{action showForm "meeting"}}><i class="icon-calendar"></i> Meeting</a>
+            <a href="#" {{action showForm "meeting"}}><i class="ss-standard ss-calendar"></i> Meeting</a>
           </li>
           {{/if}}
         </ul>

@@ -1,7 +1,7 @@
 .form {
   button.btn{
     i[class^="ss-"] {
-      font-size: 19px;
+      font-size: 14px;
       position: relative;
     }
   }
@@ -59,8 +59,8 @@
       outline: none;
     }
 
-    .icon-comment {
-      margin-top: 8px;
+    .ss-chat {
+      margin: 10px 0 0 10px;
     }
 
     i,

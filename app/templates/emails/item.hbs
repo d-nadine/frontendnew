@@ -3,9 +3,9 @@
     <div class="adder">
       <div class="arrow"></div>
       {{#if showFormBox}}
-        <i class="icon-minus" {{action toggleFormBox}}></i>
+        <i class="ss-standard ss-hyphen" {{action toggleFormBox}}></i>
       {{else}}
-        <i class="icon-plus" {{action toggleFormBox}}></i>
+        <i class="ss-standard ss-plus" {{action toggleFormBox}}></i>
       {{/if}}
     </div>
   {{/unless}}
@@ -70,15 +70,15 @@
 
     <div class="actions text-right">
       <a {{action toggleReplyForm}} class="btn btn-link">
-        <i class="icon-reply"></i>Reply
+        <i class="ss-standard ss-reply"></i>Reply
       </a>
 
       <a {{action toggleForwardForm}} class="btn btn-link">
-        <i class="icon-forward"></i>Forward
+        <i class="ss-standard ss-right"></i>Forward
       </a>
 
       <a class="btn btn-link" {{action delete this}}>
-        <i class="icon-delete"></i>
+        <i class="ss-symbolicons-block ss-trash"></i>
       </a>
     </div>
     {{#if isPersonal}}

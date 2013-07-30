@@ -1,4 +1,4 @@
-<h1><i class="icon-plus"></i>Lead</h1>
+<h1><i class="ss-standard ss-plus"></i>Lead</h1>
 <ul class="nav nav-pills">
   <li class="active">
     <a href="#single" data-toggle="tab">Single Lead</a>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="existing">
-            {{#unless isNew}} 
+            {{#unless isNew}}
               {{#if isLead}}
                 <p><span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is a lead.</p>
                 {{#if contactDeals.length}}
@@ -61,7 +61,7 @@
               {{else}}
                 <p><span>{{#linkTo contact content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
                 <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
-                  <i id="existingToggle" class="icon-arrow-down"></i>
+                  <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
                 </a>
                 <a href="#" id="makeLead" {{action makeLead  bubbles=false}} class="btn btn-success">Yes</a>
                 Or click {{#linkTo contact content}}here{{/linkTo}} to update their details.
@@ -110,7 +110,7 @@
               </div>
             </div>
             <div class="control-group">
-              <a href="#" class="btn showdetails-link" {{action toggleDetail target="view" bubbles=false}}><i id="detailToggle" class="icon-arrow-down"></i></a>
+              <a href="#" class="btn showdetails-link" {{action toggleDetail target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
             </div>
             <div class="address-section">
               <hr/>
@@ -123,7 +123,7 @@
                 {{#if isSaving}}
                   <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
                 {{else}}
-                  <i class="icon-plus"></i> Submit
+                  <i class="ss-standard ss-plus"></i> Submit
                 {{/if}}
               </a>
             </div>

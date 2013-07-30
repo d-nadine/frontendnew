@@ -18,7 +18,7 @@
 
   .is-selected .content,
   .content:hover {
-    .delete, .icon-comment { 
+    .delete, .ss-chat {
       display: inline;
     }
   }
@@ -53,7 +53,7 @@
     cursor: pointer;
   }
 
-  .delete, .icon-comment {
+  .delete, .ss-chat {
     display: none;
   }
 
@@ -62,7 +62,7 @@
   }
 
   .discussion-item {
-    [class^="icon-discussion"] {
+    .ss-chat {
       float: left;
     }
 
@@ -98,13 +98,13 @@
       margin-right: 20px;
     }
 
-    p { 
+    p {
       color: $dark;
       font-size: 16px;
       line-height: 30px;
     }
 
-    .name { 
+    .name {
       font-weight: bold;
     }
   }
@@ -164,7 +164,7 @@
 
 .messages-view .discussion-card  {
   .header {
-    i { 
+    i {
       float: left;
       margin-right: 40px;
       font-size: 32px;
@@ -237,7 +237,7 @@
     }
   }
 
-  .subject { 
+  .subject {
     text-align: center;
     color: $muted;
   }

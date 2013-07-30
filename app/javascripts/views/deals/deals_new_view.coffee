@@ -55,7 +55,7 @@ Radium.DealsNewView= Ember.View.extend
       <span  class="text dollar">$</span>
       {{input value=controller.value type="number" class="field input-medium negotitating"}}
       {{#if view.valueInvalid}}
-        <span class="error"><i class="icon-warning icon-white"></i>Value must be greater than 0.</span>
+        <span class="error"><i class="ss-standard ss-alert"></i>Value must be greater than 0.</span>
       {{/if}}
     """
 

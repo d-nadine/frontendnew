@@ -46,12 +46,12 @@
   {{#if content.isNewItem}}
     {{#if isValid}}
       <button class="btn btn-success" {{action "createChecklist"}}>
-        <i class="icon-plus"></i>
+        <i class="ss-standard ss-check"></i>
       </button>
     {{/if}}
   {{else}}
     <button class="btn btn-danger" {{action "deleteChecklist" this}}>
-      <i class="icon-delete"></i>
+      <i class="ss-symbolicons-block ss-trash"></i>
     </button>
 
     {{#if isEditing}}
