@@ -7,31 +7,31 @@
       <ul class="nav">
         <li class="dropdown">
           {{#linkTo messages}}
-            Messages
+            Messages <i class="ss-standard ss-mail"></i>
           {{/linkTo}}
         </li>
 
         <li>
           {{#linkTo calendar today}}
-            Calendar
+            Calendar <i class="ss-standard ss-calendar"></i>
           {{/linkTo}}
         </li>
 
         <li>
           {{#linkTo user currentUser}}
-            Tasks
+            Tasks <i class="ss-standard ss-check"></i>
           {{/linkTo}}
         </li>
 
         <li>
           {{#linkTo pipeline.index}}
-            Pipeline
+            Pipeline <i class="ss-standard ss-barchart"></i>
           {{/linkTo}}
         </li>
 
         <li>
           {{#linkTo addressbook.filter 'all'}}
-            Address Book
+            Address Book <i class="ss-symbolicons-block ss-users"></i>
           {{/linkTo}}
         </li>
       </ul>
