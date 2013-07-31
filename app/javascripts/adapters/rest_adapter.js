@@ -62,7 +62,8 @@ Radium.RESTAdapter.configure('plurals',{
   company: 'companies',
   settings: 'settings',
   user_invitation_delivery: 'user_invitation_deliveries',
-  autocomplete_company: 'autocomplete_companies'
+  autocomplete_company: 'autocomplete_companies',
+  autocomplete_all: 'autocomplete_all'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
