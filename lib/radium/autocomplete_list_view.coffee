@@ -105,6 +105,17 @@ Radium.AutocompleteView = Radium.View.extend
   filterResults: (item) ->
     !@get('source').contains(item)
 
+  retrieve: (query, callback) ->
+    list = @get('list')
+
+    return unless list.get('length')
+
+    results = list.filter(@get('parentView').filterResults.bind(this))
+                   .map (item) =>
+                      @mapSearchResult.call this, item
+
+    callback(results, query)
+
   autocomplete: Ember.TextField.extend
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'controller.currentUser'
@@ -137,7 +148,7 @@ Radium.AutocompleteView = Radium.View.extend
       if @get('parentView').selectionAdded
         options = $.extend {}, options, selectionAdded: @get('parentView').selectionAdded.bind(this)
 
-      @$().autoSuggest {retrieve: @retrieve.bind(this)}, options
+      @$().autoSuggest {retrieve: @get('parentView').retrieve.bind(this)}, options
 
     selectionAdded: (item) ->
       # create a simple object and let the controller/form how to handle what happens
@@ -171,17 +182,6 @@ Radium.AutocompleteView = Radium.View.extend
 
       elem.html(content)
 
-    retrieve: (query, callback) ->
-      list = @get('list')
-
-      return unless list.get('length')
-
-      results = list.filter(@get('parentView').filterResults.bind(this))
-                     .map (item) =>
-                        @mapSearchResult.call this, item
-
-      callback(results, query)
-
     mapSearchResult: (result) ->
       currentUser = @get('currentUser')
 
@@ -204,3 +204,14 @@ Radium.AutocompleteView = Radium.View.extend
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
 
+# FIXME: Temporarry hack, this should be the main view when
+# there is autocompete for tags
+Radium.AsyncAutocompleteView = Radium.AutocompleteView.extend
+  retrieve: (query, callback) ->
+    Radium.AutocompleteAll.find(autocomplete: {name: query}).then((people) =>
+      results = people.filter(@get('parentView').filterResults.bind(this))
+                     .map (item) =>
+                        @mapSearchResult.call this, item
+
+      callback(results, query)
+    ).then(null, Radium.rejectionHandler)

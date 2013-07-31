@@ -17,7 +17,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     not @get('controller.message.length')
   ).property('controller.isSubmitted', 'controller.message')
 
-  to: Radium.AutocompleteView.extend
+  to: Radium.AsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.to'
     showAvatar: false
@@ -31,12 +31,12 @@ Radium.FormsEmailView = Radium.FormView.extend
       @get('controller.to.length') > 0
     ).property('controller.to.[]')
 
-  cc: Radium.AutocompleteView.extend
+  cc: Radium.AsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.cc'
     showAvatar: false
 
-  bcc: Radium.AutocompleteView.extend
+  bcc: Radium.AsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.bcc'
     showAvatar: false

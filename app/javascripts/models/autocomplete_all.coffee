@@ -5,8 +5,7 @@ Radium.AutocompleteAll = Radium.Model.extend
 
   person: ((key, value) ->
     if arguments.length == 2 && value
-      property = value.constructor.toString().humanize()
-      associationName = "#{property}"
+      associationName = value.constructor.toString().humanize()
       @set associationName, value
     else
       @get('user') || @get('contact')
