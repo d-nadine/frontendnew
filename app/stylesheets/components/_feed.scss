@@ -108,3 +108,58 @@
     color: #3A87AD;
   }
 }
+
+.feed {
+  border-top: 1px solid $control-border-color;
+}
+
+.feed-item {
+  padding: 5px 0;
+  overflow: hidden;
+  border-bottom: 1px solid $control-border-color;
+}
+
+.feed-item-date {
+  margin: 5px 0;
+  display: inline-block;
+  font-size: 11px;
+  color: $muted;
+}
+
+.feed-item-comments-btn {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.feed-item-icon {
+  width: 40px;
+  padding: 5px 0 0;
+  float: left;
+  font-size: 15px;
+
+  i {
+    top: 2px;
+    position: relative;
+    color: $dark-background;
+    text-shadow: 0 -1px 0 rgba(black, 0.15), 0 1px 0 rgba(white, 0.5);
+  }
+}
+
+.feed-item-header {
+  h5 {
+    margin: 5px 0;
+  }
+}
+
+.feed-item-content {
+  margin-left: 40px;
+
+  &:hover .comments-view {
+    display: block;
+  }
+
+  .comments-view {
+    display: none;
+  }
+}
