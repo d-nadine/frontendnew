@@ -3,9 +3,3 @@
   margin-left: $button-bar-width + $sidebar-border-size;
   background: #f3f3f3;
 }
-
-.drawer-open {
-  .two-column-layout {
-    margin-left: $drawer-width + $button-bar-width + ($two-column-gutter/2);
-  }
-}
