@@ -5,6 +5,11 @@
   resize: none;
 }
 
+.new-leads-control {
+  margin: 20px 0;
+  overflow: hidden;
+}
+
 .selector{
   vertical-align: top;
 }
@@ -69,17 +74,6 @@
       width: 519px;
       padding: 5px;
       border: 1px solid $control-border-color;
-    }
-  }
-
-  ul.nav-pills{
-    li:first-of-type a{
-      padding-left: 50px;
-      padding-right: 50px;
-    }
-
-    li a{
-      font-size: 17.5px;
     }
   }
 
@@ -156,20 +150,6 @@
       }
     }
 
-    .commit{
-      width: 200px;
-      margin: 0 auto;
-      .btn-success{
-        padding-left: 8px;
-        padding-right: 13px;
-        i{
-          font-size: 10px;
-          position: relative;
-          top: -2px;
-        }
-      }
-    }
-
     span.text{
       position: relative;
       top: 0.5px;
@@ -195,5 +175,13 @@
         padding-right: 20px;
       }
     }
+  }
+}
+
+
+.new-lead-form {
+  label {
+    font-weight: bold;
+    color: #6e6e6e;
   }
 }

@@ -1,18 +1,22 @@
-<h1><i class="ss-standard ss-plus"></i>Lead</h1>
-<ul class="nav nav-pills">
-  <li class="active">
-    <a href="#single" data-toggle="tab">Single Lead</a>
-  </li>
-  <li>
-    <a href="#file" data-toggle="tab">Import leads from file</a>
-  </li>
-  <li>
-    <a href="#social" data-toggle="tab">From Social Network</a>
-  </li>
-</ul>
+<h1 class="blue">Add Leads</h1>
+
+<div class="new-leads-control">
+  <ul class="nav nav-pills">
+    <li class="active">
+      <a href="#single" data-toggle="tab"><i class="ss-standard ss-plus"></i> Single Lead</a>
+    </li>
+    <li>
+      <a href="#file" data-toggle="tab">Import leads from file</a>
+    </li>
+    <li>
+      <a href="#social" data-toggle="tab">From Social Network</a>
+    </li>
+  </ul>
+</div>
+
 <div class="tab-content">
   <div id="single" class="tab-pane active">
-    <form class="form form-horizontal">
+    <form class="form form-horizontal well new-lead-form">
       <div class="secondary">
         {{partial "saving"}}
         <fieldset>
@@ -118,8 +122,8 @@
               <hr/>
             </div>
             {{partial 'validation_error_message'}}
-            <div class="commit">
-              <a href="#" {{action submit target="view" bubbles=false}} {{bindAttr disabled=isSaving}} class="btn btn-success">
+            <div class="button-row">
+              <a href="#" {{action submit target="view" bubbles=false}} {{bindAttr disabled=isSaving}} class="btn btn-primary pull-right">
                 {{#if isSaving}}
                   <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
                 {{else}}

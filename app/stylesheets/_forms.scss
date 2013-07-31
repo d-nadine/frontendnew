@@ -6,6 +6,11 @@
     }
   }
 
+  &.well {
+    @include box-shadow(none);
+    @include border-radius(0);
+  }
+
   .page-header{
     input{
       font-size: 26px;
@@ -130,6 +135,11 @@
   }
 }
 
+.button-row {
+  margin: 20px 0;
+  padding: 20px 0;
+  border-top: 1px solid $control-border-color;
+}
 
 .form-buttons {
   margin: 10px 0 0;

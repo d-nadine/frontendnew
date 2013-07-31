@@ -2,7 +2,6 @@
   position: relative;
   display: inline-block;
   background-color: white;
-  padding: 1px 2px;
   @include border-radius(3px);
 
   &.is-disabled,
@@ -45,6 +44,10 @@
     }
   }
 
+  .btn-group > .btn.controlbox-dropdown:first-child {
+    @include border-radius(0 2px 2px 0);
+  }
+
   &.field-blend-in {
     .add-on, input, input:focus,
     .btn, .btn:hover, .btn:active,
@@ -55,15 +58,18 @@
 
   // everything that could possibly have
   // a style brought in from bootstrap
-  .add-on, input, input:focus,
-  .btn, .btn:hover, .btn:active,
-  .btn-group.open .btn,
-  {
+  .add-on, input, input:focus {
     border: none !important;
     border-radius: 0px !important;
     background-color: white;
     background-image: none;
     box-shadow: none;
+  }
+
+  .prepend-group .btn {
+    border-color: transparent;
+    background: none;
+    @include box-shadow(none);
   }
 
   i {
