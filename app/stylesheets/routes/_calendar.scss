@@ -175,6 +175,10 @@ $calendar-off: #d8d9d9;
     float: left;
     clear: left;
   }
+
+  &.is-selected{
+    background: lightblue;
+  }
 }
 
 .day-event-item-description {

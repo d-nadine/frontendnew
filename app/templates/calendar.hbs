@@ -56,8 +56,8 @@
                 </span>
 
                 <ul>
-                  {{#each calendarDay.visibleContent class="unstyled"}}
-                  <li class="day-event-item">
+                  {{#each calendarDay.visibleContent class="unstyled" itemController="calendarTaskItem" }}
+                  <li {{bindAttr class=":day-event-item controller.isSelected:is-selected"}}>
                     <a href="#" {{action selectCalendarTask this target="calendarDay"}}>
                       {{formatDateTime time}}
                       <span class="day-event-item-description">{{title}}</span>
