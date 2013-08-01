@@ -4,11 +4,7 @@ Radium.FormsDiscussionView = Radium.FormView.extend
     valueBinding: 'controller.topic'
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
 
-    placeholder: """
-      Add people to discussion by tagging them with "@" 
-      for example @John. They'll be notified when someone
-      comments.
-    """
+    placeholder: "New discussion"
     disabledBinding: 'controller.isDisabled'
 
     isInvalid: (->

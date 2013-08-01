@@ -1,7 +1,7 @@
 <form {{bindAttr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :primary"}} {{action expand}}>
     <div class="icon pull-left">
-      <i class="ss-standard ss-calendar"></i>
+      <i class="ss-standard ss-calendar inline-form-icon"></i>
     </div>
 
     {{#if showOptions}}
@@ -31,7 +31,7 @@
     {{/if}}
 
     {{#if showComments}}
-      <i class="ss-symbolicons-block ss-chat pull-right"></i>
+      <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
   </div>
 

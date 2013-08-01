@@ -14,7 +14,13 @@
 
   .second-row {
     position: relative;
-    text-align: right;
+  }
+
+  .hint {
+    margin-left: 45px;
+    padding-right: 15px;
+    overflow: hidden;
+    @include box-sizing(border-box);
   }
 
   &:not(.is-new){

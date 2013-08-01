@@ -1,7 +1,7 @@
 <form {{bindAttr class="isEditable justAdded :form :discussion-form"}}>
   <div class="primary">
     <div>
-      <i class="ss-symbolicons-block ss-chat"></i>
+      <i class="ss-symbolicons-block ss-chat inline-form-icon"></i>
 
       {{#if showSuccess}}
         <span class="succes">Discussion Added</span>
@@ -11,8 +11,11 @@
     </div>
     <div class="second-row">
       {{#if showSaveButton}}
-        <button {{action submit}} class="btn btn-primary">Save</button>
+        <button {{action submit}} class="btn btn-primary pull-right">Save</button>
       {{/if}}
+      <div class="clearfix hint">
+        <small class="muted">Add people to discussion by tagging them with "@" for example @John.<br>They'll be notified when someone comments.</small>
+      </div>
 
       {{#if showSuccessMessage}}
         <span class="success-message green">Discussion Saved</span>

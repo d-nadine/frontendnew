@@ -63,15 +63,6 @@
     a, a:focus, a:visited, .btn, .btn:focus {
       outline: none;
     }
-
-    .ss-chat {
-      margin: 10px 0 0 10px;
-    }
-
-    i,
-    label[class^="ss-"] {
-      font-size: 20px;
-    }
   }
 
   &.just-added {
@@ -82,9 +73,23 @@
   }
 }
 
+.form-box-comments-icon {
+  font-size: 20px;
+  margin: 10px 0 0 10px;
+}
+
 .form-box {
+  margin: 0 0 20px;
+  @include display-box;
+  @include box-orient(horizontal);
+  @include box-align(start);
+
   .form-container {
-    overflow: hidden;
+    @include box-flex(1);
+  }
+
+  .form-box-controls {
+    @include box-flex(0);
   }
 
   .form-switcher,
@@ -135,6 +140,15 @@
   }
 }
 
+.inline-form-icon {
+  display: inline-block;
+  margin: 6px 0 0;
+  position: relative;
+  top: 2px;
+  font-size: 20px;
+  color: $muted;
+}
+
 .button-row {
   margin: 20px 0;
   padding: 20px 0;
@@ -150,4 +164,9 @@
 .btn-block {
   display: block;
   box-sizing: border-box;
+}
+
+.inline-contact-name {
+  font-size: 18px;
+  line-height: 30px;
 }

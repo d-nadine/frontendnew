@@ -1,5 +1,22 @@
 <div class="form-box">
-  <div class="pull-right">
+  <div class="form-container">
+    {{#if showTodoForm}}
+      {{render "forms/todo" todoForm}}
+    {{/if}}
+
+    {{#if showCallForm}}
+      {{render "forms/call" callForm}}
+    {{/if}}
+
+    {{#if showDiscussionForm}}
+      {{render "forms/discussion" discussionForm}}
+    {{/if}}
+
+    {{#if showMeetingForm}}
+      {{render "forms/meeting" meetingForm}}
+    {{/if}}
+  </div>
+  <div class="form-box-controls">
     {{#if compactFormButtons}}
       <div class="btn-group form-switcher-small">
         <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
@@ -55,23 +72,6 @@
           </button>
         {{/if}}
       </div>
-    {{/if}}
-  </div>
-  <div class="form-container">
-    {{#if showTodoForm}}
-      {{render "forms/todo" todoForm}}
-    {{/if}}
-
-    {{#if showCallForm}}
-      {{render "forms/call" callForm}}
-    {{/if}}
-
-    {{#if showDiscussionForm}}
-      {{render "forms/discussion" discussionForm}}
-    {{/if}}
-
-    {{#if showMeetingForm}}
-      {{render "forms/meeting" meetingForm}}
     {{/if}}
   </div>
 </div>
