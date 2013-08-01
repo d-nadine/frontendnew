@@ -45,7 +45,9 @@ Radium.Router.map ->
     @route 'fromContact', path: '/new/contacts/:contact_id'
     @route 'fromUser', path: '/new/users/:user_id'
 
-  @resource 'calendar', path: '/:year/:month/:day'
+  @resource 'calendar', ->
+    @route 'index', path: '/:year/:month/:day'
+    @route 'task', path: '/:task_type/:task_id'
 
   @resource 'addressbook', ->
     @route 'filter', path: '/:filter'

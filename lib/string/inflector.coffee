@@ -14,3 +14,5 @@ String::humanize = ->
 
   str = str.split('.').pop()
 
+String::constantize = ->
+  Ember.get Radium, @singularize().classify()

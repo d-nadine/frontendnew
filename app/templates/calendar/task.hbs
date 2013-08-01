@@ -1,0 +1,18 @@
+<h3>
+  {{#linkTo calendar.index model.time}}Back to Calendar{{/linkTo}}
+</h3>
+<h3>
+  {{formatDateTime time format=full}}
+</h3>
+
+{{#if showTodoForm}}
+  {{render "forms/todo" model}}
+{{/if}}
+
+{{#if showCallForm}}
+  {{render "forms/call" model}}
+{{/if}}
+
+{{#if showMeetingForm}}
+  {{render "forms/meeting" model}}
+{{/if}}

@@ -8,19 +8,7 @@ Radium.TaskListGroupItemController = Radium.ArrayController.extend
     @get('content.name').capitalize()
   ).property('content.name')
 
-Radium.TaskListItemController = Radium.ObjectController.extend
-  showMeetingForm: (->
-    @get('model.constructor') is Radium.Meeting
-  ).property('model')
-
-  showTodoForm: (->
-    @get('model.constructor') is Radium.Todo
-  ).property('model')
-
-  showCallForm: (->
-    @get('model.constructor') is Radium.Call
-  ).property('model')
-
+Radium.TaskListItemController = Radium.ObjectController.extend Radium.TaskMixin,
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->

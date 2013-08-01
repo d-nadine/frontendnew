@@ -6,9 +6,6 @@
     <h3 class="events-user-name">{{controllers.calendar.user.name}}</h3>
   </div>
 {{/if}}
-{{#if isLoading}}
-  {{partial 'is_loading'}}
-{{/if}}
 {{#unless selectedDay.date}}
   {{#each day in days}}
     <div class="events-list-header">
