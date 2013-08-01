@@ -68,7 +68,11 @@ $calendar-off: #d8d9d9;
   color: #6e6e6e;
 
   &.is-selected {
-    background: lightblue;
+    background: $calendar-active-bg;
+
+    a {
+      color: $calendar-active;
+    }
   }
 
   time {
@@ -77,9 +81,13 @@ $calendar-off: #d8d9d9;
     text-transform: lowercase;
   }
 
-  i{
+  i {
     float: left;
     margin-right: 10px;
+  }
+
+  a {
+    color: inherit;
   }
 }
 
@@ -125,7 +133,7 @@ $calendar-off: #d8d9d9;
   }
 
   .is-selected-date {
-    background-color: $calendar-active;
+    background-color: $calendar-active-bg;
     border: 1px solid #bcbcbc;
 
     .btn-slab {
@@ -171,6 +179,10 @@ $calendar-off: #d8d9d9;
 
   a {
     color: inherit;
+
+    &:hover {
+      color: #3290e5;
+    }
   }
 
   time {
@@ -181,8 +193,8 @@ $calendar-off: #d8d9d9;
     clear: left;
   }
 
-  &.is-selected{
-    background: lightblue;
+  &.is-selected a {
+    color: #3290e5;
   }
 }
 
