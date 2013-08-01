@@ -1,8 +1,8 @@
 require 'lib/radium/show_more_mixin'
 
 Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMoreMixin,
-  needs: ['calendar', 'calendarSidebar']
-  calendarDate: Ember.computed.alias('controllers.calendar.date')
+  needs: ['calendarIndex', 'calendarSidebar']
+  calendarDate: Ember.computed.alias('controllers.calendarIndex.date')
 
   selectedTask: Ember.computed.alias 'controllers.calendarSidebar.selectedTask'
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'

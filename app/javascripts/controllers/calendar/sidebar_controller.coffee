@@ -1,20 +1,20 @@
 Day = Ember.ArrayProxy.extend()
 
 Radium.CalendarSidebarController = Radium.ObjectController.extend
-  needs: ['calendar', 'calendarSidebar']
-  contentBinding: 'controllers.calendar.user'
-  isLoading: Ember.computed.alias 'controllers.calendar.isLoading'
+  needs: ['calendarIndex', 'calendarSidebar']
+  contentBinding: 'controllers.calendarIndex.user'
+  isLoading: Ember.computed.alias 'controllers.calendarIndex.isLoading'
 
   selectedTask: null
   selectedDay: null
 
   items: (->
-    @get 'controllers.calendar.items'
-  ).property('controllers.calendar.items')
+    @get 'controllers.calendarIndex.items'
+  ).property('controllers.calendarIndex.items')
 
   date: (->
-    @get 'controllers.calendar.date'
-  ).property('controllers.calendar.date')
+    @get 'controllers.calendarIndex.date'
+  ).property('controllers.calendarIndex.date')
 
   isDifferentUser: (->
     @get('content') != @get('currentUser')

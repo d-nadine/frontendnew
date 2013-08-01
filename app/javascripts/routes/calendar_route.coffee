@@ -11,17 +11,6 @@ Radium.CalendarRoute = Radium.Route.extend
       calendarSidebarController = @controllerFor('calendarSidebar')
       calendarSidebarController.set('selectedDay', calendarDay)
 
-  serialize: (model) ->
-    {
-      year: model.get('year')
-      month: model.get('month')
-      day: model.get('day')
-    }
-
-  model: (params) ->
-    string = "#{params.year}-#{params.month}-#{params.day}"
-    Ember.DateTime.parse string, "%Y-%m-%d"
-
   renderTemplate: ->
     @render()
 
@@ -34,3 +23,19 @@ Radium.CalendarRoute = Radium.Route.extend
     @render 'calendar/drawer_buttons',
       outlet: 'buttons'
       into: 'application'
+
+Radium.CalendarIndexRoute = Radium.Route.extend
+  serialize: (model) ->
+    {
+      year: model.get('year')
+      month: model.get('month')
+      day: model.get('day')
+    }
+
+  model: (params) ->
+    string = "#{params.year}-#{params.month}-#{params.day}"
+    Ember.DateTime.parse string, "%Y-%m-%d"
+
+  renderTemplate: ->
+    @render 'calendar/index',
+      into: 'calendar'

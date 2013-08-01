@@ -7,7 +7,7 @@ CalendarItem = Ember.ObjectController.extend
     @get('description') || @get('topic')
   ).property('description', 'topic')
 
-Radium.CalendarController = Ember.Controller.extend Radium.CurrentUserMixin,
+Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin,
   needs: ['users', 'clock', 'calendarSidebar']
 
   clock: Ember.computed.alias('controllers.clock')
