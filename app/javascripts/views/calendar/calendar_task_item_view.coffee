@@ -10,6 +10,8 @@ Radium.CalendarTaskItemView = Radium.View.extend
   ).observes('controller.isSelected')
 
   scrollToTask: ->
+    return unless @$()
+
     parent = Ember.$('.sidebar')
 
     distanceToCenter = (0.5 * parent.height() - @$().outerHeight())
