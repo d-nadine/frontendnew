@@ -2,9 +2,9 @@
   {{#if contacts.length}}
     <h5>
       {{#if isTag}}
-        {{#linkTo addressbook.members this}}{{membersText}}{{/linkTo}}
+        {{#linkTo "addressbook.members" this}}{{membersText}}{{/linkTo}}
       {{else}}
-        {{#linkTo addressbook.employees this}}{{membersText}}{{/linkTo}}
+        {{#linkTo "addressbook.employees" this}}{{membersText}}{{/linkTo}}
       {{/if}}
     </h5>
     <div class="clearfix">
@@ -18,9 +18,9 @@
     </div>
     {{#if hasMoreContacts}}
       {{#if isTag}}
-        {{#linkTo addressbook.members this}}...{{/linkTo}}
+        {{#linkTo "addressbook.members" this}}...{{/linkTo}}
       {{else}}
-        {{#linkTo addressbook.employees this}}...{{/linkTo}}
+        {{#linkTo "addressbook.employees" this}}...{{/linkTo}}
       {{/if}}
     {{/if}}
   {{else}}

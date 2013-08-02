@@ -27,7 +27,7 @@
     <div class="sidebar-panel-content">
       {{#if contacts.length}}
         <div class="assigned-contacts">
-          {{#linkTo addressbook.assigned this}}
+          {{#linkTo "addressbook.assigned" this}}
             <span {{bindAttr class=":assigned-count :badge :pull-right contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
             My Assigned Contacts
           {{/linkTo}}
@@ -86,10 +86,10 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
-        {{#linkTo pipeline.resourceDeals this class="btn btn-link pull-right"}}
+        {{#linkTo "pipeline.resourceDeals" this class="btn btn-link pull-right"}}
           All Deals
         {{/linkTo}}
-        {{#linkTo deals.fromUser this class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
+        {{#linkTo "deals.fromUser" this class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
       </div>
     </div>
   </div>

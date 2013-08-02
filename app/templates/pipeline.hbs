@@ -3,7 +3,7 @@
     {{#each workflowGroups itemController="workflowGroupItem"}}
       <li class="pipeline-breadcrumb-item">
         {{#if isWorkflow}}
-          {{#linkTo pipeline.workflow content.title class="pipeline-breadcrumb-button"}}
+          {{#linkTo "pipeline.workflow" content.title class="pipeline-breadcrumb-button"}}
             <div class="vert-center">
               <h4 class="pipeline-state-title">
                 {{capitalize content.title}}
@@ -16,7 +16,7 @@
           {{/linkTo}}
         {{/if}}
         {{#if isClosed}}
-          {{#linkTo pipeline.closed class="pipeline-breadcrumb-button"}}
+          {{#linkTo "pipeline.closed" class="pipeline-breadcrumb-button"}}
             <div class="vert-center">
               <h4 class="pipeline-state-title">
                 {{capitalize content.title}}
@@ -29,7 +29,7 @@
           {{/linkTo}}
         {{/if}}
         {{#if isLost}}
-          {{#linkTo pipeline.lost class="pipeline-breadcrumb-button"}}
+          {{#linkTo "pipeline.lost" class="pipeline-breadcrumb-button"}}
             <div class="vert-center">
               <h4 class="pipeline-state-title pipeline-state-lost">
                 {{capitalize content.title}}
@@ -44,7 +44,7 @@
       </li>
     {{/each}}
     <li class="pipeline-breadcrumb-item">
-      {{#linkTo pipeline.unpublished class="pipeline-breadcrumb-button"}}
+      {{#linkTo "pipeline.unpublished" class="pipeline-breadcrumb-button"}}
         <div class="vert-center">
           <h5 class="pipeline-state-title pipeline-state-empty">Unpublished</h5>
           <p class="pipeline-state-numbers">{{unpublished.length}}</p>

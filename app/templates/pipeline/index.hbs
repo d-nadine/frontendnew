@@ -30,13 +30,13 @@
       <tr>
         <td class="title">
           {{#if isWorkflow}}
-            {{#linkTo pipeline.workflow content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{#linkTo "pipeline.workflow" content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
           {{/if}}
           {{#if isClosed}}
-            {{#linkTo pipeline.closed}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{#linkTo "pipeline.closed"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
           {{/if}}
           {{#if isLost}}
-            {{#linkTo pipeline.lost}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{#linkTo "pipeline.lost"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
           {{/if}}
         </td>
         <td>

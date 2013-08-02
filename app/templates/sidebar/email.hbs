@@ -4,7 +4,7 @@
   <div class="control-group">
     <label class="control-label"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
     {{#if email}}
-      {{#linkTo emails.mailTo this}}<i class="ss-standard ss-mail"></i> {{email}}{{/linkTo}}
+      {{#linkTo "emails.mailTo" this}}<i class="ss-standard ss-mail"></i> {{email}}{{/linkTo}}
     {{else}}
       <i class="ss-standard ss-mail"></i><span class="empty">Add email here</span>
     {{/if}}

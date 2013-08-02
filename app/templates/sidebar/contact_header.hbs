@@ -32,7 +32,7 @@
       <span class="title muted">{{title}}</span>
       <span class="company">
         {{#if company}}
-          {{#linkTo company company}}{{company.name}}{{/linkTo}}
+          {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
         {{else}}
           {{companyName}}
         {{/if}}

@@ -3,17 +3,17 @@
     {{partial 'shared/check_button'}}
     <div class="header">
       <div class="name">
-        <span class="name">{{#linkTo unimplemented}}{{name}}{{/linkTo}}</span>
+        <span class="name">{{#linkTo "unimplemented"}}{{name}}{{/linkTo}}</span>
       </div>
       <div class="created-by">
         <label>Created By</label>
         <!-- FIXME: uncomment when API has user -->
-        {{!#linkTo user user}}{{!user.name}}{{!/linkTo}}
+        {{!#linkTo "user" user}}{{!user.name}}{{!/linkTo}}
       </div>
       <div class="description">
         {{description}}
       </div>
-      {{#linkTo unimplemented class="btn btn-block"}}Follow{{/linkTo}}
+      {{#linkTo "unimplemented" class="btn btn-block"}}Follow{{/linkTo}}
     </div>
   </div>
   <div class="tasks">&nbsp;</div>

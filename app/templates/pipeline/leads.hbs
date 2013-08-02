@@ -30,7 +30,7 @@
         <td>{{avatar this size=medium}}</td>
         <td>
           <p>
-            <big class="name">{{#linkTo contact this}}{{name}}{{/linkTo}}</big></br>
+            <big class="name">{{#linkTo "contact" this}}{{name}}{{/linkTo}}</big></br>
             <span class="title">{{title}}</span>
           <p>
 
@@ -38,7 +38,7 @@
         </td>
         <td>
           <p>
-            <big class="name">{{#linkTo user user}}{{user.name}}{{/linkTo}}</big></br>
+            <big class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</big></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
@@ -53,7 +53,7 @@
           {{/if}}
         </td>
         <td class="text-center">
-          {{#linkTo deals.fromContact this class="btn"}}Add Deal{{/linkTo}}
+          {{#linkTo "deals.fromContact" this class="btn"}}Add Deal{{/linkTo}}
         </td>
         <td class="text-right">
           {{partial 'search/delete'}}

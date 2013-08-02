@@ -6,7 +6,7 @@
     {{render "sidebar/company_website" model}}
   </div>
   <hr class="first"/>
-  {{#linkTo leads.fromCompany this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
+  {{#linkTo "leads.fromCompany" this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
   {{#if contacts.length}}
     <hr />
     <div class="company-type">

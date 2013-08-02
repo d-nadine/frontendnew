@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="address-book-controls">
     <div class="pull-right">
-      {{#linkTo leads.new class="btn btn-primary"}}
+      {{#linkTo "leads.new" class="btn btn-primary"}}
         <i class="ss-standard ss-plus"></i> New Contact
       {{/linkTo}}
       {{#if hasCheckedContent}}
@@ -47,7 +47,7 @@
         </button>
         <ul class="dropdown-menu">
           {{#each filters}}
-            <li>{{#linkTo addressbook.filter name}}{{text}}{{/linkTo}}</li>
+            <li>{{#linkTo "addressbook.filter" name}}{{text}}{{/linkTo}}</li>
           {{/each}}
         </ul>
       </div>

@@ -3,7 +3,7 @@
     {{#each comments}}
       <li class="comment">
         <div class="avatar-container">
-          {{#linkTo user user}}{{avatar user}}{{/linkTo}}
+          {{#linkTo "user" user}}{{avatar user}}{{/linkTo}}
         </div>
 
         <div class="text">
@@ -13,7 +13,7 @@
     {{/each}}
 
     <li class="comment new-comment">
-      {{#linkTo unimplemented}}
+      {{#linkTo "unimplemented"}}
         <i class="ss-standard ss-attach"></i>
       {{/linkTo}}
 

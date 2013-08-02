@@ -1,36 +1,36 @@
 <div id="topbar" role="header" class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
-    {{#linkTo unimplemented class="brand"}}
+    {{#linkTo "unimplemented" class="brand"}}
       <img src="/images/logo.png" alt="::radium">
     {{/linkTo}}
     <div class="container">
       <ul class="nav">
         <li class="dropdown">
-          {{#linkTo messages}}
+          {{#linkTo "messages"}}
             Messages <i class="ss-standard ss-mail"></i>
           {{/linkTo}}
         </li>
 
         <li>
-          {{#linkTo calendar today}}
+          {{#linkTo "calendar" today}}
             Calendar <i class="ss-standard ss-calendar"></i>
           {{/linkTo}}
         </li>
 
         <li>
-          {{#linkTo user currentUser}}
+          {{#linkTo "user" currentUser}}
             Tasks <i class="ss-standard ss-check"></i>
           {{/linkTo}}
         </li>
 
         <li>
-          {{#linkTo pipeline.index}}
+          {{#linkTo "pipeline.index"}}
             Pipeline <i class="ss-standard ss-barchart"></i>
           {{/linkTo}}
         </li>
 
         <li>
-          {{#linkTo addressbook.filter 'all'}}
+          {{#linkTo "addressbook.filter" 'all'}}
             Address Book <i class="ss-symbolicons-block ss-users"></i>
           {{/linkTo}}
         </li>

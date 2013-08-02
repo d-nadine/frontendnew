@@ -75,7 +75,7 @@
           <div class="deal">
             <div>
               <div>
-                {{#linkTo deal this}}{{name}}{{/linkTo}}
+                {{#linkTo "deal" this}}{{name}}{{/linkTo}}
               </div>
               <div class="deal-value">
                 {{currency value}}<br/>
@@ -86,10 +86,10 @@
         {{/each}}
         <div class="deal-links">
           <!-- FIXME: Where should this go -->
-          {{#linkTo pipeline.resourceDeals this class="btn btn-link pull-right"}}
+          {{#linkTo "pipeline.resourceDeals" this class="btn btn-link pull-right"}}
             All Deals
           {{/linkTo}}
-          {{#linkTo deals.fromContact model class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
+          {{#linkTo "deals.fromContact" model class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
         </div>
       </div>
     </div>

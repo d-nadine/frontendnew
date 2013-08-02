@@ -31,14 +31,14 @@
         </td>
         <td>
           <p>
-            <big>{{#linkTo deal this}}{{name}}</big>{{/linkTo}}<br/>
-            {{#linkTo contact contact}}{{contact.name}}{{/linkTo}}<br/>
+            <big>{{#linkTo "deal" this}}{{name}}</big>{{/linkTo}}<br/>
+            {{#linkTo "contact" contact}}{{contact.name}}{{/linkTo}}<br/>
             {{contact.title}}
           </p>
         </td>
         <td>
           <p>
-            <big class="name">{{#linkTo user user}}{{user.name}}{{/linkTo}}</big></br>
+            <big class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</big></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>

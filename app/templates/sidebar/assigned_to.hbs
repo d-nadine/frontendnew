@@ -14,11 +14,11 @@
           {{view view.leadSources}}
         </div>
       {{else}}
-        {{#linkTo user user}}
+        {{#linkTo "user" user}}
           {{avatar user class="img-polaroid"}}
         {{/linkTo}}
         <p>
-          {{#linkTo user user}}{{user.name}}{{/linkTo}}<br/>
+          {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
           <span class="title muted">{{title}}</span>
         </p>
         <div class="source">
