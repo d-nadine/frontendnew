@@ -2,7 +2,7 @@
   <i class="ss-standard ss-todo"></i>
 </button>
 
-<div {{bindAttr class="isSelectable :content"}} {{action selectItem this}}>
+<div {{bindAttr class="isSelectable :content"}} {{action 'selectItem' this}}>
   {{yield}}
 
   <div class="footer">
