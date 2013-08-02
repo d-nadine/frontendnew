@@ -36,9 +36,10 @@ Radium.ApplicationRoute = Radium.Route.extend
         @set 'router.openDrawer', name
 
     closeDrawer: ->
-      @render 'nothing',
-        into: 'application'
+      @disconnectOutlet(
         outlet: 'drawer'
+        parentView: 'application'
+      )
 
       @set 'router.openDrawer', null
       $('body').removeClass 'drawer-open'
@@ -111,7 +112,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     # FIXME: Where are we getting the county list from
     @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
 
-    @controllerFor('clock').set 'model', Ember.DateTime.create() 
+    @controllerFor('clock').set 'model', Ember.DateTime.create()
 
   renderTemplate: ->
     @render()

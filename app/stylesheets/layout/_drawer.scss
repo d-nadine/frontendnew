@@ -1,10 +1,17 @@
 .drawer-view {
   @extend .sidebar;
-  z-index: 100;
+  z-index: 99;
   color: #fff;
   background-color: #303030;
+  @include translateX(-100%);
+  @include transition(transform 0.25s);
+
+  &.open {
+    @include translateX(0);
+  }
 
   .scroller .thumb {
     background-color: rgba(0,0,0, 0.5);
   }
+
 }
