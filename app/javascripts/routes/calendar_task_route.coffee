@@ -23,7 +23,7 @@ Radium.CalendarTaskRoute = Radium.Route.extend
     calendarSidebar = @controllerFor('calendarSidebar')
 
     selectedDay = calendarSidebar.get('days').find (day) =>
-      day.get('date').toDateFormat() == task.get('time').toDateFormat()
+      day.get('date').isTheSameDayAs(task.get('time'))
 
     calendarSidebar.set 'selectedDay', selectedDay
 

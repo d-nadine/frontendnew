@@ -21,7 +21,7 @@ Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMore
 
     return true if !selectedDay && isToday
 
-    selectedDay == @get('model')
+    selectedDay && (selectedDay.get('date').isTheSameDayAs(@get('model.date')))
   ).property('isToday', 'selectedDay')
 
   day: (->

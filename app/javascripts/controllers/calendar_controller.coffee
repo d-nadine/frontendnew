@@ -18,11 +18,12 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   # FIXME: use afterModel hook when we upgrade to rc6?
   dateDidChange: ( ->
-    date = @get('date')
+    date = @get('startOfCalendar')
+    dateKey = date.toDateFormat()
 
-    return if @get('map').has date
+    return if @get('map').has dateKey
 
-    @get('map').set date, date
+    @get('map').set dateKey, date
 
     startOfCalendar = @get('startOfCalendar')
     endOfCalendar = @get('endOfCalendar')

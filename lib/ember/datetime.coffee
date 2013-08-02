@@ -67,6 +67,9 @@ Ember.DateTime.reopen
   isFuture: ->
     @get('milliseconds') > Ember.DateTime.create().get('milliseconds')
 
+  isTheSameDayAs: (other) ->
+    @toDateFormat() == other.toDateFormat()
+
   toHumanFormat: ->
     format = "%A, %B %D %Y"
 

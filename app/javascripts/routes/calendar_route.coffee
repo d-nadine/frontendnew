@@ -14,8 +14,6 @@ Radium.CalendarRoute = Radium.Route.extend
   renderTemplate: ->
     @render()
 
-    @controllerFor('calendarSidebar').set('selectedDay', null)
-
     @render 'calendar/sidebar',
       outlet: 'sidebar',
       into: 'calendar'
