@@ -1,10 +1,3 @@
-(function() {
-var Ember = { assert: function() {} };
-// Version: v1.0.0-rc.5-32-g579661a
-// Last commit: 579661a (2013-06-07 06:14:51 -0700)
-
-
-(function() {
 /**
 @module ember
 @submodule ember-handlebars-compiler
@@ -18,12 +11,12 @@ var objectCreate = Object.create || function(parent) {
 };
 
 var Handlebars = this.Handlebars || (Ember.imports && Ember.imports.Handlebars);
-if(!Handlebars && typeof require === 'function') {
+if (!Handlebars && typeof require === 'function') {
   Handlebars = require('handlebars');
 }
 
-Ember.assert("Ember Handlebars requires Handlebars version 1.0.0-rc.4. Include a SCRIPT tag in the HTML HEAD linking to the Handlebars file before you link to Ember.", Handlebars)
-Ember.assert("Ember Handlebars requires Handlebars version 1.0.0-rc.4, COMPILER_REVISION expected: 3, got: " +  Handlebars.COMPILER_REVISION + " – Please note: Builds of master may have other COMPILER_REVISION values.", Handlebars.COMPILER_REVISION === 3);
+Ember.assert("Ember Handlebars requires Handlebars version 1.0.0. Include a SCRIPT tag in the HTML HEAD linking to the Handlebars file before you link to Ember.", Handlebars);
+Ember.assert("Ember Handlebars requires Handlebars version 1.0.0, COMPILER_REVISION expected: 4, got: " +  Handlebars.COMPILER_REVISION + " - Please note: Builds of master may have other COMPILER_REVISION values.", Handlebars.COMPILER_REVISION === 4);
 
 /**
   Prepares the Handlebars templating library for use inside Ember's view
@@ -80,7 +73,7 @@ function makeBindings(options) {
 
   ## Custom view helper example
 
-  Assuming a view subclass named `App.CalenderView` were defined, a helper
+  Assuming a view subclass named `App.CalendarView` were defined, a helper
   for rendering instances of this view could be registered as follows:
 
   ```javascript
@@ -109,16 +102,27 @@ function makeBindings(options) {
   @param {String} dependentKeys*
 */
 Ember.Handlebars.helper = function(name, value) {
+  if (Ember.Component.detect(value)) {
+    Ember.assert("You tried to register a component named '" + name + "', but component names must include a '-'", name.match(/-/));
+
+    var proto = value.proto();
+    if (!proto.layoutName && !proto.templateName) {
+      value.reopen({
+        layoutName: 'components/' + name
+      });
+    }
+  }
+
   if (Ember.View.detect(value)) {
     Ember.Handlebars.registerHelper(name, function(options) {
-      Ember.assert("You can only pass attributes as parameters (not values) to a application-defined helper", arguments.length < 2);
+      Ember.assert("You can only pass attributes (such as name=value) not bare values to a helper for a View", arguments.length < 2);
       makeBindings(options);
       return Ember.Handlebars.helpers.view.call(this, value, options);
     });
   } else {
     Ember.Handlebars.registerBoundHelper.apply(null, arguments);
   }
-}
+};
 
 /**
 @class helpers
@@ -199,12 +203,12 @@ Ember.Handlebars.Compiler.prototype.mustache = function(mustache) {
   } else if (mustache.params.length || mustache.hash) {
     // no changes required
   } else {
-    var id = new Handlebars.AST.IdNode(['_triageMustache']);
+    var id = new Handlebars.AST.IdNode([{ part: '_triageMustache' }]);
 
     // Update the mustache node to include a hash value indicating whether the original node
     // was escaped. This will allow us to properly escape values when the underlying value
     // changes and we need to re-render the value.
-    if(!mustache.escaped) {
+    if (!mustache.escaped) {
       mustache.hash = mustache.hash || new Handlebars.AST.HashNode([]);
       mustache.hash.pairs.push(["unescaped", new Handlebars.AST.StringNode("true")]);
     }
@@ -266,10 +270,3 @@ if (Handlebars.compile) {
   };
 }
 
-
-})();
-
-
-exports.precompile = Ember.Handlebars.precompile;
-exports.EmberHandlebars = Ember.Handlebars;
-})();

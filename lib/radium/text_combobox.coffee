@@ -30,7 +30,7 @@ Radium.TextCombobox = Ember.View.extend
         </button>
         <ul class="dropdown-menu">
           {{#each item in view.source}}
-            <li><a {{action "selectItem" item target=view href=true bubbles=false}}>{{item}}</a></li>
+            <li><a {{action selectItem item target=view href=true bubbles=false}}>{{item}}</a></li>
           {{/each}}
         </ul>
       </div>
