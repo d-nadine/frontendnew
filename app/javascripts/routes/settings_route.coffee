@@ -1,5 +1,5 @@
 Radium.SettingsRoute = Radium.Route.extend()
 
 Radium.SettingsIndexRoute = Radium.Route.extend
-  redirect: ->
+  beforeModel: ->
     @.transitionTo 'settings.profile'

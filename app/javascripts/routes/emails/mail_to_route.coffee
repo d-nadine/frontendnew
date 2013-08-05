@@ -8,13 +8,12 @@ Radium.EmailsMailToRoute = Ember.Route.extend
     recipient_type: key
     recipient_id: model.get('id')
 
-  deserialize: (params) ->
+  model: (params) ->
     type = Radium.Model.mappings[params.recipient_type]
 
     type.find(params.recipient_id)
 
-  redirect: ->
-    model = @modelFor('emailsMailTo')
+  afterModel: (model, transition)->
     newEmailcontroller = @controllerFor('emailsNew')
     newEmailcontroller.set 'showAddresses', true
     form = newEmailcontroller.get('newEmail')

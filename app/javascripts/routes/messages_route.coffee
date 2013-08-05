@@ -91,9 +91,12 @@ Radium.MessagesRoute = Radium.Route.extend
     @send 'closeDrawer'
 
 Radium.MessagesIndexRoute = Radium.Route.extend
-  redirect: ->
+  beforeModel: ->
     messages = @modelFor('messages')
     item = messages.get('firstObject')
     return unless item
 
-    @send 'selectItem', item
+    if item instanceof Radium.Email
+      @transitionTo 'emails.show', item
+    else if item instanceof Radium.Discussion
+      @transitionTo 'messages.discussion', item
