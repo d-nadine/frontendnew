@@ -1,3 +1,10 @@
+(function() {
+var Ember = { assert: function() {} };
+// Version: v1.0.0-rc.6-167-g1af8166
+// Last commit: 1af8166 (2013-07-22 01:22:37 +0000)
+
+
+(function() {
 /**
 @module ember
 @submodule ember-handlebars-compiler
@@ -73,7 +80,7 @@ function makeBindings(options) {
 
   ## Custom view helper example
 
-  Assuming a view subclass named `App.CalendarView` were defined, a helper
+  Assuming a view subclass named `App.CalenderView` were defined, a helper
   for rendering instances of this view could be registered as follows:
 
   ```javascript
@@ -270,3 +277,10 @@ if (Handlebars.compile) {
   };
 }
 
+
+})();
+
+
+exports.precompile = Ember.Handlebars.precompile;
+exports.EmberHandlebars = Ember.Handlebars;
+})();
