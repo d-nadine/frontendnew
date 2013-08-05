@@ -21,7 +21,7 @@ window.Radium = Radium
 Radium.deferReadiness()
 
 Ember.RSVP.configure 'onerror', (e) ->
-  return e.message == "TransitionAborted"
+  return if e.message == "TransitionAborted"
 
   console.log e.message
   console.log e.stack
