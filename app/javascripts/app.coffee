@@ -20,6 +20,10 @@ window.Radium = Radium
 
 Radium.deferReadiness()
 
+Ember.RSVP.configure 'onerror', (e) ->
+  console.log e.message
+  console.log e.stack
+
 require /lib\/radium\/base/
 
 require 'lib/radium/computed'

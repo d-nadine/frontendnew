@@ -50,7 +50,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         Ember.run(adapter, function(){
           this.didFindQuery(store, type, json, recordArray);
         });
-      }).then(DS.rejectionHandler);
+      }).then(null, DS.rejectionHandler);
     }else{
       var args = Array.prototype.call(arguments, 0, -1);
       base.apply(this, args);
