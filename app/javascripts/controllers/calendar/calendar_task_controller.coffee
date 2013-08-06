@@ -4,6 +4,5 @@ Radium.CalendarTaskController = Ember.ObjectController.extend Radium.TaskMixin,
 
     return unless model
 
-    Ember.run.next =>
-      model.set 'isExpanded', true
+    model.set 'isExpanded', true
   ).observes('model')
