@@ -1,20 +1,19 @@
 <ul class="unstyled notifications-list">
-  <li class="notification-item">
+  <li class="notification-item notification-item-top">
     <div class="notification-item-content">
+      <div class="notifications-list-close-btn">
+        <a href="#" class="btn btn-round" {{action close target="view"}}>&times;</a>
+      </div>
       <div class="notification-item-header">
-        <div class="pull-right">
-          <a href="#" {{action close target="view"}}>Close</a>
-        </div>
-        <i class="ss-standard ss-clock notification-item-icon attention"></i>
         <div>
-          <h4>Reminders</h4>
+          <h3>Notifications</h3>
         </div>
       </div>
 
       <div class="notification-item-footer">
         <div class="clearfix pull-right">
-          <button class="btn btn-small btn-primary">Snooze All</button>
-          <button class="btn btn-small btn-success">Mark All as Done</button>
+          <button class="btn">Snooze All</button>
+          <button class="btn btn-primary">Mark All as Done</button>
         </div>
       </div>
     </div>
@@ -23,17 +22,15 @@
   <li class="notification-item">
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
-        <i class="ss-standard ss-clock notification-item-icon attention"></i>
         <div>
-          <h5>Buy milk for the office kitchen</h5>
+          <h4>Buy milk for the office kitchen</h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
-            <i class="ss-standard ss-check notification-item-icon"></i>
+          <small class="notification-item-meta notification-task-overdue">
             <strong>Overdue today at 9 AM</strong>
           </small>
         </div>
@@ -44,17 +41,15 @@
   <li class="notification-item">
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
-        <i class="ss-standard ss-clock notification-item-icon attention"></i>
         <div>
-          <h5><strong>Call</strong> with <strong>Tim Cook</strong></h5>
+          <h4><strong>Call</strong> with <strong>Tim Cook</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
-            <i class="ss-standard ss-phone notification-item-icon"></i>
+          <small class="notification-item-meta notification-task-overdue">
             <strong>Overdue today at 9 AM</strong>
           </small>
         </div>
@@ -65,10 +60,9 @@
   <li class="notification-item">
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
-        <i class="ss-standard ss-clock notification-item-icon"></i>
         <div>
-          <h5>Budget review with <strong>Tim Cook</strong> CEO Apple</h5>
-          <small>In <strong>15 minutes</strong> at <strong>Apple</strong></small>
+          <h4>Budget review with <strong>Tim Cook</strong> CEO Apple</h4>
+          <small class="notification-item-meta">In <strong>15 minutes</strong> at <strong>Apple</strong></small>
         </div>
       </div>
 
@@ -89,15 +83,15 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>Steve commented on a todo <strong>"write a memo to Sally"</strong></h5>
-          <small>Maybe it should b better if we took...</small>
+          <h4>Steve commented on a todo <strong>"write a memo to Sally"</strong></h4>
+          <small class="notification-item-meta">Maybe it should b better if we took...</small>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
             <strong>3 hours ago</strong>
           </small>
@@ -110,15 +104,15 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>Steve sent you an email</h5>
-          <small>It's a great idea...</small>
+          <h4>Steve sent you an email</h4>
+          <small class="notification-item-meta">It's a great idea...</small>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-mail notification-item-icon"></i>
             <strong>3 hours ago</strong>
           </small>
@@ -131,15 +125,15 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>Rachael Adams assigned to you</h5>
-          <small>Write a memo to Bob about targets this month</small>
+          <h4>Rachael Adams assigned to you</h4>
+          <small class="notification-item-meta">Write a memo to Bob about targets this month</small>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
             <strong>Today</strong>
           </small>
@@ -152,14 +146,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>You have <strong>1 missed call</strong> from <strong>Laura Waters Apple</strong></h5>
+          <h4>You have <strong>1 missed call</strong> from <strong>Laura Waters Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
             <strong>Today at 2PM</strong>
           </small>
@@ -172,14 +166,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5><strong>Call</strong> with <strong>Bob Smith Apple</strong></h5>
+          <h4><strong>Call</strong> with <strong>Bob Smith Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
             <strong>In 1 hour</strong>
           </small>
@@ -192,14 +186,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5><strong>Sam Asikainen</strong> assigned you a deal with <strong>Viveka Smith Apple</strong></h5>
+          <h4><strong>Sam Asikainen</strong> assigned you a deal with <strong>Viveka Smith Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <span class="label label-info">Deal</span>
             <strong>Yesterday</strong>
           </small>
@@ -212,14 +206,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>No reply from <strong>Tim Cook email</strong> sent</h5>
+          <h4>No reply from <strong>Tim Cook email</strong> sent</h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-mail notification-item-icon"></i>
             <strong>Yesterday</strong>
           </small>
@@ -232,14 +226,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5>You have <strong>1 new lead</strong> from <strong>website</strong></h5>
+          <h4>You have <strong>1 new lead</strong> from <strong>website</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <span class="label label-success">Lead</span>
             <strong>Yesterday</strong>
           </small>
@@ -252,14 +246,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5><strong>Sami Asikainen</strong> assigned you a <strong>Call</strong> with <strong>Viveka Smith Apple</strong></h5>
+          <h4><strong>Sami Asikainen</strong> assigned you a <strong>Call</strong> with <strong>Viveka Smith Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
             <strong>Yesterday</strong>
           </small>
@@ -272,14 +266,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5><strong>Sami Asikainen</strong> assigned you a <strong>Company – Apple</strong></h5>
+          <h4><strong>Sami Asikainen</strong> assigned you a <strong>Company – Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-buildings notification-item-icon"></i>
             <strong>Yesterday</strong>
           </small>
@@ -292,14 +286,14 @@
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
         <div>
-          <h5><strong>Sami Asikainen</strong> assigned you a <strong>Contact</strong> with <strong>Viveka Smith Apple</strong></h5>
+          <h4><strong>Sami Asikainen</strong> assigned you a <strong>Contact</strong> with <strong>Viveka Smith Apple</strong></h4>
         </div>
       </div>
 
       <div class="notification-item-footer">
         {{partial "notifications/notification_actions"}}
         <div class="clearfix">
-          <small>
+          <small class="notification-item-meta">
             <i class="ss-standard ss-user notification-item-icon"></i>
             <strong>Yesterday</strong>
           </small>

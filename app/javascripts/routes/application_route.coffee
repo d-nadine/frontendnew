@@ -113,3 +113,10 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()
+
+  renderTemplate: ->
+    @render()
+
+    @render 'drawer_panel',
+      into: 'application'
+      outlet: 'drawerPanel'
