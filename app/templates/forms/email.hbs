@@ -22,10 +22,10 @@
 
           <span class="toggles">
             {{#unless showCc}}
-              <a href="#" tabindex="7" {{action expandList 'cc'}}>CC</a>
+              <a href="#" class="muted" tabindex="7" {{action expandList 'cc'}}>CC</a>
             {{/unless}}
             {{#unless showBcc}}
-              <a href="#" tabIndex="7" {{action expandList 'bcc'}}>BCC</a>
+              <a href="#" class="muted" tabIndex="7" {{action expandList 'bcc'}}>BCC</a>
             {{/unless}}
           </span>
         </div>
@@ -52,7 +52,7 @@
       </div>
     {{/if}}
 
-    <div class="block body">
+    <div class="block body field">
       {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
       <div>
         <div class="check-response">
@@ -87,12 +87,13 @@
           <a href="#" tabindex="4" class="pull-right btn btn-link" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
         {{/unless}}
       </div>
-      <hr/>
-      <div class="footer">
+    </div>
+    <div class="footer">
+      <div class="pull-right">
         {{#if showEmailCancel}}
           <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
         {{/if}}
-        <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary">Send</button>
+        <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
       </div>
     </div>
   </form>

@@ -1,5 +1,6 @@
 Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
+  classNames: ['messages-list-item']
   layoutName: 'messages/sidebar_item'
   classNameBindings: [
     'itemClass'

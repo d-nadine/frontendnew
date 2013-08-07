@@ -1,15 +1,14 @@
-<ul class="unstyled selectable">
-  <li>
-    <span class="label label-info folder-label">{{capitalize folder}}</span>
-  </li>
-  <li class="send-email">
-    {{#linkTo "emails.new" class="btn btn-block btn-success"}}
-        Send Email
+<ul class="unstyled selectable messages-list">
+  <li class="messages-list-item">
+    {{#linkTo "emails.new" class="btn btn-block btn-primary"}}
+      <i class="ss-standard ss-plus ss-small"></i> <i class="ss-standard ss-mail"></i> Send Email
     {{/linkTo}}
   </li>
   {{#if content}}
     {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}
   {{else}}
-    <p>No Emails!</p>
+    <li class="messages-list-item text-center">
+      <i class="ss-standard ss-inbox muted"></i> This folder is empty
+    </li>
   {{/if}}
 </ul>

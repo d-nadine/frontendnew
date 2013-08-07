@@ -1,6 +1,8 @@
-// FIXME: this should not be required
-.fixed-two-column-layout #sidebar .selectable > li.is-impersonal {
-  background-color: #FFF9CA;
+.messages-list-item {
+  padding: 15px;
+  border-bottom: 1px solid #dddddd;
+  background: #fff;
+  @include box-sizing(border-box);
 }
 
 .messages-sidebar-view {

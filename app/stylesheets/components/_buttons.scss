@@ -41,6 +41,10 @@ $btn-primary : #007cdd;
     top: 2px;
     vertical-align: middle;
   }
+
+  .ss-small {
+    top: 1px;
+  }
 }
 
 .btn-link {
@@ -61,6 +65,13 @@ $btn-primary : #007cdd;
   line-height: 27px;
   font-weight: bold;
   @include border-radius(20px);
+}
+
+.btn-wide {
+  padding: {
+    right: 60px;
+    left: 60px;
+  }
 }
 
 .btn-primary {
