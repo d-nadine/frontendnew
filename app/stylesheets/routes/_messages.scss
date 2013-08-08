@@ -1,266 +1,111 @@
+
 .messages-list-item {
-  padding: 15px;
-  border-bottom: 1px solid #dddddd;
+  $item-border: #dddddd;
+
+  padding: 10px 20px;
+  position: relative;
+  border-bottom: 1px solid $item-border;
   background: #fff;
   @include box-sizing(border-box);
-}
+  @include transition(background-color 0.25s);
 
-.messages-sidebar-view {
-  .folder-label{
-    width: 98%;
-    font-size: 20px;
-    padding-bottom: 8px;
-    text-align: center;
-    padding-top: 10px;
-    height: 20px;
-  }
-  .checker {
-    border-right: solid 2px $dark-background;
+  &.is-selected {
+    background-color: $calendar-active-bg;
   }
 
-  .is-selected .content,
-  .content:hover {
-    .delete, .ss-chat {
-      display: inline;
-    }
-  }
-
-  .is-unread .teaser {
-    font-weight: bold;
-  }
-
-  .is-impersonal {
-    background-color: blue;
-  }
-
-  .has-tasks .content:after {
+  .btn-read-status {
     position: absolute;
-    content: ' ';
-    left: -33px;
-    height: 0;
-    width: 0;
-    bottom: -32px;
-    border: solid 20px transparent;
-    border-top-color: $associated-blue;
-    @include rotate(45deg);
+    left: 10px;
+    top: 10px;
   }
 
-  .content {
-    margin-left: 40px;
-    position: relative;
-    cursor: poin
+  .btn-read {
+    opacity: 0;
+    @include transition(opacity 0.25s);
   }
 
-  .content.is-selectable:hover {
-    cursor: pointer;
-  }
-
-  .delete, .ss-chat {
-    display: none;
-  }
-
-  .footer {
-    overflow: auto;
-  }
-
-  .discussion-item {
-    .ss-chat {
-      float: left;
-    }
-
-    .text-container {
-      margin-left: 40px;
-      margin-right: 15px;
-    }
-
-    .user-list {
-      margin-bottom: 10px;
-    }
+  &:hover .btn-read {
+    opacity: 1;
   }
 }
 
-.messages-view .context {
-  .context-container {
-    padding: 15px 0;
-    border: solid 1px $selected-item-border;
-    background-color: $bright;
-    margin-bottom: 15px;
-    box-sizing: border-box;
+.message-list-readable-item {
+  padding-left: 30px;
+}
+
+.message-item-content {
+  overflow: hidden;
+}
+
+.message-item-avatar {
+  margin-right: 20px;
+}
+
+.message-item-title {
+  margin: 0 0 5px;
+}
+
+.message-item-subject {
+  margin: 0 0 5px;
+}
+
+.message-item-actions {
+  opacity: 0;
+  @include transition(opacity 0.25s);
+
+  .messages-list-item:hover & {
+    opacity: 1;
   }
 
-  .task-info-container {
-    margin-left: 0;
+  i {
+    color: $blue;
+    margin: 0 0 0 5px;
   }
+}
 
-  .contact-info {
-    padding-left: 15px;
+.message-item-links {
+  a {
+    margin: 0 5px 0 0;
+    color: #979797;
 
-    .avatar {
-      float: left;
-      margin-right: 20px;
+    .is-selected & {
+      color: $blue;
     }
-
-    p {
-      color: $dark;
-      font-size: 16px;
-      line-height: 30px;
-    }
-
-    .name {
-      font-weight: bold;
-    }
-  }
-
-  .deal-info {
-    table {
-      width: 100%;
-    }
-  }
-
-  .task-info {
-    text-align: right;
-
-    table {
-      width: 100%;
-    }
-  }
-
-  h2 {
-    font-size: 12px;
-    line-height: 12px;
-    margin: 0;
-    margin-bottom: 15px;
-    color: $dark;
   }
 
 }
 
-.messages-view .message-card {
-  padding: 50px;
-  padding-bottom: 0px;
+.folders-list {
+  text-align: center;
+}
 
-  .header {
-    margin-bottom: 15px;
-  }
+.folders-list-item {
+  width: 100%;
+  margin: 20px 0;
+  display: inline-block;
+  cursor: pointer;
 
-  .content {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 15px;
+  a {
+    display: block;
+    line-height: 60px;
+    color: darken(white, 10%);
+    @include transition(all 0.25s);
 
-    .text {
-      margin-bottom: 30px;
+    &:hover {
+      color: white;
 
-      &.empty p {
-        color: $muted;
-        text-align: center;
-        font-style: italic;
+      i {
+        @include translateY(-10px);
       }
     }
-  }
 
-  .related-tasks {
-    padding: 20px 0;
-  }
-}
-
-.messages-view .discussion-card  {
-  .header {
     i {
-      float: left;
-      margin-right: 40px;
-      font-size: 32px;
-    }
-  }
-}
-
-.messages-view .email-card {
-  .header {
-    .more {
-      margin-right: 15px;
+      position: relative;
+      top: 2px;
+      font-size: 50px;
+      text-shadow: 0 1px 4px rgba(black, 0.8);
+      @include translateY(0);
     }
 
-    .sender {
-      margin-right: 10px;
-    }
-
-    .subject {
-      margin-left: 10px;
-    }
-
-    dl {
-      dt, dd {
-        margin-bottom: 5px;
-      }
-
-      dt {
-        width: 50px;
-        float: left;
-        font-weight: normal;
-
-        &:after {
-          content: ':'
-        }
-      }
-
-      dd {
-        margin-left: 60px;
-      }
-    }
   }
-}
-
-.modal-loading {
-  text-align: center;
-  padding: 30px 15px;
-
-  img {
-    margin-bottom: 30px;
-  }
-
-  p {
-    color: $muted;
-    margin: 0;
-  }
-}
-
-.email-confirmation-view {
-  padding: 30px 15px;
-
-  .close{
-    display: none;
-  }
-
-  .sending {
-    text-align: center;
-
-    img {
-      margin-bottom: 30px;
-    }
-  }
-
-  .subject {
-    text-align: center;
-    color: $muted;
-  }
-
-  .recipients {
-    text-align: center;
-    font-size: 150%;
-  }
-}
-
-.related-task-prompt {
-  text-align: center;
-  color: #37aed4;
-  font-weight: bold;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.message-card.is-sending {
-  text-align: center;
-  padding: 50px;
 }

@@ -1,7 +1,7 @@
 #drawer-buttons {
   width: $button-bar-width;
   position: fixed;
-  top: 48px;
+  top: 47px;
   bottom: 0;
   z-index: 999;
   background-color: $black;
@@ -9,21 +9,22 @@
   > a {
     display: block;
     position: relative;
-    padding: 4px 12px;
-    margin-bottom: 6px;
-    height: 60px;
-    color: inherit;
+    font-size: 18px;
+    line-height: 70px;
     text-decoration: none;
-    border-bottom: 1px solid $background;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(black, 0.8);
+    color: #787878;
+    background-color: rgba(white, 0);
+    @include transition(background-color 0.25s);
+
+    &:hover {
+      background-color: rgba(white, 0.1);
+    }
 
     i {
-      position: absolute;
-      top: 50%;
-      margin-top: -25%;
-      left: 50%;
-      margin-left: -20%;
-
-      color: $bright;
+      position: relative;
+      top: 2px;
     }
   }
 

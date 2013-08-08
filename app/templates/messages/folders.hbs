@@ -1,10 +1,10 @@
-<ul class="unstyled thumbnail-list">
+<ul class="unstyled folders-list">
   {{#each folders}}
-    <li>
+  {{log this}}
+    <li class="folders-list-item">
       <a {{action selectFolder name href=true }}>
-        <img src="http://placehold.it/120x120" />
+        <i class="ss-standard ss-inbox"></i>
       </a>
-      <br/>
       {{label title}}
     </li>
   {{/each}}
