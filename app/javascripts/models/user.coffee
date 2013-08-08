@@ -24,7 +24,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   avatar: DS.attr('object')
 
-  signature: DS.attr('string')
   lastLogin: DS.attr('date')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

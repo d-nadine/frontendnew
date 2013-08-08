@@ -6614,8 +6614,9 @@ DS.Serializer = Ember.Object.extend({
     aliases.forEach(function(key, type) {
       plural = self.pluralize(key);
       // FIXME: Ember-data bug with same singular key as plural key
-      // Ember.assert("The '" + key + "' alias has already been defined", !aliases.get(plural));
-      if(!aliases.get(plural)){
+-     // Ember.assert("The '" + key + "' alias has already been defined", !aliases.get(plural));
+      if(key !== plural){
+        Ember.assert("The '" + key + "' alias has already been defined", !aliases.get(plural));
         aliases.set(plural, type);
       }
     });

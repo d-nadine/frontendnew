@@ -3,8 +3,6 @@ require 'lib/radium/text_area'
 require 'lib/radium/toggle_switch'
 
 Radium.FormsEmailView = Radium.FormView.extend
-  settings: Ember.computed.alias 'controller.controllers.settings'
-
   didInsertElement: ->
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
