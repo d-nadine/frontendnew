@@ -63,10 +63,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     @$('.modal').removeClass('in')
 
   addSignature: ->
-    signature = @get('controller.signature')
-
-    if signature
-      @appendSignature
+    if signature = @get('controller.signature')
+      @appendSignature()
     else
       @set 'showSignatureModal', true
       Ember.run.next =>

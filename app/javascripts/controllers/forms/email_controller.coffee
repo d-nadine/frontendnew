@@ -2,7 +2,8 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   needs: ['tags','contacts','users','userSettings']
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
-  signature: Ember.computed.alias 'controllers.userSettings.signature'
+  settings: Ember.computed.alias 'controllers.userSettings.model'
+  signature: Ember.computed.alias 'settings.signature'
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
 
@@ -26,6 +27,9 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
     return unless @get('signature.length')
 
     @set 'signatureSubmited', false
+
+    @get('settings').one 'didUpdate', =>
+      @send 'flashSuccess', 'Signature updated'
 
     @get('store').commit()
 
