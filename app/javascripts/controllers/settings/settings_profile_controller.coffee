@@ -1,4 +1,8 @@
 Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
+  needs: ['userSettings']
+  settings: Ember.computed.alias 'controllers.userSettings'
+  signatureBinding: 'controllers.userSettings.signature'
+  
   isValid: ( ->
     !Ember.isEmpty(@get('firstName')) && !Ember.isEmpty(@get('lastName'))
   ).property('firstName', 'lastName')
@@ -12,7 +16,7 @@ Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
 
     user = @get('model')
 
-    user.one 'didUpdate', ->
+    user.one 'didUpdate', =>
       @send "flashSuccess", "Profile settings saved!"
 
     user.one 'becameInvalid', (result) =>
@@ -22,6 +26,9 @@ Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
     user.one 'becameError', (result) =>
       @send 'flashError', "an error happened and the profile could not be updated"
       @resetModel()
+
+    user.get('settings').one 'didUpdate', =>
+      @send 'flashSuccess', 'Signature updated'
 
     user.get('transaction').commit()
 
