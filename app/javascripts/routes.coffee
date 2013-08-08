@@ -65,13 +65,3 @@ Radium.Router.map ->
     @route 'remindersAlerts', path: 'reminders-alerts'
 
   @route 'unimplemented'
-
-  @resource 'development', ->
-    @route 'forms'
-    @route 'todoForm'
-    @route 'callForm'
-    @route 'meetingForm'
-    @route 'discussionForm'
-    @route 'emailForms'
-    @route 'widgets'
-    @route 'masterFeed'

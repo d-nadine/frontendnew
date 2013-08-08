@@ -50,6 +50,4 @@ require 'controllers'
 
 require /helpers/
 
-require 'factories'
-
 require 'debug'
