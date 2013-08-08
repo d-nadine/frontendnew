@@ -1,9 +1,6 @@
 Radium.SettingsRemindersAlertsRoute = Radium.Route.extend
   model: ->
-    transaction = @store.transaction()
-    settings = Radium.Settings.find(1)
-    transaction.add settings
-    settings
+    @controllerFor('userSettings').get('model')
 
   events:
     save: (settings) ->
