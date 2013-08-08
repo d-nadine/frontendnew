@@ -1,6 +1,7 @@
 Radium.User = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
 
+  settings: DS.belongsTo('Radium.UserSettings')
   account: DS.belongsTo('Radium.Account')
 
   deals: DS.hasMany('Radium.Deal')
@@ -24,7 +25,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   avatar: DS.attr('object')
 
   signature: DS.attr('string')
-  settings: DS.attr('object')
   lastLogin: DS.attr('date')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
