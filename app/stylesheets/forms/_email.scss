@@ -55,6 +55,25 @@
   }
 
   .footer {
+    overflow: hidden;
     text-align: right;
   }
+}
+
+
+.email-item-card {
+  width: 60%;
+  overflow: hidden;
+}
+
+.email-item-card-content {
+  padding-left: 140px;
+}
+
+.email-item-card-title {
+  margin: 0;
+}
+
+.email-item-next-task {
+  width: 30%;
 }

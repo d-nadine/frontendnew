@@ -1,70 +1,34 @@
 <!-- columns must add up to 8 -->
-<div class="row context">
-  <div class="span8 context-container">
-    <div class="row">
-      <div class="span3 contact-info-container">
-        <div class="contact-info">
-          {{avatar contact style="medium" class="img-polaroid"}}
-          <p>
-            <span class="name">
-              {{#if contact.name}}
-                {{contact.name}}
-              {{else}}
-                <span class="muted">No Name</span>
-              {{/if}}
-            </span></br>
-            <span class="title">
-              {{#if contact.title}}
-                {{contact.title}}
-              {{else}}
-                <span class="muted">No Title</span>
-              {{/if}}
-            </span>
-          </p>
-        </div>
-      </div>
-
-      <div class="span2 deal-info-container">
-        <div class="deal-info">
-          <h2 class="upcase">Current Deal</h2>
-
-          <table>
-            <tbody>
-              {{#if activeDeal}}
-                <tr>
-                  <td>
-                    <strong>
-                      {{#linkTo "deal" activeDeal}}{{activeDeal.name}}{{/linkTo}}
-                    </strong>
-                  </td>
-                  <td class="capitalize">{{activeDeal.status}}</td>
-                  <td class="money">{{currency activeDeal.value}}</td>
-                </tr>
-              {{else}}
-                <tr colspan="3">
-                  <td class="muted">No deals yet</td>
-                </tr>
-              {{/if}}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="span3 task-info-container">
-        <div class="task-info">
-          <h2 class="upcase">Next Task</h2>
-
-          <table>
-            <tbody>
-              <tr colspan="3">
-                <td>
-                  {{render "next_task" nextTask}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="clearfix email-item-header">
+  <div class="pull-left block email-item-card">
+    <div class="pull-left">
+      {{avatar contact size="large"}}
     </div>
+    <div class="email-item-card-content">
+      <h3 class="email-item-card-title">
+        {{#if contact.name}}
+          {{contact.name}}
+        {{else}}
+          <span class="muted">No Name</span>
+        {{/if}}
+      </h3>
+      <p>
+        {{#if contact.title}}
+          {{contact.title}}
+        {{else}}
+          <span class="muted">No Title</span>
+        {{/if}}
+      </p>
+      <p class="source">From <a href="#" class="ss-icon ss-social">LinkedIn</a></p>
+    </div>
+  </div>
+
+  <div class="pull-right block email-item-card email-item-next-task">
+    <h6>Next task:</h6>
+    {{#if activeDeal}}
+      {{#linkTo "deal" activeDeal}}{{activeDeal.name}}{{/linkTo}}
+    {{else}}
+      <p>No deals yet</p>
+    {{/if}}
   </div>
 </div>

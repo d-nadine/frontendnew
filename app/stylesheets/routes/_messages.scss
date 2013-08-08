@@ -53,7 +53,8 @@
   opacity: 0;
   @include transition(opacity 0.25s);
 
-  .messages-list-item:hover & {
+  .messages-list-item:hover &,
+  .messages-list-item.is-selected & {
     opacity: 1;
   }
 
@@ -107,5 +108,24 @@
       @include translateY(0);
     }
 
+  }
+}
+
+.btn-messages-action {
+  margin-left: 30px;
+  color: #000;
+  @include transition(color 0.25s);
+
+  i {
+    margin: 0 5px 0 0;
+    color: #e4e4e4;
+    @include transition(color 0.25s);
+  }
+
+  &:hover {
+    text-decoration: none;
+    &, i {
+      color: $blue;
+    }
   }
 }
