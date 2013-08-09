@@ -93,7 +93,17 @@
         {{#if showEmailCancel}}
           <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
         {{/if}}
-        <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
+        <div class="btn-group">
+          <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Send Tomorrow</a></li>
+            <li><a href="#">Send Next Week</a></li>
+            <li>{{view view.datePicker class="field"}}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </form>
