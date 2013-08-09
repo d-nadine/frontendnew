@@ -5,16 +5,16 @@
   <fieldset>
     <legend>Reminders</legend>
 
-    <div {{bindAttr class=":control-group overdueTasks.enabled::control-disabled"}}>
+    <div {{bindAttr class=":control-group notifications.overdueTasks.enabled::control-disabled"}}>
       <span class="help-block">Send me a reminder when I have an overdue task:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
         {{input type="number"
-          value=overdueTasks.duration
+          value=notifications.overdueTasks.duration
           placeholder="1"
           class="input-mini"
-          disabledBinding="controller.overdueTaskDisabled"}}
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="overdueTasks.enabled"}}
+          disabledBinding="overdueTaskDisabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.overdueTasks.enabled"}}
       </div>
     </div>
   </fieldset>
@@ -23,7 +23,7 @@
     <legend>Alerts</legend>
   </fieldset>
   <div class="form-actions">
-    <button type="button" {{action update}} {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
+    <button type="button" {{action update}} {{bindAttr disabled=isSaving}} class="btn btn-primary">Save</button>
     <button class="btn" {{action "cancel"}}>Cancel</button>
   </div>
 </form>

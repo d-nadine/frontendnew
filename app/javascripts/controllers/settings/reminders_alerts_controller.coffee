@@ -1,6 +1,6 @@
 Radium.SettingsRemindersAlertsController = Radium.ObjectController.extend BufferedProxy,
-  overdueTaskDisabled: Ember.computed.not 'overdueTasks.enabled'
-  update: (settings) ->
+  overdueTaskDisabled: Ember.computed.not 'notifications.overdueTasks.enabled'
+  update:  ->
     @applyBufferedChanges()
 
     model = @get('model')
