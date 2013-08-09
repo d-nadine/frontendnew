@@ -209,3 +209,11 @@ Radium.RESTAdapter.map('Radium.User', {
   isAdmin: {key: 'admin'},
   settings: {key: 'user_settings_id'}
 });
+
+Radium.RESTAdapter.map('Radium.UserSettings', {
+  notifications: {embedded: 'always'},
+});
+
+Radium.RESTAdapter.map('Radium.NotificationSettings', {
+  overdueTasks: {embedded: 'always'},
+});
