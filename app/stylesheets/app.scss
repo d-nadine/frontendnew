@@ -122,3 +122,50 @@ a:hover {
 .table .th, .table td {
   vertical-align: middle;
 }
+
+
+.gray-background {
+  background-color: $background;
+}
+
+.bright-background {
+  background-color: $bright;
+}
+
+.blue {
+  color: $blue;
+}
+
+.green {
+  color: $green;
+}
+
+.money {
+  color: $money;
+}
+
+.muted,
+.btn:hover.muted {
+  color: $muted;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
+.dark {
+  color: $dark;
+}
+
+.black {
+  color: $black;
+}
+
+.associated-blue {
+  background-color: $associated-blue;
+}
+
+.secondary-selection {
+  background-color: $secondary-selection;
+}
+

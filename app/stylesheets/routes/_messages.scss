@@ -5,12 +5,12 @@
   padding: 10px 20px;
   position: relative;
   border-bottom: 1px solid $item-border;
-  background: #fff;
+  background: $background;
   @include box-sizing(border-box);
   @include transition(background-color 0.25s);
 
   &.is-selected {
-    background-color: $calendar-active-bg;
+    background-color: #fff;
   }
 
   .btn-read-status {
@@ -112,7 +112,7 @@
 }
 
 .btn-messages-action {
-  margin-left: 30px;
+  margin-left: 10px;
   color: #000;
   @include transition(color 0.25s);
 

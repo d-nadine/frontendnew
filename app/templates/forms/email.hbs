@@ -54,37 +54,49 @@
 
     <div class="block body field">
       {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
-      <div>
-        <div class="check-response">
-          {{#unless showCheckForResponse}}
-            <button class="btn" tabindex="6" {{action toggleReminderForm bubbles="false"}}>
-              {{#if includeReminder}}
-                Checking for response in {{reminderTime}} day(s)
-              {{else}}
-                Check for response?
-              {{/if}}
+      <div class="email-item-actions">
+        {{#unless isPersonal}}
+          {{#if showFormBox}}
+            <button class="btn text-error" {{action toggleFormBox}}>
+              <i class="ss-standard ss-delete"></i> Cancel
             </button>
-          {{/unless}}
+          {{else}}
+            <button class="btn" {{action toggleFormBox}}>
+              <i class="ss-standard ss-check green"></i> Add todo
+            </button>
+          {{/if}}
+        {{/unless}}
+
+        <div class="check-response">
           {{#if showCheckForResponse}}
-            <div class="reminder-form form-inline">
-              Check for response?
-
-              {{view view.reminderSwitch class="inline"}}
-
-              in
-
-              {{view view.reminderLength class="field"}}
-
-              days
-
-              <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
-                Done
-              </button>
+            <div class="popover bottom show check-response-popover">
+              <div class="arrow"></div>
+              <h3 class="popover-title">Check for response?</h3>
+              <div class="popover-content">
+                {{view view.reminderSwitch class="inline"}} in {{view view.reminderLength class="field"}} days
+                <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
+                  Done
+                </button>
+              </div>
             </div>
           {{/if}}
+            <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+              <i class="ss-standard ss-info"></i>
+              {{#if includeReminder}}
+                 Checking for response in {{reminderTime}} day(s)
+              {{else}}
+                 Check for response?
+              {{/if}}
+            </button>
         </div>
+
+          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-filter"></i> Make Private
+          </a>
         {{#unless view.signatureAdded}}
-          <a href="#" tabindex="4" class="pull-right btn btn-link" {{action addSignature target="view" bubbles="true"}}>+ Add Signature</a>
+          <a href="#" tabindex="4" class="pull-right btn btn-link btn-messages-action" {{action addSignature target="view" bubbles="true"}}>
+            <i class="ss-standard ss-write"></i> Add Signature
+          </a>
         {{/unless}}
       </div>
     </div>

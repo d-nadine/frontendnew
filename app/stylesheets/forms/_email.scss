@@ -2,8 +2,10 @@
   margin: 0 0 40px;
 }
 
-.email-thread-item-actions {
-  margin: 0 0 20px;
+.email-item-actions {
+  margin: 20px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid #ddd;
 }
 
 .email-card {
@@ -49,21 +51,34 @@
   }
 
   .check-response {
+    position: relative;
     display: inline-block;
   }
 
-  .reminder-form {
+  .check-response-popover {
+    width: 230px;
+    margin-top: 30px;
     background-color: $light-background;
     border: solid 1px $selected-item-border;
-    padding: 15px;
 
     input[type=number] {
       width: 30px;
     }
 
     button {
-      margin-left: 15px;
+      float: right;
     }
+  }
+}
+
+.email-title {
+  margin: 0;
+  line-height: 30px;
+}
+
+.email-header-actions {
+  .close {
+    float: none;
   }
 }
 
@@ -100,4 +115,8 @@
 
 .email-item-next-task {
   width: 30%;
+}
+
+.email-compose-footer {
+  border-top: 1px solid #dddddd;
 }

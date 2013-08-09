@@ -8,6 +8,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
 
     @get('toList').focus() if @get('controller.showAddresses')
+    @$('.btn').tooltip()
 
   noContent: ( ->
     return unless @get('controller.isSubmitted')
