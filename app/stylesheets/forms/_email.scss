@@ -1,3 +1,15 @@
+.email-thread-item {
+  margin: 0 0 40px;
+}
+
+.email-thread-item-actions {
+  margin: 0 0 20px;
+}
+
+.email-card {
+  @include box-shadow(0 0 4px rgba(black, 0.1));
+}
+
 .forms-email-view {
   a {
     text-decoration: none;
@@ -60,10 +72,27 @@
   }
 }
 
+.email-details {
+  dl.dl-horizontal {
+    dt {
+      width: 50px;
+      color: $muted;
+
+      &:after {
+        content: ":";
+      }
+    }
+
+    dd {
+      margin-left: 60px;
+    }
+  }
+}
 
 .email-item-card {
   width: 60%;
   overflow: hidden;
+  @include box-shadow(0 0 4px rgba(black, 0.1));
 }
 
 .email-item-card-content {

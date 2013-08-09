@@ -1,14 +1,17 @@
+$comment-bg: #e7e7e7;
+$comment-border: #cfcfcf;
+
 .comments {
-  border: solid 1px darken($dark-background, 10%);
-  background-color: $dark-background;
-  margin-top: 30px;
+  border: solid 1px $comment-border;
+  background-color: $comment-bg;
+  margin-top: 20px;
 
   &:after {
-    border-bottom-color: $dark-background;
+    border-bottom-color: $comment-bg;
   }
 
   &:before {
-    border-bottom-color: darken($dark-background, 20%);
+    border-bottom-color: $comment-border;
   }
 }
 
@@ -37,6 +40,10 @@
   .text {
     margin-left: 40px;
     margin-right: 60px;
+
+    textarea {
+      border: 1px solid $comment-border;
+    }
   }
 }
 

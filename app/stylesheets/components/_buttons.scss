@@ -45,6 +45,10 @@ $btn-primary : #007cdd;
   .ss-small {
     top: 1px;
   }
+
+  &.text-error {
+    color: $red;
+  }
 }
 
 .btn-link {
