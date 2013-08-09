@@ -5,8 +5,8 @@ Radium.EmailsItemController = Radium.ObjectController.extend
     @toggleProperty 'isPersonal'
 
   isPersonal: ( (key, value) ->
-    return if @get('isnew')
-    return if @get('model.issaving')
+    return if @get('isNew')
+    return if @get('model.isSaving')
     return if @get('model.isSending')
     if arguments.length == 2
       @set('model.isPersonal', value)

@@ -1,96 +1,29 @@
 <div class="page-header">
   <h3>Reminders & Alerts</h3>
 </div>
-<form class="form-horizontal settings-form" {{action "save" controller.content on="submit"}}>
-  {{#with reminders}}
+<form class="form-horizontal settings-form">
   <fieldset>
     <legend>Reminders</legend>
 
-    <div {{bindAttr class=":control-group controller.overdueTaskDisabled:control-disabled"}}>
+    <div {{bindAttr class=":control-group overdueTasks.enabled::control-disabled"}}>
       <span class="help-block">Send me a reminder when I have an overdue task:</span>
       <label for="" class="control-label">When task is overdue</label>
       <div class="controls">
         {{input type="number"
-          value=overdueTaskDays
+          value=overdueTasks.duration
           placeholder="1"
           class="input-mini"
           disabledBinding="controller.overdueTaskDisabled"}}
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="overdueTaskEnabled"}}
-      </div>
-    </div>
-
-    <div {{bindAttr class=":control-group controller.assignedOverdueTaskDisabled:control-disabled"}}>
-      <span class="help-block">Send me a reminder when I create a task for someone else:</span>
-      <label for="" class="control-label">When task is overdue</label>
-      <div class="controls">
-        {{input type="number"
-          value=assignedOverdueTaskDays
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="controller.assignedOverdueTaskDisabled"}}
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="assignedOverdueTaskEnabled"}}
-      </div>
-    </div>
-
-    <div {{bindAttr class=":control-group controller.localMeetingDisabled:control-disabled"}}>
-      <span class="help-block">Send me a reminder when a meeting is in my office/office building:</span>
-      <label for="" class="control-label">When meeting is in</label>
-      <div class="controls">
-        {{input type="number"
-          value=localMeetingDays
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="controller.localMeetingDisabled"}}
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="localMeetingEnabled"}}
-      </div>
-    </div>
-
-    <div {{bindAttr class=":control-group controller.outOfOfficeDisabled:control-disabled"}}>
-      <span class="help-block">Send me a reminder when a meeting is not in my office/office building:</span>
-      <label for="" class="control-label">When meeting is</label>
-      <div class="controls">
-        {{input type="number"
-          value=outOfOfficeDays
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="controller.outOfOfficeDisabled"}}
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="outOfOfficeEnabled"}}
+        {{view Radium.FormEnabledSwitchView isCheckedBinding="overdueTasks.enabled"}}
       </div>
     </div>
   </fieldset>
 
   <fieldset>
     <legend>Alerts</legend>
-    <p {{bindAttr class=":control-inline-text controller.leadIgnoredDisabled:control-disabled"}}>
-      If a lead is ignored for more than {{input type="number"
-        value=leadIgnoredDays
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="controller.leadIgnoredDisabled"}}
-         days highlight that lead
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="leadIgnoredEnabled"}}
-    <p {{bindAttr class=":control-inline-text controller.clientIgnoredDisabled:control-disabled"}}>
-      If a client is ignored for more than
-      {{input type="number"
-        value=clientIgnoredDays
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="controller.clientIgnoredDisabled"}}
-       days highlight that lead
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="clientIgnoredEnabled"}}
-    <p {{bindAttr class=":control-inline-text controller.taskIgnoredDisabled:control-disabled"}}>
-      If a task is ignored for more than
-      {{input type="number"
-        value=taskIgnoredDays
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="controller.taskIgnoredDisabled"}}
-       days highlight that lead
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="taskIgnoredEnabled"}}
   </fieldset>
-  {{/with}}
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button class="btn" {{action "cancel" controller}}>Cancel</button>
+    <button type="button" {{action update}} {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
+    <button class="btn" {{action "cancel"}}>Cancel</button>
   </div>
 </form>
