@@ -14,7 +14,7 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
 
     user.one 'didUpdate', =>
       message = if isAdmin
-                  'user no lonber admin'
+                  'user no longer admin'
                 else
                   'user is now an admin'
 
