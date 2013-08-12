@@ -1,9 +1,36 @@
-<ul class="unstyled selectable messages-list">
-  <li class="messages-list-item">
+<div class="messages-list-controls">
+  <div class="clearfix">
+    <form class="form-search pull-right messages-list-search">
+      <div class="input-append">
+        <i class="ss-symbolicons-block ss-search"></i>
+        {{input type="text" placeholder=content.selectedSearchScope}}
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right">
+            {{#each folders}}
+            <li>
+              <a href="#" {{action selectSearchScope this}}>
+                {{title}}
+              </a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </form>
+    <div class="mailbox-tab">
+      {{folder}} {{#if content.length}}({{content.length}}){{/if}}
+    </div>
+  </div>
+  <div class="new-message-btn">
     {{#linkTo "emails.new" class="btn btn-block btn-primary"}}
       <i class="ss-standard ss-plus ss-small"></i> <i class="ss-standard ss-mail"></i> Send Email
     {{/linkTo}}
-  </li>
+  </div>
+</div>
+<ul class="unstyled selectable messages-list">
   {{#if content}}
     {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}
   {{else}}

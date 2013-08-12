@@ -2,9 +2,14 @@
   position: relative;
   vertical-align: middle;
 
+  .input-append {
+    position: relative;
+  }
+
   i {
     height: 100%;
     position: absolute;
+    z-index: 9;
     top: 0;
     left: 10px;
     font-size: 15px;
@@ -13,5 +18,6 @@
 
   input[type="text"] {
     padding-left: 30px;
+    @include box-sizing(border-box);
   }
 }

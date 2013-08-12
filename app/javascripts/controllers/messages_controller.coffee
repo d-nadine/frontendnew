@@ -26,3 +26,5 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
   load: ->
     @get('content').load()
+
+  selectedSearchScope: "Search All Emails"

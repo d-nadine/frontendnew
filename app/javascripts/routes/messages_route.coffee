@@ -21,6 +21,9 @@ Radium.MessagesRoute = Radium.Route.extend
 
       @transitionToBulkOrBack()
 
+    selectSearchScope: (item) ->
+      @controllerFor('messages').set 'selectedSearchScope', "Search #{item.title}"
+
     checkAll: ->
       itemsChecked = @controllerFor('messages').get('hasCheckedContent')
       @controllerFor('messages').setEach 'isChecked', !itemsChecked
@@ -84,7 +87,7 @@ Radium.MessagesRoute = Radium.Route.extend
       outlet: 'sidebar'
 
   deactivate: ->
-    @render 'nothing', 
+    @render 'nothing',
       into: 'application'
       outlet: 'buttons'
 

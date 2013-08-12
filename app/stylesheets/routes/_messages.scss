@@ -1,7 +1,48 @@
+$item-border: #dddddd;
+
+.messages-list-controls {
+  border-bottom: 1px solid $item-border;
+}
+
+.new-message-btn {
+  margin: 15px 10px;
+}
+
+.mailbox-tab {
+  padding-left: 10px;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.messages-list-search {
+  width: 100%;
+  max-width: 235px;
+  background: $active-state;
+  margin: 0;
+  padding: 15px;
+
+  .input-append {
+    width: 100%;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    height: 30px;
+    padding: 0 30px;
+    @include border-radius(4px);
+    @include box-sizing(border-box);
+
+    &:focus {
+      z-index: 0;
+    }
+  }
+
+  .btn-group {
+    margin-left: -32px;
+  }
+}
 
 .messages-list-item {
-  $item-border: #dddddd;
-
   padding: 10px 20px;
   position: relative;
   border-bottom: 1px solid $item-border;
