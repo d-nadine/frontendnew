@@ -15,7 +15,7 @@
         {{view view.firstName value=firstName placeholder="First Name" class="input-block-level inline-field large-inline-field"}}
         {{view view.lastName placeholder="Last Name" class="input-block-level inline-field large-inline-field"}}
         <br>
-        {{input type="tel" value=phone placeholder="Phone Number" class="input-block-level inline-field user-phone" disabledBinding=isUpdating}}
+        {{input type="tel" value=phone placeholder="Phone Number" class="input-block-level inline-field user-phone" disabledBinding=isSaving}}
         <br>
       </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="control-group">
       <label class="control-label">Signature</label>
       <div class="controls">
-        {{textarea rows="8" value=settings.signature disabledBinding=settings.isUpdating}}
+        {{textarea rows="8" value=settings.signature disabledBinding=settings.isSaving}}
       </div>
     </div>
   </fieldset>
@@ -46,6 +46,6 @@
 
   <div class="form-actions">
     <button type="submit" {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
-    <button class="btn" {{action "cancel" controller.currentUser}} {{bindAttr disabled=isUpdating}}>Cancel</button>
+    <button class="btn" {{action "cancel" controller.currentUser}} {{bindAttr disabled=isSaving}}>Cancel</button>
   </div>
 </form>

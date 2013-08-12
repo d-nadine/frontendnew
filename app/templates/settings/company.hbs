@@ -17,18 +17,18 @@
 {{render "inviteUser"}}
 
 <h6>Team</h6>
-{{#if controller.users.length}}
+{{#if users.length}}
   <ul class="unstyled settings-list settings-users-list">
-    {{each controller.users itemViewClass="Radium.SettingsUsersItemView"}}
+    {{each users itemViewClass="Radium.SettingsUsersItemView"}}
   </ul>
 {{else}}
   <p>No users added yet, invite one now! ^</p>
 {{/if}}
 
-{{#if controller.pendingUsers.length}}
+{{#if pendingUsers.length}}
 <h6>Awaiting Confirmation</h6>
   <ul class="unstyled settings-list settings-users-list">
-    {{#each controller.pendingUsers}}
+    {{#each pendingUsers}}
       <li>
         <div class="pull-right user-actions">
           <button class="btn btn-danger" {{action "cancelInvite" this}}>Cancel Invite</button>
