@@ -216,4 +216,10 @@ Radium.RESTAdapter.map('Radium.UserSettings', {
 
 Radium.RESTAdapter.map('Radium.NotificationSettings', {
   overdueTasks: {embedded: 'always'},
+  createdOverdueTasks: {embedded: 'always'},
+  localMeetings: {embedded: 'always'},
+  remoteMeetings: {embedded: 'always'},
+  leadIgnored: {embedded: 'always'},
+  clientIgnored: {embedded: 'always'},
+  taskIgnored: {embedded: 'always'},
 });
