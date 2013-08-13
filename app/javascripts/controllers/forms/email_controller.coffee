@@ -7,6 +7,29 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
 
+  formBox: (->
+    Radium.FormBox.create
+      todoForm: @get('todoForm')
+      callForm: @get('callForm')
+  ).property('todoForm', 'callForm')
+
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+  ).property('model', 'tomorrow')
+
+  callForm: Radium.computed.newForm('call')
+
+  callFormDefaults: (->
+    reference: @get('model')
+    finishBy: @get('tomorrow')
+    user: @get('currentUser')
+    contact: @get('contact')
+  ).property('model', 'tomorrow', 'contact')
+
   people: ( ->
     users = @get('users').mapProperty('content')
     contacts = @get('contacts')
@@ -19,7 +42,10 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
     @set("show#{section.capitalize()}", true)
 
   toggleReminderForm: ->
-    @toggleProperty 'showCheckForResponse'
+    @toggleProperty 'includeReminder'
+
+  toggleFormBox: ->
+    @toggleProperty 'showFormBox'
 
   createSignature: ->
     @set 'signatureSubmited', true

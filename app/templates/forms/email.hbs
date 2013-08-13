@@ -52,9 +52,47 @@
       </div>
     {{/if}}
 
-    <div class="block body field">
-      {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
-      <div class="email-item-actions">
+    <div class="new-message-block">
+      <div class="new-message-row">
+        {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
+      </div>
+
+      <div class="clearfix new-message-row">
+        <div class="pull-right">
+          {{#unless view.signatureAdded}}
+            <button tabindex="4" class="btn btn-link btn-messages-action" {{action addSignature target="view" bubbles="true"}}>
+              <i class="ss-standard ss-write"></i> Add Signature
+            </button>
+          {{/unless}}
+
+          <button class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="email-item-actions new-message-row">
+        <div class="pull-right">
+          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-filter"></i> Make Private
+          </a>
+          {{#if showEmailCancel}}
+            <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
+          {{/if}}
+          <button class="btn">Save Draft</button>
+          <div class="btn-group">
+            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Send Tomorrow</a></li>
+              <li><a href="#">Send Next Week</a></li>
+              <li class="dropdown-datepicker">{{view view.datePicker class="field"}}</li>
+            </ul>
+          </div>
+        </div>
+
         {{#unless isPersonal}}
           {{#if showFormBox}}
             <button class="btn text-error" {{action toggleFormBox}}>
@@ -62,61 +100,34 @@
             </button>
           {{else}}
             <button class="btn" {{action toggleFormBox}}>
-              <i class="ss-standard ss-check green"></i> Add todo
+              <i class="ss-standard ss-check green"></i> Add a follow-up todo
             </button>
           {{/if}}
         {{/unless}}
 
-        <div class="check-response">
-          {{#if showCheckForResponse}}
-            <div class="popover bottom show check-response-popover">
-              <div class="arrow"></div>
-              <h3 class="popover-title">Check for response?</h3>
-              <div class="popover-content">
-                {{view view.reminderSwitch class="inline"}} in {{view view.reminderLength class="field"}} days
-                <button href="#" class="btn" {{action toggleReminderForm bubbles="false"}}>
-                  Done
-                </button>
-              </div>
-            </div>
-          {{/if}}
-            <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
-              <i class="ss-standard ss-info"></i>
-              {{#if includeReminder}}
-                 Checking for response in {{reminderTime}} day(s)
-              {{else}}
-                 Check for response?
-              {{/if}}
-            </button>
-        </div>
+        <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+          {{#unless includeReminder}}
+            <i class="ss-standard ss-info"></i> Check for response?
+          {{/unless}}
+        </button>
+      </div>
 
-          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
-            <i class="ss-standard ss-filter"></i> Make Private
-          </a>
-        {{#unless view.signatureAdded}}
-          <a href="#" tabindex="4" class="pull-right btn btn-link btn-messages-action" {{action addSignature target="view" bubbles="true"}}>
-            <i class="ss-standard ss-write"></i> Add Signature
-          </a>
-        {{/unless}}
-      </div>
-    </div>
-    <div class="footer">
-      <div class="pull-right">
-        {{#if showEmailCancel}}
-          <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
-        {{/if}}
-        <div class="btn-group">
-          <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
-          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Send Tomorrow</a></li>
-            <li><a href="#">Send Next Week</a></li>
-            <li class="dropdown-datepicker">{{view view.datePicker class="field"}}</li>
-          </ul>
+      {{#if includeReminder}}
+        <div class="new-message-row block-blue check-response">
+          <div class="pull-right">
+            <button class="btn btn-link" {{action toggleReminderForm bubbles="false"}}>
+              <i class="ss-standard ss-delete"></i>
+            </button>
+          </div>
+          <p><i class="ss-standard ss-info muted"></i> Check for response in {{view view.reminderLength class="field"}} days
         </div>
-      </div>
+      {{/if}}
+
+      {{#if showFormBox}}
+        <div class="new-message-row block-gray">
+          {{render "form_box" formBox}}
+        </div>
+      {{/if}}
     </div>
   </form>
 

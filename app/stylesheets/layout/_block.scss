@@ -45,12 +45,12 @@
   background-color: $light-background;
 }
 
-.block-connected {
-  margin-top: -11px;
+.block-blue {
+  background: $calendar-active-bg;
 }
 
-.block.block-blue {
-  background-color: $associated-blue;
+.block-connected {
+  margin-top: -11px;
 }
 
 .block-arrow-top {

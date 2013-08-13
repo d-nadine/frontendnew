@@ -49,9 +49,6 @@ Radium.FormsEmailView = Radium.FormView.extend
     valueBinding: 'controller.message'
     placeholder: 'Message'
 
-  reminderSwitch: Radium.ToggleSwitch.extend
-    checkedBinding: 'controller.includeReminder'
-
   reminderLength: Ember.TextField.extend
     type: 'number'
     valueBinding: 'controller.reminderTime'

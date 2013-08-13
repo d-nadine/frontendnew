@@ -3,8 +3,6 @@
 }
 
 .email-item-actions {
-  margin: 20px 0 0;
-  padding: 10px 0 0;
   border-top: 1px solid #ddd;
 }
 
@@ -48,26 +46,6 @@
   .body textarea {
     min-height: 200px;
     resize: none;
-  }
-
-  .check-response {
-    position: relative;
-    display: inline-block;
-  }
-
-  .check-response-popover {
-    width: 230px;
-    margin-top: 30px;
-    background-color: $light-background;
-    border: solid 1px $selected-item-border;
-
-    input[type=number] {
-      width: 30px;
-    }
-
-    button {
-      float: right;
-    }
   }
 }
 
@@ -119,4 +97,33 @@
 
 .email-compose-footer {
   border-top: 1px solid #dddddd;
+}
+
+.new-message-block {
+  @extend .block;
+  padding: 0;
+
+  textarea.input-block-level {
+    padding: 0;
+  }
+}
+
+.new-message-row {
+  margin: 0 15px;
+  padding: 10px 0;
+
+  &.block-blue,
+  &.block-gray {
+    margin: 0;
+    padding: {
+      right: 15px;
+      left: 15px;
+    }
+    border-top: 1px solid #ddd;
+  }
+}
+
+
+.check-response p {
+  margin: 0;
 }
