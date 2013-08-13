@@ -42,25 +42,25 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
 
     return false if position == 1
 
-    previous = @find (ps) -> ps.position == (position - 1)
+    previous = @find (ps) -> ps.get('position') == (position - 1)
 
-    return unless next
+    return unless previous
 
-    previous.incrementProperty('position')
+    previous.get('model').incrementProperty('position')
     state.decrementProperty('position')
 
     @saveState()
 
-  movePipelineStateDown: (ps) ->
+  movePipelineStateDown: (state) ->
     position = state.get('position')
 
-    return false if position == @get('length') - 1
+    return false if position == @get('length')
 
-    next = @find (ps) -> ps.position == (position + 1)
+    next = @find (ps) -> ps.get('position') == (position + 1)
 
     return unless next
 
-    next.decrementProperty('position')
+    next.get('model').decrementProperty('position')
     state.incrementProperty('position')
 
     @saveState()

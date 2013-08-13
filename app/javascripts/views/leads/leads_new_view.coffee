@@ -4,6 +4,7 @@ require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
 
 Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
+  classNameBindings: ['controller.isNew::disabled-content']
   contacts: Ember.computed.alias 'controller.contacts'
 
   didInsertElement: ->
@@ -100,6 +101,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     @$('.multiple-field input').attr('readonly', disabled)
     @$('.multiple-field select').attr('readonly', disabled)
+    @$('.radio-group input').attr('disabled', disabled)
 
     unless @get('controller.isNew')
       @$('.multiple-field .icon-plus').hide()

@@ -178,6 +178,13 @@
   }
 }
 
+.leads-new-view{
+  &.disabled-content{
+     .multiple-field .add-new .ss-plus{
+      display: none;
+    }
+  }
+}
 
 .new-lead-form {
   label {
