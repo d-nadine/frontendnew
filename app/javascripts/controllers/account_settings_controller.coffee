@@ -29,10 +29,17 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
   ).property('workflow.[]')
 
   workflowStates: ( ->
-    Ember.A(@get('workflow').map((state) =>
-      state.get('name')
-    ) || [])
-  ).property('workflow.[]')
+    return [] unless @get('workflow.length')
+
+    states = (@get('workflow').toArray().sort((a, b) ->
+        Ember.compare a.get('position'), b.get('position')
+      ).map((state) =>
+        state.get('name')
+      )
+    )
+
+    return Ember.A(states)
+  ).property('workflow.[]', 'workflow.@each.position')
 
   dealStates: (->
     statuses = @get('workflowStates').slice()
