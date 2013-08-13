@@ -1,3 +1,3 @@
 Radium.SettingsPipelineStatesRoute = Radium.Route.extend
   model: ->
-    Radium.PipelineState.find()
+    @controllerFor('account').get('workflow')
