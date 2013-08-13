@@ -6,6 +6,7 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
   itemController: 'pipelineStateItem'
 
   saveState: ->
+    debugger
     account = @get('account')
     return unless account.get('isDirty')
 
@@ -13,6 +14,7 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
       @send 'flashSuccess', 'Updated'
 
     account.one 'becameInvalid', (result) =>
+      debugger
       @send 'flashError', result
 
     account.one 'becameError', (result) =>
@@ -37,21 +39,30 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
     true if @get('length') > 1
   ).property('@each')
 
-  movePipelineStateUp: (ps) ->
-    idx = @get('arrangedContent').indexOf(ps)
+  movePipelineStateUp: (state) ->
+    position = state.get('position')
 
-    false if Ember.isEqual(ps, @get('content.firstObject'))
+    return false if position == 1
 
-    @objectAt(idx - 1).incrementProperty('position')
-    ps.decrementProperty('position')
-    @store.commit()
+    previous = @find (ps) -> ps.position == (position - 1)
+
+    return unless next
+
+    previous.incrementProperty('position')
+    state.decrementProperty('position')
+
+    @saveState()
 
   movePipelineStateDown: (ps) ->
-    idx = @get('arrangedContent').indexOf(ps)
+    position = state.get('position')
 
-    false if Ember.isEqual(ps, @get('content.lastObject'))
+    return false if position == @get('length') - 1
 
-    @objectAt(idx + 1).decrementProperty('position')
-    ps.incrementProperty('position')
-    @store.commit()
+    next = @find (ps) -> ps.position == (position + 1)
 
+    return unless next
+
+    next.decrementProperty('position')
+    state.incrementProperty('position')
+
+    @saveState()
