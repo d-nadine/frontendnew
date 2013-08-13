@@ -6,7 +6,6 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
   itemController: 'pipelineStateItem'
 
   saveState: ->
-    debugger
     account = @get('account')
     return unless account.get('isDirty')
 
@@ -14,7 +13,6 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
       @send 'flashSuccess', 'Updated'
 
     account.one 'becameInvalid', (result) =>
-      debugger
       @send 'flashError', result
 
     account.one 'becameError', (result) =>
