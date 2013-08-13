@@ -15,12 +15,12 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
       date: 1
 
   isFirstItem: (->
-    return if @get('account.isSaving')
+    return true if @get('account.isSaving')
     Ember.isEqual(@, @get('parentController.firstObject'))
   ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')
 
   isLastItem: (->
-    return if @get('account.isSaving')
+    return true if @get('account.isSaving')
 
     Ember.isEqual(@, @get('parentController.lastObject'))
   ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')
