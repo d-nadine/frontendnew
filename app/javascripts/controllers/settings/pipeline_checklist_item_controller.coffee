@@ -1,4 +1,4 @@
-Radium.PipelineChecklistItemController = Ember.ObjectController.extend
+Radium.PipelineChecklistItemController = Radium.ObjectController.extend BufferedProxy,
   kinds: [
     "Todo"
     "Meeting"

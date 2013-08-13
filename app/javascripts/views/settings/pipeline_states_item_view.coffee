@@ -2,6 +2,14 @@ Radium.PipelineStatesItemView = Ember.View.extend
   classNames: ["row", "pipeline-state-item"]
   templateName: 'settings/pipeline_states_item'
 
+  pipelineStateName: Ember.TextField.extend Ember.TargetActionSupport,
+    valueBinding: 'controller.model.name'
+    action: 'saveState'
+    target: 'controller'
+    insertNewline: ->
+      @triggerAction()
+      false
+
   didInsertElement: ->
     if @get('content.isNew')
       @$().addClass('new')
