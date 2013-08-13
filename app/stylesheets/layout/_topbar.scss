@@ -8,6 +8,10 @@
     @include box-shadow(none);
   }
 
+  .container {
+    margin-left: 0;
+  }
+
   .nav {
     top: 2px;
   }

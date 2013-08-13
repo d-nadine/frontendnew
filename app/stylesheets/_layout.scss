@@ -10,6 +10,11 @@ body {
   @include box-sizing(border-box);
 }
 
+.main-content {
+  width: 100%;
+  max-width: 1015px;
+}
+
 $sidebar-width: 370px;
 $sidebar-border-size: 8px;
 $button-bar-width: 40px;

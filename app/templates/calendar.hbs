@@ -1,7 +1,9 @@
-<div class="sidebar">
-  {{outlet sidebar}}
-</div>
+<div class="two-column-layout">
+  <div class="sidebar">
+    {{outlet sidebar}}
+  </div>
 
-<div class="calendar-container">
-  {{outlet}}
+  <div class="main-content">
+    {{outlet}}
+  </div>
 </div>

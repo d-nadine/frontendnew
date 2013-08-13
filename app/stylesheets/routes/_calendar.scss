@@ -1,7 +1,7 @@
 $calendar-off: #d8d9d9;
 
 .calendar-container {
-  padding: 60px 20px 0 420px;
+  width: 100%;
 
   @include breakpoint(landscape) {
     padding-left: 350px;
