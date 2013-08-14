@@ -45,7 +45,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     placeholder: 'Subject'
 
   body: Radium.TextArea.extend
-    classNameBindings: ['parentView.noContent:is-invalid']
+    classNameBindings: [':message-body', 'parentView.noContent:is-invalid']
     valueBinding: 'controller.message'
     placeholder: 'Message'
 
@@ -75,7 +75,7 @@ Radium.FormsEmailView = Radium.FormView.extend
         @$('.modal textarea').focus()
 
   appendSignature: ->
-    textArea = $('.body textarea')
+    textArea = @$('.message-body')
     currentLength = textArea.val()?.length || 0
     textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
     textArea.height("+=50")
