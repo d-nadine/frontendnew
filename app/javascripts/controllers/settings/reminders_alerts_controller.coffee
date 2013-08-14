@@ -8,8 +8,6 @@ Radium.SettingsRemindersAlertsController = Radium.ObjectController.extend Buffer
   taskIngoredDisabled: Ember.computed.not 'notifications.taskIgnored.enabled'
 
   update:  ->
-    @applyBufferedChanges()
-
     model = @get('model')
 
     model.one 'didUpdate', =>
@@ -23,7 +21,6 @@ Radium.SettingsRemindersAlertsController = Radium.ObjectController.extend Buffer
 
     @get('store').commit()
 
-    @discardBufferedChanges()
-
   cancel: ->
-    @discardBufferedChanges()
+    # FIXME: Why is buffered proxy not working here?
+    @get('model.transaction').rollback()
