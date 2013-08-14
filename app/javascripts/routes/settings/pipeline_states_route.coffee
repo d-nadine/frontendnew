@@ -12,11 +12,22 @@ Radium.SettingsPipelineStatesRoute = Radium.Route.extend
         outlet: 'modal'
 
     deleteRecord: (state) ->
+      account = @controllerFor('account').get('model')
+
+      if account.get('workflow.length') <= 2
+        @send 'close'
+        @send 'flashError', 'You must have at least 2 pipeline states'
+        return
+
+      transaction = @get('store').transaction()
+
+      transaction.add account
+
       state.deleteRecord()
 
-      @controllerFor('account').get('workflow').removeObject state
+      account.get('workflow').removeObject state
 
-      @store.commit()
+      transaction.commit()
 
       @send 'close'
 
