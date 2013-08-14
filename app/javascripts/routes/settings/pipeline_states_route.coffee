@@ -12,14 +12,9 @@ Radium.SettingsPipelineStatesRoute = Radium.Route.extend
         outlet: 'modal'
 
     deleteRecord: (state) ->
-      account = @controllerFor('account').get('model')
+      state.deleteRecord()
 
-      workflowState = account.get('workflow').find (ps) =>
-        ps == state
-
-      workflowState.deleteRecord()
-
-      account.get('workflow').removeObject workflowState
+      @controllerFor('account').get('workflow').removeObject state
 
       @store.commit()
 
