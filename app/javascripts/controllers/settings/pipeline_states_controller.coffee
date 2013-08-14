@@ -7,7 +7,9 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
 
   saveState: ->
     account = @get('account')
+
     return unless account.get('isDirty')
+    return if @get('account.isSaving')
 
     account.one 'didUpdate', =>
       @send 'flashSuccess', 'Updated'
@@ -21,13 +23,12 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
     @get('store').commit()
 
   createPipelineState: ->
-    newState = Radium.PipelineState.createRecord
-      name: "Pipeline State #{this.get('length') + 1}"
-      position: @get('length') + 1
+    newPosition = @get('length') + 1
 
-    newState.one('didCreate', ->
-      newState.set('isNewItem', true)
-    )
+    @get('account.workflow').createRecord
+                              name: "Pipelie State #{newPosition}"
+                              position: newPosition
+    @saveState()
 
   deletePipelineState: (ps) ->
     ps.deleteRecord()

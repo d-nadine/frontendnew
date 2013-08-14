@@ -2,10 +2,20 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
   account: Ember.computed.alias 'parentController.account'
 
   kinds: [
-    "Todo"
-    "Meeting"
-    "Call"
+    "todo"
+    "meeting"
+    "call"
   ]
+
+  isValid: ( ->
+    model = @get('model')
+
+    return unless model
+    return false if Ember.isEmpty model.get('description')
+    return false unless model.get('weight')
+
+    true
+  ).property('description', 'weight', 'kind', 'date')
 
   setKind: (kind) ->
     @set('kind', kind)
@@ -40,14 +50,5 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
     dateString
   ).property('content.date')
 
-  setNone: ->
-    @set('content.date', 0)
-
-  setOneDay: ->
-    @set('content.date', 1)
-
-  setTwoDays: ->
-    @set('content.date', 2)
-
-  setOneWeek: ->
-    @set('content.date', 7)
+  setDate: (date) ->
+    @set('content.date', date)

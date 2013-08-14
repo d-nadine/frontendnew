@@ -2,7 +2,7 @@
   <div class="input-prepend input-append">
     <div class="btn-group">
       <button class="btn dropdown-toggle" {{bindAttr disabled= account.isSaving}} data-toggle="dropdown">
-        {{kind}}
+        {{capitalize kind}}
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
@@ -11,7 +11,7 @@
         {{/each}}
       </ul>
     </div>
-    {{input type="text" disabledBinding=account.isSaving  value=description placeholder="Add additional item"}}
+    {{input type="text" disabledBinding=account.isSaving  value=model.description placeholder="Add additional item"}}
   </div>
 
   <div class="input-append">
@@ -25,10 +25,10 @@
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li><a href="#" {{action "setNone"}}>None</a></li>
-      <li><a href="#" {{action "setOneDay"}}>1 day</a></li>
-      <li><a href="#" {{action "setTwoDays"}}>2 days</a></li>
-      <li><a href="#" {{action "setOneWeek"}}>1 week</a></li>
+      <li><a href="#" {{action setDate 0}}>None</a></li>
+      <li><a href="#" {{action setDate 1}}>1 day</a></li>
+      <li><a href="#" {{action setDate 2}}>2 days</a></li>
+      <li><a href="#" {{action setDate 7}}>1 week</a></li>
     </ul>
   </div>
 
@@ -45,12 +45,12 @@
 <div class="checklist-controls">
   {{#if content.isNewItem}}
     {{#if isValid}}
-      <button class="btn btn-success" {{action "createChecklist"}}>
+      <button class="btn btn-success" {{action "createChecklistItem"}}>
         <i class="ss-standard ss-check"></i>
       </button>
     {{/if}}
   {{else}}
-    <button class="btn btn-danger" {{action "deleteChecklist" this}}>
+    <button class="btn btn-danger" {{action deleteChecklistItem this}}>
       <i class="ss-symbolicons-block ss-trash"></i>
     </button>
 

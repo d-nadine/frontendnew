@@ -3,48 +3,55 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
   account: Ember.computed.alias 'parentController.account'
 
   init: ->
-    @_super()
-    @createNewChecklistItem()
-
-  createNewChecklistItem: ->
-    @set 'newChecklistItem', Radium.NewChecklist.create
+    @_super.apply this, arguments
+    @set 'newChecklistItem', Ember.Object.create
       isNewItem: true
+      isEditing: true
       description: null
       weight: null
-      kind: 'Call'
+      kind: 'call'
       date: 1
 
   isFirstItem: (->
     return true if @get('account.isSaving')
-    Ember.isEqual(@, @get('parentController.firstObject'))
+    Ember.isEqual(this, @get('parentController.firstObject'))
   ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')
 
   isLastItem: (->
     return true if @get('account.isSaving')
 
-    Ember.isEqual(@, @get('parentController.lastObject'))
+    Ember.isEqual(this, @get('parentController.lastObject'))
   ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')
 
-  createChecklist: ->
-    props = @get('newChecklistItem').getProperties('description', 'weight', 'kind', 'date')
-    checklist = Radium.PipelineChecklist.createRecord(props)
-
+  resetNewItem: ->
     @get('newChecklistItem').setProperties
       description: null
       weight: null
       kind: 'Call'
       date: 1
 
-    checklist.one('didCreate', =>
-      # Hack, since for some reason `isNew` this gets turned off once the object
-      # is pushed into a parent model, forcing a redraw. Could be a better approach
-      checklist.set('isNewItem', true)
-      @get('checklists').pushObject(checklist)
-    )
+  createChecklistItem: ->
+    account = @get('account')
 
-    @store.commit()
+    return if account.get('isSaving')
 
-  deleteChecklist: (checklist) ->
-    checklist.deleteRecord()
-    @get('checklists').removeObject(checklist)
-    @store.commit()
+    props = @get('newChecklistItem').getProperties('description', 'weight', 'kind', 'date')
+    checklist = @get('model.checklist').createRecord props
+
+    return unless account.get('isDirty')
+
+    account.one 'didUpdate', =>
+      @resetNewItem()
+      @send 'flashSuccess', 'Updated'
+
+    account.one 'becameInvalid', (result) =>
+      @send 'flashError', result
+
+    account.one 'becameError', (result) =>
+      @send 'flashError', 'An error occurred and the action can not be completed'
+
+    @get('store').commit()
+
+  deleteChecklistItem: (checklistItem) ->
+    checklistItem.deleteRecord()
+    @send 'saveState'
