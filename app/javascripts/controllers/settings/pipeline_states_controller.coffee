@@ -26,13 +26,9 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
     newPosition = @get('length') + 1
 
     @get('account.workflow').createRecord
-                              name: "Pipelie State #{newPosition}"
+                              name: "Pipeline State #{newPosition}"
                               position: newPosition
     @saveState()
-
-  deletePipelineState: (ps) ->
-    ps.deleteRecord()
-    @store.commit()
 
   hasMultipleItems: (->
     true if @get('length') > 1

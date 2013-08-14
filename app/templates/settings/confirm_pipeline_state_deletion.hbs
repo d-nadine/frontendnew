@@ -1,0 +1,24 @@
+<div class="modal fade">
+  <div class="modal-header">
+    <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+    <h3>Are You Sure?</h3>
+  </div>
+
+  <div class="modal-body">
+    {{#if isUpdatingDeals}}
+      saving...please wait....
+      {{partial saving}}
+    {{/if}}
+    {{#if hasDeals}}
+      <p>The pipeline state <strong>{{name}}</strong> has deals associated with it, please choose a new pipline state for these deals..</p>
+      <p>{{view Ember.Select contentBinding="otherStates" valueBinding="selectedOtherState"}} <button {{action transferDeals}} {{bindAttr disabled=isUpdatingDeals}} class="btn btn-danger">Change State</button>
+    {{/if}}
+    <p>This action cannot be undone! Deleting <strong>{{name}}</strong> will be permanent.</p>
+
+    <button class="btn btn-large btn-danger btn-block" {{action deleteRecord this}} {{bindAttr disabled=hasDeals}}>I understand the consequences, delete this pipeline state.</button>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn" {{action close}}>Cancel</a>
+  </div>
+</div>

@@ -38,7 +38,7 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
       )
     )
 
-    return Ember.A(states)
+    Ember.A(states)
   ).property('workflow.[]', 'workflow.@each.position')
 
   dealStates: (->
