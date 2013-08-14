@@ -1,4 +1,6 @@
 Radium.PipelineChecklistItemController = Radium.ObjectController.extend BufferedProxy,
+  account: Ember.computed.alias 'parentController.account'
+
   kinds: [
     "Todo"
     "Meeting"
@@ -8,21 +10,22 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
   setKind: (kind) ->
     @set('kind', kind)
 
-  edit: (checklist) ->
-    transaction = @store.transaction()
-    transaction.add(checklist)
+  edit:  ->
     @set('isEditing', true)
 
-  save: (checklist) ->
-    checklist.get('transaction').commit()
+  save: ->
+    return if @get('account.isSaving')
+
     @set('isEditing', false)
-    @send('flashMessage',
-      type: 'alert-success'
-      message: "Pipeline checklist updated!"
-    )
+
+    @applyBufferedChanges()
+
+    return unless @get('model.isDirty')
+
+    @send 'saveState'
 
   cancel: (checklist) ->
-    @get('content.transaction').rollback()
+    @discardBufferedChanges()
     @set('isEditing', false)
 
   selectedDateString: (->

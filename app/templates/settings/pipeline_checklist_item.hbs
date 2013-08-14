@@ -1,7 +1,7 @@
 {{#if isEditing}}
   <div class="input-prepend input-append">
     <div class="btn-group">
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
+      <button class="btn dropdown-toggle" {{bindAttr disabled= account.isSaving}} data-toggle="dropdown">
         {{kind}}
         <span class="caret"></span>
       </button>
@@ -11,16 +11,16 @@
         {{/each}}
       </ul>
     </div>
-    {{input type="text" value=description placeholder="Add additional item"}}
+    {{input type="text" disabledBinding=account.isSaving  value=description placeholder="Add additional item"}}
   </div>
 
   <div class="input-append">
-    {{input type="number" class="span1" value=content.weight min="0" max="100"}}
+    {{input type="number" class="span1" value=content.weight min="0" disabledBinding=account.isSaving max="100"}}
     <span class="add-on">%</span>
   </div>
 
   <div class="btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="btn dropdown-toggle"  {{bindAttr disabled= account.isSaving}} data-toggle="dropdown" href="#">
       {{selectedDateString}}
       <span class="caret"></span>
     </a>
@@ -55,13 +55,13 @@
     </button>
 
     {{#if isEditing}}
-      <button class="btn" {{action "cancel" this}}>Cancel</button>
+      <button class="btn" {{action "cancel"}}>Cancel</button>
     {{else}}
-      <button class="btn" {{action "edit" this}}>Edit</button>
+      <button class="btn" {{action "edit"}}>Edit</button>
     {{/if}}
 
     {{#if isValid}}
-      <button class="btn btn-success" {{action "save" this}}>Save</button>
+      <button class="btn btn-success" {{action "save"}}>Save</button>
     {{/if}}
   {{/if}}
 </div>
