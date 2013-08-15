@@ -46,9 +46,11 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
 
     account.one 'becameInvalid', (result) =>
       @send 'flashError', result
+      result.reset()
 
     account.one 'becameError', (result) =>
       @send 'flashError', 'An error occurred and the action can not be completed'
+      result.reset()
 
     @get('store').commit()
 

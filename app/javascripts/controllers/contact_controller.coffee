@@ -17,10 +17,12 @@ Radium.ContactController = Radium.ObjectController.extend
 
     contact.one 'becameInvalid', (result) =>
       @send 'flashError', contact
+      result.reset()
 
     contact.one 'becameError', (result) =>
       transaction.rollback()
       @send 'flashError', 'An error has occurred and the contact cannot be updated.'
+      result.reset()
 
     transaction.commit()
 

@@ -15,9 +15,11 @@ Radium.SettingsRemindersAlertsController = Radium.ObjectController.extend Buffer
 
     model.one 'becameError', (result) =>
       @send 'flashError', result
+      result.reset() 
 
     model.one 'becameInvalid', (result) =>
       @send 'flashError', result
+      result.reset() 
 
     @get('store').commit()
 

@@ -20,6 +20,7 @@ Radium.SettingsPipelineStatesController = Radium.ArrayController.extend
 
     account.one 'becameError', (result) =>
       @send 'flashError', 'An error occurred and the action can not be completed'
+      result.reset()
 
     @get('store').commit()
 

@@ -31,9 +31,11 @@ Radium.EmailsShowRoute = Radium.Route.extend
 
       email.one 'becameInvalid', =>
         @send 'flashError', email
+        email.reset() 
 
       email.one 'becameError', =>
         @send 'flashError', 'An error has occurred and the eamil has not been sent'
+        email.reset() 
 
       @store.commit()
 
