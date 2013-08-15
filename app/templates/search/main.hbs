@@ -1,0 +1,21 @@
+<form class="navbar-search">
+  <div class="main-search-toggles">
+    <i class="ss-search"></i>
+    <i {{bindAttr class=":ss-standard query:ss-directup:ss-dropdown"}} {{action toggleAdvancedSearch}}></i>
+  </div>
+  {{view view.searchInput valueBinding="query" class="search-query" placeholder="Search emails, people..."}}
+</form>
+{{#if isOpen}}
+  <div class="main-search-results">
+    {{#if query}}
+      Search results for {{query}}
+    {{/if}}
+    <div class="main-search-results-section">
+      <h6>Recent Searches</h6>
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+      </ul>
+    </div>
+  </div>
+{{/if}}
