@@ -1,34 +1,42 @@
 <!-- columns must add up to 8 -->
-<div class="clearfix email-item-header">
-  <div class="pull-left block email-item-card">
-    <div class="pull-left">
-      {{avatar contact size="large"}}
-    </div>
-    <div class="email-item-card-content">
-      <h3 class="email-item-card-title">
-        {{#if contact.name}}
-          {{contact.name}}
-        {{else}}
-          <span class="muted">No Name</span>
-        {{/if}}
-      </h3>
-      <p>
-        {{#if contact.title}}
-          {{contact.title}}
-        {{else}}
-          <span class="muted">No Title</span>
-        {{/if}}
-      </p>
-      <p class="source">From <a href="#" class="ss-icon ss-social">LinkedIn</a></p>
+<div class="clearfix email-hud">
+  <div class="pull-right email-hud-actions">
+    {{#if contact.isPersonal}}
+      <button class="btn">
+        Not Not a Radium Contact. Make Private?
+      </button>
+    {{/if}}
+    <div class="btn-group">
+      <button class="btn btn-primary">Add to Radium</button>
+      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">As Lead</a></li>
+        <li><a href="#">As a Prospect</a></li>
+        <li><a href="#">As a Customer</a></li>
+        <li><a href="#">Exclude from Pipeline</a></li>
+      </ul>
     </div>
   </div>
 
-  <div class="pull-right block email-item-card email-item-next-task">
-    <h6>Next task:</h6>
-    {{#if activeDeal}}
-      {{#linkTo "deal" activeDeal}}{{activeDeal.name}}{{/linkTo}}
-    {{else}}
-      <p>No deals yet</p>
-    {{/if}}
+  <div class="pull-left">
+    {{avatar contact size="medium"}}
+  </div>
+  <div class="email-hud-content">
+    <h4 class="email-hud-title">
+      {{#if contact.name}}
+        {{contact.name}}
+      {{else}}
+        No Name
+      {{/if}}
+    </h4>
+    <p>
+      {{contact.primaryEmail.value}}
+      <br>
+      {{#if contact.title}}
+        {{contact.company.name}}
+      {{/if}}
+    </p>
   </div>
 </div>

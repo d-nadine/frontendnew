@@ -58,6 +58,12 @@
   line-height: 30px;
 }
 
+.email-header {
+  margin: 0 0 10px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #ddd;
+}
+
 .email-header-actions {
   .close {
     float: none;
@@ -79,24 +85,6 @@
       margin-left: 60px;
     }
   }
-}
-
-.email-item-card {
-  width: 60%;
-  overflow: hidden;
-  @include box-shadow(0 0 4px rgba(black, 0.1));
-}
-
-.email-item-card-content {
-  padding-left: 140px;
-}
-
-.email-item-card-title {
-  margin: 0;
-}
-
-.email-item-next-task {
-  width: 30%;
 }
 
 .email-compose-footer {
@@ -129,5 +117,25 @@
 
 
 .check-response p {
+  margin: 0;
+}
+
+// Email HUD
+.email-hud {
+  margin: 0 0 40px;
+  padding: 15px;
+  background: #313131;
+  color: #fff;
+}
+
+.email-hud-actions {
+  margin-top: 15px;
+}
+
+.email-hud-content {
+  padding-left: 80px;
+}
+
+.email-hud-title {
   margin: 0;
 }

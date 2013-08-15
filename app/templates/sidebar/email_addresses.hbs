@@ -4,7 +4,7 @@
   </div>
 {{else}}
   <div class="control-group">
-    </id><label class="control-label primary-item"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+    <label class="control-label primary-item"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
     {{#if primaryEmail.value}}
       {{#linkTo "emails.mailTo" this}}<i class="icon-mail"></i>{{primaryEmail.value}}{{/linkTo}}
     {{else}}
