@@ -1,7 +1,7 @@
 (function() {
 var Ember = { assert: function() {} };
-// Version: v1.0.0-rc.6-167-g1af8166
-// Last commit: 1af8166 (2013-07-22 01:22:37 +0000)
+// Version: v1.0.0-rc.7-8-g958bd9b
+// Last commit: 958bd9b (2013-08-14 22:45:58 -0700)
 
 
 (function() {
@@ -80,7 +80,7 @@ function makeBindings(options) {
 
   ## Custom view helper example
 
-  Assuming a view subclass named `App.CalenderView` were defined, a helper
+  Assuming a view subclass named `App.CalendarView` were defined, a helper
   for rendering instances of this view could be registered as follows:
 
   ```javascript
@@ -273,7 +273,10 @@ if (Handlebars.compile) {
     var environment = new Ember.Handlebars.Compiler().compile(ast, options);
     var templateSpec = new Ember.Handlebars.JavaScriptCompiler().compile(environment, options, undefined, true);
 
-    return Ember.Handlebars.template(templateSpec);
+    var template = Ember.Handlebars.template(templateSpec);
+    template.isMethod = false; //Make sure we don't wrap templates with ._super
+      
+    return template;
   };
 }
 

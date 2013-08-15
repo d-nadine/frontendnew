@@ -1,5 +1,5 @@
-// Version: v0.13-92-gad6b4f0
-// Last commit: ad6b4f0 (2013-08-09 21:34:23 +0100)
+// Version: v0.13-103-g8013bfa
+// Last commit: 8013bfa (2013-08-14 11:44:30 +0100)
 
 
 (function() {
@@ -52,10 +52,16 @@ var define, requireModule;
   @class DS
   @static
 */
-window.DS = Ember.Namespace.create({
-  VERSION: '0.13'
-});
 
+if ('undefined' === typeof DS) {
+  DS = Ember.Namespace.create({
+    VERSION: '0.13'
+  });
+
+  if ('undefined' !== typeof window) {
+    window.DS = DS;
+  }
+}
 })();
 
 
@@ -104,6 +110,121 @@ DS.NewJSONSerializer = Ember.Object.extend({
 /**
   @module ember-data
 */
+// Keep ED compatible with previous versions of ember
+// TODO: Remove this check for Ember 1.0
+if (!Ember.DataAdapter) { return; }
+
+var get = Ember.get, capitalize = Ember.String.capitalize, underscore = Ember.String.underscore, DS = window.DS ;
+
+/**
+  Extend `Ember.DataAdapter` with ED specific code.
+*/
+DS.DebugAdapter = Ember.DataAdapter.extend({
+  getFilters: function() {
+    return [
+      { name: 'isNew', desc: 'New' },
+      { name: 'isModified', desc: 'Modified' },
+      { name: 'isClean', desc: 'Clean' }
+    ];
+  },
+
+  detect: function(klass) {
+    return klass !== DS.Model && DS.Model.detect(klass);
+  },
+
+  columnsForType: function(type) {
+    var columns = [{ name: 'id', desc: 'Id' }], count = 0, self = this;
+    Ember.A(get(type, 'attributes')).forEach(function(name, meta) {
+        if (count++ > self.attributeLimit) { return false; }
+        var desc = capitalize(underscore(name).replace('_', ' '));
+        columns.push({ name: name, desc: desc });
+    });
+    return columns;
+  },
+
+  getRecords: function(type) {
+    return this.get('store').all(type);
+  },
+
+  getRecordColumnValues: function(record) {
+    var self = this, count = 0,
+        columnValues = { id: get(record, 'id') };
+
+    record.eachAttribute(function(key) {
+      if (count++ > self.attributeLimit) {
+        return false;
+      }
+      var value = get(record, key);
+      columnValues[key] = value;
+    });
+    return columnValues;
+  },
+
+  getRecordKeywords: function(record) {
+    var keywords = [], keys = Ember.A(['id']);
+    record.eachAttribute(function(key) {
+      keys.push(key);
+    });
+    keys.forEach(function(key) {
+      keywords.push(get(record, key));
+    });
+    return keywords;
+  },
+
+  getRecordFilterValues: function(record) {
+    return {
+      isNew: record.get('isNew'),
+      isModified: record.get('isDirty') && !record.get('isNew'),
+      isClean: !record.get('isDirty')
+    };
+  },
+
+  getRecordColor: function(record) {
+    var color = 'black';
+    if (record.get('isNew')) {
+      color = 'green';
+    } else if (record.get('isDirty')) {
+      color = 'blue';
+    }
+    return color;
+  },
+
+  observeRecord: function(record, recordUpdated) {
+    var releaseMethods = Ember.A(), self = this,
+        keysToObserve = Ember.A(['id', 'isNew', 'isDirty']);
+
+    record.eachAttribute(function(key) {
+      keysToObserve.push(key);
+    });
+
+    keysToObserve.forEach(function(key) {
+      var handler = function() {
+        recordUpdated(self.wrapRecord(record));
+      };
+      Ember.addObserver(record, key, handler);
+      releaseMethods.push(function() {
+        Ember.removeObserver(record, key, handler);
+      });
+    });
+
+    var release = function() {
+      releaseMethods.forEach(function(fn) { fn(); } );
+    };
+
+    return release;
+  }
+
+});
+
+
+})();
+
+
+
+(function() {
+/**
+  @module ember-data
+*/
 
 var set = Ember.set;
 
@@ -142,6 +263,8 @@ Ember.onLoad('Ember.Application', function(Application) {
     name: "store",
 
     initialize: function(container, application) {
+      Ember.assert("You included Ember Data but didn't define "+application.toString()+".Store", application.Store);
+
       application.register('store:main', application.Store);
       application.register('serializer:_default', DS.NewJSONSerializer);
 
@@ -151,14 +274,28 @@ Ember.onLoad('Ember.Application', function(Application) {
     }
   });
 
+  // Keep ED compatible with previous versions of ember
+  // TODO: Remove the if statement for Ember 1.0
+  if (DS.DebugAdapter) {
+    Application.initializer({
+      name: "dataAdapter",
+
+      initialize: function(container, application) {
+        application.register('dataAdapter:main', DS.DebugAdapter);
+      }
+    });
+  }
+
   Application.initializer({
     name: "injectStore",
 
     initialize: function(container, application) {
       application.inject('controller', 'store', 'store:main');
       application.inject('route', 'store', 'store:main');
+      application.inject('dataAdapter', 'store', 'store:main');
     }
   });
+
 });
 
 })();
@@ -5288,6 +5425,9 @@ DS.Model.reopenClass({
     if (!inverseType) { return null; }
 
     var options = this.metaForProperty(name).options;
+
+    if (options.inverse === null) { return null; }
+    
     var inverseName, inverseKind;
 
     if (options.inverse) {
@@ -9433,6 +9573,44 @@ DS.rejectionHandler = function(reason) {
   }
   ```
 
+  ## Customization
+
+  ### Endpoint path customization
+
+  Endpoint paths can be prefixed with a `namespace` by setting the namespace
+  property on the adapter:
+
+  ```js
+  DS.RESTAdapter.reopen({
+    namespace: 'api/1'
+  });
+  ```
+  Requests for `App.Person` would now target `/api/1/people/1`.
+
+  ### Host customization
+
+  An adapter can target other hosts by setting the `url` property.
+
+  ```js
+  DS.RESTAdapter.reopen({
+    url: 'https://api.example.com'
+  });
+  ```
+
+  ### Headers customization
+
+  Some APIs require HTTP headers, eg to provide an API key. An array of
+  headers can be added to the adapter which are passed with every request:
+
+  ```js
+  DS.RESTAdapter.reopen({
+    headers: {
+      "API_KEY": "secret key",
+      "ANOTHER_HEADER": "asdsada"
+    }
+  });
+  ```
+
   @class RESTAdapter
   @constructor
   @namespace DS
@@ -9811,6 +9989,15 @@ DS.RESTAdapter = DS.Adapter.extend({
       if (hash.data && type !== 'GET') {
         hash.contentType = 'application/json; charset=utf-8';
         hash.data = JSON.stringify(hash.data);
+      }
+
+      if (adapter.headers !== undefined) {
+        var headers = adapter.headers;
+        hash.beforeSend = function (xhr) {
+          Ember.keys(headers).forEach(function(key) {
+            xhr.setRequestHeader(key, headers[key]);
+          });
+        };
       }
 
       hash.success = function(json) {
