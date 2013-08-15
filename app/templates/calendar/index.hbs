@@ -1,15 +1,15 @@
 <div class="calendar-toolbar">
   <div class="pull-right">
-    {{#linkTo "calendar.index" lastMonth class="btn calendar-month-btn"}}
+    {{#linkTo "calendar.index" lastMonth class="btn btn-circle-icon btn-circle-icon-left calendar-month-btn"}}
       <i class="ss-standard ss-left"></i> Last Month
     {{/linkTo}}
 
-    {{#linkTo "calendar.index" nextMonth class="btn calendar-month-btn"}}
+    {{#linkTo "calendar.index" nextMonth class="btn btn-circle-icon btn-circle-icon-right calendar-month-btn"}}
       Next Month <i class="ss-standard ss-right"></i>
     {{/linkTo}}
   </div>
-  <h3>
-    {{formatDateTime date format="monthYear"}}
+  <h3 class="blue">
+    <i class="ss-standard ss-calendar"></i> {{formatDateTime date format="monthYear"}}
   </h3>
 </div>
 <div>
