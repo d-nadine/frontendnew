@@ -68,6 +68,15 @@ $item-border: #dddddd;
   &:hover .btn-read {
     opacity: 1;
   }
+
+  .label {
+    line-height: 20px;
+    padding: 0 5px;
+    background: #E4E4E4;
+    border: 1px solid #BFBFBF;
+    color: #333;
+    text-shadow: none;
+  }
 }
 
 .message-list-readable-item {

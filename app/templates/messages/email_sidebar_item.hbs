@@ -4,8 +4,9 @@
 <div class="clearfix">
   <h5 class="message-item-title">{{sender.name}}</h5>
   <p class="message-item-subject">{{subject}}</p>
-  <div class="message-item-links">
-    <a href="#" class="ss-icon ss-social">google+</a>
-    <a href="#" class="ss-icon ss-social">linkedin</a>
-  </div>
+  {{#if contact.isPersonal}}
+    <span class="label">
+      Not a Radium Contact
+    </span>
+  {{/if}}
 </div>
