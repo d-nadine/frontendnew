@@ -1,6 +1,6 @@
 Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
   isCurrentUser: ( ->
-    @get('model') == @get('currentUser')
+    @get('model') == @get('currentUser.model')
   ).property('model')
 
   toggleIsAdmin: ->
