@@ -16,7 +16,7 @@ Radium.SettingsConfirmPipelineStateDeletionController = Radium.ObjectController.
   otherStates: ( ->
     @get('accountSettings.workflowStates').reject (item) =>
                                         item == @get('model.name')
-  ).property('accountSettings.workflowStates.[]')
+  ).property('accountSettings.workflowStates.[]', 'hasDeals', 'isUpdatingDeals')
 
   transferDeals: ->
     deals = Radium.Deal.all().filter (deal) => deal.get('status') == @get('model.name')

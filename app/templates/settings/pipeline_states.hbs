@@ -6,9 +6,11 @@
 
   <div class="row">
     <div class="span5 pipeline-state-create">
-      <button class="btn btn-large btn-success" {{action "createPipelineState"}}>
-        Add Pipeline State
-      </button>
+      {{#if isAdmin}}
+        <button class="btn btn-large btn-success" {{action "createPipelineState" bubbles="false"}}>
+          Add Pipeline State
+        </button>
+      {{/if}}
     </div>
   </div>
 </div> <!-- /.pipeline-states-list -->

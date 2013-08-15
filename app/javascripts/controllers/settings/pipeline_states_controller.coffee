@@ -1,4 +1,4 @@
-Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
+Radium.SettingsPipelineStatesController = Radium.ArrayController.extend
   sortProperties: ['position']
   needs: ['account']
   account: Ember.computed.alias 'controllers.account.model'
@@ -16,6 +16,7 @@ Radium.SettingsPipelineStatesController = Ember.ArrayController.extend
 
     account.one 'becameInvalid', (result) =>
       @send 'flashError', result
+      account.reset()
 
     account.one 'becameError', (result) =>
       @send 'flashError', 'An error occurred and the action can not be completed'

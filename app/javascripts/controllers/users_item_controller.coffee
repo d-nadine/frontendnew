@@ -22,8 +22,10 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
 
     user.one 'becameInvalid', (result) =>
       @send 'flashError', result
+      @resetModel()
 
     user.one 'becameError', (result) =>
       @send 'flashError', result
+      @resetModel()
 
     @get('store').commit()

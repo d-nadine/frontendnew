@@ -7,9 +7,10 @@ Radium.PipelineStatesItemView = Ember.View.extend
     disabledBinding: 'controller.account.isSaving'
     action: 'saveState'
     target: 'controller'
-    insertNewline: ->
+    insertNewline: (e) ->
       @triggerAction()
-      false
+      e.stopPropagation()
+      e.preventDefault()
 
   didInsertElement: ->
     if @get('content.isNew')

@@ -26,6 +26,31 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     return this._super(url, type, hash);
   },
 
+  didError: function(store, type, record, xhr){
+    if (xhr.status === 412 ){
+      var json = JSON.parse(xhr.responseText),
+          errors = {};
+
+      if(!json.hasOwnProperty('error')){
+        this._super.apply(this, arguments);
+      }else{
+        // FIXME: We need better error messages from the server
+        switch(json.error){
+          case "EditUser::NonAdminUserForbindden":
+          case "EditAccount::NonAdminUserForbindden":
+            errors.message = "You need to be an admin user to perform this action";
+            break;
+          default:
+            errors.error = json.error;
+        }
+
+        store.recordWasInvalid(record, errors);
+      }
+    } else {
+      this._super.apply(this, arguments);
+    }
+  },
+
   findQuery: function(store, type, query, recordArray) {
     var recordType = type.toString().split(".")[1];
     var queryMethod = "query" + recordType + "Records";

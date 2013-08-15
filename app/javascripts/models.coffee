@@ -11,6 +11,15 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @constructor.toString().split('.').pop().toLowerCase()
   ).property()
 
+  reset: ->
+    state = if @get('id')
+              'loaded.updated.uncommitted'
+            else
+              'loaded.created.uncommited'
+
+    @get('transaction').rollback()
+    @get('stateManager').transitionTo(state)
+
 requireAll /models/
 
 Radium.Model.reopenClass

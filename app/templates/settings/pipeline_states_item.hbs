@@ -1,22 +1,26 @@
 <div class="span2">
   {{view view.pipelineStateName class="inline-field"}}
   <div class="btn-toolbar">
-    {{#if parentController.hasMultipleItems}}
-    <div class="btn-group">
-      <button class="btn btn-mini"
-        {{bindAttr disabled="isFirstItem"}}
-        {{action "movePipelineStateUp" this}}>▲</button>
-      <button class="btn btn-mini"
-      {{bindAttr disabled="isLastItem"}}
-      {{action "movePipelineStateDown" this}}>▼</button>
-    </div>
+    {{#if isAdmin}}
+      {{#if parentController.hasMultipleItems}}
+        <div class="btn-group">
+          <button class="btn btn-mini"
+            {{bindAttr disabled="isFirstItem"}}
+            {{action "movePipelineStateUp" this}}>▲</button>
+          <button class="btn btn-mini"
+          {{bindAttr disabled="isLastItem"}}
+          {{action "movePipelineStateDown" this}}>▼</button>
+        </div>
+      {{/if}}
+      <div class="btn btn-mini btn-danger pipeline-delete-btn" {{action confirmDeletion this}}>
+        <i class="ss-symbolicons-block ss-trash"></i>
+      </div>
     {{/if}}
-    <div class="btn btn-mini btn-danger pipeline-delete-btn" {{action confirmDeletion this}}>
-      <i class="ss-symbolicons-block ss-trash"></i>
-    </div>
   </div>
 </div>
-<div class="span8">
-  {{each checklist itemViewClass="Radium.PipelineChecklistItemView" itemController="pipelineChecklistItem"}}
-  {{render pipelineChecklistItem newChecklistItem}}
-</div>
+{{#if isAdmin}}
+  <div class="span8">
+    {{each checklist itemViewClass="Radium.PipelineChecklistItemView" itemController="pipelineChecklistItem"}}
+    {{render pipelineChecklistItem newChecklistItem}}
+  </div>
+{{/if}}
