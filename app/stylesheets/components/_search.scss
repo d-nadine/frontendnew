@@ -28,12 +28,27 @@
   position: relative;
 
   .navbar-search {
+    width: 250px;
     position: relative;
+    @include transition(width 0.15s);
+
+    &.is-open {
+      width: 350px;
+
+      .search-query {
+        color: #000;
+        border-color: #fff;
+        background-color: #fff;
+      }
+    }
   }
 
   .search-query {
+    width: 100%;
+    height: 30px;
     padding-left: 50px !important;
     @include border-radius(4px);
+    @include box-sizing(border-box);
 
     &:focus {
       color: #000;
@@ -58,4 +73,86 @@
   border-top: 1px solid $border;
   @include box-shadow(0 2px 2px rgba(black, 0.1));
   @include border-radius(0 0 4px 4px);
+}
+
+.main-search-results-section {
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid $border;
+
+  &:last-child {
+    border: none;
+  }
+}
+
+.main-search-advanced-setting-item {
+  padding: 0 15px 0 35px;
+
+  label {
+    width: 70px;
+    margin-right: 10px;
+    float: left;
+    line-height: 30px;
+
+    &.toggle-label {
+      width: auto;
+    }
+  }
+
+  select {
+    width: 200px;
+    display: block;
+  }
+}
+
+.main-search-results-toggle {
+  position: relative;
+  z-index: 5;
+  margin: 0;
+}
+
+.main-search-results-title {
+  padding: 0 15px 0 35px;
+  position: relative;
+
+  i {
+    position: absolute;
+    left: 10px;
+    top: 0;
+  }
+}
+
+.main-search-results-list {
+
+}
+
+.main-search-results-list-item {
+  a {
+    padding: 0 15px 0 35px;
+    line-height: 25px;
+    position: relative;
+    display: block;
+    color: #000;
+    @include box-sizing(border-box);
+
+    &:hover {
+      color: #fff;
+      background-color: $blue;
+    }
+  }
+}
+
+.main-search-results-item-title {
+  position: relative;
+  margin-left: 10px;
+}
+
+.main-search-results-type {
+  font-size: 11px;
+  color: #979797;
+  float: left;
+
+  i {
+    color: #979797 !important;
+  }
 }
