@@ -1,8 +1,12 @@
 <h2>Feed</h2>
 
 <div class="feed">
-  {{render activities visibleContent}}
-
+  {{#if allAreLoaded}}
+    {{render activities visibleContent}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}}
+<!--
   <div class="feed-item">
     <div class="feed-item-header">
       <div class="pull-right">
@@ -68,3 +72,4 @@
     {{partial "shared/show_more"}}
   </div>
 </div>
+-->

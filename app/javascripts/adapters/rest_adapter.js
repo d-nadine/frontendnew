@@ -89,7 +89,8 @@ Radium.RESTAdapter.configure('plurals',{
   user_invitation_delivery: 'user_invitation_deliveries',
   autocomplete_company: 'autocomplete_companies',
   autocomplete_all: 'autocomplete_all',
-  user_settings: 'user_settings'
+  user_settings: 'user_settings',
+  activity: 'activities'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
@@ -232,7 +233,7 @@ Radium.RESTAdapter.map('Radium.UserInvitation', {
 
 Radium.RESTAdapter.map('Radium.User', {
   isAdmin: {key: 'admin'},
-  settings: {key: 'user_settings_id'}
+  settings: {key: 'settings_id'}
 });
 
 Radium.RESTAdapter.map('Radium.UserSettings', {

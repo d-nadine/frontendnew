@@ -3,5 +3,6 @@ Radium.ActivitiesItemView = Radium.View.extend
   layoutName: 'activity'
 
   templateName: (->
+    console.log "activities/#{@get('controller.tag')}"
     "activities/#{@get('controller.tag')}"
   ).property('controller.tag')
