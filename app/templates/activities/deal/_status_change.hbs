@@ -1,13 +1,5 @@
-{{#if isNegotiating}}
-  <p>
-    "{{link deal}}" is now "{{status}}"
-    <br />
-    by {{link user}}
-  </p>
-{{else}}
-  <p>
-    "{{link deal}}" is now {{status}}
-    <br />
-    by {{link user}}
-  </p>
-{{/if}}
+<p>
+  "{{link deal}}" is now {{meta.newStatus}}
+  <br />
+  by {{link user}}
+</p>
