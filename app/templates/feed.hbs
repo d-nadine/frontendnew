@@ -3,9 +3,11 @@
 <div class="feed">
   {{#if allAreLoaded}}
     {{render activities visibleContent}}
+    {{partial "shared/show_more"}}
   {{else}}
     {{partial 'is_loading'}}
   {{/if}}
+</div>
 <!--
   <div class="feed-item">
     <div class="feed-item-header">
@@ -22,7 +24,7 @@
     </div>
     <div class="feed-item-content">
       <p>From: <a href="#">Steve Jobs</a> to <a href="#">Michael Bolton</a> <a href="#">Read more</a></p>
-      {{render 'comments' model}}
+      {{!render 'comments' model}}
     </div>
   </div>
 
@@ -40,7 +42,7 @@
     </div>
     <div class="feed-item-content">
       <p>from our website</p>
-      {{render 'comments' model}}
+      {{!render 'comments' model}}
     </div>
   </div>
 
@@ -64,12 +66,12 @@
         <li><img src="/images/default_avatars/small.png" alt=""></li>
         <li><img src="/images/default_avatars/small.png" alt=""></li>
       </ul>
-      {{render 'comments' model}}
+      {{!render 'comments' model}}
     </div>
   </div>
 
   <div class="activity row">
-    {{partial "shared/show_more"}}
+    {{!partial "shared/show_more"}}
   </div>
 </div>
 -->

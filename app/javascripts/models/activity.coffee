@@ -5,11 +5,12 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   # FIXME: remove when ED supports has many through
   tags: DS.hasMany('Radium.Tag')
 
-  user: DS.belongsTo('Radium.User', inverse: null)
+  user: DS.belongsTo('Radium.User')
 
   tag: DS.attr('string')
   event: DS.attr('string')
   meta: DS.attr('object')
+  time: DS.attr('datetime')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value

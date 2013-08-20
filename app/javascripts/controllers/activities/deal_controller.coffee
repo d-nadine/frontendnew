@@ -1,4 +1,5 @@
 Radium.ActivitiesDealController = Radium.ObjectController.extend
+  isCreate: Ember.computed.is 'event', 'create'
   isDelete: Ember.computed.is 'event', 'delete'
   isAssign: Ember.computed.is 'event', 'assign'
   isStatusChange: Ember.computed.is 'event', 'status_change'
@@ -19,6 +20,7 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
 
   icon: (->
     switch @get('event')
+      when 'create' then 'create'
       when 'delete' then 'delete'
       when 'assign' then 'switch'
       when 'status_change' then 'chart'

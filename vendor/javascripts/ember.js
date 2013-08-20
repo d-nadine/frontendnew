@@ -21013,6 +21013,9 @@ SimpleHandlebarsView.prototype = {
 
   update: function () {
     this.updateId = null;
+    if(!this.morph){
+      return;
+    }
     this.morph.html(this.render());
   },
 
