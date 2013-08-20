@@ -17,10 +17,7 @@
     {{#if showAddresses}}
       <div class="addresses">
         <div {{bindAttr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-          <label>To</label>
-          {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
-
-          <span class="toggles">
+          <span class="toggles pull-right">
             {{#unless showCc}}
               <a href="#" class="muted" tabindex="7" {{action expandList 'cc'}}>CC</a>
             {{/unless}}
@@ -28,18 +25,20 @@
               <a href="#" class="muted" tabIndex="7" {{action expandList 'bcc'}}>BCC</a>
             {{/unless}}
           </span>
+          <label>To</label>
+          {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
         </div>
 
         {{#if showCc }}
           <div class="field control-box control-box-block-level recipients cc">
-            <label class="muted">CC</label>
+            <label>CC</label>
             {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
           </div>
         {{/if}}
 
         {{#if showBcc }}
           <div class="field control-box control-box-block-level recipients bcc">
-            <label class="muted">BCC</label>
+            <label>BCC</label>
             {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
           </div>
         {{/if}}
@@ -47,23 +46,28 @@
     {{/if}}
 
     {{#if showSubject}}
-      <div>
+      <div class="field control-box control-box-block-level recipients cc">
+        <label>Subject</label>
         {{view view.subject tabindex=2 class="subject field input-block-level"}}
       </div>
     {{/if}}
 
     <div class="new-message-block">
-      <div class="new-message-row">
+      <div class="new-message-row new-message-compose">
         {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
       </div>
 
       <div class="clearfix new-message-row">
-        <div class="pull-right">
+        <div class="btn-toolbar pull-right">
           {{#unless view.signatureAdded}}
             <button tabindex="4" class="btn btn-link btn-messages-action" {{action addSignature target="view" bubbles="true"}}>
               <i class="ss-standard ss-write"></i> Add Signature
             </button>
           {{/unless}}
+
+          <button class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-attach"></i> Add Attachment
+          </button>
 
           <button class="btn btn-link btn-messages-action">
             <i class="ss-standard ss-trash"></i> Delete
@@ -72,10 +76,7 @@
       </div>
 
       <div class="email-item-actions new-message-row">
-        <div class="pull-right">
-          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
-            <i class="ss-standard ss-filter"></i> Make Private
-          </a>
+        <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
@@ -92,34 +93,27 @@
             </ul>
           </div>
         </div>
-
-        {{#unless isPersonal}}
-          {{#if showFormBox}}
-            <button class="btn text-error" {{action toggleFormBox}}>
-              <i class="ss-standard ss-delete"></i> Cancel
-            </button>
-          {{else}}
-            <button class="btn" {{action toggleFormBox}}>
-              <i class="ss-standard ss-check green"></i> Add a follow-up todo
-            </button>
-          {{/if}}
-        {{/unless}}
-
-        <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+        <div class="btn-toolbar">
           {{#unless includeReminder}}
-            <i class="ss-standard ss-info"></i> Check for response?
+            <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+                <i class="ss-standard ss-info"></i> Check for response?
+            </button>
           {{/unless}}
-        </button>
+          <button {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-filter"></i> Make Private
+          </button>
+        </div>
       </div>
 
       {{#if includeReminder}}
         <div class="new-message-row block-blue check-response">
           <div class="pull-right">
-            <button class="btn btn-link" {{action toggleReminderForm bubbles="false"}}>
-              <i class="ss-standard ss-delete"></i>
+            <button class="btn btn-primary" {{action toggleReminderForm bubbles="false"}}>
+              Cancel
             </button>
           </div>
-          <p><i class="ss-standard ss-info muted"></i> Check for response in {{view view.reminderLength class="field"}} days
+          <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response by </p>
+          {{view view.datePicker class="field"}}
         </div>
       {{/if}}
 

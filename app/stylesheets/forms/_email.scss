@@ -6,7 +6,7 @@
   border-top: 1px solid #ddd;
   padding: {
     top: 10px;
-    bottom: 10px;
+    bottom: 20px;
   }
 }
 
@@ -27,19 +27,16 @@
     margin-bottom: 10px;
 
     label {
+      width: 70px;
+      margin: 0 0 0 20px;
+      float: left;
       cursor: default;
-      width: 40px;
+      line-height: 35px;
+      color: #6e6e6e;
     }
 
     .toggles {
-      width: 100px;
-      text-align: right;
-    }
-
-    label, .autocomplete, .toggles {
-      display: table-cell;
-      margin: 0;
-      vertical-align: middle;
+      line-height: 30px;
     }
   }
 
@@ -101,23 +98,32 @@
 }
 
 .new-message-row {
-  margin: 0 15px;
+  margin: 0 30px;
   padding: 10px 0;
 
   &.block-blue,
   &.block-gray {
     margin: 0;
     padding: {
-      right: 15px;
-      left: 15px;
+      right: 30px;
+      left: 30px;
     }
     border-top: 1px solid #ddd;
   }
 }
 
+.new-message-compose {
+  padding-top: 20px;
 
-.check-response p {
-  margin: 0;
+  textarea {
+    min-height: 230px;
+  }
+}
+
+.check-response-label {
+  margin: 0 10px 0 0;
+  float: left;
+  line-height: 35px;
 }
 
 // Email HUD
