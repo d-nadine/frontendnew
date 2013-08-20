@@ -6,5 +6,5 @@ Radium.ActivitiesItemView = Radium.View.extend
     if @get('controller.isLoaded')
       "activities/#{@get('controller.tag')}"
     else
-      "activities/loading}"
+      "activities/loading"
   ).property('controller.tag')
