@@ -4,5 +4,8 @@ Radium.ActivitiesItemView = Radium.View.extend
 
   templateName: (->
     console.log "activities/#{@get('controller.tag')}"
-    "activities/#{@get('controller.tag')}"
+    if @get('controller.isLoaded')
+      "activities/#{@get('controller.tag')}"
+    else
+      "activities/loading}"
   ).property('controller.tag')

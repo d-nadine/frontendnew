@@ -7,4 +7,5 @@ Radium.FeedController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   allAreLoaded: ( ->
     notLoaded = @filterProperty('isLoaded', false).get('length')
     notLoaded == 0
-  ).property('@each.isLoaded')
+  ).property('@each.isLoaded', 'content.[]')
+  
