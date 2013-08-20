@@ -4,8 +4,7 @@ Radium.FeedController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   sortAscending: false
   sortProperties: ['timestamp']
 
-  allAreLoaded: ( ->
+  allLoaded: ( ->
     notLoaded = @filterProperty('isLoaded', false).get('length')
     notLoaded == 0
-  ).property('@each.isLoaded', 'content.[]')
-  
+  ).property('@each.isLoaded')
