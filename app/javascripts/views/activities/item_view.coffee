@@ -3,7 +3,6 @@ Radium.ActivitiesItemView = Radium.View.extend
   layoutName: 'activity'
 
   templateName: (->
-    console.log "activities/#{@get('controller.tag')}"
     if @get('controller.isLoaded')
       "activities/#{@get('controller.tag')}"
     else
