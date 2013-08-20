@@ -1,1 +1,7 @@
-{{each controller itemViewClass="Radium.ActivitiesItemView"}}
+{{#each activity in controller}}
+  {{#if activity.isLoaded}}
+    {{renderActivity activity}}
+  {{else}}
+  {{partial 'is_loading'}}
+  {{/if}}
+{{/each}}

@@ -32724,7 +32724,7 @@ function chain(app, promise, fn) {
 }
 
 /**
-* Loads a route, sets up any controllers, and renders any templates associated
+* Loads a route, sets up any controllers, and  itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView itemViewClass="Radium.ActivitiesItemView""""""""""""""""renders any templates associated
 * with the route as though a real user had triggered the route change while
 * using your app.
 *

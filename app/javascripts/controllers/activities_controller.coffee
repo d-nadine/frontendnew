@@ -1,6 +1,4 @@
 Radium.ActivitiesController = Radium.ArrayController.extend
-  lookupItemController: (activity) ->
-    if activity.get('isLoaded')
-      "activities.#{activity.get('tag')}"
-    else
-      "activities.loading"
+  itemController: 'activityItem'
+
+Radium.ActivityItemController = Radium.ObjectController.extend()
