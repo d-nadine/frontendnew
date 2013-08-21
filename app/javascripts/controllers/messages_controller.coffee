@@ -1,4 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+  needs: ['application']
   sortProperties: ['time']
   sortAscending: false
 
@@ -14,7 +15,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   selectionsDidChange: (->
     if @get('content').filterProperty('isChecked').get('length')
       @transitionTo 'messages.bulk_actions'
-    else
+    else if @controllerFor('application').get('currentPath') == 'messages.bulk_actions'
       @send 'back'
   ).observes('content.@each.isChecked')
 
