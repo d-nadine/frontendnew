@@ -1,4 +1,16 @@
 <div class="message-item-actions">
+  {{#if todos.length}}
+    <i class="ss-standard ss-check"></i>
+  {{/if}}
+
+  {{#if calls.length}}
+    <i class="ss-standard ss-phone"></i>
+  {{/if}}
+
+  {{#if meetings.length}}
+    <i class="ss-standard ss-calendar"></i>
+  {{/if}}
+
   {{#if hasAttachments}}
     <i class="ss-standard ss-attach"></i>
   {{/if}}
@@ -7,7 +19,7 @@
     <i class="ss-symbolicons-block ss-chat"></i>
   {{/if}}
 
-  <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
+  <a {{action delete this bubbles=false}} href="#" class="btn-icon delete pull-right">
     <i class='ss-symbolicons-block ss-trash'></i>
   </a>
 </div>

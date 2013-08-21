@@ -7,91 +7,14 @@
 </form>
 {{#if isOpen}}
   <div class="main-search-results">
-    <div class="main-search-results-section">
-      {{#if query}}
+    {{#if query}}
+      <div class="main-search-results-section">
         <h6 class="main-search-results-title">
-          <i class="ss-standard ss-view"></i>Search results for <span class="muted">{{query}}</span>
+          Search results for <span class="muted">{{query}}</span>
         </h6>
-      {{else}}
-        <h6 class="main-search-results-title">
-          <i class="ss-standard ss-clock"></i>Recent Searches
-        </h6>
-        <ul class="unstyled main-search-results-list">
-          <li class="main-search-results-list-item">
-            <a href="#">
-              <span class="main-search-results-type">
-                <i class="ss-standard ss-mail"></i>
-                <strong>Message</strong>
-              </span>
-              <span class="main-search-results-item-title">Lorem ipsum dolor...</span>
-            </a>
-          </li>
-          <li class="main-search-results-list-item">
-            <a href="#">
-              <span class="main-search-results-item-title">Lorem ipsum dolor...</span>
-            </a>
-          </li>
-          <li class="main-search-results-list-item">
-            <a href="#">
-              <span class="main-search-results-type">
-                <i class="ss-standard ss-user"></i>
-                <strong>Contacts</strong>
-              </span>
-              <span class="main-search-results-item-title">Lorem ipsum dolor...</span>
-            </a>
-          </li>
-        </ul>
-      {{/if}}
-    </div>
+      </div>
+    {{/if}}
 
-    {{#view view.advancedSearchSettingsView class="main-search-results-section"}}
-      <button {{bindAttr class=":main-search-results-toggle :btn :btn-link :pull-right :ss-standard view.sectionIsOpen:ss-directup:ss-dropdown"}} {{action toggleAdvancedSettings target="view"}}>&nbsp;</button>
-      <h6 class="main-search-results-title">
-        <i class="ss-icon ss-search"></i>Advanced Search
-      </h6>
-      {{#if view.sectionIsOpen}}
-        <ul class="unstyled">
-          <li class="main-search-advanced-setting-item">
-            <label>Mailbox</label>
-            <select>
-              <option value="">All</option>
-            </select>
-          </li>
-          <li class="main-search-advanced-setting-item">
-            <label>Related to</label>
-            <select>
-              <option value="">Everyone</option>
-            </select>
-          </li>
-          <li class="main-search-advanced-setting-item">
-            <label>Status</label>
-            <select>
-              <option value="">All</option>
-            </select>
-          </li>
-          <li class="main-search-advanced-setting-item">
-            <label class="toggle-label"><input type="checkbox"> Show only unread</label>
-          </li>
-        </ul>
-      {{/if}}
-    {{/view}}
-
-    <div class="main-search-results-section">
-      <h6 class="main-search-results-title">
-        <i class="ss-standard ss-filter"></i>Smart Filters
-      </h6>
-      <ul class="unstyled main-search-results-list">
-        <li class="main-search-results-list-item">
-          <a href="#">
-            Emails from leads I haven't replied to
-          </a>
-        </li>
-        <li class="main-search-results-list-item">
-          <a href="#">
-            Emails with unanswered questions which I have not replied to
-          </a>
-        </li>
-      </ul>
-    </div>
+    {{partial "search/settings"}}
   </div>
 {{/if}}

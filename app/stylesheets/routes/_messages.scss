@@ -1,5 +1,55 @@
 $item-border: #dddddd;
 
+.messages-tabs {
+  margin: 0;
+  background-color: $active-state;
+  border-bottom: none;
+  @include display-box;
+  @include box-orient(horizontal);
+  @include box-align(stretch);
+
+  > li {
+    @include box-flex(1);
+    float: none;
+    margin: 0;
+    border: none;
+
+    > a {
+      height: 35px;
+      overflow: hidden;
+      margin: 0;
+      line-height: 35px;
+      color: #E9E9E9;
+      border: none;
+      @include border-radius(0);
+
+      &:hover {
+        border: none;
+        color: $active-state;
+      }
+    }
+  }
+
+  > a {
+    color: #fff;
+  }
+
+  > .active > a {
+    border: none;
+    color: $active-state;
+    background-color: #E9E9E9;
+
+    &:hover {
+      border: none;
+    }
+  }
+}
+
+.messages-search-tab {
+  width: 30px;
+  text-align: center;
+}
+
 .messages-list-controls {
   border-bottom: 1px solid $item-border;
 }
@@ -15,11 +65,7 @@ $item-border: #dddddd;
 }
 
 .messages-list-search {
-  width: 100%;
-  max-width: 235px;
-  background: $active-state;
-  margin: 0;
-  padding: 15px;
+  margin: 15px;
 
   .input-append {
     width: 100%;
@@ -43,15 +89,17 @@ $item-border: #dddddd;
 }
 
 .messages-list-item {
-  padding: 10px 20px;
   position: relative;
-  border-bottom: 1px solid $item-border;
   background: $background;
   @include box-sizing(border-box);
   @include transition(background-color 0.25s);
 
   &.is-selected {
     background-color: #fff;
+
+    .message-item-content {
+      border-color: $active-state;
+    }
   }
 
   .btn-read-status {
@@ -65,8 +113,17 @@ $item-border: #dddddd;
     @include transition(opacity 0.25s);
   }
 
-  &:hover .btn-read {
-    opacity: 1;
+  .delete {
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover,
+  &.is-selected {
+    .delete,
+    .btn-read {
+      opacity: 1;
+    }
   }
 
   .check-box {
@@ -87,12 +144,19 @@ $item-border: #dddddd;
   }
 }
 
-.message-list-readable-item {
-  padding-left: 30px;
-}
-
 .message-item-content {
+  padding: 10px 20px;
   overflow: hidden;
+  border: {
+    top: 1px solid $item-border;
+    right: 1px solid transparent;
+    bottom: 1px solid transparent;
+    left: 1px solid transparent;
+  }
+
+  .message-list-readable-item & {
+    padding-left: 30px;
+  }
 }
 
 .message-item-avatar {
@@ -108,16 +172,8 @@ $item-border: #dddddd;
 }
 
 .message-item-actions {
-  opacity: 0;
-  @include transition(opacity 0.25s);
-
-  .messages-list-item:hover &,
-  .messages-list-item.is-selected & {
-    opacity: 1;
-  }
-
   i {
-    color: $blue;
+    color: $muted;
     margin: 0 0 0 5px;
   }
 }

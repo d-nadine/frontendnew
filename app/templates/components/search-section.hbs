@@ -1,0 +1,7 @@
+<h6 class="main-search-results-title">
+  <button {{bindAttr class=":main-search-results-toggle :btn :btn-link :muted :pull-right :ss-standard isOpen:ss-directup:ss-dropdown"}} {{action toggleSection bubbles=false}}>&nbsp;</button>
+  {{title}}
+</h6>
+<div {{bindAttr class=":clearfix isOpen::hidden"}}>
+  {{yield}}
+</div>

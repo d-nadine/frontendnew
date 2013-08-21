@@ -1,6 +1,24 @@
 <div class="messages-list-controls">
-  <div class="clearfix">
-    <form class="form-search pull-right messages-list-search">
+  <ul class="nav nav-tabs messages-tabs">
+    <li class="active">
+      <a href="#">
+        {{folder}} {{#if content.length}}({{content.length}}){{/if}}
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        Only Radium
+      </a>
+    </li>
+    <li {{bindAttr class=":messages-search-tab isSearchOpen:active"}}>
+      <a href="#" {{action toggleSearch}}>
+        <i class="ss-symbolicons-block ss-search"></i>
+      </a>
+    </li>
+  </ul>
+
+  {{#if isSearchOpen}}
+    <form class="form-search messages-list-search">
       <div class="input-append">
         <i class="ss-symbolicons-block ss-search"></i>
         {{input type="text" placeholder=content.selectedSearchScope}}
@@ -20,22 +38,22 @@
         </div>
       </div>
     </form>
-    <div class="mailbox-tab">
-      {{folder}} {{#if content.length}}({{content.length}}){{/if}}
-    </div>
-  </div>
-  <div class="new-message-btn">
+    {{partial "search/settings"}}
+  {{/if}}
+
+  <div class="clearfix new-message-btn">
     {{#linkTo "emails.new" class="btn btn-block btn-primary"}}
       <i class="ss-standard ss-plus ss-small"></i> <i class="ss-standard ss-mail"></i> Send Email
     {{/linkTo}}
   </div>
 </div>
+
 <ul class="unstyled selectable messages-list">
   {{#if content}}
     {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}
   {{else}}
     <li class="messages-list-item text-center">
-      <i class="ss-standard ss-inbox muted"></i> This folder is empty
+      <p><i class="ss-standard ss-inbox muted"></i> This folder is empty</p>
     </li>
   {{/if}}
 </ul>
