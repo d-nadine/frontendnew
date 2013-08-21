@@ -46,6 +46,8 @@ require 'models'
 
 require /^forms/
 
+requireAll /components/
+
 require 'views'
 
 require 'lib/radium/checkable_mixin'

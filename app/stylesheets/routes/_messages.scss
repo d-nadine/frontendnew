@@ -69,6 +69,14 @@ $item-border: #dddddd;
     opacity: 1;
   }
 
+  .check-box {
+    padding: 5px;
+    position: absolute;
+    left: 0;
+    top: 30px;
+    z-index: 1;
+  }
+
   .label {
     line-height: 20px;
     padding: 0 5px;
@@ -178,4 +186,9 @@ $item-border: #dddddd;
       color: $blue;
     }
   }
+}
+
+// Sent message page
+.email-confirmation-view {
+
 }

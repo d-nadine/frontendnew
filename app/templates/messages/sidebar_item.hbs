@@ -1,23 +1,10 @@
 <div {{bindAttr class=":message-item-content isSelectable :content"}} {{action selectItem this}}>
   <button {{bindAttr class=":btn-read-status isRead:btn-read:btn-unread"}}></button>
+  {{check-box checked=isChecked disabled=disabled}}
 
   <small class="muted pull-right">
     {{formatDateTime timestamp}}
   </small>
 
   {{yield}}
-
-  <div class="pull-right message-item-actions">
-    {{!#if hasAttachments}}
-      <i class="ss-standard ss-attach"></i>
-    {{!/if}}
-
-    {{!#if hasComments}}
-      <i class="ss-symbolicons-block ss-chat"></i>
-    {{!/if}}
-
-    <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
-      <i class='ss-symbolicons-block ss-trash'></i>
-    </a>
-  </div>
 </div>

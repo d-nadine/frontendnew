@@ -1,0 +1,13 @@
+<div class="message-item-actions">
+  {{#if hasAttachments}}
+    <i class="ss-standard ss-attach"></i>
+  {{/if}}
+
+  {{#if hasComments}}
+    <i class="ss-symbolicons-block ss-chat"></i>
+  {{/if}}
+
+  <a {{action delete this bubbles=false}} href="#" class="btn-icon delete">
+    <i class='ss-symbolicons-block ss-trash'></i>
+  </a>
+</div>

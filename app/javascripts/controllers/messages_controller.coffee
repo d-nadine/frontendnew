@@ -11,6 +11,13 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     { title: 'All Emails', name: 'emails' }
   ]
 
+  selectionsDidChange: (->
+    if @get('content').filterProperty('isChecked').get('length')
+      @transitionTo 'messages.bulk_actions'
+    else
+      @send 'back'
+  ).observes('content.@each.isChecked')
+
   canSelectItems: (->
     @get('checkedContent.length') == 0
   ).property('checkedContent.length')

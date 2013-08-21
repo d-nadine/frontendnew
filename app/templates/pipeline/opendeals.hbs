@@ -25,7 +25,7 @@
     {{#each controller}}
       <tr {{bindAttr class="isChecked"}}>
         <td>
-          {{view Radium.Checkbox class="checker-block" checkedBinding="isChecked"}}
+          {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td>
           <p>
