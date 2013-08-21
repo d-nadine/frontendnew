@@ -17,4 +17,4 @@ Radium.DealConfirmStatusChangeController = Radium.ObjectController.extend
   confirm: ->
     @set 'isSubmitted', true
     return unless @get('isValid')
-    @send 'confirmStatusChange'
+    @send 'confirmStatusChange', @get('model')

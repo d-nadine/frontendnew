@@ -5,10 +5,14 @@ Radium.PipelineRoute = Radium.Route.extend
       @transitionTo 'pipeline.index'
 
   activate: ->
-    # FIXME: use a mixin when we upgrade to rc6
     @_super.apply this, arguments
-    return if @events.hasOwnProperty 'saveChecklist'
-    Ember.merge @events, Radium.ChecklistEvents
+
+    @_super.apply this, arguments
+    unless @events.hasOwnProperty 'saveChecklist'
+      Ember.merge @events, Radium.ChecklistEvents
+
+    unless @events.hasOwnProperty 'showStatusChangeConfirm'
+      Ember.merge @events, Radium.DealStatusChangeMixin
 
   model: ->
     model = @modelFor 'pipeline'

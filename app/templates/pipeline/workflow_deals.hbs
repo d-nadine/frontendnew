@@ -57,11 +57,9 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#">Lead</a></li>
-              <li><a href="#">Negotiating</a></li>
-              <li><a href="#">Closed</a></li>
-              <li><a href="#">Paid</a></li>
-              <li><a href="#">Lost</a></li>
+              {{#each workflowGroups}}
+                <li><a {{action changeStatus name}} href="#">{{name}}</a></li>
+              {{/each}}
             </ul>
           </div>
         </td>
