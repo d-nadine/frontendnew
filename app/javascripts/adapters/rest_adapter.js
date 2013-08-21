@@ -180,7 +180,7 @@ Radium.RESTAdapter.map('Radium.ChecklistItem', {
 
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
-  addresses: {embedded: 'always'},
+  addresses: {key: 'offices', embedded: 'always'},
   tagNames: {embedded: 'always'},
 });
 

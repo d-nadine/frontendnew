@@ -2,13 +2,16 @@ Radium.LeadsFromCompanyRoute = Radium.Route.extend
   setupController: (controller, model) ->
     leadsController = @controllerFor('leadsNew')
     leadsController.set 'model', @get 'contactForm'
+    initialStatus = @controllerFor('leadStatuses').get('content.firstObject.value')
+    leadsController.set 'model.initialStatus', initialStatus
+    initialDealState = @controllerFor('accountSettings').get('model.workflow.firstObject.name')
+    leadsController.set 'model.initialDealState', initialDealState
     leadsController.get('model').reset()
     leadsController.set 'user', @controllerFor('currentUser').get('model')
     leadsController.set 'company', model
     leadsController.set 'companyName', model.get('name')
-    leadsController.set 'status', model.get('status')
     leadsController.set('source', 'Lead Form')
-    leadsController.set 'expandImmediately', true
+    leadsController.set 'expandImmediately', true 
 
   renderTemplate: ->
     @render 'leads.new',
