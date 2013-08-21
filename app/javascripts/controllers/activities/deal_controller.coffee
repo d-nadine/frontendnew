@@ -1,4 +1,4 @@
-Radium.ActivitiesDealController = Radium.ObjectController.extend
+Radium.ActivitiesDealController = Radium.ObjectController.extend Radium.ActivityAssignMixin,
   isCreate: Ember.computed.is 'event', 'create'
   isDelete: Ember.computed.is 'event', 'delete'
   isAssign: Ember.computed.is 'event', 'assign'
@@ -14,7 +14,6 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend
 
   contact: Ember.computed.alias 'reference.contact'
   company: Ember.computed.alias 'reference.company'
-  reassignedTo: Ember.computed.alias 'meta.user'
   status: Ember.computed.alias 'meta.status'
   isNegotiating: Ember.computed.alias 'meta.negotiating'
 
