@@ -1,5 +1,6 @@
 Radium.EmailsItemController = Radium.ObjectController.extend
   showMeta : false
+  currentForm: 'todo'
 
   toggleSwitch: ->
     @toggleProperty 'isPersonal'
@@ -18,9 +19,21 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   toggleFormBox: ->
     @toggleProperty 'showFormBox'
 
+  showForm: (form) ->
+    @setProperties
+      showFormBox: true
+      currentForm: form
+
+    @set 'formBox.activeForm', form
+
+  hideForm: ->
+    @set 'showFormBox', false
+    @set 'formBox.activeForm', null
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
+      meetingForm: @get('meetingForm')
       callForm: @get('callForm')
   ).property('todoForm', 'callForm')
 
@@ -33,6 +46,16 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   ).property('model', 'tomorrow')
 
   callForm: Radium.computed.newForm('call')
+
+  meetingForm: Radium.computed.newForm('meeting')
+  meetingFormDefaults: ( ->
+    topic: null
+    users: Em.ArrayProxy.create(content: [])
+    contacts: Em.ArrayProxy.create(content: [])
+    startsAt: @get('now')
+    endsAt: @get('now').advance(hour: 1)
+    invitations: Ember.A()
+  ).property('model', 'now')
 
   callFormDefaults: (->
     reference: @get('model')

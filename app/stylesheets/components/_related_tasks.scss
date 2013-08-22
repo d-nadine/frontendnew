@@ -3,7 +3,6 @@ ol.related-tasks {
 
   li {
     position: relative;
-    margin-bottom: 10px;
 
     &.is-finished, &.is-finished a {
       color: $muted;
@@ -27,7 +26,18 @@ ol.related-tasks {
   }
 
   i {
-    font-size: larger;
+    font-size: 20px;
+    color: $muted;
+    float: left;
+    position: relative;
+    top: 1px;
+  }
+
+  .related-task-title {
+    display: block;
+    margin: 0 0 0 30px;
+    font-size: 18px;
+    color: $muted;
   }
 
   span.time {

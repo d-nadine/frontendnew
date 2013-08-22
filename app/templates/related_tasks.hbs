@@ -8,26 +8,19 @@
           {{else}}
             {{#if isTodo}}
               <li {{bindAttr class="isFinished isOverdue"}}>
-                <i class="ss-standard ss-check"></i>
-                {{#linkTo "unimplemented"}}{{description}}{{/linkTo}}
                 <span class="time">
                   Due
                   {{#linkTo "unimplemented"}}
                     {{formatDateTime time format="date"}}
                   {{/linkTo}}
                 </span>
+                <i class="ss-standard ss-check"></i>
+                {{#linkTo "unimplemented" class="related-task-title"}}{{description}}{{/linkTo}}
               </li>
             {{/if}}
 
             {{#if isCall}}
               <li {{bindAttr class="isFinished isOverdue"}}>
-                <i class="ss-standard ss-phone"></i>
-                {{#linkTo "unimplemented"}}Call{{/linkTo}}
-                with
-                {{#linkTo "user" user}}{{user.name}}{{/linkTo}}
-                and
-                {{#linkTo "contact" contact}}{{contact.name}}{{/linkTo}}
-
                 <span class="time">
                   on
                   {{#linkTo "unimplemented"}}
@@ -38,16 +31,19 @@
                     {{formatDateTime time format="short"}}
                   {{/linkTo}}
                 </span>
+                <i class="ss-standard ss-phone"></i>
+                <span class="related-task-title">
+                {{#linkTo "unimplemented"}}Call{{/linkTo}}
+                with
+                {{#linkTo "user" user}}{{user.name}}{{/linkTo}}
+                and
+                {{#linkTo "contact" contact}}{{contact.name}}{{/linkTo}}
+                </span>
               </li>
             {{/if}}
 
             {{#if isMeeting}}
               <li>
-                <i class="ss-standard ss-calendar"></i>
-                {{#linkTo "unimplemented"}}Meeting {{topic}}{{/linkTo}}
-                with
-                {{list participants}}
-
                 <span class="time">
                   on
                   {{#linkTo "unimplemented"}}
@@ -57,6 +53,12 @@
                   {{#linkTo "unimplemented"}}
                     {{formatDateTime time format="short"}}
                   {{/linkTo}}
+                </span>
+                <i class="ss-standard ss-calendar"></i>
+                <span class="related-task-title">
+                {{#linkTo "unimplemented"}}Meeting {{topic}}{{/linkTo}}
+                with
+                {{list participants}}
                 </span>
               </li>
             {{/if}}

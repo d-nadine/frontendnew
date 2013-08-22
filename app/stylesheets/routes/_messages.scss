@@ -88,6 +88,10 @@ $item-border: #dddddd;
   }
 }
 
+.messages-list-empty {
+  padding: 10px 0;
+  line-height: 30px;
+}
 .messages-list-item {
   position: relative;
   background: $background;

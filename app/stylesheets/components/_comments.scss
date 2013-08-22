@@ -38,8 +38,11 @@ $comment-border: #cfcfcf;
   }
 
   .text {
-    margin-left: 40px;
     margin-right: 60px;
+
+    .avatar-container + & {
+      margin-left: 40px;
+    }
 
     textarea {
       border: 1px solid $comment-border;
