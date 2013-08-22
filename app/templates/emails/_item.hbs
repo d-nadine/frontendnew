@@ -1,0 +1,133 @@
+<div class="block email-card message-card">
+  <div class="email-header">
+    <div class="pull-right email-header-actions">
+      <button class="btn btn-link muted" {{action toggleMeta}}>
+        <small>
+          {{#if showMeta}}
+            Less
+          {{else}}
+            More
+          {{/if}}
+        </small>
+      </button>
+
+      <button class="btn btn-link muted">
+        <i class="ss-standard ss-trash"></i>
+      </button>
+    </div>
+    <h5 class="email-title">
+      {{#if subject}}
+        <big class="sender">{{link sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+      {{else}}
+        Email from <big class="sender">{{link sender}}</big>
+      {{/if}}
+
+    </h5>
+
+    {{#if showMeta}}
+      <div class="email-details">
+        <dl class="dl-horizontal">
+          <dt>To</dt>
+          <dd>{{list toList}}
+          </dd>
+          {{#if cc}}
+            <dt>CC</dt>
+            <dd>{{list ccList}}</dd>
+          {{/if}}
+          <dt>Time</dt>
+          <dd>{{formatDateTime sentAt format="full"}}</dd>
+        </dl>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="content">
+    <div {{bindAttr class="message::empty :text"}}>
+      {{#if message}}
+        <p>
+          {{!FIXME: This needs to some formatting}}
+          {{unbound message}}
+        </p>
+      {{else}}
+        <p>(No Message)</p>
+      {{/if}}
+    </div>
+
+    {{#if attachments}}
+      <div class="clearfix email-item-actions email-item-attachments">
+        {{partial "shared/attachments"}}
+      </div>
+    {{/if}}
+
+    <div class="clearfix email-item-actions">
+      <div class="pull-right">
+        <a {{action toggleReplyForm}} class="btn btn-link btn-messages-action">
+          <i class="ss-standard ss-reply"></i> Reply
+        </a>
+
+        <a {{action toggleForwardForm}} class="btn btn-link btn-messages-action">
+          <i class="ss-standard ss-right"></i> Forward
+        </a>
+
+        {{#if isPersonal}}
+          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+            <i class="ss-symbolicons-block ss-earth"></i> Make Public
+          </a>
+        {{else}}
+          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-filter"></i> Make Private
+          </a>
+        {{/if}}
+        <a class="btn btn-link btn-messages-action" {{action delete this}}>
+          <i class="ss-symbolicons-block ss-trash"></i> Delete
+        </a>
+      </div>
+
+      {{#unless isPersonal}}
+        {{#if showFormBox}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-delete red"></i> Cancel
+          </button>
+        {{else}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-check green"></i> Add a Follow-up Task
+          </button>
+        {{/if}}
+      {{/unless}}
+    </div>
+    {{#if isPersonal}}
+      <div class="clearfix">
+        <div class="alert alert-info">
+          This email is a personal email.  Would you like to add this email to Radium?
+          <button {{action toggleSwitch}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-small">
+            Add Email to Radium
+          </button>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#unless isPersonal}}
+      <div class="clearfix email-item-actions email-item-related-tasks">
+        {{render 'related_tasks' tasks}}
+      </div>
+    {{/unless}}
+  </div>
+</div>
+
+{{#if showReplyForm}}
+  <div class="block block-arrow-top">
+    {{render "forms/reply" replyEmail}}
+  </div>
+{{/if}}
+
+{{#if showForwardForm}}
+  {{render "forms/forward_email" forwardEmail}}
+{{/if}}
+
+{{#if showFormBox}}
+  <div class="block block-connected email-item-form-box">
+    {{render "form_box" formBox}}
+  </div>
+{{/if}}
+
+{{render 'comments' model}}
