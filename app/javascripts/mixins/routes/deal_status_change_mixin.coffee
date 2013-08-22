@@ -2,6 +2,9 @@ Radium.DealStatusChangeMixin =
   confirmStatusChange: ->
     commit = @get('statusChangeCommit')
     controller = @get('statusChangeController')
+    if lostBecause = controller.get('lostBecause')
+      controller.get('model').set('lostBecause', lostBecause)
+
     commit.call controller
     @send 'close'
 

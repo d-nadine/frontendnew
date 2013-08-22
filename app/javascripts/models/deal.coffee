@@ -30,7 +30,6 @@ Radium.Deal = DS.Model.extend Radium.FollowableMixin,
   description: DS.attr('string')
   payBy: DS.attr('datetime')
   value: DS.attr('number')
-  reason: DS.attr('string')
 
   lostDuring: DS.attr('string')
   lostBecause: DS.attr('string')

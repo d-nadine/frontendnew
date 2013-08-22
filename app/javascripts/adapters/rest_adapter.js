@@ -170,7 +170,6 @@ Radium.RESTAdapter.map('Radium.Discussion', {
 Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
-  reason: { key: 'lost_because' },
   checklist: { key: 'check_list' ,embedded: 'always' },
 });
 

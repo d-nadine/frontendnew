@@ -4,12 +4,18 @@ Radium.PipelineItemController = Radium.ObjectController.extend Radium.ChecklistT
     @get('controllers.pipeline.workflowGroups')
   ).property('controllers.pipeline.model.workflowGroups.[]')
 
+  isCheckedDidChange: ( ->
+    @applyBufferedChanges()
+  ).observes('isChecked')
+
   changeStatus: (status) ->
     @discardBufferedChanges()
 
     return if status == @get('status')
 
-    commit = (result) =>
+    commit =  =>
+      if status == 'lost'
+        @set 'lostDuring', @get('model.status')
       @applyBufferedChanges()
       @get('store').commit()
 
