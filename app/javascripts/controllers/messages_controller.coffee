@@ -2,6 +2,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   needs: ['application']
   sortProperties: ['time']
   sortAscending: false
+  applicationController: Ember.computed.alias 'controllers.application'
 
   folderBinding: 'model.folder'
 
@@ -15,7 +16,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   selectionsDidChange: (->
     if @get('content').filterProperty('isChecked').get('length')
       @transitionTo 'messages.bulk_actions'
-    else if @controllerFor('application').get('currentPath') == 'messages.bulk_actions'
+    else if @get('applicationController.currentPath') == 'messages.bulk_actions'
       @send 'back'
   ).observes('content.@each.isChecked')
 

@@ -1,4 +1,4 @@
-require 'lib/radium/autocomplete_list_view'
+require 'lib/radium/async_autocomplete_list_view'
 require 'lib/radium/text_area'
 require 'lib/radium/toggle_switch'
 
@@ -16,7 +16,7 @@ Radium.FormsEmailView = Radium.FormView.extend
     not @get('controller.message.length')
   ).property('controller.isSubmitted', 'controller.message')
 
-  to: Radium.AsyncAutocompleteView.extend
+  to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.to'
     showAvatar: false
@@ -30,12 +30,12 @@ Radium.FormsEmailView = Radium.FormView.extend
       @get('controller.to.length') > 0
     ).property('controller.to.[]')
 
-  cc: Radium.AsyncAutocompleteView.extend
+  cc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.cc'
     showAvatar: false
 
-  bcc: Radium.AsyncAutocompleteView.extend
+  bcc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.bcc'
     showAvatar: false

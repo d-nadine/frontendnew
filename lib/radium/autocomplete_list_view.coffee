@@ -203,15 +203,3 @@ Radium.AutocompleteView = Radium.View.extend
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
-
-# FIXME: Temporarry hack, this should be the main view when
-# there is autocompete for tags
-Radium.AsyncAutocompleteView = Radium.AutocompleteView.extend
-  retrieve: (query, callback) ->
-    Radium.AutocompleteAll.find(autocomplete: {name: query}).then((people) =>
-      results = people.filter(@get('parentView').filterResults.bind(this))
-                     .map (item) =>
-                        @mapSearchResult.call this, item
-
-      callback(results, query)
-    ).then(null, Radium.rejectionHandler)

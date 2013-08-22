@@ -87,8 +87,7 @@ Radium.RESTAdapter.configure('plurals',{
   company: 'companies',
   settings: 'settings',
   user_invitation_delivery: 'user_invitation_deliveries',
-  autocomplete_company: 'autocomplete_companies',
-  autocomplete_all: 'autocomplete_all',
+  autocomplete_item: 'autocomplete',
   user_settings: 'user_settings',
   activity: 'activities'
 });
