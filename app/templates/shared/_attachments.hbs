@@ -1,12 +1,10 @@
-{{#if attachments}}
-  <ul class="unstyled inline attachments">
-    {{#each attachments}}
-      <li>
-        <a href="{{unbound url}}" target="_new">
-          <i class="ss-standard ss-attach"></i>
-          <span class="file-name">{{name}}</span>
-        </a>
-      </li>
-    {{/each}}
-  </ul>
-{{/if}}
+<ul class="unstyled inline attachments">
+  {{#each attachments}}
+    <li>
+      <a href="{{unbound url}}" target="_new">
+        <i class="ss-standard ss-attach"></i>
+        <span class="file-name">{{name}}</span>
+      </a>
+    </li>
+  {{/each}}
+</ul>

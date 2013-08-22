@@ -4,16 +4,6 @@
       <i class="ss-standard ss-calendar inline-form-icon"></i>
     </div>
 
-    {{#if showOptions}}
-      <a tabindex="3" href="#" class="btn btn-link pull-right" {{action toggleExpanded bubble=false}}>
-        {{#if isExpanded}}
-          Hide
-        {{else}}
-          Options
-        {{/if}}
-      </a>
-    {{/if}}
-
     {{#if showSuccess}}
       <span class="success green pull-right">Meeting saved</span>
     {{/if}}
@@ -35,60 +25,58 @@
     {{/if}}
   </div>
 
-  {{#if isExpanded}}
-    <div class="expanded-fields">
-      <div>
-        <div class="field-group">
-          {{view view.datePicker class="field"}}
-        </div>
-        <div class="field-group">
-          {{view view.startsAt class="field"}}
-          {{view view.endsAt class="field"}}
-        </div>
-        <div class="field-group">
-          {{view view.location class="field"}}
-        </div>
-        <div class="field-group">
-          {{#if isDisabled}}
-            <ul>
-            {{#each attendees}}
-            <li>
-              {{avatar this}}
-              {{name}}
-            </li>
-            {{/each}}
-            </li>
-          {{else}}
-            {{view view.attendees class="field" viewName="attendeeList"}}
-          {{/if}}
-        </div>
+  <div class="expanded-fields">
+    <div>
+      <div class="field-group">
+        {{view view.datePicker class="field"}}
       </div>
-      <div class="block calendars">
-        <div class="btn-group control-box">
-          <a {{action showCalendars}}class="btn">
-            <strong>{{currentDate}}'s Calendars</strong>
-            {{#if calendarsOpen}}
-              <i class="ss-standard ss-navigatedown"></i>
-            {{else}}
-              <i class="ss-standard ss-navigateup"></i>
-            {{/if}}
-          </a>
-        </div>
-        {{#if calendarsOpen}}
-          {{partial 'forms/existing_meetings'}}
+      <div class="field-group">
+        {{view view.startsAt class="field"}}
+        {{view view.endsAt class="field"}}
+      </div>
+      <div class="field-group">
+        {{view view.location class="field"}}
+      </div>
+      <div class="field-group">
+        {{#if isDisabled}}
+          <ul>
+          {{#each attendees}}
+          <li>
+            {{avatar this}}
+            {{name}}
+          </li>
+          {{/each}}
+          </li>
+        {{else}}
+          {{view view.attendees class="field" viewName="attendeeList"}}
         {{/if}}
       </div>
-      <div class="form-buttons">
-        <div class="pull-right">
-          <button class="btn btn-primary" {{action submit bubbles=false}}>Save</button>
-          <button class="btn" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
-        </div>
-      </div>
-
-      {{partial 'forms/tasks'}}
-
-      {{partial 'forms/footer'}}
     </div>
-  {{/if}}
+    <div class="block calendars">
+      <div class="btn-group control-box">
+        <a {{action showCalendars}}class="btn">
+          <strong>{{currentDate}}'s Calendars</strong>
+          {{#if calendarsOpen}}
+            <i class="ss-standard ss-navigatedown"></i>
+          {{else}}
+            <i class="ss-standard ss-navigateup"></i>
+          {{/if}}
+        </a>
+      </div>
+      {{#if calendarsOpen}}
+        {{partial 'forms/existing_meetings'}}
+      {{/if}}
+    </div>
+    <div class="form-buttons">
+      <div class="pull-right">
+        <button class="btn btn-primary" {{action submit bubbles=false}}>Save</button>
+        <button class="btn" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
+      </div>
+    </div>
+
+    {{partial 'forms/tasks'}}
+
+    {{partial 'forms/footer'}}
+  </div>
   {{view view.cancelMeetingDialogue}}
 </form>

@@ -138,6 +138,30 @@
   line-height: 35px;
 }
 
+.email-item-form-box {
+  padding: {
+    top: 0;
+    bottom: 0;
+  }
+
+  .form-box {
+    margin: 0;
+  }
+
+  .form {
+    .primary {
+      border: none;
+      @include box-shadow(none);
+    }
+  }
+
+  .expanded-fields {
+    background: none;
+    border-top: 1px solid #ddd;
+    @include box-shadow(none);
+  }
+}
+
 // Email HUD
 .email-hud {
   margin: 0 0 40px;

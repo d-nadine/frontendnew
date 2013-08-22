@@ -53,9 +53,11 @@
       {{/if}}
     </div>
 
-    <div class="clearfix email-item-actions email-item-attachments">
-      {{partial "shared/attachments"}}
-    </div>
+    {{#if attachments}}
+      <div class="clearfix email-item-actions email-item-attachments">
+        {{partial "shared/attachments"}}
+      </div>
+    {{/if}}
 
     <div class="clearfix email-item-actions">
       <div class="pull-right">
@@ -82,25 +84,15 @@
       </div>
 
       {{#unless isPersonal}}
-        <div class="btn-group">
-          <button class="btn" {{action showForm "todo"}}>
-            <i class="ss-standard ss-check green"></i> Add a follow-up {{currentForm}}
+        {{#if showFormBox}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-delete red"></i> Cancel
           </button>
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
+        {{else}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-check green"></i> Add a Follow-up Task
           </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" {{action showForm "todo"}}>Add a related todo</a>
-            </li>
-            <li>
-              <a href="#" {{action showForm "meeting"}}>Add a related meeting</a>
-            </li>
-            <li>
-              <a href="#" {{action showForm "call"}}>Add a related call</a>
-            </li>
-          </ul>
-        </div>
+        {{/if}}
       {{/unless}}
     </div>
     {{#if isPersonal}}
@@ -133,7 +125,7 @@
 {{/if}}
 
 {{#if showFormBox}}
-  <div class="block block-connected block-gray">
+  <div class="block block-connected email-item-form-box">
     {{render "form_box" formBox}}
   </div>
 {{/if}}

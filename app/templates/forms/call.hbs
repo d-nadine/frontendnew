@@ -16,9 +16,9 @@
     {{/if}}
 
 
-    {{#if showCallBox}}
-      {{view view.callBox classNames="pull-right"}}
-    {{/if}}
+    {{!#if showCallBox}}
+      {{!view view.callBox classNames="pull-right"}}
+    {{!/if}}
 
     {{#if showOptions}}
       <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded bubbles=false}}>
