@@ -1,10 +1,16 @@
 <ul class="unstyled folders-list">
+  <li class="folders-list-title">
+    <button class="btn btn-link btn-close pull-right" {{action toggleFolders}}>
+      <i class="ss-standard ss-delete"></i>
+    </button>
+    <i class="ss-standard ss-sent"></i> <strong>Stacks</strong> – {{folder}}
+  </li>
   {{#each folders}}
     <li class="folders-list-item">
       <a {{action selectFolder name href=true }}>
-        <i class="ss-standard ss-inbox"></i>
+        <i class="ss-standard ss-{{unbound icon}}"></i>
+        <span class="folder-label">{{title}}</span>
       </a>
-      {{label title}}
     </li>
   {{/each}}
 </ul>

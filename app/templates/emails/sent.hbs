@@ -1,11 +1,5 @@
 <div class="block email-confirmation-view">
   <button type="button" {{action closeEmailConfirmation bubbles="false"}} class="close">×</button>
-  {{#if showTasksButton}}
-    <div class="adder">
-      <div class="arrow"></div>
-      <i class="ss-standard ss-plus" {{action addTask this}}></i>
-    </div>
-  {{/if}}
 
   {{#if isSaving}}
     <div class="sending">
@@ -13,22 +7,22 @@
       <p class="muted">Sending</p>
     </div>
   {{else}}
-    <div class="subject">
+    <div class="subject text-center">
       {{#if subject}}
-        <p>Your email &quot;{{#linkTo "emails.show" this}}{{subject}}{{/linkTo}}&quot; sent to</p>
+        <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#linkTo "emails.show" this}}{{subject}}{{/linkTo}}&quot; was sent to</p>
       {{else}}
-        <p>Sent an email to</p>
+        <p><i class="ss-standard ss-check green"></i> Sent an email to</p>
       {{/if}}
     </div>
 
-    <div class="recipients">
-      {{list toList}}
+    <div class="recipients-list text-center">
+      <h3>{{list toList}}</h3>
     </div>
   {{/if}}
 </div>
 
 {{#if showTasksButton}}
-  <div {{action addTask model}} class="block block-connected block-blue related-task-prompt">
-    <p>Add Related Task?</p>
+  <div {{action addTask model}} class="block block-connected block-gray related-task-prompt text-center">
+    <a href="#" class="btn btn-primary" {{action addTask this}}>Add Related Task?</a>
   </div>
 {{/if}}

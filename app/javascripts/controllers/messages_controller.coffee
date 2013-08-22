@@ -7,10 +7,12 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   folderBinding: 'model.folder'
 
   folders: [
-    { title: 'Inbox', name: 'inbox' }
-    { title: 'Sent items', name: 'sent' }
-    { title: 'Discussions', name: 'discussions' }
-    { title: 'All Emails', name: 'emails' }
+    { title: 'Inbox', name: 'inbox', icon: 'mail' }
+    { title: 'Sent items', name: 'sent', icon: 'send' }
+    { title: 'Discussions', name: 'discussions', icon: 'chat' }
+    { title: 'All Emails', name: 'emails', icon: 'mail' }
+    { title: 'Attachments', name: 'attachments', icon: 'attach' }
+    { title: 'Meeting invites', name: 'invites', icon: 'calendar' }
   ]
 
   selectionsDidChange: (->
