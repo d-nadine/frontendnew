@@ -10,7 +10,7 @@ Radium.Router.map ->
     @route 'bulk_actions'
     @resource 'emails', ->
       @route 'show', path: '/:email_id'
-      @route 'empty', path: '/:folder'
+      @route 'empty', path: '/:folder/empty'
       @route 'new'
       @route 'mailTo', path: 'mailto/:recipient_type/:recipient_id'
       # FIXME: this should be a routless state
