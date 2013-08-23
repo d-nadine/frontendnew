@@ -159,25 +159,16 @@ Radium.AutocompleteView = Radium.View.extend
       @get('parentView').addSelection item
 
     formatList: (data, elem) ->
-      email= data.data.get('email')
-
-      name = if data.name && email
-                "#{data.name} (#{email})"
-             else if data.name
-                data.name
-             else
-               email
-
       content = ""
 
       if @get('parentView.showAvatarInResults')
         content = """
           #{@getAvatar(data)}
-          #{name}
+          #{data.name}
         """
       else
         content = """
-          #{name}
+          #{data.name}
         """
 
       elem.html(content)
@@ -185,10 +176,20 @@ Radium.AutocompleteView = Radium.View.extend
     mapSearchResult: (result) ->
       currentUser = @get('currentUser')
 
-      name = if result.constructor == Radium.User && result.get('id') == currentUser.get('id')
-                "#{result.get('name')} (Me)"
+      email= result.get('email')
+      name = result.get('name')
+
+      name = if name && email
+                "#{name} (#{email})"
+             else if name
+                name
              else
-                result.get('name') || result.get('email')
+               email
+
+      name = if result.get('person').constructor == Radium.User && result.get('id') == currentUser.get('id')
+                "#{name} (Me)"
+             else
+               name
 
       result =
         value: "#{result.constructor}-#{result.get('id')}"
