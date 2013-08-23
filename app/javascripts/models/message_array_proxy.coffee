@@ -6,13 +6,11 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin
   isloaded: false
 
   load: ->
-    return if @get('isLoaded')
-
     @clear()
 
-    Radium.Email.all().then (emails) =>
+    Radium.Email.find({}).then (emails) =>
       @add emails
-      Radium.Discussion.all().then (discussions) =>
+      Radium.Discussion.find({}).then (discussions) =>
         @add discussions
         @set 'isLoaded', true
         @resolve this

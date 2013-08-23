@@ -15,6 +15,9 @@ Radium.MessagesRoute = Radium.Route.extend
         @transitionTo 'emails.show', item
       else if item instanceof Radium.Discussion
         @transitionTo 'messages.discussion', item
+      else
+        folder = @modelFor('messages').get('folder')
+        @transitionTo 'emails.empty', folder
 
     check: (item) ->
       item.toggleProperty 'isChecked'
@@ -97,7 +100,9 @@ Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
     messages = @modelFor('messages')
     item = messages.get('firstObject')
-    return unless item
+    unless item
+      @transitionTo 'emails.empty', messages.get('folder')
+      return
 
     if item instanceof Radium.Email
       @transitionTo 'emails.show', item
