@@ -62,7 +62,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     description: null
     reference: @get('model')
     finishBy: @get('taskStartDate')
-    user: @get('currentUser')
+    user: @get('currentUser.model')
   ).property('model', 'tomorrow', 'taskStartDate')
 
   callForm: Radium.computed.newForm('call')
@@ -70,7 +70,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   callFormDefaults: (->
     contact: @get('contact')
     finishBy: @get('taskStartDate')
-    user: @get('currentUser')
+    user: @get('currentUser.model')
   ).property('model', 'tomorrow', 'taskStartDate')
 
   meetingForm: Radium.computed.newForm('meeting')

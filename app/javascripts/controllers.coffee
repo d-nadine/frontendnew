@@ -5,7 +5,7 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
-  currentUser: Ember.computed.alias 'controllers.currentUser'
+  currentUser: Ember.computed.alias 'controllers.currentUser.model'
   isAdmin: Ember.computed.equal 'currentUser.model.isAdmin', true
   nonAdmin: Ember.computed.not 'isAdmin'
 

@@ -41,6 +41,7 @@ Radium.ContactController = Radium.ObjectController.extend
       callForm: @get('callForm')
       discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
+      about: @get('model')
   ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: Radium.computed.newForm('todo')

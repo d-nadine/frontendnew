@@ -36,7 +36,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
     description: null
     reference: @get('model')
     finishBy: @get('tomorrow')
-    user: @get('currentUser')
+    user: @get('currentUser.model')
   ).property('model', 'tomorrow')
 
   callForm: Radium.computed.newForm('call', canChangeContact: false)
@@ -54,6 +54,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   discussionFormDefaults: (->
     reference: @get('model')
     user: @get('currentUser')
+    about: @get('model')
   ).property('model')
 
   meetingForm: Radium.computed.newForm('meeting')
