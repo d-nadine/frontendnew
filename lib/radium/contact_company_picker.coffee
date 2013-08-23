@@ -1,11 +1,10 @@
 require 'lib/radium/company_picker'
 
-Radium.ContactCompanyPicker = Radium.AutocompleteCombobox.extend
+Radium.ContactCompanyPicker = Radium.CompanyPicker.extend
   classNameBindings: [':company-name']
   valueBinding: 'controller.company'
   placeholder: 'Company'
   companyNameBinding: 'controller.companyName'
-  autocompleteResultType: Radium.AutocompleteCompany
 
   didInsertElement: ->
     @_super.apply this, arguments

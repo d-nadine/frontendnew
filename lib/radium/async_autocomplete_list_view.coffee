@@ -1,8 +1,13 @@
 require 'lib/radium/autocomplete_list_view'
 
 Radium.AsyncAutocompleteView = Radium.AutocompleteView.extend
+  queryParameters: (query) ->
+    term: query
+
   retrieve: (query, callback) ->
-    Radium.AutocompleteItem.find(term: query).then((people) =>
+    queryParameters = @get('parentView').queryParameters(query)
+
+    Radium.AutocompleteItem.find(queryParameters).then((people) =>
       results = people.filter(@get('parentView').filterResults.bind(this))
                      .map (item) =>
                         @mapSearchResult.call this, item

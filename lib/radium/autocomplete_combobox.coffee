@@ -58,7 +58,10 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
   """
 
   setValue: (object) ->
-    @set 'value', object.get(@get('autocompleteResultType.property'))
+    @set 'value', object.get('name')
+
+  queryParameters: (query) ->
+    term: query
 
   textField: Ember.TextField.extend Radium.AddActiveToParentMixin, Radium.ToggleDropdownMixin,
     valueBinding: 'parentView.query'
@@ -66,12 +69,10 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     placeholderBinding: 'parentView.placeholder'
 
     didInsertElement: ->
-      autocompleteType = @get('parentView').autocompleteResultType
-
-      Ember.assert "You need to specify a AutocompleteResultType, e.g. Radium.AutocompleteContact'", autocompleteType
-
       @$().typeahead source: (query, process) =>
-        autocompleteType.find(autocomplete: {name: query}).then((results) =>
+        queryParameters = @get('parentView').queryParameters(query)
+
+        Radium.AutocompleteItem.find(queryParameters).then((results) =>
           process results
         , Radium.rejectionHandler)
         .then(null, Radium.rejectionHandler)
