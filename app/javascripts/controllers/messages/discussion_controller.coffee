@@ -1,4 +1,4 @@
-Radium.MessagesDiscussionController = Radium.FormController.extend
+Radium.MessagesDiscussionController = Radium.FormController.extend Radium.ChangeContactStatusMixin,
   aboutDeal: (->
     @get('reference') instanceof Radium.Deal
   ).property('reference')
@@ -24,4 +24,3 @@ Radium.MessagesDiscussionController = Radium.FormController.extend
     else
       @get('reference')
   ).property('reference')
-

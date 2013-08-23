@@ -3,7 +3,7 @@
   <div class="pull-right email-hud-actions">
     {{#if contact.isPersonal}}
       <button class="btn">
-        Not Not a Radium Contact. Make Private?
+        Not a Radium Contact. Make Private?
       </button>
     {{/if}}
     <div class="btn-group">
@@ -12,10 +12,12 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href="#">As Lead</a></li>
-        <li><a href="#">As a Prospect</a></li>
-        <li><a href="#">As a Customer</a></li>
-        <li><a href="#">Exclude from Pipeline</a></li>
+        <li>
+          <a href="#" {{action changeStatus "pipeline"}}>As Lead</a>
+        </li>
+        <li>
+          <a href="#" {{action changeStatus "exclude"}}>Exclude from Pipeline</a>
+        </li>
       </ul>
     </div>
   </div>

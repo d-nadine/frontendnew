@@ -71,12 +71,12 @@ Radium.MessagesRoute = Radium.Route.extend
       @send 'back'
 
   model: ->
-     messages = Radium.MessageArrayProxy.create
+    messages = Radium.MessageArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')
 
-     messages.load()
+    messages.load()
 
-     messages
+    messages
 
   renderTemplate: (controller, context) ->
     @render 'messages/drawer_buttons', outlet: 'buttons'
