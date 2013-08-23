@@ -23,7 +23,12 @@ Radium.LinkView = Ember.View.extend
   tagName: "span"
 
   templateName: (->
-    name = "links/#{@get('content.constructor').toString().split('.')[1].underscore()}"
+    content = if @get('content') instanceof Ember.ObjectController
+                @get('content.content')
+              else
+                @get('content')
+
+    name = "links/#{content.constructor.toString().split('.')[1].underscore()}"
     name = "links/default" unless Ember.TEMPLATES[name]
     name
   ).property('content')
