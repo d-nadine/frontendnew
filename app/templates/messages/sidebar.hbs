@@ -1,59 +1,26 @@
 <div class="messages-list-controls">
   <ul class="nav nav-tabs messages-tabs">
-    <li class="active">
-      <a href="#">
+    <li {{bindAttr class="view.folderTabSelected:active"}}>
+      <a href="#" {{action selectTab "folderTabView" target="view"}}>
         {{folder}} {{#if content.length}}({{content.length}}){{/if}}
       </a>
     </li>
-    <li>
-      <a href="#">
+    <li {{bindAttr class="view.radiumTabSelected:active"}}>
+      <a href="#" {{action selectTab "radiumTabView" target="view"}}>
         Only Radium
       </a>
     </li>
-    <li {{bindAttr class=":messages-search-tab isSearchOpen:active"}}>
-      <a href="#" {{action toggleSearch}}>
+    <li {{bindAttr class=":messages-search-tab view.searchTabSelected:active"}}>
+      <a href="#" {{action selectTab "searchTabView" target="view"}}>
         <i class="ss-symbolicons-block ss-search"></i>
       </a>
     </li>
   </ul>
-
-  {{#if isSearchOpen}}
-    <form class="form-search messages-list-search">
-      <div class="input-append">
-        <i class="ss-symbolicons-block ss-search"></i>
-        {{input type="text" placeholder=content.selectedSearchScope}}
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right">
-            {{#each folders}}
-            <li>
-              <a href="#" {{action selectSearchScope this}}>
-                {{title}}
-              </a>
-            </li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    </form>
-    {{partial "search/settings"}}
-  {{/if}}
-
   <div class="clearfix new-message-btn">
     {{#linkTo "emails.new" class="btn btn-block btn-primary"}}
       <i class="ss-standard ss-plus ss-small"></i> <i class="ss-standard ss-mail"></i> Send Email
     {{/linkTo}}
   </div>
-</div>
 
-<ul class="unstyled selectable messages-list">
-  {{#if content}}
-    {{each controller itemViewClass="Radium.MessagesSidebarItemView"}}
-  {{else}}
-    <li class="messages-list-item text-center messages-list-empty">
-      <p><i class="ss-standard ss-inbox muted"></i> This folder is empty</p>
-    </li>
-  {{/if}}
-</ul>
+  {{view Ember.ContainerView viewName="tabContentView"}}
+</div>

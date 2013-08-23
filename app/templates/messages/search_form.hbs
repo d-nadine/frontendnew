@@ -1,0 +1,21 @@
+<form class="form-search messages-list-search">
+  <div class="input-append">
+    <i class="ss-symbolicons-block ss-search"></i>
+    {{input type="text" placeholder=content.selectedSearchScope}}
+    <div class="btn-group">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        {{#each folders}}
+        <li>
+          <a href="#" {{action selectSearchScope this}}>
+            {{title}}
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</form>
+{{partial "search/settings"}}

@@ -11,4 +11,8 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
   contentBinding: Ember.Binding.oneWay 'controllers.messages'
   selectedContentBinding: Ember.Binding.oneWay 'controllers.messages.selectedContent'
 
+  currentTab: 'folderTabView'
+  selectTab: (tab) ->
+    @set 'currentTab', "#{tab}View"
+
   itemController: 'messagesSidebarItem'

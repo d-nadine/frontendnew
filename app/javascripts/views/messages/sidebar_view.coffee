@@ -5,6 +5,29 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   #   Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
   # ).observes('controller.length')
 
+  didInsertElement: ->
+    @selectTab('folderTabView')
+
+  folderTabSelected: (->
+    @get('folderTabView').detectInstance(@.get('tabContentView.currentView'))
+  ).property('tabContentView.currentView')
+  radiumTabSelected: (->
+    @get('radiumTabView').detectInstance(@.get('tabContentView.currentView'))
+  ).property('tabContentView.currentView')
+  searchTabSelected: (->
+    @get('searchTabView').detectInstance(@.get('tabContentView.currentView'))
+  ).property('tabContentView.currentView')
+
+  selectTab: (tabName) ->
+    @get('tabContentView').set('currentView', @get(tabName).create())
+
+  folderTabView: Ember.View.extend
+    templateName: 'messages/list'
+  radiumTabView: Ember.View.extend
+    templateName: 'messages/list'
+  searchTabView: Ember.View.extend
+    templateName: 'messages/search_form'
+
   selectionDidChange: (->
     selectedItem = @get 'controller.selectedContent'
     return unless selectedItem
