@@ -3,24 +3,22 @@
 </div>
 <div class="clearfix">
   <div class="pull-right user-actions">
-    {{#if isAdmin}}
-      {{#unless isCurrentUser}}
-        {{#if content.isAdmin}}
-          <button class="btn btn-small btn-danger" {{bindAttr disabled=isSaving}} {{action "toggleIsAdmin"}}>Remove as Admin</button>
-        {{else}}
-          <button class="btn btn-small btn-success" {{bindAttr disabled=isSaving}} {{action "toggleIsAdmin"}}>Make Admin</button>
-        {{/if}}
-        <button class="btn btn-link" {{action "deleteUser" this}}>
-          <i class="ss-symbolicons-block ss-trash"></i>
-        </button>
-      {{/unless}}
-    {{/if}}
+    {{#unless isCurrentUser}}
+      {{#if model.isAdmin}}
+        <button class="btn btn-small btn-danger" {{bindAttr disabled=isSaving}} {{action "toggleIsAdmin"}}>Remove as Admin</button>
+      {{else}}
+        <button class="btn btn-small btn-success" {{bindAttr disabled=isSaving}} {{action "toggleIsAdmin"}}>Make Admin</button>
+      {{/if}}
+      <button class="btn btn-link" {{action "deleteUser" this}}>
+        <i class="ss-symbolicons-block ss-trash"></i>
+      </button>
+    {{/unless}}
   </div>
 
   <div class="user-meta">
     <h5 class="name">
-      {{name}} <small>{{email}}</small>
-      {{#if isAdmin}}
+      {{#linkTo 'user' model}}{{name}} <small>{{email}}</small>{{/linkTo}}
+      {{#if model.isAdmin}}
         <span class="label label-info">Admin</span>
       {{/if}}
     </h5>

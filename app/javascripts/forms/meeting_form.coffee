@@ -24,6 +24,10 @@ Radium.MeetingForm = Radium.Form.extend
               else
                 @get('model')
 
+    users = @get('users').slice()
+    contacts = @get('contacts').slice()
+    reference = @get('reference')
+
     if isNew
       @get('users').forEach (user) =>
         meeting.get('invitations').addObject person: type: 'user', id: user.get('id')
@@ -36,5 +40,14 @@ Radium.MeetingForm = Radium.Form.extend
 
       if @get('reference') && @get('reference.constructor') is Radium.Contact
           meeting.get('invitations').addObject person: type: 'contact', id: @get('reference.id')
+
+    meeting.one 'didCreate', (meeting) =>
+      # FIXME: client side hack.  The server should return the meeting
+      # with the relationships set
+      @get('currentUser.model').reload()
+
+      users.forEach (user) -> user.reload()
+      contacts.forEach (contact) -> contact.reload()
+      reference.reload() if reference
 
     @get('store').commit()

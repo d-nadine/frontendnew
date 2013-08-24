@@ -13,13 +13,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
 
-  people: ( ->
-    userList = @get('userList').mapProperty('content')
-    contactList = @get('contactList')
-
-    Radium.PeopleList.listPeople(userList, contactList)
-  ).property('userList.[]', 'contactList.[]')
-
   isEditable:( ->
     return false if @get('isSaving')
     return false if @get('isSubmitted')
@@ -159,15 +152,17 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     false
 
   addSelection: (attendee) ->
-    resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
+    person = attendee.get('person')
+
+    resource = if person.constructor == Radium.User then 'users' else 'contacts'
 
     attendees = @get(resource)
 
-    return if attendees.find( (item) -> item == attendee)
+    return if attendees.find( (item) -> item == person)
 
-    attendees.addObject attendee
+    attendees.addObject person
 
-    @get('meetingUsers').pushObject attendee if attendee.constructor == Radium.User
+    @get('meetingUsers').pushObject person if person.constructor == Radium.User
 
   removeSelection: (attendee) ->
     if @get('invited').contains attendee

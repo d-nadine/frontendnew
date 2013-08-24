@@ -30,14 +30,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
     contact: @get('contact')
   ).property('model', 'tomorrow', 'contact')
 
-  people: ( ->
-    users = @get('users').mapProperty('content')
-    contacts = @get('contacts')
-
-    Radium.PeopleList.listPeople(users, contacts)
-      .filter (person) -> person.get('email') || person.get('primaryEmail.value')
-  ).property('users.[]', 'contacts.[]')
-
   expandList: (section) ->
     @set("show#{section.capitalize()}", true)
 

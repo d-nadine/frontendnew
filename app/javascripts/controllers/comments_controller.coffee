@@ -3,7 +3,7 @@ Radium.CommentsController = Radium.ObjectController.extend
 
   submit: ->
     comment = @get('comments').createRecord
-      user: @get('currentUser.model')
+      user: @get('currentUser')
       text: @get('text')
       commentable: @get('model')
 

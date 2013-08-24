@@ -14,3 +14,7 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
       </div>
     </div>
   """
+  filterResults: (item) ->
+    !@get('source').contains(item.get('person'))
+
+

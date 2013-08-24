@@ -1,7 +1,7 @@
 <div class="span2">
   {{view view.pipelineStateName class="inline-field"}}
   <div class="btn-toolbar">
-    {{#if isAdmin}}
+    {{#if currentUser.isAdmin}}
       {{#if parentController.hasMultipleItems}}
         <div class="btn-group">
           <button class="btn btn-mini"

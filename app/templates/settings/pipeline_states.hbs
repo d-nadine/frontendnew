@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="span5 pipeline-state-create">
-      {{#if isAdmin}}
+      {{#if currentUser.isAdmin}}
         <button class="btn btn-large btn-success" {{action "createPipelineState" bubbles="false"}}>
           Add Pipeline State
         </button>

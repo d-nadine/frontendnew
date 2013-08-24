@@ -85,9 +85,9 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 
 Radium.RESTAdapter.configure('plurals',{
   company: 'companies',
-  settings: 'settings',
   user_invitation_delivery: 'user_invitation_deliveries',
   autocomplete_item: 'autocomplete',
+  settings: 'settings_id',
   user_settings: 'user_settings',
   activity: 'activities'
 });

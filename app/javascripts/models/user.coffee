@@ -6,11 +6,11 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   deals: DS.hasMany('Radium.Deal')
 
-  todos: DS.hasMany('Radium.Todo', inverse: 'user')
-  calls: DS.hasMany('Radium.Call', inverse: 'user')
-  meetings: DS.hasMany('Radium.Meeting', inverse: 'users')
+  todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
+  meetings: DS.hasMany('Radium.Meeting')
 
-  activities: DS.hasMany('Radium.Activity', inverse: 'user')
+  activities: DS.hasMany('Radium.Activity')
 
   firstName: DS.attr('string')
   lastName: DS.attr('string')
