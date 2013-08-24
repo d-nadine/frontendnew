@@ -1,5 +1,9 @@
 $calendar-off: #d8d9d9;
 
+.calendar-toolbar {
+  max-width: 518px;
+}
+
 .calendar-container {
   width: 100%;
 
@@ -52,20 +56,25 @@ $calendar-off: #d8d9d9;
   font-size: 12px;
   font-weight: bold;
   line-height: 32px;
-  background-color: #e9e9e9;
+  border-bottom: 1px solid rgba(black, 0.1);
+  background-color: #e7e7e7;
 }
 
 .events-list-item {
   @extend ._events-list;
   padding: {
-    top: 8px;
-    bottom: 8px;
+    top: 15px;
+    bottom: 15px;
   }
   font-size: 14px;
   line-height: 18px;
   background: #fff;
   border-bottom: 1px solid rgba(black, 0.1);
   color: #6e6e6e;
+
+  a {
+    display: block;
+  }
 
   &.is-selected {
     background: $calendar-active-bg;
@@ -84,6 +93,8 @@ $calendar-off: #d8d9d9;
   i {
     float: left;
     margin-right: 10px;
+    font-size: 18px;
+    color: #cdcdcd;
   }
 
   a {
@@ -109,6 +120,8 @@ $calendar-off: #d8d9d9;
   td {
     vertical-align: top;
     background-color: $bright;
+    border: 1px solid #c3c3c3;
+    @include border-radius(4px);
   }
 
   tr {
@@ -129,12 +142,13 @@ $calendar-off: #d8d9d9;
   }
 
   .is-different-month {
+    color: #6e6e6e;
     background-color: $dark-background;
   }
 
   .is-selected-date {
     background-color: $calendar-active-bg;
-    border: 1px solid #bcbcbc;
+    border: 1px solid #008fe5;
 
     .btn-slab {
       color: darken($calendar-active, 20%);
@@ -148,8 +162,8 @@ $calendar-off: #d8d9d9;
   .date {
     display: block;
     font-weight: bold;
-    font-size: 11px;
-    color: lighten($dark, 45);
+    font-size: 14px;
+    color: #2d2d30;
     line-height: 20px;
   }
 
