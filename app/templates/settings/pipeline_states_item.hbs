@@ -18,7 +18,7 @@
     {{/if}}
   </div>
 </div>
-{{#if isAdmin}}
+{{#if currentUser.isAdmin}}
   <div class="span8">
     {{each checklist itemViewClass="Radium.PipelineChecklistItemView" itemController="pipelineChecklistItem"}}
     {{render pipelineChecklistItem newChecklistItem}}
