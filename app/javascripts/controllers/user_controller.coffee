@@ -33,7 +33,6 @@ Radium.UserController = Radium.ObjectController.extend
       compactFormButtons: true
       todoForm: @get('todoForm')
       callForm: @get('callForm')
-      discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 

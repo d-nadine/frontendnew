@@ -20,7 +20,14 @@
       </div>
     </div>
   </li>
-
+  {{#each notification in controller}}
+    {{#if notification.isLoaded}}
+      {{renderNotification notification}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
+  {{/each}}
+  <!--  
   <li class="notification-item">
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">
@@ -30,7 +37,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta notification-task-overdue">
             <strong>Overdue today at 9 AM</strong>
@@ -49,7 +56,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta notification-task-overdue">
             <strong>Overdue today at 9 AM</strong>
@@ -71,7 +78,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <ul class="inline">
             <li>{{avatar this style="small"}}</li>
@@ -93,7 +100,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
@@ -101,8 +108,8 @@
           </small>
         </div>
       </div>
-    </a>
-  </li>
+    _st</a>
+  <_st/li>
 
   <li class="notification-item">
     <a href="#" class="notification-item-content">
@@ -114,7 +121,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-mail notification-item-icon"></i>
@@ -135,7 +142,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
@@ -155,7 +162,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
@@ -175,7 +182,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
@@ -195,7 +202,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <span class="label label-info">Deal</span>
@@ -215,7 +222,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-mail notification-item-icon"></i>
@@ -235,7 +242,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <span class="label label-success">Lead</span>
@@ -255,7 +262,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-phone notification-item-icon"></i>
@@ -275,7 +282,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-buildings notification-item-icon"></i>
@@ -295,7 +302,7 @@
       </div>
 
       <div class="notification-item-footer">
-        {{partial "notifications/notification_actions"}}
+        {{!partial "notifications/notification_actions"}}
         <div class="clearfix">
           <small class="notification-item-meta">
             <i class="ss-standard ss-user notification-item-icon"></i>
@@ -305,4 +312,5 @@
       </div>
     </a>
   </li>
+  -->
 </ul>

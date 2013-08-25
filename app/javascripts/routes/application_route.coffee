@@ -97,10 +97,17 @@ Radium.ApplicationRoute = Radium.Route.extend
         type: 'alert-error'
         message: error
 
+  activate: ->
+    Radium.NotificationsPoller.create().start()
+
+  deactivate: ->
+    Radium.NotificationsPoller.create().stop()
+
   model: ->
     Radium.Deal.find({})
 
   setupController: (controller, deals) ->
+    @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()
     @controllerFor('tags').set 'model', Radium.Tag.find()
