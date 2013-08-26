@@ -49,6 +49,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
   meetingForm: Radium.computed.newForm('meeting')
   meetingFormDefaults: ( ->
+    isExpanded: true
     topic: null
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
