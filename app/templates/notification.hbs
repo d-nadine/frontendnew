@@ -11,13 +11,9 @@
   <div class="notification-item-footer">
     {{partial "notifications/notification_actions"}}
     <div class="clearfix">
-      <small {{bindAttr class=":notification-item-meta isOverdue:notification-task-overdue"}}>
+      <small class="notification-item-meta">
         <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
-        {{#unless isOverdue}}
-          {{timeInHumanFormat}}
-        {{else}}
-          <strong>Overdue at {{timeInHumanFormat}}</strong>
-        {{/unless}}
+        {{timeInHumanFormat}}
       </small>
     </div>
   </div>

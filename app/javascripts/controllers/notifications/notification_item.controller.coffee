@@ -9,8 +9,4 @@ Radium.NotificationsAssignContactController = Radium.NotificationsAssignControll
 
 Radium.NotificationsAssignDealController = Radium.NotificationsAssignController.extend()
 
-Radium.NotificationsAssignTodoController = Radium.NotificationsAssignController.extend
-  isOverdue: ( ->
-    @get('reference.overdue')
-  ).property('reference')
-
+Radium.NotificationsAssignTodoController = Radium.NotificationsAssignController.extend()
