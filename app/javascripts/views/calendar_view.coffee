@@ -6,10 +6,16 @@ Radium.CalendarView = Radium.View.extend Radium.DarkBackgroundMixin,
       dateFormat: "yy-mm-dd"
       numberOfMonths: [2, 3]
       defaultDate: new Date()
-      onSelect: (date, datepicker) =>
-        alert()
-        date = Ember.DateTime.parse(date, '%Y-%m-%d')
-        @set 'controller.date', date
-    ).on 'click', =>
+    )
+    .on('changeDate', (event) =>
+      date = Ember.DateTime.create
+        day: event.date.getDate()
+        month: event.date.getMonth()
+        year: event.date.getYear()
+
+      @get('controller').send 'selectDay', date
+    )
+    .on('click', =>
       $().datepicker('show')
+    )
 
