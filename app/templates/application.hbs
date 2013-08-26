@@ -3,7 +3,7 @@
   <a {{action toggleNotifications}} href="#">
     <i class="ss-standard ss-clock"></i>
     {{#if notificationCount}}
-      ({{notificationCount}})
+      {{badge notificationCount style=important}}
     {{/if}}
   </a>
 
