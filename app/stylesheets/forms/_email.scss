@@ -139,24 +139,31 @@
 }
 
 .email-item-form-box {
-  padding: {
-    top: 0;
-    bottom: 0;
-  }
+  padding: 0;
 
   .form-box {
     margin: 0;
   }
 
+  .form-box-controls {
+    position: absolute;
+    right: 10px;
+  }
+
   .form {
     .primary {
+      margin: {
+        right: 15px;
+        left: 15px;
+      }
       border: none;
       @include box-shadow(none);
     }
   }
 
   .expanded-fields {
-    background: none;
+    margin: 0;
+    background: $calendar-active-bg;
     border-top: 1px solid #ddd;
     @include box-shadow(none);
   }

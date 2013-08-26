@@ -122,9 +122,13 @@
 .expanded-fields {
   position: relative;
   background-color: $secondary-selection;
-  padding: 20px;
   margin: 0 10px;
   @include box-shadow(0 2px 1px rgba(black, 0.25));
+
+  .form-row {
+    padding: 15px;
+    border-bottom: 1px solid $control-border-color;
+  }
 
   .field-group {
     margin: 5px 0;
@@ -137,6 +141,20 @@
     hr {
       margin: 10px 0;
     }
+  }
+}
+
+.icon-label {
+  float: left;
+  margin-right: 10px;
+  top: 3px;
+  position: relative;
+  color: $lightness;
+}
+
+.field-group-input {
+  .icon-label + & {
+    margin-left: 35px;
   }
 }
 
@@ -156,7 +174,6 @@
 }
 
 .form-buttons {
-  margin: 10px 0 0;
   clear: both;
   overflow: hidden;
 }

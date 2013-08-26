@@ -25,14 +25,18 @@
 
   {{#if isExpanded}}
     <div class="expanded-fields">
-      <div>
-        {{view view.datePicker class="field"}}
-        {{view view.userPicker class="field"}}
+      <div class="form-row">
+        <div class="field-group meeting-form-invite">
+          {{view view.datePicker class="field"}}
+          {{view view.userPicker class="field"}}
+        </div>
       </div>
 
       {{#if isEditable}}
-        <div class="form-buttons">
-          <button class="btn btn-primary pull-right" type="submit" {{action submit}}>Save</button>
+        <div class="form-row form-buttons">
+          <div class="pull-right">
+            <button class="btn btn-primary" type="submit" {{action submit}}>Save</button>
+          </div>
         </div>
       {{/if}}
 

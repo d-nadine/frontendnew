@@ -203,3 +203,29 @@
   }
 
 }
+
+.meeting-form-invite {
+
+}
+
+.meeting-form-attendees {
+
+}
+
+.meeting-form-attendees-label {
+  margin: 0 10px 0 0;
+  line-height: 32px;
+}
+
+.meeting-form-attendees-list {
+  li {
+    max-width: 40px;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 12px;
+  }
+
+  img {
+    display: block;
+  }
+}

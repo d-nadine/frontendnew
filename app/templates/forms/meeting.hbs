@@ -26,51 +26,69 @@
   </div>
 
   <div class="expanded-fields">
-    <div>
+    <div class="form-row">
       <div class="field-group">
         {{view view.datePicker class="field"}}
+        {{view view.startsAt class="field"}} to {{view view.endsAt class="field"}}
       </div>
-      <div class="field-group">
-        {{view view.startsAt class="field"}}
-        {{view view.endsAt class="field"}}
-      </div>
+    </div>
+    <div class="form-row">
       <div class="field-group">
         {{view view.location class="field"}}
       </div>
+    </div>
+    <div class="form-row">
       <div class="field-group">
-        {{#if isDisabled}}
-          <ul>
-          {{#each attendees}}
-          <li>
-            {{avatar this}}
-            {{name}}
-          </li>
-          {{/each}}
-          </li>
-        {{else}}
-          {{view view.attendees class="field" viewName="attendeeList"}}
-        {{/if}}
+        <label class="icon-label"><i class="ss-symbolicons-block ss-write"></i></label>
+        <div class="field-group-input">
+          <input type="text" class="input-block-level" placeholder="Description">
+        </div>
+        <div class="clearfix">
+          <div class="pull-right">
+            <button class="btn btn-link">
+              <i class="ss-standard ss-attach"></i> Attach a file
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="block calendars">
-      <div class="btn-group control-box">
-        <a {{action showCalendars}}class="btn">
-          <strong>{{currentDate}}'s Calendars</strong>
-          {{#if calendarsOpen}}
-            <i class="ss-standard ss-navigatedown"></i>
-          {{else}}
-            <i class="ss-standard ss-navigateup"></i>
-          {{/if}}
-        </a>
+    <div class="form-row">
+      <div class="field-group meeting-form-invite">
+        <div class="pull-right">
+          <button class="btn btn-link" {{action showCalendars}}>
+            {{currentDate}}'s Calendars
+            <i {{bindAttr class=":ss-standard calendarsOpen:ss-navigateup:ss-navigatedown"}}></i>
+          </button>
+        </div>
+        {{#unless isDisabled}}
+          {{view view.attendees class="field" viewName="attendeeList"}}
+        {{/unless}}
       </div>
       {{#if calendarsOpen}}
-        {{partial 'forms/existing_meetings'}}
+        <div class="field-group">
+          {{partial 'forms/existing_meetings'}}
+        </div>
+      {{/if}}
+      {{#if attendees.length}}
+        <div class="field-group meeting-form-attendees">
+          <label class="icon-label">
+            <i class="ss-standard ss-users"></i> Attendees
+          </div>
+          <ul class="inline meeting-form-attendees-list">
+            {{#each attendees}}
+            <li>
+              {{avatar this}}
+              {{name}}
+            </li>
+            {{/each}}
+          </ul>
+        </div>
       {{/if}}
     </div>
-    <div class="form-buttons">
+    <div class="form-row form-buttons">
       <div class="pull-right">
+        <button class="btn btn-link" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
         <button class="btn btn-primary" {{action submit bubbles=false}}>Save</button>
-        <button class="btn" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
       </div>
     </div>
 
