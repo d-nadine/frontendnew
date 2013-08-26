@@ -112,10 +112,12 @@ Radium.ApplicationRoute = Radium.Route.extend
         message: error
 
   activate: ->
-    Radium.NotificationsPoller.create().start()
+    notificationPoller = Radium.NotificationsPoller.create()
+    Radium.set('notificationPoller', notificationPoller)
+    notificationPoller.start()
 
   deactivate: ->
-    Radium.NotificationsPoller.create().stop()
+    Radium.get('notificationPoller').stop()
 
   model: ->
     Radium.Deal.find({})
