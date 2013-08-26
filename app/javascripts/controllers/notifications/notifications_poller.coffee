@@ -12,6 +12,18 @@ Radium.NotificationsPoller = Ember.Object.extend
     clearInterval(@_timer) if @_timer
 
   onPoll: ->
-    console.log "Polling starting at #{Ember.DateTime.create().toFullFormat()}"
-    Radium.Notification.find().then ->
-      console.log "Polling ended at #{Ember.DateTime.create().toFullFormat()}"
+    existing = Radium.Notification.all().slice()
+
+    Radium.Notification.find({}).then (records) ->
+      return unless records.get('length')
+
+      delta = records.toArray().reject (record) =>
+                existing.contains(record)
+
+      console.log "#{delta.length} new notifications"
+
+      return unless delta.length
+
+      notifyCount = Radium.get('notifyCount')
+
+      Radium.set('notifyCount', delta.length + notifyCount)

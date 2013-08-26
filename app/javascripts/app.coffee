@@ -9,17 +9,33 @@ require 'lib/ember/computed'
 
 require 'lib/string/inflector'
 
-Radium = Em.Application.create
+Radium = Em.Application.createWithMixins
   rootElement: '#application'
   customEvents:
     blur: 'blur'
   timezone: Ember.DateTime.create().get('timezone')
+  title: 'Radium'
+  notifyCount: 0
+
   LOG_STACKTRACE_ON_DEPRECATION : true
   LOG_BINDINGS                  : true
   LOG_TRANSITIONS               : true
   LOG_TRANSITIONS_INTERNAL      : true
   LOG_VIEW_LOOKUPS              : true
   LOG_ACTIVE_GENERATION         : true
+
+  titleChanged: ( ->
+    title = @get('title')
+    notifyCount = @get('notifyCount')
+
+    if notifyCount
+      title = "(#{notifyCount}) #{title}"
+
+    window.setTimeout ->
+      document.title = "."
+      document.title = title
+    , 200
+  ).observes('notifyCount')
 
 window.Radium = Radium
 

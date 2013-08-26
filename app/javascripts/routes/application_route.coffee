@@ -16,6 +16,7 @@ Radium.ApplicationRoute = Radium.Route.extend
           into: 'application'
 
         @set 'router.openDrawer', name
+        Radium.set 'notifyCount', 0
 
     toggleDrawer: (name) ->
       if @get('router.openDrawer') == name
