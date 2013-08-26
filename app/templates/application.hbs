@@ -2,7 +2,9 @@
 <div id="drawer-buttons">
   <a {{action toggleNotifications}} href="#">
     <i class="ss-standard ss-clock"></i>
-    ({{notificationCount}})
+    {{#if notificationCount}}
+      ({{notificationCount}})
+    {{/if}}
   </a>
 
   <a {{action back}} href="#">
