@@ -17,6 +17,19 @@ Radium.ApplicationRoute = Radium.Route.extend
 
         @set 'router.openDrawer', name
         Radium.set 'notifyCount', 0
+        Ember.run.later =>
+          notifications = @controllerFor('notifications').get('model')
+
+          return unless notifications.get('length')
+
+          notifications.filter((notification) ->
+            !notification.get('read')
+          )
+          .forEach (notification) =>
+            notification.set('read', true)
+
+          @get('store').commit()
+        , 200
 
     toggleDrawer: (name) ->
       if @get('router.openDrawer') == name

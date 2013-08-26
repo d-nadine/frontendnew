@@ -2,6 +2,7 @@ Radium.Notification = Radium.Model.extend
   tag: DS.attr('string')
   event: DS.attr('string')
   time: DS.attr('datetime')
+  read: DS.attr('boolean')
   user: DS.belongsTo('Radium.User')
   sentBy: DS.belongsTo('Radium.User')
 
