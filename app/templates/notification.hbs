@@ -1,21 +1,20 @@
 <li class="notification-item">
-  <!-- UNCOMMENT THIS IF YOU WANT TO SEE SOME CRAZYNESS -->
-  <!--<a href="#" class="notification-item-content"> -->
-  <div class="notification-item-header">
-    <div>
-      {{yield}}
-      <!--<small class="notification-item-meta">Write a memo to Bob about targets this month</small>-->
+  <div href="#" class="notification-item-content">
+    <div class="notification-item-header">
+      <div>
+        {{yield}}
+        <!--<small class="notification-item-meta">Write a memo to Bob about targets this month</small>-->
+      </div>
     </div>
-  </div>
 
-  <div class="notification-item-footer">
-    {{partial "notifications/notification_actions"}}
-    <div class="clearfix">
-      <small class="notification-item-meta">
-        <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
-        {{timeInHumanFormat}}
-      </small>
+    <div class="notification-item-footer">
+      {{partial "notifications/notification_actions"}}
+      <div class="clearfix">
+        <small class="notification-item-meta">
+          <i class="ss-symbolicons-block ss-chat notification-item-icon"></i>
+          {{timeInHumanFormat}}
+        </small>
+      </div>
     </div>
   </div>
-  <!-- </a> -->
 </li>

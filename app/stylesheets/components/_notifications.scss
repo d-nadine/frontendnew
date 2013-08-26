@@ -34,7 +34,7 @@
 
   &:hover {
     text-decoration: none;
-    background-color: rgba(white, 0.25);
+    background-color: rgba(white, 0.15);
 
     strong,
     .btn-link {
@@ -43,9 +43,12 @@
   }
 }
 
-a.notification-item-content {
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(black, 0.5);
+.notification-item-header,
+.notification-item-footer {
+  a {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(black, 0.5);
+  }
 }
 
 .notification-item-header {
