@@ -6,7 +6,7 @@
       {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
     {{else}}
       {{#if contact}}
-        {{#linkTo "contact" contact class="pull-left inline-contact-name"}}{{contact.name}}{{/linkTo}}
+        {{#linkTo "contact" contact class="pull-left inline-contact-name"}}{{contact.displayName}}{{/linkTo}}
       {{else}}
       {{/if}}
     {{/if}}

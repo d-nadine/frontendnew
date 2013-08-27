@@ -34,8 +34,8 @@ Radium.LinkView = Ember.View.extend
   ).property('content')
 
   displayName: (->
-    @get('content.name') || @get('content.email') || @get('content.phoneNumber')
-  ).property('content.name', 'content.email', 'content.phoneNumber')
+    @get('content.name') || @get('content.email') || @get('content.phoneNumber') || @get('content.primaryEmail') || @get('content.primaryPhone')
+  ).property('content.name', 'content.email', 'content.phoneNumber', 'content.primaryEmail', 'content.primaryPhone')
 
   company: Ember.computed.alias('content.company')
 

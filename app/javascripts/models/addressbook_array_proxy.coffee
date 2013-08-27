@@ -37,7 +37,8 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     if searchText = @get('searchText')
       unless @get('selectedResource')
         content = content.filter (item) ->
-                      ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
+                      name = item.get('name') || item.get('displayName')
+                      ~name.toLowerCase().indexOf(searchText.toLowerCase())
 
     content.setEach 'isChecked', false
 

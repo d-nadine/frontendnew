@@ -40,7 +40,7 @@
           <div class="existing">
             {{#unless isNew}}
               {{#if isLead}}
-                <p><span>{{#linkTo "contact" content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is a lead.</p>
+                <p><span>{{#linkTo "contact" content}}{{displayName}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is a lead.</p>
                 {{#if contactDeals.length}}
                   <p>They are the contact in the following deals:</p>
                   <table class="table table-striped table-bordered table-hover deals">
@@ -63,7 +63,7 @@
                 <p>Do you want to create a new deal?</p>
                 {{#linkTo "deals.fromContact" this class="btn btn-success"}}Yes{{/linkTo}}
               {{else}}
-                <p><span>{{#linkTo "contact" content}}{{name}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
+                <p><span>{{#linkTo "contact" content}}{{displayName}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
                 <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
                   <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
                 </a>

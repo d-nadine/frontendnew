@@ -89,7 +89,7 @@ Radium.DealsNewView= Ember.View.extend
 
     return reference.get('subject') if reference.constructor is Radium.Email
     return reference.get('topic') if reference.constructor is Radium.Todo
-    return reference.get('name') if reference.constructor is Radium.Contact
+    return reference.get('displayName') if reference.constructor is Radium.Contact
 
     ""
   ).property('controller.reference')
