@@ -19,6 +19,7 @@
     </ul>
   </div>
 {{/if}}
-<span class="text">{{view.leader}}</span>
+{{#if view.leader}}
+  <span class="text">{{view.leader}}</span>
+{{/if}}
 {{view view.humanTextField}}
-

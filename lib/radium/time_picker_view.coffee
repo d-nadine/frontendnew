@@ -13,7 +13,7 @@ Radium.TimePickerView = Radium.View.extend
   isOpen: false
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
-  leader: 'Starts at:'
+  leader: null
 
   disabled: Ember.computed.alias('controller.isDisabled')
 
