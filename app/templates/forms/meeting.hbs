@@ -1,5 +1,9 @@
 <form {{bindAttr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bindAttr class="hasElapsed showTopicTextBox:open:closed :primary"}} {{action expand}}>
+    {{#if showComments}}
+      <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
+    {{/if}}
+
     {{#if showOptions}}
       <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded bubbles=false}}>
         {{#if isExpanded}}
@@ -28,10 +32,6 @@
         {{/each}}
         at {{view.readableStartsAt}}
       </span>
-    {{/if}}
-
-    {{#if showComments}}
-      <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
   </div>
 
@@ -97,6 +97,9 @@
         {{/if}}
       </div>
       <div class="form-row form-buttons">
+        {{#if showAddAction}}
+          {{partial 'add_action'}}
+        {{/if}}
         <div class="pull-right">
           <button class="btn btn-link" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bindAttr disabled="view.cancelMeetingDisabled"}}>Cancel</button>
           <button class="btn btn-primary" {{action submit bubbles=false}}>Save</button>

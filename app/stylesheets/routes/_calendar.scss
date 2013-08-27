@@ -92,16 +92,15 @@ $calendar-off: #d8d9d9;
     text-transform: lowercase;
   }
 
-  i {
-    float: left;
-    margin-right: 10px;
-    font-size: 18px;
-    color: #cdcdcd;
-  }
-
   a {
     color: inherit;
   }
+}
+
+.events-list-item-button {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #cdcdcd;
 }
 
 .events-list-empty {

@@ -1,8 +1,3 @@
-<div class="adder">
-  <div class="arrow"></div>
-  {{#if showFormBox}}
-    <i class="ss-standard ss-hyphen" {{action toggleFormBox}}></i>
-  {{else}}
-    <i class="ss-standard ss-plus" {{action toggleFormBox}}></i>
-  {{/if}}
-</div>
+<button class="btn" {{action toggleFormBox}}>
+  <i {{bindAttr class=":ss-standard showFormBox:ss-hyphen:ss-plus"}}></i> Add a related task
+</button>

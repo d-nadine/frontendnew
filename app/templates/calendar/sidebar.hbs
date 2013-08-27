@@ -9,6 +9,15 @@
 {{#if isLoading}}
   {{partial 'is_loading'}}
 {{/if}}
+
+<div class="events-list-header">
+  Overdue
+</div>
+{{! TODO: Add overdue items each loop here. Empty class is shown}}
+<div class="ember-view events-list-item">
+  <i class="ss-symbolicons-block ss-smile"></i> No overdue items
+</div>
+
 {{#unless selectedDay.date}}
   {{#each day in days}}
     <div class="events-list-header">

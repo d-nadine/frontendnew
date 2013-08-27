@@ -34,6 +34,9 @@
 
       {{#if isEditable}}
         <div class="form-row form-buttons">
+          {{#if showAddAction}}
+            {{partial 'add_action'}}
+          {{/if}}
           <div class="pull-right">
             <button class="btn btn-primary" type="submit" {{action submit}}>Save</button>
           </div>
