@@ -21,6 +21,7 @@ Radium.EmailForm = Radium.Form.extend
     message: @get('message')
     sentAt: Ember.DateTime.create()
     to: @get('to').map (person) =>
+      debugger
       person.get('email') || person.get('primaryEmail.value')
 
     cc: @get('cc').map (person) =>

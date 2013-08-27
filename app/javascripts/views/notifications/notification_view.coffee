@@ -4,3 +4,4 @@ Radium.NotificationView = Radium.View.extend
 Radium.NotificationsAssignTodoView = Radium.NotificationView.extend()
 Radium.NotificationsAssignDealView = Radium.NotificationView.extend()
 Radium.NotificationsAssignContactView = Radium.NotificationView.extend()
+Radium.NotificationsLeadEmailView = Radium.NotificationView.extend()

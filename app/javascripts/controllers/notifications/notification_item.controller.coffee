@@ -10,3 +10,5 @@ Radium.NotificationsAssignContactController = Radium.NotificationsAssignControll
 Radium.NotificationsAssignDealController = Radium.NotificationsAssignController.extend()
 
 Radium.NotificationsAssignTodoController = Radium.NotificationsAssignController.extend()
+
+Radium.NotificationsLeadEmailController = Radium.NotificationsAssignController.extend()

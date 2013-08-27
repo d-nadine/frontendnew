@@ -22,7 +22,8 @@ Radium.Notification = Radium.Model.extend
         @get('_referenceTodo') ||
         @get('_referenceCall') ||
         @get('_referenceMeeting')
-  ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting')
+        @get('_referenceEmail')
+  ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceEmail')
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
@@ -33,3 +34,4 @@ Radium.Notification = Radium.Model.extend
   _referenceTodo: DS.belongsTo('Radium.Todo')
   _referenceCall: DS.belongsTo('Radium.Call')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
+  _referenceEmail: DS.belongsTo('Radium.Email')
