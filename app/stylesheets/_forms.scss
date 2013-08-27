@@ -150,6 +150,11 @@
   top: 3px;
   position: relative;
   color: $lightness;
+
+  i {
+    position: relative;
+    top: 2px;
+  }
 }
 
 .field-group-input {
