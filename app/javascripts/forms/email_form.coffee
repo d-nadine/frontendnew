@@ -21,13 +21,13 @@ Radium.EmailForm = Radium.Form.extend
     message: @get('message')
     sentAt: Ember.DateTime.create()
     to: @get('to').map (person) =>
-      person.get('email') || person.get('primaryEmail.value')
+      person.get('email')
 
     cc: @get('cc').map (person) =>
-      person.get('email') || person.get('primaryEmail.value')
+      person.get('email')
 
     bcc: @get('bcc').map (person) =>
-      person.get('email') || person.get('primaryEmail.value')
+      person.get('email')
   ).property().volatile()
 
   isValid: ( ->

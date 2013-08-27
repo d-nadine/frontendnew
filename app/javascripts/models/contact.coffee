@@ -55,7 +55,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryAddress: Radium.computed.primary 'addresses'
 
   displayName: ( ->
-    @get('name') || @get('primaryEmail') || @get('primaryPhone')
+    @get('name') || @get('primaryEmail.value') || @get('primaryPhone.value')
   ).property('name', 'primaryEmail', 'primaryPhone')
 
   nameWithCompany: ( ->
