@@ -148,9 +148,13 @@ $calendar-off: #d8d9d9;
     background-color: $dark-background;
   }
 
+  .is-today {
+    border: 1px solid #008fe5;
+  }
+
+  .is-today,
   .is-selected-date {
     background-color: $calendar-active-bg;
-    border: 1px solid #008fe5;
 
     .btn-slab {
       color: darken($calendar-active, 20%);

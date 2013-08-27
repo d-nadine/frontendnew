@@ -46,10 +46,14 @@
     {{#each weeks}}
       <tr>
         {{#each calendarDay in this itemController="calendarDayItem"}}
-          <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isSelectedDate :day"}}>
+          <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday calendarDay.isSelectedDate :day"}}>
             <div class="wrapper">
               <span class="date">
-                {{calendarDay.day}}
+                {{#if calendarDay.isToday}}
+                  Today
+                {{else}}
+                  {{calendarDay.day}}
+                {{/if}}
               </span>
 
               <ul>
