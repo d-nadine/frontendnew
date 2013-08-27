@@ -186,7 +186,7 @@ Radium.AutocompleteView = Radium.View.extend
              else
                email
 
-      name = if result.get('person').constructor == Radium.User && result.get('id') == currentUser.get('id')
+      name = if !result.get('isExternal') && result.get('person').constructor == Radium.User && result.get('id') == currentUser.get('id')
                 "#{name} (Me)"
              else
                name

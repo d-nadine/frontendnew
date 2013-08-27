@@ -13,3 +13,7 @@ Radium.AutocompleteItem = Radium.Model.extend
   _personContact: DS.belongsTo('Radium.Contact')
   _personUser: DS.belongsTo('Radium.User')
   _personCompany: DS.belongsTo('Radium.Company')
+
+  isExternal: ( ->
+    Ember.isEmpty(@get('person'))
+  ).property('person')
