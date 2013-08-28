@@ -14,3 +14,9 @@ Ember.Application.initializer
   after: 'store'
   initialize: (container, application) ->
     Ember.$.cookie 'token', 'development'
+
+Ember.Application.initializer
+  name: 'stripePublicKey'
+  after: 'store'
+  initialize: (container, application) ->
+    Stripe.setPublishableKey('pk_test_fcvBFet4q62tftqiRZntwafx')

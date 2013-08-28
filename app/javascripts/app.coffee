@@ -37,9 +37,6 @@ Radium = Em.Application.createWithMixins
     , 200
   ).observes('notifyCount')
 
-  ready: ->
-    Stripe.setPublishableKey('pk_test_fcvBFet4q62tftqiRZntwafx')
-
 window.Radium = Radium
 
 Radium.deferReadiness()

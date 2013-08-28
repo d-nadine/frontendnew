@@ -21,6 +21,7 @@ Radium.SettingsBillingView = Radium.View.extend
         controller.set 'token', response.id
         controller.update()
 
+    # test credit card number #4242424242424242
     Stripe.card.createToken
       number: $('#card-number').val(),
       cvc: $('#card-cvc').val(),

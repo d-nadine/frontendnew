@@ -42,7 +42,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     account.set('billingInfo.vat', model.get('vat'))
 
     account.one 'didUpdate', =>
-      @send 'flashSuccess', 'Your billing information have been updated.'
+      @send 'flashSuccess', 'Your billing information has been updated.'
 
     account.one 'becameError', (result) =>
       @send 'flashError', result
