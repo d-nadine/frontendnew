@@ -1,7 +1,7 @@
 <form class="form-horizontal" {{action "updateBilling" on="submit"}}>
   <fieldset>
     <legend>Billing Information</legend>
-    {{#if isUpdatingBilling}}
+    {{#if account.isSaving}}
       <div class="alert alert-info">
         <h4 class="text-center text-info">Updating billing...</h4>
       </div>
@@ -10,28 +10,28 @@
       <div class="control-group">
         <label for="organizationName" class="control-label">Organization Name</label>
         <div class="controls">
-          <input type="text" id="organizationName" class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name.">
+          {{view view.organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
         </div>
       </div>
 
       <div class="control-group">
         <label for="billingEmail" class="control-label">Billing Email</label>
         <div class="controls">
-          <input type="text" id="billingEmail" class="input-block-level" placeholder="Email address where the receipts are sent to">
+          {{view view.billingInfoView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
         </div>
       </div>
 
       <div class="control-group">
         <label for="yourReference" class="control-label">Your Reference</label>
         <div class="controls">
-          <input type="text" id="yourReference" class="input-block-level" placeholder="Your internal reference shown on the receipts.">
+          {{input type="text" value=reference class="input-block-level" placeholder="Your internal reference shown on the receipts."}}
         </div>
       </div>
 
       <div class="control-group">
         <label for="phoneNumber" class="control-label">Phone Number</label>
         <div class="controls">
-          <input type="text" id="phoneNumber" class="input-large">
+          {{input type="text" value=phone class="input-label"}}
         </div>
       </div>
 
@@ -47,7 +47,7 @@
       <div class="control-group">
         <label for="billingEmail" class="control-label">VAT ID</label>
         <div class="controls">
-          <input type="text" id="billingEmail" class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID">
+          {{input type="text" value=vat class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID"}}
         </div>
       </div>
 
@@ -65,8 +65,8 @@
         </div>
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button class="btn" {{action "cancel"}}>Cancel</button>
+        <button type="submit" class="btn btn-primary" {{action update}} {{bindAttr disabled=account.isSaving}}>Save</button>
+        <button class="btn" {{action "cancel"}} {{bindAttr disabled=account.isSaving}}>Cancel</button>
       </div>
     </fieldset>
   {{/if}}

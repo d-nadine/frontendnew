@@ -1,6 +1,6 @@
 Radium.SettingsBillingRoute = Radium.Route.extend
   model: ->
-    Radium.SubscriptionPlan.find({})
+    @controllerFor('account').get('model.billingInfo')
 
   # FIXME: currentPlan needs set on account in API
   # setupController: (controller, models) ->

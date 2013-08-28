@@ -21,7 +21,7 @@ Radium.Notification = Radium.Model.extend
         @get('_referenceInvitation') ||
         @get('_referenceTodo') ||
         @get('_referenceCall') ||
-        @get('_referenceMeeting')
+        @get('_referenceMeeting') ||
         @get('_referenceEmail')
   ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceEmail')
   _referenceContact: DS.belongsTo('Radium.Contact')

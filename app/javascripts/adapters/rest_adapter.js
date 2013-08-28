@@ -145,6 +145,7 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 
 Radium.RESTAdapter.map('Radium.Account', {
   workflow: {embedded: 'always'},
+  billingInfo: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.Workflow', {

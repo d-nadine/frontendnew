@@ -123,6 +123,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.Deal.find({})
 
   setupController: (controller, deals) ->
+    @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()
     @controllerFor('contacts').set 'model', Radium.Contact.find()
