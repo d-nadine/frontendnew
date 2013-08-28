@@ -2,7 +2,9 @@
   <li class="notification-item notification-item-top">
     <div class="notification-item-content">
       <div class="notification-item-header">
-        {{partial "shared/close_drawer"}}
+        <button class="btn btn-link btn-close pull-right" {{action toggleNotifications}}>
+          <i class="ss-standard ss-delete"></i>
+        </button>
         <div>
           <h5>Notifications</h5>
         </div>
