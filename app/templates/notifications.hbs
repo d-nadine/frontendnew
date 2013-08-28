@@ -1,21 +1,17 @@
 <ul class="unstyled notifications-list">
   <li class="notification-item notification-item-top">
     <div class="notification-item-content">
-      <div class="notifications-list-close-btn">
-        <a href="#" class="btn btn-round" {{action close target="view"}}>
-          <i class="ss-standard ss-navigateleft"></i>
-        </a>
-      </div>
       <div class="notification-item-header">
+        {{partial "shared/close_drawer"}}
         <div>
-          <h3>Notifications</h3>
+          <h5>Notifications</h5>
         </div>
       </div>
       {{#if length}}
         <div class="notification-item-footer">
           <div class="clearfix pull-right">
             <!--<button class="btn">Snooze All</button>-->
-            <button class="btn" {{action deleteAllNotifications}}>Dismiss All</button>
+            <button class="btn btn-small" {{action deleteAllNotifications}}>Dismiss All</button>
           </div>
         </div>
       {{/if}}
@@ -32,7 +28,7 @@
       No notifications
     </div>
   {{/each}}
-  <!--  
+  <!--
   <li class="notification-item">
     <a href="#" class="notification-item-content">
       <div class="notification-item-header">

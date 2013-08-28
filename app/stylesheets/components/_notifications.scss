@@ -15,10 +15,7 @@
 }
 
 .notification-item-top {
-  color: #000;
-  background-color: #fff;
-
-  h3 {
+  h5 {
     margin: 0 0 10px;
   }
 }
@@ -34,11 +31,14 @@
 
   &:hover {
     text-decoration: none;
-    background-color: rgba(white, 0.15);
+    color: #000;
+    background-color: #fff;
+    text-shadow: none;
 
     strong,
-    .btn-link {
-      color: darken(white, 5%);
+    .btn-link,
+    a {
+      color: $link;
     }
   }
 }

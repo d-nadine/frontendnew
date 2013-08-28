@@ -114,6 +114,24 @@ $btn-primary : #007cdd;
   }
 }
 
+.btn-close {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  line-height: 8px;
+  vertical-align: text-top;
+  text-shadow: none;
+  text-align: center;
+  color: #4b4b4b;
+  background: #fff;
+  @include border-radius(20px);
+
+  i {
+    font-size: 9px;
+    top: 1px;
+  }
+}
+
 .btn-primary {
   border-color: #0082df;
   color: #fff;
