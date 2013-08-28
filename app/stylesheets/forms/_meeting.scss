@@ -189,7 +189,12 @@
   }
 
   .autocomplete {
+    width: 70%;
     display: inline-block;
+
+    .as-selection-item {
+      display: none;
+    }
   }
 }
 
@@ -212,6 +217,16 @@
     font-size: 10px;
     font-weight: bold;
     line-height: 12px;
+    position: relative;
+  }
+
+  .btn-close {
+    position: absolute;
+    font-size: 14px;
+    line-height: 14px;
+    top: -5px;
+    right: 5px;
+    border: 1px solid #333;
   }
 
   img {
