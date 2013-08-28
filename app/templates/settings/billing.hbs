@@ -3,6 +3,14 @@
   <h3>Initech, Inc.</h3>
 </div>
 
+{{#unless hasToken}}
+  <div class="row">
+    <div class="alert">
+      You need to update your details with a valid credit card to upgrade your account.
+    </div>
+  </div>
+{{/unless}}
+
 {{#if isNewCard}}
   {{partial 'settings/billing_form'}}
 {{else}}
@@ -18,7 +26,7 @@
 
   <div class="row">
 
-    {{#each subscriptionPlans}}
+    {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
     <div class="span3">
       <ul {{bindAttr class=":pricing-table isCurrent"}}>
         <li class="title">{{unbound capitalize name}}</li>
@@ -27,7 +35,7 @@
         <li class="price">{{unbound currency amount}}/User</li>
         <li class="cta-button">
           <button
-            {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="isCurrent"}}
+            {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="notSelectable"}}
             {{action "upgradePlan" this}}>
             {{#if isCurrent}}
               Your plan

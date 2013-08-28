@@ -34,6 +34,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
     # FIXME: Hack to stop a PUT on embedded object
     account.set('billingInfo.organisation', model.get('organisation'))
+    account.set('billingInfo.token', model.get('token'))
     account.set('billingInfo.billingEmail', model.get('billingEmail'))
     account.set('billingInfo.reference', model.get('reference'))
     account.set('billingInfo.phone', model.get('phone'))
