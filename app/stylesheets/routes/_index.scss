@@ -1,0 +1,90 @@
+.dashboard {
+  .main-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+.dashboard-header {
+  margin: 50px 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #333;
+}
+
+.dashboard-grid {
+  .dashboard-grid-item:nth-child(4n+1) {
+    margin-left: 0;
+    clear: left;
+  }
+}
+
+.dashboard-grid-item {
+  height: 244px;
+  margin: 0 0 8px 8px;
+  float: left;
+}
+
+.dashboard-grid-item-profile .dashboard-grid-link {
+  color: #fff;
+  background: image-url('default_avatars/huge.png') no-repeat center center;
+}
+
+.dashboard-grid-link {
+  width: 244px;
+  height: 244px;
+  padding: 60px 20px 50px;
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  border: 1px solid #bfbfbf;
+  border: {
+    top-color: #d0d0d0;
+    right-color: #d1d1d1;
+    left-color: #d1d1d1;
+  }
+  color: #787878;
+  background: #e4e4e4;
+  @include border-radius(5px);
+  @include box-sizing(border-box);
+  @include box-shadow(
+    inset 0 1px 5px rgba(white, 0.25),
+    0 1px 1px rgba(black, 0.1)
+  );
+
+  &:hover {
+    h4 {
+      text-decoration: underline;
+      color: $link;
+    }
+
+    .dashboard-grid-icon {
+      color: darken($link, 5%);
+      @include transform(scale(1.1), translateY(-10px));
+    }
+  }
+}
+
+.dashboard-grid-icon {
+  height: 68px;
+  line-height: 75px;
+  text-shadow: 0 -1px 0 darken($link, 20%);
+  color: $link;
+  @include transition(transform 0.25s, color 0.35s);
+  @include transform(scale(1), translateY(0));
+
+  i {
+    font-size: 68px;
+  }
+}
+
+.dashboard-grid-label {
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+
+  h4 {
+    margin: 0;
+  }
+}

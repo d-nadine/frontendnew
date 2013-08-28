@@ -1,0 +1,1 @@
+Radium.IndexRoute = Radium.Route.extend()
