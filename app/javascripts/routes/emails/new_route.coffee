@@ -1,5 +1,5 @@
 Radium.EmailsNewRoute = Ember.Route.extend
-  events: 
+  events:
     sendEmail: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')
@@ -22,7 +22,7 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       email.one 'becameError', =>
         form.set 'isSending', false
-        @send 'flashError', 'An error has occurred and the eamil has not been sent'
+        @send 'flashError', 'An error has occurred and the email has not been sent'
 
       @store.commit()
 

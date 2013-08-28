@@ -17,6 +17,8 @@ $btn-primary : #007cdd;
     bottom-color: #8c8c8c;
     left-color: #a3a3a3;
   }
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   position: relative;
   color: #242424;
   @include border-radius(3px);

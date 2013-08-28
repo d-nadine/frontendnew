@@ -102,7 +102,7 @@ $item-border: #dddddd;
     background-color: #fff;
 
     .message-item-content {
-      border-color: $active-state;
+      border-color: $blue;
     }
   }
 
@@ -214,13 +214,15 @@ $item-border: #dddddd;
     background: #787878;
     @include transition(color 0.25s);
 
-    &:hover {
-      background: #bababa;
+    &:hover,
+    &.is-selected {
+      background: #fff;
       color: #000;
-      text-shadow: 0 -1px 0px rgba(black, 0.5);
+      text-shadow: none;
 
       i {
         color: $blue;
+        text-shadow: 0 -1px 0px darken($blue, 15%);
       }
     }
 
@@ -241,20 +243,26 @@ $item-border: #dddddd;
   text-align: left;
   background: #4b4b4b;
 
+  p {
+    margin: 0;
+    line-height: 50px;
+  }
+
   .btn-close {
-    background: #FFF;
+    margin: 16px 0 0;
+    background: #fff;
     border-radius: 20px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     padding: 0;
-    line-height: 10px;
+    line-height: 8px;
     vertical-align: text-top;
-    margin: 5px 0 0;
     text-shadow: none;
+    text-align: center;
     color: #4b4b4b;
 
     i {
-      font-size: 12px;
+      font-size: 9px;
       top: 1px;
     }
   }
