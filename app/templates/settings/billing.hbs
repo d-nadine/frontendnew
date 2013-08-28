@@ -21,9 +21,10 @@
     {{#each controller}}
     <div class="span3">
       <ul {{bindAttr class=":pricing-table isCurrent"}}>
-        <li class="title">{{unbound title}}</li>
+        <li class="title">{{unbound capitalize name}}</li>
         <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
-        <li class="price">${{unbound price}}/User</li>
+        <li class="price">{{totalUsers}} Users</i>
+        <li class="price">{{unbound currency amount}}/User</li>
         <li class="cta-button">
           <button
             {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="isCurrent"}}
