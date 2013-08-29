@@ -8,5 +8,5 @@ Radium.ActivitiesSystemController = Ember.ObjectController.extend
 
   icon: (->
     switch @get('event')
-      when 'lead_received' then 'new'
+      when 'lead_received' then 'user'
   ).property('event')

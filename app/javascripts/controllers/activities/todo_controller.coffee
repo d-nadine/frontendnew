@@ -7,8 +7,8 @@ Radium.ActivitiesTodoController = Radium.ObjectController.extend
 
   icon: (->
     switch @get('event')
-      when 'finish' then 'todo'
-      when 'create' then 'switch'
+      when 'finish' then 'check'
+      when 'create' then 'transfer'
   ).property('event')
 
   eventName: (->

@@ -6,4 +6,4 @@ Radium.ActivitiesCallController = Radium.ObjectController.extend
   # FIXME: change this when call model is updated
   contact: Ember.computed.alias 'reference.reference'
 
-  icon: 'call'
+  icon: 'phone'

@@ -19,15 +19,15 @@ Radium.ActivitiesDealController = Radium.ObjectController.extend Radium.Activity
 
   icon: (->
     switch @get('event')
-      when 'create' then 'create'
+      when 'create' then 'plus'
       when 'delete' then 'delete'
-      when 'assign' then 'switch'
+      when 'assign' then 'transfer'
       when 'status_change' then 'chart'
-      when 'close' then 'money'
-      when 'lose' then 'money'
-      when 'pay' then 'money'
-      when 'publish' then 'quill'
-      when 'reopen' then 'spinner'
+      when 'close' then 'dollarsign'
+      when 'lose' then 'dollarsign'
+      when 'pay' then 'dollarsign'
+      when 'publish' then 'write'
+      when 'reopen' then 'plus'
   ).property('event')
 
   eventName: (->

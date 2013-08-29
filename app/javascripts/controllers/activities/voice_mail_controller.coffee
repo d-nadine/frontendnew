@@ -3,4 +3,4 @@ Radium.ActivitiesVoiceMailController = Radium.ObjectController.extend
   to: Ember.computed.alias 'voiceMail.to'
   from: Ember.computed.alias 'voiceMail.from'
 
-  icon: 'voice-mail'
+  icon: 'phone'

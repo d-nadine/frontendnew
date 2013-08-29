@@ -13,10 +13,10 @@ Radium.ActivitiesContactController = Radium.ObjectController.extend Radium.Activ
 
   icon: (->
     switch @get('event')
-      when 'create' then 'contact-plus'
-      when 'update' then 'edit'
-      when 'assign' then 'switch'
-      when 'delete' then 'contact-cancel'
+      when 'create' then 'star'
+      when 'update' then 'write'
+      when 'assign' then 'transfer'
+      when 'delete' then 'delete'
       when 'status_change' then 'chart'
-      when 'primary_contact' then 'office'
+      when 'primary_contact' then 'buildings'
   ).property('event')

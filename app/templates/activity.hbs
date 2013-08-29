@@ -1,5 +1,7 @@
-<div class="span1"><i class="icon-{{unbound icon}} event"></i></div>
-<div class="span5 headline">
+<div class="pull-left activity-icon">
+  <i class="ss-standard ss-{{unbound icon}} event"></i>
+</div>
+<div class="clearfix activity-content">
+  <div class="pull-right timestamp">{{ageInWords time}}</div>
   {{yield}}
 </div>
-<div class="span1 timestamp">{{ageInWords time}}</div>

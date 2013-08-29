@@ -8,7 +8,7 @@ Radium.ActivitiesCompanyController = Radium.ObjectController.extend
 
   icon: (->
     switch @get('isAssign')
-      when 'assign' then 'switch'
-      when 'update' then 'edit'
-      else 'office'
+      when 'assign' then 'buildings'
+      when 'update' then 'write'
+      else 'notebook'
   ).property('event')

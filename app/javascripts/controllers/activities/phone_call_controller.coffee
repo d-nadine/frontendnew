@@ -9,8 +9,8 @@ Radium.ActivitiesPhoneCallController = Radium.ObjectController.extend
 
   icon: (->
     switch @get('event')
-      when 'finish' then 'call'
-      when 'miss' then 'missed-call'
+      when 'finish' then 'phone'
+      when 'miss' then 'phone-disabled'
   ).property('event')
 
   eventName: (->

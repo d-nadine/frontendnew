@@ -3,4 +3,4 @@ Radium.ActivitiesDiscussionController = Radium.ObjectController.extend
   poster: Ember.computed.alias('reference.user')
   participants: Ember.computed.alias('reference.users')
 
-  icon: 'discussion'
+  icon: 'chat'
