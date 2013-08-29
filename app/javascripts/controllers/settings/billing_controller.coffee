@@ -24,10 +24,13 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @get('currentPlan.totalUsers')
   ).property('currentPlan.totalUsers')
 
+  hasGatewayAccount: ( ->
+    @get('account.billingInfo.gatewayIdentifier')
+  ).property('account.billingInfo.gatewayIdentifier')
+
   activeCard: ( ->
-    return unless @get('gatewayIdentifier')
     Radium.ActiveCard.find @get('account.id')
-  ).property('gatewayIdentifier')
+  ).property('account.billingInfo.gatewayIdentifier', 'hasGatewayAccount')
 
   country: ( (key, value) ->
     if arguments.length == 2 && value != undefined
@@ -40,7 +43,9 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   ).property('model.country')
 
   update: ->
-    return unless @hasBufferedChanges
+    unless @hasBufferedChanges
+      @send 'flashSuccess', 'Your billing information has been updated.'
+      return
 
     @applyBufferedChanges()
 
@@ -63,7 +68,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     account.set('billingInfo.vat', model.get('vat'))
     account.set('billingInfo.country', model.get('country'))
 
-    account.one 'didUpdate', =>
+    account.one 'didUpdate', (result) =>
       @send 'flashSuccess', 'Your billing information has been updated.'
 
     account.one 'becameError', (result) =>
@@ -74,7 +79,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @send 'flashError', result
       result.reset()
 
-    @get('store').commit()
+    @get('account.transaction').commit()
 
   cancel: ->
     @discardBufferedChanges()

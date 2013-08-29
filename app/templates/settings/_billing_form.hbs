@@ -92,9 +92,9 @@
       {{/unless}}
       <div class="form-actions">
         {{#if hasGatewayAccount}}
-          <button type="submit" class="btn btn-primary" {{action update}} {{bindAttr disabled=account.isSaving}}>Save</button>
+          <button type="submit" class="btn btn-primary" {{action update}} {{bindAttr disabled="account.isSaving"}}>Save</button>
         {{else}}
-          <button type="submit" class="btn btn-primary" {{action createTokenAndSubmit target="view"}} {{bindAttr disabled=account.isSaving}}>Save</button>
+          <button type="submit" class="btn btn-primary" {{action createTokenAndSubmit target="view"}} {{bindAttr disabled="account.isSaving"}}>Save</button>
         {{/if}}
         <button class="btn" {{action "cancel"}} {{bindAttr disabled=account.isSaving}}>Cancel</button>
       </div>
