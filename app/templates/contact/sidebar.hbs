@@ -15,21 +15,18 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <div class="company-website">
-        {{render "sidebar/company_website" model.company}}
-      </div>
-      <div class="email">
-        {{render "sidebar/email_addresses" model}}
-      </div>
-      <div class="phone">
-        {{render "sidebar/phone_numbers" model}}
-      </div>
-      <div class="show-more">
-        <a href="#" class="btn" {{action showExtraContactDetail bubbles=false target="view"}}>
-          <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
-        </a>
-      </div>
-
+      {{render "sidebar/company_website" model.company}}
+    </div>
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/phone' model}}
+    </div>
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/email' model}}
+    </div>
+    <div class="show-more">
+      <a href="#" class="btn btn-link btn-block" {{action showExtraContactDetail bubbles=false target="view"}}>
+        <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
+      </a>
     </div>
   </div>
 
@@ -45,7 +42,9 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6>Tags</h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-target"></i> Tags
+      </h6>
     </div>
     <div class="sidebar-panel-content">
       <div class="tag-picker">
@@ -56,7 +55,9 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6>Total Deals Won</h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-dollarsign"></i> Total Deals Won
+      </h6>
     </div>
     <div class="sidebar-panel-content">
       <div class="deals-won">
@@ -67,7 +68,9 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6>Open Deals <span class="mark">{{deals.length}}</span></h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-dollarsign"></i> Open Deals <span class="mark">{{deals.length}}</span>
+      </h6>
     </div>
     <div class="sidebar-panel-content">
       <div class="open-deals">

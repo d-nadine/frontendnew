@@ -1,7 +1,9 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
     <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-    <h6>Assigned To</h6>
+    <h6 class="sidebar-panel-title">
+      <i class="ss-standard ss-view"></i> Assigned To
+    </h6>
   </div>
   <div class="sidebar-panel-content">
     <div class="assigned-to control-group">
@@ -21,18 +23,14 @@
           {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
           <span class="title muted">{{title}}</span>
         </p>
-        <div class="source">
-          <div>
-            <div><label class="control-label">Source</label></div>
-            <div>{{source}}</div>
-          </div>
-        </div>
       {{/if}}
       <div class="createdAt">
-        <div>
-          <div><label class="control-label">Client Since</label></div>
-          <div>{{formatDateTime createdAt format="date"}}</div>
-        </div>
+        <dl class="dl-horizontal">
+          <dt>Source</dt>
+          <dd>{{source}}</dd>
+          <dt>Client Since</dt>
+          <dd>{{formatDateTime createdAt format="date"}}</dd>
+        </dl>
       </div>
     </div>
   </div>

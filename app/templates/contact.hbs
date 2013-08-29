@@ -1,4 +1,3 @@
-<h1>Radium.Contact Route</h1>
 {{#if isPersonal}}
   <div class="alert alert-info">
     This contact is a personal conact.  Would you like to add this contact to Radium?
@@ -7,9 +6,10 @@
     <button {{action makeContactPublic this}} {{bindAttr disabled=isSaving}} class="btn btn-block btn-large btn-info">ADD CONTACT TO RADIUM</button>
   </div>
 {{else}}
-  {{render "form_box" formBox}}
-
-  {{render "task_list" tasks}}
+  <div class="tasks-content">
+    {{render "form_box" formBox}}
+    {{render "task_list" tasks}}
+  </div>
 
   {{render "feed" activities}}
 {{/if}}

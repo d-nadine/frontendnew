@@ -178,6 +178,39 @@
   }
 }
 
+.sidebar-panel-header {
+  i.ss-write {
+    margin: 5px 10px 0 0;
+    color: $link;
+  }
+}
+
+.contact-types-list {
+  margin: 0;
+
+  dt {
+    width: 90px;
+    text-align: left;
+
+    i {
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  dd {
+    margin-left: 95px;
+
+    .field {
+      margin: 0;
+    }
+  }
+}
+
+.btn-follow {
+  margin: 10px 0 0;
+}
+
 .user-avatar {
   margin-right: 20px;
 }

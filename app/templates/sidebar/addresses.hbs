@@ -1,12 +1,17 @@
-{{#if isEditing}}
-  <div>
-    {{render 'multiple/address' form.addresses}}
-  </div>
-{{else}}
-  <h2>Address <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-  {{#if primaryAddress}}
-    {{partial 'shared/address'}}
-  {{else}}
-    <span class="empty">Add address here</span>
-  {{/if}}
-{{/if}}
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-buildings muted"></i> Address</dt>
+  <dd>
+    {{#if isEditing}}
+      <div>
+        {{render 'multiple/address' form.addresses}}
+      </div>
+    {{else}}
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#if primaryAddress}}
+        {{partial 'shared/address'}}
+      {{else}}
+        <span class="empty">Add address here</span>
+      {{/if}}
+    {{/if}}
+  </dd>
+</dl>

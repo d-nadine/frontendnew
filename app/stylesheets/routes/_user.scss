@@ -125,37 +125,3 @@
     }
   }
 }
-
-
-.sidebar-panel-title {
-  i {
-    margin-right: 10px;
-    color: $link;
-  }
-}
-
-.contact-types-list {
-  margin: 0;
-
-  dt {
-    width: 70px;
-    text-align: left;
-
-    i {
-      position: relative;
-      top: 1px;
-    }
-  }
-
-  dd {
-    margin-left: 80px;
-
-    .field {
-      margin: 0;
-    }
-  }
-}
-
-.btn-follow {
-  margin: 10px 0 0;
-}

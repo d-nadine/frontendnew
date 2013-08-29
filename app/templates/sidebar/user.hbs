@@ -1,20 +1,25 @@
-<h2>Assigned To</h2>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <h6 class="sidebar-panel-title">
+      <i class="ss-standard ss-view"></i> Assigned To
+    </h6>
+  </div>
+  <div class="sidebar-panel-content">
+    {{#if isEditing}}
+      {{#linkTo "user" user}}
+        {{avatar this class="img-polaroid"}}
+      {{/linkTo}}
+      {{view view.userPicker class="field"}}
+    {{else}}
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#linkTo "user" user}}
+        {{avatar this class="img-polaroid"}}
+      {{/linkTo}}
 
-<div class="assigned-to">
-  {{#if isEditing}}
-    {{#linkTo "user" user}}
-      {{avatar this class="img-polaroid"}}
-    {{/linkTo}}
-    {{view view.userPicker class="field"}}
-  {{else}}
-    <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-    {{#linkTo "user" user}}
-      {{avatar this class="img-polaroid"}}
-    {{/linkTo}}
-
-    <p>
-      {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
-      <span class="title muted">{{user.title}}</span>
-    </p>
-  {{/if}}
+      <p>
+        {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
+        <span class="title muted">{{user.title}}</span>
+      </p>
+    {{/if}}
+  </div>
 </div>

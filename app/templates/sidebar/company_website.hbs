@@ -1,21 +1,26 @@
-{{#if model}}
-  {{#if isEditing}}
-    <div>
-      <i class="ss-standard ss-cloud"></i>{{input type="text" value=form.website class="field" placeholder="Add company website"}}
-    </div>
-  {{else}}
-    <div class="not-editing">
-      {{#if company.website}}
-        <a href="{{unbound company.website}}" target="_blank"><i class="ss-standard ss-cloud"></i>{{company.website}}</a>
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-cloud muted"></i> Website</dt>
+  <dd>
+    {{#if model}}
+      {{#if isEditing}}
+        <div>
+          {{input type="text" value=form.website class="field" placeholder="Add company website"}}
+        </div>
       {{else}}
-        <i class="ss-standard ss-cloud"></i><span class="empty">Add company website</span>
+        <div class="pull-right">
+          <i class="ss-standard ss-write" {{action toggleEditor target=view bubbles=false}}></i>
+        </div>
+        <div class="not-editing">
+          {{#if company.website}}
+            <a href="{{unbound company.website}}" target="_blank">{{company.website}}</a>
+          {{else}}
+            <span class="empty">Add company website</span>
+          {{/if}}
+        </div>
       {{/if}}
-    </div>
-    <div>
-      <i class="ss-standard ss-write" {{action toggleEditor target=view bubbles=false}}></i>
-    </div>
-  {{/if}}
-{{else}}
-  <i class="ss-standard ss-cloud"></i><span class="empty">Please assign a company.</span>
-{{/if}}
+    {{else}}
+      <span class="empty">Please assign a company.</span>
+    {{/if}}
 
+  </dd>
+</dl>

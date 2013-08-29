@@ -1,48 +1,72 @@
 <form class="form">
-  <div class="meta">
-    <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
-    {{render 'sidebar/name' model}}
-
-    {{render "sidebar/company_website" model}}
-  </div>
-  <hr class="first"/>
-  {{#linkTo "leads.fromCompany" this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
-  {{#if contacts.length}}
-    <hr />
-    <div class="company-type">
-      <h2>{{maxContactsStatus}}</h2>
-    </div> 
-    <hr />
-  {{/if}}
-  <div class="tag-picker">
-    <div class="tag-label">
-      <h2 class="blue">Tags</h2>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <div class="user-avatar pull-left">
+        <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
+      </div>
+      <div class="clearfix">
+        <div class="header">
+          {{render 'sidebar/name' model}}
+        </div>
+      </div>
     </div>
-    {{render 'sidebar/tags' model}}
-  </div>
-  <hr/>
-  <div class="about">
-    {{render 'sidebar/about' model}}
+    <div class="sidebar-panel-content">
+      {{render "sidebar/company_website" model}}
+    </div>
+    <div class="sidebar-panel-content">
+      {{render "sidebar/addresses" model}}
+    </div>
   </div>
 
-  <hr/>
+  {{render 'sidebar/about' model}}
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-users"></i> Contacts
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{#linkTo "leads.fromCompany" this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
+      {{#if contacts.length}}
+        <div class="company-type">
+          <h2>{{maxContactsStatus}}</h2>
+        </div>
+      {{/if}}
+    </div>
+  </div>
 
   {{render 'sidebar/user' model}}
 
-  <hr />
-
-  {{partial 'shared/add_files'}}
-
-  <hr/>
-
-  <div class="address">
-    {{render "sidebar/addresses" model}}
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-target"></i> Tags
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="tag-picker">
+        {{render 'sidebar/tags' model}}
+      </div>
+    </div>
   </div>
 
-  <hr/>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-attach"></i> Files
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{partial 'shared/add_files'}}
+    </div>
+  </div>
 
   {{partial 'shared/followers'}}
-  <hr/>
 
-  <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+    </div>
+  </div>
 </form>
