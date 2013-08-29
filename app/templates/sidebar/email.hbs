@@ -1,12 +1,15 @@
-{{#if isEditing}}
-  {{input type="email" value=form.email class="field"}}
-{{else}}
-  <div class="control-group">
-    <label class="control-label"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-    {{#if email}}
-      {{#linkTo "emails.mailTo" this}}<i class="ss-standard ss-mail"></i> {{email}}{{/linkTo}}
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-mail muted"></i> Email</dt>
+  <dd>
+    {{#if isEditing}}
+      {{input type="email" value=form.email class="field"}}
     {{else}}
-      <i class="ss-standard ss-mail"></i><span class="empty">Add email here</span>
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#if email}}
+        {{#linkTo "emails.mailTo" this}} {{email}}{{/linkTo}}
+      {{else}}
+        <i class="ss-standard ss-mail"></i><span class="empty">Add email here</span>
+       {{/if}}
     {{/if}}
-  </div>
-{{/if}}
+  </dd>
+</dl>

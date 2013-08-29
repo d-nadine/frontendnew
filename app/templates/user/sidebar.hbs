@@ -6,41 +6,23 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6>Contact</h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-navigate"></i> Contact
+      </h6>
     </div>
     <div class="sidebar-panel-content">
-      <ul class="unstyled">
-        <li class="email">
-          {{render 'sidebar/email' model}}
-        </li>
-        <li class="phone">
-          {{render 'sidebar/phone' model}}
-        </li>
-      </ul>
+      {{render 'sidebar/phone' model}}
+    </div>
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/email' model}}
     </div>
   </div>
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">My Assigned Contacts <span class="mark">{{contacts.length}}</span></h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{#if contacts.length}}
-        <div class="assigned-contacts">
-          {{#linkTo "addressbook.assigned" this}}
-            <span {{bindAttr class=":assigned-count :badge :pull-right contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
-            My Assigned Contacts
-          {{/linkTo}}
-        </div>
-      {{else}}
-        <p class="text-center">No contacts have been assigned.</p>
-      {{/if}}
-    </div>
-  </div>
-
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">Sales</h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-piechart"></i> Sales
+      </h6>
     </div>
     <div class="sidebar-panel-content">
       <div id="sales-goal">
@@ -94,11 +76,33 @@
     </div>
   </div>
 
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-users"></i> My Assigned Contacts <span class="mark">{{contacts.length}}</span>
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{#if contacts.length}}
+        <div class="assigned-contacts">
+          {{#linkTo "addressbook.assigned" this}}
+            <span {{bindAttr class=":assigned-count :badge :pull-right contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
+            My Assigned Contacts
+          {{/linkTo}}
+        </div>
+      {{else}}
+        <p class="text-center">No contacts have been assigned.</p>
+      {{/if}}
+    </div>
+  </div>
+
   {{partial 'shared/followers'}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">Following</h6>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-users"></i> Following
+      </h6>
     </div>
     <div class="sidebar-panel-content">
       <ul class="unstyled">

@@ -1,12 +1,15 @@
-{{#if isEditing}}
-  {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
-{{else}}
-  <div class="control-group">
-    <label class="control-label"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-    {{#if phone}}
-        <a href="tel:{{unbound phone}}"><i class="ss-standard ss-phone"></i>{{phone}}</a>
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-phone muted"></i> Phone</dt>
+  <dd>
+    {{#if isEditing}}
+      {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
     {{else}}
-      <i class="ss-standard ss-phone"></i> <span class="empty">Add phone here</span>
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#if phone}}
+          <a href="tel:{{unbound phone}}">{{phone}}</a>
+      {{else}}
+        <span class="empty">Add phone here</span>
+      {{/if}}
     {{/if}}
-  </div>
-{{/if}}
+  </dd>
+</dl>
