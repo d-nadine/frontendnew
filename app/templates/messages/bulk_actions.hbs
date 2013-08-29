@@ -1,13 +1,11 @@
 <div id="bulk-actions">
-  <div class="page-header upcase">
-    <button class="btn pull-right" {{action cancel}}>
-      Cancel
-    </button>
-
-    <button class="btn btn-danger pull-right" {{action confirmDeletion}}>
-      Delete
-    </button>
-
+  <div class="page-header">
+    <div class="pull-right">
+      <div class="btn-toolbar">
+        <button class="btn" {{action cancel}}>Cancel</button>
+        <button class="btn btn-primary" {{action confirmDeletion}}>Delete</button>
+      </div>
+    </div>
     <h3>Create Tasks from Selected Emails</h3>
   </div>
 

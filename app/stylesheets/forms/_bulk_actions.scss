@@ -1,3 +1,13 @@
+#bulk-actions {
+  .page-header {
+    margin-bottom: 0;
+
+    .btn-toolbar {
+      margin-top: 5px;
+    }
+  }
+}
+
 .addressbook-view,
 #pipeline-results {
   .assign, .change-status{
