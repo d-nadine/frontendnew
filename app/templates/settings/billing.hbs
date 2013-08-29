@@ -27,7 +27,6 @@
   </h2>
 
   <div class="row">
-
     {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
     <div class="span3">
       <ul {{bindAttr class=":pricing-table isCurrent"}}>
@@ -35,11 +34,11 @@
         <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
         <li class="price">{{totalUsers}} Users</i>
         <li class="price">{{unbound currency amount}}/User</li>
-        {{#unless isAdmin}}
+        {{#if isAdmin}}
           <li class="cta-button">
             <button
               {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="notSelectable"}}
-              {{action "upgradePlan" this}}>
+              {{action updateSubscription name}}>
               {{#if isCurrent}}
                 Your plan
               {{else}}
@@ -47,10 +46,9 @@
               {{/if}}
             </button>
           </li>
-        {{/unless}}
+        {{/if}}
       </ul>
     </div>
     {{/each}}
-
   </div>
 </div>

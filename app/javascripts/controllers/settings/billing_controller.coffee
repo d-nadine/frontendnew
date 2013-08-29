@@ -67,7 +67,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @send 'flashSuccess', 'Your billing information has been updated.'
 
     account.one 'becameError', (result) =>
-      @send 'flashError', result
+      @send 'flashError', "An error happened and you billing information could not be updated"
       result.reset() 
 
     account.one 'becameInvalid', (result) =>
@@ -79,10 +79,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   cancel: ->
     @discardBufferedChanges()
 
-  # currentPlan: (->
-  #   @get('content').findProperty('isCurrent', true)
-  # ).property('@each.isCurrent')
-
   updateBilling: ->
     @set('isUpdatingBilling', true)
 
@@ -92,7 +88,24 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         isNewCard: false
     , 1500)
 
-  upgradePlan: (model) ->
-    @get('content').setEach('isCurrent', false)
-    model.set('isCurrent', true)
-    @set('controllers.settings.currentPlan', model.get('id'))
+  updateSubscription: (subscription) ->
+    model = @get('model')
+
+    account = @get('account')
+
+    billingInfo = account.get('billingInfo')
+
+    account.set('billingInfo.subscription', subscription)
+
+    account.one 'didUpdate', =>
+      @send 'flashSuccess', "You are now on the #{subscription} plan"
+
+    account.one 'becameError', (result) =>
+      @send 'flashError', "An error has occurred and your subscription cannot be updated"
+      result.reset() 
+
+    account.one 'becameInvalid', (result) =>
+      @send 'flashError', result
+      result.reset()
+
+    @get('store').commit()
