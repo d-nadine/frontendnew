@@ -1,5 +1,5 @@
 Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
-  hasToken: Ember.computed.alias 'parentController.hasToken'
+  hasGatewayAccount: Ember.computed.alias 'parentController.hasGatewayAccount'
   notSelectable: ( ->
-    !@get('hasToken')
-  ).property('hasToken')
+    !@get('hasGatewayAccount')
+  ).property('hasGatewayAccount')

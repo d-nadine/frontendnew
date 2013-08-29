@@ -7,4 +7,4 @@ Radium.BillingInfo = Radium.Model.extend
   phone: DS.attr('string')
   country: DS.attr('string')
   vat: DS.attr('string')
-  hasToken: Ember.computed.bool 'token'
+  hasGatewayAccount: Ember.computed.bool 'gatewayIdentifier'

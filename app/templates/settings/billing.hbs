@@ -3,25 +3,27 @@
   <h3>Initech, Inc.</h3>
 </div>
 
-{{#unless hasToken}}
-  <div class="row">
-    <div class="alert">
-      You need to update your details with a valid credit card to upgrade your account.
+{{#if isAdmin}}
+  {{#unless hasGatewayAccount}}
+    <div class="row">
+      <div class="alert">
+        You need to update your details with a valid credit card to upgrade your account.
+      </div>
     </div>
-  </div>
-{{/unless}}
+  {{/unless}}
 
-{{#if isNewCard}}
-  {{partial 'settings/billing_form'}}
-{{else}}
-  <a href="#" class="btn" {{action "changeBilling"}}>Update Billing Info</a>
+  {{#if isNewCard}}
+    {{partial 'settings/billing_form'}}
+  {{else}}
+    <a href="#" class="btn" {{action "changeBilling"}}>Update Billing Info</a>
+  {{/if}}
 {{/if}}
 <div class="upgrade-plan">
   <div class="page-header">
     <h4>Upgrate Account</h4>
   </div>
   <h2 class="text-center">
-    {{controllers.users.length}}/{{controller.currentPlan.totalUsers}} Users to add users
+    {{controllers.users.length}}/{{controller.totalUsers}} Users to add users
   </h2>
 
   <div class="row">
@@ -33,17 +35,19 @@
         <li class="description">Manage your customers in a breathtakingly simple way. Radium is a CRM that doesn't get in the way of the way you work.</li>
         <li class="price">{{totalUsers}} Users</i>
         <li class="price">{{unbound currency amount}}/User</li>
-        <li class="cta-button">
-          <button
-            {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="notSelectable"}}
-            {{action "upgradePlan" this}}>
-            {{#if isCurrent}}
-              Your plan
-            {{else}}
-              Upgrade
-            {{/if}}
-          </button>
-        </li>
+        {{#unless isAdmin}}
+          <li class="cta-button">
+            <button
+              {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="notSelectable"}}
+              {{action "upgradePlan" this}}>
+              {{#if isCurrent}}
+                Your plan
+              {{else}}
+                Upgrade
+              {{/if}}
+            </button>
+          </li>
+        {{/unless}}
       </ul>
     </div>
     {{/each}}

@@ -6,7 +6,6 @@
         <h4 class="text-center text-info">Updating billing...</h4>
       </div>
     {{else}}
-      <p class="text-warning">You need to be admin to change the settings.</p>
       <div class="control-group">
         <label for="organizationName" class="control-label">Organization Name</label>
         <div class="controls">
@@ -38,9 +37,7 @@
       <div class="control-group">
         <label for="country" class="control-label">Country</label>
         <div class="controls">
-          <select id="country">
-            <option value=""></option>
-          </select>
+          {{view Ember.Select contentBinding="controller.controllers.countries" valueBinding="country"}}
         </div>
       </div>
 
@@ -51,19 +48,19 @@
         </div>
       </div>
 
-      {{#unless hasToken}}
-        <h4>Credit Card</h4>
+      <h4>Credit Card</h4>
+      {{#unless hasGatewayAccount}}
         <form id="card-form" method="POST">
           <div class="control-group">
             <label class="control-label">Card Number</label>
             <div class="controls">
-              <input id="card-number" type="text" size="20"/>
+              <input id="card-number" type="text" size="20" value="4242424242424242"/>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label">CVC</label>
             <div class="controls">
-              <input id="card-cvc" type="text" size="4" class="input-mini"/>
+              <input id="card-cvc" type="text" size="4" class="input-mini" value="111"/>
             </div>
           </div>
           <div class="control-group">
@@ -71,21 +68,36 @@
               <span>Expiration (MM/YYYY)</span>
             </label>
             <div class="controls">
-              <input id="card-expiry-month" type="text" size="2"  class="input-mini"/>
+              <input id="card-expiry-month" type="text" size="2"  class="input-mini" value="11"/>
               <span> / </span>
-              <input id="card-expiry-year" type="text" size="4" class="input-mini"/>
+              <input id="card-expiry-year" type="text" size="4" class="input-mini" value="2015"/>
             </div>
           </div> 
         </form>
+      {{else}}
+        {{#if activeCard.isLoading}}
+          {{partial 'is_loading'}}
+        {{else}}
+          <table class="table table-striped table-bordered table-hover">
+            <tr>
+              <td>Card Number</td>
+              <td>XXXXX{{activeCard.last4}}</td>
+            </tr>
+            <tr>
+              <td>Card Type</td>
+              <td>{{activeCard.cardType}}</td>
+            </tr>
+          </table>
+        {{/if}}
       {{/unless}}
-        <div class="form-actions">
-          {{#if hasToken}}
-            <button type="submit" class="btn btn-primary" {{action update}} {{bindAttr disabled=account.isSaving}}>Save</button>
-          {{else}}
-            <button type="submit" class="btn btn-primary" {{action createTokenAndSubmit target="view"}} {{bindAttr disabled=account.isSaving}}>Save</button>
-          {{/if}}
-          <button class="btn" {{action "cancel"}} {{bindAttr disabled=account.isSaving}}>Cancel</button>
-        </div>
+      <div class="form-actions">
+        {{#if hasGatewayAccount}}
+          <button type="submit" class="btn btn-primary" {{action update}} {{bindAttr disabled=account.isSaving}}>Save</button>
+        {{else}}
+          <button type="submit" class="btn btn-primary" {{action createTokenAndSubmit target="view"}} {{bindAttr disabled=account.isSaving}}>Save</button>
+        {{/if}}
+        <button class="btn" {{action "cancel"}} {{bindAttr disabled=account.isSaving}}>Cancel</button>
+      </div>
     </fieldset>
   {{/if}}
 </div>

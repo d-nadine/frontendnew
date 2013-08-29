@@ -131,6 +131,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('companies').set 'model', Radium.Company.find()
 
     # FIXME: Where are we getting the county list from
-    @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada', 'Germany', 'UK'])
+    @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada'])
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()

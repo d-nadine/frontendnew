@@ -1,5 +1,5 @@
 Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
-  needs: ['settings', 'users', 'account', 'subscriptionPlans']
+  needs: ['settings', 'users', 'account', 'subscriptionPlans', 'countries']
   subscriptionPlans: Ember.computed.alias 'controllers.subscriptionPlans'
   account: Ember.computed.alias 'controllers.account.model'
   isNewCard: false
@@ -16,6 +16,28 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     return if Ember.isEmpty(@get('billingEmail'))
     true
   ).property('organisation', 'billingEmail', 'isSubmitted')
+
+  totalUsers: ( ->
+    unless @get('currentPlan.totalUsers')
+      5
+    else
+      @get('currentPlan.totalUsers')
+  ).property('currentPlan.totalUsers')
+
+  activeCard: ( ->
+    return unless @get('gatewayIdentifier')
+    Radium.ActiveCard.find @get('account.id')
+  ).property('gatewayIdentifier')
+
+  country: ( (key, value) ->
+    if arguments.length == 2 && value != undefined
+      @set 'model.country', value
+    else
+      unless @get('model.country')
+        @get('controllers.countries.firstObject')
+      else
+        @get('model.country')
+  ).property('model.country')
 
   update: ->
     return unless @hasBufferedChanges
@@ -38,8 +60,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     account.set('billingInfo.billingEmail', model.get('billingEmail'))
     account.set('billingInfo.reference', model.get('reference'))
     account.set('billingInfo.phone', model.get('phone'))
-    account.set('country', model.get('country'))
     account.set('billingInfo.vat', model.get('vat'))
+    account.set('billingInfo.country', model.get('country'))
 
     account.one 'didUpdate', =>
       @send 'flashSuccess', 'Your billing information has been updated.'
