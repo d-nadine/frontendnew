@@ -3,21 +3,27 @@
     position: relative;
 
     &.is-finished {
-      background-color: $dark-background;
+      text-shadow: 0 1px 0 rgba(white, 0.2);
+      color: #c5c5c5;
+      background-color: #e8e8e8;
 
       .checker label::after {
         border-color: $muted
       }
 
-      &::after {
-        width: 96%;
-        content: '';
-        position: absolute;
-        height: 2px;
-        background-color: black;
-        margin: 0 auto;
-        left: 2%;
-        top: 50%;
+      .field {
+        position: relative;
+
+        &:after {
+          width: 96%;
+          content: '';
+          position: absolute;
+          height: 1px;
+          background-color: #797979;
+          margin: 0 auto;
+          left: 2%;
+          top: 50%;
+        }
       }
     }
   }

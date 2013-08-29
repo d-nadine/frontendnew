@@ -65,6 +65,10 @@
     }
   }
 
+  &.is-expanded .primary {
+    border-color: $link;
+  }
+
   &.just-added {
     .primary {
       background-color: darken($dark-background, 50);
