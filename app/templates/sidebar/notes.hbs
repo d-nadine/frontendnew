@@ -1,6 +1,5 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
-    <i class="ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
     <h6 class="sidebar-panel-title">
       <i class="ss-standard ss-write"></i> Notes
     </h6>
@@ -20,6 +19,13 @@
           {{/if}}
         </div>
       {{/if}}
+    </div>
+    <div class="clearfix">
+      <div class="pull-right">
+        <button class="btn btn-primary" {{action toggleEditor target=view bubbles=false}}>
+          <i class="ss-standard ss-plus"></i> Add Note
+        </button>
+      </div>
     </div>
   </div>
 </div>

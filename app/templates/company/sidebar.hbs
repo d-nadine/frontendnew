@@ -1,24 +1,11 @@
 <form class="form">
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <div class="user-avatar pull-left">
-        <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
-      </div>
-      <div class="clearfix">
-        <div class="header">
-          {{render 'sidebar/name' model}}
-        </div>
-      </div>
-    </div>
-    <div class="sidebar-panel-content">
       {{render "sidebar/company_website" model}}
-    </div>
-    <div class="sidebar-panel-content">
       {{render "sidebar/addresses" model}}
     </div>
   </div>
 
-  {{render 'sidebar/about' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
@@ -37,6 +24,8 @@
   </div>
 
   {{render 'sidebar/user' model}}
+
+  {{render 'sidebar/notes' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">

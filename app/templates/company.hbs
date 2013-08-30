@@ -1,3 +1,30 @@
+<div class="company-banner">
+  <div class="company-banner-inner">
+    <div class="pull-left company-icon">
+      <i class="ss-standard ss-buildings"></i>
+    </div>
+    <div class="clearfix">
+      {{render 'sidebar/name' model}}
+      {{partial 'shared/address'}}
+    </div>
+  </div>
+  <div class="company-banner-footer">
+    <div class="pull-right">
+      <button class="btn btn-primary">
+        <i class="ss-standard ss-plus"></i> Add Deal
+      </button>
+    </div>
+    <ul class="inline">
+      <li>Deals</li>
+      <li><a href="#">3 Open ($0000)</a></li>
+      <li><a href="#">3 Lost ($0000)</a></li>
+      <li><a href="#">3 Closed ($0000)</a></li>
+      <li><a href="#">See all Deals</a></li>
+    </ul>
+  </div>
+
+</div>
 <div class="tasks-content">
+  {{!TODO Add form/tasks list}}
 </div>
 {{render "feed" activities}}

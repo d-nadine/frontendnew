@@ -1,3 +1,54 @@
+.company-banner {
+  background-color: #eaeaea;
+
+  .name {
+    .edit-icon {
+      font-size: 12px;
+      color: $muted;
+      display: none;
+    }
+
+    &:hover .edit-icon {
+      display: block;
+    }
+  }
+}
+
+.company-banner-footer {
+  padding: 5px 10px;
+  overflow: hidden;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(black, 0.5);
+  background: #797979;
+
+  a {
+    margin: {
+      right: 20px;
+      left: 20px;
+    }
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  li {
+    line-height: 30px;
+  }
+}
+
+.company-banner-inner {
+  width: 300px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.company-icon {
+  margin: 0 20px 0 0;
+  font-size: 50px;
+  line-height: 60px;
+  color: $link;
+}
+
 .company-sidebar-view{
   .control-label{
     font-weight: bold;
@@ -57,7 +108,7 @@
     }
 
     .website {
-      position: relative; 
+      position: relative;
       top: 5px;
 
       input{
