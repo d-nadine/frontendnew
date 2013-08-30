@@ -17,6 +17,16 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     true
   ).property('organisation', 'billingEmail', 'isSubmitted')
 
+  currentPlan: ( ->
+    subscription = @get('account.billingInfo.subscription')
+    return unless subscription
+
+    subscriptionPlans = @get('subscriptionPlans')
+    return unless subscriptionPlans.get('length')
+
+    @get('subscriptionPlans').find (plan) => plan.get('name') == subscription
+  ).property('subscriptionPlans.[]', 'account.billingInfo.subscription')
+
   totalUsers: ( ->
     unless @get('currentPlan.totalUsers')
       5
