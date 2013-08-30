@@ -2,6 +2,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       {{render 'sidebar/contact_header' model}}
+      <button class="btn btn-block btn-small btn-follow">Follow {{firstName}}</button>
     </div>
   </div>
 
@@ -13,30 +14,46 @@
     </div>
   </div>
 
-  <div class="sidebar-panel">
+  <div class="sidebar-panel sidebar-panel-grey">
     <div class="sidebar-panel-content">
-      {{render "sidebar/company_website" model.company}}
-    </div>
-    <div class="sidebar-panel-content">
-      {{render 'sidebar/phone' model}}
-    </div>
-    <div class="sidebar-panel-content">
-      {{render 'sidebar/email' model}}
-    </div>
-    <div class="show-more">
-      <a href="#" class="btn btn-link btn-block" {{action showExtraContactDetail bubbles=false target="view"}}>
-        <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
-      </a>
+      <table class="table sidebar-table">
+        <tbody>
+          {{#each deals}}
+            <tr>
+              <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+              <td class="text-right">
+                <strong>{{currency value}} ({{status}})</strong>
+              </td>
+            </tr>
+          {{/each}}
+          <tr>
+            <td>Deal totals</td>
+            <td class="text-right">
+              <strong>{{currency dealsTotal}}</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix">
+        {{#linkTo "deals.fromContact" model class="btn btn-primary pull-right"}}
+          <i class="ss-standard ss-plus"></i> Deal
+        {{/linkTo}}
+        See deals with {{name}}
+      </div>
     </div>
   </div>
 
   <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-navigate"></i> Contact
+      </h6>
+    </div>
     <div class="sidebar-panel-content">
-      <div class="additional-detail">
-        <div class="address">
-          {{render "sidebar/addresses" model}}
-        </div>
-      </div>
+      {{render "sidebar/company_website" model.company}}
+      {{render 'sidebar/phone' model}}
+      {{render 'sidebar/email' model}}
+      {{render "sidebar/addresses" model}}
     </div>
   </div>
 
@@ -53,55 +70,14 @@
     </div>
   </div>
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-dollarsign"></i> Total Deals Won
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      <div class="deals-won">
-        <div class="amount">{{currency dealsTotal}}</div>
-      </div>
-    </div>
-  </div>
+  {{render 'sidebar/notes' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-dollarsign"></i> Open Deals <span class="mark">{{deals.length}}</span>
+        <i class="ss-standard ss-file"></i> Files
       </h6>
     </div>
-    <div class="sidebar-panel-content">
-      <div class="open-deals">
-        {{#each deals}}
-          <div class="deal">
-            <div>
-              <div>
-                {{#linkTo "deal" this}}{{name}}{{/linkTo}}
-              </div>
-              <div class="deal-value">
-                {{currency value}}<br/>
-                <i>{{status}}</i>
-              </div>
-            </div>
-          </div>
-        {{/each}}
-        <div class="deal-links">
-          <!-- FIXME: Where should this go -->
-          {{#linkTo "pipeline.resourceDeals" this class="btn btn-link pull-right"}}
-            All Deals
-          {{/linkTo}}
-          {{#linkTo "deals.fromContact" model class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  {{render 'sidebar/about' model}}
-
-  <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       {{partial 'shared/add_files'}}
     </div>

@@ -12,8 +12,6 @@
     </div>
     <div class="sidebar-panel-content">
       {{render 'sidebar/phone' model}}
-    </div>
-    <div class="sidebar-panel-content">
       {{render 'sidebar/email' model}}
     </div>
   </div>
@@ -54,13 +52,13 @@
     </div>
 
     <div class="sidebar-panel-content">
-      <table class="table table-striped table-bordered table-hover totals">
+      <table class="table totals">
         <tbody>
           {{#each statuses itemController="userDealTotalsItem"}}
             <tr>
-              <td><label class="control-label">{{this.model}}</td>
-              <td><label {{bindAttr class=":badge dealsTotal:badge-success:badge-important"}}>{{dealsTotal}}</td>
-              <td><label>{{currency dealsValue}}</td>
+              <td>{{this.model}}</td>
+              <td>{{dealsTotal}}</td>
+              <td>{{currency dealsValue}}</td>
             </tr>
           {{/each}}
         </tbody>
@@ -68,10 +66,9 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
-        {{#linkTo "pipeline.resourceDeals" this class="btn btn-link pull-right"}}
-          All Deals
+        {{#linkTo "deals.fromUser" this class="btn btn-block btn-primary"}}
+          <i class="ss-standard ss-plus"></i> Deal
         {{/linkTo}}
-        {{#linkTo "deals.fromUser" this class="btn btn-primary"}}<i class="ss-standard ss-plus"></i> Deal{{/linkTo}}
       </div>
     </div>
   </div>

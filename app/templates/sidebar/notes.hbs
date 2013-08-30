@@ -2,14 +2,14 @@
   <div class="sidebar-panel-header">
     <i class="ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
     <h6 class="sidebar-panel-title">
-      <i class="ss-standard ss-openbook"></i> About
+      <i class="ss-standard ss-write"></i> Notes
     </h6>
   </div>
   <div class="sidebar-panel-content">
-    <div class="about">
+    <div class="notes">
       {{#if isEditing}}
         <div>
-          {{view view.textArea class="field" valueBinding=form.notes placeholder="About"}}
+          {{view view.textArea class="field" valueBinding=form.notes placeholder="Notes"}}
         </div>
       {{else}}
         <div>

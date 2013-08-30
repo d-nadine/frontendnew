@@ -95,7 +95,7 @@
     }
   }
 
-  .about{
+  .notes {
     .icon-edit{
       position: relative;
       top: 19px;
@@ -147,6 +147,20 @@
   margin: 0 0 2px;
 }
 
+.sidebar-table {
+  td {
+    border: none;
+  }
+}
+
+.sidebar-panel-grey {
+  .sidebar-panel-content {
+    text-shadow: 0 1px 0 rgba(black, 0.25);
+    color: #fff;
+    background: #797979;
+  }
+}
+
 .sidebar-panel-header {
   padding: 0 18px;
   border-top: 1px solid $selected-item-border;
@@ -161,6 +175,15 @@
 .sidebar-panel-title {
   margin: 0;
   line-height: 32px;
+  text-shadow: 0 1px 0 rgba(white, 0.2);
+
+  i[class*="ss"] {
+    font-size: 14px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+    color: $link;
+  }
 }
 
 .sidebar-panel-content {
@@ -186,7 +209,7 @@
 }
 
 .contact-types-list {
-  margin: 0;
+  margin: 0 0 10px;
 
   dt {
     width: 90px;
@@ -213,4 +236,20 @@
 
 .user-avatar {
   margin-right: 20px;
+}
+
+/* Attachments */
+.attachment-item-icon {
+  font-size: 20px;
+  color: $link;
+}
+
+.attachment-item-content {
+  margin-left: 40px;
+}
+
+.attachment-item-footer {
+  small {
+    display: block;
+  }
 }

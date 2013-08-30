@@ -177,31 +177,6 @@
     }
   }
 
-  .open-deals{
-    > div{
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .deal{
-      > div{
-        margin-bottom: 10px
-      }
-
-      .deal-value{
-        text-align: right;
-        i{
-          font-weight: normal;
-        }
-      }
-    }
-
-    .btn-primary{
-      padding-left: 56px;
-      padding-right: 70px;
-    }
-  }
-
   .deal-links{
     margin-top: 20px;
   }

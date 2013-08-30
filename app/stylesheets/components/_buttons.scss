@@ -170,6 +170,16 @@ $btn-primary : #007cdd;
   }
 }
 
+.btn-danger {
+  color: #fff;
+  background: {
+    image: none;
+    color: $red;
+  }
+  border: none;
+  @include box-shadow(none);
+}
+
 .btn-success {
   $success: #5ab623;
   color: #fff;

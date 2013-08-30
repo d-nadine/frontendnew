@@ -1,12 +1,35 @@
 <div class="control-group files">
-  <div class="controls add-files">
-    <button class="btn btn-block add-files" {{bindAttr disabled="view.disabled"}}>
-      Add Files <i class="ss-standard ss-attach"></i>
-    </button>
-  </div>
-  <div>
+  <ul class="unstyled">
     {{#each attachment in attachments}}
-      Foo
+      <li>
+        <div class="pull-left">
+          <i class="ss-standard ss-attach attachment-item-icon"></i>
+        </div>
+        <div class="attachment-item-content">
+          <div class="attachment-item-header">
+            <div class="pull-right">
+              <small class="muted">April 15, 2013 </small>
+              <a href="#">
+                <i class="ss-standard ss-chat"></i> 2
+              </a>
+            </div>
+            <p>Attachment name</p>
+          </div>
+          <div class="attachment-item-footer">
+            <button class="btn btn-link muted pull-right">
+              <i class="ss-symbolicons-block ss-trash"></i>
+            </button>
+            <small class="muted">Uploaded by <a href="#">Sami Asikainen</a></small>
+          </div>
+        </div>
+      </li>
+    {{else}}
+      <li class="text-center">No attachments</li>
     {{/each}}
+  </ul>
+  <div class="controls add-files">
+    <button class="btn btn-primary pull-right" {{bindAttr disabled="view.disabled"}}>
+      <i class="ss-standard ss-attach"></i> Add Files
+    </button>
   </div>
 </div>
