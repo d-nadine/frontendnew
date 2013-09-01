@@ -46,12 +46,11 @@
 
   <h2 class="with-button">
     Attachments
-    <button class="btn pull-right">Add File</button>
+    {{view view.fileUploader class="upload-button"}}
+    <!--<button class="btn pull-right">Add File</button>-->
   </h2>
 
-  {{#each attachment in attachments}}
-    Foo
-  {{/each}}
+  {{partial 'shared/attachments'}}
 
   {{partial 'shared/followers'}}
 

@@ -12,10 +12,6 @@ Radium.TodoForm = Radium.Form.extend
     if this.constructor is Radium.TodoForm then Radium.Todo else Radium.Call
   ).property()
 
-  typeName: ( ->
-    @get('type').toString().humanize()
-  ).property('type')
-
   reset: ->
     @_super.apply this, arguments
     @set 'description', ''
@@ -50,11 +46,11 @@ Radium.TodoForm = Radium.Form.extend
 
     record.one 'becameError', (result)  ->
       result.get('transaction').rollback()
-      typeName = @get('type').toString().humanize()
+      typeName = @get('type').humanize()
       deferred.reject("An error has occurred and the #{typeName} could not be created.")
 
   bulkCommit: ->
-    typeName = @get('type').toString().humanize()
+    typeName = @get('type').humanize()
 
     @get('reference').forEach (item) =>
       record = @get('type').createRecord @get('data')

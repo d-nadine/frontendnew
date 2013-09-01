@@ -1,15 +1,17 @@
 Radium.Attachment = Radium.Model.extend
+  fileName: DS.attr('string')
   url: DS.attr('string')
-  mimeType: DS.attr('string')
-  name: DS.attr('string')
+  uploadedBy: DS.belongsTo('Radium.User')
 
-  attachable: ((key, value) ->
+  reference: ((key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('_attachableDiscussion') || @get('_attachableDeal') || @get('_attachableEmail')
-  ).property('_attachableDiscussion', '_attachableDeal', '_attachableEmail')
-  _attachableDeal: DS.belongsTo('Radium.Deal')
-  _attachableEmail: DS.belongsTo('Radium.Email')
-  _attachableDiscussion: DS.belongsTo('Radium.Discussion')
+      @get('_referenceDiscussion') || @get('_referenceDeal') || @get('_referenceEmail') || '_referenceContact' || '_referenceCompany'
+  ).property('_referenceDiscussion', '_referenceDeal', '_referenceEmail', '_referenceContact', '_referenceCompany')
+  _referenceContact: DS.belongsTo('Radium.Contact')
+  _referenceCompany: DS.belongsTo('Radium.Company')
+  _referenceDeal: DS.belongsTo('Radium.Deal')
+  _referenceEmail: DS.belongsTo('Radium.Email')
+  _referenceDiscussion: DS.belongsTo('Radium.Discussion')
