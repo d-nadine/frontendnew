@@ -87,13 +87,13 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
 
     if task.get('isOverdue')
       'overdue'
-    else if Ember.DateTime.compare(time, today) == -1
+    else if Ember.DateTime.compare(time, today) == 0
       'today'
-    else if Ember.DateTime.compare(time, tomorrow) == -1
+    else if Ember.DateTime.compare(time, tomorrow) == 0
       'tomorrow'
-    else if Ember.DateTime.compare(time, thisWeek) == -1
+    else if Ember.DateTime.compare(time, thisWeek) == 0
       'this_week'
-    else if Ember.DateTime.compare(time, nextWeek) == -1
+    else if Ember.DateTime.compare(time, nextWeek) == 0
       'next_week'
     else
       'later'
