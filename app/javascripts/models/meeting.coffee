@@ -3,7 +3,6 @@ require 'lib/radium/aggregate_array_proxy'
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
-  organizer: DS.belongsTo('Radium.User')
   invitations: DS.hasMany('Radium.Invitation')
 
   topic: DS.attr('string')
@@ -13,6 +12,13 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
+
+  organizer: ( ->
+    @get('_organizerUser') ||
+    @get('_organizerContact')
+  ).property('_organizerUser', '_organizerContact')
+  _organizerUser: DS.belongsTo('Radium.User')
+  _organizerContact: DS.belongsTo('Radium.Contact')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
