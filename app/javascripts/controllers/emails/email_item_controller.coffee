@@ -70,8 +70,9 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   toggleForwardForm: -> @toggleProperty 'showForwardForm'
 
   replyEmail: (->
-    Radium.ReplyForm.create
+    replyEmail = Radium.ReplyForm.create
       email: @get('model')
+    
   ).property('model')
 
   forwardEmail: (->

@@ -10,6 +10,7 @@ Radium.ReplyForm = Radium.EmailForm.extend
     @_super.apply this, arguments
     @set 'subject', "RE: #{@get('email.subject')}"
     @get('email.toList').forEach (person) => @get('to').pushObject person
+    @get('to').pushObject(@get('email.sender'))
 
   defaults: (->
     subject: '' 

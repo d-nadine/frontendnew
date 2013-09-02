@@ -54,6 +54,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
 
+  email: Ember.computed.alias 'primaryEmail.value'
+
   displayName: ( ->
     @get('name') || @get('primaryEmail.value') || @get('primaryPhone.value')
   ).property('name', 'primaryEmail', 'primaryPhone')

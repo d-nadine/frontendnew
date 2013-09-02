@@ -54,6 +54,8 @@ Radium.FormsEmailView = Radium.FormView.extend
     disabled: Ember.computed.not('controller.includeReminder')
 
   datePicker: Radium.DatePicker.extend
+    # FIXME: stopping the reply form from being posted
+    isInvalid: false
     click: (event)->
       # prevent bubbling up so the dropdown doesn't close
       event.stopPropagation()

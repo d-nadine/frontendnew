@@ -24,10 +24,7 @@ Radium.EmailsShowRoute = Radium.Route.extend
         form.reset()
 
         Ember.run.next =>
-          if !currentlyViewing.isIncludedInConversation(email)
-            @transitionTo 'emails.show', email
-          else
-            $.scrollTo 0, duration: 300
+          @transitionTo 'emails.show', email
 
       email.one 'becameInvalid', =>
         @send 'flashError', email
