@@ -1,5 +1,10 @@
+html,
 body {
-  background: none;
+  height: 100%;
+}
+
+body {
+  background: #f3f3f3;
 
   @include breakpoint(portrait) {
     padding: 0;

@@ -17,6 +17,7 @@
   }
 
   input[type="text"] {
+    height: 32px;
     padding-left: 30px;
     @include box-sizing(border-box);
   }

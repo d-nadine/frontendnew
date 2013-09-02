@@ -159,6 +159,11 @@
     color: #fff;
     background: #797979;
   }
+
+  a:not(.btn) {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 
 .sidebar-panel-header {

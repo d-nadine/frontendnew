@@ -2,8 +2,17 @@
 
 }
 
-.address-book-list-switch {
-  border-bottom: 1px solid $border;
+.search-results-header {
+  padding: 4px 0;
+  line-height: 30px;
+  border: {
+    top: 2px solid $border;
+    bottom: 2px solid $border;
+  }
+
+  a {
+    color: $border;
+  }
 }
 
 .search-result-list-item {
@@ -13,11 +22,15 @@
   @include box-sizing(border-box);
 
   &.is-checked {
-    background-color: $associated-blue;
+    border: {
+      right: 1px solid $link;
+      left: 1px solid $link;
+    }
+    background-color: $calendar-active-bg;
   }
 
   .delete {
-    margin-top: 25px;
+    margin: 25px 10px;
     opacity: 0;
     @include transition(opacity 0.25s);
   }
