@@ -41,8 +41,7 @@
     <div {{bindAttr class="message::empty :text"}}>
       {{#if message}}
         <p>
-          {{!FIXME: This needs to some formatting}}
-          {{{unbound message}}}
+          {{{formattedMessage}}}
         </p>
       {{else}}
         <p>(No Message)</p>

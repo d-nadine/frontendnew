@@ -12,7 +12,8 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
     !Ember.isNone(@get('contact'))
   ).property('contact')
 
-  history: (->
-    Radium.Email.filter (otherEmail) => 
-      @get('model').isIncludedInConversation otherEmail
-  ).property('model')
+  # FIXME: Can we remove this permanently
+  # history: (->
+  #   Radium.Email.filter (otherEmail) => 
+  #     @get('model').isIncludedInConversation otherEmail
+  # ).property('model')
