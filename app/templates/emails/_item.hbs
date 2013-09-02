@@ -90,7 +90,8 @@
         {{/if}}
       {{/unless}}
     </div>
-    {{#if isPersonal}}
+    {{!#if isPersonal}}
+      <!--
       <div class="clearfix">
         <div class="alert alert-info">
           This email is a personal email.  Would you like to add this email to Radium?
@@ -99,7 +100,8 @@
           </button>
         </div>
       </div>
-    {{/if}}
+      -->
+    {{!/if}}
 
     {{#unless isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
