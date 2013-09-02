@@ -8,6 +8,8 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
 
     contact.one 'didUpdate', =>
       @send "flashSuccess", "Contact updated!"
+      if contact.get('isLead')
+        Radium.Deal.find()
 
     contact.one 'becameInvalid', (result) =>
       @send 'flashError', result
