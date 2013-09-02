@@ -16,6 +16,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend
       @get('model.isPersonal')
   ).property('model.isPersonal')
 
+  senderIsContact: ( ->
+    @get("sender.constructor") is Radium.Contact
+  ).property('sender')
+
   toggleFormBox: ->
     @toggleProperty 'showFormBox'
 
