@@ -36,7 +36,9 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   ).property('invitations.[]')
 
   attendees: ( ->
-    Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
+    attendees = Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
+    attendees.insertAt(0, @get('organizer')) unless @get('isNew')
+    attendees
   ).property('users.[]', 'contacts.[]')
 
   showTopicTextBox: ( ->

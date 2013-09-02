@@ -23,6 +23,10 @@
       border: 1px solid $valid-input-border;
     }
 
+    div.is-invalid{
+      border: 1px solid $red;
+    }
+
     .cancel-meeting{
       position: absolute;
       top: 0px;
