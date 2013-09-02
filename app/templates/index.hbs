@@ -9,81 +9,81 @@
 <div class="dashboard-grid">
   <ul class="unstyled">
     <li class="dashboard-grid-item dashboard-grid-item-profile">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'settings.profile' class="dashboard-grid-link"}}
         <div class="dashboard-grid-label">
           <h4>Complete Your Profile</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'settings.company' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-like"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Invite Your Team</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'settings.billing' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-heart"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Get a Free Month</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'leads.new' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-users"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Add Contacts</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'deals.new' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-dollarsign"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Add a Deal</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'user' currentUser class="dashboard-grid-link"}} 
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-check"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Add a Todo</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'user.form' currentUser 'call' class="dashboard-grid-link"}} 
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-phone"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Add a Call</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      <a href="#" class="dashboard-grid-link">
+      {{#linkTo 'user.form' currentUser 'meeting' class="dashboard-grid-link"}} 
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-calendar"></i>
         </div>
         <div class="dashboard-grid-label">
           <h4>Add a Meeting</h4>
         </div>
-      </a>
+      {{/linkTo}}
     </li>
   </ul>
 </div>

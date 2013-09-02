@@ -38,11 +38,15 @@
           </tr>
         </tbody>
       </table>
+      {{#if deals.length}}
+      <div class="clearfix">
+        See deals with {{#linkTo pipeline.resourceDeals this}}{{displayName}}{{/linkTo}}
+      </div>
+      {{/if}}
       <div class="clearfix">
         {{#linkTo "deals.fromContact" model class="btn btn-primary pull-right"}}
           <i class="ss-standard ss-plus"></i> Deal
         {{/linkTo}}
-        See deals with {{name}}
       </div>
     </div>
   </div>

@@ -27,3 +27,10 @@ Radium.UserRoute = Radium.Route.extend
     @render 'user/sidebar',
       into: 'user'
       outlet: 'sidebar'
+
+Radium.UserFormRoute = Radium.Route.extend
+  model: (params) ->
+    params.form
+
+  setupController: (controller, form) ->
+    @controllerFor('user').set('activeForm', form)

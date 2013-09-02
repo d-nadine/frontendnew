@@ -36,7 +36,8 @@ Radium.Router.map ->
 
   @resource 'company', path: '/companies/:company_id'
 
-  @resource 'user', path: '/users/:user_id'
+  @resource 'user', path: '/users/:user_id', ->
+    @route 'form', path: '/:form'
 
   @resource 'tag', path: '/tags/:tag_id'
 
