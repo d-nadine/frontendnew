@@ -33,6 +33,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     params =
       start_date: startOfCalendar.toDateFormat()
       end_date: endOfCalendar.toDateFormat()
+      user_id: @get('currentUser.id')
 
     todos = Radium.Todo.find(params)
     meetings = Radium.Meeting.find(params)
