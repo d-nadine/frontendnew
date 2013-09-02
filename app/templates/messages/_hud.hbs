@@ -1,22 +1,26 @@
 <!-- columns must add up to 8 -->
 <div class="clearfix email-hud">
   <div class="pull-right email-hud-actions">
-    {{#if contact.isPersonal}}
-      <div class="btn-group">
-        <button class="btn btn-primary">Add to Radium</button>
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="#" {{action changeStatus "pipeline"}}>As Lead</a>
-          </li>
-          <li>
-            <a href="#" {{action changeStatus "exclude"}}>Exclude from Pipeline</a>
-          </li>
-        </ul>
-      </div>
-    {{/if}}
+    {{#unless isSaving}}
+      {{#if contact.isPersonal}}
+        <div class="btn-group">
+          <button class="btn btn-primary" {{action changeStatus "pipeline"}}>Add to Radium</button>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" {{action changeStatus "pipeline"}}>As Lead</a>
+            </li>
+            <li>
+              <a href="#" {{action changeStatus "exclude"}}>Exclude from Pipeline</a>
+            </li>
+          </ul>
+        </div>
+      {{/if}}
+    {{else}}
+      {{partial 'saving'}}
+    {{/unless}}
   </div>
 
   <div class="pull-left">
@@ -24,7 +28,7 @@
   </div>
   <div class="email-hud-content">
     <h4 class="email-hud-title">
-      {{link contact}}
+      {{#linkTo 'contact' contact}}{{contact.displayName}}{{/linkTo}}
     </h4>
     <p>
       {{contact.primaryEmail.value}}

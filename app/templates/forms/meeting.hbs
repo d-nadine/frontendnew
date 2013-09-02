@@ -91,9 +91,13 @@
             <ul class="inline meeting-form-attendees-list">
               {{#each attendees}}
               <li>
-                {{avatar this}}
-                {{name}}
+                {{#if isLoaded}}
+                  {{avatar this}}
+                  {{link this}}
                 <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
+                {{else}}
+                  {{partial 'is_loading'}}
+                {{/if}}
               </li>
               {{/each}}
             </ul>

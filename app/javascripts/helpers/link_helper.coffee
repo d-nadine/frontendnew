@@ -10,7 +10,7 @@ Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#linkTo 'company'
 Ember.TEMPLATES['links/tag'] = Ember.Handlebars.compile "{{#linkTo 'tag' view.content}}{{view.content.name}}{{/linkTo}}"
 Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#linkTo 'deal' view.content}}{{view.content.name}}{{/linkTo}}"
 Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
-  <a href="{{unbound url}}" target="_new">{{view.content.name}}</a>
+  <a href="{{url}}" target="_new">{{view.content.name}}</a>
 """
 Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
   {{#linkTo 'unimplemented'}}{{truncate view.content.topic length=20}}{{/linkTo}}
@@ -35,7 +35,7 @@ Radium.LinkView = Ember.View.extend
 
   displayName: (->
     @get('content.name') || @get('content.email') || @get('content.phoneNumber') || @get('content.primaryEmail.value') || @get('content.primaryPhone.value')
-  ).property('content.name', 'content.email', 'content.phoneNumber', 'content.primaryEmail', 'content.primaryPhone')
+  ).property('content.name', 'content.email', 'content.phoneNumber', 'content.primaryEmail', 'content.primaryPhone', 'content')
 
   company: Ember.computed.alias('content.company')
 

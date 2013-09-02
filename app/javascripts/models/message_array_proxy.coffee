@@ -8,7 +8,7 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin
   load: ->
     @clear()
 
-    Radium.Email.find({}).then (emails) =>
+    Radium.Email.find({user_id: @get('currentUser.id')}).then (emails) =>
       @add emails
       Radium.Discussion.find({}).then (discussions) =>
         @add discussions
