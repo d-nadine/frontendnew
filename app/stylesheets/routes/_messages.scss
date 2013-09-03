@@ -8,6 +8,11 @@ $item-border: #dddddd;
   @include box-orient(horizontal);
   @include box-align(stretch);
 
+  &:before,
+  &:after {
+    content: none;
+  }
+
   > li {
     @include box-flex(1);
     float: none;
