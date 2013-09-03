@@ -53,6 +53,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
     # FIXME: we want to dispose of models in an isError state,
     # this filter should be removed and the @each dependentKey should
     # be removed when the model can be destroyed
+    return Ember.A() unless @get('visibleContent.length')
     visibleContent = @get('visibleContent').filter (item) -> !item.get('isError')
 
     return unless visibleContent
