@@ -61,8 +61,8 @@
 </div>
 {{outlet confirmation}}
 {{#if showFormArea}}
-  <div class="block block-blue block-arrow-bottom action-forms">
-    <div class="upcase">{{view.bulkLeader}}</div>
+  <div class="block block-gray action-forms">
+    <h5>{{view.bulkLeader}}</h5>
     {{partial 'bulk_actions/reassign'}}
     {{#if showEmailForm}}
       {{render "forms/email" newEmail}}

@@ -1,67 +1,82 @@
 <form class="form">
-  <div class="page-header">
-    {{render 'sidebar/name' model}}
-  </div>
-
-  <div class="meta">
-    {{avatar contact size=medium class="img-polaroid"}}
-    <p>
-      {{render 'sidebar/contact_picker' model}}
-      <span class="title muted">{{contact.title}}</span>
-    </p>
-  </div>
-
-  <div class="forecast">
-    <hr />
-    <h2>Forecast</h2>
-    {{view Radium.ProgressBar percentageBinding="percentage"}}
-    <div class="checklist-plus">
-      <a href="#checklistModal" {{action showChecklist this}} class="btn btn-success">
-        <i class="ss-standard ss-plus"></i>
-      </a>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      {{render 'sidebar/name' model}}
     </div>
-    <div {{bindAttr class=":total total:white"}}>{{total}}%</div>
-    <hr />
+  </div>
+
+  {{render 'sidebar/deal_status' model}}
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-navigate"></i> Contact
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="user-avatar pull-left">
+        {{avatar contact size=medium class="img-polaroid"}}
+      </div>
+      <div class="clearfix">
+        {{render 'sidebar/contact_picker' model}}
+        <p class="title muted">{{contact.title}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-symbolicons-block ss-partlycloudy"></i> Forecast
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{view Radium.ProgressBar percentageBinding="percentage"}}
+      <div class="checklist-plus">
+        <a href="#checklistModal" {{action showChecklist this}} class="btn btn-success">
+          <i class="ss-standard ss-plus"></i>
+        </a>
+      </div>
+      <div {{bindAttr class=":total total:white"}}>{{total}}%</div>
+    </div>
   </div>
 
   {{render 'sidebar/description' model}}
 
-  <hr />
-
   {{render 'sidebar/amount' model}}
 
-  <hr />
 
   {{#unless isPublic}}
     <p class="muted">Publish this deal to change its status</p>
   {{/unless}}
 
-  {{render 'sidebar/deal_status' model}}
-
- <hr />
-
   {{render 'sidebar/user' model}}
 
-  <hr />
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <div class="pull-right upload-file-btn">
+        {{view view.fileUploader class="upload-button"}}
+      </div>
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-attach"></i> Attachments
+      </h6>
+    </div>
+    {{partial 'shared/attachments'}}
+  </div>
 
-  <h2 class="with-button">
-    Attachments
-    {{view view.fileUploader class="upload-button"}}
-    <!--<button class="btn pull-right">Add File</button>-->
-  </h2>
-
-  {{partial 'shared/attachments'}}
 
   {{partial 'shared/followers'}}
 
-  <hr />
-
-  <button class="btn btn-warning btn-block" {{action togglePublished}} {{bindAttr disabled=isSaving}}>
-    {{#if isPublic}}
-      Unpublish
-    {{else}}
-      Publish
-    {{/if}}
-  </button>
-  <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bindAttr disabled=isSaving}}>Delete</button>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-warning btn-block" {{action togglePublished}} {{bindAttr disabled=isSaving}}>
+        {{#if isPublic}}
+          Unpublish
+        {{else}}
+          Publish
+        {{/if}}
+      </button>
+      <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bindAttr disabled=isSaving}}>Delete</button>
+    </div>
+  </div>
 </form>

@@ -34,10 +34,10 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
 
     result =
       switch form
-        when "assign" then "reassign "
-        when "todo" then "add a todo"
-        when "call" then "create and assign a call"
-        when "email" then "email "
+        when "assign" then "Reassign "
+        when "todo" then "Add a Todo"
+        when "call" then "Create and Assign a Call"
+        when "email" then "Email "
         when "addTags" then "Add Tags"
         else
           throw new Error("Unknown #{form} for bulkLeader")

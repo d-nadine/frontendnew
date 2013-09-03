@@ -172,7 +172,8 @@
   vertical-align: middle;
   background: #e8e8e8;
 
-  .btn {
+  .btn,
+  .upload-file-btn {
     margin-top: 2px;
   }
 }
@@ -190,6 +191,7 @@
     color: $link;
   }
 }
+
 
 .sidebar-panel-content {
   padding: 18px;

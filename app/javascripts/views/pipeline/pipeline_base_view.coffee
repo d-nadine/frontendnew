@@ -33,11 +33,11 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
 
     prefix =
       switch form
-        when "assign" then "reassign "
-        when "todo" then "add a todo about  "
-        when "call" then "create and assign a call from  "
-        when "status" then "change status on "
-        when "email" then "email "
+        when "assign" then "Reassign "
+        when "todo" then "Add a Todo About  "
+        when "call" then "Create and Assign a Call from  "
+        when "status" then "Change status on "
+        when "email" then "Email "
         else
           throw new Error("Unknown #{form} for bulkLeader")
 

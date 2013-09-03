@@ -1,9 +1,17 @@
-<h2>Description <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></h2>
-
-{{#if isEditing}}
-  {{view view.textArea valueBinding=form.description classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
-{{else}}
-  <p class="inline-editor-text">
-    {{description}}
-  </p>
-{{/if}}
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+    <h6 class="sidebar-panel-title">
+      <i class="ss-symbolicons-block ss-notepad"></i> Description
+    </h6>
+  </div>
+  <div class="sidebar-panel-content">
+    {{#if isEditing}}
+      {{view view.textArea valueBinding=form.description classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
+    {{else}}
+      <p class="inline-editor-text">
+        {{description}}
+      </p>
+    {{/if}}
+  </div>
+</div>
