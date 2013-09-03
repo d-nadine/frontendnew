@@ -191,4 +191,8 @@
     font-weight: bold;
     color: #6e6e6e;
   }
+
+  .control-box input.ember-text-field {
+    min-width: 300px;
+  }
 }
