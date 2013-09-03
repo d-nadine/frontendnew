@@ -92,6 +92,7 @@ Radium.Combobox = Radium.View.extend
   # Begin typehead customization
   matcher: (item) ->
     string = item.get @field
+    return unless @query
     ~string.toLowerCase().indexOf(@query.toLowerCase())
 
   sorter: (items) ->

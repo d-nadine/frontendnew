@@ -157,6 +157,13 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   addSelection: (attendee) ->
     person = attendee.get('person')
 
+    unless person
+      displayName = attendee.get('name') || attendee.get('email')
+      item = Ember.Object.create
+              name: attendee.get('name'), email: attendee.get('email'), displayName: displayName
+      @get('contacts').addObject item
+      return
+
     resource = if person.constructor == Radium.User then 'users' else 'contacts'
 
     attendees = @get(resource)

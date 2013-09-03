@@ -47,7 +47,8 @@ Radium.MeetingForm = Radium.Form.extend
       @get('currentUser.model').reload()
 
       users.forEach (user) -> user.reload()
-      contacts.forEach (contact) -> contact.reload()
+      contacts.forEach (contact) -> 
+        contact.reload() if contact.reload
       reference.reload() if reference
 
     @get('store').commit()

@@ -89,15 +89,11 @@
               <i class="ss-standard ss-users"></i> Attendees
             </label>
             <ul class="inline meeting-form-attendees-list">
-              {{#each attendees}}
+              {{#each attendees itemController="autocompleteItem"}}
               <li>
-                {{#if isLoaded}}
-                  {{avatar this}}
-                  {{link this}}
+                {{avatar this}}
+                {{displayName}}
                 <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
-                {{else}}
-                  {{partial 'is_loading'}}
-                {{/if}}
               </li>
               {{/each}}
             </ul>
