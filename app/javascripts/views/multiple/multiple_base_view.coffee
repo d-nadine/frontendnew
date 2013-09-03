@@ -4,7 +4,7 @@ Radium.MultipleBaseView = Radium.View.extend
     evt.preventDefault()
 
   primaryRadio: Radium.Radiobutton.extend
-    leader: 'Make Primary'
+    leader: 'Primary'
 
     didInsertElement: ->
       @set('checked', true) if @get('controller.isPrimary')
@@ -20,6 +20,13 @@ Radium.MultipleBaseView = Radium.View.extend
       <div class="multiple-field multiple-email-address-view control-group">
         <label class="control-label">{{typeLabel}}</label>
         <div class="controls" {{bindAttr class="isInvalid"}}>
+          {{#if showDelete}}
+            <div class="pull-right">
+              <a href="#" {{action removeSelection this bubbles="false"}} class="btn btn-link">
+                <i class="ss-symbolicons-block ss-trash"></i>
+              </a>
+            </div>
+          {{/if}}
           {{yield}}
         </div>
         {{#if showDropDown}}
@@ -38,23 +45,20 @@ Radium.MultipleBaseView = Radium.View.extend
               </ul>
             </div>
             {{view view.primaryRadio}}
-            {{#if showDelete}}
-              <a href="#" {{action removeSelection this bubbles="false"}} >
-                <i class="ss-symbolicons-block ss-trash"></i>
-              </a>
-            {{/if}}
           </div>
         {{/if}}
-        {{#if showAddNew}}
-          <div class="add-new">
-            <a href="#" {{action addNew bubbles="false"}}><i class="ss-standard ss-plus"></i></a>
-          </div>
-        {{/if}}
-        {{#if showAddNewAddress}}
-          <div class="add-new">
-            <a href="#" {{action addNew bubbles="false"}}><i class="ss-standard ss-plus"></i></a>
-          </div>
-        {{/if}}
+        <div class="clearfix add-new">
+          {{#if showAddNew}}
+            <a href="#" {{action addNew bubbles="false"}} class="btn btn-link btn-block">
+              <i class="ss-standard ss-plus"></i> Add New
+            </a>
+          {{/if}}
+          {{#if showAddNewAddress}}
+            <a href="#" {{action addNew bubbles="false"}} class="btn btn-link btn-block">
+              <i class="ss-standard ss-plus"></i> Add New
+            </a>
+          {{/if}}
+        </div>
       </div>
     {{/each}}
   """

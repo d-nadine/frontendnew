@@ -1,14 +1,17 @@
-{{#if isEditing}}
-  <div>
-    {{render 'multiple/phone_number' form.phoneNumbers}}
-  </div>
-{{else}}
-  <div class="control-group">
-    </id><label class="control-label primary-item"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-    {{#if primaryPhone.value}}
-      <a href="tel:{{unbound primaryPhone.value}}"><i class="icon-call"></i>{{primaryPhone.value}}</a>
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-phone muted"></i></dt>
+  <dd>
+    {{#if isEditing}}
+      {{render 'multiple/phone_number' form.phoneNumbers}}
     {{else}}
-      <span class="empty">Add Phone Number here</span>
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#if primaryPhone.value}}
+        <a href="tel:{{unbound primaryPhone.value}}">
+          <strong>{{primaryPhone.name}}</strong> {{primaryPhone.value}}
+        </a>
+      {{else}}
+        <span class="empty">Add Phone Number here</span>
+      {{/if}}
     {{/if}}
-  </div>
-{{/if}}
+  </dd>
+</dl>

@@ -1,8 +1,4 @@
 .multiple-field{
-  div{
-    display: inline-block;
-  }
-
   label{
     display: inline;
   }
@@ -24,10 +20,6 @@
   }
 
   .add-new{
-    margin-left: 5px;
-    vertical-align: top;
-    position: relative;
-    top: 3px;
     a{
       text-decoration: none;
     }
@@ -35,5 +27,11 @@
 
   input[type=text].masked.is-invalid{
     border: 1px solid red;
+  }
+
+  .selector {
+    label {
+      display: inline;
+    }
   }
 }
