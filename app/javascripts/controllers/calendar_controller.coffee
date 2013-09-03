@@ -41,7 +41,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
     @set 'isLoading', true
 
-    Ember.RSVP.all([todos, meetings]).then =>
+    Ember.RSVP.all([todos, meetings, calls]).then =>
       @set 'isLoading', false
   ).observes('date')
 
@@ -94,17 +94,20 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     items = []
 
     @get('todos').forEach (todo) -> items.pushObject todo
+    @get('calls').forEach (call) -> items.pushObject call
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
-    if user = @get('user')
-      items = items.filter (item) =>
-        item.constructor is Radium.Todo && item.get('user') == user ||
-        item.constructor is Radium.Meeting && item.get('users').contains user
+    user = @get('user') || @get('currentUser')
+
+    items = items.filter (item) =>
+      (item.constructor is Radium.Todo && item.get('user') == user) ||
+      (item.constructor is Radium.Call && item.get('user') == user) ||
+      (item.constructor is Radium.Meeting && item.get('users').contains(user) || item.get('organizer') == user)
 
     items.sort((a, b) ->
         Ember.DateTime.compare a.get('time'), b.get('time')
       ).map (item) -> CalendarItem.create(content: item)
-  ).property('date', 'todos.[]', 'meetings.[]', 'user')
+  ).property('date', 'todos.[]', 'calls.[]',  'meetings.[]', 'user')
 
   todos: (->
     startDate = @get 'startOfCalendar'
@@ -114,12 +117,20 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
       todo.get('isLoaded') && todo.get('finishBy').isBetweenDates(startDate, endDate)
   ).property('date')
 
+  calls: (->
+    startDate = @get 'startOfCalendar'
+    endDate = @get 'endOfCalendar'
+
+    Radium.Call.filter (call) ->
+      call.get('isLoaded') && call.get('finishBy').isBetweenDates(startDate, endDate)
+  ).property('date')
+
   meetings: (->
     startDate = @get 'startOfCalendar'
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
-      meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate)
+      meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate) 
   ).property('date')
 
   # FIXME: Why does this only work with ArrayController and
