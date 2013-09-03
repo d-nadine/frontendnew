@@ -1,9 +1,10 @@
 .next-task-widget {
   text-align: left;
+  white-space: nowrap;
 
-  small {
+  span {
+    display: inline-block;
     margin-right: 10px;
-    font-weight: bold;
   }
 
   &:hover {
@@ -12,7 +13,14 @@
     }
   }
 
+  .dark {
+    font-weight: bold;
+  }
+
   .text {
+    max-width: 120px;
     margin-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

@@ -1,0 +1,37 @@
+.tabbar {
+  padding-top: 15px;
+  position: fixed;
+  top: 47px;
+  left: 40px;
+  right: 0;
+  background-color: $dark-selected-item;
+
+  .tabbar-inner {
+    /*max-width: 1000px;*/
+    margin: 0 auto;
+  }
+
+  .nav {
+    margin-bottom: 0;
+    border: none;
+    text-shadow: 0 1px 1px rgba(black, 0.75);
+
+    > li > a:hover,
+    > li > a:focus,
+    a.active {
+      text-shadow: 0 1px 1px rgba(black, 0.2);
+      color: #666;
+      border-bottom: none;
+      background-color: $background;
+    }
+  }
+
+  a {
+    padding: {
+      right: 50px;
+      left: 50px;
+    }
+    font-weight: bold;
+    color: #fff;
+  }
+}

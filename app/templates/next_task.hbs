@@ -12,7 +12,7 @@
       <i class="ss-standard ss-calendar"></i>
     {{/if}}
 
-    <small class="dark">
+    <span class="dark">
       {{#if isTodo}}
         {{formatDateTime finishBy format=date}}
       {{/if}}
@@ -24,7 +24,7 @@
       {{#if isMeeting}}
         {{formatDateTime startsAt format=date}}
       {{/if}}
-    </small>
+    </span>
 
     <span class="text">
       {{#if isTodo}}
@@ -40,8 +40,8 @@
       {{/if}}
     </span>
   {{else}}
-    <small class="dark">
+    <span class="dark">
       No Tasks Yet!
-    </small>
+    </span>
   {{/if}}
 </a>

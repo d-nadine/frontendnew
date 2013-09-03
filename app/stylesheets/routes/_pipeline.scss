@@ -1,3 +1,9 @@
+.pipeline-view {
+  .main-content {
+    padding-top: 40px;
+  }
+}
+
 .add-lead {
   display: inline-block;
 }
@@ -31,6 +37,23 @@
 }
 
 .pipeline-workflow-deals-row {
+  border: {
+    right: 1px solid transparent;
+    left: 1px solid transparent;
+  }
+
+  &.is-checked {
+    border: {
+      right-color: $link;
+      left-color: $link;
+    }
+
+    & td,
+    &:hover td {
+      background: $calendar-active-bg;
+    }
+  }
+
   a.delete {
     color: #b6b6b6;
     opacity: 0;

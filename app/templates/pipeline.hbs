@@ -1,57 +1,35 @@
-<div class="pipeline-breadcrumb">
-  <ol class="pipeline-breadcrumb-list">
-    {{#each workflowGroups itemController="workflowGroupItem"}}
-      <li class="pipeline-breadcrumb-item">
-        {{#if isWorkflow}}
-          {{#linkTo "pipeline.workflow" content.title class="pipeline-breadcrumb-button"}}
-            <div class="vert-center">
-              <h4 class="pipeline-state-title">
-                {{capitalize content.title}}
-                <div class="pipeline-badge">
-                  {{pipelineBadge content.title}} new
-                </div>
-              </h4>
-              <p class="pipeline-state-numbers">{{length}} / {{currency total}}</p>
-            </div>
-          {{/linkTo}}
-        {{/if}}
-        {{#if isClosed}}
-          {{#linkTo "pipeline.closed" class="pipeline-breadcrumb-button"}}
-            <div class="vert-center">
-              <h4 class="pipeline-state-title">
-                {{capitalize content.title}}
-                <div class="pipeline-badge">
-                  {{pipelineBadge content.title}}
-                </div>
-              </h4>
-              <p class="pipeline-state-numbers">{{length}} / {{currency total}}</p>
-            </div>
-          {{/linkTo}}
-        {{/if}}
-        {{#if isLost}}
-          {{#linkTo "pipeline.lost" class="pipeline-breadcrumb-button"}}
-            <div class="vert-center">
-              <h4 class="pipeline-state-title pipeline-state-lost">
-                {{capitalize content.title}}
-                <div class="pipeline-badge">
-                  {{pipelineBadge content.title}}
-                </div>
-              </h4>
-              <p class="pipeline-state-numbers">{{length}} / {{currency total}}</p>
-            </div>
-          {{/linkTo}}
-        {{/if}}
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <ul class="nav nav-tabs">
+      <li>
+        {{#linkTo "pipeline" activeClass="current-url"}}All Pipelines{{/linkTo}}
       </li>
-    {{/each}}
-    <li class="pipeline-breadcrumb-item">
-      {{#linkTo "pipeline.unpublished" class="pipeline-breadcrumb-button"}}
-        <div class="vert-center">
-          <h5 class="pipeline-state-title pipeline-state-empty">Unpublished</h5>
-          <p class="pipeline-state-numbers">{{unpublished.length}}</p>
-        </div>
-      {{/linkTo}}
-    </li>
-  </ol>
+      {{#each workflowGroups itemController="workflowGroupItem"}}
+        <li>
+          {{#if isWorkflow}}
+            {{#linkTo "pipeline.workflow" content.title}}
+              {{content.title}} {{currency total}}
+            {{/linkTo}}
+          {{/if}}
+          {{#if isClosed}}
+            {{#linkTo "pipeline.closed"}}
+              {{content.title}} {{currency total}}
+            {{/linkTo}}
+          {{/if}}
+          {{#if isLost}}
+            {{#linkTo "pipeline.lost"}}
+              {{content.title}} {{currency total}}
+            {{/linkTo}}
+          {{/if}}
+        </li>
+      {{/each}}
+      <li>
+        {{#linkTo "pipeline.unpublished"}}
+          Unpublished {{unpublished.length}}
+        {{/linkTo}}
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div id="pipeline-results" class="">
