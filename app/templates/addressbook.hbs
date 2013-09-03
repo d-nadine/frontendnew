@@ -85,10 +85,26 @@
 
 <div class="search-result-list">
   {{#if visibleContent.length}}
-    <div class="search-results-header">
-      <a href="#" {{action checkAll}}>Select All</a>
+    <div class="search-results-header row-fluid">
+      <div class="span1 checkers">
+        <a href="#" {{action checkAll}}>Select All</a>
+      </div>
+      <div class="span4 name">
+        Name
+      </div>
+      <div class="span2 last-activity">
+        Last Activity
+      </div>
+      <div class="span2 next-task">
+        Next Task
+      </div>
+      <div class="span3 groups">
+        Groups
+      </div>
     </div>
   {{/if}}
   {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
-  {{partial 'shared/show_more'}}
+  <div class="clearfix">
+    {{partial 'shared/show_more'}}
+  </div>
 </div>

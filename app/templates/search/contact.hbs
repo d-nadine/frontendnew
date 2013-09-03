@@ -1,29 +1,33 @@
-{{partial 'shared/check_button'}}
-<div class="pull-left">
-  {{avatar this size=medium class="img-polaroid"}}
+<div class="span1 checkers">
+  {{partial 'shared/check_button'}}
 </div>
-<div class="clearfix">
-  <div class="pull-right delete">
-    {{partial 'search/delete'}}
+<div class="span4 name">
+  <div class="pull-left">
+    {{avatar this size=medium class="img-polaroid"}}
   </div>
-  <div class="span3">
-    <div class="name">
-      <h4 class="search-list-item-title">{{#linkTo "contact" this}}{{displayName}}{{/linkTo}}</h4>
-    </div>
-    <div class="company-title">
-      <div class="title muted">{{title}}</div>
-      {{#if company}}
+  <div class="clearfix search-list-item-title">
+    <h4>
+      {{#linkTo "contact" this}}
+        {{displayName}}
+      {{/linkTo}}
+    </h4>
+    {{partial 'search/links'}}
+    <div class="title muted">{{title}}</div>
+    {{#if company}}
       <div class="company">
         {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
       </div>
-      {{/if}}
-    </div>
-    {{partial 'search/links'}}
+    {{/if}}
   </div>
-  <div class="span2">
-    {{partial 'search/last_activity'}}
-  </div>
-  <div class="span3">
-    {{partial 'search/tasks'}}
+</div>
+<div class="span2 last-activity">
+  {{partial 'search/last_activity'}}
+</div>
+<div class="span2 next-task">
+  {{partial 'search/tasks'}}
+</div>
+<div class="span3 groups">
+  <div class="pull-right">
+    {{partial 'search/delete'}}
   </div>
 </div>

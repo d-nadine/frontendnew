@@ -4,10 +4,18 @@
 
 .search-results-header {
   padding: 4px 0;
+  overflow-x: hidden;
   line-height: 30px;
+  font-size: 11px;
+  font-weight: bold;
   border: {
     top: 2px solid $border;
     bottom: 2px solid $border;
+  }
+  color: $border;
+
+  > div {
+    float: left;
   }
 
   a {
@@ -16,17 +24,33 @@
 }
 
 .search-result-list-item {
-  padding: 10px 0 10px 50px;
+  width: 100%;
+  padding: 10px 0;
+  float: left;
   position: relative;
   border-bottom: 1px solid $border;
+  border: {
+      right: 1px solid transparent;
+      left: 1px solid transparent;
+    }
   @include box-sizing(border-box);
+
+  > div {
+    float: left;
+  }
 
   &.is-checked {
     border: {
-      right: 1px solid $link;
-      left: 1px solid $link;
+      right-color: $link;
+      left-color: $link;
     }
     background-color: $calendar-active-bg;
+  }
+
+  .company-icon {
+    height: 50px;
+    font-size: 50px;
+    line-height: 60px;
   }
 
   .delete {
@@ -42,13 +66,16 @@
   .avatar {
     display: inline-block;
   }
-
-  .links a,
-  .search-list-item-title a {
-    color: #333;
-  }
 }
 
 .search-list-item-title {
-  margin-top: 0;
+  margin: 0 0 0 100px;
+
+  h4 {
+    margin-top: 0;
+
+    a {
+      color: #333;
+    }
+  }
 }

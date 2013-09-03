@@ -1,5 +1,5 @@
 Radium.SearchResultItemView = Radium.View.extend
-  classNames: 'search-result-list-item'
+  classNames: 'search-result-list-item row-fluid'
   classNameBindings: ['controller.isChecked']
 
   didInsertElement: ->

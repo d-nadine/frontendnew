@@ -4,5 +4,9 @@
     <label>Next Task</label>
     {{render "next_task" nextTask}}
   </div>
+  {{else}}
+    <div class="text-error">
+      <strong><i class="ss-standard ss-alert"></i> No tasks</strong>
+    </div>
   {{/if}}
 </div>

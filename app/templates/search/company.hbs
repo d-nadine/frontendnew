@@ -1,22 +1,26 @@
-{{partial 'shared/check_button'}}
-<div class="pull-left">
-  <img src="http://placehold.it/74x74" class="img-polaroid" alt="">
+<div class="span1 checkers">
+  {{partial 'shared/check_button'}}
 </div>
-<div class="clearfix">
-  <div class="pull-right">
-    {{partial 'search/delete'}}
+<div class="span4 name">
+  <div class="pull-left company-icon">
+    <i class="ss-standard ss-buildings muted"></i>
   </div>
-  <div class="span3">
-    <h4 class="search-list-item-title">{{#linkTo "company" this}}{{name}}{{/linkTo}}</h4>
+  <div class="clearfix search-list-item-title">
+    <h4>{{#linkTo "company" this}}{{name}}{{/linkTo}}</h4>
     {{partial 'search/links'}}
     <address>
       {{partial 'shared/address'}}
     </address>
   </div>
-  <div class="span2">
-    {{partial 'search/tasks'}}
-  </div>
-  <div class="span2">
-    {{partial 'search/members'}}
+</div>
+<div class="span2 last-activity">
+  {{partial 'search/last_activity'}}
+</div>
+<div class="span2 next-task">
+  {{partial 'search/tasks'}}
+</div>
+<div class="span3 groups">
+  <div class="pull-right">
+    {{partial 'search/delete'}}
   </div>
 </div>
