@@ -97,12 +97,12 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     @get('calls').forEach (call) -> items.pushObject call
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
-    user = @get('user') || @get('currentUser')
-
-    items = items.filter (item) =>
-      (item.constructor is Radium.Todo && item.get('user') == user) ||
-      (item.constructor is Radium.Call && item.get('user') == user) ||
-      (item.constructor is Radium.Meeting && item.get('users').contains(user) || item.get('organizer') == user)
+    if user = @get('user')
+      items = items.filter (item) =>
+        debugger
+        item.constructor is Radium.Todo && item.get('user') == user ||
+        item.constructor is Radium.Call && item.get('user') == user ||
+        item.constructor is Radium.Meeting && item.get('users').contains user
 
     items.sort((a, b) ->
         Ember.DateTime.compare a.get('time'), b.get('time')
