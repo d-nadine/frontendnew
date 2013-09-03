@@ -59,7 +59,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
   """
 
   setValue: (object) ->
-    @set 'value', object.get('name')
+    @set 'value', object.get('person')
 
   queryParameters: (query) ->
     term: query

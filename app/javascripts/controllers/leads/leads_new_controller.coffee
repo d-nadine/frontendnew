@@ -8,6 +8,15 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null
 
+  name: ( (key, value)->
+    if arguments.length == 2 && @get('model').constructor isnt Radium.Contact
+      @set('model.name', value)
+    else
+      return @get('model.name') if @get('model.name.length')
+
+      @get('model.name') || @get('model.displayName')
+  ).property('model.name')
+
   addTag: (tag) ->
     return if @get('tagNames').mapProperty('name').contains tag
 

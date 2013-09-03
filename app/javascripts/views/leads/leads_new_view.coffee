@@ -166,12 +166,14 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
     setValue: (searchResult) ->
       contact = searchResult.get('person')
-      @set 'value', contact.get('name')
       @set 'controller.model', contact
+      @set 'value', contact.get('displayName')
 
     didInsertElement: ->
       @_super.apply this, arguments
-      @$('input[type=text]').focus()
+      Ember.run =>
+        @$('input[type=text]').val('')
+        @$('input[type=text]').focus()
 
     clearValue: ->
       @get('controller').cancel()
