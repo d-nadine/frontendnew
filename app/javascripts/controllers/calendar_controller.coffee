@@ -105,10 +105,8 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     currentUser = @get('currentUser')
 
     items = items.reject (item) =>
-      debugger
       return false unless (item.constructor is Radium.Meeting) && item.get('organizer') && item.get('users.length')
       ((item.constructor is Radium.Meeting) && ((!item.get('users').contains(user)) && (item.get('organizer') != currentUser)))
-      debugger
 
     items.sort((a, b) ->
         Ember.DateTime.compare a.get('time'), b.get('time')
