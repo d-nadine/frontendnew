@@ -1,5 +1,5 @@
 .tabbar {
-  padding-top: 15px;
+  padding-top: 5px;
   position: fixed;
   top: 47px;
   left: 40px;
@@ -17,22 +17,25 @@
     border: none;
     text-shadow: 0 1px 1px rgba(black, 0.75);
 
-    > li > a:hover,
-    > li > a:focus,
-    a.active {
-      text-shadow: 0 1px 1px rgba(black, 0.2);
-      color: #666;
-      border-bottom: none;
-      background-color: $background;
-    }
-  }
+    > li {
+      > a {
+        padding: {
+          right: 25px;
+          left: 25px;
+        }
+        font-weight: bold;
+        color: #fff;
 
-  a {
-    padding: {
-      right: 50px;
-      left: 50px;
+        &:hover,
+        &:focus,
+        &.active {
+          text-shadow: 0 1px 1px rgba(black, 0.2);
+          color: #666;
+          border-bottom: none;
+          background-color: $background;
+        }
+      }
+
     }
-    font-weight: bold;
-    color: #fff;
   }
 }

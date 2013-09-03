@@ -1,3 +1,3 @@
-Radium.CompanyView = Radium.View.extend Radium.LightBackgroundMixin,
+Radium.CompanyView = Radium.View.extend
   classNames: ['page-view']
   layoutName: "layouts/two_column"

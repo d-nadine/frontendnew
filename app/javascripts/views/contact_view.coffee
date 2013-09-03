@@ -1,3 +1,3 @@
-Radium.ContactView = Radium.View.extend Radium.LightBackgroundMixin,
+Radium.ContactView = Radium.View.extend
   classNames: ['page-view']
   layoutName: "layouts/two_column"

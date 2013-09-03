@@ -1,6 +1,6 @@
 <header class="dashboard-header">
   <div class="pull-right">
-    <a href="#" class="btn btn-primary">My Profile</a>
+    {{#linkTo "settings.profile" class="btn btn-primary"}}My Profile{{/linkTo}}
   </div>
   <h4 class="muted">Welcome back, user</h4>
   <h1>Now, click on the links below to get started</h1>
@@ -56,7 +56,7 @@
       {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      {{#linkTo 'user' currentUser class="dashboard-grid-link"}} 
+      {{#linkTo 'user' currentUser class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-check"></i>
         </div>
@@ -66,7 +66,7 @@
       {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      {{#linkTo 'user.form' currentUser 'call' class="dashboard-grid-link"}} 
+      {{#linkTo 'user.form' currentUser 'call' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-phone"></i>
         </div>
@@ -76,7 +76,7 @@
       {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      {{#linkTo 'user.form' currentUser 'meeting' class="dashboard-grid-link"}} 
+      {{#linkTo 'user.form' currentUser 'meeting' class="dashboard-grid-link"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-calendar"></i>
         </div>
