@@ -87,7 +87,13 @@
   {{#if visibleContent.length}}
     <div class="search-results-header row-fluid">
       <div class="span1 checkers">
-        <a href="#" {{action checkAll}}>Select All</a>
+        <a href="#" {{action checkAll}}>
+          {{#if checkedContent}}
+            Select none
+          {{else}}
+            Select all
+          {{/if}}
+        </a>
       </div>
       <div class="span4 name">
         Name
