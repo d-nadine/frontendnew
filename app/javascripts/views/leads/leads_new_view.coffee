@@ -133,7 +133,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     isSubmitted: Ember.computed.alias('controller.isSubmitted')
     isNew: Ember.computed.alias 'controller.isNew'
     highlighter: (item) ->
-      string = item.get 'name'
+      string = item.get 'displayName'
 
       query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
       result = string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->

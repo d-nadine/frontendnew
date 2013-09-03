@@ -17,3 +17,7 @@ Radium.AutocompleteItem = Radium.Model.extend
   isExternal: ( ->
     Ember.isEmpty(@get('person'))
   ).property('person')
+
+  displayName: ( ->
+    @get('name') || @get('email')
+  ).property('name', 'email')

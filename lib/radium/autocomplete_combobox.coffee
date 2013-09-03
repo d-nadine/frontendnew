@@ -3,6 +3,7 @@ require 'lib/radium/toggle_dropdown_mixin'
 
 Radium.AutocompleteCombobox = Radium.Combobox.extend
   queryBinding: 'queryToValueTransform'
+  field: 'displayName'
 
   matchesSelection: (value) ->
     return unless value
