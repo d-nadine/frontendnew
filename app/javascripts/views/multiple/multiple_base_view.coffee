@@ -4,6 +4,7 @@ Radium.MultipleBaseView = Radium.View.extend
     evt.preventDefault()
 
   primaryRadio: Radium.Radiobutton.extend
+    classNames: 'primary-label'
     leader: 'Primary'
 
     didInsertElement: ->
@@ -17,7 +18,7 @@ Radium.MultipleBaseView = Radium.View.extend
 
   layout: Ember.Handlebars.compile """
     {{#each controller itemController="multipleItem"}}
-      <div class="multiple-field multiple-email-address-view control-group">
+      <div {{bindAttr class=":multiple-field :multiple-email-address-view :control-group isPrimary"}}>
         <label class="control-label">{{typeLabel}}</label>
         <div class="controls" {{bindAttr class="isInvalid"}}>
           {{#if showDelete}}

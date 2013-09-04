@@ -1,14 +1,19 @@
-{{#if isEditing}}
-  <div>
-    {{render 'multiple/email_address' form.emailAddresses}}
-  </div>
-{{else}}
-  <div class="control-group">
-    <label class="control-label primary-item"><i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
-    {{#if primaryEmail.value}}
-      {{#linkTo "emails.mailTo" this}}<i class="icon-mail"></i>{{primaryEmail.value}}{{/linkTo}}
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-mail muted"></i></dt>
+  <dd>
+    {{#if isEditing}}
+      <div>
+        {{render 'multiple/email_address' form.emailAddresses}}
+      </div>
     {{else}}
-      <span class="empty">Add email here</span>
+      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      {{#if primaryEmail.value}}
+        {{#linkTo "emails.mailTo" this}}
+          <strong>{{primaryEmail.name}}</strong> {{primaryEmail.value}}
+        {{/linkTo}}
+      {{else}}
+        <span class="empty">Add email here</span>
+      {{/if}}
     {{/if}}
-  </div>
-{{/if}}
+  </dd>
+</dl>

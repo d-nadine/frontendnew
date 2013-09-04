@@ -1,4 +1,11 @@
 .multiple-field{
+  padding: 5px;
+  @include box-sizing(border-box);
+
+  &.is-primary {
+    background-color: $background;
+  }
+
   label{
     display: inline;
   }
@@ -25,13 +32,30 @@
     }
   }
 
-  input[type=text].masked.is-invalid{
-    border: 1px solid red;
+  input[type="text"],
+  input[type="email"] {
+    width: 240px;
+    padding: {
+      right: 5px;
+      left: 5px;
+    }
+
+    &.masked.is-invalid {
+      border: 1px solid red;
+    }
+  }
+
+  .controls {
+    margin-bottom: 5px;
   }
 
   .selector {
     label {
       display: inline;
     }
+  }
+
+  .primary-label {
+    display: inline-block;
   }
 }
