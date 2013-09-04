@@ -29,8 +29,8 @@ Radium.AuthManager = Ember.Object.extend
   ).observes('token')
 
   logOut: (apiUrl) ->
-    url = "#{apiUrl}/sessions/destroy"
-
-    Ember.$.get(url).then ->
-      location.replace 'http://www.radiumapp.com/'
-
+    Ember.$.ajax
+      url: "#{apiUrl}/sessions/destroy"
+      dataType: 'jsonp',
+      success:  ->
+        location.replace 'http://www.radiumapp.com/'
