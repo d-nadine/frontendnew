@@ -2,7 +2,11 @@ Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
   needs: ['userSettings']
   settings: Ember.computed.alias 'controllers.userSettings'
   signatureBinding: 'controllers.userSettings.signature'
-  
+
+  isEditing: false
+  toggleEdit: ->
+    @toggleProperty('isEditing')
+
   isValid: ( ->
     !Ember.isEmpty(@get('firstName')) && !Ember.isEmpty(@get('lastName'))
   ).property('firstName', 'lastName')

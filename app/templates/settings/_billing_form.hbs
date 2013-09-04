@@ -1,6 +1,5 @@
 <div class="form-horizontal">
   <fieldset>
-    <legend>Billing Information</legend>
     {{#if account.isSaving}}
       <div class="alert alert-info">
         <h4 class="text-center text-info">Updating billing...</h4>
@@ -48,7 +47,7 @@
         </div>
       </div>
 
-      <h4>Credit Card</h4>
+      <h4><i class="ss-standard ss-creditcard blue"></i> Credit Card</h4>
       {{#unless hasGatewayAccount}}
         <form id="card-form" method="POST">
           <div class="control-group">
@@ -72,7 +71,7 @@
               <span> / </span>
               <input id="card-expiry-year" type="text" size="4" class="input-mini" />
             </div>
-          </div> 
+          </div>
         </form>
       {{else}}
         {{#if activeCard.isLoading}}

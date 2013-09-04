@@ -1,6 +1,6 @@
 Radium.LightBackgroundMixin = Ember.Mixin.create
   didInsertElement: ->
-    $('html').toggleClass('bright-background')
+    $('body').addClass('bright-background')
 
   willDestroyElement: ->
-    $('html').toggleClass('bright-background')
+    $('body').removeClass('bright-background')

@@ -1,4 +1,8 @@
 .settings-view {
+  .main-content {
+    margin-top: 50px;
+  }
+
   .page-header > .company-logo {
     margin-right: 20px;
 
@@ -6,19 +10,38 @@
       line-height: 50px;
     }
   }
+
+  .control-label {
+    text-align: left;
+    font-weight: bold;
+  }
 }
 
 .settings-sidebar {
+  width: 230px;
   float: left;
+  font-size: 18px;
 
-  a.active {
-    color: #555555;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
-    cursor: default;
-    border-color: #ddd transparent #ddd #ddd;
-    *border-right-color: #ffffff;
+  h3 {
+    margin-top: 0;
+  }
+
+  nav {
+    margin-top: 10px;
+  }
+
+  ul li {
+    margin: 0 0 5px;
+  }
+
+  a {
+    display: block;
+    line-height: 28px;
+    color: #787878;
+
+    &.active {
+      font-weight: bold;
+    }
   }
 }
 
@@ -33,10 +56,25 @@
       margin: 0;
     }
   }
+
+  .form-actions {
+    border: none;
+  }
+}
+
+.settings-user-details {
+  overflow: hidden;
+
+  label.control-label {
+    width: 80px;
+    color: #666;
+    font-size: 12x;
+  }
 }
 
 input.inline-field {
   border: 1px solid transparent;
+  background: transparent;
   @include box-shadow(none);
 
   &:hover,

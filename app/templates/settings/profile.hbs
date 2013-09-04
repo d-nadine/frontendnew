@@ -1,30 +1,28 @@
-<div class="page-header">
-  <h3>My Profile</h3>
-</div>
 <form class="form-horizontal settings-form" {{action "save" controller.currentUser on="submit"}}>
   {{#with controller.currentUser}}
   <fieldset>
-    <div class="control-group">
-      <div class="user-edit-avatar">
-        <button class="btn btn-mini user-change-avatar">
-          <i class="ss-standard ss-write"></i>
-        </button>
-        <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
-      </div>
-      <div class="controls settings-user-details">
-        {{view view.firstName value=firstName placeholder="First Name" class="input-block-level inline-field large-inline-field"}}
-        {{view view.lastName placeholder="Last Name" class="input-block-level inline-field large-inline-field"}}
-        <br>
-        {{input type="tel" value=phone placeholder="Phone Number" class="input-block-level inline-field user-phone" disabledBinding=isSaving}}
-        <br>
-      </div>
+    <div class="pull-right">
+      <a href="#" class="btn" {{action toggleEdit}}>Edit</a>
     </div>
-  </fieldset>
-
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label">Gmail</label>
-      <div class="controls">
+    <div class="user-edit-avatar">
+      <button class="btn btn-mini user-change-avatar">
+        <i class="ss-standard ss-write"></i>
+      </button>
+      <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
+    </div>
+    <div class="controls settings-user-details">
+      <div class="control-group">
+        {{#if controller.isEditing}}
+          {{view view.firstName value=firstName placeholder="First Name" class="span2"}}
+          {{view view.lastName placeholder="Last Name" class="span2"}}
+          {{view view.title placeholder="Title" class="span2"}}
+        {{else}}
+          <h4>{{firstName}} {{lastName}}</h4>
+          <h3>{{title}}</h3>
+        {{/if}}
+      </div>
+      <div class="control-group">
+        <label class="control-label">Gmail</label>
         <div class="input-prepend input-append">
           <input class="span2" id="appendedPrependedInput" type="text" {{bindAttr value=email}} readonly>
           <span class="add-on">
@@ -32,20 +30,28 @@
           </span>
         </div>
       </div>
+      <div class="control-group">
+        <label class="control-label">Phone</label>
+        {{input type="tel" value=phone placeholder="Phone Number" class="user-phone" disabledBinding=isSaving}}
+      </div>
     </div>
   </fieldset>
-    <fieldset>
+
+  <fieldset>
     <div class="control-group">
-      <label class="control-label">Signature</label>
+      <label class="control-label">
+        <i class="ss-standard ss-write blue"></i> Signature
+      </label>
       <div class="controls">
-        {{textarea rows="8" value=settings.signature disabledBinding=settings.isSaving}}
+        {{textarea rows="3" cols="15" value=settings.signature disabledBinding=settings.isSaving}}
       </div>
     </div>
   </fieldset>
   {{/with}}
 
-  <div class="form-actions">
-    <button type="submit" {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
-    <button class="btn" {{action "cancel" controller.currentUser}} {{bindAttr disabled=isSaving}}>Cancel</button>
+  <div>
+    <div class="pull-right">
+      <button type="submit" {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
+    </div>
   </div>
 </form>

@@ -1,23 +1,31 @@
+.pricing-table-list {
+  margin: 30px 0;
+
+  .pricing-item:first-of-type {
+    margin-left: 0;
+  }
+}
+
 .pricing-table {
   margin: 0;
-  padding: 0;
+  padding: 30px 0;
   list-style: none;
-  border: 1px solid lightgray;
+  background: #f3f3f3;
+  border: 1px solid #e7e7e7;
+  @include border-radius(5px);
 
   &.is-current {
     background: lightyellow;
   }
 
   li {
-    padding: 10px 20px;
+    padding: 20px 40px;
     text-align: center;
-    border-bottom: 1px solid rgba(black, 0.1);
     @include box-sizing(border-box);
   }
 
   .title {
     font-size: 20px;
-    font-weight: bold;
   }
 
   .description {
@@ -25,11 +33,11 @@
       top: 15px;
       bottom: 15px;
     }
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .price {
-    font-size: 18px;
-    color: #666;
+    font-size: 25px;
+    font-weight: bold;
   }
 }
