@@ -1,5 +1,8 @@
 Radium.ApplicationRoute = Radium.Route.extend
   events:
+    logOut: ->
+      Radium.get('authManager').logOut(@get('store._adapter.url'))
+
     # Fired whenever the application enters
     # a new route
     didTransition: ->

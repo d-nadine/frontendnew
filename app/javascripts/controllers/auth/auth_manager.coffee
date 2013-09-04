@@ -12,6 +12,14 @@ Radium.AuthManager = Ember.Object.extend
     @get('_token')
   ).property('_token').volatile()
 
+  setAjaxHeaders: ( ->
+    if token = @get('_token')
+      $.ajaxSetup
+        headers:
+          "X-Ember-Compat": "true",
+          "X-User-Token": token
+  ).observes('_token')
+
   tokenDidChange: ( ->
     token = @get('_token')
 
@@ -19,3 +27,10 @@ Radium.AuthManager = Ember.Object.extend
 
     location.replace('http://api.radiumcrm.com/sessions/new')
   ).observes('token')
+
+  logOut: (apiUrl) ->
+    url = "#{apiUrl}/sessions/destroy"
+
+    Ember.$.get(url).then ->
+      location.replace 'http://www.radiumapp.com/'
+
