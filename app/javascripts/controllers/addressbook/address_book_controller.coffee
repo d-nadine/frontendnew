@@ -21,15 +21,18 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @_super.apply this, arguments
     @get('checkedContent').removeArrayObserver(this)
 
-  filters: [
+  categories: [
+    {name: 'all', text: 'All'}
     {name: 'people', text: 'People'}
+    {name: 'companies', text: 'Companies'}
+    {name: 'tags', text: 'Groups'}
+  ]
+
+  filters: [
     {name: 'assigned', text: 'Assigned To Me'}
     {name: 'lead', text: 'Lead'}
     {name: 'exclude', text: 'Excluded from Pipeline'}
     {name: 'personal', text: 'Personal Contacts'}
-    {name: 'companies', text: 'Companies'}
-    {name: 'tags', text: 'Tags'}
-    {name: 'all', text: 'All'}
   ]
 
   assignableContent: ( ->
