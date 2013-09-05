@@ -1,20 +1,17 @@
-<div class="page-header">
-  <img src="http://placehold.it/50x50" alt="" class="pull-left company-logo">
-  <h3>Initech, Inc.</h3>
-</div>
-
 {{#if isAdmin}}
   {{#unless hasGatewayAccount}}
-    <div class="row">
-      <div class="alert">
-        You need to update your details with a valid credit card to upgrade your account.
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="alert">
+          You need to update your details with a valid credit card to upgrade your account.
+        </div>
       </div>
     </div>
   {{/unless}}
-  <div>
+  <div class="settings-group">
     {{#unless isNewCard}}
       <div class="pull-right">
-        <a href="#" class="btn" {{action "changeBilling"}}>Update Billing Info</a>
+        <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
       </div>
     {{/unless}}
     <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
@@ -41,7 +38,7 @@
         {{#if isAdmin}}
           <li class="cta-button">
             <button
-              {{bindAttr class=":btn :btn-block isCurrent::btn-success" disabled="notSelectable"}}
+              {{bindAttr class=":btn isCurrent::btn-success" disabled="notSelectable"}}
               {{action updateSubscription name}}>
               {{#if isCurrent}}
                 Your plan
