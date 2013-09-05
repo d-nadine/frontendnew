@@ -1,22 +1,35 @@
 // this is an inline checker (useful in forms)
 .check-box {
+  width: 24px;
+  height: 24px;
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  text-align: center;
+  border: 1px solid #c3c3c3;
+  background: #fff;
   cursor: pointer;
+  @include border-radius(3px);
 
   &.disabled {
     cursor: default;
   }
 
+  i {
+    margin: 2px 0 0;
+    opacity: 0;
+    font-size: 12px;
+  }
+
+  &:hover i {
+    opacity: 0.25;
+  }
 
   input {
     position: absolute;
     visibility: hidden;
 
     &:checked + i {
-      color: $green;
+      opacity: 1;
     }
 
     &:disabled + i {
