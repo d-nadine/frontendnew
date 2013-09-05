@@ -1,0 +1,31 @@
+{{#if isUser}}
+  {{#linkTo 'user' model}}{{model.firstName}}{{/linkTo}}
+{{/if}}
+
+{{#if isContact}}
+  {{#linkTo 'contact' model}}{{model.displayName}}{{/linkTo}}
+
+  {{#if model.company}}
+    ({{#linkTo 'company' model.company}}{{model.company.name}}{{/linkTo}})
+  {{/if}}
+{{/if}}
+
+{{#if isCompany}}
+  {{#linkTo 'company' model}}{{model.name}}{{/linkTo}}
+{{/if}}
+
+{{#if isTag}}
+  {{#linkTo 'tag' model}}{{model.name}}{{/linkTo}}
+{{/if}}
+
+{{#if isDeal}}
+  {{#linkTo 'deal' model}}{{model.name}}{{/linkTo}}
+{{/if}}
+
+{{#if isAttachment}}
+  <a href="{{url}}" target="_new">{{fileName}}</a>
+{{/if}}
+
+{{#if isEmail}}
+  {{#linkTo 'emails.show' model}}{{model.subject}}{{/linkTo}}
+{{/if}}
