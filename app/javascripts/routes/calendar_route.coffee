@@ -1,7 +1,8 @@
 Radium.CalendarRoute = Radium.Route.extend
   events:
     toggleCalendarDrawer: ->
-      @send 'toggleDrawer', 'calendar/select_user'
+      @controllerFor('calendar').toggleProperty('isCalendarDrawerOpen')
+      # @send 'toggleDrawer', 'calendar/select_user'
 
     selectUser: (user) ->
       @controllerFor('calendar').set 'user', user

@@ -134,7 +134,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
-      meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate) 
+      meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate)
   ).property('date')
 
   # FIXME: Why does this only work with ArrayController and

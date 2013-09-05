@@ -1,7 +1,53 @@
 $calendar-off: #d8d9d9;
 
+.calendar-view {
+  .two-column-layout {
+    padding-left: 40px;
+    @include transition(padding 0.25s ease-in);
+
+    &.is-calendar-drawer-open {
+      padding-left: 380px;
+
+      .sidebar {
+        @include translateX(0);
+      }
+    }
+  }
+
+  .main-content {
+    max-width: none;
+    @include transition(padding 0.25s ease-in);
+  }
+
+  .sidebar {
+    @include transition(transform 0.25s ease-in);
+    @include translateX(-100%);
+  }
+}
+
 .calendar-toolbar {
-  max-width: 518px;
+  width: 100%;
+  display: inline-block;
+  margin: 0 0 20px;
+  color: #707070;
+  border-bottom: 1px solid #787878;
+
+  .month-datepicker-button {
+    margin-right: 20px;
+    position: relative;
+    top: 2px;
+    color: #c4c4c4;
+  }
+
+  .btn-group {
+    margin-top: 13px;
+  }
+}
+
+.calendar-date-title {
+  min-width: 415px;
+  display: inline-block;
+  font-size: 30px;
 }
 
 .calendar-container {
@@ -60,6 +106,10 @@ $calendar-off: #d8d9d9;
   line-height: 32px;
   border-bottom: 1px solid rgba(black, 0.1);
   background-color: #e7e7e7;
+
+  time {
+    text-align: right;
+  }
 }
 
 .events-list-item {
@@ -83,6 +133,14 @@ $calendar-off: #d8d9d9;
 
     a {
       color: $calendar-active;
+    }
+  }
+
+  button.events-list-item-button {
+    padding-top: 0;
+
+    &:hover {
+      color: $green;
     }
   }
 
@@ -117,6 +175,10 @@ $calendar-off: #d8d9d9;
   border-spacing: 4px;
   border-collapse: separate;
   table-layout: fixed;
+
+  th {
+    text-align: left;
+  }
 
   td {
     vertical-align: top;

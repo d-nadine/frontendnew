@@ -1,11 +1,14 @@
 Radium.CalendarView = Radium.View.extend Radium.DarkBackgroundMixin,
   classNames: ['page-view']
   didInsertElement: ->
-    @$('i.month-datepicker-button').datepicker(
+    date = new Date()
+    dates = [date.getYear(), date.getMonth(), date.getDate()]
+    @$('i.month-datepicker-button')
+    .data('date', dates.join('-'))
+    .datepicker(
       changeMonth: true
       dateFormat: "yy-mm-dd"
       numberOfMonths: [2, 3]
-      defaultDate: new Date()
     )
     .on('changeDate', (event) =>
       date = Ember.DateTime.create

@@ -61,6 +61,7 @@
     border: solid 1px $dark-background;
 
     a, a:focus, a:visited, .btn, .btn:focus {
+      color: #4d4d4d;
       outline: none;
     }
   }
@@ -90,6 +91,7 @@
 }
 
 .form-box {
+  max-width: 900px;
   margin: 0 0 20px;
   @include display-box;
   @include box-orient(horizontal);
