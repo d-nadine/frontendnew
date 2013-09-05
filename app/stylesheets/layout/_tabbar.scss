@@ -8,7 +8,6 @@
   background-color: $dark-selected-item;
 
   .tabbar-inner {
-    /*max-width: 1000px;*/
     margin: 0 auto;
   }
 
@@ -37,6 +36,7 @@
           color: #000;
           border-bottom: none;
           background-color: $background;
+          text-shadow: none;
         }
       }
 
