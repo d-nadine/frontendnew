@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header pipeline-header">
   <div class="page-header-controls">
     <form class="form-search pipeline-search">
       <i class="ss-symbolicons-block ss-search"></i>
@@ -7,10 +7,14 @@
     {{partial "pipeline/add_lead_btn"}}
     {{partial "pipeline/actions_btn"}}
   </div>
-  <div id="title">
+  <div class="pipeline-title pull-left">
     <h1>{{title}}</h1>
   </div>
+  <div class="pull-left pipeline-grand-total">
+    <h3><span>Total</span> $18,000</h3>
+  </div>
 </div>
+<div class="clearfix"></div>
 <div class="hidden">
   <div class="show-results">
     <a href="#" class="btn" {{action toggleResultsTable target="view" bubbles=false}}>
