@@ -1,5 +1,5 @@
 <p>
-  "{{link meeting}}" meeting rescheduled to {{formatDateTime newTime}}
+  "{{rescheduled-link model=meeting}}" meeting rescheduled to {{formatDateTime newTime}}
   <br />with: {{list participants}}
-  <br />by {{link user}}
+  <br />by {{resource-link model=user}}
 </p>

@@ -1,5 +1,5 @@
 {{#if isEditing}}
   {{view view.contactPicker}}
 {{else}}
-  <span class="name">{{link contact}}<i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></span></br></br>
+  <span class="name">{{resource-link model=contact}}<i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></span></br></br>
 {{/if}}

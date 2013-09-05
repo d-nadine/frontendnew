@@ -1,10 +1,6 @@
 <h4>You have {{#linkTo 'emails.show' reference}}new mail{{/linkTo}} from
   {{#if reference.isLoaded}}
-    {{#if senderIsContact}}
-      {{#linkTo 'contact' reference.sender}}{{reference.sender.displayName}}{{/linkTo}}
-    {{else}}
-      {{#linkTo 'user' reference.sender}}{{reference.sender.name}}{{/linkTo}}
-    {{/if}}
+    {{resource-link model=reference.sender}}
   {{else}}
     {{partial 'is_loading'}}
   {{/if}}

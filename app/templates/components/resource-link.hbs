@@ -29,3 +29,7 @@
 {{#if isEmail}}
   {{#linkTo 'emails.show' model}}{{model.subject}}{{/linkTo}}
 {{/if}}
+
+{{#if isMeeting}}
+  {{#linkTo 'unimplemented'}}{{view.content.topic}}{{/linkTo}}
+{{/if}}

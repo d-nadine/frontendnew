@@ -40,7 +40,7 @@
           <div class="existing">
             {{#unless isNew}}
               {{#if isLead}}
-                <p><span>{{#linkTo "contact" content}}{{displayName}}{{/linkTo}}{{#if company}}, {{#linkTo company company}}{{company.name}}{{/linkTo}}{{/if}}</span> is a lead.</p>
+                <p><span>{{resourceDeals-link model=content}}</span> is a lead.</p>
                 {{#if contactDeals.length}}
                   <p>They are the contact in the following deals:</p>
                   <table class="table table-striped table-bordered table-hover deals">

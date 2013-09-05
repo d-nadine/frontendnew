@@ -1,11 +1,11 @@
 {{#if isCreate}}
-  "{{link attachment}}" uploaded to the {{link attachedTo}} deal with {{link company}}
+  "{{resource-link model=attachment}}" uploaded to the {{resource-link attachedTo}} deal with {{resource-link model=company}}
 {{/if}}
 
 {{#if isUpdate}}
-  "{{link attachment}}" file changed on the {{link attachedTo}} deal with {{link company}}
+  "{{resource-link model=attachment}}" file changed on the {{resource-link model=attachedTo}} deal with {{resource-link model=company}}
 {{/if}}
 
 {{#if isDelete}}
-  "{{link attachment}}" file removed form the {{link attachedTo}} deal with {{link company}}
+  "{{resource-link model=attachment}}" file removed form the {{resource-link model=attachedTo}} deal with {{resource-link model=company}}
 {{/if}}

@@ -1,11 +1,11 @@
 {{#if isCreate}}
-  "{{link attachment}}" added to discussion about {{link attachedTo}}
+  "{{resource-link model=attachment}}" added to discussion about {{resource-link model=attachedTo}}
 {{/if}}
 
 {{#if isUpdate}}
-  "{{link attachment}}" file changed on the discussion about {{link attachedTo}}
+  "{{resource-link model=attachment}}" file changed on the discussion about {{resource-link model=attachedTo}}
 {{/if}}
 
 {{#if isDelete}}
-  "{{link attachment}}" file removed form the discussion about {{link attachedTo}}
+  "{{resource-link model=attachment}}" file removed form the discussion about {{resource-link model=attachedTo}}
 {{/if}}

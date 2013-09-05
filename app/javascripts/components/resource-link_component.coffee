@@ -1,36 +1,44 @@
 Radium.ResourceLinkComponent = Ember.Component.extend
+  tagName: 'span'
   isUser: ( ->
-    @get('model').constructor is Radium.User
-  ).property('model')
+    @get('content').constructor is Radium.User
+  ).property('content')
 
   isContact: ( ->
-    @get('model').constructor is Radium.Contact
-  ).property('model')
+    @get('content').constructor is Radium.Contact
+  ).property('content')
 
   isCompany: ( ->
-    @get('model').constructor is Radium.Company
-  ).property('model')
+    @get('content').constructor is Radium.Company
+  ).property('content')
 
   isTag: ( ->
-    @get('model').constructor is Radium.Tag
-  ).property('model')
+    @get('content').constructor is Radium.Tag
+  ).property('content')
 
   isDeal: ( ->
-    @get('model').constructor is Radium.Deal
-  ).property('model')
+    @get('content').constructor is Radium.Deal
+  ).property('content')
 
   isAttachment: ( ->
-    @get('model').constructor is Radium.Attachment
-  ).property('model')
+    @get('content').constructor is Radium.Attachment
+  ).property('content')
 
   isDiscussion: ( ->
-    @get('model').constructor is Radium.Discussion
-  ).property('model')
+    @get('content').constructor is Radium.Discussion
+  ).property('content')
 
   isMeeting: ( ->
-    @get('model').constructor is Radium.Meeting
-  ).property('model')
+    @get('content').constructor is Radium.Meeting
+  ).property('content')
 
   isEmail: ( ->
-    @get('model').constructor is Radium.Meeting
+    @get('content').constructor is Radium.Email
+  ).property('content')
+
+  content: ( ->
+    if @get('model') instanceof Ember.ObjectController
+      @get('model.content')
+    else
+      @get('model')
   ).property('model')
