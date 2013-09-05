@@ -1,6 +1,11 @@
 <div class="page-header">
   <div class="page-header-controls">
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{input type=text value=searchText class="span5"}}
+    </form>
     {{partial "pipeline/add_lead_btn"}}
+    {{partial "pipeline/actions_btn"}}
   </div>
   <div id="title">
     <h1>{{title}}</h1>
@@ -57,7 +62,7 @@
   {{#each groups itemController="workflowGroupItem"}}
     <div class="pipeline-workflows-list-item">
       <div class="page-header">
-        <h3>{{capitalize content.title}} <small>({{length}})</small></h3>
+        <h3>{{capitalize content.title}} ({{length}})</h3>
       </div>
       <div class="deals">
         {{#if isWorkflow}}

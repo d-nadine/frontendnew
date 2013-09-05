@@ -1,51 +1,41 @@
 {{partial 'pipeline/header'}}
 
 <table class="table">
-  <colgroup>
-    <col class="checkbox">
-    <col class="deal">
-    <col class="assigned-to">
-    <col class="pay-by">
-    <col class="next-task">
-    <col class="status">
-    <col class="value">
-    <col class="delete">
-  </colgroup>
   <thead>
     <tr>
-      <th>&nbsp;</th>
-      <th>Deal</th>
-      <th>Assigned To</th>
-      <th>Last Activity</th>
-      <th>Next Task</th>
-      <th>Status</th>
-      <th class="text-center">Value</th>
-      <th>&nbsp;</th>
+      <th class="checkbox">Select All</th>
+      <th class="deal">Deal</th>
+      <th class="assigned-to">Assigned To</th>
+      <th class="last-activity">Last Activity</th>
+      <th class="next-task">Next Task</th>
+      <th class="status">Status</th>
+      <th class="value">Value</th>
+      <th class="delete">&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     {{#each controller}}
       <tr {{bindAttr class="isChecked"}}>
-        <td>
+        <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
-        <td>
+        <td class="deal">
           <p>
-            <big>{{#linkTo "deal" this}}{{name}}</big>{{/linkTo}}<br/>
+            <span>{{#linkTo "deal" this}}{{name}}</span>{{/linkTo}}<br/>
             {{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}<br/>
             {{contact.title}}
           </p>
         </td>
-        <td>
+        <td class="assigned-to">
           <p>
-            <big class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</big></br>
+            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
-        <td>
+        <td class="last-activity">
           {{formatDateTime updatedAt format=date}}
         </td>
-        <td>
+        <td class="next-task">
           {{#if nextTask}}
             <span class="fixme upcase">unimplemented</span>
           {{else}}
@@ -53,8 +43,8 @@
           {{/if}}
         </td>
         <td><span class="fixme upcase">{{status}}</span></td>
-        <td class="text-right">{{currency value}}</td>
-        <td class="text-right">
+        <td class="value">{{currency value}}</td>
+        <td class="delete">
           {{partial 'search/delete'}}
         </td>
       </tr>

@@ -1,5 +1,13 @@
+.pipeline-search {
+
+}
+
 .add-lead {
   display: inline-block;
+
+  .btn {
+    margin-left: 10px;
+  }
 }
 
 .pipeline-workflows-list-item {
@@ -13,7 +21,12 @@
   vertical-align: middle;
   background: #e9e9e9;
 
+  h3 {
+    font-weight: normal;
+  }
+
   small {
+    font-size: 14px;
     line-height: 60px;
     display: inline-block;
     color: #888;
@@ -21,12 +34,69 @@
 }
 
 .pipeline-workflow-deals-list {
+  $base-width: 1200px;
   margin-bottom: 0;
   border-bottom: 1px solid #ccc;
 
   th {
     text-align: left;
     color: #6e6e6e;
+  }
+
+  .next-task-widget {
+    max-width: 250px;
+
+    .text {
+      max-width: 100px;
+    }
+  }
+
+  .checkbox {
+    width: percentage(100px / $base-width);
+  }
+
+  .name,
+  .deal {
+    width: percentage(148px / $base-width);
+  }
+
+  .assigned-to {
+    width: percentage(148px / $base-width);
+  }
+
+  .last-activity {
+    width: percentage(122px / $base-width);
+  }
+
+  .reason,
+  .age {
+    width: percentage(148px / $base-width);
+  }
+
+  .lost-during,
+  .last-activity {
+    width: percentage(122px / $base-width);
+  }
+
+  .next-task {
+    width: percentage(250px / $base-width);
+  }
+
+  .status {
+    width: percentage(145px / $base-width);
+  }
+
+  .pay-by,
+  .forecast {
+    width: percentage(144px / $base-width);
+  }
+
+  .value {
+    width: percentage(130px / $base-width);
+  }
+
+  .deal-button {
+    width: percentage(148px / $base-width);
   }
 }
 

@@ -2,51 +2,42 @@
   {{partial 'pipeline/header'}}
 {{/if}}
 <table class="table table-hover pipeline-workflow-deals-list">
-  <colgroup>
-    <col class="checkbox">
-    <col class="deal">
-    <col class="assigned-to">
-    <col class="pay-by">
-    <col class="next-task">
-    <col class="status">
-    <col class="value">
-  </colgroup>
   <thead>
     <tr>
-      <th>&nbsp;</th>
-      <th>Deal</th>
-      <th>Assigned To</th>
-      <th>Pay By</th>
-      <th>Next Task</th>
-      <th class="text-center">Value</th>
+      <th class="checkbox">Select All</th>
+      <th class="deal">Deal</th>
+      <th class="assigned-to">Assigned To</th>
+      <th class="pay-by">Pay By</th>
+      <th class="next-task">Next Task</th>
+      <th class="value">Value</th>
     </tr>
   </thead>
   <tbody>
     {{#each visibleContent itemController="pipelineItem"}}
       <tr {{bindAttr class="isChecked"}}>
-        <td>
+        <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
-        <td>
+        <td class="deal">
           <p>
-            <big>{{#linkTo "deal" this}}{{name}}</big>{{/linkTo}}<br/>
+            <span class="name">{{#linkTo "deal" this}}{{name}}{{/linkTo}}</span><br/>
             {{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}<br/>
             {{contact.title}}
           </p>
         </td>
-        <td>
+        <td class="assigned-to">
           <p>
-            <big class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</big></br>
+            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
-        <td {{bindAttr class="isPastPayment"}}>
+        <td {{bindAttr  class=":pay-by isPastPayment"}}>
           {{formatDateTime payBy format=date}}
         </td>
-        <td>
+        <td class="next-task">
           {{partial 'pipeline/pipeline_next_task'}}
         </td>
-        <td class="text-right">{{currency value}}</td>
+        <td class="value">{{currency value}}</td>
       </tr>
     {{else}}
       <tr>

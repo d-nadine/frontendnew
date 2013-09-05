@@ -3,7 +3,7 @@
 <table class="table">
   <colgroup>
     <col class="checkbox">
-    <col span="2" class="lead">
+    <col class="lead">
     <col class="assigned-to">
     <col class="age">
     <col class="next-task">
@@ -12,25 +12,25 @@
   </colgroup>
   <thead>
     <tr>
-      <th>&nbsp;</th>
-      <th colspan="2">Lead</th>
-      <th>Assigned To</th>
-      <th class="text-center">Age</th>
-      <th class="text-center">Next Task</th>
-      <th>&nbsp;</th>
+      <th class="checkbox">Select All</th>
+      <th class="lead">Lead</th>
+      <th class="assigned-to">Assigned To</th>
+      <th class="age">Age</th>
+      <th class="next-task">Next Task</th>
+      <th class="deal-button">Forecast</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     {{#each visibleContent}}
       <tr {{bindAttr class="isChecked"}}>
-        <td>
+        <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
-        <td>{{avatar this size=medium}}</td>
-        <td>
+        <td class="lead">{{avatar this size=medium}}</td>
+        <td class="assigned-to">
           <p>
-            <big class="name">{{#linkTo "contact" this}}{{displayName}}{{/linkTo}}</big></br>
+            <span class="name">{{#linkTo "contact" this}}{{displayName}}{{/linkTo}}</span></br>
             <span class="title">{{title}}</span>
           <p>
 
@@ -38,21 +38,21 @@
         </td>
         <td>
           <p>
-            <big class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</big></br>
+            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
-        <td {{bindAttr class="isExpired :text-center"}}>
+        <td {{bindAttr class="isExpired :age :text-center"}}>
           {{ageInWords createdAt}}
         </td>
-        <td class="text-center">
+        <td class="next-task">
           {{#if nextTask}}
             <span class="fixme upcase">unimplemented</span>
           {{else}}
             <i class="ss-standard ss-warning"></i>
           {{/if}}
         </td>
-        <td class="text-center">
+        <td class="deal-button">
           {{#linkTo "deals.fromContact" this class="btn"}}Add Deal{{/linkTo}}
         </td>
         <td class="text-right">

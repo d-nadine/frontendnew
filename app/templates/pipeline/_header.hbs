@@ -2,31 +2,17 @@
   <div class="pipeline-state-controls pull-right">
     <form class="form-search pipeline-search">
       <i class="ss-symbolicons-block ss-search"></i>
-      {{input type=text value=searchText class="input-medium"}}
+      {{input type=text value=searchText class="span5"}}
     </form>
 
     {{partial "pipeline/add_lead_btn"}}
-    {{#if selectedFilterText}}
-      <div class="btn-group">
-        <button class="btn">{{selectedFilterText}}</button>
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          {{#each filters}}
-            <li>
-              <a href="#" {{action changeFilter name}}>{{text}}</a>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    {{/if}}
+    {{partial "pipeline/actions_btn"}}
 
-    {{#if hasCheckedContent}}
-      <div class="btn-group">
-        <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
-          Actions <span class="caret"></span>
-        </button>
+    <div class="btn-group">
+      <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+        Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
+      </button>
+      {{#if hasCheckedContent}}
         <ul class="dropdown-menu">
           <li>
             <a href="#" {{action showForm 'assign'}}>Assign</a>
@@ -51,8 +37,8 @@
             <a href="#" {{action confirmDeletion}}>Delete</a>
           </li>
         </ul>
-      </div>
-    {{/if}}
+      {{/if}}
+    </div>
   </div>
 
   <div id="title">
