@@ -1,10 +1,10 @@
-<div class="span1 checkers">
+<div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
-</div>
-<div class="span4 name">
-  <div class="pull-left company-icon">
+  <div class="pull-right company-icon">
     <i class="ss-standard ss-buildings muted"></i>
   </div>
+</div>
+<div class="span2 name">
   <div class="clearfix search-list-item-title">
     <h4>{{#linkTo "company" this}}{{name}}{{/linkTo}}</h4>
     {{partial 'search/links'}}
@@ -20,7 +20,5 @@
   {{partial 'search/tasks'}}
 </div>
 <div class="span3 groups">
-  <div class="pull-right">
-    {{partial 'search/delete'}}
-  </div>
+
 </div>

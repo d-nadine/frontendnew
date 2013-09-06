@@ -1,10 +1,10 @@
-<div class="span1 checkers">
+<div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
-</div>
-<div class="span4 name">
-  <div class="pull-left">
+  <div class="pull-right">
     {{avatar this size=medium class="img-polaroid"}}
   </div>
+</div>
+<div class="span2 name">
   <div class="clearfix search-list-item-title">
     <h4>
       {{#linkTo "contact" this}}
@@ -27,7 +27,7 @@
   {{partial 'search/tasks'}}
 </div>
 <div class="span3 groups">
-  <div class="pull-right">
-    {{partial 'search/delete'}}
-  </div>
+  {{#each tags}}
+    {{name}}
+  {{/each}}
 </div>

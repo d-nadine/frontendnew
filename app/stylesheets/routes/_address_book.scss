@@ -38,6 +38,10 @@
     float: left;
   }
 
+  a:not(.btn) {
+    color: #111;
+  }
+
   &.is-checked {
     border: {
       right-color: $link;
@@ -62,14 +66,24 @@
     opacity: 1;
   }
 
+  .checker {
+    position: relative;
+  }
+
+  .check-box {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+  }
+
   .avatar {
     display: inline-block;
   }
 }
 
 .search-list-item-title {
-  margin: 0 0 0 100px;
-
   h4 {
     margin-top: 0;
 
