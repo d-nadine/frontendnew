@@ -26,7 +26,7 @@
       <div id="sales-goal">
         <div id="totals">
           <div class="pull-left">
-            <label class="control-label">{{currentMonth}}</label>
+            {{currentMonth}}
           </div>
           <div class="sales-total pull-right">
             {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
@@ -66,7 +66,7 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
-        {{#linkTo "deals.fromUser" this class="btn btn-block btn-primary"}}
+        {{#linkTo "deals.fromUser" this class="btn btn-block btn-large btn-primary"}}
           <i class="ss-standard ss-plus"></i> Deal
         {{/linkTo}}
       </div>
@@ -76,19 +76,19 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-users"></i> My Assigned Contacts <span class="mark">{{contacts.length}}</span>
+        <i class="ss-standard ss-users"></i> My Assigned Contacts
       </h6>
     </div>
     <div class="sidebar-panel-content">
       {{#if contacts.length}}
         <div class="assigned-contacts">
           {{#linkTo "addressbook.assigned" this}}
-            <span {{bindAttr class=":assigned-count :badge :pull-right contacts.length:badge-success:badge-important"}}>{{contacts.length}}</span>
+            <span {{bindAttr class=":assigned-count :pull-right"}}>{{contacts.length}}</span>
             My Assigned Contacts
           {{/linkTo}}
         </div>
       {{else}}
-        <p class="text-center">No contacts have been assigned.</p>
+        <p>No contacts have been assigned.</p>
       {{/if}}
     </div>
   </div>
@@ -110,14 +110,23 @@
             {{person.title}}
           </li>
         {{else}}
-          <li class="text-center">Not following anybody yet!</li>
+          <li>Not following anybody yet!</li>
         {{/each}}
       </ul>
     </div>
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-danger btn-block" {{action confirmDeletion}}>Delete</button>
+      <button class="btn btn-danger btn-large btn-block" {{action confirmDeletion}}>Delete</button>
+      {{#if controller.currentUser}}
+        <br>
+        {{#linkTo "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/linkTo}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      {{view Radium.Combobox placeholder="Invite someone"}}
     </div>
   </div>
 </form>

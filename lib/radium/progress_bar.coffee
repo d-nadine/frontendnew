@@ -1,5 +1,5 @@
 Radium.ProgressBar = Ember.View.extend
-  classNameBindings: [':progress', ':progress-info',':active']
+  classNameBindings: [':progress', ':progress-success',':active', 'percentage:has-percentage']
 
   style: ( ->
     "width: #{@get('percentage')}%"

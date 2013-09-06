@@ -70,8 +70,10 @@
   }
 
   .todo {
-    margin-left: 40px;
-    margin-right: 140px;
+    margin: {
+      left: 60px;
+      right: 140px;
+    }
 
     &.is-valid {
       color: black;

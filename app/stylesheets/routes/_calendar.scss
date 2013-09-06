@@ -191,7 +191,6 @@ $calendar-off: #d8d9d9;
     td:last-of-type,
     td:nth-of-type(6) {
       color: darken($calendar-off, 20%);
-      background-color: lighten($calendar-off, 2%);
 
       .date {
         color: darken($calendar-off, 8%);

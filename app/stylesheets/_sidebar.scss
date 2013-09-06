@@ -186,6 +186,7 @@
   overflow: hidden;
   background-color: #fff;
   border-bottom: 1px solid $control-border-color;
+  color: #6e6e6e;
 
   &:last-child {
     border-bottom: none;
@@ -193,6 +194,10 @@
 
   .name {
     margin: 0;
+  }
+
+  a:not(.btn) {
+    color: darken(#6e6e6e, 10%);
   }
 }
 
@@ -207,7 +212,7 @@
   margin: 0 0 10px;
 
   dt {
-    width: 30px;
+    width: 40px;
     text-align: left;
 
     i {
@@ -217,7 +222,7 @@
   }
 
   dd {
-    margin-left: 30px;
+    margin-left: 40px;
 
     .field {
       margin: 0;

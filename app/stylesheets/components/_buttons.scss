@@ -177,7 +177,6 @@ $btn-primary : #007cdd;
     color: $red;
   }
   border: none;
-  @include box-shadow(none);
 }
 
 .btn-success {
@@ -330,4 +329,8 @@ $btn-primary : #007cdd;
       }
     }
   }
+}
+
+.btn-load-more {
+  font-size: 14px;
 }

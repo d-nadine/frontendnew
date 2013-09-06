@@ -1,17 +1,21 @@
 // this is an inline checker (useful in forms)
 .checker {
+  width: 40px;
+  height: 40px;
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 20px;
+  text-align: center;
 
   label {
+    padding: 0 20px;
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
     cursor: default;
     color: $muted;
     font-size: 18px;
+    @include box-sizing(border-box);
   }
 
   input:not([disabled]) + label:hover {
