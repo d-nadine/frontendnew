@@ -65,8 +65,10 @@
       outline: none;
     }
 
-    .checker {
+    .checker,
+    .form-icon {
       width: 60px;
+      text-align: center;
     }
   }
 
@@ -111,6 +113,11 @@
   .form-switcher,
   .form-switcher-small {
     margin-left: 10px;
+
+    > .dropdown-menu > li > a {
+      line-height: 30px;
+      font-size: 18px;
+    }
   }
 
   .form-switcher {

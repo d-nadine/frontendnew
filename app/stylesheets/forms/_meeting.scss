@@ -80,7 +80,14 @@
       }
 
       span.topic{
+        position: relative;
+        overflow: hidden;
+        margin-left: 70px;
+        display: block;
+        font-size: 20px;
+        line-height: 30px;
         cursor:pointer;
+        color: $muted;
 
         a:after{
           content: ',';
@@ -91,7 +98,7 @@
       }
 
       &.closed{
-        padding: 17px 12px 17px 12px;
+
         .checker label{
           top: -5px;
         }
@@ -120,7 +127,7 @@
     }
 
     .meeting {
-      margin-left: 40px;
+      margin-left: 60px;
       margin-right: 140px;
     }
 
