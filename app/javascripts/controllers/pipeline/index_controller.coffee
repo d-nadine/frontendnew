@@ -27,3 +27,18 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
     Ember.ArrayProxy.create
       content: @get('workflowGroups')
   ).property('workflowGroups')
+
+  total: (->
+    workflowDeals = @get('workflowDeals')
+
+    return 0 if workflowDeals.get('length') == 0
+
+    workflowDeals.reduce(((value, item) ->
+      if item.get('status') == 'lost'
+        return value
+
+      value + item.get('value')
+    ), 0)
+  ).property('workflowDeals.[]')
+
+
