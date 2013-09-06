@@ -1,8 +1,11 @@
+$body: #6e6e6e;
+
 .search-result-list {
 
 }
 
 .search-results-header {
+  $border: #595858;
   padding: 4px 0;
   overflow-x: hidden;
   line-height: 30px;
@@ -11,15 +14,19 @@
     top: 2px solid $border;
     bottom: 2px solid $border;
   }
-  color: $border;
+  color: $body;
 
   > div {
     float: left;
   }
 
   a {
-    color: $border;
+    color: $body;
   }
+}
+
+.address-book-button {
+  min-width: 160px;
 }
 
 .search-result-list-item {
@@ -32,14 +39,20 @@
       right: 1px solid transparent;
       left: 1px solid transparent;
     }
+  color: $body;
   @include box-sizing(border-box);
 
   > div {
     float: left;
   }
 
-  a:not(.btn) {
-    color: #111;
+  .title,
+  .title a {
+    color: #2d2d30;
+  }
+
+  a {
+    color: $body;
   }
 
   &.is-checked {
