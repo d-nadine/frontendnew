@@ -1,5 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
-  needs: ['application']
+  needs: ['application', 'emailsShow']
   sortProperties: ['time']
   sortAscending: false
   applicationController: Ember.computed.alias 'controllers.application'
@@ -19,7 +19,8 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     if @get('content').filterProperty('isChecked').get('length')
       @transitionTo 'messages.bulk_actions'
     else if @get('applicationController.currentPath') == 'messages.bulk_actions'
-      @send 'back'
+      if email = @get('controllers.emailsShow.model')
+        @send 'selectItem', email
   ).observes('content.@each.isChecked')
 
   canSelectItems: (->
