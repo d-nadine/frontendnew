@@ -10,13 +10,14 @@
   <ul class="unstyled">
     <li class="dashboard-grid-item dashboard-grid-item-profile">
       {{#linkTo 'settings.profile' class="dashboard-grid-link"}}
+      {{avatar controller.currentUser size=dashboard}}
         <div class="dashboard-grid-label">
           <h4>Complete Your Profile</h4>
         </div>
       {{/linkTo}}
     </li>
     <li class="dashboard-grid-item">
-      {{#linkTo 'settings.company' class="dashboard-grid-link"}}
+      {{#linkTo 'settings.company' class="dashboard-grid-link" style="background:red"}}
         <div class="dashboard-grid-icon">
           <i class="ss-standard ss-like"></i>
         </div>

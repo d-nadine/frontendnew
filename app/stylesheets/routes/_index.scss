@@ -24,9 +24,15 @@
   float: left;
 }
 
-.dashboard-grid-item-profile .dashboard-grid-link {
-  color: #fff;
-  background: image-url('default_avatars/huge.png') no-repeat center center;
+.dashboard-grid-item-profile {
+  @include border-radius(5px);
+  text-shadow: 0 1px 3px rgba(black, 0.85);
+
+  .dashboard-grid-link {
+    padding: 0;
+    color: #fff;
+    background: $blue;
+  }
 }
 
 .dashboard-grid-link {

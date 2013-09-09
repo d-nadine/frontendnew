@@ -10,6 +10,8 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
                  {height: 124, width: 124}
                else if style == 'medium'
                  {height: 64, width: 64}
+               else if style == 'dashboard'
+                 {height: 244, width: 244}
                else
                  {height: 32, width: 32}
 
