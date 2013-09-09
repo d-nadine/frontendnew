@@ -6,6 +6,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   Radium.BulkActionControllerMixin,
 
   isEditable: true
+  isThumbnailsVisible: true
 
   init: ->
     @_super.apply this, arguments
@@ -34,6 +35,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'exclude', text: 'Excluded from Pipeline'}
     {name: 'personal', text: 'Personal Contacts'}
   ]
+
+  toggleThumbnails: ->
+    @toggleProperty('isThumbnailsVisible')
 
   assignableContent: ( ->
     checkedContent = @get('checkedContent')

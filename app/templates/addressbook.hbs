@@ -105,7 +105,13 @@
           {{/if}}
         </a>
         <div class="pull-right">
-          Hide
+          <a href="#" {{action toggleThumbnails}}>
+            {{#if isThumbnailsVisible}}
+              Hide
+            {{else}}
+              Show avatars
+            {{/if}}
+          </a>
         </div>
       </div>
       <div class="span2 name">

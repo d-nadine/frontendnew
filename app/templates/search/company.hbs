@@ -1,8 +1,10 @@
 <div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
-  <div class="pull-right company-icon">
-    <i class="ss-standard ss-buildings muted"></i>
-  </div>
+  {{#if parentController.isThumbnailsVisible}}
+    <div class="pull-right company-icon">
+      <i class="ss-standard ss-buildings muted"></i>
+    </div>
+  {{/if}}
 </div>
 <div class="span2 name">
   <div class="clearfix search-list-item-title">
