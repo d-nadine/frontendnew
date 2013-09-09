@@ -91,19 +91,6 @@
         {{/if}}
       {{/unless}}
     </div>
-    {{!#if isPersonal}}
-      <!--
-      <div class="clearfix">
-        <div class="alert alert-info">
-          This email is a personal email.  Would you like to add this email to Radium?
-          <button {{action toggleSwitch}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-small">
-            Add Email to Radium
-          </button>
-        </div>
-      </div>
-      -->
-    {{!/if}}
-
     {{#unless isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
         {{render 'related_tasks' tasks}}
