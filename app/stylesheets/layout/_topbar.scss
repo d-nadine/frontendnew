@@ -15,6 +15,10 @@
 
   .nav {
     top: 2px;
+
+    > li {
+      margin: 0 10px;
+    }
   }
 
   .navbar-search {
@@ -23,8 +27,9 @@
 
   a {
     color: #787878;
+
     i {
-      margin-left: 4px;
+      margin-left: 10px;
       position: relative;
       top: 1px;
       font-size: 12px;
@@ -32,7 +37,8 @@
       text-shadow: 0 1px 0 rgba(black, 0.25);
     }
 
-    &.active {
+    &.active,
+    &.active i {
       color: #fff;
     }
   }
