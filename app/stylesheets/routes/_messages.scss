@@ -126,6 +126,7 @@ $item-border: #dddddd;
 
   .messages-list-item-timestamp {
     font-size: 11px;
+    line-height: 1em;
   }
 
   .delete {
@@ -186,6 +187,7 @@ $item-border: #dddddd;
 }
 
 .message-item-title {
+  line-height: 0.9em;
   margin: 0 0 5px;
 }
 
@@ -194,6 +196,7 @@ $item-border: #dddddd;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 28px;
 }
 
 .message-item-actions {

@@ -1,39 +1,45 @@
 <div id="bulk-actions">
   <div class="page-header">
+    <h5>Create Tasks from Selected Emails</h5>
+  </div>
+
+  {{render 'form_box' formBox}}
+
+  <ul class="unstyled bulk-actions-list">
+    {{#each controller}}
+      <li>
+        <div class="pull-right">
+          {{formatDateTime timestamp}}
+        </div>
+        {{check-box checked=isChecked disabled=disabled}}
+        <div class="bulk-actions-list-content">
+          <div class="message-item-avatar pull-left">
+            {{#if sender.isLoaded}}
+              {{avatar sender style="medium"}}
+            {{else}}
+              {{partial 'is_loading'}}
+            {{/if}}
+          </div>
+          <div class="clearfix">
+            <h5 class="message-item-title">{{resource-link model=sender}}</h5>
+            <p class="message-item-subject">
+              {{subject}}
+              {{#unless subject}}&nbsp;{{/unless}}
+            </p>
+            {{#if hasAttachments}}
+              <i class="ss-standard ss-attach"></i>
+            {{/if}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+  <div class="clearfix">
     <div class="pull-right">
       <div class="btn-toolbar">
         <button class="btn" {{action cancel}}>Cancel</button>
         <button class="btn btn-primary" {{action confirmDeletion}}>Delete</button>
       </div>
     </div>
-    <h3>Create Tasks from Selected Emails</h3>
-  </div>
-
-  <div class="block block-blue block-arrow-bottom">
-    {{render 'form_box' formBox}}
-  </div>
-
-  <div class="block block-connected">
-    <table class="table table-list">
-      {{#each controller}}
-        <tr class="secondary-selection">
-          <td>
-            {{#if isEmail}}
-              <i class="ss-standard ss-mail"></i>
-            {{else}}
-              <i class="ss-symbolicons-block ss-chat"></i>
-            {{/if}}
-          </td>
-          <td><strong>{{person.name}}</strong></td>
-          <td>{{truncate summary}}</td>
-          <td class="muted">{{formatDateTime timestamp}}</td>
-          <td>
-            {{#if hasAttachments}}
-              <i class="ss-standard ss-attach"></i>
-            {{/if}}
-          </td>
-        </tr>
-      {{/each}}
-    </table>
   </div>
 </div>

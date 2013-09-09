@@ -3,7 +3,7 @@ $calendar-off: #d8d9d9;
 .calendar-view {
   .two-column-layout {
     padding-left: 40px;
-    @include transition(padding 0.25s ease-in);
+    @include transition(padding 0.25s);
 
     &.is-calendar-drawer-open {
       padding-left: 380px;
@@ -16,11 +16,11 @@ $calendar-off: #d8d9d9;
 
   .main-content {
     max-width: none;
-    @include transition(padding 0.25s ease-in);
+    @include transition(padding 0.25s);
   }
 
   .sidebar {
-    @include transition(transform 0.25s ease-in);
+    @include transition(transform 0.25s);
     @include translateX(-100%);
   }
 }
@@ -108,6 +108,7 @@ $calendar-off: #d8d9d9;
   background-color: #e7e7e7;
 
   time {
+    display: block;
     text-align: right;
   }
 }

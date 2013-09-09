@@ -1,11 +1,5 @@
 #bulk-actions {
-  .page-header {
-    margin-bottom: 0;
 
-    .btn-toolbar {
-      margin-top: 5px;
-    }
-  }
 }
 
 .addressbook-view,
@@ -62,6 +56,42 @@
       top: 4px;
       right: 5px;
       color: $bright;
+    }
+  }
+}
+
+.bulk-actions-list {
+  li {
+    padding: 10px;
+    position: relative;
+    background: #ebf4fd;
+    border: 1px solid $blue;
+    border-top: none;
+
+    &:first-of-type {
+      border-top: 2px solid #595758;
+    }
+
+    time {
+      font-size: 11px;
+      line-height: 1em;
+    }
+
+    .check-box {
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 20px;
+    }
+
+    .bulk-actions-list-content {
+      position: relative;
+      margin: 0 0 0 60px;
+    }
+
+    .message-item-title {
+      line-height: 0.9em;
     }
   }
 }
