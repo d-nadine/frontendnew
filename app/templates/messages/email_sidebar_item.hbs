@@ -1,5 +1,9 @@
 <div class="message-item-avatar pull-left">
-  {{avatar sender style="medium"}}
+  {{#if sender.isLoaded}}
+    {{avatar sender style="medium"}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}}
 </div>
 <div class="clearfix">
   <h5 class="message-item-title">{{resource-link model=sender}}</h5>
