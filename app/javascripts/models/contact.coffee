@@ -22,7 +22,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   source: DS.attr('string')
   status: DS.attr('string')
   title: DS.attr('string')
-  avatar: DS.attr('object')
+  avatarKey: DS.attr('string')
   notes: DS.attr('string')
 
   isPersonal: Ember.computed.equal 'status', 'personal'

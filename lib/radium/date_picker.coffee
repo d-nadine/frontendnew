@@ -45,7 +45,6 @@ Radium.DatePicker = Radium.View.extend
     return if @$('.datepicker-link').length is 0
 
     @$('.datepicker-link').datepicker()
-    console.log(@$('.btn.dropdown-toggle'))
     @$('.btn.dropdown-toggle').dropdown()
 
     view = this

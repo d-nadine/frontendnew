@@ -2,6 +2,7 @@ Radium.AutocompleteItem = Radium.Model.extend
   name: DS.attr('string')
   email: DS.attr('string')
   source: DS.attr('string')
+  avatarKey: DS.attr('string')
 
   person: ((key, value) ->
     if arguments.length == 2 && value

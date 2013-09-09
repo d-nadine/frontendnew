@@ -22,7 +22,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   email: DS.attr('string')
   phone: DS.attr('string')
 
-  avatar: DS.attr('object')
+  avatarKey: DS.attr('string')
 
   lastLogin: DS.attr('date')
 

@@ -191,16 +191,18 @@ Radium.AutocompleteView = Radium.View.extend
              else
                name
 
+      avatarUrl = if result.get('avatarKey')
+                    "http://res.cloudinary.com/radium/image/upload/c_fit,h_32,w_32/#{result.get('avatarKey')}.jpg"
+                  else
+                    "/images/default_avatars/small.png"
+
       result =
         value: "#{result.constructor}-#{result.get('id')}"
         name: name
-        # FIXME: Get real avatar
-        avatar: "/images/default_avatars/small.png"
+        avatar: avatarUrl
         data: result
 
     getAvatar: (data) ->
-      unless data.data
-        data.avatar = "/images/default_avatars/small.png"
       """
         <img src="#{data.avatar}" title="#{data.name}" class="avatar avatar-small">
       """
