@@ -17,15 +17,7 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 
 Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
-// 
-//   ajax: function(url, type, hash) {
-//     hash = hash || {};
-//     hash.headers = hash.headers || {};
-//     hash.headers['X-Ember-Compat'] = "true";
-//     hash.headers['X-User-Token'] = Radium.get('authManager.token');
-//     return this._super(url, type, hash);
-//   },
-// 
+
   didError: function(store, type, record, xhr){
     if (xhr.status === 412 ){
       var json = JSON.parse(xhr.responseText),
@@ -248,4 +240,8 @@ Radium.RESTAdapter.map('Radium.NotificationSettings', {
   leadIgnored: {embedded: 'always'},
   clientIgnored: {embedded: 'always'},
   taskIgnored: {embedded: 'always'},
+});
+
+Radium.RESTAdapter.map('Radium.Comment', {
+  user: {key: 'author_id'}
 });

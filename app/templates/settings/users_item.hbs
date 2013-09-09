@@ -1,5 +1,9 @@
 <div class="pull-left user-avatar">
-  {{avatar this style="small"}}
+  {{#if isLoaded}}
+    {{avatar this style="small"}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}}
 </div>
 <div class="clearfix">
   <div class="pull-right user-actions">

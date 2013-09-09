@@ -1,7 +1,11 @@
 <div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
   <div class="pull-right">
-    {{avatar this size=medium class="img-polaroid"}}
+    {{#if isLoaded}}
+      {{avatar this size=medium class="img-polaroid"}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
   </div>
 </div>
 <div class="span2 name">

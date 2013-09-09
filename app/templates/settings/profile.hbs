@@ -8,7 +8,11 @@
       <button class="btn btn-mini user-change-avatar">
         <i class="ss-standard ss-write"></i>
       </button>
-      <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
+      {{#if isLoaded}}
+        {{avatar this size=large class="img-polaroid"}}
+      {{else}}
+        {{partial 'is_loading'}}
+      {{/if}}
     </div>
     <div class="controls settings-user-details">
       <div class="control-group">
@@ -32,7 +36,7 @@
       </div>
       <div class="control-group">
         <label class="control-label">Phone</label>
-        {{input type="tel" value=phone placeholder="Phone Number" class="user-phone" disabledBinding=isSaving}}
+        {{view view.phone placeholder="Phone Number" class="user-phone" disabledBinding=isSaving}}
       </div>
     </div>
   </fieldset>

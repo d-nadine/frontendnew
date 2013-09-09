@@ -21,7 +21,11 @@
   </div>
 {{else}}
   <div class="user-avatar pull-left">
-    {{avatar this size=medium}}
+    {{#if isLoaded}}
+      {{avatar this size=medium}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
   </div>
   <div class="clearfix">
     <h4 class="name">

@@ -17,7 +17,11 @@
         </div>
       {{else}}
         {{#linkTo "user" user}}
-          {{avatar user class="img-polaroid"}}
+          {{#if user.isLoaded}}
+            {{avatar user class="img-polaroid"}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
         {{/linkTo}}
         <p>
           {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>

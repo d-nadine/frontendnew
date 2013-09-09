@@ -20,7 +20,11 @@
           {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td class="lead">
-          {{avatar this size=medium}}
+          {{#if contact.isLoaded}}
+            {{avatar contact size=medium}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
           <p>
             <span class="name">{{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}</span></br>
             <span class="title">{{contact.title}}</span>

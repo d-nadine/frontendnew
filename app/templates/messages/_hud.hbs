@@ -26,7 +26,11 @@
   </div>
 
   <div class="pull-left">
-    {{avatar contact size="medium"}}
+    {{#if contact.isLoaded}}
+      {{avatar contact size="medium"}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
   </div>
   <div class="email-hud-content">
     <h4 class="email-hud-title">

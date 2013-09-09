@@ -105,9 +105,13 @@
       <ul class="unstyled">
         {{#each person in following}}
           <li>
-            {{avatar person}}
-            {{person.name}}</br>
-            {{person.title}}
+            {{#if person.isLoaded}}
+              {{avatar person}}
+              {{person.name}}</br>
+              {{person.title}}
+            {{else}}
+              {{partial 'is_loading'}}
+            {{/if}}
           </li>
         {{else}}
           <li>Not following anybody yet!</li>

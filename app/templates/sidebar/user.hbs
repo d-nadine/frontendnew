@@ -7,15 +7,22 @@
   <div class="sidebar-panel-content">
     {{#if isEditing}}
       {{#linkTo "user" user}}
-        {{avatar this class="img-polaroid"}}
+        {{#if isLoaded}}
+          {{avatar this class="img-polaroid"}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
       {{/linkTo}}
       {{view view.userPicker class="field"}}
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
       {{#linkTo "user" user}}
-        {{avatar this class="img-polaroid"}}
+        {{#if isLoaded}}
+          {{avatar this class="img-polaroid"}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
       {{/linkTo}}
-
       <p>
         {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
         <span class="title muted">{{user.title}}</span>

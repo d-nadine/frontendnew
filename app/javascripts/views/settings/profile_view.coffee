@@ -10,3 +10,9 @@ Radium.SettingsProfileView = Radium.View.extend
   title: Ember.TextField.extend Radium.ValueIsInvalidMixin,
     valueBinding: 'controller.title'
     disabledBinding: 'controller.isSaving'
+
+  phone: Ember.TextField.extend
+    valueBinding: 'controller.phone'
+    disabledBinding: 'controller.isSaving'
+
+

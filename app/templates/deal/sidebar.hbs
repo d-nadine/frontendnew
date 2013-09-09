@@ -15,7 +15,11 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="user-avatar pull-left">
-        {{avatar contact size=medium class="img-polaroid"}}
+        {{#if contact.isLoaded}}
+          {{avatar contact size=medium class="img-polaroid"}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
       </div>
       <div class="clearfix">
         {{render 'sidebar/contact_picker' model}}

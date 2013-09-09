@@ -1,1 +1,1 @@
-Radium.UserSettingsController = Ember.ObjectController.extend()
+Radium.UserSettingsController = Radium.ObjectController.extend()

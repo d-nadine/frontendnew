@@ -5,7 +5,11 @@
         <button class="btn btn-mini user-change-avatar">
           <i class="ss-standard ss-write"></i>
         </button>
-        <img src="/images/default_avatars/large.png" alt="" class="img-polaroid">
+        {{#if currentUser.isLoaded}}
+          {{avatar currentUser size=large class="img-polaroid"}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
       </div>
       <div class="controls settings-user-details">
         <div class="pull-right">
