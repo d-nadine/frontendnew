@@ -3,22 +3,23 @@
     <div class="pull-right email-header-actions">
       <button class="btn btn-link muted" {{action toggleMeta}}>
         <small>
+          {{ageInWords sentAt}}
           {{#if showMeta}}
-            Less
+            (less)
           {{else}}
-            More
+            (more)
           {{/if}}
         </small>
       </button>
     </div>
-    <h5 class="email-title">
+    <h4 class="email-title">
       {{#if subject}}
-        <big class="sender">{{resource-link model=sender}}</big> writes <big class="subject"><strong>{{subject}}</strong></big>
+        <strong>{{subject}}</strong><br>
+        <span class="sender">{{resource-link model=sender}} writes</span>
       {{else}}
-          Email from <big class="sender">{{resource-link model=sender}}</big>
+        Email from <span class="sender">{{resource-link model=sender}}</span>
       {{/if}}
-
-    </h5>
+    </h4>
 
     {{#if showMeta}}
       <div class="email-details">

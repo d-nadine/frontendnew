@@ -37,8 +37,12 @@ $comment-border: #cfcfcf;
     }
   }
 
+  .field {
+    font-size: 14px;
+  }
+
   .text {
-    margin-right: 60px;
+    margin-right: 30px;
 
     .avatar-container + & {
       margin-left: 40px;
@@ -48,6 +52,10 @@ $comment-border: #cfcfcf;
       border: 1px solid $comment-border;
     }
   }
+}
+
+.comment-attachment-icon {
+  font-size: 14px;
 }
 
 .new-comment {

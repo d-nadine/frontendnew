@@ -6,8 +6,22 @@ require 'views/forms/form_view'
 
 Radium.FormsTodoView = Radium.FormView.extend
   checkbox: Radium.Checkbox.extend
+    attributeBindings: 'title'
     checkedBinding: 'controller.isFinished'
     disabledBinding: 'controller.canFinish'
+    title: (->
+      if @get('controller.isFinished')
+        "Mark as not done"
+      else
+        "Mark as done"
+    ).property('controller.isDisabled', 'controller.isFinished')
+    didInsertElement: ->
+      unless @get('controller.isNew')
+        @$().tooltip()
+
+    willDestroyElement: ->
+      if @$().data('tooltip')
+        @$().tooltip('destroy')
 
   todoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.description'

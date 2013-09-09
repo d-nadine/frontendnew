@@ -40,5 +40,5 @@ Radium.MentionFieldView = Ember.View.extend
       this.get('controller').submit()
 
     didInsertElement: ->
-      @$().mentionsInput
+      @$().focus().mentionsInput
         onDataRequest: @get('parentView').search.bind(@get('parentView'))

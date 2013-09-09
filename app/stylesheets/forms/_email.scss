@@ -69,6 +69,10 @@
 .email-title {
   margin: 0;
   line-height: 30px;
+
+  .sender {
+    font-weight: normal;
+  }
 }
 
 .email-header {
@@ -87,6 +91,7 @@
   dl.dl-horizontal {
     dt {
       width: 50px;
+      text-align: left;
       color: $muted;
 
       &:after {

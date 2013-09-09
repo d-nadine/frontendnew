@@ -24,6 +24,8 @@ $item-border: #dddddd;
       overflow: hidden;
       margin: 0;
       line-height: 35px;
+      text-align: center;
+      text-transform: capitalize;
       color: #E9E9E9;
       border: none;
       @include border-radius(0);
@@ -122,6 +124,10 @@ $item-border: #dddddd;
     @include transition(opacity 0.25s);
   }
 
+  .messages-list-item-timestamp {
+    font-size: 11px;
+  }
+
   .delete {
     opacity: 0;
     @include transition(opacity 0.25s);
@@ -136,11 +142,18 @@ $item-border: #dddddd;
   }
 
   .check-box {
+    width: 10px;
+    height: 10px;
     padding: 5px;
     position: absolute;
-    left: 0;
-    top: 30px;
+    left: 4px;
+    top: 32px;
     z-index: 1;
+
+    i {
+      margin: 0;
+      line-height: 12px;
+    }
   }
 
   .label {
@@ -178,6 +191,9 @@ $item-border: #dddddd;
 
 .message-item-subject {
   margin: 0 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .message-item-actions {

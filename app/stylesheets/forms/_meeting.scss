@@ -61,21 +61,15 @@
 
       &.has-elapsed {
         // FIXME:  mixin with is-finished?
-        background-color: $dark-background;
+        background-color: #dadada;
+        border-color: #cdcdcd;
 
         .icon i::after {
           border-color: $muted
         }
 
-        &::after {
-          width: 96%;
-          content: '';
-          position: absolute;
-          height: 2px;
-          background-color: black;
-          margin: 0 auto;
-          left: 2%;
-          top: 50%;
+        .topic {
+          text-decoration: line-through;
         }
       }
 

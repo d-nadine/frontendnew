@@ -5,10 +5,14 @@
     &.is-finished {
       text-shadow: 0 1px 0 rgba(white, 0.2);
       color: #c5c5c5;
-      background-color: #e8e8e8;
+      border-color: $green;
 
       .checker label::after {
         border-color: $muted
+      }
+
+      .inline-form-icon {
+        color: $green;
       }
 
       .field {
@@ -19,7 +23,7 @@
           content: '';
           position: absolute;
           height: 1px;
-          background-color: #797979;
+          background-color: $muted;
           margin: 0 auto;
           left: 2%;
           top: 50%;

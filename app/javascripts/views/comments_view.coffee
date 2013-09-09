@@ -2,7 +2,7 @@ require 'lib/radium/text_area'
 
 Radium.CommentsView = Radium.View.extend
   commentTextArea: Radium.TextArea.extend(Ember.TargetActionSupport,
-    placeholder: 'Add a comment'
+    placeholder: 'comment'
     valueBinding: 'controller.text'
     classNames: ['new-comment']
     target: 'controller'
