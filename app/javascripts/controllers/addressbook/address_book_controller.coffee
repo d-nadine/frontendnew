@@ -22,7 +22,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @get('checkedContent').removeArrayObserver(this)
 
   categories: [
-    {name: 'all', text: 'All'}
+    {name: 'all', text: 'Show All'}
     {name: 'people', text: 'People'}
     {name: 'companies', text: 'Companies'}
     {name: 'tags', text: 'Groups'}

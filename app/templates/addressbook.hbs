@@ -19,42 +19,6 @@
       {{#linkTo "leads.new" class="btn btn-primary"}}
         <i class="ss-standard ss-plus"></i> Contact
       {{/linkTo}}
-        <div class="btn-group">
-          <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
-            Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
-          </button>
-          {{#if hasCheckedContent}}
-            <ul class="dropdown-menu">
-              {{#if hasContacts}}
-                <li>
-                  <a href="#" {{action showForm 'assign'}}>Assign</a>
-                </li>
-              {{/if}}
-              <li>
-                <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
-              </li>
-              <li>
-                <a href="#" {{action showForm 'call'}}>Call</a>
-              </li>
-              {{#if hasContacts}}
-                <li>
-                  <a href="#" {{action showEmail}}>Email</a>
-                </li>
-              {{/if}}
-              {{#if assignableContent}}
-                <li>
-                  <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
-                </li>
-              {{/if}}
-              <li>
-                <a href="#" {{action confirmDeletion}}>Delete</a>
-              </li>
-            </ul>
-          {{/if}}
-        </div>
-    </div>
-
-    <div>
       <div class="btn-group">
         <button class="btn address-book-button">Filter{{!view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -68,6 +32,41 @@
       </div>
     </div>
 
+    <div>
+      <div class="btn-group">
+        <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+          Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
+        </button>
+        {{#if hasCheckedContent}}
+          <ul class="dropdown-menu">
+            {{#if hasContacts}}
+              <li>
+                <a href="#" {{action showForm 'assign'}}>Assign</a>
+              </li>
+            {{/if}}
+            <li>
+              <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
+            </li>
+            <li>
+              <a href="#" {{action showForm 'call'}}>Call</a>
+            </li>
+            {{#if hasContacts}}
+              <li>
+                <a href="#" {{action showEmail}}>Email</a>
+              </li>
+            {{/if}}
+            {{#if assignableContent}}
+              <li>
+                <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
+              </li>
+            {{/if}}
+            <li>
+              <a href="#" {{action confirmDeletion}}>Delete</a>
+            </li>
+          </ul>
+        {{/if}}
+      </div>
+    </div>
   </div>
 </div>
 {{outlet confirmation}}
@@ -115,10 +114,10 @@
       <div class="span2 last-activity">
         Last Activity
       </div>
-      <div class="span2 next-task">
+      <div class="span3 next-task">
         Next Task
       </div>
-      <div class="span3 groups">
+      <div class="span2 groups">
         Groups
       </div>
     </div>
