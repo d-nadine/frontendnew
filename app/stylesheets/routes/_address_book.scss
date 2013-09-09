@@ -46,6 +46,12 @@ $body: #6e6e6e;
     float: left;
   }
 
+  .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   .title,
   .title a {
     color: #2d2d30;

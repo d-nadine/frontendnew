@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th class="checkbox">Select All</th>
-      <th class="lead">Lead</th>
+      <th class="deal-lead">Lead</th>
       <th class="assigned-to">Assigned To</th>
       <th class="reason">Reason</th>
       <th class="lost-during">Lost During</th>
@@ -19,12 +19,7 @@
         <td>
           {{check-box checked=isChecked class="checker-block"}}
         </td>
-        <td class="lead">
-          {{#if contact.isLoaded}}
-            {{avatar contact size=medium}}
-          {{else}}
-            {{partial 'is_loading'}}
-          {{/if}}
+        <td class="deal-lead">
           <p>
             <span class="name">{{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}</span></br>
             <span class="title">{{contact.title}}</span>
