@@ -12,6 +12,6 @@ Ember.Handlebars.registerHelper 'ageInWords', (value, options) ->
   else
     "#{days} days"
 
-  html = "<time>#{text}</time"
+  html = "<time>#{text}</time>"
 
   new Handlebars.SafeString html
