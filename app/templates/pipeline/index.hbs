@@ -1,19 +1,26 @@
 <div class="page-header pipeline-header">
-  <div class="page-header-controls">
-    <form class="form-search pipeline-search">
-      <i class="ss-symbolicons-block ss-search"></i>
-      {{input type=text value=searchText class="span5"}}
-    </form>
+  <div class="pull-left">
+    <div class="pipeline-title pull-left">
+      <h1>{{title}}</h1>
+    </div>
+    <div class="pull-left pipeline-grand-total">
+      <h3><span>Total</span> {{currency total}}</h3>
+    </div>
+  </div>
+
+  <div class="pull-right page-header-controls">
     {{partial "pipeline/add_lead_btn"}}
     {{partial "pipeline/actions_btn"}}
   </div>
-  <div class="pipeline-title pull-left">
-    <h1>{{title}}</h1>
-  </div>
-  <div class="pull-left pipeline-grand-total">
-    <h3><span>Total</span> {{currency total}}</h3>
+
+  <div class="pipeline-header-center">
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{input type=text value=searchText class="search-input"}}
+    </form>
   </div>
 </div>
+
 <div class="clearfix"></div>
 <div class="hidden">
   <div class="show-results">

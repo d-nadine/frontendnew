@@ -1,4 +1,6 @@
 .pipeline-header {
+  width: 100%;
+  display: inline-block;
   border: none;
 
   h1, h3 {
@@ -8,6 +10,20 @@
 
 .pipeline-title {
   margin: 0 40px 0 0;
+}
+
+.pipeline-header-center {
+  margin: 0 auto;
+  overflow: hidden;
+
+  .form-search {
+    width: 50%;
+    float: right;
+  }
+
+  .search-input {
+    width: 100%;
+  }
 }
 
 .pipeline-grand-total {
