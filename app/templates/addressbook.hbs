@@ -2,7 +2,12 @@
   <div class="tabbar-inner">
     <ul class="nav nav-tabs">
       {{#each categories}}
-        <li>{{#linkTo "addressbook.filter" name}}{{text}}{{/linkTo}}</li>
+        <li>
+          {{#linkTo "addressbook.filter" name}}
+            {{#if isPrivate}}<i class="ss-standard ss-lock"></i> {{/if}}
+            {{text}}
+          {{/linkTo}}
+        </li>
       {{/each}}
     </ul>
   </div>
@@ -66,6 +71,12 @@
           </ul>
         {{/if}}
       </div>
+      {{! FIXME: Hook up to private filters}}
+      {{#if isPrivate}}
+        <span class="text-error">
+          <strong><i class="ss-standard ss-lock"></i> Private Contacts</strong>
+        </span>
+      {{/if}}
     </div>
   </div>
 </div>

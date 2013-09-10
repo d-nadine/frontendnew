@@ -122,6 +122,10 @@ a:hover {
   text-transform: capitalize;
 }
 
+.text-error {
+  color: #c60436;
+}
+
 // override bootstrap's align top
 .table .th, .table td {
   vertical-align: middle;
