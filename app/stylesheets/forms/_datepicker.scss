@@ -8,7 +8,11 @@
   }
 
   input {
-    width: 80px;
+    width: 200px;
     padding-left: 0px;
+
+    &.timepicker {
+      width: 75px;
+    }
   }
 }

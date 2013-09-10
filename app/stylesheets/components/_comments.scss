@@ -27,16 +27,6 @@ $comment-border: #cfcfcf;
     float: left;
   }
 
-  a {
-    float: right;
-    font-size: 130%;
-    margin-top: 6px;
-
-    &, &:active, a:hover, a:visited {
-      color: inherit;
-    }
-  }
-
   .field {
     font-size: 14px;
   }
@@ -44,17 +34,19 @@ $comment-border: #cfcfcf;
   .text {
     margin-right: 30px;
 
-    .avatar-container + & {
-      margin-left: 40px;
-    }
 
     textarea {
       border: 1px solid $comment-border;
     }
   }
+
+  .avatar-container + .text {
+    margin-left: 50px;
+  }
 }
 
 .comment-attachment-icon {
+  margin: 6px 0 0 10px;
   font-size: 14px;
 }
 
@@ -63,4 +55,8 @@ $comment-border: #cfcfcf;
   box-sizing: border-box;
   margin: 0;
   resize: none;
+
+  .text {
+    overflow: hidden;
+  }
 }

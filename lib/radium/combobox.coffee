@@ -54,7 +54,7 @@ Radium.Combobox = Radium.View.extend
     {{#unless view.disabled}}
       <div {{bindAttr class="view.open:open :btn-group :controlbox-dropdown-group"}} {{action toggleDropdown target=view bubbles=false}}>
         <button class="btn controlbox-dropdown dropdown-toggle" tabindex="-1">
-          <i class="ss-standard ss-navigatedown"></i>
+          <i class="ss-standard ss-dropdown"></i>
         </button>
         <ul class="dropdown-menu">
           {{#each view.sortedSource}}

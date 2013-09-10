@@ -48,7 +48,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     {{#unless view.disabled}}
       <div class="btn-group controlbox-dropdown-group">
         <button class="btn controlbox-dropdown" tabindex="-1" disabled="disabled">
-          <i class="ss-standard ss-navigatedown"></i>
+          <i class="ss-standard ss-dropdown"></i>
         </button>
      </div>
     {{/unless}}

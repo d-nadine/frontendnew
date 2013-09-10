@@ -45,6 +45,11 @@
   }
 
   .btn-group > .btn.controlbox-dropdown:first-child {
+    padding: {
+      top: 5px;
+      bottom: 5px;
+    }
+    border: none;
     @include border-radius(0 2px 2px 0);
   }
 

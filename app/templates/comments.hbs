@@ -5,21 +5,19 @@
         <div class="avatar-container">
           {{#linkTo "user" user}}{{avatar user}}{{/linkTo}}
         </div>
-
         <div class="text">
           {{text}}
         </div>
       </li>
     {{/each}}
-
-    <li class="comment new-comment">
-      {{#linkTo "unimplemented"}}
-        <i class="ss-standard ss-attach muted comment-attachment-icon"></i>
-      {{/linkTo}}
-
-      <div class="text">
-        {{view view.commentTextArea class="field" rows="1"}}
-      </div>
-    </li>
   </ul>
+  <div class="new-comment">
+    {{#linkTo "unimplemented" class="pull-right comment-attachment-icon"}}
+      <i class="ss-standard ss-attach muted"></i>
+    {{/linkTo}}
+
+    <div class="text">
+      {{view view.commentTextArea class="field" rows="1"}}
+    </div>
+  </div>
 </div>
