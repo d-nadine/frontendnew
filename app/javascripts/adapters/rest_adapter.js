@@ -153,6 +153,11 @@ Radium.RESTAdapter.map('Radium.Contact', {
   addresses: {embedded: 'always'},
   tagNames: {embedded: 'always'},
   comments: {embedded: 'load'},
+  contactInfo: {embedded: 'always'}
+});
+
+Radium.RESTAdapter.map('Radium.ContactInfo', {
+  socialProfiles: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Discussion', {

@@ -16,6 +16,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
+  contactInfo: DS.belongsTo('Radium.ContactInfo')
+
   name: DS.attr('string')
   companyName: DS.attr('string')
   status: DS.attr('string')
