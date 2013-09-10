@@ -10,7 +10,11 @@
   <ul class="unstyled">
     <li class="dashboard-grid-item dashboard-grid-item-profile">
       {{#linkTo 'settings.profile' class="dashboard-grid-link"}}
-      {{avatar controller.currentUser size=dashboard}}
+        {{#if  currentUser.isLoaded}}
+          {{avatar currentUser size=dashboard}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
         <div class="dashboard-grid-label">
           <h4>Complete Your Profile</h4>
         </div>
