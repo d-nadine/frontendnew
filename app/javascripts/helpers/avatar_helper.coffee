@@ -15,6 +15,6 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
                else
                  {height: 32, width: 32}
 
-  url = "http://res.cloudinary.com/radium/image/upload/c_fit,h_#{dimensions.height},w_#{dimensions.width}/#{person.get('avatarKey')}.jpg"
+  url = "http://res.cloudinary.com/radium/image/upload/h_#{dimensions.height},w_#{dimensions.width},c_thumb,g_face/#{person.get('avatarKey')}.jpg"
 
   return new Handlebars.SafeString("<img src='#{url}' class='avatar #{options.hash.class}'/>")
