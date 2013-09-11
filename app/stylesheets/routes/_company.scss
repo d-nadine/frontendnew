@@ -14,37 +14,46 @@
   }
 }
 
-.company-banner-footer {
-  padding: 5px 10px;
-  overflow: hidden;
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(black, 0.5);
-  background: #797979;
+.company-banner-details {
+  margin-left: 60px;
+  position: relative;
 
-  a {
-    margin: {
-      right: 20px;
-      left: 20px;
-    }
-    display: inline-block;
-    color: #fff;
-    font-weight: bold;
+  .page-header,
+  .page-header h3 {
+    margin: 0;
   }
 
-  li {
-    line-height: 30px;
+  .page-header {
+    margin-bottom: 20px;
   }
 }
 
-.company-banner-inner {
-  width: 300px;
-  padding: 20px;
-  overflow: hidden;
+.company-banner-col {
+  width: 50%;
+  float: left;
+
+  .dl-horizontal {
+    dt {
+      width: auto;
+      margin-right: 10px;
+      text-align: left;
+    }
+
+    dd {
+      margin-left: auto;
+    }
+  }
+}
+
+.company-banner-actions {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .company-icon {
   margin: 0 20px 0 0;
-  font-size: 50px;
+  font-size: 40px;
   line-height: 60px;
   color: $link;
 }

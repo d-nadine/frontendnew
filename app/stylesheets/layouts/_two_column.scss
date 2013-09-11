@@ -2,3 +2,92 @@
   padding: 60px 20px 60px 382px;
   margin-left: $button-bar-width + $sidebar-border-size;
 }
+
+.company-view,
+.deal-view {
+  .main-content {
+    margin-top: 199px;
+  }
+
+  .sidebar {
+    top: 246px;
+  }
+
+  /* REMOVE ME: TESTING ONLY */
+  .main-content {
+    height: 5000px;
+  }
+
+  &.is-scrolled {
+    .sidebar {
+      top: 102px;
+    }
+  }
+}
+
+.sticky-banner {
+  height: 196px;
+  position: fixed;
+  top: 47px;
+  left: 40px;
+  right: 0;
+  z-index: 99;
+  border-bottom: 3px solid #797979;
+
+  .is-scrolled & {
+    height: 40px;
+  }
+}
+
+.sticky-banner-content {
+  max-width: 1500px;
+  padding: 20px;
+  @include box-sizing(border-box);
+
+  .is-scrolled & {
+    display: none;
+  }
+}
+
+.sticky-banner-collapsed {
+  height: 55px;
+  padding: 10px;
+  overflow: hidden;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(black, 0.5);
+  background: #797979;
+  display: none;
+  @include box-sizing(border-box);
+
+  .is-scrolled & {
+    display: block;
+  }
+
+  > div {
+    max-width: 1590px;
+  }
+
+  a {
+    margin: {
+      right: 20px;
+      left: 20px;
+    }
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  li {
+    line-height: 30px;
+  }
+}
+
+.sticky-banner-collapsed-aside {
+  width: 345px;
+  margin-left: 10px;
+}
+
+.sticky-banner-small-title {
+  margin: 0 40px 0 0;
+  line-height: 28px;
+}
