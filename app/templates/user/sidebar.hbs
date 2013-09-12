@@ -13,7 +13,9 @@
     <div class="sidebar-panel-content">
       {{render 'sidebar/phone' model}}
       {{render 'sidebar/email' model}}
-      {{render 'sidebar/social'}}
+      {{#if model.contactInfo}}
+        {{render 'sidebar/social' model.contactInfo}}
+      {{/if}}
     </div>
   </div>
 

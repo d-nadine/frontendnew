@@ -61,7 +61,9 @@
       {{render "sidebar/company_website" model.company}}
       {{render 'sidebar/phone_numbers' model}}
       {{render 'sidebar/email_addresses' model}}
-      {{render 'sidebar/social' model.contactInfo}}
+      {{#if model.contactInfo}}
+        {{render 'sidebar/social' model.contactInfo}}
+      {{/if}}
       {{render "sidebar/addresses" model}}
     </div>
   </div>
