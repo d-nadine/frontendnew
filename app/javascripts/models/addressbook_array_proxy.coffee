@@ -2,6 +2,7 @@ require 'lib/radium/aggregate_array_proxy'
 
 Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin,
   selectedFilter: null
+  additionalFilter: null
   currentuser: null
   isloaded: false
   searchText: null
@@ -25,6 +26,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   clear: ->
     @set 'isLoaded', false
     @set 'content', []
+    @set 'additionalFilter', null
 
   arrangedContent: (->
     content = @get('content')
@@ -40,19 +42,30 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
                       name = item.get('name') || item.get('displayName')
                       ~name.toLowerCase().indexOf(searchText.toLowerCase())
 
+    if @get('additionalFilter')
+      content = content.filter @furtherFilter.bind(this)
+
     content.setEach 'isChecked', false
 
-    content
+    unless @get('selectedFilter') == 'private'
+      content = content.reject (item) =>
+                  item.constructor == Radium.Contact && item.get('isPersonal')
 
     # FIXME: how are we sorting?
     content.sort @sortResults.bind(this)
-  ).property('content.[]', 'selectedFilter', 'searchText')
+  ).property('content.[]', 'selectedFilter', 'searchText', 'additionalFilter')
 
   sortResults: (left, right) ->
     Ember.compare left.get('name'), right.get('name')
 
+  furtherFilter: (item) ->
+    @["filter#{@get('additionalFilter').classify()}"](item)
+
   filterFunction: (item) ->
     @["filter#{@get('selectedFilter').classify()}"](item)
+
+  filterPrivate: (item) ->
+    item.constructor == Radium.Contact && item.get('isPersonal')
 
   filterTags: (item) ->
     item.constructor is Radium.Tag

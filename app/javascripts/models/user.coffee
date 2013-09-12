@@ -38,5 +38,5 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   contacts: ( ->
     Radium.Contact.all().filter (contact) =>
-      contact.get('user') == this
+      contact.get('user') == this && !contact.get('isPersonal')
   ).property('deals.[]')

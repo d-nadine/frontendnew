@@ -12,6 +12,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @_super.apply this, arguments
     @get('checkedContent').addArrayObserver(this)
 
+  additionalFilter: (additional) ->
+    @set('model.additionalFilter', additional)
+
   arrayWillChange:  (start, removeCount, addCount) ->
     @set 'activeForm', null
 
@@ -34,8 +37,18 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'assigned', text: 'Assigned To Me'}
     {name: 'lead', text: 'Lead'}
     {name: 'exclude', text: 'Excluded from Pipeline'}
-    {name: 'personal', text: 'Personal Contacts'}
   ]
+
+  additionalFilterDisabled: ( ->
+    selectedFilter = @get('model.selectedFilter') 
+    if selectedFilter == 'private'
+      @set 'model.additionalFilter', null
+      return true
+  ).property('model.additionalFilter', 'model.selectedFilter')
+
+  isPrivateContacts: ( ->
+    @get('model.selectedFilter') == 'private'
+  ).property('model.selectedFilter')
 
   toggleThumbnails: ->
     @toggleProperty('isThumbnailsVisible')
@@ -59,6 +72,8 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   ).property('checkedContent.[]')
 
   hasContacts: ( ->
+    return false if @get('isPrivateContacts')
+
     checkedContent = @get('checkedContent')
 
     return unless checkedContent.get('length')

@@ -3,6 +3,8 @@ Ember.Handlebars.registerBoundHelper 'social-icon', (value, options) ->
             "<dt><i class='ss-icon ss-social ss-facebook muted'></i></dt>"
           else if value.get('type') == "twitter"
             "<dt><i class='ss-icon ss-social ss-twitter muted'></i></dt>"
+          else if value.get('type') == "linkedin"
+            "<dt><i class='ss-icon ss-social ss-linkedin muted'></i></dt>"
           else
             "<dt><i class='ss-symbolicons-block ss-share muted'></i></dt>"
 
