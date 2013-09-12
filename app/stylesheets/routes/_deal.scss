@@ -1,3 +1,116 @@
+/* Deal banner */
+.deal-banner {
+  .sticky-banner-collapsed {
+    ul {
+      font-weight: bold;
+
+      li:first-of-type {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+.deal-banner-details {
+  width: 375px;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.deal-banner-stats {
+  overflow: hidden;
+
+  table {
+
+    th {
+      padding: 0 0 10px;
+      text-align: left;
+      color: #787878;
+    }
+
+    td {
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 30px;
+
+      i {
+        position: relative;
+        top: 4px;
+      }
+    }
+
+    .deal-total {
+      width: 284px;
+    }
+
+    .deal-forecast {
+      width: 180px;
+    }
+  }
+}
+
+.deal-banner-bar {
+  position: absolute;
+  top:0;
+  right: 0;
+  left: 0;
+  border-top: 3px solid $green;
+
+  a.tab {
+    margin: 0 0 0 250px;
+    padding: 0 20px;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 35px;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(black, 0.2);
+    text-transform: uppercase;
+    background: $green;
+    @include border-radius(0 0 5px 5px);
+  }
+}
+
+.deal-progress {
+  width: 100%;
+  max-width: 670px;
+  margin: 30px 0 0;
+  display: inline-block;
+  position: relative;
+  border-bottom: 1px solid #c3c3c3;
+
+  .deal-label {
+    width: 20%;
+    float: left;
+    line-height: 24px;
+    font-weight: bold;
+
+    &:not(.active) {
+      color: #787878;
+    }
+  }
+
+  .bar {
+    width: 40%;
+    height: 3px;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    background-color: $blue;
+  }
+}
+
+.deal-timeframe {
+  margin: 10px 0;
+  font-size: 12px;
+  color: #787878;
+
+  i {
+    font-size: 10px;
+  }
+}
+
 .deal-checklist-view{
   .modal.fade.in{
     width: 754px;

@@ -1,11 +1,5 @@
 <form class="form">
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-content">
-      {{render 'sidebar/name' model}}
-    </div>
-  </div>
-
-  {{render 'sidebar/deal_status' model}}
+  {{render 'sidebar/user' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
@@ -31,7 +25,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
-        <i class="ss-symbolicons-block ss-partlycloudy"></i> Forecast
+        <i class="ss-symbolicons-block ss-chart"></i> Status
       </h6>
     </div>
     <div class="sidebar-panel-content">
@@ -45,16 +39,12 @@
     </div>
   </div>
 
-  {{render 'sidebar/description' model}}
-
-  {{render 'sidebar/amount' model}}
+  {{!render 'sidebar/amount' model}}
 
 
   {{#unless isPublic}}
     <p class="muted">Publish this deal to change its status</p>
   {{/unless}}
-
-  {{render 'sidebar/user' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">

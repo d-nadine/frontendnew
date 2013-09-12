@@ -6,6 +6,74 @@
     it with the rest of your company.
   </div>
 {{else}}
+  <div class="sticky-banner deal-banner">
+    <div class="deal-banner-bar">
+      <a href="#" class="tab">
+        Open Deal
+      </a>
+    </div>
+    <div class="sticky-banner-content">
+      <div class="pull-right">
+        <div class="btn-toolbar">
+          <a href="#" class="btn btn-link">
+            <strong>All deals with Company</strong>
+          </a>
+          <button class="btn">Follow</button>
+        </div>
+      </div>
+      <div class="pull-left deal-banner-details">
+        <h2>{{name}}</h2>
+        <p>
+          <a href="#">Existing Customer</a> related to <a href="#">email</a><br>
+          <a href="#">Customer Name</a> at <a href="#">Company</a>
+        </p>
+      </div>
+
+      <div class="deal-banner-stats">
+        <table>
+          <thead>
+            <tr>
+              <th class="deal-total">Negotiating for</th>
+              <th class="deal-forecast">Forecast</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="deal-total">
+                <i class="ss-standard ss-briefcase"></i>  {{currency value}}
+              </td>
+              <td class="deal-forecast">{{percentage}}%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="clearfix deal-progress">
+          <div class="deal-label">Lead</div>
+          <div class="deal-label active">Negotiating</div>
+          <div class="deal-label">Closed</div>
+          <div class="deal-label">Paid</div>
+          <div class="deal-label">Lost</div>
+          <div class="bar"></div>
+        </div>
+        <p class="deal-timeframe">
+          <i class="ss-standard ss-directright"></i> Deal open for 45 days
+        </p>
+      </div>
+    </div>
+
+    <div class="sticky-banner-collapsed">
+      <div>
+        <div class="pull-left sticky-banner-collapsed-aside">
+          <h4 class="sticky-banner-small-title">
+            <i class="ss-standard ss-briefcase"></i> {{name}}
+          </h4>
+        </div>
+        <ul class="inline">
+          <li>{{description}}</li>
+          <li>Forecast {{percentage}}</li>
+        </ul>
+      </div>
+    </div>
+</div>
   {{render "form_box" formBox}}
 
   {{render "task_list" tasks}}
