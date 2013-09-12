@@ -47,7 +47,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   groupType: WorkflowGroup
 
   groupBy: (deal) ->
-    deal.get('status').replace(/\W+/, "_")
+    deal.get('status')
 
   workflowTotal: (->
     @get 'workflowDeals.length'
