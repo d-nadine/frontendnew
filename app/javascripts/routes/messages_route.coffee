@@ -16,7 +16,7 @@ Radium.MessagesRoute = Radium.Route.extend
       else if item instanceof Radium.Discussion
         @transitionTo 'messages.discussion', item
       else
-        folder = @modelFor('messages').get('folder')
+        folder = @controllerFor('messages').get('model.folder')
         @transitionTo 'emails.empty', folder
 
     check: (item) ->
@@ -70,14 +70,6 @@ Radium.MessagesRoute = Radium.Route.extend
     else if !itemsChecked
       @send 'back'
 
-  model: ->
-    messages = Radium.MessageArrayProxy.create
-      currentUser: @controllerFor('currentUser').get('model')
-
-    messages.load()
-
-    messages
-
   renderTemplate: (controller, context) ->
     @render 'messages/drawer_buttons', outlet: 'buttons'
 
@@ -98,7 +90,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
-    messages = @modelFor('messages')
+    messages = @controllerFor('messages').get('model')
     item = messages.get('firstObject')
     unless item
       @transitionTo 'emails.empty', messages.get('folder')

@@ -1,24 +1,30 @@
 require 'lib/radium/aggregate_array_proxy'
+require 'mixins/controllers/poller_mixin'
 
-Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredMixin,
+Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMxin,
   folder: 'inbox'
   currentuser: null
   isloaded: false
 
-  load: ->
-    @clear()
-
+  onPoll: ->
     Radium.Email.find({user_id: @get('currentUser.id')}).then (emails) =>
-    # Radium.Email.find().then (emails) =>
-      @add emails
-      Radium.Discussion.find({}).then (discussions) =>
-        @add discussions
-        @set 'isLoaded', true
-        @resolve this
+      newEmails = @delta(emails)
 
-  clear: ->
-    @set 'isLoaded', false
-    @set 'content', []
+      if newEmails.length
+        console.log "#{newEmails.length} found"
+        @add(newEmails)
+      else
+        console.log "No new emails"
+      Radium.Discussion.find({}).then (discussions) =>
+        newDiscussions = @delta(emails)
+
+        @add(newDiscussions) if newDiscussions.length
+
+  delta: (records) ->
+    delta = records.toArray().reject (record) =>
+                @get('content').contains(record)
+
+    delta
 
   arrangedContent: (->
     content = @get('content')

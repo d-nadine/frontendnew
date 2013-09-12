@@ -1,16 +1,4 @@
-Radium.NotificationsPoller = Ember.Object.extend
-  interval: 30000  # 30 seconds
-  _timer: null
-
-  init: ->
-    @onPoll()
-
-  start: ->
-    @_timer = setInterval(@onPoll.bind(this), @interval)
-
-  stop: ->
-    clearInterval(@_timer) if @_timer
-
+Radium.NotificationsPoller = Ember.Object.extend Radium.PollerMxin,
   onPoll: ->
     existing = Radium.Notification.all().slice()
 

@@ -118,9 +118,16 @@ Radium.ApplicationRoute = Radium.Route.extend
     notificationPoller = Radium.NotificationsPoller.create()
     Radium.set('notificationPoller', notificationPoller)
     notificationPoller.start()
+    messages = Radium.MessageArrayProxy.create
+      currentUser: @controllerFor('currentUser').get('model')
+
+    messages.start()
+    @controllerFor('messages').set 'model', messages
 
   deactivate: ->
     Radium.get('notificationPoller').stop()
+    if model = @controllerFor('messages').get('model')
+      model.stop()
 
   model: ->
     Radium.Deal.find({})
