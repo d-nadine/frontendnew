@@ -91,7 +91,7 @@ Radium.MessagesRoute = Radium.Route.extend
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
     messages = @controllerFor('messages').get('model')
-    item = messages.get('firstObject')
+    item = messages.get('lastObject')
     unless item
       @transitionTo 'emails.empty', messages.get('folder')
       return
