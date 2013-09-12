@@ -90,7 +90,8 @@ Radium.MessagesRoute = Radium.Route.extend
 
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
-    messages = @controllerFor('messages').get('model')
+    messages = @controllerFor('messages').get('model.content').sort (a, b) =>
+      Ember.DateTime.compare(a.get('time'), b.get('time'))
     item = messages.get('lastObject')
     unless item
       @transitionTo 'emails.empty', messages.get('folder')
