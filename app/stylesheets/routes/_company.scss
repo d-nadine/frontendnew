@@ -28,19 +28,23 @@
   }
 }
 
-.company-banner-col {
-  width: 50%;
-  float: left;
+.company-banner-address {
+  width: 310px;
+}
+
+.company-banner-stats {
+  color: #787878;
 
   .dl-horizontal {
+    margin-top: 0;
+
     dt {
-      width: auto;
-      margin-right: 10px;
+      width: 175px;
       text-align: left;
     }
 
     dd {
-      margin-left: auto;
+      margin-left: 175px;
     }
   }
 }
@@ -49,6 +53,10 @@
   position: absolute;
   right: 0;
   bottom: 0;
+
+  .btn-toolbar > .btn {
+    margin-right: 0;
+  }
 }
 
 .company-icon {
