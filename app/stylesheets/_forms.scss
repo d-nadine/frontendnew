@@ -241,3 +241,26 @@
   font-size: 18px;
   line-height: 30px;
 }
+
+/*
+  Form used on new leads/deals, but can be used for anything long.
+  Kept as a separate class so we don't conflict with inline forms that
+  may need to be smaller.
+*/
+.main-form {
+  input.field {
+    height: 25px;
+  }
+
+  .control-group {
+    margin-bottom: 20px;
+  }
+
+  .multiple-field {
+    padding: 0;
+
+    .controls {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -158,12 +158,9 @@
 
   .secondary{
     margin: 0;
-    width: auto;
+    padding: 10px;
     background-color: $background;
     border: solid 1px $dark-background;
-    padding: 10px;
-    width: 95%;
-    margin: 0 auto;
 
     .saving{
       margin-left: auto;
