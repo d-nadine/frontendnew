@@ -11,7 +11,7 @@
 }
 
 .selector{
-  vertical-align: top;
+  display: inline-block;
 }
 
 .leads-view{
@@ -72,8 +72,9 @@
   .autocomplete{
     ul.as-selections{
       width: 519px;
-      padding: 5px;
+      padding: 3px 5px;
       border: 1px solid $control-border-color;
+      @include border-radius(4px);
     }
   }
 
@@ -128,7 +129,7 @@
     }
 
     .controls{
-      margin-left: 0;
+      margin-left: 150px;
     }
 
     label.type{
@@ -137,6 +138,9 @@
     }
 
     .addresses{
+      > div {
+        margin-bottom: 10px;
+      }
       .whole{
         display: block;
       }

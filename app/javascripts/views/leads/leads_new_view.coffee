@@ -118,12 +118,12 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   toggleDetail: ->
     @$('.address-section').slideToggle('medium')
-    @$('#detailToggle').toggleClass('icon-arrow-up icon-arrow-down')
+    @$('#detailToggle').toggleClass('ss-navigatedown ss-navigateup')
 
   showExistingDetails: ->
     @$('.commit').hide()
     @$('.contact-detail').slideToggle('medium')
-    @$('#existingToggle').toggleClass('icon-arrow-up icon-arrow-down')
+    @$('#existingToggle').toggleClass('ss-navigateup')
 
   contactName: Radium.ContactPicker.extend Radium.ContactCompanyMixin,
     classNameBindings: ['open', ':contact-name']

@@ -115,13 +115,11 @@
               <a href="#" class="btn showdetails-link" {{action toggleDetail target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
             </div>
             <div class="address-section">
-              <hr/>
               {{render 'multiple/address' addresses}}
-              <hr/>
             </div>
             {{partial 'validation_error_message'}}
             <div class="button-row">
-              <a href="#" {{action submit target="view" bubbles=false}} {{bindAttr disabled=isSaving}} class="btn btn-primary pull-right">
+              <a href="#" {{action submit target="view" bubbles=false}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
                 {{#if isSaving}}
                   <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
                 {{else}}

@@ -211,6 +211,10 @@
 .contact-types-list {
   margin: 0 0 10px;
 
+  .btn-remove-field {
+    padding-left: 0;
+  }
+
   dt {
     width: 40px;
     text-align: left;
