@@ -29,6 +29,7 @@
   .control-box input[type="text"],
   .control-box input[type="number"],
   .combobox input[type="text"]{
+    width: 228px;
     box-shadow: none;
     border: solid 1px $control-border-color;
     border-radius: 0px;
@@ -56,11 +57,16 @@
   .checklist-forecast{
     position: relative;
     margin-bottom: -20px;
-    .progress.progress-info{
-      display: inline-block;
-      width: 40%;
-      height: 31px;
-      overflow: visible;
+
+    .progress {
+      height: 32px;
+
+      .progress-info{
+        display: inline-block;
+        width: 40%;
+        height: 32px;
+        overflow: visible;
+      }
     }
 
     .checklist-plus{
@@ -136,7 +142,8 @@
 
   .dollar{
     font-weight: bold;
-    padding: 3px 0;
+    padding: 4px 0;
+    line-height: 26px;
   }
 
   .controls.add-files{
@@ -196,19 +203,8 @@
     margin-left: 2px;
   }
 
-  .controls{
-    margin-left: 0;
-  }
-
   .control-label{
     text-align: left;
     width: 110px;
-  }
-
-  .actions{
-    margin-left: 200px;
-    .btn{
-      padding: 5px 60px 5px 60px;
-    }
   }
 }

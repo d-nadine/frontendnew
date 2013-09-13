@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label">Description</label>
+        <label class="control-label">Deal Description</label>
         <div class="controls required">
           {{view view.description valueBinding="description" placeholder="Description" classNames="field input-xxlarge"}}
         </div>
@@ -96,9 +96,9 @@
       </div>
       <hr/>
       {{partial 'validation_error_message'}}
-      <div class="control-group actions">
-        <button href="#" class="btn publish" {{bindAttr disabled="isSaving"}} {{action saveAsDraft}}>Save as draft</button>
-        <button href="#" class="btn btn-success publish"  {{bindAttr disabled="isSaving"}} {{action publish}}>
+      <div class="pull-right control-group actions">
+        <button class="btn btn-large publish" {{bindAttr disabled="isSaving"}} {{action saveAsDraft}}>Save as draft</button>
+        <button class="btn btn-success btn-large publish"  {{bindAttr disabled="isSaving"}} {{action publish}}>
           {{#if isSaving}}
             <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
           {{else}}
