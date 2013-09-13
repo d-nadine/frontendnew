@@ -124,8 +124,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     messages.start()
     @controllerFor('messages').set 'model', messages
 
-    console.log "@get('currentUser.initialMailImported') = #{@get('currentUser.initialMailImported')}"
-
     unless @controllerFor('currentUser').get('initialMailImported')
       initialImporter = Radium.InitialImportPoller.create
         currentUser: @controllerFor('currentUser').get('model')
