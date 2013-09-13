@@ -18,38 +18,40 @@
     </div>
   </div>
 
-  <div class="sidebar-panel sidebar-panel-grey">
-    <div class="sidebar-panel-content">
-      <table class="table sidebar-table">
-        <tbody>
-          {{#each deals}}
+  {{#unless isPersonal}}
+    <div class="sidebar-panel sidebar-panel-grey">
+      <div class="sidebar-panel-content">
+        <table class="table sidebar-table">
+          <tbody>
+            {{#each deals}}
+              <tr>
+                <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+                <td class="text-right">
+                  <strong>{{currency value}} ({{status}})</strong>
+                </td>
+              </tr>
+            {{/each}}
             <tr>
-              <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+              <td>Deal totals</td>
               <td class="text-right">
-                <strong>{{currency value}} ({{status}})</strong>
+                <strong>{{currency dealsTotal}}</strong>
               </td>
             </tr>
-          {{/each}}
-          <tr>
-            <td>Deal totals</td>
-            <td class="text-right">
-              <strong>{{currency dealsTotal}}</strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {{#if deals.length}}
+          </tbody>
+        </table>
+        {{#if deals.length}}
+          <div class="clearfix">
+            See {{#linkTo "pipeline.resourceDeals" this}}deals{{/linkTo}} with {{displayName}}
+          </div>
+        {{/if}}
         <div class="clearfix">
-          See {{#linkTo "pipeline.resourceDeals" this}}deals{{/linkTo}} with {{displayName}}
+          {{#linkTo "deals.fromContact" model class="btn btn-primary pull-right"}}
+            <i class="ss-standard ss-plus"></i> Deal
+          {{/linkTo}}
         </div>
-      {{/if}}
-      <div class="clearfix">
-        {{#linkTo "deals.fromContact" model class="btn btn-primary pull-right"}}
-          <i class="ss-standard ss-plus"></i> Deal
-        {{/linkTo}}
       </div>
     </div>
-  </div>
+  {{/unless}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
