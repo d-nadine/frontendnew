@@ -17,6 +17,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   title: DS.attr('string')
   isAdmin: DS.attr('boolean')
   initialMailImported: DS.attr('boolean')
+  contactInfo: DS.belongsTo('Radium.ContactInfo')
 
   following: DS.hasMany('Radium.User')
 

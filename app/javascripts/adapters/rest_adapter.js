@@ -230,7 +230,8 @@ Radium.RESTAdapter.map('Radium.UserInvitation', {
 
 Radium.RESTAdapter.map('Radium.User', {
   isAdmin: {key: 'admin'},
-  settings: {key: 'settings_id'}
+  settings: {key: 'settings_id'},
+  contactInfo: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.UserSettings', {
