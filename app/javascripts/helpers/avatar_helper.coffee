@@ -2,6 +2,9 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
   style = options.hash.style || options.hash.size || 'small'
 
   unless person && person.get('avatarKey')
+    if style == 'dashboard'
+      style = 'huge'
+
     url = "/images/default_avatars/#{style}.png"
 
     return new Handlebars.SafeString("<img src='#{url}' class='avatar avatar-#{style} #{options.hash.class}'/>")
