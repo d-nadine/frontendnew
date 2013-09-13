@@ -15,6 +15,10 @@ Radium.ContactController = Radium.ObjectController.extend
 
     transaction.add(contact)
 
+    contact.one 'didUpdate', (result) =>
+      unless contact.get('isPersonal')
+        contact.get('user').reload()
+
     contact.one 'becameInvalid', (result) =>
       @send 'flashError', contact
       result.reset()
@@ -76,8 +80,8 @@ Radium.ContactController = Radium.ObjectController.extend
     reference: @get('model')
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    startsAt: @get('now').advance(hour: 1)
-    endsAt: @get('now').advance(hour: 2)
+    startsAt: @get('now')
+    endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
   ).property('model', 'now')
 
