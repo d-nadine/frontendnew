@@ -183,6 +183,25 @@
   }
 }
 
+.initial-importing{
+  position: fixed;
+  width: 80%;
+  top: 60px;
+  z-index: $alerts-layer;
+  text-align: center;
+  margin: 0 0 0 -40%;
+  left:50%;
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 1s;
+}
+
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
 // Email HUD
 .email-hud {
   margin: 0 0 40px;

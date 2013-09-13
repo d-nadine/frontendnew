@@ -69,7 +69,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         });
       }).then(null, DS.rejectionHandler);
     }else{
-      var args = Array.prototype.call(arguments, 0, -1);
+      var args = Array.prototype.slice.call(arguments, 0, -1);
       base.apply(this, args);
     }
   }
