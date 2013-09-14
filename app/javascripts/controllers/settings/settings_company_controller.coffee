@@ -3,7 +3,7 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Current
   users: Ember.computed.alias 'controllers.users'
   pendingUsers: ( ->
     @get('controllers.usersInvites').filter (invite) ->
-      !invite.get('confirmed') || !invite.get('isNew') || !invite.get('isError')
+      !invite.get('confirmed') && !invite.get('isNew') && !invite.get('isError')
   ).property('controllers.usersInvites.[]')
 
   resendInvite: (invite) -> 
