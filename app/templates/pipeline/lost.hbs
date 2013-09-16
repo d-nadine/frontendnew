@@ -1,52 +1,54 @@
-{{#if showHeader}}
-  {{partial 'pipeline/header'}}
-{{/if}}
-<table class="table table-hover pipeline-workflow-deals-list">
-  <thead>
-    <tr>
-      <th class="checkbox">Select All</th>
-      <th class="deal-lead">Lead</th>
-      <th class="assigned-to">Assigned To</th>
-      <th class="reason">Reason</th>
-      <th class="lost-during">Lost During</th>
-      <th class="value">Value</th>
-      <th class="delete-button">&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each visibleContent itemController="pipelineItem"}}
-      <tr {{bindAttr class="isChecked"}}>
-        <td>
-          {{check-box checked=isChecked class="checker-block"}}
-        </td>
-        <td class="deal-lead">
-          <p>
-            <span class="name">{{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}</span></br>
-            <span class="title">{{contact.title}}</span>
-          <p>
-
-          <p class="from"><strong>From:</strong>&nbsp;{{contact.source}}</p>
-        </td>
-        <td class="assigned-to">
-          <p>
-            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
-            <span class="title">{{user.title}}</span>
-          <p>
-        </td>
-        <td><em class="reason">{{lostBecause}}</em></td>
-        <td class="lost-during">{{lostDuring}}</td>
-        <td class="value">{{currency value}}</td>
-        <td class="delete">
-          {{partial 'search/delete'}}
-        </td>
-      </tr>
-    {{else}}
+<div class="pipeline-lost">
+  {{#if showHeader}}
+    {{partial 'pipeline/header'}}
+  {{/if}}
+  <table class="table table-hover pipeline-workflow-deals-list pipeline-lost-list">
+    <thead>
       <tr>
-        <td colspan="8">No Deals</td>
+        <th class="checkbox">Select All</th>
+        <th class="deal-lead">Lead</th>
+        <th class="assigned-to">Assigned To</th>
+        <th class="reason">Reason</th>
+        <th class="lost-during">Lost During</th>
+        <th class="value">Value</th>
+        <th class="delete-button">&nbsp;</th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each visibleContent itemController="pipelineItem"}}
+        <tr {{bindAttr class="isChecked"}}>
+          <td>
+            {{check-box checked=isChecked class="checker-block"}}
+          </td>
+          <td class="deal-lead">
+            <p>
+              <span class="name">{{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}</span></br>
+              <span class="title">{{contact.title}}</span>
+            <p>
 
-{{partial "shared/show_more"}}
-{{partial "pipeline/totals"}}
+            <p class="from"><strong>From:</strong>&nbsp;{{contact.source}}</p>
+          </td>
+          <td class="assigned-to">
+            <p>
+              <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
+              <span class="title">{{user.title}}</span>
+            <p>
+          </td>
+          <td><em class="reason">{{lostBecause}}</em></td>
+          <td class="lost-during">{{lostDuring}}</td>
+          <td class="value">{{currency value}}</td>
+          <td class="delete">
+            {{partial 'search/delete'}}
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="8">No Deals</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{partial "shared/show_more"}}
+  {{partial "pipeline/totals"}}
+</div>

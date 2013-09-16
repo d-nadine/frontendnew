@@ -47,6 +47,7 @@
 
 .pipeline-workflows-total {
   width: 25%;
+  margin: 0 0 30px;
   padding: 0 20px;
   float: right;
   vertical-align: middle;
@@ -61,6 +62,10 @@
     line-height: 60px;
     display: inline-block;
     color: #888;
+  }
+
+  .pipeline-lost-view & {
+    background: #ead7d7;
   }
 }
 
@@ -170,4 +175,13 @@
 .pipeline-search {
   margin: 0;
   display: inline-block;
+}
+
+.pipeline-workflows-list .pipeline-workflows-list-item:last-of-type {
+  width: 100%;
+  margin: 20px 0;
+  padding: 0 5px;
+  overflow: hidden;
+  clear: both;
+  background-color: #e9e9e9;
 }
