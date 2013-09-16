@@ -1,13 +1,17 @@
 /* Deal banner */
-.deal-banner {
-  .sticky-banner-collapsed {
-    ul {
-      font-weight: bold;
+.deal-banner-collapsed {
+  ul {
+    margin-left: 160px;
+    font-weight: bold;
 
-      li:first-of-type {
-        margin-right: 30px;
-      }
+    li i.ss-briefcase {
+      top: 2px;
+      position: relative;
     }
+  }
+
+  .ss-directright {
+    font-size: 10px;
   }
 }
 
@@ -69,6 +73,10 @@
     text-transform: uppercase;
     background: $red;
     @include border-radius(0 0 5px 5px);
+  }
+
+  .is-scrolled & .tab {
+    margin-left: 20px;
   }
 
   &.is-public {

@@ -42,7 +42,7 @@
           <tbody>
             <tr>
               <td class="deal-total">
-                <i class="ss-standard ss-briefcase"></i>  {{currency value}}
+                <i class="ss-standard ss-briefcase"></i> {{currency value}}
               </td>
               <td class="deal-forecast">{{percentage}}%</td>
             </tr>
@@ -64,17 +64,17 @@
       </div>
     </div>
 
-    <div class="sticky-banner-collapsed">
+    <div class="sticky-banner-collapsed deal-banner-collapsed">
       <div>
         <div class="pull-left sticky-banner-collapsed-aside">
-          <h4 class="sticky-banner-small-title">
-            <i class="ss-standard ss-briefcase"></i> {{name}}
-          </h4>
+          <ul class="inline">
+            <li>{{company.name}}</li>
+            <li><i class="ss-standard ss-directright"></i></li>
+            <li>{{contact.name}}</li>
+            <li><i class="ss-standard ss-directright"></i></li>
+            <li><i class="ss-standard ss-briefcase"></i> {{name}} {{currency value}}</li>
+          </ul>
         </div>
-        <ul class="inline">
-          <li>{{description}}</li>
-          <li>Forecast {{percentage}}</li>
-        </ul>
       </div>
     </div>
 </div>
