@@ -85,3 +85,12 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   deletionNotConfirmed: (->
     @get('deletionToken') isnt @get('name')
   ).property('deletionToken')
+
+  # Status controls
+  # FIXME: Needs to be hooked up with store
+  changeStatus: (status) ->
+    @set('status', status)
+
+  dealProgressClass: (->
+    "status-#{@get('status').toLowerCase()}"
+  ).property('status')

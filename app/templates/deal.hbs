@@ -7,10 +7,10 @@
   </div>
 {{else}}
   <div class="sticky-banner deal-banner">
-    <div class="deal-banner-bar">
-      <a href="#" class="tab">
-        Open Deal
-      </a>
+    <div {{bindAttr class=":deal-banner-bar isPublic"}}>
+      <div class="tab">
+        {{#if isPublic}}Open{{else}}Closed{{/if}} Deal
+      </div>
     </div>
     <div class="sticky-banner-content">
       <div class="pull-right">
@@ -24,8 +24,10 @@
       <div class="pull-left deal-banner-details">
         <h2>{{name}}</h2>
         <p>
-          <a href="#">Existing Customer</a> related to <a href="#">email</a><br>
-          <a href="#">Customer Name</a> at <a href="#">Company</a>
+          {{#if reference}}
+            Related to {{#linkTo "messages.email" reference}}{{reference.subject}}{{/linkTo}}<br>
+          {{/if}}
+          {{resource-link model=contact}}
         </p>
       </div>
 
@@ -46,17 +48,19 @@
             </tr>
           </tbody>
         </table>
-        <div class="clearfix deal-progress">
-          <div class="deal-label">Lead</div>
-          <div class="deal-label active">Negotiating</div>
-          <div class="deal-label">Closed</div>
-          <div class="deal-label">Paid</div>
-          <div class="deal-label">Lost</div>
+        <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
+          <a href="#" class="deal-label" {{action "changeStatus" "lead"}}>Lead</a>
+          <a href="#" class="deal-label" {{action "changeStatus" "negotiating"}}>Negotiating</a>
+          <a href="#" class="deal-label" {{action "changeStatus" "closed"}}>Closed</a>
+          <a href="#" class="deal-label" {{action "changeStatus" "paid"}}>Paid</a>
+          <a href="#" class="deal-label" {{action "changeStatus" "lost"}}>Lost</a>
           <div class="bar"></div>
         </div>
-        <p class="deal-timeframe">
-          <i class="ss-standard ss-directright"></i> Deal open for 45 days
-        </p>
+        {{#if payBy}}
+          <p class="deal-timeframe">
+            <i class="ss-standard ss-directright"></i> Deal open for {{payBy}} days
+          </p>
+        {{/if}}
       </div>
     </div>
 

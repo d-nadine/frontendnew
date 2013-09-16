@@ -1,4 +1,12 @@
 .datepicker-control-box {
+  .prepend-group {
+    height: 35px;
+
+    .btn {
+      height: 35px;
+    }
+  }
+
   &.is-disabled > i {
     margin-left: 12px;
   }
