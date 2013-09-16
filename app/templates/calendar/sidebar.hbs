@@ -26,15 +26,15 @@
   <i class="ss-symbolicons-block ss-smile"></i> No overdue items
 </div>
 
-{{#unless selectedDay.date}}
+{{!#unless selectedDay.date}}
   {{#each day in days}}
     <div class="events-list-header">
       {{formatDateTime day.date format="calendar"}}
     </div>
     {{each item in day itemController="calendarTaskItem" itemViewClass="Radium.CalendarTaskItemView"}}
   {{/each}}
-{{else}}
-  <div class="events-list-back-button">
+{{!else}}
+  <!-- <div class="events-list-back-button">
     <button class="btn" {{action selectDay}}>‹ Monthly View</button>
   </div>
   <div class="events-list-header">{{formatDateTime selectedDay.date format=date}}</div>
@@ -43,5 +43,5 @@
     {{each item in selectedDay itemController="calendarTaskItem" itemViewClass="Radium.CalendarTaskItemView"}}
   {{else}}
     <div class="events-list-item events-list-empty">No tasks for this day</div>
-  {{/if}}
-{{/unless}}
+  {{/if}} -->
+{{!/unless}}

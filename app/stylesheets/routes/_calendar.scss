@@ -15,7 +15,7 @@ $calendar-off: #d8d9d9;
   }
 
   .main-content {
-    max-width: none;
+    max-width: 1600px;
     @include transition(padding 0.25s);
   }
 
@@ -118,6 +118,7 @@ $calendar-off: #d8d9d9;
   padding: {
     top: 15px;
     bottom: 15px;
+    left: 0;
   }
   font-size: 14px;
   line-height: 18px;
@@ -157,7 +158,6 @@ $calendar-off: #d8d9d9;
 }
 
 .events-list-item-button {
-  margin-right: 10px;
   font-size: 18px;
   color: #cdcdcd;
 }
@@ -167,7 +167,6 @@ $calendar-off: #d8d9d9;
 }
 
 .events-list-item-description {
-  padding: 0 0 0 20px;
   overflow: hidden;
 }
 

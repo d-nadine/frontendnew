@@ -1,4 +1,6 @@
 Radium.CalendarRoute = Radium.Route.extend
+  setupController: (controller) ->
+    @controllerFor('calendar').set('isCalendarDrawerOpen', true)
   events:
     toggleCalendarDrawer: ->
       @controllerFor('calendar').toggleProperty('isCalendarDrawerOpen')
