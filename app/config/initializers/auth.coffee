@@ -27,5 +27,6 @@ Ember.Application.initializer
       accountSettingsController = container.lookup('controller:accountSettings')
       accountSettingsController.set('model', user.get('account'))
 
+      Ember.$('[class^=ball]').hide()
       Radium.advanceReadiness()
     ), errHandler).then(null, errHandler)
