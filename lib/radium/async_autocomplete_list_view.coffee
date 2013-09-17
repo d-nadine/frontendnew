@@ -21,5 +21,9 @@ Radium.AsyncAutocompleteView = Radium.AutocompleteView.extend
     ).then(null, Radium.rejectionHandler)
 
 Radium.EmailAsyncAutocompleteView = Radium.AsyncAutocompleteView.extend
+  queryParameters: (query) ->
+    term: query
+    email_only: true
+
   filterResults: (item) ->
     !@get('source').contains(item) && item.get('email')

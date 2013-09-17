@@ -1,4 +1,8 @@
 Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
+  queryParameters: (query) ->
+    term: query
+    email_only: true
+
   template: Ember.Handlebars.compile """
     <div class="contextMenu" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
