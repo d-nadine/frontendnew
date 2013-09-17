@@ -2,21 +2,29 @@
   <div class="pull-right">
     {{#linkTo "settings.profile" class="btn btn-primary"}}My Profile{{/linkTo}}
   </div>
-  <h4 class="muted">Welcome back, {{controller.currentUser.name}}</h4>
+  <h4 class="muted dashboard-user-title">
+    <div class="pull-left dashboard-user-avatar">
+     {{#if  currentUser.isLoaded}}
+        {{avatar currentUser}}
+      {{else}}
+        {{partial 'is_loading'}}
+      {{/if}}
+    </div>
+    Welcome back, {{controller.currentUser.name}}
+  </h4>
+  <div class="clearfix"></div>
   <h1>Now, click on the links below to get started</h1>
 </header>
 
 <div class="dashboard-grid">
   <ul class="unstyled">
-    <li class="dashboard-grid-item dashboard-grid-item-profile">
+    <li class="dashboard-grid-item">
       {{#linkTo 'settings.profile' class="dashboard-grid-link"}}
-        {{#if  currentUser.isLoaded}}
-          {{avatar currentUser size=dashboard}}
-        {{else}}
-          {{partial 'is_loading'}}
-        {{/if}}
+        <div class="dashboard-grid-icon">
+          <i class="ss-standard ss-user"></i>
+        </div>
         <div class="dashboard-grid-label">
-          <h4>Complete Your Profile</h4>
+          <h4>Complete Profile</h4>
         </div>
       {{/linkTo}}
     </li>
