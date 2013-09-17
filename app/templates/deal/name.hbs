@@ -1,0 +1,8 @@
+{{#if isEditing}}
+{{input value=name class="field detail" classNameBindings="controller.isValid::is-invalid :detail" placeholder="Deal Name"}}
+{{else}}
+  <h2 class="deal-title">
+    <span>{{name}}</span>
+    <i class="ss-write" {{action toggleEditor target=view bubbles=false}}></i>
+  </h2>
+{{/if}}

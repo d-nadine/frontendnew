@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="pull-left deal-banner-details">
-        <h2>{{name}}</h2>
+        {{render 'deal/name' model}}
         <p>
           {{#if reference}}
             Related to {{#linkTo "messages.email" reference}}{{reference.subject}}{{/linkTo}}<br>

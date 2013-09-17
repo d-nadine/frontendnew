@@ -1,0 +1,1 @@
+Radium.DealNameView = Radium.InlineEditorView.extend()

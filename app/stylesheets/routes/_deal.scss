@@ -18,9 +18,29 @@
 .deal-banner-details {
   width: 375px;
 
-  h2 {
+  .deal-title {
     margin-top: 0;
+
+    span {
+      display: inline-block;
+    }
+
+    i {
+      margin-left: 20px;
+      font-size: 14px;
+      line-height: 14px;
+      color: $muted;
+      display: none;
+    }
+
+    &:hover i {
+      display: inline-block;
+    }
   }
+}
+
+.deal-name-view {
+  position: relative;
 }
 
 .deal-banner-stats {
@@ -111,6 +131,7 @@
     bottom: -3px;
     left: 0;
     background-color: $blue;
+    @include transition(width 0.25s ease-in);
   }
 
   &.status-lead {
