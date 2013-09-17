@@ -15,6 +15,7 @@ Radium.CalendarTaskItemView = Radium.View.extend
     parent = Ember.$('.sidebar')
 
     distanceToCenter = (0.5 * parent.height() - @$().outerHeight())
+    return unless @$().offset()
     distanceToElement = @$().offset().top
 
     top = distanceToElement - distanceToCenter
