@@ -1,5 +1,7 @@
 Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.CurrentUserMixin,
-  needs: ['users', 'usersInvites']
+  needs: ['users', 'usersInvites', 'account']
+  account: Ember.computed.alias 'controllers.account.model'
+  companyName: Ember.computed.alias 'controllers.account.name'
   users: Ember.computed.alias 'controllers.users'
   pendingUsers: ( ->
     @get('controllers.usersInvites').filter (invite) ->

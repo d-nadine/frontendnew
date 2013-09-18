@@ -12,10 +12,11 @@
         {{/if}}
       </div>
       <div class="controls settings-user-details">
-        <div class="pull-right">
-          <a href="#" class="btn btn-small">Edit</a>
-        </div>
-        {{input value=companyName class="input-block-level inline-field large-inline-field"}}
+        {{#if isAdmin}}
+          {{render 'sidebar/name' account}}
+        {{else}}
+          <h2>{{companyName}}</h2>
+        {{/if}}
       </div>
     </div>
   </fieldset>

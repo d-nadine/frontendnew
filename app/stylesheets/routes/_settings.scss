@@ -75,6 +75,13 @@
     color: #666;
     font-size: 12x;
   }
+
+  .inline-editor {
+    .ss-write{
+      opacity: 0.3;
+      font-size: 12px;
+    }
+  }
 }
 
 input.inline-field {
