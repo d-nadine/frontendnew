@@ -6,7 +6,7 @@ require 'lib/radium/contact_company_picker'
 require 'lib/radium/tag_autocomplete'
 requireAll /views\/sidebar/
 
-Radium.ContactSidebarView = Radium.View.extend Radium.ContactViewMixin,
+Radium.ContactSidebarView = Radium.FixedSidebarView.extend Radium.ContactViewMixin,
   classNames: ['sidebar-panel-bordered']
 
   showExtraContactDetail: ->

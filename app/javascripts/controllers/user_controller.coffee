@@ -5,6 +5,7 @@ Radium.UserController = Radium.ObjectController.extend
 
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   isEditable: true
+  isEditing: false
 
   closedDealsTotal: ( ->
     deals = @get('deals')

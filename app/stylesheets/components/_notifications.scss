@@ -1,5 +1,6 @@
 .notifications {
   background-color: $active-state;
+  @include user-select(none);
 }
 
 .notifications-list-close-btn {

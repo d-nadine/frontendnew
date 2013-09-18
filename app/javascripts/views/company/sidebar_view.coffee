@@ -6,4 +6,4 @@ require 'lib/radium/tag_autocomplete'
 require 'views/contact/contact_view_mixin'
 requireAll /views\/sidebar/
 
-Radium.CompanySidebarView = Radium.View.extend  Radium.ContactViewMixin
+Radium.CompanySidebarView = Radium.View.extend(Radium.ContactViewMixin, Radium.ScrollableMixin)

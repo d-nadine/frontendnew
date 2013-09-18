@@ -8,6 +8,7 @@ Radium.StickyBannerMixin = Ember.Mixin.create
       else
         @set('isScrolled', false)
 
+      Ember.$(window).trigger('stickyChange')
     )
   willDestroyElement: ->
     Ember.$(window).off('scroll.stickyScroll')

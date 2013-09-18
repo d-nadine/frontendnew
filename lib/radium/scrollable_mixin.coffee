@@ -1,14 +1,25 @@
 Radium.ScrollableMixin = Em.Mixin.create
   didInsertElement: ->
-    @shouldScroll()
+    Ember.run.scheduleOnce 'afterRender', this, ->
+      @shouldScroll()
 
-    @$(window).on 'resize', @get('windowDidResize')
+    Ember.run.scheduleOnce 'afterRender', this, ->
+      Ember.$(window).on('stickyChange', => @setSidebarHeight())
+      Ember.$(window).on 'resize', @shouldScroll.bind this
+
+  setSidebarHeight: ->
+    # Use the .sidebar for the height, since notifications is laid out differently
+    height = Em.$('.sidebar').height()
+    @$('.viewport').height(height)
+    @$('.scroller').tinyscrollbar_update('relative')
+
 
   shouldScroll: ->
     if @get 'scroller'
-      @get('scroller').tinyscrollbar_update('relative')
+      @setSidebarHeight()
     else
       scroller = @$('.scroller').tinyscrollbar()
+      @setSidebarHeight()
       @set 'scroller', scroller
 
   removeScrolling: ->
