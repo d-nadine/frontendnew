@@ -1,1 +1,0 @@
-Radium.DealNameController = Radium.SidebarBaseController.extend()

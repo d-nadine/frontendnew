@@ -1,8 +1,8 @@
 Radium.InlineEditorView = Ember.View.extend
   classNameBindings: ['isEditing:inline-editor-open:inline-editor-closed', 'disabled:is-disabled:is-enabled', ':inline-editor']
 
-  isEditingBinding: 'controller.isEditing'
-  isValidBinding: 'controller.isValid'
+  isEditing: Ember.computed.alias 'controller.isEditing'
+  isValid: Ember.computed.alias 'controller.isValid'
 
   # Clicking on the view will activate the editor.
   # Disable this if you want to activate
@@ -50,15 +50,9 @@ Radium.InlineEditorView = Ember.View.extend
 
     return unless @get 'isEditing'
     Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
+
   highlightSelection: ->
     @$('input[type=text],textarea').filter(':first').focus()
-    @$('input[type=text]').filter(':first').select()
-
-  # isValid: (->
-  #   value = @get 'value'
-  #   return unless value
-  #   true
-  # ).property('value')
 
   keyDown: (evt) ->
     return unless evt.target.tagName.toLowerCase() == 'input'
