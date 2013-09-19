@@ -66,5 +66,7 @@ Radium.EmailsShowRoute = Radium.Route.extend
     model.set 'isRead', true
     @store.commit()
 
+    controller.send 'clearNewPiplineDeal'
+
     @controllerFor('messages').set 'selectedContent', model
     controller.set 'model', model

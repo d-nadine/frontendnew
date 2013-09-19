@@ -45,3 +45,8 @@
     </p>
   </div>
 </div>
+{{#if hasNewPipelineDeal}}
+<div class="alert">
+  <h4>{{contact.displayName}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.</h4>
+</div>
+{{/if}}
