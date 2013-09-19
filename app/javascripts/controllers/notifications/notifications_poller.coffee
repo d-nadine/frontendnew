@@ -1,4 +1,4 @@
-Radium.NotificationsPoller = Ember.Object.extend Radium.PollerMxin,
+Radium.NotificationsPoller = Ember.Object.extend Radium.PollerMixin,
   onPoll: ->
     existing = Radium.Notification.all().slice()
 

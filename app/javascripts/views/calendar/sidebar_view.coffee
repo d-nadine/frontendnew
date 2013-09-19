@@ -6,5 +6,5 @@ Radium.CalendarSidebarView = Radium.FixedSidebarView.extend
       @get('controller').addObserver('content.length', =>
         Ember.run.later( =>
           @setSidebarHeight()
-        , 50);
+        , 50)
       )

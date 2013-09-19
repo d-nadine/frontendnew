@@ -1,4 +1,4 @@
-Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMxin,
+Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
   interval: 10000
 
   onPoll: ->

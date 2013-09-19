@@ -1,7 +1,7 @@
 require 'lib/radium/aggregate_array_proxy'
 require 'mixins/controllers/poller_mixin'
 
-Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMxin,
+Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
   folder: 'inbox'
   currentuser: null
   isloaded: false
@@ -13,11 +13,8 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMxin,
       if newEmails.length
         console.log "#{newEmails.length} found"
         @add(newEmails)
-      else
-        console.log "No new emails"
       Radium.Discussion.find({}).then (discussions) =>
         newDiscussions = @delta(emails)
-
         @add(newDiscussions) if newDiscussions.length
 
   delta: (records) ->
