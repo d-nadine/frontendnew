@@ -3,7 +3,7 @@
   <div class="pull-right email-hud-actions">
     {{#unless isSaving}}
       {{#if contact.isPersonal}}
-        <div class="btn-group">
+        <div class="btn-group btn-add-to-radium">
           <button class="btn btn-primary" {{action changeStatus "pipeline"}}>Add to Radium</button>
           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
@@ -18,7 +18,9 @@
           </ul>
         </div>
       {{else}}
-        <h4><span class='badge badge-info'>Radium Contact</span></h4>
+        {{#if contact.nextTask}}
+          {{render "next_task" contact.nextTask}}
+        {{/if}}
       {{/if}}
     {{else}}
       {{partial 'saving'}}
@@ -36,6 +38,9 @@
     <h4 class="email-hud-title">
       {{#linkTo 'contact' contact}}{{contact.displayName}}{{/linkTo}}
     </h4>
+    {{#unless contact.isPersonal}}
+      <span class='badge badge-info'>Radium Contact</span>
+    {{/unless}}
     <p>
       {{contact.primaryEmail.value}}
       <br>
@@ -47,6 +52,6 @@
 </div>
 {{#if hasNewPipelineDeal}}
 <div class="alert">
-  <h4>{{contact.displayName}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.</h4>
+  {{contact.displayName}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.
 </div>
 {{/if}}
