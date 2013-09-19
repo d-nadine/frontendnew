@@ -7,6 +7,7 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
 
   didInsertElement: ->
     @selectTab('folderTabView')
+    @_super()
 
   folderTabSelected: (->
     @get('folderTabView').detectInstance(@.get('tabContentView.currentView'))

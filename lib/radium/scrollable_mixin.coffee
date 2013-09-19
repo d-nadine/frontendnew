@@ -3,15 +3,15 @@ Radium.ScrollableMixin = Em.Mixin.create
     Ember.run.scheduleOnce 'afterRender', this, ->
       @shouldScroll()
 
-    Ember.run.scheduleOnce 'afterRender', this, ->
-      Ember.$(window).on('stickyChange', => @setSidebarHeight())
-      Ember.$(window).on 'resize', @shouldScroll.bind this
+    Ember.$(window).on('stickyChange', @setSidebarHeight.bind this)
+    Ember.$(window).on 'resize', @shouldScroll.bind this
 
   setSidebarHeight: ->
     # Use the .sidebar for the height, since notifications is laid out differently
-    height = Em.$('.sidebar').height()
-    @$('.viewport').height(height)
-    @$('.scroller').tinyscrollbar_update('relative')
+    if @get('state') is 'inDOM'
+      height = Em.$('.sidebar').height()
+      @$('.viewport').height(height)
+      @$('.scroller').tinyscrollbar_update('relative')
 
 
   shouldScroll: ->
@@ -30,7 +30,6 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   willDestroyElement: ->
     @removeScrolling()
-    @$(window).off 'resize', @get('windowDidResize')
 
   # Do this to ensure that our event handler always
   # executes in the right context. This also gives
