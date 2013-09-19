@@ -64,7 +64,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'isNew', true
     @set 'name', ''
     @set 'notes', ''
-    @set 'source', 'From Website'
+    @set 'source', @get('initialLeadSource')
     @set 'companyName', null
     @set 'company', ''
     @set 'status', @get('initialStatus')
