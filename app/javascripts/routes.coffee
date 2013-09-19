@@ -63,6 +63,7 @@ Radium.Router.map ->
     @route 'billing'
     @route 'api'
     @route 'customFields', path: 'custom-fields'
+    @route 'leadSources', path: 'lead-sources'
     @route 'pipelineStates', path: 'pipeline-states'
     @route 'remindersAlerts', path: 'reminders-alerts'
 

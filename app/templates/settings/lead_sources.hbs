@@ -1,0 +1,20 @@
+<div class="pipeline-states-list">
+  <h3>Lead Sources</h3>
+  <p>Where do you collect your leads from?
+
+  <ol>
+    {{#each leadSources}}
+      <li>{{render 'settings/lead_source_item' this}}</li>
+    {{/each}}
+  </ol>
+
+  <div class="row">
+    <div class="span5 pipeline-state-create">
+      {{#if currentUser.isAdmin}}
+        <button class="btn btn-large btn-success" {{action "createLeadSource" bubbles="false"}}>
+          Add Lead Source
+        </button>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -21,6 +21,17 @@
   </div>
 </div>
 
+{{#if currentUser.isAdmin}}
+  <div class="alert-container">
+    <div class="alert alert-info pull-left">
+      <h4 class="text-center">Set up your pipeline {{#linkTo "settings.pipelineStates"}}here{{/linkTo}}</h4>
+    </div>
+    <div class="alert alert-info pull-right">
+      <h4 class="text-center">Set up your lead sources {{#linkTo "settings.leadSources"}}here{{/linkTo}}</h4>
+    </div>
+  </div>
+{{/if}}
+
 <div class="clearfix"></div>
 <div class="hidden">
   <div class="show-results">

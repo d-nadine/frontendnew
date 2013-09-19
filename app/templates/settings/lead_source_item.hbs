@@ -1,0 +1,22 @@
+{{#if isEditing}}
+  {{view view.leadSourceName  placeholder="Add lead source"}}
+{{else}}
+  <span class="lead-source-item">{{name}}</span>
+{{/if}}
+{{#if isAdmin}}
+<div class="checklist-controls">
+  <button class="btn btn-danger" {{action deleteLeadSource this}}>
+    <i class="ss-symbolicons-block ss-trash"></i>
+  </button>
+
+  {{#if isEditing}}
+    <button class="btn" {{action "cancel"}}>Cancel</button>
+  {{else}}
+    <button class="btn" {{action "edit"}}>Edit</button>
+  {{/if}}
+
+  {{#if isValid}}
+    <button class="btn btn-success" {{action "save"}}>Save</button>
+  {{/if}}
+</div>
+{{/if}}
