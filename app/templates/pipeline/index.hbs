@@ -31,78 +31,79 @@
     </div>
   </div>
 {{/if}}
-
 <div class="clearfix"></div>
-<div class="hidden">
-  <div class="show-results">
-    <a href="#" class="btn" {{action toggleResultsTable target="view" bubbles=false}}>
-      {{#if view.showResults}}
-        <i class="ss-standard ss-navigateup"></i>
-      {{else}}
-        <i class="ss-standard ss-navigatedown"></i>
-      {{/if}}
-    </a>
+{{#unless workflowDeals.length}}
+  <div class="text-center new-lead">
+    {{#linkTo "leads.new" class="btn btn-primary btn-large"}}
+      Your pipeline is empty click here to <strong>Add a Lead</strong>
+    {{/linkTo}}
   </div>
-  <table class="table table-striped table-bordered table-hover totals">
-    <thead>
-      <tr>
-        <th class="title">STATE</th>
-        <th>TOTAL</th>
-        <th>PERCENTAGE</th>
-        <th>VALUE</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each groups itemController="workflowGroupItem"}}
-      <tr>
-        <td class="title">
+{{else}}
+  <div class="hidden">
+    <div class="show-results">
+      <a href="#" class="btn" {{action toggleResultsTable target="view" bubbles=false}}>
+        {{#if view.showResults}}
+          <i class="ss-standard ss-navigateup"></i>
+        {{else}}
+          <i class="ss-standard ss-navigatedown"></i>
+        {{/if}}
+      </a>
+    </div>
+    <table class="table table-striped table-bordered table-hover totals">
+      <thead>
+        <tr>
+          <th class="title">STATE</th>
+          <th>TOTAL</th>
+          <th>PERCENTAGE</th>
+          <th>VALUE</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each groups itemController="workflowGroupItem"}}
+        <tr>
+          <td class="title">
+            {{#if isWorkflow}}
+              {{#linkTo "pipeline.workflow" content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{/if}}
+            {{#if isClosed}}
+              {{#linkTo "pipeline.closed"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{/if}}
+            {{#if isLost}}
+              {{#linkTo "pipeline.lost"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{/if}}
+          </td>
+          <td>
+            <label {{bindAttr class=":badge length:badge-success:badge-important"}}>{{length}}</label>
+          </td>
+          <td>
+            {{percentage}}%
+          </td>
+          <td>
+            <label>{{currency total}}</label>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="pipeline-workflows-list">
+    {{#each groups itemController="workflowGroupItem"}}
+      <div class="pipeline-workflows-list-item">
+        <div class="page-header">
+          <h3>{{capitalize content.title}} ({{length}})</h3>
+        </div>
+        <div class="deals">
           {{#if isWorkflow}}
-            {{#linkTo "pipeline.workflow" content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{render 'pipeline/workflow_deals' deals}}
           {{/if}}
           {{#if isClosed}}
-            {{#linkTo "pipeline.closed"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{render 'pipeline/closed' deals}}
           {{/if}}
           {{#if isLost}}
-            {{#linkTo "pipeline.lost"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+            {{render 'pipeline/lost' deals}}
           {{/if}}
-        </td>
-        <td>
-          <label {{bindAttr class=":badge length:badge-success:badge-important"}}>{{length}}</label>
-        </td>
-        <td>
-          {{percentage}}%
-        </td>
-        <td>
-          <label>{{currency total}}</label>
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
-<div class="pipeline-workflows-list">
-  {{#each groups itemController="workflowGroupItem"}}
-    <div class="pipeline-workflows-list-item">
-      <div class="page-header">
-        <h3>{{capitalize content.title}} ({{length}})</h3>
+        </div>
       </div>
-      <div class="deals">
-        {{#if isWorkflow}}
-          {{render 'pipeline/workflow_deals' deals}}
-        {{/if}}
-        {{#if isClosed}}
-          {{render 'pipeline/closed' deals}}
-        {{/if}}
-        {{#if isLost}}
-          {{render 'pipeline/lost' deals}}
-        {{/if}}
-      </div>
-    </div>
-  {{else}}
-    <div class="text-center">
-      {{#linkTo "leads.new" class="btn btn-primary btn-large"}}
-        Your pipeline is empty click here to <strong>Add a Lead</strong>
-      {{/linkTo}}
-    </div>
-  {{/each}}
-</div>
+    {{/each}}
+  </div>
+{{/unless}}
