@@ -98,5 +98,11 @@
         {{/if}}
       </div>
     </div>
+  {{else}}
+    <div class="text-center">
+      {{#linkTo "leads.new" class="btn btn-primary btn-large"}}
+        Your pipeline is empty click here to <strong>Add a Lead</strong>
+      {{/linkTo}}
+    </div>
   {{/each}}
 </div>
