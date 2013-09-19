@@ -1,5 +1,5 @@
 <!-- columns must add up to 8 -->
-<div class="clearfix email-hud">
+<div {{bindAttr class=":clearfix :email-hud contact.isLead:is-lead-contact"}}>
   <div class="pull-right email-hud-actions">
     {{#unless isSaving}}
       {{#if contact.isPersonal}}

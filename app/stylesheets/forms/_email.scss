@@ -208,6 +208,10 @@
   padding: 15px;
   background: #313131;
   color: #fff;
+
+  &.is-lead-contact{
+    background-color: white;
+  }
 }
 
 .email-hud-actions {
