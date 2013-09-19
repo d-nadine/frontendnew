@@ -50,6 +50,15 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @get('model.selectedFilter') == 'private'
   ).property('model.selectedFilter')
 
+  showEmptyAddressBookButton: ( -> 
+    return false if @get('isPrivateContacts')
+    filter = @get('model.selectedFilter')
+
+    return false if filter == 'companies' || filter == 'tags'
+
+    not @get('model.length')
+  ).property('isPrivateContacts', 'arrangedContent.[]', 'filter')
+
   toggleThumbnails: ->
     @toggleProperty('isThumbnailsVisible')
 

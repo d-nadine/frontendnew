@@ -107,41 +107,47 @@
 {{/if}}
 
 <div class="search-result-list">
-  {{#if visibleContent.length}}
-    <div class="search-results-header row-fluid">
-      <div class="span2 checkers">
-        <a href="#" {{action checkAll}}>
-          {{#if checkedContent}}
-            Select None
-          {{else}}
-            Select All
-          {{/if}}
-        </a>
-        <div class="pull-right">
-          <a href="#" {{action toggleThumbnails}}>
-            {{#if isThumbnailsVisible}}
-              Hide
+  {{#if showEmptyAddressBookButton}}
+    <div class="alert alert-info text-center">
+      <h3>You have no contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
+    </div>
+  {{else}}
+    {{#if visibleContent.length}}
+      <div class="search-results-header row-fluid">
+        <div class="span2 checkers">
+          <a href="#" {{action checkAll}}>
+            {{#if checkedContent}}
+              Select None
             {{else}}
-              Show avatars
+              Select All
             {{/if}}
           </a>
+          <div class="pull-right">
+            <a href="#" {{action toggleThumbnails}}>
+              {{#if isThumbnailsVisible}}
+                Hide
+              {{else}}
+                Show avatars
+              {{/if}}
+            </a>
+          </div>
+        </div>
+        <div class="span2 name">
+          Name
+        </div>
+        <div class="span2 last-activity">
+          Last Activity
+        </div>
+        <div class="span3 next-task">
+          Next Task
+        </div>
+        <div class="span2 groups">
+          Groups
         </div>
       </div>
-      <div class="span2 name">
-        Name
-      </div>
-      <div class="span2 last-activity">
-        Last Activity
-      </div>
-      <div class="span3 next-task">
-        Next Task
-      </div>
-      <div class="span2 groups">
-        Groups
-      </div>
-    </div>
+    {{/if}}
+    {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
   {{/if}}
-  {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
   <div class="clearfix">
     {{partial 'shared/show_more'}}
   </div>
