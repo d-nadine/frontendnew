@@ -1,4 +1,4 @@
-Radium.MessagesSidebarController = Radium.ArrayController.extend
+Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['messages']
 
   folders: Ember.computed.alias 'controllers.messages.folders'

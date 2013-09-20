@@ -1,4 +1,4 @@
-Radium.PollerMixin = Ember.Mixin.create
+Radium.PollerMixin = Ember.Mixin.create Radium.TriggerScrollerResizeMixin, Ember.Evented,
   interval: 30000  # 30 seconds
   _timer: null
 
@@ -13,4 +13,4 @@ Radium.PollerMixin = Ember.Mixin.create
     clearInterval(@_timer) if @_timer
 
   onPoll: ->
-    throw new Error('You need to override onPoll in Radium.PollerMixin') 
+    throw new Error('You need to override onPoll in Radium.PollerMixin')

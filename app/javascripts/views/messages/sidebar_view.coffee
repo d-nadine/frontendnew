@@ -1,13 +1,12 @@
-Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
-  # FIXME: Need to review whether the tinyscrollbar is needed
-  # itemsDidChange: (->
-  #   return unless @state is 'inDOM'
-  #   Ember.run.scheduleOnce 'afterRender', this, 'shouldScroll'
-  # ).observes('controller.length')
-
+Radium.MessagesSidebarView = Radium.FixedSidebarView.extend Radium.TriggerScrollerResizeMixin,
+  messages: Ember.computed.alias 'controller.controllers.messages.content'
   didInsertElement: ->
     @selectTab('folderTabView')
-    @_super()
+    @_super.apply this, arguments
+    @get('messages').on('newContentAdded', this, 'onNewContentAdded')
+
+  onNewContentAdded: ->
+    @triggerScrollbarResize()
 
   folderTabSelected: (->
     @get('folderTabView').detectInstance(@.get('tabContentView.currentView'))

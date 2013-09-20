@@ -1,7 +1,6 @@
-Radium.ScrollableListItemMixin = Ember.Mixin.create
+Radium.ScrollableListItemMixin = Ember.Mixin.create Radium.TriggerScrollerResizeMixin,
   didInsertElement: ->
-    Ember.run.scheduleOnce 'afterRender', ->
-      Ember.$(window).trigger 'stickyChange'
+    Ember.run.scheduleOnce 'afterRender', this, 'triggerScrollbarResize'
 
   willDestroyElement: ->
-    Ember.$(window).trigger 'stickyChange'
+    @triggerScrollbarResize()

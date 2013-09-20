@@ -10,12 +10,22 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
     Radium.Email.find({user_id: @get('currentUser.id')}).then (emails) =>
       newEmails = @delta(emails)
 
-      if newEmails.length
-        console.log "#{newEmails.length} found"
-        @add(newEmails)
-      Radium.Discussion.find({}).then (discussions) =>
-        newDiscussions = @delta(emails)
-        @add(newDiscussions) if newDiscussions.length
+      return unless newEmails.length
+
+      console.log "#{newEmails.length} found"
+
+      @add(newEmails)
+
+      @trigger 'newContentAdded'
+
+    Radium.Discussion.find({}).then (discussions) =>
+      newDiscussions = @delta(discussions)
+
+      return unless discussions.length
+
+      @add(newDiscussions) if newDiscussions.length
+
+      @trigger 'newContentAdded'
 
   delta: (records) ->
     delta = records.toArray().reject (record) =>

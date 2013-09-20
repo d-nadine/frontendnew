@@ -8,11 +8,13 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   setSidebarHeight: ->
     # Use the .sidebar for the height, since notifications is laid out differently
-    if @get('state') is 'inDOM'
-      height = Em.$('.sidebar').height()
-      @$('.viewport').height(height)
-      @$('.scroller').tinyscrollbar_update('relative')
+    return unless  @get('state') is 'inDOM'
 
+    height = Em.$('.sidebar').outerHeight(true)
+
+    Ember.run.next =>
+      $(".viewport").css('height': height + 'px')
+      @$('.scroller').tinyscrollbar_update('relative')
 
   shouldScroll: ->
     if @get 'scroller'

@@ -1,4 +1,4 @@
-Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentificationMixin, Radium.ScrollableListItemMixin,
+Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentificationMixin,
   tagName: 'li'
   classNames: ['messages-list-item', 'message-list-readable-item']
   layoutName: 'messages/sidebar_item'
@@ -18,7 +18,7 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     'Radium.Discussion': 'discussion'
 
   templateName: ( ->
-    part = @templateMap[@get('content.content.constructor')]
+    part = @templateMap[@get('content.constructor')]
     "messages/#{part}_sidebar_item"
   ).property('content')
 

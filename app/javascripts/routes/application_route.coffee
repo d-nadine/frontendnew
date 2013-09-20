@@ -121,6 +121,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     messages = Radium.MessageArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')
 
+    messages.onPoll()
     messages.start()
     @controllerFor('messages').set 'model', messages
 

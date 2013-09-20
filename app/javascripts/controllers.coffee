@@ -1,6 +1,6 @@
 requireAll /mixins\/controllers/
 
-ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin,
+ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
