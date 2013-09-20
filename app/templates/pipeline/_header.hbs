@@ -4,7 +4,11 @@
       <h1>{{title}}</h1>
     </div>
   </div>
-  <div class="pull-right">
+  <div class="pull-right pipeline-header-tools">
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{input type=text value=searchText class="search-input"}}
+    </form>
     <div class="btn-toolbar">
       {{partial "pipeline/add_lead_btn"}}
       {{partial "pipeline/actions_btn"}}
@@ -41,13 +45,6 @@
         {{/if}}
       </div>
     </div>
-  </div>
-
-  <div class="pipeline-header-center">
-    <form class="form-search pipeline-search">
-      <i class="ss-symbolicons-block ss-search"></i>
-      {{input type=text value=searchText class="search-input"}}
-    </form>
   </div>
 </div>
 {{#if showFormArea}}

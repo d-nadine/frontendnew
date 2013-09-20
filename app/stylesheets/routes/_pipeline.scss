@@ -8,6 +8,15 @@
   }
 }
 
+.pipeline-header-tools {
+  margin-top: 5px;
+
+  > div,
+  > form {
+    display: inline-block;
+  }
+}
+
 .pipeline-title {
   margin: 0 40px 0 0;
 }
@@ -15,15 +24,6 @@
 .pipeline-header-center {
   margin: 0 auto;
   overflow: hidden;
-
-  .form-search {
-    width: 50%;
-    float: right;
-  }
-
-  .search-input {
-    width: 100%;
-  }
 }
 
 .pipeline-grand-total {
@@ -175,6 +175,10 @@
 .pipeline-search {
   margin: 0;
   display: inline-block;
+
+  .search-input {
+    width: 300px;
+  }
 }
 
 .pipeline-workflows-list .pipeline-workflows-list-item:last-of-type {
