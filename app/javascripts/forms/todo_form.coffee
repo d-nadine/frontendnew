@@ -15,6 +15,7 @@ Radium.TodoForm = Radium.Form.extend
   reset: ->
     @_super.apply this, arguments
     @set 'description', ''
+    @set('submitForm', false)
 
   isBulk: ( ->
     Ember.isArray @get('reference')

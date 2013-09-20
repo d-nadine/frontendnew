@@ -13,6 +13,7 @@ Radium.DiscussionForm = Radium.Form.extend
   reset: ->
     @_super.apply this, arguments
     @set 'topic', ''
+    @set('submitForm', false)
 
   commit: ->
     discussion = Radium.Discussion.createRecord @get('data')

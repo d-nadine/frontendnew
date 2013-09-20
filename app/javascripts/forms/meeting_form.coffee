@@ -15,6 +15,7 @@ Radium.MeetingForm = Radium.Form.extend
     @get('users').clear()
     @get('contacts').clear()
     @get('invitations').clear()
+    @set('submitForm', false)
 
   commit: ->
     isNew = @get('isNew')

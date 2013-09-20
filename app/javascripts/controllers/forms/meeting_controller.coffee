@@ -1,5 +1,5 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
-  needs: ['companies','contacts','users']
+  needs: ['companies','contacts','users', 'formBox']
   now: Ember.computed.alias('clock.now')
   companies: Ember.computed.alias('controllers.companies')
   userList: Ember.computed.alias 'controllers.users'

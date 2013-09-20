@@ -5,6 +5,12 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
 
   showOptions: Ember.computed.alias('isNew')
 
+  submitFormDidChange: ( ->
+    return unless @get('model.submitForm')
+    @send 'submit'
+    @set 'model.submitForm', false
+  ).observes('model.submitForm')
+
   isPrimaryInputDisabled: (->
     return false if @get('isNew')
     return true unless @get('isExpanded')
