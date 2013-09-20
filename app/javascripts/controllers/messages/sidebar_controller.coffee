@@ -20,5 +20,3 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
   showMore: ->
     @_super.apply this, arguments
     @get('content.content').trigger 'newContentAdded'
-
-

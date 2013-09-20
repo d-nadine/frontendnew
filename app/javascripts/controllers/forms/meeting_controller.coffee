@@ -160,7 +160,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     unless person
       displayName = attendee.get('name') || attendee.get('email')
       item = Ember.Object.create
-              name: attendee.get('name'), email: attendee.get('email'), displayName: displayName
+              name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey')
       @get('contacts').addObject item
       return
 
