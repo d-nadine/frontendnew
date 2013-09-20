@@ -7,6 +7,7 @@ Radium.ScrollableMixin = Em.Mixin.create
     Ember.$(window).on 'resize', @setScroller.bind this
 
   setSidebarHeight: ->
+    console.log('hi!!!')
     # Use the .sidebar for the height, since notifications is laid out differently
     return unless  @get('state') is 'inDOM'
 
