@@ -1,4 +1,4 @@
-Radium.CalendarTaskItemView = Radium.View.extend Radium.ScrollableListItemMixin,
+Radium.CalendarTaskItemView = Radium.View.extend
   classNames: 'events-list-item'
   classNameBindings: ['controller.isSelected']
   templateName: 'calendar/calendar_task_item'

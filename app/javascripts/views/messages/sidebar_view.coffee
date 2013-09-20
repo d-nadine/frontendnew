@@ -1,12 +1,8 @@
-Radium.MessagesSidebarView = Radium.FixedSidebarView.extend Radium.TriggerScrollerResizeMixin,
+Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   messages: Ember.computed.alias 'controller.controllers.messages.content'
   didInsertElement: ->
     @selectTab('folderTabView')
     @_super.apply this, arguments
-    @get('messages').on('newContentAdded', this, 'onNewContentAdded')
-
-  onNewContentAdded: ->
-    @triggerScrollbarResize()
 
   folderTabSelected: (->
     @get('folderTabView').detectInstance(@.get('tabContentView.currentView'))

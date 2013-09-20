@@ -1,4 +1,4 @@
-Radium.PollerMixin = Ember.Mixin.create Radium.TriggerScrollerResizeMixin, Ember.Evented,
+Radium.PollerMixin = Ember.Mixin.create Ember.Evented,
   interval: 30000  # 30 seconds
   _timer: null
 

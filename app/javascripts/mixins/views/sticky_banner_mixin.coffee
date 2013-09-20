@@ -1,4 +1,4 @@
-Radium.StickyBannerMixin = Ember.Mixin.create Radium.TriggerScrollerResizeMixin,
+Radium.StickyBannerMixin = Ember.Mixin.create
   classNameBindings: ['isScrolled']
   isScrolled: false
   didInsertElement: ->
@@ -7,8 +7,6 @@ Radium.StickyBannerMixin = Ember.Mixin.create Radium.TriggerScrollerResizeMixin,
         @set('isScrolled', true)
       else
         @set('isScrolled', false)
-
-      @triggerScrollbarResize()
     )
   willDestroyElement: ->
     Ember.$(window).off('scroll.stickyScroll')

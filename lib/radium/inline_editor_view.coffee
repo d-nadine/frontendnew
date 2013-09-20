@@ -14,9 +14,6 @@ Radium.InlineEditorView = Ember.View.extend
 
   didInsertElement: ->
     $('body').on 'click.inline', =>
-      Ember.run.next(->
-        Ember.$(window).trigger 'stickyChange'
-      )
       return unless @get('isEditing')
       @toggleEditor()
 
@@ -27,10 +24,6 @@ Radium.InlineEditorView = Ember.View.extend
     @$().trigger 'click' if evt.target.tagName == 'SELECT'
 
   click: (evt) ->
-    Ember.run.next(->
-      Ember.$(window).trigger 'stickyChange'
-    )
-
     return unless @get('activateOnClick')
     return if @get('disabled')
 

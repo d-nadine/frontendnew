@@ -1,13 +1,19 @@
 Radium.ScrollableMixin = Em.Mixin.create
+  updater: null
   didInsertElement: ->
     Ember.run.scheduleOnce 'afterRender', this, ->
       @setScroller()
+      @set 'updater', setInterval( =>
+        @setSidebarHeight()
+      , 100)
 
-    Ember.$(window).on('stickyChange', @setSidebarHeight.bind this)
-    Ember.$(window).on 'resize', @setScroller.bind this
+    # Ember.$(window).on 'resize.scroller', @setScroller.bind this
+
+  willDestroyElement: ->
+    @set 'updater', null
+    @removeScrolling()
 
   setSidebarHeight: ->
-    console.log('hi!!!')
     # Use the .sidebar for the height, since notifications is laid out differently
     return unless  @get('state') is 'inDOM'
 
@@ -33,9 +39,6 @@ Radium.ScrollableMixin = Em.Mixin.create
     @$('scroller .scrollbar').hide()
     @$('.scrollcontainer').find("*").andSelf().unbind()
     @set('scroller', null)
-
-  willDestroyElement: ->
-    @removeScrolling()
 
   layout: Ember.Handlebars.compile """
     <div class="scroller">
