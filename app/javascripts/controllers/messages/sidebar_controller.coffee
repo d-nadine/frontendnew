@@ -16,7 +16,3 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
     @set 'currentTab', "#{tab}View"
 
   itemController: 'messagesSidebarItem'
-
-  showMore: ->
-    @_super.apply this, arguments
-    @get('content.content').trigger 'newContentAdded'

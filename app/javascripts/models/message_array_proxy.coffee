@@ -16,16 +16,12 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
 
       @add(newEmails)
 
-      @trigger 'newContentAdded'
-
     Radium.Discussion.find({}).then (discussions) =>
       newDiscussions = @delta(discussions)
 
       return unless discussions.length
 
       @add(newDiscussions) if newDiscussions.length
-
-      @trigger 'newContentAdded'
 
   delta: (records) ->
     delta = records.toArray().reject (record) =>
