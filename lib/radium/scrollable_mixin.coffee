@@ -1,16 +1,17 @@
 Radium.ScrollableMixin = Em.Mixin.create
-  updater: null
+  scrollbarResizeTimer: null
   didInsertElement: ->
     Ember.run.scheduleOnce 'afterRender', this, ->
       @setScroller()
-      @set 'updater', setInterval( =>
+      @set 'scrollbarResizeTimer', setInterval( =>
         @setSidebarHeight()
       , 100)
 
     # Ember.$(window).on 'resize.scroller', @setScroller.bind this
 
   willDestroyElement: ->
-    @set 'updater', null
+    clearInterval @get('scrollbarResizeTimer') if @get('scrollbarResizeTimer')
+    @set 'scrollbarResizeTimer', null
     @removeScrolling()
 
   setSidebarHeight: ->
@@ -20,6 +21,7 @@ Radium.ScrollableMixin = Em.Mixin.create
     height = Em.$('.sidebar').outerHeight(true)
 
     Ember.run.next =>
+      return if @get('state') is 'destroying'
       $(".viewport").css('height': height + 'px')
       @$('.scroller').tinyscrollbar_update('relative')
 
