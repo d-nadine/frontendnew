@@ -7,8 +7,6 @@ Radium.ScrollableMixin = Em.Mixin.create
         @setSidebarHeight()
       , 100)
 
-    # Ember.$(window).on 'resize.scroller', @setScroller.bind this
-
   willDestroyElement: ->
     clearInterval @get('scrollbarResizeTimer') if @get('scrollbarResizeTimer')
     @set 'scrollbarResizeTimer', null

@@ -18,7 +18,7 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     'Radium.Discussion': 'discussion'
 
   templateName: ( ->
-    part = @templateMap[@get('content.constructor')]
+    part = @templateMap[@get('content.content.constructor')]
     "messages/#{part}_sidebar_item"
   ).property('content')
 

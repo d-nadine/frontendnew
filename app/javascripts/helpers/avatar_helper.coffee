@@ -1,3 +1,9 @@
+Radium.DefaultAvatars =
+  small: "small_cj96pu"
+  medium: "medium_m7scj1"
+  large: "large_hpaznc"
+  huge: "huge_tacjys"
+
 Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
   style = options.hash.style || options.hash.size || 'small'
 
@@ -5,7 +11,7 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
     if style == 'dashboard'
       style = 'huge'
 
-    url = "/images/default_avatars/#{style}.png"
+    url = "http://res.cloudinary.com/radium/image/upload/#{Radium.DefaultAvatars[style]}.png"
 
     return new Handlebars.SafeString("<img src='#{url}' class='avatar avatar-#{style} #{options.hash.class}'/>")
 

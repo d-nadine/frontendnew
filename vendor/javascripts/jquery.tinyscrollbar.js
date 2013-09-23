@@ -1,5 +1,5 @@
 /*
- * Tiny Scrollbar
+mousewheel* Tiny Scrollbar
  * http://www.baijs.nl/tinyscrollbar/
  *
  * Dual licensed under the MIT or GPL Version 2 licenses.
