@@ -68,9 +68,11 @@
       <div>
         <div class="pull-left sticky-banner-collapsed-aside">
           <ul class="inline">
-            <li>{{company.name}}</li>
-            <li><i class="ss-standard ss-directright"></i></li>
-            <li>{{contact.name}}</li>
+            {{#if company.name}}
+              <li>{{company.name}}</li>
+              <li><i class="ss-standard ss-directright"></i></li>
+            {{/if}}
+            <li>{{contact.displayName}}</li>
             <li><i class="ss-standard ss-directright"></i></li>
             <li><i class="ss-standard ss-briefcase"></i> {{name}} {{currency value}}</li>
           </ul>
