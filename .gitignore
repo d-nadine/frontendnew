@@ -10,3 +10,5 @@ vendor/ember.js
 vendor/data
 test_site/
 vendor/cache/*
+radium.sublime-project
+radium.sublime-workspace
