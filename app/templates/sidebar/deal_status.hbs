@@ -6,10 +6,12 @@
   </div>
   <div class="sidebar-panel-content">
     {{#if isEditing}}
-      <div>{{view view.statusSelect class="status-select"}}</div>
+      <div>
+        {{view view.statusSelect class="status-select"}}
+      </div>
     {{else}}
       <div class="deal-status">
-        <h2>{{status}}<i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></h1>
+        <p>{{status}}<i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></p>
       </div>
     {{/if}}
   </div>

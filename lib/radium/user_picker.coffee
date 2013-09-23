@@ -1,10 +1,6 @@
 require 'lib/radium/combobox'
 
 Radium.UserPicker = Radium.Combobox.extend
-  classNameBindings: [
-    ':user-picker-control-box'
-  ]
-
   valueBinding: 'controller.user'
   sourceBinding: 'controller.controllers.users'
   leader: 'Assigned to'
