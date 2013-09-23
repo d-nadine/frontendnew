@@ -1,4 +1,16 @@
 Radium.RESTSerializer = DS.RESTSerializer.extend({
+  init: function(){
+    this._super.apply(this, arguments);
+    this.configure({
+      meta: 'meta',
+      since: 'next',
+      page: 'page',
+      totalPages: 'total_pages',
+      totalRecords: 'total_records',
+      isLastPage: 'last_page'
+    });
+  },
+
   addAttribute: function(hash, key, value) {
     switch(key){
       case 'created_at':
