@@ -24,7 +24,7 @@ Radium.FormsTodoView = Radium.FormView.extend
         @$().tooltip('destroy')
 
   todoField: Radium.FormsTodoFieldView.extend
-    valueBinding: 'controller.description'
+    value: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: (->
       if @get('referenceName')

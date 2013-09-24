@@ -1,5 +1,5 @@
 Radium.ApplicationRoute = Radium.Route.extend
-  events:
+  actions:
     logOut: ->
       Radium.get('authManager').logOut(@get('store._adapter.url'))
 

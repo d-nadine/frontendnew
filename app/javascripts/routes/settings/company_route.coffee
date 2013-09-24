@@ -5,7 +5,7 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
   setupController: (controller, model) ->
     this.controllerFor('usersInvites').set('content', model)
 
-  events:
+  actions:
     deleteUser: (user) ->
       c = confirm("Are you sure you want to delete #{user.get('name')}? This cannot be undone")
 

@@ -2,6 +2,43 @@ require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
+  actions:
+    submit: ->
+      @set 'isSubmitted', true
+      return unless @get('isValid')
+
+      @set 'isExpanded', false
+      @set 'justAdded', true
+      @set 'showOptions', false
+
+      Ember.run.later(( =>
+        @set 'justAdded', false
+        @set 'isSubmitted', false
+        @set 'showOptions', true
+
+        @applyBufferedChanges()
+
+        if @get('isNew')
+          @get('model').commit().then(( (confirmation) =>
+            @send('flashSuccess', confirmation) if confirmation
+          ),
+          ((error) =>
+            @send 'flashError', error
+          ))
+        else
+          @get('store').commit()
+
+        @discardBufferedChanges()
+
+        return unless @get('isNew')
+
+        @get('model').reset()
+        @trigger('formReset')
+      ), 1200)
+
+  init: ->
+    @_super.apply this, arguments
+
   needs: ['users']
 
   canFinish: (->
@@ -27,39 +64,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
     true
   ).property('description', 'finishBy', 'user')
-
-  submit: ->
-    @set 'isSubmitted', true
-    return unless @get('isValid')
-
-    @set 'isExpanded', false
-    @set 'justAdded', true
-    @set 'showOptions', false
-
-    Ember.run.later(( =>
-      @set 'justAdded', false
-      @set 'isSubmitted', false
-      @set 'showOptions', true
-
-      @applyBufferedChanges()
-
-      if @get('isNew')
-        @get('model').commit().then(( (confirmation) =>
-          @send('flashSuccess', confirmation) if confirmation
-        ),
-        ((error) =>
-          @send 'flashError', error
-        ))
-      else
-        @get('store').commit()
-
-      @discardBufferedChanges()
-
-      return unless @get('isNew')
-
-      @get('model').reset()
-      @trigger('formReset')
-    ), 1200)
 
   isBulk: ( ->
     Ember.isArray @get('reference')

@@ -1,10 +1,7 @@
 Radium.CalendarRoute = Radium.Route.extend
-  setupController: (controller) ->
-    @controllerFor('calendar').set('isCalendarDrawerOpen', true)
-  events:
+  actions:
     toggleCalendarDrawer: ->
       @controllerFor('calendar').toggleProperty('isCalendarDrawerOpen')
-      # @send 'toggleDrawer', 'calendar/select_user'
 
     selectUser: (user) ->
       @controllerFor('calendar').set 'user', user
@@ -13,6 +10,9 @@ Radium.CalendarRoute = Radium.Route.extend
     selectDay: (calendarDay) ->
       calendarSidebarController = @controllerFor('calendarSidebar')
       calendarSidebarController.set('selectedDay', calendarDay)
+
+  setupController: (controller) ->
+    @controllerFor('calendar').set('isCalendarDrawerOpen', true)
 
   renderTemplate: ->
     @render()
@@ -36,6 +36,35 @@ Radium.CalendarIndexRoute = Radium.Route.extend
   model: (params) ->
     string = "#{params.year}-#{params.month}-#{params.day}"
     Ember.DateTime.parse string, "%Y-%m-%d"
+
+  afterModel: (model, transition) ->
+    controller = @controllerFor('calendarIndex')
+    startOfCalendar = controller.firstDayOfMonth(model)
+    dateKey = model.toDateFormat()
+
+    map = controller.get('map')
+
+    return if map.has dateKey
+
+    map.set dateKey, model
+
+    endOfCalendar = controller.lastDayOfMonth(model)
+
+    return if !startOfCalendar || !endOfCalendar
+
+    params =
+      start_date: startOfCalendar.toDateFormat()
+      end_date: endOfCalendar.toDateFormat()
+      user_id: controller.get('currentUser.id')
+
+    todos = Radium.Todo.find(params)
+    meetings = Radium.Meeting.find(params)
+    calls = Radium.Call.find(params)
+
+    controller.set 'isLoading', true
+
+    Ember.RSVP.all([todos, meetings, calls]).then =>
+      controller.set 'isLoading', false
 
   renderTemplate: ->
     @render 'calendar/index',

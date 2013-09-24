@@ -1,5 +1,5 @@
 Radium.SettingsPipelineStatesRoute = Radium.Route.extend
-  events:
+  actions:
     confirmDeletion: (state) ->
       account = @controllerFor('account').get('model')
 

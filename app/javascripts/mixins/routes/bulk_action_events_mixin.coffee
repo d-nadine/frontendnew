@@ -1,5 +1,5 @@
 Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
-  events:
+  actions:
     toggleChecked: ->
       controller = if @controller.constructor is Radium.PipelineWorkflowController
                      @controllerFor 'pipelineWorkflowDeals'

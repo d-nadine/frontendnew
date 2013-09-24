@@ -1,5 +1,5 @@
 Radium.MessagesRoute = Radium.Route.extend
-  events:
+  actions:
     toggleFolders: ->
       @send 'toggleDrawer', 'messages/folders'
 

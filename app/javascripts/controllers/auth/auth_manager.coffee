@@ -18,7 +18,7 @@ Radium.AuthManager = Ember.Object.extend
         headers:
           "X-Ember-Compat": "true",
           "X-User-Token": token
-  ).observes('_token')
+  ).observes('_token').on('init')
 
   tokenDidChange: ( ->
     token = @get('_token')
@@ -26,7 +26,7 @@ Radium.AuthManager = Ember.Object.extend
     return unless Ember.isEmpty(token)
 
     location.replace('http://api.radiumcrm.com/sessions/new')
-  ).observes('token')
+  ).observes('token').on('init')
 
   logOut: (apiUrl) ->
     Ember.$.ajax

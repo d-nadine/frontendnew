@@ -35,10 +35,10 @@ Radium.ScrollableMixin = Em.Mixin.create
       @set 'scroller', scroller
 
   removeScrolling: ->
-    @get('scroller').unbindAll() if @get('scroller')
-    @$('scroller .scrollbar').hide()
-    @$('.scrollcontainer').find("*").andSelf().unbind()
-    @set('scroller', null)
+    # @get('scroller').unbindAll() if @get('scroller')
+    # @$('scroller .scrollbar').hide()
+    # @$('.scrollcontainer').find("*").andSelf().unbind()
+    # @set('scroller', null)
 
   layout: Ember.Handlebars.compile """
     <div class="scroller">

@@ -16,35 +16,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
   map: Ember.Map.create()
 
-  # FIXME: use afterModel hook when we upgrade to rc6?
-  dateDidChange: ( ->
-    date = @get('startOfCalendar')
-    dateKey = date.toDateFormat()
-
-    return if @get('map').has dateKey
-
-    @get('map').set dateKey, date
-
-    startOfCalendar = @get('startOfCalendar')
-    endOfCalendar = @get('endOfCalendar')
-
-    return if !startOfCalendar || !endOfCalendar
-
-    params =
-      start_date: startOfCalendar.toDateFormat()
-      end_date: endOfCalendar.toDateFormat()
-      user_id: @get('currentUser.id')
-
-    todos = Radium.Todo.find(params)
-    meetings = Radium.Meeting.find(params)
-    calls = Radium.Call.find(params)
-
-    @set 'isLoading', true
-
-    Ember.RSVP.all([todos, meetings, calls]).then =>
-      @set 'isLoading', false
-  ).observes('date')
-
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
@@ -88,7 +59,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   users: Ember.computed.alias 'controllers.users'
 
-  date: (-> @get 'content').property('content')
+  date: Ember.computed.alias 'content'
 
   items: (->
     items = []
@@ -162,25 +133,13 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   startOfCalendar: (->
     date = @get('date').copy()
 
-    firstDayOfMonth = date.adjust day: 1
-
-    if firstDayOfMonth.get('dayOfWeek') == 1
-      firstDayOfMonth
-    else
-      firstDayOfMonth.get('lastMonday')
+    @firstDayOfMonth(date)
   ).property('date')
 
   endOfCalendar: (->
     date = @get('date').copy()
 
-    lastDayOfMonth = date.adjust(day: 1).
-      advance(month: 1).
-      advance(day: -1)
-
-    if lastDayOfMonth.get('dayOfWeek') == 0
-      lastDayOfMonth
-    else
-      lastDayOfMonth.get('nextSunday')
+    @lastDayOfMonth(date)
   ).property('date')
 
   weeks: (->
@@ -213,3 +172,21 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
     weeks
   ).property('date', 'items.[]', 'user', 'isLoading')
+
+  lastDayOfMonth: (date) ->
+    lastDayOfMonth = date.adjust(day: 1).
+      advance(month: 1).
+      advance(day: -1)
+
+    if lastDayOfMonth.get('dayOfWeek') == 0
+      lastDayOfMonth
+    else
+      lastDayOfMonth.get('nextSunday')
+
+  firstDayOfMonth: (date) ->
+    firstDayOfMonth = date.adjust day: 1
+
+    if firstDayOfMonth.get('dayOfWeek') == 1
+      firstDayOfMonth
+    else
+      firstDayOfMonth.get('lastMonday')

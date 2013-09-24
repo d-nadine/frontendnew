@@ -1,5 +1,5 @@
-// Version: v0.13-103-g8013bfa
-// Last commit: 8013bfa (2013-08-14 11:44:30 +0100)
+// Version: v0.14-1-g9cd7909
+// Last commit: 9cd7909 (2013-09-24 10:27:28 +0100)
 
 
 (function() {
@@ -54,14 +54,16 @@ var define, requireModule;
 */
 
 if ('undefined' === typeof DS) {
+  /*global DS:true*/
   DS = Ember.Namespace.create({
-    VERSION: '0.13'
+    VERSION: '0.14'
   });
 
   if ('undefined' !== typeof window) {
     window.DS = DS;
   }
 }
+
 })();
 
 
@@ -1815,7 +1817,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
   },
 
   /**
-    This method returns a record for a given record refeence.
+    This method returns a record for a given record reference.
 
     If no record for the reference has yet been materialized, this method will
     materialize a new `DS.Model` instance. This allows adapters to eagerly load

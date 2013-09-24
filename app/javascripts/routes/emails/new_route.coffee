@@ -1,5 +1,5 @@
 Radium.EmailsNewRoute = Ember.Route.extend
-  events:
+  actions:
     sendEmail: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')

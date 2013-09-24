@@ -37,7 +37,7 @@ Radium.MentionFieldView = Ember.View.extend
         event.preventDefault()
 
     insertNewline: (event) ->
-      this.get('controller').submit()
+      @get('parentView.controller').send 'submit'
 
     didInsertElement: ->
       @$().focus().mentionsInput

@@ -1,4 +1,15 @@
 Radium.EmailsItemController = Radium.ObjectController.extend
+  actions:
+    toggleFormBox: ->
+      @toggleProperty 'showFormBox'
+
+    showForm: (form) ->
+      @setProperties
+        showFormBox: true
+        currentForm: form
+
+      @set 'formBox.activeForm', form
+
   showMeta : false
   currentForm: 'todo'
 
@@ -15,16 +26,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend
     else
       @get('model.isPersonal')
   ).property('model.isPersonal')
-
-  toggleFormBox: ->
-    @toggleProperty 'showFormBox'
-
-  showForm: (form) ->
-    @setProperties
-      showFormBox: true
-      currentForm: form
-
-    @set 'formBox.activeForm', form
 
   hideForm: ->
     @set 'showFormBox', false

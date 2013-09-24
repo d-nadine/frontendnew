@@ -1,5 +1,5 @@
 Radium.EmailsShowRoute = Radium.Route.extend
-  events:
+  actions:
     sendReply: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')

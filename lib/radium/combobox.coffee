@@ -2,6 +2,14 @@ require 'lib/radium/add_active_to_parent_mixin'
 require 'lib/radium/toggle_dropdown_mixin'
 
 Radium.Combobox = Radium.View.extend
+  actions:
+    toggleDropdown: (event) ->
+      @toggleProperty 'open'
+
+    selectObject: (item) ->
+      @set 'open', false
+      @setValue item
+
   classNameBindings: [
     'isInvalid'
     'disabled:is-disabled'
@@ -78,13 +86,6 @@ Radium.Combobox = Radium.View.extend
   template: Ember.Handlebars.compile """
     <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a>
   """
-
-  toggleDropdown: (event) ->
-    @toggleProperty 'open'
-
-  selectObject: (item) ->
-    @set 'open', false
-    @setValue item
 
   setValue: (object) ->
     @set 'value', object

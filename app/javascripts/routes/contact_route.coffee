@@ -1,5 +1,5 @@
 Radium.ContactRoute = Radium.Route.extend
-  events:
+  actions:
     confirmDeletion: ->
       @render 'contact/deletion_confirmation',
         into: 'application'

@@ -1,4 +1,11 @@
 Radium.FormBoxController = Radium.ObjectController.extend
+  actions:
+    showForm: (form) ->
+      @set 'activeForm', form
+
+    submitForm: ->
+      @get("#{@get('activeForm')}Form").set('submitForm', true)
+
   activeForm: 'todo'
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')
@@ -9,9 +16,3 @@ Radium.FormBoxController = Radium.ObjectController.extend
   showMeetingFormChanges: ( ->
     @set 'meetingForm.isExpanded', @get('showMeetingForm')
   ).observes('showMeetingForm')
-
-  showForm: (form) ->
-    @set 'activeForm', form
-
-  submitForm: ->
-    @get("#{@get('activeForm')}Form").set('submitForm', true)

@@ -1,5 +1,5 @@
 Radium.MessagesBulkActionsRoute = Radium.Route.extend
-  events:
+  actions:
     cancel: ->
       @deactivate()
       @send 'back'

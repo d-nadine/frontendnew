@@ -1,4 +1,18 @@
 Radium.FormController = Radium.ObjectController.extend Ember.Evented,
+  actions:
+    toggleFormBox: ->
+      @toggleProperty 'showFormBox'
+      return
+
+    toggleExpanded: ->
+      @toggleProperty 'isExpanded'
+      return
+
+    expand: ->
+      return unless @get('isExpandable')
+      @toggleProperty 'isExpanded'
+      return
+
   justAdded: (->
     @get('content.justAdded') == true
   ).property('content.justAdded')
@@ -52,18 +66,8 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
     @get('content.isEditable') is false
   ).property('model', 'isEditable')
 
-  toggleExpanded: ->
-    @toggleProperty 'isExpanded'
-
-  expand: ->
-    return unless @get('isExpandable')
-    @toggleProperty 'isExpanded'
-
   hasComments: Ember.computed.present('comments')
   showAddAction: Ember.computed.not('isNew')
-
-  toggleFormBox: ->
-    @toggleProperty 'showFormBox'
 
   formBox: (->
     Radium.FormBox.create

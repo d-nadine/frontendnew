@@ -1,7 +1,7 @@
 Day = Ember.ArrayProxy.extend()
 
 Radium.CalendarSidebarController = Radium.ObjectController.extend
-  needs: ['calendarIndex', 'calendarSidebar']
+  needs: ['calendar', 'calendarIndex']
   contentBinding: 'controllers.calendarIndex.user'
   isLoading: Ember.computed.alias 'controllers.calendarIndex.isLoading'
 

@@ -26,15 +26,18 @@ Radium.FormsCallView = Radium.FormsTodoView.extend
     ).property('controller.isSubmitted', 'controller.contact', 'controller.description')
 
   callBox: Radium.View.extend
+    actions:
+      toggleDropdown: (event) ->
+        @$().toggleClass 'open'
+
     contactBinding: 'controller.reference'
+
     classNames: ['btn-group', 'call-control-box']
+
     dropDownTabIndex: (->
       return unless @get('tabIndex')
       @get('tabIndex') + 1
     ).property('tabIndex')
-
-    toggleDropdown: (event) ->
-      @$().toggleClass 'open'
 
     template: Ember.Handlebars.compile """
       <button class="btn btn-success" {{bindAttr tabIndex="view.tabIndex"}} {{action startCall bubbles=false}}>

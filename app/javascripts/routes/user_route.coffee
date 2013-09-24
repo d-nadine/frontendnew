@@ -1,5 +1,5 @@
 Radium.UserRoute = Radium.Route.extend
-  events:
+  actions:
     confirmDeletion: ->
       @render 'user/deletion_confirmation',
         into: 'application'

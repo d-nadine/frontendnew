@@ -1,11 +1,12 @@
 Radium.EmailsSentController = Ember.ObjectController.extend
+  actions:
+    toggleFormBox: ->
+      @toggleProperty 'showFormBox'
+
   needs: ['clock']
   clock: Ember.computed.alias('controllers.clock')
 
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
-
-  toggleFormBox: ->
-    @toggleProperty 'showFormBox'
 
   formBox: (->
     Radium.FormBox.create
