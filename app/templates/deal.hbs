@@ -48,7 +48,7 @@
             </tr>
           </tbody>
         </table>
-        <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
+        <div {{bindAttr class=":clearfix :deal-progress dealProgressClass view.statusString"}}>
           {{#each statuses}}
             <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
           {{/each}}
