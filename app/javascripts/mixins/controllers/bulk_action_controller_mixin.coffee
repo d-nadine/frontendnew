@@ -1,4 +1,8 @@
 Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
+  actions:
+    showForm: (form) ->
+      @set 'activeForm', form
+
   needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
@@ -20,15 +24,15 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   hasActiveForm: Ember.computed.notEmpty('activeForm')
 
+  init: ->
+    @_super.apply this, arguments
+    @set 'assignToUser', @get('currentUser')
+
   isLost: ( ->
     return unless @get('changedStatus')
 
     @get('changedStatus').toLowerCase() == 'lost'
   ).property('changedStatus')
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'assignToUser', @get('currentUser')
 
   clearChecked: ->
     @get('checkedContent').forEach (item) =>
@@ -64,9 +68,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
       @trigger 'formReset'
     ), 1200)
-
-  showForm: (form) ->
-    @set 'activeForm', form
 
   changeStatusForm: Radium.computed.newForm('changeStatus')
 

@@ -2,6 +2,28 @@ require 'lib/radium/show_more_mixin'
 require 'mixins/controllers/bulk_action_controller_mixin'
 
 Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixin,
+  actions:
+    additionalFilter: (additional) ->
+      @set('model.additionalFilter', additional)
+
+    addTags: ->
+      addTagsForm = @get('addTagsForm')
+      addTagsForm.addTags()
+
+      @get('store').commit()
+      addTagsForm.reset()
+
+      @set 'activeForm', null
+
+      @send 'flashSuccess', 'Selected tags added'
+
+    addTag: (tag) ->
+      tagNames = @get('addTagsForm.tagNames')
+
+      return if tagNames.contains tag
+
+      tagNames.addObject Ember.Object.create name: tag
+
   Radium.CheckableMixin,
   Radium.BulkActionControllerMixin,
 
@@ -11,9 +33,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   init: ->
     @_super.apply this, arguments
     @get('checkedContent').addArrayObserver(this)
-
-  additionalFilter: (additional) ->
-    @set('model.additionalFilter', additional)
 
   arrayWillChange:  (start, removeCount, addCount) ->
     @set 'activeForm', null
@@ -102,24 +121,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
       return
 
     @set 'model.selectedFilter', filter
-
-  addTags: ->
-    addTagsForm = @get('addTagsForm')
-    addTagsForm.addTags()
-
-    @get('store').commit()
-    addTagsForm.reset()
-
-    @set 'activeForm', null
-
-    @send 'flashSuccess', 'Selected tags added'
-
-  addTag: (tag) ->
-    tagNames = @get('addTagsForm.tagNames')
-
-    return if tagNames.contains tag
-
-    tagNames.addObject Ember.Object.create name: tag
 
   displayLeads: (leads) ->
     @get('controllers.pipelineLeads').set('filteredLeads', leads)
