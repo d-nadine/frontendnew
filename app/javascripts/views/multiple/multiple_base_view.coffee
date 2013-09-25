@@ -14,7 +14,7 @@ Radium.MultipleBaseView = Radium.View.extend
 
     click: (evt) ->
       evt.stopPropagation()
-      @get('controller').setIsPrimary()
+      @get('controller').send 'setIsPrimary'
 
   layout: Ember.Handlebars.compile """
     {{#each controller itemController="multipleItem"}}

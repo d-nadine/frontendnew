@@ -1,4 +1,42 @@
 Radium.MultipleItemController = Radium.ObjectController.extend
+  actions:
+    setIsPrimary: ->
+      @get('parent').setEach('isPrimary', false)
+      @set('isPrimary', true)
+      @send 'stopEditing' if @get('record')
+
+    removeSelection: (item) ->
+      parent = @get('parent')
+
+      if record = item.get('record')
+        retlationShip = if item.record.constructor is Radium.EmailAddress
+                          'emailAddresses'
+                        else if item.record.constructor is Radium.PhoneNumber
+                          'phoneNumbers'
+                        else
+                          'addresses'
+
+        @send 'removeMultiple', retlationShip, item.get('record')
+
+      @get('parent').removeObject item
+
+      unless parent.get('length')
+        @send('stopEditing')
+
+      isPrimary = @get('parent').find (item) -> item.get('isPrimary')
+
+      if isPrimary
+        @send('stopEditing')
+        return
+
+      nextIsPrimary = parent.filter((item) -> item.record)?.get('firstObject')
+
+      nextIsPrimary ||= parent.get('firstObject')
+
+      nextIsPrimary.set 'isPrimary', true
+
+      @send('stopEditing')
+
   parent: Ember.computed.alias 'target.target'
   labels: Ember.computed.alias 'parent.labels'
   leader: Ember.computed.alias 'parent.leader'
@@ -44,40 +82,3 @@ Radium.MultipleItemController = Radium.ObjectController.extend
   showDelete: ( ->
     @get('parent.length') > 1
   ).property('parent.[]')
-
-  setIsPrimary: ->
-    @get('parent').setEach('isPrimary', false)
-    @set('isPrimary', true)
-    @send 'stopEditing' if @get('record')
-
-  removeSelection: (item) ->
-    parent = @get('parent')
-
-    if record = item.get('record')
-      retlationShip = if item.record.constructor is Radium.EmailAddress
-                        'emailAddresses'
-                      else if item.record.constructor is Radium.PhoneNumber
-                        'phoneNumbers'
-                      else
-                        'addresses'
-
-      @send 'removeMultiple', retlationShip, item.get('record')
-
-    @get('parent').removeObject item
-
-    unless parent.get('length')
-      @send('stopEditing')
-
-    isPrimary = @get('parent').find (item) -> item.get('isPrimary')
-
-    if isPrimary
-      @send('stopEditing')
-      return
-
-    nextIsPrimary = parent.filter((item) -> item.record)?.get('firstObject')
-
-    nextIsPrimary ||= parent.get('firstObject')
-
-    nextIsPrimary.set 'isPrimary', true
-
-    @send('stopEditing')

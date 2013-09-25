@@ -2,9 +2,9 @@ Radium.InlineEditorView = Ember.View.extend
   actions:
     toggleEditor:  ->
       if @get('isEditing') and @get('isValid')
-        @get('controller').stopEditing()
+        @get('controller').send 'stopEditing'
       else
-        @get('controller').startEditing()
+        @get('controller').send 'startEditing'
 
       return unless @get 'isEditing'
       Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'

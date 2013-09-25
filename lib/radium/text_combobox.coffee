@@ -2,6 +2,15 @@ require 'lib/radium/add_active_to_parent_mixin'
 require 'lib/radium/toggle_dropdown_mixin'
 
 Radium.TextCombobox = Ember.View.extend
+  actions:
+    toggleDropdown: (event) ->
+      @toggleProperty 'open'
+
+    selectItem: (text) ->
+      @set 'open', false
+      Ember.run =>
+        @set 'value', text
+
   classNameBindings: [
     'isInvalid'
     'isValid'
@@ -46,11 +55,3 @@ Radium.TextCombobox = Ember.View.extend
 
     focusIn: (evt) ->
       @get('parentView').$().addClass('active')
-
-  toggleDropdown: (event) ->
-    @toggleProperty 'open'
-
-  selectItem: (text) ->
-    @set 'open', false
-    Ember.run =>
-      @set 'value', text

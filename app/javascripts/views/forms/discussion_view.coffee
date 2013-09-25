@@ -1,11 +1,11 @@
 Radium.FormsDiscussionView = Radium.FormView.extend
   textbox: Radium.MentionFieldView.extend
     classNameBindings: ['value:is-valid', 'isInvalid']
-    valueBinding: 'controller.topic'
-    isSubmitted: Ember.computed.alias('controller.isSubmitted')
+    valueBinding: 'targetObject.topic'
+    isSubmitted: Ember.computed.alias('targetObject.isSubmitted')
 
     placeholder: "New discussion"
-    disabledBinding: 'controller.isDisabled'
+    disabledBinding: 'targetObject.isDisabled'
 
     isInvalid: (->
       Ember.isEmpty(@get('value')) && @get('isSubmitted')

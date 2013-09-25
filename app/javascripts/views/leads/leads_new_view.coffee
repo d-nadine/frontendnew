@@ -4,6 +4,35 @@ require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
 
 Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
+  actions:
+    submit: ->
+      @set 'controller.isSubmitted', true
+
+      return unless @get('controller.isValid')
+
+      if Ember.isEmpty( @get('controller.name')) || Ember.isEmpty( @get('controller.companyName'))
+        @$('.modal').modal backdrop: false
+        return
+
+      @get('controller').submit()
+
+    showContactDetails: ->
+      @$('.commit').show()
+      contactDetails = @$('.contact-detail')
+      existingArea = @$('.existing')
+
+      existingArea.hide()
+      contactDetails.slideDown('medium')
+
+    toggleDetail: ->
+      @$('.address-section').slideToggle('medium')
+      @$('#detailToggle').toggleClass('ss-navigatedown ss-navigateup')
+
+    showExistingDetails: ->
+      @$('.commit').hide()
+      @$('.contact-detail').slideToggle('medium')
+      @$('#existingToggle').toggleClass('ss-navigateup')
+
   classNameBindings: ['controller.isNew::disabled-content']
   contacts: Ember.computed.alias 'controller.contacts'
 
@@ -15,17 +44,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   onHideModal: ->
     @$('.modal').modal 'hide' if @$('.modal')
-
-  submit: ->
-    @set 'controller.isSubmitted', true
-
-    return unless @get('controller.isValid')
-
-    if Ember.isEmpty( @get('controller.name')) || Ember.isEmpty( @get('controller.companyName'))
-      @$('.modal').modal backdrop: false
-      return
-
-    @get('controller').submit()
 
   cancelSubmit: ->
     @$('.modal').modal 'hide'
@@ -50,7 +68,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     blur: ->
       return unless @get('controller.isNew')
       return if @get('controller.companyName')?.length < 3
-      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
+      @get('parentView').send('showContactDetails') unless @$('.contact-detail').is(':visible')
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
@@ -81,7 +99,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     attributeBindings: ['readonly']
     classNames: ['field', 'text-area']
     placeholder: 'What is the lead interested in buying?'
-    valueBinding: 'controller.notes'
+    valueBinding: 'targetObject.notes'
     readonly: Ember.computed.not 'controller.isNew'
 
   source: Radium.LeadSourcesView.extend
@@ -107,23 +125,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       @$('.multiple-field .icon-plus').hide()
 
   ).observes('controller.isNew')
-
-  showContactDetails: ->
-    @$('.commit').show()
-    contactDetails = @$('.contact-detail')
-    existingArea = @$('.existing')
-
-    existingArea.hide()
-    contactDetails.slideDown('medium')
-
-  toggleDetail: ->
-    @$('.address-section').slideToggle('medium')
-    @$('#detailToggle').toggleClass('ss-navigatedown ss-navigateup')
-
-  showExistingDetails: ->
-    @$('.commit').hide()
-    @$('.contact-detail').slideToggle('medium')
-    @$('#existingToggle').toggleClass('ss-navigateup')
 
   contactName: Radium.ContactPicker.extend Radium.ContactCompanyMixin,
     classNameBindings: ['open', ':contact-name']
@@ -181,4 +182,4 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     blur: ->
       return unless @get('isNew')
       return if @get('value')?.length < 3
-      @get('parentView').showContactDetails() unless @$('.contact-detail').is(':visible')
+      @get('parentView').send('showContactDetails') unless @$('.contact-detail').is(':visible')

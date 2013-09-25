@@ -15,6 +15,28 @@ Radium.DealStatusForm = Radium.Form.extend
     @set 'lostDuring', null
 
 Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
+  actions:
+    setProperties: ->
+      if @get('isLost')
+        @set 'form.lostDuring', @get('model.status')
+      else
+        @set 'form.lostBecause', null
+        @set 'form.lostDuring', null
+
+      @_super.apply this, arguments
+
+    commit: ->
+      if @get('model.status') == @get('form.status')
+        @set 'isEditing', false
+        return
+
+      # FIXME: super hacky way of getting commit
+      @send 'showStatusChangeConfirm', this, @_super
+
+    setForm: ->
+      @set 'form.status', @get('model.status')
+      @set 'lostBecause', null
+
   needs: ['accountSettings','pipeline']
   statuses: Ember.computed.alias('controllers.pipeline.dealStates')
   isValid: true
@@ -23,26 +45,6 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
     return unless @get('form.status')
     @get('form.status').toLowerCase() == 'lost'
   ).property('form.status')
-
-  setProperties: ->
-    if @get('isLost')
-      @set 'form.lostDuring', @get('model.status')
-    else
-      @set 'form.lostBecause', null
-      @set 'form.lostDuring', null
-
-    @_super.apply this, arguments
-
-  commit: ->
-    if @get('model.status') == @get('form.status')
-      @set 'isEditing', false
-      return
-
-    @send 'showStatusChangeConfirm', this, @_super
-
-  setForm: ->
-    @set 'form.status', @get('model.status')
-    @set 'lostBecause', null
 
   form: ( ->
     Radium.DealStatusForm.create()

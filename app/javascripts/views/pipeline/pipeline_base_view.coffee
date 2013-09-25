@@ -8,7 +8,7 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   lostBecause: Radium.TextArea.extend(Ember.TargetActionSupport,
     classNameBindings: ['isValid', 'isInvalid']
     placeholder: 'Supply a reason why this deal was lost.'
-    valueBinding: 'controller.lostBecause'
+    valueBinding: 'targetObject.lostBecause'
     isLost: Ember.computed.alias 'controller.isLost'
     classNames: ['new-comment']
     isValid: (->
@@ -22,7 +22,7 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   )
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend
-    valueBinding: 'controller.statusTodo'
+    valueBinding: 'targetObject.statusTodo'
     placeholder: "Add related todo?"
 
   bulkLeader: ( ->
