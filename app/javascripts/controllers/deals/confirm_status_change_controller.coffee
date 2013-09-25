@@ -1,6 +1,12 @@
 require 'lib/radium/modal_view'
 
 Radium.DealConfirmStatusChangeController = Radium.ObjectController.extend
+  actions:
+    confirm: ->
+      @set 'isSubmitted', true
+      return unless @get('isValid')
+      @send 'confirmStatusChange', @get('model')
+
   isSubmitted: false
 
   isLost: (->
@@ -13,8 +19,3 @@ Radium.DealConfirmStatusChangeController = Radium.ObjectController.extend
 
     @get('lostBecause.length')
   ).property('lostBecause', 'isSubmitted', 'isLost')
-
-  confirm: ->
-    @set 'isSubmitted', true
-    return unless @get('isValid')
-    @send 'confirmStatusChange', @get('model')
