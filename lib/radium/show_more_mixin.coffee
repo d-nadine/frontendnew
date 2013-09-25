@@ -1,4 +1,15 @@
 Radium.ShowMoreMixin = Ember.Mixin.create
+  actions:
+    showMore: ->
+      return unless @get('hiddenContent.length')
+      @set 'currentPage', @get('currentPage') + 1
+
+    hasMoreContent: ->
+      !!@get('hiddenContent.length')
+
+    reset: ->
+      @set 'currentPage', 1
+
   perPage: 7
   currentPage: 1
 
@@ -22,10 +33,6 @@ Radium.ShowMoreMixin = Ember.Mixin.create
       Ember.A(content.slice(0, currentLimit))
   ).property('arrangedContent.length', 'currentLimit')
 
-  showMore: ->
-    return unless @get('hiddenContent.length')
-    @set 'currentPage', @get('currentPage') + 1
-
   totalLength: (->
     @get('arrangedContent.length')
   ).property('arrangedContent.length')
@@ -34,12 +41,6 @@ Radium.ShowMoreMixin = Ember.Mixin.create
     if content = @get('arrangedContent')
       Ember.A(content.slice(@get('currentLimit') + 1, @get('arrangedContent.length')))
   ).property('arrangedContent.length', 'currentLimit')
-
-  hasMoreContent: ->
-    !!@get('hiddenContent.length')
-
-  reset: ->
-    @set 'currentPage', 1
 
   contentArrayDidChange: (array, idx, removedCount, addedCount) ->
     @_super.apply this, arguments

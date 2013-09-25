@@ -14,5 +14,6 @@ Radium.FormBoxController = Radium.ObjectController.extend
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting')
 
   showMeetingFormChanges: ( ->
+    return unless @get('meetingForm')
     @set 'meetingForm.isExpanded', @get('showMeetingForm')
   ).observes('showMeetingForm')

@@ -1,6 +1,7 @@
 require 'mixins/routes/deal_status_change_mixin'
+require 'routes/mixins/checklist_mixins'
 
-Radium.DealRoute = Radium.Route.extend
+Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatusChangeMixin,
   actions:
     confirmDeletion: ->
       @render 'deal/deletion_confirmation',
@@ -38,15 +39,6 @@ Radium.DealRoute = Radium.Route.extend
       @render 'deal/checklist',
         into: 'application'
         outlet: 'modal'
-
-  activate: ->
-    # FIXME: use a mixin when we upgrade to rc6
-    @_super.apply this, arguments
-    unless @actions.hasOwnProperty 'saveChecklist'
-      Ember.merge @actions, Radium.ChecklistEvents
-
-    unless @actions.hasOwnProperty 'showStatusChangeConfirm'
-      Ember.merge @actions, Radium.DealStatusChangeMixin
 
   renderTemplate: ->
     if @modelFor('deal').get('isDestroyed')

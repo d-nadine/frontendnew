@@ -1,16 +1,8 @@
-Radium.PipelineRoute = Radium.Route.extend
+Radium.PipelineRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatusChangeMixin,
   actions:
     selectGroup: (group) ->
       @controllerFor('pipeline').set('selectedGroup', group.get('title'))
       @transitionTo 'pipeline.index'
-
-  activate: ->
-    @_super.apply this, arguments
-    unless @actions.hasOwnProperty 'saveChecklist'
-      Ember.merge @actions, Radium.ChecklistEvents
-
-    unless @actions.hasOwnProperty 'showStatusChangeConfirm'
-      Ember.merge @actions, Radium.DealStatusChangeMixin
 
   model: ->
     model = @modelFor 'pipeline'

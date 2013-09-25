@@ -1,25 +1,26 @@
 Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserMixin,
+  actions:
+    inviteUser: ->
+      user = Radium.UserInvitation.createRecord
+        email: @get('newUserEmail')
+
+      user.one 'didCreate', =>
+        @send 'flashSuccess', 'The invitation has been sent'
+        @set 'newUserEmail', null
+
+      user.one 'becameInvalid', =>
+        @send 'flashError', user
+        user.deleteRecord()
+
+      user.one 'becameError', =>
+        @send 'flashError', 'An error has occurred and the invitation cannot be sent.'
+        user.deleteRecord()
+
+      user.get('transaction').commit()
+
   needs: 'users'
   users: Ember.computed.alias 'controllers.users'
   newUserEmail: null,
-
-  inviteUser: ->
-    user = Radium.UserInvitation.createRecord
-      email: @get('newUserEmail')
-
-    user.one 'didCreate', =>
-      @send 'flashSuccess', 'The invitation has been sent'
-      @set 'newUserEmail', null
-
-    user.one 'becameInvalid', =>
-      @send 'flashError', user
-      user.deleteRecord()
-
-    user.one 'becameError', =>
-      @send 'flashError', 'An error has occurred and the invitation cannot be sent.'
-      user.deleteRecord()
-
-    user.get('transaction').commit()
 
   # FIXME: Should be done on the server and return 422
   isDuplicate: ( ->

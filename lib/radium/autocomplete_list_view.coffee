@@ -118,7 +118,7 @@ Radium.AutocompleteView = Radium.View.extend
 
   autocomplete: Ember.TextField.extend
     classNameBindings: [':field']
-    currentUser: Ember.computed.alias 'controller.currentUser'
+    currentUser: Ember.computed.alias 'targetObject.currentUser'
     sourceBinding: 'parentView.source'
     placeholderBinding: 'parentView.placeholder'
     listBinding: 'parentView.list'

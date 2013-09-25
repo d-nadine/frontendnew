@@ -82,7 +82,7 @@ Radium.MessagesRoute = Radium.Route.extend
       outlet: 'sidebar'
 
   deactivate: ->
-    @controllerFor('messagesSidebar').reset()
+    @controllerFor('messagesSidebar').send 'reset'
     @render 'nothing',
       into: 'application'
       outlet: 'buttons'

@@ -1,4 +1,14 @@
 Radium.InlineEditorView = Ember.View.extend
+  actions:
+    toggleEditor:  ->
+      if @get('isEditing') and @get('isValid')
+        @get('controller').stopEditing()
+      else
+        @get('controller').startEditing()
+
+      return unless @get 'isEditing'
+      Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
+
   classNameBindings: ['isEditing:inline-editor-open:inline-editor-closed', 'disabled:is-disabled:is-enabled', ':inline-editor']
 
   isEditing: Ember.computed.alias 'controller.isEditing'
@@ -15,7 +25,7 @@ Radium.InlineEditorView = Ember.View.extend
   didInsertElement: ->
     $('body').on 'click.inline', =>
       return unless @get('isEditing')
-      @toggleEditor()
+      @send 'toggleEditor'
 
   willDestroyElement: ->
     $('body').off 'click.inline'
@@ -29,28 +39,18 @@ Radium.InlineEditorView = Ember.View.extend
 
     unless @get('isEditing')
       event.stopPropagation()
-      @toggleEditor()
+      @send 'toggleEditor'
       return
 
     tagName = evt.target.tagName.toLowerCase()
 
     if ['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1
       event.stopPropagation()
-      @toggleEditor()
+      @send 'toggleEditor'
       return
 
     evt.preventDefault()
     evt.stopPropagation()
-
-
-  toggleEditor:  ->
-    if @get('isEditing') and @get('isValid')
-      @get('controller').stopEditing()
-    else
-      @get('controller').startEditing()
-
-    return unless @get 'isEditing'
-    Ember.run.scheduleOnce 'afterRender', this, 'highlightSelection'
 
   highlightSelection: ->
     @$('input[type=text],textarea').filter(':first').focus()
@@ -60,7 +60,7 @@ Radium.InlineEditorView = Ember.View.extend
 
     return if [13, 9].indexOf(evt.keyCode) == -1
 
-    @toggleEditor()
+    @send 'toggleEditor'
 
   textField: Ember.TextField.extend
     isEditing: Ember.computed.alias('parentView.isEditing')
@@ -71,7 +71,7 @@ Radium.InlineEditorView = Ember.View.extend
       event.stopPropagation() if @get 'isEditing'
 
     insertNewline: ->
-      @get('parentView').toggleEditor()
+      @get('parentView').send 'toggleEditor'
 
   textArea: Ember.TextArea.extend
     isEditing: Ember.computed.alias('parentView.isEditing')

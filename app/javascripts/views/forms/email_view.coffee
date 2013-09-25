@@ -3,6 +3,30 @@ require 'lib/radium/text_area'
 require 'lib/radium/toggle_switch'
 
 Radium.FormsEmailView = Radium.FormView.extend
+  actions:
+    closeModal: ->
+      @$().one $.support.transition.end, =>
+        @set 'showSignatureModal', false
+
+      @$('.modal').removeClass('in')
+
+    addSignature: ->
+      if signature = @get('controller.signature')
+        @send 'appendSignature'
+      else
+        @set 'showSignatureModal', true
+        Ember.run.next =>
+          @$('.modal').addClass 'in'
+          @$('.modal textarea').focus()
+
+    appendSignature: ->
+      textArea = @$('.message-body')
+      currentLength = textArea.val()?.length || 0
+      textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
+      textArea.height("+=50")
+      textArea.setCursorPosition(currentLength)
+      @set 'signatureAdded', true
+
   didInsertElement: ->
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
@@ -41,11 +65,11 @@ Radium.FormsEmailView = Radium.FormView.extend
     showAvatar: false
 
   subject: Ember.TextField.extend
-    valueBinding: 'controller.subject'
+    valueBinding: 'targetObject.subject'
 
   body: Radium.TextArea.extend
     classNameBindings: [':message-body', 'parentView.noContent:is-invalid']
-    valueBinding: 'controller.message'
+    valueBinding: 'targetObject.message'
     placeholder: 'Message'
 
   reminderLength: Ember.TextField.extend
@@ -60,39 +84,16 @@ Radium.FormsEmailView = Radium.FormView.extend
       # prevent bubbling up so the dropdown doesn't close
       event.stopPropagation()
 
-  closeModal: ->
-    @$().one $.support.transition.end, =>
-      @set 'showSignatureModal', false
-
-    @$('.modal').removeClass('in')
-
-  addSignature: ->
-    if signature = @get('controller.signature')
-      @appendSignature()
-    else
-      @set 'showSignatureModal', true
-      Ember.run.next =>
-        @$('.modal').addClass 'in'
-        @$('.modal textarea').focus()
-
-  appendSignature: ->
-    textArea = @$('.message-body')
-    currentLength = textArea.val()?.length || 0
-    textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
-    textArea.height("+=50")
-    textArea.setCursorPosition(currentLength)
-    @set 'signatureAdded', true
-
   signature: Radium.TextArea.extend
     classNameBindings: ['isInvalid']
     placeholder: 'Signature'
-    valueBinding: 'controller.signature'
+    valueBinding: 'targetObject.signature'
     isInvalid: ( ->
-      return unless @get('controller.signatureSubmited')
+      return unless @get('targetObject.signatureSubmited')
 
       @get('value').length == 0
-    ).property('value', 'controller.signatureSubmited')
+    ).property('value', 'targetObject.signatureSubmited')
 
   onSignatureAdded: ->
-    @appendSignature()
-    @closeModal()
+    @send 'appendSignature'
+    @send 'closeModal'
