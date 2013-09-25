@@ -1,4 +1,49 @@
 Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
+  actions:
+    stopEditing: ->
+      false
+
+    addTag: (tag) ->
+      return if @get('tagNames').mapProperty('name').contains tag
+
+      @get('tagNames').addObject Ember.Object.create name: tag
+
+    makeLead: ->
+      @set 'status', 'pipeline'
+
+      @get('store').commit()
+
+    cancel: ->
+      @get('form').reset()
+      @set 'model', @get('form')
+
+    submit: ->
+      @set 'isSubmitted', true
+
+      return unless @get('isValid')
+
+      createContact = @get('model').create()
+
+      @trigger 'hideModal'
+
+      # FIXME: should not have to call Ember.run.next
+      createContact.one 'didCreate', =>
+        Ember.run.next =>
+          @set 'isSaving', false
+          @transitionToRoute 'contact', createContact.get('contact')
+
+      createContact.one 'becameError', (result) =>
+        @set 'isSaving', false
+        @send 'flashError', 'An error has occurred and the contact could not be created.'
+
+      createContact.one 'becameInvalid', (result) =>
+        @set 'isSaving', false
+        @send 'flashError', createContact
+
+      @set 'isSaving', true
+
+      @get('store').commit()
+
   needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'leadStatuses']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
@@ -16,16 +61,6 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
       @get('model.name') || @get('model.displayName')
   ).property('model.name')
-
-  addTag: (tag) ->
-    return if @get('tagNames').mapProperty('name').contains tag
-
-    @get('tagNames').addObject Ember.Object.create name: tag
-
-  makeLead: ->
-    @set 'status', 'pipeline'
-
-    @get('store').commit()
 
   modelDidChange: ( ->
     return if @get('form') || !@get('model')
@@ -45,34 +80,3 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   isNewLead: ( ->
     @get('model.isNew') && @get('status') == 'pipeline'
   ).property('model.isNew', 'status')
-
-  cancel: ->
-    @get('form').reset()
-    @set 'model', @get('form')
-
-  submit: ->
-    @set 'isSubmitted', true
-
-    return unless @get('isValid')
-
-    createContact = @get('model').create()
-
-    @trigger 'hideModal'
-
-    # FIXME: should not have to call Ember.run.next
-    createContact.one 'didCreate', =>
-      Ember.run.next =>
-        @set 'isSaving', false
-        @transitionToRoute 'contact', createContact.get('contact')
-
-    createContact.one 'becameError', (result) =>
-      @set 'isSaving', false
-      @send 'flashError', 'An error has occurred and the contact could not be created.'
-
-    createContact.one 'becameInvalid', (result) =>
-      @set 'isSaving', false
-      @send 'flashError', createContact
-
-    @set 'isSaving', true
-
-    @get('store').commit()

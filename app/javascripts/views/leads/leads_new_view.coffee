@@ -14,7 +14,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
         @$('.modal').modal backdrop: false
         return
 
-      @get('controller').submit()
+      @get('controller').send 'submit'
 
     showContactDetails: ->
       @$('.commit').show()
@@ -33,6 +33,15 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       @$('.contact-detail').slideToggle('medium')
       @$('#existingToggle').toggleClass('ss-navigateup')
 
+    cancelSubmit: ->
+      @$('.modal').modal 'hide'
+
+      if Ember.isEmpty @get('controller.name')
+        @$('.contact-name input[type=text]').focus()
+        return
+
+      @$('.company-name input[type=text]').focus()
+
   classNameBindings: ['controller.isNew::disabled-content']
   contacts: Ember.computed.alias 'controller.contacts'
 
@@ -44,15 +53,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   onHideModal: ->
     @$('.modal').modal 'hide' if @$('.modal')
-
-  cancelSubmit: ->
-    @$('.modal').modal 'hide'
-
-    if Ember.isEmpty @get('controller.name')
-      @$('.contact-name input[type=text]').focus()
-      return
-
-    @$('.company-name input[type=text]').focus()
 
   missingDetail: ( ->
     return "contact name" if Ember.isEmpty(@get('controller.name'))
@@ -163,7 +163,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     ).property('value')
 
     clearValue: ->
-      @get('controller').cancel()
+      @get('controller').send 'cancel'
 
     setValue: (searchResult) ->
       contact = searchResult.get('person')
@@ -175,9 +175,6 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       Ember.run =>
         @$('input[type=text]').val('')
         @$('input[type=text]').focus()
-
-    clearValue: ->
-      @get('controller').cancel()
 
     blur: ->
       return unless @get('isNew')
