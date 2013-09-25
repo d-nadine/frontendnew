@@ -1,10 +1,4 @@
 Radium.ChangeContactStatusMixin = Ember.Mixin.create
-  newPipelineDeal: null
-
-  hasNewPipelineDeal: ( ->
-    @get('newPipelineDeal')
-  ).property('newPipelineDeal')
-
   actions:
     changeStatus: (newStatus) ->
       contact = @get('contact')
@@ -36,3 +30,9 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
 
     clearNewPiplineDeal: ->
       @set('newPipelineDeal', null)
+
+  newPipelineDeal: null
+
+  hasNewPipelineDeal: ( ->
+    @get('newPipelineDeal')
+  ).property('newPipelineDeal')

@@ -17,7 +17,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
   selectionsDidChange: (->
     if @get('content').filterProperty('isChecked').get('length')
-      @transitionTo 'messages.bulk_actions'
+      @transitionToRoute 'messages.bulk_actions'
     else if @get('applicationController.currentPath') == 'messages.bulk_actions'
       if email = @get('controllers.emailsShow.model')
         @send 'selectItem', email
