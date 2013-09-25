@@ -13,10 +13,11 @@ Radium.CompanyWebsiteForm = Radium.Form.extend
     @set 'website', ''
 
 Radium.SidebarCompanyWebsiteController = Radium.SidebarBaseController.extend
-  isValid: true
+  actions:
+    setForm: ->
+      @set('form.website', @get('website'))
 
-  setForm: ->
-    @set('form.website', @get('website'))
+  isValid: true
 
   form: ( ->
     Radium.CompanyWebsiteForm.create()

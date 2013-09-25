@@ -12,10 +12,11 @@ Radium.AboutForm = Radium.Form.extend
     @set 'notes', ''
 
 Radium.SidebarAboutController = Radium.SidebarBaseController.extend
-  isValid: true
+  actions:
+    setForm: ->
+      @set 'form.notes', @get('model.notes')
 
-  setForm: ->
-    @set 'form.notes', @get('model.notes')
+  isValid: true
 
   form: ( ->
     Radium.AboutForm.create()

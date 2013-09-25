@@ -12,10 +12,11 @@ Radium.AmountForm = Radium.Form.extend
     @set 'value', ''
 
 Radium.SidebarAmountController = Radium.SidebarBaseController.extend
-  isValid: Ember.computed.bool 'form.value'
+  actions:
+    setForm: ->
+      @set 'form.value', @get('model.value')
 
-  setForm: ->
-    @set 'form.value', @get('model.value')
+  isValid: Ember.computed.bool 'form.value'
 
   form: ( ->
     Radium.AmountForm.create()

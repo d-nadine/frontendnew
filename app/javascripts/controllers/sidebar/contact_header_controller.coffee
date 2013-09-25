@@ -15,6 +15,13 @@ Radium.ContactHeaderForm = Radium.Form.extend
     @set 'companyName', ''
 
 Radium.SidebarContactHeaderController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.name', @get('model.name')
+      @set 'form.title', @get('model.title')
+      @set 'form.company', @get('model.company')
+      @set 'form.companyName', @get('model.companyName')
+
   needs: ['companies']
 
   isValid: ( ->
@@ -22,12 +29,6 @@ Radium.SidebarContactHeaderController = Radium.SidebarBaseController.extend
     return if Ember.isEmpty @get('form.name')
     @get('form.name.length') >= 3
   ).property('form.name', 'isEditing')
-
-  setForm: ->
-    @set 'form.name', @get('model.name')
-    @set 'form.title', @get('model.title')
-    @set 'form.company', @get('model.company')
-    @set 'form.companyName', @get('model.companyName')
 
   form: ( ->
     Radium.ContactHeaderForm.create()

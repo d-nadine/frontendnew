@@ -12,10 +12,11 @@ Radium.EmailForm = Radium.Form.extend
     @set 'email', ''
 
 Radium.SidebarEmailController = Radium.SidebarBaseController.extend
-  isValid: true
+  actions:
+    setForm: ->
+      @set 'form.email', @get('model.email')
 
-  setForm: ->
-    @set 'form.email', @get('model.email')
+  isValid: true
 
   form: ( ->
     Radium.EmailForm.create()

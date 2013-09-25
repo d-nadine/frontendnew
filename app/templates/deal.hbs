@@ -49,11 +49,9 @@
           </tbody>
         </table>
         <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
-          <a href="#" class="deal-label" {{action "changeStatus" "lead"}}>Lead</a>
-          <a href="#" class="deal-label" {{action "changeStatus" "negotiating"}}>Negotiating</a>
-          <a href="#" class="deal-label" {{action "changeStatus" "closed"}}>Closed</a>
-          <a href="#" class="deal-label" {{action "changeStatus" "paid"}}>Paid</a>
-          <a href="#" class="deal-label" {{action "changeStatus" "lost"}}>Lost</a>
+          {{#each statuses}}
+            <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
+          {{/each}}
           <div class="bar"></div>
         </div>
         {{#if payBy}}

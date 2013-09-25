@@ -12,10 +12,11 @@ Radium.DescriptionForm = Radium.Form.extend
     @set 'description', ''
 
 Radium.SidebarDescriptionController = Radium.SidebarBaseController.extend
-  isValid: true
+  actions:
+    setForm: ->
+      @set 'form.description', @get('model.description')
 
-  setForm: ->
-    @set 'form.description', @get('model.description')
+  isValid: true
 
   form: ( ->
     Radium.DescriptionForm.create()

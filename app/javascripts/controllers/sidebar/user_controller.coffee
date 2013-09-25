@@ -12,6 +12,10 @@ Radium.UserForm = Radium.Form.extend
     @set 'user', null
 
 Radium.SidebarUserController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.user', @get('model.user')
+
   needs: ['users', 'accountSettings']
 
   isValid: ( ->
@@ -19,9 +23,6 @@ Radium.SidebarUserController = Radium.SidebarBaseController.extend
     return if Ember.isEmpty @get('form.user')
     true
   ).property('form.user',  'isEditing')
-
-  setForm: ->
-    @set 'form.user', @get('model.user')
 
   form: ( ->
     Radium.UserForm.create()

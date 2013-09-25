@@ -13,6 +13,11 @@ Radium.ContactAssignedToForm = Radium.Form.extend
     @set 'user', null
 
 Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.source', @get('model.source')
+      @set 'form.user', @get('model.user')
+
   needs: ['users', 'accountSettings']
 
   isValid: ( ->
@@ -21,10 +26,6 @@ Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend
     return if Ember.isEmpty @get('form.user')
     true
   ).property('form.source', 'form.user',  'isEditing')
-
-  setForm: ->
-    @set 'form.source', @get('model.source')
-    @set 'form.user', @get('model.user')
 
   form: ( ->
     Radium.ContactAssignedToForm.create()

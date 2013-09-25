@@ -13,11 +13,12 @@ Radium.ContactStatusForm = Radium.Form.extend
     @set 'status', null
 
 Radium.SidebarContactStatusController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.status', @get('model.status')
+
   needs: ['leadStatuses']
   isValid: true
-
-  setForm: ->
-    @set 'form.status', @get('model.status')
 
   form: ( ->
     Radium.ContactStatusForm.create()

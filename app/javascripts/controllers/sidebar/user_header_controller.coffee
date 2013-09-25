@@ -14,6 +14,12 @@ Radium.UserHeaderForm = Radium.Form.extend
     @set 'title', ''
 
 Radium.SidebarUserHeaderController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.firstName', @get('model.firstName')
+      @set 'form.lastName', @get('model.lastName')
+      @set 'form.title', @get('model.title')
+
   needs: ['companies']
 
   isValid: ( ->
@@ -22,11 +28,6 @@ Radium.SidebarUserHeaderController = Radium.SidebarBaseController.extend
     @get('form.firstName.length') >= 3
     @get('form.lastName.length') >= 3
   ).property('form.firstName', 'isEditing')
-
-  setForm: ->
-    @set 'form.firstName', @get('model.firstName')
-    @set 'form.lastName', @get('model.lastName')
-    @set 'form.title', @get('model.title')
 
   form: ( ->
     Radium.UserHeaderForm.create()

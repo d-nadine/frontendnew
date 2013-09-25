@@ -12,10 +12,11 @@ Radium.NameForm = Radium.Form.extend
     @set 'name', ''
 
 Radium.SidebarNameController = Radium.SidebarBaseController.extend
-  isValid: true
+  actions:
+    setForm: ->
+      @set 'form.name', @get('model.name')
 
-  setForm: ->
-    @set 'form.name', @get('model.name')
+  isValid: true
 
   form: ( ->
     Radium.NameForm.create()

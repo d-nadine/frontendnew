@@ -11,53 +11,55 @@ Radium.AddressesForm = Radium.Form.extend
     @set 'addresses', Ember.A()
 
 Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
-  isValid: true
-  recordArray: 'addresses'
+  actions:
+    commit: ->
+      @get("form.#{@recordArray}").forEach (item) =>
+        if item.hasOwnProperty 'record'
+          item.record.setProperties
+            isPrimary: item.get('isPrimary')
+            name: item.get('name')
+            street: item.get('street')
+            city: item.get('city')
+            state: item.get('state')
+            zipcode: item.get('zipcode')
+            country: item.get('country')
+        else
+          if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode'))
+            @get("content.#{@recordArray}").createRecord item.getProperties('name', 'isPrimary', 'street', 'city', 'state', 'zipcode', 'country')
 
-  commit: ->
-    @get("form.#{@recordArray}").forEach (item) =>
-      if item.hasOwnProperty 'record'
-        item.record.setProperties
-          isPrimary: item.get('isPrimary')
-          name: item.get('name')
-          street: item.get('street')
-          city: item.get('city')
-          state: item.get('state')
-          zipcode: item.get('zipcode')
-          country: item.get('country')
-      else
-        if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode'))
-          @get("content.#{@recordArray}").createRecord item.getProperties('name', 'isPrimary', 'street', 'city', 'state', 'zipcode', 'country')
+      @get('content.transaction').commit()
 
-    @get('content.transaction').commit()
+    setForm: ->
+      recordArray = @get(@recordArray)
+      formArray = @get("form.#{@recordArray}")
 
-  setForm: ->
-    recordArray = @get(@recordArray)
-    formArray = @get("form.#{@recordArray}")
+      unless recordArray.get('length')
+        companyAddress = @get('company.primaryAddress')
 
-    unless recordArray.get('length')
-      companyAddress = @get('company.primaryAddress')
+        if companyAddress
+          hash = Ember.Object.create(companyAddress.getAddressHash())
+          formArray.pushObject hash
+          return
 
-      if companyAddress
-        hash = Ember.Object.create(companyAddress.getAddressHash())
-        formArray.pushObject hash
+        formArray.pushObject Ember.Object.create
+          name: 'work'
+          street: ''
+          city: ''
+          state: ''
+          zipcode: ''
+          country: ''
+          isPrimary: true
+
         return
 
-      formArray.pushObject Ember.Object.create
-        name: 'work'
-        street: ''
-        city: ''
-        state: ''
-        zipcode: ''
-        country: ''
-        isPrimary: true
+      recordArray.forEach (item) =>
+        hash = Ember.Object.create(item.getAddressHash())
+        hash.set 'record', item
+        formArray.pushObject hash
 
-      return
 
-    recordArray.forEach (item) =>
-      hash = Ember.Object.create(item.getAddressHash())
-      hash.set 'record', item
-      formArray.pushObject hash
+  isValid: true
+  recordArray: 'addresses'
 
   form: ( ->
     Radium.AddressesForm.create()

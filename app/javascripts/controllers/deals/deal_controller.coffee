@@ -1,7 +1,11 @@
+require 'lib/radium/buffered_proxy'
 require 'forms/todo_form'
 require 'controllers/deals/checklist_mixin'
+require 'mixins/controllers/change_deal_status_mixin'
 
-Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
+Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, BufferedProxy,
+  Radium.ChangeDealStatusMixin,
+
   needs: ['accountSettings', 'users', 'contacts']
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
 
@@ -86,11 +90,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin,
     @get('deletionToken') isnt @get('name')
   ).property('deletionToken')
 
-  # Status controls
-  # FIXME: Needs to be hooked up with store
-  changeStatus: (status) ->
-    @set('status', status)
-
   dealProgressClass: (->
-    "status-#{@get('status').toLowerCase()}"
+    "status-#{@get('status')}"
   ).property('status')
