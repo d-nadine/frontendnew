@@ -3,6 +3,22 @@ require 'lib/radium/location_picker'
 require 'lib/radium/meeting_autocomplete_view'
 
 Radium.FormsMeetingView = Radium.FormView.extend
+  actions:
+    showCancelMeetingDialogue: ->
+      return if @get('controller.isNew')
+
+      dialogue =  @$('.cancel-meeting')
+
+      dialogue.show()
+
+      event.stopPropagation()
+
+      $('html').on 'click.cancel-meeting', ->
+        $('html').off 'click.cancel-meeting'
+        dialogue.hide()
+
+      false
+
   classNames: ['meeting-form-container']
 
   onFormReset: ->
@@ -18,22 +34,14 @@ Radium.FormsMeetingView = Radium.FormView.extend
   willDestroyElement: ->
     $('html').off 'click.cancel-meeting'
 
-  showCancelMeetingDialogue: ->
-    return if @get('controller.isNew')
-
-    dialogue =  @$('.cancel-meeting')
-
-    dialogue.show()
-
-    event.stopPropagation()
-
-    $('html').on 'click.cancel-meeting', ->
-      $('html').off 'click.cancel-meeting'
-      dialogue.hide()
-
-    false
-
   cancelMeetingDialogue: Radium.View.extend
+    actions:
+      cancel: ->
+        @$().hide()
+
+      cancelMeeting: ->
+        @$().hide()
+
     classNames: ['cancel-meeting']
     template: Ember.Handlebars.compile """
       <div class="cancel-meeting-content">
@@ -48,11 +56,6 @@ Radium.FormsMeetingView = Radium.FormView.extend
         <div>Notifications will be sent to attendees</div>
       </div>
     """
-    cancel: ->
-      @$().hide()
-
-    cancelMeeting: ->
-      @$().hide()
 
   topicField: Radium.MentionFieldView.extend
     classNameBindings: ['isInvalid', ':meeting']

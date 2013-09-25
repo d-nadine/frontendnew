@@ -2,6 +2,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   actions:
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
+      return
 
     showForm: (form) ->
       @setProperties
@@ -9,6 +10,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
         currentForm: form
 
       @set 'formBox.activeForm', form
+      return
 
     toggleMeta: ->
       @toggleProperty 'showMeta'
@@ -16,9 +18,11 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
     toggleReplyForm: ->
       @toggleProperty 'showReplyForm'
+      return
 
     toggleForwardForm: ->
       @toggleProperty 'showForwardForm'
+      return
 
   showMeta : false
   currentForm: 'todo'

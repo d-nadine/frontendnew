@@ -1,6 +1,7 @@
 Radium.FormsForwardEmailController = Radium.FormsEmailController.extend
-  expand: ->
-    @toggleProperty 'isExpanded'
+  actions:
+    expand: ->
+      @toggleProperty 'isExpanded'
 
-  submit: (form) ->
-    @send 'forward', form
+    submit: (form) ->
+      @send 'forward', form

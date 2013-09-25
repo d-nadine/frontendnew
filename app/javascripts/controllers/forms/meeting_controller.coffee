@@ -1,5 +1,9 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   actions:
+    showCalendars: ->
+      @toggleProperty 'calendarsOpen'
+      false
+
     submit:  ->
       @set 'isSubmitted', true
 
@@ -149,10 +153,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return false if @get('justAdded')
     !@get('isNew')
   ).property('isNew')
-
-  showCalendars: ->
-    @toggleProperty 'calendarsOpen'
-    false
 
   addSelection: (attendee) ->
     person = attendee.get('person')

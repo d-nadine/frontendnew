@@ -1,4 +1,13 @@
 Radium.TimePickerView = Radium.View.extend
+  actions:
+    showTimePicker: ->
+      return if @get('disabled')
+
+      unless @get('isOpen')
+        @$('.timepicker').trigger('click.timepicker')
+
+      @toggleProperty('isOpen')
+
   templateName: 'forms/time_picker'
   classNameBindings: [
     'date:is-valid'
@@ -18,14 +27,6 @@ Radium.TimePickerView = Radium.View.extend
   disabled: Ember.computed.alias('controller.isDisabled')
 
   textBinding: 'textToTimeTransform'
-
-  showTimePicker: ->
-    return if @get('disabled')
-
-    unless @get('isOpen')
-      @$('.timepicker').trigger('click.timepicker')
-
-    @toggleProperty('isOpen')
 
   textToTimeTransform: ((key, value) ->
     if arguments.length == 2
