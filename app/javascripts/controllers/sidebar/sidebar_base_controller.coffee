@@ -15,7 +15,10 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
     setProperties: ->
       return unless @get('model')
 
-      @get('model').setProperties(@get('form').getProperties(@get('form.properties')))
+      properties = @get('form').getProperties(@get('form.properties'))
+      model = @get('model')
+
+      model.setProperties(properties)
 
     commit: ->
       return unless @get('model')

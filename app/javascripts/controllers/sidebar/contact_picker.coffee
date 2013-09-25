@@ -12,6 +12,10 @@ Radium.ContactForm = Radium.Form.extend
     @set 'contact', null
 
 Radium.SidebarContactPickerController = Radium.SidebarBaseController.extend
+  actions:
+    setForm: ->
+      @set 'form.contact', @get('model.contact')
+
   needs: ['contacts']
 
   isValid: ( ->
@@ -19,9 +23,6 @@ Radium.SidebarContactPickerController = Radium.SidebarBaseController.extend
     return if Ember.isEmpty @get('form.contact')
     true
   ).property('form.contact',  'isEditing')
-
-  setForm: ->
-    @set 'form.contact', @get('model.contact')
 
   form: ( ->
     Radium.ContactForm.create()
