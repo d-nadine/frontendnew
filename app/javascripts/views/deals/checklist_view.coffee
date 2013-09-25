@@ -8,12 +8,12 @@ Radium.ChecklistView = Ember.View.extend
   templateName: 'deals/checklist'
 
   newItemDescription: Ember.TextField.extend Radium.ChecklistItemMixin,
-    valueBinding: 'controller.newItemDescription'
+    valueBinding: 'targetObject.newItemDescription'
     placeholder: "Add additional item"
 
   newItemWeight: Ember.TextField.extend Radium.ChecklistItemMixin,
     attributeBindings: ['min', 'max']
-    valueBinding: 'controller.newItemWeight'
+    valueBinding: 'targetObject.newItemWeight'
     placeholder: 0
 
   showAddButton: ( ->

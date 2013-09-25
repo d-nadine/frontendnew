@@ -1,4 +1,14 @@
 Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMixin,
+  actions:
+    saveAsDraft: ->
+      @set 'status', 'unpublished'
+      @set 'isPublished', false
+      @submit()
+
+    publish: ->
+      @set 'isPublished', true
+      @submit()
+
   needs: ['contacts','users', 'accountSettings']
   statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
   contacts: ( ->
@@ -31,15 +41,6 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
     @set('status', @get('statuses.firstObject'))
   ).observes('statuses.[]')
-
-  saveAsDraft: ->
-    @set 'status', 'unpublished'
-    @set 'isPublished', false
-    @submit()
-
-  publish: ->
-    @set 'isPublished', true
-    @submit()
 
   submit: ->
     @set 'isSubmitted', true

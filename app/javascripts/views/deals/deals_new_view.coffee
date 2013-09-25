@@ -6,24 +6,25 @@ require 'lib/radium/contact_picker'
 require 'lib/radium/value_validation_mixin'
 
 Radium.DealsNewView= Ember.View.extend
+  actions:
+    toggleChecklist: (evt) ->
+      return if @get('disabled')
+
+      @$('.checklist-items-container').slideToggle('medium')
+      @toggleProperty 'showChecklistItems'
+
+    toggleDetail: (evt) ->
+      @$('#deal-detail').slideToggle('medium')
+      @toggleProperty 'showDetail'
+
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
   showChecklistItems: false
   showDetail: false
   disabled: false
 
-  toggleChecklist: (evt) ->
-    return if @get('disabled')
-
-    @$('.checklist-items-container').slideToggle('medium')
-    @toggleProperty 'showChecklistItems'
-
-  toggleDetail: (evt) ->
-    @$('#deal-detail').slideToggle('medium')
-    @toggleProperty 'showDetail'
-
   name: Ember.TextField.extend Radium.ValueValidationMixin,
-    valueBinding: 'controller.name'
+    valueBinding: 'targetObject.name'
     disabledBinding: 'parentView.disabled'
     didInsertElement: ->
       @$().focus()
@@ -37,7 +38,7 @@ Radium.DealsNewView= Ember.View.extend
   description: Radium.TextArea.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'
     rows: 3
-    valueBinding: 'controller.description'
+    valueBinding: 'targetObject.description'
 
   dealStates: Ember.View.extend
     template: Ember.Handlebars.compile """

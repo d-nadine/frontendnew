@@ -1,8 +1,8 @@
 Radium.ValueIsInvalidMixin = Ember.Mixin.create
   classNameBindings: ['isInvalid']
   isInvalid: (->
-    Ember.isEmpty(@get('value')) && @get('controller.isSubmitted')
-  ).property('value', 'controller.isSubmitted')
+    Ember.isEmpty(@get('value')) && @get('targetObject.isSubmitted')
+  ).property('value', 'targetObject.isSubmitted')
 
 Radium.ValueValidationMixin = Ember.Mixin.create Radium.ValueIsInvalidMixin,
   classNameBindings: ['isValid',':field']

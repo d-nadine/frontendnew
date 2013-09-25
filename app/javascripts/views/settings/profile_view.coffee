@@ -1,18 +1,18 @@
 Radium.SettingsProfileView = Radium.View.extend
   firstName: Ember.TextField.extend Radium.ValueIsInvalidMixin,
-    valueBinding: 'controller.firstName'
-    disabledBinding: 'controller.isSaving'
+    valueBinding: 'targetObject.firstName'
+    disabledBinding: 'targetObject.isSaving'
 
   lastName: Ember.TextField.extend Radium.ValueIsInvalidMixin,
-    valueBinding: 'controller.lastName'
-    disabledBinding: 'controller.isSaving'
+    valueBinding: 'targetObject.lastName'
+    disabledBinding: 'targetObject.isSaving'
 
   title: Ember.TextField.extend Radium.ValueIsInvalidMixin,
-    valueBinding: 'controller.title'
-    disabledBinding: 'controller.isSaving'
+    valueBinding: 'targetObject.title'
+    disabledBinding: 'targetObject.isSaving'
 
   phone: Ember.TextField.extend
-    valueBinding: 'controller.phone'
-    disabledBinding: 'controller.isSaving'
+    valueBinding: 'targetObject.phone'
+    disabledBinding: 'targetObject.isSaving'
 
 

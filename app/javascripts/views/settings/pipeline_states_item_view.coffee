@@ -3,8 +3,8 @@ Radium.PipelineStatesItemView = Ember.View.extend
   templateName: 'settings/pipeline_states_item'
 
   pipelineStateName: Ember.TextField.extend Ember.TargetActionSupport,
-    valueBinding: 'controller.model.name'
-    disabledBinding: 'controller.account.isSaving'
+    valueBinding: 'targetObject.model.name'
+    disabledBinding: 'targetObject.account.isSaving'
     action: 'saveState'
     target: 'controller'
     insertNewline: (e) ->
