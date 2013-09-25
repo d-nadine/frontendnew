@@ -9,4 +9,4 @@ Radium.SidebarContactHeaderView = Radium.InlineEditorView.extend
     setValue: ->
       @_super.apply this, arguments
       Ember.run.next =>
-        @get('parentView').toggleEditor()
+        @get('parentView').send 'toggleEditor'
