@@ -12,6 +12,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
     toggleMeta: ->
       @toggleProperty 'showMeta'
+      return
 
     toggleReplyForm: ->
       @toggleProperty 'showReplyForm'

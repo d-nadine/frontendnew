@@ -1,4 +1,32 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
+  actions:
+    submit:  ->
+      @set 'isSubmitted', true
+
+      return unless @get('isValid')
+
+      @set 'isExpanded', false
+      @set 'justAdded', true
+
+      Ember.run.later( ( =>
+        @set 'justAdded', false
+        @set 'isSubmitted', false
+
+        @applyBufferedChanges()
+
+        if @get('isNew')
+          @get('model').commit() 
+        else
+          @get('store').commit()
+
+        @discardBufferedChanges()
+
+        return unless @get('isNew')
+
+        @get('model').reset()
+        @trigger 'formReset'
+      ), 1200)
+
   needs: ['companies','contacts','users']
   now: Ember.computed.alias('clock.now')
   companies: Ember.computed.alias('controllers.companies')
@@ -72,34 +100,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   endsAtIsInvalid: ( ->
     Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) == -1
   ).property('startsAt', 'endsAt')
-
-
-  submit:  ->
-    @set 'isSubmitted', true
-
-    return unless @get('isValid')
-
-    @set 'isExpanded', false
-    @set 'justAdded', true
-
-    Ember.run.later( ( =>
-      @set 'justAdded', false
-      @set 'isSubmitted', false
-
-      @applyBufferedChanges()
-
-      if @get('isNew')
-        @get('model').commit() 
-      else
-        @get('store').commit()
-
-      @discardBufferedChanges()
-
-      return unless @get('isNew')
-
-      @get('model').reset()
-      @trigger 'formReset'
-    ), 1200)
 
   cancellationText: ( ->
     return if @get('isNew')

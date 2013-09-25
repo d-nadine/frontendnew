@@ -45,9 +45,12 @@ Radium.MeetingForm = Radium.Form.extend
     meeting.one 'didCreate', (meeting) =>
       # FIXME: client side hack.  The server should return the meeting
       # with the relationships set
-      @get('currentUser.model').reload()
+      currentUser = @get('currentUser.model')
+      currentUser.reload()
 
-      users.forEach (user) -> user.reload()
+      users.forEach (user) ->
+        unless user == currentUser
+          user.reload()
       contacts.forEach (contact) -> 
         contact.reload() if contact.reload
       reference.reload() if reference

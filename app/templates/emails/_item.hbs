@@ -29,7 +29,7 @@
           </dd>
           {{#if cc}}
             <dt>CC</dt>
-            <dd>{{list ccList}}</dd>
+            <dd>{{!list ccList}}</dd>
           {{/if}}
           <dt>Time</dt>
           <dd>{{formatDateTime sentAt format="full"}}</dd>
@@ -93,7 +93,7 @@
     </div>
     {{#unless isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
-        {{render 'related_tasks' tasks}}
+        {{!render 'related_tasks' tasks}}
       </div>
     {{/unless}}
   </div>

@@ -40,40 +40,39 @@ Radium.computed.newForm = (form, properties = {}) ->
       isNew: true
       defaults: @get(defaultsName)
 
-Radium.computed.tasks = ->
+Radium.computed.aggregate = ->
   properties = Array.prototype.slice.call arguments
 
   args = properties.map (prop) => "#{prop}.[]"
 
   func = (propName) ->
-    aggregate = Radium.AggregateArrayProxy.create()
-    arrays = properties.map((array) => 
+    arrays = properties.map((array) =>
       @get(array)
     ).filter((array) =>
       array.get('length')
     )
 
+    aggregate = Ember.ArrayProxy.create(content: Ember.A())
+
     aggregate.set 'isLoading', true
 
-    errHandler = (error) =>
-      aggregate.set 'isLoading', false
-      Radium.rejectionHandler error
+    arrays.forEach (array) =>
+      loading = array.filterProperty('isLoaded', false)
 
-    Ember.RSVP.all(arrays).then((=>
-      arrays.forEach (array) => 
-        loading = array.filterProperty('isLoaded', false)
-        aggregate.add array.filter((item) -> return !loading.contains(item))
+      loaded = array.filter((item) -> return !loading.contains(item))
 
-        loading.forEach (task) =>
-          observer = =>
-            if task.get('isLoaded')
-              aggregate.add [task]
-              task.removeObserver 'isLoaded', observer
+      loaded.forEach (item) ->
+        aggregate.pushObject item
 
-          task.addObserver 'isLoaded', observer
-      aggregate.set 'isLoading', false
-    ), errHandler)
-    .then(null, errHandler)
+      loading.forEach (item) =>
+        observer = =>
+          if item.get('isLoaded')
+            aggregate.pushObject(item)
+            item.removeObserver 'isLoaded', observer
+
+        item.addObserver 'isLoaded', observer
+
+    aggregate.set 'isLoading', false
 
     aggregate
 
@@ -81,7 +80,7 @@ Radium.computed.tasks = ->
 
   Ember.computed.apply this, args
 
-Radium.computed.aggregate = Radium.computed.tasks
+Radium.computed.tasks = Radium.computed.aggregate
 
 Radium.computed.required = ->
   Ember.computed ->
