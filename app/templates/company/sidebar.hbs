@@ -14,7 +14,8 @@
       </h6>
     </div>
     <div class="sidebar-panel-content">
-      {{#linkTo "leads.fromCompany" this classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
+      {{model.constructor}}
+      {{#linkTo "leads.fromCompany" model classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/linkTo}}
       {{#if contacts.length}}
         <div class="company-type">
           <h2>{{maxContactsStatus}}</h2>
