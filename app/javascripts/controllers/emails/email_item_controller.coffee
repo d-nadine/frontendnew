@@ -10,6 +10,15 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
       @set 'formBox.activeForm', form
 
+    toggleMeta: ->
+      @toggleProperty 'showMeta'
+
+    toggleReplyForm: ->
+      @toggleProperty 'showReplyForm'
+
+    toggleForwardForm: ->
+      @toggleProperty 'showForwardForm'
+
   showMeta : false
   currentForm: 'todo'
 
@@ -65,10 +74,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend
     user: @get('currentUser')
     contact: @get('contact')
   ).property('model', 'tomorrow', 'contact')
-
-  toggleMeta: -> @toggleProperty 'showMeta'
-  toggleReplyForm: -> @toggleProperty 'showReplyForm'
-  toggleForwardForm: -> @toggleProperty 'showForwardForm'
 
   replyEmail: (->
     Radium.ReplyForm.create
