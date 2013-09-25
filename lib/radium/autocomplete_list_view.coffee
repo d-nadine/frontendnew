@@ -1,4 +1,11 @@
 Radium.AutocompleteView = Radium.View.extend
+  events:
+    addSelection: (item) ->
+      @get('source').addObject item
+
+    removeSelection: (item) ->
+      @get('source').removeObject item
+
   classNameBindings: [
     'isInvalid'
     'hasUsers:is-valid'
@@ -62,12 +69,6 @@ Radium.AutocompleteView = Radium.View.extend
     dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
 
     event.stopPropagation()
-
-  addSelection: (item) ->
-    @get('source').addObject item
-
-  removeSelection: (item) ->
-    @get('source').removeObject item
 
   resizeInputBox: ->
     input = @$('li.as-original input')
