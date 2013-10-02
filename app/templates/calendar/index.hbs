@@ -55,14 +55,10 @@
               </span>
 
               <ul>
-                {{#each calendarDay.visibleContent class="unstyled" itemController="calendarTaskItem" }}
-                <li {{bindAttr class=":day-event-item controller.isSelected:is-selected"}}>
-                  <a href="#" {{action selectCalendarTask this target="calendarDay"}}>
-                    {{formatDateTime time}}
-                    <span class="day-event-item-description">{{title}}</span>
-                  </a>
-                </i>
-                {{/each}}
+                {{each calendarDay.visibleContent 
+                  class="unstyled" 
+                  itemController="calendarTaskItem"
+                  itemViewClass="Radium.CalendarDateTaskItemView"}}
               </ul>
             </div>
             {{#if calendarDay.hiddenContent}}

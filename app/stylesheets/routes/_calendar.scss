@@ -125,6 +125,15 @@ $calendar-off: #d8d9d9;
   background: #fff;
   border-bottom: 1px solid rgba(black, 0.1);
   color: #6e6e6e;
+  @include transition(background-color 0.5s ease-in);
+
+  &.is-new-item {
+    background: $green;
+
+    button.events-list-item-button {
+      color: #fff;
+    }
+  }
 
   a {
     display: block;
@@ -140,6 +149,8 @@ $calendar-off: #d8d9d9;
 
   button.events-list-item-button {
     padding-top: 0;
+    @include transition(color 0.5s ease-in);
+
 
     &:hover {
       color: $green;
@@ -256,6 +267,14 @@ $calendar-off: #d8d9d9;
   font-size: 12px;
   line-height: 18px;
   color: #6e6e6e;
+  background: rgba(white, 0);
+  @include transition(all 0.75s ease-in);
+  @include border-radius(20px);
+
+  &.is-new-item {
+    color: #fff;
+    background-color: $green;
+  }
 
   a {
     color: inherit;
