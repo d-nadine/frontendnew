@@ -25,7 +25,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
     text = text.replace(re,"<a href='$1' target='_new'>$1</a>")
     text = text.replace(/<img[^>]*>/g,"")
     text
-  ).property('message')
+  ).property('message', 'message.length')
 
   sender: ( ->
     @get('_senderUser') ||

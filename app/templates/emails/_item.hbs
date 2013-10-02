@@ -15,9 +15,9 @@
     <h4 class="email-title">
       {{#if subject}}
         <strong>{{subject}}</strong><br>
-        <span class="sender">{{link sender}} writes</span>
+        <span class="sender">{{resource-link model=sender}} writes</span>
       {{else}}
-        Email from <span class="sender">{{link sender}}</span>
+        Email from <span class="sender">{{resource-link model=sender}}</span>
       {{/if}}
     </h4>
 
@@ -40,7 +40,7 @@
 
   <div class="content">
     <div {{bindAttr class="message::empty :text"}}>
-      {{#if message}}
+      {{#if message.length}}
         <p>
           {{{formattedMessage}}}
         </p>
