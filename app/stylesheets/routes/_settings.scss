@@ -287,7 +287,21 @@ input.api-field {
   }
 }
 
-.lead-source-item{
+// Lead Sources ordered list
+.lead-sources {
+  li {
+    padding: 2px 0;
+    line-height: 30px;
+    border-bottom: 1px solid $control-border-color;
+
+    input[type="text"] {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.lead-source-item {
   float: left;
+  line-height: 30px;
   width: 224px;
 }
