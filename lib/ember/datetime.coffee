@@ -70,6 +70,10 @@ Ember.DateTime.reopen
   isTheSameDayAs: (other) ->
     @toDateFormat() == other.toDateFormat()
 
+  isBeforeYesterday: ->
+    yesterDay = Ember.DateTime.create().advance(day: -1).atBeginningOfDay().get('milliseconds')
+    @get('milliseconds') < yesterDay
+
   toHumanFormat: ->
     format = "%A, %B %D %Y"
 

@@ -7,7 +7,7 @@
             <strong>Saving.....</strong>
           {{else}}
             {{#if isTodo}}
-              <li {{bindAttr class="isFinished isOverdue"}}>
+              <li {{bindAttr class="isFinished overdue"}}>
                 <span class="time">
                   Due
                   {{#linkTo "unimplemented"}}
@@ -20,7 +20,7 @@
             {{/if}}
 
             {{#if isCall}}
-              <li {{bindAttr class="isFinished isOverdue"}}>
+              <li {{bindAttr class="isFinished overdue"}}>
                 <span class="time">
                   on
                   {{#linkTo "unimplemented"}}

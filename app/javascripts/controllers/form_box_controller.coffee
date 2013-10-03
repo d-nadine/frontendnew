@@ -4,7 +4,8 @@ Radium.FormBoxController = Radium.ObjectController.extend
       @set 'activeForm', form
 
     submitForm: ->
-      @get("#{@get('activeForm')}Form").set('submitForm', true)
+      activeForm = @get("#{@get('activeForm')}Form")
+      activeForm.set('submitForm', true)
 
   activeForm: 'todo'
 

@@ -40,13 +40,7 @@
 
   <div class="content">
     <div {{bindAttr class="message::empty :text"}}>
-      {{#if message.length}}
-        <p>
-          {{{formattedMessage}}}
-        </p>
-      {{else}}
-        <p>(No Message)</p>
-      {{/if}}
+      {{emailBodyFormatter message}}
     </div>
 
     {{#if attachments}}

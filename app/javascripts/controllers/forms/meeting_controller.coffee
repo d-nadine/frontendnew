@@ -94,7 +94,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return if @get('endsAtIsInvalid')
 
     true
-  ).property('topic', 'startsAt', 'endsAt', 'startsAtIsInvalid', 'endsAtIsInvalid')
+  ).property('topic', 'startsAt', 'endsAt', 'startsAtIsInvalid', 'endsAtIsInvalid', 'submitForm')
 
   startsAtIsInvalid: ( ->
     now = Ember.DateTime.create().advance(minute: -5)

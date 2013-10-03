@@ -63,7 +63,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
     return unless @get('user')
 
     true
-  ).property('description', 'finishBy', 'user')
+  ).property('description', 'finishBy', 'user', 'submitForm')
 
   isBulk: ( ->
     Ember.isArray @get('reference')

@@ -8,3 +8,16 @@ Radium.HasTasksMixin = Ember.Mixin.create
   nextTask: (->
     @get 'tasks.firstObject'
   ).property('tasks.firstObject')
+
+  filteredTasks: ( ->
+    tasks = @get('tasks')
+
+    return Ember.A() unless tasks.get('length')
+
+    tasks.filter (task) ->
+      return true unless task.get('time').isBeforeYesterday()
+
+      return if task.constructor is Radium.Meeting
+
+      not task.get('isFinished')
+  ).property('tasks.[]')

@@ -43,7 +43,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
     today = @get 'clock.atBeginningOfDay'
 
     displayable = content.filter (item) ->
-      Ember.DateTime.compare(item.get('time'), today) >= 0 || item.get('isOverdue')
+      Ember.DateTime.compare(item.get('time'), today) >= 0 || item.get('overdue')
 
     displayable.sort (item1, item2) ->
       Ember.compare item1.get('time'), item2.get('time')
@@ -86,7 +86,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
     nextWeek = @get 'clock.endOfNextWeek'
     time     = task.get 'time'
 
-    if task.get('isOverdue')
+    if task.get('overdue')
       'overdue'
     else if Ember.DateTime.compare(time, today) == 0
       'today'
