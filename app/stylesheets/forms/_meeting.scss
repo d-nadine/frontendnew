@@ -193,9 +193,12 @@
     z-index: 9;
   }
 
+  .invite-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
   .autocomplete {
-    width: 70%;
-    display: inline-block;
 
     .as-selection-item {
       display: none;

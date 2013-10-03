@@ -75,7 +75,9 @@
             <label class="icon-label">
               <i class="ss-standard ss-user"></i>
             </label>
-            {{view view.attendees class="field" viewName="attendeeList"}}
+            <div class="invite-wrapper">
+              {{view view.attendees class="field" viewName="attendeeList"}}
+            </div>
           {{/unless}}
         </div>
         {{#if calendarsOpen}}
