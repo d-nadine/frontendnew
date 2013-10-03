@@ -9,7 +9,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
     @get 'tasks.firstObject'
   ).property('tasks.firstObject')
 
-  filteredTasks: ( ->
+  currentTasks: ( ->
     tasks = @get('tasks')
 
     return Ember.A() unless tasks.get('length')
