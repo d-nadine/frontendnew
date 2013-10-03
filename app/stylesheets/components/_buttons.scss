@@ -12,10 +12,10 @@ $btn-primary : #007cdd;
 
 .btn {
   border: {
-    top-color: #bbbbbb;
-    right-color: #a3a3a3;
-    bottom-color: #8c8c8c;
-    left-color: #a3a3a3;
+    top-color: #d0d0d0;
+    right-color: #c9c9c9;
+    bottom-color: #bfbfbf;
+    left-color: #c9c9c9;
   }
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,7 +23,7 @@ $btn-primary : #007cdd;
   color: #242424;
   @include border-radius(3px);
   @include background-image(linear-gradient(#e4e6e6, #d9dbdb));
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.7), 0 1px 2px rgba(black, 0.2));
+  @include box-shadow(inset 0 1px 0 #e9eaea, 0 1px 1px rgba(black, 0.15));
 
   &:hover,
   &:focus,
@@ -36,13 +36,15 @@ $btn-primary : #007cdd;
 
   &:active,
   &:focus {
+    @include box-shadow(none);
     @include background-image(linear-gradient(#c3c3c3, #a9a9a9));
   }
 
   i {
+    display: inline-block;
     position: relative;
     top: 2px;
-    display: inline-block;
+    vertical-align: middle;
   }
 
   .ss-small {
@@ -52,6 +54,10 @@ $btn-primary : #007cdd;
   &.text-error {
     color: $red;
   }
+}
+
+.btn-large {
+  max-height: 44px;
 }
 
 .btn-circle-icon {
@@ -133,12 +139,13 @@ $btn-primary : #007cdd;
 }
 
 .btn-primary {
+  font-weight: bold;
   border-color: #0082df;
   color: #fff;
   background-color: $btn-primary;
   text-shadow: 0 1px 1px rgba(black, 0.5);
   @include background-image(linear-gradient(#00a3e7, $btn-primary));
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.25), 0 1px 2px rgba(black, 0.2));
+  @include box-shadow(inset 0 1px 0 rgba(white, 0.1), 0 1px 2px rgba(black, 0.2));
 
   &:hover,
   &:focus,
@@ -169,40 +176,53 @@ $btn-primary : #007cdd;
       @include background-image(linear-gradient(#00a3e7, $btn-primary));
     }
   }
+
+  .ss-plus {
+    font-size: 10px;
+    top: 0;
+  }
 }
 
 .btn-danger {
+  font-weight: bold;  
   color: #fff;
   background: {
     image: none;
     color: $red;
   }
-  border: none;
+  border-color: $red;
+  @include box-shadow(none);
+
+  &:hover {
+    background-color: darken($red, 10%);
+    border-color: darken($red, 10%);
+  }
 }
 
 .btn-success {
-  $success: #5ab623;
   color: #fff;
-  border-color: darken(#5ab623, 5%);
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.25), 0 1px 2px rgba(black, 0.2));
-  @include background-image(linear-gradient($success, darken($success, 10%)));
+  border-color: $success;
+  @include box-shadow(none);
+  @include background-image(linear-gradient($success, darken($success, 1%)));
 
   &:hover,
   &:focus,
   &:active {
+    @include box-shadow(none);
     background: {
       position: 0 0;
     }
   }
 
   &:hover {
-    @include background-image(linear-gradient(#5ab623, darken(#5ab623, 10%)));
+    @include background-image(linear-gradient($success, darken($success, 10%)));
   }
 
   &:active,
   &:focus {
     background-position: 0 0;
-    @include background-image(linear-gradient(darken($success, 15%), darken(#5ab623, 10%)));
+    border-color: darken($success, 5%);
+    @include background-image(linear-gradient(darken($success, 5%), darken($success, 10%)));
   }
 }
 

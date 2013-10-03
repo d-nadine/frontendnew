@@ -4,6 +4,7 @@
 
     .btn {
       height: 35px;
+      @include box-sizing(border-box);
     }
   }
 
