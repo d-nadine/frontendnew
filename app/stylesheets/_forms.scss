@@ -228,6 +228,10 @@
 .form-buttons {
   clear: both;
   overflow: hidden;
+
+  .btn-link {
+    color: #2b3839;
+  }
 }
 
 .btn-block {
