@@ -12,7 +12,7 @@
     {{/if}}
 
     {{#if showComments}}
-      <i class="ss-symbolicons-block ss-chat pull-right"></i>
+      <i class="ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
 
 
@@ -47,11 +47,12 @@
       </div>
 
       {{#if isEditable}}
-        {{#if showAddAction}}
-          {{partial 'add_action'}}
-        {{/if}}
         <div class="form-row form-buttons">
+          {{#if showAddAction}}
+            {{partial 'add_action'}}
+          {{/if}}
           <div class="pull-right">
+            <button class="btn btn-link">Delete call</button>
             <button class="btn btn-primary" type="submit" {{action submit}}>Save</button>
           </div>
         </div>

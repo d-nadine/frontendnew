@@ -44,6 +44,17 @@ $calendar-off: #d8d9d9;
   }
 }
 
+.calendar-month-btn {
+  &:hover,
+  &:active {
+    color: $green;
+  }
+
+  i {
+    top: 0;
+  }
+}
+
 .calendar-date-title {
   min-width: 415px;
   display: inline-block;

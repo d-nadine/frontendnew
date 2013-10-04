@@ -3,8 +3,16 @@
   white-space: nowrap;
 
   span {
+    font-size: 12px;
+    vertical-align: middle;
     display: inline-block;
     margin-right: 10px;
+    color: #2d3b3c;
+  }
+
+  time {
+    margin-left: 10px;
+    font-weight: bold;
   }
 
   &:hover {
