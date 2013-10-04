@@ -24,6 +24,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           ),
           ((error) =>
             @send 'flashError', error
+            error.deleteRecord()
           ))
         else
           @get('store').commit()

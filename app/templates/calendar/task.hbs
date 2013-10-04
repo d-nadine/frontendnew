@@ -7,14 +7,20 @@
   </h3>
 </header>
 
-{{#if showTodoForm}}
-  {{render "forms/todo" model}}
-{{/if}}
+{{#unless isDeleted}}
+  {{#if showTodoForm}}
+    {{render "forms/todo" model}}
+  {{/if}}
 
-{{#if showCallForm}}
-  {{render "forms/call" model}}
-{{/if}}
+  {{#if showCallForm}}
+    {{render "forms/call" model}}
+  {{/if}}
 
-{{#if showMeetingForm}}
-  {{render "forms/meeting" model}}
-{{/if}}
+  {{#if showMeetingForm}}
+    {{render "forms/meeting" model}}
+  {{/if}}
+{{else}}
+<div class="alert">
+<h4 class="text-center">The task has been deleted.</h4>
+</div> 
+{{/unless}}

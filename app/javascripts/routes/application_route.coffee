@@ -114,10 +114,19 @@ Radium.ApplicationRoute = Radium.Route.extend
         type: 'alert-error'
         message: error
 
+    confirmTaskDeletion: (task) ->
+      controller = @controllerFor("#{task.humanize()}DeletionConfirmation")
+      controller.set 'model', task
+
+      @render "#{task.humanize()}/deletion_confirmation",
+        into: 'application'
+        outlet: 'modal'
+
   activate: ->
     notificationPoller = Radium.NotificationsPoller.create()
     Radium.set('notificationPoller', notificationPoller)
     notificationPoller.start()
+
     messages = Radium.MessageArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')
 
