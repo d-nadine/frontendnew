@@ -171,7 +171,7 @@
         }
       }
 
-      .autocomplete{
+      .autocomplete {
         display: inline-block;
         margin-top: 10px;
         padding: 5px;
@@ -194,12 +194,13 @@
     z-index: 9;
   }
 
-  .invite-wrapper {
-    position: relative;
-    overflow: hidden;
-  }
-
   .autocomplete {
+    border: none;
+
+    ul.as-selections {
+      @include border-radius(4px);
+      border: 1px solid $control-border-color;
+    }
 
     .as-selection-item {
       display: none;
@@ -227,6 +228,7 @@
     font-weight: bold;
     line-height: 12px;
     position: relative;
+    vertical-align: top;
   }
 
   .btn-close {
