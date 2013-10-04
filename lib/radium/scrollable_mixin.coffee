@@ -1,6 +1,7 @@
 Radium.ScrollableMixin = Em.Mixin.create
   scrollbarResizeTimer: null
   didInsertElement: ->
+    @_super.apply this, arguments
     Ember.run.scheduleOnce 'afterRender', this, ->
       @setScroller()
       @set 'scrollbarResizeTimer', setInterval( =>
