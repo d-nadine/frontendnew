@@ -40,11 +40,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
         @$().hide()
 
       cancelMeeting: ->
-        model = @get("controller.model")
-
-        model.deleteRecord()
-
-        model.get('transaction').commit()
+        @get('controller').send 'deleteMeeting'
 
         @$().hide()
 

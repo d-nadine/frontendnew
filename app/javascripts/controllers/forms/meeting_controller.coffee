@@ -4,6 +4,16 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       @toggleProperty 'calendarsOpen'
       false
 
+    deleteMeeting: ->
+      model = if @get('model') instanceof Ember.ObjectController
+                @get("model.model")
+              else
+                @get("model")
+
+      model.deleteRecord()
+
+      model.get('transaction').commit()
+
     submit:  ->
       @set 'isSubmitted', true
 
@@ -106,7 +116,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   ).property('startsAt', 'endsAt')
 
   cancellationText: ( ->
-    return if @get('isNew')
+    return if @get('isNew') || !@get('controller.model')
 
     topic = @get('topic')
 

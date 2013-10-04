@@ -39,6 +39,7 @@
       text-align: center;
       z-index: 1000;
       @include border-radius(5px);
+      height: 100%;
     }
 
     .cancel-meeting-content {
