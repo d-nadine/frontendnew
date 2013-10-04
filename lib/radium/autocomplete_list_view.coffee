@@ -1,5 +1,5 @@
 Radium.AutocompleteView = Radium.View.extend
-  events:
+  actions:
     addSelection: (item) ->
       @get('source').addObject item
 
@@ -157,7 +157,7 @@ Radium.AutocompleteView = Radium.View.extend
         item = Ember.Object.create
                   email: item
 
-      @get('parentView').addSelection item
+      @get('parentView').send('addSelection', item)
 
     formatList: (data, elem) ->
       content = ""

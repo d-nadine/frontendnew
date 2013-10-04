@@ -24,11 +24,11 @@ Radium.EmailsItemController = Radium.ObjectController.extend
       @toggleProperty 'showForwardForm'
       return
 
+    toggleSwitch: ->
+      @toggleProperty 'isPersonal'
+
   showMeta : false
   currentForm: 'todo'
-
-  toggleSwitch: ->
-    @toggleProperty 'isPersonal'
 
   isPersonal: ( (key, value) ->
     return if @get('isNew')
