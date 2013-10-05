@@ -1,4 +1,12 @@
 Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
+  actions:
+    addSelection: (item) ->
+      @get('controller').send('addSelection', item)
+    removeSelection: (item) ->
+      @get('controller').send('removeSelection', item)
+
+  sourceBinding: 'controller.attendees'
+
   queryParameters: (query) ->
     term: query
     email_only: true

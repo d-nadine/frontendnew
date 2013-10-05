@@ -1,5 +1,41 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   actions:
+    addSelection: (attendee) ->
+      person = attendee.get('person')
+
+      unless person
+        displayName = attendee.get('name') || attendee.get('email')
+        item = Ember.Object.create
+                name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey')
+        @get('contacts').addObject item
+        return
+
+      resource = if person.constructor == Radium.User then 'users' else 'contacts'
+
+      attendees = @get(resource)
+
+      return if attendees.find( (item) -> item == person)
+
+      attendees.addObject person
+
+      @get('meetingUsers').pushObject person if person.constructor == Radium.User
+
+    removeSelection: (attendee) ->
+      if @get('invited').contains attendee
+        alert 'No API for existing attendees'
+        event.preventDefault()
+        return
+
+      resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
+
+      attendees = @get(resource)
+
+      return unless attendees.find( (item) -> item == attendee)
+
+      attendees.removeObject attendee
+
+      @get('meetingUsers').removeObject attendee if attendee.constructor == Radium.User
+
     showCalendars: ->
       @toggleProperty 'calendarsOpen'
       false
@@ -30,6 +66,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         if @get('isNew')
           @get('model').commit() 
+          @get('attendees').clear()
         else
           @get('store').commit()
 
@@ -163,42 +200,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return false if @get('justAdded')
     !@get('isNew')
   ).property('isNew')
-
-  addSelection: (attendee) ->
-    person = attendee.get('person')
-
-    unless person
-      displayName = attendee.get('name') || attendee.get('email')
-      item = Ember.Object.create
-              name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey')
-      @get('contacts').addObject item
-      return
-
-    resource = if person.constructor == Radium.User then 'users' else 'contacts'
-
-    attendees = @get(resource)
-
-    return if attendees.find( (item) -> item == person)
-
-    attendees.addObject person
-
-    @get('meetingUsers').pushObject person if person.constructor == Radium.User
-
-  removeSelection: (attendee) ->
-    if @get('invited').contains attendee
-      alert 'No API for existing attendees'
-      event.preventDefault()
-      return
-
-    resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
-
-    attendees = @get(resource)
-
-    return unless attendees.find( (item) -> item == attendee)
-
-    attendees.removeObject attendee
-
-    @get('meetingUsers').removeObject attendee if attendee.constructor == Radium.User
 
   currentDate: ( ->
     @get('startsAt').toHumanFormat()
