@@ -89,5 +89,3 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')
-
-
