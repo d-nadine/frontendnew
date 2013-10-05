@@ -127,12 +127,12 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.set('notificationPoller', notificationPoller)
     notificationPoller.start()
 
-    # messages = Radium.MessageArrayProxy.create
-    #   currentUser: @controllerFor('currentUser').get('model')
+    messages = Radium.MessageArrayProxy.create
+      currentUser: @controllerFor('currentUser').get('model')
 
-    # messages.onPoll()
-    # messages.start()
-    # @controllerFor('messages').set 'model', messages
+    messages.onPoll()
+    messages.start()
+    @controllerFor('messages').set 'model', messages
 
     unless @controllerFor('currentUser').get('initialMailImported')
       initialImporter = Radium.InitialImportPoller.create
