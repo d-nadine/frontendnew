@@ -33,4 +33,4 @@ Radium.AuthManager = Ember.Object.extend
       url: "#{apiUrl}/sessions/destroy"
       dataType: 'jsonp',
       success:  ->
-        location.replace 'http://www.radiumapp.com/'
+        location.replace 'http://www.radiumcrm.com/'
