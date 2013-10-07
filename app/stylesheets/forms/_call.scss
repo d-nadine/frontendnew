@@ -105,13 +105,21 @@
 
   .contact-picker {
     float: left;
-
-    input {
-      width: 140px;
-    }
   }
 
-  .field.todo {
-    display: inline-block;
+  .mention-field-view {
+    margin-left: 60px;
+    clear: both;
+  }
+}
+
+p.call-description {
+  margin: 0;
+  font-size: 18px;
+  line-height: 30px;
+
+  .is-expanded & {
+    clear: both;
+    margin-left: 60px;
   }
 }

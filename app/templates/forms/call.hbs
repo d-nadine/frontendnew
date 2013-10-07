@@ -6,7 +6,7 @@
       {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
     {{else}}
       {{#if contact}}
-        {{#linkTo "contact" contact class="pull-left inline-contact-name"}}{{contact.displayName}}{{/linkTo}}
+        {{#linkTo "contact" contact class="pull-left inline-contact-name"}}Call {{contact.displayName}}{{/linkTo}}
       {{else}}
       {{/if}}
     {{/if}}
@@ -34,7 +34,11 @@
       <span class="success-message green pull-right">Call saved</span>
     {{/if}}
 
-    {{view view.todoField classNames="field field-blend-in" viewName="description"}}
+    {{#if showOptions}}
+      {{view view.todoField classNames="field field-blend-in" viewName="description"}}
+    {{else}}
+      <p class="call-description">{{description}}</p>
+    {{/if}}
   </div>
 
   {{#if isExpanded}}
