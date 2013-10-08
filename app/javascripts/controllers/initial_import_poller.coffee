@@ -1,5 +1,5 @@
 Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
-  interval: 10000
+  interval: 1000
 
   onPoll: ->
     currentUser = @get('currentUser')

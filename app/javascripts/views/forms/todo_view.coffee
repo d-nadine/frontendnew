@@ -40,4 +40,5 @@ Radium.FormsTodoView = Radium.FormView.extend
     disabledBinding: 'controller.isDisabled'
 
   onFormReset: ->
-    @get('description').reset()
+    if description = @get('description')
+      description.reset()
