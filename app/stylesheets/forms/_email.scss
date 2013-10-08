@@ -4,8 +4,9 @@
 
 .email-item-actions {
   border-top: 1px solid #ddd;
+  margin: 30px 0 0;
   padding: {
-    top: 10px;
+    top: 20px;
     bottom: 10px;
   }
 }
@@ -72,7 +73,7 @@
 
 .email-title {
   margin: 0;
-  line-height: 30px;
+  line-height: 25px;
 
   .sender {
     font-weight: normal;
@@ -80,8 +81,8 @@
 }
 
 .email-header {
-  margin: 0 0 10px;
-  padding: 0 0 10px;
+  margin: 0 0 20px;
+  padding: 0 0 20px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -195,7 +196,7 @@
 
 // Email HUD
 .email-hud {
-  margin: 0 0 40px;
+  margin: 0 0 10px;
   padding: 15px;
   background: #313131;
   color: #fff;

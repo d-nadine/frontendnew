@@ -15,6 +15,10 @@ $comment-border: #cfcfcf;
   }
 }
 
+.comments-list {
+  margin-bottom: 0;
+}
+
 .comment {
   overflow: auto;
   margin-bottom: 15px;
@@ -48,6 +52,7 @@ $comment-border: #cfcfcf;
 .comment-attachment-icon {
   margin: 6px 0 0 10px;
   font-size: 14px;
+  color: #979797;
 }
 
 .new-comment {
