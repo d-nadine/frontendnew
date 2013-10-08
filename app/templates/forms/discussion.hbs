@@ -1,14 +1,15 @@
 <form {{bindAttr class="isEditable justAdded :form :discussion-form"}}>
   <div class="primary">
-    <div>
+    <div class="form-icon pull-left">
       <i class="ss-symbolicons-block ss-chat inline-form-icon"></i>
-
-      {{#if showSuccess}}
-        <span class="succes">Discussion Added</span>
-      {{/if}}
-
-      {{view view.textbox classNames="textbox field field-blend-in" viewName="text"}}
     </div>
+
+    {{#if showSuccess}}
+      <span class="succes">Discussion Added</span>
+    {{/if}}
+
+    {{view view.textbox classNames="textbox field field-blend-in" viewName="text"}}
+    
     <div class="second-row">
       {{#if showSaveButton}}
         <button {{action submit}} class="btn btn-primary pull-right">Save</button>

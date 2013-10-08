@@ -1,14 +1,9 @@
 .discussion-form {
   .primary {
     position: relative;
-    i {
-      display: block;
-      float: left;
-      margin-top: 6px;
-    }
 
     .textbox {
-      margin-left: 40px;
+      margin-left: 60px;
     }
   }
 
@@ -17,16 +12,10 @@
   }
 
   .hint {
-    margin-left: 45px;
+    margin-left: 60px;
     padding-right: 15px;
     overflow: hidden;
     @include box-sizing(border-box);
-  }
-
-  &:not(.is-new){
-    .second-row{
-      padding-bottom: 37px;
-    }
   }
 
   &.just-added {
