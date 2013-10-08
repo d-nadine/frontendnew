@@ -21,9 +21,6 @@
       }
     }
   }
-  .success-message {
-    margin-right: 10px;
-  }
 
   &.is-expandable:not(.is-editable) .todo textarea,
   &.is-expandable:not(.is-expanded) .todo textarea,
@@ -41,10 +38,6 @@
   }
 
   &.just-added .primary {
-    .checker label {
-      color: $green;
-    }
-
     .todo textarea,
     .todo .mentions,
     .todo .mentions a,
@@ -88,10 +81,6 @@
   }
 
   .checker {
-    label {
-      color: $muted;
-    }
-
     input:not([disabled]) + label:hover {
       color: $green;
     }
@@ -104,7 +93,12 @@
   }
 
   .contact-picker {
+    width: 50%;
     float: left;
+
+    input {
+      width: calc(100% - 54px);
+    }
   }
 
   .mention-field-view {

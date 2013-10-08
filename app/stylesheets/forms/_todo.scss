@@ -33,10 +33,6 @@
   }
 
   &.just-added .primary {
-    .checker label {
-      color: $green;
-    }
-
     .todo textarea,
     .todo .mentions,
     .todo .mentions a {
