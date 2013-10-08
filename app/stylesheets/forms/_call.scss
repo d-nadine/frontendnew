@@ -1,25 +1,6 @@
 .call-form {
   .primary {
     position: relative;
-
-    &.is-finished {
-      background-color: $dark-background;
-
-      .checker label::after {
-        border-color: $muted
-      }
-
-      &::after {
-        width: 96%;
-        content: '';
-        position: absolute;
-        height: 2px;
-        background-color: black;
-        margin: 0 auto;
-        left: 2%;
-        top: 50%;
-      }
-    }
   }
 
   &.is-expandable:not(.is-editable) .todo textarea,

@@ -68,6 +68,33 @@
       width: 60px;
       text-align: center;
     }
+
+    &.is-finished {
+      border-color: #cecece;
+      background-color: #e8e8e8;
+      color: #c5c5c5;
+
+      a {
+        color: #c5c5c5;
+      }
+
+      .checker,
+      .inline-form-icon,
+      .form-box-comments-icon {
+        color: #cecece;
+      }
+
+      &::after {
+        width: 96%;
+        content: '';
+        position: absolute;
+        height: 1px;
+        background-color: #797979;
+        margin: 0 auto;
+        left: 2%;
+        top: 50%;
+      }
+    }
   }
 
   &.is-expanded {

@@ -101,6 +101,10 @@ $btn-primary : #007cdd;
   &:active {
     background-image: none;
   }
+
+  &:focus {
+    background: none;
+  }
 }
 
 .btn-round {
