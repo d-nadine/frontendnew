@@ -13,6 +13,18 @@ $comment-border: #cfcfcf;
   &:before {
     border-bottom-color: $comment-border;
   }
+
+  &:before {
+    width: 37px;
+    height: 12px;
+    margin-top: -12px;
+    position: absolute;
+    top: 0;
+    left: 36px;
+    content: "";
+    z-index: 1;
+    background: url("/images/backgrounds/comment-triangle.png") no-repeat 0 0;
+  }
 }
 
 .comments-list {
@@ -37,11 +49,6 @@ $comment-border: #cfcfcf;
 
   .text {
     margin-right: 30px;
-
-
-    textarea {
-      border: 1px solid $comment-border;
-    }
   }
 
   .avatar-container + .text {
@@ -52,6 +59,7 @@ $comment-border: #cfcfcf;
 .comment-attachment-icon {
   margin: 6px 0 0 10px;
   font-size: 14px;
+  line-height: 32px;
   color: #979797;
 }
 
@@ -63,5 +71,14 @@ $comment-border: #cfcfcf;
 
   .text {
     overflow: hidden;
+  }
+
+  textarea {
+    padding: {
+      top: 3px;
+      bottom: 3px;
+    }
+    line-height: 30px;
+    border: 1px solid $comment-border;
   }
 }
