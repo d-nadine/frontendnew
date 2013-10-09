@@ -2,6 +2,7 @@
   padding: 0;
   border-radius: 0px;
   border: solid 1px $control-border-color;
+  background: #fff;
 
   li {
     font-size: 16px;
@@ -12,7 +13,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: $selected-item;
+        background-color: #c3c3c3;
         background-image: none;
         color: inherit;
       }

@@ -186,11 +186,11 @@ $btn-primary : #007cdd;
   }
 
   .btn-group > & + .dropdown-menu {
-    background: $calendar-active-bg;
+    background: #fff;
 
     a:hover {
       color: #fff;
-      @include background-image(linear-gradient(#00a3e7, $btn-primary));
+      background: #c3c3c3;
     }
   }
 
