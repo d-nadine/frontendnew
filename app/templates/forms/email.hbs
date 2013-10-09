@@ -75,14 +75,14 @@
         </div>
       </div>
 
-      <div class="email-item-actions new-message-row">
+      <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn">Save Draft</button>
+          <button class="btn btn-main">Save Draft</button>
           <div class="btn-group">
-            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-wide">Send</button>
+            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
@@ -93,26 +93,23 @@
             </ul>
           </div>
         </div>
-        <div class="btn-toolbar">
-          {{#unless includeReminder}}
-            <button class="btn btn-link btn-messages-action" tabindex="6" {{action toggleReminderForm bubbles="false"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
-                <i class="ss-standard ss-info"></i> Check for response?
-            </button>
-          {{/unless}}
-        </div>
+        {{#if includeReminder}}
+          <div>
+            <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response in </p>
+            {{view view.datePicker class="field check-response-datepicker"}}
+            <a href="#" class="btn btn-main btn-primary" {{action toggleReminderForm}}>
+              OK
+            </a>
+          </div>
+        {{else}}
+          <div class="btn-toolbar">
+            <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+              <i class="ss-standard ss-info"></i> Check for response?
+            </a>
+          </div>
+        {{/if}}
       </div>
 
-      {{#if includeReminder}}
-        <div class="new-message-row block-blue check-response">
-          <div class="pull-right">
-            <button class="btn btn-primary" {{action toggleReminderForm bubbles="false"}}>
-              Cancel
-            </button>
-          </div>
-          <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response by </p>
-          {{view view.datePicker class="field"}}
-        </div>
-      {{/if}}
 
       {{#if showFormBox}}
         <div class="new-message-row block-gray">

@@ -21,11 +21,11 @@
         <i class="ss-symbolicons-block ss-search"></i>
         {{input value=model.searchText type="text" class="field search-text"}}
       </form>
-      {{#linkTo "leads.new" class="btn btn-primary"}}
+      {{#linkTo "leads.new" class="btn btn-main btn-primary"}}
         <i class="ss-standard ss-plus"></i> Contact
       {{/linkTo}}
       <div class="btn-group">
-        <button class="btn address-book-button" >{{view.selectedFilterText}}</button>
+        <button class="btn btn-main address-book-button" >{{view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle" {{bindAttr disabled=additionalFilterDisabled}} data-toggle="dropdown">
           <span class="caret"></span>
         </button>
@@ -39,7 +39,7 @@
 
     <div>
       <div class="btn-group">
-        <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+        <button {{bindAttr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
           Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
         </button>
         {{#if hasCheckedContent}}

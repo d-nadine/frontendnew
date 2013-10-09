@@ -4,17 +4,26 @@
   border: solid 1px $control-border-color;
 
   li {
-    border-bottom: solid 1px $control-border-color;
+    font-size: 16px;
 
-    a:hover {
-      cursor: pointer;
-      background-color: $selected-item;
-      background-image: none;
-      color: inherit;
+    a {
+      font-weight: normal;
+      line-height: 30px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $selected-item;
+        background-image: none;
+        color: inherit;
+      }
     }
 
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .btn-group > & > li > a {
+    font-weight: normal;
   }
 }

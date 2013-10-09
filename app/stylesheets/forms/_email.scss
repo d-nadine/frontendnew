@@ -125,7 +125,7 @@
 
 .new-message-row {
   margin: 0 30px;
-  padding: 10px 0;
+  padding: 15px 0;
 
   &.block-blue,
   &.block-gray {
@@ -150,6 +150,12 @@
   margin: 0 10px 0 0;
   float: left;
   line-height: 35px;
+}
+
+.check-response-datepicker {
+  input {
+    width: 70px;
+  }
 }
 
 .email-item-form-box {

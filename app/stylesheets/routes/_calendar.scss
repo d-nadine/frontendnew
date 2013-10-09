@@ -160,6 +160,7 @@ $calendar-off: #d8d9d9;
 
   button.events-list-item-button {
     padding-top: 0;
+    line-height: 20px;
     @include transition(color 0.5s ease-in);
 
 

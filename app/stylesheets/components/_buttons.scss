@@ -54,10 +54,23 @@ $btn-primary : #007cdd;
   &.text-error {
     color: $red;
   }
+
+  .caret {
+    margin-top: 12px;
+  }
+}
+
+.btn-main,
+.btn-main + .dropdown-toggle {
+  line-height: 28px;
 }
 
 .btn-large {
   max-height: 44px;
+
+  .caret {
+    margin-top: 7px;
+  }
 }
 
 .btn-circle-icon {
@@ -326,7 +339,7 @@ $btn-primary : #007cdd;
 }
 
 .dropdown-datepicker {
-  margin: 5px;
+  margin: 10px;
 
   .ember-text-field {
     width: 70px;

@@ -14,7 +14,7 @@
       {{partial "pipeline/actions_btn"}}
 
       <div class="btn-group">
-        <button {{bindAttr class=":btn :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+        <button {{bindAttr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
           Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
         </button>
         {{#if hasCheckedContent}}

@@ -4,6 +4,11 @@
 
     .btn {
       height: 35px;
+      padding: {
+        top: 0;
+        bottom: 0;
+      }
+      background: none !important;
       @include box-sizing(border-box);
     }
   }
