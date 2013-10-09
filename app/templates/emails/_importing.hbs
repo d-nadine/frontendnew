@@ -3,6 +3,7 @@
   <div class="alert alert-info initial-importing text-center">
     <strong> Your inbox is being imported.....</strong>
     {{partial 'is_loading'}}
+    <h4>{{currentUser.emailsImported}}%</h4>
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
   </div>
 {{/unless}}
