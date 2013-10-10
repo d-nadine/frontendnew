@@ -24,8 +24,6 @@ Ember.Application.initializer
         widget:
           activator: "#IntercomDefaultWidget"
 
-      debugger
-
       account = user.get('account')
 
       userSettingsController = container.lookup('controller:userSettings')

@@ -2,6 +2,10 @@ Radium.Route = Ember.Route.extend()
 
 Radium.Router.reopen
   location: 'history'
+  didTransition: (infos) ->
+    @_super.apply this, arguments
+    window.Intercom('update')
+    window.Intercom('reattach_activator')
 
 Radium.Router.map ->
   @resource 'messages', ->

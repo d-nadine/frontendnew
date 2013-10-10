@@ -5,8 +5,13 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     # Fired whenever the application enters
     # a new route
-    didTransition: ->
+    didTransition: (infos) ->
+      alert 'no it does not'
+      @_super.apply this, arguments
+      window.Intercom('update')
+      window.Intercom('reattach_activator')
       @send 'closeDrawer'
+      console.log infos
 
     toggleNotifications: ->
       if @get('router.openDrawer') == name
