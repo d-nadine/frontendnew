@@ -42,6 +42,8 @@ Radium.MessagesRoute = Radium.Route.extend
         else
           nextItem = controller.get('selectedContent')
 
+        @controllerFor('messagesSidebar').send('showMore')
+
         item.deleteRecord()
         @get('store').commit()
 
