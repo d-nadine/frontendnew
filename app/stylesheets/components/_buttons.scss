@@ -244,6 +244,10 @@ $btn-primary : #007cdd;
 }
 
 .btn-group {
+  &.open .btn-primary.dropdown-toggle {
+    background-color: $btn-primary;
+  }
+
   > .btn {
     position: relative;
     z-index: 1;
@@ -255,6 +259,7 @@ $btn-primary : #007cdd;
     }
 
     & + .dropdown-toggle {
+      @include box-shadow(none);
       @include border-radius(0 3px 3px 0);
     }
   }
