@@ -3,16 +3,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     logOut: ->
       Radium.get('authManager').logOut(@get('store._adapter.url'))
 
-    # Fired whenever the application enters
-    # a new route
-    didTransition: (infos) ->
-      alert 'no it does not'
-      @_super.apply this, arguments
-      window.Intercom('update')
-      window.Intercom('reattach_activator')
-      @send 'closeDrawer'
-      console.log infos
-
     toggleNotifications: ->
       if @get('router.openDrawer') == name
         @send 'closeDrawer'
