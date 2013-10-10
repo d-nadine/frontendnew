@@ -5,7 +5,7 @@ Ember.Application.initializer
     Radium.set('authManager', Radium.AuthManager.create())
 
     errHandler = (e) =>
-      location.replace('http://api.radiumcrm.com/sessions/new')
+      # location.replace('http://api.radiumcrm.com/sessions/new')
       # Ember.Logger.error e
       # console.error 'The "me" user was not found for some reason!'
       # throw e
@@ -15,6 +15,16 @@ Ember.Application.initializer
 
       currentUserController = container.lookup('controller:currentUser')
       currentUserController.set 'model', user
+
+      window.Intercom "boot",
+        app_id: "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf"
+        email: user.get('email') 
+        user_id: user.get('id')
+        created_at: user.get('createdAt').toUnixTimestamp()
+        widget:
+          activator: "#IntercomDefaultWidget"
+
+      debugger
 
       account = user.get('account')
 

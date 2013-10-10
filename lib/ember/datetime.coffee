@@ -87,6 +87,9 @@ Ember.DateTime.reopen
   toHumanFormatWithTime: ->
     "#{@toHumanFormat()} #{@toMeridianTime()}"
 
+  toUnixTimestamp: ->
+    @toJSDate().getTime() / 1000
+
 Ember.DateTime.reopenClass
   random: (options = {}) ->
     multipler = ->
