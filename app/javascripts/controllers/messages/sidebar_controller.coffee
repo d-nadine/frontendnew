@@ -9,7 +9,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
     @toggleProperty 'isSearchOpen'
 
   contentBinding: Ember.Binding.oneWay 'controllers.messages'
-  selectedContentBinding: Ember.Binding.oneWay 'controllers.messages.selectedContent'
+  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
 
   currentTab: 'folderTabView'
   selectTab: (tab) ->

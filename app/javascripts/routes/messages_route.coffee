@@ -39,23 +39,23 @@ Radium.MessagesRoute = Radium.Route.extend
 
         if item == controller.get('selectedContent')
           nextItem = controller.get('nextItem')
-
-          item.deleteRecord()
-          @get('store').commit()
-
-          @send 'selectItem', controller.get('nextItem')
         else
-          item.deleteRecord()
-          @get('store').commit()
+          nextItem = controller.get('selectedContent')
+
+        item.deleteRecord()
+        @get('store').commit()
+
+        Ember.run.next =>
+          @send 'selectItem', nextItem
 
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
     duration = 600
 
     modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
-    $("#main-panel #{modelSelector}").fadeOut duration
-    $("#sidebar #{modelSelector}").animate {left: "-120%", height: 0}, duration, ->
-      $(this).hide()
+    $(".messages-list #{modelSelector}").fadeOut duration
+    # $(".email-card.message-card").animate {left: "-120%", height: 0}, duration, ->
+    #   $(this).hide()
 
     Ember.run.later this, callback, duration
 
@@ -92,15 +92,12 @@ Radium.MessagesRoute = Radium.Route.extend
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
     messagesController = @controllerFor('messages')
-    messages = messagesController.get('model.content')
-    if ((!messages) || (!messages.get('length')))
+    unless messagesController.get('length')
       folder = messagesController.get('folder') || 'inbox'
       @transitionTo 'emails.empty', folder
       return
 
-    messages = messages.sort (a, b) =>
-      Ember.DateTime.compare(a.get('time'), b.get('time'))
-    item = messages.get('lastObject')
+    item = messagesController.get('firstObject')
 
     if item instanceof Radium.Email
       @transitionTo 'emails.show', item
