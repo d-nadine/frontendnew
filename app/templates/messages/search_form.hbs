@@ -1,21 +1,24 @@
-<form class="form-search messages-list-search">
-  <div class="input-append">
-    <i class="ss-symbolicons-block ss-search"></i>
-    {{input type="text" placeholder=content.selectedSearchScope}}
-    <div class="btn-group">
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu pull-right">
-        {{#each folders}}
-        <li>
-          <a href="#" {{action selectSearchScope this}}>
-            {{title}}
-          </a>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
+<form class="messages-list-search">
+  <div class="controls">
+    <div class="combobox control-box">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{view Ember.TextField class="field" placeholderBinding="content.selectedSearchScope"}}
+      <div class="btn-group controlbox-dropdown-group">
+        <button class="btn controlbox-dropdown dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each folders}}
+          <li>
+            <a href="#" {{action selectSearchScope this}}>
+              {{title}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
+      </div> {{!-- /.btn-group --}}
+    </div> {{!-- /.combobox --}}
+  </div> {{!-- /.controls --}}
 </form>
 {{partial "search/settings"}}
+{{partial "messages/new_email_btn"}}
