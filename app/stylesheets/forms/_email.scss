@@ -191,13 +191,8 @@
 }
 
 .initial-importing{
-  position: fixed;
-  width: 80%;
-  top: 60px;
-  z-index: $alerts-layer;
-  text-align: center;
-  margin: 0 0 0 -40%;
-  left:50%;
+  width: 660px;
+  margin: 60px auto;
 }
 
 // Email HUD

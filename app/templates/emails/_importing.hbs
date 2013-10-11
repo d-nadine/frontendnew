@@ -1,9 +1,6 @@
 {{#unless currentUser.initialMailImported}}
-  <h1>{{controller}}</h1>
-  <div class="alert alert-info initial-importing text-center">
-    <strong> Your inbox is being imported.....</strong>
-    {{partial 'is_loading'}}
-    <h4>{{currentUser.emailsImported}}%</h4>
+  <div class="initial-importing text-center">
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
+    <p>Your inbox is being imported&hellip;</p>
   </div>
 {{/unless}}
