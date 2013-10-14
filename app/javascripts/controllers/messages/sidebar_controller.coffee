@@ -1,6 +1,6 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['messages']
-  page: 1
+  page: 0
   loadedPages: Ember.A()
   allPagesLoaded: false
 
@@ -9,17 +9,17 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
       superMethod = @_super
       args = Array.prototype.slice.call(arguments)
       self = this
-      page = @get('page')
       loadedPages = @get('loadedPages')
+      page = @get('page')
       allPagesLoaded = @get('allPagesLoaded')
-
-      @set('page', @get('page') + 1)
 
       if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
         superMethod.apply self, args
         return
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: page).then (emails) =>
+      @set('page', page + 1)
+
+      Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page')).then (emails) =>
         messagesProxy = @get('content.content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
