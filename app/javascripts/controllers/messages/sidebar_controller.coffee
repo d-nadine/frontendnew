@@ -13,17 +13,14 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
       page = @get('page')
       allPagesLoaded = @get('allPagesLoaded')
 
-      messagesProxy = @get('content.content')
-
       if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
         superMethod.apply self, args
         return
 
-      pageSize = if messagesProxy.get('initialSet') then 7 else 14
-
       @set('page', page + 1)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page'), page_size: pageSize).then (emails) =>
+      Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page')).then (emails) =>
+        messagesProxy = @get('content.content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
 
