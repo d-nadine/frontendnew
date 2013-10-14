@@ -1,5 +1,6 @@
 Radium.InfiniteScrollerComponent = Ember.Component.extend
   isLoading: false
+  previousBottom: 0
   didInsertElement: ->
     @_super.apply this, arguments
     @setupInfiniteScrollingListener()
@@ -27,6 +28,16 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
   isScrolledToTheBottom: ->
     viewportBottom = $('.viewport').offset().top + $('.viewport').height()
 
-    thumbBottom = $('.thumb').offset().top + $('.thumb').height()
+    thumbTop = $('.thumb').offset().top
+      
+    thumbBottom = thumbTop  + $('.thumb').height()
+
+    previousBottom = @get('previousBottom')
+
+    if previousBottom > thumbTop
+      @set('previousBottom', thumbTop)
+      return
+
+    @set('previousBottom', thumbTop)
 
     ((Math.round(viewportBottom - thumbBottom)) == 0)

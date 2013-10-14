@@ -3,6 +3,15 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   didInsertElement: ->
     @selectTab('folderTabView')
     @_super.apply this, arguments
+    Ember.run.scheduleOnce 'afterRender', this, 'fillSidebarWithMessages'
+    Ember.$(window).resize =>
+      @fillSidebarWithMessages()
+
+  fillSidebarWithMessages: ->
+    messages = Ember.$('.sidebar').height() / 110
+    if messages > 7
+      @get('controller').send('showMore')
+      Ember.$('.scroller').tinyscrollbar_update('relative')
 
   folderTabSelected: (->
     @get('folderTabView').detectInstance(@.get('tabContentView.currentView'))
