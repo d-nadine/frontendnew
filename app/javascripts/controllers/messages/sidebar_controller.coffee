@@ -1,6 +1,6 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['messages']
-  page: 2
+  page: 1
   loadedPages: Ember.A()
   allPagesLoaded: false
 
@@ -18,9 +18,14 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
         return
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: page).then (emails) =>
+        messagesProxy = @get('content.content')
+        unless messagesProxy.get('initialSet')
+          messagesProxy.set('initialSet', true)
+
         return unless emails.get('length')
+
         @set('page', @get('page') + 1)
-        @get('content.content').add(emails)
+        messagesProxy.add(emails)
         superMethod.apply self, args
         loadedPages.pushObject(page)
         meta = emails.store.typeMapFor(Radium.Email).metadata

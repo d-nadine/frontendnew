@@ -6,8 +6,10 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
   currentuser: null
   isloaded: false
   totalRecords: 0
+  initialSet: false
 
   onPoll: ->
+    return unless @get('initialSet')
     Radium.Email.find(user_id: @get('currentUser.id'), page: 1).then (emails) =>
       newEmails = @delta(emails)
 

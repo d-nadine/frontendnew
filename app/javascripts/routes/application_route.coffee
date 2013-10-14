@@ -141,8 +141,8 @@ Radium.ApplicationRoute = Radium.Route.extend
       currentUser: @controllerFor('currentUser').get('model')
       content: Ember.A()
     @controllerFor('messages').set 'model', messages
-    messages.onPoll()
-    # messages.start()
+    @controllerFor('messagesSidebar').send('showMore')
+    messages.start()
 
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
