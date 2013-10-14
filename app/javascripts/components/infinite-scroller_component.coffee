@@ -29,7 +29,7 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
     viewportBottom = $('.viewport').offset().top + $('.viewport').height()
 
     thumbTop = $('.thumb').offset().top
-      
+
     thumbBottom = thumbTop  + $('.thumb').height()
 
     previousBottom = @get('previousBottom')
