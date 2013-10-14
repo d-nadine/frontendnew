@@ -17,6 +17,8 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
         superMethod.apply self, args
         return
 
+      @set('page', @get('page') + 1)
+
       Radium.Email.find(user_id: @get('currentUser.id'), page: page).then (emails) =>
         messagesProxy = @get('content.content')
         unless messagesProxy.get('initialSet')
@@ -24,7 +26,6 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
 
         return unless emails.get('length')
 
-        @set('page', @get('page') + 1)
         messagesProxy.add(emails)
         superMethod.apply self, args
         loadedPages.pushObject(page)
