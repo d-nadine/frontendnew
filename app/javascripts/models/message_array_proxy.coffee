@@ -5,9 +5,10 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
   folder: 'inbox'
   currentuser: null
   isloaded: false
+  totalRecords: 0
 
   onPoll: ->
-    Radium.Email.find({user_id: @get('currentUser.id')}).then (emails) =>
+    Radium.Email.find(user_id: @get('currentUser.id'), page: 1).then (emails) =>
       newEmails = @delta(emails)
 
       return unless newEmails.length
@@ -15,6 +16,10 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
       console.log "#{newEmails.length} found"
 
       @add(newEmails)
+
+      meta = emails.store.typeMapFor(Radium.Email).metadata
+
+      @set('totalRecords', meta.totalRecords)
 
     Radium.Discussion.find({}).then (discussions) =>
       newDiscussions = @delta(discussions)

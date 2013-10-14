@@ -2,7 +2,7 @@
   <ul class="nav nav-tabs messages-tabs">
     <li {{bindAttr class="view.folderTabSelected:active"}}>
       <a href="#" {{action selectTab "folderTabView" target="view"}}>
-        {{folder}} {{#if content.length}}({{content.length}}){{/if}}
+        {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
       </a>
     </li>
     <li {{bindAttr class="view.radiumTabSelected:active"}}>

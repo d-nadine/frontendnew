@@ -1,6 +1,6 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
   needs: ['application', 'emailsShow', 'messagesDiscussion']
-  sortProperties: ['time']
+  sortProperties: ['id']
   sortAscending: false
   applicationController: Ember.computed.alias 'controllers.application'
 
