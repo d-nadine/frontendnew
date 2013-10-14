@@ -15,7 +15,10 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
 
       @set('page', page + 1)
 
-      if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
+      if allPagesLoaded || (loadedPages.indexOf(@get('page')) >= 0)
+        console.log "allPagesLoaded = #{allPagesLoaded}"
+        console.log @get('page')
+        console.log loadedPages
         superMethod.apply self, args
         return
 
