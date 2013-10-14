@@ -13,11 +13,11 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
       page = @get('page')
       allPagesLoaded = @get('allPagesLoaded')
 
+      @set('page', page + 1)
+
       if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
         superMethod.apply self, args
         return
-
-      @set('page', page + 1)
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page')).then (emails) =>
         messagesProxy = @get('content.content')
