@@ -7,7 +7,7 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
 
   fillSidebarWithMessages: ->
     messages = Ember.$('.sidebar').height() / 110
-    if messages > 7
+    if messages > 5
       @get('controller').send('showMore')
       Ember.$('.scroller').tinyscrollbar_update('relative')
 
