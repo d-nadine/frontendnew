@@ -93,6 +93,9 @@ Radium.MessagesRoute = Radium.Route.extend
 
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->
+    sidebarController = @controllerFor('messagesSidebar')
+    sidebarController.set('page', 1)
+
     messagesController = @controllerFor('messages')
     unless messagesController.get('length')
       folder = messagesController.get('folder') || 'inbox'

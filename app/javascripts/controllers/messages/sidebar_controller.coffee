@@ -1,21 +1,30 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['messages']
-  page: 1
+  page: 2
   loadedPages: Ember.A()
+  allPagesLoaded: false
 
   actions:
     showMore: ->
       superMethod = @_super
       args = Array.prototype.slice.call(arguments)
       self = this
-      @set('page', @get('page') + 1)
       page = @get('page')
       loadedPages = @get('loadedPages')
+      allPagesLoaded = @get('allPagesLoaded')
+
+      if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
+        superMethod.apply self, args
+        return
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: page).then (emails) =>
+        return unless emails.get('length')
+        @set('page', @get('page') + 1)
         @get('content.content').add(emails)
         superMethod.apply self, args
-        # loadedPages.pushObject(page)
+        loadedPages.pushObject(page)
+        meta = emails.store.typeMapFor(Radium.Email).metadata
+        @set('allPagesLoaded', meta.isLastPage)
 
   folders: Ember.computed.alias 'controllers.messages.folders'
   folder: Ember.computed.alias 'controllers.messages.folder'

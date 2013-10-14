@@ -4,8 +4,6 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
     @selectTab('folderTabView')
     @_super.apply this, arguments
     Ember.run.scheduleOnce 'afterRender', this, 'fillSidebarWithMessages'
-    Ember.$(window).resize =>
-      @fillSidebarWithMessages()
 
   fillSidebarWithMessages: ->
     messages = Ember.$('.sidebar').height() / 110
