@@ -19,7 +19,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
 
       @set('page', page + 1)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page')).then (emails) =>
+      Radium.Email.find(user_id: @get('currentUser.id'), page: @get('page'), page_size: 14).then (emails) =>
         messagesProxy = @get('content.content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
