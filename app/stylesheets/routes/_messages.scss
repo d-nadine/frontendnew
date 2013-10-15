@@ -56,10 +56,27 @@ $item-border: #dddddd;
 .messages-search-tab {
   width: 30px;
   text-align: center;
+
+  &.active a {
+    background: #fff;
+  }
 }
 
 .messages-list-controls {
+  background: #fff;
   border-bottom: 1px solid $item-border;
+
+  .main-search-results-section {
+    margin: 0 15px;
+    border: {
+      right: 1px solid #cecece;
+      left: 1px solid #cecece;
+    }
+
+    .control-box input {
+      width: 178px;
+    }
+  }
 }
 
 .new-message-btn {
@@ -73,7 +90,9 @@ $item-border: #dddddd;
 }
 
 .messages-list-search {
-  margin: 15px;
+  margin: 0;
+  padding: 15px 15px 0;
+  background: #fff;
 
   .control-box {
     padding-left: 50px;
