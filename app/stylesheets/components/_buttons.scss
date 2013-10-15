@@ -54,16 +54,20 @@ $btn-primary : #007cdd;
   &.text-error {
     color: $red;
   }
+}
 
-  .caret {
+.btn-main {
+
+  &,
+  & + .dropdown-toggle {
+    line-height: 28px;
+  }
+
+  & + .dropdown-toggle .caret {
     margin-top: 12px;
   }
 }
 
-.btn-main,
-.btn-main + .dropdown-toggle {
-  line-height: 28px;
-}
 
 .btn-large {
   max-height: 44px;

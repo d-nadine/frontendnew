@@ -72,7 +72,7 @@
   left: 0;
   z-index: $alerts-layer * 2;
   background-color: $selected-item;
-  border: 1px solid $border;
+  border: 1px solid #e0e0e0;
   @include box-shadow(0 2px 2px rgba(black, 0.1));
   @include border-radius(0 0 4px 4px);
 }
@@ -81,6 +81,7 @@
   overflow: hidden;
   position: relative;
   border-bottom: 1px solid $border;
+  color: #696969;
 
   &:last-child {
     border: none;
@@ -88,7 +89,8 @@
 }
 
 .main-search-advanced-setting-item {
-  padding: 4px 15px 0 35px;
+  margin: 0 0 10px;
+  padding: 4px 15px 0;
 
   label {
     width: 70px;
@@ -96,15 +98,18 @@
     float: left;
     font-size: 12px;
     font-weight: bold;
-    line-height: 30px;
+    line-height: 35px;
+    text-align: left;
+    color: #696969;
 
     &.toggle-label {
       width: auto;
-    }
+      padding: 0 0 0 25px;
 
-    input[type="checkbox"] {
-      vertical-align: middle;
-      margin: 0;
+      input[type="checkbox"] {
+        vertical-align: middle;
+        margin: 0 10px 0 -25px;
+      }
     }
   }
 
@@ -112,12 +117,21 @@
     width: 200px;
     display: block;
   }
+
+  .control-box input {
+    width: 204px;
+  }
 }
 
 .main-search-results-toggle {
   position: relative;
   z-index: 5;
   margin: 8px 0 0;
+
+  &:focus {
+    text-decoration: none;
+    outline: none;
+  }
 }
 
 .main-search-results-title {
@@ -132,6 +146,14 @@
     position: absolute;
     left: 10px;
     top: 0;
+  }
+
+  & + div {
+    padding: {
+      top: 8px;
+      bottom: 8px;
+    }
+    background-color: #e0e0e0;
   }
 }
 

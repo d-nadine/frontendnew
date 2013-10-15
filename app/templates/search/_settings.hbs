@@ -25,24 +25,46 @@
 {{/search-section}}
 
 {{#search-section title="Advanced Search"}}
+  {{!-- TODO: Hook up comboboxes --}}
   <ul class="unstyled">
     <li class="main-search-advanced-setting-item">
       <label>Mailbox</label>
-      <select>
-        <option value="">All</option>
-      </select>
+      <div class="controls">
+        <div class="combobox control-box field">
+          <input type="text" value="Main">
+          <div class="btn-group controlbox-dropdown-group">
+            <button class="btn controlbox-dropdown" tabindex="-1">
+              <span class="caret"></span>
+            </button>
+         </div>
+        </div>
+      </div>
     </li>
     <li class="main-search-advanced-setting-item">
       <label>Related to</label>
-      <select>
-        <option value="">Everyone</option>
-      </select>
+      <div class="controls">
+        <div class="combobox control-box field">
+          <input type="text" value="Everyone">
+          <div class="btn-group controlbox-dropdown-group">
+            <button class="btn controlbox-dropdown dropdown-toggle" tabindex="-1">
+              <span class="caret"></span>
+            </button>
+         </div>
+        </div>
+      </div>
     </li>
     <li class="main-search-advanced-setting-item">
       <label>Status</label>
-      <select>
-        <option value="">All</option>
-      </select>
+      <div class="controls">
+        <div class="combobox control-box field">
+          <input type="text" value="All">
+          <div class="btn-group controlbox-dropdown-group">
+            <button class="btn controlbox-dropdown" tabindex="-1">
+              <span class="caret"></span>
+            </button>
+         </div>
+        </div>
+      </div>
     </li>
     <li class="main-search-advanced-setting-item">
       <label class="toggle-label"><input type="checkbox"> Show only unread</label>

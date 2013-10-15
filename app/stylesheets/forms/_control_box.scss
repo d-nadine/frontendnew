@@ -23,7 +23,7 @@
     display: inline-block;
     width: auto;
     min-width: 16px;
-    padding: 4px 5px;
+    padding: 3px 5px;
     font-size: 14px;
     font-weight: normal;
     line-height: 26px;
@@ -45,11 +45,12 @@
 
   .btn-group > .btn.controlbox-dropdown:first-child {
     height: 35px;
+    margin: -1px;
     padding: {
       top: 5px;
       bottom: 5px;
     }
-    border: none;
+    border: 1px solid #b8b8b8;
     @include border-radius(0 2px 2px 0);
   }
 
