@@ -18,14 +18,16 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
       page = @get('page')
       allPagesLoaded = @get('allPagesLoaded')
 
-      @set('page', page + 1)
-
-      page = @get('page')
+      unless allPagesLoaded
+        @set('page', page + 1)
+        page = @get('page')
 
       if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
         superMethod.apply self, args
-        @send('loadNextPage') unless allPagesLoaded
+        @send('loadNextPage') if (!allPagesLoaded) && (loadedPages.indexOf(page + 1) == -1)
         return
+
+      loadedPages.pushObject(page)
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
         messagesProxy = @get('content.content')
@@ -36,14 +38,21 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
 
         messagesProxy.add(emails)
         superMethod.apply self, args
-        loadedPages.pushObject(page)
         meta = emails.store.typeMapFor(Radium.Email).metadata
         @set('allPagesLoaded', meta.isLastPage)
 
-        @send('loadNextPage') unless meta.isLastPage
+        @send('loadNextPage') if (!meta.isLastPage) && (loadedPages.indexOf(page + 1) == -1)
 
     loadNextPage: ->
       page = @get('page') + 1
+
+      @set('page', page)
+
+      loadedPages = @get('loadedPages')
+
+      return unless loadedPages.indexOf(page) == -1
+
+      loadedPages.pushObject(page)
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
         messagesProxy = @get('content.content')
