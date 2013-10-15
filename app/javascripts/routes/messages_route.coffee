@@ -50,6 +50,27 @@ Radium.MessagesRoute = Radium.Route.extend
         Ember.run.next =>
           @send 'selectItem', nextItem
 
+    selectTab: (tab) ->
+      controller = @controllerFor('messagesSidebar')
+
+      controller.set 'activeTab', tab
+
+      if tab != 'search'
+        controller.set('controllers.messages.folder', tab)
+
+      template = if tab == 'search'
+                   'messages/search_form'
+                 else
+                    'messages/list'
+
+      @render template,
+        into: 'messages/sidebar'
+        outlet: 'messages-sidebar-content'
+        controller: controller
+
+      Ember.run.next =>
+        @send 'selectItem', @controllerFor('messages').get('firstObject')
+
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
     duration = 600
@@ -82,6 +103,11 @@ Radium.MessagesRoute = Radium.Route.extend
     @render 'messages/sidebar',
       into: 'messages'
       outlet: 'sidebar'
+
+    @render 'messages/list',
+      into: 'messages/sidebar'
+      outlet: 'messages-sidebar-content'
+      controller: @controllerFor('messagesSidebar')
 
   deactivate: ->
     @controllerFor('messagesSidebar').send 'reset'

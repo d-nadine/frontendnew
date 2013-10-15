@@ -26,6 +26,8 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
     @set 'isLoading', false
 
   isScrolledToTheBottom: ->
+    return if @isDestroyed || @isDestroying
+
     viewportBottom = $('.viewport').offset().top + $('.viewport').height()
 
     thumbTop = $('.thumb').offset().top

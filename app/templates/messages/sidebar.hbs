@@ -1,20 +1,20 @@
 <div class="messages-list-controls">
   <ul class="nav nav-tabs messages-tabs">
-    <li {{bindAttr class="view.folderTabSelected:active"}}>
-      <a href="#" {{action selectTab "folderTabView" target="view"}}>
+    <li {{bindAttr class="inboxIsActive:active"}}>
+      <a href="#" {{action selectTab "inbox"}}>
         {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
       </a>
     </li>
-    <li {{bindAttr class="view.radiumTabSelected:active"}}>
-      <a href="#" {{action selectTab "radiumTabView" target="view"}}>
+    <li {{bindAttr class="radiumIsActive:active"}}>
+      <a href="#" {{action selectTab "radium"}}>
         Only Radium
       </a>
     </li>
-    <li {{bindAttr class=":messages-search-tab view.searchTabSelected:active"}}>
-      <a href="#" {{action selectTab "searchTabView" target="view"}}>
+    <li {{bindAttr class=":messages-search-tab searchIsActive:active"}}>
+      <a href="#" {{action selectTab "search"}}>
         <i class="ss-symbolicons-block ss-search"></i>
       </a>
     </li>
   </ul>
-  {{view Ember.ContainerView viewName="tabContentView"}}
+  {{outlet messages-sidebar-content}}
 </div>

@@ -60,3 +60,6 @@ Radium.MessageArrayProxy = Radium.AggregateArrayProxy.extend Radium.PollerMixin,
 
   filterUntracked: (item) ->
     item.get('isPersonal') is false
+
+  filterRadium: (item) ->
+    item.get('isPublic')

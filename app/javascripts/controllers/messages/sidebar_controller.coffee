@@ -1,8 +1,13 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   needs: ['messages']
+  activeTab: 'inbox'
   page: 0
   loadedPages: Ember.A()
   allPagesLoaded: false
+
+  inboxIsActive: Ember.computed.equal('activeTab', 'inbox')
+  radiumIsActive: Ember.computed.equal('activeTab', 'radium')
+  searchIsActive: Ember.computed.equal('activeTab', 'search')
 
   actions:
     showMore: ->
@@ -54,15 +59,11 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
   folder: Ember.computed.alias 'controllers.messages.folder'
 
   isSearchOpen: false
+
   toggleSearch: ->
     @toggleProperty 'isSearchOpen'
 
   content: Ember.computed.alias 'controllers.messages'
   selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
   totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
-
-  currentTab: 'folderTabView'
-  selectTab: (tab) ->
-    @set 'currentTab', "#{tab}View"
-
   itemController: 'messagesSidebarItem'
