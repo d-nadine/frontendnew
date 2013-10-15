@@ -28,7 +28,7 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
 
       @get('store').commit()
 
-    clearNewPiplineDeal: ->
+    clearNewPipelineDeal: ->
       @set('newPipelineDeal', null)
 
   newPipelineDeal: null
