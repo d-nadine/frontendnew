@@ -60,12 +60,8 @@
         </a>
 
         {{#if isPersonal}}
-          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
+          <a {{action makePublic}} class="btn btn-link btn-messages-action">
             <i class="ss-symbolicons-block ss-earth"></i> Make Public
-          </a>
-        {{else}}
-          <a {{action toggleSwitch}} class="btn btn-link btn-messages-action">
-            <i class="ss-standard ss-filter"></i> Make Private
           </a>
         {{/if}}
         <a class="btn btn-link btn-messages-action" {{action delete this}}>

@@ -7,7 +7,6 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
     messages = Ember.$('.sidebar').height() / 110
     if messages > 5
       @get('controller').send('showMore')
-      Ember.$('.scroller').tinyscrollbar_update('relative')
 
   selectionDidChange: (->
     selectedItem = @get 'controller.selectedContent'

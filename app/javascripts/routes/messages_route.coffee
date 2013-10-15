@@ -109,6 +109,9 @@ Radium.MessagesRoute = Radium.Route.extend
       outlet: 'messages-sidebar-content'
       controller: @controllerFor('messagesSidebar')
 
+    Ember.run.next =>
+      Ember.$('.scroller').tinyscrollbar_update('relative')
+
   deactivate: ->
     @controllerFor('messagesSidebar').send 'reset'
     @render 'nothing',

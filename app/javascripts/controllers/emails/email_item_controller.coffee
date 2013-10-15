@@ -24,22 +24,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend
       @toggleProperty 'showForwardForm'
       return
 
-    toggleSwitch: ->
-      @toggleProperty 'isPersonal'
+    makePublic: ->
+      @set('model.isPersonal', false)
+      @get('store').commit()
 
   showMeta : false
   currentForm: 'todo'
-
-  isPersonal: ( (key, value) ->
-    return if @get('isNew')
-    return if @get('model.isSaving')
-    return if @get('model.isSending')
-    if arguments.length == 2
-      @set('model.isPersonal', value)
-      @get('store').commit()
-    else
-      @get('model.isPersonal')
-  ).property('model.isPersonal')
 
   hideForm: ->
     @set 'showFormBox', false
