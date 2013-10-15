@@ -40,4 +40,4 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
 
     @set('previousBottom', thumbTop)
 
-    ((Math.round(viewportBottom - thumbBottom)) <= 50)
+    ((Math.round(viewportBottom - thumbBottom)) <= 10)
