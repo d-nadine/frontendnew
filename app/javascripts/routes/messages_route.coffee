@@ -89,8 +89,6 @@ Radium.MessagesRoute = Radium.Route.extend
     messagesController = @controllerFor('messages')
     sidebarController = @controllerFor('messagesSidebar')
 
-    sidebarController.set('activeTab', null)
-
     messagesController.set('folder', params.folder)
 
     model = @modelFor 'messages'
