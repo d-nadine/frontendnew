@@ -130,19 +130,19 @@ Radium.ApplicationRoute = Radium.Route.extend
 
   deactivate: ->
     Radium.get('notificationPoller').stop()
-    if model = @controllerFor('messages').get('model')
-      model.stop()
+    # if model = @controllerFor('messages').get('model')
+    #   model.stop()
 
   model: ->
     Radium.Deal.find({})
 
   setupController: (controller, deals) ->
-    messages = Radium.MessageArrayProxy.create
-      currentUser: @controllerFor('currentUser').get('model')
-      content: Ember.A()
-    @controllerFor('messages').set 'model', messages
-    @controllerFor('messagesSidebar').send('showMore')
-    messages.start()
+    # messages = Radium.MessageArrayProxy.create
+    #   currentUser: @controllerFor('currentUser').get('model')
+    #   content: Ember.A()
+    # @controllerFor('messages').set 'model', messages
+    # @controllerFor('messagesSidebar').send('showMore')
+    # messages.start()
 
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()

@@ -2,8 +2,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   needs: ['application', 'emailsShow', 'messagesDiscussion']
   applicationController: Ember.computed.alias 'controllers.application'
 
-  folderBinding: 'model.folder'
-
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
     { title: 'Sent items', name: 'sent', icon: 'send' }
@@ -32,11 +30,3 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     return false if @get('hasCheckedContent')
     true
   ).property('hasCheckedContent', 'selectedContent')
-
-  clear: ->
-    @get('content').clear()
-
-  load: ->
-    @get('content').load()
-
-  selectedSearchScope: "Search All Emails"

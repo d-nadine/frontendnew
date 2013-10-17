@@ -8,7 +8,7 @@ Radium.Router.reopen
     window.Intercom('reattach_activator')
 
 Radium.Router.map ->
-  @resource 'messages', ->
+  @resource 'messages', path: '/messages/:folder', ->
     @route 'email', path: '/emails/:email_id'
     @route 'discussion', path: '/discussions/:discussion_id'
     @route 'bulk_actions'

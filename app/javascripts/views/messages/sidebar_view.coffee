@@ -1,7 +1,7 @@
 Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   didInsertElement: ->
     @_super.apply this, arguments
-    Ember.run.scheduleOnce 'afterRender', this, 'fillSidebarWithMessages'
+    # Ember.run.scheduleOnce 'afterRender', this, 'fillSidebarWithMessages'
 
   fillSidebarWithMessages: ->
     messages = Ember.$('.sidebar').height() / 110

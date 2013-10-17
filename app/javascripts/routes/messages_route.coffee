@@ -93,6 +93,43 @@ Radium.MessagesRoute = Radium.Route.extend
     else if !itemsChecked
       @send 'back'
 
+  model: (params, transition) ->
+    @controllerFor('messages').set('folder', params.folder)
+
+    model = @modelFor 'messages'
+
+    model.destroy() if model
+
+    Radium.Email.find(user_id: @get('currentUser.id'), folder: "INBOX",  page: 1, page_size: 15)
+
+  serialize: (model) ->
+    folder: @controllerFor('messages').get('folder')
+
+  afterModel: (model, transitioin) ->
+    meta = @get('store').typeMapFor(Radium.Email).metadata
+    sidebarController = @controllerFor('messagesSidebar')
+
+    Ember.run.next =>
+      sidebarController.set('totalRecords', meta.totalRecords)
+      sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
+
+    return unless transitioin.targetName == "messages.index"
+
+    unless model.get('length')
+      folder = model.get('folder') || 'inbox'
+      @transitionTo 'emails.empty', folder
+      return
+
+    item = model.get('firstObject')
+
+    if item instanceof Radium.Email
+      @transitionTo 'emails.show', item
+    else if item instanceof Radium.Discussion
+      @transitionTo 'messages.discussion', item
+
+  setupController: (controller, model) ->
+    controller.set 'model', model.toArray()
+
   renderTemplate: (controller, context) ->
     @render 'messages/drawer_buttons', outlet: 'buttons'
 
@@ -117,23 +154,4 @@ Radium.MessagesRoute = Radium.Route.extend
     @render 'nothing',
       into: 'application'
       outlet: 'buttons'
-
     @send 'closeDrawer'
-
-Radium.MessagesIndexRoute = Radium.Route.extend
-  beforeModel: ->
-    sidebarController = @controllerFor('messagesSidebar')
-    sidebarController.set('page', 1)
-
-    messagesController = @controllerFor('messages')
-    unless messagesController.get('length')
-      folder = messagesController.get('folder') || 'inbox'
-      @transitionTo 'emails.empty', folder
-      return
-
-    item = messagesController.get('firstObject')
-
-    if item instanceof Radium.Email
-      @transitionTo 'emails.show', item
-    else if item instanceof Radium.Discussion
-      @transitionTo 'messages.discussion', item

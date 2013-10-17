@@ -1,8 +1,7 @@
-Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMoreMixin,
+Radium.MessagesSidebarController = Radium.ArrayController.extend
   needs: ['messages']
   activeTab: 'inbox'
-  page: 0
-  loadedPages: Ember.A()
+  page: 1
   allPagesLoaded: false
 
   inboxIsActive: Ember.computed.equal('activeTab', 'inbox')
@@ -11,58 +10,29 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.ShowMore
 
   actions:
     showMore: ->
-      superMethod = @_super
-      args = Array.prototype.slice.call(arguments)
-      self = this
-      loadedPages = @get('loadedPages')
-      page = @get('page')
-      allPagesLoaded = @get('allPagesLoaded')
+      return if @get('allPagesLoaded')
 
-      unless allPagesLoaded
-        @set('page', page + 1)
-        page = @get('page')
+      page = @get('page') + 1
 
-      if allPagesLoaded || (loadedPages.indexOf(page) >= 0)
-        superMethod.apply self, args
-        @send('loadNextPage') if (!allPagesLoaded) && (loadedPages.indexOf(page + 1) == -1)
-        return
+      console.log page
 
-      loadedPages.pushObject(page)
+      @set('page', page)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
-        messagesProxy = @get('content.content')
+      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 15).then (emails) =>
+        messagesProxy = @get('content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
 
         return unless emails.get('length')
 
-        messagesProxy.add(emails)
-        superMethod.apply self, args
+        messagesProxy.pushObjects(emails.toArray())
         meta = emails.store.typeMapFor(Radium.Email).metadata
+        @set('totalRecords', meta.totalRecords)
         @set('allPagesLoaded', meta.isLastPage)
 
-        @send('loadNextPage') if (!meta.isLastPage) && (loadedPages.indexOf(page + 1) == -1)
-
-    loadNextPage: ->
-      page = @get('page') + 1
-
-      @set('page', page)
-
-      loadedPages = @get('loadedPages')
-
-      return unless loadedPages.indexOf(page) == -1
-
-      loadedPages.pushObject(page)
-
-      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
-        messagesProxy = @get('content.content')
-
-        return unless emails.get('length')
-
-        messagesProxy.add(emails)
-        @get('loadedPages').pushObject(page)
-        meta = emails.store.typeMapFor(Radium.Email).metadata
-        @set('allPagesLoaded', meta.isLastPage)
+    reset: ->
+      @set('page', 1)
+      @set('allPagesLoaded', false)
 
   folders: Ember.computed.alias 'controllers.messages.folders'
   folder: Ember.computed.alias 'controllers.messages.folder'
