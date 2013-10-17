@@ -23,7 +23,7 @@
 .sticky-banner {
   height: 196px;
   position: fixed;
-  top: 60px;
+  top: $navbar-height;
   left: 40px;
   right: 0;
   z-index: 10;
