@@ -37,7 +37,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
         @set('isLoading', false)
 
     reset: ->
-      @set('page', 1)
+      @set('page', 0)
       @set('allPagesLoaded', false)
 
   folders: Ember.computed.alias 'controllers.messages.folders'

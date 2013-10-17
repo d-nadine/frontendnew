@@ -106,17 +106,21 @@ Radium.MessagesRoute = Radium.Route.extend
     folder: @controllerFor('messages').get('folder')
 
   afterModel: (model, transitioin) ->
-    return unless transitioin.targetName == "messages.index"
-
-    meta = @get('store').typeMapFor(Radium.Email).metadata
     sidebarController = @controllerFor('messagesSidebar')
 
-    sidebarController.send 'showMore'
-    sidebarController.send 'showMore'
+    return if sidebarController.get('page') > 0
+
+    meta = @get('store').typeMapFor(Radium.Email).metadata
 
     Ember.run.next =>
       sidebarController.set('totalRecords', meta.totalRecords)
       sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
+
+    sidebarController.send 'showMore'
+
+    sidebarController.send 'showMore' if sidebarController.get('totalRecords') > 10
+
+    return unless transitioin.targetName == "messages.index"
 
     unless model.get('length')
       folder = model.get('folder') || 'inbox'
