@@ -115,8 +115,7 @@ Radium.MessagesRoute = Radium.Route.extend
       sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
 
     sidebarController.send 'showMore'
-
-    sidebarController.send 'showMore' if sidebarController.get('totalRecords') > 10
+    sidebarController.send 'showMore'
 
     return unless transitioin.targetName == "messages.index"
 
