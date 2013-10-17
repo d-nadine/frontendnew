@@ -98,7 +98,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     model = @modelFor 'messages'
 
-    model.destroy() if model
+    return model if model
 
     Radium.Email.find(user_id: @get('currentUser.id'), folder: "INBOX",  page: 1, page_size: 15)
 
