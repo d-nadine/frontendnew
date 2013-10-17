@@ -1,5 +1,10 @@
 Radium.MessagesRoute = Radium.Route.extend
   actions:
+    willTransition: (transition) ->
+      transition.abort() if transition.targetName == "messages.index"
+
+      true
+
     toggleFolders: ->
       @send 'toggleDrawer', 'messages/folders'
 
