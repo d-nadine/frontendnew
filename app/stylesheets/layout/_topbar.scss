@@ -1,5 +1,4 @@
 #topbar {
-
   .navbar-inner {
     height: 60px;
     padding: 0 60px;
@@ -22,7 +21,23 @@
   }
 
   .navbar-search {
-    margin-top: 9px;
+    margin-top: 12px;
+
+    input.field {
+      height: 27px;
+    }
+
+    .ss-search {
+      margin: 0 9px;
+      vertical-align: middle;
+      font-size: 16px;
+      color: #000;
+    }
+  }
+
+  .btn,
+  .btn-group {
+    margin-top: 0;
   }
 
   a {
@@ -44,5 +59,8 @@
       color: #fff;
     }
   }
-
+  
+  a.brand {
+    line-height: 30px;
+  }
 }

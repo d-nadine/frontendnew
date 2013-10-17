@@ -1,9 +1,15 @@
 <form {{bindAttr class=":navbar-search isOpen"}}>
-  <div class="main-search-toggles">
-    <i class="ss-search"></i>
-    <i {{bindAttr class=":ss-standard query:ss-directup:ss-dropdown"}} {{action toggleAdvancedSearch}}></i>
-  </div>
-  {{view view.searchInput valueBinding="query" class="search-query" tabindex="1" placeholder="Search emails, people..."}}
+  <div class="controls">
+    <div class="combobox control-box">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{view Ember.TextField class="field" placeholder="Search Radium"}}
+      <div class="btn-group controlbox-dropdown-group">
+        <button class="btn controlbox-dropdown dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+      </div> {{!-- /.btn-group --}}
+    </div> {{!-- /.combobox --}}
+  </div> {{!-- /.controls --}}
 </form>
 {{#if isOpen}}
   <div class="main-search-results">
