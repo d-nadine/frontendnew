@@ -98,22 +98,25 @@ Radium.MessagesRoute = Radium.Route.extend
 
     model = @modelFor 'messages'
 
-    return model if model
+    model.destroy() if model
 
-    Radium.Email.find(user_id: @get('currentUser.id'), folder: "INBOX",  page: 1, page_size: 15)
+    Radium.Email.find(user_id: @get('currentUser.id'), folder: "INBOX",  page: 1, page_size: 1)
 
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')
 
   afterModel: (model, transitioin) ->
+    return unless transitioin.targetName == "messages.index"
+
     meta = @get('store').typeMapFor(Radium.Email).metadata
     sidebarController = @controllerFor('messagesSidebar')
+
+    sidebarController.send 'showMore'
+    sidebarController.send 'showMore'
 
     Ember.run.next =>
       sidebarController.set('totalRecords', meta.totalRecords)
       sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
-
-    return unless transitioin.targetName == "messages.index"
 
     unless model.get('length')
       folder = model.get('folder') || 'inbox'

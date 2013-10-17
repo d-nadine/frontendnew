@@ -1,7 +1,7 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend
   needs: ['messages']
   activeTab: 'inbox'
-  page: 1
+  page: 0
   allPagesLoaded: false
 
   inboxIsActive: Ember.computed.equal('activeTab', 'inbox')
@@ -16,8 +16,6 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
       page = @get('page') + 1
 
-      console.log page
-
       @set('page', page)
 
       Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
@@ -27,7 +25,12 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
         return unless emails.get('length')
 
-        messagesProxy.pushObjects(emails.toArray())
+        ids = messagesProxy.map (email) -> email.get('id')
+
+        emails.toArray().forEach (email) ->
+          messagesProxy.pushObject(email) unless ids.contains(email.get('id'))
+          ids.push email.get('id')
+
         meta = emails.store.typeMapFor(Radium.Email).metadata
         @set('totalRecords', meta.totalRecords)
         @set('allPagesLoaded', meta.isLastPage)
