@@ -6,22 +6,13 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
   content: Ember.computed.alias 'controllers.messages'
   selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
-  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
   totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
+  folder: Ember.computed.alias 'controllers.messages.folder'
   itemController: 'messagesSidebarItem'
 
-  inboxIsActive: Ember.computed.equal('activeTab', 'inbox')
-  radiumIsActive: Ember.computed.equal('activeTab', 'radium')
-  searchIsActive: Ember.computed.equal('activeTab', 'search')
-
-  queryFolder: ( ->
-    activeTab = @get('activeTab')
-
-    if activeTab == "sent"
-      "Sent Messages"
-    else
-      "INBOX"
-  ).property('activeTab')
+  inboxIsActive: Ember.computed.equal('folder', 'inbox')
+  radiumIsActive: Ember.computed.equal('folder', 'radium')
+  searchIsActive: Ember.computed.equal('folder', 'search')
 
   actions:
     showMore: ->
@@ -33,7 +24,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
       @set('page', page)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), folder: @get('queryFolder'), page: page, page_size: 10).then (emails) =>
+      queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: page)
+
+      Radium.Email.find(queryParams).then (emails) =>
         messagesProxy = @get('content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
@@ -54,9 +47,6 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
     reset: ->
       @set('page', 0)
       @set('allPagesLoaded', false)
-
-  folders: Ember.computed.alias 'controllers.messages.folders'
-  folder: Ember.computed.alias 'controllers.messages.folder'
 
   isSearchOpen: false
 

@@ -1,17 +1,19 @@
 <div class="messages-list-controls">
   <ul class="nav nav-tabs messages-tabs">
     <li {{bindAttr class="inboxIsActive:active"}}>
-      <a href="#" {{action selectTab "inbox"}}>
-        {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
-      </a>
+      {{#linkTo "messages" "inbox"}}
+        {{#if inboxIsActive}}
+          {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
+        {{/if}}
+      {{/linkTo}}
     </li>
     <li {{bindAttr class="radiumIsActive:active"}}>
-      <a href="#" {{action selectTab "radium"}}>
+      {{#linkTo "messages" "radium"}}
         Only Radium
-      </a>
+      {{/linkTo}}
     </li>
     <li {{bindAttr class=":messages-search-tab searchIsActive:active"}}>
-      <a href="#" {{action selectTab "search"}}>
+      <a href="#" {{action selectSearchTab}}>
         <i class="ss-symbolicons-block ss-search"></i>
       </a>
     </li>

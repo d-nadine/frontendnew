@@ -1,4 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+  pageSize: 10
   needs: ['application', 'emailsShow', 'messagesDiscussion']
   applicationController: Ember.computed.alias 'controllers.application'
 
@@ -30,3 +31,23 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     return false if @get('hasCheckedContent')
     true
   ).property('hasCheckedContent', 'selectedContent')
+
+  queryFolders:
+    inbox: "INBOX"
+    sent: "Sent Messages"
+
+  queryParams: ->
+    folder = @get('folder')
+    queryFolder = @queryFolders[folder]
+    pageSize = @get('pageSize')
+
+    if folder == "radium"
+      user_id: @get('currentUser.id')
+      radium_only: true
+      page: 1
+      page_size: pageSize
+    else
+      user_id: @get('currentUser.id')
+      folder: queryFolder
+      page: 1
+      page_size: pageSize

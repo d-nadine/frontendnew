@@ -1,9 +1,17 @@
 Radium.MessagesRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
-      transition.abort() if transition.targetName == "messages.index"
+      return true unless transition.targetName == "messages.index"
 
-      true
+      sidebarController = @controllerFor('messagesSidebar')
+
+      existingFolder = sidebarController.get('folder')
+
+      if transition.params.folder == existingFolder
+        transition.abort()
+      else
+        sidebarController.send 'reset'
+        true
 
     toggleFolders: ->
       @send 'toggleDrawer', 'messages/folders'
@@ -55,26 +63,15 @@ Radium.MessagesRoute = Radium.Route.extend
         Ember.run.next =>
           @send 'selectItem', nextItem
 
-    selectTab: (tab) ->
+    selectSearchTab: ->
       controller = @controllerFor('messagesSidebar')
 
-      controller.set 'activeTab', tab
+      controller.set 'activeTab', 'search'
 
-      if tab != 'search'
-        controller.set('controllers.messages.folder', tab)
-
-      template = if tab == 'search'
-                   'messages/search_form'
-                 else
-                    'messages/list'
-
-      @render template,
+      @render 'messages/search_form',
         into: 'messages/sidebar'
         outlet: 'messages-sidebar-content'
         controller: controller
-
-      Ember.run.next =>
-        @send 'selectItem', @controllerFor('messages').get('firstObject')
 
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
@@ -99,15 +96,20 @@ Radium.MessagesRoute = Radium.Route.extend
       @send 'back'
 
   model: (params, transition) ->
-    @controllerFor('messages').set('folder', params.folder)
+    messagesController = @controllerFor('messages')
+    sidebarController = @controllerFor('messagesSidebar')
+
+    sidebarController.set('activeTab', null)
+
+    messagesController.set('folder', params.folder)
 
     model = @modelFor 'messages'
 
     model.destroy() if model
 
-    folder = @controllerFor('messagesSidebar').get('queryFolder')
+    queryParams = Ember.merge(messagesController.queryParams(), page_size: 1)
 
-    Radium.Email.find(user_id: @get('currentUser.id'), folder: folder,  page: 1, page_size: 1)
+    Radium.Email.find(queryParams)
 
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')
