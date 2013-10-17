@@ -2,7 +2,7 @@
 <ul class="unstyled selectable messages-list">
   {{#if content}}
     {{each content itemViewClass="Radium.MessagesSidebarItemView" itemController="messagesSidebarItem"}}
-    {{infinite-scroller getMore='showMore' allLoaded=allPagesLoaded}}
+    {{infinite-scroller getMore='showMore' allLoaded=allPagesLoaded isLoading=isLoading}}
   {{else}}
     <li class="messages-list-item text-center messages-list-empty">
       <p><i class="ss-standard ss-inbox muted"></i> This folder is empty</p>

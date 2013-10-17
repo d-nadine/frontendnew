@@ -12,13 +12,15 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
     showMore: ->
       return if @get('allPagesLoaded')
 
+      @set('isLoading', true)
+
       page = @get('page') + 1
 
       console.log page
 
       @set('page', page)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 15).then (emails) =>
+      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
         messagesProxy = @get('content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
@@ -29,6 +31,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
         meta = emails.store.typeMapFor(Radium.Email).metadata
         @set('totalRecords', meta.totalRecords)
         @set('allPagesLoaded', meta.isLastPage)
+        @set('isLoading', false)
 
     reset: ->
       @set('page', 1)
