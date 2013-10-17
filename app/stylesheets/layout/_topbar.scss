@@ -1,7 +1,7 @@
 #topbar {
 
   .navbar-inner {
-    height: 47px;
+    height: 60px;
     padding: 0 60px;
     background: #313131;
     border: none;
@@ -26,10 +26,12 @@
   }
 
   a {
+    font-size: 16px;
+    line-height: 36px;
     color: #787878;
 
     i {
-      margin-left: 10px;
+      margin-left: 5px;
       position: relative;
       top: 1px;
       font-size: 12px;

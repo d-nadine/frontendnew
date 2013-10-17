@@ -1,5 +1,5 @@
 .two-column-layout {
-  padding: 62px 20px 60px 378px;
+  padding: 75px 20px 60px 378px;
   margin-left: $button-bar-width + $sidebar-border-size;
 }
 
@@ -10,12 +10,12 @@
   }
 
   .sidebar {
-    top: 246px;
+    top: 259px;
   }
 
   &.is-scrolled {
     .sidebar {
-      top: 102px;
+      top: 115px;
     }
   }
 }
@@ -23,7 +23,7 @@
 .sticky-banner {
   height: 196px;
   position: fixed;
-  top: 47px;
+  top: 60px;
   left: 40px;
   right: 0;
   z-index: 10;
