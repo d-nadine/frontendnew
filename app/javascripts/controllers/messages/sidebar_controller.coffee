@@ -1,6 +1,5 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend
   needs: ['messages']
-  activeTab: 'inbox'
   page: 0
   allPagesLoaded: false
 

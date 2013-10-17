@@ -63,16 +63,6 @@ Radium.MessagesRoute = Radium.Route.extend
         Ember.run.next =>
           @send 'selectItem', nextItem
 
-    selectSearchTab: ->
-      controller = @controllerFor('messagesSidebar')
-
-      controller.set 'activeTab', 'search'
-
-      @render 'messages/search_form',
-        into: 'messages/sidebar'
-        outlet: 'messages-sidebar-content'
-        controller: controller
-
   # TODO: figure out a better way to do this
   animateDelete: (item, callback) ->
     duration = 600
@@ -107,6 +97,8 @@ Radium.MessagesRoute = Radium.Route.extend
 
     model.destroy() if model
 
+    return if sidebarController.get('searchIsActive')
+
     queryParams = Ember.merge(messagesController.queryParams(), page_size: 1)
 
     Radium.Email.find(queryParams)
@@ -117,6 +109,7 @@ Radium.MessagesRoute = Radium.Route.extend
   afterModel: (model, transitioin) ->
     sidebarController = @controllerFor('messagesSidebar')
 
+    return if sidebarController.get('searchIsActive')
     return if sidebarController.get('page') > 0
 
     meta = @get('store').typeMapFor(Radium.Email).metadata
@@ -144,6 +137,8 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionTo 'messages.discussion', item
 
   setupController: (controller, model) ->
+    return unless model
+
     controller.set 'model', model.toArray()
 
   renderTemplate: (controller, context) ->
@@ -157,10 +152,14 @@ Radium.MessagesRoute = Radium.Route.extend
       into: 'messages'
       outlet: 'sidebar'
 
-    @render 'messages/list',
+    controller = @controllerFor('messagesSidebar')
+
+    template = if controller.get('searchIsActive') then 'messages/search_form' else 'messages/list'
+
+    @render template,
       into: 'messages/sidebar'
       outlet: 'messages-sidebar-content'
-      controller: @controllerFor('messagesSidebar')
+      controller: controller
 
     Ember.run.next =>
       Ember.$('.scroller').tinyscrollbar_update('relative')

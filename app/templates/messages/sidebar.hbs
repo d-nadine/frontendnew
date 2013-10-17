@@ -13,9 +13,9 @@
       {{/linkTo}}
     </li>
     <li {{bindAttr class=":messages-search-tab searchIsActive:active"}}>
-      <a href="#" {{action selectSearchTab}}>
+      {{#linkTo "messages" "search"}}
         <i class="ss-symbolicons-block ss-search"></i>
-      </a>
+      {{/linkTo}}
     </li>
   </ul>
   {{outlet messages-sidebar-content}}
