@@ -30,7 +30,15 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
 
-        return unless emails.get('length')
+        meta = emails.store.typeMapFor(Radium.Email).metadata
+        @set('totalRecords', meta.totalRecords)
+        @set('allPagesLoaded', meta.isLastPage)
+
+        unless emails.get('length')
+          @set('isLoading', false)
+          if page > meta.totalPages
+            @set 'allPagesLoaded', true
+          return
 
         ids = messagesProxy.map (email) -> email.get('id')
 
@@ -38,14 +46,12 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
           messagesProxy.pushObject(email) unless ids.contains(email.get('id'))
           ids.push email.get('id')
 
-        meta = emails.store.typeMapFor(Radium.Email).metadata
-        @set('totalRecords', meta.totalRecords)
-        @set('allPagesLoaded', meta.isLastPage)
         @set('isLoading', false)
 
     reset: ->
       @set('page', 0)
       @set('allPagesLoaded', false)
+      @set('isLoading', false)
 
   isSearchOpen: false
 
