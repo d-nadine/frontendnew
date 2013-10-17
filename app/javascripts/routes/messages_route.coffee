@@ -105,7 +105,9 @@ Radium.MessagesRoute = Radium.Route.extend
 
     model.destroy() if model
 
-    Radium.Email.find(user_id: @get('currentUser.id'), folder: "INBOX",  page: 1, page_size: 1)
+    folder = @controllerFor('messagesSidebar').get('queryFolder')
+
+    Radium.Email.find(user_id: @get('currentUser.id'), folder: folder,  page: 1, page_size: 1)
 
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')

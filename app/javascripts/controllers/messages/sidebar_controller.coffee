@@ -4,9 +4,24 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
   page: 0
   allPagesLoaded: false
 
+  content: Ember.computed.alias 'controllers.messages'
+  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
+  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
+  totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
+  itemController: 'messagesSidebarItem'
+
   inboxIsActive: Ember.computed.equal('activeTab', 'inbox')
   radiumIsActive: Ember.computed.equal('activeTab', 'radium')
   searchIsActive: Ember.computed.equal('activeTab', 'search')
+
+  queryFolder: ( ->
+    activeTab = @get('activeTab')
+
+    if activeTab == "sent"
+      "Sent Messages"
+    else
+      "INBOX"
+  ).property('activeTab')
 
   actions:
     showMore: ->
@@ -18,7 +33,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
       @set('page', page)
 
-      Radium.Email.find(user_id: @get('currentUser.id'), page: page, page_size: 10).then (emails) =>
+      Radium.Email.find(user_id: @get('currentUser.id'), folder: @get('queryFolder'), page: page, page_size: 10).then (emails) =>
         messagesProxy = @get('content')
         unless messagesProxy.get('initialSet')
           messagesProxy.set('initialSet', true)
@@ -46,9 +61,4 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
   isSearchOpen: false
 
   toggleSearch: ->
-    @toggleProperty 'isSearchOpen'
-
-  content: Ember.computed.alias 'controllers.messages'
-  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
-  totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
-  itemController: 'messagesSidebarItem'
+    @toggleProperty 'isSearchOpen' 
