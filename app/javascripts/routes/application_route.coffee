@@ -127,6 +127,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     unless @controllerFor('currentUser').get('initialMailImported')
       initialImporter = Radium.InitialImportPoller.create
         currentUser: @controllerFor('currentUser').get('model')
+        controller: @controllerFor('messagesSidebar')
 
       initialImporter.start()
 

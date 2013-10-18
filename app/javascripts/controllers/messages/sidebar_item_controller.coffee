@@ -1,5 +1,10 @@
 Radium.MessagesSidebarItemController = Radium.ObjectController.extend
   needs: ['messages']
+
+  actions:
+    checkMessageItem: ->
+      console.log 'here'
+
   selectedContent: Ember.computed.alias('controllers.messages.selectedContent')
   isSelectable: Ember.computed.alias('controllers.messages.canSelectItems')
 
