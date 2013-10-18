@@ -1,3 +1,3 @@
 Radium.EmailsEmptyRoute = Radium.Route.extend
-  model: (params) ->
-    params.folder
+  model: ->
+    @controllerFor('messages').get('folder')

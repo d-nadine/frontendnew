@@ -122,7 +122,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     unless model.get('length')
       folder = model.get('folder') || 'inbox'
-      @transitionTo 'emails.empty', folder
+      @transitionTo 'emails.empty'
       return
 
     item = model.get('firstObject')
