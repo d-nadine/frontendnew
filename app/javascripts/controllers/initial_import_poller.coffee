@@ -13,5 +13,5 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     if @get('page') <= 5 && !@get('isLoading') && !@get('allPagesLoaded')
       controller.send 'showMore'
 
-    Radium.User.find(currentUser.get('id')).then (users) =>
-      @stop() if users.get('firstObject.initialMailImported')
+    @get('currentUser').reload() 
+    @stop() if @get('currentUser').get('firstObject.initialMailImported')
