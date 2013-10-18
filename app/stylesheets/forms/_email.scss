@@ -191,8 +191,14 @@
 }
 
 .initial-importing{
-  width: 660px;
-  margin: 60px auto;
+  padding: 10px 30px;
+  position: fixed;
+  top: 75px;
+  right: 20px;
+  left: 426px;
+  z-index: 99;
+  @include box-sizing(border-box);
+  @include box-shadow(0 2px 2px rgba(black, 0.25));
 }
 
 // Email HUD
@@ -219,4 +225,8 @@
 
 .email-hud-title {
   margin: 0;
+}
+
+.emails-show-view {
+  position: relative;
 }
