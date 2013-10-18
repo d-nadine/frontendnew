@@ -1,5 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
-  pageSize: 10
+  pageSize: 5
   needs: ['application', 'emailsShow', 'messagesDiscussion']
   applicationController: Ember.computed.alias 'controllers.application'
 

@@ -116,6 +116,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     sidebarController.send 'showMore'
     sidebarController.send 'showMore'
+    sidebarController.send 'showMore'
 
     return unless transitioin.targetName == "messages.index"
 
