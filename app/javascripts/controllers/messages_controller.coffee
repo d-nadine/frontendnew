@@ -62,15 +62,17 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
     delta
 
-  selectionsDidChange: (->
-    if @get('content').filterProperty('isChecked').get('length')
-      @transitionToRoute 'messages.bulk_actions'
-    else if @get('applicationController.currentPath') == 'messages.bulk_actions'
-      if email = @get('controllers.emailsShow.model')
-        @send 'selectItem', email
-      else if discussion = @get('controllers.messagesDiscussion')
-        @send 'selectItem', discussion
-  ).observes('content.@each.isChecked')
+  # selectionsDidChange: (->
+  #   currentPath = @get('applicationController.currentPath')
+  #   if @get('content').filterProperty('isChecked').get('length')
+  #     return if currentPath == 'messages.bulk_actions'
+  #     @transitionToRoute 'messages.bulk_actions'
+  #   else if currentPath == 'messages.bulk_actions'
+  #     if email = @get('controllers.emailsShow.model')
+  #       @send 'selectItem', email
+  #     else if discussion = @get('controllers.messagesDiscussion')
+  #       @send 'selectItem', discussion
+  # ).observes('content.@each.isChecked')
 
   canSelectItems: (->
     @get('checkedContent.length') == 0

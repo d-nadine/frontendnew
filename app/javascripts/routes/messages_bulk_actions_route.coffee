@@ -27,9 +27,11 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
         transaction.add item
         item.deleteRecord()
 
-      controller.load()
+      transaction.commit()
+
       @send 'closeModal'
-      @transitionTo 'messages'
+
+      @transitionTo 'messages', controller.get('folder')
 
 
   setupController: (controller) ->
