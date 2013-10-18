@@ -3,7 +3,7 @@ require 'mixins/controllers/poller_mixin'
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin, Radium.PollerMixin,
   folder: "inbox"
   pageSize: 5
-  needs: ['application', 'emailsShow', 'messagesDiscussion', 'messagesSidebar']
+  needs: ['application', 'messagesSidebar']
   applicationController: Ember.computed.alias 'controllers.application'
   isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
 
@@ -61,18 +61,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
                 @get('content').contains(record)
 
     delta
-
-  # selectionsDidChange: (->
-  #   currentPath = @get('applicationController.currentPath')
-  #   if @get('content').filterProperty('isChecked').get('length')
-  #     return if currentPath == 'messages.bulk_actions'
-  #     @transitionToRoute 'messages.bulk_actions'
-  #   else if currentPath == 'messages.bulk_actions'
-  #     if email = @get('controllers.emailsShow.model')
-  #       @send 'selectItem', email
-  #     else if discussion = @get('controllers.messagesDiscussion')
-  #       @send 'selectItem', discussion
-  # ).observes('content.@each.isChecked')
 
   canSelectItems: (->
     @get('checkedContent.length') == 0

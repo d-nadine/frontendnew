@@ -1,8 +1,9 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend
-  needs: ['messages']
+  needs: ['messages', 'application', 'emailsShow', 'messagesDiscussion']
   page: 0
   allPagesLoaded: false
 
+  applicationController: Ember.computed.alias 'controllers.application'
   content: Ember.computed.alias 'controllers.messages'
   selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
   totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
@@ -17,6 +18,17 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
   searchIsActive: Ember.computed.equal('folder', 'search')
 
   actions:
+    checkMessageItem: ->
+      currentPath = @get('applicationController.currentPath')
+      if @get('content.content').filterProperty('isChecked').get('length')
+        return if currentPath == 'messages.bulk_actions'
+        @transitionToRoute 'messages.bulk_actions'
+      else if currentPath == 'messages.bulk_actions'
+        if email = @get('controllers.emailsShow.model')
+          @send 'selectItem', email
+        else if discussion = @get('controllers.messagesDiscussion')
+          @send 'selectItem', discussion
+
     showMore: ->
       return if @get('allPagesLoaded')
 
