@@ -91,7 +91,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     model = @modelFor 'messages'
 
-    model.destroy() if model
+    model?.destroy()
 
     return if sidebarController.get('searchIsActive')
 
@@ -114,9 +114,10 @@ Radium.MessagesRoute = Radium.Route.extend
       sidebarController.set('totalRecords', meta.totalRecords)
       sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
 
-    sidebarController.send 'showMore'
-    sidebarController.send 'showMore'
-    sidebarController.send 'showMore'
+    if meta.totalRecords > 0
+      sidebarController.send 'showMore'
+      sidebarController.send 'showMore'
+      sidebarController.send 'showMore'
 
     return unless transitioin.targetName == "messages.index"
 

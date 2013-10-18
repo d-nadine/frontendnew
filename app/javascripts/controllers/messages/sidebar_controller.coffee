@@ -29,9 +29,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
       queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: page)
 
       Radium.Email.find(queryParams).then (emails) =>
-        messagesProxy = @get('content')
-        unless messagesProxy.get('initialSet')
-          messagesProxy.set('initialSet', true)
+        content = @get('content')
+        unless content.get('initialSet')
+          content.set('initialSet', true)
 
         meta = emails.store.typeMapFor(Radium.Email).metadata
         @set('totalRecords', meta.totalRecords)
@@ -43,10 +43,10 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
             @set 'allPagesLoaded', true
           return
 
-        ids = messagesProxy.map (email) -> email.get('id')
+        ids = content.map (email) -> email.get('id')
 
         emails.toArray().forEach (email) ->
-          messagesProxy.pushObject(email) unless ids.contains(email.get('id'))
+          content.pushObject(email) unless ids.contains(email.get('id'))
           ids.push email.get('id')
 
         @set('isLoading', false)
