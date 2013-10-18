@@ -1,8 +1,11 @@
-Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+require 'mixins/controllers/poller_mixin'
+
+Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin, Radium.PollerMixin,
   folder: "inbox"
   pageSize: 5
-  needs: ['application', 'emailsShow', 'messagesDiscussion']
+  needs: ['application', 'emailsShow', 'messagesDiscussion', 'messagesSidebar']
   applicationController: Ember.computed.alias 'controllers.application'
+  isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
@@ -12,6 +15,50 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     # { title: 'Attachments', name: 'attachments', icon: 'attach' }
     # { title: 'Meeting invites', name: 'invites', icon: 'calendar' }
   ]
+
+  onPoll: ->
+    Radium.Email.find(user_id: @get('currentUser.id'), page: 1).then (emails) =>
+      return if @get('isLoading')
+
+      newEmails = @delta(emails)
+
+      return unless newEmails.length
+
+      console.log "#{newEmails.length} found"
+
+      @tryAdd(newEmails)
+
+      meta = emails.store.typeMapFor(Radium.Email).metadata
+
+      @set('totalRecords', meta.totalRecords)
+
+    Radium.Discussion.find({}).then (discussions) =>
+      return if @get('folder') == "sent"
+
+      newDiscussions = @delta(discussions)
+
+      return unless discussions.length
+
+      @tryAdd(newDiscussions) if newDiscussions.length
+
+  tryAdd: (items) ->
+    content = @get('content')
+    ids = content.map (item) -> item.get('id')
+    folder = @get('folder')
+    currentUser = @get('currentUser')
+
+    items.toArray().forEach (item) ->
+      return if ids.contains(item.get('id'))
+      return if folder == "sent" && item.get('sender') != currentUser
+      return if folder == "radium" && item is Radium.Emal && item.get('isPersonal')
+      @unshiftObject(item)
+      ids.push item.get('id')
+
+  delta: (records) ->
+    delta = records.toArray().reject (record) =>
+                @get('content').contains(record)
+
+    delta
 
   selectionsDidChange: (->
     if @get('content').filterProperty('isChecked').get('length')

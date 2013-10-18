@@ -122,6 +122,8 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.set('notificationPoller', notificationPoller)
     notificationPoller.start()
 
+    @controllerFor('messages').start()
+
     unless @controllerFor('currentUser').get('initialMailImported')
       initialImporter = Radium.InitialImportPoller.create
         currentUser: @controllerFor('currentUser').get('model')
@@ -130,20 +132,12 @@ Radium.ApplicationRoute = Radium.Route.extend
 
   deactivate: ->
     Radium.get('notificationPoller').stop()
-    # if model = @controllerFor('messages').get('model')
-    #   model.stop()
+    @controllerFor('messages').stop()
 
   model: ->
     Radium.Deal.find({})
 
   setupController: (controller, deals) ->
-    # messages = Radium.MessageArrayProxy.create
-    #   currentUser: @controllerFor('currentUser').get('model')
-    #   content: Ember.A()
-    # @controllerFor('messages').set 'model', messages
-    # @controllerFor('messagesSidebar').send('showMore')
-    # messages.start()
-
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()

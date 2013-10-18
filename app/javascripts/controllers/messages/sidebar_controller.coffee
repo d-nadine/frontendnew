@@ -30,8 +30,6 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
 
       Radium.Email.find(queryParams).then (emails) =>
         content = @get('content')
-        unless content.get('initialSet')
-          content.set('initialSet', true)
 
         meta = emails.store.typeMapFor(Radium.Email).metadata
         @set('totalRecords', meta.totalRecords)

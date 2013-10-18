@@ -10,12 +10,12 @@
               <li {{bindAttr class="isFinished overdue"}}>
                 <span class="time">
                   Due
-                  {{#linkTo "unimplemented"}}
+                  {{#linkTo "calendar.task" this}}
                     {{formatDateTime time format="date"}}
                   {{/linkTo}}
                 </span>
                 <i class="ss-standard ss-check"></i>
-                {{#linkTo "unimplemented" class="related-task-title"}}{{description}}{{/linkTo}}
+                {{#linkTo "calendar.task" this class="related-task-title"}}{{description}}{{/linkTo}}
               </li>
             {{/if}}
 
@@ -23,11 +23,11 @@
               <li {{bindAttr class="isFinished overdue"}}>
                 <span class="time">
                   on
-                  {{#linkTo "unimplemented"}}
+                  {{#linkTo "calendar.task" this}}
                     {{formatDateTime time format="date"}}
                   {{/linkTo}}
                   at
-                  {{#linkTo "unimplemented"}}
+                  {{#linkTo "calendar.task" this}}
                     {{formatDateTime time format="short"}}
                   {{/linkTo}}
                 </span>
@@ -46,17 +46,17 @@
               <li>
                 <span class="time">
                   on
-                  {{#linkTo "unimplemented"}}
+                  {{#linkTo "calendar.task" this}}
                     {{formatDateTime time format="date"}}
                   {{/linkTo}}
                   at
-                  {{#linkTo "unimplemented"}}
+                  {{#linkTo "calendar.task" this}}
                     {{formatDateTime time format="short"}}
                   {{/linkTo}}
                 </span>
                 <i class="ss-standard ss-calendar"></i>
                 <span class="related-task-title">
-                {{#linkTo "unimplemented"}}Meeting {{topic}}{{/linkTo}}
+                {{#linkTo "calendar.task" this}}Meeting {{topic}}{{/linkTo}}
                 with
                 {{list participants}}
                 </span>
