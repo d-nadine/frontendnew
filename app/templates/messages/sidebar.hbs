@@ -4,6 +4,8 @@
       {{#linkTo "messages" "inbox"}}
         {{#if inboxIsActive}}
           {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
+        {{else}}
+          Inbox
         {{/if}}
       {{/linkTo}}
     </li>
