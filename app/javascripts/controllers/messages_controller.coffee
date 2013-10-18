@@ -17,7 +17,9 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   ]
 
   onPoll: ->
-    Radium.Email.find(user_id: @get('currentUser.id'), page: 1).then (emails) =>
+    queryParams = @queryParams()
+
+    Radium.Email.find(queryParams).then (emails) =>
       return if @get('isLoading')
 
       newEmails = @delta(emails)
@@ -47,7 +49,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     folder = @get('folder')
     currentUser = @get('currentUser')
 
-    items.toArray().forEach (item) ->
+    items.toArray().forEach (item) =>
       return if ids.contains(item.get('id'))
       return if folder == "sent" && item.get('sender') != currentUser
       return if folder == "radium" && item is Radium.Emal && item.get('isPersonal')
