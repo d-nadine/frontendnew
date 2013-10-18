@@ -18,6 +18,7 @@ Radium.Email = DS.Model.extend Radium.CommentsMixin,
   sentAt: DS.attr('datetime')
   isRead: DS.attr('boolean')
   isPersonal: DS.attr('boolean')
+  folder: DS.attr('string')
 
   sender: ( ->
     @get('_senderUser') ||

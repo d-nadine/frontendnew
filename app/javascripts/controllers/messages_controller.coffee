@@ -1,4 +1,5 @@
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin,
+  folder: "inbox"
   pageSize: 5
   needs: ['application', 'emailsShow', 'messagesDiscussion']
   applicationController: Ember.computed.alias 'controllers.application'
