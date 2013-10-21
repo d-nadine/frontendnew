@@ -1,9 +1,9 @@
-Ember.Handlebars.registerHelper 'ageInWords', (value, options) ->
+Ember.Handlebars.registerBoundHelper 'ageInWords', (value, options) ->
   return "Never" unless value
 
   now = Ember.DateTime.create()
 
-  days = this.get(value).daysApart now
+  days = value.daysApart now
 
   text = if days == 0
     "New"
