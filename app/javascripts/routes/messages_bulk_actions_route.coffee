@@ -23,16 +23,20 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
       transaction = @get('store').transaction() 
 
-      items.toArray().forEach (item) -> 
-        transaction.add item
-        item.deleteRecord()
+      lastRecord = items[items.length-1]
 
-      transaction.commit()
+      items.toArray().forEach (item) =>
+        item.deleteRecord()
+        item.one 'didDelete', (record) =>
+          if record.get('id') == lastRecord.get('id')
+            @send 'flashSuccess', 'Emails deleted'
+            @transitionTo 'messages', controller.get('folder')
+
+      @get('store').commit()
 
       @send 'closeModal'
 
-      @transitionTo 'messages', controller.get('folder')
-
+      @controllerFor('messagesSidebar').send 'reset'
 
   setupController: (controller) ->
     checkedContent = @controllerFor('messages').get('checkedContent')

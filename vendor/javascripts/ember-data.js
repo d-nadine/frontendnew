@@ -3752,6 +3752,10 @@ var RootState = {
         record.transitionTo('saved');
 
         record.send('invokeLifecycleCallbacks');
+      },
+
+      loadedData: function(){
+        debugger;
       }
     },
 

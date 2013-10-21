@@ -1,10 +1,13 @@
 Radium.NotificationsController = Radium.ArrayController.extend
+  actions:
+    deleteAllNotifications: ->
+      return unless @get('model.length')
+
+      items = @get('model').toArray()
+
+      items.forEach (item) =>
+        item.deleteRecord()
+
+      @get('store').commit()
+
   itemController: 'notificationsItem'
-
-  deleteAllNotifications: ->
-    return unless @get('model.length')
-
-    @get('model').forEach (notification) =>
-      notification.deleteRecord()
-
-    @get('store').commit()

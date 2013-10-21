@@ -1,5 +1,8 @@
 Radium.ApplicationRoute = Radium.Route.extend
   actions:
+    error: (model, transition) ->
+      console.log "In the error route handler with #{model.constructor} and #{transition}"
+
     logOut: ->
       Radium.get('authManager').logOut(@get('store._adapter.url'))
 

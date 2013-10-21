@@ -1,6 +1,8 @@
 Radium.MessagesRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
+      return true if @controllerFor('application').get('currentPath') == 'messages.bulk_actions'
+
       return true unless transition.targetName == "messages.index"
 
       sidebarController = @controllerFor('messagesSidebar')
@@ -30,11 +32,6 @@ Radium.MessagesRoute = Radium.Route.extend
         folder = @controllerFor('messages').get('model.folder')
         @transitionTo 'emails.empty', folder
 
-    check: (item) ->
-      item.toggleProperty 'isChecked'
-
-      @transitionToBulkOrBack()
-
     selectSearchScope: (item) ->
       @controllerFor('messages').set 'selectedSearchScope', "Search #{item.title}"
 
@@ -57,6 +54,10 @@ Radium.MessagesRoute = Radium.Route.extend
 
         item.deleteRecord()
         @get('store').commit()
+
+        return unless item.get('isDirty')
+
+        @send 'flashSuccess', 'Email deleted'
 
         Ember.run.next =>
           @send 'selectItem', nextItem

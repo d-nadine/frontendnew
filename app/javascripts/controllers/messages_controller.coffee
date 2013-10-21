@@ -17,9 +17,14 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   ]
 
   onPoll: ->
+    currentPath = @get('controllers.application.currentPath')
+
+    return if currentPath is 'messages.bulk_actions'
+
     queryParams = @queryParams()
 
     Radium.Email.find(queryParams).then (emails) =>
+      return if currentPath is 'messages.bulk_actions'
       return if @get('isLoading')
 
       newEmails = @delta(emails)
@@ -35,6 +40,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
       @set('totalRecords', meta.totalRecords)
 
     Radium.Discussion.find({}).then (discussions) =>
+      return if currentPath is 'messages.bulk_actions'
       return if @get('folder') == "sent"
 
       newDiscussions = @delta(discussions)

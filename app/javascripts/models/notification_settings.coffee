@@ -1,4 +1,4 @@
-Radium.NotificationSettings = DS.Model.extend
+Radium.NotificationSettings = Radium.Model.extend
   overdueTasks: DS.belongsTo("Radium.UserNotificationSetting")
   createdOverdueTasks: DS.belongsTo("Radium.UserNotificationSetting")
   localMeetings: DS.belongsTo("Radium.UserNotificationSetting")

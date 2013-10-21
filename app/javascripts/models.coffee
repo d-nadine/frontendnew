@@ -20,6 +20,12 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @get('transaction').rollback()
     @get('stateManager').transitionTo(state)
 
+  deleteRecord: ->
+    if @get('currentState.stateName') != 'root.loaded.saved'
+      return
+
+    @send('deleteRecord')
+
 requireAll /models/
 
 Radium.Model.reopenClass

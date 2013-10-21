@@ -1,6 +1,6 @@
 require 'lib/radium/checklist_total_mixin'
 
-Radium.Deal = DS.Model.extend Radium.FollowableMixin,
+Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
   Radium.ChecklistTotalMixin,

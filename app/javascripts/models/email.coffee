@@ -1,4 +1,4 @@
-Radium.Email = DS.Model.extend Radium.CommentsMixin,
+Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
 
