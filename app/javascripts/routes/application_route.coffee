@@ -32,6 +32,14 @@ Radium.ApplicationRoute = Radium.Route.extend
           @get('store').commit()
         , 200
 
+    notificationDelete: (reference) ->
+      notifications =  Radium.Notification.all().filter (notification) => notification.get('reference') == reference
+
+      return unless notifications.get('length')
+
+      notifications.forEach (notification) =>
+        notification.deleteRecord()
+
     toggleDrawer: (name) ->
       if @get('router.openDrawer') == name
         $('body').removeClass 'drawer-open'

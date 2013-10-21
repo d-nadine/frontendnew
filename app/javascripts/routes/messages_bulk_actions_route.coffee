@@ -26,9 +26,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
       lastRecord = items[items.length-1]
 
       items.toArray().forEach (item) =>
-        notifications =  Radium.Notification.all().filter (notification) => notification.get('reference') == item
-        notifications.forEach (notification) =>
-          notification.deleteRecord()
+        @send 'notificationDelete', item
 
         item.deleteRecord()
         item.one 'didDelete', (record) =>

@@ -50,12 +50,7 @@ Radium.MessagesRoute = Radium.Route.extend
         else
           nextItem = controller.get('selectedContent')
 
-
-        notifications =  Radium.Notification.all().filter (notification) => notification.get('reference') == item
-
-        if notifications.get('length')
-          notifications.forEach (notification) =>
-            notification.deleteRecord()
+        @send 'notificationDelete', item
 
         @controllerFor('messagesSidebar').send('showMore')
 
