@@ -42,6 +42,14 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
   setupController: (controller) ->
     checkedContent = @controllerFor('messages').get('checkedContent')
+
+    unless checkedContent.get('length')
+      @controllerFor('messagesSidebar').send 'reset'
+      Ember.run.next =>
+        @transitionTo 'messages', @controllerFor('messages').get('folder')
+
+      return
+
     controller.set 'model', checkedContent
 
   deactivate: ->

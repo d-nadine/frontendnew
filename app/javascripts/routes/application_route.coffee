@@ -7,9 +7,13 @@ Radium.ApplicationRoute = Radium.Route.extend
       Radium.get('authManager').logOut(@get('store._adapter.url'))
 
     toggleNotifications: ->
+      controller = @controllerFor('notifications')
+
       if @get('router.openDrawer') == name
+        controller.set('drawerOpen', false)
         @send 'closeDrawer'
       else
+        controller.set('drawerOpen', true)
         $('body').addClass 'drawer-open'
 
         @render 'notifications',

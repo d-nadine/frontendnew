@@ -1,4 +1,5 @@
 Radium.NotificationsController = Radium.ArrayController.extend
+  needs: ['messagesSidebar']
   actions:
     deleteAllNotifications: ->
       return unless @get('model.length')
@@ -10,4 +11,10 @@ Radium.NotificationsController = Radium.ArrayController.extend
 
       @get('store').commit()
 
+    showEmail: (email) ->
+      @get('controllers.messagesSidebar').send 'reset'
+      @transitionToRoute 'emails.show', "inbox", email
+
   itemController: 'notificationsItem'
+
+  drawerOpen: false

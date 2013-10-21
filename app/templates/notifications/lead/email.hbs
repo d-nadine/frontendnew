@@ -1,4 +1,4 @@
-<h4>You have {{#linkTo 'emails.show' "inbox" reference}}new mail{{/linkTo}} from
+<h4>You have <a href="#" {{action showEmail reference}}>new mail</a> from
   {{#if reference.isLoaded}}
     {{resource-link model=reference.sender}}
   {{else}}
