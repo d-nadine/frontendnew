@@ -6,6 +6,15 @@ Radium.ApplicationRoute = Radium.Route.extend
     logOut: ->
       Radium.get('authManager').logOut(@get('store._adapter.url'))
 
+    deleteTask: (model) ->
+      msg = "#{model.humanize().capitalize()} has been deleted"
+
+      model.deleteRecord()
+
+      model.get('transaction').commit()
+
+      @send 'flashSuccess', msg
+
     toggleNotifications: ->
       controller = @controllerFor('notifications')
 
