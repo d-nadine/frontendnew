@@ -3757,9 +3757,8 @@ var RootState = {
         record.send('invokeLifecycleCallbacks');
       },
 
-      loadedData: function(){
-        debugger;
-      }
+      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+      loadedData: Ember.K
     },
 
     // Once the adapter indicates that the deletion has
