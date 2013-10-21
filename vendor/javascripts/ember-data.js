@@ -3727,7 +3727,10 @@ var RootState = {
           t.remove(record);
         });
         record.transitionTo('loaded.materializing');
-      }
+      },
+
+      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+      loadedData: Ember.K
     },
 
     // After a record's transaction is committing, but
