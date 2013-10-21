@@ -9,7 +9,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     toggleNotifications: ->
       controller = @controllerFor('notifications')
 
-      if @get('router.openDrawer') == name
+      if controller.get('drawerOpen')
         controller.set('drawerOpen', false)
         @send 'closeDrawer'
       else
