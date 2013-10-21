@@ -11,9 +11,9 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     controller = @get('controller')
 
     if currentUser.get('initialMailImported')
-      controller.send 'showMore'
-      controller.send 'showMore'
-      controller.send 'showMore'
+      for i in [0...3]
+        controller.send 'showMore'
+
       @stop()
 
     if @get('page') <= 2 && !@get('isLoading') && !@get('allPagesLoaded')
