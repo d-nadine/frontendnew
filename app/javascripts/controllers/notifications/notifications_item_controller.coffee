@@ -1,5 +1,5 @@
 Radium.NotificationsItemController = Radium.ObjectController.extend
-  deleteNotification: -> 
-    @get('model').deleteRecord()
-    @get('store').commit()
-
+  actions:
+    deleteNotification: -> 
+      @get('model').deleteRecord()
+      @get('store').commit()
