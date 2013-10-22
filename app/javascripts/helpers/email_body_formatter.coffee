@@ -6,4 +6,4 @@ Ember.Handlebars.registerBoundHelper 'emailBodyFormatter', (message, options) ->
   text = text.replace(re,"<a href='$1' target='_new'>$1</a>")
   text = text.replace(/<img[^>]*>/g,"")
 
-  return new Handlebars.SafeString("<p>#{text}</p>")
+  return new Handlebars.SafeString("#{text}")

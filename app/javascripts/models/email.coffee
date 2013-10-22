@@ -18,6 +18,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   sentAt: DS.attr('datetime')
   isRead: DS.attr('boolean')
   isPersonal: DS.attr('boolean')
+  name: Ember.computed.alias 'subject'
 
   sender: ( ->
     @get('_senderUser') ||

@@ -2,6 +2,8 @@ require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
+  needs: ['users']
+
   actions:
     submit: ->
       @set 'isSubmitted', true
@@ -39,8 +41,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   init: ->
     @_super.apply this, arguments
-
-  needs: ['users']
 
   canFinish: (->
     @get('isDisabled') || @get('isNew')
@@ -85,6 +85,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   showOptions: Ember.computed.alias('isNew')
 
   showSuccess: Ember.computed.alias('justAdded')
+
+  hasReference: ( ->
+    !@get('isNew') && @get('reference')
+  ).property('reference', 'isNew')
 
   isExpandable: (->
     return false if @get('justAdded')

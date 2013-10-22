@@ -27,7 +27,7 @@
 {{/if}}
 
 {{#if isEmail}}
-  {{#linkTo 'emails.show' model}}{{model.subject}}{{/linkTo}}
+  {{#linkTo 'emails.show' "inbox" model}}{{model.subject}}{{/linkTo}}
 {{/if}}
 
 {{#if isMeeting}}

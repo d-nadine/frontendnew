@@ -48,6 +48,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
+    description: "Follow up with #{@get('model.subject')} email tomorrow."
   ).property('model', 'tomorrow')
 
   callForm: Radium.computed.newForm('call')

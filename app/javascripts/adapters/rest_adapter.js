@@ -199,7 +199,7 @@ Radium.RESTAdapter.map('Radium.PhoneNumber', {
 });
 
 Radium.RESTAdapter.map('Radium.Email', {
-  message: {key: 'body'},
+  message: {key: 'html'},
   isPublic: {key: 'public'},
   isRead: {key: 'read'},
   isPersonal: {key: 'personal'},
