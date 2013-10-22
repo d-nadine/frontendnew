@@ -1,4 +1,5 @@
 Radium.FileUploaderComponent = Ember.TextField.extend
+  classNames: ['upload-button']
   type: 'file'
   attributeBindings: ['multiple']
   multiple: true
