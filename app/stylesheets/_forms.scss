@@ -101,6 +101,20 @@
         top: 50%;
       }
     }
+
+    .reference-meta {
+      position: relative;
+      color: #797979;
+
+      p {
+        margin: 5px 0;
+      }
+
+      a {
+        font-weight: bold;
+        color: $blue;
+      }
+    }
   }
 
   &.is-expanded {

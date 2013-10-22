@@ -21,9 +21,7 @@
 
     {{view view.todoField classNames="field field-blend-in" viewName="description"}}
 
-    {{#if hasReference}}
-    Related {{reference.typeName}} {{resource-link model=reference}}
-    {{/if}}
+    {{partial "forms/reference"}}
   </div>
 
   {{#if isExpanded}}
