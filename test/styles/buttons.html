@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Radium Style Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../../site/application.css" rel="stylesheet">
+    <link href="css/styleguide.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="./index.html">Radium</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="./index.html">Main</a>
+              </li>
+              <li class="active">
+                <a href="./buttons.html">Buttons</a>
+              </li>
+              <li class="">
+                <a href="./forms.html">Forms (N/A)</a>
+              </li>
+              <li>
+                <a href="./alerts.html">Alerts (N/A)</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Docs nav
+      ================================================== -->
+      <div class="row">
+        <div class="span8 offset2">
+          <div class="page-header">
+            <h3>Main buttons</h3>
+          </div>
+
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn">A button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn"&gt;
+  A button
+&lt;/button&gt;
+</pre>
+
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-primary">A primary button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-primary"&gt;
+  A primary button
+&lt;/button&gt;
+</pre>
+
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-success">A success button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-success"&gt;
+  An success button
+&lt;/button&gt;
+</pre>
+
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-danger">An error button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-danger"&gt;
+  An error button
+&lt;/button&gt;
+</pre>
+
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-large btn-primary">
+            <i class="ss-standard ss-plus"></i> <strong>A new button</strong>
+          </button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-large btn-primary"&gt;
+  &lt;i class="ss-standard ss-plus"&gt;&lt;/i&gt; &lt;strong&gt;A new button&lt;/strong&gt;
+&lt;/button&gt;
+</pre>
+
+
+        <h3>Button dropdowns</h3>
+        <p>Any button can be modified to be slightly larger or have different width/height.</p>
+
+        <div class="bs-docs-example example-buttons">
+          <div class="btn-group">
+            <button class="btn">
+              A dropdown
+            </button>
+            <button class="btn dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-main">
+              A main dropdown
+            </button>
+            <button class="btn dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-main btn-primary">
+              A primary dropdown
+            </button>
+            <button class="btn btn-primary dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+          </div>
+        </div>
+<pre class="prettyprint">
+&lt;div class="btn-group"&gt;
+  &lt;button class="btn"&gt;
+    A dropdown
+  &lt;/button&gt;
+  &lt;button class="btn"&gt;
+    &lt;span class="caret"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;ul class="dropdown"&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-main"&gt;
+    A main dropdown
+  &lt;/button&gt;
+  &lt;button class="btn"&gt;
+    &lt;span class="caret"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;ul class="dropdown"&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-main btn-primary"&gt;
+    A primary dropdown
+  &lt;/button&gt;
+  &lt;button class="btn btn-primary"&gt;
+    &lt;span class="caret"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;ul class="dropdown"&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+
+        <div class="bs-docs-example example-buttons">
+          <div class="btn-group">
+            <button class="btn btn-large">
+              <i class="ss-standard ss-check green"></i> Add Task
+            </button>
+            <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#"><i class="ss-standard ss-check"></i> Todo</a>
+              </li>
+              <li>
+                <a href="#"><i class="ss-standard ss-phone"></i> Call</a>
+              </li>
+              <li>
+                <a href="#"><i class="ss-standard ss-calendar"></i> Meeting</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+<pre class="prettyprint">
+&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-large"&gt;
+    &lt;i class="ss-standard ss-check green"&gt;&lt;/i&gt; Add Task
+  &lt;/button&gt;
+  &lt;button class="btn btn-large dropdown-toggle" data-toggle="dropdown"&gt;
+    &lt;span class="caret"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+</pre>
+
+
+
+        <h3>Button modifiers</h3>
+        <p>Any button can be modified to be slightly larger or have different width/height.</p>
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-large">A large button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-large"&gt;
+  A button
+&lt;/button&gt;
+</pre>
+
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-main">A main button</button>
+          <button class="btn btn-primary btn-main">A main button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-main"&gt;
+  A button
+&lt;/button&gt;
+
+&lt;button class="btn btn-primary btn-main"&gt;
+  A button
+&lt;/button&gt;
+</pre>
+        <p>Main buttons are used in toolbars, they are slightly larger then a regular button without the larger text size of a <code>.btn-large</code> button.</p>
+
+
+        <div class="bs-docs-example example-buttons">
+          <br>
+          <button class="btn btn-block">A block button</button>
+          <button class="btn btn-block btn-large btn-primary">A primary block button</button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-block"&gt;
+  A block button
+&lt;/button&gt;
+
+&lt;button class="btn btn-block btn-large btn-primary"&gt;
+  A primary block button
+&lt;/button&gt;
+</pre>
+
+
+
+
+        </div> <!-- /.span8 -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  <script src="js/prettify.min.js"></script>
+  <script src="js/app.js"></script>
+  </body>
+</html>
