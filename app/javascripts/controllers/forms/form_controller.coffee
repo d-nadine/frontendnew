@@ -9,6 +9,7 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
       return
 
     expand: ->
+      return if event.target.tagName == "A"
       return if !@get('isNew') && event.target.tagName == "TEXTAREA" && @get('isExpanded')
       return unless @get('isExpandable')
       @toggleProperty 'isExpanded'
