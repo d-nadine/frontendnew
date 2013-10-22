@@ -13,6 +13,7 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 
   addAttribute: function(hash, key, value) {
     switch(key){
+      case 'html':
       case 'created_at':
       case 'updated_at':
         return;
@@ -199,7 +200,7 @@ Radium.RESTAdapter.map('Radium.PhoneNumber', {
 });
 
 Radium.RESTAdapter.map('Radium.Email', {
-  message: {key: 'html'},
+  message: {key: 'body'},
   isPublic: {key: 'public'},
   isRead: {key: 'read'},
   isPersonal: {key: 'personal'},

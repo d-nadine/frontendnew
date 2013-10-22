@@ -14,6 +14,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
   subject: DS.attr('string')
   message: DS.attr('string')
+  html: DS.attr('string')
   read: DS.attr('boolean')
   sentAt: DS.attr('datetime')
   isRead: DS.attr('boolean')
