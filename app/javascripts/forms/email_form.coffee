@@ -3,6 +3,7 @@ require 'forms/form'
 Radium.EmailForm = Radium.Form.extend
   includeReminder: false
   reminderTime: 5
+  files: Ember.A()
 
   init: ->
     @set 'content', Ember.Object.create()
@@ -15,6 +16,7 @@ Radium.EmailForm = Radium.Form.extend
     @get('to').clear()
     @get('cc').clear()
     @get('bcc').clear()
+    @get('files').clear()
 
   data: ( ->
     subject: @get('subject')

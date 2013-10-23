@@ -4,6 +4,11 @@ Radium.FileUploaderComponent = Ember.TextField.extend
   attributeBindings: ['multiple']
   multiple: true
   change: (e) ->
-    input = e.target
-    return if Ember.isEmpty(input.files)
-    @set('uploadTo.files', input.files)
+    files = e.target.files
+    return if Ember.isEmpty(files)
+    uploadToFiles = @get('files')
+
+    for i in [0...files.length]
+      file = files[i]
+      fileWrapper = Ember.Object.create(file, file: file)
+      uploadToFiles.pushObject(fileWrapper)
