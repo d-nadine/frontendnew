@@ -7,6 +7,10 @@ Radium.UserController = Radium.ObjectController.extend
   isEditable: true
   isEditing: false
 
+  userIsCurrentUser: ( ->
+    @get('model') == @get('currentUser')
+  ).property('model', 'currentUser')
+
   closedDealsTotal: ( ->
     deals = @get('deals')
 
@@ -73,4 +77,3 @@ Radium.UserController = Radium.ObjectController.extend
     endsAt: @get('now').advance(hour: 2)
     invitations: Ember.A()
   ).property('model', 'now')
-

@@ -124,7 +124,9 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-danger btn-large btn-block" {{action confirmDeletion}}>Delete</button>
+      {{#unless userIsCurrentUser}}
+        <button class="btn btn-danger btn-large btn-block" {{action confirmDeletion}}>Delete</button>
+      {{/unless}}
       {{#if controller.currentUser}}
         <br>
         {{#linkTo "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/linkTo}}
