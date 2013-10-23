@@ -4,27 +4,56 @@ Radium.EmailsNewRoute = Ember.Route.extend
       form.set 'isSubmitted', true
       return unless form.get('isValid')
 
-      email = Radium.Email.createRecord form.get('data')
-
-      email.set 'sentAt', Ember.DateTime.create()
-
       form.set 'isSending', true
 
-      email.one 'didCreate', =>
-        Ember.run.next =>
-          form.set 'isSubmitted', false
-          form.set 'isSending', false
-          @transitionTo 'emails.sent', email
+      email = Radium.Email.createRecord(form.get('data'))
+      email.set('_senderUser', @controllerFor('currentUser').get('model'))
 
-      email.one 'becameInvalid', =>
-        form.set 'isSending', false
-        @send 'flashError', email
+      formData = new FormData()
+      formData.append('email', JSON.stringify(email.serialize()))
 
-      email.one 'becameError', =>
-        form.set 'isSending', false
-        @send 'flashError', 'An error has occurred and the email has not been sent'
+      files = form.get('data').files
 
-      @store.commit()
+      if files.length 
+        for i in [0...files.length]
+          formData.append(files[i].name, files[i])
+
+      self = this
+
+      url = "#{@get('store._adapter.url')}/emails"
+
+      settings =
+        url: url
+        type: "POST"
+        contentType: false
+        processData: false
+        xhr: ->
+          Ember.$.ajaxSettings.xhr()
+        data: formData
+
+      settings.success = (data) ->
+        Ember.run null, resolve, data
+
+      settings.error = (jqXHR, textStatus, errorThrown) ->
+        Ember.run null, reject, jqXHR
+
+      Ember.$.ajax settings
+
+      # email.one 'didCreate', =>
+      #   Ember.run.next =>
+      #     form.set 'isSubmitted', false
+      #     form.set 'isSending', false
+      #     @transitionTo 'emails.sent', email
+
+      # email.one 'becameInvalid', =>
+      #   form.set 'isSending', false
+      #   @send 'flashError', email
+
+      # email.one 'becameError', =>
+      #   form.set 'isSending', false
+      #   @send 'flashError', 'An error has occurred and the email has not been sent'
+
+      # @store.commit()
 
   deactivate: ->
     @controllerFor('emailsNew').get('newEmail').reset()
