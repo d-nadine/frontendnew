@@ -66,7 +66,7 @@
           {{/unless}}
 
           <button class="btn btn-link btn-messages-action">
-            {{file-uploader}}
+            {{file-uploader uploadTo=controller}}
             <!--<i class="ss-standard ss-attach"></i> Add Attachment-->
           </button>
 
@@ -75,7 +75,7 @@
           </button>
         </div>
       </div>
-
+      {{upload-filelist files=controller.files}}
       <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
