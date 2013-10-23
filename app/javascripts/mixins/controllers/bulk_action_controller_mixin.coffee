@@ -124,6 +124,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       to: []
       cc: []
       bcc: []
+      files: Ember.A()
   ).property()
 
   checkAll: ->

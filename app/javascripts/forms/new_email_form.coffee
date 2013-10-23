@@ -10,3 +10,4 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'to', []
     @set 'cc', []
     @set 'bcc', []
+    @set 'files', Ember.A()

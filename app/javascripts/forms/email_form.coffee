@@ -30,6 +30,8 @@ Radium.EmailForm = Radium.Form.extend
 
     bcc: @get('bcc').map (person) =>
       person.get('email')
+
+    files: @get('files')
   ).property().volatile()
 
   isValid: ( ->
