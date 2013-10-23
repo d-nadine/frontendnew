@@ -31,6 +31,8 @@ debug code in the running app. You can symlink `vendor/ember.js` or
 Tests are written with qunit and executed with Iridium. You can run
 all tests: `$ bundle exec iridium test`
 
+A basic style guide listing common UI components and the markup required to generate them is available. Right now it runs off the generated Sass/Compass outputted to the `site` directory. To view, simply open the `index.html` file in `test/styles/index.html`.
+
 ## Deploying
 
 Deploying is easy: `$ ./script/deploy`. This will do some integrity
