@@ -1,4 +1,11 @@
 Radium.FlashView = Ember.View.extend
+  actions:
+    close: ->
+      @$().one($.support.transition.end, =>
+        @get('parentView').disconnectOutlet('flash')
+      ).removeClass('in')
+      return
+
   classNames: 'alert fade'
   classNameBindings: 'controller.type'
   templateName: 'flash'
@@ -8,17 +15,11 @@ Radium.FlashView = Ember.View.extend
     @$().addClass('in')
 
     timer = setTimeout(=>
-      @close()
+      @send 'close'
     , 4000)
 
     @set('timer', timer)
 
   willDestroyElement: ->
     clearTimeout(@get('timer'))
-    @$().off($.support.transition.end)
-
-  # For this to work, ensure that the flash message is placed in a `flash` outlet
-  close: ->
-    @$().one($.support.transition.end, =>
-      @get('parentView').disconnectOutlet('flash')
-    ).removeClass('in')
+    @$().off($.support.transition.end) 
