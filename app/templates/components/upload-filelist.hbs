@@ -1,8 +1,16 @@
 {{#each files}}
   <div class="upload-file">
-    <a href="#">{{name}} ({{size}})</a>
+    {{#unless isUploading}}
+      <a href="#">{{name}} ({{size}})</a>
+    {{else}}
+      {{name}} ({{size}})
+    {{/unless}}
     <button type="button" {{action removeFile this}} class="close">
-      <i class="ss-standard ss-delete"></i>
+      {{#unless isUploading}}
+        <i class="ss-standard ss-delete"></i>
+      {{else}}
+        <img src="/images/ajax-loader.gif"/> <span class="muted">uploading...</span>
+      {{/unless}}
     </button>
   </div>
 {{/each}}

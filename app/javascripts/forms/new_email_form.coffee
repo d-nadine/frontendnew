@@ -5,8 +5,8 @@ Radium.NewEmailForm = Radium.EmailForm.extend
   showSubject: true
 
   reset: ->
-    @set 'subject', '' 
-    @set 'message', '' 
+    @set 'subject', ''
+    @set 'message', ''
     @set 'to', []
     @set 'cc', []
     @set 'bcc', []
