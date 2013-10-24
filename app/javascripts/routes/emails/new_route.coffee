@@ -16,7 +16,7 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       if files.length 
         for i in [0...files.length]
-          formData.append(files[i].name, files[i])
+          formData.append("file#{i + 1}", files[i])
 
       self = this
 
