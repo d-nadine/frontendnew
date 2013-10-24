@@ -19,7 +19,8 @@ Radium.UploadingMixin = Ember.Mixin.create
       return unless files.length
       uploader = @get('parentView.uploader')
       for file in files
-        uploader.upload(file)
+        uploader.upload(file).then (data) =>
+          @get('parentView').onDidUpload(data)
 
   onDidUpload: (data) ->
     setTimeout =>

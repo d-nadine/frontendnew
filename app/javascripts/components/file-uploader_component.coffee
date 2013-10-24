@@ -21,13 +21,13 @@ Radium.FileUploaderComponent = Ember.TextField.extend Radium.UploadingMixin,
       file = files[i]
       fileWrapper = Ember.Object.create(file, file: file, isUploading: true)
       uploadToFiles.pushObject(fileWrapper)
-      uploader.upload(file)
+      uploader.upload(file).then (data) =>
+        id = data["attachment"]["id"]
+        store = @get("controller.store")
+        adapter = store.adapterForType(Radium.Attachment)
+        adapter.didFindRecord(store, Radium.Attachment, data, id)
+        attachment = Radium.Attachment.find(id)
+        fileWrapper.set 'isUploading', false
+        fileWrapper.set 'attachment', attachment
 
     false
-
-  onDidUpload: (data) ->
-    id = data["attachment"]["id"]
-    store = @get("controller.store")
-    adapter = store.adapterForType(Radium.Attachment)
-    adapter.didFindRecord(store, Radium.Attachment, data, id)
-    attachment = Radium.Attachment.find(id)
