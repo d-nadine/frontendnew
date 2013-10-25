@@ -6,9 +6,6 @@ Radium.FileUploaderComponent = Ember.TextField.extend Radium.UploadingMixin,
   attributeBindings: ['multiple']
   multiple: true
 
-  allUploaded: (->
-  ).property('files.@each.isUploading')
-
   init: ->
     @_super.apply this, arguments
     # FIXME: Total hack, remove when the initializer works
