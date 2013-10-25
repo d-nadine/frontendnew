@@ -38,6 +38,6 @@ Radium.FileUploaderComponent = Ember.TextField.extend Radium.UploadingMixin,
 
       uploadToFiles.pushObject(wrappedFile)
 
-      uploader.upload(file).then @handlerFactory(wrappedFile).bind(this)
+      uploader.upload(file, bucket: @get('bucket')).then @handlerFactory(wrappedFile).bind(this)
 
     false

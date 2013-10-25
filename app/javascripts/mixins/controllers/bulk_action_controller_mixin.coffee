@@ -107,7 +107,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   callFormDefaults: (->
     description: null
-    # contact: @get('contact')
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
@@ -125,6 +124,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       cc: []
       bcc: []
       files: Ember.A()
+      attachedFiles: Ember.A()
   ).property()
 
   checkAll: ->

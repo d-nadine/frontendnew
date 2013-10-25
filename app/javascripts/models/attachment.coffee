@@ -1,6 +1,7 @@
 Radium.Attachment = Radium.Model.extend
   fileName: DS.attr('string')
   url: DS.attr('string')
+  bucket: DS.attr('string')
   uploadedBy: DS.belongsTo('Radium.User')
 
   reference: ((key, value) ->

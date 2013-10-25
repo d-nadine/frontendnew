@@ -18,8 +18,10 @@ Radium.UploadingMixin = Ember.Mixin.create
       files = e.target.files
       return unless files.length
       uploader = @get('parentView.uploader')
+      model = @get('parentView.controller.model')
+      modelAttributes = type: model.humanize(), id: model.get('id')
       for file in files
-        uploader.upload(file).then (data) =>
+        uploader.upload(file, modelAttributes).then (data) =>
           @get('parentView').onDidUpload(data)
 
   onDidUpload: (data) ->

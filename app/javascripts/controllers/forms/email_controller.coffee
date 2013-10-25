@@ -30,6 +30,11 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   signature: Ember.computed.alias 'settings.signature'
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
+  bucket: null
+
+  init: ->
+    @_super.apply this, arguments
+    @set 'bucket', Math.random().toString(36).substr(2,9)
 
   disableSave: false
 
