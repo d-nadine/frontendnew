@@ -66,7 +66,7 @@
           {{/unless}}
 
           <button class="btn btn-link btn-messages-action">
-            {{file-uploader files=controller.files}}
+            {{file-uploader files=controller.files disableSave=disableSave}}
           </button>
 
           <button class="btn btn-link btn-messages-action">
@@ -82,8 +82,8 @@
           {{/if}}
           <button class="btn btn-main">Save Draft</button>
           <div class="btn-group">
-            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" {{bindAttr disabled=disableSave}}>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">

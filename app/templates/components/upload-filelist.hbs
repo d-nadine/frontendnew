@@ -1,7 +1,7 @@
 {{#each files}}
   <div class="upload-file">
     {{#unless isUploading}}
-      <a href="#">{{name}} ({{size}})</a>
+      <a href="{{unbound attachment.url}}" target="_new">{{name}} ({{size}})</a>
     {{else}}
       {{name}} ({{size}})
     {{/unless}}

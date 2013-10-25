@@ -17,6 +17,7 @@ Radium.EmailForm = Radium.Form.extend
     @get('cc').clear()
     @get('bcc').clear()
     @get('files').clear()
+    @get('attachedFiles').clear()
 
   data: ( ->
     subject: @get('subject')
@@ -33,6 +34,8 @@ Radium.EmailForm = Radium.Form.extend
 
     files: @get('files').map (file) =>
       file.get('file')
+
+    attachedFiles: Ember.A()
   ).property().volatile()
 
   isValid: ( ->

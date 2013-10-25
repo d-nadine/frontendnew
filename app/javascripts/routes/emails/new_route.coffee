@@ -8,6 +8,10 @@ Radium.EmailsNewRoute = Ember.Route.extend
 
       email.set 'sentAt', Ember.DateTime.create()
 
+      form.get('files').map( (file) -> file.get('attachment'))
+          .forEach (attachment) =>
+            email.get('attachedFiles').push(attachment.get('id'))
+
       form.set 'isSending', true
 
       email.one 'didCreate', =>

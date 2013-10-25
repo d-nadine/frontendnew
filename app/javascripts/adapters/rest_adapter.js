@@ -1,3 +1,5 @@
+var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach;
+
 Radium.RESTSerializer = DS.RESTSerializer.extend({
   init: function(){
     this._super.apply(this, arguments);
@@ -22,9 +24,20 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
     }
   },
 
-  // FIXME: Remove
   addHasMany: function(hash, record, key, relationship) {
-    this._super.apply(this, arguments);
+    if(['attachment_ids'].indexOf(key) === -1){
+      return this._super.apply(this, arguments);
+    }
+    var type = record.constructor,
+        name = relationship.key,
+        serializedHasMany = [],
+        includeType = (relationship.options && relationship.options.polymorphic),
+        manyArray, embeddedType;
+
+    // Get the DS.ManyArray for the relationship off the record
+    manyArray = get(record, name);
+
+    hash[key] = manyArray.map(function(item){ return item.get('id'); });
   },
 });
 

@@ -31,6 +31,8 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
 
+  disableSave: false
+
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
