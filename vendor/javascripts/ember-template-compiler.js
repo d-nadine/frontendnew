@@ -1,6 +1,6 @@
 (function() {
 var Ember = { assert: function() {}, FEATURES: { isEnabled: function() {} } };
- // Version: 1.1.1
+ // Version: 1.1.2
 
 (function() {
 /**
