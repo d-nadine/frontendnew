@@ -39,14 +39,6 @@
   </div>
 
   <div class="content">
-    <div {{bindAttr class="message::empty :text"}}>
-      {{#if html.length}}
-        {{htmlBodyFormatter html}}
-      {{else}}
-        {{emailBodyFormatter message}}
-      {{/if}}
-    </div>
-
     {{#if attachments}}
       <div class="clearfix email-item-actions email-item-attachments">
         {{partial "shared/attachments"}}
@@ -67,6 +59,21 @@
           <i class="ss-symbolicons-block ss-trash"></i> Delete
         </a>
       </div>
+      {{#if showReplyForm}}
+        <div class="block block-arrow-top">
+          {{render "forms/reply" replyEmail}}
+        </div>
+      {{/if}}
+
+      {{#if showForwardForm}}
+        {{render "forms/forward_email" forwardEmail}}
+      {{/if}}
+
+      {{#if showFormBox}}
+        <div class="block block-connected email-item-form-box">
+          {{render "form_box" formBox}}
+        </div>
+      {{/if}}
 
       {{#unless isPersonal}}
         {{#if showFormBox}}
@@ -86,22 +93,11 @@
       </div>
     {{/unless}}
   </div>
+  <div class="iframe-container">
+    <div {{bindAttr class="message::empty :text"}}>
+      {{htmlBodyFormatter model}}
+    </div>
+  </div>
 </div>
-
-{{#if showReplyForm}}
-  <div class="block block-arrow-top">
-    {{render "forms/reply" replyEmail}}
-  </div>
-{{/if}}
-
-{{#if showForwardForm}}
-  {{render "forms/forward_email" forwardEmail}}
-{{/if}}
-
-{{#if showFormBox}}
-  <div class="block block-connected email-item-form-box">
-    {{render "form_box" formBox}}
-  </div>
-{{/if}}
 
 {{render 'comments' model}}

@@ -17,7 +17,7 @@ Radium.EmailForm = Radium.Form.extend
     @get('cc').clear()
     @get('bcc').clear()
     @get('files').clear()
-    @get('attachedFiles').clear()
+    @get('attachedFiles').clear() if @get('attachedFiles')
 
   data: ( ->
     subject: @get('subject')

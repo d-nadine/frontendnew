@@ -17,10 +17,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend
       return
 
     toggleReplyForm: ->
+      @set 'showForwardForm', false
       @toggleProperty 'showReplyForm'
       return
 
     toggleForwardForm: ->
+      @set 'showReplyForm', false
       @toggleProperty 'showForwardForm'
       return
 

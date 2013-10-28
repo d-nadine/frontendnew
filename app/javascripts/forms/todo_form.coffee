@@ -47,11 +47,11 @@ Radium.TodoForm = Radium.Form.extend
 
     record.one 'becameError', (result)  ->
       result.get('transaction').rollback()
-      typeName = @get('type').humanize()
+      typeName = result.humanize()
       deferred.reject("An error has occurred and the #{typeName} could not be created.")
 
   bulkCommit: ->
-    typeName = @get('type').humanize()
+    typeName = @get('reference.firstObject').humanize()
 
     @get('reference').forEach (item) =>
       record = @get('type').createRecord @get('data')
