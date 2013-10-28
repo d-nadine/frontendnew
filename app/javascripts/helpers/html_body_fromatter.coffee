@@ -2,8 +2,6 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (message, options) ->
   return new Handlebars.SafeString("<p>(No Message)</p>") unless message?.length
 
   text = @get('html')
-  re = /^x-msg:\/\//ig
-  text = text.replace(re,"#")
-  text = text.replace(/<BASE[^>]*>/g,"")
+  text = text.replace(/(href=")x-msg:\/\/([^"]+)\//ig, '$1#$2')
 
   return new Handlebars.SafeString("#{text}")
