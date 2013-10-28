@@ -41,7 +41,7 @@
   <div class="content">
     <div {{bindAttr class="message::empty :text"}}>
       {{#if html.length}}
-        {{{html}}}
+        {{htmlBodyFormatter html}}
       {{else}}
         {{emailBodyFormatter message}}
       {{/if}}
