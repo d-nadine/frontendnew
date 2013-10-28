@@ -75,13 +75,12 @@
         </div>
       </div>
       {{upload-filelist files=controller.files}}
-      {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
       <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main">Save Draft</button>
+          <button class="btn btn-main" {{bindAttr disabled=disableSave}}>Save Draft</button>
           <div class="btn-group">
             <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" {{bindAttr disabled=disableSave}}>
@@ -110,6 +109,7 @@
           </div>
         {{/if}}
       </div>
+      {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
 
 
       {{#if showFormBox}}
