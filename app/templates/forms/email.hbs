@@ -75,6 +75,7 @@
         </div>
       </div>
       {{upload-filelist files=controller.files}}
+      {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
       <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
