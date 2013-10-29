@@ -1,7 +1,8 @@
 Radium.MessagesRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
-      return true if @controllerFor('application').get('currentPath') == 'messages.bulk_actions'
+      if ['messages.emails.new', 'messages.bulk_actions'].contains @controllerFor('application').get('currentPath')
+        return true
 
       return true unless transition.targetName == "messages.index"
 

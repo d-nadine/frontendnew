@@ -30,6 +30,19 @@ Radium.EmailsItemController = Radium.ObjectController.extend
       @set('model.isPersonal', false)
       @get('store').commit()
 
+    deleteEmail: (item) ->
+      if @get('showReplyForm')
+        @set('showReplyForm', false)
+        @set('showForwardForm', false)
+        return
+
+      if @get('showForwardForm')
+        @set('showReplyForm', false)
+        @set('showForwardForm', false)
+        return
+
+      @send 'delete', item
+
   showMeta : false
   currentForm: 'todo'
 

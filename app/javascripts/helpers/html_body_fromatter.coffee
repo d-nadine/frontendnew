@@ -26,13 +26,12 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     re = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
     text = text.replace(/<img[^>]*>/g,"")
 
-
   text = text.replace(re,"<a href='$1' target='_new'>$1</a>")
 
   Ember.run.next =>
     $('#email-body-iframe').remove()
     $('.iframe-container').append """
-      <iframe id="email-body-iframe" style="width:100%"></iframe>
+      <iframe id="email-body-iframe"></iframe>
     """
     $('#email-body-iframe')[0].contentWindow.document.write text
     setIframeHeight 'email-body-iframe'
