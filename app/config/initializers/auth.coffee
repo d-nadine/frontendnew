@@ -17,7 +17,7 @@ Ember.Application.initializer
       currentUserController.set 'model', user
 
       window.Intercom "boot",
-        app_id: "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf"
+        app_id: Radium.get('intercomAppId')
         email: user.get('email') 
         user_id: user.get('id')
         created_at: user.get('createdAt').toUnixTimestamp()
