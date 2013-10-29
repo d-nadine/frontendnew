@@ -10,16 +10,6 @@
 #   Radium.boot()
 #
 # Your boot code begins here...
-window.intercomSettings =
-  company:
-    # TODO: Insert the current company id here
-    id: "123"
-    # TODO: Insert the current company name here
-    name: "Radium"
-    # TODO: Insert the current company created at UNIX timestamp here
-    created_at: 1234567890
-
-  app_id: "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf"
 require 'app'
 
 #Radium.initialize()

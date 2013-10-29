@@ -21,6 +21,7 @@ Ember.Application.initializer
         email: user.get('email') 
         user_id: user.get('id')
         created_at: user.get('createdAt').toUnixTimestamp()
+        number_of_contacts: 0
         widget:
           activator: "#IntercomDefaultWidget"
 

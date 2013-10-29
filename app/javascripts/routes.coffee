@@ -4,7 +4,8 @@ Radium.Router.reopen
   location: 'history'
   didTransition: (infos) ->
     @_super.apply this, arguments
-    window.Intercom('update')
+    numberOfContacts =  Radium.Contact.all().filter((contact) => not contact.get('isPersonal')).get('length')
+    window.Intercom('update', number_of_contacts: numberOfContacts) 
     window.Intercom('reattach_activator')
 
 Radium.Router.map ->
