@@ -23,7 +23,6 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     text = text.replace(/(href=")x-msg:\/\/([^"]+)\//ig, '$1#$2')
   else
     text = email.get('message').replace(/\n/g, '<br />')
-    text = text.replace(/<img[^>]*>/g,"")
     re = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
     text = text.replace(re, "<a href='$1' target='_blank'>$1</a>")
 
@@ -34,6 +33,8 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     $('.iframe-container').append """
       <iframe id="email-body-iframe" src="#?linkTarget=_blank"></iframe>
     """
+
     $('#email-body-iframe')[0].contentWindow.document.write text
     setIframeHeight 'email-body-iframe'
+
   return ""
