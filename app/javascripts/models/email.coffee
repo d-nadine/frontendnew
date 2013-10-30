@@ -50,10 +50,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   people: Radium.computed.aggregate('toList','ccList', 'senderArray')
   recipients: Radium.computed.aggregate('toList','ccList')
 
-  hasLead: (->
-    @get('people').any (person) => person.constructor is Radium.Contact && person.get('isLead')
-  ).property('people.[]')
-
   isIncludedInConversation: (email) ->
     return true if email == this
 
