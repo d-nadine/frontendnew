@@ -4,11 +4,11 @@ Radium.EmailsNewRoute = Ember.Route.extend
       if transition.targetName == "messages.index"
         controller = @controllerFor('messages')
         @controllerFor('messagesSidebar').send 'reset'
-        Ember.run.next =>
-          if controller.get('model.length')
-            @transitionTo 'emails.show', "inbox", controller.get('firstObject')
-          else
-            @transitionTo 'emails.empty', "inbox"
+
+        if controller.get('model.length')
+          @transitionTo 'emails.show', "inbox", controller.get('firstObject')
+        else
+          @transitionTo 'emails.empty', "inbox"
 
         return false
 
