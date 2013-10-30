@@ -42,7 +42,7 @@
       <span class='badge badge-info'>Radium Contact</span>
     {{/unless}}
     <p>
-      {{#linkTo "emails.mailTo" "inbox" contact}}{{contact.primaryEmail.value}}{{/linkTo}}
+      mail to: {{#linkTo "emails.mailTo" "inbox" contact}}{{contact.primaryEmail.value}}{{/linkTo}}
       <br>
       {{#if contact.title}}
         {{contact.title}}

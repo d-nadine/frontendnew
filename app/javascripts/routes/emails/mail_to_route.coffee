@@ -21,4 +21,6 @@ Radium.EmailsMailToRoute = Ember.Route.extend
     form.set 'showAddresses', true
     form.set 'showSubject', true
     form.get('to').pushObject(model)
-    @transitionTo 'emails.new'
+    sidebarController = @controllerFor('messagesSidebar')
+    sidebarController.send 'reset'
+    @transitionTo 'emails.new', sidebarController.get('folder')

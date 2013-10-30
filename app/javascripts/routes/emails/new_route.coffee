@@ -34,8 +34,3 @@ Radium.EmailsNewRoute = Ember.Route.extend
       @controllerFor('messagesSidebar').send 'reset'
       Ember.run.next =>
         @transitionTo 'messages', @controllerFor('messages').get('folder')
-
-
-
-  deactivate: ->
-    @controllerFor('emailsNew').get('newEmail').reset()

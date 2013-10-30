@@ -4,3 +4,4 @@ Radium.ApplicationController = Radium.ObjectController.extend
   notificationCount: ( ->
     Radium.get('notifyCount')
   ).property('Radium.notifyCount')
+
