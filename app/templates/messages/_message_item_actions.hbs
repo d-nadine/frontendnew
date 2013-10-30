@@ -1,4 +1,8 @@
 <div class="message-item-actions">
+  {{#if hasLead}}
+    <span class='badge badge-success'>LEAD</span>
+  {{/if}}
+
   {{#if todos.length}}
     <i class="ss-standard ss-check"></i>
   {{/if}}

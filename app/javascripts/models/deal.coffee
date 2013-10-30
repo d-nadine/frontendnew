@@ -41,6 +41,10 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   company: Ember.computed.alias('contact.company')
 
+  isOpen: ( ->
+    not ['lost', 'closed'].contains(@get('status'))
+  ).property('status')
+
   isUnpublished: ( ->
     @get('status') == 'unpublished'
   ).property('status')

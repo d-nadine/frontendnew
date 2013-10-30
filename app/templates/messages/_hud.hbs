@@ -42,10 +42,28 @@
       <span class='badge badge-info'>Radium Contact</span>
     {{/unless}}
     <p>
-      {{contact.primaryEmail.value}}
+      {{#linkTo "emails.mailTo" "inbox" contact}}{{contact.primaryEmail.value}}{{/linkTo}}
       <br>
       {{#if contact.title}}
-        {{contact.company.displayName}}
+        {{contact.title}}
+      {{/if}}
+      {{#if contact.company}}
+        {{#linkTo "company" contact.company}}{{contact.company.name}}{{/linkTo}}
+      {{/if}}
+      {{#if contact.openDeals.length}}
+        <table class="contact-deals-table">
+          <tbody>
+            {{#each contact.openDeals}}
+              <tr>
+                <td>{{status}}</td>
+                <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+                <td>
+                  <strong>{{currency value}}</strong>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
       {{/if}}
     </p>
   </div>

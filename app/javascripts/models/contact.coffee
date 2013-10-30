@@ -40,9 +40,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
-  isLead: ( ->
-    @get('status') == 'pipeline'
-  ).property('status')
+  isLead: Ember.computed.equal 'status', 'pipeline'
 
   isPersonal: ( ->
     @get('status') == 'personal'
@@ -57,6 +55,10 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryAddress: Radium.computed.primary 'addresses'
 
   email: Ember.computed.alias 'primaryEmail.value'
+
+  openDeals: ( ->
+    @get('deals').filterProperty 'isOpen'
+  ).property('deals.[]')
 
   displayName: ( ->
     @get('name') || @get('primaryEmail.value') || @get('primaryPhone.value')
