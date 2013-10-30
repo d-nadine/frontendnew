@@ -50,15 +50,4 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   people: Radium.computed.aggregate('toList','ccList', 'senderArray')
   recipients: Radium.computed.aggregate('toList','ccList')
 
-  isIncludedInConversation: (email) ->
-    return true if email == this
-
-    people = @get 'people'
-    otherPeople = email.get 'people'
-
-    return false if people.get('length') != otherPeople.get('length')
-
-    otherPeople.every (person) ->
-      people.contains person
-
   time: Ember.computed.alias 'sentAt'
