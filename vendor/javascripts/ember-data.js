@@ -3394,7 +3394,10 @@ var DirtyState = {
     becameError: function(record) {
       record.transitionTo('error');
       record.send('invokeLifecycleCallbacks');
-    }
+    },
+
+    // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+    loadedData: Ember.K
   },
 
   // A record is in the `invalid` state when its client-side

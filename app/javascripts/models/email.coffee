@@ -43,6 +43,11 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   bcc: DS.attr('array')
   attachedFiles: DS.attr('array')
 
+  hasLead: ( ->
+    sender = @get('sender')
+    sender.constructor is Radium.Contact && sender.get('isLead')
+  ).property('sender')
+
   isPublic: Ember.computed.not 'isPersonal'
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
