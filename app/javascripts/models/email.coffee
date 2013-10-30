@@ -45,6 +45,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
   hasLead: ( ->
     sender = @get('sender')
+    return unless sender
     sender.constructor is Radium.Contact && sender.get('isLead')
   ).property('sender')
 

@@ -23400,7 +23400,7 @@ define("metamorph",
        * node and use *it* as the marker.
        **/
       var realNode = function(start) {
-        while (start.parentNode.tagName === "") {
+        while (start && start.parentNode.tagName === "") {
           start = start.parentNode;
         }
 

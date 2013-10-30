@@ -40,17 +40,15 @@
     </h4>
     {{#unless contact.isPersonal}}
       <span class='badge badge-info'>Radium Contact</span>
-    {{/unless}}
-    <p>
-      mail to: {{#linkTo "emails.mailTo" "inbox" contact}}{{contact.primaryEmail.value}}{{/linkTo}}
-      <br>
-      {{#if contact.title}}
-        {{contact.title}}
-      {{/if}}
-      {{#if contact.company}}
-        {{#linkTo "company" contact.company}}{{contact.company.name}}{{/linkTo}}
-      {{/if}}
-      {{#if contact.openDeals.length}}
+      <p>
+        mail to: {{#linkTo "emails.mailTo" "inbox" contact}}{{contact.primaryEmail.value}}{{/linkTo}}
+        <br>
+        {{#if contact.title}}
+          {{contact.title}}
+        {{/if}}
+        {{#if contact.company}}
+          {{#linkTo "company" contact.company}}{{contact.company.name}}{{/linkTo}}
+        {{/if}}
         <table class="contact-deals-table">
           <tbody>
             {{#each contact.openDeals}}
@@ -64,8 +62,8 @@
             {{/each}}
           </tbody>
         </table>
-      {{/if}}
-    </p>
+      </p>
+    {{/unless}}
   </div>
 </div>
 {{#if hasNewPipelineDeal}}
