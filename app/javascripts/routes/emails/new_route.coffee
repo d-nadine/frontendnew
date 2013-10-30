@@ -1,5 +1,20 @@
 Radium.EmailsNewRoute = Ember.Route.extend
   actions:
+    willTransition: (transition) ->
+      if transition.targetName == "messages.index"
+        controller = @controllerFor('messages')
+        @controllerFor('messagesSidebar').send 'reset'
+        Ember.run.next =>
+          folder = controller.get('folder')
+          if controller.get('model.length')
+            @transitionTo 'emails.show', folder, controller.get('firstObject')
+          else
+            @transitionTo 'messages.empty', folder
+
+        return false
+
+      true
+
     sendEmail: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')
@@ -34,3 +49,7 @@ Radium.EmailsNewRoute = Ember.Route.extend
       @controllerFor('messagesSidebar').send 'reset'
       Ember.run.next =>
         @transitionTo 'messages', @controllerFor('messages').get('folder')
+
+  deactivate: ->
+    @controllerFor('emailsNew').get('newEmail').reset()
+    @controllerFor('messagesSidebar').send 'reset'
