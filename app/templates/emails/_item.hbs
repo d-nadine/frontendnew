@@ -53,6 +53,7 @@
 
     <div class="clearfix email-item-actions">
       <div class="pull-right">
+      {{#unless isDraft}}
         <a {{action toggleReplyForm}} class="btn btn-link btn-messages-action">
           <i class="ss-standard ss-reply"></i> Reply
         </a>
@@ -60,6 +61,13 @@
         <a {{action toggleForwardForm}} class="btn btn-link btn-messages-action">
           <i class="ss-standard ss-right"></i> Forward
         </a>
+      {{else}}
+        {{#linkTo "emails.edit" model class="btn btn-link btn-messages-action"}}
+          <i class="ss-standard ss-right"></i> Edit
+        {{/linkTo}}
+
+        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
+      {{/unless}}
 
         <a class="btn btn-link btn-messages-action" {{action deleteEmail this}}>
           <i class="ss-symbolicons-block ss-trash"></i> Delete

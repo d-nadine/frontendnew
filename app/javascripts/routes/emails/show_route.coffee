@@ -62,6 +62,27 @@ Radium.EmailsShowRoute = Radium.Route.extend
 
       @store.commit()
 
+  sendDraft: (email) ->
+    email.set 'sentAt', Ember.DateTime.create()
+
+    email.one 'didUpdate', (result) =>
+      Ember.run.next =>
+        form.set 'isSubmitted', false
+        form.set 'isSending', false
+        messagesController = @controllerFor('messages')
+        messagesController.get('model').removeObject(result)
+        @transitionTo 'emails.sent', email
+
+    email.one 'becameInvalid', =>
+      form.set 'isSending', false
+      @send 'flashError', email
+
+    email.one 'becameError', =>
+      form.set 'isSending', false
+      @send 'flashError', 'An error has occurred and the email has not been sent'
+
+    @store.commit()
+
   setupController: (controller, model) ->
     model.set 'isRead', true
     @store.commit()

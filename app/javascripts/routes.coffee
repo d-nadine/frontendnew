@@ -17,6 +17,7 @@ Radium.Router.map ->
       @route 'show', path: '/:email_id'
       @route 'empty', path: '/empty'
       @route 'new'
+      @route 'edit', path: '/:email_id/edit'
       @route 'mailTo', path: 'mailto/:recipient_type/:recipient_id'
       # FIXME: this should be a routless state
       # The path is only here so the email can be
