@@ -17,6 +17,29 @@ Radium.MessagesRoute = Radium.Route.extend
         sidebarController.send 'reset'
         true
 
+    sendDraft: (email) ->
+      email.set 'sentAt', Ember.DateTime.create()
+      email.set 'isDraft', false
+
+      email.set 'isSending', true
+
+      email.one 'didUpdate', (result) =>
+        Ember.run.next =>
+          email.set 'isSending', false
+          messagesController = @controllerFor('messages')
+          messagesController.get('model').removeObject(result)
+          @transitionTo 'emails.sent', email
+
+      email.one 'becameInvalid', =>
+        email.set 'isSending', false
+        @send 'flashError', email
+
+      email.one 'becameError', =>
+        email.set 'isSending', false
+        @send 'flashError', 'An error has occurred and the email has not been sent'
+
+      @store.commit()
+
     toggleFolders: ->
       @send 'toggleDrawer', 'messages/folders'
 

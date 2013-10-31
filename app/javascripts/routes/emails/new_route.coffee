@@ -3,7 +3,7 @@ require 'routes/mixins/send_email_mixin'
 Radium.EmailsNewRoute = Ember.Route.extend Radium.SendEmailMixin,
   actions:
     willTransition: (transition) ->
-      if transition.targetName == "messages.index"
+      if transition.targetName == "messages.index" && transition.params.folder == "inbox"
         controller = @controllerFor('messages')
         @controllerFor('messagesSidebar').send 'reset'
 

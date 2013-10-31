@@ -1,4 +1,5 @@
 Radium.EmailsItemController = Radium.ObjectController.extend
+  needs: ['messages']
   actions:
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
