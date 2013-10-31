@@ -20,7 +20,12 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
 
       @trigger 'signatureAdded'
 
+    saveAsDraft: (form) ->
+      @set 'isDraft', true
+      @send 'sendEmail', form
+
     submit: (form) ->
+      @set 'isDraft', false
       @send 'sendEmail', form
       false
 

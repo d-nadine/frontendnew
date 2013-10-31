@@ -18,11 +18,14 @@ Radium.EmailForm = Radium.Form.extend
     @get('bcc').clear()
     @get('files').clear()
     @get('attachedFiles').clear() if @get('attachedFiles')
+    @set('isDraft', false)
 
   data: ( ->
     subject: @get('subject')
     message: @get('message')
     sentAt: Ember.DateTime.create()
+    isDraft: @get('isDraft')
+
     to: @get('to').map (person) =>
       person.get('email')
 

@@ -12,3 +12,4 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'bcc', []
     @set 'files', Ember.A()
     @set 'attachedFiles', Ember.A()
+    @set 'isDraft', false

@@ -224,6 +224,7 @@ Radium.RESTAdapter.map('Radium.Email', {
   isPublic: {key: 'public'},
   isRead: {key: 'read'},
   isPersonal: {key: 'personal'},
+  isDraft: {key: 'draft'},
   comments: {embedded: 'load'},
 });
 

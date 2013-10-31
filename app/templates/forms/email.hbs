@@ -1,7 +1,11 @@
 {{#if isSending}}
   <div class="block email-card message-card is-sending">
     <p><img src="/images/loading.gif"></p>
-    <p class="muted">Sending</p>
+    {{#unless isDraft}}
+      <p class="muted">Sending</p>
+    {{else}}
+      <p class="muted">Saving Draft</p>
+    {{/unless}}
   </div>
 {{else}}
   <form class="form">
@@ -9,7 +13,6 @@
       <h5>
         Reply to
         {{list to}}
-
         <a class="pull-right" href="#" {{action expand}}>More Options</a>
       </h5>
     {{/if}}
@@ -87,7 +90,7 @@
           {{#if showEmailCancel}}
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main" {{bindAttr disabled=disableSave}}>Save Draft</button>
+          <button class="btn btn-main" {{bindAttr disabled=disableSave}} {{action saveAsDraft this}}>Save Draft</button>
           <div class="btn-group">
             <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" {{bindAttr disabled=disableSave}}>

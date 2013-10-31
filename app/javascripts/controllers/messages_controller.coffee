@@ -9,6 +9,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
+    { title: 'Drafts', name: 'drafts', icon: 'mail' }
     { title: 'Sent items', name: 'sent', icon: 'send' }
     # { title: 'Discussions', name: 'discussions', icon: 'chat' }
     # { title: 'All Emails', name: 'emails', icon: 'mail' }
@@ -58,7 +59,8 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     items.toArray().forEach (item) =>
       return if ids.contains(item.get('id'))
       return if folder == "sent" && item.get('sender') != currentUser
-      return if folder == "radium" && item is Radium.Emal && item.get('isPersonal')
+      return if folder == "radium" && item.constructor is Radium.Email && item.get('isPersonal')
+      return if folder == "drafts" && item.constructor is Radium.Email && !item.get('isDraft')
       @unshiftObject(item)
       ids.push item.get('id')
 
@@ -81,6 +83,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   queryFolders:
     inbox: "INBOX"
     sent: "Sent Messages"
+    drafts: "Drafts"
 
   queryParams: ->
     folder = @get('folder')
