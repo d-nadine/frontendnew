@@ -9,6 +9,6 @@ Radium.FormsReplyController = Radium.FormsEmailController.extend
       @toggleProperty 'showSubject'
       false
 
-    cancelCreate: ->
+    deleteFromEditor: ->
       @send 'deleteEmail', @get('model')
       false

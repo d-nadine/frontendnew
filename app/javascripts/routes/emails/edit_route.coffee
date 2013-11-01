@@ -1,4 +1,21 @@
 Radium.EmailsEditRoute = Radium.Route.extend
+  actions:
+    deleteFromEditor: ->
+      messagesController = @controllerFor('messages')
+
+      folder = messagesController.get('folder')
+
+      email = @modelFor('emailsEdit')
+
+      messagesController.removeObject(email) if folder == 'drafts'
+
+      @send 'delete', email
+
+      @controllerFor('messagesSidebar').send 'reset'
+      @transitionTo 'messages', messagesController.get('folder')
+
+      false
+
   afterModel: (model, transition) ->
     emailForm = Radium.NewEmailForm.create()
     emailForm.reset()
