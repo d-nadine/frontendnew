@@ -3,20 +3,17 @@ require 'routes/mixins/send_email_mixin'
 Radium.EmailsNewRoute = Ember.Route.extend Radium.SendEmailMixin,
   actions:
     willTransition: (transition) ->
-      if transition.targetName == "messages.index" && transition.params.folder == "inbox"
+      if transition.targetName == "messages.index"
         controller = @controllerFor('messages')
         @controllerFor('messagesSidebar').send 'reset'
 
-        if controller.get('model.length')
-          @transitionTo 'emails.show', "inbox", controller.get('firstObject')
-        else
-          @transitionTo 'emails.empty', "inbox"
+        @transitionTo 'messages.index', transition.params.folder
 
         return false
 
       true
 
-    sendEmail: (form) ->
+    saveEmail: (form) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')
 
@@ -36,7 +33,13 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SendEmailMixin,
           form.set 'isSending', false
           messagesController = @controllerFor('messages')
           messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
-          @transitionTo 'emails.sent', email
+          if result.get('isDraft')
+            @send 'flashSuccess', 'Email has been saved to the drafts folder'
+            @controllerFor('messagesSidebar').send 'reset'
+            @controllerFor('messages').set('selectedContent', result)
+            @transitionTo 'emails.edit', 'drafts', result
+          else
+            @transitionTo 'emails.sent', email
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false

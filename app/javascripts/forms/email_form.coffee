@@ -19,6 +19,7 @@ Radium.EmailForm = Radium.Form.extend
     @get('files').clear()
     @get('attachedFiles').clear() if @get('attachedFiles')
     @set('isDraft', false)
+    @set('bucket', Math.random().toString(36).substr(2,9))
 
   data: ( ->
     subject: @get('subject')
@@ -39,6 +40,7 @@ Radium.EmailForm = Radium.Form.extend
       file.get('file')
 
     attachedFiles: Ember.A()
+    bucket: @get('bucket')
   ).property().volatile()
 
   isValid: ( ->

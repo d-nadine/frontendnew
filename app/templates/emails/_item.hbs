@@ -66,10 +66,10 @@
           <i class="ss-standard ss-right"></i> Edit
         {{/linkTo}}
 
-        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bindAttr disabled=isSending}} class="btn btn-primary btn-main btn-wide">Send</button>
+        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
       {{/unless}}
 
-        <a class="btn btn-link btn-messages-action" {{action deleteEmail this}}>
+        <a class="btn btn-link btn-messages-action" {{action deleteEmail this}} {{bindAttr disabled=isSaving}}>
           <i class="ss-symbolicons-block ss-trash"></i> Delete
         </a>
       </div>

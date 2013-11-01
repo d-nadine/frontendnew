@@ -22,11 +22,11 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
 
     saveAsDraft: (form) ->
       @set 'isDraft', true
-      @send 'sendEmail', form
+      @send 'saveEmail', form
 
     submit: (form) ->
       @set 'isDraft', false
-      @send 'sendEmail', form
+      @send 'saveEmail', form
       false
 
   needs: ['tags','contacts','users','userSettings']
@@ -36,11 +36,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   signature: Ember.computed.alias 'settings.signature'
   user: Ember.computed.alias 'controllers.currentUser'
   isEditable: true
-  bucket: null
-
-  init: ->
-    @_super.apply this, arguments
-    @set 'bucket', Math.random().toString(36).substr(2,9)
 
   disableSave: false
 

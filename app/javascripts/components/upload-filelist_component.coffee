@@ -1,13 +1,16 @@
 Radium.UploadFilelistComponent = Ember.Component.extend
   actions:
     removeFile: (file) ->
-      attachment = @get('file.attachment')
       @get('files').removeObject(file)
 
-      # FIXME: server side delete
-      # attachment.deleteRecord()
+      attachment = if file instanceof Radium.Attachment
+                     file
+                   else
+                     file.get('attachment')
 
-      # attachment.get('transaction').commit()
+      attachment.deleteRecord()
+
+      attachment.get('transaction').commit()
 
 Radium.AttachmentListController = Ember.ObjectController.extend
   isLoaded: Ember.computed.alias 'model.attachment.isLoaded'

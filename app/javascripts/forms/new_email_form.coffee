@@ -13,3 +13,4 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'files', Ember.A()
     @set 'attachedFiles', Ember.A()
     @set 'isDraft', false
+    @set 'bucket', Math.random().toString(36).substr(2,9)

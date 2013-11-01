@@ -1,5 +1,36 @@
 Radium.EmailsEditRoute = Radium.Route.extend
   actions:
+    saveEmail: (form) ->
+      form.set 'isSubmitted', true
+      return unless form.get('isValid')
+
+      data = form.get('data')
+      email = @modelFor('emailsEdit')
+      email.setProperties data
+
+      form.get('files').compact().map( (file) -> file.get('attachment'))
+          .forEach (attachment) =>
+            email.get('attachedFiles').push(attachment.get('id'))
+
+      form.set 'isSending', true
+
+      email.one 'didUpdate', (result) =>
+        Ember.run.next =>
+          form.set 'isSubmitted', false
+          form.set 'isSending', false
+          @transitionTo 'emails.sent', email
+
+      email.one 'becameInvalid', =>
+        form.set 'isSending', false
+        @send 'flashError', email
+
+      email.one 'becameError', =>
+        form.set 'isSending', false
+        @send 'flashError', 'An error has occurred and the email has not been sent'
+
+      @store.commit()
+
+
     deleteFromEditor: ->
       messagesController = @controllerFor('messages')
 
@@ -23,10 +54,11 @@ Radium.EmailsEditRoute = Radium.Route.extend
     emailForm.setProperties 
       subject: model.get('subject')
       message: model.get('message')
-      isDraft: model.get('isDraft')
+      isDraft: true
       to: model.get('toList')
       cc: model.get('ccList').map (person) -> person.get('email')
       bcc: model.get('bccList').map (person) -> person.get('email')
       files: model.get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
+      bucket: model.get('bucket')
 
     @controllerFor('emailsEdit').set('emailForm', emailForm)
