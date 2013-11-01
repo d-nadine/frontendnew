@@ -4,6 +4,12 @@ Radium.EmailsEditRoute = Radium.Route.extend
     emailForm.reset()
 
     emailForm.setProperties 
-      subject: email.get('subject')
-      message: email.get('message')
-      to: @get('to').toArray()
+      subject: model.get('subject')
+      message: model.get('message')
+      isDraft: model.get('isDraft')
+      to: model.get('toList')
+      cc: model.get('ccList').map (person) -> person.get('email')
+      bcc: model.get('bccList').map (person) -> person.get('email')
+      files: model.get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
+
+    @controllerFor('emailsEdit').set('emailForm', emailForm)
