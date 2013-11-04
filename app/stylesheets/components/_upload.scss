@@ -1,41 +1,34 @@
 input[type=file]{
   margin-left: 2em;
-  width: 135px;
+  width: 110px;
   height: 27px;
-}
 
-.upload-button:before {
-  content: 'Select some files';
-  background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#F9F9F9), to(#E3E3E3));
-  background: -webkit-linear-gradient(top, #F9F9F9, #E3E3E3);
-  background: -moz-linear-gradient(top, #F9F9F9, #E3E3E3);
-  background: -ms-linear-gradient(top, #F9F9F9, #E3E3E3);
-  background: -o-linear-gradient(top, #F9F9F9, #E3E3E3);
-  background: linear-gradient(top, #F9F9F9, #E3E3E3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 11px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-}
-.upload-button:hover:before {
-  border-color: black;
-}
-.upload-button:active:before {
-  background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#E3E3E3), to(#F9F9F9));
-  background: -webkit-linear-gradient(top, #E3E3E3, #F9F9F9);
-  background: -moz-linear-gradient(top, #E3E3E3, #F9F9F9);
-  background: -ms-linear-gradient(top, #E3E3E3, #F9F9F9);
-  background: -o-linear-gradient(top, #E3E3E3, #F9F9F9);
-  background: linear-gradient(top, #E3E3E3, #F9F9F9);
-}
+  &.upload-button {
+    margin: 0;
+    position: relative;
+    color: transparent;
+    cursor: pointer;
 
+    &:before {
+      content: 'Select some files';
+      position: absolute;
+      line-height: 18px;
+      padding: 4px 0;
+      white-space: nowrap;
+      cursor: pointer;
+      background-color: #fff;
+      color: #000;
+      @include user-select(none);
+    }
 
+    &,
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    &:hover:before {
+      color: $blue;
+    }
+  }
+}

@@ -65,16 +65,23 @@
             </button>
           {{/unless}}
 
-          <button class="btn btn-link btn-messages-action">
-            {{file-uploader files=controller.files disableSave=disableSave bucket=bucket}}
-          </button>
+          <div class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-attach"></i>
+            {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
+          </div>
 
           <button class="btn btn-link btn-messages-action" {{action cancelCreate}}>
             <i class="ss-standard ss-trash"></i> Delete
           </button>
         </div>
       </div>
-      {{upload-filelist files=controller.files}}
+
+      {{#if controller.files}}
+        <div class="clearfix new-message-row">
+          {{upload-filelist files=controller.files}}
+        </div>
+      {{/if}}
+
       <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
