@@ -68,25 +68,27 @@
       {{#if showForwardForm}}
         {{render "forms/forward_email" forwardEmail}}
       {{/if}}
-
-      {{#if showFormBox}}
-        <div class="block block-connected email-item-form-box">
-          {{render "form_box" formBox}}
-        </div>
-      {{/if}}
-
-      {{#unless isPersonal}}
-        {{#if showFormBox}}
-          <button class="btn" {{action toggleFormBox}}>
-            <i class="ss-standard ss-delete red"></i> Cancel
-          </button>
-        {{else}}
-          <button class="btn" {{action toggleFormBox}}>
-            <i class="ss-standard ss-check green"></i> Add a Follow-up Task
-          </button>
-        {{/if}}
-      {{/unless}}
     </div>
+
+    {{#unless isPersonal}}
+      {{#if showFormBox}}
+        <button class="btn" {{action toggleFormBox}}>
+          <i class="ss-standard ss-delete"></i> Done
+        </button>
+      {{else}}
+        <button class="btn" {{action toggleFormBox}}>
+          <i class="ss-standard ss-check green"></i> Add a Follow-up Task
+        </button>
+      {{/if}}
+    {{/unless}}
+
+    {{#if showFormBox}}
+      <div class="block block-connected email-item-form-box">
+        {{render "form_box" formBox}}
+      </div>
+    {{/if}}
+
+
     {{#unless isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
         {{render 'related_tasks' tasks}}
