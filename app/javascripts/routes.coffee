@@ -78,4 +78,6 @@ Radium.Router.map ->
     @route 'pipelineStates', path: 'pipeline-states'
     @route 'remindersAlerts', path: 'reminders-alerts'
 
+  @route 'reports'
+  
   @route 'unimplemented'
