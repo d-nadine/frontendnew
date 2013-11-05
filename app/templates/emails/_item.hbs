@@ -39,6 +39,12 @@
   </div>
 
   <div class="content">
+    <div class="iframe-container">
+      <div {{bindAttr class="message::empty :text"}}>
+        {{htmlBodyFormatter model}}
+      </div>
+    </div>
+    
     {{#if attachments}}
       <div class="clearfix email-item-actions email-item-attachments">
         {{partial "shared/attachments"}}
@@ -94,11 +100,6 @@
         {{render 'related_tasks' tasks}}
       </div>
     {{/unless}}
-  </div>
-  <div class="iframe-container">
-    <div {{bindAttr class="message::empty :text"}}>
-      {{htmlBodyFormatter model}}
-    </div>
   </div>
 </div>
 

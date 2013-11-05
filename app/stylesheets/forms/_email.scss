@@ -199,8 +199,10 @@
   .expanded-fields {
     margin: 0;
     background: $calendar-active-bg;
+    border: none;
     border-top: 1px solid #ddd;
     @include box-shadow(none);
+    @include border-radius(0);
   }
 }
 
