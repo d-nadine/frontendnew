@@ -221,15 +221,17 @@
 .email-hud {
   margin: 0 0 10px;
   padding: 15px;
-  background: #313131;
+  background-color: white;
 
-  &.is-lead-contact{
-    background-color: white;
+  &.is-private {
+    color: #fff;
+    background: #313131;
   }
 
   .btn-link {
     padding-left: 0;
     color: $blue;
+    text-shadow: none;
   }
 }
 
