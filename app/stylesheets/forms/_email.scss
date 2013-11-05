@@ -226,6 +226,11 @@
   &.is-lead-contact{
     background-color: white;
   }
+
+  .btn-link {
+    padding-left: 0;
+    color: $blue;
+  }
 }
 
 .email-hud-actions {

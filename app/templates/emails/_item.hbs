@@ -65,6 +65,19 @@
           <i class="ss-symbolicons-block ss-trash"></i> Delete
         </a>
       </div>
+
+      {{#unless isPersonal}}
+        {{#if showFormBox}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-delete"></i> Done
+          </button>
+        {{else}}
+          <button class="btn" {{action toggleFormBox}}>
+            <i class="ss-standard ss-check green"></i> Add a Follow-up Task
+          </button>
+        {{/if}}
+      {{/unless}}
+      
       {{#if showReplyForm}}
         <div class="block block-arrow-top">
           {{render "forms/reply" replyEmail}}
@@ -75,18 +88,6 @@
         {{render "forms/forward_email" forwardEmail}}
       {{/if}}
     </div>
-
-    {{#unless isPersonal}}
-      {{#if showFormBox}}
-        <button class="btn" {{action toggleFormBox}}>
-          <i class="ss-standard ss-delete"></i> Done
-        </button>
-      {{else}}
-        <button class="btn" {{action toggleFormBox}}>
-          <i class="ss-standard ss-check green"></i> Add a Follow-up Task
-        </button>
-      {{/if}}
-    {{/unless}}
 
     {{#if showFormBox}}
       <div class="block block-connected email-item-form-box">
