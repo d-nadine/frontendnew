@@ -150,8 +150,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       if arguments.length == 2
         if @matchesSelection(value)
           @$('input[type=text]').blur()
-          @clearValue()
-          @set 'controller.name', value
+          @set 'value', value
         else
           unless @get('isNew')
             @clearValue()

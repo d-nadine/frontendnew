@@ -81,9 +81,10 @@ Radium.ApplicationRoute = Radium.Route.extend
       $('body').removeClass 'drawer-open'
 
     closeModal: ->
-      @render 'nothing',
-        into: 'application'
+      @disconnectOutlet(
         outlet: 'modal'
+        parentView: 'application'
+      )
 
     back: ->
       history = @get('router.history')

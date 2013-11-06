@@ -15,12 +15,20 @@ Radium.ContactRoute = Radium.Route.extend
 
       contact.deleteRecord()
 
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
+      name = contact.get('name')
 
-      @render 'contact/deleted',
-        into: 'application'
+      contact.one 'didDelete', =>
+        @send 'closeModal'
+        @send 'flashSuccess', "The contact #{name} has been deleted"
+        @transitionTo 'addressbook.filter', 'all'
+
+      contact.one 'becameInvalid', (result) =>
+        result.reset() 
+
+      contact.one 'becameError', (result) =>
+        result.reset() 
+
+      @get('store').commit()
 
   renderTemplate: ->
     @render()
