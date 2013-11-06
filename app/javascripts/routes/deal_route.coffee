@@ -21,12 +21,8 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
       @get('store').commit()
 
       deal.one 'didDelete', =>
-        @render 'nothing',
-          into: 'application'
-          outlet: 'modal'
-
-        @render 'deal/deleted',
-          into: 'application'
+        @send 'closeModal'
+        @transitionTo 'deals.deleted'
 
       deal.one 'becameInvalid', =>
         console.error 'deal becameInvalid'

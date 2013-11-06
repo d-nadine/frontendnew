@@ -48,6 +48,7 @@ Radium.Router.map ->
 
   @resource 'deals', ->
     @resource 'deal', path: '/:deal_id'
+    @route 'deleted'
     @route 'new'
     @route 'fromContact', path: '/new/contacts/:contact_id'
     @route 'fromUser', path: '/new/users/:user_id'
