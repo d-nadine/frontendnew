@@ -70,3 +70,12 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     else
       @get('name')
   ).property('name', 'company.name')
+
+  deleteRelationships: ->
+    @get('deals').forEach (deal) =>
+      deal.deleteRecord()
+
+    @get('tasks').forEach (task) =>
+      task.deleteRecord()
+
+    @get('store').commit()

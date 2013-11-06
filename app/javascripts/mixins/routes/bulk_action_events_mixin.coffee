@@ -99,13 +99,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
 
     deleteAll: ->
       didDelete = (record) =>
-        record.get('deals').forEach (deal) =>
-          deal.deleteRecord()
-
-        record.get('tasks').forEach (task) =>
-          task.deleteRecord()
-
-        @get('store').commit()
+        record.deleteRelationships() if record.deleteRelationships
 
       @getController().get('checkedContent').toArray().forEach (record) ->
         record.deleteRecord()

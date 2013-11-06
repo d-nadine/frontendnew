@@ -21,13 +21,7 @@ Radium.ContactRoute = Radium.Route.extend
         @send 'closeModal'
 
         setTimeout =>
-          contact.get('deals').forEach (deal) =>
-            deal.deleteRecord()
-
-          contact.get('tasks').forEach (task) =>
-            task.deleteRecord()
-
-          @get('store').commit()
+          contact.deleteRelationships()
         , 0
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
