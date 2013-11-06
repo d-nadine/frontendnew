@@ -3,6 +3,23 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     showForm: (form) ->
       @set 'activeForm', form
 
+    checkAll: ->
+      @get('visibleContent').setEach 'isChecked', !@get('hasCheckedContent')
+
+    cancelSendEmail: ->
+      @set 'activeForm', null
+
+    showEmail: ->
+      form = @get('newEmail')
+      form.reset()
+
+      contacts = @get('checkedContent').filter((contact) ->
+        contact instanceof Radium.Contact).toArray()
+
+      form.get('to').pushObjects(contacts)
+
+      @showForm 'email'
+
   needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
@@ -126,20 +143,3 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       files: Ember.A()
       attachedFiles: Ember.A()
   ).property()
-
-  checkAll: ->
-    @get('visibleContent').setEach 'isChecked', !@get('hasCheckedContent')
-
-  cancelSendEmail: ->
-    @set 'activeForm', null
-
-  showEmail: ->
-    form = @get('newEmail')
-    form.reset()
-
-    contacts = @get('checkedContent').filter((contact) ->
-      contact instanceof Radium.Contact).toArray()
-
-    form.get('to').pushObjects(contacts)
-
-    @showForm 'email'

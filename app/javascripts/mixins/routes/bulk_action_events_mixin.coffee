@@ -67,11 +67,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       (error) =>
         @send 'flashError', error
 
-    confirmDeletion: ->
-      @render 'bulk_actions/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
     close: ->
       @render 'nothing',
         into: 'application'
@@ -103,8 +98,19 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         outlet: 'modal'
 
     deleteAll: ->
+      didDelete = (record) =>
+        record.get('deals').forEach (deal) =>
+          deal.deleteRecord()
+
+        record.get('tasks').forEach (task) =>
+          task.deleteRecord()
+
+        @get('store').commit()
+
       @getController().get('checkedContent').toArray().forEach (record) ->
         record.deleteRecord()
+
+        record.one 'didDelete', didDelete
 
       @get('store').commit()
 
@@ -123,7 +129,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
       @send 'close'
 
   getController: ->
-    if /addressbook/.test this.controller.constructor.toString()
+    if /addressbook/.test @controllerFor('application').get('currentPath')
       @controllerFor "addressbook"
     else if @controller.constructor is Radium.PipelineWorkflowController
       @controllerFor "pipelineWorkflowDeals"

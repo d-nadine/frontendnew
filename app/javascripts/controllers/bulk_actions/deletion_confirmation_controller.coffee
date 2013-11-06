@@ -1,1 +1,1 @@
-Radium.BulkActionsDeletionConfirmationController = Radium.ObjectController.extend()
+Radium.BulkActionsDeletionConfirmationController = Radium.ArrayController.extend()
