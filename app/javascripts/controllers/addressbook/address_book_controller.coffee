@@ -24,6 +24,14 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
       tagNames.addObject Ember.Object.create name: tag
 
+    displayLeads: (leads) ->
+      @get('controllers.pipelineLeads').set('filteredLeads', leads)
+      @transitionToRoute 'pipeline.leads'
+
+    displayOpenDeals: (deals) ->
+      @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
+      @transitionToRoute 'pipeline.opendeals'
+
   Radium.CheckableMixin,
   Radium.BulkActionControllerMixin,
 
@@ -121,11 +129,3 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
       return
 
     @set 'model.selectedFilter', filter
-
-  displayLeads: (leads) ->
-    @get('controllers.pipelineLeads').set('filteredLeads', leads)
-    @transitionToRoute 'pipeline.leads'
-
-  displayOpenDeals: (deals) ->
-    @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
-    @transitionToRoute 'pipeline.opendeals'
