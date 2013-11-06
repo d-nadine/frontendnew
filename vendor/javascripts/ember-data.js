@@ -1,5 +1,5 @@
-// Version: v0.14
-// Last commit: d9cd270 (2013-08-31 17:12:14 -0700)
+// Version: v0.14-1-g423da9e
+// Last commit: 423da9e (2013-11-06 17:39:55 +0000)
 
 
 (function() {
@@ -3394,7 +3394,10 @@ var DirtyState = {
     becameError: function(record) {
       record.transitionTo('error');
       record.send('invokeLifecycleCallbacks');
-    }
+    },
+
+    // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+    loadedData: Ember.K
   },
 
   // A record is in the `invalid` state when its client-side
@@ -3727,7 +3730,10 @@ var RootState = {
           t.remove(record);
         });
         record.transitionTo('loaded.materializing');
-      }
+      },
+
+      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+      loadedData: Ember.K
     },
 
     // After a record's transaction is committing, but
@@ -3752,7 +3758,10 @@ var RootState = {
         record.transitionTo('saved');
 
         record.send('invokeLifecycleCallbacks');
-      }
+      },
+
+      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
+      loadedData: Ember.K
     },
 
     // Once the adapter indicates that the deletion has
