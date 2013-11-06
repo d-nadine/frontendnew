@@ -1,9 +1,11 @@
 .single-column-container {
-  width: 100%;
-  max-width: 1200px;
-  padding: 60px 0 60px 40px;
+  padding: 60px 40px;
   margin: 0 40px;
   @include box-sizing(border-box);
+
+  .main-content {
+    max-width: none;
+  }
 
   @include breakpoint(smallscreen) {
     max-width: 724px;
