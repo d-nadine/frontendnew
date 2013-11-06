@@ -218,8 +218,9 @@
 }
 
 .meeting-form-attendees-list {
+  $width: 40px;
   li {
-    max-width: 40px;
+    max-width: $width;
     font-size: 10px;
     font-weight: bold;
     line-height: 12px;
@@ -238,5 +239,13 @@
 
   img {
     display: block;
+  }
+
+  .invitee-name {
+    max-width: $width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
   }
 }

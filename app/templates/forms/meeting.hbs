@@ -92,9 +92,9 @@
             </label>
             <ul class="inline meeting-form-attendees-list">
               {{#each attendees itemController="autocompleteItem"}}
-              <li>
+              <li {{bindAttr title="displayName"}}>
                 {{avatar this}}
-                {{displayName}}
+                <span class="invitee-name">{{displayName}}</span>
                 <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
               </li>
               {{/each}}
