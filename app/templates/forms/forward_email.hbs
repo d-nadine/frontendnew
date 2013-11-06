@@ -11,7 +11,7 @@
       <table {{bindAttr class=":addresses view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
         <tr>
           <td><label>To</label></td>
-          <td>{{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}</td>
+          <td class="forward-autocomplete">{{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}</td>
         </tr>
       </table>
     </div>

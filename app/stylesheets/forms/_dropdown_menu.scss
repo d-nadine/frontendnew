@@ -10,6 +10,8 @@
     a {
       font-weight: normal;
       line-height: 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       &:hover {
         cursor: pointer;
