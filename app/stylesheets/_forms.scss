@@ -224,18 +224,13 @@
   @include box-shadow(0 2px 1px rgba(black, 0.1));
 
   .form-row {
-    padding: 15px;
-    border-bottom: 1px solid $control-border-color;
+    padding: 20px;
+    border-bottom: 1px solid #dddddd;
 
     &:last-child,
     &:last-of-type {
       border-bottom: none;
     }
-  }
-
-  .field-group {
-    margin: 5px 0;
-    clear: both;
   }
 
   .tasks-container {
@@ -264,6 +259,11 @@
   }
 }
 
+.field-group {
+  margin: 5px 0;
+  clear: both;
+}
+
 .icon-label {
   float: left;
   margin-right: 10px;
@@ -289,7 +289,7 @@
   position: relative;
   top: 2px;
   font-size: 20px;
-  color: $muted;
+  color: #cecece;
 }
 
 .button-row {

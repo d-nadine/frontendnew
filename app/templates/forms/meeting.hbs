@@ -80,11 +80,6 @@
             </div>
           {{/unless}}
         </div>
-        {{#if calendarsOpen}}
-          <div class="field-group">
-            {{partial 'forms/existing_meetings'}}
-          </div>
-        {{/if}}
         {{#if attendees.length}}
           <div class="field-group meeting-form-attendees">
             <label class="icon-label">
@@ -93,12 +88,17 @@
             <ul class="inline meeting-form-attendees-list">
               {{#each attendees itemController="autocompleteItem"}}
               <li {{bindAttr title="displayName"}}>
-                {{avatar this}}
+                {{avatar this style="medium"}}
                 <span class="invitee-name">{{displayName}}</span>
                 <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
               </li>
               {{/each}}
             </ul>
+          </div>
+        {{/if}}
+        {{#if calendarsOpen}}
+          <div class="field-group">
+            {{partial 'forms/existing_meetings'}}
           </div>
         {{/if}}
       </div>
