@@ -1,5 +1,5 @@
-// Version: v0.14-1-g9cd7909
-// Last commit: 9cd7909 (2013-09-24 10:27:28 +0100)
+// Version: v0.14
+// Last commit: d9cd270 (2013-08-31 17:12:14 -0700)
 
 
 (function() {
@@ -3394,10 +3394,7 @@ var DirtyState = {
     becameError: function(record) {
       record.transitionTo('error');
       record.send('invokeLifecycleCallbacks');
-    },
-
-    // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-    loadedData: Ember.K
+    }
   },
 
   // A record is in the `invalid` state when its client-side
@@ -3730,10 +3727,7 @@ var RootState = {
           t.remove(record);
         });
         record.transitionTo('loaded.materializing');
-      },
-
-      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-      loadedData: Ember.K
+      }
     },
 
     // After a record's transaction is committing, but
@@ -3758,10 +3752,7 @@ var RootState = {
         record.transitionTo('saved');
 
         record.send('invokeLifecycleCallbacks');
-      },
-
-      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-      loadedData: Ember.K
+      }
     },
 
     // Once the adapter indicates that the deletion has
@@ -9837,7 +9828,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     }, function(xhr){
       // HACKERY, to just ignore server 404 errors
       // that have been deleted from cascading deletes
-      if(xhr.status == 404){
+      if(xhr.status === 404){
         adapter.didDeleteRecord(store, type, record, {});
         return;
       }
