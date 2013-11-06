@@ -3,19 +3,19 @@
     <div class="control-group">
       <label class="control-label">Name</label>
       <div class="controls">
-        {{input value=form.name classNameBindings=":field controller.isValid::is-invalid :detail" placeholder="Name"}}
+        {{view view.contactName valueBinding="form.name" classNameBindings=":field controller.isValid::is-invalid :detail" placeholder="Name"}}
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Title</label>
       <div class="controls">
-        {{input value=form.title class="field detail" placeholder="Title"}}
+        {{view view.contactTitle valueBinding="form.title" class="field detail" placeholder="Title" viewName="title"}}
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Company</label>
       <div class="controls">
-        {{view view.companyPicker class="field"}}
+        {{view view.companyPicker class="field" viewName="company"}}
       </div>
     </div>
   </div>
