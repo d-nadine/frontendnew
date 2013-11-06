@@ -15,7 +15,12 @@ Radium.CompanyRoute = Radium.Route.extend
 
       company.deleteRecord()
 
+      name = company.get('name')
+
       @get('store').commit()
+
+      @send 'flashSuccess', "The company #{name} has been deleted"
+      @transitionTo 'addressbook.filter', 'all'
 
       @render 'nothing',
         into: 'application'
