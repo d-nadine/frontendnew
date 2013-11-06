@@ -1,4 +1,20 @@
 Radium.DatePicker = Radium.View.extend
+  actions:
+    setDate: (key) ->
+      date = switch key
+        when 'today'
+          Ember.DateTime.create().atEndOfDay()
+        when 'tomorrow'
+          Ember.DateTime.create().advance(day: 1)
+        when 'this_week'
+          Ember.DateTime.create().atEndOfWeek()
+        when 'next_week'
+          Ember.DateTime.create().advance(day: 7)
+        when 'next_month'
+          Ember.DateTime.create().advance(month: 1)
+
+      @set 'text', date.toHumanFormat()
+
   templateName: 'forms/date_picker'
   classNameBindings: [
     'date:is-valid'
@@ -67,21 +83,6 @@ Radium.DatePicker = Radium.View.extend
       view.set 'text', Ember.DateTime.create(@date.getTime()).toHumanFormat()
 
       @hide()
-
-  setDate: (key) ->
-    date = switch key
-      when 'today'
-        Ember.DateTime.create().atEndOfDay()
-      when 'tomorrow'
-        Ember.DateTime.create().advance(day: 1)
-      when 'this_week'
-        Ember.DateTime.create().atEndOfWeek()
-      when 'next_week'
-        Ember.DateTime.create().advance(day: 7)
-      when 'next_month'
-        Ember.DateTime.create().advance(month: 1)
-
-    @set 'text', date.toHumanFormat()
 
   humanTextField: Ember.TextField.extend
     valueBinding: 'parentView.text'

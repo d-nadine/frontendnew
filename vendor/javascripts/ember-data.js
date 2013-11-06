@@ -9835,6 +9835,12 @@ DS.RESTAdapter = DS.Adapter.extend({
     return this.ajax(this.buildURL(root, id, record), "DELETE").then(function(json){
       adapter.didDeleteRecord(store, type, record, json);
     }, function(xhr){
+      // HACKERY, to just ignore server 404 errors
+      // that have been deleted from cascading deletes
+      if(xhr.status == 404){
+        adapter.didDeleteRecord(store, type, record, {});
+        return;
+      }
       adapter.didError(store, type, record, xhr);
       throw xhr;
     }).then(null, DS.rejectionHandler);
