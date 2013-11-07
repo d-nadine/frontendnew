@@ -18,6 +18,11 @@
   </div>
   <h1>{{account.name}} Reports – {{currentYear}}</h1>
 </div>
+{{#each controller}}
+  <button class="btn btn-link" {{action "filterByUser" user}}>
+    {{user}}
+  </button>
+{{/each}}
 
 {{partial "reports/_filter"}}
 
