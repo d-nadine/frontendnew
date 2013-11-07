@@ -3596,6 +3596,8 @@ var RootState = {
         // FLAGS
         isLoaded: false,
 
+        becomeDirty: Ember.K,
+
         exit: function(record) {
           once(function() {
             record.trigger('didLoad');

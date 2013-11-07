@@ -50,7 +50,7 @@ Radium.TodoForm = Radium.Form.extend
       typeName = result.humanize()
       deferred.reject("An error has occurred and the #{typeName} could not be created.")
 
-  bulkCommit: ->
+  bulkCommit: (deferred) ->
     typeName = @get('reference.firstObject').humanize()
 
     @get('reference').forEach (item) =>

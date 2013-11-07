@@ -3,19 +3,19 @@
     <div class="control-group">
       <label class="control-label">First Name</label>
       <div class="controls">
-        {{input value=form.firstName class="field detail" placeholder="First Name"}}
+        {{view view.userFirstName valueBinding="form.firstName" class="field detail" placeholder="First Name" viewName="firstName"}}
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Surname</label>
       <div class="controls">
-        {{input value=form.lastName class="field detail" placeholder="Surname"}}
+        {{view view.userLastName valueBinding="form.lastName" class="field detail" placeholder="Surname" tabindex="lastName"}}
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">Title</label>
       <div class="controls">
-        {{input value=form.title class="field detail" placeholder="Title"}}
+        {{view view.userTitle valueBinding="form.title" class="field detail" placeholder="title" tabindex="title"}}
       </div>
     </div>
   </div>

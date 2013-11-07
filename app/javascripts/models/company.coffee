@@ -20,3 +20,13 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+
+  clearRelationships: ->
+    @get('contacts').compact().forEach (contact) =>
+      contact.deleteRecord()
+
+    @get('tasks').compact().forEach (task) =>
+      task.deleteRecord()
+
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()

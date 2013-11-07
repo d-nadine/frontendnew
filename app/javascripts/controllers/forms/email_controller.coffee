@@ -22,6 +22,7 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
 
     submit: (form) ->
       @send 'sendEmail', form
+      false
 
   needs: ['tags','contacts','users','userSettings']
   users: Ember.computed.alias 'controllers.users'

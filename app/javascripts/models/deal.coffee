@@ -48,3 +48,12 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   isUnpublished: ( ->
     @get('status') == 'unpublished'
   ).property('status')
+
+  clearRelationships: ->
+    @get('contact.deals').removeObject(this) if @get('contact')
+
+    @get('tasks').compact().forEach (task) =>
+      task.deleteRecord()
+
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()

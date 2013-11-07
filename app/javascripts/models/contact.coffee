@@ -71,11 +71,12 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
       @get('name')
   ).property('name', 'company.name')
 
-  deleteRelationships: ->
-    @get('deals').forEach (deal) =>
+  clearRelationships: ->
+    @get('deals').compact().forEach (deal) =>
       deal.deleteRecord()
 
-    @get('tasks').forEach (task) =>
+    @get('tasks').compact().forEach (task) =>
       task.deleteRecord()
 
-    @get('store').commit()
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()

@@ -1,4 +1,6 @@
-Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
+require 'routes/mixins/send_email_mixin'
+
+Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
   actions:
     toggleChecked: ->
       controller = if @controller.constructor is Radium.PipelineWorkflowController
@@ -12,40 +14,13 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         item.set 'isChecked', !allChecked
 
     sendEmail: (form) ->
-      form.set 'isSubmitted', true
-      return unless form.get('isValid')
-
-      email = Radium.Email.createRecord form.get('data')
-
-      email.set 'sender', @controllerFor('currentUser').get('model')
-
-      email.set 'sentAt', Ember.DateTime.create()
-
-      form.set 'isSending', true
-
-      @resetForm()
-
-      @controllerFor('emailsSent').set('model', form)
-
-      email.one 'didCreate', =>
-        Ember.run.next =>
-          form.set 'isSubmitted', false
-          form.set 'isSending', false
-          @transitionTo 'emails.sent', email
-
-      email.one 'becameInvalid', =>
-        form.set 'isSending', false
-        @send 'flashError', email
-
-      email.one 'becameError', =>
-        form.set 'isSending', false
-        @send 'flashError', 'An error has occurred and the eamil has not been sent'
-
-      @store.commit()
+      @_super.apply this, arguments
 
       @render 'emails/sent',
         into: @getTemplate()
         outlet: 'confirmation'
+
+      false
 
     closeEmailConfirmation: ->
       template = if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'
@@ -82,6 +57,8 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
     deleteRecord: (record) ->
       record.deleteRecord()
 
+      @get('store').commit()
+
       @send "flashSuccess", "Record has been deleted."
 
       @send 'close'
@@ -98,27 +75,10 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         outlet: 'modal'
 
     deleteAll: ->
-      didDelete = (record) =>
-        record.deleteRelationships() if record.deleteRelationships
-
       @getController().get('checkedContent').toArray().forEach (record) ->
         record.deleteRecord()
 
-        record.one 'didDelete', didDelete
-
       @get('store').commit()
-
-      @send 'close'
-
-    confirmSingleDelete: (record) ->
-      @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
-
-      @render 'bulk_actions/single_delete_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    deleteRecord: (record) ->
-      record.deleteRecord()
 
       @send 'close'
 
