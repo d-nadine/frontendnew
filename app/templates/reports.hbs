@@ -1,5 +1,21 @@
 <div class="page-header">
   <h1>{{account.name}} Reports</h1>
 </div>
+{{#each controller}}
+  <button class="btn btn-link" {{action "filterByUser" user}}>
+    {{user}}
+  </button>
+{{/each}}
 
-{{pie-chart}}
+{{pie-chart 
+  dimension=controller.dateDimension 
+  group=controller.datesGroup
+  size="300" 
+  radius="150"
+  renderLabel=false}}
+
+{{pie-chart 
+  dimension=controller.userDimension 
+  group=controller.usersGroup
+  size="300" 
+  radius="150"}}
