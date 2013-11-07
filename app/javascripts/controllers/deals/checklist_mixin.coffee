@@ -1,10 +1,56 @@
 Radium.ChecklistMixin = Ember.Mixin.create
-  kinds: [
+  actions:
+    removeAdditionalItem: (item) ->
+      @get('checklist').removeObject item
+
+    setItemDate: (date) ->
+      @set 'newItemDate', date
+
+    setKind: (kind) ->
+      @set 'newItemKind', kind.toLowerCase()
+
+    createNewItem: ->
+      description = @get('newItemDescription')
+      weight = parseInt(@get('newItemWeight'))
+      finished = @get('newItemFinished')
+      date = @get('newItemDate') || 0
+      kind = @get('newItemKind') || 'todo'
+
+      return if Ember.isEmpty(description)
+      return if Ember.isEmpty(weight)
+
+      newItem =
+              description: description
+              weight: weight
+              isFinished: false
+              isAdditional: true 
+              kind: kind
+              date: date
+
+      newRecord = if @get('isNew')
+                    Ember.Object.create(newItem)
+                  else
+                    @get('checklist').createRecord(newItem)
+
+      if @get('isNew')
+        @get('checklist').addObject newRecord
+      else
+        @get('store').commit()
+
+      @set('newItemDescription', '')
+      @set('newItemWeight', '')
+      @set('newItemFinished', false)
+      @set('newItemDate', 0)
+      @set('newItemKind', 'todo')
+
+  kinds: Ember.A([
     "todo"
     "meeting"
     "call"
-  ]
+  ])
+
   dateMap: Ember.Map.create()
+
   init: ->
     @_super.apply this, arguments
     dateMap = @get 'dateMap'
@@ -16,46 +62,3 @@ Radium.ChecklistMixin = Ember.Mixin.create
   selectedDateText: ( ->
     @get('dateMap').get(@get('newItemDate'))
   ).property('newItemDate')
-
-  removeAdditionalItem: (item) ->
-    @get('checklist').removeObject item
-
-  setItemDate: (date) ->
-    @set 'newItemDate', date
-
-  setKind: (kind) ->
-    @set 'newItemKind', kind.toLowerCase()
-
-  createNewItem: ->
-    description = @get('newItemDescription')
-    weight = parseInt(@get('newItemWeight'))
-    finished = @get('newItemFinished')
-    date = @get('newItemDate')
-    kind = @get('newItemKind')
-
-    return if Ember.isEmpty(description)
-    return if Ember.isEmpty(weight)
-
-    newItem =
-            description: description
-            weight: weight
-            isFinished: false
-            isAdditional: true 
-            kind: kind
-            date: date
-
-    newRecord = if @get('isNew')
-                  Ember.Object.create(newItem)
-                else
-                  @get('checklist').createRecord(newItem)
-
-    if @get('isNew')
-      @get('checklist').addObject newRecord
-    else
-      @get('store').commit()
-
-    @set('newItemDescription', '')
-    @set('newItemWeight', '')
-    @set('newItemFinished', false)
-    @set('newItemDate', 0)
-    @set('newItemKind', 'todo')

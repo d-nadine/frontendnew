@@ -29,8 +29,8 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                {{#each controller.kinds}}
-                  <li><a href="#" {{action setKind this}}>{{this}}</a></li>
+                {{#each kind in controller.kinds}}
+                  <li><a href="#" {{action setKind kind}}>{{kind}}</a></li>
                 {{/each}}
               </ul>
             </div>

@@ -5,6 +5,11 @@ Radium.ChecklistItemMixin = Ember.Mixin.create(Ember.TargetActionSupport,
 )
 
 Radium.ChecklistView = Ember.View.extend
+  actions:
+    createNewItem: ->
+      @get('controller').send 'createNewItem'
+      @get('itemDescription').$().focus()
+
   templateName: 'deals/checklist'
 
   newItemDescription: Ember.TextField.extend Radium.ChecklistItemMixin,
@@ -25,7 +30,3 @@ Radium.ChecklistView = Ember.View.extend
 
     (description.length > 0)
   ).property('controller.newItemDescription', 'controller.newItemWeight')
-
-  createNewItem: ->
-    @get('controller').createNewItem()
-    @get('itemDescription').$().focus()
