@@ -180,14 +180,13 @@
   }
 
   .location-picker-control-box {
-    padding-right: 50px;
+    
   }
 
   .map-link {
     position: absolute;
-    position: absolute;
     top: 0;
-    right: 0;
+    left: 100%;
     z-index: 9;
   }
 
