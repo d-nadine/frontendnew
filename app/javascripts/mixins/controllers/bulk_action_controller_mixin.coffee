@@ -131,7 +131,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   ).property('model.[]', 'tomorrow')
 
   newEmail: (->
-    Radium.EmailForm.create
+    Radium.NewEmailForm.create
       showAddresses: true
       showSubject: true
       showEmailCancel: true

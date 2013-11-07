@@ -14,7 +14,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
         item.set 'isChecked', !allChecked
 
     sendEmail: (form) ->
-      @_super form
+      @_super.apply this, arguments
 
       @render 'emails/sent',
         into: @getTemplate()
