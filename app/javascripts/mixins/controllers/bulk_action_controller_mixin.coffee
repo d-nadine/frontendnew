@@ -18,7 +18,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
       form.get('to').pushObjects(contacts)
 
-      @showForm 'email'
+      @send 'showForm', 'email'
 
   needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
