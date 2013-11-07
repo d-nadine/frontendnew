@@ -22,7 +22,7 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   clearRelationships: ->
-    @get('companies').forEach (task) =>
+    @get('contacts').forEach (task) =>
       task.deleteRecord()
 
     @get('tasks').forEach (task) =>

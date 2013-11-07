@@ -82,6 +82,8 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
     deleteRecord: (record) ->
       record.deleteRecord()
 
+      @get('store').commit()
+
       @send "flashSuccess", "Record has been deleted."
 
       @send 'close'
@@ -102,18 +104,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create
         record.deleteRecord()
 
       @get('store').commit()
-
-      @send 'close'
-
-    confirmSingleDelete: (record) ->
-      @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
-
-      @render 'bulk_actions/single_delete_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    deleteRecord: (record) ->
-      record.deleteRecord()
 
       @send 'close'
 
