@@ -12,9 +12,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   isPublic: Ember.computed.not 'isUnpublished'
   statusDisabled: Ember.computed.not('isPublic')
 
-  # FIXME: this should be null and not an empty string
-  deletionToken: ''
-
   # FIXME: How do we determine this?
   isEditable: true
 
@@ -85,10 +82,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
     @set 'status', status
 
     @get('store').commit()
-
-  deletionNotConfirmed: (->
-    @get('deletionToken') isnt @get('name')
-  ).property('deletionToken')
 
   dealProgressClass: (->
     "status-#{@get('status')}"
