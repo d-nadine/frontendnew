@@ -1,0 +1,6 @@
+{{#unless isUploading}}
+  {{avatar model size=medium}}
+  {{view view.fileUploader}}
+{{else}}
+  {{partial 'is_uploading'}}
+{{/unless}}

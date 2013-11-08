@@ -36,11 +36,16 @@ Radium.InlineEditorView = Ember.View.extend
   click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
-
-    unless @get('isEditing')
+    if evt.target?.type == 'file'
       event.stopPropagation()
-      @send 'toggleEditor'
       return
+
+    if evt.target?.type == 'file'
+      event.stopPropagation()
+      event.preventDefault()
+      $(evt.target).click()
+      event.stopPropagation()
+      return false
 
     tagName = evt.target.tagName.toLowerCase()
 

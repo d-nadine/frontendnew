@@ -9,7 +9,7 @@
       {{#unless isUploading}}
         <i class="ss-standard ss-delete"></i>
       {{else}}
-        <img src="/images/ajax-loader.gif"/> <span class="muted">uploading...</span>
+        {{partial 'is_uploading'}}
       {{/unless}}
     </button>
   </div>

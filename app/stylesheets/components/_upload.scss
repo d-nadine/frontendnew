@@ -2,28 +2,48 @@ input[type=file]{
   margin-left: 2em;
   width: 110px;
   height: 27px;
+  margin: 0;
+  position: relative;
+  color: transparent;
+  cursor: pointer;
 
-  &.upload-button {
-    margin: 0;
-    position: relative;
-    color: transparent;
-    cursor: pointer;
+  &.upload-button, &.avatar-upload {
+    &.upload-button {
+      &:before {
+        content: 'Select some files';
+        position: absolute;
+        line-height: 18px;
+        padding: 4px 0;
+        white-space: nowrap;
+        cursor: pointer;
+        background-color: #fff;
+        color: #000;
+        @include user-select(none);
 
-    &:before {
-      content: 'Select some files';
-      position: absolute;
-      line-height: 18px;
-      padding: 4px 0;
-      white-space: nowrap;
-      cursor: pointer;
-      background-color: #fff;
-      color: #000;
-      @include user-select(none);
-
-      .sidebar-panel-header & {
-        background-color: #e8e8e8;
+        .sidebar-panel-header & {
+          background-color: #e8e8e8;
+        }
       }
     }
+
+    &.avatar-upload {
+      &:before {
+        content: 'Select avatar';
+        position: absolute;
+        line-height: 18px;
+        padding: 4px 0;
+        white-space: nowrap;
+        cursor: pointer;
+        background-color: #fff;
+        color: #000;
+        @include user-select(none);
+
+        .sidebar-panel-header & {
+          background-color: #e8e8e8;
+        }
+      }
+    }
+
 
     &,
     &:active,

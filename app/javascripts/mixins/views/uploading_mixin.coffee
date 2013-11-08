@@ -5,6 +5,9 @@ Radium.UploadingMixin = Ember.Mixin.create
   didInsertElement: ->
     @_super.apply this, arguments
     url = "#{@get('controller.store._adapter.url')}/uploads"
+    @setUploader(url)
+
+  setUploader: (url) ->
     @set('uploader', Ember.Uploader.create
                         url: url,
                         model: @get('controller.model'),
@@ -12,6 +15,8 @@ Radium.UploadingMixin = Ember.Mixin.create
 
     @get('uploader').on('didUpload', this, 'onDidUpload')
     @get('uploader').on('progress', this, 'onDidProgress')
+    @get('uploader')
+
 
   fileUploader: Ember.FileField.extend
     change: (e) ->

@@ -1,6 +1,9 @@
 {{#if isEditing}}
   <div class="contact-detail">
     <div class="control-group">
+      {{upload-avatar model=model finishedUpload='stopEditing'}}
+    </div>
+    <div class="control-group">
       <label class="control-label">First Name</label>
       <div class="controls">
         {{view view.userFirstName valueBinding="form.firstName" class="field detail" placeholder="First Name" viewName="firstName"}}
