@@ -1,5 +1,9 @@
 {{#unless isUploading}}
-  {{avatar model size=medium}}
+  {{#if isLargeAvatar}}
+    {{avatar model size="large"}}
+  {{else}}
+    {{avatar model size="medium"}}
+  {{/if}}
   {{view view.fileUploader}}
 {{else}}
   {{partial 'is_uploading'}}

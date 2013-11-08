@@ -5,13 +5,17 @@
       <a href="#" class="btn btn-small" {{action toggleEdit}}>Edit</a>
     </div>
     <div class="user-edit-avatar">
-      <button class="btn btn-mini user-change-avatar">
+      <button class="btn btn-mini user-change-avatar" {{action toggleAvatar}}>
         <i class="ss-standard ss-write"></i>
       </button>
-      {{#if isLoaded}}
-        {{avatar this size=large class="img-polaroid"}}
+      {{#if controller.isEditingAvatar}}
+        {{upload-avatar model=controller.currentUser avatarsize="large" finishedUpload='toggleAvatar'}}
       {{else}}
-        {{partial 'is_loading'}}
+        {{#if isLoaded}}
+          {{avatar this size="large" class="img-polaroid"}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
       {{/if}}
     </div>
     <div class="controls settings-user-details">
@@ -36,7 +40,7 @@
       </div>
       <div class="control-group">
         <label class="control-label">Phone</label>
-        {{view view.phone placeholder="Phone Number" class="user-phone" disabledBinding=isSaving}}
+        {{view view.phone placeholder="Phone Number" class="user-phone" disabledBinding="isSaving"}}
       </div>
     </div>
   </fieldset>
@@ -47,7 +51,7 @@
         <i class="ss-standard ss-write blue"></i> Signature
       </label>
       <div class="controls">
-        {{textarea rows="3" cols="15" value=settings.signature disabledBinding=settings.isSaving}}
+        {{textarea rows="3" cols="15" value=settings.signature disabledBinding="settings.isSaving"}}
       </div>
     </div>
   </fieldset>
