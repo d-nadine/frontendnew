@@ -1,0 +1,68 @@
+.reports-filter {
+  $bg: #dbdbdb;
+  padding: 15px;
+  overflow: hidden;
+  background: $bg;
+
+  input[type="text"] {
+    margin: 0;
+  }
+
+  .option {
+    margin-right: -3px;
+    padding: 5px 20px;
+    display: inline-block;
+    border-right: 1px solid darken($bg, 10%);
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.report-section {
+  margin: 0 0 50px;
+  overflow: hidden;
+  clear: both;
+}
+
+.report-section-total {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+// Reports overview
+.report-overview {
+  .summary {
+    width: 25%;
+    padding: 0 15px;
+    float: left;
+    @include box-sizing(border-box);
+  }
+
+  .infographic {
+    height: 150px;
+    margin: 0 0 20px;
+    text-align: center;
+    border-bottom: 1px solid $muted;
+
+    i {
+      margin: 0 0 10px;
+      display: inline-block;
+      font-size: 25px;
+      line-height: 30px;
+    }
+  }
+
+  .summary-details {
+    > * {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+// Anchors have some height to them to account for the fixed navbar
+.report-anchor {
+  height: 60px;
+  display: block;
+}

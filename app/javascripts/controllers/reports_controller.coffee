@@ -19,5 +19,13 @@ Radium.ReportsController = Ember.ArrayController.extend
     )
 
   actions:
-    filterByUser: (user) ->
-      console.log(user)
+    reset: ->
+      @get('userDimension').filter()
+      @get('dateDimension').filter()
+      dc.redrawAll()
+
+    filterByQuarter: (quarter) ->
+      dates = [new Date(2013, 5, 1), new Date(2013, 8, 30)]
+      @get('userDimension').filter(dates)
+      @get('dateDimension').filter(null)
+      dc.redrawAll()

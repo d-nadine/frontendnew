@@ -1,21 +1,212 @@
 <div class="page-header">
+  <div class="pull-right">
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{input value=model.searchText type="text" class="field search-text"}}
+    </form>
+    <div class="btn-group">
+      <button class="btn btn-main address-book-button" >Actions</button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li>
+            <a href="#">Report Action</a>
+          </li>
+      </ul>
+    </div>
+  </div>
   <h1>{{account.name}} Reports</h1>
 </div>
-{{#each controller}}
-  <button class="btn btn-link" {{action "filterByUser" user}}>
-    {{user}}
-  </button>
-{{/each}}
 
-{{pie-chart 
-  dimension=controller.dateDimension 
-  group=controller.datesGroup
-  size="300" 
-  radius="150"
-  renderLabel=false}}
+<div class="reports-filter">
+  <div class="option">
+    Time Period <input type="text" name="" id="">
+  </div>
+  <div class="option">
+    <button class="btn">This month</button>
+  </div>
+  <div class="option">
+    <button class="btn">Quarterly</button>
+  </div>
+  <div class="option">
+    <button class="btn">Yearly</button>
+  </div>
+  <div class="option">
+    <button class="btn">By Person</button>    
+  </div>
+  <div class="option">
+    <button class="btn">By Company</button>
+  </div>
+</div>
 
-{{pie-chart 
-  dimension=controller.userDimension 
-  group=controller.usersGroup
-  size="300" 
-  radius="150"}}
+<div class="report-section report-overview">
+  <div class="page-header">
+    <h4>Overview</h4>
+  </div>
+  <div class="report-content">
+    <div class="summary">
+      <div class="infographic">
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user"></i>
+        <i class="ss-symbolicons ss-user green"></i>
+        <i class="ss-symbolicons ss-user green"></i>
+        <i class="ss-symbolicons ss-user green"></i>
+        <i class="ss-symbolicons ss-user green"></i>
+      </div>
+      <div class="text-center summary-details">
+        <h2>26 leads</h2>
+        <h4>
+          80%<br>
+          <small>Lead close rate</small>
+        </h4>
+        <h4>
+          <i class="ss-symbolicons ss-user green"></i> Up 5%<br>
+          <small>Compared to last month</small>
+        </h4>
+        <a href="#report-leads" class="btn">More</a>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="infographic">
+        <i class="ss-standard ss-briefcase"></i>
+        <i class="ss-standard ss-briefcase"></i>
+        <i class="ss-standard ss-briefcase"></i>
+        <i class="ss-standard ss-briefcase green"></i>
+        <i class="ss-standard ss-briefcase green"></i>
+      </div>
+      <div class="text-center summary-details">
+        <h2>1 Negotiating</h2>
+        <h4>
+          80%<br>
+          <small>Negotiating close rate</small>
+        </h4>
+        <h4>
+          <i class="ss-standard ss-briefcase text-error"></i> Down 5%<br>
+          <small>Compared to last month</small>
+        </h4>
+        <a href="#report-deals" class="btn">More</a>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="infographic">
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill"></i>
+        <i class="ss-symbolicons ss-bill green"></i>
+        <i class="ss-symbolicons ss-bill green"></i>
+        <i class="ss-symbolicons ss-bill green"></i>
+        <i class="ss-symbolicons ss-bill green"></i>
+        <i class="ss-symbolicons ss-bill green"></i>
+      </div>
+      <div class="text-center summary-details">
+        <h2>20 Closed</h2>
+        <h4>
+          20 deals<br>
+          <small>$28, 000.00</small>
+        </h4>
+        <h4>
+          <i class="ss-standard ss-up green"></i> Up 5%<br>
+          <small>from last year</small>
+        </h4>
+        <a href="#report-closed" class="btn">More</a>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="infographic">
+        <i class="ss-symbolicons ss-deletefile"></i>
+        <i class="ss-symbolicons ss-deletefile"></i>
+      </div>
+      <div class="text-center summary-details">
+        <h2>1 Lost</h2>
+        <h4>
+          1 deal<br>
+          <small>$28, 000.00</small>
+        </h4>
+        <h4>
+          <i class="ss-standard ss-up text-error"></i> Up 5%<br>
+          <small>Average number of lost deals a month</small>
+        </h4>
+        <a href="#report-lost" class="btn">More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a name="report-leads" id="report-leads" class="report-anchor">&nbsp;</a>
+<section  class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      $100.00
+    </div>
+    <h4>Leads</h4>
+  </div>
+
+  {{pie-chart 
+    dimension=controller.userDimension 
+    group=controller.usersGroup
+    size="300" 
+    radius="150"}}
+</section>
+
+<a name="report-deals" id="report-deals" class="report-anchor">&nbsp;</a>
+<section class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      24 deals
+    </div>
+    <h4>Deals</h4>
+  </div>
+
+  {{pie-chart 
+    dimension=controller.dateDimension 
+    group=controller.datesGroup
+    size="300" 
+    radius="150"}}
+</section>
+
+<a name="report-closed" id="report-closed" class="report-anchor">&nbsp;</a>
+<section class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      24 deals
+    </div>
+    <h4>Closed Deals</h4>
+  </div>
+
+  {{pie-chart 
+    dimension=controller.dateDimension 
+    group=controller.datesGroup
+    size="300" 
+    radius="150"}}
+</section>
+
+<a name="report-lost" id="report-lost" class="report-anchor">&nbsp;</a>
+<section class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      2 deals
+    </div>
+    <h4>Lost Deals</h4>
+  </div>
+
+  {{pie-chart 
+    dimension=controller.dateDimension 
+    group=controller.datesGroup
+    size="300" 
+    radius="150"}}
+</section>

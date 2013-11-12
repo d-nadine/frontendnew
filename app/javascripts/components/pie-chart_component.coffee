@@ -1,15 +1,12 @@
-Radium.PieChartComponent = Ember.Component.extend
+require 'mixins/components/chart_component_mixin'
+
+Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
+  type: 'pieChart'
   size: 100
   radius: 50
-  dimension: null
-  group: null
-  renderLabel: true
 
-  initChart: (->
-    chart = dc.pieChart(@$()[0])
-    @set('chart', chart)
-    @renderChart()
-  ).on('didInsertElement')
+  refresh: ->
+    @get('chart').refresh()
 
   renderChart: ->
     chart = @get 'chart'
