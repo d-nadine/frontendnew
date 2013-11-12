@@ -180,7 +180,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     )
 
   actions:
-
     linkToPipeline: (state) ->
       if state == 'closed'
         this.transitionToRoute('pipeline.closed')
@@ -253,4 +252,5 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('year').filter([start, end])
       @setDates(start, end)
       @calcSums()
+
       dc.redrawAll()
