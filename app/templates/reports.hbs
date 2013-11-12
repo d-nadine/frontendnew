@@ -188,11 +188,11 @@
     <h4>Closed Deals</h4>
   </div>
 
-  {{pie-chart 
-    dimension=controller.dateDimension 
-    group=controller.datesGroup
-    size="300" 
-    radius="150"}}
+  {{bar-chart 
+    dimension=controller.totalDimension 
+    group=controller.totalsGroup
+    width="800"
+    height="400"}}
 </section>
 
 <a name="report-lost" id="report-lost" class="report-anchor">&nbsp;</a>

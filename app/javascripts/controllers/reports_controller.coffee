@@ -9,6 +9,8 @@ Radium.ReportsController = Ember.ArrayController.extend
     dates = date.group()
     user = data.dimension (d) -> d.user
     users = user.group()
+    total = data.dimension (d) -> d.total
+    totals = total.group()
 
     @setProperties(
       crossfilter: data
@@ -16,6 +18,8 @@ Radium.ReportsController = Ember.ArrayController.extend
       datesGroup: dates
       userDimension: user
       usersGroup: users
+      totalDimension: total
+      totalsGroup: totals
     )
 
   actions:
