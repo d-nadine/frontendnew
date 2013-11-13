@@ -1,10 +1,18 @@
 {{#each files}}
   <div class="upload-file">
-    {{#unless isUploading}}
-      <a href="{{unbound attachment.url}}" target="_new" class="uploaded-file">{{name}} ({{size}})</a>
+    {{#if name}}
+      {{#unless isUploading}}
+        <a href="{{unbound attachment.url}}" target="_new" class="uploaded-file">{{name}} ({{size}})</a>
+      {{else}}
+        {{name}} ({{size}})
+      {{/unless}}
     {{else}}
-      {{name}} ({{size}})
-    {{/unless}}
+        {{#if attachment.isLoaded}}
+        <a href="{{unbound attachment.url}}" target="_new" class="uploaded-file">{{attachment.fileName}}</a>
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
+    {{/if}}
     <button type="button" {{action removeFile this}} class="close">
       {{#unless isUploading}}
         <i class="ss-standard ss-delete"></i>
