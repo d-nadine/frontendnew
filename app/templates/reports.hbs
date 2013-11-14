@@ -19,7 +19,7 @@
   <h1>{{account.name}} Reports</h1>
 </div>
 
-<div class="reports-filter">
+<div id="master-filter" class="reports-filter">
   <div class="option">
     Time Period <input type="text" name="" id="">
   </div>
@@ -27,7 +27,18 @@
     <button class="btn">This month</button>
   </div>
   <div class="option">
-    <button class="btn" {{action "filterByQuarter" "Q4"}}>Quarterly</button>
+    <div class="btn-group">
+      <button class="btn">Quarterly</button>
+      <div class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" {{action "filterByQuarter" "Q1"}}>Q1</a></li>
+        <li><a href="#" {{action "filterByQuarter" "Q2"}}>Q2</a></li>
+        <li><a href="#" {{action "filterByQuarter" "Q3"}}>Q3</a></li>
+        <li><a href="#" {{action "filterByQuarter" "Q4"}}>Q4</a></li>
+      </ul>
+    </div>
   </div>
   <div class="option">
     <button class="btn">Yearly</button>
@@ -162,6 +173,7 @@
     size="300" 
     radius="150"}}
 </section>
+
 <a name="report-leads" id="report-leads" class="report-anchor">&nbsp;</a>
 <section  class="report-section">
   <div class="page-header">
@@ -172,8 +184,9 @@
   </div>
 
   {{bar-chart 
-    dimension=controller.userDimension 
-    group=controller.usersGroup
+    dimension=controller.leadDimension 
+    group=controller.leadsGroup
+    domain=controller.leadsDomain
     width="800"
     height="400"}}
 </section>

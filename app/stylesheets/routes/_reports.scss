@@ -1,8 +1,16 @@
 .reports-filter {
   $bg: #dbdbdb;
   padding: 15px;
-  overflow: hidden;
   background: $bg;
+
+  .pin-filter & {
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    left: 40px;
+    z-index: 9999;
+    @include box-shadow(0 2px 2px rgba(black, 0.2));
+  }
 
   input[type="text"] {
     margin: 0;
