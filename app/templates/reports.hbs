@@ -27,13 +27,13 @@
     <button class="btn">This month</button>
   </div>
   <div class="option">
-    <button class="btn">Quarterly</button>
+    <button class="btn" {{action "filterByQuarter" "Q4"}}>Quarterly</button>
   </div>
   <div class="option">
     <button class="btn">Yearly</button>
   </div>
   <div class="option">
-    <button class="btn">By Person</button>    
+    <button class="btn" {{action "filterByUser" "Paul"}}>By Person</button>    
   </div>
   <div class="option">
     <button class="btn">By Company</button>
@@ -147,13 +147,13 @@
   </div>
 </div>
 
-<a name="report-leads" id="report-leads" class="report-anchor">&nbsp;</a>
+<a name="report-sales" id="report-sales" class="report-anchor">&nbsp;</a>
 <section  class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
       $100.00
     </div>
-    <h4>Leads</h4>
+    <h4>Sales</h4>
   </div>
 
   {{pie-chart 
@@ -161,6 +161,21 @@
     group=controller.usersGroup
     size="300" 
     radius="150"}}
+</section>
+<a name="report-leads" id="report-leads" class="report-anchor">&nbsp;</a>
+<section  class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      24 Leads
+    </div>
+    <h4>Leads</h4>
+  </div>
+
+  {{bar-chart 
+    dimension=controller.userDimension 
+    group=controller.usersGroup
+    width="800"
+    height="400"}}
 </section>
 
 <a name="report-deals" id="report-deals" class="report-anchor">&nbsp;</a>
@@ -172,11 +187,11 @@
     <h4>Deals</h4>
   </div>
 
-  {{pie-chart 
+  {{bar-chart 
     dimension=controller.dateDimension 
     group=controller.datesGroup
-    size="300" 
-    radius="150"}}
+    width="800"
+    height="400"}}
 </section>
 
 <a name="report-closed" id="report-closed" class="report-anchor">&nbsp;</a>
@@ -204,9 +219,9 @@
     <h4>Lost Deals</h4>
   </div>
 
-  {{pie-chart 
+  {{bar-chart 
     dimension=controller.dateDimension 
     group=controller.datesGroup
-    size="300" 
-    radius="150"}}
+    width="800"
+    height="400"}}
 </section>
