@@ -13,14 +13,13 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
     @$('input[type=text]').val(resource.get('name')) if @$('input[type=text]')
 
   selectedFilterText: ( ->
-    return 'Filter' if @get('controller.additionalFilterDisabled')
     additionalFilter = @get('controller.model.additionalFilter')
 
     return 'Filter' unless additionalFilter
 
     filter = @get('controller.filters').findProperty('name', additionalFilter)
     filter.text if filter
-  ).property('controller.model.additionalFilter', 'controller.additionalFilterDisabled')
+  ).property('controller.model.additionalFilter')
 
   bulkLeader: ( ->
     form = @get('controller.activeForm')

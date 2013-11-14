@@ -1,0 +1,44 @@
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <ul class="nav nav-tabs">
+      {{#each categories}}
+        <li>
+          {{#linkTo "addressbook.filter" name}}
+            {{#if isPrivate}}<i class="ss-standard ss-lock"></i> {{/if}}
+            {{text}}
+          {{/linkTo}}
+        </li>
+      {{/each}}
+      <li>
+        {{#linkTo "externalcontacts"}}
+          <i class="ss-standard ss-lock"></i>
+          Google Contacts
+        {{/linkTo}}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="page-header">
+  <h1>Address Book</h1>
+  <div class="address-book-controls">
+    <div class="pull-right">
+      <form class="form-search pipeline-search">
+        <i class="ss-symbolicons-block ss-search"></i>
+        {{input value=model.searchText type="text" class="field search-text"}}
+      </form>
+      {{#linkTo "leads.new" class="btn btn-main btn-primary"}}
+        <i class="ss-standard ss-plus"></i> Contact
+      {{/linkTo}}
+    </div>
+  </div>
+</div>
+<div class="search-result-list">
+  {{#unless model.length}}
+    <div class="alert alert-info text-center">
+      <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
+    </div>
+  {{else}}
+    <h3>You have contacts</h3>
+  {{/unless}}
+</div>
+ 

@@ -63,6 +63,8 @@ Radium.Router.map ->
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:company_id/employees'
 
+  @resource 'externalcontacts'
+
   @resource 'settings', ->
     @route 'profile'
     @route 'company'
