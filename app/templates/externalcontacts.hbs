@@ -38,7 +38,32 @@
       <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
     </div>
   {{else}}
-    <h3>You have contacts</h3>
+    {{#each model}}
+      <div class="search-result-list-item row-fluid">
+        <div class="span2 checkers">
+          {{check-box checked=isChecked class="checker-block"}}
+          <div class="pull-right">
+            {{#if isLoaded}}
+              {{avatar this size=medium class="img-polaroid"}}
+            {{else}}
+              {{partial 'is_loading'}}
+            {{/if}}
+          </div>
+        </div>
+        <div class="span2 name">
+          <div class="clearfix search-list-item-title">
+            <h4 class="title">
+              {{displayName}}
+            </h4>
+            <div class="title muted">{{title}}</div>
+            {{#if company}}
+              <div class="company">
+                {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
   {{/unless}}
 </div>
- 
