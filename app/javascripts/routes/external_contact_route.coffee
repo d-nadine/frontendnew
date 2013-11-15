@@ -6,4 +6,3 @@ Radium.ExternalcontactsRoute = Radium.Route.extend
     controller.send 'reset'
     controller.send 'showMore'
     controller.send 'showMore'
-    # Radium.ExternalContact.find controller.queryParams()

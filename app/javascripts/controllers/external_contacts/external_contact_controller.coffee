@@ -1,6 +1,6 @@
 Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   needs: ['addressbook']
-  page: 1
+  page: 0
   allPagesLoaded: false
   pageSize: 10
   loadingType: Radium.ExternalContact
@@ -47,6 +47,9 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
     pageSize = @get('pageSize')
     userId = @get('currentUser.id')
     page = @get('page')
+
+    if page < 1
+      paget = 1
 
     page: page
     page_size: pageSize
