@@ -21,8 +21,11 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
     return if @get('isLoading')
     @sendAction 'getMore'
 
+  dontScroll: ->
+    @isDestroyed || @isDestroying || @get('allLoaded')
+
   isScrolledToTheBottom: ->
-    return if @isDestroyed || @isDestroying || @get('allLoaded')
+    return if @dontScroll()
 
     viewportBottom = $('.viewport').offset().top + $('.viewport').height()
 

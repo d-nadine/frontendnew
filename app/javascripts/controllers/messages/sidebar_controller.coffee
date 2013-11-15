@@ -1,4 +1,4 @@
-Radium.MessagesSidebarController = Radium.ArrayController.extend
+Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   needs: ['messages', 'application', 'emailsShow', 'messagesDiscussion']
   page: 0
   allPagesLoaded: false
@@ -29,42 +29,15 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend
         else if discussion = @get('controllers.messagesDiscussion')
           @send 'selectItem', discussion
 
-    showMore: ->
-      return if @get('allPagesLoaded')
-
-      @set('isLoading', true)
-
-      page = @get('page') + 1
-
-      @set('page', page)
-
-      queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: page)
-
-      Radium.Email.find(queryParams).then (emails) =>
-        content = @get('content')
-
-        meta = emails.store.typeMapFor(Radium.Email).metadata
-        @set('totalRecords', meta.totalRecords)
-        @set('allPagesLoaded', meta.isLastPage)
-
-        unless emails.get('length')
-          @set('isLoading', false)
-          if page > meta.totalPages
-            @set 'allPagesLoaded', true
-          return
-
-        ids = content.map (email) -> email.get('id')
-
-        emails.toArray().forEach (email) ->
-          content.pushObject(email) unless ids.contains(email.get('id'))
-          ids.push email.get('id')
-
-        @set('isLoading', false)
-
     reset: ->
       @set('page', 0)
       @set('allPagesLoaded', false)
       @set('isLoading', false)
+
+  modelQuery: ->
+    queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: @get('page'))
+
+    Radium.Email.find(queryParams)
 
   isSearchOpen: false
 
