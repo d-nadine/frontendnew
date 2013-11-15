@@ -12,6 +12,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   renderChart: ->
     chart = @get 'chart'
     domain = @get 'domain'
+    valueAccessor = @get 'valueAccessor'
 
     chart
       .width(@get('width'))
@@ -21,6 +22,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .x(d3.time.scale().domain(domain))
       .round(d3.time.month.round)
       .xUnits(d3.time.months)
+      .valueAccessor((d) -> d.value[valueAccessor])
       .renderLabel(@get('renderLabel'))
     chart.render()
 

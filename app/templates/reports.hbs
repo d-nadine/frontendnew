@@ -24,7 +24,7 @@
     Time Period <input type="text" name="" id="">
   </div>
   <div class="option">
-    <button class="btn">This month</button>
+    <button class="btn" {{action "filterThisMonth"}}>This month</button>
   </div>
   <div class="option">
     <div class="btn-group">
@@ -48,6 +48,9 @@
   </div>
   <div class="option">
     <button class="btn">By Company</button>
+  </div>
+  <div class="option">
+    <button class="btn" {{action "reset"}}>Reset</button>
   </div>
 </div>
 
@@ -184,9 +187,10 @@
   </div>
 
   {{bar-chart 
-    dimension=controller.leadDimension 
-    group=controller.leadsGroup
+    dimension=controller.dealDimension 
+    group=controller.dealsGroup
     domain=controller.leadsDomain
+    valueAccessor="leads"
     width="800"
     height="400"}}
 </section>
@@ -201,8 +205,10 @@
   </div>
 
   {{bar-chart 
-    dimension=controller.dateDimension 
-    group=controller.datesGroup
+    dimension=controller.dealDimension 
+    group=controller.dealsGroup
+    domain=controller.leadsDomain
+    valueAccessor="deals"
     width="800"
     height="400"}}
 </section>
@@ -217,8 +223,10 @@
   </div>
 
   {{bar-chart 
-    dimension=controller.totalDimension 
-    group=controller.totalsGroup
+    dimension=controller.dealDimension 
+    group=controller.dealsGroup
+    domain=controller.leadsDomain
+    valueAccessor="closed"
     width="800"
     height="400"}}
 </section>
@@ -233,8 +241,10 @@
   </div>
 
   {{bar-chart 
-    dimension=controller.dateDimension 
-    group=controller.datesGroup
+    dimension=controller.dealDimension 
+    group=controller.dealsGroup
+    domain=controller.leadsDomain
+    valueAccessor="lost"
     width="800"
     height="400"}}
 </section>
