@@ -3,6 +3,7 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
   page: 1
   allPagesLoaded: false
   pageSize: 20
+  loadingType: Radium.ExternalContact
 
   categories: Ember.computed.alias 'controllers.addressbook.categories'
 

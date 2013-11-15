@@ -2,6 +2,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   needs: ['messages', 'application', 'emailsShow', 'messagesDiscussion']
   page: 0
   allPagesLoaded: false
+  loadingType: Radium.Email
 
   applicationController: Ember.computed.alias 'controllers.application'
   content: Ember.computed.alias 'controllers.messages'

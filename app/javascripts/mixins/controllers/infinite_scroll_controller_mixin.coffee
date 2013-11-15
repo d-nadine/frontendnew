@@ -12,7 +12,7 @@ Radium.InfiniteScrollControllerMixin = Ember.Mixin.create
       @modelQuery().then (records) =>
         content = @get('content')
 
-        meta = records.store.typeMapFor(Radium.record).metadata
+        meta = records.store.typeMapFor(@loadingType).metadata
         @set('totalRecords', meta.totalRecords)
         @set('allPagesLoaded', meta.isLastPage)
 
@@ -29,5 +29,3 @@ Radium.InfiniteScrollControllerMixin = Ember.Mixin.create
           ids.push record.get('id')
 
         @set('isLoading', false)
-
-
