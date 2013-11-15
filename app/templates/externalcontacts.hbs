@@ -34,9 +34,13 @@
 </div>
 <div class="search-result-list">
   {{#unless model.length}}
+    {{#if isLoading}}
+      {{partial 'is_loading'}}
+    {{else}}
     <div class="alert text-center">
       <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
     </div>
+    {{/if}}
   {{else}}
     {{#if hasNewPipelineDeal}}
     <div class="alert">

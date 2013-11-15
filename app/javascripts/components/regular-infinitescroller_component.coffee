@@ -11,4 +11,4 @@ Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.exten
 
     difference = (viewPortTop - distanceToViewportTop)
 
-    return true if difference > 0 && difference < 5
+    return true if difference > 0 && difference < 30
