@@ -23,7 +23,6 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
             delta = deals.toArray().reject (record) =>
                       existingDeals.contains(record)
 
-            debugger
             deal = delta.get('firstObject')
             @get('controllers.addressbook.model').pushObject(deal.get('contact'))
             @set 'newPipelineDeal', deal
