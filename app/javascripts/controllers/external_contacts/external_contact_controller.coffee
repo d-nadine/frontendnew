@@ -7,6 +7,9 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
   categories: Ember.computed.alias 'controllers.addressbook.categories'
 
   actions:
+    promote: (model, state) ->
+      #do stuff
+
     reset: ->
       @set('page', 1)
 
