@@ -16,7 +16,7 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
       existingDeals = Radium.Deal.all().slice()
 
       promote.one 'didCreate', (result) =>
-        @send "flashSuccess", "Contact updated!"
+        @send "flashSuccess", "Contact created!"
         @get('content').removeObject(model)
         if status == "pipeline" 
           Radium.Deal.find({}).then (deals) =>
