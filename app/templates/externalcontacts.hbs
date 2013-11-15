@@ -38,6 +38,11 @@
       <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
     </div>
   {{else}}
+    {{#if hasNewPipelineDeal}}
+    <div class="alert">
+      {{resource-link model=newPipelineDeal.contact}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.
+    </div>
+    {{/if}}
     <div class="search-results-header row-fluid">
       <div class="span2 checkers">
         <a href="#" {{action checkAll}}>
@@ -103,17 +108,6 @@
         <div class="span2">
           <div class="btn-group btn-add-to-radium">
             <button class="btn btn-main btn-primary" {{action "promote" this "pipeline"}}>Add to Radium</button>
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#" {{action "promote" this "pipeline"}}>As Lead</a>
-              </li>
-              <li>
-                <a href="#" {{action "promote" this "exclude"}}>Exclude from Pipeline</a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

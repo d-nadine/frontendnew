@@ -8,8 +8,27 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
   categories: Ember.computed.alias 'controllers.addressbook.categories'
 
   actions:
-    promote: (model, state) ->
-      #do stuff
+    promote: (model, status) ->
+      promote = Radium.PromoteExternalContact.createRecord
+                externalContact: model
+                status: status
+
+      existingDeals = Radium.Deal.all().slice()
+
+      promote.one 'didCreate', (result) =>
+        @send "flashSuccess", "Contact updated!"
+        @get('content').removeObject(model)
+        if status == "pipeline" 
+          Radium.Deal.find({}).then (deals) =>
+            delta = deals.toArray().reject (record) =>
+                      existingDeals.contains(record)
+
+            debugger
+            deal = delta.get('firstObject')
+            @get('controllers.addressbook.model').pushObject(deal.get('contact'))
+            @set 'newPipelineDeal', deal
+
+      @get('store').commit()
 
     reset: ->
       @set('page', 1)
@@ -25,3 +44,11 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
     page: page
     page_size: pageSize
     user_id: userId
+
+  arrangedContent: ( ->
+    @get('content').filter (item) -> item.get('name.length') || item.get('email.length')
+  ).property('content.[]')
+
+  hasNewPipelineDeal: ( ->
+    @get('newPipelineDeal')
+  ).property('newPipelineDeal')
