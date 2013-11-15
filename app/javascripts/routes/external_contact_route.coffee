@@ -3,4 +3,5 @@ Radium.ExternalcontactsRoute = Radium.Route.extend
     controller = @controllerFor 'externalcontacts'
     controller.send 'reset'
     controller.set 'newPipelineDeal', null
+    controller.set 'searchText', null
     Radium.ExternalContact.find controller.queryParams()

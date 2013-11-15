@@ -24,7 +24,7 @@
     <div class="pull-right">
       <form class="form-search pipeline-search">
         <i class="ss-symbolicons-block ss-search"></i>
-        {{input value=model.searchText type="text" class="field search-text"}}
+        {{input value=searchText type="text" class="field search-text"}}
       </form>
       {{#linkTo "leads.new" class="btn btn-main btn-primary"}}
         <i class="ss-standard ss-plus"></i> Contact
@@ -34,7 +34,7 @@
 </div>
 <div class="search-result-list">
   {{#unless model.length}}
-    <div class="alert alert-info text-center">
+    <div class="alert text-center">
       <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
     </div>
   {{else}}
@@ -45,7 +45,7 @@
     {{/if}}
     <div class="search-results-header row-fluid">
       <div class="span2 checkers">
-        <a href="#" {{action checkAll}}>
+        <a href="#" {{action checkAll}} style="visibility:hidden">
           {{#if checkedContent}}
             Select None
           {{else}}
@@ -53,7 +53,7 @@
           {{/if}}
         </a>
         <div class="pull-right">
-          <a href="#" {{action toggleThumbnails}}>
+          <a href="#" {{action toggleThumbnails}} style="visibility:hidden">
             {{#if isThumbnailsVisible}}
               Hide
             {{else}}
@@ -69,10 +69,13 @@
         Promote
       </div>
     </div>
+    {{#if isLoading}}
+      {{partial 'is_loading'}}
+    {{/if}}
     {{#each controller}}
       <div class="search-result-list-item row-fluid">
         <div class="span2 checkers">
-          {{check-box checked=isChecked class="checker-block"}}
+          {{!check-box checked=isChecked class="checker-block"}}
           <div class="pull-right">
             {{#if isLoaded}}
               {{avatar this size=medium class="img-polaroid"}}
