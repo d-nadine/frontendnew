@@ -37,7 +37,7 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
 
     reset: ->
       @set('model', Ember.A())
-      @set('page', 1)
+      @set('page', 0)
       @send 'showMore'
 
   modelQuery: ->
