@@ -1,9 +1,6 @@
 Radium.EmailsMailToRoute = Ember.Route.extend
   serialize: (model) ->
-    key = Radium.Model.keyFromValue(model.constructor)
-
-    unless key
-      throw new Error("no entry in Radium.Model.mappings for #{model.constructor}")
+    key = model.humanize().pluralize()
 
     recipient_type: key
     recipient_id: model.get('id')

@@ -38,6 +38,32 @@
       <h3>You have no google contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
     </div>
   {{else}}
+    <div class="search-results-header row-fluid">
+      <div class="span2 checkers">
+        <a href="#" {{action checkAll}}>
+          {{#if checkedContent}}
+            Select None
+          {{else}}
+            Select All
+          {{/if}}
+        </a>
+        <div class="pull-right">
+          <a href="#" {{action toggleThumbnails}}>
+            {{#if isThumbnailsVisible}}
+              Hide
+            {{else}}
+              Show avatars
+            {{/if}}
+          </a>
+        </div>
+      </div>
+      <div class="span4 name">
+        Name
+      </div>
+      <div class="span2">
+        Promote
+      </div>
+    </div>
     {{#each model}}
       <div class="search-result-list-item row-fluid">
         <div class="span2 checkers">
@@ -50,17 +76,44 @@
             {{/if}}
           </div>
         </div>
-        <div class="span2 name">
+        <div class="span4 name">
           <div class="clearfix search-list-item-title">
-            <h4 class="title">
-              {{displayName}}
+            <h4>
+              {{name}}
             </h4>
+            {{#if email}}
+              <div class="sidebar-email-view inline-editor-closed is-enabled inline-editor">
+                <dl class="dl-horizontal contact-types-list">
+                <dt><i class="ss-standard ss-mail muted"></i></dt>
+                <dd>
+                  {{#linkTo "emails.mailTo" "inbox" this}} {{email}}{{/linkTo}}
+                </dd>
+              </dl>
+              </div>
+            {{/if}}
+            {{render 'sidebar/social' contactInfo}}
             <div class="title muted">{{title}}</div>
             {{#if company}}
               <div class="company">
                 {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
               </div>
             {{/if}}
+          </div>
+        </div>
+        <div class="span2">
+          <div class="btn-group btn-add-to-radium">
+            <button class="btn btn-main btn-primary" {{action changeStatus model "pipeline"}}>Add to Radium</button>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#" {{action promote model "pipeline"}}>As Lead</a>
+              </li>
+              <li>
+                <a href="#" {{action promote model "exclude"}}>Exclude from Pipeline</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

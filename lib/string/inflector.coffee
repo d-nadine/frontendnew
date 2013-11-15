@@ -1,4 +1,5 @@
 String::pluralize = ->
+    return "companies" if this.toString() == 'company'
     "#{@}s"
 
 String::singularize = ->

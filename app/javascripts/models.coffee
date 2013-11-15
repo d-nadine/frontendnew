@@ -28,15 +28,3 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @send('deleteRecord')
 
 requireAll /models/
-
-Radium.Model.reopenClass
-  mappings:
-    contacts: Radium.Contact
-    users: Radium.User
-    companies: Radium.Company
-    deals: Radium.Deal
-
-  keyFromValue: (klass) ->
-    (for key of @mappings
-      if @mappings[key] == klass
-        return key)
