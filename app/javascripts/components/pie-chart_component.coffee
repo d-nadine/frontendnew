@@ -18,6 +18,11 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .dimension(@get('dimension'))
       .group(@get('group'))
       .renderLabel(@get('renderLabel'))
+
+    chart.on('filtered', (chart, filter) =>
+      @sendAction('action', filter)
+    )
+
     chart.render()
 
 Ember.Handlebars.helper 'pie-chart', Radium.PieChartComponent

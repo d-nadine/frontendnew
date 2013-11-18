@@ -41,13 +41,43 @@
     </div>
   </div>
   <div class="option">
-    <button class="btn">Yearly</button>
+    <div class="btn-group">
+      <button class="btn">Year</button>
+      <div class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" {{action "filterByYear" "2013"}}>2013</a></li>
+      </ul>
+    </div>
   </div>
   <div class="option">
-    <button class="btn" {{action "filterByUser" "Paul"}}>By Person</button>    
+    <div class="btn-group">
+      <button class="btn">By Person</button>
+      <div class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" {{action "filterByUser" "Michael"}}>Michael</a></li>
+        <li><a href="#" {{action "filterByUser" "Paul"}}>Paul</a></li>
+        <li><a href="#" {{action "filterByUser" "John"}}>John</a></li>
+        <li><a href="#" {{action "filterByUser" "Pete"}}>Pete</a></li>
+      </ul>
+    </div>
   </div>
   <div class="option">
-    <button class="btn">By Company</button>
+    <div class="btn-group">
+      <button class="btn">By Company</button>
+      <div class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" {{action "filterByCompany" "Acme"}}>Acme</a></li>
+        <li><a href="#" {{action "filterByCompany" "Billings Corp"}}>Billings Corp</a></li>
+        <li><a href="#" {{action "filterByCompany" "Coffees"}}>Coffees</a></li>
+        <li><a href="#" {{action "filterByCompany" "Dundler Mifflen"}}>Dundler Mifflen</a></li>
+      </ul>
+    </div>
   </div>
   <div class="option">
     <button class="btn" {{action "reset"}}>Reset</button>
@@ -165,7 +195,7 @@
 <section  class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
-      $100.00
+      {{currency controller.total_closed}}
     </div>
     <h4>Sales</h4>
   </div>
@@ -173,6 +203,7 @@
   {{pie-chart 
     dimension=controller.userDimension 
     group=controller.usersGroup
+    action="chartFilterByUser"
     size="300" 
     radius="150"}}
 </section>
@@ -181,7 +212,7 @@
 <section  class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
-      24 Leads
+      {{status_lead_total}} Leads
     </div>
     <h4>Leads</h4>
   </div>
@@ -190,6 +221,7 @@
     dimension=controller.dealDimension 
     group=controller.dealsGroup
     domain=controller.leadsDomain
+    action="filterFromChart"
     valueAccessor="leads"
     width="800"
     height="400"}}
@@ -199,7 +231,7 @@
 <section class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
-      24 deals
+      {{status_open_total}} deals
     </div>
     <h4>Deals</h4>
   </div>
@@ -208,6 +240,7 @@
     dimension=controller.dealDimension 
     group=controller.dealsGroup
     domain=controller.leadsDomain
+    action="filterFromChart"
     valueAccessor="deals"
     width="800"
     height="400"}}
@@ -217,7 +250,7 @@
 <section class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
-      24 deals
+      {{status_closed_total}} deals
     </div>
     <h4>Closed Deals</h4>
   </div>
@@ -226,6 +259,7 @@
     dimension=controller.dealDimension 
     group=controller.dealsGroup
     domain=controller.leadsDomain
+    action="filterFromChart"
     valueAccessor="closed"
     width="800"
     height="400"}}
@@ -235,7 +269,7 @@
 <section class="report-section">
   <div class="page-header">
     <div class="pull-right report-section-total">
-      2 deals
+      {{status_lost_total}} deals
     </div>
     <h4>Lost Deals</h4>
   </div>
@@ -244,6 +278,7 @@
     dimension=controller.dealDimension 
     group=controller.dealsGroup
     domain=controller.leadsDomain
+    action="filterFromChart"
     valueAccessor="lost"
     width="800"
     height="400"}}

@@ -24,6 +24,10 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .xUnits(d3.time.months)
       .valueAccessor((d) -> d.value[valueAccessor])
       .renderLabel(@get('renderLabel'))
+
+    chart.on('filtered', (chart, filter) =>
+      @sendAction('action', filter)
+    )
     chart.render()
 
 Ember.Handlebars.helper 'bar-chart', Radium.BarChartComponent

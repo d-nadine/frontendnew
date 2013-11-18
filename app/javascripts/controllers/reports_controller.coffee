@@ -1,3 +1,8 @@
+###
+Note: This controller is WIP. Filtering and Crossfilter setup
+needs to be significantly trimmed, there is an exorbitant amount of filter lookups
+that need to be reduced elegantly
+###
 Radium.ReportsController = Ember.ArrayController.extend
   needs: ['account']
   account: Ember.computed.alias 'controllers.account'
@@ -7,6 +12,9 @@ Radium.ReportsController = Ember.ArrayController.extend
     today = new Date()
     data = crossfilter(@get('content'))
     all = data.groupAll()
+
+    year = data.dimension((d) -> d.date)
+    years = year.group(d3.time.year)
 
     quarter = data.dimension (d) ->
       month = d.date.getMonth()
@@ -25,6 +33,10 @@ Radium.ReportsController = Ember.ArrayController.extend
     users = user.group().reduceSum((d) ->
       d.total
     )
+
+    status = data.dimension((d) -> d.status)
+    statusesByTotal = status.group().reduceSum((d) -> d.total)
+    statusesByAmount = status.group().reduceCount()
 
     deal = data.dimension((d) -> d.date)
     deals = deal.group(d3.time.month).reduce(
@@ -54,40 +66,88 @@ Radium.ReportsController = Ember.ArrayController.extend
         closed: 0
         lost: 0
     )
+
+    company = data.dimension((d) -> d.company)
+    companies = company.group()
     
     # TODO: Break this into a composable object, so it can be
     # iterated over when applying filters
     @setProperties(
       crossfilter: data
+      yearDimension: year
+      yearsGroup: years
       quarterDimension: quarter
       quartersGroup: quarters
       userDimension: user
       usersGroup: users
       dealDimension: deal
       dealsGroup: deals
+      companyDimension: company
+      companiesGroup: companies
+      statusDimension: status
+      statusesByTotal: statusesByTotal
+      statusesByAmount: statusesByAmount
+    )
+
+    @calcSums()
+
+  calcSums: ->
+    totalsByStatus = @get 'statusesByTotal'
+    statusesByAmount = @get 'statusesByAmount'
+    allTotals = totalsByStatus.all()
+    allStatuses = statusesByAmount.all()
+
+    allTotals.forEach((item) =>
+      @set 'total_' + item.key, item.value
+    )
+
+    allStatuses.forEach((item) =>
+      @set 'status_' + item.key + '_total', item.value
     )
 
   actions:
+    filterByDate: (date) ->
+      @calcSums()
+
+    chartFilterByUser: (user) ->
+      @calcSums()
+
     reset: ->
       @get('userDimension').filter(null)
       @get('quarterDimension').filter(null)
       @get('dealDimension').filter(null)
+      @get('statusDimension').filter(null)
+      @get('companyDimension').filter(null)
+      @calcSums()
       dc.redrawAll()
 
     filterThisMonth: ->
-      @get('quarterDimension').filter(null)
-      @get('userDimension').filter(null)
-      @get('dealDimension').filter([new Date(2013,10,1), new Date(2013,10,31)])
+      day = new Date()
+      start = d3.time.month.floor(day)
+      end = d3.time.month.ceil(day)
+      @get('dealDimension').filter([start, end])
+      @calcSums()
       dc.redrawAll()
 
     filterByUser: (user) ->
-      @get('quarterDimension').filter(null)
-      @get('dealDimension').filter(null)
       @get('userDimension').filter(user)
+      @calcSums()
+      dc.redrawAll()
+
+    filterByCompany: (company) ->
+      @get('companyDimension').filter(company)
+      @calcSums()
       dc.redrawAll()
 
     filterByQuarter: (quarter) ->
-      @get('userDimension').filter(null)
-      @get('dealDimension').filter(null)
       @get('quarterDimension').filter(quarter)
+      @calcSums()
+      dc.redrawAll()
+
+    filterByYear: (year) ->
+      date = new Date()
+      start = d3.time.year.floor(date)
+      end = d3.time.year.ceil(date)
+      @get('yearDimension').filter([start, end])
+      @calcSums()
       dc.redrawAll()
