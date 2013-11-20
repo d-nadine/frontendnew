@@ -2,7 +2,7 @@ require 'mixins/components/chart_component_mixin'
 
 Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   type: 'barChart'
-  width: 100
+  width: null
   height: 100
   domain: [0, 1]
 
@@ -13,9 +13,12 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
     chart = @get 'chart'
     domain = @get 'domain'
     valueAccessor = @get 'valueAccessor'
+    width = @get('width')
+
+    componentWidth = if width then width else @$().parent().width()
 
     chart
-      .width(@get('width'))
+      .width(componentWidth)
       .height(@get('height'))
       .dimension(@get('dimension'))
       .group(@get('group'))
@@ -26,8 +29,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .renderLabel(@get('renderLabel'))
 
     chart.on('filtered', (chart, filter) =>
-      @sendAction('action', filter) if filter?
+      setFilter = if filter then filter else null
+      @sendAction('action', setFilter)
     )
     chart.render()
-
-Ember.Handlebars.helper 'bar-chart', Radium.BarChartComponent

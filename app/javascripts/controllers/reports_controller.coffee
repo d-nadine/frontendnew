@@ -8,6 +8,12 @@ Radium.ReportsController = Ember.ArrayController.extend
   account: Ember.computed.alias 'controllers.account'
   leadsDomain: [new Date(2013, 1, 1), new Date(2013, 11, 31)]
 
+
+  defaultSelectedUser: 'Everyone'
+  selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
+  defaultSelectedQuarter: 'All Quarters'
+  selectedQuarter: Ember.computed.defaultTo('defaultSelectedQuarter')
+
   setupCrossfilter: ->
     today = new Date()
     data = crossfilter(@get('content'))
@@ -18,6 +24,7 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     quarter = data.dimension (d) ->
       month = d.date.getMonth()
+
       if (month <= 2)
         q = "Q1"
       else if (month > 3 && month <= 5)
@@ -26,7 +33,9 @@ Radium.ReportsController = Ember.ArrayController.extend
         q = "Q3"
       else
         q = "Q4"
+
       q
+
     quarters = quarter.group()
 
     user = data.dimension (d) -> d.user
@@ -61,7 +70,7 @@ Radium.ReportsController = Ember.ArrayController.extend
           p.deals--
         p
       () ->
-        leads: 0 
+        leads: 0
         deals: 0
         closed: 0
         lost: 0
@@ -94,8 +103,13 @@ Radium.ReportsController = Ember.ArrayController.extend
   calcSums: ->
     totalsByStatus = @get 'statusesByTotal'
     statusesByAmount = @get 'statusesByAmount'
+    users = @get 'usersGroup'
+    quarters = @get 'quartersGroup'
     allTotals = totalsByStatus.all()
     allStatuses = statusesByAmount.all()
+
+    @set 'users', users.all()
+    @set 'quarters', quarters.all()
 
     allTotals.forEach((item) =>
       @set 'total_' + item.key, item.value
@@ -107,17 +121,20 @@ Radium.ReportsController = Ember.ArrayController.extend
 
   actions:
     filterByDate: (date) ->
+      @get('quarterDimension').filter(null)
+      @set 'selectedQuarter', null
+      @get('dealDimension').filter(date)
       @calcSums()
-
-    chartFilterByUser: (user) ->
-      @calcSums()
+      dc.redrawAll()
 
     reset: ->
       @get('userDimension').filter(null)
-      @get('quarterDimension').filter(null)
       @get('dealDimension').filter(null)
+      @get('quarterDimension').filter(null)
       @get('statusDimension').filter(null)
       @get('companyDimension').filter(null)
+      @set 'selectedUser', null
+      @set 'selectedQuarter', null
       @calcSums()
       dc.redrawAll()
 
@@ -130,6 +147,7 @@ Radium.ReportsController = Ember.ArrayController.extend
       dc.redrawAll()
 
     filterByUser: (user) ->
+      @set 'selectedUser', user
       @get('userDimension').filter(user)
       @calcSums()
       dc.redrawAll()
@@ -141,6 +159,7 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     filterByQuarter: (quarter) ->
       @get('quarterDimension').filter(quarter)
+      @set 'selectedQuarter', quarter
       @calcSums()
       dc.redrawAll()
 

@@ -94,7 +94,7 @@
           fontFamily="ss-symbolicons"}}
       </div>
       <div class="text-center summary-details">
-        <h2>1 Lost</h2>
+        <h2>{{status_lost_total}} Lost</h2>
         <h4>
           {{status_lost_total}} deal<br>
           <small>$28, 000.00</small>
@@ -121,7 +121,7 @@
   {{pie-chart 
     dimension=controller.userDimension 
     group=controller.usersGroup
-    action="chartFilterByUser"
+    action="filterByUser"
     size="300" 
     radius="150"}}
 </section>
@@ -141,7 +141,6 @@
     domain=controller.leadsDomain
     action="filterByDate"
     valueAccessor="leads"
-    width="800"
     height="400"}}
 </section>
 
@@ -160,7 +159,6 @@
     domain=controller.leadsDomain
     action="filterByDate"
     valueAccessor="deals"
-    width="800"
     height="400"}}
 </section>
 
@@ -179,7 +177,6 @@
     domain=controller.leadsDomain
     action="filterByDate"
     valueAccessor="closed"
-    width="800"
     height="400"}}
 </section>
 
@@ -198,6 +195,5 @@
     domain=controller.leadsDomain
     action="filterByDate"
     valueAccessor="lost"
-    width="800"
     height="400"}}
 </section>

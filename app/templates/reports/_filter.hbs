@@ -1,0 +1,39 @@
+<div id="master-filter" class="reports-filter">
+  <div class="option">
+    Time Period <input type="text" name="" id="">
+  </div>
+  <div class="option">
+    <button class="btn" {{action "filterThisMonth"}}>This month</button>
+  </div>
+  <div class="option">
+    {{report-dropdown 
+      options=quarters 
+      resetOption=defaultSelectedQuarter
+      selected=selectedQuarter
+      action="filterByQuarter"}}
+  </div>
+  <div class="option">
+    {{report-dropdown 
+      options=users 
+      resetOption=defaultSelectedUser
+      selected=selectedUser
+      action="filterByUser"}}
+  </div>
+  <div class="option">
+    <div class="btn-group">
+      <button class="btn">By Company</button>
+      <div class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" {{action "filterByCompany" "Acme"}}>Acme</a></li>
+        <li><a href="#" {{action "filterByCompany" "Billings Corp"}}>Billings Corp</a></li>
+        <li><a href="#" {{action "filterByCompany" "Coffees"}}>Coffees</a></li>
+        <li><a href="#" {{action "filterByCompany" "Dundler Mifflen"}}>Dundler Mifflen</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="option">
+    <button class="btn" {{action "reset"}}>Reset</button>
+  </div>
+</div>

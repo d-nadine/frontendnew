@@ -10,3 +10,8 @@ Radium.ChartComponentMixin = Ember.Mixin.create
     @set('chart', chart)
     @renderChart()
   ).on('didInsertElement')
+
+  actions:
+    reset: ->
+      @get('chart').filterAll()
+      dc.redrawAll()
