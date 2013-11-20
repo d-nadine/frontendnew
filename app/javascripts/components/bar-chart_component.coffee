@@ -4,10 +4,15 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   type: 'barChart'
   width: null
   height: 100
+  classNames: 'bar-chart'
   domain: [0, 1]
 
   refresh: ->
     @get('chart').refresh()
+
+  resize: ->
+    width = @$().parent().width()
+    @get('chart').width(width).render()
 
   renderChart: ->
     chart = @get 'chart'
@@ -28,8 +33,10 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .valueAccessor((d) -> d.value[valueAccessor])
       .renderLabel(@get('renderLabel'))
 
-    chart.on('filtered', (chart, filter) =>
-      setFilter = if filter then filter else null
-      @sendAction('action', setFilter)
-    )
+    chart.on('filtered', _.debounce((chart, filter) =>
+      @sendAction('action', filter)
+    ), 100)
+
     chart.render()
+    
+    $(window).on('resize', _.debounce(@resize.bind(this), 50).bind(this))

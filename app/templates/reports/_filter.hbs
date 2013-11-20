@@ -1,6 +1,6 @@
 <div id="master-filter" class="reports-filter">
   <div class="option">
-    Time Period <input type="text" name="" id="">
+    Time Period {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
   </div>
   <div class="option">
     <button class="btn" {{action "filterThisMonth"}}>This month</button>
@@ -20,20 +20,14 @@
       action="filterByUser"}}
   </div>
   <div class="option">
-    <div class="btn-group">
-      <button class="btn">By Company</button>
-      <div class="btn dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </div>
-      <ul class="dropdown-menu">
-        <li><a href="#" {{action "filterByCompany" "Acme"}}>Acme</a></li>
-        <li><a href="#" {{action "filterByCompany" "Billings Corp"}}>Billings Corp</a></li>
-        <li><a href="#" {{action "filterByCompany" "Coffees"}}>Coffees</a></li>
-        <li><a href="#" {{action "filterByCompany" "Dundler Mifflen"}}>Dundler Mifflen</a></li>
-      </ul>
-    </div>
+    {{report-dropdown 
+      options=companies 
+      resetOption=defaultSelectedCompany
+      selected=selectedCompany
+      action="filterByCompany"}}
   </div>
   <div class="option">
     <button class="btn" {{action "reset"}}>Reset</button>
   </div>
 </div>
+<div class="reports-filter-placeholder"></div>

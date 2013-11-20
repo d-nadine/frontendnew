@@ -7,12 +7,15 @@ Radium.ReportsController = Ember.ArrayController.extend
   needs: ['account']
   account: Ember.computed.alias 'controllers.account'
   leadsDomain: [new Date(2013, 1, 1), new Date(2013, 11, 31)]
-
+  startDate: Ember.DateTime.create(),
+  endDate: Ember.DateTime.create(),
 
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
   defaultSelectedQuarter: 'All Quarters'
   selectedQuarter: Ember.computed.defaultTo('defaultSelectedQuarter')
+  defaultSelectedCompany: 'All Companies'
+  selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
 
   setupCrossfilter: ->
     today = new Date()
@@ -105,11 +108,13 @@ Radium.ReportsController = Ember.ArrayController.extend
     statusesByAmount = @get 'statusesByAmount'
     users = @get 'usersGroup'
     quarters = @get 'quartersGroup'
+    companies = @get 'companiesGroup'
     allTotals = totalsByStatus.all()
     allStatuses = statusesByAmount.all()
 
     @set 'users', users.all()
     @set 'quarters', quarters.all()
+    @set 'companies', companies.all()
 
     allTotals.forEach((item) =>
       @set 'total_' + item.key, item.value
@@ -119,12 +124,27 @@ Radium.ReportsController = Ember.ArrayController.extend
       @set 'status_' + item.key + '_total', item.value
     )
 
+  setDates: (start, end) ->
+    unless arguments.length
+      date = new Date()
+      start = d3.time.year.floor(date)
+      end = d3.time.year.ceil(date)
+
+    @setProperties(
+      startDate: Ember.DateTime.create(start.getTime())
+      endDate: Ember.DateTime.create(end.getTime())
+    )
+
   actions:
     filterByDate: (date) ->
-      @get('quarterDimension').filter(null)
-      @set 'selectedQuarter', null
-      @get('dealDimension').filter(date)
-      @calcSums()
+      if date
+        @get('quarterDimension').filter(null)
+        @set 'selectedQuarter', null
+        @get('dealDimension').filter(date)
+        @setDates(date[0], date[1])
+        @calcSums()
+      else
+        @setDates()
       dc.redrawAll()
 
     reset: ->
@@ -143,6 +163,9 @@ Radium.ReportsController = Ember.ArrayController.extend
       start = d3.time.month.floor(day)
       end = d3.time.month.ceil(day)
       @get('dealDimension').filter([start, end])
+      @get('quarterDimension').filter(null)
+      @set 'selectedQuarter', null
+      @setDates(start, end)
       @calcSums()
       dc.redrawAll()
 
@@ -154,6 +177,7 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     filterByCompany: (company) ->
       @get('companyDimension').filter(company)
+      @set('selectedCompany', company)
       @calcSums()
       dc.redrawAll()
 
@@ -161,6 +185,14 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('quarterDimension').filter(quarter)
       @set 'selectedQuarter', quarter
       @calcSums()
+
+      switch quarter
+        when "Q1" then @setDates(new Date(2013, 0, 1), new Date(2013, 2, 31))
+        when "Q2" then @setDates(new Date(2013, 3, 1), new Date(2013, 5, 30))
+        when "Q3" then @setDates(new Date(2013, 6, 1), new Date(2013, 8, 30))
+        when "Q4" then @setDates(new Date(2013, 9, 1), new Date(2013, 11, 31))
+        else @send('filterByYear', new Date())
+      
       dc.redrawAll()
 
     filterByYear: (year) ->
@@ -168,5 +200,6 @@ Radium.ReportsController = Ember.ArrayController.extend
       start = d3.time.year.floor(date)
       end = d3.time.year.ceil(date)
       @get('yearDimension').filter([start, end])
+      @setDates(start, end)
       @calcSums()
       dc.redrawAll()

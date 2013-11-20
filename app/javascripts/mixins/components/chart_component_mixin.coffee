@@ -2,6 +2,7 @@ Radium.ChartComponentMixin = Ember.Mixin.create
   dimension: null
   group: null
   renderLabel: true
+  classNames: 'radium-chart'
 
   initChart: (->
     type = @get 'type'

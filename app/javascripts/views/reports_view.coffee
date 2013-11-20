@@ -4,9 +4,9 @@ Radium.ReportsView = Ember.View.extend
   classNameBindings: 'isFilterPinned:pin-filter'
 
   didInsertElement: ->
-    filter = @$('#master-filter')
-    filterTop = filter.offset().top
-    filterHeight = filter.height()
+    $filter = @$('#master-filter')
+    filterTop = $filter.offset().top
+    filterHeight = $filter.height()
     @set 'mainFilterOffset', filterTop - filterHeight
     $(window).on 'scroll.reports', @reportsScrollHandler.bind(this)
 
