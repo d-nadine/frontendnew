@@ -32,6 +32,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .group(@get('group'))
       .x(d3.time.scale().domain(domain))
       .round(d3.time.month.round)
+      .mouseZoomable(false)
       .xUnits(d3.time.months)
       .valueAccessor((d) -> d.value[valueAccessor])
       .renderLabel(@get('renderLabel'))
@@ -41,5 +42,8 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
     ), 100)
 
     chart.render()
+    
+    # For debugging
+    @$().data('chart', chart)
     
     $(window).on('resize.chart', _.debounce(@resize.bind(this), 50).bind(this))
