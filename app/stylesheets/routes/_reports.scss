@@ -44,6 +44,22 @@
 }
 
 // Reports overview
+
+// Animation
+@include keyframes(iconBounce) {
+  0% {
+    @include scale(0, 0);
+  }
+
+  90% {
+    @include scale(1.1, 1.1);
+  }
+
+  100% {
+    @include scale(1, 1);
+  }
+}
+
 .report-overview {
   .summary {
     width: 25%;
@@ -63,6 +79,12 @@
       display: inline-block;
       font-size: 25px;
       line-height: 30px;
+    }
+
+    @for $i from 0 through 100 {
+      i:nth-child(#{$i}) {
+        @include animation(iconBounce #{$i * 0.05}s);
+      }
     }
   }
 
