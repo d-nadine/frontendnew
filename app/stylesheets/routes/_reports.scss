@@ -90,6 +90,16 @@
   }
 }
 
+#report-sales-section .charts {
+  text-align: center;
+
+  .pie-chart {
+    float: none;
+    margin: 0 4%;
+    display: inline-block;
+  }
+}
+
 // Anchors have some height to them to account for the fixed navbar
 .report-anchor {
   height: 95px;

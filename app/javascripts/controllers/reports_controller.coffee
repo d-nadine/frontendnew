@@ -53,6 +53,7 @@ Radium.ReportsController = Ember.ArrayController.extend
     deal = data.dimension((d) -> d.date)
     deals = deal.group(d3.time.month).reduce(
       (p, v) ->
+        p.total = p.total + 1
         if v.status is "lead"
           p.leads++
         else if v.status is "lost"
@@ -63,6 +64,7 @@ Radium.ReportsController = Ember.ArrayController.extend
           p.deals++
         p
       (p, v) ->
+        p.total = p.total - 1
         if v.status is "lead"
           p.leads--
         else if v.status is "lost"
@@ -73,6 +75,7 @@ Radium.ReportsController = Ember.ArrayController.extend
           p.deals--
         p
       () ->
+        total: 0
         leads: 0
         deals: 0
         closed: 0
@@ -106,11 +109,13 @@ Radium.ReportsController = Ember.ArrayController.extend
   calcSums: ->
     totalsByStatus = @get 'statusesByTotal'
     statusesByAmount = @get 'statusesByAmount'
+    deals = @get 'dealsGroup'
     users = @get 'usersGroup'
     quarters = @get 'quartersGroup'
     companies = @get 'companiesGroup'
     allTotals = totalsByStatus.all()
     allStatuses = statusesByAmount.all()
+    allDeals = deals.all()
 
     @set 'users', users.all()
     @set 'quarters', quarters.all()
@@ -122,6 +127,10 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     allStatuses.forEach((item) =>
       @set 'status_' + item.key + '_total', item.value
+    )
+
+    allDeals.forEach((item) =>
+      @set 'deal_' + item.key, item.value
     )
 
   setDates: (start, end) ->
