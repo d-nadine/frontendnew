@@ -1,4 +1,7 @@
 Radium.ReportsView = Ember.View.extend
+  init: ->
+    @set('charts', [])
+    @_super()
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
   classNameBindings: 'isFilterPinned:pin-filter'
@@ -21,3 +24,18 @@ Radium.ReportsView = Ember.View.extend
       @set 'isFilterPinned', true
     else
       @set 'isFilterPinned', false
+
+  registerChart: (chart) ->
+    @get('charts').pushObject chart
+
+  removeChart: (chart) ->
+    @get('charts').removeObject chart
+
+  updateCharts: (->
+    startDate = @get('controller.startDate').toJSDate()
+    endDate = @get('controller.endDate').toJSDate()
+
+    @get('charts').forEach((chart) =>
+      chart.focus([startDate, endDate])
+    )
+  ).observes('controller.startDate', 'controller.endDate')

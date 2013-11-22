@@ -9,6 +9,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
 
   willDestroyElement: ->
     $(window).off('resize.chart')
+    @get('parentView').removeChart(@get('chart'))
 
   refresh: ->
     @get('chart').refresh()
@@ -43,6 +44,8 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
     ), 100)
 
     chart.render()
+
+    @get('parentView').registerChart(chart)
 
     # For debugging
     @$().data('chart', chart)
