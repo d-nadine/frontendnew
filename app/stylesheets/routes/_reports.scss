@@ -83,7 +83,7 @@
 
     @for $i from 0 through 100 {
       i:nth-child(#{$i}) {
-        @include animation(iconBounce #{$i * 0.05}s);
+        @include animation(iconBounce #{$i * 0.02}s);
       }
     }
   }
