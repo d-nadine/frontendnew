@@ -3,7 +3,7 @@
     Time Period {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
   </div>
   <div class="option">
-    <button class="btn" {{action "filterThisMonth"}}>This month</button>
+    <button {{bindAttr class=":btn isCurrentMonth:active"}} {{action "filterThisMonth"}}>This month</button>
   </div>
   <div class="option">
     {{report-dropdown 

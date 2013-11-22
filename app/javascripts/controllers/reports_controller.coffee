@@ -10,6 +10,13 @@ Radium.ReportsController = Ember.ArrayController.extend
   startDate: Ember.DateTime.create(),
   endDate: Ember.DateTime.create(),
 
+  isCurrentMonth: (->
+    startMonth = @get('startDate').advance({day: 1})
+    endMonth = @get('endDate').advance({day: -1})
+
+    return if startMonth.get('month') is endMonth.get('month') then true else false
+  ).property('startDate', 'endDate')
+
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
   defaultSelectedQuarter: 'All Quarters'
