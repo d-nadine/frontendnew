@@ -66,6 +66,7 @@ Radium.InlineEditorView = Ember.View.extend
     return if [13, 9].indexOf(evt.keyCode) == -1
 
     @send 'toggleEditor'
+    return false
 
   textField: Ember.TextField.extend
     isEditing: Ember.computed.alias('parentView.isEditing')

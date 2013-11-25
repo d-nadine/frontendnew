@@ -13,7 +13,7 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
   selectionAdded: (tag) ->
     name = if typeof tag == "string" then tag else tag.get('name')
 
-    @get('targetObject').send('addTag', name)
+    @get('controller').send('addTag', name)
 
   filterResults: (item) ->
     not @get('source').mapProperty('name').contains(item.get('name'))

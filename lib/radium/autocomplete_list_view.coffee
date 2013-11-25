@@ -117,6 +117,14 @@ Radium.AutocompleteView = Radium.View.extend
 
     callback(results, query)
 
+  selectionAdded: (item) ->
+    # create a simple object and let the controller/form how to handle what happens
+    if typeof item == "string"
+      item = Ember.Object.create
+                email: item
+
+    @send('addSelection', item)
+
   autocomplete: Ember.TextField.extend
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'targetObject.currentUser'
@@ -124,6 +132,15 @@ Radium.AutocompleteView = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
     listBinding: 'parentView.list'
     tabindexBinding: 'parentView.tabindex'
+
+    keyDown: (e) ->
+      unless e.keyCode == 13
+        @_super.apply this, arguments
+        return
+
+      @get('parentView').selectionAdded @get('value')
+      @set 'value', ''
+      return false
 
     didInsertElement: ->
       Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'
@@ -135,7 +152,7 @@ Radium.AutocompleteView = Radium.View.extend
         searchObjProps: "name"
         formatList: @formatList.bind(this)
         getAvatar: @getAvatar.bind(this)
-        selectionAdded: @selectionAdded.bind(this)
+        selectionAdded: @get('parentView').selectionAdded.bind(@get('parentView'))
         resultsHighlight: true
         canGenerateNewSelections: true
         usePlaceholder: true
@@ -146,18 +163,7 @@ Radium.AutocompleteView = Radium.View.extend
       if @get('parentView').newItemCriteria
         options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)
 
-      if @get('parentView').selectionAdded
-        options = $.extend {}, options, selectionAdded: @get('parentView').selectionAdded.bind(this)
-
       @$().autoSuggest {retrieve: @get('parentView').retrieve.bind(this)}, options
-
-    selectionAdded: (item) ->
-      # create a simple object and let the controller/form how to handle what happens
-      if typeof item == "string"
-        item = Ember.Object.create
-                  email: item
-
-      @get('parentView').send('addSelection', item)
 
     formatList: (data, elem) ->
       content = ""
