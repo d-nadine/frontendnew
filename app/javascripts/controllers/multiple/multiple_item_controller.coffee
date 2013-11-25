@@ -3,7 +3,6 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     setIsPrimary: ->
       @get('parent').setEach('isPrimary', false)
       @set('isPrimary', true)
-      @send 'stopEditing' if @get('record')
 
     removeSelection: (item) ->
       parent = @get('parent')
@@ -35,7 +34,12 @@ Radium.MultipleItemController = Radium.ObjectController.extend
 
       nextIsPrimary.set 'isPrimary', true
 
-      @send('stopEditing')
+    toggleOpen: ->
+      @toggleProperty 'open'
+
+    selectValue: (value) ->
+      @set('model.name', value.toString())
+      @send 'toggleOpen'
 
   parent: Ember.computed.alias 'target.target'
   labels: Ember.computed.alias 'parent.labels'
@@ -44,14 +48,8 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     "#{@get('name')} #{@get('leader')}"
   ).property('leader', 'name')
 
-  toggleOpen: ->
-    @toggleProperty 'open'
-
-  selectValue: (value) ->
-    @set('model.name', value.toString())
-    @toggleOpen()
-
   name: ( ->
+    return 'Personal' unless @get('content.name.length')
     @get('content.name').capitalize()
   ).property('content.name')
 

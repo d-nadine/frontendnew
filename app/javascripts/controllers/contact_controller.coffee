@@ -1,34 +1,35 @@
 Radium.ContactController = Radium.ObjectController.extend
+  actions:
+    removeMultiple: (relationship, item) ->
+      @get(relationship).removeObject item
+
+    makeContactPublic: (contact) ->
+      contact.set 'status', 'pipeline'
+
+      transaction = @get('store').transaction()
+
+      transaction.add(contact)
+
+      contact.one 'didUpdate', (result) =>
+        unless contact.get('isPersonal')
+          contact.get('user').reload()
+
+      contact.one 'becameInvalid', (result) =>
+        @send 'flashError', contact
+        result.reset()
+
+      contact.one 'becameError', (result) =>
+        transaction.rollback()
+        @send 'flashError', 'An error has occurred and the contact cannot be updated.'
+        result.reset()
+
+      transaction.commit()
+
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
   companies: Ember.computed.alias 'controllers.companies'
   # FIXME: How do we determine this?
   isEditable: true
-
-  removeMultiple: (relationship, item) ->
-    @get(relationship).removeObject item
-
-  makeContactPublic: (contact) ->
-    contact.set 'status', 'pipeline'
-
-    transaction = @get('store').transaction()
-
-    transaction.add(contact)
-
-    contact.one 'didUpdate', (result) =>
-      unless contact.get('isPersonal')
-        contact.get('user').reload()
-
-    contact.one 'becameInvalid', (result) =>
-      @send 'flashError', contact
-      result.reset()
-
-    contact.one 'becameError', (result) =>
-      transaction.rollback()
-      @send 'flashError', 'An error has occurred and the contact cannot be updated.'
-      result.reset()
-
-    transaction.commit()
 
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->
