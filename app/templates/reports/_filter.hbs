@@ -1,6 +1,9 @@
 <div id="master-filter" class="reports-filter">
+  <div>
+    {{date-range source=controller height=15 startDate=startDate endDate=endDate}}
+  </div>
   <div class="option">
-    Time Period {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
+    {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
   </div>
   <div class="option">
     <button {{bindAttr class=":btn isCurrentMonth:active"}} {{action "filterThisMonth"}}>This month</button>

@@ -1,3 +1,20 @@
+.axis path, .axis line {
+  fill: none;
+  stroke: #aaa;
+  shape-rendering: crispEdges;
+}
+
+.brush .extent {
+  stroke: #f09f8c;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+g.context rect.background{
+  fill: none;
+  visibility: visible !important;
+}
+
 .reports-filter {
   $bg: #dbdbdb;
   padding: 15px;
