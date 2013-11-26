@@ -143,11 +143,11 @@ Radium.ApplicationRoute = Radium.Route.extend
         outlet: 'modal'
 
     # TODO: figure out a better way to do this
-    animateDelete: (item, callback) ->
+    animateDelete: (item, callback, container = '') ->
       duration = 600
 
       modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
-      $(".messages-list #{modelSelector}").fadeOut duration
+      $("#{container} #{modelSelector}".trim()).fadeOut duration
 
       Ember.run.later this, callback, duration
 

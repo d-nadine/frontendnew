@@ -44,7 +44,7 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionToBulkOrBack()
 
     delete: (item) ->
-      @send 'animateDelete', item, =>
+      callback = =>
         controller = @controllerFor('messages')
 
         if item == controller.get('selectedContent')
@@ -65,6 +65,8 @@ Radium.MessagesRoute = Radium.Route.extend
 
         Ember.run.next =>
           @send 'selectItem', nextItem
+
+      @send 'animateDelete', item, callback, '.messages-list'
 
   transitionToBulkOrBack: ->
     currentPath = @controllerFor('application').get('currentPath')
