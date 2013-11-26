@@ -1,48 +1,46 @@
-<div class="search-result-list-item row-fluid">
-  <div class="span2 checkers">
-    {{check-box checked=isChecked class="checker-block"}}
-    <div class="pull-right">
-      {{#if isLoaded}}
-        {{avatar this size=medium class="img-polaroid"}}
-      {{else}}
-        {{partial 'is_loading'}}
-      {{/if}}
-    </div>
+<div class="span2 checkers">
+  {{check-box checked=isChecked class="checker-block"}}
+  <div class="pull-right">
+    {{#if isLoaded}}
+      {{avatar this size=medium class="img-polaroid"}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
   </div>
-  <div class="span4 name">
-    <div class="clearfix search-list-item-title">
-      <h4>
-        {{name}}
-      </h4>
-      {{#if email}}
-        <div class="sidebar-email-view inline-editor-closed is-enabled inline-editor">
-          <dl class="dl-horizontal contact-types-list">
-          <dt><i class="ss-standard ss-mail muted"></i></dt>
-          <dd>
-            {{#linkTo "emails.mailTo" "inbox" this}} {{email}}{{/linkTo}}
-          </dd>
-        </dl>
-        </div>
-      {{/if}}
-      {{render 'sidebar/social' contactInfo}}
-      <div class="title muted">{{title}}</div>
-      {{#if company}}
-        <div class="company">
-          {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
-        </div>
-      {{/if}}
-    </div>
+</div>
+<div class="span4 name">
+  <div class="clearfix search-list-item-title">
+    <h4>
+      {{name}}
+    </h4>
+    {{#if email}}
+      <div class="sidebar-email-view inline-editor-closed is-enabled inline-editor">
+        <dl class="dl-horizontal contact-types-list">
+        <dt><i class="ss-standard ss-mail muted"></i></dt>
+        <dd>
+          {{#linkTo "emails.mailTo" "inbox" this}} {{email}}{{/linkTo}}
+        </dd>
+      </dl>
+      </div>
+    {{/if}}
+    {{render 'sidebar/social' contactInfo}}
+    <div class="title muted">{{title}}</div>
+    {{#if company}}
+      <div class="company">
+        {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
+      </div>
+    {{/if}}
   </div>
-  <div class="span2">
-    <div class="btn-group btn-add-to-radium">
-      <button class="btn btn-main btn-primary" {{action "promote" this "pipeline"}}>Add to Radium</button>
-    </div>
+</div>
+<div class="span2">
+  <div class="btn-group btn-add-to-radium">
+    <button class="btn btn-main btn-primary" {{action "promote" this "pipeline"}}>Add to Radium</button>
   </div>
-  <div class="span1">
-    <div class="btn-group">
-      <a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
-        <i class="ss-symbolicons-block ss-trash"></i>
-      </a>
-    </div>
+</div>
+<div class="span1">
+  <div class="btn-group">
+    <a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
+      <i class="ss-symbolicons-block ss-trash"></i>
+    </a>
   </div>
 </div>

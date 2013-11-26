@@ -79,7 +79,7 @@
     {{#if isLoading}}
       {{partial 'is_loading'}}
     {{/if}}
-    {{each controller itemViewClass="Radium.ExternalContactItemView"}}
+    {{each controller itemController="extenalContactsItem" itemViewClass="Radium.ExternalContactItemView"}}
   {{/unless}}
   {{regular-infinitescroller getMore='showMore' allLoaded=allPagesLoaded isLoading=isLoading}}
 </div>
