@@ -191,6 +191,16 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
   participants: Radium.computed.aggregate('users', 'contacts')
 
+  attendees: ( ->
+    participants = @get('participants')
+    return participants if @get('isNew')
+
+    attendees = participants.toArray()
+    attendees.insertAt(0, @get('organizer'))
+
+    attendees
+  ).property('participants.[]')
+
   isExpandable: (->
     return false if @get('justAdded')
     !@get('isNew')

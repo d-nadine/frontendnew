@@ -80,13 +80,13 @@
             </div>
           {{/unless}}
         </div>
-        {{#if participants.length}}
+        {{#if attendees.length}}
           <div class="field-group meeting-form-attendees">
             <label class="icon-label">
               <i class="ss-standard ss-users"></i> Attendees
             </label>
             <ul class="inline meeting-form-attendees-list">
-              {{#each participants itemController="autocompleteItem"}}
+              {{#each attendees itemController="autocompleteItem"}}
               <li {{bindAttr title="displayName"}}>
                 {{#if isLoaded}}
                   {{avatar this style="medium"}}
