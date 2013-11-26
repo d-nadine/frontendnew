@@ -3,7 +3,7 @@ require 'lib/radium/combobox'
 require 'lib/radium/contact_picker'
 
 Radium.FormsCallView = Radium.FormsTodoView.extend
-  todoField: Radium.FormsTodoFieldView.extend
+  todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
     placeholder: 'about...'
 
   contactPicker: Radium.ContactPicker.extend

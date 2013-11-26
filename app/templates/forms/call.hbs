@@ -1,5 +1,5 @@
 <form {{bindAttr class="isExpandable isEditable isNew isExpanded justAdded :form :form-inline :call-form"}}>
-  <div {{bindAttr class="isFinished :primary"}} {{action expand}}>
+  <div {{bindAttr class="isFinished view.isFocused :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if isExpanded}}

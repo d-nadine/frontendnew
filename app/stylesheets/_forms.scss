@@ -75,6 +75,11 @@
       text-align: center;
     }
 
+    &.is-focused {
+      border-color: $link;
+      @include box-shadow(0 0 3px $link);
+    }
+
     &.is-finished {
       border-color: #cecece;
       background-color: #e8e8e8;

@@ -23,7 +23,7 @@ Radium.FormsTodoView = Radium.FormView.extend
       if @$().data('tooltip')
         @$().tooltip('destroy')
 
-  todoField: Radium.FormsTodoFieldView.extend
+  todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
     value: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: (->

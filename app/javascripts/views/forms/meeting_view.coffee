@@ -59,7 +59,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
       </div>
     """
 
-  topicField: Radium.MentionFieldView.extend
+  topicField: Radium.MentionFieldView.extend Radium.TextFieldFocusMixin,
     classNameBindings: ['isInvalid', ':meeting']
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: 'Add meeting topic'
