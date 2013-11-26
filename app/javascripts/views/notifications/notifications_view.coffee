@@ -7,11 +7,14 @@ Radium.NotificationsView = Radium.DrawerView.extend
     $('body').on 'click.notifications', (e) =>
       return unless controller.get('drawerOpen')
 
+      target = $(e.target)
+      if e.target.tagName == "A" && target.hasClass('notifications-link')
+        return false
+
       if e.target.tagName == "A"
         controller.send 'toggleNotifications'
-        return
+        return false
 
-      target = $(e.target)
       return if target.hasClass('ss-clock')
       return if $.contains(ele[0], e.target)
       controller.send 'toggleNotifications'

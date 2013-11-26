@@ -1,6 +1,6 @@
 {{partial navbar}}
 <div id="drawer-buttons">
-  <a {{action toggleNotifications}} href="#">
+  <a class="notifications-link" {{action toggleNotifications}} href="#">
     <i class="ss-standard ss-clock"></i>
     {{#if notificationCount}}
       {{badge notificationCount style=important}}
