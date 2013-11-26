@@ -5,7 +5,7 @@ Radium.ExternalcontactsRoute = Radium.Route.extend Radium.BulkActionEmailEventsM
         @send 'animateDelete', model, =>
           model.deleteRecord()
 
-      @get('store').commit()
+          @get('store').commit()
 
       @send 'close'
       return false
