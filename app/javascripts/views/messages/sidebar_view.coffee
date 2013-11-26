@@ -1,12 +1,6 @@
 Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   didInsertElement: ->
     @_super.apply this, arguments
-    # Ember.run.scheduleOnce 'afterRender', this, 'fillSidebarWithMessages'
-
-  fillSidebarWithMessages: ->
-    messages = Ember.$('.sidebar').height() / 110
-    if messages > 5
-      @get('controller').send('showMore')
 
   selectionDidChange: (->
     selectedItem = @get 'controller.selectedContent'

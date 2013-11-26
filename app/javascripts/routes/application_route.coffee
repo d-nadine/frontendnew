@@ -142,6 +142,15 @@ Radium.ApplicationRoute = Radium.Route.extend
         into: 'application'
         outlet: 'modal'
 
+    # TODO: figure out a better way to do this
+    animateDelete: (item, callback) ->
+      duration = 600
+
+      modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
+      $(".messages-list #{modelSelector}").fadeOut duration
+
+      Ember.run.later this, callback, duration
+
   activate: ->
     notificationPoller = Radium.NotificationsPoller.create()
     Radium.set('notificationPoller', notificationPoller)

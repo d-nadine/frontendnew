@@ -30,6 +30,16 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
 
       @get('store').commit()
 
+    deleteExternalContact: (model) ->
+      @send 'animateDelete', model, =>
+        name = model.get('displayName')
+
+        model.deleteRecord()
+
+        @get('store').commit()
+
+        @send 'flashSuccess', "#{name} has been deleted."
+
     showMore: ->
       return false if @get('searchText.length')
       @_super.apply this, arguments
