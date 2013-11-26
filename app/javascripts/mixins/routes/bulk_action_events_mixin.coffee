@@ -10,7 +10,12 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
 
       allChecked = controller.get('checkedContent.length') == controller.get('visibleContent.length')
 
-      controller.get('visibleContent').forEach (item) ->
+      content = if controller.hasOwnProperty('visibleContent')
+                  @get('visibleContent')
+                else
+                  @get('content')
+
+      content.forEach (item) ->
         item.set 'isChecked', !allChecked
 
     sendEmail: (form) ->

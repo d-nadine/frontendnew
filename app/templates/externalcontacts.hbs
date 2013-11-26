@@ -21,6 +21,11 @@
 <div class="page-header">
   <h1>Address Book</h1>
   <div class="address-book-controls">
+    <div class="btn-group">
+      <button {{action "confirmDeletion"}} {{bindAttr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}}>
+        Delete All
+      </button>
+    </div>
     <div class="pull-right">
       <form class="form-search pipeline-search">
         <i class="ss-symbolicons-block ss-search"></i>
@@ -32,6 +37,7 @@
     </div>
   </div>
 </div>
+
 <div class="search-result-list">
   {{#unless model.length}}
     {{#if isLoading}}
