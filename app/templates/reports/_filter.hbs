@@ -1,6 +1,6 @@
 <div id="master-filter" class="reports-filter">
   <div>
-    {{date-range source=controller height=15 startDate=startDate endDate=endDate}}
+    {{date-range source=controller height=30 startDate=startDate endDate=endDate filter="filterByDate" reset="reset"}}
   </div>
   <div class="option">
     {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}

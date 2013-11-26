@@ -1,11 +1,12 @@
 Radium.ReportsView = Ember.View.extend
-  init: ->
-    @set('charts', [])
-    @_super()
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
   classNameBindings: 'isFilterPinned:pin-filter'
 
+  init: ->
+    @set('charts', [])
+    @_super()
+    
   didInsertElement: ->
     $filter = @$('#master-filter')
     filterTop = $filter.offset().top

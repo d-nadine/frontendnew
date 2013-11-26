@@ -1,20 +1,4 @@
-.axis path, .axis line {
-  fill: none;
-  stroke: #aaa;
-  shape-rendering: crispEdges;
-}
-
-.brush .extent {
-  stroke: #f09f8c;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
-}
-
-g.context rect.background{
-  fill: none;
-  visibility: visible !important;
-}
-
+// Filter bar layout
 .reports-filter {
   $bg: #dbdbdb;
   padding: 15px;
@@ -29,7 +13,7 @@ g.context rect.background{
     @include box-shadow(0 2px 2px rgba(black, 0.2));
 
     & + .reports-filter-placeholder {
-      height: 70px;
+      height: 120px;
     }
   }
 
@@ -48,6 +32,34 @@ g.context rect.background{
     }
   }
 }
+
+// D3 Filter
+.date-range {
+  @include box-shadow(inset 0 0 10px rgba(black, 0.25));
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #aaa;
+    shape-rendering: crispEdges;
+  }
+
+  .brush .extent {
+    stroke: $link;
+    fill-opacity: .125;
+    fill: $link;
+    shape-rendering: crispEdges;
+  }
+
+  g.context rect.background{
+    fill: none;
+    visibility: visible !important;
+  }
+
+  text {
+    fill: #000;
+  }
+}
+
 
 .report-section {
   margin: 0 0 50px;

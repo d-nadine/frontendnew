@@ -1,4 +1,5 @@
 Radium.DateRangeComponent = Ember.Component.extend
+  classNames: "date-range"
   width: null
   height: 100
   source: null
@@ -7,7 +8,7 @@ Radium.DateRangeComponent = Ember.Component.extend
   domain: [new Date(2013, 0, 1), new Date(2013, 11, 31)]
 
   setupCanvas: (->
-    width = if @get('width') is null then @$().parent().width() - 60 else @get('width')
+    width = if @get('width') is null then @$().parent().innerWidth() else @get('width')
     height = @get 'height'
     margin = @get 'margin'
     domain = @get 'domain'
@@ -31,9 +32,7 @@ Radium.DateRangeComponent = Ember.Component.extend
 
     brush = d3.svg.brush()
                     .x(contextXScale)
-                    .on("brush", =>
-                      @brushDidChange.call(this, brush)
-                    )
+                    .on("brush", @brushDidChange.bind(this))
 
     context = svg.append("g")
       .attr("class","context")
@@ -43,6 +42,8 @@ Radium.DateRangeComponent = Ember.Component.extend
       .attr("class", "x axis top")
       .attr("transform", "translate(0,0)")
       .call(contextAxis)
+      .selectAll("text")
+        .style("text-anchor", "start")
 
     context.append("g")
       .attr("class", "x brush")
@@ -51,14 +52,29 @@ Radium.DateRangeComponent = Ember.Component.extend
         .attr("y", 0)
         .attr("height", height)
 
+    @setProperties(
+      brush: brush
+      svg: svg
+    )
   ).on('didInsertElement')
 
-  brushDidChange: (brush) ->
+  dateRangeDidChange: (->
+    brush = @get('brush')
+    svg = @get('svg')
+    startDate = @get('startDate')
+    endDate = @get('endDate')
+
+    brush.extent([startDate.toJSDate(), endDate.toJSDate()])
+    svg.selectAll(".brush").call(brush);
+  ).observes('startDate', 'endDate')
+
+  brushDidChange: () ->
+    brush = @get('brush')
     if brush.empty()
-      @get('source').setDates()
+      @sendAction('reset')
     else
       extent = brush.extent()
-      @get('source').setDates(extent[0], extent[1])
+      @sendAction('filter', [extent[0], extent[1]])
     dc.redrawAll()
 
 Ember.Handlebars.helper('date-range', Radium.DateRangeComponent)
