@@ -80,17 +80,21 @@
             </div>
           {{/unless}}
         </div>
-        {{#if attendees.length}}
+        {{#if participants.length}}
           <div class="field-group meeting-form-attendees">
             <label class="icon-label">
               <i class="ss-standard ss-users"></i> Attendees
             </label>
             <ul class="inline meeting-form-attendees-list">
-              {{#each attendees itemController="autocompleteItem"}}
+              {{#each participants itemController="autocompleteItem"}}
               <li {{bindAttr title="displayName"}}>
-                {{avatar this style="medium"}}
-                <span class="invitee-name">{{displayName}}</span>
-                <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
+                {{#if isLoaded}}
+                  {{avatar this style="medium"}}
+                  <span class="invitee-name">{{displayName}}</span>
+                  <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
+                {{else}}
+                  {{partial 'is_loading'}}
+                {{/if}}
               </li>
               {{/each}}
             </ul>

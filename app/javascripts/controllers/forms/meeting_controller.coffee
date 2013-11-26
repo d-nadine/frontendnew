@@ -6,7 +6,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       unless person
         displayName = attendee.get('name') || attendee.get('email')
         item = Ember.Object.create
-                name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey')
+                name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey'), isLoaded: true
         @get('contacts').addObject item
         return
 
@@ -66,7 +66,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         if @get('isNew')
           @get('model').commit() 
-          @get('attendees').clear()
         else
           @get('store').commit()
 
@@ -115,12 +114,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
      @get('invitations').map (invitation) -> invitation.get('person')
   ).property('invitations.[]')
 
-  attendees: ( ->
-    attendees = Radium.PeopleList.listPeople(@get('users'), @get('contacts'))
-    attendees.insertAt(0, @get('organizer')) unless @get('isNew')
-    attendees
-  ).property('users.[]', 'contacts.[]')
-
   showTopicTextBox: ( ->
     return false if @get('justAdded')
     return true if @get('isNew')
@@ -153,11 +146,11 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   ).property('startsAt', 'endsAt')
 
   cancellationText: ( ->
-    return if @get('isNew') || !@get('controller.model')
+    return if @get('isNew') || !@get('model') || @get('isSaving')
 
     topic = @get('topic')
 
-    attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+    attendees = @get('participants').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
 
     "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
   ).property('topic', 'isNew')
@@ -195,6 +188,8 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
             self.set 'calendarsOpen', true
 
   ).observes('meetingUsers.[]', 'startsAt')
+
+  participants: Radium.computed.aggregate('users', 'contacts')
 
   isExpandable: (->
     return false if @get('justAdded')

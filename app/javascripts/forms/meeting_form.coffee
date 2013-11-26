@@ -42,17 +42,25 @@ Radium.MeetingForm = Radium.Form.extend
       if @get('reference') && @get('reference.constructor') is Radium.Contact
           meeting.get('invitations').addObject person: type: 'contact', id: @get('reference.id')
 
-    meeting.one 'didCreate', (meeting) =>
+    meeting.one 'didCreate', (result) =>
       # FIXME: client side hack.  The server should return the meeting
       # with the relationships set
       currentUser = @get('currentUser.model')
-      currentUser.reload()
+
+      array = Ember.A()
+
+      array.pushObject currentUser
 
       users.forEach (user) ->
         unless user == currentUser
-          user.reload()
-      contacts.forEach (contact) -> 
-        contact.reload() if contact.reload
-      reference.reload() if reference
+          array.pushObject user
+
+      contacts.forEach (contact) ->
+        array.pushObject(contact) if contact.reload
+
+      array.pushObject(reference) if reference
+
+      array.forEach (model) =>
+        model.reload() unless model.get('currentState.stateName') == "root.loaded.reloading"
 
     @get('store').commit()

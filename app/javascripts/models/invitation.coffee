@@ -1,7 +1,7 @@
 Radium.Invitation = Radium.Model.extend
   meeting: DS.belongsTo 'Radium.Meeting'
 
-  state: DS.attr('string')
+  status: DS.attr('string')
 
   person: ((key, value) ->
     if arguments.length == 2 && value

@@ -5,7 +5,7 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
     removeSelection: (item) ->
       @get('controller').send('removeSelection', item)
 
-  sourceBinding: 'controller.attendees'
+  sourceBinding: 'controller.participants'
 
   queryParameters: (query) ->
     term: query
@@ -28,5 +28,3 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
   """
   filterResults: (item) ->
     !@get('source').contains(item.get('person'))
-
-

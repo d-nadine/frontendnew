@@ -35,15 +35,17 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   time: Ember.computed.alias('startsAt')
 
-  participants: Radium.computed.aggregate('users', 'contacts')
-
   contacts: ( ->
+    return Ember.A() unless @get('invitations.length')
+
     @get('invitations')
       .filter((invitation) -> invitation?.get('person')?.constructor is Radium.Contact)
       .map((invitation) -> invitation.get('person'))
   ).property('invitations.[]')
 
   users: ( ->
+    return Ember.A() unless @get('invitations.length')
+
     @get('invitations')
       .filter((invitation) -> invitation.get('person')?.constructor is Radium.User)
       .map((invitation) -> invitation.get('person'))

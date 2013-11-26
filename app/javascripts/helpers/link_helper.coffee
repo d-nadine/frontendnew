@@ -15,7 +15,7 @@ Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
 Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
   {{#linkTo 'unimplemented'}}{{truncate view.content.topic length=20}}{{/linkTo}}
 """
-Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo 'unimplemented'}}{{view.content.topic}}{{/linkTo}}"
+Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo 'calendar.task' this}}{{view.content.topic}}{{/linkTo}}"
 Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile "{{#linkTo 'emails.show' 'inbox' view.content}}{{view.content.subject}}{{/linkTo}}"
 Ember.TEMPLATES['links/default'] = Ember.Handlebars.compile "{{view.displayName}}"
 
