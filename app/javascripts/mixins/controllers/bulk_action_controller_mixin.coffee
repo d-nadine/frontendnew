@@ -4,7 +4,12 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       @set 'activeForm', form
 
     checkAll: ->
-      @get('visibleContent').setEach 'isChecked', !@get('hasCheckedContent')
+      content = if @hasOwnProperty('visibleContent')
+                  @get('visibleContent')
+                else
+                  @get('content')
+
+      content.setEach 'isChecked', !@get('hasCheckedContent')
 
     cancelSendEmail: ->
       @set 'activeForm', null
@@ -20,6 +25,9 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
       @send 'showForm', 'email'
 
+    toggleThumbnails: ->
+      @toggleProperty('isThumbnailsVisible')
+
   needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
@@ -31,6 +39,8 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   perPage: 7
   activeForm: null
+
+  isThumbnailsVisible: true
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')
   showCallForm: Ember.computed.equal('activeForm', 'call')

@@ -36,7 +36,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
       @transitionToRoute 'pipeline.opendeals'
 
   isEditable: true
-  isThumbnailsVisible: true
 
   init: ->
     @_super.apply this, arguments
@@ -85,9 +84,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     not @get('model.length')
   ).property('isPrivateContacts', 'arrangedContent.[]', 'filter')
-
-  toggleThumbnails: ->
-    @toggleProperty('isThumbnailsVisible')
 
   assignableContent: ( ->
     checkedContent = @get('checkedContent')

@@ -1,5 +1,7 @@
 Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   Radium.CheckableMixin,
+  Radium.BulkActionControllerMixin,
+
   needs: ['addressbook']
   page: 0
   allPagesLoaded: false

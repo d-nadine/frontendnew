@@ -49,7 +49,7 @@
     {{/if}}
     <div class="search-results-header row-fluid">
       <div class="span2 checkers">
-        <a href="#" {{action checkAll}} style="visibility:hidden">
+        <a href="#" {{action checkAll}}>
           {{#if checkedContent}}
             Select None
           {{else}}
@@ -57,7 +57,7 @@
           {{/if}}
         </a>
         <div class="pull-right">
-          <a href="#" {{action toggleThumbnails}} style="visibility:hidden">
+          <a href="#" {{action toggleThumbnails}}>
             {{#if isThumbnailsVisible}}
               Hide
             {{else}}
