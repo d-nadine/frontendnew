@@ -8,17 +8,24 @@ Radium.EmailsEditRoute = Radium.Route.extend
       email = @modelFor('emailsEdit')
       email.setProperties data
 
+      isDraft = email.get('isDraft')
+
       form.get('files').compact().map( (file) -> file.get('attachment'))
           .forEach (attachment) =>
             email.get('attachedFiles').push(attachment.get('id'))
 
-      form.set 'isSending', true
+      unless isDraft
+        form.set 'isSending', true
 
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           form.set 'isSubmitted', false
           form.set 'isSending', false
-          @transitionTo 'emails.sent', email
+          unless isDraft
+            @transitionTo 'emails.sent', email
+            return
+          else
+            @send 'flashSuccess', 'Draft saved'
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
@@ -29,7 +36,6 @@ Radium.EmailsEditRoute = Radium.Route.extend
         @send 'flashError', 'An error has occurred and the email has not been sent'
 
       @store.commit()
-
 
     deleteFromEditor: ->
       messagesController = @controllerFor('messages')
