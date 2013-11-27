@@ -14,3 +14,8 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'attachedFiles', Ember.A()
     @set 'isDraft', false
     @set 'bucket', Math.random().toString(36).substr(2,9)
+
+Radium.DraftEmailForm = Radium.NewEmailForm.extend
+  reset: ->
+    @_super.apply this, arguments
+    @set 'reference', null

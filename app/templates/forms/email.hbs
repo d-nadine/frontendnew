@@ -70,7 +70,11 @@
 
           <div class="btn btn-link btn-messages-action">
             <i class="ss-standard ss-attach"></i>
-            {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
+            {{#unless isDraft}}
+              {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
+            {{else}}
+              {{file-uploader files=controller.files disableSave=disableSave model=reference class="btn-file btn-messages-action"}}
+            {{/unless}}
           </div>
 
           <button class="btn btn-link btn-messages-action" {{action deleteFromEditor}}>

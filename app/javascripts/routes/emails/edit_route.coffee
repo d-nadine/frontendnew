@@ -54,10 +54,11 @@ Radium.EmailsEditRoute = Radium.Route.extend
       false
 
   afterModel: (model, transition) ->
-    emailForm = Radium.NewEmailForm.create()
+    emailForm = Radium.DraftEmailForm.create()
     emailForm.reset()
 
     emailForm.setProperties 
+      reference: model
       subject: model.get('subject')
       message: model.get('message')
       isDraft: true

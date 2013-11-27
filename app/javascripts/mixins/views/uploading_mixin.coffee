@@ -40,7 +40,12 @@ Radium.UploadingMixin = Ember.Mixin.create
 
       uploadToFiles.pushObject(wrappedFile)
 
-      uploader.upload(file, bucket: @get('bucket')).then @handlerFactory(wrappedFile).bind(this)
+      hash = if model = @get('model')
+                type: model.humanize(), id: model.get('id')
+              else
+                bucket: @get('bucket')
+
+      uploader.upload(file, hash).then @handlerFactory(wrappedFile).bind(this)
 
     false
 
