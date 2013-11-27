@@ -123,8 +123,11 @@
           </div>
         {{/if}}
       </div>
-      {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
-
+      {{#unless isDraft}}
+        {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
+      {{else}}
+        {{drag-fileuploader files=controller.files disableSave=disableSave model=reference}}
+      {{/unless}}
       {{#if showFormBox}}
         <div class="new-message-row block-gray">
           {{render "form_box" formBox}}
