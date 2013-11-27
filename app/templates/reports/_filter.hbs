@@ -6,14 +6,13 @@
     {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
   </div>
   <div class="option">
-    <button {{bindAttr class=":btn isCurrentMonth:active"}} {{action "filterThisMonth"}}>This month</button>
-  </div>
-  <div class="option">
-    {{report-dropdown 
-      options=quarters 
-      resetOption=defaultSelectedQuarter
-      selected=selectedQuarter
-      action="filterByQuarter"}}
+    <div class="btn-group">
+      <button {{bindAttr class=":btn isCurrentMonth:active"}} {{action "filterThisMonth"}}>This month</button>
+      <button class="btn" {{action "filterByQuarter" "Q1"}}>Q1</button>
+      <button class="btn" {{action "filterByQuarter" "Q2"}}>Q2</button>
+      <button class="btn" {{action "filterByQuarter" "Q3"}}>Q3</button>
+      <button class="btn" {{action "filterByQuarter" "Q4"}}>Q4</button>
+    </div>
   </div>
   <div class="option">
     {{report-dropdown 
