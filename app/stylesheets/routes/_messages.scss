@@ -206,6 +206,26 @@ $item-border: #dddddd;
   .message-list-readable-item & {
     padding-left: 50px;
   }
+
+  &.is-draft {
+    font-style: italic;
+
+    .btn-read-status {
+      display: none;
+    }
+
+    a {
+      color: $text;
+    }
+
+    .message-item-avatar {
+      background: #333;
+
+      img {
+        opacity: 0.75;
+      }
+    }
+  }
 }
 
 .message-item-avatar {

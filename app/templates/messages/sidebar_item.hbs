@@ -1,10 +1,12 @@
-<div {{bindAttr class=":message-item-content isSelectable :content"}} {{action selectItem this}}>
+<div {{bindAttr class=":message-item-content isSelectable isDraft :content"}} {{action selectItem this}}>
   {{#unless isRead}}
     <span class="btn-read-status btn-unread"></span>
   {{/unless}}
+
   {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}
 
   <small class="muted pull-right messages-list-item-timestamp">
+    {{#if isDraft}}Saved at {{/if}}
     {{formatDateTime timestamp}}
   </small>
 

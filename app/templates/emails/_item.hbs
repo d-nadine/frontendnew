@@ -68,7 +68,7 @@
         </a>
       {{else}}
         {{#linkTo "emails.edit" model class="btn btn-link btn-messages-action"}}
-          <i class="ss-standard ss-right"></i> Edit
+          <i class="ss-standard ss-write"></i> Edit
         {{/linkTo}}
 
         <button tabindex="6" {{action saveDraft this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
