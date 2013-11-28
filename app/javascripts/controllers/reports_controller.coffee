@@ -141,14 +141,17 @@ Radium.ReportsController = Ember.ArrayController.extend
     )
 
   setDates: (start, end) ->
-    unless arguments.length
+    if arguments.length
+      startDate = d3.time.month.floor(start)
+      endDate = d3.time.month.ceil(end)
+    else
       date = new Date()
-      start = d3.time.year.floor(date)
-      end = d3.time.year.ceil(date)
+      startDate = d3.time.year.floor(date)
+      endDate = d3.time.year.ceil(date)
 
     @setProperties(
-      startDate: Ember.DateTime.create(start.getTime())
-      endDate: Ember.DateTime.create(end.getTime())
+      startDate: Ember.DateTime.create(startDate.getTime())
+      endDate: Ember.DateTime.create(endDate.getTime())
     )
 
   actions:
