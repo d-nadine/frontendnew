@@ -1,6 +1,7 @@
 Radium.FormBoxController = Radium.ObjectController.extend
   actions:
     showForm: (form) ->
+      @get("#{form}Form").reset()
       @set 'activeForm', form
 
     submitForm: ->
