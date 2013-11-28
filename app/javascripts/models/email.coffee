@@ -1,6 +1,9 @@
+require 'models/email_props_mixin'
+
 Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
+  Radium.EmailPropertiesMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
@@ -50,10 +53,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
     return unless sender
     sender.constructor is Radium.Contact && sender.get('isLead')
   ).property('sender')
-
-  isScheduled: ( ->
-    !!@get('sendTime') && @get('isDraft')
-  ).property('sendTime', 'isDraft')
 
   isPublic: Ember.computed.not 'isPersonal'
 

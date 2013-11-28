@@ -8,11 +8,7 @@
     {{/unless}}
   </div>
 {{else}}
-  {{#if isScheduled }}
-    <div class="alert alert-success">
-      Email scheduled for delivery on {{sendTimeFormatted}}.  Click <a href="#" {{action cancelDelivery this}}>this</a> to cancel.
-    </div>
-  {{/if}}
+  {{partial 'forms/scheduled_email'}}
   <form class="form">
     {{#if isReply}}
       <h5>

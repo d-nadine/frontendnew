@@ -16,17 +16,7 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'bucket', Math.random().toString(36).substr(2,9)
     @set 'sendTime', null
 
-Radium.DraftEmailForm = Radium.NewEmailForm.extend
+Radium.DraftEmailForm = Radium.NewEmailForm.extend Radium.EmailPropertiesMixin,
   reset: ->
     @_super.apply this, arguments
     @set 'reference', null
-
-  isScheduled: ( ->
-    !!@get('sendTime') && @get('isDraft')
-  ).property('sendTime', 'isDraft')
-
-  sendTimeFormatted: ( ->
-    @get('sendTime').toHumanFormatWithTime()
-  ).property('sendTime')
-
-
