@@ -25,7 +25,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SendEmailMixin,
           .forEach (attachment) =>
             email.get('attachedFiles').push(attachment.get('id'))
 
-      form.set 'isSending', true
+      form.set('isSending', true) unless form.get('isDraft')
 
       email.one 'didCreate', (result) =>
         Ember.run.next =>

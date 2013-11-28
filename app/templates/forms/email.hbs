@@ -8,6 +8,11 @@
     {{/unless}}
   </div>
 {{else}}
+  {{#if isScheduled }}
+    <div class="alert alert-success">
+      Email scheduled for delivery on {{sendTimeFormatted}}.  Click <a href="#" {{action cancelDelivery this}}>this</a> to cancel.
+    </div>
+  {{/if}}
   <form class="form">
     {{#if isReply}}
       <h5>
@@ -101,8 +106,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#" >Send Tomorrow</a></li>
-              <li><a href="#">Send Next Week</a></li>
+              <li><a href="#" {{action scheduleDelivery this 'tomorrow'}}>Send Tomorrow</a></li>
+              <li><a href="#" {{action scheduleDelivery this 'this_week'}}>Send Next Week</a></li>
               <li>{{view view.datePicker class="field"}}</li>
             </ul>
           </div>

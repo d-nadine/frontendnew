@@ -51,6 +51,10 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
     sender.constructor is Radium.Contact && sender.get('isLead')
   ).property('sender')
 
+  isScheduled: ( ->
+    !!@get('sendTime') && @get('isDraft')
+  ).property('sendTime', 'isDraft')
+
   isPublic: Ember.computed.not 'isPersonal'
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

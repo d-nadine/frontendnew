@@ -20,3 +20,13 @@ Radium.DraftEmailForm = Radium.NewEmailForm.extend
   reset: ->
     @_super.apply this, arguments
     @set 'reference', null
+
+  isScheduled: ( ->
+    !!@get('sendTime') && @get('isDraft')
+  ).property('sendTime', 'isDraft')
+
+  sendTimeFormatted: ( ->
+    @get('sendTime').toHumanFormatWithTime()
+  ).property('sendTime')
+
+

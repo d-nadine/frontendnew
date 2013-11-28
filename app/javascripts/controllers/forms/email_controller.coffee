@@ -26,6 +26,16 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
       @set 'isDraft', true
       @send 'saveEmail', form
 
+    scheduleDelivery: (form, date) ->
+      form.set 'sendTime', Ember.DateTime.create().advance(minute: 10)
+      @send 'saveAsDraft', form
+      #Hack to close menu
+      $(document).trigger('click.date-send-menu')
+
+    cancelDelivery: (form) ->
+      form.set 'sendTime', null
+      @send 'saveAsDraft', form
+
     submit: (form) ->
       @set 'isDraft', false
       @send 'saveEmail', form

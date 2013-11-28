@@ -57,7 +57,7 @@ Radium.EmailsEditRoute = Radium.Route.extend
     emailForm = Radium.DraftEmailForm.create()
     emailForm.reset()
 
-    emailForm.setProperties 
+    emailForm.setProperties
       reference: model
       subject: model.get('subject')
       message: model.get('message')
@@ -67,5 +67,6 @@ Radium.EmailsEditRoute = Radium.Route.extend
       bcc: model.get('bccList').map (person) -> person.get('email')
       files: model.get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
       bucket: model.get('bucket')
+      sendTime: model.get('sendTime')
 
     @controllerFor('emailsEdit').set('emailForm', emailForm)
