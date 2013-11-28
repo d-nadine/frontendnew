@@ -11,6 +11,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
     { title: 'Drafts', name: 'drafts', icon: 'file' }
     { title: 'Sent items', name: 'sent', icon: 'send' }
+    { title: 'Scheduled', name: 'scheduled', icon: 'clock' }
     # { title: 'Discussions', name: 'discussions', icon: 'chat' }
     # { title: 'All Emails', name: 'emails', icon: 'mail' }
     # { title: 'Attachments', name: 'attachments', icon: 'attach' }
