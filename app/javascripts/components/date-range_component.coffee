@@ -34,6 +34,8 @@ Radium.DateRangeComponent = Ember.Component.extend
     brush = @brush = d3.svg.brush()
                     .x(contextXScale)
                     .on("brush", @brushDidChange.bind(this))
+                    .on("brushstart", => @set 'isDragging', true)
+                    .on("brushend", => @set 'isDragging', false)
 
     context = @svgContext = svg.append("g")
       .attr("class", "context")
@@ -72,6 +74,7 @@ Radium.DateRangeComponent = Ember.Component.extend
     @svg.selectAll(".brush").call(@brush);
 
   dateRangeDidChange: (->
+    return if @get 'isDragging'
     startDate = @get('startDate')
     endDate = @get('endDate')
 
@@ -83,6 +86,7 @@ Radium.DateRangeComponent = Ember.Component.extend
     if @brush.empty()
       @sendAction('reset')
     else
+      @set 'isDragging', true
       extent = @brush.extent()
       @sendAction('filter', [extent[0], extent[1]])
     dc.redrawAll()
