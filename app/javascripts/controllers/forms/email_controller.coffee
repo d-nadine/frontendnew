@@ -2,9 +2,11 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   actions:
     toggleReminderForm: ->
       @toggleProperty 'includeReminder'
+      return false
 
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
+      return false
 
     createSignature: ->
       @set 'signatureSubmited', true

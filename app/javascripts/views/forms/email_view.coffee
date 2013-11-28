@@ -27,6 +27,11 @@ Radium.FormsEmailView = Radium.FormView.extend
       textArea.setCursorPosition(currentLength)
       @set 'signatureAdded', true
 
+    toggleSendMenu: ->
+      @$('#sendMenu').toggleClass('open')
+      event.preventDefault()
+      event.stopPropagation()
+
   didInsertElement: ->
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
@@ -80,9 +85,6 @@ Radium.FormsEmailView = Radium.FormView.extend
   datePicker: Radium.DatePicker.extend
     # FIXME: stopping the reply form from being posted
     isInvalid: false
-    click: (event)->
-      # prevent bubbling up so the dropdown doesn't close
-      event.stopPropagation()
 
   signature: Radium.TextArea.extend
     classNameBindings: ['isInvalid']

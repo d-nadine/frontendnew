@@ -95,15 +95,15 @@
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
           <button class="btn btn-main" {{bindAttr disabled=disableSave}} {{action saveAsDraft this}}>Save Draft</button>
-          <div class="btn-group">
+          <div id="sendMenu" class="btn-group">
             <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" {{bindAttr disabled=disableSave}}>
+            <button class="btn btn-primary dropdown-toggle" {{bindAttr disabled=disableSave}} {{action toggleSendMenu target=view}}>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
               <li><a href="#">Send Tomorrow</a></li>
               <li><a href="#">Send Next Week</a></li>
-              <li class="dropdown-datepicker">{{view view.datePicker class="field"}}</li>
+              <li>{{view view.datePicker class="field"}}</li>
             </ul>
           </div>
         </div>
