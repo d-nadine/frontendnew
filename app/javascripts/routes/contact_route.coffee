@@ -36,3 +36,10 @@ Radium.ContactRoute = Radium.Route.extend
     @render 'contact/sidebar',
       into: 'contact'
       outlet: 'sidebar'
+
+  setupController: (controller, model) ->
+    ['todo'].forEach (form) ->
+      if form = controller.get("formBox.#{form}Form")
+        form?.reset()
+
+    controller.set('model', model)

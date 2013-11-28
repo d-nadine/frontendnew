@@ -45,3 +45,10 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
       @render 'deal/sidebar',
         into: 'deal'
         outlet: 'sidebar'
+
+  setupController: (controller, model) ->
+    ['todo', 'call', 'meeting'].forEach (form) ->
+      if form = controller.get("formBox.#{form}Form")
+        form?.reset()
+
+    controller.set('model', model)   

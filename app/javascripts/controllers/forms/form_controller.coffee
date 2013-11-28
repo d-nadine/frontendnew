@@ -24,8 +24,7 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
   submitFormDidChange: ( ->
     return unless @get('model.submitForm')
     @send 'submit'
-    @set 'model.submitForm', false
-  ).observes('model.submitForm')
+  ).observes('model.submitForm').on('init')
 
   isPrimaryInputDisabled: (->
     return false if @get('isNew')
