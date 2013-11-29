@@ -4,26 +4,14 @@
   {{#if isSaving}}
     <div class="sending">
       <p><img src="/images/loading.gif"></p>
-      {{#unless isDraft}}
-        <p class="muted">Sending</p>
-      {{else}}
-        <p class="muted">Saving</p>
-      {{/unless}}
+      <p class="muted">Sending</p>
     </div>
   {{else}}
     <div class="subject text-center">
       {{#if subject}}
-        {{#unless isDraft}}
-          <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#linkTo "emails.show" this}}{{subject}}{{/linkTo}}&quot; was sent to</p>
-        {{else}}
-          <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#linkTo "emails.show" this}}{{subject}}{{/linkTo}}&quot; was saved as a draft for these recipients:</p>
-        {{/unless}}
+        <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#linkTo "emails.show" "sent" this}}{{subject}}{{/linkTo}}&quot; was sent to</p>
       {{else}}
-        {{#unless isDraft}}
-          <p><i class="ss-standard ss-check green"></i> Sent an email to</p>
-        {{else}}
-          <p><i class="ss-standard ss-check green"></i> Was saved as a draft for these recipients:</p>
-        {{/unless}}
+        <p><i class="ss-standard ss-check green"></i> Sent an email to</p>
       {{/if}}
     </div>
 

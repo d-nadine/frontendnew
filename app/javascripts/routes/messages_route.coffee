@@ -17,7 +17,7 @@ Radium.MessagesRoute = Radium.Route.extend
         sidebarController.send 'reset'
         true
 
-    saveDraft: (email) ->
+    sendDraft: (email) ->
       email.set 'sentAt', Ember.DateTime.create()
       email.set 'isDraft', false
 

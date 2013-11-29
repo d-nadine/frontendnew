@@ -15,17 +15,13 @@ Radium.EmailsEditRoute = Radium.Route.extend
             email.get('attachedFiles').push(attachment.get('id'))
 
       unless isDraft
-        form.set 'isSending', true
+        @send 'sendDraft', email
+        return
 
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           form.set 'isSubmitted', false
-          form.set 'isSending', false
-          unless isDraft
-            @transitionTo 'emails.sent', email
-            return
-          else
-            @send 'flashSuccess', 'Draft saved'
+          @send 'flashSuccess', 'Draft saved'
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
