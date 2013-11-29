@@ -77,8 +77,15 @@ Radium.DateRangeComponent = Ember.Component.extend
     return if @get 'isDragging'
     startDate = @get('startDate')
     endDate = @get('endDate')
+    domain = @get('domain')
+    domainStart = Ember.DateTime.create(domain[0].getTime())
+    domainEnd = Ember.DateTime.create(domain[1].getTime())
 
-    @brush.extent([startDate.toJSDate(), endDate.toJSDate()])
+    if startDate.isTheSameDayAs(domainStart) and endDate.isTheSameDayAs(domainEnd)
+      @brush.clear()
+    else
+      @brush.extent([startDate.toJSDate(), endDate.toJSDate()])
+      
     @redraw()
   ).observes('startDate', 'endDate')
 

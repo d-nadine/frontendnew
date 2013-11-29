@@ -94,17 +94,17 @@ Radium.ReportsController = Ember.ArrayController.extend
     # iterated over when applying filters
     @setProperties(
       crossfilter: data
-      yearDimension: year
-      yearsGroup: years
-      quarterDimension: quarter
-      quartersGroup: quarters
-      userDimension: user
-      usersGroup: users
-      dealDimension: deal
-      dealsGroup: deals
-      companyDimension: company
-      companiesGroup: companies
-      statusDimension: status
+      year: year
+      years: years
+      quarter: quarter
+      quarters: quarters
+      user: user
+      users: users
+      deal: deal
+      deals: deals
+      company: company
+      companies: companies
+      status: status
       statusesByTotal: statusesByTotal
       statusesByAmount: statusesByAmount
     )
@@ -114,17 +114,17 @@ Radium.ReportsController = Ember.ArrayController.extend
   calcSums: ->
     totalsByStatus = @get 'statusesByTotal'
     statusesByAmount = @get 'statusesByAmount'
-    deals = @get 'dealsGroup'
-    users = @get 'usersGroup'
-    quarters = @get 'quartersGroup'
-    companies = @get 'companiesGroup'
+    deals = @get 'deals'
+    users = @get 'users'
+    quarters = @get 'quarters'
+    companies = @get 'companies'
     allTotals = totalsByStatus.all()
     allStatuses = statusesByAmount.all()
     allDeals = deals.all()
 
-    @set 'users', users.all()
-    @set 'quarters', quarters.all()
-    @set 'companies', companies.all()
+    @set 'allUsers', users.all()
+    @set 'allQuarters', quarters.all()
+    @set 'allCompanies', companies.all()
 
     allTotals.forEach((item) =>
       @set 'total_' + item.key, item.value
@@ -155,9 +155,9 @@ Radium.ReportsController = Ember.ArrayController.extend
   actions:
     filterByDate: (date) ->
       if date
-        @get('quarterDimension').filter(null)
+        @get('quarter').filter(null)
         @set 'selectedQuarter', null
-        @get('dealDimension').filter(date)
+        @get('deal').filter(date)
         @setDates(date[0], date[1])
         @calcSums()
       else
@@ -165,11 +165,11 @@ Radium.ReportsController = Ember.ArrayController.extend
       dc.redrawAll()
 
     reset: ->
-      @get('userDimension').filter(null)
-      @get('dealDimension').filter(null)
-      @get('quarterDimension').filter(null)
-      @get('statusDimension').filter(null)
-      @get('companyDimension').filter(null)
+      @get('user').filter(null)
+      @get('deal').filter(null)
+      @get('quarter').filter(null)
+      @get('status').filter(null)
+      @get('company').filter(null)
       @set 'selectedUser', null
       @set 'selectedQuarter', null
       @calcSums()
@@ -180,8 +180,8 @@ Radium.ReportsController = Ember.ArrayController.extend
       day = @get('app.today').toJSDate()
       start = d3.time.month.floor(day)
       end = d3.time.month.ceil(day)
-      @get('dealDimension').filter([start, end])
-      @get('quarterDimension').filter(null)
+      @get('deal').filter([start, end])
+      @get('quarter').filter(null)
       @set 'selectedQuarter', null
       @setDates(start, end)
       @calcSums()
@@ -189,18 +189,18 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     filterByUser: (user) ->
       @set 'selectedUser', user
-      @get('userDimension').filter(user)
+      @get('user').filter(user)
       @calcSums()
       dc.redrawAll()
 
     filterByCompany: (company) ->
-      @get('companyDimension').filter(company)
+      @get('company').filter(company)
       @set('selectedCompany', company)
       @calcSums()
       dc.redrawAll()
 
     filterByQuarter: (quarter) ->
-      @get('quarterDimension').filter(quarter)
+      @get('quarter').filter(quarter)
       @set 'selectedQuarter', quarter
 
       switch quarter
@@ -217,7 +217,7 @@ Radium.ReportsController = Ember.ArrayController.extend
       date = new Date()
       start = d3.time.year.floor(date)
       end = d3.time.year.ceil(date)
-      @get('yearDimension').filter([start, end])
+      @get('year').filter([start, end])
       @setDates(start, end)
       @calcSums()
       dc.redrawAll()

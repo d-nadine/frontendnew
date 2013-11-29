@@ -109,22 +109,22 @@
   </div>
   <div class="charts">
     {{pie-chart 
-      dimension=controller.userDimension 
-      group=controller.usersGroup
+      dimension=user 
+      group=users
       action="filterByUser"
       size="300" 
       radius="150"}}
 
     {{pie-chart 
-      dimension=controller.companyDimension 
-      group=controller.companiesGroup
+      dimension=company 
+      group=companies
       action="filterByCompany"
       size="300" 
       radius="150"}}
 
     {{pie-chart 
-      dimension=controller.quarterDimension 
-      group=controller.quartersGroup
+      dimension=quarter 
+      group=quarters
       action="filterByQuarter"
       size="300" 
       radius="150"}}
@@ -141,9 +141,9 @@
     <div class="col">
       <h4>{{status_lead_total}} Leads</h4>
       {{bar-chart 
-        dimension=controller.dealDimension 
-        group=controller.dealsGroup
-        domain=controller.domain
+        dimension=deal 
+        group=deals
+        domain=domain
         action="filterByDate"
         valueAccessor="leads"
         height="250"}}
@@ -151,9 +151,9 @@
     <div class="col">
       <h4>{{status_open_total}} deals</h4>
       {{bar-chart 
-        dimension=controller.dealDimension 
-        group=controller.dealsGroup
-        domain=controller.domain
+        dimension=deal 
+        group=deals
+        domain=domain
         action="filterByDate"
         valueAccessor="deals"
         height="250"}}
@@ -161,9 +161,9 @@
     <div class="col">
       <h4>{{status_closed_total}} closed deals</h4>
       {{bar-chart 
-        dimension=controller.dealDimension 
-        group=controller.dealsGroup
-        domain=controller.domain
+        dimension=deal 
+        group=deals
+        domain=domain
         action="filterByDate"
         valueAccessor="closed"
         height="250"}}
@@ -171,9 +171,9 @@
     <div class="col">
       <h4>{{status_lost_total}} lost deals</h4>
       {{bar-chart 
-        dimension=controller.dealDimension 
-        group=controller.dealsGroup
-        domain=controller.domain
+        dimension=deal
+        group=deals
+        domain=domain
         action="filterByDate"
         valueAccessor="lost"
         height="250"}}
