@@ -16,7 +16,7 @@
       </ul>
     </div>
   </div>
-  <h1>{{account.name}} Reports</h1>
+  <h1>{{account.name}} Reports – {{currentYear}}</h1>
 </div>
 
 {{partial "reports/_filter"}}
@@ -143,7 +143,7 @@
       {{bar-chart 
         dimension=controller.dealDimension 
         group=controller.dealsGroup
-        domain=controller.leadsDomain
+        domain=controller.domain
         action="filterByDate"
         valueAccessor="leads"
         height="250"}}
@@ -153,7 +153,7 @@
       {{bar-chart 
         dimension=controller.dealDimension 
         group=controller.dealsGroup
-        domain=controller.leadsDomain
+        domain=controller.domain
         action="filterByDate"
         valueAccessor="deals"
         height="250"}}
@@ -163,7 +163,7 @@
       {{bar-chart 
         dimension=controller.dealDimension 
         group=controller.dealsGroup
-        domain=controller.leadsDomain
+        domain=controller.domain
         action="filterByDate"
         valueAccessor="closed"
         height="250"}}
@@ -173,7 +173,7 @@
       {{bar-chart 
         dimension=controller.dealDimension 
         group=controller.dealsGroup
-        domain=controller.leadsDomain
+        domain=controller.domain
         action="filterByDate"
         valueAccessor="lost"
         height="250"}}

@@ -4,7 +4,7 @@ Radium.DateRangeComponent = Ember.Component.extend
   height: 100
   source: null
   margin: {top: 0, right: 30, bottom: 15, left: 30}
-  domain: [new Date(2013, 0, 1), new Date(2013, 11, 31)]
+  domain: []
 
   componentWidth: (->
     if @get('width') is null then @$().parent().innerWidth() else @get('width')

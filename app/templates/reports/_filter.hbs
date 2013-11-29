@@ -1,13 +1,20 @@
 <div id="master-filter" class="reports-filter">
   <div>
-    {{date-range source=controller height=30 startDate=startDate endDate=endDate filter="filterByDate" reset="reset"}}
+    {{date-range source=controller 
+        height=30 
+        startDate=startDate 
+        endDate=endDate 
+        currentYear=currentYear
+        domain=domain
+        filter="filterByDate" 
+        reset="reset"}}
   </div>
   <div class="option">
-    {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
+    <button class="btn" {{action "reset"}}>Reset</button>
   </div>
   <div class="option">
     <div class="btn-group">
-      <button {{bindAttr class=":btn isCurrentMonth:active"}} {{action "filterThisMonth"}}>This month</button>
+      <button class="btn" {{action "filterThisMonth"}}>This month</button>
       <button class="btn" {{action "filterByQuarter" "Q1"}}>Q1</button>
       <button class="btn" {{action "filterByQuarter" "Q2"}}>Q2</button>
       <button class="btn" {{action "filterByQuarter" "Q3"}}>Q3</button>
@@ -29,7 +36,7 @@
       action="filterByCompany"}}
   </div>
   <div class="option">
-    <button class="btn" {{action "reset"}}>Reset</button>
+    {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
   </div>
 </div>
 <div class="reports-filter-placeholder"></div>

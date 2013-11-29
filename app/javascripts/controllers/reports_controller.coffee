@@ -4,19 +4,17 @@ needs to be significantly trimmed, there is an exorbitant amount of filter looku
 that need to be reduced elegantly
 ###
 Radium.ReportsController = Ember.ArrayController.extend
-  needs: ['account']
+  needs: ['application', 'account']
   account: Ember.computed.alias 'controllers.account'
-  leadsDomain: [new Date(2013, 1, 1), new Date(2013, 11, 31)]
+  app: Ember.computed.alias 'controllers.application'
+  domain: (->
+    date = @get('app.today').toJSDate()
+    [d3.time.year.floor(date), d3.time.year.ceil(date)]
+  ).property()
   startDate: Ember.DateTime.create(),
   endDate: Ember.DateTime.create(),
-
-  isCurrentMonth: (->
-    startMonth = @get('startDate').advance({day: 1})
-    endMonth = @get('endDate').advance({day: -1})
-
-    return if startMonth.get('month') is endMonth.get('month') then true else false
-  ).property('startDate', 'endDate')
-
+  defaultYear: Ember.computed.alias('app.today.year')
+  currentYear: Ember.computed.defaultTo('defaultYear')
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
   defaultSelectedQuarter: 'All Quarters'
@@ -25,7 +23,7 @@ Radium.ReportsController = Ember.ArrayController.extend
   selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
 
   setupCrossfilter: ->
-    today = new Date()
+    today = @get('app.today').toJSDate()
     data = crossfilter(@get('content'))
     all = data.groupAll()
 
@@ -179,7 +177,7 @@ Radium.ReportsController = Ember.ArrayController.extend
       dc.redrawAll()
 
     filterThisMonth: ->
-      day = new Date()
+      day = @get('app.today').toJSDate()
       start = d3.time.month.floor(day)
       end = d3.time.month.ceil(day)
       @get('dealDimension').filter([start, end])
