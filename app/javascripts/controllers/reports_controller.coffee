@@ -61,30 +61,38 @@ Radium.ReportsController = Ember.ArrayController.extend
         p.total = p.total + 1
         if v.status is "lead"
           p.leads++
+          p.leads_total = p.leads_total + v.total
         else if v.status is "lost"
           p.lost++ 
         else if v.status is "closed"
           p.closed++ 
         else 
           p.deals++
+          p.deals_total = p.deals_total + v.total
         p
       (p, v) ->
         p.total = p.total - 1
         if v.status is "lead"
           p.leads--
+          p.leads_total = p.leads_total - v.total
         else if v.status is "lost"
           p.lost-- 
         else if v.status is "closed"
           p.closed-- 
         else 
+          p.deals_total = p.deals_total - v.total
           p.deals--
         p
       () ->
         total: 0
         leads: 0
+        leads_total: 0
         deals: 0
+        deals_total: 0
         closed: 0
+        closed_total: 0
         lost: 0
+        lost_total: 0
     )
 
     company = data.dimension((d) -> d.company)

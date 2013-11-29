@@ -36,10 +36,10 @@
       <div class="text-center summary-details">
         <h2>{{status_lead_total}} leads</h2>
         <h4>
-          80%<br>
-          <small>Lead close rate</small>
+          {{currency total_lead}}<br>
+          <small>Total in pending deals</small>
         </h4>
-        <h4>
+        <h4 class="hidden">
           <i class="ss-symbolicons ss-user green"></i> Up 5%<br>
           <small>Compared to last month</small>
         </h4>
@@ -55,10 +55,10 @@
       <div class="text-center summary-details">
         <h2>{{status_open_total}} Negotiating</h2>
         <h4>
-          80%<br>
-          <small>Negotiating close rate</small>
+          {{currency total_open}}<br>
+          <small>Total in Negotiation at this time period</small>
         </h4>
-        <h4>
+        <h4 class="hidden">
           <i class="ss-standard ss-briefcase text-error"></i> Down 5%<br>
           <small>Compared to last month</small>
         </h4>
@@ -73,8 +73,11 @@
       </div>
       <div class="text-center summary-details">
         <h2>{{status_closed_total}} Closed</h2>
-        <h4>$28, 000.00</h4>
         <h4>
+          {{currency total_closed}}<br>
+          <small>Total in closed deals{{#if total_closed}}. Nice work!{{/if}}</small>
+        </h4>
+        <h4 class="hidden">
           <i class="ss-standard ss-up green"></i> Up 5%<br>
           <small>from last year</small>
         </h4>
@@ -87,10 +90,13 @@
           icon="ss-deletefile"
           fontFamily="ss-symbolicons"}}
       </div>
-      <div class="text-center summary-details">
+      <div {{bindAttr class=":text-center :summary-details total_lost:text-error"}}>
         <h2>{{status_lost_total}} Lost</h2>
-        <h4>$28, 000.00</h4>
         <h4>
+          {{currency total_lost}}<br>
+          <small>Total in lost deals</small>
+        </h4>
+        <h4 class="hidden">
           <i class="ss-standard ss-up text-error"></i> Up 5%<br>
           <small>Average number of lost deals a month</small>
         </h4>
