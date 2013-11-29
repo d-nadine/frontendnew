@@ -38,14 +38,16 @@ Radium.FormsEmailView = Radium.FormView.extend
 
     @get('toList').focus() if @get('controller.showAddresses')
     @$('.btn').tooltip()
-    $(document).on 'click.date-send-menu', (e) =>
+
+    $('body').on 'click.date-send-menu', (e) =>
+      return true if e.target?.type == 'file'
       return if $(e.target).parents('#sendMenu').length
       @$('#sendMenu').removeClass('open')
       e.preventDefault()
       e.stopPropagation()
 
   willDestroyElement: ->
-    $(document).off 'click.date-send-menu'
+    $('body').off 'click.date-send-menu'
 
   noContent: ( ->
     return unless @get('controller.isSubmitted')
