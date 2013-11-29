@@ -43,7 +43,6 @@
           <i class="ss-symbolicons ss-user green"></i> Up 5%<br>
           <small>Compared to last month</small>
         </h4>
-        <a href="#report-leads" class="btn">More</a>
       </div>
     </div>
     <div class="summary">
@@ -63,7 +62,6 @@
           <i class="ss-standard ss-briefcase text-error"></i> Down 5%<br>
           <small>Compared to last month</small>
         </h4>
-        <a href="#report-deals" class="btn">More</a>
       </div>
     </div>
     <div class="summary">
@@ -80,7 +78,6 @@
           <i class="ss-standard ss-up green"></i> Up 5%<br>
           <small>from last year</small>
         </h4>
-        <a href="#report-closed" class="btn">More</a>
       </div>
     </div>
     <div class="summary">
@@ -97,7 +94,6 @@
           <i class="ss-standard ss-up text-error"></i> Up 5%<br>
           <small>Average number of lost deals a month</small>
         </h4>
-        <a href="#report-lost" class="btn">More</a>
       </div>
     </div>
   </div>
@@ -136,73 +132,51 @@
 </section>
 
 <a name="report-leads" id="report-leads" class="report-anchor">&nbsp;</a>
-<section  class="report-section">
-  <div class="page-header">
-    <div class="pull-right report-section-total">
-      {{status_lead_total}} Leads
-    </div>
-    <h4>Leads</h4>
-  </div>
-
-  {{bar-chart 
-    dimension=controller.dealDimension 
-    group=controller.dealsGroup
-    domain=controller.leadsDomain
-    action="filterByDate"
-    valueAccessor="leads"
-    height="400"}}
-</section>
-
-<a name="report-deals" id="report-deals" class="report-anchor">&nbsp;</a>
 <section class="report-section">
   <div class="page-header">
-    <div class="pull-right report-section-total">
-      {{status_open_total}} deals
-    </div>
-    <h4>Deals</h4>
+    <h4>Deal Reports</h4>
   </div>
 
-  {{bar-chart 
-    dimension=controller.dealDimension 
-    group=controller.dealsGroup
-    domain=controller.leadsDomain
-    action="filterByDate"
-    valueAccessor="deals"
-    height="400"}}
-</section>
-
-<a name="report-closed" id="report-closed" class="report-anchor">&nbsp;</a>
-<section class="report-section">
-  <div class="page-header">
-    <div class="pull-right report-section-total">
-      {{status_closed_total}} deals
+  <div class="bar-charts">
+    <div class="col">
+      <h4>{{status_lead_total}} Leads</h4>
+      {{bar-chart 
+        dimension=controller.dealDimension 
+        group=controller.dealsGroup
+        domain=controller.leadsDomain
+        action="filterByDate"
+        valueAccessor="leads"
+        height="250"}}
     </div>
-    <h4>Closed Deals</h4>
-  </div>
-
-  {{bar-chart 
-    dimension=controller.dealDimension 
-    group=controller.dealsGroup
-    domain=controller.leadsDomain
-    action="filterByDate"
-    valueAccessor="closed"
-    height="400"}}
-</section>
-
-<a name="report-lost" id="report-lost" class="report-anchor">&nbsp;</a>
-<section class="report-section">
-  <div class="page-header">
-    <div class="pull-right report-section-total">
-      {{status_lost_total}} deals
+    <div class="col">
+      <h4>{{status_open_total}} deals</h4>
+      {{bar-chart 
+        dimension=controller.dealDimension 
+        group=controller.dealsGroup
+        domain=controller.leadsDomain
+        action="filterByDate"
+        valueAccessor="deals"
+        height="250"}}
     </div>
-    <h4>Lost Deals</h4>
+    <div class="col">
+      <h4>{{status_closed_total}} closed deals</h4>
+      {{bar-chart 
+        dimension=controller.dealDimension 
+        group=controller.dealsGroup
+        domain=controller.leadsDomain
+        action="filterByDate"
+        valueAccessor="closed"
+        height="250"}}
+    </div>
+    <div class="col">
+      <h4>{{status_lost_total}} lost deals</h4>
+      {{bar-chart 
+        dimension=controller.dealDimension 
+        group=controller.dealsGroup
+        domain=controller.leadsDomain
+        action="filterByDate"
+        valueAccessor="lost"
+        height="250"}}
+    </div>
   </div>
-
-  {{bar-chart 
-    dimension=controller.dealDimension 
-    group=controller.dealsGroup
-    domain=controller.leadsDomain
-    action="filterByDate"
-    valueAccessor="lost"
-    height="400"}}
 </section>

@@ -62,7 +62,7 @@
 
 
 .report-section {
-  margin: 0 0 50px;
+  margin: 0 0 10px;
   overflow: hidden;
   clear: both;
 }
@@ -98,7 +98,7 @@
   }
 
   .infographic {
-    height: 150px;
+    height: 110px;
     margin: 0 0 20px;
     text-align: center;
     border-bottom: 1px solid $muted;
@@ -148,6 +148,13 @@
     float: none;
     margin: 0 4%;
     display: inline-block;
+  }
+}
+
+.bar-charts {
+  .col {
+    width: 50%;
+    float: left;
   }
 }
 

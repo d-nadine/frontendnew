@@ -204,7 +204,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     filterByQuarter: (quarter) ->
       @get('quarterDimension').filter(quarter)
       @set 'selectedQuarter', quarter
-      @calcSums()
 
       switch quarter
         when "Q1" then @setDates(new Date(2013, 0, 1), new Date(2013, 2, 31))
@@ -213,6 +212,7 @@ Radium.ReportsController = Ember.ArrayController.extend
         when "Q4" then @setDates(new Date(2013, 9, 1), new Date(2013, 11, 31))
         else @send('filterByYear', new Date())
       
+      @calcSums()
       dc.redrawAll()
 
     filterByYear: (year) ->
