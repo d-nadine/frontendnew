@@ -27,7 +27,7 @@ Radium.FormsTodoView = Radium.FormView.extend
     value: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: (->
-      if @get('referenceName')
+      if @get('referenceName') and !@get('controller.reference.token')
         "Add a todo about #{@get('referenceName')} for #{@get('date').toHumanFormat()}"
       else
         "Add a todo for #{@get('date').toHumanFormat()}"

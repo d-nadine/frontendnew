@@ -59,9 +59,17 @@
         <tbody>
           {{#each statuses itemController="userDealTotalsItem"}}
             <tr>
-              <td>{{this.model}}</td>
+              <td>
+                {{#link-to "pipeline.workflow" this.model}}
+                  {{this.model}}
+                {{/link-to}}
+              </td>
               <td>{{dealsTotal}}</td>
-              <td>{{currency dealsValue}}</td>
+              <td>
+                {{#link-to "pipeline.workflow" this.model}}
+                  {{currency dealsValue}}
+                {{/link-to}}
+              </td>
             </tr>
           {{/each}}
         </tbody>
