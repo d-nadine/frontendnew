@@ -41,6 +41,7 @@ Radium.MessagesRoute = Radium.Route.extend
       @store.commit()
 
     toggleFolders: ->
+      @toggleProperty 'controller.drawerOpen'
       @send 'toggleDrawer', 'messages/folders'
 
     selectFolder: (name) ->

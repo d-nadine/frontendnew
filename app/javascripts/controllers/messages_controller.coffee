@@ -1,6 +1,7 @@
 require 'mixins/controllers/poller_mixin'
 
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin, Radium.PollerMixin,
+  drawerOpen: false
   folder: "inbox"
   pageSize: 5
   needs: ['application', 'messagesSidebar']

@@ -1,3 +1,4 @@
-<a {{action toggleCalendarDrawer}}>
+<a {{action toggleCalendarDrawer}} {{bindAttr class="isCalendarDrawerOpen:active"}}>
+  <i {{bindAttr class=":ss-standard isCalendarDrawerOpen:ss-left:ss-right :drawer-toggle-arrow"}}></i>
   <i class="ss-symbolicons-block ss-calendar"></i>
 </a>
