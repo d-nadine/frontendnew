@@ -27,6 +27,10 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   sendTime: DS.attr('datetime')
   checkForResponse: DS.attr('datetime')
 
+  isScheduled: ( ->
+    @get('isDraft') && @get('sendTime')
+  ).property('isDraft', 'sendTime')
+
   sender: ( ->
     @get('_senderUser') ||
     @get('_senderContact')

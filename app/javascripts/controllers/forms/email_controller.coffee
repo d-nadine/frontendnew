@@ -22,9 +22,9 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
 
       @trigger 'signatureAdded'
 
-    saveAsDraft: (form) ->
+    saveAsDraft: (form, transitionFolder) ->
       @set 'isDraft', true
-      @send 'saveEmail', form
+      @send 'saveEmail', form, transitionFolder
 
     scheduleDelivery: (form, date) ->
       if typeof date is "string"
@@ -34,7 +34,7 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
           date = Ember.DateTime.create().atEndOfWeek()
 
       form.set 'sendTime', date
-      @send 'saveAsDraft', form
+      @send 'saveAsDraft', form, 'scheduled'
       #Hack to close menu
       $('#sendMenu').removeClass('open')
       $(document).trigger('click.date-send-menu')
@@ -50,7 +50,7 @@ Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
 
     cancelDelivery: (form) ->
       form.set 'sendTime', null
-      @send 'saveAsDraft', form
+      @send 'saveAsDraft', form, 'drafts'
 
     submit: (form) ->
       @set 'isDraft', false

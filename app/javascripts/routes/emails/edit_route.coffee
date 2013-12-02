@@ -1,6 +1,6 @@
 Radium.EmailsEditRoute = Radium.Route.extend
   actions:
-    saveEmail: (form) ->
+    saveEmail: (form, transitionFolder) ->
       form.set 'isSubmitted', true
       return unless form.get('isValid')
 
@@ -22,6 +22,7 @@ Radium.EmailsEditRoute = Radium.Route.extend
         Ember.run.next =>
           form.set 'isSubmitted', false
           @send 'flashSuccess', 'Draft saved'
+          @transitionTo 'emails.edit', transitionFolder, result if transitionFolder
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false

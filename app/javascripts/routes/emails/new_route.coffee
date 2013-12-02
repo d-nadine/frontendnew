@@ -34,10 +34,11 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SendEmailMixin,
           messagesController = @controllerFor('messages')
           messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
           if result.get('isDraft')
-            @send 'flashSuccess', 'Email has been saved to the drafts folder'
+            folder = if result.get('isScheduled') then 'scheduled' else 'drafts'
+            @send 'flashSuccess', "Email has been saved to the #{folder} folder"
             @controllerFor('messagesSidebar').send 'reset'
             @controllerFor('messages').set('selectedContent', result)
-            @transitionTo 'emails.edit', 'drafts', result
+            @transitionTo 'emails.edit', folder, result
           else
             @transitionTo 'emails.sent', email
 
