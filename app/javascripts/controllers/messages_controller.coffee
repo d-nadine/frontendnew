@@ -85,6 +85,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     inbox: "INBOX"
     sent: "Sent Messages"
     drafts: "Drafts"
+    scheduled: "Scheduled"
 
   queryParams: ->
     folder = @get('folder')
