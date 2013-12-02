@@ -64,5 +64,6 @@ Radium.EmailsEditRoute = Radium.Route.extend
       files: model.get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
       bucket: model.get('bucket')
       sendTime: model.get('sendTime')
+      checkForResponse: model.get('checkForResponse')
 
     @controllerFor('emailsEdit').set('emailForm', emailForm)

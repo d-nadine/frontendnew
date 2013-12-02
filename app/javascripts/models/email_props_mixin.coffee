@@ -6,3 +6,7 @@ Radium.EmailPropertiesMixin = Ember.Mixin.create
   sendTimeFormatted: ( ->
     @get('sendTime').toHumanFormatWithTime()
   ).property('sendTime')
+
+  checkForResponseFormatted: ( ->
+    @get('checkForResponse')?.toHumanFormatWithTime()
+  ).property('checkForResponse')

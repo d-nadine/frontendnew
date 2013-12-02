@@ -21,6 +21,7 @@ Radium.EmailForm = Radium.Form.extend
     @set('isDraft', false)
     @set('bucket', Math.random().toString(36).substr(2,9))
     @set('sendTime', null)
+    @set('checkForResponse', null)
 
   data: ( ->
     subject: @get('subject')
@@ -43,6 +44,7 @@ Radium.EmailForm = Radium.Form.extend
     attachedFiles: Ember.A()
     bucket: @get('bucket')
     sendTime: @get('sendTime')
+    checkForResponse: @get('checkForResponse')
   ).property().volatile()
 
   isValid: ( ->

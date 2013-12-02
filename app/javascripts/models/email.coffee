@@ -25,6 +25,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   isDraft: DS.attr('boolean')
   name: Ember.computed.alias 'subject'
   sendTime: DS.attr('datetime')
+  checkForResponse: DS.attr('datetime')
 
   sender: ( ->
     @get('_senderUser') ||

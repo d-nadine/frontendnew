@@ -256,3 +256,13 @@
 .emails-show-view {
   position: relative;
 }
+
+#sendMenu{
+  .time-picker, .picker-submit{
+    display: block;
+  }
+}
+
+.check-response{
+  margin-top: 10px;
+}

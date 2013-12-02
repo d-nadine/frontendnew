@@ -16,3 +16,5 @@ Radium.NotificationsLeadEmailController = Radium.NotificationsAssignController.e
 Radium.NotificationsNewUserController = Radium.NotificationsAssignController.extend()
 
 Radium.NotificationsNewController = Radium.NotificationsAssignController.extend()
+
+Radium.NotificationsScheduledEmailController = Radium.NotificationsAssignController.extend()

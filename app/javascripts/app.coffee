@@ -62,9 +62,9 @@ require 'models'
 
 require /^forms/
 
-requireAll /components/
-
 require 'views'
+
+requireAll /components/
 
 require 'lib/radium/checkable_mixin'
 require 'lib/radium/selectable_mixin'

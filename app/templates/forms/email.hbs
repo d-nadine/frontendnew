@@ -104,23 +104,25 @@
             <ul class="dropdown-menu">
               <li><a href="#" {{action scheduleDelivery this 'tomorrow'}}>Send Tomorrow</a></li>
               <li><a href="#" {{action scheduleDelivery this 'this_week'}}>Send Next Week</a></li>
-              <li>{{view view.datePicker class="field"}}</li>
+              <li>{{date-timepicker submitDate="scheduleDelivery" model=this}}</li>
             </ul>
           </div>
-        </div>
+        </div> 
         {{#if includeReminder}}
           <div>
             <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response in </p>
-            {{view view.datePicker class="field check-response-datepicker"}}
-            <a href="#" class="btn btn-main btn-primary" {{action toggleReminderForm}}>
-              OK
-            </a>
+            {{date-timepicker submitDate="setCheckForResponse" model=this}}
           </div>
         {{else}}
           <div class="btn-toolbar">
             <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
               <i class="ss-standard ss-info"></i> Check for response?
             </a>
+          </div>
+        {{/if}}
+        {{#if checkForResponse}}
+          <div class="alert alert-success check-response">
+            Checking for response at {{checkForResponseFormatted}}.  Click <a href="#" {{action cancelCheckForResponse this}}>this</a> to cancel.
           </div>
         {{/if}}
       </div>

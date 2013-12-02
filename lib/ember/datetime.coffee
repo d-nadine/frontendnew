@@ -23,6 +23,9 @@ Ember.DateTime.reopen
     return false if Ember.DateTime.compare(this, end) == 1
     true
 
+  isBeforeNow: ->
+    Ember.DateTime.compare(this, Ember.DateTime.create()) != 1
+
   isBeforeToday: ->
     yesterDay = Ember.DateTime.create().advance(day: -1)
     Ember.DateTime.compareDate(this, yesterDay) != 1

@@ -15,6 +15,7 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'isDraft', false
     @set 'bucket', Math.random().toString(36).substr(2,9)
     @set 'sendTime', null
+    @set 'checkForResponse', null
 
 Radium.DraftEmailForm = Radium.NewEmailForm.extend Radium.EmailPropertiesMixin,
   reset: ->
