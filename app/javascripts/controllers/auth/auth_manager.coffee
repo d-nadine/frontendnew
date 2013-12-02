@@ -14,7 +14,7 @@ Radium.AuthManager = Ember.Object.extend
 
   setAjaxHeaders: ( ->
     if token = @get('_token')
-      $.ajaxSetup
+      Ember.$.ajaxSetup
         headers:
           "X-Ember-Compat": "true",
           "X-User-Token": token

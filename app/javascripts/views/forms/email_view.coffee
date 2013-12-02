@@ -41,6 +41,7 @@ Radium.FormsEmailView = Radium.FormView.extend
 
     $('body').on 'click.date-send-menu', (e) =>
       return true if e.target?.type == 'file'
+      return true if e.target.tagName == 'A'
       target = $(e.target)
       return if target.hasClass('ui-timepicker-selected') || target.parents('.timepicker').length
       return if target.parents('#sendMenu').length
