@@ -4,6 +4,7 @@ Radium.Notification = Radium.Model.extend
   time: DS.attr('datetime')
   read: DS.attr('boolean')
   user: DS.belongsTo('Radium.User')
+  email: DS.belongsTo('Radium.Email')
   sentBy: DS.belongsTo('Radium.User')
 
   reference: ((key, value) ->

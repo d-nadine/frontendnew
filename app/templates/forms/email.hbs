@@ -104,14 +104,14 @@
             <ul class="dropdown-menu">
               <li><a href="#" {{action scheduleDelivery this 'tomorrow'}}>Send Tomorrow</a></li>
               <li><a href="#" {{action scheduleDelivery this 'this_week'}}>Send Next Week</a></li>
-              <li>{{date-timepicker submitDate="scheduleDelivery" model=this}}</li>
+              <li>{{date-timepicker submitDate="scheduleDelivery" model=model}}</li>
             </ul>
           </div>
         </div> 
         {{#if includeReminder}}
           <div>
             <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response in </p>
-            {{date-timepicker submitDate="setCheckForResponse" model=this}}
+            {{date-timepicker submitDate="setCheckForResponse" model=model}}
           </div>
         {{else}}
           <div class="btn-toolbar">

@@ -1,6 +1,6 @@
 require 'forms/email_form'
 
-Radium.NewEmailForm = Radium.EmailForm.extend
+Radium.NewEmailForm = Radium.EmailForm.extend Radium.EmailPropertiesMixin,
   showAddresses: true
   showSubject: true
 
@@ -17,7 +17,7 @@ Radium.NewEmailForm = Radium.EmailForm.extend
     @set 'sendTime', null
     @set 'checkForResponse', null
 
-Radium.DraftEmailForm = Radium.NewEmailForm.extend Radium.EmailPropertiesMixin,
+Radium.DraftEmailForm = Radium.NewEmailForm.extend
   reset: ->
     @_super.apply this, arguments
     @set 'reference', null
