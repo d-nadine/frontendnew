@@ -39,6 +39,13 @@
           background-color: $background;
           text-shadow: none;
         }
+
+        @include breakpoint(landscape) {
+          padding: {
+            right: 10px;
+            left: 10px;
+          }
+        }
       }
 
     }

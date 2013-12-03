@@ -19,8 +19,9 @@
 }
 
 .dashboard-grid-item {
+  width: percentage(244px / 1000px);
   height: 244px;
-  margin: 0 0 8px 8px;
+  margin: 0 0 8px percentage(8px / 1000px);
   float: left;
 }
 
@@ -40,10 +41,9 @@
 }
 
 .dashboard-grid-link {
-  width: 244px;
   height: 244px;
   padding: 60px 20px 50px;
-  display: inline-block;
+  display: block;
   overflow: hidden;
   text-align: center;
   position: relative;

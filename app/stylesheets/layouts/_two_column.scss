@@ -1,6 +1,10 @@
 .two-column-layout {
   padding: 75px 20px 60px 378px;
   margin-left: $button-bar-width + $sidebar-border-size;
+
+  @include breakpoint(landscape) {
+    padding-left: 305px;
+  }
 }
 
 .company-view,

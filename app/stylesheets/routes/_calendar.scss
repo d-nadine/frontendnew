@@ -8,9 +8,17 @@ $calendar-off: #d8d9d9;
     &.is-calendar-drawer-open {
       padding-left: 380px;
 
+      @include breakpoint(landscape) {
+        padding-left: 305px;
+      }
+
       .sidebar {
         @include translateX(0);
       }
+    }
+
+    @include breakpoint(landscape) {
+      padding-left: 10px;
     }
   }
 
