@@ -5,6 +5,7 @@ $navbar: #313131;
   
   .navbar-inner {
     height: $navbar-height;
+    padding: 0 !important;
     background: $navbar;
     border: none;
     @include box-shadow(none);

@@ -15,7 +15,6 @@
   }
 
   @include breakpoint(portrait) {
-    width: 220px;
     @include translateX(-290px);
   }
 

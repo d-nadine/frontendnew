@@ -5,6 +5,10 @@
   @include breakpoint(landscape) {
     padding-left: 305px;
   }
+
+  @include breakpoint(portrait) {
+    padding-left: 10px;
+  }
 }
 
 .company-view,
@@ -32,6 +36,7 @@
   right: 0;
   z-index: 10;
   border-bottom: 3px solid #797979;
+  background: #F3F3F3;
 
   .is-scrolled & {
     height: 40px;

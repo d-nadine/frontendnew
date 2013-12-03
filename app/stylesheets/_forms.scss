@@ -166,17 +166,15 @@
 
 .form-box {
   margin: 0 0 20px;
+  display: -webkit-flex;
+  display: flex;
   @include display-box;
   @include box-orient(horizontal);
-  @include box-align(start);
-  display: -webkit-flex;
-  -webkit-flex-flow: row wrap;
-  display: flex;
-  flex-flow: row wrap;
+  @include box-align(stretch);
 
   .form-container {
-    @include box-flex(1);
     flex: 1;
+    @include box-flex(1);
   }
 
   .form-box-controls {

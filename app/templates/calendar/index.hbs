@@ -1,8 +1,5 @@
 <div class="calendar-toolbar">
-  <h3 class="calendar-date-title pull-left">
-    <i class="ss-standard ss-calendar month-datepicker-button"></i> {{formatDateTime date format="monthYear"}}
-  </h3>
-  <div class="btn-group pull-left">
+  <div class="btn-group pull-right">
     {{#linkTo "calendar.index" lastMonth class="btn calendar-month-btn"}}
       <i class="ss-standard ss-directleft"></i>
     {{/linkTo}}
@@ -11,6 +8,9 @@
       <i class="ss-standard ss-directright"></i>
     {{/linkTo}}
   </div>
+  <h3 class="calendar-date-title">
+    <i class="ss-standard ss-calendar month-datepicker-button"></i> {{formatDateTime date format="monthYear"}}
+  </h3>
 </div>
 <div>
   {{render "form_box" formBox}}

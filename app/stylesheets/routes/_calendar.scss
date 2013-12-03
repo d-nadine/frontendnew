@@ -65,7 +65,6 @@ $calendar-off: #d8d9d9;
 
 .calendar-date-title {
   min-width: 415px;
-  display: inline-block;
   font-size: 30px;
 }
 
@@ -280,6 +279,21 @@ $calendar-off: #d8d9d9;
     text-align: center;
     letter-spacing: 1px;
     text-decoration: none;
+  }
+
+  @include breakpoint(portrait) {
+    border-collapse: collapse;
+    table-layout: auto;
+
+    thead {
+      display: none;
+    }
+
+    td {
+      width: 100%;
+      float: left;
+      @include border-radius(0);
+    }
   }
 }
 

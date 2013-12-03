@@ -46,6 +46,7 @@
   height: 100%;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  @include user-select(none);
 }
 
 .scroller .overview{

@@ -31,7 +31,10 @@ Radium.ScrollableMixin = Em.Mixin.create
     if @get 'scroller'
       @setSidebarHeight()
     else
-      scroller = @$('.scroller').tinyscrollbar()
+      isTouch = 'ontouchstart' of window
+      scroller = @$('.scroller').tinyscrollbar(
+       invertscroll: if isTouch then true else false
+      )
       @setSidebarHeight()
       @set 'scroller', scroller
 
