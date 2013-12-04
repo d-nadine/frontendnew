@@ -104,7 +104,7 @@
             <ul class="dropdown-menu">
               <li><a href="#" {{action scheduleDelivery this 'tomorrow'}}>Send Tomorrow</a></li>
               <li><a href="#" {{action scheduleDelivery this 'this_week'}}>Send Next Week</a></li>
-              <li>{{date-timepicker submitDate="scheduleDelivery" model=model}}</li>
+              <li>{{date-timepicker submitDate="scheduleDelivery" model=this}}</li>
             </ul>
           </div>
         </div> 
@@ -120,11 +120,7 @@
             </a>
           </div>
         {{/if}}
-        {{#if checkForResponse}}
-          <div class="alert alert-success check-response">
-            Checking for response at {{checkForResponseFormatted}}.  Click <a href="#" {{action cancelCheckForResponse this}}>this</a> to cancel.
-          </div>
-        {{/if}}
+
       </div>
       {{#unless isDraft}}
         {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}

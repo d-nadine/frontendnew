@@ -44,6 +44,14 @@ Radium.EmailsItemController = Radium.ObjectController.extend
 
       @send 'delete', item
 
+    cancelCheckForResponse: (email) ->
+      email.set 'checkForResponse', null
+
+      email.one 'didUpdate', (result) =>
+        @send 'flashSuccess', 'Response check cancelled'
+
+      @get('store').commit()
+
   showMeta : false
   currentForm: 'todo'
 

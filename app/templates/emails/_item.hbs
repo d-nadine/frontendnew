@@ -49,7 +49,9 @@
         {{htmlBodyFormatter model}}
       </div>
     </div>
-    
+    {{#unless isDraft}}
+      {{partial 'emails/check_for_response'}}
+    {{/unless}}
     {{#if attachments}}
       <div class="clearfix email-item-actions email-item-attachments">
         {{partial "shared/attachments"}}
