@@ -131,7 +131,8 @@
   overflow: auto;
 
   .jspVerticalBar {
-    width: 8px;
+    width: 0; // Set to 0 so we don't get unwanted padding
+    right: 10px;
     background: none;
   }
 
@@ -140,6 +141,7 @@
   }
 
   .jspDrag {
+    width: 8px;
     background: rgba(black, 0.5);
     @include border-radius(8px);
     opacity: 0;

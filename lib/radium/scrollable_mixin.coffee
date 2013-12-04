@@ -1,8 +1,8 @@
 Radium.ScrollableMixin = Em.Mixin.create
   classNames: ['scroll-pane']
   scrollbarResizeTimer: null
-  # didInsertElement: ->
-  #   Ember.run.scheduleOnce('afterRender', @setupScollbar.bind(this))
+  willDestroyElement: ->
+    @$().data('jsp').destroy()
 
   getDimensions: ->
     $this = @$()
