@@ -1,64 +1,35 @@
 Radium.ScrollableMixin = Em.Mixin.create
+  classNames: ['scroll-pane']
   scrollbarResizeTimer: null
-  didInsertElement: ->
-    @_super.apply this, arguments
-    Ember.run.scheduleOnce 'afterRender', this, ->
-      @setScroller()
-      @set 'scrollbarResizeTimer', setInterval( =>
-        @setSidebarHeight()
-      , 100)
+  # didInsertElement: ->
+  #   Ember.run.scheduleOnce('afterRender', @setupScollbar.bind(this))
 
-  willDestroyElement: ->
-    clearInterval @get('scrollbarResizeTimer') if @get('scrollbarResizeTimer')
-    @set 'scrollbarResizeTimer', null
-    @removeScrolling()
+  getDimensions: ->
+    $this = @$()
+    height = $(window).height() - 60
+    width = $this.innerWidth()
+    dimensions =
+      width: width
+      height: height
 
-  setSidebarHeight: ->
-    # Use the .sidebar for the height, since notifications is laid out differently
-    return unless  @get('state') is 'inDOM'
+  setupScollbar: (->
+    $(window).on('resize.jscrollpane', @_resize.bind(this))
+    dimensions = @getDimensions()
 
-    height = Em.$('.sidebar').outerHeight(true)
-
-    Ember.run.next =>
-      return if @get('state') is 'destroying'
-      $(".viewport").css('height': height + 'px')
-      @$('.scroller').tinyscrollbar_update('relative')
-
-  setScroller: ->
-    if @get('state') == 'destroying'
-      return
-
-    if @get 'scroller'
-      @setSidebarHeight()
-    else
-      isTouch = 'ontouchstart' of window
-      scroller = @$('.scroller').tinyscrollbar(
-       invertscroll: if isTouch then true else false
+    @$()
+      .height(dimensions.height)
+      .jScrollPane(
+        autoReinitialise: true
+        verticalDragMaxWidth: 0
+        verticalDragMinWidth: 0
+        contentWidth: dimensions.width
+        verticalGutter: 0
+        horizontalGutter: 0
       )
-      @setSidebarHeight()
-      @set 'scroller', scroller
+  ).on('didInsertElement')
 
-  removeScrolling: ->
-    # @get('scroller').unbindAll() if @get('scroller')
-    # @$('scroller .scrollbar').hide()
-    # @$('.scrollcontainer').find("*").andSelf().unbind()
-    # @set('scroller', null)
-
-  layout: Ember.Handlebars.compile """
-    <div class="scroller">
-      <div class="scrollbar">
-        <div class="track">
-          <div class="thumb">
-            <div class="end"></div>
-          </div>
-        </div>
-      </div>
-      <div class="viewport">
-        <div class="overview">
-          <div class="panel-content">
-            {{yield}}
-          </div>
-        </div>
-      </div>
-    </div>
-  """
+  _resize: ->
+    dimensions = @getDimensions()
+    @$()
+      .height(dimensions.height)
+      .data('jsp').reinitialise()

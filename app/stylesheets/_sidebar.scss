@@ -126,6 +126,31 @@
   }
 }
 
+.scroll-pane {
+  width: 100%;
+  overflow: auto;
+
+  .jspVerticalBar {
+    width: 8px;
+    background: none;
+  }
+
+  .jspTrack {
+    background: none;
+  }
+
+  .jspDrag {
+    background: rgba(black, 0.5);
+    @include border-radius(8px);
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover .jspDrag {
+    opacity: 1;
+  }
+}
+
 .sidebar-panel {
   margin: 0 0 2px;
 }
