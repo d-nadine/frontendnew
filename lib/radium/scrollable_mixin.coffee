@@ -1,6 +1,14 @@
+# Depends on jScrollPane (http://jscrollpane.kelvinluck.com/)
+# Only available for vertical scrolling
+
 Radium.ScrollableMixin = Em.Mixin.create
   classNames: ['scroll-pane']
   scrollbarResizeTimer: null
+
+  # Hooks - sends event scrollPositionY,
+  didScrollToBottom: Ember.K
+  didScrollToTop: Ember.K
+
   willDestroyElement: ->
     @$().data('jsp').destroy()
 
@@ -26,7 +34,13 @@ Radium.ScrollableMixin = Em.Mixin.create
         verticalGutter: 0
         horizontalGutter: 0
       )
+      .on('jsp-scroll-y', @didScrollHandler.bind(this))
   ).on('didInsertElement')
+
+  # Event handler for scrolling on Y axis, dispatches to public hooks
+  didScrollHandler: (event, scrollPositionY, isAtTop, isAtBottom) ->
+    @didScrollToBottom.apply(this, [event, scrollPositionY]) if isAtBottom
+    @didScrollToTop.apply(this, [event, scrollPositionY]) if isAtTop
 
   _resize: ->
     dimensions = @getDimensions()

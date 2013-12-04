@@ -2,6 +2,11 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
   didInsertElement: ->
     @_super.apply this, arguments
 
+  didScrollToBottom: (event, scrollY) ->
+    controller = @get('controller')
+    return if controller.get('isLoading')
+    controller.send 'showMore'
+
   selectionDidChange: (->
     selectedItem = @get 'controller.selectedContent'
     return unless selectedItem
