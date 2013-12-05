@@ -4,13 +4,11 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
     @setupInfiniteScrollingListener()
 
   setupInfiniteScrollingListener: ->
-    scroller = Ember.$('.sidebar .scroller')
-    scroller.on 'mousewheel', @didScroll.bind(this)
-    scroller.on 'DOMMouseScroll', @didScroll.bind(this)
+    @addObserver 'isAtBottom', this, 'didScroll'
 
-  teardownInfiniteScrollingListener: ->
-    scroller.off('mousewheel', @didScroll.bind(this))
-    scroller.off('DOMMouseScroll', @didScroll.bind(this))
+  willDestroyElement: ->
+    @_super.apply this, arguments
+    @removeObserver 'isAtBottom', this, 'didScroll'
 
   didScroll: ->
     return unless @isScrolledToTheBottom()
@@ -27,10 +25,4 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
   isScrolledToTheBottom: ->
     return if @dontScroll()
 
-    viewportBottom = $('.viewport').offset().top + $('.viewport').height()
-
-    thumbTop = $('.thumb').offset().top
-
-    thumbBottom = thumbTop  + $('.thumb').height()
-
-    ((Math.round(viewportBottom - thumbBottom)) <= 30)
+    @get('isAtBottom')

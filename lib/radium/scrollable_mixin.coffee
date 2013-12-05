@@ -4,10 +4,8 @@
 Radium.ScrollableMixin = Em.Mixin.create
   classNames: ['scroll-pane']
   scrollbarResizeTimer: null
-
-  # Hooks - sends event scrollPositionY,
-  didScrollToBottom: Ember.K
-  didScrollToTop: Ember.K
+  isAtBottom: false
+  isAtTop: false
 
   willDestroyElement: ->
     @$().data('jsp').destroy()
@@ -39,8 +37,8 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   # Event handler for scrolling on Y axis, dispatches to public hooks
   didScrollHandler: (event, scrollPositionY, isAtTop, isAtBottom) ->
-    @didScrollToBottom.apply(this, [event, scrollPositionY]) if isAtBottom
-    @didScrollToTop.apply(this, [event, scrollPositionY]) if isAtTop
+    @set('isAtBottom', isAtBottom)
+    @set('isAtTop', isAtTop)
 
   _resize: ->
     dimensions = @getDimensions()
