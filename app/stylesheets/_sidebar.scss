@@ -126,33 +126,6 @@
   }
 }
 
-.scroll-pane {
-  width: 100%;
-  overflow: auto;
-
-  .jspVerticalBar {
-    width: 0; // Set to 0 so we don't get unwanted padding
-    right: 10px;
-    background: none;
-  }
-
-  .jspTrack {
-    background: none;
-  }
-
-  .jspDrag {
-    width: 8px;
-    background: rgba(black, 0.5);
-    @include border-radius(8px);
-    opacity: 0;
-    @include transition(opacity 0.25s);
-  }
-
-  &:hover .jspDrag {
-    opacity: 1;
-  }
-}
-
 .sidebar-panel {
   margin: 0 0 2px;
 }
