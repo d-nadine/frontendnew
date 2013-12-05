@@ -9,6 +9,7 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   willDestroyElement: ->
     @$().data('jsp').destroy()
+    $(window).off 'resize.jscrollpane'
 
   getDimensions: ->
     $this = @$()
