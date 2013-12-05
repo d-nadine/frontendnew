@@ -23,6 +23,10 @@ $body: #6e6e6e;
   a {
     color: $body;
   }
+
+  @include breakpoint(portrait) {
+    font-size: 11px;
+  }
 }
 
 .address-book-button {
@@ -73,6 +77,11 @@ $body: #6e6e6e;
     height: 50px;
     font-size: 50px;
     line-height: 60px;
+
+    @include breakpoint(portrait) {
+      margin-right: 0;
+      float: right;
+    }
   }
 
   .delete {
@@ -87,6 +96,21 @@ $body: #6e6e6e;
 
   .checker {
     position: relative;
+  }
+
+  .checkers {
+    text-align: right;
+
+
+    @include breakpoint(portrait) {
+      text-align: left;
+
+      .check-box {
+        top: 18px;
+        left: 8px;
+        bottom: auto;
+      }
+    }
   }
 
   .check-box {

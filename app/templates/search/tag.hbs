@@ -1,5 +1,5 @@
 <div class="span2 checkers">
-  {{partial 'shared/check_button'}}
+  {{check-box checked=isChecked class="checker-block"}}
 </div>
 <div class="span2 name">
   <span class="name">{{#linkTo "unimplemented"}}{{name}}{{/linkTo}}</span>
@@ -16,4 +16,6 @@
 <div class="span2">
   {{partial 'search/members'}}
 </div>
-{{partial 'search/delete'}}
+<div class="span1">
+  {{partial 'search/delete'}}
+</div>

@@ -1,16 +1,14 @@
 <div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
-  <div class="pull-right">
-    {{#if isThumbnailsVisible}}
-      {{#if isLoaded}}
-        {{avatar this size=medium class="img-polaroid"}}
-      {{else}}
-        {{partial 'is_loading'}}
-      {{/if}}
+  {{#if isThumbnailsVisible}}
+    {{#if isLoaded}}
+      {{avatar this size=medium class="img-polaroid"}}
+    {{else}}
+      {{partial 'is_loading'}}
     {{/if}}
-  </div>
+  {{/if}}
 </div>
-<div class="span4 name">
+<div class="span6 name">
   <div class="clearfix search-list-item-title">
     <h4>
       {{name}}
@@ -34,7 +32,7 @@
     {{/if}}
   </div>
 </div>
-<div class="span2">
+<div class="span3">
   <div class="btn-group btn-add-to-radium">
     <button class="btn btn-main btn-primary" {{action "promote" this "pipeline"}}>Add to Radium</button>
   </div>

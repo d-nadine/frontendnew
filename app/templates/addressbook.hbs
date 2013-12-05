@@ -121,10 +121,11 @@
       <div class="search-results-header row-fluid">
         <div class="span2 checkers">
           <a href="#" {{action checkAll}}>
+            <span class="hidden-tablet">Select </span>
             {{#if checkedContent}}
-              Select None
+              None
             {{else}}
-              Select All
+              All
             {{/if}}
           </a>
           <div class="pull-right">
