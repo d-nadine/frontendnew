@@ -16,6 +16,10 @@
 
   @include breakpoint(portrait) {
     @include translateX(-290px);
+
+    .is-sidebar-visible .two-column-layout & {
+      @include translateX(0);
+    }
   }
 
   .meta h1,

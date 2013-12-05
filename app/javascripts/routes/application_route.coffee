@@ -71,6 +71,9 @@ Radium.ApplicationRoute = Radium.Route.extend
 
         @set 'router.openDrawer', name
 
+    toggleSidebar: ->
+      @toggleProperty('controller.isSidebarVisible')
+
     closeDrawer: ->
       @disconnectOutlet(
         outlet: 'drawer'
