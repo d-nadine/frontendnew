@@ -8,6 +8,23 @@
   }
 }
 
+.pipeline-tabs {
+  @include breakpoint(portrait) {
+    > li {
+      float: none;
+      display: block;
+
+      a {
+        @include border-radius(0);
+      }
+    }
+  }
+}
+
+.btn-toggle-pipelines {
+  margin: 5px 20px 10px 10px;
+}
+
 .pipeline-header-tools {
   margin-top: 5px;
 
