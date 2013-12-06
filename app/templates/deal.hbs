@@ -1,3 +1,80 @@
+<div class="sticky-banner deal-banner">
+  <div {{bindAttr class=":deal-banner-bar isPublic status"}}>
+    <div class="tab">
+    {{#if isUnpublished}}
+      Unpublished
+    {{else}}
+      {{#if isPublic}}Open{{else}}Closed{{/if}} Deal
+    {{/if}}
+    </div>
+  </div>
+  <div class="sticky-banner-content">
+    <div class="pull-right">
+      <div class="btn-toolbar">
+        <a href="#" class="btn btn-link">
+          <strong>All deals with Company</strong>
+        </a>
+        <button class="btn">Follow</button>
+      </div>
+    </div>
+    <div class="pull-left deal-banner-details">
+      {{render 'sidebar/name' model}}
+      <p>
+        {{#if reference}}
+          Related to {{#linkTo "messages.email" reference}}{{reference.subject}}{{/linkTo}}<br>
+        {{/if}}
+        {{resource-link model=contact}}
+      </p>
+    </div>
+
+    <div class="deal-banner-stats">
+      <table>
+        <thead>
+          <tr>
+            <th class="deal-total">Negotiating for</th>
+            <th class="deal-forecast">Forecast</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="deal-total">
+              <i class="ss-standard ss-briefcase"></i> {{currency value}}
+            </td>
+            <td class="deal-forecast">{{percentage}}%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
+      {{dealProgress}}
+        {{#each statuses}}
+          <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
+        {{/each}}
+        <div class="bar" {{bindAttr style="view.dealProgressBarWidth"}}></div>
+      </div>
+      {{#if payBy}}
+        <p class="deal-timeframe">
+          <i class="ss-standard ss-directright"></i> Deal open for {{payBy}} days
+        </p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="sticky-banner-collapsed deal-banner-collapsed">
+    <div>
+      <div class="pull-left sticky-banner-collapsed-aside">
+        <ul class="inline">
+          {{#if company.name}}
+            <li>{{company.name}}</li>
+            <li><i class="ss-standard ss-directright"></i></li>
+          {{/if}}
+          <li>{{contact.displayName}}</li>
+          <li><i class="ss-standard ss-directright"></i></li>
+          <li><i class="ss-standard ss-briefcase"></i> {{name}} {{currency value}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 {{#if isUnpublished}}
   <div class="alert alert-info">
     this deal is <strong>not</strong> published yet!
@@ -6,79 +83,6 @@
     it with the rest of your company.
   </div>
 {{else}}
-  <div class="sticky-banner deal-banner">
-    <div {{bindAttr class=":deal-banner-bar isPublic"}}>
-      <div class="tab">
-        {{#if isPublic}}Open{{else}}Closed{{/if}} Deal
-      </div>
-    </div>
-    <div class="sticky-banner-content">
-      <div class="pull-right">
-        <div class="btn-toolbar">
-          <a href="#" class="btn btn-link">
-            <strong>All deals with Company</strong>
-          </a>
-          <button class="btn">Follow</button>
-        </div>
-      </div>
-      <div class="pull-left deal-banner-details">
-        {{render 'sidebar/name' model}}
-        <p>
-          {{#if reference}}
-            Related to {{#linkTo "messages.email" reference}}{{reference.subject}}{{/linkTo}}<br>
-          {{/if}}
-          {{resource-link model=contact}}
-        </p>
-      </div>
-
-      <div class="deal-banner-stats">
-        <table>
-          <thead>
-            <tr>
-              <th class="deal-total">Negotiating for</th>
-              <th class="deal-forecast">Forecast</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="deal-total">
-                <i class="ss-standard ss-briefcase"></i> {{currency value}}
-              </td>
-              <td class="deal-forecast">{{percentage}}%</td>
-            </tr>
-          </tbody>
-        </table>
-        <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
-        {{dealProgress}}
-          {{#each statuses}}
-            <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
-          {{/each}}
-          <div class="bar" {{bindAttr style="view.dealProgressBarWidth"}}></div>
-        </div>
-        {{#if payBy}}
-          <p class="deal-timeframe">
-            <i class="ss-standard ss-directright"></i> Deal open for {{payBy}} days
-          </p>
-        {{/if}}
-      </div>
-    </div>
-
-    <div class="sticky-banner-collapsed deal-banner-collapsed">
-      <div>
-        <div class="pull-left sticky-banner-collapsed-aside">
-          <ul class="inline">
-            {{#if company.name}}
-              <li>{{company.name}}</li>
-              <li><i class="ss-standard ss-directright"></i></li>
-            {{/if}}
-            <li>{{contact.displayName}}</li>
-            <li><i class="ss-standard ss-directright"></i></li>
-            <li><i class="ss-standard ss-briefcase"></i> {{name}} {{currency value}}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-</div>
   {{render "form_box" formBox}}
 
   {{render "task_list" currentTasks}}

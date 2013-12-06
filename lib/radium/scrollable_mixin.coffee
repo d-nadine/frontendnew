@@ -13,7 +13,8 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   getDimensions: ->
     $this = @$()
-    height = $(window).height() - 60
+    offset = parseFloat($this.parent().css('top'))
+    height = $(window).height() - offset
     width = $this.innerWidth()
     dimensions =
       width: width
@@ -43,6 +44,4 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   _resize: ->
     dimensions = @getDimensions()
-    @$()
-      .height(dimensions.height)
-      .data('jsp').reinitialise()
+    @$().height(dimensions.height)
