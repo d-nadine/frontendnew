@@ -10,24 +10,35 @@
   {{partial 'is_loading'}}
 {{/if}}
 
-<div class="events-list-header">
-  Overdue
-</div>
 {{! TODO: Add overdue items each loop here. Empty class is shown}}
-<div class="events-list-item">
-  <a href="#">
-    <button class="btn btn-link pull-left events-list-item-button">
-      <i class="ss-standard ss-check"></i>
-    </button>
-    <div class="events-list-item-description">Overdue Todo</div>
-  </a>
-</div>
-<div class="events-list-item hide">
-  <i class="ss-symbolicons-block ss-smile"></i> No overdue items
+<div class="hidden">
+  <div class="events-list-header">
+    Overdue
+  </div>
+  <div class="events-list-item">
+    <a href="#">
+      <button class="btn btn-link pull-left events-list-item-button">
+        <i class="ss-standard ss-check"></i>
+      </button>
+      <div class="events-list-item-description">Overdue Todo</div>
+    </a>
+  </div>
+  <div class="events-list-item hide">
+    <i class="ss-symbolicons-block ss-smile"></i> No overdue items
+  </div>
 </div>
 {{#each day in days}}
   <div class="events-list-header">
     {{formatDateTime day.date format="calendar"}}
   </div>
   {{each item in day itemController="calendarTaskItem" itemViewClass="Radium.CalendarTaskItemView"}}
+{{else}}
+  <div class="events-list-item">
+    <div class="text-center">
+      <h3>
+        <i class="ss-standard ss-calendar"></i>
+      </h3>
+      Nothing scheduled this month
+    </div>
+  </div>
 {{/each}}
