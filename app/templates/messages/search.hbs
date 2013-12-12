@@ -1,3 +1,56 @@
-{{controller}}
-{{view.constructor}}
-<h1>{{model.length}}</h1>
+<div class="page-header">
+  <h5>Search results for term <em>{{term}}</em></h5>
+</div>
+<ul class="unstyled bulk-actions-list">
+  {{#each controller}}
+    <li>
+      <div class="pull-right">
+        {{formatDateTime sentAt}}
+      </div>
+      <div class="bulk-actions-list-content">
+        <div class="message-item-avatar pull-left">
+          {{#if sender.isLoaded}}
+            {{avatar sender style="medium"}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
+        </div>
+        <div class="clearfix">
+          <h5 class="message-item-title">{{resource-link model=sender}}</h5>
+          <p class="message-item-subject">
+            {{#if subject.length}}
+              {{#linkTo 'emails.show' this.folder this}}{{subject}}{{/linkTo}}
+            {{else}}
+              {{#linkTo 'emails.show' this.folder this}}(No Subject){{/linkTo}}
+            {{/if}}
+          </p>
+          {{#if subjectHighlights.length}}
+          <div class="highlights">
+            <h5>The term appears in this email subject:</h5>
+            <ul>
+            {{#each subjectHighlights}}
+              <li>{{this}}</li>
+            {{/each}}
+            </ul>
+          </div>
+          {{/if}}
+          {{#if bodyHighlights.length}}
+            <div class="highlights">
+              <h5>The term appears in this email body:</h5>
+              <ul>
+              {{#each bodyHighlights}}
+                <li>{{this}}</li>
+              {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </li>
+  {{else}}
+    <li>
+      <h5>No matches for that term.</h5>
+    </li>
+  {{/each}}
+</ul>
+

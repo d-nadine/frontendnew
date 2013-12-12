@@ -358,3 +358,15 @@ $item-border: #dddddd;
 .email-confirmation-view {
 
 }
+
+.messages-search-view{
+  .message-item-subject{
+    margin-bottom: 25px;
+  }
+  ul{
+    list-style: none;
+  }
+  em.highlight{
+    background: #ffc;
+  }
+}
