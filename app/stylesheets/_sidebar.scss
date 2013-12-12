@@ -59,6 +59,7 @@
       height: 33px;
       border: 1px solid $control-border-color;
       margin-bottom: 13px;
+
       input{
         font-weight: bold;
         font-size: 18px;
@@ -126,6 +127,16 @@
 
     .readonly{
       margin-left: 10px;
+    }
+  }
+
+  @include breakpoint(landscape) {
+    .multiple-field {
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: auto;
+      }
     }
   }
 }
@@ -234,6 +245,11 @@
 
     .field {
       margin: 0;
+
+      @include breakpoint(landscape) {
+        width: inherit;
+        display: block;
+      }
     }
   }
 }
@@ -242,6 +258,10 @@
   img {
     margin-right: 20px;
     float: left;
+  }
+
+  .control-box input {
+    width: 140px;
   }
 }
 
