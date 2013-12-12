@@ -11,7 +11,6 @@ Radium.ActivitiesContactController = Radium.ObjectController.extend Radium.Activ
   company: Ember.computed.alias 'meta.company'
   status: Ember.computed.alias 'meta.status'
   assignedTo: Ember.computed.alias 'meta.user'
-  email: Ember.computed.alias 'meta.email'
 
   icon: (->
     switch @get('event')
