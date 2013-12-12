@@ -9,6 +9,8 @@ require 'lib/ember/computed'
 
 require 'lib/string/inflector'
 
+FastClick.attach(document.body);
+
 Radium = Em.Application.createWithMixins
   rootElement: '#application'
   customEvents:

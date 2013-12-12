@@ -37,7 +37,7 @@ Radium.MultipleBaseView = Radium.View.extend
                 <button class="btn" {{action toggleOpen bubbles="false"}}>
                   {{name}}
                 </button>
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" {{action toggleOpen}}>
+                <a class="btn dropdown-toggle needsclick" data-toggle="dropdown" href="#" {{action toggleOpen}}>
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">

@@ -31,7 +31,7 @@
       {{/linkTo}}
       <div class="btn-group">
         <button class="btn btn-main address-book-button" >{{view.selectedFilterText}}</button>
-        <button class="btn dropdown-toggle" {{bindAttr disabled=additionalFilterDisabled}} data-toggle="dropdown">
+        <button class="btn dropdown-toggle needsclick" {{bindAttr disabled=additionalFilterDisabled}} data-toggle="dropdown">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -44,7 +44,7 @@
 
     <div>
       <div class="btn-group">
-        <button {{bindAttr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+        <button {{bindAttr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
           Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
         </button>
         {{#if hasCheckedContent}}

@@ -13,7 +13,7 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
 
   template: Ember.Handlebars.compile """
     <div class="contextMenu" class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="dropdown-toggle needsclick" data-toggle="dropdown" href="#">
         link<b class="caret"></b>
       </a>
       <div class="attendeeMenu dropdown-menu">
