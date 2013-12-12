@@ -9,6 +9,20 @@ Radium.MessagesSidebarView = Radium.FixedSidebarView.extend
     Ember.run.scheduleOnce 'afterRender', this, 'scrollToItem', selectedItem
   ).observes('controller.selectedContent')
 
+  searchTextField: Ember.TextField.extend
+    classNames: ['field']
+    placeholderBinding: 'content.selectedSearchScope'
+    valueBinding: 'targetObject.term'
+
+    click: (event) ->
+      event.stopPropagation()
+
+    keyDown: (e) ->
+      e.preventDefault() if e.keyCode is 13
+
+    insertNewline: (e) ->
+      @get('targetObject').send 'search'
+
   scrollToItem: (item) ->
     modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
     # FIXME: do we need the tinyscrollbar?

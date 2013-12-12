@@ -44,6 +44,20 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
 
+  buildURL: function(root, suffix, record) {
+    if(root !== 'email_search_result'){
+      return this._super.apply(this, arguments);
+    }
+
+    var url = [this.url];
+
+    url.push("emails");
+    url.push("search");
+
+    return url.join("/");
+  },
+
+
   didError: function(store, type, record, xhr){
     if (xhr.status === 412 ){
       var json = JSON.parse(xhr.responseText),

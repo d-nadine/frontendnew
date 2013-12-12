@@ -179,7 +179,11 @@ Radium.MessagesRoute = Radium.Route.extend
 
     controller = @controllerFor('messagesSidebar')
 
-    template = if controller.get('searchIsActive') then 'messages/search_form' else 'messages/list'
+    if controller.get('searchIsActive')
+      template = 'messages/search_form'
+      controller = @controllerFor('messagesSearch')
+    else
+      template = 'messages/list'
 
     @render template,
       into: 'messages/sidebar'
