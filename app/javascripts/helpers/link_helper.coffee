@@ -16,7 +16,13 @@ Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
   {{#linkTo 'unimplemented'}}{{truncate view.content.topic length=20}}{{/linkTo}}
 """
 Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo 'calendar.task' this}}{{view.content.topic}}{{/linkTo}}"
-Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile "{{#linkTo 'emails.show' 'inbox' view.content}}{{view.content.subject}}{{/linkTo}}"
+Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile """
+  {{#if email.subject.length}}
+    {{#linkTo 'emails.show' 'inbox' view.content}}{{view.content.subject}}{{/linkTo}}
+  {{else}}
+    {{#linkTo 'emails.show' 'inbox' view.content}}(No Subject){{/linkTo}}
+  {{/if}}
+"""
 Ember.TEMPLATES['links/default'] = Ember.Handlebars.compile "{{view.displayName}}"
 
 Radium.LinkView = Ember.View.extend

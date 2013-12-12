@@ -1,4 +1,4 @@
-Radium.ActivityAssignMixin = Ember.Mixin.create
+Radium.activityassignmixin = Ember.Mixin.create
   oldUser: ( ->
     Radium.User.all().find (user) => user.get('id') == (@get('meta.oldUserId') + "")
   ).property('meta.oldUserId')
