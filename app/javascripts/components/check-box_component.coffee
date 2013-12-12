@@ -3,6 +3,7 @@ Radium.CheckBoxComponent = Ember.Component.extend
   classNames: 'check-box'
   click: (event) ->
     event.stopPropagation()
+    @toggleProperty('checked')
     @sendNotification()
 
   sendNotification: ->

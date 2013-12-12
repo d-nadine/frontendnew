@@ -19,9 +19,13 @@
     opacity: 0;
     font-size: 12px;
     vertical-align: top;
+
+    &.checked {
+      opacity: 1;
+    }
   }
 
-  &:hover i {
+  &:hover:not(.checked) i {
     opacity: 0.25;
   }
 
