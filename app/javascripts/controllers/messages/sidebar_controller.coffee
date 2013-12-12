@@ -3,6 +3,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   page: 1
   allPagesLoaded: false
   loadingType: Radium.Email
+  term: null
 
   currentPath: Ember.computed.alias 'controllers.application.currentPath'
   content: Ember.computed.alias 'controllers.messages'

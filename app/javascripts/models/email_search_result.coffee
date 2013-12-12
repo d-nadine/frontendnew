@@ -12,3 +12,6 @@ Radium.EmailSearchResult = Radium.Model.extend Radium.TimestampsMixin,
     @get('_senderUser') ||
     @get('_senderContact')
   ).property('_senderUser', '_senderContact')
+
+  _senderUser: DS.belongsTo('Radium.User')
+  _senderContact: DS.belongsTo('Radium.Contact')

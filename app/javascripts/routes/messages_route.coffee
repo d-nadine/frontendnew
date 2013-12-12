@@ -17,6 +17,13 @@ Radium.MessagesRoute = Radium.Route.extend
         sidebarController.send 'reset'
         true
 
+    search: ->
+      term = @controllerFor('messagesSidebar').get('term')?.trim()
+
+      return unless term?.length
+
+      @transitionTo('messages.search', term)
+
     sendDraft: (email) ->
       email.set 'sentAt', Ember.DateTime.create()
       email.set 'isDraft', false
@@ -179,11 +186,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     controller = @controllerFor('messagesSidebar')
 
-    if controller.get('searchIsActive')
-      template = 'messages/search_form'
-      controller = @controllerFor('messagesSearch')
-    else
-      template = 'messages/list'
+    template = if controller.get('searchIsActive') then 'messages/search_form' else 'messages/list'
 
     @render template,
       into: 'messages/sidebar'
