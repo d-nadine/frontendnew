@@ -9,7 +9,7 @@
 
   {{outlet buttons}}
 
-  <a href="#" class="hidden-desktop" {{action "toggleSidebar"}} title="Show/hide sidebar">
+  <a href="#" {{bindAttr class=":hidden-desktop isTwoColumn::hidden"}} {{action "toggleSidebar"}} title="Show/hide sidebar">
     <i {{bindAttr class=":ss-standard isSidebarVisible:ss-delete:ss-layout"}}></i>
   </a>
 
