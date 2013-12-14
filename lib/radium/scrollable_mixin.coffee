@@ -44,5 +44,6 @@ Radium.ScrollableMixin = Em.Mixin.create
     @set('isAtTop', isAtTop)
 
   _resize: ->
+    return unless @$()
     dimensions = @getDimensions()
     @$().height(dimensions.height)
