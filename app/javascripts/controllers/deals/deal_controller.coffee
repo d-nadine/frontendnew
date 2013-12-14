@@ -6,6 +6,17 @@ require 'mixins/controllers/change_deal_status_mixin'
 Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, BufferedProxy,
   Radium.ChangeDealStatusMixin,
 
+  actions:
+    togglePublished: ->
+      status = if @get('isPublic')
+                 "unpublished"
+               else
+                 @get('firstState')
+
+      @set 'model.status', status
+
+      @get('store').commit()
+
   needs: ['accountSettings', 'users', 'contacts']
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
 
@@ -72,16 +83,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
     invitations: Ember.A()
     reference: @get('model')
   ).property('model', 'now')
-
-  togglePublished: ->
-    status = if @get('isPublic')
-               "unpublished"
-             else
-               @get('firstState')
-
-    @set 'status', status
-
-    @get('store').commit()
 
   dealProgressClass: (->
     "status-#{@get('status')}"
