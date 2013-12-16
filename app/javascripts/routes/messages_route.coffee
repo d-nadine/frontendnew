@@ -115,9 +115,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
     return if sidebarController.get('searchIsActive')
 
-    queryParams = Ember.merge(messagesController.queryParams(), page_size: 1)
-
-    Radium.Email.find(queryParams)
+    Radium.Email.find(messagesController.queryParams())
 
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')
