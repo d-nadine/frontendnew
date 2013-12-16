@@ -1,4 +1,6 @@
 Radium.NotificationsController = Radium.ArrayController.extend
+  sortProperties: ['time']
+  sortAscending: false
   needs: ['messagesSidebar']
   actions:
     deleteAllNotifications: ->
