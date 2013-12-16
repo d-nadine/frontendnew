@@ -124,7 +124,7 @@ Radium.MessagesRoute = Radium.Route.extend
     sidebarController = @controllerFor('messagesSidebar')
 
     return if sidebarController.get('searchIsActive')
-    return if sidebarController.get('page') > 0 && @controllerFor('currentUser').get('initialMailImported')
+    return if sidebarController.get('page') > 1 && @controllerFor('currentUser').get('initialMailImported')
 
     meta = @get('store').typeMapFor(Radium.Email).metadata
 

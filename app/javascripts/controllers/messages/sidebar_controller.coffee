@@ -1,6 +1,6 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   needs: ['messages', 'application', 'emailsShow', 'messagesDiscussion']
-  page: 0
+  page: 1
   allPagesLoaded: false
   loadingType: Radium.Email
 
@@ -31,7 +31,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
           @send 'selectItem', discussion
 
     reset: ->
-      @set('page', 0)
+      @set('page', 1)
       @set('allPagesLoaded', false)
       @set('isLoading', false)
 
