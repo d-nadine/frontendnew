@@ -7,18 +7,9 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
     Radium.User.all().find (user) => user.get('id') == (@get('meta.newUserId') + "")
   ).property('meta.newUserId')
 
-  emailIdDidChange: ( ->
+  email: ( ->
     emailId = @get('meta.emailId')
     return unless emailId
 
-    activity = @get('model')
-    store = @get('store')
-    Radium.Email.find(emailId).then( ((email) => 
-        @set('email', email)
-      ),
-      ((email) =>
-        activity.deleteRecord()
-        store.commit()
-      )
-    )
-  ).observes('meta.emailId')
+    Radium.Email.find(emailId)
+  ).property('meta.emailId')
