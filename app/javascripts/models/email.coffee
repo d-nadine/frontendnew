@@ -27,6 +27,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   sendTime: DS.attr('datetime')
   checkForResponse: DS.attr('datetime')
 
+  notifications: DS.hasMany('Radium.Notification', inverse: '_referenceEmail')
+
   isScheduled: ( ->
     @get('isDraft') && @get('sendTime')
   ).property('isDraft', 'sendTime')
@@ -67,3 +69,18 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   recipients: Radium.computed.aggregate('toList','ccList')
 
   time: Ember.computed.alias 'sentAt'
+
+  clearRelationships: ->
+    activities = []
+
+    Radium.Activity.all().toArray().forEach((activity) =>
+      if activity.get('meta.emailId')
+        if(activity.get('meta.emailId').toString() == @get('id').toString() || activity.get('reference') == this)
+          activities.push activity
+    )
+
+    activities.forEach (activity) =>
+      activity.deleteRecord()
+
+    @get('notifications').compact().forEach (notification) =>
+      notification.deleteRecord()
