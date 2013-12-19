@@ -11,6 +11,10 @@ Radium.EmailsEmptyController = Radium.ObjectController.extend
 
   init: ->
     @_super.apply this, arguments
+    if @get('controllers.messages.length') > 0
+      @send 'transitionToEmail'
+      return
+
     Ember.addObserver(@get('controllers.messages'), 'content.[]',  this, 'messagesLengthDidChange')
 
   messagesLengthDidChange: ->
