@@ -1,15 +1,15 @@
 <div class="addresses control-group">
-  <div class="whole">
+  <div class="control-group">
     {{input type="text" value=street class="field input-xlarge" placeholder="street"}}
   </div>
-  <div class="whole">
+  <div class="control-group">
     {{input type="text" value=city class="field input-xlarge city" placeholder="City"}}
   </div>
-  <div class="broken">
-    {{input type="text" value=state class="field state" placeholder="State"}}
-    {{input type="text" value=zipcode class="field zip" placeholder="Zip Code"}}
+  <div class="control-group">
+    {{input type="text" value=state class="field state input-medium" placeholder="State"}}
+    {{input type="text" value=zipcode class="field zip input-small" placeholder="Zip Code"}}
   </div>
-  <div class="whole">
+  <div class="control-group">
     {{view Ember.Select contentBinding="controller.parent.controllers.countries" valueBinding="country"}}
   </div>
 </div>

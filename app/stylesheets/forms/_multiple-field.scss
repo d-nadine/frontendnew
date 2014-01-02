@@ -34,12 +34,6 @@
 
   input[type="text"],
   input[type="email"] {
-    width: 240px;
-    padding: {
-      right: 5px;
-      left: 5px;
-    }
-
     &.masked.is-invalid {
       border: 1px solid red;
     }
