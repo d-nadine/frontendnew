@@ -274,6 +274,8 @@
                                       abortRequest();
                                       setTimeout(function(){ input.val('').focus(); }, opts.keyDelay);
                                     }
+                                }else if(!results_holder.is(':visible')){
+                                  break;
                                 }
                             }
                         case 13: // return
@@ -377,7 +379,9 @@
                             }
 
                             if(opts.resultsHighlight && query.length > 0){
-                                this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<strong>$1</strong>");
+                                if(this_data[opts.selectedItemProp]){
+                                  this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<strong>$1</strong>");
+                                }
                             }
                             if(!opts.formatList){
                                 formatted = formatted.html(this_data[opts.selectedItemProp]);

@@ -70,6 +70,9 @@ Radium.MessagesRoute = Radium.Route.extend
     delete: (item) ->
       callback = =>
         controller = @controllerFor('messages')
+        sidebarController = @controllerFor('messagesSidebar')
+
+        sidebarController.set 'isLoading', true
 
         if item == controller.get('selectedContent')
           nextItem = controller.get('nextItem')
@@ -78,17 +81,25 @@ Radium.MessagesRoute = Radium.Route.extend
 
         @send 'notificationDelete', item
 
-        @controllerFor('messagesSidebar').send('showMore')
-
         item.deleteRecord()
+
+        item.one 'didDelete', =>
+          controller.removeObject item
+          sidebarController.set 'isLoading', false
+          @send 'selectItem', nextItem
+          @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
+
+        item.one 'becameInvalid', =>
+          sidebarController.set 'isLoading', false
+
+        item.one 'becameError', =>
+          sidebarController.set 'isLoading', false
+
         @get('store').commit()
 
         return unless item.get('isDirty')
 
         @send 'flashSuccess', 'Email deleted'
-
-        Ember.run.next =>
-          @send 'selectItem', nextItem
 
       @send 'animateDelete', item, callback, '.messages-list'
 

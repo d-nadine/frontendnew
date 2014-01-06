@@ -1,10 +1,10 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
-  needs: ['messages', 'application', 'emailsShow', 'messagesDiscussion']
+  needs: ['messages', 'emailsShow', 'messagesDiscussion']
   page: 1
   allPagesLoaded: false
   loadingType: Radium.Email
 
-  applicationController: Ember.computed.alias 'controllers.application'
+  currentPath: Ember.computed.alias 'controllers.application.currentPath'
   content: Ember.computed.alias 'controllers.messages'
   selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
   totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
@@ -20,7 +20,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
   actions:
     checkMessageItem: ->
-      currentPath = @get('applicationController.currentPath')
+      currentPath = @get('currentPath')
       if @get('content.content').filterProperty('isChecked').get('length')
         return if currentPath == 'messages.bulk_actions'
         @transitionToRoute 'messages.bulk_actions'

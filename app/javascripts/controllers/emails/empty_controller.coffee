@@ -1,5 +1,5 @@
 Radium.EmailsEmptyController = Radium.ObjectController.extend
-  needs: ['messages', 'application']
+  needs: ['messages']
   actions:
     transitionToEmail: ->
       email = @get('controllers.messages.firstObject')
@@ -11,7 +11,9 @@ Radium.EmailsEmptyController = Radium.ObjectController.extend
 
   init: ->
     @_super.apply this, arguments
-    if @get('controllers.messages.length') > 0
+    remaining = @get('controllers.messages').reject((item) => item.get('isDeleted'))
+
+    if remaining.length
       @send 'transitionToEmail'
       return
 

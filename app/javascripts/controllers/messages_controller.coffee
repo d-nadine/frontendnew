@@ -4,9 +4,9 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   drawerOpen: false
   folder: "inbox"
   pageSize: 5
-  needs: ['application', 'messagesSidebar']
-  applicationController: Ember.computed.alias 'controllers.application'
+  needs: ['messagesSidebar']
   isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
+  currentPath: Ember.computed.alias 'controllers.application.currentPath'
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
@@ -20,7 +20,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   ]
 
   onPoll: ->
-    currentPath = @get('controllers.application.currentPath')
+    currentPath = @get('currentPath')
 
     return if currentPath is 'messages.bulk_actions'
 
@@ -65,6 +65,10 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
       return if folder == "drafts" && item.constructor is Radium.Email && !item.get('isDraft')
       @unshiftObject(item)
       ids.push item.get('id')
+
+    if @get('currentPath') == "messages.emails.empty"
+      Ember.run.next =>
+        @send 'selectItem', @get('firstObject')
 
   delta: (records) ->
     delta = records.toArray().reject (record) =>
