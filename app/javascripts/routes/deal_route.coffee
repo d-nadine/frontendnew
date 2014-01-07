@@ -16,19 +16,23 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
     deleteRecord: ->
       deal = @modelFor 'deal'
 
+      name = deal.get('name')
+
       deal.deleteRecord()
 
-      @get('store').commit()
-
       deal.one 'didDelete', =>
-        @send 'closeModal'
-        @transitionTo 'deals.deleted'
+        @send 'flashSuccess', "Deal #{name} has been deleted"
 
-      deal.one 'becameInvalid', =>
-        console.error 'deal becameInvalid'
+      deal.one 'becameInvalid', (result) =>
+        result.reset()
 
-      deal.one 'becameError', =>
-        console.error 'deal becameError'
+      deal.one 'becameError', (result) =>
+        result.reset()
+
+      @send 'closeModal'
+      @transitionTo 'pipeline.index'
+
+      @get('store').commit()
 
     showChecklist: (deal) ->
       @controllerFor('dealChecklist').set('model', deal)
