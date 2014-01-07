@@ -1,4 +1,4 @@
-Radium.EmailsShowRoute = Radium.Route.extend
+Radium.EmailsShowRoute = Radium.Route.extend Radium.SaveEmailMixin,
   actions:
     sendReply: (form) ->
       form.set 'isSubmitted', true

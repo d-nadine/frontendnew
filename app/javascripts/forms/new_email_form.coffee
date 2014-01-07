@@ -20,4 +20,9 @@ Radium.NewEmailForm = Radium.EmailForm.extend Radium.EmailPropertiesMixin,
 Radium.DraftEmailForm = Radium.NewEmailForm.extend
   reset: ->
     @_super.apply this, arguments
+    @set 'id', null
     @set 'reference', null
+
+  sendDraft: ( ->
+    @get('id') && !@get('isDraft')
+  ).property('id', 'isDraft')

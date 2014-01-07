@@ -22,13 +22,6 @@ Radium.NotificationsView = Radium.DrawerView.extend
       e.stopPropagation()
       e.preventDefault()
 
-    Ember.run.scheduleOnce 'afterRender', this, ->
-      @get('controller').addObserver('content.length', =>
-        Ember.run.later( =>
-          @setSidebarHeight()
-        , 500)
-      )
-
   willDestroyElement: ->
     $('body').off 'click.notifications'
 

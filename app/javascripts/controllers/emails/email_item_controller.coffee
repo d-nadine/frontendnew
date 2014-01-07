@@ -98,6 +98,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend
   replyEmail: (->
     Radium.ReplyForm.create
       email: @get('model')
+      currentUser: @get('currentUser')
   ).property('model')
 
   forwardEmail: (->

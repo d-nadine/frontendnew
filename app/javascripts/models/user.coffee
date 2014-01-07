@@ -43,3 +43,14 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
     Radium.Contact.all().filter (contact) =>
       contact.get('user') == this && !contact.get('isPersonal')
   ).property('deals.[]')
+
+  clearRelationships: ->
+    @get('tasks').compact().forEach (task) =>
+      task.deleteRecord()
+
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()
+
+    Radium.Notification.all().compact().forEach (notification) =>
+      if notification.get('_referenceUser') == this
+        notification.deleteRecord()

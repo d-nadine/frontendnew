@@ -50,6 +50,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     @get('status') == 'exclude'
   ).property('status')
 
+  notifications: DS.hasMany('Radium.Notification', inverse: '_referenceContact')
+
   primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
@@ -80,3 +82,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
     @get('activities').compact().forEach (activity) =>
       activity.deleteRecord()
+
+    Radium.Notification.all().compact().forEach (notification) =>
+      if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this 
+        notification.deleteRecord()

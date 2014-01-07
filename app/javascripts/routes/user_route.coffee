@@ -13,14 +13,23 @@ Radium.UserRoute = Radium.Route.extend
     deleteRecord: ->
       user = @modelFor 'user'
 
+      name = user.get('name')
+
       user.deleteRecord()
 
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
+      user.one 'didDelete', =>
+        @send 'flashSuccess', "User #{name} has been deleted"
 
-      @render 'user/deleted',
-        into: 'application'
+      user.one 'becameInvalid', (result) =>
+        result.reset()
+
+      user.one 'becameError', (result) =>
+        result.reset()
+
+      @send 'closeModal'
+      @transitionTo 'settings.company'
+
+      @get('store').commit()
 
   renderTemplate: ->
     @render()
@@ -33,7 +42,7 @@ Radium.UserRoute = Radium.Route.extend
       if form = controller.get("formBox.#{form}Form")
         form?.reset()
 
-    controller.set('model', model)   
+    controller.set('model', model)
 
 Radium.UserFormRoute = Radium.Route.extend
   model: (params) ->

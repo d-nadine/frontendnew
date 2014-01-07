@@ -11,6 +11,7 @@ Radium.EmailForm = Radium.Form.extend
 
   reset: ->
     @_super.apply this, arguments
+    @set('id', null)
     @set('subject', '')
     @set('message', '')
     @get('to').clear()
