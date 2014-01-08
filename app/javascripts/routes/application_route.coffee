@@ -11,10 +11,6 @@ Radium.ApplicationRoute = Radium.Route.extend
 
       model.deleteRecord()
 
-      model.one 'didDelete', (result) =>
-        result.reset()
-        @send 'flashError', result
-
       model.one 'becameError', (result) =>
         result.reset()
         @send 'flashError', result
