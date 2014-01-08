@@ -3,6 +3,8 @@ Radium.FormBoxController = Radium.ObjectController.extend
     showForm: (form) ->
       @get("#{form}Form").reset()
       @set 'activeForm', form
+      if @get('showMeetingForm')
+        @set 'meetingForm.isExpanded', @get('showMeetingForm')
 
     submitForm: ->
       activeForm = @get("#{@get('activeForm')}Form")
@@ -14,8 +16,3 @@ Radium.FormBoxController = Radium.ObjectController.extend
   showCallForm: Ember.computed.equal('activeForm', 'call')
   showDiscussionForm: Ember.computed.equal('activeForm', 'discussion')
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting')
-
-  showMeetingFormChanges: ( ->
-    return unless @get('meetingForm')
-    @set 'meetingForm.isExpanded', @get('showMeetingForm')
-  ).observes('showMeetingForm')

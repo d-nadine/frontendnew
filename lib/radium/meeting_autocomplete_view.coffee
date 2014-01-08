@@ -6,10 +6,12 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
       @get('controller').send('removeSelection', item)
 
   sourceBinding: 'controller.participants'
+  currentUserEmail: Ember.computed.alias 'controller.currentUser.email'
 
   queryParameters: (query) ->
     term: query
     email_only: true
+    scopes: ['user', 'contact']
 
   template: Ember.Handlebars.compile """
     <div class="contextMenu" class="dropdown">
@@ -27,4 +29,5 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
     </div>
   """
   filterResults: (item) ->
-    !@get('source').contains(item.get('person'))
+    item.get('email') != @get('parentView.currentUserEmail') &&
+    !@get('source').map((selection) => selection.get('email')).contains(item.get('email'))

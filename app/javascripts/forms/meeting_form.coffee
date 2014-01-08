@@ -35,7 +35,7 @@ Radium.MeetingForm = Radium.Form.extend
 
       @get('contacts').forEach (contact) =>
         if contact.get('id')
-          meeting.get('invitations').addObject person: type: 'contact', id: contact.get('id')
+          meeting.get('invitations').addObject person: type: contact.get('typeName'), id: contact.get('id')
         else
           meeting.get('invitations').addObject email: contact.get('email')
 

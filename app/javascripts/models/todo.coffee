@@ -25,6 +25,8 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
 
+  activities: DS.hasMany('Radium.Activity', inverse: '_referenceTodo')
+
   overdue: ( ->
     now = Ember.DateTime.create().atEndOfDay()
 
@@ -36,3 +38,10 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   toString: ->
     @get 'description'
 
+  clearRelationships: ->
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()
+
+    Radium.Notification.all().compact().forEach (notification) =>
+      if notification.get('_referenceTodo') == this
+        notification.deleteRecord()

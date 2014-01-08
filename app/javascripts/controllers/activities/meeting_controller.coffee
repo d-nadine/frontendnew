@@ -10,6 +10,8 @@ Radium.ActivitiesMeetingController = Radium.ObjectController.extend
 
   icon: 'calendar'
 
+  participants: Radium.computed.aggregate('meeting.users', 'meeting.contacts')
+
   eventName: (->
     switch @get('event')
       when 'cancel' then 'cancelled'

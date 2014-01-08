@@ -150,10 +150,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
     topic = @get('topic')
 
-    attendees = @get('participants').map( (attendee) -> "@#{attendee.get('name')}").join(', ')
+    attendees = @get('participants').map( (attendee) -> "@#{attendee.get('displayName')}").join(', ')
 
     "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
-  ).property('topic', 'isNew')
+  ).property('topic', 'isNew', 'users.[]', 'contacts.[]')
 
   startsAtDidChange: ( ->
     startsAt = @get('startsAt')

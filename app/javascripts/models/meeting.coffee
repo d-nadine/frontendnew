@@ -33,6 +33,8 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceTodo: DS.belongsTo('Radium.Todo')
 
+  activities: DS.hasMany('Radium.Activity', inverse: '_referenceMeeting')
+
   time: Ember.computed.alias('startsAt')
 
   contacts: ( ->
@@ -50,3 +52,11 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       .filter((invitation) -> invitation.get('person')?.constructor is Radium.User)
       .map((invitation) -> invitation.get('person'))
   ).property('invitations.[]')
+
+  clearRelationships: ->
+    @get('activities').compact().forEach (activity) =>
+      activity.deleteRecord()
+
+    Radium.Notification.all().compact().forEach (notification) =>
+      if notification.get('_referenceMeeting') == this
+        notification.deleteRecord()
