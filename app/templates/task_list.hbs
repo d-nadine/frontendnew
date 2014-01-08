@@ -6,17 +6,19 @@
       <h3>{{group.title}}</h3>
 
       {{#each task in group}}
-        {{#if showTodoForm}}
-          {{render "forms/todo" task}}
-        {{/if}}
+        {{#ifIsLive model}}
+          {{#if showTodoForm}}
+            {{render "forms/todo" task.model}}
+          {{/if}}
 
-        {{#if showCallForm}}
-          {{render "forms/call" task}}
-        {{/if}}
+          {{#if showCallForm}}
+            {{render "forms/call" task.model}}
+          {{/if}}
 
-        {{#if showMeetingForm}}
-          {{render "forms/meeting" task}}
-        {{/if}}
+          {{#if showMeetingForm}}
+            {{render "forms/meeting" task.model}}
+          {{/if}}
+        {{/ifIsLive}}
       {{/each}}
     {{/each}}
     {{partial "shared/show_more"}}

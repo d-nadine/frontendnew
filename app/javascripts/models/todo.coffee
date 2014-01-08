@@ -17,13 +17,15 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
         @get('_referenceDeal') ||
         @get('_referenceDiscussion') ||
         @get('_referenceEmail') ||
-        @get('_referenceMeeting')
-  ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting')
+        @get('_referenceMeeting') ||
+        @get('_referenceTodo')
+  ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceTodo')
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')
+  _referenceTodo: DS.belongsTo('Radium.Todo')
 
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceTodo')
 

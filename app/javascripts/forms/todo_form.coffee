@@ -43,12 +43,15 @@ Radium.TodoForm = Radium.Form.extend
       deferred.resolve()
 
     record.one 'becameInvalid', (result) =>
+      @send 'flashError', result
+      result.reset()
       deferred.reject(result)
 
     record.one 'becameError', (result)  ->
+      @send 'flashError', result
+      result.reset()
       result.get('transaction').rollback()
-      typeName = result.humanize()
-      deferred.reject("An error has occurred and the #{typeName} could not be created.")
+      deferred.reject("An error has occurred and the #{result.get('typeName')} could not be created.")
 
   bulkCommit: (deferred) ->
     typeName = @get('reference.firstObject').humanize()
