@@ -1,12 +1,12 @@
 <div class="calendar-toolbar">
   <div class="btn-group pull-right">
-    {{#linkTo "calendar.index" lastMonth class="btn calendar-month-btn"}}
+    {{#link-to "calendar.index" lastMonth class="btn calendar-month-btn"}}
       <i class="ss-standard ss-directleft"></i>
-    {{/linkTo}}
+    {{/link-to}}
 
-    {{#linkTo "calendar.index" nextMonth class="btn calendar-month-btn"}}
+    {{#link-to "calendar.index" nextMonth class="btn calendar-month-btn"}}
       <i class="ss-standard ss-directright"></i>
-    {{/linkTo}}
+    {{/link-to}}
   </div>
   <h3 class="calendar-date-title">
     <i class="ss-standard ss-calendar month-datepicker-button"></i> {{formatDateTime date format="monthYear"}}
@@ -44,7 +44,7 @@
     {{#each weeks}}
       <tr>
         {{#each calendarDay in this itemController="calendarDayItem"}}
-          <td {{action selectDay this bubbles=false}} {{bindAttr class="calendarDay.isDifferentMonth calendarDay.isToday calendarDay.isSelectedDate :day"}}>
+          <td {{action selectDay this bubbles=false}} {{bind-attr class="calendarDay.isDifferentMonth calendarDay.isToday calendarDay.isSelectedDate :day"}}>
             <div class="wrapper">
               <span class="date">
                 {{#if calendarDay.isToday}}

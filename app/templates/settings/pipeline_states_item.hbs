@@ -5,10 +5,10 @@
       {{#if parentController.hasMultipleItems}}
         <div class="btn-group">
           <button class="btn btn-mini"
-            {{bindAttr disabled="isFirstItem"}}
+            {{bind-attr disabled="isFirstItem"}}
             {{action "movePipelineStateUp" this}}>▲</button>
           <button class="btn btn-mini"
-          {{bindAttr disabled="isLastItem"}}
+          {{bind-attr disabled="isLastItem"}}
           {{action "movePipelineStateDown" this}}>▼</button>
         </div>
       {{/if}}

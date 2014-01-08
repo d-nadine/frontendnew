@@ -1,25 +1,25 @@
 {{#if isUser}}
-  {{#linkTo 'user' model}}{{model.firstName}}{{/linkTo}}
+  {{#link-to 'user' model}}{{model.firstName}}{{/link-to}}
 {{/if}}
 
 {{#if isContact}}
-  {{#linkTo 'contact' model}}{{model.displayName}}{{/linkTo}}
+  {{#link-to 'contact' model}}{{model.displayName}}{{/link-to}}
 
   {{#if model.company}}
-    ({{#linkTo 'company' model.company}}{{model.company.name}}{{/linkTo}})
+    ({{#link-to 'company' model.company}}{{model.company.name}}{{/link-to}})
   {{/if}}
 {{/if}}
 
 {{#if isCompany}}
-  {{#linkTo 'company' model}}{{model.name}}{{/linkTo}}
+  {{#link-to 'company' model}}{{model.name}}{{/link-to}}
 {{/if}}
 
 {{#if isTag}}
-  {{#linkTo 'tag' model}}{{model.name}}{{/linkTo}}
+  {{#link-to 'tag' model}}{{model.name}}{{/link-to}}
 {{/if}}
 
 {{#if isDeal}}
-  {{#linkTo 'deal' model}}{{model.name}}{{/linkTo}}
+  {{#link-to 'deal' model}}{{model.name}}{{/link-to}}
 {{/if}}
 
 {{#if isAttachment}}
@@ -27,9 +27,9 @@
 {{/if}}
 
 {{#if isEmail}}
-  {{#linkTo 'emails.show' "inbox" model}}{{model.subject}}{{/linkTo}}
+  {{#link-to 'emails.show' "inbox" model}}{{model.subject}}{{/link-to}}
 {{/if}}
 
 {{#if isMeeting}}
-  {{#linkTo 'calendar.task' model}}{{view.content.topic}}{{/linkTo}}
+  {{#link-to 'calendar.task' model}}{{view.content.topic}}{{/link-to}}
 {{/if}}

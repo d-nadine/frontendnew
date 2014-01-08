@@ -33,8 +33,8 @@
         <div class="control-group">
           <label class="control-label">Related to</label>
           <div class="controls">
-            <!-- FIXME : create linkToResource -->
-            {{#linkTo "unimplemented"}}{{view.referenceName}}{{/linkTo}}
+            <!-- FIXME : create link-toResource -->
+            {{#link-to "unimplemented"}}{{view.referenceName}}{{/link-to}}
           </div>
         </div>
       {{/if}}
@@ -43,7 +43,7 @@
         <div class="controls">
           <div class="checklist-forecast">
             {{view Radium.ProgressBar percentageBinding="percentage"}}
-            <div {{bindAttr class=":total total:white"}}>{{total}}%</div>
+            <div {{bind-attr class=":total total:white"}}>{{total}}%</div>
             <div class="checklist-plus">
               <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
                 {{#if view.showChecklistItems}}
@@ -82,7 +82,7 @@
         </div>
         <div class="control-group">
           <div class="controls add-files">
-            <button class="btn add-files" {{bindAttr disabled="view.disabled"}}>
+            <button class="btn add-files" {{bind-attr disabled="view.disabled"}}>
               Add Files <i class="ss-standard ss-attach"></i>
             </button>
           </div>
@@ -97,8 +97,8 @@
       <hr/>
       {{partial 'validation_error_message'}}
       <div class="pull-right control-group actions">
-        <button class="btn btn-large publish" {{bindAttr disabled="isSaving"}} {{action saveAsDraft}}>Save as draft</button>
-        <button class="btn btn-success btn-large publish"  {{bindAttr disabled="isSaving"}} {{action publish}}>
+        <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action saveAsDraft}}>Save as draft</button>
+        <button class="btn btn-success btn-large publish"  {{bind-attr disabled="isSaving"}} {{action publish}}>
           {{#if isSaving}}
             <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
           {{else}}

@@ -1,5 +1,5 @@
 <!-- columns must add up to 8 -->
-<div {{bindAttr class=":clearfix :email-hud contact.isLead:is-lead-contact:is-private"}}>
+<div {{bind-attr class=":clearfix :email-hud contact.isLead:is-lead-contact:is-private"}}>
   <div class="pull-right email-hud-actions">
     {{#unless isSaving}}
       {{#if contact.isPersonal}}
@@ -36,27 +36,27 @@
   </div>
   <div class="email-hud-content">
     <h4 class="email-hud-title">
-      {{#linkTo 'contact' contact}}{{contact.displayName}}{{/linkTo}}
+      {{#link-to 'contact' contact}}{{contact.displayName}}{{/link-to}}
     </h4>
     {{#unless contact.isPersonal}}
       <span class='badge badge-info'>Radium Contact</span>
       <p>
-        {{#linkTo "emails.mailTo" "inbox" contact class="btn btn-link"}}
+        {{#link-to "emails.mailTo" "inbox" contact class="btn btn-link"}}
           <i class="ss-standard ss-mail"></i> {{contact.primaryEmail.value}}
-        {{/linkTo}}
+        {{/link-to}}
         <br>
         {{#if contact.title}}
           {{contact.title}}
         {{/if}}
         {{#if contact.company}}
-          {{#linkTo "company" contact.company}}{{contact.company.name}}{{/linkTo}}
+          {{#link-to "company" contact.company}}{{contact.company.name}}{{/link-to}}
         {{/if}}
         <table class="contact-deals-table">
           <tbody>
             {{#each contact.openDeals}}
               <tr>
                 <td>{{status}}</td>
-                <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+                <td>{{#link-to "deal" this}}{{name}}{{/link-to}}
                 <td>
                   <strong>{{currency value}}</strong>
                 </td>
@@ -70,6 +70,6 @@
 </div>
 {{#if hasNewPipelineDeal}}
 <div class="alert">
-  {{resource-link model=contact}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.
+  {{resource-link model=contact}} has been added to the {{#link-to "deal" newPipelineDeal}}pipeline{{/link-to}}.
 </div>
 {{/if}}

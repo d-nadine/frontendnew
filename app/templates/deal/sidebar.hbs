@@ -35,7 +35,7 @@
           <i class="ss-standard ss-plus"></i>
         </a>
       </div>
-      <div {{bindAttr class=":total total:white"}}>{{total}}%</div>
+      <div {{bind-attr class=":total total:white"}}>{{total}}%</div>
     </div>
   </div>
 
@@ -63,14 +63,14 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-warning btn-block" {{action togglePublished}} {{bindAttr disabled=isSaving}}>
+      <button class="btn btn-warning btn-block" {{action togglePublished}} {{bind-attr disabled=isSaving}}>
         {{#if isPublic}}
           Unpublish
         {{else}}
           Publish
         {{/if}}
       </button>
-      <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bindAttr disabled=isSaving}}>Delete</button>
+      <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bind-attr disabled=isSaving}}>Delete</button>
     </div>
   </div>
 </form>

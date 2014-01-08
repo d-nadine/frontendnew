@@ -59,25 +59,25 @@
     {{else}}
       <div class="form-switcher">
         {{#if todoForm}}
-          <button {{action showForm "todo"}} {{bindAttr class=":btn :btn-action showTodoForm:active"}}>
+          <button {{action showForm "todo"}} {{bind-attr class=":btn :btn-action showTodoForm:active"}}>
             <i class="ss-standard ss-check"></i>
           </button>
         {{/if}}
 
         {{#if callForm}}
-          <button {{action showForm "call"}} {{bindAttr class=":btn :btn-action showCallForm:active"}}>
+          <button {{action showForm "call"}} {{bind-attr class=":btn :btn-action showCallForm:active"}}>
             <i class="ss-standard ss-phone"></i>
           </button>
         {{/if}}
 
         {{#if discussionForm}}
-          <button {{action showForm "discussion"}} {{bindAttr class=":btn :btn-action showDiscussionForm:active"}}>
+          <button {{action showForm "discussion"}} {{bind-attr class=":btn :btn-action showDiscussionForm:active"}}>
             <i class="ss-symbolicons-block ss-chat"></i>
           </button>
         {{/if}}
 
         {{#if meetingForm}}
-          <button {{action showForm "meeting"}} {{bindAttr class=":btn :btn-action showMeetingForm:active"}}>
+          <button {{action showForm "meeting"}} {{bind-attr class=":btn :btn-action showMeetingForm:active"}}>
             <i class="ss-standard ss-calendar"></i>
           </button>
         {{/if}}

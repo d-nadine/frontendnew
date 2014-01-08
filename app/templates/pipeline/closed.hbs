@@ -14,24 +14,24 @@
   </thead>
   <tbody>
     {{#each visibleContent itemController="pipelineItem"}}
-      <tr {{bindAttr class="isChecked"}}>
+      <tr {{bind-attr class="isChecked"}}>
         <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td class="deal">
           <p>
-            <span class="name">{{#linkTo "deal" this}}{{name}}{{/linkTo}}</span><br/>
-            {{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}<br/>
+            <span class="name">{{#link-to "deal" this}}{{name}}{{/link-to}}</span><br/>
+            {{#link-to "contact" contact}}{{contact.displayName}}{{/link-to}}<br/>
             {{contact.title}}
           </p>
         </td>
         <td class="assigned-to">
           <p>
-            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
+            <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
-        <td {{bindAttr  class=":pay-by isPastPayment"}}>
+        <td {{bind-attr  class=":pay-by isPastPayment"}}>
           {{formatDateTime payBy format=date}}
         </td>
         <td class="next-task">

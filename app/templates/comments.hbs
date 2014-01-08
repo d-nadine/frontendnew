@@ -3,7 +3,7 @@
     {{#each comments}}
       <li class="comment">
         <div class="avatar-container">
-          {{#linkTo "user" user}}{{avatar user}}{{/linkTo}}
+          {{#link-to "user" user}}{{avatar user}}{{/link-to}}
         </div>
         <div class="text">
           {{text}}
@@ -12,9 +12,9 @@
     {{/each}}
   </ul>
   <div class="new-comment">
-    {{#linkTo "unimplemented" class="pull-right comment-attachment-icon"}}
+    {{#link-to "unimplemented" class="pull-right comment-attachment-icon"}}
       <i class="ss-standard ss-attach"></i>
-    {{/linkTo}}
+    {{/link-to}}
 
     <div class="text">
       {{view view.commentTextArea class="field" rows="1"}}

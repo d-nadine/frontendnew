@@ -16,15 +16,15 @@
           {{view view.leadSources}}
         </div>
       {{else}}
-        {{#linkTo "user" user}}
+        {{#link-to "user" user}}
           {{#if user.isLoaded}}
             {{avatar user class="img-polaroid"}}
           {{else}}
             {{partial 'is_loading'}}
           {{/if}}
-        {{/linkTo}}
+        {{/link-to}}
         <p>
-          {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
+          {{#link-to "user" user}}{{user.name}}{{/link-to}}<br/>
           <span class="title muted">{{title}}</span>
         </p>
       {{/if}}

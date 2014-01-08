@@ -14,14 +14,14 @@
   </thead>
   <tbody>
     {{#each visibleContent}}
-      <tr {{bindAttr class="isChecked"}}>
+      <tr {{bind-attr class="isChecked"}}>
         <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td class="lead">{{avatar this size=medium}}</td>
         <td class="assigned-to">
           <p>
-            <span class="name">{{#linkTo "contact" this}}{{displayName}}{{/linkTo}}</span></br>
+            <span class="name">{{#link-to "contact" this}}{{displayName}}{{/link-to}}</span></br>
             <span class="title">{{title}}</span>
           <p>
 
@@ -29,11 +29,11 @@
         </td>
         <td>
           <p>
-            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
+            <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
-        <td {{bindAttr class="isExpired :age :text-center"}}>
+        <td {{bind-attr class="isExpired :age :text-center"}}>
           {{ageInWords createdAt}}
         </td>
         <td class="next-task">
@@ -44,7 +44,7 @@
           {{/if}}
         </td>
         <td class="deal-button">
-          {{#linkTo "deals.fromContact" this class="btn"}}Add Deal{{/linkTo}}
+          {{#link-to "deals.fromContact" this class="btn"}}Add Deal{{/link-to}}
         </td>
         <td class="text-right">
           {{partial 'search/delete'}}

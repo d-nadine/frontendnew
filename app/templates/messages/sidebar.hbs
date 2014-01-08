@@ -1,23 +1,23 @@
 <div class="messages-list-controls">
   <ul class="nav nav-tabs messages-tabs">
-    <li {{bindAttr class="inboxIsActive:active"}}>
-      {{#linkTo "messages" "inbox"}}
+    <li {{bind-attr class="inboxIsActive:active"}}>
+      {{#link-to "messages" "inbox"}}
         {{#if inboxIsActive}}
           {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
         {{else}}
           Inbox
         {{/if}}
-      {{/linkTo}}
+      {{/link-to}}
     </li>
-    <li {{bindAttr class="radiumIsActive:active"}}>
-      {{#linkTo "messages" "radium"}}
+    <li {{bind-attr class="radiumIsActive:active"}}>
+      {{#link-to "messages" "radium"}}
         Tracked Email
-      {{/linkTo}}
+      {{/link-to}}
     </li>
-    <li {{bindAttr class=":messages-search-tab searchIsActive:active"}}>
-      {{#linkTo "messages" "search"}}
+    <li {{bind-attr class=":messages-search-tab searchIsActive:active"}}>
+      {{#link-to "messages" "search"}}
         <i class="ss-symbolicons-block ss-search"></i>
-      {{/linkTo}}
+      {{/link-to}}
     </li>
   </ul>
   {{outlet messages-sidebar-content}}

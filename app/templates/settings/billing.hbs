@@ -28,7 +28,7 @@
   <div class="row-fluid pricing-table-list">
     {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
     <div class="span4 pricing-item">
-      <ul {{bindAttr class=":pricing-table isCurrent"}}>
+      <ul {{bind-attr class=":pricing-table isCurrent"}}>
         <li class="title">{{unbound capitalize name}}</li>
         <li class="price blue">{{unbound currency amount}}/User</li>
         <li class="description">
@@ -38,7 +38,7 @@
         {{#if isAdmin}}
           <li class="cta-button">
             <button
-              {{bindAttr class=":btn isCurrent::btn-success" disabled="notSelectable"}}
+              {{bind-attr class=":btn isCurrent::btn-success" disabled="notSelectable"}}
               {{action updateSubscription name}}>
               {{#if isCurrent}}
                 Your plan

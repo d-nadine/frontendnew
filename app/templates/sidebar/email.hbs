@@ -6,7 +6,7 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
       {{#if email}}
-        {{#linkTo "emails.mailTo" "inbox" this}} {{email}}{{/linkTo}}
+        {{#link-to "emails.mailTo" "inbox" this}} {{email}}{{/link-to}}
       {{else}}
         <span class="empty">Add email here</span>
        {{/if}}

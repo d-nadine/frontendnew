@@ -11,7 +11,7 @@
                 {{description}}
               </label>
             </td>
-            <td {{bindAttr class="isFinished:is-finished:muted"}}>
+            <td {{bind-attr class="isFinished:is-finished:muted"}}>
               {{weight}}%
               {{#if isAdditional}}
                 <a href="#" class="additional" {{action removeAdditionalItem this bubbles="false"}}>

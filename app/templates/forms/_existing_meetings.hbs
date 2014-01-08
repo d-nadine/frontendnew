@@ -3,9 +3,9 @@
     <tr>
       <td>
         {{avatar selectedUser}}
-        {{#linkTo "user" this}}{{selectedUser.name}}{{/linkTo}}
+        {{#link-to "user" this}}{{selectedUser.name}}{{/link-to}}
       </td>
-      <td {{bindAttr class="hasConflict"}}>
+      <td {{bind-attr class="hasConflict"}}>
         {{formatDateTime startsAt format="short"}} to {{time endsAt format="short"}}
       </td>
       <td>
@@ -13,7 +13,7 @@
         {{#if meetingUsers}}
           with
           {{#each meetingUsers}}
-            {{#linkTo "user" this}}{{this.name}}{{/linkTo}}&nbsp;
+            {{#link-to "user" this}}{{this.name}}{{/link-to}}&nbsp;
           {{/each}}
         {{/if}}
       </td>

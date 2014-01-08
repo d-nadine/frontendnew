@@ -2,16 +2,16 @@
   {{check-box checked=isChecked class="checker-block"}}
 </div>
 <div class="span2 name">
-  <span class="name">{{#linkTo "unimplemented"}}{{name}}{{/linkTo}}</span>
+  <span class="name">{{#link-to "unimplemented"}}{{name}}{{/link-to}}</span>
 </div>
 <div class="span2 created-by">
   <label>Created By</label>
   <!-- FIXME: uncomment when API has user -->
-  {{!#linkTo "user" user}}{{!user.name}}{{!/linkTo}}
+  {{!#link-to "user" user}}{{!user.name}}{{!/link-to}}
 </div>
 <div class="span3 description">
   {{description}}
-  {{#linkTo "unimplemented" class="btn btn-block"}}Follow{{/linkTo}}
+  {{#link-to "unimplemented" class="btn btn-block"}}Follow{{/link-to}}
 </div>
 <div class="span2">
   {{partial 'search/members'}}

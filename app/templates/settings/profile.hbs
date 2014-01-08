@@ -32,7 +32,7 @@
       <div class="control-group">
         <label class="control-label">Gmail</label>
         <div class="input-prepend input-append">
-          <input class="span2" id="appendedPrependedInput" type="text" {{bindAttr value=email}} readonly>
+          <input class="span2" id="appendedPrependedInput" type="text" {{bind-attr value=email}} readonly>
           <span class="add-on">
             <span class="label label-success"><i class="ss-standard ss-check"></i> Connected</span>
           </span>
@@ -59,7 +59,7 @@
 
   <div>
     <div class="pull-right">
-      <button type="submit" {{bindAttr disabled=isUpdating}} class="btn btn-primary">Save</button>
+      <button type="submit" {{bind-attr disabled=isUpdating}} class="btn btn-primary">Save</button>
     </div>
   </div>
 </form>

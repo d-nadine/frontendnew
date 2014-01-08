@@ -1,12 +1,12 @@
-<form {{bindAttr class="isExpandable isEditable isNew isExpanded justAdded :form :form-inline :call-form"}}>
-  <div {{bindAttr class="isFinished view.isFocused :primary"}} {{action expand}}>
+<form {{bind-attr class="isExpandable isEditable isNew isExpanded justAdded :form :form-inline :call-form"}}>
+  <div {{bind-attr class="isFinished view.isFocused :primary"}} {{action expand}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if isExpanded}}
       {{view view.contactPicker classNames="contact-picker field field-blend-in"}}
     {{else}}
       {{#if contact}}
-        {{#linkTo "contact" contact class="pull-left inline-contact-name"}}Call {{contact.displayName}}{{/linkTo}}
+        {{#link-to "contact" contact class="pull-left inline-contact-name"}}Call {{contact.displayName}}{{/link-to}}
       {{else}}
         {{view view.contactPicker classNames="contact-picker field"}}
       {{/if}}

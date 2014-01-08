@@ -6,25 +6,25 @@
   </div>
   <div class="sidebar-panel-content sidebar-user-panel">
     {{#if isEditing}}
-      {{#linkTo "user" user}}
+      {{#link-to "user" user}}
         {{#if isLoaded}}
           {{avatar this class="img-polaroid"}}
         {{else}}
           {{partial 'is_loading'}}
         {{/if}}
-      {{/linkTo}}
+      {{/link-to}}
       {{view view.userPicker class="field"}}
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
-      {{#linkTo "user" user}}
+      {{#link-to "user" user}}
         {{#if isLoaded}}
           {{avatar this class="img-polaroid"}}
         {{else}}
           {{partial 'is_loading'}}
         {{/if}}
-      {{/linkTo}}
+      {{/link-to}}
       <p>
-        {{#linkTo "user" user}}{{user.name}}{{/linkTo}}<br/>
+        {{#link-to "user" user}}{{user.name}}{{/link-to}}<br/>
         <span class="title muted">{{user.title}}</span>
       </p>
     {{/if}}

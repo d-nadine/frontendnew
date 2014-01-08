@@ -34,7 +34,7 @@
           <div class="sales-total pull-right">
             {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
               {{#if isEditing}}
-                <div {{bindAttr class="view.isValid:success:error :control-group"}}>
+                <div {{bind-attr class="view.isValid:success:error :control-group"}}>
                   <div class="input-prepend">
                     <span class="add-on">$</span>
                     {{input type="number" value=view.value class="field span2" min="0"}}
@@ -48,7 +48,7 @@
           <div class="clearfix"></div>
           <div class="sales-forecast">
             {{view Radium.ProgressBar percentageBinding="salesGoalPercentage"}}
-            <div {{bindAttr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>
+            <div {{bind-attr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>
           </div>
         </div>
       </div>
@@ -77,9 +77,9 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
-        {{#linkTo "deals.fromUser" this class="btn btn-block btn-large btn-primary"}}
+        {{#link-to "deals.fromUser" this class="btn btn-block btn-large btn-primary"}}
           <i class="ss-standard ss-plus"></i> Deal
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     </div>
   </div>
@@ -93,10 +93,10 @@
     <div class="sidebar-panel-content">
       {{#if contacts.length}}
         <div class="assigned-contacts">
-          {{#linkTo "addressbook.assigned" this}}
-            <span {{bindAttr class=":assigned-count :pull-right"}}>{{contacts.length}}</span>
+          {{#link-to "addressbook.assigned" this}}
+            <span {{bind-attr class=":assigned-count :pull-right"}}>{{contacts.length}}</span>
             My Assigned Contacts
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       {{else}}
         <p>No contacts have been assigned.</p>
@@ -137,7 +137,7 @@
       {{/unless}}
       {{#if controller.currentUser}}
         <br>
-        {{#linkTo "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/linkTo}}
+        {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
       {{/if}}
     </div>
   </div>

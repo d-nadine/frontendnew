@@ -14,8 +14,8 @@
       {{partial "pipeline/actions_btn"}}
 
       <div class="btn-group">
-        <button {{bindAttr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
-          Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
+        <button {{bind-attr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+          Actions <span {{bind-attr class=":caret hasCheckedContent::hide"}}></span>
         </button>
         {{#if hasCheckedContent}}
           <ul class="dropdown-menu">
@@ -60,7 +60,7 @@
           {{view view.changeStatusTodo viewName="statusTodo"}}
         </div>
         <div id="change-status-action">
-          <a href="#" class="btn btn-medium btn-success" {{bindAttr disabled="controller.justAdded"}} {{action changeStatus}}>
+          <a href="#" class="btn btn-medium btn-success" {{bind-attr disabled="controller.justAdded"}} {{action changeStatus}}>
             OK
           </a>
         </div>

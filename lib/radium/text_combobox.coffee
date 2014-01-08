@@ -33,7 +33,7 @@ Radium.TextCombobox = Ember.View.extend
     {{view view.textField}}
 
     {{#unless view.disabled}}
-      <div {{bindAttr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
+      <div {{bind-attr class="view.open:open :btn-group"}} {{action toggleDropdown target=view bubbles=false}}>
         <button class="btn dropdown-toggle controlbox-dropdown" tabindex="-1">
           <i class="ss-standard ss-dropdown"></i>
         </button>

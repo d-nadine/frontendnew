@@ -2,15 +2,15 @@
   {{#if contacts.length}}
     <h5>
       {{#if isTag}}
-        {{#linkTo "addressbook.members" this}}{{membersText}}{{/linkTo}}
+        {{#link-to "addressbook.members" this}}{{membersText}}{{/link-to}}
       {{else}}
-        {{#linkTo "addressbook.employees" this}}{{membersText}}{{/linkTo}}
+        {{#link-to "addressbook.employees" this}}{{membersText}}{{/link-to}}
       {{/if}}
     </h5>
     <div class="clearfix">
       <ul class="inline contact">
         {{#each truncatedContacts}}
-          <li class="contact-tooltip" data-toggle="tooltip" {{bindAttr title="name"}}>
+          <li class="contact-tooltip" data-toggle="tooltip" {{bind-attr title="name"}}>
             {{#if isLoaded}}
               {{avatar this size=small class="img-polaroid"}}
             {{else}}
@@ -22,9 +22,9 @@
     </div>
     {{#if hasMoreContacts}}
       {{#if isTag}}
-        {{#linkTo "addressbook.members" this}}...{{/linkTo}}
+        {{#link-to "addressbook.members" this}}...{{/link-to}}
       {{else}}
-        {{#linkTo "addressbook.employees" this}}...{{/linkTo}}
+        {{#link-to "addressbook.employees" this}}...{{/link-to}}
       {{/if}}
     {{/if}}
   {{else}}

@@ -8,9 +8,9 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
       {{#if primaryEmail.value}}
-        {{#linkTo "emails.mailTo" "inbox" this}}
+        {{#link-to "emails.mailTo" "inbox" this}}
           <strong>{{primaryEmail.name}}</strong> {{primaryEmail.value}}
-        {{/linkTo}}
+        {{/link-to}}
       {{else}}
         <span class="empty">Add email here</span>
       {{/if}}

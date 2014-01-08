@@ -1,5 +1,5 @@
 <div class="sticky-banner deal-banner">
-  <div {{bindAttr class=":deal-banner-bar isPublic status"}}>
+  <div {{bind-attr class=":deal-banner-bar isPublic status"}}>
     <div class="tab">
     {{#if isUnpublished}}
       Unpublished
@@ -21,7 +21,7 @@
       {{render 'sidebar/name' model}}
       <p>
         {{#if reference}}
-          Related to {{#linkTo "messages.email" reference}}{{reference.subject}}{{/linkTo}}<br>
+          Related to {{#link-to "messages.email" reference}}{{reference.subject}}{{/link-to}}<br>
         {{/if}}
         {{resource-link model=contact}}
       </p>
@@ -44,12 +44,12 @@
           </tr>
         </tbody>
       </table>
-      <div {{bindAttr class=":clearfix :deal-progress dealProgressClass"}}>
+      <div {{bind-attr class=":clearfix :deal-progress dealProgressClass"}}>
       {{dealProgress}}
         {{#each statuses}}
           <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
         {{/each}}
-        <div class="bar" {{bindAttr style="view.dealProgressBarWidth"}}></div>
+        <div class="bar" {{bind-attr style="view.dealProgressBarWidth"}}></div>
       </div>
       {{#if payBy}}
         <p class="deal-timeframe">

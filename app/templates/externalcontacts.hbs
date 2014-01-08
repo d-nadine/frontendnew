@@ -3,17 +3,17 @@
     <ul class="nav nav-tabs">
       {{#each categories}}
         <li>
-          {{#linkTo "addressbook.filter" name}}
+          {{#link-to "addressbook.filter" name}}
             {{#if isPrivate}}<i class="ss-standard ss-lock"></i> {{/if}}
             {{text}}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
       {{/each}}
       <li>
-        {{#linkTo "externalcontacts"}}
+        {{#link-to "externalcontacts"}}
           <i class="ss-standard ss-lock"></i>
           Google Contacts
-        {{/linkTo}}
+        {{/link-to}}
       </li>
     </ul>
   </div>
@@ -22,7 +22,7 @@
   <h1>Address Book</h1>
   <div class="address-book-controls">
     <div class="btn-group">
-      <button {{action "confirmDeletion"}} {{bindAttr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}}>
+      <button {{action "confirmDeletion"}} {{bind-attr class=":btn :btn-main :dropdown-toggle controller.hasCheckedContent::muted"}}>
         Delete All
       </button>
     </div>
@@ -31,9 +31,9 @@
         <i class="ss-symbolicons-block ss-search"></i>
         {{input value=searchText type="text" class="field search-text"}}
       </form>
-      {{#linkTo "leads.new" class="btn btn-main btn-primary"}}
+      {{#link-to "leads.new" class="btn btn-main btn-primary"}}
         <i class="ss-standard ss-plus"></i> Contact
-      {{/linkTo}}
+      {{/link-to}}
     </div>
   </div>
 </div>
@@ -50,7 +50,7 @@
   {{else}}
     {{#if hasNewPipelineDeal}}
     <div class="alert">
-      {{resource-link model=newPipelineDeal.contact}} has been added to the {{#linkTo "deal" newPipelineDeal}}pipeline{{/linkTo}}.
+      {{resource-link model=newPipelineDeal.contact}} has been added to the {{#link-to "deal" newPipelineDeal}}pipeline{{/link-to}}.
     </div>
     {{/if}}
     <div class="search-results-header row-fluid">

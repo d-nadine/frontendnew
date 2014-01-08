@@ -9,7 +9,7 @@
   </li>
   {{#each folders itemController="messagesFolder"}}
     <li class="folders-list-item">
-      <a {{bindAttr class="isSelected"}} {{action selectFolder name href=true }}>
+      <a {{bind-attr class="isSelected"}} {{action selectFolder name href=true }}>
         <i class="ss-standard ss-{{unbound icon}}"></i>
         <span class="folder-label">{{title}}</span>
       </a>

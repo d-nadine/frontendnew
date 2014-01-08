@@ -3,16 +3,16 @@
     <ul class="nav nav-tabs">
       {{#each categories}}
         <li>
-          {{#linkTo "addressbook.filter" name}}
+          {{#link-to "addressbook.filter" name}}
             {{#if isPrivate}}<i class="ss-standard ss-lock"></i> {{/if}}
             {{text}}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
       {{/each}}
       <li>
-        {{#linkTo "externalcontacts"}}
+        {{#link-to "externalcontacts"}}
           <i class="ss-standard ss-lock"></i> Google Contacts
-        {{/linkTo}}
+        {{/link-to}}
       </li>
     </ul>
   </div>
@@ -26,12 +26,12 @@
         <i class="ss-symbolicons-block ss-search"></i>
         {{input value=model.searchText type="text" class="field search-text"}}
       </form>
-      {{#linkTo "leads.new" class="btn btn-main btn-primary"}}
+      {{#link-to "leads.new" class="btn btn-main btn-primary"}}
         <i class="ss-standard ss-plus"></i> Contact
-      {{/linkTo}}
+      {{/link-to}}
       <div class="btn-group">
         <button class="btn btn-main address-book-button" >{{view.selectedFilterText}}</button>
-        <button class="btn dropdown-toggle needsclick" {{bindAttr disabled=additionalFilterDisabled}} data-toggle="dropdown">
+        <button class="btn dropdown-toggle needsclick" {{bind-attr disabled=additionalFilterDisabled}} data-toggle="dropdown">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -44,8 +44,8 @@
 
     <div>
       <div class="btn-group">
-        <button {{bindAttr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
-          Actions <span {{bindAttr class=":caret hasCheckedContent::hide"}}></span>
+        <button {{bind-attr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+          Actions <span {{bind-attr class=":caret hasCheckedContent::hide"}}></span>
         </button>
         {{#if hasCheckedContent}}
           <ul class="dropdown-menu">
@@ -114,7 +114,7 @@
 <div class="search-result-list">
   {{#if showEmptyAddressBookButton}}
     <div class="alert alert-info text-center">
-      <h3>You have no contacts here. {{#linkTo "leads.new"}}Add a new contact{{/linkTo}}.</h3>
+      <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
     </div>
   {{else}}
     {{#if visibleContent.length}}

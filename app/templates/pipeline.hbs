@@ -6,31 +6,31 @@
     <div class="nav-collapse collapse pipeline-tabs">
       <ul class="nav nav-tabs">
         <li>
-          {{#linkTo "pipeline.index"}}All Pipeline{{/linkTo}}
+          {{#link-to "pipeline.index"}}All Pipeline{{/link-to}}
         </li>
         {{#each workflowGroups itemController="workflowGroupItem"}}
           <li>
             {{#if isWorkflow}}
-              {{#linkTo "pipeline.workflow" content.title}}
+              {{#link-to "pipeline.workflow" content.title}}
                 {{content.title}} {{currency total}}
-              {{/linkTo}}
+              {{/link-to}}
             {{/if}}
             {{#if isClosed}}
-              {{#linkTo "pipeline.closed"}}
+              {{#link-to "pipeline.closed"}}
                 {{content.title}} {{currency total}}
-              {{/linkTo}}
+              {{/link-to}}
             {{/if}}
             {{#if isLost}}
-              {{#linkTo "pipeline.lost"}}
+              {{#link-to "pipeline.lost"}}
                 {{content.title}} {{currency total}}
-              {{/linkTo}}
+              {{/link-to}}
             {{/if}}
           </li>
         {{/each}}
         <li>
-          {{#linkTo "pipeline.unpublished"}}
+          {{#link-to "pipeline.unpublished"}}
             Unpublished {{unpublished.length}}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
       </ul>
     </div>

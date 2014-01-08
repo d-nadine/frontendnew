@@ -1,26 +1,26 @@
-Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#linkTo 'user' view.content}}{{view.content.firstName}}{{/linkTo}}"
+Ember.TEMPLATES['links/user'] = Ember.Handlebars.compile "{{#link-to 'user' view.content}}{{view.content.firstName}}{{/link-to}}"
 Ember.TEMPLATES['links/contact'] = Ember.Handlebars.compile """
-  {{#linkTo 'contact' view.content}}{{view.displayName}}{{/linkTo}}
+  {{#link-to 'contact' view.content}}{{view.displayName}}{{/link-to}}
 
   {{#if view.company}}
-    ({{#linkTo 'company' view.company}}{{view.company.name}}{{/linkTo}})
+    ({{#link-to 'company' view.company}}{{view.company.name}}{{/link-to}})
   {{/if}}
 """
-Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#linkTo 'company' view.content}}{{view.content.name}}{{/linkTo}}"
-Ember.TEMPLATES['links/tag'] = Ember.Handlebars.compile "{{#linkTo 'tag' view.content}}{{view.content.name}}{{/linkTo}}"
-Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#linkTo 'deal' view.content}}{{view.content.name}}{{/linkTo}}"
+Ember.TEMPLATES['links/company'] = Ember.Handlebars.compile "{{#link-to 'company' view.content}}{{view.content.name}}{{/link-to}}"
+Ember.TEMPLATES['links/tag'] = Ember.Handlebars.compile "{{#link-to 'tag' view.content}}{{view.content.name}}{{/link-to}}"
+Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#link-to 'deal' view.content}}{{view.content.name}}{{/link-to}}"
 Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
   <a href="{{url}}" target="_new">{{view.content.name}}</a>
 """
 Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
-  {{#linkTo 'unimplemented'}}{{truncate view.content.topic length=20}}{{/linkTo}}
+  {{#link-to 'unimplemented'}}{{truncate view.content.topic length=20}}{{/link-to}}
 """
-Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#linkTo 'calendar.task' this}}{{view.content.topic}}{{/linkTo}}"
+Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#link-to 'calendar.task' this}}{{view.content.topic}}{{/link-to}}"
 Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile """
   {{#if email.subject.length}}
-    {{#linkTo 'emails.show' 'inbox' view.content}}{{view.content.subject}}{{/linkTo}}
+    {{#link-to 'emails.show' 'inbox' view.content}}{{view.content.subject}}{{/link-to}}
   {{else}}
-    {{#linkTo 'emails.show' 'inbox' view.content}}(No Subject){{/linkTo}}
+    {{#link-to 'emails.show' 'inbox' view.content}}(No Subject){{/link-to}}
   {{/if}}
 """
 Ember.TEMPLATES['links/default'] = Ember.Handlebars.compile "{{view.displayName}}"

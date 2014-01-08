@@ -9,7 +9,7 @@
   {{else}}
     <div class="subject text-center">
       {{#if subject}}
-        <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#linkTo "emails.show" "sent" this}}{{subject}}{{/linkTo}}&quot; was sent to</p>
+        <p><i class="ss-standard ss-check green"></i> Your email &quot;{{#link-to "emails.show" "sent" this}}{{subject}}{{/link-to}}&quot; was sent to</p>
       {{else}}
         <p><i class="ss-standard ss-check green"></i> Sent an email to</p>
       {{/if}}

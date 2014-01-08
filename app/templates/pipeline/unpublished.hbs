@@ -15,20 +15,20 @@
   </thead>
   <tbody>
     {{#each controller}}
-      <tr {{bindAttr class="isChecked"}}>
+      <tr {{bind-attr class="isChecked"}}>
         <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td class="deal">
           <p>
-            <span>{{#linkTo "deal" this}}{{name}}</span>{{/linkTo}}<br/>
-            {{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}<br/>
+            <span>{{#link-to "deal" this}}{{name}}</span>{{/link-to}}<br/>
+            {{#link-to "contact" contact}}{{contact.displayName}}{{/link-to}}<br/>
             {{contact.title}}
           </p>
         </td>
         <td class="assigned-to">
           <p>
-            <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
+            <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
             <span class="title">{{user.title}}</span>
           <p>
         </td>

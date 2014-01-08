@@ -25,7 +25,7 @@
           <tbody>
             {{#each deals}}
               <tr>
-                <td>{{#linkTo "deal" this}}{{name}}{{/linkTo}}
+                <td>{{#link-to "deal" this}}{{name}}{{/link-to}}
                 <td class="text-right">
                   <strong>{{currency value}} ({{status}})</strong>
                 </td>
@@ -41,13 +41,13 @@
         </table>
         {{#if deals.length}}
           <div class="clearfix">
-            See {{#linkTo "pipeline.resourceDeals" this}}deals{{/linkTo}} with {{displayName}}
+            See {{#link-to "pipeline.resourceDeals" this}}deals{{/link-to}} with {{displayName}}
           </div>
         {{/if}}
         <div class="clearfix">
-          {{#linkTo "deals.fromContact" model class="btn btn-primary pull-right"}}
+          {{#link-to "deals.fromContact" model class="btn btn-primary pull-right"}}
             <i class="ss-standard ss-plus"></i> Deal
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       </div>
     </div>

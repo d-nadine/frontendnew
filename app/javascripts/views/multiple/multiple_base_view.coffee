@@ -18,9 +18,9 @@ Radium.MultipleBaseView = Radium.View.extend
 
   layout: Ember.Handlebars.compile """
     {{#each controller itemController="multipleItem"}}
-      <div {{bindAttr class=":multiple-field :multiple-email-address-view :control-group isPrimary"}}>
+      <div {{bind-attr class=":multiple-field :multiple-email-address-view :control-group isPrimary"}}>
         <label class="control-label">{{typeLabel}}</label>
-        <div class="controls" {{bindAttr class="isInvalid"}}>
+        <div class="controls" {{bind-attr class="isInvalid"}}>
           {{#if showDelete}}
             <div class="pull-right">
               <a href="#" {{action removeSelection this bubbles="false"}} class="btn btn-link btn-remove-field">
@@ -33,7 +33,7 @@ Radium.MultipleBaseView = Radium.View.extend
 
           {{#if showDropDown}}
             <div class="selector">
-              <div class="btn-group mutiple-field" {{bindAttr class="open:open"}}>
+              <div class="btn-group mutiple-field" {{bind-attr class="open:open"}}>
                 <button class="btn" {{action toggleOpen bubbles="false"}}>
                   {{name}}
                 </button>

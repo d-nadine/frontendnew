@@ -16,13 +16,13 @@
     </thead>
     <tbody>
       {{#each visibleContent itemController="pipelineItem"}}
-        <tr {{bindAttr class="isChecked"}}>
+        <tr {{bind-attr class="isChecked"}}>
           <td>
             {{check-box checked=isChecked class="checker-block"}}
           </td>
           <td class="deal-lead">
             <p>
-              <span class="name">{{#linkTo "contact" contact}}{{contact.displayName}}{{/linkTo}}</span></br>
+              <span class="name">{{#link-to "contact" contact}}{{contact.displayName}}{{/link-to}}</span></br>
               <span class="title">{{contact.title}}</span>
             <p>
 
@@ -30,7 +30,7 @@
           </td>
           <td class="assigned-to">
             <p>
-              <span class="name">{{#linkTo "user" user}}{{user.name}}{{/linkTo}}</span></br>
+              <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
               <span class="title">{{user.title}}</span>
             <p>
           </td>

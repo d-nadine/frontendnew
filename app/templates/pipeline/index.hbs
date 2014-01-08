@@ -21,19 +21,19 @@
 {{#if currentUser.isAdmin}}
   <div class="alert-container">
     <div class="alert pull-left">
-      <h4 class="text-center">Set up your pipeline {{#linkTo "settings.pipelineStates"}}here{{/linkTo}}</h4>
+      <h4 class="text-center">Set up your pipeline {{#link-to "settings.pipelineStates"}}here{{/link-to}}</h4>
     </div>
     <div class="alert pull-right">
-      <h4 class="text-center">Set up your lead sources {{#linkTo "settings.leadSources"}}here{{/linkTo}}</h4>
+      <h4 class="text-center">Set up your lead sources {{#link-to "settings.leadSources"}}here{{/link-to}}</h4>
     </div>
   </div>
 {{/if}}
 <div class="clearfix"></div>
 {{#unless workflowDeals.length}}
   <div class="text-center new-lead">
-    {{#linkTo "leads.new" class="btn btn-primary btn-large"}}
+    {{#link-to "leads.new" class="btn btn-primary btn-large"}}
       Your pipeline is empty click here to <strong>Add a Lead</strong>
-    {{/linkTo}}
+    {{/link-to}}
   </div>
 {{else}}
   <div class="hidden">
@@ -60,17 +60,17 @@
         <tr>
           <td class="title">
             {{#if isWorkflow}}
-              {{#linkTo "pipeline.workflow" content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+              {{#link-to "pipeline.workflow" content.title}}<label class="control-lablel">{{capitalize content.title}}</label>{{/link-to}}
             {{/if}}
             {{#if isClosed}}
-              {{#linkTo "pipeline.closed"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+              {{#link-to "pipeline.closed"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/link-to}}
             {{/if}}
             {{#if isLost}}
-              {{#linkTo "pipeline.lost"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/linkTo}}
+              {{#link-to "pipeline.lost"}}<label class="control-lablel">{{capitalize content.title}}</label>{{/link-to}}
             {{/if}}
           </td>
           <td>
-            <label {{bindAttr class=":badge length:badge-success:badge-important"}}>{{length}}</label>
+            <label {{bind-attr class=":badge length:badge-success:badge-important"}}>{{length}}</label>
           </td>
           <td>
             {{percentage}}%

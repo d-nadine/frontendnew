@@ -7,37 +7,37 @@
             <strong>Saving.....</strong>
           {{else}}
             {{#if isTodo}}
-              <li {{bindAttr class="isFinished overdue"}}>
+              <li {{bind-attr class="isFinished overdue"}}>
                 <span class="time">
                   Due
-                  {{#linkTo "calendar.task" this}}
+                  {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="date"}}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </span>
                 <i class="ss-standard ss-check"></i>
-                {{#linkTo "calendar.task" this class="related-task-title"}}{{description}}{{/linkTo}}
+                {{#link-to "calendar.task" this class="related-task-title"}}{{description}}{{/link-to}}
               </li>
             {{/if}}
 
             {{#if isCall}}
-              <li {{bindAttr class="isFinished overdue"}}>
+              <li {{bind-attr class="isFinished overdue"}}>
                 <span class="time">
                   on
-                  {{#linkTo "calendar.task" this}}
+                  {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="date"}}
-                  {{/linkTo}}
+                  {{/link-to}}
                   at
-                  {{#linkTo "calendar.task" this}}
+                  {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="short"}}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </span>
                 <i class="ss-standard ss-phone"></i>
                 <span class="related-task-title">
-                {{#linkTo "calendar.task" this}}Call{{/linkTo}}
+                {{#link-to "calendar.task" this}}Call{{/link-to}}
                 with
-                {{#linkTo "user" user}}{{user.name}}{{/linkTo}}
+                {{#link-to "user" user}}{{user.name}}{{/link-to}}
                 and
-                {{#linkTo "contact" contact}}{{contact.name}}{{/linkTo}}
+                {{#link-to "contact" contact}}{{contact.name}}{{/link-to}}
                 </span>
               </li>
             {{/if}}
@@ -46,17 +46,17 @@
               <li>
                 <span class="time">
                   on
-                  {{#linkTo "calendar.task" this}}
+                  {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="date"}}
-                  {{/linkTo}}
+                  {{/link-to}}
                   at
-                  {{#linkTo "calendar.task" this}}
+                  {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="short"}}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </span>
                 <i class="ss-standard ss-calendar"></i>
                 <span class="related-task-title">
-                {{#linkTo "calendar.task" this}}Meeting {{topic}}{{/linkTo}}
+                {{#link-to "calendar.task" this}}Meeting {{topic}}{{/link-to}}
                 with
                 {{list participants}}
                 </span>

@@ -1,6 +1,6 @@
 {{view Radium.NavbarView}}
 <div id="drawer-buttons">
-  <a {{bindAttr class=":notifications-link isNotificationsOpen:active"}} {{action toggleNotifications}} href="#">
+  <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action toggleNotifications}} href="#">
     <i class="ss-standard ss-clock"></i>
     {{#if notificationCount}}
       {{badge notificationCount style=important}}
@@ -9,13 +9,13 @@
 
   {{outlet buttons}}
 
-  <a href="#" {{bindAttr class=":hidden-desktop isTwoColumn::hidden"}} {{action "toggleSidebar"}} title="Show/hide sidebar">
-    <i {{bindAttr class=":ss-standard isSidebarVisible:ss-delete:ss-layout"}}></i>
+  <a href="#" {{bind-attr class=":hidden-desktop isTwoColumn::hidden"}} {{action "toggleSidebar"}} title="Show/hide sidebar">
+    <i {{bind-attr class=":ss-standard isSidebarVisible:ss-delete:ss-layout"}}></i>
   </a>
 
-  {{#linkTo "settings" class="settings"}}
+  {{#link-to "settings" class="settings"}}
     <i class="ss-standard ss-settings"></i>
-  {{/linkTo}}
+  {{/link-to}}
 </div>
 
 {{outlet drawer}}

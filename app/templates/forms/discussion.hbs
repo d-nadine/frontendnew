@@ -1,4 +1,4 @@
-<form {{bindAttr class="isEditable justAdded :form :discussion-form"}}>
+<form {{bind-attr class="isEditable justAdded :form :discussion-form"}}>
   <div class="primary">
     <div class="form-icon pull-left">
       <i class="ss-symbolicons-block ss-chat inline-form-icon"></i>
@@ -9,7 +9,7 @@
     {{/if}}
 
     {{view view.textbox classNames="textbox field field-blend-in" viewName="text"}}
-    
+
     <div class="second-row">
       {{#if showSaveButton}}
         <button {{action submit}} class="btn btn-primary pull-right">Save</button>

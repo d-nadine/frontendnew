@@ -45,7 +45,7 @@
 
   <div class="content">
     <div class="iframe-container">
-      <div {{bindAttr class="message::empty :text"}}>
+      <div {{bind-attr class="message::empty :text"}}>
         {{htmlBodyFormatter model}}
       </div>
     </div>
@@ -69,14 +69,14 @@
           <i class="ss-standard ss-right"></i> Forward
         </a>
       {{else}}
-        {{#linkTo "emails.edit" model class="btn btn-link btn-messages-action"}}
+        {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
           <i class="ss-standard ss-write"></i> Edit
-        {{/linkTo}}
+        {{/link-to}}
 
-        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bindAttr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
+        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
       {{/unless}}
 
-        <a class="btn btn-link btn-messages-action" {{action deleteEmail this}} {{bindAttr disabled=isSaving}}>
+        <a class="btn btn-link btn-messages-action" {{action deleteEmail this}} {{bind-attr disabled=isSaving}}>
           <i class="ss-symbolicons-block ss-trash"></i> Delete
         </a>
       </div>

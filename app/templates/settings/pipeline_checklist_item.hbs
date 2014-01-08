@@ -1,7 +1,7 @@
 {{#if isEditing}}
   <div class="input-prepend input-append">
     <div class="btn-group">
-      <button class="btn dropdown-toggle needsclick" {{bindAttr disabled= account.isSaving}} data-toggle="dropdown">
+      <button class="btn dropdown-toggle needsclick" {{bind-attr disabled= account.isSaving}} data-toggle="dropdown">
         {{capitalize kind}}
         <span class="caret"></span>
       </button>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="btn-group">
-    <a class="btn dropdown-toggle needsclick"  {{bindAttr disabled= account.isSaving}} data-toggle="dropdown" href="#">
+    <a class="btn dropdown-toggle needsclick"  {{bind-attr disabled= account.isSaving}} data-toggle="dropdown" href="#">
       {{selectedDateString}}
       <span class="caret"></span>
     </a>

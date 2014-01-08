@@ -20,7 +20,7 @@
 
     {{#if showAddresses}}
       <div class="addresses">
-        <div {{bindAttr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+        <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
           <span class="toggles pull-right">
             {{#unless showCc}}
               <a href="#" class="muted" tabindex="7" {{action expandList 'cc'}}>CC</a>
@@ -90,15 +90,15 @@
         </div>
       {{/if}}
 
-      <div {{bindAttr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
+      <div {{bind-attr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
             <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main" {{bindAttr disabled=disableSave}} {{action saveAsDraft this}}>Save Draft</button>
+          <button class="btn btn-main" {{bind-attr disabled=disableSave}} {{action saveAsDraft this}}>Save Draft</button>
           <div id="sendMenu" class="btn-group">
-            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bindAttr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
-            <button class="btn btn-primary dropdown-toggle" {{bindAttr disabled=disableSave}} {{action toggleSendMenu target=view}}>
+            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
+            <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action toggleSendMenu target=view}}>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">

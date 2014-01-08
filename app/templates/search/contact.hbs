@@ -11,15 +11,15 @@
 <div class="span2 name">
   <div class="clearfix search-list-item-title">
     <h4 class="title">
-      {{#linkTo "contact" this}}
+      {{#link-to "contact" this}}
         {{displayName}}
-      {{/linkTo}}
+      {{/link-to}}
     </h4>
     {{partial 'search/links'}}
     <div class="title muted">{{title}}</div>
     {{#if company}}
       <div class="company">
-        {{#linkTo "company" company}}{{company.name}}{{/linkTo}}
+        {{#link-to "company" company}}{{company.name}}{{/link-to}}
       </div>
     {{/if}}
   </div>
