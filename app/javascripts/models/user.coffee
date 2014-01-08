@@ -44,6 +44,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
       contact.get('user') == this && !contact.get('isPersonal')
   ).property('deals.[]')
 
+  displayName: Ember.computed.alias 'name'
+
   clearRelationships: ->
     @get('tasks').compact().forEach (task) =>
       task.deleteRecord()
