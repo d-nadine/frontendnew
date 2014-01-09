@@ -26,7 +26,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting', inverse: 'todos')
-  _referenceTodo: DS.belongsTo('Radium.Todo')
+  _referenceTodo: DS.belongsTo('Radium.Todo', inverse: 'todos')
 
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceTodo')
 

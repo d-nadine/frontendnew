@@ -25,7 +25,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
             @send('flashSuccess', confirmation) if confirmation
           ),
           ((error) =>
-            debugger
             @send 'flashError', error
             error.deleteRecord()
           ))
