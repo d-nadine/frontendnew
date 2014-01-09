@@ -1,5 +1,6 @@
 Radium.FormsAttachmentMixin = Ember.Mixin.create
   reset: ->
+    @_super.apply this, arguments
     if @get('files')
       @get('files').clear()
     else
