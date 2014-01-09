@@ -8,7 +8,7 @@ Radium.SendEmailMixin = Ember.Mixin.create
 
       email.set 'sentAt', Ember.DateTime.create()
 
-      form.setFilesOnEmail(email)
+      form.setFilesOnModel(email)
 
       form.set 'isSending', true
 

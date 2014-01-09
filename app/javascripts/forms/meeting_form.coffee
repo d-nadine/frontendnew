@@ -1,12 +1,18 @@
 require 'forms/form'
+require 'forms/forms_attachment_mixin'
 
-Radium.MeetingForm = Radium.Form.extend
+Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   data: ( ->
     topic: @get('topic')
     location: @get('location')
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
     invitations: Ember.A()
+    files: @get('files').map (file) =>
+      file.get('file')
+
+    attachedFiles: Ember.A()
+    bucket: @get('bucket')
   ).property().volatile()
 
   reset: ->
@@ -16,6 +22,7 @@ Radium.MeetingForm = Radium.Form.extend
     @get('contacts').clear()
     @get('invitations').clear()
     @set('submitForm', false)
+    @_super.apply this, arguments
 
   commit: ->
     isNew = @get('isNew')

@@ -14,7 +14,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       email.set 'sentAt', Ember.DateTime.create()
 
-      form.setFilesOnEmail(email)
+      form.setFilesOnModel(email)
 
       if form.get('sendDraft')
         @send 'sendDraft', email
@@ -24,6 +24,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       email.one 'didCreate', (result) =>
         Ember.run.next =>
+          result.off 'didUpdate'
           form.set 'isSubmitted', false
           form.set 'isSending', false
           messagesController = @controllerFor('messages')
@@ -40,6 +41,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           form.set 'isSubmitted', false
+          debugger
           @send 'flashSuccess', 'Draft saved'
           @transitionTo 'emails.edit', transitionFolder, result if transitionFolder
 
