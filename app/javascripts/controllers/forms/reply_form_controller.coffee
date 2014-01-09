@@ -12,9 +12,3 @@ Radium.FormsReplyController = Radium.FormsEmailController.extend
     deleteFromEditor: ->
       @send 'deleteEmail', @get('model')
       false
-
-  currentUserEmail: Ember.computed.alias 'controllers.currentUser.email'
-
-  to: ( ->
-    @get('model.to').reject (recipient) => recipient.get('email')?.toLowerCase() == @get('currentUserEmail')?.toLowerCase()
-  ).property('model.to.[]')
