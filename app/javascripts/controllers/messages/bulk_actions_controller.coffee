@@ -8,7 +8,8 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      callForm: @get('callForm')
+      # disable for now
+      # callForm: @get('callForm')
       discussionForm: @get('discussionForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 

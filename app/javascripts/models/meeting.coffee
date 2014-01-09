@@ -35,6 +35,11 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceMeeting')
 
+  todos: DS.hasMany('Radium.Todo')
+  calls: DS.hasMany('Radium.Call')
+
+  tasks: Radium.computed.tasks('todos', 'calls')
+
   time: Ember.computed.alias('startsAt')
 
   contacts: ( ->
@@ -56,6 +61,9 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   clearRelationships: ->
     @get('activities').compact().forEach (activity) =>
       activity.deleteRecord()
+
+    @get('tasks').compact().forEach (task) =>
+      task.deleteRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceMeeting') == this

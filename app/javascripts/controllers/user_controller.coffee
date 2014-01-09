@@ -37,7 +37,6 @@ Radium.UserController = Radium.ObjectController.extend
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
-      callForm: @get('callForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 

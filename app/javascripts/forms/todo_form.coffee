@@ -43,12 +43,10 @@ Radium.TodoForm = Radium.Form.extend
       deferred.resolve()
 
     record.one 'becameInvalid', (result) =>
-      @send 'flashError', result
       result.reset()
       deferred.reject(result)
 
     record.one 'becameError', (result)  ->
-      @send 'flashError', result
       result.reset()
       result.get('transaction').rollback()
       deferred.reject("An error has occurred and the #{result.get('typeName')} could not be created.")

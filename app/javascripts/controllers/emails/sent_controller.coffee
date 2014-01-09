@@ -6,7 +6,8 @@ Radium.EmailsSentController = Radium.ObjectController.extend
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      callForm: @get('callForm')
+      # disable for now
+      # callForm: @get('callForm')
   ).property('todoForm', 'callForm')
 
   todoForm: Radium.computed.newForm('todo')

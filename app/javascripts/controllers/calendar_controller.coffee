@@ -19,7 +19,8 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   formBox: (->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      callForm: @get('callForm')
+      # disable for now
+      # callForm: @get('callForm')
       discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
