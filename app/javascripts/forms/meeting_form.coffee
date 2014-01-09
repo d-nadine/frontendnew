@@ -1,5 +1,4 @@
 require 'forms/form'
-require 'forms/forms_attachment_mixin'
 
 Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   data: ( ->
@@ -16,13 +15,13 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   ).property().volatile()
 
   reset: ->
+    @_super.apply this, arguments
     return unless @get('isNew')
     @_super.apply this, arguments
     @get('users').clear()
     @get('contacts').clear()
     @get('invitations').clear()
     @set('submitForm', false)
-    @_super.apply this, arguments
 
   commit: ->
     isNew = @get('isNew')
