@@ -45,6 +45,11 @@ Radium.ResourceLinkComponent = Ember.Component.extend
     @get('content').constructor is Radium.Email
   ).property('content')
 
+  isTodo: ( ->
+    return false unless @get('content')
+    @get('content').constructor is Radium.Todo
+  ).property('content')
+
   content: ( ->
     if @get('model') instanceof Ember.ObjectController
       @get('model.content')

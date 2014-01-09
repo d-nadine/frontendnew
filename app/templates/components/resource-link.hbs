@@ -33,3 +33,7 @@
 {{#if isMeeting}}
   {{#link-to 'calendar.task' model}}{{view.content.topic}}{{/link-to}}
 {{/if}}
+
+{{#if isTodo}}
+  {{#link-to 'calendar.task' model}}{{view.content.description}}{{/link-to}}
+{{/if}}
