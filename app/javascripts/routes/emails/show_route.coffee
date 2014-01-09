@@ -10,9 +10,7 @@ Radium.EmailsShowRoute = Radium.Route.extend Radium.SaveEmailMixin,
       # by the server when the email is actually sent
       email.set 'sentAt', Ember.DateTime.create()
 
-      form.get('files').map( (file) -> file.get('attachment'))
-          .forEach (attachment) =>
-            email.get('attachedFiles').push(attachment.get('id'))
+      form.setFilesOnEmail(email)
 
       # FIXME: hax to close the form. The UI property should be
       # kept on the item controller but there is no way 

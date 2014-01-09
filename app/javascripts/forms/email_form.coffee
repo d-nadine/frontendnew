@@ -24,6 +24,11 @@ Radium.EmailForm = Radium.Form.extend
     @set('sendTime', null)
     @set('checkForResponse', null)
 
+  setFilesOnEmail: (email) ->
+    @get('files').map( (file) -> file.get('attachment'))
+        .forEach (attachment) =>
+          email.get('attachedFiles').push(attachment.get('id'))
+
   data: ( ->
     subject: @get('subject')
     message: @get('message')

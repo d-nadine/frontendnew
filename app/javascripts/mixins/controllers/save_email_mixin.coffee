@@ -14,9 +14,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       email.set 'sentAt', Ember.DateTime.create()
 
-      form.get('files').map( (file) -> file.get('attachment'))
-          .forEach (attachment) =>
-            email.get('attachedFiles').push(attachment.get('id'))
+      form.setFilesOnEmail(email)
 
       if form.get('sendDraft')
         @send 'sendDraft', email
