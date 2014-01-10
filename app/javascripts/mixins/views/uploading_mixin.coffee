@@ -56,6 +56,7 @@ Radium.UploadingMixin = Ember.Mixin.create
       adapter = store.adapterForType(Radium.Attachment)
       adapter.didFindRecord(store, Radium.Attachment, data, id)
       attachment = Radium.Attachment.find(id)
+      attachment.get('reference').reload() if attachment.get('reference')
       wrappedFile.set 'isUploading', false
       wrappedFile.set 'attachment', attachment
 
