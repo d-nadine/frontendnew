@@ -211,5 +211,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   ).property('startsAt')
 
   files: ( ->
+    return @get('model.files') if @get('model.files')
     @get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
-  ).property('attachments.[]')
+  ).property('attachments.[]', 'model.files.[]')
