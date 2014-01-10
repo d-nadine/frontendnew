@@ -209,3 +209,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   currentDate: ( ->
     @get('startsAt').toHumanFormat()
   ).property('startsAt')
+
+  files: ( ->
+    @get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
+  ).property('attachments.[]')
