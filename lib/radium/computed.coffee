@@ -49,6 +49,7 @@ Radium.computed.aggregate = ->
     arrays = properties.map((array) =>
       @get(array)
     ).filter((array) =>
+      return unless array
       array.get('length')
     )
 
