@@ -51,7 +51,7 @@ Radium.DatePicker = Radium.View.extend
       @get('date').toHumanFormat()
     else
       value
-  ).property()
+  ).property('date')
 
   defaultDate: (->
     Ember.DateTime.create().toDateFormat()
