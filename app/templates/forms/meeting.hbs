@@ -56,13 +56,21 @@
           </div>
           <div class="clearfix">
             <div class="pull-right">
-              <button class="btn btn-link">
-                <i class="ss-standard ss-attach"></i> Attach a file
-              </button>
+              <i class="ss-standard ss-attach"></i>
+              {{#if isNew}}
+                {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
+              {{else}}
+                {{file-uploader files=controller.files disableSave=disableSave model=reference class="btn-file btn-messages-action"}}
+              {{/if}}
             </div>
           </div>
         </div>
       </div>
+      {{#if controller.files}}
+        <div class="clearfix new-message-row">
+          {{upload-filelist files=controller.files}}
+        </div>
+      {{/if}}
       <div class="form-row">
         <div class="field-group meeting-form-invite">
           <div class="pull-right">

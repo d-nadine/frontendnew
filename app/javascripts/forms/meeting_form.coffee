@@ -8,6 +8,11 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
     invitations: Ember.A()
+    files: @get('files').map (file) =>
+      file.get('file')
+
+    attachedFiles: Ember.A()
+    bucket: @get('bucket')
   ).property().volatile()
 
   reset: ->
@@ -42,6 +47,8 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
       if @get('reference') && @get('reference.constructor') is Radium.Contact
           meeting.get('invitations').addObject person: type: 'contact', id: @get('reference.id')
+
+      @setFilesOnModel(meeting)
 
     meeting.one 'didCreate', (result) =>
       # FIXME: client side hack.  The server should return the meeting

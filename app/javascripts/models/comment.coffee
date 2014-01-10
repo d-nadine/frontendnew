@@ -16,6 +16,7 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
         @get('call') ||
         @get('activity')
   ).property('email', 'discussion', 'deal', 'meeting', 'todo', 'call', 'activity')
+
   activity: DS.belongsTo('Radium.Activity')
   call: DS.belongsTo('Radium.Call')
   email: DS.belongsTo('Radium.Email')
@@ -23,3 +24,4 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
   discussion: DS.belongsTo('Radium.Discussion')
   meeting: DS.belongsTo('Radium.Meeting')
   todo: DS.belongsTo('Radium.Todo')
+  attachedFiles: DS.attr('array')

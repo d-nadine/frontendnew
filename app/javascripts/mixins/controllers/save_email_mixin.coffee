@@ -41,7 +41,6 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           form.set 'isSubmitted', false
-          debugger
           @send 'flashSuccess', 'Draft saved'
           @transitionTo 'emails.edit', transitionFolder, result if transitionFolder
 

@@ -21,3 +21,5 @@ Radium.CreateMeeting = Radium.Model.extend
   _referenceEmail: DS.belongsTo('Radium.Email')
 
   time: Ember.computed.alias('startsAt')
+
+  attachedFiles: DS.attr('array')

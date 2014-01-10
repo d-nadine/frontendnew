@@ -43,13 +43,13 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     bcc: @get('bcc').map (person) =>
       person.get('email')
 
+    sendTime: @get('sendTime')
+    checkForResponse: @get('checkForResponse')
     files: @get('files').map (file) =>
       file.get('file')
 
     attachedFiles: Ember.A()
     bucket: @get('bucket')
-    sendTime: @get('sendTime')
-    checkForResponse: @get('checkForResponse')
   ).property().volatile()
 
   isValid: ( ->
