@@ -40,6 +40,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
   template: Ember.Handlebars.compile """
       {{#if isLoaded}}
         {{avatar this style="medium"}}
+        <span class="invitee-name">{{displayName}}</span>
         {{#unless isInvited}}
           <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
         {{/unless}}
