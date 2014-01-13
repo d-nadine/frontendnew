@@ -14,6 +14,8 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   website: DS.attr('string')
   notes: DS.attr('string')
 
+  displayName: Ember.computed.alias 'name'
+
   primaryAddress: Radium.computed.primary 'addresses'
 
   todos: DS.hasMany('Radium.Todo')
