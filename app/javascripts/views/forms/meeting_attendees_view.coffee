@@ -1,6 +1,6 @@
 Radium.MeetingAttendeesView = Radium.View.extend
   actions:
-    showContextMenu: (attendee) ->
+    showContextMenu: ->
       return false unless @get('isEditable')
 
       el = @$()
@@ -24,8 +24,16 @@ Radium.MeetingAttendeesView = Radium.View.extend
       e.stopPropagation()
       e.preventDefault()
 
+  willDestroyElement: ->
+    @_super.apply this, arguments
+    $('body').off 'click.attendees-view'
+
   click: (e) ->
-    @$().parent().find('.contextMenu').removeClass('open')
+    dropdown = @$().find('.contextMenu')[0]
+
+    @$().parent().find('.contextMenu').each (index, el)  =>
+      $(el).removeClass('open') unless el == dropdown
+
     return false unless @get('isEditable')
     @send 'showContextMenu', @get('controller.model')
 
