@@ -22,8 +22,6 @@ Radium.MeetingAttendeesView = Radium.View.extend
 
     $('body').on 'click.attendees-view', (e) =>
       @$().find('.contextMenu').removeClass('open')
-      e.stopPropagation()
-      e.preventDefault()
 
   willDestroyElement: ->
     @_super.apply this, arguments
