@@ -53,8 +53,8 @@ Radium.MeetingAttendeesView = Radium.View.extend
         <div class="attendeeMenu dropdown-menu">
           <table>
             <tr>
-              <td><a href="#">Remove Attendee</a></td>
-              <td><a href="#">Resend Invite</a></td>
+              <td><a href="#" {{action cancelInvitation this}}>Remove Attendee</a></td>
+              <td><a href="#" {{action resendInvite this}}>Resend Invite</a></td>
             </tr>
           </table>
         </div>
