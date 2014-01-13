@@ -16,8 +16,13 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
     resendInvite: (attendee) ->
       alert 'No server side implementation yet'
 
+  isOrganizer: Ember.computed 'person', 'parentController.organizer', ->
+    @get('model') == @get('parentController.organizer')
+
   invited: Ember.computed.alias 'parentController.invited'
-  isInvited: Ember.computed 'person', 'invited.[]', ->
+
+  isInvited: Ember.computed 'model', 'invited.[]', ->
+    return true if @get('isOrganizer')
     @get('invited').contains(@get('model'))
 
   findInviationFromAttendee: (attendee) ->

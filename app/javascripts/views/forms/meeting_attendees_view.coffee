@@ -13,6 +13,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
       event.stopPropagation()
 
   isEditable: Ember.computed.not 'controller.isNew'
+  isOrganizer: Ember.computed.alias 'controller.isOrganizer'
   tagName: 'li'
   attributeBindings: ['controller.displayName:title']
 
@@ -34,6 +35,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
     @$().parent().find('.contextMenu').each (index, el)  =>
       $(el).removeClass('open') unless el == dropdown
 
+    return false if @get('isOrganizer')
     return false unless @get('isEditable')
     @send 'showContextMenu', @get('controller.model')
 
