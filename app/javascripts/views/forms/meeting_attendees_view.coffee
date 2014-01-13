@@ -1,5 +1,4 @@
 Radium.MeetingAttendeesView = Radium.View.extend
-  isEditable: Ember.computed.not 'controller.isNew'
   actions:
     showContextMenu: (attendee) ->
       return false unless @get('isEditable')
@@ -10,19 +9,31 @@ Radium.MeetingAttendeesView = Radium.View.extend
 
       dropdown.toggleClass('open')
 
+      event.preventDefault()
       event.stopPropagation()
 
+  isEditable: Ember.computed.not 'controller.isNew'
   tagName: 'li'
   attributeBindings: ['controller.displayName:title']
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+
+    $('body').on 'click.attendees-view', (e) =>
+      @$().find('.contextMenu').removeClass('open')
+      e.stopPropagation()
+      e.preventDefault()
+
+  click: (e) ->
+    @$().parent().find('.contextMenu').removeClass('open')
+    return false unless @get('isEditable')
+    @send 'showContextMenu', @get('controller.model')
 
   template: Ember.Handlebars.compile """
       {{#if isLoaded}}
         {{avatar this style="medium"}}
-        <span class="invitee-name">{{displayName}}</span>
         {{#unless isInvited}}
           <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
-        {{else}}
-          <a href="#" class="btn-close" {{action showContextMenu this target="view"}}>&times;</a>
         {{/unless}}
       {{else}}
         {{partial 'is_loading'}}
