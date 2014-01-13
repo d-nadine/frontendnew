@@ -21,11 +21,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       @get('meetingUsers').pushObject person if person.constructor == Radium.User
 
     removeSelection: (attendee) ->
-      if @get('invited').contains attendee
-        alert 'No API for existing attendees'
-        event.preventDefault()
-        return
-
       resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
 
       attendees = @get(resource)
