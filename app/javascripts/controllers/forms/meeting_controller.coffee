@@ -167,7 +167,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return unless Ember.DateTime.compare(endsAt, startsAt) != 1
 
     @set('endsAt', startsAt.advance(hour: 1))
-  ).observes('startsAt')
+  ).observes('startsAt', 'endsAt')
 
   participants: Radium.computed.aggregate('users', 'contacts')
 
