@@ -29,8 +29,8 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
     return unless @get('startsAt')
 
     startsAt = @get('startsAt')
-    start = startsAt.advance(day: -1).toDateFormat()
-    end = startsAt.advance(day: 1).toDateFormat()
+    start = startsAt.atBeginningOfDay().toFullFormat()
+    end = startsAt.atEndOfDay().toFullFormat()
 
     params = user_id: user.get('id'), start_date: start, end_date: end
 
