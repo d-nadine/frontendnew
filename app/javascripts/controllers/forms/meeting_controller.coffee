@@ -82,9 +82,12 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
   init: ->
     @_super.apply this, arguments
-    @set 'meetingUsers', Radium.MeetingUsers.create()
+    @set 'meetingUsers', Radium.MeetingUsers.create(parent: this)
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
+    return unless @get('isNew')
+    @get('meetingUsers').pushObject @get('organizer')
+    @set 'meetingUsers.startsAt', @get('model.startsAt')
 
   isEditable:( ->
     return false if @get('isSaving')
@@ -163,38 +166,20 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @set('endsAt', startsAt.advance(hour: 1))
   ).observes('startsAt')
 
-  # FIXME: Review when using real ember-data
-  attendeesDidChange: ( ->
-    return if @get('calendarsOpen')
-    return unless @get('isExpanded')
-    return unless @get('users.length') && @get('startsAt')
-
-    self = this
-
-    @get('meetingUsers').forEach (user) =>
-      if user
-        meetings = Radium.Meeting.find(user_id: user.get('id'), day: @get('startsAt').toDateFormat())
-
-        meetings.forEach (meeting) ->
-          startsAt = meeting.get('startsAt').copy().advance(minute: -5)
-          endsAt = meeting.get('endsAt').copy().advance(minute: 5)
-
-          if self.get('startsAt').isBetween startsAt, endsAt
-            self.set 'calendarsOpen', true
-
-  ).observes('meetingUsers.[]', 'startsAt')
-
   participants: Radium.computed.aggregate('users', 'contacts')
 
   attendees: ( ->
     participants = @get('participants')
-    return participants if @get('isNew')
 
     attendees = participants.toArray()
-    attendees.insertAt(0, @get('organizer'))
+
+    organizer = @get('organizer')
+
+    unless organizer && attendees.contains organizer
+      attendees.insertAt(0, organizer)
 
     attendees
-  ).property('participants.[]')
+  ).property('participants.[]', 'organizer')
 
   isExpandable: (->
     return false if @get('justAdded')

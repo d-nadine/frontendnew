@@ -20,6 +20,7 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
     @get('model') == @get('parentController.organizer')
 
   invited: Ember.computed.alias 'parentController.invited'
+  isNew: Ember.computed.alias 'parentController.isNew'
 
   isInvited: Ember.computed 'model', 'invited.[]', ->
     return true if @get('isOrganizer')

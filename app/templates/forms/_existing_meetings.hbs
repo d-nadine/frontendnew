@@ -1,15 +1,15 @@
 <table class="table table-striped table-bordered table-hover">
-  {{#each content.meetings}}
+  {{#each meetingUsers.meetings}}
     <tr>
       <td>
         {{avatar selectedUser}}
         {{#link-to "user" this}}{{selectedUser.name}}{{/link-to}}
       </td>
       <td {{bind-attr class="hasConflict"}}>
-        {{formatDateTime startsAt format="short"}} to {{time endsAt format="short"}}
+        {{formatDateTime startsAt format="short"}} to {{formatDateTime endsAt format="short"}}
       </td>
       <td>
-        {{topic}}
+        {{resource-link model=content}}
         {{#if meetingUsers}}
           with
           {{#each meetingUsers}}
