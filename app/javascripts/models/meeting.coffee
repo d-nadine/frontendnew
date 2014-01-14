@@ -6,6 +6,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   invitations: DS.hasMany('Radium.Invitation')
 
   topic: DS.attr('string')
+  description: DS.attr('string')
   location: DS.attr('string')
   startsAt: DS.attr('datetime')
   endsAt: DS.attr('datetime')

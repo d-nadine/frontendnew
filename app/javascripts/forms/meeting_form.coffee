@@ -4,6 +4,7 @@ require 'forms/forms_attachment_mixin'
 Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   data: ( ->
     topic: @get('topic')
+    description: @get('description')
     location: @get('location')
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
@@ -18,6 +19,7 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   reset: ->
     return unless @get('isNew')
     @_super.apply this, arguments
+    @get('description', "")
     @get('users').clear()
     @get('contacts').clear()
     @get('invitations').clear()

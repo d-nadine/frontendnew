@@ -5,6 +5,7 @@ Radium.CreateMeeting = Radium.Model.extend
   invitations: DS.attr('array')
 
   topic: DS.attr('string')
+  description: DS.attr('string')
   location: DS.attr('string')
   startsAt: DS.attr('datetime')
   endsAt: DS.attr('datetime')

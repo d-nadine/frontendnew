@@ -1,5 +1,6 @@
 Radium.Invitation = Radium.Model.extend
   meeting: DS.belongsTo 'Radium.Meeting'
+  email: DS.attr('string')
 
   status: DS.attr('string')
 

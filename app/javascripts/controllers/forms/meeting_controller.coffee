@@ -3,12 +3,35 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     addSelection: (attendee) ->
       person = attendee.get('person')
 
-      unless person
+      unless @get("isNew")
+        if person
+          invitation = Radium.Invitation.createRecord
+                          person: person
+                          meeting: @get('model')
+                          status: 'pending'
+
+        else
+          invitation = Radium.Invitation.createRecord
+                          email: attendee.get('email')
+                          meeting: @get('model')
+                          status: 'pending'
+                          displayName: attendee.get('email')
+
+        @get('store').commit()
+
+        invitation.one 'didCreate', =>
+          @get('model').reload()
+
+        return
+
+      if @get('isNew') && ! person
         displayName = attendee.get('name') || attendee.get('email')
         item = Ember.Object.create
                 name: attendee.get('name'), email: attendee.get('email'), displayName: displayName, avatarKey: attendee.get('avatarKey'), isLoaded: true
-        @get('contacts').addObject item
-        return
+
+        if @get('isNew')
+          @get('contacts').addObject item
+          return
 
       resource = if person.constructor == Radium.User then 'users' else 'contacts'
 

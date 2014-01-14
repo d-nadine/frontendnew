@@ -4,7 +4,7 @@ CalendarItem = Ember.ObjectController.extend
   ).property('content', 'finishBy', 'startsAt')
 
   title: (->
-    @get('description') || @get('topic')
+     @get('topic') || @get('description')
   ).property('description', 'topic')
 
 Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin,

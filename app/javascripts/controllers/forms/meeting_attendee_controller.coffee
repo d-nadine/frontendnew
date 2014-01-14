@@ -4,7 +4,7 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
       invitation = @findInviationFromAttendee attendee
       Ember.assert "No invitation found for attendee #{attendee.get('id') - attendee.constructor}", invitation
 
-      name = invitation.get('person.name')
+      name = invitation.get('person.displayName')
 
       invitation.one 'didDelete', =>
         @send 'flashSuccess', "#{name} has been removed from this meeting"
