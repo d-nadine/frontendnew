@@ -6,7 +6,11 @@ Radium.TimePickerView = Radium.View.extend
       unless @get('isOpen')
         @$('.timepicker').trigger('click.timepicker')
 
-      @toggleProperty('isOpen')
+      Ember.run.next =>
+        @toggleProperty('isOpen')
+
+      event.stopPropagation()
+      event.preventDefault()
 
   templateName: 'forms/time_picker'
   classNameBindings: [

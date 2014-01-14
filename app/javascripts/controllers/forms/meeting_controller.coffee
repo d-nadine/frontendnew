@@ -164,7 +164,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
     @set('meetingUsers.startsAt', startsAt)
 
-    return unless Ember.DateTime.compare(endsAt, startsAt) == -1
+    return unless Ember.DateTime.compare(endsAt, startsAt) != 1
 
     @set('endsAt', startsAt.advance(hour: 1))
   ).observes('startsAt')
