@@ -28,10 +28,14 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')
 
-    params = user_id: user.get('id'), day: @get('startsAt').toDateFormat()
+    startsAt = @get('startsAt')
+    start = startsAt.advance(day: -1).toDateFormat()
+    end = startsAt.advance(day: 1).toDateFormat()
 
-    if @get('meetingId')
-      params['meeting_id'] = @get('meetingId')
+    params = user_id: user.get('id'), start_date: start, end_date: end
+
+    if meetingId = @get('meetingId')
+      params['exclude_ids'] = meetingId
 
     Radium.Meeting.find(params).then (meetings) =>
       meetings.forEach (meeting) =>
