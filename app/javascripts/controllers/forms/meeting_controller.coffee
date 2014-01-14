@@ -29,7 +29,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
       attendees.removeObject attendee
 
-      @get('meetingUsers').removeObject attendee if attendee.constructor == Radium.User
+      @get('meetingUsers.content').removeObject attendee if attendee.constructor == Radium.User
 
     showCalendars: ->
       @toggleProperty 'calendarsOpen'
@@ -85,9 +85,12 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @set 'meetingUsers', Radium.MeetingUsers.create(parent: this)
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
+
     return unless @get('isNew')
+
     @get('meetingUsers').pushObject @get('organizer')
     @set 'meetingUsers.startsAt', @get('model.startsAt')
+    @get('content.users').forEach (user) => @get('meetingUsers').pushObject user
 
   isEditable:( ->
     return false if @get('isSaving')

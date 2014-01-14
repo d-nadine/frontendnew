@@ -28,7 +28,12 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')
 
-    Radium.Meeting.find(user_id: user.get('id'), day: @get('startsAt').toDateFormat()).then (meetings) =>
+    params = user_id: user.get('id'), day: @get('startsAt').toDateFormat()
+
+    if @get('meetingId')
+      params['meeting_id'] @get('meetingId')
+
+    Radium.Meeting.find(params).then (meetings) =>
       meetings.forEach (meeting) =>
         existingEntry = @get('meetings').find (existing) ->
           existing.get('content') == meeting && existing.get('selectedUser') == user
@@ -48,4 +53,4 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
     meetings = @get('meetings')
 
     meetings.forEach (meeting) ->
-      meetings.removeObject(meeting) if meeting.get('users').contains(user)
+      meetings.removeObject(meeting) if meeting.get('selectedUser') == user
