@@ -8,13 +8,31 @@
     {{partial 'is_loading'}}
   {{/if}}
 </div>
-<div class="span2 name">
+<div class="span4 name">
   <div class="clearfix search-list-item-title">
-    <h4 class="title">
-      {{#link-to "contact" this}}
-        {{displayName}}
-      {{/link-to}}
-    </h4>
+    {{#if name}}
+      <h4 class="title">
+        {{#link-to "contact" this}}
+          {{name}}
+        {{/link-to}}
+      </h4>
+      {{#if email}}
+        <div class="sidebar-email-view inline-editor-closed is-enabled inline-editor">
+          <dl class="dl-horizontal contact-types-list">
+          <dt><i class="ss-standard ss-mail muted"></i></dt>
+          <dd>
+            {{#link-to "contact" this}} {{email}}{{/link-to}}
+          </dd>
+        </dl>
+        </div>
+      {{/if}}
+    {{else}}
+      <h4 class="title">
+        {{#link-to "contact" this}}
+          {{email}}
+        {{/link-to}}
+      </h4>
+    {{/if}}
     {{partial 'search/links'}}
     <div class="title muted">{{title}}</div>
     {{#if company}}
@@ -24,9 +42,12 @@
     {{/if}}
   </div>
 </div>
+<!--
+DISABLE FOR NOW
 <div class="span2 last-activity">
-  {{partial 'search/last_activity'}}
+  {{!partial 'search/last_activity'}}
 </div>
+-->
 <div class="span3 next-task">
   {{partial 'search/tasks'}}
 </div>
