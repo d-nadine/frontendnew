@@ -14,4 +14,3 @@ Radium.Invitation = Radium.Model.extend
   ).property('_personUser', '_personContact')
   _personContact: DS.belongsTo('Radium.Contact')
   _personUser: DS.belongsTo('Radium.User')
-

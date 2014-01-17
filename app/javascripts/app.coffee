@@ -9,7 +9,16 @@ require 'lib/ember/computed'
 
 require 'lib/string/inflector'
 
-FastClick.attach(document.body);
+FastClick.attach(document.body)
+
+window.number_of_clicks = 0
+
+document.addEventListener  'click', ->
+          window.Intercom "update",
+            increments:
+              number_of_clicks: 1
+          window.Intercom('reattach_activator')
+        , false
 
 Radium = Em.Application.createWithMixins
   rootElement: '#application'

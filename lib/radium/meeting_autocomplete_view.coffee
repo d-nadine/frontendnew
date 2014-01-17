@@ -1,7 +1,11 @@
 Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
   actions:
     addSelection: (item) ->
-      @get('controller').send('addSelection', item)
+      if @get('controller.isNew')
+        @get('controller').send('addSelection', item)
+      else
+        @get('controller').send('addAttendeeToExistingMeeting', item)
+
     removeSelection: (item) ->
       @get('controller').send('removeSelection', item)
 

@@ -1,28 +1,42 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   actions:
-    addSelection: (attendee) ->
+    addAttendeeToExistingMeeting: (attendee) ->
       person = attendee.get('person')
 
-      unless @get("isNew")
-        if person
-          invitation = Radium.Invitation.createRecord
-                          person: person
-                          meeting: @get('model')
-                          status: 'pending'
+      if person
+        invitation = Radium.Invitation.createRecord
+                        status: 'pending'
 
-        else
-          invitation = Radium.Invitation.createRecord
-                          email: attendee.get('email')
-                          meeting: @get('model')
-                          status: 'pending'
-                          displayName: attendee.get('email')
+        key = "_person#{person.constructor.humanize().capitalize()}"
 
-        @get('store').commit()
+        invitation.set key, person
+        invitation.set 'meeting', @get('model')
+      else
+        invitation = Radium.Invitation.createRecord
+                        email: attendee.get('email')
+                        meeting: @get('model')
+                        status: 'pending'
+                        displayName: attendee.get('email')
 
-        invitation.one 'didCreate', =>
-          @get('model').reload()
+        invitation.one 'didCreate', (result) =>
+          observer = =>
+            if result.get('currentState.stateName') == "root.loaded.saved"
+              result.reload()
+              result.removeObserver 'currentState.stateName', observer
 
-        return
+          result.addObserver 'currentState.stateName', observer
+
+        invitation.one 'becameInvalid', (result) =>
+          @get('invitations').removeObject invitation
+          @send 'flashError', result
+
+        invitation.one 'becameError', (result) =>
+          @send 'flashError', 'An error has occurred and the invitaiton cannot be sent.'
+
+      @get('store').commit()
+
+    addSelection: (attendee) ->
+      person = attendee.get('person')
 
       if @get('isNew') && ! person
         displayName = attendee.get('name') || attendee.get('email')
@@ -32,8 +46,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
         if @get('isNew')
           @get('contacts').addObject item
           return
-
-      resource = if person.constructor == Radium.User then 'users' else 'contacts'
 
       attendees = @get(resource)
 
@@ -73,7 +85,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
       return unless @get('isValid')
 
-      @set 'isExpanded', false
       @set 'justAdded', true
 
       Ember.run.later( ( =>

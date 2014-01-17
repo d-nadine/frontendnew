@@ -23,6 +23,8 @@ Ember.Application.initializer
         created_at: user.get('createdAt').toUnixTimestamp()
         widget:
           activator: "#IntercomDefaultWidget"
+        increments:
+          number_of_clicks: 1
 
       account = user.get('account')
 

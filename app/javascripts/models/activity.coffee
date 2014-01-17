@@ -28,7 +28,8 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
         @get('_referenceMeeting') ||
         @get('_referencePhoneCall') ||
         @get('_referenceTodo') ||
-        @get('_referenceVoiceMail')
+        @get('_referenceVoiceMail') ||
+        @get('_referenceInvitation')
   ).property('_referenceAttachment',
     '_referenceCall',
     '_referenceCompany',
@@ -39,7 +40,8 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
     '_referenceMeeting',
     '_referencePhoneCall',
     '_referenceTodo',
-    '_referenceVoiceMail')
+    '_referenceVoiceMail',
+    '_referenceInvitation')
   _referenceAttachment: DS.belongsTo('Radium.Attachment')
   _referenceCall: DS.belongsTo('Radium.Call')
   _referenceCompany: DS.belongsTo('Radium.Company')
@@ -51,3 +53,4 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   _referencePhoneCall: DS.belongsTo('Radium.PhoneCall')
   _referenceTodo: DS.belongsTo('Radium.Todo')
   _referenceVoiceMail: DS.belongsTo('Radium.VoiceMail')
+  _referenceInvitation: DS.belongsTo('Radium.Invitation')

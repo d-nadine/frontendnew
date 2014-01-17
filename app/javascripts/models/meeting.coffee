@@ -46,10 +46,12 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   contacts: ( ->
     return Ember.A() unless @get('invitations.length')
 
-    @get('invitations')
+    contacts = @get('invitations')
       .filter((invitation) -> invitation?.get('person')?.constructor is Radium.Contact)
       .map((invitation) -> invitation.get('person'))
-  ).property('invitations.[]')
+
+    contacts
+  ).property('invitations.[]', 'invitations.@each.person')
 
   users: ( ->
     return Ember.A() unless @get('invitations.length')
