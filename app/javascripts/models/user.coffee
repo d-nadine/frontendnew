@@ -48,7 +48,14 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   clearRelationships: ->
     @get('tasks').compact().forEach (task) =>
-      task.deleteRecord()
+      if task.constructor isnt Radium.Meeting
+        task.deleteRecord()
+      else
+        if task.get('organizer') isnt this
+          invitation = task.get('invitations').find (invitation) => invitation.get('person') == this
+          invitation.unloadRecord()
+        else
+          task.deleteRecord()
 
     @get('activities').compact().forEach (activity) =>
       activity.deleteRecord()

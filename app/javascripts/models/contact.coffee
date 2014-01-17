@@ -75,13 +75,20 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   clearRelationships: ->
     @get('deals').compact().forEach (deal) =>
-      deal.deleteRecord()
+      deal.unloadRecord()
 
     @get('tasks').compact().forEach (task) =>
-      task.deleteRecord()
+      if task.constructor isnt Radium.Meeting
+        task.deleteRecord()
+      else
+        if task.get('reference') isnt this
+          invitation = task.get('invitations').find (invitation) => invitation.get('person') == this
+          invitation.unloadRecord()
+        else
+          task.deleteRecord()
 
     @get('activities').compact().forEach (activity) =>
-      activity.deleteRecord()
+      activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this 
