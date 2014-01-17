@@ -31,6 +31,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
           @send 'flashError', result
 
         invitation.one 'becameError', (result) =>
+          @get('invitations').removeObject invitation
           @send 'flashError', 'An error has occurred and the invitaiton cannot be sent.'
 
       @get('store').commit()
