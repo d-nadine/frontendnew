@@ -48,6 +48,8 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
           @get('contacts').addObject item
           return
 
+      resource = if attendee.constructor == Radium.User then 'users' else 'contacts'
+
       attendees = @get(resource)
 
       return if attendees.find( (item) -> item == person)
