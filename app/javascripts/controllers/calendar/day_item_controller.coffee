@@ -4,6 +4,7 @@ Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMore
   actions:
     selectCalendarTask: (task) ->
       @set 'controllers.calendarSidebar.selectedTask', task
+      @transitionToRoute "calendar.task", task
 
   needs: ['calendarIndex', 'calendarSidebar']
   calendarDate: Ember.computed.alias('controllers.calendarIndex.date')
