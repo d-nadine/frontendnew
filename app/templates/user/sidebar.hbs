@@ -135,15 +135,17 @@
       {{#unless userIsCurrentUser}}
         <button class="btn btn-danger btn-large btn-block" {{action confirmDeletion}}>Delete</button>
       {{/unless}}
-      {{#if controller.currentUser}}
+      {{#if userIsCurrentUser}}
         <br>
         {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
       {{/if}}
     </div>
   </div>
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-content">
-      {{view Radium.Combobox placeholder="Invite someone"}}
+  {{#if userIsCurrentUser}}
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-content">
+        {{render "inviteUser"}}
+      </div>
     </div>
-  </div>
+  {{/if}}
 </form>

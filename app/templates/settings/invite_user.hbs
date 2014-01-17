@@ -1,11 +1,11 @@
-<form {{bind-attr class=":form-inline didInvite:success"}} {{action "inviteUser" on="submit"}}>
+<form {{bind-attr class=":form-inline didInvite:success"}}>
   {{#if isDuplicate}}
     <div class="alert alert-warning">
       A user with this email address has already registered.
     </div>
   {{/if}}
-  {{input value=newUserEmail class="input-xlarge" placeholder="Add a member by Email"}}
-  <button class="btn btn-success" {{bind-attr disabled="controller.isDisabled"}}>
+  {{input value=newUserEmail class="input-xlarge" placeholder="Invite a member by email to use Radium" action="inviteUser"}}
+  <button class="btn btn-success" {{bind-attr disabled="controller.isDisabled"}} {{action inviteuser}}>
     Invite
   </button>
 </form>
