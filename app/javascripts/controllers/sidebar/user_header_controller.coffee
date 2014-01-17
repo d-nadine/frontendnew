@@ -22,6 +22,10 @@ Radium.SidebarUserHeaderController = Radium.SidebarBaseController.extend
 
   needs: ['companies']
 
+  userIsCurrentUser: ( ->
+    @get('model') == @get('currentUser')
+  ).property('model', 'currentUser')
+
   isValid: ( ->
     return unless @get('isEditing')
     return if Ember.isEmpty @get('form.firstName')

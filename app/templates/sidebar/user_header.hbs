@@ -40,4 +40,6 @@
     {{/if}}
   </div>
 {{/if}}
-<button class="btn btn-block btn-follow">Follow {{firstName}}</button>
+{{#unless userIsCurrentUser}}
+  <button class="btn btn-block btn-follow">Follow {{firstName}}</button>
+{{/unless}}
