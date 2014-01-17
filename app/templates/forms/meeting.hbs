@@ -1,3 +1,4 @@
+<h1>{{isExpanded}}</h1>
 <form {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bind-attr class="hasElapsed view.isFocused showTopicTextBox:open:closed :primary"}} {{action expand}}>
     {{#if showComments}}
@@ -52,7 +53,7 @@
         <div class="field-group">
           <label class="icon-label"><i class="ss-symbolicons-block ss-write"></i></label>
           <div class="field-group-input">
-            {{input type="text" value=description class="input-block-level" placeholder="description"}}
+            {{input type="text" value=model.description class="input-block-level" placeholder="description" action="submit"}}
           </div>
           <div class="clearfix">
             <div class="pull-right">

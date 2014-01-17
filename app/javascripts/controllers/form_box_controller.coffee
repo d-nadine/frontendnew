@@ -4,7 +4,7 @@ Radium.FormBoxController = Radium.ObjectController.extend
       @get("#{form}Form").reset()
       @set 'activeForm', form
       if @get('showMeetingForm')
-        @set 'meetingForm.isExpanded', @get('showMeetingForm')
+        @set 'meetingForm.isExpanded', true
 
     submitForm: ->
       activeForm = @get("#{@get('activeForm')}Form")

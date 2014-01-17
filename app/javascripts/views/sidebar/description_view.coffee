@@ -1,6 +1,6 @@
 Radium.SidebarDescriptionView = Radium.InlineEditorView.extend
   textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
-     click: (event) ->
+    click: (event) ->
       event.stopPropagation()
 
     insertNewline: ->
