@@ -150,9 +150,12 @@ Radium.MessagesRoute = Radium.Route.extend
       sidebarController.set('totalRecords', meta.totalRecords)
       sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
 
-    if meta.totalRecords > 0
+    pageSize = @controllerFor('messages').get('pageSize')
+
+    if meta.totalRecords > pageSize
       for i in [0...3]
-        sidebarController.send 'showMore'
+        currentCount = (i + 1) * pageSize
+        sidebarController.send 'showMore' if meta.totalRecords >= currentCount
 
     return unless transitioin.targetName == "messages.index"
 
