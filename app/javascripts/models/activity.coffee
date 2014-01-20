@@ -12,6 +12,10 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   meta: DS.attr('object')
   time: DS.attr('datetime')
 
+  iid: ( ->
+    parseInt @get('id')
+  ).property('id')
+
   reference: ((key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.toString().split('.')[1]
