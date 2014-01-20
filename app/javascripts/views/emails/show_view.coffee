@@ -1,5 +1,4 @@
-Radium.EmailsShowView = Radium.View.extend
-  didInsertElement: ->
+Radium.EmailsShowView = Radium.View.extend didInsertElement: ->
     model = @get 'controller.model'
 
     return if model == @get('controller.history.firstObject')

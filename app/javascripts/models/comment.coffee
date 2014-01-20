@@ -1,4 +1,5 @@
 Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
+  Radium.TimestampsMixin,
   user: DS.belongsTo('Radium.User')
 
   text: DS.attr('string')

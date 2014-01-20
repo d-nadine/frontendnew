@@ -28,9 +28,6 @@ Radium.FormsMeetingView = Radium.FormView.extend
     @get('controller.startsAt').toHumanFormatWithTime()
   ).property('startsAt')
 
-  didInsertElement: ->
-    @_super.apply this, arguments
-
   willDestroyElement: ->
     $('html').off 'click.cancel-meeting'
 

@@ -54,6 +54,13 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
       @setFilesOnModel(meeting)
 
     meeting.one 'didCreate', (result) =>
+      observer = =>
+        if result.get('meeting')
+          result.set 'meeting.newTask', true
+          result.removeObserver 'meeting', observer
+
+      result.addObserver 'meeting', observer
+
       # FIXME: client side hack.  The server should return the meeting
       # with the relationships set
       currentUser = @get('currentUser.model')

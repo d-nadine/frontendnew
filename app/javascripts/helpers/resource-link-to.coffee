@@ -1,3 +1,4 @@
+#http://jsbin.com/OnuCaCep/38/edit
 Radium.typeToLinks =
   email: 'emails.show'
   meeting: 'calendar.task'
@@ -26,5 +27,13 @@ Ember.Handlebars.registerHelper "resource-link-to", (name, options) ->
     options.contexts = [this, this]
     args.unshift name
     args.unshift resourceRoute
+
+  unless resource.get('isLoaded')
+    observer = =>
+      if resource.get('isLoaded')
+        # how do I get the LinkView to rerender here?
+        resource.removeObserver 'isLoaded', observer
+
+    resource.addObserver 'isLoaded', observer
 
   Ember.Handlebars.helpers["link-to"].apply this, args
