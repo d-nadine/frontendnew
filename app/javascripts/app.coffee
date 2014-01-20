@@ -9,8 +9,6 @@ require 'lib/ember/computed'
 
 require 'lib/string/inflector'
 
-require 'instrumentation/view_rendering'
-
 FastClick.attach(document.body)
 
 window.number_of_clicks = 0

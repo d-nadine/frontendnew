@@ -21,4 +21,5 @@ Ember.Application.initializer
   name: 'stripePublicKey'
   after: 'store'
   initialize: (container, application) ->
+    require 'instrumentation/view_rendering'
     Stripe.setPublishableKey('pk_test_fcvBFet4q62tftqiRZntwafx')

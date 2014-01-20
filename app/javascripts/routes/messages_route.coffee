@@ -115,6 +115,7 @@ Radium.MessagesRoute = Radium.Route.extend
       @send 'back'
 
   model: (params, transition) ->
+    @set('time', new Date())
     messagesController = @controllerFor('messages')
     sidebarController = @controllerFor('messagesSidebar')
 
@@ -132,6 +133,12 @@ Radium.MessagesRoute = Radium.Route.extend
     folder: @controllerFor('messages').get('folder')
 
   afterModel: (model, transitioin) ->
+    now = new Date()
+
+    diff = Math.ceil(now.getTime() - @get('time').getTime()) / 100
+
+    console.log "model hook took #{diff} seconds"
+
     sidebarController = @controllerFor('messagesSidebar')
 
     return if sidebarController.get('searchIsActive')
