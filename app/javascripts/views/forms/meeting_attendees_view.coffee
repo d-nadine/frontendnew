@@ -15,7 +15,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
   isEditable: Ember.computed.not 'controller.parentController.isNew'
   isOrganizer: Ember.computed.alias 'controller.isOrganizer'
   tagName: 'li'
-  attributeBindings: ['controller.displayName:title']
+  attributeBindings: ['controller.title:title']
 
   didInsertElement: ->
     @_super.apply this, arguments
@@ -23,9 +23,13 @@ Radium.MeetingAttendeesView = Radium.View.extend
     $('body').on 'click.attendees-view', (e) =>
       @$().find('.contextMenu').removeClass('open')
 
+    @$().tooltip()
+
   willDestroyElement: ->
     @_super.apply this, arguments
     $('body').off 'click.attendees-view'
+    if @$().data('tooltip')
+      @$().tooltip('destroy')
 
   click: (e) ->
     dropdown = @$().find('.contextMenu')[0]
