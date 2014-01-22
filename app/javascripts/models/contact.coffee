@@ -83,7 +83,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
       else
         if task.get('reference') isnt this
           invitation = task.get('invitations').find (invitation) => invitation.get('person') == this
-          invitation.unloadRecord()
+          invitation?.unloadRecord()
         else
           task.deleteRecord()
 
