@@ -29,7 +29,7 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
 
     unless @get('isOrganizer')
       invitation = @findInviationFromAttendee @get('model')
-      title += " - #{invitation.get('status')}"
+      title += " - #{invitation.get('status')}" unless @get('isNew')
     else
       title += " - organizer"
 
