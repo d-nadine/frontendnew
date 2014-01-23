@@ -87,7 +87,8 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   showSuccess: Ember.computed.alias('justAdded')
 
   hasReference: ( ->
-    !@get('isNew') && @get('reference')
+    reference = @get('reference')
+    !@get('isNew') && reference
   ).property('reference', 'isNew')
 
   isExpandable: (->

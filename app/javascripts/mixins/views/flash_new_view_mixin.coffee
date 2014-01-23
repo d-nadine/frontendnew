@@ -1,5 +1,6 @@
 Radium.FlashNewViewMixin = Ember.Mixin.create
   classNameBindings: ['animateNewItem:isNewItem']
+  didInsertElement: ->
   flash: (->
     # isNew as a class name binding isn't reliable at the moment,
     # so this is a temp fix so new items flash on insert

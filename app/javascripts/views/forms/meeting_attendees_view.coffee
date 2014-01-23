@@ -28,7 +28,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
   willDestroyElement: ->
     @_super.apply this, arguments
     $('body').off 'click.attendees-view'
-    if @$().data('tooltip')
+    if @$()?.data('tooltip')
       @$().tooltip('destroy')
 
   click: (e) ->

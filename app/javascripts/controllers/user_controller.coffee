@@ -43,7 +43,7 @@ Radium.UserController = Radium.ObjectController.extend
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: (->
-    reference: @get('model')
+    reference: @get('model') unless @get('model') == @get('currentUser')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
   ).property('model', 'tomorrow')

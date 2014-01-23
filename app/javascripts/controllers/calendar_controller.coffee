@@ -33,7 +33,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   todoFormDefaults: (->
     description: null
-    reference: @get('model')
     finishBy: @get('taskStartDate')
     user: @get('currentUser')
   ).property('model', 'tomorrow', 'taskStartDate')
@@ -108,9 +107,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     Radium.Meeting.filter (meeting) ->
       meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate)
   ).property('date')
-
-  # FIXME: Why does this only work with ArrayController and
-  # not ArrayProxy
 
   dayNames: (->
     firstDay = Ember.DateTime.create().get('lastMonday')
