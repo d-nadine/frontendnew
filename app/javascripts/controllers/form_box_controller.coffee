@@ -1,4 +1,4 @@
-Radium.FormBoxController = Radium.ObjectController.extend
+Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
   actions:
     showForm: (form) ->
       @get("#{form}Form").reset()
@@ -6,9 +6,14 @@ Radium.FormBoxController = Radium.ObjectController.extend
       if @get('showMeetingForm')
         @set 'meetingForm.isExpanded', true
 
+      Ember.run.later this, =>
+        @trigger 'focusTopic'
+      , 400
+
     submitForm: ->
       activeForm = @get("#{@get('activeForm')}Form")
       activeForm.set('submitForm', true)
+      @trigger 'focusTopic'
 
   activeForm: 'todo'
 

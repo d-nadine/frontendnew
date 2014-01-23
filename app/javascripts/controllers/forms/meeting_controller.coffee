@@ -90,6 +90,8 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
       @set 'justAdded', true
 
+      @set 'isExpanded', false
+
       Ember.run.later( ( =>
         @set 'justAdded', false
         @set 'isSubmitted', false

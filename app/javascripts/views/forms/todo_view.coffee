@@ -3,6 +3,7 @@ require 'views/forms/todo_field_view'
 require 'lib/radium/user_picker'
 require 'lib/radium/date_picker'
 require 'views/forms/form_view'
+require 'views/forms/focus_textarea_mixin'
 
 Radium.FormsTodoView = Radium.FormView.extend
   checkbox: Radium.Checkbox.extend
@@ -24,6 +25,8 @@ Radium.FormsTodoView = Radium.FormView.extend
         @$().tooltip('destroy')
 
   todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
+    Radium.FocusTextareaMixin,
+
     value: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: (->

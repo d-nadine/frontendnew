@@ -1,6 +1,7 @@
 require 'lib/radium/time_picker_view'
 require 'lib/radium/location_picker'
 require 'lib/radium/meeting_autocomplete_view'
+require 'views/forms/focus_textarea_mixin'
 
 Radium.FormsMeetingView = Radium.FormView.extend
   actions:
@@ -57,6 +58,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
     """
 
   topicField: Radium.MentionFieldView.extend Radium.TextFieldFocusMixin,
+    Radium.FocusTextareaMixin,
+
     classNameBindings: ['isInvalid', ':meeting']
     disabledBinding: 'controller.isPrimaryInputDisabled'
     placeholder: 'Add meeting topic'
