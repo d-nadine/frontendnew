@@ -1,4 +1,9 @@
 Radium.CalendarTaskRoute = Radium.Route.extend
+  actions:
+    deleteTask: (model) ->
+      @transitionTo 'calendar.index', model.get('time')
+      false
+
   serialize: (model) ->
     taskType = model.constructor.toString().humanize().pluralize()
 

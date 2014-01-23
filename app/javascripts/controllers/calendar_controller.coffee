@@ -49,7 +49,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   meetingFormDefaults: ( ->
     topic: null
-    isExpanded: true
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
     startsAt: @get('now').advance(hour: 1)

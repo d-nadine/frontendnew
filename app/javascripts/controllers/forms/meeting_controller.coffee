@@ -83,6 +83,11 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
       model.get('transaction').commit()
 
+      if @get('parentController') instanceof Radium.CalendarTaskController
+        @transitionToRoute 'calendar.index', model.get('startsAt')
+
+      @send 'flashSuccess', 'The task has been deleted.'
+
     submit:  ->
       @set 'isSubmitted', true
 
