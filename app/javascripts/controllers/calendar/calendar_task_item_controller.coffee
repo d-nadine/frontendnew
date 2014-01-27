@@ -8,7 +8,10 @@ Radium.CalendarTaskItemController = Radium.ObjectController.extend
       @toggleProperty 'isFinished'
 
       Ember.run =>
-        model.set('isExpanded', !model.get('isFinished'))
+        if @get("controllers.application.currentPath") == "calendar.task"
+          model.set('isExpanded', !model.get('isFinished'))
+        else
+          model.set('isExpanded', false)
 
       @get('store').commit()
 
