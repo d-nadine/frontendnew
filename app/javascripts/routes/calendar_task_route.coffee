@@ -17,6 +17,9 @@ Radium.CalendarTaskRoute = Radium.Route.extend
   setupController: (controller, task) ->
     controller.set 'model', task
 
+    if task.constructor is Radium.Todo
+      task.set('isExpanded', !task.get("isFinished"))
+
     @send 'selectDay', selectedDay
 
     calendarIndexController = @controllerFor('calendarIndex')
