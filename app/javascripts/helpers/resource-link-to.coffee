@@ -12,6 +12,8 @@ Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
   if resource.constructor is Radium.Attachments
     return new Handlebars.SafeString "<a href='#{resource.get('url')}' target='_blank'>#{resource.get('fileName')}</a>"
 
+  return unless resource.humanize
+
   resourceRoute = resource.humanize()
 
   if Radium.typeToLinks[resourceRoute]
