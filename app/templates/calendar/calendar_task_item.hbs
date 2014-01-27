@@ -2,6 +2,9 @@
   <button {{action finishTask}} class="btn btn-link pull-left events-list-item-button">
     {{taskIcon item.content.content}}
   </button>
+  <button {{action deleteTask content.content}} class="btn-icon delete close pull-right">
+    <i class="ss-block ss-trash"></i>
+  </button>
   <div {{bind-attr class="isFinished :events-list-item-description"}}>
     {{item.title}}
   </div>

@@ -185,6 +185,22 @@ $calendar-off: #d8d9d9;
   a {
     color: inherit;
   }
+
+  .delete {
+    opacity: 0;
+    @include transition(opacity 0.25s);
+
+    i {
+      font-size: 15px;
+    }
+  }
+
+  &:hover,
+  &.is-selected {
+    .delete{
+      opacity: 1;
+    }
+  }
 }
 
 .events-list-item-button {
