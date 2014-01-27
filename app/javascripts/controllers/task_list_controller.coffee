@@ -59,7 +59,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.Groupable, Radi
     return unless visibleContent
 
     @group visibleContent
-  ).property('visibleContent.length', 'visibleContent.@each.isError')
+  ).property('visibleContent.[]', 'visibleContent.@each.isError')
 
   arrangedGroups: (->
     return unless @get('groupedContent')
