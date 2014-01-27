@@ -62,7 +62,9 @@ Radium.TimePickerView = Radium.View.extend
               else
                 30 - minutes
 
-    element.timepicker('setTime', @get('date').advance(minute: roundUp).toJSDate())
+    advance = @get('date').advance(minute: roundUp)
+    @set('date', advance)
+    element.timepicker('setTime', advance.toJSDate())
 
   timeField: Ember.TextField.extend
     classNames: 'input-small timepicker'
