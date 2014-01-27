@@ -198,6 +198,10 @@ $calendar-off: #d8d9d9;
 
 .events-list-item-description {
   overflow: hidden;
+
+  &.is-finished{
+    text-decoration: line-through;
+  }
 }
 
 .calendar {
@@ -338,4 +342,8 @@ $calendar-off: #d8d9d9;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  &.is-finished {
+    text-decoration: line-through;
+  }
 }

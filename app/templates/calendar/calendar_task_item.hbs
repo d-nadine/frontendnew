@@ -1,8 +1,8 @@
 {{#link-to "calendar.task" item.content.content}}
-  <button class="btn btn-link pull-left events-list-item-button">
+  <button {{action finishTask}} class="btn btn-link pull-left events-list-item-button">
     {{taskIcon item.content.content}}
   </button>
-  <div class="events-list-item-description">
+  <div {{bind-attr class="isFinished :events-list-item-description"}}>
     {{item.title}}
   </div>
 {{/link-to}}
