@@ -37,3 +37,6 @@ Radium.CalendarTaskRoute = Radium.Route.extend
   renderTemplate: ->
     @render 'calendar/task',
       into: 'calendar'
+
+  deactivate: ->
+    @controller.set('isExpanded', false)
