@@ -1,9 +1,9 @@
 <p>
-  {{resource-link model=follower}} is now following
+  {{resource-link-to follower}} is now following
 
   {{#if useQuotes}}
-    "{{resource-link model=following}}"
+    "{{resource-link-to following}}"
   {{else}}
-    {{link model=following}}
+    {{link following}}
   {{/if}}
 </p>

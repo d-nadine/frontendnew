@@ -28,7 +28,7 @@
       <span class="topic">
         {{topic}} with
         {{#each attendees}}
-          {{resource-link  model=this}}
+          {{resource-link-to this}}
         {{/each}}
         at {{view.readableStartsAt}}
       </span>

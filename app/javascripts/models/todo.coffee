@@ -7,6 +7,8 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   finishBy: DS.attr('datetime')
   isFinished: DS.attr('boolean')
 
+  displayName: Ember.computed.alias 'description'
+
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]

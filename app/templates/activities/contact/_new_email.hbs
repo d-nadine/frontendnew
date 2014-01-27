@@ -1,9 +1,9 @@
 <p>
   {{#if email.isLoaded}}
-    {{resource-link model=email}}
+    {{resource-link-to email}}
   {{else}}
     {{partial 'is_loading'}}
   {{/if}}
   <br/>
-  from: {{resource-link model=contact}} to: {{resource-link model=user}}
+  from: {{resource-link-to contact}} to: {{resource-link-to user}}
 </p>

@@ -24,7 +24,11 @@
           {{/if}}
         </td>
         <td>
-          {{resource-link model=attachment.uploadedBy}}
+          {{#if attachment.isLoaded}}
+            {{resource-link-to attachment.uploadedBy}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
         </td>
         <td>
           <button type="button" {{action removeFile this}} class="close">

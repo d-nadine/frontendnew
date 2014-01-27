@@ -1,6 +1,6 @@
 <h4>You have <a href="#" {{action showEmail reference}}>new mail</a> from
   {{#if reference.isLoaded}}
-    {{resource-link model=reference.sender}}
+    {{resource-link-to reference.sender}}
   {{else}}
     {{partial 'is_loading'}}
   {{/if}}

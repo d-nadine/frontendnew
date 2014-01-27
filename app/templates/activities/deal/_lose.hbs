@@ -1,5 +1,5 @@
 <p>
-  {{resource-link model=user}} lost the "{{resource-link model=deal}}" worth {{currency value}}
+  {{resource-link-to user}} lost the "{{resource-link-to deal}}" worth {{currency value}}
   <br />
-  with: {{resource-link model=company}}
+  {{#if company}}{{resource-link-to company}}{{/if}}
 </p>

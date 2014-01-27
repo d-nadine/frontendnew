@@ -1,11 +1,11 @@
 <p>
   {{#if reference.description}}
-    "{{reference.description}}" call added to {{resource-link model=contact}}
+    "{{reference.description}}" call added to {{resource-link-to contact}}
   {{else}}
-    Call added to {{resource-link model=contact}}
+    Call added to {{resource-link-to contact}}
   {{/if}}
 
   <br />
 
-  by {{resource-link model=user}}
+  by {{resource-link-to user}}
 </p>

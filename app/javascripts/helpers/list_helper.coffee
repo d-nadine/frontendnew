@@ -1,6 +1,6 @@
 Ember.TEMPLATES['sentence'] = Ember.Handlebars.compile """
   {{#each controller}}
-    {{resource-link model=this}}{{separator}}
+    {{resource-link-to this}}{{separator}}
   {{/each}}
 """
 

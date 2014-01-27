@@ -20,9 +20,9 @@
     <h4 class="email-title">
       {{#if subject}}
         <strong>{{subject}}</strong><br>
-        <span class="sender">{{resource-link model=sender}} writes</span>
+        <span class="sender">{{resource-link-to sender}} writes</span>
       {{else}}
-        Email from <span class="sender">{{resource-link model=sender}}</span>
+        Email from <span class="sender">{{resource-link-to sender}}</span>
       {{/if}}
     </h4>
 
