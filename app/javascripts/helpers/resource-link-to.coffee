@@ -23,9 +23,21 @@ Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
     options.types = ["ID", "STRING", "ID"]
     options.contexts = [this, this, this]
     args.unshift path
+
+    if resource.constructor is Radium.Email
+      folder = if Ember.ControllerMixin.detect(this) && @container.lookup('controller:currentUser').get('model') == this.get("sender")
+                "sent"
+               else
+                 "inbox"
+
+      options.contexts.push this
+      options.types.insertAt(1, "STRING")
+      args.unshift folder
+
     args.unshift resourceRoute
     prop = if path.length then ".displayName" else "displayName"
     args.unshift path + prop
+
   else
     options.types = ["STRING", "ID"]
     options.contexts = [this, this]
