@@ -5,9 +5,12 @@ Radium.typeToLinks =
 
 Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
   args = Array::slice.call(arguments, 1)
-  resource = @get(path)
+  resource = if path.length
+                @get(path)
+             else
+               @get('model')
 
-  return '' if resource is null
+  return '' unless resource
 
   if resource.constructor is Radium.Attachments
     return new Handlebars.SafeString "<a href='#{resource.get('url')}' target='_blank'>#{resource.get('fileName')}</a>"
