@@ -7,6 +7,9 @@ Radium.CalendarTaskItemController = Radium.ObjectController.extend
 
       @toggleProperty 'isFinished'
 
+      Ember.run =>
+        model.set('isExpanded', !model.get('isFinished'))
+
       @get('store').commit()
 
   needs: ['calendarSidebar']

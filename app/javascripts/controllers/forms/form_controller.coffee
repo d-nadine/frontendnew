@@ -48,6 +48,15 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
     true
   ).property('content', 'content.isEditable', 'isSaving')
 
+  modelIsExpandedDidChange: ( ->
+    if model = @get('model')
+      @set('isExpanded', model.get('isExpanded'))
+  ).observes('model.isExpanded')
+
+  isExpandableDidChange: (->
+    if !@get('isExpandable') then @set('isExpanded', false)
+  ).observes('isExpandable')
+
   isDisabled: (->
     return true if @get('justAdded')
     @get('content.isEditable') is false

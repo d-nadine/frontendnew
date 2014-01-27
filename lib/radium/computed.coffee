@@ -69,6 +69,7 @@ Radium.computed.aggregate = ->
         observer = =>
           if item.get('isLoaded')
             aggregate.pushObject(item)
+            item.set 'isExpanded', false
             item.removeObserver 'isLoaded', observer
 
         item.addObserver 'isLoaded', observer
