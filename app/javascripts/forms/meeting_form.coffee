@@ -26,6 +26,12 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('submitForm', false)
     @set('organizer', @get('currentUser'))
 
+  resetDates: ->
+    date = Ember.DateTime.create().getRoundTime()
+    @set('startsAt', date.advance(hour: 1))
+    @set('endsAt', date.advance(hour: 2))
+
+
   commit: ->
     isNew = @get('isNew')
 

@@ -55,6 +55,7 @@ Radium.TimePickerView = Radium.View.extend
       forceRoundTime: false
       timeFormat: 'h:i A'
 
+    return unless @get('date')
     advance = @get('date').getRoundTime()
 
     @set('date', advance)

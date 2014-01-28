@@ -75,7 +75,7 @@
         <div class="field-group meeting-form-invite">
           <div class="pull-right">
             <button class="btn btn-link" {{action showCalendars}}>
-              {{currentDate}}'s Calendars
+              {{formatDateTime startsAt format="calendar"}}'s Calendars
               <i {{bind-attr class=":ss-standard calendarsOpen:ss-navigateup:ss-navigatedown"}}></i>
             </button>
           </div>

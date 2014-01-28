@@ -27,7 +27,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   taskStartDate: ( ->
     @get('selectedDay.date') || @get('tomorrow')
-  ).property('tomorrow', 'selectedDay', 'date')
+  ).property('tomorrow', 'selectedDay.date')
 
   todoForm: Radium.computed.newForm('todo')
 
@@ -48,13 +48,22 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   meetingForm: Radium.computed.newForm('meeting')
 
   meetingFormDefaults: ( ->
+    date = @get('selectedDay.date') || Ember.DateTime.create()
     topic: null
     users: Em.ArrayProxy.create(content: [])
     contacts: Em.ArrayProxy.create(content: [])
-    startsAt: @get('now').advance(hour: 1)
-    endsAt: @get('now').advance(hour: 2)
+    startsAt: date.advance(hour: 2)
+    endsAt: date.advance(hour: 3)
     invitations: Ember.A()
-  ).property('model', 'now')
+  ).property('model', 'now', 'selectedDay.date')
+
+  selectedDateDidChange: (->
+    return unless @get('selectedDay.date') && @get('meetingForm')
+    date = @get('selectedDay.date')
+    Ember.run.next =>
+      @set('meetingForm.startsAt', date.advance(hour: 2))
+      @set('meetingForm.endsAt', date.advance(hour: 3))
+  ).observes('selectedDay.date', 'meetingForm')
 
   users: Ember.computed.alias 'controllers.users'
 

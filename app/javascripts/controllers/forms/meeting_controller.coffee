@@ -119,6 +119,8 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
         return unless @get('isNew')
 
         @get('model').reset()
+        @get('model').resetDates()
+
         @trigger 'formReset'
       ), 1200)
 
@@ -238,10 +240,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return false if @get('justAdded')
     !@get('isNew')
   ).property('isNew')
-
-  currentDate: ( ->
-    @get('startsAt').toHumanFormat()
-  ).property('startsAt')
 
   files: ( ->
     return @get('model.files') if @get('model.files')
