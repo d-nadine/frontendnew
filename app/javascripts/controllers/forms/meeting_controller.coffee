@@ -110,8 +110,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         @discardBufferedChanges()
 
-        if @get('parentController') instanceof Radium.CalendarTaskController
+        Ember.run.next =>
           @get('controllers.calendarSidebar').notifyPropertyChange('items')
+
+        if @get('parentController') instanceof Radium.CalendarTaskController
           @set('isExpanded', true)
 
         return unless @get('isNew')
@@ -202,7 +204,13 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     startsAt = @get('startsAt')
     endsAt = @get('endsAt')
 
-    return unless startsAt
+    return unless startsAt && endsAt
+
+    Ember.DateTime.setRoundTime(this, 'startsAt')
+    Ember.DateTime.setRoundTime(this, 'endsAt')
+
+    if endsAt.daysApart(startsAt) != 1
+      @set('endsAt', startsAt.advance(hour: 1))
 
     @set('meetingUsers.startsAt', startsAt)
 

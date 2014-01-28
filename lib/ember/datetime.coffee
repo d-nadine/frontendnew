@@ -93,7 +93,20 @@ Ember.DateTime.reopen
   toUnixTimestamp: ->
     @toJSDate().getTime() / 1000
 
+  getRoundTime: ->
+    minutes = @toJSDate().getMinutes()
+
+    roundUp = if minutes > 30
+                60 - minutes
+              else
+                30 - minutes
+
+    @advance(minute: roundUp)
+
 Ember.DateTime.reopenClass
+  setRoundTime: (parent, prop) ->
+    parent.set(prop,parent.get(prop).getRoundTime())
+
   random: (options = {}) ->
     multipler = ->
       if options.past
