@@ -41,10 +41,10 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
   showSuccess: Ember.computed.alias('justAdded')
 
   isEditable: (->
+    return true if @get('isNew')
     return false if @get('isSubmitted')
     return false if @get('justAdded')
     return false if @get('isSaving')
-    return true if @get('isNew')
     true
   ).property('content', 'content.isEditable', 'isSaving')
 

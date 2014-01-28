@@ -9,6 +9,6 @@ Radium.FlashNewViewMixin = Ember.Mixin.create
       @$().addClass('is-new-item')
       Ember.run.later(this, =>
         @$()?.removeClass('is-new-item')
-        @set('content.newTask', false)
+        @set('content.newTask', false) if @get('content')
       , 100)
   ).on('didInsertElement')
