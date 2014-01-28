@@ -203,23 +203,18 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   ).property('topic', 'isNew', 'participants.[]')
 
   startsAtDidChange: ( ->
-    startsAt = @get('startsAt')
-    endsAt = @get('endsAt')
-
-    return unless startsAt && endsAt
+    return unless @get('startsAt') && @get('endsAt')
 
     Ember.DateTime.setRoundTime(this, 'startsAt')
     Ember.DateTime.setRoundTime(this, 'endsAt')
 
-    if endsAt.daysApart(startsAt) != 1
-      @set('endsAt', startsAt.advance(hour: 1))
+    endsAtGreater = Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) != 1
 
-    @set('meetingUsers.startsAt', startsAt)
+    if (@get('endsAt').daysApart(@get('startsAt')) > 1) || endsAtGreater
+      @set('endsAt', @get('startsAt').advance(hour: 1))
 
-    return unless Ember.DateTime.compare(endsAt, startsAt) != 1
-
-    @set('endsAt', startsAt.advance(hour: 1))
-  ).observes('startsAt', 'endsAt')
+    @set('meetingUsers.startsAt', @get('startsAt'))
+  ).observes('startsAt', 'endsAt', 'model.startsAt')
 
   participants: Radium.computed.aggregate('users', 'contacts')
 

@@ -7,6 +7,7 @@ require 'lib/radium/tag_autocomplete'
 requireAll /views\/sidebar/
 
 Radium.ContactSidebarView = Radium.FixedSidebarView.extend Radium.ContactViewMixin,
+  Radium.UploadingMixin,
   classNames: ['sidebar-panel-bordered']
 
   showExtraContactDetail: ->
