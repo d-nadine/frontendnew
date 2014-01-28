@@ -1,8 +1,8 @@
-Radium.SidebarAboutView = Radium.InlineEditorView.extend
+Radium.SidebarNotesView = Radium.InlineEditorView.extend
   textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
      click: (event) ->
       event.stopPropagation()
 
     insertNewline: ->
-      @get('parentView').toggleEditor()
+      @get('parentView').send 'toggleEditor'
   )

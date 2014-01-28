@@ -5,27 +5,29 @@
     </h6>
   </div>
   <div class="sidebar-panel-content">
+    {{#if isEditing}}
     <div class="notes">
-      {{#if isEditing}}
-        <div>
-          {{view view.textArea class="field" valueBinding=form.notes placeholder="Notes"}}
-        </div>
-      {{else}}
-        <div>
-          {{#if notes}}
-          <span>{{notes}}</span>
-          {{else}}
-          <span>&nbsp;</span>
-          {{/if}}
-        </div>
-      {{/if}}
+      <div>
+        {{view view.textArea class="field" valueBinding=form.notes placeholder="Notes"}}
+      </div>
+    </div>
+    {{else}}
+    <div class="notes">
+      <div>
+        {{#if notes}}
+        <span>{{notes}}</span>
+        {{else}}
+        <span>&nbsp;</span>
+        {{/if}}
+      </div>
     </div>
     <div class="clearfix">
       <div class="pull-right">
-        <button class="btn btn-primary" {{action toggleEditor target=view bubbles=false}}>
+        <button class="btn btn-primary" {{action toggleEditor target=view bubbles="false"}}>
           <i class="ss-standard ss-plus"></i> Add Note
         </button>
       </div>
     </div>
+    {{/if}} 
   </div>
 </div>

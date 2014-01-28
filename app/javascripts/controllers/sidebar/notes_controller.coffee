@@ -1,6 +1,6 @@
 require 'controllers/sidebar/sidebar_base_controller'
 
-Radium.AboutForm = Radium.Form.extend
+Radium.NotesForm = Radium.Form.extend
   init: ->
     @set 'content', Ember.Object.create()
     @_super.apply this, arguments
@@ -11,7 +11,7 @@ Radium.AboutForm = Radium.Form.extend
     @_super.apply this, arguments
     @set 'notes', ''
 
-Radium.SidebarAboutController = Radium.SidebarBaseController.extend
+Radium.SidebarNotesController = Radium.SidebarBaseController.extend
   actions:
     setForm: ->
       @set 'form.notes', @get('model.notes')
@@ -19,5 +19,5 @@ Radium.SidebarAboutController = Radium.SidebarBaseController.extend
   isValid: true
 
   form: ( ->
-    Radium.AboutForm.create()
+    Radium.NotesForm.create()
   ).property()
