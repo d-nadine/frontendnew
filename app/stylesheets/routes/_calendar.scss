@@ -170,8 +170,12 @@ $calendar-off: #d8d9d9;
     line-height: 20px;
     @include transition(color 0.5s ease-in);
 
+    .ss-check{
+      outline: none;
+    }
 
-    &:hover {
+    &:hover,
+    &.is-finished .ss-check{
       color: $green;
     }
   }

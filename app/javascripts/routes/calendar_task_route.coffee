@@ -19,6 +19,8 @@ Radium.CalendarTaskRoute = Radium.Route.extend
 
     if task.constructor is Radium.Todo
       task.set('isExpanded', !task.get("isFinished"))
+    else if task.constructor is Radium.Meeting
+      task.set('isExpanded', !task.get('hasElapsed'))
 
     @send 'selectDay', selectedDay
 

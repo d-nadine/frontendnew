@@ -9,6 +9,10 @@ Radium.MeetingAttendeesView = Radium.View.extend
 
       dropdown.toggleClass('open')
 
+      dropdown.css
+        position: 'absolute',
+        top: @$('img').height()
+
       event.preventDefault()
       event.stopPropagation()
 
@@ -44,6 +48,9 @@ Radium.MeetingAttendeesView = Radium.View.extend
   template: Ember.Handlebars.compile """
       {{#if isLoaded}}
         {{avatar this style="medium"}}
+        {{#if displayStatus}}
+          <span {{bind-attr class="invitationStatus"}}>{{invitationStatus}}</span>
+        {{/if}}
         <span class="invitee-name">{{displayName}}</span>
         {{#unless isInvited}}
           <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>

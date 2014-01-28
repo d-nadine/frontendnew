@@ -166,12 +166,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @get('isExpanded')
   ).property('isNew', 'isDisabled', 'isExpanded','justAdded')
 
-  hasElapsed: ( ->
-    return unless @get('startsAt')
-
-    @get('startsAt').isBeforeToday()
-  ).property('startsAt', 'now')
-
   isValid: ( ->
     return if Ember.isEmpty(@get('topic'))
     return if @get('startsAtIsInvalid')

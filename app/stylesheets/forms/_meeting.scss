@@ -313,6 +313,24 @@
     display: block;
   }
 
+  .pending,
+  .confirmed,
+  .rejected {
+    color: #fff;
+  }
+
+  .pending {
+    background-color: $amber;
+  }
+
+  .confirmed {
+    background-color: $success;
+  }
+
+  .rejected{
+    background-color: $red;
+  }
+
   .invitee-name {
     max-width: $width;
     overflow: hidden;

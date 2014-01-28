@@ -1,5 +1,22 @@
 Radium.CalendarRoute = Radium.Route.extend
   actions:
+    finishTask: (task) ->
+      return unless task.constructor is Radium.Todo
+
+      task.toggleProperty 'isFinished'
+
+      onTask = @controller.get('controllers.application.currentPath') == "calendar.task"
+
+      if onTask
+        task.set('isExpanded', !task.get('isFinished'))
+      else
+        task.set('isExpanded', false)
+
+      @get('store').commit()
+
+      if onTask && task != @controllerFor('calendarTask').get('model')
+        @transitionTo 'calendar.task', task
+
     toggleCalendarDrawer: ->
       @controllerFor('calendar').toggleProperty('isCalendarDrawerOpen')
 

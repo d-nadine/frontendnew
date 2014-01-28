@@ -28,12 +28,17 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
     title = @get('displayName')
 
     unless @get('isOrganizer')
-      invitation = @findInviationFromAttendee @get('model')
-      title += " - #{invitation.get('status')}" unless @get('isNew')
+      title += " - #{@get('invitationStatus')}" unless @get('isNew')
     else
       title += " - organizer"
 
     title
+
+  displayStatus: Ember.computed 'isOrganizer', 'isNew', ->
+    !@get('isOrganizer') && !@get('isNew')
+
+  invitationStatus: Ember.computed 'model', ->
+    @findInviationFromAttendee(@get('model')).get('status')
 
   isInvited: Ember.computed 'model', 'invited.[]', ->
     return true if @get('isOrganizer')
