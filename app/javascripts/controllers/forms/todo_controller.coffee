@@ -2,7 +2,7 @@ require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
-  needs: ['users']
+  needs: ['users', 'calendarSidebar']
 
   actions:
     submit: ->
@@ -30,6 +30,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           ))
         else
           @get('store').commit()
+
+        if @get('parentController') instanceof Radium.CalendarTaskController
+          @get('controllers.calendarSidebar').notifyPropertyChange('items')
 
         @discardBufferedChanges()
 

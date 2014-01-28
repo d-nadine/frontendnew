@@ -110,13 +110,17 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         @discardBufferedChanges()
 
+        if @get('parentController') instanceof Radium.CalendarTaskController
+          @get('controllers.calendarSidebar').notifyPropertyChange('items')
+          @set('isExpanded', true)
+
         return unless @get('isNew')
 
         @get('model').reset()
         @trigger 'formReset'
       ), 1200)
 
-  needs: ['companies','contacts','users']
+  needs: ['companies','contacts','users', 'calendarSidebar']
   now: Ember.computed.alias('clock.now')
   companies: Ember.computed.alias('controllers.companies')
   userList: Ember.computed.alias 'controllers.users'
