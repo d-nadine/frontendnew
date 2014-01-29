@@ -24,9 +24,11 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       email.one 'didCreate', (result) =>
         Ember.run.next =>
+          delete result.files
           result.off 'didUpdate'
           form.set 'isSubmitted', false
           form.set 'isSending', false
+          form.reset()
           messagesController = @controllerFor('messages')
           messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
           if result.get('isDraft')
@@ -40,6 +42,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
+          delete result.files
           form.set 'isSubmitted', false
           @send 'flashSuccess', 'Draft saved'
           @transitionTo 'emails.edit', transitionFolder, result if transitionFolder
