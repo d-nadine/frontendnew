@@ -1,8 +1,10 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
+    {{#unless hideUploader}}
     <div class="pull-right upload-file-btn">
       {{file-uploader files=controller.files disableSave=disableSave model=model class="btn-file btn-messages-action"}}
     </div>
+    {{/unless}}
     <h6 class="sidebar-panel-title">
       <i class="ss-standard ss-attach"></i> Attachments
     </h6>

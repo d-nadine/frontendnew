@@ -1,5 +1,6 @@
-Radium.EmailsItemController = Radium.ObjectController.extend
+Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   needs: ['messages']
+  hideUploader: true
   actions:
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
