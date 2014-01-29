@@ -128,6 +128,10 @@ Radium.Combobox = Radium.View.extend
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
 
+    focusIn: ->
+      Em.run.next =>
+        @$().select()
+
     didInsertElement: ->
       @$().typeahead source: @get('parentView.sortedSource')
 

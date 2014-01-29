@@ -21,12 +21,12 @@
 
     {{view view.todoField classNames="field field-blend-in" viewName="description"}}
 
-    {{partial "forms/reference"}}
   </div>
 
   {{#if isExpanded}}
     <div class="expanded-fields">
       <div class="form-row">
+        {{partial "forms/reference"}}
         <div class="field-group meeting-form-invite">
           {{view view.datePicker class="field"}}
           {{view view.userPicker class="field"}}
@@ -42,7 +42,7 @@
             {{#if showAddAction}}
               <button class="btn btn-link" {{action deleteTask model}}>Delete todo</button>
             {{/if}}
-            <button class="btn btn-primary" type="submit" {{action submit}}>Save</button>
+            <button class="btn btn-main btn-primary" type="submit" {{action submit}}>Save</button>
           </div>
         </div>
       {{/if}}
