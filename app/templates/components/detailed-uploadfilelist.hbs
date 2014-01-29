@@ -1,45 +1,43 @@
-<ul class="unstyled inline attachments">
-  <table class="table table-striped table-bordered table-hover">
-    {{#if files.length}}
-      <tr>
-        <th>File Name</th>
-        <th>Uploaded By</th>
-        <th>&nbsp;</th>
-      </tr>
-    {{/if}}
-    {{#each files}}
-      <tr>
-        <td>
-          {{#if name}}
-            {{name}} ({{size}})
-          {{else}}
-            {{#if attachment.isLoaded}}
-              <a href="{{unbound attachment.url}}" target="_new">
-                <i class="ss-standard ss-attach"></i>
-                <span class="file-name">{{attachment.fileName}}</span>
-              </a>
-            {{else}}
-              {{partial 'is_loading'}}
-            {{/if}}
-          {{/if}}
-        </td>
-        <td>
+<table class="table table-striped table-bordered table-hover attachments">
+  {{#if files.length}}
+    <tr>
+      <th>File Name</th>
+      <th>Uploaded By</th>
+      <th>&nbsp;</th>
+    </tr>
+  {{/if}}
+  {{#each files}}
+    <tr>
+      <td>
+        {{#if name}}
+          {{name}} ({{size}})
+        {{else}}
           {{#if attachment.isLoaded}}
-            {{resource-link-to attachment.uploadedBy}}
+            <a href="{{unbound attachment.url}}" target="_new">
+              <i class="ss-standard ss-attach"></i>
+              <span class="file-name">{{attachment.fileName}}</span>
+            </a>
           {{else}}
             {{partial 'is_loading'}}
           {{/if}}
-        </td>
-        <td>
-          <button type="button" {{action removeFile this}} class="close">
-            {{#unless isUploading}}
-              <i class="ss-standard ss-delete"></i>
-            {{else}}
-              {{partial 'is_uploading'}}
-            {{/unless}}
-          </button>
-        </td>
-      </tr>
-    {{/each}}
-  </table>
-</ul>
+        {{/if}}
+      </td>
+      <td>
+        {{#if attachment.isLoaded}}
+          {{resource-link-to attachment.uploadedBy}}
+        {{else}}
+          {{partial 'is_loading'}}
+        {{/if}}
+      </td>
+      <td>
+        <button type="button" {{action removeFile this}} class="close">
+          {{#unless isUploading}}
+            <i class="ss-standard ss-delete"></i>
+          {{else}}
+            {{partial 'is_uploading'}}
+          {{/unless}}
+        </button>
+      </td>
+    </tr>
+  {{/each}}
+</table>

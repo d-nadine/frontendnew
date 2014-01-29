@@ -9,6 +9,8 @@ Radium.UploadAvatarComponent = Ember.Component.extend Radium.UploadingMixin,
     attributeBindings: ['accept']
     accept: 'image/*'
     type: 'file'
+    attributeBindings: ['multiple']
+    multiple: false
 
   isLargeAvatar: ( ->
     @get('avatarsize') == "large"

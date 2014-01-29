@@ -5,7 +5,7 @@
       {{#if isFollowing}}
         <span class="label label-success">Following</span>
       {{else}}
-        <button class="btn btn-block btn-small btn-follow" disabled>Follow {{firstName}}</button>
+        <button class="btn btn-block btn-small btn-follow" disabled="disabled">Follow {{firstName}}</button>
       {{/if}}
     </div>
   </div>
@@ -85,17 +85,8 @@
 
   {{render 'sidebar/notes' model}}
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <div class="pull-right upload-file-btn">
-        {{view view.fileUploader class="upload-button"}}
-      </div>
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-attach"></i> Attachments
-      </h6>
-    </div>
-    {{partial 'shared/attachments'}}
-  </div>
+
+  {{partial 'shared/attachments'}}
 
   {{render 'sidebar/assigned_to' model}}
 

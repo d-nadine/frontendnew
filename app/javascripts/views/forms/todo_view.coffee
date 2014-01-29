@@ -31,10 +31,14 @@ Radium.FormsTodoView = Radium.FormView.extend
     disabledBinding: 'controller.isPrimaryInputDisabled'
     finishBy: Ember.computed.alias 'controller.finishBy'
     placeholder: (->
-      if @get('referenceName') and !@get('controller.reference.token')
-        "Add a todo about #{@get('referenceName')} for #{@get('finishBy').toHumanFormat()}"
-      else
-        "Add a todo for #{@get('finishBy').toHumanFormat()}"
+      pre = if @get('referenceName') and !@get('controller.reference.token')
+              "Add a todo about #{@get('referenceName')}"
+            else
+              "Add a todo"
+
+      return pre unless @get('finishBy')
+
+      "#{pre} for #{@get('finishBy').toHumanFormat()}"
     ).property('reference.name', 'controller.finishBy')
 
   datePicker: Radium.DatePicker.extend

@@ -4,7 +4,7 @@ require 'controllers/deals/checklist_mixin'
 require 'mixins/controllers/change_deal_status_mixin'
 
 Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, BufferedProxy,
-  Radium.ChangeDealStatusMixin,
+  Radium.ChangeDealStatusMixin, Radium.AttachedFilesMixin,
 
   actions:
     togglePublished: ->

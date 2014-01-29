@@ -1,4 +1,5 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
+  Radium.AttachedFilesMixin,
   actions:
     addAttendeeToExistingMeeting: (attendee) ->
       person = attendee.get('person')
@@ -236,7 +237,3 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     !@get('isNew')
   ).property('isNew')
 
-  files: ( ->
-    return @get('model.files') if @get('model.files')
-    @get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)
-  ).property('attachments.[]', 'model.files.[]')

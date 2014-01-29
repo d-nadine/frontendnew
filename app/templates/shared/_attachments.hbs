@@ -1,38 +1,17 @@
-<ul class="unstyled inline attachments">
-  {{#if view.percentage}}
-    <img src="/images/ajax-loader.gif"/> <span class="muted">uploading...</span>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <div class="pull-right upload-file-btn">
+      {{file-uploader files=controller.files disableSave=disableSave model=model class="btn-file btn-messages-action"}}
+    </div>
+    <h6 class="sidebar-panel-title">
+      <i class="ss-standard ss-attach"></i> Attachments
+    </h6>
+  </div>
+  {{#if controller.files}}
+    {{detailed-uploadfilelist files=controller.files}}
+  {{else}}
+  <div class="sidebar-panel-content">
+    No attachments
+  </div>
   {{/if}}
-  <table class="table table-striped table-bordered table-hover">
-    {{#if attachments.length}}
-      <tr>
-        <th>File Name</th>
-        <th>Uploaded By</th>
-      </tr>
-    {{/if}}
-    {{#each attachments}}
-      <tr>
-        {{#unless isLoaded}}
-          <td colspan="2">
-            {{partial 'is_loading'}}
-          </td>
-        {{else}}
-          <td>
-            <a href="{{unbound url}}" target="_new">
-              <i class="ss-standard ss-attach"></i>
-              <span class="file-name">{{fileName}}</span>
-            </a>
-          </td>
-          <td>
-            {{resource-link-to uploadedBy}}
-          </td>
-        {{/unless}}
-      </tr>
-    {{else}}
-    <tr>
-      <td colspan="2">
-        No attachments
-      </td>
-    </tr>
-    {{/each}}
-  </table>
-</ul>
+</div>

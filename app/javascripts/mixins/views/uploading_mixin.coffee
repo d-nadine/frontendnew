@@ -17,18 +17,6 @@ Radium.UploadingMixin = Ember.Mixin.create
     @get('uploader').on('progress', this, 'onDidProgress')
     @get('uploader')
 
-
-  fileUploader: Ember.FileField.extend
-    change: (e) ->
-      files = e.target.files
-      return unless files.length
-      uploader = @get('parentView.uploader')
-      model = @get('parentView.controller.model')
-      modelAttributes = type: model.humanize(), id: model.get('id')
-      for file in files
-        uploader.upload(file, modelAttributes).then (data) =>
-          @get('parentView').onDidUpload(data)
-
   uploadFiles: (files) ->
     @set('disableSave', true)
     uploader = @get('uploader')

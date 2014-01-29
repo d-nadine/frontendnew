@@ -1,4 +1,4 @@
-Radium.ContactController = Radium.ObjectController.extend
+Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
@@ -86,4 +86,3 @@ Radium.ContactController = Radium.ObjectController.extend
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
   ).property('model', 'now')
-
