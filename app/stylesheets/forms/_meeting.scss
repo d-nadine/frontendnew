@@ -237,7 +237,7 @@
   }
 
   .location-picker-control-box {
-    
+
   }
 
   .map-link {
@@ -281,17 +281,31 @@
 }
 
 .meeting-form-attendees-list {
-  $width: 40px;
+  $width: 60px;
   li {
     max-width: $width;
+    margin-right: 15px;
     font-size: 10px;
     font-weight: bold;
     line-height: 12px;
     position: relative;
     vertical-align: top;
+    cursor: pointer;
 
     &:hover .btn-close {
       opacity: 1;
+    }
+  }
+
+  .invitation-status {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+    line-height: 14px;
+    text: {
+      transform: uppercase;
+      align: center;
     }
   }
 
@@ -307,7 +321,7 @@
   }
 
 
-  img.avatar-medium {
+  img.avatar {
     width: 100%;
     height: auto;
     display: block;
