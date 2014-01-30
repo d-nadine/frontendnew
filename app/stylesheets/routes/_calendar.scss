@@ -353,6 +353,10 @@ $calendar-off: #d8d9d9;
   &.is-selected a {
     color: #3290e5;
   }
+
+  .is-finished time {
+    text-decoration: line-through;
+  }
 }
 
 .day-event-item-description {

@@ -150,11 +150,11 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return false if @get('isSubmitted')
     return true if @get('isNew')
     return false if @get('justAdded')
-    return false if @get('hasElapsed')
+    return false if @get('isFinished')
     return true if @get('currentUser') is @get('organizer')
     return true unless @get('invitations.length')
     @get('invitations').find((invitation) => invitation.get('person') == @get('currentUser'))
-  ).property('isSubmitted', 'isNew', 'justAdded', 'hasElapsed', 'isSaving')
+  ).property('isSubmitted', 'isNew', 'justAdded', 'isFinished', 'isSaving')
 
   locations: ( ->
     @get('companies').map (company) -> 

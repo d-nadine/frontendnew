@@ -1,5 +1,5 @@
 <form {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
-  <div {{bind-attr class="hasElapsed view.isFocused showTopicTextBox:open:closed :primary"}} {{action expand}}>
+  <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary"}} {{action expand}}>
     {{#if showComments}}
       <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}

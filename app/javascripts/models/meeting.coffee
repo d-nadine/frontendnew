@@ -65,7 +65,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   attachedFiles: DS.attr('array')
 
-  hasElapsed: ( ->
+  isFinished: ( ->
     return unless @get('startsAt')
 
     @get('startsAt').isBeforeNow()

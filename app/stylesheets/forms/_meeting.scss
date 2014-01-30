@@ -47,7 +47,7 @@
         top: 3px;
       }
 
-      &.has-elapsed {
+      &.is-finished {
         // FIXME:  mixin with is-finished?
         background-color: #dadada;
         border-color: #cdcdcd;

@@ -1,11 +1,4 @@
-CalendarItem = Ember.ObjectController.extend
-  time: (->
-    @get('finishBy') || @get('startsAt')
-  ).property('content', 'finishBy', 'startsAt')
-
-  title: (->
-     @get('topic') || @get('description')
-  ).property('description', 'topic')
+CalendarItem = Ember.ObjectController.extend()
 
 Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin,
   needs: ['users', 'clock', 'calendarSidebar']
