@@ -71,7 +71,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       input.on 'changeDate', @changeDatePicker.bind(this)
 
     changeDatePicker: (evt) ->
-      @get('targetObject').set 'date', Ember.DateTime.create(evt.date.valueOf())
+      milliseconds = evt.date.add(1).hours().valueOf()
+      @get('targetObject').set 'date', Ember.DateTime.create(milliseconds)
       @$().data('datepicker').hide()
 
     hideDatePicker: ->
@@ -108,12 +109,13 @@ Radium.DatePickerComponent = Ember.Component.extend
       evt.preventDefault()
 
     valueDidChange: ->
-      originalDate = @get('date')
+      originalDate = @get('targetObject.date').toJSDate()
       today = Ember.DateTime.create().toJSDate()
       value = @get('value')?.toLowerCase()
       datePicker = @get('datePicker')
 
       days =
+        "sat": "saturday"
         "sun": "sunday"
         "mon": "monday"
         "tue": "tuesday"
@@ -121,18 +123,20 @@ Radium.DatePickerComponent = Ember.Component.extend
         "thu": "thursday"
         "fri": "friday"
 
-      if value?.length > 2
-        parsed = Date.parse value
+      if value?.length <= 2
+        @$().datepicker('setValue', originalDate)
+        return
 
-      if day = days[value]
-        parsed = Date.parse day
-        isDayOfWeek = true
+      parsed = Date.parse value
+
+      for k, v of days
+        if value?.indexOf(k) != -1
+          parsed = Date.parse v
+          isDayOfWeek = true
+          break
 
       if value == 'next'
         parsed = Date.today()
-
-      if /^\btom(?:o(?:r(?:r(?:ow?)?)?)?)?\b$/i.test(value)
-        parsed = Date.parse('tomorrow')
 
       if parsed && parsed.isBefore(today)
         if isDayOfWeek
@@ -146,9 +150,14 @@ Radium.DatePickerComponent = Ember.Component.extend
         else
           parsed.add(days: 7)
 
+      if /^\btom(?:o(?:r(?:r(?:ow?)?)?)?)?\b$/i.test(value)
+        parsed = Date.parse('tomorrow')
+
       result = new Date(parsed)
 
-      return if result.toString() == "Invalid Date"
+      if (result.toString() == "Invalid Date") || result.getTime() == 0
+        @$().datepicker('setValue', originalDate)
+        return
 
       @$().datepicker('setValue', result)
 
