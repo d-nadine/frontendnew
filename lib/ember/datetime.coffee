@@ -103,6 +103,16 @@ Ember.DateTime.reopen
 
     @advance(minute: roundUp)
 
+  nextMonth: ->
+    date = @toJSDate()
+
+    if date.getMonth() is 11
+      current = new Date(date.getFullYear() + 1, 0, 1)
+    else
+      current = new Date(date.getFullYear(), date.getMonth() + 1, 1)
+
+    Ember.DateTime.create(current.valueOf())
+
 Ember.DateTime.reopenClass
   setRoundTime: (parent, prop) ->
     parent.set(prop,parent.get(prop).getRoundTime())

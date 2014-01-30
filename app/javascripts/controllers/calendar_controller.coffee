@@ -121,7 +121,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   ).property()
 
   nextMonth: (->
-    @get('date').copy().advance(month: 1)
+    @get('date').nextMonth()
   ).property('date')
 
   lastMonth: (->
