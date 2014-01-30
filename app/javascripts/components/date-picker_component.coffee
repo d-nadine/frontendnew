@@ -104,9 +104,22 @@ Radium.DatePickerComponent = Ember.Component.extend
         @$().trigger
           type: 'changeDate'
           date: date
+      else if keyCode == @ESCAPE
+        @resetDateDisplay()
+      else if keyCode = @TAB
+        @resetDateDisplay()
+        $('.datepicker').find('a').attr('tabindex','-1')
+        @$().parent().next().find('input').focus()
 
       evt.stopPropagation()
       evt.preventDefault()
+
+    resetDateDisplay: ->
+      originalDate = @get('targetObject.date').toJSDate()
+      @$().trigger
+        type: 'changeDate'
+        date: originalDate
+      @$().datepicker().trigger 'hide'
 
     valueDidChange: ->
       originalDate = @get('targetObject.date').toJSDate()
@@ -164,6 +177,10 @@ Radium.DatePickerComponent = Ember.Component.extend
     focusIn: (e) ->
       Ember.run.next  =>
         @$().get(0).select()
+
+    focusOut: (e) ->
+      Ember.run.next =>
+        @resetDateDisplay()
 
   defaultDate: (->
     Ember.DateTime.create().toDateFormat()
