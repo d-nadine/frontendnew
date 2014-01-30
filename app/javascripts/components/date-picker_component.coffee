@@ -124,14 +124,15 @@ Radium.DatePickerComponent = Ember.Component.extend
       if value?.length > 2
         parsed = Date.parse value
 
-      for k, v of days
-        if value?.indexOf(k) != -1
-          parsed = Date.parse v
-          isDayOfWeek = true
-          break
+      if day = days[value]
+        parsed = Date.parse day
+        isDayOfWeek = true
 
       if value == 'next'
         parsed = Date.today()
+
+      if /^\btom(?:o(?:r(?:r(?:ow?)?)?)?)?\b$/i.test(value)
+        parsed = Date.parse('tomorrow')
 
       if parsed && parsed.isBefore(today)
         if isDayOfWeek
