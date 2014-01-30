@@ -95,10 +95,6 @@ Radium.FormsEmailView = Radium.FormView.extend
     valueBinding: 'controller.reminderTime'
     disabled: Ember.computed.not('controller.includeReminder')
 
-  datePicker: Radium.DatePicker.extend
-    # FIXME: stopping the reply form from being posted
-    isInvalid: false
-
   signature: Radium.TextArea.extend
     classNameBindings: ['isInvalid']
     placeholder: 'Signature'

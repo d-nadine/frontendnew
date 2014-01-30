@@ -1,7 +1,6 @@
 require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
 require 'lib/radium/user_picker'
-require 'lib/radium/date_picker'
 require 'views/forms/form_view'
 require 'views/forms/focus_textarea_mixin'
 
@@ -40,13 +39,6 @@ Radium.FormsTodoView = Radium.FormView.extend
 
       "#{pre} for #{@get('finishBy').toHumanFormat()}"
     ).property('reference.name', 'controller.finishBy')
-
-  # datePicker: Radium.DatePicker.extend
-  #   date: Ember.computed.alias 'controller.finishBy'
-  #   isInvalid: (->
-  #     return unless  @get('isSubmitted')
-  #     @get('date').isBeforeNow()
-  #   ).property('date', 'isSubmitted')
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'

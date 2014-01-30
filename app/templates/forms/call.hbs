@@ -47,7 +47,7 @@
       <div class="form-row">
         {{partial "forms/reference"}}
         <div class="field-group meeting-form-invite">
-          {{view view.datePicker class="field"}}
+          {{date-picker class="field" date=finishBy}}
           {{view view.userPicker class="field"}}
         </div>
       </div>
