@@ -66,15 +66,27 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       @set('targetObject.datePicker', datePicker)
 
-      input.on 'show', =>
-        @set('pickerShown', false)
+      input.on 'show', @showDatePicker.bind(this)
+      input.on 'hide', @hideDatePicker.bind(this)
+      input.on 'changeDate', @changeDatePicker.bind(this)
 
-      input.on 'hide', =>
-        @set('pickerShown', true)
+    changeDatePicker: (evt) ->
+      @get('targetObject').set 'date', Ember.DateTime.create(evt.date.valueOf())
+      @$().data('datepicker').hide()
 
-      input.on 'changeDate', (evt) =>
-        @get('targetObject').set 'date', Ember.DateTime.create(evt.date.valueOf())
-        datePicker.hide()
+    hideDatePicker: ->
+      @set('pickerShown', true)
+
+    showDatePicker: ->
+      @set('pickerShown', false)
+
+    willDestroyElement: ->
+      @_super.apply this, arguments
+      @removeObserver 'value', this, 'valueDidChange'
+      datePicker = @$().datepicker()
+      datePicker.off 'show', @showDatePicker
+      datePicker.off 'hide', @hideDatePicker
+      datePicker.off 'changeDate', @changeDatePicker
 
     keyDown: (evt) ->
       datepicker = @$().data('datepicker')
@@ -94,10 +106,6 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       evt.stopPropagation()
       evt.preventDefault()
-
-    willDestroyElement: ->
-      @_super.apply this, arguments
-      @removeObserver 'value', this, 'valueDidChange'
 
     valueDidChange: ->
       originalDate = @get('date')
