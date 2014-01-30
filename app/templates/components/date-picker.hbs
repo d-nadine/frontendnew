@@ -1,0 +1,13 @@
+{{#if disabled}}
+  <i class="ss-standard ss-calendar"></i>
+{{else}}
+  <div class="btn-group prepend-group">
+    <button {{action showPicker}} class="btn" type="button">
+      <i class="ss-standard ss-calendar"></i>
+    </button>
+  </div>
+{{/if}}
+{{#if leader}}
+  <span {{action showPicker}} class="text">{{leader}}</span>
+{{/if}}
+{{view view.humanTextField}}

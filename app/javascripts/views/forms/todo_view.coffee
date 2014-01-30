@@ -41,12 +41,12 @@ Radium.FormsTodoView = Radium.FormView.extend
       "#{pre} for #{@get('finishBy').toHumanFormat()}"
     ).property('reference.name', 'controller.finishBy')
 
-  datePicker: Radium.DatePicker.extend
-    date: Ember.computed.alias 'controller.finishBy'
-    isInvalid: (->
-      return unless  @get('isSubmitted')
-      @get('date').isBeforeNow()
-    ).property('date', 'isSubmitted')
+  # datePicker: Radium.DatePicker.extend
+  #   date: Ember.computed.alias 'controller.finishBy'
+  #   isInvalid: (->
+  #     return unless  @get('isSubmitted')
+  #     @get('date').isBeforeNow()
+  #   ).property('date', 'isSubmitted')
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'

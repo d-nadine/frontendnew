@@ -27,16 +27,18 @@
 		this.picker = $(DPGlobal.template)
 							.appendTo('body')
 							.on({
-								click: $.proxy(this.click, this),
-								mousedown: $.proxy(this.mousedown, this)
+								click: $.proxy(this.click, this)//,
+								//mousedown: $.proxy(this.mousedown, this)
 							});
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
 		
 		if (this.isInput) {
+      console.log('cuntos');
+      console.log(this.element);
 			this.element.on({
 				focus: $.proxy(this.show, this),
-				blur: $.proxy(this.hide, this),
+				//blur: $.proxy(this.hide, this),
 				keyup: $.proxy(this.update, this)
 			});
 		} else {
@@ -46,6 +48,7 @@
 				this.element.on('click', $.proxy(this.show, this));
 			}
 		}
+	
 		this.minViewMode = options.minViewMode||this.element.data('date-minviewmode')||0;
 		if (typeof this.minViewMode === 'string') {
 			switch (this.minViewMode) {
@@ -77,6 +80,7 @@
 		this.startViewMode = this.viewMode;
 		this.weekStart = options.weekStart||this.element.data('date-weekstart')||0;
 		this.weekEnd = this.weekStart === 0 ? 6 : this.weekStart - 1;
+		this.onRender = options.onRender;
 		this.fillDow();
 		this.fillMonths();
 		this.update();
@@ -91,13 +95,18 @@
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
 			this.place();
 			$(window).on('resize', $.proxy(this.place, this));
-			// if (e ) {
-			//   e.stopPropagation();
-			//   e.preventDefault();
-			// }
-			if (!this.isInput) {
-				$(document).on('mousedown', $.proxy(this.hide, this));
+			if (e ) {
+				e.stopPropagation();
+				e.preventDefault();
 			}
+			if (!this.isInput) {
+			}
+			var that = this;
+			$(document).on('mousedown', function(ev){
+				if ($(ev.target).closest('.datepicker').length == 0) {
+					that.hide();
+				}
+			});
 			this.element.trigger({
 				type: 'show',
 				date: this.date
@@ -139,6 +148,7 @@
 			}
 			this.set();
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
+      console.log(this.viewDate);
 			this.fill();
 		},
 		
@@ -192,22 +202,26 @@
 			var nextMonth = new Date(prevMonth);
 			nextMonth.setDate(nextMonth.getDate() + 42);
 			nextMonth = nextMonth.valueOf();
-			html = [];
-			var clsName;
+			var html = [];
+			var clsName,
+				prevY,
+				prevM;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getDay() === this.weekStart) {
 					html.push('<tr>');
 				}
-				clsName = '';
-				if (prevMonth.getMonth() < month) {
+				clsName = this.onRender(prevMonth);
+				prevY = prevMonth.getFullYear();
+				prevM = prevMonth.getMonth();
+				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
-				} else if (prevMonth.getMonth() > month) {
+				} else if ((prevM > month && prevY === year) || prevY > year) {
 					clsName += ' new';
 				}
 				if (prevMonth.valueOf() === currentDate) {
 					clsName += ' active';
 				}
-				html.push('<td class="day'+clsName+'">'+prevMonth.getDate() + '</td>');
+				html.push('<td class="day '+clsName+'">'+prevMonth.getDate() + '</td>');
 				if (prevMonth.getDay() === this.weekEnd) {
 					html.push('</tr>');
 				}
@@ -284,7 +298,7 @@
 						this.set();
 						break;
 					case 'td':
-						if (target.is('.day')){
+						if (target.is('.day') && !target.is('.disabled')){
 							var day = parseInt(target.text(), 10)||1;
 							var month = this.viewDate.getMonth();
 							if (target.is('.old')) {
@@ -334,6 +348,9 @@
 	};
 
 	$.fn.datepicker.defaults = {
+		onRender: function(date) {
+			return '';
+		}
 	};
 	$.fn.datepicker.Constructor = Datepicker;
 	
@@ -384,25 +401,31 @@
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 			if (parts.length === format.parts.length) {
+				var year = date.getFullYear(), day = date.getDate(), month = date.getMonth();
 				for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 					val = parseInt(parts[i], 10)||1;
 					switch(format.parts[i]) {
 						case 'dd':
 						case 'd':
+							day = val;
 							date.setDate(val);
 							break;
 						case 'mm':
 						case 'm':
+							month = val - 1;
 							date.setMonth(val - 1);
 							break;
 						case 'yy':
+							year = 2000 + val;
 							date.setFullYear(2000 + val);
 							break;
 						case 'yyyy':
+							year = val;
 							date.setFullYear(val);
 							break;
 					}
 				}
+				date = new Date(year, month, day, 0 ,0 ,0);
 			}
 			return date;
 		},
@@ -451,4 +474,4 @@
 							'</div>'+
 						'</div>';
 
-}( window.jQuery )
+}( window.jQuery );
