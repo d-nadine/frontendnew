@@ -34,8 +34,6 @@
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
 		
 		if (this.isInput) {
-      console.log('cuntos');
-      console.log(this.element);
 			this.element.on({
 				focus: $.proxy(this.show, this),
 				//blur: $.proxy(this.hide, this),
@@ -148,7 +146,6 @@
 			}
 			this.set();
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
-      console.log(this.viewDate);
 			this.fill();
 		},
 		

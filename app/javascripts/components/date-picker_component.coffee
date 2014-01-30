@@ -30,20 +30,25 @@ Radium.DatePickerComponent = Ember.Component.extend
   leader: 'Due'
 
   textBinding: 'textToDateTransform'
-#   disabled: Ember.computed.alias('controller.isDisabled')
-# 
-#   isSubmitted: Ember.computed.alias('controller.isSubmitted')
-#   isInvalid: (->
-#     Ember.isEmpty(@get('text')) && @get('isSubmitted')
-#   ).property('value', 'isSubmitted')
-# 
+
+  disabled: Ember.computed.alias('targetObject.isDisabled')
+  isSubmitted: Ember.computed.alias('targetObject.isSubmitted')
+
+  isInvalid: (->
+    return false unless @get('isSubmitted')
+    return false if Ember.isEmpty(@get('text'))
+    return false unless @get('date')
+
+    @get('date').isBeforeToday()
+  ).property('date', 'isSubmitted')
+
   humanTextField: Ember.TextField.extend
     viewName: 'dateDisplay'
     TAB: 9
     ENTER: 13
     ESCAPE: 27
     valueBinding: 'parentView.text'
-    # disabledBinding: 'parentView.disabled'
+    disabledBinding: 'targetObject.disabled'
     init: ->
       @_super.apply(this, arguments)
 
@@ -76,9 +81,11 @@ Radium.DatePickerComponent = Ember.Component.extend
       @$().data('datepicker').hide()
 
     hideDatePicker: ->
+      return if @isDestroyed
       @set('pickerShown', true)
 
     showDatePicker: ->
+      return if @isDestroyed
       @set('pickerShown', false)
 
     willDestroyElement: ->
@@ -177,10 +184,6 @@ Radium.DatePickerComponent = Ember.Component.extend
     focusIn: (e) ->
       Ember.run.next  =>
         @$().get(0).select()
-
-    focusOut: (e) ->
-      Ember.run.next =>
-        @resetDateDisplay()
 
   defaultDate: (->
     Ember.DateTime.create().toDateFormat()
