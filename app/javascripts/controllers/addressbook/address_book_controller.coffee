@@ -70,6 +70,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   ]
 
   additionalFilterDisabled: ( ->
+    return true if @get('isCompanies')
     selectedFilter = @get('model.selectedFilter') 
     if selectedFilter == 'private'
       @set 'model.additionalFilter', null

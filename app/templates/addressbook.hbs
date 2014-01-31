@@ -35,7 +35,7 @@
         </a> 
         {{/unless}}
       <div class="btn-group">
-        <button class="btn btn-main address-book-button" >{{view.selectedFilterText}}</button>
+        <button class="btn btn-main address-book-button" {{bind-attr disabled=isCompanies}}>{{view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle needsclick" {{bind-attr disabled=additionalFilterDisabled}} data-toggle="dropdown">
           <span class="caret"></span>
         </button>
