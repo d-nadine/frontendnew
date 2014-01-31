@@ -10,6 +10,7 @@ Radium.FormsCompanyView = Radium.View.extend
     @get('controller').on('setupNewCompany', this, 'onSetupNewCompany')
 
   willDestroyElement: ->
+    @send 'hideNewCompany'
     @_super.apply this, arguments
     @get('controller').off('setupNewCompany', this, 'onSetupNewCompany')
 

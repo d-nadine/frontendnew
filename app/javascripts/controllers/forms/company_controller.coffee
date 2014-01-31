@@ -10,7 +10,7 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
                   name: @get('companyName')
 
       company.one 'didCreate', (result) =>
-        @set 'isSaving', false
+        @send 'reset'
         @send 'flashSuccess', "#{@get('companyName')} created."
         @transitionToRoute 'company', result
 
@@ -26,6 +26,14 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
 
       @get('store').commit()
 
+    reset: ->
+      @set('isSaving', false)
+      @set('companyName', '')
+      @set('company', null)
+      @set('isSubmitted', false)
+      Ember.run.next =>
+        @trigger 'setupNewCompany'
+
   needs: ['addressbook']
   companyName: ''
   company: null
@@ -37,9 +45,7 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
     @get('controllers.addressbook').on('setupNewCompany', this, 'onSetupNewCompany')
 
   onSetupNewCompany: ->
-    @set('companyName', '')
-    Ember.run.next =>
-      @trigger 'setupNewCompany'
+    @send 'reset'
 
   isValid: ( ->
     @get('companyName.length')
