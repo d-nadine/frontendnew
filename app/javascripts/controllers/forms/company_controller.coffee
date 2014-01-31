@@ -15,13 +15,11 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
         @transitionToRoute 'company', result
 
       company.one 'becameInvalid', (result) =>
-        debugger
         @set 'isSaving', false
         @send 'flashError', company
         result.reset()
 
       company.one 'becameError', (result)  =>
-        debugger
         @set 'isSaving', false
         @send 'flashError', 'An error has occurred and the company could not be created.'
         result.reset()
