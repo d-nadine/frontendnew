@@ -10,8 +10,8 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
                   name: @get('companyName')
 
       company.one 'didCreate', (result) =>
-        @send 'reset'
         @send 'flashSuccess', "#{@get('companyName')} created."
+        @send 'reset'
         @transitionToRoute 'company', result
 
       company.one 'becameInvalid', (result) =>
@@ -39,6 +39,10 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
   company: null
   isSaving: false
   isSubmitted: false
+
+  isDisabled: ( ->
+    return true if @get('isSaving') || @get('company')
+  ).property('isSaving', 'company')
 
   init: ->
     @_super.apply this, arguments
