@@ -281,13 +281,15 @@
 }
 
 .meeting-form-attendees-list {
-  $width: 60px;
+  $width: 30px;
+
+  &.unstyled {
+    margin-left: 100px;
+  }
+
   li {
-    max-width: $width;
-    margin-right: 15px;
-    font-size: 10px;
+    margin: 0 15px 10px 0;
     font-weight: bold;
-    line-height: 12px;
     position: relative;
     vertical-align: top;
     cursor: pointer;
@@ -297,11 +299,21 @@
     }
   }
 
+  .invitee-actions {
+    opacity: 0;
+    @include transition(opacity 0.25s);
+  }
+
+  &:hover .invitee-actions {
+    opacity: 1;
+  }
+
   .invitation-status {
     position: absolute;
     bottom: 0;
-    left: 5px;
-    right: 5px;
+    left: 0;
+    right: 0;
+    font-size: 8px;
     line-height: 14px;
     text: {
       transform: uppercase;
@@ -352,4 +364,9 @@
     white-space: nowrap;
     display: inline-block;
   }
+}
+
+.invitee-thumb {
+  width: 50px;
+  position: relative;
 }

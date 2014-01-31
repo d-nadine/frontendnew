@@ -27,7 +27,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
     $('body').on 'click.attendees-view', (e) =>
       @$().find('.contextMenu').removeClass('open')
 
-    @$().tooltip()
+    # @$().tooltip()
 
   willDestroyElement: ->
     @_super.apply this, arguments
@@ -46,28 +46,41 @@ Radium.MeetingAttendeesView = Radium.View.extend
     @send 'showContextMenu', @get('controller.model')
 
   template: Ember.Handlebars.compile """
-      {{#if isLoaded}}
-        {{avatar this style="large"}}
-        {{#if displayStatus}}
-          <span {{bind-attr class=":invitation-status invitationStatus"}}>{{invitationStatus}}</span>
+    <div class="media">
+      <div class="invitee-thumb pull-left">
+        {{#if isLoaded}}
+          {{avatar this style="large" class="media-object"}}
+          {{#if displayStatus}}
+            <span {{bind-attr class=":invitation-status invitationStatus"}}>{{invitationStatus}}</span>
+          {{/if}}
+        {{else}}
+          {{partial 'is_loading'}}
         {{/if}}
-        {{#unless isInvited}}
-          <a href="#" class="btn-close" {{action removeSelection this}}>&times;</a>
-        {{/unless}}
-      {{else}}
-        {{partial 'is_loading'}}
-      {{/if}}
-      <div class="contextMenu dropdown">
-        <a class="dropdown-toggle needsclick" href="#">
-          link<b class="caret"></b>
-        </a>
-        <div class="attendeeMenu dropdown-menu">
-          <table>
-            <tr>
-              <td><a href="#" {{action cancelInvitation this}}>Remove Attendee</a></td>
-              <td><a href="#" {{action resendInvite this}}>Resend Invite</a></td>
-            </tr>
-          </table>
+      </div>
+      <div class="media-body">
+        <div class="media-heading">
+          {{displayName}}
+        </div>
+        <div class="media-content">
+          {{#if isOrganizer}}
+            <span class="label">Organizer</span>
+          {{else}}
+            <div class="invitee-actions">
+              {{#if isInvited}}
+              <div class="btn-group">
+                <a href="#" class="btn btn-mini btn-danger" {{action cancelInvitation this}}>Remove Attendee</a></td>
+              </div>
+              <div class="btn-group">
+                <a href="#" class="btn btn-mini btn-success" {{action resendInvite this}}>Resend Invite</a></td>
+              </div>
+              {{else}}
+                <a href="#" class="btn btn-mini" {{action removeSelection this}}>
+                  <i class="ss-symbolicons-block ss-trash"></i>
+                </a>
+              {{/if}}
+            </div>
+          {{/if}}
         </div>
       </div>
+    </div>
     """
