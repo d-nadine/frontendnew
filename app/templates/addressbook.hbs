@@ -17,18 +17,23 @@
     </ul>
   </div>
 </div>
-
 <div class="page-header">
   <h1>Address Book</h1>
   <div class="address-book-controls">
     <div class="pull-right">
       <form class="form-search pipeline-search">
         <i class="ss-symbolicons-block ss-search"></i>
-        {{input value=model.searchText type="text" class="field search-text"}}
+        {{view view.searchInput value=model.searchText type="text" class="field search-text"}}
       </form>
-      {{#link-to "leads.new" class="btn btn-main btn-primary"}}
-        <i class="ss-standard ss-plus"></i> Contact
-      {{/link-to}}
+      {{#unless isCompanies}}
+        {{#link-to "leads.new" class="btn btn-main btn-primary"}}
+          <i class="ss-standard ss-plus"></i> Contact
+        {{/link-to}}
+      {{else}}
+        <a href="#" {{action showAddCompany target="view"}} class="btn btn-main btn-primary">
+          <i class="ss-standard ss-plus"></i> Company
+        </a> 
+        {{/unless}}
       <div class="btn-group">
         <button class="btn btn-main address-book-button" >{{view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle needsclick" {{bind-attr disabled=additionalFilterDisabled}} data-toggle="dropdown">
@@ -86,6 +91,9 @@
       {{/if}}
     </div>
   </div>
+  {{#if isCompanies}}
+    {{render 'forms/company'}}
+  {{/if}}
 </div>
 {{outlet confirmation}}
 {{#if showFormArea}}
@@ -110,7 +118,6 @@
     {{/if}}
   </div>
 {{/if}}
-
 <div class="search-result-list">
   {{#if showEmptyAddressBookButton}}
     <div class="alert alert-info text-center">

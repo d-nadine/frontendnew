@@ -135,3 +135,18 @@ $body: #6e6e6e;
     }
   }
 }
+
+.new-company {
+  label {
+    font-weight: bold;
+    color: #6e6e6e;
+  }
+
+  .control-box input.ember-text-field {
+    min-width: 300px;
+  }
+
+  .controlbox-dropdown-group,  .controlbox-dropdown-group .btn{
+    width: 35px;
+  }
+}

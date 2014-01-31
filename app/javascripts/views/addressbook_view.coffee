@@ -2,6 +2,15 @@ require 'lib/radium/tag_autocomplete'
 require 'mixins/views/bulk_action_view_mixin'
 
 Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
+  actions:
+    showAddCompany: ->
+      @get('controller').send 'setupNewCompany'
+      @$('.address-book-controls').slideUp('medium', =>
+        @$('.new-company').slideDown('medium', =>
+          Ember.$('.new-company input[type=text]').focus()
+        )
+      )
+
   classNames: ['page-view']
   layoutName: 'layouts/single_column'
 
@@ -45,3 +54,12 @@ Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
   tags: Radium.TagAutoComplete.extend
     sourceBinding: 'controller.addTagsForm.tagNames'
     placeholder: 'Add Tags'
+
+  searchInput: Ember.TextField.extend
+    keyDown: (e) ->
+      unless e.keyCode == 13
+        @_super.apply this, arguments
+        return
+
+      e.preventDefault()
+      e.stopPropagation()

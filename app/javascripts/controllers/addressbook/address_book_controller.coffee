@@ -4,6 +4,7 @@ require 'mixins/controllers/bulk_action_controller_mixin'
 Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   Radium.CheckableMixin,
   Radium.BulkActionControllerMixin,
+  Ember.Evented,
 
   actions:
     additionalFilter: (additional) ->
@@ -34,6 +35,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     displayOpenDeals: (deals) ->
       @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
       @transitionToRoute 'pipeline.opendeals'
+
+    setupNewCompany: ->
+      @trigger 'setupNewCompany'
 
   isEditable: true
 
@@ -74,6 +78,10 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
   isPrivateContacts: ( ->
     @get('model.selectedFilter') == 'private'
+  ).property('model.selectedFilter')
+
+  isCompanies: ( ->
+    @get('model.selectedFilter') == 'companies'
   ).property('model.selectedFilter')
 
   showEmptyAddressBookButton: ( -> 

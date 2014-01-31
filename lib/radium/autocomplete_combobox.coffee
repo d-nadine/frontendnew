@@ -68,6 +68,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     valueBinding: 'parentView.query'
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
+    autocomplete: 'off'
 
     didInsertElement: ->
       @$().typeahead source: (query, process) =>

@@ -1,2 +1,2 @@
 Ember.TextField.reopen
-  attributeBindings: ['min', 'readonly']
+  attributeBindings: ['min', 'readonly', 'autocomplete']

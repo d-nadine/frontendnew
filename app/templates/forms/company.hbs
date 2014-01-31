@@ -1,0 +1,16 @@
+<div class="pull-right">
+  {{partial "saving"}}
+  <form class="form-search pipeline-search">
+    {{view view.companyPicker}}
+  </form>
+  <a href="#" {{action createCompany}}  {{bind-attr disabled=isSaving}} class="btn btn-main btn-primary">
+    {{#if isSaving}}
+      <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
+    {{else}}
+      <i class="ss-standard ss-plus"></i> Submit
+    {{/if}}
+  </a>
+  <a href="#" {{action hideNewCompany target="view"}} {{bind-attr disabled=isSaving}} class="btn btn-danger btn-main">
+    Cancel
+  </a>
+</div>
