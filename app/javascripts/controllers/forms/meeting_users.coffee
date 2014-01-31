@@ -23,7 +23,7 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
       @removeMeetingsForUser content[idx]
 
   activeMeetings: Ember.computed 'meetings.[]', 'meetings.@each.isDeleted', ->
-    @get('meetings').reject (meeting) => meeting.get('isDeleted')
+    @get('meetings').reject (meeting) => meeting.get('isDeleted') || meeting.get('isFinished')
 
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')
