@@ -71,6 +71,8 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     return true if @get('city.length') > 1
     return true if @get('state.length') > 1
     return true if @get('zipcode.length') > 1
+    return true if @get('email.length') > 1
+    return true if @get('phone.length') > 1
   ).property('parent.[]', 'street', 'city', 'state', 'zip')
 
   showDropDown: ( ->

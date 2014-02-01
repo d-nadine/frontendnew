@@ -45,7 +45,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
       todoForm: @get('todoForm')
       # disable for now
       # callForm: @get('callForm')
-      discussionForm: @get('discussionForm')
+      # discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
       about: @get('model')
   ).property('todoForm', 'callForm', 'discussionForm')

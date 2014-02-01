@@ -15,12 +15,6 @@
         {{view view.contactTitle valueBinding="form.title" class="field detail" placeholder="Title" viewName="title"}}
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Company</label>
-      <div class="controls">
-        {{view view.companyPicker class="field" viewName="company"}}
-      </div>
-    </div>
   </div>
 {{else}}
   <div class="user-avatar pull-left">
@@ -37,13 +31,6 @@
     </h4>
     <div class="company-title">
       <span class="title muted">{{title}}</span>
-      <span class="company">
-        {{#if company}}
-          {{#link-to "company" company}}{{company.name}}{{/link-to}}
-        {{else}}
-          {{companyName}}
-        {{/if}}
-      </span>
     </div>
   </div>
 {{/if}}

@@ -11,8 +11,8 @@
           <i class="ss-standard ss-write" {{action toggleEditor target=view bubbles=false}}></i>
         </div>
         <div class="not-editing">
-          {{#if company.website}}
-            <a href="{{unbound company.website}}" target="_blank">{{company.website}}</a>
+          {{#if website}}
+            <a href="{{unbound website}}" target="_blank">{{website}}</a>
           {{else}}
             <span class="empty">Add company website</span>
           {{/if}}

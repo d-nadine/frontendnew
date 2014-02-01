@@ -1,0 +1,21 @@
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-buildings muted"></i></dt>
+  <dd>
+    {{#if isEditing}}
+      <div>
+        {{view view.companyPicker}}
+      </div>
+    {{else}}
+      <div class="pull-right">
+        <i class="ss-standard ss-write" {{action toggleEditor target=view bubbles=false}}></i>
+      </div>
+      <div class="not-editing">
+        {{#if company}}
+          <h6>{{#link-to 'company' company}}{{company.displayName}}{{/link-to}}</h6>
+        {{else}}
+          <span class="empty">Add company</span>
+        {{/if}}
+      </div>
+    {{/if}}
+  </dd>
+</dl>

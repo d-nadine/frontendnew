@@ -1,4 +1,3 @@
-<form class="form">
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       {{render "sidebar/company_website" model}}
@@ -14,7 +13,6 @@
       </h6>
     </div>
     <div class="sidebar-panel-content">
-      {{model.constructor}}
       {{#link-to "leads.fromCompany" model classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/link-to}}
       {{#if contacts.length}}
         <div class="company-type">

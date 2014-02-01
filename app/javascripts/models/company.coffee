@@ -8,6 +8,8 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   addresses: DS.hasMany('Radium.Address')
 
   primaryContact: DS.belongsTo('Radium.Contact', inverse: 'company')
+  primaryAddress: Radium.computed.primary 'addresses'
+
   user: DS.belongsTo('Radium.User')
 
   name: DS.attr('string')

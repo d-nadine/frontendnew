@@ -36,29 +36,32 @@ Radium.InlineEditorView = Ember.View.extend
   click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
-    if evt.target?.type == 'file'
-      event.stopPropagation()
-      return
 
     if evt.target?.type == 'file'
       event.stopPropagation()
-      event.preventDefault()
-      $(evt.target).click()
-      event.stopPropagation()
-      return false
+      return
 
     tagName = evt.target.tagName.toLowerCase()
 
-    if ['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1
+    if (['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1) || $(evt.target).hasClass('resource-name')
       event.stopPropagation()
       @send 'toggleEditor'
       return
+
+    return if tagName == 'a' && evt.target?.target == "_blank"
 
     evt.preventDefault()
     evt.stopPropagation()
 
   highlightSelection: ->
-    @$('input[type=text],textarea').filter(':first').focus()
+    textField = @$('input[type=text],textarea').filter(':first')
+
+    return unless textField.length
+
+    Ember.run.later =>
+      textField.focus()
+      textField.get(0).select()
+    , 200
 
   keyDown: (evt) ->
     return unless evt.target.tagName.toLowerCase() == 'input'

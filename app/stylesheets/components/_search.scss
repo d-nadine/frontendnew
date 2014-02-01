@@ -29,6 +29,8 @@
   position: relative;
 
   .navbar-search {
+    // disable for now
+    visibility: hidden;
     width: 250px;
     position: relative;
     @include transition(width 0.15s);

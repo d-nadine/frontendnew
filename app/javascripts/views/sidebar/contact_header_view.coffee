@@ -17,13 +17,5 @@ Radium.SidebarContactHeaderView = Radium.InlineEditorView.extend
         @_super.apply this, arguments
         return
 
-      @get('parentView.company').$('input').focus()
+      @get('parentView.name').$('input').focus()
       return false
-
-  companyPicker: Radium.ContactCompanyPicker.extend Radium.ComboboxSelectMixin,
-    valueBinding: 'controller.form.company'
-    companyNameBinding: 'controller.form.companyName'
-    setValue: ->
-      @_super.apply this, arguments
-      Ember.run.next =>
-        @get('parentView').send 'toggleEditor'

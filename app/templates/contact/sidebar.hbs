@@ -12,6 +12,12 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
+      {{render 'sidebar/contact_company' model}}
+    </div>
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
       <div class="contact-type">
         {{render 'sidebar/contact_status' model}}
       </div>
@@ -60,7 +66,6 @@
       </h6>
     </div>
     <div class="sidebar-panel-content">
-      {{render "sidebar/company_website" model.company}}
       {{render 'sidebar/phone_numbers' model}}
       {{render 'sidebar/email_addresses' model}}
       {{#if model.contactInfo}}

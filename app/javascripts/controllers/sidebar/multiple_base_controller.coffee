@@ -10,6 +10,8 @@ Radium.MultipleBaseController = Radium.SidebarBaseController.extend
           if item.get('value.length') && item.get('value') != "+1"
             @get("content.#{@recordArray}").createRecord item.getProperties('name', 'value', 'isPrimary')
 
+      model = @get("content")
+
       @get('content.transaction').commit()
 
     setForm: ->

@@ -16,10 +16,11 @@
         <div class="pull-right">
           <button class="btn" disabled="disabled">Follow</button>
         </div>
-        <h3>{{name}}</h3>
+        <div class="deal-banner-details">
+          {{render 'sidebar/name' model}}
+        </div>
       </div>
       <div class="pull-left company-banner-address">
-        {{partial 'shared/address'}}
         <p>
           <strong>
             <a href="#">Existing Customer</a>

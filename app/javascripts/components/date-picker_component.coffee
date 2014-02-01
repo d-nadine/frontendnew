@@ -122,7 +122,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       evt.preventDefault()
 
     resetDateDisplay: ->
-      originalDate = @get('targetObject.date')?.toJSDate() || Date.today()
+      originalDate = if  @get('targetObject.date') then @get('targetObject.date').toJSDate() else Date.today()
+
       @$().trigger
         type: 'changeDate'
         date: originalDate

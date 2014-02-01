@@ -39,7 +39,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
       todoForm: @get('todoForm')
       # disable for now
       # callForm: @get('callForm')
-      discussionForm: @get('discussionForm')
+      # discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 

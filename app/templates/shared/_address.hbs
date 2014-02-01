@@ -1,6 +1,10 @@
 {{#if primaryAddress}}
   {{#with primaryAddress}}
     <div class="readonly readonly-address">
+      {{#if email.length}}
+        <div>{{#link-to "emails.mailTo" "inbox" this}} {{email}}{{/link-to}}</email>
+      {{/if}}
+      <div>{{phone}}</div>
       <div>{{street}}</div>
       <div>{{formatted}}</div>
       <div>{{country}}</div>

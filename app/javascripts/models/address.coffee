@@ -6,6 +6,8 @@ Radium.Address = Radium.Model.extend
   city: DS.attr('string')
   country: DS.attr('string')
   zipcode: DS.attr('string')
+  email: DS.attr('string')
+  phone: DS.attr('string')
 
   formatted: ( ->
     [@get('state'), @get('city'), @get('zipcode')].join(', ')
@@ -14,12 +16,14 @@ Radium.Address = Radium.Model.extend
   value: ( ->
     return if @get('isNew')
 
-    !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode'))
-  ).property('isNew', 'street', 'state', 'city', 'country', 'zipcode')
+    !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode')) || !Ember.isEmpty(@get('email')) || !Ember.isEmpty(@get('phone'))
+  ).property('isNew', 'street', 'state', 'city', 'country', 'zipcode', 'email', 'phone')
 
   getAddressHash: ->
     isPrimary: this.get('isPrimary')
     name: this.get('name')
+    email: this.get('email')
+    phone: this.get('phone')
     street: this.get('street')
     city: this.get('city')
     state: this.get('state')
@@ -28,6 +32,8 @@ Radium.Address = Radium.Model.extend
 
   toString:  ->
     parts = [
+      @get('email')
+      @get('phone')
       @get('street')
       @get('state')
       @get('city')

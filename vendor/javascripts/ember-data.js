@@ -1,5 +1,5 @@
-// Version: v0.14-1-g423da9e
-// Last commit: 423da9e (2013-11-06 17:39:55 +0000)
+// Version: v0.14-5-g9c74452
+// Last commit: 9c74452 (2014-02-01 13:51:08 +0000)
 
 
 (function() {
@@ -3079,7 +3079,7 @@ DS.Store.reopenClass({
 
 
 (function() {
-/**
+/*
   @module ember-data
 */
 
@@ -3396,8 +3396,7 @@ var DirtyState = {
       record.send('invokeLifecycleCallbacks');
     },
 
-    // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-    loadedData: Ember.K
+    rollback: Ember.K
   },
 
   // A record is in the `invalid` state when its client-side
@@ -3566,7 +3565,9 @@ var RootState = {
     becameError: function(record) {
       record.transitionTo('error');
       record.send('invokeLifecycleCallbacks');
-    }
+    },
+
+    unloadRecord: Ember.K
   },
 
   // A record enters this state when its data is populated.
@@ -3763,7 +3764,11 @@ var RootState = {
       },
 
       // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-      loadedData: Ember.K
+      loadedData: Ember.K,
+
+      becomeDirty: Ember.K,
+
+      rollback: Ember.K
     },
 
     // Once the adapter indicates that the deletion has
@@ -3781,7 +3786,9 @@ var RootState = {
       invokeLifecycleCallbacks: function(record) {
         record.trigger('didDelete', record);
         record.trigger('didCommit', record);
-      }
+      },
+
+      becomeDirty: Ember.K
     }
   },
 
@@ -3798,6 +3805,7 @@ var RootState = {
     }
   }
 };
+
 
 var hasOwnProp = {}.hasOwnProperty;
 
