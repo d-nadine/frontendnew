@@ -1,6 +1,11 @@
 require 'lib/radium/tag_autocomplete'
 
 Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
+  actions:
+    removeSelection: (tag) ->
+      @get('source').removeObject item
+      false
+
   init: ->
     @_super.apply this, arguments
     Ember.addBeforeObserver this, 'controller.company.tagNames', null, 'sourceWillChange'

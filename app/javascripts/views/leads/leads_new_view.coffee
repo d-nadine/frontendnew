@@ -100,7 +100,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     classNames: ['field', 'text-area']
     placeholder: 'What is the lead interested in buying?'
     valueBinding: 'targetObject.notes'
-    readonly: Ember.computed.not 'controller.isNew'
+    readonly: Ember.computed.not 'targetObject.isNew'
 
   source: Radium.LeadSourcesView.extend
     disabled: Ember.computed.not 'controller.isNew'

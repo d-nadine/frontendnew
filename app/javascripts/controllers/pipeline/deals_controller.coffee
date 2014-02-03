@@ -24,7 +24,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
     content.setEach 'isChecked', false
 
     content = content.filter (item) ->
-                  if selectedFilter == 'name' 
+                  if selectedFilter == 'name'
                     ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
                   else if selectedFilter == 'company'
                     item.get('contact.company') && ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
