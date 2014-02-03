@@ -8,17 +8,22 @@
       {{/if}}
     </h5>
     <div class="clearfix">
-      <ul class="inline contact">
-        {{#each truncatedContacts}}
-          <li class="contact-tooltip" data-toggle="tooltip" {{bind-attr title="name"}}>
+      {{#each truncatedContacts}}
+        <div class="media">
+          <div class="invitee-thumb pull-left">
             {{#if isLoaded}}
               {{avatar this size=small class="img-polaroid"}}
             {{else}}
               {{partial 'is_loading'}}
             {{/if}}
-          </li>
-        {{/each}}
-      </ul>
+          </div>
+          <div class="media-body">
+            <div class="media-heading">
+              {{#link-to 'contact' this}}{{displayName}}{{/link-to}}
+            </div>
+          </div>
+        </div>
+      {{/each}}
     </div>
     {{#if hasMoreContacts}}
       {{#if isTag}}

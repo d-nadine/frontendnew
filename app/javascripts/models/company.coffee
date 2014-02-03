@@ -1,4 +1,5 @@
 Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
+  Radium.AttachmentsMixin,
   contacts: DS.hasMany('Radium.Contact')
   addresses: DS.hasMany('Radium.Address')
   activities: DS.hasMany('Radium.Activity', inverse: 'companies')

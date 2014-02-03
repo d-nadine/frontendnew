@@ -11,6 +11,7 @@
       <h6 class="sidebar-panel-title">
         <i class="ss-standard ss-users"></i> Contacts
       </h6>
+      {{partial 'search/members'}}
     </div>
     <div class="sidebar-panel-content">
       {{#link-to "leads.fromCompany" model classNames="btn btn-block add-contact"}}<i class="add icon-plus"></i>Add Contact{{/link-to}}
@@ -39,16 +40,7 @@
     </div>
   </div>
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-attach"></i> Files
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{partial 'shared/add_files'}}
-    </div>
-  </div>
+  {{partial 'shared/attachments'}}
 
   {{partial 'shared/followers'}}
 

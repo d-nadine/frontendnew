@@ -35,6 +35,10 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
       model.one 'bacameError', ->
         @send 'flashError', 'An error has occurred and the update did not occurr.'
 
+      if @updateHook
+        model.one 'didUpdate', (result) =>
+          @updateHook(result)
+
       @get('store').commit()
 
   isEditable: true

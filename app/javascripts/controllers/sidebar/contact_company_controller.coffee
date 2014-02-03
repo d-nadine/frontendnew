@@ -17,7 +17,6 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
 
     createCompany: (companyName) ->
       @set('form.company', Ember.Object.create name: companyName)
-      @send 'commit'
       @send 'stopEditing'
 
     setProperties: ->
@@ -29,18 +28,42 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
       if form.get('company.name') == model.get('company.name')
         return
 
-      if Ember.isEmpty(form.get('company.name'))
+      if Ember.isEmpty(form.get('company.name')) && @get('model.company.name')
+        model.set 'removeCompany', true
         model.set 'company', null
 
       model.set('companyName', form.get('company.name'))
 
     commit: ->
+      existing = @get('model.company.name')
+      updated = @get('form.company.name')
+
+      companyUpdate =  ((existing != updated) && updated != '')
+
+      if company = @get('company')
+        @set('existingCompany', company)
+
+      @set('companyAdded', companyUpdate)
+
       @_super.apply this, arguments
-      @get('model').notifyPropertyChange('company')
+
+  updateHook: (contact) ->
+    if existingCompany = @get('existingCompany')
+      existingCompany.reload()
+      @set('existingCompany', null)
+
+    return unless @get('companyAdded')
+
+    @set 'companyAdded', false
+
+    observer = =>
+      if company =  contact.get('company')
+        contact.removeObserver 'company', observer
+        company.reload()
+
+    contact.addObserver 'company', observer
 
   isValid: ( ->
-    # return unless @get('isEditing')
-    # return if Ember.isEmpty @get('form.contact')
     true
   ).property('form.company',  'isEditing')
 

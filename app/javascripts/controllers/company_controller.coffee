@@ -1,4 +1,4 @@
-Radium.CompanyController = Radium.ObjectController.extend
+Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
 
@@ -25,3 +25,19 @@ Radium.CompanyController = Radium.ObjectController.extend
 
     @get('leadStatuses').objectAt(maxStatus).name
   ).property('contacts.[]')
+
+  membersText: Ember.computed 'contacts.[]', ->
+    "View all #{@get('contacts.length')} contacts."
+
+  truncatedContacts: ( ->
+    @get('contacts').toArray().sort((left, right) ->
+      Ember.compare(left.get('name'), right.get('name'))).slice(0, 3)
+  ).property('contacts.[]', 'model')
+
+  hasMoreContacts: ( ->
+    contacts = @get('contacts.length')
+
+    return unless contacts
+
+    contacts > @get('truncatedContacts.length')
+  ).property('contacts.[]', 'truncatedContacts')

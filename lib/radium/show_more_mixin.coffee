@@ -39,5 +39,5 @@ Radium.ShowMoreMixin = Ember.Mixin.create
 
   hiddenContent: ( ->
     if content = @get('arrangedContent')
-      Ember.A(content.slice(@get('currentLimit') + 1, @get('arrangedContent.length')))
-  ).property('arrangedContent.length', 'currentLimit')
+      Ember.A(content.slice(@get('currentLimit'), @get('arrangedContent.length')))
+  ).property('arrangedContent.[]', 'currentLimit')
