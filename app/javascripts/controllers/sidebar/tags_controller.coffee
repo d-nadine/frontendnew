@@ -8,7 +8,7 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
       @get('store').commit()
 
     removeSelection: (tag) ->
-      return unless @get('tagNames').mapProperty('name').contains tag
+      return unless @get('tagNames').mapProperty('name').contains(tag.get('name'))
 
       @get('tagNames').removeObject(tag)
 

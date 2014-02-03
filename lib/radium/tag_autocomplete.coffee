@@ -1,6 +1,12 @@
 require 'lib/radium/autocomplete_list_view'
 
 Radium.TagAutoComplete = Radium.AutocompleteView.extend
+  actions:
+    removeSelection: (tag) ->
+      @get('controller').send 'removeSelection', tag
+
+      false
+
   sourceBinding: 'controller.tagNames'
   listBinding: 'controller.controllers.tags'
   isEditable: true
