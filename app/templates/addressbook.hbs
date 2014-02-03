@@ -60,22 +60,26 @@
               </li>
             {{/if}}
             {{#unless isPrivateContacts}}
-              <li>
-                <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
-              </li>
-              <li>
-                <a href="#" {{action showForm 'call'}}>Call</a>
-              </li>
-              {{#if hasContacts}}
+              {{#unless isTags}}
                 <li>
-                  <a href="#" {{action showEmail}}>Email</a>
+                  <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
                 </li>
-              {{/if}}
-              {{#if assignableContent}}
+                <!--
                 <li>
-                  <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
+                  <a href="#" {{!action showForm 'call'}}>Call</a>
                 </li>
-              {{/if}}
+                -->
+                {{#if hasContacts}}
+                  <li>
+                    <a href="#" {{action showEmail}}>Email</a>
+                  </li>
+                {{/if}}
+                {{#if assignableContent}}
+                  <li>
+                    <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
+                  </li>
+                {{/if}}
+              {{/unless}}
             {{/unless}}
             <li>
               <a href="#" {{action confirmDeletion}}>Delete</a>

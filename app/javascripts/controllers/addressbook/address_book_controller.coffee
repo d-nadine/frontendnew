@@ -12,6 +12,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     addTags: ->
       addTagsForm = @get('addTagsForm')
+
+      addTagsForm.set 'controller', this
+
       addTagsForm.addTags()
 
       @get('store').commit()
@@ -83,6 +86,10 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
   isCompanies: ( ->
     @get('model.selectedFilter') == 'companies'
+  ).property('model.selectedFilter')
+
+  isTags: ( ->
+    @get('model.selectedFilter') == 'tags'
   ).property('model.selectedFilter')
 
   showEmptyAddressBookButton: ( -> 

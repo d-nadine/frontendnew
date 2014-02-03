@@ -19,7 +19,22 @@ Radium.AddTagsForm = Radium.Form.extend
 
     return unless tagNames.length
 
-    selectedContent.forEach (item) =>
-      tagNames.forEach (tag) =>
-        unless item.get('tagNames').mapProperty('name').contains(tag.get('name'))
+    all = Radium.Tag.all().map (tag) -> tag.get('name').toLowerCase()
+
+    tagNames.forEach (tag) =>
+      tagName = tag.get('name').toLowerCase()
+
+      unless (all.contains(tagName))
+        tag = Radium.Tag.createRecord name: tag.get('name')
+
+        tag.one 'didCreate', (result) =>
+            model = @get('controller.model')
+            model.addObject result
+
+          selectedContent.forEach (item) =>
+            item.get('tagNames').addObject Radium.TagName.createRecord name: tag.get('name')
+
+          @get('store').commit()
+      else
+        selectedContent.forEach (item) =>
           item.get('tagNames').addObject Radium.TagName.createRecord name: tag.get('name')

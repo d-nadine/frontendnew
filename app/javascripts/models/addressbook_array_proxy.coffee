@@ -4,7 +4,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
   selectedFilter: null
   additionalFilter: null
   currentuser: null
-  isloaded: false
+  isLoaded: false
   searchText: null
   assignedUser: null
 
