@@ -1,12 +1,5 @@
 <div class="members">
   {{#if contacts.length}}
-    <h5>
-      {{#if isTag}}
-        {{#link-to "addressbook.members" this}}{{membersText}}{{/link-to}}
-      {{else}}
-        {{#link-to "addressbook.employees" this}}{{membersText}}{{/link-to}}
-      {{/if}}
-    </h5>
     <div class="clearfix">
       {{#each truncatedContacts}}
         <div class="media">

@@ -77,6 +77,34 @@
   font-size: 14px;
 }
 
+.add-contact {
+  margin-bottom: 10px;
+}
+
+.members {
+  .media {
+    margin: 0;
+  }
+
+  .media-heading {
+    margin: 0;
+
+    a {
+      display: block;
+      line-height: 41px;
+    }
+  }
+
+}
+
+.company-members-link a {
+  line-height: 32px;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+}
+
 .company-sidebar-view{
   .control-label{
     font-weight: bold;
@@ -161,12 +189,6 @@
       right: 0;
       top: 7px;
     }
-  }
-
-  .add-contact{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
   }
 
   .add.icon-plus{
