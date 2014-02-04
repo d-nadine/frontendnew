@@ -147,6 +147,13 @@
   }
 }
 
+.sidebar-panel-warning {
+  .sidebar-panel-content {
+    color: #fff;
+    background-color: lighten(#3A87AD, 10%);
+  }
+}
+
 .sidebar-panel-grey {
   .sidebar-panel-content {
     text-shadow: 0 1px 0 rgba(black, 0.25);

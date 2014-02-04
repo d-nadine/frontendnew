@@ -1,6 +1,17 @@
 <form class="form">
   {{render 'sidebar/user' model}}
   {{render 'sidebar/deal_status' model}}
+
+  {{#unless isPublic}}
+    <div class="sidebar-panel sidebar-panel-warning">
+      <div class="sidebar-panel-content">
+        <div class="text-center">
+          <i class="ss-standard ss-info"></i> Publish this deal to change its status
+        </div>
+      </div>
+    </div>
+  {{/unless}}
+
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
@@ -40,11 +51,6 @@
   </div>
 
   {{render 'sidebar/amount' model}}
-
-
-  {{#unless isPublic}}
-    <p class="muted">Publish this deal to change its status</p>
-  {{/unless}}
 
   {{partial 'shared/attachments'}}
 
