@@ -1,4 +1,3 @@
-<h1>{{deals.length}}</h1>
 <div class="sticky-banner company-banner">
   <div class="sticky-banner-content">
     <div class="pull-left company-icon">
@@ -7,7 +6,7 @@
     <div class="clearfix company-banner-details">
       <div class="company-banner-actions">
         <div class="btn-toolbar">
-          <button class="btn btn-link">All Deals</button>
+          <button class="btn btn-link" {{action displayDeals}}>All Deals</button>
           {{#link-to "deals.fromCompany" model class="btn btn-wide btn-primary pull-right"}}
             <i class="ss-standard ss-plus"></i> Deal
           {{/link-to}}
@@ -30,13 +29,10 @@
       </div>
       <div class="pull-left company-banner-stats">
         <dl class="dl-horizontal">
-          <dt>3 Open Deals</dt>
-          <dd>($0000)</dd>
-          <dt>3 Closed Deals</dt>
-          <dd>($0000)</dd>
-          <dt>3 Paid Deals</dt>
-          <dd>($0000)</dd>
-          <dt>3 Lost Deals</dt>
+          {{#each groupedDeals}}
+            <dt>{{count}} {{name}}</dt>
+            <dd>({{currency value}})</dd>
+          {{/each}}
           <dd>&nbsp;</dd>
         </dl>
       </div>
