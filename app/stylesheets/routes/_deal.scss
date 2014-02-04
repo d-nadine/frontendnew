@@ -18,6 +18,22 @@
 .deal-banner-details {
   width: 375px;
 
+  .inline-editor .field {
+    width: 100%;
+    height: 34px;
+    padding: {
+      right: 0;
+      left: 0;
+    }
+    margin-bottom: 8px;
+    font: {
+      size: 32px;
+      weight: bold;
+    }
+    border: none;
+    background: transparent;
+  }
+
   .deal-title {
     margin-top: 0;
 
