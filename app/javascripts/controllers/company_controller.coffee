@@ -51,7 +51,7 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
     contacts > @get('truncatedContacts.length')
   ).property('contacts.[]', 'truncatedContacts')
 
-  groupedDeals: Ember.arrayComputed 'deals.@each.status', {
+  groupedDeals: Ember.arrayComputed 'contacts', 'deals.@each.status', {
     initialValue: []
     initialize: (array, changeMeta, instanceMeta) ->
       array.pushObject(Ember.Object.create(key: 'open', name: 'Open Deals', count: 0, value: 0, deals: Ember.A()))
