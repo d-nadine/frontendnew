@@ -76,8 +76,8 @@
 
   .company-type,
   .contact-type{
-    height: 30px;
     width: 100%;
+    // height: 30px;
     position: relative;
   }
 
@@ -141,10 +141,6 @@
   }
 }
 
-.sidebar-panel {
-  margin: 0 0 2px;
-}
-
 .sidebar-table {
   td {
     border: none;
@@ -159,7 +155,7 @@
   }
 
   a:not(.btn) {
-    color: #fff;
+    color: #fff !important;
     text-decoration: underline;
   }
 }
@@ -200,10 +196,6 @@
   color: #6e6e6e;
   @include box-sizing(border-box);
 
-  &:last-child {
-    border-bottom: none;
-  }
-
   .name {
     margin: 0;
   }
@@ -211,6 +203,10 @@
   a:not(.btn) {
     color: darken(#6e6e6e, 10%);
   }
+}
+
+.sidebar-panel-header + .sidebar-panel-content:last-child {
+  border-bottom: none;
 }
 
 .sidebar-panel-content.hide {

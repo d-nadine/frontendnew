@@ -1,4 +1,4 @@
-<dl class="dl-horizontal contact-types-list">
+<dl class="dl-horizontal contact-types-list contact-company-list">
   <dt><i class="ss-standard ss-buildings muted"></i></dt>
   <dd>
     {{#if isEditing}}
@@ -11,7 +11,11 @@
       </div>
       <div class="not-editing">
         {{#if company}}
-          <h6>{{#link-to 'company' company}}{{company.displayName}}{{/link-to}}</h6>
+          <p class="company-link">
+            {{#link-to 'company' company}}
+              {{company.displayName}}
+            {{/link-to}}
+          </p>
         {{else}}
           <span class="empty">Add company</span>
         {{/if}}
