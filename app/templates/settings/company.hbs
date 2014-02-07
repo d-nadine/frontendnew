@@ -1,5 +1,12 @@
 <form class="form-horizontal settings-form">
   <fieldset>
+    <div class="pull-right">
+      {{#if isAdmin}}
+        <button type="button" {{action confirmDestroyAccount}} class="btn btn-danger btn-large">
+          DELETE ACCOUNT
+        </button>
+      {{/if}}
+    </div>
     <div class="control-group">
       <div class="user-edit-avatar">
         <button class="btn btn-mini user-change-avatar">
