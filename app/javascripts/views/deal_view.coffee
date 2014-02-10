@@ -10,8 +10,8 @@ Radium.DealView = Radium.View.extend Radium.StickyBannerMixin,
 
   dealProgressBarWidth: (->
     return 0 unless Ember.$('.deal-progress').length
-    start = Ember.$('.deal-progress').offset().left
-    finish = $(".#{@get('controller.status').dasherize()}").offset().left
+    start = Ember.$('.deal-progress > a:first').offset().left
+    finish = $(".deal-progress  a.#{@get('controller.status').dasherize()}").offset().left
     width = finish - start
     width = width + 20 if width > 0
     "width: #{width}px"

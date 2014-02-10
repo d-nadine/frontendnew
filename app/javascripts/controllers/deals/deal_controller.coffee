@@ -26,6 +26,8 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   dealPercentage:( ->
     status = @get('status')
+    return 100 if status == 'closed'
+    return 0 if status == 'lost'
     statuses = @get('statuses')
     index = statuses.indexOf(status)
     Math.floor (index / statuses.length) * 100

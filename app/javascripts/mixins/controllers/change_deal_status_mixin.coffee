@@ -6,13 +6,12 @@ Radium.ChangeDealStatusMixin = Ember.Mixin.create
       return if status == @get('status')
 
       commit =  =>
-        @set 'status', status
 
         if status == 'lost'
           @set 'lostDuring', @get('model.status')
+
         @applyBufferedChanges()
         @get('store').commit()
 
+      @set 'status', status
       @send 'showStatusChangeConfirm', this, commit
-
-
