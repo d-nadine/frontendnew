@@ -3,10 +3,16 @@ require 'mixins/views/sticky_banner_mixin'
 Radium.DealView = Radium.View.extend Radium.StickyBannerMixin,
   classNames: ['page-view']
   layoutName: 'layouts/two_column'
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @notifyPropertyChange('dealProgressBarWidth')
+
   dealProgressBarWidth: (->
-    status = @get('controller.status')
-    statuses = @get('controller.statuses')
-    index = statuses.indexOf(status) + 1
-    width = (index / statuses.length) * 100
-    "width: #{width}%"
+    return 0 unless Ember.$('.deal-progress').length
+    start = Ember.$('.deal-progress').offset().left
+    finish = $(".#{@get('controller.status').dasherize()}").offset().left
+    width = finish - start
+    width = width + 20 if width > 0
+    "width: #{width}px"
   ).property('controller.status')

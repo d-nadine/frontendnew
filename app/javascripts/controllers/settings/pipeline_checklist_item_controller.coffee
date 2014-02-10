@@ -4,7 +4,7 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
   kinds: [
     "todo"
     "meeting"
-    "call"
+    # "call"
   ]
 
   isValid: ( ->

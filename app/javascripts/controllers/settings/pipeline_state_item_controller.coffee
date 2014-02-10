@@ -9,7 +9,7 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
       isEditing: true
       description: null
       weight: null
-      kind: 'call'
+      kind: 'todo'
       date: 1
 
   isFirstItem: (->

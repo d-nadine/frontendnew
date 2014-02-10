@@ -40,14 +40,13 @@
             <td class="deal-total">
               <i class="ss-standard ss-briefcase"></i> {{currency value}}
             </td>
-            <td class="deal-forecast">{{percentage}}%</td>
+            <td class="deal-forecast">{{dealPercentage}}%</td>
           </tr>
         </tbody>
       </table>
       <div {{bind-attr class=":clearfix :deal-progress dealProgressClass"}}>
-      {{dealProgress}}
-        {{#each statuses}}
-          <a href="#" class="deal-label" {{action "changeStatus" this}}>{{this}}</a>
+        {{#each statuses itemController="dealStatusItem"}}
+          <a href="#" {{bind-attr class="classStatus :deal-label"}} {{action "changeStatus" model}}>{{model}}</a>
         {{/each}}
         <div class="bar" {{bind-attr style="view.dealProgressBarWidth"}}></div>
       </div>

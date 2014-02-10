@@ -46,7 +46,7 @@ Radium.ChecklistMixin = Ember.Mixin.create
   kinds: Ember.A([
     "todo"
     "meeting"
-    "call"
+    # "call"
   ])
 
   dateMap: Ember.Map.create()

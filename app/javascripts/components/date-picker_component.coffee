@@ -130,7 +130,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       @$().datepicker().trigger 'hide'
 
     valueDidChange: ->
-      originalDate = @get('targetObject.date').toJSDate()
+      originalDate = @get('targetObject.date')?.toJSDate()
+      return unless originalDate
       today = Ember.DateTime.create().toJSDate()
       value = @get('value')?.toLowerCase()
       datePicker = @get('datePicker')

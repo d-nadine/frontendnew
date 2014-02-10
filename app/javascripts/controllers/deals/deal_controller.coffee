@@ -3,6 +3,10 @@ require 'forms/todo_form'
 require 'controllers/deals/checklist_mixin'
 require 'mixins/controllers/change_deal_status_mixin'
 
+Radium.DealStatusItemController = Radium.ObjectController.extend
+  classStatus: Ember.computed 'model', ->
+    @get('model').dasherize()
+
 Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, BufferedProxy,
   Radium.ChangeDealStatusMixin, Radium.AttachedFilesMixin,
 
@@ -19,6 +23,13 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   needs: ['accountSettings', 'users', 'contacts']
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
+
+  dealPercentage:( ->
+    status = @get('status')
+    statuses = @get('statuses')
+    index = statuses.indexOf(status)
+    Math.floor (index / statuses.length) * 100
+  ).property('status')
 
   isPublic: Ember.computed.not 'isUnpublished'
   statusDisabled: Ember.computed.not('isPublic')
