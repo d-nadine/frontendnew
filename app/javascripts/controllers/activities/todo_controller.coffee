@@ -1,8 +1,8 @@
-Radium.ActivitiesTodoController = Radium.ObjectController.extend
+Radium.ActivitiesTodoController = Radium.ActivityBaseController.extend
   isFinish: Ember.computed.is 'event', 'finish'
   isCreate: Ember.computed.is 'event', 'create'
 
-  todo: Ember.computed.alias 'reference'
+  # todo: Ember.computed.alias 'reference'
   assignedTo: Ember.computed.alias 'meta.user'
 
   icon: (->

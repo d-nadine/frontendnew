@@ -1,4 +1,4 @@
-Radium.ActivitiesSystemController = Ember.ObjectController.extend
+Radium.ActivitiesSystemController = Radium.ActivityBaseController.extend
   isLeadReceived: Ember.computed.equal 'event', 'lead_received'
 
   contact: Ember.computed.alias 'reference'

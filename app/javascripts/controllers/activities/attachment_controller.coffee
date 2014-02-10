@@ -1,4 +1,4 @@
-Radium.ActivitiesAttachmentController = Radium.ObjectController.extend
+Radium.ActivitiesAttachmentController = Radium.ActivityBaseController.extend
   attachment: Ember.computed.alias 'reference'
   attachedTo: Ember.computed.alias 'reference.reference'
 

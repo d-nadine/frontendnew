@@ -1,4 +1,4 @@
-Radium.ActivitiesPhoneCallController = Radium.ObjectController.extend
+Radium.ActivitiesPhoneCallController = Radium.ActivityBaseController.extend
   isFinish: Ember.computed.is 'event', 'finish'
   isMissedCall: Ember.computed.is 'event', 'miss'
 

@@ -1,4 +1,4 @@
-Radium.ActivitiesDealController = Radium.ObjectController.extend Radium.ActivityAssignMixin,
+Radium.ActivitiesDealController = Radium.ActivityBaseController.extend Radium.ActivityAssignMixin,
   isCreate: Ember.computed.is 'event', 'create'
   isDelete: Ember.computed.is 'event', 'delete'
   isAssign: Ember.computed.is 'event', 'assign'

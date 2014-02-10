@@ -1,4 +1,4 @@
-Radium.ActivitiesFollowController = Radium.ObjectController.extend
+Radium.ActivitiesFollowController = Radium.ActivityBaseController.extend
   follower: Ember.computed.alias('meta.follower')
   following: Ember.computed.alias('meta.following')
 

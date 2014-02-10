@@ -1,5 +1,5 @@
-// Version: v0.14-5-g9c74452
-// Last commit: 9c74452 (2014-02-01 13:51:08 +0000)
+// Version: v0.14-8-g9cd3ad8
+// Last commit: 9cd3ad8 (2014-02-10 13:06:51 +0000)
 
 
 (function() {
@@ -3567,7 +3567,10 @@ var RootState = {
       record.send('invokeLifecycleCallbacks');
     },
 
-    unloadRecord: Ember.K
+    unloadRecord: Ember.K,
+    reloadRecord: function(model) {
+      model.store.reloadRecord(model);
+    }
   },
 
   // A record enters this state when its data is populated.

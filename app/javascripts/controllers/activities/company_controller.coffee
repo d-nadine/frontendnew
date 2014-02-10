@@ -1,4 +1,4 @@
-Radium.ActivitiesCompanyController = Radium.ObjectController.extend
+Radium.ActivitiesCompanyController = Radium.ActivityBaseController.extend
   isCreate: Ember.computed.is 'event', 'create'
   isUpdate: Ember.computed.is 'event', 'update'
   isAssign: Ember.computed.is 'event', 'assign'

@@ -1,4 +1,4 @@
-Radium.ActivitiesDiscussionController = Radium.ObjectController.extend
+Radium.ActivitiesDiscussionController = Radium.ActivityBaseController.extend
   topic: Ember.computed.alias('reference.topic')
   poster: Ember.computed.alias('reference.user')
   participants: Ember.computed.alias('reference.users')

@@ -1,4 +1,4 @@
-Radium.ActivitiesInvitationController = Radium.ObjectController.extend
+Radium.ActivitiesInvitationController = Radium.ActivityBaseController.extend
   isCreate: Ember.computed.is 'event', 'create'
   isConfirm: Ember.computed.is 'event', 'confirm'
 

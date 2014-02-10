@@ -1,4 +1,4 @@
-Radium.ActivitiesMeetingController = Radium.ObjectController.extend
+Radium.ActivitiesMeetingController = Radium.ActivityBaseController.extend
   isReschedule: Ember.computed.is 'event', 'reschedule'
   isCancel: Ember.computed.is 'event', 'cancel'
   isCreate: Ember.computed.is 'event', 'create'

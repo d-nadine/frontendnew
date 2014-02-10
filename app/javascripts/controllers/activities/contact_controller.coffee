@@ -1,4 +1,4 @@
-Radium.ActivitiesContactController = Radium.ObjectController.extend Radium.ActivityAssignMixin,
+Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium.ActivityAssignMixin,
   isCreate: Ember.computed.is 'event', 'create'
   isUpdate: Ember.computed.is 'event', 'update'
   isAssign: Ember.computed.is 'event', 'assign'
