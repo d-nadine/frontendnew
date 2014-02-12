@@ -18,7 +18,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
       when 'update' then 'write'
       when 'assign' then 'transfer'
       when 'delete' then 'delete'
-      when 'status_change' then 'chart'
+      when 'status_change' then 'transfer'
       when 'primary_contact' then 'buildings'
       when 'new_email' then 'mail'
   ).property('event')

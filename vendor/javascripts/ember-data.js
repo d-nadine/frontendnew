@@ -1,5 +1,5 @@
-// Version: v0.14-8-g9cd3ad8
-// Last commit: 9cd3ad8 (2014-02-10 13:06:51 +0000)
+// Version: v0.14-9-g9cd6ba4
+// Last commit: 9cd6ba4 (2014-02-12 06:24:39 +0000)
 
 
 (function() {
@@ -3629,7 +3629,9 @@ var RootState = {
 
       materializingData: function(record) {
         record.transitionTo('loaded.materializing');
-      }
+      },
+
+      reloadRecord: Ember.K,
     },
 
     // If there are no local changes to a record, it remains

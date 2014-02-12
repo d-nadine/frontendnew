@@ -69,22 +69,52 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     }
   },
 
+  findHasMany: function(store, record, relationship, details) {
+    if(relationship.key !== 'activities') {
+      return;
+    }
+
+    var type = relationship.type,
+        root = this.rootForType(type),
+        url = this.url + details.url,
+        self = this;
+
+    this.ajax(url, "GET", {
+      data: {page: 1}
+    }).then(function(json) {
+      var data = record.get('data'),
+        ids = [],
+        references = json[relationship.key];
+
+      ids = references.map(function(ref){
+        return ref.id;
+      });
+
+      data[relationship.key] = ids;
+
+      record.set('data', data);
+
+      self.didFindMany(store, type, json);
+      record.suspendRelationshipObservers(function() {
+        record.hasManyDidChange(relationship.key);
+      });
+    }).then(null, DS.rejectionHandler);
+  },
+
   findQuery: function(store, type, query, recordArray) {
     var recordType = type.toString().split(".")[1];
     var queryMethod = "query" + recordType + "Records";
 
     if(this[queryMethod]) {
       return this[queryMethod].call(this, store, type, query, recordArray, this._super);
-    } else {
-      return this._super.apply(this, arguments);
     }
+
+    return this._super.apply(this, arguments);
   },
 
   queryUserRecords: function(store, type, query, recordArray, base){
     if(query.name === "me"){
       var adapter = this;
-
-      this.url;
 
       return this.ajax(this.url + '/users/me', "GET").then(function(json){
         var user = json.user;
