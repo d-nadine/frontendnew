@@ -69,7 +69,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     }
   },
 
-  findHasMany: function(store, record, relationship, details) {
+  findHasMany: function(store, record, relationship, details, page) {
     if(relationship.key !== 'activities') {
       return;
     }
@@ -80,7 +80,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         self = this;
 
     this.ajax(url, "GET", {
-      data: {page: 1}
+      data: {page: page || 1}
     }).then(function(json) {
       var data = record.get('data'),
         ids = [],
@@ -95,8 +95,10 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
       record.set('data', data);
 
       self.didFindMany(store, type, json);
+
       record.suspendRelationshipObservers(function() {
         record.hasManyDidChange(relationship.key);
+        record.get(relationship.key).set('metadata', store.typeMapFor(type).metadata)
       });
     }).then(null, DS.rejectionHandler);
   },
