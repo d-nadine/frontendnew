@@ -104,8 +104,15 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 
       record.suspendRelationshipObservers(function() {
         record.hasManyDidChange(relationship.key);
-        record.get(relationship.key).set('metadata', store.typeMapFor(type).metadata);
       });
+
+      var metadata = store.typeMapFor(type).metadata;
+
+      record.get(relationship.key).set('metadata', metadata);
+
+      if(options.callback){
+        options.callback(metadata);
+      }
     }).then(null, DS.rejectionHandler);
   },
 
