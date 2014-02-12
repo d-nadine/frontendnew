@@ -1,7 +1,22 @@
 Radium.ShowMoreComponent = Ember.Component.extend
   actions:
     showMore: ->
-      alert @get('model.metadata.page')
+      model = @get('model')
+      parent = model.get('owner')
+      store = parent.store
+      adapter = store.adapterForType(model.type)
+      metadata = @get('model.metadata')
+
+      relationship = Ember.get(parent.constructor, 'relationshipsByName').get(model.name)
+
+      url = "/#{parent.humanize().pluralize()}/#{parent.get('id')}/activities"
+
+      options = {
+        url: url,
+        page: metadata.page + 1
+      }
+
+      adapter.findHasMany(store, parent, relationship, options)
 
   pagingAvailable: ( ->
     metadata = @get('model.metadata')
