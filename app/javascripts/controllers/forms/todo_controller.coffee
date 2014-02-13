@@ -60,6 +60,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       model.set('isFinished', value)
 
       unless model.get('isNew')
+        model.one 'didUpdate', (result) =>
+          model.get('user')?.reload()
+
         @get('store').commit()
     else
       model.get('isFinished')

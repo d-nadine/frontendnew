@@ -12,6 +12,9 @@ Radium.CalendarRoute = Radium.Route.extend
       else
         task.set('isExpanded', false)
 
+      task.one 'didUpdate', (result) =>
+        task.get('user')?.reload()
+
       @get('store').commit()
 
       if onTask && task != @controllerFor('calendarTask').get('model')
