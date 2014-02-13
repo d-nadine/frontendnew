@@ -10,3 +10,15 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend
   timestamp: (->
     @get('sentAt') || @get('createdAt')
   ).property()
+
+  fromUser: Ember.computed 'model', ->
+    unless sender = @get('sender')
+      return
+
+    sender.constructor is Radium.User && sender != @get('currentUser')
+
+  hasLead: Ember.computed 'model', ->
+    unless sender = @get('sender')
+      return
+
+    sender.constructor is Radium.Contact && sender.get('isLead')

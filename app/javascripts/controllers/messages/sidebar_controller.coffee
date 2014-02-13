@@ -35,12 +35,12 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
       @set('allPagesLoaded', false)
       @set('isLoading', false)
 
+    toggleSearch: ->
+      @toggleProperty 'isSearchOpen' 
+
   modelQuery: ->
     queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: @get('page'))
 
     Radium.Email.find(queryParams)
 
   isSearchOpen: false
-
-  toggleSearch: ->
-    @toggleProperty 'isSearchOpen' 
