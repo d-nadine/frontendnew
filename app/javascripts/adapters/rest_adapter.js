@@ -77,10 +77,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
       return;
     }
 
-    if(!options || !options.url) {
-      return
-    }
-
     var type = relationship.type,
         root = this.rootForType(type),
         url = this.url + options.url,
