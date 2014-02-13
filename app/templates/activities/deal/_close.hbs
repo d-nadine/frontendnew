@@ -1,5 +1,7 @@
 <p>
   {{resource-link-to user}} closed "{{resource-link-to deal}}" worth {{currency value}}!
-  <br />
-  with: {{resource-link-to company}}
+  {{#if company}}
+    <br />
+    with: {{resource-link-to company}}
+  {{/if}}
 </p>

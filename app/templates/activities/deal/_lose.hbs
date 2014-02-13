@@ -1,5 +1,8 @@
 <p>
   {{resource-link-to user}} lost the "{{resource-link-to deal}}" worth {{currency value}}
   <br />
-  {{#if company}}{{resource-link-to company}}{{/if}}
+  {{#if company}}
+    <br />
+    with: {{resource-link-to company}}
+  {{/if}}
 </p>
