@@ -145,6 +145,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     @set 'meetingUsers.startsAt', @get('model.startsAt')
     @get('content.users').forEach (user) => @get('meetingUsers').pushObject user
 
+    if reference = @get('reference')
+      if (reference.constructor is Radium.Contact) && reference.get('primaryEmail.value')
+        @get('content.contacts').addObject(reference)
+
   isEditable:( ->
     return false if @get('isSaving')
     return false if @get('isSubmitted')

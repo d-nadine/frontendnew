@@ -1,5 +1,7 @@
 <p>
   "{{resource-link-to meeting}}" meeting added
-  <br />with: {{list participants}}
+  {{#if participants.length}}
+    <br />with: {{list participants}}
+  {{/if}}
   <br />by {{resource-link-to user}}
 </p>
