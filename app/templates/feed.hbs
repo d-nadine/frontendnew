@@ -1,5 +1,5 @@
 <h2>Activity</h2>
 <div class="feed">
-  {{render activities controller}}
-  {{show-more model=model}}
+  {{render activities visibleContent}}
+  {{show-more model=model parent="targetObject.parentController" shower="targetObject"}}
 </div>

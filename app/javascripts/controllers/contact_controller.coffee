@@ -30,6 +30,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   companies: Ember.computed.alias 'controllers.companies'
   # FIXME: How do we determine this?
   isEditable: true
+  loadedPages: [1]
 
   dealsTotal: ( ->
     @get('deals').reduce((preVal, item) ->

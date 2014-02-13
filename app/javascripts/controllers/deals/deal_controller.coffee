@@ -23,6 +23,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   needs: ['accountSettings', 'users', 'contacts']
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
+  loadedPages: [1]
 
   dealPercentage:( ->
     status = @get('status')

@@ -13,13 +13,12 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
   reset: ->
     state = if @get('id')
-              'loaded.updated.uncommitted'
+              'loaded.saved'
             else
               'loaded.created.uncommited'
 
     @get('transaction').rollback()
     @transitionTo(state)
-    @send 'becameClean'
 
   deleteRecord: ->
     if @get('currentState.stateName') != 'root.loaded.saved'

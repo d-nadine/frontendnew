@@ -10,6 +10,7 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'leadStatuses', 'pipelineOpendeals']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  loadedPages: [1]
 
   # FIXME: How do we determine this?
   isEditable: true
