@@ -1,4 +1,7 @@
-var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach;
+var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach,
+  map = Ember.EnumerableUtils.map;
+
+
 
 Radium.RESTSerializer = DS.RESTSerializer.extend({
   init: function(){
@@ -93,17 +96,34 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
       var raw = data[relationship.key];
 
       if(Ember.isArray(raw)) {
-        data[relationship.key] = raw.concat(ids);
+        data[relationship.key] = raw.concat(ids).uniq();
       } else {
         data[relationship.key] = ids;
       }
+
+      raw = data[relationship.key];
 
       record.set('data', data);
 
       self.didFindMany(store, type, json);
 
       record.suspendRelationshipObservers(function() {
-        record.hasManyDidChange(relationship.key);
+        var cachedValue = record.cacheFor(relationship.key);
+
+        var references = map(raw, function(id) {
+          if (typeof id === 'object') {
+            if( id.clientId ) {
+              // if it was already a reference, return the reference
+              return id;
+            } else {
+              // <id, type> tuple for a polymorphic association.
+              return store.referenceForId(id.type, id.id);
+            }
+          }
+          return store.referenceForId(type, id);
+        });
+
+        set(cachedValue, 'content', Ember.A(references));
       });
 
       var metadata = store.typeMapFor(type).metadata;
