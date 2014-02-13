@@ -44,6 +44,9 @@ Radium.UserRoute = Radium.Route.extend
 
     controller.set('model', model)
 
+  deactivate: ->
+    @controller.get('model').reload()
+
 Radium.UserFormRoute = Radium.Route.extend
   model: (params) ->
     params.form

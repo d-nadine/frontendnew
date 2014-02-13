@@ -22,6 +22,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
         if @get('isNew')
           @get('model').commit().then(( (confirmation) =>
+            if @get('controllers.application.currentPath') != 'user.index'
+              @get('user')?.reload()
+
             @send('flashSuccess', confirmation) if confirmation
           ),
           ((error) =>
@@ -61,7 +64,8 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
       unless model.get('isNew')
         model.one 'didUpdate', (result) =>
-          model.get('user')?.reload()
+          if @get('controllers.application.currentPath') != 'user.index'
+            @get('user')?.reload()
 
         @get('store').commit()
     else
