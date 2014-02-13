@@ -77,6 +77,8 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
       return;
     }
 
+    options = options || {url: '/' + record.humanize().pluralize() + '/' + record.get('id') + '/activities'};
+
     var type = relationship.type,
         root = this.rootForType(type),
         url = this.url + options.url,

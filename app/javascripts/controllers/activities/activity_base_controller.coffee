@@ -16,9 +16,9 @@ Radium.ActivityBaseController = Radium.ObjectController.extend
 
     Ember.run.later =>
       if reference.get('currentState.stateName') == 'root.error'
-        # model.deleteRecord()
+        model.deleteRecord()
 
-        # store.commit()
+        store.commit()
       else
         reference.reload()
     , rand
