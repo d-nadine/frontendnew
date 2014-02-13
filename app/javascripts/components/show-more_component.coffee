@@ -21,26 +21,33 @@ Radium.ShowMoreComponent = Ember.Component.extend
 
       url = "/#{owner.humanize().pluralize()}/#{owner.get('id')}/activities"
 
-      set = @set
+      self = this
 
       options = {
         url: url
         page: metadata.page + 1
-        callback: (metadata) ->
+        callback: (metadata) =>
           parent.get('loadedPages').push(currentPage)
           model.set 'isLoading', false
           shower.send 'showMore'
           if metadata.isLastPage || metadata.page >= metadata.totalPages
-            set('isVisible', false)
+            self.set('isVisible', false)
       }
 
       model.set 'isLoading', true
 
       adapter.findHasMany(store, owner, relationship, options)
 
+  isVisible: false
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    if metadata = @get('model.metadata')
+      @set('isVisible', true) unless metadata.isLastPage
+
   currentPage: 1
 
   pagingAvailable: ( ->
     metadata = @get('model.metadata')
-    @set('isVisible', false) if metadata.isLastPage
+    @set('isVisible', true) unless metadata.isLastPage
   ).observes('model.metadata.isLastPage')
