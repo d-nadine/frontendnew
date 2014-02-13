@@ -43,11 +43,11 @@ Radium.ShowMoreComponent = Ember.Component.extend
   didInsertElement: ->
     @_super.apply this, arguments
     if metadata = @get('model.metadata')
-      @set('isVisible', true) unless metadata.isLastPage
+      @set('isVisible', metadata.totalPages > 1)
 
   currentPage: 1
 
   pagingAvailable: ( ->
     metadata = @get('model.metadata')
-    @set('isVisible', true) unless metadata.isLastPage
+    @set('isVisible', metadata.totalPages > 1)
   ).observes('model.metadata.isLastPage')
