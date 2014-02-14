@@ -102,9 +102,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#" {{action scheduleDelivery this 'tomorrow'}}>Send Tomorrow</a></li>
-              <li><a href="#" {{action scheduleDelivery this 'this_week'}}>Send Next Week</a></li>
-              <li>{{date-timepicker submitDate="scheduleDelivery" model=this}}</li>
+              <li><a href="#" {{action scheduleDelivery model.model 'tomorrow'}}>Send Tomorrow</a></li>
+              <li>{{date-timepicker submitDate="scheduleDelivery" model=model.model}}</li>
             </ul>
           </div>
         </div> 

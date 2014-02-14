@@ -30,8 +30,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
       if typeof date is "string"
         if date == 'tomorrow'
           date = Ember.DateTime.create().advance(day: 1)
-        else
-          date = Ember.DateTime.create().atEndOfWeek()
 
       form.set 'sendTime', date
       @send 'saveAsDraft', form, 'scheduled'
