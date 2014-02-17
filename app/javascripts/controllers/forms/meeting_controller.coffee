@@ -111,11 +111,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         @discardBufferedChanges()
 
-        Ember.run.next =>
-          @get('controllers.calendarSidebar').notifyPropertyChange('items')
-
-        if @get('parentController') instanceof Radium.CalendarTaskController
-          @set('isExpanded', true)
+        if parentController = @get('parentController')
+          if parentController instanceof Radium.CalendarTaskController
+            parentController.get('controllers.calendarSidebar').notifyPropertyChange('items')
+            @set('isExpanded', true)
 
         return unless @get('isNew')
 

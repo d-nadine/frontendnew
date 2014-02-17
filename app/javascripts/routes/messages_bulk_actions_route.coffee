@@ -32,7 +32,8 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
         item.one 'didDelete', (record) =>
           if record.get('id') == lastRecord.get('id')
             @send 'flashSuccess', 'Emails deleted'
-            @transitionTo 'messages', controller.get('folder')
+            Ember.run.next =>
+              @transitionTo 'messages.index', controller.get('folder')
 
       @get('store').commit()
 
