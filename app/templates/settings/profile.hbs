@@ -2,10 +2,10 @@
   {{#with controller.currentUser}}
   <fieldset>
     <div class="pull-right">
-      <a href="#" class="btn btn-small" {{action toggleEdit}}>Edit</a>
+      <a href="#" class="btn btn-small" {{action "toggleEdit"}}>Edit</a>
     </div>
     <div class="user-edit-avatar">
-      <button class="btn btn-mini user-change-avatar" {{action toggleAvatar}}>
+      <button class="btn btn-mini user-change-avatar" {{action "toggleAvatar"}}>
         <i class="ss-standard ss-write"></i>
       </button>
       {{#if controller.isEditingAvatar}}

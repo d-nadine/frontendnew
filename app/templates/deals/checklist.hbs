@@ -14,7 +14,7 @@
             <td {{bind-attr class="isFinished:is-finished:muted"}}>
               {{weight}}%
               {{#if isAdditional}}
-                <a href="#" class="additional" {{action removeAdditionalItem this bubbles="false"}}>
+                <a href="#" class="additional" {{action "removeAdditionalItem" this bubbles="false"}}>
                   delete
                 </a>
               {{/if}}
@@ -30,7 +30,7 @@
               </button>
               <ul class="dropdown-menu">
                 {{#each kind in controller.kinds}}
-                  <li><a href="#" {{action setKind kind}}>{{kind}}</a></li>
+                  <li><a href="#" {{action "setKind" kind}}>{{kind}}</a></li>
                 {{/each}}
               </ul>
             </div>
@@ -51,16 +51,16 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#" {{action setItemDate 0}}>None</a></li>
-                <li><a href="#" {{action setItemDate 1}}>1 day</a></li>
-                <li><a href="#" {{action setItemDate 2}}>2 days</a></li>
-                <li><a href="#" {{action setItemDate 7}}>1 week</a></li>
+                <li><a href="#" {{action "setItemDate" 0}}>None</a></li>
+                <li><a href="#" {{action "setItemDate" 1}}>1 day</a></li>
+                <li><a href="#" {{action "setItemDate" 2}}>2 days</a></li>
+                <li><a href="#" {{action "setItemDate" 7}}>1 week</a></li>
               </ul>
             </div>
           </td>
           <td>
             {{#if view.showAddButton }}
-            <a href="#" {{action createNewItem target="view"}} class="btn">
+            <a href="#" {{action "createNewItem" target="view"}} class="btn">
               <i class="ss-standard ss-plus"></i>
             </a>
             {{/if}}

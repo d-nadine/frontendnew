@@ -42,7 +42,7 @@
     <div class="sidebar-panel-content">
       {{view Radium.ProgressBar percentageBinding="percentage"}}
       <div class="checklist-plus">
-        <a href="#checklistModal" {{action showChecklist this}} class="btn btn-success">
+        <a href="#checklistModal" {{action "showChecklist" this}} class="btn btn-success">
           <i class="ss-standard ss-plus"></i>
         </a>
       </div>
@@ -58,14 +58,14 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-warning btn-block" {{action togglePublished}} {{bind-attr disabled=isSaving}}>
+      <button class="btn btn-warning btn-block" {{action "togglePublished"}} {{bind-attr disabled=isSaving}}>
         {{#if isPublic}}
           Unpublish
         {{else}}
           Publish
         {{/if}}
       </button>
-      <button class="btn btn-danger btn-block" {{action confirmDeletion}} {{bind-attr disabled=isSaving}}>Delete</button>
+      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}} {{bind-attr disabled=isSaving}}>Delete</button>
     </div>
   </div>
 </form>

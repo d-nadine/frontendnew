@@ -4,7 +4,7 @@
     {{#if isEditing}}
       {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if phone}}
           <a href="tel:{{unbound phone}}">{{phone}}</a>
       {{else}}

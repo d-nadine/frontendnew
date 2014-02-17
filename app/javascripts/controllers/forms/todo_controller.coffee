@@ -35,8 +35,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           @get('store').commit()
 
         Ember.run.next =>
-          if @get('parentController.parentController') instanceof Radium.CalendarIndexController
-            @get('controllers.calendarSidebar').notifyPropertyChange('items')
+          @get('controllers.calendarSidebar').notifyPropertyChange('items') if @get('controllers.calendarSidebar')
 
         if @get('parentController') instanceof Radium.CalendarTaskController
           @set('isExpanded', true)

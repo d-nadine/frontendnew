@@ -1,6 +1,6 @@
 <ul class="unstyled folders-list">
   <li class="folders-list-title">
-    <button class="btn btn-link btn-close pull-right" {{action toggleFolders}}>
+    <button class="btn btn-link btn-close pull-right" {{action "toggleFolders"}}>
       <i class="ss-standard ss-delete"></i>
     </button>
     <p>
@@ -9,7 +9,7 @@
   </li>
   {{#each folders itemController="messagesFolder"}}
     <li class="folders-list-item">
-      <a {{bind-attr class="isSelected"}} {{action selectFolder name href=true }}>
+      <a {{bind-attr class="isSelected"}} {{action "selectFolder" name href=true }}>
         <i class="ss-standard ss-{{unbound icon}}"></i>
         <span class="folder-label">{{title}}</span>
       </a>

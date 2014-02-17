@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+  <button type="button" class="close" {{action "close"}} aria-hidden="true">&times;</button>
   <h3>Are You Sure Want to Delete {{length}} Item(s)?</h3>
 </div>
 
@@ -14,11 +14,11 @@
     <li>Anything in the feed</li>
   </ul>
 
-  <button class="btn btn-large btn-danger btn-block" {{action delete}}>
+  <button class="btn btn-large btn-danger btn-block" {{action "delete"}}>
     I understand the consequences, delete {{length}} item(s)
   </button>
 </div>
 
 <div class="modal-footer">
-  <a href="#" class="btn" {{action close}}>Cancel</a>
+  <a href="#" class="btn" {{action "close"}}>Cancel</a>
 </div>

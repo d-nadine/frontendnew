@@ -4,7 +4,7 @@
     {{#if isEditing}}
       {{render 'multiple/phone_number' form.phoneNumbers}}
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if primaryPhone.value}}
         <a href="tel:{{unbound primaryPhone.value}}">
           <strong>{{primaryPhone.name}}</strong> {{primaryPhone.value}}

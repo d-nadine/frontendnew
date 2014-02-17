@@ -1,7 +1,7 @@
 {{#each activity in controller}}
   {{#if activity.isLoaded}}
     {{#unless activity.reference.isDeleted}}
-      {{renderActivity activity}}
+      {{renderActivity "activity"}}
     {{/unless}}
   {{else}}
     {{partial 'is_loading'}}

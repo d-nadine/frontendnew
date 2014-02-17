@@ -41,7 +41,7 @@
                   </div>
                 </div>
               {{else}}
-                <label class="control-label blue money">{{currency salesGoal}} <i class="ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i></label>
+                <label class="control-label blue money">{{currency salesGoal}} <i class="ss-write pull-right" {{action "toggleEditor" target="view" bubbles=false}}></i></label>
               {{/if}}
             {{/view}}
           </div>
@@ -133,7 +133,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       {{#unless userIsCurrentUser}}
-        <button class="btn btn-danger btn-large btn-block" {{action confirmDeletion}}>Delete</button>
+        <button class="btn btn-danger btn-large btn-block" {{action "confirmDeletion"}}>Delete</button>
       {{/unless}}
       {{#if userIsCurrentUser}}
         <br>

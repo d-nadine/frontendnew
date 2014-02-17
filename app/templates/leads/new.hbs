@@ -62,10 +62,10 @@
                 {{#link-to "deals.fromContact" this class="btn btn-success"}}Yes{{/link-to}}
               {{else}}
                 <p><span>{{#link-to "contact" content}}{{displayName}}{{/link-to}}{{#if company}}, {{#link-to company company}}{{company.name}}{{/link-to}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
-                <a href="#" class="btn" {{action showExistingDetails bubbles=false target="view"}}>
+                <a href="#" class="btn" {{action "showExistingDetails" bubbles=false target="view"}}>
                   <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
                 </a>
-                <a href="#" id="makeLead" {{action makeLead  bubbles=false}} class="btn btn-success">Yes</a>
+                <a href="#" id="makeLead" {{action "makeLead"  bubbles=false}} class="btn btn-success">Yes</a>
                 Or click {{#link-to "contact" content}}here{{/link-to}} to update their details.
               {{/if}}
             {{/unless}}
@@ -112,14 +112,14 @@
               </div>
             </div>
             <div class="control-group">
-              <a href="#" class="btn showdetails-link" {{action toggleDetail target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
+              <a href="#" class="btn showdetails-link" {{action "toggleDetail" target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
             </div>
             <div class="address-section">
               {{render 'multiple/address' addresses}}
             </div>
             {{partial 'validation_error_message'}}
             <div class="button-row">
-              <a href="#" {{action submit target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+              <a href="#" {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
                 {{#if isSaving}}
                   <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
                 {{else}}
@@ -132,7 +132,7 @@
         </div>
       <div class="modal hide fade">
         <div class="modal-header">
-          <button type="button" {{action cancelSubmit target="view" bubbles="false"}} class="close">×</button>
+          <button type="button" {{action "cancelSubmit" target="view" bubbles="false"}} class="close">×</button>
           <h2>Add {{view.missingDetail}}?</h2>
         </div>
         <div class="modal-body">
@@ -141,8 +141,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <a href="#" {{action cancelSubmit target="view" bubbles="false"}} class="btn">Cancel</a>
-          <a href="#" {{action submit bubbles="false"}} class="btn btn-primary">Proceed</a>
+          <a href="#" {{action "cancelSubmit" target="view" bubbles="false"}} class="btn">Cancel</a>
+          <a href="#" {{action "submit" bubbles="false"}} class="btn btn-primary">Proceed</a>
         </div>
       </div>
     </form>

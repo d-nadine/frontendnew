@@ -60,7 +60,7 @@ Radium.Combobox = Radium.View.extend
     {{view view.textField}}
 
     {{#unless view.disabled}}
-      <div {{bind-attr class="view.open:open :btn-group :controlbox-dropdown-group"}} {{action toggleDropdown target=view bubbles=false}}>
+      <div {{bind-attr class="view.open:open :btn-group :controlbox-dropdown-group"}} {{action "toggleDropdown" target=view bubbles=false}}>
         <button class="btn controlbox-dropdown dropdown-toggle" tabindex="-1" type="button">
           <i class="ss-standard ss-dropdown"></i>
         </button>
@@ -84,7 +84,7 @@ Radium.Combobox = Radium.View.extend
   """
 
   template: Ember.Handlebars.compile """
-    <a {{action selectObject this target=view href=true bubbles=false}}>{{name}}</a>
+    <a {{action "selectObject" this target=view href=true bubbles=false}}>{{name}}</a>
   """
 
   setValue: (object) ->

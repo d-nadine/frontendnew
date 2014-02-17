@@ -1,6 +1,6 @@
 <ul class="unstyled thumbnail-list">
   {{#each users}}
-    <li {{action selectUser this}}>
+    <li {{action "selectUser" this}}>
       {{avatar this style="large" class="img-polaroid"}}
       <br/>
       {{label name}}

@@ -1,5 +1,5 @@
 <form {{bind-attr class="isExpandable isEditable isNew isExpanded justAdded :form :form-inline :call-form"}}>
-  <div {{bind-attr class="isFinished view.isFocused :primary"}} {{action expand}}>
+  <div {{bind-attr class="isFinished view.isFocused :primary"}} {{action "expand"}}>
     {{view view.checkbox classNames="pull-left"}}
 
     {{#if isExpanded}}
@@ -22,7 +22,7 @@
     {{!/if}}
 
     {{#if showOptions}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded bubbles=false}}>
+      <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
         {{#if isExpanded}}
           Hide
         {{else}}
@@ -59,9 +59,9 @@
           {{/if}}
           <div class="pull-right">
             {{#if showAddAction}}
-              <button class="btn btn-link" {{action deleteTask model}}>Delete call</button>
+              <button class="btn btn-link" {{action "deleteTask" model}}>Delete call</button>
             {{/if}}
-            <button class="btn btn-main btn-primary" type="submit" {{action submit}}>Save</button>
+            <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
           </div>
         </div>
       {{/if}}

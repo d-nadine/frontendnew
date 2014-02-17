@@ -30,7 +30,7 @@
           <i class="ss-standard ss-plus"></i> Contact
         {{/link-to}}
       {{else}}
-        <a href="#" {{action showAddCompany target="view"}} class="btn btn-main btn-primary">
+        <a href="#" {{action "showAddCompany" target="view"}} class="btn btn-main btn-primary">
           <i class="ss-standard ss-plus"></i> Company
         </a> 
         {{/unless}}
@@ -41,7 +41,7 @@
         </button>
         <ul class="dropdown-menu">
           {{#each filters}}
-            <li><a href="#" {{action additionalFilter name}}>{{text}}</a></li>
+            <li><a href="#" {{action "additionalFilter" name}}>{{text}}</a></li>
           {{/each}}
         </ul>
       </div>
@@ -56,13 +56,13 @@
           <ul class="dropdown-menu">
             {{#if hasContacts}}
               <li>
-                <a href="#" {{action showForm 'assign'}}>Assign</a>
+                <a href="#" {{action "showForm" 'assign'}}>Assign</a>
               </li>
             {{/if}}
             {{#unless isPrivateContacts}}
               {{#unless isTags}}
                 <li>
-                  <a href="#" {{action showForm 'todo'}}>Assign A Todo</a>
+                  <a href="#" {{action "showForm" 'todo'}}>Assign A Todo</a>
                 </li>
                 <!--
                 <li>
@@ -71,18 +71,18 @@
                 -->
                 {{#if hasContacts}}
                   <li>
-                    <a href="#" {{action showEmail}}>Email</a>
+                    <a href="#" {{action "showEmail"}}>Email</a>
                   </li>
                 {{/if}}
                 {{#if assignableContent}}
                   <li>
-                    <a href="#" {{action showForm 'addTags'}}>Add Tags</a>
+                    <a href="#" {{action "showForm" 'addTags'}}>Add Tags</a>
                   </li>
                 {{/if}}
               {{/unless}}
             {{/unless}}
             <li>
-              <a href="#" {{action confirmDeletion}}>Delete</a>
+              <a href="#" {{action "confirmDeletion"}}>Delete</a>
             </li>
           </ul>
         {{/if}}
@@ -118,7 +118,7 @@
 
     {{#if showAddTags}}
       {{view view.tags viewName="tagAutocomplete"}}
-      <button id="add-tags" class="btn" {{action addTags}}>Add Tags</button>
+      <button id="add-tags" class="btn" {{action "addTags"}}>Add Tags</button>
     {{/if}}
   </div>
 {{/if}}
@@ -131,7 +131,7 @@
     {{#if visibleContent.length}}
       <div class="search-results-header row-fluid">
         <div class="span2 checkers">
-          <a href="#" {{action checkAll}}>
+          <a href="#" {{action "checkAll"}}>
             <span class="hidden-tablet">Select </span>
             {{#if checkedContent}}
               None
@@ -140,7 +140,7 @@
             {{/if}}
           </a>
           <div class="pull-right">
-            <a href="#" {{action toggleThumbnails}}>
+            <a href="#" {{action "toggleThumbnails"}}>
               {{#if isThumbnailsVisible}}
                 Hide
               {{else}}

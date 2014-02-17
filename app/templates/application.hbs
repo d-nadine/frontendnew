@@ -1,6 +1,6 @@
 {{view Radium.NavbarView}}
 <div id="drawer-buttons">
-  <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action toggleNotifications}} href="#">
+  <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action "toggleNotifications"}} href="#">
     <i class="ss-standard ss-clock"></i>
     {{#if notificationCount}}
       {{badge notificationCount style=important}}

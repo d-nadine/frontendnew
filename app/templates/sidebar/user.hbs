@@ -15,7 +15,7 @@
       {{/link-to}}
       {{view view.userPicker class="field"}}
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target="view" bubbles=false}}></i>
       {{#link-to "user" user}}
         {{#if isLoaded}}
           {{avatar this class="img-polaroid"}}

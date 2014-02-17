@@ -50,8 +50,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
       </div>
       <div class="cancel-meeting-footer">
         <div class="pull-right">
-          <button {{action cancel target="view" bubbles=false}} class="btn">No</button>
-          <button {{action cancelMeeting target="view" bubbles=false}} class="btn btn-primary">YES, CANCEL</button>
+          <button {{action "cancel" target="view" bubbles=false}} class="btn">No</button>
+          <button {{action "cancelMeeting" target="view" bubbles=false}} class="btn btn-primary">YES, CANCEL</button>
         </div>
         <div>Notifications will be sent to attendees</div>
       </div>

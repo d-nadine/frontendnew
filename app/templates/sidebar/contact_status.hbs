@@ -2,7 +2,7 @@
   <div>{{view view.statusSelect}}</div>
 {{else}}
   <div class="pull-right">
-    <i class="ss-standard ss-write" {{action toggleEditor target=view bubbles=false}}></i>
+    <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>
   </div>
   <p>{{view.statusDescription}}</p>
 {{/if}}

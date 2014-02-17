@@ -3,20 +3,20 @@
   <form class="form-search pipeline-search">
     {{view view.companyPicker}}
   </form>
-  <a href="#" {{action createCompany}}  {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
+  <a href="#" {{action "createCompany"}}  {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
     {{#if isSaving}}
       <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
     {{else}}
       <i class="ss-standard ss-plus"></i> Submit
     {{/if}}
   </a>
-  <a href="#" {{action hideNewCompany target="view"}} {{bind-attr disabled=isDisabled}} class="btn btn-danger btn-main">
+  <a href="#" {{action "hideNewCompany" target="view"}} {{bind-attr disabled=isDisabled}} class="btn btn-danger btn-main">
     Cancel
   </a>
 </div>
 <div class="existing-company hide">
   {{#if company}}
     {{resource-link-to company}} already exists, click {{#resource-link-to company}}here{{/resource-link-to}} to update their details.<br/>
-    Click <a {{action resetCompany target="view"}} href="#">here</a> to add a new company.
+    Click <a {{action "resetCompany" target="view"}} href="#">here</a> to add a new company.
   {{/if}}
 </div>

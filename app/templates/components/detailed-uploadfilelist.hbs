@@ -30,7 +30,7 @@
         {{/if}}
       </td>
       <td>
-        <button type="button" {{action removeFile this}} class="close">
+        <button type="button" {{action "removeFile" this}} class="close">
           {{#unless isUploading}}
             <i class="ss-standard ss-delete"></i>
           {{else}}

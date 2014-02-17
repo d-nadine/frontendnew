@@ -1,5 +1,5 @@
 {{#if isScheduled }}
   <div class="alert alert-success">
-    Email scheduled for delivery at {{sendTimeFormatted}}.  Click <a href="#" {{action cancelDelivery this}}>this</a> to cancel.
+    Email scheduled for delivery at {{sendTimeFormatted}}.  Click <a href="#" {{action "cancelDelivery" this}}>this</a> to cancel.
   </div>
 {{/if}}

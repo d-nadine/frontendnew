@@ -25,10 +25,10 @@
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li><a href="#" {{action setDate 0}}>None</a></li>
-      <li><a href="#" {{action setDate 1}}>1 day</a></li>
-      <li><a href="#" {{action setDate 2}}>2 days</a></li>
-      <li><a href="#" {{action setDate 7}}>1 week</a></li>
+      <li><a href="#" {{action "setDate" 0}}>None</a></li>
+      <li><a href="#" {{action "setDate" 1}}>1 day</a></li>
+      <li><a href="#" {{action "setDate" 2}}>2 days</a></li>
+      <li><a href="#" {{action "setDate" 7}}>1 week</a></li>
     </ul>
   </div>
 
@@ -50,7 +50,7 @@
       </button>
     {{/if}}
   {{else}}
-    <button class="btn btn-danger" {{action deleteChecklistItem this}}>
+    <button class="btn btn-danger" {{action "deleteChecklistItem" this}}>
       <i class="ss-symbolicons-block ss-trash"></i>
     </button>
 

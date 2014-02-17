@@ -68,13 +68,13 @@ Radium.MeetingAttendeesView = Radium.View.extend
             <div class="invitee-actions">
               {{#if isInvited}}
               <div class="btn-group">
-                <a href="#" class="btn btn-mini btn-danger" {{action cancelInvitation this}}>Remove Attendee</a></td>
+                <a href="#" class="btn btn-mini btn-danger" {{action "cancelInvitation" this}}>Remove Attendee</a></td>
               </div>
               <div class="btn-group">
-                <a href="#" class="btn btn-mini btn-success" {{action resendInvite this}}>Resend Invite</a></td>
+                <a href="#" class="btn btn-mini btn-success" {{action "resendInvite" this}}>Resend Invite</a></td>
               </div>
               {{else}}
-                <a href="#" class="btn btn-mini" {{action removeSelection this}}>
+                <a href="#" class="btn btn-mini" {{action "removeSelection" this}}>
                   <i class="ss-symbolicons-block ss-trash"></i>
                 </a>
               {{/if}}

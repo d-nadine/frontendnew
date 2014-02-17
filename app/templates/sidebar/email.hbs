@@ -4,7 +4,7 @@
     {{#if isEditing}}
       {{input type="email" value=form.email class="field"}}
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if email}}
         {{#link-to "emails.mailTo" "inbox" this}} {{email}}{{/link-to}}
       {{else}}

@@ -1,6 +1,6 @@
 <div class="modal fade">
   <div class="modal-header">
-    <button type="button" class="close" {{action close}} aria-hidden="true">&times;</button>
+    <button type="button" class="close" {{action "close"}} aria-hidden="true">&times;</button>
     <h3>Are You Sure?</h3>
   </div>
 
@@ -11,7 +11,7 @@
     {{#if hasDeals}}
       {{#if otherStates.length}}
         <p>The pipeline state <strong>{{name}}</strong> has deals associated with it, please choose a new pipline state for these deals..</p>
-        <p>{{view Ember.Select contentBinding="otherStates" valueBinding="selectedOtherState"}} <button {{action transferDeals}} {{bind-attr disabled=isUpdatingDeals}} class="btn btn-danger">Change State</button>
+        <p>{{view Ember.Select contentBinding="otherStates" valueBinding="selectedOtherState"}} <button {{action "transferDeals"}} {{bind-attr disabled=isUpdatingDeals}} class="btn btn-danger">Change State</button>
       {{else}}
         You need to create a new pipeline state to transfer the deals.  This is the only current state.</p>
       {{/if}}
@@ -19,11 +19,11 @@
     {{#if otherStates.length}}
       <p>This action cannot be undone! Deleting <strong>{{name}}</strong> will be permanent.</p>
 
-      <button class="btn btn-large btn-danger btn-block" {{action deleteRecord this}} {{bind-attr disabled=hasDeals}}>I understand the consequences, delete this pipeline state.</button>
+      <button class="btn btn-large btn-danger btn-block" {{action "deleteRecord" this}} {{bind-attr disabled=hasDeals}}>I understand the consequences, delete this pipeline state.</button>
     {{/if}}
   </div>
 
   <div class="modal-footer">
-    <a href="#" class="btn" {{action close}}>Cancel</a>
+    <a href="#" class="btn" {{action "close"}}>Cancel</a>
   </div>
 </div>

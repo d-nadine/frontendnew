@@ -48,13 +48,13 @@
             </button>
             <ul class="dropdown-menu">
               {{#each workflowGroups}}
-                <li><a {{action changeStatus name}} href="#">{{name}}</a></li>
+                <li><a {{action "changeStatus" name}} href="#">{{name}}</a></li>
               {{/each}}
             </ul>
           </div>
         </td>
         <td class="forecast">
-          <a href="#" {{action showChecklist this bubbles=false}}>{{percentage}}%</a>
+          <a href="#" {{action "showChecklist" this bubbles=false}}>{{percentage}}%</a>
         </td>
         <td class="value">{{currency value}}</td>
         <td class="delete text-right">

@@ -5,7 +5,7 @@
     </div>
   {{/if}}
   {{input value=newUserEmail class="input-xlarge" placeholder="Invite a member by email to use Radium" action="inviteUser"}}
-  <button class="btn btn-success" {{bind-attr disabled="controller.isDisabled"}} {{action inviteuser}}>
+  <button class="btn btn-success" {{bind-attr disabled="controller.isDisabled"}} {{action "inviteuser"}}>
     Invite
   </button>
 </form>

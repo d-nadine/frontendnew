@@ -45,7 +45,7 @@
             {{view Radium.ProgressBar percentageBinding="percentage"}}
             <div {{bind-attr class=":total total:white"}}>{{total}}%</div>
             <div class="checklist-plus">
-              <a href="#checklistModal" class="btn" {{action toggleChecklist target="view" bubbles=false}}>
+              <a href="#checklistModal" class="btn" {{action "toggleChecklist" target="view" bubbles=false}}>
                 {{#if view.showChecklistItems}}
                   <i class="ss-standard ss-navigateup"></i>
                 {{else}}
@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class="detail-plus">
-        <a href="#checklistModal" class="btn" {{action toggleDetail target="view" bubbles=false}}>
+        <a href="#checklistModal" class="btn" {{action "toggleDetail" target="view" bubbles=false}}>
           {{#if view.showDetail}}
             <i class="ss-standard ss-navigateup"></i>
           {{else}}
@@ -97,8 +97,8 @@
       <hr/>
       {{partial 'validation_error_message'}}
       <div class="pull-right control-group actions">
-        <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action saveAsDraft}}>Save as draft</button>
-        <button class="btn btn-success btn-large publish"  {{bind-attr disabled="isSaving"}} {{action publish}}>
+        <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action "saveAsDraft"}}>Save as draft</button>
+        <button class="btn btn-success btn-large publish"  {{bind-attr disabled="isSaving"}} {{action "publish"}}>
           {{#if isSaving}}
             <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
           {{else}}

@@ -23,5 +23,5 @@ Radium.LocationPicker = Radium.Combobox.extend
   footerView: Radium.View.extend
     classNames: ["map-link"]
     template: Ember.Handlebars.compile """
-      <a {{action openMap}} href="#">Map</a>
+      <a {{action "openMap"}} href="#">Map</a>
     """

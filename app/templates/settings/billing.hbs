@@ -39,7 +39,7 @@
           <li class="cta-button">
             <button
               {{bind-attr class=":btn isCurrent::btn-success" disabled="notSelectable"}}
-              {{action updateSubscription name}}>
+              {{action "updateSubscription" name}}>
               {{#if isCurrent}}
                 Your plan
               {{else}}

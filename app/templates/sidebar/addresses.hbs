@@ -6,7 +6,7 @@
         {{render 'multiple/address' form.addresses}}
       </div>
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if primaryAddress}}
         {{partial 'shared/address'}}
       {{else}}

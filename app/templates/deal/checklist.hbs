@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <button type="button"  {{action cancelChecklistSave this bubbles="false"}} data-dismiss="modal" class="close">×</button>
+  <button type="button"  {{action "cancelChecklistSave" this bubbles="false"}} data-dismiss="modal" class="close">×</button>
   <h2>Checklist</h2>
 </div>
 <div class="modal-body">
   {{view Radium.ChecklistView}}
 </div>
 <div class="modal-footer">
-  <a href="#"  {{action cancelChecklistSave this bubbles="false"}} class="btn" data-dismiss="modal">Cancel</a>
-  <a href="#" {{action saveChecklist this bubbles="false"}} data-dismiss="modal" class="btn btn-primary">Done</a>
+  <a href="#"  {{action "cancelChecklistSave" this bubbles="false"}} class="btn" data-dismiss="modal">Cancel</a>
+  <a href="#" {{action "saveChecklist" this bubbles="false"}} data-dismiss="modal" class="btn btn-primary">Done</a>
 </div>

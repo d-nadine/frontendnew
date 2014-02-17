@@ -1,4 +1,4 @@
-<div {{bind-attr class=":message-item-content isSelectable isDraft :content"}} {{action selectItem this}}>
+<div {{bind-attr class=":message-item-content isSelectable isDraft :content"}} {{action "selectItem" this}}>
   {{#unless isRead}}
     <span class="btn-read-status btn-unread"></span>
   {{/unless}}

@@ -1,7 +1,7 @@
 <div class="block email-card message-card">
   <div class="email-header">
     <div class="pull-right email-header-actions">
-      <button class="btn btn-link muted" {{action toggleMeta}}>
+      <button class="btn btn-link muted" {{action "toggleMeta"}}>
         <small>
           {{ageInWords sentAt}}
           {{#if showMeta}}
@@ -30,11 +30,11 @@
       <div class="email-details">
         <dl class="dl-horizontal">
           <dt>To</dt>
-          <dd>{{list toList}}
+          <dd>{{list "toList"}}
           </dd>
           {{#if cc}}
             <dt>CC</dt>
-            <dd>{{list ccList}}</dd>
+            <dd>{{list "ccList"}}</dd>
           {{/if}}
           <dt>Time</dt>
           <dd>{{formatDateTime updatedAt format="full"}}</dd>
@@ -61,11 +61,11 @@
     <div class="clearfix email-item-actions">
       <div class="pull-right">
       {{#unless isDraft}}
-        <a {{action toggleReplyForm}} class="btn btn-link btn-messages-action">
+        <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
           <i class="ss-standard ss-reply"></i> Reply
         </a>
 
-        <a {{action toggleForwardForm}} class="btn btn-link btn-messages-action">
+        <a {{action "toggleForwardForm"}} class="btn btn-link btn-messages-action">
           <i class="ss-standard ss-right"></i> Forward
         </a>
       {{else}}
@@ -73,21 +73,21 @@
           <i class="ss-standard ss-write"></i> Edit
         {{/link-to}}
 
-        <button tabindex="6" {{action sendDraft this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
+        <button tabindex="6" {{action "sendDraft" this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
       {{/unless}}
 
-        <a class="btn btn-link btn-messages-action" {{action deleteEmail this}} {{bind-attr disabled=isSaving}}>
+        <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
           <i class="ss-symbolicons-block ss-trash"></i> Delete
         </a>
       </div>
 
       {{#unless isPersonal}}
         {{#if showFormBox}}
-          <button class="btn" {{action toggleFormBox}}>
+          <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-delete"></i> Done
           </button>
         {{else}}
-          <button class="btn" {{action toggleFormBox}}>
+          <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-check green"></i> Add a Follow-up Task
           </button>
         {{/if}}

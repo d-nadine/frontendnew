@@ -3,7 +3,7 @@
     <div class="separator">
       <h5>
         Forward: {{email.subject}}
-        <a class="pull-right" href="#" {{action expand}}>More Options</a>
+        <a class="pull-right" href="#" {{action "expand"}}>More Options</a>
       </h5>
     </div>
 
@@ -29,7 +29,7 @@
     {{/if}}
 
     <div class="footer">
-      <button tabindex="5" {{action submit this bubbles="false"}} class="btn btn-primary">Send</button>
+      <button tabindex="5" {{action "submit" this bubbles="false"}} class="btn btn-primary">Send</button>
     </div>
   </form>
 </div>

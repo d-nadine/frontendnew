@@ -141,8 +141,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   ).property('date')
 
   weeks: (->
-    return [] if @get('isLoading')
-
     weeks = []
     counter = 1
     days = []
@@ -169,7 +167,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
       counter += 1
 
     weeks
-  ).property('date', 'items.[]', 'user', 'isLoading')
+  ).property('date', 'items.[]', 'user')
 
   lastDayOfMonth: (date) ->
     lastDayOfMonth = date.adjust(day: 1).

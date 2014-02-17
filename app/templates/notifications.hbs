@@ -2,7 +2,7 @@
   <li class="notification-item notification-item-top">
     <div class="notification-item-content">
       <div class="notification-item-header">
-        <button class="btn btn-link btn-close pull-right" {{action toggleNotifications}}>
+        <button class="btn btn-link btn-close pull-right" {{action "toggleNotifications"}}>
           <i class="ss-standard ss-delete"></i>
         </button>
         <div>
@@ -13,7 +13,7 @@
         <div class="notification-item-footer">
           <div class="clearfix pull-right">
             <!--<button class="btn">Snooze All</button>-->
-            <button class="btn btn-small" {{action deleteAllNotifications}}>Dismiss All</button>
+            <button class="btn btn-small" {{action "deleteAllNotifications"}}>Dismiss All</button>
           </div>
         </div>
       {{/if}}

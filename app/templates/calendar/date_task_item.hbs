@@ -1,4 +1,4 @@
-<a href="#" {{action selectCalendarTask this target="calendarDay"}}>
+<a href="#" {{action "selectCalendarTask" this target="calendarDay"}}>
   <span {{bind-attr class="isFinished"}}>{{formatDateTime time}}</span>
   <span {{bind-attr class="isFinished :day-event-item-description"}}>{{displayName}}</span>
 </a>

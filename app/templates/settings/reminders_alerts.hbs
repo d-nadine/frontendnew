@@ -85,7 +85,7 @@
     </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.taskIgnored.enabled"}}
   </fieldset>
   <div class="form-actions">
-    <button type="button" {{action update}} {{bind-attr disabled=isSaving}} class="btn btn-primary">Save</button>
+    <button type="button" {{action "update"}} {{bind-attr disabled=isSaving}} class="btn btn-primary">Save</button>
     <button class="btn" {{action "cancel"}}>Cancel</button>
   </div>
 </form>

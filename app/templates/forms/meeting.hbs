@@ -1,11 +1,11 @@
 <form {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
-  <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary"}} {{action expand}}>
+  <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary"}} {{action "expand"}}>
     {{#if showComments}}
       <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
 
     {{#if showOptions}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action toggleExpanded bubbles=false}}>
+      <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
         {{#if isExpanded}}
           Hide
         {{else}}
@@ -74,7 +74,7 @@
       <div class="form-row">
         <div class="field-group meeting-form-invite">
           <div class="pull-right">
-            <button class="btn btn-link" {{action showCalendars}}>
+            <button class="btn btn-link" {{action "showCalendars"}}>
               {{formatDateTime startsAt format="calendar"}}'s Calendars
               <i {{bind-attr class=":ss-standard calendarsOpen:ss-navigateup:ss-navigatedown"}}></i>
             </button>
@@ -109,8 +109,8 @@
           {{partial 'add_action'}}
         {{/if}}
         <div class="pull-right">
-          <button class="btn btn-main" {{action showCancelMeetingDialogue target="view" bubbles=false}} {{bind-attr disabled="view.cancelMeetingDisabled"}}>Cancel Meeting</button>
-          <button class="btn btn-main btn-primary" {{action submit bubbles=false}}>Save</button>
+          <button class="btn btn-main" {{action "showCancelMeetingDialogue" target="view" bubbles=false}} {{bind-attr disabled="view.cancelMeetingDisabled"}}>Cancel Meeting</button>
+          <button class="btn btn-main btn-primary" {{action "submit" bubbles=false}}>Save</button>
         </div>
       </div>
 

@@ -6,7 +6,7 @@
         {{render 'multiple/email_address' form.emailAddresses}}
       </div>
     {{else}}
-      <i class="ss-standard ss-write pull-right" {{action toggleEditor target=view bubbles=false}}></i>
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if primaryEmail.value}}
         {{#link-to "emails.mailTo" "inbox" this}}
           <strong>{{primaryEmail.name}}</strong> {{primaryEmail.value}}

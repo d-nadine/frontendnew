@@ -13,8 +13,8 @@
     {{#if isReply}}
       <h5>
         Reply to
-        {{list to}}
-        <a class="pull-right" href="#" {{action expand}}>More Options</a>
+        {{list "to"}}
+        <a class="pull-right" href="#" {{action "expand"}}>More Options</a>
       </h5>
     {{/if}}
 
@@ -23,10 +23,10 @@
         <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
           <span class="toggles pull-right">
             {{#unless showCc}}
-              <a href="#" class="muted" tabindex="7" {{action expandList 'cc'}}>CC</a>
+              <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
             {{/unless}}
             {{#unless showBcc}}
-              <a href="#" class="muted" tabIndex="7" {{action expandList 'bcc'}}>BCC</a>
+              <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
             {{/unless}}
           </span>
           <label>To</label>
@@ -64,7 +64,7 @@
       <div class="clearfix new-message-row">
         <div class="btn-toolbar pull-right">
           {{#unless view.signatureAdded}}
-            <button tabindex="4" class="btn btn-link btn-messages-action" {{action addSignature target="view" bubbles="true"}}>
+            <button tabindex="4" class="btn btn-link btn-messages-action" {{action "addSignature" target="view" bubbles="true"}}>
               <i class="ss-standard ss-write"></i> Add Signature
             </button>
           {{/unless}}
@@ -78,7 +78,7 @@
             {{/unless}}
           </div>
 
-          <button class="btn btn-link btn-messages-action" {{action deleteFromEditor}}>
+          <button class="btn btn-link btn-messages-action" {{action "deleteFromEditor"}}>
             <i class="ss-standard ss-trash"></i> Delete
           </button>
         </div>
@@ -93,16 +93,16 @@
       <div {{bind-attr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
-            <button tabindex="5" {{action cancelSendEmail bubbles="false"}} class="btn">Cancel</button>
+            <button tabindex="5" {{action "cancelSendEmail" bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main" {{bind-attr disabled=disableSave}} {{action saveAsDraft this}}>Save Draft</button>
+          <button class="btn btn-main" {{bind-attr disabled=disableSave}} {{action "saveAsDraft" this}}>Save Draft</button>
           <div id="sendMenu" class="btn-group">
-            <button tabindex="6" {{action submit this controller bubbles="false"}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
-            <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action toggleSendMenu target=view}}>
+            <button tabindex="6" {{action "submit" this controller bubbles="false"}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
+            <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action "toggleSendMenu" target=view}}>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#" {{action scheduleDelivery model 'tomorrow'}}>Send Tomorrow</a></li>
+              <li><a href="#" {{action "scheduleDelivery" model 'tomorrow'}}>Send Tomorrow</a></li>
               <li>{{date-timepicker submitDate="scheduleDelivery" model=model}}</li>
             </ul>
           </div>
@@ -139,7 +139,7 @@
     <div class="modal-backdrop">
       <div class="modal fade">
         <div class="modal-header">
-          <button type="button" {{action closeModal target="view" bubbles="false"}} class="close">×</button>
+          <button type="button" {{action "closeModal" target="view" bubbles="false"}} class="close">×</button>
           <h2>Add Signature?</h2>
         </div>
         <div class="modal-body">
@@ -149,8 +149,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <a href="#" {{action closeModal target="view" bubbles="false"}} class="btn">Cancel</a>
-          <a href="#" {{action createSignature}} class="btn btn-primary">Done</a>
+          <a href="#" {{action "closeModal" target="view" bubbles="false"}} class="btn">Cancel</a>
+          <a href="#" {{action "createSignature"}} class="btn btn-primary">Done</a>
         </div>
       </div>
     </div>

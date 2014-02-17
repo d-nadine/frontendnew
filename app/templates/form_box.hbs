@@ -19,7 +19,7 @@
   <div class="form-box-controls">
     {{#if compactFormButtons}}
       <div class="btn-group form-switcher-small">
-        <button {{action submitForm}} class="btn btn-large">
+        <button {{action "submitForm"}} class="btn btn-large">
           {{#if showTodoForm}}
             <i class="ss-standard ss-check green"></i> Add Task
           {{/if}}
@@ -36,22 +36,22 @@
         <ul class="dropdown-menu">
           {{#if todoForm}}
           <li>
-            <a href="#" {{action showForm "todo"}}><i class="ss-standard ss-check"></i> Todo</a>
+            <a href="#" {{action "showForm" "todo"}}><i class="ss-standard ss-check"></i> Todo</a>
           </li>
           {{/if}}
           {{#if callForm}}
           <li>
-            <a href="#" {{action showForm "call"}}><i class="ss-standard ss-phone"></i> Call</a>
+            <a href="#" {{action "showForm" "call"}}><i class="ss-standard ss-phone"></i> Call</a>
           </li>
           {{/if}}
           {{#if discussionForm}}
           <li>
-            <a href="#" {{action showForm "discussion"}}><i class="ss-standard ss-chat"></i> Discussion</a>
+            <a href="#" {{action "showForm" "discussion"}}><i class="ss-standard ss-chat"></i> Discussion</a>
           </li>
           {{/if}}
           {{#if meetingForm}}
           <li>
-            <a href="#" {{action showForm "meeting"}}><i class="ss-standard ss-calendar"></i> Meeting</a>
+            <a href="#" {{action "showForm" "meeting"}}><i class="ss-standard ss-calendar"></i> Meeting</a>
           </li>
           {{/if}}
         </ul>
@@ -59,25 +59,25 @@
     {{else}}
       <div class="form-switcher">
         {{#if todoForm}}
-          <button {{action showForm "todo"}} {{bind-attr class=":btn :btn-action showTodoForm:active"}}>
+          <button {{action "showForm" "todo"}} {{bind-attr class=":btn :btn-action showTodoForm:active"}}>
             <i class="ss-standard ss-check"></i>
           </button>
         {{/if}}
 
         {{#if callForm}}
-          <button {{action showForm "call"}} {{bind-attr class=":btn :btn-action showCallForm:active"}}>
+          <button {{action "showForm" "call"}} {{bind-attr class=":btn :btn-action showCallForm:active"}}>
             <i class="ss-standard ss-phone"></i>
           </button>
         {{/if}}
 
         {{#if discussionForm}}
-          <button {{action showForm "discussion"}} {{bind-attr class=":btn :btn-action showDiscussionForm:active"}}>
+          <button {{action "showForm" "discussion"}} {{bind-attr class=":btn :btn-action showDiscussionForm:active"}}>
             <i class="ss-symbolicons-block ss-chat"></i>
           </button>
         {{/if}}
 
         {{#if meetingForm}}
-          <button {{action showForm "meeting"}} {{bind-attr class=":btn :btn-action showMeetingForm:active"}}>
+          <button {{action "showForm" "meeting"}} {{bind-attr class=":btn :btn-action showMeetingForm:active"}}>
             <i class="ss-standard ss-calendar"></i>
           </button>
         {{/if}}

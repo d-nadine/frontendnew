@@ -20,26 +20,26 @@
         {{#if hasCheckedContent}}
           <ul class="dropdown-menu">
             <li>
-              <a href="#" {{action showForm 'assign'}}>Assign</a>
+              <a href="#" {{action "showForm" 'assign'}}>Assign</a>
             </li>
             <li>
-              <a href="#" {{action showForm 'todo'}}>Todo</a>
+              <a href="#" {{action "showForm" 'todo'}}>Todo</a>
             </li>
             <li>
-              <a href="#" {{action showForm 'call'}}>Call</a>
+              <a href="#" {{action "showForm" 'call'}}>Call</a>
             </li>
             {{#if isLeads}}
               <li>
-                <a href="#" {{action showEmail}}>Email</a>
+                <a href="#" {{action "showEmail"}}>Email</a>
               </li>
             {{/if}}
             {{#unless isLeads}}
               <li>
-                <a href="#" {{action showForm 'status'}}>Change Status</a>
+                <a href="#" {{action "showForm" 'status'}}>Change Status</a>
               </li>
             {{/unless}}
             <li>
-              <a href="#" {{action confirmDeletion}}>Delete</a>
+              <a href="#" {{action "confirmDeletion"}}>Delete</a>
             </li>
           </ul>
         {{/if}}
@@ -60,7 +60,7 @@
           {{view view.changeStatusTodo viewName="statusTodo"}}
         </div>
         <div id="change-status-action">
-          <a href="#" class="btn btn-medium btn-success" {{bind-attr disabled="controller.justAdded"}} {{action changeStatus}}>
+          <a href="#" class="btn btn-medium btn-success" {{bind-attr disabled="controller.justAdded"}} {{action "changeStatus"}}>
             OK
           </a>
         </div>
