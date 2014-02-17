@@ -2,8 +2,6 @@
 # we need to be available globally
 require /lib\/patches/
 
-require 'lib/ember/arrangable_mixin'
-require 'lib/ember/filterable_mixin'
 require 'lib/ember/datetime'
 require 'lib/ember/computed'
 

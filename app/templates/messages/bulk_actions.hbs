@@ -5,13 +5,14 @@
 
   {{render 'form_box' formBox}}
 
+  {{! THIS SHOULD PROXY TO MODEL, WHY??}}
   <ul class="unstyled bulk-actions-list">
-    {{#each controller}}
+    {{#each controller.model}}
       <li>
         <div class="pull-right">
           {{formatDateTime timestamp}}
         </div>
-        {{check-box checked=isChecked disabled=disabled}}
+        {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}
         <div class="bulk-actions-list-content">
           <div class="message-item-avatar pull-left">
             {{#if sender.isLoaded}}

@@ -65,7 +65,7 @@ Radium.MessagesRoute = Radium.Route.extend
       itemsChecked = @controllerFor('messages').get('hasCheckedContent')
       @controllerFor('messages').setEach 'isChecked', !itemsChecked
 
-      @transitionToBulkOrBack()
+      @controllerFor('messagesSidebar').send 'checkMessageItem'
 
     delete: (item) ->
       callback = =>

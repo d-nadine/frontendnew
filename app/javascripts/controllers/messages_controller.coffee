@@ -69,6 +69,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     if @get('currentPath') == "messages.emails.empty"
       Ember.run.next =>
         @send 'selectItem', @get('firstObject')
+        @transitionToRoute 'emails.show', folder, @get('firstObject')
 
   delta: (records) ->
     delta = records.toArray().reject (record) =>
