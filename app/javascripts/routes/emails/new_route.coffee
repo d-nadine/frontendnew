@@ -8,7 +8,7 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
         controller = @controllerFor('messages')
         @controllerFor('messagesSidebar').send 'reset'
 
-        @transitionTo 'messages.index', transition.params.folder
+        @transitionTo 'messages.index', transition.params.messages.folder
 
         return false
 

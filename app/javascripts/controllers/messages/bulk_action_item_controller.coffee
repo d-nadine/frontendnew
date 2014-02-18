@@ -1,4 +1,8 @@
 Radium.MessagesBulkActionItemController = Radium.ObjectController.extend
+  actions:
+    checkMessageItem: ->
+      alert 'flaps'
+
   summary: (->
     @get('subject') || @get('topic')
   ).property('subject', 'topic')

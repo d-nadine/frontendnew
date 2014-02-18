@@ -11,7 +11,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
       existingFolder = sidebarController.get('folder')
 
-      if transition.params.folder == existingFolder
+      if transition.params.messages.folder == existingFolder
         transition.abort()
       else
         sidebarController.send 'reset'

@@ -45,7 +45,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
       @controllerFor('messagesSidebar').send 'reset'
 
-  setupController: (controller) ->
+  beforeModel: (controller) ->
     checkedContent = @controllerFor('messages').get('checkedContent')
 
     unless checkedContent.get('length')
@@ -54,8 +54,6 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
         @transitionTo 'messages', @controllerFor('messages').get('folder')
 
       return
-
-    controller.set 'model', checkedContent
 
   deactivate: ->
     @controllerFor('messages').forEach (item) =>
