@@ -145,6 +145,8 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionTo 'messages.discussion', item
 
   setupController: (controller, model) ->
+    return unless model
+
     controller.set 'model', model.toArray()
 
     @controllerFor('messagesSidebar').send 'loadInitialPages'
