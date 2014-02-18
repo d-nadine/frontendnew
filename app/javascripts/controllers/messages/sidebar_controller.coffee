@@ -30,6 +30,23 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
         else if discussion = @get('controllers.messagesDiscussion')
           @send 'selectItem', discussion
 
+    loadInitialPages: ->
+      return if @get('searchIsActive')
+      return if @get('page') > 1 && @get('currentUser.initialMailImported')
+
+      meta = @get('store').typeMapFor(Radium.Email).metadata
+
+      Ember.run.next =>
+        @set('totalRecords', meta.totalRecords)
+        @set('allPagesLoaded', meta.allPagesLoaded)
+
+      pageSize = @get('controllers.messages.pageSize')
+
+      if meta.totalRecords > pageSize
+        for i in [0...3]
+          currentCount = (i + 1) * pageSize
+          @send 'showMore' if meta.totalRecords >= currentCount
+
     reset: ->
       @set('page', 1)
       @set('allPagesLoaded', false)

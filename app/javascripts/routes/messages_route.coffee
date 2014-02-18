@@ -115,15 +115,10 @@ Radium.MessagesRoute = Radium.Route.extend
       @send 'back'
 
   model: (params, transition) ->
-    @set('time', new Date())
     messagesController = @controllerFor('messages')
     sidebarController = @controllerFor('messagesSidebar')
 
     messagesController.set('folder', params.folder)
-
-    model = @modelFor 'messages'
-
-    model?.destroy()
 
     return if sidebarController.get('searchIsActive')
 
@@ -133,29 +128,7 @@ Radium.MessagesRoute = Radium.Route.extend
     folder: @controllerFor('messages').get('folder')
 
   afterModel: (model, transitioin) ->
-    now = new Date()
-
-    diff = Math.ceil(now.getTime() - @get('time').getTime()) / 100
-
-    console.log "model hook took #{diff} seconds"
-
-    sidebarController = @controllerFor('messagesSidebar')
-
-    return if sidebarController.get('searchIsActive')
-    return if sidebarController.get('page') > 1 && @controllerFor('currentUser').get('initialMailImported')
-
-    meta = @get('store').typeMapFor(Radium.Email).metadata
-
-    Ember.run.next =>
-      sidebarController.set('totalRecords', meta.totalRecords)
-      sidebarController.set('allPagesLoaded', meta.allPagesLoaded)
-
-    pageSize = @controllerFor('messages').get('pageSize')
-
-    if meta.totalRecords > pageSize
-      for i in [0...3]
-        currentCount = (i + 1) * pageSize
-        sidebarController.send 'showMore' if meta.totalRecords >= currentCount
+    return if @controllerFor('messagesSidebar').get('searchIsActive')
 
     return unless transitioin.targetName == "messages.index"
 
@@ -172,9 +145,9 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionTo 'messages.discussion', item
 
   setupController: (controller, model) ->
-    return unless model
-
     controller.set 'model', model.toArray()
+
+    @controllerFor('messagesSidebar').send 'loadInitialPages'
 
   renderTemplate: (controller, context) ->
     @render 'messages/drawer_buttons', outlet: 'buttons'
