@@ -1,10 +1,6 @@
 require 'forms/form_box'
 
 Radium.MessagesBulkActionsController = Radium.ArrayController.extend
-  actions:
-    checkMessageItem: ->
-      alert 'flaps'
-
   needs: ['users', 'messages']
 
   model: Ember.computed.alias 'controllers.messages.checkedContent'
