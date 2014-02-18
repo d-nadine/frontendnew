@@ -127,23 +127,6 @@ Radium.MessagesRoute = Radium.Route.extend
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')
 
-  afterModel: (model, transitioin) ->
-    return if @controllerFor('messagesSidebar').get('searchIsActive')
-
-    return unless transitioin.targetName == "messages.index"
-
-    unless model.get('length')
-      folder = model.get('folder') || 'inbox'
-      @transitionTo 'emails.empty'
-      return
-
-    item = model.get('firstObject')
-
-    if item instanceof Radium.Email
-      @transitionTo 'emails.show', item
-    else if item instanceof Radium.Discussion
-      @transitionTo 'messages.discussion', item
-
   setupController: (controller, model) ->
     return unless model
 
@@ -177,3 +160,25 @@ Radium.MessagesRoute = Radium.Route.extend
       into: 'application'
       outlet: 'buttons'
     @send 'closeDrawer'
+
+Radium.MessagesIndexRoute = Radium.Route.extend
+  afterModel: (mo, transition) ->
+    return if @controllerFor('messagesSidebar').get('searchIsActive')
+
+    return unless transition.targetName == "messages.index"
+
+    model = @modelFor('messages')
+
+    unless model.get('length')
+      folder = model.get('folder') || 'inbox'
+      @transitionTo 'emails.empty'
+      return
+
+    item = model.get('firstObject')
+
+    if item instanceof Radium.Email
+      @transitionTo 'emails.show', item
+    else if item instanceof Radium.Discussion
+      @transitionTo 'messages.discussion', item
+
+

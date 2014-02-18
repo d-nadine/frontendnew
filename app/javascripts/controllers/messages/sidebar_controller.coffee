@@ -21,12 +21,18 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   actions:
     checkMessageItem: ->
       currentPath = @get('currentPath')
-      if @get('content.content').filterProperty('isChecked').get('length')
+      content = @get('content.content')
+
+      if content.filterProperty('isChecked').get('length')
         return if currentPath == 'messages.bulk_actions'
         @transitionToRoute 'messages.bulk_actions'
       else if currentPath == 'messages.bulk_actions'
         if email = @get('controllers.emailsShow.model')
-          @send 'selectItem', email
+          if !email.get('isDeleted')
+            @send 'selectItem', email
+          else
+            first = content.filter((item) -> not item.get('isDeleted'))?.get('firstObject')
+            @send 'selectItem', first
         else if discussion = @get('controllers.messagesDiscussion')
           @send 'selectItem', discussion
 
