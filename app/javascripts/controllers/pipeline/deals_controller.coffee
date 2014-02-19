@@ -1,14 +1,18 @@
 require 'controllers/pipeline/base_controller'
 
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
-  selectedFilter: 'name'
-  searchText: null
+  actions:
+    changeFilter: (filter) ->
+      @set 'selectedFilter', filter
 
   toggleChecked: ->
     allChecked = @get('checkedContent.length') == @get('length')
 
     @get('content').forEach (item) ->
       item.set 'isChecked', !allChecked
+
+  selectedFilter: 'name'
+  searchText: null
 
   arrangedContent: ( ->
     content = @get('content')
@@ -45,16 +49,5 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
     {name: 'user', text: 'Filter By Assigned'}
   ]
 
-  changeFilter: (filter) ->
-    @set 'selectedFilter', filter
-
-  total: ( ->
-    return 0 unless @get('visibleContent.length')
-
-    sum = 0
-
-    @get('visibleContent').forEach (item) ->
-      sum += item.get('value')
-
-    sum
-  ).property('visibleContent.[]')
+  dealValues: Ember.computed.mapBy 'visibleContent', 'value'
+  total: Ember.computed.sum 'dealValues'

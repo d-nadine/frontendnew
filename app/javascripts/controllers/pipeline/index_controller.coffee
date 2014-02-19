@@ -24,6 +24,8 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   groups: ( ->
     return [] unless @get('workflowGroups.length')
 
+    debugger
+
     Ember.ArrayProxy.create
       content: @get('workflowGroups')
   ).property('workflowGroups')
