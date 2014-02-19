@@ -20,12 +20,14 @@
 
 {{#if currentUser.isAdmin}}
   <div class="alert-container">
+    <button type="button" class="close" data-dismiss="alert"><i class="ss-standard ss-delete"></i></button>
     <div class="alert pull-left">
       <h4 class="text-center">Set up your pipeline {{#link-to "settings.pipelineStates"}}here{{/link-to}}</h4>
     </div>
     <div class="alert pull-right">
       <h4 class="text-center">Set up your lead sources {{#link-to "settings.leadSources"}}here{{/link-to}}</h4>
     </div>
+    <div class="clearfix"></div>
   </div>
 {{/if}}
 <div class="clearfix"></div>
