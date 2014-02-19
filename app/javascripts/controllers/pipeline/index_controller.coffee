@@ -28,17 +28,16 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
       content: @get('workflowGroups')
   ).property('workflowGroups')
 
-  total: (->
-    workflowDeals = @get('workflowDeals')
-
-    return 0 if workflowDeals.get('length') == 0
-
-    workflowDeals.reduce(((value, item) ->
+  total: Ember.reduceComputed "workflowDeals.@each.{status,value}",
+    initialValue: 0
+    addedItem: (accumulatedValue, item, changeMeta, instanceMeta) ->
       if item.get('status') == 'lost'
-        return value
+        return accumulatedValue
 
-      value + item.get('value')
-    ), 0)
-  ).property('workflowDeals.[]')
+      accumulatedValue + item.get('value')
 
+    removedItem: (accumulatedValue, item, changeMeta, instanceMeta) ->
+      if item.get('status') == 'lost'
+        return accumulatedValue
 
+      accumulatedValue - item.get('value')
