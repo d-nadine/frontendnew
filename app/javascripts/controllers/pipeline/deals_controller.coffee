@@ -14,6 +14,11 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   selectedFilter: 'name'
   searchText: null
 
+  init: ->
+    @_super.apply this, arguments
+    return unless @get('parentController.parentController') instanceof Radium.PipelineIndexController
+    Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
+
   arrangedContent: ( ->
     content = @get('content')
 

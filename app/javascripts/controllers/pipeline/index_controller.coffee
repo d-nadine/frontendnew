@@ -3,6 +3,7 @@ require 'mixins/controllers/bulk_action_controller_mixin'
 Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   needs: ['workflowGroupItem']
   filteredDeals: null
+  searchText: null
 
   selectedGroup: Ember.computed.alias 'controllers.workflowGroupItem.selectedGroup'
 
@@ -20,15 +21,6 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   ).property('currentDeals.@each.isChecked')
 
   hasCheckedContent: Ember.computed.bool 'checkedContent.length'
-
-  groups: ( ->
-    return [] unless @get('workflowGroups.length')
-
-    debugger
-
-    Ember.ArrayProxy.create
-      content: @get('workflowGroups')
-  ).property('workflowGroups')
 
   total: Ember.reduceComputed "workflowDeals.@each.{status,value}",
     initialValue: 0

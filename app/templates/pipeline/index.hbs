@@ -58,7 +58,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each groups itemController="workflowGroupItem"}}
+        {{#each workflowGroups itemController="workflowGroupItem"}}
         <tr>
           <td class="title">
             {{#if isWorkflow}}
@@ -86,7 +86,7 @@
     </table>
   </div>
   <div class="pipeline-workflows-list">
-    {{#each groups itemController="workflowGroupItem"}}
+    {{#each workflowGroups itemController="workflowGroupItem"}}
       <div class="pipeline-workflows-list-item">
         <div class="page-header">
           <h3>{{capitalize content.title}} ({{length}})</h3>
