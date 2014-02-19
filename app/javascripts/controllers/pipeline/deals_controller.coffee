@@ -1,18 +1,13 @@
 require 'controllers/pipeline/base_controller'
+require 'controllers/pipeline/filter_mixin'
 
-Radium.PipelineDealsController = Radium.PipelineBaseController.extend
+Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.FilterMixin,
   actions:
-    changeFilter: (filter) ->
-      @set 'selectedFilter', filter
+    toggleChecked: ->
+      allChecked = @get('checkedContent.length') == @get('length')
 
-  toggleChecked: ->
-    allChecked = @get('checkedContent.length') == @get('length')
-
-    @get('content').forEach (item) ->
-      item.set 'isChecked', !allChecked
-
-  selectedFilter: 'name'
-  searchText: null
+      @get('content').forEach (item) ->
+        item.set 'isChecked', !allChecked
 
   init: ->
     @_super.apply this, arguments
@@ -59,17 +54,6 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
 
     content
   ).property('content.[]', 'selectedFilter', 'searchText')
-
-  selectedFilterText: ( ->
-    @get('filters').findProperty('name', @get('selectedFilter')).text
-  ).property('selectedFilter')
-
-  filters: [
-    {name: 'name', text: 'Filter By Name'}
-    {name: 'contact', text: 'Filter By Contact'}
-    {name: 'company', text: 'Filter By Company'}
-    {name: 'user', text: 'Filter By Assigned'}
-  ]
 
   dealValues: Ember.computed.mapBy 'visibleContent', 'value'
   total: Ember.computed.sum 'dealValues'
