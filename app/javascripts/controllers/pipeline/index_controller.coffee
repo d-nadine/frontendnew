@@ -5,6 +5,8 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   filteredDeals: null
   searchText: null
 
+  arrangedDealsLength: 0
+
   selectedGroup: Ember.computed.alias 'controllers.workflowGroupItem.selectedGroup'
 
   title: 'Pipeline'

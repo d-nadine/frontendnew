@@ -1,5 +1,8 @@
 Radium.WorkflowGroupItemController = Radium.ArrayController.extend
   needs: ['pipeline']
+  arrangedDealsLength: 0
+
+  hide: false
 
   workflowTotal: Ember.computed.alias('controllers.pipeline.content.workflowTotal')
   selectedGroup: Ember.computed.alias('controllers.pipeline.selectedGroup')

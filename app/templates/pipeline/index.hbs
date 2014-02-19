@@ -87,9 +87,11 @@
   </div>
   <div class="pipeline-workflows-list">
     {{#each workflowGroups itemController="workflowGroupItem"}}
+      {{#if content.length}}
+      {{#unless hide}}
       <div class="pipeline-workflows-list-item">
         <div class="page-header">
-          <h3>{{capitalize content.title}} ({{length}})</h3>
+          <h3>{{capitalize content.title}} ({{arrangedDealsLength}})</h3>
         </div>
         <div class="deals">
           {{#if isWorkflow}}
@@ -103,6 +105,8 @@
           {{/if}}
         </div>
       </div>
+      {{/unless}}
+      {{/if}}
     {{/each}}
   </div>
 {{/unless}}

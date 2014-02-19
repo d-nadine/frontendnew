@@ -19,6 +19,22 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
     return unless @get('parentController.parentController') instanceof Radium.PipelineIndexController
     Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
 
+  resultsDidChange: ( ->
+    unless parentController = @get('parentController')
+      return
+
+    return unless parentController instanceof Radium.WorkflowGroupItemController
+
+    return if parentController.get("isDestroying")
+
+    parentController.set('arrangedDealsLength', @get('length'))
+
+    if @get('length')
+      parentController.set('hide', false)
+    else
+      parentController.set('hide', true)
+  ).observes('arrangedContent.[]', 'selectedFilter', 'searchText').on('init')
+
   arrangedContent: ( ->
     content = @get('content')
 
