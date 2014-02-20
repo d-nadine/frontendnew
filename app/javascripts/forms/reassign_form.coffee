@@ -16,8 +16,8 @@ Radium.ReassignForm = Radium.Form.extend
     @set('todo', null)
 
   commit: ->
-    promise = Ember.Deferred.promise (deferred) =>
-      deferred.resolve() unless @get('selectedContent.length')
+    return new Ember.RSVP.Promise (resolve, reject) =>
+      resolve() unless @get('selectedContent.length')
 
       transaction = @get('store').transaction()
 
@@ -31,15 +31,15 @@ Radium.ReassignForm = Radium.Form.extend
 
         deal.one 'didUpdate', =>
           deal.set 'isChecked', false
-          deferred.resolve() unless @get('deals.length')
+          resolve() unless @get('deals.length')
 
         deal.one 'becameInvalid', (result) =>
           transaction.rollback()
-          deferred.reject(result)
+          reject(result)
 
         deal.one 'becameError', (result)  ->
           transaction.rollback()
-          deferred.reject('An error has occurred and the deals could not be reassigned.')
+          reject('An error has occurred and the deals could not be reassigned.')
 
         transaction.add deal
 

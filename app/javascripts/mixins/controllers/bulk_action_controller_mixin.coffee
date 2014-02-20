@@ -94,11 +94,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
-  cantAssign: Ember.computed 'justAdded', 'assignToUser', 'currentUser', ->
-    return false if @get('justAdded')
-    return false unless @get('assignToUser')
-    @get('assignToUser') == @get('currentUser')
-
   isLost: ( ->
     return unless @get('changedStatus')
     @get('changedStatus').toLowerCase() == 'lost'

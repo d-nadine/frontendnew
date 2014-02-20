@@ -21,3 +21,15 @@ Radium.BulkActionViewMixin = Ember.Mixin.create
   assignTodoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.reassignTodo'
     placeholder: "Add related todo?"
+    keyDown: (e) ->
+      unless e.keyCode == 13
+        @_super.apply this, arguments
+        return
+
+      @get('controller').send 'reassign'
+
+      e.preventDefault()
+      e.stopPropagation()
+      false
+
+
