@@ -4,10 +4,10 @@
       {{view view.userPicker}}
       <div class="assign-todo">
         <i class="ss-standard ss-check"></i>
-        {{view view.assignTodoField viewName="assignTodo"}}
+        {{view view.assignTodoField viewName="assignTodo" disabled=cantAssign}}
       </div>
       <div class="reassign pull-right">
-        <a href="#" class="btn btn-primary" {{bind-attr disabled="controller.justAdded"}} {{action "reassign" this}}>
+        <a href="#" class="btn btn-primary" {{bind-attr disabled="cantAssign"}} {{action "reassign" this}}>
           <i class="ss-standard ss-plus"></i>
           Reassign
         </a>
