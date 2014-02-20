@@ -23,6 +23,9 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   changeStatusTodo: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.statusTodo'
     placeholder: "Add related todo?"
+    keyDown: (e) ->
+      return unless e.keyCode == 13
+      @get('controller').send 'changeStatus'
 
   bulkLeader: ( ->
     form = @get('controller.activeForm')
