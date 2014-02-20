@@ -29,7 +29,7 @@
     {{#each visibleContent itemController="pipelineItem"}}
       <tr {{bind-attr class=":pipeline-workflow-deals-row isChecked"}}>
         <td class="checkbox">
-          {{check-box checked=model.isChecked class="checker-block"}}
+          {{check-box checked=isChecked class="checker-block"}}
         </td>
         <td class="deal">
           <p>

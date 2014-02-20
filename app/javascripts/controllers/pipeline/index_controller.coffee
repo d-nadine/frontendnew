@@ -3,6 +3,7 @@ require 'controllers/pipeline/filter_mixin'
 
 Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   Radium.FilterMixin,
+  Radium.BulkActionControllerMixin,
 
   needs: ['workflowGroupItem']
   filteredDeals: null
