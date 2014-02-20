@@ -32,6 +32,12 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
       parentController.set('hide', true)
   ).observes('arrangedContent.[]', 'selectedFilter', 'searchText').on('init')
 
+  sortContent: ->
+    sort = @get("sort")
+
+    @get("content").toArray().sort (a, b) ->
+      Ember.compare a.get('displayName'), b.get('displayName')
+
   arrangedContent: ( ->
     content = @get('content')
 
@@ -39,7 +45,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
     searchText = @get('searchText')
 
-    return content unless searchText?.length
+    return @sortContent() unless searchText?.length
 
     selectedFilter = @get('selectedFilter')
 
@@ -53,7 +59,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
                   else
                     ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
-    content
+    @sortContent()
   ).property('content.[]', 'selectedFilter', 'searchText', 'sort')
 
   dealValues: Ember.computed.mapBy 'visibleContent', 'value'
