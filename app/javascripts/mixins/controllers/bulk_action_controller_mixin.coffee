@@ -33,6 +33,13 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       if @get('isLost')
         @set 'changeStatusForm.lostBecause', @get('lostBecause')
 
+      diff = @get('checkedContent').reject (deal) =>
+        deal.get('status') == @get('changedStatus')
+
+      unless diff.length
+        @send 'flashError', 'You need to specity a different deal status'
+        return
+
       return unless @get('changeStatusForm.isValid')
       @set 'changeStatusForm.todo', @get('statusTodo')
       @get('changeStatusForm').commit().then =>

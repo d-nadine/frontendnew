@@ -20,13 +20,13 @@ Radium.ChangeStatusForm = Radium.Form.extend
     @set('lostBecause', null)
 
   commit:  ->
-    promise = Ember.Deferred.promise (deferred) =>
+    return new Ember.RSVP.Promise (resolve, reject) =>
       status = @get('status')
 
       deals = @get('deals').reject (deal) =>
         deal.get('status') == status
 
-      deferred.resolve() unless @get('deals.length')
+      resolve() unless @get('deals.length')
 
       transaction = @get('store').transaction()
 
@@ -47,18 +47,16 @@ Radium.ChangeStatusForm = Radium.Form.extend
 
         deal.one 'didUpdate', (result) =>
           deal.set 'isChecked', false
-          deferred.resolve() if deals.get('lastObject') == result
+          resolve() if deals.get('lastObject') == result
 
         deal.one 'becameInvalid', (result) =>
           transaction.rollback()
-          deferred.reject(result)
+          reject(result)
 
         deal.one 'becameError', (result)  ->
           transaction.rollback()
-          deferred.reject('An error has occurred and the selected deals status could not be changed.')
+          reject('An error has occurred and the selected deals status could not be changed.')
 
         transaction.add deal
 
       transaction.commit()
-
-    promise

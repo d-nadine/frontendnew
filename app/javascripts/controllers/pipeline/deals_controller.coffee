@@ -54,7 +54,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
                     ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
     content
-  ).property('content.[]', 'selectedFilter', 'searchText')
+  ).property('content.[]', 'selectedFilter', 'searchText', 'sort')
 
   dealValues: Ember.computed.mapBy 'visibleContent', 'value'
   total: Ember.computed.sum 'dealValues'
