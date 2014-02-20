@@ -14,6 +14,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
     parentController = @get('parentController.parentController')
     return unless parentController instanceof Radium.PipelineIndexController
     Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
+    Ember.bind(this, 'selectedFilter', 'parentController.parentController.selectedFilter')
 
   resultsDidChange: ( ->
     unless parentController = @get('parentController')
