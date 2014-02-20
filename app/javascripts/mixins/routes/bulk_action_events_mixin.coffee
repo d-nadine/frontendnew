@@ -90,7 +90,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
   getController: ->
     if /addressbook/.test @controllerFor('application').get('currentPath')
       @controllerFor "addressbook"
-    else if @controller.constructor is Radium.PipelineWorkflowController
+    else if @controller instanceof Radium.PipelineWorkflowController
       @controllerFor "pipelineWorkflowDeals"
     else
       this.controller
