@@ -14,3 +14,27 @@
     text-align: right;
   }
 }
+
+.column-sort {
+  position: relative;
+  color: #6E6E6E;
+
+  &.active {
+    color: $link;
+  }
+
+  &:hover,
+  &.active {
+    i {
+      display: block;
+    }
+  }
+
+  i {
+    font-size: 9px;
+    position: absolute;
+    top: 2px;
+    right: -14px;
+    display: none;
+  }
+}
