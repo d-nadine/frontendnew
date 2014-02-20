@@ -28,7 +28,38 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     toggleThumbnails: ->
       @toggleProperty('isThumbnailsVisible')
 
-  needs: ['users', 'accountSettings', 'tags', 'pipelineLeads', 'pipelineOpendeals']
+    changeStatus: ->
+      @set 'isSubmitted', true
+      if @get('isLost')
+        @set 'changeStatusForm.lostBecause', @get('lostBecause')
+
+      return unless @get('changeStatusForm.isValid')
+      @set 'changeStatusForm.todo', @get('statusTodo')
+      @get('changeStatusForm').commit().then =>
+        @send 'flashSuccess', "Deal's status succesfully changed"
+        @set('statusTodo', '')
+        @set 'isSubmitted', false
+        @get('changeStatusForm').reset()
+        @set 'lostBecause', ''
+        @trigger 'formReset'
+        , (error) =>
+          @send 'flashError', error
+
+    submit: (form) ->
+      return unless form.get('isValid')
+
+      @set 'justAdded', true
+
+      Ember.run.later(( =>
+        @set 'justAdded', false
+
+        form.commit()
+        form.reset()
+
+        @trigger 'formReset'
+      ), 1200)
+
+  needs: ['users', 'accountSettings', 'tags', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   assignToUser: null
@@ -57,44 +88,12 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   isLost: ( ->
     return unless @get('changedStatus')
-
     @get('changedStatus').toLowerCase() == 'lost'
   ).property('changedStatus')
 
   clearChecked: ->
     @get('checkedContent').forEach (item) =>
       item.set('isChecked', false)
-
-  changeStatus: ->
-    @set 'isSubmitted', true
-    if @get('isLost')
-      @set 'changeStatusForm.lostBecause', @get('lostBecause')
-
-    return unless @get('changeStatusForm.isValid')
-    @set 'changeStatusForm.todo', @get('statusTodo')
-    @get('changeStatusForm').commit().then =>
-      @send 'flashSuccess', "Deal's status succesfully changed"
-      @set('statusTodo', '')
-      @set 'isSubmitted', false
-      @get('changeStatusForm').reset()
-      @set 'lostBecause', ''
-      @trigger 'formReset'
-      , (error) =>
-        @send 'flashError', error
-
-  submit: (form) ->
-    return unless form.get('isValid')
-
-    @set 'justAdded', true
-
-    Ember.run.later(( =>
-      @set 'justAdded', false
-
-      form.commit()
-      form.reset()
-
-      @trigger 'formReset'
-    ), 1200)
 
   changeStatusForm: Radium.computed.newForm('changeStatus')
 

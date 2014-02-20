@@ -9,16 +9,15 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
     classNameBindings: ['isValid', 'isInvalid']
     placeholder: 'Supply a reason why this deal was lost.'
     valueBinding: 'targetObject.lostBecause'
-    isLost: Ember.computed.alias 'controller.isLost'
     classNames: ['new-comment']
     isValid: (->
-      return unless @get('isLost')
+      return unless @get('targetObject.isLost')
       @get('value.length')
-    ).property('value', 'controller.isSubmitted', 'controller.isLost')
+    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
     isInvalid: ( ->
-      return unless @get('controller.isSubmitted')
+      return unless @get('targetObject.isSubmitted')
       not @get('isValid')
-    ).property('value', 'controller.isSubmitted', 'controller.isLost')
+    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
   )
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend

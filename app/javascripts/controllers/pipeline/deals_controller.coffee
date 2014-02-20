@@ -49,9 +49,9 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
                   if selectedFilter == 'name'
                     ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
                   else if selectedFilter == 'company'
-                    item.get('contact.company') && ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
+                    item.get('contact.company') && ~item.get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
                   else
-                    ~item.get(selectedFilter).get('name').toLowerCase().indexOf(searchText.toLowerCase())
+                    ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
     content
   ).property('content.[]', 'selectedFilter', 'searchText')

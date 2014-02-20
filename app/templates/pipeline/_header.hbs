@@ -16,42 +16,4 @@
     </div>
   </div>
 </div>
-{{#if showFormArea}}
-<div class="block block-gray action-forms">
-  <h5>{{view.bulkLeader}}</h5>
-  {{partial 'bulk_actions/reassign'}}
-  {{#if showChangeStatusForm}}
-    <form>
-      <div class="change-status">
-        {{view view.statusPicker}}
-        <div class="assign-todo">
-          <i class="ss-standard ss-todo"></i>
-          {{view view.changeStatusTodo viewName="statusTodo"}}
-        </div>
-        <div id="change-status-action">
-          <a href="#" class="btn btn-medium btn-success" {{bind-attr disabled="controller.justAdded"}} {{action "changeStatus"}}>
-            OK
-          </a>
-        </div>
-      </div>
-      {{#if isLost}}
-        <div>
-          {{view view.lostBecause class="field" viewName="because"}}
-        </div>
-      {{/if}}
-    </form>
-  {{/if}}
-
-  {{#if showEmailForm}}
-    {{render "forms/email" newEmail}}
-  {{/if}}
-
-  {{#if showTodoForm}}
-    {{render "forms/todo" todoForm}}
-  {{/if}}
-
-  {{#if showCallForm}}
-    {{render "forms/call" callForm}}
-  {{/if}}
-</div>
-{{/if}}
+{{partial "pipeline/form_area"}}
