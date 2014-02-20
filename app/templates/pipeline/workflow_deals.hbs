@@ -4,16 +4,14 @@
 <table class="table table-hover pipeline-workflow-deals-list">
   <thead>
     <tr>
-      <th class="checkbox">Select All</th>
+      <th class="checkbox">
+        {{partial 'forms/check_all'}}
+      </th>
       <th class="deal">
         {{table-sorter heading="Deal"}}
       </th>
-      <th class="assigned-to">
-        {{table-sorter heading="Assigned To"}}
-      </th>
-      <th class="last-activity">
-        {{table-sorter heading="Last Activity"}}
-      </th>
+      <th class="assigned-to">Assigned To</th>
+      <th class="last-activity">Last Activity</th>
       <th class="next-task">Next Task</th>
       <th class="status">Change Status</th>
       <th class="forecast">

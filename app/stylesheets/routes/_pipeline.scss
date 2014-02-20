@@ -113,6 +113,9 @@
 
   .checkbox {
     width: percentage(100px / $base-width);
+    a {
+      color: #6e6e6e;
+    }
   }
 
   .name,

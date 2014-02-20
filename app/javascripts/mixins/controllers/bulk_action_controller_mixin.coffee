@@ -46,6 +46,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
           @send 'flashError', error
 
     submit: (form) ->
+      return unless form
       return unless form.get('isValid')
 
       @set 'justAdded', true

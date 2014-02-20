@@ -55,13 +55,7 @@
     {{/if}}
     <div class="search-results-header row-fluid">
       <div class="span2 checkers">
-        <a href="#" {{action "checkAll"}}>
-          {{#if checkedContent}}
-            Select None
-          {{else}}
-            Select All
-          {{/if}}
-        </a>
+        {{partial 'forms/check_all'}}
         <div class="pull-right">
           <a href="#" {{action "toggleThumbnails"}}>
             {{#if isThumbnailsVisible}}
