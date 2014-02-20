@@ -2,7 +2,7 @@ require 'mixins/views/bulk_action_view_mixin'
 
 Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   statusPicker: Ember.Select.extend
-    contentBinding: 'controller.statuses'
+    contentBinding: 'controller.activeStatuses'
     valueBinding: 'controller.changedStatus'
 
   lostBecause: Radium.TextArea.extend(Ember.TargetActionSupport,
@@ -21,7 +21,7 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   )
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend
-    valueBinding: 'targetObject.statusTodo'
+    valueBinding: 'controller.statusTodo'
     placeholder: "Add related todo?"
 
   bulkLeader: ( ->

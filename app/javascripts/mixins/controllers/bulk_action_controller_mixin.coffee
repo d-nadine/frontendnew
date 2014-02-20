@@ -91,6 +91,9 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @get('changedStatus').toLowerCase() == 'lost'
   ).property('changedStatus')
 
+  activeStatuses: Ember.computed 'statuses.[]', 'title', ->
+    @get('statuses').reject (status) => status.capitalize() == @get('title')
+
   clearChecked: ->
     @get('checkedContent').forEach (item) =>
       item.set('isChecked', false)

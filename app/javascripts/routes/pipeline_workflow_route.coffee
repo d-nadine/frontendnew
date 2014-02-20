@@ -1,9 +1,10 @@
-Radium.PipelineWorkflowRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
+Radium.PipelineWorkflowRoute = Radium.PipelineBaseRoute.extend Radium.BulkActionEmailEventsMixin,
   Radium.ClearCheckedMixin,
   model: (params) ->
     params.pipeline_state
 
   setupController: (controller, state) ->
+    @_super.apply this, arguments
     pipeline = @modelFor('pipeline')
 
     unless pipeline.get state
