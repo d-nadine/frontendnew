@@ -21,11 +21,16 @@ Radium.ChangeStatusForm = Radium.Form.extend
 
   commit:  ->
     promise = Ember.Deferred.promise (deferred) =>
+      status = @get('status')
+
+      deals = @get('deals').reject (deal) =>
+        deal.get('status') == status
+
       deferred.resolve() unless @get('deals.length')
 
       transaction = @get('store').transaction()
 
-      @get('deals').forEach (deal) =>
+      deals.forEach (deal) =>
         if @get('status').toLowerCase() == 'lost'
           deal.set('lostDuring', deal.get('status'))
           deal.set('lostBecause', @get('lostBecause'))
@@ -40,9 +45,9 @@ Radium.ChangeStatusForm = Radium.Form.extend
           todo.set 'reference', deal
           transaction.add todo
 
-        deal.one 'didUpdate', =>
+        deal.one 'didUpdate', (result) =>
           deal.set 'isChecked', false
-          deferred.resolve() unless @get('deals.length')
+          deferred.resolve() if deals.get('lastObject') == result
 
         deal.one 'becameInvalid', (result) =>
           transaction.rollback()
