@@ -1,6 +1,17 @@
 require 'mixins/views/bulk_action_view_mixin'
 
 Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
+  pipelineSearch: Ember.TextField.extend
+    type: "text"
+    valueBinding: 'targetObject.searchText'
+    keyDown: (e) ->
+      return unless e.keyCode ==13
+
+      e.stopPropagation()
+      e.preventDefault()
+
+      false
+
   statusPicker: Ember.Select.extend
     contentBinding: 'controller.activeStatuses'
     valueBinding: 'controller.changedStatus'
