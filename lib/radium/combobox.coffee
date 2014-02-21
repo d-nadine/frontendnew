@@ -88,6 +88,7 @@ Radium.Combobox = Radium.View.extend
   """
 
   setValue: (object) ->
+    object = if object instanceof Ember.ObjectController then object.get('content') else object
     @set 'value', object
 
   # Begin typehead customization
