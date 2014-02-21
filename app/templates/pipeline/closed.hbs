@@ -7,11 +7,17 @@
       <th class="checkbox">
         {{partial 'forms/check_all'}}
       </th>
-      <th class="deal">Deal</th>
-      <th class="assigned-to">Assigned To</th>
+      <th class="deal">
+        {{table-sorter heading="Deal" sortOn="name" sort="sortDeals"}}
+      </th>
+      <th class="assigned-to">
+        {{table-sorter heading="Assigned To" sortOn="user.name" sort="sortDeals"}}
+      </th>
       <th class="pay-by">Pay By</th>
       <th class="next-task">Next Task</th>
-      <th class="value">Value</th>
+      <th class="value">
+        {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
+      </th>
     </tr>
   </thead>
   <tbody>

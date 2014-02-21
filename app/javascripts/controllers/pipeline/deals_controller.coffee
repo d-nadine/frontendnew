@@ -9,6 +9,12 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
       @get('content').forEach (item) ->
         item.set 'isChecked', !allChecked
 
+    sortDeals: (column, ascending) ->
+      Ember.run =>
+        @set 'sort', column
+        @set 'sortAscending', ascending
+        @notifyPropertyChange 'sort'
+
   init: ->
     @_super.apply this, arguments
     parentController = @get('parentController.parentController')
@@ -33,16 +39,27 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
   ).observes('arrangedContent.[]', 'selectedFilter', 'searchText').on('init')
 
   sortFunc: (a, b) ->
-    Ember.compare a.get('displayName'), b.get('displayName')
+    sort = @get('sort')
+    sortAscending = @get('sortAscending')
+
+    if sortAscending
+      left = a
+      right = b
+    else
+      left = b
+      right = a
+
+    Ember.compare left.get(sort), right.get(sort)
 
   arrangedContent: ( ->
     content = @get('content')
+    sortFunc = @sortFunc.bind this
 
     return Ember.A() unless content.get('length')
 
     searchText = @get('searchText')
 
-    return content.toArray().sort(@sortFunc) unless searchText?.length
+    return content.toArray().sort(sortFunc) unless searchText?.length
 
     selectedFilter = @get('selectedFilter')
 
@@ -56,8 +73,8 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
                   else
                     ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
-    content.toArray().sort(@sortFunc)
-  ).property('content.[]', 'selectedFilter', 'searchText', 'sort')
+    content.toArray().sort(sortFunc)
+  ).property('content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending')
 
   dealValues: Ember.computed.mapBy 'visibleContent', 'value'
   total: Ember.computed.sum 'dealValues'

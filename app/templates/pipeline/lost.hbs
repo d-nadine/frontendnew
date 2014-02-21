@@ -8,11 +8,21 @@
         <th class="checkbox">
           {{partial 'forms/check_all'}}
         </th>
-        <th class="deal-lead">Lead</th>
-        <th class="assigned-to">Assigned To</th>
-        <th class="reason">Reason</th>
-        <th class="lost-during">Lost During</th>
-        <th class="value">Value</th>
+        <th class="deal-lead">
+          {{table-sorter heading="Lead" sortOn="contact.name" sort="sortDeals"}}
+        </th>
+        <th class="assigned-to">
+          {{table-sorter heading="Assigned To" sortOn="user.name" sort="sortDeals"}}
+        </th>
+        <th class="reason">
+          {{table-sorter heading="Reason" sortOn="lostBecause" sort="sortDeals"}}
+        </th>
+        <th class="lost-during">
+          {{table-sorter heading="Lost During" sortOn="lostDuring" sort="sortDeals"}}
+        </th>
+        <th class="value">
+          {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
+        </th>
         <th class="delete-button">&nbsp;</th>
       </tr>
     </thead>

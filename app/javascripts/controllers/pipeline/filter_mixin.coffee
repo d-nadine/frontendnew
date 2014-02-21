@@ -6,6 +6,7 @@ Radium.FilterMixin = Ember.Mixin.create
   selectedFilter: 'name'
   searchText: null
   sort: 'name'
+  sortAscending: true
 
   selectedFilterText: ( ->
     @get('filters').findProperty('name', @get('selectedFilter')).text
