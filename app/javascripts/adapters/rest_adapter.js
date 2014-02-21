@@ -87,7 +87,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     this.ajax(url, "GET", {
       data: {page: options.page || 1}
     }).then(function(json) {
-      var data = record.get('data'),
+      var data = record.get('_data'),
         ids = [],
         references = json[relationship.key];
 
@@ -105,7 +105,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 
       raw = data[relationship.key];
 
-      record.set('data', data);
+      record.set('_data', data);
 
       self.didFindMany(store, type, json);
 
