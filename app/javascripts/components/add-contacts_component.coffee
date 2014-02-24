@@ -6,7 +6,7 @@ Radium.AddContactsComponent = Ember.Component.extend
       @get('store').commit()
 
     removeSelection: (contact) ->
-      @get('parent.contacts').removeObject(lookup.get('person'))
+      @get('parent.contacts').removeObject(contact)
 
       @get('store').commit()
 
