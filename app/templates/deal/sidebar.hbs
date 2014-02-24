@@ -54,11 +54,24 @@
 
   {{partial 'shared/attachments'}}
 
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard ss-users"></i> Contacts
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="contacts-picker">
+        {{add-contacts parent=model store=controller.store}}
+      </div>
+    </div>
+  </div>
+
   {{partial 'shared/followers'}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-warning btn-block" {{action "togglePublished"}} {{bind-attr disabled=isSaving}}>
+      <button class="btn btn-warning btn-block publish" {{action "togglePublished"}} {{bind-attr disabled=isSaving}}>
         {{#if isPublic}}
           Unpublish
         {{else}}

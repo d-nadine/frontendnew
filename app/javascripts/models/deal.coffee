@@ -16,6 +16,8 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   user: DS.belongsTo('Radium.User')
   checklist: DS.hasMany('Radium.ChecklistItem')
 
+  contacts: DS.hasMany('Radium.Contact')
+
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
