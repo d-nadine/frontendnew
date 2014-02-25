@@ -1,4 +1,4 @@
-Radium.EmailsSentController = Radium.ObjectController.extend
+Radium.EmailsSentController = Radium.ObjectController.extend Radium.EmailDealMixin,
   actions:
     toggleFormBox: ->
       @toggleProperty 'showFormBox'

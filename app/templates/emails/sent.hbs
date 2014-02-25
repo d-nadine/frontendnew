@@ -18,6 +18,12 @@
     <div class="recipients-list text-center">
       <h3>{{list "toList"}}</h3>
     </div>
+
+    {{#if hasDeal}}
+      <div class="recipients-list text-center">
+        {{partial 'deals/deal_badge'}}
+      </div>
+    {{/if}}
   {{/if}}
 </div>
 

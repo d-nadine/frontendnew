@@ -35,5 +35,6 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       bucket: model.get('bucket')
       sendTime: model.get('sendTime')
       checkForResponse: model.get('checkForResponse')
+      deal: model.get('deal')
 
     @controllerFor('emailsEdit').set('emailForm', emailForm)

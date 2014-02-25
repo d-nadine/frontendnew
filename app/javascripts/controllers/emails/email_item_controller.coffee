@@ -1,4 +1,6 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
+  Radium.EmailDealMixin,
+
   needs: ['messages', 'deals']
   hideUploader: true
   actions:
@@ -63,23 +65,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
       false
 
-    clearDeal: ->
-      @set 'showingAddDeal', false
-      @set 'deal', null
-
-      @get('store').commit()
-
-      return
-
     hideForm: ->
       @set 'showFormBox', false
       @set 'formBox.activeForm', null
 
   showMeta : false
   currentForm: 'todo'
-
-  hasDeal: Ember.computed 'deal', ->
-    @get('deal')
 
   formBox: (->
     Radium.FormBox.create
