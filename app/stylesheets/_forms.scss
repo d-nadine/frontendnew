@@ -38,13 +38,15 @@
     position: relative;
 
     .ss-write {
-      opacity: 0;
+      opacity: 0.15;
       font-size: 12px;
+      @include transition(opacity 0.25s);
     }
 
     &:hover{
       .ss-write {
-        opacity: 0.3;
+        opacity: 0.5;
+
         &:hover{
           opacity: 1;
         }
