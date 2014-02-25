@@ -1,5 +1,5 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
-  needs: ['messages']
+  needs: ['messages', 'deals']
   hideUploader: true
   actions:
     toggleFormBox: ->
@@ -19,12 +19,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       return
 
     toggleReplyForm: ->
-      @set 'showForwardForm', false
+      @send 'closeForms'
       @toggleProperty 'showReplyForm'
       return
 
     toggleForwardForm: ->
-      @set 'showReplyForm', false
+      @send 'closeForms'
       @toggleProperty 'showForwardForm'
       return
 
@@ -34,13 +34,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     deleteEmail: (item) ->
       if @get('showReplyForm')
-        @set('showReplyForm', false)
-        @set('showForwardForm', false)
+        @send 'closeForms'
         return
 
       if @get('showForwardForm')
-        @set('showReplyForm', false)
-        @set('showForwardForm', false)
+        @send 'closeForms'
+
         return
 
       @send 'delete', item
@@ -53,12 +52,34 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
       @get('store').commit()
 
+    closeForms: ->
+      @set('showReplyForm', false)
+      @set('showForwardForm', false)
+      @set('showingAddDeal', false)
+
+    toggleAddDealForm: ->
+      @send 'closeForms'
+      @toggleProperty 'showingAddDeal'
+
+      false
+
+    clearDeal: ->
+      @set 'showingAddDeal', false
+      @set 'deal', null
+
+      @get('store').commit()
+
+      return
+
+    hideForm: ->
+      @set 'showFormBox', false
+      @set 'formBox.activeForm', null
+
   showMeta : false
   currentForm: 'todo'
 
-  hideForm: ->
-    @set 'showFormBox', false
-    @set 'formBox.activeForm', null
+  hasDeal: Ember.computed 'deal', ->
+    @get('deal')
 
   formBox: (->
     Radium.FormBox.create

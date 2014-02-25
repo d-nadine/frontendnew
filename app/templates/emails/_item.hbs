@@ -90,6 +90,17 @@
           <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-check green"></i> Add a Follow-up Task
           </button>
+          {{#unless hasDeal}}
+            <a href="#" {{action "toggleAddDealForm"}} class="btn">Add Deal</a>
+          {{else}}
+            {{partial 'deals/deal_badge'}}
+          {{/unless}}
+        {{/if}}
+      {{/unless}}
+
+      {{#unless hasDeal}}
+        {{#if showingAddDeal}}
+          {{add-deal parent=model}}
         {{/if}}
       {{/unless}}
 

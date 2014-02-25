@@ -126,10 +126,7 @@
             {{#unless hasDeal}}
               <a href="#" {{action "toggleAddDealForm"}} class="btn btn-link btn-main btn-messages-action">Add Deal</a>
             {{else}}
-              <span class='badge badge-info'>
-                <a class="pull-right" {{action clearDeal}}>x</a>
-                {{deal.name}}
-              </span>
+              {{partial 'deals/deal_badge'}}
             {{/unless}}
           </div>
           {{partial 'emails/check_for_response'}}

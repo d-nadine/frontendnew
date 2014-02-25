@@ -4,11 +4,20 @@ Radium.AddDealComponent = Ember.Component.extend
       @set('isSubmitted', true)
       return unless @get('parent.deal')
 
+      debugger
+
+      unless @get('isNew')
+        @get('store').commit()
+
       @send 'closeForm'
+      false
 
     closeForm: ->
       @get('targetObject').send 'toggleAddDealForm'
       false
+
+  store: Ember.computed ->
+    @get('container').lookup('store:main')
 
   isSubmitted: false
 
