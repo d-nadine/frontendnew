@@ -1,6 +1,7 @@
 Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
   actions:
     toggleReminderForm: ->
+      @set 'showingAddDeal', false
       @toggleProperty 'includeReminder'
       return false
 
@@ -55,7 +56,22 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
       @send 'saveEmail', form
       false
 
-  needs: ['tags','contacts','users','userSettings']
+    toggleAddDealForm: ->
+      @set 'includeReminder', false
+      @toggleProperty 'showingAddDeal'
+      false
+
+    clearDeal: ->
+      @set 'showingAddDeal', false
+      @set 'deal', null
+      return unless @get('isNew')
+
+      @get('store').commit()
+      return
+
+  showingAddDeal: false
+
+  needs: ['tags','contacts','users','userSettings', 'deals']
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
   settings: Ember.computed.alias 'controllers.userSettings.model'
@@ -64,6 +80,9 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
   isEditable: true
 
   disableSave: false
+
+  hasDeal: Ember.computed 'deal', ->
+    @get('deal')
 
   formBox: (->
     Radium.FormBox.create

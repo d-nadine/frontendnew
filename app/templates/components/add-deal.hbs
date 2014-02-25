@@ -1,0 +1,18 @@
+{{#unless dealsExist}}
+  <h5>There are currently no deals</h5>
+  {{#link-to "deals.new" class="btn btn-main btn-primary"}}
+    <i class="ss-standard ss-plus"></i> Deal
+  {{/link-to}}
+{{else}}
+  <div class="assigned-to control-group">
+    <div class="control-group">
+      {{view view.dealPicker}}
+      <button class="btn btn-primary picker-submit" {{action "addDeal"}}>
+        OK
+      </button>
+      <button class="btn btn-primary picker-submit" {{action "closeForm"}}>
+        CANCEL
+      </button>
+    </div>
+  </div>
+{{/unless}}

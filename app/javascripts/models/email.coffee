@@ -31,6 +31,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceEmail')
 
+  deal: DS.belongsTo('Radium.Deal')
+
   isScheduled: ( ->
     @get('isDraft') && @get('sendTime')
   ).property('isDraft', 'sendTime')

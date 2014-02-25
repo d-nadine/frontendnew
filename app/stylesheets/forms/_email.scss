@@ -270,3 +270,14 @@ g.email-thread-item {
 .check-response{
   margin-top: 10px;
 }
+
+.badge-info {
+  a.pull-right {
+    color: #fff;
+    margin-left: 5px;
+    font-size: larger;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+  }
+}

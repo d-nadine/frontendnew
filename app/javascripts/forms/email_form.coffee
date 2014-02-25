@@ -26,6 +26,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('isDraft', false)
     @set('sendTime', null)
     @set('checkForResponse', null)
+    @set('deal', null)
     @_super.apply this, arguments
 
   data: ( ->
@@ -50,6 +51,8 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
     attachedFiles: Ember.A()
     bucket: @get('bucket')
+
+    deal: @get('deal')
   ).property().volatile()
 
   isValid: ( ->

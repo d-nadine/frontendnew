@@ -91,6 +91,12 @@
       {{/if}}
 
       <div {{bind-attr class=":email-item-actions :new-message-row includeReminder:block-blue"}}>
+        <!--
+        FIXME: POSITION CORRECTLY
+        <div class="pull-right">
+          <button type="button" class="close" {{!action "toggleReminderForm"}} aria-hidden="true">&times;</button>
+        </div>
+        -->
         <div class="btn-toolbar pull-right">
           {{#if showEmailCancel}}
             <button tabindex="5" {{action "cancelSendEmail" bubbles="false"}} class="btn">Cancel</button>
@@ -117,9 +123,23 @@
             <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
               <i class="ss-standard ss-info"></i> Check for response?
             </a>
+            {{#unless hasDeal}}
+              <a href="#" {{action "toggleAddDealForm"}} class="btn btn-link btn-main btn-messages-action">Add Deal</a>
+            {{else}}
+              <span class='badge badge-info'>
+                <a class="pull-right" {{action clearDeal}}>x</a>
+                {{deal.name}}
+              </span>
+            {{/unless}}
           </div>
           {{partial 'emails/check_for_response'}}
         {{/if}}
+  
+        {{#unless hasDeal}}
+          {{#if showingAddDeal}}
+            {{add-deal parent=model}}
+          {{/if}}
+        {{/unless}}
 
       </div>
       {{#unless isDraft}}
