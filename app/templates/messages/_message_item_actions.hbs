@@ -1,37 +1,40 @@
 <div class="message-item-actions">
-  {{#if hasLead}}
-    <span class='badge badge-success'>LEAD</span>
-  {{/if}}
+  <div class="pull-right">
+    <a {{action "delete" this bubbles=false}} href="#" class="btn-icon delete">
+      <i class='ss-symbolicons-block ss-trash'></i>
+    </a>
+  </div>
+  <div class="message-item-labels">
+    {{#if hasLead}}
+      <span class='badge badge-success'>LEAD</span>
+    {{/if}}
 
-  {{#if fromUser}}
-    <span class='badge badge-warning'>USER</span>
-  {{/if}} 
+    {{#if fromUser}}
+      <span class='badge badge-warning'>USER</span>
+    {{/if}}
 
-  {{#if hasDeal}}
-    <span class="email-deal">{{partial 'deals/deal_badge'}}</span>
-  {{/if}}
+    {{#if hasDeal}}
+      {{partial 'deals/deal_badge'}}
+    {{/if}}
 
-  {{#if todos.length}}
-    <i class="ss-standard ss-check"></i>
-  {{/if}}
+    {{#if todos.length}}
+      <i class="ss-standard ss-check"></i>
+    {{/if}}
 
-  {{#if calls.length}}
-    <i class="ss-standard ss-phone"></i>
-  {{/if}}
+    {{#if calls.length}}
+      <i class="ss-standard ss-phone"></i>
+    {{/if}}
 
-  {{#if meetings.length}}
-    <i class="ss-standard ss-calendar"></i>
-  {{/if}}
+    {{#if meetings.length}}
+      <i class="ss-standard ss-calendar"></i>
+    {{/if}}
 
-  {{#if hasAttachments}}
-    <i class="ss-standard ss-attach"></i>
-  {{/if}}
+    {{#if hasAttachments}}
+      <i class="ss-standard ss-attach"></i>
+    {{/if}}
 
-  {{#if hasComments}}
-    <i class="ss-symbolicons-block ss-chat"></i>
-  {{/if}}
-
-  <a {{action "delete" this bubbles=false}} href="#" class="btn-icon delete pull-right">
-    <i class='ss-symbolicons-block ss-trash'></i>
-  </a>
+    {{#if hasComments}}
+      <i class="ss-symbolicons-block ss-chat"></i>
+    {{/if}}
+  </div>
 </div>

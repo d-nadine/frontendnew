@@ -193,6 +193,15 @@ $item-border: #dddddd;
   }
 }
 
+.message-item-details {
+  margin-left: 80px;
+
+  .badge {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .message-item-content {
   padding: 10px 20px;
   overflow: hidden;

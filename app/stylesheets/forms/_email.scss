@@ -1,4 +1,4 @@
-g.email-thread-item {
+.email-thread-item {
   margin: 0 0 40px;
 }
 
@@ -289,9 +289,24 @@ g.email-thread-item {
   }
 }
 
-.email-deal {
-  .badge-info a {
-    line-height: inherit;
-    font-size: inherit;
+.badge-email-deal {
+  max-width: 60px;
+  position: relative;
+  padding-right: 20px;
+  @include border-radius(40px);
+
+  a {
+    line-height: inherit !important;
+  }
+
+  .close {
+    float: none;
+    top: 0;
+    right: 5px;
+    position: absolute;
+    line-height: 15px !important;
+    line-height: 15px !important;
+    color: #fff;
+    opacity: 0.5;
   }
 }
