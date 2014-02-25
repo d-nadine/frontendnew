@@ -27,6 +27,7 @@
     }
 
     li.as-selection-item {
+      display: inline-block;
       background-image: none;
       @include border-radius(4px);
       @include box-shadow(none);

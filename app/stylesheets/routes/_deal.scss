@@ -310,3 +310,14 @@
 .deal-deleted-view {
   text-align: center;
 }
+
+.contacts-picker {
+  .autocomplete ul.as-selections li.as-selection-item {
+    max-width: 145px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 30px;
+  }
+}
