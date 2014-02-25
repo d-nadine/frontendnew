@@ -7,6 +7,10 @@
     <span class='badge badge-warning'>USER</span>
   {{/if}} 
 
+  {{#if hasDeal}}
+    <span class="email-deal">{{partial 'deals/deal_badge'}}</span>
+  {{/if}}
+
   {{#if todos.length}}
     <i class="ss-standard ss-check"></i>
   {{/if}}
@@ -31,9 +35,3 @@
     <i class='ss-symbolicons-block ss-trash'></i>
   </a>
 </div>
-<div class="email-deal">
-  {{#if hasDeal}}
-    {{partial 'deals/deal_badge'}}
-  {{/if}}
-</div>
-
