@@ -3,7 +3,7 @@
     <span class='badge badge-success'>LEAD</span>
   {{/if}}
 
-   {{#if fromUser}}
+  {{#if fromUser}}
     <span class='badge badge-warning'>USER</span>
   {{/if}} 
 
@@ -31,3 +31,9 @@
     <i class='ss-symbolicons-block ss-trash'></i>
   </a>
 </div>
+<div class="email-deal">
+  {{#if hasDeal}}
+    {{partial 'deals/deal_badge'}}
+  {{/if}}
+</div>
+

@@ -1,4 +1,4 @@
-Radium.MessagesSidebarItemController = Radium.ObjectController.extend
+Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.EmailDealMixin,
   needs: ['messages']
   selectedContent: Ember.computed.alias('controllers.messages.selectedContent')
   isSelectable: Ember.computed.alias('controllers.messages.canSelectItems')
@@ -11,13 +11,13 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend
     @get('sentAt') || @get('createdAt')
   ).property()
 
-  fromUser: Ember.computed 'model', ->
+  fromUser: Ember.computed 'sender', ->
     unless sender = @get('sender')
       return
 
     sender.constructor is Radium.User && sender != @get('currentUser')
 
-  hasLead: Ember.computed 'model', ->
+  hasLead: Ember.computed 'sender', ->
     unless sender = @get('sender')
       return
 

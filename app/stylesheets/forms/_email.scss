@@ -288,3 +288,10 @@ g.email-thread-item {
     }
   }
 }
+
+.email-deal {
+  .badge-info a {
+    line-height: inherit;
+    font-size: inherit;
+  }
+}
