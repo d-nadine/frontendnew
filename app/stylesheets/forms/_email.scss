@@ -272,12 +272,19 @@ g.email-thread-item {
 }
 
 .badge-info {
-  a.pull-right {
+  a {
     color: #fff;
-    margin-left: 5px;
-    font-size: larger;
-    position: relative;
-    top: -5px;
-    cursor: pointer;
+    &:not(.pull-right){
+      line-height: 20px;
+      font-size: larger;
+    }
+
+    &.pull-right {
+      margin-left: 5px;
+      font-size: larger;
+      position: relative;
+      top: -5px;
+      cursor: pointer;
+    }
   }
 }

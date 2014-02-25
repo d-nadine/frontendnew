@@ -1,4 +1,8 @@
 <span class='badge badge-info'>
   <a class="pull-right" {{action clearDeal}}>x</a>
-  {{deal.name}}
+  {{#if isNew}}
+    {{deal.name}}
+  {{else}}
+    {{#link-to 'deal' deal}}{{deal.name}}{{/link-to}}
+  {{/if}}
 </span>

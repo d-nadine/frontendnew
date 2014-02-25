@@ -4,8 +4,6 @@ Radium.AddDealComponent = Ember.Component.extend
       @set('isSubmitted', true)
       return unless @get('parent.deal')
 
-      debugger
-
       unless @get('isNew')
         @get('store').commit()
 
