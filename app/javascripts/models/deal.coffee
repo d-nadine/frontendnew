@@ -67,3 +67,5 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
     Radium.Notification.all().compact().forEach (notification) =>
       if @get('_referenceDeal') == this
         notification.deleteRecord()
+
+    @_super.apply this, arguments

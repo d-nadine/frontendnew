@@ -8,7 +8,7 @@ Radium.EmailDealMixin = Ember.Mixin.create
 
       @get('store').commit()
 
-      return
+      return false
 
   hasDeal: Ember.computed 'deal', ->
     @get('deal')
