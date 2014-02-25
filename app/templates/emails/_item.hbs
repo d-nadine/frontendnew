@@ -58,7 +58,7 @@
       </div>
     {{/if}}
 
-    <div class="clearfix email-item-actions">
+    <div class="clearfix email-item-actions email-item-main-actions">
       <div class="pull-right">
       {{#unless isDraft}}
         <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
@@ -91,16 +91,10 @@
             <i class="ss-standard ss-check green"></i> Add a Follow-up Task
           </button>
           {{#unless hasDeal}}
-            <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn">Add Deal</a>
-          {{else}}
-            {{partial 'deals/deal_badge'}}
+            <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn">
+              <i class="ss-standard ss-dollarsign green"></i> Add Deal
+            </a>
           {{/unless}}
-        {{/if}}
-      {{/unless}}
-
-      {{#unless hasDeal}}
-        {{#if showingAddDeal}}
-          {{add-deal parent=model}}
         {{/if}}
       {{/unless}}
 
@@ -121,6 +115,27 @@
       </div>
     {{/if}}
 
+    {{#if hasDeal}}
+      <div class="clearfix email-item-actions email-item-related-tasks">
+        <ol class="unstyled related-tasks">
+          <li>
+            <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
+            <i class="ss-standard ss-dollarsign"></i>
+            {{#if isNew}}
+              <span class="related-task-title">{{deal.name}}</span>
+            {{else}}
+              {{#link-to 'deal' deal class="related-task-title"}}
+                {{deal.name}}
+              {{/link-to}}
+            {{/if}}
+          </li>
+        </ol>
+      </div>
+    {{else}}
+      {{#if showingAddDeal}}
+        {{add-deal parent=model}}
+      {{/if}}
+    {{/if}}
 
     {{#unless isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
