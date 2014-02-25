@@ -12,11 +12,13 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   activities: DS.hasMany('Radium.Activity')
 
-  contact: DS.belongsTo('Radium.Contact')
+  contact: DS.belongsTo('Radium.Contact', inverse: 'deals')
   user: DS.belongsTo('Radium.User')
   checklist: DS.hasMany('Radium.ChecklistItem')
 
   contacts: DS.hasMany('Radium.Contact')
+
+  contactRefs: DS.attr('array')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

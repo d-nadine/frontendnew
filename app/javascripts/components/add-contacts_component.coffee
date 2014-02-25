@@ -1,12 +1,19 @@
 Radium.AddContactsComponent = Ember.Component.extend
   actions:
     addSelection: (lookup) ->
-      @get('parent.contacts').addObject(lookup.get('person'))
+      refs = @get('parent.contacts').mapProperty('id')
+      refs.push(lookup.get('id'))
+
+      @set('parent.contactRefs', refs)
 
       @get('store').commit()
 
     removeSelection: (contact) ->
-      @get('parent.contacts').removeObject(contact)
+      refs = @get('parent.contacts').mapProperty('id')
+
+      refs.removeObject(contact.get('id'))
+
+      @set('parent.contactRefs', refs)
 
       @get('store').commit()
 
@@ -31,4 +38,7 @@ Radium.AddContactsComponent = Ember.Component.extend
       scopes: ['contact']
 
     filterResults: (item) ->
-      @get('targetObject.parent.contact') != item
+      parent = @get('targetObject.parent')
+      return if parent.get('contact') == item.get('person')
+
+      not parent.get('contacts').mapProperty('id').contains(item.id)
