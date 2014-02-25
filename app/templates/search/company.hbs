@@ -6,7 +6,7 @@
     </div>
   {{/if}}
 </div>
-<div class="span4 name">
+<div class="span3 name">
   <div class="clearfix search-list-item-title">
     <h4 class="title">{{#link-to "company" this}}{{name}}{{/link-to}}</h4>
     {{partial 'search/links'}}
@@ -15,15 +15,14 @@
     </address>
   </div>
 </div>
-<!--
-DISABLE FOR NOW
 <div class="span2 last-activity">
-  {{!partial 'search/last_activity'}}
+  {{resource-link-to user}}
 </div>
--->
-<div class="span3 next-task">
+<div class="span2 next-task">
   {{partial 'search/tasks'}}
 </div>
 <div class="span2 groups">
-
+  {{#each tags}}
+    {{name}}
+  {{/each}}
 </div>
