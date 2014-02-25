@@ -28,6 +28,11 @@
     tr{
       td{
         padding: 5px;
+        vertical-align: middle;
+
+        input.field {
+          margin-bottom: 0;
+        }
 
         &.check{
           input[type=checkbox]{

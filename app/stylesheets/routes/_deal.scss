@@ -180,12 +180,11 @@
 .deal-checklist-view{
   .modal.fade.in{
     width: 754px;
-    table{
-      .btn-group{
-        position: relative;
-        top: -6px;
-      }
-    }
+  }
+
+  .modal-body {
+    overflow: visible;
+    max-height: none;
   }
 }
 .deal-sidebar-view {
