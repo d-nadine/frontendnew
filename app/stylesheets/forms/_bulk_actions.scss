@@ -1,5 +1,13 @@
-#bulk-actions {
+.bulk-actions {
+  margin-bottom: 20px;
 
+  form {
+    margin-bottom: 0;
+  }
+}
+
+.bulk-actions-title {
+  margin: 0 0 5px;
 }
 
 .addressbook-view,
@@ -32,7 +40,11 @@
 
     .assign-todo{
       width: 54%;
-      padding-bottom: 2px;
+      min-height: 32px;
+      padding: {
+        left: 35px;
+        bottom: 2px;
+      }
       background-color: $bright;
       .todo{
         margin-left: 20px;
@@ -40,7 +52,14 @@
 
       .icon-todo{
         position: absolute;
-        top: 7px;
+        top: 9px;
+        left: 9px;
+        font-size: 20px;
+        color: $lightness;
+      }
+
+      .mentions-input-box textarea {
+        margin-top: 3px;
       }
     }
 

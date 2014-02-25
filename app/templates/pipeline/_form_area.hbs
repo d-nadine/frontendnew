@@ -1,6 +1,6 @@
 {{#if showFormArea}}
-<div class="block block-gray action-forms">
-  <h5>{{view.bulkLeader}}</h5>
+<div class="block block-gray action-forms bulk-actions">
+  <h5 class="bulk-actions-title">{{view.bulkLeader}}</h5>
   {{partial 'bulk_actions/reassign'}}
   {{#if showChangeStatusForm}}
     <form>
@@ -10,9 +10,9 @@
           <i class="ss-standard ss-todo"></i>
           {{view view.changeStatusTodo viewName="statusTodo"}}
         </div>
-        <div id="change-status-action">
-          <a href="#" class="btn btn-medium btn-success" {{bind-attr disabled="controller.justAdded"}} {{action "changeStatus"}}>
-            OK
+        <div class="pull-right">
+          <a href="#" class="btn btn-primary" {{bind-attr disabled="controller.justAdded"}} {{action "changeStatus"}}>
+            <i class="ss-standard ss-repeat"></i> Change Status
           </a>
         </div>
       </div>

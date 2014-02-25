@@ -75,6 +75,7 @@
 
 .pipeline-workflows-list-item {
   margin: 0 0 50px;
+  display: inline-block;
 }
 
 .pipeline-workflows-total {
@@ -220,7 +221,6 @@
   width: 100%;
   margin: 20px 0;
   padding: 0 5px;
-  overflow: hidden;
   clear: both;
   background-color: #e9e9e9;
 }
