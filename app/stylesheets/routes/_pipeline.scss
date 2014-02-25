@@ -8,6 +8,21 @@
   }
 }
 
+.pipeline-cta-banner {
+  position: relative;
+
+  .close {
+    margin-top: -9px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+  }
+
+  h4 {
+    line-height: 35px;
+  }
+}
+
 .pipeline-tabs {
   @include breakpoint(portrait) {
     > li {
