@@ -32,7 +32,7 @@ Radium.AddDealComponent = Ember.Component.extend
 
     value: Ember.computed.alias 'controller.targetObject.deal'
     sourceBinding: 'controller.targetObject.controllers.deals'
-    placeholderBinding: 'Type deal name'
+    placeholder: 'Type deal name'
     isSubmittedBinding:'controller.isSubmitted'
 
     didInsertElement: ->
