@@ -9,10 +9,6 @@ Radium.ShowMoreComponent = Ember.Component.extend
       @set('currentPage', @get('currentPage') + 1)
 
       currentPage = @get('currentPage')
-
-      if parent.get('loadedPages').contains(currentPage)
-        return shower.send 'showMore'
-
       owner = model.get('owner')
       store = owner.store
       adapter = store.adapterForType(model.type)

@@ -27,7 +27,10 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   sendTime: DS.attr('datetime')
   checkForResponse: DS.attr('datetime')
 
-  displayName: Ember.computed.alias 'subject'
+  displayName: Ember.computed 'subject', ->
+    return @get('subject') if @get('subject.length')
+
+    return "(no subject)"
 
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceEmail')
 
