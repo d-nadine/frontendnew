@@ -2,6 +2,7 @@ require 'forms/form'
 require 'lib/radium/checklist_total_mixin'
 
 Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
+  Radium.FormsAttachmentMixin,
   data: ( ->
     name: @get('name')
     contact: @get('contact')
