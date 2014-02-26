@@ -4,7 +4,7 @@ Radium.AddDealComponent = Ember.Component.extend
       @set('isSubmitted', true)
       return unless @get('parent.deal')
 
-      unless @get('isNew')
+      unless @get('targetObject.isNew')
         @get('store').commit()
 
       @send 'closeForm'
@@ -30,7 +30,7 @@ Radium.AddDealComponent = Ember.Component.extend
         @_super.apply this, arguments
         @get("controller").send 'addDeal'
 
-    valueBinding: 'controller.targetObject.deal'
+    value: Ember.computed.alias 'controller.targetObject.deal'
     sourceBinding: 'controller.targetObject.controllers.deals'
     leader: 'Add Deal'
     isSubmittedBinding:'controller.isSubmitted'

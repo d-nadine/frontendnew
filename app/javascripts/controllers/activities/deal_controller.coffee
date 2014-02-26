@@ -8,6 +8,7 @@ Radium.ActivitiesDealController = Radium.ActivityBaseController.extend Radium.Ac
   isLose: Ember.computed.is 'event', 'lose'
   isReopen: Ember.computed.is 'event', 'reopen'
   isPay: Ember.computed.is 'event', 'value_change'
+  isEmailAdded: Ember.computed.is 'event', 'email_added'
 
   deal: Ember.computed.alias 'reference'
   value: Ember.computed.alias 'deal.value'
@@ -28,6 +29,7 @@ Radium.ActivitiesDealController = Radium.ActivityBaseController.extend Radium.Ac
       when 'pay' then 'dollarsign'
       when 'publish' then 'write'
       when 'reopen' then 'plus'
+      when "email_added" then 'mail'
   ).property('event')
 
   eventName: (->

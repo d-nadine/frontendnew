@@ -46,11 +46,13 @@
       font-size: 14px;
       line-height: 14px;
       color: $muted;
-      display: none;
+      display: inline-block;
+      opacity: 0.15;
+      @include transition(opacity 0.25s);
     }
 
     &:hover i {
-      display: inline-block;
+      opacity: 1;
     }
   }
 }

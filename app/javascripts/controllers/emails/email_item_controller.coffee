@@ -60,7 +60,8 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @set('showingAddDeal', false)
 
     toggleAddDealForm: ->
-      @send 'closeForms'
+      @set('showReplyForm', false)
+      @set('showForwardForm', false)
       @toggleProperty 'showingAddDeal'
 
       false

@@ -1,5 +1,5 @@
-// Version: v0.14-10-g1f18d95
-// Last commit: 1f18d95 (2014-02-13 12:07:48 +0000)
+// Version: v0.14-11-gd2898da
+// Last commit: d2898da (2014-02-26 06:05:00 +0000)
 
 
 (function() {
@@ -3507,6 +3507,10 @@ updatedState.uncommitted.deleteRecord = function(record) {
   record.transitionTo('deleted.uncommitted');
   record.clearRelationships();
 };
+
+updatedState.inFlight.loadedData = Ember.K;
+
+updatedState.uncommitted.loadedData = Ember.K;
 
 var RootState = {
   // FLAGS

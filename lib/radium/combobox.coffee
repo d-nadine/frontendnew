@@ -131,7 +131,7 @@ Radium.Combobox = Radium.View.extend
 
     focusIn: ->
       Em.run.next =>
-        @$().select()
+        @$()?.select()
 
     didInsertElement: ->
       @$().typeahead source: @get('parentView.sortedSource')
