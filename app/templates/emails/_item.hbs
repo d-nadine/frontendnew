@@ -81,7 +81,7 @@
         </a>
       </div>
 
-      {{#unless isPersonal}}
+      {{#unless sender.isPersonal}}
         {{#if showFormBox}}
           <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-delete"></i> Done
@@ -137,7 +137,7 @@
       {{/if}}
     {{/if}}
 
-    {{#unless isPersonal}}
+    {{#unless sender.isPersonal}}
       <div class="clearfix email-item-actions email-item-related-tasks">
         {{render 'related_tasks' tasks}}
       </div>

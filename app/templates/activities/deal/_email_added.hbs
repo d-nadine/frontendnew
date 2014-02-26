@@ -1,11 +1,11 @@
 <p>
   {{#if email.isLoaded}}
     {{resource-link-to email}}
+    <br/>
+    from: {{resource-link-to email.sender}}
   {{else}}
     {{partial 'is_loading'}}
   {{/if}}
-  <br/>
-  from: {{resource-link-to contact}} to: {{resource-link-to user}}
   <br/>
   added to {{resource-link-to reference}}
 </p>

@@ -2,9 +2,16 @@ Radium.AddDealComponent = Ember.Component.extend
   actions:
     addDeal: ->
       @set('isSubmitted', true)
-      return unless @get('parent.deal')
+      parent = if @get('parent') instanceof Ember.ObjectController
+                 @get('parent.model')
+               else
+                 @get('parent')
+
+      return unless deal = parent.get('deal')
 
       unless @get('targetObject.isNew')
+        parent.reloadAfterUpdateEvent('didUpdate')
+
         @get('store').commit()
 
       @send 'closeForm'

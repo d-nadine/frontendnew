@@ -19,13 +19,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
                         status: 'pending'
                         displayName: attendee.get('email')
 
-        invitation.one 'didCreate', (result) =>
-          observer = =>
-            if result.get('currentState.stateName') == "root.loaded.saved"
-              result.removeObserver 'currentState.stateName', observer
-              result.reload()
-
-          result.addObserver 'currentState.stateName', observer
+        invitation.reloadAfterUpdateEvent()
 
         invitation.one 'becameInvalid', (result) =>
           @get('invitations').removeObject invitation

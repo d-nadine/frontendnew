@@ -26,4 +26,16 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     @send('deleteRecord')
 
+  reloadAfterUpdateEvent: (event = 'didCreate') ->
+    @one event, (result) ->
+      @reloadAfterUpdate.call result
+
+  reloadAfterUpdate: ->
+    observer = ->
+      if @get('currentState.stateName') == "root.loaded.saved"
+        @removeObserver 'currentState.stateName', observer
+        @reload()
+
+    @addObserver 'currentState.stateName', observer
+
 requireAll /models/
