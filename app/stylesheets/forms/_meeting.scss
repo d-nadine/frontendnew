@@ -255,8 +255,9 @@
       border: 1px solid $control-border-color;
     }
 
-    .as-selection-item {
-      display: none;
+    li.as-selection-item,
+    li.as-selection-item.blur, {
+      display: none !IMPORTANT;
     }
   }
 }
