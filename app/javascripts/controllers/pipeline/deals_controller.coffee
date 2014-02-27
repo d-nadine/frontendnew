@@ -49,6 +49,22 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
       left = b
       right = a
 
+    if sort == 'nextTask'
+      sortA = left.get('nextTask')
+      sortB = right.get('nextTask')
+
+      if !sortA && !sortB
+        return 0
+      else if !sortA && sortB
+        return -1
+      else if sortA && !sortB
+        return 1
+
+      return Ember.DateTime.compare sortA.get('time'), sortB.get('time')
+
+    if sort == 'updatedAt'
+      return Ember.DateTime.compare left.get(sort), right.get(sort)
+
     Ember.compare left.get(sort), right.get(sort)
 
   arrangedContent: ( ->

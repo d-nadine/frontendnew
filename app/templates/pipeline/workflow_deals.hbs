@@ -13,8 +13,12 @@
       <th class="assigned-to">
         {{table-sorter heading="Assigned To" sortOn="user.name" sort="sortDeals"}}
       </th>
-      <th class="last-activity">Last Activity</th>
-      <th class="next-task">Next Task</th>
+      <th class="last-activity">
+        {{table-sorter heading="Last Activity" sortOn="updatedAt" sort="sortDeals"}}
+      </th>
+      <th class="next-task">
+        {{table-sorter heading="Next Task" sortOn="nextTask" sort="sortDeals"}}
+      </th>
       <th class="status">Change Status</th>
       <th class="forecast">Forecast</th>
       <th class="value">
