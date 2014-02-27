@@ -53,3 +53,9 @@ Radium.AddDealComponent = Ember.Component.extend
       return unless e.keyCode == 13
 
       @get("controller").send 'addDeal'
+
+    template: Ember.Handlebars.compile """
+      <a {{action "selectObject" this target=view href=true bubbles=false}}>{{longName}}</a>
+    """
+
+

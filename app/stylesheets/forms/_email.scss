@@ -13,6 +13,12 @@
   .input-append {
     margin-bottom: 0;
   }
+
+  .combobox {
+    input[type=text] {
+      width: 250px;
+    }
+  }
 }
 
 .email-item-main-actions {

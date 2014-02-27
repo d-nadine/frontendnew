@@ -55,6 +55,17 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
     @get('status') == 'unpublished'
   ).property('status')
 
+  longName: Ember.computed 'name', 'contact', ->
+    name = @get('name')
+    return name unless @get('contact')
+
+    suffix = if company = @get('contact.company')
+               company.get('displayName')
+             else
+               @get('contact.displayName')
+
+    "#{name} - #{suffix}"
+
   clearRelationships: ->
     @get('contact.deals').removeObject(this) if @get('contact')
 
