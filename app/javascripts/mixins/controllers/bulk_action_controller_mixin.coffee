@@ -27,6 +27,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
     toggleThumbnails: ->
       @toggleProperty('isThumbnailsVisible')
+      false
 
     changeStatus: ->
       @set 'isSubmitted', true

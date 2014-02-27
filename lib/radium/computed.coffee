@@ -3,7 +3,6 @@ require 'forms/discussion_form'
 require 'forms/meeting_form'
 require 'forms/todo_form'
 require 'lib/radium/aggregate_array_proxy'
-require 'lib/radium/task_list'
 require 'forms/deal_form'
 require 'forms/contact_form'
 
@@ -43,43 +42,38 @@ Radium.computed.newForm = (form, properties = {}) ->
 Radium.computed.aggregate = ->
   properties = Array.prototype.slice.call arguments
 
-  args = properties.map (prop) => "#{prop}.[]"
+  args = properties.map (prop) => "#{prop}"
 
-  func = (propName) ->
-    arrays = properties.map((array) =>
-      @get(array)
-    ).filter((array) =>
-      return unless array
-      array.get('length')
-    )
+  options =
+    initialValue: []
+    addedItem: (array, item, changeMeta, instanceMeta) ->
+      return array if array.contains item
 
-    aggregate = Ember.ArrayProxy.create(content: Ember.A())
+      observer = =>
+        return unless item.get('isLoaded')
 
-    aggregate.set 'isLoading', true
+        item.removeObserver 'isLoaded', observer
 
-    arrays.forEach (array) =>
-      loading = array.filterProperty('isLoaded', false)
+        array.addObject(item)
 
-      loaded = array.filter((item) -> return !loading.contains(item))
-
-      loaded.forEach (item) ->
-        aggregate.pushObject item
-
-      loading.forEach (item) =>
-        observer = =>
-          if item.get('isLoaded')
-            aggregate.pushObject(item)
-            item.removeObserver 'isLoaded', observer
-
+      if item.get('isLoaded')
+        observer()
+      else
         item.addObserver 'isLoaded', observer
 
-    aggregate.set 'isLoading', false
+      array
 
-    aggregate
+    removedItem: (array, item, changeMeta, instanceMeta) ->
+      return unless array.length
+      return unless array.contains(item)
 
-  args.push func
+      array.removeObject(item)
 
-  Ember.computed.apply this, args
+      array
+
+  args.push options
+
+  Ember.arrayComputed.apply this, args
 
 Radium.computed.tasks = Radium.computed.aggregate
 

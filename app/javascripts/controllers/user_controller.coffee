@@ -71,8 +71,8 @@ Radium.UserController = Radium.ObjectController.extend
     location: ""
     isNew: true
     reference: @get('model')
-    users: Em.ArrayProxy.create(content: [])
-    contacts: Em.ArrayProxy.create(content: [])
+    users: Ember.A()
+    contacts: Em.A()
     startsAt: @get('now').advance(hour: 1)
     endsAt: @get('now').advance(hour: 2)
     invitations: Ember.A()
