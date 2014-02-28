@@ -7,8 +7,10 @@ Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
   args = Array::slice.call(arguments, 1)
   resource = if path.length
                 @get(path)
-             else
+             else if this instanceof Em.Controller
                @get('model')
+             else if this instanceof Radium.Model
+               this
 
   return '' unless resource
 

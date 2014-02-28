@@ -19,6 +19,8 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
 
       existingDeals = Radium.Deal.all().slice()
 
+      addressBookController = @get('controllers.addressbook.model')
+
       promote.one 'didCreate', (result) =>
         @send "flashSuccess", "Contact created!"
         @get('content').removeObject(model)
@@ -28,7 +30,7 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
                       existingDeals.contains(record)
 
             deal = delta.get('firstObject')
-            @get('controllers.addressbook.model').pushObject(deal.get('contact'))
+            addressBookController.pushObject(deal.get('contact'))
             @set 'newPipelineDeal', deal
 
       @get('store').commit()

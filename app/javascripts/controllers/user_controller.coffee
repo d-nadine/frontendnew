@@ -1,4 +1,8 @@
 Radium.UserController = Radium.ObjectController.extend
+  actions:
+    goToeditProfile: ->
+      @transitionToRoute "settings.profile"
+
   needs: ['accountSettings']
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   compactFormButtons: true
@@ -11,6 +15,10 @@ Radium.UserController = Radium.ObjectController.extend
   userIsCurrentUser: ( ->
     @get('model') == @get('currentUser')
   ).property('model', 'currentUser')
+
+  otherUser: ( ->
+    Radium.User.all().find (item) -> item.get('id').toString() == "164"
+  ).property('controllers.users.[]')
 
   closedDealsTotal: ( ->
     deals = @get('deals')

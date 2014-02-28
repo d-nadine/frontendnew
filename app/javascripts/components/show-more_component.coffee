@@ -45,5 +45,9 @@ Radium.ShowMoreComponent = Ember.Component.extend
 
   pagingAvailable: ( ->
     metadata = @get('model.metadata')
+    unless metadata
+      @set 'isVisible', false
+      return
+
     @set('isVisible', metadata.totalPages > 1)
   ).observes('model.metadata.isLastPage')

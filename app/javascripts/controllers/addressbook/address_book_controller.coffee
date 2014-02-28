@@ -98,8 +98,10 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     return false if filter == 'companies' || filter == 'tags'
 
-    not @get('model.length')
-  ).property('isPrivateContacts', 'arrangedContent.[]', 'filter')
+    not @get('content.content')
+      .filter((item) -> 
+        item.constructor is Radium.Contact && not item.get('isPersonal'))?.length
+  ).property('isPrivateContacts', 'content.[]', 'filter')
 
   assignableContent: ( ->
     checkedContent = @get('checkedContent')

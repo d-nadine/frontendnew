@@ -134,13 +134,13 @@
     <div class="sidebar-panel-content">
       {{#unless userIsCurrentUser}}
         <button class="btn btn-danger btn-large btn-block" {{action "confirmDeletion"}}>Delete</button>
-      {{/unless}}
-      {{#if userIsCurrentUser}}
-        <br>
+      {{else}}
+        <br/>
         {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
-      {{/if}}
+      {{/unless}}
     </div>
   </div>
+  {{!http://jsbin.com/nikit/9/edit}}
   {{#if userIsCurrentUser}}
     <div class="sidebar-panel">
       <div class="sidebar-panel-content">

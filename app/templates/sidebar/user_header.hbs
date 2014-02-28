@@ -24,7 +24,7 @@
   </div>
 {{else}}
   <div class="user-avatar pull-left">
-    {{avatar this size=medium}}
+    {{avatar model size=medium}}
   </div>
   <div class="clearfix">
     <div class="header">
@@ -40,6 +40,6 @@
     {{/if}}
   </div>
 {{/if}}
-{{#unless userIsCurrentUser}}
-  <button class="btn btn-block btn-follow">Follow {{firstName}}</button>
+{{#unless parentController.userIsCurrentUser}}
+  <button disabled="disabled" class="btn btn-block btn-follow">Follow {{firstName}}</button>
 {{/unless}}
