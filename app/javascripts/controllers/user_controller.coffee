@@ -12,10 +12,6 @@ Radium.UserController = Radium.ObjectController.extend
     @get('model') == @get('currentUser')
   ).property('model', 'currentUser')
 
-  otherUser: ( ->
-    Radium.User.all().find (item) -> item.get('id').toString() == "164"
-  ).property('controllers.users.[]')
-
   closedDealsTotal: ( ->
     deals = @get('deals')
 
