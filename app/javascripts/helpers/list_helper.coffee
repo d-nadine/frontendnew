@@ -11,8 +11,6 @@ Radium.SentenceController = Radium.ArrayController.extend
   itemController: 'sentenceItem'
 
 Radium.SentenceItemController = Radium.ObjectController.extend
-  # HAX, apparently having itemController wraps all the indivdual
-  # items in that item controller--thusly the call to taret
   list: Ember.computed.alias('parentController.content')
 
   separator: (->
@@ -23,7 +21,7 @@ Radium.SentenceItemController = Radium.ObjectController.extend
   ).property('model')
 
 Ember.Handlebars.registerHelper 'list', (listPath, options) ->
-  options.types[0] = "ID"
+  options.types[0] = "STRING"
   # Render calls handelbars.get with contexts[1] for some reason.
   # I don't know why, but adding this line fixes it.
   options.contexts[1] = options.contexts[0]
