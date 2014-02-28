@@ -1,8 +1,4 @@
 Radium.UserController = Radium.ObjectController.extend
-  actions:
-    goToeditProfile: ->
-      @transitionToRoute "settings.profile"
-
   needs: ['accountSettings']
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   compactFormButtons: true
