@@ -50,6 +50,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
         @trigger('formReset')
       ), 1200)
 
+    trySubmit: ->
+      return if @get('isNew')
+      @send 'submit'
+
   init: ->
     @_super.apply this, arguments
 

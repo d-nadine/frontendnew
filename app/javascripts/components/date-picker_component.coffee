@@ -76,9 +76,14 @@ Radium.DatePickerComponent = Ember.Component.extend
       input.on 'changeDate', @changeDatePicker.bind(this)
 
     changeDatePicker: (evt) ->
-      milliseconds = evt.date.add(1).hours().valueOf()
+      milliseconds = evt.date.add(new Date().getHours() + 1).hours().valueOf()
       @get('targetObject').set 'date', Ember.DateTime.create(milliseconds)
       @$().data('datepicker').hide()
+      target = @get('targetObject')
+
+      return unless target.get('submitForm')
+
+      target.sendAction 'submitForm'
 
     hideDatePicker: ->
       return if @isDestroyed

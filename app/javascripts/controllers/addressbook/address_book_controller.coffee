@@ -62,7 +62,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'all', text: 'Show All'}
     {name: 'people', text: 'People'}
     {name: 'companies', text: 'Companies'}
-    {name: 'tags', text: 'Groups'}
+    {name: 'tags', text: 'Tags'}
     {name: 'private', text: 'Private Contacts', isPrivate: true}
   ]
 

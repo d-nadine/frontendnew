@@ -82,11 +82,15 @@
         </div>
         <div class="control-group">
           <div class="controls add-files">
-            <button class="btn add-files" {{bind-attr disabled="view.disabled"}}>
-              Add Files <i class="ss-standard ss-attach"></i>
-            </button>
+            {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
           </div>
+          {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
         </div>
+        {{#if controller.files}}
+          <div class="clearfix new-message-row">
+            {{detailed-uploadfilelist files=controller.files}}
+          </div>
+        {{/if}}
         <div class="control-group">
           <label class="control-label">PO Number</label>
           <div class="controls">

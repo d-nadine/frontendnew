@@ -13,6 +13,8 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     value: @get('value')
     poNumber: @get('poNumber')
     isPublished: @get('isPublished')
+    attachedFiles: Ember.A()
+    bucket: @get('bucket')
   ).property().volatile()
 
   reset: () ->
@@ -51,6 +53,8 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
 
   create:  ->
     deal = Radium.Deal.createRecord @get('data')
+
+    @setFilesOnModel(deal)
 
     @get('checklist').forEach (item) =>
       deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'date', 'isFinished')

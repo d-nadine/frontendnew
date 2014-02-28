@@ -60,7 +60,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   to: DS.attr('array')
   cc: DS.attr('array')
   bcc: DS.attr('array')
-  attachedFiles: DS.attr('array')
 
   isPublic: Ember.computed.not 'isPersonal'
 

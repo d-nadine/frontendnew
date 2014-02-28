@@ -63,8 +63,6 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       .map((invitation) -> invitation.get('person'))
   ).property('invitations.[]')
 
-  attachedFiles: DS.attr('array')
-
   isFinished: ( ->
     return unless @get('startsAt')
 

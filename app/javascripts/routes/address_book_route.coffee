@@ -55,4 +55,5 @@ Radium.AddressbookMembersRoute = Radium.AddressbookMemberBaseRoute.extend
 
 Radium.AddressbookEmployeesRoute = Radium.AddressbookMemberBaseRoute.extend
   model: (params) ->
+    debugger
     Radium.Company.find(params.company_id)
