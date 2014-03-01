@@ -1,169 +1,134 @@
-<div class="page-header">
-  <h2>Add Leads</h2>
-</div>
-
-<div class="new-leads-control">
-  <div class="btn-toolbar">
-    <a href="#single" data-toggle="tab" class="btn btn-primary btn-large">
-      <i class="ss-standard ss-plus"></i> Single Lead
-    </a>
-    <a href="#file" class="btn btn-large btn-link" data-toggle="tab">Import leads from file</a>
-    <a href="#social" class="btn btn-large btn-link" data-toggle="tab">From Social Network</a>
-  </div>
-</div>
-
-<div class="tab-content">
-  <div id="single" class="tab-pane active">
-    <form class="form form-horizontal well main-form new-lead-form">
-      <div class="secondary">
-        {{partial "saving"}}
-        <fieldset>
-        <div class="control-group">
-          <label class="control-label">Name</label>
-          <div class="controls">
-            <div {{bind-attr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
-              {{view view.contactName viewName="nameField"}}
-              {{#unless isNew}}
-                <span class="text">{{view.statusDescription}}</span>
-              {{/unless}}
-            </div>
-          </div>
-        </div>
-          <div class="control-group">
-            <label class="control-label">Company</label>
-            <div class="controls">
-              {{view view.companyPicker class="field"}}
-            </div>
-          </div>
-          <div class="existing">
+<div class="tab-pane active">
+  <form class="form form-horizontal well main-form new-lead-form">
+    <div class="secondary">
+      {{partial "saving"}}
+      <fieldset>
+      <div class="control-group">
+        <label class="control-label">Name</label>
+        <div class="controls">
+          <div {{bind-attr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
+            {{view view.contactName viewName="nameField"}}
             {{#unless isNew}}
-              {{#if isLead}}
-                <p><span>{{resource-link-to content}}</span> is a lead.</p>
-                {{#if contactDeals.length}}
-                  <p>They are the contact in the following deals:</p>
-                  <table class="table table-striped table-bordered table-hover deals">
-                    <thead>
-                      <tr>
-                        <th>DEAL NAME</th>
-                        <th>STATUS</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{#each contactDeals}}
-                        <tr>
-                          <td>{{#link-to "deal" this}}{{name}}{{/link-to}}</td>
-                          <td>{{status}}</td>
-                        </tr>
-                      {{/each}}
-                    </tbody>
-                  </table>
-                {{/if}}
-                <p>Do you want to create a new deal?</p>
-                {{#link-to "deals.fromContact" this class="btn btn-success"}}Yes{{/link-to}}
-              {{else}}
-                <p><span>{{#link-to "contact" content}}{{displayName}}{{/link-to}}{{#if company}}, {{#link-to company company}}{{company.name}}{{/link-to}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
-                <a href="#" class="btn" {{action "showExistingDetails" bubbles=false target="view"}}>
-                  <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
-                </a>
-                <a href="#" id="makeLead" {{action "makeLead"  bubbles=false}} class="btn btn-success">Yes</a>
-                Or click {{#link-to "contact" content}}here{{/link-to}} to update their details.
-              {{/if}}
+              <span class="text">{{view.statusDescription}}</span>
             {{/unless}}
           </div>
-          <div class="contact-detail">
-            {{render 'multiple/email_address' emailAddresses}}
-            {{render 'multiple/phone_number' phoneNumbers}}
-            <div class="control-group">
-              <label class="control-label">Assigned To</label>
-              <div class="controls">
-                {{view view.userPicker}}
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label type">Type</label>
-              <div class="controls">
-                {{view view.contactType}}
-              </div>
-            </div>
-            {{#if isNewLead}}
-              <div class="control-group">
-                <label class="control-label type">Deal State</label>
-                <div class="controls">
-                  {{view view.workflowStates}}
-                </div>
-              </div>
-            {{/if}}
-            <div class="control-group">
-              <label class="control-label">Tags</label>
-              <div class="controls">
-                {{view view.tags placeholder="Tags..." viewName="tags"}}
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label type">Notes</label>
-              <div class="controls">
-                {{view view.notes class="input-xxlarge"}}
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label type">Lead Source</label>
-              <div class="controls">
-                {{view view.source}}
-              </div>
-            </div>
-            <div class="control-group">
-              <a href="#" class="btn showdetails-link" {{action "toggleDetail" target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
-            </div>
-            <div class="address-section">
-              {{render 'multiple/address' addresses}}
-            </div>
-            {{partial 'validation_error_message'}}
-            <div class="button-row">
-              <a href="#" {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
-                {{#if isSaving}}
-                  <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
-                {{else}}
-                  <i class="ss-standard ss-plus"></i> Submit
-                {{/if}}
+        </div>
+      </div>
+        <div class="control-group">
+          <label class="control-label">Company</label>
+          <div class="controls">
+            {{view view.companyPicker class="field"}}
+          </div>
+        </div>
+        <div class="existing">
+          {{#unless isNew}}
+            {{#if isLead}}
+              <p><span>{{resource-link-to content}}</span> is a lead.</p>
+              {{#if contactDeals.length}}
+                <p>They are the contact in the following deals:</p>
+                <table class="table table-striped table-bordered table-hover deals">
+                  <thead>
+                    <tr>
+                      <th>DEAL NAME</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each contactDeals}}
+                      <tr>
+                        <td>{{#link-to "deal" this}}{{name}}{{/link-to}}</td>
+                        <td>{{status}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              {{/if}}
+              <p>Do you want to create a new deal?</p>
+              {{#link-to "deals.fromContact" this class="btn btn-success"}}Yes{{/link-to}}
+            {{else}}
+              <p><span>{{#link-to "contact" content}}{{displayName}}{{/link-to}}{{#if company}}, {{#link-to company company}}{{company.name}}{{/link-to}}{{/if}}</span> is not a lead, do you want to update their status to lead?</p>
+              <a href="#" class="btn" {{action "showExistingDetails" bubbles=false target="view"}}>
+                <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
               </a>
+              <a href="#" id="makeLead" {{action "makeLead"  bubbles=false}} class="btn btn-success">Yes</a>
+              Or click {{#link-to "contact" content}}here{{/link-to}} to update their details.
+            {{/if}}
+          {{/unless}}
+        </div>
+        <div class="contact-detail">
+          {{render 'multiple/email_address' emailAddresses}}
+          {{render 'multiple/phone_number' phoneNumbers}}
+          <div class="control-group">
+            <label class="control-label">Assigned To</label>
+            <div class="controls">
+              {{view view.userPicker}}
             </div>
           </div>
-          </fieldset>
+          <div class="control-group">
+            <label class="control-label type">Type</label>
+            <div class="controls">
+              {{view view.contactType}}
+            </div>
+          </div>
+          {{#if isNewLead}}
+            <div class="control-group">
+              <label class="control-label type">Deal State</label>
+              <div class="controls">
+                {{view view.workflowStates}}
+              </div>
+            </div>
+          {{/if}}
+          <div class="control-group">
+            <label class="control-label">Tags</label>
+            <div class="controls">
+              {{view view.tags placeholder="Tags..." viewName="tags"}}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label type">Notes</label>
+            <div class="controls">
+              {{view view.notes class="input-xxlarge"}}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label type">Lead Source</label>
+            <div class="controls">
+              {{view view.source}}
+            </div>
+          </div>
+          <div class="control-group">
+            <a href="#" class="btn showdetails-link" {{action "toggleDetail" target="view" bubbles=false}}><i id="detailToggle" class="ss-standard ss-navigatedown"></i></a>
+          </div>
+          <div class="address-section">
+            {{render 'multiple/address' addresses}}
+          </div>
+          {{partial 'validation_error_message'}}
+          <div class="button-row">
+            <a href="#" {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+              {{#if isSaving}}
+                <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
+              {{else}}
+                <i class="ss-standard ss-plus"></i> Submit
+              {{/if}}
+            </a>
+          </div>
         </div>
-      <div class="modal hide fade">
-        <div class="modal-header">
-          <button type="button" {{action "cancelSubmit" target="view" bubbles="false"}} class="close">×</button>
-          <h2>Add {{view.missingDetail}}?</h2>
-        </div>
-        <div class="modal-body">
-          <form class="form">
-            <p>You are about to create a contact without a {{view.missingDetail}}, do you want to do this?</p>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a href="#" {{action "cancelSubmit" target="view" bubbles="false"}} class="btn">Cancel</a>
-          <a href="#" {{action "submit" bubbles="false"}} class="btn btn-primary">Proceed</a>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div id="file" class="tab-pane">
-    <form class="form form-horizontal">
-      <div class="secondary">
-        <fieldset>
-          {{partial 'unimplemented'}}
         </fieldset>
       </div>
-    </form>
-  </div>
-  <div id="social" class="tab-pane">
-    <form class="form form-horizontal">
-      <div class="secondary">
-        <fieldset>
-          {{partial 'unimplemented'}}
-        </fieldset>
+    <div class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" {{action "cancelSubmit" target="view" bubbles="false"}} class="close">×</button>
+        <h2>Add {{view.missingDetail}}?</h2>
       </div>
-    </form>
-  </div>
+      <div class="modal-body">
+        <form class="form">
+          <p>You are about to create a contact without a {{view.missingDetail}}, do you want to do this?</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#" {{action "cancelSubmit" target="view" bubbles="false"}} class="btn">Cancel</a>
+        <a href="#" {{action "submit" bubbles="false"}} class="btn btn-primary">Proceed</a>
+      </div>
+    </div>
+  </form>
 </div>
-

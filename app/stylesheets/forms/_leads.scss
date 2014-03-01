@@ -79,7 +79,6 @@
   }
 
   .tab-content{
-    margin-top: -15px;
     overflow: visible;
   }
 
@@ -193,5 +192,45 @@
 
   .control-box input.ember-text-field {
     min-width: 300px;
+  }
+}
+
+// Import forms
+.import-match-form {
+
+}
+
+.match-columns-title {
+  margin-bottom: 20px;
+  line-height: 30px;
+  font-weight: bold;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.preview-title {
+  margin-left: 374px;
+}
+
+.preview-inline {
+  margin-left: 15px;
+}
+
+.match-additonal-column-options {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  margin-left: 10px;
+  line-height: 30px;
+
+  > span {
+    margin-right: 15px;
+  }
+
+  .radio.inline {
+    padding-top: 0;
+
+    input[type="radio"] {
+      margin-top: 3px;
+    }
   }
 }

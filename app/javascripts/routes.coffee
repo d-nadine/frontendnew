@@ -5,7 +5,7 @@ Radium.Router.reopen
   didTransition: (infos) ->
     @_super.apply this, arguments
     numberOfContacts =  Radium.Contact.all().filter((contact) => not contact.get('isPersonal')).get('length')
-    window.Intercom('update', number_of_contacts: numberOfContacts) 
+    window.Intercom('update', number_of_contacts: numberOfContacts)
     window.Intercom('reattach_activator')
 
 Radium.Router.map ->
@@ -35,6 +35,8 @@ Radium.Router.map ->
 
   @resource 'leads', ->
     @route 'new'
+    @route 'import'
+    @route 'match'
     @route 'fromCompany', path: '/new/companies/:company_id'
 
   @resource 'contacts'

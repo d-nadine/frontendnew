@@ -1,0 +1,41 @@
+<div class="tab-pane active">
+  <div class="alert alert-info">
+    <i class="ss-standard ss-info"></i> Import your own contacts by uploading a CSV or Excel file. Need more guidance? <a href="#" {{action "toggleInstructions"}}>Click here</a> for some basic tips.
+  </div>
+  {{#if showInstructions}}
+    <div class="well">
+      <h4>Import instructions</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <button class="btn btn-main btn-primary" {{action "toggleInstructions"}}>
+        Thanks, got it
+      </button>
+    </div>
+  {{/if}}
+
+  {{#if importing}}
+    <div class="well">
+      <h4>Importing contacts</h4>
+      {{view Radium.ProgressBar percentageBinding="percentage"}}
+    </div>
+  {{else}}
+    <form class="form form-horizontal well main-form new-lead-form" {{action "importFile" on="submit"}}>
+      <div class="control-group">
+        <label class="control-label" for="import-csv">Import Contacts</label>
+        <div class="controls">
+          <input type="file" id="import-csv">
+          <span class="help-block">Download sample file for quicker import <a href="#">here</a></span>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button class="btn btn-primary">Import</button>
+        </div>
+      </div>
+    </form>
+  {{/if}}
+</div>

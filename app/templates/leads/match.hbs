@@ -1,0 +1,74 @@
+<div class="alert alert-error">
+  <div class="text-center">
+    <h4>Over 1000 contacts detected.</h4>
+    <div>This may be a long process, are you sure you want to continue?</div>
+    <div class="alert-actions">
+      <button class="btn btn-main btn-primary">Yes</button>
+      <button class="btn btn-main">No</button>
+    </div>
+  </div>
+</div>
+
+<form class="form form-horizontal well main-form import-match-form" {{action "importFile" on="submit"}}>
+  <fieldset>
+    <div class="match-columns-title">
+      <div class="preview-title">Preview</div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">First Name</label>
+      <div class="controls">
+        {{view Radium.AutocompleteCombobox classNames="field"}}
+        <span class="help-inline preview-inline">Sami</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Last Name</label>
+      <div class="controls">
+        {{view Radium.AutocompleteCombobox classNames="field"}}
+        <span class="help-inline preview-inline">Asikainen</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Title</label>
+      <div class="controls">
+        {{view Radium.AutocompleteCombobox classNames="field"}}
+        <span class="help-inline preview-inline">CEO</span>
+      </div>
+    </div>
+  </fieldset>
+
+  </fieldset>
+    <legend>7 additional columns detected</legend>
+    <div class="control-group">
+      <label class="control-label">Do you want to add</label>
+      <div class="controls">
+        {{view Radium.AutocompleteCombobox classNames="field" placeholder="Some field"}}
+        <span class="match-additonal-column-options">
+          <span>Add as a</span>
+          <label class="radio inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+            Tag
+          </label>
+          <label class="radio inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+            Contact Note
+          </label>
+          <label class="radio inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+            Company Note
+          </label>
+        </span>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="button-row">
+    <button {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+      {{#if isSaving}}
+        <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
+      {{else}}
+        <i class="ss-standard ss-plus"></i> Import
+      {{/if}}
+    </button>
+  </div>
+</form>
