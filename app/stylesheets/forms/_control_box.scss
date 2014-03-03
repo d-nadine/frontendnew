@@ -19,16 +19,12 @@
   // take the bootstrap add-on but don't bring
   // in all the crap related to it's styling
   .text {
-    vertical-align: top;
-    display: inline-block;
-    width: auto;
-    min-width: 16px;
-    padding: 3px 5px;
-    font-size: 14px;
+    padding-left: 5px;
     font-weight: normal;
     line-height: 26px;
     text-align: center;
     color: $muted;
+    vertical-align: middle;
   }
 
   .add-on {
@@ -90,7 +86,12 @@
 
   input {
     width: auto;
+    padding: {
+      top: 0;
+      bottom: 0;
+    }
     margin-bottom: 0;
+    vertical-align: middle;
   }
 }
 
