@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<form class="form form-horizontal well main-form import-match-form" {{action "importFile" on="submit"}}>
+<div class="form form-horizontal well main-form import-match-form">
   <fieldset>
     <div class="match-columns-title">
       <div class="preview-title">Preview</div>
@@ -63,7 +63,7 @@
   </fieldset>
 
   <div class="button-row">
-    <button {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+    <button {{action "importFile" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
       {{#if isSaving}}
         <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
       {{else}}
@@ -71,4 +71,4 @@
       {{/if}}
     </button>
   </div>
-</form>
+</div>

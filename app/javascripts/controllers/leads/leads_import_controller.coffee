@@ -10,6 +10,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
           @incrementProperty "percentage"
         else
           clearInterval(progresser)
+          @setProperties(
+            importing: false
+            percentage: 0
+          )
           @transitionTo "leads.match"
       , 100)
   ).observes('importing').on('init')
