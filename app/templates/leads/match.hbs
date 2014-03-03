@@ -1,14 +1,98 @@
+{{#if showLargeImportMessage}}
 <div class="alert alert-error">
   <div class="text-center">
     <h4>Over 1000 contacts detected.</h4>
     <div>This may be a long process, are you sure you want to continue?</div>
     <div class="alert-actions">
-      <button class="btn btn-main btn-primary">Yes</button>
-      <button class="btn btn-main">No</button>
+      <button class="btn btn-main btn-primary" {{action "dismissLargeImportMessage"}}>
+        Yes
+      </button>
+      <button class="btn btn-main" {{action "cancelLargeImportMessage"}}>
+        No
+      </button>
     </div>
   </div>
 </div>
+{{/if}}
 
+{{#if importSuccess}}
+  <div class="alert alert-info">
+    Successfully imported contacts from <code>contacts.csv</code>!
+  </div>
+  <div class="row-fluid">
+    <div class="span3 offset1 match-summary-item">
+      <div class="media">
+        <a href="#" class="pull-left match-summary-total text-success">
+          100
+        </a>
+        <div class="media-body text-success">
+          <h4 class="media-heading"><i class="ss-standard ss-users"></i> Contacts Imported</h4>
+          <p>New deals are created for each.</p>
+        </div>
+      </div>
+    </div>
+    <div class="span3 offset1 match-summary-item">
+      <div class="media">
+        <a href="#" class="pull-left match-summary-total text-success">
+          40
+        </a>
+        <div class="media-body text-success">
+          <h4 class="media-heading"><i class="ss-standard ss-buildings"></i> Companies Imported</h4>
+          <p>New deals are created for each.</p>
+        </div>
+      </div>
+    </div>
+    <div class="span3 offset1 match-summary-item">
+      <div class="media">
+        <a href="#" class="pull-left match-summary-total text-error">
+          5
+        </a>
+        <div class="media-body text-error">
+          <h4 class="media-heading"><i class="ss-standard ss-alert"></i> Errors Detected</h4>
+          <p>New deals are created for each.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <table class="table table-striped match-errors-table">
+      <caption>The following items were flagged for errors.</caption>
+      <thead>
+        <tr>
+          <th>Line</th>
+          <th>Column</th>
+          <th>Received Value</th>
+          <th class="text-error">Error</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>24</td>
+          <td>Name</td>
+          <td><pre>""</pre></td>
+          <td class="text-error">Entry cannot be blank</td>
+          <td>
+            <a href="#" class="close">
+              <i class="ss-symbolicons-block ss-trash"></i>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>52</td>
+          <td>Email Address</td>
+          <td><pre>test@test.</pre></td>
+          <td class="text-error">Not a valid email</td>
+          <td>
+            <a href="#" class="close">
+              <i class="ss-symbolicons-block ss-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{{else}}
 <div class="form form-horizontal well main-form import-match-form">
   <fieldset>
     <div class="match-columns-title">
@@ -63,7 +147,7 @@
   </fieldset>
 
   <div class="button-row">
-    <button {{action "importFile" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+    <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
       {{#if isSaving}}
         <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
       {{else}}
@@ -72,3 +156,4 @@
     </button>
   </div>
 </div>
+{{/if}}

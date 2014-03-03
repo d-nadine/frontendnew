@@ -19,22 +19,17 @@
 
   {{#if importing}}
     <div class="well">
-      <h4>Importing contacts</h4>
+      <h4>Importing contacts from <code>contacts.csv</code></h4>
       {{view Radium.ProgressBar percentageBinding="percentage"}}
     </div>
   {{else}}
     <div class="form form-horizontal well main-form new-lead-form">
       <div class="control-group">
-        <label class="control-label" for="import-csv">Import Contacts</label>
-        <div class="controls">
-          <input type="file" id="import-csv">
-          <span class="help-block">Download sample file for quicker import <a href="#">here</a></span>
-        </div>
+        {{drag-fileuploader}}
+        <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
-      <div class="control-group">
-        <div class="controls">
-          <button class="btn btn-primary" {{action "importFile"}}>Import</button>
-        </div>
+      <div class="control-group text-right">
+        <button class="btn btn-primary" {{action "importFile"}}>Import</button>
       </div>
     </div>
   {{/if}}

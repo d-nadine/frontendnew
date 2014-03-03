@@ -234,3 +234,28 @@
     }
   }
 }
+
+.match-summary-item {
+  margin: 40px 0;
+
+  .media-heading {
+    i {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+.match-summary-total {
+  font: {
+    size: 45px;
+    weight: bold;
+  }
+  line-height: 1em;
+}
+
+.match-errors-table {
+  pre {
+    margin: 0;
+  }
+}
