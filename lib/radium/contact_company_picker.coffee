@@ -3,7 +3,7 @@ require 'lib/radium/company_picker'
 Radium.ContactCompanyPicker = Radium.CompanyPicker.extend
   classNameBindings: [':company-name']
   valueBinding: 'controller.company'
-  placeholder: 'Company'
+  placeholder: 'Choose or add a Company'
   companyNameBinding: 'controller.companyName'
 
   didInsertElement: ->
