@@ -39,5 +39,8 @@ Radium.CsvReaderComponent = Ember.TextField.extend
         @send 'importToLarge', lines.length
         return
 
+      @set 'controller.initialImported', true
+      @set 'controller.disabled', true
+
     csv = reader.readAsText(file)
 

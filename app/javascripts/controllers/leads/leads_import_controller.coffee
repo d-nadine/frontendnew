@@ -38,5 +38,5 @@ Radium.LeadsImportController= Ember.ObjectController.extend
             importing: false
             percentage: 0
           )
-      , 100)
+      , 10)
   ).observes('importing').on('init')

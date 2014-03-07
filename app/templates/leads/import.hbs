@@ -35,6 +35,22 @@
       {{view Radium.ProgressBar percentageBinding="percentage"}}
     </div>
   {{/if}}
+  {{#if initialImported}}
+    <div class="form form-horizontal well main-form import-match-form">
+      <fieldset>
+        <div class="match-columns-title">
+          <div class="preview-title">Preview</div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">First Name</label>
+          <div class="controls">
+            {{view Radium.AutocompleteCombobox classNames="field"}}
+            <span class="help-inline preview-inline">Sami</span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  {{/if}}
   <div class="form form-horizontal well main-form new-lead-form">
     <div class="control-group">
       {{drag-fileuploader}}
@@ -42,7 +58,7 @@
     </div>
     <div class="control-group text-right">
       <button class="btn btn-primary" {{!action "importFile"}}>Import</button>
-      {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing}}
+      {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing initialImported=initialImported}}
     </div>
   </div>
 </div>
