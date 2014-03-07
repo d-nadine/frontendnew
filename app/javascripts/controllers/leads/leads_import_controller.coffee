@@ -1,7 +1,31 @@
 Radium.LeadsImportController= Ember.ObjectController.extend
+  actions:
+    importFile: (event) ->
+      @set "importing", true
+      return
+
+    toggleInstructions: ->
+      @toggleProperty "showInstructions"
+      return
+
+    cancelImport: (rowCount) ->
+      @set 'rowCount', rowCount
+      @set 'showLargeImportMessage', true
+      @set 'showInstructions', false
+      false
+
+    dismissLargeImportMessage: ->
+      @set 'rowCount', 0
+      @set 'showLargeImportMessage', false
+      @set 'showInstructions', false
+      false
+
   importing: false
   percentage: 0
   showInstructions: false
+  showLargeImportMessage: false
+  rowCount: 0
+  disableImport: false
 
   fileUploaded: (->
     if @get('importing')
@@ -14,15 +38,5 @@ Radium.LeadsImportController= Ember.ObjectController.extend
             importing: false
             percentage: 0
           )
-          @transitionTo "leads.match"
       , 100)
   ).observes('importing').on('init')
-
-  actions:
-    importFile: (event) ->
-      @set "importing", true
-      return
-
-    toggleInstructions: ->
-      @toggleProperty "showInstructions"
-      return

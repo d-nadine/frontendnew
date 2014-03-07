@@ -7,7 +7,7 @@ input[type=file]{
   color: transparent;
   cursor: pointer;
 
-  &.upload-button, &.avatar-upload {
+  &.upload-button, &.avatar-upload, &.csv-upload{
     &.upload-button {
       &:before {
         content: 'Select some files';
@@ -44,6 +44,23 @@ input[type=file]{
       }
     }
 
+    &.csv-upload {
+      &:before {
+        content: 'Select Import File';
+        position: absolute;
+        line-height: 18px;
+        padding: 4px 0;
+        white-space: nowrap;
+        cursor: pointer;
+        background-color: #fff;
+        color: #000;
+        @include user-select(none);
+
+        .sidebar-panel-header & {
+          background-color: #e8e8e8;
+        }
+      }
+    }
 
     &,
     &:active,
