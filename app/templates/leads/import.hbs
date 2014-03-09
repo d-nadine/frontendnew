@@ -50,15 +50,16 @@
         </div>
       </fieldset>
     </div>
+  {{else}}
+    <div class="form form-horizontal well main-form new-lead-form">
+      <div class="control-group">
+        {{drag-fileuploader}}
+        <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
+      </div>
+      <div class="control-group text-right">
+        <button class="btn btn-primary" {{!action "importFile"}}>Import</button>
+        {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing initialImported=initialImported}}
+      </div>
+    </div>
   {{/if}}
-  <div class="form form-horizontal well main-form new-lead-form">
-    <div class="control-group">
-      {{drag-fileuploader}}
-      <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
-    </div>
-    <div class="control-group text-right">
-      <button class="btn btn-primary" {{!action "importFile"}}>Import</button>
-      {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing initialImported=initialImported}}
-    </div>
-  </div>
 </div>

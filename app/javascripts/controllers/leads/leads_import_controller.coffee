@@ -24,6 +24,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   percentage: 0
   showInstructions: false
   showLargeImportMessage: false
+  initialImported: false
   rowCount: 0
   disableImport: false
 
