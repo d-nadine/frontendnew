@@ -3,7 +3,7 @@ require 'lib/radium/tag_autocomplete'
 Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
   actions:
     removeSelection: (tag) ->
-      @get('source').removeObject item
+      @get('source').removeObject tag
       false
 
   init: ->
