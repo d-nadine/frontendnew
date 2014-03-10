@@ -42,12 +42,12 @@
           <div class="preview-title">Preview</div>
         </div>
         <div class="control-group">
-          <label class="control-label">First Name</label>
+          <label class="control-label">First Row is Header</label>
           <div class="controls">
-            {{view Radium.AutocompleteCombobox classNames="field"}}
-            <span class="help-inline preview-inline">Sami</span>
+            {{check-box checked=firstRowIsHeader class="checker-block"}}
           </div>
         </div>
+        {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
       </fieldset>
     </div>
   {{else}}
@@ -57,8 +57,8 @@
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
-        <button class="btn btn-primary" {{!action "importFile"}}>Import</button>
-        {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing initialImported=initialImported}}
+        <!--<button class="btn btn-primary" {{!action "importFile"}}>Import</button>-->
+        {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing finished="initialFileUploaded"}}
       </div>
     </div>
   {{/if}}
