@@ -99,6 +99,63 @@
   &lt;i class="ss-standard ss-plus"&gt;&lt;/i&gt; &lt;strong&gt;A new button&lt;/strong&gt;
 &lt;/button&gt;
 </pre>
+        <p><span class="label label-warning">Note:</span> Loading state buttons aren't required to, but should have the disabled property enabled to prevent extra clicks. It is currently only available in these button sets.</p>
+        <div class="bs-docs-example example-buttons">
+          <button class="btn btn-main btn-primary btn-loading">
+            <span>
+              <div class="ball"></div>
+              <div class="ball1"></div>
+            </span> Loading...
+          </button>
+           <button class="btn btn-success btn-main btn-loading" disabled="true">
+            <span>
+              <div class="ball"></div>
+              <div class="ball1"></div>
+            </span> Loading...
+          </button>
+          <button class="btn btn-main btn-primary btn-loading" disabled="true">
+            <span>
+              <div class="ball"></div>
+              <div class="ball1"></div>
+            </span> Loading...
+          </button>
+           <button class="btn btn-large btn-primary btn-loading" disabled="true">
+            <span>
+              <div class="ball"></div>
+              <div class="ball1"></div>
+            </span> Loading...
+          </button>
+        </div>
+<pre class="prettyprint">
+&lt;button class="btn btn-main btn-primary btn-loading"&gt;
+  &lt;span&gt;
+    &lt;div class="ball"&gt;&lt;/div&gt;
+    &lt;div class="ball1"&gt;&lt;/div&gt;
+  &lt;/span&gt;
+  Loading...
+&lt;/button&gt;
+&lt;button class="btn btn-success btn-main btn-loading" disabled="true"&gt;
+  &lt;span&gt;
+    &lt;div class="ball"&gt;&lt;/div&gt;
+    &lt;div class="ball1"&gt;&lt;/div&gt;
+  &lt;/span&gt;
+  Loading...
+&lt;/button&gt;
+&lt;button class="btn btn-main btn-primary btn-loading" disabled="true"&gt;
+  &lt;span&gt;
+    &lt;div class="ball"&gt;&lt;/div&gt;
+    &lt;div class="ball1"&gt;&lt;/div&gt;
+  &lt;/span&gt;
+  Loading...
+&lt;/button&gt;
+&lt;button class="btn btn-large btn-primary btn-loading" disabled="true"&gt;
+  &lt;span&gt;
+    &lt;div class="ball"&gt;&lt;/div&gt;
+    &lt;div class="ball1"&gt;&lt;/div&gt;
+  &lt;/span&gt;
+  Loading...
+&lt;/button&gt;
+</pre>
 
 
         <h3>Button dropdowns</h3>
