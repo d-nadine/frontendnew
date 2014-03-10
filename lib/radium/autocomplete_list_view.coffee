@@ -18,6 +18,7 @@ Radium.AutocompleteView = Radium.View.extend
   showAvatarInResults: true
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
+  minChars: 1
 
   layout: Ember.Handlebars.compile """
     <ul class="as-selections">
@@ -46,9 +47,6 @@ Radium.AutocompleteView = Radium.View.extend
   template: Ember.Handlebars.compile """
     <!-- override to add context menu -->
   """
-
-  focus: ->
-    @$('li.as-original input').focus()
 
   showContextMenu: (attendee) ->
     return false unless @get('isEditable')
@@ -159,6 +157,7 @@ Radium.AutocompleteView = Radium.View.extend
         retrieveLimit: 5
         startText: @get('placeholder')
         keyDelay: 100
+        minChars: @get('parentView').get('minChars')
 
       if @get('parentView').newItemCriteria
         options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)

@@ -22,6 +22,8 @@ Radium = Em.Application.createWithMixins
   rootElement: '#application'
   customEvents:
     blur: 'blur'
+    focus: 'focus'
+
   timezone: Ember.DateTime.create().get('timezone')
   title: 'Radium'
   notifyCount: 0

@@ -12,6 +12,7 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
   isEditable: true
   showAvatar: false
   showAvatarInResults: false
+  minChars: 0
   newItemCriteria: (text) ->
     re = /^(?=.*[^\W_])[\w ]{3,}$/
     re.test text
@@ -23,4 +24,3 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
 
   filterResults: (item) ->
     not @get('source').mapProperty('name').contains(item.get('name'))
-
