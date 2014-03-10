@@ -107,11 +107,9 @@ Ember.DateTime.reopen
     date = @toJSDate()
 
     if date.getMonth() is 11
-      current = new Date(date.getFullYear() + 1, 0, 1)
+      Ember.DateTime.create(day: 1, month: 1, year: date.getFullYear() + 1)
     else
-      current = new Date(date.getFullYear(), date.getMonth() + 1, 1)
-
-    Ember.DateTime.create(current.valueOf())
+      Ember.DateTime.create(day: 1, month: date.getMonth() + 2, year: date.getFullYear())
 
 Ember.DateTime.reopenClass
   setRoundTime: (parent, prop) ->
