@@ -5,5 +5,4 @@ Radium.CompanyPicker = Radium.AutocompleteCombobox.extend
   valueBinding: 'controller.company'
   placeholder: 'Company'
   queryParameters: (query) ->
-    Ember.merge @_super.apply(this, arguments), scopes: 'contact'
-
+    Ember.merge @_super.apply(this, arguments), scopes: 'company'
