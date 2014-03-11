@@ -52,8 +52,14 @@
         {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
         <h4>Or</h4>
         {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow class="match-divider"}}
+        {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow class="match-divider"}}
         {{import-header leader="Email" source=headerData value=headerInfo.email row=firstDataRow}}
         {{import-header leader="Phone Number" source=headerData value=headerInfo.phone row=firstDataRow class="match-divider"}}
+        {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow}}
+        {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
+        {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
+        {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
+        {{import-header leader="Country" source=headerData value=headerInfo.phone row=firstDataRow}}
       </fieldset>
       <div class="button-row">
         <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
