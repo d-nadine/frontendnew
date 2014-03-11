@@ -132,7 +132,7 @@ Radium.Combobox = Radium.View.extend
   keyDown: (e) ->
     keyCode = e.keyCode
 
-    @_super.apply(this, arguments) unless e.keyCode == 27 # escape key
+    return unless e.keyCode == 27 # escape key
 
     @send 'toggleDropdown'
 
