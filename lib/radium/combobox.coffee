@@ -19,6 +19,11 @@ Radium.Combobox = Radium.View.extend
 
   field: 'name'
 
+  focusOut: (e) ->
+    Ember.run.later =>
+      @set 'open', false
+    , 200
+
   click: (event) ->
     event.stopPropagation()
 
@@ -123,6 +128,17 @@ Radium.Combobox = Radium.View.extend
 
   updater: (item) ->
     @set 'value', item
+
+  keyDown: (e) ->
+    keyCode = e.keyCode
+
+    @_super.apply(this, arguments) unless e.keyCode == 27 # escape key
+
+    @send 'toggleDropdown'
+
+    e.preventDefault()
+    e.stopPropagation()
+    false
 
   textField: Ember.TextField.extend Radium.AddActiveToParentMixin, Radium.ToggleDropdownMixin,
     valueBinding: 'parentView.query'
