@@ -103,3 +103,12 @@ Radium.computed.total = (collection, key = 'value') ->
     @get(collection).reduce((preVal, item) ->
       preVal + item.get(key) || 0
     , 0, key)
+
+Radium.computed.addAllKeysProperty = (context, propertyName, objectPath, func) ->
+  subject = context.get(objectPath)
+
+  args = Ember.keys(subject).map((key) -> "#{objectPath}.#{key}")
+
+  args.push func
+
+  Ember.defineProperty(context, propertyName, Ember.computed.apply(this, args))

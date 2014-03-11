@@ -61,6 +61,17 @@
         {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
         {{import-header leader="Country" source=headerData value=headerInfo.phone row=firstDataRow}}
       </fieldset>
+      <div class="preview">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              {{#each previewHeaders}}
+                <th>{{header}}</th>
+              {{/each}}
+            </tr>
+          </thead>
+        </table>
+      </div>
       <div class="button-row">
         <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
           {{#if isSaving}}

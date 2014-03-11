@@ -46,7 +46,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         disableImport: false
         importFile: null
         firstRowIsHeader: true
-        headerInfo: Ember.Object.create()
+        headerInfo: Ember.Object.create
+          firstName: null
+          lastName: null
+          name: null
 
       @get('headerData').clear()
       @set('headerData', Ember.A())
@@ -63,8 +66,26 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   headerData: Ember.A()
   importFile: null
   firstRowIsHeader: true
-  headerInfo: Ember.Object.create()
+  headerInfo: Ember.Object.create
+    firstName: null
+    lastName: null
+    name: null
   firstDataRow: Ember.A()
+
+  init: ->
+    @_super.apply this, arguments
+    Radium.computed.addAllKeysProperty this, 'previewHeaders', 'headerInfo', ->
+      headerInfo = @get('headerInfo')
+
+      headers = Ember.keys(headerInfo).reject (key) -> Ember.isEmpty(headerInfo.get(key))
+
+      return Ember.A() unless headers.length
+
+      headers.map (header) -> 
+        header = header .replace(/([A-Z])/g, ' $1')
+                        .replace(/^./, (str) -> str.toUpperCase())
+
+        Ember.Object.create(header: header)
 
   fileUploaded: (->
     if @get('importing')
