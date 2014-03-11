@@ -36,7 +36,6 @@ Radium.FormsEmailView = Radium.FormView.extend
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
 
-    @get('toList').focus() if @get('controller.showAddresses')
     @$('.btn').tooltip()
 
     $('body').on 'click.date-send-menu', (e) =>
