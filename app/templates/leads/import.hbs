@@ -47,7 +47,12 @@
             {{check-box checked=firstRowIsHeader class="checker-block"}}
           </div>
         </div>
+        <fieldset>
         {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
+        <h4>Or</h4>
+          {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
+          {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
+        </fieldset>
       </fieldset>
     </div>
   {{else}}
