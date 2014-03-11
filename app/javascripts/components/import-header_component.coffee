@@ -1,5 +1,5 @@
 Radium.ImportHeaderComponent = Ember.Component.extend
-  classNames: ['control-group']
+  classNames: ['control-group', 'import-header']
 
   autocomplete: Radium.Combobox.extend
     classNames: ['field']

@@ -31,7 +31,7 @@
   {{/if}}
   {{#if importing}}
     <div class="well">
-      <h4>Importing contacts from <code>contacts.csv</code></h4>
+      <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
       {{view Radium.ProgressBar percentageBinding="percentage"}}
     </div>
   {{/if}}
@@ -41,19 +41,32 @@
         <div class="match-columns-title">
           <div class="preview-title">Preview</div>
         </div>
-        <div class="control-group">
+        <div class="control-group hidden">
           <label class="control-label">First Row is Header</label>
           <div class="controls">
             {{check-box checked=firstRowIsHeader class="checker-block"}}
           </div>
         </div>
-        <fieldset>
+        <h4>Contact Name</h4>
         {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
+        {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
         <h4>Or</h4>
-          {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
-          {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
-        </fieldset>
+        {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow class="match-divider"}}
+        {{import-header leader="Email" source=headerData value=headerInfo.email row=firstDataRow}}
+        {{import-header leader="Phone Number" source=headerData value=headerInfo.phone row=firstDataRow class="match-divider"}}
       </fieldset>
+      <div class="button-row">
+        <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
+          {{#if isSaving}}
+            <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
+          {{else}}
+            <i class="ss-standard ss-plus"></i> Import
+          {{/if}}
+        </button>
+        <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+          Cancel
+        </button>
+      </div>
     </div>
   {{else}}
     <div class="form form-horizontal well main-form new-lead-form">
@@ -62,7 +75,6 @@
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
-        <!--<button class="btn btn-primary" {{!action "importFile"}}>Import</button>-->
         {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing finished="initialFileUploaded"}}
       </div>
     </div>

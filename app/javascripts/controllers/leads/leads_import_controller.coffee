@@ -15,14 +15,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend
 
       @setProperties
         showInstructions: false
-        initialImported: true
         importFile: imported.file
         headerData: headerData
         firstDataRow: firstDataRow
-
-    importFile: (event) ->
-      @set "importing", true
-      return
 
     toggleInstructions: ->
       @toggleProperty "showInstructions"
@@ -81,6 +76,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
           @setProperties(
             importing: false
             percentage: 0
+            initialImported: true
           )
       , 10)
   ).observes('importing').on('init')
