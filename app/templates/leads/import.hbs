@@ -59,16 +59,21 @@
         {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
         {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
         {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
-        {{import-header leader="Country" source=headerData value=headerInfo.phone row=firstDataRow}}
+        {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
       </fieldset>
       <div class="preview">
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               {{#each previewHeaders}}
-                <th>{{header}}</th>
+                <th>{{name}}</th>
               {{/each}}
             </tr>
+            {{#each previewData}}
+              <tr>
+                
+              </tr>
+            {{/each}}
           </thead>
         </table>
       </div>
