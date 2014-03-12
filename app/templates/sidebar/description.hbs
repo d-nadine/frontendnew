@@ -7,7 +7,7 @@
   </div>
   <div class="sidebar-panel-content">
     {{#if isEditing}}
-      {{view view.textArea valueBinding=form.description classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
+      {{view view.textArea valueBinding="form.description" classNameBindings="view.isValid:is-valid:is-invalid :input-block-level :field"}}
     {{else}}
       <p class="inline-editor-text">
         {{description}}

@@ -92,7 +92,7 @@ Radium.InlineEditorView = Ember.View.extend
 
   template: Ember.Handlebars.compile """
     {{#if view.isEditing}}
-      {{view view.textField valueBinding=view.value}}
+      {{view view.textField valueBinding="view.value"}}
     {{else}}
       <span class="inline-editor-text">{{view.value}}</span>
     {{/if}}

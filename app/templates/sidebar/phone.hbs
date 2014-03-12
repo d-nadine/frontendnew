@@ -2,7 +2,7 @@
   <dt><i class="ss-standard ss-phone muted"></i></dt>
   <dd>
     {{#if isEditing}}
-      {{view Radium.PhoneInput valueBinding=form.phone viewName="phone" isInvalid=false}}
+      {{view Radium.PhoneInput valueBinding="form.phone" viewName="phone" isInvalid=false}}
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if phone}}
