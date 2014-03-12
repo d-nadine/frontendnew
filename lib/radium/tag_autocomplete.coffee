@@ -7,6 +7,7 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
 
       false
 
+  classNames: ['tags']
   sourceBinding: 'controller.tagNames'
   listBinding: 'controller.controllers.tags'
   isEditable: true

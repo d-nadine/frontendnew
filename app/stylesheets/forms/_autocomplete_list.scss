@@ -91,8 +91,10 @@ li.as-result-item, li.as-message {
   border-radius: none !important;
 }
 
-ul.as-list {
-  left: 0 !important;
-  box-shadow: none;
-  border-radius: none;
+div.autocomplete:not(.tags) {
+  ul.as-list {
+    left: 0 !important;
+    box-shadow: none;
+    border-radius: none;
+  }
 }
