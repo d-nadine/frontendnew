@@ -20,6 +20,7 @@ Radium.Combobox = Radium.View.extend
   field: 'name'
 
   focusOut: (e) ->
+    return if @isDestroyed || @isDestroying || !@get('open')
     Ember.run.later =>
       @set 'open', false
     , 200
