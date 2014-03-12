@@ -90,6 +90,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
       @set('firstDataRow', Ember.A())
       @get('importedData').clear()
       @set('importedData', Ember.A())
+      @get('tagNames').clear()
+      @set('tagNames', Ember.A())
+
+  needs: ['tags']
 
   importing: false
   percentage: 0
@@ -101,7 +105,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   headerData: Ember.A()
   importFile: null
   firstRowIsHeader: true
-  importedData: []
+  importedData: Ember.A()
+  tagNames: Ember.A()
 
   headerInfo: Ember.Object.create
     firstName: null
