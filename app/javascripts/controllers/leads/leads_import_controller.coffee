@@ -22,6 +22,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
                     headers: headers
                     rows: data
                     status: @get('status')
+                    fileName: importFile.name
 
       @get('tagNames').forEach (tag) =>
         importJob.get('tagNames').push tag.get('name')
