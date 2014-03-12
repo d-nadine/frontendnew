@@ -149,8 +149,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
     data = @get('importedData')
 
     if isPreview && data.length > 20
-      start = if @get('firstRowIsHeader') then 1 else 0
-      data = data.slice(start, 20)
+      data = data.slice(0, 20)
+
+    if @get('firstRowIsHeader')
+      data = data.slice(1)
 
     data.map (row) =>
       Ember.Object.create
