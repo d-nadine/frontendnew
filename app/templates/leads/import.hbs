@@ -83,10 +83,15 @@
         </table>
       </div>
       <fieldset>
-        <div class="control-group">
+        <h4>Type</h4>
+        <div class="control-group radio-group">
+          <ul>
+            {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Lead" value="pipeline" tagName="li"}}
+            {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Exclude From Pipeline" value="exclude" tagName="li"}}
+          </ul>
           {{view view.tags}}
         </div>
-      </fieldset>
+      </div>
       <div class="button-row">
         <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
           {{#if isSaving}}

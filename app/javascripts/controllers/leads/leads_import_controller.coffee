@@ -21,6 +21,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
       importJob = Radium.ContactImportJob.createRecord
                     headers: headers
                     rows: data
+                    status: @get('status')
+
+      @get('tagNames').forEach (tag) =>
+        importJob.get('tagNames').push tag.get('name')
 
       @get('store').commit()
 
@@ -71,6 +75,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         disableImport: false
         importFile: null
         firstRowIsHeader: true
+        status: 'pipeline'
         headerInfo: Ember.Object.create
           firstName: null
           lastName: null
@@ -93,6 +98,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend
       @get('tagNames').clear()
       @set('tagNames', Ember.A())
 
+    addTag: (tag) ->
+      return if @get('tagNames').mapProperty('name').contains tag
+
+      @get('tagNames').addObject Ember.Object.create name: tag
+
   needs: ['tags']
 
   importing: false
@@ -107,6 +117,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   firstRowIsHeader: true
   importedData: Ember.A()
   tagNames: Ember.A()
+  isEditable: true
+  status: 'pipeline'
 
   headerInfo: Ember.Object.create
     firstName: null
