@@ -61,31 +61,36 @@
         {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
         {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
       </fieldset>
+      <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
       <div class="preview">
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
-              {{#each previewHeaders}}
+              {{#each selectedHeaders}}
                 <th>{{name}}</th>
               {{/each}}
             </tr>
+          </thead>
+          <tbody>
             {{#each previewData}}
               <tr>
-                
+                {{#each field in fields}}
+                  <td>{{field}}</td>
+                {{/each}}
               </tr>
             {{/each}}
-          </thead>
+          </tbody>
         </table>
       </div>
       <div class="button-row">
-        <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
+        <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
           {{#if isSaving}}
             <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
           {{else}}
             <i class="ss-standard ss-plus"></i> Import
           {{/if}}
         </button>
-        <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+        <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
           Cancel
         </button>
       </div>

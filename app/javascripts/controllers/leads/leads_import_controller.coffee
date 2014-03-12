@@ -1,5 +1,29 @@
 Radium.LeadsImportController= Ember.ObjectController.extend
   actions:
+    importContacts: ->
+      selectedHeaders = @get('selectedHeaders')
+
+      unless selectedHeaders.length
+        @send 'flashError', 'You need to map the name or email field to the csv file.'
+        return
+
+      headerInfo = @get('headerInfo')
+
+      if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.email
+        @send 'flashError', 'You need to map the name or email field to the csv file.'
+        return
+
+      headers = Ember.keys(@get('headerInfo')).reject (key) -> Ember.isEmpty(headerInfo.get(key))
+
+      data = @getImportData(false).map (item) ->
+                                    item.fields.map (item) -> item
+
+      importJob = Radium.ContactImportJob.createRecord
+                    headers: headers
+                    rows: data
+
+      @get('store').commit()
+
     initialFileUploaded: (imported) ->
       unless imported.data.length
         @send 'flashError', 'The file contained no data'
@@ -18,6 +42,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         importFile: imported.file
         headerData: headerData
         firstDataRow: firstDataRow
+        importedData: imported.data
 
     toggleInstructions: ->
       @toggleProperty "showInstructions"
@@ -63,6 +88,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend
       @set('headerData', Ember.A())
       @get('firstDataRow').clear()
       @set('firstDataRow', Ember.A())
+      @get('importedData').clear()
+      @set('importedData', Ember.A())
 
   importing: false
   percentage: 0
@@ -74,6 +101,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   headerData: Ember.A()
   importFile: null
   firstRowIsHeader: true
+  importedData: []
 
   headerInfo: Ember.Object.create
     firstName: null
@@ -93,7 +121,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   init: ->
     @_super.apply this, arguments
     self = this
-    Radium.computed.addAllKeysProperty this, 'previewHeaders', 'headerInfo', ->
+    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', ->
       headerInfo = @get('headerInfo')
 
       headers = Ember.keys(headerInfo).reject (key) -> Ember.isEmpty(headerInfo.get(key))
@@ -107,6 +135,28 @@ Radium.LeadsImportController= Ember.ObjectController.extend
           marker: self.get("headerInfo.#{header}.name")
 
         Ember.Object.create(hash)
+
+  previewData: Ember.computed 'selectedHeaders.[]', ->
+    @getImportData(true)
+
+  getImportData: (isPreview) ->
+    selectedHeaders = @get('selectedHeaders').mapProperty('marker')
+
+    return unless selectedHeaders.length
+
+    headerData = @get('headerData').mapProperty('name')
+
+    data = @get('importedData')
+
+    if isPreview && data.length > 20
+      start = if @get('firstRowIsHeader') then 1 else 0
+      data = data.slice(start, 20)
+
+    data.map (row) =>
+      Ember.Object.create
+        fields: selectedHeaders.map (header) =>
+          index = headerData.indexOf(header)
+          row[index]
 
   fileUploaded: (->
     if @get('importing')
