@@ -7,4 +7,5 @@ Radium.ContactImportJob = Radium.Model.extend
   createdAt: DS.attr('datetime')
   updatedAt: DS.attr('datetime')
   importedCount: DS.attr('number')
+  totalCount: DS.attr('number')
   finished: DS.attr('boolean')

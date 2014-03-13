@@ -16,14 +16,14 @@ Radium.CsvReaderComponent = Ember.TextField.extend
 
     target = @get('controller.targetObject')
 
-    @set 'controller.importing', true
+    @set 'controller.isUploading', true
     @set 'controller.disabled', true
 
     file = e.target.files[0]
     extension = file.name.split('.').pop().toLowerCase()
 
     unless extension == 'csv'
-      @set 'controller.importing', false
+      @set 'controller.isUploading', false
       @set 'controller.disabled', false
       target.send 'flashError', 'You can only import files with a csv extension!'
       return
@@ -34,7 +34,7 @@ Radium.CsvReaderComponent = Ember.TextField.extend
       lines = CSV.parse(e.target.result)
 
       if lines.length > 1000
-        @set 'controller.importing', false
+        @set 'controller.isUploading', false
         @set 'controller.disabled', false
         @send 'importToLarge', lines.length
         return

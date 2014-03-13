@@ -29,11 +29,8 @@
       </div>
     </div>
   {{/if}}
-  {{#if importing}}
-    <div class="well">
-      <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
-      {{view Radium.ProgressBar percentageBinding="percentage"}}
-    </div>
+  {{#if isUploading}}
+    {{partial 'is_loading'}}
   {{/if}}
   {{#if initialImported}}
     <div class="form form-horizontal well main-form import-match-form">
@@ -112,8 +109,14 @@
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
-        {{csv-reader cancel="cancelImport" disabled=disableImport importing=importing finished="initialFileUploaded"}}
+        {{csv-reader cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
       </div>
+    </div>
+  {{/if}}
+  {{#if importing}}
+    <div class="well">
+      <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
+      {{view Radium.ProgressBar percentageBinding="percentage"}}
     </div>
   {{/if}}
   <fieldset>

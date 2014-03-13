@@ -1,4 +1,4 @@
-Radium.LeadsImportController= Ember.ObjectController.extend
+Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   actions:
     importContacts: ->
       selectedHeaders = @get('selectedHeaders')
@@ -28,12 +28,15 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         importJob.get('tagNames').push tag.get('name')
 
       importJob.one 'didCreate', =>
-        @set 'isSaving', false
         @send 'reset'
+        @set 'pollImportJob', importJob
+        @set('importing', true)
+        @start()
 
       @get('store').commit()
 
     initialFileUploaded: (imported) ->
+      @set 'isUploading', false
       unless imported.data.length
         @send 'flashError', 'The file contained no data'
         return
@@ -52,6 +55,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         headerData: headerData
         firstDataRow: firstDataRow
         importedData: imported.data
+        initialImported: true
 
     toggleInstructions: ->
       @toggleProperty "showInstructions"
@@ -76,11 +80,13 @@ Radium.LeadsImportController= Ember.ObjectController.extend
         showInstructions: false
         showLargeImportMessage: false
         initialImported: false
+        isUploading: false
         rowCount: 0
         disableImport: false
         importFile: null
         firstRowIsHeader: true
         status: 'pipeline'
+        pollImportJob: null
         headerInfo: Ember.Object.create
           firstName: null
           lastName: null
@@ -111,10 +117,12 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   needs: ['tags']
 
   importing: false
-  percentage: 0
+  percentage: 3
+  interval: 1000
   showInstructions: false
   showLargeImportMessage: false
   initialImported: false
+  isUploading: false
   rowCount: 0
   disableImport: false
   headerData: Ember.A()
@@ -124,6 +132,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend
   tagNames: Ember.A()
   isEditable: true
   status: 'pipeline'
+  pollImportJob: null
 
   headerInfo: Ember.Object.create
     firstName: null
@@ -182,17 +191,24 @@ Radium.LeadsImportController= Ember.ObjectController.extend
           index = headerData.indexOf(header)
           row[index]
 
-  fileUploaded: (->
-    if @get('importing')
-      progresser = setInterval(=>
-        if @get("percentage") < 100
-          @incrementProperty "percentage"
-        else
-          clearInterval(progresser)
-          @setProperties(
-            importing: false
-            percentage: 0
-            initialImported: true
-          )
-      , 10)
-  ).observes('importing').on('init')
+  onPoll: ->
+    unless job = @get('pollImportJob')
+      @stop()
+      return
+
+    job.one 'didReload', =>
+      if job.get('finished')
+        @set('percentage', 100)
+        @set('importing', false)
+        @stop()
+        @send 'flashSuccess', 'The contacts have been successfully imported.'
+        @send 'reset'
+        return
+
+      importedCount = job.get('importedCount')
+      total = job.get('totalCount')
+      percentage = Math.floor (importedCount / total) * 100
+
+      @set('percentage', percentage)
+
+    job.reload()
