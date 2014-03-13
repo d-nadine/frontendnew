@@ -109,7 +109,13 @@
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
-        {{csv-reader cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
+        <div class="btn btn-main btn-file-upload">
+          <span>
+            <i class="ss-symbolicons-block ss-addfile"></i>
+            Upload CSV file
+          </span>
+          {{csv-reader cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
+        </div>
       </div>
     </div>
   {{/if}}
