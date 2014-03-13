@@ -108,7 +108,7 @@
   {{else}}
     <div class="form form-horizontal well main-form new-lead-form">
       <div class="control-group">
-        {{drag-fileuploader}}
+        {{!drag-fileuploader}}
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
@@ -134,9 +134,11 @@
             <td>{{formatDateTime createdAt format="full"}}</td>
             <td>{{importedCount}}</td>
             <td>
-              <button type="button" {{action "deleteJob" this}} class="close">
-                <i class="ss-standard ss-delete"></i>
-              </button>
+              {{#if finished}}
+                <button type="button" {{action "confirmDeleteJob" this}} class="close">
+                  <i class="ss-standard ss-delete"></i>
+                </button>
+              {{/if}}
             </td>
           </tr>
         {{else}}

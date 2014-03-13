@@ -27,6 +27,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend
       @get('tagNames').forEach (tag) =>
         importJob.get('tagNames').push tag.get('name')
 
+      importJob.one 'didCreate', =>
+        @set 'isSaving', false
+        @send 'reset'
+
       @get('store').commit()
 
     initialFileUploaded: (imported) ->
