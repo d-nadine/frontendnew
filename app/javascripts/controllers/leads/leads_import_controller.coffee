@@ -203,6 +203,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         @stop()
         @send 'flashSuccess', 'The contacts have been successfully imported.'
         @send 'reset'
+        Radium.Contact.find({})
         return
 
       importedCount = job.get('importedCount')
