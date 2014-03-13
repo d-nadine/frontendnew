@@ -3,14 +3,14 @@
 </div>
 
 <div class="new-leads-control">
-  <div class="btn-toolbar">
-    {{#link-to "leads.new" class="btn btn-large btn-link" activeClass="btn-primary"}}
-      <i class="ss-standard ss-plus"></i> Single Lead
+  <ul class="nav nav-tabs">
+    {{#link-to "leads.new" href=false tagName="li"}}
+      <a href="#"><i class="ss-standard ss-plus"></i> Single Lead</a>
     {{/link-to}}
-    {{#link-to "leads.import" class="btn btn-large btn-link" activeClass="btn-primary"}}
-      Import leads from file
+    {{#link-to "leads.import" href=false tagName="li"}}
+      <a href="#">Import leads from file</a>
     {{/link-to}}
-  </div>
+  </ul>
 </div>
 
 <div class="tab-content">
