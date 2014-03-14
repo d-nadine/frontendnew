@@ -24,6 +24,10 @@ Radium.LeadsImportRoute = Radium.Route.extend
  
         @send 'flashSuccess', "The job has been deleted"
 
+        Ember.run.later ->
+          location.reload()
+        , 400
+
       job.one 'becameInvalid', (result) =>
         @send 'flashError', result
         result.reset()

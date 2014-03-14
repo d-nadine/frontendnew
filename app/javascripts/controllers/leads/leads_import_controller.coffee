@@ -183,8 +183,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
     data = @get('importedData')
 
-    if isPreview && data.length > 20
-      data = data.slice(0, 20)
+    if isPreview && data.length > 5
+      data = data.slice(0, 5)
 
     if @get('firstRowIsHeader')
       data = data.slice(1)
