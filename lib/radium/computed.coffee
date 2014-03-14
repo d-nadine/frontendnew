@@ -6,6 +6,8 @@ require 'lib/radium/aggregate_array_proxy'
 require 'forms/deal_form'
 require 'forms/contact_form'
 
+a_slice = Array.prototype.slice
+
 Radium.computed = {}
 
 Radium.computed.isToday = (dependentKey) ->
@@ -40,7 +42,7 @@ Radium.computed.newForm = (form, properties = {}) ->
       defaults: @get(defaultsName)
 
 Radium.computed.aggregate = ->
-  properties = Array.prototype.slice.call arguments
+  properties = a_slice.call arguments
 
   args = properties.map (prop) => "#{prop}"
 
@@ -109,6 +111,9 @@ Radium.computed.addAllKeysProperty = (context, propertyName, objectPath, func) -
 
   args = Ember.keys(subject).map((key) -> "#{objectPath}.#{key}")
 
-  args.push func
+  if typeof func != 'function'
+    args.push.apply(args, a_slice.call(arguments, 3, -1))
+
+  args.push a_slice.call(arguments, -1)[0]
 
   Ember.defineProperty(context, propertyName, Ember.computed.apply(this, args))

@@ -58,6 +58,7 @@
         {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
         {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
       </fieldset>
+      {{#if selectedHeaders.length}}
       <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
       <div class="preview">
         <table class="table table-bordered table-striped table-hover">
@@ -79,6 +80,7 @@
           </tbody>
         </table>
       </div>
+      {{/if}}
       <fieldset>
         <h4>Type</h4>
         <div class="control-group radio-group">

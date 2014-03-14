@@ -156,7 +156,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   init: ->
     @_super.apply this, arguments
     self = this
-    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', ->
+    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', ->
       headerInfo = @get('headerInfo')
 
       headers = Ember.keys(headerInfo).reject (key) -> Ember.isEmpty(headerInfo.get(key))
@@ -183,8 +183,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
     data = @get('importedData')
 
-    if isPreview && data.length > 5
-      data = data.slice(0, 5)
+    if isPreview && data.length > 6
+      data = data.slice(0, 6)
 
     if @get('firstRowIsHeader')
       data = data.slice(1)
