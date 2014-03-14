@@ -26,7 +26,7 @@ Radium.LeadsImportRoute = Radium.Route.extend
 
         Ember.run.later ->
           location.reload()
-        , 400
+        , 200
 
       job.one 'becameInvalid', (result) =>
         @send 'flashError', result
