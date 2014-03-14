@@ -107,7 +107,7 @@
   {{else}}
     <div class="form form-horizontal well main-form new-lead-form">
       <div class="control-group">
-        {{!drag-fileuploader}}
+        {{drag-csv cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
         <span class="text-center help-block">Download sample file for quicker import <a href="#">here</a></span>
       </div>
       <div class="control-group text-right">
