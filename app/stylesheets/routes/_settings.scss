@@ -66,6 +66,26 @@
       margin: 0;
     }
   }
+
+  .long-label {
+    width: 290px;
+  }
+
+  input[type="number"] {
+    width: 40px;
+    padding-right: 0;
+
+    & + .add-on {
+      background-color: #fff;
+      border-left: none;
+      color: $muted;
+    }
+  }
+
+  .input-append input[type="number"] {
+    border-right: none;
+    @include box-shadow(none);
+  }
 }
 
 .settings-user-details {

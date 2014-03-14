@@ -1,56 +1,74 @@
+<h3 class="settings-title">Reminders & Alerts</h3>
 <form class="form-horizontal settings-form">
   <fieldset>
-    <legend>Reminders</legend>
-
     <div {{bind-attr class=":control-group notifications.overdueTasks.enabled::control-disabled"}}>
       <span class="help-block">Send me a reminder when I have an overdue task:</span>
-      <label for="" class="control-label">When task is overdue</label>
+      <label class="control-label">When task is overdue</label>
       <div class="controls">
-        {{input type="number"
-          value=notifications.overdueTasks.duration
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="overdueTasksDisabled"}}
+        <div class="input-append">
+          {{input type="number"
+            value=notifications.overdueTasks.duration
+            placeholder="1"
+            class="input-mini"
+            disabledBinding="overdueTasksDisabled"}}
+            <span class="add-on">min.</span>
+        </div>
         {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.overdueTasks.enabled"}}
       </div>
     </div>
 
     <div {{bind-attr class=":control-group notifications.createdOverdueTasks.enabled::control-disabled"}}>
       <span class="help-block">Send me a reminder when I create a task for someone else:</span>
-      <label for="" class="control-label">When task is overdue</label>
+      <label class="control-label">When task is overdue</label>
       <div class="controls">
-        {{input type="number"
-          value=notifications.createdOverdueTasks.duration
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="createdTasksOverdueTaskDisabled"}}
+        <div class="input-append">
+          {{input type="number"
+            value=notifications.createdOverdueTasks.duration
+            placeholder="1"
+            class="input-mini"
+            disabledBinding="createdTasksOverdueTaskDisabled"}}
+          <span class="add-on">min.</span>
+        </div>
         {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.createdOverdueTasks.enabled"}}
       </div>
     </div>
 
     <div {{bind-attr class=":control-group notifications.localMeetings.enabled::control-disabled"}}>
-      <span class="help-block">Send me a reminder when a meeting is in my office/office building::</span>
-      <label for="" class="control-label">When meeting is in</label>
+      <span class="help-block">Send me a reminder when a meeting is in my office/office building:</span>
+      <label class="control-label">When meeting is in</label>
       <div class="controls">
-        {{input type="number"
-          value=notifications.localMeetings.duration
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="locaMeetingsDisabled"}}
+        <div class="input-append">
+          {{input type="number"
+            value=notifications.localMeetings.duration
+            placeholder="1"
+            class="input-mini"
+            disabledBinding="locaMeetingsDisabled"}}
+          <span class="add-on">min.</span>
+        </div>
         {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.localMeetings.enabled"}}
       </div>
     </div>
 
     <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
-      <span class="help-block">Send me a reminder when a meeting is NOT in my office/office building::</span>
-      <label for="" class="control-label">When meeting is in</label>
+      <span class="help-block">Send me a reminder when a meeting is NOT in my office/office building:</span>
+      <label class="control-label">When meeting is in</label>
       <div class="controls">
-        {{input type="number"
-          value=notifications.remoteMeetings.duration
-          placeholder="1"
-          class="input-mini"
-          disabledBinding="remoteMeetingsDisabled"}}
+        <div class="input-append">
+          {{input type="number"
+            value=notifications.remoteMeetings.duration
+            placeholder="1"
+            class="input-mini"
+            disabledBinding="remoteMeetingsDisabled"}}
+          <span class="add-on">min.</span>
+        </div>
         {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.remoteMeetings.enabled"}}
+      </div>
+    </div>
+
+    <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
+      <label class="control-label long-label">Send enabled reminders as an email also</label>
+      <div class="controls">
+        {{view Radium.FormEnabledSwitchView isCheckedBinding=""}}
       </div>
     </div>
   </fieldset>
@@ -83,6 +101,12 @@
         disabledBinding="taskIngoredDisabled"}}
          days highlight that client
     </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.taskIgnored.enabled"}}
+    <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
+      <label class="control-label long-label">Send enabled alerts as an email also</label>
+      <div class="controls">
+        {{view Radium.FormEnabledSwitchView isCheckedBinding=""}}
+      </div>
+    </div>
   </fieldset>
   <div class="form-actions">
     <button type="button" {{action "update"}} {{bind-attr disabled=isSaving}} class="btn btn-primary">Save</button>
