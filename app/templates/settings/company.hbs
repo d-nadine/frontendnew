@@ -32,7 +32,7 @@
 {{render "inviteUser"}}
 
 <h4>Team</h4>
-<p>You currently have {{users.length}} out of 5 of your current plan. {{#link-to "settings.billing"}}Upgrade your plan{{/link-to}} to add more.</p>
+<p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users {{#link-to "settings.billing"}}upgrade your account{{/link-to}}.</p>
 {{#if users.length}}
   <ul class="unstyled settings-list settings-users-list">
     {{each users itemViewClass="Radium.SettingsUsersItemView"}}

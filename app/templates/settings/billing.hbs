@@ -22,23 +22,23 @@
   </div>
 {{/if}}
 <div class="upgrade-plan">
-  <h4><i class="ss-standard ss-dollarsign blue"></i> Upgrate Account</h4>
-  <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>
+  <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrate Account</h4>
+  <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users {{#link-to "settings.billing"}}upgrade your account{{/link-to}}.</p>
 
   <div class="row-fluid pricing-table-list">
+    <table class="table">
     {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
-    <div class="span4 pricing-item">
-      <ul {{bind-attr class=":pricing-table isCurrent"}}>
-        <li class="title">{{unbound capitalize name}}</li>
-        <li class="price blue">{{unbound currency amount}}/User</li>
-        <li class="description">
+      <tr {{bind-attr class=":pricing-table isCurrent"}}>
+        <td class="title">{{unbound capitalize name}}</td>
+        <td class="price blue">{{unbound currency amount}}/User</td>
+        <td class="description">
           {{totalUsers}} Users<br>
           Unlimited Deals
-        </li>
+        </td>
         {{#if isAdmin}}
-          <li class="cta-button">
+          <td class="cta-button">
             <button
-              {{bind-attr class=":btn isCurrent::btn-success" disabled="notSelectable"}}
+              {{bind-attr class=":btn isCurrent::btn-success" disabled="isCurrent"}}
               {{action "updateSubscription" name}}>
               {{#if isCurrent}}
                 Your plan
@@ -46,10 +46,15 @@
                 Upgrade
               {{/if}}
             </button>
-          </li>
+          </td>
         {{/if}}
-      </ul>
-    </div>
+      </tr>
     {{/each}}
+      <tr>
+        <td colspan="4">
+          View details about all our <a href="http://www.radiumcrm.com/pricing/">available plans</a>.
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

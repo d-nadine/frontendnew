@@ -34,7 +34,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       account.one 'becameError', (result) =>
         @send 'flashError', "An error happened and you billing information could not be updated"
-        result.reset() 
+        result.reset()
 
       account.one 'becameInvalid', (result) =>
         @send 'flashError', result
@@ -68,7 +68,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       account.one 'becameError', (result) =>
         @send 'flashError', "An error has occurred and your subscription cannot be updated"
-        result.reset() 
+        result.reset()
 
       account.one 'becameInvalid', (result) =>
         @send 'flashError', result
@@ -100,7 +100,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
   totalUsers: ( ->
     unless @get('currentPlan.totalUsers')
-      5
+      3
     else
       @get('currentPlan.totalUsers')
   ).property('currentPlan.totalUsers')

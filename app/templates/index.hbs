@@ -1,4 +1,10 @@
 <header class="dashboard-header">
+  <div class="alert">
+    <i class="ss-standard ss-clock"></i> Your free, 14-day trial has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
+  </div>
+  <div class="alert alert-info">
+    <i class="ss-standard ss-users"></i> Looks like you haven't added any users yet. Radium can import your Gmail contacts for you, head over to the {{#link-to "addressbook.index"}}Address Book{{/link-to}} to add some now.
+  </div>
   <div class="pull-right">
     {{#link-to "settings.profile" class="btn btn-primary"}}My Profile{{/link-to}}
   </div>
