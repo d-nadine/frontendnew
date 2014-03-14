@@ -19,6 +19,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
 
+  contactImportJob: DS.belongsTo('Radium.ContactImportJob')
+
   name: DS.attr('string')
   companyName: DS.attr('string')
   status: DS.attr('string')

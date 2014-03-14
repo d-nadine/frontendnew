@@ -83,7 +83,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         isUploading: false
         rowCount: 0
         disableImport: false
-        importFile: null
         firstRowIsHeader: true
         status: 'pipeline'
         pollImportJob: null
@@ -149,6 +148,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
   firstDataRow: Ember.A()
 
+  sortedJobs: Ember.computed.sort 'model', (a, b) ->
+    left = b.get('createdAt') || Ember.DateTime.create()
+    right = a.get('createdAt') || Ember.DateTime.create()
+    compare = Ember.DateTime.compare left, right
+
   init: ->
     @_super.apply this, arguments
     self = this
@@ -203,6 +207,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         @stop()
         @send 'flashSuccess', 'The contacts have been successfully imported.'
         @send 'reset'
+        @set 'importFile', null
         Radium.Contact.find({})
         return
 
