@@ -88,8 +88,14 @@
   }
 }
 
-.settings-user-details {
+.form-horizontal .settings-user-details {
   overflow: hidden;
+  margin-left: 150px;
+
+  h2 {
+    font-size: 16px;
+    margin: 0 0 20px;
+  }
 
   label.control-label {
     width: 80px;
@@ -195,6 +201,13 @@ input.api-field {
 }
 
 .settings-users-list {
+  li {
+    padding: {
+      right: 10px;
+      left: 10px;
+    }
+  }
+
   .user-avatar {
     margin-right: 20px;
   }

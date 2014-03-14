@@ -11,8 +11,11 @@ Ember.Handlebars.registerBoundHelper 'formatDateTime', (value, options) ->
 
   options.hash.format ||= 'short'
   format = formats[options.hash.format]
-
-  formatted = Handlebars.Utils.escapeExpression value.toFormattedString(format)
+  if Ember.DateTime.detectInstance value
+    date = value.toFormattedString(format)
+  else
+    date = Ember.DateTime.create(value.getTime()).toFormattedString(format)
+  formatted = Handlebars.Utils.escapeExpression(date)
 
   if options.hash.class
     new Handlebars.SafeString "<time class=\"time #{options.hash.class}\">#{formatted}</time>"

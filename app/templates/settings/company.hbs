@@ -1,9 +1,9 @@
-<form class="form-horizontal settings-form">
+<div class="form-horizontal settings-form">
   <fieldset>
     <div class="pull-right">
       {{#if isAdmin}}
-        <button type="button" {{action "confirmDestroyAccount"}} class="btn btn-danger btn-large">
-          DELETE ACCOUNT
+        <button type="button" {{action "confirmDestroyAccount"}} class="btn btn-danger btn-main">
+          Delete Account
         </button>
       {{/if}}
     </div>
@@ -22,16 +22,17 @@
         {{#if isAdmin}}
           {{render 'sidebar/name' account}}
         {{else}}
-          <h2>{{companyName}}</h2>
+          <h4>{{companyName}}</h4>
         {{/if}}
       </div>
     </div>
   </fieldset>
-</form>
+</div>
 
 {{render "inviteUser"}}
 
-<h6>Team</h6>
+<h4>Team</h4>
+<p>You currently have {{users.length}} out of 5 of your current plan. {{#link-to "settings.billing"}}Upgrade your plan{{/link-to}} to add more.</p>
 {{#if users.length}}
   <ul class="unstyled settings-list settings-users-list">
     {{each users itemViewClass="Radium.SettingsUsersItemView"}}
@@ -41,7 +42,7 @@
 {{/if}}
 
 {{#if pendingUsers.length}}
-<h6>Awaiting Confirmation</h6>
+<h4>Awaiting Confirmation</h4>
   <ul class="unstyled settings-list settings-users-list">
     {{#each pendingUsers}}
       <li>
@@ -49,7 +50,10 @@
           <button class="btn btn-danger" {{action "cancelInvite" this}}>Cancel Invite</button>
           <button class="btn btn-warning" {{action "resendInvite" this}}>Resend Invite</button>
         </div>
-        <p>{{email}} - sent at - {{formatDateTime sentAt format=full}}</p>
+        <h5>
+          {{email}}
+          <small class="clearfix">Sent at {{formatDateTime sentAt format=full}}</small>
+        </h5>
       </li>
     {{/each}}
   </ul>
