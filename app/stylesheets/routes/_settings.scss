@@ -27,14 +27,15 @@
   border-bottom: 1px solid #ddd;
 }
 
+.settings-title,
+.settings-sidebar h3 {
+  margin-top: 0;
+}
+
 .settings-sidebar {
   width: 230px;
   float: left;
   font-size: 18px;
-
-  h3 {
-    margin-top: 0;
-  }
 
   nav {
     margin-top: 10px;
@@ -107,9 +108,23 @@ input.inline-field {
   }
 }
 
+.api-key-panel {
+  .control-group {
+    margin: 0;
+  }
 
+  .control-label {
+    width: 120px;
+  }
+
+  .controls {
+    margin-left: 130px;
+  }
+}
 
 input.api-field {
+  width: 400px;
+  margin: 0;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 

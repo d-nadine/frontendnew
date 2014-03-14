@@ -1,6 +1,14 @@
+<h3 class="settings-title">Radium API Key</h3>
 <p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess.
+  To use the API please contact us by describing your use case. <a href="#" {{action "openIntercom"}}>Click here</a>.
 </p>
-<div class="alert alert-info">
-  <h4>Your API key: {{input value=token class="api-field" readonly="readonly"}}</h4>
+<div class="alert alert-info api-key-panel">
+  <div class="form form-horizontal">
+    <div class="control-group">
+      <label class="control-label">Your API key:</label>
+      <div class="controls">
+        {{input value=token class="api-field" readonly="readonly"}}
+      </div>
+    </div>
+  </div>
 </div>
