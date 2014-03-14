@@ -151,7 +151,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   sortedJobs: Ember.computed.sort 'model', (a, b) ->
     left = b.get('createdAt') || Ember.DateTime.create()
     right = a.get('createdAt') || Ember.DateTime.create()
-    compare = Ember.DateTime.compare left, right
+    Ember.DateTime.compare left, right
 
   init: ->
     @_super.apply this, arguments

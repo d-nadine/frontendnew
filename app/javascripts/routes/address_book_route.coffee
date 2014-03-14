@@ -56,3 +56,16 @@ Radium.AddressbookMembersRoute = Radium.AddressbookMemberBaseRoute.extend
 Radium.AddressbookEmployeesRoute = Radium.AddressbookMemberBaseRoute.extend
   model: (params) ->
     Radium.Company.find(params.company_id)
+
+Radium.AddressbookContactimportjobsRoute = Radium.Route.extend
+  model: (params) ->
+    Radium.ContactImportJob.find(params.contact_import_job_id)
+
+  setupController: (controller, model) ->
+    addressbookController = @controllerFor('addressbook')
+    addressbookController.set 'searchText', ''
+    addressbookController.set('currentPage', 1)
+    Ember.run =>
+      addressbookController.set('model.selectedResource', model)
+      addressbookController.trigger 'selectedResourceChanged', model
+      addressbookController.set 'model.selectedFilter', 'resource'

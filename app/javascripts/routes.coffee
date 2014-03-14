@@ -65,6 +65,7 @@ Radium.Router.map ->
     @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:company_id/employees'
+    @route 'contactimportjobs', path: '/contactimportjobs/:contact_import_job_id/contacts'
 
   @resource 'externalcontacts'
 

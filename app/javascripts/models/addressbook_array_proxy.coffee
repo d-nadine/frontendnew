@@ -97,6 +97,8 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
 
     if selectedResource instanceof Radium.Company
       item.get('company') is selectedResource
+    else if selectedResource instanceof Radium.ContactImportJob
+      item.get('contactImportJob') is selectedResource
     else
       item.get('tags').contains selectedResource if item.get('tags')
 
