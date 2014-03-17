@@ -221,12 +221,18 @@
   margin-left: 15px;
 }
 
+.multi-import label {
+  margin-top: 15px;
+}
+
 .match-additonal-column-options {
   display: inline-block;
   margin-bottom: 0;
   vertical-align: middle;
   margin-left: 10px;
   line-height: 30px;
+  position: relative;
+  top: 10px;
 
   > span {
     margin-right: 15px;
@@ -238,6 +244,13 @@
     input[type="radio"] {
       margin-top: 3px;
     }
+  }
+
+  ul li span {
+    position: relative;
+    top: 4px;
+    font-weight: bold;
+    margin-right: 5px;
   }
 }
 

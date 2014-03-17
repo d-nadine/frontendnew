@@ -1,5 +1,15 @@
 Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   actions:
+    addNewAdditionalField: ->
+      @get('additionalFields').addObject @getNewAdditionalField()
+
+    removeAdditionalField: (field) ->
+      @get('additionalFields').removeObject field
+
+      return if @get('additionalFields.length')
+
+      @send 'addNewAdditionalField'
+
     importContacts: ->
       selectedHeaders = @get('selectedHeaders')
 
@@ -86,18 +96,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         firstRowIsHeader: true
         status: 'pipeline'
         pollImportJob: null
-        headerInfo: Ember.Object.create
-          firstName: null
-          lastName: null
-          name: null
-          companyName: null
-          email: null
-          phone: null
-          street: null
-          city: null
-          state: null
-          zip: null
-          country: null
+        headerInfo: @getNewHeaderInfo()
 
       @get('headerData').clear()
       @set('headerData', Ember.A())
@@ -107,6 +106,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       @set('importedData', Ember.A())
       @get('tagNames').clear()
       @set('tagNames', Ember.A())
+      @get('additionalFields').clear()
+      @set('additionalFields', Ember.A([@getNewAdditionalField()]))
 
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
@@ -132,19 +133,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   isEditable: true
   status: 'pipeline'
   pollImportJob: null
-
-  headerInfo: Ember.Object.create
-    firstName: null
-    lastName: null
-    name: null
-    companyName: null
-    email: null
-    phone: null
-    street: null
-    city: null
-    state: null
-    zip: null
-    country: null
+  additionalFields: Ember.A()
+  headerInfo: null
 
   firstDataRow: Ember.A()
 
@@ -156,6 +146,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   init: ->
     @_super.apply this, arguments
     self = this
+
+    @set 'additionalFields', Ember.A([@getNewAdditionalField()])
+    @set 'headerInfo', @getNewHeaderInfo()
     Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', ->
       headerInfo = @get('headerInfo')
 
@@ -194,6 +187,23 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         fields: selectedHeaders.map (header) =>
           index = headerData.indexOf(header)
           row[index]
+
+  getNewAdditionalField: ->
+    Ember.Object.create type: 'contact.note', mapping: null
+
+  getNewHeaderInfo: ->
+    Ember.Object.create
+      firstName: null
+      lastName: null
+      name: null
+      companyName: null
+      email: null
+      phone: null
+      street: null
+      city: null
+      state: null
+      zip: null
+      country: null
 
   onPoll: ->
     unless job = @get('pollImportJob')

@@ -1,0 +1,8 @@
+{{#each field in fields}}
+  {{multi-importfield field=field headerData=headerData firstDataRow=firstDataRow removeField="removeField" }}
+{{/each}}
+<div class="add-new">
+  <a href="#" {{action "addNew" bubbles="false"}} class="btn btn-link btn-remove-field">
+    <i class="ss-standard ss-plus"></i> Add New
+  </a>
+</div>

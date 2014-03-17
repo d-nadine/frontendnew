@@ -58,6 +58,11 @@
         {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
         {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
       </fieldset>
+      <fieldset>
+        <legend>Combine additional fields into notes field or create tag from field.</legend>
+        {{multi-importfields fields=additionalFields addNew="addNewAdditionalField" removeField="removeAdditionalField" headerData=headerData firstDataRow=firstDataRow}}
+      </fieldset>
+
       {{#if selectedHeaders.length}}
       <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
       <div class="preview">
