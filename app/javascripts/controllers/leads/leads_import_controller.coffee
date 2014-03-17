@@ -34,6 +34,13 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
                     status: @get('status')
                     fileName: @get('importFile').name
 
+      additionalFields = @get('additionalFields').map((field) =>
+                              return unless field.get('mapping')
+                              type: field.get('type'), mapping: field.get('mapping.name')
+                          ).compact()
+
+      importJob.set('additionalFields', additionalFields) if additionalFields.length
+
       @get('tagNames').forEach (tag) =>
         importJob.get('tagNames').push tag.get('name')
 
@@ -189,7 +196,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
           row[index]
 
   getNewAdditionalField: ->
-    Ember.Object.create type: 'contact.note', mapping: null
+    Ember.Object.create type: 'contact', mapping: null
 
   getNewHeaderInfo: ->
     Ember.Object.create
