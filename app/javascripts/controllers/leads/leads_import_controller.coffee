@@ -25,21 +25,34 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       headers = Ember.keys(@get('headerInfo')).reject (key) -> Ember.isEmpty(headerInfo.get(key))
 
-      data = @getImportData(false).map (item) ->
-                                    item.fields.map (item) -> item
-
       importJob = Radium.ContactImportJob.createRecord
                     headers: headers
-                    rows: data
                     status: @get('status')
                     fileName: @get('importFile').name
 
-      additionalFields = @get('additionalFields').map((field) =>
-                              return unless field.get('mapping')
-                              type: field.get('type'), mapping: field.get('mapping.name')
-                          ).compact()
+      additionalFields = Ember.A()
+
+      @get('additionalFields').forEach (field) =>
+        return unless field.get('mapping')
+
+        mapping = field.get('mapping.name')
+
+        return if additionalFields.mapProperty('mapping').contains mapping
+
+        unless importJob.get('headers').contains(mapping)
+          importJob.get("headers").pushObject mapping
+          @get('selectedHeaders').push Ember.Object.create marker: mapping, name: mapping
+
+        additionalFields.push type: field.get('type'), mapping: mapping
+
+      additionalFields = additionalFields.compact()
 
       importJob.set('additionalFields', additionalFields) if additionalFields.length
+
+      data = @getImportData(false).map (item) ->
+                                    item.fields.map (item) -> item
+
+      importJob.set 'rows', data
 
       @get('tagNames').forEach (tag) =>
         importJob.get('tagNames').push tag.get('name')
