@@ -6,6 +6,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   isStatusChange: Ember.computed.is 'event', 'status_change'
   isPrimaryContact: Ember.computed.is 'event', 'primary_contact'
   isNewEmail: Ember.computed.is 'event', 'new_email'
+  isInfoChange: Ember.computed.is 'event', 'contact_info_change'
 
   contact: Ember.computed.alias 'reference'
   company: Ember.computed.alias 'meta.company'
@@ -19,6 +20,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
       when 'assign' then 'transfer'
       when 'delete' then 'delete'
       when 'status_change' then 'transfer'
+      when 'contact_info_change' then 'write'
       when 'primary_contact' then 'buildings'
       when 'new_email' then 'mail'
   ).property('event')
