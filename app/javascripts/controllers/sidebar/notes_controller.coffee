@@ -21,3 +21,6 @@ Radium.SidebarNotesController = Radium.SidebarBaseController.extend
   form: ( ->
     Radium.NotesForm.create()
   ).property()
+
+  markedUpNotes: Ember.computed 'model.notes', ->
+    @get('model.notes').replace("\n", "<br/>")
