@@ -32,6 +32,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       additionalFields = Ember.A()
 
+      selectedHeaders = @get('selectedHeaders').slice()
+
       @get('additionalFields').forEach (field) =>
         return unless field.get('mapping')
 
@@ -40,17 +42,21 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         return if additionalFields.mapProperty('mapping').contains mapping
 
         unless importJob.get('headers').contains(mapping)
+          selectedHeaders.push Ember.Object.create marker: mapping, name: mapping
           importJob.get("headers").pushObject mapping
-          @get('selectedHeaders').push Ember.Object.create marker: mapping, name: mapping
 
-        additionalFields.push type: field.get('type'), mapping: mapping
+        additionalFields.pushObject type: field.get('type'), mapping: mapping
 
       additionalFields = additionalFields.compact()
 
       importJob.set('additionalFields', additionalFields) if additionalFields.length
 
-      data = @getImportData(false).map (item) ->
+      data = @getImportData(false, selectedHeaders).map (item) ->
                                     item.fields.map (item) -> item
+
+      unless data.length
+        @send 'flashError', "There are no valid rows in the imported file."
+        return
 
       importJob.set 'rows', data
 
@@ -185,10 +191,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         Ember.Object.create(hash)
 
   previewData: Ember.computed 'selectedHeaders.[]', ->
-    @getImportData(true)
+    selectedHeaders = @get('selectedHeaders').slice()
+    @getImportData(true, selectedHeaders)
 
-  getImportData: (isPreview) ->
-    selectedHeaders = @get('selectedHeaders').mapProperty('marker')
+  getImportData: (isPreview, selectedHeaders) ->
+    selectedHeaders = selectedHeaders.mapProperty('marker')
 
     return unless selectedHeaders.length
 
