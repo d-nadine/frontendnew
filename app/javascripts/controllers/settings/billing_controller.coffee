@@ -98,6 +98,9 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     @get('subscriptionPlans').find (plan) => plan.get('name') == subscription
   ).property('subscriptionPlans.[]', 'account.billingInfo.subscription')
 
+  validPlans: Ember.computed.filter 'subscriptionPlans', (plan) ->
+    plan.get('name') != 'basic'
+
   totalUsers: ( ->
     unless @get('currentPlan.totalUsers')
       3

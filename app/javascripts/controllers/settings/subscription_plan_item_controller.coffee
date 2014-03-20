@@ -8,3 +8,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   isCurrent: ( ->
     @get('parentController.currentPlan') == @get('model')
   ).property('parentController.currentPlan', 'model')
+
+  totalUsers: ( ->
+    @get('model.totalUsers') - 1
+  ).property('model.totalUsers')

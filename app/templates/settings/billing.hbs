@@ -27,10 +27,10 @@
 
   <div class="row-fluid pricing-table-list">
     <table class="table">
-    {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
+    {{#each validPlans itemController="subscriptionPlanItem"}}
       <tr {{bind-attr class=":pricing-table isCurrent"}}>
         <td class="title">{{unbound capitalize name}}</td>
-        <td class="price blue">{{unbound currency amount}}/User</td>
+        <td class="price blue">{{unbound currency amount}}/month</td>
         <td class="description">
           {{totalUsers}} Users<br>
           Unlimited Deals
