@@ -1,3 +1,8 @@
+{{#if currentUser.trialPeriodHasExpired}}
+  <div class="alert">
+    <i class="ss-standard ss-clock"></i> Your free, 14-day trial has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
+  </div>
+{{/if}}
 {{#if isAdmin}}
   {{#unless hasGatewayAccount}}
     <div class="row-fluid">

@@ -180,5 +180,3 @@ Radium.MessagesIndexRoute = Radium.Route.extend
       @transitionTo 'emails.show', item
     else if item instanceof Radium.Discussion
       @transitionTo 'messages.discussion', item
-
-
