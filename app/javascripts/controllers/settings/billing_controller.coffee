@@ -105,7 +105,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     unless @get('currentPlan.totalUsers')
       3
     else
-      @get('currentPlan.totalUsers')
+      @get('currentPlan.totalUsers') - 1
   ).property('currentPlan.totalUsers')
 
   hasGatewayAccount: ( ->
