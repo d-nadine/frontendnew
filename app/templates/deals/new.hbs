@@ -4,6 +4,9 @@
 <div class="secondary">
   <form class="form form-horizontal main-form">
     {{partial "saving"}}
+    {{#if error}}
+      {{partial 'exceeded_subscription_plan_error'}}
+    {{/if}}
     <fieldset>
       <div class="control-group">
         <label class="control-label">Deal Name</label>

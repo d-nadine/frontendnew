@@ -8,3 +8,7 @@ Radium.InviteUserView = Ember.View.extend
         )
       , 1500)
   ).observes('controller.didInvite')
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @get('controller').send 'reset'

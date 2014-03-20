@@ -8,6 +8,7 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   currentUser: Ember.computed.alias 'controllers.currentUser.model'
   isAdmin: Ember.computed.bool 'currentUser.isAdmin', true
   nonAdmin: Ember.computed.not 'isAdmin'
+  plan: Ember.computed.alias 'currentUser.account.billingInfo.subscription'
 
 Radium.ArrayController = Ember.ArrayController.extend ControllerMixin
 Radium.Controller = Ember.Controller.extend ControllerMixin

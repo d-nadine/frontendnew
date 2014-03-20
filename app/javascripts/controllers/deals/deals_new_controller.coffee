@@ -14,13 +14,19 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
       deal.one 'becameInvalid', (result) =>
         @set 'isSaving', false
-        @send 'flashError', deal
-        result.reset()
+        error = deal.get('errors.error')
+
+        if new RegExp('\\b' + @get('plan') + '\\b').test(error)
+          @set 'error', error
+        else
+          @send 'flashError', deal
+
+        deal.deleteRecord()
 
       deal.one 'becameError', (result)  ->
         @set 'isSaving', false
         @send 'flashError', 'An error has occurred and the deal could not be created.'
-        result.reset()
+        deal.deleteRecord()
 
       @set 'isSaving', true
 
@@ -41,6 +47,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     @get('controllers.contacts').filter (contact) ->
       contact.get('status') != 'personal'
   ).property('controllers.contacts.[]')
+  error: null
 
   checklist: ( ->
     status = @get('status').toLowerCase()

@@ -9,7 +9,13 @@ Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserM
         @set 'newUserEmail', null
 
       user.one 'becameInvalid', =>
-        @send 'flashError', user
+        error = user.get('errors.error')
+
+        if new RegExp('\\b' + @get('plan') + '\\b').test(error)
+          @set 'error', error
+        else
+          @send 'flashError', user
+
         user.deleteRecord()
 
       user.one 'becameError', =>
@@ -18,9 +24,15 @@ Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserM
 
       user.get('transaction').commit()
 
+    reset: ->
+      @setProperties
+        newUserEmail: null
+        error: null
+
   needs: 'users'
   users: Ember.computed.alias 'controllers.users'
-  newUserEmail: null,
+  newUserEmail: null
+  error: null
 
   # FIXME: Should be done on the server and return 422
   isDuplicate: ( ->
