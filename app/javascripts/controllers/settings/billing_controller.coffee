@@ -1,7 +1,7 @@
 Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   actions:
     changeBilling: ->
-      @set('isNewCard', true)
+      @set('showBillingForm', true)
 
     update: ->
       unless @hasBufferedChanges
@@ -30,13 +30,16 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.country', model.get('country'))
 
       account.one 'didUpdate', (result) =>
+        @set 'isSaving', false
         @send 'flashSuccess', 'Your billing information has been updated.'
 
       account.one 'becameError', (result) =>
+        @set 'isSaving', false
         @send 'flashError', "An error happened and you billing information could not be updated"
         result.reset()
 
       account.one 'becameInvalid', (result) =>
+        @set 'isSaving', false
         @send 'flashError', result
         result.reset()
 
@@ -44,6 +47,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
     cancel: ->
       @discardBufferedChanges()
+      @set 'showBillingForm', false
 
     updateBilling: ->
       @set('isUpdatingBilling', true)
@@ -59,18 +63,25 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       account = @get('account')
 
+      unless @get('account.gatewaySetup')
+        @send 'flashError', 'You need to add your credit card details before you upgrade.'
+        return
+
       billingInfo = account.get('billingInfo')
 
       account.set('billingInfo.subscription', subscription)
 
       account.one 'didUpdate', =>
+        @set 'isSaving', false
         @send 'flashSuccess', "You are now on the #{subscription} plan"
 
       account.one 'becameError', (result) =>
+        @set 'isSaving', false
         @send 'flashError', "An error has occurred and your subscription cannot be updated"
         result.reset()
 
       account.one 'becameInvalid', (result) =>
+        @set 'isSaving', false
         @send 'flashError', result
         result.reset()
 
@@ -80,11 +91,16 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   subscriptionPlans: Ember.computed.alias 'controllers.subscriptionPlans'
   account: Ember.computed.alias 'controllers.account.model'
   isNewCard: false
+  showBillingForm: false
+  activeCard: null
+  isSaving: false
 
   isValid: ( ->
     return true unless @get('isSubmitted')
     return if Ember.isEmpty(@get('organisation'))
-    return if Ember.isEmpty(@get('billingEmail'))
+    email = @get('billingEmail')
+    return if Ember.isEmpty(email)
+    return unless @emailIsValid email
     true
   ).property('organisation', 'billingEmail', 'isSubmitted')
 
@@ -111,10 +127,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   hasGatewayAccount: ( ->
     @get('account.billingInfo.gatewayIdentifier')
   ).property('account.billingInfo.gatewayIdentifier')
-
-  activeCard: ( ->
-    Radium.ActiveCard.find @get('account.id')
-  ).property('account.billingInfo.gatewayIdentifier', 'hasGatewayAccount')
 
   country: ( (key, value) ->
     if arguments.length == 2 && value != undefined

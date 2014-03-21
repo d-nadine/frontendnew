@@ -14,14 +14,14 @@
     </div>
   {{/unless}}
   <div class="settings-group">
-    {{#unless isNewCard}}
+    {{#unless showBillingForm}}
       <div class="pull-right">
         <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
       </div>
     {{/unless}}
     <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
 
-    {{#if isNewCard}}
+    {{#if showBillingForm}}
       {{partial 'settings/billing_form'}}
     {{/if}}
   </div>
@@ -43,7 +43,7 @@
         {{#if isAdmin}}
           <td class="cta-button">
             <button
-              {{bind-attr class=":btn isCurrent::btn-success" disabled="isCurrent"}}
+              {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}
               {{action "updateSubscription" name}}>
               {{#if isCurrent}}
                 Your plan
