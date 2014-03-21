@@ -8,3 +8,6 @@ Radium.BillingInfo = Radium.Model.extend
   country: DS.attr('string')
   vat: DS.attr('string')
   subscription: DS.attr('string')
+  trialStartDate: DS.attr('datetime')
+  nextPaymentDue: DS.attr('datetime')
+  subscriptionEnded: DS.attr('boolean')

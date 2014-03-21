@@ -1,7 +1,7 @@
 Radium.ApplicationRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
-      if @controllerFor('currentUser').get('trialPeriodHasExpired')
+      if @controllerFor('currentUser').get('subscriptionInvalid')
         return true if transition.targetName == "settings.billing"
 
         @send 'flashError', 'You can only access the settings page unless you upgrade your plan.'
@@ -195,7 +195,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.Deal.find({})
 
   afterModel: ->
-    if @controllerFor('currentUser').get('trialPeriodHasExpired')
+    if @controllerFor('currentUser').get('subscriptionInvalid')
       @transitionTo 'settings.billing'
 
   setupController: (controller, deals) ->

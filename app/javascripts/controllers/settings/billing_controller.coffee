@@ -4,6 +4,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @set('showBillingForm', true)
 
     update: ->
+      @set 'isSaving', true
+
       unless @hasBufferedChanges
         @send 'flashSuccess', 'Your billing information has been updated.'
         return
@@ -58,8 +60,13 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
           isNewCard: false
       , 1500)
 
+    cancelSubscription: ->
+      alert 'flaps'
+
     updateSubscription: (subscription) ->
       model = @get('model')
+
+      @set 'isSaving', true
 
       account = @get('account')
 
@@ -118,8 +125,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     plan.get('name') != 'basic'
 
   totalUsers: ( ->
-    unless @get('currentPlan.totalUsers')
-      3
+    if @get('currentPlan.name') == 'basic'
+      1
     else
       @get('currentPlan.totalUsers') - 1
   ).property('currentPlan.totalUsers')
