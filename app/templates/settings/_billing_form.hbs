@@ -81,17 +81,17 @@
             <table class="table table-striped table-bordered table-hover">
               <tr>
                 <td>Card Number</td>
-                <td>XXXXX{{activeCard.last4}}</td>
+                <td>XXXXX{{controller.activeCard.last4}}</td>
               </tr>
               <tr>
                 <td>Card Type</td>
-                <td>{{activeCard.cardType}}</td>
+                <td>{{controller.activeCard.cardType}}</td>
               </tr>
             </table>
           {{/if}}
         {{/unless}}
       </div>
-      {{#if isSaving}}
+      {{#if isPersisting}}
         <p>
           <img src="/images/ajax-loader.gif"/> <span class="muted">Saving...</span>
         </p>
@@ -99,11 +99,11 @@
       <div class="form-actions">
         <div class="pull-right">
           {{#if hasGatewayAccount}}
-            <button type="submit" class="btn btn-primary" {{action "update"}} {{bind-attr disabled="isSaving"}}>Save</button>
+            <button type="submit" class="btn btn-primary" {{action "update"}} {{!bind-attr disabled="isPersisting"}}>Save</button>
           {{else}}
-            <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isSaving"}}>Save</button>
+            <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isPersisting"}}>Save</button>
           {{/if}}
-          <button class="btn" {{action "cancel"}} {{bind-attr disabled=account.isSaving}}>Cancel</button>
+          <button class="btn" {{action "cancel"}} {{bind-attr disabled="isPersisting"}}>Cancel</button>
         </div>
       </div>
     </fieldset>

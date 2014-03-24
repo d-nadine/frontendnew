@@ -19,7 +19,7 @@ Radium.ContactRoute = Radium.Route.extend
 
       contact.one 'didDelete', =>
         @send 'closeModal'
- 
+
         @send 'flashSuccess', "The contact #{name} has been deleted"
         @transitionTo 'addressbook.filter', 'all'
 

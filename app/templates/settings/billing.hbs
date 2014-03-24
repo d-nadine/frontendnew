@@ -1,4 +1,4 @@
-{{#if currentUser.subscriptionInvalid}}
+{{#if currentUser.subscriptionInvalid}} if @get('token')
   <div class="alert">
     <i class="ss-standard ss-clock"></i> Your free, 14-day trial has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
   </div>
@@ -29,10 +29,11 @@
 <div class="upgrade-plan">
   <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrate Account</h4>
   <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>
-  {{#if hasGatewayAccount}}
-    {{#if activeSubscription.nextDueDate}}
-      <strong>Next Payment Due: {{formatDateTime activeSubscription.nextDueDate format="calendar"}}</strong>
-    {{/if}}
+  {{#if showNextPaymentDate}}
+    <strong>Next Payment Due: {{formatDateTime activeSubscription.nextDueDate format="calendar"}}</strong>
+  {{/if}}
+  {{#if activeSubscription.subscriptionEnded}}
+    <strong>Your account has been cancelled and will expire on the: {{formatDateTime activeSubscription.subscriptionEndDate format="calendar"}}</strong>
   {{/if}}
   <div class="row-fluid pricing-table-list">
     <table class="table">
@@ -57,7 +58,7 @@
             </button>
 
             {{#if isCurrent}}
-              <button class="btn btn-danger" {{action "cancelSubscription"}}>Cancel Subscription</button>
+              <button class="btn btn-danger" {{action "confirmCancelSubscription"}}>Cancel Subscription</button>
             {{/if}}
           </td>
         {{/if}}

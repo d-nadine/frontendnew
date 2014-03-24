@@ -10,15 +10,17 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   ).property('hasGatewayAccount', 'isCurrent')
 
   isCurrent: ( ->
-    return false unless @get('isPaidAccount')
+    return if @get('parentController.isPersisting')
     @get('parentController.currentPlan') == @get('model')
-  ).property('parentController.currentPlan', 'model')
+  ).property('parentController.currentPlan', 'model', 'isPersisting')
 
   totalUsers: ( ->
     @get('model.totalUsers') - 1
   ).property('model.totalUsers')
 
   notViable: Ember.computed 'isCurrent', 'totalUsers', 'isSaving', 'users.[]', ->
+    return true if @get('currentUser.billingInfo.subscription') == 'basic'
+
     return true if @get('isSaving')
 
     return false if @get('isCurrent')

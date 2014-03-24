@@ -5,12 +5,12 @@ Radium.SettingsBillingView = Radium.View.extend
     createTokenAndSubmit: ->
       controller = @get('controller')
 
-      controller.set 'isSaving', true
+      controller.set 'isPersisting', true
 
       controller.set('isSubmitted', true)
 
       unless controller.get('isValid')
-        controller.set 'isSaving', false
+        controller.set 'isPersisting', false
         $.scrollTo 0, 500, { easing:'swing', queue:true, axis:'xy' }
         return
 

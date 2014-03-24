@@ -3,8 +3,31 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     changeBilling: ->
       @set('showBillingForm', true)
 
+    cancelSubscription: ->
+      @set 'isPersisting', true
+
+      model = @get('model')
+
+      account = @get('account')
+
+      account.set('billingInfo.subscription', null)
+
+      account.one 'didUpdate', =>
+        Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
+          @set 'activeSubscription', activeSubscription
+          @set 'isPersisting', false
+
+          @send 'flashSuccess', "Your subscription has been cancelled and will expire on the #{activeSubscription.get('subscriptionEndDate').toHumanFormat()}"
+
+      @addErrorEvents(account)
+
+      @get('store').commit()
+
+
+      @send 'close'
+
     update: ->
-      @set 'isSaving', true
+      @set 'isPersisting', true
 
       unless @hasBufferedChanges
         @send 'flashSuccess', 'Your billing information has been updated.'
@@ -32,20 +55,17 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.country', model.get('country'))
 
       account.one 'didUpdate', (result) =>
-        @set 'isSaving', false
+        @get('model').transitionTo("loaded.saved")
+        @set('token', null) if @get('token')
+        @set 'isPersisting', false
         @send 'flashSuccess', 'Your billing information has been updated.'
 
-      account.one 'becameError', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', "An error happened and you billing information could not be updated"
-        result.reset()
+        Radium.ActiveCard.find(@get('controllers.account.id')).then (card) =>
+          @set 'activeCard', card
 
-      account.one 'becameInvalid', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', result
-        result.reset()
+      @addErrorEvents(account)
 
-      @get('account.transaction').commit()
+      @get('store').commit()
 
     cancel: ->
       @discardBufferedChanges()
@@ -60,13 +80,10 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
           isNewCard: false
       , 1500)
 
-    cancelSubscription: ->
-      alert 'flaps'
-
     updateSubscription: (subscription) ->
-      model = @get('model')
+      @set 'isPersisting', true
 
-      @set 'isSaving', true
+      model = @get('model')
 
       account = @get('account')
 
@@ -79,18 +96,13 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.subscription', subscription)
 
       account.one 'didUpdate', =>
-        @set 'isSaving', false
+        Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
+          @set 'activeSubscription', activeSubscription
+
+        @set 'isPersisting', false
         @send 'flashSuccess', "You are now on the #{subscription} plan"
 
-      account.one 'becameError', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', "An error has occurred and your subscription cannot be updated"
-        result.reset()
-
-      account.one 'becameInvalid', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', result
-        result.reset()
+      @addErrorEvents(account)
 
       @get('store').commit()
 
@@ -100,7 +112,20 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   isNewCard: false
   showBillingForm: false
   activeCard: null
-  isSaving: false
+  isPersisting: false
+
+  addErrorEvents: (account) ->
+    account.one 'becameError', (result) =>
+      @set 'isPersisting', false
+      @send 'flashError', "An error has occurred and your subscription cannot be updated"
+      account.reset()
+      @get('model').transitionTo("loaded.saved")
+
+    account.one 'becameInvalid', (result) =>
+      @set 'isPersisting', false
+      @send 'flashError', result
+      account.reset()
+      @get('model').transitionTo("loaded.saved")
 
   isValid: ( ->
     return true unless @get('isSubmitted')
@@ -134,6 +159,11 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   hasGatewayAccount: ( ->
     @get('account.billingInfo.gatewayIdentifier')
   ).property('account.billingInfo.gatewayIdentifier')
+
+  showNextPaymentDate: Ember.computed 'hasGatewayAccount', 'activeSubscription', 'activeSubscription.nextDueDate', 'billingInfo.subscriptionEnded', ->
+    return false unless @get('hasGatewayAccount')
+    return false if @get('billingInfo.subscriptionEnded')
+    !!@get('activeSubscription.nextDueDate')
 
   country: ( (key, value) ->
     if arguments.length == 2 && value != undefined
