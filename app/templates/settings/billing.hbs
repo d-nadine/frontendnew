@@ -5,14 +5,16 @@
 {{/if}}
 {{#if isAdmin}}
   {{#unless hasGatewayAccount}}
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="alert">
-          You need to update your details with a valid credit card to upgrade your account.<br/>
-          <strong>Click edit below</strong>
+    {{#unless isPersisting}}
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="alert">
+            You need to update your details with a valid credit card to upgrade your account.<br/>
+            <strong>Click edit below</strong>
+          </div>
         </div>
       </div>
-    </div>
+    {{/unless}}
   {{/unless}}
   <div class="settings-group">
     {{#unless showBillingForm}}
