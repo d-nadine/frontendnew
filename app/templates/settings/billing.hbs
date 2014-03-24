@@ -27,8 +27,13 @@
     {{#if showBillingForm}}
       {{partial 'settings/billing_form'}}
     {{/if}}
-  </div>
-{{/if}}
+    {{#if account.isSaving}}
+      <div class="alert alert-info">
+        <h4 class="text-center text-info">Updating billing...</h4>
+      </div>
+    {{/if}}
+      </div>
+    {{/if}}
 <div class="upgrade-plan">
   <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrate Account</h4>
   <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>

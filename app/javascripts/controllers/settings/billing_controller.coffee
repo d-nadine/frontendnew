@@ -4,6 +4,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @set('showBillingForm', true)
 
     cancelSubscription: ->
+      @set 'showBillingForm', false
+
       @set 'isPersisting', true
 
       model = @get('model')
@@ -72,16 +74,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @discardBufferedChanges()
       @set 'showBillingForm', false
 
-    updateBilling: ->
-      @set('isUpdatingBilling', true)
-
-      Ember.run.later(=>
-        @setProperties
-          isUpdatingBilling: false
-          isNewCard: false
-      , 1500)
-
     updateSubscription: (subscription) ->
+      @set 'showBillingForm', false
       @set 'isPersisting', true
 
       model = @get('model')

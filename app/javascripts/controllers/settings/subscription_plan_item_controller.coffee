@@ -28,6 +28,6 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
 
     return false if @get('currentPlan') == 'basic'
 
-    return false if @get('isCurrent')
+    return true if @get('isCurrent')
 
     @get('totalUsers') < @get('users.length')

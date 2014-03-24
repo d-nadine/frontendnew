@@ -1,111 +1,105 @@
 <div class="form-horizontal">
   <fieldset>
-    {{#if account.isSaving}}
-      <div class="alert alert-info">
-        <h4 class="text-center text-info">Updating billing...</h4>
-      </div>
-    {{else}}
-      <div class="settings-group">
-        <div class="control-group">
-          <label for="organizationName" class="control-label">Organization Name</label>
-          <div class="controls">
-            {{view view.organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
-          </div>
-        </div>
-        <div class="control-group">
-          <label for="billingEmail" class="control-label">Billing Email</label>
-          <div class="controls">
-            {{view view.billingInfoView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label for="yourReference" class="control-label">Your Reference</label>
-          <div class="controls">
-            {{input type="text" value=reference class="input-block-level" placeholder="Your internal reference shown on the receipts."}}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label for="phoneNumber" class="control-label">Phone Number</label>
-          <div class="controls">
-            {{input type="text" value=phone class="input-label"}}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label for="country" class="control-label">Country</label>
-          <div class="controls">
-            {{view Ember.Select contentBinding="controller.controllers.countries" valueBinding="country"}}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label for="billingEmail" class="control-label">VAT ID</label>
-          <div class="controls">
-            {{input type="text" value=vat class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID"}}
-          </div>
+    <div class="settings-group">
+      <div class="control-group">
+        <label for="organizationName" class="control-label">Organization Name</label>
+        <div class="controls">
+          {{view view.organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
         </div>
       </div>
-      <div class="settings-group">
-        <h4><i class="ss-standard ss-creditcard blue"></i> Credit Card</h4>
-        {{#unless hasGatewayAccount}}
-          <form id="card-form" method="POST">
-            <div class="control-group">
-              <label class="control-label">Card Number</label>
-              <div class="controls">
-                <input id="card-number" type="text" size="20" />
-              </div>
+      <div class="control-group">
+        <label for="billingEmail" class="control-label">Billing Email</label>
+        <div class="controls">
+          {{view view.billingInfoView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="yourReference" class="control-label">Your Reference</label>
+        <div class="controls">
+          {{input type="text" value=reference class="input-block-level" placeholder="Your internal reference shown on the receipts."}}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="phoneNumber" class="control-label">Phone Number</label>
+        <div class="controls">
+          {{input type="text" value=phone class="input-label"}}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="country" class="control-label">Country</label>
+        <div class="controls">
+          {{view Ember.Select contentBinding="controller.controllers.countries" valueBinding="country"}}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="billingEmail" class="control-label">VAT ID</label>
+        <div class="controls">
+          {{input type="text" value=vat class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID"}}
+        </div>
+      </div>
+    </div>
+    <div class="settings-group">
+      <h4><i class="ss-standard ss-creditcard blue"></i> Credit Card</h4>
+      {{#unless hasGatewayAccount}}
+        <form id="card-form" method="POST">
+          <div class="control-group">
+            <label class="control-label">Card Number</label>
+            <div class="controls">
+              <input id="card-number" type="text" size="20" />
             </div>
-            <div class="control-group">
-              <label class="control-label">CVC</label>
-              <div class="controls">
-                <input id="card-cvc" type="text" size="4" maxlength="4" class="input-mini"/>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">CVC</label>
+            <div class="controls">
+              <input id="card-cvc" type="text" size="4" maxlength="4" class="input-mini"/>
             </div>
-            <div class="control-group">
-              <label class="control-label">
-                <span>Expiration (MM/YYYY)</span>
-              </label>
-              <div class="controls">
-                <input id="card-expiry-month" type="text" size="2" maxlength="2"  class="input-mini"/>
-                <span> / </span>
-                <input id="card-expiry-year" type="text" size="4" maxlength="4" class="input-mini" />
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">
+              <span>Expiration (MM/YYYY)</span>
+            </label>
+            <div class="controls">
+              <input id="card-expiry-month" type="text" size="2" maxlength="2"  class="input-mini"/>
+              <span> / </span>
+              <input id="card-expiry-year" type="text" size="4" maxlength="4" class="input-mini" />
             </div>
-          </form>
+          </div>
+        </form>
+      {{else}}
+        {{#if activeCard.isLoading}}
+          {{partial 'is_loading'}}
         {{else}}
-          {{#if activeCard.isLoading}}
-            {{partial 'is_loading'}}
-          {{else}}
-            <table class="table table-striped table-bordered table-hover">
-              <tr>
-                <td>Card Number</td>
-                <td>XXXXX{{controller.activeCard.last4}}</td>
-              </tr>
-              <tr>
-                <td>Card Type</td>
-                <td>{{controller.activeCard.cardType}}</td>
-              </tr>
-            </table>
-          {{/if}}
-        {{/unless}}
+          <table class="table table-striped table-bordered table-hover">
+            <tr>
+              <td>Card Number</td>
+              <td>XXXXX{{controller.activeCard.last4}}</td>
+            </tr>
+            <tr>
+              <td>Card Type</td>
+              <td>{{controller.activeCard.cardType}}</td>
+            </tr>
+          </table>
+        {{/if}}
+      {{/unless}}
+    </div>
+    {{#if isPersisting}}
+      <p>
+        <img src="/images/ajax-loader.gif"/> <span class="muted">Saving...</span>
+      </p>
+    {{/if}}
+    <div class="form-actions">
+      <div class="pull-right">
+        {{#if hasGatewayAccount}}
+          <button type="submit" class="btn btn-primary" {{action "update"}} {{!bind-attr disabled="isPersisting"}}>Save</button>
+        {{else}}
+          <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isPersisting"}}>Save</button>
+        {{/if}}
+        <button class="btn" {{action "cancel"}} {{bind-attr disabled="isPersisting"}}>Cancel</button>
       </div>
-      {{#if isPersisting}}
-        <p>
-          <img src="/images/ajax-loader.gif"/> <span class="muted">Saving...</span>
-        </p>
-      {{/if}}
-      <div class="form-actions">
-        <div class="pull-right">
-          {{#if hasGatewayAccount}}
-            <button type="submit" class="btn btn-primary" {{action "update"}} {{!bind-attr disabled="isPersisting"}}>Save</button>
-          {{else}}
-            <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isPersisting"}}>Save</button>
-          {{/if}}
-          <button class="btn" {{action "cancel"}} {{bind-attr disabled="isPersisting"}}>Cancel</button>
-        </div>
-      </div>
-    </fieldset>
-  {{/if}}
+    </div>
+  </fieldset>
 </div>
