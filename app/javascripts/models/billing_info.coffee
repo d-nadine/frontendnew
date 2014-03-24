@@ -11,3 +11,4 @@ Radium.BillingInfo = Radium.Model.extend
   trialStartDate: DS.attr('datetime')
   nextPaymentDue: DS.attr('datetime')
   subscriptionEnded: DS.attr('boolean')
+  subscriptionEndDate: DS.attr('boolean')

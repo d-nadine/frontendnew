@@ -21,8 +21,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   refreshFailed: DS.attr('boolean')
   subscriptionInvalid: DS.attr('boolean')
 
-  isPaidAccount: DS.attr('boolean')
-
   contactInfo: DS.belongsTo('Radium.ContactInfo')
 
   following: DS.hasMany('Radium.User')

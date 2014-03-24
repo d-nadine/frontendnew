@@ -5,3 +5,4 @@ Radium.Account = Radium.Model.extend
   leadSources: DS.attr('array')
   billingInfo: DS.belongsTo('Radium.BillingInfo')
   gatewaySetup: DS.attr('boolean')
+  subscriptionInvalid: DS.attr('boolean')
