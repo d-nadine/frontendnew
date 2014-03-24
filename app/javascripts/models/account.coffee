@@ -6,3 +6,4 @@ Radium.Account = Radium.Model.extend
   billingInfo: DS.belongsTo('Radium.BillingInfo')
   gatewaySetup: DS.attr('boolean')
   subscriptionInvalid: DS.attr('boolean')
+  isTrial: DS.attr('boolean')

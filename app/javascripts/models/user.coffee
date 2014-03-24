@@ -19,7 +19,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   initialMailImported: DS.attr('boolean')
   emailsImported: DS.attr('number')
   refreshFailed: DS.attr('boolean')
-  subscriptionInvalid: DS.attr('boolean')
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
 

@@ -12,3 +12,4 @@ Radium.BillingInfo = Radium.Model.extend
   nextPaymentDue: DS.attr('datetime')
   subscriptionEnded: DS.attr('boolean')
   subscriptionEndDate: DS.attr('boolean')
+  gatewaySet: DS.attr('boolean')
