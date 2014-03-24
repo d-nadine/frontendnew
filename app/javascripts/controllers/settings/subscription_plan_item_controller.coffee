@@ -2,26 +2,31 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   needs: ['users']
   hasGatewayAccount: Ember.computed.alias 'parentController.hasGatewayAccount'
   users: Ember.computed.alias 'controllers.users'
-  isSaving: Ember.computed.alias 'parentController.isSaving'
-
-  notSelectable: ( ->
-    return true if @get('isCurrent')
-    !@get('hasGatewayAccount')
-  ).property('hasGatewayAccount', 'isCurrent')
+  isPersisting: Ember.computed.alias 'parentController.isPersisting'
+  currentPlan: Ember.computed.alias 'currentUser.account.billingInfo.subscription'
+  subscriptionEnded: Ember.computed.alias 'currentUser.account.billingInfo.subscriptionEnded'
+  activeCard: Ember.computed.alias 'parentController.activeCard'
 
   isCurrent: ( ->
     return if @get('parentController.isPersisting')
     @get('parentController.currentPlan') == @get('model')
   ).property('parentController.currentPlan', 'model', 'isPersisting')
 
+  showCancel: Ember.computed 'isCurrent', 'subscriptionEnded', ->
+    return false if @get('currentPlan') == 'basic'
+    return false if @get('subscriptionEnded')
+    @get('isCurrent')
+
   totalUsers: ( ->
     @get('model.totalUsers') - 1
   ).property('model.totalUsers')
 
-  notViable: Ember.computed 'isCurrent', 'totalUsers', 'isSaving', 'users.[]', ->
-    return true if @get('currentUser.billingInfo.subscription') == 'basic'
+  notViable: Ember.computed 'isCurrent', 'totalUsers', 'isPersisting', 'activeCard', 'users.[]', ->
+    return true if @get('isPersisting')
+    return true unless @get('activeCard')
+    # return true if @get('subscriptionEnded')
 
-    return true if @get('isSaving')
+    return false if @get('currentPlan') == 'basic'
 
     return false if @get('isCurrent')
 

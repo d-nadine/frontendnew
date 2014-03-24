@@ -13,16 +13,18 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.subscription', null)
 
       account.one 'didUpdate', =>
-        Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
-          @set 'activeSubscription', activeSubscription
+        activeSubscription = @get('activeSubscription')
+
+        activeSubscription.reload()
+
+        activeSubscription.one 'didReload', =>
           @set 'isPersisting', false
 
-          @send 'flashSuccess', "Your subscription has been cancelled and will expire on the #{activeSubscription.get('subscriptionEndDate').toHumanFormat()}"
+          @send 'flashSuccess', "Your subscription has been cancelled and will expire on the #{@get('activeSubscription.subscriptionEndDate').toHumanFormat()}"
 
       @addErrorEvents(account)
 
       @get('store').commit()
-
 
       @send 'close'
 
@@ -157,8 +159,9 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   ).property('currentPlan.totalUsers')
 
   hasGatewayAccount: ( ->
+    return false if @get('isPersisting')
     @get('account.billingInfo.gatewayIdentifier')
-  ).property('account.billingInfo.gatewayIdentifier')
+  ).property('account.billingInfo.gatewayIdentifier', 'isPersisting')
 
   showNextPaymentDate: Ember.computed 'hasGatewayAccount', 'activeSubscription', 'activeSubscription.nextDueDate', 'billingInfo.subscriptionEnded', ->
     return false unless @get('hasGatewayAccount')
