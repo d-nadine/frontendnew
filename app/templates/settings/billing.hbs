@@ -1,3 +1,6 @@
+{{#if account.isTrial}}
+  
+{{/if}}
 {{#if currentUser.account.subscriptionInvalid}}
   <div class="alert">
     <i class="ss-standard ss-clock"></i> Your subscription has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
