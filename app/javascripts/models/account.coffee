@@ -7,3 +7,4 @@ Radium.Account = Radium.Model.extend
   gatewaySetup: DS.attr('boolean')
   subscriptionInvalid: DS.attr('boolean')
   isTrial: DS.attr('boolean')
+  trialDaysLeft: DS.attr('number')

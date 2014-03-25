@@ -1,5 +1,7 @@
 {{#if account.isTrial}}
-  
+  <div class="alert alert-info">
+    There are currently <strong>{{account.trialDaysLeft}}</strong> left on your {{subscription}} trial plan.
+  </div>
 {{/if}}
 {{#if currentUser.account.subscriptionInvalid}}
   <div class="alert">
