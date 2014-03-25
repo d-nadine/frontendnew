@@ -1,7 +1,11 @@
+require 'controllers/settings/subscriptions_mixin'
+
 Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
+  Radium.SubscriptionMixin,
   actions:
     changeBilling: ->
-      @set('showBillingForm', true)
+      @toggleProperty('showBillingForm')
+      false
 
     cancelSubscription: ->
       @set 'showBillingForm', false
@@ -102,8 +106,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       @get('store').commit()
 
-  needs: ['settings', 'users', 'account', 'subscriptionPlans', 'countries']
-  subscriptionPlans: Ember.computed.alias 'controllers.subscriptionPlans'
+  needs: ['settings', 'users', 'account', 'countries']
   account: Ember.computed.alias 'controllers.account.model'
   isNewCard: false
   showBillingForm: false
@@ -131,26 +134,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     return unless @emailIsValid email
     true
   ).property('organisation', 'billingEmail', 'isSubmitted')
-
-  currentPlan: ( ->
-    subscription = @get('account.billingInfo.subscription')
-    return unless subscription
-
-    subscriptionPlans = @get('subscriptionPlans')
-    return unless subscriptionPlans.get('length')
-
-    @get('subscriptionPlans').find (plan) => plan.get('name') == subscription
-  ).property('subscriptionPlans.[]', 'account.billingInfo.subscription')
-
-  validPlans: Ember.computed.filter 'subscriptionPlans', (plan) ->
-    plan.get('name') != 'basic'
-
-  totalUsers: ( ->
-    if @get('currentPlan.name') == 'basic'
-      1
-    else
-      @get('currentPlan.totalUsers') - 1
-  ).property('currentPlan.totalUsers')
 
   hasGatewayAccount: ( ->
     @get('account.billingInfo.gatewayIdentifier')

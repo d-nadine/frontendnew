@@ -10,7 +10,7 @@
         <div class="span12">
           <div class="alert">
             You need to update your details with a valid credit card to upgrade your account.<br/>
-            <strong>Click edit below</strong>
+            <strong>Click below to add your credit card details.</strong>
           </div>
         </div>
       </div>
@@ -22,7 +22,10 @@
         <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
       </div>
     {{/unless}}
-    <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
+    <h4>
+      <a href="#" {{action "changeBilling"}}>
+        <i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
+      </a>
 
     {{#if showBillingForm}}
       {{partial 'settings/billing_form'}}
@@ -50,25 +53,43 @@
   {{/if}}
   <div class="row-fluid pricing-table-list">
     <table class="table">
-    {{#each validPlans itemController="subscriptionPlanItem"}}
+    {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
       <tr {{bind-attr class=":pricing-table isCurrent"}}>
         <td class="title">{{unbound capitalize name}}</td>
-        <td class="price blue">{{unbound currency amount}}/month</td>
+        <td class="price blue">
+          {{#unless isBasic}}
+            {{unbound currency amount}}/month
+          {{else}}
+            Free
+          {{/unless}}
+        </td>
         <td class="description">
-          {{totalUsers}} Users<br>
+          {{#if isBasic}}
+            1 User
+          {{else}}
+            {{totalUsers}} Users<br>
+          {{/if}}
+          {{#if isBasic}}
+          5 Deals
+          {{else}}
           Unlimited Deals
+          {{/if}}
         </td>
         {{#if isAdmin}}
           <td class="cta-button">
-            <button
-              {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}
-              {{action "updateSubscription" name}}>
-              {{#if isCurrent}}
-                Your plan
-              {{else}}
-                Upgrade
-              {{/if}}
-            </button>
+            {{#unless exceededUsers}}
+              <button
+                {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}
+                {{action "updateSubscription" name}}>
+                {{#if isCurrent}}
+                  Your plan
+                {{else}}
+                  Upgrade
+                {{/if}}
+              </button>
+            {{else}}
+              <strong>N/A</strong>
+            {{/unless}}
 
             {{#if showCancel}}
               <button class="btn btn-danger" {{action "confirmCancelSubscription"}}>Cancel Subscription</button>

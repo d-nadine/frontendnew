@@ -1,4 +1,7 @@
+require 'controllers/settings/subscriptions_mixin'
+
 Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.CurrentUserMixin,
+  Radium.SubscriptionMixin,
   needs: ['users', 'usersInvites', 'account']
   account: Ember.computed.alias 'controllers.account.model'
   companyName: Ember.computed.alias 'controllers.account.name'
