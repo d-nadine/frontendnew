@@ -1,0 +1,27 @@
+<li>
+  {{#link-to "pipeline.index"}}All Pipeline{{/link-to}}
+</li>
+{{#each workflowGroups itemController="workflowGroupItem"}}
+  <li>
+    {{#if isWorkflow}}
+      {{#link-to "pipeline.workflow" content.title}}
+        {{content.title}} {{currency total}}
+      {{/link-to}}
+    {{/if}}
+    {{#if isClosed}}
+      {{#link-to "pipeline.closed"}}
+        {{content.title}} {{currency total}}
+      {{/link-to}}
+    {{/if}}
+    {{#if isLost}}
+      {{#link-to "pipeline.lost"}}
+        {{content.title}} {{currency total}}
+      {{/link-to}}
+    {{/if}}
+  </li>
+{{/each}}
+<li>
+  {{#link-to "pipeline.unpublished"}}
+    Unpublished {{unpublished.length}}
+  {{/link-to}}
+</li>

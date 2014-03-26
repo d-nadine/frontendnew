@@ -1,39 +1,25 @@
 <div class="tabbar">
   <div class="tabbar-inner">
-    <button type="button" class="btn btn-toggle-pipelines visible-tablet visible-phone pull-right" data-toggle="collapse" data-target=".pipeline-tabs">
-      Pipeline states
-    </button>
-    <div class="nav-collapse collapse pipeline-tabs">
-      <ul class="nav nav-tabs">
-        <li>
-          {{#link-to "pipeline.index"}}All Pipeline{{/link-to}}
-        </li>
-        {{#each workflowGroups itemController="workflowGroupItem"}}
-          <li>
-            {{#if isWorkflow}}
-              {{#link-to "pipeline.workflow" content.title}}
-                {{content.title}} {{currency total}}
-              {{/link-to}}
-            {{/if}}
-            {{#if isClosed}}
-              {{#link-to "pipeline.closed"}}
-                {{content.title}} {{currency total}}
-              {{/link-to}}
-            {{/if}}
-            {{#if isLost}}
-              {{#link-to "pipeline.lost"}}
-                {{content.title}} {{currency total}}
-              {{/link-to}}
-            {{/if}}
-          </li>
-        {{/each}}
-        <li>
-          {{#link-to "pipeline.unpublished"}}
-            Unpublished {{unpublished.length}}
-          {{/link-to}}
-        </li>
-      </ul>
-    </div>
+    {{#if isLargeWorkflow}}
+      <div class="btn-group pipelines-list">
+        <button class="btn btn-main">Pipelines</button>
+        <button class="btn dropdown-toggle needsclick" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{partial "pipeline/tabs"}}
+        </ul>
+      </div>
+    {{else}}
+      <button type="button" class="btn btn-toggle-pipelines visible-tablet visible-phone pull-right" data-toggle="collapse" data-target=".pipeline-tabs">
+        Pipeline states
+      </button>
+      <div class="nav-collapse collapse pipeline-tabs">
+        <ul class="nav nav-tabs">
+          {{partial "pipeline/tabs"}}
+        </ul>
+      </div>
+    {{/if}}
   </div>
 </div>
 
