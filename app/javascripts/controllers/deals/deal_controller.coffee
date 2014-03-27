@@ -30,15 +30,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   contacts: Ember.computed.alias 'controllers.contacts.content'
 
-  dealPercentage:( ->
-    status = @get('status')
-    return 100 if status == 'closed'
-    return 0 if status == 'lost'
-    statuses = @get('statuses')
-    index = statuses.indexOf(status)
-    Math.floor (index / statuses.length) * 100
-  ).property('status')
-
   isPublic: Ember.computed.not 'isUnpublished'
   statusDisabled: Ember.computed.not('isPublic')
 
