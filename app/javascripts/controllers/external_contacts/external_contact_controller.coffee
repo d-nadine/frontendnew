@@ -24,14 +24,6 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
       promote.one 'didCreate', (result) =>
         @send "flashSuccess", "Contact created!"
         @get('content').removeObject(model)
-        if status == "pipeline" 
-          Radium.Deal.find({}).then (deals) =>
-            delta = deals.toArray().reject (record) =>
-                      existingDeals.contains(record)
-
-            deal = delta.get('firstObject')
-            addressBookController.pushObject(deal.get('contact'))
-            @set 'newPipelineDeal', deal
 
       @get('store').commit()
 
@@ -76,10 +68,6 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
 
     @get('content').filter (item) -> item.get('name.length') || item.get('email.length')
   ).property('content.[]')
-
-  hasNewPipelineDeal: ( ->
-    @get('newPipelineDeal')
-  ).property('newPipelineDeal')
 
   isLoading: false
 

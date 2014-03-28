@@ -11,12 +11,6 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
 
       contact.one 'didUpdate', (result) =>
         @send "flashSuccess", "Contact updated!"
-        if contact.get('isLead')
-          Radium.Deal.find({}).then (deals) =>
-            delta = deals.toArray().reject (record) =>
-                      existingDeals.contains(record)
-
-            @set 'newPipelineDeal', delta.get('firstObject')
 
       contact.one 'becameInvalid', (result) =>
         @send 'flashError', result
@@ -27,12 +21,3 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
         @resetModel()
 
       @get('store').commit()
-
-    clearNewPipelineDeal: ->
-      @set('newPipelineDeal', null)
-
-  newPipelineDeal: null
-
-  hasNewPipelineDeal: ( ->
-    @get('newPipelineDeal')
-  ).property('newPipelineDeal')
