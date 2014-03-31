@@ -81,6 +81,7 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
 
     deleteAll: ->
       @getController().get('checkedContent').toArray().forEach (record) ->
+        record.set('isChecked', false)
         record.deleteRecord()
 
       @get('store').commit()

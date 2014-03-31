@@ -25,8 +25,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
       lastRecord = items[items.length-1]
 
-      Ember.run =>
-        controller.get('checkedContent').setEach 'isChecked', false
+      controller.get('checkedContent').setEach 'isChecked', false
 
       items.forEach (item) ->
         o = controller.find (rec) -> rec.get('id') == item.get('id')
@@ -37,11 +36,13 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
         item.deleteRecord()
 
+        # Ember.run.once(this, this.batchDeletes)
         item.one 'didDelete', (record) =>
           if record.get('id') == lastRecord.get('id')
             @send 'flashSuccess', 'Emails deleted'
-            Ember.run.next =>
-              @controllerFor('messagesSidebar').send('checkMessageItem')
+            # FIXME: This causes filterBy to break, 
+            # I've reported this issue https://github.com/emberjs/ember.js/issues/4620
+            # @controllerFor('messagesSidebar').send('checkMessageItem')
 
       @get('store').commit()
 

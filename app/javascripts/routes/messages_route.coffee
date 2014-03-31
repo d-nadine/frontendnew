@@ -50,12 +50,13 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionTo "messages", name
 
     selectItem: (item) ->
+      folder = @controllerFor('messages').get('folder')
+
       if item instanceof Radium.Email
-        @transitionTo 'emails.show', item
+        @transitionTo 'emails.show', folder, item
       else if item instanceof Radium.Discussion
-        @transitionTo 'messages.discussion', item
+        @transitionTo 'messages.discussion',folder, item
       else
-        folder = @controllerFor('messages').get('model.folder')
         @transitionTo 'emails.empty', folder
 
     selectSearchScope: (item) ->
