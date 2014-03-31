@@ -8,13 +8,15 @@ Radium.ModalView = Radium.View.extend
   """
 
   didInsertElement: ->
+    @_super.apply this, arguments
     @$('.modal').addClass('in')
 
   destroy: ->
     if @get('state') isnt 'inDOM' then @_super()
 
-    @$().one $.support.transition.end, @_super.bind(this)
-
     @$('.modal').removeClass('in')
 
+    superFunction = @__nextSuper.bind this
+
+    @$().one $.support.transition.end, superFunction
 

@@ -10,6 +10,7 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
 
     close: ->
       @controller.discardBufferedChanges() if @controller.discardBufferedChanges
+
       @render 'nothing',
         into: 'application'
         outlet: 'modal'
