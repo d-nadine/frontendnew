@@ -48,7 +48,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
 
       @send 'closeModal'
 
-  beforeModel: (controller) ->
+  beforeModel: (transition) ->
     checkedContent = @controllerFor('messages').get('checkedContent')
 
     unless checkedContent.get('length')
@@ -57,6 +57,9 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
         @transitionTo 'messages', @controllerFor('messages').get('folder')
 
       return
+
+  model: ->
+    undefined
 
   deactivate: ->
     @controllerFor('messages').forEach (item) =>

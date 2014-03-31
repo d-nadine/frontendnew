@@ -1,6 +1,8 @@
 Radium.CalendarView = Radium.View.extend Radium.DarkBackgroundMixin,
+  Radium.ScrollTopMixin,
   classNames: ['page-view']
   didInsertElement: ->
+    @_super.apply this, arguments
     date = new Date()
     dates = [date.getYear(), date.getMonth(), date.getDate()]
     @$('i.month-datepicker-button')

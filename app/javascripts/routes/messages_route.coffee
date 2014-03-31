@@ -163,12 +163,10 @@ Radium.MessagesRoute = Radium.Route.extend
     @send 'closeDrawer'
 
 Radium.MessagesIndexRoute = Radium.Route.extend
-  afterModel: (mo, transition) ->
+  afterModel: (model, transition) ->
     return if @controllerFor('messagesSidebar').get('searchIsActive')
 
     return unless transition.targetName == "messages.index"
-
-    model = @modelFor('messages')
 
     unless model.get('length')
       folder = model.get('folder') || 'inbox'

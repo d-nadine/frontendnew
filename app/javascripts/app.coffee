@@ -82,5 +82,6 @@ require 'lib/radium/selectable_mixin'
 require 'controllers'
 
 require /helpers/
+require /mixins/
 
 require 'debug'

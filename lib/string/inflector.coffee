@@ -3,7 +3,12 @@ String::pluralize = ->
     "#{@}s"
 
 String::singularize = ->
-  @replace /s$/, ''
+  map = {Companies: "company"}
+
+  if ret = map[this]
+    ret
+  else
+    @replace /s$/, ''
 
 String::capitalize = ->
   @replace(/^([a-z])/, (match) -> match.toUpperCase() )

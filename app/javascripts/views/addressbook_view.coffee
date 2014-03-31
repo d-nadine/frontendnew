@@ -2,6 +2,8 @@ require 'lib/radium/tag_autocomplete'
 require 'mixins/views/bulk_action_view_mixin'
 
 Radium.AddressbookView = Ember.View.extend Radium.BulkActionViewMixin,
+  Radium.ScrollTopMixin,
+
   actions:
     showAddCompany: ->
       @get('controller').send 'setupNewCompany'

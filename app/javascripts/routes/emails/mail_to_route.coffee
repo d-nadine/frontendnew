@@ -6,7 +6,9 @@ Radium.EmailsMailToRoute = Ember.Route.extend
     recipient_id: model.get('id')
 
   model: (params) ->
-    type = Radium.Model.mappings[params.recipient_type]
+    type = Radium.get(params.recipient_type.singularize().capitalize())
+
+    Em.assert "Type not found from recipient_type #{params.recipient_type} in EmailsMailToRoute", type
 
     type.find(params.recipient_id)
 

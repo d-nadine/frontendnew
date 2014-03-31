@@ -4,11 +4,11 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   allPagesLoaded: false
   loadingType: Radium.Email
 
-  currentPath: Ember.computed.alias 'controllers.application.currentPath'
-  content: Ember.computed.alias 'controllers.messages'
-  selectedContent: Ember.computed.alias 'controllers.messages.selectedContent'
-  totalRecords: Ember.computed.alias 'controllers.messages.content.totalRecords'
-  folder: Ember.computed.alias 'controllers.messages.folder'
+  currentPath: Ember.computed.oneWay 'controllers.application.currentPath'
+  content: Ember.computed.oneWay 'controllers.messages'
+  selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
+  totalRecords: Ember.computed.oneWay 'controllers.messages.content.totalRecords'
+  folder: Ember.computed.oneWay 'controllers.messages.folder'
   itemController: 'messagesSidebarItem'
 
   inboxIsActive: ( ->
