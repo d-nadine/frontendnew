@@ -1,6 +1,8 @@
 require 'mixins/views/bulk_action_view_mixin'
 
 Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
+  Radium.ScrollTopMixin,
+
   pipelineSearch: Ember.TextField.extend
     type: "text"
     valueBinding: 'targetObject.searchText'

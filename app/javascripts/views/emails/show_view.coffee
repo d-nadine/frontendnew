@@ -1,4 +1,7 @@
-Radium.EmailsShowView = Radium.View.extend didInsertElement: ->
+Radium.EmailsShowView = Radium.View.extend Radium.ScrollTopMixin,
+  didInsertElement: ->
+    @_super.apply this, arguments
+
     model = @get 'controller.model'
 
     return if model == @get('controller.history.firstObject')
