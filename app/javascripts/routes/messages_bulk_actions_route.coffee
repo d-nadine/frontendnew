@@ -21,17 +21,20 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
     delete: ->
       controller = @controllerFor('messages')
 
-      items = controller.get('checkedContent').slice().toArray()
+      items = Ember.A(controller.get('checkedContent'))
 
-      lastRecord = items[items.length-1]
+      lastRecord = items.get('lastObject')
 
       controller.get('checkedContent').setEach 'isChecked', false
 
-      items.forEach (item) ->
-        o = controller.find (rec) -> rec.get('id') == item.get('id')
-        controller.removeObject(o) if o
+      # for item in items.slice(0).reverse()
+        # items.forEach (item) ->
+        # o = controller.find (rec) -> rec.get('id') == item.get('id')
+        # controller.removeObject(o) if o
 
-      items.toArray().forEach (item) =>
+      for i in [items.length - 1..0] by -1
+        item = items[i]
+        # controller.removeObject item
         @send 'notificationDelete', item
 
         item.deleteRecord()

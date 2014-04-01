@@ -1,7 +1,9 @@
-Radium.ChecklistMixin = Ember.Mixin.create
+Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
   actions:
     removeAdditionalItem: (item) ->
       @get('checklist').removeObject item
+
+      @get("store").commit()
 
     setItemDate: (date) ->
       @set 'newItemDate', date
@@ -10,14 +12,14 @@ Radium.ChecklistMixin = Ember.Mixin.create
       @set 'newItemKind', kind.toLowerCase()
 
     createNewItem: ->
+      @set 'isSubmitted', true
       description = @get('newItemDescription')
       weight = parseInt(@get('newItemWeight'))
       finished = @get('newItemFinished')
       date = @get('newItemDate') || 0
       kind = @get('newItemKind') || 'todo'
 
-      return if Ember.isEmpty(description)
-      return if Ember.isEmpty(weight)
+      return unless @get('isValid')
 
       newItem =
               description: description
@@ -27,16 +29,27 @@ Radium.ChecklistMixin = Ember.Mixin.create
               kind: kind
               date: date
 
-      newRecord = if @get('isNew')
+      checklistItem = if @get('isNew')
                     Ember.Object.create(newItem)
                   else
                     @get('checklist').createRecord(newItem)
 
+      didCommit = (result) =>
+        @send 'reset'
+        @trigger 'newItemCreated'
+
+      checklistItem.one 'didCreate', didCommit
+      checklistItem.one 'didUpdate', didCommit
+
       if @get('isNew')
-        @get('checklist').addObject newRecord
+        @get('checklist').addObject checklistItem
       else
         @get('store').commit()
 
+      @send 'reset'
+
+    reset: ->
+      @set 'isSubmitted', false
       @set('newItemDescription', '')
       @set('newItemWeight', '')
       @set('newItemFinished', false)
@@ -49,6 +62,11 @@ Radium.ChecklistMixin = Ember.Mixin.create
     # "call"
   ])
 
+  isValid: Ember.computed 'newItemDescription', 'newItemWeight', 'isSubmitted', ->
+    !Ember.isEmpty(@get('newItemDescription')) && !Ember.isEmpty(@get('newItemWeight'))
+
+  isSubmitted: false
+
   dateMap: Ember.Map.create()
 
   init: ->
@@ -58,6 +76,7 @@ Radium.ChecklistMixin = Ember.Mixin.create
     dateMap.set(1, '1 Day')
     dateMap.set(2, 'Days')
     dateMap.set(7, '1 Week')
+    @send 'reset'
 
   selectedDateText: ( ->
     @get('dateMap').get(@get('newItemDate'))

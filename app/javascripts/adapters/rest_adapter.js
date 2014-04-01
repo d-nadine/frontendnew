@@ -61,6 +61,9 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
           case "EditAccount::NonAdminUserForbindden":
             errors.message = "You need to be an admin user to perform this action";
             break;
+          case "Todo::PersonalEmailForbidden":
+            errors.message = "You cannot create a todo from a personal email";
+            break;
           default:
             errors.error = json.error;
         }

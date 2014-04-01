@@ -1,32 +1,35 @@
 Radium.ChecklistItemMixin = Ember.Mixin.create(Ember.TargetActionSupport,
   classNameBindings: ['isInvalid']
+  isValid: Ember.computed.not 'isInvalid'
+  isSubmitted: Ember.computed.oneWay 'targetObject.isSubmitted'
   insertNewline: (e) ->
-    @get('parentView').createNewItem()
+    @get('targetObject').send 'createNewItem'
 )
 
 Radium.ChecklistView = Ember.View.extend
-  actions:
-    createNewItem: ->
-      @get('controller').send 'createNewItem'
-      @get('itemDescription').$().focus()
-
   templateName: 'deals/checklist'
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+    @get('controller').on('newItemCreated', this, 'setFocus')
+    Ember.run.scheduleOnce 'afterRender', this, 'setFocus'
+
+  setFocus: ->
+    @get('itemDescription').$().focus()
 
   newItemDescription: Ember.TextField.extend Radium.ChecklistItemMixin,
     valueBinding: 'targetObject.newItemDescription'
     placeholder: "Add additional item"
+    isInvalid: ( ->
+      return false unless @get('isSubmitted')
+      not @get('targetObject.newItemDescription.length')
+    ).property('targetObject.newItemDescription', 'isSubmitted')
 
   newItemWeight: Ember.TextField.extend Radium.ChecklistItemMixin,
     attributeBindings: ['min', 'max']
     valueBinding: 'targetObject.newItemWeight'
     placeholder: 0
-
-  showAddButton: ( ->
-    description = @get('controller.newItemDescription')
-    weight = @get('controller.newItemWeight')
-
-    return unless /^\d+$/.test weight
-    return unless parseInt(weight) <= 100 && parseInt(weight) > 0
-
-    (description.length > 0)
-  ).property('controller.newItemDescription', 'controller.newItemWeight')
+    isInvalid: ( ->
+      return false unless @get('isSubmitted')
+      not @get('targetObject.newItemWeight.length')
+    ).property('targetObject.newItemWeight', 'isSubmitted')

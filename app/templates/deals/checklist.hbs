@@ -2,7 +2,7 @@
   <div class="checklist-items">
     <table>
       <tbody>
-        {{#each checklist}}
+        {{#each checklist itemController="dealsChecklistItem"}}
           <tr>
             <td class="kind">{{checklistKind kind}}</td>
             <td class="check">
@@ -59,11 +59,9 @@
             </div>
           </td>
           <td>
-            {{#if view.showAddButton }}
-            <a href="#" {{action "createNewItem" target="view"}} class="btn">
+            <a href="#" {{action "createNewItem"}} class="btn">
               <i class="ss-standard ss-plus"></i>
             </a>
-            {{/if}}
           </td>
         </tr>
       </tbody>
