@@ -11,9 +11,7 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     controller = @get('controller')
 
     if currentUser.get('initialMailImported')
-      Ember.run.later this, =>
-        controller.get('container').lookup('route:messages').refresh()
-      , 5000
+      controller.get('container').lookup('route:messages').refresh()
 
       @stop()
 
