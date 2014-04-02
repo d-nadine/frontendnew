@@ -37,6 +37,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     return true if @get('isPersisting')
     return true unless @get('activeCard')
     return false if @get('isTrial')
+    return true if @get('model.planId') == 'basic' && @get('currentPlan.planId') != 'basic'
     # return true if @get('subscriptionEnded')
 
     return false if @get('currentPlan') == 'basic'

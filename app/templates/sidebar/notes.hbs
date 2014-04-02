@@ -1,14 +1,14 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
     <h6 class="sidebar-panel-title">
-      <i class="ss-standard ss-write"></i> Notes
+      <i class="ss-standard ss-write"></i> About
     </h6>
   </div>
   <div class="sidebar-panel-content">
     {{#if isEditing}}
     <div class="notes">
       <div>
-        {{view view.textArea class="field" valueBinding="form.notes" placeholder="Notes"}}
+        {{view view.textArea class="field" valueBinding="form.notes" placeholder="About"}}
       </div>
     </div>
     {{else}}
@@ -24,7 +24,7 @@
     <div class="clearfix">
       <div class="pull-right">
         <button class="btn btn-primary" {{action "toggleEditor" target=view bubbles="false"}}>
-          <i class="ss-standard ss-plus"></i> Add Note
+          <i class="ss-standard ss-plus"></i> Add
         </button>
       </div>
     </div>
