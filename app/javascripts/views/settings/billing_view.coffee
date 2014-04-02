@@ -16,6 +16,7 @@ Radium.SettingsBillingView = Radium.View.extend
 
       stripeResponseHandler = (status, response) =>
         if response.error
+          @controller.set 'isPersisting', false
           controller.send 'flashError', response.error.message
         else
           controller.set 'token', response.id
