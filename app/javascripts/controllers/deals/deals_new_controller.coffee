@@ -3,7 +3,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
   actions:
     submit: ->
       @set 'isSubmitted', true
-      return unless @get('isValid')
+      return unless @get('model.isValid')
 
       deal = @get('model').create()
 
