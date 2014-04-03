@@ -10,7 +10,13 @@ Radium.ChangeDealStatusMixin = Ember.Mixin.create
           @set 'lostDuring', @get('model.status')
 
         @applyBufferedChanges()
+
+        @get('model').one 'didUpdate', =>
+          @get('controllers.contact').notifyPropertyChange 'dealsTotal'
+
         @get('store').commit()
 
       @set 'status', status
       @send 'showStatusChangeConfirm', this, commit
+
+  needs: ['contact']
