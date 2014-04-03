@@ -42,6 +42,10 @@ Radium.AddDealComponent = Ember.Component.extend
     placeholder: 'Type deal name'
     isSubmittedBinding:'controller.isSubmitted'
 
+    setValue: (object) ->
+      @_super.apply this, arguments
+      @get("controller").send 'addDeal'
+
     didInsertElement: ->
       @_super.apply this, arguments
       @$('input[type=text]').focus()

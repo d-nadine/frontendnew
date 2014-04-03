@@ -7,9 +7,10 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
     Radium.User.all().find (user) => user.get('id') == (@get('meta.newUserId') + "")
   ).property('meta.newUserId')
 
-  email: ( ->
+  email: Ember.computed 'meta.emailId', ->
     emailId = @get('meta.emailId')
     return unless emailId
 
-    Radium.Email.find(emailId)
-  ).property('meta.emailId')
+    Radium.Email.find(emailId).then( (result) =>
+      @set 'email', result
+    )

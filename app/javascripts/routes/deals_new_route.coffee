@@ -4,3 +4,7 @@ Radium.DealsNewRoute = Radium.DealNewBaseRoute.extend
   setupController: (controller, model) ->
     @_super.call this, controller, model
     controller.set 'model.user', @controllerFor('currentUser').get('model')
+
+  deactivate: ->
+    @controller.set 'isSubmitted', false
+    @controller.get('model').reset()

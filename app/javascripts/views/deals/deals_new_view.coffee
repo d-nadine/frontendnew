@@ -5,7 +5,7 @@ require 'lib/radium/autocomplete_combobox'
 require 'lib/radium/contact_picker'
 require 'lib/radium/value_validation_mixin'
 
-Radium.DealsNewView= Ember.View.extend
+Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMixin,
   actions:
     toggleChecklist: (evt) ->
       return if @get('disabled')
