@@ -39,8 +39,6 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
       item.one 'didDelete', (record) =>
         if record.get('id') == lastRecord.get('id')
           @send 'flashSuccess', 'Emails deleted'
-          # FIXME: This causes filterBy to break, 
-          # I've reported this issue https://github.com/emberjs/ember.js/issues/4620
           @controllerFor('messagesSidebar').send('checkMessageItem')
 
     @get('store').commit()

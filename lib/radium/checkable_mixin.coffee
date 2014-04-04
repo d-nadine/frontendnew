@@ -1,6 +1,9 @@
 Radium.CheckableMixin = Ember.Mixin.create
   allChecked: false
 
+  # FIXME: FilterBy breaks when used like this
+  # I've reported this issue https://github.com/emberjs/ember.js/issues/4620
+  # we want to be using filterBy and not @each
   # checkedContent: Ember.computed.filterBy '@this', 'isChecked'
 
   checkedContent: Ember.computed 'arrangedContent.@each.isChecked', (item) ->
