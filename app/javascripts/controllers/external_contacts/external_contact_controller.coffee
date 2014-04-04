@@ -17,8 +17,6 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
                 externalContact: model
                 status: status
 
-      existingDeals = Radium.Deal.all().slice()
-
       addressBookController = @get('controllers.addressbook.model')
 
       promote.one 'didCreate', (result) =>
