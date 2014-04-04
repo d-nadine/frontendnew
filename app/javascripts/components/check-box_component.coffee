@@ -5,8 +5,10 @@ Radium.CheckBoxComponent = Ember.Component.extend
     event.stopPropagation()
     @toggleProperty('checked')
 
-    Ember.run.next =>
-      @sendNotification()
+    # FIXME: I should not have to schedule this call
+    # I created this issue
+    # https://github.com/emberjs/ember.js/issues/4385#issuecomment-38055914
+    Ember.run.schedule('actions', this, 'sendNotification')
 
   sendNotification: ->
     @sendAction 'sendCheck'
