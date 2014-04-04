@@ -7,7 +7,10 @@ Radium.CheckableMixin = Ember.Mixin.create
   # checkedContent: Ember.computed.filterBy '@this', 'isChecked'
 
   checkedContent: Ember.computed 'arrangedContent.@each.isChecked', (item) ->
-    @get('arrangedContent').filter (item) -> item.get('isChecked')
+    unless arrangedContent = @get('arrangedContent')
+      return Ember.A()
+
+    arrangedContent.filter (item) -> item.get('isChecked')
 
   hasCheckedContent: (->
     !Ember.isEmpty(@get('checkedContent'))
