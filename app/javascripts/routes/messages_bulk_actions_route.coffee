@@ -39,7 +39,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
       item.one 'didDelete', (record) =>
         if record.get('id') == lastRecord.get('id')
           @send 'flashSuccess', 'Emails deleted'
-          @controllerFor('messagesSidebar').send('checkMessageItem')
+          @controllerFor('messagesSidebar').get('container').lookup('route:messages').refresh()
 
     @get('store').commit()
 
