@@ -12,14 +12,14 @@
 }
 
 .dashboard-grid {
-  .dashboard-grid-item:nth-child(4n+1) {
+  .dashboard-grid-item:nth-child(3n+1) {
     margin-left: 0;
     clear: left;
   }
 }
 
 .dashboard-grid-item {
-  width: percentage(244px / 1000px);
+  width: percentage(328px / 1000px);
   height: 244px;
   margin: 0 0 8px percentage(8px / 1000px);
   float: left;
@@ -96,5 +96,15 @@
 
   h4 {
     margin: 0;
+  }
+}
+
+.hide-home-page {
+  margin-top: 15px;
+  font-size: 13px;
+  color: $muted;
+
+  input[type="checkbox"] {
+    margin-top: 0;
   }
 }

@@ -68,3 +68,15 @@
   margin: 10px 0 0;
   padding: 10px 0 0;
 }
+
+.alert-chrome-extension {
+  overflow: hidden;
+}
+
+.alert-chrome-extension-text {
+  margin-left: 350px;
+
+  a.btn-primary {
+    color: #fff;
+  }
+}

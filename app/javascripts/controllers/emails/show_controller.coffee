@@ -16,8 +16,13 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
 
       @_super.call(this, newStatus)
 
+    dismissExtension: ->
+      @set "showExtensionCTA", false
+
+
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')
+  showExtensionCTA: true
 
   contact: ( ->
     sender = @get('sender')
@@ -25,6 +30,6 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
     return sender if sender instanceof Radium.Contact
   ).property('sender')
 
-  showHud: (-> 
+  showHud: (->
     !Ember.isNone(@get('contact'))
   ).property('contact')

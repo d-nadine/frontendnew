@@ -7,4 +7,4 @@ Radium.ApplicationController = Radium.ObjectController.extend
   currentDrawer: null
   notificationCount: ( ->
     Radium.get('notifyCount')
-  ).property('Radium.notifyCount')
+  ).property('Radium.notifyCount')     

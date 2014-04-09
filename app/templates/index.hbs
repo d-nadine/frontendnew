@@ -1,14 +1,4 @@
 <header class="dashboard-header">
-  {{#if currentUser.account.subscriptionInvalid}}
-    <div class="alert">
-      <i class="ss-standard ss-clock"></i> Your free, 14-day trial has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
-    </div>
-  {{/if}}
-  <!--
-  <div class="alert alert-info">
-    <i class="ss-standard ss-users"></i> Looks like you haven't added any users yet. Radium can import your Gmail contacts for you, head over to the {{#link-to "addressbook.index"}}Address Book{{/link-to}} to add some now.
-  </div>
-  -->
   <div class="pull-right">
     {{#link-to "settings.profile" class="btn btn-primary"}}My Profile{{/link-to}}
   </div>
@@ -29,14 +19,14 @@
 <div class="dashboard-grid">
   <ul class="unstyled">
     <li class="dashboard-grid-item">
-      {{#link-to 'settings.profile' class="dashboard-grid-link"}}
+      <a href="https://chrome.google.com/webstore/detail/radium-crm/nlbgbhgiifndpojjfbnmfgaedkokchln" class="dashboard-grid-link" target="_blank">
         <div class="dashboard-grid-icon">
-          <i class="ss-standard ss-user"></i>
+          <img src="/images/google-chrome-logo.svg" width="70" alt="Download our Google Chrome Extenstion" />
         </div>
         <div class="dashboard-grid-label">
-          <h4>Complete Profile</h4>
+          <h4>Get the Chrome Extension</h4>
         </div>
-      {{/link-to}}
+      </a>
     </li>
     <li class="dashboard-grid-item">
       {{#link-to 'settings.company' class="dashboard-grid-link" style="background:red"}}
@@ -45,16 +35,6 @@
         </div>
         <div class="dashboard-grid-label">
           <h4>Invite Your Team</h4>
-        </div>
-      {{/link-to}}
-    </li>
-    <li class="dashboard-grid-item">
-      {{#link-to 'settings.billing' class="dashboard-grid-link"}}
-        <div class="dashboard-grid-icon">
-          <i class="ss-standard ss-heart"></i>
-        </div>
-        <div class="dashboard-grid-label">
-          <h4>Get a Free Month</h4>
         </div>
       {{/link-to}}
     </li>
@@ -85,16 +65,6 @@
         </div>
         <div class="dashboard-grid-label">
           <h4>Add a Todo</h4>
-        </div>
-      {{/link-to}}
-    </li>
-    <li class="dashboard-grid-item">
-      {{#link-to 'user.form' currentUser 'call' class="dashboard-grid-link"}}
-        <div class="dashboard-grid-icon">
-          <i class="ss-standard ss-phone"></i>
-        </div>
-        <div class="dashboard-grid-label">
-          <h4>Add a Call</h4>
         </div>
       {{/link-to}}
     </li>

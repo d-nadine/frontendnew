@@ -1,0 +1,16 @@
+{{#if showExtensionCTA}}
+  <div class="alert alert-chrome-extension">
+    <div class="pull-left">
+      <img src="/images/chrome-extension-preview.png" alt="" />
+    </div>
+    <div class="alert-chrome-extension-text">
+      <h4>Radium Google Chrome Extension</h4>
+      Check out our Extension for Google Chrome, works in Gmail. Install it from the <a href="#">Chrome Store</a>.
+      <br><br>
+      <div class="clearfix">
+        <a href="https://chrome.google.com/webstore/detail/radium-crm/nlbgbhgiifndpojjfbnmfgaedkokchln" class="btn btn-main btn-primary" target="_blank">Learn more</a>
+        <a href="#" class="btn btn-main btn-link" {{action "dismissExtension"}}>No, thanks</a>
+      </div>
+    </div>
+  </div>
+{{/if}}
