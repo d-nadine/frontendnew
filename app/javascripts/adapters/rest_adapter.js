@@ -340,6 +340,7 @@ Radium.RESTAdapter.map('Radium.User', {
 
 Radium.RESTAdapter.map('Radium.UserSettings', {
   notifications: {embedded: 'always'},
+  alerts: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.NotificationSettings', {

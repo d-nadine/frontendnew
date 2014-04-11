@@ -17,12 +17,13 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
       @_super.call(this, newStatus)
 
     dismissExtension: ->
-      @set "showExtensionCTA", false
+      @set 'currentUser.settings.alerts.extensionSeen', true
+      @get('store').commit()
 
 
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')
-  showExtensionCTA: true
+  showExtensionCTA: Ember.computed.not 'currentUser.settings.alerts.extensionSeen'
 
   contact: ( ->
     sender = @get('sender')

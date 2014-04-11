@@ -96,8 +96,10 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.gatewaySet', true)
 
       account.one 'didUpdate', =>
-        Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
-          @set 'activeSubscription', activeSubscription
+        debugger
+        if subscription != 'basic'
+          Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
+            @set 'activeSubscription', activeSubscription
 
         @set 'isPersisting', false
         @send 'flashSuccess', "You are now on the #{subscription} plan"
