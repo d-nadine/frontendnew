@@ -66,8 +66,8 @@ Radium.computed.aggregate = ->
       array
 
     removedItem: (array, item, changeMeta, instanceMeta) ->
-      return unless array.length
-      return unless array.contains(item)
+      return array unless array.length
+      return array unless array.contains(item)
 
       array.removeObject(item)
 

@@ -18,10 +18,9 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
 
     statuses.forEach (state) =>
       unless @get(state)
-        Ember.defineProperty this, state, Ember.computed( ->
+        Ember.defineProperty this, state, Ember.computed "#{state}.[]", ->
           Radium.Deal.filter (deal) ->
             deal.get('status') == state
-        ).property("#{state}.[]")
 
     statuses
   ).property('settings.model', 'settings.dealStates.[]')
