@@ -9,28 +9,32 @@
   </div>
 {{/if}}
 {{#if isAdmin}}
-  {{#unless hasGatewayAccount}}
-    {{#unless isPersisting}}
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="alert">
-            You need to update your details with a valid credit card to upgrade your account.<br/>
-            <strong>Click below to add your credit card details.</strong>
+  {{#unless isUnlimited}}
+    {{#unless hasGatewayAccount}}
+      {{#unless isPersisting}}
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="alert">
+              You need to update your details with a valid credit card to upgrade your account.<br/>
+              <strong>Click below to add your credit card details.</strong>
+            </div>
           </div>
         </div>
-      </div>
+      {{/unless}}
     {{/unless}}
   {{/unless}}
   <div class="settings-group">
-    {{#unless showBillingForm}}
-      <div class="pull-right">
-        <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
-      </div>
-    {{/unless}}
-    <h4>
-      <a href="#" {{action "changeBilling"}}>
-        <i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
-      </a>
+    {{#unless isUnlimited}}
+      {{#unless showBillingForm}}
+        <div class="pull-right">
+          <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
+        </div>
+      {{/unless}}
+      <h4>
+        <a href="#" {{action "changeBilling"}}>
+          <i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
+        </a>
+      {{/unless}}
 
     {{#if showBillingForm}}
       {{partial 'settings/billing_form'}}
@@ -43,12 +47,18 @@
       </div>
     {{/if}}
 <div class="upgrade-plan">
-  <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrate Account</h4>
+  {{#unless isUnlimited}}
+    <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
+  {{/unless}}
   {{#if account.isTrial}}
     <p><strong>You are currently on a trial {{currentPlan.name}} account, you have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong></p>
     <p><strong>Choose a plan below to upgrade your account</strong></p>
   {{else}}
-    <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>
+    {{#if isUnlimited}}
+      <p><strong>You have an unlimited account.</p>
+    {{else}}
+      <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>
+    {{/if}}
   {{/if}}
   {{#if showNextPaymentDate}}
     <strong>Next Payment Due: {{formatDateTime activeSubscription.nextDueDate format="calendar"}}</strong>

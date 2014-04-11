@@ -110,6 +110,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
   needs: ['settings', 'users', 'account', 'countries']
   account: Ember.computed.alias 'controllers.account.model'
+  isUnlimited: Ember.computed.alias 'account.isUnlimited'
   isNewCard: false
   showBillingForm: false
   activeCard: null
