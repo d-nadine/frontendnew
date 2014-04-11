@@ -9,6 +9,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   isTrial: Ember.computed.alias 'parentController.account.isTrial'
 
   isCurrent: ( ->
+    return false if @get('currentUser.account.subscriptionInvalid')
     return if @get('parentController.isPersisting')
     return false if @get('isTrial')
     @get('parentController.currentPlan') == @get('model')
@@ -38,7 +39,6 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     return true unless @get('activeCard')
     return false if @get('isTrial')
     return true if @get('model.planId') == 'basic' && @get('currentPlan.planId') != 'basic'
-    # return true if @get('subscriptionEnded')
 
     return false if @get('currentPlan') == 'basic'
 

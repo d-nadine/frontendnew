@@ -21,7 +21,7 @@ Radium.SettingsBillingRoute = Radium.Route.extend
     hash =
       card: Radium.ActiveCard.find accountController.get('id')
 
-    if ['bronze', 'silver', 'gold'].contains billingInfo.get('subscription')
+    if billingInfo.get('hasSubscription')
       hash.subscription = Radium.ActiveSubscription.find accountController.get('id')
 
     Ember.RSVP.hash hash
