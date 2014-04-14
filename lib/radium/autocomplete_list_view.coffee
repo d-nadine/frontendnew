@@ -150,6 +150,8 @@ Radium.AutocompleteView = Radium.View.extend
 
       @get('parentView').send('removeSelection', last)
 
+      @get('parentView').$('.as-results').hide()
+
       false
 
     didInsertElement: ->
