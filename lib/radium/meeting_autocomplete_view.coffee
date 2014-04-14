@@ -11,6 +11,7 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
 
   sourceBinding: 'controller.participants'
   currentUserEmail: Ember.computed.alias 'controller.currentUser.email'
+  deleteOnBackSpace: false
 
   queryParameters: (query) ->
     term: query

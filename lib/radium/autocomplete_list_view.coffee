@@ -19,6 +19,7 @@ Radium.AutocompleteView = Radium.View.extend
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
   users: Ember.computed.alias('controller.users')
   minChars: 1
+  deleteOnBackSpace: true
 
   layout: Ember.Handlebars.compile """
     <ul class="as-selections">
@@ -140,7 +141,8 @@ Radium.AutocompleteView = Radium.View.extend
         @set 'value', ''
         return false
 
-      return @_super.apply(this, arguments) if @get('value').length
+      if @get('value').length || !@get('parentView.deleteOnBackSpace')
+        return @_super.apply(this, arguments) 
 
       last = @get('source.lastObject')
 
