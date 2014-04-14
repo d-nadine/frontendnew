@@ -228,29 +228,6 @@
                             e.preventDefault();
                             moveSelection("down");
                             break;
-                        case 8:  // delete
-                            if(input.val() == ""){
-                                var last = values_input.val().split(",");
-                                last = last[last.length - 2];
-                                selections_holder.children().not(org_li.prev()).removeClass("selected");
-                                if(org_li.prev().hasClass("selected")){
-                                    values_input.val(values_input.val().replace(","+last+",",","));
-                                    opts.selectionRemoved.call(this, org_li.prev());
-                                } else {
-                                    opts.selectionClick.call(this, org_li.prev());
-                                    org_li.prev().addClass("selected");
-                                }
-                            }
-                            if(input.val().length == 1){
-                                results_holder.hide();
-                                prev = "";
-                                abortRequest();
-                            }
-                            if($(":visible",results_holder).length > 0){
-                                if (timeout){ clearTimeout(timeout); }
-                                timeout = setTimeout(function(){ keyChange(); }, opts.keyDelay);
-                            }
-                            break;
                         case 9: case 188:  // tab or comm
                             if(opts.canGenerateNewSelections){
                                 tab_press = true;

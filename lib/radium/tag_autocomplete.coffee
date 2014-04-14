@@ -15,7 +15,7 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
   showAvatarInResults: false
   minChars: 0
   newItemCriteria: (text) ->
-    re = /^(?=.*[^\W_])[\w ]{3,}$/
+    re = /^(?=.*[^\W_])[\w ]{2,}$/
     re.test text
 
   selectionAdded: (tag) ->
@@ -25,3 +25,13 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
 
   filterResults: (item) ->
     not @get('source').mapProperty('name').contains(item.get('name'))
+
+  focusOut: (e) ->
+    input = @$('input[type=text]')
+    text = input.val()
+
+    return unless @newItemCriteria(text)
+
+    @selectionAdded(text)
+    input.val('').focus()
+    false

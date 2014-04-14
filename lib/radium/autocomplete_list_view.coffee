@@ -132,13 +132,23 @@ Radium.AutocompleteView = Radium.View.extend
     tabindexBinding: 'parentView.tabindex'
 
     keyDown: (e) ->
-      unless e.keyCode == 13
-        @_super.apply this, arguments
-        return
+      unless [8, 13].contains e.keyCode
+        return @_super.apply this, arguments
 
-      @get('parentView').selectionAdded @get('value')
-      @set 'value', ''
-      return false
+      if e.keyCode == 13
+        @get('parentView').selectionAdded @get('value')
+        @set 'value', ''
+        return false
+
+      return @_super.apply(this, arguments) if @get('value').length
+
+      last = @get('source.lastObject')
+
+      return unless last
+
+      @get('parentView').send('removeSelection', last)
+
+      false
 
     didInsertElement: ->
       Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'
