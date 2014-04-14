@@ -116,16 +116,14 @@ Radium.AutocompleteView = Radium.View.extend
         @set 'value', ''
         return false
 
-      if @get('value').length || !@get('parentView.deleteOnBackSpace')
-        return @_super.apply(this, arguments) 
+
+      return @_super.apply(this, arguments) if @get('value').length
 
       last = @get('source.lastObject')
 
       return unless last
 
       @get('parentView').send('removeSelection', last)
-
-      @get('parentView').$('.as-results').hide()
 
       false
 
