@@ -96,7 +96,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.set('billingInfo.gatewaySet', true)
 
       account.one 'didUpdate', =>
-        debugger
         if subscription != 'basic'
           Radium.ActiveSubscription.find(@get('controllers.account.id')).then (activeSubscription) =>
             @set 'activeSubscription', activeSubscription

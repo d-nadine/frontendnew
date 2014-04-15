@@ -23,7 +23,9 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     text = text.replace(/(href=")x-msg:\/\/([^"]+)\//ig, '$1#$2')
   else
     text = email.get('message')
-    unless /<[a-z][\s\S]*>/i.test text
+    try
+      $(text)[0]
+    catch
       text = text.replace(/\n/g, '<br />')
 
   text = text.replace(/<(a)([^>]+)>/ig,"<$1 target=\"_blank\"  $2>")
