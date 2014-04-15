@@ -46,3 +46,18 @@ Radium.FormsTodoView = Radium.FormView.extend
   onFormReset: ->
     if description = @get('description')
       description.reset()
+
+  referenceIcon: (->
+    className = null
+      
+    switch @get('controller.reference.typeName')
+      when 'deal' then className = 'ss-briefcase'
+      when 'contact' then className = 'ss-user'
+      when 'email' then className = 'ss-mail'
+      when 'company' then className = 'ss-buildings'
+      when 'meeting' then className = 'ss-calendar'
+      when 'todo' then className = 'ss-check'
+      else className = "ss-view"
+
+    className
+  ).property('controller.reference')

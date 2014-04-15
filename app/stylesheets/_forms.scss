@@ -111,24 +111,23 @@
 
     .reference-meta {
       margin: 0 60px;
-      position: relative;
-      color: #797979;
 
       p {
         margin: 5px 0;
       }
+    }
+  }
 
-      a {
-        font-weight: bold;
-        color: $blue;
-      }
+  &.has-reference,
+  &.is-expanded {
+    .primary {
+      @include border-radius(3px 3px 0 0);
     }
   }
 
   &.is-expanded {
     .primary {
       border-color: $link;
-      @include border-radius(3px 3px 0 0);
     }
 
     .form-box-comments-icon {
@@ -152,6 +151,38 @@
     .inline-form-icon {
       color: $bright;
     }
+  }
+}
+
+.reference-meta {
+  position: relative;
+  color: #797979;
+
+  a {
+    font-weight: bold;
+    color: $blue;
+  }
+
+  i {
+    position: relative;
+    top: 2px;
+    color: $muted;
+  }
+}
+
+.has-reference > .reference-meta {
+  padding: 15px 20px;
+  position: relative;
+  background: #f6f6f6;
+  border: solid 1px $dark-background;
+  border-top: none;
+  @include box-sizing(border-box);
+  @include border-radius(0 0 3px 3px);
+  @include box-shadow(0 2px 1px rgba(black, 0.1));
+
+  p {
+    margin: 0;
+    line-height: 30px;
   }
 }
 

@@ -1,5 +1,8 @@
 {{#if hasReference}}
   <div class="reference-meta">
-    <p>Related {{reference.typeName}} {{resource-link-to reference}}</p>
+    <p>
+      {{#if reference.description}}<em>{{reference.description}}</em> - {{/if}}
+      Related to <i {{bind-attr class=":ss-standard :text-muted view.referenceIcon"}}></i> {{resource-link-to reference}}{{#if reference.company}}, {{resource-link-to reference.company}}{{/if}}
+    </p>
   </div>
 {{/if}}
