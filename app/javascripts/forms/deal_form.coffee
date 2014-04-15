@@ -46,7 +46,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     return false if Ember.isEmpty(dealValue)
     return false if parseInt(dealValue) == 0
     # FIXME: move into helper
-    return false unless /^(?=.*[1-9])\d{0,5}(\.\d{1,2})?$/.test dealValue
+    return false unless /^(?=.*[1-9])\d{0,15}(\.\d{1,2})?$/.test dealValue
 
     true
   ).property('name','contact','user','source','description', 'value')
