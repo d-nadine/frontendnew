@@ -22,9 +22,9 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     text = email.get('html')
     text = text.replace(/(href=")x-msg:\/\/([^"]+)\//ig, '$1#$2')
   else
-    text = email.get('message').replace(/\n/g, '<br />')
-    re = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-    text = text.replace(re, "<a href='$1' target='_blank'>$1</a>")
+    text = email.get('message')
+    unless /<[a-z][\s\S]*>/i.test text
+      text = text.replace(/\n/g, '<br />')
 
   text = text.replace(/<(a)([^>]+)>/ig,"<$1 target=\"_blank\"  $2>")
 

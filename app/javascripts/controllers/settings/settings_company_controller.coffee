@@ -6,6 +6,7 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Current
   account: Ember.computed.alias 'controllers.account.model'
   companyName: Ember.computed.alias 'controllers.account.name'
   users: Ember.computed.alias 'controllers.users'
+  isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
   pendingUsers: ( ->
     @get('controllers.usersInvites').filter (invite) ->
       !invite.get('confirmed') && !invite.get('isError') && !invite.get("isNew")
