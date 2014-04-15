@@ -5,7 +5,7 @@ Radium.DealsChecklistItemController = Radium.ObjectController.extend
     checklistItems = Ember.A()
     workflow.forEach (workflowItem) ->
       checklist = workflowItem.get('checklist')
-      ret.pushObjects(checklist.toArray()) if checklist.get('length')
+      checklistItems.pushObjects(checklist.toArray()) if checklist.get('length')
 
     checklistItems
 
