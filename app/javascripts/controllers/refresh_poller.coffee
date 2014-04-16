@@ -30,6 +30,6 @@ Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
     currentUser = @get('currentUser')
 
     currentUser.set 'syncState', 'waiting'
-    currentUser.set 'emailsImported', 'waiting'
+    currentUser.set 'emailsImported', 0
 
     @get('store').commit()
