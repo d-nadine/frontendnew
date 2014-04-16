@@ -7,7 +7,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
   nextTask: Ember.computed 'tasks.firstObject', 'tasks.[]', ->
     currentTasks = @get('currentTasks')
 
-    return unless currentTasks.get("length") >= 2
+    return unless currentTasks.get("length")
 
     for task in currentTasks by -1
       return task unless task.get("isFinished")
