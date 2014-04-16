@@ -15,6 +15,9 @@
     {{#if showMeetingForm}}
       {{render "forms/meeting" meetingForm}}
     {{/if}}
+    {{#if showNoteForm}}
+      {{render "forms/note" noteForm}}
+    {{/if}}
   </div>
   <div class="form-box-controls">
     {{#if compactFormButtons}}
@@ -28,6 +31,9 @@
           {{/if}}
           {{#if showMeetingForm}}
             <i class="ss-standard ss-calendar green"></i> Add Task
+          {{/if}}
+          {{#if showNoteForm}}
+            <i class="ss-standard ss-notebook green"></i> Add Note
           {{/if}}
         </button>
         <button class="btn btn-large dropdown-toggle needsclick" data-toggle="dropdown">
@@ -52,6 +58,11 @@
           {{#if meetingForm}}
           <li>
             <a href="#" {{action "showForm" "meeting"}}><i class="ss-standard ss-calendar"></i> Meeting</a>
+          </li>
+          {{/if}}
+          {{#if noteForm}}
+          <li>
+            <a href="#" {{action "showForm" "note"}}><i class="ss-standard ss-notebook"></i> Note</a>
           </li>
           {{/if}}
         </ul>
@@ -79,6 +90,11 @@
         {{#if meetingForm}}
           <button {{action "showForm" "meeting"}} {{bind-attr class=":btn :btn-action showMeetingForm:active"}}>
             <i class="ss-standard ss-calendar"></i>
+          </button>
+        {{/if}}
+        {{#if noteForm}}
+          <button {{action "showForm" "note"}} {{bind-attr class=":btn :btn-action showNoteForm:active"}}>
+            <i class="ss-standard ss-note"></i>
           </button>
         {{/if}}
       </div>
