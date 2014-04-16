@@ -28,30 +28,34 @@ Radium.SettingsPipelineStatesController = Radium.ArrayController.extend
       @send 'saveState'
 
     movePipelineStateUp: (state) ->
-      position = state.get('position')
+      states = @map (item) -> item.get('model')
 
-      return false if position == 1
+      index = states.indexOf state
 
-      previous = @find (ps) -> ps.get('position') == (position - 1)
+      return false if index == 0
 
-      return unless previous
+      next = states.objectAt(index - 1)
 
-      previous.get('model').incrementProperty('position')
-      state.decrementProperty('position')
+      return unless next
+
+      state.set('position', index)
+      next.set('position', index + 1)
 
       @send 'saveState'
 
     movePipelineStateDown: (state) ->
-      position = state.get('position')
+      states = @map (item) -> item.get('model')
 
-      return false if position == @get('length')
+      index = states.indexOf state
 
-      next = @find (ps) -> ps.get('position') == (position + 1)
+      return false if index == (@get('length') - 1)
+
+      next = states.objectAt(index + 1)
 
       return unless next
 
-      next.get('model').decrementProperty('position')
-      state.incrementProperty('position')
+      state.set('position', index + 2)
+      next.set('position', index + 1)
 
       @send 'saveState'
 

@@ -35,3 +35,15 @@ Radium.SettingsPipelineStatesRoute = Radium.Route.extend
 
   model: ->
     @controllerFor('account').get('workflow')
+
+  afterModel: (model) ->
+    sorted = model.toArray().sort (a, b) ->
+      Ember.compare a.get('position'), b.get('position')
+
+    index = 1
+    sorted.forEach (state) =>
+      state.set('position', index)
+      index++
+
+    @get('store').commit()
+
