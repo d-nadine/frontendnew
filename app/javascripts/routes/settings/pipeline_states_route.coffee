@@ -40,10 +40,7 @@ Radium.SettingsPipelineStatesRoute = Radium.Route.extend
     sorted = model.toArray().sort (a, b) ->
       Ember.compare a.get('position'), b.get('position')
 
-    index = 1
-    sorted.forEach (state) =>
-      state.set('position', index)
-      index++
+    for state, index in sorted
+      state.set('position', index + 1)
 
     @get('store').commit()
-
