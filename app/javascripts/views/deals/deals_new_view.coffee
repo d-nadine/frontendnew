@@ -29,9 +29,11 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
     didInsertElement: ->
       @$().focus()
 
-  contactPicker: Radium.ContactPicker.extend(Radium.ValueValidationMixin)
+  contactPicker: Radium.ContactPicker.extend Radium.ValueValidationMixin,
+    parent: Ember.computed.alias 'controller'
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
+    parent: Ember.computed.alias 'controller'
     disabledBinding: 'parentView.disabled'
     leader: null
 
@@ -74,8 +76,7 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
 
       return false if Ember.isEmpty value
 
-      # FIXME: move into helper
-      /^(?=.*[1-9])\d{0,15}(\.\d{1,2})?$/.test value
+      value.toString().isCurrency()
     ).property('controller.value', 'controller.isSubmitted')
 
     isInvalid: ( ->

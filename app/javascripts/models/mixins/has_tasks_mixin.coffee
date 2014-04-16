@@ -1,15 +1,18 @@
 Radium.HasTasksMixin = Ember.Mixin.create
   tasks: Radium.computed.required()
 
-  hasTasks: (->
+  hasTasks: Ember.computed 'tasks.[]', ->
     @get('tasks.length')
-  ).property('tasks.length')
 
-  nextTask: (->
-    @get 'tasks.firstObject'
-  ).property('tasks.firstObject')
+  nextTask: Ember.computed 'tasks.firstObject', 'tasks.[]', ->
+    currentTasks = @get('currentTasks')
 
-  currentTasks: ( ->
+    return unless currentTasks.get("length") >= 2
+
+    for task in currentTasks by -1
+      return task unless task.get("isFinished")
+
+  currentTasks: Ember.computed 'tasks.[]', ->
     tasks = @get('tasks')
 
     return Ember.A() unless tasks.get('length')
@@ -20,4 +23,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
       return if task.constructor is Radium.Meeting
 
       not task.get('isFinished')
-  ).property('tasks.[]')
+
+  notifyTasksChange: ->
+    @notifyPropertyChange('currentTasks')
+    @notifyPropertyChange('nextTask')

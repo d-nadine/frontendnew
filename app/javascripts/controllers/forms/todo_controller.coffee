@@ -72,6 +72,11 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           if @get('controllers.application.currentPath') != 'user.index'
             @get('user')?.reload()
 
+        unless reference = @get('reference')
+          return
+
+        reference.notifyTasksChange()
+
         @get('store').commit()
     else
       model.get('isFinished')
