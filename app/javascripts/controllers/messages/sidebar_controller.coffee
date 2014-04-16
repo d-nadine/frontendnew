@@ -108,3 +108,5 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   searchIsActive: Ember.computed.equal('folder', 'search')
 
   isSyncing: Ember.computed.alias 'currentUser.isSyncing'
+
+  isTestUser: Ember.computed.equal 'currentUser.id', "163"
