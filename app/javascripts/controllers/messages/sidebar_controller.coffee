@@ -15,6 +15,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
           refreshPoller = @get('refreshPoller')
 
           refreshPoller.set('currentUser', currentUser)
+          refreshPoller.set('store', @get('store'))
+          refreshPoller.set('container', @get('container'))
+
           refreshPoller.start()
 
       job.one 'becameInvalid', (result) =>
