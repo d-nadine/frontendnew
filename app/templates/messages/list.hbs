@@ -1,4 +1,18 @@
 {{partial "messages/new_email_btn"}}
+{{#unless cannotRefresh}}
+  <div class="clearfix new-message-btn">
+    <a href="#" {{action refresh}} class="btn btn-block btn-large btn-danger">
+      <strong>Refresh</strong>
+    </a>
+  </div>
+{{/unless}}
+{{#if isSyncing}}
+  <div class="text-center">
+    {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
+    <p><img src="/images/ajax-loader.gif"/> {{currentUser.emailsImported}}% emails imported&hellip;</p>
+    <p><strong>Status</strong> {{currentUser.syncState}}&hellip;</p>
+  </div>
+{{/if}}
 <ul class="unstyled selectable messages-list">
   {{#if content}}
     {{each content itemViewClass="Radium.MessagesSidebarItemView" itemController="messagesSidebarItem"}}

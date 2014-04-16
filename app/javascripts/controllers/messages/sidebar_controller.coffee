@@ -1,24 +1,30 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
-  needs: ['messages', 'emailsShow', 'messagesDiscussion']
-  page: 1
-  allPagesLoaded: false
-  loadingType: Radium.Email
-
-  currentPath: Ember.computed.oneWay 'controllers.application.currentPath'
-  content: Ember.computed.oneWay 'controllers.messages'
-  selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
-  totalRecords: Ember.computed.oneWay 'controllers.messages.content.totalRecords'
-  folder: Ember.computed.oneWay 'controllers.messages.folder'
-  itemController: 'messagesSidebarItem'
-
-  inboxIsActive: ( ->
-    ['inbox', 'sent', 'drafts', 'scheduled'].contains @get('folder')
-  ).property('folder')
-
-  radiumIsActive: Ember.computed.equal('folder', 'radium')
-  searchIsActive: Ember.computed.equal('folder', 'search')
-
   actions:
+    refresh: ->
+      return if @get('cannotRefresh') || @get('isSyncing')
+
+      currentUser = @get('currentUser')
+
+      job = Radium.EmailSyncJob.createRecord
+              user: currentUser
+
+      job.one 'didCreate', (result) =>
+        currentUser.reload()
+
+        currentUser.one 'didReload', =>
+          refreshPoller = @get('refreshPoller')
+
+          refreshPoller.set('currentUser', currentUser)
+          refreshPoller.start()
+
+      job.one 'becameInvalid', (result) =>
+        @send 'flashError', job
+
+      job.one 'becameInvalid', (result) =>
+        @send 'flashError', 'An error has occurred and the refresh command failed.r'
+
+      @get('store').commit()
+
     checkMessageItem: ->
       currentPath = @get('currentPath')
       content = @get('content.content')
@@ -64,9 +70,38 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
     toggleSearch: ->
       @toggleProperty 'isSearchOpen' 
 
+  needs: ['messages', 'emailsShow', 'messagesDiscussion']
+
+  init: ->
+    @_super.apply this, arguments
+    @set 'refreshPoller', Radium.RefreshPoller.create()
+
+  cannotRefresh: Ember.computed 'folder.length', ->
+    @get('folder') != 'inbox'
+
   modelQuery: ->
     queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: @get('page'))
 
     Radium.Email.find(queryParams)
 
   isSearchOpen: false
+
+  page: 1
+  allPagesLoaded: false
+  loadingType: Radium.Email
+
+  currentPath: Ember.computed.oneWay 'controllers.application.currentPath'
+  content: Ember.computed.oneWay 'controllers.messages'
+  selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
+  totalRecords: Ember.computed.oneWay 'controllers.messages.content.totalRecords'
+  folder: Ember.computed.oneWay 'controllers.messages.folder'
+  itemController: 'messagesSidebarItem'
+
+  inboxIsActive: ( ->
+    ['inbox', 'sent', 'drafts', 'scheduled'].contains @get('folder')
+  ).property('folder')
+
+  radiumIsActive: Ember.computed.equal('folder', 'radium')
+  searchIsActive: Ember.computed.equal('folder', 'search')
+
+  isSyncing: Ember.computed.alias 'currentUser.isSyncing'

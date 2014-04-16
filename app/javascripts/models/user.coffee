@@ -19,6 +19,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   initialMailImported: DS.attr('boolean')
   emailsImported: DS.attr('number')
   refreshFailed: DS.attr('boolean')
+  syncState: DS.attr('string')
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
 
@@ -45,6 +46,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
     Radium.Contact.all().filter (contact) =>
       contact.get('user') == this && !contact.get('isPersonal')
   ).property('deals.[]')
+
+  isSyncing: Ember.computed 'syncState', ->
+    @get('syncState') != "waiting"
 
   displayName: Ember.computed.alias 'name'
 
