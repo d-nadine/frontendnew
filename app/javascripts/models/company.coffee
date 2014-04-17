@@ -15,7 +15,7 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
 
   name: DS.attr('string')
   website: DS.attr('string')
-  notes: DS.attr('string')
+  about: DS.attr('string')
 
   displayName: Ember.computed.alias 'name'
 

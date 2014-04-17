@@ -1,4 +1,4 @@
-Radium.SidebarNotesView = Radium.InlineEditorView.extend
+Radium.SidebarAboutView = Radium.InlineEditorView.extend
   textArea: Radium.TextArea.extend(Ember.TargetActionSupport,
      click: (event) ->
       event.stopPropagation()

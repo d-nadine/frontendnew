@@ -7,7 +7,7 @@ Radium.CreateContact = Radium.Model.extend
   status: DS.attr('string')
   source: DS.attr('string')
   status: DS.attr('string')
-  notes: DS.attr('string')
+  about: DS.attr('string')
 
   phoneNumbers: DS.attr('array')
   emailAddresses: DS.attr('array')

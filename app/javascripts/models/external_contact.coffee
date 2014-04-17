@@ -10,7 +10,7 @@ Radium.ExternalContact = Radium.Model.extend
   name: DS.attr('string')
   title: DS.attr('string')
   avatarKey: DS.attr('string')
-  notes: DS.attr('string')
+  about: DS.attr('string')
 
   primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
