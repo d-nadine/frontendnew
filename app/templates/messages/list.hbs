@@ -1,7 +1,7 @@
 {{partial "messages/new_email_btn"}}
 {{#unless cannotRefresh}}
   <div class="clearfix new-message-btn">
-    <button {{action refresh}} {{bind-attr disabled=isSyncing}} class="btn btn-block btn-large btn-danger">
+    <button {{action refresh}} {{bind-attr disabled=isSyncing}} class="btn btn-block btn-large">
       <strong>Refresh</strong>
     </button>
   </div>

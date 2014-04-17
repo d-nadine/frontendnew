@@ -40,6 +40,9 @@ Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
       currentUser.set 'syncState', 'waiting'
       currentUser.set 'emailsImported', 0
 
+      currentUser.one 'didUpdate', =>
+        currentUser.reload()
+
       @get('controller.store').commit()
 
     if currentUser.get('currentState.stateName') != "root.loaded.saved"
