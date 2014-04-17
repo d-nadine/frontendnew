@@ -17,7 +17,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
       return
 
     if currentUser.get('syncState') == 'finished'
-      @get('controller.container').lookup('route:messages').refresh()
+      @get('controller.controllers.messages').onPoll()
       @finishSync()
 
 
