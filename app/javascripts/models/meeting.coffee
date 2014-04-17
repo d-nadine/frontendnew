@@ -1,4 +1,4 @@
-require 'lib/radium/aggregate_array_proxy' 
+require 'lib/radium/aggregate_array_proxy'
 
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
@@ -40,6 +40,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
+  notes: DS.hasMany('Radium.Note', inverse: '_referenceMeeting')
 
   tasks: Radium.computed.tasks('todos', 'calls')
 

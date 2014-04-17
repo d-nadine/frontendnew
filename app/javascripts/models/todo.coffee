@@ -36,7 +36,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')
-
+  notes: DS.hasMany('Radium.Note', inverse: '_referenceTodo')
   tasks: Radium.computed.tasks('todos', 'calls')
 
   overdue: Ember.computed 'finishBy', ->

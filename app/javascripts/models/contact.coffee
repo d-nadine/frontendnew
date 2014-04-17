@@ -13,6 +13,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   phoneNumbers: DS.hasMany('Radium.PhoneNumber')
   emailAddresses: DS.hasMany('Radium.EmailAddress')
   addresses: DS.hasMany('Radium.Address')
+  notes: DS.hasMany('Radium.Note', inverse: '_referenceContact')
 
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
@@ -89,5 +90,5 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
       activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
-      if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this 
+      if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this
         notification.deleteRecord()
