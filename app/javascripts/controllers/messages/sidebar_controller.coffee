@@ -14,17 +14,19 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
         currentUser.one 'didReload', =>
           refreshPoller = @get('refreshPoller')
 
-          refreshPoller.set('currentUser', currentUser)
-          refreshPoller.set('store', @get('store'))
-          refreshPoller.set('container', @get('container'))
+          refreshPoller.set 'controller', this
 
           refreshPoller.start()
 
       job.one 'becameInvalid', (result) =>
+        @set 'isSyncing', false
         @send 'flashError', job
 
       job.one 'becameInvalid', (result) =>
+        @set 'isSyncing', false
         @send 'flashError', 'An error has occurred and the refresh command failed.r'
+
+      @set 'isSyncing', true
 
       @get('store').commit()
 
@@ -100,13 +102,10 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   folder: Ember.computed.oneWay 'controllers.messages.folder'
   itemController: 'messagesSidebarItem'
 
-  inboxIsActive: ( ->
+  inboxIsActive: Ember.computed 'folder', ->
     ['inbox', 'sent', 'drafts', 'scheduled'].contains @get('folder')
-  ).property('folder')
 
   radiumIsActive: Ember.computed.equal('folder', 'radium')
   searchIsActive: Ember.computed.equal('folder', 'search')
 
-  isSyncing: Ember.computed.alias 'currentUser.isSyncing'
-
-  isTestUser: Ember.computed.equal 'currentUser.id', "163"
+  isSyncing: false

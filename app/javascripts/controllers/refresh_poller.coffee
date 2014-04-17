@@ -5,31 +5,44 @@ Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
   start: ->
     @_super.apply this, arguments
 
-    @_timeout = setInterval(@_refreshTimedOut.bind(this), @timeOutInterval)
+    @_timeout = setInterval(@finishSync.bind(this), @timeOutInterval)
 
   stop: ->
     @_super.apply this, arguments
+    @set('controller.isSyncing', false)
     clearInterval(@_timeout) if (@_timeout)
 
   onPoll: ->
-    unless currentUser = @get('currentUser')
+    unless currentUser = @get('controller.currentUser')
       return
 
-    unless currentUser.get('isSyncing')
-      @get('container').lookup('route:messages').refresh()
-      @stop()
+    if currentUser.get('syncState') == 'finished'
+      @get('controller.container').lookup('route:messages').refresh()
+      @finishSync()
 
-    currentUser.reload()
+
+    if currentUser.get('currentState.stateName') == "root.loaded.saved"
+      currentUser.reload()
 
     currentUser.one 'becameError', =>
       @stop()
 
-  _refreshTimedOut: ->
+  finishSync: ->
     @stop()
 
-    currentUser = @get('currentUser')
+    currentUser = @get('controller.currentUser')
 
-    currentUser.set 'syncState', 'waiting'
-    currentUser.set 'emailsImported', 0
+    observer = =>
+      return unless currentUser.get('currentState.stateName') == "root.loaded.saved"
 
-    @get('store').commit()
+      currentUser.removeObserver 'currentState.stateName', observer
+
+      currentUser.set 'syncState', 'waiting'
+      currentUser.set 'emailsImported', 0
+
+      @get('controller.store').commit()
+
+    if currentUser.get('currentState.stateName') != "root.loaded.saved"
+      currentUser.addObserver 'currentState.stateName', observer
+    else
+      observer()

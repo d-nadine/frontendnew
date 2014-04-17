@@ -1,17 +1,15 @@
 {{partial "messages/new_email_btn"}}
-{{#if isTestUser}}
-  {{#unless cannotRefresh}}
-    <div class="clearfix new-message-btn">
-      <a href="#" {{action refresh}} class="btn btn-block btn-large btn-danger">
-        <strong>Refresh</strong>
-      </a>
-    </div>
-  {{/unless}}
-{{/if}}
+{{#unless cannotRefresh}}
+  <div class="clearfix new-message-btn">
+    <button {{action refresh}} {{bind-attr disabled=isSyncing}} class="btn btn-block btn-large btn-danger">
+      <strong>Refresh</strong>
+    </button>
+  </div>
+{{/unless}}
 {{#if isSyncing}}
   <div class="text-center">
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
-    <p><img src="/images/ajax-loader.gif"/> {{currentUser.emailsImported}}% emails imported&hellip;</p>
+    <p><img src="/images/ajax-loader.gif"/> {{currentUser.emailsImported}}% complete.&hellip;</p>
     <p><strong>Status</strong> {{currentUser.syncState}}&hellip;</p>
   </div>
 {{/if}}
