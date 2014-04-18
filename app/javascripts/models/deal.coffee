@@ -47,7 +47,7 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   displayName: Ember.computed.alias 'name'
 
-  notes: Ember.computed.alias 'description'
+  about: Ember.computed.alias 'description'
 
   isOpen: ( ->
     not ['lost', 'closed'].contains(@get('status'))

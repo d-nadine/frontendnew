@@ -6,16 +6,16 @@
   </div>
   <div class="sidebar-panel-content">
     {{#if isEditing}}
-    <div class="notes">
+    <div class="about">
       <div>
-        {{view view.textArea class="field" valueBinding="form.notes" placeholder="About"}}
+        {{view view.textArea class="field" valueBinding="form.about" placeholder="About"}}
       </div>
     </div>
     {{else}}
-    <div class="notes">
+    <div class="about">
       <div>
-        {{#if notes}}
-        <span>{{{markedUpNotes}}}</span>
+        {{#if about}}
+        <span>{{{markedUpAbout}}}</span>
         {{else}}
         <span>&nbsp;</span>
         {{/if}}
@@ -28,6 +28,6 @@
         </button>
       </div>
     </div>
-    {{/if}} 
+    {{/if}}
   </div>
 </div>

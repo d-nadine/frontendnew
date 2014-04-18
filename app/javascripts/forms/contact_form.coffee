@@ -5,7 +5,7 @@ Radium.ContactForm = Radium.Form.extend
     name: @get('name')
     companyName: @get('companyName')
     user: @get('user')
-    notes: @get('notes')
+    about: @get('about')
     source: @get('source')
     status: @get('status')
     dealState: @get('dealState')
@@ -32,7 +32,7 @@ Radium.ContactForm = Radium.Form.extend
     @get('phoneNumbers').forEach (phoneNumber) =>
       number = phoneNumber.get('value')
       if number.length && number != "+1"
-        contact.get('phoneNumbers').push  
+        contact.get('phoneNumbers').push
           name: phoneNumber.get('name')
           number: phoneNumber.get('value')
           primary: phoneNumber.get('isPrimary')
@@ -63,7 +63,7 @@ Radium.ContactForm = Radium.Form.extend
     @_super.apply this, arguments
     @set 'isNew', true
     @set 'name', ''
-    @set 'notes', ''
+    @set 'about', ''
     @set 'source', @get('initialLeadSource')
     @set 'companyName', null
     @set 'company', ''
