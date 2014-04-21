@@ -92,5 +92,5 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
     content.toArray().sort(sortFunc)
   ).property('content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending')
 
-  dealValues: Ember.computed.mapBy 'visibleContent', 'value'
+  dealValues: Ember.computed.mapBy 'arrangedContent', 'value'
   total: Ember.computed.sum 'dealValues'
