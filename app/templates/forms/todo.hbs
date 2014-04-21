@@ -11,6 +11,11 @@
         {{/if}}
       </a>
     {{/if}}
+
+    {{#if overdue}}
+      <i class="ss-alert pull-right"></i>
+    {{/if}}
+
     {{#if comments.length}}
       <i class="ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
@@ -21,12 +26,12 @@
 
     {{view view.todoField classNames="field field-blend-in" viewName="description"}}
 
+    {{partial "forms/reference"}}
   </div>
 
   {{#if isExpanded}}
     <div class="expanded-fields">
       <div class="form-row">
-        {{partial "forms/reference"}}
         <div class="field-group meeting-form-invite">
           {{date-picker date=finishBy class="field" submitForm="trySubmit"}}
           {{view view.userPicker class="field"}}
@@ -51,7 +56,5 @@
 
       {{partial 'forms/footer'}}
     </div>
-  {{else}}
-    {{partial "forms/reference"}}
   {{/if}}
 </form>

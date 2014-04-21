@@ -77,7 +77,59 @@ Radium.computed.aggregate = ->
 
   Ember.arrayComputed.apply this, args
 
-Radium.computed.tasks = Radium.computed.aggregate
+Radium.computed.tasks = ->
+  properties = a_slice.call arguments
+
+  args = properties.map (prop) => "#{prop}"
+
+  args.forEach (arg) ->
+    args.push "#{arg}.@each.isFinished"
+
+  options =
+    initialValue: []
+    sortFunc: (left, right) ->
+      compare = Ember.DateTime.compare left.get("time"), right.get("time")
+
+      if compare == 0
+        Ember.compare left.get("displayName"), right.get("displayName")
+      else
+        compare
+
+    addedItem: (array, item, changeMeta, instanceMeta) ->
+      return array if array.contains item
+      return array if item.get('isFinished')
+
+      observer = =>
+        return unless item.get('isLoaded')
+
+        item.removeObserver 'isLoaded', observer
+
+        return if array.contains item
+        return if item.get('isFinished')
+
+        array.pushObject item
+
+        array.sort options.sortFunc
+
+      if item.get('isLoaded')
+        observer()
+      else
+        item.addObserver 'isLoaded', observer
+
+      array
+
+    removedItem: (array, item, changeMeta, instanceMeta) ->
+      return array unless array.length
+      return array unless array.contains(item)
+
+      array.removeObject(item)
+
+      array
+
+  args.push options
+
+  Ember.arrayComputed.apply this, args
+
 
 Radium.computed.required = ->
   Ember.computed ->

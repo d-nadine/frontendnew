@@ -49,7 +49,7 @@ Radium.FormsTodoView = Radium.FormView.extend
 
   referenceIcon: (->
     className = null
-      
+
     switch @get('controller.reference.typeName')
       when 'deal' then className = 'ss-briefcase'
       when 'contact' then className = 'ss-user'
