@@ -1,0 +1,27 @@
+<div class="reference-meta">
+  <p>
+    {{#if isDeal}}
+      <i class="ss-standard :text-muted ss-briefcase"></i>{{resource-link-to reference}}, {{resource-link-to reference.contact}}{{#if reference.contact.company}}, {{resource-link-to reference.contact.company}}{{/if}}
+    {{/if}}
+
+    {{#if isEmail}}
+      <i class="ss-standard :text-muted ss-mail"></i> {{resource-link-to reference}}, {{resource-link-to reference.sender}} {{#if reference.sender.company}}, {{resource-link-to reference.sender.company}}{{/if}}
+    {{/if}}
+
+    {{#if isContact}}
+      <i class="ss-standard :text-muted ss-user"></i> {{resource-link-to reference}}{{#if reference.company}}, {{resource-link-to reference.company}}{{/if}}
+    {{/if}}
+
+    {{#if isCompany}}
+      <i class="ss-standard :text-muted ss-buildings"></i> {{resource-link-to reference}}
+    {{/if}}
+
+    {{#if isMeeting}}
+      <i class="ss-standard :text-muted ss-briefcase"></i> {{resource-link-to reference}}
+    {{/if}}
+
+    {{#if isTodo}}
+      <i class="ss-standard :text-muted ss-check"></i> {{resource-link-to reference}}
+    {{/if}}
+  </p>
+</div>
