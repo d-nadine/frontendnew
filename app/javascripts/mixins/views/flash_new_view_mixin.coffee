@@ -20,7 +20,7 @@ Radium.FlashNewViewMixin = Ember.Mixin.create
   scrollToTask: ->
     return unless @$()
 
-    top = @$().offset().top + 200
+    top = @$().offset().top - 100
 
     Ember.$("body,html").animate
       scrollTop: top,
