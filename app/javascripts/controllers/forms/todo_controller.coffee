@@ -45,8 +45,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
         @applyBufferedChanges()
 
+        model = @get('model')
+
         if @get('isNew')
-          @get('model').commit().then(( (confirmation) =>
+          model.commit().then(( (confirmation) =>
             if @get('controllers.application.currentPath') != 'user.index'
               @get('user')?.reload()
 
@@ -57,6 +59,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
             error.deleteRecord()
           ))
         else
+          @send 'addErrorHandlersToModel', model
           @get('store').commit()
 
         Ember.run.next =>

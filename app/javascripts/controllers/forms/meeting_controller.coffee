@@ -98,9 +98,13 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
 
         @applyBufferedChanges()
 
+        model = @get('model')
+
         if @get('isNew')
-          @get('model').commit() 
+          model.commit() 
         else
+          @send 'addErrorHandlersToModel', model
+
           @get('store').commit()
 
         @discardBufferedChanges()

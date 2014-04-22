@@ -1,6 +1,18 @@
 requireAll /mixins\/controllers/
 
 ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
+  actions:
+    addErrorHandlersToModel: (model) ->
+      model.one 'becameInvalid', (result) =>
+        @send 'flashError', result
+        model.reset()
+
+      model.one 'becameError', =>
+        @send 'flashError', 'An error has occurred and the meeting cannot be updated.'
+        model.reset()
+
+      false
+
   needs: ['clock', 'application']
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
