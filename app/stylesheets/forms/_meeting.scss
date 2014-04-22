@@ -71,9 +71,15 @@
         cursor:pointer;
         color: $muted;
 
+        a, a:focus, a:visited {
+          font-weight: bold;
+          color: $blue;
+        }
+
         a:after{
           content: ',';
         }
+
         a:last-of-type:after{
           content: '';
         }

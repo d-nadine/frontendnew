@@ -5,7 +5,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   arrangedGroups: Ember.computed.sort 'groupedContent', (left, right) ->
     Ember.compare left.get('position'), right.get('position')
 
-  groupedContent: Ember.arrayComputed 'visibleContent.[]', 'visibleContent.@each.isFinished',
+  groupedContent: Ember.arrayComputed 'visibleContent.@each.isFinished',
     addedItem: (array, task, changeMeta, instanceMeta) ->
       name = @groupBy task
 
