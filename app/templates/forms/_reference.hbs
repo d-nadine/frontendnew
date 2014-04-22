@@ -1,7 +1,3 @@
 {{#if hasReference}}
-  <div class="reference-meta">
-    <p>
-      <i {{bind-attr class=":ss-standard :text-muted view.referenceIcon"}}></i> {{resource-link-to reference}}{{#if reference.company}}, {{resource-link-to reference.company}}{{/if}}
-    </p>
-  </div>
+  {{task-reference reference=reference}}
 {{/if}}
