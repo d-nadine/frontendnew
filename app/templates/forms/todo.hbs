@@ -1,8 +1,6 @@
 <form {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
   <div {{bind-attr class="isFinished view.isFocused :primary"}} {{action "expand"}}>
-    <button {{action "finishTask" bubbles=false}} {{bind-attr disabled="cantFinish" class="isFinished :btn :btn-link :pull-left :events-list-item-button"}}>
-      <i class="ss-standard ss-check"></i>
-    </button>
+    {{view view.finishView}}
 
     {{#if showOptions}}
       <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>

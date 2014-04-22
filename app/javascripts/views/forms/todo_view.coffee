@@ -10,6 +10,38 @@ Radium.FormsTodoView = Radium.FormView.extend
     return unless @get('controller').on
     @get('controller').on('animateFinish', this, 'onAnimateFinish') if @get('controller').on
 
+  finishView: Radium.View.extend Ember.ViewTargetActionSupport,
+    tagName: 'button'
+    classNameBindings: ["isFinished", ":btn", ":btn-link", ":pull-left", ":events-list-item-button"]
+    attributeBindings: 'title'
+
+    didInsertElement: ->
+      @_super.apply this, arguments
+      unless @get('controller.isNew')
+        @$().tooltip()
+
+    willDestroyElement: ->
+      @_super.apply this, arguments
+
+      if @$().data('tooltip')
+        @$().tooltip('destroy')
+
+    click: ->
+      @triggerAction
+        action: 'finishTask'
+
+      false
+
+    template: Ember.Handlebars.compile """
+      <i class="ss-standard ss-check"></i>
+    """
+
+    title: Ember.computed 'controller.isDisabled', 'controller.isFinished', ->
+      if @get('controller.isFinished')
+        "Mark as not done"
+      else
+        "Mark as done"
+
   todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
     Radium.FocusTextareaMixin,
 
