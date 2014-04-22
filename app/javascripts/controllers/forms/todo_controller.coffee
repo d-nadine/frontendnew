@@ -21,14 +21,27 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       else
         clearInterval @get('timer') if @get('timer')
 
+        @send('completeFinish') if @get("hasBufferedChanges")
+
       false
 
     completeFinish: ->
-      return unless @get("isFinishing")
+      @set("isFinishing", false)
 
       @applyBufferedChanges()
 
+      @get('model').one 'didUpdate', ->
+        if @get('controllers.application.currentPath') != 'user.index'
+          @get('user')?.reload()
+
+        unless reference = @get('reference')
+          return
+
+        reference.reload()
+
       @get('store').commit()
+
+      @discardBufferedChanges()
 
     submit: ->
       @set 'isSubmitted', true

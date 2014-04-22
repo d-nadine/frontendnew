@@ -67,9 +67,11 @@ Radium.FormsTodoView = Radium.FormView.extend
       description.reset()
 
   onAnimateFinish: ->
-    unless @$().length
-      @get('controller').send 'completeFinish'
+    controller = @get('controller')
+
+    unless @$()?.length
+      controller.send 'completeFinish'
       return
 
     @$().fadeOut 'slow', =>
-      @get('controller').send 'completeFinish'
+      controller.send 'completeFinish'
