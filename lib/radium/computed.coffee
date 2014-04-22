@@ -83,7 +83,7 @@ Radium.computed.tasks = ->
   args = properties.map (prop) => "#{prop}"
 
   args.forEach (arg) ->
-    args.push "#{arg}.@each.isFinished"
+    args.push "#{arg}.@each.{isFinished,isDeleted}"
 
   options =
     initialValue: []
@@ -106,6 +106,7 @@ Radium.computed.tasks = ->
 
         return if array.contains item
         return if item.get('isFinished')
+        return if item.get('isDeleted')
 
         array.pushObject item
 

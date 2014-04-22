@@ -20,6 +20,8 @@ Radium.FormsTodoView = Radium.FormView.extend
         @$().tooltip()
 
     willDestroyElement: ->
+      @_super.apply this, arguments
+
       if @$().data('tooltip')
         @$().tooltip('destroy')
 
