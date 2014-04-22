@@ -40,9 +40,9 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
   tasks: Radium.computed.tasks('todos', 'calls')
 
   overdue: ( ->
-    now = Ember.DateTime.create().atEndOfDay()
+    return false if @get('isFinished')
 
-    (@get('finishBy').get('milliseconds') < now.get('milliseconds'))  && (!@get('isFinished'))
+    @get('finishBy').isBeforeToday()
   ).property('finishBy')
 
   time: Ember.computed.alias('finishBy')

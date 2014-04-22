@@ -13,7 +13,7 @@
     {{/if}}
 
     {{#if overdue}}
-      <i class="ss-alert pull-right"></i>
+      <span class="pull-right overdue-alert"><i class="ss-alert"></i> {{formatDateTime time format="date"}}</span>
     {{/if}}
 
     {{#if comments.length}}
