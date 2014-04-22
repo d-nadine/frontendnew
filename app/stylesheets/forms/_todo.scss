@@ -2,6 +2,12 @@
   .primary {
     position: relative;
 
+    .events-list-item-button .ss-check {
+      font-size: 18px;
+      position: absolute;
+      top: 7px;
+    }
+
     &.is-finished {
       text-shadow: 0 1px 0 rgba(white, 0.2);
       color: #c5c5c5;
@@ -31,6 +37,8 @@
       }
     }
   }
+
+
 
   &.just-added .primary {
     .todo textarea,

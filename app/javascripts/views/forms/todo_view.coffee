@@ -5,25 +5,10 @@ require 'views/forms/form_view'
 require 'views/forms/focus_textarea_mixin'
 
 Radium.FormsTodoView = Radium.FormView.extend
-  checkbox: Radium.Checkbox.extend
-    attributeBindings: 'title'
-    checkedBinding: 'controller.isFinished'
-    disabledBinding: 'controller.canFinish'
-    title: (->
-      if @get('controller.isFinished')
-        "Mark as not done"
-      else
-        "Mark as done"
-    ).property('controller.isDisabled', 'controller.isFinished')
-    didInsertElement: ->
-      unless @get('controller.isNew')
-        @$().tooltip()
-
-    willDestroyElement: ->
-      @_super.apply this, arguments
-
-      if @$().data('tooltip')
-        @$().tooltip('destroy')
+  didInsertElement: ->
+    @_super.apply this, arguments
+    return unless @get('controller').on
+    @get('controller').on('animateFinish', this, 'onAnimateFinish') if @get('controller').on
 
   todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
     Radium.FocusTextareaMixin,
@@ -48,3 +33,11 @@ Radium.FormsTodoView = Radium.FormView.extend
   onFormReset: ->
     if description = @get('description')
       description.reset()
+
+  onAnimateFinish: ->
+    unless @$().length
+      @get('controller').send 'completeFinish'
+      return
+
+    @$().fadeOut 'slow', =>
+      @get('controller').send 'completeFinish'

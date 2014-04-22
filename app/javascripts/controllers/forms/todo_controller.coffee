@@ -5,6 +5,31 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   needs: ['users']
 
   actions:
+    finishTask: ->
+      return if @get('cantFinish')
+
+      @toggleProperty('isFinished')
+
+      if @get('isFinished') && @get('hasBufferedChanges')
+        timer = setInterval =>
+          @set 'isFinishing', true
+          @trigger('animateFinish')
+          clearInterval timer
+        , 4000
+
+        @set 'timer', timer
+      else
+        clearInterval @get('timer') if @get('timer')
+
+      false
+
+    completeFinish: ->
+      return unless @get("isFinishing")
+
+      @applyBufferedChanges()
+
+      @get('store').commit()
+
     submit: ->
       @set 'isSubmitted', true
       return unless @get('isValid')
@@ -57,30 +82,11 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   init: ->
     @_super.apply this, arguments
 
-  canFinish: (->
-    @get('isDisabled') || @get('isNew')
-  ).property('isDisabled', 'isNew')
+  timer: null
+  isFinishing: false
 
-  isFinished: ((key, value) ->
-    model = @get('content')
-
-    if arguments.length == 2
-      model.set('isFinished', value)
-
-      unless model.get('isNew')
-        model.one 'didUpdate', (result) =>
-          if @get('controllers.application.currentPath') != 'user.index'
-            @get('user')?.reload()
-
-        unless reference = @get('reference')
-          return
-
-        reference.notifyTasksChange()
-
-        @get('store').commit()
-    else
-      model.get('isFinished')
-  ).property('content.isFinished')
+  cantFinish: Ember.computed 'isDisabled', 'isNew', 'isFinishing', ->
+    @get('isDisabled') || @get('isNew') || @get('isFinishing')
 
   isValid: ( ->
     return if Ember.isEmpty(@get('description').trim())
