@@ -1,16 +1,24 @@
 <div class="task-list">
-  {{#each task in visibleContent itemController="taskListItem"}}
-    {{#if showTodoForm}}
-      {{render "forms/todo" task.model}}
-    {{/if}}
+  {{#if model.isLoading}}
+    {{partial 'is_loading'}}
+  {{else}}
+    {{#each group in arrangedGroups}}
+      <h3>{{group.displayName}}</h3>
 
-    {{#if showCallForm}}
-      {{render "forms/call" task.model}}
-    {{/if}}
+      {{#each task in group itemController="taskListItem"}}
+        {{#if showTodoForm}}
+          {{render "forms/todo" task.model}}
+        {{/if}}
 
-    {{#if showMeetingForm}}
-      {{render "forms/meeting" task.model}}
-    {{/if}}
-  {{/each}}
-  {{partial "shared/show_more"}}
+        {{#if showCallForm}}
+          {{render "forms/call" task.model}}
+        {{/if}}
+
+        {{#if showMeetingForm}}
+          {{render "forms/meeting" task.model}}
+        {{/if}}
+      {{/each}}
+    {{/each}}
+    {{partial "shared/show_more"}}
+  {{/if}}
 </div>

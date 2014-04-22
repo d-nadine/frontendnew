@@ -1,27 +1,24 @@
 require 'lib/radium/groupable'
 require 'lib/radium/show_more_mixin'
 
-Radium.TaskListController = Radium.ArrayController.extend
-  arrangedContent: Ember.computed 'content.[]', ->
-    content = @get('content')
-
-    return Ember.A() unless content.get('length')
-
-    content
-
+Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   arrangedGroups: Ember.computed.sort 'groupedContent', (left, right) ->
+    Ember.compare left.get('position'), right.get('position')
 
-  groupedContent: Ember.arrayComputed '@this', 'arrangedContent.@each.isFinished',
+  groupedContent: Ember.arrayComputed 'visibleContent.[]', 'visibleContent.@each.isFinished',
     addedItem: (array, task, changeMeta, instanceMeta) ->
       name = @groupBy task
 
       unless group = array.findBy 'name', name
 
-        group = Ember.ArrayProxy.createWithMixins Radium.ShowMoreMixin,
-          perPage: 3
+        group = Ember.ArrayProxy.create
           content: Ember.A()
           name: name
 
+        unless group.get('name') == 'today'
+          displayName = group.get('name').replace(/\_/g, ' ').split(' ').map((word) -> word.capitalize()).join(' ')
+
+        group.set 'displayName', displayName
         group.set 'position', @getPosition(group)
 
         array.pushObject group
@@ -43,12 +40,13 @@ Radium.TaskListController = Radium.ArrayController.extend
 
       array
 
-    Ember.compare left.get('position'), right.get('position')
-
   getPosition: (group) ->
     switch group.get('name')
       when 'today' then 1
-      when 'overdue' then 2
+      when 'tomorrow' then 2
+      when 'this_week' then 3
+      when 'next_week' then 4
+      else 5
 
   groupBy: (task) ->
     today    = @get 'clock.endOfDay'
@@ -57,17 +55,13 @@ Radium.TaskListController = Radium.ArrayController.extend
     nextWeek = @get 'clock.endOfNextWeek'
     time     = task.get 'time'
 
-    if task.get('overdue')
-      'overdue'
-    else if task.get('isFinished')
-      'completed'
-    else if Ember.DateTime.compare(time, today) == 0
+    if task.get('overdue') || time.isToday()
       'today'
-    else if Ember.DateTime.compare(time, tomorrow) == 0
+    else if time.isTomorrow()
       'tomorrow'
-    else if Ember.DateTime.compare(time, thisWeek) == 0
+    else if time.toJSDate() < thisWeek.toJSDate()
       'this_week'
-    else if Ember.DateTime.compare(time, nextWeek) == 0
+    else if time.toJSDate() < nextWeek.toJSDate()
       'next_week'
     else
       'later'
