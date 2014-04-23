@@ -34,20 +34,32 @@ Radium.ShowMoreComponent = Ember.Component.extend
 
       adapter.findHasMany(store, owner, relationship, options)
 
+    setVisibility: ->
+      # hacky but something weird is happening with the metadata
+      # it appears that the metadata is shared with the whole type
+      # and does not reset unless the model is reloaded
+      if @get('currentPage') == 1 && @get('model.length') < @get('pageSize')
+        @set 'isVisible', false
+        return
+
+      unless metadata = @get('model.metadata')
+        @set 'isVisible', false
+        return
+
+      isVisible = metadata.totalPages > 1
+
+      @set('isVisible', isVisible)
+
   isVisible: false
+  currentPage: 1
+  pageSize: 7
 
   didInsertElement: ->
     @_super.apply this, arguments
-    if metadata = @get('model.metadata')
-      @set('isVisible', metadata.totalPages > 1)
 
-  currentPage: 1
+    @send 'setVisibility'
 
   pagingAvailable: ( ->
-    metadata = @get('model.metadata')
-    unless metadata
-      @set 'isVisible', false
-      return
 
-    @set('isVisible', metadata.totalPages > 1)
-  ).observes('model.metadata.isLastPage')
+    @send 'setVisibility'
+  ).observes('model.metadata', 'model.metadata.isLastPage')
