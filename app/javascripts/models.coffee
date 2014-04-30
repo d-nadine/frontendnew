@@ -4,6 +4,11 @@ require 'models/mixins/timestamps_mixin'
 require 'models/mixins/followable_mixin'
 require 'models/mixins/has_tasks_mixin'
 
+Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
+  resolveContent: Ember.observer('promise', ->
+    @then (result) => @set('content', result)
+  ).on "init"
+
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 

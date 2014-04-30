@@ -16,6 +16,10 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
     parseInt @get('id')
   ).property('id')
 
+  note: Ember.computed 'meta.noteId', ->
+    Radium.PromiseProxy.create
+      promise: Radium.Note.find @get('meta.noteId')
+
   reference: ((key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.toString().split('.')[1]

@@ -11,5 +11,22 @@ Radium.NoteForm = Radium.Form.extend
     @set 'body', ''
     @set('submitForm', false)
   commit: ->
-    Radium.Note.createRecord @get('data')
-    @get('store').commit()
+    return unless @get('isNew')
+    return new Ember.RSVP.Promise (resolve, reject)=>
+      record = Radium.Note.createRecord @get('data')
+
+      record.one 'didCreate', (result) =>
+        @get('user').reload()
+        result.set 'newTask', true
+        resolve()
+
+      record.one 'becameInvalid', (result) =>
+        result.reset()
+        reject(result)
+
+      record.one 'becameError', (result)  ->
+        result.reset()
+        result.get('transaction').rollback()
+        reject("An error has occurred and the #{result.get('typeName')} could not be created.")
+
+      @get('store').commit()
