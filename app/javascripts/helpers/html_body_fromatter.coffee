@@ -32,7 +32,7 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
   Ember.run.next =>
     $('#email-body-iframe').remove()
     $('.iframe-container').append """
-      <iframe id="email-body-iframe" src="#?linkTarget=_blank"></iframe>
+      <iframe id="email-body-iframe" src=""></iframe>
     """
 
     $('#email-body-iframe')[0].contentWindow.document.write text
