@@ -16,9 +16,9 @@ Radium.NoteForm = Radium.Form.extend
       record = Radium.Note.createRecord @get('data')
 
       record.one 'didCreate', (result) =>
-        @get('user').reload()
+        @get('reference').reload()
         result.set 'newTask', true
-        resolve()
+        resolve(result)
 
       record.one 'becameInvalid', (result) =>
         result.reset()
