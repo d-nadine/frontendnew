@@ -1,5 +1,5 @@
 Radium.RdConversationInputComponent = Ember.Component.extend
-  classNames: ['rr-conversation-input']
+  classNames: ['rd-conversation-input']
   attributeBindings: ['contenteditable']
   contenteditable: "true"
   value: ""
@@ -7,13 +7,14 @@ Radium.RdConversationInputComponent = Ember.Component.extend
 
   input: ->
     @set 'value', @$().text()
-  sync: (->
+
+  sync: Ember.observer 'value', ->
     unless @get('value') == @$().text()
-      @$().text @get('text')
-  ).observes 'text'
-  requestFocus: (->
+      @$().text @get('value')
+
+  requestFocus: Ember.observer('focus', ->
     if @get 'focus'
       @$().focus()
     else
       @$().blur()
-  ).observes('focus').on 'didInsertElement'
+  ).on 'didInsertElement'
