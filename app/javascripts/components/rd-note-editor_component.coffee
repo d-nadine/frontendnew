@@ -27,17 +27,22 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
       return unless @get('isDirty')
       @set 'isEditing', false
 
-      @get('buffer').applyBufferedChanges()
+      oldBody = @get('note.body')
+      newBody = @get('buffer.body')
+      buffer = @get('buffer')
+      buffer.applyBufferedChanges()
       note = @get('note.content')
+      store = @get('store')
 
-      note.one "didError", ->
-        alert('ploblemo')
-        note.rollback()
-      note.one "becameInvalid", ->
-        alert('ploblemo')
-        note.rollback()
-      @get('store').commit()
-      
+      note.one "becameError", =>
+        alert('unable to save note')
+        note.reset()
+        note.set 'body', oldBody
+        buffer.set 'body', newBody
+        @send 'edit'
+
+      store.commit()
+
     cancel: ->
       return unless @get('isEditing')
       @get('buffer').discardBufferedChanges()
