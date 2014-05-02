@@ -1,0 +1,23 @@
+.rd-note-editor {
+  i.ss-write {
+    cursor: pointer;
+  }
+  a.save, a.cancel {
+    cursor: default;
+    opacity: 0;
+    transition: .2s;
+    
+  }
+  &.is-editing {
+    a.cancel {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+  &.is-dirty {
+    a.save {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
