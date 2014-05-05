@@ -73,27 +73,26 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
   showMeta : false
   currentForm: 'todo'
 
-  formBox: (->
+  formBox: Ember.computed 'todoform', 'callform', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
       meetingForm: @get('meetingForm')
       # disable for now
       # callForm: @get('callForm')
-  ).property('todoForm', 'callForm')
 
   todoForm: Radium.computed.newForm('todo')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     description: "Follow up with #{@get('model.subject')} email tomorrow."
-  ).property('model', 'tomorrow')
 
   callForm: Radium.computed.newForm('call')
 
   meetingForm: Radium.computed.newForm('meeting')
-  meetingFormDefaults: ( ->
+
+  meetingFormDefaults: Ember.computed 'model', 'now', ->
     isExpanded: true
     topic: null
     users: Em.ArrayProxy.create(content: [])
@@ -101,22 +100,18 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
-  ).property('model', 'now')
 
-  callFormDefaults: (->
+  callFormDefaults: Ember.computed 'model', 'tomorrow', 'contact', ->
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     contact: @get('contact')
-  ).property('model', 'tomorrow', 'contact')
 
-  replyEmail: (->
+  replyEmail: Ember.computed 'model', ->
     Radium.ReplyForm.create
-      email: @get('model')
+      repliedTo: @get('model')
       currentUser: @get('currentUser')
-  ).property('model')
 
-  forwardEmail: (->
+  forwardEmail: Ember.computed 'model', ->
     Radium.ForwardEmailForm.create
       email: @get('model')
-  ).property('model')

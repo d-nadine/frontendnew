@@ -4,13 +4,15 @@ Radium.EmailsShowRoute = Radium.Route.extend Radium.SaveEmailMixin,
       form.set 'isSubmitted', true
       return unless form.get('isValid')
 
-      email = Radium.Email.createRecord form.get('data')
+      reply = Radium.Email.createRecord form.get('data')
+
+      reply.set('repliedTo', @modelFor('emails.show'))
 
       # Set the time so things sort correctly. It will be updated
       # by the server when the email is actually sent
-      email.set 'sentAt', Ember.DateTime.create()
+      reply.set 'sentAt', Ember.DateTime.create()
 
-      form.setFilesOnModel(email)
+      form.setFilesOnModel(reply)
 
       # FIXME: hax to close the form. The UI property should be
       # kept on the item controller but there is no way 
@@ -18,23 +20,21 @@ Radium.EmailsShowRoute = Radium.Route.extend Radium.SaveEmailMixin,
       # controller. The reply form itself has a reference
       # to the email it's replying to so we can go through
       # that for now.
-      form.set('email.showReplyForm', false)
+      form.set('repliedTo.showReplyForm', false)
 
-      currentlyViewing = @modelFor 'emails.show'
-
-      email.one 'didCreate', =>
+      reply.one 'didCreate', =>
         form.reset()
 
         Ember.run.next =>
-          @transitionTo 'emails.show', email
+          @transitionTo 'emails.show', 'sent', reply
 
-      email.one 'becameInvalid', =>
-        @send 'flashError', email
-        email.reset() 
+      reply.one 'becameInvalid', =>
+        @send 'flashError', reply
+        reply.reset() 
 
-      email.one 'becameError', =>
+      reply.one 'becameError', =>
         @send 'flashError', 'An error has occurred and the eamil has not been sent'
-        email.reset() 
+        reply.reset() 
 
       @store.commit()
 

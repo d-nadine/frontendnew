@@ -4,28 +4,26 @@ Radium.ReplyForm = Radium.EmailForm.extend
   showAddresses: false
   showSubject: false
 
-  email: null
+  repliedTo: null
 
   reset: ->
     @_super.apply this, arguments
-    subject = @get('email.subject')
+    subject = @get('repliedTo.subject')
 
     subject = if /^Re:/i.test(subject) then subject else "RE: #{subject}"
 
     @set 'subject', subject
 
     currentUser = @get('currentUser')
-    @get('email.toList').forEach (person) =>
-      if person != @get('currentUser') && person.get('email')?.toLowerCase() != @get('currentUser.email')?.toLowerCase()
+    @get('repliedTo.toList').forEach (person) =>
+      if person != @get('currentUser') && person.get('repliedTo')?.toLowerCase() != @get('currentUser.repliedTo')?.toLowerCase()
         @get('to').pushObject(person)
 
-    @get('to').pushObject(@get('email.sender'))
+    @get('to').pushObject(@get('repliedTo.sender'))
 
-  defaults: (->
+  defaults: Ember.computed 'repliedTo', 'repliedTo.subject', 'repliedTo.toList.[]', ->
     subject: ''
     message: ''
     to: []
     cc: []
     bcc: []
-  ).property('email', 'email.subject', 'email.toList.[]')
-
