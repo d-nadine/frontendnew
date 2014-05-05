@@ -8,7 +8,7 @@ Radium.TimeAgoView = Ember.View.extend
     @_super.apply this, arguments
     @tick()
 
-  formattedContent: Ember.computed( ->
+  formattedContent: Ember.computed 'content', ->
     fromNow = (date) ->
 
       now = Ember.DateTime.create()
@@ -19,11 +19,14 @@ Radium.TimeAgoView = Ember.View.extend
         return "A few seconds ago"
       else if timeDiff < 60
         return "#{timeDiff} minute(s) ago"
-      else
+      else if timeDiff < (24 * 60)
         return "#{Math.floor(timeDiff / 60)} hour(s) ago"
+      else if timeDiff < (24 * 60 * 7)
+        return "#{Math.floor(timeDiff / (24 * 60))} day(s) ago"
+      else
+        return date.toDateFormat()
 
     fromNow @get('content')
-  ).property('content')
 
   tick: ->
     nextTick = Ember.run.later this, =>
