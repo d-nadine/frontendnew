@@ -9,41 +9,27 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
 
   store: Ember.computed ->
     this.container.lookup "store:main"
+
   setup: (->
     Ember.oneWay this, 'hasFocus', 'isEditing'
-    $('body').on 'click.rd-note-editor', =>
-      return unless @get('isEditing')
-      @send 'save'
   ).on 'didInsertElement'
 
-  teardown: (->
-    $('body').off 'click.rd-note-editor'
-  ).on 'willDestroyElement'
+  focusOut: (e)->
+    Ember.run.next => @send 'save'
 
   actions:
     edit: ->
       @set 'isEditing', true
     save: ->
-      return unless @get('isDirty')
+      return unless @get('isDirty') || @get('isCancelling')
       @set 'isEditing', false
+      @get('buffer').applyBufferedChanges()
 
-      oldBody = @get('note.body')
-      newBody = @get('buffer.body')
-      buffer = @get('buffer')
-      buffer.applyBufferedChanges()
-      note = @get('note.content')
-      store = @get('store')
-
-      note.one "becameError", =>
-        alert('unable to save note')
-        note.reset()
-        note.set 'body', oldBody
-        buffer.set 'body', newBody
-        @send 'edit'
-
-      store.commit()
+      @sendAction 'save', @get('note.content')
 
     cancel: ->
       return unless @get('isEditing')
       @get('buffer').discardBufferedChanges()
       @set 'isEditing', false
+      @set 'isCancelling', true
+      Ember.run.next => @set 'isCancelling', false
