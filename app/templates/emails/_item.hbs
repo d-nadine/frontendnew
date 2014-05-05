@@ -3,7 +3,7 @@
     <div class="pull-right email-header-actions">
       <button class="btn btn-link muted" {{action "toggleMeta"}}>
         <small>
-          {{ageInWords sentAt}}
+          {{emailSentAt time format="long"}}
           {{#if showMeta}}
             (less)
           {{else}}

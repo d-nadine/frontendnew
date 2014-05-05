@@ -150,6 +150,8 @@ $item-border: #dddddd;
   }
 
   .messages-list-item-timestamp {
+    position: relative;
+    top: 3px;
     font-size: 11px;
     line-height: 1em;
   }

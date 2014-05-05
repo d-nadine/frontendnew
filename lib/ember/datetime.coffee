@@ -8,6 +8,9 @@ Ember.DateTime.reopen
   toFullFormat: ->
     @toISO8601()
 
+  toLocaleDateString: ->
+    @toJSDate().toLocaleDateString()
+
   toJSDate: ->
     jsDate = new Date()
     jsDate.setTime(@get('_ms'))
@@ -56,7 +59,7 @@ Ember.DateTime.reopen
 
   daysApart: (other) ->
     timeDiff = other.get('milliseconds') - @get('milliseconds')
-    Math.ceil(timeDiff / (1000 * 3600 * 24))
+    Math.floor(timeDiff / (1000 * 3600 * 24))
 
   isToday: ->
     @toDateFormat() == Ember.DateTime.create().toDateFormat()
@@ -89,6 +92,9 @@ Ember.DateTime.reopen
 
   toHumanFormatWithTime: ->
     "#{@toHumanFormat()} #{@toMeridianTime()}"
+
+  toBriefFormat: ->
+    @toFormattedString("%D %b %y")
 
   toUnixTimestamp: ->
     @toJSDate().getTime() / 1000

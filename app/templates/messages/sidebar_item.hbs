@@ -7,7 +7,7 @@
 
   <small class="muted pull-right messages-list-item-timestamp">
     {{#if isDraft}}Saved at {{/if}}
-    {{formatDateTime timestamp}}
+    {{emailSentAt time format="brief"}}
   </small>
 
   {{yield}}
