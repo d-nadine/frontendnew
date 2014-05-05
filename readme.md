@@ -6,10 +6,13 @@
 2. Install casperjs (this can be done with homebrew)
 3. Install ruby 1.9.3
 4. bundle
+5. `cd new-test`
+6. `npm install`
+7. `bower install`
 
 ## Developing
 
-Developing happens using Iridium's preview server. You can stat the
+Developing happens using Iridium's preview server. You can start the
 server by running: `bundle exec iridium server` then opening the URL
 in your browser. Edit your files and hit refresh.
 
@@ -28,8 +31,15 @@ debug code in the running app. You can symlink `vendor/ember.js` or
 
 ## Testing
 
-Tests are written with qunit and executed with Iridium. You can run
-all tests: `$ bundle exec iridium test`
+Tests are written with qunit and, currently, Iridium must be running to execute them.
+
+This is a bit awkward for now, but you need 3 terminal windows for tests to run: 1 for Iridium (this compiles changes to your JS and CSS), 1 for Karma test runner, and 1 for initiating tests.
+
+Window 1: `bundle exec iridium server`
+Window 2: `karma start`
+Window 3: `karma run`
+
+There are old tests in the `test/` directory that don't run, for now the only working tests are in the `new-test/` directory.
 
 A basic style guide listing common UI components and the markup required to generate them is available. Right now it runs off the generated Sass/Compass outputted to the `site` directory. To view, simply open the `index.html` file in `test/styles/index.html`.
 
@@ -63,7 +73,7 @@ classes. Each class has it's own file. All the code lives inside
 * `factories`: Model factories defined in this directory.
 * `helpers`: Bound and unbound helpers for Handlebars templates
 * `mixins`: Reusable modules. Loosely organized.
-* `models`: All sorts of models. Not just `DS.Store` models. These may 
+* `models`: All sorts of models. Not just `DS.Store` models. These may
   also be domain models
 * `views`: Views only. There are a lot. There are subfolders for
   different pages and responsibilities.

@@ -12,3 +12,5 @@ test_site/
 vendor/cache/*
 radium.sublime-project
 radium.sublime-workspace
+new-test/node_modules
+new-test/bower_components

@@ -1,0 +1,18 @@
+{
+  "name": "RadiumCRM",
+  "version": "0.0.0",
+  "authors": [
+    ""
+  ],
+  "description": "Radium-CRM",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "qunit-bdd": "0.4.0"
+  }
+}
