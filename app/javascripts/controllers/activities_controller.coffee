@@ -1,16 +1,10 @@
 Radium.ActivitiesController = Radium.ArrayController.extend
-  lookupItemController: (item)->
-    if item.get('tag') == 'note'
-      'activityNote'
-    else
-      'activityItem'
+  itemController: 'activityItem'
 
   activities: Ember.computed.filter '@this', (item) ->
     item.get('isLoaded') && !item.get('isDeleted')
 
-Radium.ActivityItemController = Radium.ObjectController.extend()
-
-Radium.ActivityNoteController = Radium.ObjectController.extend
+Radium.ActivityItemController = Radium.ObjectController.extend
   actions:
     saveNote: (note)->
       note.one "becameError", (result)=>
