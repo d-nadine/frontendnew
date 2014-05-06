@@ -1,5 +1,4 @@
-// Version: v0.14-12-g8a1f322
-// Last commit: 8a1f322 (2014-05-06 07:36:52 +0100)
+// Last commit: f93611e (2014-05-06 10:33:41 +0100)
 
 
 (function() {
@@ -3772,7 +3771,6 @@ var RootState = {
         record.send('invokeLifecycleCallbacks');
       },
 
-      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
       loadedData: Ember.K,
 
       becomeDirty: Ember.K,
@@ -3785,6 +3783,12 @@ var RootState = {
         record.transitionTo('loaded.saved');
 
         record.trigger('becameInvalid', record);
+      },
+
+      becameError: function(record) {
+        record.transitionTo('loaded.saved');
+
+        record.trigger('becameError', record);
       }
     },
 
