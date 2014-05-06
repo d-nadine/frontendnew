@@ -1,5 +1,5 @@
-// Version: v0.14-11-gd2898da
-// Last commit: d2898da (2014-02-26 06:05:00 +0000)
+// Version: v0.14-12-g8a1f322
+// Last commit: 8a1f322 (2014-05-06 07:36:52 +0100)
 
 
 (function() {
@@ -3777,7 +3777,15 @@ var RootState = {
 
       becomeDirty: Ember.K,
 
-      rollback: Ember.K
+      rollback: Ember.K,
+
+      becameInvalid: function(record, errors) {
+        set(record, 'errors', errors);
+
+        record.transitionTo('loaded.saved');
+
+        record.trigger('becameInvalid', record);
+      }
     },
 
     // Once the adapter indicates that the deletion has
