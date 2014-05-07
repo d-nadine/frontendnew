@@ -1,15 +1,18 @@
 Radium.PollerMixin = Ember.Mixin.create Ember.Evented,
   interval: 30000  # 30 seconds
   _timer: null
+  isPolling: false
 
   init: ->
     @_super.apply this, arguments
     @onPoll()
 
   start: ->
+    @set 'isPolling', true
     @_timer = setInterval(@onPoll.bind(this), @interval)
 
   stop: ->
+    @set 'isPolling', false
     clearInterval(@_timer) if @_timer
 
   onPoll: ->

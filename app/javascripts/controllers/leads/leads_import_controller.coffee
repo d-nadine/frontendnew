@@ -63,8 +63,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       @get('tagNames').forEach (tag) =>
         importJob.get('tagNames').push tag.get('name')
 
+      @set('importing', true)
+
       importJob.one 'didCreate', =>
-        @send 'pollForJob'
+        @send 'pollForJob', importJob
 
       reset = =>
         @set 'pollImportJob', importJob
@@ -207,17 +209,28 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
         Ember.Object.create(hash)
 
+
+  initialized: false
+
   jobsLoaded: ->
-    unless firstJob = @get('sortedJobs.firstObject')
+    removeObserver = =>
       @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
+
+    if @get('importing')
+      removeObserver()
+      return
+
+    unless firstJob = @get('sortedJobs.firstObject')
+      removeObserver()
       return
 
     unless firstJob.get('isProcessing')
-      @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
+      removeObserver()
       return
 
+    removeObserver()
+
     @send 'pollForJob', firstJob
-    @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
   previewData: Ember.computed 'selectedHeaders.[]', ->
     selectedHeaders = @get('selectedHeaders').slice()

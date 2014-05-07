@@ -71,14 +71,16 @@ ul.attachments {
 }
 
 .table.attachments{
-  td.error {
+  td.error, td.deleting {
     color: $red;
     font-weight: bold;
   }
 
-  td.processing{
+  td.processing, td.deleting{
     font-weight: bold;
-    color: $success;
+    &:not(.deleting) {
+      color: $success;
+    }
     -webkit-animation-name: blinker;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);

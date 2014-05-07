@@ -153,7 +153,7 @@
             <td {{bind-attr class="importStatus"}}>{{capitalize importStatus}}</td>
             <td>
               {{#if finished}}
-                <button type="button" {{action "confirmDeleteJob" this}} class="close">
+                <button type="button" {{action "confirmDeleteJob" this}} {{bind-attr disabled="isDeleting"}} class="close">
                   <i class="ss-standard ss-delete"></i>
                 </button>
               {{/if}}
