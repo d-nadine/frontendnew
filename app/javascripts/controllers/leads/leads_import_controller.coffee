@@ -209,9 +209,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
         Ember.Object.create(hash)
 
-
-  initialized: false
-
   jobsLoaded: ->
     removeObserver = =>
       @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
