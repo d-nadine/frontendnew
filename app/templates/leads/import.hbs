@@ -1,131 +1,133 @@
 <div class="tab-pane active">
-  <div class="alert alert-info">
-    <i class="ss-standard ss-info"></i> Import your own contacts by uploading a CSV file. Need more guidance? <a href="#" {{action "toggleInstructions"}}>Click here</a> for some basic tips.
-  </div>
-  {{#if showInstructions}}
-    <div class="well">
-      <h4>Import instructions</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <button class="btn btn-main btn-primary" {{action "toggleInstructions"}}>
-        Thanks, got it
-      </button>
+  {{#unless importing}}
+    <div class="alert alert-info">
+      <i class="ss-standard ss-info"></i> Import your own contacts by uploading a CSV file. Need more guidance? <a href="#" {{action "toggleInstructions"}}>Click here</a> for some basic tips.
     </div>
-  {{/if}}
-  {{#if showLargeImportMessage}}
-    <div class="alert alert-error">
-      <div class="text-center">
-        <h4>Over 1000 contacts detected.</h4>
-        <div>The import file contains {{rowCount}} rows and the current limit of contacts that can be imported into Radium is 1000 ?</div>
-        <div class="alert-actions">
-          <button class="btn btn-main btn-primary" {{action "dismissLargeImportMessage"}}>
-            Try Again?
+    {{#if showInstructions}}
+      <div class="well">
+        <h4>Import instructions</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <button class="btn btn-main btn-primary" {{action "toggleInstructions"}}>
+          Thanks, got it
+        </button>
+      </div>
+    {{/if}}
+    {{#if showLargeImportMessage}}
+      <div class="alert alert-error">
+        <div class="text-center">
+          <h4>Over 1000 contacts detected.</h4>
+          <div>The import file contains {{rowCount}} rows and the current limit of contacts that can be imported into Radium is 1000 ?</div>
+          <div class="alert-actions">
+            <button class="btn btn-main btn-primary" {{action "dismissLargeImportMessage"}}>
+              Try Again?
+            </button>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if isUploading}}
+      {{partial 'is_loading'}}
+    {{/if}}
+    {{#if initialImported}}
+      <div class="form form-horizontal well main-form import-match-form">
+        <fieldset>
+          <div class="match-columns-title">
+            <div class="preview-title">Preview</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">First Row is Header</label>
+            <div class="controls">
+              {{check-box checked=firstRowIsHeader class="checker-block"}}
+            </div>
+          </div>
+          <h4>Contact Name</h4>
+          {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
+          {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
+          <h4>Or</h4>
+          {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow class="match-divider"}}
+          {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow class="match-divider"}}
+          {{import-header leader="Email" source=headerData value=headerInfo.email row=firstDataRow}}
+          {{import-header leader="Phone Number" source=headerData value=headerInfo.phone row=firstDataRow class="match-divider"}}
+          {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow}}
+          {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
+          {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
+          {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
+          {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
+        </fieldset>
+        <fieldset>
+          <legend>Combine additional fields into about field or create tag from field.</legend>
+          {{multi-importfields fields=additionalFields addNew="addNewAdditionalField" removeField="removeAdditionalField" headerData=headerData firstDataRow=firstDataRow}}
+        </fieldset>
+
+        {{#if selectedHeaders.length}}
+        <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
+        <div class="preview">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                {{#each selectedHeaders}}
+                  <th>{{name}}</th>
+                {{/each}}
+              </tr>
+            </thead>
+            <tbody>
+              {{#each previewData}}
+                <tr>
+                  {{#each field in fields}}
+                    <td>{{field}}</td>
+                  {{/each}}
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        {{/if}}
+        <fieldset>
+          <h4>Type</h4>
+          <div class="control-group radio-group">
+            <ul>
+              {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Lead" value="pipeline" tagName="li"}}
+              {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Exclude From Pipeline" value="exclude" tagName="li"}}
+            </ul>
+            {{view view.tags}}
+          </div>
+        </fieldset>
+        <div class="button-row">
+          <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
+            {{#if isSaving}}
+              <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
+            {{else}}
+              <i class="ss-standard ss-plus"></i> Import
+            {{/if}}
+          </button>
+          <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
+            Cancel
           </button>
         </div>
       </div>
-    </div>
-  {{/if}}
-  {{#if isUploading}}
-    {{partial 'is_loading'}}
-  {{/if}}
-  {{#if initialImported}}
-    <div class="form form-horizontal well main-form import-match-form">
-      <fieldset>
-        <div class="match-columns-title">
-          <div class="preview-title">Preview</div>
-        </div>
+    {{else}}
+      <div class="form form-horizontal well main-form new-lead-form">
         <div class="control-group">
-          <label class="control-label">First Row is Header</label>
-          <div class="controls">
-            {{check-box checked=firstRowIsHeader class="checker-block"}}
+          {{drag-csv cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
+          <span class="text-center help-block">Download sample file for quicker import <a href="https://s3.amazonaws.com/radium-production/static/sample.csv" target="_blank">here</a></span>
+        </div>
+        <div class="control-group text-right">
+          <div class="btn btn-main btn-file-upload">
+            <span>
+              <i class="ss-symbolicons-block ss-addfile"></i>
+              Upload CSV file
+            </span>
+            {{csv-reader cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
           </div>
         </div>
-        <h4>Contact Name</h4>
-        {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
-        {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
-        <h4>Or</h4>
-        {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow class="match-divider"}}
-        {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow class="match-divider"}}
-        {{import-header leader="Email" source=headerData value=headerInfo.email row=firstDataRow}}
-        {{import-header leader="Phone Number" source=headerData value=headerInfo.phone row=firstDataRow class="match-divider"}}
-        {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow}}
-        {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
-        {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
-        {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
-        {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
-      </fieldset>
-      <fieldset>
-        <legend>Combine additional fields into about field or create tag from field.</legend>
-        {{multi-importfields fields=additionalFields addNew="addNewAdditionalField" removeField="removeAdditionalField" headerData=headerData firstDataRow=firstDataRow}}
-      </fieldset>
-
-      {{#if selectedHeaders.length}}
-      <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
-      <div class="preview">
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              {{#each selectedHeaders}}
-                <th>{{name}}</th>
-              {{/each}}
-            </tr>
-          </thead>
-          <tbody>
-            {{#each previewData}}
-              <tr>
-                {{#each field in fields}}
-                  <td>{{field}}</td>
-                {{/each}}
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
       </div>
-      {{/if}}
-      <fieldset>
-        <h4>Type</h4>
-        <div class="control-group radio-group">
-          <ul>
-            {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Lead" value="pipeline" tagName="li"}}
-            {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leader="Exclude From Pipeline" value="exclude" tagName="li"}}
-          </ul>
-          {{view view.tags}}
-        </div>
-      </fieldset>
-      <div class="button-row">
-        <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
-          {{#if isSaving}}
-            <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
-          {{else}}
-            <i class="ss-standard ss-plus"></i> Import
-          {{/if}}
-        </button>
-        <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
-          Cancel
-        </button>
-      </div>
-    </div>
-  {{else}}
-    <div class="form form-horizontal well main-form new-lead-form">
-      <div class="control-group">
-        {{drag-csv cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
-        <span class="text-center help-block">Download sample file for quicker import <a href="https://s3.amazonaws.com/radium-production/static/sample.csv" target="_blank">here</a></span>
-      </div>
-      <div class="control-group text-right">
-        <div class="btn btn-main btn-file-upload">
-          <span>
-            <i class="ss-symbolicons-block ss-addfile"></i>
-            Upload CSV file
-          </span>
-          {{csv-reader cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
-        </div>
-      </div>
-    </div>
-  {{/if}}
+    {{/if}}
+  {{/unless}}
   {{#if importing}}
     <div class="well">
       <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
