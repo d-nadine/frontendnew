@@ -64,12 +64,28 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         importJob.get('tagNames').push tag.get('name')
 
       importJob.one 'didCreate', =>
-        @send 'reset'
+        @send 'pollForJob'
+
+      reset = =>
         @set 'pollImportJob', importJob
-        @set('importing', true)
-        @start()
+        @set('importing', false)
+        @send 'reset'
+
+      importJob.one 'becameInvalid', (result) =>
+        @send 'flashError', result
+        reset()
+
+      importJob.one 'becameError', (result) =>
+        @send 'flashError', 'An error has occurred and the import job could not be created.'
+        reset()
 
       @get('store').commit()
+
+    pollForJob: (importJob) ->
+      @send 'reset'
+      @set 'pollImportJob', importJob
+      @set('importing', true)
+      @start()
 
     initialFileUploaded: (imported) ->
       @set 'isUploading', false
@@ -172,6 +188,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   init: ->
     @_super.apply this, arguments
     self = this
+    @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
     @set 'additionalFields', Ember.A([@getNewAdditionalField()])
     @set 'headerInfo', @getNewHeaderInfo()
@@ -189,6 +206,18 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
           marker: self.get("headerInfo.#{header}.name")
 
         Ember.Object.create(hash)
+
+  jobsLoaded: ->
+    unless firstJob = @get('sortedJobs.firstObject')
+      @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
+      return
+
+    unless firstJob.get('isProcessing')
+      @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
+      return
+
+    @send 'pollForJob', firstJob
+    @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
   previewData: Ember.computed 'selectedHeaders.[]', ->
     selectedHeaders = @get('selectedHeaders').slice()

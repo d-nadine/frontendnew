@@ -15,6 +15,8 @@ Radium.ChecklistView = Ember.View.extend
     Ember.run.scheduleOnce 'afterRender', this, 'setFocus'
 
   setFocus: ->
+    return unless @get('itemDescription')
+
     @get('itemDescription').$().focus()
 
   newItemDescription: Ember.TextField.extend Radium.ChecklistItemMixin,

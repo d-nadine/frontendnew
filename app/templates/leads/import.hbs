@@ -140,6 +140,7 @@
           <th>File Name</th>
           <th>Imported On</th>
           <th>Imported</th>
+          <th>Status</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -149,6 +150,7 @@
             <td>{{fileName}}</td>
             <td>{{formatDateTime createdAt format="full"}}</td>
             <td>{{importedCount}}</td>
+            <td {{bind-attr class="importStatus"}}>{{capitalize importStatus}}</td>
             <td>
               {{#if finished}}
                 <button type="button" {{action "confirmDeleteJob" this}} class="close">
@@ -159,7 +161,7 @@
           </tr>
         {{else}}
           <tr>
-            <td colspan="4">No imports have been completed.</td>
+            <td colspan="5">No imports have been completed.</td>
           </tr>
         {{/each}}
       </tbody>

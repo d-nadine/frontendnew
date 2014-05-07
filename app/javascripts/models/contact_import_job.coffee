@@ -10,3 +10,7 @@ Radium.ContactImportJob = Radium.Model.extend
   importedCount: DS.attr('number')
   totalCount: DS.attr('number')
   finished: DS.attr('boolean')
+  importStatus: DS.attr('string')
+
+  isProcessing: Ember.computed 'importStatus', ->
+    @get('importStatus') == 'processing'

@@ -25,7 +25,7 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
               description: description
               weight: weight
               isFinished: false
-              isAdditional: true 
+              isAdditional: true
               kind: kind
               date: date
 
@@ -38,15 +38,16 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
         @send 'reset'
         @trigger 'newItemCreated'
 
-      checklistItem.one 'didCreate', didCommit
-      checklistItem.one 'didUpdate', didCommit
-
       if @get('isNew')
         @get('checklist').addObject checklistItem
       else
+        checklistItem.one 'didCreate', didCommit
+        checklistItem.one 'didUpdate', didCommit
+
         @get('store').commit()
 
       @send 'reset'
+      false
 
     reset: ->
       @set 'isSubmitted', false
