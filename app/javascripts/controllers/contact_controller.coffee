@@ -82,9 +82,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
-<<<<<<< HEAD
-=======
-  ).property('model', 'now')
 
   noteForm: Radium.computed.newForm 'note'
 
@@ -92,4 +89,3 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
     reference: @get('model')
     user: @get('currentUser')
   ).property 'model'
->>>>>>> spike out note form
