@@ -7,8 +7,7 @@
 # conversation inputs can be both read-only or read-write depending on
 # the value of the 'editable'
 Radium.RdConversationInputComponent = Ember.Component.extend
-  classNames: ['rd-conversation-input']
-  classNameBindings: ['editable']
+  classNameBindings: [':rd-conversation-input', 'editable']
   attributeBindings: ['contenteditable']
 
   ##

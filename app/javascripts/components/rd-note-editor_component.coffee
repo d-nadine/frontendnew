@@ -1,6 +1,5 @@
 Radium.RdNoteEditorComponent = Ember.Component.extend
-  classNames: ['rd-note-editor']
-  classNameBindings: ['isEditing', 'isDirty']
+  classNameBindings: [':rd-note-editor', 'isEditing', 'isDirty']
   isEditing: false
   isDirty: Ember.computed.readOnly 'buffer.hasBufferedChanges'
   buffer: Ember.computed('note', ->
