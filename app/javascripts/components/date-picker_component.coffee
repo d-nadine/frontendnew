@@ -34,13 +34,20 @@ Radium.DatePickerComponent = Ember.Component.extend
   disabled: Ember.computed.alias('targetObject.isDisabled')
   isSubmitted: Ember.computed.alias('targetObject.isSubmitted')
 
-  isInvalid: (->
+  isInvalid: Ember.computed 'date', 'isSubmitted', ->
     return false unless @get('isSubmitted')
     return false if Ember.isEmpty(@get('text'))
     return false unless @get('date')
 
     @get('date').isBeforeToday()
-  ).property('date', 'isSubmitted')
+
+  textToDateTransform: Ember.computed 'date', (key, value) ->
+    if arguments.length == 2
+      return
+    else if !value && @get('date')
+      @get('date').toHumanFormat()
+    else
+      value
 
   humanTextField: Ember.TextField.extend
     viewName: 'dateDisplay'
@@ -49,6 +56,8 @@ Radium.DatePickerComponent = Ember.Component.extend
     ESCAPE: 27
     valueBinding: 'parentView.text'
     disabledBinding: 'targetObject.disabled'
+    date: Ember.computed.alias 'targetObject.date'
+
     init: ->
       @_super.apply(this, arguments)
 
@@ -77,10 +86,11 @@ Radium.DatePickerComponent = Ember.Component.extend
 
     changeDatePicker: (evt) ->
       milliseconds = evt.date.add(new Date().getHours() + 1).hours().valueOf()
-      @get('targetObject').set 'date', Ember.DateTime.create(milliseconds)
+      @set 'date', Ember.DateTime.create(milliseconds)
       @$().data('datepicker').hide()
       target = @get('targetObject')
 
+      return if evt.dontSubmit
       return unless target.get('submitForm')
 
       target.sendAction 'submitForm'
@@ -91,8 +101,9 @@ Radium.DatePickerComponent = Ember.Component.extend
 
     showDatePicker: ->
       return if @isDestroyed
-      @set('pickerShown', false)
 
+      @set('pickerShown', false)
+ 
     willDestroyElement: ->
       @_super.apply this, arguments
       @removeObserver 'value', this, 'valueDidChange'
@@ -119,23 +130,24 @@ Radium.DatePickerComponent = Ember.Component.extend
       else if keyCode == @ESCAPE
         @resetDateDisplay()
       else if keyCode = @TAB
-        @resetDateDisplay()
-        $('.datepicker').find('a').attr('tabindex','-1')
+        @$().trigger
+          type: 'changeDate'
+          date: date
+          dontSubmit: true
+
+        @$('.datepicker').find('a').attr('tabindex','-1')
         @$().parent().next().find('input').focus()
 
       evt.stopPropagation()
       evt.preventDefault()
 
     resetDateDisplay: ->
-      originalDate = if  @get('targetObject.date') then @get('targetObject.date').toJSDate() else Date.today()
+      originalDate = if @get('date') then @get('date').toJSDate() else Date.today()
 
-      @$().trigger
-        type: 'changeDate'
-        date: originalDate
-      @$().datepicker().trigger 'hide'
+      @$().data('datepicker').hide()
 
     valueDidChange: ->
-      originalDate = @get('targetObject.date')?.toJSDate()
+      originalDate = @get('date')?.toJSDate()
       return unless originalDate
       today = Ember.DateTime.create().toJSDate()
       value = @get('value')?.toLowerCase()
@@ -194,16 +206,3 @@ Radium.DatePickerComponent = Ember.Component.extend
     focusIn: (e) ->
       Ember.run.next  =>
         @$().get(0).select()
-
-  defaultDate: (->
-    Ember.DateTime.create().toDateFormat()
-  ).property()
-
-  textToDateTransform: ((key, value) ->
-    if arguments.length == 2
-      return 
-    else if !value && @get('date')
-      @get('date').toHumanFormat()
-    else
-      value
-  ).property('date')

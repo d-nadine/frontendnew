@@ -123,41 +123,45 @@
   </div>
 {{/if}}
 <div class="search-result-list">
-  {{#if showEmptyAddressBookButton}}
-    <div class="alert alert-info text-center">
-      <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
-    </div>
-  {{else}}
-    {{#if visibleContent.length}}
-      <div class="search-results-header row-fluid">
-        <div class="span2 checkers">
-          {{partial 'forms/check_all'}}
-          <div class="pull-right">
-            <a href="#" {{action "toggleThumbnails"}}>
-              {{#if isThumbnailsVisible}}
-                Hide
-              {{else}}
-                Show avatars
-              {{/if}}
-            </a>
+  {{#unless contacts.isLoading}}
+    {{#if showEmptyAddressBookButton}}
+      <div class="alert alert-info text-center">
+        <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
+      </div>
+    {{else}}
+      {{#if visibleContent.length}}
+        <div class="search-results-header row-fluid">
+          <div class="span2 checkers">
+            {{partial 'forms/check_all'}}
+            <div class="pull-right">
+              <a href="#" {{action "toggleThumbnails"}}>
+                {{#if isThumbnailsVisible}}
+                  Hide
+                {{else}}
+                  Show avatars
+                {{/if}}
+              </a>
+            </div>
+          </div>
+          <div class="span3 name">
+            Name
+          </div>
+          <div class="span2 last-activity">
+            Assigned To
+          </div>
+          <div class="span3 next-task">
+            Next Task
+          </div>
+          <div class="span2 groups">
+            Tags
           </div>
         </div>
-        <div class="span3 name">
-          Name
-        </div>
-        <div class="span2 last-activity">
-          Assigned To
-        </div>
-        <div class="span3 next-task">
-          Next Task
-        </div>
-        <div class="span2 groups">
-          Tags
-        </div>
-      </div>
+      {{/if}}
+      {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
     {{/if}}
-    {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
-  {{/if}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/unless}}
   <div class="clearfix">
     {{partial 'shared/show_more'}}
   </div>

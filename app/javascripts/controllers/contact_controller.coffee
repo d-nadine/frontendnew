@@ -32,15 +32,14 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   isEditable: true
   loadedPages: [1]
 
-  dealsTotal: ( ->
+  dealsTotal: Ember.computed 'deals.[]', ->
     @get('deals').reduce((preVal, item) ->
       value = if item.get('status') == 'closed' then item.get('value') else 0
 
       preVal + value
     , 0, 'value')
-  ).property('deals.[]')
 
-  formBox: (->
+  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
@@ -49,34 +48,30 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
       # discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
       about: @get('model')
-  ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: Radium.computed.newForm('todo')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
 
   callForm: Radium.computed.newForm('call', canChangeContact: false)
 
-  callFormDefaults: (->
+  callFormDefaults: Ember.computed 'model', 'tomorrow', ->
     contact: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
 
   discussionForm: Radium.computed.newForm('discussion')
 
-  discussionFormDefaults: (->
+  discussionFormDefaults: Ember.computed 'model', ->
     reference: @get('model')
     user: @get('currentUser')
-  ).property('model')
 
   meetingForm: Radium.computed.newForm('meeting')
 
-  meetingFormDefaults: ( ->
+  meetingFormDefaults: Ember.computed 'model', 'now', ->
     topic: null
     location: ""
     isNew: true
@@ -86,4 +81,3 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
-  ).property('model', 'now')

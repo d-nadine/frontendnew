@@ -1,1 +1,2 @@
-Radium.ContactsController = Radium.ArrayController.extend()
+Radium.ContactsController = Radium.ArrayController.extend
+  isLoading: true

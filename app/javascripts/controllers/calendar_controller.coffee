@@ -9,38 +9,34 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
   map: Ember.Map.create()
 
-  formBox: (->
+  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
       # disable for now
       # callForm: @get('callForm')
       discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
-  ).property('todoForm', 'callForm', 'discussionForm')
 
-  taskStartDate: ( ->
+  taskStartDate: Ember.computed 'tomorrow', 'selectedDay.date', ->
     @get('selectedDay.date') || @get('tomorrow')
-  ).property('tomorrow', 'selectedDay.date')
 
   todoForm: Radium.computed.newForm('todo')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'model', 'tomorrow', 'taskStartDate', ->
     description: null
     finishBy: @get('taskStartDate')
     user: @get('currentUser')
-  ).property('model', 'tomorrow', 'taskStartDate')
 
   callForm: Radium.computed.newForm('call')
 
-  callFormDefaults: (->
+  callFormDefaults: Ember.computed 'model', 'tomorrow', 'taskStartDate', ->
     contact: @get('contact')
     finishBy: @get('taskStartDate')
     user: @get('currentUser')
-  ).property('model', 'tomorrow', 'taskStartDate')
 
   meetingForm: Radium.computed.newForm('meeting')
 
-  meetingFormDefaults: ( ->
+  meetingFormDefaults: Ember.computed 'model', 'now', 'selectedDay.date', ->
     date = @get('selectedDay.date') || Ember.DateTime.create()
     topic: null
     users: Em.ArrayProxy.create(content: [])
@@ -48,21 +44,19 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     startsAt: date.advance(hour: 2)
     endsAt: date.advance(hour: 3)
     invitations: Ember.A()
-  ).property('model', 'now', 'selectedDay.date')
 
-  selectedDateDidChange: (->
+  selectedDateDidChange: Ember.observer 'selectedday.date', 'meetingform', ->
     return unless @get('selectedDay.date') && @get('meetingForm')
     date = @get('selectedDay.date')
     Ember.run.next =>
       @set('meetingForm.startsAt', date.advance(hour: 2))
       @set('meetingForm.endsAt', date.advance(hour: 3))
-  ).observes('selectedDay.date', 'meetingForm')
 
   users: Ember.computed.alias 'controllers.users'
 
   date: Ember.computed.alias 'content'
 
-  items: (->
+  items: Ember.computed 'date', 'todos.[]', 'calls.[]',  'meetings.[]', 'user', ->
     items = []
 
     @get('todos').forEach (todo) -> items.pushObject todo
@@ -76,40 +70,36 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
     currentUser = @get('currentUser')
 
-    items = items.reject (item) =>
-      return false unless (item.constructor is Radium.Meeting) && item.get('organizer') && item.get('users.length')
-      ((item.constructor is Radium.Meeting) && ((!item.get('users').contains(user)) && (item.get('organizer') != currentUser)))
+    # items = items.reject (item) =>
+    #   # return false unless (item.constructor is Radium.Meeting) && item.get('organizer') && item.get('users.length')
+    #   ((item.constructor is Radium.Meeting) && ((!item.get('users').contains(user)) && (item.get('organizer') != currentUser)))
 
     items.sort((a, b) ->
         Ember.DateTime.compare a.get('time'), b.get('time')
       ).map (item) -> CalendarItem.create(content: item)
-  ).property('date', 'todos.[]', 'calls.[]',  'meetings.[]', 'user')
 
-  todos: (->
+  todos: Ember.computed 'date', ->
     startDate = @get 'startOfCalendar'
     endDate = @get 'endOfCalendar'
 
     Radium.Todo.filter (todo) ->
       todo.get('isLoaded') && todo.get('finishBy').isBetweenDates(startDate, endDate)
-  ).property('date')
 
-  calls: (->
+  calls: Ember.computed 'date', ->
     startDate = @get 'startOfCalendar'
     endDate = @get 'endOfCalendar'
 
     Radium.Call.filter (call) ->
       call.get('isLoaded') && call.get('finishBy').isBetweenDates(startDate, endDate)
-  ).property('date')
 
-  meetings: (->
+  meetings: Ember.computed 'date', ->
     startDate = @get 'startOfCalendar'
     endDate = @get 'endOfCalendar'
 
     Radium.Meeting.filter (meeting) ->
       meeting.get('isLoaded') && meeting.get('startsAt').isBetweenDates(startDate, endDate)
-  ).property('date')
 
-  dayNames: (->
+  dayNames: Ember.computed ->
     firstDay = Ember.DateTime.create().get('lastMonday')
 
     names = []
@@ -118,29 +108,24 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
       names.push firstDay.advance(day: i).toFormattedString('%A')
 
     names
-  ).property()
 
-  nextMonth: (->
+  nextMonth: Ember.computed 'date', ->
     @get('date').nextMonth()
-  ).property('date')
 
-  lastMonth: (->
+  lastMonth:Ember.computed 'date', ->
     @get('date').copy().advance(month: -1)
-  ).property('date')
 
-  startOfCalendar: (->
+  startOfCalendar: Ember.computed 'date', ->
     date = @get('date').copy()
 
     @firstDayOfMonth(date)
-  ).property('date')
 
-  endOfCalendar: (->
+  endOfCalendar: Ember.computed 'date', ->
     date = @get('date').copy()
 
     @lastDayOfMonth(date)
-  ).property('date')
 
-  weeks: (->
+  weeks: Ember.computed 'date', 'items.[]', 'user', ->
     weeks = []
     counter = 1
     days = []
@@ -167,7 +152,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
       counter += 1
 
     weeks
-  ).property('date', 'items.[]', 'user')
 
   lastDayOfMonth: (date) ->
     lastDayOfMonth = date.adjust(day: 1).

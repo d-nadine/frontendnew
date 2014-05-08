@@ -82,13 +82,14 @@ Radium.CalendarIndexRoute = Radium.Route.extend
       end_date: endOfCalendar.toDateFormat()
       user_id: controller.get('currentUser.id')
 
-    todos = Radium.Todo.find(params)
-    meetings = Radium.Meeting.find(params)
-    calls = Radium.Call.find(params)
+    hash =
+      todos: Radium.Todo.find(params)
+      meetings: Radium.Meeting.find(params)
+      calls: Radium.Call.find(params)
 
     controller.set 'isLoading', true
 
-    Ember.RSVP.all([todos, meetings, calls]).then =>
+    Ember.RSVP.hash(hash).then =>
       controller.set 'isLoading', false
 
   renderTemplate: ->

@@ -202,7 +202,13 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()
-    @controllerFor('contacts').set 'model', Radium.Contact.find()
+
+    contactsController = @controllerFor('contacts')
+
+    Radium.Contact.find({}).then (contacts) =>
+      contactsController.set 'model', contacts
+      contactsController.set 'isLoading', false
+
     @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
     @controllerFor('deals').set 'model', Radium.Deal.find()
