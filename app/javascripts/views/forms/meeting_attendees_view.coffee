@@ -59,7 +59,7 @@ Radium.MeetingAttendeesView = Radium.View.extend
       </div>
       <div class="media-body">
         <div class="media-heading">
-          {{displayName}}
+          {{resource-link-to this}}
         </div>
         <div class="media-content">
           {{#if isOrganizer}}
