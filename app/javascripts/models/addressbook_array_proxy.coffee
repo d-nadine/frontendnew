@@ -40,6 +40,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
       unless @get('selectedResource')
         content = content.filter (item) ->
                       name = item.get('name') || item.get('displayName')
+                      return false unless name
                       ~name.toLowerCase().indexOf(searchText.toLowerCase())
 
     if @get('additionalFilter')
