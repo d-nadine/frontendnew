@@ -7,6 +7,8 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   needs: ['messagesSidebar']
   isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
   currentPath: Ember.computed.alias 'controllers.application.currentPath'
+  sortProperties: ['time']
+  sortAscending: false
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }
@@ -77,15 +79,13 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
     delta
 
-  canSelectItems: (->
+  canSelectItems: Ember.computed 'checkedContent.[]', ->
     @get('checkedContent.length') == 0
-  ).property('checkedContent.length')
 
-  noSelection: (->
+  noSelection: Ember.computed 'hasCheckedContent', 'selectedContent', ->
     return false if @get('selectedContent')
     return false if @get('hasCheckedContent')
     true
-  ).property('hasCheckedContent', 'selectedContent')
 
   queryFolders:
     inbox: "INBOX"

@@ -69,7 +69,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   people: Radium.computed.aggregate('toList','ccList', 'senderArray')
   recipients: Radium.computed.aggregate('toList','ccList')
 
-  time: Ember.computed.alias 'sentAt'
+  time: Ember.computed 'sentAt', 'updatedAt', ->
+    @get('sentAt') || @get('updatedAt')
 
   clearRelationships: ->
     activities = []

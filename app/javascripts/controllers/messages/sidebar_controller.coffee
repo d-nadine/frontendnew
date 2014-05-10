@@ -24,7 +24,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
       job.one 'becameInvalid', (result) =>
         @set 'isSyncing', false
-        @send 'flashError', 'An error has occurred and the refresh command failed.r'
+        @send 'flashError', 'An error has occurred and the refresh command failed'
 
       @set 'isSyncing', true
 
