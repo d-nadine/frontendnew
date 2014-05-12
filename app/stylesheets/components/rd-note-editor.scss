@@ -2,16 +2,20 @@
   i.ss-write {
     cursor: pointer;
   }
-  a.cancel {
+  a.cancel, .save, .delete {
     cursor: default;
     opacity: 0;
     transition: .2s;
     
   }
   &.is-editing {
-    a.cancel {
+    a.cancel, .save, .delete {
       cursor: pointer;
       opacity: 1;
     }
+  }
+  .actions {
+    text-align: right;
+    margin-top: 5px;
   }
 }

@@ -1,4 +1,8 @@
-<i class="ss-standard ss-write" {{action "edit"}}></i><a class="cancel" {{action "cancel"}}>cancel</a>
 <div {{action "edit"}}>
-  {{rd-conversation-input value=buffer.body editable=isEditing focus=hasFocus}}
+  {{note.user.name}}: {{rd-conversation-input value=buffer.body editable=isEditing focus=hasFocus}}
+</div>
+<div class="actions">
+  <a class="cancel" {{action "cancel"}}>cancel</a>
+  <button class="btn btn-link delete" {{action "delete"}}>Delete note</button>
+  <button class="btn btn-main btn-primary delete" type="save" {{action "save"}}>Save</button>
 </div>
