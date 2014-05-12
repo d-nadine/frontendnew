@@ -1,15 +1,18 @@
 require 'forms/form'
 Radium.NoteForm = Radium.Form.extend
-  data: ( ->
+  data: Ember.computed( ->
     user: @get('user')
     reference: @get('reference')
     body: @get('body')
-  ).property().volatile()
+  ).volatile()
+
   isValid: Ember.computed.notEmpty 'body'
+
   reset: ->
     @_super.apply this, arguments
     @set 'body', ''
     @set('submitForm', false)
+
   commit: ->
     return unless @get('isNew')
     return new Ember.RSVP.Promise (resolve, reject)=>
