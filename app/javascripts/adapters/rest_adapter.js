@@ -315,6 +315,10 @@ Radium.RESTAdapter.map('Radium.Todo', {
   comments: {embedded: 'load'}
 });
 
+Radium.RESTAdapter.map('Radium.Note', {
+  comments: {embedded: 'load'}
+})
+
 Radium.RESTAdapter.map('Radium.Call', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},

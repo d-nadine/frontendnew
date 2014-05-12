@@ -1,4 +1,4 @@
-Radium.Note = Radium.Model.extend
+Radium.Note = Radium.Model.extend Radium.CommentsMixin,
   user: DS.belongsTo('Radium.User')
 
   body: DS.attr('string')

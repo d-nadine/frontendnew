@@ -4,19 +4,20 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
 
   text: DS.attr('string')
 
-  commentable: ((key, value) ->
+  commentable: Ember.computed('email', 'discussion', 'deal', 'meeting', 'todo', 'call', 'activity', 'note', (key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.toString().split('.')[1].toLowerCase()
       @set property, value
     else
       @get('email') ||
-        @get('discussion') ||
-        @get('deal') ||
-        @get('meeting') ||
-        @get('todo') ||
-        @get('call') ||
-        @get('activity')
-  ).property('email', 'discussion', 'deal', 'meeting', 'todo', 'call', 'activity')
+      @get('discussion') ||
+      @get('deal') ||
+      @get('meeting') ||
+      @get('todo') ||
+      @get('call') ||
+      @get('activity') ||
+      @get('note')
+  )
 
   activity: DS.belongsTo('Radium.Activity')
   call: DS.belongsTo('Radium.Call')
@@ -25,4 +26,5 @@ Radium.Comment = Radium.Model.extend Radium.AttachmentsMixin,
   discussion: DS.belongsTo('Radium.Discussion')
   meeting: DS.belongsTo('Radium.Meeting')
   todo: DS.belongsTo('Radium.Todo')
+  note: DS.belongsTo('Radium.Note')
   attachedFiles: DS.attr('array')
