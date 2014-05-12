@@ -1,1 +1,6 @@
-<h4>Your email '{{email.subject}}' has been opened by {{reference.name}}!</h4>
+<h4>Your email <a href="#" {{action "showEmail" email}}>'{{email.subject}}'</a> has been opened by
+  {{#if reference.isLoaded}}
+    {{resource-link-to reference}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}}!</h4>
