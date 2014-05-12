@@ -16,3 +16,16 @@ Radium.ActivityItemController = Radium.ObjectController.extend
         result.reset()
 
       @get('store').commit()
+
+    deleteNote: (note)->
+      note.deleteRecord()
+
+      errorHandler = (result) =>
+        @send 'flashError', 'An error has occurred and the  cannot be deleted.'
+
+      note.one 'didDelete', =>
+        @send 'flashSuccess', 'Note deleted'
+      note.one 'becameInvalid', errorHandler
+      note.one 'becameError', errorHandler
+
+      @get('store').commit()

@@ -32,12 +32,18 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
   actions:
     edit: ->
       @set 'isEditing', true
+
     save: ->
       @set 'isEditing', false
       return unless @get('isDirty')
       @get('buffer').applyBufferedChanges()
 
       @sendAction 'save', @get('note.content')
+
+    delete: ->
+      @get('buffer').discardBufferedChanges()
+      @set 'isEditing', false
+      @sendAction 'delete', @get('note.content')
 
     cancel: ->
       return unless @get('isEditing')
