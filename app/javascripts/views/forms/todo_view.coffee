@@ -9,6 +9,8 @@ Radium.FormsTodoView = Radium.FormView.extend
     @_super.apply this, arguments
     return unless @get('controller').on
     @get('controller').on('animateFinish', this, 'onAnimateFinish') if @get('controller').on
+    @set 'store', @get('controller.store')
+    @set 'model', @get("controller.model")
 
   finishView: Radium.View.extend Ember.ViewTargetActionSupport,
     tagName: 'button'
@@ -69,9 +71,30 @@ Radium.FormsTodoView = Radium.FormView.extend
   onAnimateFinish: ->
     controller = @get('controller')
 
+    # This makes me very sad but sometimes the
+    # controller has been destroyed by the time it gets here
+    # there is no choice but to finish the todo in the view
+    if controller
+      send = controller.send.bind controller
+    else
+      send = =>
+        @set('model.isFinished', true)
+
+        @get('model').one 'didUpdate', ->
+          if @get('controllers.application.currentPath') != 'user.index'
+            @get('user')?.reload()
+
+          unless reference = @get('reference')
+            return
+
+          reference.reload()
+
+        @get('store').commit()
+
+
     unless @$()?.length
-      controller.send 'completeFinish'
+      send 'completeFinish'
       return
 
     @$().fadeOut 'slow', =>
-      controller.send 'completeFinish'
+      send 'completeFinish'

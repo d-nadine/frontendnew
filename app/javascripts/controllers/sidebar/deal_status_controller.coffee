@@ -30,8 +30,10 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
         @set 'isEditing', false
         return
 
-      # FIXME: super hacky way of getting commit
-      @send 'showStatusChangeConfirm', this, @_super
+      # FIXME: likely to break in the next upgrade when
+      # this __nextSuper ember confusion goes away
+      # should be _super but ember broke that
+      @send 'showStatusChangeConfirm', this, @__nextSuper
 
     setForm: ->
       @set 'form.status', @get('model.status')
