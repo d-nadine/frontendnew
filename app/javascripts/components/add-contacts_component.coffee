@@ -1,19 +1,17 @@
 Radium.AddContactsComponent = Ember.Component.extend
   actions:
     addSelection: (lookup) ->
-      refs = @get('parent.contacts').mapProperty('id')
-      refs.push(lookup.get('id'))
-
-      @set('parent.contactRefs', refs)
+      @get('parent.contactRefs').createRecord
+        contact: lookup.get("person")
 
       @get('store').commit()
 
     removeSelection: (contact) ->
-      refs = @get('parent.contacts').mapProperty('id')
+      ref = @get('parent.contactRefs').find (ref) -> ref.get('contact.id') == contact.get('id')
 
-      refs.removeObject(contact.get('id'))
+      return unless ref
 
-      @set('parent.contactRefs', refs)
+      @get('parent.contactRefs').removeObject(ref)
 
       @get('store').commit()
 

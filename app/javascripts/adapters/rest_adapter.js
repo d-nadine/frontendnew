@@ -234,11 +234,11 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 
 Radium.RESTAdapter.map('Radium.Account', {
   workflow: {embedded: 'always'},
-  billingInfo: {embedded: 'always'},
+  billingInfo: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Workflow', {
-  checklist: {key: 'check_list', embedded: 'always'},
+  checklist: {key: 'check_list', embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Contact', {
@@ -265,28 +265,29 @@ Radium.RESTAdapter.map('Radium.ContactInfo', {
 
 Radium.RESTAdapter.map('Radium.Discussion', {
   user: {key: 'posted_by'},
-  comments: {embedded: 'load'},
+  comments: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   checklist: { key: 'check_list' ,embedded: 'always' },
+  contactRefs: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.ChecklistItem', {
-  isFinished: {key: 'finished'},
+  isFinished: {key: 'finished'}
 });
 
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
   addresses: {key: 'offices', embedded: 'always'},
-  tagNames: {embedded: 'always'},
+  tagNames: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.PhoneNumber', {
   value: { key: 'number' },
-  isPrimary: { key: 'primary'},
+  isPrimary: { key: 'primary'}
 });
 
 Radium.RESTAdapter.map('Radium.Email', {
@@ -295,41 +296,41 @@ Radium.RESTAdapter.map('Radium.Email', {
   isRead: {key: 'read'},
   isPersonal: {key: 'personal'},
   isDraft: {key: 'draft'},
-  comments: {embedded: 'load'},
+  comments: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.EmailAddress', {
   value: { key: 'address' },
-  isPrimary: { key: 'primary'},
+  isPrimary: { key: 'primary'}
 });
 
 Radium.RESTAdapter.map('Radium.Address', {
-  isPrimary: { key: 'primary'},
+  isPrimary: { key: 'primary'}
 });
 
 Radium.RESTAdapter.map('Radium.Todo', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
   user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'},
+  comments: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.Call', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
   user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'},
+  comments: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.Meeting', {
   isFinished: {key: 'finished'},
   finishBy: {key: 'time'},
   user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'},
+  comments: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.UserInvitation', {
-  email: {key: 'address'},
+  email: {key: 'address'}
 });
 
 Radium.RESTAdapter.map('Radium.User', {
@@ -350,7 +351,7 @@ Radium.RESTAdapter.map('Radium.NotificationSettings', {
   remoteMeetings: {embedded: 'always'},
   leadIgnored: {embedded: 'always'},
   clientIgnored: {embedded: 'always'},
-  taskIgnored: {embedded: 'always'},
+  taskIgnored: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Comment', {

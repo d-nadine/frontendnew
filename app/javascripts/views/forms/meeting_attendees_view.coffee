@@ -1,49 +1,14 @@
 Radium.MeetingAttendeesView = Radium.View.extend
-  actions:
-    showContextMenu: ->
-      return false unless @get('isEditable')
-
-      el = @$()
-
-      dropdown = el.find('.contextMenu')
-
-      dropdown.toggleClass('open')
-
-      dropdown.css
-        position: 'absolute',
-        top: @$('img').height()
-
-      event.preventDefault()
-      event.stopPropagation()
-
   isEditable: Ember.computed.not 'controller.parentController.isNew'
   isOrganizer: Ember.computed.alias 'controller.isOrganizer'
   tagName: 'li'
   attributeBindings: ['controller.title:title']
-
-  didInsertElement: ->
-    @_super.apply this, arguments
-
-    $('body').on 'click.attendees-view', (e) =>
-      @$().find('.contextMenu').removeClass('open')
-
-    # @$().tooltip()
 
   willDestroyElement: ->
     @_super.apply this, arguments
     $('body').off 'click.attendees-view'
     if @$()?.data('tooltip')
       @$().tooltip('destroy')
-
-  click: (e) ->
-    dropdown = @$().find('.contextMenu')[0]
-
-    @$().parent().find('.contextMenu').each (index, el)  =>
-      $(el).removeClass('open') unless el == dropdown
-
-    return false if @get('isOrganizer')
-    return false unless @get('isEditable')
-    @send 'showContextMenu', @get('controller.model')
 
   template: Ember.Handlebars.compile """
     <div class="media">

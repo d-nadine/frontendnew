@@ -21,10 +21,10 @@ Radium.AutocompleteView = Radium.View.extend
   minChars: 1
   deleteOnBackSpace: true
 
-  layout: Ember.Handlebars.compile """
+  template: Ember.Handlebars.compile """
     <ul class="as-selections">
     {{#each view.source}}
-      <li {{action "showContextMenu" this target="view"}} {{bind-attr class="view.isEditable :as-selection-item :blur"}}>
+      <li {{bind-attr class="view.isEditable :as-selection-item :blur"}}>
         {{#if view.isEditable}}
           <a class="as-close" {{action "removeSelection" this target="view" bubbles=false}}>×</a>
         {{/if}}
@@ -42,32 +42,7 @@ Radium.AutocompleteView = Radium.View.extend
         {{view view.autocomplete}}
       </li>
     </ul>
-    {{yield}}
   """
-
-  template: Ember.Handlebars.compile """
-    <!-- override to add context menu -->
-  """
-
-  showContextMenu: (attendee) ->
-    return false unless @get('isEditable')
-
-    el = $(event.srcElement)
-
-    dropdown = el.parents('div.autocomplete:eq(0)').find('.contextMenu')
-
-    return unless dropdown.length
-
-    position = el.position()
-
-    dropdown.css
-      position: "absolute",
-      left: position.left  + "px"
-      top: position.top + el.height() + 7 + "px"
-
-    dropdown.find('a:eq(0)').trigger('click.dropdown.data-api')
-
-    event.stopPropagation()
 
   resizeInputBox: ->
     input = @$('li.as-original input')

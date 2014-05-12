@@ -18,7 +18,7 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   contacts: DS.hasMany('Radium.Contact')
 
-  contactRefs: DS.attr('array')
+  contactRefs: DS.hasMany('Radium.ContactRef')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined

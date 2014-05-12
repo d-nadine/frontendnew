@@ -6,7 +6,7 @@ Radium.PipelineResourceDealsRoute = Radium.Route.extend
     resource_id: model.get('id')
 
   model: (params) ->
-    type = Radium.Model.mappings[params.resource_type]
+    type = params.resource_type.singularize().constantize()
     type.find(params.resource_id)
 
   setupController: (controller, resource) ->
