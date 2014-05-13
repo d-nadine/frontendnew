@@ -1,0 +1,11 @@
+<td class="deal">
+  <p>
+    <span>{{#link-to "deal" this}}{{name}}{{/link-to}}</span><br/>
+    {{#if hasPrimaryContact}}
+      {{resource-link-to contact}}<br/>
+      <small>{{contact.title}}</small>
+    {{else}}
+      <span class="no-primary">No Primary Contact</span>
+    {{/if}}
+  </p>
+</td>

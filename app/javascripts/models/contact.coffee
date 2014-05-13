@@ -36,23 +36,20 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   isExpired: Radium.computed.daysOld('createdAt', 60)
 
-  latestDeal: ( ->
+  latestDeal: Ember.computed 'deals', ->
     # FIXME: Is it safe to assume that
     #deals will be ordered on the server?
     @get('deals.firstObject')
-  ).property('deals')
 
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   isLead: Ember.computed.equal 'status', 'pipeline'
 
-  isPersonal: ( ->
+  isPersonal: Ember.computed 'status', ->
     @get('status') == 'personal'
-  ).property('status')
 
-  isExcluded: ( ->
+  isExcluded: Ember.computed 'status', ->
     @get('status') == 'exclude'
-  ).property('status')
 
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceContact')
 
@@ -62,20 +59,17 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   email: Ember.computed.alias 'primaryEmail.value'
 
-  openDeals: ( ->
+  openDeals: Ember.computed 'deals.[]', ->
     @get('deals').filterProperty 'isOpen'
-  ).property('deals.[]')
 
-  displayName: ( ->
+  displayName: Ember.computed 'name', 'primaryEmail', 'primaryPhone', ->
     @get('name') || @get('primaryEmail.value') || @get('primaryPhone.value')
-  ).property('name', 'primaryEmail', 'primaryPhone')
 
-  nameWithCompany: ( ->
+  nameWithCompany: Ember.computed 'name', 'company.name', ->
     if @get('company.name')
       "#{@get('name')} (#{@get('company.name')})"
     else
       @get('name')
-  ).property('name', 'company.name')
 
   clearRelationships: ->
     @get('deals').compact().forEach (deal) =>

@@ -5,7 +5,28 @@
   </div>
 
   <div class="modal-body">
-    <p>This action cannot be undone! Deleting <strong>{{name}}</strong> will be permanent.</p>
+    <p>This action cannot be undone! Deleting <strong>{{displayName}}</strong> will be permanent.</p>
+    {{#if deals.length}}
+      <strong>{{displayName}} is the primary contact in the following deals.</strong>
+      <table class="table sidebar-table">
+        <tbody>
+          {{#each deals}}
+            <tr>
+              <td>{{#link-to "deal" this}}{{name}}{{/link-to}}
+              <td class="text-right">
+                <strong>{{currency value}} ({{status}})</strong>
+              </td>
+            </tr>
+          {{/each}}
+          <tr>
+            <td>Closed deals totals</td>
+            <td class="text-right">
+              <strong>{{currency dealsTotal}}</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    {{/if}}
 
     <button class="btn btn-large btn-danger btn-block" {{action "deleteRecord"}}>I understand the consequences, delete this contact.</button>
   </div>

@@ -20,14 +20,14 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   contactRefs: DS.hasMany('Radium.ContactRef')
 
-  reference: ((key, value) ->
+  reference: Ember.computed  '_reference',  (key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
       associationName = "_reference#{property}"
       @set associationName, value
     else
       @get('_referenceEmail')
-  ).property('_referenceEmail')
+
   _referenceEmail: DS.belongsTo('Radium.Email')
 
   name: DS.attr('string')
@@ -49,13 +49,11 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   about: Ember.computed.alias 'description'
 
-  isOpen: ( ->
+  isOpen: Ember.computed 'status', ->
     not ['lost', 'closed'].contains(@get('status'))
-  ).property('status')
 
-  isUnpublished: ( ->
+  isUnpublished: Ember.computed 'status', ->
     @get('status') == 'unpublished'
-  ).property('status')
 
   longName: Ember.computed 'name', 'contact', ->
     name = @get('name')
@@ -67,6 +65,9 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
                @get('contact.displayName')
 
     "#{name} - #{suffix}"
+
+  hasPrimaryContact: Ember.computed 'contact', ->
+    @get('contact.id')
 
   clearRelationships: ->
     @get('contact.deals').removeObject(this) if @get('contact')

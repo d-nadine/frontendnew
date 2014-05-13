@@ -95,61 +95,50 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       return if @get('isNew')
       @send 'submit'
 
-  init: ->
-    @_super.apply this, arguments
-
   timer: null
   isFinishing: false
 
   cantFinish: Ember.computed 'isDisabled', 'isNew', 'isFinishing', ->
     @get('isDisabled') || @get('isNew') || @get('isFinishing')
 
-  isValid: ( ->
+  isValid: Ember.computed 'description.length', 'finishBy', 'user', 'model.submitForm', ->
     return if Ember.isEmpty(@get('description').trim())
     return if @get('finishBy').isBeforeToday()
     return unless @get('user')
 
     true
-  ).property('description.length', 'finishBy', 'user', 'model.submitForm')
 
-  isBulk: ( ->
+  isBulk: Ember.computed 'reference', ->
     Ember.isArray @get('reference')
-  ).property('reference')
 
-  showComments: ( ->
+  showComments: Ember.computed 'isNew', 'justAdded', 'isBulk', ->
     return false if @get('isBulk')
     return false if @get('justAdded')
     return false unless @get('id')
 
     true
-  ).property('isNew', 'justAdded', 'isBulk')
 
-  justAdded: (->
+  justAdded: Ember.computed 'content.justadded', ->
     @get('content.justAdded') == true
-  ).property('content.justAdded')
 
   showOptions: Ember.computed.alias('isNew')
 
   showSuccess: Ember.computed.alias('justAdded')
 
-  hasReference: ( ->
+  hasReference: Ember.computed 'reference', 'isNew', ->
     reference = @get('reference')
     !@get('isNew') && reference
-  ).property('reference', 'isNew')
 
-  isExpandable: (->
+  isExpandable: Ember.computed 'isNew', 'isFinished', ->
     return false if @get('justAdded')
     !@get('isNew') && !@get('isFinished')
-  ).property('isNew', 'isFinished')
 
-  isExpandableDidChange: (->
+  isExpandableDidChange: Ember.observer 'isExpandable', ->
     if !@get('isExpandable') then @set('isExpanded', false)
-  ).observes('isExpandable')
 
   isDisabled: Ember.computed.not('isEditable')
 
-  isPrimaryInputDisabled: (->
+  isPrimaryInputDisabled: Ember.computed 'isDisabled', 'isExpanded', 'isNew', ->
     return false if @get('isNew')
     return true unless @get('isExpanded')
     @get 'isDisabled'
-  ).property('isDisabled', 'isExpanded', 'isNew')

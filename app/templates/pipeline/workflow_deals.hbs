@@ -33,13 +33,7 @@
         <td class="checkbox">
           {{check-box checked=isChecked class="checker-block"}}
         </td>
-        <td class="deal">
-          <p>
-            <span>{{#link-to "deal" this}}{{name}}{{/link-to}}</span><br/>
-            {{#link-to "contact" contact}}{{contact.displayName}}{{/link-to}}<br/>
-            <small>{{contact.title}}</small>
-          </p>
-        </td>
+        {{partial 'pipeline/deal_contact'}}
         <td class="assigned-to">
           <p>
             <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>

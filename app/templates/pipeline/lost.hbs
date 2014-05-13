@@ -35,11 +35,14 @@
           <td class="deal-lead">
             <p>
               <span class="name">{{resource-link-to this}}</span></br>
-              <span class="name">{{resource-link-to contact}}</span></br>
-              <span class="title">{{contact.title}}</span>
+              {{#if hasPrimaryContact}}
+                <span class="name">{{resource-link-to contact}}</span></br>
+                <span class="title">{{contact.title}}</span>
+                <p class="from"><strong>From:</strong>&nbsp;{{contact.source}}</p>
+              {{else}}
+                <span class="no-primary">No Primary Contact</span>
+              {{/if}}
             <p>
-
-            <p class="from"><strong>From:</strong>&nbsp;{{contact.source}}</p>
           </td>
           <td class="assigned-to">
             <p>

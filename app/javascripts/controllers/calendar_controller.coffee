@@ -45,7 +45,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     endsAt: date.advance(hour: 3)
     invitations: Ember.A()
 
-  selectedDateDidChange: Ember.observer 'selectedday.date', 'meetingform', ->
+  selectedDateDidChange: Ember.observer 'selectedDay.date', 'meetingform', ->
     return unless @get('selectedDay.date') && @get('meetingForm')
     date = @get('selectedDay.date')
     Ember.run.next =>

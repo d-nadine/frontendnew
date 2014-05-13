@@ -20,10 +20,14 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="user-avatar pull-left">
-        {{#if contact.isLoaded}}
-          {{avatar contact size=medium class="img-polaroid"}}
+        {{#if hasPrimaryContact}}
+          {{#if contact.isLoaded}}
+            {{avatar contact size=medium class="img-polaroid"}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
         {{else}}
-          {{partial 'is_loading'}}
+          <span class="no-primary">No Primary Contact</span>
         {{/if}}
       </div>
       <div class="clearfix">
