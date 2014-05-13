@@ -20,12 +20,13 @@ Radium.ActivityItemController = Radium.ObjectController.extend
     deleteNote: (note)->
       note.deleteRecord()
 
-      errorHandler = (result) =>
-        @send 'flashError', 'An error has occurred and the  cannot be deleted.'
-
       note.one 'didDelete', =>
         @send 'flashSuccess', 'Note deleted'
-      note.one 'becameInvalid', errorHandler
-      note.one 'becameError', errorHandler
+      note.one 'becameInvalid', =>
+        console.log 'becameInvalid'
+        @send 'flashError', 'An error has occurred and the note cannot be deleted.'
+      note.one 'becameError', =>
+        console.log 'becameError'
+        @send 'flashError', 'An error has occurred and the note cannot be deleted.'
 
       @get('store').commit()

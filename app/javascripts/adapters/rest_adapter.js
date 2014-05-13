@@ -237,6 +237,10 @@ Radium.RESTAdapter.map('Radium.Account', {
   billingInfo: {embedded: 'always'}
 });
 
+Radium.RESTAdapter.map('Radium.Activity', {
+  note: {embedded: 'load'}
+})
+
 Radium.RESTAdapter.map('Radium.Workflow', {
   checklist: {key: 'check_list', embedded: 'always'}
 });

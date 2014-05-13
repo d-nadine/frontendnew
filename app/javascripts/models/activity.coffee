@@ -1,3 +1,5 @@
+require 'models/note'
+
 Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   users: DS.hasMany('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
@@ -7,6 +9,8 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
 
   user: DS.belongsTo('Radium.User', inverse: 'activities')
 
+  note: DS.belongsTo('Radium.Note')
+
   tag: DS.attr('string')
   event: DS.attr('string')
   meta: DS.attr('object')
@@ -15,10 +19,6 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   iid: ( ->
     parseInt @get('id')
   ).property('id')
-
-  note: Ember.computed 'meta.noteId', ->
-    Radium.PromiseProxy.create
-      promise: Radium.Note.find @get('meta.noteId')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value

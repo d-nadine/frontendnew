@@ -40,9 +40,10 @@ Radium.RdConversationInputComponent = Ember.Component.extend
   focusOut: ->
     @set 'focus', false
 
-  sync: Ember.observer 'value', ->
+  sync: Ember.observer('value', ->
     unless @get('value') == @$().text()
       @$().text @get('value')
+  ).on "didInsertElement"
 
   requestFocus: Ember.observer('focus', ->
     Ember.run.next =>
