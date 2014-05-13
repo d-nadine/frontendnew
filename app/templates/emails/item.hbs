@@ -1,1 +1,5 @@
+{{#each notification in model.notifications}}
+  <div class="alert alert-info">Opened by {{notification.reference.name}} <span class="pull-right">{{notification.timeFormatted}}</span></div>
+  
+{{/each}}
 {{partial 'emails/item'}}
