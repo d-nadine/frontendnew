@@ -1,7 +1,7 @@
 <p>
   {{resource-link-to contact}}
   opened the email 
-  {{#link-to 'emails.show' email}}{{email.subject}} {{/link-to}}
+  {{#link-to 'emails.show' "inbox" email}}{{email.subject}} {{/link-to}}
   from
   {{resource-link-to user}}
 </p>
