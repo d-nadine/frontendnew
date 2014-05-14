@@ -22,6 +22,7 @@ Radium.ActivityItemController = Radium.ObjectController.extend
 
       note.one 'didDelete', =>
         @send 'flashSuccess', 'Note deleted'
+        @get('reference').reload()
       note.one 'becameInvalid', =>
         console.log 'becameInvalid'
         @send 'flashError', 'An error has occurred and the note cannot be deleted.'
