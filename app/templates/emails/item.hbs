@@ -1,5 +1,5 @@
 {{#each notification in model.notifications}}
-  <div class="alert alert-info">Opened by {{notification.reference.name}} <span class="pull-right">{{notification.timeFormatted}}</span></div>
+  <div class="alert alert-info event"><i class="ss-standard ss-view"> </i> Opened by {{notification.reference.name}} <span class="pull-right">{{notification.timeFormatted}}</span></div>
   
 {{/each}}
 {{partial 'emails/item'}}
