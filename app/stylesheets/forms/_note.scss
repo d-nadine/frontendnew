@@ -2,4 +2,13 @@
   .rd-conversation-input {
     margin-left: 60px;
   }
+
+  > .primary {
+    position: relative;
+
+    i.ss-notepad {
+      position: absolute;
+      left: 14px;
+    }
+  }
 }
