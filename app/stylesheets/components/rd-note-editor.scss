@@ -1,7 +1,4 @@
 .rd-note-editor {
-  i.ss-write {
-    cursor: pointer;
-  }
   a.cancel, .save, .delete {
     cursor: default;
     opacity: 0;
@@ -17,5 +14,17 @@
   .actions {
     text-align: right;
     margin-top: 5px;
+  }
+  .editable-indicator {
+    position: absolute;
+    right: 100px;
+    opacity: 0;
+    transition: .25s;
+  }
+  &:hover .editable-indicator {
+    opacity: 1;
+  }
+  &:hover.is-editing .editable-indicator {
+    opacity: 0;
   }
 }
