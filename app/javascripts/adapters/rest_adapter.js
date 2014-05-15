@@ -235,6 +235,10 @@ Radium.RESTAdapter.map('Radium.Account', {
   billingInfo: {embedded: 'always'}
 });
 
+Radium.RESTAdapter.map('Radium.Activity', {
+  note: {embedded: 'load'}
+})
+
 Radium.RESTAdapter.map('Radium.Workflow', {
   checklist: {key: 'check_list', embedded: 'always'}
 });
@@ -316,6 +320,10 @@ Radium.RESTAdapter.map('Radium.Todo', {
   user: { key: 'assigned_to_id' },
   comments: {embedded: 'load'}
 });
+
+Radium.RESTAdapter.map('Radium.Note', {
+  comments: {embedded: 'load'}
+})
 
 Radium.RESTAdapter.map('Radium.Call', {
   isFinished: {key: 'finished'},

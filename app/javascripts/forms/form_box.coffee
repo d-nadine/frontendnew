@@ -6,3 +6,4 @@ Radium.FormBox = Ember.ObjectProxy.extend
   callForm: null
   discussionForm: null
   meetingForm: null
+  noteForm: null

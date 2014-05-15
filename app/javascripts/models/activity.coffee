@@ -1,3 +1,5 @@
+require 'models/note'
+
 Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   users: DS.hasMany('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
@@ -6,6 +8,8 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   tags: DS.hasMany('Radium.Tag')
 
   user: DS.belongsTo('Radium.User', inverse: 'activities')
+
+  note: DS.belongsTo('Radium.Note')
 
   tag: DS.attr('string')
   event: DS.attr('string')

@@ -46,6 +46,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
       # disable for now
       # callForm: @get('callForm')
       # discussionForm: @get('discussionForm')
+      noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
       about: @get('model')
 
@@ -81,3 +82,9 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
+
+  noteForm: Radium.computed.newForm 'note'
+
+  noteFormDefaults: Ember.computed 'model', ->
+    reference: @get('model')
+    user: @get('currentUser')

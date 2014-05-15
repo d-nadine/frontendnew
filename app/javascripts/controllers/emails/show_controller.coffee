@@ -23,6 +23,7 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
 
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')
+
   showExtensionCTA: Ember.computed.not 'currentUser.settings.alerts.extensionSeen'
 
   contact: ( ->

@@ -1,0 +1,12 @@
+<form {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :note-form"}}>
+  <div {{bind-attr class="isFinished view.isFocused :primary"}}>
+    <i class="ss-notepad pull-left"></i>
+
+    {{#if showSuccess}}
+      <span class="success-message green pull-right">Todo saved</span>
+    {{/if}}
+
+    {{rd-conversation-input value=body focus=true}}
+
+  </div>
+</form>

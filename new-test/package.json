@@ -1,0 +1,17 @@
+{
+  "name": "radium-crm",
+  "version": "0.0.0",
+  "description": "Radium CRM for Gmail",
+  "dependencies": {
+    "karma": "0.10.x",
+    "karma-chrome-launcher": "*",
+    "karma-coffee-preprocessor": "~0.1",
+    "karma-phantomjs-launcher": "~0.1.2",
+    "coffee-script": "~1.7.1"
+  },
+  "author": "Radium CRM, Inc.",
+  "devDependencies": {
+    "qunitjs": "~1.12.0",
+    "karma-qunit": "~0.1.1"
+  }
+}
