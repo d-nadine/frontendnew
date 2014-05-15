@@ -76,6 +76,22 @@
       </table>
     </div>
     <div class="sidebar-panel-content">
+      <table class="table totals">
+      <tbody>
+        {{#each stats}}
+          <tr>
+            <td>
+              {{this}}
+            </td>
+            <td>
+              Value
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+      </table>
+    </div>
+    <div class="sidebar-panel-content">
       <div class="deal-links">
         {{#link-to "deals.fromUser" this class="btn btn-block btn-large btn-primary"}}
           <i class="ss-standard ss-plus"></i> Deal
