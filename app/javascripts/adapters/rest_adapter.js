@@ -1,8 +1,6 @@
 var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach,
   map = Ember.EnumerableUtils.map;
 
-
-
 Radium.RESTSerializer = DS.RESTSerializer.extend({
   init: function(){
     this._super.apply(this, arguments);
@@ -250,6 +248,10 @@ Radium.RESTAdapter.map('Radium.Contact', {
   tagNames: {embedded: 'always'},
   comments: {embedded: 'load'},
   contactInfo: {embedded: 'always'}
+});
+
+Radium.RESTAdapter.map('Radium.ContactImportJob', {
+  importErrors: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.ExternalContact', {
