@@ -85,7 +85,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   noteForm: Radium.computed.newForm 'note'
 
-  noteFormDefaults: (->
+  noteFormDefaults: Ember.computed 'model', ->
     reference: @get('model')
     user: @get('currentUser')
-  ).property 'model'
