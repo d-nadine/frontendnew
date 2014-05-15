@@ -128,25 +128,23 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       account.reset()
       @get('model').transitionTo("loaded.saved")
 
-  isValid: ( ->
+  isValid: Ember.computed 'organisation', 'billingEmail', 'isSubmitted', ->
     return true unless @get('isSubmitted')
     return if Ember.isEmpty(@get('organisation'))
     email = @get('billingEmail')
     return if Ember.isEmpty(email)
     return unless @emailIsValid email
     true
-  ).property('organisation', 'billingEmail', 'isSubmitted')
 
-  hasGatewayAccount: ( ->
+  hasGatewayAccount: Ember.computed 'account.billingInfo.gatewayIdentifier', ->
     @get('account.billingInfo.gatewayIdentifier')
-  ).property('account.billingInfo.gatewayIdentifier')
 
   showNextPaymentDate: Ember.computed 'hasGatewayAccount', 'activeSubscription', 'activeSubscription.nextDueDate', 'billingInfo.subscriptionEnded', ->
     return false unless @get('hasGatewayAccount')
     return false if @get('billingInfo.subscriptionEnded')
     !!@get('activeSubscription.nextDueDate')
 
-  country: ( (key, value) ->
+  country: Ember.computed 'model.country', (key, value) ->
     if arguments.length == 2 && value != undefined
       @set 'model.country', value
     else
@@ -154,4 +152,3 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         @get('controllers.countries.firstObject')
       else
         @get('model.country')
-  ).property('model.country')

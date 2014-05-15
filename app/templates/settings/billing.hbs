@@ -3,49 +3,14 @@
     There are currently <strong>{{account.trialDaysLeft}}</strong> left on your <strong>{{currentPlan.name}}</strong> trial plan.
   </div>
 {{/if}}
+
 {{#if currentUser.account.subscriptionInvalid}}
   <div class="alert">
     <i class="ss-standard ss-clock"></i> Your subscription has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
   </div>
 {{/if}}
-{{#if isAdmin}}
-  {{#unless isUnlimited}}
-    {{#unless hasGatewayAccount}}
-      {{#unless isPersisting}}
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="alert">
-              You need to update your details with a valid credit card to upgrade your account.<br/>
-              <strong>Click below to add your credit card details.</strong>
-            </div>
-          </div>
-        </div>
-      {{/unless}}
-    {{/unless}}
-  {{/unless}}
-  <div class="settings-group">
-    {{#unless isUnlimited}}
-      {{#unless showBillingForm}}
-        <div class="pull-right">
-          <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
-        </div>
-      {{/unless}}
-      <h4>
-        <a href="#" {{action "changeBilling"}}>
-          <i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
-        </a>
-      {{/unless}}
 
-    {{#if showBillingForm}}
-      {{partial 'settings/billing_form'}}
-    {{/if}}
-    {{#if account.isSaving}}
-      <div class="alert alert-info">
-        <h4 class="text-center text-info">Updating billing...</h4>
-      </div>
-    {{/if}}
-      </div>
-    {{/if}}
+{{#if isAdmin}}
 <div class="upgrade-plan">
   {{#unless isUnlimited}}
     <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
@@ -123,4 +88,24 @@
     </tbody>
     </table>
   </div>
+  <div class="settings-group">
+    {{#unless showBillingForm}}
+      <div class="pull-right">
+        <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
+      </div>
+    {{/unless}}
+    <a href="#" {{action "changeBilling"}}>
+      <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
+    </a>
+
+    {{#if showBillingForm}}
+      {{view Radium.BillingFormView}}
+    {{/if}}
+    {{#if account.isSaving}}
+      <div class="alert alert-info">
+        <h4 class="text-center text-info">Updating billing...</h4>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
 </div>

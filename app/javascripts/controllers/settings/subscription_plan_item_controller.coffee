@@ -9,12 +9,11 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   isTrial: Ember.computed.alias 'parentController.account.isTrial'
   isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
 
-  isCurrent: ( ->
+  isCurrent: Ember.computed 'parentController.currentPlan', 'model', 'isPersisting', ->
     return false if @get('currentUser.account.subscriptionInvalid')
     return if @get('parentController.isPersisting')
     return false if @get('isTrial')
     @get('parentController.currentPlan') == @get('model')
-  ).property('parentController.currentPlan', 'model', 'isPersisting')
 
   showCancel: Ember.computed 'isCurrent', 'subscriptionEnded', ->
     return false if @get('currentPlan') == 'basic'
@@ -22,12 +21,11 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     return false if @get('subscriptionEnded')
     @get('isCurrent')
 
-  totalUsers: ( ->
+  totalUsers: Ember.computed 'isBasic', 'model.totalUsers', ->
     if @get('isBasic')
       1
     else
       @get('model.totalUsers') - 1
-  ).property('isBasic', 'model.totalUsers')
 
   isBasic: Ember.computed.equal 'model.planId', 'basic'
 
@@ -37,7 +35,6 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
 
   notViable: Ember.computed 'isCurrent', 'totalUsers', 'isPersisting', 'activeCard', 'users.[]', ->
     return true if @get('isPersisting')
-    return true unless @get('activeCard')
     return false if @get('isTrial')
     return true if @get('model.planId') == 'basic' && @get('currentPlan.planId') != 'basic'
 
