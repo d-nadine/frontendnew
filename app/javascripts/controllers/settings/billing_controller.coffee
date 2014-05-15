@@ -79,6 +79,10 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @set 'showBillingForm', false
 
     updateSubscription: (subscription) ->
+      unless activeCard = @get('activeCard')
+        @set 'showBillingForm', true
+        return
+
       @set 'showBillingForm', false
       @set 'isPersisting', true
 

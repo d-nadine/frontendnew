@@ -3,7 +3,7 @@ require 'lib/radium/value_validation_mixin'
 Radium.BillingFormView = Radium.View.extend
   actions:
     createTokenAndSubmit: ->
-      controller = @get('targetObject')
+      controller = @get('controller')
 
       controller.set 'isPersisting', true
 
@@ -11,14 +11,14 @@ Radium.BillingFormView = Radium.View.extend
 
       unless controller.get('isValid')
         controller.set 'isPersisting', false
-        $.scrollTo 0, 500, { easing:'swing', queue:true, axis:'xy' }
         return
 
       stripeResponseHandler = (status, response) =>
         if response.error
-          @controller.set 'isPersisting', false
+          controller.set 'isPersisting', false
           controller.send 'flashError', response.error.message
         else
+          Ember.$.scrollTo($('.upgrade-plan')[0], 800, {offset: - 100})
           controller.set 'token', response.id
           controller.send 'update'
 
@@ -34,10 +34,12 @@ Radium.BillingFormView = Radium.View.extend
   setUp: ( ->
     Ember.run.scheduleOnce 'afterRender', 'this', =>
       @$().slideDown 'slow', =>
-        unless organisationName = @get("organisationName")?.$()
+        unless organizationName = @get("organizationName")?.$()
           return
 
-        organisationName.focus()
+        organizationName.focus()
+        Ember.$.scrollTo($('.settings-group')[0], 800, {offset: - 100})
+
   ).on 'didInsertElement'
 
   teardown: ( ->
