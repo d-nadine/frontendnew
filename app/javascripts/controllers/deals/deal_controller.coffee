@@ -50,6 +50,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
       # disable for now
       # callForm: @get('callForm')
       # discussionForm: @get('discussionForm')
+      noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
   ).property('todoForm', 'callForm', 'discussionForm')
 
@@ -94,6 +95,12 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
     invitations: Ember.A()
     reference: @get('model')
   ).property('model', 'now')
+
+  noteForm: Radium.computed.newForm 'note'
+
+  noteFormDefaults: Ember.computed 'model', ->
+    reference: @get('model')
+    user: @get('currentUser')
 
   dealProgressClass: (->
     "status-#{@get('status')}"
