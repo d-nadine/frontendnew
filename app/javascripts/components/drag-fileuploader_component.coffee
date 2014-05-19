@@ -4,10 +4,8 @@ require 'components/draggable_mixin'
 Radium.DragFileuploaderComponent = Ember.Component.extend Radium.UploadingMixin,
   Radium.DraggableMixin,
 
-  init: ->
-    @_super.apply this, arguments
-    # FIXME: Total hack, remove when the initializer works
-    @set 'controller.store', Radium.__container__.lookup('store:main')
+  store: Ember.computed ->
+    this.container.lookup "store:main"
 
   drop: (e) ->
     @$('.dropbox').removeClass('hover')

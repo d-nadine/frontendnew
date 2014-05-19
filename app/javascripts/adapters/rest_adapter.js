@@ -46,7 +46,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
 
   didError: function(store, type, record, xhr){
-    if ([403, 412].contains(xhr.status) ){
+    if ([402, 403, 412].contains(xhr.status) ){
       var json = JSON.parse(xhr.responseText),
           errors = {};
 

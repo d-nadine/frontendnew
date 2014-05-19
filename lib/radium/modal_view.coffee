@@ -19,6 +19,8 @@ Radium.ModalView = Radium.View.extend
 
     modal.removeClass('in')
 
+    # FIXME: __nextSuper will break in a future
+    # ember release
     superFunction = @__nextSuper.bind this
 
     @$().one $.support.transition.end, superFunction

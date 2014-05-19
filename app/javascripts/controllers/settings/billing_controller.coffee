@@ -2,6 +2,7 @@ require 'controllers/settings/subscriptions_mixin'
 
 Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   Radium.SubscriptionMixin,
+  Ember.Evented,
   actions:
     changeBilling: ->
       @toggleProperty('showBillingForm')
@@ -130,7 +131,10 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @set 'isPersisting', false
       @send 'flashError', result
       account.reset()
-      @get('model').transitionTo("loaded.saved")
+      model = @get('model')
+      model.get("transaction").rollback()
+      model.transitionTo("loaded.saved")
+      @trigger 'cardError'
 
   isValid: Ember.computed 'organisation', 'billingEmail', 'isSubmitted', ->
     return true unless @get('isSubmitted')

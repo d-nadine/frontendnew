@@ -1,8 +1,6 @@
 Radium.UploadAvatarComponent = Ember.Component.extend Radium.UploadingMixin,
-  init: ->
-    @_super.apply this, arguments
-    # FIXME: Total hack, remove when the initializer works
-    @set 'controller.store', Radium.__container__.lookup('store:main')
+  store: Ember.computed ->
+    this.container.lookup "store:main"
 
   fileUploader: Ember.TextField.extend
     classNames: ['avatar-upload']

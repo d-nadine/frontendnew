@@ -1,4 +1,4 @@
-// Last commit: f93611e (2014-05-06 10:33:41 +0100)
+// Last commit: 69a1821 (2014-05-19 13:57:17 +0100)
 
 
 (function() {
@@ -3510,6 +3510,12 @@ updatedState.uncommitted.deleteRecord = function(record) {
 updatedState.inFlight.loadedData = Ember.K;
 
 updatedState.uncommitted.loadedData = Ember.K;
+
+updatedState.uncommitted.didCommit = Ember.K;
+
+updatedState.inFlight.becomeDirty = function(record) {
+  record.transitionTo('updated.uncommitted');
+};
 
 var RootState = {
   // FLAGS

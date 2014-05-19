@@ -18,11 +18,13 @@ Radium.BillingFormView = Radium.View.extend
           controller.set 'isPersisting', false
           controller.send 'flashError', response.error.message
         else
-          Ember.$.scrollTo($('.upgrade-plan')[0], 800, {offset: - 100})
+          Ember.$.scrollTo('.upgrade-plan', 800, {offset: - 100})
           controller.set 'token', response.id
           controller.send 'update'
 
       # test credit card number #4242424242424242
+      # raise errors https://stripe.com/docs/testing
+      # card declined 4000000000000002
       Stripe.card.createToken
         number: $('#card-number').val(),
         cvc: $('#card-cvc').val(),
@@ -31,16 +33,24 @@ Radium.BillingFormView = Radium.View.extend
       , stripeResponseHandler
       false
 
+    scrollToCard: ->
+      Ember.$.scrollTo('.settings-group', 800, {offset: - 100})
+
   setUp: ( ->
+    @get('controller').on('cardError', this, 'onCardError') if @get('controller').on
+
     Ember.run.scheduleOnce 'afterRender', 'this', =>
       @$().slideDown 'slow', =>
         unless organizationName = @get("organizationName")?.$()
           return
 
         organizationName.focus()
-        Ember.$.scrollTo($('.settings-group')[0], 800, {offset: - 100})
+        @send 'scrollToCard'
 
   ).on 'didInsertElement'
+
+  onCardError: ->
+    @send 'scrollToCard'
 
   teardown: ( ->
     clone = this.$().clone()
