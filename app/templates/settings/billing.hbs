@@ -78,7 +78,9 @@
                 {{/if}}
               </button>
             {{else}}
-              <strong>N/A</strong>
+              {{#unless isCurrent}}
+                <strong>N/A</strong>
+              {{/unless}}
             {{/unless}}
 
             {{#if showCancel}}
