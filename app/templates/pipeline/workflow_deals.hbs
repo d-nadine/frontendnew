@@ -20,6 +20,9 @@
         {{table-sorter heading="Next Task" sortOn="nextTask" sort="sortDeals"}}
       </th>
       <th class="status">Change Status</th>
+      <th class="status-last-changed-at">
+        {{table-sorter heading="Last Change" sortOn="statusLastChangedAt" sort="sortDeals"}}
+      </th>
       <th class="forecast">Forecast</th>
       <th class="value">
         {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
@@ -58,6 +61,9 @@
               {{/each}}
             </ul>
           </div>
+        </td>
+        <td>
+          {{formatDateTime statusLastChangedAt format=date}}
         </td>
         <td class="forecast">
           <a href="#" {{action "showChecklist" this bubbles=false}}>{{percentage}}%</a>

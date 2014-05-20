@@ -161,6 +161,10 @@
     width: percentage(122px / $base-width);
   }
 
+  .status-last-changed-at {
+    width: percentage(100px / $base-width);
+  }
+
   .next-task {
     width: percentage(250px / $base-width);
   }
