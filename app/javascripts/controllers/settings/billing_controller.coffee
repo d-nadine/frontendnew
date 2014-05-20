@@ -99,6 +99,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       account.set('billingInfo.subscription', subscription)
       account.set('billingInfo.gatewaySet', true)
+      account.set('billingInfo.subscriptionEnded', false)
+      account.set('billingInfo.subscriptionEndDate', null)
 
       account.one 'didUpdate', =>
         if subscription != 'basic'

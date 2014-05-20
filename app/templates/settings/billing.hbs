@@ -9,12 +9,17 @@
     <i class="ss-standard ss-clock"></i> Your subscription has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
   </div>
 {{/if}}
-
+{{#if account.isSaving}}
+  <div class="alert alert-info">
+    <h4 class="text-center text-info">Updating billing...</h4>
+  </div>
+{{/if}}
 {{#if isAdmin}}
 <div class="upgrade-plan">
   {{#unless isUnlimited}}
     <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
   {{/unless}}
+
   {{#if account.isTrial}}
     <p><strong>You are currently on a trial {{currentPlan.name}} account, you have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong></p>
     <p><strong>Choose a plan below to upgrade your account</strong></p>
@@ -25,12 +30,15 @@
       <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>
     {{/if}}
   {{/if}}
+
   {{#if showNextPaymentDate}}
     <strong>Next Payment Due: {{formatDateTime activeSubscription.nextDueDate format="calendar"}}</strong>
   {{/if}}
+
   {{#if account.billingInfo.subscriptionEnded}}
-    <strong>Your account has been cancelled and will expire: {{formatDateTime activeSubscription.subscriptionEndDate format="calendar"}}</strong>
+    <strong>Your account has been cancelled and will expire: {{formatDateTime subscriptionEndDate format="calendar"}}</strong>
   {{/if}}
+
   <div class="row-fluid pricing-table-list">
     <table class="table">
     <tbody>
@@ -100,11 +108,6 @@
 
     {{#if showBillingForm}}
       {{view Radium.BillingFormView}}
-    {{/if}}
-    {{#if account.isSaving}}
-      <div class="alert alert-info">
-        <h4 class="text-center text-info">Updating billing...</h4>
-      </div>
     {{/if}}
   </div>
 {{/if}}

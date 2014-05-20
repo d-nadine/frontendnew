@@ -11,7 +11,8 @@ Radium.BillingInfo = Radium.Model.extend
   trialStartDate: DS.attr('datetime')
   nextPaymentDue: DS.attr('datetime')
   subscriptionEnded: DS.attr('boolean')
-  subscriptionEndDate: DS.attr('boolean')
+  subscriptionEndDate: DS.attr('datetime')
   gatewaySet: DS.attr('boolean')
   hasSubscription: Ember.computed 'subscription', 'gatewaySet', ->
+    return false if @get('subscriptionEnded')
     @get('gatewaySet') && ['bronze', 'silver', 'gold'].contains(@get('subscription'))
