@@ -4,6 +4,11 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   Radium.SubscriptionMixin,
   Ember.Evented,
   actions:
+    updateBilling: ->
+      return if @get('gatewaySet')
+
+      @set 'showBillingForm', true
+
     changeBilling: ->
       @toggleProperty('showBillingForm')
       false
@@ -153,6 +158,12 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
     return false unless @get('hasGatewayAccount')
     return false if @get('billingInfo.subscriptionEnded')
     !!@get('activeSubscription.nextDueDate')
+
+  trialUnit: Ember.computed 'account.trialDaysLeft', ->
+    unless daysLeft = @get("account.trialDaysLeft")
+      return
+
+    if daysLeft < 2 then "day" else "days"
 
   country: Ember.computed 'model.country', (key, value) ->
     if arguments.length == 2 && value != undefined

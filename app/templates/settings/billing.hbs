@@ -1,12 +1,12 @@
 {{#if account.isTrial}}
   <div class="alert alert-info">
-    There are currently <strong>{{account.trialDaysLeft}}</strong> left on your <strong>{{currentPlan.name}}</strong> trial plan.
+    There are currently <strong>{{account.trialDaysLeft}} {{trialUnit}}</strong> left on your <strong>{{currentPlan.name}}</strong> trial plan.
   </div>
 {{/if}}
 
 {{#if currentUser.account.subscriptionInvalid}}
   <div class="alert">
-    <i class="ss-standard ss-clock"></i> Your subscription has expired. Please {{#link-to "settings.billing"}}upgrade your plan{{/link-to}} to continue using Radium.
+    <i class="ss-standard ss-clock"></i> Your subscription has expired. Please <a href="#" {{action updateBilling}}>upgrade your plan</a> to continue using Radium.
   </div>
 {{/if}}
 {{#if account.isSaving}}
