@@ -42,7 +42,7 @@
   <div class="row-fluid pricing-table-list">
     <table class="table">
     <tbody>
-    {{#each subscriptionPlans itemController="subscriptionPlanItem"}}
+    {{#each activeSubscriptions itemController="subscriptionPlanItem"}}
       <tr {{bind-attr class=":pricing-table isCurrent"}}>
         <td class="title">{{unbound capitalize name}}</td>
         <td class="price blue">

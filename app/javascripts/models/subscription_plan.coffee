@@ -5,3 +5,4 @@ Radium.SubscriptionPlan = Radium.Model.extend
   interval: DS.attr('string')
   currency: DS.attr('string')
   totalUsers: DS.attr('number')
+  disabled: DS.attr('boolean')
