@@ -7,6 +7,9 @@ Radium.Notification = Radium.Model.extend
   email: DS.belongsTo('Radium.Email')
   sentBy: DS.belongsTo('Radium.User')
 
+  timeFormatted: Ember.computed 'time', ->
+    time.toHumanFormatWithTime() if time = @get('time')
+
   reference: ((key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]

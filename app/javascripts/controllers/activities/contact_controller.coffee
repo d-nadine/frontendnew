@@ -7,6 +7,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   isPrimaryContact: Ember.computed.is 'event', 'primary_contact'
   isNewEmail: Ember.computed.is 'event', 'new_email'
   isInfoChange: Ember.computed.is 'event', 'contact_info_change'
+  isOpen: Ember.computed.is 'event', 'open'
 
   contact: Ember.computed.alias 'reference'
   company: Ember.computed.alias 'meta.company'
@@ -23,4 +24,5 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
       when 'contact_info_change' then 'write'
       when 'primary_contact' then 'buildings'
       when 'new_email' then 'mail'
+      when 'open' then 'view'
   ).property('event')
