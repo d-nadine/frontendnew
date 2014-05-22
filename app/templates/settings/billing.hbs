@@ -36,7 +36,7 @@
   {{/if}}
 
   {{#if account.billingInfo.subscriptionEnded}}
-    <strong>Your account has been cancelled and will expire: {{formatDateTime subscriptionEndDate format="calendar"}}</strong>
+    <strong>Your account has been cancelled and will expire: {{formatDateTime account.billingInfo.subscriptionEndDate format="calendar"}}</strong>
   {{/if}}
 
   <div class="row-fluid pricing-table-list">

@@ -12,9 +12,11 @@ Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
-  typeName: ( ->
+  typeName: Ember.computed ->
     @constructor.toString().underscore().split('.').pop().toLowerCase()
-  ).property()
+
+  inErrorState: Ember.computed 'currentState.stateName', ->
+    @get('currentState.stateName') == 'root.error'
 
   reset: ->
     state = if @get('id')
