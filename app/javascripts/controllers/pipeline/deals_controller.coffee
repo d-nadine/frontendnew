@@ -22,7 +22,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
     Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
     Ember.bind(this, 'selectedFilter', 'parentController.parentController.selectedFilter')
 
-  resultsDidChange: ( ->
+  resultsDidChange: Ember.observer('arrangedContent.[]', 'selectedFilter', 'searchText', ->
     unless parentController = @get('parentController')
       return
 
@@ -36,7 +36,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
       parentController.set('hide', false)
     else
       parentController.set('hide', true)
-  ).observes('arrangedContent.[]', 'selectedFilter', 'searchText').on('init')
+  ).on('init')
 
   sortFunc: (a, b) ->
     sort = @get('sort')
@@ -67,7 +67,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
     Ember.compare left.get(sort), right.get(sort)
 
-  arrangedContent: ( ->
+  arrangedContent: Ember.computed 'content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending', ->
     content = @get('content')
     sortFunc = @sortFunc.bind this
 
@@ -90,7 +90,6 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
                     ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
     content.toArray().sort(sortFunc)
-  ).property('content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending')
 
   dealValues: Ember.computed.mapBy 'arrangedContent', 'value'
   total: Ember.computed.sum 'dealValues'

@@ -8,18 +8,16 @@ Radium.ForwardEmailForm = Radium.EmailForm.extend
     @set('subject', "FWD: #{@get('email.subject')}")
     message = """
     >>>> Forward Email
-    #{@get('email.message')}
+    #{@get('email.message') || @get('email.html')}
     """
     @set('message', message)
 
-  defaults: (->
-    subject: '' 
+  defaults: Ember.computed 'email', ->
+    subject: ''
     message: ''
     to: []
     cc: []
     bcc: []
-  ).property('email')
 
-  isValid: ( ->
+  isValid: Ember.computed 'to.[]', 'subject', 'message', ->
     @get('to.length') && @get('subject') && @get('message.length')
-  ).property('to.[]', 'subject', 'message')
