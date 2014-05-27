@@ -5,7 +5,6 @@ Radium.UserController = Radium.ObjectController.extend
   loadedPages: [1]
 
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
-  stats: ['stuff', 'crap']
   isEditable: true
   isEditing: false
 

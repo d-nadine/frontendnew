@@ -176,7 +176,8 @@ Radium.RESTAdapter.configure('plurals',{
   settings: 'settings',
   user_settings: 'user_settings',
   activity: 'activities',
-  destroy: 'destroy'
+  destroy: 'destroy',
+  user_statistics: 'user_statistics'
 });
 
 Radium.RESTAdapter.registerTransform('object', {

@@ -12,6 +12,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   activities: DS.hasMany('Radium.Activity', inverse: 'user')
 
+  statistics: Ember.computed ->
+    Radium.UserStatistics.find(@get('id'))
+  
   firstName: DS.attr('string')
   lastName: DS.attr('string')
   title: DS.attr('string')

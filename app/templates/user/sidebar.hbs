@@ -77,18 +77,36 @@
     </div>
     <div class="sidebar-panel-content">
       <table class="table totals">
-      <tbody>
-        {{#each stats}}
+        <tbody>
           <tr>
-            <td>
-              {{this}}
-            </td>
-            <td>
-              Value
-            </td>
+            <td>Closed Deals</td>
+            <td>{{statistics.closedDeals}}</td>
           </tr>
-        {{/each}}
-      </tbody>
+          <tr>
+            <td>Deals in Pipeline</td>
+            <td>{{statistics.inPipeline}}</td>
+          </tr>
+          <tr>
+            <td>Emails Sent</td>
+            <td>{{statistics.emailsSent}}</td>
+          </tr>
+          <tr>
+            <td>Meetings Created</td>
+            <td>{{statistics.meetingsCreated}}</td>
+          </tr>
+          <tr>
+            <td>Average Deal Size</td>
+            <td>${{statistics.averageDealSize}}</td>
+          </tr>
+          <tr>
+            <td>Contacts Added</td>
+            <td>{{statistics.contactsAdded}}</td>
+          </tr>
+          <tr>
+            <td>Total $$$ in Pipeline</td>
+            <td>${{statistics.pipelineTotal}}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="sidebar-panel-content">
