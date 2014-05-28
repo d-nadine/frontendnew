@@ -3,6 +3,6 @@ Radium.UserStatistics = Radium.Model.extend
   inPipeline: DS.attr('number')
   emailsSent: DS.attr('number')
   meetingsCreated: DS.attr('number')
-  averageDealSize: DS.attr('number')
+  averageClosedDealSize: DS.attr('number')
   contactsAdded: DS.attr('number')
-  pipelineTotal: DS.attr('number')
+  activePipelineTotal: DS.attr('number')
