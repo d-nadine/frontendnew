@@ -83,38 +83,7 @@
       </h6>
     </div>
     <div class="sidebar-panel-content">
-      <table class="table totals">
-        <tbody>
-          <tr>
-            <td>Closed Deals</td>
-            <td>{{statistics.closedDeals}}</td>
-          </tr>
-          <tr>
-            <td>Deals in Pipeline</td>
-            <td>{{statistics.inPipeline}}</td>
-          </tr>
-          <tr>
-            <td>Emails Sent</td>
-            <td>{{statistics.emailsSent}}</td>
-          </tr>
-          <tr>
-            <td>Meetings Created</td>
-            <td>{{statistics.meetingsCreated}}</td>
-          </tr>
-          <tr>
-            <td>Average Closed Deal Size</td>
-            <td>${{statistics.averageClosedDealSize}}</td>
-          </tr>
-          <tr>
-            <td>Contacts Added</td>
-            <td>{{statistics.contactsAdded}}</td>
-          </tr>
-          <tr>
-            <td>Active Pipeline Total</td>
-            <td>${{statistics.activePipelineTotal}}</td>
-          </tr>
-        </tbody>
-      </table>
+      {{user-statistics statistics=statistics}}
     </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
