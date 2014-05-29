@@ -75,6 +75,16 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        Cumulative Statistics
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{user-statistics statistics=userStatistics}}
+    </div>
     <div class="sidebar-panel-content">
       <div class="deal-links">
         {{#link-to "deals.fromUser" this class="btn btn-block btn-large btn-primary"}}

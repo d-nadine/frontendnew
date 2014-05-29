@@ -12,6 +12,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   activities: DS.hasMany('Radium.Activity', inverse: 'user')
 
+  userStatistics: DS.belongsTo('Radium.UserStatistics')
+  
   firstName: DS.attr('string')
   lastName: DS.attr('string')
   title: DS.attr('string')
