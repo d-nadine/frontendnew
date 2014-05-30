@@ -212,10 +212,10 @@ Radium.ReportsController = Ember.ArrayController.extend
       @set 'selectedQuarter', quarter
 
       switch quarter
-        when "Q1" then @setDates(new Date(2013, 0, 1), new Date(2013, 2, 31))
-        when "Q2" then @setDates(new Date(2013, 3, 1), new Date(2013, 5, 30))
-        when "Q3" then @setDates(new Date(2013, 6, 1), new Date(2013, 8, 30))
-        when "Q4" then @setDates(new Date(2013, 9, 1), new Date(2013, 11, 31))
+        when "Q1" then @setDates(new Date(2014, 0, 1), new Date(2014, 2, 31))
+        when "Q2" then @setDates(new Date(2014, 3, 1), new Date(2014, 5, 30))
+        when "Q3" then @setDates(new Date(2014, 6, 1), new Date(2014, 8, 30))
+        when "Q4" then @setDates(new Date(2014, 9, 1), new Date(2014, 11, 31))
         else @send('filterByYear', new Date())
       
       @calcSums()
