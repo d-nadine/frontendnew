@@ -209,6 +209,7 @@ Radium.ReportsController = Ember.ArrayController.extend
 
     filterByQuarter: (quarter) ->
       @get('quarter').filter(quarter)
+      @get('deal').filter()
       @set 'selectedQuarter', quarter
 
       switch quarter
