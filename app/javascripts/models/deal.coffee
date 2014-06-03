@@ -15,7 +15,6 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   activities: DS.hasMany('Radium.Activity')
 
   contact: DS.belongsTo('Radium.Contact', inverse: 'deals')
-  user: DS.belongsTo('Radium.User')
   checklist: DS.hasMany('Radium.ChecklistItem')
 
   contacts: DS.hasMany('Radium.Contact')
