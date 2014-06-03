@@ -5,7 +5,8 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
   Radium.ChecklistTotalMixin,
 
-  statusLastChangedAt: DS.attr('date')
+  statusLastChangedAt: DS.attr('datetime')
+  expectedCloseDate: DS.attr('datetime')
   user: DS.belongsTo('Radium.User')
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')

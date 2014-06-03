@@ -27,6 +27,9 @@
       <th class="value">
         {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
       </th>
+      <th class="expected-close-date">
+        {{table-sorter heading="Expected Close" sortOn="expectedCloseDate" sort="sortDeals"}}
+      </th>
       <th class="delete">&nbsp;</th>
     </tr>
   </thead>
@@ -69,6 +72,10 @@
           <a href="#" {{action "showChecklist" this bubbles=false}}>{{percentage}}%</a>
         </td>
         <td class="value">{{currency value}}</td>
+        <td class="expected-close-date">
+          {{formatDateTime expectedCloseDate format=date}}
+        </td>
+
         <td class="delete text-right">
           {{partial 'search/delete'}}
         </td>
