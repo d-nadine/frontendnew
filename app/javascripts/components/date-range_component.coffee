@@ -39,7 +39,6 @@ Radium.DateRangeComponent = Ember.Component.extend
 
     context = @svgContext = svg.append("g")
       .attr("class", "context")
-      .attr("transform", "translate(#{(margin.left + width * .25)}, 0)")
 
     context.append("g")
       .attr("class", "x axis top")
@@ -66,8 +65,6 @@ Radium.DateRangeComponent = Ember.Component.extend
 
     @svg.attr("width", width - 5)
         .attr("height", height)
-    @svgContext.attr("transform", "translate(#{(width * .25)})")
-
 
   redraw: ->
     @setDimensions()
