@@ -185,6 +185,13 @@
   .deal-button {
     width: percentage(148px / $base-width);
   }
+
+  .expected-close-date {
+    width: percentage(200px / $base-width);
+    i.ss-dropdown {
+      right: -38px;
+    }
+  }
 }
 
 .pipeline-workflow-deals-row {
