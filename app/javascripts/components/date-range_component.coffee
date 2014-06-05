@@ -71,7 +71,6 @@ Radium.DateRangeComponent = Ember.Component.extend
     startDate = @get('startDate')
     endDate = @get('endDate')
     domain = @get('domain')
-    console.log('domain in didChange', domain)
     domainStart = Ember.DateTime.create(domain[0].getTime())
     domainEnd = Ember.DateTime.create(domain[1].getTime())
 
