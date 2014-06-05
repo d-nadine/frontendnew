@@ -1,25 +1,23 @@
 require 'forms/form'
 
 Radium.TodoForm = Radium.Form.extend
-  data: ( ->
+  data: (Ember.computed ->
     user: @get('user')
     finishBy: @get('finishBy')
     reference: @get('reference')
     description: @get('description')
-  ).property().volatile()
+  ).volatile()
 
-  type: ( ->
+  type: Ember.computed ->
     if this.constructor is Radium.TodoForm then Radium.Todo else Radium.Call
-  ).property()
 
   reset: ->
     @_super.apply this, arguments
     @set 'description', ''
     @set('submitForm', false)
 
-  isBulk: ( ->
+  isBulk: Ember.computed 'reference', ->
     Ember.isArray @get('reference')
-  ).property('reference')
 
   commit: ->
     promise = Ember.Deferred.promise (deferred) =>
