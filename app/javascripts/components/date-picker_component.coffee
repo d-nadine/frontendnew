@@ -36,8 +36,8 @@ Radium.DatePickerComponent = Ember.Component.extend
 
   isInvalid: Ember.computed 'date', 'isSubmitted', ->
     return false unless @get('isSubmitted')
-    return false if Ember.isEmpty(@get('text'))
-    return false unless @get('date')
+    return true if Ember.isEmpty(@get('text'))
+    return true unless @get('date')
 
     @get('date').isBeforeToday()
 

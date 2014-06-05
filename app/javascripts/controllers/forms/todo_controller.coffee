@@ -103,6 +103,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   isValid: Ember.computed 'description.length', 'finishBy', 'user', 'model.submitForm', ->
     return if Ember.isEmpty(@get('description').trim())
+    return unless @get('finishBy')
     return if @get('finishBy').isBeforeToday()
     return unless @get('user')
 
