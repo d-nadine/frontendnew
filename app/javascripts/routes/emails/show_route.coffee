@@ -26,11 +26,11 @@ Radium.EmailsShowRoute = Radium.Route.extend Radium.SaveEmailMixin,
         form.reset()
 
         Ember.run.next =>
-          @transitionTo 'emails.show', 'sent', reply
+          @transitionTo 'emails.sent', reply
 
       reply.one 'becameInvalid', =>
         @send 'flashError', reply
-        reply.reset() 
+        reply.reset()
 
       reply.one 'becameError', =>
         @send 'flashError', 'An error has occurred and the eamil has not been sent'

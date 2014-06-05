@@ -16,7 +16,7 @@ Radium.ReplyForm = Radium.EmailForm.extend
 
     currentUser = @get('currentUser')
     @get('repliedTo.toList').forEach (person) =>
-      if person != @get('currentUser') && person.get('repliedTo')?.toLowerCase() != @get('currentUser.repliedTo')?.toLowerCase()
+      if person != @get('currentUser') && person.get('email')?.toLowerCase() != @get('currentUser.email')?.toLowerCase()
         @get('to').pushObject(person)
 
     @get('to').pushObject(@get('repliedTo.sender'))

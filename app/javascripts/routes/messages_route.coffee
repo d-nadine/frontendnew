@@ -175,7 +175,8 @@ Radium.MessagesIndexRoute = Radium.Route.extend
 
     item = model.get('firstObject')
 
+    folder = @controllerFor('messages').get('folder')
     if item instanceof Radium.Email
-      @transitionTo 'emails.show', item
+      @transitionTo 'emails.show', folder, item
     else if item instanceof Radium.Discussion
       @transitionTo 'messages.discussion', item
