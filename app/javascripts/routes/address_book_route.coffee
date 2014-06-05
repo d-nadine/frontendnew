@@ -14,10 +14,10 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
     addressBookProxy
 
   deactivate: ->
-    model = @controllerFor('addressbook').get('model')
-    model.destroy()
-    model = null
-    @currentModel = null
+    if addressBookContent = @modelFor('addressbook')
+      addressBookContent.set('searchText', '')
+
+    @controllerFor('externalcontacts').set 'searchText', ''
 
 Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: (params) ->

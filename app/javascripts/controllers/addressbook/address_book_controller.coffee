@@ -74,27 +74,23 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     {name: 'exclude', text: 'Excluded from Pipeline'}
   ]
 
-  additionalFilterDisabled: ( ->
+  additionalFilterDisabled: Ember.computed 'model.additionalFilter', 'model.selectedFilter', ->
     return true if @get('isCompanies')
     selectedFilter = @get('model.selectedFilter') 
     if selectedFilter == 'private'
       @set 'model.additionalFilter', null
       return true
-  ).property('model.additionalFilter', 'model.selectedFilter')
 
-  isPrivateContacts: ( ->
+  isPrivateContacts: Ember.computed 'model.selectedFilter', ->
     @get('model.selectedFilter') == 'private'
-  ).property('model.selectedFilter')
 
-  isCompanies: ( ->
+  isCompanies: Ember.computed 'model.selectedFilter', ->
     @get('model.selectedFilter') == 'companies'
-  ).property('model.selectedFilter')
 
-  isTags: ( ->
+  isTags: Ember.computed 'model.selectedFilter', ->
     @get('model.selectedFilter') == 'tags'
-  ).property('model.selectedFilter')
 
-  showEmptyAddressBookButton: ( -> 
+  showEmptyAddressBookButton: Ember.computed 'isPrivateContacts', 'content.[]', 'filter', ->
     return false if @get('isPrivateContacts')
     filter = @get('model.selectedFilter')
 
@@ -103,27 +99,24 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     not @get('content.content')
       .filter((item) -> 
         item.constructor is Radium.Contact && not item.get('isPersonal'))?.length
-  ).property('isPrivateContacts', 'content.[]', 'filter')
 
-  assignableContent: ( ->
+  assignableContent: Ember.computed 'checkedContent.[]', ->
     checkedContent = @get('checkedContent')
 
     return unless checkedContent.get('length')
 
     checkedContent.some (item) ->
       item instanceof Radium.Contact || item instanceof Radium.Company
-  ).property('checkedContent.[]')
 
   showAddTags: Ember.computed.equal('activeForm', 'addTags')
 
   addTagsForm: Radium.computed.newForm('addTags')
 
-  addTagsFormDefaults: ( ->
+  addTagsFormDefaults: Ember.computed 'checkedContent.[]', ->
     tagNames: Ember.A()
     selectedContent: @get('checkedContent')
-  ).property('checkedContent.[]')
 
-  hasContacts: ( ->
+  hasContacts: Ember.computed 'checkedContent.[]', ->
     return false if @get('isPrivateContacts')
 
     checkedContent = @get('checkedContent')
@@ -132,7 +125,6 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
 
     checkedContent.some (item) ->
       item instanceof Radium.Contact
-  ).property('checkedContent.[]')
 
   changeFilter: (filter) ->
     @set('currentPage', 1)

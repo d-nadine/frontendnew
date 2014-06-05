@@ -2,9 +2,8 @@ require 'lib/radium/groupable'
 require 'lib/radium/groupable_with_defaults'
 
 WorkflowGroup = Ember.ArrayProxy.extend
-  title: (->
+  title: Ember.computed 'firstObject.status', ->
     @get('firstObject.status')
-  ).property('firstObject.status')
 
 # FIXME: this should be an Ember.Object. The PipelineController
 # has to each into content since properties on an array proxy
@@ -13,7 +12,7 @@ WorkflowGroup = Ember.ArrayProxy.extend
 Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
   content: []
   settings: null
-  workflowStates: ( ->
+  workflowStates: Ember.computed 'settings.model', 'settings.dealStates.[]', ->
     statuses = @get('settings.dealStates')
 
     statuses.forEach (state) =>
@@ -23,46 +22,39 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
             deal.get('status') == state
 
     statuses
-  ).property('settings.model', 'settings.dealStates.[]')
 
-  workflowDeals: (->
+  workflowDeals: Ember.computed 'workflowStates.[]', 'workflowDeals.[]', 'workflowDeals.@each.status', ->
     statuses = @get 'workflowStates'
 
     return unless statuses
 
     Radium.Deal.filter (deal) ->
       statuses.indexOf(deal.get('status')) != -1
-  ).property('workflowStates.[]', 'workflowDeals.[]', 'workflowDeals.@each.status')
 
-  workflowGroups: (->
+  workflowGroups: Ember.computed 'workflowDeals.[]', ->
     deals = @get 'workflowDeals'
     return unless deals
 
     states = @get('settings.dealStates')
 
     @group deals, states
-  ).property('workflowDeals.[]')
 
   groupType: WorkflowGroup
 
   groupBy: (deal) ->
     deal.get('status')
 
-  workflowTotal: (->
+  workflowTotal: Ember.computed 'workflowDeals.length', ->
     @get 'workflowDeals.length'
-  ).property('workflowDeals.length')
 
-  closed: (->
+  closed: Ember.computed 'closed.[]', ->
     Radium.Deal.filter (deal) ->
       deal.get('status') == 'closed'
-  ).property('closed.[]')
 
-  lost: (->
+  lost: Ember.computed 'lost.[]', ->
     Radium.Deal.filter (deal) ->
       deal.get('status') == 'lost'
-  ).property('lost.[]')
 
-  unpublished: (->
+  unpublished: Ember.computed 'unpublished.[]', ->
     Radium.Deal.filter (deal) ->
       deal.get('status') == 'unpublished'
-  ).property('unpublished.[]')

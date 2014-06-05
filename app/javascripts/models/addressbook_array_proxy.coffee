@@ -28,7 +28,7 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     @set 'content', []
     @set 'additionalFilter', null
 
-  arrangedContent: (->
+  arrangedContent: Ember.computed 'content.[]', 'selectedFilter', 'searchText', 'additionalFilter', ->
     content = @get('content')
     return unless content
 
@@ -54,7 +54,6 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
 
     # FIXME: how are we sorting?
     content.sort @sortResults.bind(this)
-  ).property('content.[]', 'selectedFilter', 'searchText', 'additionalFilter')
 
   sortResults: (left, right) ->
     Ember.compare left.get('name'), right.get('name')

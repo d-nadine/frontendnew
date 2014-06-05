@@ -26,6 +26,8 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
       @trigger 'hideModal'
 
+      self = this
+
       # FIXME: should not have to call Ember.run.next
       createContact.one 'didCreate', =>
         Ember.run.next =>
@@ -44,7 +46,7 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
       @get('store').commit()
 
-  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'leadStatuses']
+  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'leadStatuses', 'addressbook']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
   companies: Ember.computed.alias 'controllers.companies'
@@ -53,30 +55,26 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null
 
-  name: ( (key, value)->
+  name: Ember.computed 'model.name', (key, value)->
     if arguments.length == 2 && @get('model').constructor isnt Radium.Contact
       @set('model.name', value)
     else
       return @get('model.name') if @get('model.name.length')
 
       @get('model.name') || @get('model.displayName')
-  ).property('model.name')
 
-  modelDidChange: ( ->
+  modelDidChange: Ember.computed 'model', ->
     return if @get('form') || !@get('model')
 
     @set 'form', @get('model') if @get('model.isNew')
-  ).observes('model')
 
-  contactDeals: ( ->
+  contactDeals: Ember.computed 'model', ->
     return if !@get('model') || @get('model.isNew')
     return unless @get('model.isLead')
 
     # FIXME: Is there a better way?
     Radium.Deal.all().filter (deal) =>
       deal.get('status') != 'lost' && deal.get('contact') == @get('model')
-  ).property('model')
 
-  isNewLead: ( ->
+  isNewLead: Ember.computed 'model.isNew', 'status', ->
     @get('model.isNew') && @get('status') == 'pipeline'
-  ).property('model.isNew', 'status')
