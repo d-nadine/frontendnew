@@ -13,12 +13,12 @@ Radium.ReportsController = Ember.ArrayController.extend
   ).property()
   startDate: Ember.DateTime.create(),
   endDate: Ember.DateTime.create(),
-  defaultYear: Ember.computed.alias('app.today.year')
-  currentYear: Ember.computed.defaultTo('defaultYear')
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
   defaultSelectedCompany: 'All Companies'
   selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
+
+  currentYear: 2014
 
   setupCrossfilter: ->
     today = @get('app.today').toJSDate()
@@ -206,7 +206,7 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('quarter').filter(quarter)
       @get('deal').filter()
 
-      year = 2014
+      year = @get('currentYear')
       switch quarter
         when "Q1" then @setDates(new Date(year, 0, 1), new Date(year, 2, 31))
         when "Q2" then @setDates(new Date(year, 3, 1), new Date(year, 5, 30))
