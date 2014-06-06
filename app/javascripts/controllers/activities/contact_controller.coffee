@@ -14,7 +14,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   status: Ember.computed.alias 'meta.status'
   assignedTo: Ember.computed.alias 'meta.user'
 
-  icon: (->
+  icon: Ember.computed 'event', ->
     switch @get('event')
       when 'create' then 'star'
       when 'update' then 'write'
@@ -25,4 +25,3 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
       when 'primary_contact' then 'buildings'
       when 'new_email' then 'mail'
       when 'open' then 'view'
-  ).property('event')

@@ -61,18 +61,17 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
     page_size: pageSize
     user_id: userId
 
-  arrangedContent: ( ->
+  arrangedContent: Ember.computed 'content.[]', ->
     return unless @get('content.length')
 
     @get('content').filter (item) -> item.get('name.length') || item.get('email.length')
-  ).property('content.[]')
 
   isLoading: false
 
-  searchTextDidChange: ( ->
+  searchTextDidChange: Ember.observer 'searchText', ->
     searchText = @get('searchText')
 
-    unless searchText.length
+    unless searchText?.length
       @send 'reset'
       return
 
@@ -89,4 +88,3 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
       @set('content', Ember.A())
       @set("content", people)
       @set('isLoading', false)
-  ).observes('searchText')
