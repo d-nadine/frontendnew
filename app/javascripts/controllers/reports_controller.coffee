@@ -8,7 +8,7 @@ Radium.ReportsController = Ember.ArrayController.extend
   account: Ember.computed.alias 'controllers.account'
   app: Ember.computed.alias 'controllers.application'
   domain: (->
-    date = @get('app.today').toJSDate()
+    date = new Date(@get('currentYear'), '05', '15')
     [d3.time.year.floor(date), d3.time.year.ceil(date)]
   ).property()
   startDate: Ember.DateTime.create(),
