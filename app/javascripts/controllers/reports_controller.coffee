@@ -177,7 +177,6 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('company').filter(null)
       @set 'selectedUser', null
       @calcSums()
-      dc.filterAll()
       dc.redrawAll()
 
     filterThisMonth: ->
