@@ -34,7 +34,7 @@
           fontFamily="ss-symbolicons"}}
       </div>
       <div class="text-center summary-details">
-        <h2>{{status_lead_total}} leads</h2>
+        <h2>{{status_lead_total}} Leads</h2>
         <h4>
           {{currency total_lead}}<br>
           <small>Total in pending deals</small>
@@ -48,14 +48,14 @@
     <div class="summary">
       <div class="infographic">
         {{report-icons 
-          total=status_open_total
+          total=status_negotiating_total
           icon="ss-briefcase"
           fontFamily="ss-standard"}}
       </div>
       <div class="text-center summary-details">
-        <h2>{{status_open_total}} Negotiating</h2>
+        <h2>{{status_negotiating_total}} Negotiating</h2>
         <h4>
-          {{currency total_open}}<br>
+          {{currency total_negotiating}}<br>
           <small>Total in Negotiation at this time period</small>
         </h4>
         <h4 class="hidden">
@@ -155,7 +155,7 @@
         height="250"}}
     </div>
     <div class="col">
-      <h4>{{status_open_total}} deals</h4>
+      <h4>{{status_negotiating_total}} deals</h4>
       {{bar-chart 
         dimension=deal 
         group=deals

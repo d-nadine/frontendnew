@@ -5,6 +5,7 @@ Radium.ReportsRoute = Ember.Route.extend
       json['deals'].forEach (deal) ->
         deal.date = new Date(deal.date)
         deal.total = Number(deal.total)
+        deal.status = deal.status.toLowerCase()
       json['deals']
 
   setupController: (controller, model) ->

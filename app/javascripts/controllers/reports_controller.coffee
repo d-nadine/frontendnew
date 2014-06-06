@@ -212,17 +212,18 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('deal').filter()
       @set 'selectedQuarter', quarter
 
+      year = 2014
       switch quarter
-        when "Q1" then @setDates(new Date(2014, 0, 1), new Date(2014, 2, 31))
-        when "Q2" then @setDates(new Date(2014, 3, 1), new Date(2014, 5, 30))
-        when "Q3" then @setDates(new Date(2014, 6, 1), new Date(2014, 8, 30))
-        when "Q4" then @setDates(new Date(2014, 9, 1), new Date(2014, 11, 31))
-        else @send('filterByYear', new Date())
+        when "Q1" then @setDates(new Date(year, 0, 1), new Date(year, 2, 31))
+        when "Q2" then @setDates(new Date(year, 3, 1), new Date(year, 5, 30))
+        when "Q3" then @setDates(new Date(year, 6, 1), new Date(year, 8, 30))
+        when "Q4" then @setDates(new Date(year, 9, 1), new Date(year, 11, 31))
+        else @send('filterByYear')
       
       @calcSums()
       dc.redrawAll()
 
-    filterByYear: (year) ->
+    filterByYear: ->
       date = new Date()
       start = d3.time.year.floor(date)
       end = d3.time.year.ceil(date)
