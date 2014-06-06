@@ -37,22 +37,19 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   deal: DS.belongsTo('Radium.Deal')
   repliedTo: DS.belongsTo('Radium.Email')
 
-  isScheduled: ( ->
+  isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')
-  ).property('isDraft', 'sendTime')
 
-  sender: ( ->
+  sender: Ember.computed '_senderUser', '_senderContact', ->
     @get('_senderUser') ||
     @get('_senderContact')
-  ).property('_senderUser', '_senderContact')
 
   _senderUser: DS.belongsTo('Radium.User')
   _senderContact: DS.belongsTo('Radium.Contact')
 
-  senderArray: (->
+  senderArray: Ember.computed 'sender', ->
     Ember.ArrayProxy.create
       content: [ @get('sender') ]
-  ).property('sender')
 
   toList: Radium.computed.aggregate('toUsers', 'toContacts')
   ccList: Radium.computed.aggregate('ccUsers', 'ccContacts')
