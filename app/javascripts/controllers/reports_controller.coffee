@@ -17,8 +17,6 @@ Radium.ReportsController = Ember.ArrayController.extend
   currentYear: Ember.computed.defaultTo('defaultYear')
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
-  defaultSelectedQuarter: 'All Quarters'
-  selectedQuarter: Ember.computed.defaultTo('defaultSelectedQuarter')
   defaultSelectedCompany: 'All Companies'
   selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
 
@@ -164,7 +162,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     filterByDate: (date) ->
       if date
         @get('quarter').filter(null)
-        @set 'selectedQuarter', null
         @get('deal').filter(date)
         @setDates(date[0], date[1])
         @calcSums()
@@ -179,7 +176,6 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('status').filter(null)
       @get('company').filter(null)
       @set 'selectedUser', null
-      @set 'selectedQuarter', null
       @calcSums()
       dc.filterAll()
       dc.redrawAll()
@@ -190,7 +186,6 @@ Radium.ReportsController = Ember.ArrayController.extend
       end = d3.time.month.ceil(day)
       @get('deal').filter([start, end])
       @get('quarter').filter(null)
-      @set 'selectedQuarter', null
       @setDates(start, end)
       @calcSums()
       dc.redrawAll()
@@ -210,7 +205,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     filterByQuarter: (quarter) ->
       @get('quarter').filter(quarter)
       @get('deal').filter()
-      @set 'selectedQuarter', quarter
 
       year = 2014
       switch quarter
