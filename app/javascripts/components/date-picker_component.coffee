@@ -27,6 +27,8 @@ Radium.DatePickerComponent = Ember.Component.extend
     ':datepicker-control-box'
   ]
 
+  isEditable: true
+
   leader: 'Due'
 
   textBinding: 'textToDateTransform'
@@ -103,7 +105,7 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if @isDestroyed
 
       @set('pickerShown', false)
- 
+
     willDestroyElement: ->
       @_super.apply this, arguments
       @removeObserver 'value', this, 'valueDidChange'

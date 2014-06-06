@@ -58,10 +58,7 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="date-picker">
-        {{date-picker date=model.expectedCloseDate leader="" class="field"}}
-        <button class="btn btn-primary picker-submit" {{action "save"}}>
-          OK
-        </button>
+        {{render 'sidebar/date_picker' model}}
       </div>
     </div>
   </div>

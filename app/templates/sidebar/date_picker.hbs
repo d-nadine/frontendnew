@@ -1,0 +1,11 @@
+{{#if isEditing}}
+  {{date-picker date=model.expectedCloseDate leader="" class="field" focus-out="stopEditing"}}
+  <button class="btn btn-primary picker-submit" {{action "stopEditing"}}>
+    OK
+  </button>
+{{else}}
+  <div class="deal-status">
+    <p>{{formatDateTime model.expectedCloseDate format="calendar"}}</p>
+    <i class="ss-standard ss-write pull-right" {{action "startEditing"}}></i>
+  </div>
+{{/if}}
