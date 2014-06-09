@@ -170,6 +170,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 });
 
 Radium.RESTAdapter.configure('plurals',{
+  reply: 'replies',
   company: 'companies',
   user_invitation_delivery: 'user_invitation_deliveries',
   autocomplete_item: 'autocomplete',

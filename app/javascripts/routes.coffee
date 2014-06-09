@@ -10,8 +10,6 @@ Radium.Router.reopen
 
 Radium.Router.map ->
   @resource 'messages', path: '/messages/:folder', ->
-    @route 'email', path: '/emails/:email_id'
-    @route 'discussion', path: '/discussions/:discussion_id'
     @route 'bulk_actions'
     @resource 'emails', ->
       @route 'show', path: '/:email_id'

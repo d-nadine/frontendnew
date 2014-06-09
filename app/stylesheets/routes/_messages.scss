@@ -261,6 +261,11 @@ $item-border: #dddddd;
   line-height: 28px;
 }
 
+.thread {
+  position: relative;
+  top: 4px;
+}
+
 .message-item-actions {
   i {
     color: $muted;
