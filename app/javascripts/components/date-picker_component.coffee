@@ -16,6 +16,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       @toggleProperty 'pickerShown'
 
       false
+    confirmEdit: ->
+      @sendAction "confirmEdit"
 
   pickerShown: false
 

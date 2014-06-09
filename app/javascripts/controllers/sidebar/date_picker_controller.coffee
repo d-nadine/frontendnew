@@ -13,9 +13,8 @@ Radium.DatePickerForm = Radium.Form.extend
 
 Radium.SidebarDatePickerController = Radium.SidebarBaseController.extend
   actions:
-    actions:
-      setForm: ->
-        @set 'form.expectedCloseDate', @get('model.expectedCloseDate')
+    setForm: ->
+      @set 'form.expectedCloseDate', @get('model.expectedCloseDate')
   form: ( ->
     Radium.DatePickerForm.create()
   ).property()
