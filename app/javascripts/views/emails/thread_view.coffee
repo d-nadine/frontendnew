@@ -1,2 +1,1 @@
-Radium.EmailsShowView = Radium.View.extend()
-  
+Radium.EmailsThreadView = Radium.View.extend()

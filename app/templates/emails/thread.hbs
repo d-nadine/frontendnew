@@ -1,5 +1,5 @@
 <div class="email-history">
-  {{#each visibleContent itemController="emailThreadItem"}}
+  {{#each visibleContent itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}
         {{render "emails/item" this}}
     {{else}}
