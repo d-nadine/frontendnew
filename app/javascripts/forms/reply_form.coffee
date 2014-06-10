@@ -14,14 +14,16 @@ Radium.ReplyForm = Radium.EmailForm.extend
 
     @set 'subject', subject
 
-    currentUser = @get('currentUser')
-    @get('repliedTo.toList').forEach (person) =>
-      if person != @get('currentUser') && person.get('email')?.toLowerCase() != @get('currentUser.email')?.toLowerCase()
-        @get('to').pushObject(person)
+    to = @get('repliedTo.toList').slice()
 
-    sender = @get('repliedTo.sender')
+    to.pushObject(@get('repliedTo.sender'))
 
-    @get('to').pushObject() unless sender.get('email') == currentUser.get('email')
+    currentUserEmail = @get('currentUser.email')?.toLowerCase()
+
+    to = to.reject (person) ->
+      person.get('email').toLowerCase() == currentUserEmail
+
+    @set('to', to)
 
   defaults: Ember.computed 'repliedTo', 'repliedTo.subject', 'repliedTo.toList.[]', ->
     subject: ''

@@ -29,7 +29,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('deal', null)
     @_super.apply this, arguments
 
-  data: ( ->
+  data: Ember.computed( ->
     subject: @get('subject')
     message: @get('message')
     sentAt: Ember.DateTime.create()
@@ -53,11 +53,10 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     bucket: @get('bucket')
 
     deal: @get('deal')
-  ).property().volatile()
+  ).volatile()
 
-  isValid: ( ->
+  isValid: Ember.computed 'to.[]', 'message', ->
     @get('to.length') && @get('message.length')
-  ).property('to.[]', 'message')
 
 Radium.DraftEmailForm = Radium.EmailForm.extend
   reset: ->
