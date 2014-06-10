@@ -18,7 +18,11 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
   iFrameContainerSelector +=  " .iframe-container"
 
   if !email.get('message')?.length && !email.get('html')?.length
-    $('#email-body-iframe').remove()
+    Ember.run.next ->
+      iFrameContainer = $(iFrameContainerSelector)
+
+      iFrameContainer.children('iframe').remove()
+
     return new Handlebars.SafeString("<p>(No Message)</p>")
 
   if email.get('html')?.length

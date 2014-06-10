@@ -1,3 +1,5 @@
+require 'routes/emails/base_show_route'
+
 Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
   setupController: (controller, model) ->
     model.set 'isRead', true
