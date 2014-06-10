@@ -1,18 +1,3 @@
-window.setIframeHeight = (id) ->
-  ifrm = document.getElementById(id)
-  doc = (if ifrm.contentDocument then ifrm.contentDocument else ifrm.contentWindow.document)
-  ifrm.style.visibility = "hidden"
-  ifrm.style.height = "10px"
-  ifrm.style.height = getDocHeight(doc) + 4 + "px"
-  ifrm.style.visibility = "visible"
-
-window.getDocHeight = (doc) ->
-  doc = doc or document
-  body = doc.body
-  html = doc.documentElement
-  height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
-  height
-
 Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
   iFrameContainerSelector = ".email-history [data-id='#{email.get('id')}']"
   iFrameContainerSelector +=  " .iframe-container"
@@ -39,13 +24,22 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
   Ember.run.next ->
     iFrameContainer = $(iFrameContainerSelector)
     $('#email-body-iframe', iFrameContainer).remove()
+
     iFrameContainer.append """
       <iframe id="email-body-iframe" src=""></iframe>
     """
 
-    iFrame = iFrameContainer.children('iframe')
+    $iFrame = iFrameContainer.children('iframe')
+    iFrame = $iFrame.get(0)
 
-    iFrame.get(0).contentWindow.document.write text
-    setIframeHeight 'email-body-iframe'
+    iFrame.contentWindow.document.write text
+
+    if replies = $iFrame.contents().find('.gmail_quote')
+      replies.remove()
+
+    iFrame.style.visibility = "hidden"
+    iFrame.style.height = "10px"
+    iFrame.style.height = $iFrame.contents().height() + "px"
+    iFrame.style.visibility = "visible"
 
   return ""
