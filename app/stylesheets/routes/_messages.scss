@@ -198,10 +198,11 @@ $item-border: #dddddd;
 .message-item-details {
   margin-left: 80px;
 
-  .badge {
+  .badge.thread {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;
+    background-color: #0088cc;
   }
 }
 
