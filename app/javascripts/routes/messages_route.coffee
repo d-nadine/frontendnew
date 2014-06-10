@@ -52,12 +52,12 @@ Radium.MessagesRoute = Radium.Route.extend
     selectItem: (item) ->
       folder = @controllerFor('messages').get('folder')
 
-      if item instanceof Radium.Email
-        @transitionTo 'emails.show', folder, item
-      else if item instanceof Radium.Discussion
-        @transitionTo 'messages.discussion',folder, item
-      else
-        @transitionTo 'emails.empty', folder
+      route = unless item.get('threadCount')
+                'emails.show'
+              else
+                'emails.thread'
+
+      @transitionTo route, folder, item
 
     selectSearchScope: (item) ->
       @controllerFor('messages').set 'selectedSearchScope', "Search #{item.title}"
@@ -175,7 +175,13 @@ Radium.MessagesIndexRoute = Radium.Route.extend
 
     item = model.get('firstObject')
 
+
+    # FIXME: we should be able to call
+    # @send 'selectItem', item
+    # in a future version of ember??
+    # to remove this duplication
     folder = @controllerFor('messages').get('folder')
+
     if item instanceof Radium.Email
       @transitionTo 'emails.show', folder, item
     else if item instanceof Radium.Discussion

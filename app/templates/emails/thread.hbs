@@ -1,0 +1,10 @@
+<div class="email-history">
+  {{#each visibleContent itemController="emailThreadItem"}}
+    {{#if isLoaded}}
+        {{render "emails/item" this}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
+  {{/each}}
+  {{partial 'shared/show_more'}}
+</div>

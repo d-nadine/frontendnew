@@ -13,6 +13,7 @@ Radium.Router.map ->
     @route 'bulk_actions'
     @resource 'emails', ->
       @route 'show', path: '/:email_id'
+      @route 'thread', path: '/:email_id/thread'
       @route 'empty', path: '/empty'
       @route 'new'
       @route 'edit', path: '/:email_id/edit'

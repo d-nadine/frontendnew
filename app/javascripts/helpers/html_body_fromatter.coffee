@@ -14,6 +14,9 @@ window.getDocHeight = (doc) ->
   height
 
 Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
+  iFrameContainerSelector = ".email-history [data-id='#{email.get('id')}']"
+  iFrameContainerSelector +=  " .iframe-container"
+
   if !email.get('message')?.length && !email.get('html')?.length
     $('#email-body-iframe').remove()
     return new Handlebars.SafeString("<p>(No Message)</p>")
@@ -29,13 +32,16 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
 
   text = text.replace(/<(a)([^>]+)>/ig,"<$1 target=\"_blank\"  $2>")
 
-  Ember.run.next =>
-    $('#email-body-iframe').remove()
-    $('.iframe-container').append """
+  Ember.run.next ->
+    iFrameContainer = $(iFrameContainerSelector)
+    $('#email-body-iframe', iFrameContainer).remove()
+    iFrameContainer.append """
       <iframe id="email-body-iframe" src=""></iframe>
     """
 
-    $('#email-body-iframe')[0].contentWindow.document.write text
+    iFrame = iFrameContainer.children('iframe')
+
+    iFrame.get(0).contentWindow.document.write text
     setIframeHeight 'email-body-iframe'
 
   return ""
