@@ -1,36 +1,51 @@
 Radium.EmailNavComponent = Ember.Component.extend
   actions:
     previous: ->
-      console.log 'pervious'
+      @send 'navigate', false
 
     next: ->
+      @send 'navigate', true
+
+    navigate: (forward) ->
       emailCoords = @getEmailCoords()
 
       unless emailCoords.length
         return
 
       scrollElement = $(window)
-      scrollTop = scrollElement.scrollTop() + 100
+      scrollTop = scrollElement.scrollTop() + 250
 
-      emailCoords.forEach (coord) ->
-        if scrollTop < coord.bottom && coord.index != 0
-          Ember.$.scrollTo(coord.selector, 800, {offset: -100})
+      current = emailCoords.find (coord) ->
+        scrollTop >= coord.top && scrollTop <= coord.bottom
+
+      return unless current
+
+      index = emailCoords.indexOf current
+
+      nextIndex = if forward then (index + 1) else (index - 1)
+
+      unless next = emailCoords[nextIndex]
+        return
+
+      ele = $(next.selector)
+      Ember.$.scrollTo("##{ele.get(0).id}", 800, {offset: -100})
 
   classNameBindings: [':email-nav']
 
   getEmailCoords: ->
-    emails = @get('emails')
+    emails = @get('emails').toArray().sort (a, b) ->
+      Ember.compare b.get('id'), a.get('id')
+
     return unless emails.get('length')
 
     coords = emails.map((email) ->
       selector = ".email-history [data-id='#{email.get('id')}']"
-      outer = $(selector)
-      return unless outer.length
+      ele = $(selector)
+      return unless ele.length
 
-      ele = outer.find('.iframe-container')
       index = emails.indexOf email
-      top  = ele.position().top + $(window).scrollTop()
-      bottom = ele.position().top + ele.outerHeight(true)
+      top  = ele.offset().top
+      bottom = ele.offset().top + ele.outerHeight(true)
 
       index: index
       top: top
