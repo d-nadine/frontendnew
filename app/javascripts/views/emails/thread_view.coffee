@@ -1,2 +1,1 @@
-Radium.EmailsThreadView = Radium.View.extend
-  hasScrolled: false
+Radium.EmailsThreadView = Radium.View.extend(Radium.ScrollTopMixin)
