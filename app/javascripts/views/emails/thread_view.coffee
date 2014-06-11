@@ -1,1 +1,2 @@
-Radium.EmailsThreadView = Radium.View.extend()
+Radium.EmailsThreadView = Radium.View.extend
+  hasScrolled: false
