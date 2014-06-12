@@ -48,9 +48,12 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
         return
 
-      if @get('parentController') instanceof Radium.EmailThreadItemController
-        @get('parentController').send 'deleteEmail', item
-        return false
+      parentController = @get('parentController')
+
+      if parentController instanceof Radium.EmailThreadItemController
+        if item != parentController.get('selectedEmail')
+          parentController.send 'deleteEmail', item
+          return false
 
       @send 'delete', item
 
