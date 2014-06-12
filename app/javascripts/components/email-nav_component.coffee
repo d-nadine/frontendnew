@@ -33,8 +33,7 @@ Radium.EmailNavComponent = Ember.Component.extend
   classNameBindings: [':email-nav']
 
   getEmailCoords: ->
-    emails = @get('emails').toArray().sort (a, b) ->
-      Ember.compare b.get('id'), a.get('id')
+    emails = @get('emails')
 
     return unless emails.get('length')
 

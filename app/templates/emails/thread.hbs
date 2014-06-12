@@ -1,6 +1,10 @@
 <div class="email-history">
-  {{email-nav emails=visibleContent}}
-  {{#each visibleContent itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
+  {{#if isLoading}}
+    {{partial 'is_loading'}}
+  {{else}}
+    {{email-nav emails=visibleContent}}
+  {{/if}}
+  {{#each sortedReplies itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}
       {{render "emails/item" this}}
     {{else}}

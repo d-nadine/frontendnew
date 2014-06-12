@@ -48,6 +48,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
         return
 
+      if @get('parentController') instanceof Radium.EmailThreadItemController
+        @get('parentController').send 'deleteEmail', item
+        return false
+
       @send 'delete', item
 
     cancelCheckForResponse: (email) ->

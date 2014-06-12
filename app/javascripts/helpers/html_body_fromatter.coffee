@@ -35,7 +35,7 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     iFrame.contentWindow.document.write text
 
     if replies = $iFrame.contents().find('.gmail_quote')
-      replies.remove()
+      replies.remove() if replies.length
 
     iFrame.style.visibility = "hidden"
     iFrame.style.height = "10px"
