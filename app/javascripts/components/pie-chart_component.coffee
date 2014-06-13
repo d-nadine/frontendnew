@@ -22,12 +22,13 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
     chart = @get 'chart'
 
     chart
-      .width(@get('size'))
-      .height(@get('size'))
+      .width(@get('radius')*2)
+      .height(@get('radius')*2)
       .radius(@get('radius'))
       .dimension(@get('dimension'))
       .group(@get('group'))
-      .renderLabel(@get('renderLabel'))
+      .renderLabel(false)
+      .legend(dc.legend().x((@get('radius')*2) + 10).y(10))
 
     chart.on('filtered', @setFilter.bind(this))
 
