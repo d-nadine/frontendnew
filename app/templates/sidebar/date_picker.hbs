@@ -4,8 +4,8 @@
     OK
   </button>
 {{else}}
-  <div class="deal-status">
-    <p {{action "startEditing"}} class="formatted-close-date">
+  <div class="deal-status"{{action "startEditing"}}>
+    <p class="formatted-close-date">
       {{formatDateTime model.expectedCloseDate format="calendar"}}
     </p>
     <i class="ss-standard ss-write pull-right" {{action "startEditing"}}></i>
