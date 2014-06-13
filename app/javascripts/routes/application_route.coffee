@@ -58,18 +58,19 @@ Radium.ApplicationRoute = Radium.Route.extend
           notifications.filter((notification) ->
             !notification.get('read')
           )
-          .forEach (notification) =>
+          .forEach (notification) ->
             notification.set('read', true)
 
           @get('store').commit()
         , 200
 
     notificationDelete: (reference) ->
-      notifications =  Radium.Notification.all().filter (notification) => notification.get('reference') == reference
+      notifications =  Radium.Notification.all().filter (notification) ->
+        notification.get('reference') == reference
 
       return unless notifications.get('length')
 
-      notifications.forEach (notification) =>
+      notifications.forEach (notification) ->
         notification.deleteRecord()
 
     toggleDrawer: (name) ->

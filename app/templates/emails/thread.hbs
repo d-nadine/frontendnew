@@ -2,7 +2,7 @@
   {{#if isLoading}}
     {{partial 'is_loading'}}
   {{else}}
-    {{email-nav emails=visibleContent}}
+    {{email-nav emails=sortedReplies}}
   {{/if}}
   {{#each sortedReplies itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}
