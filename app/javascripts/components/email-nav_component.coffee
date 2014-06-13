@@ -22,7 +22,22 @@ Radium.EmailNavComponent = Ember.Component.extend
 
       index = emailCoords.indexOf current
 
-      nextIndex = if forward then (index + 1) else (index - 1)
+      scrolledToBottom = ->
+        container = $('body').get(0)
+
+        height = container.clientHeight
+        scroll = container.scrollHeight
+        position = container.scrollTop
+
+        current = (height + position)
+        leeway = 3
+
+        return ((scroll > (current - leeway)) && (scroll < (current + leeway)))
+
+      if !forward && scrolledToBottom()
+        nextIndex = (emailCoords.length - 2)
+      else
+        nextIndex = if forward then (index + 1) else (index - 1)
 
       unless next = emailCoords[nextIndex]
         return
