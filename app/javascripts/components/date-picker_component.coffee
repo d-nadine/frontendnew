@@ -80,7 +80,7 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       datePicker = input.data('datepicker')
       $(".scroll-pane").scroll =>
-        @$().datepicker "place"
+        @$().datepicker "place" if @$()
       @$().off('keyup', datePicker.update)
 
       @set('targetObject.datePicker', datePicker)
