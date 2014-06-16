@@ -180,6 +180,7 @@
 
   .value {
     width: percentage(130px / $base-width);
+    min-width: 88px;
   }
 
   .deal-button {
