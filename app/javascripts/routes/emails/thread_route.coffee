@@ -11,22 +11,23 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
 
     controller.set 'model', Ember.A([model])
 
-    model.get('replies').slice().toArray()
+    replies = model.get('replies').slice().toArray()
       .reject((reply) -> reply.get('id') == model.get('id'))
-      .forEach (reply) ->
-        observer = ->
-          return unless reply.get('isLoaded')
 
-          reply.removeObserver 'isLoaded', observer
-          controller.get('model').pushObject(reply)
+    replies.forEach (reply) ->
+      observer = ->
+        return unless reply.get('isLoaded')
 
-          if controller.get('model.length') == model.get('replies.length') || controller.get('model.length') == 5
-            controller.set 'isLoading', false
+        reply.removeObserver 'isLoaded', observer
+        controller.get('model').pushObject(reply)
 
-            Ember.run.next ->
-              window.scrollTo(0,0)
+        if controller.get('model.length') >= (replies.get('length') - 1) || controller.get('model.length') == 5
+          controller.set 'isLoading', false
 
-        if reply.get('isLoaded')
-          observer()
-        else
-          reply.addObserver 'isLoaded', observer
+          Ember.run.next ->
+            window.scrollTo(0,0)
+
+      if reply.get('isLoaded')
+        observer()
+      else
+        reply.addObserver 'isLoaded', observer
