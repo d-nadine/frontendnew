@@ -6,7 +6,11 @@
 {{else}}
   <div class="deal-status"{{action "startEditing"}}>
     <p class="formatted-close-date">
-      {{formatDateTime model.expectedCloseDate format="calendar"}}
+      {{#if model.expectedCloseDate}}
+        {{formatDateTime model.expectedCloseDate format="calendar"}}
+      {{else}}
+        <em>None</em>
+      {{/if}}
     </p>
     <i class="ss-standard ss-write pull-right" {{action "startEditing"}}></i>
   </div>
