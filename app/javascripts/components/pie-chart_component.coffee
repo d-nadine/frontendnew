@@ -2,7 +2,6 @@ require 'mixins/components/chart_component_mixin'
 
 Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   type: 'pieChart'
-  size: 100
   classNames: 'pie-chart'
   classNameBindings: ['uniqueClass']
   radius: 50
