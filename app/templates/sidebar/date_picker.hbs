@@ -1,5 +1,5 @@
 {{#if isEditing}}
-  {{date-picker date=form.expectedCloseDate leader="" class="field" confirmEdit="stopEditing"}}
+  {{date-picker date=form.expectedCloseDate leader="" class="field" submitForm="stopEditing"}}
   <button class="btn btn-primary picker-submit" {{action "stopEditing"}}>
     OK
   </button>

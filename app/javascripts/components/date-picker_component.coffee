@@ -16,8 +16,6 @@ Radium.DatePickerComponent = Ember.Component.extend
       @toggleProperty 'pickerShown'
 
       false
-    confirmEdit: ->
-      @sendAction "confirmEdit"
 
   pickerShown: false
 
@@ -98,7 +96,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if evt.dontSubmit
       return unless target.get('submitForm')
 
-      target.sendAction 'submitForm'
+      Ember.run.next =>
+        target.sendAction 'submitForm'
 
     hideDatePicker: ->
       return if @isDestroyed

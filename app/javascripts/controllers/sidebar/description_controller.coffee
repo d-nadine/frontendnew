@@ -18,6 +18,5 @@ Radium.SidebarDescriptionController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.DescriptionForm.create()
-  ).property()

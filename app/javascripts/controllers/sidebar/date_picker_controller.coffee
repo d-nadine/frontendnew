@@ -15,6 +15,8 @@ Radium.SidebarDatePickerController = Radium.SidebarBaseController.extend
   actions:
     setForm: ->
       @set 'form.expectedCloseDate', @get('model.expectedCloseDate')
-  form: ( ->
+
+  isValid: true
+
+  form: Ember.computed ->
     Radium.DatePickerForm.create()
-  ).property()
