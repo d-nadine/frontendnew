@@ -4,14 +4,14 @@
       {{#each categories}}
         <li>
           {{#link-to "addressbook.filter" name}}
-            {{#if isPrivate}}<i class="ss-standard ss-lock"></i> {{/if}}
+            {{#if isRadium}}<i class="fontello-icon-circle-empty"></i> {{/if}}
             {{text}}
           {{/link-to}}
         </li>
       {{/each}}
       <li>
         {{#link-to "externalcontacts"}}
-          <i class="ss-standard ss-lock"></i> Google Contacts
+          <i class="fontello-icon-google"></i> Untracked Contacts
         {{/link-to}}
       </li>
     </ul>
