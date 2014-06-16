@@ -142,7 +142,13 @@ Radium.DatePickerComponent = Ember.Component.extend
       evt.preventDefault()
 
     resetDateDisplay: ->
-      originalDate = if @get('date') then @get('date').toJSDate() else Date.today()
+      originalDate = if @get('date') then @get('date').toJSDate()
+
+      if originalDate
+        @$().datepicker('setValue', originalDate)
+        @set('value', @get('date').toHumanFormat())
+      else
+        @set('value', '')
 
       @$().data('datepicker').hide()
 
@@ -162,7 +168,7 @@ Radium.DatePickerComponent = Ember.Component.extend
         "thu": "thursday"
         "fri": "friday"
 
-      if value?.length <= 2
+      if value?.length <= 2 && originalDate
         @$().datepicker('setValue', originalDate)
         return
 
@@ -197,7 +203,7 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       result = new Date(parsed)
 
-      if (result.toString() == "Invalid Date") || result.getTime() == 0
+      if ((result.toString() == "Invalid Date") || result.getTime() == 0) && originalDate
         @$().datepicker('setValue', originalDate)
         return
 
