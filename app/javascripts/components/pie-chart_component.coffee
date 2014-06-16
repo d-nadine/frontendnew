@@ -4,8 +4,21 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   type: 'pieChart'
   size: 100
   classNames: 'pie-chart'
+  classNameBindings: ['uniqueClass']
   radius: 50
 
+  uniqueClass: Ember.computed ->
+    randomNumber = Math.round(Math.random() * 10000)
+    "pie-chart-#{randomNumber}"
+
+  style: Ember.computed ->
+    """<style type='text/css'>
+      
+      .pie-chart.#{@get('uniqueClass')} svg {
+        width: #{(@get('radius')*2) + 150}px;
+      }
+
+    </style>"""
   setFilter: (chart, filter) ->
     currentFilter = @get('_currentFilter')
 
