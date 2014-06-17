@@ -40,6 +40,47 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 
     hash[key] = manyArray.map(function(item){ return item.get('id'); });
   },
+
+  extractValidationErrors: function(type, json) {
+    var errors = {},
+        self = this,
+        attributes = get(type, 'attributes').keys.list.map(function(name) {
+          return self._keyForAttributeName(type, name);
+        }),
+        errorKeys = [];
+
+    for(var errorKey in json['errors']) {
+      if(errorKey) {
+        errorKeys.push(errorKey);
+      }
+    }
+
+    attributes.forEach(function(name) {
+      if (json['errors'].hasOwnProperty(name)) {
+        errors[name] = json['errors'][name];
+      }
+    }, this);
+
+    var i, key, len = errorKeys.length;
+
+    for(i = 0; i < len; i++) {
+      key = errorKeys[i];
+      if(key && !attributes.contains(key)) {
+        errors[this.printFriendlyName(key)] = json['errors'][key];
+      }
+    }
+
+    return errors;
+  },
+
+  printFriendlyName: function(key) {
+    var map = {};
+    map["workflow.check_list"] = "checklist item";
+    map["workflow.check_list.weight"] = "checklist item weight";
+    map["email_addresses"] = "email address";
+
+    return map[key] || key.humanize();
+  }
 });
 
 Radium.RESTAdapter = DS.RESTAdapter.extend({
