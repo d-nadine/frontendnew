@@ -7,8 +7,7 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   radius: 50
 
   uniqueClass: Ember.computed ->
-    randomNumber = Math.round(Math.random() * 10000)
-    "pie-chart-#{randomNumber}"
+    "pie-chart-#{@get('radius')}"
 
   style: Ember.computed ->
     """<style type='text/css'>
