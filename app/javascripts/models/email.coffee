@@ -38,7 +38,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceEmail')
 
   deal: DS.belongsTo('Radium.Deal')
-  repliedTo: DS.belongsTo('Radium.Email')
+  repliedTo: DS.belongsTo('Radium.Email', inverse: null)
 
   isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')
