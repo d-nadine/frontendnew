@@ -27,6 +27,8 @@ Radium.DatePickerComponent = Ember.Component.extend
     ':datepicker-control-box'
   ]
 
+  isEditable: true
+
   leader: 'Due'
 
   textBinding: 'textToDateTransform'
@@ -75,7 +77,8 @@ Radium.DatePickerComponent = Ember.Component.extend
           if date.valueOf() < now.valueOf() then 'disabled' else ''
 
       datePicker = input.data('datepicker')
-
+      $(".scroll-pane").scroll =>
+        @$().datepicker "place" if @$()
       @$().off('keyup', datePicker.update)
 
       @set('targetObject.datePicker', datePicker)
@@ -93,7 +96,8 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if evt.dontSubmit
       return unless target.get('submitForm')
 
-      target.sendAction 'submitForm'
+      Ember.run.next =>
+        target.sendAction 'submitForm'
 
     hideDatePicker: ->
       return if @isDestroyed
@@ -103,7 +107,7 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if @isDestroyed
 
       @set('pickerShown', false)
- 
+
     willDestroyElement: ->
       @_super.apply this, arguments
       @removeObserver 'value', this, 'valueDidChange'

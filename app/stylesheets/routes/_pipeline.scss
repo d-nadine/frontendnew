@@ -180,10 +180,18 @@
 
   .value {
     width: percentage(130px / $base-width);
+    min-width: 88px;
   }
 
   .deal-button {
     width: percentage(148px / $base-width);
+  }
+
+  .expected-close-date {
+    width: percentage(200px / $base-width);
+    i.ss-dropdown, i.ss-directup {
+      right: -38px;
+    }
   }
 }
 

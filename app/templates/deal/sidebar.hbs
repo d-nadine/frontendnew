@@ -23,10 +23,10 @@
         {{#if hasPrimaryContact}}
           {{#if contact.isLoaded}}
             {{avatar contact size=medium class="img-polaroid"}}
-          {{else}}
+            {{else}}
             {{partial 'is_loading'}}
           {{/if}}
-        {{else}}
+          {{else}}
           <span class="no-primary">No Primary Contact</span>
         {{/if}}
       </div>
@@ -49,6 +49,20 @@
       </div>
     </div>
   </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        <i class="ss-standard"></i>Expected Close Date
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="date-picker">
+        {{render 'sidebar/date_picker' model}}
+      </div>
+    </div>
+  </div>
+
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
@@ -80,7 +94,7 @@
       <button class="btn btn-warning btn-block publish" {{action "togglePublished"}} {{bind-attr disabled=isSaving}}>
         {{#if isPublic}}
           Unpublish
-        {{else}}
+          {{else}}
           Publish
         {{/if}}
       </button>

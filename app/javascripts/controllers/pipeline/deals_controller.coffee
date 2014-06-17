@@ -62,8 +62,17 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
       return Ember.DateTime.compare sortA.get('time'), sortB.get('time')
 
-    if sort == 'updatedAt'
-      return Ember.DateTime.compare left.get(sort), right.get(sort)
+    if sort == "expectedCloseDate" or sort == 'updatedAt'
+      sortA = left.get(sort)
+      sortB = right.get(sort)
+      if sortA && sortB
+        return Ember.DateTime.compare left.get(sort), right.get(sort)
+      else if !sortA && !sortB
+        return 0
+      else if !sortA && sortB
+        return -1
+      else if sortA && !sortB
+        return 1
 
     Ember.compare left.get(sort), right.get(sort)
 

@@ -33,7 +33,7 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
         @send 'flashError', result
 
       model.one 'bacameError', ->
-        @send 'flashError', 'An error has occurred and the update did not occurr.'
+        @send 'flashError', 'An error has occurred and the update did not occur.'
 
       if @updateHook
         model.one 'didUpdate', (result) =>

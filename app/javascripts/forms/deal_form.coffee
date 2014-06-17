@@ -13,6 +13,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     value: @get('value')
     poNumber: @get('poNumber')
     isPublished: @get('isPublished')
+    expectedCloseDate: @get('expectedCloseDate')
     attachedFiles: Ember.A()
     bucket: @get('bucket')
   ).property().volatile()
@@ -27,6 +28,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     @set('source', '')
     @set('value', 0)
     @set('poNumber', '')
+    @set('expectedCloseDate', null)
     @set('isPublished', true)
     @get('checklist').clear()
 

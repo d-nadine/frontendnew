@@ -11,6 +11,8 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   Radium.ChangeDealStatusMixin, Radium.AttachedFilesMixin,
 
   actions:
+    save: ->
+      @get('store').commit()
     togglePublished: ->
       #FIXME: hack to stop this being bubbled here on error
       return unless Ember.$(event.target).hasClass 'publish'
