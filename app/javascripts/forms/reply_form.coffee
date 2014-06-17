@@ -6,17 +6,19 @@ Radium.ReplyForm = Radium.EmailForm.extend
 
   repliedTo: null
 
-  reset: ->
-    @_super.apply this, arguments
-    subject = @get('repliedTo.subject')
+  repliedToDidChange: Ember.observer 'repliedTo', ->
+    unless repliedTo = @get('repliedTo')
+      return
+
+    subject = repliedTo.get('subject')
 
     subject = if /^Re:/i.test(subject) then subject else "RE: #{subject}"
 
     @set 'subject', subject
 
-    to = @get('repliedTo.toList').slice()
+    to = repliedTo.get('toList').slice()
 
-    to.pushObject(@get('repliedTo.sender'))
+    to.pushObject(repliedTo.get('.sender'))
 
     currentUserEmail = @get('currentUser.email')?.toLowerCase()
 

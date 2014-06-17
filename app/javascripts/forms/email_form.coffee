@@ -27,6 +27,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('sendTime', null)
     @set('checkForResponse', null)
     @set('deal', null)
+    @set('repliedTo', null)
     @_super.apply this, arguments
 
   data: Ember.computed( ->
@@ -53,6 +54,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     bucket: @get('bucket')
 
     deal: @get('deal')
+    repliedTo: @get('repliedTo')
   ).volatile()
 
   isValid: Ember.computed 'to.[]', 'message', ->

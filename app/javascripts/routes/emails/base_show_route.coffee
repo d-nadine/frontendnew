@@ -6,8 +6,6 @@ Radium.ShowRouteBase = Radium.Route.extend
 
       reply = Radium.Email.createRecord form.get('data')
 
-      reply.set('repliedTo', @modelFor('emails.show'))
-
       # Set the time so things sort correctly. It will be updated
       # by the server when the email is actually sent
       reply.set 'sentAt', Ember.DateTime.create()
