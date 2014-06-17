@@ -6,7 +6,7 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   classNameBindings: ['uniqueClass']
   radius: 50
   # possible title formats: 'default', 'money'
-  titleFormat: 'default'
+  valueFormat: 'default'
 
   uniqueClass: Ember.computed ->
     "pie-chart-#{@get('radius')}"
@@ -31,12 +31,15 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   refresh: ->
     @get('chart').refresh()
 
-  formattedTitle: (titleObject) ->
-    if @titleFormat == 'default'
-      "#{titleObject.key}: #{titleObject.value}"
-    else
-      "#{titleObject.key}: #{accounting.formatMoney(titleObject.value)}"
+  formattedValue: (object) ->
+    if @get('valueFormat') == 'default'
+      object.value
+    else if @get('valueFormat') == 'money'
+      accounting.formatMoney(object.value)
 
+  formattedTitle: (titleObject) ->
+    "#{titleObject.key}: #{@formattedValue(titleObject)}"
+    
   renderChart: ->
     chart = @get 'chart'
 
@@ -46,7 +49,7 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .radius(@get('radius'))
       .dimension(@get('dimension'))
       .group(@get('group'))
-      .renderLabel(false)
+      .label((d) => @formattedValue(d))
       .legend(dc.legend().x((@get('radius')*2) + 10).y(10))
       .title((d) => @formattedTitle(d))
     chart.on('filtered', @setFilter.bind(this))
