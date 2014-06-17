@@ -94,7 +94,7 @@ Radium.ReportsController = Ember.ArrayController.extend
     )
 
     company = data.dimension((d) -> d.company)
-    companies = company.group()
+    companies = company.group().reduceSum((d) -> d.total)
     
     # TODO: Break this into a composable object, so it can be
     # iterated over when applying filters
