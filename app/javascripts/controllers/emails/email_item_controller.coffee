@@ -119,9 +119,19 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     contact: @get('contact')
 
   replyEmail: Ember.computed 'model', ->
-    Radium.ReplyForm.create
-      repliedTo: @get('model')
+    replyForm = Radium.ReplyForm.create
       currentUser: @get('currentUser')
+
+    model = @get('model')
+
+    repliedTo = if model instanceof Ember.ObjectController
+                   model.get('model')
+                else
+                  model
+
+    replyForm.set('repliedTo', repliedTo)
+
+    replyForm
 
   forwardEmail: Ember.computed 'model', ->
     Radium.ForwardEmailForm.create
