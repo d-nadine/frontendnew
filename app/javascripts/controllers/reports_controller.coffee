@@ -49,7 +49,7 @@ Radium.ReportsController = Ember.ArrayController.extend
       d.total
     )
 
-    status = data.dimension((d) -> d.status)
+    status = data.dimension((d) -> d.status).filter('closed')
     statusesByTotal = status.group().reduceSum((d) -> d.total)
     statusesByAmount = status.group().reduceCount()
 
