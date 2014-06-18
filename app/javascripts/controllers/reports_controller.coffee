@@ -4,7 +4,9 @@ needs to be significantly trimmed, there is an exorbitant amount of filter looku
 that need to be reduced elegantly
 ###
 Radium.ReportsController = Ember.ArrayController.extend
-  needs: ['application', 'account']
+  needs: ['application', 'account', 'accountSettings']
+  dealStates: Ember.computed.alias 'controllers.accountSettings.dealStates'
+  
   account: Ember.computed.alias 'controllers.account'
   app: Ember.computed.alias 'controllers.application'
   domain: (->
@@ -132,17 +134,36 @@ Radium.ReportsController = Ember.ArrayController.extend
     @set 'allQuarters', quarters.all()
     @set 'allCompanies', companies.all()
 
-    allTotals.forEach((item) =>
-      @set 'total_' + item.key, item.value
-    )
+    totals = {}
+    allTotals.forEach (item) =>
+      totals[item.key] = item.value
 
-    allStatuses.forEach((item) =>
-      @set 'status_' + item.key + '_total', item.value
-    )
+    status_totals = {}
+    allStatuses.forEach (item) =>
+      status_totals[item.key] = item.value
 
-    allDeals.forEach((item) =>
-      @set 'deal_' + item.key, item.value
-    )
+    deals = {}
+    allDeals.forEach (item) =>
+      deals[item.key] = item.value
+
+    workflowObjects = []
+    @get('dealStates').forEach (state) ->
+      state = state.toLowerCase()
+      icon = switch state
+        when 'lost' then 'ss-deletefile'
+        when 'closed' then 'ss-bill'
+        when 'negotiating' then 'ss-briefcase'
+        else 'ss-user'
+
+      workflowObjects.push {
+        name: state
+        total: totals[state]
+        status: status_totals[state]
+        deal: deals[state]
+        icon: icon
+      }
+
+    @set('workflowObjects', workflowObjects)
 
   setDates: (start, end) ->
     if arguments.length
@@ -159,6 +180,15 @@ Radium.ReportsController = Ember.ArrayController.extend
     )
 
   actions:
+
+    linkToPipeline: (state) ->
+      if state == 'closed'
+        this.transitionToRoute('pipeline.closed')
+      else if state == 'lost'
+        this.transitionToRoute('pipeline.lost')
+      else
+        this.transitionToRoute('pipeline.workflow', state)
+
     filterByDate: (date) ->
       if date
         @get('quarter').filter(null)
