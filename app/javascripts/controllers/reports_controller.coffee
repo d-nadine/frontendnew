@@ -147,8 +147,8 @@ Radium.ReportsController = Ember.ArrayController.extend
       deals[item.key] = item.value
 
     workflowObjects = []
-    @get('dealStates').forEach (state) ->
-      state = state.toLowerCase()
+    @get('dealStates').forEach (rawState) ->
+      state = rawState.toLowerCase()
       icon = switch state
         when 'lost' then 'ss-deletefile'
         when 'closed' then 'ss-bill'
@@ -156,7 +156,7 @@ Radium.ReportsController = Ember.ArrayController.extend
         else 'ss-user'
 
       workflowObjects.push {
-        name: state
+        name: rawState
         total: totals[state]
         status: status_totals[state]
         deal: deals[state]
