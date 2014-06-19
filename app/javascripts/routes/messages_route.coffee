@@ -52,6 +52,9 @@ Radium.MessagesRoute = Radium.Route.extend
     selectItem: (item) ->
       folder = @controllerFor('messages').get('folder')
 
+      unless item
+        return @transitionTo 'emails.empty', folder
+
       route = unless item.get('threadCount')
                 'emails.show'
               else
@@ -169,8 +172,8 @@ Radium.MessagesIndexRoute = Radium.Route.extend
     return unless transition.targetName == "messages.index"
 
     unless model.get('length')
-      folder = model.get('folder') || 'inbox'
-      @transitionTo 'emails.empty'
+      folder = @controllerFor('messages').get('folder') || 'inbox'
+      @transitionTo 'emails.empty', folder
       return
 
     item = model.get('firstObject')
