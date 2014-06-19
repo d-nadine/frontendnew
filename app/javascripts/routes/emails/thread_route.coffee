@@ -7,6 +7,8 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
 
     @controllerFor('messages').set 'selectedContent', model
 
+    controller.set('currentPage', 1)
+
     controller.set 'isLoading', true
 
     controller.set 'model', Ember.A([model])
