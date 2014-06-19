@@ -13,8 +13,6 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
       return addressBookProxy
 
   redirect: (model, transition) ->
-    console.log "model:", model.get("contacts.length")
-    console.log "params", transition.params
     return if transition.params["addressbook.filter"]
     if !model.get("contacts.length")
       @transitionTo("externalcontacts")

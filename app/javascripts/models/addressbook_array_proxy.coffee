@@ -14,13 +14,10 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     @clear()
 
     Radium.Contact.find({}).then (contacts) =>
-      console.log("contacts loading?", contacts.get("length"))
       @add contacts
       Radium.Company.find({}).then (companies) =>
-        console.log("companies loading?", companies.get("length"))
         @add companies
         Radium.Tag.find({}).then (tags) =>
-          console.log("tags loading?", tags.get("length"))
           @set 'isLoaded', true
           @add tags
           @set 'selectedFilter', 'all'
@@ -31,9 +28,8 @@ Radium.AddressBookArrayProxy = Radium.AggregateArrayProxy.extend Ember.DeferredM
     @set 'content', []
     @set 'additionalFilter', null
 
-  contacts: (->
+  contacts: Ember.computed 'content.[]', ->
     @get("content").filterBy "constructor", Radium.Contact
-  ).property("content.[]")
 
   arrangedContent: Ember.computed 'content.[]', 'selectedFilter', 'searchText', 'additionalFilter', ->
     content = @get('content')
