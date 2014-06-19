@@ -28,11 +28,12 @@
         {{#link-to "leads.new" class="btn btn-main btn-primary"}}
           <i class="ss-standard ss-plus"></i> Contact
         {{/link-to}}
-      {{else}}
+        {{else}}
         <a href="#" {{action "showAddCompany" target="view"}} class="btn btn-main btn-primary">
           <i class="ss-standard ss-plus"></i> Company
         </a>
-        {{/unless}}
+
+      {{/unless}}
       <div class="btn-group">
         <button class="btn btn-main address-book-button" {{bind-attr disabled=isCompanies}}>{{view.selectedFilterText}}</button>
         <button class="btn dropdown-toggle needsclick" {{bind-attr disabled=additionalFilterDisabled}} data-toggle="dropdown">
@@ -65,7 +66,7 @@
                 </li>
                 <!--
                 <li>
-                  <a href="#" {{!action showForm 'call'}}>Call</a>
+                <a href="#" {{!action showForm 'call'}}>Call</a>
                 </li>
                 -->
                 {{#if hasContacts}}
@@ -128,6 +129,37 @@
         <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
       </div>
     {{else}}
+      <div class="search-results-header row-fluid">
+        <div class="span1">Select All</div>
+
+        <div class="span2 name">Name</div>
+        <div class="span1 company">Company</div>
+        <div class="span2 nexttask">Next Task</div>
+        <div class="span1 inactive">Inactive</div>
+        <div class="span2 lastcommunication">Last Communication</div>
+        <div class="span1 assignedto">Assigned</div>
+        <div class="span1 deals">Deals</div>
+      </div>
+      <div class="skinny-line row-fluid">
+        <div class="span1 row-fluid">
+          <div class="span6 select">{{input type="checkbox"}}</div>
+          <div class="span6 avatar">
+            <img style="height: 30px; border-radius: 5px;"src="http://res.cloudinary.com/radium/image/upload/h_64,w_64,c_fill,g_face/n3wyrkgcculwnhegb0ry.jpg"/>
+          </div>
+        </div>
+        <div class="span2 name">Adam Hawkins</div>
+        <div class="span1 company">Bestbuy</div>
+        <div class="span2 nexttask">
+          <a class="btn btn-main next-task-widget" style="height:30px">
+            <i class="ss-standard ss-check green"></i>
+            <span class="text">Meet for lunch</span>
+          </a>
+        </div>
+        <div class="span1 inactive">3 days</div>
+        <div class="span2 lastcommunication">4 Weeks ago</div>
+        <div class="span1 assignedto">Ryan Grush</div>
+        <div class="span1 deals">6</div>
+      </div>
       {{#if visibleContent.length}}
         <div class="search-results-header row-fluid">
           <div class="span2 checkers">
@@ -155,30 +187,10 @@
             Tags
           </div>
         </div>
-        <div class="skinny-line row">
-          <div class="span1 select">{{input type="checkbox"}}</div>
-          <div class="span1 avatar" style="font-size:30px;padding-top:10px">☃</div>
-          <div class="span1 name" style="font-weight:bold">Adam Hawkins</div>
-          <div class="span1 company">Bestbuy</div>
-          <div class="span2 nexttask">
-            <a class="btn btn-main next-task-widget" style="height:30px">
-              <i class="ss-standard ss-check green"></i>
-              <span class="text">Meet for lunch</span>
-            </a>
-          </div>
-          <div class="span1 inactive">inactive?</div>
-          <div class="span1 lastcommunication"><time>3/26/1994</time></div>
-          <div class="span1 assignedto">Ryan Grush</div>
-          <div class="span1 tags">Tags</div>
-          <div class="span1 deals">Deals</div>
-          <div class="span1 type">Type</div>
-          <div class="span1 source">Source</div>
-          <div class="span1 added"><time>Added</time></div>
-        </div>
       {{/if}}
       {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
     {{/if}}
-  {{else}}
+    {{else}}
     {{partial 'is_loading'}}
   {{/unless}}
   <div class="clearfix">
