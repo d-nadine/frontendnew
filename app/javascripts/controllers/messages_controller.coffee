@@ -16,10 +16,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     { title: 'Drafts', name: 'drafts', icon: 'file' }
     { title: 'Sent items', name: 'sent', icon: 'send' }
     { title: 'Scheduled', name: 'scheduled', icon: 'clock' }
-    # { title: 'Discussions', name: 'discussions', icon: 'chat' }
-    # { title: 'All Emails', name: 'emails', icon: 'mail' }
-    # { title: 'Attachments', name: 'attachments', icon: 'attach' }
-    # { title: 'Meeting invites', name: 'invites', icon: 'calendar' }
   ]
 
   onPoll: ->
@@ -66,6 +62,8 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
       return if folder == "sent" && item.get('sender') != currentUser
       return if folder == "radium" && item.constructor is Radium.Email && item.get('isPersonal')
       return if folder == "drafts" && item.constructor is Radium.Email && !item.get('isDraft')
+      return if folder == "archive" && item.constructor is Radium.Email && !item.get('isArchived')
+
       @unshiftObject(item)
       ids.push item.get('id')
 

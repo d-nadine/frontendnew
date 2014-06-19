@@ -43,6 +43,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')
 
+  isArchived: Ember.computed.equal 'folder', 'archived'
+
   sender: Ember.computed '_senderUser', '_senderContact', ->
     @get('_senderUser') ||
     @get('_senderContact')
