@@ -170,9 +170,7 @@ Radium.ApplicationRoute = Radium.Route.extend
       duration = 600
 
       modelSelector = "[data-model='#{item.constructor}'][data-id='#{item.get('id')}']"
-      $("#{container} #{modelSelector}".trim()).fadeOut duration
-
-      Ember.run.later this, callback, duration
+      $("#{container} #{modelSelector}".trim()).animate {left: "-120%", height: 0}, duration, callback
 
   activate: ->
     notificationPoller = Radium.NotificationsPoller.create()

@@ -45,6 +45,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
   isArchived: Ember.computed.equal 'folder', 'archived'
 
+  archived: DS.attr('boolean')
+
   sender: Ember.computed '_senderUser', '_senderContact', ->
     @get('_senderUser') ||
     @get('_senderContact')

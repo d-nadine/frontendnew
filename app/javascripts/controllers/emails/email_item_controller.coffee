@@ -38,7 +38,13 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @set('model.isPersonal', false)
       @get('store').commit()
 
+    archiveEmail: (item) ->
+      @send 'removeSidebarItem', item, 'archive', 'archiveEmail'
+
     deleteEmail: (item) ->
+      @send 'removeSidebarItem', item, 'delete', 'deleteEmail'
+
+    removeSidebarItem: (item, action, threadAction) ->
       if @get('showReplyForm')
         @send 'closeForms'
         return
@@ -52,10 +58,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
       if parentController instanceof Radium.EmailThreadItemController
         if item != parentController.get('selectedEmail')
-          parentController.send 'deleteEmail', item
+          parentController.send threadAction, item
           return false
 
-      @send 'delete', item
+      @send action, item
 
     cancelCheckForResponse: (email) ->
       email.set 'checkForResponse', null

@@ -71,7 +71,15 @@ Radium.MessagesRoute = Radium.Route.extend
 
       @controllerFor('messagesSidebar').send 'checkMessageItem'
 
+    archive: (item) ->
+      return if item.get('isArchived')
+
+      @send 'removeItem', item, 'archive'
+
     delete: (item) ->
+      @send 'removeItem', item, 'delete'
+
+    removeItem: (item, action) ->
       callback = =>
         controller = @controllerFor('messages')
         sidebarController = @controllerFor('messagesSidebar')
@@ -83,11 +91,16 @@ Radium.MessagesRoute = Radium.Route.extend
         else
           nextItem = controller.get('selectedContent')
 
-        @send 'notificationDelete', item
+        if action == 'delete'
+          @send 'notificationDelete', item
 
-        item.deleteRecord()
+          item.deleteRecord()
+          updateEvent = 'didDelete'
+        else
+          item.set 'archived', true
+          updateEvent = 'didUpdate'
 
-        item.one 'didDelete', =>
+        item.one updateEvent, =>
           controller.removeObject item
           sidebarController.set 'isLoading', false
           @send 'selectItem', nextItem
@@ -103,7 +116,10 @@ Radium.MessagesRoute = Radium.Route.extend
 
         return unless item.get('isDirty')
 
-        @send 'flashSuccess', 'Email deleted'
+        if action == 'delete'
+          @send 'flashSuccess', 'Email deleted'
+        else
+          @send 'flashSuccess', 'Email archived'
 
       @send 'animateDelete', item, callback, '.messages-list'
 
