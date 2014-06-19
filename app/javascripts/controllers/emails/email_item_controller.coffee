@@ -1,8 +1,5 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.EmailDealMixin,
-
-  needs: ['messages', 'deals']
-  hideUploader: true
   actions:
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
@@ -39,10 +36,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @get('store').commit()
 
     archiveEmail: (item) ->
-      @send 'removeSidebarItem', item, 'archive', 'archiveEmail'
+      @send 'removeSidebarItem', item, 'archive'
 
     deleteEmail: (item) ->
-      @send 'removeSidebarItem', item, 'delete', 'deleteEmail'
+      @send 'removeSidebarItem', item, 'delete'
 
     removeSidebarItem: (item, action, threadAction) ->
       if @get('showReplyForm')
@@ -57,8 +54,8 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       parentController = @get('parentController')
 
       if parentController instanceof Radium.EmailThreadItemController
-        if item != parentController.get('selectedEmail')
-          parentController.send threadAction, item
+        if item != parentController.get('selectedEmail') && action == 'delete'
+          parentController.send 'deleteEmail', item
           return false
 
       @send action, item
@@ -142,3 +139,17 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
   forwardEmail: Ember.computed 'model', ->
     Radium.ForwardEmailForm.create
       email: @get('model')
+
+  needs: ['messages', 'deals']
+  hideUploader: true
+
+  archiveEnabled: Ember.computed 'controllers.messages.folder', 'model', 'parentController.selectedEmail', ->
+    return if @get('controllers.messages.folder') == 'archive'
+
+    parentController = @get('parentController')
+
+    return if parentController instanceof Radium.EmailThreadItemController &&
+                parentController.get('selectedEmail') != @get('model.model')
+
+    true
+

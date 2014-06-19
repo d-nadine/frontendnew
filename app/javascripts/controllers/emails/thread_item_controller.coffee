@@ -3,7 +3,6 @@ Radium.EmailThreadItemController = Radium.ObjectController.extend
     deleteEmail: (email) ->
       parentController = @get('parentController')
       store = @get('store')
-      adapter = store.get('_adapter')
       selectedEmail = @get('selectedEmail')
 
       unless @get('isSelected')
