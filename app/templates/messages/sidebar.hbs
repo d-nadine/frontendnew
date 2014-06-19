@@ -2,7 +2,7 @@
   <ul class="nav nav-tabs messages-tabs">
     <li {{bind-attr class="inboxIsActive:active"}}>
       {{#link-to "messages" "inbox"}}
-        <i class="fontello-icon-google"></i>
+        <i class="custom-icon-google"></i>
         {{#if inboxIsActive}}
           {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
         {{else}}
@@ -12,7 +12,7 @@
     </li>
     <li {{bind-attr class="radiumIsActive:active"}}>
       {{#link-to "messages" "radium"}}
-        <i class="fontello-icon-circle-empty"></i>
+        <i class="custom-icon-radium"></i>
         Tracked Email
       {{/link-to}}
     </li>
