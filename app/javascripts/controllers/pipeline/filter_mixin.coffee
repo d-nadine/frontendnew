@@ -15,6 +15,7 @@ Radium.FilterMixin = Ember.Mixin.create
   filters: [
     {name: 'name', text: 'Filter By Name'}
     {name: 'contact', text: 'Filter By Contact'}
-    # {name: 'company', text: 'Filter By Company'}
+    {name: 'company', text: 'Filter By Company'}
     {name: 'user', text: 'Filter By Assigned'}
+    {name: 'all', text: 'Filter By Any'}
   ]

@@ -91,13 +91,23 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
     content.setEach 'isChecked', false
 
     content = content.filter (item) ->
-                  if selectedFilter == 'name'
-                    ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
-                  else if selectedFilter == 'company'
-                    item.get('contact.company') && ~item.get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
-                  else
-                    ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
 
+      regex = new RegExp(searchText, "i")
+      nameTest = regex.test(item.get('name'))
+      contactTest = regex.test(item.get('contact.displayName'))
+      assignedTest = regex.test(item.get('user.displayName'))
+      companyTest = regex.test(item.get('company.displayName'))
+
+      if selectedFilter == 'name'
+        nameTest
+      else if selectedFilter == 'user'
+        assignedTest
+      else if selectedFilter == 'contact'
+        contactTest
+      else if selectedFilter == 'company'
+        companyTest
+      else # ALL
+        nameTest or assignedTest or contactTest or companyTest
     content.toArray().sort(sortFunc)
 
   dealValues: Ember.computed.mapBy 'arrangedContent', 'value'
