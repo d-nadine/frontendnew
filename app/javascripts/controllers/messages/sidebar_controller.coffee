@@ -103,7 +103,8 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   itemController: 'messagesSidebarItem'
 
   inboxIsActive: Ember.computed 'folder', ->
-    ['inbox', 'sent', 'drafts', 'scheduled'].contains @get('folder')
+    folders = @get('controllers.messages.folders').mapProperty 'name'
+    folders.contains @get('folder')
 
   radiumIsActive: Ember.computed.equal('folder', 'radium')
   searchIsActive: Ember.computed.equal('folder', 'search')

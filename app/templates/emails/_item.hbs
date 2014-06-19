@@ -75,6 +75,9 @@
 
         <button tabindex="6" {{action "sendDraft" this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
       {{/unless}}
+        <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
+          <i class="ss-symbolicons-block ss-download"></i> Archive
+        </a>
 
         <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
           <i class="ss-symbolicons-block ss-trash"></i> Delete
