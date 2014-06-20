@@ -1,7 +1,10 @@
 require 'controllers/pipeline/base_controller'
-require 'controllers/pipeline/filter_mixin'
 
-Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.FilterMixin,
+Radium.PipelineDealsController = Radium.PipelineBaseController.extend
+  sort: 'name'
+  sortAscending: true
+  filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
+
   actions:
     toggleChecked: ->
       allChecked = @get('checkedContent.length') == @get('length')
@@ -15,14 +18,13 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
         @set 'sortAscending', ascending
         @notifyPropertyChange 'sort'
 
-  init: ->
-    @_super.apply this, arguments
+  bindSearchText: (->
     parentController = @get('parentController.parentController')
     return unless parentController instanceof Radium.PipelineIndexController
     Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
-    Ember.bind(this, 'selectedFilter', 'parentController.parentController.selectedFilter')
+  ).on("init")
 
-  resultsDidChange: Ember.observer('arrangedContent.[]', 'selectedFilter', 'searchText', ->
+  resultsDidChange: Ember.observer('arrangedContent.[]', 'searchText', ->
     unless parentController = @get('parentController')
       return
 
@@ -76,7 +78,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
     Ember.compare left.get(sort), right.get(sort)
 
-  arrangedContent: Ember.computed 'content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending', ->
+  arrangedContent: Ember.computed 'content.[]', 'searchText', 'sort', 'sortAscending', ->
     content = @get('content')
     sortFunc = @sortFunc.bind this
 
@@ -86,17 +88,12 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
     return content.toArray().sort(sortFunc) unless searchText?.length
 
-    selectedFilter = @get('selectedFilter')
-
     content.setEach 'isChecked', false
 
-    content = content.filter (item) ->
-                  if selectedFilter == 'name'
-                    ~item.get('name').toLowerCase().indexOf(searchText.toLowerCase())
-                  else if selectedFilter == 'company'
-                    item.get('contact.company') && ~item.get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
-                  else
-                    ~item.get(selectedFilter).get('displayName').toLowerCase().indexOf(searchText.toLowerCase())
+    content = content.filter (item) =>
+      regex = new RegExp(searchText, "i")
+      @get("filterList").some (filter) ->
+        regex.test(item.get(filter))
 
     content.toArray().sort(sortFunc)
 
