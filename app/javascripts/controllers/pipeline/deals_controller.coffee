@@ -1,7 +1,8 @@
 require 'controllers/pipeline/base_controller'
-require 'controllers/pipeline/filter_mixin'
 
-Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.FilterMixin,
+Radium.PipelineDealsController = Radium.PipelineBaseController.extend
+  sort: 'name'
+  sortAscending: true
   actions:
     toggleChecked: ->
       allChecked = @get('checkedContent.length') == @get('length')
@@ -15,14 +16,13 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
         @set 'sortAscending', ascending
         @notifyPropertyChange 'sort'
 
-  init: ->
-    @_super.apply this, arguments
+  bindSearchText: (->
     parentController = @get('parentController.parentController')
     return unless parentController instanceof Radium.PipelineIndexController
     Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
-    Ember.bind(this, 'selectedFilter', 'parentController.parentController.selectedFilter')
+  ).on("init")
 
-  resultsDidChange: Ember.observer('arrangedContent.[]', 'selectedFilter', 'searchText', ->
+  resultsDidChange: Ember.observer('arrangedContent.[]', 'searchText', ->
     unless parentController = @get('parentController')
       return
 
@@ -76,7 +76,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
 
     Ember.compare left.get(sort), right.get(sort)
 
-  arrangedContent: Ember.computed 'content.[]', 'selectedFilter', 'searchText', 'sort', 'sortAscending', ->
+  arrangedContent: Ember.computed 'content.[]', 'searchText', 'sort', 'sortAscending', ->
     content = @get('content')
     sortFunc = @sortFunc.bind this
 
@@ -85,8 +85,6 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
     searchText = @get('searchText')
 
     return content.toArray().sort(sortFunc) unless searchText?.length
-
-    selectedFilter = @get('selectedFilter')
 
     content.setEach 'isChecked', false
 
@@ -98,16 +96,9 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.Fil
       assignedTest = regex.test(item.get('user.displayName'))
       companyTest = regex.test(item.get('company.displayName'))
 
-      if selectedFilter == 'name'
-        nameTest
-      else if selectedFilter == 'user'
-        assignedTest
-      else if selectedFilter == 'contact'
-        contactTest
-      else if selectedFilter == 'company'
-        companyTest
-      else # ALL
-        nameTest or assignedTest or contactTest or companyTest
+      # Filter on all attrs
+      nameTest or assignedTest or contactTest or companyTest
+
     content.toArray().sort(sortFunc)
 
   dealValues: Ember.computed.mapBy 'arrangedContent', 'value'
