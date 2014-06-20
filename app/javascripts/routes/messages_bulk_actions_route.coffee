@@ -20,9 +20,12 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
         outlet: 'modal'
 
     delete: ->
-      Ember.run.once this, 'batchDeletes'
+      Ember.run.once this, 'batchRemoves', 'delete'
 
-  batchDeletes: ->
+    archiveEmails: ->
+      Ember.run.once this, 'batchRemoves', 'archive'
+
+  batchRemoves: (action) ->
     controller = @controllerFor('messages')
 
     items = Ember.A(controller.get('checkedContent').slice())
@@ -32,14 +35,26 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
     for i in [items.length - 1..0] by -1
       item = items[i]
       controller.removeObject item
-      @send 'notificationDelete', item
+      @send('notificationDelete', item) if action == "delete"
 
-      item.deleteRecord()
+      if action == "delete"
+        item.deleteRecord()
+        updateEvent = 'didDelete'
+        success = "Emails deleted"
+      else
+        item.set 'archived', true
+        updateEvent = 'didUpdate'
+        success = "Emails archived"
 
-      item.one 'didDelete', (record) =>
+      item.one updateEvent, (record) =>
+
         if record.get('id') == lastRecord.get('id')
-          @send 'flashSuccess', 'Emails deleted'
+          @send 'flashSuccess', success
           @controllerFor('messagesSidebar').get('container').lookup('route:messages').refresh()
+
+          if action == "archive"
+            Ember.run.next ->
+              items.setEach 'isChecked', false
 
     @get('store').commit()
 
