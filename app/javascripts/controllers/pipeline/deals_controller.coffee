@@ -3,6 +3,8 @@ require 'controllers/pipeline/base_controller'
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   sort: 'name'
   sortAscending: true
+  filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
+
   actions:
     toggleChecked: ->
       allChecked = @get('checkedContent.length') == @get('length')
@@ -88,16 +90,10 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
 
     content.setEach 'isChecked', false
 
-    content = content.filter (item) ->
-
+    content = content.filter (item) =>
       regex = new RegExp(searchText, "i")
-      nameTest = regex.test(item.get('name'))
-      contactTest = regex.test(item.get('contact.displayName'))
-      assignedTest = regex.test(item.get('user.displayName'))
-      companyTest = regex.test(item.get('company.displayName'))
-
-      # Filter on all attrs
-      nameTest or assignedTest or contactTest or companyTest
+      @get("filterList").some (filter) ->
+        regex.test(item.get(filter))
 
     content.toArray().sort(sortFunc)
 
