@@ -9,9 +9,15 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
     addressBookProxy = Radium.AddressBookArrayProxy.create
       currentUser: @controllerFor('currentUser').get('model')
 
-    addressBookProxy.load()
+    addressBookProxy.load().then ->
+      return addressBookProxy
 
-    addressBookProxy
+  redirect: (model, transition) ->
+    return if transition.params["addressbook.filter"]
+    if !model.get("contacts.length")
+      @transitionTo("externalcontacts")
+    else
+      @transitionTo("addressbook.filter", "people")
 
   deactivate: ->
     if addressBookContent = @modelFor('addressbook')

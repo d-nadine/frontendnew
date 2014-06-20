@@ -61,11 +61,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     @get('checkedContent').removeArrayObserver(this)
 
   categories: [
-    # {name: 'all', text: 'Show All'}
-    {name: 'people', text: 'People'}
+    {name: 'people', text: 'Contacts', isRadium: true}
     {name: 'companies', text: 'Companies'}
     {name: 'tags', text: 'Tags'}
-    # {name: 'private', text: 'Private Contacts', isPrivate: true}
   ]
 
   filters: [
