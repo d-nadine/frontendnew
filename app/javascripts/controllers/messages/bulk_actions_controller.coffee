@@ -4,6 +4,8 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
   needs: ['users', 'messages']
 
   content: Ember.computed.oneWay 'controllers.messages.checkedContent'
+  canArchive: Ember.computed 'controllers.messages.folder', ->
+    @get('controllers.messages.folder') != "archive"
 
   itemController: 'messagesBulkActionItem'
 
