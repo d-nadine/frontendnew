@@ -51,25 +51,22 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
   willDestroyElement: ->
     $('body').off 'click.date-send-menu'
 
-  noContent: ( ->
+  noContent: Ember.computed 'controller.isSubmitted', 'controller.message', ->
     return unless @get('controller.isSubmitted')
 
     not @get('controller.message.length')
-  ).property('controller.isSubmitted', 'controller.message')
 
-  to: Radium.EmailAsyncAutocompleteView.extend
+  to: Radium.EmailAsyncAutocompleteView.extend Ember.computed 'controller.isSubmitted', 'controller.to.[]', ->
     classNameBindings: [':email']
     sourceBinding: 'controller.to'
     showAvatar: false
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.to.[]', ->
       return unless @get('controller.isSubmitted')
 
       @get('controller.to.length') == 0
-    ).property('controller.isSubmitted', 'controller.to.[]')
 
-    isValid: ( ->
+    isValid: Ember.computed 'controller.to.[]', ->
       @get('controller.to.length') > 0
-    ).property('controller.to.[]')
 
   cc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
@@ -98,11 +95,10 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
     classNameBindings: ['isInvalid']
     placeholder: 'Signature'
     valueBinding: 'targetObject.signature'
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'value', 'targetObject.signatureSubmited', ->
       return unless @get('targetObject.signatureSubmited')
 
       @get('value').length == 0
-    ).property('value', 'targetObject.signatureSubmited')
 
   onSignatureAdded: ->
     @send 'appendSignature'

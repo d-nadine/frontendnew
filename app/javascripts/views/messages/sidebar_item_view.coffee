@@ -9,18 +9,26 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     'controller.hasTasks'
   ]
 
-  itemClass: (->
+  setup: ( ->
+    @$('a.archive').tooltip()
+  ).on('didInsertElement')
+
+  teardown: ( ->
+    return unless @$
+
+    @$('a.archive')?.data('tooltip')?.destroy()
+  ).on('willDestroyElement')
+
+  itemClass: Ember.computed ->
     "#{@templateMap[@get('content.content.constructor')]}-item"
-  ).property()
 
   templateMap:
     'Radium.Email': 'email'
     'Radium.Discussion': 'discussion'
 
-  templateName: ( ->
+  templateName: Ember.computed 'content', ->
     part = @templateMap[@get('content.content.constructor')]
     "messages/#{part}_sidebar_item"
-  ).property('content')
 
   checker: Radium.Checkbox.extend
     classNames: ['checker-block']
