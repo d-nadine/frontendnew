@@ -76,6 +76,14 @@ Radium.MessagesRoute = Radium.Route.extend
 
       @send 'removeItem', item, 'archive'
 
+      foldersIcon = $('.email-folders')
+
+      foldersIcon.addClass('highlight')
+
+      setTimeout ->
+        foldersIcon.removeClass('highlight')
+      , 3000
+
     delete: (item) ->
       @send 'removeItem', item, 'delete'
 
@@ -106,10 +114,10 @@ Radium.MessagesRoute = Radium.Route.extend
           @send 'selectItem', nextItem
           @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
 
-        item.one 'becameInvalid', =>
+        item.one 'becameInvalid', ->
           sidebarController.set 'isLoading', false
 
-        item.one 'becameError', =>
+        item.one 'becameError', ->
           sidebarController.set 'isLoading', false
 
         @get('store').commit()
