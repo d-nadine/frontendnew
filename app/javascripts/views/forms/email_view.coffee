@@ -56,7 +56,7 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
 
     not @get('controller.message.length')
 
-  to: Radium.EmailAsyncAutocompleteView.extend Ember.computed 'controller.isSubmitted', 'controller.to.[]', ->
+  to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.to'
     showAvatar: false
