@@ -140,70 +140,76 @@
   {{/if}}
   <fieldset>
     <legend>Previous Contact Imports</legend>
-    <table class="table table-striped table-bordered table-hover attachments">
-      <thead>
-        <tr>
-          <th>File Name</th>
-          <th>Imported On</th>
-          <th>Imported</th>
-          <th>Status</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each sortedJobs itemController="importJobsItem"}}
+    {{#if model.isUpdating}}
+      {{partial 'is_loading'}}
+    {{else}}
+      <table class="table table-striped table-bordered table-hover attachments">
+        <thead>
           <tr>
-            <td>{{fileName}}</td>
-            <td>{{formatDateTime createdAt format="full"}}</td>
-            <td>{{importedCount}}</td>
-            <td {{bind-attr class="importStatus"}}>
-              {{#if completedWithErrors}}
-                Finished with errors <br/>
-                <a href="#" {{action "toggleErrors"}}>
-                  {{linkText}}
-                </a>
-              {{else}}
-                {{capitalize importStatus}}
-              {{/if}}
-            </td>
-            <td>
-              {{#if finished}}
-                <button type="button" {{action "confirmDeleteJob" this}} {{bind-attr disabled="isDeleting"}} class="close">
-                  <i class="ss-standard ss-delete"></i>
-                </button>
-              {{/if}}
-            </td>
+            <th>File Name</th>
+            <th>Imported On</th>
+            <th>Imported</th>
+            <th>Errors</th>
+            <th>Status</th>
+            <th>&nbsp;</th>
           </tr>
-          {{#if showErrors}}
+        </thead>
+        <tbody>
+          {{#each sortedJobs itemController="importJobsItem"}}
             <tr>
-              <td colspan="4">
-                <table class="table table-striped table-bordered table-hover attachments">
-                  <thead>
-                    <tr>
-                      <th>Index</th>
-                      <th>Error Message</th>
-                      <th>CSV Row</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each importErrors}}
-                      <tr>
-                        <td>{{index}}</td>
-                        <td>{{message}}
-                        <td>{{row}}</td>
-                      </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
+              <td>{{fileName}}</td>
+              <td>{{formatDateTime createdAt format="full"}}</td>
+              <td>{{importedCount}}</td>
+              <td class="center">{{importErrors.length}}</td>
+              <td {{bind-attr class="importStatus"}}>
+                {{#if completedWithErrors}}
+                  Finished with errors <br/>
+                  <a href="#" {{action "toggleErrors"}}>
+                    {{linkText}}
+                  </a>
+                {{else}}
+                  {{capitalize importStatus}}
+                {{/if}}
+              </td>
+              <td>
+                {{#if finished}}
+                  <button type="button" {{action "confirmDeleteJob" this}} {{bind-attr disabled="isDeleting"}} class="close">
+                    <i class="ss-standard ss-delete"></i>
+                  </button>
+                {{/if}}
               </td>
             </tr>
-          {{/if}}
-        {{else}}
-          <tr>
-            <td colspan="5">No imports have been completed.</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+            {{#if showErrors}}
+              <tr>
+                <td colspan="4">
+                  <table class="table table-striped table-bordered table-hover attachments">
+                    <thead>
+                      <tr>
+                        <th>Row</th>
+                        <th>Error Message</th>
+                        <th>CSV Row</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each importErrors}}
+                        <tr>
+                          <td>{{index}}</td>
+                          <td>{{message}}
+                          <td>{{row}}</td>
+                        </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            {{/if}}
+          {{else}}
+            <tr>
+              <td colspan="5">No imports have been completed.</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
 </fieldset>
 </div>
