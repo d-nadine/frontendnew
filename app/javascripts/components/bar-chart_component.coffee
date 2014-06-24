@@ -36,8 +36,9 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .brushOn(false)
       .mouseZoomable(false)
       .xUnits(d3.time.months)
-      .valueAccessor((d) -> d.value[valueAccessor])
+      .valueAccessor((d) -> d.value[valueAccessor + '_total'])
       .renderLabel(@get('renderLabel'))
+      .margins({top: 15, right: 10, bottom: 20, left: 60})
 
     chart.on('filtered', _.debounce((chart, filter) =>
       @sendAction('action', filter)
