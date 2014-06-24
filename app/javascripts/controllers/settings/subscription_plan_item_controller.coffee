@@ -21,12 +21,13 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     @get('isCurrent')
 
   totalUsers: Ember.computed 'isBasic', 'model.totalUsers', ->
-    if @get('isBasic')
+    if @get('isBasic') || @get('isSolo')
       1
     else
       @get('model.totalUsers') - 1
 
   isBasic: Ember.computed.equal 'model.planId', 'basic'
+  isSolo: Ember.computed.equal 'model.planId', 'solo'
 
   exceededUsers: Ember.computed 'model.totalUsers', 'users.[]', ->
     return true if @get('isUnlimited')
