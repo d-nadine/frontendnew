@@ -86,45 +86,17 @@
   </div>
 
   <div class="bar-charts">
-    <div class="col">
-      <h4>{{status_lead_total}} Leads</h4>
-      {{bar-chart 
-        dimension=deal 
-        group=deals
-        domain=domain
-        action="filterByDate"
-        valueAccessor="leads"
-        height="250"}}
-    </div>
-    <div class="col">
-      <h4>{{status_negotiating_total}} deals</h4>
-      {{bar-chart 
-        dimension=deal 
-        group=deals
-        domain=domain
-        action="filterByDate"
-        valueAccessor="deals"
-        height="250"}}
-    </div>
-    <div class="col">
-      <h4>{{status_closed_total}} closed deals</h4>
-      {{bar-chart 
-        dimension=deal 
-        group=deals
-        domain=domain
-        action="filterByDate"
-        valueAccessor="closed"
-        height="250"}}
-    </div>
-    <div class="col">
-      <h4>{{status_lost_total}} lost deals</h4>
-      {{bar-chart 
-        dimension=deal
-        group=deals
-        domain=domain
-        action="filterByDate"
-        valueAccessor="lost"
-        height="250"}}
-    </div>
+    {{#each workflow in workflowObjects}}
+      <div class="col">
+        <h4>{{workflow.status}} {{workflow.name}}</h4>
+        {{bar-chart 
+          dimension=deal 
+          group=deals
+          domain=domain
+          action="filterByDate"
+          valueAccessor=workflow.lowercaseName
+          height="250"}}
+      </div>
+    {{/each}}
   </div>
 </section>

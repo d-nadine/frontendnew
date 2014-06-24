@@ -51,48 +51,35 @@ Radium.ReportsController = Ember.ArrayController.extend
       d.total
     )
 
-    status = data.dimension((d) -> d.status).filter('closed')
+    status = data.dimension((d) -> d.status)
     statusesByTotal = status.group().reduceSum((d) -> d.total)
     statusesByAmount = status.group().reduceCount()
 
     deal = data.dimension((d) -> d.date)
+    controller = this
     deals = deal.group(d3.time.month).reduce(
       (p, v) ->
         p.total = p.total + 1
-        if v.status is "lead"
-          p.leads++
-          p.leads_total = p.leads_total + v.total
-        else if v.status is "lost"
-          p.lost++ 
-        else if v.status is "closed"
-          p.closed++ 
-        else 
-          p.deals++
-          p.deals_total = p.deals_total + v.total
+        console.log("add status", v.status)
+        p[v.status]++
+        status_total = p[v.status + '_total']
+        status_total = status_total + v.total
         p
       (p, v) ->
         p.total = p.total - 1
-        if v.status is "lead"
-          p.leads--
-          p.leads_total = p.leads_total - v.total
-        else if v.status is "lost"
-          p.lost-- 
-        else if v.status is "closed"
-          p.closed-- 
-        else 
-          p.deals_total = p.deals_total - v.total
-          p.deals--
+        p[v.status]--
+        status_total = p[v.status + '_total']
+        status_total = status_total - v.total
         p
       () ->
-        total: 0
-        leads: 0
-        leads_total: 0
-        deals: 0
-        deals_total: 0
-        closed: 0
-        closed_total: 0
-        lost: 0
-        lost_total: 0
+
+        stuff = {}
+        controller.get('dealStates').forEach (workflow) ->
+          workflow = workflow.toLowerCase()
+          stuff[workflow] = 0
+          stuff[workflow + '_total'] = 0
+        console.log(stuff)
+        stuff
     )
 
     company = data.dimension((d) -> d.company)
@@ -157,6 +144,7 @@ Radium.ReportsController = Ember.ArrayController.extend
 
       workflowObjects.push {
         name: rawState
+        lowercaseName: state
         total: totals[state]
         status: status_totals[state]
         deal: deals[state]
