@@ -1,11 +1,12 @@
 Radium.RdDaterangepickerComponent = Ember.Component.extend
-  startDate: null
-  endDate: null
+  startDate: new Date()
+  endDate: new Date()
 
   initializeDaterangepicker: (->
-    @$('input[name="daterangepicker"]').daterangepicker
+    @$('input.daterange-field').daterangepicker
       startDate: @get("startDate")
       endDate: @get("endDate")
+      opens: 'left'
       ranges:
         'Today': [moment(), moment()]
         'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)]
