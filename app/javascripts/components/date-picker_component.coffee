@@ -8,7 +8,7 @@ Radium.DatePickerComponent = Ember.Component.extend
       unless @get('pickerShown')
         datePicker.show()
 
-        Ember.run.next  =>
+        Ember.run.next  ->
           view.$().get(0).select()
       else
         datePicker.hide()
@@ -96,7 +96,7 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if evt.dontSubmit
       return unless target.get('submitForm')
 
-      Ember.run.next =>
+      Ember.run.next ->
         target.sendAction 'submitForm'
 
     hideDatePicker: ->
@@ -133,14 +133,11 @@ Radium.DatePickerComponent = Ember.Component.extend
           date: date
       else if keyCode == @ESCAPE
         @resetDateDisplay()
-      else if keyCode = @TAB
-        @$().trigger
-          type: 'changeDate'
-          date: date
-          dontSubmit: true
+      else if keyCode == @TAB
+        @$().data('datepicker').hide()
 
         @$('.datepicker').find('a').attr('tabindex','-1')
-        @$().parent().next().find('input').focus()
+        return @$().parent().next().find('input').focus()
 
       evt.stopPropagation()
       evt.preventDefault()
