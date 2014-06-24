@@ -129,17 +129,6 @@
         <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
       </div>
     {{else}}
-      <div class="search-results-header row-fluid">
-        <div class="span1">Select All</div>
-
-        <div class="span2 name">Name</div>
-        <div class="span1 company">Company</div>
-        <div class="span2 nexttask">Next Task</div>
-        <div class="span1 inactive">Inactive</div>
-        <div class="span2 lastcommunication">Last Communication</div>
-        <div class="span1 assignedto">Assigned</div>
-        <div class="span1 deals">Deals</div>
-      </div>
       <div class="skinny-line row-fluid">
         <div class="span1 row-fluid">
           <div class="span6 select">{{input type="checkbox"}}</div>
@@ -157,11 +146,26 @@
         </div>
         <div class="span1 inactive">3 days</div>
         <div class="span2 lastcommunication">4 Weeks ago</div>
-        <div class="span1 assignedto">Ryan Grush</div>
+        <div class="span2 assignedto">Ryan Grush</div>
         <div class="span1 deals">6</div>
       </div>
       {{#if visibleContent.length}}
         <div class="search-results-header row-fluid">
+          <div class="span1">Select All</div>
+
+          <div class="span3 row-fluid">
+            <div class="span6 name">Name</div>
+            <div class="span6 company">Company</div>
+          </div>
+          <div class="span2 nexttask">Next Task</div>
+          <div class="span1 inactive">Inactive</div>
+          <div class="span2 lastcommunication">Last Communication</div>
+          <div class="span3 row-fluid">
+            <div class="span6 assignedto">Assigned</div>
+            <div class="span6 deals">Deals</div>
+          </div>
+
+          <!--
           <div class="span2 checkers">
             {{partial 'forms/check_all'}}
             <div class="pull-right">
@@ -174,18 +178,7 @@
               </a>
             </div>
           </div>
-          <div class="span3 name">
-            Name
-          </div>
-          <div class="span2 last-activity">
-            Assigned To
-          </div>
-          <div class="span3 next-task">
-            Next Task
-          </div>
-          <div class="span2 groups">
-            Tags
-          </div>
+          --!>
         </div>
       {{/if}}
       {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}

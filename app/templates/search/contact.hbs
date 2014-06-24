@@ -1,3 +1,4 @@
+<!---
 <div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
   {{#if isLoaded}}
@@ -52,4 +53,48 @@
   {{#each tags}}
     {{name}}
   {{/each}}
+</div>
+--!>
+<div class="span1 row-fluid">
+  <div class="span6 select">{{input type="checkbox"}}</div>
+  <div class="span6 avatar">
+    {{#if isLoaded}}
+      {{#if parentController.isThumbnailsVisible}}
+        {{avatar this size=small class="img-polaroid"}}
+      {{/if}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
+  </div>
+</div>
+<div class="span3 row-fluid">
+  <div class="span6 name">
+    {{#link-to "contact" this}}
+      {{name}}
+    {{/link-to}}
+  </div>
+  <div class="span6 company">
+    {{#if company}}
+      {{#link-to "company" company}}{{company.name}}{{/link-to}}
+    {{/if}}
+  </div>
+</div>
+<div class="span2 nextTask">
+  {{partial 'search/tasks'}}
+  <!--
+  <a class="btn btn-main next-task-widget" style="height:30px">
+    <i class="ss-standard ss-check green"></i>
+    <span class="text">Meet for lunch</span>
+  </a>
+  --!>
+</div>
+<div class="span1 inactive">3 days</div>
+<div class="span2 lastcommunication">4 Weeks ago</div>
+<div class="span3 row-fluid">
+  <div class="span6 assignedto">
+    {{resource-link-to user}}
+  </div>
+  <div class="span6 deals">
+    {{partial 'search/links'}}
+  </div>
 </div>
