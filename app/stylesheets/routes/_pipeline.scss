@@ -163,6 +163,9 @@
 
   .status-last-changed-at {
     width: percentage(100px / $base-width);
+    i.ss-dropdown {
+      right: -30px;
+    }
   }
 
   .next-task {
