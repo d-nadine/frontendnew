@@ -73,7 +73,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
       @set('isLoading', false)
 
     toggleSearch: ->
-      @toggleProperty 'isSearchOpen' 
+      @toggleProperty 'isSearchOpen'
 
   needs: ['messages', 'emailsShow', 'messagesDiscussion']
 

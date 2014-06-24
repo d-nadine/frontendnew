@@ -6,4 +6,3 @@ Radium.EmailsSentRoute = Ember.Route.extend
 
   activate: ->
     @controllerFor('messagesSidebar').send 'reset'
-

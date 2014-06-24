@@ -190,6 +190,9 @@ Radium.MessagesRoute = Radium.Route.extend
     @send 'closeDrawer'
 
 Radium.MessagesIndexRoute = Radium.Route.extend
+  beforeModel: ->
+    @controllerFor('messagesSidebar').send 'reset'
+
   afterModel: (model, transition) ->
     return if @controllerFor('messagesSidebar').get('searchIsActive')
 
@@ -201,6 +204,9 @@ Radium.MessagesIndexRoute = Radium.Route.extend
       return
 
     item = model.get('firstObject')
+
+    unless item
+      return @transitionTo 'emails.empty', folder
 
     # FIXME: we should be able to call
     # @send 'selectItem', item
