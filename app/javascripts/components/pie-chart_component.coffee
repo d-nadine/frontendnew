@@ -35,7 +35,7 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
     if @get('valueFormat') == 'default'
       object.value
     else if @get('valueFormat') == 'money'
-      accounting.formatMoney(object.value)
+      accounting.formatMoney(object.value['closed_total'])
 
   formattedTitle: (titleObject) ->
     "#{titleObject.key}: #{@formattedValue(titleObject)}"
@@ -52,6 +52,8 @@ Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .label((d) => @formattedValue(d))
       .legend(dc.legend().x((@get('radius')*2) + 10).y(10))
       .title((d) => @formattedTitle(d))
+      .valueAccessor((d) -> d.value['closed_total'])
+
     chart.on('filtered', @setFilter.bind(this))
 
     chart.render()

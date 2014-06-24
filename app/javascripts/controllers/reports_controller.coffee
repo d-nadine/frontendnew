@@ -3,6 +3,30 @@ Note: This controller is WIP. Filtering and Crossfilter setup
 needs to be significantly trimmed, there is an exorbitant amount of filter lookups
 that need to be reduced elegantly
 ###
+
+reduceByStatus = (crossfilterGroups, context) ->
+  crossfilterGroups.reduce(
+    (p, v) ->
+      p.total = p.total + 1
+      p[v.status]++
+      p[v.status + '_total'] = p[v.status + '_total'] + v.total
+      p
+    (p, v) ->
+      p.total = p.total - 1
+      p[v.status]--
+      p[v.status + '_total'] = p[v.status + '_total'] - v.total
+      p
+    () ->
+      stuff = {}
+      context.get('dealStates').forEach (workflow) ->
+        workflow = workflow.toLowerCase()
+        stuff[workflow] = 0
+        stuff[workflow + '_total'] = 0
+      console.log(stuff)
+      stuff['total'] = 0
+      stuff
+  )
+
 Radium.ReportsController = Ember.ArrayController.extend
   needs: ['application', 'account', 'accountSettings']
   dealStates: Ember.computed.alias 'controllers.accountSettings.dealStates'
@@ -47,44 +71,21 @@ Radium.ReportsController = Ember.ArrayController.extend
     quarters = quarter.group()
 
     user = data.dimension (d) -> d.user
-    users = user.group().reduceSum((d) ->
-      d.total
-    )
+    users = user.group()
+    reduceByStatus(users, this)
 
     status = data.dimension((d) -> d.status)
     statusesByTotal = status.group().reduceSum((d) -> d.total)
     statusesByAmount = status.group().reduceCount()
 
     deal = data.dimension((d) -> d.date)
-    controller = this
-    deals = deal.group(d3.time.month).reduce(
-      (p, v) ->
-        p.total = p.total + 1
-        console.log("add status", v.status)
-        p[v.status]++
-        status_total = p[v.status + '_total']
-        status_total = status_total + v.total
-        p
-      (p, v) ->
-        p.total = p.total - 1
-        p[v.status]--
-        status_total = p[v.status + '_total']
-        status_total = status_total - v.total
-        p
-      () ->
 
-        stuff = {}
-        controller.get('dealStates').forEach (workflow) ->
-          workflow = workflow.toLowerCase()
-          stuff[workflow] = 0
-          stuff[workflow + '_total'] = 0
-        console.log(stuff)
-        stuff
-    )
+    deals = deal.group(d3.time.month)
+    reduceByStatus(deals, this)
 
     company = data.dimension((d) -> d.company)
     companies = company.group().reduceSum((d) -> d.total)
-    
+    reduceByStatus(companies, this)
     # TODO: Break this into a composable object, so it can be
     # iterated over when applying filters
     @setProperties(
