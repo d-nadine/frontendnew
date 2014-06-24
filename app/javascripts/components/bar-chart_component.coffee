@@ -7,6 +7,11 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   classNames: 'bar-chart'
   domain: [0, 1]
 
+  rotateText: ->
+    @$(".x .tick text").each (index, element) ->
+      if(!(parseInt($(element).text())))
+        $(element).attr("transform", "rotate(20)")
+
   willDestroyElement: ->
     $(window).off('resize.chart')
     @get('parentView').removeChart(@get('chart'))
@@ -17,6 +22,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   resize: ->
     width = @$().parent().width()
     @get('chart').width(width).render()
+    @rotateText()
 
   renderChart: ->
     chart = @get 'chart'
@@ -38,7 +44,7 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .xUnits(d3.time.months)
       .valueAccessor((d) -> d.value[valueAccessor + '_total'])
       .renderLabel(@get('renderLabel'))
-      .margins({top: 15, right: 10, bottom: 20, left: 60})
+      .margins({top: 15, right: 10, bottom: 30, left: 60})
 
     chart.on('filtered', _.debounce((chart, filter) =>
       @sendAction('action', filter)
@@ -46,9 +52,11 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
 
     chart.render()
 
+    @rotateText()
+
     @get('parentView').registerChart(chart)
 
     # For debugging
     @$().data('chart', chart)
-    
+
     $(window).on('resize.chart', _.debounce(@resize.bind(this), 50).bind(this))
