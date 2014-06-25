@@ -46,10 +46,6 @@ Radium.BarChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
       .renderLabel(@get('renderLabel'))
       .margins({top: 15, right: 10, bottom: 30, left: 60})
 
-    chart.on('filtered', _.debounce((chart, filter) =>
-      @sendAction('action', filter)
-    ), 100)
-
     chart.render()
 
     @rotateText()

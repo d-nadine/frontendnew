@@ -1,24 +1,9 @@
 <div id="master-filter" class="reports-filter">
-  <div>
-    {{date-range source=controller 
-        height=30 
-        startDate=startDate 
-        endDate=endDate 
-        domain=domain
-        filter="filterByDate" 
-        reset="reset"}}
-  </div>
   <div class="option">
     <button class="btn" {{action "reset"}}>Reset</button>
   </div>
   <div class="option">
-    <div class="btn-group">
-      <button class="btn" {{action "filterThisMonth"}}>This month</button>
-      <button class="btn" {{action "filterByQuarter" "Q1"}}>Q1</button>
-      <button class="btn" {{action "filterByQuarter" "Q2"}}>Q2</button>
-      <button class="btn" {{action "filterByQuarter" "Q3"}}>Q3</button>
-      <button class="btn" {{action "filterByQuarter" "Q4"}}>Q4</button>
-    </div>
+   {{rd-daterangepicker action="filterByDate"}}
   </div>
   <div class="option">
     {{report-dropdown 

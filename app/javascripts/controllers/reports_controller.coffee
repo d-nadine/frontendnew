@@ -44,31 +44,12 @@ Radium.ReportsController = Ember.ArrayController.extend
   defaultSelectedCompany: 'All Companies'
   selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
 
-  currentYear: 2014
+  currentYear: 2013
 
   setupCrossfilter: ->
     today = @get('app.today').toJSDate()
     data = crossfilter(@get('content'))
     all = data.groupAll()
-
-    year = data.dimension((d) -> d.date)
-    years = year.group(d3.time.year)
-
-    quarter = data.dimension (d) ->
-      month = d.date.getMonth()
-
-      if (month <= 2)
-        q = "Q1"
-      else if (month > 3 && month <= 5)
-        q = "Q2"
-      else if (month > 5 && month <= 8)
-        q = "Q3"
-      else
-        q = "Q4"
-
-      q
-
-    quarters = quarter.group()
 
     user = data.dimension (d) -> d.user
     users = user.group()
@@ -90,10 +71,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     # iterated over when applying filters
     @setProperties(
       crossfilter: data
-      year: year
-      years: years
-      quarter: quarter
-      quarters: quarters
       user: user
       users: users
       deal: deal
@@ -112,14 +89,12 @@ Radium.ReportsController = Ember.ArrayController.extend
     statusesByAmount = @get 'statusesByAmount'
     deals = @get 'deals'
     users = @get 'users'
-    quarters = @get 'quarters'
     companies = @get 'companies'
     allTotals = totalsByStatus.all()
     allStatuses = statusesByAmount.all()
     allDeals = deals.all()
 
     @set 'allUsers', users.all()
-    @set 'allQuarters', quarters.all()
     @set 'allCompanies', companies.all()
 
     totals = {}
@@ -155,17 +130,9 @@ Radium.ReportsController = Ember.ArrayController.extend
     @set('workflowObjects', workflowObjects)
 
   setDates: (start, end) ->
-    if arguments.length
-      startDate = d3.time.month.floor(start)
-      endDate = d3.time.month.ceil(end)
-    else
-      date = new Date()
-      startDate = d3.time.year.floor(date)
-      endDate = d3.time.year.ceil(date)
-
     @setProperties(
-      startDate: Ember.DateTime.create(startDate.getTime())
-      endDate: Ember.DateTime.create(endDate.getTime())
+      startDate: Ember.DateTime.create(start.getTime())
+      endDate: Ember.DateTime.create(end.getTime())
     )
 
   actions:
@@ -177,33 +144,18 @@ Radium.ReportsController = Ember.ArrayController.extend
       else
         this.transitionToRoute('pipeline.workflow', state)
 
-    filterByDate: (date) ->
-      if date
-        @get('quarter').filter(null)
-        @get('deal').filter(date)
-        @setDates(date[0], date[1])
-        @calcSums()
-      else
-        @setDates()
+    filterByDate: (startDate, endDate) ->
+      console.log('filterByDate', startDate, endDate)
+      @setDates(startDate, endDate)
+      @calcSums()
       dc.redrawAll()
 
     reset: ->
       @get('user').filter(null)
       @get('deal').filter(null)
-      @get('quarter').filter(null)
       @get('status').filter(null)
       @get('company').filter(null)
       @set 'selectedUser', null
-      @calcSums()
-      dc.redrawAll()
-
-    filterThisMonth: ->
-      day = @get('app.today').toJSDate()
-      start = d3.time.month.floor(day)
-      end = d3.time.month.ceil(day)
-      @get('deal').filter([start, end])
-      @get('quarter').filter(null)
-      @setDates(start, end)
       @calcSums()
       dc.redrawAll()
 

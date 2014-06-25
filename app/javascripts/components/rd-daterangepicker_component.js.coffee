@@ -16,4 +16,5 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
       (start, end) =>
         @set("startDate", moment(start).toDate())
         @set("endDate", moment(end).toDate())
+        @sendAction('action', @get("startDate"), @get('endDate'))
   ).on("didInsertElement")
