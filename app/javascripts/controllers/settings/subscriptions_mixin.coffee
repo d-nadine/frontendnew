@@ -6,17 +6,21 @@ Radium.SubscriptionMixin = Ember.Mixin.create
     @get('subscriptionPlans').reject (plan) =>
       (plan.get('disabled') && plan != @get('currentPlan'))
 
-  currentPlan: Ember.computed 'subscriptionPlans.[]', 'account.billingInfo.subscription', ->
-    subscription = @get('account.billingInfo.subscription')
+  currentPlan: Ember.computed 'subscriptionPlans.[]', 'account.billing.subscription', ->
+    subscription = @get('account.billing.subscription')
     return unless subscription
 
     subscriptionPlans = @get('subscriptionPlans')
     return unless subscriptionPlans.get('length')
 
-    @get('subscriptionPlans').find (plan) => plan.get('planId') == subscription
+    plan = @get('subscriptionPlans').find (plan) -> plan.get('planId') == subscription.get('planId')
+
+    plan
 
   totalUsers: Ember.computed 'currentPlan.totalUsers', ->
-    if @get('currentPlan.planId') == 'basic'
-      1
-    else
-      @get('currentPlan.totalUsers') - 1
+    return unless @get('currentPlan')
+
+    Ember.assert "Subscription plan should have totalUsers", @get('currentPlan.totalUsers')
+
+    totalUsers = @get('currentPlan.totalUsers')
+    if totalUsers == 1 then 1 else totalUsers - 1

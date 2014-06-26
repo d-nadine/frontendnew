@@ -1,3 +1,3 @@
 Radium.AccountController = Radium.ObjectController.extend
-  hasGatewayAccount: Ember.computed 'billingInfo.gatewayIdentifier', ->
-    return @get('billingInfo.gatewayIdentifier')
+  hasGatewayAccount: Ember.computed 'billing.gatewayIdentifier', ->
+    return @get('billing.gatewayIdentifier')

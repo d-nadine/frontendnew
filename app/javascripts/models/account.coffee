@@ -3,9 +3,10 @@ Radium.Account = Radium.Model.extend
   workflow: DS.hasMany('Radium.Workflow')
   users: DS.hasMany('Radium.User')
   leadSources: DS.attr('array')
-  billingInfo: DS.belongsTo('Radium.BillingInfo')
   gatewaySetup: DS.attr('boolean')
   subscriptionInvalid: DS.attr('boolean')
   isTrial: DS.attr('boolean')
   trialDaysLeft: DS.attr('number')
   isUnlimited: DS.attr('boolean')
+
+  billing: DS.belongsTo('Radium.Billing')

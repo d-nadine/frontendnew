@@ -219,7 +219,8 @@ Radium.RESTAdapter.configure('plurals',{
   user_settings: 'user_settings',
   activity: 'activities',
   destroy: 'destroy',
-  user_statistics: 'user_statistics'
+  user_statistics: 'user_statistics',
+  billing: 'billing'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
@@ -274,8 +275,7 @@ Radium.RESTAdapter.registerTransform('datetime',  {
 });
 
 Radium.RESTAdapter.map('Radium.Account', {
-  workflow: {embedded: 'always'},
-  billingInfo: {embedded: 'always'}
+  workflow: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.Activity', {
