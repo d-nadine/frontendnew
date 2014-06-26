@@ -31,12 +31,3 @@ Radium.ReportsView = Ember.View.extend
 
   removeChart: (chart) ->
     @get('charts').removeObject chart
-
-  updateCharts: (->
-    startDate = @get('controller.startDate').toJSDate()
-    endDate = @get('controller.endDate').toJSDate()
-
-    @get('charts').forEach((chart) =>
-      chart.focus([startDate, endDate])
-    )
-  ).observes('controller.startDate', 'controller.endDate')

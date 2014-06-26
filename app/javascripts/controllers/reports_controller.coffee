@@ -22,7 +22,6 @@ reduceByStatus = (crossfilterGroups, context) ->
         workflow = workflow.toLowerCase()
         stuff[workflow] = 0
         stuff[workflow + '_total'] = 0
-      console.log(stuff)
       stuff['total'] = 0
       stuff
   )
@@ -34,9 +33,11 @@ Radium.ReportsController = Ember.ArrayController.extend
   account: Ember.computed.alias 'controllers.account'
   app: Ember.computed.alias 'controllers.application'
   domain: (->
-    date = new Date(@get('currentYear'), '05', '15')
-    [d3.time.year.floor(date), d3.time.year.ceil(date)]
-  ).property()
+    start = d3.time.day(@get('startDate').toJSDate())
+    end =  d3.time.day(@get('endDate').toJSDate())
+    console.log('domain', start, end)
+    [start, end]
+  ).property('startDate', 'endDate')
   startDate: Ember.DateTime.create(),
   endDate: Ember.DateTime.create(),
   defaultSelectedUser: 'Everyone'
@@ -56,13 +57,6 @@ Radium.ReportsController = Ember.ArrayController.extend
     reduceByStatus(users, this)
 
     status = data.dimension((d) -> d.status)
-    statusesByTotal = status.group().reduceSum((d) -> d.total)
-    statusesByAmount = status.group().reduceCount()
-
-    deal = data.dimension((d) -> d.date)
-
-    deals = deal.group(d3.time.month)
-    reduceByStatus(deals, this)
 
     company = data.dimension((d) -> d.company)
     companies = company.group().reduceSum((d) -> d.total)
@@ -70,27 +64,36 @@ Radium.ReportsController = Ember.ArrayController.extend
     # TODO: Break this into a composable object, so it can be
     # iterated over when applying filters
     @setProperties(
+      data: data
       crossfilter: data
       user: user
       users: users
-      deal: deal
-      deals: deals
       company: company
       companies: companies
       status: status
-      statusesByTotal: statusesByTotal
-      statusesByAmount: statusesByAmount
     )
 
     @calcSums()
 
+  dateDimension: Ember.computed 'crossfilter', ->
+    @get('crossfilter').dimension( (d) -> d.date)
+
   calcSums: ->
-    totalsByStatus = @get 'statusesByTotal'
-    statusesByAmount = @get 'statusesByAmount'
-    deals = @get 'deals'
+    statusesByTotal = @get('status').group().reduceSum((d) -> d.total)
+    statusesByAmount = @get('status').group().reduceCount()
+
+    @set('statusesByTotal', statusesByTotal)
+    @set('statusesByAmount', statusesByAmount)
+
+    deal = @get('dateDimension').filter(@get('domain'))
+    deals = deal.group()
+    reduceByStatus(deals, this)
+    @set('deal', deal)
+    @set('deals', deals)
+
     users = @get 'users'
     companies = @get 'companies'
-    allTotals = totalsByStatus.all()
+    allTotals = statusesByTotal.all()
     allStatuses = statusesByAmount.all()
     allDeals = deals.all()
 
