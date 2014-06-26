@@ -172,7 +172,7 @@
                 {{/if}}
               </td>
               <td>
-                {{#if finished}}
+                {{#if isFinished}}
                   <button type="button" {{action "confirmDeleteJob" this}} {{bind-attr disabled="isDeleting"}} class="close">
                     <i class="ss-standard ss-delete"></i>
                   </button>

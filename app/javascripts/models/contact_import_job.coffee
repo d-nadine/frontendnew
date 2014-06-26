@@ -18,3 +18,8 @@ Radium.ContactImportJob = Radium.Model.extend
 
   isDeleting: Ember.computed 'importStatus', ->
     @get('importStatus') == 'deleting'
+
+  isFinished: Ember.computed 'importStatus', ->
+    return false if @get('isProcessing') || @get('isDeleting')
+
+    @get('finished') || @get('importStatus') == 'finished'
