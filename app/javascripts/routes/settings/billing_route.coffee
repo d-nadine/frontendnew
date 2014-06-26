@@ -16,16 +16,16 @@ Radium.SettingsBillingRoute = Radium.Route.extend
 
     return unless accountController.get('gatewaySetup')
 
-    billingInfo = accountController.get('billingInfo')
+    billing = accountController.get('billing')
 
     hash =
       card: Radium.ActiveCard.find accountController.get('id')
 
-    if billingInfo.get('hasSubscription')
+    if billing.get('hasSubscription')
       hash.subscription = Radium.ActiveSubscription.find accountController.get('id')
 
     Ember.RSVP.hash(hash)
-      .catch (error) =>
+      .catch (error) ->
         if hash.card.get('inErrorState')  || error.constructor == Radium.ActiveCard
           delete hash.card
 
@@ -35,8 +35,8 @@ Radium.SettingsBillingRoute = Radium.Route.extend
         return hash
 
   setupController: (controller, model) ->
-    billingInfo = @controllerFor('account').get('model.billingInfo')
-    controller.set 'model', billingInfo
+    billing = @controllerFor('account').get('model.billing')
+    controller.set 'model', billing
 
     return unless model
 

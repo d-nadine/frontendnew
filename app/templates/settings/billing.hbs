@@ -70,7 +70,7 @@
             {{#unless exceededUsers}}
               <button
                 {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}
-                {{action "updateSubscription" planId}}>
+                {{action "updateSubscription" this}}>
                 {{#if isCurrent}}
                   Your plan
                 {{else}}
