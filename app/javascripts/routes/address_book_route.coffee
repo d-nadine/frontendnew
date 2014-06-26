@@ -12,8 +12,8 @@ Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
     addressBookProxy.load().then ->
       return addressBookProxy
 
-  redirect: (model, transition) ->
-    return if transition.params["addressbook.filter"]
+  afterModel: (model, transition) ->
+    return if transition.params["addressbook.filter"] || transition.params['addressbook.contactimportjobs']
     if !model.get("contacts.length")
       @transitionTo("externalcontacts")
     else
@@ -32,7 +32,7 @@ Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEvents
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
     addressbookController.set 'searchText', ''
-    Ember.run.next =>
+    Ember.run.next ->
       addressbookController.set('model.selectedFilter', model)
 
 Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
@@ -41,7 +41,7 @@ Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEven
 
   setupController: (controller, model) ->
     addressbookController = @controllerFor('addressbook')
-    Ember.run.next =>
+    Ember.run.next ->
       addressbookController.set 'model.assignedUser', model
       addressbookController.set('model.selectedFilter', 'usersContacts')
 
@@ -50,7 +50,7 @@ Radium.AddressbookMemberBaseRoute = Radium.Route.extend Radium.BulkActionEmailEv
     addressbookController = @controllerFor('addressbook')
     addressbookController.set 'searchText', ''
     addressbookController.set('currentPage', 1)
-    Ember.run =>
+    Ember.run ->
       addressbookController.set('model.selectedResource', model)
       addressbookController.trigger 'selectedResourceChanged', model
       addressbookController.set 'model.selectedFilter', 'resource'
@@ -71,7 +71,7 @@ Radium.AddressbookContactimportjobsRoute = Radium.Route.extend
     addressbookController = @controllerFor('addressbook')
     addressbookController.set 'searchText', ''
     addressbookController.set('currentPage', 1)
-    Ember.run =>
+    Ember.run ->
       addressbookController.set('model.selectedResource', model)
       addressbookController.trigger 'selectedResourceChanged', model
       addressbookController.set 'model.selectedFilter', 'resource'
