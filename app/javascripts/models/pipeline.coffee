@@ -39,6 +39,10 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
 
     @group deals, states
 
+  activeDeals: Ember.computed 'workflowDeals.[]', ->
+    return @get("workflowDeals").filter (deal) ->
+      return deal.get("status").toLowerCase() not in ["closed", "lost"]
+
   groupType: WorkflowGroup
 
   groupBy: (deal) ->

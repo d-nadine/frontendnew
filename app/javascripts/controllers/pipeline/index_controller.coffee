@@ -13,7 +13,7 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
 
   selectedGroup: Ember.computed.alias 'controllers.workflowGroupItem.selectedGroup'
 
-  title: 'Pipeline'
+  title: 'Active Pipeline'
 
   hasCheckedContent: Ember.computed.bool 'checkedContent.length'
 

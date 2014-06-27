@@ -1,9 +1,11 @@
 require 'controllers/pipeline/base_controller'
 
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
+  needs: ["pipelineIndex"]
   sort: 'name'
   sortAscending: true
   filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
+  searchText: Ember.computed.alias 'controllers.pipelineIndex.searchText'
 
   actions:
     toggleChecked: ->
@@ -18,18 +20,8 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
         @set 'sortAscending', ascending
         @notifyPropertyChange 'sort'
 
-  bindSearchText: (->
-    parentController = @get('parentController.parentController')
-    return unless parentController instanceof Radium.PipelineIndexController
-    Ember.bind(this, 'searchText', 'parentController.parentController.searchText')
-  ).on("init")
-
   resultsDidChange: Ember.observer('arrangedContent.[]', 'searchText', ->
-    unless parentController = @get('parentController')
-      return
-
-    return unless parentController instanceof Radium.WorkflowGroupItemController
-
+    parentController = @get("controllers.pipelineIndex")
     return if parentController.get("isDestroying")
 
     parentController.set('arrangedDealsLength', @get('length'))
@@ -64,7 +56,7 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
 
       return Ember.DateTime.compare sortA.get('time'), sortB.get('time')
 
-    if sort == "expectedCloseDate" or sort == 'updatedAt'
+    if sort in ["expectedCloseDate", "statusLastChangedAt", "updatedAt"]
       sortA = left.get(sort)
       sortB = right.get(sort)
       if sortA && sortB

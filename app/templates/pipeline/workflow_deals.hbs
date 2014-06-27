@@ -19,9 +19,11 @@
       <th class="next-task">
         {{table-sorter heading="Next Task" sortOn="nextTask" sort="sortDeals"}}
       </th>
-      <th class="status">Change Status</th>
+      <th class="status">
+        {{table-sorter heading="Change Status" sortOn="status" sort="sortDeals"}}
+      </th>
       <th class="status-last-changed-at">
-        {{table-sorter heading="Last Change" sortOn="statusLastChangedAt" sort="sortDeals"}}
+        {{table-sorter heading="Last State Change" sortOn="statusLastChangedAt" sort="sortDeals"}}
       </th>
       <th class="forecast">Forecast</th>
       <th class="value">

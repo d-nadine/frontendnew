@@ -88,27 +88,15 @@
     </table>
   </div>
   <div class="pipeline-workflows-list">
-    {{#each workflowGroups itemController="workflowGroupItem"}}
-      {{#if content.length}}
-      {{#unless hide}}
-      <div class="pipeline-workflows-list-item">
-        <div class="page-header">
-          <h3>{{capitalize content.title}} ({{arrangedDealsLength}})</h3>
+      {{#if activeDeals.length}}
+        <div class="pipeline-workflows-list-item">
+          <div class="page-header">
+            <h3>All Active Deals ({{arrangedDealsLength}})</h3>
+          </div>
+          <div class="deals">
+            {{render 'pipeline/workflow_deals' activeDeals}}
+          </div>
         </div>
-        <div class="deals">
-          {{#if isWorkflow}}
-            {{render 'pipeline/workflow_deals' deals}}
-          {{/if}}
-          {{#if isClosed}}
-            {{render 'pipeline/closed' deals}}
-          {{/if}}
-          {{#if isLost}}
-            {{render 'pipeline/lost' deals}}
-          {{/if}}
-        </div>
-      </div>
-      {{/unless}}
       {{/if}}
-    {{/each}}
   </div>
 {{/unless}}
