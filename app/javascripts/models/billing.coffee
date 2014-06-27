@@ -13,6 +13,8 @@ Radium.Billing = Radium.Model.extend
   subscriptionEnded: DS.attr('boolean')
   subscriptionEndDate: DS.attr('datetime')
   gatewaySet: DS.attr('boolean')
+  isTrial: DS.attr('boolean')
+  subscriptionInvalid: DS.attr('boolean')
 
   isBasic: Ember.computed 'subscription.planId', ->
     @get('subscription.planId') == 'basic'

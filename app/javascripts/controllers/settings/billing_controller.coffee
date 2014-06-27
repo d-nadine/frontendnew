@@ -89,14 +89,14 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       billing = @get('model')
 
-      Ember.assert "Current subscription is available for selection.", billing.get('subscription') != subscription
-
       billing.set('subscription', subscription)
       billing.set('gatewaySet', true)
 
       @applyBufferedChanges()
 
       billing.one 'didUpdate', =>
+        billing.reload()
+
         if subscription.get('planId') != 'basic'
           Radium.ActiveSubscription.find(@get('account.id')).then (activeSubscription) =>
             @set 'activeSubscription', activeSubscription

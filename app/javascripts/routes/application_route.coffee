@@ -1,7 +1,7 @@
 Radium.ApplicationRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
-      if @controllerFor('currentUser').get('account.subscriptionInvalid')
+      if @controllerFor('currentUser').get('account.billing.subscriptionInvalid')
         return true if transition.targetName == "settings.billing"
 
         @send 'flashError', 'You can only access the settings page unless you upgrade your plan.'
@@ -194,7 +194,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     Radium.Deal.find({})
 
   afterModel: ->
-    if @controllerFor('currentUser').get('account.subscriptionInvalid')
+    if @controllerFor('currentUser').get('account.billing.subscriptionInvalid')
       @transitionTo 'settings.billing'
 
   setupController: (controller, deals) ->
@@ -204,7 +204,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
     contactsController = @controllerFor('contacts')
 
-    Radium.Contact.find({}).then (contacts) =>
+    Radium.Contact.find({}).then (contacts) ->
       contactsController.set 'model', contacts
       contactsController.set 'isLoading', false
 

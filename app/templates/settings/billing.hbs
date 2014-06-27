@@ -1,10 +1,10 @@
-{{#if account.isTrial}}
+{{#if isTrial}}
   <div class="alert alert-info">
     There are currently <strong>{{account.trialDaysLeft}} {{trialUnit}}</strong> left on your <strong>{{currentPlan.name}}</strong> trial plan.
   </div>
 {{/if}}
 
-{{#if currentUser.account.subscriptionInvalid}}
+{{#if subscriptionInvalid}}
   <div class="alert">
     <i class="ss-standard ss-clock"></i> Your subscription has expired. Please <a href="#" {{action updateBilling}}>upgrade your plan</a> to continue using Radium.
   </div>
@@ -20,7 +20,7 @@
     <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
   {{/unless}}
 
-  {{#if account.isTrial}}
+  {{#if isTrial}}
     <p><strong>You are currently on a trial {{currentPlan.name}} account, you have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong></p>
     <p><strong>Choose a plan below to upgrade your account</strong></p>
   {{else}}
