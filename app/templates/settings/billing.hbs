@@ -35,8 +35,8 @@
     <strong>Next Payment Due: {{formatDateTime activeSubscription.nextDueDate format="calendar"}}</strong>
   {{/if}}
 
-  {{#if account.billingInfo.subscriptionEnded}}
-    <strong>Your account has been cancelled and will expire: {{formatDateTime account.billingInfo.subscriptionEndDate format="calendar"}}</strong>
+  {{#if subscriptionEnded}}
+    <strong>Your account has been cancelled and will expire: {{formatDateTime subscriptionEndDate format="calendar"}}</strong>
   {{/if}}
 
   <div class="row-fluid pricing-table-list">

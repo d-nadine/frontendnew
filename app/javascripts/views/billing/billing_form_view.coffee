@@ -9,11 +9,13 @@ Radium.BillingFormView = Radium.View.extend
 
       controller.set('isSubmitted', true)
 
+      controller.applyBufferedChanges()
+
       unless controller.get('isValid')
         controller.set 'isPersisting', false
         return
 
-      stripeResponseHandler = (status, response) =>
+      stripeResponseHandler = (status, response) ->
         if response.error
           controller.set 'isPersisting', false
           controller.send 'flashError', response.error.message
@@ -55,7 +57,7 @@ Radium.BillingFormView = Radium.View.extend
   teardown: ( ->
     clone = this.$().clone()
     @$().parent().prepend(clone)
-    clone.slideUp 'slow', =>
+    clone.slideUp 'slow', ->
       clone.remove()
   ).on 'willDestroyElement'
 
@@ -67,8 +69,8 @@ Radium.BillingFormView = Radium.View.extend
     valueBinding: 'targetObject.organisation'
 
   billingInfoView: Ember.TextField.extend
-    valueBinding: 'targetObject.billingEmail'
     classNameBindings: ['isInvalid', 'isValid', ':field']
+    valueBinding: 'targetObject.billingEmail'
 
     isInvalid: Ember.computed 'value', 'targetObject.isSubmitted', ->
       value = @get('value')

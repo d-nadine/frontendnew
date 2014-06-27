@@ -20,7 +20,7 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   currentUser: Ember.computed.alias 'controllers.currentUser.model'
   isAdmin: Ember.computed.bool 'currentUser.isAdmin', true
   nonAdmin: Ember.computed.not 'isAdmin'
-  plan: Ember.computed.alias 'currentUser.account.billingInfo.subscription'
+  plan: Ember.computed.alias 'currentUser.account.billing.subscription.planId'
   emailIsValid: (email) ->
     /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test email
 

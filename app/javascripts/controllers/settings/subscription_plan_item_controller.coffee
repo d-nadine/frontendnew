@@ -4,7 +4,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   users: Ember.computed.alias 'controllers.users'
   isPersisting: Ember.computed.alias 'parentController.isPersisting'
   currentPlan: Ember.computed.alias 'currentUser.account.billing.subscription'
-  subscriptionEnded: Ember.computed.alias 'currentUser.account.billingInfo.subscriptionEnded'
+  subscriptionEnded: Ember.computed.alias 'currentUser.account.billing.subscriptionEnded'
   activeCard: Ember.computed.alias 'parentController.activeCard'
   isTrial: Ember.computed.alias 'parentController.account.isTrial'
   isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
