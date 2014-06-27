@@ -4,13 +4,13 @@ Ember.Application.initializer
   initialize: (container, application) ->
     Radium.set('authManager', Radium.AuthManager.create())
 
-    errHandler = (e) =>
+    errHandler = (e) ->
       # location.replace('http://api.radiumcrm.com/sessions/new')
       # Ember.Logger.error e
       # console.error 'The "me" user was not found for some reason!'
       # throw e
 
-    Radium.User.find(name: 'me').then(((records) =>
+    Radium.User.find(name: 'me').then(((records) ->
       user = records.get('firstObject')
 
       currentUserController = container.lookup('controller:currentUser')
@@ -36,6 +36,9 @@ Ember.Application.initializer
 
       accountSettingsController = container.lookup('controller:accountSettings')
       accountSettingsController.set('model', user.get('account'))
+
+      billingController = container.lookup('controller:settingsBilling')
+      billingController.set('model', user.get('account.billing'))
 
       # we need to get the user to grant access if it has been revoked
       if user.get('refreshFailed')

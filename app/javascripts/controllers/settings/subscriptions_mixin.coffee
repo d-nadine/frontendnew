@@ -3,8 +3,11 @@ Radium.SubscriptionMixin = Ember.Mixin.create
   subscriptionPlans: Ember.computed.oneWay 'controllers.subscriptionPlans'
 
   activeSubscriptions: Ember.computed 'subscriptionPlans.[]', ->
-    @get('subscriptionPlans').reject (plan) =>
-      (plan.get('disabled') && plan != @get('currentPlan'))
+    @get('subscriptionPlans').reject((plan) =>
+      plan.get('disabled') && plan != @get('currentPlan')
+    ).sort((left, right) ->
+      Ember.compare(left.get('displayOrder'), right.get('displayOrder'))
+    )
 
   currentPlan: Ember.computed 'subscriptionPlans.[]', 'account.billing.subscription', ->
     subscription = @get('account.billing.subscription')
