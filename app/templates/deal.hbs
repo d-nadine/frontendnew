@@ -21,7 +21,7 @@
       {{render 'sidebar/name' model}}
       <p>
         {{#if reference}}
-          Related to {{#link-to "messages.email" reference}}{{reference.subject}}{{/link-to}}<br>
+          Related to {{#link-to "emails.show" "inbox" reference}}{{reference.subject}}{{/link-to}}<br>
         {{/if}}
         {{resource-link-to contact}}
       </p>
