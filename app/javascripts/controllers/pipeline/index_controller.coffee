@@ -8,6 +8,8 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   searchText: Ember.computed.alias 'controllers.pipeline.searchText'
   filterStartDate: Ember.computed.alias 'controllers.pipeline.filterStartDate'
   filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
+  showPastDateRange: Ember.computed.alias 'controllers.pipeline.showPastDateRange'
+  showFutureDateRange: Ember.computed.alias 'controllers.pipeline.showFutureDateRange'
 
   arrangedDealsLength: 0
 
