@@ -3,12 +3,11 @@ require 'mixins/controllers/bulk_action_controller_mixin'
 Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   Radium.BulkActionControllerMixin,
 
-  needs: ['workflowGroupItem']
+  needs: ['workflowGroupItem', "pipeline"]
   filteredDeals: null
-  searchText: null
-
-  filterStartDate: null
-  filterEndDate: null
+  searchText: Ember.computed.alias 'controllers.pipeline.searchText'
+  filterStartDate: Ember.computed.alias 'controllers.pipeline.filterStartDate'
+  filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
 
   arrangedDealsLength: 0
 

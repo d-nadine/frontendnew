@@ -1,13 +1,13 @@
 require 'controllers/pipeline/base_controller'
 
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
-  needs: ["pipelineIndex"]
+  needs: ["pipelineIndex", "pipeline"]
   sort: 'name'
   sortAscending: true
   filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
-  searchText: Ember.computed.alias 'controllers.pipelineIndex.searchText'
-  filterStartDate: Ember.computed.alias 'controllers.pipelineIndex.filterStartDate'
-  filterEndDate: Ember.computed.alias 'controllers.pipelineIndex.filterEndDate'
+  searchText: Ember.computed.alias 'controllers.pipeline.searchText'
+  filterStartDate: Ember.computed.alias 'controllers.pipeline.filterStartDate'
+  filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
 
   actions:
     toggleChecked: ->

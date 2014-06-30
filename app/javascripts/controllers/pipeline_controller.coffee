@@ -8,3 +8,6 @@ Radium.PipelineController = Radium.ObjectController.extend
   unpublished: Ember.computed.alias 'content.unpublished'
   lost: Ember.computed.alias 'content.lost'
   isLargeWorkflow: Ember.computed.gt('workflowGroups.length', 5)
+  searchText: null
+  filterStartDate: null
+  filterEndDate: null
