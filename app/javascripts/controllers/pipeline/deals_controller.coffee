@@ -6,6 +6,8 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   sortAscending: true
   filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
   searchText: Ember.computed.alias 'controllers.pipelineIndex.searchText'
+  filterStartDate: Ember.computed.alias 'controllers.pipelineIndex.filterStartDate'
+  filterEndDate: Ember.computed.alias 'controllers.pipelineIndex.filterEndDate'
 
   actions:
     toggleChecked: ->
@@ -70,8 +72,18 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
 
     Ember.compare left.get(sort), right.get(sort)
 
-  arrangedContent: Ember.computed 'content.[]', 'searchText', 'sort', 'sortAscending', ->
+  dateFilteredContent: Ember.computed 'content.[]', 'filterStartDate', 'filterEndDate', ->
     content = @get('content')
+
+    content.filter (item) =>
+      return true unless @get("filterStartDate")? and @get("filterEndDate")?
+      closeDate = item.get("expectedCloseDate._ms")
+      startDate = @get("filterStartDate").getTime()
+      endDate = @get("filterEndDate").getTime()
+      return !closeDate? || (startDate <= closeDate && closeDate <= endDate)
+
+  arrangedContent: Ember.computed 'dateFilteredContent.[]', 'searchText', 'sort', 'sortAscending', ->
+    content = @get('dateFilteredContent')
     sortFunc = @sortFunc.bind this
 
     return Ember.A() unless content.get('length')

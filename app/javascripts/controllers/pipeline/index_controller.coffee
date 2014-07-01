@@ -7,6 +7,9 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   filteredDeals: null
   searchText: null
 
+  filterStartDate: null
+  filterEndDate: null
+
   arrangedDealsLength: 0
 
   checkedContent: Ember.computed.filterBy 'workflowDeals', 'isChecked', true
