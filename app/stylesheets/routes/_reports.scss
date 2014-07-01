@@ -34,34 +34,6 @@
   }
 }
 
-// D3 Filter
-.date-range {
-  @include box-shadow(inset 0 0 10px rgba(black, 0.25));
-
-  .axis path, .axis line {
-    fill: none;
-    stroke: #aaa;
-    shape-rendering: crispEdges;
-  }
-
-  .brush .extent {
-    stroke: $link;
-    fill-opacity: .125;
-    fill: $link;
-    shape-rendering: crispEdges;
-  }
-
-  g.context rect.background{
-    fill: none;
-    visibility: visible !important;
-  }
-
-  text {
-    fill: #000;
-  }
-}
-
-
 .report-section {
   margin: 0 0 10px;
   overflow: hidden;
@@ -136,10 +108,6 @@
   &.pie-chart .reset {
     left: 0;
   }
-
-  &.bar-chart .reset {
-    right: 0;
-  }
 }
 
 #report-sales-section .charts {
@@ -149,13 +117,6 @@
     float: left;
     margin: 0 4%;
     display: inline-block;
-  }
-}
-
-.bar-charts {
-  .col {
-    width: 50%;
-    float: left;
   }
 }
 

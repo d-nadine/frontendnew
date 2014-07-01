@@ -73,22 +73,3 @@
       valueFormat="money"}}
   </div>
 </section>
-<section class="report-section">
-  <div class="page-header">
-    <h4>Deal Reports</h4>
-  </div>
-
-  <div class="bar-charts">
-    {{#each workflow in workflowObjects}}
-      <div class="col">
-        <h4>{{workflow.status}} {{workflow.name}}</h4>
-        {{bar-chart 
-          dimension=deal 
-          group=deals
-          domain=domain
-          valueAccessor=workflow.lowercaseName
-          height="250"}}
-      </div>
-    {{/each}}
-  </div>
-</section>
