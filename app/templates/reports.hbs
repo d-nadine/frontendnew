@@ -27,27 +27,25 @@
     <h4>Overview</h4>
   </div>
   <div class="report-content">
-
-{{#each workflow in workflowObjects}}
-
-  <div class="summary">
-    <div class="infographic">
-      {{report-icons 
-        total=workflow.status
-        icon=workflow.icon
-        fontFamily="ss-symbolicons"}}
-    </div>
-    <div class="text-center summary-details"> 
-      <a href="#" {{action 'linkToPipeline' workflow.name}}>
-        <h2>{{workflow.status}} {{workflow.name}}</h2>
-      </a>
-      <h4>
-        {{currency workflow.total}}<br>
-        <small>Total in pending deals</small>
-      </h4>
-    </div>
-  </div>
-{{/each}}
+    {{#each workflow in workflowObjects}}
+      <div class="summary">
+        <div class="infographic">
+          {{report-icons 
+            total=workflow.status
+            icon=workflow.icon
+            fontFamily="ss-symbolicons"}}
+        </div>
+        <div class="text-center summary-details"> 
+          <a href="#" {{action 'linkToPipeline' workflow.name}}>
+            <h2>{{workflow.status}} {{workflow.name}}</h2>
+          </a>
+          <h4>
+            {{currency workflow.total}}<br>
+            <small>Total in pending deals</small>
+          </h4>
+        </div>
+      </div>
+    {{/each}}
   </div>
 </div>
 <section id="report-sales-section" class="report-section">
