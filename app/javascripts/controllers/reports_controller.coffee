@@ -133,7 +133,10 @@ Radium.ReportsController = Ember.ArrayController.extend
         icon: icon
       }
 
+    totalClosed = workflowObjects.filterBy('name', 'closed')[0].total
+
     @set('workflowObjects', workflowObjects)
+    @set('totalClosed', totalClosed)
 
   actions:
     linkToPipeline: (state) ->
