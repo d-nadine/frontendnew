@@ -3,21 +3,15 @@ require 'mixins/components/chart_component_mixin'
 Radium.PieChartComponent = Ember.Component.extend Radium.ChartComponentMixin,
   type: 'pieChart'
   classNames: 'pie-chart'
-  classNameBindings: ['uniqueClass']
   radius: 50
   # possible title formats: 'default', 'money'
   valueFormat: 'default'
 
-  uniqueClass: Ember.computed ->
-    "pie-chart-#{@get('radius')}"
-
   style: Ember.computed ->
     """<style type='text/css'>
-      
-      .pie-chart.#{@get('uniqueClass')} svg {
+      ##{Ember.guidFor(this)} svg {
         width: #{(@get('radius')*2) + 150}px;
       }
-
     </style>"""
   setFilter: (chart, filter) ->
     currentFilter = @get('_currentFilter')
