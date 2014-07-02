@@ -1,11 +1,7 @@
 describe "RdConversationInputComponent", ->
-  before ->
-    Ember.run =>
-      @input = Radium.__container__.lookup("component:rdConversationInput")
-      @input.append()
-      @$ = @input.$.bind(@input)
-  after ->
-    Ember.run =>
-      @input.destroy()
+  beforeEach ->
+    @input = component 'rdConversationInput'
+    @$ = @input.$.bind(@input)
+
   it "renders itself", ->
-    ok(@$().attr("class").match /rd-conversation-input/)
+    expect(@$().attr("class")).to.match /rd-conversation-input/

@@ -14,6 +14,7 @@ gem 'therubyracer'
 
 group :development do
   gem 'dnote'
+  gem 'guard'
 end
 
 group :production do

@@ -8,11 +8,10 @@ module.exports = function(config) {
     basePath: '',
 
     // frameworks to use
-    frameworks: ['qunit'],
+    frameworks: ['mocha', 'chai', 'sinon-chai', 'chai-jquery'],
 
     // list of files / patterns to load in the browser
     files: [
-      './bower_components/qunit-bdd/lib/qunit-bdd.js',
       '../site/application.js',
       '../site/application.css',
       './spec_helper.coffee',
@@ -66,7 +65,7 @@ module.exports = function(config) {
       // options passed to the coffee compiler
       options: {
         bare: true,
-        sourceMap: false
+        sourceMap: true
       },
       // transforming the filenames
       transformPath: function(path) {
