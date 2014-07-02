@@ -1,0 +1,14 @@
+<button class="btn">{{selected}}</button>
+<div class="btn dropdown-toggle" data-toggle="dropdown">
+  <span class="caret"></span>
+</div>
+<ul class="dropdown-menu">
+  <li>
+    <a href="#" {{action "selectFilter" null}}>{{resetOption}}</a>
+  </li>
+  {{#each options}}
+    <li>
+      <a href="#" {{action "selectFilter" key}}>{{key}}</a>
+    </li>
+  {{/each}}
+</ul>

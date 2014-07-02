@@ -1,0 +1,75 @@
+<div class="page-header">
+  <div class="pull-right hidden">
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-search"></i>
+      {{input value=model.searchText type="text" class="field search-text"}}
+    </form>
+    <div class="btn-group">
+      <button class="btn btn-main address-book-button" >Actions</button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li>
+            <a href="#">Report Action</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+  <h1>{{account.name}} Reports – {{currentYear}}</h1>
+</div>
+
+{{partial "reports/_filter"}}
+
+
+<div class="report-section report-overview">
+  <div class="page-header">
+    <h4>Overview</h4>
+  </div>
+  <div class="report-content">
+    {{#each workflow in workflowObjects}}
+      <div class="summary">
+        <div class="infographic">
+          {{report-icons 
+            total=workflow.status
+            icon=workflow.icon
+            fontFamily="ss-symbolicons"}}
+        </div>
+        <div class="text-center summary-details"> 
+          <a href="#" {{action 'linkToPipeline' workflow.name}}>
+            <h2>{{workflow.status}} {{workflow.name}}</h2>
+          </a>
+          <h4>
+            {{currency workflow.total}}<br>
+            <small>Total in pending deals</small>
+          </h4>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+<section id="report-sales-section" class="report-section">
+  <div class="page-header">
+    <div class="pull-right report-section-total">
+      {{currency totalClosed}}
+    </div>
+    <h4>Sales</h4>
+  </div>
+  <div class="charts">
+    {{pie-chart 
+      dimension=user 
+      group=users
+      action="filterByUser"
+      radius="120"
+      title="Sales By Person"
+      valueFormat="money"}}
+
+    {{pie-chart 
+      dimension=company 
+      group=companies
+      action="filterByCompany"
+      radius="120"
+      title="Sales By Company"
+      valueFormat="money"}}
+  </div>
+</section>

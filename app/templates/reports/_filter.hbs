@@ -1,0 +1,26 @@
+<div id="master-filter" class="reports-filter">
+  <div class="option">
+    <button class="btn" {{action "reset"}}>Reset</button>
+  </div>
+  <div class="option">
+   {{rd-daterangepicker startDate=startDate endDate=endDate}}
+  </div>
+  <div class="option">
+    {{report-dropdown 
+      options=allUsers 
+      resetOption=defaultSelectedUser
+      selected=selectedUser
+      action="filterByUser"}}
+  </div>
+  <div class="option">
+    {{report-dropdown 
+      options=allCompanies 
+      resetOption=defaultSelectedCompany
+      selected=selectedCompany
+      action="filterByCompany"}}
+  </div>
+  <div class="option">
+    {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
+  </div>
+</div>
+<div class="reports-filter-placeholder"></div>

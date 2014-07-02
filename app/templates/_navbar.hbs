@@ -1,0 +1,54 @@
+<div id="topbar" role="header" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    {{#linkTo "index" class="brand"}}
+      <img src="/images/logo.png" alt="::radium">
+    {{/linkTo}}
+    <div class="container">
+      <ul class="nav">
+        <li class="dropdown">
+          {{#linkTo "messages" "inbox"}}
+            Messages <i class="ss-standard ss-mail"></i>
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "calendar" today}}
+            Calendar <i class="ss-standard ss-calendar"></i>
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "user" currentUser}}
+            Tasks <i class="ss-standard ss-check"></i>
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "pipeline"}}
+            Pipeline <i class="ss-standard ss-barchart"></i>
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "addressbook.filter" 'all'}}
+            Address Book <i class="ss-symbolicons-block ss-users"></i>
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "reports"}}
+            Reports <i class="ss-symbolicons-block ss-barchart"></i>
+          {{/linkTo}}
+        </li>
+      </ul>
+      <div class="pull-right">
+        {{render "search/main"}}
+        <ul class="nav">
+          <li>
+            <a href="#" {{action "logOut"}}>Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
