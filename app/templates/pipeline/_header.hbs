@@ -9,6 +9,10 @@
       <i class="ss-symbolicons-block ss-search"></i>
       {{view view.pipelineSearch class="field search-text"}}
     </form>
+    <form class="form-search pipeline-search">
+      <i class="ss-symbolicons-block ss-calendar"></i>
+      {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate past=showPastDateRange future=showFutureDateRange}}
+    </form>
     <div class="btn-toolbar">
       {{partial "pipeline/add_lead_btn"}}
       {{partial "pipeline/actions_btn"}}
