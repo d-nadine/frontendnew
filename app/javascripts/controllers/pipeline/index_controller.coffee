@@ -11,9 +11,6 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   showPastDateRange: Ember.computed.alias 'controllers.pipeline.showPastDateRange'
   showFutureDateRange: Ember.computed.alias 'controllers.pipeline.showFutureDateRange'
 
-  filterStartDate: null
-  filterEndDate: null
-
   arrangedDealsLength: 0
 
   checkedContent: Ember.computed.filterBy 'workflowDeals', 'isChecked', true
