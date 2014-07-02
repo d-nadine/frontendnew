@@ -1,13 +1,15 @@
 require 'controllers/pipeline/base_controller'
 
 Radium.PipelineDealsController = Radium.PipelineBaseController.extend
-  needs: ["pipelineIndex"]
+  needs: ["pipelineIndex", "pipeline"]
   sort: 'name'
   sortAscending: true
   filterList: ["name", "contact.displayName", "user.displayName", "company.displayName"]
-  searchText: Ember.computed.alias 'controllers.pipelineIndex.searchText'
-  filterStartDate: Ember.computed.alias 'controllers.pipelineIndex.filterStartDate'
-  filterEndDate: Ember.computed.alias 'controllers.pipelineIndex.filterEndDate'
+  searchText: Ember.computed.alias 'controllers.pipeline.searchText'
+  filterStartDate: Ember.computed.alias 'controllers.pipeline.filterStartDate'
+  filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
+  showPastDateRange: Ember.computed.alias 'controllers.pipeline.showPastDateRange'
+  showFutureDateRange: Ember.computed.alias 'controllers.pipeline.showFutureDateRange'
 
   actions:
     toggleChecked: ->
@@ -23,15 +25,12 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
         @notifyPropertyChange 'sort'
 
   resultsDidChange: Ember.observer('arrangedContent.[]', 'searchText', ->
+    return if @get("controllers.pipeline").get("isDestroying")
+    return if @get("controllers.pipelineIndex").get("isDestroying")
+
     parentController = @get("controllers.pipelineIndex")
-    return if parentController.get("isDestroying")
-
-    parentController.set('arrangedDealsLength', @get('length'))
-
-    if @get('length')
-      parentController.set('hide', false)
-    else
-      parentController.set('hide', true)
+    if !!parentController
+      @get("controllers.pipelineIndex")?.set('arrangedDealsLength', @get('arrangedContent.length'))
   ).on('init')
 
   sortFunc: (a, b) ->

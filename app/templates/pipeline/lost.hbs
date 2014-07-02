@@ -23,6 +23,9 @@
         <th class="value">
           {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
         </th>
+        <th class="value">
+          {{table-sorter heading="Lost on" sortOn="statusLastChangedAt" sort="sortDeals"}}
+        </th>
         <th class="delete-button">&nbsp;</th>
       </tr>
     </thead>
@@ -42,17 +45,21 @@
               {{else}}
                 <span class="no-primary">No Primary Contact</span>
               {{/if}}
-            <p>
+            </p>
           </td>
           <td class="assigned-to">
             <p>
               <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
               <span class="title">{{user.title}}</span>
-            <p>
+            </p>
           </td>
           <td><em class="reason">{{lostBecause}}</em></td>
           <td class="lost-during">{{lostDuring}}</td>
           <td class="value">{{currency value}}</td>
+          <td>
+            {{formatDateTime statusLastChangedAt format=date}}
+          </td>
+
           <td class="delete">
             {{partial 'search/delete'}}
           </td>
