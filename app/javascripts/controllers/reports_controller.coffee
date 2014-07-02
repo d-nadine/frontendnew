@@ -44,8 +44,6 @@ Radium.ReportsController = Ember.ArrayController.extend
   defaultSelectedCompany: 'All Companies'
   selectedCompany: Ember.computed.defaultTo('defaultSelectedCompany')
 
-  currentYear: 2013
-
   domainObserver: Ember.observer 'startDate', 'endDate', ->
     @calcSums()
     dc.redrawAll()
