@@ -1,3 +1,9 @@
+##
+# A lazy each loop to iterate over potentially infinite lists
+#
+# {{#rd-lazy-each content=myBigList endInSight="loadMoreData"}}
+#   this is lazy item {{name}}
+# {{/rd-lazy-each}}
 Radium.RdLazyEachComponent = Ember.Component.extend
   classNames: ['rd-lazy-each']
 
