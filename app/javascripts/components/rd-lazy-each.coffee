@@ -10,13 +10,21 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   layout: Ember.Handlebars.compile "{{view listView}}"
 
   listView: Ember.computed 'template', ->
-    Ember.ListView.createWithMixins
-      lazyList: this
-      content: Ember.computed.oneWay 'lazyList.content'
-      height: Ember.computed.oneWay 'lazyList.height'
-      rowHeight: Ember.computed.oneWay 'lazyList.rowHeight'
-      width: Ember.computed.oneWay 'lazyList.width'
+    listView = Ember.ListView.createWithMixins
+      lazyEach: this
+      content: Ember.computed.oneWay 'lazyEach.content'
+      height: Ember.computed.oneWay 'lazyEach.height'
+      rowHeight: Ember.computed.oneWay 'lazyEach.rowHeight'
+      width: Ember.computed.oneWay 'lazyEach.width'
       elementWidth: Ember.computed.oneWay 'lazylist.elementWidth'
 
       itemViewClass: Ember.ListItemView.extend
         template: @get 'template'
+    listView.on('scrollYChanged', this, "scrollYChanged")
+    return listView
+
+  scrollYChanged: ->
+    @sendAction "endInSight"
+
+  scrollTo: (y)->
+    @get('listView').scrollTo y
