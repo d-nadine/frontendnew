@@ -27,16 +27,18 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
 
     return standardRange
 
-  syncField: Ember.observer("startDate", "endDate", ->
-    @picker.setStartDate @get("startDate")
-    @picker.setEndDate @get("endDate")
-    @picker.container.find('button.applyBtn').click()
-  ).on('didInsertElement')
+  syncField: ->
+    Ember.run.once =>
+      @picker.setStartDate @get("startDate") || moment().startOf('month')
+      @picker.setEndDate @get("endDate") || moment().endOf('month')
+      @picker.container.find('button.applyBtn').click()
 
   initializeDaterangepicker: (->
+    hasDateRange = @get('startDate') and @get('endDate')
+    @set 'hasDateRangeWasEmptyOnInit', !hasDateRange
     @picker = @$('input.daterange-field').daterangepicker
-      startDate: @get("startDate")
-      endDate: @get("endDate")
+      startDate: @get("startDate") || moment().startOf('month')
+      endDate: @get("endDate") || moment().endOf('month').add('month', 1)
       opens: 'left'
       ranges:
         @get("ranges")
@@ -44,4 +46,8 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
         @set("startDate", moment(start).toDate())
         @set("endDate", moment(end).toDate())
     .data('daterangepicker')
+    unless hasDateRange
+      @$('input').val('')
+    @addObserver("startDate", this, "syncField")
+    @addObserver("endDate", this, "syncField")
   ).on("didInsertElement")

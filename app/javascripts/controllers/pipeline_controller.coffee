@@ -9,7 +9,7 @@ Radium.PipelineController = Radium.ObjectController.extend
   lost: Ember.computed.alias 'content.lost'
   isLargeWorkflow: Ember.computed.gt('workflowGroups.length', 5)
   searchText: ""
-  filterStartDate: moment().startOf('month').toDate()
-  filterEndDate: moment().endOf('month').toDate()
+  filterStartDate: null
+  filterEndDate: null
   showPastDateRange: false
   showFutureDateRange: true

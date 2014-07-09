@@ -14,6 +14,9 @@
       {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate past=showPastDateRange future=showFutureDateRange}}
     </form>
     <div class="btn-toolbar">
+      <a href="#" class="btn btn-main btn-primary" {{action "resetFilters"}}>
+        Reset
+      </a>
       {{partial "pipeline/add_lead_btn"}}
       {{partial "pipeline/actions_btn"}}
       {{partial "pipeline/form_buttons"}}

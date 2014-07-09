@@ -16,8 +16,12 @@
     <form class="form-search pipeline-search">
       <i class="ss-symbolicons-block ss-calendar"></i>
 
-      {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate}}
+      {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate past=false future=true}}
     </form>
+    <a href="#" class="btn btn-main btn-primary" {{action "resetFilters"}}>
+      Reset
+    </a>
+
     {{partial "pipeline/add_lead_btn"}}
     {{partial "pipeline/actions_btn"}}
     {{partial "pipeline/form_buttons"}}
