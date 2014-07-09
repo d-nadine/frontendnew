@@ -36,6 +36,12 @@
   </div>
 </div>
 
+{{#rd-lazy-each content=model}}
+  {{log "Model" this}}
+  <div>Hi, my name is {{this.email}}</div>
+{{/rd-lazy-each}}
+
+<!---
 <div class="search-result-list">
   {{#unless model.length}}
     {{#if isLoading}}
@@ -70,3 +76,4 @@
   {{/unless}}
   {{regular-infinitescroller getMore='showMore' allLoaded=allPagesLoaded isLoading=isLoading}}
 </div>
+--!>

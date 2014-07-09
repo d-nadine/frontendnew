@@ -11,8 +11,9 @@ Radium.ExternalcontactsRoute = Radium.Route.extend Radium.BulkActionEmailEventsM
       return false
 
   model: ->
-    controller = @controllerFor 'externalcontacts'
-    controller.set 'searchText', null
-    controller.send 'reset'
-    controller.send 'showMore'
-    controller.send 'showMore'
+    Radium.Contact.find private: true
+    # controller = @controllerFor 'externalcontacts'
+    # controller.set 'searchText', null
+    # controller.send 'reset'
+    # controller.send 'showMore'
+    # controller.send 'showMore'

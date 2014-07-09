@@ -1,3 +1,5 @@
+Radium.ExternalContactsController = Radium.ArrayController.extend()
+###
 Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   Radium.CheckableMixin,
   Radium.BulkActionControllerMixin,
@@ -88,3 +90,4 @@ Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.Infinit
       @set('content', Ember.A())
       @set("content", people)
       @set('isLoading', false)
+###
