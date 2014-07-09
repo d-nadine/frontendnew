@@ -27,6 +27,7 @@ Radium.RdLazyEachComponent = Ember.Component.extend
       rowHeight: Ember.computed.oneWay 'lazyEach.rowHeight'
       width: Ember.computed.oneWay 'lazyEach.width'
       elementWidth: Ember.computed.oneWay 'lazylist.elementWidth'
+      scrollTop: 0
 
       itemViewClass: Ember.ListItemView.extend
         template: @get 'template'
@@ -36,17 +37,17 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   scrollYChanged: ->
     @set("lastVisibleIndex", @get("listView._lastEndingIndex"))
 
-  withinHorizon: Ember.computed 'lastVisibleIndex', 'content.length', 'hasCrossedThreshold'->
+  withinHorizon: Ember.computed 'lastVisibleIndex', 'content.length', 'hasCrossedThreshold', ->
     if @get("hasCrossedThreshold")
       return false
     return false unless @get("lastVisibleIndex")?
     return @get("content.length") - @get("lastVisibleIndex") < @get("horizon")
 
   notifyEndInSight: Ember.observer('horizonThresholdCrossed', ->
+    @set("hasCrossedThreshold", @get("horizonThresholdCrossed"))
+
     if @get("horizonThresholdCrossed")
       @sendAction "endInSight"
-
-    @set("hasCrossedThreshold", @get("horizonThresholdCrossed"))
   ).on("init")
 
 

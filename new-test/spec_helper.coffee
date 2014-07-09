@@ -19,7 +19,7 @@ window.afterEach = ((original)->
   return (fn)->
     original ->
       Ember.run => fn.call(this)
-)(after)
+)(afterEach)
 
 components = []
 window.component = (name, options = {})->
