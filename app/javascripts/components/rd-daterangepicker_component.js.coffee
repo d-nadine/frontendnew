@@ -4,6 +4,12 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
   past: true
   future: false
 
+  keyPress: (event) ->
+    if event.keyCode == 13
+      event.preventDefault()
+      @set "startDate", moment(@picker.startDate).toDate()
+      @set "endDate", moment(@picker.endDate).toDate()
+
   ranges: Ember.computed "past", "future", ->
     standardRange =
       '+/- 1 year': [moment().subtract('years', 1), moment().add('years', 1)]
@@ -43,8 +49,11 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
       ranges:
         @get("ranges")
       (start, end) =>
-        @set("startDate", moment(start).toDate())
-        @set("endDate", moment(end).toDate())
+        # Have to unwrap and re-wrap this as moment object to validate that it's a date
+        # Otherwise this parses too quickly and inserts garbage date on text entry
+        if moment(start.toDate(), "MM/DD/YYYY", true).isValid() and moment(end.toDate(), "MM/DD/YYYY", true).isValid()
+          @set("startDate", moment(start).toDate())
+          @set("endDate", moment(end).toDate())
     .data('daterangepicker')
     unless hasDateRange
       @$('input').val('')
