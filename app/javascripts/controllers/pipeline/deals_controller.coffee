@@ -10,6 +10,8 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
   showPastDateRange: Ember.computed.alias 'controllers.pipeline.showPastDateRange'
   showFutureDateRange: Ember.computed.alias 'controllers.pipeline.showFutureDateRange'
+  isTextFiltering: Ember.computed.alias 'controllers.pipeline.isTextFiltering'
+  isDateFiltering: Ember.computed.alias 'controllers.pipeline.isDateFiltering'
 
   actions:
     toggleChecked: ->

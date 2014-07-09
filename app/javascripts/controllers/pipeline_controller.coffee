@@ -13,3 +13,7 @@ Radium.PipelineController = Radium.ObjectController.extend
   filterEndDate: null
   showPastDateRange: false
   showFutureDateRange: true
+  searchTextEmpty: Ember.computed.empty "searchText"
+  isTextFiltering: Ember.computed.not "searchTextEmpty"
+  isDateFiltering: Ember.computed.and "filterStartDate", "filterEndDate"
+  isBothFiltering: Ember.computed.and "isDateFiltering", "isTextFiltering"
