@@ -30,14 +30,14 @@ describe 'loading data into a lazy list', ->
 
   describe 'scrolling near the end', ->
     beforeEach ->
-      @list.scrollTo(200)
+      @list.scrollTo(140)
     it 'asks for more data', ->
       expect(@moar).to.have.been.called
 
     describe 'scrolling just a bit more', ->
       beforeEach ->
         @moar.reset()
-        @list.scrollTo(201)
+        @list.scrollTo(141)
       it 'does not ask for more data', ->
         expect(@moar).not.to.have.been.called
     describe 'scrolling to the end of the new data set', ->

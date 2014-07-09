@@ -14,6 +14,8 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   elementWidth: null
   #When the end of the list is within this many elements, fire off "endInSight"
   horizon: 10
+  horizonThresholdCrossedBinding: "withinHorizon"
+  hasCrossedThreshold: false
 
   layout: Ember.Handlebars.compile "{{view listView}}"
 
@@ -34,12 +36,19 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   scrollYChanged: ->
     @set("lastVisibleIndex", @get("listView._lastEndingIndex"))
 
-  withinHorizon: Ember.computed 'lastVisibleIndex', 'content.length', ->
-    return false unless @get("lastVisibleIndex")
+  withinHorizon: Ember.computed 'lastVisibleIndex', 'content.length', 'hasCrossedThreshold'->
+    if @get("hasCrossedThreshold")
+      return false
+    return false unless @get("lastVisibleIndex")?
     return @get("content.length") - @get("lastVisibleIndex") < @get("horizon")
 
-  notifyEndInSight: Ember.observer 'withinHorizon', ->
-    @sendAction "endInSight" if @get("withinHorizon")
+  notifyEndInSight: Ember.observer('horizonThresholdCrossed', ->
+    if @get("horizonThresholdCrossed")
+      @sendAction "endInSight"
+
+    @set("hasCrossedThreshold", @get("horizonThresholdCrossed"))
+  ).on("init")
+
 
   scrollTo: (y)->
     @get('listView').scrollTo y

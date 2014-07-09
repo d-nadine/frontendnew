@@ -21,11 +21,6 @@ window.afterEach = ((original)->
       Ember.run => fn.call(this)
 )(after)
 
-beforeEach ->
-  Radium.advanceReadiness()
-afterEach ->
-  Radium.reset()
-
 components = []
 window.component = (name, options = {})->
   component = Radium.__container__.lookup("component:#{name}")
