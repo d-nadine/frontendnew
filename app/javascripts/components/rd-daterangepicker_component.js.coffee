@@ -45,13 +45,17 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
     @picker = @$('input.daterange-field').daterangepicker
       startDate: @get("startDate") || moment().startOf('month')
       endDate: @get("endDate") || moment().endOf('month').add('month', 1)
+      format: "MM/DD/YYYY"
       opens: 'left'
       ranges:
         @get("ranges")
       (start, end) =>
-        # Have to unwrap and re-wrap this as moment object to validate that it's a date
-        # Otherwise this parses too quickly and inserts garbage date on text entry
-        if moment(start.toDate(), "MM/DD/YYYY", true).isValid() and moment(end.toDate(), "MM/DD/YYYY", true).isValid()
+        # for text input, use stricter validation rules
+        if start._i and end._i
+          start = moment(start._i, "MM/DD/YYYY", true)
+          end = moment(end._i, "MM/DD/YYYY", true)
+
+        if start.isValid() and end.isValid()
           @set("startDate", moment(start).toDate())
           @set("endDate", moment(end).toDate())
     .data('daterangepicker')
