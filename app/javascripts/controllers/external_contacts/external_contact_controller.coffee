@@ -1,4 +1,4 @@
-Radium.ExternalContactsController = Radium.ArrayController.extend()
+Radium.ExternalcontactsController = Radium.ArrayController.extend()
 ###
 Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   Radium.CheckableMixin,

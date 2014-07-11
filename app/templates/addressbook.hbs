@@ -64,11 +64,6 @@
                 <li>
                   <a href="#" {{action "showForm" 'todo'}}>Assign A Todo</a>
                 </li>
-                <!--
-                <li>
-                <a href="#" {{!action showForm 'call'}}>Call</a>
-                </li>
-                -->
                 {{#if hasContacts}}
                   <li>
                     <a href="#" {{action "showEmail"}}>Email</a>
@@ -164,21 +159,6 @@
             <div class="span6 assignedto">Assigned</div>
             <div class="span6 deals">Deals</div>
           </div>
-
-          <!--
-          <div class="span2 checkers">
-            {{partial 'forms/check_all'}}
-            <div class="pull-right">
-              <a href="#" {{action "toggleThumbnails"}}>
-                {{#if isThumbnailsVisible}}
-                  Hide
-                {{else}}
-                  Show avatars
-                {{/if}}
-              </a>
-            </div>
-          </div>
-          --!>
         </div>
       {{/if}}
       {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
