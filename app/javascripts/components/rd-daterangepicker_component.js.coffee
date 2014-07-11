@@ -39,6 +39,13 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
       @picker.setEndDate @get("endDate") || moment().endOf('month')
       @picker.container.find('button.applyBtn').click()
 
+  # Don't show the UNBOUND dummy values that get inserted on init
+  clearOutField: Ember.observer "startDate", "endDate", ->
+    Ember.run.later =>
+      return unless @$("input")
+      unless @get('startDate') and @get('endDate')
+        @$("input").val("")
+
   initializeDaterangepicker: (->
     hasDateRange = @get('startDate') and @get('endDate')
     @set 'hasDateRangeWasEmptyOnInit', !hasDateRange
@@ -59,8 +66,6 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
           @set("startDate", moment(start).toDate())
           @set("endDate", moment(end).toDate())
     .data('daterangepicker')
-    unless hasDateRange
-      @$('input').val('')
     @addObserver("startDate", this, "syncField")
     @addObserver("endDate", this, "syncField")
   ).on("didInsertElement")
