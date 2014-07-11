@@ -20,6 +20,9 @@
       <th class="value">
         {{table-sorter heading="Value" sortOn="value" sort="sortDeals"}}
       </th>
+      <th class="value">
+        {{table-sorter heading="Date Closed" sortOn="statusLastChangedAt" sort="sortDeals"}}
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -42,10 +45,21 @@
           {{partial 'pipeline/pipeline_next_task'}}
         </td>
         <td class="value">{{currency value}}</td>
+        <td>
+          {{formatDateTime statusLastChangedAt format=date}}
+        </td>
       </tr>
     {{else}}
       <tr>
-        <td colspan="7">No Deals</td>
+        <td colspan="7">
+          No deals
+          {{#if isTextFiltering}}
+            matching "{{searchText}}"
+          {{/if}}
+          {{#if isDateFiltering}}
+            with a Closed Date between {{formatDateTime filterStartDate format=date}} and {{formatDateTime filterEndDate format=date}}
+          {{/if}}
+        </td>
       </tr>
     {{/each}}
   </tbody>

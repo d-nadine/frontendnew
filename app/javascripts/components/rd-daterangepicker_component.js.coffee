@@ -4,6 +4,12 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
   past: true
   future: false
 
+  keyPress: (event) ->
+    if event.keyCode == 13
+      event.preventDefault()
+      @set "startDate", moment(@picker.startDate).toDate()
+      @set "endDate", moment(@picker.endDate).toDate()
+
   ranges: Ember.computed "past", "future", ->
     standardRange =
       '+/- 1 year': [moment().subtract('years', 1), moment().add('years', 1)]
@@ -27,21 +33,39 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
 
     return standardRange
 
-  syncField: Ember.observer("startDate", "endDate", ->
-    @picker.setStartDate @get("startDate")
-    @picker.setEndDate @get("endDate")
-    @picker.container.find('button.applyBtn').click()
-  ).on('didInsertElement')
+  syncField: ->
+    Ember.run.once =>
+      @picker.setStartDate @get("startDate") || moment().startOf('month')
+      @picker.setEndDate @get("endDate") || moment().endOf('month')
+      @picker.container.find('button.applyBtn').click()
+
+  # Don't show the UNBOUND dummy values that get inserted on init
+  clearOutField: Ember.observer "startDate", "endDate", ->
+    Ember.run.later =>
+      return unless @$("input")
+      unless @get('startDate') and @get('endDate')
+        @$("input").val("")
 
   initializeDaterangepicker: (->
+    hasDateRange = @get('startDate') and @get('endDate')
+    @set 'hasDateRangeWasEmptyOnInit', !hasDateRange
     @picker = @$('input.daterange-field').daterangepicker
-      startDate: @get("startDate")
-      endDate: @get("endDate")
+      startDate: @get("startDate") || moment().startOf('month')
+      endDate: @get("endDate") || moment().endOf('month').add('month', 1)
+      format: "MM/DD/YYYY"
       opens: 'left'
       ranges:
         @get("ranges")
       (start, end) =>
-        @set("startDate", moment(start).toDate())
-        @set("endDate", moment(end).toDate())
+        # for text input, use stricter validation rules
+        if start._i and end._i
+          start = moment(start._i, "MM/DD/YYYY", true)
+          end = moment(end._i, "MM/DD/YYYY", true)
+
+        if start.isValid() and end.isValid()
+          @set("startDate", moment(start).toDate())
+          @set("endDate", moment(end).toDate())
     .data('daterangepicker')
+    @addObserver("startDate", this, "syncField")
+    @addObserver("endDate", this, "syncField")
   ).on("didInsertElement")

@@ -84,7 +84,15 @@
       </tr>
     {{else}}
       <tr>
-        <td colspan="9">No Deals</td>
+        <td colspan="9">
+          No deals
+          {{#if isTextFiltering}}
+            matching "{{searchText}}"
+          {{/if}}
+          {{#if isDateFiltering}}
+            with an Expected Close Date between {{formatDateTime filterStartDate format=date}} and {{formatDateTime filterEndDate format=date}}
+          {{/if}}
+        </td>
       </tr>
     {{/each}}
     <tr>
