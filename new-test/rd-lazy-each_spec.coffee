@@ -1,9 +1,9 @@
-describe 'loading data into a lazy list', ->
-  height = 80
-  rowHeight = 40
-  horizon = 2
-  list = null
+describe "a lazy list", ->
   beforeEach ->
+    height = 100
+    rowHeight = 25
+    horizon = 2
+    list = null
     $('body').append $ """
     <style>
       ember-list-view {
@@ -15,75 +15,51 @@ describe 'loading data into a lazy list', ->
       }
     </style>
     """
-    @moar = sinon.spy =>
-      @list.get('content').pushObjects [
-        {name: 'Bam Bam'},
-        {name: 'Pebbles'},
-        {name: 'Dino'},
-        {name: 'Mr Slate'}
-      ]
+
+    @content = Ember.A [
+      {name: 'Barney'},
+      {name: 'Fred'},
+      {name: 'Betty'},
+      {name: 'Wilma'}
+    ]
+
+    @extras = Ember.A [
+      {name: 'Bam Bam'},
+      {name: 'Pebbles'},
+      {name: 'Dino'},
+      {name: 'Mr. Slate'},
+    ]
+
+    @extra = {name: 'Bam Bam'}
+
+    @endOfList = false
+    @smallDataLoad = false
+    @moar = sinon.spy => console.log 'MOAR'
+
     @list = list = component 'rdLazyEach',
       height: height
       rowHeight: rowHeight
       horizon: horizon
-      content: [
-        {name: 'Barney'},
-        {name: 'Fred'},
-        {name: 'Betty'},
-        {name: 'Wilma'}
-      ]
+      content: @content
       endInSight: "moar"
       targetObject:
         moar: @moar
     @list.templateForName = ->
       Ember.Handlebars.compile('<div data-item>{{name}}</div>')
-  afterEach ->
-    Ember.run @list, 'remove'
 
-  it 'exists', ->
-    expect(@list).to.exist
-  it 'has the expected dimensions', ->
-    expect(@list.$().height()).to.equal 80
-  it 'contains all the items', ->
-    expect(@list.$('[data-item]').length).to.equal 3
-    expect(@list.$('[data-item]:first')).to.have.text "Barney"
-    expect(@list.$('[data-item]:last')).to.have.text "Betty"
-
-  calculateScrollTop = (index) ->
-    (index * rowHeight)
-
-  scroll = (index) ->
-    list.scrollTo calculateScrollTop(index)
-
-  scrollToHorizon = ->
-    initiallyVisibleRows = height / rowHeight
-    scroll list.get('content.length') - horizon + initiallyVisibleRows
-
-  describe 'scrolling near the end', ->
-    beforeEach ->
-      @moar.reset()
-      scroll 2
-    it 'asks for more data', ->
+  describe "when it is loaded at the beginning with all data showing", ->
+    it "loads more data", ->
       expect(@moar).to.have.been.calledOnce
-
-    it 'still contains only three items', ->
-      expect(@list.$('[data-item]').length).to.equal 3
-
-    it 'contains the expected items', ->
-      #Bam Bam is first because the text of the first div has been replaced
-      expect(@list.$('[data-item]:first')).to.have.text "Bam Bam"
-      expect(@list.$('[data-item]:last')).to.have.text "Wilma"
-
-    describe 'scrolling just a bit more', ->
-      beforeEach ->
-        @moar.reset()
-        scroll 3
-      it 'does not ask for more data', ->
-        expect(@moar).not.to.have.been.called
-
-      describe 'scrolling to the end of the new data set', ->
+    describe "when no more data arrives", ->
+      describe "scrolling some more", ->
         beforeEach ->
-          @moar.reset()
-          scrollToHorizon()
-        it 'asks for more data', ->
-          expect(@moar).to.have.been.calledOnce
+          @list.scroll
+        it "does not ask for more data", ->
+    describe "when data arrives, but still within the event horizon", ->
+      beforeEach ->
+        @content.addObject @extra
+      it "asks for more data", ->
+        expect(@moar).to.have.been.calledTwice
+    describe "when data arrives, and expands the list beyond horizon", ->
+      describe "scrolling within the horizon", ->
+        it "does not ask for more data", ->

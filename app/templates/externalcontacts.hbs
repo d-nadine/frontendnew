@@ -36,7 +36,6 @@
   </div>
 </div>
 
-{{#rd-lazy-each content=model}}
-  {{log "Model" this}}
+{{#rd-lazy-each content=model endInSight="nextPage"}}
   <div>Hi, my email is {{this.email}}</div>
 {{/rd-lazy-each}}
