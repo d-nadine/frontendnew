@@ -7,7 +7,6 @@ Radium.set('rootElement', 'body')
 
 window.require = (module_id)->
   console.log module_id
-  #document.write("<script src='#{}'")
 
 window.beforeEach = ((original)->
   return (fn)->
@@ -32,3 +31,11 @@ window.component = (name, options = {})->
 
 afterEach ->
   components.forEach (component)-> component.destroy()
+
+beforeEach ->
+  @sandbox = sinon.sandbox.create()
+afterEach ->
+  @sandbox.restore()
+
+beforeEach ->
+  @store = Radium.__container__.lookup 'store:main'

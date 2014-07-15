@@ -34,7 +34,7 @@ describe "a lazy list", ->
 
     @endOfList = false
     @smallDataLoad = false
-    @moar = sinon.spy => console.log 'MOAR'
+    @moar = sinon.spy =>
 
     @list = list = component 'rdLazyEach',
       height: height

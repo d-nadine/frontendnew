@@ -1,7 +1,5 @@
-Radium.ExternalcontactsController = Radium.ArrayController.extend
-  actions:
-    nextPage: ->
-      console.log 'nextPage'
+Radium.ExternalcontactsController = Radium.ArrayController.extend()
+
 ###
 Radium.ExternalcontactsController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   Radium.CheckableMixin,

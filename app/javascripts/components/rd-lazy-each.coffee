@@ -19,9 +19,7 @@ Radium.RdLazyEachComponent = Ember.Component.extend
     return @get('listView._lastEndingIndex') || @get('height') / @get('rowHeight')
   ).property().volatile()
   contentLengthDidChange: Ember.observer 'content.length', (->
-    console.log 'contentLengthdidchange', @get('horizonThresholdCrossed'), @get('withinHorizon')
     if @get('withinHorizon')
-      console.log 'sendAction in response to content length change'
       @sendAction "endInSight"
   )
   layout: Ember.Handlebars.compile "{{view listView}}"
@@ -44,15 +42,12 @@ Radium.RdLazyEachComponent = Ember.Component.extend
     @notifyPropertyChange 'lastVisibleIndex'
 
   withinHorizon: Ember.computed 'lastVisibleIndex', 'content.length', ->
-    console.log 'withinHorizon', @get('lastVisibleIndex'), @get('listView._lastEndingIndex'), @get('content.length')
     return false unless @get("lastVisibleIndex")?
     return @get("content.length") - @get("lastVisibleIndex") < @get("horizon")
 
 
   notifyEndInSight: Ember.observer('horizonThresholdCrossed', ->
-    console.log 'notifyEndInSight', @get('horizonThresholdCrossed')
     if @get("horizonThresholdCrossed")
-      console.log 'send Action because SEND IT'
       @sendAction "endInSight"
   )
 
