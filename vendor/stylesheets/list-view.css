@@ -4,4 +4,5 @@
 }
 .ember-list-item-view {
   position: absolute;
+  width: 100%;
 }

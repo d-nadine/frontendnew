@@ -36,6 +36,35 @@
   </div>
 </div>
 
-{{#rd-lazy-each content=model endInSight="loadMoreContacts"}}
-  <div>Hi, my email is {{this.email}}</div>
+{{#rd-lazy-each content=model endInSight="loadMoreContacts" height="400" rowHeight="50"}}
+  <div class="row-fluid">
+    <div class="span2 row-fluid">
+      <div class="span6 select">{{input type="checkbox"}}</div>
+      <div class="span6 avatar">
+        {{avatar this size=small class="img-polaroid"}}
+      </div>
+    </div>
+    <div class="span6 row-fluid">
+      <div class="span6 name">
+        {{#link-to "contact" this}}{{displayName}}{{/link-to}}
+      </div>
+      <div class="span6 company">
+        {{#if company}}
+          {{#link-to "company" company}}{{company.name}}{{/link-to}}
+        {{/if}}
+      </div>
+    </div>
+    <div class="span3">
+      <div class="btn-group btn-add-to-radium">
+        <button class="btn btn-mini btn-main btn-primary" {{action "promote" this "pipeline"}}>Track with Radium</button>
+      </div>
+    </div>
+    <div class="span1">
+      <div class="btn-group">
+        <a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
+          <i class="ss-symbolicons-block ss-trash"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 {{/rd-lazy-each}}

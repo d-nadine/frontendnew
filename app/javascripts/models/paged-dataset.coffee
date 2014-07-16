@@ -5,7 +5,6 @@ Radium.PagedDataset = Ember.ArrayProxy.extend({
     type = @get 'type'
     page = @get 'page'
     store = @get 'store'
-    return [] unless page > 0
 
     Ember.assert 'type must be defined', !!type
     Ember.assert 'store must be defined', !!store

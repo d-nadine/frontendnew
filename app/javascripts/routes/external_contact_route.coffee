@@ -1,6 +1,6 @@
 Radium.ExternalcontactsRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: ->
-    Radium.InfiniteDataset.create
+    @dataset = Radium.InfiniteDataset.create
       store: @store
       type: Radium.Contact
       params: {private: true}
