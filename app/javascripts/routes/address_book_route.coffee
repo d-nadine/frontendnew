@@ -1,39 +1,41 @@
 require 'mixins/routes/bulk_action_events_mixin'
 
-Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
-  model: ->
-    model = @modelFor 'addressbook'
+Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin
+  # model: ->
+  #   []
+  #   model = @modelFor 'addressbook'
 
-    return model if model
+  #   return model if model
 
-    addressBookProxy = Radium.AddressBookArrayProxy.create
-      currentUser: @controllerFor('currentUser').get('model')
+  #   addressBookProxy = Radium.AddressBookArrayProxy.create
+  #     currentUser: @controllerFor('currentUser').get('model')
 
-    addressBookProxy.load().then ->
-      return addressBookProxy
+  #   addressBookProxy.load().then ->
+  #     return addressBookProxy
 
-  afterModel: (model, transition) ->
-    return if transition.params["addressbook.filter"] || transition.params['addressbook.contactimportjobs']
-    if !model.get("contacts.length")
-      @transitionTo("externalcontacts")
-    else
-      @transitionTo("addressbook.filter", "people")
 
-  deactivate: ->
-    if addressBookContent = @modelFor('addressbook')
-      addressBookContent.set('searchText', '')
+  # afterModel: (model, transition) ->
+  #   return if transition.params["addressbook.filter"] || transition.params['addressbook.contactimportjobs']
+  #   if !model.get("contacts.length")
+  #     @transitionTo("externalcontacts")
+  #   else
+  #     @transitionTo("addressbook.filter", "people")
 
-    @controllerFor('externalcontacts').set 'searchText', ''
+  # deactivate: ->
+  #   if addressBookContent = @modelFor('addressbook')
+  #     addressBookContent.set('searchText', '')
 
-Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
-  model: (params) ->
-    params.filter
+  #   @controllerFor('externalcontacts').set 'searchText', ''
 
-  setupController: (controller, model) ->
-    addressbookController = @controllerFor('addressbook')
-    addressbookController.set 'searchText', ''
-    Ember.run.next ->
-      addressbookController.set('model.selectedFilter', model)
+# Radium.AddressbookFilterRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
+#   model: (params) ->
+#     params.filter
+
+#   setupController: (controller, model) ->
+#     addressbookController = @controllerFor('addressbook')
+#     addressbookController.set 'searchText', ''
+#     Ember.run.next ->
+#       addressbookController.set('model.selectedFilter', model)
 
 Radium.AddressbookAssignedRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin,
   model: (params) ->
