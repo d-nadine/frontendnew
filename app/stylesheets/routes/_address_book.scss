@@ -4,6 +4,10 @@ $body: #6e6e6e;
 
 }
 
+#addressbook .page-header {
+  min-height: 60px;
+}
+
 .search-results-header {
   $border: #595858;
   padding: 4px 0;
