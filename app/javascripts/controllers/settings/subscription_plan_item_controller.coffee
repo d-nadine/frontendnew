@@ -39,3 +39,5 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     return true if @get('isCurrent')
 
     @get('totalUsers') < @get('users.length')
+
+  isCurrentAndisTrial: Ember.computed.and 'isCurrent', 'isTrial'

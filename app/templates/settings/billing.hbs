@@ -77,6 +77,9 @@
                   Upgrade
                 {{/if}}
               </button>
+              {{#if isCurrentAndisTrial}}
+                <button {{action "updateSubscription" this}} class="btn btn-success">Upgrade</button>
+              {{/if}}
             {{else}}
               {{#unless isCurrent}}
                 <strong>N/A</strong>
