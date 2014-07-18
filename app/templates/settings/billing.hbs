@@ -47,7 +47,7 @@
         <td class="title">{{unbound capitalize name}}</td>
         <td class="price blue">
           {{#unless isBasic}}
-            {{unbound currency amount}}/month
+            {{unbound currency amount}}/{{interval}}
           {{else}}
             Free
           {{/unless}}
