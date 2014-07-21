@@ -64,6 +64,11 @@
             {{/each}}
           </tbody>
         </table>
+        {{#if isUpdating}}
+          <div class="updating-blinker">
+            <strong>Updating....</strong>
+          </div>
+        {{/if}}
       </p>
     {{/unless}}
   </div>

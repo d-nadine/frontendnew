@@ -341,3 +341,9 @@
     opacity: 0.5;
   }
 }
+
+.updating-blinker {
+  color: $red;
+  font-weight: bold;
+  @include add-blinker;
+}

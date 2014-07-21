@@ -1,4 +1,5 @@
 Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContactStatusMixin,
+  Radium.UpdateContactPoller,
   actions:
     changeStatus: (email, newStatus) ->
       email.set('isPersonal', false)
@@ -26,12 +27,15 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
 
   showExtensionCTA: Ember.computed.not 'currentUser.settings.alerts.extensionSeen'
 
-  contact: ( ->
+  contact: Ember.computed 'sender', ->
     sender = @get('sender')
 
     return sender if sender instanceof Radium.Contact
-  ).property('sender')
 
-  showHud: (->
+  showHud: Ember.computed 'contact', ->
     !Ember.isNone(@get('contact'))
-  ).property('contact')
+
+  isUpdating: Ember.computed 'contact', 'contact.isUpdating', ->
+    return false unless @get('contact')
+
+    @get('contact.isUpdating')
