@@ -1,4 +1,5 @@
 Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
+  Radium.TimeoutPollerMixin,
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
@@ -10,7 +11,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
       transaction.add(contact)
 
-      contact.one 'didUpdate', (result) =>
+      contact.one 'didUpdate', (result) ->
         unless contact.get('isPersonal')
           contact.get('user').reload()
 
@@ -88,3 +89,48 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   noteFormDefaults: Ember.computed 'model', ->
     reference: @get('model')
     user: @get('currentUser')
+
+  isUpdatingDidChange: Ember.observer 'isUpdating', ->
+    return unless @get('isUpdating')
+
+    @start()
+
+  onPoll: ->
+    return @stop() unless @get('isUpdating')
+
+    contact = @get('model')
+
+    contact.one 'didReload', =>
+      return @stop unless @get('isUpdating')
+
+    contact.reload()
+
+  stop: ->
+    @_super.apply this, arguments
+    clearInterval(@_timeout) if (@_timeout)
+
+  finishSync: ->
+    console.log 'in finishSync'
+
+    @stop()
+
+    return unless @get('isUpdating')
+
+    contact = @get('model')
+
+    observer = =>
+      return unless contact.get('currentState.stateName') == "root.loaded.saved"
+
+      contact.removeObserver 'currentState.stateName', observer
+
+      contact.set 'updateStatus', 'updated'
+
+      contact.one 'didUpdate', ->
+        contact.reload()
+
+      @get('store').commit()
+
+    if contact.get('currentState.stateName') != "root.loaded.saved"
+      contact.addObserver 'currentState.stateName', observer
+    else
+      observer()

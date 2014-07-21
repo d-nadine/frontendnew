@@ -40,14 +40,12 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   token: DS.attr('string')
 
-  name: ( ->
+  name: Ember.computed 'firstName', 'lastName', ->
     "#{@get("firstName")} #{@get("lastName")}"
-  ).property('firstName', 'lastName')
 
-  contacts: ( ->
+  contacts: Ember.computed 'deals.[]', ->
     Radium.Contact.all().filter (contact) =>
       contact.get('user') == this && !contact.get('isPersonal')
-  ).property('deals.[]')
 
   isSyncing: Ember.computed 'syncState', ->
     @get('syncState') != "waiting"
@@ -65,7 +63,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
         else
           task.deleteRecord()
 
-    @get('activities').compact().forEach (activity) =>
+    @get('activities').compact().forEach (activity) ->
       activity.deleteRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>

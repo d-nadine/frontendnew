@@ -1,12 +1,6 @@
-Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
-  interval: 1000
-  timeOutInterval: 10000
-  _timeout: null
-  start: ->
-    @_super.apply this, arguments
+require 'mixins/controllers/timeout_poller_mixin'
 
-    @_timeout = setInterval(@finishSync.bind(this), @timeOutInterval)
-
+Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
   stop: ->
     @_super.apply this, arguments
     @set('controller.isSyncing', false)
@@ -40,7 +34,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.PollerMixin,
       currentUser.set 'syncState', 'waiting'
       currentUser.set 'emailsImported', 0
 
-      currentUser.one 'didUpdate', =>
+      currentUser.one 'didUpdate', ->
         currentUser.reload()
 
       @get('controller.store').commit()

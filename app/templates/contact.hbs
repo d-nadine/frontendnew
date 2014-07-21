@@ -6,10 +6,18 @@
     <button {{action "makeContactPublic" this}} {{bind-attr disabled=isSaving}} class="btn btn-block btn-large btn-info">ADD CONTACT TO RADIUM</button>
   </div>
 {{else}}
-  <div class="tasks-content">
+  <div class="tasks-content contacts">
     {{render "form_box" formBox}}
-    {{render "task_list" currentTasks}}
+    {{#if isUpdating}}
+      <div class="well">
+        <h4>Updating details....</h4>
+      </div>
+    {{else}}
+      {{render "task_list" currentTasks}}
+    {{/if}}
   </div>
 
-  {{render "feed" activities}}
+  {{#unless isUpdating}}
+    {{render "feed" activities}}
+  {{/unless}}
 {{/if}}

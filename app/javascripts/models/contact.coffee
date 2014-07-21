@@ -26,11 +26,11 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   companyName: DS.attr('string')
   status: DS.attr('string')
   source: DS.attr('string')
-  status: DS.attr('string')
   title: DS.attr('string')
   avatarKey: DS.attr('string')
   about: DS.attr('string')
   removeCompany: DS.attr('boolean')
+  updateStatus: DS.attr('string')
 
   isPersonal: Ember.computed.equal 'status', 'personal'
   isPublic: Ember.computed.not 'isPersonal'
@@ -45,9 +45,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 
   isLead: Ember.computed.equal 'status', 'pipeline'
-
-  isPersonal: Ember.computed 'status', ->
-    @get('status') == 'personal'
 
   isExcluded: Ember.computed 'status', ->
     @get('status') == 'exclude'
@@ -72,8 +69,10 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     else
       @get('name')
 
+  isUpdating: Ember.computed.equal 'updateStatus', 'updating'
+
   clearRelationships: ->
-    @get('deals').compact().forEach (deal) =>
+    @get('deals').compact().forEach (deal) ->
       deal.unloadRecord()
 
     @get('tasks').compact().forEach (task) =>
@@ -86,7 +85,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
         else
           task.deleteRecord()
 
-    @get('activities').compact().forEach (activity) =>
+    @get('activities').compact().forEach (activity) ->
       activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
