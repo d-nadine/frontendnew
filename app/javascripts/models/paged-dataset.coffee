@@ -10,11 +10,13 @@ Radium.PagedDataset = Ember.ArrayProxy.extend({
     Ember.assert 'store must be defined', !!store
 
     params = Ember.merge {page: page}, @get 'params'
-
-    return store.findQuery(type, params)
+    query = type.find params
+    console.log 'new page', Ember.guidFor(query), 'page', @get('page'), 'params', @get('params')
+    return query
   )
 
   resetPaging: Ember.observer 'params', ->
+    console.log 'reset paging', Ember.guidFor(this)
     @set 'page', 1
 
   pageForward: ->

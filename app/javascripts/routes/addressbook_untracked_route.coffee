@@ -8,4 +8,5 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
     promote: (model, status)->
       console.log 'promote this contact'
     loadMoreContacts: ->
+      console.log 'AddressbookUntrackedRoute.actions#loadMoreContacts'
       @dataset.expand()
