@@ -3,7 +3,6 @@ describe "a paged dataset", ->
     @sandbox.stub @store, 'findQuery', => @content = ['bob', 'bobo']
     @dataset = Radium.PagedDataset.create
       type: 'contact'
-      store: @store
       params:
         q: 'bob'
         private: true

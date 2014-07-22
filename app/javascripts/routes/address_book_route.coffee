@@ -1,6 +1,6 @@
 require 'mixins/routes/bulk_action_events_mixin'
 
-Radium.AddressbookRoute = Radium.Route.extend Radium.BulkActionEmailEventsMixin
+Radium.AddressbookRoute = Radium.Route.extend()
   # model: ->
   #   []
   #   model = @modelFor 'addressbook'

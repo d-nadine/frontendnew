@@ -1,5 +1,6 @@
 minispade.require "boot"
 Ember.testing = true
+Ember.Test.adapter = Ember.Test.Adapter.create()
 Radium.setupForTesting()
 Radium.injectTestHelpers()
 Radium.set('rootElement', 'body')
@@ -21,10 +22,9 @@ window.afterEach = ((original)->
 )(afterEach)
 
 components = []
-window.component = (name, options = {})->
-  component = Radium.__container__.lookup("component:#{name}")
-  throw new Error("component:#{name} does not exist") unless component
-  component.setProperties options
+window.component = (type, options = {})->
+  throw new Error("component:#{name} does not exist") unless type?
+  component = type.create Ember.merge {container: Radium.__container__}, options
   component.append()
   components.push component
   return component
