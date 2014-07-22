@@ -10,7 +10,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
 
   isCurrent: Ember.computed 'parentController.currentPlan', 'model', 'isPersisting', ->
-    return false if @get('currentUser.account.billing.subscriptionInvalid')
+    return false if @get('currentUser.subscriptionInvalid')
     return if @get('parentController.isPersisting')
     @get('parentController.currentPlan') == @get('model')
 

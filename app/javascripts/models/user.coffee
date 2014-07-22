@@ -24,6 +24,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   syncState: DS.attr('string')
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
+  subscriptionInvalid: DS.attr('boolean')
 
   following: DS.hasMany('Radium.User')
 
