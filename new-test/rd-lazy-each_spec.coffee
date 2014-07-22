@@ -35,7 +35,7 @@ describe "a lazy list", ->
     @endOfList = false
     @smallDataLoad = false
     @moar = sinon.spy =>
-
+    @action = sinon.spy =>
     @list = list = component 'rdLazyEach',
       height: height
       rowHeight: rowHeight
@@ -44,12 +44,14 @@ describe "a lazy list", ->
       endInSight: "moar"
       targetObject:
         moar: @moar
-    @list.templateForName = ->
-      Ember.Handlebars.compile('<div data-item>{{name}}</div>')
+        someAction: @action
+      template:
+        Ember.Handlebars.compile('<div {{action "someAction"}} data-item>{{name}}</div>')
 
   describe "when it is loaded at the beginning with all data showing", ->
     it "loads more data", ->
       expect(@moar).to.have.been.calledOnce
+      expect($('[data-item]').length).to.equal 4
     describe "when no more data arrives", ->
       describe "scrolling some more", ->
         beforeEach ->
@@ -63,3 +65,8 @@ describe "a lazy list", ->
     describe "when data arrives, and expands the list beyond horizon", ->
       describe "scrolling within the horizon", ->
         it "does not ask for more data", ->
+    describe "clicking on an action handler in the embedded template", ->
+      beforeEach ->
+        click '[data-item]:first'
+      it 'fires the action on the lazy-each components context', ->
+        expect(@action).to.have.been.called

@@ -1,10 +1,8 @@
-Radium.InfiniteDataset = Ember.ArrayProxy.extend({
+Radium.InfiniteDataset = Ember.ArrayProxy.extend
   params: {}
 
   content: Ember.computed 'source', ->
-    content = Ember.A []
-    console.log 'reset content to', Ember.guidFor content
-    return content
+    Ember.A []
 
   source: Ember.computed 'params', 'store', 'type', ->
     Radium.PagedDataset.create
@@ -19,13 +17,9 @@ Radium.InfiniteDataset = Ember.ArrayProxy.extend({
 
     @queue = queue.then ->
       source.then (records)->
-        console.log 'adding', source.get('length'),'records from ', Ember.guidFor(source), 'to', Ember.guidFor(content), content.get('length')
-        console.log 'first', source.get('firstObject.name'), 'last', source.get('lastObject.name')
         content.addObjects source
   ).on 'init'
 
-  expand: (->
-    console.log 'expand dataset'
-    @get('source').pageForward()
-  )
-})
+  expand: ->
+    Ember.run.later =>
+      @get('source').pageForward()
