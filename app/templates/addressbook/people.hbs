@@ -9,43 +9,6 @@
   </div>
 </div>
 
-<style type="text/css">
-
- table {
-   width: 100%;
- }
-
- th {
-   color: rgb(118,144,170);
-   text-align: left;
-   font-weight: bold;
-   border-bottom: 1px solid black;
-
- }
-
-
- td {
-   background-color: white;
-   border-bottom: 1px solid transparent;
-   border-right: 1px solid transparent;
-   margin: 0 !important;
-   text-overflow: ellipsis;
-   overflow: hidden;
-   white-space: nowrap;
- }
-
- td, th {
-   width: 80px;
-   max-width: 80px;
-   padding-left: 5px;
-   height: 50px;
- }
-
- td.row-selector, th.row-selector {
-   width: 20px;
- }
-</style>
-
 <table style="width: calc(100% - 15px);">
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
@@ -61,7 +24,7 @@
 {{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
   <table style="height: 50px;">
     <tr>
-      <td class="row-selector">{{input type="checkbox"}}</th>
+      <td class="row-selector">{{input type="checkbox"}}</td>
       <td>{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
       <td>{{company.name}}</td>
       <td></td>
