@@ -31,11 +31,11 @@ Radium.RdLazyEachComponent = Ember.Component.extend
     console.log 'parentView.cloneKeywords', parentView.cloneKeywords
     listView = Ember.ListView.createWithMixins
       lazyEach: this
-      content: Ember.computed.oneWay 'lazyEach.content'
-      height: Ember.computed.oneWay 'lazyEach.height'
-      rowHeight: Ember.computed.oneWay 'lazyEach.rowHeight'
-      width: Ember.computed.oneWay 'lazyEach.width'
-      elementWidth: Ember.computed.oneWay 'lazylist.elementWidth'
+      content: Ember.computed.readOnly 'lazyEach.content'
+      height: Ember.computed.readOnly 'lazyEach.height'
+      rowHeight: Ember.computed.readOnly 'lazyEach.rowHeight'
+      width: Ember.computed.readOnly 'lazyEach.width'
+      elementWidth: Ember.computed.readOnly 'lazylist.elementWidth'
       scrollTop: 0
       itemViewClass: Ember.ListItemView.extend
         template: @get 'template'

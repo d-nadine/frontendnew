@@ -10,49 +10,64 @@
 </div>
 
 <style type="text/css">
- .table-header {
+
+ table {
+   width: 100%;
+ }
+
+ th {
    color: rgb(118,144,170);
    text-align: left;
    font-weight: bold;
-   width: calc(100% - 15px);
    border-bottom: 1px solid black;
 
  }
 
- .table-cell {
+
+ td {
    background-color: white;
    border-bottom: 1px solid transparent;
    border-right: 1px solid transparent;
+   margin: 0 !important;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+ }
+
+ td, th {
+   width: 80px;
+   max-width: 80px;
+   padding-left: 5px;
+ }
+
+ td.row-selector, th.row-selector {
+   width: 20px;
  }
 </style>
 
-<div class="row-fluid table-header">
-  <div class="span2 row-fluid">
-    <div class="span2"></div>
-    <div class="span10">Name</div>
-  </div>
-  <div class="span2">Company</div>
-  <div class="span2 row-fluid">
-    <div class="span6">Events</div>
-    <div class="span6">Inactive</div>
-  </div>
-  <div class="span2">Next Task</div>
-  <div class="span2">Assigned To</div>
-  <div class="span2">Location</div>
-</div>
-{{#rd-lazy-each content=model endInSight="loadMoreContacts" height="500" rowHeight="50"}}
-  <div class="row-fluid">
-    <div class="span2 row-fluid">
-      <div class="span2 table-cell">{{input type="checkbox"}}</div>
-      <div class="span10 table-cell" style="word-break: break-all;">{{#link-to "contact" this}}{{displayName}}{{/link-to}}</div>
-    </div>
-    <div class="span2 table-cell">{{company.name}}</div>
-    <div class="span2 row-fluid">
-      <div class="span6 table-cell"></div>
-      <div class="span6 table-cell"></div>
-    </div>
-    <div class="span2 table-cell">{{tasks.firstObject.displayName}}</div>
-    <div class="span2 table-cell">{{#link-to "user" user}}{{user.name}}{{/link-to}}</div>
-    <div class="span2 table-cell"></div>
-  </div>
+<table style="width: calc(100% - 15px);">
+  <tr>
+    <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
+    <th>Name</th>
+    <th>Company</th>
+    <th class="events">Events</th>
+    <th class="inactive">Inactive</th>
+    <th>Next Task</th>
+    <th>Assigned To</th>
+    <th>Location</th>
+  </tr>
+</table>
+{{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
+  <table style="height: 50px;">
+    <tr>
+      <td class="row-selector">{{input type="checkbox"}}</th>
+      <td>{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
+      <td>{{company.name}}</td>
+      <td></td>
+      <td></td>
+      <td>{{tasks.firstObject.displayName}}</td>
+      <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
+      <td></td>
+    </tr>
+  </table>
 {{/rd-lazy-each}}
