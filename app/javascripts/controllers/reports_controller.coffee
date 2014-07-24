@@ -29,16 +29,17 @@ reduceByStatus = (crossfilterGroups, context) ->
 Radium.ReportsController = Ember.ArrayController.extend
   needs: ['application', 'account', 'accountSettings']
   dealStates: Ember.computed.alias 'controllers.accountSettings.dealStates'
-  
+
   account: Ember.computed.alias 'controllers.account'
   app: Ember.computed.alias 'controllers.application'
   domain: (->
-    start = d3.time.day(@get('startDate'))
-    end =  d3.time.day(@get('endDate'))
-    [start, end]
+    if !!@get("startDate") and !!@get("endDate")
+      start = d3.time.day(@get('startDate'))
+      end =  d3.time.day(@get('endDate'))
+      [start, end]
   ).property('startDate', 'endDate')
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: null
+  endDate: null
   defaultSelectedUser: 'Everyone'
   selectedUser: Ember.computed.defaultTo('defaultSelectedUser')
   defaultSelectedCompany: 'All Companies'
@@ -151,6 +152,8 @@ Radium.ReportsController = Ember.ArrayController.extend
       @get('status').filter(null)
       @get('company').filter(null)
       @set 'selectedUser', null
+      @set 'startDate', null
+      @set 'endDate', null
       @calcSums()
       dc.redrawAll()
 

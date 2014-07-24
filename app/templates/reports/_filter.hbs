@@ -3,24 +3,28 @@
     <button class="btn" {{action "reset"}}>Reset</button>
   </div>
   <div class="option">
-   {{rd-daterangepicker startDate=startDate endDate=endDate}}
+   {{rd-daterangepicker startDate=startDate endDate=endDate placeholderText="Change Date Range"}}
   </div>
   <div class="option">
-    {{report-dropdown 
-      options=allUsers 
+    {{report-dropdown
+      options=allUsers
       resetOption=defaultSelectedUser
       selected=selectedUser
       action="filterByUser"}}
   </div>
   <div class="option">
-    {{report-dropdown 
-      options=allCompanies 
+    {{report-dropdown
+      options=allCompanies
       resetOption=defaultSelectedCompany
       selected=selectedCompany
       action="filterByCompany"}}
   </div>
   <div class="option">
-    {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
+    {{#if domain}}
+      {{formatDateTime startDate format="date"}} - {{formatDateTime endDate format="date"}}
+    {{else}}
+      All time
+    {{/if}}
   </div>
 </div>
 <div class="reports-filter-placeholder"></div>
