@@ -9,15 +9,13 @@ Radium.Address = Radium.Model.extend
   email: DS.attr('string')
   phone: DS.attr('string')
 
-  formatted: ( ->
-    [@get('state'), @get('city'), @get('zipcode')].join(', ')
-  ).property('street', 'state', 'city', 'country', 'zipcode')
+  formatted: Ember.computed 'street', 'state', 'city', 'country', 'zipcode', ->
+    [@get('state'), @get('city'), @get('zipcode')].join(' ')
 
-  value: ( ->
+  value: Ember.computed 'isNew', 'street', 'state', 'city', 'country', 'zipcode', 'email', 'phone', ->
     return if @get('isNew')
 
     !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode')) || !Ember.isEmpty(@get('email')) || !Ember.isEmpty(@get('phone'))
-  ).property('isNew', 'street', 'state', 'city', 'country', 'zipcode', 'email', 'phone')
 
   getAddressHash: ->
     isPrimary: this.get('isPrimary')

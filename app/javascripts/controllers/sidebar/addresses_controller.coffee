@@ -14,25 +14,30 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
   actions:
     commit: ->
       @get("form.#{@recordArray}").forEach (item) =>
+        setProperties = (record) ->
+          ["email", "phone", "street", "city", "state", "zipcode", "country", "isPrimary"].forEach (field) ->
+            record.set(field, item.get(field)) unless Ember.isEmpty($.trim(item.get(field)))
+
+        email = item.get('email')
+
+        if !Ember.isEmpty(email) && !@emailIsValid(email)
+          @send 'flashError', "Not a valid email address"
+          return
+
         if item.hasOwnProperty 'record'
           item.record.setProperties
-            isPrimary: item.get('isPrimary')
             name: item.get('name')
-            email: item.get('email')
-            phone: item.get('phone')
-            street: item.get('street')
-            city: item.get('city')
-            state: item.get('state')
-            zipcode: item.get('zipcode')
-            country: item.get('country')
+
+          setProperties item.record
         else
           if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode')) || !Ember.isEmpty(item.get('email')) || !Ember.isEmpty(item.get('phone'))
-            @get("content.#{@recordArray}").createRecord item.getProperties('name', 'isPrimary', 'street', 'city', 'state', 'zipcode', 'country', 'email', 'phone')
+            record = @get("content.#{@recordArray}").createRecord()
+            setProperties record
 
       model = @get('content')
 
       model.one 'becameInvalid', (result) =>
-        @send 'flashError', 'A validation error has occurred.'
+        @send 'flashError', result
         result.reset()
 
       model.one 'bacameError', (result) =>
@@ -55,18 +60,18 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
 
         formArray.pushObject Ember.Object.create
           name: 'work'
-          email: ''
-          phone: ''
-          street: ''
-          city: ''
-          state: ''
-          zipcode: ''
-          country: ''
+          email: null
+          phone: null
+          street: null
+          city: null
+          state: null
+          zipcode: null
+          country: null
           isPrimary: true
 
         return
 
-      recordArray.forEach (item) =>
+      recordArray.forEach (item) ->
         hash = Ember.Object.create(item.getAddressHash())
         hash.set 'record', item
         formArray.pushObject hash

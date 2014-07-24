@@ -43,7 +43,7 @@ Radium.InlineEditorView = Ember.View.extend
 
     tagName = evt.target.tagName.toLowerCase()
 
-    if (['input', 'button', 'span',  'select', 'i', 'a'].indexOf(tagName) == -1) || $(evt.target).hasClass('resource-name')
+    if (['input', 'button',  'select', 'i', 'a'].indexOf(tagName) == -1) || $(evt.target).hasClass('resource-name')
       event.stopPropagation()
       @send 'toggleEditor'
       return
