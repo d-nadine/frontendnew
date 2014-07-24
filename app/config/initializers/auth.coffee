@@ -41,12 +41,12 @@ Ember.Application.initializer
       billingController.set('model', user.get('account.billing'))
 
       # we need to get the user to grant access if it has been revoked
-      # if user.get('refreshFailed')
-      #   store = currentUserController.get('store')
+      if user.get('refreshFailed')
+        store = currentUserController.get('store')
 
-      #   apiUrl = store.get('_adapter.url')
-      #   Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
-      # else
-      Ember.$('[class^=ball]').hide()
-      Radium.advanceReadiness()
+        apiUrl = store.get('_adapter.url')
+        Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
+      else
+        Ember.$('[class^=ball]').hide()
+        Radium.advanceReadiness()
     ), errHandler).then(null, errHandler)
