@@ -6,6 +6,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   isStatusChange: Ember.computed.is 'event', 'status_change'
   isPrimaryContact: Ember.computed.is 'event', 'primary_contact'
   isNewEmail: Ember.computed.is 'event', 'new_email'
+  isSentEmail: Ember.computed.is 'event', 'sent_email'
   isInfoChange: Ember.computed.is 'event', 'contact_info_change'
   isOpen: Ember.computed.is 'event', 'open'
 

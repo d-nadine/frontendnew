@@ -26,6 +26,10 @@
   {{partial "activities/contact/new_email"}}
 {{/if}}
 
+{{#if isNewEmail}}
+  {{partial "activities/contact/sent_email"}}
+{{/if}}
+
 {{#if isInfoChange}}
   {{partial "activities/contact/info_change"}}
 {{/if}}
