@@ -24,8 +24,7 @@ $body: #6e6e6e;
 
   td {
     background-color: white;
-    border-bottom: 1px solid transparent;
-    border-right: 1px solid transparent;
+    border: 1px solid #f3f3f3;
     margin: 0 !important;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -46,6 +45,10 @@ $body: #6e6e6e;
     .avatar-col {
       width: 40px;
     }
+  }
+
+  .ember-list-view {
+    overflow-y: scroll !important;
   }
 }
 
