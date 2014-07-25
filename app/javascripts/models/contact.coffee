@@ -31,6 +31,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   about: DS.attr('string')
   removeCompany: DS.attr('boolean')
   updateStatus: DS.attr('string')
+  lastActivityAt: DS.attr('date')
+  activityCount: DS.attr('number')
 
   isPersonal: Ember.computed.equal 'status', 'personal'
   isPublic: Ember.computed.not 'isPersonal'
