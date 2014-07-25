@@ -13,24 +13,22 @@
 <table style="width: calc(100% - 15px);">
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
-    <th class="avatar-col"></th>
-    <th>Email</th>
     <th>Name</th>
-    <th>Track with Radium</th>
-    <th>Delete </th>
+    <th>Email</th>
+    <th>Actions</th>
   </tr>
 </table>
 {{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
   <table style="height: 50px;">
     <tr>
       <td class="row-selector">{{input type="checkbox"}}</td>
-      <td style="avatar-col">{{avatar this size="small" class="img-polaroid"}}</td>
+      <td>{{avatar this size="small" class="img-polaroid"}} {{displayName}}</td>
       <td>{{email}}</td>
-      <td>{{displayName}}</td>
-      <td><button class="btn btn-mini btn-main btn-primary" {{action "promote" this "pipeline"}}>Promote</button></td>
-      <td><a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
-        <i class="ss-symbolicons-block ss-trash"></i>
-      </a>
+      <td>
+        <button class="btn btn-mini btn-main btn-primary" {{action "promote" this "pipeline"}}>Track</button>
+        <a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
+          <i class="ss-symbolicons-block ss-trash"></i>
+        </a>
       </td>
 
     </tr>
