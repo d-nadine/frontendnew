@@ -34,6 +34,10 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   lastActivityAt: DS.attr('date')
   activityCount: DS.attr('number')
 
+  daysInactive: Ember.computed 'lastActivityAt', ->
+    if @get("lastActivityAt")?
+      moment.duration((new Date - @get("lastActivityAt")), "milliseconds").humanize()
+
   isPersonal: Ember.computed.equal 'status', 'personal'
   isPublic: Ember.computed.not 'isPersonal'
 

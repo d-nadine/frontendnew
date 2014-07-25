@@ -3,7 +3,6 @@
     <div class="pull-right">
       <form class="form-search pipeline-search">
         <i class="ss-symbolicons-block ss-search"></i>
-        {{input value=searchText type="text" class="field search-text"}}
       </form>
     </div>
   </div>
@@ -13,25 +12,17 @@
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
     <th>Name</th>
-    <th>Company</th>
-    <th class="events">Events</th>
-    <th class="inactive">Inactive</th>
-    <th>Next Task</th>
+    <th>Open Deals</th>
     <th>Assigned To</th>
-    <th>Location</th>
   </tr>
 </table>
 {{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
   <table style="height: 50px;">
     <tr>
       <td class="row-selector">{{input type="checkbox"}}</td>
-      <td>{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
-      <td>{{company.name}}</td>
-      <td>{{activityCount}}</td>
-      <td>{{daysInactive}}</td>
-      <td>{{tasks.firstObject.displayName}}</td>
+      <td>{{#link-to "company" this}}{{displayName}}{{/link-to}}</td>
+      <td>{{openDeals.length}}</td>
       <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
-      <td></td>
     </tr>
   </table>
 {{/rd-lazy-each}}
