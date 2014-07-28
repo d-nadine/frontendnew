@@ -197,7 +197,6 @@
 .sidebar-panel-content {
   width: 100%;
   padding: 18px;
-  display: inline-block;
   background-color: #fff;
   border-bottom: 1px solid $control-border-color;
   color: #6e6e6e;
@@ -272,7 +271,8 @@
   }
 }
 
-.btn-follow {
+.btn.btn-block.btn-follow {
+  display: none;
   margin: 10px 0 0;
 }
 
