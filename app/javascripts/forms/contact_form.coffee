@@ -15,12 +15,11 @@ Radium.ContactForm = Radium.Form.extend
     tagNames: Ember.A()
   ).property().volatile()
 
-  isValid: ( ->
+  isValid: Ember.computed 'name', 'companyName', 'user', 'source', ->
     return if Ember.isEmpty(@get('name')) && Ember.isEmpty(@get('companyName'))
     return if Ember.isEmpty(@get('source'))
     return unless @get('user')
     true
-  ).property('name', 'companyName', 'user', 'source')
 
   create:  ->
     contact = Radium.CreateContact.createRecord @get('data')

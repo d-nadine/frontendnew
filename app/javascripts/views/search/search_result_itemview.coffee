@@ -6,10 +6,9 @@ Radium.SearchResultItemView = Radium.View.extend
     @$('.contact-tooltip').tooltip()
 
   willDestroyElement: ->
-    @$('.contact-tooltip').tooltip('destroy')
+    @$('.contact-tooltip')?.tooltip('destroy')
 
-  templateName: ( ->
+  templateName: Ember.computed 'controller.model', ->
     type = @get('controller.model.typeName')
 
     "search/#{type}"
-  ).property('controller.model')

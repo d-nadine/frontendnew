@@ -32,6 +32,9 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
       createContact.one 'didCreate', =>
         Ember.run.next =>
           @set 'isSaving', false
+          addressBook = @get('controllers.addressbook.content')
+          contact = createContact.get('contact')
+          addressBook.pushObject(contact)
           @transitionToRoute 'contact', createContact.get('contact')
 
       createContact.one 'becameError', (result) =>
