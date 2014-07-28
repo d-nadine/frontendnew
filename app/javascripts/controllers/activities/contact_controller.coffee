@@ -25,5 +25,5 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
       when 'contact_info_change' then 'write'
       when 'primary_contact' then 'buildings'
       when 'new_email' then 'mail'
-      when 'sent_mail' then 'mail'
+      when 'sent_email' then 'mail'
       when 'open' then 'view'
