@@ -3,7 +3,16 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
 
-      @get('tagNames').createRecord(name: tag)
+      tag = @get('tagNames').createRecord(name: tag)
+
+      addressbook = @get('controllers.addressbook.content')
+
+      tagName = tag.get('name')
+
+      tag.one 'didCreate', ->
+        Radium.Tag.find({}).then (tags) ->
+          if tag = tags.find((tag) -> tag.get('name') == tagName)
+            addressbook.pushObject tag
 
       @get('store').commit()
 
@@ -14,5 +23,5 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
 
       @get('store').commit()
 
-  needs: ['tags']
+  needs: ['tags', 'addressbook']
   isEditable: true
