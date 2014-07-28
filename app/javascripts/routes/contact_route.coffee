@@ -21,15 +21,16 @@ Radium.ContactRoute = Radium.Route.extend
         @send 'closeModal'
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
-        @transitionTo 'addressbook.filter', 'all'
 
-      contact.one 'becameInvalid', (result) =>
+      contact.one 'becameInvalid', (result) ->
         result.reset() 
 
-      contact.one 'becameError', (result) =>
+      contact.one 'becameError', (result) ->
         result.reset() 
 
       @get('store').commit()
+
+      @transitionTo 'addressbook.filter', 'people'
 
   renderTemplate: ->
     @render()
