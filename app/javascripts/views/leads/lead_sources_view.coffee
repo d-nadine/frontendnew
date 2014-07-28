@@ -5,6 +5,6 @@ Radium.LeadSourcesView = Radium.TextCombobox.extend Radium.ValueValidationMixin,
   classNameBindings: [
     'disabled:is-disabled'
   ]
-  sourceBinding: 'targetObject.controllers.accountSettings.leadSources'
+  sourceBinding: 'controller.controllers.accountSettings.leadSources'
   valueBinding: 'controller.source'
   placeholder: 'Where is this lead from?'
