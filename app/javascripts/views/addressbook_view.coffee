@@ -1,4 +1,5 @@
 Radium.AddressbookView = Ember.View.extend
+  layoutName: 'layouts/single_column'
 
   readAvailableHeight: (->
     console.log 'hello', @$('#addressbook').height(), @get('controller.constructor')
