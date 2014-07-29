@@ -4,19 +4,25 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
       type: Radium.Contact
       params: {private: true}
   actions:
-    promote: (model, status) ->
-      console.log 'I want to promote this', model, status
-      promote = Radium.PromoteExternalContact.createRecord
-                externalContact: model
-                status: status
+    track: (contact) ->
+      if confirm "Track this contact in Radium?"
+        track = Radium.TrackedContact.createRecord
+                  contact: contact
 
-      addressBookController = @get('controllers.addressbook.model')
+        track.one 'didCreate', (result) =>
+          @send "flashSuccess", "Contact is now tracked in Radium"
+          @dataset.removeObject(contact)
 
-      promote.one 'didCreate', (result) =>
-        @send "flashSuccess", "Contact created!"
-        @get('content').removeObject(model)
+        @store.commit()
 
-      @get('store').commit()
     loadMoreContacts: ->
       console.log 'AddressbookUntrackedRoute.actions#loadMoreContacts'
       @dataset.expand()
+
+    destroyContact: (contact)->
+      if confirm "delete this contact?"
+        contact.deleteRecord()
+        contact.one 'didDelete', =>
+          @send "flashSuccess", "Contact deleted"
+          @dataset.removeObject contact
+        @store.commit()

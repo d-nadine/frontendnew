@@ -25,8 +25,8 @@
       <td>{{avatar this size="small" class="img-polaroid"}} {{displayName}}</td>
       <td>{{email}}</td>
       <td>
-        <button class="btn btn-mini btn-main btn-primary" {{action "promote" this "pipeline"}}>Track</button>
-        <a href="#" {{action "deleteExternalContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
+        <button class="btn btn-mini btn-main btn-primary" {{action "track" this}}>Track</button>
+        <a href="#" {{action "destroyContact" this bubbles="false"}} class="btn btn-link btn-remove-field">
           <i class="ss-symbolicons-block ss-trash"></i>
         </a>
       </td>

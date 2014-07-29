@@ -27,8 +27,6 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   listView: Ember.computed 'template', ->
     get = Ember.get
     parentView = this._parentView
-    console.log 'parentView', parentView
-    console.log 'parentView.cloneKeywords', parentView.cloneKeywords
     listView = Ember.ListView.createWithMixins
       lazyEach: this
       content: Ember.computed.readOnly 'lazyEach.content'
@@ -42,8 +40,6 @@ Radium.RdLazyEachComponent = Ember.Component.extend
         context: get(parentView, 'context'),
         controller: get(parentView, 'controller'),
         templateData: { keywords: parentView.cloneKeywords() }
-        click: ->
-          console.log 'clicked!'
     listView.on('scrollYChanged', this, "scrollYChanged")
     return listView
 
