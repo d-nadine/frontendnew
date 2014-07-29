@@ -1,4 +1,6 @@
-Radium.ContactRoute = Radium.Route.extend
+require 'routes/follow_actions_mixin'
+
+Radium.ContactRoute = Radium.Route.extend Radium.FollowActionsMixin,
   actions:
     confirmDeletion: ->
       @render 'contact/deletion_confirmation',
@@ -22,10 +24,10 @@ Radium.ContactRoute = Radium.Route.extend
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
-      contact.one 'becameInvalid', (result) =>
+      contact.one 'becameInvalid', (result) ->
         result.reset()
 
-      contact.one 'becameError', (result) =>
+      contact.one 'becameError', (result) ->
         result.reset()
 
       @get('store').commit()
