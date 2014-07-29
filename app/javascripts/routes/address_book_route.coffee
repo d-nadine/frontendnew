@@ -1,4 +1,4 @@
 Radium.AddressbookRoute = Radium.Route.extend({
-  redirect: ->
+  afterModel: ->
     @transitionTo 'addressbook.people'
 })
