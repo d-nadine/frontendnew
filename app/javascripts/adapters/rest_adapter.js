@@ -1,3 +1,5 @@
+"use strict";
+
 var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach,
   map = Ember.EnumerableUtils.map;
 
@@ -26,7 +28,7 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
   },
 
   addHasMany: function(hash, record, key, relationship) {
-    if(['attachment_ids'].indexOf(key) === -1){
+    if(['attachment_ids', 'contacts_followed_ids'].indexOf(key) === -1){
       return this._super.apply(this, arguments);
     }
     var type = record.constructor,
