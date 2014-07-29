@@ -13,6 +13,10 @@ Radium.CompanyRoute = Radium.Route.extend
     deleteRecord: ->
       company = @modelFor 'company'
 
+      addressBook = @controllerFor('addressbook').get('content')
+
+      addressBook.removeObject(company)
+
       company.deleteRecord()
 
       name = company.get('name')

@@ -26,7 +26,11 @@ Radium.ContactRoute = Radium.Route.extend
         result.reset() 
 
       contact.one 'becameError', (result) ->
-        result.reset() 
+        result.reset()
+
+      addressBook = @controllerFor('addressbook').get('content')
+
+      addressBook.removeObject(contact)
 
       @get('store').commit()
 

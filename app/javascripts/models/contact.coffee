@@ -91,3 +91,5 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this
         notification.deleteRecord()
+
+    @_super.apply this, arguments
