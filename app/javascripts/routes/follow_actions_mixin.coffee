@@ -13,6 +13,8 @@ Radium.FollowActionsMixin = Ember.Mixin.create
 
       follow.one 'didCreate', =>
         @send 'flashSuccess', "You are now following #{followable.displayName}"
+        user.reload()
+        follow.get('followable').reload()
 
       follow.one "becameError", =>
         @send "flashError", "An error has occurred and you cannot follow #{followable.displayName}"
