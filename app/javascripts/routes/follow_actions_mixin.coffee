@@ -5,18 +5,20 @@ Radium.FollowActionsMixin = Ember.Mixin.create
 
       user = @controllerFor('currentUser').get('content')
 
-      user.get("following").createRecord
+      follow = Radium.Follow.createRecord
                                 follower: user
                                 followable: followable
 
-      user.one 'didUpdate', =>
+      Ember.assert "followable has not been set.", follow.get('followable')
+
+      follow.one 'didCreate', =>
         @send 'flashSuccess', "You are now following #{followable.displayName}"
 
-      user.one "becameError", =>
+      follow.one "becameError", =>
         @send "flashError", "An error has occurred and you cannot follow #{followable.displayName}"
         user.reset()
 
-      user.one "becameInvalid", (result) =>
+      follow.one "becameInvalid", (result) =>
         @send "flashError", result
         user.reset()
 

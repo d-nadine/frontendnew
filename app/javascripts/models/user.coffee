@@ -26,7 +26,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   contactInfo: DS.belongsTo('Radium.ContactInfo')
   subscriptionInvalid: DS.attr('boolean')
 
-  following: DS.hasMany('Radium.Followee', inverse: 'follower')
+  contactsFollowed: DS.hasMany('Radium.Contact')
+  usersFollowed: DS.hasMany('Radium.User')
 
   email: DS.attr('string')
   phone: DS.attr('string')
