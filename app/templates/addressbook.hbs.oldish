@@ -1,0 +1,170 @@
+<div class="tabbar">
+  <div class="tabbar-inner">
+    <ul class="nav nav-tabs">
+      <li>
+        {{#link-to "addressbook.people"}}
+          <i class="custom-icon-radium"></i> People
+        {{/link-to}}
+        {{#link-to "addressbook.companies"}}
+          Companies
+        {{/link-to}}
+        {{#link-to "addressbook.untracked"}}
+          <i class="custom-icon-google"></i> Untracked Contacts
+        {{/link-to}}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="page-header">
+  <div class="address-book-controls">
+    <div class="pull-right">
+      <form class="form-search pipeline-search">
+        <i class="ss-symbolicons-block ss-search"></i>
+        {{view view.searchInput value=model.searchText type="text" class="field search-text"}}
+      </form>
+      {{#unless isCompanies}}
+        {{#link-to "leads.new" class="btn btn-main btn-primary"}}
+          <i class="ss-standard ss-plus"></i> Contact
+        {{/link-to}}
+        {{else}}
+        <a href="#" {{action "showAddCompany" target="view"}} class="btn btn-main btn-primary">
+          <i class="ss-standard ss-plus"></i> Company
+        </a>
+
+      {{/unless}}
+      <div class="btn-group">
+        <button class="btn btn-main address-book-button" {{bind-attr disabled=isCompanies}}>{{view.selectedFilterText}}</button>
+        <button class="btn dropdown-toggle needsclick" {{bind-attr disabled=additionalFilterDisabled}} data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each filters}}
+            <li><a href="#" {{action "additionalFilter" name}}>{{text}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="btn-group">
+        <button {{bind-attr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+          Actions <span {{bind-attr class=":caret hasCheckedContent::hide"}}></span>
+        </button>
+        {{#if hasCheckedContent}}
+          <ul class="dropdown-menu">
+            {{#if hasContacts}}
+              <li>
+                <a href="#" {{action "showForm" 'assign'}}>Assign</a>
+              </li>
+            {{/if}}
+            {{#unless isPrivateContacts}}
+              {{#unless isTags}}
+                <li>
+                  <a href="#" {{action "showForm" 'todo'}}>Assign A Todo</a>
+                </li>
+                {{#if hasContacts}}
+                  <li>
+                    <a href="#" {{action "showEmail"}}>Email</a>
+                  </li>
+                {{/if}}
+                {{#if assignableContent}}
+                  <li>
+                    <a href="#" {{action "showForm" 'addTags'}}>Add Tags</a>
+                  </li>
+                {{/if}}
+              {{/unless}}
+            {{/unless}}
+            <li>
+              <a href="#" {{action "confirmDeletion"}}>Delete</a>
+            </li>
+          </ul>
+        {{/if}}
+      </div>
+      {{! FIXME: Hook up to private filters}}
+      {{#if isPrivate}}
+        <span class="text-error">
+          <strong><i class="ss-standard ss-lock"></i> Private Contacts</strong>
+        </span>
+      {{/if}}
+    </div>
+  </div>
+  {{#if isCompanies}}
+    {{render 'forms/company'}}
+  {{/if}}
+</div>
+{{outlet confirmation}}
+{{#if showFormArea}}
+  <div class="block block-gray action-forms">
+    <h5>{{view.bulkLeader}}</h5>
+    {{partial 'bulk_actions/reassign'}}
+    {{#if showEmailForm}}
+      {{render "forms/email" newEmail}}
+    {{/if}}
+
+    {{#if showTodoForm}}
+      {{render "forms/todo" todoForm}}
+    {{/if}}
+
+    {{#if showCallForm}}
+      {{render "forms/call" callForm}}
+    {{/if}}
+
+    {{#if showAddTags}}
+      {{view view.tags viewName="tagAutocomplete"}}
+      <button id="add-tags" class="btn" {{action "addTags"}}>Add Tags</button>
+    {{/if}}
+  </div>
+{{/if}}
+<div class="search-result-list">
+  {{#unless contacts.isLoading}}
+    {{#if showEmptyAddressBookButton}}
+      <div class="alert alert-info text-center">
+        <h3>You have no contacts here. {{#link-to "leads.new"}}Add a new contact{{/link-to}}.</h3>
+      </div>
+    {{else}}
+      <div class="skinny-line row-fluid">
+        <div class="span1 row-fluid">
+          <div class="span6 select">{{input type="checkbox"}}</div>
+          <div class="span6 avatar">
+            <img style="height: 30px; border-radius: 5px;"src="http://res.cloudinary.com/radium/image/upload/h_64,w_64,c_fill,g_face/n3wyrkgcculwnhegb0ry.jpg"/>
+          </div>
+        </div>
+        <div class="span2 name">Adam Hawkins</div>
+        <div class="span1 company">Bestbuy</div>
+        <div class="span2 nexttask">
+          <a class="btn btn-main next-task-widget" style="height:30px">
+            <i class="ss-standard ss-check green"></i>
+            <span class="text">Meet for lunch</span>
+          </a>
+        </div>
+        <div class="span1 inactive">3 days</div>
+        <div class="span2 lastcommunication">4 Weeks ago</div>
+        <div class="span2 assignedto">Ryan Grush</div>
+        <div class="span1 deals">6</div>
+      </div>
+      {{#if visibleContent.length}}
+        <div class="search-results-header row-fluid">
+          <div class="span1">Select All</div>
+
+          <div class="span3 row-fluid">
+            <div class="span6 name">Name</div>
+            <div class="span6 company">Company</div>
+          </div>
+          <div class="span2 nexttask">Next Task</div>
+          <div class="span1 inactive">Inactive</div>
+          <div class="span2 lastcommunication">Last Communication</div>
+          <div class="span3 row-fluid">
+            <div class="span6 assignedto">Assigned</div>
+            <div class="span6 deals">Deals</div>
+          </div>
+        </div>
+      {{/if}}
+      {{each visibleContent itemController="addressBookResultItem" itemViewClass="Radium.SearchResultItemView" emptyViewClass="Radium.EmptySearchResultView"}}
+    {{/if}}
+    {{else}}
+    {{partial 'is_loading'}}
+  {{/unless}}
+  <div class="clearfix">
+    {{partial 'shared/show_more'}}
+  </div>
+</div>

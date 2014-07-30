@@ -1,55 +1,37 @@
-<div class="span2 checkers">
-  {{check-box checked=isChecked class="checker-block"}}
-  {{#if isLoaded}}
-    {{#if parentController.isThumbnailsVisible}}
-      {{avatar this size=medium class="img-polaroid"}}
-    {{/if}}
-  {{else}}
-    {{partial 'is_loading'}}
-  {{/if}}
-</div>
-<div class="span3 name">
-  <div class="clearfix search-list-item-title">
-    {{#if name}}
-      <h4 class="title">
-        {{#link-to "contact" this}}
-          {{name}}
-        {{/link-to}}
-      </h4>
-      {{#if email}}
-        <div class="sidebar-email-view inline-editor-closed is-enabled inline-editor">
-          <dl class="dl-horizontal contact-types-list">
-          <dt><i class="ss-standard ss-mail muted"></i></dt>
-          <dd>
-            {{#link-to "contact" this}} {{email}}{{/link-to}}
-          </dd>
-        </dl>
-        </div>
+<div class="span1 row-fluid">
+  <div class="span6 select">{{input type="checkbox"}}</div>
+  <div class="span6 avatar">
+    {{#if isLoaded}}
+      {{#if parentController.isThumbnailsVisible}}
+        {{avatar this size=small class="img-polaroid"}}
       {{/if}}
     {{else}}
-      <h4 class="title">
-        {{#link-to "contact" this}}
-          {{email}}
-        {{/link-to}}
-      </h4>
-    {{/if}}
-    {{partial 'search/links'}}
-    <div class="title muted">{{title}}</div>
-    {{#if company}}
-      <div class="company">
-        {{#link-to "company" company}}{{company.name}}{{/link-to}}
-      </div>
+      {{partial 'is_loading'}}
     {{/if}}
   </div>
 </div>
-<div class="span2 last-activity">
-  {{resource-link-to user}}
+<div class="span3 row-fluid">
+  <div class="span6 name">
+    {{#link-to "contact" this}}
+      {{name}}
+    {{/link-to}}
+  </div>
+  <div class="span6 company">
+    {{#if company}}
+      {{#link-to "company" company}}{{company.name}}{{/link-to}}
+    {{/if}}
+  </div>
 </div>
-<div class="span3 next-task">
+<div class="span2 nextTask">
   {{partial 'search/tasks'}}
 </div>
-<div class="span2 groups">
-  {{#each tags}}
-    {{name}}
-  {{/each}}
+<div class="span1 inactive">3 days</div>
+<div class="span2 lastcommunication">4 Weeks ago</div>
+<div class="span3 row-fluid">
+  <div class="span6 assignedto">
+    {{resource-link-to user}}
+  </div>
+  <div class="span6 deals">
+    {{partial 'search/links'}}
+  </div>
 </div>

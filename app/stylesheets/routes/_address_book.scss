@@ -4,6 +4,54 @@ $body: #6e6e6e;
 
 }
 
+#addressbook {
+  .page-header {
+    min-height: 60px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    color: rgb(118,144,170);
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+
+  }
+
+
+  td {
+    background-color: white;
+    border: 1px solid #f3f3f3;
+    margin: 0 !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  td, th {
+    width: 80px;
+    max-width: 80px;
+    padding-left: 5px;
+    height: 50px;
+    &.row-selector {
+      width: 20px;
+    }
+  }
+
+  .untracked {
+    .avatar-col {
+      width: 40px;
+    }
+  }
+
+  .ember-list-view {
+    overflow-y: scroll !important;
+  }
+}
+
 .search-results-header {
   $border: #595858;
   padding: 4px 0;
@@ -40,9 +88,9 @@ $body: #6e6e6e;
   position: relative;
   border-bottom: 1px solid $border;
   border: {
-      right: 1px solid transparent;
-      left: 1px solid transparent;
-    }
+    right: 1px solid transparent;
+    left: 1px solid transparent;
+  }
   color: $body;
   @include box-sizing(border-box);
 

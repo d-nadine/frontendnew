@@ -301,13 +301,6 @@ Radium.RESTAdapter.map('Radium.ContactImportJob', {
   importErrors: {embedded: 'load'}
 });
 
-Radium.RESTAdapter.map('Radium.ExternalContact', {
-  phoneNumbers: {embedded: 'always'},
-  emailAddresses: {embedded: 'always'},
-  addresses: {embedded: 'always'},
-  contactInfo: {embedded: 'always'}
-});
-
 Radium.RESTAdapter.map('Radium.ContactInfo', {
   socialProfiles: {embedded: 'always'}
 });

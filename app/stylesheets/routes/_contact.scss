@@ -224,4 +224,11 @@
 .contacts.tasks-content .well {
   background-color: #fff;
   @include add-blinker;
+
+}
+
+.nextTask {
+  time {
+    display: none;
+  }
 }

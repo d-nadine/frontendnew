@@ -1,0 +1,27 @@
+<div class="page-header">
+  <div class="address-book-controls">
+    <div class="pull-right">
+      <form class="form-search pipeline-search">
+      </form>
+    </div>
+  </div>
+</div>
+
+<table style="width: calc(100% - 15px);">
+  <tr>
+    <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
+    <th>Name</th>
+    <th>Open Deals</th>
+    <th>Assigned To</th>
+  </tr>
+</table>
+{{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
+  <table style="height: 50px;">
+    <tr>
+      <td class="row-selector">{{input type="checkbox"}}</td>
+      <td>{{#link-to "company" this}}{{displayName}}{{/link-to}}</td>
+      <td>{{openDeals.length}}</td>
+      <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
+    </tr>
+  </table>
+{{/rd-lazy-each}}

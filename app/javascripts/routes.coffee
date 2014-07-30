@@ -60,13 +60,15 @@ Radium.Router.map ->
     @route 'task', path: '/:task_type/:task_id'
 
   @resource 'addressbook', ->
-    @route 'filter', path: '/:filter'
+    @route 'people'
+    @route 'untracked'
+    @route 'companies'
+    #@route 'tags'
+    #@route 'filter', path: '/:filter'
     @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:company_id/employees'
     @route 'contactimportjobs', path: '/contactimportjobs/:contact_import_job_id/contacts'
-
-  @resource 'externalcontacts'
 
   @resource 'settings', ->
     @route 'profile'

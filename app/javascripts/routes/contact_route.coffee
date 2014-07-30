@@ -22,19 +22,15 @@ Radium.ContactRoute = Radium.Route.extend
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
-      contact.one 'becameInvalid', (result) ->
-        result.reset() 
-
-      contact.one 'becameError', (result) ->
+      contact.one 'becameInvalid', (result) =>
         result.reset()
 
-      addressBook = @controllerFor('addressbook').get('content')
-
-      addressBook.removeObject(contact)
+      contact.one 'becameError', (result) =>
+        result.reset()
 
       @get('store').commit()
 
-      @transitionTo 'addressbook.filter', 'people'
+      @transitionTo 'addressbook.people'
 
   renderTemplate: ->
     @render()

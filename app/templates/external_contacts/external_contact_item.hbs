@@ -1,11 +1,7 @@
 <div class="span2 checkers">
   {{check-box checked=isChecked class="checker-block"}}
   {{#if isThumbnailsVisible}}
-    {{#if isLoaded}}
-      {{avatar this size=medium class="img-polaroid"}}
-    {{else}}
-      {{partial 'is_loading'}}
-    {{/if}}
+    {{avatar this size=medium class="img-polaroid"}}
   {{/if}}
 </div>
 <div class="span6 name">
@@ -23,7 +19,6 @@
       </dl>
       </div>
     {{/if}}
-    {{render 'sidebar/social' contactInfo}}
     <div class="title muted">{{title}}</div>
     {{#if company}}
       <div class="company">
