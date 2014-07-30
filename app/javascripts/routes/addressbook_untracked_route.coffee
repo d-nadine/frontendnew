@@ -16,7 +16,6 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
         @store.commit()
 
     loadMoreContacts: ->
-      console.log 'AddressbookUntrackedRoute.actions#loadMoreContacts'
       @dataset.expand()
 
     destroyContact: (contact)->
