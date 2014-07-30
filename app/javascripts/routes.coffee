@@ -63,8 +63,6 @@ Radium.Router.map ->
     @route 'people'
     @route 'untracked'
     @route 'companies'
-    #@route 'tags'
-    #@route 'filter', path: '/:filter'
     @route 'assigned', path: '/users/:user_id/contacts'
     @route 'members', path: '/tags/:tag_id/members'
     @route 'employees', path: '/companies/:company_id/employees'
@@ -81,5 +79,5 @@ Radium.Router.map ->
     @route 'remindersAlerts', path: 'reminders-alerts'
 
   @route 'reports'
-  
+
   @route 'unimplemented'
