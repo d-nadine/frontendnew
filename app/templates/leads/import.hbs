@@ -8,7 +8,6 @@
         <h4>Import instructions</h4>
         <p>
           <ol>
-            <li>Maximum of 1000 contacts per file</li>
             <li>Download our sample file <a href="https://s3.amazonaws.com/radium-production/static/sample.csv" target="_blank">here</a></li>
             <li>Use a CSV file from either Microsoft Excel or Google Spreadsheets</li>
             <li>If you are having trouble with characters showing up strangely be sure to set the CSV encoding to UTF-8</li>
@@ -18,19 +17,6 @@
         <button class="btn btn-main btn-primary" {{action "toggleInstructions"}}>
           Thanks, got it
         </button>
-      </div>
-    {{/if}}
-    {{#if showLargeImportMessage}}
-      <div class="alert alert-error">
-        <div class="text-center">
-          <h4>Over 1000 contacts detected.</h4>
-          <div>The import file contains {{rowCount}} rows and the current limit of contacts that can be imported into Radium is 1000 ?</div>
-          <div class="alert-actions">
-            <button class="btn btn-main btn-primary" {{action "dismissLargeImportMessage"}}>
-              Try Again?
-            </button>
-          </div>
-        </div>
       </div>
     {{/if}}
     {{#if isUploading}}

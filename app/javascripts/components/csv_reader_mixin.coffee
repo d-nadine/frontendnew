@@ -1,11 +1,5 @@
 Radium.CsvReaderMixin = Ember.Mixin.create
-  MAX_ROWS: 2500
-
   actions:
-    importToLarge: (rowCount) ->
-      @sendAction 'cancel', rowCount
-      false
-
     parseFile: (file) ->
       target = @get('controller.targetObject')
 
@@ -24,12 +18,6 @@ Radium.CsvReaderMixin = Ember.Mixin.create
 
       reader.addEventListener "load",  (e) =>
         lines = CSV.parse(e.target.result)
-
-        if lines.length > @MAX_ROWS
-          @set 'controller.isUploading', false
-          @set 'controller.disabled', false
-          @send 'importToLarge', lines.length
-          return
 
         @set 'controller.disabled', true
 

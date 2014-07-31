@@ -117,13 +117,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
     cancelImport: (rowCount) ->
       @set 'rowCount', rowCount
-      @set 'showLargeImportMessage', true
       @set 'showInstructions', false
       false
 
     dismissLargeImportMessage: ->
       @set 'rowCount', 0
-      @set 'showLargeImportMessage', false
       @set 'showInstructions', false
       false
 
@@ -132,7 +130,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         importing: false
         percentage: 0
         showInstructions: false
-        showLargeImportMessage: false
         initialImported: false
         isUploading: false
         rowCount: 0
@@ -164,7 +161,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   percentage: 3
   interval: 1000
   showInstructions: false
-  showLargeImportMessage: false
   initialImported: false
   isUploading: false
   rowCount: 0
