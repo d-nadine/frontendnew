@@ -1,29 +1,35 @@
 Radium.FollowFeedComponent = Ember.Component.extend
   actions:
     follow: ->
+      @send 'perform', Radium.Follow
+
+    unfollow: ->
+      @send 'perform', Radium.Unfollow
+
+    perform: (klass) ->
       followable = @get('followable')
 
       Ember.assert "You can only follow contacts or users", followable.constructor in [Radium.Contact, Radium.User]
 
       user = @get('user')
 
-      follow = Radium.Follow.createRecord
-                                follower: user
-                                followable: followable
+      follow = klass.createRecord
+                          follower: user
+                          followable: followable
 
       Ember.assert "followable has not been set.", follow.get('followable')
 
       follow.one 'didCreate', =>
-        @send 'flashSuccess', "You are now following #{followable.get('displayName')}"
+        @get('targetObject').send 'flashSuccess', follow.get('successMessage')
 
         [user, followable].forEach (m) -> m.reload()
 
       follow.one "becameError", =>
-        @send "flashError", "An error has occurred and you cannot follow #{followable.displayName}"
+        @get('targetObject').send "flashError", follow.get('errorMessage')
         user.reset()
 
       follow.one "becameInvalid", (result) =>
-        @send "flashError", result
+        @get('targetObject').send "flashError", result
         user.reset()
 
       @get('store').commit()
