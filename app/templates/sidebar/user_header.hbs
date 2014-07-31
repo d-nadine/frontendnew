@@ -40,6 +40,4 @@
     {{/if}}
   </div>
 {{/if}}
-{{#unless parentController.userIsCurrentUser}}
-  <button disabled="disabled" class="btn btn-block btn-follow">Follow {{firstName}}</button>
-{{/unless}}
+{{follow-feed user=currentUser followable=model}}

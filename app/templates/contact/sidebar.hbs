@@ -2,11 +2,7 @@
   <div class="sidebar-panel sidebar-panel-main">
     <div class="sidebar-panel-content">
       {{render 'sidebar/contact_header' model}}
-      {{#if isFollowing}}
-        <span class="label label-success">Following</span>
-      {{else}}
-        <button class="btn btn-block btn-small btn-follow" {{action "follow" model}}>Follow {{displayName}}</button>
-      {{/if}}
+      {{follow-feed user=currentUser followable=model}}
     </div>
   </div>
 

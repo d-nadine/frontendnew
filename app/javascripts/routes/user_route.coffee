@@ -20,10 +20,10 @@ Radium.UserRoute = Radium.Route.extend
       user.one 'didDelete', =>
         @send 'flashSuccess', "User #{name} has been deleted"
 
-      user.one 'becameInvalid', (result) =>
+      user.one 'becameInvalid', (result) ->
         result.reset()
 
-      user.one 'becameError', (result) =>
+      user.one 'becameError', (result) ->
         result.reset()
 
       @send 'closeModal'

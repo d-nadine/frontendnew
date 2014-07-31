@@ -1,0 +1,6 @@
+  {{#unless isFollowing}}
+    <button class="btn btn-block btn-small btn-follow" {{action "follow"}}><strong>Follow</strong></button>
+  {{else}}
+    <span class="label label-success">Following</span>
+    <button class="btn btn-block btn-small btn-follow" {{action "unfollow"}}><strong>Unfollow</strong></button>
+  {{/unless}}

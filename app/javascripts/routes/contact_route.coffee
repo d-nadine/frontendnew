@@ -1,6 +1,4 @@
-require 'routes/follow_actions_mixin'
-
-Radium.ContactRoute = Radium.Route.extend Radium.FollowActionsMixin,
+Radium.ContactRoute = Radium.Route.extend
   actions:
     confirmDeletion: ->
       @render 'contact/deletion_confirmation',
