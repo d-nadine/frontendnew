@@ -40,4 +40,6 @@
     {{/if}}
   </div>
 {{/if}}
-{{follow-feed user=currentUser followable=model}}
+{{#unless parentController.userIsCurrentUser}}
+  {{follow-feed user=currentUser followable=model}}
+{{/unless}}
