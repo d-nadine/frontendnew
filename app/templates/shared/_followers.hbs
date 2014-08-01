@@ -6,11 +6,11 @@
   </div>
   <div class="sidebar-panel-content">
     <ul class="unstyled">
-      {{#each follower in followers}}
+      {{#each followers}}
         <li>
-          {{avatar follower}}
-          {{follower.name}}</br>
-          {{follower.title}}
+          {{avatar this}}
+          {{resource-link-to this}}</br>
+          {{title}}
         </li>
       {{else}}
         <li>No followers yet!</li>

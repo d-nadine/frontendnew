@@ -209,6 +209,10 @@
   a:not(.btn) {
     color: darken(#6e6e6e, 10%);
   }
+
+  ul.unstyled li {
+    margin-bottom: 10px;
+  }
 }
 
 .sidebar-panel-header + .sidebar-panel-content:last-child {
