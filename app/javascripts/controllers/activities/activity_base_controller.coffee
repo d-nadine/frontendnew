@@ -1,4 +1,7 @@
 Radium.ActivityBaseController = Radium.ObjectController.extend
+  isFollowing: Ember.computed 'user', ->
+    @get('user') != @get('currentUser')
+
   referenceDidChange: ( ->
     unless reference = @get('reference')
       return

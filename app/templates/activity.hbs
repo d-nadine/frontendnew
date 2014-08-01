@@ -2,6 +2,14 @@
   <i class="ss-standard ss-{{unbound icon}} event"></i>
 </div>
 <div class="clearfix activity-content">
+  <div class="span1">
+  {{avatar user}}
+  </div>
   <div class="pull-right timestamp">{{ageInWords time}}</div>
+  {{#if isFollowing}}
+    <div class="span1">
+      <i class="ss-standard ss-fork"></i>
+    </div>
+  {{/if}}
   {{yield}}
 </div>

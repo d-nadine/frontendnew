@@ -20,6 +20,21 @@
 
 .activity-content {
   margin-left: 50px;
+  .span1 {
+    width: 38px;
+    margin-left: -10px;
+  }
+
+  .span1 img {
+    position: relative;
+    top: 4px;
+  }
+
+  .span1 i.ss-standard.ss-fork{
+    position: relative;
+    top: 12px;
+    left: 10px;
+  }
 }
 
 .activity.deal.closed,
