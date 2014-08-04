@@ -1,61 +1,61 @@
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-content">
-      {{render "sidebar/company_website" model}}
-      {{render "sidebar/addresses" model}}
-    </div>
+{{follow-feed user=currentUser followable=model canFollow=canFollow}}
+<div class="sidebar-panel">
+  <div class="sidebar-panel-content">
+    {{render "sidebar/company_website" model}}
+    {{render "sidebar/addresses" model}}
   </div>
+</div>
 
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <div class="pull-right company-members-link">
-        {{#if isTag}}
-          {{#link-to "addressbook.members" this}}{{membersText}}{{/link-to}}
-        {{else}}
-          {{#link-to "addressbook.employees" this}}{{membersText}}{{/link-to}}
-        {{/if}}
-      </div>
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-users"></i> Contacts
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{partial 'search/members'}}
-    </div>
-    <div class="sidebar-panel-content">
-      {{#link-to "leads.fromCompany" model classNames="btn btn-block btn-main btn-primary add-contact"}}<i class="add icon-plus"></i>Add Contact{{/link-to}}
-      {{#if contacts.length}}
-        <div class="company-type">
-          {{maxContactsStatus}}
-        </div>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <div class="pull-right company-members-link">
+      {{#if isTag}}
+        {{#link-to "addressbook.members" this}}{{membersText}}{{/link-to}}
+      {{else}}
+        {{#link-to "addressbook.employees" this}}{{membersText}}{{/link-to}}
       {{/if}}
     </div>
+    <h6 class="sidebar-panel-title">
+      <i class="ss-standard ss-users"></i> Contacts
+    </h6>
   </div>
-
-  {{render 'sidebar/user' model}}
-
-  {{render 'sidebar/about' model}}
-
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-target"></i> Tags
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      <div class="tag-picker">
-        {{render 'sidebar/tags' model}}
+  <div class="sidebar-panel-content">
+    {{partial 'search/members'}}
+  </div>
+  <div class="sidebar-panel-content">
+    {{#link-to "leads.fromCompany" model classNames="btn btn-block btn-main btn-primary add-contact"}}<i class="add icon-plus"></i>Add Contact{{/link-to}}
+    {{#if contacts.length}}
+      <div class="company-type">
+        {{maxContactsStatus}}
       </div>
+    {{/if}}
+  </div>
+</div>
+
+{{render 'sidebar/user' model}}
+
+{{render 'sidebar/about' model}}
+
+<div class="sidebar-panel">
+  <div class="sidebar-panel-header">
+    <h6 class="sidebar-panel-title">
+      <i class="ss-standard ss-target"></i> Tags
+    </h6>
+  </div>
+  <div class="sidebar-panel-content">
+    <div class="tag-picker">
+      {{render 'sidebar/tags' model}}
     </div>
   </div>
+</div>
 
-  {{partial 'shared/attachments'}}
+{{partial 'shared/attachments'}}
 
-  {{partial 'shared/followers'}}
+{{partial 'shared/followers'}}
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-content">
-      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete</button>
-    </div>
+<div class="sidebar-panel">
+  <div class="sidebar-panel-content">
+    <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete</button>
   </div>
-</form>
+</div>

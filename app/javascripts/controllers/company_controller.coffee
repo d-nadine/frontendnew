@@ -1,4 +1,5 @@
 Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
+  Radium.CanFollowMixin,
   actions:
     displayDeals: ->
       deals = Ember.A()

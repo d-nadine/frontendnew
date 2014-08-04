@@ -1,5 +1,6 @@
 Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.UpdateContactPoller,
+  Radium.CanFollowMixin,
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
@@ -28,7 +29,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
-  companies: Ember.computed.alias 'controllers.companies' 
+  companies: Ember.computed.alias 'controllers.companies'
   contact: Ember.computed.alias 'model'
 
   # FIXME: How do we determine this?

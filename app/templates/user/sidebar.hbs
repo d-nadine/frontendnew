@@ -122,11 +122,15 @@
         <i class="ss-standard ss-users"></i> Following
       </h6>
     </div>
-    <div class="sidebar-panel-content">
+    <div class="sidebar-panel-content following">
       <ul class="unstyled">
-        {{#each following}}
+        {{#each following itemController="followingItem"}}
           <li>
-            {{avatar this}}
+            {{#if isCompany}}
+              <i class="ss-standard ss-buildings"></i>
+            {{else}}
+              {{avatar this}}
+            {{/if}}
             {{resource-link-to this}}</br>
           </li>
         {{else}}

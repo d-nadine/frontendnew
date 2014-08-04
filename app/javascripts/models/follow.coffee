@@ -10,9 +10,10 @@ Radium.Follow = Radium.Model.extend
 
   contact: DS.belongsTo('Radium.Contact')
   user: DS.belongsTo('Radium.User')
+  company: DS.belongsTo('Radium.Company')
 
   name: Ember.computed 'user', 'contact', ->
-    followable = @get('user') || @get('contact')
+    followable = @get('user') || @get('contact') || @get('company')
     followable.get('displayName')
 
   successMessage: Ember.computed 'followable', 'followable.displayName', ->

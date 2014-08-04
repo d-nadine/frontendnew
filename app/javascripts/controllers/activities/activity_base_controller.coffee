@@ -1,6 +1,13 @@
 Radium.ActivityBaseController = Radium.ObjectController.extend
+  needs: ['application', 'user']
   isFollowing: Ember.computed 'user', ->
-    @get('user') != @get('currentUser')
+    return if @get('controllers.application.currentPath') != 'user.index'
+
+    currentUser = @get('currentUser')
+
+    return unless @get('controllers.user.model') == currentUser
+
+    @get('user') != currentUser
 
   referenceDidChange: ( ->
     unless reference = @get('reference')
@@ -17,7 +24,7 @@ Radium.ActivityBaseController = Radium.ObjectController.extend
 
     store = @get('store')
 
-    Ember.run.later =>
+    Ember.run.later ->
       if reference.get('currentState.stateName') == 'root.error'
         model.deleteRecord()
 

@@ -9,7 +9,7 @@ Radium.FollowFeedComponent = Ember.Component.extend
     perform: (klass) ->
       followable = @get('followable')
 
-      Ember.assert "You can only follow contacts or users", followable.constructor in [Radium.Contact, Radium.User]
+      Ember.assert "You can only follow companies, contacts or users", followable.constructor in [Radium.Contact, Radium.User, Radium.Company]
 
       user = @get('user')
 

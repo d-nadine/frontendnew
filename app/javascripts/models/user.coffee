@@ -27,8 +27,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   subscriptionInvalid: DS.attr('boolean')
 
   contactsFollowed: DS.hasMany('Radium.Contact')
+  companiesFollowed: DS.hasMany('Radium.Company')
   usersFollowed: DS.hasMany('Radium.User')
-  following: Radium.computed.aggregate('contactsFollowed', 'usersFollowed')
+  following: Radium.computed.aggregate('companiesFollowed', 'contactsFollowed', 'usersFollowed')
 
   email: DS.attr('string')
   phone: DS.attr('string')

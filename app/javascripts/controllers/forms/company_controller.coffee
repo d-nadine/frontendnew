@@ -43,9 +43,11 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
   isSaving: false
   isSubmitted: false
 
-  isDisabled: ( ->
+  isDisabled: Ember.computed 'isSaving', 'company', ->
     return true if @get('isSaving') || @get('company')
-  ).property('isSaving', 'company')
+
+  canFollow: Ember.computed 'model.user', 'currentUser', ->
+    @get('model.user') != @get('currentUser')
 
   init: ->
     @_super.apply this, arguments
@@ -54,6 +56,5 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
   onSetupNewCompany: ->
     @send 'reset'
 
-  isValid: ( ->
+  isValid: Ember.computed 'companyName.length', 'isSubmitted', ->
     @get('companyName.length')
-  ).property('companyName.length', 'isSubmitted')
