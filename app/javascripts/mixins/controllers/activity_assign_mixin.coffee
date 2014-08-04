@@ -14,7 +14,7 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
 
     Radium.Email.find(emailId).then( (result) =>
       @set 'email', result
-    ).catch (result) =>
+    ).catch (result) ->
       # pretty hacky but until the email_id is separated
       # from the meta field, then it will do
       return if result.constructor != Radium.Email && !result.get('isError')

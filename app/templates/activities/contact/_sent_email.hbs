@@ -1,8 +1,6 @@
 <p>
   {{#if email.isLoaded}}
     {{resource-link-to email}}
-  {{else}}
-    {{partial 'is_loading'}}
   {{/if}}
   <br/>
   sent to {{resource-link-to contact}}
