@@ -68,7 +68,7 @@ Radium.BillingFormView = Radium.View.extend
     viewName: 'organizationName'
     valueBinding: 'targetObject.organisation'
 
-  billingInfoView: Ember.TextField.extend
+  billingEmailView: Ember.TextField.extend
     classNameBindings: ['isInvalid', 'isValid', ':field']
     valueBinding: 'targetObject.billingEmail'
 

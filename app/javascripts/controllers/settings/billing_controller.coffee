@@ -130,7 +130,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       model.transitionTo("loaded.saved")
       @trigger 'cardError'
 
-  isValid: Ember.computed 'organisation', 'billingEmail', 'isSubmitted', ->
+  isValid: Ember.computed 'organisation', 'billingEmail', 'organisation.length', 'billingEmail.length', 'isSubmitted', ->
     return true unless @get('isSubmitted')
     return if Ember.isEmpty(@get('organisation'))
     email = @get('billingEmail')
@@ -160,12 +160,4 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       else
         @get('model.country')
 
-  billingEmail: Ember.computed 'model.billingEmail', (key, value) ->
-    if arguments.length == 2 && value != undefined
-      @set 'model.billingEmail', value
-    else
-      billingEmail = @get('model.billingEmail')
-      unless billingEmail?.length
-        @get('currentUser.email')
-      else
-        billingEmail
+
