@@ -203,11 +203,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('users').set 'model', Radium.User.find()
 
     contactsController = @controllerFor('contacts')
-
-    Radium.Contact.find({}).then (contacts) ->
-      contactsController.set 'model', contacts
-      contactsController.set 'isLoading', false
-
     @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
     @controllerFor('deals').set 'model', Radium.Deal.find()
