@@ -3,6 +3,7 @@ Radium.AddressbookPeopleRoute = Radium.Route.extend
     @dataset = Radium.InfiniteDataset.create
       type: Radium.Contact
       params: {public: true}
+
   actions:
     loadMoreContacts: ->
       @dataset.expand()
