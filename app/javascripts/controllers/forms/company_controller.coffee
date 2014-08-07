@@ -1,4 +1,5 @@
 Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
+  Radium.CanFollowMixin,
   actions:
     createCompany: ->
       @set 'isSubmitted', true
@@ -45,9 +46,6 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
 
   isDisabled: Ember.computed 'isSaving', 'company', ->
     return true if @get('isSaving') || @get('company')
-
-  canFollow: Ember.computed 'model.user', 'currentUser', ->
-    @get('model.user') != @get('currentUser')
 
   init: ->
     @_super.apply this, arguments

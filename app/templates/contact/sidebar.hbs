@@ -2,6 +2,7 @@
   <div class="sidebar-panel sidebar-panel-main">
     <div class="sidebar-panel-content">
       {{render 'sidebar/contact_header' model}}
+      {{log canFollow}}
       {{follow-feed user=currentUser followable=model canFollow=canFollow}}
     </div>
   </div>
