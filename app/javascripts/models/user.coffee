@@ -4,7 +4,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   settings: DS.belongsTo('Radium.UserSettings')
   account: DS.belongsTo('Radium.Account')
 
-  deals: DS.hasMany('Radium.Deal')
+  deals: DS.hasMany('Radium.Deal', inverse: 'user')
 
   todos: DS.hasMany('Radium.Todo')
   calls: DS.hasMany('Radium.Call')

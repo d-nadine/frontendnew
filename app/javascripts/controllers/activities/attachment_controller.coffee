@@ -4,7 +4,6 @@ Radium.ActivitiesAttachmentController = Radium.ActivityBaseController.extend
 
   forContact: Radium.computed.kindOf 'attachment.reference', Radium.Contact
   forDeal: Radium.computed.kindOf 'attachment.reference', Radium.Deal
-  forDiscussion: Radium.computed.kindOf 'attachment.reference', Radium.Discussion
 
   isCreate: Ember.computed.equal 'event', 'create'
   isUpdate: Ember.computed.equal 'event', 'update'

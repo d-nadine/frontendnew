@@ -41,16 +41,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
       @set('totalRecords', meta.totalRecords)
 
-    Radium.Discussion.find({}).then (discussions) =>
-      return if currentPath is 'messages.bulk_actions'
-      return if @get('folder') == "sent"
-
-      newDiscussions = @delta(discussions)
-
-      return unless discussions.length
-
-      @tryAdd(newDiscussions) if newDiscussions.length
-
   tryAdd: (items) ->
     content = @get('content')
     ids = content.map (item) -> item.get('id')
