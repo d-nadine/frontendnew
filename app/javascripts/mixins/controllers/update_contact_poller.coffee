@@ -29,7 +29,7 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
     contact = @get('contact')
 
     observer = =>
-      return unless contact.get('currentState.stateName') == "root.loaded.saved"
+      return unless contact.get('inCleanState')
 
       contact.removeObserver 'currentState.stateName', observer
 
@@ -40,7 +40,7 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
 
       @get('store').commit()
 
-    if contact.get('currentState.stateName') != "root.loaded.saved"
+    unless contact.get('inCleanState')
       contact.addObserver 'currentState.stateName', observer
     else
       observer()

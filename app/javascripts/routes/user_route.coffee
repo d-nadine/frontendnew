@@ -45,7 +45,11 @@ Radium.UserRoute = Radium.Route.extend
     controller.set('model', model)
 
   deactivate: ->
-    @controller.get('model').reload()
+    model = @controller.get('model')
+
+    return unless model.get('inCleanState')
+
+    model.reload()
 
 Radium.UserFormRoute = Radium.Route.extend
   model: (params) ->

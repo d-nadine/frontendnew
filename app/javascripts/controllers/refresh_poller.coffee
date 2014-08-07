@@ -15,7 +15,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
       @finishSync()
 
 
-    if currentUser.get('currentState.stateName') == "root.loaded.saved"
+    if currentUser.get('inCleanState')
       currentUser.reload()
 
     currentUser.one 'becameError', =>
@@ -27,7 +27,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
     currentUser = @get('controller.currentUser')
 
     observer = =>
-      return unless currentUser.get('currentState.stateName') == "root.loaded.saved"
+      return unless currentUser.get('inCleanState')
 
       currentUser.removeObserver 'currentState.stateName', observer
 
@@ -39,7 +39,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
 
       @get('controller.store').commit()
 
-    if currentUser.get('currentState.stateName') != "root.loaded.saved"
+    unless currentUser.get('inCleanState')
       currentUser.addObserver 'currentState.stateName', observer
     else
       observer()

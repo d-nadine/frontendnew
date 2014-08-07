@@ -18,6 +18,9 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   inErrorState: Ember.computed 'currentState.stateName', ->
     @get('currentState.stateName') == 'root.error'
 
+  inCleanState: Ember.computed 'currentState.stateName', ->
+    @get('currentState.stateName') == "root.loaded.saved"
+
   reset: ->
     state = if @get('id')
               'loaded.saved'
@@ -28,7 +31,7 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @transitionTo(state)
 
   deleteRecord: ->
-    if @get('currentState.stateName') != 'root.loaded.saved'
+    unless @get('inCleanState')
       return
 
     @send('deleteRecord')
@@ -39,7 +42,7 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
   reloadAfterUpdate: ->
     observer = ->
-      if @get('currentState.stateName') == "root.loaded.saved"
+      if @get('inCleanState')
         @removeObserver 'currentState.stateName', observer
         @reload()
 
