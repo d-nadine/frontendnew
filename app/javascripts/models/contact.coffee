@@ -3,7 +3,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   Radium.AttachmentsMixin,
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call', inverse: 'contact')
   meetings: DS.hasMany('Radium.Meeting', inverse: '_referenceContact')
   deals: DS.hasMany('Radium.Deal', inverse: 'contact')
   tags: DS.hasMany('Radium.Tag')
@@ -47,7 +46,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     #deals will be ordered on the server?
     @get('deals.firstObject')
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'meetings')
 
   isLead: Ember.computed.equal 'status', 'pipeline'
 

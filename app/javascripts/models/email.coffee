@@ -6,7 +6,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   Radium.EmailPropertiesMixin,
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
   toContacts: DS.hasMany('Radium.Contact')
   toUsers: DS.hasMany('Radium.User')
@@ -68,7 +67,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
   isPublic: Ember.computed.not 'isPersonal'
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'meetings')
 
   people: Radium.computed.aggregate('toList','ccList', 'senderArray')
   recipients: Radium.computed.aggregate('toList','ccList')

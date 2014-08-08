@@ -85,7 +85,6 @@ Radium.CalendarIndexRoute = Radium.Route.extend
     hash =
       todos: Radium.Todo.find(params)
       meetings: Radium.Meeting.find(params)
-      calls: Radium.Call.find(params)
 
     controller.set 'isLoading', true
 

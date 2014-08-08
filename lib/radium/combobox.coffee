@@ -101,7 +101,7 @@ Radium.Combobox = Radium.View.extend
     object = if object instanceof Ember.ObjectController then object.get('content') else object
     @set 'value', object
 
-  # Begin typehead customization
+  # Begin typeahead customization
   matcher: (item) ->
     string = item.get @field
     return unless @query

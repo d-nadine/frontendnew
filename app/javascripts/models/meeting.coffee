@@ -39,10 +39,9 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceMeeting')
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
   notes: DS.hasMany('Radium.Note', inverse: '_referenceMeeting')
 
-  tasks: Radium.computed.tasks('todos', 'calls')
+  tasks: Radium.computed.tasks('todos')
 
   time: Ember.computed.alias('startsAt')
 

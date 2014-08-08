@@ -7,7 +7,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   deals: DS.hasMany('Radium.Deal', inverse: 'user')
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
 
   activities: DS.hasMany('Radium.Activity', inverse: 'user')
@@ -38,7 +37,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   lastLoggedIn: DS.attr('date')
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'meetings')
 
   salesGoal: DS.attr('number')
 

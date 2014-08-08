@@ -56,11 +56,10 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   date: Ember.computed.alias 'content'
 
-  items: Ember.computed 'date', 'todos.[]', 'calls.[]',  'meetings.[]', 'user', ->
+  items: Ember.computed 'date', 'todos.[]',  'meetings.[]', 'user', ->
     items = []
 
     @get('todos').forEach (todo) -> items.pushObject todo
-    @get('calls').forEach (call) -> items.pushObject call
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
     if user = @get('user')
@@ -84,13 +83,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
     Radium.Todo.filter (todo) ->
       todo.get('isLoaded') && todo.get('finishBy').isBetweenDates(startDate, endDate)
-
-  calls: Ember.computed 'date', ->
-    startDate = @get 'startOfCalendar'
-    endDate = @get 'endOfCalendar'
-
-    Radium.Call.filter (call) ->
-      call.get('isLoaded') && call.get('finishBy').isBetweenDates(startDate, endDate)
 
   meetings: Ember.computed 'date', ->
     startDate = @get 'startOfCalendar'

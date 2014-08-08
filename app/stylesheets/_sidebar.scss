@@ -210,6 +210,10 @@
     color: darken(#6e6e6e, 10%);
   }
 
+  .company-picker ul.typeahead li a {
+    color: $bright;
+  }
+
   ul.unstyled li {
     margin-bottom: 10px;
   }

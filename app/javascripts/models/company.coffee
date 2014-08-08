@@ -21,7 +21,6 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   primaryAddress: Radium.computed.primary 'addresses'
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
 

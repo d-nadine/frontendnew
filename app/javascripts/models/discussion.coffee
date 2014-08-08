@@ -5,7 +5,6 @@ Radium.Discussion = Radium.Model.extend Radium.CommentsMixin,
   users: DS.hasMany('Radium.User')
 
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
 
   user: DS.belongsTo('Radium.User')
 

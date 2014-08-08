@@ -9,7 +9,6 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   expectedCloseDate: DS.attr('datetime')
   user: DS.belongsTo('Radium.User')
   todos: DS.hasMany('Radium.Todo')
-  calls: DS.hasMany('Radium.Call')
   meetings: DS.hasMany('Radium.Meeting')
 
   activities: DS.hasMany('Radium.Activity')
@@ -42,7 +41,7 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   isPastPayment: Radium.computed.isPast("payBy")
 
-  tasks: Radium.computed.tasks('todos', 'calls', 'meetings')
+  tasks: Radium.computed.tasks('todos', 'meetings')
 
   company: Ember.computed.alias('contact.company')
 
