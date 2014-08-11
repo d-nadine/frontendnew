@@ -15,6 +15,7 @@ Ember.Application.initializer
   name: 'developmentCookie'
   after: 'store'
   initialize: (container, application) ->
+    application.set('cookieDomain', 'development');
     Ember.$.cookie 'token', 'development'
 
 Ember.Application.initializer

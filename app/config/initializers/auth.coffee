@@ -4,13 +4,7 @@ Ember.Application.initializer
   initialize: (container, application) ->
     Radium.set('authManager', Radium.AuthManager.create())
 
-    errHandler = (e) ->
-      # location.replace('http://api.radiumcrm.com/sessions/new')
-      # Ember.Logger.error e
-      # console.error 'The "me" user was not found for some reason!'
-      # throw e
-
-    Radium.User.find(name: 'me').then(((records) ->
+    Radium.User.find(name: 'me').then (records) ->
       user = records.get('firstObject')
 
       currentUserController = container.lookup('controller:currentUser')
@@ -18,7 +12,7 @@ Ember.Application.initializer
 
       window.Intercom "boot",
         app_id: Radium.get('intercomAppId')
-        email: user.get('email') 
+        email: user.get('email')
         user_id: user.get('id')
         created_at: user.get('createdAt').toUnixTimestamp()
         widget:
@@ -49,4 +43,3 @@ Ember.Application.initializer
       else
         Ember.$('[class^=ball]').hide()
         Radium.advanceReadiness()
-    ), errHandler).then(null, errHandler)

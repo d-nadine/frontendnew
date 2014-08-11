@@ -204,7 +204,10 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         Ember.run(adapter, function(){
           this.didFindQuery(store, type, json, recordArray);
         });
-      }).then(null, DS.rejectionHandler);
+      }).catch(function(xhr){
+        $.removeCookie('token', Radium.get('cookieDomain'), {path: '/'});
+        throw new Error('The "me" user was not found for some reason!');
+      });
     }else{
       var args = Array.prototype.slice.call(arguments, 0, -1);
       base.apply(this, args);
