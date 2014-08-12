@@ -18,7 +18,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     typeahead.hide()
     @$('input[type=text]').blur()
 
-  queryToValueTransform: ((key, value) ->
+  queryToValueTransform: Ember.computed 'value', (key, value) ->
     if arguments.length == 2
       if  @matchesSelection(value)
         @select()
@@ -28,7 +28,6 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
       @get "value.#{@field}"
     else
       value
-  ).property('value')
 
   layout: Ember.Handlebars.compile """
     {{#if view.footerView}}

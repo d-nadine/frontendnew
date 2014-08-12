@@ -54,10 +54,9 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
   onHideModal: ->
     @$('.modal').modal 'hide' if @$('.modal')
 
-  missingDetail: ( ->
+  missingDetail: Ember.computed 'controller.name', 'controller.companyName', 'showModal', ->
     return "contact name" if Ember.isEmpty(@get('controller.name'))
     return "company" if Ember.isEmpty(@get('controller.companyName'))
-  ).property('controller.name', 'controller.companyName', 'showModal')
 
   tags: Radium.ContactTagAutocomplete.extend
     isEditableBinding: 'controller.isNew'
@@ -146,10 +145,9 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
       result += "<img src='#{url}' class='img-polaroid' alt=#{item.get('source')}/>"
       result
 
-    queryToValueTransform: ((key, value) ->
+    queryToValueTransform: Ember.computed 'value', (key, value) ->
       if arguments.length == 2
         if @matchesSelection(value)
-          @$('input[type=text]').blur()
           @set 'value', value
         else
           unless @get('isNew')
@@ -159,9 +157,9 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
         @get 'value'
       else
         value
-    ).property('value')
 
     clearValue: ->
+      @$('.typeahead').hide()
       @get('controller').send 'cancel'
 
     setValue: (searchResult) ->

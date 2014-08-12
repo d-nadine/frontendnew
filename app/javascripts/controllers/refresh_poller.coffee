@@ -14,9 +14,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
       @get('controller.controllers.messages').onPoll()
       @finishSync()
 
-
-    if currentUser.get('inCleanState')
-      currentUser.reload()
+    currentUser.reload()
 
     currentUser.one 'becameError', =>
       @stop()

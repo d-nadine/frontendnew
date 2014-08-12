@@ -12,6 +12,11 @@ Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
+  reload: ->
+    return unless @get('inCleanState')
+
+    @_super.apply this, arguments
+
   typeName: Ember.computed ->
     @constructor.toString().underscore().split('.').pop().toLowerCase()
 

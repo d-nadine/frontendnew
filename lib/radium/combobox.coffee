@@ -32,31 +32,28 @@ Radium.Combobox = Radium.View.extend
   click: (event) ->
     event.stopPropagation()
 
-  sortedSource: ( ->
+  sortedSource: Ember.computed 'source.[]', ->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
       sortProperties: [@field]
       content: @get('source')
-  ).property('source.[]')
 
   queryBinding: 'queryToValueTransform'
 
   isSubmitted: Ember.computed.alias('controller.isSubmitted')
 
-  isInvalid: (->
+  isInvalid: Ember.computed 'value', 'isSubmitted', ->
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
-  ).property('value', 'isSubmitted')
 
   lookupQuery: (query) ->
     @get('source').find (item) => item.get(@field) == query
 
-  queryToValueTransform: ((key, value) ->
+  queryToValueTransform: Ember.computed 'value', (key, value) ->
     if arguments.length == 2
       @set 'value', @lookupQuery(value)
     else if !value && @get('value')
       @get "value.#{@field}"
     else
       value
-  ).property('value')
 
   layout: Ember.Handlebars.compile """
     {{#if view.leaderView}}

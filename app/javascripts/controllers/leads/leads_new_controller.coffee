@@ -66,7 +66,7 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
       @get('model.name') || @get('model.displayName')
 
-  modelDidChange: Ember.computed 'model', ->
+  modelDidChange: Ember.observer 'model', ->
     return if @get('form') || !@get('model')
 
     @set 'form', @get('model') if @get('model.isNew')
