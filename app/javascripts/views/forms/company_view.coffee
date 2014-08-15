@@ -1,28 +1,22 @@
 Radium.FormsCompanyView = Radium.View.extend
-  classNames: ['new-company', 'hide']
+  classNames: ['new-company']
   actions:
-    hideNewCompany: ->
-      @$().slideUp('slow', =>
-        Ember.$('.address-book-controls').slideDown('medium'))
-
     showExisting: ->
       @$('.existing-company').slideDown('medium')
 
     resetCompany: ->
-      @$('.existing-company').slideDown('medium', =>
-        @get('controller').send 'reset'
-        Ember.run.later =>
-          @$('input[type=text]').focus()
-        , 500
-      )
+      @get('controller').send 'reset'
+      Ember.run.later =>
+        @$('input[type=text]').focus()
+      , 500
 
   willDestroyElement: ->
-    @send 'hideNewCompany'
+    @get('controller').send 'reset'
     @_super.apply this, arguments
 
   companyPicker: Radium.ContactCompanyPicker.extend
     classNameBindings: [':field', 'isInvalid']
-    placeholder: 'Company'
+    placeholder: 'Add Company'
     disabled: Ember.computed.alias 'controller.isDisabled'
 
     isInvalid: Ember.computed 'controller.isSubmitted', 'controller.companyName', ->

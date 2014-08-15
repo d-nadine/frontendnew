@@ -2,12 +2,11 @@
   <div class="address-book-controls">
     <div class="pull-right">
       <form class="form-search pipeline-search">
+        {{render 'forms/company'}}
       </form>
-      {{#link-to "leads.new" class="btn btn-primary"}}+ Contact{{/link-to}}
     </div>
   </div>
 </div>
-
 <table style="width: calc(100% - 15px);">
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>

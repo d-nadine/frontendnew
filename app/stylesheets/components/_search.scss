@@ -21,6 +21,12 @@
     padding-left: 30px;
     @include box-sizing(border-box);
   }
+
+  &.pipeline-search {
+    .btn-primary {
+      padding-left: 25px;
+    }
+  }
 }
 
 // Main Search
