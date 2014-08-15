@@ -1,6 +1,8 @@
 Radium.InfiniteDataset = Ember.ArrayProxy.extend
   params: {}
 
+  isLoading: false
+
   content: Ember.computed 'source', ->
     Ember.A []
 
@@ -11,12 +13,15 @@ Radium.InfiniteDataset = Ember.ArrayProxy.extend
       type: @get "type"
 
   loadPage: Ember.observer('source.content', ->
+    @set 'isLoading', true
     content = @get('content')
     source = @get('source.content')
     queue = @queue || Ember.RSVP.resolve()
+    self = this
 
     @queue = queue.then ->
-      source.then (records)->
+      source.then (records) ->
+        self.set 'isLoading', false
         content.addObjects source
   ).on 'init'
 
