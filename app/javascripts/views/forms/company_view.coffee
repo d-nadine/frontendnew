@@ -16,28 +16,19 @@ Radium.FormsCompanyView = Radium.View.extend
         , 500
       )
 
-  didInsertElement: ->
-    @_super.apply this, arguments
-    @get('controller').on('setupNewCompany', this, 'onSetupNewCompany')
-
   willDestroyElement: ->
     @send 'hideNewCompany'
     @_super.apply this, arguments
-    @get('controller').off('setupNewCompany', this, 'onSetupNewCompany')
-
-  onSetupNewCompany: ->
-    console.log 'do we need this'
 
   companyPicker: Radium.ContactCompanyPicker.extend
     classNameBindings: [':field', 'isInvalid']
     placeholder: 'Company'
     disabled: Ember.computed.alias 'controller.isDisabled'
 
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.companyName', ->
       return unless @get('controller.isSubmitted')
       value = @get('controller.companyName')
       !value || value.length == 0
-    ).property('controller.isSubmitted', 'controller.companyName')
 
     setValue: (obj) ->
       @_super obj.get('person')

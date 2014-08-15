@@ -1,4 +1,5 @@
 /*
+ https://github.com/gkindel/CSV-JS/
  CSV-JS - A Comma-Separated Values parser for JS
 
  Built to rfc4180 standard, with options for adjusting strictness:
