@@ -2,10 +2,13 @@
   <div class="address-book-controls">
     <div class="pull-right">
       <form class="form-search pipeline-search">
-        {{render 'forms/company'}}
+        <a href="#" {{action "showAddCompany" target="view"}} class="btn btn-main btn-primary">
+          <i class="ss-standard ss-plus"></i> Company
+        </a>
       </form>
     </div>
   </div>
+  {{render 'forms/company'}}
 </div>
 
 {{partial "addressbook/loader"}}

@@ -1,5 +1,15 @@
-<div class="loader pull-left">
 {{#if content.isLoading}}
+<div class="loader pull-left">
   <img src="/images/ajax-loader.gif"/> <span class="muted">loading...</span>
+</div>
+{{else}}
+  {{#unless content.length}}
+    <div class="alert alert-info pipeline-cta-banner">
+      <div class="row-fluid">
+        <div class="span12">
+          <h4 class="text-center">No Records</h4>
+        </div>
+      </div>
+    </div>
+  {{/unless}}
 {{/if}}
- </div>

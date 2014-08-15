@@ -1,4 +1,12 @@
 Radium.AddressbookView = Ember.View.extend
+  actions:
+    showAddCompany: ->
+      @$('.address-book-controls').slideUp('medium', =>
+        @$('.new-company').slideDown('medium', =>
+          Ember.$('.new-company input[type=text]').focus()
+        )
+      )
+
   layoutName: 'layouts/single_column'
 
   readAvailableHeight: (->

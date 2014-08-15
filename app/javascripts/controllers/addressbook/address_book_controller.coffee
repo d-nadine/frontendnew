@@ -42,6 +42,10 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     setupNewCompany: ->
       @trigger 'setupNewCompany'
 
+  contactsTotal: Ember.computed.oneWay 'totalsPoller.contacts'
+  companiesTotal: Ember.computed.oneWay 'totalsPoller.companies'
+  untrackedTotal: Ember.computed.oneWay 'totalsPoller.untracked'
+
   isEditable: true
   needs: ['contacts']
   contacts: Ember.computed.alias 'controllers.contacts'

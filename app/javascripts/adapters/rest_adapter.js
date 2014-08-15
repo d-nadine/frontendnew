@@ -225,7 +225,8 @@ Radium.RESTAdapter.configure('plurals',{
   activity: 'activities',
   destroy: 'destroy',
   user_statistics: 'user_statistics',
-  billing: 'billing'
+  billing: 'billing',
+  addressbook_totals: 'addressbook_totals'
 });
 
 Radium.RESTAdapter.registerTransform('object', {

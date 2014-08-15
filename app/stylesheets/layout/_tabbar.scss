@@ -38,6 +38,11 @@
           border-bottom: none;
           background-color: $background;
           text-shadow: none;
+
+          .badge {
+            background: #6AA4EC;
+            color: #fff;
+          }
         }
 
         @include breakpoint(landscape) {
@@ -45,6 +50,14 @@
             right: 10px;
             left: 10px;
           }
+        }
+
+        .badge {
+          font-size: 17px;
+          padding: 5px;
+          margin-left: 7px;
+          background: #ddd;
+          color: #333333;
         }
       }
 

@@ -4,16 +4,19 @@
       <li>
         {{#link-to "addressbook.people"}}
           <i class="custom-icon-radium"></i> People
+          <span class="badge">{{contactsTotal}}</span>
         {{/link-to}}
       </li>
       <li>
         {{#link-to "addressbook.companies"}}
           Companies
+          <span class="badge">{{companiesTotal}}</span>
         {{/link-to}}
       </li>
       <li>
         {{#link-to "addressbook.untracked"}}
           <i class="custom-icon-google"></i> Untracked Contacts
+          <span class="badge">{{untrackedTotal}}</span>
         {{/link-to}}
       </li>
     </ul>

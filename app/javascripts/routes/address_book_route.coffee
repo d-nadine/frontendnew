@@ -1,1 +1,14 @@
-Radium.AddressbookRoute = Radium.Route.extend({})
+Radium.AddressbookRoute = Radium.Route.extend
+  setupController: (controller, model) ->
+    currentUser = controller.get('currentUser')
+    poller = Radium.AddressbookTotalsPoller.create(currentUser: currentUser)
+    poller.set 'currentUser', currentUser
+    poller.start()
+    controller.set 'totalsPoller', poller
+
+  deactivate: ->
+    @_super.apply this, arguments
+    return unless @controller.get('totalsPoller')
+
+    @controller.get('totalsPoller').stop()
+    @controller.set('totalsPoller', null)
