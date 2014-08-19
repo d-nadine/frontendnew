@@ -212,6 +212,15 @@
 
   .company-picker, .contact-picker {
     ul.typeahead li a {
+      background-color: $bright;
+      color: $black;
+    }
+
+    ul.typeahead li:not(.active) a{
+      color: $black;
+    }
+
+    ul.typeahead li.active a{
       color: $bright;
     }
   }
