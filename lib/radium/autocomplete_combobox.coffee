@@ -4,6 +4,7 @@ require 'lib/radium/toggle_dropdown_mixin'
 Radium.AutocompleteCombobox = Radium.Combobox.extend
   queryBinding: 'queryToValueTransform'
   field: 'displayName'
+  isLoading: false
 
   matchesSelection: (value) ->
     return unless value
@@ -47,7 +48,11 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     {{#unless view.disabled}}
       <div class="btn-group controlbox-dropdown-group">
         <button class="btn controlbox-dropdown" tabindex="-1" disabled="disabled">
-          <i class="ss-standard ss-dropdown"></i>
+          {{#if view.isLoading}}
+            <img src="/images/ajax-loader.gif"/>
+          {{else}}
+            <i class="ss-standard ss-dropdown"></i>
+          {{/if}}
         </button>
      </div>
     {{/unless}}
@@ -58,7 +63,21 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
   """
 
   setValue: (object) ->
-    @set 'value', object.get('person')
+    @set('isLoading', true)
+    @set('readonly', true)
+    person = object.get('person')
+
+    observer = =>
+      return unless person.get('isLoaded')
+      @set 'value', person
+      @set('isLoading', false)
+      @set('readonly', false)
+      person.removeObserver('isLoaded')
+
+    if person.get('isLoaded')
+      observer()
+    else
+      person.addObserver('isLoaded', observer)
 
   queryParameters: (query) ->
     term: query
@@ -67,14 +86,19 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
     valueBinding: 'parentView.query'
     disabledBinding: 'parentView.disabled'
     placeholderBinding: 'parentView.placeholder'
+    readonlyBinding: 'parentView.readonly'
     autocomplete: 'off'
 
     didInsertElement: ->
       @$().typeahead source: (query, process) =>
         queryParameters = @get('parentView').queryParameters(query)
 
+        @set('parentView.isLoading', true)
+
         Radium.AutocompleteItem.find(queryParameters).then((results) =>
           process results
+          @set('parentView.isLoading', false)
+
         , Radium.rejectionHandler)
         .then(null, Radium.rejectionHandler)
 
