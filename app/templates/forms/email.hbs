@@ -115,13 +115,13 @@
         </div> 
         {{#if includeReminder}}
           <div>
-            <p class="check-response-label"><i class="ss-standard ss-info muted"></i> Check for response in </p>
+            <p class="check-response-label"><i class="ss-standard ss-info muted"></i>  Follow Up if No Response?</p>
             {{date-timepicker submitDate="setCheckForResponse" model=model}}
           </div>
         {{else}}
           <div class="btn-toolbar">
             <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
-              <i class="ss-standard ss-info"></i> Check for response?
+              <i class="ss-standard ss-info"></i> Follow Up if No Response?
             </a>
             {{#unless hasDeal}}
               <a href="#" {{action "toggleAddDealForm"}} class="btn btn-link btn-main btn-messages-action">Add to Deal</a>
