@@ -6,6 +6,9 @@ Radium.Notification = Radium.Model.extend
   user: DS.belongsTo('Radium.User')
   email: DS.belongsTo('Radium.Email')
   sentBy: DS.belongsTo('Radium.User')
+  checkForResponse: DS.belongsTo('Radium.CheckForResponse')
+
+  # checkForResponse: DS.belongsTo('Radium.CheckForResponse')
 
   timeFormatted: Ember.computed 'time', ->
     time.toHumanFormatWithTime() if time = @get('time')
