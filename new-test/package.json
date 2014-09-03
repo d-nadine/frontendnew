@@ -11,7 +11,13 @@
   },
   "author": "Radium CRM, Inc.",
   "devDependencies": {
-    "karma-mocha": "*",
-    "karma-chai-plugins": "*"
+    "bower": "^1.3.9",
+    "karma-chai-plugins": "*",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "*"
+  },
+  "scripts": {
+    "postinstall": "bower install --no-interactive",
+    "test": "karma start --single-run=true --browsers=PhantomJS"
   }
 }
