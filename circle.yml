@@ -1,3 +1,8 @@
 machine:
   ruby:
     version: '2.0'
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: radium-frontend-staging
