@@ -11,7 +11,7 @@ Ember.Application.initializer
     Ember.assert 'store found in adapterUrl initializer', store
 
     store.get('_adapter').reopen
-      url: 'http://api.radiumcrm.com'
+      url: window.API_HOST || 'http://api.radiumcrm.com'
 
 Ember.Application.initializer
   name: 'stripePublicKey'
