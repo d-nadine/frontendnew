@@ -21,7 +21,7 @@
     <div class="ball1"></div>
     <div id="application"></div>
     <script>
-      window.API_HOST = <%= ENV['API_HOST'] %>;
+      window.API_HOST = <%= ENV['API_HOST'].to_s %>;
     </script>
 
     <script src="/application.js"></script>
