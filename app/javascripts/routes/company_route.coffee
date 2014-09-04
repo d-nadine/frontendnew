@@ -23,6 +23,9 @@ Radium.CompanyRoute = Radium.Route.extend
 
       @get('store').commit()
 
+      addressbookController = @controllerFor('addressbook')
+      addressbookController.send('updateTotals') if addressbookController
+
       @send 'flashSuccess', "The company #{name} has been deleted"
       @transitionTo 'addressbook.companies'
 

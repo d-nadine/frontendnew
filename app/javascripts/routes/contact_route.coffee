@@ -22,6 +22,9 @@ Radium.ContactRoute = Radium.Route.extend
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
+        addressbookController = @controllerFor('addressbook')
+        addressbookController.send('updateTotals') if addressbookController
+
       contact.one 'becameInvalid', (result) ->
         result.reset()
 

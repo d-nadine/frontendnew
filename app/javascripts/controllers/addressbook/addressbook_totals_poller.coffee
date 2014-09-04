@@ -1,14 +1,16 @@
 Radium.AddressbookTotalsPoller = Ember.Object.extend Radium.PollerMixin,
-  interval: 5000
-  contacts: 0
-  companies: 0
-  untracked: 0
+  interval: 10000
 
   onPoll: ->
-    Ember.assert 'must supply current user', @get('currentUser')
-    userId = @get('currentUser.id')
+    currentUser = @get('currentUser')
+    controller = @get('controller')
 
-    Radium.AddressbookTotals.find({}).then (results) =>
-      result = results.get('firstObject')
+    Ember.assert 'must supply current user', currentUser
+    Ember.assert 'must supply a controller', controller
 
-      @setProperties result.get('data')
+    controller.send 'updateTotals'
+
+    currentUser.one 'didReoload', =>
+      @stop() if currentUser.get('initialContactsImported')
+
+    currentUser.reload()

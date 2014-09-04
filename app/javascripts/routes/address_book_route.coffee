@@ -1,7 +1,10 @@
 Radium.AddressbookRoute = Radium.Route.extend
   setupController: (controller, model) ->
+    controller.send 'updateTotals'
+
     currentUser = controller.get('currentUser')
-    poller = Radium.AddressbookTotalsPoller.create(currentUser: currentUser)
+
+    poller = Radium.AddressbookTotalsPoller.create(currentUser: currentUser, controller: controller)
     poller.set 'currentUser', currentUser
     poller.start()
     controller.set 'totalsPoller', poller

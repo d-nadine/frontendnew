@@ -7,6 +7,14 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
   Ember.Evented,
 
   actions:
+    updateTotals: ->
+      Radium.AddressbookTotals.find({}).then (results) =>
+        totals = results.get('firstObject')
+
+        @set 'contactsTotal', totals.get('contacts')
+        @set 'companiesTotal', totals.get('companies')
+        @set 'untrackedTotal', totals.get('untracked')
+
     additionalFilter: (additional) ->
       @set('model.additionalFilter', additional)
 
@@ -42,9 +50,10 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.ShowMoreMixi
     setupNewCompany: ->
       @trigger 'setupNewCompany'
 
-  contactsTotal: Ember.computed.oneWay 'totalsPoller.contacts'
-  companiesTotal: Ember.computed.oneWay 'totalsPoller.companies'
-  untrackedTotal: Ember.computed.oneWay 'totalsPoller.untracked'
+  contactsTotal: 0
+  companiesTotal: 0
+  untrackedTotal: 0
+
 
   isEditable: true
   needs: ['contacts']

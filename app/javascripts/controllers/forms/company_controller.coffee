@@ -14,6 +14,9 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
         addressBook = @get('controllers.addressbook.content')
         addressBook.pushObject(company)
 
+        addressbookController = @get('controllers.addressbook')
+        addressbookController.send('updateTotals') if addressbookController
+
         @send 'flashSuccess', "#{@get('companyName')} created."
         @send 'reset'
         @transitionToRoute 'company', result

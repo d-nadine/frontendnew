@@ -18,6 +18,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   title: DS.attr('string')
   isAdmin: DS.attr('boolean')
   initialMailImported: DS.attr('boolean')
+  initialContactsImported: DS.attr('boolean')
   emailsImported: DS.attr('number')
   refreshFailed: DS.attr('boolean')
   syncState: DS.attr('string')
