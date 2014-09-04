@@ -1,7 +1,12 @@
 $body: #6e6e6e;
 
-.search-result-list {
-
+.nav-tabs .contacts-importing {
+  text-transform: capitalize;
+  padding-right: 25px;
+  padding-left: 25px;
+  font-weight: bold;
+  line-height: 29px;
+  @include add-blinker;
 }
 
 #addressbook {

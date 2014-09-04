@@ -19,6 +19,13 @@
           <span class="badge">{{untrackedTotal}}</span>
         {{/link-to}}
       </li>
+      {{#unless currentUser.initialContactsImported}}
+      <li>
+        <a href="#">
+          <span class="badge contacts-importing">Importing</span>
+        </a>
+      </li>
+      {{/unless}}
     </ul>
   </div>
 </div>
