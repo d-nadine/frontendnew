@@ -38,6 +38,8 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
 
     @$('.btn').tooltip()
 
+    @$('.date-time-menu').css left: '-100px'
+
     $('body').on 'click.date-send-menu', (e) =>
       return true if e.target?.type == 'file'
       return true if e.target.tagName == 'A'

@@ -1,6 +1,13 @@
 Radium.FlashNewViewMixin = Ember.Mixin.create
-  didInsertElement: ->
-    @_super.apply this, arguments
+  setup: (->
+    @addObserver 'controller.newTask', this, 'observeNewTask'
+  ).on 'didInsertElement'
+
+  tearDown: (->
+    @removeObserver 'controller.newTask', this, 'observeNewTask'
+  ).on 'willDestroyElement'
+
+  observeNewTask: ->
     controller = @get('controller')
 
     return unless controller.get('newTask')
@@ -9,13 +16,17 @@ Radium.FlashNewViewMixin = Ember.Mixin.create
 
     Ember.run.later(this, =>
       @$()?.removeClass('is-new-item')
+
+      @removeObserver 'controller.newTask', this, 'observeNewTask'
+
       controller.set('model.newTask', false)
+
       return unless controller.get('parentController') instanceof Radium.TaskListItemController
 
       return if controller.get('parentController.parentController.hiddenContent.length')
 
       Ember.run.scheduleOnce 'afterRender', this, 'scrollToTask'
-    , 100)
+    , 1000)
 
   scrollToTask: ->
     return unless @$()

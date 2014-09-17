@@ -24,6 +24,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
         @get('_referenceMeeting') ||
         @get('_referenceTodo')
   ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany')
+
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
@@ -34,7 +35,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceTodo')
 
-  todos: DS.hasMany('Radium.Todo')
+  todos: DS.hasMany('Radium.Todo', inverse: null)
   notes: DS.hasMany('Radium.Note', inverse: '_referenceTodo')
   tasks: Radium.computed.tasks('todos')
 
@@ -49,12 +50,15 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
     @get 'description'
 
   clearRelationships: ->
-    @get('activities').compact().forEach (activity) =>
+    @get('activities').compact().forEach (activity) ->
       activity.deleteRecord()
 
-    @get('tasks').compact().forEach (task) =>
+    @get('tasks').compact().forEach (task) ->
       task.deleteRecord()
 
-    Radium.Notification.all().compact().forEach (notification) =>
+    @get('todos').compact().forEach (todo) ->
+      todo.unloadRecord()
+
+    Radium.Notification.all().compact().forEach (notification) ->
       if notification.get('_referenceTodo') == this
         notification.deleteRecord()

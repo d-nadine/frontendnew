@@ -101,18 +101,18 @@
           {{#if showEmailCancel}}
             <button tabindex="5" {{action "cancelSendEmail" bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main" {{bind-attr disabled=disableSave}} {{action "saveAsDraft" this}}>Save Draft</button>
+          <button class="btn btn-main btn-draft" {{bind-attr disabled=disableSave}} {{action "saveAsDraft" this}}>Save Draft</button>
           <div id="sendMenu" class="btn-group">
             <button tabindex="6" {{action "submit" this controller bubbles="false"}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
             <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action "toggleSendMenu" target=view}}>
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu date-time-menu">
               <li><a href="#" {{action "scheduleDelivery" model 'tomorrow'}}>Send Tomorrow</a></li>
               <li>{{date-timepicker submitDate="scheduleDelivery" model=model}}</li>
             </ul>
           </div>
-        </div> 
+        </div>
         {{#if includeReminder}}
           <div>
             <p class="check-response-label"><i class="ss-standard ss-info muted"></i>  Follow Up if No Response?</p>

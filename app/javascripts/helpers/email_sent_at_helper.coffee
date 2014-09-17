@@ -1,8 +1,10 @@
 formats =
   long: "toHumanFormatWithTime"
   brief: "toBriefFormat"
-  
+
 Ember.Handlebars.registerBoundHelper 'emailSentAt', (value, options) ->
+  Ember.assert "null value passed to eamailSentAt helper", value
+
   unless value
     value = @get('updatedAt')
 

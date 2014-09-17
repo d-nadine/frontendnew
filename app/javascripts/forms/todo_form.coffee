@@ -37,11 +37,11 @@ Radium.TodoForm = Radium.Form.extend
 
     record = @get('type').createRecord @get('data')
 
-    record.one 'didCreate', (result) =>
+    record.one 'didCreate', (result) ->
       result.set 'newTask', true
       deferred.resolve()
 
-    record.one 'becameInvalid', (result) =>
+    record.one 'becameInvalid', (result) ->
       result.reset()
       deferred.reject(result)
 
