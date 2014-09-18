@@ -1,6 +1,9 @@
 Radium.FlashNewViewMixin = Ember.Mixin.create
   setup: (->
-    @addObserver 'controller.newTask', this, 'observeNewTask'
+    if @get('controller.newTask')
+      @observeNewTask()
+    else
+      @addObserver 'controller.newTask', this, 'observeNewTask'
   ).on 'didInsertElement'
 
   tearDown: (->

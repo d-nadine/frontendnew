@@ -1,4 +1,4 @@
-// Last commit: 69a1821 (2014-05-19 13:57:17 +0100)
+// Last commit: 93b5a28 (2014-09-18 09:51:58 +0100)
 
 
 (function() {
@@ -3750,7 +3750,12 @@ var RootState = {
       },
 
       // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-      loadedData: Ember.K
+      loadedData: Ember.K,
+
+      unloadRecord: function(record) {
+        record.clearRelationships();
+        record.transitionTo('deleted.saved');
+      }
     },
 
     // After a record's transaction is committing, but
@@ -4101,8 +4106,6 @@ DS.Model = Ember.Object.extend(Ember.Evented, LoadPromise, {
   },
 
   unloadRecord: function() {
-    Ember.assert("You can only unload a loaded, non-dirty record.", !get(this, 'isDirty'));
-
     this.send('unloadRecord');
   },
 

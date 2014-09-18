@@ -16,21 +16,21 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   # Client side only, so user can choose to decline a meeting.
   cancelled: DS.attr('boolean')
 
-  organizer: ( ->
+  organizer: Ember.computed '_organizerUser', '_organizerContact', ->
     @get('_organizerUser') ||
     @get('_organizerContact')
-  ).property('_organizerUser', '_organizerContact')
+
   _organizerUser: DS.belongsTo('Radium.User')
   _organizerContact: DS.belongsTo('Radium.Contact')
 
-  reference: ((key, value) ->
+  reference: Ember.computed 'todo', 'deal', 'email', (key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
       associationName = "_reference#{property}"
       @set associationName, value
     else
       @get('_referenceContact', '_referenceTodo') || @get('_referenceDeal') || @get('_referenceEmail')
-  ).property('todo', 'deal', 'email')
+
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceEmail: DS.belongsTo('Radium.Email')
@@ -45,7 +45,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
   time: Ember.computed.alias('startsAt')
 
-  contacts: ( ->
+  contacts: Ember.computed 'invitations.[]', 'invitations.@each.person', ->
     return Ember.A() unless @get('invitations.length')
 
     contacts = @get('invitations')
@@ -53,29 +53,26 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
       .map((invitation) -> invitation.get('person'))
 
     contacts
-  ).property('invitations.[]', 'invitations.@each.person')
 
-  users: ( ->
+  users: Ember.computed 'invitations.[]', ->
     return Ember.A() unless @get('invitations.length')
 
     @get('invitations')
       .filter((invitation) -> invitation.get('person')?.constructor is Radium.User)
       .map((invitation) -> invitation.get('person'))
-  ).property('invitations.[]')
 
-  isFinished: ( ->
+  isFinished: Ember.computed 'startsAt', ->
     return unless @get('startsAt')
 
     @get('startsAt').isBeforeNow()
-  ).property('startsAt')
 
   clearRelationships: ->
-    @get('activities').compact().forEach (activity) =>
-      activity.deleteRecord()
+    @get('activities').compact().forEach (activity) ->
+      activity.unloadRecord()
 
-    @get('tasks').compact().forEach (task) =>
-      task.deleteRecord()
+    @get('tasks').compact().forEach (task) ->
+      task.unloadRecord()
 
-    Radium.Notification.all().compact().forEach (notification) =>
+    Radium.Notification.all().compact().forEach (notification) ->
       if notification.get('_referenceMeeting') == this
         notification.deleteRecord()

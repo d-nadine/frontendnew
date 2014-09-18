@@ -140,13 +140,17 @@
     }
   }
 
+  .deal-value {
+    height: 26px;
+  }
+
   .dollar{
     font-weight: bold;
     padding: 4px 0;
     line-height: 26px;
     position: relative;
-    top: -1px;
-    margin-right: 2px;
+    top: 1px;
+    margin-right: 6px;
   }
 
   .controls.add-files{

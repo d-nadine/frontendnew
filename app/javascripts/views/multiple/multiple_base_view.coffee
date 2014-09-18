@@ -34,10 +34,10 @@ Radium.MultipleBaseView = Radium.View.extend
           {{#if showDropDown}}
             <div class="selector">
               <div class="btn-group mutiple-field" {{bind-attr class="open:open"}}>
-                <button class="btn" {{action "toggleOpen" bubbles="false"}}>
+                <button class="btn" {{action "toggleOpen" bubbles=false}}>
                   {{name}}
                 </button>
-                <a class="btn dropdown-toggle needsclick" data-toggle="dropdown" href="#" {{action "toggleOpen"}}>
+                <a class="btn dropdown-toggle needsclick" data-toggle="dropdown" href="#" {{action "toggleOpen" bubbles=false}}>
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">

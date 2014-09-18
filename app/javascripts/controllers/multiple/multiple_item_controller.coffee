@@ -36,6 +36,7 @@ Radium.MultipleItemController = Radium.ObjectController.extend
 
     toggleOpen: ->
       @toggleProperty 'open'
+      false
 
     selectValue: (value) ->
       @set('model.name', value.toString())
@@ -44,27 +45,25 @@ Radium.MultipleItemController = Radium.ObjectController.extend
   parent: Ember.computed.alias 'target.target'
   labels: Ember.computed.alias 'parent.labels'
   leader: Ember.computed.alias 'parent.leader'
-  typeLabel: ( ->
-    "#{@get('name')} #{@get('leader')}"
-  ).property('leader', 'name')
 
-  name: ( ->
+  typeLabel: Ember.computed 'leader', 'name', ->
+    "#{@get('name')} #{@get('leader')}"
+
+  name: Ember.computed 'content.name', ->
     return 'Personal' unless @get('content.name.length')
     @get('content.name').capitalize()
-  ).property('content.name')
 
-  showAddNew: ( ->
+  showAddNew: Ember.computed 'parent.[]', 'value', ->
     return if @get('parent.length') <= 1 && @get('value.length') < 2
 
     (@isLastElement() && (@get('value.length') >= 2))
-  ).property('parent.[]', 'value')
 
   isLastElement: ->
     lastIndex = @get('parent.length') - 1
 
     @get('model') == @get('parent').objectAt(lastIndex)
 
-  showAddNewAddress: ( ->
+  showAddNewAddress: Ember.computed 'parent.[]', 'street', 'city', 'state', 'zip', ->
     return unless @isLastElement()
 
     return true if @get('street.length') > 1
@@ -73,12 +72,9 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     return true if @get('zipcode.length') > 1
     return true if @get('email.length') > 1
     return true if @get('phone.length') > 1
-  ).property('parent.[]', 'street', 'city', 'state', 'zip')
 
-  showDropDown: ( ->
+  showDropDown: Ember.computed 'parent.[]', ->
     @get('parent.length') > 1
-  ).property('parent.[]')
 
-  showDelete: ( ->
+  showDelete: Ember.computed 'parent.[]', ->
     @get('parent.length') > 1
-  ).property('parent.[]')
