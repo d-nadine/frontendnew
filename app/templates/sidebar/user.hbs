@@ -7,8 +7,8 @@
   <div class="sidebar-panel-content sidebar-user-panel">
     {{#if isEditing}}
       {{#link-to "user" user}}
-        {{#if isLoaded}}
-          {{avatar this class="img-polaroid"}}
+      {{#if isLoaded}}
+          {{avatar user class="img-polaroid"}}
         {{else}}
           {{partial 'is_loading'}}
         {{/if}}
@@ -17,8 +17,8 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target="view" bubbles=false}}></i>
       {{#link-to "user" user}}
-        {{#if isLoaded}}
-          {{avatar this class="img-polaroid"}}
+      {{#if isLoaded}}
+          {{avatar user class="img-polaroid"}}
         {{else}}
           {{partial 'is_loading'}}
         {{/if}}

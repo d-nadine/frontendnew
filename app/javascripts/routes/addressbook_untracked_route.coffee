@@ -22,7 +22,7 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
           @send "flashSuccess", "Contact deleted"
           @dataset.removeObject contact
           @controllerFor('addressbook').send 'updateTotals'
-          
+
         @store.commit()
 
   model: ->

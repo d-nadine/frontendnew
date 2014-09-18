@@ -22,6 +22,12 @@ Radium.ContactRoute = Radium.Route.extend
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
+        peopleDataset = @controllerFor('addressbookPeople').get('model')
+
+        peopleDataset.removeObject(contact) if peopleDataset
+
+        @transitionTo 'addressbook.people'
+
         addressbookController = @controllerFor('addressbook')
         addressbookController.send('updateTotals') if addressbookController
 
@@ -32,8 +38,6 @@ Radium.ContactRoute = Radium.Route.extend
         result.reset()
 
       @get('store').commit()
-
-      @transitionTo 'addressbook.people'
 
   renderTemplate: ->
     @render()
