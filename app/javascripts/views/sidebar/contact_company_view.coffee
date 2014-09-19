@@ -7,11 +7,10 @@ Radium.SidebarContactCompanyView = Radium.InlineEditorView.extend
     placeholder: 'choose a company'
     valueBinding: 'controller.form.company'
 
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.form.companyName', ->
       return unless @get('controller.isSubmitted')
       value = @get('controller.form.companyName')
       !value || value.length == 0
-    ).property('controller.isSubmitted', 'controller.form.companyName')
 
     keyDown: (e) ->
       unless e.keyCode == 13

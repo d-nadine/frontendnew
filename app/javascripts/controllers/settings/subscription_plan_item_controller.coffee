@@ -7,7 +7,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   subscriptionEnded: Ember.computed.alias 'currentUser.account.billing.subscriptionEnded'
   activeCard: Ember.computed.alias 'parentController.activeCard'
   isTrial: Ember.computed.alias 'parentController.account.billing.isTrial'
-  isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
+  unlimited: Ember.computed.alias 'currentUser.account.unlimited'
 
   isCurrent: Ember.computed 'parentController.currentPlan', 'model', 'isPersisting', ->
     return false if @get('currentUser.subscriptionInvalid')
@@ -28,7 +28,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   isSolo: Ember.computed.equal 'model.planId', 'solo'
 
   exceededUsers: Ember.computed 'model.totalUsers', 'users.[]', ->
-    return true if @get('isUnlimited')
+    return true if @get('unlimited')
     @get('totalUsers') < @get('users.length')
 
   notViable: Ember.computed 'isCurrent', 'totalUsers', 'isPersisting', 'activeCard', 'users.[]', ->

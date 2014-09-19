@@ -70,12 +70,12 @@ Radium.AutocompleteView = Radium.View.extend
     input.width inputWidth
 
   didInsertElement: ->
+    @_super.apply this, arguments
     @$('input[type=text]').addClass('field')
     @resizeInputBox()
 
-  sourceDidChange: (->
+  sourceDidChange: Ember.observer 'source.[]', ->
     Ember.run.scheduleOnce 'afterRender', this, "resizeInputBox"
-  ).observes('source.[]')
 
   filterResults: (item) ->
     !@get('source').contains(item)
@@ -128,6 +128,7 @@ Radium.AutocompleteView = Radium.View.extend
       false
 
     didInsertElement: ->
+      @_super.apply this, arguments
       Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'
 
     addAutocomplete: ->

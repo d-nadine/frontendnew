@@ -17,7 +17,7 @@ Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
     @get('source').removeObjects @get('source').filter (tag) =>
       @get('source').mapProperty('name').contains (tag.get('name'))
 
-  companyDidChange: ( ->
+  companyDidChange: Ember.observer 'controller.company', ->
     return unless @get('controller.isNew')
 
     return unless @get('controller.company.tagNames.length')
@@ -26,4 +26,3 @@ Radium.ContactTagAutocomplete = Radium.TagAutoComplete.extend
       @get('source').mapProperty('name').contains (tag.get('name'))
 
     @get('source').addObjects(companyTags)
-  ).observes('controller.company')

@@ -16,7 +16,7 @@
 {{/if}}
 {{#if isAdmin}}
 <div class="upgrade-plan">
-  {{#unless isUnlimited}}
+  {{#unless unlimited}}
     <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
   {{/unless}}
 
@@ -24,7 +24,7 @@
     <p><strong>You are currently on a trial {{currentPlan.name}} account, you have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong></p>
     <p><strong>Choose a plan below to upgrade your account</strong></p>
   {{else}}
-    {{#if isUnlimited}}
+    {{#if unlimited}}
       <p><strong>You have an unlimited account.</p>
     {{else}}
       <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users upgrade your account.</p>

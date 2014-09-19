@@ -58,7 +58,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
     return "contact name" if Ember.isEmpty(@get('controller.name'))
     return "company" if Ember.isEmpty(@get('controller.companyName'))
 
-  tags: Radium.ContactTagAutocomplete.extend
+  tags: Radium.ContactTagAutoomplete.extend
     isEditableBinding: 'controller.isNew'
 
   companyPicker: Radium.ContactCompanyPicker.extend Radium.ContactCompanyMixin,

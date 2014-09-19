@@ -32,7 +32,7 @@ Radium.TimePickerView = Radium.View.extend
 
   textBinding: 'textToTimeTransform'
 
-  textToTimeTransform: ((key, value) ->
+  textToTimeTransform: Ember.computed 'date', (key, value) ->
     if arguments.length == 2
       if value && /^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/.test(value)
         dateString = "#{@get('date').toDateFormat()} #{value}"
@@ -41,7 +41,6 @@ Radium.TimePickerView = Radium.View.extend
       @get('date').toMeridianTime()
     else
       value
-  ).property('date')
 
   willDestroyElement: ->
     @$('.timepicker').timepicker('remove')

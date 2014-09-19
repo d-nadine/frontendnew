@@ -1,6 +1,8 @@
 Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
   actions:
     save: (user) ->
+      return unless @hasBufferedChanges
+
       @set 'isSubmitted', true
 
       return unless @get('isValid')
@@ -10,6 +12,7 @@ Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
       user = @get('model')
 
       user.one 'didUpdate', =>
+        @set 'isEditing', false
         @send "flashSuccess", "Profile settings saved!"
 
       user.one 'becameInvalid', (result) =>

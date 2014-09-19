@@ -6,7 +6,7 @@
         "level": "ignore"
     },
     "max_line_length": {
-        "value": 80,
+        "value": 120,
         "level": "ignore"
     },
     "camel_case_classes": {

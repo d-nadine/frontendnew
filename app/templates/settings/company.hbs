@@ -32,7 +32,7 @@
 {{render "inviteUser"}}
 
 <h4>Team</h4>
-{{#if isUnlimited}}
+{{#if unlimited}}
   <p><strong>You have an unlimited account.</p>
 {{else}}
   <p><strong>You have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong> To add more users {{#link-to "settings.billing"}}upgrade your account{{/link-to}}.</p>

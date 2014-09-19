@@ -1,1 +1,1 @@
-window.puts = window.puts || -> console.log.apply(console, arguments)
+window.p = window.puts = window.puts || -> console.log.apply(console, arguments)

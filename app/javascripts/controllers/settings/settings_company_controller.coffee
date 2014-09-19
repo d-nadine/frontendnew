@@ -29,7 +29,7 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Current
   account: Ember.computed.alias 'controllers.account.model'
   companyName: Ember.computed.alias 'controllers.account.name'
   users: Ember.computed.alias 'controllers.users'
-  isUnlimited: Ember.computed.alias 'currentUser.account.isUnlimited'
+  unlimited: Ember.computed.alias 'currentUser.account.unlimited'
 
   pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', ->
     existing = @get('users').mapProperty('email').map (email) -> email.toLowerCase()

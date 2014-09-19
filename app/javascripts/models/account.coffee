@@ -7,6 +7,6 @@ Radium.Account = Radium.Model.extend
   subscriptionInvalid: DS.attr('boolean')
   isTrial: DS.attr('boolean')
   trialDaysLeft: DS.attr('number')
-  isUnlimited: DS.attr('boolean')
+  unlimited: DS.attr('boolean')
 
   billing: DS.belongsTo('Radium.Billing')

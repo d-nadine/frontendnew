@@ -137,7 +137,7 @@ Radium.DatePickerComponent = Ember.Component.extend
         @$().data('datepicker').hide()
 
         @$('.datepicker').find('a').attr('tabindex','-1')
-        return @$().parent().next().find('input').focus()
+        this.$().parent().next().children('input:first').get(0).focus()
 
       evt.stopPropagation()
       evt.preventDefault()
