@@ -15,6 +15,33 @@ end
 desc "Compiles the application"
 task :compile => "assets:precompile"
 
+namespace :deploy do
+  desc "deploy to production"
+  task :production do
+    ENV['HEROKU_APP'] ||= 'radium-frontend'
+    ENV['branch'] ||= 'master'
+    Rake::Task["deploy"].execute
+  end
+
+  desc "deploy to staging"
+  task :staging do
+    ENV['HEROKU_APP'] ||= 'radium-frontend-staging'
+    ENV['branch'] ||= 'staging'
+    Rake::Task["deploy:deploy"].execute
+  end
+
+  task :deploy do
+    heroku_app = ENV['HEROKU_APP']
+
+    remote = "git@heroku.com:#{heroku_app}.git"
+    branch = ENV['branch'] ||= 'master'
+
+    sh "heroku maintenance:on --app #{heroku_app}"
+    sh "git push #{remote} #{branch}:master -f"
+    sh "heroku maintenance:off -a #{heroku_app}"
+  end
+end
+
 namespace :build do
   vendor_path = File.expand_path "../vendor/", __FILE__
   vendor_js_path = File.expand_path "../vendor/javascripts", __FILE__
