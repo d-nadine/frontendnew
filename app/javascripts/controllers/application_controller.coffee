@@ -5,6 +5,5 @@ Radium.ApplicationController = Radium.ObjectController.extend
   isNotificationsOpen: Ember.computed.alias 'controllers.notifications.drawerOpen'
   today: Ember.DateTime.create()
   currentDrawer: null
-  notificationCount: ( ->
+  notificationCount: Ember.computed 'Radium.notifyCount', ->
     Radium.get('notifyCount')
-  ).property('Radium.notifyCount')     

@@ -142,7 +142,7 @@ Radium.AutocompleteView = Radium.View.extend
         resultsHighlight: true
         canGenerateNewSelections: true
         usePlaceholder: true
-        retrieveLimit: 5
+        retrieveLimit: 8
         startText: @get('placeholder')
         keyDelay: 100
         minChars: @get('parentView').get('minChars')
