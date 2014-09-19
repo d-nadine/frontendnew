@@ -16,13 +16,13 @@ Radium.BillingFormView = Radium.View.extend
         return
 
       stripeResponseHandler = (status, response) ->
-        if response.error
-          controller.set 'isPersisting', false
-          controller.send 'flashError', response.error.message
-        else
+        unless response.error
           Ember.$.scrollTo('.upgrade-plan', 800, {offset: - 100})
           controller.set 'token', response.id
           controller.send 'update'
+        else
+          controller.set 'isPersisting', false
+          controller.send 'flashError', response.error.message
 
       # test credit card number #4242424242424242
       # raise errors https://stripe.com/docs/testing

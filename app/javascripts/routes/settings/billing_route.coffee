@@ -43,8 +43,8 @@ Radium.SettingsBillingRoute = Radium.Route.extend
     if model.hasOwnProperty('card') && !model.card?.get('inErrorState')
       controller.set 'activeCard', model.card
 
-    if model.hasOwnProperty('subscription') && !model?.subscription?.get('inErrorState')
-      controller.set 'activeSubscription', model.subscription
+    if model.hasOwnProperty('subscriptionPlan') && !model?.subscriptionPlan?.get('inErrorState')
+      controller.set 'activeSubscription', model.subscriptionPlan
 
   deactivate: ->
     @_super.apply this, arguments

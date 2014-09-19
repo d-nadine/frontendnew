@@ -7,7 +7,7 @@ Radium.Billing = Radium.Model.extend
   phone: DS.attr('string')
   country: DS.attr('string')
   vat: DS.attr('string')
-  subscription: DS.belongsTo('Radium.SubscriptionPlan')
+  subscriptionPlan: DS.belongsTo('Radium.SubscriptionPlan')
   trialStartDate: DS.attr('datetime')
   nextPaymentDue: DS.attr('datetime')
   subscriptionEnded: DS.attr('boolean')
@@ -16,9 +16,9 @@ Radium.Billing = Radium.Model.extend
   isTrial: DS.attr('boolean')
   subscriptionInvalid: DS.attr('boolean')
 
-  isBasic: Ember.computed 'subscription.planId', ->
-    @get('subscription.planId') == 'basic'
+  isBasic: Ember.computed 'subscriptionPlan.planId', ->
+    @get('subscriptionPlan.planId') == 'basic'
 
-  hasSubscription: Ember.computed 'subscription', 'gatewaySet', ->
+  hasSubscription: Ember.computed 'subscriptionPlan', 'gatewaySet', ->
     return false if @get('subscriptionEnded')
     @get('gatewaySet') && !@get('isBasic')

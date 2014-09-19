@@ -2,7 +2,7 @@ Radium.ApplicationRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
       if @controllerFor('currentUser').get('subscriptionInvalid')
-        return true if transition.targetName == "settings.billing"
+        return true if transition.targetName in ["settings.billing", "settings.company"]
 
         @send 'flashError', 'You can only access the settings page unless you upgrade your plan.'
         transition.abort()

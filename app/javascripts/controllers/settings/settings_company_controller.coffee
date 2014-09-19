@@ -1,9 +1,8 @@
 require 'controllers/settings/subscriptions_mixin'
 
-Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.CurrentUserMixin,
-  Radium.SubscriptionMixin,
+Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.SubscriptionMixin,
   actions:
-    resendInvite: (invite) -> 
+    resendInvite: (invite) ->
       invitation = Radium.UserInvitationDelivery.createRecord
                     userInvitation: invite
 
@@ -31,7 +30,7 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Current
   users: Ember.computed.alias 'controllers.users'
   unlimited: Ember.computed.alias 'currentUser.account.unlimited'
 
-  pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', ->
+  pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', 'controllers.usersInvites.@each.isNew', ->
     existing = @get('users').mapProperty('email').map (email) -> email.toLowerCase()
 
     @get('controllers.usersInvites').filter (invite) ->

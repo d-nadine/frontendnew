@@ -20,7 +20,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       billing = @get('model')
 
-      billing.set('subscription', null)
+      billing.set('subscriptionPlan', null)
 
       activeSubscription = @get('activeSubscription')
 
@@ -64,6 +64,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         @set 'isPersisting', false
         @send 'flashSuccess', 'Your billing information has been updated.'
 
+        billing.reload()
+
         Radium.ActiveCard.find(@get('account.id')).then (card) =>
           @set 'activeCard', card
 
@@ -75,7 +77,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @discardBufferedChanges()
       @set 'showBillingForm', false
 
-    updateSubscription: (subscription) ->
+    updateSubscription: (subscriptionPlan) ->
       unless activeCard = @get('activeCard')
         @set 'showBillingForm', true
         return
@@ -89,7 +91,9 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       billing = @get('model')
 
-      billing.set('subscription', subscription)
+      Ember.assert "The gatway identifier is not set", billing.get('gatewayIdentifier')
+
+      billing.set('subscriptionPlan', subscriptionPlan)
       billing.set('gatewaySet', true)
 
       @applyBufferedChanges()
@@ -97,12 +101,14 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       billing.one 'didUpdate', =>
         billing.reload()
 
-        if subscription.get('planId') != 'basic'
+        @get('currentUser').reload()
+
+        if subscriptionPlan.get('planId') != 'basic'
           Radium.ActiveSubscription.find(@get('account.id')).then (activeSubscription) =>
             @set 'activeSubscription', activeSubscription
 
         @set 'isPersisting', false
-        @send 'flashSuccess', "You are now on the #{subscription.get('name')} plan"
+        @send 'flashSuccess', "You are now on the #{subscriptionPlan.get('name')} plan"
 
       @addErrorEvents(billing)
 

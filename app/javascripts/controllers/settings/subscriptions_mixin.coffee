@@ -9,8 +9,8 @@ Radium.SubscriptionMixin = Ember.Mixin.create
       Ember.compare(left.get('displayOrder'), right.get('displayOrder'))
     )
 
-  currentPlan: Ember.computed 'subscriptionPlans.[]', 'account.billing.subscription', ->
-    subscription = @get('account.billing.subscription')
+  currentPlan: Ember.computed 'subscriptionPlans.[]', 'account.billing.subscriptionPlan', ->
+    subscription = @get('account.billing.subscriptionPlan')
     return unless subscription
 
     subscriptionPlans = @get('subscriptionPlans')
