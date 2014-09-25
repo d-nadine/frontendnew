@@ -13,6 +13,9 @@
         <div class="notification-item-footer">
           <div class="clearfix pull-right">
             <!--<button class="btn">Snooze All</button>-->
+            {{#if isDeleting}}
+              {{partial "is_deleting"}}
+            {{/if}}
             <button class="btn btn-small" {{action "deleteAllNotifications"}}>Dismiss All</button>
           </div>
         </div>
