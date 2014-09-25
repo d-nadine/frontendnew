@@ -20,7 +20,7 @@ namespace :deploy do
   task :production do
     ENV['HEROKU_APP'] ||= 'radium-frontend'
     ENV['branch'] ||= 'master'
-    Rake::Task["deploy"].execute
+    Rake::Task["deploy:deploy"].execute
   end
 
   desc "deploy to staging"

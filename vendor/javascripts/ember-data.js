@@ -3348,6 +3348,11 @@ var DirtyState = {
 
     rollback: function(record) {
       record.rollback();
+    },
+
+    unloadRecord: function(record) {
+      record.clearRelationships();
+      record.transitionTo('deleted.saved');
     }
   },
 
@@ -3395,7 +3400,12 @@ var DirtyState = {
       record.send('invokeLifecycleCallbacks');
     },
 
-    rollback: Ember.K
+    rollback: Ember.K,
+
+    unloadRecord: function(record) {
+      record.clearRelationships();
+      record.transitionTo('deleted.saved');
+    }
   },
 
   // A record is in the `invalid` state when its client-side
@@ -3517,6 +3527,11 @@ updatedState.inFlight.becomeDirty = function(record) {
   record.transitionTo('updated.uncommitted');
 };
 
+updatedState.inFlight.unloadRecord = function(record) {
+  record.clearRelationships();
+  record.transitionTo('deleted.saved');
+};
+
 var RootState = {
   // FLAGS
   isEmpty: false,
@@ -3576,7 +3591,11 @@ var RootState = {
       record.send('invokeLifecycleCallbacks');
     },
 
-    unloadRecord: Ember.K,
+    unloadRecord: function(record) {
+      record.clearRelationships();
+      record.transitionTo('deleted.saved');
+    },
+
     reloadRecord: function(model) {
       model.store.reloadRecord(model);
     }
@@ -3800,6 +3819,11 @@ var RootState = {
         record.transitionTo('loaded.saved');
 
         record.trigger('becameError', record);
+      },
+
+      unloadRecord: function(record) {
+        record.clearRelationships();
+        record.transitionTo('deleted.saved');
       }
     },
 
