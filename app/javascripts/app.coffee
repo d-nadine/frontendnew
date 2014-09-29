@@ -34,7 +34,7 @@ Radium = Em.Application.createWithMixins
   # LOG_VIEW_LOOKUPS              : true
   # LOG_ACTIVE_GENERATION         : true
 
-  titleChanged: ( ->
+  titleChanged: Ember.observer 'notifyCount', ->
     title = @get('title')
     notifyCount = @get('notifyCount')
 
@@ -45,7 +45,6 @@ Radium = Em.Application.createWithMixins
       document.title = "."
       document.title = title
     , 200
-  ).observes('notifyCount')
 
 window.Radium = Radium
 
