@@ -30,6 +30,19 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Subscri
   users: Ember.computed.alias 'controllers.users'
   unlimited: Ember.computed.alias 'currentUser.account.unlimited'
 
+  importedGlobalContactsDidChange: Ember.observer 'account.importedContactsGlobal', ->
+    account = @get('account')
+
+    return if account.get('isSaving') || account.get("isUpdating")
+
+    account.one "didUpdate", =>
+      @send "flashSuccess", "Account updated"
+
+    account.one "didError", =>
+      @send "flashError", "An error has occurred and the account can not be updated."
+
+    @get("store").commit()
+
   pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', 'controllers.usersInvites.@each.isNew', ->
     existing = @get('users').mapProperty('email').map (email) -> email.toLowerCase()
 

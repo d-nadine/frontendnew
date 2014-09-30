@@ -166,6 +166,14 @@ input.api-field {
   display: inline-block;
 }
 
+.import-switch {
+  margin-top: 25px;
+  .switch {
+    position: relative;
+    top: -3px;
+  }
+}
+
 .user-edit-avatar {
   width: 134px;
   float: left;

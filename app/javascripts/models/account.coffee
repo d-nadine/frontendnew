@@ -8,5 +8,6 @@ Radium.Account = Radium.Model.extend
   isTrial: DS.attr('boolean')
   trialDaysLeft: DS.attr('number')
   unlimited: DS.attr('boolean')
+  importedContactsGlobal: DS.attr('boolean')
 
   billing: DS.belongsTo('Radium.Billing')

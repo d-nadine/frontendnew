@@ -5,6 +5,9 @@
         <button type="button" {{action "confirmDestroyAccount"}} class="btn btn-danger btn-main">
           Delete Organization And All Users
         </button>
+        <div class="import-switch">
+         <strong>Track all imported contacts</strong> {{view Radium.FormEnabledSwitchView isCheckedBinding="account.importedContactsGlobal"}}
+       </div>
       {{/if}}
     </div>
     <div class="control-group">
@@ -28,7 +31,6 @@
     </div>
   </fieldset>
 </div>
-
 {{render "inviteUser"}}
 
 <h4>Team</h4>
