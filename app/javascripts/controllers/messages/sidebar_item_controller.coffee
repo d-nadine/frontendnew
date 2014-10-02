@@ -15,10 +15,10 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.Ema
 
     sender.constructor is Radium.User && sender != @get('currentUser')
 
-  hasLead: Ember.computed 'sender', ->
+  hasLead: Ember.computed 'sender', 'sender.isLoaded', ->
     unless sender = @get('sender')
       return
 
-    sender.constructor is Radium.Contact && sender.get('isLead')
+    sender.get('isPublic')
 
   onArchiveTab: Ember.computed.equal 'controllers.messages.folder', 'archive'
