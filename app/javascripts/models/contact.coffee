@@ -37,7 +37,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
       moment.duration((new Date - @get("lastActivityAt")), "milliseconds").humanize()
 
   isPersonal: Ember.computed.equal 'status', 'personal'
-  isPublic: Ember.computed.not 'isPersonal'
+  isPublic: DS.attr('boolean')
 
   isExpired: Radium.computed.daysOld('createdAt', 60)
 
