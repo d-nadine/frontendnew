@@ -7,6 +7,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
     makeContactPublic: (contact) ->
       contact.set 'status', 'pipeline'
+      contact.set 'isPublic', true
 
       transaction = @get('store').transaction()
 
