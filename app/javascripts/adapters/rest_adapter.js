@@ -233,7 +233,8 @@ Radium.RESTAdapter.configure('plurals',{
   destroy: 'destroy',
   user_statistics: 'user_statistics',
   billing: 'billing',
-  addressbook_totals: 'addressbook_totals'
+  addressbook_totals: 'addressbook_totals',
+  track_all_contacts: 'track_all_contacts'
 });
 
 Radium.RESTAdapter.registerTransform('object', {

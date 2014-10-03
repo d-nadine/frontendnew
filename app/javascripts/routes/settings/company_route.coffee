@@ -50,6 +50,7 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
 
     didResendInvite: (email) ->
       alert "Did resend invite to #{email}"
+
   model: ->
     Radium.UserInvitation.find()
 

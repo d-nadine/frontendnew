@@ -9,12 +9,3 @@ Radium.EmailsItemView = Radium.View.extend Radium.ContentIdentificationMixin,
       content.get('content')
     else
       content
-
-  publicToggleSwitch: Radium.PublicSwitch.extend
-    checkedBinding: 'isPublic'
-
-    isPublic: Ember.computed 'controller.isPublic', (key, value)  ->
-      if arguments.length == 2
-        @set 'controller.isPersonal', !value
-      else
-        !@get('controller.isPersonal')

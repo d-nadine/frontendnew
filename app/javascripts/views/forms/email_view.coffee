@@ -1,6 +1,5 @@
 require 'lib/radium/async_autocomplete_list_view'
 require 'lib/radium/text_area'
-require 'lib/radium/toggle_switch'
 
 Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
   actions:

@@ -13,7 +13,7 @@
             disabledBinding="overdueTasksDisabled"}}
             <span class="add-on">min.</span>
         </div>
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.overdueTasks.enabled"}}
+        {{toggle-switch class="checkbox inline" checked=notifications.overdueTasks.enabled}}
       </div>
     </div>
 
@@ -29,7 +29,7 @@
             disabledBinding="createdTasksOverdueTaskDisabled"}}
           <span class="add-on">min.</span>
         </div>
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.createdOverdueTasks.enabled"}}
+        {{toggle-switch class="checkbox inline" checked=notifications.createdOverdueTasks.enabled}}
       </div>
     </div>
 
@@ -45,7 +45,7 @@
             disabledBinding="locaMeetingsDisabled"}}
           <span class="add-on">min.</span>
         </div>
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.localMeetings.enabled"}}
+        {{toggle-switch class="checkbox inline" checked=notifications.localMeetings.enabled}}
       </div>
     </div>
 
@@ -61,14 +61,14 @@
             disabledBinding="remoteMeetingsDisabled"}}
           <span class="add-on">min.</span>
         </div>
-        {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.remoteMeetings.enabled"}}
+        {{toggle-switch class="checkbox inline" checked=notifications.remoteMeetings.enabled}}
       </div>
     </div>
 
     <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
       <label class="control-label long-label">Send enabled reminders as an email also</label>
       <div class="controls">
-        {{view Radium.FormEnabledSwitchView isCheckedBinding=""}}
+        {{toggle-switch class="checkbox inline"}}
       </div>
     </div>
   </fieldset>
@@ -82,7 +82,7 @@
         class="input-mini"
         disabledBinding="leadIgnoredDisabled"}}
          days highlight that lead
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.leadIgnored.enabled"}}
+    </p> {{toggle-switch class="checked inline" checked=notifications.leadIgnored.enabled}}
 
     <p {{bind-attr class=":control-inline-text notifications.clientIgnored.enabled::control-disabled"}}>
       If a client is ignored for more than {{input type="number"
@@ -91,7 +91,7 @@
         class="input-mini"
         disabledBinding="clientIgnoredDisabled"}}
          days highlight that client
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.clientIgnored.enabled"}}
+    </p> {{toggle-switch class="checked inline" checked=notifications.clientIgnored.enabled}}
 
     <p {{bind-attr class=":control-inline-text notifications.taskIgnored.enabled::control-disabled"}}>
       If a client is ignored for more than {{input type="number"
@@ -100,11 +100,11 @@
         class="input-mini"
         disabledBinding="taskIngoredDisabled"}}
          days highlight that client
-    </p> {{view Radium.FormEnabledSwitchView isCheckedBinding="notifications.taskIgnored.enabled"}}
+    </p> {{toggle-switch checked=notifications.taskIgnored.enabled}}
     <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
       <label class="control-label long-label">Send enabled alerts as an email also</label>
       <div class="controls">
-        {{view Radium.FormEnabledSwitchView isCheckedBinding=""}}
+        {{toggle-switch class="checked inline"}}
       </div>
     </div>
   </fieldset>
