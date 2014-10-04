@@ -85,9 +85,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
     @get('folder') != 'inbox'
 
   modelQuery: ->
-    queryParams = Ember.merge(@get('controllers.messages').queryParams(), page: @get('page'))
+    requestParams = Ember.merge(@get('controllers.messages').requestParams(), page: @get('page'))
 
-    Radium.Email.find(queryParams)
+    Radium.Email.find(requestParams)
 
   isSearchOpen: false
 

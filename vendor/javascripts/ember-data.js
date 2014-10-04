@@ -379,13 +379,54 @@ if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Date) {
 /**
   @module ember-data
 */
+Ember.PromiseMixin = Ember.Mixin.create({
+  then: function(resolve, reject, label) {
+    var promise, entity;
+
+    entity = this;
+    promise = get(this, '_promise');
+
+    function fulfillmentHandler(fulfillment) {
+      if (fulfillment === promise) {
+        return resolve(entity);
+      } else {
+        return resolve(fulfillment);
+      }
+    }
+
+    return promise.then(resolve && fulfillmentHandler, reject, label);
+  },
+
+  resolve: function(value) {
+    var promise = get(this, '_promise');
+
+    if (value === this) {
+      Ember.RSVP.resolve(promise);
+    } else {
+      Ember.RSVP.resolve(value);
+    }
+  },
+
+  reject: function(value) {
+    Ember.RSVP.reject(value);
+  },
+
+  _promise: Ember.computed(function() {
+    var self = this,
+        label = 'Ember: PromiseMixin - ' + this;
+
+    return new Ember.RSVP.Promise(function(resolve, reject){
+      self.resolve = resolve;
+      self.reject = reject;
+    }, label);
+  })
+});
 
 var Evented = Ember.Evented,              // ember-runtime/mixins/evented
-    Deferred = Ember.DeferredMixin,       // ember-runtime/mixins/evented
-    run = Ember.run,                      // ember-metal/run-loop
+      run = Ember.run,                      // ember-metal/run-loop
     get = Ember.get;                      // ember-metal/accessors
 
-var LoadPromise = Ember.Mixin.create(Evented, Deferred, {
+var LoadPromise = Ember.Mixin.create(Ember.PromiseMixin, Evented, {
   init: function() {
     this._super.apply(this, arguments);
 

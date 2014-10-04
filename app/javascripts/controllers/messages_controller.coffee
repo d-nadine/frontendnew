@@ -23,9 +23,9 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
     return if currentPath is 'messages.bulk_actions'
 
-    queryParams = @queryParams()
+    requestParams = @requestParams()
 
-    Radium.Email.find(queryParams).then (emails) =>
+    Radium.Email.find(requestParams).then (emails) =>
       return if currentPath is 'messages.bulk_actions'
       return if @get('isLoading')
 
@@ -85,7 +85,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     drafts: "Drafts"
     scheduled: "Scheduled"
 
-  queryParams: ->
+  requestParams: ->
     folder = @get('folder')
     queryFolder = @queryFolders[folder]
     pageSize = @get('pageSize')
