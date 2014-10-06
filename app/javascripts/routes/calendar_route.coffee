@@ -33,8 +33,8 @@ Radium.CalendarRoute = Radium.Route.extend
       @send 'closeDrawer'
 
     selectDay: (calendarDay) ->
-      calendarSidebarController = @controllerFor('calendarSidebar')
-      calendarSidebarController.set('selectedDay', calendarDay)
+      calendarIndexController = @controllerFor('calendarIndex')
+      calendarIndexController.set('selectedDay', calendarDay)
 
   setupController: (controller) ->
     @controllerFor('calendar').set('isCalendarDrawerOpen', true)

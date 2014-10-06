@@ -6,17 +6,19 @@
       <h3>{{group.displayName}}</h3>
 
       {{#each task in group itemController="taskListItem"}}
-        {{#if showTodoForm}}
-          {{render "forms/todo" task.model}}
-        {{/if}}
+        {{#with task}}
+          {{#if showTodoForm}}
+            {{render "forms/todo" model}}
+          {{/if}}
 
-        {{#if showCallForm}}
-          {{render "forms/call" task.model}}
-        {{/if}}
+          {{#if showCallForm}}
+            {{render "forms/call" model}}
+          {{/if}}
 
-        {{#if showMeetingForm}}
-          {{render "forms/meeting" task.model}}
-        {{/if}}
+          {{#if showMeetingForm}}
+            {{render "forms/meeting" model}}
+          {{/if}}
+        {{/with}}
       {{/each}}
     {{/each}}
     {{partial "shared/show_more"}}

@@ -3,7 +3,7 @@
     Back to Calendar
   {{/link-to}}
   <h3>
-    {{formatDateTime time format=calendar}}
+    {{formatDateTime model.time format="calendar"}}
   </h3>
 </header>
 
@@ -21,6 +21,6 @@
   {{/if}}
 {{else}}
 <div class="alert">
-<h4 class="text-center">The task has been deleted.</h4>
-</div> 
+  <h4 class="text-center">The task has been deleted.</h4>
+</div>
 {{/unless}}

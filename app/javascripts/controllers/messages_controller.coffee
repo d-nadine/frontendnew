@@ -42,8 +42,8 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
       @set('totalRecords', meta.totalRecords)
 
   tryAdd: (items) ->
-    content = @get('content')
-    ids = content.map (item) -> item.get('id')
+    model = @get('model')
+    ids = model.map (item) -> item.get('id')
     folder = @get('folder')
     currentUser = @get('currentUser')
 
@@ -66,7 +66,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
   delta: (records) ->
     delta = records.toArray().reject (record) =>
-                @get('content').contains(record)
+                @get('model').contains(record)
 
     delta
 

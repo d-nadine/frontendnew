@@ -1,4 +1,4 @@
-// Last commit: 93b5a28 (2014-09-18 09:51:58 +0100)
+// Last commit: 7174224 (2014-09-25 09:33:50 +0100)
 
 
 (function() {
@@ -379,12 +379,18 @@ if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Date) {
 /**
   @module ember-data
 */
+
+var Evented = Ember.Evented,              // ember-runtime/mixins/evented
+    run = Ember.run,                      // ember-metal/run-loop
+    get = Ember.get;                      // ember-metal/accessors
+
 Ember.PromiseMixin = Ember.Mixin.create({
   then: function(resolve, reject, label) {
-    var promise, entity;
+    var deferred, promise, entity;
 
     entity = this;
-    promise = get(this, '_promise');
+    deferred = get(this, '_deferred');
+    promise = deferred.promise;
 
     function fulfillmentHandler(fulfillment) {
       if (fulfillment === promise) {
@@ -398,33 +404,26 @@ Ember.PromiseMixin = Ember.Mixin.create({
   },
 
   resolve: function(value) {
-    var promise = get(this, '_promise');
+    var deferred, promise;
+
+    deferred = get(this, '_deferred');
+    promise = deferred.promise;
 
     if (value === this) {
-      Ember.RSVP.resolve(promise);
+      deferred.resolve(promise);
     } else {
-      Ember.RSVP.resolve(value);
+      deferred.resolve(value);
     }
   },
 
   reject: function(value) {
-    Ember.RSVP.reject(value);
+    get(this, '_deferred').reject(value);
   },
 
-  _promise: Ember.computed(function() {
-    var self = this,
-        label = 'Ember: PromiseMixin - ' + this;
-
-    return new Ember.RSVP.Promise(function(resolve, reject){
-      self.resolve = resolve;
-      self.reject = reject;
-    }, label);
+  _deferred: Ember.computed(function() {
+    return Ember.RSVP.defer('Ember: DeferredMixin - ' + this);
   })
 });
-
-var Evented = Ember.Evented,              // ember-runtime/mixins/evented
-      run = Ember.run,                      // ember-metal/run-loop
-    get = Ember.get;                      // ember-metal/accessors
 
 var LoadPromise = Ember.Mixin.create(Ember.PromiseMixin, Evented, {
   init: function() {

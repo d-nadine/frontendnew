@@ -49,7 +49,7 @@
           <p>
         </td>
         <td class="last-activity">
-          {{formatDateTime updatedAt format=date}}
+          {{formatDateTime updatedAt format="date"}}
         </td>
         <td class="next-task">
           {{partial 'pipeline/pipeline_next_task'}}
@@ -68,14 +68,14 @@
           </div>
         </td>
         <td>
-          {{formatDateTime statusLastChangedAt format=date}}
+          {{formatDateTime statusLastChangedAt format="date"}}
         </td>
         <td class="forecast">
           <a href="#" {{action "showChecklist" this bubbles=false}}>{{percentage}}%</a>
         </td>
         <td class="value">{{currency value}}</td>
         <td class="expected-close-date">
-          {{formatDateTime expectedCloseDate format=date}}
+          {{formatDateTime expectedCloseDate format="date"}}
         </td>
 
         <td class="delete text-right">
@@ -90,7 +90,7 @@
             matching "{{searchText}}"
           {{/if}}
           {{#if isDateFiltering}}
-            with an Expected Close Date between {{formatDateTime filterStartDate format=date}} and {{formatDateTime filterEndDate format=date}}
+            with an Expected Close Date between {{formatDateTime filterStartDate format="date"}} and {{formatDateTime filterEndDate format="date"}}
           {{/if}}
         </td>
       </tr>

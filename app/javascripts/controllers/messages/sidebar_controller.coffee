@@ -32,12 +32,12 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
     checkMessageItem: ->
       currentPath = @get('currentPath')
-      content = @get('content.content')
+      model = @get('model.model')
 
       predicate = (item) ->
                     !item.get('isDeleted') && !item.get('isChecked')
 
-      if content.filterProperty('isChecked').get('length')
+      if model.filterProperty('isChecked').get('length')
         return if currentPath == 'messages.bulk_actions'
         @transitionToRoute 'messages.bulk_actions'
       else if currentPath == 'messages.bulk_actions'
@@ -45,7 +45,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
           if !email.get('isDeleted') && !email.get('isChecked')
             @send 'selectItem', email
           else
-            first = content.filter(predicate)?.get('firstObject')
+            first = model.filter(predicate)?.get('firstObject')
             @send 'selectItem', first
         else if discussion = @get('controllers.messagesDiscussion')
           @send 'selectItem', discussion
@@ -96,9 +96,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   loadingType: Radium.Email
 
   currentPath: Ember.computed.oneWay 'controllers.application.currentPath'
-  content: Ember.computed.oneWay 'controllers.messages'
+  model: Ember.computed.oneWay 'controllers.messages'
   selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
-  totalRecords: Ember.computed.oneWay 'controllers.messages.content.totalRecords'
+  totalRecords: Ember.computed.oneWay 'controllers.messages.model.totalRecords'
   folder: Ember.computed.oneWay 'controllers.messages.folder'
   itemController: 'messagesSidebarItem'
 

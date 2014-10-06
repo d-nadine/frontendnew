@@ -1,9 +1,11 @@
 {{#each activity in activities}}
-  {{#if activity.isLoaded}}
-    {{#unless activity.reference.isDeleted}}
-      {{renderActivity "activity"}}
-    {{/unless}}
-  {{else}}
-    {{partial 'is_loading'}}
-  {{/if}}
+  {{#with activity}}
+    {{#if activity.isLoaded}}
+      {{#unless activity.reference.isDeleted}}
+        {{renderActivity "activity"}}
+      {{/unless}}
+    {{else}}
+      {{partial 'is_loading'}}
+    {{/if}}
+  {{/with}}
 {{/each}}

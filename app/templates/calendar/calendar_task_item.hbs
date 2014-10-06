@@ -1,11 +1,13 @@
-{{#link-to "calendar.task" item.content.content}}
-  <button {{action "finishTask" model.model bubbles=false}} {{bind-attr class="isFinished :btn :btn-link :pull-left :events-list-item-button"}}>
-    {{taskIcon item.content.content}}
-  </button>
-  <button {{action "deleteTask" content.content}} class="btn-icon delete close pull-right">
-    <i class="ss-block ss-trash"></i>
-  </button>
-  <div {{bind-attr class="isFinished :events-list-item-description"}}>
-    {{item.displayName}}
-  </div>
+{{#with item.model.model}}
+  {{#link-to "calendar.task" this}}
+    <button {{action "finishTask" this bubbles=false}} {{bind-attr class="isFinished :btn :btn-link :pull-left :events-list-item-button"}}>
+      {{taskIcon this}}
+    </button>
+    <button {{action "deleteTask" this}} class="btn-icon delete close pull-right">
+      <i class="ss-block ss-trash"></i>
+    </button>
+    <div {{bind-attr class="isFinished :events-list-item-description"}}>
+      {{displayName}}
+    </div>
 {{/link-to}}
+{{/with}}

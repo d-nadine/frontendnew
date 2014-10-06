@@ -39,14 +39,14 @@
           <p>
         </td>
         <td {{bind-attr  class=":pay-by isPastPayment"}}>
-          {{formatDateTime payBy format=date}}
+          {{formatDateTime payBy format="date"}}
         </td>
         <td class="next-task">
           {{partial 'pipeline/pipeline_next_task'}}
         </td>
         <td class="value">{{currency value}}</td>
         <td>
-          {{formatDateTime statusLastChangedAt format=date}}
+          {{formatDateTime statusLastChangedAt format="date"}}
         </td>
       </tr>
     {{else}}
@@ -57,7 +57,7 @@
             matching "{{searchText}}"
           {{/if}}
           {{#if isDateFiltering}}
-            with a Closed Date between {{formatDateTime filterStartDate format=date}} and {{formatDateTime filterEndDate format=date}}
+            with a Closed Date between {{formatDateTime filterStartDate format="date"}} and {{formatDateTime filterEndDate format="date"}}
           {{/if}}
         </td>
       </tr>

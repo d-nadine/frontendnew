@@ -44,7 +44,7 @@
     {{#each weeks}}
       <tr>
         {{#each calendarDay in this itemController="calendarDayItem"}}
-          <td {{action "selectDay" this bubbles=false}} {{bind-attr class="calendarDay.isDifferentMonth calendarDay.isToday calendarDay.isSelectedDate :day"}}>
+          <td {{action "selectDay" calendarDay bubbles=false}} {{bind-attr class="calendarDay.isDifferentMonth calendarDay.isToday calendarDay.isSelectedDate :day"}}>
             <div class="wrapper">
               <span class="date">
                 {{#if calendarDay.isToday}}
@@ -55,8 +55,8 @@
               </span>
 
               <ul>
-                {{each calendarDay.visibleContent 
-                  class="unstyled" 
+                {{each calendarDay.visibleContent
+                  class="unstyled"
                   itemController="calendarTaskItem"
                   itemViewClass="Radium.CalendarDateTaskItemView"}}
               </ul>

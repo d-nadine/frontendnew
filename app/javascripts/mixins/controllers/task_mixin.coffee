@@ -1,12 +1,9 @@
 Radium.TaskMixin = Ember.Mixin.create
-  showMeetingForm: (->
+  showMeetingForm: Ember.computed 'model', ->
     @get('model.constructor') is Radium.Meeting
-  ).property('model')
 
-  showTodoForm: (->
+  showTodoForm: Ember.computed 'model', ->
     @get('model.constructor') is Radium.Todo
-  ).property('model')
 
-  showCallForm: (->
+  showCallForm: Ember.computed 'model', ->
     @get('model.constructor') is Radium.Call
-  ).property('model')

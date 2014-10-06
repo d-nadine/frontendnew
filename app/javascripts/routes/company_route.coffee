@@ -13,28 +13,31 @@ Radium.CompanyRoute = Radium.Route.extend
     deleteRecord: ->
       company = @modelFor 'company'
 
-      addressBook = @controllerFor('addressbook').get('content')
-
-      addressBook.removeObject(company)
-
       company.deleteRecord()
 
       name = company.get('name')
 
+      company.one 'didDelete', =>
+        @send 'closeModal'
+
+        @send 'flashSuccess', "The company #{name} has been deleted"
+
+        companiesDataset = @controllerFor('addressbookCompanies').get('model')
+
+        companiesDataset.removeObject(company) if companiesDataset
+
+        @transitionTo 'addressbook.companies'
+
+        addressbookController = @controllerFor('addressbook')
+        addressbookController.send('updateTotals') if addressbookController
+
+      company.one 'becameInvalid', (result) ->
+        result.reset()
+
+      company.one 'becameError', (result) ->
+        result.reset()
+
       @get('store').commit()
-
-      addressbookController = @controllerFor('addressbook')
-      addressbookController.send('updateTotals') if addressbookController
-
-      @send 'flashSuccess', "The company #{name} has been deleted"
-      @transitionTo 'addressbook.companies'
-
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
-      @render 'company/deleted',
-        into: 'application'
 
   renderTemplate: ->
     @render()

@@ -42,7 +42,7 @@ Radium.MultipleItemController = Radium.ObjectController.extend
       @set('model.name', value.toString())
       @send 'toggleOpen'
 
-  parent: Ember.computed.alias 'target.target'
+  parent: Ember.computed.alias 'parentController'
   labels: Ember.computed.alias 'parent.labels'
   leader: Ember.computed.alias 'parent.leader'
 

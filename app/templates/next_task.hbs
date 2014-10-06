@@ -14,15 +14,15 @@
 
     <span>
       {{#if isTodo}}
-        {{formatDateTime finishBy format=date}}
+        {{formatDateTime finishBy format="date"}}
       {{/if}}
 
       {{#if isCall}}
-        {{formatDateTime finishBy format=date}}
+        {{formatDateTime finishBy format="date"}}
       {{/if}}
 
       {{#if isMeeting}}
-        {{formatDateTime startsAt format=date}}
+        {{formatDateTime startsAt format="date"}}
       {{/if}}
     </span>
 

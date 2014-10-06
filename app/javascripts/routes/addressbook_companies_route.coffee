@@ -1,3 +1,10 @@
 Radium.AddressbookCompaniesRoute = Radium.Route.extend
   model: ->
-    Radium.Company.find({})
+    @dataset = Radium.InfiniteDataset.create
+      type: Radium.Company
+
+  actions:
+    loadMoreCompanies: ->
+      @dataset.expand()
+
+

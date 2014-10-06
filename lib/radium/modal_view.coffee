@@ -12,7 +12,7 @@ Radium.ModalView = Radium.View.extend
     @$('.modal').addClass('in')
 
   destroy: ->
-    if @get('state') isnt 'inDOM' then @_super()
+    if @get('_state') isnt 'inDOM' then @_super()
 
     unless modal = @$('.modal')
       return

@@ -1,0 +1,1 @@
+Radium.AddressbookCompaniesController = Radium.ArrayController.extend()

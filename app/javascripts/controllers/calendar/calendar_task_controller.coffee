@@ -1,5 +1,5 @@
 Radium.CalendarTaskController = Ember.ObjectController.extend Radium.TaskMixin,
   needs: ['calendarSidebar']
 
-  modelWillChange: Ember.beforeObserver 'model', ->
+  modelDidChange: Ember.observer 'model', ->
     @set('model.isExpanded', false)

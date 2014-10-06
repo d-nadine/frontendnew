@@ -29,6 +29,7 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   listView: Ember.computed 'template', ->
     get = Ember.get
     parentView = this._parentView
+
     listView = Ember.ListView.createWithMixins
       lazyEach: this
       content: Ember.computed.readOnly 'lazyEach.content'

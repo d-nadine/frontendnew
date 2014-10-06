@@ -6,8 +6,10 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
-  selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
   map: Ember.Map.create()
+
+  selectedDay: null
+  selectedTask: null
 
   formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
     Radium.FormBox.create

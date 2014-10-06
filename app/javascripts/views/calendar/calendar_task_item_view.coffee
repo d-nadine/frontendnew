@@ -3,11 +3,10 @@ Radium.CalendarTaskItemView = Radium.View.extend Radium.FlashNewViewMixin,
   classNameBindings: ['controller.isSelected']
   templateName: 'calendar/calendar_task_item'
 
-  isSelectedDidChange: ( ->
+  isSelectedDidChange: Ember.observer 'controller.isSelected', ->
     return unless @get('controller.isSelected')
 
     Ember.run.scheduleOnce 'afterRender', this, 'scrollToTask'
-  ).observes('controller.isSelected')
 
   scrollToTask: ->
     return unless @$()

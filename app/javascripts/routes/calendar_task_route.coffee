@@ -32,12 +32,14 @@ Radium.CalendarTaskRoute = Radium.Route.extend
 
     calendarSidebar = @controllerFor('calendarSidebar')
 
-    selectedDay = calendarSidebar.get('days').find (day) =>
+    selectedDay = calendarSidebar.get('days').find (day) ->
       day.get('date').isTheSameDayAs(task.get('time'))
 
-    calendarSidebar.set 'selectedDay', selectedDay
+    calendarIndexController = @controllerFor('calendarIndex')
 
-    calendarSidebar.set('selectedTask', task)
+    calendarIndexController.set 'selectedDay', selectedDay
+
+    calendarIndexController.set('selectedTask', task)
 
   renderTemplate: ->
     @render 'calendar/task',

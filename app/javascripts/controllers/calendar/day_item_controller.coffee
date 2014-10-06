@@ -3,32 +3,30 @@ require 'lib/radium/show_more_mixin'
 Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMoreMixin,
   actions:
     selectCalendarTask: (task) ->
-      @set 'controllers.calendarSidebar.selectedTask', task
+      @set 'controllers.calendarIndex.selectedTask', task
       @transitionToRoute "calendar.task", task
 
   needs: ['calendarIndex', 'calendarSidebar']
   calendarDate: Ember.computed.alias('controllers.calendarIndex.date')
 
-  selectedTask: Ember.computed.alias 'controllers.calendarSidebar.selectedTask'
-  selectedDay: Ember.computed.alias 'controllers.calendarSidebar.selectedDay'
+  selectedTask: Ember.computed.alias 'controllers.calendarIndex.selectedTask'
+  selectedDay: Ember.computed.alias 'controllers.calendarIndex.selectedDay'
 
   sortProperties: ['time']
 
-  isDifferentMonth: (->
+  isDifferentMonth: Ember.computed 'date', ->
     @get('content.date.month') != @get('calendarDate.month')
-  ).property('date')
 
   isToday: Radium.computed.isToday('content.date')
 
-  isSelectedDate: ( ->
+  isSelectedDate: Ember.computed 'isToday', 'selectedDay', ->
     selectedDay = @get('selectedDay')
     isToday = @get('isToday')
 
     return true if !selectedDay && isToday
 
     selectedDay && (selectedDay.get('date').isTheSameDayAs(@get('model.date')))
-  ).property('isToday', 'selectedDay')
 
-  day: (->
+  day: Ember.computed 'date', ->
     @get('content.date.day')
-  ).property('date')
+  

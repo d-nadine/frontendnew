@@ -4,7 +4,7 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.Ema
   isSelectable: Ember.computed.alias('controllers.messages.canSelectItems')
 
   isSelected: Ember.computed 'selectedContent', ->
-    @get('content') == @get('selectedContent')
+    @get('model') == @get('selectedContent')
 
   timestamp: Ember.computed ->
     @get('sentAt') || @get('createdAt')

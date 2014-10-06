@@ -1,34 +1,26 @@
 Day = Ember.ArrayProxy.extend()
 
 Radium.CalendarSidebarController = Radium.ObjectController.extend
-  needs: ['calendar', 'calendarIndex']
+  needs: ['calendarIndex']
   contentBinding: 'controllers.calendarIndex.user'
   isLoading: Ember.computed.alias 'controllers.calendarIndex.isLoading'
 
-  selectedTask: null
-  selectedDay: null
-
-  items: (->
+  items: Ember.computed 'controllers.calendarIndex.items', ->
     @get 'controllers.calendarIndex.items'
-  ).property('controllers.calendarIndex.items')
 
-  date: (->
+  date: Ember.computed 'controllers.calendarIndex.date', ->
     @get 'controllers.calendarIndex.date'
-  ).property('controllers.calendarIndex.date')
 
-  isDifferentUser: (->
+  isDifferentUser: Ember.computed 'content', 'currentUser', ->
     @get('content') != @get('currentUser')
-  ).property('content', 'currentUser')
 
-  startOfCalendar: (->
+  startOfCalendar: Ember.computed 'date', ->
     @get('date').copy().atBeginningOfMonth()
-  ).property('date')
 
-  endOfCalendar: (->
+  endOfCalendar: Ember.computed 'date', ->
     @get('date').copy().atEndOfMonth()
-  ).property('date')
 
-  days: (->
+  days: Ember.computed 'items', ->
     days = []
     items = @get 'items'
     startDate = @get 'startOfCalendar'
@@ -50,4 +42,3 @@ Radium.CalendarSidebarController = Radium.ObjectController.extend
       days.pushObject day
 
     days
-  ).property('items')
