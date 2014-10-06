@@ -66,6 +66,5 @@ Radium.DraftEmailForm = Radium.EmailForm.extend
     @set 'id', null
     @set 'reference', null
 
-  sendDraft: ( ->
+  sendDraft: Ember.computed 'id', 'isDraft', ->
     @get('id') && !@get('isDraft')
-  ).property('id', 'isDraft')

@@ -9,7 +9,7 @@ Radium.AddDealComponent = Ember.Component.extend
 
       return unless deal = parent.get('deal')
 
-      unless @get('targetObject.isNew')
+      unless @get('isNew')
         parent.reloadAfterUpdateEvent('didUpdate')
 
         @get('store').commit()
@@ -20,6 +20,9 @@ Radium.AddDealComponent = Ember.Component.extend
     closeForm: ->
       @get('targetObject').send 'toggleAddDealForm'
       false
+
+  isNew: Ember.computed 'targetObject.id', ->
+    not !!@get('targetObject.id')
 
   store: Ember.computed ->
     @get('container').lookup('store:main')
@@ -61,5 +64,3 @@ Radium.AddDealComponent = Ember.Component.extend
     template: Ember.Handlebars.compile """
       <a {{action "selectObject" this target=view href=true bubbles=false}}>{{longName}}</a>
     """
-
-
