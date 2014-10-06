@@ -12,6 +12,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
       if @get('isFinished') && @get('hasBufferedChanges')
         timer = setInterval =>
+
           @set 'isFinishing', true
           @trigger('animateFinish')
           clearInterval timer
@@ -45,7 +46,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
     submit: ->
       @set 'isSubmitted', true
-      return unless @get('isValid')
+
+      unless @get('isValid')
+        @set 'isExpanded', true
+        return
 
       @set 'isExpanded', false
       @set 'justAdded', true
