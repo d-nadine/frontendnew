@@ -23,11 +23,13 @@
     </div>
   </li>
   {{#each notification in controller}}
-    {{#if notification.isLoaded}}
-      {{renderNotification "notification"}}
-    {{else}}
-      {{partial 'is_loading'}}
-    {{/if}}
+    {{#with notification}}
+      {{#if notification.isLoaded}}
+        {{renderNotification "notification"}}
+      {{else}}
+        {{partial 'is_loading'}}
+      {{/if}}
+    {{/with}}
   {{else}}
     <div class="text-center">
       No notifications
