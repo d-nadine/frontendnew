@@ -43,13 +43,14 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
   needs: ['contacts','users', 'accountSettings']
   statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
-  contacts: ( ->
+
+  contacts: Ember.computed 'controllers.contacts.[]', ->
     @get('controllers.contacts').filter (contact) ->
       contact.get('status') != 'personal'
-  ).property('controllers.contacts.[]')
+
   error: null
 
-  checklist: ( ->
+  checklist: Ember.computed 'status', ->
     status = @get('status').toLowerCase()
 
     Ember.assert("No pipeline state checklists exist", !!@get('pipelineStateChecklists.length'))
@@ -66,11 +67,9 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
                                                 Ember.Object.create checkListItem.serialize()
 
     checklist
-  ).property('status')
 
-  statusesDidChange: ( ->
+  statusesDidChange: Ember.computed 'statuses.[]', ->
     return unless @get('statuses.length')
     return if @get('status')
 
     @set('status', @get('statuses.firstObject'))
-  ).observes('statuses.[]')

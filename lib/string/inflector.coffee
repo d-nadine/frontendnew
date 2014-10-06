@@ -25,3 +25,6 @@ String::constantize = ->
 
 String::isCurrency = ->
   /^(?=.*[0-9])\d{1,15}(\.\d{1,2})?$/.test this
+
+String::dedasherize = ->
+  @replace(/[-]/g, ' ')

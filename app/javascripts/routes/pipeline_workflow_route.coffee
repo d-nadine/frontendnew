@@ -7,15 +7,16 @@ Radium.PipelineWorkflowRoute = Radium.PipelineBaseRoute.extend Radium.BulkAction
     @_super.apply this, arguments
     pipeline = @modelFor('pipeline')
 
-    unless pipeline.get state
-      Ember.defineProperty pipeline, state, Ember.computed( ->
+    prop = state.dasherize()
+
+    unless pipeline.get prop
+      Ember.defineProperty pipeline, state, Ember.computed "#{prop}", ->
         Radium.Deal.filter (deal) ->
           deal.get('status') == state
-      ).property("#{state}.[]")
 
     controller = @controllerFor('pipelineWorkflowDeals')
     controller.set('title', state)
-    controller.set('model', pipeline.get(state))
+    controller.set('model', pipeline.get(prop))
     controller.set 'showHeader', true
     @clearChecked()
 

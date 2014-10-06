@@ -8,6 +8,7 @@ Radium.PipelineRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealSt
     willTransition: ->
       @send "resetFilters"
       return true
+
     resetFilters: ->
       @controllerFor("pipeline").setProperties
         searchText: ""

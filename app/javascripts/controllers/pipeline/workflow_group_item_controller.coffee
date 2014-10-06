@@ -13,46 +13,42 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
     @toggleProperty 'isExpanded'
     @set 'selectedGroup', @get('content.title') if @get('isExpanded')
 
-  selectedGroupDidChange: (->
+  selectedGroupDidChange: Ember.observer 'selectedGroup', 'deals.[]', ->
     selectedGroup = @get 'selectedGroup'
     return unless selectedGroup
 
     @set('isExpanded', @get('content.title') == selectedGroup)
-  ).observes('selectedGroup', 'deals.[]')
 
-  percentage: (->
+  percentage: Ember.computed 'workflowTotal', 'length', ->
     total = @get 'workflowTotal'
     length = @get 'length'
 
     return 0 unless total && length
 
     Math.floor((length / total) * 100)
-  ).property('workflowTotal', 'length')
 
-  total: (->
+  total: Ember.computed 'length', ->
     return 0 if @get('length') == 0
 
     @reduce(((value, item) ->
       value + item.get('value')
     ), 0)
-  ).property('length')
 
-  isWorkflow: ( ->
-    title = @get('content.title')
+  dasherized: Ember.computed 'model.title', ->
+    @get('model.title').dasherize()
+
+  isWorkflow: Ember.computed 'dasherized', ->
+    title = @get('dasherized')
     not ['closed', 'lost', 'unpublished'].contains(title)
-  ).property('content.title')
 
-  isClosed: ( ->
-    @get('content.title').toLowerCase() == 'closed'
-  ).property('content.title')
+  isClosed: Ember.computed 'dasherized', ->
+    @get('dasherized') == 'closed'
 
-  isLost: ( ->
-    @get('content.title').toLowerCase() == 'lost'
-  ).property('content.title')
+  isLost: Ember.computed 'dasherized', ->
+    @get('dasherized') == 'lost'
 
-  title: ( ->
+  title: Ember.computed 'status', 'deals.[]', ->
     "#{@get('content.title')} - (#{@get('length')})"
-  ).property('status', 'deals.length')
 
   deleteObject: (record) ->
     record.deleteRecord()
