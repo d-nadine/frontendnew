@@ -4,11 +4,10 @@ require 'lib/radium/user_picker'
 require 'views/forms/form_view'
 require 'views/forms/focus_textarea_mixin'
 
-Radium.FormsTodoView = Radium.FormView.extend
+Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
   didInsertElement: ->
     @_super.apply this, arguments
     return unless @get('controller').on
-    @get('controller').on('animateFinish', this, 'onAnimateFinish') if @get('controller').on
     @set 'store', @get('controller.store')
     @set 'model', @get("controller.model")
 
@@ -17,16 +16,15 @@ Radium.FormsTodoView = Radium.FormView.extend
     classNameBindings: ["isFinished", ":btn", ":btn-link", ":pull-left", ":events-list-item-button"]
     attributeBindings: 'title'
 
-    didInsertElement: ->
-      @_super.apply this, arguments
+    setup: ( ->
       unless @get('controller.isNew')
         @$().tooltip()
+    ).on('didInsertElement')
 
-    willDestroyElement: ->
-      @_super.apply this, arguments
-
+    willDestroyElement: ( ->
       if @$().data('tooltip')
         @$().tooltip('destroy')
+    ).on('willDestroyElement')
 
     click: ->
       @triggerAction
@@ -67,34 +65,3 @@ Radium.FormsTodoView = Radium.FormView.extend
   onFormReset: ->
     if description = @get('description')
       description.reset()
-
-  onAnimateFinish: ->
-    controller = @get('controller')
-
-    # This makes me very sad but sometimes the
-    # controller has been destroyed by the time it gets here
-    # there is no choice but to finish the todo in the view
-    if controller
-      send = controller.send.bind controller
-    else
-      send = =>
-        @set('model.isFinished', true)
-
-        @get('model').one 'didUpdate', ->
-          if @get('controllers.application.currentPath') != 'user.index'
-            @get('user')?.reload()
-
-          unless reference = @get('reference')
-            return
-
-          reference.reload()
-
-        @get('store').commit()
-
-
-    unless @$()?.length
-      send 'completeFinish'
-      return
-
-    @$().fadeOut 'slow', =>
-      send 'completeFinish'

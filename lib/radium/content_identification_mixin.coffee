@@ -5,4 +5,4 @@ Radium.ContentIdentificationMixin = Ember.Mixin.create
     if content = @get('controller.content')
       @get('controller.content').constructor.toString()
 
-  dataIdBinding: Ember.Binding.oneWay 'content.id'
+  dataId: Ember.computed.oneWay 'controller.content.id'

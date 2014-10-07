@@ -36,6 +36,9 @@ Ember.DateTime.reopen
   atEndOfDay: ->
     @adjust hour: 23, minute: 59, second: 59
 
+  atEndOfTomorrow: ->
+    @advance(day: 1).atEndOfDay()
+
   atBeginningOfDay: ->
     @adjust hour: 0, minute: 0, second: 0
 

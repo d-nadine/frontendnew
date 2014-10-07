@@ -12,6 +12,7 @@ Ember.Handlebars.registerBoundHelper 'formatDateTime', (value, options) ->
 
   options.hash.format ||= 'short'
   format = formats[options.hash.format]
+
   if Ember.DateTime.detectInstance value
     date = value.toFormattedString(format)
   else

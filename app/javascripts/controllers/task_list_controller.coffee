@@ -49,10 +49,11 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
       else 5
 
   groupBy: (task) ->
-    today    = @get 'clock.endOfDay'
-    tomorrow = @get 'clock.endOfTomorrow'
-    thisWeek = @get 'clock.endOfThisWeek'
-    nextWeek = @get 'clock.endOfNextWeek'
+    now = Ember.DateTime.create()
+    today    = now.atEndOfDay()
+    tomorrow = now.atEndOfTomorrow()
+    thisWeek = now.atEndOfWeek()
+    nextWeek = now.atEndOfWeek().advance(day: 1).atEndOfWeek()
     time     = task.get 'time'
 
     if task.get('overdue') || time.isToday()

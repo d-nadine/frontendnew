@@ -4,22 +4,17 @@ Radium.ClockController = Ember.ObjectController.extend
 
   now: Ember.computed.alias('model')
 
-  beginningOfDay: (->
+  beginningOfDay: Ember.computed 'model', ->
     @get('model').atBeginningOfDay()
-  ).property('model')
 
-  endOfDay: (->
+  endOfDay: Ember.computed 'model', ->
     @get('model').atEndOfDay()
-  ).property('model')
 
-  endOfTomorrow: (->
+  endOfTomorrow: Ember.computed 'model', ->
     @get('model').advance(day: 1).atEndOfDay()
-  ).property('model')
 
-  endOfThisWeek: (->
+  endOfThisWeek: Ember.computed 'model', ->
     @get('model').atEndOfWeek()
-  ).property('model')
 
-  endOfNextWeek: (->
+  endOfNextWeek: Ember.computed ->
     @get('model').atEndOfWeek().advance(day: 1).atEndOfWeek()
-  ).property()

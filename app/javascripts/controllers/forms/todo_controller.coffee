@@ -12,11 +12,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
       if @get('isFinished') && @get('hasBufferedChanges')
         timer = setInterval =>
-
-          @set 'isFinishing', true
-          @trigger('animateFinish')
+          @send 'completeFinish'
           clearInterval timer
-        , 4000
+        , 2000
 
         @set 'timer', timer
       else
@@ -27,22 +25,32 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       false
 
     completeFinish: ->
-      @set("isFinishing", false)
+      model = @get('model')
+      user = model.get('user')
+      reference = model.get('reference')
+      currentPath = @get('controllers.application.currentPath')
+      store = @get('store')
+      ele = Ember.$("[data-model='#{model.constructor}'][data-id='#{model.get('id')}']")
 
-      @applyBufferedChanges()
+      finish = ->
+        model.set('isFinished', true)
 
-      @get('model').one 'didUpdate', ->
-        if @get('controllers.application.currentPath') != 'user.index'
-          @get('user')?.reload()
+        model.one 'didUpdate', ->
+          if currentPath != 'user.index'
+            user?.reload()
 
-        unless reference = @get('reference')
-          return
+          unless reference
+            return
 
-        reference.reload()
+          reference.reload()
 
-      @get('store').commit()
+        store.commit()
 
-      @discardBufferedChanges()
+      unless ele.length
+        return send()
+
+      ele.fadeOut ->
+        finish()
 
     submit: ->
       @set 'isSubmitted', true
@@ -100,10 +108,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       @send 'submit'
 
   timer: null
-  isFinishing: false
 
-  cantFinish: Ember.computed 'isDisabled', 'isNew', 'isFinishing', ->
-    @get('isDisabled') || @get('isNew') || @get('isFinishing')
+  cantFinish: Ember.computed 'isDisabled', 'isNew', ->
+    @get('isDisabled') || @get('isNew')
 
   isValid: Ember.computed 'description.length', 'finishBy', 'user', 'model.submitForm', ->
     return if Ember.isEmpty(@get('description').trim())
