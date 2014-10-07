@@ -1,5 +1,4 @@
 Radium.UserController = Radium.ObjectController.extend
-  needs: ['accountSettings']
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
   compactFormButtons: true
   loadedPages: [1]

@@ -22,11 +22,12 @@ Radium.ShowMoreComponent = Ember.Component.extend
       options = {
         url: url
         page: metadata.page + 1
-        callback: (metadata) =>
+        pageSize: @get('pageSize')
+        callback: (metadata) ->
           parent.get('loadedPages').push(currentPage)
           model.set 'isLoading', false
           shower.send 'showMore'
-          if metadata.isLastPage || metadata.page >= metadata.totalPages
+          if (metadata.page * self.get('pageSize')) >= metadata.totalRecords
             self.set('isVisible', false)
       }
 
@@ -38,15 +39,16 @@ Radium.ShowMoreComponent = Ember.Component.extend
       # hacky but something weird is happening with the metadata
       # it appears that the metadata is shared with the whole type
       # and does not reset unless the model is reloaded
-      if @get('currentPage') == 1 && @get('model.length') < @get('pageSize')
-        @set 'isVisible', false
+      if @get('currentPage') == 1
+        visibility = @get('model.length') > @get('pageSize')
+        @set 'isVisible', visibility
         return
 
       unless metadata = @get('model.metadata')
         @set 'isVisible', false
         return
 
-      isVisible = metadata.totalPages > 1
+      isVisible = (metadata.page * @get('pageSize')) <= metadata.totalRecords
 
       @set('isVisible', isVisible)
 
@@ -59,7 +61,5 @@ Radium.ShowMoreComponent = Ember.Component.extend
 
     @send 'setVisibility'
 
-  pagingAvailable: ( ->
-
+  pagingAvailable: Ember.observer 'model.metadata', 'model.metadata.isLastPage', ->
     @send 'setVisibility'
-  ).observes('model.metadata', 'model.metadata.isLastPage')

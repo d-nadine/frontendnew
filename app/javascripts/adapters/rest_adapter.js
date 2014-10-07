@@ -129,7 +129,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         self = this;
 
     this.ajax(url, "GET", {
-      data: {page: options.page || 1}
+      data: {page: options.page}
     }).then(function(json) {
       var data = record.get('_data'),
         ids = [],
