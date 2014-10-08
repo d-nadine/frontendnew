@@ -2,9 +2,7 @@ Ember.Application.initializer
   name: 'adapterUrl'
   after: 'store'
   initialize: (container, application) ->
-    application.set('cookieDomain', '.radiumcrm.com');
-
-    application.set('intercomAppId', "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf")
+    application.set('cookieDomain', '.radiumcrm.com')
 
     store = container.lookup('store:main')
 
@@ -26,5 +24,3 @@ Ember.onerror = (e) ->
 
   console.log e.message
   console.log e.stack
-
-

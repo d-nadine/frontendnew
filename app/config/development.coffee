@@ -2,8 +2,6 @@ Ember.Application.initializer
   name: 'adapterUrl'
   after: 'store'
   initialize: (container, application) ->
-    application.set('intercomAppId', '31e29cpv')
-
     store = container.lookup('store:main')
 
     Ember.assert 'store found in adapterUrl initializer', store
