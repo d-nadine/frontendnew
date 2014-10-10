@@ -22,17 +22,17 @@
       {{/if}}
     </div>
   </li>
-  {{#each notification in controller}}
-    {{#with notification}}
-      {{#if notification.isLoaded}}
+  {{#if controller.length}}
+    {{#rd-lazy-each content=controller endInSight="loadNotifications" height=500 rowHeight=120 autoHeight=true}}
+      {{#if isLoaded}}
         {{renderNotification "notification"}}
       {{else}}
         {{partial 'is_loading'}}
       {{/if}}
-    {{/with}}
+    {{/rd-lazy-each}}
   {{else}}
     <div class="text-center">
       No notifications
     </div>
-  {{/each}}
+ {{/if}}
 </ul>

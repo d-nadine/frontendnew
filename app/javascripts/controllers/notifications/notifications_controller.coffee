@@ -4,6 +4,9 @@ Radium.NotificationsController = Radium.ArrayController.extend
   needs: ['messagesSidebar']
   isDeleting: false
   actions:
+    loadNotifications: ->
+      @dataset.expand()
+
     deleteAllNotifications: ->
       return unless @get('model.length')
 
@@ -48,3 +51,8 @@ Radium.NotificationsController = Radium.ArrayController.extend
   itemController: 'notificationsItem'
 
   drawerOpen: false
+
+  setup: ( ->
+    @dataset = Radium.InfiniteDataset.create
+      type: Radium.Notification
+  ).on('init')
