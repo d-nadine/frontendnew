@@ -193,6 +193,26 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     return this._super.apply(this, arguments);
   },
 
+  queryEmailRecords: function(store, type, query, recordArray, base){
+    if(query.name === "reply_thread") {
+      var root = this.rootForType(type),
+          adapter = this,
+          url = this.url + '/email_replies/' + query.emailId;
+
+      delete query.name;
+      delete query.emailId;
+
+      return this.ajax(url, "GET", {
+        data: query
+      }).then(function(json){
+        adapter.didFindQuery(store, type, json, recordArray);
+      }).then(null, DS.rejectionHandler);
+    }else {
+      var args = Array.prototype.slice.call(arguments, 0, -1);
+      base.apply(this, args);
+    }
+  },
+
   queryUserRecords: function(store, type, query, recordArray, base){
     if(query.name === "me"){
       var adapter = this;

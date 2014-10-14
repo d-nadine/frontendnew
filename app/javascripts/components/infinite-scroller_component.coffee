@@ -1,14 +1,14 @@
 Radium.InfiniteScrollerComponent = Ember.Component.extend
-  didInsertElement: ->
-    @_super.apply this, arguments
+  setup: ( ->
     @setupInfiniteScrollingListener()
+  ).on 'didInsertElement'
 
   setupInfiniteScrollingListener: ->
     @addObserver 'isAtBottom', this, 'didScroll'
 
-  willDestroyElement: ->
-    @_super.apply this, arguments
+  teardown: (->
     @removeObserver 'isAtBottom', this, 'didScroll'
+  ).on 'willDestroyElement'
 
   didScroll: ->
     return unless @isScrolledToTheBottom()

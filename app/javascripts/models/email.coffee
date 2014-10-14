@@ -13,7 +13,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   ccUsers: DS.hasMany('Radium.User')
   bccContacts: DS.hasMany('Radium.Contact')
   bccUsers: DS.hasMany('Radium.User')
-  replies: DS.hasMany('Radium.Email', inverse: null)
 
   subject: DS.attr('string')
   message: DS.attr('string')

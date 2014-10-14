@@ -5,7 +5,7 @@ Radium.InfiniteScrollControllerMixin = Ember.Mixin.create
 
       @set('isLoading', true)
 
-      page = @get('page') + 1
+      page = (@get('page') || 1) + 1
 
       @set('page', page)
 

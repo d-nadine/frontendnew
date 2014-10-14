@@ -55,12 +55,7 @@ Radium.MessagesRoute = Radium.Route.extend
       unless item
         return @transitionTo 'emails.empty', folder
 
-      route = unless item.get('threadCount')
-                'emails.show'
-              else
-                'emails.thread'
-
-      @transitionTo route, folder, item
+      @transitionTo 'emails.thread', folder, item
 
     selectSearchScope: (item) ->
       @controllerFor('messages').set 'selectedSearchScope', "Search #{item.title}"

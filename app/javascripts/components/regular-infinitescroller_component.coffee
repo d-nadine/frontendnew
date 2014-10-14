@@ -1,6 +1,10 @@
 Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.extend
   setupInfiniteScrollingListener: ->
-    $(window).on 'scroll', @didScroll.bind(this)
+    $(window).on 'scroll.regularScroller', @didScroll.bind(this)
+
+  teardown: ( ->
+    $(window).off 'scroll.regularScroller'
+  ).on 'willDestroyElement'
 
   isScrolledToTheBottom: ->
     return if @dontScroll()
