@@ -50,12 +50,18 @@ Radium.MessagesRoute = Radium.Route.extend
       @transitionTo "messages", name
 
     selectItem: (item) ->
-      folder = @controllerFor('messages').get('folder')
+      messagesController = @controllerFor('messages')
+
+      folder = messagesController.get('folder')
 
       unless item
         return @transitionTo 'emails.empty', folder
 
-      @transitionTo 'emails.thread', folder, item
+      folder = messagesController.get('folder')
+
+      route = messagesController.get('nextRoute')
+
+      @transitionTo route, folder, item
 
     selectSearchScope: (item) ->
       @controllerFor('messages').set 'selectedSearchScope', "Search #{item.title}"
@@ -193,8 +199,10 @@ Radium.MessagesIndexRoute = Radium.Route.extend
 
     return unless transition.targetName == "messages.index"
 
+    messagesController = @controllerFor 'messages'
+
     unless model.get('length')
-      folder = @controllerFor('messages').get('folder') || 'inbox'
+      folder = messagesController.get('folder') || 'inbox'
       @transitionTo 'emails.empty', folder
       return
 
@@ -203,15 +211,8 @@ Radium.MessagesIndexRoute = Radium.Route.extend
     unless item
       return @transitionTo 'emails.empty', folder
 
-    # FIXME: we should be able to call
-    # @send 'selectItem', item
-    # in a future version of ember??
-    # to remove this duplication
-    folder = @controllerFor('messages').get('folder')
+    folder = messagesController.get('folder')
 
-    route = unless item.get('threadCount')
-              'emails.show'
-            else
-              'emails.thread'
+    route = messagesController.get('nextRoute')
 
     @transitionTo route, folder, item

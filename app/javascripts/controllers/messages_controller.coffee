@@ -18,6 +18,17 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     { title: 'Scheduled', name: 'scheduled', icon: 'clock' }
   ]
 
+  nextRoute: Ember.computed 'threadRoute', ->
+    if @get('threadRoute')
+      'emails.thread'
+    else
+      'emails.show'
+
+  threadRoute: Ember.computed 'folder', ->
+    @get('folder') in ['radium', 'inbox']
+
+  showRoute: Ember.computed.not 'threadRoute'
+
   onPoll: ->
     currentPath = @get('currentPath')
 
