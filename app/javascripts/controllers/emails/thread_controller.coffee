@@ -33,7 +33,7 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
   selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
   pageSize: 7
   hasReplies: true
-  sortedReplies: Ember.computed.sort 'model', (left, right) ->
+  sortedReplies: Ember.computed.sort '@this.@each.model', (left, right) ->
     a = left.get('sentAt')
     b = right.get('sentAt')
     Ember.DateTime.compare b, a

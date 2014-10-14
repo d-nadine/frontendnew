@@ -103,7 +103,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
     if folder == "radium"
       user_id: @get('currentUser.id')
-      radium_only: true
+        tracked_only: true
       page: 1
       page_size: pageSize
     else

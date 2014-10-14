@@ -75,7 +75,7 @@ Radium.MessagesRoute = Radium.Route.extend
     archive: (item) ->
       return if item.get('isArchived')
 
-      @send 'removeItem', item, 'archive'
+      @send 'recalculateModel', item, 'archive'
 
       foldersIcon = $('.email-folders')
 
@@ -86,7 +86,59 @@ Radium.MessagesRoute = Radium.Route.extend
       , 3000
 
     delete: (item) ->
-      @send 'removeItem', item, 'delete'
+      @send 'recalculateModel', item, 'delete'
+
+    recalculateModel: (item, action) ->
+      messagesController = @controllerFor 'messages'
+
+      if messagesController.get('showRoute')
+        return @send('removeItem', item, action)
+
+      threadController = @controllerFor('emailsThread')
+
+      replies = threadController.get('sortedReplies')
+
+      if replies.get('length') == 1
+        return @send('removeItem', item, action)
+
+      callback = =>
+        threadController.get('model').removeObject(item)
+
+        messagesController.get('model').removeObject item
+
+        if item == messagesController.get('selectedContent')
+          nextItem = threadController.objectAt(1)
+        else
+          nextItem = threadController.get('firstObject')
+
+        if action == 'delete'
+          @send 'notificationDelete', item
+
+          item.deleteRecord()
+          updateEvent = 'didDelete'
+        else
+          item.set 'archived', true
+          updateEvent = 'didUpdate'
+
+        item.one updateEvent, =>
+          @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+
+        item.one 'becameInvalid', ->
+          sidebarController.set 'isLoading', false
+
+        item.one 'becameError', ->
+          sidebarController.set 'isLoading', false
+
+        @get('store').commit()
+
+        return unless item.get('isDirty')
+
+        if action == 'delete'
+          @send 'flashSuccess', 'Email deleted'
+        else
+          @send 'flashSuccess', 'Email archived'
+
+      @send 'animateDelete', item, callback, '.messages-list'
 
     removeItem: (item, action) ->
       callback = =>
