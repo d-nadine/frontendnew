@@ -102,14 +102,14 @@ Radium.MessagesRoute = Radium.Route.extend
         return @send('removeItem', item, action)
 
       callback = =>
-        threadController.get('model').removeObject(item)
+        isSelectedContent = (item == messagesController.get('selectedContent'))
 
-        messagesController.get('model').removeObject item
+        isFirstInThread = (item == threadController.get('firstObject'))
 
-        if item == messagesController.get('selectedContent')
-          nextItem = threadController.objectAt(1)
-        else
-          nextItem = threadController.get('firstObject')
+        index = replies.indexOf item
+
+        messagesController.removeObject(item)
+        threadController.removeObject(item)
 
         if action == 'delete'
           @send 'notificationDelete', item
@@ -121,7 +121,12 @@ Radium.MessagesRoute = Radium.Route.extend
           updateEvent = 'didUpdate'
 
         item.one updateEvent, =>
-          @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+          if isSelectedContent && isFirstInThread
+            nextItem = threadController.get('firstObject')
+            @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+            messagesController.get('model').insertAt(0, nextItem)
+          else
+            @refresh()
 
         item.one 'becameInvalid', ->
           sidebarController.set 'isLoading', false
