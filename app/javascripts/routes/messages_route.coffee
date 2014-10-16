@@ -57,7 +57,7 @@ Radium.MessagesRoute = Radium.Route.extend
       unless item
         return @transitionTo 'emails.empty', folder
 
-        folder = messagesController.get('folder')
+      folder = messagesController.get('folder')
 
       route = messagesController.get('nextRoute')
 
@@ -90,6 +90,9 @@ Radium.MessagesRoute = Radium.Route.extend
 
     recalculateModel: (item, action) ->
       messagesController = @controllerFor 'messages'
+      sidebarController = @controllerFor 'messagesSidebar'
+
+      fromSidebar = $(event.target).parent().hasClass('on-sidebar')
 
       if messagesController.get('showRoute')
         return @send('removeItem', item, action)
@@ -119,18 +122,28 @@ Radium.MessagesRoute = Radium.Route.extend
           updateEvent = 'didUpdate'
 
         item.one updateEvent, =>
-          nextItem = threadController.get('firstObject')
-
           if isSelectedContent
+            currentUser = @controllerFor('currentUser').get('model')
+
+            predicate = (email) ->
+              email.get('sender') != currentUser
+
+            nextItem = threadController.find predicate
+
+            return unless nextItem
+
             messagesController.get('model').insertAt(0, nextItem)
             @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+            return
 
-          # @refresh()
+          @refresh() if fromSidebar
 
         item.one 'becameInvalid', ->
+          item.set 'isTransitioning', false
           sidebarController.set 'isLoading', false
 
         item.one 'becameError', ->
+          item.set 'isTransitioning', false
           sidebarController.set 'isLoading', false
 
         @get('store').commit()
@@ -142,7 +155,7 @@ Radium.MessagesRoute = Radium.Route.extend
         else
           @send 'flashSuccess', 'Email archived'
 
-      if isSelectedContent
+      if isSelectedContent || fromSidebar
         @send 'animateDelete', item, callback, '.messages-list'
       else
         callback()
