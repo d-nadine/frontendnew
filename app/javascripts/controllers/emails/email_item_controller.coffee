@@ -98,7 +98,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     else
       model
 
-  todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
+  todoFormDefaults: Ember.computed 'email', 'tomorrow', ->
     reference: @get('email')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
@@ -118,7 +118,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     invitations: Ember.A()
 
   callFormDefaults: Ember.computed 'model', 'tomorrow', 'contact', ->
-    reference: @get('model')
+    reference: @get('email')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     contact: @get('contact')
