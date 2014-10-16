@@ -39,11 +39,10 @@ Radium.EmailNavComponent = Ember.Component.extend
       else
         nextIndex = if forward then (index + 1) else (index - 1)
 
-      unless next = emailCoords[nextIndex]
-        return if @get('allLoaded')
-
+      if (emailCoords.length > 5) && (nextIndex == (emailCoords.length - 2))
         @sendAction 'loadMore'
 
+      unless next = emailCoords[nextIndex]
         return
 
       ele = $(next.selector)

@@ -1,1 +1,1 @@
-Radium.EmailsThreadView = Radium.View.extend(Radium.ScrollTopMixin)
+Radium.EmailsThreadView = Radium.View.extend()

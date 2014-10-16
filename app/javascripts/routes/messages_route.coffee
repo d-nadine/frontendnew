@@ -99,16 +99,17 @@ Radium.MessagesRoute = Radium.Route.extend
 
       threadController = @controllerFor('emailsThread')
 
-      replies = threadController.get('sortedReplies')
+      isFirstInThread = threadController.get('firstObject') == item
 
-      if replies.get('length') == 1
-        return @send('removeItem', item, action)
+      if isFirstInThread
+        replies = threadController.get('sortedReplies')
+
+        if replies.get('length') == 1
+          return @send('removeItem', item, action)
 
       isSelectedContent = (item == messagesController.get('selectedContent'))
 
       callback = =>
-        index = replies.indexOf item
-
         messagesController.removeObject(item)
         threadController.removeObject(item)
 
@@ -136,7 +137,13 @@ Radium.MessagesRoute = Radium.Route.extend
             @transitionTo "emails.thread", messagesController.get("folder"), nextItem
             return
 
-          @refresh() if fromSidebar
+          return unless fromSidebar
+
+          sidebarController = @controllerFor('messagesSidebar')
+
+          sidebarController.send 'reset'
+
+          sidebarController.get('container').lookup('route:messages').refresh()
 
         item.one 'becameInvalid', ->
           item.set 'isTransitioning', false
