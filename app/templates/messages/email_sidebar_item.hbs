@@ -1,8 +1,12 @@
 <div class="message-item-avatar pull-left">
+  {{#if threadIsLoading}}
+    <img src="/images/loading/turningArrow.gif"/>
+  {{else}}
   {{#if sender.isLoaded}}
     {{avatar sender style="medium"}}
   {{else}}
     {{avatar sender style="medium"}}
+  {{/if}}
   {{/if}}
 </div>
 <div class="clearfix message-item-details">

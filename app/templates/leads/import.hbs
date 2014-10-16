@@ -89,7 +89,7 @@
         <div class="button-row">
           <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
             {{#if isSaving}}
-              <img src="/images/ajax-loader.gif"/> <span class="muted">Importing</span>
+              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Importing</span>
             {{else}}
               <i class="ss-standard ss-plus"></i> Import
             {{/if}}

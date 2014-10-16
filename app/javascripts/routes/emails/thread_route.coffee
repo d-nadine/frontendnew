@@ -2,6 +2,7 @@ require 'routes/emails/base_show_route'
 
 Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
   afterModel: (model, transition) ->
+    model.set 'isTransitioning', true
     controller = @controllerFor('emailsThread')
     controller.set 'isLoading', true
     controller.set 'allLoaded', false
@@ -43,6 +44,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
       controller.set 'isLoading', false
       controller.set 'allLoaded', true
       controller.set 'hasReplies', false
+      model.set 'isTransitioning', false
       return
 
     replies.forEach (reply) ->
@@ -54,6 +56,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
 
         if controller.get('model.length') >= replies.get('length') || controller.get('model.length') == controller.get('pageSize')
           controller.set 'isLoading', false
+          model.set 'isTransitioning', false
 
           controller.set('allLoaded', controller.get('model.length') < controller.get('pageSize'))
 

@@ -1,6 +1,8 @@
 <div class="email-history">
   {{#if isLoading}}
-    {{partial 'is_loading'}}
+    <div class="email-nav">
+      {{partial 'is_loading'}}
+    </div>
   {{else}}
     {{email-nav emails=sortedReplies isVisible=hasReplies loadMore='showMore' isLoading=isLoading}}
   {{/if}}

@@ -57,7 +57,7 @@ Radium.MessagesRoute = Radium.Route.extend
       unless item
         return @transitionTo 'emails.empty', folder
 
-      folder = messagesController.get('folder')
+        folder = messagesController.get('folder')
 
       route = messagesController.get('nextRoute')
 
@@ -101,11 +101,9 @@ Radium.MessagesRoute = Radium.Route.extend
       if replies.get('length') == 1
         return @send('removeItem', item, action)
 
+      isSelectedContent = (item == messagesController.get('selectedContent'))
+
       callback = =>
-        isSelectedContent = (item == messagesController.get('selectedContent'))
-
-        isFirstInThread = (item == threadController.get('firstObject'))
-
         index = replies.indexOf item
 
         messagesController.removeObject(item)
@@ -121,12 +119,13 @@ Radium.MessagesRoute = Radium.Route.extend
           updateEvent = 'didUpdate'
 
         item.one updateEvent, =>
-          if isSelectedContent && isFirstInThread
-            nextItem = threadController.get('firstObject')
-            @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+          nextItem = threadController.get('firstObject')
+
+          if isSelectedContent
             messagesController.get('model').insertAt(0, nextItem)
-          else
-            @refresh()
+            @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+
+          # @refresh()
 
         item.one 'becameInvalid', ->
           sidebarController.set 'isLoading', false
@@ -143,7 +142,10 @@ Radium.MessagesRoute = Radium.Route.extend
         else
           @send 'flashSuccess', 'Email archived'
 
-      @send 'animateDelete', item, callback, '.messages-list'
+      if isSelectedContent
+        @send 'animateDelete', item, callback, '.messages-list'
+      else
+        callback()
 
     removeItem: (item, action) ->
       callback = =>
@@ -163,7 +165,7 @@ Radium.MessagesRoute = Radium.Route.extend
           item.deleteRecord()
           updateEvent = 'didDelete'
         else
-          item.set 'archived', true
+          item.set 'folder', 'archive'
           updateEvent = 'didUpdate'
 
         item.one updateEvent, =>
@@ -173,9 +175,11 @@ Radium.MessagesRoute = Radium.Route.extend
           @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
 
         item.one 'becameInvalid', ->
+          item.set 'isTransitioning', false
           sidebarController.set 'isLoading', false
 
         item.one 'becameError', ->
+          item.set 'isTransitioning', false
           sidebarController.set 'isLoading', false
 
         @get('store').commit()

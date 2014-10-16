@@ -53,12 +53,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
       parentController = @get('parentController')
 
-      if parentController instanceof Radium.EmailThreadItemController
-        if item != parentController.get('selectedEmail') && action == 'delete'
-          parentController.send 'deleteEmail', item
-          return false
-
-      @send action, item
+      @send action, item, action
 
     cancelCheckForResponse: (email) ->
       email.set 'checkForResponse', null
@@ -142,14 +137,4 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   needs: ['messages', 'deals']
   hideUploader: true
-
-  archiveEnabled: Ember.computed 'controllers.messages.folder', 'model', 'parentController.selectedEmail', ->
-    return if @get('controllers.messages.folder') == 'archive'
-
-    parentController = @get('parentController')
-
-    return if parentController instanceof Radium.EmailThreadItemController &&
-                parentController.get('selectedEmail') != @get('model.model')
-
-    true
-
+  archiveEnabled: Radium.computed.notEqual 'controllers.messages.folder', 'archive'

@@ -1,6 +1,6 @@
 {{#unless currentUser.initialMailImported}}
   <div class="alert alert-info initial-importing text-center">
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
-    <p><img src="/images/ajax-loader.gif"/> {{currentUser.emailsImported}}% of your emails have been imported&hellip;</p>
+    <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.emailsImported}}% of your emails have been imported&hellip;</p>
   </div>
 {{/unless}}

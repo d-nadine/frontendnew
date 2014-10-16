@@ -2,9 +2,12 @@ Radium.EmailsEmptyController = Radium.ObjectController.extend
   needs: ['messages']
   actions:
     transitionToEmail: ->
-      email = @get('controllers.messages.firstObject')
+      messagesController = @get('controllers.messages')
+      email = messagesController.get('firstObject')
 
-      @transitionToRoute 'emails.show', @get('folder'), email
+      nextRoute = messagesController.get('nextRoute')
+
+      @transitionToRoute nextRoute, @get('folder'), email
 
   currentPath: Ember.computed.alias 'controllers.application.currentPath'
   folder: Ember.computed.alias 'controllers.messages.folder'

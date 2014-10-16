@@ -41,7 +41,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')
 
-  isArchived: Ember.computed.equal 'folder', 'archived'
+  isArchived: Ember.computed.equal 'folder', 'archive'
 
   archived: DS.attr('boolean')
 

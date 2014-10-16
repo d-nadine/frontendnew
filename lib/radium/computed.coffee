@@ -10,6 +10,10 @@ a_slice = Array.prototype.slice
 
 Radium.computed = {}
 
+Radium.computed.notEqual = (dependentKey, value) ->
+  Ember.computed dependentKey, (key, value) ->
+    @get(dependentKey) != value
+
 Radium.computed.isToday = (dependentKey) ->
   Ember.computed dependentKey, (key) ->
     @get(dependentKey).isToday()

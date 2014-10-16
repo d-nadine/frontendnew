@@ -9,7 +9,7 @@
 {{#if isSyncing}}
   <div class="text-center">
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
-    <p><img src="/images/ajax-loader.gif"/> {{currentUser.emailsImported}}% complete.&hellip;</p>
+    <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.emailsImported}}% complete.&hellip;</p>
     <p><strong>Status</strong> {{currentUser.syncState}}&hellip;</p>
   </div>
 {{/if}}

@@ -7,7 +7,7 @@
         </button>
         <div class="import-switch">
           <strong>Track all new mail automatically
-          {{#if isSaving}}<img src="/images/ajax-loader.gif"/>{{/if}}</strong>
+          {{#if isSaving}}<img src="/images/loading/ajax-loader.gif"/>{{/if}}</strong>
           {{toggle-switch checked=account.importedContactsGlobal action="switchTrackAllContacts" dontPropagate=true}}
        </div>
       {{/if}}

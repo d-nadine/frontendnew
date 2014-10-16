@@ -49,7 +49,7 @@ Radium.AutocompleteCombobox = Radium.Combobox.extend
       <div class="btn-group controlbox-dropdown-group">
         <button class="btn controlbox-dropdown" tabindex="-1" disabled="disabled">
           {{#if view.isLoading}}
-            <img src="/images/ajax-loader.gif"/>
+            <img src="/images/loading/ajax-loader.gif"/>
           {{else}}
             <i class="ss-standard ss-dropdown"></i>
           {{/if}}

@@ -41,14 +41,8 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
         return if currentPath == 'messages.bulk_actions'
         @transitionToRoute 'messages.bulk_actions'
       else if currentPath == 'messages.bulk_actions'
-        if email = @get('controllers.emailsShow.model')
-          if !email.get('isDeleted') && !email.get('isChecked')
-            @send 'selectItem', email
-          else
-            first = model.filter(predicate)?.get('firstObject')
-            @send 'selectItem', first
-        else if discussion = @get('controllers.messagesDiscussion')
-          @send 'selectItem', discussion
+        first = model.filter(predicate)?.get('firstObject')
+        @send 'selectItem', first
 
     loadInitialPages: ->
       return if @get('searchIsActive')
@@ -75,7 +69,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
     toggleSearch: ->
       @toggleProperty 'isSearchOpen'
 
-  needs: ['messages', 'emailsShow', 'messagesDiscussion']
+  needs: ['messages', 'emailsThread']
 
   init: ->
     @_super.apply this, arguments

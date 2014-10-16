@@ -18,6 +18,9 @@
       </div>
     {{/if}}
     <h4 class="email-title">
+      <div class="pull-left sender-avatar">
+        {{avatar sender style="medium"}}
+      </div>
       {{#if subject}}
         <strong>{{subject}}</strong><br>
         <span class="sender">{{resource-link-to sender}} writes</span>

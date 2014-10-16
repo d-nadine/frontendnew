@@ -114,7 +114,7 @@
         <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action "saveAsDraft"}}>Save as draft</button>
         <button class="btn btn-success btn-large publish"  {{bind-attr disabled="isSaving"}} {{action "publish"}}>
           {{#if isSaving}}
-            <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
+            <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Saving</span>
           {{else}}
             Publish
           {{/if}}

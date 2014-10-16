@@ -106,7 +106,7 @@
           <div class="button-row">
             <a href="#" {{action "submit" target="view" bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
               {{#if isSaving}}
-                <img src="/images/ajax-loader.gif"/> <span class="muted">Saving</span>
+                <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Saving</span>
               {{else}}
                 <i class="ss-standard ss-plus"></i> Submit
               {{/if}}
