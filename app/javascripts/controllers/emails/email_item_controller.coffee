@@ -91,8 +91,15 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   todoForm: Radium.computed.newForm('todo')
 
+  email: Ember.computed 'model', ->
+    model = @get('model')
+    if model instanceof Radium.ObjectController
+      model.get('model')
+    else
+      model
+
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
-    reference: @get('model')
+    reference: @get('email')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     description: "Follow up with #{@get('model.subject')} email tomorrow."

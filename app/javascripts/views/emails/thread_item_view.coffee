@@ -4,9 +4,10 @@ Radium.ThreadItemView = Radium.View.extend
   hasScrolled: Ember.computed.alias 'parentView.hasScrolled'
   isSelected: Ember.computed.oneWay 'controller.isSelected'
   lastEmail: Ember.computed.oneWay 'controller.controllers.emailsThread.lastObject'
+  currentPage: Ember.computed.oneWay 'controller.controllers.emailsThread.page'
 
   setup: (->
-    if @get('currentEmail') == @get('lastEmail')
+    if @get('currentPage') == 1 && (@get('currentEmail') == @get('lastEmail'))
       Ember.run.scheduleOnce 'afterRender', this, 'scrollToTop'
   ).on 'didInsertElement'
 
