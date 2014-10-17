@@ -127,14 +127,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     replyForm = Radium.ReplyForm.create
       currentUser: @get('currentUser')
 
-    model = @get('model')
-
-    repliedTo = if model instanceof Ember.ObjectController
-                   model.get('model')
-                else
-                  model
-
-    replyForm.set('repliedTo', repliedTo)
+    replyForm.set('repliedTo', @get('email'))
 
     replyForm
 

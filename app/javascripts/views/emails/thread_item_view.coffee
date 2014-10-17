@@ -3,7 +3,7 @@ Radium.ThreadItemView = Radium.View.extend
   currentEmail: Ember.computed.oneWay 'controller.model'
   hasScrolled: Ember.computed.alias 'parentView.hasScrolled'
   isSelected: Ember.computed.oneWay 'controller.isSelected'
-  lastEmail: Ember.computed.oneWay 'controller.controllers.emailsThread.lastObject'
+  lastEmail: Ember.computed.oneWay 'controller.controllers.emailsThread..sortedReplies.lastObject'
   currentPage: Ember.computed.oneWay 'controller.controllers.emailsThread.page'
 
   setup: (->
@@ -12,4 +12,10 @@ Radium.ThreadItemView = Radium.View.extend
   ).on 'didInsertElement'
 
   scrollToTop: ->
-    window.scrollTo(0,0)
+    email = @get('currentEmail')
+
+    setTimeout ->
+      selector = ".email-history [data-id='#{email.get('id')}']"
+      ele = $(selector).get(0)
+      Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
+    , 200

@@ -6,7 +6,7 @@ Radium.MessagesRoute = Radium.Route.extend
         return true
 
       return true unless transition.targetName == "messages.index"
-
+  
       sidebarController = @controllerFor('messagesSidebar')
 
       existingFolder = sidebarController.get('folder')
