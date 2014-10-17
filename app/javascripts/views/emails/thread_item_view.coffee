@@ -13,14 +13,13 @@ Radium.ThreadItemView = Radium.View.extend
 
     setTimeout =>
       if @get('currentPage') == 1 && (@get('currentEmail') == @get('emailsThread.lastObject'))
-        p email.get('subject')
         selector = ".email-history [data-id='#{email.get('id')}']"
         ele = $(selector).get(0)
         Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
         return
 
-      # if email == @get('lastEmail')
-      #   $(window).on "scroll.regularScroller#{email.get('id')}", @didScroll.bind(this)
+      if email == @get('emailsThread.firstObject')
+        $(window).on "scroll.regularScroller#{email.get('id')}", @didScroll.bind(this)
     , 200
 
   didScroll: ->

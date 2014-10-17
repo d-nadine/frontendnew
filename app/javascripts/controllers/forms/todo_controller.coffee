@@ -31,6 +31,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       currentPath = @get('controllers.application.currentPath')
       store = @get('store')
       ele = Ember.$("[data-model='#{model.constructor}'][data-id='#{model.get('id')}']")
+      self = this
 
       finish = ->
         model.set('isFinished', true)
@@ -47,7 +48,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
         store.commit()
 
       unless ele.length
-        return send()
+        return self.send()
 
       ele.fadeOut ->
         finish()
