@@ -1,21 +1,31 @@
 Radium.ThreadItemView = Radium.View.extend
-  selectedEmail: Ember.computed.oneWay 'controller.selectedEmail'
   currentEmail: Ember.computed.oneWay 'controller.model'
-  hasScrolled: Ember.computed.alias 'parentView.hasScrolled'
-  isSelected: Ember.computed.oneWay 'controller.isSelected'
-  lastEmail: Ember.computed.oneWay 'controller.controllers.emailsThread..sortedReplies.lastObject'
+  emailsThread: Ember.computed.alias 'controller.controllers.emailsThread'
+
   currentPage: Ember.computed.oneWay 'controller.controllers.emailsThread.page'
 
   setup: (->
-    if @get('currentPage') == 1 && (@get('currentEmail') == @get('lastEmail'))
-      Ember.run.scheduleOnce 'afterRender', this, 'scrollToTop'
+    Ember.run.scheduleOnce 'afterRender', this, 'scrollToTop'
   ).on 'didInsertElement'
 
   scrollToTop: ->
     email = @get('currentEmail')
 
-    setTimeout ->
-      selector = ".email-history [data-id='#{email.get('id')}']"
-      ele = $(selector).get(0)
-      Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
+    setTimeout =>
+      if @get('currentPage') == 1 && (@get('currentEmail') == @get('emailsThread.lastObject'))
+        p email.get('subject')
+        selector = ".email-history [data-id='#{email.get('id')}']"
+        ele = $(selector).get(0)
+        Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
+        return
+
+      # if email == @get('lastEmail')
+      #   $(window).on "scroll.regularScroller#{email.get('id')}", @didScroll.bind(this)
     , 200
+
+  didScroll: ->
+    @get('currentEmail.subject')
+
+  teardown: ( ->
+    $(window).off "scroll.regularScroller#{email.get('id')}", @didScroll.bind(this)
+  )

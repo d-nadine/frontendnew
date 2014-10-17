@@ -36,25 +36,31 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
 
     controller.set 'isLoading', true
 
-    controller.set 'model', Ember.A([model])
-
     replies = model.get('replies')
 
     unless replies.get('length')
+      controller.set 'model', Ember.A([model])
       controller.set 'isLoading', false
       controller.set 'allLoaded', true
       controller.set 'hasReplies', false
       model.set 'isTransitioning', false
       return
 
+    models = Ember.A([model])
+
     replies.forEach (reply) ->
       observer = ->
         return unless reply.get('isLoaded')
 
         reply.removeObserver 'isLoaded', observer
-        controller.get('model').pushObject(reply)
+        models.pushObject(reply)
 
-        if controller.get('model.length') >= replies.get('length') || controller.get('model.length') == controller.get('pageSize')
+        if models.get('length') >= replies.get('length') || models.get('length') == controller.get('pageSize')
+          sorted = models.sort (a, b) ->
+            Ember.DateTime.compare a.get('sentAt'), b.get('sentAt')
+
+          controller.set 'model', sorted
+
           controller.set 'isLoading', false
           model.set 'isTransitioning', false
 

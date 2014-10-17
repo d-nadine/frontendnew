@@ -24,7 +24,8 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
         ids = content.mapProperty('id')
 
         records.toArray().forEach (record) ->
-          content.pushObject(record) unless ids.contains(record.get('id'))
+          p record.get('sentAt').toString()
+          content.insertAt(0, record) unless ids.contains(record.get('id'))
           ids.push record.get('id')
 
         @set('isLoading', false)
@@ -33,7 +34,3 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
   selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
   pageSize: 7
   hasReplies: true
-  sortedReplies: Ember.computed.sort '@this.@each.model', (left, right) ->
-    a = left.get('sentAt')
-    b = right.get('sentAt')
-    Ember.DateTime.compare b, a

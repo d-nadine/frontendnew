@@ -4,14 +4,14 @@
       {{partial 'is_loading'}}
     </div>
   {{else}}
-    {{email-nav emails=sortedReplies isVisible=hasReplies loadMore='showMore' isLoading=isLoading}}
+    {{email-nav emails=model isVisible=hasReplies loadMore='showMore' isLoading=isLoading}}
   {{/if}}
-  {{#each sortedReplies itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
+  {{#each model itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}
       {{render "emails/item" this}}
     {{else}}
       {{partial 'is_loading'}}
     {{/if}}
   {{/each}}
-  {{!regular-infinitescroller getMore='showMore' allLoaded=allLoaded isLoading=isLoading}}
+  {{forward-infinitescroller getMore='showMore' allLoaded=allLoaded isLoading=isLoading}}
 </div>

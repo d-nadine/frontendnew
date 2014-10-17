@@ -1,3 +1,5 @@
+require 'components/infinite-scroller_component'
+
 Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.extend
   setupInfiniteScrollingListener: ->
     $(window).on 'scroll.regularScroller', @didScroll.bind(this)
@@ -6,7 +8,7 @@ Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.exten
     $(window).off 'scroll.regularScroller'
   ).on 'willDestroyElement'
 
-  isScrolledToTheBottom: ->
+  shouldLoadMore: ->
     return if @dontScroll()
     distanceToViewportTop = ($(document).height() - $(window).height())
     viewPortTop = $(document).scrollTop()

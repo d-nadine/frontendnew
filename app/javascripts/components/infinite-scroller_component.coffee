@@ -11,7 +11,7 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
   ).on 'willDestroyElement'
 
   didScroll: ->
-    return unless @isScrolledToTheBottom()
+    return unless @shouldLoadMore()
 
     @loadMore()
 
@@ -22,7 +22,7 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
   dontScroll: ->
     @isDestroyed || @isDestroying || @get('allLoaded')
 
-  isScrolledToTheBottom: ->
+  shouldLoadMore: ->
     return if @dontScroll()
 
     @get('isAtBottom')

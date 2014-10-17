@@ -102,7 +102,7 @@ Radium.MessagesRoute = Radium.Route.extend
       isFirstInThread = threadController.get('firstObject') == item
 
       if isFirstInThread
-        replies = threadController.get('sortedReplies')
+        replies = threadController.get('model')
 
         if replies.get('length') == 1
           return @send('removeItem', item, action)
