@@ -5,7 +5,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
     model.set 'isTransitioning', true
     controller = @controllerFor('emailsThread')
     controller.set 'isLoading', true
-    controller.set 'allLoaded', false
+    controller.set 'allPagesLoaded', false
     controller.set 'page', 1
     controller.set 'hasReplies', true
 
@@ -41,7 +41,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
     unless replies.get('length')
       controller.set 'model', Ember.A([model])
       controller.set 'isLoading', false
-      controller.set 'allLoaded', true
+      controller.set 'allPagesLoaded', true
       controller.set 'hasReplies', false
       model.set 'isTransitioning', false
       return
@@ -64,7 +64,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
           controller.set 'isLoading', false
           model.set 'isTransitioning', false
 
-          controller.set('allLoaded', controller.get('model.length') < controller.get('pageSize'))
+          controller.set('allPagesLoaded', controller.get('model.length') < controller.get('pageSize'))
 
       if reply.get('isLoaded')
         observer()

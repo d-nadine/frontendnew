@@ -33,3 +33,7 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
   selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
   pageSize: 7
   hasReplies: true
+
+  setup: (->
+    @set 'allPagesLoaded', false
+  ).on 'init'

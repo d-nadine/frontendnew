@@ -7,8 +7,8 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
     $(window).on "scroll.regularScroller", @didScroll.bind(this)
 
   didScroll: ->
+    return if @get('controller.allPagesLoaded')
     firstInThread = @get('controller.firstObject')
-    subject = firstInThread.get('subject')
 
     selector = selector = ".email-history [data-id='#{firstInThread.get('id')}']"
     ele = $(selector)
@@ -27,16 +27,20 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
       emailCoords = @getEmailCoords(emails)
 
       unless emailCoords.length
-        return
+        return @addListener()
 
       current = emailCoords.find (coord) ->
         scrollTop >= coord.top && scrollTop <= coord.bottom
 
-      return unless current
+      unless current
+        return @addListener()
 
       index = emailCoords.indexOf current
 
       current = emailCoords[index + 1]
+
+      unless current
+        return @addListener()
 
       self = this
       observer = =>
@@ -48,9 +52,7 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
           ele = $(current.selector)
 
           onAfter = ->
-            return if self.controller.get('allPagesLoaded')
-
-            $(window).on "scroll.regularScroller", self.didScroll.bind(self)
+            self.addListener()
 
           Ember.$.scrollTo("##{ele.get(0).id}", 0, {offset: 0, onAfter: onAfter})
         , 200
