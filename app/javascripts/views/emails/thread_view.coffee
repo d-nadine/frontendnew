@@ -52,8 +52,8 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
 
             $(window).on "scroll.regularScroller", self.didScroll.bind(self)
 
-          Ember.$.scrollTo("##{ele.get(0).id}", 0, {offset: -200, onAfter: onAfter})
-        , 400
+          Ember.$.scrollTo("##{ele.get(0).id}", 0, {offset: 0, onAfter: onAfter})
+        , 200
 
       @addObserver('controller.isLoading', observer)
       @get('controller').send 'showMore'
