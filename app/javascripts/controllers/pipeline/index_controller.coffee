@@ -3,7 +3,7 @@ require 'mixins/controllers/bulk_action_controller_mixin'
 Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   Radium.BulkActionControllerMixin,
 
-  needs: ['workflowGroupItem', "pipeline"]
+  needs: ['workflowGroupItem', "pipeline", "pipelineWorkflowDeals"]
   filteredDeals: null
   searchText: Ember.computed.alias 'controllers.pipeline.searchText'
   filterStartDate: Ember.computed.alias 'controllers.pipeline.filterStartDate'
@@ -24,13 +24,13 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   total: Ember.reduceComputed "workflowDeals.@each.{status,value}",
     initialValue: 0
     addedItem: (accumulatedValue, item, changeMeta, instanceMeta) ->
-      if item.get('status') == 'lost'
+      if item.get('status') in ['lost', 'closed'] || item.get('isUnPublished')
         return accumulatedValue
 
       accumulatedValue + item.get('value')
 
     removedItem: (accumulatedValue, item, changeMeta, instanceMeta) ->
-      if item.get('status') == 'lost'
+      if item.get('status') in ['lost', 'closed'] || item.get('isUnPublished')
         return accumulatedValue
 
       accumulatedValue - item.get('value')

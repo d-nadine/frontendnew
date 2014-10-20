@@ -102,5 +102,4 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
 
     content.toArray().sort(sortFunc)
 
-  dealValues: Ember.computed.mapBy 'arrangedContent', 'value'
-  total: Ember.computed.sum 'dealValues'
+  total: Ember.computed.oneWay 'controllers.pipelineIndex.total'
