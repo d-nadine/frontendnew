@@ -1,11 +1,11 @@
 {{#if notFromUser}}
-  <div class="span2">
+  <div class="span1">
     <div class="sender-avatar">
-      {{avatar sender style="large"}}
+      {{avatar sender style="medium"}}
     </div>
   </div>
 {{/if}}
-<div {{bind-attr class=":span8 notFromUser senderIsCurrentUser"}}>
+<div {{bind-attr class=":span9 notFromUser senderIsCurrentUser"}}>
   <div {{bind-attr class=":block :email-card :message-card notFromUser"}}>
     <div class="email-header">
       <div class="pull-right email-header-actions">
@@ -105,9 +105,9 @@
     </div>
   </div>
 
+  {{#unless sender.isPersonal}}
   <div {{bind-attr class=":block :email-card :message-card notFromUser"}}>
     <div class="text-right">
-      {{#unless sender.isPersonal}}
         {{#if showFormBox}}
           <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-delete"></i> Done
@@ -127,7 +127,6 @@
             </a>
           {{/unless}}
         {{/if}}
-      {{/unless}}
     </div>
 
       {{#if hasDeal}}
@@ -154,7 +153,7 @@
         </div>
       {{/unless}}
   </div>
-
+  {{/unless}}
   {{#if showFormBox}}
     <div class="block block-connected email-item-form-box">
       {{render "form_box" formBox}}
@@ -170,9 +169,9 @@
 {{/if}}
 </div>
 {{#unless notFromUser}}
-<div class="span2">
+<div class="span1">
   <div class="sender-avatar">
-    {{avatar sender style="large"}}
+    {{avatar sender style="medium"}}
   </div>
 </div>
 {{/unless}}

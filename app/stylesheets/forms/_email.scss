@@ -1,12 +1,11 @@
 .email-history .sender-avatar .avatar {
   border-radius: 16px;
-  max-width: none;
 }
 
-.span8 {
+.span9 {
 	position: relative;
 }
-.span8.sender-is-current-user:after, .span8.sender-is-current-user:before {
+.span9.sender-is-current-user:after, .span9.sender-is-current-user:before {
 	left: 99%;
 	top: 55px;
 	border: solid transparent;
@@ -17,21 +16,21 @@
 	pointer-events: none;
 }
 
-.span8.sender-is-current-user:after {
+.span9.sender-is-current-user:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-left-color: #fff;
 	border-width: 16px;
 	margin-top: -10px;
 }
 
-.span8.sender-is-current-user:before {
+.span9.sender-is-current-user:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-left-color: #dbdbdb;
 	border-width: 16px;
 	margin-top: -10px;
 }
 
-.span8.not-from-user:after, .span8.not-from-user:before {
+.span9.not-from-user:after, .span9.not-from-user:before {
 	right: 99%;
 	top: 55px;
 	border: solid transparent;
@@ -42,13 +41,13 @@
 	pointer-events: none;
 }
 
-.span8.not-from-user:after {
+.span9.not-from-user:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #eef9ff;
 	border-width: 16px;
 	margin-top: -10px;
 }
-.span8.not-from-user:before {
+.span9.not-from-user:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #c2e1f5;
 	border-width: 16px;
@@ -129,7 +128,7 @@
   }
 
   &.not-from-user {
-    background-color: #eef9ff;
+    background-color: #fff;
   }
 }
 
