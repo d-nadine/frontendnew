@@ -3,8 +3,6 @@
     <div class="email-nav">
       {{partial 'is_loading'}}
     </div>
-  {{else}}
-    {{email-nav emails=model isVisible=hasReplies loadMore='showMore' isLoading=isLoading}}
   {{/if}}
   {{#each model itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}

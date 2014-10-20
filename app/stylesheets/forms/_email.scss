@@ -1,3 +1,60 @@
+.email-history .sender-avatar .avatar {
+  border-radius: 16px;
+  max-width: none;
+}
+
+.span8 {
+	position: relative;
+}
+.span8.sender-is-current-user:after, .span8.sender-is-current-user:before {
+	left: 99%;
+	top: 55px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.span8.sender-is-current-user:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #fff;
+	border-width: 16px;
+	margin-top: -10px;
+}
+
+.span8.sender-is-current-user:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #dbdbdb;
+	border-width: 16px;
+	margin-top: -10px;
+}
+
+.span8.not-from-user:after, .span8.not-from-user:before {
+	right: 99%;
+	top: 55px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.span8.not-from-user:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: #eef9ff;
+	border-width: 16px;
+	margin-top: -10px;
+}
+.span8.not-from-user:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #c2e1f5;
+	border-width: 16px;
+	margin-top: -10px;
+}
+
 .email-thread-item {
   margin: 0 0 40px;
 }
@@ -28,9 +85,6 @@
 }
 
 .email-item-actions {
-  border-top: 1px solid #ddd;
-  padding: 20px 10px;
-
   .block-arrow-top{
     margin-top: 35px;
   }
@@ -69,9 +123,13 @@
 
 .email-card {
   @include box-shadow(0 0 4px rgba(black, 0.1));
-
+  border-radius: 16px;
   .text {
     overflow-x: hidden;
+  }
+
+  &.not-from-user {
+    background-color: #eef9ff;
   }
 }
 
@@ -182,6 +240,11 @@
       left: 30px;
     }
     border-top: 1px solid #ddd;
+  }
+
+  &.add-deal{
+    border: 1px solid #ddd;
+    border-radius: 16px;
   }
 }
 

@@ -5,6 +5,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @toggleProperty 'showFormBox'
       return
 
+    showCommentBox: ->
+      @toggleProperty 'showCommentBox'
+      false
+
     showForm: (form) ->
       @setProperties
         showFormBox: true
@@ -82,6 +86,11 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
   showMeta : false
   currentForm: 'todo'
 
+  senderIsCurrentUser: Ember.computed 'sender', 'currentUser', ->
+    @get('currentUser') == @get('sender')
+
+  notFromUser: Ember.computed.not 'senderIsCurrentUser'
+
   formBox: Ember.computed 'todoform', 'callform', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
@@ -138,3 +147,5 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
   needs: ['messages', 'deals']
   hideUploader: true
   archiveEnabled: Radium.computed.notEqual 'controllers.messages.folder', 'archive'
+  hasComments: Ember.computed.bool 'comments.length'
+  renderComments: Ember.computed.or 'hasComments', 'showCommentBox'

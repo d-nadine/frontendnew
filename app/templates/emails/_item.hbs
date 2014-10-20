@@ -1,155 +1,178 @@
-<div class="block email-card message-card">
-  <div class="email-header">
-    <div class="pull-right email-header-actions">
-      <button class="btn btn-link muted" {{action "toggleMeta"}}>
-        <small>
-          {{emailSentAt time format="long"}}
-          {{#if showMeta}}
-            (less)
-          {{else}}
-            (more)
-          {{/if}}
-        </small>
-      </button>
+{{#if notFromUser}}
+  <div class="span2">
+    <div class="sender-avatar">
+      {{avatar sender style="large"}}
     </div>
-    {{#if isScheduled}}
-      <div class="alert alert-success">
-        Email scheduled for delivery at {{sendTimeFormatted}}.
+  </div>
+{{/if}}
+<div {{bind-attr class=":span8 notFromUser senderIsCurrentUser"}}>
+  <div {{bind-attr class=":block :email-card :message-card notFromUser"}}>
+    <div class="email-header">
+      <div class="pull-right email-header-actions">
+        <button class="btn btn-link muted" {{action "toggleMeta"}}>
+          <small>
+            {{emailSentAt time format="long"}}
+            {{#if showMeta}}
+              (less)
+            {{else}}
+              (more)
+            {{/if}}
+          </small>
+        </button>
       </div>
-    {{/if}}
-    <h4 class="email-title">
-      <div class="pull-left sender-avatar">
-        {{avatar sender style="medium"}}
-      </div>
-      {{#if subject}}
-        <strong>{{subject}}</strong><br>
-        <span class="sender">{{resource-link-to sender}} writes</span>
-      {{else}}
-        Email from <span class="sender">{{resource-link-to sender}}</span>
+      {{#if isScheduled}}
+        <div class="alert alert-success">
+          Email scheduled for delivery at {{sendTimeFormatted}}.
+        </div>
       {{/if}}
-    </h4>
+      <h4 class="email-title">
+        {{#if subject}}
+          <strong>{{subject}}</strong><br>
+          <span class="sender">{{resource-link-to sender}} writes</span>
+        {{else}}
+          Email from <span class="sender">{{resource-link-to sender}}</span>
+        {{/if}}
+      </h4>
 
-    {{#if showMeta}}
-      <div class="email-details">
-        <dl class="dl-horizontal">
-          <dt>To</dt>
-          <dd>{{list "toList"}}
-          </dd>
-          {{#if cc}}
-            <dt>CC</dt>
-            <dd>{{list "ccList"}}</dd>
-          {{/if}}
-          <dt>Time</dt>
-          <dd>{{formatDateTime time format="full"}}</dd>
-        </dl>
+      {{#if showMeta}}
+        <div class="email-details">
+          <dl class="dl-horizontal">
+            <dt>To</dt>
+            <dd>{{list "toList"}}
+            </dd>
+            {{#if cc}}
+              <dt>CC</dt>
+              <dd>{{list "ccList"}}</dd>
+            {{/if}}
+            <dt>Time</dt>
+            <dd>{{formatDateTime time format="full"}}</dd>
+          </dl>
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="content">
+      <div class="iframe-container">
+        <div {{bind-attr class="message::empty :text"}}>
+          {{htmlBodyFormatter model}}
+        </div>
       </div>
-    {{/if}}
+      {{#unless isDraft}}
+        {{partial 'emails/check_for_response'}}
+      {{/unless}}
+      {{#if attachments}}
+        <div class="clearfix email-item-actions email-item-attachments">
+          {{partial "shared/attachments"}}
+        </div>
+      {{/if}}
+
+      <div class="clearfix email-item-actions email-item-main-actions">
+        <div class="pull-right">
+        {{#unless isDraft}}
+          <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-reply"></i> Reply
+          </a>
+
+          <a {{action "toggleForwardForm"}} class="btn btn-link btn-messages-action">
+            <i class="ss-standard ss-right"></i> Forward
+          </a>
+        {{else}}
+          {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
+            <i class="ss-standard ss-write"></i> Edit
+          {{/link-to}}
+
+          <button tabindex="6" {{action "sendDraft" this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
+        {{/unless}}
+        {{#if archiveEnabled}}
+          <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
+            <i class="ss-standard ss-box"></i> Archive </a>
+        {{/if}}
+
+          <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
+            <i class="ss-symbolicons-block ss-trash"></i> Delete
+          </a>
+        </div>
+        {{#if showReplyForm}}
+          <div class="block block-arrow-top">
+            {{render "forms/reply" replyEmail}}
+          </div>
+        {{/if}}
+
+        {{#if showForwardForm}}
+          {{render "forms/forward_email" forwardEmail}}
+        {{/if}}
+      </div>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="iframe-container">
-      <div {{bind-attr class="message::empty :text"}}>
-        {{htmlBodyFormatter model}}
-      </div>
-    </div>
-    {{#unless isDraft}}
-      {{partial 'emails/check_for_response'}}
-    {{/unless}}
-    {{#if attachments}}
-      <div class="clearfix email-item-actions email-item-attachments">
-        {{partial "shared/attachments"}}
-      </div>
-    {{/if}}
-
-    <div class="clearfix email-item-actions email-item-main-actions">
-      <div class="pull-right">
-      {{#unless isDraft}}
-        <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
-          <i class="ss-standard ss-reply"></i> Reply
-        </a>
-
-        <a {{action "toggleForwardForm"}} class="btn btn-link btn-messages-action">
-          <i class="ss-standard ss-right"></i> Forward
-        </a>
-      {{else}}
-        {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
-          <i class="ss-standard ss-write"></i> Edit
-        {{/link-to}}
-
-        <button tabindex="6" {{action "sendDraft" this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
-      {{/unless}}
-      {{#if archiveEnabled}}
-        <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
-          <i class="ss-standard ss-box"></i> Archive </a>
-      {{/if}}
-
-        <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
-          <i class="ss-symbolicons-block ss-trash"></i> Delete
-        </a>
-      </div>
-
+  <div {{bind-attr class=":block :email-card :message-card notFromUser"}}>
+    <div class="text-right">
       {{#unless sender.isPersonal}}
         {{#if showFormBox}}
           <button class="btn" {{action "toggleFormBox"}}>
             <i class="ss-standard ss-delete"></i> Done
           </button>
         {{else}}
-          <button class="btn" {{action "toggleFormBox"}}>
+          {{#unless hasComments}}
+            <a class="btn btn-link btn-messages-action"  {{action "showCommentBox"}}>
+              Add Comments
+            </a>
+          {{/unless}}
+          <a class="btn btn-link btn-messages-action"  {{action "toggleFormBox"}}>
             <i class="ss-standard ss-check green"></i> Add a Follow-up Task
-          </button>
+          </a>
           {{#unless hasDeal}}
-            <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn">
+            <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn btn-link btn-messages-action">
               <i class="ss-standard ss-dollarsign green"></i> Add To Deal
             </a>
           {{/unless}}
         {{/if}}
       {{/unless}}
+    </div>
 
-      {{#if showReplyForm}}
-        <div class="block block-arrow-top">
-          {{render "forms/reply" replyEmail}}
+      {{#if hasDeal}}
+        <div class="clearfix email-item-actions email-item-related-tasks">
+          <ol class="unstyled related-tasks">
+            <li>
+              <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
+              <i class="ss-standard ss-dollarsign"></i>
+              {{#if isNew}}
+                <span class="related-task-title">{{deal.name}}</span>
+              {{else}}
+                {{#link-to 'deal' deal class="related-task-title"}}
+                  {{deal.name}}
+                {{/link-to}}
+              {{/if}}
+            </li>
+          </ol>
         </div>
       {{/if}}
 
-      {{#if showForwardForm}}
-        {{render "forms/forward_email" forwardEmail}}
-      {{/if}}
+      {{#unless sender.isPersonal}}
+        <div class="clearfix email-item-actions email-item-related-tasks">
+          {{render 'related_tasks' tasks}}
+        </div>
+      {{/unless}}
+  </div>
+
+  {{#if showFormBox}}
+    <div class="block block-connected email-item-form-box">
+      {{render "form_box" formBox}}
     </div>
+  {{/if}}
 
-    {{#if showFormBox}}
-      <div class="block block-connected email-item-form-box">
-        {{render "form_box" formBox}}
-      </div>
-    {{/if}}
+  {{#if showingAddDeal}}
+    {{add-deal parent=model}}
+  {{/if}}
 
-    {{#if hasDeal}}
-      <div class="clearfix email-item-actions email-item-related-tasks">
-        <ol class="unstyled related-tasks">
-          <li>
-            <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
-            <i class="ss-standard ss-dollarsign"></i>
-            {{#if isNew}}
-              <span class="related-task-title">{{deal.name}}</span>
-            {{else}}
-              {{#link-to 'deal' deal class="related-task-title"}}
-                {{deal.name}}
-              {{/link-to}}
-            {{/if}}
-          </li>
-        </ol>
-      </div>
-    {{else}}
-      {{#if showingAddDeal}}
-        {{add-deal parent=model}}
-      {{/if}}
-    {{/if}}
-
-    {{#unless sender.isPersonal}}
-      <div class="clearfix email-item-actions email-item-related-tasks">
-        {{render 'related_tasks' tasks}}
-      </div>
-    {{/unless}}
+{{#if renderComments}}
+  {{render 'comments' model}}
+{{/if}}
+</div>
+{{#unless notFromUser}}
+<div class="span2">
+  <div class="sender-avatar">
+    {{avatar sender style="large"}}
   </div>
 </div>
-
-{{render 'comments' model}}
+{{/unless}}
