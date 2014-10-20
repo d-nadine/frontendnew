@@ -23,8 +23,7 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
 
         ids = content.mapProperty('id')
 
-        records.toArray().forEach (record) ->
-          p record.get('sentAt').toString()
+        records.toArray().reverse().forEach (record) ->
           content.insertAt(0, record) unless ids.contains(record.get('id'))
           ids.push record.get('id')
 

@@ -1,4 +1,4 @@
-Radium.EmailNavComponent = Ember.Component.extend
+Radium.EmailNavComponent = Ember.Component.extend Radium.GetEmailCoords,
   actions:
     previous: ->
       @send 'navigate', false
@@ -7,7 +7,9 @@ Radium.EmailNavComponent = Ember.Component.extend
       @send 'navigate', true
 
     navigate: (forward) ->
-      emailCoords = @getEmailCoords()
+      emails = @get('emails')
+
+      emailCoords = @getEmailCoords(emails)
 
       unless emailCoords.length
         return
@@ -49,29 +51,3 @@ Radium.EmailNavComponent = Ember.Component.extend
       Ember.$.scrollTo("##{ele.get(0).id}", 800, {offset: -100})
 
   classNameBindings: [':email-nav']
-
-  getEmailCoords: ->
-    emails = @get('emails')
-
-    return unless emails.get('length')
-
-    coords = emails.map((email) ->
-      selector = ".email-history [data-id='#{email.get('id')}']"
-      ele = $(selector)
-      return unless ele.length
-
-      index = emails.indexOf email
-      top  = ele.offset().top
-      bottom = ele.offset().top + ele.outerHeight(true)
-
-      index: index
-      top: top
-      bottom: bottom
-      node: ele
-      selector: selector
-    ).compact()
-
-    unless coords.length == emails.get('length')
-      return []
-
-    coords
