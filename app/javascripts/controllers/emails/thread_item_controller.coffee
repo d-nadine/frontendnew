@@ -1,4 +1,4 @@
-Radium.EmailThreadItemController = Radium.ObjectController.extend
+Radium.EmailThreadItemController = Radium.ObjectController.extend Ember.Evented,
   needs: ['messages', 'emailsThread']
   selectedEmail: Ember.computed.oneWay 'controllers.messages.selectedContent'
   folder: Ember.computed.oneWay 'controllers.messages.folder'

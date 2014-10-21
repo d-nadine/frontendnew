@@ -2,6 +2,22 @@
   border-radius: 16px;
 }
 
+.span1.sender-avatar {
+
+}
+
+.span1.sender-avatar.not-user {
+  margin-left: 0;
+  margin-right: 22px;
+
+  strong a{
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+}
+
 .span9 {
 	position: relative;
 }

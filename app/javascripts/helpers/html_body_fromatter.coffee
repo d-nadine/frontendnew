@@ -21,8 +21,11 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
 
   text = text.replace(/<(a)([^>]+)>/ig,"<$1 target=\"_blank\"  $2>")
 
+  self = this
+
   Ember.run.next ->
     iFrameContainer = $(iFrameContainerSelector)
+
     $('#email-body-iframe', iFrameContainer).remove()
 
     iFrameContainer.append """
@@ -32,7 +35,11 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     $iFrame = iFrameContainer.children('iframe')
     iFrame = $iFrame.get(0)
 
-    iFrame.contentWindow.document.write text
+    frameWindow = iFrame.contentWindow
+    frameDocument = frameWindow.document
+    frameDocument.open()
+    frameDocument.write text
+    frameDocument.close()
 
     if replies = $iFrame.contents().find('.gmail_quote')
       replies.remove() if replies.length
@@ -41,5 +48,11 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     iFrame.style.height = "10px"
     iFrame.style.height = $iFrame.contents().height() + "px"
     iFrame.style.visibility = "visible"
+
+    parentController = self.get('parentController')
+
+    Ember.run.next ->
+      return unless parentController.on
+      parentController.trigger('contentLoaded')
 
   return ""

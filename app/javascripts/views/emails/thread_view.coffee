@@ -8,6 +8,8 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
 
   didScroll: ->
     return if @get('controller.allPagesLoaded')
+    return unless @get('controller.initialised')
+
     firstInThread = @get('controller.firstObject')
 
     selector = selector = ".email-history [data-id='#{firstInThread.get('id')}']"

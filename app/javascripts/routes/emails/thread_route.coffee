@@ -1,13 +1,17 @@
 require 'routes/emails/base_show_route'
 
 Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
-  afterModel: (model, transition) ->
-    model.set 'isTransitioning', true
+  beforeModel: ->
     controller = @controllerFor('emailsThread')
     controller.set 'isLoading', true
     controller.set 'allPagesLoaded', false
     controller.set 'page', 1
     controller.set 'hasReplies', true
+    controller.set 'initialised', false
+
+  afterModel: (model, transition) ->
+    model.set 'isTransitioning', true
+    controller = @controllerFor('emailsThread')
 
     pageSize = controller.get('pageSize')
     query =
@@ -43,6 +47,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
       controller.set 'isLoading', false
       controller.set 'allPagesLoaded', true
       controller.set 'hasReplies', false
+      controller.set 'page', 1
       model.set 'isTransitioning', false
       return
 

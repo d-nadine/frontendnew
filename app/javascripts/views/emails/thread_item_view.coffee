@@ -1,21 +1,23 @@
 Radium.ThreadItemView = Radium.View.extend
-  currentEmail: Ember.computed.oneWay 'controller.model'
   emailsThread: Ember.computed.alias 'controller.controllers.emailsThread'
-  currentPage: Ember.computed.oneWay 'controller.controllers.emailsThread.page'
 
   setup: (->
-    Ember.run.scheduleOnce 'afterRender', this, 'scrollToFirstEmail'
+    @get('controller').on('contentLoaded', this, 'scrollToFirstEmail')
   ).on 'didInsertElement'
 
   scrollToFirstEmail: ->
-    email = @get('currentEmail')
-    currentPage = @get('currentPage')
-
     # scroll to last email
-    setTimeout =>
-      if @get('currentPage') == 1 && (@get('currentEmail') == @get('emailsThread.lastObject'))
-        selector = ".email-history [data-id='#{email.get('id')}']"
+    parentController = @get('controller.controllers.emailsThread')
+
+    return if parentController.get('initialised')
+
+    currentPage = parentController.get('page')
+    isLast = !!(@get('controller.model') == parentController.get('lastObject'))
+    isFirstPage = !!(currentPage == 1)
+
+    if isFirstPage && isLast
+      Ember.run.next =>
+        selector = ".email-history [data-id='#{@get('controller.model.id')}']"
         ele = $(selector).get(0)
         Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
-        return
-    , 200
+        parentController.set 'initialised', true

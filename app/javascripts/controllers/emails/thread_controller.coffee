@@ -36,4 +36,5 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
 
   setup: (->
     @set 'allPagesLoaded', false
+    @set 'intialised', false
   ).on 'init'
