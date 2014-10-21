@@ -143,11 +143,9 @@
         </div>
       {{/if}}
 
-      {{#unless sender.isPersonal}}
-        <div class="clearfix email-item-actions email-item-related-tasks">
-          {{render 'related_tasks' tasks}}
-        </div>
-      {{/unless}}
+      <div class="clearfix email-item-actions email-item-related-tasks">
+        {{render 'related_tasks' tasks}}
+      </div>
   </div>
   {{/unless}}
   {{#if showFormBox}}

@@ -56,6 +56,8 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
           onAfter = ->
             self.addListener()
 
+          return onAfter() unless ele
+
           Ember.$.scrollTo("##{ele.get(0).id}", 0, {offset: 0, onAfter: onAfter})
         , 200
 
