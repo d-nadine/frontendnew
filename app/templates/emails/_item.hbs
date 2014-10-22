@@ -14,21 +14,24 @@
               (more)
             {{/if}}
           </small>
+          <div class="text-right">{{subject}}</div>
         </button>
+        {{#if notTracked}}
+        <div class="btn-group btn-add-to-radium">
+          <button class="btn btn-main btn-primary" {{action "track" sender}}>Track with Radium</button>
+        </div>
+        {{/if}}
+        {{#if isTracked}}
+        <div class="btn-group btn-add-to-radium">
+          <button class="btn btn-main btn-danger" {{action "stopTracking" sender}}>Stop Tracking</button>
+        </div>
+        {{/if}}
       </div>
       {{#if isScheduled}}
         <div class="alert alert-success">
           Email scheduled for delivery at {{sendTimeFormatted}}.
         </div>
       {{/if}}
-      <h4 class="email-title">
-        {{#if subject}}
-          <strong>{{subject}}</strong><br>
-          <span class="sender">{{resource-link-to sender}} writes</span>
-        {{else}}
-          Email from <span class="sender">{{resource-link-to sender}}</span>
-        {{/if}}
-      </h4>
 
       {{#if showMeta}}
         <div class="email-details">

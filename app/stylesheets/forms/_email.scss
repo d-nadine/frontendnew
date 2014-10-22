@@ -203,12 +203,28 @@
 .email-header {
   margin: 0 0 20px;
   padding: 0 0 20px;
-  border-bottom: 1px solid #ddd;
 }
 
 .email-header-actions {
   .close {
     float: none;
+  }
+
+  .btn-group, .btn-primary {
+    display: block;
+  }
+
+  .btn-group {
+    margin-top: 5px;
+  }
+
+  .btn-primary, .btn-danger {
+    float: right;
+    margin-bottom: 5px;
+  }
+
+  .btn-link {
+    text-align: right;
   }
 }
 

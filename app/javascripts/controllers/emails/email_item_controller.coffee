@@ -1,6 +1,33 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.EmailDealMixin,
   actions:
+    track: (contact) ->
+      @send 'changeTracking', contact, true
+
+    stopTracking: (contact) ->
+      @send 'changeTracking', contact, false
+
+    changeTracking: (contact, isPublic) ->
+      contact.set('isPublic', isPublic)
+
+      contact.one 'didUpdate', (result) =>
+        message = if isPublic
+                    "You are now tracking #{contact.get('displayName')}"
+                  else
+                    "You are no longer tracking #{contact.get('displayName')}"
+
+        @send "flashSuccess", message
+
+      contact.one 'becameInvalid', (result) =>
+        @send 'flashError', result
+        @resetModel()
+
+      contact.one 'becameError', (result) =>
+        @send 'flashError', "an error has occurred."
+        @resetModel()
+
+      @get('store').commit()
+
     toggleFormBox: ->
       @toggleProperty 'showFormBox'
       return
@@ -85,6 +112,20 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   showMeta : false
   currentForm: 'todo'
+
+  isTracked: Ember.computed 'sender', 'sender.isPublic', ->
+    sender = @get('sender')
+
+    return false unless sender instanceof Radium.Contact
+
+    sender.get('isPublic')
+
+  notTracked: Ember.computed 'sender', 'sender.isPublic', ->
+    sender = @get('sender')
+
+    return false unless sender instanceof Radium.Contact
+
+    not sender.get('isPublic')
 
   senderIsCurrentUser: Ember.computed 'sender', 'currentUser', ->
     @get('currentUser') == @get('sender')
