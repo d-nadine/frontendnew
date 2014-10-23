@@ -1,0 +1,1 @@
+Radium.ConversationsRoute = Radium.Route.extend()

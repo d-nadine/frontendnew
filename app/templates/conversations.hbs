@@ -1,0 +1,113 @@
+<div class="conversations-container row-fluid">
+  <div class="conversations-sidebar span2">
+    <div id="totals" class="group">
+      <p>My Inbox</p>
+      <div class="item active">
+        <span class="lbl">Incoming</span>
+        <span class="badge">1132</span>
+      </div>
+      <div class="item">
+        <span class="lbl">Waiting for Reply</span>
+        <span class="badge">11</span>
+      </div>
+      <div class="item">
+        <span class="lbl">Send Later</span>
+        <span class="badge">12</span>
+      </div>
+      <div class="item">
+        <span class="lbl">Replied To</span>
+      </div>
+      <div id="archived" class="item">
+        <span class="lbl">Archived</span>
+      </div>
+      <div id="ignored" class="item">
+        <span class="lbl">Ignored</span>
+      </div>
+    </div>
+  </div>
+  <div class="conversations-table">
+    <div class="toolbar">
+      <div class="left">
+        <a href="#" class="btn">Compose</a>
+        <div class="btn-group">
+          <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Actions <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="#">Compose</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Track</a></li>
+            <li><a href="#">Archive</a></li>
+            <li><a href="#">Ignore</a></li>
+            <li><a href="#">Delete</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Assign To</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#"><img src="images/profile/sami.jpg"> Sami</a>
+                </li>
+                <li>
+                  <a href="#"><img src="images/profile/paul.jpg"> Paul</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <a href="#" class="list"><i class="ss-standard ss-list"></i></a>
+        <a href="#" class="chat"><i class="ss-standard ss-chat"></i></a>
+        <input type="text" placeholder="Search">
+      </div>
+    </div>
+    <table class="convo">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox"></th>
+          <th>Contact</th>
+          <th>Assigned To</th>
+          <th>Follow-up</th>
+          <th>Message</th>
+          <th>Received</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="check"><input type="checkbox"></td>
+          <td class="contact">
+            <i class="ss-standard ss-user"></i>
+            <a href="#">amy@yahoo.com</a>
+          </td>
+          <td class="assign">
+            <div class="btn-group">
+              <a href="#" data-toggle="dropdown" class="assignto">
+                <img src="images/profile/me.jpg">
+                <span class="to">Me</span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                  <a href="#" value="Me"><img src="images/profile/me.jpg"> Me</a></li>
+                  <li>
+                    <a href="#" value="Sami"><img src="images/profile/sami.jpg"> Sami</a>
+                  </li>
+                  <li>
+                    <a href="#" value="Paul"><img src="images/profile/paul.jpg"> Paul</a>
+                  </li>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <span class="follow-yes">Yes, no reply</span>
+          </td>
+          <td>Test Subject</td>
+          <td>Today</td>
+          <td class="choose">
+            <a href="#">Track</a>
+            <span> | </span>
+            <a href="#">Ignore</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
