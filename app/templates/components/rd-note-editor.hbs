@@ -1,8 +1,9 @@
-<div {{action "edit"}}>
+<div class="editable-body" {{action "edit"}}>
   <div class="editable-indicator">
     <i class="ss-standard ss-write"></i> click to edit
   </div>
-  {{note.user.name}}: {{rd-conversation-input value=buffer.body editable=isEditing focus=hasFocus}}
+  <div class="editable-name">{{note.user.name}}:</div>
+  {{rd-conversation-input value=buffer.body editable=isEditing focus=hasFocus}}
 </div>
 <div class="actions">
   <a class="cancel" {{action "cancel"}}>cancel</a>

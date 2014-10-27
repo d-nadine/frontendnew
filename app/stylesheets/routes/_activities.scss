@@ -10,10 +10,12 @@
 }
 
 .activity-icon {
-  margin: 0 0 0 10px;
+  margin: 10px 0 0 10px;
   color: #cecece;
 }
-
+.activity .timestamp {
+    margin-top: 10px;
+}
 .activity .timestamp time {
   color: $muted;
 }

@@ -1,4 +1,6 @@
 .rd-note-editor {
+  padding-left: 38px;
+
   a.cancel, .save, .delete {
     cursor: default;
     opacity: 0;
@@ -15,16 +17,33 @@
     text-align: right;
     margin-top: 5px;
   }
+  .editable-name {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .editable-body {
+    position: relative;
+  }
   .editable-indicator {
     position: absolute;
-    right: 100px;
+    right: -115px;
+    top: 1px;
     opacity: 0;
     transition: .25s;
+  }
+  .editable-indicator:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
   &:hover .editable-indicator {
     opacity: 1;
   }
   &:hover.is-editing .editable-indicator {
     opacity: 0;
+  }
+  .rd-conversation-input {
+    line-height: 1.55;
+    font-size: 15px;
+    margin-top: 10px;
   }
 }
