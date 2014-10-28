@@ -7,7 +7,7 @@
   {{#if error}}
     {{partial 'exceeded_subscription_plan_error'}}
   {{/if}}
-  {{input value=newUserEmail class="input-xlarge" placeholder="Invite a member by email to use Radium" action="inviteUser"}}
+  {{input value=newUserEmail class="input-xlarge invite-team" placeholder="Invite a member by email to use Radium" action="inviteUser"}}
   <button class="btn btn-success" {{bind-attr disabled="controller.isDisabled"}} {{action "inviteUser"}}>
     Invite
   </button>

@@ -144,7 +144,6 @@
       {{#unless userIsCurrentUser}}
         <button class="btn btn-danger btn-large btn-block" {{action "confirmDeletion"}}>Delete</button>
       {{else}}
-        <br/>
         {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
       {{/unless}}
     </div>

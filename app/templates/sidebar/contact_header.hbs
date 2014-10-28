@@ -25,10 +25,18 @@
     {{/if}}
   </div>
   <div class="clearfix">
-    <h4 class="name">
-      <i class="ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
-      {{name}}
-    </h4>
+    <div class="not-editing">
+      {{#if name}}
+        <h4 class="name" placeholder="Add name">
+          <i class="ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
+          {{name}}
+        </h4>
+      {{else}}
+        <span class="empty empty-name">Add name</span>
+      {{/if}}
+    </div>
+
+
     <div class="company-title">
       <span class="title muted">{{title}}</span>
     </div>

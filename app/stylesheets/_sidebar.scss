@@ -139,6 +139,17 @@
       }
     }
   }
+
+  .form {
+    margin-bottom: 0;
+  }
+  .form-inline {
+    margin: 7px 5px;
+  }
+
+  .not-editing .empty-name {
+    line-height: 35px;
+  }
 }
 
 .sidebar-table {
@@ -325,4 +336,9 @@
 .formatted-close-date {
   width: 90%;
   float: left;
+}
+
+.invite-team {
+    width: 75%;
+    margin-right: 1%;
 }
