@@ -22,6 +22,28 @@
     }
   }
 
+  .sidebar-panel:first-of-type .sidebar-panel-content {
+    border-bottom: 0px;
+  }
+  
+  .sidebar-panel:nth-of-type(2) .sidebar-panel-content {
+    padding-top: 10px;
+  }
+  .sidebar-panel:nth-of-type(2) dt {
+    width: 30px;
+    text-align: left;
+    padding-right: 20px;
+  }
+  .sidebar-panel:nth-of-type(2) dt i {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+  }
+
+  table a {
+    text-transform: capitalize;
+  }
+
   .meta h1,
   .page-header h1{
     font-size: 26px;

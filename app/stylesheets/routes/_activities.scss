@@ -18,6 +18,7 @@
 }
 .activity .timestamp time {
   color: $muted;
+  margin-right: 10px;
 }
 
 .activity-content {
@@ -61,6 +62,7 @@
     position: relative;
     top: 10px;
     color: #468847;
+    margin-right: 10px;
   }
 }
 
