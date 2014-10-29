@@ -1,10 +1,39 @@
 .email-history .sender-avatar .avatar {
-  border-radius: 16px;
+  border-radius: 3px;
 }
 
 .span1.sender-avatar {
 
 }
+
+.iframe-container {
+    margin-bottom: 10px;
+}
+.email-options-left {
+    float: left;
+    display: inline-block;
+
+    a.btn {
+        margin-right: 15px;
+
+        i {
+            margin-right: 0;
+        }
+    }
+}
+.email-options-right {
+    display: inline-block;
+    float: right;
+    
+    a.btn {
+      margin-left: 15px;
+
+      i {
+          margin-right: 0;
+      }
+    }
+}
+
 
 .span1.sender-avatar.not-user {
   margin-left: 0;
@@ -116,7 +145,7 @@
 }
 
 .email-item-main-actions {
-  margin: 30px 0 0;
+  margin: 0px 0 0;
 }
 
 #email-body-iframe{
@@ -137,8 +166,9 @@
 }
 
 .email-card {
+  padding-bottom: 37px;
+
   @include box-shadow(0 0 4px rgba(black, 0.1));
-  border-radius: 16px;
   .text {
     overflow-x: hidden;
   }

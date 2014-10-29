@@ -65,7 +65,55 @@
         </div>
       {{/if}}
 
-      <div class="clearfix email-item-actions email-item-main-actions">
+      {{#unless sender.isPersonal}}
+      <div {{bind-attr class=":message-card notFromUser :email-options-left"}}>
+        <div>
+            {{#if showFormBox}}
+              <button class="btn" {{action "toggleFormBox"}}>
+                <i class="ss-standard ss-delete"></i> Done
+              </button>
+            {{else}}
+              {{#unless hasComments}}
+                <a class="btn btn-link btn-messages-action"  {{action "showCommentBox"}}>
+                  <i class="ss-standard ss-chat"></i> Comments
+                </a>
+              {{/unless}}
+              <a class="btn btn-link btn-messages-action"  {{action "toggleFormBox"}}>
+                <i class="ss-standard ss-check green"></i> Follow-up Task
+              </a>
+              {{#unless hasDeal}}
+                <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn btn-link btn-messages-action">
+                  <i class="ss-standard ss-dollarsign green"></i> Deal
+                </a>
+              {{/unless}}
+            {{/if}}
+        </div>
+
+          {{#if hasDeal}}
+            <div class="clearfix email-item-actions email-item-related-tasks">
+              <ol class="unstyled related-tasks">
+                <li>
+                  <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
+                  <i class="ss-standard ss-dollarsign"></i>
+                  {{#if isNew}}
+                    <span class="related-task-title">{{deal.name}}</span>
+                  {{else}}
+                    {{#link-to 'deal' deal class="related-task-title"}}
+                      {{deal.name}}
+                    {{/link-to}}
+                  {{/if}}
+                </li>
+              </ol>
+            </div>
+          {{/if}}
+
+          <div class="clearfix email-item-actions email-item-related-tasks">
+            {{render 'related_tasks' tasks}}
+          </div>
+      </div>
+      {{/unless}}
+
+      <div class="clearfix email-item-actions email-item-main-actions email-options-right">
         <div class="pull-right">
         {{#unless isDraft}}
           <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
@@ -79,7 +127,6 @@
           {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
             <i class="ss-standard ss-write"></i> Edit
           {{/link-to}}
-
           <button tabindex="6" {{action "sendDraft" this controller bubbles="false"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
         {{/unless}}
         {{#if archiveEnabled}}
@@ -91,6 +138,10 @@
             <i class="ss-symbolicons-block ss-trash"></i> Delete
           </a>
         </div>
+      </div>
+
+
+
         {{#if showReplyForm}}
           <div class="block block-arrow-top">
             {{render "forms/reply" replyEmail}}
@@ -101,56 +152,9 @@
           {{render "forms/forward_email" forwardEmail}}
         {{/if}}
       </div>
-    </div>
   </div>
 
-  {{#unless sender.isPersonal}}
-  <div {{bind-attr class=":block :email-card :message-card notFromUser"}}>
-    <div class="text-right">
-        {{#if showFormBox}}
-          <button class="btn" {{action "toggleFormBox"}}>
-            <i class="ss-standard ss-delete"></i> Done
-          </button>
-        {{else}}
-          {{#unless hasComments}}
-            <a class="btn btn-link btn-messages-action"  {{action "showCommentBox"}}>
-              Add Comments
-            </a>
-          {{/unless}}
-          <a class="btn btn-link btn-messages-action"  {{action "toggleFormBox"}}>
-            <i class="ss-standard ss-check green"></i> Add a Follow-up Task
-          </a>
-          {{#unless hasDeal}}
-            <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn btn-link btn-messages-action">
-              <i class="ss-standard ss-dollarsign green"></i> Add To Deal
-            </a>
-          {{/unless}}
-        {{/if}}
-    </div>
 
-      {{#if hasDeal}}
-        <div class="clearfix email-item-actions email-item-related-tasks">
-          <ol class="unstyled related-tasks">
-            <li>
-              <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
-              <i class="ss-standard ss-dollarsign"></i>
-              {{#if isNew}}
-                <span class="related-task-title">{{deal.name}}</span>
-              {{else}}
-                {{#link-to 'deal' deal class="related-task-title"}}
-                  {{deal.name}}
-                {{/link-to}}
-              {{/if}}
-            </li>
-          </ol>
-        </div>
-      {{/if}}
-
-      <div class="clearfix email-item-actions email-item-related-tasks">
-        {{render 'related_tasks' tasks}}
-      </div>
-  </div>
-  {{/unless}}
   {{#if showFormBox}}
     <div class="block block-connected email-item-form-box">
       {{render "form_box" formBox}}

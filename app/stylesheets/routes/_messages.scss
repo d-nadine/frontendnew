@@ -354,7 +354,7 @@ $item-border: #dddddd;
 }
 
 .btn-messages-action {
-  margin-left: 10px;
+  padding: 0px !important;
   color: #000;
   @include transition(color 0.25s);
 
