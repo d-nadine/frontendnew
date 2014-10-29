@@ -1,7 +1,6 @@
 require 'mixins/controllers/bulk_action_controller_mixin'
 
 Radium.AddressbookController = Radium.ArrayController.extend Radium.BulkActionControllerMixin,
-
   actions:
     updateTotals: ->
       Radium.AddressbookTotals.find({}).then (results) =>

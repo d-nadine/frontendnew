@@ -3,19 +3,20 @@
     <div id="totals" class="group">
       <p>My Inbox</p>
       <div class="item active">
-        <span class="lbl">Incoming</span>
-        <span class="badge">1132</span>
+        <span class="lbl">{{#link-to "conversations" "incoming"}}Incoming{{/link-to}}</span>
+        <span class="badge">{{incoming}}</span>
       </div>
       <div class="item">
-        <span class="lbl">Waiting for Reply</span>
-        <span class="badge">11</span>
+        <span class="lbl">{{#link-to "conversations" "waiting"}}Waiting for Reply{{/link-to}}</span>
+        <span class="badge">{{waiting}}</span>
       </div>
       <div class="item">
-        <span class="lbl">Send Later</span>
-        <span class="badge">12</span>
+        <span class="lbl">{{#link-to "conversations" "later"}}Send Later{{/link-to}}</span>
+        <span class="badge">{{later}}</span>
       </div>
       <div class="item">
-        <span class="lbl">Replied To</span>
+        <span class="lbl">{{#link-to "conversations" "replied"}}Replied To{{/link-to}}</span>
+        <span class="badge">{{replied}}</span>
       </div>
       <div id="archived" class="item">
         <span class="lbl">Archived</span>
@@ -42,12 +43,11 @@
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Assign To</a>
               <ul class="dropdown-menu">
+                {{#each users}}
                 <li>
-                  <a href="#"><img src="images/profile/sami.jpg"> Sami</a>
+                  <a href="#" {{action bulkAssign this}}>{{avatar this style="tiny"}}{{displayName}}</a>
                 </li>
-                <li>
-                  <a href="#"><img src="images/profile/paul.jpg"> Paul</a>
-                </li>
+                {{/each}}
               </ul>
             </li>
           </ul>
@@ -55,8 +55,8 @@
       </div>
       <div class="right">
         <a href="#" class="list"><i class="ss-standard ss-list"></i></a>
-        <a href="#" class="chat"><i class="ss-standard ss-chat"></i></a>
-        <input type="text" placeholder="Search">
+        {{#link-to "messages" "inbox" class="chat"}}<i class="ss-standard ss-chat"></i>{{/link-to}}
+        <!--<input type="text" placeholder="Search">-->
       </div>
     </div>
     <table class="convo">
@@ -66,47 +66,57 @@
           <th>Contact</th>
           <th>Assigned To</th>
           <th>Follow-up</th>
-          <th>Message</th>
+          <th>Subject</th>
           <th>Received</th>
         </tr>
       </thead>
       <tbody>
+        {{#each controller}}
         <tr>
           <td class="check"><input type="checkbox"></td>
           <td class="contact">
             <i class="ss-standard ss-user"></i>
-            <a href="#">amy@yahoo.com</a>
+            {{resource-link-to contact}}
           </td>
           <td class="assign">
             <div class="btn-group">
               <a href="#" data-toggle="dropdown" class="assignto">
-                <img src="images/profile/me.jpg">
-                <span class="to">Me</span>
+                {{avatar assignedTo style="tiny"}}
+                <span class="to">{{assignedTo.displayName}}</span>
                 <span class="caret"></span>
               </a>
+              {{#if assignees.length}}
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                {{#each assignees}}
                 <li>
-                  <a href="#" value="Me"><img src="images/profile/me.jpg"> Me</a></li>
-                  <li>
-                    <a href="#" value="Sami"><img src="images/profile/sami.jpg"> Sami</a>
-                  </li>
-                  <li>
-                    <a href="#" value="Paul"><img src="images/profile/paul.jpg"> Paul</a>
-                  </li>
+                  <a href="#" {{action assignContact contact this}}>
+                    {{avatar this style="tiny"}}{{displayName}}
+                  </a>
+                </li>
+                {{/each}}
               </ul>
+              {{/if}}
             </div>
           </td>
           <td>
-            <span class="follow-yes">Yes, no reply</span>
+            <span class="follow-yes"></span>
           </td>
-          <td>Test Subject</td>
-          <td>Today</td>
+          <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncatedSubject}}{{/link-to}}</td>
+          <td>{{ageInWords time}}</td>
           <td class="choose">
-            <a href="#">Track</a>
+            {{#unless contact.isPublic}}
+            <a {{action track contact}} href="#">Track</a>
             <span> | </span>
+            {{/unless}}
             <a href="#">Ignore</a>
           </td>
+          <td class="delete">
+            <a href="#" {{action delete this}} class="btn btn-link btn-remove-field">
+              <i class="ss-symbolicons-block ss-trash"></i>
+            </a>
+          </td>
         </tr>
+        {{/each}}
       </tbody>
     </table>
   </div>

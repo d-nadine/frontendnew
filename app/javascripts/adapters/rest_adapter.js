@@ -194,15 +194,30 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
   },
 
   queryEmailRecords: function(store, type, query, recordArray, base){
-    if(query.name === "reply_thread") {
-      var root = this.rootForType(type),
-          adapter = this,
-          url = this.url + '/email_replies/' + query.emailId;
+    var root, adapter, url;
+    if(query.name === 'reply_thread') {
+      root = this.rootForType(type);
+      adapter = this;
+      url = this.url + '/email_replies/' + query.emailId;
 
       delete query.name;
       delete query.emailId;
 
-      return this.ajax(url, "GET", {
+      return this.ajax(url, 'GET', {
+        data: query
+      }).then(function(json){
+        adapter.didFindQuery(store, type, json, recordArray);
+      }).then(null, DS.rejectionHandler);
+    }
+    else if(['incoming', 'replied', 'waiting', 'later'].contains(query.name)){
+      root = this.rootForType(type);
+      adapter = this;
+      url = this.url + '/conversations/' + query.name;
+
+      delete query.name;
+      delete query.emailId;
+
+      return this.ajax(url, 'GET', {
         data: query
       }).then(function(json){
         adapter.didFindQuery(store, type, json, recordArray);
@@ -254,6 +269,7 @@ Radium.RESTAdapter.configure('plurals',{
   user_statistics: 'user_statistics',
   billing: 'billing',
   addressbook_totals: 'addressbook_totals',
+  conversations_totals: 'conversations_totals',
   track_all_contacts: 'track_all_contacts'
 });
 

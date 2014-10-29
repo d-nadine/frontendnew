@@ -23,9 +23,7 @@ Radium.Router.map ->
       # passed with transitionTo
       @route 'sent', path: '/:email_id/sent'
 
-  @resource 'conversations', ->
-    @route 'incoming'
-    @route 'waiting'
+  @resource 'conversations', path: '/conversations/:type'
 
   @resource 'pipeline', ->
     @route 'index'
