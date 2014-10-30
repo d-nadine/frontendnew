@@ -8,7 +8,8 @@ Radium.RdLazyEachComponent = Ember.Component.extend
   classNames: ['rd-lazy-each']
 
   content: Ember.computed -> []
-  height: 600
+  autoHeight: true
+  height: 800
   rowHeight: 60
   width: null
   elementWidth: null
@@ -62,7 +63,7 @@ Radium.RdLazyEachComponent = Ember.Component.extend
 
       resizeHeight: ->
         return unless @get('autoHeight')
-        height = window.innerHeight - @$().offset().top
+        height = (window.innerHeight - @$().offset().top) + 20
         @set('lazyEach.height', height)
 
     listView.on('scrollYChanged', this, "scrollYChanged")

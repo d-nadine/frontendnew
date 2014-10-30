@@ -12,19 +12,19 @@
 </div>
 
 {{partial "addressbook/loader"}}
-<table style="width: calc(100% - 15px);">
+<table>
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
-    <th>Name</th>
+    <th class="company">Name</th>
     <th>Open Deals</th>
     <th>Assigned To</th>
   </tr>
 </table>
-{{#rd-lazy-each content=model endInSight="loadMoreCompanies" height=500 rowHeight=50}}
+{{#rd-lazy-each content=model endInSight="loadMoreCompanies" height=500 rowHeight=50 }}
   <table style="height: 50px;">
     <tr>
       <td class="row-selector">{{input type="checkbox"}}</td>
-      <td>{{#link-to 'company' this}}{{displayName}}{{/link-to}}</td>
+      <td class="company">{{#link-to 'company' this}}{{displayName}}{{/link-to}}</td>
       <td>{{openDeals.length}}</td>
       <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
     </tr>

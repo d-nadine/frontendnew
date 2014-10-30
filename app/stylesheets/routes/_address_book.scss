@@ -9,6 +9,13 @@ $body: #6e6e6e;
   @include add-blinker;
 }
 
+.addressbook-view {
+    .single-column-container {
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+}
+
 #addressbook {
   .page-header {
     min-height: 60px;
@@ -16,6 +23,10 @@ $body: #6e6e6e;
 
   .loader {
     margin-left: 54px;
+
+    span {
+      color: red;
+    }
   }
 
   table {
@@ -23,30 +34,62 @@ $body: #6e6e6e;
   }
 
   th {
-    color: rgb(118,144,170);
+    // color: rgb(118,144,170);
+    color: #3887C6 !important;
     text-align: left;
     font-weight: bold;
+    border: 2px solid transparent;
     border-bottom: 1px solid black;
 
+
+    &.row-selector input {
+      width: 15px;
+    }
+    a {
+        color: #3887C6 !important;
+    }
   }
 
 
   td {
     background-color: white;
-    border: 1px solid #f3f3f3;
+    border: 2px solid #f3f3f3;
     margin: 0 !important;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 15px;
+    color: #555;
+
+    a {
+      color: #555;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
   }
 
   td, th {
     width: 80px;
     max-width: 80px;
-    padding-left: 5px;
+    padding-left: 10px;
     height: 50px;
+
     &.row-selector {
       width: 20px;
+      padding-left: 0 !important;
+      text-align: center;
+
+      input {
+        margin-top: 0;
+      }
+    }
+    &.company {
+        font-weight: 600;
+
+    }
+    &.events {
+        max-width: 20px;
     }
   }
 

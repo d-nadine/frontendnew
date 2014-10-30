@@ -12,10 +12,10 @@
 
 {{partial "addressbook/loader"}}
 
-<table style="width: calc(100% - 15px);">
+<table>
   <tr>
     <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
-    <th>{{table-sorter heading="Name" sortOn="displayName" sort="sortContacts"}}</th>
+    <th class="company">{{table-sorter heading="Name" sortOn="displayName" sort="sortContacts"}}</th>
     <th>{{table-sorter heading="Company" sortOn="company" sort="sortContacts"}}</th>
     <th class="events">Events</th>
     <th class="inactive">Inactive</th>
@@ -28,9 +28,9 @@
   <table style="height: 50px;">
     <tr>
       <td class="row-selector">{{input type="checkbox"}}</td>
-      <td>{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
+      <td class="company">{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
       <td>{{company.name}}</td>
-      <td>{{activityCount}}</td>
+      <td class="events">{{activityCount}}</td>
       <td>{{daysInactive}}</td>
       <td>{{tasks.firstObject.displayName}}</td>
       <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
