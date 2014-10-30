@@ -12,9 +12,8 @@ Radium.CheckableMixin = Ember.Mixin.create
 
     arrangedContent.filter (item) -> item.get('isChecked')
 
-  hasCheckedContent: (->
+  hasCheckedContent: Ember.computed 'checkedContent.length', ->
     !Ember.isEmpty(@get('checkedContent'))
-  ).property('checkedContent.length')
 
   toggleChecked: ->
     allChecked = @get('checkedContent.length') == @get('length')
@@ -22,6 +21,5 @@ Radium.CheckableMixin = Ember.Mixin.create
     @get('content').forEach (item) ->
       item.set 'isChecked', !allChecked
 
-  allCheckedDidChange: (  ->
+  allCheckedDidChange: Ember.observer 'allChecked', ->
     @toggleChecked()
-  ).observes('allChecked')

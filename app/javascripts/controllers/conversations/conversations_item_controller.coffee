@@ -3,12 +3,12 @@ Radium.ConversationsItemController = Radium.ObjectController.extend
   incoming: Ember.computed.equal 'conversationType', 'incoming'
 
   contact: Ember.computed 'sender', 'conversationType', 'toList.[]', ->
-    if @get('incoming')
+    if @get('sender').constructor is Radium.Contact
       return @get('sender')
 
     return unless @get('toList.length')
 
-    contact = @get('toList.firstObject')
+    contact = @get('toList').find (r) -> r.constructor is Radium.Contact
 
     return contact if contact.get('isLoaded')
 

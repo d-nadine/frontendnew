@@ -46,10 +46,14 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a href="#">Compose</a></li>
             <li class="divider"></li>
-            <li><a href="#">Track</a></li>
-            <li><a href="#">Archive</a></li>
-            <li><a href="#">Ignore</a></li>
-            <li><a href="#">Delete</a></li>
+            <li><a href="#" {{action "trackAll"}}>Track</a></li>
+            {{#unless isArchived}}
+              <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+            {{/unless}}
+            {{#unless isIgnored}}
+              <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
+            {{/unless}}
+            <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
             <li class="divider"></li>
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Assign To</a>
@@ -73,7 +77,9 @@
     <table class="convo">
       <thead>
         <tr>
-          <th class="check"><input type="checkbox"></th>
+          <th class="check">
+            {{partial 'forms/check_all'}}
+          </th>
           <th>Contact</th>
           <th>Assigned To</th>
           <th>Follow-up</th>
@@ -90,12 +96,14 @@
           </tr>
         {{else}}
           {{#each controller}}
-          <tr data-model="Radium.Email" {{bind-attr data-id=id}}>
-            <td class="check"><input type="checkbox"></td>
+          <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
+            <td class="check">
+              {{check-box checked=isChecked class="checker-block"}}
+            </td>
             <td class="contact">
               <i class="ss-standard ss-user"></i>
               {{#if contact}}
-                {{#resource-link-to contact}}{{truncate contact.displayName length="30"}}{{/resource-link-to}}
+                {{#resource-link-to contact}}{{truncate contact.displayName length="20"}}{{/resource-link-to}}
               {{else}}
                   Loading.....
               {{/if}}
@@ -125,7 +133,7 @@
             <td>
               <span class="follow-yes"></span>
             </td>
-            <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="25"}}{{/link-to}}</td>
+            <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
             <td>{{ageInWords time}}</td>
             <td class="choose text-center">
               {{#unless contact.isPublic}}

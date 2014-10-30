@@ -95,10 +95,9 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @_super.apply this, arguments
     @set 'assignToUser', @get('currentUser')
 
-  isLost: ( ->
+  isLost: Ember.computed 'changedStatus', ->
     return unless @get('changedStatus')
     @get('changedStatus').toLowerCase() == 'lost'
-  ).property('changedStatus')
 
   activeStatuses: Ember.computed 'statuses.[]', 'title', ->
     @get('statuses').reject (status) => status.capitalize() == @get('title')
@@ -109,49 +108,42 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   changeStatusForm: Radium.computed.newForm('changeStatus')
 
-  changeStatusFormDefaults: ( ->
+  changeStatusFormDefaults: Ember.computed 'currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status', 'lostBecause', ->
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     deals: @get('checkedContent')
-    finishBy: @get('tomorrow')
     status: @get('changedStatus')
     todo: @get('statusTodo')
     lostBecause: @get('lostBecause')
-  ).property('currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status', 'lostBecause')
 
   reassignForm: Radium.computed.newForm('reassign')
 
-  reassignFormDefaults: ( ->
+  reassignFormDefaults: Ember.computed 'assignToUser', 'checkedContent.[]', 'reassignTodo', 'tomorrow', ->
     assignToUser: @get('assignToUser')
     selectedContent: @get('checkedContent')
     todo: @get('reassignTodo')
     finishBy: @get('tomorrow')
-  ).property('assignToUser', 'checkedContent.[]', 'reassignTodo', 'tomorrow')
 
   todoForm: Radium.computed.newForm('todo')
 
-  showFormArea: ( ->
+  showFormArea: Ember.computed 'hasCheckedContent', 'hasActiveForm', ->
     @get('hasCheckedContent') && @get('hasActiveForm')
-  ).property('hasCheckedContent', 'hasActiveForm')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'checkedContent.[]', 'tomorrow', ->
     description: null
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('checkedContent')
-  ).property('checkedContent.[]', 'tomorrow')
 
   callForm: Radium.computed.newForm('call', canChangeContact: false)
 
-  callFormDefaults: (->
+  callFormDefaults: Ember.computed 'model.[]', 'tomorrow', ->
     description: null
-    reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('checkedContent')
-  ).property('model.[]', 'tomorrow')
 
-  newEmail: (->
+  newEmail: Ember.computed ->
     Radium.EmailForm.create
       showAddresses: true
       showSubject: true
@@ -163,4 +155,3 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       bcc: []
       files: Ember.A()
       attachedFiles: Ember.A()
-  ).property()

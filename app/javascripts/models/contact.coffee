@@ -75,6 +75,10 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   isUpdating: Ember.computed.equal 'updateStatus', 'updating'
 
+  track: ->
+    @set('isPublic', true)
+    @set('status', 'pipeline')
+
   clearRelationships: ->
     @get('deals').compact().forEach (deal) ->
       deal.unloadRecord()

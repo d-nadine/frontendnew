@@ -151,6 +151,27 @@
   line-height: 30px;
 }
 
+.convo tr {
+  border: {
+    right: 1px solid transparent;
+    left: 1px solid transparent;
+  }
+
+  &.is-checked {
+    border: {
+      right-color: $link;
+      left-color: $link;
+    }
+
+    & td,
+    &:hover td {
+      background: $calendar-active-bg;
+    }
+  }
+}
+
+
+
 .convo tr tbody td{
   border-top: 1px solid #ddd;
 }
