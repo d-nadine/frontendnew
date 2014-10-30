@@ -2,32 +2,43 @@
   <div class="conversations-sidebar span2">
     <div id="totals" class="group">
       <p>My Inbox</p>
-      <div class="item active">
+      <div {{bind-attr class=":item isIncoming:active"}}>
         <span class="lbl">{{#link-to "conversations" "incoming"}}Incoming{{/link-to}}</span>
-        <span class="badge">{{incoming}}</span>
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{incoming}}</span>
+        {{/if}}
       </div>
-      <div class="item">
+      <div {{bind-attr class=":item isWaiting:active"}}>
         <span class="lbl">{{#link-to "conversations" "waiting"}}Waiting for Reply{{/link-to}}</span>
-        <span class="badge">{{waiting}}</span>
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{waiting}}</span>
+        {{/if}}
       </div>
-      <div class="item">
+      <div {{bind-attr class=":item isLater:active"}}>
         <span class="lbl">{{#link-to "conversations" "later"}}Send Later{{/link-to}}</span>
-        <span class="badge">{{later}}</span>
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{later}}</span>
+        {{/if}}
       </div>
-      <div class="item">
+      <div {{bind-attr class=":item isReplied:active"}}>
         <span class="lbl">{{#link-to "conversations" "replied"}}Replied To{{/link-to}}</span>
-        <span class="badge">{{replied}}</span>
       </div>
-      <div id="archived" class="item">
+      <div id="archived" {{bind-attr class=":item isArchived:active"}}>
         <span class="lbl">Archived</span>
       </div>
-      <div id="ignored" class="item">
+      <div id="ignored" {{bind-attr class=":item isIgnored:active"}}>
         <span class="lbl">Ignored</span>
       </div>
     </div>
   </div>
-  <div class="conversations-table">
-    <div class="toolbar">
+  <div class="conversations-table span9">
+    <div class="toolbar span10">
       <div class="left">
         <a href="#" class="btn">Compose</a>
         <div class="btn-group">
@@ -71,52 +82,75 @@
         </tr>
       </thead>
       <tbody>
-        {{#each controller}}
-        <tr>
-          <td class="check"><input type="checkbox"></td>
-          <td class="contact">
-            <i class="ss-standard ss-user"></i>
-            {{resource-link-to contact}}
-          </td>
-          <td class="assign">
-            <div class="btn-group">
-              <a href="#" data-toggle="dropdown" class="assignto">
-                {{avatar assignedTo style="tiny"}}
-                <span class="to">{{assignedTo.displayName}}</span>
-                <span class="caret"></span>
-              </a>
-              {{#if assignees.length}}
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                {{#each assignees}}
-                <li>
-                  <a href="#" {{action assignContact contact this}}>
-                    {{avatar this style="tiny"}}{{displayName}}
-                  </a>
-                </li>
-                {{/each}}
-              </ul>
+        {{#if isLoading}}
+          <tr>
+            <td colspan="10" class="text-center">
+              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+            </td>
+          </tr>
+        {{else}}
+          {{#each controller}}
+          <tr data-model="Radium.Email" {{bind-attr data-id=id}}>
+            <td class="check"><input type="checkbox"></td>
+            <td class="contact">
+              <i class="ss-standard ss-user"></i>
+              {{#if contact}}
+                {{#resource-link-to contact}}{{truncate contact.displayName length="30"}}{{/resource-link-to}}
+              {{else}}
+                  Loading.....
               {{/if}}
-            </div>
-          </td>
-          <td>
-            <span class="follow-yes"></span>
-          </td>
-          <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncatedSubject}}{{/link-to}}</td>
-          <td>{{ageInWords time}}</td>
-          <td class="choose">
-            {{#unless contact.isPublic}}
-            <a {{action track contact}} href="#">Track</a>
-            <span> | </span>
-            {{/unless}}
-            <a href="#">Ignore</a>
-          </td>
-          <td class="delete">
-            <a href="#" {{action delete this}} class="btn btn-link btn-remove-field">
-              <i class="ss-symbolicons-block ss-trash"></i>
-            </a>
-          </td>
-        </tr>
-        {{/each}}
+            </td>
+            <td class="assign">
+              <div class="btn-group">
+                <a href="#" data-toggle="dropdown" class="assignto">
+                  {{avatar assignedTo style="tiny"}}
+                  <span class="to">{{assignedTo.displayName}}</span>
+                  {{#if assignees.length}}
+                    <span class="caret"></span>
+                  {{/if}}
+                </a>
+                {{#if assignees.length}}
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  {{#each assignees}}
+                  <li>
+                    <a href="#" {{action assignContact contact this}}>
+                      {{avatar this style="tiny"}}{{displayName}}
+                    </a>
+                  </li>
+                  {{/each}}
+                </ul>
+                {{/if}}
+              </div>
+            </td>
+            <td>
+              <span class="follow-yes"></span>
+            </td>
+            <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="25"}}{{/link-to}}</td>
+            <td>{{ageInWords time}}</td>
+            <td class="choose text-center">
+              {{#unless contact.isPublic}}
+              <a {{action "track" contact}} href="#">Track</a>
+              <span> | </span>
+              {{/unless}}
+              <a href="#" {{action "ignore" this}}>Ignore</a>
+            </td>
+            <td class="delete">
+              <a href="#" {{action "archive" this}} class="btn btn-link btn-remove-field">
+                <i class="ss-standard ss-box"></i>
+              </a>
+            </td>
+            <td class="delete">
+              <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
+                <i class="ss-symbolicons-block ss-trash"></i>
+              </a>
+            </td>
+          </tr>
+          {{else}}
+            <tr>
+              <td colspan="10" class="text-center">No Results</td>
+            </tr>
+          {{/each}}
+        {{/if}}
       </tbody>
     </table>
   </div>

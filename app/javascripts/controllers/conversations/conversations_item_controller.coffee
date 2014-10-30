@@ -1,20 +1,31 @@
 Radium.ConversationsItemController = Radium.ObjectController.extend
   conversationType: Ember.computed.oneWay 'parentController.conversationType'
   incoming: Ember.computed.equal 'conversationType', 'incoming'
-  truncatedSubject: Ember.computed 'subject', ->
-    max = 25
-    subject = @get('subject')
-    if subject.length < max
-      subject
-    else
-      "#{subject.substring(0, max)}..."
 
-  contact: Ember.computed 'sender', 'conversationType', ->
+  contact: Ember.computed 'sender', 'conversationType', 'toList.[]', ->
     if @get('incoming')
-      @get('sender')
+      return @get('sender')
+
+    return unless @get('toList.length')
+
+    contact = @get('toList.firstObject')
+
+    return contact if contact.get('isLoaded')
+
+    self = this
+
+    observer = ->
+      return unless contact.get('isLoaded')
+
+      contact.removeObserver "isLoaded", observer
+
+      self.set 'contact', contact
+
+    contact.addObserver 'isLoaded', observer
 
   assignedTo: Ember.computed 'contact', 'contact.user', ->
     @get('contact.user')
 
   assignees: Ember.computed 'parentController.users.[]', 'assignedTo', ->
-    @get('parentController.users').reject (user) => user == @get('assignedTo')
+    @get('parentController.users').mapProperty('model').reject (user) =>
+      user == @get('assignedTo')
