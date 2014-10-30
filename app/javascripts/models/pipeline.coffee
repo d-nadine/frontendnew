@@ -16,7 +16,7 @@ Radium.Pipeline = Ember.ArrayProxy.extend Radium.GroupableWithDefaults,
     statuses = @get('settings.dealStates')
 
     statuses.forEach (state) =>
-      prop = state.dasherize()
+      prop = state.dasherize().toLowerCase()
 
       unless @get(prop)
         Ember.defineProperty this, prop, Ember.computed "#{prop}.[]", ->

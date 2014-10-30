@@ -76,6 +76,8 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
   dateFilteredContent: Ember.computed 'content.[]', 'filterStartDate', 'filterEndDate', ->
     content = @get('content')
 
+    return Ember.A() unless @get('content.length')
+
     content.filter (item) =>
       return true unless @get("filterStartDate")? and @get("filterEndDate")?
       closeDate = item.get("expectedCloseDate._ms")

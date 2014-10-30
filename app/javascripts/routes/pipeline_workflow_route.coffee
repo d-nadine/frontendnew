@@ -7,10 +7,10 @@ Radium.PipelineWorkflowRoute = Radium.PipelineBaseRoute.extend Radium.BulkAction
     @_super.apply this, arguments
     pipeline = @modelFor('pipeline')
 
-    prop = state.dasherize()
+    prop = state.dasherize().toLowerCase()
 
     unless pipeline.get prop
-      Ember.defineProperty pipeline, state, Ember.computed "#{prop}", ->
+      Ember.defineProperty pipeline, prop, Ember.computed "#{prop}", ->
         Radium.Deal.filter (deal) ->
           deal.get('status') == state
 
