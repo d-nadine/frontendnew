@@ -40,11 +40,11 @@
   <div class="conversations-table span9">
     <div class="toolbar span10">
       <div class="left">
-        <a href="#" class="btn">Compose</a>
+        {{#link-to "emails.new" "inbox" class="btn"}}Compose{{/link-to}}
         <div class="btn-group">
           <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Actions <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><a href="#">Compose</a></li>
+            <li><a href="#" {{action "emailAll"}}>Compose</a></li>
             <li class="divider"></li>
             {{#unless isIgnored}}
               <li><a href="#" {{action "trackAll"}}>Track</a></li>

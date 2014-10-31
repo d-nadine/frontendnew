@@ -212,7 +212,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored'].contains(query.name)){
       root = this.rootForType(type);
       adapter = this;
-      url = this.url + '/conversations/' + query.name;
+      url = this.url + '/conversations/' + query.name + '?page_size=15';
 
       delete query.name;
       delete query.emailId;

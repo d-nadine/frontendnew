@@ -67,3 +67,11 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
     controller.set 'model', model
     controller.set 'isLoading', false
     controller.send 'updateTotals'
+
+  deactivate: ->
+    @_super.apply this, arguments
+    controller = @controllerFor 'conversations'
+    return unless controller.get('hasCheckedContent')
+
+    controller.get('checkedContent').forEach (email) ->
+      email.set 'isChecked', false
