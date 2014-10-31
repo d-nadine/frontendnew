@@ -13,21 +13,59 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       content = @get('content')
 
       content.setEach 'isChecked', !@get('hasCheckedContent')
+      false
 
-    trackAll: ->
+    assignAll: (user) ->
       self = this
 
       bulkActionDetail =
         action: 'didUpdate'
         actionFunc: (item) ->
           contact = item.get('contact')
-          contact.track()
+          contact.set 'user', user
           return contact
         endFunc: ->
-          self.send 'flashSuccess', "You are now tracking the selected contacts"
+          self.send 'flashSuccess', "The selected contacts have been assigned to #{user.get('displayName')}"
 
-      @completeBulkAction(bulkActionDetail).then (result) ->
-        result()
+      @completeAction(bulkActionDetail)
+      false
+
+    assignAll: (user) ->
+      self = this
+
+      bulkActionDetail =
+        action: 'didUpdate'
+        actionFunc: (item) ->
+          contact = item.get('contact')
+          contact.set 'user', user
+          return contact
+        endFunc: ->
+          self.send 'flashSuccess', "The selected contacts have been assigned to #{user.get('displayName')}"
+
+      @completeAction(bulkActionDetail)
+      false
+
+    ignoreAll: ->
+      self = this
+      ignored = not @get('isIgnored')
+
+      message = if ignored
+                  "The selected contacts mail is now ignored."
+                else
+                  "The selected contacts mail is no longer ignored."
+
+      bulkActionDetail =
+        action: 'didUpdate'
+        actionFunc: (item) ->
+          contact = item.get('contact')
+          contact.set 'ignored', ignored
+          return contact
+        endFunc: ->
+          self.send 'flashSuccess', message
+          self.container.lookup('route:conversations').refresh()
+
+      @completeAction(bulkActionDetail)
+      false
 
     archiveAll: ->
       self = this
@@ -41,8 +79,8 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           self.send 'flashSuccess', 'You have archived all the selected emails'
           self.container.lookup('route:conversations').refresh()
 
-      @completeBulkAction(bulkActionDetail).then (result) ->
-        result()
+      @completeAction(bulkActionDetail)
+      false
 
     deleteAll: ->
       self = this
@@ -56,8 +94,53 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           self.send 'flashSuccess', 'You have deleted all the deleted emails'
           self.container.lookup('route:conversations').refresh()
 
-      @completeBulkAction(bulkActionDetail).then (result) ->
-        result()
+      @completeAction(bulkActionDetail)
+      false
+
+    assignContact: (contact, user) ->
+      contact.set 'user', user
+
+      contact.one 'didUpdate', =>
+        @send 'flashSuccess', "#{contact.get('displayName')} has been assigned to #{user.get('displayName')}"
+
+      contact.one 'becameInvalid', =>
+        @send 'flashError', contact
+
+      contact.one 'bemameError', =>
+        @send 'an error has occurred and the assignment was not completed'
+
+      @get('store').commit()
+      false
+
+    ignore: (contact, user) ->
+      ignored = not @get('isIgnored')
+
+      contact.set 'ignored', ignored
+
+      contact.one 'didUpdate', =>
+        message = unless ignored
+                    "#{contact.get('displayName')}'s mail is now ignored."
+                  else
+                    "#{contact.get('displayName')}'s mail is no longer ignored."
+
+        @send 'flashSuccess', "#{contact.get('displayName')}'s mail is now ignored."
+        @get('conversationsRoute').refresh()
+
+      contact.one 'becameInvalid', =>
+        @send 'flashError', contact
+
+      contact.one 'bemameError', =>
+        @send 'an error has occurred and the assignment was not completed'
+
+      @get('store').commit()
+      false
+
+
+  completeAction: (bulkActionDetail) ->
+    @completeBulkAction(bulkActionDetail).then((successFunc) ->
+      successFunc()
+    ).catch (errorFunc) ->
+      errorFunc()
 
   completeBulkAction: (bulkActionDetail) ->
     self = this
@@ -85,6 +168,12 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           item.one bulkActionDetail.action, ->
             finish()
 
+          item.one 'becameInvalid', ->
+            reject(-> self.send 'flashError', item)
+
+          item.one 'becameError', ->
+            reject(-> self.send 'flashError', "An error has occurred and the operation could not be completed.")
+
       self.get('store').commit()
 
   needs: ['users']
@@ -99,3 +188,6 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   isIgnored: Ember.computed.equal "conversationType", "ignored"
 
   users: Ember.computed.alias 'controllers.users'
+
+  conversationsRoute: Ember.computed 'container', ->
+    @container.lookup("route:conversations")

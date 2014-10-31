@@ -7,9 +7,8 @@ Radium.ReassignForm = Radium.Form.extend
     description: @get('todo')
   ).property().volatile()
 
-  isValid: ( ->
+  isValid: Ember.computed 'assignToUser', ->
     @get('assignToUser')
-  ).property('assignToUser')
 
   reset: ->
     @_super.apply this, arguments

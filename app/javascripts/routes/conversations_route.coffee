@@ -14,6 +14,13 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
       @send 'removeItem', 'ignore', email
       false
 
+    # FIXME: we should not have to handle this in the route
+    # but as it is in a users loop, the call gets routed here
+    # from conversations.hbs
+    assignAll: (user) ->
+      @controllerFor('conversations').send 'assignAll', user
+      false
+
     removeItem: (action, email) ->
       controller = @controllerFor 'conversations'
 

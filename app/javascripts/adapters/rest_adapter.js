@@ -209,7 +209,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         adapter.didFindQuery(store, type, json, recordArray);
       }).then(null, DS.rejectionHandler);
     }
-    else if(['incoming', 'replied', 'waiting', 'later'].contains(query.name)){
+    else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored'].contains(query.name)){
       root = this.rootForType(type);
       adapter = this;
       url = this.url + '/conversations/' + query.name;

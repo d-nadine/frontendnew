@@ -30,10 +30,10 @@
         <span class="lbl">{{#link-to "conversations" "replied"}}Replied To{{/link-to}}</span>
       </div>
       <div id="archived" {{bind-attr class=":item isArchived:active"}}>
-        <span class="lbl">Archived</span>
+        <span class="lbl">{{#link-to "conversations" "archived"}}Archived{{/link-to}}</span>
       </div>
       <div id="ignored" {{bind-attr class=":item isIgnored:active"}}>
-        <span class="lbl">Ignored</span>
+        <span class="lbl">{{#link-to "conversations" "ignored"}}Ignored{{/link-to}}</span>
       </div>
     </div>
   </div>
@@ -46,12 +46,18 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a href="#">Compose</a></li>
             <li class="divider"></li>
-            <li><a href="#" {{action "trackAll"}}>Track</a></li>
+            {{#unless isIgnored}}
+              <li><a href="#" {{action "trackAll"}}>Track</a></li>
+            {{/unless}}
             {{#unless isArchived}}
-              <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+              {{#unless isIgnored}}
+                <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+              {{/unless}}
             {{/unless}}
             {{#unless isIgnored}}
               <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
+            {{else}}
+              <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
             {{/unless}}
             <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
             <li class="divider"></li>
@@ -60,7 +66,7 @@
               <ul class="dropdown-menu">
                 {{#each users}}
                 <li>
-                  <a href="#" {{action bulkAssign this}}>{{avatar this style="tiny"}}{{displayName}}</a>
+                  <a href="#" {{action "assignAll" this}}>{{avatar this style="tiny"}}{{displayName}}</a>
                 </li>
                 {{/each}}
               </ul>
@@ -121,7 +127,7 @@
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                   {{#each assignees}}
                   <li>
-                    <a href="#" {{action assignContact contact this}}>
+                    <a href="#" {{action "assignContact" controller.contact this}}>
                       {{avatar this style="tiny"}}{{displayName}}
                     </a>
                   </li>
@@ -136,17 +142,25 @@
             <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
             <td>{{ageInWords time}}</td>
             <td class="choose text-center">
-              {{#unless contact.isPublic}}
-              <a {{action "track" contact}} href="#">Track</a>
-              <span> | </span>
+              {{#unless isIgnored}}
+                {{#unless contact.isPublic}}
+                <a {{action "track" contact}} href="#">Track</a>
+                <span> | </span>
+                {{/unless}}
               {{/unless}}
-              <a href="#" {{action "ignore" this}}>Ignore</a>
+              {{#unless isIgnored}}
+                <a href="#" {{action "ignore" controller.contact}}>Ignore</a>
+              {{else}}
+                <a href="#" {{action "ignore" controller.contact}}>Stop Ignoring</a>
+              {{/unless}}
             </td>
+            {{#unless isIgnored}}
             <td class="delete">
               <a href="#" {{action "archive" this}} class="btn btn-link btn-remove-field">
                 <i class="ss-standard ss-box"></i>
               </a>
             </td>
+            {{/unless}}
             <td class="delete">
               <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
                 <i class="ss-symbolicons-block ss-trash"></i>

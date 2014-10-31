@@ -39,6 +39,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   isPublic: DS.attr('boolean')
   isPersonal: Ember.computed.not 'isPublic'
 
+  ignored: DS.attr('boolean')
+
   isExpired: Radium.computed.daysOld('createdAt', 60)
 
   latestDeal: Ember.computed 'deals', ->
