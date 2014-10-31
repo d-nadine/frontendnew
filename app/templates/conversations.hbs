@@ -96,7 +96,7 @@
       <tbody>
         {{#if isLoading}}
           <tr>
-            <td colspan="10" class="text-center">
+            <td colspan="9" class="text-center">
               <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
             </td>
           </tr>
@@ -104,7 +104,7 @@
           {{#each controller}}
           <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
             <td class="check">
-              {{check-box checked=isChecked class="checker-block"}}
+              {{input type="checkbox" checked=isChecked class="checker-block"}}
             </td>
             <td class="contact">
               <i class="ss-standard ss-user"></i>
@@ -154,13 +154,6 @@
                 <a href="#" {{action "ignore" controller.contact}}>Stop Ignoring</a>
               {{/unless}}
             </td>
-            {{#unless isIgnored}}
-            <td class="delete">
-              <a href="#" {{action "archive" this}} class="btn btn-link btn-remove-field">
-                <i class="ss-standard ss-box"></i>
-              </a>
-            </td>
-            {{/unless}}
             <td class="delete">
               <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
                 <i class="ss-symbolicons-block ss-trash"></i>
@@ -169,7 +162,7 @@
           </tr>
           {{else}}
             <tr>
-              <td colspan="10" class="text-center">No Results</td>
+              <td colspan="9" class="text-center">No Results</td>
             </tr>
           {{/each}}
         {{/if}}
