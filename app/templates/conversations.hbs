@@ -84,7 +84,7 @@
       <thead>
         <tr>
           <th class="check">
-            {{partial 'forms/check_all'}}
+            {{input type="checkbox" class="checker-block" checked=allChecked action="checkAll"}}
           </th>
           <th>Contact</th>
           <th>Assigned To</th>
@@ -141,6 +141,7 @@
             </td>
             <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
             <td>{{ageInWords time}}</td>
+            <td>{{contact.isPublic}}</td>
             <td class="choose text-center">
               {{#unless isIgnored}}
                 {{#unless contact.isPublic}}
@@ -149,9 +150,13 @@
                 {{/unless}}
               {{/unless}}
               {{#unless isIgnored}}
-                <a href="#" {{action "ignore" controller.contact}}>Ignore</a>
+                {{#unless contact.isPublic}}
+                  <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
+                {{else}}
+                  <a href="#" {{action "archive" this}}>Archive</a>
+                {{/unless}}
               {{else}}
-                <a href="#" {{action "ignore" controller.contact}}>Stop Ignoring</a>
+                <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
               {{/unless}}
             </td>
             <td class="delete">

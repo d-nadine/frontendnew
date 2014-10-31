@@ -126,30 +126,6 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       @get('store').commit()
       false
 
-    ignore: (contact, user) ->
-      ignored = not @get('isIgnored')
-
-      contact.set 'ignored', ignored
-
-      contact.one 'didUpdate', =>
-        message = unless ignored
-                    "#{contact.get('displayName')}'s mail is now ignored."
-                  else
-                    "#{contact.get('displayName')}'s mail is no longer ignored."
-
-        @send 'flashSuccess', "#{contact.get('displayName')}'s mail is now ignored."
-        @get('conversationsRoute').refresh()
-
-      contact.one 'becameInvalid', =>
-        @send 'flashError', contact
-
-      contact.one 'bemameError', =>
-        @send 'an error has occurred and the assignment was not completed'
-
-      @get('store').commit()
-      false
-
-
   completeAction: (bulkActionDetail) ->
     @completeBulkAction(bulkActionDetail).then((successFunc) ->
       successFunc()

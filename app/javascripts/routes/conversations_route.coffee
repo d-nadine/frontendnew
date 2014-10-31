@@ -10,8 +10,8 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
       @send 'removeItem', 'archive', email
       false
 
-    ignore: (email) ->
-      @send 'removeItem', 'ignore', email
+    ignore: (email, contact) ->
+      @send 'removeItem', 'ignore', email, contact
       false
 
     # FIXME: we should not have to handle this in the route
@@ -21,22 +21,32 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
       @controllerFor('conversations').send 'assignAll', user
       false
 
-    removeItem: (action, email) ->
+    removeItem: (action, email, contact) ->
       controller = @controllerFor 'conversations'
 
       callback = =>
+        finish = =>
+          @send 'flashSuccess', "email #{action}d!"
+          if action == 'archive'
+            @refresh()
+          else
+            @controllerFor('conversations').removeObject email
+
         if action == 'delete'
           @send 'notificationDelete', email
 
           email.deleteRecord()
           updateEvent = 'didDelete'
-        else
+        else if action == 'archive'
           email.set 'archived', true
           updateEvent = 'didUpdate'
+        else if action == 'ignore'
+          ignore = @controllerFor('conversations').get('isIgnored')
+          contact.set 'ignored', not ignore
+          contact.one 'didUpdate', finish
+          return @get('store').commit()
 
-        email.one updateEvent, =>
-          @send 'flashSuccess', "email #{action}d!"
-          @refresh()
+        email.one updateEvent, finish
 
         errorMessage = "an error has occurred and the email could not be #{action}d"
 
