@@ -6,4 +6,4 @@ Ember.Handlebars.registerBoundHelper 'truncate', (value, options) ->
   if value.length >= length
     Handlebars.Utils.escapeExpression "#{value.slice(0, length-3)}..."
   else
-    Handlebars.Utils.escapeExpression(value.slice(0, length))
+    Handlebars.Utils.escapeExpression(value)

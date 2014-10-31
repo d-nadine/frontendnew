@@ -40,7 +40,7 @@
   <div class="conversations-table span9">
     <div class="toolbar span10">
       <div class="left">
-        {{#link-to "emails.new" "inbox" class="btn"}}Compose{{/link-to}}
+        <a href="#" class="btn" {{action "emailAll"}}/>Compose</a>
         <div class="btn-group">
           <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Actions <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -141,7 +141,6 @@
             </td>
             <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
             <td>{{ageInWords time}}</td>
-            <td>{{contact.isPublic}}</td>
             <td class="choose text-center">
               {{#unless isIgnored}}
                 {{#unless contact.isPublic}}
