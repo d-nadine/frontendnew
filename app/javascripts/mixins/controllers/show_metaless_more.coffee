@@ -26,5 +26,10 @@ Radium.ShowMetalessMoreMixin = Ember.Mixin.create
 
         @set 'isContentLoading', false
 
+    reset: ->
+      @set('page', 1)
+      @set('allPagesLoaded', false)
+      @set('isLoading', false)
+
   modelQuery: (page, pageSize) ->
     throw new Error("You must provide a modelQuery method which accepts page and pageSize arguments.")

@@ -64,7 +64,9 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
   beforeModel: (transition) ->
     type = transition.params.conversations.type
     controller = @controllerFor 'conversations'
-    controller.set 'allPagesLoaded', false
+
+    controller.send 'reset'
+
     controller.set 'isLoading', true
     controller.set 'totalsLoading', true
     controller.set('conversationType', type)
