@@ -23,13 +23,17 @@
     </div>
   </li>
   {{#if controller.length}}
-    {{#rd-lazy-each content=controller endInSight="loadNotifications" height=500 rowHeight=120 autoHeight=true}}
+    {{#each controller}}
       {{#if isLoaded}}
         {{renderNotification "notification"}}
       {{else}}
         {{partial 'is_loading'}}
       {{/if}}
-    {{/rd-lazy-each}}
+    {{/each}}
+    {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
+    {{#if contentIsLoading}}
+      {{partial "is_loading"}}
+    {{/if}}
   {{else}}
     <div class="text-center">
       No notifications

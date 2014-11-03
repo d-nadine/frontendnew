@@ -1,12 +1,9 @@
-Radium.NotificationsController = Radium.ArrayController.extend
+Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetalessMoreMixin,
   sortProperties: ['time']
   sortAscending: false
   needs: ['messagesSidebar']
   isDeleting: false
   actions:
-    loadNotifications: ->
-      @dataset.expand()
-
     deleteAllNotifications: ->
       return unless @get('model.length')
 
@@ -51,8 +48,7 @@ Radium.NotificationsController = Radium.ArrayController.extend
   itemController: 'notificationsItem'
 
   drawerOpen: false
-
-  setup: ( ->
-    @dataset = Radium.InfiniteDataset.create
-      type: Radium.Notification
-  ).on('init')
+  page: 1
+  allPagesLoaded: false
+  modelQuery: (page, pageSize) ->
+    Radium.Notification.find(page: page, page_size: pageSize)

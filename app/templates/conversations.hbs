@@ -166,7 +166,6 @@
             </td>
           </tr>
         {{/each}}
-        {{log view.constructor}}
         {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
         {{#if isContentLoading}}
           <tr>
