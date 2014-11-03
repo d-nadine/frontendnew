@@ -91,93 +91,89 @@
           <th>Follow-up</th>
           <th>Subject</th>
           <th>Received</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        {{#if isLoading}}
+        {{#each controller}}
+        <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
+          <td class="check">
+            {{input type="checkbox" checked=isChecked class="checker-block"}}
+          </td>
+          <td class="contact">
+            <i class="ss-standard ss-user"></i>
+            {{#if contact}}
+              {{#resource-link-to contact}}{{truncate contact.displayName length="20"}}{{/resource-link-to}}
+            {{else}}
+                Loading.....
+            {{/if}}
+          </td>
+          <td class="assign">
+            <div class="btn-group">
+              <a href="#" data-toggle="dropdown" class="assignto">
+                {{avatar assignedTo style="tiny"}}
+                <span class="to">{{assignedTo.displayName}}</span>
+                {{#if assignees.length}}
+                  <span class="caret"></span>
+                {{/if}}
+              </a>
+              {{#if assignees.length}}
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                {{#each assignees}}
+                <li>
+                  <a href="#" {{action "assignContact" controller.contact this}}>
+                    {{avatar this style="tiny"}}{{displayName}}
+                  </a>
+                </li>
+                {{/each}}
+              </ul>
+              {{/if}}
+            </div>
+          </td>
+          <td class="follow">
+            <span class="follow-yes"></span>
+          </td>
+          <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
+          <td class="received">{{ageInWords time}}</td>
+          <td class="choose text-center">
+            {{#unless isIgnored}}
+              {{#unless contact.isPublic}}
+              <a {{action "track" contact}} href="#">Track</a>
+              <span> | </span>
+              {{/unless}}
+            {{/unless}}
+            {{#unless isIgnored}}
+              {{#unless contact.isPublic}}
+                <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
+              {{else}}
+                <a href="#" {{action "archive" this}}>Archive</a>
+              {{/unless}}
+            {{else}}
+              <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
+            {{/unless}}
+          </td>
+          <td class="delete">
+            <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
+              <i class="ss-symbolicons-block ss-trash"></i>
+            </a>
+          </td>
+        </tr>
+        {{else}}
+          <tr>
+            <td colspan="9" class="text-center">
+              No Results
+            </td>
+          </tr>
+        {{/each}}
+        {{log view.constructor}}
+        {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
+        {{#if isContentLoading}}
           <tr>
             <td colspan="9" class="text-center">
               <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
             </td>
           </tr>
-        {{else}}
-          {{#each controller}}
-          <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
-            <td class="check">
-              {{input type="checkbox" checked=isChecked class="checker-block"}}
-            </td>
-            <td class="contact">
-              <i class="ss-standard ss-user"></i>
-              {{#if contact}}
-                {{#resource-link-to contact}}{{truncate contact.displayName length="20"}}{{/resource-link-to}}
-              {{else}}
-                  Loading.....
-              {{/if}}
-            </td>
-            <td class="assign">
-              <div class="btn-group">
-                <a href="#" data-toggle="dropdown" class="assignto">
-                  {{avatar assignedTo style="tiny"}}
-                  <span class="to">{{assignedTo.displayName}}</span>
-                  {{#if assignees.length}}
-                    <span class="caret"></span>
-                  {{/if}}
-                </a>
-                {{#if assignees.length}}
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                  {{#each assignees}}
-                  <li>
-                    <a href="#" {{action "assignContact" controller.contact this}}>
-                      {{avatar this style="tiny"}}{{displayName}}
-                    </a>
-                  </li>
-                  {{/each}}
-                </ul>
-                {{/if}}
-              </div>
-            </td>
-            <td>
-              <span class="follow-yes"></span>
-            </td>
-            <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
-            <td>{{ageInWords time}}</td>
-            <td class="choose text-center">
-              {{#unless isIgnored}}
-                {{#unless contact.isPublic}}
-                <a {{action "track" contact}} href="#">Track</a>
-                <span> | </span>
-                {{/unless}}
-              {{/unless}}
-              {{#unless isIgnored}}
-                {{#unless contact.isPublic}}
-                  <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
-                {{else}}
-                  <a href="#" {{action "archive" this}}>Archive</a>
-                {{/unless}}
-              {{else}}
-                <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
-              {{/unless}}
-            </td>
-            <td class="delete">
-              <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
-                <i class="ss-symbolicons-block ss-trash"></i>
-              </a>
-            </td>
-          </tr>
-          {{else}}
-            <tr>
-              <td colspan="9" class="text-center">No Results</td>
-            </tr>
-          {{/each}}
-          {{log view.constructor}}
-          {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
-          {{#if isContentLoading}}
-            <tr>
-              <td colspan="9" class="text-center">
-                <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
-              </td>
-            </tr>
-            {{/if}}
         {{/if}}
       </tbody>
     </table>

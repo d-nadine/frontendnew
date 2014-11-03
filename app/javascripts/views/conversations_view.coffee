@@ -13,6 +13,13 @@ Radium.ConversationsView = Radium.View.extend
 
     conversations.css 'max-height', height
 
+    headers = @$('table.convo thead th')
+    cells = conversations.find('tr:first').children()
+
+    colWidths = cells.each (index, cell) ->
+                  width = $(cell).width()
+                  $(headers[index]).width(width)
+
   atContentEnd: ->
     conversations = @$(@get('elementSelector'))
 

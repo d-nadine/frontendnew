@@ -217,8 +217,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 
       url = this.url + '/conversations/' + query.name + '?page=' + page +  '&page_size=' + pageSize;
 
-      p(url);
-
       delete query.name;
       delete query.page;
       delete query.pageSize;

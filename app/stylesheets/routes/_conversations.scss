@@ -156,6 +156,26 @@
   text-align: left;
 }
 
+.convo tbody td.contact {
+  width: 20%;
+}
+
+.convo tbody td.assign {
+  width: 18%;
+}
+
+.convo tbody td.follow {
+  width: 9%;
+}
+
+.convo tbody td.subject {
+  width: auto;
+}
+
+.convo tbody td.recieved {
+  width: 65px;
+}
+
 .convo img {
   width: 22px;
   border-radius: 4px;
