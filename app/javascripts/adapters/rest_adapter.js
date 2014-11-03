@@ -194,7 +194,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
   },
 
   queryEmailRecords: function(store, type, query, recordArray, base){
-    var root, adapter, url;
+    var root, adapter, url, page, pageSize;
     if(query.name === 'reply_thread') {
       root = this.rootForType(type);
       adapter = this;
@@ -211,11 +211,17 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     }
     else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored'].contains(query.name)){
       root = this.rootForType(type);
-      adapter = this;
-      url = this.url + '/conversations/' + query.name + '?page_size=15';
+      adapter = this,
+      page = query.page || 1,
+      pageSize = query.pageSize;
+
+      url = this.url + '/conversations/' + query.name + '?page=' + page +  '&page_size=' + pageSize;
+
+      p(url);
 
       delete query.name;
-      delete query.emailId;
+      delete query.page;
+      delete query.pageSize;
 
       return this.ajax(url, 'GET', {
         data: query

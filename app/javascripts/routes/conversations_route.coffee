@@ -70,13 +70,19 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
     type
 
   model: (params) ->
-    Radium.Email.find(name: params.type)
+    Radium.Email.find(name: params.type, pageSize: 15)
 
   setupController: (controller, model) ->
     @_super.apply this, arguments
-    controller.set 'model', model
+    controller.set 'model', model.toArray()
     controller.set 'isLoading', false
     controller.send 'updateTotals'
+
+    return unless controller.get('isIncoming')
+
+    unless controller.get 'allPagesLoaded'
+      for i in [0...2]
+        controller.send 'showMore'
 
   deactivate: ->
     @_super.apply this, arguments

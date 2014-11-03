@@ -169,6 +169,15 @@
               <td colspan="9" class="text-center">No Results</td>
             </tr>
           {{/each}}
+          {{log view.constructor}}
+          {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
+          {{#if isContentLoading}}
+            <tr>
+              <td colspan="9" class="text-center">
+                <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+              </td>
+            </tr>
+            {{/if}}
         {{/if}}
       </tbody>
     </table>

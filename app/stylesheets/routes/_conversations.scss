@@ -30,12 +30,6 @@
   border-radius: 5px;
 }
 
-/*
-#div.conversations-table. td {
-  
-}
-*/
-
 .conversations-sidebar .item:hover {
   cursor: pointer;
 }
@@ -148,6 +142,16 @@
   width: 100%;
   margin-top: 35px
 }
+
+.convo tbody, .convo thead {
+  display: block;
+}
+
+.convo tbody {
+  overflow: auto;
+  width: 100%;
+}
+
 .convo th {
   text-align: left;
 }

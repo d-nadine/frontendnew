@@ -1,5 +1,31 @@
 Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    showMore: ->
+      return if @get('allPagesLoaded')
+
+      @set 'isContentLoading', true
+
+      page = (@get('page') || 1) + 1
+      pageSize = @get('pageSize')
+
+      @set('page', page)
+
+      Radium.Email.find(name: @get('conversationType'), page: page, pageSize: pageSize).then (records) =>
+        unless records.get('length')
+          @set('isContentLoading', false)
+          @set('allPagesLoaded', true)
+          return
+
+        content = @get('content')
+
+        ids = content.map (record) -> record.get('id')
+
+        records.toArray().forEach (record) ->
+          content.pushObject(record) unless ids.contains(record.get('id'))
+          ids.push record.get('id')
+
+        @set 'isContentLoading', false
+
     updateTotals: ->
       Radium.ConversationsTotals.find({}).then (results) =>
         totals = results.get('firstObject')
@@ -176,6 +202,11 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   isReplied: Ember.computed.equal "conversationType", "replied"
   isArchived: Ember.computed.equal "conversationType", "archived"
   isIgnored: Ember.computed.equal "conversationType", "ignored"
+  isContentLoaded: false
+
+  page: 1
+  pageSize: 10
+  allPagesLoaded: false
 
   users: Ember.computed.alias 'controllers.users'
 
