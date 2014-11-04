@@ -166,9 +166,9 @@
 }
 
 .email-card {
-  padding-bottom: 37px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 
-  @include box-shadow(0 0 4px rgba(black, 0.1));
   .text {
     overflow-x: hidden;
   }
@@ -474,3 +474,32 @@
   font-weight: bold;
   @include add-blinker;
 }
+
+
+.email-thread-item {
+    .email-card {
+        display: inline-block;
+
+        .email-sender {
+            display: inline-block;
+            float: left;
+
+            strong {
+                font-size: 16px;
+            }
+        }
+        .email-header-actions {
+            display: inline-block;
+        }
+    }
+
+    .email-options {
+        background: #f9f9f9;
+        padding: 10px 20px;
+        border: solid 1px #dbdbdb;
+    }
+}
+
+
+
+
