@@ -14,9 +14,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend
         ['color', ['color']]
         ['para', ['ul', 'ol', 'paragraph']]
         ['height', ['height']]
-        ['insert', ['link']]
+        ['insert', ['link', 'picture']]
         ['table', ['table']]
         ['help', ['help']]
+        ['misc', ['codeview', 'undo', 'redo']]
       ]
 
     textarea.code @get('content')
@@ -27,6 +28,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend
   ).on 'didInsertElement'
 
   addBootstrapDropdown: ->
+    if tabindex = @get('tabindex')
+      @$('.note-editable').attr('tabindex', tabindex)
+
     dropdowns = $('[data-toggle=dropdown]')
 
     dropdowns.dropdown()

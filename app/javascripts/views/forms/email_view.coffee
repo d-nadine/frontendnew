@@ -22,8 +22,10 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
       editable = @$('.note-editable')
       current = @get('controller.message') || ''
       currentLength = current.length
+      signature = @get('controller.signature').replace '\n', '<br/>'
 
-      newMessage = "#{current}<br/><br/>#{@get('controller.signature')}"
+      newMessage = "#{current}<br/><br/>#{signature}"
+
       @set 'controller.message', newMessage
       editable.html(newMessage)
       editable.height("+=50")

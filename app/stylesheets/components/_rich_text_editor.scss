@@ -5,3 +5,9 @@
     border: 1px solid red;
   }
 }
+
+.note-dialog .note-image-dialog.modal.in .modal-body {
+  h5:first-of-type, input[type=file] {
+    display: none;
+  }
+}
