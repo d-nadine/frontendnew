@@ -58,7 +58,7 @@
 
     <div class="new-message-block">
       <div class="new-message-row new-message-compose">
-        {{view view.body tabindex=3 class="field field-blend-in input-block-level"}}
+        {{richtext-editor content=message header="New Email" isInvalid=messageIsInvalid}}
       </div>
 
       <div class="clearfix new-message-row">
@@ -131,7 +131,7 @@
           </div>
           {{partial 'emails/check_for_response'}}
         {{/if}}
-  
+
         {{#unless hasDeal}}
           {{#if showingAddDeal}}
             {{add-deal parent=model}}

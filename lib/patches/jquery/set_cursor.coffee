@@ -7,3 +7,13 @@ $.fn.setCursorPosition = (pos) ->
     range.moveEnd('character', pos)
     range.moveStart('character', pos)
     range.select()
+
+
+$.fn.restoreCursor = (pos )->
+  element = $(this).get(0)
+  range = document.createRange()
+  range.setStart(element.firstChild, pos)
+  range.setEnd(element.firstChild, pos)
+  selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range)

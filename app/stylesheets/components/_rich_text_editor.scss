@@ -1,0 +1,7 @@
+.richtext-editor {
+  width: 100%;
+
+  &.is-invalid {
+    border: 1px solid red;
+  }
+}

@@ -19,11 +19,15 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
           @$('.modal textarea').focus()
 
     appendSignature: ->
-      textArea = @$('.message-body')
-      currentLength = textArea.val()?.length || 0
-      textArea.val("#{textArea.val()}\n\n#{@get('controller.signature')}")
-      textArea.height("+=50")
-      textArea.setCursorPosition(currentLength)
+      editable = @$('.note-editable')
+      current = @get('controller.message') || ''
+      currentLength = current.length
+
+      newMessage = "#{current}<br/><br/>#{@get('controller.signature')}"
+      @set 'controller.message', newMessage
+      editable.html(newMessage)
+      editable.height("+=50")
+      editable.restoreCursor(currentLength)
       @set 'signatureAdded', true
 
     toggleSendMenu: ->
@@ -81,11 +85,6 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
 
   subject: Ember.TextField.extend
     valueBinding: 'targetObject.subject'
-
-  body: Radium.TextArea.extend
-    classNameBindings: [':message-body', 'parentView.noContent:is-invalid']
-    valueBinding: 'targetObject.message'
-    placeholder: 'Message'
 
   reminderLength: Ember.TextField.extend
     type: 'number'
