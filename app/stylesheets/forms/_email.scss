@@ -480,16 +480,27 @@
     .email-card {
         display: inline-block;
 
-        .email-sender {
-            display: inline-block;
-            float: left;
-
-            strong {
-                font-size: 16px;
-            }
+        .avatar-wrap {
+            margin: 0;
+            padding-left: 15px;
         }
-        .email-header-actions {
-            display: inline-block;
+
+        .email-wrap {
+            float: right;
+
+            .email-sender {
+                display: inline-block;
+                float: left;
+                padding-left: 8px;
+                padding-top: 10px;
+
+                strong {
+                    font-size: 18px;
+                }
+            }
+            .email-header-actions {
+                display: inline-block;
+            }
         }
     }
 
@@ -500,6 +511,8 @@
     }
 }
 
-
+#email-body-iframe body {
+    margin: 0;
+}
 
 
