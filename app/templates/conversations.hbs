@@ -102,9 +102,9 @@
             {{input type="checkbox" checked=isChecked class="checker-block"}}
           </td>
           <td class="contact">
-            <i class="ss-standard ss-user"></i>
             {{#if contact}}
-              {{#resource-link-to contact}}{{truncate contact.displayName length="20"}}{{/resource-link-to}}
+              {{#resource-link-to contact}}<i class="ss-standard ss-user"></i>{{/resource-link-to}}  
+              {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="20"}}{{/link-to}}
             {{else}}
                 Loading.....
             {{/if}}
