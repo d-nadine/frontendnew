@@ -1,3 +1,7 @@
+.conversations-view .single-column-container {
+    padding-right: 0;
+}
+
 .conversations-container {
   margin-top: 10px;
 }
@@ -5,7 +9,6 @@
 .conversations-sidebar {
   display: inline-block;
   float: left;
-  margin-right: 30px;
   margin-top: 67px;
 }
 
@@ -22,57 +25,46 @@
   margin-bottom: 5px;
 }
 
-.conversations-sidebar #totals .item, .conversations-sidebar .item .lbl a {
-  margin-bottom: 3px;
-  background: #e9e9e9;
-  color: #666;
-  padding: 5px 0;
-  border-radius: 5px;
+.conversations-sidebar .item {
+    width: calc(100% - 30px);
+    display: inline-block;
+    padding: 7px 15px 6px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    background: #e9e9e9;
+    color: #666;
+
+    &.active {
+        background: #3887e6 !important;
+        color: #fff;
+
+        .badge {
+            background: #6AA4EC;
+        }
+    }
+
+    .badge {
+        border-radius: 21px;
+        margin-right: 0;
+        font-weight: 600;
+        padding: 2px 8px;
+        background: #ddd;
+        text-align: center;
+        float: right;
+    }
 }
 
-.conversations-sidebar .item:hover {
-  cursor: pointer;
-}
 
-.conversations-sidebar .item span {
-  display: inline-block;
-  line-height: 22px;
-  vertical-align: bottom;
-  height: 22px;
-}
-
-.conversations-sidebar #totals .item {
-  position: relative;
-}
-
-.conversations-sidebar #totals .item .lbl {
-  padding-left: 7%;
-}
-
-.conversations-sidebar #totals .item .badge {
-  float: right;
-  border-radius: 21px;
-  margin-right: 6%;
-  font-weight: 600;
-  padding: 0 3%;
-  background: #ddd;
-  text-align: center;
-}
-
-.conversations-sidebar #totals .item.active, .conversations-sidebar .item.active span a {
-  background: #3887e6 !important;
-  color: #fff;
-}
-
-.conversations-sidebar #totals .item.active .badge, .conversations-sidebar .item.active .badge {
-  background: #6AA4EC;
-}
 
 .conversations-table {
   display: inline-block;
   float: left;
 }
 
+.toolbar {
+    padding-top: 7px;
+    padding-bottom: 30px;
+}
 
 .toolbar > div {
   display: inline-block;
@@ -140,7 +132,8 @@
 .convo {
   font-size: 14px;
   width: 100%;
-  margin-top: 35px
+  margin-top: 35px;
+  table-layout: fixed;
 }
 
 .convo tbody, .convo thead {
@@ -150,18 +143,38 @@
 .convo tbody {
   overflow: auto;
   width: 100%;
+  border-bottom: 1px solid #ddd;
 }
 
 .convo th {
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 .convo tbody td.contact {
-  width: 20%;
+    // width: 20%;
+    width: auto;
+
+    a {
+        display: inline-block;
+        float: left;
+
+        &:nth-of-type(1) {
+            width: 23px;
+        }
+        &:nth-of-type(2) {
+            width: calc(10vw + 5px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 }
 
+
+
 .convo tbody td.assign {
-  width: 18%;
+  width: 15%;
 }
 
 .convo tbody td.follow {
@@ -169,11 +182,22 @@
 }
 
 .convo tbody td.subject {
-  width: auto;
+    // width: 24%;
+    width: auto;
+
+    a {
+        width: calc(10vw + 110px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
 
-.convo tbody td.recieved {
-  width: 65px;
+.convo tbody td.received {
+  width: 8%;
+  text-align: center;
 }
 
 .convo img {
@@ -184,6 +208,10 @@
 .convo th, .convo td {
   padding: 0 10px;
   line-height: 30px;
+}
+
+.convo tbody tr:first-of-type td {
+    border-top: 0px;
 }
 
 .convo tr {
@@ -211,11 +239,11 @@
   border-top: 1px solid #ddd;
 }
 
-.convo tr .check{
+.convo tr td.check{
   border-left: 1px solid #ddd;
 }
 
-.convo tr .choose{
+.convo tr td.choose{
   border-right: 1px solid #ddd;
 }
 
@@ -234,6 +262,10 @@
 .convo .check {
   width: 3%;
   text-align: center;
+
+  input {
+    margin-top: 0;
+  }
 }
 
 .convo td.choose span {
@@ -242,13 +274,15 @@
 }
 
 .convo .btn-group {
-  width: 100%;
+  // width: 100%;
+  width: auto;
 }
 
 .convo .btn-group > a {
   font-size: 13px;
   display: inline-block;
-  width: 100%;
+  // width: 100%;
+  width: auto;
   color: #333;
 }
 
@@ -268,7 +302,8 @@
 
 .convo .btn-group > a .to {
   padding-left: 5px;
-  width: calc(80% - 22px);
+  // width: calc(70% - 22px);
+  width: 100px;
   display: inline-block;
 }
 
@@ -281,20 +316,37 @@
   display: inline-block;
   text-align: center;
   position: relative;
-  top: 3px;
+  top: 1px;
 }
 
 .convo .contact a {
-  padding-left: 5px;
   font-weight: 500;
+
+  i {
+    text-align: left;
+    color: $muted;
+
+    &.isPublic {
+        color: $blue;
+    }
+  }
 }
 
 .convo .choose {
-  width: 100px;
+    width: 13%;
 }
 
 .convo .delete {
-  width: 50px;
+    width: 3%;
+    padding: 0;
+
+    a {
+        color: #666;
+
+        &:hover {
+            color: $blue;
+        }
+    }
 }
 
 .follow-yes {
@@ -304,3 +356,26 @@
 .follow-waiting {
   color: #999;
 }
+
+.no-results {
+    width: 100%;
+}
+
+
+.loading-gif {
+    background: #e3e3e3;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 200px;
+    line-height: 30px;
+    text-align: center;
+
+    div {
+        display: inline-block;
+        width: auto;
+    }
+}
+

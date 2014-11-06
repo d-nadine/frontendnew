@@ -1,44 +1,44 @@
 <div class="conversations-container row-fluid">
   <div class="conversations-sidebar span2">
+
     <div id="totals" class="group">
-      <p>My Inbox</p>
-      <div {{bind-attr class=":item isIncoming:active"}}>
-        <span class="lbl">{{#link-to "conversations" "incoming"}}Incoming{{/link-to}}</span>
-        {{#if totalsLoading}}
-          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-        {{else}}
-          <span class="badge">{{incoming}}</span>
-        {{/if}}
-      </div>
-      <div {{bind-attr class=":item isWaiting:active"}}>
-        <span class="lbl">{{#link-to "conversations" "waiting"}}Waiting for Reply{{/link-to}}</span>
-        {{#if totalsLoading}}
-          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-        {{else}}
-          <span class="badge">{{waiting}}</span>
-        {{/if}}
-      </div>
-      <div {{bind-attr class=":item isLater:active"}}>
-        <span class="lbl">{{#link-to "conversations" "later"}}Send Later{{/link-to}}</span>
-        {{#if totalsLoading}}
-          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-        {{else}}
-          <span class="badge">{{later}}</span>
-        {{/if}}
-      </div>
-      <div {{bind-attr class=":item isReplied:active"}}>
-        <span class="lbl">{{#link-to "conversations" "replied"}}Replied To{{/link-to}}</span>
-      </div>
-      <div id="archived" {{bind-attr class=":item isArchived:active"}}>
-        <span class="lbl">{{#link-to "conversations" "archived"}}Archived{{/link-to}}</span>
-      </div>
-      <div id="ignored" {{bind-attr class=":item isIgnored:active"}}>
-        <span class="lbl">{{#link-to "conversations" "ignored"}}Ignored{{/link-to}}</span>
-      </div>
+        <p>My Inbox</p>
+        {{#link-to "conversations" "incoming" class="item"}}
+            Incoming
+            {{#if totalsLoading}}
+            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+            {{else}}
+            <span class="badge">{{incoming}}</span>
+            {{/if}}
+        {{/link-to}}
+
+        {{#link-to "conversations" "waiting" class="item"}}
+            Waiting for Reply
+            {{#if totalsLoading}}
+            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+            {{else}}
+            <span class="badge">{{waiting}}</span>
+            {{/if}}
+        {{/link-to}}
+
+        {{#link-to "conversations" "later" class="item"}}
+            Send Later
+            {{#if totalsLoading}}
+            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+            {{else}}
+            <span class="badge">{{later}}</span>
+            {{/if}}
+        {{/link-to}}
+
+        {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
+
+        {{#link-to "conversations" "archived" class="item"}}Archived{{/link-to}}
+
+        {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
     </div>
   </div>
-  <div class="conversations-table span9">
-    <div class="toolbar span10">
+  <div class="conversations-table span10">
+    <div class="toolbar span12">
       <div class="left">
         <a href="#" class="btn" {{action "emailAll"}}/>Compose</a>
         <div class="btn-group">
@@ -102,12 +102,18 @@
             {{input type="checkbox" checked=isChecked class="checker-block"}}
           </td>
           <td class="contact">
-            {{#if contact}}
-              {{#resource-link-to contact}}<i class="ss-standard ss-user"></i>{{/resource-link-to}}  
-              {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="20"}}{{/link-to}}
-            {{else}}
-                Loading.....
-            {{/if}}
+                {{#if contact}}
+                  {{#resource-link-to contact}}
+                    {{#unless contact.isPublic}}
+                        <i class="ss-standard ss-user notPublic"></i>
+                    {{else}}
+                        <i class="ss-standard ss-user isPublic"></i>
+                    {{/unless}}
+                  {{/resource-link-to}}  
+                  {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
+                {{else}}
+                    Loading.....
+                {{/if}}
           </td>
           <td class="assign">
             <div class="btn-group">
@@ -134,7 +140,9 @@
           <td class="follow">
             <span class="follow-yes"></span>
           </td>
-          <td class="subject">{{#link-to "emails.show" "inbox" this}}{{truncate subject length="20"}}{{/link-to}}</td>
+          <td class="subject">
+            {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
+          </td>
           <td class="received">{{ageInWords time}}</td>
           <td class="choose text-center">
             {{#unless isIgnored}}
@@ -161,9 +169,11 @@
         </tr>
         {{else}}
           <tr>
-            <td colspan="9" class="text-center">
+            <td></td>
+            <td colspan="9" class="text-center no-results">
               No Results
             </td>
+            <td></td>
           </tr>
         {{/each}}
         {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
