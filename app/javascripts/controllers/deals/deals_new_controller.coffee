@@ -19,7 +19,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
         if new RegExp('\\b' + @get('plan') + '\\b').test(error)
           @set 'error', error
         else
-          # @send 'flashError', deal
+          @send 'flashError', deal
 
         deal.deleteRecord()
 
