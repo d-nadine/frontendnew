@@ -2,36 +2,32 @@
   border-radius: 3px;
 }
 
-.span1.sender-avatar {
-
-}
-
 .iframe-container {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .email-options-left {
-    float: left;
-    display: inline-block;
+  float: left;
+  display: inline-block;
 
-    a.btn {
-        margin-right: 15px;
+  a.btn {
+    margin-right: 15px;
 
-        i {
-            margin-right: 0;
-        }
+    i {
+      margin-right: 0;
     }
+  }
 }
 .email-options-right {
-    display: inline-block;
-    float: right;
-    
-    a.btn {
-      margin-left: 15px;
+  display: inline-block;
+  float: right;
+  
+  a.btn {
+    margin-left: 15px;
 
-      i {
-          margin-right: 0;
-      }
+    i {
+      margin-right: 0;
     }
+  }
 }
 
 
@@ -477,42 +473,42 @@
 
 
 .email-thread-item {
-    .email-card {
+  .email-card {
+    display: inline-block;
+
+    .avatar-wrap {
+      margin: 0;
+      padding-left: 15px;
+    }
+
+    .email-wrap {
+      float: right;
+
+      .email-sender {
         display: inline-block;
+        float: left;
+        padding-left: 8px;
+        padding-top: 10px;
 
-        .avatar-wrap {
-            margin: 0;
-            padding-left: 15px;
+        strong {
+          font-size: 18px;
         }
-
-        .email-wrap {
-            float: right;
-
-            .email-sender {
-                display: inline-block;
-                float: left;
-                padding-left: 8px;
-                padding-top: 10px;
-
-                strong {
-                    font-size: 18px;
-                }
-            }
-            .email-header-actions {
-                display: inline-block;
-            }
-        }
+      }
+      .email-header-actions {
+        display: inline-block;
+      }
     }
+  }
 
-    .email-options {
-        background: #f9f9f9;
-        padding: 10px 20px;
-        border: solid 1px #dbdbdb;
-    }
+  .email-options {
+    background: #f9f9f9;
+    padding: 10px 20px;
+    border: solid 1px #dbdbdb;
+  }
 }
 
 #email-body-iframe body {
-    margin: 0;
+  margin: 0;
 }
 
 

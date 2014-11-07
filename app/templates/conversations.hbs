@@ -2,39 +2,39 @@
   <div class="conversations-sidebar span2">
 
     <div id="totals" class="group">
-        <p>My Inbox</p>
-        {{#link-to "conversations" "incoming" class="item"}}
-            Incoming
-            {{#if totalsLoading}}
-            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-            {{else}}
-            <span class="badge">{{incoming}}</span>
-            {{/if}}
-        {{/link-to}}
+      <p>My Inbox</p>
+      {{#link-to "conversations" "incoming" class="item"}}
+      Incoming
+      {{#if totalsLoading}}
+      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+      {{else}}
+      <span class="badge">{{incoming}}</span>
+      {{/if}}
+      {{/link-to}}
 
-        {{#link-to "conversations" "waiting" class="item"}}
-            Waiting for Reply
-            {{#if totalsLoading}}
-            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-            {{else}}
-            <span class="badge">{{waiting}}</span>
-            {{/if}}
-        {{/link-to}}
+      {{#link-to "conversations" "waiting" class="item"}}
+      Waiting for Reply
+      {{#if totalsLoading}}
+      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+      {{else}}
+      <span class="badge">{{waiting}}</span>
+      {{/if}}
+      {{/link-to}}
 
-        {{#link-to "conversations" "later" class="item"}}
-            Send Later
-            {{#if totalsLoading}}
-            <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-            {{else}}
-            <span class="badge">{{later}}</span>
-            {{/if}}
-        {{/link-to}}
+      {{#link-to "conversations" "later" class="item"}}
+      Send Later
+      {{#if totalsLoading}}
+      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+      {{else}}
+      <span class="badge">{{later}}</span>
+      {{/if}}
+      {{/link-to}}
 
-        {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
+      {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
 
-        {{#link-to "conversations" "archived" class="item"}}Archived{{/link-to}}
+      {{#link-to "conversations" "archived" class="item"}}Archived{{/link-to}}
 
-        {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
+      {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
     </div>
   </div>
   <div class="conversations-table span10">
@@ -47,17 +47,17 @@
             <li><a href="#" {{action "emailAll"}}>Compose</a></li>
             <li class="divider"></li>
             {{#unless isIgnored}}
-              <li><a href="#" {{action "trackAll"}}>Track</a></li>
+            <li><a href="#" {{action "trackAll"}}>Track</a></li>
             {{/unless}}
             {{#unless isArchived}}
-              {{#unless isIgnored}}
-                <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
-              {{/unless}}
+            {{#unless isIgnored}}
+            <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+            {{/unless}}
             {{/unless}}
             {{#unless isIgnored}}
-              <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
+            <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
             {{else}}
-              <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
+            <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
             {{/unless}}
             <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
             <li class="divider"></li>
@@ -102,18 +102,18 @@
             {{input type="checkbox" checked=isChecked class="checker-block"}}
           </td>
           <td class="contact">
-                {{#if contact}}
-                  {{#resource-link-to contact}}
-                    {{#unless contact.isPublic}}
-                        <i class="ss-standard ss-user notPublic"></i>
-                    {{else}}
-                        <i class="ss-standard ss-user isPublic"></i>
-                    {{/unless}}
-                  {{/resource-link-to}}  
-                  {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
-                {{else}}
-                    Loading.....
-                {{/if}}
+            {{#if contact}}
+            {{#resource-link-to contact}}
+            {{#unless contact.isPublic}}
+            <i class="ss-standard ss-user notPublic"></i>
+            {{else}}
+            <i class="ss-standard ss-user isPublic"></i>
+            {{/unless}}
+            {{/resource-link-to}}  
+            {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
+            {{else}}
+            Loading.....
+            {{/if}}
           </td>
           <td class="assign">
             <div class="btn-group">
@@ -121,7 +121,7 @@
                 {{avatar assignedTo style="tiny"}}
                 <span class="to">{{assignedTo.displayName}}</span>
                 {{#if assignees.length}}
-                  <span class="caret"></span>
+                <span class="caret"></span>
                 {{/if}}
               </a>
               {{#if assignees.length}}
@@ -146,19 +146,19 @@
           <td class="received">{{ageInWords time}}</td>
           <td class="choose text-center">
             {{#unless isIgnored}}
-              {{#unless contact.isPublic}}
-              <a {{action "track" contact}} href="#">Track</a>
-              <span> | </span>
-              {{/unless}}
+            {{#unless contact.isPublic}}
+            <a {{action "track" contact}} href="#">Track</a>
+            <span> | </span>
+            {{/unless}}
             {{/unless}}
             {{#unless isIgnored}}
-              {{#unless contact.isPublic}}
-                <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
-              {{else}}
-                <a href="#" {{action "archive" this}}>Archive</a>
-              {{/unless}}
+            {{#unless contact.isPublic}}
+            <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
             {{else}}
-              <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
+            <a href="#" {{action "archive" this}}>Archive</a>
+            {{/unless}}
+            {{else}}
+            <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
             {{/unless}}
           </td>
           <td class="delete">
@@ -168,21 +168,21 @@
           </td>
         </tr>
         {{else}}
-          <tr>
-            <td></td>
-            <td colspan="9" class="text-center no-results">
-              No Results
-            </td>
-            <td></td>
-          </tr>
+        <tr>
+          <td></td>
+          <td colspan="9" class="text-center no-results">
+            No Results
+          </td>
+          <td></td>
+        </tr>
         {{/each}}
         {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
         {{#if isContentLoading}}
-          <tr>
-            <td colspan="9" class="text-center">
-              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
-            </td>
-          </tr>
+        <tr>
+          <td colspan="9" class="text-center">
+            <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+          </td>
+        </tr>
         {{/if}}
       </tbody>
     </table>

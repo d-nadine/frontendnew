@@ -1,5 +1,5 @@
 .conversations-view .single-column-container {
-    padding-right: 0;
+  padding-right: 0;
 }
 
 .conversations-container {
@@ -26,32 +26,32 @@
 }
 
 .conversations-sidebar .item {
-    width: calc(100% - 30px);
-    display: inline-block;
-    padding: 7px 15px 6px;
-    border-radius: 5px;
-    margin-bottom: 3px;
-    background: #e9e9e9;
-    color: #666;
+  width: calc(100% - 30px);
+  display: inline-block;
+  padding: 7px 15px 6px;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  background: #e9e9e9;
+  color: #666;
 
-    &.active {
-        background: #3887e6 !important;
-        color: #fff;
-
-        .badge {
-            background: #6AA4EC;
-        }
-    }
+  &.active {
+    background: #3887e6 !important;
+    color: #fff;
 
     .badge {
-        border-radius: 21px;
-        margin-right: 0;
-        font-weight: 600;
-        padding: 2px 8px;
-        background: #ddd;
-        text-align: center;
-        float: right;
+      background: #6AA4EC;
     }
+  }
+
+  .badge {
+    border-radius: 21px;
+    margin-right: 0;
+    font-weight: 600;
+    padding: 2px 8px;
+    background: #ddd;
+    text-align: center;
+    float: right;
+  }
 }
 
 
@@ -62,8 +62,8 @@
 }
 
 .toolbar {
-    padding-top: 7px;
-    padding-bottom: 30px;
+  padding-top: 7px;
+  padding-bottom: 30px;
 }
 
 .toolbar > div {
@@ -152,23 +152,22 @@
 }
 
 .convo tbody td.contact {
-    // width: 20%;
-    width: auto;
+  width: auto;
 
-    a {
-        display: inline-block;
-        float: left;
+  a {
+    display: inline-block;
+    float: left;
 
-        &:nth-of-type(1) {
-            width: 23px;
-        }
-        &:nth-of-type(2) {
-            width: calc(10vw + 5px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    &:nth-of-type(1) {
+      width: 23px;
     }
+    &:nth-of-type(2) {
+      width: calc(10vw + 5px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 
@@ -182,17 +181,16 @@
 }
 
 .convo tbody td.subject {
-    // width: 24%;
-    width: auto;
+  width: auto;
 
-    a {
-        width: calc(10vw + 110px);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: inline-block;
-        vertical-align: middle;
-    }
+  a {
+    width: calc(10vw + 110px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 .convo tbody td.received {
@@ -211,7 +209,7 @@
 }
 
 .convo tbody tr:first-of-type td {
-    border-top: 0px;
+  border-top: 0px;
 }
 
 .convo tr {
@@ -274,14 +272,12 @@
 }
 
 .convo .btn-group {
-  // width: 100%;
   width: auto;
 }
 
 .convo .btn-group > a {
   font-size: 13px;
   display: inline-block;
-  // width: 100%;
   width: auto;
   color: #333;
 }
@@ -302,7 +298,6 @@
 
 .convo .btn-group > a .to {
   padding-left: 5px;
-  // width: calc(70% - 22px);
   width: 100px;
   display: inline-block;
 }
@@ -327,26 +322,26 @@
     color: $muted;
 
     &.isPublic {
-        color: $blue;
+      color: $blue;
     }
   }
 }
 
 .convo .choose {
-    width: 13%;
+  width: 13%;
 }
 
 .convo .delete {
-    width: 3%;
-    padding: 0;
+  width: 3%;
+  padding: 0;
 
-    a {
-        color: #666;
+  a {
+    color: #666;
 
-        &:hover {
-            color: $blue;
-        }
+    &:hover {
+      color: $blue;
     }
+  }
 }
 
 .follow-yes {
@@ -358,24 +353,24 @@
 }
 
 .no-results {
-    width: 100%;
+  width: 100%;
 }
 
 
 .loading-gif {
-    background: #e3e3e3;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 200px;
-    line-height: 30px;
-    text-align: center;
+  background: #e3e3e3;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 200px;
+  line-height: 30px;
+  text-align: center;
 
-    div {
-        display: inline-block;
-        width: auto;
-    }
+  div {
+    display: inline-block;
+    width: auto;
+  }
 }
 
