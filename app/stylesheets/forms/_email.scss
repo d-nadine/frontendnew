@@ -46,52 +46,52 @@
 	position: relative;
 }
 .span9.sender-is-current-user:after, .span9.sender-is-current-user:before {
-	left: 99%;
-	top: 55px;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
+  left: 99%;
+  top: 55px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
 .span9.sender-is-current-user:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-left-color: #fff;
-	border-width: 16px;
-	margin-top: -10px;
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: #fff;
+  border-width: 16px;
+  margin-top: -10px;
 }
 
 .span9.sender-is-current-user:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-left-color: #dbdbdb;
-	border-width: 16px;
-	margin-top: -10px;
+  border-color: rgba(194, 225, 245, 0);
+  border-left-color: #dbdbdb;
+  border-width: 16px;
+  margin-top: -10px;
 }
 
 .span9.not-from-user:after, .span9.not-from-user:before {
-	right: 99%;
-	top: 55px;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
+  right: 99%;
+  top: 55px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
 .span9.not-from-user:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-right-color: #fff;
-	border-width: 16px;
-	margin-top: -10px;
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: #fff;
+  border-width: 16px;
+  margin-top: -10px;
 }
 .span9.not-from-user:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-right-color: #c2e1f5;
-	border-width: 16px;
-	margin-top: -10px;
+  border-color: rgba(194, 225, 245, 0);
+  border-right-color: #c2e1f5;
+  border-width: 16px;
+  margin-top: -10px;
 }
 
 .email-thread-item {
