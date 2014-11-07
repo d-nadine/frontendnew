@@ -324,7 +324,7 @@ $btn-primary : #007cdd;
   }
 }
 
-.btn-group {
+.btn-group:not(.vanilla) {
   &.open .btn-primary.dropdown-toggle {
     background-color: $btn-primary;
   }

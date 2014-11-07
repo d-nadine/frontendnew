@@ -1,40 +1,253 @@
-<div class="page-header">
-  <div class="address-book-controls">
-    <div class="pull-right">
-      <form class="form-search pipeline-search">
-        <i class="ss-symbolicons-block ss-search"></i>
-        {{input value=searchText type="text" class="field search-text"}}
-      </form>
-      {{#link-to "leads.new" class="btn btn-primary"}}+ Contact{{/link-to}}
+<div class="page-header row-fluid">
+  <div class="subhead">
+    <div class="left">
+      <div class="nav-wrap">
+        <span class="count">
+          <span class="chosen">0</span>
+          <span class="divider">/</span>
+          <span class="total">6</span>
+          <span class="label">CONTACTS</span>
+        </span>
+        <div class="tools">
+          {{#link-to "leads.new" class="btn-contact"}}
+            <i class="ss-standard ss-user"></i>
+            <span>Add Contact</span>
+          {{/link-to}}
+          <div class="btn-group vanilla">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+              <i class="ss-standard ss-cursor"></i> Actions
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="#">Compose</a></li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Add to List</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">All</a></li>
+                  <li><a href="#">New</a></li>
+                  <li><a href="#">Unassigned</a></li>
+                  <li><a href="#">No Tasks</a></li>
+                  <li><a href="#">Assigned to Me</a></li>
+                  <li><a href="#">Losing Touch</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Assign To</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><img src="images/profile/me.jpg"> Me</a></li>
+                  <li><a href="#"><img src="images/profile/sami.jpg"> Sami</a></li>
+                  <li><a href="#"><img src="images/profile/paul.jpg"> Paul</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Delete</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-selector">
+      <button data-toggle="dropdown" class="dropdown-toggle">
+        <span>
+          <i class="ss-standard ss-columns"></i>
+          <i class="ss-standard ss-dropdown"></i>
+        </span>
+      </button>
+      <ul class="col-menu dropdown-menu">
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>NAME</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>EMAIL</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>COMPANY</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>EVENTS</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>INACTIVE</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>NEXT TASK</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>ASSIGNED TO</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>LAST ACTIVITY</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>LOCATION</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>PHONE</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>TAGS</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>DEALS</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>TYPE</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>SOURCE</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>POSITION</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>ADDED</span>
+          </label>
+        </li>
+      </ul>
+      <input type="text" class="searchbox" placeholder="Search">
     </div>
   </div>
+  <div class="contacts-sidebar span2">
+    <ul class="nav nav-pills">
+      <li>
+        <a href="#">
+          <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
+          <span>All</span>
+          <span>122</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i></i>
+          <span>New</span>
+          <span>13</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i></i>
+          <span>Unassigned</span>
+          <span>47</span></a>
+      </li>
+      <li>
+        <a href="#">
+          <i></i>
+          <span>No Tasks</span>
+          <span>35</span>
+        </a>
+      </li>
+      <li class="">
+        <a href="#">
+          <i></i>
+          <span>Assigned to Me</span>
+          <span>5</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i></i>
+          <span>Losing Touch</span>
+          <span>28</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="span9">
+    <table class="contacts-table">
+      <thead>
+        <tr>
+          <th class="check">
+            <input type="checkbox"/>
+          </th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Events</th>
+          <th>Inactive</th>
+          <th>Next Task</th>
+          <th>Assigned To</th>
+          <th>Last Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="check">
+            <input type="checkbox"/>
+          </td>
+          <td class="name">
+            <img src="http://res.cloudinary.com/radium/image/upload/h_22,w_22,c_fill,g_face/oyfddbortyjzlvy0ykcr.jpg" class="avatar">
+            <a href="#">Paul Cowan</a>
+          </td>
+          <td>
+            <a href="#">dagda1@scotalt.net</a>
+          </td>
+          <td>
+            Cutting-Edge Solutions (Scotland)
+          </td>
+          <td>
+            123
+          </td>
+          <td>
+            2 Days
+          </td>
+          <td>
+            Do something or other
+          </td>
+          <td>
+            <img src="http://res.cloudinary.com/radium/image/upload/h_22,w_22,c_fill,g_face/oyfddbortyjzlvy0ykcr.jpg" class="avatar">
+            <a href="#">Paul Cowan</a>
+          </td>
+          <td>
+            Last Activity
+          </td>
+        </tr>
+      </tbody>
+    </tabl>
+  </div>
 </div>
-
-{{partial "addressbook/loader"}}
-
-<table>
-  <tr>
-    <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
-    <th class="company">{{table-sorter heading="Name" sortOn="displayName" sort="sortContacts"}}</th>
-    <th>{{table-sorter heading="Company" sortOn="company" sort="sortContacts"}}</th>
-    <th class="events">Events</th>
-    <th class="inactive">Inactive</th>
-    <th>Next Task</th>
-    <th>Assigned To</th>
-    <th>Location</th>
-  </tr>
-</table>
-{{#rd-lazy-each content=model endInSight="loadMoreContacts" height=500 rowHeight=50}}
-  <table style="height: 50px;">
-    <tr>
-      <td class="row-selector">{{input type="checkbox"}}</td>
-      <td class="company">{{#link-to "contact" this}}{{displayName}}{{/link-to}}</td>
-      <td>{{company.name}}</td>
-      <td class="events">{{activityCount}}</td>
-      <td>{{daysInactive}}</td>
-      <td>{{tasks.firstObject.displayName}}</td>
-      <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
-      <td></td>
-    </tr>
-  </table>
-{{/rd-lazy-each}}
