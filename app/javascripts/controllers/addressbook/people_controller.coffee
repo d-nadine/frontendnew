@@ -1,4 +1,4 @@
-Radium.AddressbookPeopleController = Radium.ArrayController.extend
+Radium.PeopleIndexController = Radium.ArrayController.extend
   actions:
     sortContacts: (prop, ascending) ->
       model = @get("model")

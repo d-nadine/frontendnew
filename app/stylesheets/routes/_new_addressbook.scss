@@ -47,12 +47,12 @@
     margin-left: 8px;
   }
 
-  .subhead .nav-wrap > a.active:hover {
+  .subhead .nav-wrap a.active:hover {
     cursor: pointer;
     text-decoration: none;
   }
 
-  .subhead .nav-wrap > a.active:hover span {
+  .subhead .nav-wrap a.active:hover span {
     text-decoration: underline;
   }
 
@@ -132,7 +132,7 @@
     margin-bottom: 25px;
   }
 
-  .nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus {
+  .nav-tabs .active a, .nav-tabs .active a:hover, .nav-tabs .active a:focus {
     background: #f3f3f3;
   }
 
@@ -210,7 +210,7 @@
     font-size: 13px;
   }
 
-  .contacts-sidebar .nav li.active > a > span:nth-of-type(2) {
+  .contacts-sidebar .nav li.active a span:nth-of-type(2) {
     background: #6AA4EC;
   }
 

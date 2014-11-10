@@ -62,7 +62,8 @@ Radium.Router.map ->
     @route 'task', path: '/:task_type/:task_id'
 
   @resource 'addressbook', ->
-    @route 'people'
+    @resource 'people', ->
+      @route 'index', path: '/:filter'
     @route 'untracked'
     @route 'companies'
     @route 'assigned', path: '/users/:user_id/contacts'

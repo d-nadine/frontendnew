@@ -26,7 +26,7 @@ Radium.ContactRoute = Radium.Route.extend
 
         peopleDataset.removeObject(contact) if peopleDataset
 
-        @transitionTo 'addressbook.people'
+        @transitionTo 'people.index', 'all'
 
         addressbookController = @controllerFor('addressbook')
         addressbookController.send('updateTotals') if addressbookController
