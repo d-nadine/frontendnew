@@ -1,7 +1,7 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
     showMore: ->
-      alert 'hoor'
+      @get('model').expand()
 
     sortContacts: (prop, ascending) ->
       model = @get("model")
