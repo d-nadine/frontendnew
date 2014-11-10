@@ -1,6 +1,9 @@
 Radium.PeopleIndexRoute = Radium.Route.extend
-  beforeModel: (transition) ->
-    filter = transition.params['people.index'].filter
+  model: (params) ->
+    params = @controllerFor('peopleIndex').get('paramsMap')[params.filter]
 
-  model: ->
-    p "in model"
+    params = Ember.merge params, page_size: 15
+
+    Radium.InfiniteDataset.create
+      type: Radium.Contact
+      params: params

@@ -1,5 +1,8 @@
-Radium.PeopleIndexController = Radium.ArrayController.extend
+Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    showMore: ->
+      alert 'hoor'
+
     sortContacts: (prop, ascending) ->
       model = @get("model")
       params = model.get("params")
@@ -12,6 +15,21 @@ Radium.PeopleIndexController = Radium.ArrayController.extend
       model.set 'params', params
       false
 
+  filter: null
+
   searchText: "",
   filterParams: Ember.observer "searchText", ->
-    @get("model").set("params", {public: true, like: @get("searchText")})
+    return if filter is null
+
+    filter = @get('filter')
+    params = @get('paramsMap')[filter]
+
+    searchText = Ember.$.trim(@get('searchText'))
+
+    params = Ember.merge params, like: searchText
+
+    @get("model").set("params", params)
+
+  paramsMap:
+    all:
+      public: true

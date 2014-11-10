@@ -199,6 +199,7 @@
     </ul>
   </div>
   <div class="span9">
+    {{partial "addressbook/loader"}}
     <table class="contacts-table">
       <thead>
         <tr>
@@ -216,37 +217,53 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="check">
-            <input type="checkbox"/>
-          </td>
-          <td class="name">
-            <img src="http://res.cloudinary.com/radium/image/upload/h_22,w_22,c_fill,g_face/oyfddbortyjzlvy0ykcr.jpg" class="avatar">
-            <a href="#">Paul Cowan</a>
-          </td>
-          <td>
-            <a href="#">dagda1@scotalt.net</a>
-          </td>
-          <td>
-            Cutting-Edge Solutions (Scotland)
-          </td>
-          <td>
-            123
-          </td>
-          <td>
-            2 Days
-          </td>
-          <td>
-            Do something or other
-          </td>
-          <td>
-            <img src="http://res.cloudinary.com/radium/image/upload/h_22,w_22,c_fill,g_face/oyfddbortyjzlvy0ykcr.jpg" class="avatar">
-            <a href="#">Paul Cowan</a>
-          </td>
-          <td>
-            Last Activity
-          </td>
-        </tr>
+        {{#each controller}}
+          <tr>
+            <td class="check">
+              <input type="checkbox"/>
+            </td>
+            <td class="name">
+              {{avatar this style="tiny"}}
+              {{resource-link-to this}}
+            </td>
+            <td>
+              {{#if emailAddresses.length}}
+                <a href="#">{{primaryEmail.value}}</a>
+              {{/if}}
+            </td>
+            <td>
+              {{#if company.name}}
+                {{resource-link-to company}}
+              {{/if}}
+            </td>
+            <td>
+              {{activityCount}}
+            </td>
+            <td>
+              {{daysInactive}}
+            </td>
+            <td>
+              {{#if taks.length}}
+                {{resource-link-to tasks.firstObject}}
+              {{/if}}
+            </td>
+            <td>
+              {{avatar user style="tiny"}}
+              {{resource-link-to user}}
+            </td>
+            <td>
+              Last Activity
+            </td>
+          </tr>
+        {{/each}}
+        {{regular-infinitescroller getMore=showMore allLoaded=false isLoading=false}}
+        {{#if isLoading}}
+          <tr>
+            <td colspan="9" class="text-center">
+              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+            </td>
+          </tr>
+        {{/if}}
       </tbody>
     </tabl>
   </div>
