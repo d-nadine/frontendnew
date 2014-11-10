@@ -4,29 +4,29 @@
     <div id="totals" class="group">
       <p>My Inbox</p>
       {{#link-to "conversations" "incoming" class="item"}}
-      Incoming
+        Incoming
       {{#if totalsLoading}}
-      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
       {{else}}
-      <span class="badge">{{incoming}}</span>
+        <span class="badge">{{incoming}}</span>
       {{/if}}
       {{/link-to}}
 
       {{#link-to "conversations" "waiting" class="item"}}
-      Waiting for Reply
+        Waiting for Reply
       {{#if totalsLoading}}
-      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
       {{else}}
-      <span class="badge">{{waiting}}</span>
+        <span class="badge">{{waiting}}</span>
       {{/if}}
       {{/link-to}}
 
       {{#link-to "conversations" "later" class="item"}}
-      Send Later
+        Send Later
       {{#if totalsLoading}}
-      <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
       {{else}}
-      <span class="badge">{{later}}</span>
+        <span class="badge">{{later}}</span>
       {{/if}}
       {{/link-to}}
 
@@ -47,17 +47,17 @@
             <li><a href="#" {{action "emailAll"}}>Compose</a></li>
             <li class="divider"></li>
             {{#unless isIgnored}}
-            <li><a href="#" {{action "trackAll"}}>Track</a></li>
+              <li><a href="#" {{action "trackAll"}}>Track</a></li>
             {{/unless}}
             {{#unless isArchived}}
-            {{#unless isIgnored}}
-            <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+              {{#unless isIgnored}}
+                <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
+              {{/unless}}
             {{/unless}}
-            {{/unless}}
             {{#unless isIgnored}}
-            <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
+              <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
             {{else}}
-            <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
+              <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
             {{/unless}}
             <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
             <li class="divider"></li>
@@ -65,9 +65,9 @@
               <a tabindex="-1" href="#">Assign To</a>
               <ul class="dropdown-menu">
                 {{#each users}}
-                <li>
-                  <a href="#" {{action "assignAll" this}}>{{avatar this style="tiny"}}{{displayName}}</a>
-                </li>
+                  <li>
+                    <a href="#" {{action "assignAll" this}}>{{avatar this style="tiny"}}{{displayName}}</a>
+                  </li>
                 {{/each}}
               </ul>
             </li>
@@ -77,7 +77,6 @@
       <div class="right">
         <a href="#" class="list"><i class="ss-standard ss-list"></i></a>
         {{#link-to "messages" "inbox" class="chat"}}<i class="ss-standard ss-chat"></i>{{/link-to}}
-        <!--<input type="text" placeholder="Search">-->
       </div>
     </div>
     <table class="convo">
@@ -97,92 +96,92 @@
       </thead>
       <tbody>
         {{#each controller}}
-        <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
-          <td class="check">
-            {{input type="checkbox" checked=isChecked class="checker-block"}}
-          </td>
-          <td class="contact">
-            {{#if contact}}
-            {{#resource-link-to contact}}
-            {{#unless contact.isPublic}}
-            <i class="ss-standard ss-user notPublic"></i>
-            {{else}}
-            <i class="ss-standard ss-user isPublic"></i>
-            {{/unless}}
-            {{/resource-link-to}}  
-            {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
-            {{else}}
-            Loading.....
-            {{/if}}
-          </td>
-          <td class="assign">
-            <div class="btn-group">
-              <a href="#" data-toggle="dropdown" class="assignto">
-                {{avatar assignedTo style="tiny"}}
-                <span class="to">{{assignedTo.displayName}}</span>
-                {{#if assignees.length}}
-                <span class="caret"></span>
-                {{/if}}
-              </a>
-              {{#if assignees.length}}
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                {{#each assignees}}
-                <li>
-                  <a href="#" {{action "assignContact" controller.contact this}}>
-                    {{avatar this style="tiny"}}{{displayName}}
-                  </a>
-                </li>
-                {{/each}}
-              </ul>
+          <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
+            <td class="check">
+              {{input type="checkbox" checked=isChecked class="checker-block"}}
+            </td>
+            <td class="contact">
+              {{#if contact}}
+                {{#resource-link-to contact}}
+                  {{#unless contact.isPublic}}
+                    <i class="ss-standard ss-user notPublic"></i>
+                  {{else}}
+                    <i class="ss-standard ss-user isPublic"></i>
+                  {{/unless}}
+                {{/resource-link-to}}  
+                {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
+              {{else}}
+                Loading.....
               {{/if}}
-            </div>
-          </td>
-          <td class="follow">
-            <span class="follow-yes"></span>
-          </td>
-          <td class="subject">
-            {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
-          </td>
-          <td class="received">{{ageInWords time}}</td>
-          <td class="choose text-center">
-            {{#unless isIgnored}}
-            {{#unless contact.isPublic}}
-            <a {{action "track" contact}} href="#">Track</a>
-            <span> | </span>
-            {{/unless}}
-            {{/unless}}
-            {{#unless isIgnored}}
-            {{#unless contact.isPublic}}
-            <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
-            {{else}}
-            <a href="#" {{action "archive" this}}>Archive</a>
-            {{/unless}}
-            {{else}}
-            <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
-            {{/unless}}
-          </td>
-          <td class="delete">
-            <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
-              <i class="ss-symbolicons-block ss-trash"></i>
-            </a>
-          </td>
-        </tr>
-        {{else}}
-        <tr>
-          <td></td>
-          <td colspan="9" class="text-center no-results">
-            No Results
-          </td>
-          <td></td>
-        </tr>
+            </td>
+            <td class="assign">
+              <div class="btn-group">
+                <a href="#" data-toggle="dropdown" class="assignto">
+                  {{avatar assignedTo style="tiny"}}
+                  <span class="to">{{assignedTo.displayName}}</span>
+                  {{#if assignees.length}}
+                  <span class="caret"></span>
+                  {{/if}}
+                </a>
+                {{#if assignees.length}}
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  {{#each assignees}}
+                  <li>
+                    <a href="#" {{action "assignContact" controller.contact this}}>
+                      {{avatar this style="tiny"}}{{displayName}}
+                    </a>
+                  </li>
+                  {{/each}}
+                </ul>
+                {{/if}}
+              </div>
+            </td>
+            <td class="follow">
+              <span class="follow-yes"></span>
+            </td>
+            <td class="subject">
+              {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
+            </td>
+            <td class="received">{{ageInWords time}}</td>
+            <td class="choose text-center">
+              {{#unless isIgnored}}
+                {{#unless contact.isPublic}}
+                  <a {{action "track" contact}} href="#">Track</a>
+                  <span> | </span>
+                {{/unless}}
+              {{/unless}}
+              {{#unless isIgnored}}
+                {{#unless contact.isPublic}}
+                  <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
+                {{else}}
+                  <a href="#" {{action "archive" this}}>Archive</a>
+                {{/unless}}
+                {{else}}
+                  <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
+              {{/unless}}
+            </td>
+            <td class="delete">
+              <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
+                <i class="ss-symbolicons-block ss-trash"></i>
+              </a>
+            </td>
+          </tr>
+          {{else}}
+            <tr>
+              <td></td>
+              <td colspan="9" class="text-center no-results">
+                No Results
+              </td>
+              <td></td>
+            </tr>
         {{/each}}
         {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
         {{#if isContentLoading}}
-        <tr>
-          <td colspan="9" class="text-center">
-            <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
-          </td>
-        </tr>
+          <tr>
+            <td colspan="9" class="text-center">
+              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+            </td>
+          </tr>
         {{/if}}
       </tbody>
     </table>
