@@ -5,29 +5,29 @@
       <p>My Inbox</p>
       {{#link-to "conversations" "incoming" class="item"}}
         Incoming
-      {{#if totalsLoading}}
-        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-      {{else}}
-        <span class="badge">{{incoming}}</span>
-      {{/if}}
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{incoming}}</span>
+        {{/if}}
       {{/link-to}}
 
       {{#link-to "conversations" "waiting" class="item"}}
         Waiting for Reply
-      {{#if totalsLoading}}
-        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-      {{else}}
-        <span class="badge">{{waiting}}</span>
-      {{/if}}
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{waiting}}</span>
+        {{/if}}
       {{/link-to}}
 
       {{#link-to "conversations" "later" class="item"}}
         Send Later
-      {{#if totalsLoading}}
-        <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
-      {{else}}
-        <span class="badge">{{later}}</span>
-      {{/if}}
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{later}}</span>
+        {{/if}}
       {{/link-to}}
 
       {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
@@ -108,7 +108,7 @@
                   {{else}}
                     <i class="ss-standard ss-user isPublic"></i>
                   {{/unless}}
-                {{/resource-link-to}}  
+                {{/resource-link-to}}
                 {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
               {{else}}
                 Loading.....
@@ -120,19 +120,19 @@
                   {{avatar assignedTo style="tiny"}}
                   <span class="to">{{assignedTo.displayName}}</span>
                   {{#if assignees.length}}
-                  <span class="caret"></span>
+                    <span class="caret"></span>
                   {{/if}}
                 </a>
                 {{#if assignees.length}}
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                  {{#each assignees}}
-                  <li>
-                    <a href="#" {{action "assignContact" controller.contact this}}>
-                      {{avatar this style="tiny"}}{{displayName}}
-                    </a>
-                  </li>
-                  {{/each}}
-                </ul>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    {{#each assignees}}
+                      <li>
+                        <a href="#" {{action "assignContact" controller.contact this}}>
+                          {{avatar this style="tiny"}}{{displayName}}
+                        </a>
+                      </li>
+                    {{/each}}
+                  </ul>
                 {{/if}}
               </div>
             </td>
@@ -156,8 +156,8 @@
                 {{else}}
                   <a href="#" {{action "archive" this}}>Archive</a>
                 {{/unless}}
-                {{else}}
-                  <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
+              {{else}}
+                <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
               {{/unless}}
             </td>
             <td class="delete">
@@ -166,14 +166,14 @@
               </a>
             </td>
           </tr>
-          {{else}}
-            <tr>
-              <td></td>
-              <td colspan="9" class="text-center no-results">
-                No Results
-              </td>
-              <td></td>
-            </tr>
+        {{else}}
+          <tr>
+            <td></td>
+            <td colspan="9" class="text-center no-results">
+              No Results
+            </td>
+            <td></td>
+          </tr>
         {{/each}}
         {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
         {{#if isContentLoading}}

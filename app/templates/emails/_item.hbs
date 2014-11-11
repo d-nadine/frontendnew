@@ -5,7 +5,7 @@
         <div class="span2 avatar-wrap">
           {{partial 'emails/sender_avatar'}}
         </div>
-      {{/if}}    
+      {{/if}}
 
       <div class="email-wrap span10">
         <div class="email-header">
@@ -56,7 +56,7 @@
               </dl>
             </div>
           {{/if}}
-        </div> 
+        </div>
 
         <div class="content">
           <div class="iframe-container">
@@ -66,7 +66,7 @@
           </div>
 
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   <div class="email-options">
@@ -90,44 +90,44 @@
                   <i class="ss-standard ss-delete"></i> Done
                 </button>
               {{else}}
-              {{#unless hasComments}}
-                <a class="btn btn-link btn-messages-action"  {{action "showCommentBox"}}>
-                  <i class="ss-standard ss-chat"></i> Comments
-                </a>
-              {{/unless}}
+                {{#unless hasComments}}
+                  <a class="btn btn-link btn-messages-action"  {{action "showCommentBox"}}>
+                    <i class="ss-standard ss-chat"></i> Comments
+                  </a>
+                {{/unless}}
                 <a class="btn btn-link btn-messages-action"  {{action "toggleFormBox"}}>
                   <i class="ss-standard ss-check green"></i> Follow-up Task
                 </a>
-              {{#unless hasDeal}}
-                <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn btn-link btn-messages-action">
-                  <i class="ss-standard ss-dollarsign green"></i> Deal 
-                </a>
-              {{/unless}}
+                {{#unless hasDeal}}
+                  <a href="#" {{action "toggleAddDealForm"}} {{bind-attr disabled=isSaving}} class="btn btn-link btn-messages-action">
+                    <i class="ss-standard ss-dollarsign green"></i> Deal
+                  </a>
+                {{/unless}}
               {{/if}}
             </div>
 
-          {{#if hasDeal}}
-            <div class="clearfix email-item-actions email-item-related-tasks">
-              <ol class="unstyled related-tasks">
-                <li>
-                  <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
-                  <i class="ss-standard ss-dollarsign"></i>
-                  {{#if isNew}}
-                    <span class="related-task-title">{{deal.name}}</span>
-                  {{else}}
-                    {{#link-to 'deal' deal class="related-task-title"}}
+            {{#if hasDeal}}
+              <div class="clearfix email-item-actions email-item-related-tasks">
+                <ol class="unstyled related-tasks">
+                  <li>
+                    <a class="close pull-right" {{action "clearDeal"}}>&times;</a>
+                    <i class="ss-standard ss-dollarsign"></i>
+                    {{#if isNew}}
+                      <span class="related-task-title">{{deal.name}}</span>
+                    {{else}}
+                      {{#link-to 'deal' deal class="related-task-title"}}
                       {{deal.name}}
-                    {{/link-to}}
-                  {{/if}}
-                </li>
-              </ol>
-            </div>
-          {{/if}}
+                      {{/link-to}}
+                    {{/if}}
+                  </li>
+                </ol>
+              </div>
+            {{/if}}
 
-          <div class="clearfix email-item-actions email-item-related-tasks">
-            {{render 'related_tasks' tasks}}
+            <div class="clearfix email-item-actions email-item-related-tasks">
+              {{render 'related_tasks' tasks}}
+            </div>
           </div>
-        </div>
         {{/unless}}
       </div>
 
@@ -152,41 +152,41 @@
               <i class="ss-standard ss-box"></i> Archive </a>
           {{/if}}
 
-            <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
-              <i class="ss-symbolicons-block ss-trash"></i> Delete
-            </a>
-          </div>
+          <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
+            <i class="ss-symbolicons-block ss-trash"></i> Delete
+          </a>
         </div>
       </div>
-
-      <div>
-        {{#if showReplyForm}}
-          <div class="block block-arrow-top">
-            {{render "forms/reply" replyEmail}}
-          </div>
-        {{/if}}
-
-        {{#if showForwardForm}}
-          {{render "forms/forward_email" forwardEmail}}
-        {{/if}}
-
-
-        {{#if showFormBox}}
-          <div class="block block-connected email-item-form-box">
-            {{render "form_box" formBox}}
-          </div>
-        {{/if}}
-
-        {{#if showingAddDeal}}
-          {{add-deal parent=model}}
-        {{/if}}
-
-        {{#if renderComments}}
-          {{render 'comments' model}}
-        {{/if}}
-      </div>
-      {{#unless notFromUser}}
-        {{partial 'emails/sender_avatar'}}
-      {{/unless}}
     </div>
+
+    <div>
+      {{#if showReplyForm}}
+        <div class="block block-arrow-top">
+          {{render "forms/reply" replyEmail}}
+        </div>
+      {{/if}}
+
+      {{#if showForwardForm}}
+        {{render "forms/forward_email" forwardEmail}}
+      {{/if}}
+
+
+      {{#if showFormBox}}
+        <div class="block block-connected email-item-form-box">
+          {{render "form_box" formBox}}
+        </div>
+      {{/if}}
+
+      {{#if showingAddDeal}}
+        {{add-deal parent=model}}
+      {{/if}}
+
+      {{#if renderComments}}
+        {{render 'comments' model}}
+      {{/if}}
+    </div>
+    {{#unless notFromUser}}
+      {{partial 'emails/sender_avatar'}}
+    {{/unless}}
   </div>
+</div>
