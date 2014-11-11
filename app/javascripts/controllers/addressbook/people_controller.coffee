@@ -18,8 +18,21 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   filter: null
 
-  searchText: "",
-  filterParams: Ember.observer "searchText", ->
+  searchText: ""
+
+  isAll: Ember.computed.equal 'filter', 'all'
+  isNew: Ember.computed.equal 'filter', 'new'
+  isUnassigned: Ember.computed.equal 'filter', 'unassigned'
+  isNoTasks: Ember.computed.equal 'filter', 'notasks'
+  isAssigned: Ember.computed.equal 'filter', 'assigned'
+  isLosing: Ember.computed.equal 'filter', 'losing'
+
+  filterParams: Ember.computed 'filter', ->
+    public: true
+    filter: @get('filter')
+    page_size: @get('pageSize')
+
+  searchDidChange: Ember.observer "searchText", ->
     return if filter is null
 
     filter = @get('filter')

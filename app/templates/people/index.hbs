@@ -155,51 +155,51 @@
   </div>
   <div class="contacts-sidebar span2">
     <ul class="nav nav-pills">
-      <li class="active">
-        <a href="#">
+      <li {{bind-attr class="isAll:active"}}>
+        {{#link-to "people.index" "all"}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
           <span>All</span>
           <span>122</span>
-        </a>
+        {{/link-to}}
       </li>
-      <li>
-        <a href="#">
+      <li {{bind-attr class="isNew:active"}}>
+        {{#link-to "people.index" "new"}}
           <i></i>
           <span>New</span>
           <span>13</span>
-        </a>
+        {{/link-to}}
       </li>
-      <li>
-        <a href="#">
+      <li {{bind-attr class="isUnassigned:active"}}>
+        {{#link-to "people.index" "unassigned"}}
           <i></i>
           <span>Unassigned</span>
-          <span>47</span></a>
+          <span>47</span>
+        {{/link-to}}
       </li>
-      <li>
-        <a href="#">
+      <li {{bind-attr class="isNoTasks:active"}}>
+        {{#link-to "people.index" "notasks"}}
           <i></i>
           <span>No Tasks</span>
           <span>35</span>
-        </a>
+        {{/link-to}}
       </li>
-      <li>
-        <a href="#">
+      <li {{bind-attr class="isAssigned:active"}}>
+        {{#link-to "people.index" "assigned"}}
           <i></i>
           <span>Assigned to Me</span>
           <span>5</span>
-        </a>
+        {{/link-to}}
       </li>
-      <li>
-        <a href="#">
+      <li {{bind-attr class="isLosing:active"}}>
+        {{#link-to "people.index" "losing"}}
           <i></i>
           <span>Losing Touch</span>
           <span>28</span>
-        </a>
+        {{/link-to}}
       </li>
     </ul>
   </div>
   <div class="span9">
-    {{partial "addressbook/loader"}}
     <table class="contacts-table">
       <thead>
         <tr>
