@@ -26,9 +26,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
     searchText = Ember.$.trim(@get('searchText'))
 
-    params = Ember.merge params, like: searchText
+    params = Ember.merge params, like: searchText, page_size: @get('pageSize')
 
     @get("model").set("params", params)
+
+  pageSize: 25
 
   paramsMap:
     all:

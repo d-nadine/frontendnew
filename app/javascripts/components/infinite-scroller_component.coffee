@@ -17,6 +17,7 @@ Radium.InfiniteScrollerComponent = Ember.Component.extend
 
   loadMore: ->
     return if @get('isLoading')
+
     @sendAction 'getMore'
 
   dontScroll: ->

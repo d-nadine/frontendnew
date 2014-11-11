@@ -257,7 +257,7 @@
           </tr>
         {{/each}}
         {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
-        {{#if isLoading}}
+        {{#if content.isLoading}}
           <tr>
             <td colspan="9" class="text-center">
               <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
