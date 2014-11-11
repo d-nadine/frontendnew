@@ -1,7 +1,8 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
     showMore: ->
-      @get('model').expand()
+      model = @get('model')
+      Ember.run.throttle model, model.expand, 300
 
     sortContacts: (prop, ascending) ->
       model = @get("model")
