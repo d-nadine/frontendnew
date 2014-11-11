@@ -1,11 +1,9 @@
 <div {{bind-attr class=":span10 notFromUser senderIsCurrentUser row-fluid"}}>
   <div {{bind-attr class=":block :email-card :message-card notFromUser :span12"}}>
     <div class="row-fluid">
-      {{#if notFromUser}}
-        <div class="span2 avatar-wrap">
-          {{partial 'emails/sender_avatar'}}
-        </div>
-      {{/if}}
+      <div class="span2 avatar-wrap">
+        {{partial 'emails/sender_avatar'}}
+      </div>
 
       <div class="email-wrap span10">
         <div class="email-header">
@@ -185,8 +183,5 @@
         {{render 'comments' model}}
       {{/if}}
     </div>
-    {{#unless notFromUser}}
-      {{partial 'emails/sender_avatar'}}
-    {{/unless}}
   </div>
 </div>
