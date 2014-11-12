@@ -53,6 +53,15 @@ Radium.deferReadiness()
 Ember.RSVP.configure 'onerror', (e) ->
   return if e.message == "TransitionAborted"
 
+  if e.hasOwnProperty 'responseText'
+    return p """
+      ===============================
+      Request failed with: #{e.status}
+      status: #{e.statusText}
+      response: #{e.responseText}
+      ==============================
+      """
+
   console.log e.message
   console.log e.stack
 

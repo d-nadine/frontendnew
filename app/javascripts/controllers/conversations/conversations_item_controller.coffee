@@ -30,5 +30,5 @@ Radium.ConversationsItemController = Radium.ObjectController.extend
     @get('contact.user')
 
   assignees: Ember.computed 'parentController.users.[]', 'assignedTo', ->
-    @get('parentController.users').mapProperty('model').reject (user) =>
+    @get('parentController.users').reject (user) =>
       user == @get('assignedTo')

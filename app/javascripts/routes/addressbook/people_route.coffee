@@ -1,4 +1,8 @@
 Radium.PeopleIndexRoute = Radium.Route.extend
+  queryParams:
+    user:
+      refreshModel: true
+
   beforeModel: (transition) ->
     filter = transition.params['people.index'].filter
 
@@ -9,10 +13,10 @@ Radium.PeopleIndexRoute = Radium.Route.extend
   model: (params) ->
     controller = @controllerFor 'peopleIndex'
 
-    params = controller.get('filterParams')
+    controller.set('user', params.user) if params.user
 
-    p params
-  
+    filterParams = controller.get('filterParams')
+
     Radium.InfiniteDataset.create
       type: Radium.Contact
       params: params

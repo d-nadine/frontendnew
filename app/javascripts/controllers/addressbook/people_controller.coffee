@@ -1,5 +1,9 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    showUsersContacts: (user) ->
+      @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id')
+      false
+
     showMore: ->
       model = @get('model')
       Ember.run.throttle model, model.expand, 300
@@ -16,21 +20,34 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       model.set 'params', params
       false
 
+  needs: ['users']
+
+  users: Ember.computed.oneWay 'controllers.users'
+
+  queryParams: ['user']
+  user: null
+
   filter: null
 
   searchText: ""
 
   isAll: Ember.computed.equal 'filter', 'all'
   isNew: Ember.computed.equal 'filter', 'new'
-  isUnassigned: Ember.computed.equal 'filter', 'unassigned'
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
-  isAssigned: Ember.computed.equal 'filter', 'assigned'
   isLosing: Ember.computed.equal 'filter', 'losing'
 
-  filterParams: Ember.computed 'filter', ->
-    public: true
-    filter: @get('filter')
-    page_size: @get('pageSize')
+  isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
+
+  filterParams: Ember.computed 'filter', 'user', ->
+    params =
+      public: true
+      filter: @get('filter')
+      page_size: @get('pageSize')
+
+    unless user = @get('user') && @get('isAssignedTo')
+      return
+
+    Ember.merge params, user: @get('user')
 
   searchDidChange: Ember.observer "searchText", ->
     return if filter is null

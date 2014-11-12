@@ -43,7 +43,7 @@
 {{/if}}
 {{#if users.length}}
   <ul class="unstyled settings-list settings-users-list">
-    {{each users itemViewClass="Radium.SettingsUsersItemView"}}
+    {{each users itemController="userItem" itemViewClass="Radium.SettingsUsersItemView"}}
   </ul>
 {{else}}
   <p>No users added yet, invite one now! ^</p>
