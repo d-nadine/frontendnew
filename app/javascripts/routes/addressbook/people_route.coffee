@@ -20,7 +20,6 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     filterParams = controller.get('filterParams')
 
-    p filterParams
     Radium.InfiniteDataset.create
       type: Radium.Contact
       params: filterParams

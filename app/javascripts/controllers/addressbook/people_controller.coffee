@@ -6,6 +6,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         @set 'all', totals.get('all')
         @set 'new', totals.get('new')
         @set 'noTasks', totals.get('noTasks')
+        @set 'inactive', totals.get('inactive')
         @set 'usersTotals', totals.get('usersTotals')
 
     showUsersContacts: (user) ->
@@ -58,20 +59,18 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
     Ember.merge params, user: @get('user')
 
+  noResults: Ember.computed 'content.isLoading', 'model.[]', ->
+    not @get('content.isLoading') && not @get('model').get('length')
+
   searchDidChange: Ember.observer "searchText", ->
     return if filter is null
 
     filter = @get('filter')
-    params = @get('paramsMap')[filter]
 
     searchText = Ember.$.trim(@get('searchText'))
 
-    params = Ember.merge params, like: searchText, page_size: @get('pageSize')
+    params = filter: filter, like: searchText, page_size: @get('pageSize'), public: true
 
     @get("model").set("params", params)
 
   pageSize: 25
-
-  paramsMap:
-    all:
-      public: true
