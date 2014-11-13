@@ -277,6 +277,7 @@ Radium.RESTAdapter.configure('plurals',{
   billing: 'billing',
   addressbook_totals: 'addressbook_totals',
   conversations_totals: 'conversations_totals',
+  contacts_totals: 'contacts_totals',
   track_all_contacts: 'track_all_contacts'
 });
 

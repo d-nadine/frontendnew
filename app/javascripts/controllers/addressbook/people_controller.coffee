@@ -1,5 +1,13 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    updateTotals: ->
+      Radium.ContactsTotals.find({}).then (results) =>
+        totals = results.get('firstObject')
+        @set 'all', totals.get('all')
+        @set 'new', totals.get('new')
+        @set 'noTasks', totals.get('noTasks')
+        @set 'usersTotals', totals.get('usersTotals')
+
     showUsersContacts: (user) ->
       @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id')
       false
@@ -20,9 +28,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       model.set 'params', params
       false
 
-  needs: ['users']
+  needs: ['users', 'tags']
 
   users: Ember.computed.oneWay 'controllers.users'
+  tags: Ember.computed.oneWay 'controllers.tags'
 
   queryParams: ['user']
   user: null
@@ -45,7 +54,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       page_size: @get('pageSize')
 
     unless user = @get('user') && @get('isAssignedTo')
-      return
+      return params
 
     Ember.merge params, user: @get('user')
 

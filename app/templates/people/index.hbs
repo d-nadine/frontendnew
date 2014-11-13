@@ -23,20 +23,23 @@
               <li class="dropdown-submenu">
                 <a tabindex="-1" href="#">Add to List</a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">All</a></li>
-                  <li><a href="#">New</a></li>
-                  <li><a href="#">Unassigned</a></li>
-                  <li><a href="#">No Tasks</a></li>
-                  <li><a href="#">Assigned to Me</a></li>
-                  <li><a href="#">Losing Touch</a></li>
+                  {{#each tags}}
+                    <li>
+                      <a href="#">{{name}}</a>
+                    </li>
+                  {{else}}
+                    <li><a href="#">(none)</a></li>
+                  {{/each}}
                 </ul>
               </li>
               <li class="dropdown-submenu">
                 <a tabindex="-1" href="#">Assign To</a>
                 <ul class="dropdown-menu">
-                  <li><a href="#"><img src="images/profile/me.jpg"> Me</a></li>
-                  <li><a href="#"><img src="images/profile/sami.jpg"> Sami</a></li>
-                  <li><a href="#"><img src="images/profile/paul.jpg"> Paul</a></li>
+                  {{#each users}}
+                    <li>
+                      <a href="#" {{action "assignAll" this}}>{{avatar this style="tiny"}}{{displayName}}</a>
+                    </li>
+                  {{/each}}
                 </ul>
               </li>
               <li><a href="#">Delete</a></li>
@@ -159,15 +162,15 @@
         {{#link-to "people.index" "all" (query-params user_id="")}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
           <span>All</span>
-          <span>122</span>
+          <span>{{all}}</span>
         {{/link-to}}
       </li>
       {{#each users itemController="peopleUserItem"}}
         <li {{bind-attr class="isCurrent:active"}}>
           <a href="#" {{action "showUsersContacts" this}}
             <i class="ss-symbolicons ss-lightning"></i>
-            <span>{{displayName}}</span>
-            <span>13</span>
+            <span>{{display}}</span>
+            <span>{{contactsTotal}}</span>
           </a>
         </li>
       {{/each}}
@@ -175,14 +178,14 @@
         {{#link-to "people.index" "new" (query-params user_id="")}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
           <span>New</span>
-          <span>13</span>
+          <span>{{new}}</span>
         {{/link-to}}
       </li>
       <li {{bind-attr class="isNoTasks:active"}}>
         {{#link-to "people.index" "notasks" (query-params user_id="")}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
           <span>No Tasks</span>
-          <span>35</span>
+          <span>{{noTasks}}</span>
         {{/link-to}}
       </li>
       <li {{bind-attr class="isLosing:active"}}>

@@ -8,6 +8,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller = @controllerFor 'people.index'
 
+    controller.send 'updateTotals'
     controller.set 'filter', filter
 
   model: (params) ->
@@ -15,8 +16,11 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller.set('user', params.user) if params.user
 
+    controller.set 'filter', params.filter
+
     filterParams = controller.get('filterParams')
 
+    p filterParams
     Radium.InfiniteDataset.create
       type: Radium.Contact
-      params: params
+      params: filterParams
