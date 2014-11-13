@@ -3,4 +3,5 @@ Radium.ContactsTotals = Radium.Model.extend
   new: DS.attr('number')
   noTasks: DS.attr('number')
   inactive: DS.attr('number')
+  noList: DS.attr('number')
   usersTotals: DS.attr('array')

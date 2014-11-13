@@ -7,6 +7,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         @set 'new', totals.get('new')
         @set 'noTasks', totals.get('noTasks')
         @set 'inactive', totals.get('inactive')
+        @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
 
     showUsersContacts: (user) ->
@@ -45,6 +46,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   isNew: Ember.computed.equal 'filter', 'new'
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
   isLosing: Ember.computed.equal 'filter', 'losing'
+  isNoList: Ember.computed.equal 'filter', 'no_list'
 
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
 

@@ -195,6 +195,13 @@
           <span>{{inactive}}</span>
         {{/link-to}}
       </li>
+      <li {{bind-attr class="isNoList:active"}}>
+        {{#link-to "people.index" "no_tasks" (query-params user_id="")}}
+          <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
+          <span>No List</span>
+          <span>{{noList}}</span>
+        {{/link-to}}
+      </li>
     </ul>
   </div>
   <div class="span9">
