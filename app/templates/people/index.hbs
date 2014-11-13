@@ -153,7 +153,7 @@
           </label>
         </li>
       </ul>
-      <input type="text" class="searchbox" placeholder="Search">
+      {{input type="text" value=searchText class="searchbox" placeholder="search"}}
     </div>
   </div>
   <div class="contacts-sidebar span2">
@@ -222,11 +222,13 @@
             </td>
             <td class="name">
               {{avatar this style="tiny"}}
-              {{resource-link-to this}}
+              {{#if name.length}}
+                {{#link-to "contact"}}{{name}}{{/link-to}}
+              {{/if}}
             </td>
             <td>
               {{#if emailAddresses.length}}
-                <a href="#">{{primaryEmail.value}}</a>
+                {{#resource-link-to this}}{{primaryEmail.value}}{{/resource-link-to}}
               {{/if}}
             </td>
             <td>

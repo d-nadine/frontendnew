@@ -63,14 +63,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     not @get('content.isLoading') && not @get('model').get('length')
 
   searchDidChange: Ember.observer "searchText", ->
-    return if filter is null
+    return if @get('filter') is null
 
-    filter = @get('filter')
+    searchText = @get('searchText')
 
-    searchText = Ember.$.trim(@get('searchText'))
+    filterParams = @get('filterParams')
 
-    params = filter: filter, like: searchText, page_size: @get('pageSize'), public: true
+    params = Ember.merge filterParams, like: searchText
 
-    @get("model").set("params", params)
+    @get("content").set("params", Ember.copy(params))
 
   pageSize: 25
