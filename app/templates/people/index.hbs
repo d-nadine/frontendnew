@@ -165,15 +165,13 @@
           <span>{{all}}</span>
         {{/link-to}}
       </li>
-      {{#each users itemController="peopleUserItem"}}
-        <li {{bind-attr class="isCurrent:active"}}>
-          <a href="#" {{action "showUsersContacts" this}}
-            <i class="ss-symbolicons ss-lightning"></i>
-            <span>{{display}}</span>
-            <span>{{contactsTotal}}</span>
-          </a>
-        </li>
-      {{/each}}
+      <li {{bind-attr class="isCurrentUser:active"}}>
+        <a href="#" {{action "showUsersContacts" currentUser}}
+          <i class="ss-symbolicons ss-lightning"></i>
+          <span>{{currentDisplay}}</span>
+          <span>{{currentContactsTotal}}</span>
+        </a>
+      </li>
       <li {{bind-attr class="isNew:active"}}>
         {{#link-to "people.index" "new" (query-params user_id="")}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
@@ -196,13 +194,37 @@
         {{/link-to}}
       </li>
       <li {{bind-attr class="isNoList:active"}}>
-        {{#link-to "people.index" "no_tasks" (query-params user_id="")}}
+        {{#link-to "people.index" "no_list" (query-params user_id="")}}
           <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
           <span>No List</span>
           <span>{{noList}}</span>
         {{/link-to}}
       </li>
     </ul>
+    {{log view.constructor}}
+    {{#if showMoreMenu}}
+      <ul class="nav nav-pills more">
+        {{#each team itemController="peopleUserItem"}}
+          <li {{bind-attr class="isCurrent:active"}}>
+            <a href="#" {{action "showUsersContacts" this}}
+              <i class="ss-symbolicons ss-lightning"></i>
+              <span>{{display}}</span>
+              <span>{{contactsTotal}}</span>
+            </a>
+          </li>
+        {{/each}}
+        {{#each tags itemController="peopleTagItem"}}
+          <li {{bind-attr class="isCurrent:active"}}>
+            <a class="tag" href="#" {{action "showTagsContacts" this}}
+              <i>&nbsp;</i>
+              <span>{{name}}</span>
+              <span>{{contactsTotal}}</span>
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+      <a href="#" class="show-more">Show More</a>
+    {{/if}}
   </div>
   <div class="span9">
     <table class="contacts-table">

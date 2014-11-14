@@ -9,10 +9,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         @set 'inactive', totals.get('inactive')
         @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
+        @set 'tagsTotals', totals.get('tagsTotals')
 
     showUsersContacts: (user) ->
       @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id')
       false
+
+    showTagsContacts: (tag) ->
+      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
 
     showMore: ->
       model = @get('model')
@@ -35,7 +39,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
 
-  queryParams: ['user']
+  queryParams: ['user', 'tag']
   user: null
 
   filter: null
@@ -47,19 +51,43 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
   isLosing: Ember.computed.equal 'filter', 'losing'
   isNoList: Ember.computed.equal 'filter', 'no_list'
+  isTagged: Ember.computed.equal 'filter', 'tagged'
+
+  isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
+    return unless @get('isAssignedTo') && @get('user')
+
+    @get('currentUser.id') == @get('user')
+
+  currentDisplay: Ember.computed 'currentUser', ->
+    "@#{@get('currentUser.displayName')}"
+
+  currentContactsTotal: Ember.computed 'currentUser', 'usersTotals', ->
+    unless usersTotals = @get('usersTotals')
+      return
+
+    unless userId = @get('currentUser.id')
+      return
+
+    usersTotals.find((user) -> user.id == parseInt(userId)).total
+
+  team: Ember.computed 'currentUser', 'users.[]', ->
+    currentUser = @get('currentUser')
+
+    @get('users').reject (user) -> user == currentUser
 
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
 
-  filterParams: Ember.computed 'filter', 'user', ->
+  filterParams: Ember.computed 'filter', 'user', 'tag', ->
     params =
       public: true
       filter: @get('filter')
       page_size: @get('pageSize')
 
-    unless user = @get('user') && @get('isAssignedTo')
-      return params
+    if user = @get('user') && @get('isAssignedTo')
+      return Ember.merge params, user: @get('user')
 
-    Ember.merge params, user: @get('user')
+    if tag = @get('tag') && @get('isTagged')
+      return Ember.merge params, tag: @get('tag')
 
   noResults: Ember.computed 'content.isLoading', 'model.[]', ->
     not @get('content.isLoading') && not @get('model').get('length')
@@ -76,3 +104,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     @get("content").set("params", Ember.copy(params))
 
   pageSize: 25
+
+  showMoreMenu: Ember.computed 'team.length', 'tags.length', ->
+    @get('team.length') || @get('tags.length')

@@ -144,6 +144,10 @@
     margin-right: 5px;
   }
 
+  .nav.nav-pills.more li .tag {
+    padding-left: 21px;
+  }
+
   .nav li:first-of-type a{
     margin-left: 0;
   }
@@ -282,5 +286,17 @@
 
   .subhead .nav-wrap a.active {
     color: #fff;
+  }
+
+  .show-more {
+    width: 177px;
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+
+  .nav-pills.more {
+    display: none;
   }
 }

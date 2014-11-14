@@ -2,6 +2,8 @@ Radium.PeopleIndexRoute = Radium.Route.extend
   queryParams:
     user:
       refreshModel: true
+    tag:
+      refreshModel: true
 
   beforeModel: (transition) ->
     filter = transition.params['people.index'].filter
@@ -15,6 +17,8 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     controller = @controllerFor 'peopleIndex'
 
     controller.set('user', params.user) if params.user
+
+    controller.set('tag', params.tag) if params.tag
 
     controller.set 'filter', params.filter
 
