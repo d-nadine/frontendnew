@@ -8,17 +8,17 @@ Ember.Handlebars.registerBoundHelper 'getProperty', (context, property, options)
   unless  property.hasOwnProperty "route"
     return new Handlebars.SafeString("<span>#{prop}</span>")
 
-  context = if property.context == "this"
-              context
-            else
-              context.get(property.context)
-
   args = Array::slice.call(arguments, 2)
 
   options.types = ["ID", "STRING", "ID"]
   options.contexts = [context, context, context]
 
-  args.unshift "id"
+  id = if property.context
+          "#{property.context}.id"
+       else
+         "id"
+
+  args.unshift id
   args.unshift property.route
   args.unshift property.binding
 
