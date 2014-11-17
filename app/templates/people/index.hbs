@@ -166,7 +166,7 @@
         {{/link-to}}
       </li>
       <li {{bind-attr class="isCurrentUser:active"}}>
-        <a href="#" {{action "showUsersContacts" currentUser}}
+        <a href="#" {{action "showUsersContacts" currentUser}}>
           <i class="ss-symbolicons ss-lightning"></i>
           <span>{{currentDisplay}}</span>
           <span>{{currentContactsTotal}}</span>
@@ -215,7 +215,7 @@
       <ul class="nav nav-pills more">
         {{#each team itemController="peopleUserItem"}}
           <li {{bind-attr class="isCurrent:active"}}>
-            <a href="#" {{action "showUsersContacts" this}}
+            <a href="#" {{action "showUsersContacts" this}} class="user">
               <i class="ss-symbolicons ss-lightning"></i>
               <span>{{display}}</span>
               <span>{{contactsTotal}}</span>
@@ -251,9 +251,7 @@
             </td>
             <td class="name">
               {{avatar this style="tiny"}}
-              {{#if name.length}}
-                {{#link-to "contact"}}{{name}}{{/link-to}}
-              {{/if}}
+              {{#link-to "contact"}}{{name}}{{/link-to}}
             </td>
             <td>
               {{#if emailAddresses.length}}
