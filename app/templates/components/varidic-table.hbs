@@ -1,0 +1,72 @@
+<table class="contacts-table">
+  <thead>
+    <tr>
+      <th class="check">
+        <input type="checkbox"/>
+      </th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Events</th>
+      <th>Inactive</th>
+      <th>Next Task</th>
+      <th>Assigned To</th>
+      <th>Last Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each list}}
+      <tr>
+        <td class="check">
+          <input type="checkbox"/>
+        </td>
+        <td class="name">
+          {{avatar this style="tiny"}}
+          {{#link-to "contact"}}{{name}}{{/link-to}}
+        </td>
+        <td>
+          {{#if emailAddresses.length}}
+            {{#resource-link-to this}}{{primaryEmail.value}}{{/resource-link-to}}
+          {{/if}}
+        </td>
+        <td>
+          {{#if company.name}}
+            {{resource-link-to company}}
+          {{/if}}
+        </td>
+        <td>
+          {{activityCount}}
+        </td>
+        <td>
+          {{daysInactive}}
+        </td>
+        <td>
+          {{#if taks.length}}
+            {{resource-link-to tasks.firstObject}}
+          {{/if}}
+        </td>
+        <td>
+          {{avatar user style="tiny"}}
+          {{resource-link-to user}}
+        </td>
+        <td>
+          Last Activity
+        </td>
+      </tr>
+    {{else}}
+      {{#unless list.content.isLoading}}
+        <tr>
+          <td colspan="9" class="text-center">No Results</td>
+        </tr>
+      {{/unless}}
+    {{/each}}
+    {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
+    {{#if list.content.isLoading}}
+      <tr>
+        <td colspan="9" class="text-center">
+          <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+        </td>
+      </tr>
+    {{/if}}
+  </tbody>
+</table>
