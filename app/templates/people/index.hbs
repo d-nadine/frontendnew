@@ -200,6 +200,15 @@
           <span>{{noList}}</span>
         {{/link-to}}
       </li>
+      {{#each tags itemController="peopleTagItem"}}
+        <li {{bind-attr class="isCurrent:active"}}>
+          <a class="tag" href="#" {{action "showTagsContacts" this}}
+            <i>&nbsp;</i>
+            <span>{{name}}</span>
+            <span>{{contactsTotal}}</span>
+          </a>
+        </li>
+      {{/each}}
     </ul>
     {{log view.constructor}}
     {{#if showMoreMenu}}
@@ -209,15 +218,6 @@
             <a href="#" {{action "showUsersContacts" this}}
               <i class="ss-symbolicons ss-lightning"></i>
               <span>{{display}}</span>
-              <span>{{contactsTotal}}</span>
-            </a>
-          </li>
-        {{/each}}
-        {{#each tags itemController="peopleTagItem"}}
-          <li {{bind-attr class="isCurrent:active"}}>
-            <a class="tag" href="#" {{action "showTagsContacts" this}}
-              <i>&nbsp;</i>
-              <span>{{name}}</span>
               <span>{{contactsTotal}}</span>
             </a>
           </li>

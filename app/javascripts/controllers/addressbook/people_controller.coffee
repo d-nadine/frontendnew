@@ -105,5 +105,5 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   pageSize: 25
 
-  showMoreMenu: Ember.computed 'team.length', 'tags.length', ->
-    @get('team.length') || @get('tags.length')
+  showMoreMenu: Ember.computed 'team.[]', ->
+    @get('team.length')

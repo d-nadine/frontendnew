@@ -1,6 +1,6 @@
 Radium.PeopleIndexView = Radium.View.extend
   setup: ( ->
-    @addObserver 'controller.showMoreMenu', this, 'addEventHandlers'
+    Ember.run.scheduleOnce 'afterRender', this, 'addEventHandlers'
 
     @$('ul.col-menu li').on 'click.col-men', ->
       check = $(this).find 'input[type=checkbox]'
@@ -10,26 +10,29 @@ Radium.PeopleIndexView = Radium.View.extend
   ).on 'didInsertElement'
 
   addEventHandlers: ->
-    return unless @get('controller.showMoreMenu')
-    return unless @$('.show-more').length
+    Ember.run.later =>
+      return unless @get('controller.showMoreMenu')
 
-    @removeObserver 'controller.showMoreMenu', this, 'addEventHandlers'
+      return unless @$('.show-more').length
 
-    self = this
+      @removeObserver 'controller.showMoreMenu', this, 'addEventHandlers'
 
-    @$('.show-more').on 'click.show-more', (e) ->
-      el = $(this)
+      self = this
 
-      text = if el.text() == 'Show More'
-        'Hide'
-      else
-        'Show More'
+      @$('.show-more').on 'click.show-more', (e) ->
+        el = $(this)
 
-      el.text text
+        text = if el.text() == 'Show More'
+          'Hide'
+        else
+          'Show More'
 
-      self.$('.nav-pills.more').slideToggle(100)
+        el.text text
 
-      false
+        self.$('.nav-pills.more').slideToggle(100)
+
+        false
+    , 1000
 
   teardown: (->
     @$('ul.col-menu').off 'click.col-men'
