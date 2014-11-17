@@ -116,5 +116,20 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Name"
       route: "contact"
       binding: "name"
+      context: "this"
+    },
+    {
+      classNames: ""
+      heading: "Email"
+      route: "contact"
+      binding: "primaryEmail.value"
+      context: "this"
+    },
+    {
+      classNames: ""
+      heading: "Company"
+      route: "company"
+      binding: "name"
+      context: "company"
     }
   ])

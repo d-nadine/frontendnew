@@ -24,14 +24,14 @@
 {{else}}
   {{#unless list.content.isLoading}}
     <tr>
-      <td colspan="9" class="text-center">No Results</td>
+      <td {{bind-attr colspan="colSpan"}} class="text-center">No Results</td>
     </tr>
   {{/unless}}
 {{/each}}
     {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
     {{#if list.content.isLoading}}
       <tr>
-        <td colspan="9" class="text-center">
+        <td {{bind-attr colspan="colSpan"}} class="text-center">
           <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
         </td>
       </tr>
