@@ -109,3 +109,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   showMoreMenu: Ember.computed 'team.[]', ->
     @get('team.length')
+
+  columns: Ember.A([
+    {
+      classNames: "name"
+      heading: "Name"
+      route: "contact"
+      binding: "name"
+    }
+  ])
