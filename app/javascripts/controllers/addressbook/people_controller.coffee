@@ -89,6 +89,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     if tag = @get('tag') && @get('isTagged')
       return Ember.merge params, tag: @get('tag')
 
+    params
+
   noResults: Ember.computed 'content.isLoading', 'model.[]', ->
     not @get('content.isLoading') && not @get('model').get('length')
 
