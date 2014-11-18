@@ -66,8 +66,10 @@ $body: #6e6e6e;
   td, th {
     width: 80px;
     max-width: 80px;
-    padding-left: 10px !IMPORTANT;
-    height: 50px;
+    &:not(.check) {
+      padding-left: 10px !IMPORTANT;
+      height: 50px;
+    }
 
     &.row-selector {
       width: 20px;
