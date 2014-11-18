@@ -10,18 +10,24 @@
     </tr>
   </thead>
   <tbody>
-{{#each item in list}}
+{{#each item in list itemController="varidicItem"}}
   <tr>
     <td class="check">
       <input type="checkbox"/>
     </td>
     {{#each column in columns}}
+      {{#with item}}
       <td {{bind-attr class="column.classNames"}}>
-        {{#if column.avatar}}
-          {{dynamicAvatar item column}}
+        {{#if column.component}}
+          {{renderComponent item column}}
+        {{else}}
+          {{#if column.avatar}}
+            {{dynamicAvatar item column}}
+          {{/if}}
+          {{getProperty item column}}
         {{/if}}
-        {{getProperty item column}}
       </td>
+      {{/with}}
     {{/each}}
   </tr>
 {{else}}

@@ -143,4 +143,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       route: "calendar.task"
       context: "tasks.firstObject"
     }
+    {
+      classNames: "assign"
+      heading: "Assigned To"
+      component: "assignto-picker"
+      bindings: ["assignedTo", "assignees", "contact"]
+    }
   ])

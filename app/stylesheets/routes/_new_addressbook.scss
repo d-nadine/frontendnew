@@ -257,6 +257,21 @@
     background: #fbfbfb;
   }
 
+  .contacts-table .assign {
+    overflow: visible;
+  }
+
+  .contacts-table .assign .btn-group a {
+    &:hover {
+      text-decoration: none;
+    }
+    font-size: 13px;
+    display: inline-block;
+    width: auto;
+    color: #333;
+    cursor: hand;
+  }
+
   .contacts-sidebar {
     display: inline-block;
     width: 200px;
