@@ -9,7 +9,7 @@ Radium.ConversationsView = Radium.View.extend
   resizeTable: ->
     conversations = @$(@get('elementSelector'))
 
-    return unless conversations.length
+    return unless conversations?.length
 
     height = (window.innerHeight - conversations.offset().top) + 10
 
