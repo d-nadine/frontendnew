@@ -115,26 +115,7 @@
               {{/if}}
             </td>
             <td class="assign">
-              <div class="btn-group">
-                <a href="#" data-toggle="dropdown" class="assignto">
-                  {{avatar assignedTo style="tiny"}}
-                  <span class="to">{{assignedTo.displayName}}</span>
-                  {{#if assignees.length}}
-                    <span class="caret"></span>
-                  {{/if}}
-                </a>
-                {{#if assignees.length}}
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    {{#each assignees}}
-                      <li>
-                        <a href="#" {{action "assignContact" controller.contact this}}>
-                          {{avatar this style="tiny"}}{{displayName}}
-                        </a>
-                      </li>
-                    {{/each}}
-                  </ul>
-                {{/if}}
-              </div>
+              {{assignto-picker assignedTo=assignedTo assignees=assignees contact=controller.contact}}
             </td>
             <td class="follow">
               <span class="follow-yes"></span>

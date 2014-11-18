@@ -42,7 +42,6 @@ Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
     args.unshift resourceRoute
     prop = if path.length then ".displayName" else "displayName"
     args.unshift path + prop
-
   else
     options.types = ["STRING", "ID"]
     options.contexts = [this, this]

@@ -17,6 +17,9 @@
     </td>
     {{#each column in columns}}
       <td {{bind-attr class="column.classNames"}}>
+        {{#if column.avatar}}
+          {{dynamicAvatar item column}}
+        {{/if}}
         {{getProperty item column}}
       </td>
     {{/each}}

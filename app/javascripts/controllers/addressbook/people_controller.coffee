@@ -116,20 +116,31 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Name"
       route: "contact"
       binding: "name"
-      context: "this"
-    },
+      avatar: true
+    }
     {
-      classNames: ""
       heading: "Email"
       route: "contact"
       binding: "primaryEmail.value"
-      context: "this"
-    },
+    }
     {
-      classNames: ""
       heading: "Company"
       route: "company"
       binding: "company.name"
       context: "company"
+    }
+    {
+      heading: "Events"
+      binding: "activityCount"
+    }
+    {
+      heading: "Inactive"
+      binding: "daysInactive"
+    }
+    {
+      heading: "Next Task"
+      binding: "tasks.firstObject"
+      route: "calendar.task"
+      context: "tasks.firstObject"
     }
   ])
