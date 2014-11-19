@@ -1,34 +1,4 @@
 GIT
-  remote: git://github.com/dagda1/iridium-ember.git
-  revision: 017d584d58adc1b79c66b807dc6c9e4a548d5d4f
-  specs:
-    iridium-ember (0.1.0)
-      barber
-      ember-source (= 1.1.2)
-
-GIT
-  remote: git://github.com/dagda1/iridium.git
-  revision: 55cad855083ad2f3bf51ea714493656cd17c5557
-  specs:
-    iridium (0.9.0)
-      activesupport
-      barber (~> 0.4.2)
-      coffee-script
-      compass
-      execjs
-      grit
-      handlebars-source (= 1.0.12)
-      less
-      rack
-      rack-rewrite
-      rake-pipeline (~> 0.8.0)
-      rake-pipeline-web-filters (= 0.7.0)
-      sass
-      thor
-      uglifier (~> 1.2.3)
-      yui-compressor
-
-GIT
   remote: git://github.com/livingsocial/rake-pipeline.git
   revision: a75d96fbadcc659a35a0ae59212e0bc60b58cc54
   specs:
@@ -45,85 +15,122 @@ GIT
       thor
 
 GIT
-  remote: git://github.com/wycats/thor.git
-  revision: 12f767bdd8973a2cc6501b00ec459d10a17e0eeb
+  remote: git://github.com/radiumsoftware/iridium-ember.git
+  revision: fd38246ee112c84eb78ef56efb9609eab6e2b3a4
   specs:
-    thor (0.18.1)
+    iridium-ember (0.1.0)
+      barber
+      ember-source (= 1.7.1)
+
+GIT
+  remote: git://github.com/radiumsoftware/iridium.git
+  revision: 4c3a81cd7ba5da4bba64bbc09928123770b41411
+  specs:
+    iridium (0.9.0)
+      activesupport
+      barber (~> 0.4.2)
+      coffee-script
+      compass
+      execjs
+      grit
+      handlebars-source (= 1.3.0)
+      less
+      rack
+      rack-rewrite
+      rake-pipeline (~> 0.8.0)
+      rake-pipeline-web-filters (= 0.7.0)
+      sass
+      thor
+      uglifier (~> 1.2.3)
+      yui-compressor
+
+GIT
+  remote: git://github.com/wycats/thor.git
+  revision: e5e77c499b3c408c47da46285f5248c0365b2429
+  specs:
+    thor (0.19.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.0.1)
-      i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
+    activesupport (4.1.8)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
       thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
-    atomic (1.1.14)
+      tzinfo (~> 1.1)
     barber (0.4.2)
       ember-source
       execjs
       handlebars-source
-    celluloid (0.15.2)
-      timers (~> 1.1.0)
-    chunky_png (1.2.9)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
+    chunky_png (1.3.3)
     coderay (1.1.0)
-    coffee-script (2.2.0)
+    coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.8.0)
     commonjs (0.2.7)
-    compass (0.12.2)
+    compass (1.0.1)
       chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
+      compass-core (~> 1.0.1)
+      compass-import-once (~> 1.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      sass (>= 3.3.13, < 3.5)
+    compass-core (1.0.1)
+      multi_json (~> 1.0)
+      sass (>= 3.3.0, < 3.5)
+    compass-import-once (1.0.5)
+      sass (>= 3.2, < 3.5)
     daemons (1.1.9)
     diff-lcs (1.2.5)
     dnote (1.7.1)
-    ember-source (1.1.2)
-      handlebars-source (= 1.0.12)
+    ember-source (1.7.1)
+      handlebars-source (~> 1.0)
     eventmachine (1.0.3)
-    execjs (2.0.2)
-    ffi (1.9.3)
+    execjs (2.2.2)
+    ffi (1.9.6)
     formatador (0.2.5)
-    fssm (0.2.10)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    guard (2.6.1)
+    guard (2.8.2)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
-    handlebars-source (1.0.12)
-    i18n (0.6.5)
+    handlebars-source (1.3.0)
+    hitimes (1.2.2)
+    i18n (0.6.11)
     json (1.8.1)
-    kgio (2.8.1)
-    less (2.4.0)
+    kgio (2.9.2)
+    less (2.6.0)
       commonjs (~> 0.2.7)
-    libv8 (3.16.14.3)
-    listen (2.7.9)
+    libv8 (3.16.14.7)
+    listen (2.8.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.9)
     method_source (0.8.2)
-    mime-types (1.25)
-    minitest (4.7.5)
-    multi_json (1.8.2)
-    posix-spawn (0.3.6)
-    pry (0.10.0)
+    mime-types (1.25.1)
+    minitest (5.4.3)
+    multi_json (1.10.1)
+    posix-spawn (0.3.9)
+    pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.5.2)
-    rack-rewrite (1.4.01)
+    rack-rewrite (1.5.0)
     rack-test (0.6.2)
       rack (>= 1.0)
-    raindrops (0.12.0)
-    rake (10.1.0)
+    raindrops (0.13.0)
+    rake (10.1.1)
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
@@ -131,24 +138,25 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     ref (1.0.5)
-    ruby-prof (0.13.0)
-    sass (3.2.12)
-    slop (3.5.0)
-    therubyracer (0.12.0)
+    ruby-prof (0.15.2)
+    sass (3.4.8)
+    slop (3.6.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thin (1.6.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 1.0.0)
-      rack (>= 1.0.0)
-    thread_safe (0.1.3)
-      atomic
-    timers (1.1.0)
-    tzinfo (0.3.38)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    thread_safe (0.3.4)
+    timers (4.0.1)
+      hitimes
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
       multi_json (~> 1.3)
-    unicorn (4.7.0)
+    unicorn (4.8.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)

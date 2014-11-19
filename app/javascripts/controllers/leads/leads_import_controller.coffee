@@ -199,8 +199,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       headers.map (header) ->
         hash =
-          name: header.replace(/([A-Z])/g, ' $1')
-                 .replace(/^./, (str) -> str.toUpperCase()),
+          name: header.replace(/([A-Z])/g, ' $1').replace(/^./, (str) -> str.toUpperCase())
           marker: self.get("headerInfo.#{header}.name")
 
         Ember.Object.create(hash)
