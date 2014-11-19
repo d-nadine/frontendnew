@@ -1,4 +1,6 @@
-Radium.WorkflowGroupItemController = Radium.ArrayController.extend
+require 'controllers/pipeline/deals_totals_mixin'
+
+Radium.WorkflowGroupItemController = Radium.ArrayController.extend Radium.DealsTotalsMixin,
   needs: ['pipeline']
   arrangedDealsLength: 0
 
@@ -26,13 +28,6 @@ Radium.WorkflowGroupItemController = Radium.ArrayController.extend
     return 0 unless total && length
 
     Math.floor((length / total) * 100)
-
-  total: Ember.computed 'length', ->
-    return 0 if @get('length') == 0
-
-    @reduce(((value, item) ->
-      value + item.get('value')
-    ), 0)
 
   dasherized: Ember.computed 'model.title', ->
     @get('model.title').dasherize()

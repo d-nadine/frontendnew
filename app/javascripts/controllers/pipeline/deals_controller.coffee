@@ -1,6 +1,7 @@
 require 'controllers/pipeline/base_controller'
+require 'controllers/pipeline/deals_totals_mixin'
 
-Radium.PipelineDealsController = Radium.PipelineBaseController.extend
+Radium.PipelineDealsController = Radium.PipelineBaseController.extend Radium.DealsTotalsMixin,
   needs: ["pipelineIndex", "pipeline"]
   sort: 'name'
   sortAscending: true
@@ -103,5 +104,3 @@ Radium.PipelineDealsController = Radium.PipelineBaseController.extend
         regex.test(item.get(filter))
 
     content.toArray().sort(sortFunc)
-
-  total: Ember.computed.oneWay 'controllers.pipelineIndex.total'
