@@ -131,7 +131,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     }
     {
       heading: "Events"
-      binding: "activityCount"
+      binding: "activityTotal"
     }
     {
       heading: "Inactive"
@@ -139,9 +139,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     }
     {
       heading: "Next Task"
-      binding: "tasks.firstObject"
+      binding: "nextTodo.description"
       route: "calendar.task"
-      context: "tasks.firstObject"
+      context: "nextTodo"
     }
     {
       classNames: "assign"

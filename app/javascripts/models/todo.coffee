@@ -24,7 +24,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
       @get('_referenceMeeting') ||
       @get('_referenceTodo')
 
-  _referenceContact: DS.belongsTo('Radium.Contact')
+  _referenceContact: DS.belongsTo('Radium.Contact', inverse: 'todos')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')

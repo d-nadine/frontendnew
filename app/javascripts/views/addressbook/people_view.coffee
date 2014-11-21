@@ -13,7 +13,7 @@ Radium.PeopleIndexView = Radium.View.extend
     Ember.run.later =>
       return unless @get('controller.showMoreMenu')
 
-      return unless @$('.show-more').length
+      return unless @$('.show-more')?.length
 
       @removeObserver 'controller.showMoreMenu', this, 'addEventHandlers'
 

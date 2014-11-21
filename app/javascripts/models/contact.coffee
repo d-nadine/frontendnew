@@ -2,7 +2,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
   Radium.AttachmentsMixin,
 
-  todos: DS.hasMany('Radium.Todo')
+  todos: DS.hasMany('Radium.Todo', inverse: '_referenceContact')
   meetings: DS.hasMany('Radium.Meeting', inverse: '_referenceContact')
   deals: DS.hasMany('Radium.Deal', inverse: 'contact')
   tags: DS.hasMany('Radium.Tag')
@@ -13,6 +13,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   addresses: DS.hasMany('Radium.Address')
   notes: DS.hasMany('Radium.Note', inverse: '_referenceContact')
 
+  nextTodo: DS.belongsTo('Radium.Todo', inverse: null)
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
@@ -30,7 +31,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   removeCompany: DS.attr('boolean')
   updateStatus: DS.attr('string')
   lastActivityAt: DS.attr('date')
-  activityCount: DS.attr('number')
+  activityTotal: DS.attr('number')
 
   daysInactive: Ember.computed 'lastActivityAt', ->
     if @get("lastActivityAt")?
