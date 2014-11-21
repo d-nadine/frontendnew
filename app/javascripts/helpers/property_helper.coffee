@@ -3,6 +3,7 @@ Ember.Handlebars.registerBoundHelper 'getProperty', (context, property, options)
     className: ""
     context: "this"
     avatar: false
+    checked: false
 
   property = Ember.merge defaults, property
 

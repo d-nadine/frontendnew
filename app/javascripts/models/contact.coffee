@@ -42,6 +42,15 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   ignored: DS.attr('boolean')
 
+  dealsClosedTotalValue: DS.attr('number')
+  dealsClosedTotal: DS.attr('number')
+  activitySevenDaysTotal: DS.attr('number')
+  activityThirtyDaysTotal: DS.attr('number')
+
+  dealsTotal: Ember.computed 'dealsClosedTotalValue', ->
+    total = @get('dealsClosedTotalValue') || 0
+    accounting.formatMoney(total)
+
   isExpired: Radium.computed.daysOld('createdAt', 60)
 
   latestDeal: Ember.computed 'deals', ->
@@ -63,6 +72,9 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryAddress: Radium.computed.primary 'addresses'
 
   email: Ember.computed.alias 'primaryEmail.value'
+
+  added: Ember.computed 'createdAt', ->
+    @get('createdAt').toFormattedString("%B %Y")
 
   openDeals: Ember.computed 'deals.[]', ->
     @get('deals').filterProperty 'isOpen'

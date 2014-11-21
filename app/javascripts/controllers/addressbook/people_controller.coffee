@@ -117,36 +117,75 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       route: "contact"
       binding: "name"
       avatar: true
+      checked: true
     }
     {
       heading: "Email"
       route: "contact"
-      binding: "primaryEmail.value"
+      binding: "email"
+      checked: true
     }
     {
       heading: "Company"
       route: "company"
       binding: "company.name"
       context: "company"
+      checked: true
     }
     {
       heading: "Events"
       binding: "activityTotal"
+      checked: true
     }
     {
       heading: "Inactive"
       binding: "daysInactive"
+      checked: true
     }
     {
       heading: "Next Task"
       binding: "nextTodo.description"
       route: "calendar.task"
       context: "nextTodo"
+      checked: true
     }
     {
       classNames: "assign"
       heading: "Assigned To"
       component: "assignto-picker"
       bindings: ["assignedTo", "assignees", "contact"]
+      checked: true
+    }
+    {
+      heading: "City"
+      binding: "primaryAddress.city"
+    }
+    {
+      heading: "Source"
+      binding: "source"
+    }
+    {
+      heading: "Added"
+      binding: "added"
+    }
+    {
+      heading: "Deals Closed"
+      binding: "dealsClosedTotal"
+    }
+    {
+      heading: "Deals Total"
+      binding: "dealsTotal"
+    }
+    {
+      heading: "Status"
+      binding: "status"
+    }
+    {
+      heading: "Events in last 7 days"
+      binding: "activitySevenDaysTotal"
+    }
+    {
+      heading: "Events in last 30 days"
+      binding: "activityThirtyDaysTotal"
     }
   ])
