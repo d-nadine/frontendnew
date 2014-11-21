@@ -56,102 +56,12 @@
         </span>
       </button>
       <ul class="col-menu dropdown-menu">
-        <li>
+        {{#each columns}}
           <label>
-            <input type="checkbox">
-            <span>NAME</span>
+            {{input type="checkbox" checked=checked}}
+            <span>{{heading}}</span>
           </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>EMAIL</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>COMPANY</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>EVENTS</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>INACTIVE</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>NEXT TASK</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>ASSIGNED TO</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>LAST ACTIVITY</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>LOCATION</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>PHONE</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>TAGS</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>DEALS</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>TYPE</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>SOURCE</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>POSITION</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <span>ADDED</span>
-          </label>
-        </li>
+        {{/each}}
       </ul>
       {{input type="text" value=searchText class="searchbox" placeholder="search"}}
     </div>
@@ -225,5 +135,5 @@
       <a href="#" class="show-more">Show More</a>
     {{/if}}
   </div>
-  {{varidic-table list=controller columns=columns showMore="showMore" class="span9"}}
+  {{varidic-table list=controller columns=checkedColumns showMore="showMore" class="span9"}}
 </div>
