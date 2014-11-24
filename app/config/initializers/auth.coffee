@@ -39,6 +39,7 @@ Ember.Application.initializer
         store = currentUserController.get('store')
 
         apiUrl = store.get('_adapter.url')
+        console.log("auth.coffee", apiUrl)
         Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
       else
         Ember.$('[class^=ball]').hide()

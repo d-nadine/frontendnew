@@ -8,6 +8,7 @@ Ember.Application.initializer
 
     Ember.assert 'store found in adapterUrl initializer', store
 
+    console.log("production.coffee", window.API_HOST)
     store.get('_adapter').reopen
       url: window.API_HOST || 'http://api.radiumcrm.com'
 

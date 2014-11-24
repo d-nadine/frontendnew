@@ -25,6 +25,7 @@ Radium.AuthManager = Ember.Object.extend
 
     return unless Ember.isEmpty(token)
 
+    console.log("auth_manager", window.API_HOST)
     location.replace(window.API_HOST + '/sessions/new')
   ).observes('token').on('init')
 
