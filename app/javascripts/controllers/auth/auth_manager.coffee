@@ -25,7 +25,7 @@ Radium.AuthManager = Ember.Object.extend
 
     return unless Ember.isEmpty(token)
 
-    location.replace('http://api.radiumcrm.com/sessions/new')
+    location.replace(window.API_HOST + '/sessions/new')
   ).observes('token').on('init')
 
   logOut: (apiUrl, destination = 'http://www.radiumcrm.com/') ->
