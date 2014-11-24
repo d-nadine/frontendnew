@@ -61,9 +61,10 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     else
       "Month"
 
-  showYearOption: Ember.computed 'yearOption', 'isCurrent', ->
-    @get('yearOption') && not @get('isCurrent')
+  showYearOption: Ember.computed 'yearOption', 'isCurrent', 'exceededUsers', ->
+    return false if @get('exceededUsers')
 
+    @get('yearOption') && not @get('isCurrent')
 
   currentPlanIsYearly: Ember.computed 'yearOption', 'parentController', ->
     @get('yearOption') == @get('parentController.currentPlan')
