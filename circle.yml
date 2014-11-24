@@ -3,7 +3,7 @@ machine:
     version: '2.0'
 deployment:
   staging:
-    branch: master
+    branch: staging
     heroku:
       appname: radium-frontend-staging
 
