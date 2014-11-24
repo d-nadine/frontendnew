@@ -46,11 +46,7 @@
       <tr {{bind-attr class=":pricing-table isCurrent"}}>
         <td class="title">{{unbound capitalize name}}</td>
         <td class="price blue">
-          {{#unless isBasic}}
-            {{unbound currency amount}}/{{interval}}
-          {{else}}
-            Free
-          {{/unless}}
+          {{{unbound pricingText}}}
         </td>
         <td class="description">
           {{#if isBasic}}
@@ -71,21 +67,19 @@
               <button
                 {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}
                 {{action "updateSubscription" this}}>
-                {{#if isCurrent}}
-                  Your plan
-                {{else}}
-                  Upgrade
-                {{/if}}
+                {{upgradeText}}
               </button>
               {{#if isCurrentAndisTrial}}
-                <button {{action "updateSubscription" this}} class="btn btn-success">Upgrade</button>
+                <button {{action "updateSubscription" this}} class="btn btn-success">{{upgradeText}}</button>
               {{/if}}
             {{else}}
               {{#unless isCurrent}}
                 <strong>N/A</strong>
               {{/unless}}
             {{/unless}}
-
+            {{#if showYearOption}}
+              <button {{action "updateSubscription" yearOption}} class="btn btn-success" {{bind-attr disabled="notViable"}}>Year</button>
+            {{/if}}
             {{#if showCancel}}
               <button class="btn btn-danger" {{action "confirmCancelSubscription"}}>Cancel Subscription</button>
             {{/if}}

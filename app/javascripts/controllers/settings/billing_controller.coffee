@@ -99,16 +99,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @applyBufferedChanges()
 
       billing.one 'didUpdate', =>
-        billing.reload()
-
-        @get('currentUser').reload()
-
-        if subscriptionPlan.get('planId') != 'basic'
-          Radium.ActiveSubscription.find(@get('account.id')).then (activeSubscription) =>
-            @set 'activeSubscription', activeSubscription
-
-        @set 'isPersisting', false
-        @send 'flashSuccess', "You are now on the #{subscriptionPlan.get('name')} plan"
+        @send 'flashSuccess', "You are now on the #{subscriptionPlan.get('name')} plan, reloading in 5 seconds..."
+        setInterval((-> window.location.reload()), 3000)
 
       @addErrorEvents(billing)
 
