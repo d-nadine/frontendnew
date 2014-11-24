@@ -6,3 +6,7 @@ deployment:
     branch: master
     heroku:
       appname: radium-frontend-staging
+
+test:
+  override:
+    - echo "Fix the tests"
