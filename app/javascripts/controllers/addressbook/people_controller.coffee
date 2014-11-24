@@ -112,7 +112,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
 
-  columns: Ember.A([
+  fixedColumns: Ember.A([
     {
       classNames: "name"
       heading: "Name"
@@ -121,6 +121,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       avatar: true
       checked: true
     }
+  ])
+
+  columns: Ember.A([
     {
       heading: "Email"
       route: "contact"

@@ -229,18 +229,28 @@
     padding-left: 0 !important;
   }
 
+  .table-container {
+    position: relative;
+    width: 1118px;
+    height: 100%;
+    display: inline-block;
+  }
+
+  .right-table {
+    overflow: auto;
+  }
+
   .contacts-table {
     table-layout: fixed;
-    width: 100%;
     clear: both;
     border-collapse: separate;
     border-spacing: 0;
-    max-width: 100%;
     background-color: transparent;
+    float: left;
   }
 
   .contacts-table .check {
-    width: 15px;
+    width: 25px;
     text-align: center;
   }
 

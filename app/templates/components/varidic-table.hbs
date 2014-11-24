@@ -1,9 +1,11 @@
 <table class="contacts-table">
   <thead>
     <tr>
+      {{#if check}}
       <th class="check">
         <input type="checkbox"/>
       </th>
+      {{/if}}
       {{#each column in columns}}
         <th>{{column.heading}}</th>
       {{/each}}
@@ -12,9 +14,11 @@
   <tbody>
 {{#each item in list itemController="varidicItem"}}
   <tr>
+    {{#if check}}
     <td class="check">
       <input type="checkbox"/>
     </td>
+    {{/if}}
     {{#each column in columns}}
       {{#with item}}
       <td {{bind-attr class="column.classNames"}}>

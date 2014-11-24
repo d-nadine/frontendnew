@@ -135,5 +135,12 @@
       <a href="#" class="show-more">Show More</a>
     {{/if}}
   </div>
-  {{varidic-table list=controller columns=checkedColumns showMore="showMore" class="span9"}}
+  <div class="table-container">
+    <div class="left-table">
+      {{varidic-table list=controller columns=fixedColumns showMore="showMore" check=true classNames="fixed-table"}}
+    </div>
+    <div class="right-table">
+      {{varidic-table list=controller columns=checkedColumns showMore="showMore"}}
+    </div>
+  </div>
 </div>

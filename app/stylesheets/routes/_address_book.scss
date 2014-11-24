@@ -28,8 +28,11 @@ $body: #6e6e6e;
     }
   }
 
-  table {
+  table:not(.contacts-table) {
     width: 100%;
+    td, th {
+      max-width: 80px;
+    }
   }
 
   th {
@@ -65,7 +68,6 @@ $body: #6e6e6e;
 
   td, th {
     width: 80px;
-    max-width: 80px;
     &:not(.check) {
       padding-left: 10px !IMPORTANT;
       height: 50px;
