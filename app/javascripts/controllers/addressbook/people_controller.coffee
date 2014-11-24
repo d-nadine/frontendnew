@@ -125,12 +125,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   columns: Ember.A([
     {
+      classNames: "email"
       heading: "Email"
       route: "contact"
       binding: "email"
       checked: true
     }
     {
+      classNames: "company"
       heading: "Company"
       route: "company"
       binding: "company.name"
@@ -138,16 +140,19 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       checked: true
     }
     {
+      classNames: "Events"
       heading: "Events"
       binding: "activityTotal"
       checked: true
     }
     {
+      classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
       checked: true
     }
     {
+      classNames: "nextTask"
       heading: "Next Task"
       binding: "nextTodo.description"
       route: "calendar.task"
@@ -162,34 +167,42 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       checked: true
     }
     {
+      classNames: "city"
       heading: "City"
       binding: "primaryAddress.city"
     }
     {
+      classNames: "source"
       heading: "Source"
       binding: "source"
     }
     {
+      classNames: "added"
       heading: "Added"
       binding: "added"
     }
     {
+      classNames: "deals-closed-total"
       heading: "Deals Closed"
       binding: "dealsClosedTotal"
     }
     {
+      classNames: "deals-total"
       heading: "Deals Total"
       binding: "dealsTotal"
     }
     {
+      classNames: "status"
       heading: "Status"
       binding: "status"
     }
     {
+      classNames: "events-seven"
       heading: "Events in last 7 days"
       binding: "activitySevenDaysTotal"
     }
     {
+      classNames: "events-thirty"
       heading: "Events in last 30 days"
       binding: "activityThirtyDaysTotal"
     }

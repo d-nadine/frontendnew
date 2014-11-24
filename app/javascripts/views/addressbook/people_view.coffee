@@ -1,13 +1,20 @@
 Radium.PeopleIndexView = Radium.View.extend
-  setup: ( ->
+  setup: Ember.on 'didInsertElement', ->
+    @resizeTableContainer()
+
+    $(window).on 'resize.table-container-resize', @resizeTableContainer.bind(this)
+
     Ember.run.scheduleOnce 'afterRender', this, 'addEventHandlers'
 
-    @$('ul.col-menu li').on 'click.col-men', ->
-      check = $(this).find 'input[type=checkbox]'
-      check.prop('checked', !check.prop('checked'))
-      return false
+  resizeTableContainer: ->
+    tableContainer = @$('.table-container')
 
-  ).on 'didInsertElement'
+    buffer = 100
+
+    left = tableContainer.offset().left
+    availableWidth = document.body.clientWidth - left - buffer
+
+    tableContainer.width(availableWidth)
 
   addEventHandlers: ->
     Ember.run.later =>
@@ -34,7 +41,7 @@ Radium.PeopleIndexView = Radium.View.extend
         false
     , 1000
 
-  teardown: (->
-    @$('ul.col-menu').off 'click.col-men'
+  teardown: Ember.on 'willDestroyElement', ->
+    @$('ul.col-menu').off 'click.col-menu'
     @$('.show-more').off 'click.show-more'
-  ).on 'willDestroyElement'
+    $(window).off 'resize.table-container-resize'
