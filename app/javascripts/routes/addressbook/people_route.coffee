@@ -27,3 +27,10 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     Radium.InfiniteDataset.create
       type: Radium.Contact
       params: filterParams
+
+  deactivate: ->
+    @_super.apply this, arguments
+
+    Ember.run.next =>
+      @controller.get('columns').setEach 'checked', false
+      @controller.get('columns').slice(0, 5).setEach 'checked', true

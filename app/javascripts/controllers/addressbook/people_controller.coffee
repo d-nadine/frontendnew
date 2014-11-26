@@ -147,12 +147,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Events"
       binding: "activityTotal"
       checked: true
+      sortOn: "activity_total"
     }
     {
       classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
       checked: true
+      sortOn: "last_activity_at"
     }
     {
       classNames: "nextTask"
@@ -173,40 +175,48 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       classNames: "city"
       heading: "City"
       binding: "primaryAddress.city"
+      sortOn: "city"
     }
     {
       classNames: "source"
       heading: "Source"
       binding: "source"
+      sortOn: "source"
     }
     {
       classNames: "added"
       heading: "Added"
       binding: "added"
+      sortOn: "created_at"
     }
     {
       classNames: "deals-closed-total"
       heading: "Deals Closed"
       binding: "dealsClosedTotal"
+      sortOn: "deals_closed_total"
     }
     {
       classNames: "deals-total"
       heading: "Deals Total"
       binding: "dealsTotal"
+      sortOn: "deals_closed_total_value"
     }
     {
       classNames: "status"
       heading: "Status"
       binding: "status"
+      sortOn: "status"
     }
     {
       classNames: "events-seven"
       heading: "Events in last 7 days"
       binding: "activitySevenDaysTotal"
+      sortOn: "activity_seven_days_total"
     }
     {
       classNames: "events-thirty"
       heading: "Events in last 30 days"
       binding: "activityThirtyDaysTotal"
+      sortOn: "activity_thirty_days_total"
     }
   ])

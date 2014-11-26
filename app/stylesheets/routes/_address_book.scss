@@ -31,6 +31,7 @@ $body: #6e6e6e;
   table:not(.contacts-table) {
     width: 100%;
     td, th {
+      width: 80px;
       max-width: 80px;
     }
   }
@@ -67,7 +68,6 @@ $body: #6e6e6e;
   }
 
   td, th {
-    width: 80px;
     &:not(.check) {
       padding-left: 10px !IMPORTANT;
       height: 50px;
@@ -85,9 +85,6 @@ $body: #6e6e6e;
     &.company {
         font-weight: 600;
 
-    }
-    &.events {
-        max-width: 20px;
     }
   }
 

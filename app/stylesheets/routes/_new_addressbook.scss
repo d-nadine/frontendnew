@@ -253,6 +253,10 @@
     text-align: center;
   }
 
+  .contacts-table td.check {
+    padding-left: 10px;
+  }
+
   .contacts-table th {
     border-bottom: 1px solid #777;
     text-transform: uppercase;
@@ -282,12 +286,46 @@
     cursor: hand;
   }
 
+  .contacts-table thead tr {
+    .name, .email, ,.company {
+      min-width: 250px;
+    }
+
+    .events, {
+      min-width: 80px;
+    }
+
+    .inactive {
+      min-width: 110px;
+    }
+
+    .nextTask {
+      min-width: 125px;
+    }
+
+    .assign {
+      min-width: 125px;
+    }
+
+    .city, .source {
+      min-width: 125px;
+    }
+
+    .status, .deals-closed-total, .deals-total, .events-seven, .events-thirty {
+      min-width: 90px
+    }
+
+    .events-thirty {
+      min-width: 100px;
+    }
+  }
+
   .contacts-table tbody tr {
     td {
       padding-right: 10px;
     }
 
-    .events,  {
+    .deals-closed-total, .deals-total, .events-seven, .events-thirty, .events {
       text-align: center;
     }
 
@@ -356,6 +394,5 @@
     background-color: #fff;
     vertical-align: center;
     height: 52px;
-    border-top: 1px solid #777;
   }
 }

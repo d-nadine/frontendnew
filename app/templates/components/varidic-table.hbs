@@ -8,11 +8,11 @@
       {{/if}}
       {{#each column in columns}}
         {{#if column.sortOn}}
-          <th>
+          <th {{bind-attr class="column.classNames"}}>
             {{table-sorter heading=column.heading sortOn=column.sortOn sort="sortTable"}}
           </th>
         {{else}}
-          <th>{{column.heading}}</th>
+          <th {{bind-attr class="column.classNames"}}>{{column.heading}}</th>
         {{/if}}
       {{/each}}
     </tr>
