@@ -18,9 +18,17 @@ Radium.PeopleIndexView = Radium.View.extend
     menu = $('.col-selector')
 
     if e.target == menu || target.parents('.col-selector').length
-      return
+      return @resizeTableHeaders()
 
     menu.removeClass('open') if menu.hasClass('open')
+
+  resizeTableHeaders: ->
+    rightHeight = $('.contacts-table:last thead tr th:first').outerHeight() - 1
+
+    Ember.run.next ->
+      $('.contacts-table:first thead tr th').each (index, th) ->
+        $(th).height(rightHeight)
+
 
   resizeTableContainer: ->
     tableContainer = @$('.table-container')
