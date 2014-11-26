@@ -282,6 +282,32 @@
     cursor: hand;
   }
 
+  .contacts-table tbody tr {
+    .events,  {
+      text-align: center;
+    }
+
+    .inactive, .nextTask {
+      padding-right: 10px;
+    }
+
+    .nextTask {
+      max-width: 100px;
+    }
+
+    .assign {
+      padding-right: 20px;
+    }
+
+    .city {
+      max-width: 200px;
+    }
+
+    .company, .name, .email {
+      max-width: 350px;
+    }
+  }
+
   .contacts-sidebar {
     display: inline-block;
     width: 200px;
@@ -323,5 +349,12 @@
 
   .nav-pills.more {
     display: none;
+  }
+
+  .loading {
+    text-align: center;
+    background-color: #fff;
+    vertical-align: center;
+    height: 52px;
   }
 }

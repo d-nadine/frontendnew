@@ -41,13 +41,5 @@
     </tr>
   {{/unless}}
 {{/each}}
-    {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
-    {{#if list.content.isLoading}}
-      <tr>
-        <td {{bind-attr colspan="colSpan"}} class="text-center">
-          <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
-        </td>
-      </tr>
-    {{/if}}
   </tbody>
 </table>

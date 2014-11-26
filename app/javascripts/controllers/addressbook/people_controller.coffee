@@ -140,7 +140,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       checked: true
     }
     {
-      classNames: "Events"
+      classNames: "events"
       heading: "Events"
       binding: "activityTotal"
       checked: true

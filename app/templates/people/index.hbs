@@ -142,5 +142,11 @@
     <div class="right-table">
       {{varidic-table list=controller columns=checkedColumns showMore="showMore"}}
     </div>
+    {{#if content.isLoading}}
+      <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
+        <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+      </div>
+    {{/if}}
   </div>
+  {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
 </div>
