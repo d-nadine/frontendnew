@@ -283,12 +283,12 @@
   }
 
   .contacts-table tbody tr {
-    .events,  {
-      text-align: center;
+    td {
+      padding-right: 10px;
     }
 
-    .inactive, .nextTask .source, .status, .events-seven, .events-thirty, .added {
-      padding-right: 10px;
+    .events,  {
+      text-align: center;
     }
 
     .nextTask {

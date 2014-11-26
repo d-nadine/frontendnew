@@ -120,6 +120,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       binding: "name"
       avatar: true
       checked: true
+      sortOn: "name"
     }
   ])
 
@@ -130,6 +131,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       route: "contact"
       binding: "email"
       checked: true
+      sortOn: "email"
     }
     {
       classNames: "company"
@@ -138,6 +140,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       binding: "company.name"
       context: "company"
       checked: true
+      sortOn: "company"
     }
     {
       classNames: "events"

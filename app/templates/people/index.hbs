@@ -137,10 +137,10 @@
   </div>
   <div class="table-container">
     <div class="left-table">
-      {{varidic-table list=controller columns=fixedColumns showMore="showMore" check=true classNames="fixed-table"}}
+      {{varidic-table list=controller columns=fixedColumns showMore="showMore" check=true classNames="fixed-table" sort="sortContacts"}}
     </div>
     <div class="right-table">
-      {{varidic-table list=controller columns=checkedColumns showMore="showMore"}}
+      {{varidic-table list=controller columns=checkedColumns showMore="showMore" sort="sortContacts"}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
