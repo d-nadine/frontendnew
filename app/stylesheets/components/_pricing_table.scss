@@ -8,6 +8,16 @@
   .btn-success {
     min-width: 82px;
   }
+
+  input[type=checkbox] {
+    margin-left: 10px;
+  }
+
+  .yearly-label {
+    display: inline;
+    position: relative;
+    top: 3px;
+  }
 }
 
 .pricing-table {

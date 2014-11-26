@@ -56,34 +56,31 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
 
     template: Ember.Handlebars.compile """
       <span  class="text dollar">$</span>
-      {{input value=controller.value type="number" class="field input-medium negotitating"}}
+      {{input value=value type="number" class="field input-medium negotitating"}}
       {{#if view.valueInvalid}}
         <span class="error"><i class="ss-standard ss-alert"></i>Value must be greater than 0.</span>
       {{/if}}
     """
 
-    valueInvalid: ( ->
+    valueInvalid: Ember.computed 'controller.value', 'controller.isSubmitted', ->
       return false unless @get('controller.isSubmitted')
       value = @get('controller.value')
 
       return true if Ember.isEmpty value
 
       parseInt(value) == 0
-    ).property('controller.value', 'controller.isSubmitted')
 
-    isValid: ( ->
+    isValid: Ember.computed 'controller.value', 'controller.isSubmitted', ->
       value = @get('controller.value')
 
       return false if Ember.isEmpty value
 
       value.toString().isCurrency()
-    ).property('controller.value', 'controller.isSubmitted')
 
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'controller.value', 'controller.isSubmitted', ->
       (not @get('isValid')) && @get('controller.isSubmitted')
-    ).property('controller.value', 'controller.isSubmitted')
 
-  referenceName: ( ->
+  referenceName: Ember.computed 'controller.reference', ->
     # FIXME : can we use toString on the models?
     reference = @get('controller.reference')
 
@@ -94,4 +91,3 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
     return reference.get('displayName') if reference.constructor is Radium.Contact
 
     ""
-  ).property('controller.reference')

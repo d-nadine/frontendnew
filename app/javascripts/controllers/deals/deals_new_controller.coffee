@@ -3,7 +3,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
   actions:
     submit: ->
       @set 'isSubmitted', true
-      return unless @get('model.isValid')
+      return unless @get('isValid')
 
       deal = @get('model').create()
 
@@ -73,3 +73,17 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     return if @get('status')
 
     @set('status', @get('statuses.firstObject'))
+
+  isValid: Ember.computed 'name', 'contact', 'user', 'source', 'description', 'value', ->
+    return false if Ember.isEmpty(@get('name'))
+    return false if Ember.isEmpty(@get('contact'))
+    return false if Ember.isEmpty(@get('user'))
+    return false if Ember.isEmpty(@get('description'))
+
+    dealValue = @get('value')
+
+    return false if Ember.isEmpty(dealValue)
+    return false if parseInt(dealValue) == 0
+    return false unless dealValue.isCurrency()
+
+    true

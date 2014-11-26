@@ -56,10 +56,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   upgradeText: Ember.computed 'isCurrent', 'model', 'yearOption', ->
     return "Your Plan" if @get('isCurrent')
 
-    unless @get 'yearOption'
-      "Upgrade"
-    else
-      "Month"
+    "Upgrade"
 
   showYearOption: Ember.computed 'yearOption', 'isCurrent', 'exceededUsers', ->
     return false if @get('exceededUsers')
@@ -69,7 +66,7 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
   currentPlanIsYearly: Ember.computed 'yearOption', 'parentController', ->
     @get('yearOption') == @get('parentController.currentPlan')
 
-  pricingText: Ember.computed 'model', 'isCurrent', 'currentPlanIsYearly', 'yearOption', ->
+  pricingText: Ember.computed 'model', 'isCurrent', 'currentPlanIsYearly', 'yearOption', 'yearly', ->
     return "Free" if @get('isBasic')
 
     currentPlan = @get('parentController.currentPlan')
@@ -79,9 +76,11 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     ret = if @get('isCurrent')
       "#{accounting.formatMoney(currentPlan.get('amount'))}/#{currentPlan.get('interval')}"
     else
-      "#{accounting.formatMoney(model.get('amount'))}/#{model.get('interval')}"
-
-    if yearOption && !@get('currentPlanIsYearly')
-      ret += "<br/>#{accounting.formatMoney(yearOption.get('amount'))}/#{yearOption.get('interval')}"
+      if @get('yearly')
+        "#{accounting.formatMoney(yearOption.get('amount'))}/#{yearOption.get('interval')}"
+      else
+        "#{accounting.formatMoney(model.get('amount'))}/#{model.get('interval')}"
 
     ret
+
+  yearly: false

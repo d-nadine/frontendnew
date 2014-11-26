@@ -34,23 +34,8 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
 
     return unless @get('form')
 
-    @get('checklist').forEach (item) =>
+    @get('checklist').forEach (item) ->
       item.set('isFinished', false)
-
-  isValid: ( ->
-    return false if Ember.isEmpty(@get('name'))
-    return false if Ember.isEmpty(@get('contact'))
-    return false if Ember.isEmpty(@get('user'))
-    return false if Ember.isEmpty(@get('description'))
-
-    dealValue = @get('value')
-
-    return false if Ember.isEmpty(dealValue)
-    return false if parseInt(dealValue) == 0
-    return false unless dealValue.isCurrency()
-
-    true
-  ).property('name','contact','user','source','description', 'value')
 
   create:  ->
     deal = Radium.Deal.createRecord @get('data')
