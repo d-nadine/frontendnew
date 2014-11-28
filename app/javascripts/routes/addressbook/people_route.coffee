@@ -32,5 +32,6 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     @_super.apply this, arguments
 
     Ember.run.next =>
+      @controller.get('checkedContent').setEach 'isChecked', false
       @controller.get('columns').setEach 'checked', false
-      @controller.get('columns').slice(0, 5).setEach 'checked', true
+      @controller.get('columns').slice(0, 6).setEach 'checked', true

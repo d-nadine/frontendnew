@@ -1,7 +1,7 @@
 #addressbook {
   .subhead {
     margin-top: 0;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
     font-size: 28px;
     width: 100%;
     display: inline-block;
@@ -248,6 +248,20 @@
     float: left;
   }
 
+  .contacts-table tr {
+    &.is-checked {
+      border: {
+        right-color: $link;
+        left-color: $link;
+      }
+
+      & td,
+      &:hover td {
+        background: $calendar-active-bg;
+      }
+    }
+  }
+
   .contacts-table .check {
     width: 25px;
     text-align: center;
@@ -266,7 +280,7 @@
     padding: 0 0 0 0px;
   }
 
-  .contacts-table tbody tr td.name {
+  .contacts-table tbody tr:not(.is-checked) td.name {
     border-right: 5px solid #f5f5f5;
     background: #fbfbfb;
   }

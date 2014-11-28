@@ -19,11 +19,11 @@
   </thead>
   <tbody>
 {{#each item in list itemController="varidicItem"}}
-  <tr>
+  <tr {{bind-attr class="item.isChecked:is-checked"}}>
     {{#if check}}
-    <td class="check">
-      <input type="checkbox"/>
-    </td>
+      <td class="check">
+        {{input type="checkbox" checked=item.isChecked}}
+      </td>
     {{/if}}
     {{#each column in columns}}
       {{#with item}}

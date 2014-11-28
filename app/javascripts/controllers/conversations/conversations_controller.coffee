@@ -45,21 +45,6 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       @completeAction(bulkActionDetail)
       false
 
-    assignAll: (user) ->
-      self = this
-
-      bulkActionDetail =
-        action: 'didUpdate'
-        actionFunc: (item) ->
-          contact = item.get('contact')
-          contact.set 'user', user
-          return contact
-        endFunc: ->
-          self.send 'flashSuccess', "The selected contacts have been assigned to #{user.get('displayName')}"
-
-      @completeAction(bulkActionDetail)
-      false
-
     ignoreAll: ->
       self = this
       ignored = not @get('isIgnored')

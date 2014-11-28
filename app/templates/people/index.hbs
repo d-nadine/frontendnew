@@ -23,9 +23,9 @@
               <li class="dropdown-submenu">
                 <a tabindex="-1" href="#">Add to List</a>
                 <ul class="dropdown-menu">
-                  {{#each tags}}
+                  {{#each tag in tags}}
                     <li>
-                      <a href="#">{{name}}</a>
+                      <a href="#" {{action "addTag" tag}}>{{tag.name}}</a>
                     </li>
                   {{else}}
                     <li><a href="#">(none)</a></li>
@@ -35,9 +35,9 @@
               <li class="dropdown-submenu">
                 <a tabindex="-1" href="#">Assign To</a>
                 <ul class="dropdown-menu">
-                  {{#each users}}
+                  {{#each user in users}}
                     <li>
-                      <a href="#" {{action "assignAll" this}}>{{avatar this style="tiny"}}{{displayName}}</a>
+                      <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
                     </li>
                   {{/each}}
                 </ul>

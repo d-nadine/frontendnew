@@ -6,7 +6,6 @@ Radium.CreateContact = Radium.Model.extend
   companyName: DS.attr('string')
   status: DS.attr('string')
   source: DS.attr('string')
-  status: DS.attr('string')
   about: DS.attr('string')
 
   phoneNumbers: DS.attr('array')
