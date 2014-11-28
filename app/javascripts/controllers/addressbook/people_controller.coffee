@@ -10,25 +10,32 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
     executeActions: (action, detail) ->
       checkedContent = @get('checkedContent')
-      allSelected = @get('allSelected')
+      allChecked = @get('allChecked')
 
-      unless allSelected || checkedContent.length
+      unless allChecked || checkedContent.length
         return @send 'flashError', "You have not selected any contacts."
 
-      unless allSelected
+      unless allChecked
         ids = checkedContent.mapProperty('id')
+        filter = null
       else
         ids = []
+        filter = @get('filter')
 
       job = Radium.BulkActionsJob.createRecord
              action:  action
              ids: ids
              public: true
+             filter: filter
 
       if action == "tag"
         job.set('newTags', Ember.A([detail.tag.id]))
       else if action == "assign"
         job.set('user', detail.user)
+
+      if @get('tag') && @get('isTagged')
+        tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')
+        job.set('tag', tag)
 
       job.one 'didCreate', =>
         @send 'flashSuccess', 'The records have been updated.'
@@ -153,8 +160,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     @get('team.length')
 
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
-
-  allSelected: false
 
   fixedColumns: Ember.A([
     {

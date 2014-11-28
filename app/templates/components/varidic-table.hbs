@@ -3,7 +3,7 @@
     <tr>
       {{#if check}}
       <th class="check">
-        <input type="checkbox"/>
+        {{input type="checkbox" checked=allChecked}}
       </th>
       {{/if}}
       {{#each column in columns}}
@@ -22,7 +22,7 @@
   <tr {{bind-attr class="item.isChecked:is-checked"}}>
     {{#if check}}
       <td class="check">
-        {{input type="checkbox" checked=item.isChecked}}
+        {{input type="checkbox" checked=item.isChecked disabled=allChecked}}
       </td>
     {{/if}}
     {{#each column in columns}}
