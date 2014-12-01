@@ -39,14 +39,51 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
       job.one 'didCreate', =>
         @send 'flashSuccess', 'The records have been updated.'
-        if ids.length
-          Radium.Contact.find ids: ids
+        @send 'updateLocalRecords', job
         @send 'updateTotals'
 
       job.one 'becameError', =>
         @send 'flashError', 'An error has occurred and the operation could not be completed.'
 
       @get('store').commit()
+
+    updateLocalRecords: (job) ->
+      ids = @get('checkedContent').mapProperty 'id'
+      action = job.get('action')
+
+      store = @get('store')
+      serializer = @get('store._adapter.serializer')
+      loader = DS.loaderFor(store)
+
+      ids.forEach (id) ->
+        contact = Radium.Contact.all().find (c) -> c.get('id') + '' == id
+
+        if contact
+          data = contact.get('_data')
+          if action == "assign"
+            data['user'] = id: job.get('user.id'), type: Radium.User
+
+          if action == "tag"
+            references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
+            newTagId = job.get('newTags.firstObject')
+            tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+
+            unless references.any((tag) -> tag.id == newTagId)
+              references.push id: newTagId, type: Radium.Tag
+
+              tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
+              tagName.parent = contact.get('_reference')
+              data.tagNames.push tagName
+
+            references = contact._convertTuplesToReferences(references)
+            data['tags'] = references
+
+        contact.set('_data', data)
+
+        contact.suspendRelationshipObservers ->
+          contact.notifyPropertyChange 'data'
+
+        contact.updateRecordArrays()
 
     updateTotals: ->
       Radium.ContactsTotals.find({}).then (results) =>

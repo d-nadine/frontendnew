@@ -1,4 +1,4 @@
-// Last commit: 7174224 (2014-09-25 09:33:50 +0100)
+// Last commit: 30ccb4c (2014-12-01 12:00:23 +0000)
 
 
 (function() {
@@ -3752,6 +3752,10 @@ var RootState = {
         }
 
         record.trigger('didCommit', record);
+      },
+
+      finishedMaterializing: function(record) {
+        record.transitionTo('loaded.saved');
       }
     },
 
