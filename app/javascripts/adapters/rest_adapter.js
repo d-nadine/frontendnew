@@ -136,7 +136,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     }).then(function(json) {
       var data = record.get('_data'),
         ids = [],
-        references = json[relationship.key];
+        references = json[relationship.key] || [];
 
       ids = references.map(function(ref){
         return ref.id;

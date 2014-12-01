@@ -8899,7 +8899,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
 
     Sends a delete request for the record to the server.
 
-    @method deleteRecord
+    @method 
     @property {DS.Store} store
     @property {DS.Model} type   the DS.Model class of the record
     @property {DS.Model} record

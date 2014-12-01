@@ -2,11 +2,15 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   actions:
     addTag: (tag) ->
       @send "executeActions", "tag", tag: tag
-      return false
+      false
 
     assignAll: (user) ->
       @send "executeActions", "assign", user: user
-      return false
+      false
+
+    deleteAll: ->
+      @send "executeActions", "delete"
+      false
 
     executeActions: (action, detail) ->
       checkedContent = @get('checkedContent')
@@ -54,36 +58,42 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       store = @get('store')
       serializer = @get('store._adapter.serializer')
       loader = DS.loaderFor(store)
+      dataset = @get('model')
 
       ids.forEach (id) ->
         contact = Radium.Contact.all().find (c) -> c.get('id') + '' == id
 
         if contact
-          data = contact.get('_data')
-          if action == "assign"
-            data['user'] = id: job.get('user.id'), type: Radium.User
+          if action == "delete"
+            contact.unloadRecord()
+            dataset.removeObject contact
+          else
+            data = contact.get('_data')
+            if action == "assign"
+              data['user'] = id: job.get('user.id'), type: Radium.User
 
-          if action == "tag"
-            references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
-            newTagId = job.get('newTags.firstObject')
-            tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+            if action == "tag"
+              references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
+              newTagId = job.get('newTags.firstObject')
+              tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
 
-            unless references.any((tag) -> tag.id == newTagId)
-              references.push id: newTagId, type: Radium.Tag
+              unless references.any((tag) -> tag.id == newTagId)
+                references.push id: newTagId, type: Radium.Tag
 
-              tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
-              tagName.parent = contact.get('_reference')
-              data.tagNames.push tagName
+                tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
+                tagName.parent = contact.get('_reference')
+                data.tagNames.push tagName
 
-            references = contact._convertTuplesToReferences(references)
-            data['tags'] = references
+              references = contact._convertTuplesToReferences(references)
+              data['tags'] = references
 
-        contact.set('_data', data)
 
-        contact.suspendRelationshipObservers ->
-          contact.notifyPropertyChange 'data'
+            contact.set('_data', data)
 
-        contact.updateRecordArrays()
+            contact.suspendRelationshipObservers ->
+              contact.notifyPropertyChange 'data'
+
+            contact.updateRecordArrays()
 
     updateTotals: ->
       Radium.ContactsTotals.find({}).then (results) =>

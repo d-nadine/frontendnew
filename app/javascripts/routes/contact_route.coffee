@@ -22,7 +22,7 @@ Radium.ContactRoute = Radium.Route.extend
 
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
-        peopleDataset = @controllerFor('addressbookPeople').get('model')
+        peopleDataset = @controllerFor('peopleIndex').get('model')
 
         peopleDataset.removeObject(contact) if peopleDataset
 
