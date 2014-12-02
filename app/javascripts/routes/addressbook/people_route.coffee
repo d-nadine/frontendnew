@@ -1,4 +1,20 @@
 Radium.PeopleIndexRoute = Radium.Route.extend
+  actions:
+    confirmDeletion: ->
+      controller = @controllerFor 'peopleIndex'
+
+      unless controller.get('allChecked') || controller.get('checkedContent.length')
+        return @send 'flashError', "You have not selected any contacts."
+
+      @render 'people/deletion_confirmation',
+        into: 'application',
+        outlet: 'modal',
+
+    close: ->
+      @render 'nothing',
+        into: 'application',
+        outlet: 'modal'
+
   queryParams:
     user:
       refreshModel: true

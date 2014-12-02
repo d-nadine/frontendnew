@@ -19,6 +19,21 @@
   .subhead .nav-wrap .count {
     display: inline-block;
     line-height: 32px;
+
+    .chosen, .total {
+      min-width: 40px;
+      max-width: 40px;
+      display: inline-block;
+      text-align: right;
+
+      &.is-loading {
+        visibility: hidden;
+      }
+    }
+
+    .total {
+      text-align: left;
+    }
   }
 
   .subhead .nav-wrap .count .chosen {
@@ -60,6 +75,7 @@
     display: inline-block;
     right: 4%;
     top: 25px;
+    margin-left: -26px;
   }
 
   .subhead .tools a {
@@ -69,7 +85,7 @@
   }
 
   .subhead .nav-wrap .btn-group {
-    margin-top: 5px;
+    margin-top: 7px;
   }
 
   .subhead .nav-wrap .tools .caret {

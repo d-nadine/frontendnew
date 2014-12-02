@@ -19,6 +19,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       unless allChecked || checkedContent.length
         return @send 'flashError', "You have not selected any contacts."
 
+      @set 'working', true
+
       unless allChecked
         ids = checkedContent.mapProperty('id')
         filter = null
@@ -32,6 +34,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
              public: true
              filter: filter
 
+      searchText = $.trim(@get('searchText') || '')
+
+      if searchText.length
+        job.set 'like', searchText
+
       if action == "tag"
         job.set('newTags', Ember.A([detail.tag.id]))
       else if action == "assign"
@@ -42,11 +49,16 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         job.set('tag', tag)
 
       job.one 'didCreate', =>
+        @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
         @send 'updateLocalRecords', job
         @send 'updateTotals'
 
+        return unless action == "delete"
+        @get('controllers.addressbook').send 'updateTotals'
+
       job.one 'becameError', =>
+        @set 'working', false
         @send 'flashError', 'An error has occurred and the operation could not be completed.'
 
       @get('store').commit()
@@ -130,7 +142,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       model.set 'params', params
       false
 
-  needs: ['users', 'tags']
+  needs: ['addressbook', 'users', 'tags']
 
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
@@ -207,6 +219,15 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     @get('team.length')
 
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
+
+  totalRecords: Ember.computed 'content.source.content.meta', ->
+    @get('content.source.content.meta.totalRecords')
+
+  checkedTotal: Ember.computed 'totalRecords', 'checkedContent.length', 'allChecked', ->
+    if @get('allChecked')
+      @get('totalRecords')
+    else
+      @get('checkedContent.length')
 
   fixedColumns: Ember.A([
     {

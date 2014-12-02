@@ -11,6 +11,7 @@ Radium.InfiniteDataset = Ember.ArrayProxy.extend
       params: @get 'params'
       store: @get "store"
       type: @get "type"
+      meta: {}
 
   loadPage: Ember.observer('source.content', ->
     @set 'isLoading', true
@@ -23,6 +24,8 @@ Radium.InfiniteDataset = Ember.ArrayProxy.extend
       source.then (records) ->
         self.set 'isLoading', false
         content.addObjects source
+        meta = source.get('store').typeMapFor(source.get('type')).metadata
+        source.set 'meta', meta
   ).on 'init'
 
   expand: ->

@@ -3,9 +3,21 @@
     <div class="left">
       <div class="nav-wrap">
         <span class="count">
-          <span class="chosen">0</span>
+          <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
+          {{#unless content.isLoading}}
+            {{checkedTotal}}
+          {{else}}
+            111
+          {{/unless}}
+          </span>
           <span class="divider">/</span>
-          <span class="total">6</span>
+          <span {{bind-attr class=":total content.isLoading:is-loading"}}>
+            {{#unless content.isLoading}}
+              {{totalRecords}}
+            {{else}}
+              111
+            {{/unless}}
+          </span>
           <span class="label">CONTACTS</span>
         </span>
         <div class="tools">
@@ -42,11 +54,16 @@
                   {{/each}}
                 </ul>
               </li>
-              <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
+              <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
             </ul>
           </div>
         </div>
       </div>
+    </div>
+    <div class="working-anim">
+      {{#if working}}
+        <img src="/images/loading/ajax-loader.gif"/>
+      {{/if}}
     </div>
     <div class="col-selector">
       <button class="dropdown-toggle">

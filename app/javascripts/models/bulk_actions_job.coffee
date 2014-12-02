@@ -6,3 +6,4 @@ Radium.BulkActionsJob = Radium.Model.extend
   public: DS.attr('boolean')
   newTags: DS.attr('array')
   filter: DS.attr('string')
+  like: DS.attr('string')
