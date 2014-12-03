@@ -3,7 +3,6 @@ Radium.BulkEmailJob = Radium.Model.extend Radium.BulkActionProperties,
 
   subject: DS.attr('string')
   message: DS.attr('string')
-  body: DS.attr('string')
   isDraft: DS.attr('boolean')
   sendTime: DS.attr('datetime')
 
