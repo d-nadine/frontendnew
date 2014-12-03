@@ -19,6 +19,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       unless allChecked || checkedContent.length
         return @send 'flashError', "You have not selected any contacts."
 
+      if action == "compose"
+        return @transitionToRoute 'emails.new', "inbox", queryParams: bulkEmail: true
+
       @set 'working', true
 
       unless allChecked
@@ -42,11 +45,15 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       if action == "tag"
         job.set('newTags', Ember.A([detail.tag.id]))
       else if action == "assign"
-        job.set('user', detail.user)
+        job.set('assignedTo', detail.user)
 
       if @get('tag') && @get('isTagged')
         tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')
         job.set('tag', tag)
+
+      if @get('user') && @get('isAssignedTo')
+        user = Radium.User.all().find (u) => u.get('id') == @get('user')
+        job.set 'user', user
 
       job.one 'didCreate', =>
         @set 'working', false
@@ -82,7 +89,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
           else
             data = contact.get('_data')
             if action == "assign"
-              data['user'] = id: job.get('user.id'), type: Radium.User
+              data['user'] = {id: job.get('assignedTo.id'), type: Radium.User}
 
             if action == "tag"
               references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
@@ -160,6 +167,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   isLosing: Ember.computed.equal 'filter', 'losing'
   isNoList: Ember.computed.equal 'filter', 'no_list'
   isTagged: Ember.computed.equal 'filter', 'tagged'
+  isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
 
   isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
     return unless @get('isAssignedTo') && @get('user')
@@ -182,8 +190,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     currentUser = @get('currentUser')
 
     @get('users').reject (user) -> user == currentUser
-
-  isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
 
   filterParams: Ember.computed 'filter', 'user', 'tag', ->
     params =
@@ -223,7 +229,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   totalRecords: Ember.computed 'content.source.content.meta', ->
     @get('content.source.content.meta.totalRecords')
 
-  checkedTotal: Ember.computed 'totalRecords', 'checkedContent.length', 'allChecked', ->
+  checkedTotal: Ember.computed 'totalRecords', 'checkedContent.length', 'allChecked', 'working', ->
     if @get('allChecked')
       @get('totalRecords')
     else

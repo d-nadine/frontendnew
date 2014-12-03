@@ -1,5 +1,5 @@
 <div class="clearfix new-message-btn">
-  {{#link-to "emails.new" class="btn btn-block btn-large btn-primary"}}
+  {{#link-to "emails.new" (query-params bulkEmail=false) class="btn btn-block btn-large btn-primary"}}
     <i class="ss-standard ss-plus"></i> <strong>New Email</strong>
   {{/link-to}}
 </div>

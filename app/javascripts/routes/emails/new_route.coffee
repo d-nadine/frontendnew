@@ -17,8 +17,13 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
     deleteFromEditor: ->
       @controllerFor('messagesSidebar').send 'reset'
       Ember.run.next =>
+        controller = @controllerFor('emailsNew')
+        if controller.get('isBulkEmail')
+          return @transitionTo 'people.index', 'all'
+
         @transitionTo 'messages', @controllerFor('messages').get('folder')
 
   deactivate: ->
-    @controllerFor('emailsNew').get('newEmail').reset()
+    controller = @controllerFor('emailsNew')
+    controller.get('newEmail').reset()
     @controllerFor('messagesSidebar').send 'reset'

@@ -22,4 +22,4 @@ Radium.EmailsMailToRoute = Ember.Route.extend
     form.get('to').pushObject(model)
     sidebarController = @controllerFor('messagesSidebar')
     sidebarController.send 'reset'
-    @transitionTo 'emails.new', sidebarController.get('folder')
+    @transitionTo 'emails.new', sidebarController.get('folder'), queryParams: bulkEmail: false

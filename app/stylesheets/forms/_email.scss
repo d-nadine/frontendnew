@@ -20,7 +20,7 @@
 .email-options-right {
   display: inline-block;
   float: right;
-  
+
   a.btn {
     margin-left: 15px;
 
@@ -28,6 +28,12 @@
       margin-right: 0;
     }
   }
+}
+
+.bulk-email {
+  display: inline-block;
+  color: red;
+  margin-left: 12px;
 }
 
 .span1.sender-avatar.not-user {

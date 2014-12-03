@@ -27,7 +27,7 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
 
     saveAsDraft: (form, transitionFolder) ->
       @set 'isDraft', true
-      @send 'saveEmail', form, transitionFolder
+      @send 'saveEmail', form, transitionFolder: transitionFolder
 
     scheduleDelivery: (form, date) ->
       if typeof date is "string"
@@ -55,6 +55,14 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
 
     submit: (form) ->
       @set 'isDraft', false
+
+      if @get('bulkEmail')
+        filterParams = @get('controllers.peopleIndex.content.params')
+        unless filterParams
+          return @send "flashError", "You need to select some contacts from the contacts main page."
+
+        return @send 'saveEmail', form, bulkEmailParams: filterParams, bulkEmail: true
+
       @send 'saveEmail', form
       false
 
@@ -65,12 +73,13 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
 
   showingAddDeal: false
 
-  needs: ['tags','contacts','users','userSettings', 'deals']
+  needs: ['tags','contacts','users','userSettings', 'deals', 'emailsNew', 'peopleIndex']
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
   settings: Ember.computed.alias 'controllers.userSettings.model'
   signature: Ember.computed.alias 'settings.signature'
   user: Ember.computed.alias 'controllers.currentUser'
+  bulkEmail: Ember.computed.oneWay 'controllers.emailsNew.isBulkEmail'
   isEditable: true
 
   disableSave: false

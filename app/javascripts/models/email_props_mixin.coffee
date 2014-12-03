@@ -1,12 +1,9 @@
 Radium.EmailPropertiesMixin = Ember.Mixin.create
-  isScheduled: ( ->
+  isScheduled: Ember.computed 'sendTime', 'isDraft', ->
     !!@get('sendTime') && @get('isDraft')
-  ).property('sendTime', 'isDraft')
 
-  sendTimeFormatted: ( ->
+  sendTimeFormatted: Ember.computed 'sendTime', ->
     @get('sendTime').toHumanFormatWithTime()
-  ).property('sendTime')
 
-  checkForResponseFormatted: ( ->
+  checkForResponseFormatted: Ember.computed 'checkForResponse', ->
     @get('checkForResponse')?.toHumanFormatWithTime()
-  ).property('checkForResponse')

@@ -21,31 +21,38 @@
     {{#if showAddresses}}
       <div class="addresses">
         <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-          <span class="toggles pull-right">
-            {{#unless showCc}}
-              <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
-            {{/unless}}
-            {{#unless showBcc}}
-              <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
-            {{/unless}}
-          </span>
-          <label>To</label>
-          {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
-        </div>
+          {{#unless bulkEmail}}
+              <span class="toggles pull-right">
+                {{#unless showCc}}
+                  <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
+                {{/unless}}
+                {{#unless showBcc}}
+                  <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
+                {{/unless}}
+              </span>
+              <label>To</label>
+              {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+            </div>
 
-        {{#if showCc }}
-          <div class="field control-box control-box-block-level recipients cc">
-            <label>CC</label>
-            {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
-          </div>
-        {{/if}}
+            {{#if showCc }}
+              <div class="field control-box control-box-block-level recipients cc">
+                <label>CC</label>
+                {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+              </div>
+            {{/if}}
 
-        {{#if showBcc }}
-          <div class="field control-box control-box-block-level recipients bcc">
-            <label>BCC</label>
-            {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
-          </div>
-        {{/if}}
+            {{#if showBcc }}
+              <div class="field control-box control-box-block-level recipients bcc">
+                <label>BCC</label>
+                {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
+              </div>
+            {{/if}}
+          {{else}}
+            <llabel>To</label>
+            <div class="bulk-email">
+              BULK EMAIL LIST
+            </div>
+        {{/unless}}
       </div>
     {{/if}}
 
@@ -101,7 +108,9 @@
           {{#if showEmailCancel}}
             <button tabindex="5" {{action "cancelSendEmail" bubbles="false"}} class="btn">Cancel</button>
           {{/if}}
-          <button class="btn btn-main btn-draft" {{bind-attr disabled=disableSave}} {{action "saveAsDraft" this}}>Save Draft</button>
+          {{#unless bulkEmail}}
+            <button class="btn btn-main btn-draft" {{bind-attr disabled=disableSave}} {{action "saveAsDraft" this}}>Save Draft</button>
+          {{/unless}}
           <div id="sendMenu" class="btn-group">
             <button tabindex="6" {{action "submit" this controller bubbles="false"}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
             <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action "toggleSendMenu" target=view}}>
@@ -113,31 +122,32 @@
             </ul>
           </div>
         </div>
-        {{#if includeReminder}}
-          <div>
-            <p class="check-response-label"><i class="ss-standard ss-info muted"></i>  Follow Up if No Response?</p>
-            {{date-timepicker submitDate="setCheckForResponse" model=model}}
-          </div>
-        {{else}}
-          <div class="btn-toolbar">
-            <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
-              <i class="ss-standard ss-info"></i> Follow Up if No Response?
-            </a>
-            {{#unless hasDeal}}
-              <a href="#" {{action "toggleAddDealForm"}} class="btn btn-link btn-main btn-messages-action">Add to Deal</a>
-            {{else}}
-              {{partial 'deals/deal_badge'}}
-            {{/unless}}
-          </div>
-          {{partial 'emails/check_for_response'}}
-        {{/if}}
-
-        {{#unless hasDeal}}
-          {{#if showingAddDeal}}
-            {{add-deal parent=model}}
+        {{#unless bulkEmail}}
+          {{#if includeReminder}}
+            <div>
+              <p class="check-response-label"><i class="ss-standard ss-info muted"></i>  Follow Up if No Response?</p>
+              {{date-timepicker submitDate="setCheckForResponse" model=model}}
+            </div>
+          {{else}}
+            <div class="btn-toolbar">
+              <a href="#" class="btn btn-link btn-main btn-messages-action" tabindex="6" {{action "toggleReminderForm"}} title="Radium will send you a notification if recipient has not responded" data-toggle="tooltip" >
+                <i class="ss-standard ss-info"></i> Follow Up if No Response?
+              </a>
+              {{#unless hasDeal}}
+                <a href="#" {{action "toggleAddDealForm"}} class="btn btn-link btn-main btn-messages-action">Add to Deal</a>
+              {{else}}
+                {{partial 'deals/deal_badge'}}
+              {{/unless}}
+            </div>
+            {{partial 'emails/check_for_response'}}
           {{/if}}
-        {{/unless}}
 
+          {{#unless hasDeal}}
+            {{#if showingAddDeal}}
+              {{add-deal parent=model}}
+            {{/if}}
+          {{/unless}}
+        {{/unless}}
       </div>
       {{#unless isDraft}}
         {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}

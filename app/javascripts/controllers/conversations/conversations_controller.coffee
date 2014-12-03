@@ -18,7 +18,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
     emailAll: ->
       unless @get('hasCheckedContent')
-        return @transitionToRoute "emails.new", "inbox"
+        return @transitionToRoute "emails.new", "inbox", queryParams: bulkEmail: false
 
       contacts = @get('checkedContent').map (item) =>
         index = @get('content').indexOf item
@@ -28,7 +28,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       emailForm.set 'to', contacts
 
-      @transitionToRoute 'emails.new', "inbox"
+      @transitionToRoute 'emails.new', "inbox", queryParams: bulkEmail: false
 
     assignAll: (user) ->
       self = this

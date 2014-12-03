@@ -399,6 +399,11 @@ Radium.RESTAdapter.map('Radium.Email', {
   comments: {embedded: 'load'}
 });
 
+Radium.RESTAdapter.map('Radium.BulkEmailJob', {
+  message: {key: 'body'},
+  isDraft: {key: 'draft'},
+});
+
 Radium.RESTAdapter.map('Radium.EmailAddress', {
   value: { key: 'address' },
   isPrimary: { key: 'primary'}
