@@ -1,10 +1,10 @@
 Radium.NotificationsView = Radium.DrawerView.extend
   classNames: 'notifications'
-  didInsertElement: ->
-    @_super()
+
+  setup: Ember.on 'didInsertElement', ->
     controller = @controller
     ele = this.$()
-    $('body').on 'click.notifications', (e) =>
+    $('body').on 'click.notifications', (e) ->
       return unless controller.get('drawerOpen')
 
       target = $(e.target)
