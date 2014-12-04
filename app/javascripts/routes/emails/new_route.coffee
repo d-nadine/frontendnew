@@ -27,3 +27,8 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
     controller = @controllerFor('emailsNew')
     controller.get('newEmail').reset()
     @controllerFor('messagesSidebar').send 'reset'
+
+    peopleController = @controllerFor 'peopleIndex'
+    peopleController.get('checkedContent').setEach 'isChecked', false
+    peopleController.set 'searchText', ''
+    peopleController.set 'allChecked', false

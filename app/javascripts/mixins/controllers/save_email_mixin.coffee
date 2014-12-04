@@ -5,15 +5,30 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       controller = @container.lookup('controller:peopleIndex')
 
+      filter = bulkParams.filter
       retParams = user: bulkParams.user, tag: bulkParams.tag
 
       findRecord = (type, id) ->
         type.all().find (r) -> r.get('id') == id
 
-      if controller.get('tag') && controller.get('isTagged')
-        bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
-      else if controller.get('isAssignedTo') && user_id = controller.get('user')
-        bulkParams.user = findRecord(Radium.User, bulkParams.user)
+      unless controller.get('allChecked')
+        bulkParams.ids = controller.get('checkedContent').mapProperty('id')
+        delete bulkParams.tag
+        delete bulkParams.user
+        bulkParams.filter = null
+      else
+        bulkParams.ids = []
+        bulkParams.filter = controller.get('filter')
+
+        if controller.get('tag') && controller.get('isTagged')
+          bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
+        else if controller.get('isAssignedTo') && user_id = controller.get('user')
+          bulkParams.user = findRecord(Radium.User, bulkParams.user)
+
+      searchText = $.trim(controller.get('searchText') || '')
+
+      if searchText.length
+        bulkParams.like = searchText
 
       job = Radium.BulkEmailJob.createRecord bulkParams
 
@@ -23,7 +38,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       job.one "didCreate", =>
         @send "flashSuccess", "The bulk email job has been created."
-        @transitionTo "people.index", bulkParams.filter, queryParams: retParams
+        @transitionTo "people.index", filter, queryParams: retParams
 
       job.one "becameError", =>
         @send "flashError", "An error has occurred and the bulk email job could not be created."

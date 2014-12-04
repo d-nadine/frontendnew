@@ -1,5 +1,13 @@
 Radium.PeopleIndexRoute = Radium.Route.extend
   actions:
+    willTransition: (transition) ->
+      unless transition.targetName == "emails.new"
+        @controller.set 'searchText', ''
+        @controller.get('checkedContent').setEach 'isChecked', false
+        @controller.set('allChecked', false)
+
+      true
+
     confirmDeletion: ->
       controller = @controllerFor 'peopleIndex'
 
@@ -48,6 +56,5 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     @_super.apply this, arguments
 
     Ember.run.next =>
-      @controller.get('checkedContent').setEach 'isChecked', false
       @controller.get('columns').setEach 'checked', false
       @controller.get('columns').slice(0, 6).setEach 'checked', true
