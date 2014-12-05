@@ -14,6 +14,9 @@ Radium.EditableFieldComponent = Ember.Component.extend
 
       model.one 'didUpdate', =>
         @set 'isSaving', false
+        value = @get('model').get(@get('bufferKey'))
+        unless value?.length
+          @send 'setPlaceholder'
 
       model.one 'becameInvalid', =>
         buffer.discardBufferedChanges()
@@ -45,10 +48,12 @@ Radium.EditableFieldComponent = Ember.Component.extend
   setup: Ember.on 'didInsertElement', ->
     @$().on 'focus', @focusContent.bind(this)
 
-    unless @get('value')?.length
+    value = @get('model').get(@get('bufferKey'))
+
+    unless value?.length
       @send 'setPlaceholder'
     else
-      @$().html(@get('value'))
+      @$().text(value)
 
   input: (e) ->
     @get('buffer').set(@get('bufferKey'), @$().text())
@@ -64,9 +69,10 @@ Radium.EditableFieldComponent = Ember.Component.extend
       sel.addRange(range)
 
   focusOut: (e) ->
+    modelValue = @get('model').get(@get('bufferKey')) || ''
     value = @get('buffer').get(@get('bufferKey')) || ''
 
-    unless $.trim(value).length
-      return @send 'setPlaceholder'
+    if $.trim(value).length || modelValue.length
+      return Ember.run.debounce this, 'send', ['saveField'], 200
 
-    Ember.run.debounce this, 'send', ['saveField'], 200
+    return @send 'setPlaceholder'
