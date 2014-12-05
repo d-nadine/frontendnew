@@ -27,16 +27,16 @@
     {{/if}}
     {{#each column in columns}}
       {{#with item}}
-      <td {{bind-attr class="column.classNames"}}>
-        {{#if column.component}}
-          {{renderComponent item column}}
-        {{else}}
+        <td {{bind-attr class="column.classNames"}}>
           {{#if column.avatar}}
             {{dynamicAvatar item column}}
           {{/if}}
-          {{getProperty item column}}
-        {{/if}}
-      </td>
+          {{#if column.component}}
+            {{renderComponent item column}}
+          {{else}}
+            {{getProperty item column}}
+          {{/if}}
+        </td>
       {{/with}}
     {{/each}}
   </tr>

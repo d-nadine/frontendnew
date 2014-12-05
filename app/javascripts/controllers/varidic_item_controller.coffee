@@ -8,3 +8,5 @@ Radium.VaridicItemController = Ember.ObjectController.extend
   assignees: Ember.computed 'users.[]', 'user', ->
     @get('users').reject (user) =>
       user == @get('user')
+
+  isSaving: false

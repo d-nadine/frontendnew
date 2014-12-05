@@ -282,6 +282,7 @@
     width: 25px;
     text-align: center;
   }
+  
 
   .contacts-table td.check {
     padding-left: 10px;
@@ -353,6 +354,27 @@
   .contacts-table tbody tr {
     td {
       padding-right: 10px;
+    }
+
+    td .editable {
+      display: inline-block;
+      margin-left: 8px;
+      min-width: 200px;
+      outline: none;
+
+      // fix colours
+      &.is-saving {
+        background: grey;
+      }
+
+      &:focus{
+        background:yellow
+      }
+
+      em {
+        font-style: italic;
+        color:#888
+      }
     }
 
     .deals-closed-total, .deals-total, .events-seven, .events-thirty, .events {

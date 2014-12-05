@@ -221,9 +221,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   pageSize: 25
 
-  showMoreMenu: Ember.computed 'team.[]', ->
-    @get('team.length')
-
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
 
   totalRecords: Ember.computed 'content.source.content.meta', ->
@@ -240,10 +237,31 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       classNames: "name"
       heading: "Name"
       route: "contact"
-      binding: "name"
+      bindings: [{
+        name: "value",
+        binding: "name"
+      },{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Name",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "name"
+        static: true
+      }]
+      actions: [{
+        name: "save",
+        value: "save"
+      }]
       avatar: true
       checked: true
       sortOn: "name"
+      component: 'editable-field'
     }
   ])
 
@@ -291,7 +309,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       classNames: "assign"
       heading: "Assigned To"
       component: "assignto-picker"
-      bindings: ["assignedTo", "assignees", "contact"]
+      bindings: [
+        {name: "assignedTo", value: "assignedTo"},
+        {name: "assignees", value: "assignees"},
+        {name: "contact", value: "contact"},
+      ]
       checked: true
     }
     {

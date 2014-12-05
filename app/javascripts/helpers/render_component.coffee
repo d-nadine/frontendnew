@@ -7,8 +7,16 @@ Ember.Handlebars.registerHelper 'renderComponent', (contextPath, propertyPath, o
   options.types = []
 
   property.bindings.forEach (binding) ->
-    options.hash[binding] = binding
-    options.hashTypes[binding] = "ID"
-    options.hashContexts[binding] = context
+    options.hash[binding.name] = binding.value
+    options.hashTypes[binding.name] = if binding.static then "STRING" else "ID"
+    options.hashContexts[binding.name] = context
+
+  actions = property.actions || []
+
+  actions.forEach (action) =>
+    options.hash[action.name] = (action.value)
+    options.hashTypes[action.name] = "STRING"
+    p this.constructor
+    options.hashContexts[action.name] = this
 
   helper.call(context, options)
