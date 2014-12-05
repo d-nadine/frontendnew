@@ -137,20 +137,17 @@
         </li>
       {{/each}}
     </ul>
-    {{#if showMoreMenu}}
-      <ul class="nav nav-pills more">
-        {{#each team itemController="peopleUserItem"}}
-          <li {{bind-attr class="isCurrent:active"}}>
-            <a href="#" {{action "showUsersContacts" this}} class="user">
-              <i class="ss-symbolicons ss-lightning"></i>
-              <span>{{display}}</span>
-              <span>{{contactsTotal}}</span>
-            </a>
-          </li>
-        {{/each}}
-      </ul>
-      <a href="#" class="show-more">Show More</a>
-    {{/if}}
+    <ul class="nav nav-pills more">
+      {{#each team itemController="peopleUserItem"}}
+      <li {{bind-attr class="isCurrent:active"}}>
+        <a href="#" {{action "showUsersContacts" this}} class="user">
+          <i class="ss-symbolicons ss-lightning"></i>
+          <span>{{display}}</span>
+          <span>{{contactsTotal}}</span>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
   </div>
   <div class="table-container">
     <div class="left-table">
