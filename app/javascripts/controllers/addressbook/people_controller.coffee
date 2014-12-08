@@ -296,10 +296,33 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       classNames: "company"
       heading: "Company"
       route: "company"
-      binding: "company.name"
+      bindings: [{
+        name: "value",
+        binding: "name"
+      },{
+        name: "model",
+        value: "company"
+      }
+      {
+        name: "placeholder",
+        value: "Add Company",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "name"
+        static: true
+      },
+      {
+        name: "newType"
+        value: Radium.Company
+        static: true
+      }
+      ]
       context: "company"
       checked: true
       sortOn: "company"
+      component: 'editable-field'
     }
     {
       classNames: "events"

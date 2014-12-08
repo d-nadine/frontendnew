@@ -12,10 +12,14 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     updateModel: ->
       return if @get('isInvalid')
-      return unless @get('bufferedProxy')
+
+      unless bufferedProxy = @get('bufferedProxy')
+        return
+
+      return unless bufferedProxy.hasBufferedChanges
 
       modelValue = @get('model').get(@get('bufferKey')) || ''
-      value = @get('bufferedProxy').get(@get('bufferKey')) || ''
+      value = bufferedProxy.get(@get('bufferKey')) || ''
 
       if $.trim(value).length || modelValue.length
         return Ember.run.debounce this, 'send', ['saveField'], 200
@@ -79,7 +83,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     bufferDep = "bufferedProxy.#{bufferKey}"
     modelDep = "model.#{bufferKey}"
 
-    route = "/#{@get('model').humanize().pluralize()}/#{@get('model.id')}"
+    if @get('model')
+      route = "/#{@get('model').humanize().pluralize()}/#{@get('model.id')}"
 
     Ember.defineProperty this, 'markUp', Ember.computed bufferDep, modelDep, ->
       value = @get('bufferedProxy').get(@get('bufferKey'))
@@ -98,12 +103,34 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
         isInvalid
 
-    markUp = @get('markUp')
+    model = @get('model')
 
-    unless markUp?.length
-      @send 'setPlaceholder'
+    setMarkup = =>
+      markUp = @get('markUp')
+
+      unless markUp?.length
+        @send 'setPlaceholder'
+      else
+        @$().html markUp
+
+    observer = =>
+      return unless model.get('isLoaded')
+
+      @notifyPropertyChange modelDep
+
+      setMarkup()
+      model.removeObserver 'isLoaded', observer
+
+    unless model
+      return setMarkup()
+
+    unless model.get('isLoaded')
+      Ember.run.next =>
+        @$().html("<em class='loading'>loading....</em>")
+        model.addObserver 'isLoaded', observer
+        return
     else
-      @$().html markUp
+      setMarkup()
 
   teardown: Ember.on 'willDestroyElement', ->
     @$()?.off 'focus', @focusContent.bind(this)
