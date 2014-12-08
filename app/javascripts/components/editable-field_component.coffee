@@ -4,14 +4,15 @@ require 'components/key_constants_mixin'
 Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   actions:
     activateLink: ->
-      # hacky need to use controller of the table component to transitionToRoute
-      target = @get('targetObject.parentController.targetObject')
+      target = @get('containingController')
 
       model = @get('model')
 
       return target.transitionToRoute model.humanize(), model
 
     updateModel: ->
+      return if @get('isInvalid')
+
       modelValue = @get('model').get(@get('bufferKey')) || ''
       value = @get('buffer').get(@get('bufferKey')) || ''
 
@@ -52,7 +53,11 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       @$().html("<em class='placeholder'>#{@get('placeholder')}</em>")
       false
 
-  classNameBindings: [':editable', 'isSaving']
+  # hacky need to use controller of the table component for certain functions
+  containingController: Ember.computed ->
+    @get('targetObject.parentController.targetObject')
+
+  classNameBindings: [':editable', 'isSaving', 'isInvalid']
   attributeBindings: ['contenteditable']
   contenteditable: Ember.computed "isSaving", ->
     "true" unless @get("isSaving")
@@ -80,6 +85,16 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       "<a class='route' href='#{@get('route')}'>#{value}</a>"
 
+    if @get('validator')
+      Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
+        value = @get('buffer').get(@get('bufferKey'))
+
+        return false unless value
+
+        isInvalid = not @get('validator').test value
+
+        isInvalid
+
     markUp = @get('markUp')
 
     unless markUp?.length
@@ -101,8 +116,19 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @setEndOfContentEditble()
 
   keyDown: (e) ->
+    # sadly classNameBindings does not seem to
+    # work with dynamic properties like isInvalid
+    if @get('isInvalid')
+      @$().addClass 'is-invalid'
+    else
+      @$().removeClass 'is-invalid'
+
     if e.keyCode == @ENTER
-      @send 'updateModel'
+      Ember.run.next =>
+        @send 'updateModel'
+      return false
+
+    if e.keyCode == @ESCAPE
       return false
 
     true
@@ -127,4 +153,5 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       @setEndOfContentEditble
 
   focusOut: (e) ->
-    @send 'updateModel'
+    Ember.run.next =>
+      @send 'updateModel'

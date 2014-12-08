@@ -254,10 +254,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         value: "name"
         static: true
       }]
-      actions: [{
-        name: "save",
-        value: "save"
-      }]
       avatar: true
       checked: true
       sortOn: "name"
@@ -271,8 +267,30 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Email"
       route: "contact"
       binding: "email"
+      bindings: [{
+        name: "value",
+        binding: "email"
+      },{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Email",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "email"
+        static: true
+      },
+        name: 'validator',
+        value: Radium.EMAIL_REGEX,
+        static: true
+      ]
       checked: true
       sortOn: "email"
+      component: 'editable-field'
     }
     {
       classNames: "company"

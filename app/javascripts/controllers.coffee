@@ -22,7 +22,7 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   nonAdmin: Ember.computed.not 'isAdmin'
   plan: Ember.computed.alias 'currentUser.account.billing.subscriptionPlan.planId'
   emailIsValid: (email) ->
-    /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test email
+    Radium.EMAIL_REGEX.test email
 
 Radium.ArrayController = Ember.ArrayController.extend ControllerMixin
 Radium.Controller = Ember.Controller.extend ControllerMixin

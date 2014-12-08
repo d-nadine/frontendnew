@@ -362,6 +362,9 @@
       min-width: 200px;
       outline: none;
 
+      &.is-invalid {
+        border: 1px solid red;
+     }
       // fix colours
       &.is-saving {
         background: grey;
