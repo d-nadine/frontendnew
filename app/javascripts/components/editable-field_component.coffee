@@ -12,9 +12,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     updateModel: ->
       return if @get('isInvalid')
+      return unless @get('bufferedProxy')
 
       modelValue = @get('model').get(@get('bufferKey')) || ''
-      value = @get('buffer').get(@get('bufferKey')) || ''
+      value = @get('bufferedProxy').get(@get('bufferKey')) || ''
 
       if $.trim(value).length || modelValue.length
         return Ember.run.debounce this, 'send', ['saveField'], 200
@@ -22,12 +23,12 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       return @send 'setPlaceholder'
 
     saveField: (item) ->
-      buffer = @get('buffer')
+      bufferedProxy = @get('bufferedProxy')
       model = @get('model')
 
-      return unless buffer.hasBufferedChanges
+      return unless bufferedProxy.hasBufferedChanges
 
-      buffer.applyBufferedChanges()
+      bufferedProxy.applyBufferedChanges()
 
       @set 'isSaving', true
 
@@ -38,12 +39,12 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
           @send 'setPlaceholder'
 
       model.one 'becameInvalid', =>
-        buffer.discardBufferedChanges()
+        bufferedProxy.discardBufferedChanges()
         @send 'flashError', model
         @set 'isSaving', false
 
       model.one 'becameError', =>
-        buffer.discardBufferedChanges()
+        bufferedProxy.discardBufferedChanges()
         @send 'flashError', "An error has occurred and the update could not be completed."
         @send 'isSaving', false
 
@@ -59,10 +60,12 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
   classNameBindings: [':editable', 'isSaving', 'isInvalid']
   attributeBindings: ['contenteditable']
+  isTransitioning: false
+
   contenteditable: Ember.computed "isSaving", ->
     "true" unless @get("isSaving")
 
-  buffer: Ember.computed 'model', ->
+  bufferedProxy: Ember.computed 'model', ->
     BufferedObjectProxy.create content: @get('model')
 
   store: Ember.computed ->
@@ -73,13 +76,13 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     bufferKey = @get('bufferKey')
 
-    bufferDep = "buffer.#{bufferKey}"
+    bufferDep = "bufferedProxy.#{bufferKey}"
     modelDep = "model.#{bufferKey}"
 
     route = "/#{@get('model').humanize().pluralize()}/#{@get('model.id')}"
 
     Ember.defineProperty this, 'markUp', Ember.computed bufferDep, modelDep, ->
-      value = @get('buffer').get(@get('bufferKey'))
+      value = @get('bufferedProxy').get(@get('bufferKey'))
 
       return '' unless value
 
@@ -87,7 +90,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     if @get('validator')
       Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
-        value = @get('buffer').get(@get('bufferKey'))
+        value = @get('bufferedProxy').get(@get('bufferKey'))
 
         return false unless value
 
@@ -110,7 +113,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
   input: (e) ->
     text =  @$().text()
-    @get('buffer').set(@get('bufferKey'), @$().text())
+    @get('bufferedProxy').set(@get('bufferKey'), @$().text())
     route = @get('route')
     @$().html @get('markUp')
     @setEndOfContentEditble()
