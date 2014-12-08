@@ -238,9 +238,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Name"
       route: "contact"
       bindings: [{
-        name: "value",
-        binding: "name"
-      },{
         name: "model",
         value: "model"
       }
@@ -268,9 +265,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       route: "contact"
       binding: "email"
       bindings: [{
-        name: "value",
-        binding: "email"
-      },{
         name: "model",
         value: "model"
       }
@@ -297,9 +291,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       heading: "Company"
       route: "company"
       bindings: [{
-        name: "value",
-        binding: "name"
-      },{
         name: "model",
         value: "company"
       }
@@ -317,8 +308,21 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         name: "newType"
         value: Radium.Company
         static: true
-      }
-      ]
+      },
+      {
+        name: 'parent'
+        value: 'model'
+      },
+      {
+        name: 'parentAccessor'
+        value: 'companyName'
+        static: true
+      },
+      {
+        name: 'loadAccessor'
+        value: 'company'
+        static: true
+      }]
       context: "company"
       checked: true
       sortOn: "company"
