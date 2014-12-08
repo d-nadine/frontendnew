@@ -16,7 +16,6 @@ Ember.Handlebars.registerHelper 'renderComponent', (contextPath, propertyPath, o
   actions.forEach (action) =>
     options.hash[action.name] = (action.value)
     options.hashTypes[action.name] = "STRING"
-    p this.constructor
     options.hashContexts[action.name] = this
 
   helper.call(context, options)

@@ -368,12 +368,16 @@
       }
 
       &:focus{
-        background:yellow
+        background: #f5f5f5;
       }
 
       em {
         font-style: italic;
         color:#888
+      }
+
+      a:hover {
+        cursor: pointer;
       }
     }
 
