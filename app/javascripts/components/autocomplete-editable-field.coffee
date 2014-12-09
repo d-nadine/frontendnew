@@ -29,7 +29,7 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
       @set "bufferedProxy.#{@get('bufferKey')}", object.get(@field)
 
       Ember.run.next =>
-        @input()
+        @$().text object.get(@field)
         @send 'updateModel'
 
     if person.get('isLoaded')
@@ -79,7 +79,7 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
-    @field = @get('bufferKey')
+    @field = @get('queryKey') || @get('bufferKey')
 
     bufferKey = @get('bufferKey')
     bufferDep = "bufferedProxy.#{bufferKey}"

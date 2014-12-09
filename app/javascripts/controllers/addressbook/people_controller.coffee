@@ -281,6 +281,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         name: 'validator',
         value: Radium.EMAIL_REGEX,
         static: true
+
       ]
       checked: true
       sortOn: "email"
@@ -292,7 +293,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       route: "company"
       bindings: [{
         name: "model",
-        value: "company"
+        value: "model"
       }
       {
         name: "placeholder",
@@ -301,32 +302,28 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       },
       {
         name: "bufferKey",
-        value: "name"
+        value: "companyName"
         static: true
       },
       {
-        name: "newType"
-        value: Radium.Company
+        name: "queryKey",
+        value: "name",
         static: true
       },
       {
-        name: 'parent'
-        value: 'model'
-      },
-      {
-        name: 'parentAccessor'
-        value: 'companyName'
+        name: "alternativeRoute",
+        value: "company",
         static: true
       },
       {
-        name: 'loadAccessor'
+        name: 'scopes'
         value: 'company'
         static: true
       }]
       context: "company"
       checked: true
       sortOn: "company"
-      component: 'editable-field'
+      component: 'autocomplete-editable-field'
     }
     {
       classNames: "events"

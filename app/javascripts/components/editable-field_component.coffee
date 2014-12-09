@@ -6,9 +6,12 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     activateLink: ->
       target = @get('containingController')
 
-      model = @get('model')
+      routable = if alternative = @get('alternativeRoute')
+                   @get('model').get(alternative)
+                 else
+                   @get('model')
 
-      return target.transitionToRoute model.humanize(), model
+      return target.transitionToRoute routable.humanize(), routable
 
     updateModel: ->
       return if @get('isInvalid')
@@ -30,24 +33,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     saveField: (item) ->
       bufferedProxy = @get('bufferedProxy')
+
+      return unless bufferedProxy
+
       bufferKey = @get('bufferKey')
-      isNew = bufferedProxy.get('isNew')
-
-      if isNew
-        value = bufferedProxy.get(@get('bufferKey'))
-
-        if parent = @get('parent')
-          parentAccessor = @get('parentAccessor')
-          Ember.assert "You must have a parentAccessor binding for a parent", parentAccessor
-          parent.set parentAccessor, value
-          model = parent
-        else
-          newRecord = @get('newType').createRecord()
-          newRecord.set bufferKey, value
-          @set 'bufferedProxy.content', newRecord
-          @set 'model', newRecord
-      else
-        model = @get('model')
 
       return unless bufferedProxy.hasBufferedChanges
 
@@ -55,26 +44,22 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       @set 'isSaving', true
 
-      success = =>
-        if isNew
-          parent = @get('parent')
-          parent.one 'didReload', =>
-            @set 'isSaving', false
-            updated = @get('parent').get(@get('loadAccessor'))
-            @set 'model', updated
-            @notifyPropertyChange "model"
-            @set 'bufferedProxy.content', updated
-            @$().html "<a class='route' href='#{@get('route')}'>#{bufferedProxy.get(bufferKey)}</a>"
-          parent.reload()
-        else
-          @set 'isSaving', false
-          value = @get('model').get(@get('bufferKey'))
-          unless value?.length
-            @send 'setPlaceholder'
+      model = @get('model')
 
-      model.one 'didCreate', success
+      self = this
 
-      model.one 'didUpdate', success
+      model.one 'didUpdate', =>
+        @set 'isSaving', false
+        value = @get('model').get(@get('bufferKey'))
+        unless value?.length
+          @send 'setPlaceholder'
+
+        if @get('alternativeRoute')
+          model.one 'didReload', ->
+            self.notifyPropertyChange 'model'
+            self.$().html self.get('markUp')
+
+          model.reload()
 
       model.one 'becameInvalid', =>
         bufferedProxy.discardBufferedChanges()
@@ -109,20 +94,31 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   store: Ember.computed ->
     @container.lookup "store:main"
 
+  route: Ember.computed "model", 'alternativeRoute', ->
+    routable = if alternative = @get('alternativeRoute')
+                 if alternative = @get('model').get(alternative)
+                   alternative
+               else
+                 @get('model')
+
+    return unless routable
+
+    "/#{routable.humanize().pluralize()}/#{routable.get('id')}"
+
   setup: Ember.on 'didInsertElement', ->
     @$().on 'focus', @focusContent.bind(this)
 
     bufferKey = @get('bufferKey')
-
     bufferDep = "bufferedProxy.#{bufferKey}"
+
     modelDep = "model.#{bufferKey}"
 
-    Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', modelDep, ->
+    Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->
       value = @get('bufferedProxy').get(@get('bufferKey'))
 
       return '' unless value
 
-      unless @get('bufferedProxy.isNew')
+      if @get('route')
         "<a class='route' href='#{@get('route')}'>#{value}</a>"
       else
         value
@@ -155,13 +151,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       setMarkup()
       model.removeObserver 'isLoaded', observer
 
-    unless model
-      Ember.assert 'You must assign a newType binding if the model can be null.', @get('newType')
-      placeHolder = {isNew: true}
-      placeHolder[bufferKey] = null
-      @get('bufferedProxy').set('content', placeHolder)
-      return setMarkup()
-
     unless model.get('isLoaded')
       Ember.run.next =>
         @$().html("<em class='loading'>loading....</em>")
@@ -172,11 +161,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
   teardown: Ember.on 'willDestroyElement', ->
     @$()?.off 'focus', @focusContent.bind(this)
-
-  route: Ember.computed "model", ->
-    return if !@get('model') || @get('model.isNew')
-
-    "/#{@get('model').humanize().pluralize()}/#{@get('model.id')}"
 
   input: (e) ->
     text =  @$().text()
