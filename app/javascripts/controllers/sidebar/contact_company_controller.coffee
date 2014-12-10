@@ -56,17 +56,15 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
 
     @set 'companyAdded', false
 
-    observer = =>
+    observer = ->
       if company =  contact.get('company')
         contact.removeObserver 'company', observer
         company.reload()
 
     contact.addObserver 'company', observer
 
-  isValid: ( ->
+  isValid: Ember.computed 'form.company',  'isEditing', ->
     true
-  ).property('form.company',  'isEditing')
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.ContactCompanyForm.create()
-  ).property()

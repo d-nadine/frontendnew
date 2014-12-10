@@ -1,5 +1,10 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    saveCompanyName: (context) ->
+      if Ember.isEmpty(context.get('bufferedProxy.companyName')) && context.get('model.company')
+        context.set('bufferedProxy.removeCompany', true)
+        context.set('bufferedProxy.company', null)
+
     saveEmail: (context) ->
       unless context.get('model').get('email')
         email = context.get('bufferedProxy.email')
@@ -338,7 +343,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         name: 'scopes'
         value: 'company'
         static: true
-      }]
+      }],
+      actions: [
+        {
+          name: "saveCompanyName"
+          value: "saveCompanyName"
+        }
+      ]
       context: "company"
       checked: true
       sortOn: "company"

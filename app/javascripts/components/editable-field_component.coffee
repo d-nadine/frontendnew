@@ -50,7 +50,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         self.set 'isSaving', false
         value = self.get('model').get(self.get('bufferKey'))
         unless value?.length
-          self.send 'setPlaceholder'
+          return self.send 'setPlaceholder'
 
         if self.get('alternativeRoute')
           model.one 'didReload', ->
