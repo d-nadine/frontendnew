@@ -1,0 +1,9 @@
+{{#if model}}
+  {{#if model.isLoaded}}
+    {{renderActivity model}}
+  {{else}}
+    <em>loading....</em>
+  {{/if}}
+{{else}}
+  <em>No Activity</em>
+{{/if}}

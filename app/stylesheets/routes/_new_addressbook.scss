@@ -282,7 +282,6 @@
     width: 25px;
     text-align: center;
   }
-  
 
   .contacts-table td.check {
     padding-left: 10px;
@@ -382,6 +381,34 @@
 
       a:hover {
         cursor: pointer;
+      }
+    }
+
+    td.last-activity{
+      img {
+        display: none;
+      }
+
+      .activity {
+        border-bottom: 0px;
+        padding: 0;
+        margin-top: 10px;
+
+        .activity-icon {
+          margin: 0px 0 0 10px;
+        }
+
+        br {
+          display: none;
+        }
+
+        .span1 {
+          width: 0;
+        }
+
+        .timestamp {
+          display: none;
+        }
       }
     }
 

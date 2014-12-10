@@ -403,6 +403,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       checked: true
     }
     {
+      classNames: "last-activity"
+      heading: "Last Activity"
+      component: "render-activity"
+      bindings: [
+        {name: "model", value: "model.activities.firstObject"}
+      ]
+    }
+    {
       classNames: "city"
       heading: "City"
       bindings: [{
