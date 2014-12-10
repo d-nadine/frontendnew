@@ -145,9 +145,10 @@ Radium.computed.kindOf = (property, type) ->
     @get(property) instanceof type
 
 Radium.computed.primary = (collection) ->
-  dependentKey = "#{collection}.@each.isPrimary"
+  itemsKey = "#{collection}.length"
+  isPrimaryKey = "#{collection}.@each.isPrimary"
 
-  Ember.computed dependentKey, ->
+  Ember.computed isPrimaryKey, itemsKey, ->
     return unless @get(collection).get('length')
 
     @get(collection).find (item) ->

@@ -40,26 +40,31 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       return unless bufferedProxy.hasBufferedChanges
 
-      bufferedProxy.applyBufferedChanges()
-
       @set 'isSaving', true
 
       model = @get('model')
 
       self = this
 
-      model.one 'didUpdate', =>
-        @set 'isSaving', false
-        value = @get('model').get(@get('bufferKey'))
+      success = (result) ->
+        self.set 'isSaving', false
+        value = self.get('model').get(self.get('bufferKey'))
         unless value?.length
-          @send 'setPlaceholder'
+          self.send 'setPlaceholder'
 
-        if @get('alternativeRoute')
+        if self.get('alternativeRoute')
           model.one 'didReload', ->
             self.notifyPropertyChange 'model'
             self.$().html self.get('markUp')
 
           model.reload()
+
+      if containingAction = @get("save#{bufferKey.capitalize()}")
+        @get('containingController').send containingAction, this
+
+      bufferedProxy.applyBufferedChanges()
+
+      model.one 'didUpdate', success
 
       model.one 'becameInvalid', =>
         bufferedProxy.discardBufferedChanges()

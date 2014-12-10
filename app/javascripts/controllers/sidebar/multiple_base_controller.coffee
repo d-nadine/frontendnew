@@ -24,7 +24,7 @@ Radium.MultipleBaseController = Radium.SidebarBaseController.extend
 
         return
 
-      recordArray.forEach (item) =>
+      recordArray.forEach (item) ->
         formArray.pushObject Ember.Object.create(
           isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item
         )

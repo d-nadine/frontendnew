@@ -1,5 +1,17 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    saveEmail: (context) ->
+      unless context.get('model').get('email')
+        email = context.get('bufferedProxy.email')
+        context.get('bufferedProxy').discardBufferedChanges()
+
+        emailAddress = Radium.EmailAddress.createRecord
+                         name: 'work'
+                         value: email
+                         isPrimary: true
+
+        context.get('model.emailAddresses').pushObject emailAddress
+
     addTag: (tag) ->
       @send "executeActions", "tag", tag: tag
       false
@@ -8,7 +20,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       @send "executeActions", "assign", user: user
       false
 
-    deleteAll: ->
+      deleteAll: ->
       @send "executeActions", "delete"
       false
 
@@ -282,6 +294,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         value: Radium.EMAIL_REGEX,
         static: true
 
+      ],
+      actions: [
+        {
+          name: 'saveEmail'
+          value: 'saveEmail'
+          static: true
+        }
       ]
       checked: true
       sortOn: "email"
