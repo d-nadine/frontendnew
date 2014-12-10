@@ -44,10 +44,15 @@ Radium.AutocompleteView = Radium.View.extend
     </ul>
   """
 
+  abortResize: Ember.computed.oneWay 'controller.parentController.abortResize'
+
   resizeInputBox: ->
     input = @$('li.as-original input')
 
     return unless input
+
+    if @get('abortResize')
+      return input.width(50)
 
     if @get('isEditable')
       input.show()

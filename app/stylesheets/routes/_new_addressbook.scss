@@ -412,6 +412,15 @@
       }
     }
 
+    td.tags {
+      div:first-of-type {
+        min-width: 350px;
+        max-width: 350px;
+        max-height: 50px;
+        overflow: hidden;
+      }
+    }
+
     .deals-closed-total, .deals-total, .events-seven, .events-thirty, .events {
       text-align: center;
     }

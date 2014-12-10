@@ -491,6 +491,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       sortOn: "deals_closed_total_value"
     }
     {
+      classNames: "tags"
+      heading: "Lists"
+      bindings: [
+        {name: "model", value: "model"}
+      ]
+      component: "tag-picker"
+    }
+    {
       classNames: "status"
       heading: "Status"
       binding: "status"
