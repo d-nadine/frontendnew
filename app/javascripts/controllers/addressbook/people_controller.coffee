@@ -1,21 +1,39 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   actions:
+    saveCity: (context) ->
+      unless context.get('model.city')
+        city = context.get('bufferedProxy.city')
+        context.get('bufferedProxy').discardBufferedChanges()
+
+        context.get('model.addresses').createRecord
+          name: 'work'
+          isPrimary: true
+          city: city
+
     saveCompanyName: (context) ->
       if Ember.isEmpty(context.get('bufferedProxy.companyName')) && context.get('model.company')
         context.set('bufferedProxy.removeCompany', true)
         context.set('bufferedProxy.company', null)
 
     saveEmail: (context) ->
-      unless context.get('model').get('email')
+      unless context.get('model.email')
         email = context.get('bufferedProxy.email')
         context.get('bufferedProxy').discardBufferedChanges()
 
-        emailAddress = Radium.EmailAddress.createRecord
+        context.get('model.emailAddresses').createRecord
                          name: 'work'
                          value: email
                          isPrimary: true
 
-        context.get('model.emailAddresses').pushObject emailAddress
+    savePhone: (context) ->
+      unless context.get('model.phone')
+        phone = context.get('bufferedProxy.phone')
+        context.get('bufferedProxy').discardBufferedChanges()
+
+        context.get('model.phoneNumbers').createRecord
+                         name: 'work'
+                         value: phone
+                         isPrimary: true
 
     addTag: (tag) ->
       @send "executeActions", "tag", tag: tag
@@ -280,7 +298,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       classNames: "email"
       heading: "Email"
       route: "contact"
-      binding: "email"
       bindings: [{
         name: "model",
         value: "model"
@@ -295,17 +312,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         value: "email"
         static: true
       },
+      {
         name: 'validator',
         value: Radium.EMAIL_REGEX,
         static: true
-
-      ],
+      }],
       actions: [
-        {
-          name: 'saveEmail'
-          value: 'saveEmail'
-          static: true
-        }
+        name: "saveEmail"
+        value: "saveEmail"
       ]
       checked: true
       sortOn: "email"
@@ -391,8 +405,58 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     {
       classNames: "city"
       heading: "City"
-      binding: "primaryAddress.city"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add city",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "city"
+        static: true
+      }
+      ],
+      actions: [
+        {
+          name: 'saveCity'
+          value: 'saveCity'
+          static: true
+        }
+      ]
       sortOn: "city"
+      component: 'editable-field'
+    }
+    {
+      classNames: "phone"
+      heading: "Phone"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Phone",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "phone"
+        static: true
+      }
+      ],
+      actions: [
+        {
+          name: 'savePhone'
+          value: 'savePhone'
+          static: true
+        }
+      ]
+      sortOn: "phone"
+      component: 'editable-field'
     }
     {
       classNames: "source"

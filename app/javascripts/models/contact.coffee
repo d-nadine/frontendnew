@@ -72,6 +72,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryAddress: Radium.computed.primary 'addresses'
 
   email: Ember.computed.alias 'primaryEmail.value'
+  phone: Ember.computed.alias 'primaryPhone.value'
+  city: Ember.computed.alias 'primaryAddress.city'
 
   added: Ember.computed 'createdAt', ->
     @get('createdAt').toFormattedString("%B %Y")
