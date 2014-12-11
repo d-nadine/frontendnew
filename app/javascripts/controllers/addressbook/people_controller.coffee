@@ -43,7 +43,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       @send "executeActions", "assign", user: user
       false
 
-      deleteAll: ->
+    deleteAll: ->
       @send "executeActions", "delete"
       false
 
