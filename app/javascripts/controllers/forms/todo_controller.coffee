@@ -2,13 +2,15 @@ require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
-  needs: ['users']
-
   actions:
     finishTask: ->
       return if @get('cantFinish')
 
       @toggleProperty('isFinished')
+
+      if @get('isCalendar')
+        @send('completeFinish') if @get("hasBufferedChanges")
+        return
 
       if @get('isFinished') && @get('hasBufferedChanges')
         timer = setInterval =>
@@ -49,6 +51,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
       unless ele.length
         return self.send()
+
+      unless @get('animate')
+        return finish()
 
       ele.fadeOut ->
         finish()
@@ -108,7 +113,12 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       return if @get('isNew')
       @send 'submit'
 
+  needs: ['users']
+
   timer: null
+
+  isCalendar: Ember.computed.equal 'controllers.application.currentPath', 'calendar.task'
+  animate: Ember.computed.not 'isCalendar'
 
   cantFinish: Ember.computed 'isDisabled', 'isNew', ->
     @get('isDisabled') || @get('isNew')

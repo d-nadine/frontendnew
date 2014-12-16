@@ -16,15 +16,13 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
     classNameBindings: ["isFinished", ":btn", ":btn-link", ":pull-left", ":events-list-item-button"]
     attributeBindings: 'title'
 
-    setup: ( ->
+    setup: Ember.on 'didInsertElement', ->
       unless @get('controller.isNew')
         @$().tooltip()
-    ).on('didInsertElement')
 
-    willDestroyElement: ( ->
+    willDestroyElement: Ember.on 'willDestroyElement', ->
       if @$().data('tooltip')
         @$().tooltip('destroy')
-    ).on('willDestroyElement')
 
     click: ->
       @triggerAction

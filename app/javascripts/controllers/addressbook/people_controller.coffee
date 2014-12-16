@@ -259,17 +259,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
 
-  checkColumnsDidChange: Ember.observer 'checkedColumns.[]', 'columns.[]', ->
-    checkedColumns = @get('columns')
-
-    nextTask = checkedColumns.find (col) -> col.classNames == "nextTask"
-
-    nextTaskCheck = $('.nextTaskDateDisplay').find('')
-
-    Ember.run ->
-      nextTaskCheck.attr 'checked', nextTask.checked
-
-
   totalRecords: Ember.computed 'content.source.content.meta', ->
     @get('content.source.content.meta.totalRecords')
 
