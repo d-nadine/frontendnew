@@ -14,6 +14,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   notes: DS.hasMany('Radium.Note', inverse: '_referenceContact')
 
   nextTodo: DS.belongsTo('Radium.Todo', inverse: null)
+  nextMeeting: DS.belongsTo('Radium.Meeting', inverse: null)
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
 
@@ -32,10 +33,18 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   updateStatus: DS.attr('string')
   lastActivityAt: DS.attr('date')
   activityTotal: DS.attr('number')
+  nextTaskDate: DS.attr('datetime')
+
+  nextTask: Ember.computed 'nextTodo', 'nextMeeting', ->
+    @get('nextTodo') || @get('nextMeeting')
+
+  nextTaskDateDisplay: Ember.computed 'nextTaskDate', ->
+    if @get('nextTaskDate')?
+      @get('nextTaskDate').readableTimeAgo()
 
   daysInactive: Ember.computed 'lastActivityAt', ->
     if @get("lastActivityAt")?
-      moment.duration((new Date - @get("lastActivityAt")), "milliseconds").humanize()
+      @get('lastActivityAt').readableTimeAgo()
 
   isPublic: DS.attr('boolean')
   isPersonal: Ember.computed.not 'isPublic'

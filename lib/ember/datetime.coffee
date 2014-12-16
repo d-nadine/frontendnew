@@ -1,4 +1,16 @@
+Date.prototype.readableTimeAgo = ->
+  milliseconds = moment.duration((new Date - this), "milliseconds")
+  ret = milliseconds.humanize()
+
+  if (this - new Date) < 0
+    ret = ret + " ago"
+
+  ret
+
 Ember.DateTime.reopen
+  readableTimeAgo: ->
+    @toJSDate().readableTimeAgo()
+
   toMeridianTime: ->
     @toFormattedString('%i:%M %p')
 
@@ -38,9 +50,6 @@ Ember.DateTime.reopen
 
   atEndOfTomorrow: ->
     @advance(day: 1).atEndOfDay()
-
-  atBeginningOfDay: ->
-    @adjust hour: 0, minute: 0, second: 0
 
   atBeginningOfDay: ->
     @adjust hour: 0, minute: 0, second: 0

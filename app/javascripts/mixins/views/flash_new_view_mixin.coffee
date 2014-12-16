@@ -1,14 +1,12 @@
 Radium.FlashNewViewMixin = Ember.Mixin.create
-  setup: (->
+  setup: Ember.on 'didInsertElement', ->
     if @get('controller.newTask')
       @observeNewTask()
     else
       @addObserver 'controller.newTask', this, 'observeNewTask'
-  ).on 'didInsertElement'
 
-  tearDown: (->
+  tearDown: Ember.on 'willDestroyElement', ->
     @removeObserver 'controller.newTask', this, 'observeNewTask'
-  ).on 'willDestroyElement'
 
   observeNewTask: ->
     controller = @get('controller')
@@ -40,4 +38,9 @@ Radium.FlashNewViewMixin = Ember.Mixin.create
       scrollTop: top,
         duration: 500
         complete: =>
-          @set('controller.isExpanded', true) if @get('controller')
+          unless controller = @get('controller')
+            return
+
+          return if controller.isDestroyed
+
+          controller.set('isExpanded', true) if @get('controller')
