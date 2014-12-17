@@ -51,7 +51,7 @@ Radium.NextTaskComponent = Ember.Component.extend
   needs: ['users']
 
   setupCustom: ->
-    p "setup"
+    @$('.mentions-input-box textarea').focus()
 
   setup: Ember.on 'didInsertElement', ->
     Ember.$('.modal').modal('hide')
