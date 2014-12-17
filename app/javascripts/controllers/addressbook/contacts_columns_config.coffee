@@ -116,12 +116,16 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       sortOn: "last_activity_at"
     }
     {
-      classNames: "nextTask"
+      classNames: "next-task"
       heading: "Next Task"
-      binding: "nextTask.displayName"
       route: "calendar.task"
       context: "nextTask"
       checked: true
+      bindings: [{
+        name: "model"
+        value: "model"
+      }]
+      component: "next-task"
     }
     {
       classNames: "next-task-date"

@@ -262,6 +262,7 @@
     border-spacing: 0;
     background-color: transparent;
     float: left;
+    position: relative;
   }
 
   .contacts-table tr {
@@ -329,7 +330,7 @@
       min-width: 110px;
     }
 
-    .nextTask, .next-task-date {
+    .next-task, .next-task-date {
       min-width: 125px;
     }
 
@@ -425,7 +426,23 @@
       text-align: center;
     }
 
-    .nextTask, .next-task-date {
+    .next-task {
+      .dd.open {
+        position: absolute;
+
+        a.dropdown-toggle {
+          position: relative;
+          top: -9px;
+        }
+      }
+
+      .caret {
+        margin-top: 8px;
+        margin-left: 2px;
+      }
+    }
+
+    .next-task, .next-task-date {
       max-width: 100px;
     }
 

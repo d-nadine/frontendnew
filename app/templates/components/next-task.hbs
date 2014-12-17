@@ -1,0 +1,23 @@
+{{#if model.nextTask}}
+  {{resource-link-to model.nextTask}}
+{{else}}
+  <a href="#" {{action "positionTaskMenu"}} data-toggle="dropdown" class="dropdown-toggle">
+    <span>Add Follow-up</span>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="#">Tomorrow</a>
+    </li>
+    <li>
+      <a href="#">Next Week</a>
+    </li>
+    <li>
+      <a href="#">Next Month</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a tabindex="-1" href="#" class="custom">Custom task</a>
+    </li>
+  </ul>
+{{/if}}
