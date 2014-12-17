@@ -1,7 +1,27 @@
 Radium.NextTaskComponent = Ember.Component.extend
   actions:
     addTodo: (period) ->
-      p period
+      user = @get('currentUser')
+
+      now = Ember.DateTime.create()
+
+      switch period
+        when "tomorrow" then date = @get('tomorrow')
+        when "nextweek" then date = now.atEndOfWeek().advance(day: 1).atEndOfWeek().advance(day: 1)
+        when "nextmonth" then date = now.nextMonth()
+
+      todo = Radium.Todo.createRecord
+               user: user
+               reference: @get('model')
+               description: "follow up"
+               finishBy: date
+
+      self = this
+
+      todo.one 'didCreate', (result) ->
+        self.send 'todoAdded', result
+
+      @get('store').commit()
 
     todoAdded: (todo) ->
       contact = @get('model')
@@ -22,6 +42,9 @@ Radium.NextTaskComponent = Ember.Component.extend
 
     showTodoModal: ->
       @$('.modal').modal(backdrop: false)
+
+  store: Ember.computed ->
+    @get('container').lookup 'store:main'
 
   classNames: ["dd", "dropdown"]
 

@@ -7,15 +7,14 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="#">Tomorrow</a>
+      <a href="#" {{action "addTodo" "tomorrow"}}>Tomorrow</a>
     </li>
     <li>
-      <a href="#">Next Week</a>
+      <a href="#" {{action "addTodo" "nextweek"}}>Next Week</a>
     </li>
     <li>
-      <a href="#">Next Month</a>
+      <a href="#" {{action "addTodo" "nextmonth"}}>Next Month</a>
     </li>
-    <li class="divider"></li>
     <li>
       <a {{action "showTodoModal"}} tabindex="-1" href="#" class="custom">Custom task</a>
     </li>
