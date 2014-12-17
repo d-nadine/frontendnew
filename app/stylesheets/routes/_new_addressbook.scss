@@ -249,6 +249,7 @@
     position: relative;
     height: 100%;
     display: inline-block;
+    width: calc(100% - 264px) !important;
   }
 
   .right-table {
@@ -467,6 +468,7 @@
     margin-right: 22px;
     padding-top: 14px;
     margin-top: 30px;
+    padding-left: 40px;
   }
 
   .contacts-sidebar .newList {
@@ -524,4 +526,11 @@
 
 .modal-backdrop {
   background-color: transparent;
+}
+.addressbook-view {
+  .single-column-container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+  }
 }
