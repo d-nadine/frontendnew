@@ -3,9 +3,8 @@ Radium.FormsTodoFieldView = Radium.MentionFieldView.extend
   valueBinding: 'controller.description'
   dateBinding: 'controller.finishBy'
 
-  isSubmitted: Ember.computed.alias('controller.isSubmitted')
-  isInvalid: (->
+  isSubmitted: Ember.computed.oneWay('controller.isSubmitted')
+  isInvalid: Ember.computed 'value', 'isSubmitted', ->
     Ember.isEmpty(@get('value')) && @get('isSubmitted')
-  ).property('value', 'isSubmitted')
 
-  referenceName: Ember.computed.alias('controller.reference.name')
+  referenceName: Ember.computed.oneWay('controller.reference.name')

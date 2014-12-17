@@ -46,7 +46,7 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
     value: 'controller.description'
     disabledBinding: 'controller.isPrimaryInputDisabled'
     finishBy: Ember.computed.alias 'controller.finishBy'
-    placeholder: (->
+    placeholder: Ember.computed 'reference.name', 'controller.finishBy', ->
       pre = if @get('referenceName') and !@get('controller.reference.token')
               "Add a todo about #{@get('referenceName')}"
             else
@@ -55,7 +55,6 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
       return pre unless @get('finishBy')
 
       "#{pre} for #{@get('finishBy').toHumanFormat()}"
-    ).property('reference.name', 'controller.finishBy')
 
   userPicker: Radium.UserPicker.extend
     disabledBinding: 'controller.isDisabled'

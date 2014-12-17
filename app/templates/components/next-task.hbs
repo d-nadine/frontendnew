@@ -1,7 +1,7 @@
 {{#if model.nextTask}}
   {{resource-link-to model.nextTask}}
 {{else}}
-  <a href="#" {{action "positionTaskMenu"}} data-toggle="dropdown" class="dropdown-toggle">
+  <a href="#" data-toggle="dropdown" class="dropdown-toggle">
     <span>Add Follow-up</span>
     <span class="caret"></span>
   </a>
@@ -17,7 +17,15 @@
     </li>
     <li class="divider"></li>
     <li>
-      <a tabindex="-1" href="#" class="custom">Custom task</a>
+      <a {{action "showTodoModal"}} tabindex="-1" href="#" class="custom">Custom task</a>
     </li>
   </ul>
 {{/if}}
+<div class="modal fade hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
+    {{render "forms/todo" todoForm}}
+  </div>
+<div>

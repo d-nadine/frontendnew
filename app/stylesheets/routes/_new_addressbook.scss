@@ -504,4 +504,24 @@
     vertical-align: center;
     height: 52px;
   }
+
+  .modal {
+    top: 40%;
+    width: 50%;
+
+    .modal-body {
+      width: 90%;
+
+      textarea {
+        min-height: 28px;
+      }
+    }
+    .modal-header {
+      border-bottom: 0;
+    }
+  }
+}
+
+.modal-backdrop {
+  background-color: transparent;
 }
