@@ -33,9 +33,12 @@ Radium.TodoForm = Radium.Form.extend
 
       record = @get('type').createRecord @get('data')
 
-      record.one 'didCreate', (result) ->
-        result.set 'newTask', true
-        resolve("The task #{result.get("description")} has been created.")
+      record.one 'didCreate', (created) ->
+        created.set 'newTask', true
+        text = "The task #{created.get("description")} has been created."
+        result = {todo: created, confirmtation: text}
+
+        resolve(result)
 
       record.one 'becameInvalid', (result) ->
         reject(result)
@@ -55,9 +58,9 @@ Radium.TodoForm = Radium.Form.extend
 
         record.one 'didCreate', (record) =>
           if item == @get('reference.lastObject')
-            resolve("The todos have been created")
+            resolve(confirmation: "The todos have been created")
 
-        record.one 'becameInvalid', (result) =>
+        record.one 'becameInvalid', (result) ->
           reject(result)
 
         record.one 'becameError', (result)  ->

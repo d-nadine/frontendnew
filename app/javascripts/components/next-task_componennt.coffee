@@ -3,6 +3,23 @@ Radium.NextTaskComponent = Ember.Component.extend
     addTodo: (period) ->
       p period
 
+    todoAdded: (todo) ->
+      contact = @get('model')
+
+      observer = =>
+        return unless todo.get('id')
+
+        todo.removeObserver 'id', observer
+
+        contact.updateLocalBelongsTo 'nextTodo', todo
+
+        @$('.modal').modal('hide')
+
+      if todo.get('id')
+        observer()
+      else
+        todo.addObserver 'id', observer
+
     showTodoModal: ->
       @$('.modal').modal(backdrop: false)
 
@@ -15,7 +32,7 @@ Radium.NextTaskComponent = Ember.Component.extend
 
   setup: Ember.on 'didInsertElement', ->
     Ember.$('.modal').modal('hide')
- 
+
     @$('.modal').on 'shown', @setupCustom.bind(this)
 
   teardown: Ember.on 'willDestroyElement', ->

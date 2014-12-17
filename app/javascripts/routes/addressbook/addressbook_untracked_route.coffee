@@ -1,16 +1,15 @@
 Radium.AddressbookUntrackedRoute = Radium.Route.extend
   actions:
     track: (contact) ->
-      if confirm "Track this contact in Radium?"
-        track = Radium.TrackedContact.createRecord
-                  contact: contact
+      track = Radium.TrackedContact.createRecord
+                contact: contact
 
-        track.one 'didCreate', (result) =>
-          @send "flashSuccess", "Contact is now tracked in Radium"
-          @dataset.removeObject(contact)
-          @controllerFor('addressbook').send 'updateTotals'
+      track.one 'didCreate', (result) =>
+        @send "flashSuccess", "Contact is now tracked in Radium"
+        @dataset.removeObject(contact)
+        @controllerFor('addressbook').send 'updateTotals'
 
-        @store.commit()
+      @store.commit()
 
     loadMoreContacts: ->
       @dataset.expand()

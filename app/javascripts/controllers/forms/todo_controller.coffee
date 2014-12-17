@@ -79,11 +79,15 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
         model = @get('model')
 
         if @get('isNew')
-          model.commit().then(( (confirmation) =>
+          model.commit().then(( (result) =>
             if @get('controllers.application.currentPath') != 'user.index'
               @get('user')?.reload()
 
-            @send('flashSuccess', confirmation) if confirmation
+            @send('flashSuccess', result.confirmation) if result?.confirmation
+
+            # A bit hacky, we could use sendAction if this was a component
+            if @get('target') instanceof Radium.NextTaskComponent
+              @get('target').send 'todoAdded', result.todo
           ),
           ((error) =>
             @send 'flashError', error

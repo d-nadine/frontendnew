@@ -125,7 +125,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
           else
             data = contact.get('_data')
             if action == "assign"
-              data['user'] = {id: job.get('assignedTo.id'), type: Radium.User}
+              return contact.updateLocalBelongsTo 'assignedTo', job.get('assignedTo')
 
             if action == "tag"
               references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})

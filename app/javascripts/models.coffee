@@ -12,6 +12,18 @@ Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
+  updateLocalBelongsTo: (key, belongsTo) ->
+    data = this.get('data')
+
+    data[key] = {id: belongsTo.get('id'), type: belongsTo.constructor}
+
+    this.set('_data', data)
+
+    this.suspendRelationshipObservers ->
+      this.notifyPropertyChange 'data'
+
+    this.updateRecordArrays()
+
   reload: ->
     return unless @get('inCleanState')
 

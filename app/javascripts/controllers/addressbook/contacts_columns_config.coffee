@@ -124,6 +124,14 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       bindings: [{
         name: "model"
         value: "model"
+      }
+      {
+        name: "currentUser"
+        value: "currentUser"
+      }
+      {
+        name: "tomorrow"
+        value: "tomorrow"
       }]
       component: "next-task"
     }
