@@ -15,4 +15,10 @@ Radium.PeopleTagItemController = Radium.ObjectController.extend
     unless tagId = @get('model.id')
       return
 
-    tagsTotals.find((tag) -> tag.id == parseInt(tagId)).total
+    tag = tagsTotals.find((tag) -> tag.id == parseInt(tagId))
+
+    if !tag
+      Radium.Tag.find({})
+      return
+
+    tag.total
