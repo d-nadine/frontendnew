@@ -33,6 +33,8 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
 
         todo.removeObserver 'id', observer
 
+        contact.updateLocalProperty 'nextTaskDate', todo.get('finishBy'), false
+
         contact.updateLocalBelongsTo 'nextTodo', todo
 
         @$('.modal').modal('hide')

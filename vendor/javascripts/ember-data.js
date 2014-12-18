@@ -1,4 +1,4 @@
-// Last commit: 30ccb4c (2014-12-01 12:00:23 +0000)
+// Last commit: a564cd6 (2014-12-18 16:26:02 +0000)
 
 
 (function() {
@@ -3570,6 +3570,10 @@ updatedState.inFlight.becomeDirty = function(record) {
 updatedState.inFlight.unloadRecord = function(record) {
   record.clearRelationships();
   record.transitionTo('deleted.saved');
+};
+
+updatedState.uncommitted.finishedMaterializing = function(record) {
+  record.transitionTo('loaded.saved');
 };
 
 var RootState = {
@@ -8899,7 +8903,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
 
     Sends a delete request for the record to the server.
 
-    @method 
+    @method deleteRecord
     @property {DS.Store} store
     @property {DS.Model} type   the DS.Model class of the record
     @property {DS.Model} record
