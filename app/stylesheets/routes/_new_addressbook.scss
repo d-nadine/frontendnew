@@ -263,7 +263,6 @@
     border-spacing: 0;
     background-color: transparent;
     float: left;
-    position: relative;
   }
 
   .contacts-table tr {
@@ -355,6 +354,10 @@
   .contacts-table tbody tr {
     td {
       padding-right: 10px;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     td .editable {
@@ -428,13 +431,8 @@
     }
 
     .next-task {
-      .dd.open {
-        position: absolute;
-
-        a.dropdown-toggle {
-          position: relative;
-          top: -9px;
-        }
+      a.dropdown-toggle:hover {
+        text-decoration: none;
       }
 
       .caret {

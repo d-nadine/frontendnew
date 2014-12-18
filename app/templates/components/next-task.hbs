@@ -1,7 +1,7 @@
 {{#if model.nextTask}}
   {{resource-link-to model.nextTask}}
 {{else}}
-  <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+  <a href="#" {{action "positionMenu"}} data-toggle="dropdown" class="dropdown-toggle">
     <span>Add Follow-up</span>
     <span class="caret"></span>
   </a>
