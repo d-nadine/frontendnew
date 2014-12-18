@@ -1,20 +1,34 @@
 Radium.PositionDropdownMixin = Ember.Mixin.create
   actions:
     positionMenu: (e) ->
+      return if @$().hasClass 'open'
+
       @positionDropdown()
 
-  setup: Ember.on 'didInsertElement', ->
-    $(window).on 'scroll', @positionDropdown.bind(this)
+  eventNamespace: Ember.computed 'elementId', ->
+    "scroll.#position#{@get('elementId')}"
 
-  teardown: Ember.on 'willDestroyElement', ->
-    $(window).off 'scroll'
+  didInsertElement: ->
+    @_super.apply this, arguments
+    p "fooo"
+    $(window).on @get('eventNamespace'), @scrollDropdown.bind(this)
 
-  positionDropdown: (e) ->
-    return if @$().hasClass 'open'
+  willDestroyElement: ->
+    @_super.apply this, arguments
+    $(window).off @get('eventNamespace')
 
-    a = @$('.dropdown-toggle')
+  scrollDropdown: ->
     menu = @$('.dropdown-menu')
 
-    offset = a.position()
+    return unless menu.is(':visible')
 
-    menu.css({top: offset.top + 20, left: offset.left})
+    @positionDropdown()
+
+  positionDropdown: () ->
+    menu = @$('.dropdown-menu')
+
+    a = @$('.dropdown-toggle')
+
+    position = a.position()
+
+    menu.css({top: position.top + 20, left: position.left})
