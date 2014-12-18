@@ -1,4 +1,4 @@
-Radium.PeopleIndexView = Radium.View.extend
+Radium.PeopleIndexView = Radium.View.extend Radium.ScrollTopMixin,
   setup: Ember.on 'didInsertElement', ->
     @resizeTableContainer()
     $(window).on 'resize.table-container-resize', @resizeTableContainer.bind(this)

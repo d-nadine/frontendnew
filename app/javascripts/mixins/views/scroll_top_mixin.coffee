@@ -1,7 +1,7 @@
 Radium.ScrollTopMixin = Ember.Mixin.create
-  setup: (->
+  didInsertElement: ->
+    @_super.apply this, arguments
     Ember.run.scheduleOnce 'afterRender', this, 'scrollToTop'
-  ).on 'didInsertElement'
 
   scrollToTop: ->
     window.scrollTo(0,0)
