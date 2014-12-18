@@ -6,11 +6,10 @@ Radium.PositionDropdownMixin = Ember.Mixin.create
       @positionDropdown()
 
   eventNamespace: Ember.computed 'elementId', ->
-    "scroll.#position#{@get('elementId')}"
+    "scroll.#{@get('elementId')}"
 
   didInsertElement: ->
     @_super.apply this, arguments
-    p "fooo"
     $(window).on @get('eventNamespace'), @scrollDropdown.bind(this)
 
   willDestroyElement: ->
