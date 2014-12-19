@@ -51,3 +51,6 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     Radium.InfiniteDataset.create
       type: Radium.Contact
       params: filterParams
+
+  deactivate: ->
+    @controller.set 'newTags', Ember.A()

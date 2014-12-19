@@ -84,6 +84,7 @@
     </div>
   </div>
   <div class="contacts-sidebar">
+    <a href="#" {{action "createTag"}} class="btn list-new">New List</a>
     <ul class="nav nav-pills">
       <li {{bind-attr class="isAll:active"}}>
         {{#link-to "people.index" "all" (query-params user="")}}
@@ -135,6 +136,9 @@
             <span>{{contactsTotal}}</span>
           </a>
         </li>
+      {{/each}}
+      {{#each newTag in newTags}}
+        {{new-tag newTag=newTag saveTag="saveTag"}}
       {{/each}}
     </ul>
     <ul class="nav nav-pills more">

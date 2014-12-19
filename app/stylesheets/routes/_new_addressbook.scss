@@ -137,6 +137,15 @@
     top: -3px;
   }
 
+  .contacts-sidebar .list-new {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 157px;
+  }
+
   .contacts-sidebar .nav {
     margin-bottom: 25px;
   }
@@ -456,6 +465,10 @@
     .company, .name, .email {
       max-width: 350px;
     }
+  }
+
+  .editableList:empty:before {
+    content: attr(placeholder);
   }
 
   .contacts-sidebar {

@@ -1,6 +1,29 @@
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.ContactColumnsConfig,
   actions:
+    saveTag: (newTag) ->
+      tag = Radium.Tag.createRecord(name: newTag.get('name'), account: @get('currentUser.account'))
+
+      tag.one 'didCreate', =>
+        @get('newTags').removeObject newTag
+
+        @send 'flashSuccess', "New list successfully created."
+
+        Radium.Tag.find({})
+
+        @send 'updateTotals'
+
+      tag.one 'becameInvalid', =>
+        @send "flashError", tag
+
+      tag.one 'becameError', =>
+        @send "flashError", "An error has occurred and the new list cannot be created."
+
+      @get('store').commit()
+
+    createTag: ->
+      @get('newTags').pushObject Ember.Object.create name: ''
+
     saveCity: (context) ->
       unless context.get('model.city')
         city = context.get('bufferedProxy.city')
@@ -49,7 +72,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       false
 
     executeActions: (action, detail) ->
-      checkedContent = @get('checkedContent')
+      checkedContentb = @get('checkedContent')
       allChecked = @get('allChecked')
 
       unless allChecked || checkedContent.length
@@ -204,6 +227,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   isNoList: Ember.computed.equal 'filter', 'no_list'
   isTagged: Ember.computed.equal 'filter', 'tagged'
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
+
+  newTags: Ember.A()
 
   isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
     return unless @get('isAssignedTo') && @get('user')

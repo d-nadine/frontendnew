@@ -209,7 +209,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     el = $(@$())
     if $(el.html()).hasClass('placeholder')
       el.empty()
-      @setEndOfContentEditble
+      @setEndOfContentEditble()
 
   focusOut: (e) ->
     Ember.run.next =>
