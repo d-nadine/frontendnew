@@ -31,6 +31,8 @@ Radium.NewTagComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     false
 
   focusOut: (e) ->
-    @$().addClass 'active'
+    @$().removeClass 'active'
+
+    @get('targetObject').notifyPropertyChange 'filter'
 
     false
