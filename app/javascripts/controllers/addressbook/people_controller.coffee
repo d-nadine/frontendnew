@@ -80,7 +80,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       false
 
     executeActions: (action, detail) ->
-      checkedContentb = @get('checkedContent')
+      checkedContent = @get('checkedContent')
       allChecked = @get('allChecked')
 
       unless allChecked || checkedContent.length
