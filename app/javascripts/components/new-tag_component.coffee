@@ -8,9 +8,6 @@ Radium.NewTagComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   setup: Ember.on 'didInsertElement', ->
     $('.contacts-sidebar li.active').removeClass('active')
 
-    Ember.run.next =>
-      @set 'isCurrent', true
-
     editable = @$('.editableList')
     editable.get(0).focus()
     editable.on 'focus', @focusEditable.bind(this)
@@ -30,9 +27,15 @@ Radium.NewTagComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     @sendAction 'saveTag', @get('newTag')
 
+    false
+
   focusEditable: (e) ->
+    Ember.run.next =>
+      @set 'isCurrent', true
+
     false
 
   # focusOut: (e) ->
-  #   p "in focusOut"
   #   @set 'isCurrent', false
+
+  #   false

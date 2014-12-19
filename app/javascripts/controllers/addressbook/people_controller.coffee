@@ -2,6 +2,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   Radium.ContactColumnsConfig,
   actions:
     saveTag: (newTag) ->
+      tagNames = @get('tags').mapProperty('name').map((name) -> name.toLowerCase()).toArray()
+
+      if tagNames.contains(newTag.get('name').toLowerCase())
+        @send 'flashError', 'A list with this name already exists.'
+        return
+
       tag = Radium.Tag.createRecord(name: newTag.get('name'), account: @get('currentUser.account'))
 
       tag.one 'didCreate', =>
@@ -20,6 +26,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         @send "flashError", "An error has occurred and the new list cannot be created."
 
       @get('store').commit()
+
+      false
 
     createTag: ->
       @get('newTags').pushObject Ember.Object.create name: ''
