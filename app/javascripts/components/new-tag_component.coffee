@@ -2,15 +2,10 @@ require 'components/key_constants_mixin'
 
 Radium.NewTagComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   tagName: 'li'
-  isCurrent: true
-  classNameBindings: ['isCurrent:active']
 
   setup: Ember.on 'didInsertElement', ->
-    $('.contacts-sidebar li.active').removeClass('active')
-
     editable = @$('.editableList')
     editable.get(0).focus()
-    editable.on 'focus', @focusEditable.bind(this)
     editable.on 'keydown', @saveOnEnter.bind(this)
 
   saveOnEnter: (e) ->
@@ -29,13 +24,13 @@ Radium.NewTagComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     false
 
-  focusEditable: (e) ->
-    Ember.run.next =>
-      @set 'isCurrent', true
+  focusIn: (e) ->
+    $('.contacts-sidebar li.active').removeClass('active')
+    @$().addClass 'active'
 
     false
 
-  # focusOut: (e) ->
-  #   @set 'isCurrent', false
+  focusOut: (e) ->
+    @$().addClass 'active'
 
-  #   false
+    false
