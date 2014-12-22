@@ -15,14 +15,13 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
       @dataset.expand()
 
     destroyContact: (contact)->
-      if confirm "delete this contact?"
-        contact.deleteRecord()
-        contact.one 'didDelete', =>
-          @send "flashSuccess", "Contact deleted"
-          @dataset.removeObject contact
-          @controllerFor('addressbook').send 'updateTotals'
+      contact.deleteRecord()
+      contact.one 'didDelete', =>
+        @send "flashSuccess", "Contact deleted"
+        @dataset.removeObject contact
+        @controllerFor('addressbook').send 'updateTotals'
 
-        @store.commit()
+      @store.commit()
 
   model: ->
     @dataset = Radium.InfiniteDataset.create
