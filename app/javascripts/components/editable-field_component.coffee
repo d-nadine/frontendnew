@@ -86,7 +86,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   containingController: Ember.computed ->
     @get('targetObject.parentController.targetObject')
 
-  classNameBindings: [':editable', 'isSaving', 'isInvalid']
+  classNames: ['editable']
+  classNameBindings: ['isSaving', 'isInvalid']
   attributeBindings: ['contenteditable']
   isTransitioning: false
 
@@ -209,7 +210,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     el = $(@$())
     if $(el.html()).hasClass('placeholder')
       el.empty()
-      @setEndOfContentEditble()
+
+    @setEndOfContentEditble()
 
   focusOut: (e) ->
     Ember.run.next =>
