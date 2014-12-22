@@ -88,18 +88,12 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
                 account: currentUser.get('account')
                 subscriptionPlan: subscriptionPlan
 
-      trial.one 'didCreate', =>
+      trial.save(this).then =>
         @set 'isPersisting', false
 
         @send "flashSuccess", "The trial #{subscriptionPlan.get('name')} has been created."
         currentUser.reload()
         billing.reload()
-
-      trial.one 'didError', ->
-        @set 'isPersisting', false
-        @send 'flashError', 'An error has occurred and the trial could not be created.'
-
-      @get('store').commit()
 
     updateSubscription: (subscriptionPlan, yearly, yearOption) ->
       if @get('isBasic') && subscriptionPlan.get('totalUsers') > 1

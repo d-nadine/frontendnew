@@ -23,7 +23,7 @@ Radium.NoteForm = Radium.Form.extend
         result.set 'newTask', true
         resolve(result)
 
-      record.one 'becameInvalid', (result) =>
+      record.one 'becameInvalid', (result) ->
         result.reset()
         reject(result)
 

@@ -12,6 +12,26 @@ Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
+  save: (context) ->
+    self = this
+
+    new Ember.RSVP.Promise (resolve, reject) ->
+      success = (result) ->
+        resolve result
+
+      self.one 'didCreate', success
+      self.one 'didUpdate', success
+
+      self.one 'becameInvalid', (result) ->
+        result.reset()
+        context.send 'flashError', result
+
+      self.one 'becameError', (result) ->
+        result.reset()
+        context.send 'flashError', 'An error has occurred and the operation could not be completed.'
+
+      self.get('store').commit()
+
   updateLocalBelongsTo: (key, belongsTo, notify = true) ->
     data = this.get('data')
 
