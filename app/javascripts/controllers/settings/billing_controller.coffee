@@ -77,7 +77,34 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @discardBufferedChanges()
       @set 'showBillingForm', false
 
+    createTrialPlan: (subscriptionPlan) ->
+      @set 'isPersisting', true
+
+      billing = @get('model')
+      currentUser = @get('currentUser')
+
+      trial = Radium.CreateTrialPlan.createRecord
+                user: currentUser
+                account: currentUser.get('account')
+                subscriptionPlan: subscriptionPlan
+
+      trial.one 'didCreate', =>
+        @set 'isPersisting', false
+
+        @send "flashSuccess", "The trial #{subscriptionPlan.get('name')} has been created."
+        currentUser.reload()
+        billing.reload()
+
+      trial.one 'didError', ->
+        @set 'isPersisting', false
+        @send 'flashError', 'An error has occurred and the trial could not be created.'
+
+      @get('store').commit()
+
     updateSubscription: (subscriptionPlan, yearly, yearOption) ->
+      if @get('isBasic') && subscriptionPlan.get('totalUsers') > 1
+        return @send 'createTrialPlan', subscriptionPlan
+
       unless activeCard = @get('activeCard')
         @set 'showBillingForm', true
         return
@@ -110,8 +137,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @get('store').commit()
 
   needs: ['users', 'account', 'countries']
-  account: Ember.computed.alias 'controllers.account.model'
-  unlimited: Ember.computed.alias 'account.unlimited'
+  account: Ember.computed.oneWay 'controllers.account.model'
+  unlimited: Ember.computed.oneWay 'account.unlimited'
   isNewCard: false
   showBillingForm: false
   activeCard: null
