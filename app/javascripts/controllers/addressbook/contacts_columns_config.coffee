@@ -1,4 +1,6 @@
 Radium.ContactColumnsConfig = Ember.Mixin.create
+  SAVED_COLUMNS: "saved_checked_columns"
+  initialColumns: ['email', 'company', "events", "inactive", "next-task", "next-task-date", "assign"]
   fixedColumns: Ember.A([
     {
       classNames: "name"
@@ -27,6 +29,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
 
   columns: Ember.A([
     {
+      id: "email"
       classNames: "email"
       heading: "Email"
       route: "contact"
@@ -53,11 +56,11 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         name: "saveEmail"
         value: "saveEmail"
       ]
-      checked: true
       sortOn: "email"
       component: 'editable-field'
     }
     {
+      id: "company"
       classNames: "company"
       heading: "Company"
       route: "company"
@@ -97,30 +100,29 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         }
       ]
       context: "company"
-      checked: true
       sortOn: "company"
       component: 'autocomplete-editable-field'
     }
     {
+      id: "events"
       classNames: "events"
       heading: "Events"
       binding: "activityTotal"
-      checked: true
       sortOn: "activity_total"
     }
     {
+      id: "inactive"
       classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
-      checked: true
       sortOn: "last_activity_at"
     }
     {
+      id: "next-task"
       classNames: "next-task"
       heading: "Next Task"
       route: "calendar.task"
       context: "nextTask"
-      checked: true
       bindings: [{
         name: "model"
         value: "model"
@@ -136,6 +138,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: "next-task"
     }
     {
+      id: "next-task-date"
       classNames: "next-task-date"
       heading: "Next Task Date"
       binding: "nextTaskDateDisplay"
@@ -143,6 +146,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       sortOn: "next_task_date"
     }
     {
+      id: "assign"
       classNames: "assign"
       heading: "Assigned To"
       component: "assignto-picker"
@@ -151,9 +155,9 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         {name: "assignees", value: "assignees"},
         {name: "contact", value: "contact"},
       ]
-      checked: true
     }
     {
+      id: "last-activity"
       classNames: "last-activity"
       heading: "Last Activity"
       component: "render-activity"
@@ -162,6 +166,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       ]
     }
     {
+      id: "city"
       classNames: "city"
       heading: "City"
       bindings: [{
@@ -190,6 +195,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      id: "phone"
       classNames: "phone"
       heading: "Phone"
       bindings: [{
@@ -218,30 +224,35 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      id: "source"
       classNames: "source"
       heading: "Source"
       binding: "source"
       sortOn: "source"
     }
     {
+      id: "added"
       classNames: "added"
       heading: "Added"
       binding: "added"
       sortOn: "created_at"
     }
     {
+      id: "deals-closed-total"
       classNames: "deals-closed-total"
       heading: "Deals Closed"
       binding: "dealsClosedTotal"
       sortOn: "deals_closed_total"
     }
     {
+      id: "deals-total"
       classNames: "deals-total"
       heading: "Deals Total"
       binding: "dealsTotal"
       sortOn: "deals_closed_total_value"
     }
     {
+      id: "tags"
       classNames: "tags"
       heading: "Lists"
       bindings: [
@@ -250,18 +261,21 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: "tag-picker"
     }
     {
+      id: "status"
       classNames: "status"
       heading: "Status"
       binding: "status"
       sortOn: "status"
     }
     {
+      id: "events-seven"
       classNames: "events-seven"
       heading: "Events in last 7 days"
       binding: "activitySevenDaysTotal"
       sortOn: "activity_seven_days_total"
     }
     {
+      id: "events-thirty"
       classNames: "events-thirty"
       heading: "Events in last 30 days"
       binding: "activityThirtyDaysTotal"

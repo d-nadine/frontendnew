@@ -52,5 +52,15 @@ Radium.PeopleIndexRoute = Radium.Route.extend
       type: Radium.Contact
       params: filterParams
 
+  activate: ->
+    controller = @controllerFor('peopleIndex')
+
+    unless savedColumns = JSON.parse(localStorage.getItem(controller.SAVED_COLUMNS))
+      savedColumns = controller.initialColumns
+
+      localStorage.setItem controller.SAVED_COLUMNS, JSON.stringify(savedColumns)
+
+    controller.get('columns').filter((c) -> savedColumns.contains(c.id)).setEach 'checked', true
+
   deactivate: ->
     @controller.set 'newTags', Ember.A()

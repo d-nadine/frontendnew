@@ -292,6 +292,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
   checkedColumns: Ember.computed.filterBy 'columns', 'checked'
 
+  checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
+    checked = @get('checkedColumns').filter((c) -> c.checked).mapProperty 'id'
+    localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
+
   totalRecords: Ember.computed 'content.source.content.meta', ->
     @get('content.source.content.meta.totalRecords')
 
