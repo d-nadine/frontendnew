@@ -21,12 +21,12 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
         else
           @send 'flashError', deal
 
-        deal.deleteRecord()
+        deal.unloadRecord()
 
       deal.one 'becameError', (result)  ->
         @set 'isSaving', false
         @send 'flashError', 'An error has occurred and the deal could not be created.'
-        deal.deleteRecord()
+        deal.unloadRecord()
 
       @set 'isSaving', true
 

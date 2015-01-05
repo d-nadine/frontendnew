@@ -1,4 +1,4 @@
-// Last commit: a564cPd6 (2014-12-18 16:26:02 +0000)
+// Last commit: 26f2d1e (2015-01-05 14:34:29 +0000)
 
 
 (function() {
@@ -3495,6 +3495,11 @@ var DirtyState = {
 
     invokeLifecycleCallbacks: function(record) {
       record.trigger('becameInvalid', record);
+    },
+
+    unloadRecord: function(record) {
+      record.clearRelationships();
+      record.transitionTo('deleted.saved');
     }
   }
 };
@@ -6917,7 +6922,7 @@ DS.Serializer = Ember.Object.extend({
         tuples = idsOrTuples;
 
     if(idsOrTuples && Ember.isArray(idsOrTuples)) {
-      tuples = this._convertTuples(relationship.type, idsOrTuples);
+      tuples = this._convertTuples(relationship.type, idsOrTuples.compact());
     }
 
     record.materializeHasMany(name, tuples);
