@@ -31,6 +31,8 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
 
   contactPicker: Radium.ContactPicker.extend Radium.ValueValidationMixin,
     parent: Ember.computed.alias 'controller'
+    queryParameters: (query) ->
+      Ember.merge @_super.apply(this, arguments), tracked_only: true
 
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     parent: Ember.computed.alias 'controller'
