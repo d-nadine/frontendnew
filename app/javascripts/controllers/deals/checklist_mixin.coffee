@@ -12,14 +12,14 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
       @set 'newItemKind', kind.toLowerCase()
 
     createNewItem: ->
-      @set 'isSubmitted', true
+      @set 'newItemSubmitted', true
       description = @get('newItemDescription')
       weight = parseInt(@get('newItemWeight'))
       finished = @get('newItemFinished')
       date = @get('newItemDate') || 0
       kind = @get('newItemKind') || 'todo'
 
-      return unless @get('isValid')
+      return unless @get('isChecklistItemValid')
 
       newItem =
               description: description
@@ -50,7 +50,7 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
       false
 
     reset: ->
-      @set 'isSubmitted', false
+      @set 'newItemSubmitted', false
       @set('newItemDescription', '')
       @set('newItemWeight', '')
       @set('newItemFinished', false)
@@ -63,10 +63,10 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
     # "call"
   ])
 
-  isValid: Ember.computed 'newItemDescription', 'newItemWeight', 'isSubmitted', ->
+  isChecklistItemValid: Ember.computed 'newItemDescription', 'newItemWeight', 'newItemSubmitted', ->
     !Ember.isEmpty(@get('newItemDescription')) && !Ember.isEmpty(@get('newItemWeight'))
 
-  isSubmitted: false
+  newItemSubmitted: false
 
   dateMap: Ember.Map.create()
 
@@ -79,6 +79,5 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
     dateMap.set(7, '1 Week')
     @send 'reset'
 
-  selectedDateText: ( ->
+  selectedDateText: Ember.computed 'newItemDate', ->
     @get('dateMap').get(@get('newItemDate'))
-  ).property('newItemDate')

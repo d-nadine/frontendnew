@@ -1,7 +1,7 @@
 Radium.ChecklistItemMixin = Ember.Mixin.create(Ember.TargetActionSupport,
   classNameBindings: ['isInvalid']
   isValid: Ember.computed.not 'isInvalid'
-  isSubmitted: Ember.computed.oneWay 'targetObject.isSubmitted'
+  newItemSubmitted: Ember.computed.oneWay 'targetObject.newItemSubmitted'
   insertNewline: (e) ->
     @get('targetObject').send 'createNewItem'
 )
@@ -22,16 +22,14 @@ Radium.ChecklistView = Ember.View.extend
   newItemDescription: Ember.TextField.extend Radium.ChecklistItemMixin,
     valueBinding: 'targetObject.newItemDescription'
     placeholder: "Add additional item"
-    isInvalid: ( ->
-      return false unless @get('isSubmitted')
+    isInvalid: Ember.computed 'targetObject.newItemDescription', 'newItemSubmitted', ->
+      return false unless @get('newItemSubmitted')
       not @get('targetObject.newItemDescription.length')
-    ).property('targetObject.newItemDescription', 'isSubmitted')
 
   newItemWeight: Ember.TextField.extend Radium.ChecklistItemMixin,
     attributeBindings: ['min', 'max']
     valueBinding: 'targetObject.newItemWeight'
     placeholder: 0
-    isInvalid: ( ->
-      return false unless @get('isSubmitted')
+    isInvalid: Ember.computed 'targetObject.newItemWeight', 'newItemSubmitted', ->
+      return false unless @get('newItemSubmitted')
       not @get('targetObject.newItemWeight.length')
-    ).property('targetObject.newItemWeight', 'isSubmitted')
