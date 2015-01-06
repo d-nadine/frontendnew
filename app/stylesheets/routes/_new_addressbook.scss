@@ -1,7 +1,7 @@
 #addressbook {
   .subhead {
-    margin-top: 0;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     font-size: 28px;
     width: 100%;
     display: inline-block;
@@ -10,6 +10,7 @@
   .subhead .left {
     display: inline-block;
     float: left;
+    margin-left: 45px;
   }
 
   .subhead .nav-wrap {
@@ -21,8 +22,6 @@
     line-height: 32px;
 
     .chosen, .total {
-      min-width: 55px;
-      max-width: 55px;
       display: inline-block;
       text-align: right;
 
@@ -38,25 +37,25 @@
 
   .subhead .nav-wrap .count .chosen {
     font-size: 28px;
-    margin-right: 3px;
+    margin-right: -2px;
     font-weight: 900;
   }
 
   .subhead .nav-wrap .count .divider {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 400;
     color: #777;
   }
 
   .subhead .nav-wrap .count .total {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 21px;
+    font-weight: 400;
     color: #777;
-    margin-left: -2px
+    margin-left: -4px;
   }
 
-  .subhead .nav-wrap .count .label {
-    font-size: 16px;
+  .subhead .nav-wrap .count .subtitle {
+    font-size: 18px;
     font-weight: 900;
     margin-right: 73px;
     margin-left: 8px;
@@ -96,6 +95,7 @@
     display: inline-block;
     float: right;
     position: relative;
+    margin-right: 30px;
   }
 
   .subhead .col-selector button {
@@ -138,7 +138,7 @@
   }
 
   .contacts-sidebar .list-new {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 600;
     font-size: 15px;
     padding-top: 7px;
@@ -506,7 +506,6 @@
     float: left;
     margin-right: 39px;
     padding-top: 14px;
-    margin-top: 30px;
     padding-left: 25px;
   }
 
