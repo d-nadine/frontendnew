@@ -15,11 +15,10 @@ Radium.UploadFilelistComponent = Ember.Component.extend
 Radium.AttachmentListController = Ember.ObjectController.extend
   isLoaded: Ember.computed.alias 'model.attachment.isLoaded'
   isUploading: Ember.computed.alias 'model.attachment.isUploading'
-  isLoading: ( ->
+  isLoading: Ember.computed 'isLoaded', 'isUploading', ->
     (not @get('isLoaded')) || @get('isUploading')
-  ).property('isLoaded', 'isUploading')
-  fileName: ( ->
+
+  fileName: Ember.computed 'name', 'attachment', 'isLoaded', ->
     return "#{@get('name')} (#{@get('size')})" if @get('name')
 
     @get('attachment.fileName')
-  ).property('name', 'attachment', 'isLoaded')

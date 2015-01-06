@@ -1,24 +1,23 @@
 Radium.SettingsLeadSourceItemController = Radium.ObjectController.extend BufferedProxy,
   actions:
-    edit: -> 
+    edit: ->
       @set 'isEditing', true
 
     cancel: ->
       @discardBufferedChanges()
       @set 'isEditing', false
 
-    isValid: ( ->
+    isValid: Ember.computed 'name', 'isEditing', ->
       return false unless @get('isEditing')
 
       name = @get('name')
 
       !Ember.isEmpty(name) && name.length
-    ).property('name', 'isEditing')
 
     save: ->
       unless @get('name.length')
         @send 'flashError', 'You must supply a value'
-        @cancel()
+        @send 'cancel'
         return
 
       return if @get('account.isSaving')
@@ -29,4 +28,4 @@ Radium.SettingsLeadSourceItemController = Radium.ObjectController.extend Buffere
 
       @send 'saveSources'
 
-  account: Ember.computed.alias 'parentController.account'
+  account: Ember.computed.oneWay 'parentController.account'

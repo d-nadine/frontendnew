@@ -51,6 +51,5 @@ Radium.SettingsLeadSourcesController = Radium.ArrayController.extend
   needs: ['account']
   account: Ember.computed.alias 'controllers.account.model'
 
-  leadSources: ( ->
+  leadSources: Ember.computed 'account.leadSources.[]', ->
     @get('account.leadSources').map (source) -> Ember.Object.create name: source
-  ).property('account.leadSources.[]') 

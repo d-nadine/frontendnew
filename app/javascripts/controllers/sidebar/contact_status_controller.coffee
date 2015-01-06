@@ -20,6 +20,5 @@ Radium.SidebarContactStatusController = Radium.SidebarBaseController.extend
   needs: ['leadStatuses']
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.ContactStatusForm.create()
-  ).property()

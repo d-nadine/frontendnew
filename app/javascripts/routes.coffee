@@ -79,6 +79,7 @@ Radium.Router.map ->
     @route 'customFields', path: 'custom-fields'
     @route 'leadSources', path: 'lead-sources'
     @route 'pipelineStates', path: 'pipeline-states'
+    @route 'contactStatuses', path: 'contact-statuses'
     @route 'remindersAlerts', path: 'reminders-alerts'
 
   @route 'reports'

@@ -89,7 +89,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
 
   didError: function(store, type, record, xhr){
-    if ([402, 403, 412].contains(xhr.status) ){
+    if ([402, 403, 409, 412].contains(xhr.status) ){
       var json = JSON.parse(xhr.responseText),
           errors = {};
 
@@ -278,7 +278,8 @@ Radium.RESTAdapter.configure('plurals',{
   addressbook_totals: 'addressbook_totals',
   conversations_totals: 'conversations_totals',
   contacts_totals: 'contacts_totals',
-  track_all_contacts: 'track_all_contacts'
+  track_all_contacts: 'track_all_contacts',
+  contact_status: 'contact_statuses'
 });
 
 Radium.RESTAdapter.registerTransform('object', {

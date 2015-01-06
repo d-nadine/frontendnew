@@ -3,8 +3,8 @@
   <p>Where do you collect your leads from?
 
   <ol class="lead-sources">
-    {{#each leadSources}}
-      <li>{{render 'settings/lead_source_item' this}}</li>
+    {{#each leadSource in leadSources}}
+      <li>{{render 'settings/lead_source_item' leadSource}}</li>
     {{/each}}
   </ol>
 

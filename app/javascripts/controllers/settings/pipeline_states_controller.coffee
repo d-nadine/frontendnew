@@ -65,6 +65,5 @@ Radium.SettingsPipelineStatesController = Radium.ArrayController.extend
 
   itemController: 'pipelineStateItem'
 
-  hasMultipleItems: (->
+  hasMultipleItems: Ember.computed '@each', ->
     true if @get('length') > 1
-  ).property('@each')
