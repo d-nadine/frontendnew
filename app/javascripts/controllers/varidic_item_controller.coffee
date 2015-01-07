@@ -1,7 +1,7 @@
 Radium.VaridicItemController = Radium.ObjectController.extend
-  needs: ['users', 'contactStatuses']
+  needs: ['users']
   users: Ember.computed.oneWay 'controllers.users'
-  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
+  contactStatuses: Ember.computed.oneWay 'parentController.targetObject.contactStatuses'
 
   assignedTo: Ember.computed.alias 'user'
   contact: Ember.computed.alias 'model'

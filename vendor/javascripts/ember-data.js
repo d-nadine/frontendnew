@@ -1,4 +1,4 @@
-// Last commit: 26f2d1e (2015-01-05 14:34:29 +0000)
+// Last commit: 22adb98 (2015-01-07 11:43:07 +0000)
 
 
 (function() {
@@ -3911,6 +3911,11 @@ var RootState = {
 
     invokeLifecycleCallbacks: function(record) {
       record.trigger('becameError', record);
+    },
+
+    unloadRecord: function(record) {
+      record.clearRelationships();
+      record.transitionTo('deleted.saved');
     }
   }
 };

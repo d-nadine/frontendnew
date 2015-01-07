@@ -54,6 +54,20 @@
                   {{/each}}
                 </ul>
               </li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Contact Status</a>
+                <ul class="dropdown-menu">
+                  {{#each status in contactStatuses}}
+                    <li>
+                      <a href="#" {{action "setStatus" status}}>{{status.name}}</a>
+                    </li>
+                  {{/each}}
+                  <li class="divider"></li>
+                  <li>
+                    {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
+                  </li>
+                </ul>
+              </li>
               <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
             </ul>
           </div>

@@ -10,7 +10,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
       tag = Radium.Tag.createRecord(name: newTag.get('name'), account: @get('currentUser.account'))
 
-      tag.one 'didCreate', =>
+      tag.save(this).then (tag) =>
         @get('newTags').removeObject newTag
 
         @send 'flashSuccess', "New list successfully created."
@@ -18,14 +18,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         Radium.Tag.find({})
 
         @send 'updateTotals'
-
-      tag.one 'becameInvalid', =>
-        @send "flashError", tag
-
-      tag.one 'becameError', =>
-        @send "flashError", "An error has occurred and the new list cannot be created."
-
-      @get('store').commit()
 
       false
 
@@ -75,6 +67,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       @send "executeActions", "assign", user: user
       false
 
+    setStatus: (status) ->
+      @send 'executeActions', "status", status: status
+
     deleteAll: ->
       @send "executeActions", "delete"
       false
@@ -113,6 +108,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         job.set('newTags', Ember.A([detail.tag.id]))
       else if action == "assign"
         job.set('assignedTo', detail.user)
+      else if action == "status"
+        job.set('contactStatus', detail.status)
 
       if @get('tag') && @get('isTagged')
         tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')
@@ -122,7 +119,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         user = Radium.User.all().find (u) => u.get('id') == @get('user')
         job.set 'user', user
 
-      job.one 'didCreate', =>
+      job.save(this).then( (result) =>
         @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
         @send 'updateLocalRecords', job
@@ -130,12 +127,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
         return unless action == "delete"
         @get('controllers.addressbook').send 'updateTotals'
-
-      job.one 'becameError', =>
+      ).catch =>
         @set 'working', false
-        @send 'flashError', 'An error has occurred and the operation could not be completed.'
-
-      @get('store').commit()
 
     updateLocalRecords: (job) ->
       ids = @get('checkedContent').mapProperty 'id'
@@ -157,6 +150,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
             data = contact.get('_data')
             if action == "assign"
               return contact.updateLocalBelongsTo 'assignedTo', job.get('assignedTo')
+
+            if action == "status"
+              return contact.updateLocalBelongsTo 'status', job.get('status')
 
             if action == "tag"
               references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
@@ -216,10 +212,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       model.set 'params', params
       false
 
-  needs: ['addressbook', 'users', 'tags']
+  needs: ['addressbook', 'users', 'tags', 'contactStatuses']
 
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
+  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
   queryParams: ['user', 'tag']
   user: null

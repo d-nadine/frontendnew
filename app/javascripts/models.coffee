@@ -41,14 +41,16 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
   addErrorHandlers: (context, reject) ->
     @one 'becameInvalid', (result) ->
-      result.reset() unless result.get('isNew')
+      result.reset() if result.get('id')
       context.send 'flashError', result
       reject.call context, result
+      result.unloadRecord() unless result.get('id')
 
     @one 'becameError', (result) ->
-      result.reset() unless result.get('isNew')
+      result.reset() if result.get('id')
       context.send 'flashError', 'An error has occurred and the operation could not be completed.'
       reject.call context, result
+      result.unloadRecord() unless result.get('id')
 
   updateLocalBelongsTo: (key, belongsTo, notify = true) ->
     data = this.get('data')
@@ -92,9 +94,9 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
   reset: ->
     state = if @get('id')
-              'loaded.saved'
+              "loaded.saved"
             else
-              'loaded.created.uncommited'
+              "loaded.created.uncommitted"
 
     @get('transaction').rollback()
     @transitionTo(state)
