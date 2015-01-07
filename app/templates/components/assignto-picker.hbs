@@ -9,10 +9,10 @@
 </a>
 {{#if assignees.length}}
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    {{#each assignees}}
+    {{#each assignee in assignees}}
       <li>
-        <a href="#" {{action "assignContact" controller.contact this}}>
-          {{avatar this style="tiny"}}{{displayName}}
+        <a href="#" {{action "assignContact" controller.contact assignee}}>
+          {{avatar this style="tiny"}}{{assignee.displayName}}
         </a>
       </li>
     {{/each}}

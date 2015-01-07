@@ -1,0 +1,17 @@
+<a href="#" data-toggle="dropdown">
+  <span class="caret"></span>
+  {{#if model.contactStatus}}
+    <span>{{model.contactStatus.name}}</span>
+  {{else}}
+    <i>Choose Status</i>
+  {{/if}}
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  {{#each status in availableStatuses}}
+    <li>
+      <a href="#" {{action "changeStatus" model status}}>{{status.name}}</a>
+    </li>
+  {{/each}}
+  <li class="divider"></li>
+  <li>{{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}</li>
+</ul>

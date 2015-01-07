@@ -201,6 +201,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()
+    @controllerFor('contactStatuses').set 'model', Radium.ContactStatus.find()
 
     contactsController = @controllerFor('contacts')
     @controllerFor('tags').set 'model', Radium.Tag.find()

@@ -262,10 +262,15 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "status"
-      classNames: "status"
+      classNames: "assign stat"
       heading: "Status"
-      binding: "status"
       sortOn: "status"
+      bindings: [
+        {name: "model", value: "model"}
+        {name: "contactStatuses", value: "contactStatuses"}
+        {name: "availableStatuses", value: "availableStatuses"}
+      ]
+      component: "status-picker"
     }
     {
       id: "events-seven"
