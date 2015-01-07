@@ -30,7 +30,7 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     new Ember.RSVP.Promise (resolve, reject) ->
       success = (result) ->
-        resolve.call context, result
+        resolve result
 
       self.one 'didCreate', success
       self.one 'didUpdate', success
@@ -43,13 +43,13 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @one 'becameInvalid', (result) ->
       result.reset() if result.get('id')
       context.send 'flashError', result
-      reject.call context, result
+      reject result
       result.unloadRecord() unless result.get('id')
 
     @one 'becameError', (result) ->
       result.reset() if result.get('id')
       context.send 'flashError', 'An error has occurred and the operation could not be completed.'
-      reject.call context, result
+      reject result
       result.unloadRecord() unless result.get('id')
 
   updateLocalBelongsTo: (key, belongsTo, notify = true) ->

@@ -109,7 +109,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       else if action == "assign"
         job.set('assignedTo', detail.user)
       else if action == "status"
-        job.set('contactStatus', detail.status)
+        job.set('status', detail.status)
 
       if @get('tag') && @get('isTagged')
         tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')
@@ -149,10 +149,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
           else
             data = contact.get('_data')
             if action == "assign"
-              return contact.updateLocalBelongsTo 'assignedTo', job.get('assignedTo')
+              return contact.updateLocalBelongsTo 'user', job.get('assignedTo')
 
             if action == "status"
-              return contact.updateLocalBelongsTo 'status', job.get('status')
+              return contact.updateLocalBelongsTo 'contactStatus', job.get('status')
 
             if action == "tag"
               references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
