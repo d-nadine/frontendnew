@@ -491,7 +491,7 @@
     }
 
     .assign {
-      padding-right: 20px;
+      padding-right: 10px;
 
       .btn-group {
         width: 100%;
@@ -604,44 +604,43 @@
     }
   }
 
-  .modal-backdrop {
-    background-color: transparent;
-  }
-  .addressbook-view {
-    .single-column-container {
-      padding-right: 0;
-      padding-left: 0;
-      margin-right: 0;
-    }
-  }
 
-  .subhead .tools .dropdown-toggle {
-    box-shadow: none;
+}
 
-    &:focus {
-      text-decoration: none;
-    }
-  }
-
-  .dropdown-submenu > a:after {
-    margin-top: 10px;
-  }
-
-  .dropdown-menu > li > a {
-    font-size: 15px;
-    padding-left: 10px;
-  }
-
-  .dropdown-submenu .dropdown-menu li > a {
-    line-height: 22px;
-    // padding-top: 5px;
-    // padding-bottom: 5px;
-    padding: 6px 15px 6px 10px;
-    text-overflow: inherit;
-
-    img {
-      margin-right: 7px;
-    }
+.modal-backdrop {
+  background-color: transparent;
+}
+.addressbook-view {
+  .single-column-container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
   }
 }
 
+.subhead .tools .dropdown-toggle {
+  box-shadow: none;
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.dropdown-submenu > a:after {
+  margin-top: 10px;
+}
+
+.dropdown-menu > li > a {
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.dropdown-submenu .dropdown-menu li > a {
+  line-height: 22px;
+  padding: 6px 15px 6px 10px;
+  text-overflow: inherit;
+
+  img {
+    margin-right: 7px;
+  }
+}
