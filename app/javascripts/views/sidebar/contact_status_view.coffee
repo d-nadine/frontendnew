@@ -1,8 +1,8 @@
 Radium.SidebarContactStatusView = Radium.InlineEditorView.extend
-  statusesBinding: 'controller.controllers.leadStatuses.statuses'
-  statusDescriptionBinding: 'parentView.statusDescription'
+  statuses: Ember.computed.oneWay 'controller.contactStatuses'
+
   statusSelect: Ember.Select.extend
     contentBinding: 'parentView.statuses'
-    optionValuePath: 'content.value'
+    optionValuePath: 'content.id'
     optionLabelPath: 'content.name'
-    valueBinding: 'controller.form.status'
+    valueBinding: 'controller.form.contactStatus.id'

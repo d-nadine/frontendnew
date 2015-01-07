@@ -9,7 +9,7 @@
           <div {{bind-attr class="controller.name.length:is-valid :control-box :field :contact-name"}}>
             {{view view.contactName viewName="nameField"}}
             {{#unless isNew}}
-              <span class="text">{{view.statusDescription}}</span>
+              <span class="text">{{contactStatus.name}}</span>
             {{/unless}}
           </div>
         </div>

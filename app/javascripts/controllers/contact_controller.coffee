@@ -28,8 +28,8 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
       transaction.commit()
 
-  needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'leadStatuses']
-  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'contactStatuses']
+  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   companies: Ember.computed.alias 'controllers.companies'
   contact: Ember.computed.alias 'model'
 

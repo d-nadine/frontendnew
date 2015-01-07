@@ -51,11 +51,11 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
       @get('store').commit()
 
-  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'leadStatuses', 'addressbook']
+  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'contactStatuses', 'addressbook']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
   companies: Ember.computed.alias 'controllers.companies'
-  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   leadSources: Ember.computed.alias 'controllers.accountSettings.leadSources'
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null

@@ -14,43 +14,36 @@ Radium.AccountSettingsController = Radium.ObjectController.extend
     'lost'
   ]
 
-  leadSources: ( ->
+  leadSources: Ember.computed 'model.leadSources', ->
     return unless @get('model.leadSources')
 
     @get('model.leadSources')
-  ).property('model.leadSources')
 
-  pipelineStateChecklists: ( ->
+  pipelineStateChecklists: Ember.computed 'workflow.[]', ->
     checklistMap = @get('checklistMap')
-    @get('workflow').forEach (state) =>
+    @get('workflow').forEach (state) ->
       checklistMap.set(state.get('name').toLowerCase(), state.get('checklist'))
 
     checklistMap
-  ).property('workflow.[]')
 
-  workflowStates: ( ->
+  workflowStates: Ember.computed 'workflow.[]', 'workflow.@each.position', ->
     return [] unless @get('workflow.length')
 
     states = (@get('workflow').toArray().sort((a, b) ->
         Ember.compare a.get('position'), b.get('position')
-      ).map((state) =>
+      ).map((state) ->
         state.get('name')
       )
     )
 
     Ember.A(states)
-  ).property('workflow.[]', 'workflow.@each.position')
 
-  dealStates: (->
+  dealStates: Ember.computed 'workflowStates.[]', ->
     statuses = @get('workflowStates').slice()
     statuses.pushObjects ['closed', 'lost'] unless statuses.contains 'closed'
     statuses
-  ).property('workflowStates.[]')
 
-  firstState: ( ->
+  firstState: Ember.computed 'workflowStates.[]', ->
     dealStates = @get('dealStates')
     Ember.assert 'There are dealStates', dealStates.get('length')
     dealStates.get('firstObject')
-  ).property('workflowStates.[]')
-
-

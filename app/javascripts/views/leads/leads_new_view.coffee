@@ -3,7 +3,7 @@ require 'lib/radium/value_validation_mixin'
 require 'lib/radium/contact_company_picker'
 require 'views/contact/contact_tag_autocomplete'
 
-Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
+Radium.LeadsNewView = Ember.View.extend
   actions:
     submit: ->
       @set 'controller.isSubmitted', true
@@ -74,7 +74,7 @@ Radium.LeadsNewView = Ember.View.extend Radium.ContactViewMixin,
 
   contactType: Ember.View.extend
     classNames: ['controls-group','radio-group']
-    sourceBinding: 'controller.leadStatuses'
+    sourceBinding: 'controller.contactStatuses'
     template: Ember.Handlebars.compile """
       <ul>
       {{#each view.source}}

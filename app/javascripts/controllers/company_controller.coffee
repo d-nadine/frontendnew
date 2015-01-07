@@ -9,21 +9,21 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
       @transitionToRoute 'pipeline.opendeals'
 
-  needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'leadStatuses', 'pipelineOpendeals']
-  leadStatuses: Ember.computed.alias 'controllers.leadStatuses'
+  needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'contactStatuses', 'pipelineOpendeals']
+  contactStatuses: Ember.computed.alias 'controllers.contactStatuses'
   loadedPages: [1]
 
   # FIXME: How do we determine this?
   isEditable: true
 
-  maxContactsStatus: ( ->
+  maxContactsStatus: Ember.computed 'contacts.[]', ->
     contacts = @get('contacts')
 
     return unless contacts.get('length')
 
     maxStatus = -1
 
-    statuses = @get('leadStatuses').map (status) ->
+    statuses = @get('contactStatuses').map (status) ->
                 status.value
 
     contacts.forEach (contact) ->
@@ -34,24 +34,21 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
     maxStatus = if maxStatus == -1 then 0 else maxStatus
 
-    @get('leadStatuses').objectAt(maxStatus).name
-  ).property('contacts.[]')
+    @get('contactStatuses').objectAt(maxStatus).name
 
   membersText: Ember.computed 'contacts.[]', ->
     "View all #{@get('contacts.length')} contacts."
 
-  truncatedContacts: ( ->
+  truncatedContacts: Ember.computed 'contacts.[]', 'model', ->
     @get('contacts').toArray().sort((left, right) ->
       Ember.compare(left.get('name'), right.get('name'))).slice(0, 3)
-  ).property('contacts.[]', 'model')
 
-  hasMoreContacts: ( ->
+  hasMoreContacts: Ember.computed 'contacts.[]', 'truncatedContacts', ->
     contacts = @get('contacts.length')
 
     return unless contacts
 
     contacts > @get('truncatedContacts.length')
-  ).property('contacts.[]', 'truncatedContacts')
 
   groupedDeals: Ember.arrayComputed 'contacts', 'deals.@each.status', {
     initialValue: []
@@ -101,7 +98,6 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
       array
   }
 
-  deals: ( ->
-    Radium.Deal.filter (deal) =>
+  deals: Ember.computed 'model', 'deals.[]', ->
+    Radium.Deal.filter (deal) ->
       true
-  ).property('model', 'deals.[]')

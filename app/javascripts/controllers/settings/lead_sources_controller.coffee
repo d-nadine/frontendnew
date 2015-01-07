@@ -1,7 +1,7 @@
 Radium.SettingsLeadSourcesController = Radium.ArrayController.extend
   actions:
     createLeadSource: ->
-      @get('account.leadSources').pushObject "New Lead Source #{@get('account.leadSources.length') + 1}"
+      @get('account.Leadsources').pushObject "New Lead Source #{@get('account.leadSources.length') + 1}"
       @send 'saveSources'
 
     saveSources: ->

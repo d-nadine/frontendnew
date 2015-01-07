@@ -6,7 +6,7 @@ Radium.ContactStatusForm = Radium.Form.extend
     @_super.apply this, arguments
     @reset()
 
-  properties: ['status']
+  properties: ['contactStatus']
 
   reset: ->
     @_super.apply this, arguments
@@ -15,10 +15,12 @@ Radium.ContactStatusForm = Radium.Form.extend
 Radium.SidebarContactStatusController = Radium.SidebarBaseController.extend
   actions:
     setForm: ->
-      @set 'form.status', @get('model.status')
+      @set 'form.contactStatus', @get('model.contactStatus')
 
-  needs: ['leadStatuses']
+  needs: ['contactStatuses']
   isValid: true
+
+  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
   form: Ember.computed ->
     Radium.ContactStatusForm.create()

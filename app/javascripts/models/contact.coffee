@@ -26,7 +26,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   name: DS.attr('string')
   companyName: DS.attr('string')
-  status: DS.attr('string')
   source: DS.attr('string')
   title: DS.attr('string')
   avatarKey: DS.attr('string')
