@@ -1,6 +1,8 @@
-<a href="#" data-toggle="dropdown" class="assignto">
-  {{avatar assignedTo style="tiny"}}
-  <span class="to">{{assignedTo.displayName}}</span>
+<a href="#" data-toggle="dropdown" class="dropdown-toggle assignto">
+  <span class="assignto-left">
+    {{avatar assignedTo style="tiny"}}
+    <span class="to">{{assignedTo.displayName}}</span>
+  </span>
   {{#if assignees.length}}
     <span class="caret"></span>
   {{/if}}
