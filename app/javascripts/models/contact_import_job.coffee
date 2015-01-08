@@ -3,7 +3,7 @@ Radium.ContactImportJob = Radium.Model.extend
   rows: DS.attr('array', defaultValue: [])
   tagNames: DS.attr('array', defaultValue: [])
   additionalFields: DS.attr('array', defaultValue: [])
-  status: DS.attr('string')
+  contactStatus: DS.belongsTo('Radium.ContactStatus')
   fileName: DS.attr('string')
   createdAt: DS.attr('datetime')
   updatedAt: DS.attr('datetime')

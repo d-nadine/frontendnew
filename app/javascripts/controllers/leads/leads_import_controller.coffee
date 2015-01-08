@@ -27,14 +27,14 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       importJob = Radium.ContactImportJob.createRecord
                     headers: headers
-                    status: @get('status')
+                    contactStatus: @get('contactStatus')
                     fileName: @get('importFile').name
 
       additionalFields = Ember.A()
 
       selectedHeaders = @get('selectedHeaders').slice()
 
-      @get('additionalFields').forEach (field) =>
+      @get('additionalFields').forEach (field) ->
         return unless field.get('mapping')
 
         mapping = field.get('mapping.name')
@@ -60,7 +60,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       importJob.set 'rows', data
 
-      @get('tagNames').forEach (tag) =>
+      @get('tagNames').forEach (tag) ->
         importJob.get('tagNames').push tag.get('name')
 
       @set('importing', true)
@@ -135,7 +135,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         rowCount: 0
         disableImport: false
         firstRowIsHeader: true
-        status: 'pipeline'
+        contactStatus: null
         pollImportJob: null
         headerInfo: @getNewHeaderInfo()
 
@@ -155,7 +155,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       @get('tagNames').addObject Ember.Object.create name: tag
 
-  needs: ['tags']
+  needs: ['tags', 'contactStatuses']
+
+  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
   importing: false
   percentage: 3
@@ -171,7 +173,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   importedData: Ember.A()
   tagNames: Ember.A()
   isEditable: true
-  status: 'pipeline'
+  contactStatus: null
   pollImportJob: null
   additionalFields: Ember.A()
   headerInfo: null
@@ -243,9 +245,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
     if @get('firstRowIsHeader')
       data = data.slice(1)
 
-    data.map (row) =>
+    data.map (row) ->
       Ember.Object.create
-        fields: selectedHeaders.map (header) =>
+        fields: selectedHeaders.map (header) ->
           index = headerData.indexOf(header)
           row[index]
 
