@@ -12,6 +12,7 @@ Radium.ContactImportJob = Radium.Model.extend
   finished: DS.attr('boolean')
   importStatus: DS.attr('string')
   importErrors: DS.hasMany('Radium.ImportJobError')
+  public: DS.attr('boolean')
 
   isProcessing: Ember.computed 'importStatus', ->
     @get('importStatus') == 'processing'

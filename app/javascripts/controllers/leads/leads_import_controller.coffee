@@ -29,6 +29,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
                     headers: headers
                     contactStatus: @get('contactStatus')
                     fileName: @get('importFile').name
+                    public: true
 
       additionalFields = Ember.A()
 
