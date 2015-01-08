@@ -1,5 +1,14 @@
 {{#if isEditing}}
-  <div>{{view view.statusSelect}}</div>
+  <div>
+    {{#if contactStatuses.length}}
+      {{view Ember.Select
+        content=contactStatuses
+        optionValuePath="content.id"
+        optionLabelPath="content.name"
+        selectionBinding="form.contactStatus"}}
+    {{/if}}
+    <div>{{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}</div>
+  </div>
 {{else}}
   <div class="pull-right">
     <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>

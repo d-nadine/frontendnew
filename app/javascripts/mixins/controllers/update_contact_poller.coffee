@@ -2,7 +2,7 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
   isUpdatingDidChange: Ember.observer 'contact.isUpdating', 'isUpdating', ->
     return unless @get('isUpdating')
 
-    return unless @get('contact.isLead')
+    return unless @get('contact.isPublic')
     return if @get('isPolling')
 
     @start()

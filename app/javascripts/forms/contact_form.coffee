@@ -7,7 +7,7 @@ Radium.ContactForm = Radium.Form.extend
     user: @get('user')
     about: @get('about')
     source: @get('source')
-    status: @get('status')
+    contactStatus: @get('contactStatus')
     dealState: @get('dealState')
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
@@ -22,13 +22,20 @@ Radium.ContactForm = Radium.Form.extend
     true
 
   create:  ->
-    contact = Radium.CreateContact.createRecord @get('data')
+    data = @get('data')
+    if status = data.contactStatus
+      delete data.contactStatus
+      data.contactStatus = Radium.ContactStatus.all().find (s) -> s.get('id') == status
+
+    p data.contactStatus
+
+    contact = Radium.CreateContact.createRecord data
 
     contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
     contact.set('companyName', null) if Ember.isEmpty(contact.get('companyName'))
 
-    @get('phoneNumbers').forEach (phoneNumber) =>
+    @get('phoneNumbers').forEach (phoneNumber) ->
       number = phoneNumber.get('value')
       if number.length && number != "+1"
         contact.get('phoneNumbers').push
@@ -36,7 +43,7 @@ Radium.ContactForm = Radium.Form.extend
           number: phoneNumber.get('value')
           primary: phoneNumber.get('isPrimary')
 
-    @get('emailAddresses').forEach (email) =>
+    @get('emailAddresses').forEach (email) ->
       if email.get('value.length')
         contact.get('emailAddresses').push
           name: email.get('name')
@@ -47,7 +54,7 @@ Radium.ContactForm = Radium.Form.extend
       if @addressHasValue(address)
         contact.get('addresses').push address.getProperties('name', 'primary', 'street', 'state', 'city', 'country', 'zipcode')
 
-    @get('tagNames').forEach (tag) =>
+    @get('tagNames').forEach (tag) ->
       contact.get('tagNames').push tag.get('name')
 
     contact
@@ -66,7 +73,6 @@ Radium.ContactForm = Radium.Form.extend
     @set 'source', @get('initialLeadSource')
     @set 'companyName', null
     @set 'company', ''
-    @set 'status', @get('initialStatus')
     @set 'dealState', @get('initialDealState')
     @set 'tagNames', Ember.A()
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])

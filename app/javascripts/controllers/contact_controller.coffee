@@ -1,32 +1,10 @@
 Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.UpdateContactPoller,
   Radium.CanFollowMixin,
+  Radium.TrackContactMixin,
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
-
-    makeContactPublic: (contact) ->
-      contact.set 'status', 'pipeline'
-      contact.set 'isPublic', true
-
-      transaction = @get('store').transaction()
-
-      transaction.add(contact)
-
-      contact.one 'didUpdate', (result) ->
-        unless contact.get('isPersonal')
-          contact.get('user').reload()
-
-      contact.one 'becameInvalid', (result) =>
-        @send 'flashError', contact
-        result.reset()
-
-      contact.one 'becameError', (result) =>
-        transaction.rollback()
-        @send 'flashError', 'An error has occurred and the contact cannot be updated.'
-        result.reset()
-
-      transaction.commit()
 
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'contactStatuses']
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
@@ -48,9 +26,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
-      # discussionForm: @get('discussionForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
       about: @get('model')

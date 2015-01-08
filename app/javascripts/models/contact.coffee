@@ -70,11 +70,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   tasks: Radium.computed.tasks('todos', 'meetings')
 
-  isLead: Ember.computed.equal 'status', 'pipeline'
-
-  isExcluded: Ember.computed 'status', ->
-    @get('status') == 'exclude'
-
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceContact')
 
   primaryEmail: Radium.computed.primary 'emailAddresses'
@@ -104,7 +99,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   track: ->
     @set('isPublic', true)
-    @set('status', 'pipeline')
 
   clearRelationships: ->
     @get('deals').compact().forEach (deal) ->

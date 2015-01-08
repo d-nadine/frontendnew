@@ -6,14 +6,13 @@ Radium.Radiobutton =  Ember.View.extend
     <label class="capitalize" for="{{unbound view.radioId}}">{{unbound view.leader}}</label>
   """
 
-  didInsertElement: ->
+  setup: Ember.on 'didInsertElement', ->
     @selectedValueDidChange()
 
-  radioId: ( ->
+  radioId: Ember.computed ->
     "radio-#{@get('elementId')}"
-  ).property()
 
-  selectedValueDidChange: ( ->
+  selectedValueDidChange: Ember.observer 'selectedValue', ->
     selectedValue = @get('selectedValue')
     radio = @$('input[type=radio]')
     value = radio.val()
@@ -23,7 +22,6 @@ Radium.Radiobutton =  Ember.View.extend
       @updateElementValue()
     else
       radio.prop('checked', false)
-  ).observes('selectedValue')
 
   change: (evt) ->
     radio = @$('input[type=radio]')

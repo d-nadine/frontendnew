@@ -4,7 +4,7 @@ Radium.CreateContact = Radium.Model.extend
 
   name: DS.attr('string')
   companyName: DS.attr('string')
-  status: DS.attr('string')
+  contactStatus: DS.belongsTo('Radium.ContactStatus')
   source: DS.attr('string')
   about: DS.attr('string')
 

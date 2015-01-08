@@ -22,5 +22,13 @@ Radium.SidebarContactStatusController = Radium.SidebarBaseController.extend
 
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
+  availableStatuses: Ember.computed 'contactStatus.[]', 'model.contactStatus', ->
+    status = @get('model.contactStatus')
+    contactStatuses = @get('contactStatuses') || []
+
+    return contactStatuses unless status
+
+    contactStatuses.reject (s) -> status == s
+
   form: Ember.computed ->
     Radium.ContactStatusForm.create()

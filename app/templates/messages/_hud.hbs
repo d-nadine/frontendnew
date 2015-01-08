@@ -1,10 +1,10 @@
 <!-- columns must add up to 8 -->
-<div {{bind-attr class=":clearfix :email-hud contact.isLead:is-lead-contact:is-private"}}>
+<div {{bind-attr class=":clearfix :email-hud contact.isPublic:is-lead-contact:is-private"}}>
   <div class="pull-right email-hud-actions">
     {{#unless isSaving}}
       {{#if contact.isPersonal}}
         <div class="btn-group btn-add-to-radium">
-          <button class="btn btn-main btn-primary" {{action "changeStatus" model "pipeline"}}>Track with Radium</button>
+          <button class="btn btn-main btn-primary" {{action "changeStatus" model true}}>Track with Radium</button>
           <button class="btn btn-primary dropdown-toggle needsclick" data-toggle="dropdown">
             <span class="caret"></span>
           </button>

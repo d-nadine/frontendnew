@@ -10,6 +10,9 @@ Radium.TrackContactMixin = Ember.Mixin.create
       contact.set('isPublic', isPublic)
 
       contact.one 'didUpdate', (result) =>
+        unless contact.get('isPersonal')
+          contact.get('user').reload()
+
         message = if isPublic
                     "You are now tracking #{contact.get('displayName')}"
                   else

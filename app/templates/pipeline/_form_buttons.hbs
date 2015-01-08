@@ -10,21 +10,6 @@
       <li>
         <a href="#" {{action "showForm" 'todo'}}>Todo</a>
       </li>
-<!--
-      <li>
-        <a href="#" {{!action "showForm" 'call'}}>Call</a>
-      </li>
--->
-      {{#if isLeads}}
-        <li>
-          <a href="#" {{action "showEmail"}}>Email</a>
-        </li>
-      {{/if}}
-      {{#unless isLeads}}
-        <li>
-          <a href="#" {{action "showForm" 'status'}}>Change Status</a>
-        </li>
-      {{/unless}}
       <li>
         <a href="#" {{action "confirmDeletion"}}>Delete</a>
       </li>

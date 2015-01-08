@@ -75,11 +75,11 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
 
   contactDeals: Ember.computed 'model', ->
     return if !@get('model') || @get('model.isNew')
-    return unless @get('model.isLead')
+    return unless @get('model.isPublic')
 
     # FIXME: Is there a better way?
     Radium.Deal.all().filter (deal) =>
       deal.get('status') != 'lost' && deal.get('contact') == @get('model')
 
   isNewLead: Ember.computed 'model.isNew', 'status', ->
-    @get('model.isNew') && @get('status') == 'pipeline'
+    @get('model.isNew') && @get('isPublic')
