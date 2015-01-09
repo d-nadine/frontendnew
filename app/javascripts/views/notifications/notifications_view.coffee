@@ -8,6 +8,9 @@ Radium.NotificationsView = Radium.DrawerView.extend
       return unless controller.get('drawerOpen')
 
       target = $(e.target)
+      if target.hasClass 'dismiss-single'
+        return false
+
       if e.target.tagName == "A" && target.hasClass('notifications-link')
         return false
 

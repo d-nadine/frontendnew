@@ -41,17 +41,22 @@
 
           {{#if showMeta}}
             <div class="email-details">
-              <dl class="dl-horizontal">
-                <dt>To</dt>
-                <dd>{{list "toList"}}
-                </dd>
-                {{#if cc}}
-                  <dt>CC</dt>
-                  <dd>{{list "ccList"}}</dd>
+              <table>
+                <tr>
+                  <td>To</td>
+                  <td>{{list "toList"}}</td>
+                </tr>
+                {{#if ccList.length}}
+                <tr>
+                  <td>CC</td>
+                  <td>{{list "ccList"}}</td>
+                </tr>
                 {{/if}}
-                <dt>Time</dt>
-                <dd>{{formatDateTime time format="full"}}</dd>
-              </dl>
+                <tr>
+                  <td>Time</td>
+                  <td>{{formatDateTime time format="full"}}</td>
+                </tr>
+              </table>
             </div>
           {{/if}}
         </div>

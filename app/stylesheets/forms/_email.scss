@@ -272,20 +272,15 @@
 }
 
 .email-details {
-  dl.dl-horizontal {
-    dt {
-      width: 50px;
-      text-align: left;
-      color: $muted;
+  margin: 10px 0 0 11px;
+  table tr td {
+    text-align: left;
+    color: $muted;
 
-      &:after {
-        content: ":";
-      }
+    &:after {
+      content: ":";
     }
-
-    dd {
-      margin-left: 60px;
-    }
+    margin-left: 60px;
   }
 }
 
@@ -503,7 +498,6 @@
 
       .email-sender {
         display: inline-block;
-        float: left;
         padding-left: 8px;
         padding-top: 10px;
 
