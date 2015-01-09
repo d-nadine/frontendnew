@@ -24,30 +24,21 @@ Radium.LeadsNewController= Radium.ObjectController.extend Radium.TrackContactMix
 
       self = this
 
-      # FIXME: should not have to call Ember.run.next
-      createContact.one 'didCreate', =>
+      createContact.save(this).then((result) =>
         Ember.run.next =>
           @set 'isSaving', false
           addressbookController = @get('controllers.addressbook')
           addressbookController.send('updateTotals') if addressbookController
-          addressBook = @get('controllers.addressbook.content')
+          addressBook = @get('controllers.peopleIndex.model')
           contact = createContact.get('contact')
           addressBook.pushObject(contact)
           @transitionToRoute 'contact', createContact.get('contact')
-
-      createContact.one 'becameError', (result) =>
+      ).catch (error) =>
         @set 'isSaving', false
-        @send 'flashError', 'An error has occurred and the contact could not be created.'
-
-      createContact.one 'becameInvalid', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', createContact
 
       @set 'isSaving', true
 
-      @get('store').commit()
-
-  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'contactStatuses', 'addressbook']
+  needs: ['contacts', 'users','companies', 'accountSettings', 'tags', 'countries', 'contactStatuses', 'addressbook', 'peopleIndex']
   contacts: Ember.computed.alias 'controllers.contacts'
   users: Ember.computed.alias 'controllers.users'
   companies: Ember.computed.alias 'controllers.companies'

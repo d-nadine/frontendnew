@@ -4,6 +4,7 @@ Radium.ContactForm = Radium.Form.extend
   data: ( ->
     name: @get('name')
     companyName: @get('companyName')
+    isPublic: true
     user: @get('user')
     about: @get('about')
     source: @get('source')
@@ -26,8 +27,6 @@ Radium.ContactForm = Radium.Form.extend
     if status = data.contactStatus
       delete data.contactStatus
       data.contactStatus = Radium.ContactStatus.all().find (s) -> s.get('id') == status
-
-    p data.contactStatus
 
     contact = Radium.CreateContact.createRecord data
 
@@ -75,6 +74,7 @@ Radium.ContactForm = Radium.Form.extend
     @set 'company', ''
     @set 'dealState', @get('initialDealState')
     @set 'tagNames', Ember.A()
+    @set 'isPublic', true
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: '')])

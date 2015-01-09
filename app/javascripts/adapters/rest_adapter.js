@@ -339,7 +339,7 @@ Radium.RESTAdapter.map('Radium.Account', {
 
 Radium.RESTAdapter.map('Radium.Activity', {
   note: {embedded: 'load'}
-})
+});
 
 Radium.RESTAdapter.map('Radium.Workflow', {
   checklist: {key: 'check_list', embedded: 'always'}
@@ -354,6 +354,10 @@ Radium.RESTAdapter.map('Radium.Contact', {
   tagNames: {embedded: 'always'},
   comments: {embedded: 'load'},
   contactInfo: {embedded: 'always'}
+});
+
+Radium.RESTAdapter.map('Radium.CreateContact', {
+  isPublic: {key: 'public'}
 });
 
 Radium.RESTAdapter.map('Radium.ContactImportJob', {

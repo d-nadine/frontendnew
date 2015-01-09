@@ -7,6 +7,7 @@ Radium.CreateContact = Radium.Model.extend
   contactStatus: DS.belongsTo('Radium.ContactStatus')
   source: DS.attr('string')
   about: DS.attr('string')
+  isPublic: DS.attr('boolean', default: true)
 
   phoneNumbers: DS.attr('array')
   emailAddresses: DS.attr('array')
