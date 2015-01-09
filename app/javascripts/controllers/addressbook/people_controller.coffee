@@ -39,6 +39,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
         context.set('bufferedProxy.removeCompany', true)
         context.set('bufferedProxy.company', null)
 
+      model = context.get('model')
+
+      model.one 'didReload', (result) ->
+        unless company = model.get('company')
+          return
+
+        company.reload()
+
     saveEmail: (context) ->
       unless context.get('model.email')
         email = context.get('bufferedProxy.email')
@@ -212,7 +220,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       model.set 'params', params
       false
 
-  needs: ['addressbook', 'users', 'tags', 'contactStatuses']
+  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company']
 
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
