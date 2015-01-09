@@ -1,4 +1,5 @@
-Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
+Radium.LeadsNewController= Radium.ObjectController.extend Radium.TrackContactMixin,
+  Ember.Evented,
   actions:
     stopEditing: ->
       false
@@ -7,11 +8,6 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
       return if @get('tagNames').mapProperty('name').contains tag
 
       @get('tagNames').addObject Ember.Object.create name: tag
-
-    makeLead: ->
-      @set 'status', 'pipeline'
-
-      @get('store').commit()
 
     cancel: ->
       @get('form').reset()
@@ -81,5 +77,8 @@ Radium.LeadsNewController= Radium.ObjectController.extend Ember.Evented,
     Radium.Deal.all().filter (deal) =>
       deal.get('status') != 'lost' && deal.get('contact') == @get('model')
 
-  isNewLead: Ember.computed 'model.isNew', 'status', ->
+  isNewTracked: Ember.computed 'model.isNew', 'status', ->
     @get('model.isNew') && @get('isPublic')
+
+  trackedText: Ember.computed 'isPublic', ->
+    if @get('isPublic') then "TRACKED" else "UNTRACKED"

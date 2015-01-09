@@ -16,26 +16,6 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
   # FIXME: How do we determine this?
   isEditable: true
 
-  maxContactsStatus: Ember.computed 'contacts.[]', ->
-    contacts = @get('contacts')
-
-    return unless contacts.get('length')
-
-    maxStatus = -1
-
-    statuses = @get('contactStatuses').map (status) ->
-                status.value
-
-    contacts.forEach (contact) ->
-      index = statuses.indexOf contact.get('status')
-
-      if index > maxStatus
-        maxStatus = index
-
-    maxStatus = if maxStatus == -1 then 0 else maxStatus
-
-    @get('contactStatuses').objectAt(maxStatus).name
-
   membersText: Ember.computed 'contacts.[]', ->
     "View all #{@get('contacts.length')} contacts."
 

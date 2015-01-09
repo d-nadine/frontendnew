@@ -44,6 +44,7 @@
 
   #makeLead{
     margin-right: 50px;
+    padding-bottom: 5px;
   }
 
   ul.dropdown-menu{
@@ -117,8 +118,14 @@
       .control-box{
         border: none;
       }
-      span.text{
+      span.text.tracked{
         color: $green;
+      }
+      span.text.untracked {
+        color: $red;
+      }
+      span.text strong {
+        margin-right: 10px;
       }
     }
 
