@@ -252,7 +252,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     unless userId = @get('currentUser.id')
       return
 
-    usersTotals.find((user) -> user.id == parseInt(userId)).total
+    r = usersTotals.find((user) -> user.id == parseInt(userId))
+
+    r.length || 0
 
   team: Ember.computed 'currentUser', 'users.[]', ->
     currentUser = @get('currentUser')
@@ -269,7 +271,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
       params = Ember.merge params, company: @get('company')
 
     if contactimportjob = @get('contactimportjob')
-      params = Ember.merge params, contactimportjob: @get('contactimportjob')
+      params = Ember.merge params, contact_import_job: @get('contactimportjob')
 
     if user = @get('user') && @get('isAssignedTo')
       return Ember.merge params, user: @get('user')

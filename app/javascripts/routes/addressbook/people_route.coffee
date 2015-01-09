@@ -48,9 +48,9 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller.set('tag', params.tag) if params.tag
 
-    controller.set('company', params.company) if params.company
+    controller.set('company', params.company)
 
-    controller.set('contactimportjob', params.contactimportjob) if params.contactimportjob
+    controller.set('contactimportjob', params.contactimportjob)
 
     controller.set 'filter', params.filter
 
