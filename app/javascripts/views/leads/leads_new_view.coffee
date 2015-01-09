@@ -64,11 +64,6 @@ Radium.LeadsNewView = Ember.View.extend
   companyPicker: Radium.ContactCompanyPicker.extend Radium.ContactCompanyMixin,
     disabled: Ember.computed.not 'controller.isNew'
 
-    blur: ->
-      return unless @get('controller.isNew')
-      return if @get('controller.companyName')?.length < 3
-      @get('parentView').send('showContactDetails') unless @$('.contact-detail').is(':visible')
-
   userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
     disabled: Ember.computed.not 'controller.isNew'
 
@@ -79,17 +74,6 @@ Radium.LeadsNewView = Ember.View.extend
       <ul>
       {{#each view.source}}
         {{view Radium.Radiobutton selectedValueBinding="controller.contactStatus" name="type" leaderBinding="name" valueBinding="id" tagName="li"}}
-      {{/each}}
-      </ul>
-    """
-
-  workflowStates: Ember.View.extend
-    classNames: ['controls-group','radio-group']
-    sourceBinding: 'controller.workflowStates'
-    template: Ember.Handlebars.compile """
-      <ul>
-      {{#each view.source}}
-        {{view Radium.Radiobutton selectedValueBinding="controller.dealState" name="dealState" leaderBinding="this" valueBinding="this" tagName="li"}}
       {{/each}}
       </ul>
     """
@@ -105,7 +89,7 @@ Radium.LeadsNewView = Ember.View.extend
     disabled: Ember.computed.not 'controller.isNew'
     sourceBinding: 'controller.leadSources'
 
-  contactDidChange: ( ->
+  contactDidChange: Ember.observer 'controller.isNew', ->
     contactDetails = @$('.contact-detail')
     existingArea = @$('.existing')
 
@@ -122,8 +106,8 @@ Radium.LeadsNewView = Ember.View.extend
 
     unless @get('controller.isNew')
       @$('.multiple-field .icon-plus').hide()
-
-  ).observes('controller.isNew')
+    else
+      @send 'showContactDetails'
 
   contactName: Radium.ContactPicker.extend Radium.ContactCompanyMixin,
     classNameBindings: ['open', ':contact-name']
@@ -172,8 +156,3 @@ Radium.LeadsNewView = Ember.View.extend
       Ember.run =>
         @$('input[type=text]').val('')
         @$('input[type=text]').focus()
-
-    blur: ->
-      return unless @get('isNew')
-      return if @get('value')?.length < 3
-      @get('parentView').send('showContactDetails') unless @$('.contact-detail').is(':visible')

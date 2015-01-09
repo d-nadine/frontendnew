@@ -99,7 +99,7 @@
     <div class="sidebar-panel-content">
       {{#if contacts.length}}
         <div class="assigned-contacts">
-          {{#link-to "addressbook.assigned" this}}
+          {{#link-to "people.index" "all" (query-params company="" user=id tag="" contactimportjob="")}}
             <span {{bind-attr class=":assigned-count :pull-right"}}>{{contacts.length}}</span>
             My Assigned Contacts
           {{/link-to}}
