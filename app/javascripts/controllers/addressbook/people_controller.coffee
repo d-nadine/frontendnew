@@ -218,8 +218,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
   tags: Ember.computed.oneWay 'controllers.tags'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
-  queryParams: ['user', 'tag']
+  queryParams: ['user', 'tag', 'company', 'contactimportjob']
   user: null
+  company: null
+  contactimportjob: null
 
   filter: null
 
@@ -257,11 +259,17 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
     @get('users').reject (user) -> user == currentUser
 
-  filterParams: Ember.computed 'filter', 'user', 'tag', ->
+  filterParams: Ember.computed 'filter', 'user', 'tag', 'company', 'contactimportjob', ->
     params =
       public: true
       filter: @get('filter')
       page_size: @get('pageSize')
+
+    if company = @get('company')
+      params = Ember.merge params, company: @get('company')
+
+    if contactimportjob = @get('contactimportjob')
+      params = Ember.merge params, contactimportjob: @get('contactimportjob')
 
     if user = @get('user') && @get('isAssignedTo')
       return Ember.merge params, user: @get('user')

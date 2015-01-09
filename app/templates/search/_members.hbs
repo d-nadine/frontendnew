@@ -19,11 +19,7 @@
       {{/each}}
     </div>
     {{#if hasMoreContacts}}
-      {{#if isTag}}
-        {{#link-to "addressbook.members" this}}...{{/link-to}}
-      {{else}}
-        {{#link-to "addressbook.employees" this}}...{{/link-to}}
-      {{/if}}
+      {{#link-to "people.index" "notasks" (query-params company=id contactimportjob="" user="" tag="")}}...{{/link-to}}
     {{/if}}
   {{else}}
     <label> No Members</label>

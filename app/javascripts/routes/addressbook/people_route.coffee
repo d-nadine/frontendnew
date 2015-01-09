@@ -28,6 +28,10 @@ Radium.PeopleIndexRoute = Radium.Route.extend
       refreshModel: true
     tag:
       refreshModel: true
+    company:
+      refreshModel: true
+    contactimportjob:
+      refreshModel: true
 
   beforeModel: (transition) ->
     filter = transition.params['people.index'].filter
@@ -43,6 +47,10 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     controller.set('user', params.user) if params.user
 
     controller.set('tag', params.tag) if params.tag
+
+    controller.set('company', params.company) if params.company
+
+    controller.set('contactimportjob', params.contactimportjob) if params.contactimportjob
 
     controller.set 'filter', params.filter
 

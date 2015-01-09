@@ -3,7 +3,7 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
   actions:
     displayDeals: ->
       deals = Ember.A()
-      @get('groupedDeals').forEach (group) => deals.pushObjects group.get('deals')
+      @get('groupedDeals').forEach (group) -> deals.pushObjects group.get('deals')
 
       @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
 

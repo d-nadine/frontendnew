@@ -10,11 +10,7 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
     <div class="pull-right company-members-link">
-      {{#if isTag}}
-        {{#link-to "addressbook.members" this}}{{membersText}}{{/link-to}}
-      {{else}}
-        {{#link-to "addressbook.employees" this}}{{membersText}}{{/link-to}}
-      {{/if}}
+      {{#link-to "people.index" "notasks" (query-params company=id user="" tag="" contactimportjob="")}}{{membersText}}{{/link-to}}
     </div>
     <h6 class="sidebar-panel-title">
       <i class="ss-standard ss-users"></i> Contacts
