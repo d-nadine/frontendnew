@@ -1,6 +1,9 @@
 Radium.PeopleIndexRoute = Radium.Route.extend
   actions:
     willTransition: (transition) ->
+      unless transition.targetName == 'people.index'
+        @controller.set 'company', null
+
       unless transition.targetName == "emails.new"
         @controller.set 'searchText', ''
         @controller.get('checkedContent').setEach 'isChecked', false
