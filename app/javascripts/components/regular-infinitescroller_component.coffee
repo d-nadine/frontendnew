@@ -4,9 +4,8 @@ Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.exten
   setupInfiniteScrollingListener: ->
     $(window).on 'scroll.regularScroller', @didScroll.bind(this)
 
-  teardown: ( ->
+  teardown: Ember.on 'willDestroyElement', ->
     $(window).off 'scroll.regularScroller'
-  ).on 'willDestroyElement'
 
   shouldLoadMore: ->
     return if @dontScroll()
@@ -15,6 +14,6 @@ Radium.RegularInfinitescrollerComponent = Radium.InfiniteScrollerComponent.exten
 
     return false if viewPortTop == 0
 
-    difference = (viewPortTop - distanceToViewportTop)
+    difference = (distanceToViewportTop - viewPortTop)
 
-    return true if difference > 0 && difference < 30
+    return true if difference >= 0 && difference < 30
