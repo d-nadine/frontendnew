@@ -262,7 +262,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
 
     r = usersTotals.find((user) -> user.id == parseInt(userId))
 
-    r.length || 0
+    r.total || 0
 
   team: Ember.computed 'currentUser', 'users.[]', ->
     currentUser = @get('currentUser')
