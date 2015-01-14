@@ -446,6 +446,16 @@
         .timestamp {
           display: none;
         }
+
+        .activity-content {
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          p {
+            display: inline;
+          }
+        }
       }
 
       .rd-note-editor {
