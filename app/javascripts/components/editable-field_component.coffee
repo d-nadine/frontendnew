@@ -207,12 +207,19 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     selection.addRange(range);
 
   focusContent: (e) ->
+    return unless @$().length
     el = $(@$())
     if $(el.html()).hasClass('placeholder')
       el.empty()
+
+    el.parents('td:first').addClass('active')
 
     @setEndOfContentEditble()
 
   focusOut: (e) ->
     Ember.run.next =>
       @send 'updateModel'
+
+    return unless @$().length
+
+    @$().parents('tD:first').removeClass('active')

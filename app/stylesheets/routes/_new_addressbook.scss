@@ -330,6 +330,10 @@
     padding: 0 0 0 0px;
   }
 
+  .contacts-table td.active {
+    border: 1px solid transparent;
+  }
+
   .contacts-table tbody tr:not(.is-checked) td.name {
     border-right: 2px solid #e6e6e6;
     background: #fbfbfb;
