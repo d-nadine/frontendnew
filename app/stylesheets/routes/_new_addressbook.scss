@@ -354,13 +354,16 @@
     cursor: hand;
   }
 
+  .contacts-table {
+    .events {
+      padding-left: 0 !important;
+      min-width: 70px;
+    }
+  }
+
   .contacts-table thead tr {
     .name, .email, ,.company {
       min-width: 220px;
-    }
-
-    .events, {
-      min-width: 80px;
     }
 
     .inactive {
@@ -390,11 +393,10 @@
 
   .contacts-table tbody tr {
     td {
-      padding-right: 10px;
-
       a {
         text-decoration: none;
       }
+
     }
 
     td .editable {
@@ -402,17 +404,25 @@
       display: inline;
       width: 100%;
 
-      &.is-invalid {
-        border: 1px solid red;
-     }
-      // fix colours
       &.is-saving {
-        background: grey;
         color: #fff;
       }
 
       &:focus{
-        background: #f5f5f5;
+        display: inline-block;
+        height: 42px;
+        line-height: 42px;
+        margin-left: -9px;
+        padding-left: 9px;
+        width: calc(100% - 1px);
+        outline: 1px solid #3887e6;
+
+        a {
+          display: inline-block;
+          overflow-x: scroll;
+          width: 100%;
+          margin-bottom: -5px;
+        }
       }
 
       em {
@@ -494,6 +504,8 @@
     }
 
     .next-task {
+      padding-right: 10px;
+
       a.dropdown-toggle:hover {
         text-decoration: none;
       }
@@ -517,6 +529,7 @@
 
       .assignto {
         height: 22px;
+        box-shadow: none;
 
         .assignto-left {
           height: 22px;
