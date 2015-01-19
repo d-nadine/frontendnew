@@ -77,7 +77,7 @@ $body: #6e6e6e;
 
   td, th {
     &:not(.check) {
-      padding-left: 10px !IMPORTANT;
+      padding: 2px 1px 0 10px;
       height: 44px;
     }
 
@@ -89,9 +89,6 @@ $body: #6e6e6e;
       input {
         margin-top: 0;
       }
-    }
-    &.company {
-      // font-weight: 400;
     }
   }
 

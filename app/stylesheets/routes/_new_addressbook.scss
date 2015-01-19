@@ -313,12 +313,14 @@
   }
 
   .contacts-table .check {
-    width: 25px;
+    width: 40px;
     text-align: center;
-  }
+    padding: 0;
 
-  .contacts-table td.check {
-    padding-left: 10px;
+    input {
+      vertical-align: top;
+      margin-top: 4px;
+    }
   }
 
   .contacts-table th {
@@ -327,11 +329,17 @@
   }
 
   .contacts-table td, .contacts-table th {
-    padding: 0 0 0 0px;
+    img {
+      display: none;
+    }
+    .check {
+      display: none !important;
+    }
   }
 
   .contacts-table td.active {
-    border: 1px solid red;
+    padding: 1px 0 0 9px;
+    border: 1px solid #3887e6 !important; 
   }
 
   .contacts-table tbody tr:not(.is-checked) td.name {
@@ -409,14 +417,6 @@
       }
 
       &:focus{
-        display: inline-block;
-        height: 42px;
-        line-height: 42px;
-        margin-left: -9px;
-        padding-left: 9px;
-        width: calc(100% - 1px);
-        outline: 1px solid #3887e6;
-
         a {
           display: inline-block;
           overflow-x: scroll;
