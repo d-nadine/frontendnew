@@ -12,7 +12,7 @@
     {{#each assignee in assignees}}
       <li>
         <a href="#" {{action "assignContact" controller.contact assignee}}>
-          {{avatar this style="tiny"}}{{assignee.displayName}}
+          {{avatar assignee style="tiny"}}{{assignee.displayName}}
         </a>
       </li>
     {{/each}}
