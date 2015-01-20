@@ -1,7 +1,7 @@
 #addressbook {
   .subhead {
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     font-size: 28px;
     width: 100%;
     display: inline-block;
@@ -48,9 +48,9 @@
   }
 
   .subhead .nav-wrap .count .total {
-    font-size: 21px;
-    font-weight: 400;
-    color: #777;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
     margin-left: -4px;
   }
 
@@ -163,13 +163,14 @@
   }
 
   .nav-tabs li a, .nav-pills li a {
-    padding-right: 12px;
+    padding-right: 7px;
     padding-left: 12px;
-    color: #777;
-    background: #e9e9e9;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: #444;
     margin-right: 5px;
     display: inline-block;
-    width: calc(100% - 24px);
+    width: calc(100% - 13px);
   }
 
   .nav li {
@@ -187,6 +188,10 @@
   .nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
     background: #3887e6;
     color: #fff;
+
+    i {
+      color: #fff;
+    }
   }
 
   .nav-pills {
@@ -195,14 +200,14 @@
   }
 
   .nav-pills-left {
-    width: 111px;
+    width: 141px;
     float: left;
     display: inline-block;
     height: 20px;
   }
 
   .nav-pills-right {
-    width: 50px;
+    width: 51px;
     float: left;
   }
 
@@ -211,7 +216,7 @@
     border-radius: 30px;
     padding: 3px 8px;
     margin-left: 4px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     display: inline-block;
     text-align: center;
@@ -262,6 +267,7 @@
     float: left;
     position: relative;
     top: 5px;
+    color: #777;
   }
 
   .contacts-sidebar .nav li.active a span:nth-of-type(2) {
@@ -282,7 +288,8 @@
     position: relative;
     height: 100%;
     display: inline-block;
-    width: calc(100% - 264px) !important;
+    width: calc(100% - 288px) !important;
+    margin-top: 7px;
   }
 
   .right-table {
@@ -316,6 +323,7 @@
     width: 40px;
     text-align: center;
     padding: 0;
+    border-left: 1px solid #ddd;
 
     input {
       vertical-align: top;
@@ -324,16 +332,15 @@
   }
 
   .contacts-table th {
-    border-bottom: 1px solid #777;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    background: #f9f9f9;
     text-transform: uppercase;
   }
 
   .contacts-table td, .contacts-table th {
     img {
-      display: none;
-    }
-    .check {
-      display: none !important;
+      padding-right: 5px;
     }
   }
 
@@ -343,8 +350,7 @@
   }
 
   .contacts-table tbody tr:not(.is-checked) td.name {
-    border-right: 2px solid #e6e6e6;
-    background: #fbfbfb;
+    border-right: 2px solid #ccc;
   }
 
   .contacts-table .assign {
@@ -397,6 +403,18 @@
     .events-thirty {
       min-width: 100px;
     }
+
+    .column-sort {
+      position: relative;
+
+      .ss-dropdown {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 19px;
+      }
+    }
   }
 
   .contacts-table tbody tr {
@@ -446,7 +464,7 @@
         margin-top: 10px;
 
         .activity-icon {
-          margin: 0px 0 0 10px;
+          margin: 0px 0 0 4px;
         }
 
         br {
@@ -462,19 +480,34 @@
         }
 
         .activity-content {
-          max-width: 200px;
+          max-width: 250px;
           overflow: hidden;
           text-overflow: ellipsis;
+          margin-left: 30px;
+          padding-right: 5px;
 
           p {
             display: inline;
           }
+        }
+
+        .activity-icon i {
+          position: relative;
+          top: 2px;
         }
       }
 
       .rd-note-editor {
         display: none;
       }
+    }
+
+    td.events, td.inactive, td.next-task-date, td.last-activity, td.source, td.added, td.deals-closed-total, td.deals-total, td.events-seven, td.events-thirty {
+      background: #f9f9f9;
+    }
+
+    td.phone {
+      min-width: 105px;
     }
 
     td.tags {
@@ -541,7 +574,7 @@
           .to {
             overflow-x: hidden;
             white-space: nowrap;
-            width: calc(100% - 27px);
+            width: calc(100% - 32px);
             height: 22px;
             line-height: 22px;
             text-overflow: ellipsis;
@@ -590,10 +623,10 @@
 
   .contacts-sidebar {
     display: inline-block;
-    width: 185px;
+    width: 205px;
     height: 400px;
     float: left;
-    margin-right: 54px;
+    margin-right: 58px;
     padding-top: 14px;
     padding-left: 25px;
   }
