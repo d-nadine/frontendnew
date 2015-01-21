@@ -200,7 +200,7 @@
   }
 
   .nav-pills-left {
-    width: 141px;
+    width: 10.5em;
     float: left;
     display: inline-block;
     height: 20px;
@@ -294,6 +294,14 @@
 
   .right-table {
     overflow: auto;
+    width: calc(100% - 275px);
+    float: left;
+
+    .variable {
+      display: inline-block;
+      width: calc(100% + 15px);
+      padding-bottom: 100px;
+    }
   }
 
   .contacts-table {
@@ -687,7 +695,10 @@
     }
   }
 
-
+  
+  .left-table th {
+    height: 44px !important;
+  }
 }
 
 .modal-backdrop {
