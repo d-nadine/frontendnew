@@ -294,14 +294,6 @@
 
   .right-table {
     overflow: auto;
-    width: calc(100% - 275px);
-    float: left;
-
-    .variable {
-      display: inline-block;
-      width: calc(100% + 15px);
-      padding-bottom: 100px;
-    }
   }
 
   .contacts-table {
