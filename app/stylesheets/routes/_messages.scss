@@ -141,7 +141,7 @@ $item-border: #dddddd;
   .btn-read-status {
     position: absolute;
     left: 7px;
-    top: 10px;
+    top: 28px;
   }
 
   .btn-read {
@@ -156,33 +156,38 @@ $item-border: #dddddd;
     line-height: 1em;
   }
 
-  .delete, .archive {
+  .delete, .archive, .check-box {
     opacity: 0;
     @include transition(opacity 0.25s);
+  }
+
+  .delete {
+    padding-right: 1px;
   }
 
   &:hover,
   &.is-selected {
     .delete,
     .archive,
+    .check-box,
     .btn-read {
       opacity: 1;
     }
   }
 
   .check-box {
-    width: 20px;
-    height: 20px;
+    width: 4px;
+    height: 4px;
     padding: 5px;
-    position: absolute;
-    left: 10px;
-    top: 32px;
-    z-index: 1;
+    position: relative;
+    top: 6px;
+    left: 4px;
 
     i {
       margin: 0;
-      font-size: 18px;
-      line-height: 20px;
+      font-size: 12px;
+      line-height: 4px;
+      left: -4px;
     }
   }
 
@@ -197,7 +202,6 @@ $item-border: #dddddd;
 }
 
 .message-item-details {
-  margin-left: 80px;
 
   .badge.thread {
     overflow: hidden;
@@ -208,17 +212,13 @@ $item-border: #dddddd;
 }
 
 .message-item-content {
-  padding: 10px 20px;
+  padding: 13px 20px 5px;
   overflow: hidden;
   border: {
     top: 1px solid $item-border;
     right: 1px solid transparent;
     bottom: 1px solid transparent;
     left: 1px solid transparent;
-  }
-
-  .message-list-readable-item & {
-    padding-left: 50px;
   }
 
   &.is-draft {
@@ -243,21 +243,26 @@ $item-border: #dddddd;
 }
 
 .message-item-avatar {
-  margin-right: 20px;
+  margin-right: 15px;
+  margin-left: 8px;
+
+  img {
+    width: 46px;
+  }
 }
 
 .message-item-title {
-  margin: 0 0 5px;
-  // So the title is flush to the top of the avatar
+  margin: 1px 0 1px;
   position: relative;
   top: -4px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .message-item-subject {
-  margin: 0 0 5px;
+  margin: 0 0 2px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

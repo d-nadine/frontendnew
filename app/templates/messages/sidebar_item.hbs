@@ -3,8 +3,6 @@
     <span class="btn-read-status btn-unread"></span>
   {{/unless}}
 
-  {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}
-
   <small class="muted pull-right messages-list-item-timestamp">
     {{#if isDraft}}Saved at {{/if}}
     {{emailSentAt time format="brief"}}

@@ -402,8 +402,8 @@ $btn-primary : #007cdd;
 }
 
 .btn-read-status {
-  width: 13px;
-  height: 13px;
+  width: 11px;
+  height: 11px;
   border: 1px solid;
   @include box-shadow(inset 0 1px 0 rgba(white, 0.2));
   @include background-image(linear-gradient(rgba(white, 0.25), rgba(white, 0)));
