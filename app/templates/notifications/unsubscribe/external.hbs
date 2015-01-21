@@ -1,0 +1,10 @@
+<h4>
+  {{#if reference.isLoaded}}
+    {{resource-link-to reference}}
+    {{#if unsubscribed}}
+      has unsubscribed from {{source}}
+    {{/if}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}}
+</h4>

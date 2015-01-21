@@ -7,6 +7,7 @@ Radium.Notification = Radium.Model.extend
   email: DS.belongsTo('Radium.Email')
   sentBy: DS.belongsTo('Radium.User')
   checkForResponse: DS.belongsTo('Radium.CheckForResponse')
+  source: DS.attr('string')
 
   # checkForResponse: DS.belongsTo('Radium.CheckForResponse')
 

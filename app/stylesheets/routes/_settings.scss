@@ -365,3 +365,69 @@ input.api-field {
   line-height: 30px;
   width: 224px;
 }
+
+.integrations .service{
+  width: 92%;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 30px;
+  display: inline-block;
+}
+
+.service .logo {
+  display: inline-block;
+  background: url('images/backgrounds/zapier-bw.png');
+  background-size: 100px auto;
+  background-repeat: no-repeat;
+  background-position: 0 25px;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+
+.service .description {
+  padding: 20px 20px 20px 40px;
+  display: inline-block;
+  float: left;
+  width: 547px;
+}
+
+.service .description span {
+  display: none;
+  margin-left: 2px;
+}
+
+.service .description > div:nth-of-type(1) {
+  display: inline-block;
+  margin-top: 3px;
+}
+
+.service .description > div:nth-of-type(1) p {
+  margin: 0 0 2px;
+}
+
+.service .description > div:nth-of-type(1) a {
+  color: #999;
+  text-decoration: underline;
+}
+
+.service .description > a {
+  display: inline-block;
+  float: right;
+  font-size: 14px;
+}
+
+.service .description i {
+  color: #57ad32;
+}
+
+.service h2 {
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.service p {
+  padding-bottom: 0;
+}

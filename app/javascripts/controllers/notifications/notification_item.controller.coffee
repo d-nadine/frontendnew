@@ -17,6 +17,8 @@ Radium.NotificationsNotRepliedEmailController = Radium.NotificationsAssignContro
 Radium.NotificationsNewContactImportJobController = Radium.NotificationsAssignController.extend()
 Radium.NotificationsNewAccountController = Radium.NotificationsAssignController.extend()
 Radium.NotificationsPrimaryContactDeletedDealController = Radium.NotificationItemController.extend()
+Radium.NotificationsUnsubscribeExternalController = Radium.NotificationItemController.extend
+  unsubscribed: Ember.computed.equal 'event', 'unsubscribe'
 
 Radium.NotificationsNewInvitationController = Radium.NotificationsAssignController.extend
   actions:

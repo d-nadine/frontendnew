@@ -1,7 +1,4 @@
 <h3 class="settings-title">Radium API Key</h3>
-<p>
-  To use the API please contact us by describing your use case. <a href="#" {{action "openIntercom"}}>Click here</a>.
-</p>
 <div class="alert alert-info api-key-panel">
   <div class="form form-horizontal">
     <div class="control-group">
@@ -9,6 +6,30 @@
       <div class="controls">
         {{input value=token class="api-field" readonly="readonly"}}
       </div>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <h3>Integrations</h3>
+  <div class="integrations">
+    <div class="service">
+      {{#if currentUser.thirdPartyConnected}}
+        <div class="logo"></div>
+        <div class="description">
+          <h2>Zapier <span><i class="ss-standard ss-check"></i></span></h2>
+          <div>
+            <p>Integrate Radium with 300+ Apps in the Zapier system.</p>
+            <p><a href="https://zapier.com/how-it-works/" target="_blank">Learn More</a></p>
+          </div>
+          <!-- <a href="#" class="toggle">Hide Details</a>
+          <div class="more" style="display: block;">
+            <hr>
+            <h1>Not Sure what to put here</h1>
+          </div> -->
+        </div>
+      {{else}}
+        <h4>Not connected</h4>
+      {{/if}}
     </div>
   </div>
 </div>

@@ -25,8 +25,8 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   name: Ember.computed.alias 'subject'
   sendTime: DS.attr('datetime')
   checkForResponse: DS.attr('datetime')
-
   threadCount: DS.attr('number')
+  source: DS.attr('string')
 
   displayName: Ember.computed 'subject', ->
     return @get('subject') if @get('subject.length')

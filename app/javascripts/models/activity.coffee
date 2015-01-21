@@ -15,6 +15,7 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   event: DS.attr('string')
   meta: DS.attr('object')
   time: DS.attr('datetime')
+  source: DS.attr('string')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value
