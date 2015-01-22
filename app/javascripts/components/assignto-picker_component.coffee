@@ -1,4 +1,6 @@
-Radium.AssigntoPickerComponent = Ember.Component.extend
+require 'mixins/components/position_dropdown'
+
+Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   actions:
     assignContact: (contact, user) ->
       contact.set 'user', user
@@ -14,8 +16,6 @@ Radium.AssigntoPickerComponent = Ember.Component.extend
 
       @get('store').commit()
       false
-
-  classNames: ['btn-group']
 
   store: Ember.computed ->
     @get('container').lookup('store:main')

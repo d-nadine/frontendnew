@@ -1,4 +1,6 @@
-Radium.StatusPickerComponent = Ember.Component.extend
+require 'mixins/components/position_dropdown'
+
+Radium.StatusPickerComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   actions:
     changeStatus: (contact, status) ->
       contact.set 'contactStatus', status
@@ -7,8 +9,6 @@ Radium.StatusPickerComponent = Ember.Component.extend
 
       contact.save(parent).then (result) ->
         parent.send 'flashSuccess', 'Status added.'
-
-  classNames: ['btn-group']
 
   store: Ember.computed ->
     @get('store').lookup('store:main')

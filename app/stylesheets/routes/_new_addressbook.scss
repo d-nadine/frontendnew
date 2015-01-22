@@ -261,7 +261,6 @@
     width: 19px;
     height: 12px;
     display: inline-block;
-    position: relative;
     top: 4px;
     font-size: 13px;
     float: left;
@@ -358,6 +357,7 @@
   }
 
   .contacts-table .assign {
+    position: static;
     overflow: visible;
   }
 
@@ -533,7 +533,7 @@
       overflow-x: hidden;
       float: left;
 
-      span:first-of-type {
+      span:first-of-type:not(.caret) {
         width: calc(100% - 14px);
         display: inline-block;
         white-space: normal;

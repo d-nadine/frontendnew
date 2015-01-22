@@ -56,16 +56,12 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
     @$('.mentions-input-box textarea').focus()
 
   setup: Ember.on 'didInsertElement', ->
-    # $(window).on @get('eventNamespace'), @positionDropdown.bind(this)
-
     Ember.$('.modal').modal('hide')
 
     @$('.modal').on 'shown', @setupCustom.bind(this)
 
   teardown: Ember.on 'willDestroyElement', ->
     @$('.modal').off 'shown'
-
-    # $(window).off @get('eventNamespace')
 
   todoForm: Radium.computed.newForm('todo')
 
