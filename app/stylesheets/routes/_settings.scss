@@ -375,9 +375,35 @@ input.api-field {
   display: inline-block;
 }
 
+/* .service .logo { */
+/*   display: inline-block; */
+/*   &.connected { */
+/*     background: url('http://res.cloudinary.com/radium/image/upload/v1421930278/thirdparty/zapier-bw.png'); */
+/*   } */
+
+/*   &.diconnected { */
+/*     background: url('http://res.cloudinary.com/radium/image/upload/v1421930278/thirdparty/zapier-bw.png') */
+/*   } */
+/*   background-size: 100px auto; */
+/*   background-repeat: no-repeat; */
+/*   background-position: 0 25px; */
+/*   width: 100px; */
+/*   height: 100px; */
+/*   float: left; */
+/* } */
+
 .service .logo {
   display: inline-block;
-  background: url('images/backgrounds/zapier-bw.png');
+  &.disconnected {
+    background: url('http://res.cloudinary.com/radium/image/upload/v1421930278/thirdparty/zapier-bw.png');
+  }
+
+  &.connected {
+    background: url('http://res.cloudinary.com/radium/image/upload/v1421930278/thirdparty/zapier.png');
+  }
+}
+
+.service .logo.disconnected, .service .logo.connected {
   background-size: 100px auto;
   background-repeat: no-repeat;
   background-position: 0 25px;
@@ -416,6 +442,8 @@ input.api-field {
   display: inline-block;
   float: right;
   font-size: 14px;
+  position: relative;
+  top: -10px;
 }
 
 .service .description i {

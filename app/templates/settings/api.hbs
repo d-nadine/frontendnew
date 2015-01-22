@@ -13,23 +13,19 @@
   <h3>Integrations</h3>
   <div class="integrations">
     <div class="service">
-      {{#if currentUser.thirdPartyConnected}}
-        <div class="logo"></div>
-        <div class="description">
-          <h2>Zapier <span><i class="ss-standard ss-check"></i></span></h2>
-          <div>
-            <p>Integrate Radium with 300+ Apps in the Zapier system.</p>
-            <p><a href="https://zapier.com/how-it-works/" target="_blank">Learn More</a></p>
-          </div>
-          <!-- <a href="#" class="toggle">Hide Details</a>
-          <div class="more" style="display: block;">
-            <hr>
-            <h1>Not Sure what to put here</h1>
-          </div> -->
+      <div {{bind-attr class=":logo currentUser.thirdPartyConnected:connected:disconnected"}}></Div>
+      <div class="description">
+        <h2>Zapier <span><i class="ss-standard ss-check"></i></span></h2>
+        <div>
+          <p>Integrate Radium with 300+ Apps in the Zapier system.</p>
+          <p>
+            <a href="https://zapier.com/developer/invite/14201/e005aeb13826bc7771001b1b5f8f71b4/" target="_blank">Learn More</a>
+          </p>
         </div>
-      {{else}}
-        <h4>Not connected</h4>
-      {{/if}}
+        {{#unless currentUser.thirdPartyConnected}}
+          <a href= "https://zapier.com/developer/invite/14201/e005aeb13826bc7771001b1b5f8f71b4/" target="_blank"" class= "btn-primary btn-large">Connect</a>
+        {{/unless}}
+      </div>
     </div>
   </div>
 </div>
