@@ -255,10 +255,6 @@
     display: block;
   }
 
-  .btn-group {
-    margin-top: 5px;
-  }
-
   .btn-primary, .btn-danger {
     float: right;
     margin-bottom: 5px;
@@ -270,7 +266,8 @@
 }
 
 .email-details {
-  margin: 10px 0 0 11px;
+  margin-left: 86px;
+  
   table tr td {
     text-align: left;
     color: $muted;
@@ -505,6 +502,14 @@
       padding-top: 10px;
       float: left;
 
+      .email-source img {
+        height: 20px !important;
+        width: 20px !important;
+        padding-right: 7px;
+        -webkit-filter: grayscale(100%); 
+        filter: grayscale(100%);
+      }
+
       strong {
         font-size: 15px;
       }
@@ -527,7 +532,7 @@
         text-align: right;
 
         a {
-          font-size: 14px;
+          font-size: 13px;
 
           &:hover {
             cursor: pointer;

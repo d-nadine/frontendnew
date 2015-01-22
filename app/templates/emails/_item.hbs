@@ -8,6 +8,9 @@
             {{partial 'emails/sender_avatar'}}
           </div>
           <div class="email-sender">
+            <span class="email-source">
+              {{thirdpartyIcon this}}
+            </span>
             <strong>{{resource-link-to sender}}</strong>
           </div>
         </div>
@@ -33,9 +36,6 @@
               <a class="" {{action "stopTracking" sender}}>Stop Tracking</a>
             </div>
           {{/if}}
-          <div class="pull-right">
-            {{thirdpartyIcon this}}
-          </div>
         </div>
         {{#if isScheduled}}
           <div class="alert alert-success">

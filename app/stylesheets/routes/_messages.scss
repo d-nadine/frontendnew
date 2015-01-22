@@ -151,9 +151,19 @@ $item-border: #dddddd;
 
   .messages-list-item-timestamp {
     position: relative;
-    top: 3px;
+    top: 0px;
     font-size: 11px;
     line-height: 1em;
+
+    time {
+      padding-right: 4px;
+    }
+    img {
+      position: relative;
+      top: -2px;
+      -webkit-filter: grayscale(100%); 
+      filter: grayscale(100%);
+    }
   }
 
   .delete, .archive, .check-box {
@@ -213,7 +223,7 @@ $item-border: #dddddd;
 }
 
 .message-item-content {
-  padding: 13px 20px 5px 28px;
+  padding: 13px 15px 5px 28px;
   overflow: hidden;
   border: {
     top: 1px solid $item-border;
@@ -277,6 +287,7 @@ $item-border: #dddddd;
 .message-item-actions {
   .pull-right {
     line-height: 0;
+    padding-right: 3px;
   }
 
   a i {
