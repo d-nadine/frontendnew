@@ -275,9 +275,20 @@ $item-border: #dddddd;
 }
 
 .message-item-actions {
-  i {
+  .pull-right {
+    line-height: 0;
+  }
+
+  a i {
     color: $muted;
     margin: 0 0 0 5px;
+    position: relative;
+    top: -3px;
+  }
+
+  label {
+    position: relative;
+    top: 3px !important;
   }
 }
 
