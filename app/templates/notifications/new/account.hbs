@@ -1,2 +1,7 @@
 <h4>{{resource-link-to reference}} - has signed up for radium.</h4>
-<p>{{reference.about}}</p>
+<p>
+  {{reference.about}}
+  {{#if external}}
+    {{thirdpartyIcon this}}
+  {{/if}}
+</p>

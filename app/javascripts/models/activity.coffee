@@ -4,7 +4,6 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   users: DS.hasMany('Radium.User')
   contacts: DS.hasMany('Radium.Contact')
   companies: DS.hasMany('Radium.Company')
-  # FIXME: remove when ED supports has many through
   tags: DS.hasMany('Radium.Tag')
 
   user: DS.belongsTo('Radium.User', inverse: 'activities')
@@ -16,6 +15,7 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   meta: DS.attr('object')
   time: DS.attr('datetime')
   source: DS.attr('string')
+  external: DS.attr('boolean')
 
   reference: ((key, value) ->
     if arguments.length == 2 && value

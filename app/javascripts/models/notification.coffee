@@ -8,8 +8,7 @@ Radium.Notification = Radium.Model.extend
   sentBy: DS.belongsTo('Radium.User')
   checkForResponse: DS.belongsTo('Radium.CheckForResponse')
   source: DS.attr('string')
-
-  # checkForResponse: DS.belongsTo('Radium.CheckForResponse')
+  external: DS.attr('boolean')
 
   timeFormatted: Ember.computed 'time', ->
     time.toHumanFormatWithTime() if time = @get('time')
@@ -43,9 +42,7 @@ Radium.Notification = Radium.Model.extend
   _referenceInvitation: DS.belongsTo('Radium.UserInvitation')
   _referenceTodo: DS.belongsTo('Radium.Todo')
   _referenceCall: DS.belongsTo('Radium.Call')
-  _referenceMeeting: DS.belongsTo('Radium.Meeting')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceUser: DS.belongsTo('Radium.User')
-  _referenceInvitation: DS.belongsTo('Radium.Invitation')
   _referenceContactImportJob: DS.belongsTo('Radium.ContactImportJob')
   _referenceNote: DS.belongsTo('Radium.Note')

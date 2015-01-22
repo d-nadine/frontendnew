@@ -20,6 +20,7 @@ Ember.Application.initializer
         increments:
           number_of_clicks: 1
 
+      $.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267'})
       account = user.get('account')
 
       userSettingsController = container.lookup('controller:userSettings')
