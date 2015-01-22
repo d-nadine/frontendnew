@@ -1,7 +1,3 @@
-.email-history .sender-avatar .avatar {
-  border-radius: 3px;
-}
-
 .iframe-container {
   margin-bottom: 10px;
 }
@@ -235,17 +231,19 @@
   margin: 0;
   line-height: 25px;
 
-  .sender-avatar {
-    margin-right: 10px;
-  }
   .sender {
     font-weight: normal;
   }
 }
 
 .email-header {
-  margin: 0 0 20px;
   padding: 0 0 20px;
+  display: inline-block;
+  width: 100%;
+
+  .sender-avatar {
+    position: relative;
+  }
 }
 
 .email-header-actions {
@@ -437,23 +435,7 @@
   margin-top: 10px;
 }
 
-.badge-info {
-  a {
-    color: #fff;
-    &:not(.pull-right){
-      line-height: 20px;
-      font-size: larger;
-    }
 
-    &.pull-right {
-      margin-left: 5px;
-      font-size: larger;
-      position: relative;
-      top: -5px;
-      cursor: pointer;
-    }
-  }
-}
 
 .badge-email-deal {
   max-width: 60px;
@@ -487,27 +469,75 @@
 .email-thread-item {
   .email-card {
     display: inline-block;
+    padding: 20px;
 
     .avatar-wrap {
       margin: 0;
-      padding-left: 15px;
+      display: inline-block;
+      float: left;
+
+      .badge-success {
+        position: absolute;
+        top: 38px;
+        left: 84px;
+
+        a {
+          color: #fff;
+          &:not(.pull-right){
+            line-height: 20px;
+            font-size: larger;
+          }
+
+          &.pull-right {
+            margin-left: 5px;
+            font-size: larger;
+            position: relative;
+            top: -5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .email-sender {
+      display: inline-block;
+      padding-left: 20px;
+      padding-top: 10px;
+      float: left;
+
+      strong {
+        font-size: 15px;
+      }
+    }
+
+    .email-header-actions {
+      .btn {
+        width: 100%;
+        padding: 0;
+
+        .text-right {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          width: inherit;
+        }
+      }
+
+      .btn-group {
+        text-align: right;
+
+        a {
+          font-size: 14px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     .email-wrap {
       float: right;
-
-      .email-sender {
-        display: inline-block;
-        padding-left: 8px;
-        padding-top: 10px;
-
-        strong {
-          font-size: 18px;
-        }
-      }
-      .email-header-actions {
-        display: inline-block;
-      }
     }
   }
 

@@ -1,65 +1,69 @@
 <div {{bind-attr class=":span10 notFromUser senderIsCurrentUser row-fluid"}}>
   <div {{bind-attr class=":block :email-card :message-card notFromUser :span12"}}>
     <div class="row-fluid">
-      <div class="span2 avatar-wrap">
-        {{partial 'emails/sender_avatar'}}
-      </div>
 
-      <div class="email-wrap span10">
-        <div class="email-header">
+      <div class="email-header row-fluid">
+        <div class="span6 pull-left">
+          <div class="avatar-wrap">
+            {{partial 'emails/sender_avatar'}}
+          </div>
           <div class="email-sender">
             <strong>{{resource-link-to sender}}</strong>
           </div>
-          <div class="pull-right email-header-actions">
-            <button class="btn btn-link muted" {{action "toggleMeta"}}>
-              <small>
-                {{emailSentAt time format="long"}}
-                {{#if showMeta}}
-                  (less)
-                {{else}}
-                  (more)
-                {{/if}}
-              </small>
-              <div class="text-right">{{subject}}</div>
-            </button>
-            {{#if notTracked}}
-              <div class="btn-group btn-add-to-radium">
-                <button class="btn btn-main btn-primary" {{action "track" sender}}>Track with Radium</button>
-              </div>
-            {{/if}}
-            {{#if isTracked}}
-              <div class="btn-group btn-add-to-radium">
-                <button class="btn btn-main btn-danger" {{action "stopTracking" sender}}>Stop Tracking</button>
-              </div>
-            {{/if}}
-          </div>
-          {{#if isScheduled}}
-            <div class="alert alert-success">
-              Email scheduled for delivery at {{sendTimeFormatted}}.
+        </div>
+        
+        <div class="span6 pull-right email-header-actions">
+          <button class="btn btn-link muted" {{action "toggleMeta"}}>
+            <small>
+              {{emailSentAt time format="long"}}
+              {{#if showMeta}}
+                (less)
+              {{else}}
+                (more)
+              {{/if}}
+            </small>
+            <div class="text-right">{{subject}}</div>
+          </button>
+          {{#if notTracked}}
+            <div class="btn-group btn-add-to-radium">
+              <a class="" {{action "track" sender}}>Track with Radium</a>
             </div>
           {{/if}}
-
-          {{#if showMeta}}
-            <div class="email-details">
-              <table>
-                <tr>
-                  <td>To</td>
-                  <td>{{list "toList"}}</td>
-                </tr>
-                {{#if ccList.length}}
-                <tr>
-                  <td>CC</td>
-                  <td>{{list "ccList"}}</td>
-                </tr>
-                {{/if}}
-                <tr>
-                  <td>Time</td>
-                  <td>{{formatDateTime time format="full"}}</td>
-                </tr>
-              </table>
+          {{#if isTracked}}
+            <div class="btn-group btn-add-to-radium">
+              <a class="" {{action "stopTracking" sender}}>Stop Tracking</a>
             </div>
           {{/if}}
         </div>
+        {{#if isScheduled}}
+          <div class="alert alert-success">
+            Email scheduled for delivery at {{sendTimeFormatted}}.
+          </div>
+        {{/if}}
+
+        {{#if showMeta}}
+          <div class="email-details">
+            <table>
+              <tr>
+                <td>To</td>
+                <td>{{list "toList"}}</td>
+              </tr>
+              {{#if ccList.length}}
+              <tr>
+                <td>CC</td>
+                <td>{{list "ccList"}}</td>
+              </tr>
+              {{/if}}
+              <tr>
+                <td>Time</td>
+                <td>{{formatDateTime time format="full"}}</td>
+              </tr>
+            </table>
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="email-wrap span12">
 
         <div class="content">
           <div class="iframe-container">
@@ -67,8 +71,8 @@
               {{htmlBodyFormatter model}}
             </div>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>

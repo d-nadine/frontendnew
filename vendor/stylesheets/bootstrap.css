@@ -877,9 +877,9 @@ pre code {
 .badge {
   padding-left: 9px;
   padding-right: 9px;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 .label:empty,
 .badge:empty {
@@ -911,7 +911,7 @@ a.badge:focus {
 }
 .label-success,
 .badge-success {
-  background-color: #468847;
+  background-color: #57AD32;
 }
 .label-success[href],
 .badge-success[href] {
