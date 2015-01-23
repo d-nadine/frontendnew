@@ -1,22 +1,15 @@
 Radium.AddressbookView = Ember.View.extend
   actions:
     showAddCompany: ->
-      @$('.address-book-controls').slideUp('medium', =>
-        @$('.new-company').slideDown('medium', =>
-          Ember.$('.new-company input[type=text]').focus()
-        )
+      @$('.new-company').slideToggle('medium', ->
+        Ember.$('.new-company input[type=text]').focus()
       )
 
   layoutName: 'layouts/single_column'
 
-  readAvailableHeight: (->
+  readAvailableHeight: Ember.on 'didInsertElement', ->
     @set 'controller.availableHeight', @$('#addressbook').height()
-  ).on 'didInsertElement'
-
-  setupWindowResizeListener: (->
     $(window).on 'resize.AddressbookView', => @readAvailableHeight()
-  ).on 'didInsertElement'
 
-  teardownWindowResizeListener: (->
+  teardownWindowResizeListener: Ember.on 'willDestroyElement', ->
     $(window).off 'resize.AddressbookView'
-  ).on 'willDestroyElement'

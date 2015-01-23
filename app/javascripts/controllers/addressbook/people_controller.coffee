@@ -1,4 +1,6 @@
-Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMixin,
+require "controllers/addressbook/people_mixin"
+
+Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
     saveTag: (newTag) ->
@@ -207,18 +209,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.CheckableMix
     showMore: ->
       return if @get('content.isLoading')
       @get('model').expand()
-
-    sortContacts: (prop, ascending) ->
-      model = @get("model")
-      params = model.get("params")
-
-      delete params.sort_properties
-      sort_properties = "sort_properties": JSON.stringify([{"property": prop, "asc": ascending}])
-
-      params = Ember.merge sort_properties, params
-
-      model.set 'params', params
-      false
 
   needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company']
 

@@ -1,32 +1,74 @@
-<div class="page-header">
-  <div class="address-book-controls">
-    <div class="pull-right">
-      <form class="form-search pipeline-search">
-        <a href="#" {{action "showAddCompany" target="view"}} class="btn btn-main btn-primary">
-          <i class="ss-standard ss-plus"></i> Company
-        </a>
-      </form>
+<div class="page-header row-fluid">
+  <div class="subhead">
+    <div class="left">
+      <div class="nav-wrap">
+        <span class="count">
+          <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
+          {{#unless content.isLoading}}
+            {{checkedTotal}}
+          {{else}}
+            111
+          {{/unless}}
+          </span>
+          <span class="divider">/</span>
+          <span {{bind-attr class=":total content.isLoading:is-loading"}}>
+            {{#unless content.isLoading}}
+              {{totalRecords}}
+            {{/unless}}
+          </span>
+          <span class="subtitle">COMPANIES</span>
+        </span>
+        <div class="tools">
+          <a href="#" {{action "showAddCompany" target="view"}} class="btn-contact">
+            <i class="ss-standard ss-user"></i>
+            <span>Add Company</span>
+          </a>
+          <div class="btn-group vanilla">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+              <i class="ss-standard ss-cursor"></i> Actions
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Assign To</a>
+                <ul class="dropdown-menu">
+                  {{#each user in users}}
+                    <li>
+                      <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
+                    </li>
+                  {{/each}}
+                </ul>
+              </li>
+              <li>
+                <a href="#" {{action "confirmDeletion"}}>Delete</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="working-anim">
+      {{#if working}}
+        <img src="/images/loading/ajax-loader.gif"/>
+      {{/if}}
+    </div>
+    <div class="col-selector">
+      {{input type="text" value=searchText class="searchbox" placeholder="search"}}
     </div>
   </div>
   {{render 'forms/company'}}
+  <div class="table-container companies">
+    <div class="left-table">
+      {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
+    </div>
+    <div class="right-table">
+      {{variadic-table list=controller columns=columns sort="sort" classNames="variable"}}
+    </div>
+    {{#if content.isLoading}}
+      <div class="loading" class="text-center">
+        <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+      </div>
+    {{/if}}
+  </div>
+  {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
 </div>
-
-{{partial "addressbook/loader"}}
-<table>
-  <tr>
-    <th class="row-selector"><input type="checkbox" style="visibility: hidden;"></th>
-    <th class="company">Name</th>
-    <th>Open Deals</th>
-    <th>Assigned To</th>
-  </tr>
-</table>
-{{#rd-lazy-each content=model endInSight="loadMoreCompanies" height=500 rowHeight=50 }}
-  <table style="height: 50px;">
-    <tr>
-      <td class="row-selector">{{input type="checkbox"}}</td>
-      <td class="company">{{#link-to 'company' this}}{{displayName}}{{/link-to}}</td>
-      <td>{{openDeals.length}}</td>
-      <td>{{#link-to "user" user}}{{user.name}}{{/link-to}}</td>
-    </tr>
-  </table>
-{{/rd-lazy-each}}

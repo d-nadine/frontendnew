@@ -201,10 +201,10 @@
   </div>
   <div class="table-container">
     <div class="left-table">
-      {{varidic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sortContacts" classNames="fixed"}}
+      {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
     </div>
     <div class="right-table">
-      {{varidic-table list=controller columns=checkedColumns sort="sortContacts" classNames="variable"}}
+      {{variadic-table list=controller columns=checkedColumns sort="sort" classNames="variable"}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">

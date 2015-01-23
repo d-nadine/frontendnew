@@ -1,4 +1,4 @@
-<table class="contacts-table">
+<table class="variadic-table">
   <thead>
     <tr>
       {{#if check}}
@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-{{#each item in list itemController="varidicItem"}}
+{{#each item in list itemController="variadicItem"}}
   <tr {{bind-attr class="item.isChecked:is-checked"}}>
     {{#if check}}
       <td class="check">

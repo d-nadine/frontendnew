@@ -1,4 +1,4 @@
-Radium.VaridicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
+Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   actions:
     showMore: ->
       @sendAction 'showMore'

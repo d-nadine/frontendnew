@@ -1,4 +1,12 @@
 #addressbook {
+  .new-company {
+    margin-right: 11px;
+  }
+
+  .company-form, .table-container.companies {
+    margin-left: 25px;
+  }
+
   .subhead {
     margin-top: 10px;
     margin-bottom: 24px;
@@ -295,7 +303,7 @@
     overflow: auto;
   }
 
-  .contacts-table {
+  .variadic-table {
     table-layout: fixed;
     clear: both;
     border-collapse: separate;
@@ -304,7 +312,7 @@
     float: left;
   }
 
-  .contacts-table tr {
+  .variadic-table tr {
     &.is-checked {
       border: {
         right-color: $link;
@@ -318,7 +326,7 @@
     }
   }
 
-  .contacts-table .check {
+  .variadic-table .check {
     width: 40px;
     text-align: center;
     padding: 0;
@@ -330,38 +338,38 @@
     }
   }
 
-  .contacts-table th {
+  .variadic-table th {
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
     background: #f9f9f9;
     text-transform: uppercase;
   }
 
-  .contacts-table td, .contacts-table th {
+  .variadic-table td, .variadic-table th {
     img {
       padding-right: 5px;
     }
   }
 
-  .contacts-table td.active {
+  .variadic-table td.active {
     padding: 1px 0 0 9px;
     border: 1px solid #3887e6 !important; 
   }
 
-  .contacts-table td.active {
+  .variadic-table td.active {
     border: 1px solid transparent;
   }
 
-  .contacts-table tbody tr:not(.is-checked) td.name {
+  .variadic-table tbody tr:not(.is-checked) td.name {
     border-right: 2px solid #ccc;
   }
 
-  .contacts-table .assign {
+  .variadic-table .assign {
     position: static;
     overflow: visible;
   }
 
-  .contacts-table .assign .btn-group a {
+  .variadic-table .assign .btn-group a {
     &:hover {
       text-decoration: none;
     }
@@ -372,14 +380,14 @@
     cursor: hand;
   }
 
-  .contacts-table {
+  .variadic-table {
     .events {
       padding-left: 0 !important;
       min-width: 70px;
     }
   }
 
-  .contacts-table thead tr {
+  .variadic-table thead tr {
     .name, .email, ,.company {
       min-width: 220px;
     }
@@ -421,7 +429,7 @@
     }
   }
 
-  .contacts-table tbody tr {
+  .variadic-table tbody tr {
     td {
       a {
         text-decoration: none;

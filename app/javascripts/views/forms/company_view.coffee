@@ -5,7 +5,7 @@ Radium.FormsCompanyView = Radium.View.extend
       @$('.existing-company').slideDown('medium')
 
     hideNewCompany: ->
-      @$().slideUp('slow', =>
+      @$().slideUp('slow', ->
         Ember.$('.address-book-controls').slideDown('medium'))
 
     resetCompany: ->

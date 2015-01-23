@@ -22,10 +22,10 @@ Radium.PeopleIndexView = Radium.View.extend Radium.ScrollTopMixin,
     menu.removeClass('open') if menu.hasClass('open')
 
   resizeTableHeaders: ->
-    rightHeight = $('.contacts-table:last thead tr th:first').outerHeight() - 1
+    rightHeight = $('.variadic-table:last thead tr th:first').outerHeight() - 1
 
     Ember.run.next ->
-      $('.contacts-table:first thead tr th').each (index, th) ->
+      $('.variadic-table:first thead tr th').each (index, th) ->
         $(th).height(rightHeight)
 
 
