@@ -34,7 +34,4 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
     @get('activities').compact().forEach (activity) ->
       activity.unloadRecord()
 
-  openDeals: Ember.computed 'contacts.@each.openDeals.[]', ->
-    @get("contacts").reduce (deals, contact) ->
-      deals.addObjects(contact.get("openDeals"))
-    , []
+  openDeals: DS.attr('number')
