@@ -1,6 +1,75 @@
-Radium.AddressbookUntrackedController = Ember.ArrayController.extend({
+require "controllers/addressbook/people_mixin"
+
+Radium.AddressbookUntrackedController = Ember.ArrayController.extend Radium.PeopleMixin,
   searchText: "",
-  filterParams: Ember.observer "searchText", ->
-    #TODO: loading state
-    @get("model").set("params", {private: true, like: @get("searchText")})
-})
+  needs: ['addressbook']
+
+  fixedColumns: Ember.A([
+    {
+      classNames: "name"
+      heading: "Name"
+      route: "company"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Name",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "name"
+        static: true
+      }]
+      avatar: true
+      checked: true
+      sortOn: "name"
+      component: 'editable-field'
+    }
+  ])
+
+  columns: Ember.A([
+    {
+      id: "email"
+      classNames: "email"
+      heading: "Email"
+      route: "contact"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Email",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "email"
+        static: true
+      },
+      {
+        name: 'validator',
+        value: Radium.EMAIL_REGEX,
+        static: true
+      }],
+      actions: [
+        name: "saveEmail"
+        value: "saveEmail"
+      ]
+      sortOn: "email"
+      component: 'editable-field'
+    }
+    {
+      id: "untracked-actions"
+      classNames: "untracked-actions"
+      component: "untracked-actions"
+      bindings: [{
+        name: "model"
+        value: "model"
+      }]
+    }
+  ])
+

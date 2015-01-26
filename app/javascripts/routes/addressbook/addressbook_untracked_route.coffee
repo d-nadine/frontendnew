@@ -11,9 +11,6 @@ Radium.AddressbookUntrackedRoute = Radium.Route.extend
 
       @store.commit()
 
-    loadMoreContacts: ->
-      @dataset.expand()
-
     destroyContact: (contact)->
       contact.deleteRecord()
       contact.one 'didDelete', =>
