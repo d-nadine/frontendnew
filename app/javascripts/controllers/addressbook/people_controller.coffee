@@ -223,8 +223,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   filter: null
 
-  searchText: ""
-
   isAll: Ember.computed.equal 'filter', 'all'
   isNew: Ember.computed.equal 'filter', 'new'
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
@@ -281,17 +279,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   noResults: Ember.computed 'content.isLoading', 'model.[]', ->
     not @get('content.isLoading') && not @get('model').get('length')
-
-  searchDidChange: Ember.observer "searchText", ->
-    return if @get('filter') is null
-
-    searchText = @get('searchText')
-
-    filterParams = @get('filterParams')
-
-    params = Ember.merge filterParams, like: searchText
-
-    @get("content").set("params", Ember.copy(params))
 
   pageSize: 25
 

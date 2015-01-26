@@ -22,3 +22,16 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
       @get('totalRecords')
     else
       @get('checkedContent.length')
+
+  searchText: ""
+
+  searchDidChange: Ember.observer "searchText", ->
+    return if @get('filter') is null
+
+    searchText = @get('searchText')
+
+    filterParams = @get('filterParams') || {}
+
+    params = Ember.merge filterParams, like: searchText
+
+    @get("content").set("params", Ember.copy(params))
