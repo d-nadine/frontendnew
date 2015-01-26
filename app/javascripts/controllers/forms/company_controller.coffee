@@ -11,15 +11,15 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
                   name: @get('companyName')
 
       company.one 'didCreate', (result) =>
-        addressBook = @get('controllers.addressbook.content')
-        addressBook.pushObject(company)
-
         addressbookController = @get('controllers.addressbook')
         addressbookController.send('updateTotals') if addressbookController
 
+        dataset = @get('controllers.addressbookCompanies.model')
+
+        dataset.insertAt 0, result
+
         @send 'flashSuccess', "#{@get('companyName')} created."
-        @send 'reset'
-        @transitionToRoute 'company', result
+        @trigger('formReset')
 
       company.one 'becameInvalid', (result) =>
         @set 'isSaving', false
@@ -41,7 +41,7 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
       Ember.run.next =>
         @trigger 'setupNewCompany'
 
-  needs: ['addressbook']
+  needs: ['addressbook', 'addressbookCompanies']
   companyName: ''
   company: null
   isSaving: false

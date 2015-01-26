@@ -11,8 +11,11 @@ Radium.FormsCompanyView = Radium.View.extend
     resetCompany: ->
       @get('controller').send 'reset'
       Ember.run.later =>
-        @$('input[type=text]').focus()
+        @$('input[type=text]').val('').focus()
       , 500
+
+  setup: Ember.on 'didInsertElement', ->
+    @get('controller').on('formReset', this, 'onFormReset')
 
   willDestroyElement: ->
     @get('controller').send 'reset'
@@ -41,3 +44,7 @@ Radium.FormsCompanyView = Radium.View.extend
       e.preventDefault()
       e.stopPropagation()
       false
+
+  onFormReset: ->
+    p "flappies"
+    @send 'resetCompany'
