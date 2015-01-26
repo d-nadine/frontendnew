@@ -48,7 +48,7 @@
               <p>Do you want to create a new deal?</p>
               {{#link-to "deals.fromContact" this class="btn btn-success"}}Yes{{/link-to}}
             {{else}}
-              <p><span>{{#link-to "contact" content}}{{displayName}}{{/link-to}}{{#if company}}, {{#link-to company company}}{{company.name}}{{/link-to}}{{/if}}</span> is not currently tracked, do you want track {{displayName}}?</p>
+              <p><span>{{resource-link-to content}}{{#if company}} of {{resource-link-to company}}{{/if}}</span> is not currently tracked, do you want track {{displayName}}?</p>
               <a href="#" class="btn" {{action "showExistingDetails" bubbles=false target="view"}}>
                 <i id="existingToggle" class="ss-standard ss-navigatedown"></i>
               </a>
