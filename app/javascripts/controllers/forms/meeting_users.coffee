@@ -6,13 +6,12 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
     @set 'startsAt', null
     @get('content').addArrayObserver(this)
 
-  startsAtDidChange: ( ->
+  startsAtDidChange: Ember.observer 'startsAt', ->
     return unless @get('startsAt') && @get('content.length')
     @get('meetings').clear()
 
     @get('content').forEach (user) =>
       @findMeetingsForUser(user)
-  ).observes('startsAt')
 
   arrayDidChange: (content, idx, removedCnt, addedCnt) ->
     if addedCnt > 0
@@ -23,7 +22,7 @@ Radium.MeetingUsers = Ember.ArrayProxy.extend
       @removeMeetingsForUser content[idx]
 
   activeMeetings: Ember.computed 'meetings.[]', 'meetings.@each.isDeleted', ->
-    @get('meetings').reject (meeting) => meeting.get('isDeleted') || meeting.get('isFinished')
+    @get('meetings').reject (meeting) -> meeting.get('isDeleted') || meeting.get('isFinished')
 
   findMeetingsForUser: (user) ->
     return unless @get('startsAt')

@@ -114,10 +114,10 @@ Ember.DateTime.reopen
   getRoundTime: ->
     minutes = @toJSDate().getMinutes()
 
-    roundUp = if minutes > 30
-                60 - minutes
-              else
-                30 - minutes
+    if minutes < 30
+      roundUp = 0 - minutes
+    else
+      roundUp = 30 - minutes
 
     @advance(minute: roundUp)
 

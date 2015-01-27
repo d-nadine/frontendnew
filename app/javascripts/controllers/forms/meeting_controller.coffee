@@ -199,9 +199,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   startsAtDidChange: Ember.observer 'startsAt', 'endsAt', 'model.startsAt', ->
     return unless @get('startsAt') && @get('endsAt')
 
-    Ember.DateTime.setRoundTime(this, 'startsAt')
-    Ember.DateTime.setRoundTime(this, 'endsAt')
-
     endsAtGreater = Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) != 1
 
     if (@get('endsAt').daysApart(@get('startsAt')) > 1) || endsAtGreater
@@ -226,3 +223,4 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   isExpandable: Ember.computed 'isNew', ->
     return false if @get('justAdded')
     !@get('isNew')
+
