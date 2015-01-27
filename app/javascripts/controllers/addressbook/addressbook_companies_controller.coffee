@@ -5,10 +5,6 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
   Radium.CompaniesColumnConfig,
 
   actions:
-    showMore: ->
-      return if @get('content.isLoading')
-      @get('model').expand()
-
     assignAll: (user) ->
       detail =
         user: user
@@ -27,3 +23,5 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
       false
 
   needs: ['addressbook', 'users', 'tags']
+
+  public: true

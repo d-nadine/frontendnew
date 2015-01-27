@@ -42,7 +42,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       bindings: [
         {name: "assignedTo", value: "assignedTo"},
         {name: "assignees", value: "assignees"},
-        {name: "company", value: "company"},
+        {name: "model", value: "model"},
       ]
     }]
   )

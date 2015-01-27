@@ -11,7 +11,7 @@
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
     {{#each assignee in assignees}}
       <li>
-        <a href="#" {{action "assignContact" controller.contact assignee}}>
+        <a href="#" {{action "assign" controller.model assignee}}>
           {{avatar assignee style="tiny"}}{{assignee.displayName}}
         </a>
       </li>

@@ -153,7 +153,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       bindings: [
         {name: "assignedTo", value: "assignedTo"},
         {name: "assignees", value: "assignees"},
-        {name: "contact", value: "contact"},
+        {name: "model", value: "model"},
       ]
     }
     {

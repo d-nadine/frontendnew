@@ -2,16 +2,16 @@ require 'mixins/components/position_dropdown'
 
 Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   actions:
-    assignContact: (contact, user) ->
-      contact.set 'user', user
+    assign: (model, user) ->
+      model.set 'user', user
 
-      contact.one 'didUpdate', =>
-        @send 'flashSuccess', "#{contact.get('displayName')} has been assigned to #{user.get('displayName')}"
+      model.one 'didUpdate', =>
+        @send 'flashSuccess', "#{model.get('displayName')} has been assigned to #{user.get('displayName')}"
 
-      contact.one 'becameInvalid', =>
-        @send 'flashError', contact
+      model.one 'becameInvalid', =>
+        @send 'flashError', model
 
-      contact.one 'bemameError', =>
+      model.one 'bemameError', =>
         @send 'an error has occurred and the assignment was not completed'
 
       @get('store').commit()

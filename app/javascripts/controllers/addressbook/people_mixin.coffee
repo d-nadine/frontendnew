@@ -1,5 +1,9 @@
 Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
   actions:
+    showMore: ->
+      return if @get('content.isLoading')
+      @get('model').expand()
+
     sort: (prop, ascending) ->
       model = @get("model")
       params = model.get("params")
@@ -34,7 +38,7 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
       job = detail.jobType.createRecord
              action:  action
              ids: ids
-             public: true
+             public: @get('public')
              filter: filter
 
       searchText = $.trim(@get('searchText') || '')
@@ -135,6 +139,6 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
 
     filterParams = @get('filterParams') || {}
 
-    params = Ember.merge filterParams, like: searchText
+    params = Ember.merge filterParams, like: searchText, public: @get('public')
 
     @get("content").set("params", Ember.copy(params))

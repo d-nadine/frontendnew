@@ -1,7 +1,18 @@
 #addressbook {
+  .existing-company {
+    clear: both;
+    margin-top: 10px;
+    margin-left: 25px;
+  }
+
   .companies .left-table .variadic-table {
     min-width: calc(100% - 276px);
   }
+
+  .table-container.companies, .table-container.untracked, .company-form {
+    margin-left: 15px;
+  }
+
   .companies .variadic-table thead tr {
     .open-deals {
       min-width: 120px;

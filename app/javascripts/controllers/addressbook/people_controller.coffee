@@ -122,10 +122,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
       false
 
-    showMore: ->
-      return if @get('content.isLoading')
-      @get('model').expand()
-
   needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company']
 
   users: Ember.computed.oneWay 'controllers.users'
@@ -148,6 +144,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
 
   newTags: Ember.A()
+
+  public: true
 
   isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
     return unless @get('isAssignedTo') && @get('user')
