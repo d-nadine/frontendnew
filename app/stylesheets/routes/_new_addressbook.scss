@@ -297,6 +297,11 @@
 
   .right-table {
     overflow: auto;
+
+    .variadic-table tr th:last-of-type,
+    .variadic-table tr td:last-of-type {
+      border-right: 1px solid #ddd;
+    }
   }
 
   .variadic-table {
@@ -734,3 +739,33 @@
     margin-right: 7px;
   }
 }
+
+.nav-tabs {
+  .active {
+    border-bottom: 1px solid $background;
+  }
+
+  a {
+    background: transparent !important;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      background: transparent;
+      border-bottom: 0px;
+    }
+
+    .badge {
+      background: #ccc;
+      color: #666;
+      padding: 3px 5px;
+      text-shadow: none;
+      margin-left: 4px;
+    }
+  }
+
+}
+
+
+

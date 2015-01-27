@@ -1,11 +1,40 @@
 #addressbook {
-  .untracked .left-table .variadic-table {
-    min-width: calc(100% - 376px);
-  }
-  .untracked .variadic-table thead tr {
+  .untracked {
+    margin-left: 0 !important;
+    width: 100% !important;
 
-  }
-  .untracked .variadic-table tbody tr {
+    .left-table {
+      width: 50%;
 
+      .variadic-table {
+        min-width: calc(100% - 376px);
+        width: 75%;
+      }
+
+      .name {
+        border-right: 1px solid #e6e6e6 !important;
+      }
+    }
+
+    .right-table {
+      .variadic-table {
+        width: 100%;
+      }
+
+      .untracked-actions {
+        width: 15% !important;
+        text-align: center;
+        padding-left: 0;
+
+        span {
+          display: inline-block;
+          padding: 0 5px;
+        }
+
+        a:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
