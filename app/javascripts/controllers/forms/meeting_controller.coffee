@@ -146,7 +146,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       if (reference.constructor is Radium.Contact) && reference.get('primaryEmail.value')
         @get('content.contacts').addObject(reference)
 
-  isEditable:( ->
+  isEditable: Ember.computed 'isSubmitted', 'isNew', 'justAdded', 'isFinished', 'isSaving', ->
     return false if @get('isSaving')
     return false if @get('isSubmitted')
     return true if @get('isNew')
@@ -155,46 +155,39 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     return true if @get('currentUser') is @get('organizer')
     return true unless @get('invitations.length')
     @get('invitations').find((invitation) => invitation.get('person') == @get('currentUser'))
-  ).property('isSubmitted', 'isNew', 'justAdded', 'isFinished', 'isSaving')
 
-  locations: ( ->
-    @get('companies').map (company) -> 
+  locations: Ember.computed 'companies.[]', ->
+    @get('companies').map (company) ->
       name = company.get('name')
       name += ", #{company.get('address')}" if company.get('address')
 
       Ember.Object.create(name: name)
-  ).property('companies.[]')
 
-  invited: ( ->
-     @get('invitations').map (invitation) -> invitation.get('person')
-  ).property('invitations.[]')
+  invited: Ember.computed 'invitations.[]', ->
+    @get('invitations').map (invitation) -> invitation.get('person')
 
-  showTopicTextBox: ( ->
+  showTopicTextBox: Ember.computed 'isNew', 'isDisabled', 'isExpanded','justAdded', ->
     return false if @get('justAdded')
     return true if @get('isNew')
     return false if @get('isDisabled')
     @get('isExpanded')
-  ).property('isNew', 'isDisabled', 'isExpanded','justAdded')
 
-  isValid: ( ->
+  isValid: Ember.computed 'topic', 'startsAt', 'endsAt', 'startsAtIsInvalid', 'endsAtIsInvalid', 'submitForm', ->
     return if Ember.isEmpty(@get('topic'))
     return if @get('startsAtIsInvalid')
     return if @get('startsAt').isBeforeToday()
     return if @get('endsAtIsInvalid')
 
     true
-  ).property('topic', 'startsAt', 'endsAt', 'startsAtIsInvalid', 'endsAtIsInvalid', 'submitForm')
 
-  startsAtIsInvalid: ( ->
+  startsAtIsInvalid: Ember.computed 'startsAt', ->
     now = Ember.DateTime.create().advance(minute: -5)
     Ember.DateTime.compare(@get('startsAt'), now)  == -1
-  ).property('startsAt')
 
-  endsAtIsInvalid: ( ->
+  endsAtIsInvalid: Ember.computed 'startsAt', 'endsAt', ->
     Ember.DateTime.compare(@get('endsAt'), @get('startsAt')) == -1
-  ).property('startsAt', 'endsAt')
 
-  cancellationText: ( ->
+  cancellationText: Ember.computed 'topic', 'isNew', 'participants.[]', ->
     return if @get('isNew') || !@get('model') || @get('isSaving')
 
     topic = @get('topic')
@@ -202,9 +195,8 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
     attendees = @get('attendees').map( (attendee) -> "@#{attendee.get('displayName')}").join(', ')
 
     "#{topic} with #{attendees} at #{@get('startsAt').toHumanFormatWithTime()}"
-  ).property('topic', 'isNew', 'participants.[]')
 
-  startsAtDidChange: ( ->
+  startsAtDidChange: Ember.observer 'startsAt', 'endsAt', 'model.startsAt', ->
     return unless @get('startsAt') && @get('endsAt')
 
     Ember.DateTime.setRoundTime(this, 'startsAt')
@@ -216,11 +208,10 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       @set('endsAt', @get('startsAt').advance(hour: 1))
 
     @set('meetingUsers.startsAt', @get('startsAt'))
-  ).observes('startsAt', 'endsAt', 'model.startsAt')
 
   participants: Radium.computed.aggregate('users', 'contacts')
 
-  attendees: ( ->
+  attendees: Ember.computed 'participants.[]', 'organizer', ->
     participants = @get('participants')
 
     attendees = participants.toArray()
@@ -231,10 +222,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       attendees.insertAt(0, organizer)
 
     attendees
-  ).property('participants.[]', 'organizer')
 
-  isExpandable: (->
+  isExpandable: Ember.computed 'isNew', ->
     return false if @get('justAdded')
     !@get('isNew')
-  ).property('isNew')
-
