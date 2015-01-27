@@ -3,8 +3,16 @@ require "controllers/leads/untracked_columns_config"
 
 Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixin,
   Radium.UntrackedColumnsConfig,
-
   actions:
+    trackAll: ->
+      detail =
+        jobType: Radium.BulkActionsJob
+        modelType: Radium.Contact
+        public: false
+
+      @send "executeActions", "track", detail
+      false
+
     deleteAll: ->
       detail =
         jobType: Radium.BulkActionsJob

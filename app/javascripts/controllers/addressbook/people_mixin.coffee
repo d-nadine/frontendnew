@@ -65,7 +65,6 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
         @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
         @send 'updateLocalRecords', job, detail
-
         @send 'updateTotals'
       ).catch =>
         @set 'working', false
@@ -86,9 +85,16 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
 
             @send localAction, model, job
 
-      return unless action == "delete"
-
       @get('controllers.addressbook').send 'updateTotals'
+
+
+    localTrack: (model, job) ->
+      @send 'setTracked', model, job, true
+
+    setTracked: (model, job, tracked) ->
+      model.unloadRecord()
+      dataset = @get('model')
+      dataset.removeObject model
 
     localDelete: (model, dataset) ->
       model.unloadRecord()
