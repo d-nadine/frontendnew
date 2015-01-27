@@ -21,7 +21,7 @@ Radium.LeadsImportRoute = Radium.Route.extend
 
       job.one 'didDelete', =>
         @send 'closeModal'
- 
+
         @send 'flashSuccess', "The job has been deleted"
 
         Ember.run.later ->

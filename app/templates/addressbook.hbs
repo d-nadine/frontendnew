@@ -13,19 +13,6 @@
           <span class="badge">{{companiesTotal}}</span>
         {{/link-to}}
       </li>
-      <li>
-        {{#link-to "addressbook.untracked"}}
-          <i class="custom-icon-google"></i> Untracked Contacts
-          <span class="badge">{{untrackedTotal}}</span>
-        {{/link-to}}
-      </li>
-      {{#unless currentUser.initialContactsImported}}
-      <li>
-        <a href="#">
-          <span class="badge contacts-importing">Importing</span>
-        </a>
-      </li>
-      {{/unless}}
     </ul>
   </div>
 </div>

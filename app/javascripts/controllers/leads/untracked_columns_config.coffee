@@ -65,6 +65,12 @@ Radium.UntrackedColumnsConfig = Ember.Mixin.create
         name: "model"
         value: "model"
       }]
+      actions: [
+        {
+          name: "track"
+          value: "track"
+        }
+      ]
     }
   ])
 

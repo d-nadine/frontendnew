@@ -1,12 +1,12 @@
-Radium.AddressbookCompaniesRoute = Radium.Route.extend
+Radium.LeadsUntrackedRoute = Radium.Route.extend
   actions:
     confirmDeletion: ->
-      controller = @controllerFor 'addressbookCompanies'
+      controller = @controllerFor 'leadsUntracked'
 
       unless controller.get('allChecked') || controller.get('checkedContent.length')
         return @send 'flashError', "You have not selected any items."
 
-      @render 'addressbook/deletion_confirmation',
+      @render 'leads/deletion_confirmation',
         into: 'application',
         outlet: 'modal',
 
@@ -17,5 +17,5 @@ Radium.AddressbookCompaniesRoute = Radium.Route.extend
 
   model: ->
     Radium.InfiniteDataset.create
-      type: Radium.Company
-      params: {}
+      type: Radium.Contact
+      params: {private: true}

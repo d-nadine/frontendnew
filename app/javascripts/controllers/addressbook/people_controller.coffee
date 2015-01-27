@@ -99,6 +99,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       detail =
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
+        public: true
 
       @send "executeActions", "delete", detail
       false
@@ -201,12 +202,3 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
     checked = @get('checkedColumns').filter((c) -> c.checked).mapProperty 'id'
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
-
-  totalRecords: Ember.computed 'content.source.content.meta', ->
-    @get('content.source.content.meta.totalRecords')
-
-  checkedTotal: Ember.computed 'totalRecords', 'checkedContent.length', 'allChecked', 'working', ->
-    if @get('allChecked')
-      @get('totalRecords')
-    else
-      @get('checkedContent.length')

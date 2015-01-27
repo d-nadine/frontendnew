@@ -10,6 +10,19 @@
     {{#link-to "leads.import" href=false tagName="li"}}
       <a href="#">Import contacts from file</a>
     {{/link-to}}
+    {{#link-to "leads.untracked" href=false tagName="li"}}
+      <a href="#">
+        Import contacts from google
+        <span class="badge">{{untrackedTotal}}</span>
+      </a>
+    {{/link-to}}
+    {{#unless currentUser.initialContactsImported}}
+      <li>
+        <a href="#">
+          <span class="badge contacts-importing">Importing</span>
+        </a>
+      </li>
+    {{/unless}}
   </ul>
 </div>
 

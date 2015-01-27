@@ -65,59 +65,70 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
         @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
         @send 'updateLocalRecords', job, detail
-        @send 'updateTotals'
 
-        return unless action == "delete"
-        @get('controllers.addressbook').send 'updateTotals'
+        @send 'updateTotals'
       ).catch =>
         @set 'working', false
 
     updateLocalRecords: (job, detail) ->
       ids = @get('checkedContent').mapProperty 'id'
       action = job.get('action')
-
-      store = @get('store')
-      serializer = @get('store._adapter.serializer')
-      loader = DS.loaderFor(store)
       dataset = @get('model')
 
-      ids.forEach (id) ->
+      for id in ids by -1
         model = detail.modelType.all().find (c) -> c.get('id') + '' == id
 
         if model
           if action == "delete"
-            model.unloadRecord()
-            dataset.removeObject model
+            @send 'localDelete', model, dataset
           else
-            data = model.get('_data')
-            if action == "assign"
-              return model.updateLocalBelongsTo 'user', job.get('assignedTo')
+            localAction = "local#{action.capitalize()}"
 
-            if action == "status"
-              return model.updateLocalBelongsTo 'contactStatus', job.get('status')
+            @send localAction, model, job
 
-            if action == "tag"
-              references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
-              newTagId = job.get('newTags.firstObject')
-              tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+      return unless action == "delete"
 
-              unless references.any((tag) -> tag.id == newTagId)
-                references.push id: newTagId, type: Radium.Tag
+      @get('controllers.addressbook').send 'updateTotals'
 
-                tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
-                tagName.parent = model.get('_reference')
-                data.tagNames.push tagName
+    localDelete: (model, dataset) ->
+      model.unloadRecord()
+      dataset.removeObject model
 
-              references = model._convertTuplesToReferences(references)
-              data['tags'] = references
+    localAssign: (model, job) ->
+      model.updateLocalBelongsTo 'user', job.get('assignedTo')
 
+    localStatus: (model, job) ->
+      model.updateLocalBelongsTo 'contactStatus', job.get('status')
 
-            model.set('_data', data)
+    localTag: (model, job) ->
+      data = model.get('_data')
+      store = @get('store')
+      serializer = @get('store._adapter.serializer')
+      loader = DS.loaderFor(store)
 
-            model.suspendRelationshipObservers ->
-              model.notifyPropertyChange 'data'
+      references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
 
-            model.updateRecordArrays()
+      newTagId = job.get('newTags.firstObject')
+
+      tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+
+      unless references.any((tag) -> tag.id == newTagId)
+        references.push id: newTagId, type: Radium.Tag
+
+      tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
+
+      tagName.parent = model.get('_reference')
+      data.tagNames.push tagName
+
+      references = model._convertTuplesToReferences(references)
+      data['tags'] = references
+
+      model.set('_data', data)
+
+      model.suspendRelationshipObservers ->
+        model.notifyPropertyChange 'data'
+
+      model.updateRecordArrays()
 
   users: Ember.computed.oneWay 'controllers.users'
 

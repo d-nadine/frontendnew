@@ -18,3 +18,13 @@ Radium.AddressbookDeletionConfirmationController = Radium.ObjectController.exten
 
   checkedTotal: Ember.computed.alias 'controllers.addressbookCompanies.checkedTotal'
 
+Radium.LeadsDeletionConfirmationController = Radium.ObjectController.extend
+  actions:
+    deleteAll: ->
+      @send 'close'
+      @get('controllers.leadsUntracked').send 'deleteAll'
+
+  needs: ['leadsUntracked']
+
+  checkedTotal: Ember.computed.alias 'controllers.leadsUntracked.checkedTotal'
+
