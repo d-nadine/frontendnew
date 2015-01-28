@@ -39,6 +39,7 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
              action:  action
              ids: ids
              public: @get('public')
+             private: @get('private')
              filter: filter
 
       searchText = $.trim(@get('searchText') || '')
@@ -86,15 +87,6 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
             @send localAction, model, job
 
       @get('controllers.addressbook').send 'updateTotals'
-
-
-    localTrack: (model, job) ->
-      @send 'setTracked', model, job, true
-
-    setTracked: (model, job, tracked) ->
-      model.unloadRecord()
-      dataset = @get('model')
-      dataset.removeObject model
 
     localDelete: (model, dataset) ->
       model.unloadRecord()
@@ -156,6 +148,6 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
 
     filterParams = @get('filterParams') || {}
 
-    params = Ember.merge filterParams, like: searchText, public: @get('public')
+    params = Ember.merge filterParams, like: searchText, public: @get('public'), private: @get('private')
 
     @get("content").set("params", Ember.copy(params))

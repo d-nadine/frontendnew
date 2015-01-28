@@ -46,5 +46,4 @@ Radium.FormsCompanyView = Radium.View.extend
       false
 
   onFormReset: ->
-    p "flappies"
     @send 'resetCompany'

@@ -9,6 +9,7 @@ Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixi
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
         public: false
+        private: true
 
       @send "executeActions", "track", detail
       false
@@ -18,9 +19,17 @@ Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixi
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
         public: false
+        private: true
 
       @send "executeActions", "delete", detail
       false
+
+    localTrack: (contact, dataset) ->
+      @get('model').removeObject contact
+      contact.set 'checked', false
+      @get('controllers.peopleIndex.model').pushObject contact
+      Ember.run.next ->
+        contact.set 'isChecked', false
 
     track: (contact) ->
       track = Radium.TrackedContact.createRecord
@@ -32,6 +41,8 @@ Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixi
         dataset = @get('model')
 
         dataset.removeObject(contact)
+
+        @get('controllers.peopleIndex.model').pushObject contact
 
         @get('addressbook').send 'updateTotals'
 
@@ -52,8 +63,9 @@ Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixi
       @store.commit()
 
   searchText: "",
-  needs: ['addressbook']
+  needs: ['addressbook', 'peopleIndex']
 
   addressbook: Ember.computed.oneWay "controllers.addressbook"
 
   public: false
+  private: true

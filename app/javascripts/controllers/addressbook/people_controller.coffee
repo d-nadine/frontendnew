@@ -3,6 +3,22 @@ require "controllers/addressbook/people_mixin"
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
+    unTrackAll: ->
+      detail =
+        jobType: Radium.BulkActionsJob
+        modelType: Radium.Contact
+        public: false
+        private: true
+
+      @send "executeActions", "untrack", detail
+      false
+
+    localUntrack: (contact, dataset) ->
+      Ember.run.next ->
+        contact.set 'isChecked', false
+      @get('model').removeObject contact
+      @get('controllers.leadsUntracked.model').pushObject contact
+
     saveTag: (newTag) ->
       tagNames = @get('tags').mapProperty('name').map((name) -> name.toLowerCase()).toArray()
 
@@ -100,6 +116,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
         public: true
+        private: false
 
       @send "executeActions", "delete", detail
       false
@@ -123,7 +140,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
       false
 
-  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company']
+  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'leadsUntracked']
 
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
@@ -147,6 +164,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   newTags: Ember.A()
 
   public: true
+  private: false
 
   isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
     return unless @get('isAssignedTo') && @get('user')
@@ -175,6 +193,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   filterParams: Ember.computed 'filter', 'user', 'tag', 'company', 'contactimportjob', ->
     params =
       public: true
+      private: false
       filter: @get('filter')
       page_size: @get('pageSize')
 
