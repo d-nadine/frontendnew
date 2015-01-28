@@ -279,7 +279,8 @@ Radium.RESTAdapter.configure('plurals',{
   conversations_totals: 'conversations_totals',
   contacts_totals: 'contacts_totals',
   track_all_contacts: 'track_all_contacts',
-  contact_status: 'contact_statuses'
+  contact_status: 'contact_statuses',
+  untracked_contacts_totals: 'untracked_contacts_totals'
 });
 
 Radium.RESTAdapter.registerTransform('object', {

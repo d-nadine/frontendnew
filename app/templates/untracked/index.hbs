@@ -7,8 +7,6 @@
             <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
               {{#unless content.isLoading}}
                 {{checkedTotal}}
-              {{else}}
-                111
               {{/unless}}
             </span>
             <span class="divider">/</span>
@@ -45,6 +43,43 @@
       <div class="col-selector">
         {{input type="text" value=searchText class="searchbox" placeholder="search"}}
       </div>
+    </div>
+    <div class="contacts-sidebar">
+      <ul class="nav nav-pills">
+        <li {{bind-attr class="isFiltered:active"}}>
+          {{#link-to "untracked.index" "filtered"}}
+          <div class="nav-pills-left">
+            <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
+            <span>Filtered</span>
+          </div>
+          <div class="nav-pills-right">
+            <span>{{filtered}}</span>
+          </div>
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isAll:active"}}>
+          {{#link-to "untracked.index" "all"}}
+          <div class="nav-pills-left">
+            <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
+            <span>All</span>
+          </div>
+          <div class="nav-pills-right">
+            <span>{{all}}</span>
+          </div>
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isSpam:active"}}>
+          {{#link-to "untracked.index" "spam"}}
+          <div class="nav-pills-left">
+            <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
+            <span>Spam</span>
+          </div>
+          <div class="nav-pills-right">
+            <span>{{spam}}</span>
+          </div>
+          {{/link-to}}
+        </li>
+      </ul>
     </div>
     <div class="table-container untracked">
       <div class="left-table">

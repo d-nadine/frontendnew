@@ -22,9 +22,9 @@ Radium.LeadsDeletionConfirmationController = Radium.ObjectController.extend
   actions:
     deleteAll: ->
       @send 'close'
-      @get('controllers.leadsUntracked').send 'deleteAll'
+      @get('controllers.untrackedIndex').send 'deleteAll'
 
-  needs: ['leadsUntracked']
+  needs: ['untrackedIndex']
 
-  checkedTotal: Ember.computed.alias 'controllers.leadsUntracked.checkedTotal'
+  checkedTotal: Ember.computed.alias 'controllers.untrackedIndex.checkedTotal'
 

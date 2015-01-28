@@ -1,9 +1,16 @@
 require "controllers/addressbook/people_mixin"
 require "controllers/leads/untracked_columns_config"
 
-Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixin,
+Radium.UntrackedIndexController = Ember.ArrayController.extend Radium.PeopleMixin,
   Radium.UntrackedColumnsConfig,
   actions:
+    updateTotals: ->
+      Radium.UntrackedContactsTotals.find({}).then (results) =>
+        totals = results.get('firstObject')
+        @set 'all', totals.get('all')
+        @set 'filtered', totals.get('filtered')
+        @set 'spam', totals.get('spam')
+
     trackAll: ->
       detail =
         jobType: Radium.BulkActionsJob
@@ -69,3 +76,17 @@ Radium.LeadsUntrackedController = Ember.ArrayController.extend Radium.PeopleMixi
 
   public: false
   private: true
+
+  filter: null
+
+  isFiltered: Ember.computed.equal 'filter', 'filtered'
+  isAll: Ember.computed.equal 'filter', 'all'
+  isSpam: Ember.computed.equal 'filter', 'spam'
+
+  filterParams: Ember.computed 'filter', ->
+    params =
+      public: false
+      private: true
+      filter: @get('filter')
+
+    params

@@ -37,7 +37,8 @@ Radium.Router.map ->
   @resource 'leads', ->
     @route 'new'
     @route 'import'
-    @route 'untracked'
+    @resource 'untracked', ->
+      @route 'index', path: '/:filter'
     @route 'match'
     @route 'fromCompany', path: '/new/companies/:company_id'
 

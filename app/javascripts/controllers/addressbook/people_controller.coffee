@@ -17,7 +17,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       Ember.run.next ->
         contact.set 'isChecked', false
       @get('model').removeObject contact
-      @get('controllers.leadsUntracked.model').pushObject contact
+      @get('controllers.untrackedIndex.model').pushObject contact
 
     saveTag: (newTag) ->
       tagNames = @get('tags').mapProperty('name').map((name) -> name.toLowerCase()).toArray()
@@ -140,7 +140,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
       false
 
-  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'leadsUntracked']
+  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex']
 
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
