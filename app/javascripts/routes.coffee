@@ -74,6 +74,7 @@ Radium.Router.map ->
     @route 'profile'
     @route 'company'
     @route 'billing'
+    @route 'general'
     @route 'api'
     @route 'customFields', path: 'custom-fields'
     @route 'leadSources', path: 'lead-sources'

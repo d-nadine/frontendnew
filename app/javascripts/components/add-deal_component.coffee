@@ -24,9 +24,6 @@ Radium.AddDealComponent = Ember.Component.extend
   isNew: Ember.computed 'targetObject.id', ->
     not !!@get('targetObject.id')
 
-  store: Ember.computed ->
-    @get('container').lookup('store:main')
-
   isSubmitted: false
 
   dealsExist: Ember.computed ->

@@ -6,9 +6,6 @@ Radium.FileUploaderComponent = Ember.TextField.extend Radium.UploadingMixin,
   attributeBindings: ['multiple']
   multiple: true
 
-  store: Ember.computed ->
-    this.container.lookup "store:main"
-
   change: (e) ->
     files = e.target.files
     return if Ember.isEmpty(files)

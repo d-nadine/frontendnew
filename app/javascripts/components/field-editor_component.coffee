@@ -69,9 +69,6 @@ Radium.FieldEditorComponent = Ember.Component.extend
 
     @send 'save'
 
-  store: Ember.computed ->
-    @get('container').lookup('store:main')
-
   currentUser: Ember.computed ->
     @get('container').lookup('controller:currentUser').get('model')
 

@@ -11,3 +11,4 @@ Radium.Account = Radium.Model.extend
   importedContactsGlobal: DS.attr('boolean')
 
   billing: DS.belongsTo('Radium.Billing')
+  currency: "GB"

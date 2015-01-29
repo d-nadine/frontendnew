@@ -6,12 +6,8 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
     BufferedObjectProxy.create content: @get 'note'
   )
 
-  store: Ember.computed ->
-    this.container.lookup "store:main"
-
-  setup: (->
+  setup: Ember.on 'didInsertElement', ->
     Ember.oneWay this, 'hasFocus', 'isEditing'
-  ).on 'didInsertElement'
 
   ##
   # NoteEditor listens for focus out from its input so that it can

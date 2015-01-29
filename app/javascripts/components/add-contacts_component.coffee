@@ -15,9 +15,6 @@ Radium.AddContactsComponent = Ember.Component.extend
 
       @get('store').commit()
 
-  store: Ember.computed ->
-    @get('container').lookup('store:main')
-
   isEditable: true
 
   contactsPicker: Radium.AsyncAutocompleteView.extend

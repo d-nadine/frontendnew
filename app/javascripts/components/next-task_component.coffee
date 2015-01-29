@@ -47,9 +47,6 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
     showTodoModal: ->
       @$('.modal').modal(backdrop: false)
 
-  store: Ember.computed ->
-    @get('container').lookup 'store:main'
-
   needs: ['users']
 
   setupCustom: ->

@@ -97,9 +97,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   bufferedProxy: Ember.computed 'model', ->
     BufferedObjectProxy.create content: @get('model')
 
-  store: Ember.computed ->
-    @container.lookup "store:main"
-
   route: Ember.computed "model", 'alternativeRoute', ->
     routable = if alternative = @get('alternativeRoute')
                  if alternative = @get('model').get(alternative)

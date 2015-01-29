@@ -16,6 +16,3 @@ Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownM
 
       @get('store').commit()
       false
-
-  store: Ember.computed ->
-    @get('container').lookup('store:main')

@@ -38,6 +38,3 @@ Radium.FollowFeedComponent = Ember.Component.extend
     return true if @get('user') == @get('followable')
 
     @get('followable.followers').contains @get('user')
-
-  store: Ember.computed ->
-    this.container.lookup "store:main"
