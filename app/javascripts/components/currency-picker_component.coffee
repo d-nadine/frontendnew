@@ -14,5 +14,5 @@ Radium.CurrencyPickerComponent = Ember.Component.extend
 
   currencies: Radium.Currencies
 
-  currentCurrency: Ember.computed 'currentUser', ->
+  currentCurrency: Ember.computed 'currentUser.account.currency', ->
     Radium.Currencies.find (c) => c.key == @get('currentUser.account.currency')

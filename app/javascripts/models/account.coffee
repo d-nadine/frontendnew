@@ -9,6 +9,6 @@ Radium.Account = Radium.Model.extend
   trialDaysLeft: DS.attr('number')
   unlimited: DS.attr('boolean')
   importedContactsGlobal: DS.attr('boolean')
+  currency: DS.attr('string')
 
   billing: DS.belongsTo('Radium.Billing')
-  currency: "GB"
