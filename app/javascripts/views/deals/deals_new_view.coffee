@@ -57,8 +57,8 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
     classNameBindings: ['isValid','isInvalid', 'valueInvalid', ':deal-value', ':field', ':control-box']
 
     template: Ember.Handlebars.compile """
-      <span  class="text dollar">$</span>
-      {{input value=value type="number" class="field input-medium negotitating"}}
+      <span  class="text dollar">{{currencySymbol}}</span>
+      {{input value=value type="text" class="field input-medium negotitating"}}
       {{#if view.valueInvalid}}
         <span class="error"><i class="ss-standard ss-alert"></i>Value must be greater than 0.</span>
       {{/if}}

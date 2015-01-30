@@ -18,6 +18,5 @@ Radium.SidebarAmountController = Radium.SidebarBaseController.extend
 
   isValid: Ember.computed.bool 'form.value'
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.AmountForm.create()
-  ).property()

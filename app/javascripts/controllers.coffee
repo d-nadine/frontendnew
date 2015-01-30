@@ -13,7 +13,7 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
 
       false
 
-  needs: ['clock', 'application']
+  needs: ['clock', 'application', 'account']
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
@@ -23,6 +23,9 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   plan: Ember.computed.alias 'currentUser.account.billing.subscriptionPlan.planId'
   emailIsValid: (email) ->
     Radium.EMAIL_REGEX.test email
+
+  currencySymbol: Ember.computed 'controllers.account.accountCurrency', ->
+    @get('controllers.account.accountCurrency').symbol
 
 Radium.ArrayController = Ember.ArrayController.extend ControllerMixin
 Radium.Controller = Ember.Controller.extend ControllerMixin

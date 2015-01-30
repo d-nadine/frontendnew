@@ -42,7 +42,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
 
     @setFilesOnModel(deal)
 
-    @get('checklist').forEach (item) =>
+    @get('checklist').forEach (item) ->
       deal.get('checklist').createRecord item.getProperties('kind', 'description', 'weight', 'date', 'isFinished')
 
     deal

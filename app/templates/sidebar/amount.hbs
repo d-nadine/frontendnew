@@ -9,7 +9,7 @@
     {{#if isEditing}}
       <div {{bind-attr class="isValid:success:error :control-group"}}>
         <div class="input-prepend">
-          <span class="add-on">$</span>
+          <span class="add-on">{{currencySymbol}}</span>
           {{input value=form.value class="span2" type="number" min="0"}}
         </div>
       </div>

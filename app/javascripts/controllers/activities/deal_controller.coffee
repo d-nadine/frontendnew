@@ -18,7 +18,7 @@ Radium.ActivitiesDealController = Radium.ActivityBaseController.extend Radium.Ac
   status: Ember.computed.alias 'meta.status'
   isNegotiating: Ember.computed.alias 'meta.negotiating'
 
-  icon: (->
+  icon: Ember.computed 'event', ->
     switch @get('event')
       when 'create' then 'plus'
       when 'delete' then 'delete'
@@ -30,11 +30,9 @@ Radium.ActivitiesDealController = Radium.ActivityBaseController.extend Radium.Ac
       when 'publish' then 'write'
       when 'reopen' then 'plus'
       when "email_added" then 'mail'
-  ).property('event')
 
-  eventName: (->
+  eventName: Ember.computed 'event', ->
     switch @get('event')
       when 'close' then 'closed'
       when 'lose' then 'lost'
       else @get('event')
-  ).property('event')

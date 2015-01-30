@@ -32,7 +32,7 @@
               {{#if isEditing}}
                 <div {{bind-attr class="view.isValid:success:error :control-group"}}>
                   <div class="input-prepend">
-                    <span class="add-on">$</span>
+                    <span class="add-on">{{currencySymbol}}</span>
                     {{input type="number" value=view.value class="field span2" min="0"}}
                   </div>
                 </div>
