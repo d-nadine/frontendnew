@@ -212,3 +212,4 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('countries').set 'model', Ember.A(['USA', 'Canada'])
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()
+    @controllerFor('addressbook').send('updateTotals')

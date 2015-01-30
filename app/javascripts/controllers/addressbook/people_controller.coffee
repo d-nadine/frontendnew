@@ -145,6 +145,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
+  contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
 
   queryParams: ['user', 'tag', 'company', 'contactimportjob']
   user: null
