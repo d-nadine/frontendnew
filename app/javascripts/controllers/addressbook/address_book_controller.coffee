@@ -9,3 +9,7 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.BulkActionCo
         @set 'contactsTotal', totals.get('contacts')
         @set 'companiesTotal', totals.get('companies')
         @set 'untrackedTotal', totals.get('untracked')
+
+        @set 'noContacts', totals.get('contacts') == 0
+
+  noContacts: false

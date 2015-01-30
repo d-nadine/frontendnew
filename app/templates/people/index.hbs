@@ -210,8 +210,7 @@
     {{/if}}
   </div>
   {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
-  {{log contactsTotal}}
-  {{#unless contactsTotal}}
+  {{#if noContacts}}
     <div class="message">
       <i class="ss-standard ss-user"></i>
       <h1>Add your first contact</h1>
@@ -221,5 +220,5 @@
         {{#link-to "untracked.index" "filtered" class="btn btn-primary btn-large"}}Import from Google{{/link-to}}
       </div>
     </div>
-  {{/unless}}
+  {{/if}}
 </div>

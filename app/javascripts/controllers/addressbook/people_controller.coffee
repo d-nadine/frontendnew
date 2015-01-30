@@ -142,6 +142,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex']
 
+  noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
+
   users: Ember.computed.oneWay 'controllers.users'
   tags: Ember.computed.oneWay 'controllers.tags'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'

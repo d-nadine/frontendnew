@@ -49,7 +49,7 @@ Radium.LeadsNewController= Radium.ObjectController.extend Radium.TrackContactMix
 
   totalsPoller: null
 
-  Name: Ember.computed 'model.name', (key, value)->
+  name: Ember.computed 'model.name', (key, value)->
     if arguments.length == 2 && @get('model').constructor isnt Radium.Contact
       @set('model.name', value)
     else
