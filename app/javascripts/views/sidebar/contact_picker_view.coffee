@@ -8,3 +8,6 @@ Radium.SidebarContactPickerView = Radium.InlineEditorView.extend
     valueBinding: 'controller.form.contact'
     placeholder: 'Choose a contact'
     isSubmitted: true
+    setValue: (object) ->
+      @_super.apply this, arguments
+      @get('controller').send 'commit'

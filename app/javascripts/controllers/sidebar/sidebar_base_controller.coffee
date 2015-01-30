@@ -29,11 +29,8 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
 
       return unless model.get('isDirty')
 
-      model.one 'becameInvalid', (result) ->
-        @send 'flashError', result
-
-      model.one 'bacameError', ->
-        @send 'flashError', 'An error has occurred and the update did not occur.'
+      model.save(this).then (result) =>
+        @send 'stopEditing'
 
       if @updateHook
         model.one 'didUpdate', (result) =>

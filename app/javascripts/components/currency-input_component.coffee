@@ -1,7 +1,9 @@
 Radium.CurrencyInputComponent = Ember.TextField.extend
   actions:
     formatValue: ->
-      accountCurrency = @get('accountCurrency')
+      return if @isDestroyed || @isDestroying
+
+      accountCurrency = accountController = @get('container').lookup('controller:account').get('accountCurrency')
 
       settings =
         precision: accountCurrency.precision
@@ -14,10 +16,6 @@ Radium.CurrencyInputComponent = Ember.TextField.extend
 
   type: "text"
   timeout: 1000
-
-  accountCurrency: Ember.computed ->
-    accountController = @get('container').lookup('controller:account')
-    accountController.get('accountCurrency')
 
   timeoutReference: null
 
