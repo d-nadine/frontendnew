@@ -47,7 +47,9 @@ Radium.LeadsNewController= Radium.ObjectController.extend Radium.TrackContactMix
   workflowStates: Ember.computed.alias 'controllers.accountSettings.workflowStates'
   form: null
 
-  name: Ember.computed 'model.name', (key, value)->
+  totalsPoller: null
+
+  Name: Ember.computed 'model.name', (key, value)->
     if arguments.length == 2 && @get('model').constructor isnt Radium.Contact
       @set('model.name', value)
     else

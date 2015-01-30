@@ -3,7 +3,7 @@ Radium.AddressbookTotalsPoller = Ember.Object.extend Radium.PollerMixin,
 
   onPoll: ->
     currentUser = @get('currentUser')
-    controller = @get('controller')
+    controller = @get('controller.controllers.addressbook')
 
     Ember.assert 'must supply current user', currentUser
     Ember.assert 'must supply a controller', controller

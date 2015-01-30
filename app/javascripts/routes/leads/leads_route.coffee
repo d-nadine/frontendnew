@@ -12,7 +12,7 @@ Radium.LeadsRoute = Ember.Route.extend
 
     poller.set 'currentUser', currentUser
     poller.start()
-    controller.set 'totalsPoller', poller
+    @controllerFor('leadsNew').set 'totalsPoller', poller
 
   deactivate: ->
     @_super.apply this, arguments
