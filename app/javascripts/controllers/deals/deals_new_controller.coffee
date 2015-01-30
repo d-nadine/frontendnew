@@ -63,7 +63,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     checklist = @get('model.checklist')
     checklist.clear()
 
-    checklist.pushObjects selectedChecklist.map (checkListItem) =>
+    checklist.pushObjects selectedChecklist.map (checkListItem) ->
                                                 Ember.Object.create checkListItem.serialize()
 
     checklist
@@ -80,10 +80,9 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     return false if Ember.isEmpty(@get('user'))
     return false if Ember.isEmpty(@get('description'))
 
-    dealValue = @get('value')
+    dealValue = accounting.unformat @get('value')
 
     return false if Ember.isEmpty(dealValue)
     return false if parseInt(dealValue) == 0
-    return false unless dealValue.isCurrency()
 
     true

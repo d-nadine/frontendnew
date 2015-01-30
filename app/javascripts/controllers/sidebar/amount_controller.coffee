@@ -16,7 +16,16 @@ Radium.SidebarAmountController = Radium.SidebarBaseController.extend
     setForm: ->
       @set 'form.value', @get('model.value')
 
-  isValid: Ember.computed.bool 'form.value'
+    setProperties: ->
+      model = @get('model')
+
+      amount = accounting.unformat @get('form.value')
+      model.set 'value', amount
+
+  isValid: Ember.computed 'form.value', ->
+    value = accounting.unformat @get('form.value')
+
+    parseInt(value) != 0
 
   form: Ember.computed ->
     Radium.AmountForm.create()

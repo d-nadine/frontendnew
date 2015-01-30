@@ -10,7 +10,7 @@ Radium.DealForm = Radium.Form.extend Radium.ChecklistTotalMixin,
     description: @get('description')
     source: @get('source')
     status: @get('status')
-    value: @get('value')
+    value: accounting.unformat(@get('value'))
     poNumber: @get('poNumber')
     isPublished: @get('isPublished')
     expectedCloseDate: @get('expectedCloseDate')
