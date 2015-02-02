@@ -28,19 +28,3 @@ Radium.FlashNewViewMixin = Ember.Mixin.create
 
       Ember.run.scheduleOnce 'afterRender', this, 'scrollToTask'
     , 1000)
-
-  scrollToTask: ->
-    return unless @$()
-
-    top = @$().offset().top - 100
-
-    Ember.$("body,html").animate
-      scrollTop: top,
-        duration: 500
-        complete: =>
-          unless controller = @get('controller')
-            return
-
-          return if controller.isDestroyed
-
-          controller.set('isExpanded', true) if @get('controller')
