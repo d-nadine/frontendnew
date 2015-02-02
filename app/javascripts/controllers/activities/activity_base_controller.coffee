@@ -1,7 +1,7 @@
 Radium.ActivityBaseController = Radium.ObjectController.extend
   needs: ['application', 'user']
 
-  avatarReference: Ember.computed 'user', 'reference', ->
+  avatarReference: Ember.computed 'user', 'reference', 'reference.isLoaded', ->
     reference = @get('reference')
 
     return @get('user') unless reference && reference.constructor is Radium.Contact
