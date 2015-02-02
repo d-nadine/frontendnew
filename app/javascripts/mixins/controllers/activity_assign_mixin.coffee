@@ -17,6 +17,7 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
     ).catch (result) ->
       # pretty hacky but until the email_id is separated
       # from the meta field, then it will do
+      return if result.constructor is Error
       return if result.constructor != Radium.Email && !result.get('isError')
       activity.deleteRecord()
       store.commit()

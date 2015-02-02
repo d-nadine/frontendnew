@@ -148,6 +148,8 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
 
     filterParams = @get('filterParams') || {}
 
-    params = Ember.merge filterParams, like: searchText, public: @get('public'), private: @get('private')
+    params = Ember.merge filterParams, like: searchText, public: @get('public'), private: @get('private'), page_size: @get('pageSize')
 
     @get("content").set("params", Ember.copy(params))
+
+  pageSize: 25
