@@ -163,15 +163,20 @@
           </div>
         {{/link-to}}
       </li>
-      {{#each tags itemController="peopleTagItem"}}
-        <li {{bind-attr class="isCurrent:active"}}>
-          <a class="tag" href="#" {{action "showTagsContacts" this}}>
+      {{#each tag in tags itemController="peopleTagItem"}}
+        <li {{bind-attr class="tag.isCurrent:active :tag-item"}}>
+          <a class="tag" href="#" {{action "showTagsContacts" tag}}>
             <div class="nav-pills-left">
               <i>&nbsp;</i>
-              <span>{{name}}</span>
+              <span>{{tag.name}}</span>
             </div>
-            <div class="nav-pills-right">
-              <span>{{contactsTotal}}</span>
+            <div class="nav-pills-right total">
+              <span>{{tag.contactsTotal}}</span>
+            </div>
+            <div class="nav-pills-right delete">
+              <span>
+                <i class="ss-standard ss-trash" {{action "deleteTag" tag bubbles=false}}></i>
+              </span>
             </div>
           </a>
         </li>

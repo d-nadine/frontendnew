@@ -23,7 +23,7 @@ Radium.MultipleBaseView = Radium.View.extend
         <div class="controls" {{bind-attr class="isInvalid"}}>
           {{#if showDelete}}
             <div class="pull-right">
-              <a href="#" {{action "removeSelection" this bubbles="false"}} class="btn btn-link btn-remove-field">
+              <a href="#" {{action "removeSelection" this bubbles=false}} class="btn btn-link btn-remove-field">
                 <i class="ss-symbolicons-block ss-trash"></i>
               </a>
             </div>
@@ -51,12 +51,12 @@ Radium.MultipleBaseView = Radium.View.extend
           {{/if}}
           <div class="add-new">
             {{#if showAddNew}}
-              <a href="#" {{action "addNew" bubbles="false"}} class="btn btn-link btn-remove-field">
+              <a href="#" {{action "addNew" bubbles=false}} class="btn btn-link btn-remove-field">
                 <i class="ss-standard ss-plus"></i> Add New
               </a>
             {{/if}}
             {{#if showAddNewAddress}}
-              <a href="#" {{action "addNew" bubbles="false"}} class="btn btn-link btn-remove-field">
+              <a href="#" {{action "addNew" bubbles=false}} class="btn btn-link btn-remove-field">
                 <i class="ss-standard ss-plus"></i> Add New
               </a>
             {{/if}}

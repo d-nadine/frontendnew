@@ -140,6 +140,17 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
       false
 
+    deleteTag: (tag) ->
+      tagName = tag.get('name')
+      tagId = tag.get('id')
+
+      tag.delete(this).then =>
+        @send 'flashSuccess', "The tag #{tagName} has been deleted."
+
+        @transitionToRoute "people.index", "all" if @tag == tagId
+
+      false
+
   needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'

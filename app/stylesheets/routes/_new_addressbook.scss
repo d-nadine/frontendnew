@@ -236,6 +236,35 @@
     float: left;
   }
 
+  .contacts-sidebar .tag-item {
+    .nav-pills-right {
+      position: relative;
+    }
+
+    .nav-pills-right.total {
+      display: block;
+    }
+
+    .nav-pills-right.delete {
+      display: none;
+
+      .ss-trash {
+        position: relative;
+        top: 2px;
+      }
+    }
+
+    &:hover {
+      .nav-pills-right.total {
+        display: none;
+      }
+
+      .nav-pills-right.delete {
+        display: inline-block;
+      }
+    }
+  }
+
   .nav-pills-right span {
     background: #ddd;
     border-radius: 30px;

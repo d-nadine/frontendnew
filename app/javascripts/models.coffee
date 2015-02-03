@@ -18,10 +18,13 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     new Ember.RSVP.Promise (resolve, reject) ->
       self.deleteRecord()
 
-      self.one 'didDelete', (result) ->
-        resolve.call context, result
+      self.one 'didDelete', ->
+        resolve.call context
 
-      self.addErrorHandlers(context, reject)
+      self.one 'becameError', ->
+        context.send 'flashError', 'An error has occured and the deletion could not be completed.'
+
+        reject.call context
 
       self.get('store').commit()
 
