@@ -45,7 +45,7 @@ $item-border: #dddddd;
     font-weight: bold;
     border: none;
     color: $active-state;
-    background-color: #E9E9E9;
+    background-color: #E9E9E9 !important;
 
     &:hover {
       border: none;
