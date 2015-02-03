@@ -277,6 +277,10 @@
     float: right;
   }
 
+  .nav-pills-right.delete span {
+    text-align: right;
+  }
+
   .nav li.active .nav-pills-right span {
     background: #6AA4EC;
   }
