@@ -30,62 +30,36 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
   loadedPages: [1]
 
-  contacts: Ember.computed.alias 'controllers.contacts.content'
-
   isPublic: Ember.computed.not 'isUnpublished'
   statusDisabled: Ember.computed.not('isPublic')
 
   # FIXME: How do we determine this?
   isEditable: true
 
-  contacts: ( ->
+  contacts: Ember.computed 'controllers.contacts.[]', ->
     @get('controllers.contacts').filter (contact) ->
-      contact.get('status') != 'personal'
-  ).property('controllers.contacts.[]')
+      contact.get('isPublic')
 
   contact: Ember.computed.alias('model.contact')
 
-  formBox: (->
+  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
-      # discussionForm: @get('discussionForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
-  ).property('todoForm', 'callForm', 'discussionForm')
 
   todoForm: Radium.computed.newForm('todo')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     description: null
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
-
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: (->
-    description: null
-    contact: @get('contact')
-    reference: @get('model')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-  ).property('model', 'tomorrow')
-
-  discussionForm: Radium.computed.newForm('discussion')
-
-  discussionFormDefaults: (->
-    reference: @get('model')
-    user: @get('currentUser')
-    about: @get('model')
-  ).property('model')
 
   meetingForm: Radium.computed.newForm('meeting')
 
-  meetingFormDefaults: ( ->
+  meetingFormDefaults: Ember.computed 'model', 'now', ->
     topic: null
     location: ""
     isNew: true
@@ -95,8 +69,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
     startsAt: @get('now').advance(hour: 1)
     endsAt: @get('now').advance(hour: 2)
     invitations: Ember.A()
-    reference: @get('model')
-  ).property('model', 'now')
 
   noteForm: Radium.computed.newForm 'note'
 
@@ -104,6 +76,5 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
     reference: @get('model')
     user: @get('currentUser')
 
-  dealProgressClass: (->
+  dealProgressClass: Ember.computed 'status', ->
     "status-#{@get('status')}"
-  ).property('status')

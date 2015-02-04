@@ -18,7 +18,12 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
   activeForm: 'todo'
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')
-  showCallForm: Ember.computed.equal('activeForm', 'call')
-  showDiscussionForm: Ember.computed.equal('activeForm', 'discussion')
   showNoteForm: Ember.computed.equal('activeForm', 'note')
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting')
+  showEmailForm: Ember.computed.equal('activeForm', 'email')
+
+  onFormChanged: (form) ->
+    @send 'showForm', form
+
+  setup: Ember.on 'init', ->
+    @get('parentController').on('formChanged', this, 'onFormChanged')

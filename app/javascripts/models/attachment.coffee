@@ -15,10 +15,9 @@ Radium.Attachment = Radium.Model.extend
       @get('_referenceContact') ||
       @get('_referenceCompany') ||
       @get('_referenceMeeting')
-  ).property('_referenceDiscussion', '_referenceDeal', '_referenceEmail', '_referenceContact', '_referenceCompany')
+  ).property('_referenceDeal', '_referenceEmail', '_referenceContact', '_referenceCompany')
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceCompany: DS.belongsTo('Radium.Company')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceEmail: DS.belongsTo('Radium.Email')
-  _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')

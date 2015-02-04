@@ -106,12 +106,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   notFromUser: Ember.computed.not 'senderIsCurrentUser'
 
-  formBox: Ember.computed 'todoform', 'callform', ->
+  formBox: Ember.computed 'todoform', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
       meetingForm: @get('meetingForm')
-      # disable for now
-      # callForm: @get('callForm')
 
   todoForm: Radium.computed.newForm('todo')
 
@@ -128,8 +126,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     user: @get('currentUser')
     description: "Follow up with #{@get('model.subject')} email tomorrow."
 
-  callForm: Radium.computed.newForm('call')
-
   meetingForm: Radium.computed.newForm('meeting')
 
   meetingFormDefaults: Ember.computed 'model', 'now', ->
@@ -140,12 +136,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     startsAt: @get('now')
     endsAt: @get('now').advance(hour: 1)
     invitations: Ember.A()
-
-  callFormDefaults: Ember.computed 'model', 'tomorrow', 'contact', ->
-    reference: @get('email')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-    contact: @get('contact')
 
   replyEmail: Ember.computed 'model', ->
     replyForm = Radium.ReplyForm.create

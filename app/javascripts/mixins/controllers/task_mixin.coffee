@@ -4,6 +4,3 @@ Radium.TaskMixin = Ember.Mixin.create
 
   showTodoForm: Ember.computed 'model', ->
     @get('model.constructor') is Radium.Todo
-
-  showCallForm: Ember.computed 'model', ->
-    @get('model.constructor') is Radium.Call

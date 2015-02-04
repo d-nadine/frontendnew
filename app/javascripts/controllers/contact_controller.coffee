@@ -22,12 +22,13 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
       preVal + value
     , 0, 'value')
 
-  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
+      emailForm: @get('emailForm')
       about: @get('model')
 
   todoForm: Radium.computed.newForm('todo')
@@ -35,19 +36,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
     finishBy: @get('tomorrow')
-    user: @get('currentUser')
-
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: Ember.computed 'model', 'tomorrow', ->
-    contact: @get('model')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-
-  discussionForm: Radium.computed.newForm('discussion')
-
-  discussionFormDefaults: Ember.computed 'model', ->
-    reference: @get('model')
     user: @get('currentUser')
 
   meetingForm: Radium.computed.newForm('meeting')
@@ -68,3 +56,8 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   noteFormDefaults: Ember.computed 'model', ->
     reference: @get('model')
     user: @get('currentUser')
+
+  emailForm: Radium.computed.newForm 'email'
+
+  emailFormDefaults: Ember.computed 'model', ->
+    to: Ember.A([@get('model')])

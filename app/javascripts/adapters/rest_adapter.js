@@ -369,11 +369,6 @@ Radium.RESTAdapter.map('Radium.ContactInfo', {
   socialProfiles: {embedded: 'always'}
 });
 
-Radium.RESTAdapter.map('Radium.Discussion', {
-  user: {key: 'posted_by'},
-  comments: {embedded: 'load'}
-});
-
 Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
@@ -429,13 +424,6 @@ Radium.RESTAdapter.map('Radium.Todo', {
 Radium.RESTAdapter.map('Radium.Note', {
   comments: {embedded: 'load'}
 })
-
-Radium.RESTAdapter.map('Radium.Call', {
-  isFinished: {key: 'finished'},
-  finishBy: {key: 'time'},
-  user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'}
-});
 
 Radium.RESTAdapter.map('Radium.Meeting', {
   isFinished: {key: 'finished'},

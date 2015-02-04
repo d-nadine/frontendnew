@@ -1,5 +1,3 @@
-require 'forms/call_form'
-require 'forms/discussion_form'
 require 'forms/meeting_form'
 require 'forms/todo_form'
 require 'lib/radium/aggregate_array_proxy'
@@ -40,10 +38,12 @@ Radium.computed.newForm = (form, properties = {}) ->
   Ember.computed defaultsName, ->
     Ember.assert "no #{defaultsName} specified", @get(defaultsName)
 
-    type.create properties,
+    form = type.create properties,
       content: Ember.Object.create()
       isNew: true
       defaults: @get(defaultsName)
+
+    form
 
 Radium.computed.aggregate = ->
   properties = a_slice.call arguments

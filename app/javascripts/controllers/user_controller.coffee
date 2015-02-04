@@ -29,7 +29,7 @@ Radium.UserController = Radium.ObjectController.extend
 
     Math.floor(closedDealsTotal / salesGoal)
 
-  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       compactFormButtons: true
       todoForm: @get('todoForm')
@@ -42,18 +42,6 @@ Radium.UserController = Radium.ObjectController.extend
     finishBy: @get('tomorrow')
     user: @get('currentUser')
 
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: Ember.computed 'model', 'tomorrow', ->
-    contact: @get('model')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-
-  discussionForm: Radium.computed.newForm('discussion')
-
-  discussionFormDefaults: Ember.computed 'model', ->
-    reference: @get('model')
-    user: @get('currentUser')
 
   meetingForm: Radium.computed.newForm('meeting')
 

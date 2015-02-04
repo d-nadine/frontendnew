@@ -25,10 +25,10 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
       deal.one 'didDelete', =>
         @send 'flashSuccess', "Deal #{name} has been deleted"
 
-      deal.one 'becameInvalid', (result) =>
+      deal.one 'becameInvalid', (result) ->
         result.reset()
 
-      deal.one 'becameError', (result) =>
+      deal.one 'becameError', (result) ->
         result.reset()
 
       @send 'closeModal'
@@ -53,8 +53,8 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
         outlet: 'sidebar'
 
   setupController: (controller, model) ->
-    ['todo', 'call', 'meeting'].forEach (form) ->
+    ['todo', 'meeting'].forEach (form) ->
       if form = controller.get("formBox.#{form}Form")
         form?.reset()
 
-    controller.set('model', model)   
+    controller.set('model', model) 

@@ -1,10 +1,7 @@
 Radium.NextTaskView = Radium.View.extend
-  didInsertElement: ->
+  setup: Ember.on 'didInsertElement', ->
     if @get('controller.isTodo')
       title = @get('controller.description')
-
-    if @get('controller.isCall')
-      title = @get('controller.reference.name')
 
     if @get('controller.isMeeting')
       title = @get('controller.topic')
@@ -14,6 +11,6 @@ Radium.NextTaskView = Radium.View.extend
         title: title
       )
 
-  willDestroyElement: ->
+  teardown: Ember.on 'willDestroyElement', ->
     if @$('a').data('tooltip')
       @$('a').tooltip('destroy')

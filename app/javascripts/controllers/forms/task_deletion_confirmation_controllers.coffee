@@ -10,5 +10,3 @@ Radium.TaskDeletionConfirmationController = Radium.ObjectController.extend
       @send 'closeModal'
 
 Radium.TodoDeletionConfirmationController = Radium.TaskDeletionConfirmationController.extend()
-
-Radium.CallDeletionConfirmationController = Radium.TaskDeletionConfirmationController.extend()

@@ -4,20 +4,12 @@
       <i class="ss-standard ss-check green"></i>
     {{/if}}
 
-    {{#if isCall}}
-      <i class="ss-standard ss-phone green"></i>
-    {{/if}}
-
     {{#if isMeeting}}
       <i class="ss-standard ss-calendar"></i>
     {{/if}}
 
     <span>
       {{#if isTodo}}
-        {{formatDateTime finishBy format="date"}}
-      {{/if}}
-
-      {{#if isCall}}
         {{formatDateTime finishBy format="date"}}
       {{/if}}
 
@@ -29,10 +21,6 @@
     <span class="text">
       {{#if isTodo}}
         {{truncate description}}
-      {{/if}}
-
-      {{#if isCall}}
-        Call {{reference.name}}
       {{/if}}
 
       {{#if isMeeting}}

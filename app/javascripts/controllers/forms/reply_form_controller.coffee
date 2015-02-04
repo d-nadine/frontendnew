@@ -1,4 +1,6 @@
-Radium.FormsReplyController = Radium.FormsEmailController.extend
+require 'mixins/controllers/save_email_mixin'
+
+Radium.FormsReplyController = Radium.FormsEmailController.extend Radium.SaveEmailMixin,
   actions:
     submit: (replyForm) ->
       @send 'sendReply', replyForm

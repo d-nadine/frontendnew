@@ -9,7 +9,7 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   displayName: Ember.computed.alias 'description'
 
-  reference: Ember.computed '_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany', (key, value) ->
+  reference: Ember.computed '_referenceContact', '_referenceDeal', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany', (key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
       associationName = "_reference#{property}"
@@ -26,7 +26,6 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   _referenceContact: DS.belongsTo('Radium.Contact', inverse: 'todos')
   _referenceDeal: DS.belongsTo('Radium.Deal')
-  _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting', inverse: 'todos')
   _referenceTodo: DS.belongsTo('Radium.Todo', inverse: 'todos')

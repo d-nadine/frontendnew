@@ -1,12 +1,6 @@
 Radium.RelatedTaskItemController = Radium.ObjectController.extend
-  isTodo: (->
+  isTodo: Ember.computed 'content', ->
     @get('content') instanceof Radium.Todo
-  ).property('content')
 
-  isCall: (->
-    @get('content') instanceof Radium.Call
-  ).property('content')
-
-  isMeeting: (->
+  isMeeting: Ember.computed 'content', ->
     @get('content') instanceof Radium.Meeting
-  ).property('content')

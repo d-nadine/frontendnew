@@ -1,16 +1,12 @@
 Radium.MessagesBulkActionItemController = Radium.ObjectController.extend
-  summary: (->
+  summary: Ember.computed 'subject', 'topic', ->
     @get('subject') || @get('topic')
-  ).property('subject', 'topic')
 
-  person: (->
+  person: Ember.computed 'user', 'sender', ->
     @get('sender') || @get('user')
-  ).property('user', 'sender')
 
-  timestamp: (->
+  timestamp: Ember.computed 'sentAt', 'createdAt', ->
     @get('sentAt') || @get('createdAt')
-  ).property('sentAt', 'createdAt')
 
-  isEmail: (->
+  isEmail: Ember.computed ->
     @get('content') instanceof Radium.Email
-  ).property()

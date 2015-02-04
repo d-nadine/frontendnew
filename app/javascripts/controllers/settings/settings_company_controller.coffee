@@ -50,11 +50,15 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Subscri
 
         currentUser.reload()
 
-      job.one "didError", =>
+      job.one "didError", ->
         self.send "flashError", "An error has occurred and the account can not be updated."
         self.set 'isSaving', false
 
       @get("store").commit()
+
+    toggleAvatar: ->
+      @toggleProperty('isEditingAvatar')
+      false
 
   needs: ['users', 'usersInvites', 'account']
   account: Ember.computed.alias 'controllers.account.model'
@@ -62,6 +66,7 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Subscri
   users: Ember.computed.alias 'controllers.users'
   unlimited: Ember.computed.alias 'currentUser.account.unlimited'
   isSaving: false
+  isEditingAvatar: false
 
   pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', 'controllers.usersInvites.@each.isNew', ->
     existing = @get('users').mapProperty('email').map (email) -> email.toLowerCase()

@@ -38,7 +38,7 @@ Radium.UserRoute = Radium.Route.extend
       outlet: 'sidebar'
 
   setupController: (controller, model) ->
-    ['todo', 'call', 'meeting'].forEach (form) ->
+    ['todo', 'meeting'].forEach (form) ->
       if form = controller.get("formBox.#{form}Form")
         form?.reset()
 

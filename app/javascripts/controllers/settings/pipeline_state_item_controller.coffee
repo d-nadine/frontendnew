@@ -4,7 +4,7 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
       @get('newChecklistItem').setProperties
         description: null
         weight: null
-        kind: 'Call'
+        kind: 'Todo'
         date: 1
 
     createChecklistItem: ->
@@ -48,13 +48,11 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
       kind: 'todo'
       date: 1
 
-  isFirstItem: (->
+  isFirstItem: Ember.computed 'position', 'parentController.hasMultipleItems', 'account.isSaving', ->
     return true if @get('account.isSaving')
     Ember.isEqual(this, @get('parentController.firstObject'))
-  ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')
 
-  isLastItem: (->
+  isLastItem: Ember.computed 'position', 'parentController.hasMultipleItems', 'account.isSaving', ->
     return true if @get('account.isSaving')
 
     Ember.isEqual(this, @get('parentController.lastObject'))
-  ).property('position', 'parentController.hasMultipleItems', 'account.isSaving')

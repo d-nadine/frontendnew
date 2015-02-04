@@ -3,18 +3,16 @@ require 'forms/form_box'
 Radium.MessagesBulkActionsController = Radium.ArrayController.extend
   needs: ['users', 'messages']
 
-  content: Ember.computed.oneWay 'controllers.messages.checkedContent'
+  model: Ember.computed.oneWay 'controllers.messages.checkedContent'
+
   canArchive: Ember.computed 'controllers.messages.folder', ->
     @get('controllers.messages.folder') != "archive"
 
   itemController: 'messagesBulkActionItem'
 
-  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
-      discussionForm: @get('discussionForm')
 
   todoForm: Radium.computed.newForm('todo')
 
@@ -23,12 +21,3 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
     finishBy: @get('tomorrow')
     user: @get('currentUser')
     reference: @get('model')
-
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: Ember.computed 'model.[]', 'tomorrow', ->
-    description: null
-    contact: @get('contact')
-    reference: @get('model')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')

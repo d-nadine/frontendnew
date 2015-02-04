@@ -1,4 +1,6 @@
-Radium.ContactRoute = Radium.Route.extend
+require 'mixins/controllers/save_email_mixin'
+
+Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
   actions:
     confirmDeletion: ->
       @render 'contact/deletion_confirmation',
@@ -38,6 +40,13 @@ Radium.ContactRoute = Radium.Route.extend
         result.reset()
 
       @get('store').commit()
+
+    saveEmail: (email) ->
+      @_super email, dontTransition: true
+      false
+
+    deleteFromEditor: ->
+      @controllerFor('contact').trigger 'formChanged', 'todo'
 
   renderTemplate: ->
     @render()

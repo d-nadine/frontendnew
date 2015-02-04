@@ -60,7 +60,6 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
   kinds: Ember.A([
     "todo"
     "meeting"
-    # "call"
   ])
 
   isChecklistItemValid: Ember.computed 'newItemDescription', 'newItemWeight', 'newItemSubmitted', ->

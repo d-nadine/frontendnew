@@ -9,7 +9,7 @@ Radium.TodoForm = Radium.Form.extend
   ).volatile()
 
   type: Ember.computed ->
-    if this.constructor is Radium.TodoForm then Radium.Todo else Radium.Call
+    Radium.Todo
 
   reset: ->
     @_super.apply this, arguments

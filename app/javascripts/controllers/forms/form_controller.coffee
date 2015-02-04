@@ -15,74 +15,56 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
       @toggleProperty 'isExpanded'
       return
 
-  justAdded: (->
+  justAdded: Ember.computed 'content.justAdded', ->
     @get('content.justAdded') == true
-  ).property('content.justAdded')
 
   showOptions: Ember.computed.alias('isNew')
 
-  submitFormDidChange: ( ->
+  submitFormDidChange: Ember.observer('model.submitForm', ->
     return unless @get('model.submitForm')
     @send 'submit'
-  ).observes('model.submitForm').on('init')
+  ).on('init')
 
-  isPrimaryInputDisabled: (->
+  isPrimaryInputDisabled: Ember.computed 'isDisabled', 'isExpanded', 'isNew', ->
     return false if @get('isNew')
     return true unless @get('isExpanded')
     @get 'isDisabled'
-  ).property('isDisabled', 'isExpanded', 'isNew')
 
-  showComments: (->
+  showComments: Ember.computed 'isNew', 'justAdded', ->
     return false if @get('justAdded')
     return false if @get('isNew')
     true
-  ).property('isNew', 'justAdded')
 
   showSuccess: Ember.computed.alias('justAdded')
 
-  isEditable: (->
+  isEditable: Ember.computed 'content', 'content.isEditable', 'isSaving', ->
     return true if @get('isNew')
     return false if @get('isSubmitted')
     return false if @get('justAdded')
     return false if @get('isSaving')
     true
-  ).property('content', 'content.isEditable', 'isSaving')
 
-  modelIsExpandedDidChange: ( ->
+  modelIsExpandedDidChange: Ember.observer 'model.isExpanded', ->
     if model = @get('model')
       @set('isExpanded', model.get('isExpanded'))
-  ).observes('model.isExpanded')
 
-  isExpandableDidChange: (->
+  isExpandableDidChange: Ember.observer 'isExpandable', ->
     if !@get('isExpandable') then @set('isExpanded', false)
-  ).observes('isExpandable')
 
-  isDisabled: (->
+  isDisabled: Ember.computed 'model', 'isEditable', ->
     return true if @get('justAdded')
     @get('content.isEditable') is false
-  ).property('model', 'isEditable')
 
   hasComments: Ember.computed.present('comments')
   showAddAction: Ember.computed.not('isNew')
 
-  formBox: (->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
-  ).property('todoForm', 'callForm')
 
   todoForm: Radium.computed.newForm('todo')
 
-  todoFormDefaults: (->
+  todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-  ).property('model', 'tomorrow')
-
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: (->
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-  ).property('model', 'tomorrow')

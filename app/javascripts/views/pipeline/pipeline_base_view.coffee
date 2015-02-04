@@ -57,7 +57,6 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
       switch form
         when "assign" then "Reassign "
         when "todo" then "Add a Todo About  "
-        when "call" then "Create and Assign a Call from  "
         when "status" then "Change status on "
         when "email" then "Email "
         else

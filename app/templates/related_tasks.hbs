@@ -19,28 +19,6 @@
               </li>
             {{/if}}
 
-            {{#if isCall}}
-              <li {{bind-attr class="isFinished overdue"}}>
-                <span class="time">
-                  on
-                  {{#link-to "calendar.task" this}}
-                    {{formatDateTime time format="date"}}
-                  {{/link-to}}
-                  at
-                  {{#link-to "calendar.task" this}}
-                    {{formatDateTime time format="short"}}
-                  {{/link-to}}
-                </span>
-                <i class="ss-standard ss-phone"></i>
-                <span class="related-task-title">
-                {{#link-to "calendar.task" this}}Call{{/link-to}}
-                with
-                {{#link-to "user" user}}{{user.name}}{{/link-to}}
-                and
-                {{#link-to "contact" contact}}{{contact.name}}{{/link-to}}
-                </span>
-              </li>
-            {{/if}}
 
             {{#if isMeeting}}
               <li>

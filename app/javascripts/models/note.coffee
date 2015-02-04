@@ -20,10 +20,9 @@ Radium.Note = Radium.Model.extend Radium.CommentsMixin,
       @get('_referenceEmail') ||
       @get('_referenceMeeting') ||
       @get('_referenceTodo')
-  ).property('_referenceContact', '_referenceDeal', '_referenceDiscussion', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany')
+  ).property('_referenceContact', '_referenceDeal', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany')
   _referenceContact: DS.belongsTo('Radium.Contact', inverse: 'notes')
   _referenceDeal: DS.belongsTo('Radium.Deal')
-  _referenceDiscussion: DS.belongsTo('Radium.Discussion')
   _referenceEmail: DS.belongsTo('Radium.Email')
   _referenceMeeting: DS.belongsTo('Radium.Meeting', inverse: 'notes')
   _referenceTodo: DS.belongsTo('Radium.Todo', inverse: 'notes')

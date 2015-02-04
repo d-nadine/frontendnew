@@ -11,12 +11,9 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
   selectedDay: null
   selectedTask: null
 
-  formBox: Ember.computed 'todoForm', 'callForm', 'discussionForm', ->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
-      discussionForm: @get('discussionForm')
       meetingForm: @get('meetingForm')
 
   taskStartDate: Ember.computed 'tomorrow', 'selectedDay.date', ->
@@ -26,13 +23,6 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', 'taskStartDate', ->
     description: null
-    finishBy: @get('taskStartDate')
-    user: @get('currentUser')
-
-  callForm: Radium.computed.newForm('call')
-
-  callFormDefaults: Ember.computed 'model', 'tomorrow', 'taskStartDate', ->
-    contact: @get('contact')
     finishBy: @get('taskStartDate')
     user: @get('currentUser')
 
@@ -66,8 +56,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
 
     if user = @get('user')
       items = items.filter (item) =>
-        item.constructor is Radium.Todo && item.get('user') == user ||
-        item.constructor is Radium.Call && item.get('user') == user
+        item.constructor is Radium.Todo && item.get('user') == user
 
     currentUser = @get('currentUser')
 

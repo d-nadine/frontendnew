@@ -19,7 +19,7 @@ Radium.UploadAvatarComponent = Ember.Component.extend Radium.UploadingMixin,
 
     url = "#{@get('controller.store._adapter.url')}/avatars"
     uploader = @setUploader(url)
-    model = @get('parentView.controller.model')
+    model = @get('model')
     modelAttributes = type: model.humanize(), id: model.get('id')
 
     @set 'isUploading', true

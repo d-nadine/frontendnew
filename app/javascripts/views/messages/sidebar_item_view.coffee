@@ -9,22 +9,19 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     'controller.hasTasks'
   ]
 
-  setup: ( ->
+  setup: Ember.on 'didInsertElement', ->
     @$('a.archive').tooltip()
-  ).on('didInsertElement')
 
-  teardown: ( ->
+  teardown: Ember.computed 'willDestroyElement', ->
     return unless @$
 
     @$('a.archive')?.data('tooltip')?.destroy()
-  ).on('willDestroyElement')
 
   itemClass: Ember.computed ->
     "#{@templateMap[@get('content.content.constructor')]}-item"
 
   templateMap:
     'Radium.Email': 'email'
-    'Radium.Discussion': 'discussion'
 
   templateName: Ember.computed 'content', ->
     part = @templateMap[@get('content.content.constructor')]

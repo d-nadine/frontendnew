@@ -3,20 +3,14 @@
     {{#if showTodoForm}}
       {{render "forms/todo" todoForm}}
     {{/if}}
-
-    {{#if showCallForm}}
-      {{render "forms/call" callForm}}
-    {{/if}}
-
-    {{#if showDiscussionForm}}
-      {{render "forms/discussion" discussionForm}}
-    {{/if}}
-
     {{#if showMeetingForm}}
       {{render "forms/meeting" meetingForm}}
     {{/if}}
     {{#if showNoteForm}}
       {{render "forms/note" noteForm}}
+    {{/if}}
+    {{#if showEmailForm}}
+      {{render 'forms/email' emailForm}}
     {{/if}}
   </div>
   <div class="form-box-controls">
@@ -35,6 +29,9 @@
           {{#if showNoteForm}}
             <i class="ss-standard ss-notebook green"></i> Add Note
           {{/if}}
+          {{# if showEmailForm}}
+            <i class="ss-standard ss-mail green"></i> Add Email
+          {{/if}}
         </button>
         <button class="btn btn-large dropdown-toggle needsclick" data-toggle="dropdown">
           <span class="caret"></span>
@@ -43,16 +40,6 @@
           {{#if todoForm}}
           <li>
             <a href="#" {{action "showForm" "todo"}}><i class="ss-standard ss-check"></i> Todo</a>
-          </li>
-          {{/if}}
-          {{#if callForm}}
-          <li>
-            <a href="#" {{action "showForm" "call"}}><i class="ss-standard ss-phone"></i> Call</a>
-          </li>
-          {{/if}}
-          {{#if discussionForm}}
-          <li>
-            <a href="#" {{action "showForm" "discussion"}}><i class="ss-standard ss-chat"></i> Discussion</a>
           </li>
           {{/if}}
           {{#if meetingForm}}
@@ -65,6 +52,11 @@
             <a href="#" {{action "showForm" "note"}}><i class="ss-standard ss-notebook"></i> Note</a>
           </li>
           {{/if}}
+          {{#if emailForm}}
+          <li>
+            <a href="#" {{action "showForm" "email"}}><i class="ss-standard ss-mail"></i> Email</a>
+          </li>
+          {{/if}}
         </ul>
       </div>
     {{else}}
@@ -72,18 +64,6 @@
         {{#if todoForm}}
           <button {{action "showForm" "todo"}} {{bind-attr class=":btn :btn-action showTodoForm:active"}}>
             <i class="ss-standard ss-check"></i>
-          </button>
-        {{/if}}
-
-        {{#if callForm}}
-          <button {{action "showForm" "call"}} {{bind-attr class=":btn :btn-action showCallForm:active"}}>
-            <i class="ss-standard ss-phone"></i>
-          </button>
-        {{/if}}
-
-        {{#if discussionForm}}
-          <button {{action "showForm" "discussion"}} {{bind-attr class=":btn :btn-action showDiscussionForm:active"}}>
-            <i class="ss-symbolicons-block ss-chat"></i>
           </button>
         {{/if}}
 

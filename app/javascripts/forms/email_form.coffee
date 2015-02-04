@@ -15,7 +15,12 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   reset: ->
     @set('id', null)
     @set 'message', ''
-    @set 'to', Ember.A()
+    to = if to = @get('defaults.to')
+            to
+         else
+           Ember.A()
+
+    @set 'to', to
     @set 'cc', Ember.A()
     @set 'bcc', Ember.A()
     @set 'isDraft', false
@@ -36,18 +41,18 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     sentAt: Ember.DateTime.create()
     isDraft: @get('isDraft')
 
-    to: @get('to').map (person) =>
+    to: @get('to').map (person) ->
       person.get('email')
 
-    cc: @get('cc').map (person) =>
+    cc: @get('cc').map (person) ->
       person.get('email')
 
-    bcc: @get('bcc').map (person) =>
+    bcc: @get('bcc').map (person) ->
       person.get('email')
 
     sendTime: @get('sendTime')
     checkForResponse: @get('checkForResponse')
-    files: @get('files').map (file) =>
+    files: @get('files').map (file) ->
       file.get('file')
 
     attachedFiles: Ember.A()

@@ -1,7 +1,10 @@
 Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
   actions:
     save: (user) ->
-      return unless @hasBufferedChanges
+      unless @hasBufferedChanges
+        @set 'isEditing', false
+        @applyBufferedChanges()
+        return
 
       @set 'isSubmitted', true
 
@@ -51,6 +54,5 @@ Radium.SettingsProfileController = Radium.ObjectController.extend BufferedProxy,
   isEditing: false
   isEditingAvatar: false
 
-  isValid: ( ->
+  isValid: Ember.computed 'firstName', 'lastName', ->
     !Ember.isEmpty(@get('firstName')) && !Ember.isEmpty(@get('lastName'))
-  ).property('firstName', 'lastName')

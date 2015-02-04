@@ -84,11 +84,9 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
 
   disableSave: false
 
-  formBox: Ember.computed 'todoForm', 'callForm', ->
+  formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-      # disable for now
-      # callForm: @get('callForm')
 
 
   messageIsInvalid: Ember.computed 'isSubmitted', 'message.length', ->
@@ -102,14 +100,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
     reference: @get('model')
     finishBy: @get('tomorrow')
     user: @get('currentUser')
-
-  callForm: Radium.computed.newForm('call')
-
-  callFormDefaults: Ember.computed 'model', 'tomorrow', 'contact', ->
-    reference: @get('model')
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-    contact: @get('contact')
 
   expandList: (section) ->
     @set("show#{section.capitalize()}", true)

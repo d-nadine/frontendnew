@@ -3,7 +3,5 @@
 # disabled by default.
 Radium.FormBox = Ember.ObjectProxy.extend
   todoForm: null
-  callForm: null
-  discussionForm: null
   meetingForm: null
   noteForm: null

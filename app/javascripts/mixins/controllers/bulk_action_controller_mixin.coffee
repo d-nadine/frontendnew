@@ -83,7 +83,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   isThumbnailsVisible: true
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')
-  showCallForm: Ember.computed.equal('activeForm', 'call')
   showAssignForm: Ember.computed.equal('activeForm', 'assign')
   showChangeStatusForm: Ember.computed.equal('activeForm', 'status')
   showEmailForm: Ember.computed.equal('activeForm', 'email')
@@ -130,14 +129,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @get('hasCheckedContent') && @get('hasActiveForm')
 
   todoFormDefaults: Ember.computed 'checkedContent.[]', 'tomorrow', ->
-    description: null
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-    reference: @get('checkedContent')
-
-  callForm: Radium.computed.newForm('call', canChangeContact: false)
-
-  callFormDefaults: Ember.computed 'model.[]', 'tomorrow', ->
     description: null
     finishBy: @get('tomorrow')
     user: @get('currentUser')

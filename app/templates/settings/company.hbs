@@ -14,13 +14,17 @@
     </div>
     <div class="control-group">
       <div class="user-edit-avatar">
-        <button class="btn btn-mini user-change-avatar">
+        <button class="btn btn-mini user-change-avatar" {{action "toggleAvatar"}}>
           <i class="ss-standard ss-write"></i>
         </button>
-        {{#if currentUser.isLoaded}}
-          {{avatar currentUser size=large class="img-polaroid"}}
+        {{#if controller.isEditingAvatar}}
+          {{upload-avatar model=currentUser avatarsize="large" finishedUpload='toggleAvatar'}}
         {{else}}
-          {{partial 'is_loading'}}
+          {{#if currentUser.isLoaded}}
+            {{avatar currentUser size="large" class="img-polaroid"}}
+          {{else}}
+            {{partial 'is_loading'}}
+          {{/if}}
         {{/if}}
       </div>
       <div class="controls settings-user-details">
