@@ -11,7 +11,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
                  else
                    @get('model')
 
-      return target.transitionToRoute routable.humanize(), routable
+      if queryParams = @get('queryParams')
+        target.transitionToRoute routable.humanize(), routable, queryParams: queryParams
+      else
+        target.transitionToRoute routable.humanize(), routable
 
     updateModel: ->
       return if @get('isInvalid')

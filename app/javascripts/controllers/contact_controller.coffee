@@ -2,6 +2,8 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   Radium.UpdateContactPoller,
   Radium.CanFollowMixin,
   Radium.TrackContactMixin,
+  Ember.Evented,
+
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
@@ -61,3 +63,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   emailFormDefaults: Ember.computed 'model', ->
     to: Ember.A([@get('model')])
+
+  queryParams: ['form']
+  form: null

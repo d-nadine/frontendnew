@@ -51,7 +51,11 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         name: 'validator',
         value: Radium.EMAIL_REGEX,
         static: true
-      }],
+      }
+        name: 'queryParams',
+        value: {form: 'email'}
+        static: true
+      ],
       actions: [
         name: "saveEmail"
         value: "saveEmail"

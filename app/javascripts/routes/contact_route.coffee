@@ -60,3 +60,10 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
         form?.reset()
 
     controller.set('model', model)
+
+    if form = controller.get('form')
+      Ember.run.next ->
+        controller.trigger 'formChanged', form
+
+  deactivate: ->
+    @controller.set 'form', null
