@@ -219,8 +219,3 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       attendees.insertAt(0, organizer)
 
     attendees
-
-  isExpandable: Ember.computed 'isNew', ->
-    return false if @get('justAdded')
-    !@get('isNew')
-

@@ -35,11 +35,12 @@ Radium.DatePickerComponent = Ember.Component.extend
 
   disabled: Ember.computed.alias('targetObject.isDisabled')
   isSubmitted: Ember.computed.alias('targetObject.isSubmitted')
+  ignoreEmpty: false
 
   isInvalid: Ember.computed 'date', 'isSubmitted', ->
     return false unless @get('isSubmitted')
-    return true if Ember.isEmpty(@get('text'))
-    return true unless @get('date')
+    return true if Ember.isEmpty(@get('text')) && !@get('ignoreEmpty')
+    return !@get('ignoreEmpty') unless @get('date')
 
     @get('date').isBeforeToday()
 
@@ -51,11 +52,8 @@ Radium.DatePickerComponent = Ember.Component.extend
     else
       value
 
-  humanTextField: Ember.TextField.extend
+  humanTextField: Ember.TextField.extend Radium.KeyConstantsMixin,
     viewName: 'dateDisplay'
-    TAB: 9
-    ENTER: 13
-    ESCAPE: 27
     valueBinding: 'parentView.text'
     disabledBinding: 'targetObject.disabled'
     date: Ember.computed.alias 'targetObject.date'
@@ -63,7 +61,7 @@ Radium.DatePickerComponent = Ember.Component.extend
     init: ->
       @_super.apply(this, arguments)
 
-      allowedKeyCodes = Ember.A([@TAB, @ENTER, @ESCAPE])
+      allowedKeyCodes = Ember.A([@TAB, @ENTER, @ESCAPE, @DELETE])
       @set('allowedKeyCodes', allowedKeyCodes)
 
     didInsertElement: ->
@@ -141,11 +139,25 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       return unless @get('allowedKeyCodes').contains keyCode
 
-      date = datepicker.date
-      if keyCode == @ENTER
+      clearDate = =>
+        @set 'targetObject.date', null
+        @$().datepicker('setValue', null)
+        @$().data('datepicker').hide()
+
+      changeDate = =>
         @$().trigger
           type: 'changeDate'
           date: date
+
+      date = datepicker.date
+
+      if keyCode == @ENTER
+        Ember.run.next =>
+          unless @$().val()
+            clearDate()
+            return @get('targetObject').sendAction('submitForm')
+          else
+            clearDate()
       else if keyCode == @ESCAPE
         @resetDateDisplay()
       else if keyCode == @TAB
@@ -153,6 +165,12 @@ Radium.DatePickerComponent = Ember.Component.extend
 
         @$('.datepicker').find('a').attr('tabindex','-1')
         this.$().parent().next().children('input:first').get(0).focus()
+      else if keyCode == @DELETE
+        Ember.run.next =>
+          unless @$().val()
+            clearDate()
+
+        return
 
       evt.stopPropagation()
       evt.preventDefault()
@@ -227,4 +245,8 @@ Radium.DatePickerComponent = Ember.Component.extend
 
     focusIn: (e) ->
       Ember.run.next  =>
+        ele = @$()
+
+        return unless ele && ele?.get(0)
+
         @$().get(0).select()

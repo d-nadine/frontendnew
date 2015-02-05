@@ -18,6 +18,9 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
   justAdded: Ember.computed 'content.justAdded', ->
     @get('content.justAdded') == true
 
+  isExpandable: Ember.computed 'isNew', 'isFinished', 'justAdded', ->
+    return not !!@get('justAdded')
+
   showOptions: Ember.computed.alias('isNew')
 
   submitFormDidChange: Ember.observer('model.submitForm', ->
@@ -43,13 +46,6 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
     return false if @get('justAdded')
     return false if @get('isSaving')
     true
-
-  modelIsExpandedDidChange: Ember.observer 'model.isExpanded', ->
-    if model = @get('model')
-      @set('isExpanded', model.get('isExpanded'))
-
-  isExpandableDidChange: Ember.observer 'isExpandable', ->
-    if !@get('isExpandable') then @set('isExpanded', false)
 
   isDisabled: Ember.computed 'model', 'isEditable', ->
     return true if @get('justAdded')

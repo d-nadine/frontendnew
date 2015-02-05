@@ -94,6 +94,11 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
             p error.stack
           ))
         else
+          # HACK: no other way to set finishBy to nil
+          unless @get('model.finishBy')
+            data = this.get('data')
+            data.finishBy = null
+            model.set('_data', data)
           @send 'addErrorHandlersToModel', model
           @get('store').commit()
 
@@ -157,13 +162,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
   hasReference: Ember.computed 'reference', 'isNew', ->
     reference = @get('reference')
     !@get('isNew') && reference
-
-  isExpandable: Ember.computed 'isNew', 'isFinished', ->
-    return false if @get('justAdded')
-    !@get('isNew') && !@get('isFinished')
-
-  isExpandableDidChange: Ember.observer 'isExpandable', ->
-    if !@get('isExpandable') then @set('isExpanded', false)
 
   isDisabled: Ember.computed.not('isEditable')
 
