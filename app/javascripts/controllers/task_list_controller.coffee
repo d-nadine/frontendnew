@@ -46,6 +46,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
       when 'tomorrow' then 2
       when 'this_week' then 3
       when 'next_week' then 4
+      when 'no_due_date' then 6
       else 5
 
   groupBy: (task) ->
@@ -56,7 +57,9 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
     nextWeek = now.atEndOfWeek().advance(day: 1).atEndOfWeek()
     time     = task.get 'time'
 
-    if task.get('overdue') || time.isToday()
+    if !time
+      'no_due_date'
+    else if task.get('overdue') || time.isToday()
       'today'
     else if time.isTomorrow()
       'tomorrow'

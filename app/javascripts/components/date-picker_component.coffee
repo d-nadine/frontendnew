@@ -77,8 +77,23 @@ Radium.DatePickerComponent = Ember.Component.extend
           if date.valueOf() < now.valueOf() then 'disabled' else ''
 
       datePicker = input.data('datepicker')
+
+      modelDate = @get('date')
+
+      defaultViewDate = if modelDate && !modelDate.isBeforeToday()
+                          modelDate.toJSDate()
+                        else
+                          Date.parse('tomorrow')
+
+      formatNumber = (number) ->
+        ("0" + number).slice(-2)
+
+      formatted = "#{formatNumber(defaultViewDate.getMonth() + 1)}/#{formatNumber(defaultViewDate.getDate())}/#{defaultViewDate.getFullYear()}"
+      @$().datepicker('update', formatted);
+
       $(".scroll-pane").scroll =>
         @$().datepicker "place" if @$()
+
       @$().off('keyup', datePicker.update)
 
       @set('targetObject.datePicker', datePicker)

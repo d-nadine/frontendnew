@@ -39,7 +39,6 @@ Radium.UserController = Radium.ObjectController.extend
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model') unless @get('model') == @get('currentUser')
-    finishBy: @get('tomorrow')
     user: @get('currentUser')
 
 

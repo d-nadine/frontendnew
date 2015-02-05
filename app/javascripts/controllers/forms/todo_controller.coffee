@@ -91,7 +91,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           ),
           ((error) =>
             @send 'flashError', error
-            error.deleteRecord()
+            p error.stack
           ))
         else
           @send 'addErrorHandlersToModel', model
@@ -129,8 +129,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   isValid: Ember.computed 'description.length', 'finishBy', 'user', 'model.submitForm', ->
     return if Ember.isEmpty(@get('description').trim())
-    return unless @get('finishBy')
-    return if @get('finishBy').isBeforeToday()
+    finishBy = @get('finishBy')
+
+    return if finishBy && finishBy.isBeforeToday()
+
     return unless @get('user')
 
     true

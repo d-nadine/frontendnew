@@ -18,7 +18,7 @@ Radium.HasTasksMixin = Ember.Mixin.create
     return Ember.A() unless tasks.get('length')
 
     tasks.filter (task) ->
-      return true unless task.get('time').isBeforeYesterday()
+      return true unless task.get('time') && task.get('time').isBeforeYesterday()
 
       return if task.constructor is Radium.Meeting
 

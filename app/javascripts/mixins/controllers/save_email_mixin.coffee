@@ -92,7 +92,6 @@ Radium.SaveEmailMixin = Ember.Mixin.create
             @controllerFor('messages').set('selectedContent', result)
             @transitionTo 'emails.edit', folder, result
           else
-            p options
             return if options.dontTransition
 
             @transitionTo 'emails.sent', email

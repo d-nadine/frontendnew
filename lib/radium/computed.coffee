@@ -92,6 +92,14 @@ Radium.computed.tasks = ->
   options =
     initialValue: []
     sortFunc: (left, right) ->
+      if !left.get('time') && !right.get('time')
+        return Ember.compare left.get("displayName"), right.get("displayName")
+
+      if left.get('time') && !right.get('time')
+        return 1
+      else if !left.get('time') && right.get('time')
+        return -1
+
       compare = Ember.DateTime.compare left.get("time"), right.get("time")
 
       if compare == 0
@@ -103,7 +111,7 @@ Radium.computed.tasks = ->
       return array if array.contains item
       return array if item.get('isFinished')
 
-      observer = =>
+      observer = ->
         return unless item.get('isLoaded')
 
         item.removeObserver 'isLoaded', observer
