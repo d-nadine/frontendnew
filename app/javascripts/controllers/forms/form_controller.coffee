@@ -62,5 +62,5 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')

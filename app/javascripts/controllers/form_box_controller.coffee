@@ -26,4 +26,9 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
     @send 'showForm', form
 
   setup: Ember.on 'init', ->
-    @get('parentController').on('formChanged', this, 'onFormChanged')
+    unless parentController = @get('parentController')
+      return
+
+    return unless parentController?.on
+
+    parentController.on('formChanged', this, 'onFormChanged')

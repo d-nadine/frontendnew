@@ -41,7 +41,6 @@ Radium.UserController = Radium.ObjectController.extend
     reference: @get('model') unless @get('model') == @get('currentUser')
     user: @get('currentUser')
 
-
   meetingForm: Radium.computed.newForm('meeting')
 
   meetingFormDefaults: Ember.computed 'model', 'now', ->

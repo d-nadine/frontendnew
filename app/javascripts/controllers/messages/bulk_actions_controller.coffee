@@ -18,6 +18,6 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
 
   todoFormDefaults: Ember.computed 'model.[]', 'tomorrow', ->
     description: null
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
     reference: @get('model')

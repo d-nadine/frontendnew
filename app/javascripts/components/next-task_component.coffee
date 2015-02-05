@@ -64,7 +64,7 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
 
   isEditable: true

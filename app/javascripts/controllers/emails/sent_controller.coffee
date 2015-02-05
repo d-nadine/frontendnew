@@ -11,7 +11,7 @@ Radium.EmailsSentController = Radium.ObjectController.extend Radium.EmailDealMix
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
 
   showTasksButton: Ember.computed 'isSaving', 'isPersonal', ->

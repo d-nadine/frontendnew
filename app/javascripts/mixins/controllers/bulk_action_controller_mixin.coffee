@@ -130,7 +130,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   todoFormDefaults: Ember.computed 'checkedContent.[]', 'tomorrow', ->
     description: null
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
     reference: @get('checkedContent')
 

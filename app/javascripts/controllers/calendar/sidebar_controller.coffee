@@ -15,10 +15,18 @@ Radium.CalendarSidebarController = Radium.ObjectController.extend
     @get('content') != @get('currentUser')
 
   startOfCalendar: Ember.computed 'date', ->
-    @get('date').copy().atBeginningOfMonth()
+    today = Ember.DateTime.create()
+
+    date = @get('date') || today
+
+    date.copy().atBeginningOfMonth()
 
   endOfCalendar: Ember.computed 'date', ->
-    @get('date').copy().atEndOfMonth()
+    today = Ember.DateTime.create()
+
+    date = @get('date') || today
+
+    date.copy().atEndOfMonth()
 
   days: Ember.computed 'items', ->
     days = []

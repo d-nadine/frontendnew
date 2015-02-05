@@ -91,7 +91,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
           ),
           ((error) =>
             @send 'flashError', error
-            p error.stack
           ))
         else
           # HACK: no other way to set finishBy to nil

@@ -35,7 +35,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
 
   meetingForm: Radium.computed.newForm('meeting')

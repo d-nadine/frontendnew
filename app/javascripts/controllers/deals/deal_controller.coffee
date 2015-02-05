@@ -54,7 +54,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     description: null
     reference: @get('model')
-    finishBy: @get('tomorrow')
+    finishBy: null
     user: @get('currentUser')
 
   meetingForm: Radium.computed.newForm('meeting')
