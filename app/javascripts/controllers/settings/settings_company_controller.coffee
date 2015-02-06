@@ -31,11 +31,12 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Subscri
 
       currentUser = @get('currentUser')
       account = @get('currentUser.account')
+      tracked = !!!account.get('importedContactsGlobal')
 
       job = Radium.TrackAllContacts.createRecord
               user: @get('currentUser')
               account: @get('currentUser.account')
-              tracked: not account.get("tracked")
+              tracked: tracked
 
       self = this
 
