@@ -4,3 +4,5 @@ Radium.EmailsNewController = Radium.Controller.extend
   queryParams: ['bulkEmail']
 
   isBulkEmail: Ember.computed.equal 'bulkEmail', "true"
+
+  bulkEmail: null

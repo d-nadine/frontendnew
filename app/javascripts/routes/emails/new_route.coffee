@@ -32,3 +32,5 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
     peopleController.get('checkedContent').setEach 'isChecked', false
     peopleController.set 'searchText', ''
     peopleController.set 'allChecked', false
+
+    @controllerFor('emailsNew').set 'bulkEmail', null

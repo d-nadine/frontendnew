@@ -8,5 +8,7 @@ Radium.BulkEmailJob = Radium.Model.extend Radium.BulkActionProperties,
 
   sender: DS.belongsTo('Radium.User')
 
+  checkForResponse: DS.attr('datetime')
+
   isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')

@@ -1,3 +1,5 @@
+require 'components/key_constants_mixin'
+
 Radium.AutocompleteView = Radium.View.extend
   actions:
     addSelection: (item) ->
@@ -97,14 +99,13 @@ Radium.AutocompleteView = Radium.View.extend
     callback(results, query)
 
   selectionAdded: (item) ->
-    # create a simple object and let the controller/form how to handle what happens
     if typeof item == "string"
       item = Ember.Object.create
                 email: item
 
     @send('addSelection', item)
 
-  autocomplete: Ember.TextField.extend
+  autocomplete: Ember.TextField.extend Radium.KeyConstantsMixin,
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'targetObject.currentUser'
     sourceBinding: 'parentView.source'
@@ -113,16 +114,24 @@ Radium.AutocompleteView = Radium.View.extend
     tabindexBinding: 'parentView.tabindex'
 
     keyDown: (e) ->
-      unless [8, 13].contains e.keyCode
-        return @_super.apply this, arguments
+      args = Array.prototype.slice.call(arguments)
 
-      if e.keyCode == 13
-        @get('parentView').selectionAdded @get('value')
+      callSuper = =>
+        @_super.apply this, args
+
+      unless [@DELETE, @ENTER, @SPACE].contains e.keyCode
+        return callSuper()
+
+      value = @get('value') || ''
+
+      if [@SPACE, @ENTER].contains e.keyCode
+        return callSuper() unless Radium.EMAIL_REGEX.test(value)
+
+        @get('parentView').selectionAdded value
         @set 'value', ''
         return false
 
-
-      return @_super.apply(this, arguments) if @get('value').length
+      return callSuper() if value.length
 
       last = @get('source.lastObject')
 

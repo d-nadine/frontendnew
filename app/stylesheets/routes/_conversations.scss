@@ -219,6 +219,12 @@
     display: inline-block;
     vertical-align: middle;
   }
+
+  img {
+    float: right;
+    position: relative;
+    top: 9px;
+  }
 }
 
 .convo tbody td.received {

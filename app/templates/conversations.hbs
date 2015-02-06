@@ -121,7 +121,7 @@
               <span class="follow-yes"></span>
             </td>
             <td class="subject">
-              {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
+              {{thirdpartyIcon this}} {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
             </td>
             <td class="received">{{ageInWords time}}</td>
             <td class="choose text-center">
