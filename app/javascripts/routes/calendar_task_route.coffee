@@ -1,7 +1,8 @@
 Radium.CalendarTaskRoute = Radium.Route.extend
   actions:
     deleteTask: (model) ->
-      @transitionTo 'calendar.index', model.get('time')
+      time = model.get('time') || Ember.DateTime.create()
+      @transitionTo 'calendar.index', time
       true
 
   serialize: (model) ->

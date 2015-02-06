@@ -10,6 +10,8 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
     controller.set 'initialised', false
 
   afterModel: (model, transition) ->
+    return unless model
+
     model.set 'isTransitioning', true
     controller = @controllerFor('emailsThread')
 
