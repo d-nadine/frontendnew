@@ -1,4 +1,4 @@
-// Last commit: 22adb98 (2015-01-07 11:43:07 +0000)
+// Last commit: 9e4fc98 (2015-02-06 15:33:40 +0000)
 
 
 (function() {
@@ -3579,6 +3579,10 @@ updatedState.inFlight.unloadRecord = function(record) {
 
 updatedState.uncommitted.finishedMaterializing = function(record) {
   record.transitionTo('loaded.saved');
+};
+
+updatedState.uncommitted.reloadRecord = function(model) {
+  model.store.reloadRecord(model);
 };
 
 var RootState = {
