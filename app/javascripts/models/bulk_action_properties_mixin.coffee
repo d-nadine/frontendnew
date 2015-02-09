@@ -3,6 +3,7 @@ Radium.BulkActionProperties = Ember.Mixin.create
   user: DS.belongsTo('Radium.User')
   tag: DS.belongsTo('Radium.Tag')
   public: DS.attr('boolean')
+  private: DS.attr('boolean')
   newTags: DS.attr('array')
   filter: DS.attr('string')
   like: DS.attr('string')
