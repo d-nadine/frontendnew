@@ -1,9 +1,11 @@
-Radium.RichtextEditorComponent = Ember.Component.extend
+Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   classNameBindings: [':richtext-editor', 'isInvalid']
   btnSize: 'bth-xs'
   height: 120
 
-  setup: (->
+  files: Ember.computed.alias 'targetObject.files'
+
+  setup: Ember.on 'didInsertElement', ->
     textarea = @$('textarea')
 
     textarea.summernote
@@ -24,10 +26,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend
 
     @$('.btn').addClass @get('btnSize')
 
-    Ember.run.scheduleOnce 'afterRender', this, 'addBootstrapDropdown'
-  ).on 'didInsertElement'
+    Ember.run.scheduleOnce 'afterRender', this, 'addOverrides'
 
-  addBootstrapDropdown: ->
+  addOverrides: ->
     if tabindex = @get('tabindex')
       @$('.note-editable').attr('tabindex', tabindex)
 
@@ -35,9 +36,29 @@ Radium.RichtextEditorComponent = Ember.Component.extend
 
     dropdowns.dropdown()
 
-  teardown: (->
+    dropzone = @$(".note-dropzone")
+
+    self = this
+
+    drop = @richTextAreaDrop.bind this
+
+    dropzone.off("drop").on "drop", drop
+
+  richTextAreaDrop: (e) ->
+    files = e.dataTransfer.files
+
+    return unless files.length
+
+    @uploadFiles files
+
+    $(document).trigger('drop')
+
+    e.preventDefault()
+    false
+
+  teardown: Ember.on 'willDestroyElement', ->
     @$('textarea').destroy()
-  ).on 'willDestroyElement'
+    @$(".note-dropzone").off('drop')
 
   keyUp: ->
     @doUpdate()
