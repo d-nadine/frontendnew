@@ -1,0 +1,12 @@
+<!-- file:///Users/paulcowan/Dropbox/Radium%20UI/Mockups/views/import/single.html -->
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Warning!</strong> <span class="name-variable">This person </span> has already been created. You are now editing an existing contact.
+</div>
+<div class="item">
+  <div class="icon"><i class="ss-standard ss-user"></i></div>
+  <div class="description">Name</div>
+  <div class="field">
+    {{autocomplete-textbox scopes="contact" value=name queryKey="displayName"}}
+  </div>
+</div>

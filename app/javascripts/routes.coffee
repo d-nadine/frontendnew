@@ -36,6 +36,7 @@ Radium.Router.map ->
 
   @resource 'leads', ->
     @route 'new'
+    @route 'single'
     @route 'import'
     @resource 'untracked', ->
       @route 'index', path: '/:filter'
