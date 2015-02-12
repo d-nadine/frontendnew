@@ -1,7 +1,7 @@
 require 'forms/form'
 
 Radium.ContactForm = Radium.Form.extend
-  data: ( ->
+  data: Ember.computed( ->
     name: @get('name')
     companyName: @get('companyName')
     isPublic: true
@@ -14,7 +14,7 @@ Radium.ContactForm = Radium.Form.extend
     emailAddresses: Ember.A()
     addresses: Ember.A()
     tagNames: Ember.A()
-  ).property().volatile()
+  )["volatile"]
 
   isValid: Ember.computed 'name', 'companyName', 'user', 'source', ->
     return if Ember.isEmpty(@get('name')) && Ember.isEmpty(@get('companyName'))
@@ -22,7 +22,7 @@ Radium.ContactForm = Radium.Form.extend
     return unless @get('user')
     true
 
-  create:  ->
+  create: ->
     data = @get('data')
     if status = data.contactStatus
       delete data.contactStatus
