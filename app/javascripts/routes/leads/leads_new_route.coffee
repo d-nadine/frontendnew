@@ -14,3 +14,4 @@ Radium.LeadsNewRoute = Ember.Route.extend
     isNew: true
     isSubmitted: false
     isSaving: false
+

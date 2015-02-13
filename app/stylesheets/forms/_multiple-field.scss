@@ -53,3 +53,9 @@
     display: inline-block;
   }
 }
+
+.multiple-address-view {
+  .country-picker.open .dropdown-menu {
+    position: static;
+  }
+}

@@ -30,7 +30,7 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
 
           setProperties item.record
         else
-          if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode')) || !Ember.isEmpty(item.get('email')) || !Ember.isEmpty(item.get('phone'))
+          if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode')) || !Ember.isEmpty(item.get('email')) || !Ember.isEmpty(item.get('phone')) || !Ember.isEmpty(item.get('country'))
             record = @get("content.#{@recordArray}").createRecord()
             setProperties record
 
@@ -66,7 +66,7 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
           city: null
           state: null
           zipcode: null
-          country: null
+          country: "US"
           isPrimary: true
 
         return
@@ -83,6 +83,5 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
   isCompany: Ember.computed 'model', ->
     @get('model').constructor is Radium.Company
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.AddressesForm.create()
-  ).property()

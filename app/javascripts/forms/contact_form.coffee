@@ -59,10 +59,11 @@ Radium.ContactForm = Radium.Form.extend
     contact
 
   addressHasValue: (address) ->
-    return true if address.get('street.length') > 1
-    return true if address.get('state.length') > 1
-    return true if address.get('city.length') > 1
-    return true if address.get('zipcode.length') > 1
+    return true if address.get('street.length')
+    return true if address.get('state.length')
+    return true if address.get('city.length')
+    return true if address.get('zipcode.length')
+    return true if address.get('country.length')
 
   reset: ->
     @_super.apply this, arguments
@@ -77,4 +78,4 @@ Radium.ContactForm = Radium.Form.extend
     @set 'isPublic', true
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
-    @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: '')])
+    @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: 'US')])

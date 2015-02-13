@@ -26,7 +26,7 @@ Radium.Address = Radium.Model.extend
     city: this.get('city')
     state: this.get('state')
     zipcode: this.get('zipcode')
-    country: this.get('country')
+    country: this.get('country') || "US"
 
   toString:  ->
     parts = [

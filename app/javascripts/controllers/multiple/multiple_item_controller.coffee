@@ -1,5 +1,9 @@
 Radium.MultipleItemController = Radium.ObjectController.extend
   actions:
+    changeCountry: (country) ->
+      @set 'model.country', country.key
+      @send 'stopEditing'
+
     setIsPrimary: ->
       @get('parent').setEach('isPrimary', false)
       @set('isPrimary', true)
