@@ -1,12 +1,12 @@
 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-  {{currency-display currency=currentCurrency}}
+  {{country-display country=current}}
   <span class="caret selectbox-caret"></span>
 </a>
 <ul class="dropdown-menu" role="menu" aria-labelledby="dlabel">
-  {{#each currency in currencies}}
+  {{#each country in countryList}}
     <li>
-      <a {{action "changeCurrency" currency}} tabindex="-1" href="#" data-option="USD">
-        {{currency-display currency=currency}}
+      <a {{action "changeCountry" country}} tabindex="-1" href="#" data-option="USD">
+        {{country-display country=country}}
       </a>
     </li>
   {{/each}}
