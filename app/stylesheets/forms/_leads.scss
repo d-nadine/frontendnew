@@ -285,3 +285,24 @@
     margin: 0;
   }
 }
+
+.leads-view .country-picker.open .dropdown-menu {
+  position: absolute !important;
+}
+
+.sidebar-addresses-view {
+
+  .multiple-field {
+    position: static !important;
+
+    .country-picker {
+      position: static;
+
+      .dropdown-menu {
+        position: absolute;
+        margin-left: 45px;
+        margin-top: -20px;
+      }
+    }
+  }
+}
