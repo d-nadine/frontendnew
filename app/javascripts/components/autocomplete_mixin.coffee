@@ -31,7 +31,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
       @send 'setBindingValue', object
 
-      el = @autocompletElement()
+      el = @autocompleteElement()
 
       isInput = el.get(0).tagName == "INPUT"
 
@@ -111,6 +111,14 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     null
 
+  showTypeahead: ->
+    pos = $.extend({}, @$element.position(), height: @$element[0].offsetHeight)
+    @$menu.insertAfter(@$element).css(
+      top: pos.top + pos.height
+      left: pos.left).show()
+    @shown = true
+    this
+
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
@@ -154,6 +162,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     typeahead.matcher = @matcher.bind(this)
     typeahead.sorter = @sorter.bind(this)
     typeahead.highlighter = @highlighter.bind(this)
+
+    typeahead.show = @showTypeahead.bind(typeahead)
 
     typeahead.select = ->
       val = @$menu.find('.active').data('typeahead-value')

@@ -1,20 +1,40 @@
 .country-picker {
   position: relative;
 
-  .dropdown-toggle {
+  .selected-container {
     display: inline-block;
-    padding: 6px 24px 6px 12px;
-    text-decoration: none;
-    width: 166px;
+    padding: 4px 25px 6px 12px;
+    width: 180px;
     font-size: 14px;
     color: #555;
-    vertical-align: middle;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+    .glyphicon {
+      float: left;
+      position: relative;
+      top: 4px;
+    }
+
+    b {
+      position: absolute;
+      top: 7px;
+    }
+
+    input[type=text] {
+      width: 130px;
+      border: none !important;
+      border-radius: 0px !important;
+      background-color: white;
+      background-image: none;
+      box-shadow: none;
+      position: relative;
+      top: -2px;
+    }
   }
 
   .selectbox-option {
@@ -28,9 +48,12 @@
 
   .selectbox-caret {
     float: right;
-    margin-top: 8px;
-    margin-right: -16px;
-    margin-left: -10px;
+    margin-top: 6px;
+    margin-right: -13px;
+  }
+
+  ul.dropdown-menu {
+    width: 215px;
   }
 
   ul li a {
@@ -52,3 +75,26 @@
     margin-right: 5px;
   }
 }
+
+
+.leads-view .country-picker.open .dropdown-menu {
+  position: absolute !important;
+}
+
+.sidebar-addresses-view {
+
+  .multiple-field {
+    position: static !important;
+
+    .country-picker {
+      position: static;
+
+      .dropdown-menu {
+        position: absolute;
+        margin-left: 45px;
+        margin-top: -20px;
+      }
+    }
+  }
+}
+

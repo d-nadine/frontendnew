@@ -1,7 +1,7 @@
-<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-  {{country-display country=current}}
+<span class="selected-container" {{action "toggleDropdown"}}>
+  {{country-display country=current editable=true}}
   <span class="caret selectbox-caret"></span>
-</a>
+</span>
 <ul class="dropdown-menu" role="menu" aria-labelledby="dlabel">
   {{#each country in countryList}}
     <li>

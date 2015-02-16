@@ -1,1 +1,7 @@
-<i {{bind-attr class=":glyphicon icon"}}></i>{{displayName}} <b>{{country.symbol}}</b>
+<i {{bind-attr class=":glyphicon icon"}}></i>
+{{#unbound if editable}}
+  <input type="text" {{bind-attr value=displayName}}/>
+{{else}}
+  {{displayName}}
+{{/unbound}}
+<b>{{country.symbol}}</b>

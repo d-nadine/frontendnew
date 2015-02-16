@@ -1,8 +1,15 @@
 Radium.Countries = [
   {key: 'AOA', 'label':'Angola','currencyflag':''},
+  {key: 'ARG', 'label':'Argentina','currencyflag':''},
   {key: 'AUS', 'label':'Australia','currencyflag':'AUD'},
+  {key: 'BNG', 'label':'Bangladesh','currencyflag':''},
+  {key: 'BRA', 'label':'Brazil','currencyflag':''},
+  {key: 'BUL', 'label':'Bulgaria','currencyflag':''},
   {key: 'CA', 'label':'Canada','currencyflag':''},
+  {key: 'CHL', 'label':'Chilea','currencyflag':''},
+  {key: 'CHN', 'label':'China','currencyflag':''},
   {key: 'CHF', 'label':'Switzerland','currencyflag':'CHF'},
+  {key: 'COP', 'label':'Colombia','currencyflag':''},
   {key: 'EUR', 'label':'Europe','currencyflag':'EUR'},
   {key: 'GB', 'label':'Great Britain','currencyflag':''},
   {key: 'IDR', 'label':'Indonesia','currencyflag':''},
@@ -10,3 +17,27 @@ Radium.Countries = [
   {key: 'PLN', 'label':'Poland','currencyflag':''},
   {key: 'US', 'label':'United States','currencyflag':''}
 ]
+
+
+
+# {key: 'DKK', 'label':'Denmark','currencyflag':'DKK'},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
+# {key: '', 'label':'','currencyflag':''},
