@@ -56,13 +56,15 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
     result = string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
       "<strong>#{match}</strong>"
 
-    if item.key?.length
+    if item?.key.length
       key = item.key.substr(0, 2)
       flag = "<i class=\"glyphicon bfh-flag-#{key}\"></i>"
     else
       flag = ""
 
-    result = "#{flag} #{result} <strong>#{item.symbol} "
+    symbol = item?.symbol || ""
+
+    result = "#{flag} #{result} <strong>#{symbol}</strong>"
 
   showTypeahead: ->
     pos = $.extend({}, @$element.position(), height: @$element[0].offsetHeight)

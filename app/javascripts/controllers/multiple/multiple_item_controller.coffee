@@ -82,3 +82,8 @@ Radium.MultipleItemController = Radium.ObjectController.extend
 
   showDelete: Ember.computed 'parent.[]', ->
     @get('parent.length') > 1
+
+  potentialCountry: ""
+
+  setBindingKey: ->
+    "targetObject.potentialCountry"

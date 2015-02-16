@@ -4,6 +4,9 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       return false if @get ('isLoading')
       @_super.apply this, arguments
 
+    setBindingValue: ->
+      throw new Error('subclasses need to override setBindingValue')
+
   isLoading: false
 
   matchesSelection: (value) ->
@@ -14,9 +17,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     return unless selected
     value?.toLowerCase() == selected?.toLowerCase()
-
-  setBindingValue: (object) ->
-    null
 
   setValue: (object) ->
     @set('isLoading', true)
