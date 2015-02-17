@@ -18,8 +18,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     return unless selected
     value?.toLowerCase() == selected?.toLowerCase()
 
-  setBindingValue: (object) ->
-
   setValue: (object) ->
     @set('isLoading', true)
     person = object.get('person')
@@ -130,26 +128,10 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     Ember.assert "No element found in AutocompleteMixin", el.length
 
-<<<<<<< HEAD
     unless @get('sync')
       el.typeahead source: @asyncSource.bind(this)
     else
       el.typeahead source: @get('source')
-=======
-    el.typeahead source: (query, process) =>
-      queryParameters = @queryParameters(query)
-
-      @set('isLoading', true)
-
-      Radium.AutocompleteItem.find(queryParameters).then((results) =>
-        process results
-        @set('isLoading', false)
-
-      , Radium.rejectionHandler)
-      .then(null, Radium.rejectionHandler)
-
-      null
->>>>>>> one way binding between components
 
     typeahead = el.data('typeahead')
 
