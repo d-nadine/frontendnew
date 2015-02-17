@@ -84,6 +84,3 @@ Radium.MultipleItemController = Radium.ObjectController.extend
     @get('parent.length') > 1
 
   potentialCountry: ""
-
-  setBindingKey: ->
-    "targetObject.potentialCountry"

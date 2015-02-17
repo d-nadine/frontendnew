@@ -87,9 +87,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   updater: (item) ->
     @set 'value', item
 
-  bindQuery: ->
-    throw new Error('You must override bindQuery in subclass.')
-
   getField: ->
     throw new Error('You must override getField in subclass.')
 
@@ -124,9 +121,9 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     @field = @getField.call this
 
-    bindingKey = @bindQuery.call this
-
-    binding = Ember.bind this, 'query', bindingKey
+    if @bindQuery
+      bindingKey = @bindQuery.call this
+      binding = Ember.bind this, 'query', bindingKey
 
     el = @autocompleteElement.call this
 
