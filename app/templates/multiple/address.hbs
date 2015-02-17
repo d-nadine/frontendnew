@@ -1,21 +1,21 @@
 <div class="addresses control-group">
   {{#if parentController.parentController.isCompany}}
     <div class="control-group">
-      {{input type="text" value=email class="field input-xlarge" placeholder="email"}}
+      {{input type="text" value=email class="field input-xlarge" placeholder="Email"}}
     </div>
     <div class="control-group">
-      {{input type="text" value=phone class="field input-xlarge" placeholder="phone"}}
+      {{input type="text" value=phone class="field input-xlarge" placeholder="Phone"}}
     </div>
   {{/if}}
   <div class="control-group">
-    {{input type="text" value=street class="field input-xlarge" placeholder="street"}}
+    {{input type="text" value=street class="field input-xlarge" placeholder="Street"}}
   </div>
   <div class="control-group">
     {{input type="text" value=city class="field input-xlarge city" placeholder="City"}}
   </div>
   <div class="control-group">
-    {{input type="text" value=state class="field state input-medium" placeholder="State"}}
-    {{input type="text" value=zipcode class="field zip input-small" placeholder="Zip Code"}}
+    {{input type="text" value=state class="field state input-medium" placeholder="State / Province"}}
+    {{input type="text" value=zipcode class="field zip input-small" placeholder="Zip / Postal Code"}}
   </div>
   <div class="control-group">
     {{country-picker changeCountry="changeCountry" current=country countryList=Radium.Countries query=potentialCountry}}
