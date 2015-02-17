@@ -47,7 +47,10 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
   sync: true
 
   source: Ember.computed 'countryList.[]', ->
-    @get('countryList').map (c) -> Ember.Object.create(c)
+    source = @get('countryList').map (c) -> Ember.Object.create(c)
+
+    source.sort (a, b) ->
+      Ember.compare a.get('label'), b.get('label')
 
   highlighter: (item) ->
     string = item.get @field

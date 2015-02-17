@@ -3,7 +3,7 @@
   <span class="caret selectbox-caret"></span>
 </span>
 <ul class="dropdown-menu" role="menu" aria-labelledby="dlabel">
-  {{#each country in countryList}}
+  {{#each country in source}}
     <li>
       <a {{action "changeCountry" country}} tabindex="-1" href="#" data-option="USD">
         {{country-display country=country}}
