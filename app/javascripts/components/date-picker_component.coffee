@@ -64,7 +64,7 @@ Radium.DatePickerComponent = Ember.Component.extend
       allowedKeyCodes = Ember.A([@TAB, @ENTER, @ESCAPE, @DELETE])
       @set('allowedKeyCodes', allowedKeyCodes)
 
-    didInsertElement: ->
+    setup: Ember.on 'didInsertElement', ->
       @_super.apply this, arguments
       @addObserver 'value', this, 'valueDidChange'
       nowTemp = new Date()
@@ -157,7 +157,7 @@ Radium.DatePickerComponent = Ember.Component.extend
             clearDate()
             return @get('targetObject').sendAction('submitForm')
           else
-            clearDate()
+            changeDate()
       else if keyCode == @ESCAPE
         @resetDateDisplay()
       else if keyCode == @TAB
@@ -188,7 +188,7 @@ Radium.DatePickerComponent = Ember.Component.extend
 
     valueDidChange: ->
       originalDate = @get('date')?.toJSDate()
-      return unless originalDate
+
       today = Ember.DateTime.create().toJSDate()
       value = @get('value')?.toLowerCase()
       datePicker = @get('datePicker')
@@ -201,6 +201,10 @@ Radium.DatePickerComponent = Ember.Component.extend
         "wed": "wednesday"
         "thu": "thursday"
         "fri": "friday"
+
+      if !value || originalDate?.isMinDate()
+        @set('value', null)
+        return
 
       if value?.length <= 2 && originalDate
         @$().datepicker('setValue', originalDate)
@@ -241,7 +245,7 @@ Radium.DatePickerComponent = Ember.Component.extend
         @$().datepicker('setValue', originalDate)
         return
 
-      @$().datepicker('setValue', result)
+      @$().datepicker('setValue', result) unless result.isMinDate()
 
     focusIn: (e) ->
       Ember.run.next  =>

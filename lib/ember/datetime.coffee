@@ -7,6 +7,9 @@ Date.prototype.readableTimeAgo = ->
 
   ret
 
+Date.prototype.isMinDate = ->
+  @getDate() == 1 && @getMonth() == 0 && @getFullYear() == 1970
+
 Ember.DateTime.reopen
   readableTimeAgo: ->
     @toJSDate().readableTimeAgo()
