@@ -99,7 +99,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     Radium.AutocompleteItem.find(queryParameters).then((results) =>
       process results
-      p results.get('length')
       @set('isLoading', false)
 
     , Radium.rejectionHandler)

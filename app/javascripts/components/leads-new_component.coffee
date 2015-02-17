@@ -1,8 +1,7 @@
 Radium.LeadsNewComponent = Ember.Component.extend
   actions:
-    modelSelected: (model) ->
-      @set 'form', null
-      @set 'model', model
+    modelChanged: (model) ->
+      @sendAction 'modelChanged', model
 
   classNameBindings: [':form', ':new-lead-form']
 
