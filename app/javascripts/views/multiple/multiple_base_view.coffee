@@ -7,7 +7,7 @@ Radium.MultipleBaseView = Radium.View.extend
     classNames: 'primary-label'
     leader: 'Primary'
 
-    didInsertElement: ->
+    setup: Ember.on 'didInsertElement', ->
       @set('checked', true) if @get('controller.isPrimary')
 
     isChecked: Ember.computed.bool 'controller.isPrimary'
