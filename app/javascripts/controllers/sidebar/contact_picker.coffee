@@ -16,12 +16,10 @@ Radium.SidebarContactPickerController = Radium.SidebarBaseController.extend
     setForm: ->
       @set 'form.contact', @get('model.contact')
 
-  isValid: ( ->
+  isValid: Ember.computed 'form.contact',  'isEditing', ->
     return unless @get('isEditing')
     return if Ember.isEmpty @get('form.contact')
     true
-  ).property('form.contact',  'isEditing')
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.ContactForm.create()
-  ).property()
