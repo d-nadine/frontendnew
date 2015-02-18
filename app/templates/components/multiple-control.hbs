@@ -1,0 +1,28 @@
+{{#each item in items}}
+  <div class="item" id="email">
+    <div class="icon"><i class="ss-standard ss-mail"></i></div>
+    <div class="description">
+      <select>
+        <option>Work Email</option>
+        <option>Personal Email</option>
+      </select>
+    </div>
+    <div class="field">
+      {{#with item}}
+        {{yield}}
+      {{/with}}
+      <div class="extra-field">
+        <a href="#">
+          <i class="ss-standard ss-plus"></i>
+        </a>
+      </div>
+      <div class="extra-delete">
+        <a href="#">
+          <i class="ss-standard ss-trash"></i>
+        </a>
+      </div>
+      <input type="checkbox">
+      <span class="primary-check">Primary</span>
+    </div>
+  </div>
+{{/each}}

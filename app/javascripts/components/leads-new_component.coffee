@@ -3,6 +3,9 @@ Radium.LeadsNewComponent = Ember.Component.extend
     modelChanged: (model) ->
       @sendAction 'modelChanged', model
 
+    clearExisting: ->
+      @sendAction 'clearExisting'
+
   classNameBindings: [':form', ':new-lead-form']
 
   setup: Ember.on 'didInsertElement', ->
@@ -11,4 +14,11 @@ Radium.LeadsNewComponent = Ember.Component.extend
   initialise: ->
     @$('.contact-name input[type=text]').focus()
 
+  modelDidChange: Ember.observer 'model', ->
+    Ember.run.next =>
+      @initialise()
+
   form: null
+
+  contactName: ""
+  companyName: ""

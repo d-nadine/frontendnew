@@ -11,13 +11,10 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   getField: ->
     @get('queryKey')
 
-  bindQuery: ->
-    @get('bindQueryKey')
-
   autocompleteElement: ->
     @$('input[type=text].combobox:first')
 
   input: (e) ->
     el = @autocompleteElement()
 
-    @set 'value', el.val()
+    @set 'query', el.val()

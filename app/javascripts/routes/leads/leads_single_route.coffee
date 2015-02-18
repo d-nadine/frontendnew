@@ -5,6 +5,14 @@ Radium.LeadsSingleRoute = Ember.Route.extend
       controller.set 'form', null
       controller.set 'model', model
 
+    clearExisting: ->
+      form = @get('contactForm')
+      form.reset()
+
+      controller = @controller
+
+      controller.set 'model', form
+
   model: ->
     @get('contactForm')
 

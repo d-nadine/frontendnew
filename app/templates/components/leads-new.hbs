@@ -1,15 +1,20 @@
-<!-- file:///Users/paulcowan/Dropbox/Radium%20UI/Mockups/views/import/single.html -->
+<!-- file:///Users/paulcowan/Dropbox/Mockups/views/import/single.html -->
+{{#unless model.isNew}}
 <div class="alert">
   <button type="button" class="close" data-dismiss="alert">×</button>
   <strong>Warning!</strong> <span class="name-variable">This person </span> has already been created. You are now editing an existing contact.
 </div>
+{{/unless}}
 <div class="item contact-name">
   <div class="icon">
     <i class="ss-standard ss-user"></i>
   </div>
   <div class="description">Name</div>
   <div class="field">
-    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" bindQueryKey="targetObject.model.name" action="modelChanged"}}
+    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" query=contactName  action="modelChanged"}}
+    {{#unless model.isNew}}
+      <button class="btn btn-primary" {{action "clearExisting"}}>Clear</button>
+    {{/unless}}
   </div>
 </div>
 <div class="item company">
@@ -18,6 +23,9 @@
   </div>
   <div class="description">Company</div>
   <div class="field">
-    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" bindQueryKey="targetObject.model.companyName"}}
+    {{autocomplete-textbox query=companyName scopes="company" value=model.companyName queryKey="name"}}
   </div>
 </div>
+{{#multiple-control items=model.emailAddresses}}
+  <input type="text" class="single" {{bind-attr value=value}}/>
+{{/multiple-control}}
