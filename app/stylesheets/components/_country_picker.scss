@@ -54,6 +54,11 @@
 
   ul.dropdown-menu {
     width: 215px;
+
+    li.active a {
+      color: white;
+      background: $blue;
+    }
   }
 
   ul li a {

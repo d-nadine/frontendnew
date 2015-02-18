@@ -28,6 +28,16 @@
     position: relative;
   }
 
+  .addresses {
+
+    .state {
+      width: 130px;
+    }
+    .zip {
+      width: 120px;
+    }
+  }
+
   .contact-detail{
     .detail{
       width: 100%;

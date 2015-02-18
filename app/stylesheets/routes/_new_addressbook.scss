@@ -497,6 +497,10 @@
       display: inline;
       width: 100%;
 
+      a::-webkit-scrollbar {
+        display: none !important;
+      }
+
       &.is-saving {
         color: #fff;
       }
@@ -630,6 +634,7 @@
       .assignto {
         height: 22px;
         box-shadow: none;
+        overflow-y: hidden;
 
         .assignto-left {
           height: 22px;
