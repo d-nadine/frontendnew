@@ -27,5 +27,5 @@
   </div>
 </div>
 {{#multiple-control items=model.emailAddresses}}
-  <input type="text" class="single" {{bind-attr value=value}}/>
+  {{autocomplete-email queryKey="email" query=contactEmail value=value class="single" scopes="contact"}}
 {{/multiple-control}}

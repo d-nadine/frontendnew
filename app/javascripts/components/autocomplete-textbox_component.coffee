@@ -8,9 +8,6 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
   classNameBindings: [':combobox-container']
 
-  getField: ->
-    @get('queryKey')
-
   autocompleteElement: ->
     @$('input[type=text].combobox:first')
 

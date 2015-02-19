@@ -22,3 +22,4 @@ Radium.LeadsNewComponent = Ember.Component.extend
 
   contactName: ""
   companyName: ""
+  contactEmail: ""
