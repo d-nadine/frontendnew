@@ -36,6 +36,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       return @send 'setPlaceholder'
 
     saveField: (item) ->
+      return if @get('isSaving')
+
       bufferedProxy = @get('bufferedProxy')
 
       return unless bufferedProxy
@@ -99,7 +101,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   isTransitioning: false
 
   contenteditable: Ember.computed "isSaving", ->
-    "true" unless @get("isSaving")
+    if @get("isSaving")
+      "false"
+    else
+      "true"
 
   bufferedProxy: Ember.computed 'model', ->
     BufferedObjectProxy.create content: @get('model')

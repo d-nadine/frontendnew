@@ -20,7 +20,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   setValue: (object) ->
     @set('isLoading', true)
-    @set('contenteditable', "false")
     person = object.get('person')
 
     observer = =>
