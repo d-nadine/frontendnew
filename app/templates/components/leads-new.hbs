@@ -29,7 +29,7 @@
   </div>
 </div>
 {{#each email in model.emailAddresses}}
-  {{#multiple-control item=email items=model.emailAddresses queryField=contactEmail action="modelChanged" model=model relationship="emailAddresses"}}
-    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged"}}
+  {{#multiple-control item=email items=model.emailAddresses queryField=contactEmail action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel"}}
+    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel"}}
   {{/multiple-control}}
 {{/each}}

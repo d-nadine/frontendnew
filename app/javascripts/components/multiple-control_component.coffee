@@ -4,10 +4,16 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
       @sendAction 'action', object
 
     addItem: ->
-      currentIndex = @get('length')
-      label = @labels[0]
-      item = Ember.Object.create isPrimary: false, name: label, value: ''
-      @get('items').pushObject  item
+      model = @get('model')
+
+      if model.get('isNew')
+        currentIndex = @get('length')
+        label = @labels[0]
+        item = Ember.Object.create isPrimary: false, name: label, value: ''
+        @get('items').pushObject  item
+        return
+
+      model.get(@get('relationship')).createRecord()
 
     removeItem: (item) ->
       model = @get('model')
@@ -27,7 +33,7 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
 
       setFirstToPrimary() if isPrimary
 
-      model.save(this)
+      @sendAction 'saveModel'
 
     setPrimary: (item) ->
       Ember.run.next =>
@@ -38,7 +44,7 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
 
         return if model.get('isNew')
 
-        model.save(this)
+        @sendAction 'saveModel'
 
   multiple: Ember.computed 'items.length', ->
     @get('items.length') > 1

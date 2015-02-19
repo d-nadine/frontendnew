@@ -1,20 +1,10 @@
 Radium.LeadsSingleRoute = Ember.Route.extend
-  actions:
-    modelChanged: (model) ->
-      controller = @controller
-      controller.set 'form', null
-      controller.set 'model', model
-
-    clearExisting: ->
-      form = @get('contactForm')
-      form.reset()
-
-      controller = @controller
-
-      controller.set 'model', form
-
-  model: ->
-    @get('contactForm')
+  setupController: (controller) ->
+    contactForm = @get('contactForm')
+    controller.set 'model', contactForm
+    controller.set 'contactForm', contactForm
+    controller.get('model').reset()
+    controller.set 'model.user', @controllerFor('currentUser').get('model')
 
   contactForm:  Radium.computed.newForm('contact')
 
@@ -22,3 +12,6 @@ Radium.LeadsSingleRoute = Ember.Route.extend
     isNew: true
     isSubmitted: false
     isSaving: false
+
+  deactivate: ->
+    @controller.get('model').reset()

@@ -6,6 +6,9 @@ Radium.LeadsNewComponent = Ember.Component.extend
     clearExisting: ->
       @sendAction 'clearExisting'
 
+    saveModel: ->
+      @sendAction 'saveModel'
+
   classNameBindings: [':form', ':new-lead-form']
 
   setup: Ember.on 'didInsertElement', ->
