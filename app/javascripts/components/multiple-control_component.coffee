@@ -12,15 +12,20 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
     removeItem: (item) ->
       model = @get('model')
 
-      if model.get('isNew')
-        return @get('items').removeObject item
-
       isPrimary = item.get('isPrimary')
+
+      setFirstToPrimary = =>
+        items = model.get(@get('relationship'))
+        next = items.find (i) -> i != item
+        next.set 'isPrimary', true
+
+      if model.get('isNew')
+        setFirstToPrimary() if isPrimary
+        return @get('items').removeObject item
 
       model.get(@get('relationship')).removeObject item
 
-      if isPrimary
-        model.get(@get('relationship')).get('firstObject').set 'isPrimary', true
+      setFirstToPrimary() if isPrimary
 
       model.save(this)
 
