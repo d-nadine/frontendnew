@@ -496,6 +496,7 @@
       outline: none;
       display: inline;
       width: 100%;
+      padding-left: 1px;
 
       a::-webkit-scrollbar {
         display: none !important;
@@ -503,6 +504,10 @@
 
       &.is-saving {
         color: #fff;
+      }
+
+      &.is-invalid a {
+        color: $red;
       }
 
       &:focus{

@@ -65,16 +65,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
         company.reload()
 
-    saveEmail: (context) ->
-      unless context.get('model.email')
-        email = context.get('bufferedProxy.email')
-        context.get('bufferedProxy').discardBufferedChanges()
-
-        context.get('model.emailAddresses').createRecord
-                         name: 'work'
-                         value: email
-                         isPrimary: true
-
     savePhone: (context) ->
       unless context.get('model.phone')
         phone = context.get('bufferedProxy.phone')

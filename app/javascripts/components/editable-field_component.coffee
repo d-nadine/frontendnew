@@ -17,7 +17,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         target.transitionToRoute routable.humanize(), routable
 
     updateModel: ->
-      return if @get('isInvalid')
+      if @get('isInvalid')
+        return @get('containingController').send 'flashError', 'Field is not valid.'
 
       unless bufferedProxy = @get('bufferedProxy')
         return
@@ -42,6 +43,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       bufferKey = @get('bufferKey')
 
       return unless bufferedProxy.hasBufferedChanges
+
+      if @get('isInvalid')
+        return @get('containingController').send 'flashError', 'Field is not valid.'
 
       @set 'isSaving', true
 
@@ -174,6 +178,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     route = @get('route')
     @$().html @get('markUp')
     @setEndOfContentEditble()
+    a = @$('a.route')
 
   keyDown: (e) ->
     # sadly classNameBindings does not seem to
@@ -183,12 +188,16 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     else
       @$().removeClass 'is-invalid'
 
+    bufferedProxy = @get('bufferedProxy')
+
     if e.keyCode == @ENTER
       Ember.run.next =>
         @send 'updateModel'
       return false
 
     if e.keyCode == @ESCAPE
+      bufferedProxy.discardBufferedChanges()
+      @$().html @get('markUp')
       return false
 
     true
