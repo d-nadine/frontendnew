@@ -11,3 +11,5 @@ Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMi
     el = @autocompleteElement()
 
     @set 'query', el.val()
+
+  type: 'email'

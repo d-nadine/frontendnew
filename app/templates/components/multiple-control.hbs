@@ -12,17 +12,19 @@
         {{yield}}
       {{/with}}
       <div class="extra-field">
-        <a href="#">
+        <a href="#" {{action "addItem"}}>
           <i class="ss-standard ss-plus"></i>
         </a>
       </div>
-      <div class="extra-delete">
-        <a href="#">
-          <i class="ss-standard ss-trash"></i>
-        </a>
-      </div>
-      <input type="radio">
-      <span class="primary-check">Primary</span>
+      {{#if multiple}}
+        <div class="extra-delete">
+          <a href="#" {{action "removeItem" item}}>
+            <i class="ss-standard ss-trash"></i>
+          </a>
+        </div>
+        <input type="radio">
+        <span class="primary-check">Primary</span>
+      {{/if}}
     </div>
   </div>
 {{/each}}
