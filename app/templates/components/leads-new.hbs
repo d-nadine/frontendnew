@@ -28,6 +28,8 @@
     {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name"}}
   </div>
 </div>
-{{#multiple-control items=model.emailAddresses queryField=contactEmail action="modelChanged"}}
-  {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged"}}
-{{/multiple-control}}
+{{#each email in model.emailAddresses}}
+  {{#multiple-control item=email items=model.emailAddresses queryField=contactEmail action="modelChanged" model=model relationship="emailAddresses"}}
+    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged"}}
+  {{/multiple-control}}
+{{/each}}

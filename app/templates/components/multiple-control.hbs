@@ -1,30 +1,29 @@
-{{#each item in items}}
-  <div class="item" id="email">
-    <div class="icon"><i class="ss-standard ss-mail"></i></div>
-    <div class="description">
-      <select>
-        <option>Work Email</option>
-        <option>Personal Email</option>
-      </select>
-    </div>
-    <div class="field">
-      {{#with item}}
-        {{yield}}
-      {{/with}}
-      <div class="extra-field">
+<div class="item" id="email">
+  <div class="icon"><i class="ss-standard ss-mail"></i></div>
+  <div class="description">
+    {{view Ember.Select
+    content=labels
+    selection=currentLabel}}
+  </div>
+  <div class="field">
+    {{#with item}}
+      {{yield}}
+    {{/with}}
+    <div class="extra-field">
+      {{#if isLast}}
         <a href="#" {{action "addItem"}}>
           <i class="ss-standard ss-plus"></i>
         </a>
-      </div>
-      {{#if multiple}}
-        <div class="extra-delete">
-          <a href="#" {{action "removeItem" item}}>
-            <i class="ss-standard ss-trash"></i>
-          </a>
-        </div>
-        <input type="radio">
-        <span class="primary-check">Primary</span>
       {{/if}}
     </div>
+    {{#if multiple}}
+      <div class="extra-delete">
+        <a href="#" {{action "removeItem" item}}>
+          <i class="ss-standard ss-trash"></i>
+        </a>
+      </div>
+      <input type="radio" name="primary" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}}>
+      <span class="primary-check">Primary</span>
+    {{/if}}
   </div>
-{{/each}}
+</div>
