@@ -19,7 +19,3 @@ Radium.LeadsNewComponent = Ember.Component.extend
       @initialise()
 
   form: null
-
-  contactName: ""
-  companyName: ""
-  contactEmail: ""

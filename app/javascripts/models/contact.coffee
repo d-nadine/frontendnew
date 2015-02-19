@@ -95,6 +95,21 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     else
       @get('name')
 
+  nameWithEmail: Ember.computed 'name', 'primaryEmail', ->
+    name = @get('name')
+    email = @get('email')
+
+    hasName = name?.length
+    hasEmail = email?.length
+
+    if hasName && not hasEmail
+      return name
+
+    if hasEmail && not hasName
+      return email
+
+    "#{name} (#{email})"
+
   isUpdating: Ember.computed.equal 'updateStatus', 'updating'
 
   track: ->

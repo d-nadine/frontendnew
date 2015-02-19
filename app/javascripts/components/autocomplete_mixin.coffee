@@ -53,7 +53,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     term: query
     scopes: scopes
 
-  # Begin typeahead customization
   matcher: (item) ->
     string = item.get @field
     return unless @query
@@ -75,6 +74,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
         caseInsensitive.push(item)
 
     beginswith.concat caseSensitive, caseInsensitive
+
+  holder: ""
 
   highlighter: (item) ->
     string = item.get @field
@@ -122,10 +123,10 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     if @bindQuery
       bindingKey = @bindQuery.call this
       binding = Ember.bind this, 'query', bindingKey
+    else
+      binding = Ember.bind this, 'query', "holder"
 
     el = @autocompleteElement.call this
-
-    Ember.assert "No element found in AutocompleteMixin", el.length
 
     unless @get('sync')
       el.typeahead source: @asyncSource.bind(this)
@@ -145,7 +146,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     typeahead.process = (items) ->
       Ember.RSVP.Promise.resolve(items).then =>
-        items = items.filter (item) => @matcher(item)
+        items = items.filter (item) =>
+          @matcher(item)
 
         items = @sorter(items)
 
