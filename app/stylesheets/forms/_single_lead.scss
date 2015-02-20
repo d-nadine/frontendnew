@@ -34,6 +34,11 @@
   margin-left: 12px;
 }
 
+.form .item .as-selections {
+  border: 1px solid #cccccc;
+}
+
+.form .item input.as-input,
 .form .item input.single {
   height: 25px !important;
   margin-bottom: 0;
