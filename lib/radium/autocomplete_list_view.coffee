@@ -105,6 +105,11 @@ Radium.AutocompleteView = Radium.View.extend
 
     @send('addSelection', item)
 
+  newItemCriteria: (text) ->
+    Radium.EMAIL_REGEX.test text
+
+  allowSpaces: false
+
   autocomplete: Ember.TextField.extend Radium.KeyConstantsMixin,
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'targetObject.currentUser'
@@ -124,8 +129,12 @@ Radium.AutocompleteView = Radium.View.extend
 
       value = @get('value') || ''
 
+      if e.keyCode == @SPACE && @get('parentView.allowSpaces')
+        return callSuper()
+
       if [@SPACE, @ENTER].contains e.keyCode
-        return callSuper() unless Radium.EMAIL_REGEX.test(value)
+        unless @get('parentView').newItemCriteria(value)
+          return callSuper()
 
         @get('parentView').selectionAdded value
         @set 'value', ''

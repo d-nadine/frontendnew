@@ -14,6 +14,7 @@ Radium.TagAutoComplete = Radium.AutocompleteView.extend
   showAvatar: false
   showAvatarInResults: false
   minChars: 0
+  allowSpaces: true
   newItemCriteria: (text) ->
     re = /^(?=.*[^\W_])[\w ]{2,}$/
     re.test text
