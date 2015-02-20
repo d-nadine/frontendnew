@@ -3,7 +3,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   Radium.CanFollowMixin,
   Radium.TrackContactMixin,
   Ember.Evented,
-
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item

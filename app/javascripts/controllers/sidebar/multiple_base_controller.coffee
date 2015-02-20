@@ -1,6 +1,6 @@
 require 'controllers/sidebar/sidebar_base_controller'
 
-Radium.MultipleBaseController = Radium.SidebarBaseController.extend
+Radium.MultipleBaseController = Radium.SidebarBaseController.extend Radium.FormArrayBehaviour,
   actions:
     commit: ->
       @get("form.#{@recordArray}").forEach (item) =>
@@ -15,16 +15,6 @@ Radium.MultipleBaseController = Radium.SidebarBaseController.extend
       @get('content.transaction').commit()
 
     setForm: ->
-      recordArray = @get(@recordArray)
       formArray = @get("form.#{@recordArray}")
 
-      unless recordArray.get('length')
-        formArray.pushObject Ember.Object.create
-          isPrimary: true, name: 'Work', value:''
-
-        return
-
-      recordArray.forEach (item) ->
-        formArray.pushObject Ember.Object.create(
-          isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item
-        )
+      @send 'createFormFromRelationship', @get('model'), @recordArray, formArray

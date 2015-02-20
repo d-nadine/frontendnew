@@ -14,6 +14,5 @@ Radium.SidebarEmailAddressesController = Radium.MultipleBaseController.extend
   isValid: true
   recordArray: 'emailAddresses'
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.EmailAddressesForm.create()
-  ).property()

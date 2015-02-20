@@ -6,7 +6,7 @@ Radium.MultipleController = Radium.ArrayController.extend
       item = Ember.Object.create isPrimary: false, name: label, value: ''
       @get('content').pushObject  item
 
-  labels: ['Work','Personal']
+  labels: ['Work', 'Personal']
 
   currentLabel: Ember.computed 'item.name', ->
     @get('item.name')?.toLowerCase().capitalize()

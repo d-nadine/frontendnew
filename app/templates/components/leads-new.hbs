@@ -28,8 +28,20 @@
     {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name"}}
   </div>
 </div>
-{{#each email in model.emailAddresses}}
-  {{#multiple-control item=email items=model.emailAddresses queryField=contactEmail action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel"}}
+{{#each email in emailAddresses}}
+  {{#multiple-control item=email items=emailAddresses action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail"}}
     {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel"}}
   {{/multiple-control}}
 {{/each}}
+{{#each phoneNumber in phoneNumbers}}
+  {{#multiple-control item=phoneNumber items=phoneNumbers action="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel" icon="ss-phone"}}
+    {{phone-input value=value class="single"}}
+  {{/multiple-control}}
+{{/each}}
+<div class="item">
+  <div class="icon"><i class="ss-standard ss-list"></i></div>
+  <div class="description">Lists</div>
+  <div class="field">
+    <input type="text" class="single" placeholder="">
+  </div>
+</div>

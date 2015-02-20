@@ -1,5 +1,5 @@
 <div class="item" id="email">
-  <div class="icon"><i class="ss-standard ss-mail"></i></div>
+  <div class="icon"><i {{bind-attr class=":ss-standard icon"}}></i></div>
   <div class="description">
     {{view Ember.Select
     content=labels
@@ -18,7 +18,7 @@
     </div>
     {{#if multiple}}
       <div class="extra-delete">
-        <a href="#" {{action "removeItem" item}}>
+        <a href="#" {{action "removeSelection" item}}>
           <i class="ss-standard ss-trash"></i>
         </a>
       </div>

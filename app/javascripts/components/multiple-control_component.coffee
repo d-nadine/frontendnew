@@ -1,50 +1,26 @@
+require 'controllers/form_array_behaviour'
+
 Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContextHackMixin,
+  Radium.FormArrayBehaviour,
   actions:
+    stopEditing: ->
+      @sendAction 'saveModel' unless @get('model.isNew')
+
+    removeMultiple: (relationship, item) ->
+      @get('model').get(@get('relationship')).removeObject item
+
     modelChanged: (object) ->
       @sendAction 'action', object
 
+    removeSelection: (object) ->
+      @_super.apply this, arguments
+
+      @send 'stopEditing'
+
     addItem: ->
-      model = @get('model')
-
-      if model.get('isNew')
-        currentIndex = @get('length')
-        label = @labels[0]
-        item = Ember.Object.create isPrimary: false, name: label, value: ''
-        @get('items').pushObject  item
-        return
-
-      model.get(@get('relationship')).createRecord()
-
-    removeItem: (item) ->
-      model = @get('model')
-
-      isPrimary = item.get('isPrimary')
-
-      setFirstToPrimary = =>
-        items = model.get(@get('relationship'))
-        next = items.find (i) -> i != item
-        next.set 'isPrimary', true
-
-      if model.get('isNew')
-        setFirstToPrimary() if isPrimary
-        return @get('items').removeObject item
-
-      model.get(@get('relationship')).removeObject item
-
-      setFirstToPrimary() if isPrimary
-
-      @sendAction 'saveModel'
-
-    setPrimary: (item) ->
-      Ember.run.next =>
-        @get('items').setEach 'isPrimary', false
-        item.set 'isPrimary', true
-
-        model = @get('model')
-
-        return if model.get('isNew')
-
-        @sendAction 'saveModel'
+      label = @labels[0]
+      item = Ember.Object.create isPrimary: false, name: label, value: ''
+      @get('items').pushObject  item
 
   multiple: Ember.computed 'items.length', ->
     @get('items.length') > 1
@@ -53,3 +29,5 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
     @get('item') == @get('items.lastObject')
 
   labels: ['Work','Personal']
+
+  parent: Ember.computed.oneWay 'items'
