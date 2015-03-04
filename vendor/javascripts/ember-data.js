@@ -3901,7 +3901,11 @@ var RootState = {
         record.trigger('didCommit', record);
       },
 
-      becomeDirty: Ember.K
+      becomeDirty: Ember.K,
+
+      unloadRecord: function(record) {
+        record.clearRelationships();
+      }
     }
   },
 

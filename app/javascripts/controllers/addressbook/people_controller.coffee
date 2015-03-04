@@ -59,10 +59,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       model = context.get('model')
 
-      model.one 'didReload', (result) ->
+      model.one 'didReload', (result) =>
         unless company = model.get('company')
           return
 
+        @get('controllers.addressbook').send 'updateTotals'
         company.reload()
 
     savePhone: (context) ->
