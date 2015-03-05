@@ -5,7 +5,7 @@
   </div>
   <div class="description">Name</div>
   <div class="field">
-    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName"  action="modelChanged"}}
+    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged"}}
     {{#unless model.isNew}}
       <button class="btn btn-primary" {{action "clearExisting"}}>Clear</button>
     {{/unless}}
@@ -44,4 +44,29 @@
   <div class="field">
     {{tag-picker model=model}}
   </div>
+</div>
+<div class="item">
+  <div class="icon"><i></i></div>
+  <div class="description">Assigned To</div>
+  <div class="field">
+    {{autocomplete-textbox source=users value=model.user.name queryKey="displayName"}}
+  </div>
+</div>
+<div class="clearfix"></div>
+<a href="#" class="showmore btn" {{action "toggleMore"}}>
+  <i {{bind-attr class=":ss-standard showMore:ss-navigatedown:ss-navigateup"}}></i>
+</a>
+<div class="clearfix"></div>
+<div class="more">
+  <div class="item">
+    <div class="icon"><i class="ss-standard ss-tag"></i></div>
+    <div class="description">Title</div>
+    <div class="field">
+      {{autocomplete-textbox source=users value=model.user.name queryKey="displayName"}}
+    </div>
+  </div>
+</div>
+<div class="submit">
+  <hr>
+  <a href="#" class="btn btn-large btn-primary">Submit</a>
 </div>

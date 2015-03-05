@@ -20,7 +20,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   setValue: (object) ->
     @set('isLoading', true)
-    person = object.get('person')
+    person = object.get('person') || object
 
     observer = =>
       return unless person.get('isLoaded')
@@ -128,7 +128,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     el = @autocompleteElement.call this
 
-    unless @get('sync')
+    unless @get('source')
       el.typeahead source: @asyncSource.bind(this)
     else
       el.typeahead source: @get('source')

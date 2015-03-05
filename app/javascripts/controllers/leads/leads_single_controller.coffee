@@ -24,3 +24,4 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
   addresses: Ember.A()
+  needs: ['users']

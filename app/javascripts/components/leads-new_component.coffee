@@ -9,6 +9,10 @@ Radium.LeadsNewComponent = Ember.Component.extend
     saveModel: ->
       @sendAction 'saveModel'
 
+    toggleMore: ->
+      @$('.more').slideToggle "medium", =>
+        @toggleProperty("showMore")
+
   classNameBindings: [':form', ':new-lead-form']
 
   setup: Ember.on 'didInsertElement', ->
@@ -22,3 +26,5 @@ Radium.LeadsNewComponent = Ember.Component.extend
       @initialise()
 
   form: null
+
+  showMore: false
