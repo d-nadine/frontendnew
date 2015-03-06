@@ -90,12 +90,15 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   autocompleteElement: ->
     throw new Error('You must override autocompleteElement in subclass.')
 
+  autocompleteItemType: ->
+    @get('autocompleteType') || Radium.AutocompleteItem
+
   asyncSource: (query, process) ->
     queryParameters = @queryParameters(query)
 
     @set('isLoading', true)
 
-    Radium.AutocompleteItem.find(queryParameters).then((results) =>
+    @autocompleteItemType().find(queryParameters).then((results) =>
       process results
       @set('isLoading', false)
 

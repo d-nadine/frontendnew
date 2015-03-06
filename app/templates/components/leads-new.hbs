@@ -62,11 +62,20 @@
     <div class="icon"><i class="ss-standard ss-tag"></i></div>
     <div class="description">Title</div>
     <div class="field">
-      {{autocomplete-textbox source=users value=model.user.name queryKey="displayName"}}
+      {{autocomplete-textbox autocompleteType=Radium.Title value=model.title queryKey="title" queryParameters=titleQueryParameters}}
+    </div>
+  </div>
+  <div class="item">
+    <div class="icon">
+      <i class="ss-standard ss-globe"></i>
+    </div>
+    <div class="description">Website</div>
+    <div class="field">
+      {{url-input value=
     </div>
   </div>
 </div>
 <div class="submit">
-  <hr>
+  <hr/>
   <a href="#" class="btn btn-large btn-primary">Submit</a>
 </div>

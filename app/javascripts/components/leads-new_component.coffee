@@ -28,3 +28,6 @@ Radium.LeadsNewComponent = Ember.Component.extend
   form: null
 
   showMore: false
+
+  titleQueryParameters: (query) ->
+    term: query
