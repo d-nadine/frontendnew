@@ -19,7 +19,5 @@ Radium.SidebarCompanyWebsiteController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.CompanyWebsiteForm.create()
-  ).property()
-
