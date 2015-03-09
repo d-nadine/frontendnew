@@ -73,6 +73,13 @@
     <div class="field">
       {{regex-input value=model.website regex=Radium.URL_REGEX}}
     </div>
+    <div class="item address">
+      <div class="icon"><i class="ss-standard ss-location"></i></div>
+      <div class="description">Address</div>
+      <div class="field">
+        {{multiple-address addresses=model.addresses}}
+      </div>
+    </div>
   </div>
 </div>
 <div class="submit">
