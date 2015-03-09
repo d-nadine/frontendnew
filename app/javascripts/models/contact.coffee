@@ -35,7 +35,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   lastActivityAt: DS.attr('date')
   activityTotal: DS.attr('number')
   nextTaskDate: DS.attr('datetime')
-  website: DS.attr('website')
+  website: DS.attr('string')
 
   nextTask: Ember.computed 'nextTodo', 'nextMeeting', ->
     @get('nextTodo') || @get('nextMeeting')

@@ -1,6 +1,14 @@
-Radium.MultipleAddressComponent = Ember.Component.extend
-  setup: Ember.on 'didInsertElement', ->
-    p "here"
+Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin,
 
-    focusIn: (e) ->
-      p e.target
+  autocomplete: null
+
+  setup: Ember.on 'didInsertElement', ->
+    autocomplete = @$('#autocomplete')
+    addressField = @$('#addressField')
+
+    autocomplete.on 'focus', =>
+      unless addressField.is(':visible')
+        addressField.slideDown 200
+      @geolocate()
+
+    return @initializeGoogleGeo()
