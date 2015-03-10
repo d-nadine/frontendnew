@@ -2,12 +2,10 @@
   <input class="single" id="autocomplete" placeholder="Enter address or city" type="text" autocomplete="off" class="">
 </div>
 <div id="addressField">
-  <input class="single" id="street_number" type="text" placeholder="Number">
-  <input class="single" id="route" type="text" placeholder="Street"><br>
-  <input class="single" id="" type="text" placeholder="Unit #"><br>
-  <input class="single" id="locality" type="text" placeholder="City"><br>
-  <input class="single" id="administrative_area_level_1" type="text" placeholder="State / Province"><br>
-  <input class="single" id="postal_code" type="text" placeholder="Zip / Postal Code"><br>
+  {{input class="single route" type="text" placeholder="Street"}}<br/>
+  {{input class="single postal_town" type="text" placeholder="City"}}<br/>
+  {{input class="single administrative_area_level_1" type="text" placeholder="State / Province"}}<br/>
+  {{input class="single postal_code" type="text" placeholder="Zip / Postal Code"}}<br/>
   <input class="single" id="country" type="text" placeholder="Country"><br>
   <div id="addressType">
     <div>

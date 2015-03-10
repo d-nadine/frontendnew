@@ -7,7 +7,6 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
         return @get(relationship).pushObject Ember.Object.create
           isPrimary: true, name: 'work', value: ''
 
-
       recordArray.forEach (item) ->
         formArray.pushObject Ember.Object.create(
           isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item)
