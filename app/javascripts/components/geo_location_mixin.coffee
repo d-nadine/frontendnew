@@ -7,6 +7,12 @@ Radium.GeoLocationMixin = Ember.Mixin.create
     "country": 'long_name',
     "postal_code": 'short_name'
 
+  modelMap:
+    "route": "street"
+    "postal_town": "city"
+    "postal_code": "zipcode"
+    "country": "country"
+
   initializeGoogleGeo: ->
     # Create the autocomplete object, restricting the search
     # to geographical location types.
@@ -16,8 +22,6 @@ Radium.GeoLocationMixin = Ember.Mixin.create
 
   fillInAddress: ->
     place = @autocomplete.getPlace()
-
-    p place
 
     for component of @componentForm
       input = $(component)
@@ -29,11 +33,12 @@ Radium.GeoLocationMixin = Ember.Mixin.create
       addressType = place.address_components[i].types[0]
       if @componentForm[addressType]
         val = place.address_components[i][@componentForm[addressType]]
-        el = $(".#{addressType}")
         if addressType == 'route'
           street_number = place.address_components[0]['long_name']
           val = "#{street_number} #{val}"
-        el.val(val)
+
+        if addressType != "street_number"
+          @set("current.#{@modelMap[addressType]}", val)
       i++
 
   # Bias the autocomplete object to the user's geographical location,

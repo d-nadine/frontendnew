@@ -1,6 +1,7 @@
 require 'forms/form'
+require 'mixins/addresses_mixin'
 
-Radium.ContactForm = Radium.Form.extend
+Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
   data: Ember.computed( ->
     name: @get('name')
     companyName: @get('companyName')
@@ -79,5 +80,5 @@ Radium.ContactForm = Radium.Form.extend
     @set 'isPublic', true
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
-    @set 'addresses', Ember.A([Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: 'US')])
+    @set('addresses', @defaultAddresses())
     @set 'website', null

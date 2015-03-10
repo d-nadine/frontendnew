@@ -8,6 +8,7 @@ Radium.LeadsSingleRoute = Ember.Route.extend
     controller.set 'emailAddresses', controller.get('model.emailAddresses')
     controller.set 'phoneNumbers', controller.get('model.phoneNumbers')
     controller.set 'addresses', controller.get('model.addresses')
+    controller.set 'currentAddress', controller.get('model.addresses').find (a) -> a.get('isPrimary')
 
   contactForm:  Radium.computed.newForm('contact')
 

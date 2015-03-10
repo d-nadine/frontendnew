@@ -1,4 +1,5 @@
 Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviour,
+  Ember.Evented,
   actions:
     modelChanged: (model) ->
       @get('model').reset()
@@ -7,6 +8,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
         @set relationship, Ember.A()
         @send 'createFormFromRelationship', model, relationship, @get(relationship)
+      @trigger 'modelChanged', model
 
     clearExisting: ->
       @get('model').reset()
