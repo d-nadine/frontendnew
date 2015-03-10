@@ -24,12 +24,10 @@ Radium.SidebarContactHeaderController = Radium.SidebarBaseController.extend
 
   needs: ['companies']
 
-  isValid: ( ->
+  isValid: Ember.computed 'form.name', 'isEditing', ->
     return unless @get('isEditing')
     return if Ember.isEmpty @get('form.name')
     @get('form.name.length') >= 3
-  ).property('form.name', 'isEditing')
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.ContactHeaderForm.create()
-  ).property()

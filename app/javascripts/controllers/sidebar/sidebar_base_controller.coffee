@@ -20,7 +20,7 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
 
       model.setProperties(properties)
 
-    commit: ->
+    commit: (continueEditing) ->
       return unless @get('model')
 
       @send 'setProperties'
@@ -30,7 +30,7 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
       return unless model.get('isDirty')
 
       model.save(this).then (result) =>
-        @send 'stopEditing'
+        @send 'stopEditing' unless continueEditing
 
       if @updateHook
         model.one 'didUpdate', (result) =>

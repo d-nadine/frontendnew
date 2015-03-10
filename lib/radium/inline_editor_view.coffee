@@ -22,12 +22,12 @@ Radium.InlineEditorView = Ember.View.extend
   isEditable: Ember.computed.alias('controller.isEditable')
   disabled: Ember.computed.not('isEditable')
 
-  didInsertElement: ->
+  setup: Ember.on 'didInsertElement', ->
     $('body').on 'click.inline', =>
       return unless @get('isEditing')
       @send 'toggleEditor'
 
-  willDestroyElement: ->
+  teardown: Ember.on 'willDestroyElement', ->
     $('body').off 'click.inline'
 
   change: (evt) ->
@@ -58,7 +58,7 @@ Radium.InlineEditorView = Ember.View.extend
 
     return unless textField.length
 
-    Ember.run.later =>
+    Ember.run.later ->
       textField.focus()
       textField.get(0).select()
     , 200
