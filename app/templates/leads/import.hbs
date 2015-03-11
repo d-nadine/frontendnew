@@ -160,9 +160,9 @@
             <tr>
               <td>{{fileName}}</td>
               <td>{{formatDateTime createdAt format="full"}}</td>
-              <td>{{importedCount}}</td>
-              <td class="center">{{importErrors.length}}</td>
-              <td {{bind-attr class="importStatus"}}>
+              <td class="center">{{importedCount}} / {{totalCount}}</td>
+              <td {{bind-attr class=":center importErrors.length:import-error"}}>{{importErrors.length}}</td>
+              <td {{bind-attr class="completedWithErrors:import-error"}}>
                 {{#if completedWithErrors}}
                   Finished with errors <br/>
                   <a href="#" {{action "toggleErrors"}}>

@@ -11,4 +11,4 @@ Radium.ImportJobsItemController = Radium.ObjectController.extend
     @get('importErrors.length')
 
   linkText: Ember.computed 'showErrors', ->
-    if @get('showErrors') then 'Hide' else 'show'
+    if @get('showErrors') then 'Hide' else 'Click Here To See the Errors'
