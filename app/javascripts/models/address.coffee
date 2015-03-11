@@ -18,15 +18,16 @@ Radium.Address = Radium.Model.extend
     !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode')) || !Ember.isEmpty(@get('email')) || !Ember.isEmpty(@get('phone'))
 
   getAddressHash: ->
-    isPrimary: this.get('isPrimary')
-    name: this.get('name')
-    email: this.get('email')
-    phone: this.get('phone')
-    street: this.get('street')
-    city: this.get('city')
-    state: this.get('state')
-    zipcode: this.get('zipcode')
-    country: this.get('country') || "US"
+    isPrimary: @get('isPrimary')
+    name: @get('name')
+    email: @get('email')
+    phone: @get('phone')
+    street: @get('street')
+    city: @get('city')
+    state: @get('state')
+    zipcode: @get('zipcode')
+    country: @get('country') || "US"
+    isCurrent: @get('isPrimary')
 
   toString:  ->
     parts = [

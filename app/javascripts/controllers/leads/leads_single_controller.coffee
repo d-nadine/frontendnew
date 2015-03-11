@@ -20,6 +20,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'phoneNumbers', form.get('phoneNumbers')
       @set 'addresses', form.get('addresses')
 
+      @trigger 'modelReset', form
+
     saveModel: ->
       @get('model').save(this)
 

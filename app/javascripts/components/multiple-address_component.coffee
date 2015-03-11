@@ -8,18 +8,48 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
   autocomplete: null
 
   setup: Ember.on 'didInsertElement', ->
-    @get('targetObject.targetObject').on 'modelChanged', this, 'onModelChanged'
-    autocomplete = @$('#autocomplete')
-    addressField = @$('#addressField')
+    @get('parent').on 'modelReset', this, 'onModelReset'
+    @get('parent').on 'modelChanged', this, 'onModelChanged'
 
-    autocomplete.on 'focus', =>
-      unless addressField.is(':visible')
-        addressField.slideDown 200
-      @geolocate()
+    @onModelReset()
+
+    @$('#autocomplete').on 'focus', @showAddressFields.bind(this)
 
     return @initializeGoogleGeo()
 
+  showAddressFields: ->
+    addressField = @$('#addressField')
+
+    unless addressField.is(':visible')
+      addressField.slideDown 200
+      @geolocate()
+
+  onModelReset: (from) ->
+    @$('#addressField').slideUp()
+    @set 'addresses', @defaultAddresses()
+    @set 'current', @get('addresses').find (a) -> a.get('isPrimary')
+
   onModelChanged: (model) ->
     addresses = model.get('addresses')
+    defaultAddresses = @defaultAddresses()
+
     unless addresses.get('length')
-      return @set('addresses', @defaultAddresses())
+      return @set('addresses', defaultAddresses())
+
+    @showAddressFields()
+
+    unless model.get('addresses').find( (a) -> a.get('isPrimary'))
+      model.get('addresses.firstObject').set('isPrimary', true)
+
+      unless addresses.find((a) -> a.get('name')?.toLowerCase() == "work")
+        model.get('addresses.firstObject').set('name', 'work')
+
+      @sendAction 'saveModel'
+
+    hashes = addresses.map (a) -> a.getAddressHash()
+
+    if hashes.length == 1
+      hashes.push defaultAddresses.reject (a) -> a.get('isPrimary')
+
+    @set 'addresses', hashes
+    @set 'current', hashes.findProperty 'isPrimary'
