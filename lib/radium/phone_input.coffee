@@ -1,11 +1,5 @@
 Radium.PhoneInput = Ember.TextField.extend
   classNameBindings: ['isInvalid',':masked',':field']
-  didInsertElement: ->
-    @_super.apply this, arguments
-
-    @$().keypress (e) ->
-      validKeys = [8, 0, 120, 43, 32, 45]
-      return false if validKeys.indexOf(e.which) == -1 && (e.which < 48 || e.which > 57)
 
   focusIn: (evt) ->
     value = @get('value')
@@ -20,7 +14,7 @@ Radium.PhoneInput = Ember.TextField.extend
       input.setSelectionRange pos, pos
     ), 50
 
-  isInvalid: ( ->
+  isInvalid: Ember.computed 'value', ->
     value = @get('value')
 
     return false unless value?.length
@@ -30,4 +24,3 @@ Radium.PhoneInput = Ember.TextField.extend
     return false if  /^[+\-\sx0-9]{5,}$/.test value
 
     true
-  ).property('value')

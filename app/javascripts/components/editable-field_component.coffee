@@ -198,6 +198,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     if e.keyCode == @ENTER
       Ember.run.next =>
         @send 'updateModel'
+      @$().blur()
       return false
 
     if e.keyCode == @ESCAPE
@@ -236,4 +237,4 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     return unless @$().length
 
-    @$().parents('tD:first').removeClass('active')
+    @$().parents('td:first').removeClass('active')
