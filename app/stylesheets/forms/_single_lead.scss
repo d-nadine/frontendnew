@@ -308,6 +308,15 @@
   .more {
     display: none;
     float: left;
+
+    .radio-group {
+      position: relative;
+
+      .radio-label {
+        position: relative;
+        top: 6px;
+      }
+    }
   }
 
   .submit {

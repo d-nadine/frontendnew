@@ -10,8 +10,6 @@ Radium.SettingsGeneralComponent = Ember.Component.extend
       account.save(targetObject).then (result) ->
         targetObject.send 'flashSuccess', 'The currency has been changed.'
 
-  potentialCountry: ""
-
   currentCurrency: Ember.computed 'currentUser.account.currency', ->
     Radium.Currencies.find (c) => c.key == @get('currentUser.account.currency')
 

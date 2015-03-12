@@ -20,6 +20,8 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
   showAddressFields: ->
     addressField = @$('#addressField')
 
+    return unless addressField.length
+
     unless addressField.is(':visible')
       addressField.slideDown 200
       @geolocate()
@@ -49,7 +51,8 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     hashes = addresses.map (a) -> a.getAddressHash()
 
     if hashes.length == 1
-      hashes.push defaultAddresses.reject (a) -> a.get('isPrimary')
+      home = defaultAddresses.reject( (a) -> a.get('isCurrent')).get('firstObject')
+      hashes.push home
 
     @set 'addresses', hashes
     @set 'current', hashes.findProperty 'isPrimary'

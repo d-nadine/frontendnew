@@ -11,9 +11,8 @@ Radium.Checkbox = Radium.View.extend
   _updateElementValue: ->
     @set 'checked', this.$('input').prop('checked')
 
-  checkBoxId: (->
+  checkBoxId: Ember.computed ->
     "checker-#{@get('elementId')}"
-  ).property()
 
   template: Ember.Handlebars.compile """
     <input type="checkbox" id="{{unbound view.checkBoxId}}" {{bind-attr disabled=view.disabled}}/>

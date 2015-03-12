@@ -16,6 +16,8 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     addresses: Ember.A()
     tagNames: Ember.A()
     website: null
+    gender: null
+    fax: null
   )["volatile"]
 
   isValid: Ember.computed 'name', 'companyName', 'user', 'source', ->
@@ -82,3 +84,5 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set('addresses', @defaultAddresses())
     @set 'website', null
+    @set 'gender', null
+    @set 'fax', null

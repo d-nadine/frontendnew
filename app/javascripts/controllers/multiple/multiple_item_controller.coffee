@@ -50,5 +50,3 @@ Radium.MultipleItemController = Radium.ObjectController.extend Radium.FormArrayB
 
   showDelete: Ember.computed 'parent.[]', ->
     @get('parent.length') > 1
-
-  potentialCountry: ""

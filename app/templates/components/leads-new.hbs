@@ -28,6 +28,15 @@
     {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name"}}
   </div>
 </div>
+<div class="item">
+  <div class="icon">
+    <i class="ss-standard ss-globe"></i>
+  </div>
+  <div class="description">Website</div>
+  <div class="field">
+    {{regex-input value=model.website regex=Radium.URL_REGEX}}
+  </div>
+</div>
 {{#each email in emailAddresses}}
   {{#multiple-control item=email items=emailAddresses action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail"}}
     {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel"}}
@@ -65,19 +74,40 @@
       {{autocomplete-textbox autocompleteType=Radium.Title value=model.title queryKey="title" queryParameters=titleQueryParameters}}
     </div>
   </div>
-  <div class="item">
-    <div class="icon">
-      <i class="ss-standard ss-globe"></i>
-    </div>
-    <div class="description">Website</div>
+  <div class="item address">
+    <div class="icon"><i class="ss-standard ss-location"></i></div>
+    <div class="description">Address</div>
     <div class="field">
-      {{regex-input value=model.website regex=Radium.URL_REGEX}}
+      {{multiple-address addresses=addresses current=currentAddress saveModel=saveModel parent=targetObject}}
     </div>
-    <div class="item address">
-      <div class="icon"><i class="ss-standard ss-location"></i></div>
-      <div class="description">Address</div>
-      <div class="field">
-        {{multiple-address addresses=addresses current=currentAddress saveModel=saveModel parent=targetObject}}
+  </div>
+  <div class="item">
+    <div class="icon"><i class="ss-standard ss-notebook"></i></div>
+    <div class="description">About</div>
+    <div class="field">
+      {{textarea class="single" value=model.about}}
+    </div>
+  </div>
+  <div class="item">
+    <div class="icon"><i class="ss-standard ss-fax"></i></div>
+    <div class="description">Fax</div>
+    <div class="field">
+      {{input type="text" value=model.fax class="single"}}
+    </div>
+  </div>
+  <div class="item">
+    <div class="icon"><i class=""></i></div>
+    <div class="description">Sex</div>
+    <div class="field">
+      <div class="radio-group">
+        <div>
+          {{radio-button name="gender" value="m" selection=model.gender}}
+          <span class="radio-label">Male</span>
+        </div>
+        <div>
+          {{radio-button name="gender" value="f" selection=model.gender}}
+          <span class="radio-label">Female</span>
+        </div>
       </div>
     </div>
   </div>
