@@ -3,7 +3,12 @@ require 'components/autocomplete_mixin'
 Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.AutocompleteMixin,
   actions:
     setBindingValue: (object) ->
-      @sendAction 'action', object.get('person')
+      value = if typeof object == "string"
+                object
+              else
+                object.get('person') || object
+
+      @sendAction 'action', value
 
   classNameBindings: [':combobox-container']
 

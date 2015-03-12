@@ -111,6 +111,20 @@
       </div>
     </div>
   </div>
+  <div class="item">
+    <div class="icon"><i class=""></i></div>
+    <div class="description">Source</div>
+    <div class="field">
+      {{autocomplete-textbox source=leadSources value=model.source}}
+    </div>
+  </div>
+  <div class="item">
+    <div class="icon"><i class=""></i></div>
+    <div class="description">Status</div>
+    <div class="field">
+      {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name"}}
+    </div>
+  </div>
 </div>
 <div class="submit">
   <hr/>

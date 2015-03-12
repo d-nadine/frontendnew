@@ -19,6 +19,25 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     value?.toLowerCase() == selected?.toLowerCase()
 
   setValue: (object) ->
+    self = this
+    el = self.autocompleteElement()
+
+    finish = (value) ->
+      self.send 'setBindingValue', object
+
+      isInput = el.get(0).tagName == "INPUT"
+
+      Ember.run.next ->
+        if isInput
+          el.val value
+        else
+          el.text value
+
+        self.send 'updateModel'
+
+    if typeof object == "string"
+      return finish object
+
     @set('isLoading', true)
     person = object.get('person') || object
 
@@ -28,25 +47,18 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       @set('isLoading', false)
       person.removeObserver('isLoaded')
 
-      @send 'setBindingValue', object
-
-      el = @autocompleteElement()
-
-      isInput = el.get(0).tagName == "INPUT"
-
-      Ember.run.next =>
-        if isInput
-          el.val object.get(@field)
-        else
-          el.text object.get(@field)
-
-        @send 'updateModel'
+      finish(object.get(@field))
 
     if person.get('isLoaded')
       observer()
     else
       person.addObserver('isLoaded', observer)
 
+  getValue: (item) ->
+    if typeof item == "string"
+      item
+    else
+      item.get @field
   queryParameters: (query) ->
     scopes = @get('scopes')
     Ember.assert "You need to define a scopes binding for autocomplete", scopes
@@ -54,7 +66,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     scopes: scopes
 
   matcher: (item) ->
-    string = item.get @field
+    string = @getValue item
     return unless @query
     ~string.toLowerCase().indexOf(@query.toLowerCase())
 
@@ -64,7 +76,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     caseInsensitive = []
 
     items.forEach (item) =>
-      string = item.get @field
+      string = @getValue item
 
       if !string.toLowerCase().indexOf(@query.toLowerCase())
         beginswith.push(item)
@@ -78,7 +90,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   holder: ""
 
   highlighter: (item) ->
-    string = item.get @field
+    string = @getValue item
 
     query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
