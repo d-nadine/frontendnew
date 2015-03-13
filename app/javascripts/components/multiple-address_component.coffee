@@ -36,7 +36,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     defaultAddresses = @defaultAddresses()
 
     unless addresses.get('length')
-      return @set('addresses', defaultAddresses())
+      return @set('addresses', defaultAddresses)
 
     @showAddressFields()
 

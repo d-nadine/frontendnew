@@ -38,8 +38,8 @@
   </div>
 </div>
 {{#each email in emailAddresses}}
-  {{#multiple-control item=email items=emailAddresses action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail"}}
-    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel"}}
+  {{#multiple-control item=email items=emailAddresses action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail" queryProfile="queryProfile"}}
+    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel" queryProfile="queryProfile"}}
   {{/multiple-control}}
 {{/each}}
 {{#each phoneNumber in phoneNumbers}}
@@ -125,27 +125,33 @@
       {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name"}}
     </div>
   </div>
-  <div class="item">
-    <div class="icon"><i class="ss-social ss-twitter"></i></div>
-    <div class="description">Twitter</div>
-    <div class="field">
-      <input type="text" class="single">
+  {{#if model.twitter}}
+    <div class="item">
+      <div class="icon"><i class="ss-social ss-twitter"></i></div>
+      <div class="description">Twitter</div>
+      <div class="field">
+        <a target="_new" {{bind-attr href=model.twitter.url}}{{model.twitter.url}}</a>
+      </div>
     </div>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="ss-social ss-facebook"></i></div>
-    <div class="description">Facebook</div>
-    <div class="field">
-      <input type="text" class="single">
+  {{/if}}
+  {{#if model.facebook}}
+    <div class="item">
+      <div class="icon"><i class="ss-social ss-facebook"></i></div>
+      <div class="description">Facebook</div>
+      <div class="field">
+        <a target="_new" {{bind-attr href=model.facebook.url}}{{model.facebook.url}}</a>
+      </div>
     </div>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="ss-social ss-linkedin"></i></div>
-    <div class="description">Linkedin</div>
-    <div class="field">
-      <input type="text" class="single">
+  {{/if}}
+  {{#if model.linkedin}}
+    <div class="item">
+      <div class="icon"><i class="ss-social ss-linkedin"></i></div>
+      <div class="description">Linkedin</div>
+      <div class="field">
+        <a target="_new" {{bind-attr href=model.linkedin.url}}{{model.linkedin.url}}</a>
+      </div>
     </div>
-  </div>
+  {{/if}}
 </div>
 <div class="submit">
   <hr/>

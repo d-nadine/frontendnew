@@ -22,6 +22,9 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
       item = Ember.Object.create isPrimary: false, name: label, value: ''
       @get('items').pushObject  item
 
+    queryProfile: (email) ->
+      @sendAction 'queryProfile', email
+
   multiple: Ember.computed 'items.length', ->
     @get('items.length') > 1
 

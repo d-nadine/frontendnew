@@ -13,3 +13,12 @@ Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMi
     @set 'query', el.val()
 
   type: 'email'
+
+  focusOut: (e) ->
+    @_super.apply this, arguments
+
+    val = @autocompleteElement().val()
+
+    return if !val || !Radium.EMAIL_REGEX.test val
+
+    @sendAction 'queryProfile', val

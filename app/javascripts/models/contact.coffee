@@ -50,6 +50,16 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
     if @get("lastActivityAt")?
       @get('lastActivityAt').readableTimeAgo()
 
+  twitter: Ember.computed 'contactInfo.socialProfiles.[]', ->
+    @get('contactInfo.socialProfiles')?.find (s) -> s.get('type') == 'twitter'
+
+  facebook: Ember.computed 'contactInfo.socialProfiles.[]', ->
+    @get('contactInfo.socialProfiles')?.find (s) -> s.get('type') == 'facefook'
+
+  linkedin: Ember.computed 'contactInfo.socialProfiles.[]', ->
+    @get('contactInfo.socialProfiles')?.find (s) -> s.get('type') == 'linkedin'
+
+
   isPublic: DS.attr('boolean')
   isPersonal: Ember.computed.not 'isPublic'
 

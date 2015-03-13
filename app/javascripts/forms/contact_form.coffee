@@ -86,3 +86,6 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'website', null
     @set 'gender', null
     @set 'fax', null
+    @set 'twitter', null
+    @set 'facebook', null
+    @set 'linkedin', null
