@@ -22,7 +22,9 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       @trigger 'modelReset', form
 
-    saveModel: ->
+    saveModel: (skipValidation) ->
+      return @get('model').save() if skipValidation
+
       @get('model').save(this)
 
   emailAddresses: Ember.A()

@@ -1,6 +1,11 @@
 require 'components/autocomplete_mixin'
+require 'mixins/auto_fill_hack'
+require 'mixins/validation_mixin'
 
 Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.AutocompleteMixin,
+  Radium.AutoFillHackMixin,
+  Radium.ValidationMixin,
+
   actions:
     setBindingValue: (object) ->
       value = if typeof object == "string"
@@ -18,4 +23,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   input: (e) ->
     el = @autocompleteElement()
 
-    @set 'query', el.val()
+    @set 'value', el.val()
+
+    if @get('isInvalid')
+      @$().addClass 'is-invalid'
+    else
+      @$().removeClass 'is-invalid'

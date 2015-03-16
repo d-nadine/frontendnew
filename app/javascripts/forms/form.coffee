@@ -8,6 +8,5 @@ Radium.Form = Ember.ObjectProxy.extend
     return unless @get('isNew')
     @get('content').setProperties @get('defaults')
 
-  data: ( ->
+  data: Ember.computed ->
     throw new Error('subclasses of form must override data')
-  ).property().volatile()

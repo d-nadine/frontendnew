@@ -6,8 +6,27 @@ Radium.LeadsNewComponent = Ember.Component.extend
     clearExisting: ->
       @sendAction 'clearExisting'
 
-    saveModel: ->
-      @sendAction 'saveModel'
+    saveModel: (skipValidation) ->
+      return @sendAction('saveModel') if skipValidation
+
+      @send 'isSubmitted', true
+
+      name = $.trim(@get('model.name') || '')
+
+      emailAddresses = @get('model.emailAddresses').mapProperty('value').reject (e) ->
+        Ember.isEmpty(e)
+
+      if Ember.isEmpty(name) && !emailAddresses.get('length')
+        @displayValidationError()
+        return
+
+      if emailAddresses.compact().any((e) -> !Radium.EMAIL_REGEX.text e)
+        @get('targetObject').send 'flashError', 'All email addresses must be valid'
+        @send 'flashError', 'all email addresses must be valid.'
+        return
+
+      if name.length || emailAddresses.length
+        @sendAction('saveModel')
 
     toggleMore: ->
       @$('.more').slideToggle "medium", =>
@@ -29,6 +48,10 @@ Radium.LeadsNewComponent = Ember.Component.extend
     Ember.run.next =>
       @initialise()
 
+  displayValidationError: ->
+    @get('targetObject').send 'flashError', 'You must have at least a name field or at least one valid email address'
+
+
   form: null
 
   showMore: false
@@ -37,7 +60,7 @@ Radium.LeadsNewComponent = Ember.Component.extend
     term: query
 
   initialize: Ember.on 'init', ->
-    @Profileservice.on 'profileQueried', this, 'onProfileQueried'
+    @ProfileService.on 'profileQueried', this, 'onProfileQueried'
 
   onProfileQueried: (contact) ->
     addSocialMedia = (key) =>
@@ -47,3 +70,5 @@ Radium.LeadsNewComponent = Ember.Component.extend
 
     ['twitter', 'facebook', 'linkedin'].forEach (s) ->
       addSocialMedia s
+
+  iSubmitted: false

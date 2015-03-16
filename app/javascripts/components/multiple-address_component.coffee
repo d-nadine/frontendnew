@@ -46,7 +46,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
       unless addresses.find((a) -> a.get('name')?.toLowerCase() == "work")
         model.get('addresses.firstObject').set('name', 'work')
 
-      @sendAction 'saveModel'
+      @sendAction 'saveModel', true
 
     hashes = addresses.map (a) -> a.getAddressHash()
 

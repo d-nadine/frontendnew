@@ -59,7 +59,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   linkedin: Ember.computed 'contactInfo.socialProfiles.[]', ->
     @get('contactInfo.socialProfiles')?.find (s) -> s.get('type') == 'linkedin'
 
-
   isPublic: DS.attr('boolean')
   isPersonal: Ember.computed.not 'isPublic'
 

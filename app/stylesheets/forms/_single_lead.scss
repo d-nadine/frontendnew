@@ -255,6 +255,10 @@
   .combobox-container {
     display: inline-block;
     vertical-align: top;
+
+    &.is-invalid {
+      border: 1px solid $red;
+    }
   }
 
   .combobox-container:not(.combobox-selected) i.ss-delete {
