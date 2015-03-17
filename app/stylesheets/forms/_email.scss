@@ -45,7 +45,7 @@
 }
 
 .span9 {
-	position: relative;
+  position: relative;
 }
 .span9.sender-is-current-user:after, .span9.sender-is-current-user:before {
   left: 99%;
@@ -294,7 +294,7 @@
 
 .new-message-row {
   margin: 0 30px;
-  padding: 15px 0;
+  padding: 15px 0 40px;
 
   &.block-blue,
   &.block-gray {
