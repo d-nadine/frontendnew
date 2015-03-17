@@ -25,10 +25,33 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
     saveModel: (skipValidation) ->
       return @get('model').save() if skipValidation
 
-      @get('model').save(this)
+      @set('isSubmitted', true)
+
+      unless @get('isValid')
+        return @send 'flashError', "You must supply a valid name or at least one valid email address"
+      # @get('model').save(this)
 
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses']
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
+  isSubmitted: false
+  errorMessages: Ember.A()
+
+  isValid: Ember.computed 'isSubmitted', 'model.name', 'model.emailAddresses.@each.value', ->
+    return true unless @get('isSubmitted')
+
+    emailAddresses = @get('model.emailAddresses').mapProperty('value').reject (e) ->
+      address = e || ''
+      not $.trim(address).length
+
+    name = $.trim(@get('model.name') || '')
+
+    if emailAddresses.any((address) -> !Radium.EMAIL_REGEX.test(address))
+      return false
+
+    if !name.length && !emailAddresses.get('length')
+      return false
+
+    true

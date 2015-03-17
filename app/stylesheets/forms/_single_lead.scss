@@ -252,13 +252,15 @@
 }
 
 .new-lead-form {
+  .item .field input[type=text].is-invalid,
+  .item .field input[type=email].is-invalid,
+  .item .field .combobox-container.is-invalid input[type=text] {
+    border: 1px solid $red;
+  }
+
   .combobox-container {
     display: inline-block;
     vertical-align: top;
-
-    &.is-invalid {
-      border: 1px solid $red;
-    }
   }
 
   .combobox-container:not(.combobox-selected) i.ss-delete {

@@ -1,5 +1,7 @@
+require 'mixins/validation_mixin'
 Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
   Radium.AutocompleteMixin,
+  Radium.ValidationMixin,
   actions:
     setBindingValue: (object) ->
       @sendAction 'action', object.get('person')
