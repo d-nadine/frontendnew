@@ -29,7 +29,9 @@ Radium.GeoLocationMixin = Ember.Mixin.create
       input.attr('disabled', false)
 
     i = 0
-    while i < place.address_components.length
+    l = place.address_components?.length || 0
+
+    while i < l
       addressType = place.address_components[i].types[0]
       if @componentForm[addressType]
         val = place.address_components[i][@componentForm[addressType]]

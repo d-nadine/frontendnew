@@ -18,4 +18,5 @@ Radium.LeadsSingleRoute = Ember.Route.extend
     isSaving: false
 
   deactivate: ->
-    @controller.get('model').reset()
+    controller = @controller
+    controller.send 'clearExisting'

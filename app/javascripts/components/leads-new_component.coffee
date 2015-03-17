@@ -17,10 +17,17 @@ Radium.LeadsNewComponent = Ember.Component.extend
       return unless @get('model.isNew')
       @ProfileService.queryProfile email
 
+    cancelSubmit: ->
+      @$('.modal').modal 'hide'
+
+      @$('.company input[type=text]').focus()
+
   classNameBindings: [':form', ':new-lead-form']
 
   setup: Ember.on 'didInsertElement', ->
     Ember.run.scheduleOnce 'afterRender', this, 'initialise'
+    Ember.run.next =>
+      @$('.contact-name .name-field')
 
   initialise: ->
     @$('.contact-name input[type=text]').focus()
@@ -36,7 +43,7 @@ Radium.LeadsNewComponent = Ember.Component.extend
   titleQueryParameters: (query) ->
     term: query
 
-  initialize: Ember.on 'init', ->
+  startup: Ember.on 'init', ->
     @ProfileService.on 'profileQueried', this, 'onProfileQueried'
 
   onProfileQueried: (contact) ->

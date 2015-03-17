@@ -23,7 +23,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   input: (e) ->
     el = @autocompleteElement()
 
-    @set 'value', el.val()
+    @set('value', @query = el.val())
 
     if @get('isInvalid')
       @$().addClass 'is-invalid'

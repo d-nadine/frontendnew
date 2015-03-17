@@ -6,6 +6,8 @@ Radium.RegexInputComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
 
     el = @$()
 
+    @set 'value', el.val()
+
     reset = ->
       el.css 'border', '1px solid #cccccc'
 

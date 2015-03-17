@@ -3,6 +3,11 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
 
+      if @get('isNew')
+        return if @get('tagNames').mapProperty('name').contains tag
+
+        return @get('tagNames').addObject Ember.Object.create name: tag
+
       tag = @get('tagNames').createRecord(name: tag)
 
       addressbook = @get('controllers.addressbook.content')

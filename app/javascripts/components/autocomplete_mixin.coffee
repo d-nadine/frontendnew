@@ -68,6 +68,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   matcher: (item) ->
     string = @getValue item
     return unless @query
+    return unless string
     ~string.toLowerCase().indexOf(@query.toLowerCase())
 
   sorter: (items) ->

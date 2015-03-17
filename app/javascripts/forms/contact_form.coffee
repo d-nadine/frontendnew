@@ -2,7 +2,7 @@ require 'forms/form'
 require 'mixins/addresses_mixin'
 
 Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
-  data: Ember.computed( ->
+  data: ( ->
     name: @get('name')
     companyName: @get('companyName')
     isPublic: true
@@ -18,7 +18,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     website: null
     gender: null
     fax: null
-  )["volatile"]
+  ).property().volatile()
 
   isValid: Ember.computed 'name', 'companyName', 'user', 'source', ->
     return if Ember.isEmpty(@get('name')) && Ember.isEmpty(@get('companyName'))
@@ -33,8 +33,6 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
       data.contactStatus = Radium.ContactStatus.all().find (s) -> s.get('id') == status
 
     contact = Radium.CreateContact.createRecord data
-
-    contact.set 'name', 'unknown contact' if Ember.isEmpty(contact.get('name'))
 
     contact.set('companyName', null) if Ember.isEmpty(contact.get('companyName'))
 

@@ -20,6 +20,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'phoneNumbers', form.get('phoneNumbers')
       @set 'addresses', form.get('addresses')
 
+      @set 'isSubmitted', false
+      @set 'isSaving', false
       @trigger 'modelReset', form
 
     saveModel: (skipValidation) ->
@@ -28,14 +30,51 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set('isSubmitted', true)
 
       unless @get('isValid')
-        return @send 'flashError', "You must supply a valid name or at least one valid email address"
-      # @get('model').save(this)
+        return @send 'flashError', "You must supply a valid name or at least one valid email "
+
+      model = @get('model')
+
+      if model.get('isNew') && Ember.isEmpty(@get('model.companyName'))
+        $('.modal').modal backdrop: false
+        return
+
+      @send 'completeSubmit'
+
+    completeSubmit: ->
+      $('.modal').modal 'hide' if $('.modal')
+
+      model = @get('model')
+
+      createContact = model.create()
+
+      isNew = model.get('isNew')
+
+      self = this
+
+      createContact.save(this).then((result) =>
+        Ember.run.next =>
+          @set 'isSaving', false
+
+          if isNew
+            addressbookController = @get('controllers.addressbook')
+            addressbookController.send('updateTotals') if addressbookController
+            addressBook = @get('controllers.peopleIndex.model')
+            contact = createContact.get('contact')
+            addressBook.pushObject(contact)
+            @transitionToRoute 'contact', createContact.get('contact')
+          else
+            @send 'flashSuccess', 'contacts details have been updated.'
+        ).catch (error) =>
+          @set 'isSaving', false
+
+      @set 'isSaving', true
 
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
   addresses: Ember.A()
-  needs: ['users', 'accountSettings', 'contactStatuses']
+  needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
+  isSaving: false
   isSubmitted: false
   errorMessages: Ember.A()
 
