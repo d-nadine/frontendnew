@@ -98,7 +98,9 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
     if emailAddresses.any((address) -> !Radium.EMAIL_REGEX.test(address))
       return false
 
-    if !name.length && !emailAddresses.get('length') && !@get('user')
+    return false unless @get('model.user')
+
+    if !name.length && !emailAddresses.get('length')
       return false
 
     true
