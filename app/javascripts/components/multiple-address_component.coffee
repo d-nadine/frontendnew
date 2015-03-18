@@ -18,7 +18,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     return @initializeGoogleGeo()
 
   showAddressFields: ->
-    addressField = @$('#addressField')
+    return unless addressField = @$('#addressField')
 
     return unless addressField.length
 
@@ -27,7 +27,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
       @geolocate()
 
   onModelReset: (from) ->
-    @$('#addressField').slideUp()
+    @$('#addressField')?.slideUp()
     @set 'addresses', @defaultAddresses()
     @set 'current', @get('addresses').find (a) -> a.get('isPrimary')
 

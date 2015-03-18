@@ -61,6 +61,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       item
     else
       item.get @field
+
   queryParameters: (query) ->
     scopes = @get('scopes')
     Ember.assert "You need to define a scopes binding for autocomplete", scopes

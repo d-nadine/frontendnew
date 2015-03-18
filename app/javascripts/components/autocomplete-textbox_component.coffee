@@ -13,12 +13,31 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
               else
                 object.get('person') || object
 
+      @set 'value', value
+
+      @getTypeahead().hide()
+
       @sendAction 'action', value
+
+      false
 
     showAll: ->
       return if @get('isAsync')
 
-      @getTypeahead().lookup()
+      typeahead = @getTypeahead()
+
+      return typeahead.hide() if typeahead.shown
+
+      source = @source.toArray()
+
+      typeahead.render(source.slice(0, source.length)).show()
+
+    removeValue: ->
+      @set('value', null)
+      @autocompleteElement().val('').focus()
+      event.stopPropagation()
+      event.preventDefault()
+      false
 
   classNameBindings: [':combobox-container']
 
@@ -34,3 +53,41 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       @$().addClass 'is-invalid'
     else
       @$().removeClass 'is-invalid'
+
+  valueDidChange: Ember.observer 'value', ->
+    @setValueText()
+
+  initializeValue: Ember.on 'didInsertElement', ->
+    @setValueText()
+
+  setValueText: ->
+    return unless value = @get('value')
+
+    displayValue = if typeof value == 'string'
+                     value
+                   else
+                     value.get(@queryKey)
+
+    @autocompleteElement().val(displayValue) if displayValue
+
+  focusIn: (e) ->
+    Em.run.next =>
+
+      return if @get('isAsync')
+
+      el = @autocompleteElement()
+
+      return unless el
+
+      return @autocompleteElement().select() if el.val()
+
+      return if @get('value')
+
+      return unless e.target == el.get(0)
+
+      unless el.val().length
+        @send 'showAll'
+
+    e.stopPropagation()
+    e.preventDefault()
+    return false
