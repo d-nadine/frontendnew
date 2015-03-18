@@ -43,10 +43,19 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       if isNew
         model.set 'addresses', @get('addresses')
+        @send 'saveNew'
+      else
+        @send 'saveExisting'
 
-      @send 'completeSubmit'
+    saveExisting: ->
+      model = @get('model')
 
-    completeSubmit: ->
+      return unless model.get('isDirty')
+
+      model.save().then (result) =>
+        @send 'flashSuccess', "#{model.get('displayName')} has been successfully updated."
+
+    saveNew: ->
       $('.modal').modal 'hide' if $('.modal')
 
       model = @get('model')
