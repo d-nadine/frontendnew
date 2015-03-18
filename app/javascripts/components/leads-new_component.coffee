@@ -57,3 +57,4 @@ Radium.LeadsNewComponent = Ember.Component.extend
 
   nameValidations: ['required']
   emailValidations: ['email']
+  userValidations: ['required']

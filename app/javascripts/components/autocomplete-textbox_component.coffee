@@ -13,7 +13,10 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
               else
                 object.get('person') || object
 
-      @set 'value', value
+      if @writeableValue
+        @setValueText()
+      else
+        @set 'value', value
 
       @getTypeahead().hide()
 
@@ -47,7 +50,12 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   input: (e) ->
     el = @autocompleteElement()
 
-    @query = el.val()
+    text = el.val()
+
+    @query = text
+
+    if @writeableValue
+      @set 'value', text
 
     if @get('isInvalid')
       @$().addClass 'is-invalid'

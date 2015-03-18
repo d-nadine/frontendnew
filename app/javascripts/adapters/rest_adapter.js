@@ -422,7 +422,7 @@ Radium.RESTAdapter.map('Radium.Todo', {
 
 Radium.RESTAdapter.map('Radium.Note', {
   comments: {embedded: 'load'}
-})
+});
 
 Radium.RESTAdapter.map('Radium.Meeting', {
   isFinished: {key: 'finished'},

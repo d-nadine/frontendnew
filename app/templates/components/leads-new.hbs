@@ -4,7 +4,7 @@
   </div>
   <div class="description">Contact Name</div>
   <div class="field">
-    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name"}}
+    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true}}
     {{#unless model.isNew}}
       <button class="btn btn-primary" {{action "clearExisting"}}>Clear</button>
     {{/unless}}
@@ -24,7 +24,7 @@
   </div>
   <div class="description">Company</div>
   <div class="field">
-    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name"}}
+    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" writeableValue=true}}
   </div>
 </div>
 <div class="item">
@@ -57,7 +57,7 @@
   <div class="icon"><i></i></div>
   <div class="description">Assigned To</div>
   <div class="field">
-    {{autocomplete-textbox source=users value=model.user queryKey="displayName"}}
+    {{autocomplete-textbox source=users value=model.user queryKey="displayName" validations=userValidations validator=targetObject validationField="user"}}
   </div>
 </div>
 <div class="clearfix"></div>

@@ -32,7 +32,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set('isSubmitted', true)
 
       unless @get('isValid')
-        return @send 'flashError', "You must supply a valid name or at least one valid email "
+        return @send 'flashError', "You must supply a valid name or at least one valid email and select a valid user to assign this contact to."
 
       model = @get('model')
       isNew = model.get('isNew')
@@ -86,7 +86,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   isSubmitted: false
   errorMessages: Ember.A()
 
-  isValid: Ember.computed 'isSubmitted', 'model.name', 'model.emailAddresses.@each.value', ->
+  isValid: Ember.computed 'isSubmitted', 'model.name', 'model.emailAddresses.@each.value', 'model.user', ->
     return true unless @get('isSubmitted')
 
     emailAddresses = @get('model.emailAddresses').mapProperty('value').reject (e) ->
@@ -98,7 +98,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
     if emailAddresses.any((address) -> !Radium.EMAIL_REGEX.test(address))
       return false
 
-    if !name.length && !emailAddresses.get('length')
+    if !name.length && !emailAddresses.get('length') && !@get('user')
       return false
 
     true
