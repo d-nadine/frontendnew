@@ -69,7 +69,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     @setValueText()
 
   setValueText: ->
-    return unless value = @get('value')
+    unless value = @get('value')
+      return @autocompleteElement().val('')
 
     displayValue = if typeof value == 'string'
                      value

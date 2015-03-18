@@ -34,6 +34,8 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     @set 'current', @get('addresses').find (a) -> a.get('isPrimary')
 
   onModelChanged: (model) ->
+    return if @isDestroying || @isDestroyed
+
     addresses = model.get('addresses')
     defaultAddresses = @defaultAddresses()
 
