@@ -15,6 +15,11 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
       @sendAction 'action', value
 
+    showAll: ->
+      return if @get('isAsync')
+
+      @getTypeahead().lookup()
+
   classNameBindings: [':combobox-container']
 
   autocompleteElement: ->
@@ -23,7 +28,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   input: (e) ->
     el = @autocompleteElement()
 
-    @set('value', @query = el.val())
+    @query = el.val()
 
     if @get('isInvalid')
       @$().addClass 'is-invalid'

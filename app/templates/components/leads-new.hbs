@@ -1,4 +1,4 @@
-<h1>{{model.addresses.firstObject.street}}</h1>
+<h1>{{model.contactStatus}}</h1>
 <div class="item contact-name">
   <div class="icon">
     <i class="ss-standard ss-user"></i>
@@ -58,7 +58,7 @@
   <div class="icon"><i></i></div>
   <div class="description">Assigned To</div>
   <div class="field">
-    {{autocomplete-textbox source=users value=model.user.name queryKey="displayName"}}
+    {{autocomplete-textbox source=users queryKey="displayName"}}
   </div>
 </div>
 <div class="clearfix"></div>
@@ -115,7 +115,6 @@
     <div class="icon"><i class=""></i></div>
     <div class="description">Source</div>
     <div class="field">
-      {{log leadSources.length}}
       {{autocomplete-textbox source=leadSources value=model.source}}
     </div>
   </div>

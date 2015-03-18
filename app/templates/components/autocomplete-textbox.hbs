@@ -1,6 +1,6 @@
 <div {{bind-attr class=":input-append isInvalid"}}>
-  <input type="text" autocomplete="off" placeholder="" class="combobox name-field" {{bind-attr value=value}}/>
-  <span class="add-on dropdown-toggle" data-dropdown="dropdown">
+  <input type="text" autocomplete="off" placeholder="" class="combobox name-field"/>
+  <span {{action "showAll"}} class="add-on dropdown-toggle" data-dropdown="dropdown">
     <span class="caret"></span>
     <i class="ss-standard ss-delete"></i>
   </span>

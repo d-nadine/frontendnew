@@ -9,6 +9,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   isLoading: false
 
+  isAsync: Ember.computed.not 'source'
+
   matchesSelection: (value) ->
     return unless value
     active  = @$('.typeahead .active')
@@ -106,6 +108,9 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   autocompleteItemType: ->
     @get('autocompleteType') || Radium.AutocompleteItem
 
+  getTypeahead: ->
+    @autocompleteElement().data('typeahead')
+
   asyncSource: (query, process) ->
     queryParameters = @queryParameters(query)
 
@@ -144,6 +149,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     el = @autocompleteElement.call this
 
+    isAsync = @get('isAsync')
+
     unless @get('source')
       el.typeahead source: @asyncSource.bind(this)
     else
@@ -151,13 +158,24 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     typeahead = el.data('typeahead')
 
+    isAsync = @get('isAsync')
+
     typeahead.lookup = (event) ->
       items = undefined
 
       @query = @$element.text() || @$element.val()
 
-      return (if @shown then @hide() else this)  if not @query or @query.length < @options.minLength
+      if isAsync && (not @query or @query.length < @options.minLength)
+        if @shown
+          return @hide()
+        else
+          return this
+
       items = (if $.isFunction(@source) then @source(@query, $.proxy(@process, this)) else @source)
+
+      if !isAsync && !@query && items.get('length')
+        return @render(items.slice(0, @options.items)).show()
+
       (if items then @process(items) else this)
 
     typeahead.process = (items) ->

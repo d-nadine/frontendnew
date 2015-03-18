@@ -5,9 +5,11 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @get('model').reset()
       @set 'form', null
       @set 'model', model
+
       ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
         @set relationship, Ember.A()
         @send 'createFormFromRelationship', model, relationship, @get(relationship)
+
       @trigger 'modelChanged', model
 
     clearExisting: ->
@@ -33,10 +35,14 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
         return @send 'flashError', "You must supply a valid name or at least one valid email "
 
       model = @get('model')
+      isNew = model.get('isNew')
 
-      if model.get('isNew') && Ember.isEmpty(@get('model.companyName'))
+      if isNew && Ember.isEmpty(@get('model.companyName'))
         $('.modal').modal backdrop: false
         return
+
+      if isNew
+        model.set 'addresses', @get('addresses')
 
       @send 'completeSubmit'
 
@@ -73,7 +79,9 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   phoneNumbers: Ember.A()
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
-  contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
+  contactStatuses: Ember.computed 'controllers.contactStatuses.[]', ->
+    @get('controllers.contactStatuses')
+
   isSaving: false
   isSubmitted: false
   errorMessages: Ember.A()

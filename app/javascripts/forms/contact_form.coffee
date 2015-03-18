@@ -15,8 +15,8 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     emailAddresses: Ember.A()
     addresses: Ember.A()
     tagNames: Ember.A()
-    website: null
-    gender: null
+    website: @get('website')
+    gender: @ge
     fax: null
   ).property().volatile()
 
