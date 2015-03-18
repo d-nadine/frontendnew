@@ -18,6 +18,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     website: @get('website')
     gender: @get('gender')
     fax: @get('fax')
+    title: @get('title')
   ).property().volatile()
 
   isValid: Ember.computed 'name', 'companyName', 'user', 'source', ->
@@ -87,6 +88,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'twitter', null
     @set 'facebook', null
     @set 'linkedin', null
+    @set 'title', null
     leadSources = @get('leadSources')
 
     return unless leadSources?.length

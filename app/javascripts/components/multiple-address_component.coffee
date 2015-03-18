@@ -27,6 +27,8 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
       @geolocate()
 
   onModelReset: (from) ->
+    return if @isDestroying || @isDestroyed
+
     @$('#addressField')?.slideUp()
     @set 'addresses', @defaultAddresses()
     @set 'current', @get('addresses').find (a) -> a.get('isPrimary')
