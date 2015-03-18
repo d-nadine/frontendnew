@@ -2,7 +2,8 @@
   <div class="icon">
     <i class="ss-standard ss-user"></i>
   </div>
-  <div class="description">Contact Name</div>
+  <div class="description">Name</div>
+  <div style="display:none">Chrome hack</div>
   <div class="field">
     {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid}}
     {{#unless model.isNew}}
@@ -23,6 +24,7 @@
     <i class="ss-standard ss-buildings"></i>
   </div>
   <div class="description">Company</div>
+  <div style="display:none">Chrome hack</div>
   <div class="field">
     {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" writeableValue=true}}
   </div>
@@ -69,6 +71,7 @@
   <div class="item">
     <div class="icon"><i class="ss-standard ss-tag"></i></div>
     <div class="description">Title</div>
+    <div style="display:none">Chrome hack</div>
     <div class="field">
       {{autocomplete-textbox autocompleteType=Radium.Title value=model.title queryKey="title" queryParameters=titleQueryParameters writeableValue=true }}
     </div>
@@ -76,6 +79,7 @@
   <div class="item address">
     <div class="icon"><i class="ss-standard ss-location"></i></div>
     <div class="description">Address</div>
+    <div style="display:none">Chrome hack</div>
     <div class="field">
       {{multiple-address addresses=addresses current=currentAddress saveModel=saveModel parent=targetObject}}
     </div>

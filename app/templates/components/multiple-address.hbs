@@ -1,11 +1,12 @@
 <div id="locationField">
-  <input class="single" id="autocomplete" placeholder="Enter address or city" type="text" autocomplete="off" class="">
+  <input class="single" id="autocomplete" placeholder=" " type="text" autocomplete="off" class="" required="required">
+  <label>Address</label>
 </div>
 <div id="addressField">
-  {{input value=current.street class="single route" type="text" placeholder="Street"}}<br/>
-  {{input value=current.city class="single postal_town" type="text" placeholder="City"}}<br/>
-  {{input value=current.state class="single administrative_area_level_1" type="text" placeholder="State / Province"}}<br/>
-  {{input value=current.zipcode class="single postal_code" type="text" placeholder="Zip / Postal Code"}}<br/>
+  {{input value=current.street class="single route" type="text" required="required"}}<label>Street</label><br/>
+  {{input value=current.city class="single postal_town" type="text" required="required"}}<label>City</label><br/>
+  {{input value=current.state class="single administrative_area_level_1" type="text" required="required"}}<label>State / Province</label><br/>
+  {{input value=current.zipcode class="single postal_code" type="text" required="required"}}<label>Zip / Postal Code</label><br/>
   {{country-picker changeCountry="changeCountry" current=current.country countryList=Radium.Countries}}
   <div id="addressType">
     {{#each address in addresses}}

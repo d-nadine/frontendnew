@@ -434,3 +434,22 @@
     color: #c09853;
   }
 }
+
+.single {
+  & + label {
+    position: relative;
+    left: -241px;
+    top: 2px;
+    color: #999;
+  }
+  & + label:after { content:''; }
+  &:invalid + label { display: inline-block; }
+  &:valid + label { display: none; }
+  &:invalid { 
+    border-color: #ccc !important;
+    box-shadow: none !important;
+  }
+}
+#addressField .single + label {
+  top: -2px;
+}
