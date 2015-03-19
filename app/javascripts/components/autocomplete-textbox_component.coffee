@@ -86,7 +86,6 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
   focusIn: (e) ->
     Em.run.next =>
-
       return if @get('isAsync')
 
       el = @autocompleteElement()

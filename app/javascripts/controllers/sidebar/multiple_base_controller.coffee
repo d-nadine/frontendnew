@@ -7,7 +7,7 @@ Radium.MultipleBaseController = Radium.SidebarBaseController.extend Radium.FormA
 
       model = @get("content")
 
-      @get('content.transaction').commit()
+      model.save(this)
 
     setForm: ->
       formArray = @get("form.#{@recordArray}")

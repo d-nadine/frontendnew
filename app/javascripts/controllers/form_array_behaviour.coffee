@@ -38,7 +38,7 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
 
   setModelFromHash: (model, relationship, formArray) ->
       formArray.forEach (item) =>
-        if item.hasOwnProperty 'record'
+        if item.hasOwnProperty('record') && item.get('value') != "+1"
           item.record.setProperties(name: item.get('name'), value: item.get('value'), isPrimary: item.get('isPrimary'))
         else
           if item.get('value.length') && item.get('value') != "+1"
