@@ -27,7 +27,6 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
         @get('_referenceCompany') ||
         @get('_referenceContact') ||
         @get('_referenceDeal') ||
-        @get('_referenceDiscussion') ||
         @get('_referenceEmail') ||
         @get('_referenceMeeting') ||
         @get('_referencePhoneCall') ||
@@ -39,7 +38,6 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
     '_referenceCompany',
     '_referenceContact',
     '_referenceDeal',
-    '_referenceDiscussion',
     '_referenceEmail',
     '_referenceMeeting',
     '_referencePhoneCall',

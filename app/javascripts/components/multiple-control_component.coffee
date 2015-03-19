@@ -3,6 +3,9 @@ require 'controllers/form_array_behaviour'
 Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContextHackMixin,
   Radium.FormArrayBehaviour,
   actions:
+    saveModel: ->
+      @sendAction('saveModel') if @get('saveModel')
+
     stopEditing: ->
       @sendAction 'saveModel' unless @get('model.isNew')
 
@@ -10,7 +13,7 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
       @get('model').get(@get('relationship')).removeObject item
 
     modelChanged: (object) ->
-      @sendAction 'action', object
+      @sendAction 'modelChanged', object
 
     removeSelection: (object) ->
       @_super.apply this, arguments

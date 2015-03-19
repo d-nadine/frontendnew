@@ -21,7 +21,6 @@ Radium.Notification = Radium.Model.extend
     else
       @get('_referenceContact') ||
         @get('_referenceDeal') ||
-        @get('_referenceDiscussion') ||
         @get('_referenceMeeting') ||
         @get('_referenceCompany') ||
         @get('_referenceInvitation') ||

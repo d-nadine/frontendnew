@@ -1,10 +1,13 @@
 require 'components/autocomplete_mixin'
 require 'mixins/auto_fill_hack'
 require 'mixins/validation_mixin'
+require 'mixins/save_model_key_down'
 
 Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.AutocompleteMixin,
   Radium.AutoFillHackMixin,
   Radium.ValidationMixin,
+  Radium.KeyConstantsMixin,
+  Radium.SaveModelKeyDownMixn,
 
   actions:
     setBindingValue: (object) ->
@@ -13,10 +16,10 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
               else
                 object.get('person') || object
 
-      if @writeableValue
-        @setValueText()
-      else
-        @set 'value', value
+        if @writeableValue && @hasOwnProperty 'queryKey'
+          @set('value', value.get(@queryKey))
+        else
+          @set 'value', value
 
       @getTypeahead().hide()
 
@@ -48,6 +51,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     @$('input[type=text].combobox:first')
 
   input: (e) ->
+    @_super.apply this, arguments
+
     el = @autocompleteElement()
 
     text = el.val()

@@ -12,9 +12,7 @@ Ember.TEMPLATES['links/deal'] = Ember.Handlebars.compile "{{#link-to 'deal' view
 Ember.TEMPLATES['links/attachment'] = Ember.Handlebars.compile """
   <a href="{{url}}" target="_new">{{view.content.name}}</a>
 """
-Ember.TEMPLATES['links/discussion'] = Ember.Handlebars.compile """
-  {{#link-to 'unimplemented'}}{{truncate view.content.topic length=20}}{{/link-to}}
-"""
+
 Ember.TEMPLATES['links/meeting'] = Ember.Handlebars.compile "{{#link-to 'calendar.task' this}}{{view.content.topic}}{{/link-to}}"
 Ember.TEMPLATES['links/email'] = Ember.Handlebars.compile """
   {{#if email.subject.length}}

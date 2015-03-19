@@ -16,7 +16,6 @@ Radium.Note = Radium.Model.extend Radium.CommentsMixin,
       @get('_referenceCompany') ||
       @get('_referenceContact') ||
       @get('_referenceDeal') ||
-      @get('_referenceDiscussion') ||
       @get('_referenceEmail') ||
       @get('_referenceMeeting') ||
       @get('_referenceTodo')

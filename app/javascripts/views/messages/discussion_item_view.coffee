@@ -1,1 +1,0 @@
-Radium.MessagesDiscussionItemView = Radium.View.extend Radium.ContentIdentificationMixin

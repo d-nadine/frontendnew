@@ -4,9 +4,9 @@
   </div>
   <div class="description">Name</div>
   <div class="field">
-    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid}}
+    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid saveModel="saveModel"}}
     {{#unless model.isNew}}
-      <button class="btn btn-primary" {{action "clearExisting"}}>Clear</button>
+      <button class="btn btn-primary" {{action "clearExisting"}}>Clear and Add New</button>
     {{/unless}}
   </div>
 </div>
@@ -24,7 +24,7 @@
   </div>
   <div class="description">Company</div>
   <div class="field">
-    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" writeableValue=true}}
+    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" writeableValue=true saveModel="saveModel"}}
   </div>
 </div>
 <div class="item">
@@ -37,13 +37,13 @@
   </div>
 </div>
 {{#each email in emailAddresses}}
-  {{#multiple-control item=email items=emailAddresses action="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail" queryProfile="queryProfile"}}
-    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" action="modelChanged" saveModel="saveModel" queryProfile="queryProfile" validations=_parent.emailValidations validator=_parent.targetObject validationField="email" isValid=_parentObject.isValid}}
+  {{#multiple-control item=email items=emailAddresses modelChanged="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail" queryProfile="queryProfile"}}
+    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" modelChanged="modelChanged" saveModel="saveModel" queryProfile="queryProfile" validations=_parent.emailValidations validator=_parent.targetObject validationField="email" isValid=_parentObject.isValid}}
   {{/multiple-control}}
 {{/each}}
 {{#each phoneNumber in phoneNumbers}}
-  {{#multiple-control item=phoneNumber items=phoneNumbers action="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel" icon="ss-phone"}}
-    {{phone-input value=value class="single"}}
+  {{#multiple-control item=phoneNumber items=phoneNumbers modelChanged="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel" icon="ss-phone"}}
+    {{phone-input value=value class="single" saveModel="saveModel" modelChanged="modelchanged"}}
   {{/multiple-control}}
 {{/each}}
 <div class="item">
@@ -163,12 +163,10 @@
     <h2>Add Company?</h2>
   </div>
   <div class="modal-body">
-    <form class="form">
-      <p>You are about to create a contact without a company, do you want to do this?</p>
-    </form>
+    <p>You are about to create a contact without a company, do you want to do this?</p>
   </div>
   <div class="modal-footer">
     <a href="#" {{action "cancelSubmit" bubbles=false}} class="btn">Cancel</a>
-    <a href="#" {{action "completeSubmit" target=targetObject bubbles=false}} class="btn btn-primary">Proceed</a>
+    <a href="#" {{action "saveNew" target=targetObject bubbles=false}} class="btn btn-primary">Proceed</a>
   </div>
 </div>

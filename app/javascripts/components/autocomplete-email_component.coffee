@@ -1,7 +1,12 @@
 require 'mixins/validation_mixin'
+require 'mixins/save_model_key_down'
+
 Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
   Radium.AutocompleteMixin,
   Radium.ValidationMixin,
+  Radium.KeyConstantsMixin,
+  Radium.SaveModelKeyDownMixn,
+
   actions:
     setBindingValue: (object) ->
       @sendAction 'action', object.get('person')
@@ -10,9 +15,16 @@ Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMi
     @$()
 
   input: (e) ->
+    @_super.apply this, arguments
+
     el = @autocompleteElement()
 
     @set 'query', el.val()
+
+  keyDown: (e) ->
+    return unless e.keyCode == @ENTER
+
+    @sendAction('saveModel') if @get('saveModel')
 
   type: 'email'
 

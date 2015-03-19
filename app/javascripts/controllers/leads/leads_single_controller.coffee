@@ -1,8 +1,5 @@
 require 'mixins/multiple_address_behaviour'
 
-isPrimaryComparer = (a, b) ->
-  if a.get('isPrimary') then -1 else 1
-
 Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviour,
   Radium.MultipleAddressBehaviour,
   Ember.Evented,
@@ -12,9 +9,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'form', null
       @set 'model', model
 
-      ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
-        @set relationship, Ember.A()
-        @createFormFromRelationship model, relationship, @get(relationship)
+      @hashifyRelationships()
 
       @trigger 'modelChanged', model
 
@@ -63,17 +58,22 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       return unless model.get('isDirty')
 
-      model.save().then (result) =>
+      if Ember.isEmpty('companyName')
+        model.set('removeCompany', true)
+
+      model.save(this).then (result) =>
         @send 'flashSuccess', "#{model.get('displayName')} has been successfully updated."
+
+        @hashifyRelationships()
 
     saveNew: ->
       $('.modal').modal 'hide' if $('.modal')
 
       model = @get('model')
 
-      createContact = model.create()
+      model.set('addresses', @get('addresses'))
 
-      isNew = model.get('isNew')
+      createContact = model.create()
 
       self = this
 
@@ -81,24 +81,25 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
         Ember.run.next =>
           @set 'isSaving', false
 
-          if isNew
-            addressbookController = @get('controllers.addressbook')
-            addressbookController.send('updateTotals') if addressbookController
-            addressBook = @get('controllers.peopleIndex.model')
-            contact = createContact.get('contact')
-            addressBook.pushObject(contact)
-            @transitionToRoute 'contact', createContact.get('contact')
-          else
-            @send 'flashSuccess', 'contacts details have been updated.'
+          addressbookController = @get('controllers.addressbook')
+          addressbookController.send('updateTotals') if addressbookController
+          addressBook = @get('controllers.peopleIndex.model')
+          contact = createContact.get('contact')
+          addressBook.pushObject(contact)
+          @transitionToRoute 'contact', createContact.get('contact')
         ).catch (error) =>
           @set 'isSaving', false
 
       @set 'isSaving', true
 
+  hashifyRelationships: ->
+    ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
+      @set relationship, Ember.A()
+      @createFormFromRelationship @get('model'), relationship, @get(relationship)
+
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
-  sortedEmailAddresses: Ember.computed.sort 'emailAddresses', isPrimaryComparer
-  sortedPhoneNumbers: Ember.computed.sort 'phoneNumbers', isPrimaryComparer
+
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
   contactStatuses: Ember.computed 'controllers.contactStatuses.[]', ->
@@ -108,10 +109,10 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   isSubmitted: false
   errorMessages: Ember.A()
 
-  isValid: Ember.computed 'isSubmitted', 'model.name', 'model.emailAddresses.@each.value', 'model.user', ->
+  isValid: Ember.computed 'isSubmitted', 'model.name', 'emailAddresses.@each.value', 'model.user', ->
     return true unless @get('isSubmitted')
 
-    emailAddresses = @get('model.emailAddresses').mapProperty('value').reject (e) ->
+    emailAddresses = @get('emailAddresses').mapProperty('value').reject (e) ->
       address = e || ''
       not $.trim(address).length
 

@@ -1,12 +1,9 @@
+require 'mixins/save_model_key_down'
+
 Radium.PhoneInputComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
+  Radium.SaveModelKeyDownMixn,
+
   classNameBindings: ['isInvalid', ':masked']
-
-  didInsertElement: ->
-    @_super.apply this, arguments
-
-    @$().keypress (e) ->
-      validKeys = [8, 0, 120, 43, 32, 45]
-      return false if validKeys.indexOf(e.which) == -1 && (e.which < 48 || e.which > 57)
 
   focusIn: (evt) ->
     value = @get('value')
@@ -28,6 +25,6 @@ Radium.PhoneInputComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
 
     return true unless /^(\+|0{2})/.test value
 
-    return false if  /^[+\-\sx0-9]{5,}$/.test value
+    return false if  /^[+\-\s\(\)x0-9]{5,}$/.test value
 
     true

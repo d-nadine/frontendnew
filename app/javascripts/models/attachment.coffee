@@ -9,7 +9,6 @@ Radium.Attachment = Radium.Model.extend
       property = value.constructor.split('.')[1].toLowerCase()
       @set property, value
     else
-      @get('_referenceDiscussion') ||
       @get('_referenceDeal') ||
       @get('_referenceEmail') ||
       @get('_referenceContact') ||
