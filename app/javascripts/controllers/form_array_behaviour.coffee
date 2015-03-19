@@ -1,16 +1,5 @@
 Radium.FormArrayBehaviour = Ember.Mixin.create
   actions:
-    createFormFromRelationship: (model, relationship, formArray) ->
-      recordArray = model.get(relationship)
-
-      unless recordArray.get('length')
-        return @get(relationship).pushObject Ember.Object.create
-          isPrimary: true, name: 'work', value: ''
-
-      recordArray.forEach (item) ->
-        formArray.pushObject Ember.Object.create(
-          isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item)
-
     setPrimary: (item) ->
       Ember.run.next =>
         @get('parent').setEach 'isPrimary', false
@@ -46,3 +35,22 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
       nextIsPrimary = parent.find (i) -> i != item
 
       nextIsPrimary.set 'isPrimary', true
+
+  setModelFromHash: (model, relationship, formArray) ->
+      formArray.forEach (item) =>
+        if item.hasOwnProperty 'record'
+          item.record.setProperties(name: item.get('name'), value: item.get('value'), isPrimary: item.get('isPrimary'))
+        else
+          if item.get('value.length') && item.get('value') != "+1"
+            @get("content.#{relationship}").createRecord item.getProperties('name', 'value', 'isPrimary')
+
+  createFormFromRelationship: (model, relationship, formArray) ->
+    recordArray = model.get(relationship)
+
+    unless recordArray.get('length')
+      return @get(relationship).pushObject Ember.Object.create
+        isPrimary: true, name: 'work', value: ''
+
+    recordArray.forEach (item) ->
+      formArray.pushObject Ember.Object.create(
+        isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item)

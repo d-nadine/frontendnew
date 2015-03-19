@@ -10,3 +10,7 @@ Radium.MultipleController = Radium.ArrayController.extend
 
   currentLabel: Ember.computed 'item.name', ->
     @get('item.name')?.toLowerCase().capitalize()
+
+  arrangedContent: Ember.computed 'content.[]', ->
+    @get('content').sort (a, b) ->
+      if a.get('isPrimary') then -1 else 1

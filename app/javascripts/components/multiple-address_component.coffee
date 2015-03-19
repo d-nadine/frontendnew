@@ -52,11 +52,20 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
 
       @sendAction 'saveModel', true
 
-    hashes = addresses.map (a) -> a.getAddressHash()
+    hashes = addresses.map (a) ->
+      Ember.merge(Ember.Object.create(a.getAddressHash()), record: a)
 
     if hashes.length == 1
       home = defaultAddresses.reject( (a) -> a.get('isCurrent')).get('firstObject')
+      home.set 'isPrimary', false
       hashes.push home
 
-    @set 'addresses', hashes
-    @set 'current', hashes.findProperty 'isPrimary'
+    sorted = hashes.sort (a, b) ->
+      if a.get('isPrimary') then -1 else 1
+
+    @set 'addresses', sorted
+
+    unless sorted.any((a) -> a.get('isPrimary'))
+      sorted.get('firstObject').set 'isPrimary', true
+
+    @set 'current', sorted.findProperty 'isPrimary'

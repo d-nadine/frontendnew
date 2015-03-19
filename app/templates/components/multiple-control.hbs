@@ -22,7 +22,7 @@
           <i class="ss-standard ss-trash"></i>
         </a>
       </div>
-      <input type="radio" name="primary" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}}>
+      <input type="radio" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}} {{bind-attr name=icon}}>
       <span class="primary-check">Primary</span>
     {{/if}}
   </div>

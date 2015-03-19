@@ -1,4 +1,10 @@
+require 'mixins/multiple_address_behaviour'
+
+isPrimaryComparer = (a, b) ->
+  if a.get('isPrimary') then -1 else 1
+
 Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviour,
+  Radium.MultipleAddressBehaviour,
   Ember.Evented,
   actions:
     modelChanged: (model) ->
@@ -8,7 +14,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
         @set relationship, Ember.A()
-        @send 'createFormFromRelationship', model, relationship, @get(relationship)
+        @createFormFromRelationship model, relationship, @get(relationship)
 
       @trigger 'modelChanged', model
 
@@ -50,6 +56,11 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
     saveExisting: ->
       model = @get('model')
 
+      ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>
+        @setModelFromHash model, relationship, @get(relationship)
+
+      @setAddressFromHash(model, @get('addresses'), @emailIsValid)
+
       return unless model.get('isDirty')
 
       model.save().then (result) =>
@@ -86,6 +97,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
+  sortedEmailAddresses: Ember.computed.sort 'emailAddresses', isPrimaryComparer
+  sortedPhoneNumbers: Ember.computed.sort 'phoneNumbers', isPrimaryComparer
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
   contactStatuses: Ember.computed 'controllers.contactStatuses.[]', ->

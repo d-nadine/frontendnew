@@ -1,4 +1,5 @@
 require 'controllers/sidebar/multiple_base_controller'
+require 'mixins/multiple_address_behaviour'
 
 Radium.AddressesForm = Radium.Form.extend
   init: ->
@@ -10,41 +11,14 @@ Radium.AddressesForm = Radium.Form.extend
     @_super.apply this, arguments
     @set 'addresses', Ember.A()
 
-Radium.SidebarAddressesController = Radium.MultipleBaseController.extend
+Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.MultipleAddressBehaviour,
   actions:
     commit: ->
-      @get("form.#{@recordArray}").forEach (item) =>
-        setProperties = (record) ->
-          ["email", "phone", "street", "city", "state", "zipcode", "country", "isPrimary"].forEach (field) ->
-            record.set(field, item.get(field)) unless Ember.isEmpty($.trim(item.get(field)))
-
-        email = item.get('email')
-
-        if !Ember.isEmpty(email) && !@emailIsValid(email)
-          @send 'flashError', "Not a valid email address"
-          return
-
-        if item.hasOwnProperty 'record'
-          item.record.setProperties
-            name: item.get('name')
-
-          setProperties item.record
-        else
-          if !Ember.isEmpty(item.get('street')) || !Ember.isEmpty(item.get('state')) || !Ember.isEmpty(item.get('city')) || !Ember.isEmpty(item.get('zipcode')) || !Ember.isEmpty(item.get('email')) || !Ember.isEmpty(item.get('phone')) || !Ember.isEmpty(item.get('country'))
-            record = @get("content.#{@recordArray}").createRecord()
-            setProperties record
-
       model = @get('content')
 
-      model.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        result.reset()
+      @setAddressFromHash model, @get('form.addresses'), @emailIsValid
 
-      model.one 'bacameError', (result) =>
-        @send 'flashError', 'An error has occurred and the update did not occurr.'
-        result.reset()
-
-      @get('content.transaction').commit()
+      model.save(this)
 
     setForm: ->
       recordArray = @get(@recordArray)
