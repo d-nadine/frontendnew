@@ -18,6 +18,14 @@
         <label class="control-label">Contact</label>
         <div class="controls required">
           {{view view.contactPicker}}
+          {{#if contactInvalid}}
+            <div class="contact-picker-error">
+              <span class="error">
+                <i class="ss-standard ss-alert"></i>
+                You must select an existing contact.
+              </span>
+            </div>
+          {{/if}}
         </div>
       </div>
       <div class="control-group">

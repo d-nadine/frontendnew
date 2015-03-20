@@ -74,6 +74,9 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
     @set('status', @get('statuses.firstObject'))
 
+  contactInvalid: Ember.computed 'isSubmitted', 'contact', ->
+    @get('isSubmitted') && !@get('contact')
+
   isValid: Ember.computed 'name', 'contact', 'user', 'source', 'description', 'value', ->
     return false if Ember.isEmpty(@get('name'))
     return false if Ember.isEmpty(@get('contact'))

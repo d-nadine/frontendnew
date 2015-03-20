@@ -64,6 +64,15 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
       {{/if}}
     """
 
+    focusIn: (e) ->
+      @_super.apply this, arguments
+
+      value = e.target?.value
+      return unless value?.length
+
+      if /\d+/.exec(value)[0] == "0"
+        e.target.value = ''
+
     valueInvalid: Ember.computed 'controller.value', 'controller.isSubmitted', ->
       return false unless @get('controller.isSubmitted')
       value = @get('controller.value')
