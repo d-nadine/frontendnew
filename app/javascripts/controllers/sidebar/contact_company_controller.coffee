@@ -57,6 +57,10 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
 
       false
 
+    modelChanged: (company) ->
+      @set 'form.company', 'company'
+      @send 'commit'
+  
   updateHook: (contact) ->
     if existingCompany = @get('existingCompany')
       existingCompany.reload()

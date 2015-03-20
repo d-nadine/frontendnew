@@ -1,9 +1,3 @@
-require 'lib/radium/combobox'
-require 'lib/radium/text_combobox'
-require 'lib/radium/contact_company_picker'
-require 'lib/radium/tag_autocomplete'
-requireAll /views\/sidebar/
-
 Radium.ContactSidebarView = Radium.FixedSidebarView.extend Radium.UploadingMixin,
   classNames: ['sidebar-panel-bordered']
 
