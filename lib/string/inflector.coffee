@@ -24,7 +24,7 @@ String::constantize = ->
   Ember.get Radium, @singularize().classify()
 
 String::isCurrency = ->
-  /^(?=.*[0-9])\d{1,15}(\.\d{1,2})?$/.test this
+  /^(?=.*[0-9])\d{1,15}(\.\d{1,2})?$/.test accounting.unformat(this)
 
 String::dedasherize = ->
   @replace(/[-]/g, ' ')
