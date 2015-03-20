@@ -3,7 +3,7 @@
   <dd>
     {{#if isEditing}}
       <div>
-        {{autocomplete-textbox scopes="company" value=controller.company.name queryKey="displayName" validations=companyValidations validator=controller validationField="company" isValid=isValid writeableValue=true saveModel="createCompany" action="modelChanged" disabled=isDisabled}}
+        {{autocomplete-textbox scopes="company" value=controller.form.company queryKey="displayName" validations=companyValidations validator=controller validationField="company" isValid=isValid writeableValue=true saveModel="createCompany" action="modelChanged" disabled=isDisabled}}
       </div>
     {{else}}
       <div class="pull-right">

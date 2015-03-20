@@ -4,4 +4,4 @@ Radium.SaveModelKeyDownMixn = Ember.Mixin.create
 
     return unless e.keyCode == @ENTER
 
-    @sendAction('saveModel') if @get('saveModel')
+    @sendAction('saveModel', e.target.value) if @get('saveModel')

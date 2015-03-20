@@ -1,4 +1,3 @@
-require 'lib/radium/contact_company_picker'
 require 'views/sidebar/focus_out_save'
 
 Radium.SidebarContactHeaderView = Radium.InlineEditorView.extend Radium.FocusOutSaveMixin,
