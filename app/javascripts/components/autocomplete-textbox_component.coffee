@@ -23,12 +23,16 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
       @getTypeahead().hide()
 
-      @sendAction 'action', value
+      return unless @get('action')
+
+      Ember.run.next =>
+        @sendAction 'action', value
 
       false
 
     showAll: ->
       return if @get('isAsync')
+      return if @get('disabled')
 
       typeahead = @getTypeahead()
 
@@ -38,6 +42,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
       typeahead.render(source.slice(0, source.length)).show()
 
+      false
+
     removeValue: ->
       @set('value', null)
       @autocompleteElement().val('').focus()
@@ -45,7 +51,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       event.preventDefault()
       false
 
-  classNameBindings: [':combobox-container']
+  classNameBindings: [':field', ':combobox', ':control-box', 'isInvalid']
 
   autocompleteElement: ->
     @$('input[type=text].combobox:first')
@@ -62,11 +68,6 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     if @writeableValue
       @set 'value', text
 
-    if @get('isInvalid')
-      @$().addClass 'is-invalid'
-    else
-      @$().removeClass 'is-invalid'
-
   valueDidChange: Ember.observer 'value', ->
     @setValueText()
 
@@ -74,15 +75,30 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     @setValueText()
 
   setValueText: ->
+    el = @autocompleteElement()
+
     unless value = @get('value')
-      return @autocompleteElement().val('')
+      return el.val('')
 
-    displayValue = if typeof value == 'string'
-                     value
-                   else
-                     value.get(@queryKey)
+    complete = =>
+      displayValue = if typeof value == 'string'
+                       value
+                     else
+                       value.get(@queryKey)
 
-    @autocompleteElement().val(displayValue) if displayValue
+      el.val(displayValue) if displayValue
+
+    if value instanceof DS.Model && !value.get('isLoaded')
+      observer = ->
+        return unless value.get('isLoaded')
+
+        complete()
+
+        value.removeObserver 'isLoaded', observer
+
+      value.addObserver 'isLoaded', observer
+    else
+      complete()
 
   focusIn: (e) ->
     Em.run.next =>
@@ -92,15 +108,18 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
       return unless el
 
+      e.cancelBubble = true
+
       return @autocompleteElement().select() if el.val()
 
       return if @get('value')
 
       return unless e.target == el.get(0)
 
-      unless el.val().length
+      if !el.val().length && !@getTypeahead().shown
         @send 'showAll'
 
-    e.stopPropagation()
-    e.preventDefault()
+      e.stopPropagation()
+      e.preventDefault()
+
     return false

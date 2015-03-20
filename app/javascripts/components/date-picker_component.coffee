@@ -164,7 +164,7 @@ Radium.DatePickerComponent = Ember.Component.extend
         @$().data('datepicker').hide()
 
         @$('.datepicker').find('a').attr('tabindex','-1')
-        this.$().parent().next().children('input:first').get(0).focus()
+        this.$().parent().next().children('input:first').get(0)?.focus()
       else if keyCode == @DELETE
         Ember.run.next =>
           unless @$().val()

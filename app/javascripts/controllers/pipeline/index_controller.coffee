@@ -1,7 +1,9 @@
 require 'mixins/controllers/bulk_action_controller_mixin'
+require 'mixins/user_combobox_props'
 
 Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActionControllerMixin,
   Radium.BulkActionControllerMixin,
+  Radium.UserComboboxProps,
 
   needs: ['workflowGroupItem', "pipeline", "pipelineWorkflowDeals"]
   filteredDeals: null

@@ -1,7 +1,7 @@
 {{#if showAssignForm}}
   <form>
     <div class="assign">
-      {{view view.userPicker}}
+      {{autocomplete-textbox source=users value=controller.reassignForm.assignToUser queryKey="displayName" validations=userValidations validator=controller validationField="user" disabled=controller.isDisabled}}
       <div class="assign-todo">
         <i class="ss-standard ss-check icon-todo"></i>
         {{view view.assignTodoField viewName="assignTodo"}}

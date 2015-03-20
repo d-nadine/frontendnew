@@ -36,16 +36,22 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
 
     reassign: (form) ->
       controller = @getController()
+      controller.set('isSubmitted', true)
       reassignForm = controller.get('reassignForm')
       reassignForm.set('todo', controller.get('reassignTodo'))
+
+      return unless reassignForm.get('assignToUser')
+
       reassignForm.commit().then =>
         controller.set('reassignTodo', null)
         reassignForm.reset()
         controller.trigger 'formReset'
         @resetForm()
+        controller.set('isSubmitted', false)
         @send "flashSuccess", "Selected Items have been reassigned.",
       (error) =>
         @send 'flashError', error
+        controller.set('isSubmitted', false)
 
     close: ->
       @render 'nothing',

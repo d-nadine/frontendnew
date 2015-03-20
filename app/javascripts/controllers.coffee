@@ -21,6 +21,8 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   isAdmin: Ember.computed.bool 'currentUser.isAdmin', true
   nonAdmin: Ember.computed.not 'isAdmin'
   plan: Ember.computed.alias 'currentUser.account.billing.subscriptionPlan.planId'
+  errorMessages: Ember.A()
+
   emailIsValid: (email) ->
     Radium.EMAIL_REGEX.test email
 

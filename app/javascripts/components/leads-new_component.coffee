@@ -1,4 +1,6 @@
-Radium.LeadsNewComponent = Ember.Component.extend
+require 'mixins/user_combobox_props'
+
+Radium.LeadsNewComponent = Ember.Component.extend Radium.UserComboboxProps,
   actions:
     modelChanged: (model) ->
       @sendAction 'modelChanged', model
@@ -57,4 +59,3 @@ Radium.LeadsNewComponent = Ember.Component.extend
 
   nameValidations: ['required']
   emailValidations: ['email']
-  userValidations: ['required']

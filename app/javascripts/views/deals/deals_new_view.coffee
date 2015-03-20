@@ -2,7 +2,6 @@ require 'lib/radium/progress_bar'
 require 'lib/radium/radio'
 require 'lib/radium/text_combobox'
 require 'lib/radium/autocomplete_combobox'
-require 'lib/radium/contact_picker'
 require 'lib/radium/value_validation_mixin'
 
 Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMixin,
@@ -28,16 +27,6 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
     disabledBinding: 'parentView.disabled'
     didInsertElement: ->
       @$().focus()
-
-  contactPicker: Radium.ContactPicker.extend Radium.ValueValidationMixin,
-    parent: Ember.computed.alias 'controller'
-    queryParameters: (query) ->
-      Ember.merge @_super.apply(this, arguments), tracked_only: true
-
-  userPicker: Radium.UserPicker.extend Radium.ValueValidationMixin,
-    parent: Ember.computed.alias 'controller'
-    disabledBinding: 'parentView.disabled'
-    leader: null
 
   description: Radium.TextArea.extend Radium.ValueValidationMixin,
     disabledBinding: 'parentView.disabled'

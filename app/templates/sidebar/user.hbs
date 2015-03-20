@@ -13,7 +13,7 @@
           {{partial 'is_loading'}}
         {{/if}}
       {{/link-to}}
-      {{view view.userPicker class="field"}}
+      {{autocomplete-textbox source=users value=controller.form.user queryKey="displayName" validations=userValidations validator=controller validationField="user" action="stopEditing"}}
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target="view" bubbles=false}}></i>
       {{#link-to "user" user}}

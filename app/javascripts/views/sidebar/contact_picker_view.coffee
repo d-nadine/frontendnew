@@ -1,4 +1,3 @@
-require 'lib/radium/user_picker'
 require 'lib/radium/contact_picker'
 require 'mixins/views/inline_combobox_toggle_mixin'
 

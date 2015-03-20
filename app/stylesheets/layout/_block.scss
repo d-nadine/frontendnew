@@ -45,6 +45,10 @@
   background-color: $light-background;
 }
 
+.block-gray .combobox.is-invalid input[type] {
+  border: 1px solid $red !IMPORTANT;
+}
+
 .block-blue {
   background: $calendar-active-bg;
 }

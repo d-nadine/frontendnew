@@ -8,7 +8,7 @@ Radium.DealView = Radium.View.extend Radium.StickyBannerMixin,
     @_super.apply this, arguments
     @notifyPropertyChange('dealProgressBarWidth')
 
-  dealProgressBarWidth: (->
+  dealProgressBarWidth: Ember.computed 'controller.status', ->
     return 0 unless Ember.$('.deal-progress').length
 
     status = @get('controller.status')
@@ -21,4 +21,3 @@ Radium.DealView = Radium.View.extend Radium.StickyBannerMixin,
     width = width + 20 if width > 0
 
     "width: #{width}px"
-  ).property('controller.status')

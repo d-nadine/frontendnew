@@ -1,7 +1,10 @@
 require 'controllers/forms/form_controller'
 require 'lib/radium/buffered_proxy'
+require 'mixins/user_combobox_props'
 
 Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
+  Radium.UserComboboxProps,
+
   actions:
     finishTask: ->
       return if @get('cantFinish')

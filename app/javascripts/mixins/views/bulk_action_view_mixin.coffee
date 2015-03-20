@@ -1,11 +1,6 @@
-require 'lib/radium/user_picker'
 require 'views/forms/todo_field_view'
 
 Radium.BulkActionViewMixin = Ember.Mixin.create
-  userPicker: Radium.UserPicker.extend
-    disabledBinding: 'controller.isDisabled'
-    valueBinding: 'controller.assignToUser'
-
   didInsertElement: ->
     @_super.apply this, arguments
     @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on

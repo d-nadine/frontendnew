@@ -27,6 +27,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
       false
 
   needs: ['accountSettings', 'users', 'contacts']
+
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')
   loadedPages: [1]
 

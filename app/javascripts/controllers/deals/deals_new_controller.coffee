@@ -1,5 +1,8 @@
+require 'mixins/user_combobox_props'
+
 Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMixin,
   Radium.AttachedFilesMixin,
+  Radium.UserComboboxProps,
   actions:
     submit: ->
       @set 'isSubmitted', true
@@ -42,7 +45,8 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
       @send 'submit'
 
   needs: ['contacts','users', 'accountSettings']
-  statuses: Ember.computed.alias('controllers.accountSettings.workflowStates')
+
+  statuses: Ember.computed.oneWay('controllers.accountSettings.workflowStates')
 
   contacts: Ember.computed 'controllers.contacts.[]', ->
     @get('controllers.contacts').filter (contact) ->
@@ -89,3 +93,5 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
     return false if parseInt(dealValue) == 0
 
     true
+
+  contactValidations: ['required']

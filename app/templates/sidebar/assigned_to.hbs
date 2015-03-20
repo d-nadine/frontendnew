@@ -9,7 +9,7 @@
     <div class="assigned-to control-group">
       {{#if isEditing}}
         <div>
-          {{view view.userPicker}}
+          {{autocomplete-textbox source=users value=controller.form.user queryKey="displayName" validations=userValidations validator=controller validationField="user" action="stopEditing"}}
         </div>
         <div class="source">
           <label class="control-label">Source</label>

@@ -27,6 +27,9 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     finish = (value) ->
       self.send 'setBindingValue', object
 
+      # FIXME: find a less hacky way than type checking
+      return if self instanceof Radium.AutocompleteTextboxComponent
+
       isInput = el.get(0).tagName == "INPUT"
 
       Ember.run.next ->
@@ -65,8 +68,15 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   queryParameters: (query) ->
     scopes = @get('scopes')
     Ember.assert "You need to define a scopes binding for autocomplete", scopes
-    term: query
-    scopes: scopes
+    params =
+      term: query
+      scopes: scopes
+
+    return params unless @get('tracked_only')
+
+    params.tracked_only = true
+
+    params
 
   matcher: (item) ->
     string = @getValue item

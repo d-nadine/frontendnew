@@ -1,4 +1,5 @@
 require 'controllers/sidebar/sidebar_base_controller'
+require 'mixins/user_combobox_props'
 
 Radium.ContactAssignedToForm = Radium.Form.extend
   init: ->
@@ -12,7 +13,8 @@ Radium.ContactAssignedToForm = Radium.Form.extend
     @set 'source', ''
     @set 'user', null
 
-Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend
+Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend Radium.UserComboboxProps,
+
   actions:
     setForm: ->
       @set 'form.source', @get('model.source')
@@ -28,3 +30,5 @@ Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend
 
   form: Ember.computed ->
     Radium.ContactAssignedToForm.create()
+
+  isSubmitted: true

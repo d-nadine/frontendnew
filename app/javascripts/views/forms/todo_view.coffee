@@ -1,6 +1,5 @@
 require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
-require 'lib/radium/user_picker'
 require 'views/forms/form_view'
 require 'views/forms/focus_textarea_mixin'
 
@@ -60,9 +59,6 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
       return pre unless @get('finishBy')
 
       "#{pre} for #{@get('finishBy').toHumanFormat()}"
-
-  userPicker: Radium.UserPicker.extend
-    disabledBinding: 'controller.isDisabled'
 
   onFormReset: ->
     if description = @get('description')
