@@ -23,3 +23,6 @@ Radium.SidebarContactPickerController = Radium.SidebarBaseController.extend
 
   form: Ember.computed ->
     Radium.ContactForm.create()
+
+  isSubmitted: true
+  contactValidations: ['required']
