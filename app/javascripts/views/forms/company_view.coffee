@@ -5,6 +5,9 @@ Radium.FormsCompanyView = Radium.View.extend
       @$('.existing-company').slideDown('medium')
 
     hideNewCompany: ->
+      if @get('controller.company')
+        return @send 'resetCompany'
+
       @$().slideUp('slow', ->
         Ember.$('.address-book-controls').slideDown('medium'))
 
@@ -16,34 +19,16 @@ Radium.FormsCompanyView = Radium.View.extend
 
   setup: Ember.on 'didInsertElement', ->
     @get('controller').on('formReset', this, 'onFormReset')
+    @get('controller').on('modelChanged', this, 'onModelChanged')
 
-  willDestroyElement: ->
-    @get('controller').send 'reset'
-    @_super.apply this, arguments
-
-  companyPicker: Radium.ContactCompanyPicker.extend
-    classNameBindings: [':field', 'isInvalid']
-    placeholder: 'Add Company'
-    disabled: Ember.computed.alias 'controller.isDisabled'
-
-    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.companyName', ->
-      return unless @get('controller.isSubmitted')
-      value = @get('controller.companyName')
-      !value || value.length == 0
-
-    setValue: (obj) ->
-      @_super obj.get('person')
-      @get('parentView').send 'showExisting'
-
-    keyDown: (e) ->
-      unless e.keyCode == 13
-        @_super.apply this, arguments
-        return
-
-      @get('controller').send 'createCompany'
-      e.preventDefault()
-      e.stopPropagation()
-      false
+  onModelChanged: ->
+    @send 'showExisting'
 
   onFormReset: ->
     @send 'resetCompany'
+
+  willDestroyElement: ->
+    controller = @get('controller')
+    controller.off 'formReset'
+    controller.off 'modelChanged'
+    @_super.apply this, arguments

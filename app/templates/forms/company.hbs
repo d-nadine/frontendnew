@@ -1,7 +1,7 @@
 <div class="company-form">
-  <form class="form-search pipeline-search">
-    {{view view.companyPicker}}
-  </form>
+  <div class="form-search pipeline-search">
+    {{autocomplete-textbox scopes="company" value=controller.companyName queryKey="displayName" validations=companyValidations validator=controller validationField="company" isValid=isValid writeableValue=true saveModel="createCompany" action="modelChanged" disabled=isDisabled}}
+  </div>
   <a href="#" {{action "createCompany"}}  {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
     {{#if isSaving}}
       <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Saving</span>
@@ -9,7 +9,7 @@
       <i class="ss-standard ss-plus"></i> Submit
     {{/if}}
   </a>
-  <a href="#" {{action "hideNewCompany" target="view"}} {{bind-attr disabled=isDisabled}} class="btn btn-danger btn-main">
+  <a href="#" {{action "hideNewCompany" target="view"}} class="btn btn-danger btn-main">
     Cancel
   </a>
 </div>

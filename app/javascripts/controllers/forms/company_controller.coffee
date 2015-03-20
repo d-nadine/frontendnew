@@ -33,6 +33,10 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
 
       @get('store').commit()
 
+    modelChanged: (company) ->
+      @set 'company', company
+      @trigger 'modelChanged'
+
     reset: ->
       @set('isSaving', false)
       @set('companyName', '')
@@ -59,3 +63,5 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
 
   isValid: Ember.computed 'companyName.length', 'isSubmitted', ->
     @get('companyName.length')
+
+  companyValidations: ['required']
