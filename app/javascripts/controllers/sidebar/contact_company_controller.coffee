@@ -16,8 +16,11 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
       @set 'form.company', @get('model.company')
 
     createCompany: (companyName) ->
+      return @send('stopEditing') unless companyName?.length
+
       @set('form.company', Ember.Object.create name: companyName)
-      @send 'stopEditing'
+
+      @send 'commit'
 
     setProperties: ->
       unless model = @get('model')
@@ -35,8 +38,8 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
       model.set('companyName', form.get('company.name'))
 
     commit: ->
-      existing = @get('model.company.name')
-      updated = @get('form.company.name')
+      existing = $.trim(@get('model.company.name') || '')
+      updated = $.trim(@get('form.company.name') || '')
 
       companyUpdate =  ((existing != updated) && updated != '')
 
@@ -45,7 +48,14 @@ Radium.SidebarContactCompanyController = Radium.SidebarBaseController.extend
 
       @set('companyAdded', companyUpdate)
 
-      @_super.apply this, arguments
+      args = if Ember.isEmpty(updated)
+               [true]
+             else
+               []
+
+      @_super.apply this, args
+
+      false
 
   updateHook: (contact) ->
     if existingCompany = @get('existingCompany')
