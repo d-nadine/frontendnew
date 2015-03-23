@@ -30,34 +30,3 @@ Radium.AddDealComponent = Ember.Component.extend
     Radium.Deal.all().get('length')
 
   classNameBindings: [':email-item-actions', ':new-message-row', ':block-blue', ':add-deal']
-
-  dealPicker: Radium.Combobox.extend
-    actions:
-      selectObject: (item) ->
-        @_super.apply this, arguments
-        @get("controller").send 'addDeal'
-
-    value: Ember.computed.alias 'controller.targetObject.deal'
-    sourceBinding: 'controller.targetObject.controllers.deals'
-    placeholder: 'Type deal name'
-    isSubmittedBinding:'controller.isSubmitted'
-
-    setValue: (object) ->
-      @_super.apply this, arguments
-      @get("controller").send 'addDeal'
-
-    didInsertElement: ->
-      @_super.apply this, arguments
-      @$('input[type=text]').focus()
-
-    lookupQuery: (query) ->
-      @get('source').find (item) -> item.get('name') == query
-
-    keyDown: (e) ->
-      return unless e.keyCode == 13
-
-      @get("controller").send 'addDeal'
-
-    template: Ember.Handlebars.compile """
-      <a {{action "selectObject" this target=view href=true bubbles=false}}>{{longName}}</a>
-    """

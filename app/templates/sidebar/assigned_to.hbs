@@ -13,7 +13,7 @@
         </div>
         <div class="source">
           <label class="control-label">Source</label>
-          {{view view.leadSources}}
+          {{autocomplete-textbox source=leadSources value=controller.form.source validations=userValidations validator=controller validationField="user" action="stopEditing"}}
         </div>
       {{else}}
         {{#link-to "user" user}}

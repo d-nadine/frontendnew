@@ -1,13 +1,12 @@
 <label class="control-label">Add</label>
 <div class="controls">
-  {{view view.autocomplete source=headerData value=field.mapping row=firstDataRow}}
+  {{autocomplete-textbox source=headerData value=field.mapping class="field" queryKey="name"}}
   <span class="match-additonal-column-options">
     <div class="control-group radio-group">
       <ul>
         <li><span>as a</span></li>
         {{view Radium.Radiobutton selectedValueBinding="field.type" name=uniqueRadioName leader="Group" value="tag" tagName="li"}}
         {{view Radium.Radiobutton selectedValueBinding="field.type" name=uniqueRadioName leader="Contact Note" value="contact" tagName="li"}}
-        {{!view Radium.Radiobutton selectedValueBinding="field.type" name=uniqueRadioName leader="Company Note" value="company" tagName="li"}}
         <li>
           <a href="#" {{action "removeField" field}} class="btn btn-link btn-remove-field">
             <i class="ss-symbolicons-block ss-trash"></i>

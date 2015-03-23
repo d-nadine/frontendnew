@@ -5,11 +5,5 @@ Radium.MultiImportfieldComponent = Ember.Component.extend
 
   classNames: ['multi-import']
 
-  autocomplete: Radium.Combobox.extend
-    classNames: ['field']
-    sourceBinding: 'controller.source'
-    sortedSource: Ember.computed.alias 'source'
-
-  uniqueRadioName: ( ->
+  uniqueRadioName: Ember.computed ->
     @get('elementId') + 'type'
-  ).property()

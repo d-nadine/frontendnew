@@ -6,7 +6,7 @@
 {{else}}
   <div class="assigned-to control-group">
     <div class="control-group">
-      {{view view.dealPicker}}
+      {{autocomplete-textbox source=deals value=deal queryKey="displayName" placeholder="Type a deal name." action="addDeal" parent=model}}
       <button class="btn btn-primary picker-submit" {{action "closeForm"}}>
         CANCEL
       </button>

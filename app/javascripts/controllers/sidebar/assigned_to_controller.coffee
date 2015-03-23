@@ -32,3 +32,5 @@ Radium.SidebarAssignedToController = Radium.SidebarBaseController.extend Radium.
     Radium.ContactAssignedToForm.create()
 
   isSubmitted: true
+
+  leadSources: Ember.computed.oneWay 'controllers.accountSettings.leadSources'

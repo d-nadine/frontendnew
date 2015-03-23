@@ -1,5 +1,4 @@
 require 'lib/radium/time_picker_view'
-require 'lib/radium/location_picker'
 require 'lib/radium/meeting_autocomplete_view'
 require 'views/forms/focus_textarea_mixin'
 
@@ -86,10 +85,6 @@ Radium.FormsMeetingView = Radium.FormView.extend
     isInvalid: Ember.computed 'isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date', ->
       return false unless @get('isSubmitted')
       @get('controller.endsAtIsInvalid')
-
-  location: Radium.LocationPicker.extend
-    valueBinding: 'controller.location'
-    isInvalid: false
 
   attendees: Radium.MeetingAutocompleteView.extend()
 

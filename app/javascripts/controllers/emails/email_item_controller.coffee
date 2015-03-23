@@ -150,6 +150,9 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       email: @get('model')
 
   needs: ['messages', 'deals']
+
+  deals: Ember.computed.oneWay 'controllers.deals'
+
   hideUploader: true
   hasComments: Ember.computed.bool 'comments.length'
   renderComments: Ember.computed.or 'hasComments', 'showCommentBox'

@@ -43,21 +43,24 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     if typeof object == "string"
       return finish object
 
+    unless object instanceof DS.Model
+      return finish(object.get(@field))
+
     @set('isLoading', true)
-    person = object.get('person') || object
+    subject = object.get('person') || object
 
     observer = =>
-      return unless person.get('isLoaded')
+      return unless subject.get('isLoaded')
 
       @set('isLoading', false)
-      person.removeObserver('isLoaded')
+      subject.removeObserver('isLoaded')
 
       finish(object.get(@field))
 
-    if person.get('isLoaded')
+    if subject.get('isLoaded')
       observer()
     else
-      person.addObserver('isLoaded', observer)
+      subject.addObserver('isLoaded', observer)
 
   getValue: (item) ->
     if typeof item == "string"
