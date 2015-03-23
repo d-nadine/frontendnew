@@ -3,7 +3,7 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
     stopEditing: ->
       return if @get('isSaving')
       return unless @get('isValid')
-      @send 'commit'
+      @send('commit') unless @get('isCommitting')
       @set 'isEditing', false
 
     startEditing: ->
@@ -23,20 +23,25 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
     commit: (continueEditing) ->
       return unless @get('model')
 
+      return if @get('isCommitting')
+
       @send 'setProperties'
 
       model = @get('model')
 
       return unless model.get('isDirty')
 
-      model.save(this).then (result) =>
+      @set 'isCommitting', true
+
+      model.save(this).then((result) =>
         @send 'stopEditing' unless continueEditing
+        @set 'isCommitting', false
+      ).catch (result) =>
+        @set('isCommitting', false)
 
       if @updateHook
         model.one 'didUpdate', (result) =>
           @updateHook(result)
-
-      @get('store').commit()
 
   isEditable: true
   isEditing: false
