@@ -13,12 +13,11 @@ Radium.SentenceController = Radium.ArrayController.extend
 Radium.SentenceItemController = Radium.ObjectController.extend
   list: Ember.computed.oneWay('parentController.content')
 
-  separator: (->
+  separator: Ember.computed ->
     if @get('list').indexOf(@get('model')) == @get('list.length') - 2
       ' and'
     else if !@get('list.lastObject') == @get('model')
       ', '
-  ).property('model')
 
 Ember.Handlebars.registerHelper 'list', (listPath, options) ->
   options.types[0] = "STRING"
