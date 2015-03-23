@@ -47,11 +47,12 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     removeValue: ->
       @set('value', null)
       @autocompleteElement().val('').focus()
+      @send 'showAll'
       event.stopPropagation()
       event.preventDefault()
       false
 
-  classNameBindings: [':field', ':combobox', ':control-box', 'isInvalid']
+  classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', 'isInvalid']
 
   autocompleteElement: ->
     @$('input[type=text].combobox:first')
@@ -71,8 +72,20 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   valueDidChange: Ember.observer 'value', ->
     @setValueText()
 
-  initializeValue: Ember.on 'didInsertElement', ->
+  setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
     @setValueText()
+
+    @autocompleteElement().off 'blur'
+    typeahead = @getTypeahead()
+
+    $('body').on 'click.autocomplete.txt.component', (e) =>
+      if typeahead = @getTypeahead()
+        typeahead.hide() if typeahead.shown
+
+  autocompleteOver: Ember.on 'willDestroyElement', ->
+    $('body').off 'click.autocomplete.txt.component'
 
   setValueText: ->
     el = @autocompleteElement()
@@ -107,8 +120,6 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       el = @autocompleteElement()
 
       return unless el
-
-      e.cancelBubble = true
 
       return @autocompleteElement().select() if el.val()
 

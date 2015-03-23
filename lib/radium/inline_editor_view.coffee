@@ -41,10 +41,18 @@ Radium.InlineEditorView = Ember.View.extend
       evt.stopPropagation()
       return
 
+    target = $(evt.target)
+
+    if target.hasClass('autocomplete-textbox')
+      event.stopPropagation()
+      event.preventDefault()
+      return false
+
     tagName = evt.target.tagName.toLowerCase()
 
     if (['input', 'button',  'select', 'i', 'a'].indexOf(tagName) == -1) || $(evt.target).hasClass('resource-name')
       evt.stopPropagation()
+
       @send 'toggleEditor'
       return
 
