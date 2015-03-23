@@ -1,6 +1,5 @@
 require 'lib/radium/progress_bar'
 require 'lib/radium/radio'
-require 'lib/radium/autocomplete_combobox'
 require 'lib/radium/value_validation_mixin'
 
 Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMixin,
