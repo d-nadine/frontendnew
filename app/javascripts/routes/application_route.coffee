@@ -49,7 +49,9 @@ Radium.ApplicationRoute = Radium.Route.extend
           into: 'application'
 
         @set 'router.openDrawer', name
-        Radium.set 'notifyCount', 0
+
+        @controllerFor('application').set 'notificationCount', 0
+
         Ember.run.later =>
           notifications = @controllerFor('notifications').get('model')
 
@@ -178,10 +180,7 @@ Radium.ApplicationRoute = Radium.Route.extend
         ele.animate {left: "-120%", height: 0}, duration, callback
 
   activate: ->
-    notificationPoller = Radium.NotificationsPoller.create()
-    Radium.set('notificationPoller', notificationPoller)
-    notificationPoller.start()
-
+    @controllerFor('notifications').start()
     @controllerFor('messages').start()
 
     unless @controllerFor('currentUser').get('initialMailImported')
@@ -192,7 +191,7 @@ Radium.ApplicationRoute = Radium.Route.extend
       initialImporter.start()
 
   deactivate: ->
-    Radium.get('notificationPoller').stop()
+    @controllerFor('notifications').stop()
     @controllerFor('messages').stop()
 
   model: ->

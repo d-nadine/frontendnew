@@ -5,5 +5,16 @@ Radium.ApplicationController = Radium.ObjectController.extend
   isNotificationsOpen: Ember.computed.alias 'controllers.notifications.drawerOpen'
   today: Ember.DateTime.create()
   currentDrawer: null
-  notificationCount: Ember.computed 'Radium.notifyCount', ->
-    Radium.get('notifyCount')
+  notificationCount: 0
+  title: 'Radium'
+  titleChanged: Ember.observer 'notificationCount', ->
+    title = @get('title')
+    notificationCount = @get('notificationCount')
+
+    if notificationCount
+      title = "(#{notificationCount}) #{title}"
+
+    window.setTimeout ->
+      document.title = "."
+      document.title = title
+    , 200

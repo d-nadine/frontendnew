@@ -24,8 +24,6 @@ Radium = Em.Application.createWithMixins
     blur: 'blur'
 
   timezone: Ember.DateTime.create().get('timezone')
-  title: 'Radium'
-  notifyCount: 0
 
   # LOG_STACKTRACE_ON_DEPRECATION : true
   # LOG_BINDINGS                  : true
@@ -33,18 +31,6 @@ Radium = Em.Application.createWithMixins
   # LOG_TRANSITIONS_INTERNAL      : true
   # LOG_VIEW_LOOKUPS              : true
   # LOG_ACTIVE_GENERATION         : true
-
-  titleChanged: Ember.observer 'notifyCount', ->
-    title = @get('title')
-    notifyCount = @get('notifyCount')
-
-    if notifyCount
-      title = "(#{notifyCount}) #{title}"
-
-    window.setTimeout ->
-      document.title = "."
-      document.title = title
-    , 200
 
   EMAIL_REGEX: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
 

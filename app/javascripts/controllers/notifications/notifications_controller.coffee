@@ -1,7 +1,10 @@
-Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetalessMoreMixin,
+Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetalessMoreMixin, Radium.PollerMixin,
+
   sortProperties: ['time']
   sortAscending: false
   needs: ['messagesSidebar']
+
+  applicationController: Ember.computed.oneWay 'controllers.application'
   isDeleting: false
   actions:
     deleteAllNotifications: ->
@@ -52,3 +55,22 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
   allPagesLoaded: false
   modelQuery: (page, pageSize) ->
     Radium.Notification.find(page: page, page_size: pageSize)
+
+  onPoll: ->
+    existing = Radium.Notification.all().slice()
+    applicationController = @get('applicationController')
+
+    Radium.Notification.find({page:1, page_size: 20}).then (records) ->
+      return unless records.get('length')
+
+      delta = records.toArray().reject (record) ->
+                existing.contains(record) || record.get('read')
+
+      return unless delta?.length
+
+      console.log "#{delta.length} new notifications"
+
+      Radium.NotificationsTotal.find({}).then (result) ->
+        total = result.get('firstObject.total')
+
+        applicationController.set('notificationCount', total)
