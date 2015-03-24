@@ -1,6 +1,6 @@
 Radium.LeadsFromCompanyRoute = Radium.Route.extend
   setupController: (controller, model) ->
-    controller = @controllerFor 'leadsNew'
+    controller = @controllerFor 'leadsSingle'
     controller.set 'model', @get 'contactForm'
     initialDealState = @controllerFor('accountSettings').get('model.workflow.firstObject.name')
     controller.set 'model.initialDealState', initialDealState
@@ -9,18 +9,17 @@ Radium.LeadsFromCompanyRoute = Radium.Route.extend
     controller.get('model').reset()
     controller.set 'user', @controllerFor('currentUser').get('model')
     controller.set 'company', model
-    controller.set 'companyName', model.get('name')
+    controller.set 'model.companyName', model.get('name')
     controller.set 'expandImmediately', true
 
   renderTemplate: ->
-    @render 'leads.new',
-      controller: 'leadsNew'
+    @render 'leads.single',
+      controller: 'leadsSingle'
 
   contactForm:  Radium.computed.newForm('contact')
 
   # FIXME: remove defaults and just use reset?
-  contactFormDefaults: ( ->
+  contactFormDefaults: Ember.computed ->
     isNew: true
     isSubmitted: false
     isSaving: false
-  ).property()

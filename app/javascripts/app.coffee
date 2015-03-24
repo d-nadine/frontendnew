@@ -59,8 +59,6 @@ require /lib\/radium\/base/
 
 require 'lib/radium/computed'
 
-require 'lib/radium/run_when_loaded_mixin'
-
 requireAll /services/
 
 require 'store'

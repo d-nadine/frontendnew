@@ -1,6 +1,8 @@
 Radium.DarkBackgroundMixin = Ember.Mixin.create
-  didInsertElement: ->
+  setup: Ember.on 'disInsertElement', ->
+    @_super.apply this, arguments
     $('html').toggleClass('gray-background')
 
-  willDestroyElement: ->
+  teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
     $('html').toggleClass('gray-background')

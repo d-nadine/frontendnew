@@ -102,7 +102,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
     @get('statuses').reject (status) => status.capitalize() == @get('title')
 
   clearChecked: ->
-    @get('checkedContent').forEach (item) =>
+    @get('checkedContent').forEach (item) ->
       item.set('isChecked', false)
 
   changeStatusForm: Radium.computed.newForm('changeStatus')

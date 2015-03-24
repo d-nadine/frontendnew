@@ -22,10 +22,9 @@ Radium.Groupable = Em.Mixin.create
 
     @_super.apply(this, arguments)
 
-  groupedContent: (->
+  groupedContent: Ember.computed 'arrangedContent', ->
     if content = @get 'arrangedContent'
       @group(content)
-  ).property('arrangedContent')
 
   group: (collection) ->
     groupsMap = {}
