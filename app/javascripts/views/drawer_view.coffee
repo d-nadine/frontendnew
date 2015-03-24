@@ -38,7 +38,9 @@ Radium.DrawerView = Radium.View.extend Radium.ScrollableMixin,
       return if target.hasClass('ss-clock')
       return if target.hasClass('badge-important')
       return if $.contains(ele[0], e.target)
+
       controller.send drawerAction
+
       e.stopPropagation()
       e.preventDefault()
 
