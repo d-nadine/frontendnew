@@ -10,27 +10,37 @@ Radium.DrawerView = Radium.View.extend Radium.ScrollableMixin,
     @$().addClass 'open'
 
     controller = @controller
+
+    drawerAction = controller.get('drawerAction')
+
+    Ember.assert "You must set a drawer action", drawerAction
+
     ele = this.$()
-    $('body').on 'click.notifications', (e) ->
+    $('body').on 'click.drawer-actions', (e) ->
+      target = $(e.target)
+
       return unless controller.get('drawerOpen')
 
-      target = $(e.target)
       if target.hasClass 'dismiss-single'
         return false
 
-      if e.target.tagName == "A" && target.hasClass('notifications-link')
+      classNames = e.target.className.split(' ')
+
+      drawerIcons = ['notifications-link', 'email-folders', 'ss-inbox', 'ss-clock']
+
+      if Ember.EnumerableUtils.intersection(classNames, drawerIcons).length
         return false
 
       if e.target.tagName == "A"
-        controller.send 'toggleNotifications'
+        controller.send drawerAction
         return false
 
       return if target.hasClass('ss-clock')
       return if target.hasClass('badge-important')
       return if $.contains(ele[0], e.target)
-      controller.send 'toggleNotifications'
+      controller.send drawerAction
       e.stopPropagation()
       e.preventDefault()
 
   willDestroyElement: ->
-    $('body').off 'click.notifications'
+    $('body').off 'click.drawer-actions'
