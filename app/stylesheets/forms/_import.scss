@@ -1,8 +1,75 @@
+.tab-content {
+  overflow: visible;
+}
+
 .leads-import-view {
-  .table-striped {
-    .import-error {
-      color: $red;
-      font-weight: bold;
+  .form-horizontal .control-label {
+    text-align: left;
+  }
+
+  .form .or {
+    padding-left: 15px;
+  }
+
+  #data-preview,
+  #previous-imports {
+    display: inline-block;
+    float: left;
+    clear: left;
+    margin: 50px 0 0 0px;
+    width: 100%;
+
+    h2 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-left: -14px;
     }
+  }
+
+  #data-preview table,
+  #previous-imports table {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: -12px;
+  }
+
+  #data-preview table th,
+  #previous-imports table th {
+      background: #f9f9f9;
+      border-bottom: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      height: 44px;
+      min-width: 80px;
+      padding: 2px 1px 0 10px;
+  }
+
+  #data-preview table td,
+  #previous-imports table td {
+      background-color: white;
+      border-right: 1px solid #e6e6e6;
+      border-bottom: 1px solid #e6e6e6;
+      height: 44px;
+      padding: 2px 1px 0 10px;
+  }
+
+  #data-preview .file-name,
+  #previous-imports .file-name {
+    color: #d14;
+  }
+
+  #previous-imports td {
+    background-color: transparent !important;
+  }
+
+  #data-preview .file-name {
+    color: #d14;
+  }
+
+  #data-preview table, #previous-imports table {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: -12px;
   }
 }

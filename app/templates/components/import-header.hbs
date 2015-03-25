@@ -1,5 +1,6 @@
-<label class="control-label">{{leader}}</label>
-<div class="controls">
-  {{autocomplete-textbox source=source value=value class="field" queryKey="name"}}
-  <span class="help-inline preview-inline">{{previewLeader}}</span>
+<div class="icon">
+  <i {{bind-attr class=":ss-standard icon"}}></i>
 </div>
+<div class="description">{{leader}}</div>
+{{autocomplete-textbox source=source value=value class="field" queryKey="name"}}
+<span class="help-inline preview-inline">{{previewLeader}}</span>

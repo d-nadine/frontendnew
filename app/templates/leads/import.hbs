@@ -24,48 +24,33 @@
       {{partial 'is_loading'}}
     {{/if}}
     {{#if initialImported}}
-      <div class="form form-horizontal well main-form import-match-form">
-        <fieldset>
-          <div class="match-columns-title">
-            <div class="preview-title">Preview</div>
-          </div>
+      <div class="form form-horizontal">
+        <div class="main">
           <div class="control-group">
             <label class="control-label">First Row is Header</label>
             <div class="controls">
               {{check-box checked=firstRowIsHeader class="checker-block"}}
             </div>
           </div>
-          <h4>Contact Name</h4>
-          {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow}}
+          {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow icon="ss-user"}}
           {{import-header leader="Last Name" source=headerData value=headerInfo.lastName row=firstDataRow}}
-          <h4>Or</h4>
-          {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow class="match-divider"}}
-          {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow class="match-divider"}}
-          {{import-header leader="Email" source=headerData value=headerInfo.email row=firstDataRow}}
-          {{import-header leader="Phone Number" source=headerData value=headerInfo.phone row=firstDataRow class="match-divider"}}
-          {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow}}
-          {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
-          {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
-          {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
-          {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
-        </fieldset>
-        <fieldset>
-          <legend>Combine additional fields into about field or create tag from field.</legend>
-          {{multi-importfields fields=additionalFields addNew="addNewAdditionalField" removeField="removeAdditionalField" headerData=headerData firstDataRow=firstDataRow}}
-        </fieldset>
-
-        {{#if selectedHeaders.length}}
-        <h4>Showing a sample of {{previewData.length}} rows for <code>{{importFile.name}}</code>.</h4>
-        <div class="preview">
-          <table class="table table-bordered table-striped table-hover">
-            <thead>
+          <div class="item or">
+            <div class="description">Or</div>
+          </div>
+          {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
+          {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
+        </div>
+      </div>
+      {{#if selectedHeaders.length}}
+        <div id="data-preview">
+          <h2>Showing a sample of {{previewData.length}} rows for <span class="file-name">{{importFile.name}}</span></h2>
+          <table>
+            <tbody>
               <tr>
                 {{#each selectedHeaders}}
                   <th>{{name}}</th>
                 {{/each}}
               </tr>
-            </thead>
-            <tbody>
               {{#each previewData}}
                 <tr>
                   {{#each field in fields}}
@@ -76,45 +61,7 @@
             </tbody>
           </table>
         </div>
-        {{/if}}
-        <fieldset>
-          <div class="contact-status">
-            <div class="control-group">
-              <label class="control-label">Contact Status</label>
-              <div class="controls">
-                {{#if contactStatuses.length}}
-                  {{view Ember.Select
-                  content=contactStatuses
-                  optionValuePath="content.id"
-                  optionLabelPath="content.name"
-                  selectionBinding="contactStatus"}}
-                {{/if}}
-                {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
-              </div>
-            </div>
-          </div>
-          <div class="tags">
-            <div class="control-group">
-              <label class="control-label">Groups</label>
-              <div class="controls">
-                {{view view.tags}}
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <div class="button-row">
-          <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-right">
-            {{#if isSaving}}
-              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Importing</span>
-            {{else}}
-              <i class="ss-standard ss-plus"></i> Import
-            {{/if}}
-          </button>
-          <button {{action "reset"}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-large pull-left">
-            Cancel
-          </button>
-        </div>
-      </div>
+      {{/if}}
     {{else}}
       <div class="form form-horizontal well main-form new-lead-form">
         <div class="control-group">
@@ -140,24 +87,22 @@
       <h5>It is safe to navigate away or close the browser.  The import will complete.</h5>
     </div>
   {{/if}}
-  <fieldset>
-    <legend>Previous Contact Imports</legend>
+  <div id="previous-imports">
+    <h2>Previous Contact Imports</h2>
     {{#if model.isUpdating}}
       {{partial 'is_loading'}}
     {{else}}
-      <table class="table table-striped table-bordered table-hover attachments">
-        <thead>
+      <table>
+        <tbody>
           <tr>
             <th>File Name</th>
             <th>Imported On</th>
             <th>Imported</th>
             <th>Errors</th>
             <th>Status</th>
-            <th>&nbsp;</th>
+            <th>&nbsp;</td>
           </tr>
-        </thead>
-        <tbody>
-          {{#each sortedJobs itemController="importJobsItem"}}
+           {{#each sortedJobs itemController="importJobsItem"}}
             <tr>
               <td>{{fileName}}</td>
               <td>{{formatDateTime createdAt format="full"}}</td>
@@ -185,14 +130,12 @@
               <tr>
                 <td colspan="4">
                   <table class="table table-striped table-bordered table-hover attachments">
-                    <thead>
+                    <tbody>
                       <tr>
                         <th>Row</th>
                         <th>Error Message</th>
                         <th>CSV Row</th>
                       </tr>
-                    </thead>
-                    <tbody>
                       {{#each importErrors}}
                         <tr>
                           <td>{{index}}</td>
@@ -207,11 +150,11 @@
             {{/if}}
           {{else}}
             <tr>
-              <td colspan="5">No imports have been completed.</td>
+              <td colspan="6">No imports have been completed.</td>
             </tr>
           {{/each}}
         </tbody>
       </table>
     {{/if}}
-</fieldset>
+  </div>
 </div>

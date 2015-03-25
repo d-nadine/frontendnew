@@ -1,5 +1,5 @@
 Radium.ImportHeaderComponent = Ember.Component.extend
-  classNames: ['control-group', 'import-header']
+  classNames: ['item']
 
   previewLeader: Ember.computed 'value', ->
     unless value = @get('value')
