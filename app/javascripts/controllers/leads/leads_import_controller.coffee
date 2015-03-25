@@ -139,6 +139,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         contactStatus: null
         pollImportJob: null
         headerInfo: @getNewHeaderInfo()
+        emailAddresses: Ember.A()
+        phoneNumbers: Ember.A()
 
       @get('headerData').clear()
       @set('headerData', Ember.A())
@@ -150,6 +152,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       @set('tagNames', Ember.A())
       @get('additionalFields').clear()
       @set('additionalFields', Ember.A([@getNewAdditionalField()]))
+      @get('emailAddresses').clear()
+      @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+      @get('phoneNumbers').clear()
+      @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
 
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
@@ -178,6 +184,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   pollImportJob: null
   additionalFields: Ember.A()
   headerInfo: null
+  emailAddresses: Ember.A()
+  phoneNumbers: Ember.A()
 
   firstDataRow: Ember.A()
 
@@ -192,7 +200,10 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
     @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
     @set 'additionalFields', Ember.A([@getNewAdditionalField()])
+    @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+    @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'headerInfo', @getNewHeaderInfo()
+
     Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', ->
       headerInfo = @get('headerInfo')
 

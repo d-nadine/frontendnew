@@ -1,11 +1,11 @@
-<div class="item" id="email">
+<div class="item">
   <div class="icon"><i {{bind-attr class=":ss-standard icon"}}></i></div>
   <div class="description">
     {{view Ember.Select
     content=labels
     selection=currentLabel}}
   </div>
-  <div class="field">
+  <div>
     {{#with item}}
       {{yield}}
     {{/with}}
