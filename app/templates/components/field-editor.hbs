@@ -1,22 +1,18 @@
 {{#if isEditing}}
   {{input type="text" value=bufferedProxy.name disabled=isSaving placeholder="Add contact status"}}
 {{else}}
-  <span class="lead-source-item">{{model.name}}</span>
+  <span class="lead-source-item">{{model.name}}
+    <i class="ss-standard ss-write pull-right" {{action "edit"}}></i>
+  </span>
 {{/if}}
 {{#if isAdmin}}
 <div class="checklist-controls">
-  <button class="btn btn-danger" {{action "delete"}}>
-    <i class="ss-symbolicons-block ss-trash"></i>
-  </button>
+  <a href="#" class="btn btn-link btn-remove-field" {{action "delete"}}>
+    <i class="ss-symbolicons-block ss-trash cancel"></i>
+  </a>
 
   {{#if isEditing}}
     <button class="btn" {{action "cancel"}}>Cancel</button>
-  {{else}}
-    <button class="btn" {{action "edit"}}>Edit</button>
-  {{/if}}
-
-  {{#if isValid}}
-    <button class="btn btn-success" {{action "save"}}>Save</button>
   {{/if}}
 </div>
 {{/if}}

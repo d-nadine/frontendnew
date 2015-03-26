@@ -1,61 +1,102 @@
 require 'lib/radium/buffered_proxy'
 
-Radium.FieldEditorComponent = Ember.Component.extend
+Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   actions:
-    save: ->
+    save: (noRetry) ->
       return if @get('isSaving')
 
       bufferedProxy = @get('bufferedProxy')
 
-      return unless bufferedProxy.hasBufferedChanges
+      return unless bufferedProxy
 
-      parent = @get('targetObject')
+      unless bufferedProxy.hasBufferedChanges
+        return @send 'cancel'
+
+      parent = @get('parent')
+      model = @get('model')
 
       unless bufferedProxy.get('name.length')
         parent.send 'flashError', 'You must supply a value'
-        @send 'cancel'
+        @set 'isSaving', false
+
+        return if model.get('isNew')
+
+        return @send 'cancel'
 
       @set 'isSaving', true
 
       bufferedProxy.applyBufferedChanges()
 
       self = this
-      model = @get('model')
 
-      model.save(@get('targetObject')).then((result) ->
+      model.save(parent).then((result) ->
         parent.send 'flashSuccess', 'The field has been updated.'
 
         self.set 'isSaving', false
         self.set 'isEditing', false
-      ).catch (result) ->
+      ).catch (result) =>
         self.set 'isSaving', false
         @$('input[type=text]').focus()
-
+        bufferedProxy.set 'name', result.get('_data.name')
+        bufferedProxy.applyBufferedChanges()
+        model.save(self)
       false
 
     edit: ->
       @set 'isEditing', true
 
       Ember.run.next =>
-        @$('input[type=text]').focus()
+        @$('input[type=text]').select().focus()
+
+      return unless @get('model.isNew')
+
+      @get('bufferedProxy').set 'name', ''
 
       false
 
     cancel: ->
-      @get('bufferedProxy').discardBufferedChanges()
-      @set 'isEditing', false
+      model = @get('model')
 
+      if model.get('isNew')
+        return model.unloadRecord()
+
+      @get('bufferedProxy').discardBufferedChanges()
+      @set 'isSaving', false
+      @set 'isEditing', false
       false
 
     delete: ->
       return if @get('isSaving')
 
-      parent = @get('targetObject')
+      model = @get('model')
 
-      @get('model').delete(@get('targetObject')).then (result) ->
+      if model.get('isNew')
+        return model.unloadRecord()
+
+      parent = @get('parent')
+
+      model.delete(parent).then (result) ->
         parent.send 'flashSuccess', 'The field has been deleted.'
 
       false
+
+  click: (e) ->
+    return if @get('isEditing')
+    target = e.target
+
+    return true if ["BUTTON", "A"].contains target.tagName
+
+    return unless @get('isAdmin')
+
+    @send 'edit'
+
+  focusOut: (e) ->
+    return unless @get('isEditing')
+
+    if ["BUTTON", "A"].contains e?.relatedTarget.tagName
+      return $(e.relatedTarget).click()
+
+    @send 'save'
 
   keyDown: (e) ->
     return unless @$().length
@@ -65,7 +106,7 @@ Radium.FieldEditorComponent = Ember.Component.extend
 
     return unless e.target == input.get(0)
 
-    return unless e.keyCode == 13
+    return unless e.keyCode == @ENTER
 
     @send 'save'
 
@@ -86,3 +127,13 @@ Radium.FieldEditorComponent = Ember.Component.extend
   isSaving: false
 
   isAdmin: Ember.computed.oneWay 'currentUser.isAdmin'
+
+  setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    return unless @get('model.isNew')
+
+    Ember.run.scheduleOnce 'afterRender', this, 'triggerEdit'
+
+  triggerEdit: ->
+    @send 'edit'

@@ -3,14 +3,14 @@
 
   <ol class="lead-sources">
     {{#each contactStatus in controller}}
-      {{field-editor model=contactStatus saveModel="saveContactStatuses" tagName="li"}}
+      {{field-editor model=contactStatus saveModel="saveContactStatuses" tagName="li" parent=this}}
     {{/each}}
   </ol>
 
   <div class="row">
     <div class="span5 pipeline-state-create">
       {{#if currentUser.isAdmin}}
-        <button class="btn btn-large btn-success" {{action "createContactStatus" bubbles=false}}>
+        <button class="btn btn-large btn-success" {{action "addNewContactStatus" bubbles=false}}>
           Add Contact Status
         </button>
       {{/if}}

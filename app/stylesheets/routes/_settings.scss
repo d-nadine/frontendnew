@@ -347,7 +347,6 @@ input.api-field {
   }
 }
 
-// Lead Sources ordered list
 .lead-sources {
   li {
     padding: 2px 0;
@@ -357,6 +356,16 @@ input.api-field {
     input[type="text"] {
       margin-bottom: 0;
     }
+  }
+
+  .ss-write {
+    margin-right: 5px;
+  }
+
+  .ss-trash {
+    font-size: 15px;
+    position: relative;
+    top: -3px;
   }
 }
 
