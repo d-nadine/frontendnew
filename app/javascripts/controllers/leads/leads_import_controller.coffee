@@ -274,6 +274,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       companyName: null
       email: null
       phone: null
+      title: null
+      website: null
       street: null
       city: null
       state: null
