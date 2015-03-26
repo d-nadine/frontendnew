@@ -4,7 +4,7 @@
 
   <ol class="lead-sources">
     {{#each leadSource in leadSources}}
-      <li>{{render 'settings/lead_source_item' leadSource}}</li>
+      {{field-editor model=leadSource saveModel="saveSources" deleteModel="deleteLeadSource" cancelModel="cancelModel" parent=this tagName="li" isSaving=isSaving}}
     {{/each}}
   </ol>
 

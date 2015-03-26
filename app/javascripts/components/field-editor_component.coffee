@@ -27,6 +27,9 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       bufferedProxy.applyBufferedChanges()
 
+      if @get('saveModel')
+        return @sendAction "saveModel"
+
       self = this
 
       model.save(parent).then((result) ->
@@ -45,8 +48,11 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     edit: ->
       @set 'isEditing', true
 
-      Ember.run.next =>
-        @$('input[type=text]').select().focus()
+      self = this
+      Ember.run.next ->
+        self.$('input[type=text]').select().focus().one 'blur', (e) ->
+          Ember.run.next ->
+            self.send 'save'
 
       return unless @get('model.isNew')
 
@@ -57,7 +63,10 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     cancel: ->
       model = @get('model')
 
-      if model.get('isNew')
+      if model.get('isNew') && @get('cancelModel')
+        return @sendAction 'cancelModel', model
+
+      if model.get('isNew') && model.unloadRecord
         return model.unloadRecord()
 
       @get('bufferedProxy').discardBufferedChanges()
@@ -69,6 +78,9 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       return if @get('isSaving')
 
       model = @get('model')
+
+      if @get('deleteModel')
+        return @sendAction 'deleteModel', model
 
       if model.get('isNew')
         return model.unloadRecord()
@@ -82,21 +94,22 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
   click: (e) ->
     return if @get('isEditing')
-    target = e.target
 
-    return true if ["BUTTON", "A"].contains target.tagName
+    target = $(e.target)
+
+    #return @send('edit') if target.hasClass('ss-write')
+
+    return true if ["BUTTON", "A"].contains target.get(0).tagName
+
+    return true if $(target).hasClass('btn-remove-field')
 
     return unless @get('isAdmin')
 
     @send 'edit'
 
-  focusOut: (e) ->
-    return unless @get('isEditing')
-
-    if ["BUTTON", "A"].contains e?.relatedTarget.tagName
-      return $(e.relatedTarget).click()
-
-    @send 'save'
+    e.stopPropagation()
+    e.preventDefault()
+    false
 
   keyDown: (e) ->
     return unless @$().length
@@ -131,9 +144,23 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
+    stopEditing = @stopEditing.bind(this)
+    $('body').on 'click.field-input', stopEditing
+
     return unless @get('model.isNew')
 
     Ember.run.scheduleOnce 'afterRender', this, 'triggerEdit'
+
+  stopEditing: (e) ->
+    return unless @get('isEditing')
+
+    if ["BUTTON", "A"].contains e.target.tagName
+      return $(e.relatedTarget).click()
+
+    @send 'save'
+
+  teardown: Ember.on 'willDestroyElement', ->
+    $('body').off 'click.field-input'
 
   triggerEdit: ->
     @send 'edit'
