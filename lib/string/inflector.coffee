@@ -3,7 +3,11 @@ String::pluralize = ->
     "#{@}s"
 
 String::singularize = ->
-  map = {Companies: "company"}
+  map = {
+    Companies: "company",
+    emailAddresses: "Email Address"
+    phoneNumbers: "Phone Number"
+  }
 
   if ret = map[this]
     ret

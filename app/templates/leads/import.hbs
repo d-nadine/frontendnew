@@ -39,21 +39,21 @@
           </div>
           {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
           {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
-          {{#each email in emailAddresses}}
-            {{#multiple-control item=email items=emailAddresses model=this relationship="emailAddresses" icon= "ss-mail" source=headerData}}
+          {{#each email in headerInfo.emailAddresses}}
+            {{#multiple-control item=email items=headerInfo.emailAddresses model=headerInfo relationship="emailAddresses" icon= "ss-mail" source=headerData}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
-          {{#each email in phoneNumbers}}
-            {{#multiple-control item=email items=phoneNumbers model=this relationship="phoneNumbers" icon= "ss-phone" source=headerData}}
+          {{#each email in headerInfo.phoneNumbers}}
+            {{#multiple-control item=email items=headerInfo.phoneNumbers model=headerInfo relationship="phoneNumbers" icon= "ss-phone" source=headerData}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
-          <!---TITLE -->
-          <!---WEBSITE -->
-          {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow icon= "ss-location"}}
+          {{import-header leader="Title" source=headerData value=headerInfo.title row=firstDataRow icon="ss-tag"}}
+          {{import-header leader="Website" source=headerData value=headerInfo.website row=firstDataRow icon="ss-globe"}}
+          {{import-header leader="Street" source=headerData value=headerInfo.street row=firstDataRow icon="ss-location"}}
           {{import-header leader="City" source=headerData value=headerInfo.city row=firstDataRow}}
           {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
           {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}

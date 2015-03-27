@@ -1,3 +1,11 @@
+rejectEmpty = (headerInfo, key) ->
+        info = headerInfo.get(key)
+        if Ember.isArray(info)
+          input = info.reject (i) -> Ember.isEmpty(i.get('value'))
+          !input.length
+        else
+          Ember.isEmpty(info)
+
 Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   actions:
     addNewAdditionalField: ->
@@ -19,11 +27,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       headerInfo = @get('headerInfo')
 
-      if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.email
+      if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.emailAddresses.length
         @send 'flashError', 'You need to map the name or email field to the csv file.'
         return
 
-      headers = Ember.keys(@get('headerInfo')).reject (key) -> Ember.isEmpty(headerInfo.get(key))
+      headers = Ember.keys(@get('headerInfo')).reject rejectEmpty.bind(this, headerInfo)
 
       importJob = Radium.ContactImportJob.createRecord
                     headers: headers
@@ -66,23 +74,13 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       @set('importing', true)
 
-      importJob.one 'didCreate', =>
+      importJob.save(this) =>
         @send 'pollForJob', importJob
 
       reset = =>
         @set 'pollImportJob', importJob
         @set('importing', false)
         @send 'reset'
-
-      importJob.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        reset()
-
-      importJob.one 'becameError', (result) =>
-        @send 'flashError', 'An error has occurred and the import job could not be created.'
-        reset()
-
-      @get('store').commit()
 
     pollForJob: (importJob) ->
       @send 'reset'
@@ -139,8 +137,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         contactStatus: null
         pollImportJob: null
         headerInfo: @getNewHeaderInfo()
-        emailAddresses: Ember.A()
-        phoneNumbers: Ember.A()
 
       @get('headerData').clear()
       @set('headerData', Ember.A())
@@ -152,10 +148,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       @set('tagNames', Ember.A())
       @get('additionalFields').clear()
       @set('additionalFields', Ember.A([@getNewAdditionalField()]))
-      @get('emailAddresses').clear()
-      @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
-      @get('phoneNumbers').clear()
-      @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
 
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
@@ -184,8 +176,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   pollImportJob: null
   additionalFields: Ember.A()
   headerInfo: null
-  emailAddresses: Ember.A()
-  phoneNumbers: Ember.A()
 
   firstDataRow: Ember.A()
 
@@ -200,23 +190,41 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
     @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
     @set 'additionalFields', Ember.A([@getNewAdditionalField()])
-    @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
-    @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'headerInfo', @getNewHeaderInfo()
 
-    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', ->
+    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailAddresses.@each.value.name', 'headerInfo.phoneNumbers.@each.value.name', ->
       headerInfo = @get('headerInfo')
 
-      headers = Ember.keys(headerInfo).reject (key) -> Ember.isEmpty(headerInfo.get(key))
+      headers = Ember.keys(headerInfo).reject rejectEmpty.bind(this, headerInfo)
 
       return Ember.A() unless headers.length
 
-      headers.map (header) ->
-        hash =
-          name: header.replace(/([A-Z])/g, ' $1').replace(/^./, (str) -> str.toUpperCase())
-          marker: self.get("headerInfo.#{header}.name")
+      self = this
 
-        Ember.Object.create(hash)
+      result = Ember.A()
+
+      headers.forEach (header) ->
+        headerInfoProp = self.get("headerInfo.#{header}")
+
+        unless Ember.isArray(headerInfoProp)
+          hash = Ember.Object.create
+            name: header.replace(/([A-Z])/g, ' $1').replace(/^./, (str) -> str.toUpperCase())
+            marker: headerInfoProp.get('name')
+
+          return result.push(hash)
+
+        counter = 0
+        singlular = header.singularize()
+
+        headerInfoProp.forEach (prop) ->
+          hash = Ember.Object.create
+                   name: "#{singlular} #{counter + 1}"
+                   marker: headerInfoProp.objectAt(counter).get('value.name')
+
+          result.push(hash)
+          counter++
+
+      result
 
   jobsLoaded: ->
     removeObserver = =>
@@ -272,8 +280,8 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       lastName: null
       name: null
       companyName: null
-      email: null
-      phone: null
+      emailAddresses: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+      phoneNumbers: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
       title: null
       website: null
       street: null
