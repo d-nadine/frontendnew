@@ -4,18 +4,7 @@
     {{#unless isSaving}}
       {{#if contact.isPersonal}}
         <div class="btn-group btn-add-to-radium">
-          <button class="btn btn-main btn-primary" {{action "changeStatus" model true}}>Track with Radium</button>
-          <button class="btn btn-primary dropdown-toggle needsclick" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" {{action "changeStatus" model "pipeline"}}>As Lead</a>
-            </li>
-            <li>
-              <a href="#" {{action "changeStatus" model "exclude"}}>Exclude from Pipeline</a>
-            </li>
-          </ul>
+          <button class="btn btn-main btn-primary" {{action "track" contact}}>Track with Radium</button>
         </div>
       {{else}}
         {{#if contact.nextTask}}

@@ -1,7 +1,7 @@
 require "controllers/addressbook/people_mixin"
 require "controllers/leads/untracked_columns_config"
 
-Radium.UntrackedIndexController = Ember.ArrayController.extend Radium.PeopleMixin,
+Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.UntrackedColumnsConfig,
   actions:
     updateTotals: ->
@@ -32,33 +32,31 @@ Radium.UntrackedIndexController = Ember.ArrayController.extend Radium.PeopleMixi
       false
 
     localTrack: (contact, dataset) ->
-      @get('model').removeObject contact
-      contact.set 'checked', false
-      @get('controllers.peopleIndex.model').pushObject contact
-      Ember.run.next ->
-        contact.set 'isChecked', false
+      contact.set 'isChecked', false
+      Ember.run.next =>
+        @get('model').removeObject contact
 
     track: (contact) ->
       track = Radium.TrackedContact.createRecord
                 contact: contact
 
-      track.one 'didCreate', (result) =>
+      currentUser = @get('currentUser')
+
+      track.save(this).then (result) =>
         @send "flashSuccess", "Contact is now tracked in Radium"
 
         dataset = @get('model')
 
-        dataset.removeObject(contact)
+        dataset.removeObject(contact) if dataset.removeObject
 
         @get('controllers.peopleIndex.model').pushObject contact
 
         @get('addressbook').send 'updateTotals'
 
-      @store.commit()
+        currentUser.reload()
 
     destroyContact: (contact)->
-      contact.deleteRecord()
-
-      contact.one 'didDelete', =>
+      contact.delete(this).then (result) =>
         @send "flashSuccess", "Contact deleted"
 
         dataset = @get('model')
@@ -66,8 +64,6 @@ Radium.UntrackedIndexController = Ember.ArrayController.extend Radium.PeopleMixi
         dataset.removeObject contact
 
         @get('addressbook').send 'updateTotals'
-
-      @store.commit()
 
   searchText: "",
   needs: ['addressbook', 'peopleIndex']

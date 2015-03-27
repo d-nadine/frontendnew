@@ -77,6 +77,7 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
         @send 'flashSuccess', 'The records have been updated.'
         @send 'updateLocalRecords', job, detail
         @send 'updateTotals'
+        @get('currentUser').reload()
       ).catch =>
         @set 'working', false
 
