@@ -1,3 +1,4 @@
+require 'mixins/user_combobox_props'
 rejectEmpty = (headerInfo, key) ->
         info = headerInfo.get(key)
         if Ember.isArray(info)
@@ -7,17 +8,8 @@ rejectEmpty = (headerInfo, key) ->
           Ember.isEmpty(info)
 
 Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
+  Radium.UserComboboxProps,
   actions:
-    addNewAdditionalField: ->
-      @get('additionalFields').addObject @getNewAdditionalField()
-
-    removeAdditionalField: (field) ->
-      @get('additionalFields').removeObject field
-
-      return if @get('additionalFields.length')
-
-      @send 'addNewAdditionalField'
-
     importContacts: ->
       selectedHeaders = @get('selectedHeaders')
 
@@ -39,26 +31,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
                     fileName: @get('importFile').name
                     public: true
 
-      additionalFields = Ember.A()
-
       selectedHeaders = @get('selectedHeaders').slice()
-
-      @get('additionalFields').forEach (field) ->
-        return unless field.get('mapping')
-
-        mapping = field.get('mapping.name')
-
-        return if additionalFields.mapProperty('mapping').contains mapping
-
-        unless importJob.get('headers').contains(mapping)
-          selectedHeaders.push Ember.Object.create marker: mapping, name: mapping
-          importJob.get("headers").pushObject mapping
-
-        additionalFields.pushObject type: field.get('type'), mapping: mapping
-
-      additionalFields = additionalFields.compact()
-
-      importJob.set('additionalFields', additionalFields) if additionalFields.length
 
       data = @getImportData(false, selectedHeaders).map (item) ->
                                     item.fields.map (item) -> item
@@ -137,6 +110,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         contactStatus: null
         pollImportJob: null
         headerInfo: @getNewHeaderInfo()
+        assignedTo: @get('currentUser')
 
       @get('headerData').clear()
       @set('headerData', Ember.A())
@@ -146,15 +120,15 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       @set('importedData', Ember.A())
       @get('tagNames').clear()
       @set('tagNames', Ember.A())
-      @get('additionalFields').clear()
-      @set('additionalFields', Ember.A([@getNewAdditionalField()]))
 
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
 
       @get('tagNames').addObject Ember.Object.create name: tag
 
-  needs: ['tags', 'contactStatuses']
+  needs: ['tags', 'contactStatuses', 'users']
+
+  user: Ember.computed.oneWay 'controllers.users'
 
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
 
@@ -174,7 +148,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   isEditable: true
   contactStatus: null
   pollImportJob: null
-  additionalFields: Ember.A()
   headerInfo: null
 
   firstDataRow: Ember.A()
@@ -189,9 +162,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
     self = this
     @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
-    @set 'additionalFields', Ember.A([@getNewAdditionalField()])
     @set 'headerInfo', @getNewHeaderInfo()
 
+    @set 'assignedTo', @get('user')
     Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailAddresses.@each.value.name', 'headerInfo.phoneNumbers.@each.value.name', ->
       headerInfo = @get('headerInfo')
 
@@ -270,9 +243,6 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         fields: selectedHeaders.map (header) ->
           index = headerData.indexOf(header)
           row[index]
-
-  getNewAdditionalField: ->
-    Ember.Object.create type: 'contact', mapping: null
 
   getNewHeaderInfo: ->
     Ember.Object.create

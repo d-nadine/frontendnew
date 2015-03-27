@@ -59,6 +59,21 @@
           {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
           {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
         </div>
+        <div id="assign" class="extra">
+          <h2>Assign to</h2>
+          <div class="item">
+            <div class="icon"><i class="ss-social"></i></div>
+            <div class="description">Assigned To {{assignedTo}}</div>
+            {{autocomplete-textbox source=users value=assignedTo queryKey="displayName" validations=userValidations validator=this validationField="assigned" isValid=isValid}}
+          </div>
+          <div class="item">
+            <div class="icon"><i class="ss-social"></i></div>
+            <div class="description">Add to Lists</div>
+            <div class="field">
+              {{tag-picker model=this tagNames=tagNames}}
+            </div>
+          </div>
+        </div>
       </div>
       {{#if selectedHeaders.length}}
         <div id="data-preview">
