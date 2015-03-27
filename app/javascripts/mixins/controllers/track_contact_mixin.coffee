@@ -17,6 +17,7 @@ Radium.TrackContactMixin = Ember.Mixin.create
 
       untrackedController = @getController('untrackedIndex')
       peopleController = @getController('peopleIndex')
+
       currentUser = @getController('currentUser').get('model')
 
       addressbook = @getController('addressbook')
