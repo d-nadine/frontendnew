@@ -1,5 +1,6 @@
 Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContactStatusMixin,
   Radium.UpdateContactPoller,
+  Radium.TrackContactMixin,
   actions:
     changeStatus: (email, newStatus) ->
       email.set('isPersonal', false)

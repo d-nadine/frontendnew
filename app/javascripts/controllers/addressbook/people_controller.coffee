@@ -14,10 +14,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       false
 
     localUntrack: (contact, dataset) ->
-      Ember.run.next ->
+      Ember.run.next =>
+        @get('model').removeObject contact
+        @get('controllers.untrackedIndex.model').pushObject contact
         contact.set 'isChecked', false
-      @get('model').removeObject contact
-      @get('controllers.untrackedIndex.model').pushObject contact
 
     saveTag: (newTag) ->
       tagNames = @get('tags').mapProperty('name').map((name) -> name.toLowerCase()).toArray()

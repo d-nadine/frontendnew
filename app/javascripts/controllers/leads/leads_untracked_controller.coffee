@@ -42,18 +42,16 @@ Radium.UntrackedIndexController = Ember.ArrayController.extend Radium.PeopleMixi
       track = Radium.TrackedContact.createRecord
                 contact: contact
 
-      track.one 'didCreate', (result) =>
+      track.save(this).then (result) =>
         @send "flashSuccess", "Contact is now tracked in Radium"
 
         dataset = @get('model')
 
-        dataset.removeObject(contact)
+        dataset.removeObject(contact) if dataset.removeObject
 
         @get('controllers.peopleIndex.model').pushObject contact
 
         @get('addressbook').send 'updateTotals'
-
-      @store.commit()
 
     destroyContact: (contact)->
       contact.deleteRecord()

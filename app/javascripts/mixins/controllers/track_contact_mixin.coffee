@@ -1,31 +1,42 @@
 Radium.TrackContactMixin = Ember.Mixin.create
   actions:
     track: (contact) ->
-      @send 'changeTracking', contact, true
+      controller = @getController('untrackedIndex')
+
+      contact.updateLocalProperty('isPublic', true)
+
+      controller.send 'track', contact, true
+
+      false
 
     stopTracking: (contact) ->
-      @send 'changeTracking', contact, false
+      contact.updateLocalProperty('isPublic', false)
 
-    changeTracking: (contact, isPublic) ->
-      contact.set('isPublic', isPublic)
+      untrack = Radium.UntrackedContact.createRecord
+                  contact: contact
 
-      contact.one 'didUpdate', (result) =>
-        unless contact.get('isPersonal')
-          contact.get('user').reload()
+      untrackedController = @getController('untrackedIndex')
+      peopleController = @getController('peopleIndex')
 
-        message = if isPublic
-                    "You are now tracking #{contact.get('displayName')}"
-                  else
-                    "You are no longer tracking #{contact.get('displayName')}"
+      addressbook = @getController('addressbook')
 
-        @send "flashSuccess", message
+      untrack.save(this).then (result) =>
+        @send "flashSuccess", "Contact is no longer tracked."
 
-      contact.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        @resetModel()
+        untrackedController.pushObject contact
 
-      contact.one 'becameError', (result) =>
-        @send 'flashError', "an error has occurred."
-        @resetModel()
+        peopleController.removeObject contact
 
-      @get('store').commit()
+        addressbook.send 'updateTotals'
+
+  needs: ['untrackedIndex', 'peopleIndex', 'addressbook']
+
+  getController: (controller) ->
+    controller = if this instanceof Ember.Route
+                   @controllerFor(controller)
+                 else
+                   @get("controllers.#{controller}")
+
+    Ember.assert 'controller not found in TrackContactMixin#getController', controller
+
+    controller
