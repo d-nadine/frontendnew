@@ -8,6 +8,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
   autocomplete: null
 
   setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
     @get('parent').on 'modelReset', this, 'onModelReset'
     @get('parent').on 'modelChanged', this, 'onModelChanged'
 

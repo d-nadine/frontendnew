@@ -1,5 +1,4 @@
 Radium.ReportIconsComponent = Ember.Component.extend
   icon: "user"
-  iconCountArray: ( ->
+  iconCountArray: Ember.computed 'total', ->
     Array(@get('total') || 0)
-  ).property('total')

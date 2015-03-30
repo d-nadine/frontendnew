@@ -23,14 +23,13 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
     placeholder: 'Supply a reason why this deal was lost.'
     valueBinding: 'targetObject.lostBecause'
     classNames: ['new-comment']
-    isValid: (->
+    isValid: Ember.computed 'value', 'targetObject.isSubmitted', 'targetObject.isLost', ->
       return unless @get('targetObject.isLost')
       @get('value.length')
-    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
-    isInvalid: ( ->
+
+    isInvalid: Ember.computed 'value', 'targetObject.isSubmitted', 'targetObject.isLost', ->
       return unless @get('targetObject.isSubmitted')
       not @get('isValid')
-    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
   )
 
   changeStatusTodo: Radium.FormsTodoFieldView.extend
@@ -47,7 +46,7 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
       e.stopPropagation()
       false
 
-  bulkLeader: ( ->
+  bulkLeader: Ember.computed 'controller.activeForm', 'controller.checkedContent.[]', ->
     form = @get('controller.activeForm')
     return unless form
 
@@ -73,4 +72,3 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
     return result unless form == "assign"
 
     result += " to"
-  ).property('controller.activeForm', 'controller.checkedContent.[]')

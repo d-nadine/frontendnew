@@ -34,6 +34,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       return if @get('isAsync')
       return if @get('disabled')
 
+      $('.typeahead.dropdown-menu').hide()
+
       typeahead = @getTypeahead()
 
       return typeahead.hide() if typeahead.shown

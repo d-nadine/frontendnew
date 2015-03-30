@@ -7,7 +7,7 @@ rejectEmpty = (headerInfo, key) ->
         else
           Ember.isEmpty(info)
 
-Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
+Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin,
   Radium.UserComboboxProps,
   actions:
     importContacts: ->
@@ -19,17 +19,14 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
       headerInfo = @get('headerInfo')
 
+      @set('isSubmitted', true)
+
       if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.emailAddresses.length
-        @send 'flashError', 'You need to map the name or email field to the csv file.'
-        return
+        return @send 'flashError', 'You need to map the name or email field to the csv file.'
 
-      headers = Ember.keys(@get('headerInfo')).reject rejectEmpty.bind(this, headerInfo)
+      unless assignedTo = @get('assignedTo')
+        return @send 'flashError', 'You must select a user to assign the contacts to.'
 
-      importJob = Radium.ContactImportJob.createRecord
-                    headers: headers
-                    contactStatus: @get('contactStatus')
-                    fileName: @get('importFile').name
-                    public: true
 
       selectedHeaders = @get('selectedHeaders').slice()
 
@@ -40,19 +37,43 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
         @send 'flashError', "There are no valid rows in the imported file."
         return
 
-      importJob.set 'rows', data
+      postHeaders = selectedHeaders.mapProperty('name')
 
-      @get('tagNames').forEach (tag) ->
-        importJob.get('tagNames').push tag.get('name')
+      importJob = Radium.ContactImportJob.createRecord
+                    headers: postHeaders
+                    contactStatus: @get('contactStatus')
+                    fileName: @get('importFile').name
+                    public: true
+                    assignedTo: assignedTo
+                    tagNames: @get('tagNames').mapProperty('name')
+                    rows: data
+
+      hasCollectionMarker = (label, item) ->
+        new RegExp("^#{label} \\d+$", 'i').test(item)
+
+      hasEmails = hasCollectionMarker.bind(null, "Email Address")
+      hasPhoneNumbers = hasCollectionMarker.bind(null, "PHone Number")
+
+      collectionMapping = (item) ->
+        primary: item.get('isPrimary')
+        name: item.get('name')
+
+      if postHeaders.any(hasEmails)
+        importJob.set('emailAddresses', headerInfo.get('emailAddresses').map(collectionMapping))
+
+      if postHeaders.any(hasPhoneNumbers)
+        importJob.set('phoneNumbers', headerInfo.get('phoneNumbers').map(collectionMapping))
 
       @set('importing', true)
 
-      importJob.save(this) =>
+      importJob.save(this).then( =>
         @send 'pollForJob', importJob
-
-      reset = =>
+        @set 'isSubmitted', false
+      ).catch (result) =>
+        @send 'flashError', 'an error has occurred and the job could not be completed.'
         @set 'pollImportJob', importJob
         @set('importing', false)
+        @set 'isSubmitted', false
         @send 'reset'
 
     pollForJob: (importJob) ->
@@ -100,6 +121,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
     reset: ->
       @setProperties
         importing: false
+        isSubmitted: false
         percentage: 0
         showInstructions: false
         initialImported: false
@@ -149,8 +171,9 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
   contactStatus: null
   pollImportJob: null
   headerInfo: null
-
   firstDataRow: Ember.A()
+  isNew: true
+  isSubmitted: true
 
   sortedJobs: Ember.computed.sort 'model', (a, b) ->
     left = b.get('createdAt') || Ember.DateTime.create()
@@ -164,7 +187,7 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
 
     @set 'headerInfo', @getNewHeaderInfo()
 
-    @set 'assignedTo', @get('user')
+    @set 'assignedTo', @get('currentUser')
     Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailAddresses.@each.value.name', 'headerInfo.phoneNumbers.@each.value.name', ->
       headerInfo = @get('headerInfo')
 
@@ -259,6 +282,11 @@ Radium.LeadsImportController= Ember.ObjectController.extend Radium.PollerMixin,
       state: null
       zip: null
       country: null
+      about: null
+      fax: null
+      lists: null
+      notes: null
+      gender: null
 
   onPoll: ->
     unless job = @get('pollImportJob')

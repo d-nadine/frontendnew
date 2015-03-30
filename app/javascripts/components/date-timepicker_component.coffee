@@ -14,7 +14,6 @@ Radium.DateTimepickerComponent = Ember.Component.extend
 
   time: Radium.TimePickerView.extend
     dateBinding: 'controller.selectedDate'
-    isInvalid: ( ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.selectedDate', ->
       return false unless @get('controller.isSubmitted')
       @get('date').isBeforeNow()
-    ).property('controller.isSubmitted', 'controller.selectedDate')

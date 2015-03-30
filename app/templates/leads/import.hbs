@@ -9,7 +9,7 @@
         <h4>Import instructions</h4>
         <p>
           <ol>
-            <li>Download our sample file <a href="https://s3.amazonaws.com/radium-production/static/sample.csv" target="_blank">here</a></li>
+            <li>Download our sample file <a href="https://s3.amazonaws.com/radium-production/static/sample_revised.csv" target="_blank">here</a></li>
             <li>Use a CSV file from either Microsoft Excel or Google Spreadsheets</li>
             <li>If you are having trouble with characters showing up strangely be sure to set the CSV encoding to UTF-8</li>
             <li>For large uploads please click the "?" at the bottom right to ask for assistance</li>
@@ -58,12 +58,17 @@
           {{import-header leader="State" source=headerData value=headerInfo.state row=firstDataRow}}
           {{import-header leader="Zipcode" source=headerData value=headerInfo.zip row=firstDataRow}}
           {{import-header leader="Country" source=headerData value=headerInfo.country row=firstDataRow}}
+          {{import-header leader="About" source=headerData value=headerInfo.about row=firstDataRow icon="ss-notebook"}}
+          {{import-header leader="Fax" source=headerData value=headerInfo.fax row=firstDataRow icon="ss-fax"}}
+          {{import-header leader="Gender" source=headerData value=headerInfo.gender row=firstDataRow}}
+          {{import-header leader="Lists" source=headerData value=headerInfo.lists row=firstDataRow}}
+          {{import-header leader="Notes" source=headerData value=headerInfo.notes row=firstDataRow}}
         </div>
         <div id="assign" class="extra">
           <h2>Assign to</h2>
           <div class="item">
             <div class="icon"><i class="ss-social"></i></div>
-            <div class="description">Assigned To {{assignedTo}}</div>
+            <div class="description">Assigned To</div>
             {{autocomplete-textbox source=users value=assignedTo queryKey="displayName" validations=userValidations validator=this validationField="assigned" isValid=isValid}}
           </div>
           <div class="item">
@@ -73,6 +78,17 @@
               {{tag-picker model=this tagNames=tagNames}}
             </div>
           </div>
+        </div>
+        <div class="submit">
+          <hr>
+          <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-large btn-primary">
+            {{#if isSaving}}
+              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Importing</span>
+            {{else}}
+              <i class="ss-standard ss-plus"></i> Import
+            {{/if}}
+          </button>
+          <button {{action "reset"}} class="btn btn-large">Cancel</button>
         </div>
       </div>
       {{#if selectedHeaders.length}}
@@ -100,7 +116,7 @@
       <div class="form form-horizontal well main-form new-lead-form">
         <div class="control-group">
           {{drag-csv cancel="cancelImport" disabled=disableImport isUploading=isUploading finished="initialFileUploaded"}}
-          <span class="text-center help-block">Download sample file for quicker import <a href="https://s3.amazonaws.com/radium-production/static/sample.csv" target="_blank">here</a></span>
+          <span class="text-center help-block">Download sample file for quicker import <a href="https://s3.amazonaws.com/radium-production/static/sample_revised.csv" target="_blank">here</a></span>
         </div>
         <div class="control-group text-right">
           <div class="btn btn-main btn-file-upload">
@@ -134,7 +150,7 @@
             <th>Imported</th>
             <th>Errors</th>
             <th>Status</th>
-            <th>&nbsp;</td>
+            <th>&nbsp;</th>
           </tr>
            {{#each sortedJobs itemController="importJobsItem"}}
             <tr>

@@ -15,6 +15,14 @@
     float: right;
   }
 
+  .form .submit {
+    float: left;
+    margin-top: 50px;
+    display: inline-block;
+    clear: both;
+    width: 100%;
+  }
+
   #data-preview,
   #previous-imports {
     display: inline-block;
@@ -62,10 +70,6 @@
     color: #d14;
   }
 
-  #previous-imports td {
-    background-color: transparent !important;
-  }
-
   #data-preview .file-name {
     color: #d14;
   }
@@ -75,5 +79,15 @@
     text-align: left;
     margin-top: 20px;
     margin-left: -12px;
+  }
+
+  #previous-imports table tr {
+    th:nth-child(n+3), td:nth-child(n+3) {
+      width: 75px;
+      text-align: center;
+      .close {
+        float: none;
+      }
+    }
   }
 }

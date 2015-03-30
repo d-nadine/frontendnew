@@ -3,7 +3,8 @@
   <div class="description">
     {{view Ember.Select
     content=labels
-    selection=currentLabel}}
+    selection=currentValue
+    value=item.name}}
   </div>
   <div>
     {{#with item}}

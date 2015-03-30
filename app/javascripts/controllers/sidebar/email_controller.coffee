@@ -18,6 +18,5 @@ Radium.SidebarEmailController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.EmailForm.create()
-  ).property()

@@ -37,3 +37,6 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
   labels: ['Work','Personal']
 
   parent: Ember.computed.oneWay 'items'
+
+  currentLabel: Ember.computed 'item', 'item.name', ->
+    @get('item.name')?.toLowerCase().capitalize()
