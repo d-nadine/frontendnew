@@ -52,7 +52,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       event.preventDefault()
       false
 
-  classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', 'isInvalid']
+  sync: Ember.computed.not 'isAsync'
+
+  classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', 'isInvalid', 'isAsync', 'sync']
 
   autocompleteElement: ->
     @$('input[type=text].combobox:first')
