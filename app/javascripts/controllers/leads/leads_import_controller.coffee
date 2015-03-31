@@ -52,9 +52,10 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         new RegExp("^#{label} \\d+$", 'i').test(item)
 
       hasEmails = hasCollectionMarker.bind(null, "Email Address")
-      hasPhoneNumbers = hasCollectionMarker.bind(null, "PHone Number")
+      hasPhoneNumbers = hasCollectionMarker.bind(null, "Phone Number")
 
-      collectionMapping = (item) ->
+      collectionMapping = (item, index) ->
+        index: index
         primary: item.get('isPrimary')
         name: item.get('name')
 
