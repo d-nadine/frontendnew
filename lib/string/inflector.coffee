@@ -5,7 +5,9 @@ String::pluralize = ->
 String::singularize = ->
   map = {
     Companies: "company",
-    emailAddresses: "Email Address"
+    emailMarkers: "Email Address",
+    emailAddresses: "Email Address",
+    phoneNumberMarkers: "Phone Number",
     phoneNumbers: "Phone Number"
   }
 

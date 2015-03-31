@@ -21,7 +21,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
       @set('isSubmitted', true)
 
-      if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.emailAddresses.length
+      if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.emailMarkers.length
         return @send 'flashError', 'You need to map the name or email field to the csv file.'
 
       unless assignedTo = @get('assignedTo')
@@ -57,13 +57,13 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       collectionMapping = (item, index) ->
         index: index
         primary: item.get('isPrimary')
-        name: item.get('name')
+        name: item.get('name').toLowerCase()
 
       if postHeaders.any(hasEmails)
-        importJob.set('emailAddresses', headerInfo.get('emailAddresses').map(collectionMapping))
+        importJob.set('emailMarkers', headerInfo.get('emailMarkers').map(collectionMapping))
 
       if postHeaders.any(hasPhoneNumbers)
-        importJob.set('phoneNumbers', headerInfo.get('phoneNumbers').map(collectionMapping))
+        importJob.set('phoneNumberMarkers', headerInfo.get('phoneNumberMarkers').map(collectionMapping))
 
       @set('importing', true)
 
@@ -189,7 +189,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
     @set 'headerInfo', @getNewHeaderInfo()
 
     @set 'assignedTo', @get('currentUser')
-    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailAddresses.@each.value.name', 'headerInfo.phoneNumbers.@each.value.name', ->
+    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailMarkers.@each.value.name', 'headerInfo.phoneNumberMarkers.@each.value.name', ->
       headerInfo = @get('headerInfo')
 
       headers = Ember.keys(headerInfo).reject rejectEmpty.bind(this, headerInfo)
@@ -274,8 +274,8 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       lastName: null
       name: null
       companyName: null
-      emailAddresses: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
-      phoneNumbers: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+      emailMarkers: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
+      phoneNumberMarkers: Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
       title: null
       website: null
       street: null

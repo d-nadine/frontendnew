@@ -39,14 +39,14 @@
           </div>
           {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
           {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
-          {{#each email in headerInfo.emailAddresses}}
-            {{#multiple-control item=email items=headerInfo.emailAddresses model=headerInfo relationship="emailAddresses" icon= "ss-mail" source=headerData}}
+          {{#each email in headerInfo.emailMarkers}}
+            {{#multiple-control item=email items=headerInfo.emailMarkers model=headerInfo relationship="emailMarkers" icon= "ss-mail" source=headerData}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
-          {{#each email in headerInfo.phoneNumbers}}
-            {{#multiple-control item=email items=headerInfo.phoneNumbers model=headerInfo relationship="phoneNumbers" icon= "ss-phone" source=headerData}}
+          {{#each email in headerInfo.phoneNumberMarkers}}
+            {{#multiple-control item=email items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
@@ -61,6 +61,22 @@
           {{import-header leader="About" source=headerData value=headerInfo.about row=firstDataRow icon="ss-notebook"}}
           {{import-header leader="Fax" source=headerData value=headerInfo.fax row=firstDataRow icon="ss-fax"}}
           {{import-header leader="Gender" source=headerData value=headerInfo.gender row=firstDataRow}}
+          {{import-header leader="Source" source=headerData value=headerInfo.source row=firstDataRow}}
+          <div class="item">
+            <div class="icon"><i class="ss-standard"></i></div>
+            <div class="description">Status</div>
+            <div class="field contact-status">
+              {{#if contactStatuses.length}}
+                {{view Ember.Select
+                prompt="Select Contact Status"
+                content=contactStatuses
+                optionValuePath="content.id"
+                optionLabelPath="content.name"
+                selectionBinding="contactStatus"}}
+              {{/if}}
+              {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
+            </div>
+          </div>
           {{import-header leader="Lists" source=headerData value=headerInfo.lists row=firstDataRow}}
           {{import-header leader="Notes" source=headerData value=headerInfo.notes row=firstDataRow}}
         </div>

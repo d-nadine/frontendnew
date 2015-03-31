@@ -14,8 +14,8 @@ Radium.ContactImportJob = Radium.Model.extend
   importErrors: DS.hasMany('Radium.ImportJobError')
   public: DS.attr('boolean')
   assignedTo: DS.belongsTo('Radium.User')
-  emailAddresses: DS.attr('array')
-  phoneNumbers: DS.attr('array')
+  emailMarkers: DS.attr('array')
+  phoneNumberMarkers: DS.attr('array')
 
   isProcessing: Ember.computed 'importStatus', ->
     @get('importStatus') == 'processing'
