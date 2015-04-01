@@ -1,40 +1,19 @@
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess.
-</p>
-<ul class="unstyled settings-list">
-  {{#each controller}}
-    <li>
-      <div class="pull-left">
-        <p>Custom Field</p>
-      </div>
-      <div class="clearfix">
-        {{input value=key class="inline-field"}}
-        <button class="btn btn-mini btn-danger" {{action "removeCustomField" this}}>
-          <i class="ss-symbolicons-block ss-trash"></i>
-        </button>
-      </div>
-  </li>
-  {{else}}
-  <li>
-    <div class="alert alert-warning">
-      You have no custom fields, add some below
-    </div>
-  </li>
-  {{/each}}
-</ul>
-<form class="form-horizontal settings-form" {{action "createCustomField" on="submit"}}>
-  <fieldset>
-    <div class="control-group">
-      <label for="" class="control-label">Add a Custom Field</label>
-      <div class="controls">
-        {{input type="text" value=newCustomField}}
-        <button class="btn btn-success" {{bind-attr disabled="isValidCustomField"}}>
-          Add
-        </button>
+<!-- file:///Users/paulcowan/Dropbox/Mockups/views/settings/custom.html -->
+<div class="custom-fields-view">
+  <div class="main">
+    <h1>Custom Fields for Contact</h1>
+    <div>
+      <div>
+        <select>
+          <option>Text</option>
+          <option>Date</option>
+          <option>$</option>
+          <option>URL</option>
+          <option value="dropdown">Dropdown</option>
+        </select>
+        <input type="text" value="" class="field">
+        <a href="#" id="add" class="more"><i class="ss-standard ss-plus"></i></a>
       </div>
     </div>
-  </fieldset>
-</form>
+  </div>
+</div>
