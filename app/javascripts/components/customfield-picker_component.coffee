@@ -13,14 +13,14 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend
         @$('input:first').focus()
 
   customFieldTypes: Ember.A([
-    "Text",
-    "Date",
-    "$",
-    "URL",
-    "Dropdown"
+    "text",
+    "date",
+    "currency",
+    "url",
+    "dropdown"
   ])
 
-  isSelect: Ember.computed.equal 'customField.type', 'Dropdown'
+  isSelect: Ember.computed.equal 'customField.type', 'dropdown'
 
   isLastItem: Ember.computed 'customField', 'lastItem', ->
     @get('customField') == @get('lastItem')

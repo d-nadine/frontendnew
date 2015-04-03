@@ -4,15 +4,12 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
       p customField
 
     addNewCustomField: ->
-      @get('customFields').addObject type: 'Text'
+      customField = Radium.CustomField.createRecord type: 'Text'
+      @get('model').addObject customField
 
     removeCustomField: (customField) ->
-      @get('customFields').removeObject customField
+      if customField.get('isNew')
+        @get('model').removeObject customField
+        return customField.unloadRecord()
 
-  customFields: Ember.A([
-    {
-      type: 'Text'
-    }
-  ])
-
-  lastItem: Ember.computed.oneWay 'customFields.lastObject'
+  lastItem: Ember.computed.oneWay 'model.lastObject'

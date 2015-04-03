@@ -5,7 +5,6 @@
 {{/x-select}}
 {{#unless isSelect}}
   <input type="text" value="" class="field">
-  {{log isLastItem}}
   <a href="#" id="add" class="more" {{action "modifyCustomFields"}}>
     <i {{bind-attr class=":ss-standard isLastItem:ss-plus:ss-trash"}}></i>
   </a>
