@@ -4,34 +4,41 @@
     margin: 0;
     margin-bottom: 10px;
   }
+
   .main > div {
     margin-bottom: 40px;
     clear: both;
     float: left;
   }
+
   .main input {
     float: left;
     margin-left: 5px;
     margin-right: 5px;
   }
+
   .main select {
     float: left;
     width: 120px;
   }
+
   .main a.more {
     color: #666;
     padding: 5px 10px;
     float: left;
     border-radius: 4px;
   }
+
   .main a.more i {
     vertical-align: middle;
     position: relative;
     top: 2px;
   }
-  .main a.more:hover, .main a.more:focus {
-                        text-decoration: none;
-                      }
+
+  .main a.more:hover,
+  .main a.more:focus {
+    text-decoration: none;
+  }
 
   .main > div > div {
     clear: both;
@@ -40,8 +47,13 @@
   .answer {
     margin-left: 125px !important;
   }
+
   .more-answers {
     float: left;
     margin: 5px;
+  }
+
+  .custom-select {
+    display: inline;
   }
 }

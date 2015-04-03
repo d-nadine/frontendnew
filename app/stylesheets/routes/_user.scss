@@ -28,7 +28,7 @@
     position: relative;
 
     > div{
-      @include display-box;
+      @include display-flex;
       @include box-pack(justify);
       position: relative;
     }

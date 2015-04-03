@@ -1,3 +1,4 @@
+# FIXME: this can be replace with the component helper when we upgrade to 1.11.0
 Ember.Handlebars.registerHelper 'renderComponent', (contextPath, propertyPath, options) ->
   context = Ember.Handlebars.get(this, contextPath, options)
   property = Ember.Handlebars.get(this, propertyPath, options)

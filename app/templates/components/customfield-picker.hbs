@@ -1,0 +1,13 @@
+{{#x-select value=currentType action="changeCustomFieldType"}}
+  {{#each customFieldType in customFieldTypes}}
+    {{#x-option value=customFieldType}}{{customFieldType}}{{/x-option}}
+  {{/each}}
+{{/x-select}}
+{{#unless isSelect}}
+  <input type="text" value="" class="field">
+  <a href="#" id="add" class="more">
+    <i class="ss-standard ss-plus"></i>
+  </a>
+{{else}}
+  {{dropdown-customfield class="custom-select"}}
+{{/unless}}
