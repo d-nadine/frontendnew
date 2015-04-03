@@ -1,7 +1,8 @@
 Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
   actions:
     createCustomField: (customField) ->
-      p customField
+      customField.save(this).then (result) =>
+        @send 'flashSuccess', 'Custom Field Saved.'
 
     addNewCustomField: ->
       customField = Radium.CustomField.createRecord type: 'Text'
@@ -13,3 +14,5 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
         return customField.unloadRecord()
 
   lastItem: Ember.computed.oneWay 'model.lastObject'
+
+  isSubmitted: false

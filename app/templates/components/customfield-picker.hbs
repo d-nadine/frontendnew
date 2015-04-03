@@ -1,13 +1,13 @@
 {{#x-select value=currentType action="changeCustomFieldType"}}
   {{#each customFieldType in customFieldTypes}}
-    {{#x-option value=customFieldType}}{{customFieldType}}{{/x-option}}
+    {{#x-option value=customFieldType}}{{capitalize customFieldType}}{{/x-option}}
   {{/each}}
 {{/x-select}}
 {{#unless isSelect}}
-  <input type="text" value="" class="field">
+  <input type="text"{{bind-attr class="isInvalid :field"}}>
   <a href="#" id="add" class="more" {{action "modifyCustomFields"}}>
     <i {{bind-attr class=":ss-standard isLastItem:ss-plus:ss-trash"}}></i>
   </a>
 {{else}}
-  {{dropdown-customfield customField=customField lastItem=lastItem modifyCustomFields="modifyCustomFields" class="custom-select"}}
+  {{dropdown-customfield customField=customField lastItem=lastItem modifyCustomFields="modifyCustomFields" createCustomField="createCustomField" class="custom-select"}}
 {{/unless}}
