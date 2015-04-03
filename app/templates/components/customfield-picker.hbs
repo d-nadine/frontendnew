@@ -5,9 +5,10 @@
 {{/x-select}}
 {{#unless isSelect}}
   <input type="text" value="" class="field">
-  <a href="#" id="add" class="more">
-    <i class="ss-standard ss-plus"></i>
+  {{log isLastItem}}
+  <a href="#" id="add" class="more" {{action "modifyCustomFields"}}>
+    <i {{bind-attr class=":ss-standard isLastItem:ss-plus:ss-trash"}}></i>
   </a>
 {{else}}
-  {{dropdown-customfield class="custom-select"}}
+  {{dropdown-customfield customField=customField lastItem=lastItem modifyCustomFields="modifyCustomFields" class="custom-select"}}
 {{/unless}}

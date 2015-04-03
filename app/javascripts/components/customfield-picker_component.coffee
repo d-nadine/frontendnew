@@ -1,7 +1,13 @@
 Radium.CustomfieldPickerComponent = Ember.Component.extend
   actions:
+    modifyCustomFields: (item) ->
+      if @get('isLastItem')
+        @sendAction 'addNewCustomField'
+      else
+        @sendAction 'removeCustomField', @get('customField')
+
     changeCustomFieldType: (type) ->
-      @set('isSelect', type == 'Dropdown')
+      @set 'customField.type', type
 
       Ember.run.next =>
         @$('input:first').focus()
@@ -14,6 +20,7 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend
     "Dropdown"
   ])
 
-  currentType: 'Text'
+  isSelect: Ember.computed.equal 'customField.type', 'Dropdown'
 
-  isSelect: false
+  isLastItem: Ember.computed 'customField', 'lastItem', ->
+    @get('customField') == @get('lastItem')

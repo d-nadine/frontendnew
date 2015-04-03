@@ -2,6 +2,8 @@
 <div class="custom-fields-view">
   <div class="main">
     <h1>Custom Fields for Contact</h1>
-    {{customfield-picker createCustomField="createCustomField"}}
+    {{#each customField in customFields}}
+      {{customfield-picker customField=customField lastItem=lastItem createCustomField="createCustomField" addNewCustomField="addNewCustomField" removeCustomField="removeCustomField"}}
+    {{/each}}
   </div>
 </div>
