@@ -1,5 +1,4 @@
 Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsMixin,
-
   actions:
     modifyCustomFields: (item) ->
       if @get('isLastItem')
@@ -11,7 +10,7 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
       @set 'customField.type', type
 
       Ember.run.next =>
-        @$('input:first').focus()
+        @$('input:first').select().focus()
 
   customFieldTypes: Ember.A([
     "text",
@@ -29,7 +28,9 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
   isInvalid: Ember.computed 'customField.name', 'isSubmitted', ->
     return false unless @get('isSubmitted')
 
-    !!!@get('customField.name.length')
+    text = $.trim(@get('customField.name') || '')
+
+    !!!text.length
 
   keyDown: (e) ->
     return @_super.apply(this,arguments) unless [@ENTER, @TAB].contains(e.keyCode)
@@ -37,6 +38,7 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
     @submit()
 
   input: (e) ->
+    return unless e.target.tagName == 'INPUT'
     Ember.run.next =>
       @set 'customField.name', e.target.value
 
@@ -54,7 +56,12 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
   addEventHandlers: ->
     self = this
 
-    @$('input[type=text]').on 'blur', (e) ->
+    input = @$('input[type=text]')
+
+    Ember.run.next =>
+      input.focus() if @get('customField.isNew')
+
+    input.on 'blur', (e) ->
       Ember.run.next ->
         self.submit()
 

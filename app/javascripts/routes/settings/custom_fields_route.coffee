@@ -1,8 +1,14 @@
 Radium.SettingsCustomFieldsRoute = Radium.Route.extend
   model: ->
-    Ember.A([
-      Radium.CustomField.createRecord(type: 'text')
-    ])
+    new Ember.RSVP.Promise (resolve, reject) ->
+      Radium.CustomField.find({}).then((fields) ->
+        arr = Ember.A(fields.toArray())
+
+        arr.pushObject(Ember.Object.create(isNew: true, type: 'text'))
+
+        resolve arr
+      ).catch((result) ->
+        reject(result))
 
   deactivate: ->
     controller = @controller
@@ -14,7 +20,5 @@ Radium.SettingsCustomFieldsRoute = Radium.Route.extend
 
       controller.get('model').removeObject customField
 
-      if customField.get('isNew')
-        customField.unloadRecord()
-      else
+      unless customField.get('isNew')
         customField.reset() if customField.get('isDirty')
