@@ -1,3 +1,4 @@
+require 'mixins/content_editable_behaviour'
 ##
 # A component that can both display and edit conversations. Used like
 # so:
@@ -6,7 +7,9 @@
 #
 # conversation inputs can be both read-only or read-write depending on
 # the value of the 'editable'
-Radium.RdConversationInputComponent = Ember.Component.extend
+Radium.RdConversationInputComponent = Ember.Component.extend Radium.KeyConstantsMixin,
+  Radium.ContentEditableBehaviour,
+  Ember.Evented,
   classNameBindings: [':rd-conversation-input', 'editable']
   attributeBindings: ['contenteditable']
 
@@ -34,18 +37,40 @@ Radium.RdConversationInputComponent = Ember.Component.extend
 
   ## Private API
 
-  input: ->
-    text = new String(@$().html()).reformatHtml()
+  input: (e) ->
+    text = @$().html()
 
     @set 'value', text
 
   focusOut: ->
     @set 'focus', false
 
-  sync: Ember.observer('value', ->
-    unless @get('value') == @$().text()
-      @$().text @get('value')
-  ).on "didInsertElement"
+  keyDown: (e) ->
+    if e.keyCode == @ENTER
+      docFragment = document.createDocumentFragment()
+      newEle = document.createTextNode('\n')
+      docFragment.appendChild newEle
+      newEle = document.createElement('br')
+      docFragment.appendChild newEle
+      range = window.getSelection().getRangeAt(0)
+      range.deleteContents()
+      range.insertNode docFragment
+      range = document.createRange()
+      range.setStartAfter newEle
+      range.collapse true
+      sel = window.getSelection()
+      sel.removeAllRanges()
+      sel.addRange range
+      false
+      e.preventDefault()
+
+  _setup: Ember.on 'didInsertElement', ->
+    @get('targetObject').on('formReset', this, 'onFormReset')
+    value = @get('value') || ''
+
+    return unless value.length
+
+    @$().html(value)
 
   requestFocus: Ember.observer('focus', ->
     Ember.run.next =>
@@ -55,3 +80,7 @@ Radium.RdConversationInputComponent = Ember.Component.extend
       else
         @$().blur()
   ).on 'didInsertElement'
+
+  onFormReset: ->
+    @set 'value', ''
+    @$().html('')

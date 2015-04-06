@@ -31,6 +31,7 @@ String::dedasherize = ->
 
 String::reformatHtml = ->
   @replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '\n\n')
+  .replace(/\<div\>\<br\>\<\/div\>/i, '\n')
   .replace(/<br\s*\/?>/ig,"\n")
   .replace(/&nbsp;/g,' ')
   .replace(/(<([^>]+)>)/ig,"");

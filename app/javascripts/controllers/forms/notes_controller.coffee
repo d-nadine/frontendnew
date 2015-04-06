@@ -5,7 +5,7 @@ Radium.FormsNoteController = Radium.FormController.extend
       return unless @get('isValid')
       @set 'justAdded', true
 
-      body = @get('model.body')
+      body = @get('model.body').reformatHtml()
 
       @set('model.body', body)
       @get('model').commit().then (confirmation) =>

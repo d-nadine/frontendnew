@@ -1,7 +1,9 @@
 require 'lib/radium/buffered_proxy'
 require 'components/key_constants_mixin'
+require 'mixins/content_editable_behaviour'
 
 Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
+  Radium.ContentEditableBehaviour,
   actions:
     activateLink: ->
       target = @get('containingController')
@@ -212,14 +214,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     if $(e.target).hasClass 'route'
       @send 'activateLink'
       return false
-
-  setEndOfContentEditble: ->
-    range = document.createRange()
-    range.selectNodeContents(@$().get(0))
-    range.collapse(false)
-    selection = window.getSelection()
-    selection.removeAllRanges()
-    selection.addRange(range);
 
   focusContent: (e) ->
     return unless @$().length
