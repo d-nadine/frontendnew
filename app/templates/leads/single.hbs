@@ -1,1 +1,3 @@
-{{leads-new model=model modelChanged="modelChanged" clearExisting="clearExisting" saveModel="saveModel" emailAddresses=emailAddresses phoneNumbers=phoneNumbers addresses=addresses users=controller.controllers.users currentAddress=currentAddress leadSources=controllers.accountSettings.leadSources contactStatuses=contactStatuses isSaving=isSaving isValid=isValid companyName=model.companyName}}
+{{leads-new model=model modelChanged="modelChanged" clearExisting="clearExisting" saveModel="saveModel" emailAddresses=emailAddresses phoneNumbers=phoneNumbers addresses=addresses users=controller.controllers.users currentAddress=currentAddress leadSources=controllers.accountSettings.leadSources contactStatuses=contactStatuses isSaving=isSaving isValid=isValid companyName=model.companyName customFields=customFields}}
+
+{{log customFields.length}}

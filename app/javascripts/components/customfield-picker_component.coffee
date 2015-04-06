@@ -48,7 +48,12 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
     Ember.run.next =>
       return if @get('isInvalid')
 
-      @sendAction 'createCustomField', @get('customField')
+      action = if @get('customField.isNew')
+                 'createCustomField'
+               else
+                 'updateCustomField'
+
+      @sendAction action, @get('customField')
 
   _setup: Ember.on 'didInsertElement', ->
     Ember.run.scheduleOnce 'afterRender', this, 'addEventHandlers'

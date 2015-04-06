@@ -1,26 +1,24 @@
 Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
   actions:
     createCustomField: (customField) ->
-      isNew = customField.get('isNew')
+      newRecord = Radium.CustomField.createRecord(customField.toHash())
 
-      if isNew
-        newRecord = Radium.CustomField.createRecord(customField.toHash())
-        model = @get('model')
+      model = @get('model')
 
-        index = model.indexOf customField
+      index = model.indexOf customField
 
-        model.removeObject(customField)
+      model.removeObject(customField)
 
-        model.insertAt index, newRecord
+      model.insertAt index, newRecord
 
-        customField = newRecord
-
-      customField.save(this).then (result) =>
+      newRecord.save(this).then (result) =>
         @send 'flashSuccess', 'Custom Field Saved.'
 
-      return unless isNew
-
       @get('model').pushObject(Ember.Object.create(isNew: true, type: 'text'))
+
+    updateCustomField: (customField) ->
+      customField.save(this).then (result) =>
+        @send 'flashSuccess', 'Custom Field Saved.'
 
     addNewCustomField: ->
       customField = Ember.Object.create isNew: true, type: 'text'
