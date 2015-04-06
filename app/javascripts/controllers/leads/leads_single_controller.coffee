@@ -101,9 +101,9 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   phoneNumbers: Ember.A()
 
   addresses: Ember.A()
-  needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex', 'settingsCustomFields']
+  needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
 
-  customFields: Ember.computed.oneWay 'controllers.settingsCustomFields'
+  customFields: []
 
   contactStatuses: Ember.computed 'controllers.contactStatuses.[]', ->
     @get('controllers.contactStatuses')

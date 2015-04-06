@@ -1,5 +1,9 @@
 Radium.LeadsSingleRoute = Ember.Route.extend
-  setupController: (controller) ->
+  model: ->
+    Radium.CustomField.find({})
+
+  setupController: (controller, customFields) ->
+    controller.set 'customFields', customFields
     contactForm = @get('contactForm')
     controller.set 'contactForm', contactForm
     leadSources = @controllerFor('account').get('leadSources').toArray()
