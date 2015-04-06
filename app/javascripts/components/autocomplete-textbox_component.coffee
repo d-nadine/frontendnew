@@ -50,6 +50,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       @set('value', null)
       @autocompleteElement().val('').focus()
       @send 'showAll'
+      @getTypeahead().hide()
       event.stopPropagation()
       event.preventDefault()
       false
