@@ -1946,17 +1946,35 @@
     }
 
   , keypress: function (e) {
-      if (this.suppressKeyPressRepeat) return
-      this.move(e)
+      if (!this.shown) return
+
+      switch(e.keyCode) {
+        case 9: // tab
+        case 13: // enter
+        case 27: // escape
+          e.preventDefault()
+          break
+
+        case 38: // up arrow
+          if (e.type != 'keydown') break
+          e.preventDefault()
+          this.prev()
+          break
+
+        case 40: // down arrow
+          if (e.type != 'keydown') break
+          e.preventDefault()
+          this.next()
+          break
+      }
+
+      e.stopPropagation()
     }
 
   , keyup: function (e) {
       switch(e.keyCode) {
         case 40: // down arrow
         case 38: // up arrow
-        case 16: // shift
-        case 17: // ctrl
-        case 18: // alt
           break
 
         case 9: // tab
