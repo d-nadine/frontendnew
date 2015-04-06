@@ -5,6 +5,9 @@ Radium.FormsNoteController = Radium.FormController.extend
       return unless @get('isValid')
       @set 'justAdded', true
 
+      body = @get('model.body')
+
+      @set('model.body', body)
       @get('model').commit().then (confirmation) =>
         @send('flashSuccess', "Note added") if confirmation
       ,

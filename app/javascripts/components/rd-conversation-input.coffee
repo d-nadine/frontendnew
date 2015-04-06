@@ -35,7 +35,9 @@ Radium.RdConversationInputComponent = Ember.Component.extend
   ## Private API
 
   input: ->
-    @set 'value', @$().text()
+    text = new String(@$().html()).reformatHtml()
+
+    @set 'value', text
 
   focusOut: ->
     @set 'focus', false

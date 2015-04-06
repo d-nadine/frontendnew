@@ -28,3 +28,9 @@ String::isCurrency = ->
 
 String::dedasherize = ->
   @replace(/[-]/g, ' ')
+
+String::reformatHtml = ->
+  @replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '\n\n')
+  .replace(/<br\s*\/?>/ig,"\n")
+  .replace(/&nbsp;/g,' ')
+  .replace(/(<([^>]+)>)/ig,"");
