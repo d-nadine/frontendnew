@@ -128,16 +128,18 @@
       {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name"}}
     </div>
   </div>
+  {{!debugger}}
+  {{!input type="text" value=model.name action="saveModel" on="enter"}}
   {{#each field in customFields}}
     <div class="item">
       <div class="icon"><i class=""></i></div>
       <div class="description">{{field.name}}</div>
       <div class="field">
-        <strong>{{field.name}}</strong>
+        {{renderCustomField field model}}
       </div>
     </div>
   {{/each}}
-  {{#link-to "settings.customFields" clas="settings-link"}}Custom Fields{{/link-to}}
+  {{#link-to "settings.customFields" class="settings-link"}}Custom Fields{{/link-to}}
   {{#if model.twitter}}
     <div class="item">
       <div class="icon"><i class="ss-social ss-twitter"></i></div>

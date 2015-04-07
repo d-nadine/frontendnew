@@ -89,6 +89,15 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'facebook', null
     @set 'linkedin', null
     @set 'title', null
+
+    if customFields = @get('customFields')
+      customFieldMap = Ember.Map.create()
+
+      @get('customFields').forEach (field) ->
+        customFieldMap.set field, Ember.Object.create(field: field, value: null)
+
+      @set 'customFieldMap', customFieldMap
+
     leadSources = @get('leadSources')
 
     return unless leadSources?.length

@@ -1,0 +1,26 @@
+# FIXME: this can be replace with the component helper when we upgrade to 1.11.0
+Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourcePath, options) ->
+  customField = Ember.Handlebars.get(this, customFieldPath, options)
+  resource = Ember.Handlebars.get(this, resourcePath, options)
+
+  component = switch customField.get('name')
+                when 'text' then 'customfield-input'
+                else 'customfield-input'
+
+  helper = Ember.Handlebars.resolveHelper(options.data.view.container, component)
+
+  options.contexts = []
+  options.types = []
+
+  options.hash['type'] = 'text'
+  options.hashTypes['type'] = 'STRING'
+
+  customFieldMap = resource.get('customFieldMap')
+
+  Ember.assert("the resource must have a customFieldMap", customFieldMap)
+
+  field = customFieldMap.get(customField)
+
+  options.hash['customField'] = field
+
+  helper.call this, options

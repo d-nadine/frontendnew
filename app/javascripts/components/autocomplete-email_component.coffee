@@ -4,7 +4,6 @@ require 'mixins/save_model_key_down'
 Radium.AutocompleteEmailComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
   Radium.AutocompleteMixin,
   Radium.ValidationMixin,
-  Radium.KeyConstantsMixin,
   Radium.SaveModelKeyDownMixn,
 
   actions:
