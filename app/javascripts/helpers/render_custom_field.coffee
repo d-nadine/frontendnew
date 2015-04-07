@@ -12,9 +12,6 @@ Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourceP
   options.contexts = []
   options.types = []
 
-  options.hash['type'] = 'text'
-  options.hashTypes['type'] = 'STRING'
-
   customFieldMap = resource.get('customFieldMap')
 
   Ember.assert("the resource must have a customFieldMap", customFieldMap)

@@ -17,3 +17,5 @@ Radium.CreateContact = Radium.Model.extend
   emailAddresses: DS.attr('array')
   addresses: DS.attr('array')
   tagNames: DS.attr('array', defaultValue: [])
+
+  customFieldValues: DS.hasMany('Radium.CustomFieldValue')

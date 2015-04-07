@@ -42,6 +42,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
         $('.modal').modal backdrop: false
         return
 
+      customFieldMap = @get('model.customFieldMap') || Ember.A()
+
       if isNew
         model.set 'addresses', @get('addresses')
         @send 'saveNew'

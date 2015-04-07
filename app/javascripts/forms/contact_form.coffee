@@ -59,6 +59,15 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @get('tagNames').forEach (tag) ->
       contact.get('tagNames').push tag.get('name')
 
+    unless customFieldMap = @get('customFieldMap')
+      return contact
+
+    customFieldMap.forEach (key, field) ->
+      if field.get('value.length')
+        customFieldValue = contact.get('customFieldValues').createRecord
+                             customField: key
+                             value: field.get('value')
+
     contact
 
   addressHasValue: (address) ->
@@ -89,6 +98,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'facebook', null
     @set 'linkedin', null
     @set 'title', null
+    @set 'customFieldValues', Ember.A()
 
     if customFields = @get('customFields')
       customFieldMap = Ember.Map.create()
@@ -104,7 +114,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
 
     return unless leadSources.length
 
-    initialLeadSource = if initialSource =leadSources.find((l) -> l.toLowerCase() == 'website')
+    initialLeadSource = if initialSource = leadSources.find((l) -> l.toLowerCase() == 'website')
                           initialSource
                         else
                            leadSources[0]

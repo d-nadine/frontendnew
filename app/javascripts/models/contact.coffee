@@ -24,6 +24,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   contactStatus: DS.belongsTo('Radium.ContactStatus')
 
+  customFieldValues: DS.hasMany('Radium.CustomFieldValue')
   name: DS.attr('string')
   companyName: DS.attr('string')
   source: DS.attr('string')

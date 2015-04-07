@@ -72,13 +72,13 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   clearRelationships: ->
     @get('contact.deals').removeObject(this) if @get('contact')
 
-    @get('tasks').compact().forEach (task) =>
+    @get('tasks').compact().forEach (task) ->
       task.deleteRecord()
 
-    @get('activities').compact().forEach (activity) =>
+    @get('activities').compact().forEach (activity) ->
       activity.deleteRecord()
 
-    Radium.Notification.all().compact().forEach (notification) =>
+    Radium.Notification.all().compact().forEach (notification) ->
       if @get('_referenceDeal') == this
         notification.deleteRecord()
 

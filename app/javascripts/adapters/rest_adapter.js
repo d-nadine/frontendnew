@@ -354,7 +354,8 @@ var contactsMapping = {
   addresses: {embedded: 'always'},
   tagNames: {embedded: 'always'},
   comments: {embedded: 'load'},
-  contactInfo: {embedded: 'always'}
+  contactInfo: {embedded: 'always'},
+  customFieldValues: {embedded: 'always'}
 };
 
 Radium.RESTAdapter.map('Radium.Contact', contactsMapping);
@@ -372,7 +373,7 @@ Radium.RESTAdapter.map('Radium.Deal', {
   isPublic: {key: 'public'},
   user: { key: 'assigned_to_id' },
   checklist: { key: 'check_list' ,embedded: 'always' },
-  contactRefs: {embedded: 'always'}
+  contactRefs: {embedded: 'always'},
 });
 
 Radium.RESTAdapter.map('Radium.ChecklistItem', {
