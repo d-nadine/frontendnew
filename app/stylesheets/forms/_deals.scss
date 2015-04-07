@@ -29,11 +29,17 @@
   .control-box input[type="text"],
   .control-box input[type="number"],
   .combobox input[type="text"]{
-    width: 228px;
+    width: 194px;
+    border: 0px;
+    line-height: 34px;
+    height: 33px;
     box-shadow: none;
-    border: solid 1px $control-border-color;
     border-radius: 0px;
     @include transition(border linear 0.2s);
+  }
+
+  .ss-delete {
+    top: 7px !important;
   }
 
   .checklist.block{
@@ -141,7 +147,7 @@
   }
 
   .deal-value {
-    height: 26px;
+    height: 33px;
   }
 
   .dollar{
@@ -151,6 +157,7 @@
     position: relative;
     top: 1px;
     margin-right: 6px;
+    margin-left: 10px;
   }
 
   .controls.add-files{
