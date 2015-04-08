@@ -64,9 +64,9 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
 
     customFieldMap.forEach (key, field) ->
       if field.get('value.length')
-        customFieldValue = contact.get('customFieldValues').createRecord
-                             customField: key
-                             value: field.get('value')
+        contact.get('customFieldValues').createRecord
+          customField: key
+          value: field.get('value')
 
     contact
 

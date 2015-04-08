@@ -73,6 +73,15 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       @setAddressFromHash(model, @get('addresses'), @emailIsValid)
 
+      model.get('customFieldMap').forEach (key, field) ->
+        if existing = model.get('customFieldValues').find((f) -> f.get('customField') == key)
+          existing.set('value', field.get('value'))
+        else
+          if field.get('value.length')
+            model.get('customFieldValues').createRecord
+              customField: key
+              value: field.get('value')
+
       return unless model.get('isDirty')
 
       if Ember.isEmpty('companyName')
