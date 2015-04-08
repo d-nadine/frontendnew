@@ -13,12 +13,12 @@
     top: 0;
     left: 10px;
     font-size: 15px;
-    line-height: 40px;
+    line-height: 32px;
   }
 
   input[type="text"] {
-    height: 38px;
-    padding-left: 30px;
+    height: 33px;
+    padding-left: 10px;
     @include box-sizing(border-box);
   }
 
@@ -26,6 +26,10 @@
     .btn-primary {
       padding-left: 25px;
     }
+  }
+  .add-on {
+    margin-top: 1px;
+    height: 32px;
   }
 }
 
