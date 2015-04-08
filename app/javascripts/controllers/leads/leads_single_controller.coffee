@@ -9,9 +9,22 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'form', null
       @set 'model', model
 
+      if @get('contactCustomFields.length')
+        customFieldMap = Ember.Map.create()
+
+        @get('contactCustomFields').forEach (field) ->
+          if contactsField = model.get('customFieldValues').find((f) -> f.get('customField') == field)
+            value = contactsField.get('value')
+
+          customFieldMap.set field, Ember.Object.create(field: field, value: value)
+
+        model.set('customFieldMap', customFieldMap)
+
       @hashifyRelationships()
 
       @trigger 'modelChanged', model
+
+      @clearContactCustomFields()
 
     clearExisting: ->
       @get('model').reset()
@@ -22,6 +35,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'emailAddresses', form.get('emailAddresses')
       @set 'phoneNumbers', form.get('phoneNumbers')
       @set 'addresses', form.get('addresses')
+
+      @clearContactCustomFields()
 
       @set 'isSubmitted', false
       @set 'isSaving', false
@@ -99,13 +114,16 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set relationship, Ember.A()
       @createFormFromRelationship @get('model'), relationship, @get(relationship)
 
+  clearContactCustomFields: ->
+    @set('contactCustomFields', @get('contactCustomFields').slice())
+
   emailAddresses: Ember.A()
   phoneNumbers: Ember.A()
 
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
 
-  customFields: []
+  contactCustomFields: []
 
   contactStatuses: Ember.computed 'controllers.contactStatuses.[]', ->
     @get('controllers.contactStatuses')

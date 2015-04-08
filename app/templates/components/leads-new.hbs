@@ -128,9 +128,7 @@
       {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name"}}
     </div>
   </div>
-  {{!debugger}}
-  {{!input type="text" value=model.name action="saveModel" on="enter"}}
-  {{#each field in customFields}}
+  {{#each field in contactCustomFields}}
     <div class="item">
       <div class="icon"><i class=""></i></div>
       <div class="description">{{field.name}}</div>

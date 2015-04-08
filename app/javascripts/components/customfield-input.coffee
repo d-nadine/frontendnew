@@ -2,10 +2,16 @@ Radium.CustomfieldInputComponent = Ember.TextField.extend Radium.KeyConstantsMix
   type: 'text'
 
   _customFieldInputInitialise: Ember.on 'didInsertElement', ->
-    Ember.assert "You must bind to a cusom field", @get('customField')
+    customFieldValue = @get('customFieldValue')
+
+    Ember.assert "You must supply a customFieldValue", customFieldValue
+
+    value = customFieldValue.get('value') || ''
+
+    @$().val(value)
 
   input: (e) ->
     @_super.apply this, arguments
 
     Ember.run.next =>
-      @set 'customField.value', @$().val()
+      @set 'customFieldValue.value', @$().val()

@@ -18,6 +18,6 @@ Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourceP
 
   field = customFieldMap.get(customField)
 
-  options.hash['customField'] = field
+  options.hash['customFieldValue'] = field
 
   helper.call this, options
