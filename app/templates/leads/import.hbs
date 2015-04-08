@@ -62,6 +62,9 @@
           {{import-header leader="Fax" source=headerData value=headerInfo.fax row=firstDataRow icon="ss-fax"}}
           {{import-header leader="Gender" source=headerData value=headerInfo.gender row=firstDataRow}}
           {{import-header leader="Source" source=headerData value=headerInfo.source row=firstDataRow}}
+          {{#each field in customFields}}
+            <h1>{{field.name}}</h1>
+          {{/each}}
           <div class="item">
             <div class="icon"><i class="ss-standard"></i></div>
             <div class="description">Status</div>

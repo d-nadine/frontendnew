@@ -175,8 +175,11 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
   firstDataRow: Ember.A()
   isNew: true
   isSubmitted: true
+  customFieldMap: Ember.Map.create()
+  customFields: Ember.A()
+  contactImportJobs: Ember.A()
 
-  sortedJobs: Ember.computed.sort 'model', (a, b) ->
+  sortedJobs: Ember.computed.sort 'contactImportJobs.[]', (a, b) ->
     left = b.get('createdAt') || Ember.DateTime.create()
     right = a.get('createdAt') || Ember.DateTime.create()
     Ember.DateTime.compare left, right

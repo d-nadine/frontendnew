@@ -39,7 +39,21 @@ Radium.LeadsImportRoute = Radium.Route.extend
       @get('store').commit()
 
   model: ->
-    Radium.ContactImportJob.find()
+    Ember.RSVP.hash(
+        contactImportJobs: Radium.ContactImportJob.find({}),
+        customFields: Radium.CustomField.find({})
+      )
+
+  setupController: (controller, model) ->
+    controller.set 'contactImportJobs', model.contactImportJobs
+    customFieldMap = Ember.Map.create()
+
+    model.customFields.forEach (field) ->
+      customFieldMap.set field, Ember.Object.create(customField: field, value: '')
+
+    controller.set 'customFieldMap', customFieldMap
+
+    controller.set 'customFields', model.customFields.toArray().slice()
 
   deactivate: ->
     @controller.send 'reset'
