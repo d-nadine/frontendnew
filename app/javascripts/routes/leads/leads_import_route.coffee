@@ -17,9 +17,7 @@ Radium.LeadsImportRoute = Radium.Route.extend
     deleteRecord: ->
       job = @controllerFor('contactImportJobConfirmation').get('model')
 
-      job.deleteRecord()
-
-      job.one 'didDelete', =>
+      job.delete(this).then (result) =>
         @send 'closeModal'
 
         @send 'flashSuccess', "The job has been deleted"
@@ -27,16 +25,6 @@ Radium.LeadsImportRoute = Radium.Route.extend
         Ember.run.later ->
           location.reload()
         , 200
-
-      job.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        result.reset()
-
-      job.one 'becameError', (result) =>
-        result.reset()
-        @send 'flashError', 'An error has occurred and the invitaiton cannot be sent.'
-
-      @get('store').commit()
 
   model: ->
     Ember.RSVP.hash(
@@ -46,14 +34,11 @@ Radium.LeadsImportRoute = Radium.Route.extend
 
   setupController: (controller, model) ->
     controller.set 'contactImportJobs', model.contactImportJobs
-    customFieldMap = Ember.Map.create()
 
-    model.customFields.forEach (field) ->
-      customFieldMap.set field, Ember.Object.create(customField: field, value: '')
+    customFieldMappings = model.customFields.map (f) ->
+      Ember.Object.create field: f, mapping: ''
 
-    controller.set 'customFieldMap', customFieldMap
-
-    controller.set 'customFields', model.customFields.toArray().slice()
+    controller.set 'customFieldMappings', customFieldMappings
 
   deactivate: ->
     @controller.send 'reset'

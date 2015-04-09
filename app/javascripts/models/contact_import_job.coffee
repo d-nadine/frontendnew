@@ -16,6 +16,7 @@ Radium.ContactImportJob = Radium.Model.extend
   assignedTo: DS.belongsTo('Radium.User')
   emailMarkers: DS.attr('array')
   phoneNumberMarkers: DS.attr('array')
+  customFieldMappings: DS.attr('array')
 
   isProcessing: Ember.computed 'importStatus', ->
     @get('importStatus') == 'processing'

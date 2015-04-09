@@ -1,4 +1,5 @@
 require 'mixins/user_combobox_props'
+
 rejectEmpty = (headerInfo, key) ->
         info = headerInfo.get(key)
         if Ember.isArray(info)
@@ -27,8 +28,6 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       unless assignedTo = @get('assignedTo')
         return @send 'flashError', 'You must select a user to assign the contacts to.'
 
-
-      selectedHeaders = @get('selectedHeaders').slice()
 
       data = @getImportData(false, selectedHeaders).map (item) ->
                                     item.fields.map (item) -> item
@@ -65,23 +64,25 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       if postHeaders.any(hasPhoneNumbers)
         importJob.set('phoneNumberMarkers', headerInfo.get('phoneNumberMarkers').map(collectionMapping))
 
+      headerData = @get('headerData').mapProperty('name')
+
+      mappings = @get('customFieldMappings').reject((f) -> !f.get('mapping')).map (f) ->
+        index: headerData.indexOf(f.get('mapping.name'))
+        custom_field_id: f.get('field.id')
+
+      importJob.set 'customFieldMappings', mappings
+
       @set('importing', true)
 
       importJob.save(this).then( =>
-        @send 'pollForJob', importJob
+        @pollForJob(importJob)
         @set 'isSubmitted', false
       ).catch (result) =>
         @send 'flashError', 'an error has occurred and the job could not be completed.'
         @set 'pollImportJob', importJob
         @set('importing', false)
         @set 'isSubmitted', false
-        @send 'reset'
-
-    pollForJob: (importJob) ->
-      @send 'reset'
-      @set 'pollImportJob', importJob
-      @set('importing', true)
-      @start()
+        @reset()
 
     initialFileUploaded: (imported) ->
       @set 'isUploading', false
@@ -119,31 +120,6 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       @set 'showInstructions', false
       false
 
-    reset: ->
-      @setProperties
-        importing: false
-        isSubmitted: false
-        percentage: 0
-        showInstructions: false
-        initialImported: false
-        isUploading: false
-        rowCount: 0
-        disableImport: false
-        firstRowIsHeader: true
-        contactStatus: null
-        pollImportJob: null
-        headerInfo: @getNewHeaderInfo()
-        assignedTo: @get('currentUser')
-
-      @get('headerData').clear()
-      @set('headerData', Ember.A())
-      @get('firstDataRow').clear()
-      @set('firstDataRow', Ember.A())
-      @get('importedData').clear()
-      @set('importedData', Ember.A())
-      @get('tagNames').clear()
-      @set('tagNames', Ember.A())
-
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
 
@@ -175,8 +151,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
   firstDataRow: Ember.A()
   isNew: true
   isSubmitted: true
-  customFieldMap: Ember.Map.create()
-  customFields: Ember.A()
+  customFieldMappings: Ember.A()
   contactImportJobs: Ember.A()
 
   sortedJobs: Ember.computed.sort 'contactImportJobs.[]', (a, b) ->
@@ -192,12 +167,10 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
     @set 'headerInfo', @getNewHeaderInfo()
 
     @set 'assignedTo', @get('currentUser')
-    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailMarkers.@each.value.name', 'headerInfo.phoneNumberMarkers.@each.value.name', ->
+    Radium.computed.addAllKeysProperty this, 'selectedHeaders', 'headerInfo', 'firstRowIsHeader', 'headerInfo.emailMarkers.@each.value.name', 'headerInfo.phoneNumberMarkers.@each.value.name', 'customFieldMappings.@each.mapping', ->
       headerInfo = @get('headerInfo')
 
       headers = Ember.keys(headerInfo).reject rejectEmpty.bind(this, headerInfo)
-
-      return Ember.A() unless headers.length
 
       self = this
 
@@ -224,6 +197,24 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
           result.push(hash)
           counter++
 
+      @get('customFieldMappings').forEach (f) ->
+        fieldName = f.get('field.name')
+
+        if f.get('mapping')
+          headers.push fieldName
+          headerInfoProp = self.get("headerInfo.#{f.get('mapping.name')}")
+          hash = Ember.Object.create
+                   name: fieldName
+                   marker: fieldName
+                   mapping: f.get('mapping.name')
+
+          result.push(hash)
+        else
+          index = headers.indexOf(fieldName)
+          headers.removeAt(index) unless index == -1
+
+      return Ember.A() unless headers.length
+
       result
 
   jobsLoaded: ->
@@ -244,15 +235,13 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
     removeObserver()
 
-    @send 'pollForJob', firstJob
+    @pollForJob(firstJob)
 
   previewData: Ember.computed 'selectedHeaders.[]', ->
     selectedHeaders = @get('selectedHeaders').slice()
     @getImportData(true, selectedHeaders)
 
   getImportData: (isPreview, selectedHeaders) ->
-    selectedHeaders = selectedHeaders.mapProperty('marker')
-
     return unless selectedHeaders.length
 
     headerData = @get('headerData').mapProperty('name')
@@ -265,11 +254,17 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
     if @get('firstRowIsHeader')
       data = data.slice(1)
 
-    data.map (row) ->
+    data = data.map (row) ->
       Ember.Object.create
         fields: selectedHeaders.map (header) ->
-          index = headerData.indexOf(header)
+          if mapping = header.get('mapping')
+            index = headerData.indexOf(mapping)
+          else
+            index = headerData.indexOf(header.get('marker'))
+
           row[index]
+
+    data
 
   getNewHeaderInfo: ->
     Ember.Object.create
@@ -292,6 +287,40 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       notes: null
       gender: null
 
+  reset: ->
+    @setProperties
+      importing: false
+      isSubmitted: false
+      percentage: 0
+      showInstructions: false
+      initialImported: false
+      isUploading: false
+      rowCount: 0
+      disableImport: false
+      firstRowIsHeader: true
+      contactStatus: null
+      pollImportJob: null
+      headerInfo: @getNewHeaderInfo()
+      assignedTo: @get('currentUser')
+
+    @get('headerData').clear()
+    @set('headerData', Ember.A())
+    @get('firstDataRow').clear()
+    @set('firstDataRow', Ember.A())
+    @get('importedData').clear()
+    @set('importedData', Ember.A())
+    @get('tagNames').clear()
+    @set('tagNames', Ember.A())
+
+    @get('customFieldMappings').forEach (f) ->
+      f.set('mapping', null)
+
+  pollForJob: (importJob) ->
+    @reset()
+    @set 'pollImportJob', importJob
+    @set('importing', true)
+    @start()
+
   onPoll: ->
     unless job = @get('pollImportJob')
       @stop()
@@ -303,7 +332,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         @set('importing', false)
         @stop()
         @send 'flashSuccess', 'The contacts have been successfully imported.'
-        @send 'reset'
+        @reset()
         @set 'importFile', null
         Radium.Contact.find({})
         return
