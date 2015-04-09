@@ -367,4 +367,15 @@
 
 .sidebar .contact-company-list .combobox {
   position: static;
+  display: inline-block;
+
+  input[type=text] {
+    line-height: 33px;
+    float: left;
+    height: auto;
+    width: 200px;
+  }
+  .ss-delete {
+    top: 7px;
+  }
 }

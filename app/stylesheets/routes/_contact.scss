@@ -253,3 +253,21 @@
         margin-bottom: 5px;
     }
 }
+.tasks-content {
+
+  .meeting-form-invite {
+    display: inline-block;
+
+    > .field {
+      float: left;
+      margin-right: 10px;
+      line-height: 33px;
+    }
+    .sync {
+      width: auto !important;
+    }
+  }
+}
+
+
+
