@@ -1,4 +1,3 @@
-<!-- file:///Users/paulcowan/Dropbox/Mockups/views/import/importer.html# -->
 <div class="tab-pane active">
   {{#unless importing}}
     <div class="alert alert-info">
@@ -82,6 +81,9 @@
           </div>
           {{import-header leader="Lists" source=headerData value=headerInfo.lists row=firstDataRow}}
           {{import-header leader="Notes" source=headerData value=headerInfo.notes row=firstDataRow}}
+          <div class="item">
+            {{#link-to "settings.customFields" class="settings-link"}}Custom Fields{{/link-to}}
+          </div>
         </div>
         <div id="assign" class="extra">
           <h2>Assign to</h2>

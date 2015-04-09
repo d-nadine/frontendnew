@@ -67,7 +67,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       headerData = @get('headerData').mapProperty('name')
 
       mappings = @get('customFieldMappings').reject((f) -> !f.get('mapping')).map (f) ->
-        index: headerData.indexOf(f.get('mapping.name'))
+        index: f.get('index')
         custom_field_id: f.get('field.id')
 
       importJob.set 'customFieldMappings', mappings
@@ -82,7 +82,36 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         @set 'pollImportJob', importJob
         @set('importing', false)
         @set 'isSubmitted', false
-        @reset()
+        @send 'reset'
+
+    reset: ->
+      @setProperties
+        importing: false
+        isSubmitted: false
+        percentage: 0
+        showInstructions: false
+        initialImported: false
+        isUploading: false
+        rowCount: 0
+        disableImport: false
+        firstRowIsHeader: true
+        contactStatus: null
+        pollImportJob: null
+        headerInfo: @getNewHeaderInfo()
+        assignedTo: @get('currentUser')
+
+      @get('headerData').clear()
+      @set('headerData', Ember.A())
+      @get('firstDataRow').clear()
+      @set('firstDataRow', Ember.A())
+      @get('importedData').clear()
+      @set('importedData', Ember.A())
+      @get('tagNames').clear()
+      @set('tagNames', Ember.A())
+
+      @get('customFieldMappings').forEach (f) ->
+        f.set('mapping', null)
+        f.set('index', null)
 
     initialFileUploaded: (imported) ->
       @set 'isUploading', false
@@ -154,7 +183,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
   customFieldMappings: Ember.A()
   contactImportJobs: Ember.A()
 
-  sortedJobs: Ember.computed.sort 'contactImportJobs.[]', (a, b) ->
+  sortedJobs: Ember.computed.sort 'contactImportJobs', (a, b) ->
     left = b.get('createdAt') || Ember.DateTime.create()
     right = a.get('createdAt') || Ember.DateTime.create()
     Ember.DateTime.compare left, right
@@ -207,6 +236,8 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
                    name: fieldName
                    marker: fieldName
                    mapping: f.get('mapping.name')
+
+          f.set('index', (headers.length - 1))
 
           result.push(hash)
         else
@@ -287,36 +318,8 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       notes: null
       gender: null
 
-  reset: ->
-    @setProperties
-      importing: false
-      isSubmitted: false
-      percentage: 0
-      showInstructions: false
-      initialImported: false
-      isUploading: false
-      rowCount: 0
-      disableImport: false
-      firstRowIsHeader: true
-      contactStatus: null
-      pollImportJob: null
-      headerInfo: @getNewHeaderInfo()
-      assignedTo: @get('currentUser')
-
-    @get('headerData').clear()
-    @set('headerData', Ember.A())
-    @get('firstDataRow').clear()
-    @set('firstDataRow', Ember.A())
-    @get('importedData').clear()
-    @set('importedData', Ember.A())
-    @get('tagNames').clear()
-    @set('tagNames', Ember.A())
-
-    @get('customFieldMappings').forEach (f) ->
-      f.set('mapping', null)
-
   pollForJob: (importJob) ->
-    @reset()
+    @send 'reset'
     @set 'pollImportJob', importJob
     @set('importing', true)
     @start()
@@ -332,7 +335,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         @set('importing', false)
         @stop()
         @send 'flashSuccess', 'The contacts have been successfully imported.'
-        @reset()
+        @send 'reset'
         @set 'importFile', null
         Radium.Contact.find({})
         return

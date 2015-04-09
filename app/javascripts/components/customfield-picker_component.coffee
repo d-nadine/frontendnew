@@ -17,7 +17,6 @@ Radium.CustomfieldPickerComponent = Ember.Component.extend  Radium.KeyConstantsM
     "date",
     "currency",
     "url",
-    "dropdown"
   ])
 
   isSelect: Ember.computed.equal 'customField.type', 'dropdown'
