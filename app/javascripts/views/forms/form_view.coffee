@@ -10,7 +10,7 @@ Radium.FormView = Radium.View.extend Radium.FlashNewViewMixin,
 
     @$('.expander').on 'click', (e) =>
       return if e.target.tagName == "A"
-      return if !@get('isNew') && e.target.tagName == "TEXTAREA" && @get('isExpanded')
+      return if e.target.tagName == "TEXTAREA" && @get('isExpanded')
       return unless @get('isExpandable')
       @toggleProperty 'isExpanded'
 
