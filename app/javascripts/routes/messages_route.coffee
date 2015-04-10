@@ -72,10 +72,12 @@ Radium.MessagesRoute = Radium.Route.extend
 
       @controllerFor('messagesSidebar').send 'checkMessageItem'
 
-    archive: (item) ->
+    archive: (item, fromSidebar) ->
       return if item.get('isArchived')
 
-      @send 'recalculateModel', item, 'archive'
+      item.set 'archived', true
+
+      @recalculateModel(item, 'archive', fromSidebar)
 
       foldersIcon = $('.email-folders')
 
@@ -85,133 +87,127 @@ Radium.MessagesRoute = Radium.Route.extend
         foldersIcon.removeClass('highlight')
       , 3000
 
-    delete: (item) ->
-      @send 'recalculateModel', item, 'delete'
+    delete: (item, fromSidebar) ->
+      @recalculateModel(item, 'delete', fromSidebar)
 
-    recalculateModel: (item, action) ->
-      messagesController = @controllerFor 'messages'
-      sidebarController = @controllerFor 'messagesSidebar'
+  removeItem: (item, action) ->
+    callback = =>
+      controller = @controllerFor('messages')
+      sidebarController = @controllerFor('messagesSidebar')
 
-      fromSidebar = $(event.target).parent().hasClass('on-sidebar')
+      sidebarController.set 'isLoading', true
 
-      if messagesController.get('showRoute')
-        return @send('removeItem', item, action)
-
-      threadController = @controllerFor('emailsThread')
-
-      isFirstInThread = threadController.get('firstObject') == item
-
-      if isFirstInThread
-        replies = threadController.get('model')
-
-        if replies.get('length') == 1
-          return @send('removeItem', item, action)
-
-      isSelectedContent = (item == messagesController.get('selectedContent'))
-
-      callback = =>
-        messagesController.removeObject(item)
-        threadController.removeObject(item)
-
-        if action == 'delete'
-          @send 'notificationDelete', item
-
-          item.deleteRecord()
-          updateEvent = 'didDelete'
-        else
-          item.set 'archived', true
-          updateEvent = 'didUpdate'
-
-        item.one updateEvent, =>
-          if isSelectedContent
-            currentUser = @controllerFor('currentUser').get('model')
-
-            predicate = (email) ->
-              email.get('sender') != currentUser
-
-            nextItem = threadController.find predicate
-
-            return unless nextItem
-
-            messagesController.get('model').insertAt(0, nextItem)
-            @transitionTo "emails.thread", messagesController.get("folder"), nextItem
-            return
-
-          return unless fromSidebar
-
-          sidebarController = @controllerFor('messagesSidebar')
-
-          sidebarController.send 'reset'
-
-          sidebarController.get('container').lookup('route:messages').refresh()
-
-        item.one 'becameInvalid', ->
-          item.set 'isTransitioning', false
-          sidebarController.set 'isLoading', false
-
-        item.one 'becameError', ->
-          item.set 'isTransitioning', false
-          sidebarController.set 'isLoading', false
-
-        @get('store').commit()
-
-        return unless item.get('isDirty')
-
-        if action == 'delete'
-          @send 'flashSuccess', 'Email deleted'
-        else
-          @send 'flashSuccess', 'Email archived'
-
-      if isSelectedContent || fromSidebar
-        @send 'animateDelete', item, callback, '.messages-list'
+      if item == controller.get('selectedContent')
+        nextItem = controller.get('nextItem')
       else
-        callback()
+        nextItem = controller.get('selectedContent')
 
-    removeItem: (item, action) ->
-      callback = =>
-        controller = @controllerFor('messages')
+      if action == 'delete'
+        @send 'notificationDelete', item
+
+        item.deleteRecord()
+        updateEvent = 'didDelete'
+      else
+        item.set 'folder', 'archive'
+        updateEvent = 'didUpdate'
+
+      item.one updateEvent, =>
+        controller.removeObject item
+        sidebarController.set 'isLoading', false
+        @send 'selectItem', nextItem
+        @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
+
+      item.one 'becameInvalid', ->
+        item.set 'isTransitioning', false
+        sidebarController.set 'isLoading', false
+
+      item.one 'becameError', ->
+        item.set 'isTransitioning', false
+        sidebarController.set 'isLoading', false
+
+      @get('store').commit()
+
+      return unless item.get('isDirty')
+
+      if action == 'delete'
+        @send 'flashSuccess', 'Email deleted'
+      else
+        @send 'flashSuccess', 'Email archived'
+
+    @send 'animateDelete', item, callback, '.messages-list'
+
+  recalculateModel: (item, action, fromSidebar) ->
+    messagesController = @controllerFor 'messages'
+    sidebarController = @controllerFor 'messagesSidebar'
+
+    if messagesController.get('unthreadedRoute')
+      return @removeItem(item, action)
+
+    threadController = @controllerFor('emailsThread')
+
+    isFirstInThread = threadController.get('firstObject') == item
+
+    if isFirstInThread
+      replies = threadController.get('model')
+
+      if replies.get('length') == 1
+        return @removeItem(item, action)
+
+    isSelectedContent = (item == messagesController.get('selectedContent'))
+
+    callback = =>
+      messagesController.removeObject(item)
+      threadController.removeObject(item)
+
+      if action == 'delete'
+        @send 'notificationDelete', item
+
+        item.deleteRecord()
+        updateEvent = 'didDelete'
+      else
+        updateEvent = 'didUpdate'
+
+      item.one updateEvent, =>
+        if isSelectedContent
+          currentUser = @controllerFor('currentUser').get('model')
+
+          nextItem = threadController.find (email) -> email.get('sender') != currentUser
+
+          return unless nextItem
+
+          messagesController.get('model').insertAt(0, nextItem)
+          @transitionTo "emails.thread", messagesController.get("folder"), nextItem
+          return
+
+        return unless fromSidebar
+
         sidebarController = @controllerFor('messagesSidebar')
 
-        sidebarController.set 'isLoading', true
+        sidebarController.send 'reset'
 
-        if item == controller.get('selectedContent')
-          nextItem = controller.get('nextItem')
-        else
-          nextItem = controller.get('selectedContent')
+        sidebarController.get('container').lookup('route:messages').refresh()
 
-        if action == 'delete'
-          @send 'notificationDelete', item
+      item.one 'becameInvalid', ->
+        item.set 'isTransitioning', false
+        sidebarController.set 'isLoading', false
 
-          item.deleteRecord()
-          updateEvent = 'didDelete'
-        else
-          item.set 'folder', 'archive'
-          updateEvent = 'didUpdate'
+      item.one 'becameError', ->
+        item.set 'isTransitioning', false
+        sidebarController.set 'isLoading', false
 
-        item.one updateEvent, =>
-          controller.removeObject item
-          sidebarController.set 'isLoading', false
-          @send 'selectItem', nextItem
-          @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
+      @get('store').commit()
 
-        item.one 'becameInvalid', ->
-          item.set 'isTransitioning', false
-          sidebarController.set 'isLoading', false
+      return unless item.get('isDirty')
 
-        item.one 'becameError', ->
-          item.set 'isTransitioning', false
-          sidebarController.set 'isLoading', false
+      if action == 'delete'
+        @send 'flashSuccess', 'Email deleted'
+      else
+        @send 'flashSuccess', 'Email archived'
 
-        @get('store').commit()
-
-        return unless item.get('isDirty')
-
-        if action == 'delete'
-          @send 'flashSuccess', 'Email deleted'
-        else
-          @send 'flashSuccess', 'Email archived'
-
+    if isSelectedContent || fromSidebar
       @send 'animateDelete', item, callback, '.messages-list'
+    else
+      callback()
 
   transitionToBulkOrBack: ->
     currentPath = @controllerFor('application').get('currentPath')

@@ -13,10 +13,9 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   actions:
     save: ->
       @get('store').commit()
-    togglePublished: ->
-      #FIXME: hack to stop this being bubbled here on error
-      return unless Ember.$(event.target).hasClass 'publish'
+      false
 
+    togglePublished: ->
       status = if @get('isPublic')
                  "unpublished"
                else
@@ -25,6 +24,7 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
       @set 'model.status', status
 
       @get('store').commit()
+      false
 
   needs: ['accountSettings', 'users', 'contacts']
   firstState: Ember.computed.alias('controllers.accountSettings.firstState')

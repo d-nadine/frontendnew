@@ -107,7 +107,7 @@
           {{/unless}}
           <div id="sendMenu" class="btn-group">
             <button tabindex="6" {{action "submit" this controller bubbles=false}} {{bind-attr disabled=disableSave}} class="btn btn-primary btn-main btn-wide">Send</button>
-            <button class="btn btn-primary dropdown-toggle" {{bind-attr disabled=disableSave}} {{action "toggleSendMenu" target=view}}>
+            <button class="btn btn-primary dropdown-toggle toggle-caret" {{bind-attr disabled=disableSave}}>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu date-time-menu">

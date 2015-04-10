@@ -156,7 +156,7 @@
             {{/link-to}}
             <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
           {{/unless}}
-          {{#if archiveEnabled}}
+          {{#if canArchive}}
             <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
               <i class="ss-standard ss-box"></i> Archive </a>
           {{/if}}

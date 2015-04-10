@@ -1,17 +1,13 @@
 <form {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
-  <div {{bind-attr class="isFinished view.isFocused :primary"}} {{action "expand"}}>
+  <div {{bind-attr class="isFinished view.isFocused :primary :expander"}} {{action "expand" target="view"}}>
     {{view view.finishView}}
-
-    {{#if showOptions}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
-        {{#if isExpanded}}
-          Hide
-        {{else}}
-          Options
-        {{/if}}
-      </a>
-    {{/if}}
-
+    <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
+      {{#if isExpanded}}
+        Hide
+      {{else}}
+        Options
+      {{/if}}
+    </a>
     {{#if overdue}}
       <span class="pull-right overdue-alert"><i class="ss-alert"></i> {{formatDateTime time format="date"}}</span>
     {{/if}}

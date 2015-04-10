@@ -28,7 +28,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   threadRoute: Ember.computed 'folder', ->
     @get('folder') in ['radium', 'inbox']
 
-  showRoute: Ember.computed.not 'threadRoute'
+  unthreadedRoute: Ember.computed.not 'threadRoute'
 
   onPoll: ->
     currentPath = @get('currentPath')

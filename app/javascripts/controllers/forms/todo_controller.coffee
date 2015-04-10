@@ -67,12 +67,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
       @set 'isExpanded', false
       @set 'justAdded', true
-      @set 'showOptions', false
 
       Ember.run.later(( =>
         @set 'justAdded', false
         @set 'isSubmitted', false
-        @set 'showOptions', true
 
         @applyBufferedChanges()
 
@@ -153,8 +151,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   justAdded: Ember.computed 'content.justadded', ->
     @get('content.justAdded') == true
-
-  showOptions: Ember.computed.alias('isNew')
 
   showSuccess: Ember.computed.alias('justAdded')
 

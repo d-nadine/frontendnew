@@ -4,14 +4,12 @@ Radium.ActivitiesInvitationController = Radium.ActivityBaseController.extend
 
   invitation: Ember.computed.alias 'reference'
 
-  meeting: ( ->
+  meeting: Ember.computed 'meta.meetingId', ->
     return unless @get('meta.meetingId')
 
     Radium.Meeting.all().find (meeting) =>
       meeting.get('id') == @get('meta.meetingId').toString()
-  ).property('meta.meetingId')
 
-  icon: (->
+  icon: Ember.computed 'event', ->
     switch @get('event')
       when 'create', 'confirm' then 'star'
-  ).property('event')

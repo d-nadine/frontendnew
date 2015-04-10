@@ -8,20 +8,11 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
       @toggleProperty 'isExpanded'
       return
 
-    expand: ->
-      return if event.target.tagName == "A"
-      return if !@get('isNew') && event.target.tagName == "TEXTAREA" && @get('isExpanded')
-      return unless @get('isExpandable')
-      @toggleProperty 'isExpanded'
-      return
-
   justAdded: Ember.computed 'content.justAdded', ->
     @get('content.justAdded') == true
 
   isExpandable: Ember.computed 'isNew', 'isFinished', 'justAdded', ->
     return not !!@get('justAdded')
-
-  showOptions: Ember.computed.alias('isNew')
 
   submitFormDidChange: Ember.observer('model.submitForm', ->
     return unless @get('model.submitForm')

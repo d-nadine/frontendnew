@@ -33,11 +33,6 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
       editable.restoreCursor(currentLength)
       @set 'signatureAdded', true
 
-    toggleSendMenu: ->
-      @$('#sendMenu').toggleClass('open')
-      event.preventDefault()
-      event.stopPropagation()
-
   didInsertElement: ->
     @_super.apply this, arguments
     @get('controller').on('signatureAdded', this, 'onSignatureAdded')
@@ -45,6 +40,11 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
     @$('.btn').tooltip()
 
     @$('.date-time-menu').css left: '-100px'
+
+    @$('.toggle-caret').on 'click', (e) =>
+      @$('#sendMenu').toggleClass('open')
+      e.preventDefault()
+      e.stopPropagation()
 
     $('body').on 'click.date-send-menu', (e) =>
       return true if e.target?.type == 'file'
@@ -57,6 +57,8 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
       e.stopPropagation()
 
   willDestroyElement: ->
+    @_super.apply this, arguments
+    @$('.toggle-caret').off 'click'
     $('body').off 'click.date-send-menu'
 
   noContent: Ember.computed 'controller.isSubmitted', 'controller.message', ->

@@ -20,7 +20,7 @@ Radium.CalendarView = Radium.View.extend Radium.DarkBackgroundMixin,
 
       @get('controller').send 'selectDay', date
     )
-    .on('click', =>
+    .on('click', ->
       $().datepicker('show')
     )
 

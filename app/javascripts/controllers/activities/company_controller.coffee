@@ -6,9 +6,8 @@ Radium.ActivitiesCompanyController = Radium.ActivityBaseController.extend
   company: Ember.computed.alias 'reference'
   assignedTo: Ember.computed.alias 'meta.user'
 
-  icon: (->
+  icon: Ember.computed 'event', ->
     switch @get('isAssign')
       when 'assign' then 'buildings'
       when 'update' then 'write'
       else 'notebook'
-  ).property('event')

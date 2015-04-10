@@ -73,7 +73,8 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
 
   showingAddDeal: false
 
-  needs: ['tags','contacts','users','userSettings', 'deals', 'emailsNew', 'peopleIndex']
+  needs: ['tags','contacts','users','userSettings', 'deals', 'emailsNew', 'peopleIndex', 'messages']
+
   users: Ember.computed.alias 'controllers.users'
   contacts: Ember.computed.alias 'controllers.contacts'
   settings: Ember.computed.alias 'controllers.userSettings.model'
@@ -87,7 +88,6 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
   formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       todoForm: @get('todoForm')
-
 
   messageIsInvalid: Ember.computed 'isSubmitted', 'message.length', ->
     return false unless @get('isSubmitted')

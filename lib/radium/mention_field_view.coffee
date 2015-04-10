@@ -17,7 +17,7 @@ Radium.MentionFieldView = Ember.View.extend
     """
 
   search: (mode, query, callback) ->
-    data = @get('source').filter( (item) =>
+    data = @get('source').filter( (item) ->
       item.get('name').toLowerCase().indexOf(query.toLowerCase()) > -1
     ).map( (item) =>
       id: item.get('id'), name: item.get('name'), avatar: @getAvatar(item), type: 'user'

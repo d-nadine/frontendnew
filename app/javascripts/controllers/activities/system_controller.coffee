@@ -6,7 +6,6 @@ Radium.ActivitiesSystemController = Radium.ActivityBaseController.extend
 
   eventName: Ember.computed.alias 'event'
 
-  icon: (->
-    switch @get('event')
-      when 'lead_received' then 'user'
-  ).property('event')
+  icon: Ember.computed 'event', ->
+   switch @get('event')
+     when 'lead_received' then 'user'

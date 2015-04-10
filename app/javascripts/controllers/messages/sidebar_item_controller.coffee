@@ -21,5 +21,7 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.Ema
 
     sender.get('isPublic')
 
-  onArchiveTab: Ember.computed.equal 'controllers.messages.folder', 'archive'
+  canArchive: Ember.computed 'controllers.messages.folder', ->
+    @get('controllers.messages.folder') != 'archive'
+
   threadIsLoading: Ember.computed.bool 'model.isTransitioning'

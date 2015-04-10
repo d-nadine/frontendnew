@@ -41,24 +41,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @get('store').commit()
 
     archiveEmail: (item) ->
-      @send 'removeSidebarItem', item, 'archive'
+      @removeSidebarItem(item, 'archive')
 
     deleteEmail: (item) ->
-      @send 'removeSidebarItem', item, 'delete'
-
-    removeSidebarItem: (item, action, threadAction) ->
-      if @get('showReplyForm')
-        @send 'closeForms'
-        return
-
-      if @get('showForwardForm')
-        @send 'closeForms'
-
-        return
-
-      parentController = @get('parentController')
-
-      @send action, item, action
+      @removeSidebarItem(item, 'delete')
 
     cancelCheckForResponse: (email) ->
       email.set 'checkForResponse', null
@@ -83,6 +69,20 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     hideForm: ->
       @set 'showFormBox', false
       @set 'formBox.activeForm', null
+
+  removeSidebarItem: (item, action) ->
+    if @get('showReplyForm')
+      @send 'closeForms'
+      return
+
+    if @get('showForwardForm')
+      @send 'closeForms'
+
+      return
+
+    parentController = @get('parentController')
+
+    @send action, item
 
   showMeta : false
   currentForm: 'todo'
@@ -151,6 +151,8 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   needs: ['messages', 'deals']
   hideUploader: true
-  archiveEnabled: Radium.computed.notEqual 'controllers.messages.folder', 'archive'
   hasComments: Ember.computed.bool 'comments.length'
   renderComments: Ember.computed.or 'hasComments', 'showCommentBox'
+
+  canArchive: Ember.computed 'controllers.messages.folder', ->
+    @get('controllers.messages.folder') != 'archive'

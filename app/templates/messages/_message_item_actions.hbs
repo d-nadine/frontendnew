@@ -1,11 +1,11 @@
 <div class="message-item-actions">
   <div class="pull-right">
-    {{#unless onArchiveTab}}
-      <a {{action "archive" this bubbles=false}} href="#" class="btn-icon archive" title="Archive email">
+    {{#if canArchive}}
+      <a {{action "archive" this true bubbles=false}} href="#" class="btn-icon archive" title="Archive email">
         <i class='ss-standard ss-box'></i>
       </a>
-    {{/unless}}
-    <a {{action "delete" this bubbles=false}} href="#" class="btn-icon delete on-sidebar">
+    {{/if}}
+    <a {{action "delete" this true bubbles=false}} href="#" class="btn-icon delete on-sidebar">
       <i class='ss-symbolicons-block ss-trash'></i>
     </a>
     {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}

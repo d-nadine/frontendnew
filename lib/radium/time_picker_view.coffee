@@ -1,18 +1,6 @@
 Radium.TimePickerView = Radium.View.extend
-  actions:
-    showTimePicker: ->
-      return if @get('disabled')
-
-      unless @get('isOpen')
-        @$('.timepicker').trigger('click.timepicker')
-
-      Ember.run.next =>
-        @toggleProperty('isOpen')
-
-      event.stopPropagation()
-      event.preventDefault()
-
   templateName: 'forms/time_picker'
+
   classNameBindings: [
     'date:is-valid'
     'disabled:is-disabled'
@@ -42,10 +30,24 @@ Radium.TimePickerView = Radium.View.extend
     else
       value
 
-  willDestroyElement: ->
+  tearDown: Ember.on 'willDestroyElement', ->
     @$('.timepicker').timepicker('remove')
+    @$('.show-timepicker').off 'click'
 
-  didInsertElement: ->
+  setup: Ember.on 'didInsertElement', ->
+    @$('.show-timepicker').on 'click', (e) =>
+      return if @get('disabled')
+
+      unless @get('isOpen')
+        @$('.timepicker').trigger('click.timepicker')
+
+      Ember.run.next =>
+        @toggleProperty('isOpen')
+
+      e.stopPropagation()
+      e.preventDefault()
+      false
+
     element = @$('.timepicker')
     element.timepicker
       showDuration: true

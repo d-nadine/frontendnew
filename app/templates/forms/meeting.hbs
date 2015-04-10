@@ -1,18 +1,15 @@
 <form {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
-  <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary"}} {{action "expand"}}>
+  <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary :expander"}} {{action "expand" target="view"}}>
     {{#if showComments}}
       <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
-
-    {{#if showOptions}}
-      <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
-        {{#if isExpanded}}
-          Hide
-        {{else}}
-          Options
-        {{/if}}
-      </a>
-    {{/if}}
+    <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
+      {{#if isExpanded}}
+        Hide
+      {{else}}
+        Options
+      {{/if}}
+    </a>
 
     <div class="form-icon pull-left">
       <i class="ss-standard ss-calendar inline-form-icon"></i>
