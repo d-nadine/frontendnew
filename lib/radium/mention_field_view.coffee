@@ -1,4 +1,5 @@
 Radium.MentionFieldView = Ember.View.extend
+  attributeBindings: ['readonly']
   classNameBindings: ['disabled:is-disabled', ':mention-field-view']
   sourceBinding: 'controller.controllers.users'
 
@@ -29,7 +30,7 @@ Radium.MentionFieldView = Ember.View.extend
     rows: 1
     tabIndexBinding: 'parentView.tabIndex'
     placeholderBinding: 'parentView.placeholder'
-    disabledBinding: 'parentView.disabled'
+    readonlyBinding: 'parentView.readonly'
     valueBinding: 'parentView.value'
 
     keyDown: (event) ->

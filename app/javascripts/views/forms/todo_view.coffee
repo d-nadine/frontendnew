@@ -47,8 +47,9 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
   todoField: Radium.FormsTodoFieldView.extend Radium.TextFieldFocusMixin,
     Radium.FocusTextareaMixin,
 
+    attributeBindings: ['readonly']
     value: 'controller.description'
-    disabledBinding: 'controller.isPrimaryInputDisabled'
+    readonlyBinding: 'controller.isPrimaryInputDisabled'
     finishBy: Ember.computed.alias 'controller.finishBy'
     placeholder: Ember.computed 'reference.name', 'controller.finishBy', ->
       pre = if @get('referenceName') and !@get('controller.reference.token')

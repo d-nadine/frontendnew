@@ -60,7 +60,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
     Radium.FocusTextareaMixin,
 
     classNameBindings: ['isInvalid', ':meeting']
-    disabledBinding: 'controller.isPrimaryInputDisabled'
+    readonlyBinding: 'controller.isPrimaryInputDisabled'
     placeholder: 'Add meeting topic'
     valueBinding: 'controller.topic'
 

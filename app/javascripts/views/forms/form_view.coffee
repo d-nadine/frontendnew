@@ -8,10 +8,12 @@ Radium.FormView = Radium.View.extend Radium.FlashNewViewMixin,
 
     @get('controller').on('formReset', this, 'onFormReset') if @get('controller').on
 
-    @$('.expander').on 'click', (e) =>
-      return if ["A", "I"].contains e.target.tagName
-      return if e.target.tagName == "TEXTAREA" && @get('isExpanded')
-      return unless @get('isExpandable')
+    @$('.form').on 'click', (e) =>
+      tagName = e.target.tagName
+      target = $(e.target)
+      return if tagName != 'TEXTAREA' && !target.hasClass('expander') && !target.hasClass('topic')
+
+      return if tagName == 'TEXTAREA' && @get('isExpanded')
       @toggleProperty 'isExpanded'
 
       Ember.run.next =>
