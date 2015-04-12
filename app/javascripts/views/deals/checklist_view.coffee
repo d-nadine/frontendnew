@@ -32,4 +32,5 @@ Radium.ChecklistView = Ember.View.extend
     placeholder: 0
     isInvalid: Ember.computed 'targetObject.newItemWeight', 'newItemSubmitted', ->
       return false unless @get('newItemSubmitted')
-      not @get('targetObject.newItemWeight.length')
+      newItemWeight = @get('targetObject.newItemWeight') || ''
+      !newItemWeight.length || isNaN(newItemWeight) || parseInt(newItemWeight) <= 0

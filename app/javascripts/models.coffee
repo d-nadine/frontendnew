@@ -45,16 +45,27 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   addErrorHandlers: (context, reject) ->
     self = this
     @one 'becameInvalid', (result) ->
-      self.reset() if self.get('id')
       context.send 'flashError', result
+
       reject result
-      result.unloadRecord() unless result.get('id')
+
+      Ember.run.next ->
+        if self.get('id')
+          self.reset()
+        else
+          result.reset()
+          result.unloadRecord()
 
     @one 'becameError', (result) ->
       self.reset() if self.get('id')
       context.send 'flashError', 'An error has occurred and the operation could not be completed.'
       reject result
-      result.unloadRecord() unless result.get('id')
+
+      return if result.get('id')
+
+      Ember.run.next ->
+        result.reset()
+        result.unloadRecord()
 
   updateLocalBelongsTo: (key, belongsTo, notify = true) ->
     data = this.get('data')

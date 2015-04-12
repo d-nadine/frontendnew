@@ -146,19 +146,19 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
     @get('tasks').compact().forEach (task) =>
       if task.constructor isnt Radium.Meeting
-        task.deleteRecord()
+        task.unloadRecord()
       else
         if task.get('reference') isnt this
           invitation = task.get('invitations').find (invitation) => invitation.get('person') == this
           invitation?.unloadRecord()
         else
-          task.deleteRecord()
+          task.unloadRecord()
 
     @get('activities').compact().forEach (activity) ->
       activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceContact') == this || notification.get('reference.sender') == this || notification.get('email.sender') == this || notification.get('_referenceEmail.sender') == this
-        notification.deleteRecord()
+        notification.unloadRecord()
 
     @_super.apply this, arguments

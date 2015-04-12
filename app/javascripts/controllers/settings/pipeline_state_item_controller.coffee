@@ -12,24 +12,19 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
 
       return if account.get('isSaving')
 
+      weight = @get('newChecklistItem.weight') || 0
+
+      if isNaN(weight) || parseInt(weight) <= 0 || parseInt(weight) > 100
+        return @send 'flashError', 'The weight of the pipeline state must be numeric and greater than 100'
+
       props = @get('newChecklistItem').getProperties('description', 'weight', 'kind', 'date')
       checklist = @get('model.checklist').createRecord props
 
       return unless account.get('isDirty')
 
-      account.one 'didUpdate', =>
+      account.save(this).then (result) =>
         @send 'resetNewItem'
         @send 'flashSuccess', 'Updated'
-
-      account.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        result.reset()
-
-      account.one 'becameError', (result) =>
-        @send 'flashError', 'An error occurred and the action can not be completed'
-        result.reset()
-
-      @get('store').commit()
 
     deleteChecklistItem: (checklistItem) ->
       checklistItem.deleteRecord()

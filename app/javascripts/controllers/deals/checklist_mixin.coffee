@@ -14,10 +14,13 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
     createNewItem: ->
       @set 'newItemSubmitted', true
       description = @get('newItemDescription')
-      weight = parseInt(@get('newItemWeight'))
+      weight = parseInt(@get('newItemWeight')) || 0
       finished = @get('newItemFinished')
       date = @get('newItemDate') || 0
       kind = @get('newItemKind') || 'todo'
+
+      if isNaN(weight) || weight <= 0
+        return @send 'flashError', "The checklist item weight must be greater than 0."
 
       return unless @get('isChecklistItemValid')
 
@@ -63,7 +66,9 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
   ])
 
   isChecklistItemValid: Ember.computed 'newItemDescription', 'newItemWeight', 'newItemSubmitted', ->
-    !Ember.isEmpty(@get('newItemDescription')) && !Ember.isEmpty(@get('newItemWeight'))
+    newItemWeight = @get('newItemWeight')
+
+    !Ember.isEmpty(@get('newItemDescription')) && !Ember.isEmpty(newItemWeight) || newItemWeight != 0
 
   newItemSubmitted: false
 
