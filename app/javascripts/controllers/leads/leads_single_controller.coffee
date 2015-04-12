@@ -9,14 +9,10 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       @set 'form', null
       @set 'model', model
 
-      if @get('contactCustomFields.length')
-        customFieldMap = Ember.Map.create()
+      contactCustomFields = @get('contactCustomFields')
 
-        @get('contactCustomFields').forEach (field) ->
-          if contactsField = model.get('customFieldValues').find((f) -> f.get('customField') == field)
-            value = contactsField.get('value')
-
-          customFieldMap.set field, Ember.Object.create(field: field, value: value)
+      if contactCustomFields.get('length')
+        customFieldMap = model.getCustomFieldMap(contactCustomFields)
 
         model.set('customFieldMap', customFieldMap)
 

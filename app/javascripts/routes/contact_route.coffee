@@ -49,22 +49,28 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
     deleteFromEditor: ->
       @controllerFor('contact').trigger 'formChanged', 'todo'
 
+  afterModel: (model, transition) ->
+    controller = @controllerFor 'contact'
+
+    new Ember.RSVP.Promise (resolve, reject) ->
+      Radium.CustomField.find({}).then( (fields) ->
+        controller.set 'customFields', fields
+
+        customFieldMap = model.getCustomFieldMap(fields)
+
+        model.set 'customFieldMap', customFieldMap
+
+        resolve(model)
+      ).catch (error) ->
+        Ember.Logger.error(error.stack)
+        reject(model)
+
+
   renderTemplate: ->
     @render()
     @render 'contact/sidebar',
       into: 'contact'
       outlet: 'sidebar'
-
-  setupController: (controller, model) ->
-    ['todo'].forEach (form) ->
-      if form = controller.get("formBox.#{form}Form")
-        form?.reset()
-
-    controller.set('model', model)
-
-    if form = controller.get('form')
-      Ember.run.next ->
-        controller.trigger 'formChanged', form
 
   deactivate: ->
     @controller.set 'form', null

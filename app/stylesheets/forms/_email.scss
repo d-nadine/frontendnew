@@ -217,8 +217,9 @@
     }
   }
 
-  .subject {
+  .field.control-box.control-box-block-level.recipients.cc .subject {
     width: 80%;
+    border: none;
   }
 
   .autocomplete.is-invalid{

@@ -128,6 +128,18 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   track: ->
     @set('isPublic', true)
 
+  getCustomFieldMap: (fields) ->
+    customFieldMap = Ember.Map.create()
+
+
+    fields.forEach (field) =>
+      if contactsField = @get('customFieldValues').find((f) -> f.get('customField') == field)
+        value = contactsField.get('value')
+
+      customFieldMap.set field, Ember.Object.create(field: field, value: value)
+
+    customFieldMap
+
   clearRelationships: ->
     @get('deals').compact().forEach (deal) ->
       deal.unloadRecord()

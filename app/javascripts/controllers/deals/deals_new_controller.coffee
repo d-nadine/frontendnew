@@ -8,32 +8,33 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
       @set 'isSubmitted', true
       return unless @get('isValid')
 
+      @set 'isSaving', true
+
       deal = @get('model').create()
 
-      deal.one 'didCreate', =>
+      deal.get('checklist').setEach('weight', 0)
+
+      self = this
+      deal.save(this).then((result) =>
         Ember.run.next =>
           @set 'isSaving', false
           @transitionToRoute 'deal', deal
+      ).catch (result) =>
+        debugger
 
-      deal.one 'becameInvalid', (result) =>
         @set 'isSaving', false
-        error = deal.get('errors.error')
 
-        if new RegExp('\\b' + @get('plan') + '\\b').test(error)
-          @set 'error', error
+        if result.get('errors')
+          error = deal.get('errors.error')
+
+          if new RegExp('\\b' + @get('plan') + '\\b').test(error)
+            self.set 'error', error
+          else
+            self.send 'flashError', deal
         else
-          @send 'flashError', deal
+          self.send 'flashError', 'An error has occurred and the deal could not be created.'
 
         deal.unloadRecord()
-
-      deal.one 'becameError', (result)  ->
-        @set 'isSaving', false
-        @send 'flashError', 'An error has occurred and the deal could not be created.'
-        deal.unloadRecord()
-
-      @set 'isSaving', true
-
-      @get('store').commit()
 
     saveAsDraft: ->
       @set 'status', 'unpublished'

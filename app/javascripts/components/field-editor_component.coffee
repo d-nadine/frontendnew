@@ -97,8 +97,6 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     target = $(e.target)
 
-    #return @send('edit') if target.hasClass('ss-write')
-
     return true if ["BUTTON", "A"].contains target.get(0).tagName
 
     return true if $(target).hasClass('btn-remove-field')

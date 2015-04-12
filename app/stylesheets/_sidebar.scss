@@ -26,6 +26,36 @@
     border-bottom: 0px;
   }
 
+  .sidebar-panel-content.custom-field {
+    padding-bottom: 30px;
+
+    .custom-field-name {
+      float: left;
+    }
+
+    .custom-field-value {
+      text-align: right;
+      span {
+        margin-right: 10px;
+      }
+      cursor: pointer;
+    }
+
+    textarea, input[type=text]:not(.date-picker) {
+      width: 100%;
+    }
+
+    .date-picker {
+      border: 1px solid #cccccc;
+      height: 28px;
+      border-radius: 4px;
+    }
+  }
+
+  .sidebar-contact-company-view .combobox.is-async {
+    float: left;
+  }
+
   .sidebar-panel:nth-of-type(2) .sidebar-panel-content {
     padding-top: 10px;
   }

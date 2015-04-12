@@ -84,10 +84,14 @@
     </div>
   </div>
 
+
   {{render 'sidebar/about' model}}
 
-
   {{partial 'shared/attachments'}}
+
+  {{#each field in customFields }}
+    {{customfield-editor field=field resource=model parent=this}}
+  {{/each}}
 
   {{render 'sidebar/assigned_to' model}}
 

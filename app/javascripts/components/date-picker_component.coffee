@@ -5,15 +5,16 @@ Radium.DatePickerComponent = Ember.Component.extend
 
       datePicker = @get('datePicker')
 
-      unless @get('pickerShown')
-        datePicker.show()
+      pickerShown = $('.datepicker-days').is(':visible')
 
-        Ember.run.next  ->
-          view.$().get(0).select()
-      else
-        datePicker.hide()
+      Ember.run.next ->
+        unless pickerShown
+          datePicker.show()
 
-      @toggleProperty 'pickerShown'
+          Ember.run.next  ->
+            view.$().get(0)?.select()
+        else
+          datePicker.hide()
 
       false
 
@@ -57,6 +58,7 @@ Radium.DatePickerComponent = Ember.Component.extend
     valueBinding: 'parentView.text'
     disabledBinding: 'targetObject.disabled'
     date: Ember.computed.alias 'targetObject.date'
+    classNameBindings: [":date-picker"]
 
     init: ->
       @_super.apply(this, arguments)
@@ -109,17 +111,15 @@ Radium.DatePickerComponent = Ember.Component.extend
       return if evt.dontSubmit
       return unless target.get('submitForm')
 
-      Ember.run.next ->
-        target.sendAction 'submitForm'
+      Ember.run.next =>
+        target.sendAction 'submitForm', @get('date')
 
     hideDatePicker: ->
       return if @isDestroyed
-      @set('pickerShown', true)
 
     showDatePicker: ->
       return if @isDestroyed
 
-      @set('pickerShown', false)
 
     willDestroyElement: ->
       @_super.apply this, arguments
@@ -140,9 +140,15 @@ Radium.DatePickerComponent = Ember.Component.extend
       return unless @get('allowedKeyCodes').contains keyCode
 
       clearDate = =>
-        @set 'targetObject.date', null
+        targetObject = @get('targetObject')
+        targetObject.set 'date', null
         @$().datepicker('setValue', null)
-        @$().data('datepicker').hide()
+        datepicker = @$().data('datepicker')
+        datepicker.hide()
+        datepicker.viewDate = datepicker.date = new Date()
+
+        Ember.run.next ->
+          targetObject.sendAction("dateCleared")
 
       changeDate = =>
         @$().trigger

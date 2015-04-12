@@ -3,9 +3,7 @@ Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourceP
   customField = Ember.Handlebars.get(this, customFieldPath, options)
   resource = Ember.Handlebars.get(this, resourcePath, options)
 
-  component = switch customField.get('name')
-                when 'text' then 'customfield-input'
-                else 'customfield-input'
+  component = "customfield-#{customField.get('type')}input"
 
   helper = Ember.Handlebars.resolveHelper(options.data.view.container, component)
 
@@ -19,5 +17,6 @@ Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourceP
   field = customFieldMap.get(customField)
 
   options.hash['customFieldValue'] = field
+  options.hash['currencySymbol'] = @get('targetObject.currencySymbol')
 
   helper.call this, options

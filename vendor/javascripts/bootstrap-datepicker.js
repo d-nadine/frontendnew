@@ -142,7 +142,7 @@
 			if (typeof newDate === 'string') {
 				this.date = DPGlobal.parseDate(newDate, this.format);
 			} else {
-				this.date = new Date(newDate);
+				this.date = newDate ? new Date(newDate) : new Date();
 			}
 			this.set();
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);

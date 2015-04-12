@@ -20,21 +20,11 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
 
       name = deal.get('name')
 
-      deal.deleteRecord()
+      deal.delete(this).then (result) =>
+        @send 'closeModal'
+        @transitionTo 'pipeline.index'
 
-      deal.one 'didDelete', =>
         @send 'flashSuccess', "Deal #{name} has been deleted"
-
-      deal.one 'becameInvalid', (result) ->
-        result.reset()
-
-      deal.one 'becameError', (result) ->
-        result.reset()
-
-      @send 'closeModal'
-      @transitionTo 'pipeline.index'
-
-      @get('store').commit()
 
     showChecklist: (deal) ->
       @controllerFor('dealChecklist').set('model', deal)
@@ -57,4 +47,7 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
       if form = controller.get("formBox.#{form}Form")
         form?.reset()
 
-    controller.set('model', model) 
+    controller.set('model', model)
+
+  deactivate: ->
+    @controller.get('model').reset()

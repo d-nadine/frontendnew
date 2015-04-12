@@ -32,7 +32,7 @@ Radium.LeadsNewComponent = Ember.Component.extend Radium.UserComboboxProps,
       @$('.contact-name .name-field')
 
   initialise: ->
-    @$('.contact-name input[type=text]').focus()
+    @$('.contact-name input[type=text]')?.focus()
 
   modelDidChange: Ember.observer 'model', ->
     Ember.run.next =>

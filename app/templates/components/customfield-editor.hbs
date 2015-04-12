@@ -1,0 +1,16 @@
+{{#unless isEditing}}
+  <div class="custom-field-name">
+    <strong>{{field.name}}</strong>
+  </div>
+  <div class="custom-field-value">
+    <span>{{displayCustomFieldValue customFieldValue}}</span>
+    <i class="ss-standard ss-write pull-right"></i>
+  </div>
+{{else}}
+  <div class="control-group">
+    <label class="control-label">{{field.name}}</label>
+    <div class="controls">
+      {{renderCustomField field resource}}
+    </div>
+  </div>
+{{/unless}}

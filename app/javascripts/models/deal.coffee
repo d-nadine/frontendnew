@@ -76,10 +76,10 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
       task.deleteRecord()
 
     @get('activities').compact().forEach (activity) ->
-      activity.deleteRecord()
+      activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) ->
-      if @get('_referenceDeal') == this
-        notification.deleteRecord()
+      if notification.get('_referenceDeal') == this
+        notification.unloadRecord()
 
     @_super.apply this, arguments

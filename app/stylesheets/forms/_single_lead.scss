@@ -169,7 +169,7 @@
 
 .form .extra .item input {
   float: left;
-  height: 35px;
+  height: 33px;
   margin-bottom: 0;
 }
 
@@ -408,6 +408,10 @@
   .uneditable-input.field,
   .field {
     border: none;
+  }
+
+  .control-box.datepicker-control-box {
+    border: 1px solid #cccccc;
   }
 }
 
