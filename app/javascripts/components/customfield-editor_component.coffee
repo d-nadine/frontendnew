@@ -48,6 +48,8 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
   isSaving: false
 
   click: (e) ->
+    return if ['A'].contains e.target.tagName
+
     return if @get('isEditing')
 
     @edit()

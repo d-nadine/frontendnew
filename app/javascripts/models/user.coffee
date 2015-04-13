@@ -60,17 +60,17 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   clearRelationships: ->
     @get('tasks').compact().forEach (task) =>
       if task.constructor isnt Radium.Meeting
-        task.deleteRecord()
+        task.unloadRecord()
       else
         if task.get('organizer') isnt this
           invitation = task.get('invitations').find (invitation) => invitation.get('person') == this
           invitation.unloadRecord()
         else
-          task.deleteRecord()
+          task.unloadRecord()
 
     @get('activities').compact().forEach (activity) ->
-      activity.deleteRecord()
+      activity.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceUser') == this
-        notification.deleteRecord()
+        notification.unloadRecord()

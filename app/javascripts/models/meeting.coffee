@@ -75,4 +75,4 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
 
     Radium.Notification.all().compact().forEach (notification) ->
       if notification.get('_referenceMeeting') == this
-        notification.deleteRecord()
+        notification.unloadRecord()

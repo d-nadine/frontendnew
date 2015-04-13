@@ -15,13 +15,11 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
     deleteRecord: ->
       contact = @modelFor 'contact'
 
-      contact.deleteRecord()
-
       name = contact.get('displayName')
 
-      contact.one 'didDelete', =>
-        @send 'closeModal'
+      @send 'closeModal'
 
+      contact.delete(this).then (result) =>
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
         peopleDataset = @controllerFor('peopleIndex').get('model')
@@ -32,14 +30,6 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
 
         addressbookController = @controllerFor('addressbook')
         addressbookController.send('updateTotals') if addressbookController
-
-      contact.one 'becameInvalid', (result) ->
-        result.reset()
-
-      contact.one 'becameError', (result) ->
-        result.reset()
-
-      @get('store').commit()
 
     saveEmail: (email) ->
       @_super email, dontTransition: true

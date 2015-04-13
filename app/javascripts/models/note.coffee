@@ -33,4 +33,4 @@ Radium.Note = Radium.Model.extend Radium.CommentsMixin,
   clearRelationships: ->
     Radium.Notification.all().compact().forEach (notification) =>
       if notification.get('_referenceNote') == this
-        notification.deleteRecord()
+        notification.unloadRecord()

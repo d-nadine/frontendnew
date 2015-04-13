@@ -48,14 +48,14 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   clearRelationships: ->
     @get('activities').compact().forEach (activity) ->
-      activity.deleteRecord()
+      activity.unloadRecord()
 
     @get('tasks').compact().forEach (task) ->
-      task.deleteRecord()
+      task.unloadRecord()
 
     @get('todos').compact().forEach (todo) ->
       todo.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) ->
       if notification.get('_referenceTodo') == this
-        notification.deleteRecord()
+        notification.unloadRecord()

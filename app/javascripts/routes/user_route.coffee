@@ -15,34 +15,17 @@ Radium.UserRoute = Radium.Route.extend
 
       name = user.get('name')
 
-      user.deleteRecord()
-
-      user.one 'didDelete', =>
+      user.save(this).then =>
         @send 'flashSuccess', "User #{name} has been deleted"
-
-      user.one 'becameInvalid', (result) ->
-        result.reset()
-
-      user.one 'becameError', (result) ->
-        result.reset()
+        @transitionTo 'settings.company'
 
       @send 'closeModal'
-      @transitionTo 'settings.company'
-
-      @get('store').commit()
 
   renderTemplate: ->
     @render()
     @render 'user/sidebar',
       into: 'user'
       outlet: 'sidebar'
-
-  setupController: (controller, model) ->
-    ['todo', 'meeting'].forEach (form) ->
-      if form = controller.get("formBox.#{form}Form")
-        form?.reset()
-
-    controller.set('model', model)
 
   deactivate: ->
     model = @controller.get('model')
