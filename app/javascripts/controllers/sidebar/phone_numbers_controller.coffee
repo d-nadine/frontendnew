@@ -14,6 +14,5 @@ Radium.SidebarPhoneNumbersController = Radium.MultipleBaseController.extend
   isValid: true
   recordArray: 'phoneNumbers'
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.PhoneNumbersForm.create()
-  ).property()
