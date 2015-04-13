@@ -3,7 +3,12 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
   actions:
     changeAddress: (address) ->
       @$('#autocomplete').val('')
-      @set 'current', address
+      Ember.run.next =>
+        @get('addresses').setEach('isCurrent', false)
+        address.set 'isCurrent', true
+        @set 'current', address
+
+      false
 
   autocomplete: null
 
@@ -12,7 +17,12 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     @get('parent').on 'modelReset', this, 'onModelReset'
     @get('parent').on 'modelChanged', this, 'onModelChanged'
 
-    @onModelReset()
+    model = @get('parent.model')
+
+    if model.get('isNew')
+      @onModelReset()
+    else
+      @onModelChanged(model)
 
     @$('#autocomplete').on 'focus', @showAddressFields.bind(this)
 
@@ -38,10 +48,11 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     return if @isDestroying || @isDestroyed
 
     addresses = model.get('addresses')
-    defaultAddresses = @defaultAddresses()
+    defaultAddresses = @defaultAddresses(@get('hasEmail'))
 
     unless addresses.get('length')
-      return @set('addresses', defaultAddresses)
+       @set('addresses', defaultAddresses)
+       return @set('current', @get('addresses').findProperty('isPrimary'))
 
     @showAddressFields()
 
@@ -51,7 +62,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
       unless addresses.find((a) -> a.get('name')?.toLowerCase() == "work")
         model.get('addresses.firstObject').set('name', 'work')
 
-      @sendAction 'saveModel', true
+      @sendAction('saveModel', true) if @get('saveModel')
 
     hashes = addresses.map (a) ->
       Ember.merge(Ember.Object.create(a.getAddressHash()), record: a)

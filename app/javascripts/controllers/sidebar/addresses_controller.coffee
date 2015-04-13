@@ -12,6 +12,7 @@ Radium.AddressesForm = Radium.Form.extend
     @set 'addresses', Ember.A()
 
 Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.MultipleAddressBehaviour,
+  Ember.Evented,
   actions:
     commit: ->
       model = @get('content')
@@ -50,7 +51,6 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.
         hash.set 'record', item
         formArray.pushObject hash
 
-
   isValid: true
   recordArray: 'addresses'
 
@@ -59,3 +59,6 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.
 
   form: Ember.computed ->
     Radium.AddressesForm.create()
+
+  hasEmail: Ember.computed 'parentController', ->
+    @get('parentController') instanceof Radium.CompanyController

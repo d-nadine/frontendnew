@@ -1,5 +1,10 @@
+<div id="addressField">
+{{#if hasEmail}}
+  {{input value=current.email class="single route" type="text" placeholder="email address"}}<br/>
+{{/if}}
+</div>
 <div id="locationField">
-  <input class="single" id="autocomplete" placeholder="Address" type="text" autocomplete="off" class="">
+  <input class="single address-autocomplete" id="autocomplete" placeholder="Address" type="text" autocomplete="off" class="">
 </div>
 <div id="addressField">
   {{input value=current.street class="single route" type="text" placeholder="Street"}}<br/>

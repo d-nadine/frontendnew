@@ -33,25 +33,27 @@ Radium.InlineEditorView = Ember.View.extend
   change: (evt) ->
     @$().trigger 'click' if evt.target.tagName == 'SELECT'
 
+  stopPropagation: (evt) ->
+    evt.stopPropagation();
+    evt.preventDefault();
+    return false;
+
   click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
 
     stopPropagation = ->
-      evt.stopPropagation();
-      evt.prevtDefault();
-      return false;
 
     if evt.target?.type == 'file'
-      return stopPropagation()
+      return @stopPropagation(evt)
 
     target = $(evt.target)
 
     if target.hasClass('sidebar-phone-numbers-view') || target.hasClass('sidebar-email-addresses-view')
-      return stopPropagation()
+      return @stopPropagation(evt)
 
     if target.hasClass('autocomplete-textbox')
-      return stopPropagation()
+      return @stopPropagation(evt)
 
     tagName = evt.target.tagName.toLowerCase()
 
@@ -78,6 +80,9 @@ Radium.InlineEditorView = Ember.View.extend
     , 200
 
   keyDown: (evt) ->
+    if $(evt.target).hasClass("address-autocomplete")
+      return
+
     return unless evt.target.tagName.toLowerCase() == 'input'
 
     return if [13, 9].indexOf(evt.keyCode) == -1
