@@ -33,8 +33,6 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
     return "(no subject)"
 
-  notifications: DS.hasMany('Radium.Notification', inverse: '_referenceEmail')
-
   deal: DS.belongsTo('Radium.Deal')
   repliedTo: DS.belongsTo('Radium.Email', inverse: null)
 
