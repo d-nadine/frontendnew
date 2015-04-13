@@ -29,7 +29,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     return @initializeGoogleGeo()
 
   showAddressFields: ->
-    return unless addressField = @$('#addressField')
+    return unless addressField = @$('.address-body')
 
     return unless addressField.length
 
