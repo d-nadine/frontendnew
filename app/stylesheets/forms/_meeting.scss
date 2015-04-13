@@ -195,7 +195,9 @@
   }
 }
 
-.meeting-form-invite {
+.meeting-form-container .meeting-form-invite {
+  display: block !IMPORTANT;
+
   .btn {
     line-height: 20px;
   }

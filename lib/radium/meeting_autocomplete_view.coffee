@@ -20,4 +20,4 @@ Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
 
   filterResults: (item) ->
     item.get('email').toLowerCase() != @get('parentView.currentUserEmail').toLowerCase() &&
-    !@get('source').map((selection) => selection.get('email')).contains(item.get('email'))
+    !@get('source').map((selection) -> selection.get('email')).contains(item.get('email'))
