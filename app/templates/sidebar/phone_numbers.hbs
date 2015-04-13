@@ -2,7 +2,11 @@
   <dt><i class="ss-standard ss-phone muted"></i></dt>
   <dd>
     {{#if isEditing}}
-      {{render 'multiple/phone_number' form.phoneNumbers}}
+      {{#each phoneNumber in form.phoneNumbers}}
+        {{#multiple-control item=phoneNumber items=form.phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing"}}
+          {{phone-input type="text" value=value}}
+        {{/multiple-control}}
+      {{/each}}
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if primaryPhone.value}}

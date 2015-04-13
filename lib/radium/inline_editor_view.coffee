@@ -37,20 +37,25 @@ Radium.InlineEditorView = Ember.View.extend
     return unless @get('activateOnClick')
     return if @get('disabled')
 
+    stopPropagation = ->
+      evt.stopPropagation();
+      evt.prevtDefault();
+      return false;
+
     if evt.target?.type == 'file'
-      evt.stopPropagation()
-      return
+      return stopPropagation()
 
     target = $(evt.target)
 
+    if target.hasClass('sidebar-phone-numbers-view') || target.hasClass('sidebar-email-addresses-view')
+      return stopPropagation()
+
     if target.hasClass('autocomplete-textbox')
-      event.stopPropagation()
-      event.preventDefault()
-      return false
+      return stopPropagation()
 
     tagName = evt.target.tagName.toLowerCase()
 
-    if (['input', 'button',  'select', 'i', 'a'].indexOf(tagName) == -1) || $(evt.target).hasClass('resource-name')
+    if (!['input', 'button',  'select', 'i', 'a'].contains(tagName)) || $(evt.target).hasClass('resource-name')
       evt.stopPropagation()
 
       @send 'toggleEditor'
@@ -60,6 +65,7 @@ Radium.InlineEditorView = Ember.View.extend
 
     evt.preventDefault()
     evt.stopPropagation()
+    false
 
   highlightSelection: ->
     textField = @$('input[type=text],textarea').filter(':first')

@@ -14,6 +14,7 @@ Radium.MultipleItemController = Radium.ObjectController.extend Radium.FormArrayB
 
     stopEditing: ->
       @get('parentController.parentController').send 'stopEditing'
+
   parent: Ember.computed.alias 'parentController'
   labels: Ember.computed.alias 'parent.labels'
   leader: Ember.computed.alias 'parent.leader'

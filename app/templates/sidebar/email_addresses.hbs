@@ -3,7 +3,11 @@
   <dd>
     {{#if isEditing}}
       <div>
-        {{render 'multiple/email_address' form.emailAddresses}}
+        {{#each email in form.emailAddresses}}
+          {{#multiple-control item=email items=form.emailAddresses model=model relationship="emailAddresses" saveModel="stopEditing"}}
+            {{input type="text" value=value}}
+          {{/multiple-control}}
+        {{/each}}
       </div>
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>

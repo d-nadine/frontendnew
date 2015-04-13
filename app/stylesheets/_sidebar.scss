@@ -414,3 +414,23 @@
     top: 7px;
   }
 }
+
+.sidebar .inline-editor-open .item {
+  margin-top: -5px;
+
+  .description select {
+    position: relative;
+    left: -23px;
+  }
+  .extra-field, .extra-delete, .primary-check, input[type=radio] {
+    float: right;
+  }
+
+  .extra-delete {
+    margin-right: 15px;
+  }
+
+  .primary-check {
+    margin-right: 5px;
+  }
+}
