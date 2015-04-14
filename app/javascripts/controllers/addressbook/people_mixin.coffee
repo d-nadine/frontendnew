@@ -75,69 +75,73 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
       job.save(this).then( (result) =>
         @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
-        @send 'updateLocalRecords', job, detail
+        Ember.run.once this, 'updateLocalRecords', job, detail
         @send 'updateTotals'
         @get('currentUser').reload()
       ).catch =>
         @set 'working', false
 
-    updateLocalRecords: (job, detail) ->
-      ids = @get('checkedContent').mapProperty 'id'
-      action = job.get('action')
-      dataset = @get('model')
+  updateLocalRecords: (job, detail) ->
+    ids = @get('checkedContent').mapProperty 'id'
+    action = job.get('action')
+    dataset = @get('model')
 
-      for id in ids by -1
-        model = detail.modelType.all().find (c) -> c.get('id') + '' == id
+    for id in ids by -1
+      model = detail.modelType.all().find (c) -> c.get('id') + '' == id
 
-        if model
-          if action == "delete"
-            @send 'localDelete', model, dataset
-          else
-            localAction = "local#{action.capitalize()}"
+      if model
+        if action == "delete"
+          local = "localDelete"
+          args = [model, dataset]
+        else
+          local = "local#{action.capitalize()}"
+          args = [model, job]
 
-            @send localAction, model, job
+        this[local].apply this, args
 
-      @get('controllers.addressbook').send 'updateTotals'
+    @get('controllers.addressbook').send 'updateTotals'
 
-    localDelete: (model, dataset) ->
-      model.unloadRecord()
-      dataset.removeObject model
+  localDelete: (model, dataset) ->
+    dataset.removeObject model
+    model.unloadRecord()
 
-    localAssign: (model, job) ->
-      model.updateLocalBelongsTo 'user', job.get('assignedTo')
+  localAssign: (model, job) ->
+    model.updateLocalBelongsTo 'user', job.get('assignedTo')
 
-    localStatus: (model, job) ->
-      model.updateLocalBelongsTo 'contactStatus', job.get('status')
+  localStatus: (model, job) ->
+    model.updateLocalBelongsTo 'contactStatus', job.get('status')
 
-    localTag: (model, job) ->
-      data = model.get('_data')
-      store = @get('store')
-      serializer = @get('store._adapter.serializer')
-      loader = DS.loaderFor(store)
+  localTag: (model, job) ->
+    data = model.get('_data')
+    store = @get('store')
+    serializer = @get('store._adapter.serializer')
+    loader = DS.loaderFor(store)
 
-      references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
+    references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
 
-      newTagId = job.get('newTags.firstObject')
+    newTagId = job.get('newTags.firstObject')
 
-      tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+    Ember.assert "No newTagId found to update localTag", newTagId
 
-      unless references.any((tag) -> tag.id == newTagId)
-        references.push id: newTagId, type: Radium.Tag
+    tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
 
-      tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
+    unless references.any((tag) -> tag.id == newTagId)
+      references.push id: newTagId, type: Radium.Tag
 
-      tagName.parent = model.get('_reference')
-      data.tagNames.push tagName
+    tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
 
-      references = model._convertTuplesToReferences(references)
-      data['tags'] = references
+    tagName.parent = model.get('_reference')
+    data.tagNames.push tagName
 
-      model.set('_data', data)
+    references = model._convertTuplesToReferences(references)
+    data['tags'] = references
 
-      model.suspendRelationshipObservers ->
-        model.notifyPropertyChange 'data'
+    model.set('_data', data)
 
-      model.updateRecordArrays()
+    model.suspendRelationshipObservers ->
+      model.notifyPropertyChange 'data'
+
+    model.updateRecordArrays()
 
   users: Ember.computed.oneWay 'controllers.users'
 

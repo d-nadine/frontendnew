@@ -23,22 +23,14 @@ Radium.MessagesRoute = Radium.Route.extend
 
       email.set 'isSending', true
 
-      email.one 'didUpdate', (result) =>
+      email.save(this).then((result) =>
         Ember.run.next =>
           email.set 'isSending', false
           messagesController = @controllerFor('messages')
           messagesController.get('model').removeObject(result)
           @transitionTo 'emails.sent', email
-
-      email.one 'becameInvalid', =>
+      ).catch (error) ->
         email.set 'isSending', false
-        @send 'flashError', email
-
-      email.one 'becameError', =>
-        email.set 'isSending', false
-        @send 'flashError', 'An error has occurred and the email has not been sent'
-
-      @store.commit()
 
     toggleFolders: ->
       @toggleProperty 'controller.drawerOpen'

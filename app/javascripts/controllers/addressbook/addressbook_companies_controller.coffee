@@ -22,6 +22,11 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
       @send "executeActions", "delete", detail
       false
 
+    updateTotals: ->
+      @get('addressBookController').send 'updateTotals'
+
   needs: ['addressbook', 'users', 'tags']
+
+  addressBookController: Ember.computed.oneWay 'controllers.addressbook'
 
   public: true

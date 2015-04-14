@@ -81,6 +81,8 @@ Radium.InlineEditorView = Ember.View.extend
 
   keyDown: (evt) ->
     if $(evt.target).hasClass("address-autocomplete")
+      if evt.keyCode == 13
+        return @stopPropagation(evt)
       return
 
     return unless evt.target.tagName.toLowerCase() == 'input'

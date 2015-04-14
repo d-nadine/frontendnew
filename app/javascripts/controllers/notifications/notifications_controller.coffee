@@ -14,15 +14,14 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
 
       @send 'toggleNotifications'
 
-      notificationPoller = Radium.get('notificationPoller')
-      notificationPoller.stop()
+      @stop()
 
       self = this
 
       complete = ->
         Ember.run.next ->
           self.set('isDeleting', false)
-          notificationPoller.start()
+          self.start()
 
       setTimeout ->
         Radium.Notification.all().compact().forEach (notification) ->
@@ -34,15 +33,9 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
       job = Radium.DestroyNotificationsJob.createRecord
         user: currentUser
 
-      job.one 'didCreate', =>
+      job.save(this).then =>
         @send 'flashSuccess', "All Notifications Deleted"
         complete()
-
-      job.one 'becameError', =>
-        @send 'flashError', "An error has occurred trying to delete all notifications."
-        complete()
-
-      @get('store').commit()
 
     showEmail: (email) ->
       @get('controllers.messagesSidebar').send 'reset'

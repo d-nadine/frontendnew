@@ -36,14 +36,9 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       form.setFilesOnModel(job)
 
-      job.one "didCreate", =>
+      job.save(this).then =>
         @send "flashSuccess", "The bulk email job has been created."
         @transitionTo "people.index", filter, queryParams: retParams
-
-      job.one "becameError", =>
-        @send "flashError", "An error has occurred and the bulk email job could not be created."
-
-      @get('store').commit()
 
     saveEmail: (form, options) ->
       options = options || {}

@@ -31,11 +31,6 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
       @send "executeActions", "delete", detail
       false
 
-    localTrack: (contact, dataset) ->
-      contact.set 'isChecked', false
-      Ember.run.next =>
-        @get('model').removeObject contact
-
     track: (contact) ->
       track = Radium.TrackedContact.createRecord
                 contact: contact
@@ -64,6 +59,11 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
         dataset.removeObject contact
 
         @get('addressbook').send 'updateTotals'
+
+  localTrack: (contact, dataset) ->
+    contact.set 'isChecked', false
+    Ember.run.next =>
+      @get('model').removeObject contact
 
   searchText: "",
   needs: ['addressbook', 'peopleIndex']
