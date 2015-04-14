@@ -1,4 +1,4 @@
-$navbar: #313131;
+$navbar: #4d5e6d;
 
 #topbar {
   position: fixed !important;
@@ -70,7 +70,7 @@ $navbar: #313131;
   a {
     font-size: 16px;
     line-height: 36px;
-    color: #787878;
+    color: #f3f3f3;
 
     @include breakpoint(desktop) {
       padding: {
