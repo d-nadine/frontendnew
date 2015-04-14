@@ -1,4 +1,4 @@
-Radium.EmailsNewController = Radium.Controller.extend
+Radium.EmailsNewController = Radium.Controller.extend Ember.Evented,
   newEmail: Radium.EmailForm.create()
 
   queryParams: ['bulkEmail']

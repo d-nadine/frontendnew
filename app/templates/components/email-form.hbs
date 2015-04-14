@@ -1,0 +1,125 @@
+<div id="myModal" class="email-form single-mode in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="email-form-header">
+    <h3>Compose</h3>
+    <a href="#" class="info">
+      <i class="ss-standard ss-help"></i>
+    </a>
+    <div class="type-toggle">
+      <a href="#" class="to active">Single</a>
+      <span>|</span>
+      <a href="#" class="">Mail Merge</a>
+    </div>
+  </div>
+  <div class="email-form-body">
+    <div class="addresses">
+      <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+        <span class="toggles pull-right">
+          {{#unless showCc}}
+            <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
+          {{/unless}}
+          {{#unless showBcc}}
+            <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
+          {{/unless}}
+        </span>
+        <label>To:</label>
+        {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+      </div>
+
+      {{#if showCc }}
+        <div class="field control-box control-box-block-level recipients cc">
+          <label>CC</label>
+          {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+        </div>
+      {{/if}}
+
+      {{#if showBcc }}
+        <div class="field control-box control-box-block-level recipients bcc">
+          <label>BCC</label>
+          {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="message">
+      <div class="subject-wrap">
+        <input type="text" placeholder="Subject:" class="subject tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
+      </div>
+      <div class="more-options">
+        <a href="#" class="format" tabindex="-1">
+          <i class="ss-standard ss-font"></i>
+        </a>
+        <a href="#" class="attach" data-placement="left" tabindex="-1">
+          <i class="ss-standard ss-attach"></i>
+        </a>
+        <div class="btn-group">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle" tabindex="-1">
+            <i class="ss-standard ss-navigatedown"></i>
+          </a>
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+            <li>
+              <a href="#">Save as Template</a>
+            </li>
+            <li>
+              <a href="#">Edit Templates</a>
+            </li>
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Insert Template</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Introduction</a>
+                </li>
+                <li>
+                  <a href="#">Login help</a>
+                </li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#" class="field" data-type="name">Insert Name</a>
+            </li>
+            <li>
+              <a href="#" class="field" data-type="company">Insert Company</a></li>
+            <li><a href="#" class="field" data-type="signature">Insert Signature</a></li>
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Insert Fields</a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="field" data-type="title">Title</a></li>
+                <li><a href="#" class="field" data-type="website">Website</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="textbox-wrap">
+        <div class="textbox" id="editable" contenteditable="true">
+          <div class="body-wrap">
+            <div class="body">Hi {name}</div>
+            <br><br><br><br><br><br><br><br>
+            <div class="signature">
+              Ryan Grush<br><br>
+              VP of Sales<br>
+              985-123-4567
+            </div>
+          </div>
+          <div class="prompt">
+            <a href="http://www.google.com" class="add-signature">Add a Signature</a>
+            <a href="#" class="cancel"><i class="ss-standard ss-delete"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="wysiwyg">
+        <img src="img/wysiwyg-left.png" alt="">
+        <img src="img/wysiwyg-right.png" alt="">
+      </div>
+      <div class="attachment">
+        <div class="item">
+          <i class="ss-standard ss-attach"></i>
+          <span>Sales_report.pdf</span>
+          <a href="#" class="delete"><i class="ss-standard ss-delete"></i></a>
+          <div class="progress progress-striped">
+            <div class="bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

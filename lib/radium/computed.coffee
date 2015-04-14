@@ -47,14 +47,14 @@ Radium.computed.newForm = (form, properties = {}) ->
 Radium.computed.aggregate = ->
   properties = a_slice.call arguments
 
-  args = properties.map (prop) => "#{prop}"
+  args = properties.map (prop) -> "#{prop}"
 
   options =
     initialValue: []
     addedItem: (array, item, changeMeta, instanceMeta) ->
       return array if array.contains item
 
-      observer = =>
+      observer = ->
         return unless item.get('isLoaded')
 
         item.removeObserver 'isLoaded', observer
@@ -83,7 +83,7 @@ Radium.computed.aggregate = ->
 Radium.computed.tasks = ->
   properties = a_slice.call arguments
 
-  args = properties.map (prop) => "#{prop}"
+  args = properties.map (prop) -> "#{prop}"
 
   args.forEach (arg) ->
     args.push "#{arg}.@each.{isFinished,isDeleted}"

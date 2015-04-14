@@ -211,7 +211,7 @@
   }
 
   .nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
-    background: #3887e6;
+    background: $blue;
     color: #fff;
 
     i {
@@ -408,7 +408,7 @@
 
   .variadic-table td.active {
     padding: 1px 0 0 9px;
-    border: 1px solid #3887e6 !important; 
+    border: 1px solid $blue !important;
   }
 
   .variadic-table td.active {

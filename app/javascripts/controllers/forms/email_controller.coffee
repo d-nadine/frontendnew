@@ -1,4 +1,4 @@
-Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
+Radium.FormsEmailController = Radium.ObjectController.extend Ember.Evented,
   Radium.EmailDealMixin,
 
   actions:
