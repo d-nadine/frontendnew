@@ -7,7 +7,10 @@ $.fn.setCursorPosition = (pos) ->
 $.fn.restoreCursor = (pos )->
   element = $(this).get(0)
   range = document.createRange()
-  range.setStart(element.firstChild, pos)
+  try
+    range.setStart(element.firstChild, pos)
+  catch
+    return
   range.setEnd(element.firstChild, pos)
   selection = window.getSelection()
   selection.removeAllRanges()

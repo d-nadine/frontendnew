@@ -26,7 +26,6 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       id: model.get('id')
       reference: model
       subject: model.get('subject')
-      message: model.get('message')
       html: model.get('html')
       isDraft: true
       to: model.get('toList')

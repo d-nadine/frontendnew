@@ -83,6 +83,3 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
     activities.forEach (activity) ->
       activity.unloadRecord()
-
-    @get('notifications').compact().forEach (notification) ->
-      notification.unloadRecord()

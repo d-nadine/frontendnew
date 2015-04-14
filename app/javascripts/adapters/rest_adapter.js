@@ -18,8 +18,7 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 
   addAttribute: function(hash, key, value) {
     switch(key){
-      case 'html':
-      case 'created_at':
+    case 'created_at':
       case 'updated_at':
         return;
       default:
@@ -299,9 +298,11 @@ Radium.RESTAdapter.registerTransform('object', {
   },
 
   deserialize: function(serialized) {
-    if(Ember.isNone(serialized)) return null;
+    if(Ember.isNone(serialized)){
+      return null;
+    }
 
-    var camelized = {}
+    var camelized = {};
     for(var key in serialized) {
       camelized[key.camelize()] = serialized[key];
     }

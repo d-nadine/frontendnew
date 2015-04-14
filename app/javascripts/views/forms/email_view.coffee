@@ -21,13 +21,13 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('controller.message') || ''
+      current = @get('controller.html') || ''
       currentLength = current.length
       signature = @get('controller.signature').replace(/\n/g, '<br/>')
 
       newMessage = "#{current}<br/><br/>#{signature}"
 
-      @set 'controller.message', newMessage
+      @set 'controller.html', newMessage
       editable.html(newMessage)
       editable.height("+=50")
       editable.restoreCursor(currentLength)
@@ -61,10 +61,10 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
     @$('.toggle-caret').off 'click'
     $('body').off 'click.date-send-menu'
 
-  noContent: Ember.computed 'controller.isSubmitted', 'controller.message', ->
+  noContent: Ember.computed 'controller.isSubmitted', 'controller.html', ->
     return unless @get('controller.isSubmitted')
 
-    not @get('controller.message.length')
+    not @get('controller.html.length')
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']

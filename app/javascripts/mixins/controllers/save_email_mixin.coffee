@@ -1,7 +1,7 @@
 Radium.SaveEmailMixin = Ember.Mixin.create
   actions:
     createBulkEmail: (form, bulkParams) ->
-      return unless form.get('message.length')
+      return unless form.get('html.length')
 
       controller = @container.lookup('controller:peopleIndex')
 

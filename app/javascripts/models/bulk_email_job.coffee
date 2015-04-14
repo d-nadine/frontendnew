@@ -2,7 +2,7 @@ Radium.BulkEmailJob = Radium.Model.extend Radium.BulkActionProperties,
   Radium.AttachmentsMixin,
 
   subject: DS.attr('string')
-  message: DS.attr('string')
+  html: DS.attr('string')
   isDraft: DS.attr('boolean')
   sendTime: DS.attr('datetime')
 

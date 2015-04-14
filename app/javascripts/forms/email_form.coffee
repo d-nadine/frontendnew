@@ -14,7 +14,6 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
   reset: ->
     @set('id', null)
-    @set 'message', ''
     to = if to = @get('defaults.to')
             to
          else
@@ -27,7 +26,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set 'sendTime', null
     @set 'checkForResponse', null
     @set('subject', '')
-    @set('message', '')
+    @set('html', '')
     @set('isDraft', false)
     @set('sendTime', null)
     @set('checkForResponse', null)
@@ -37,7 +36,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
   data: Ember.computed( ->
     subject: @get('subject')
-    message: @get('message')
+    html: @get('html')
     sentAt: Ember.DateTime.create()
     isDraft: @get('isDraft')
 
@@ -62,8 +61,8 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     repliedTo: @get('repliedTo')
   ).volatile()
 
-  isValid: Ember.computed 'to.[]', 'message', ->
-    @get('to.length') && @get('message.length')
+  isValid: Ember.computed 'to.[]', 'html', ->
+    @get('to.length') && @get('html.length')
 
 Radium.DraftEmailForm = Radium.EmailForm.extend
   reset: ->

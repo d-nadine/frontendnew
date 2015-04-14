@@ -90,10 +90,11 @@ Radium.FormsEmailController = Radium.ObjectController.extend  Ember.Evented,
     Radium.FormBox.create
       todoForm: @get('todoForm')
 
-  messageIsInvalid: Ember.computed 'isSubmitted', 'message.length', ->
+  messageIsInvalid: Ember.computed 'isSubmitted', 'html.length', ->
     return false unless @get('isSubmitted')
 
-    not @get('message.length')
+    message = @get('html') || ''
+    !!!message
 
   todoForm: Radium.computed.newForm('todo')
 

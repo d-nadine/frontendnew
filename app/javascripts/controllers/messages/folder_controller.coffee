@@ -1,5 +1,4 @@
 Radium.MessagesFolderController = Radium.ObjectController.extend
   needs: ['messages']
-  isSelected: (->
+  isSelected: Ember.computed 'controllers.messages.folder', ->
     @get('controllers.messages.folder') == @get('name')
-  ).property('controllers.messages.folder')
