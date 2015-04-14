@@ -1,6 +1,5 @@
 require 'forms/meeting_form'
 require 'forms/todo_form'
-require 'lib/radium/aggregate_array_proxy'
 require 'forms/deal_form'
 require 'forms/contact_form'
 

@@ -1,5 +1,3 @@
-require 'lib/radium/aggregate_array_proxy'
-
 Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   Radium.AttachmentsMixin,
 
@@ -17,8 +15,7 @@ Radium.Meeting = Radium.Model.extend Radium.CommentsMixin,
   cancelled: DS.attr('boolean')
 
   organizer: Ember.computed '_organizerUser', '_organizerContact', ->
-    @get('_organizerUser') ||
-    @get('_organizerContact')
+    @get('_organizerUser') || @get('_organizerContact')
 
   _organizerUser: DS.belongsTo('Radium.User')
   _organizerContact: DS.belongsTo('Radium.Contact')
