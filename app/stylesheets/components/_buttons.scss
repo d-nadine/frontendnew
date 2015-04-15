@@ -1,464 +1,49 @@
-$btn-primary : #007cdd;
+$blue: #3081e2;
+$lightblue: #3aa6ff;
 
-.btn.btn-flat {
-  border-radius: 0px;
+.btn,
+.btn:focus {
+  background: $blue;
+  background: #dedede;
+  color: white;
+  text-shadow: none;
   border: none;
-  text-shadow: none;
-
-  &:hover {
-    @include transition(none)
-  }
-}
-
-.btn {
-  border: {
-    top-color: #d0d0d0;
-    right-color: #c9c9c9;
-    bottom-color: #bfbfbf;
-    left-color: #c9c9c9;
-  }
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  position: relative;
-  color: #242424;
-  @include border-radius(3px);
-  @include background-image(linear-gradient(#e4e6e6, #d9dbdb));
-  @include box-shadow(inset 0 1px 0 #e9eaea, 0 1px 1px rgba(black, 0.15));
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-position: 0 0;
-  }
-
-  &:hover {
-  }
-
-  &:active,
-  &:focus {
-    @include box-shadow(none);
-    @include background-image(linear-gradient(#c3c3c3, #a9a9a9));
-  }
-
-  i {
-    display: inline-block;
-    position: relative;
-    top: 2px;
-    vertical-align: middle;
-  }
-
-  .ss-small {
-    top: 1px;
-  }
-
-  &.text-error {
-    color: $red;
-  }
-}
-
-.btn-main {
-  &,
-  & + .dropdown-toggle {
-    line-height: 28px;
-  }
-
-  & + .dropdown-toggle .caret {
-    margin-top: 12px;
-  }
-
-  .caret {
-    margin-top: 12px;
-  }
-}
-
-
-.btn-large {
-  max-height: 44px;
-
-  .caret {
-    margin-top: 7px;
-  }
-}
-
-.btn-circle-icon {
-  position: relative;
-
-  i {
-    background: #DADCDC;
-    position: absolute;
-    top: 3px;
-    border-radius: 20px;
-    line-height: 24px;
-    color: #3F3F42;
-    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.5);
-    border: 1px solid #B8B9B9;
-    width: 20px;
-    height: 20px;
-    overflow: hidden;
-  }
-}
-
-.btn-circle-icon-left {
-  padding-left: 40px;
-
-  i {
-    left: 8px;
-  }
-}
-
-.btn-circle-icon-right {
-  padding-right: 40px;
-  i {
-    right: 8px;
-  }
-}
-
-.btn-link {
-  background-image: none;
-  color: $btn-primary;
-  @include box-shadow(none);
-
-  &:active {
-    background-image: none;
-  }
-
-  &:focus {
-    background: none;
-  }
-}
-
-.btn-round {
-  width: 30px;
-  height: 30px;
-  padding: 0;
+  border-radius: 3px;
+  padding: 10px 24px;
   font-size: 16px;
-  line-height: 27px;
-  font-weight: bold;
-  @include border-radius(20px);
-}
 
-.btn-wide {
-  padding: {
-    right: 60px;
-    left: 60px;
+  &.btn-primary {
+    background: $blue;
+
+    &:hover {
+      background: $lightblue;
+    }
   }
-}
-
-.btn-close {
-  width: 16px;
-  height: 16px;
-  padding: 0;
-  line-height: 8px;
-  vertical-align: text-top;
-  text-shadow: none;
-  text-align: center;
-  color: #4b4b4b;
-  background: #fff;
-  @include border-radius(20px);
-
+  &:hover {
+    color: white;
+  }
   i {
-    font-size: 9px;
+    position: relative;
     top: 1px;
-  }
-}
-
-.btn-primary {
-  font-weight: bold;
-  border-color: #0082df;
-  color: #fff;
-  background-color: $btn-primary;
-  text-shadow: 0 1px 1px rgba(black, 0.5);
-  @include background-image(linear-gradient(#00a3e7, $btn-primary));
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.1), 0 1px 2px rgba(black, 0.2));
-
-  &:hover,
-  &:focus,
-  &:active,
-  &.active {
-    background: {
-      position: 0 0;
-      color: $btn-primary;
-    }
-  }
-
-  &:hover {
-    @include background-image(linear-gradient(#00a3e7, $btn-primary));
-  }
-
-  &:active,
-  &:focus,
-  &:disabled,
-  &.disabled,
-  &.active {
-    background-position: 0 0;
-    @include background-image(linear-gradient(#0080c1, #0060a6));
-  }
-
-  .btn-group > & + .dropdown-menu {
-    background: #f3f3f3;
-
-    a:hover {
-      color: #fff;
-      background: #c3c3c3;
-    }
-  }
-
-  .ss-plus {
-    font-size: 10px;
-    top: 0;
-  }
-}
-
-.btn-danger {
-  font-weight: bold;
-  color: #fff;
-  background: {
-    image: none;
-    color: $red;
-  }
-  border-color: $red;
-  @include box-shadow(none);
-
-  &:hover {
-    background-color: darken($red, 10%);
-    border-color: darken($red, 10%);
-  }
-}
-
-.btn-success {
-  color: #fff;
-  border-color: $success;
-  @include box-shadow(none);
-  @include background-image(linear-gradient($success, darken($success, 1%)));
-
-  &:hover,
-  &:focus,
-  &:disabled,
-  &.disabled,
-  &:active {
-    @include box-shadow(none);
-    background: {
-      position: 0 0;
-    }
-  }
-
-  &:hover {
-    @include background-image(linear-gradient($success, darken($success, 10%)));
-  }
-
-  &:active,
-  &:focus {
-    background-position: 0 0;
-    border-color: darken($success, 5%);
-    @include background-image(linear-gradient(darken($success, 5%), darken($success, 10%)));
-  }
-}
-
-.btn-loading {
-  padding-left: 5px;
-
-  &:disabled,
-  &.disabled {
-    opacity: 1;
-  }
-
-  span {
-    width: 35px;
-    height: 20px;
-    margin-right: 5px;
+    font-size: 11px;
     float: left;
-    position: relative;
-    margin-right: 5px;
+    margin-right: 7px;
   }
 
-  .ball,
-  .ball1 {
-    border-color: #fff;
-    border-top-color: transparent;
-    border-left-color: transparent;
-  }
-
-  &.btn-main {
-    span {
-      height: 30px;
-    }
-
-    .ball {
-      width: 15px;
-      height: 15px;
-      border-width: 4px;
-      @include box-shadow(0 0 15px $btn-primary);
-    }
-
-    .ball1 {
-      width: 7px;
-      height: 7px;
-      border-width: 2px;
-      @include box-shadow(0 0 5px $btn-primary);
-    }
-  }
-
-  &.btn-large {
-    .ball {
-      width: 20px;
-      height: 20px;
-      @include box-shadow(0 0 15px $btn-primary);
-    }
-
-    .ball1 {
-      width: 8px;
-      height: 8px;
-      border-width: 4px;
-      @include box-shadow(0 0 5px $btn-primary);
-    }
-  }
-
-  &.btn-success {
-    .ball {
-      @include box-shadow(0 0 15px $green);
-    }
-
-    .ball1 {
-      @include box-shadow(0 0 15px $green);
-    }
+  &.btn-small {
+    font-size: 14px;
+    padding: 8px 20px;
   }
 }
 
-.btn-group:not(.vanilla) {
-  &.open .btn-primary.dropdown-toggle {
-    background-color: $btn-primary;
+.btn-text {
+  color: $blue;
+  font-size: 16px;
+
+  &.btn-black {
+    color: #29292c;
   }
-
-  > .btn {
-    position: relative;
-    z-index: 1;
-    @include box-shadow(none);
-
-    &:first-child {
-      @include border-top-left-radius(3px);
-      @include border-bottom-left-radius(3px);
-    }
-
-    & + .dropdown-toggle {
-      @include box-shadow(none);
-      @include border-radius(0 3px 3px 0);
-    }
+  &:not(.btn-black):hover {
+    color: $lightblue;
   }
-
-  > .btn:last-child,
-  > .dropdown-toggle {
-    @include border-top-right-radius(3px);
-    @include border-bottom-right-radius(3px);
-  }
-
-  > .dropdown-menu {
-    width: auto;
-    min-width: 100%;
-    top: 89%;
-    font-size: 12px;
-    background: #e0e0e0;
-    @include border-radius(0 0 3px 3px);
-    @include box-shadow(0 2px 2px rgba(black, 0.1));
-    @include box-sizing(border-box);
-
-    > li > a {
-      padding: 2px 12px;
-      font-weight: bold;
-      color: #696969;
-      text-shadow: 0 1px 0 rgba(white, 0.1);
-
-      &:hover {
-        @include background-image(linear-gradient(#c3c3c3, #a9a9a9));
-      }
-    }
-  }
-}
-
-.btn-action {
-  padding: 8px 30px;
-  font-size: 18px;
-  color: #787878;
-
-  .ss-icon {
-    line-height: 25px;
-  }
-
-  &:hover,
-  &.active {
-    border-color: $highlight;
-  }
-
-  &.active {
-    @include box-shadow(inset 0 1px 0 rgba(white, 0.7), 0 1px 2px rgba(black, 0.2));
-
-    i {
-      color: $highlight;
-    }
-  }
-}
-
-.mark {
-  color: $link;
-}
-
-.btn-read-status {
-  width: 11px;
-  height: 11px;
-  border: 1px solid;
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.2));
-  @include background-image(linear-gradient(rgba(white, 0.25), rgba(white, 0)));
-  @include border-radius(13px);
-}
-
-.btn-unread {
-  background-color: #008fe5;
-  border-color: #0082df;
-  @include box-shadow(inset 0 1px 0 rgba(white, 0.2));
-  @include background-image(linear-gradient(rgba(white, 0.25), rgba(white, 0)));
-}
-
-.btn-read {
-  background-color: #ececec;
-  border-color: #d8d8d8;
-  @include box-shadow(inset 0 1px 2px rgba(black, 0.1));
-  @include background-image(linear-gradient(rgba(white, 0.25), rgba(white, 0)));
-}
-
-.dropdown-datepicker {
-  margin: 10px;
-
-  .ember-text-field {
-    width: 70px;
-  }
-}
-
-.btn-toolbar {
-  margin: 0;
-
-  > .btn,
-  > .btn-group {
-    margin: {
-      right: 10px;
-      left: 0;
-    }
-  }
-
-  &.pull-right,
-  .pull-right & {
-    > .btn-group,
-    > .btn {
-      margin: {
-        left: 10px;
-        right: 0;
-      }
-    }
-  }
-}
-
-.btn-load-more {
-  font-size: 14px;
-  margin-top: 20px;
-}
-.btn-load-more i {
-    font-size: 22px;
 }

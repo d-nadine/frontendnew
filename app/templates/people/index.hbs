@@ -1,111 +1,21 @@
 <div class="page-header row-fluid">
-  <div class="subhead">
-    <div class="left">
-      <div class="nav-wrap">
-        <span class="count">
-          <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
-            {{checkedTotal}}
-          </span>
-          <span class="divider">/</span>
-          <span {{bind-attr class=":total content.isLoading:is-loading"}}>
-            {{totalRecords}}
-          </span>
-          <span class="subtitle">CONTACTS</span>
-        </span>
-        <div class="tools">
-          {{#link-to "leads.single" class="btn-contact"}}
-            <i class="ss-standard ss-user"></i>
-            <span>Add Contact</span>
-          {{/link-to}}
-          <div class="btn-group vanilla">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-              <i class="ss-standard ss-cursor"></i> Actions
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a href="#" {{action "executeActions" "compose"}}>Compose</a></li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Add to List</a>
-                <ul class="dropdown-menu">
-                  {{#each tag in tags}}
-                    <li>
-                      <a href="#" {{action "addTag" tag}}>{{tag.name}}</a>
-                    </li>
-                  {{else}}
-                    <li><a href="#">(none)</a></li>
-                  {{/each}}
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Assign To</a>
-                <ul class="dropdown-menu">
-                  {{#each user in users}}
-                    <li>
-                      <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
-                    </li>
-                  {{/each}}
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Contact Status</a>
-                <ul class="dropdown-menu">
-                  {{#each status in contactStatuses}}
-                    <li>
-                      <a href="#" {{action "setStatus" status}}>{{status.name}}</a>
-                    </li>
-                  {{/each}}
-                  <li class="divider"></li>
-                  <li>
-                    {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
-                  </li>
-                </ul>
-              </li>
-              {{#unless isPotential}}
-                <li><a href="#" {{action "unTrackAll"}}>Untrack</a></li>
-              {{else}}
-                <li>
-                  <a href="#" {{action "trackAll"}}>Track</a>
-                </li>
-              {{/unless}}
-              <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
-            </ul>
-          </div>
-          <a {{action "toggleFilter"}} href="#" class="btn-filter">
-            <i class="ss-standard ss-filter"></i>
-            <span>Filter</span>
-          </a>
-        </div>
-      </div>
-      {{query-builder potentialQueries=potentialQueries actualQueries=actualQueries fields=combinedQueryFields parent=this users=users isSaved=isQuery}}
-    </div>
-    <div class="working-anim">
-      {{#if working}}
-        <img src="/images/loading/ajax-loader.gif"/>
-      {{/if}}
-    </div>
-    <div class="col-selector">
-      <button class="dropdown-toggle">
-        <span>
-          <i class="ss-standard ss-columns"></i>
-          <i class="ss-standard ss-dropdown"></i>
-        </span>
-      </button>
-      <ul class="col-menu dropdown-menu">
-        {{#each combinedColumns}}
-          <label {{bind-attr class=binding}}>
-            {{input type="checkbox" checked=checked}}
-            <span>{{heading}}</span>
-          </label>
-        {{/each}}
-      </ul>
-      {{input type="text" value=searchText class="searchbox" placeholder="search"}}
-    </div>
-  </div>
   <div class="contacts-sidebar">
-    <a href="#" {{action "createTag"}} class="btn list-new">New List</a>
-    <ul class="nav nav-pills">
-      <li {{bind-attr class="isPotential:active"}}>
-        {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
+    <span class="count">
+      {{#link-to "addressbook.companies"}}
+      <span class="count-companies">{{companiesTotal}} companies ></span>
+      {{/link-to}}
+      {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="") currentWhen="people.index"}}
+      <span class="count-people">{{contactsTotal}} people</span>
+      {{/link-to}}
+    </span>
+    <div class="contacts-sidebar-list">
+      <div class="contacts-sidebar-title">
+        <i class="ss-standard ss-list"></i>
+        <span>Lists</span>
+      </div>
+      <ul class="nav nav-pills">
+        <li {{bind-attr class="isAll:active"}}>
+          {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lock" data-original-title="" title=""></i>
             <span>My Contacts</span>
@@ -113,10 +23,10 @@
           <div class="nav-pills-right">
             <span>{{potential}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      <li {{bind-attr class="isAll:active"}}>
-        {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isAll:active"}}>
+          {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
             <span>All</span>
@@ -124,21 +34,21 @@
           <div class="nav-pills-right">
             <span>{{all}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      <li {{bind-attr class="isCurrentUser:active"}}>
-        <a href="#" {{action "showUsersContacts" currentUser}}>
-          <div class="nav-pills-left">
-            <i class="ss-symbolicons ss-lightning"></i>
-            <span>{{currentDisplay}}</span>
-          </div>
-          <div class="nav-pills-right">
-            <span>{{currentContactsTotal}}</span>
-          </div>
-        </a>
-      </li>
-      <li {{bind-attr class="isNew:active"}}>
-        {{#link-to "people.index" "new" (query-params user="" tag="" customquery="")}}
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isCurrentUser:active"}}>
+          <a href="#" {{action "showUsersContacts" currentUser}}>
+            <div class="nav-pills-left">
+              <i class="ss-symbolicons ss-lightning"></i>
+              <span>{{currentDisplay}}</span>
+            </div>
+            <div class="nav-pills-right">
+              <span>{{currentContactsTotal}}</span>
+            </div>
+          </a>
+        </li>
+        <li {{bind-attr class="isNew:active"}}>
+          {{#link-to "people.index" "new" (query-params user="" tag="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
             <span>New</span>
@@ -146,10 +56,10 @@
           <div class="nav-pills-right">
             <span>{{new}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      <li {{bind-attr class="isNoTasks:active"}}>
-        {{#link-to "people.index" "notasks" (query-params user="" tag="")}}
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isNoTasks:active"}}>
+          {{#link-to "people.index" "notasks" (query-params user="" tag="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
             <span>No Tasks</span>
@@ -157,10 +67,10 @@
           <div class="nav-pills-right">
             <span>{{noTasks}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      <li {{bind-attr class="isLosing:active"}}>
-        {{#link-to "people.index" "losing" (query-params user="" tag="")}}
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isLosing:active"}}>
+          {{#link-to "people.index" "losing" (query-params user="" tag="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
             <span>Losing Touch</span>
@@ -168,10 +78,10 @@
           <div class="nav-pills-right">
             <span>{{inactive}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      <li {{bind-attr class="isNoList:active"}}>
-        {{#link-to "people.index" "no_list" (query-params user="" tag="" customquery="")}}
+          {{/link-to}}
+        </li>
+        <li {{bind-attr class="isNoList:active"}}>
+          {{#link-to "people.index" "no_list" (query-params user="" tag="")}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
             <span>No List</span>
@@ -179,29 +89,114 @@
           <div class="nav-pills-right">
             <span>{{noList}}</span>
           </div>
-        {{/link-to}}
-      </li>
-      {{#each newCustomQuery in newCustomQueries}}
-        {{new-listitem listItem=newCustomQuery tagName="li"  action="saveCustomQuery" newItemPlaceholder="New dynamic list"}}
-      {{/each}}
-      {{#each customQuery in currentUser.customQueries}}
-        {{query-item customQuery=customQuery parent=this tagName="li"}}
-      {{/each}}
-      {{#each tag in tags}}
-        {{tag-item tag=tag parent=this tagName="li" class="tag-item"}}
-      {{/each}}
-      {{#each newTag in newTags}}
-        {{new-listitem listItem=newTag  action="saveTag" deleteAction="deleteTag"  tagName="li" newItemPlaceholder="New List"}}
-      {{/each}}
-    </ul>
-    <ul class="nav nav-pills more">
-      {{#each user in team}}
-        {{user-item user=user parent=this tagName="li" class="user"}}
-      {{/each}}
-    </ul>
+          {{/link-to}}
+        </li>
+        {{#each newCustomQuery in newCustomQueries}}
+          {{new-listitem listItem=newCustomQuery tagName="li"  action="saveCustomQuery" newItemPlaceholder="New dynamic list"}}
+        {{/each}}
+        {{#each customQuery in currentUser.customQueries}}
+          {{query-item customQuery=customQuery parent=this tagName="li"}}
+        {{/each}}
+        {{#each tag in tags}}
+          {{tag-item tag=tag parent=this tagName="li" class="tag-item"}}
+        {{/each}}
+        {{#each newTag in newTags}}
+          {{new-listitem listItem=newTag  action="saveTag" deleteAction="deleteTag"  tagName="li" newItemPlaceholder="New List"}}
+        {{/each}}
+      </ul>
+      <ul class="nav nav-pills more">
+        {{#each user in team}}
+          {{user-item user=user parent=this tagName="li" class="user"}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
   <div class="table-container">
     {{partial 'emails/importing'}}
+    <div class="subhead">
+      <div class="left">
+        <div class="nav-wrap">
+          <div class="tools">
+            {{#link-to "leads.single" class="btn btn-primary btn-icon"}}
+            <i class="ss-standard ss-user"></i>
+            <span>Add Contact</span>
+            {{/link-to}}
+            <a href="#" {{action "executeActions" "compose"}} class="btn-text btn-black"><i class="ss-standard ss-mail"></i> Compose</a>
+            <a href="#" {{action "createTag"}} class="btn-text btn-black"><i class="ss-standard ss-list"></i> New List</a>
+            <div class="btn-group vanilla">
+              <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
+                <i class="ss-standard ss-action"></i> Actions
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><a href="#" {{action "executeActions" "compose"}}>Compose</a></li>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Add to List</a>
+                  <ul class="dropdown-menu">
+                    {{#each tag in tags}}
+                      <li>
+                        <a href="#" {{action "addTag" tag}}>{{tag.name}}</a>
+                      </li>
+                    {{else}}
+                      <li><a href="#">(none)</a></li>
+                    {{/each}}
+                  </ul>
+                </li>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Assign To</a>
+                  <ul class="dropdown-menu">
+                    {{#each user in users}}
+                      <li>
+                        <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </li>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Contact Status</a>
+                  <ul class="dropdown-menu">
+                    {{#each status in contactStatuses}}
+                      <li>
+                        <a href="#" {{action "setStatus" status}}>{{status.name}}</a>
+                      </li>
+                    {{/each}}
+                    <li class="divider"></li>
+                    <li>
+                      {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#" {{action "unTrackAll"}}>Untrack</a></li>
+                <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
+              </ul>
+            </div>
+            <a {{action "toggleFilter"}} href="#" class="btn-filter">
+              <i class="ss-standard ss-filter"></i>
+              <span>Filter</span>
+            </a>
+          </div>
+          {{query-builder potentialQueries=potentialQueries actualQueries=actualQueries fields=combinedQueryFields parent=this users=users isSaved=isQuery}}
+        </div>
+      </div>
+      <div class="working-anim">
+        {{#if working}}
+          <img src="/images/loading/ajax-loader.gif"/>
+        {{/if}}
+      </div>
+      <div class="col-selector">
+        <button class="dropdown-toggle">
+          <span>
+            <i class="ss-standard ss-columns"></i>
+            <i class="ss-standard ss-dropdown"></i>
+          </span>
+        </button>
+        <ul class="col-menu dropdown-menu">
+          {{#each column in combinedColumns}}
+            {{x-check leader=column.heading checked=column.checked}}
+          {{/each}}
+        </ul>
+        {{input type="text" value=searchText class="searchbox" placeholder="search"}}
+      </div>
+    </div>
     <div class="left-table">
       {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
     </div>
@@ -210,12 +205,12 @@
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
-        <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+        <img src="/images/loading/ajax-loader.gif"/> <span class="muted"> Loading...</span>
       </div>
     {{/if}}
   </div>
   {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
-  {{#if displayNoContacts}}
+  {{#if noContacts}}
     <div class="message">
       <i class="ss-standard ss-user"></i>
       <h1>Add your first contact</h1>
