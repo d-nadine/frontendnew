@@ -11,10 +11,9 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
       contactCustomFields = @get('contactCustomFields')
 
-      if contactCustomFields.get('length')
-        customFieldMap = model.getCustomFieldMap(contactCustomFields)
+      customFieldMap = model.getCustomFieldMap(contactCustomFields)
 
-        model.set('customFieldMap', customFieldMap)
+      model.set('customFieldMap', customFieldMap)
 
       @hashifyRelationships()
 

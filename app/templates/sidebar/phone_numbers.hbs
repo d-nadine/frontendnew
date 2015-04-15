@@ -3,7 +3,7 @@
   <dd>
     {{#if isEditing}}
       {{#each phoneNumber in form.phoneNumbers}}
-        {{#multiple-control item=phoneNumber items=form.phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing"}}
+        {{#multiple-control item=phoneNumber items=form.phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing" labels=Radium.PhoneLabels}}
           {{phone-input type="text" value=value}}
         {{/multiple-control}}
       {{/each}}

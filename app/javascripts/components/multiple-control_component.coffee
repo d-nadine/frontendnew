@@ -34,8 +34,6 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
   isLast: Ember.computed 'items.[]', 'item', ->
     @get('item') == @get('items.lastObject')
 
-  labels: ['Work','Personal']
-
   parent: Ember.computed.oneWay 'items'
 
   currentLabel: Ember.computed 'item', 'item.name', ->

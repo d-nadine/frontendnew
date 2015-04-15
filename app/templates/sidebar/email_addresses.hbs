@@ -4,7 +4,7 @@
     {{#if isEditing}}
       <div>
         {{#each email in form.emailAddresses}}
-          {{#multiple-control item=email items=form.emailAddresses model=model relationship="emailAddresses" saveModel="stopEditing"}}
+          {{#multiple-control item=email items=form.emailAddresses model=model relationship="emailAddresses" saveModel="stopEditing" labels=Radium.EmailLabels}}
             {{input type="text" value=value}}
           {{/multiple-control}}
         {{/each}}
