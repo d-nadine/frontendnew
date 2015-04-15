@@ -58,7 +58,9 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.
 
     position = picker.position()
 
-    menu.css({top: position.top + 32, left: position.left})
+    height = picker.outerHeight(true) - 6
+
+    menu.css({top: position.top + height, left: position.left})
 
   isValid: true
   recordArray: 'addresses'
