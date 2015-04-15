@@ -1,106 +1,4 @@
 <div class="page-header row-fluid">
-  <div class="subhead">
-    <div class="left">
-      <div class="nav-wrap">
-        <span class="count">
-          <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
-            {{checkedTotal}}
-          </span>
-          <span class="divider">/</span>
-          <span {{bind-attr class=":total content.isLoading:is-loading"}}>
-            {{totalRecords}}
-          </span>
-          <span class="subtitle">CONTACTS</span>
-        </span>
-        <div class="tools">
-          {{#link-to "leads.single" class="btn-contact"}}
-            <i class="ss-standard ss-user"></i>
-            <span>Add Contact</span>
-          {{/link-to}}
-          <div class="btn-group vanilla">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-              <i class="ss-standard ss-cursor"></i> Actions
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a href="#" {{action "executeActions" "compose"}}>Compose</a></li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Add to List</a>
-                <ul class="dropdown-menu">
-                  {{#each tag in tags}}
-                    <li>
-                      <a href="#" {{action "addTag" tag}}>{{tag.name}}</a>
-                    </li>
-                  {{else}}
-                    <li><a href="#">(none)</a></li>
-                  {{/each}}
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Assign To</a>
-                <ul class="dropdown-menu">
-                  {{#each user in users}}
-                    <li>
-                      <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
-                    </li>
-                  {{/each}}
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Contact Status</a>
-                <ul class="dropdown-menu">
-                  {{#each status in contactStatuses}}
-                    <li>
-                      <a href="#" {{action "setStatus" status}}>{{status.name}}</a>
-                    </li>
-                  {{/each}}
-                  <li class="divider"></li>
-                  <li>
-                    {{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}
-                  </li>
-                </ul>
-              </li>
-              {{#unless isPotential}}
-                <li><a href="#" {{action "unTrackAll"}}>Make Private</a></li>
-              {{else}}
-                <li>
-                  <a href="#" {{action "trackAll"}}>Share</a>
-                </li>
-              {{/unless}}
-              <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
-            </ul>
-          </div>
-          <a {{action "toggleFilter"}} href="#" class="btn-filter">
-            <i class="ss-standard ss-filter"></i>
-            <span>Filter</span>
-          </a>
-        </div>
-      </div>
-      {{query-builder potentialQueries=potentialQueries actualQueries=actualQueries fields=combinedQueryFields parent=this users=users isSaved=isQuery}}
-    </div>
-    <div class="working-anim">
-      {{#if working}}
-        <img src="/images/loading/ajax-loader.gif"/>
-      {{/if}}
-    </div>
-    <div class="col-selector">
-      <button class="dropdown-toggle">
-        <span>
-          <i class="ss-standard ss-columns"></i>
-          <i class="ss-standard ss-dropdown"></i>
-        </span>
-      </button>
-      <ul class="col-menu dropdown-menu">
-        {{#each combinedColumns}}
-          <label {{bind-attr class=binding}}>
-            {{input type="checkbox" checked=checked}}
-            <span>{{heading}}</span>
-          </label>
-        {{/each}}
-      </ul>
-      {{input type="text" value=searchText class="searchbox" placeholder="search"}}
-    </div>
-  </div>
   <div class="contacts-sidebar">
     <span class="count">
       {{#link-to "addressbook.companies"}}
@@ -274,7 +172,7 @@
                     <a href="#" {{action "trackAll"}}>Share</a>
                   </li>
                 {{/unless}}
-                <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
+                <li><a href="#" {{action "unTrackAll"}}>Make Private</a></li>
               </ul>
             </div>
             <a {{action "toggleFilter"}} href="#" class="btn-filter">
