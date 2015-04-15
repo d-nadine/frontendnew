@@ -6,6 +6,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   files: Ember.computed.alias 'targetObject.files'
 
   setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
     textarea = @$('textarea')
 
     textarea.summernote
@@ -57,6 +59,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     false
 
   teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
     @$('textarea').destroy()
     @$(".note-dropzone").off('drop')
 

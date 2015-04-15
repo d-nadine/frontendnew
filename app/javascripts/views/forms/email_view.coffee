@@ -104,7 +104,3 @@ Radium.FormsEmailView = Radium.FormView.extend Radium.ScrollTopMixin,
       return unless @get('targetObject.signatureSubmited')
 
       @get('value').length == 0
-
-  onSignatureAdded: ->
-    @send 'appendSignature'
-    @send 'closeModal'

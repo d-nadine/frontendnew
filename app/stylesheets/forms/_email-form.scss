@@ -1,4 +1,9 @@
 .email-form-component {
+  input[type=text] {
+    height: 29px;
+    border-radius: 0px;
+  }
+
   .email-form {
     top: 20% !important;
     border-radius: 0px;
@@ -12,7 +17,6 @@
     border-bottom: 0px;
     padding-bottom: 4px;
     padding-left: 16px;
-    border-bottom: 1px solid #eee;
     margin-bottom: -15px;
 
     h3 {
@@ -108,5 +112,85 @@
   .body textarea {
     min-height: 200px;
     resize: none;
+  }
+
+  .message {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .subject-wrap {
+    position: relative;
+    display: inline-block;
+    float: left;
+  }
+
+  .more-options {
+    display: inline-block;
+    height: 35px;
+    margin-bottom: 15px;
+    float: right;
+    vertical-align: bottom;
+    line-height: 35px;
+  }
+
+  .more-options a {
+    color: #666;
+    padding-left: 9px;
+  }
+
+  .textbox-wrap {
+    position: relative;
+    width: inherit;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  input[type=text].subject {
+    width: 420px;
+  }
+
+  .message .more-options .btn-group {
+    font-size: 12px;
+  }
+
+  .dropdown-submenu > .dropdown-menu {
+    left: -100%;
+  }
+
+  .note-toolbar {
+    display: none;
+    position: absolute;
+    bottom: -36px;
+    left: -4px;
+  }
+
+  .note-editable {
+    &:empty {
+      border: 1px solid $red;
+    }
+  }
+
+  .textbox-wrap .prompt {
+    width: inherit;
+    background: #f9f9f9;
+    display: inline-block;
+    width: 99.8%;
+    bottom: 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    padding: 4px 0;
+    margin-bottom: 1px;
+    border-right: 1px solid #a9a9a9;
+    border-left: 1px solid #a9a9a9;
+    border-bottom: 1px solid #a9a9a9;
+  }
+
+  .message .textbox-wrap .prompt .cancel {
+    position: absolute;
+    right: 7px;
+    font-size: 11px;
+    color: #aaa;
   }
 }
