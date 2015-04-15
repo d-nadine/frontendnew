@@ -51,6 +51,15 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.
         hash.set 'record', item
         formArray.pushObject hash
 
+  positionDropdown: ->
+    menu = $('.sidebar .country-picker .dropdown-menu')
+
+    picker = $('.sidebar .country-picker')
+
+    position = picker.position()
+
+    menu.css({top: position.top + 32, left: position.left})
+
   isValid: true
   recordArray: 'addresses'
 
