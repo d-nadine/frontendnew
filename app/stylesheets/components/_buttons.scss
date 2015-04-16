@@ -46,4 +46,9 @@ $lightblue: #3aa6ff;
   &:not(.btn-black):hover {
     color: $lightblue;
   }
+  i {
+    position: relative;
+    top: 2px;
+    font-size: 14px;
+  }
 }
