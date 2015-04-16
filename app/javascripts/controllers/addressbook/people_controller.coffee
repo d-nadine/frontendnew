@@ -129,6 +129,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       tagName = tag.get('name')
       tagId = tag.get('id')
 
+      return unless confirm("Are you sure you want to delete the #{tagName} list?")
+
       tag.delete(this).then =>
         @send 'flashSuccess', "The tag #{tagName} has been deleted."
 

@@ -10,8 +10,15 @@
     <div>{{#link-to "settings.contactStatuses" class="edit"}}Add/Edit Statuses{{/link-to}}</div>
   </div>
 {{else}}
-  <div class="pull-right">
-    <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>
-  </div>
-  <p>{{controller.contactStatus.name}}</p>
+  {{#if contactStatus}}
+    <div class="pull-right">
+      <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>
+    </div>
+    <p>{{contactStatus.name}}</p>
+  {{else}}
+    <span class="empty">Set Contact Status</span>
+    <div class="pull-right">
+      <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>
+    </div>
+  {{/if}}
 {{/if}}

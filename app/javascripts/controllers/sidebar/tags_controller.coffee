@@ -6,6 +6,10 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
       if @get('isNew')
         return if @get('tagNames').mapProperty('name').contains tag
 
+        newTag = Radium.Tag.createRecord name: tag
+
+        newTag.save()
+
         return @get('tagNames').addObject Ember.Object.create name: tag
 
       tag = @get('tagNames').createRecord(name: tag)
@@ -14,12 +18,10 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
 
       tagName = tag.get('name')
 
-      tag.one 'didCreate', ->
+      tag.save(this).then ->
         Radium.Tag.find({}).then (tags) ->
           if tag = tags.find((tag) -> tag.get('name') == tagName)
             addressbook.pushObject tag
-
-      @get('store').commit()
 
     removeSelection: (tag) ->
       return unless @get('tagNames').mapProperty('name').contains(tag.get('name'))

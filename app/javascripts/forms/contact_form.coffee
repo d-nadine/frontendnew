@@ -31,7 +31,9 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     data = @get('data')
     if status = data.contactStatus
       delete data.contactStatus
-      data.contactStatus = Radium.ContactStatus.all().find (s) -> s.get('id') == status
+      data.contactStatus = Radium.ContactStatus.all().find (s) -> s.get('id') == status.get('id')
+
+      Ember.assert "contact status was not found", data.contactStatus
 
     contact = Radium.CreateContact.createRecord data
 
@@ -99,6 +101,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'linkedin', null
     @set 'title', null
     @set 'customFieldValues', Ember.A()
+    @set 'contactStatus', null
 
     if customFields = @get('customFields')
       customFieldMap = Ember.Map.create()

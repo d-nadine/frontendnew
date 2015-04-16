@@ -2,6 +2,7 @@ require 'mixins/multiple_address_behaviour'
 
 Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviour,
   Radium.MultipleAddressBehaviour,
+  Radium.TrackContactMixin,
   Ember.Evented,
   actions:
     modelChanged: (model) ->
@@ -52,6 +53,8 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
         $('.modal').modal backdrop: false
         return
 
+      @set 'isSaving', true
+
       customFieldMap = @get('model.customFieldMap') || Ember.A()
 
       if isNew
@@ -77,15 +80,30 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
               customField: key
               value: field.get('value')
 
-      return unless model.get('isDirty')
+      msg = =>
+        @set 'isSaving', false
+        @send 'flashSuccess', "#{model.get('displayName')} has been successfully updated."
+
+      unless model.get('isDirty')
+        return msg()
 
       if Ember.isEmpty('companyName')
         model.set('removeCompany', true)
 
-      model.save(this).then (result) =>
-        @send 'flashSuccess', "#{model.get('displayName')} has been successfully updated."
+      model.save(this).then((result) =>
+        msg()
 
         @hashifyRelationships()
+
+        unless model.get('isPublic')
+          Ember.run.next =>
+            @send 'track', model
+
+        false
+      ).then (error) =>
+        @set 'isSaving', false
+
+      false
 
     saveNew: ->
       $('.modal').modal 'hide' if $('.modal')
@@ -110,8 +128,6 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
           @transitionToRoute 'contact', createContact.get('contact')
         ).catch (error) =>
           @set 'isSaving', false
-
-      @set 'isSaving', true
 
   hashifyRelationships: ->
     ['emailAddresses', 'phoneNumbers'].forEach (relationship) =>

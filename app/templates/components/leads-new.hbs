@@ -168,8 +168,12 @@
 </div>
 <div class="submit">
   <hr/>
-  {{partial "saving"}}
-  <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>Submit</button>
+  <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>
+    Submit
+    {{#if isSaving}}
+      <img src="/images/loading/ajax-loader.gif"/> <span class="muted">saving...</span>
+    {{/if}}
+  </button>
 </div>
 <div class="modal hide fade">
   <div class="modal-header">
