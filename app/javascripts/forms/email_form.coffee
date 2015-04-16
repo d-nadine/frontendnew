@@ -51,8 +51,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
     sendTime: @get('sendTime')
     checkForResponse: @get('checkForResponse')
-    files: @get('files').map (file) ->
-      file.get('file')
+    files: @get('files').mapProperty('file')
 
     attachedFiles: Ember.A()
     bucket: @get('bucket')

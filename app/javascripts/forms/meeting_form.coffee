@@ -9,8 +9,7 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     startsAt: @get('startsAt')
     endsAt: @get('endsAt')
     invitations: Ember.A()
-    files: @get('files').map (file) =>
-      file.get('file')
+    files: @get('files').mapProperty('file')
 
     attachedFiles: Ember.A()
     bucket: @get('bucket')
@@ -44,7 +43,7 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     contacts = @get('contacts').slice()
 
     if isNew
-      @get('users').forEach (user) =>
+      @get('users').forEach (user) ->
         meeting.get('invitations').addObject person: type: 'user', id: user.get('id')
 
       @get('contacts').forEach (contact) =>

@@ -135,9 +135,9 @@
     line-height: 35px;
   }
 
-  .more-options a {
+  .email-form.single-mode .email-form-body .message .more-options a {
     color: #666;
-    padding-left: 9px;
+    margin-left: 9px;
   }
 
   .textbox-wrap {
@@ -192,5 +192,41 @@
     right: 7px;
     font-size: 11px;
     color: #aaa;
+  }
+
+  .message .attachment {
+    margin-bottom: 10px;
+  }
+  .message .attachment i {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+  }
+
+  .message .attachment a {
+    position: relative;
+    top: 1px;
+    left: 8px;
+    display: inline-block;
+  }
+
+  .message .attachment .progress {
+    width: 60px;
+    height: 10px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 15px;
+    position: relative;
+    top: 2px;
+  }
+
+  .message .attachment .delete {
+    position: relative;
+    top: 1px;
+    left: 8px;
+    color: #666;
+    display: inline-block;
   }
 }

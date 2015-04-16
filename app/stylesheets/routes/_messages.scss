@@ -386,7 +386,7 @@ $item-border: #dddddd;
   color: #000;
   @include transition(color 0.25s);
 
-  i {
+  i:not(.ss-attach) {
     margin: 0 5px 0 0;
     color: #e4e4e4;
     @include transition(color 0.25s);
@@ -398,9 +398,4 @@ $item-border: #dddddd;
       color: $blue;
     }
   }
-}
-
-// Sent message page
-.email-confirmation-view {
-
 }

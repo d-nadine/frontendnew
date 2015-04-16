@@ -15,5 +15,5 @@ Radium.FormsAttachmentMixin = Ember.Mixin.create
 
   setFilesOnModel: (model) ->
     @get('files').map( (file) -> file.get('attachment'))
-        .forEach (attachment) =>
+        .forEach (attachment) ->
           model.get('attachedFiles').push(attachment.get('id'))

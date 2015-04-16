@@ -6,11 +6,12 @@ input[type=file]{
   position: relative;
   color: transparent;
   cursor: pointer;
+  position: absolute;
+  top: -1000px;
 
   &.upload-button, &.avatar-upload, &.csv-upload{
     &.upload-button {
       &:before {
-        content: 'Select some files';
         position: absolute;
         line-height: 18px;
         padding: 4px 0;

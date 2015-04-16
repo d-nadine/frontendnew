@@ -1,0 +1,23 @@
+<i class="ss-standard ss-attach"></i>
+{{#if name}}
+  {{#unless file.isUploading}}
+    <a href="{{unbound file.attachment.url}}" target="_new" class="uploaded-file">
+      <span>{{file.name}} ({{size}})</span>
+    </a>
+  {{else}}
+    <span>{{file.name}} ({{file.size}})</span>
+  {{/unless}}
+{{else}}
+  <a href="{{unbound file.attachment.url}}" target="_new" class="uploaded-file">
+    <span>{{file.attachment.fileName}}</span>
+  </a>
+{{/if}}
+{{#unless file.attachment.isLoaded}}
+  <div class="progress progress-striped">
+    <div class="bar" {{bind-attr style="fakeProgressWidth"}}></div>
+  </div>
+{{else}}
+  <a href="#" {{action "removeFile" file}} class="delete">
+    <i class="ss-standard ss-delete"></i>
+  </a>
+{{/unless}}

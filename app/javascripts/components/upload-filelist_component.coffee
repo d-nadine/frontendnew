@@ -12,13 +12,6 @@ Radium.UploadFilelistComponent = Ember.Component.extend
 
       attachment.get('transaction').commit()
 
-Radium.AttachmentListController = Ember.ObjectController.extend
-  isLoaded: Ember.computed.alias 'model.attachment.isLoaded'
-  isUploading: Ember.computed.alias 'model.attachment.isUploading'
-  isLoading: Ember.computed 'isLoaded', 'isUploading', ->
-    (not @get('isLoaded')) || @get('isUploading')
+      false
 
-  fileName: Ember.computed 'name', 'attachment', 'isLoaded', ->
-    return "#{@get('name')} (#{@get('size')})" if @get('name')
-
-    @get('attachment.fileName')
+  classNameBindings: [':attachment']

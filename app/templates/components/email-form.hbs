@@ -22,20 +22,20 @@
           {{/unless}}
         </span>
         <label>To:</label>
-        {{view view.to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+        {{view to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
       </div>
 
       {{#if showCc }}
         <div class="field control-box control-box-block-level recipients cc">
           <label>CC</label>
-          {{view view.cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+          {{view cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
         </div>
       {{/if}}
 
       {{#if showBcc }}
         <div class="field control-box control-box-block-level recipients bcc">
           <label>BCC</label>
-          {{view view.bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
+          {{view bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
         </div>
       {{/if}}
     </div>
@@ -47,9 +47,7 @@
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
           <i class="ss-standard ss-font"></i>
         </a>
-        <a href="#" class="attach" tabindex="-1">
-          <i class="ss-standard ss-attach"></i>
-        </a>
+        {{file-uploader files=email.files disableSave=disableSave bucket=email.bucket model=email.reference class="btn-file btn-messages-action"}}
         <div class="btn-group vanilla">
           <a href="#" data-toggle="dropdown" class="dropdown-toggle" tabindex="-1">
             <i class="ss-standard ss-navigatedown"></i>
@@ -98,10 +96,13 @@
           </div>
         {{/unless}}
       </div>
+      {{#if email.files.length}}
+        {{upload-filelist files=email.files}}
+      {{/if}}
     </div>
   </div>
 </div>
-{{#if view.showSignatureModal}}
+{{#if showSignatureModal}}
   <div class="modal-backdrop">
     <div class="modal fade">
       <div class="modal-header">
@@ -111,7 +112,7 @@
       <div class="modal-body">
         <form class="form">
           <p>Add a signature that can be appended onto the end of each email.</p>
-          {{view view.signatureTextArea value=signature class="field input-block-level"}}
+          {{view signatureTextArea value=signature class="field input-block-level"}}
         </form>
       </div>
       <div class="modal-footer">

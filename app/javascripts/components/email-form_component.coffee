@@ -29,13 +29,13 @@ Radium.EmailFormComponent = Ember.Component.extend
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('form.html') || ''
+      current = @get('email.html') || ''
       currentLength = current.length
       signature = @get('signature').replace(/\n/g, '<br/>')
 
       newMessage = "#{current}<br/><br/>#{signature}"
 
-      @set 'form.html', newMessage
+      @set 'email.html', newMessage
       editable.html(newMessage)
       editable.height("+=50")
       editable.restoreCursor(currentLength)
@@ -57,24 +57,24 @@ Radium.EmailFormComponent = Ember.Component.extend
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.form.to'
+    sourceBinding: 'controller.email.to'
     showAvatar: false
     isInvalid: Ember.computed 'controller.isSubmitted', 'controller.to.[]', ->
       return unless @get('controller.isSubmitted')
 
-      @get('controller.form.to.length') == 0
+      @get('controller.email.to.length') == 0
 
-    isValid: Ember.computed 'controller.form.to.[]', ->
-      @get('controller.form.to.length') > 0
+    isValid: Ember.computed 'controller.email.to.[]', ->
+      @get('controller.email.to.length') > 0
 
   cc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.form.cc'
+    sourceBinding: 'controller.email.cc'
     showAvatar: false
 
   bcc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.form.bcc'
+    sourceBinding: 'controller.email.bcc'
     showAvatar: false
 
   signatureTextArea: Radium.TextArea.extend

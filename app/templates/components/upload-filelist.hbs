@@ -1,24 +1,3 @@
-{{#each files}}
-  <div class="upload-file">
-    {{#if name}}
-      {{#unless isUploading}}
-        <a href="{{unbound attachment.url}}" target="_new" class="uploaded-file">{{name}} ({{size}})</a>
-      {{else}}
-        {{name}} ({{size}})
-      {{/unless}}
-    {{else}}
-        {{#if attachment.isLoaded}}
-        <a href="{{unbound attachment.url}}" target="_new" class="uploaded-file">{{attachment.fileName}}</a>
-        {{else}}
-          {{partial 'is_loading'}}
-        {{/if}}
-    {{/if}}
-    <button type="button" {{action "removeFile" this}} class="close">
-      {{#unless isUploading}}
-        <i class="ss-standard ss-delete"></i>
-      {{else}}
-        {{partial 'is_uploading'}}
-      {{/unless}}
-    </button>
-  </div>
+{{#each file in files}}
+  {{upload-file file=file removeFile="removeFile"}}
 {{/each}}

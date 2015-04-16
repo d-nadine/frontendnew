@@ -2,7 +2,8 @@ require 'lib/radium/ember-uploader'
 
 Radium.UploadingMixin = Ember.Mixin.create
   percentage: 0
-  didInsertElement: ->
+
+  setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     url = "#{@get('controller.store._adapter.url')}/uploads"
     @setUploader(url)
@@ -10,8 +11,7 @@ Radium.UploadingMixin = Ember.Mixin.create
   setUploader: (url) ->
     @set('uploader', Ember.Uploader.create
                         url: url,
-                        model: @get('controller.model'),
-    )
+                        model: @get('controller.model'))
 
     @get('uploader').on('didUpload', this, 'onDidUpload')
     @get('uploader').on('progress', this, 'onDidProgress')
@@ -60,7 +60,5 @@ Radium.UploadingMixin = Ember.Mixin.create
   onDidProgress: (percent) ->
     @set('percentage', percent)
 
-  isUploadingDidChange: (->
-    return unless @get('uploader.isUploading')
+  isUploadingDidChange: Ember.observer 'uploader.isUploading', ->
     @set('percentage', 1)
-  ).observes('uploader.isUploading')
