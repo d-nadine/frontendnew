@@ -6,14 +6,14 @@
     </div>
     {{/unless}}
     <h6 class="sidebar-panel-title">
-      <i class="ss-standard ss-attach"></i> Attachments
+      Attachments
     </h6>
   </div>
   {{#if controller.files}}
-    {{detailed-uploadfilelist files=controller.files}}
+    {{upload-filelist files=files}}
   {{else}}
-  <div class="sidebar-panel-content">
-    No attachments
-  </div>
+    <div class="sidebar-panel-content">
+      No attachments
+    </div>
   {{/if}}
 </div>

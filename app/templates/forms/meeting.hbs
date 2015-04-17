@@ -1,4 +1,4 @@
-<form {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
+<div {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary :expander"}} {{action "expand" target="view"}}>
     {{#if showComments}}
       <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
@@ -53,18 +53,14 @@
           </div>
           <div class="clearfix">
             <div class="pull-right">
-              {{#if isNew}}
-                {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
-              {{else}}
-                {{file-uploader files=controller.files disableSave=disableSave model=model class="btn-file btn-messages-action"}}
-              {{/if}}
+              {{file-uploader files=controller.files disableSave=disableSave bucket=bucket model=model class="btn-file btn-messages-action"}}
             </div>
           </div>
         </div>
       </div>
       {{#if controller.files}}
         <div class="clearfix new-message-row">
-          {{upload-filelist files=controller.files}}
+          {{upload-filelist files=files}}
         </div>
       {{/if}}
       <div class="form-row">
@@ -116,4 +112,4 @@
     </div>
   {{/if}}
   {{view view.cancelMeetingDialogue}}
-</form>
+</div>

@@ -243,7 +243,16 @@
 
   .btn,
   .upload-file-btn {
-    margin-top: 2px;
+    margin-top: 9px;
+  }
+}
+
+.form .sidebar-panel .upload-filelist-component .upload-file-component.item {
+  float: none;
+  margin-left: 14px;
+
+  .ss-attach {
+    top: 5px;
   }
 }
 
@@ -278,6 +287,9 @@
     color: darken(#6e6e6e, 10%);
   }
 
+  ul.typeahead a {
+    color: $white;
+  }
   .company-picker, .contact-picker {
     ul.typeahead li a {
       background-color: $bright;

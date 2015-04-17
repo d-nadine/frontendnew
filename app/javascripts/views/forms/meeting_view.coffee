@@ -22,7 +22,7 @@ Radium.FormsMeetingView = Radium.FormView.extend
   classNames: ['meeting-form-container']
 
   onFormReset: ->
-    @$('form')[0].reset()
+    @$('.form').find('input:text').val('')
 
   readableStartsAt: Ember.computed 'startsAt', ->
     @get('controller.startsAt').toHumanFormatWithTime()

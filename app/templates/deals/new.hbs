@@ -100,13 +100,13 @@
         </div>
         <div class="control-group">
           <div class="controls add-files">
-            {{file-uploader files=controller.files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
+            <span>Select deal attachments</span> {{file-uploader files=files disableSave=disableSave bucket=bucket class="btn-file btn-messages-action"}}
           </div>
-          {{drag-fileuploader files=controller.files disableSave=disableSave bucket=bucket}}
+          {{drag-fileuploader files=files disableSave=disableSave bucket=bucket}}
         </div>
-        {{#if controller.files}}
+        {{#if files.length}}
           <div class="clearfix new-message-row">
-            {{detailed-uploadfilelist files=controller.files}}
+            {{upload-filelist files=files}}
           </div>
         {{/if}}
         <div class="control-group">

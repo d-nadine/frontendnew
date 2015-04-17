@@ -28,7 +28,9 @@ Radium.UploadingMixin = Ember.Mixin.create
 
       uploadToFiles.pushObject(wrappedFile)
 
-      hash = if model = @get('model')
+      model = @get('model')
+
+      hash = if model?.humanize
                 type: model.humanize(), id: model.get('id')
               else
                 bucket: @get('bucket')
@@ -44,7 +46,7 @@ Radium.UploadingMixin = Ember.Mixin.create
       adapter = store.adapterForType(Radium.Attachment)
       adapter.didFindRecord(store, Radium.Attachment, data, id)
       attachment = Radium.Attachment.find(id)
-      attachment.get('reference').reload() if attachment.get('reference')
+      #attachment.get('reference').reload() if attachment.get('reference')
       wrappedFile.set 'isUploading', false
       wrappedFile.set 'attachment', attachment
 

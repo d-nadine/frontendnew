@@ -164,6 +164,11 @@
     margin-left: 51px;
   }
 
+  .controls.add-files .file-uploader-component{
+    top: 2px;
+    color: $blue;
+  }
+
   hr{
     border-top: 1px solid $dark-background;
     border-bottom: 1px solid $dark-background;

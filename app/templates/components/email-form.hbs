@@ -110,10 +110,10 @@
         <h2>Add Signature?</h2>
       </div>
       <div class="modal-body">
-        <form class="form">
+        <div class="form">
           <p>Add a signature that can be appended onto the end of each email.</p>
           {{view signatureTextArea value=signature class="field input-block-level"}}
-        </form>
+        </div>
       </div>
       <div class="modal-footer">
         <a href="#" {{action "closeModal" target="view" bubbles=false}} class="btn">Cancel</a>

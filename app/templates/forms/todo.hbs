@@ -1,4 +1,4 @@
-<form {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
+<div {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
   <div {{bind-attr class="isFinished view.isFocused :primary :expander"}} {{action "expand" target="view"}}>
     {{view view.finishView}}
     <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
@@ -53,4 +53,4 @@
       {{partial 'forms/footer'}}
     </div>
   {{/if}}
-</form>
+</div>

@@ -13,7 +13,7 @@ Radium.UploadFileComponent = Ember.Component.extend
     "width: #{@get('progressIndicator')}%"
 
   _setup: Ember.on 'didInsertElement', ->
-    return if @get('file.isLoaded')
+    return if @get('file.isLoaded') || @get('file.attachment')
 
     @progress()
 
@@ -22,8 +22,9 @@ Radium.UploadFileComponent = Ember.Component.extend
       Ember.run.cancel progressTick
 
   progress: ->
-    if @get('file.isLoaded')
-      return Ember.run.cancel @get('progressTick')
+    if @get('file.isLoaded') || @get('file.attachment')
+      @_teardown()
+      return
 
     progressTick = Ember.run.later this, =>
       nextProgress = @get('progressIndicator') + 3
@@ -32,6 +33,10 @@ Radium.UploadFileComponent = Ember.Component.extend
         nextProgress = 0
 
       Ember.run.next =>
+        if @isDestroyed || @isDestroying
+          @_teardown()
+          return
+
         @set 'progressIndicator', nextProgress
 
       @progress()
