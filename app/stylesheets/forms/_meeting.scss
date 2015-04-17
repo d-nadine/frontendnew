@@ -207,20 +207,6 @@
   }
 }
 
-.meeting-form-invite {
-  display: inline-block;
-
-  > div {
-    float: left;
-    margin-right: 10px;
-
-    &.sync {
-      width: auto !important;
-      line-height: 31px;
-    }
-  }
-}
-
 .meeting-form-attendees {
   margin-top: 15px;
 }

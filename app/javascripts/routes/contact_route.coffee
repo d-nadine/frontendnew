@@ -55,6 +55,16 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
         Ember.Logger.error(error.stack)
         reject(model)
 
+  setupController: (controller, model) ->
+    ['todo'].forEach (form) ->
+      if form = controller.get("formBox.#{form}Form")
+        form?.reset()
+
+    controller.set('model', model)
+
+    if form = controller.get('form')
+      Ember.run.next ->
+        controller.trigger 'formChanged', form
 
   renderTemplate: ->
     @render()

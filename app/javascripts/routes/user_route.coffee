@@ -21,6 +21,13 @@ Radium.UserRoute = Radium.Route.extend
 
       @send 'closeModal'
 
+  setupController: (controller, model) ->
+    ['todo', 'meeting'].forEach (form) ->
+      if form = controller.get("formBox.#{form}Form")
+        form?.reset()
+
+    controller.set('model', model)
+
   renderTemplate: ->
     @render()
     @render 'user/sidebar',

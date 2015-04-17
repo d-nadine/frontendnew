@@ -34,18 +34,17 @@ Radium.InlineEditorView = Ember.View.extend
     @$().trigger 'click' if evt.target.tagName == 'SELECT'
 
   stopPropagation: (evt) ->
-    evt.stopPropagation();
-    evt.preventDefault();
+    evt.stopPropagation()
+    evt.preventDefault()
     return false;
 
   click: (evt) ->
     return unless @get('activateOnClick')
     return if @get('disabled')
 
-    stopPropagation = ->
-
     if evt.target?.type == 'file'
-      return @stopPropagation(evt)
+      evt.stopPropagation()
+      return
 
     target = $(evt.target)
 
