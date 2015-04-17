@@ -1,5 +1,5 @@
 Radium.UploadFileComponent = Ember.Component.extend
-  action:
+  actions:
     removeFile: (file) ->
       @sendAction 'removeFile', file
 

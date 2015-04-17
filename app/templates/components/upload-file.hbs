@@ -17,6 +17,10 @@
     <div class="bar" {{bind-attr style="fakeProgressWidth"}}></div>
   </div>
 {{else}}
+  {{log hideUploadedBy}}
+  {{#unless hideUploadedBy}}
+    <span class="uploaded-by">uploaded by{{resource-link-to file.attachment.uploadedBy}}</span>
+  {{/unless}}
   <a href="#" {{action "removeFile" file}} class="delete">
     <i class="ss-standard ss-delete"></i>
   </a>

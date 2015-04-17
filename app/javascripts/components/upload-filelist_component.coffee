@@ -15,3 +15,5 @@ Radium.UploadFilelistComponent = Ember.Component.extend
       false
 
   classNameBindings: [':attachment']
+
+  hideUploadedBy: false
