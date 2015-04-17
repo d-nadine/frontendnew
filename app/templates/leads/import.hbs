@@ -39,13 +39,13 @@
           {{import-header leader="Whole Name" source=headerData value=headerInfo.name row=firstDataRow}}
           {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
           {{#each email in headerInfo.emailMarkers}}
-            {{#multiple-control item=email items=headerInfo.emailMarkers model=headerInfo relationship="emailMarkers" icon= "ss-mail" source=headerData}}
+            {{#multiple-control item=email items=headerInfo.emailMarkers model=headerInfo relationship="emailMarkers" icon= "ss-mail" source=headerData labels=Radium.EmailLabels}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
           {{#each email in headerInfo.phoneNumberMarkers}}
-            {{#multiple-control item=email items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData}}
+            {{#multiple-control item=email items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData labels=Radium.PhoneLabels}}
               {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
               {{previewData value}}
             {{/multiple-control}}
