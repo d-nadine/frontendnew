@@ -50,6 +50,17 @@ Radium.EmailFormComponent = Ember.Component.extend
     hideAddSignature: ->
       @set 'signatureAdded', true
 
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    @$('.info').tooltip(html: true)
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    el = @$('info')
+
+    if el.data('tooltip')
+      el.tooltip('destroy')
+
   isEditable: true
   isSubmitted: false
   signatureAdded: false
