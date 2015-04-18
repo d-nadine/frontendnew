@@ -86,7 +86,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     ret = Ember.A()
 
     for i of placeholderMap
-      ret.push("{#{placeholderMap[i]}|fallback}") if placeholderMap.hasOwnProperty(i)
+      ret.push("{#{placeholderMap[i]}}") if placeholderMap.hasOwnProperty(i)
 
     ret
 

@@ -24,4 +24,3 @@ Radium.ModalView = Radium.View.extend
     superFunction = @__nextSuper.bind this
 
     @$().one $.support.transition.end, superFunction
-

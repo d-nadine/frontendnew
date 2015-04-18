@@ -109,7 +109,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
   highlighter: (item) ->
     string = @getValue item
 
-    query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+    query = @query.replace(/[\-\[\]()*+?.,\\\^$|#\s]/g, '\\$&')
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
       "<strong>#{match}</strong>"
 
@@ -147,6 +147,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     @shown = true
     this
 
+  showTypeahaedWhenEmpty: true
+
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
@@ -163,6 +165,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     el = @autocompleteElement.call this
 
+    Ember.assert "No autocompleteElement found", el.length
+
     isAsync = @get('isAsync')
 
     unless @get('source')
@@ -173,6 +177,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     typeahead = el.data('typeahead')
 
     isAsync = @get('isAsync')
+
+    showTypeahaedWhenEmpty = @get('showTypeahaedWhenEmpty')
 
     typeahead.lookup = (event) ->
       items = undefined
@@ -187,7 +193,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
       items = (if $.isFunction(@source) then @source(@query, $.proxy(@process, this)) else @source)
 
-      if !isAsync && !@query && items.get('length')
+      if !isAsync && !@query && items.get('length') && showTypeahaedWhenEmpty
         return @render(items.slice(0, @options.items)).show()
 
       (if items then @process(items) else this)

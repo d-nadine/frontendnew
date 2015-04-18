@@ -8,3 +8,4 @@ Radium.KeyConstantsMixin = Ember.Mixin.create
   ARROW_UP: 38
   ARROW_LEFT: 37
   ARROW_RIGHT: 39
+  OPEN_CURLY_BRACE: 219
