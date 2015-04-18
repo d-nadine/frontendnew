@@ -1,6 +1,7 @@
 Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   Radium.AutocompleteMixin,
   Radium.KeyConstantsMixin,
+  Radium.ContentEditableBehaviour,
   classNameBindings: [':richtext-editor', 'isInvalid']
   btnSize: 'bth-xs'
   height: 120
@@ -48,6 +49,11 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @set 'placeholderShown', true
 
   addOverrides: ->
+    Ember.run.next =>
+      typeahead = @getTypeahead()
+
+      typeahead.show = @showTypeahead.bind(typeahead, @getCaretCharacterOffsetWithin)
+
     editable = @$('.note-editable')
 
     if tabindex = @get('tabindex')
@@ -124,18 +130,22 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   showTypeahaedWhenEmpty: false
 
-  showTypeaheadMenu: ->
-    return if @get('isAsync')
-    return if @get('disabled')
+  showTypeahead: (getSelectionCoords) ->
+    element = $('.note-editable').get(0)
+    doc = element.ownerDocument or element.document
+    win = doc.defaultView or doc.parentWindow
 
-    $('.typeahead.dropdown-menu').hide()
+    range = win.getSelection().getRangeAt(0).cloneRange()
 
-    typeahead = @getTypeahead()
+    textNode = range.endContainer
+    $(textNode).after(@$menu)
 
-    return typeahead.hide() if typeahead.shown
+    @$menu.css(top: 'auto', left: 'auto', display: 'inline-table')
 
-    source = @source.toArray()
+    setTimeout =>
+      @$menu.show()
+    , 100
 
-    typeahead.render(source.slice(0, source.length)).show()
+    @shown = true
 
-    false
+    this
