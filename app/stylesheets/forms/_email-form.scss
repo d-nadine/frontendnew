@@ -152,10 +152,11 @@
     left: -4px;
   }
 
-  .note-editable {
-    &:empty {
-      border: 1px solid $red;
-    }
+  .note-editable.placeholder:after {
+    content: "Hi {name}";
+    position: absolute;
+    top: 10px;
+    color: #a9a9a9;
   }
 
   .textbox-wrap .prompt {

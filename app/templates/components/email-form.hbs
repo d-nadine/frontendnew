@@ -69,7 +69,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#">Insert Name</a>
+              <a {{action "insertPlaceholder" "name"}} href="#">Insert Name</a>
             </li>
             <li>
               <a href="#">Insert Company</a>
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=controller.files content=html header="New Email" isInvalid=messageIsInvalid tabindex="3"}}
+        {{richtext-editor files=files content=html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
         {{#unless signatureAdded}}
           <div class="prompt">
             <a href="#" {{action "addSignature"}} class="add-signature">Add a Signature</a>

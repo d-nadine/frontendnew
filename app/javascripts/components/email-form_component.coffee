@@ -1,5 +1,14 @@
-Radium.EmailFormComponent = Ember.Component.extend
+Radium.TemplatePlaceholderMap =
+  "name": "name"
+  "company": "company"
+  "signature": "signature"
+
+Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   actions:
+    insertPlaceholder: (key) ->
+      @trigger 'placeholderInsered', key
+      false
+
     closeModal: ->
       @$().one $.support.transition.end, =>
         @set 'showSignatureModal', false
@@ -54,6 +63,11 @@ Radium.EmailFormComponent = Ember.Component.extend
     @_super.apply this, arguments
     @$('.info').tooltip(html: true)
 
+    Ember.run.scheduleOnce 'afterRender', this, '_afterSetup'
+
+  _afterSetup: ->
+    @$('.autocomplete.email input[type=text]').focus()
+
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     el = @$('info')
@@ -65,6 +79,16 @@ Radium.EmailFormComponent = Ember.Component.extend
   isSubmitted: false
   signatureAdded: false
   showSignatureModal: false
+
+  insertActions: Ember.computed ->
+    placeholderMap = Radium.TemplatePlaceholderMap
+
+    ret = Ember.A()
+
+    for i of placeholderMap
+      ret.push("{#{placeholderMap[i]}|fallback}") if placeholderMap.hasOwnProperty(i)
+
+    ret
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']

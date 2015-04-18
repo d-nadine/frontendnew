@@ -1,4 +1,5 @@
 Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
+  Radium.AutocompleteMixin,
   classNameBindings: [':richtext-editor', 'isInvalid']
   btnSize: 'bth-xs'
   height: 120
@@ -30,9 +31,23 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     Ember.run.scheduleOnce 'afterRender', this, 'addOverrides'
 
+    return unless parent = @get('parent')
+
+    parent.on "placeholderInsered", this, "onPlaceholderInserted"
+
+  removePlaceHolder: ->
+    editable = @$('.note-editable')
+    editable.removeClass('placeholder')
+    editable.html('')
+    @set 'placeholderShown', true
+
   addOverrides: ->
+    editable = @$('.note-editable')
+
     if tabindex = @get('tabindex')
-      @$('.note-editable').attr('tabindex', tabindex)
+      editable.attr('tabindex', tabindex)
+
+    editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this)
 
     dropdowns = $('[data-toggle=dropdown]')
 
@@ -61,10 +76,11 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
 
+    @$('.note-editable').off 'focus'
     @$('textarea').destroy()
     @$(".note-dropzone").off('drop')
 
-  keyUp: ->
+  input: ->
     @doUpdate()
 
   click: (e) ->
@@ -75,3 +91,23 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   doUpdate: ->
     content = @$('.note-editable').html()
     @set('content', content)
+
+  onPlaceholderInserted: (key) ->
+    @removePlaceHolder() unless @get('placeholderShown')
+
+    text = Radium.TemplatePlaceholderMap[key]
+
+    text = "{#{text}|\"fallback\"}"
+
+    editable = @$('.note-editable')
+
+    content = editable.html() + text
+    editable.html(content)
+
+    editable.setEndOfContentEditble()
+    @doUpdate()
+
+  placeholderShown: false
+
+  autocompleteElement: ->
+    @$('.note-editable')

@@ -15,3 +15,11 @@ $.fn.restoreCursor = (pos )->
   selection = window.getSelection()
   selection.removeAllRanges()
   selection.addRange(range)
+
+$.fn.setEndOfContentEditble = ->
+  range = document.createRange()
+  range.selectNodeContents(this.get(0))
+  range.collapse(false)
+  selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range);
