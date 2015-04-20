@@ -95,7 +95,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   keyDown: (e) ->
     if e.keyCode == @OPEN_CURLY_BRACE
       @query = "{"
-      return
+      return false
 
     @doUpdate()
 
@@ -131,16 +131,20 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   showTypeahaedWhenEmpty: false
 
   showTypeahead: (getSelectionCoords) ->
-    element = $('.note-editable').get(0)
-    doc = element.ownerDocument or element.document
-    win = doc.defaultView or doc.parentWindow
+    selection = Radium.rangy.getSelection()
+    range = selection.getRangeAt(0).cloneRange()
+    editor = $('.note-editable')
 
-    range = win.getSelection().getRangeAt(0).cloneRange()
+    lastNode = range.endContainer
 
-    textNode = range.endContainer
-    $(textNode).after(@$menu)
+    $.summernote.core.dom.insertAfter(@$menu.get(0), lastNode)
 
-    @$menu.css(top: 'auto', left: 'auto', display: 'inline-table')
+    positioning = if editor.is(':empty')
+                    editor.position()
+                  else
+                    top: 'auto', left: 'auto'
+
+    @$menu.css(top: positioning.top, left: positioning.left, display: 'inline-table')
 
     setTimeout =>
       @$menu.show()

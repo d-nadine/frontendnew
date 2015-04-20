@@ -81,5 +81,6 @@ require 'controllers'
 
 require /helpers/
 require /mixins/
+require /utils/
 
 require 'debug'
