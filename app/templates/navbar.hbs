@@ -1,7 +1,7 @@
 <div id="topbar" role="header" class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     {{#link-to "index" class="brand"}}
-      <img src="/images/logo.png" alt="::radium">
+      <img src="/images/logo_white.png" alt="::radium">
     {{/link-to}}
     <div class="container">
       <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".main-nav-collapse">
@@ -10,6 +10,9 @@
         <span class="icon-bar"></span>
       </button>
       <div class="pull-right">
+        {{#link-to "settings" class="settings"}}
+          <i class="ss-standard ss-settings"></i>
+        {{/link-to}}
         {{render "search/main"}}
         <ul class="nav">
           <li>

@@ -7,6 +7,8 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
             {height: 64, width: 64}
           else if style == 'small'
             {height: 30, width: 30}
+          else if style == 'contacts-table'
+            {height: 32, width: 32}
           else if style == 'dashboard'
             {height: 244, width: 244}
           else if style == 'tiny'

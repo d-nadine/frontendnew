@@ -9,6 +9,6 @@ Ember.Handlebars.registerBoundHelper 'dynamicAvatar', (context, property, option
   args.unshift context
   options.types = [context]
 
-  options.hash.style = "tiny"
+  options.hash.style = "contacts-table"
 
   Ember.Handlebars.helpers.avatar.apply context, args

@@ -22,7 +22,8 @@
   <tr {{bind-attr class="item.isChecked:is-checked"}}>
     {{#if check}}
       <td class="check">
-        {{input type="checkbox" checked=item.isChecked disabled=allChecked}}
+        {{input type="checkbox" checked=item.isChecked disabled=allChecked id=item.id}} 
+        <label {{bind-attr for="item.id"}}><span></span></label>
       </td>
     {{/if}}
     {{#each column in columns}}
