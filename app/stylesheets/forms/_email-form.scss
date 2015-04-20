@@ -158,6 +158,17 @@
     color: #a9a9a9;
   }
 
+  .note-editable .template-item {
+    background-color: #777;
+    color: white;
+    font-weight: bold;
+    padding: 1px 4px 1px 4px;
+    a {
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
   .textbox-wrap .prompt {
     width: inherit;
     background: #f9f9f9;

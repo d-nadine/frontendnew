@@ -28,7 +28,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       self.send 'setBindingValue', object
 
       # FIXME: find a less hacky way than type checking
-      return if self instanceof Radium.AutocompleteTextboxComponent
+      return if self instanceof Radium.AutocompleteTextboxComponent ||
+                self instanceof Radium.RichtextEditorComponent
 
       isInput = el.get(0).tagName == "INPUT"
 

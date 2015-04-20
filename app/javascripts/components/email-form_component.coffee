@@ -5,8 +5,8 @@ Radium.TemplatePlaceholderMap =
 
 Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   actions:
-    insertPlaceholder: (key) ->
-      @trigger 'placeholderInsered', key
+    insertPlaceholder: (placeholder) ->
+      @trigger 'placeholderInsered', placeholder
       false
 
     closeModal: ->
@@ -86,7 +86,9 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     ret = Ember.A()
 
     for i of placeholderMap
-      ret.push("{#{placeholderMap[i]}}") if placeholderMap.hasOwnProperty(i)
+      if placeholderMap.hasOwnProperty(i)
+        item = Ember.Object.create(name: i, display: "{#{placeholderMap[i]}}")
+        ret.pushObject item
 
     ret
 

@@ -4,8 +4,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   Radium.ContentEditableBehaviour,
 
   actions:
-    setBindingValue: (value) ->
-      p value
+    setBindingValue: (placeholder) ->
+      @onPlaceholderInserted(placeholder)
+      @transitionToEditing()
+      false
 
   classNameBindings: [':richtext-editor', 'isInvalid']
   btnSize: 'bth-xs'
@@ -57,7 +59,21 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     Ember.run.next =>
       typeahead = @getTypeahead()
 
-      typeahead.show = @showTypeahead.bind(typeahead, @getCaretCharacterOffsetWithin)
+      typeahead.show = @showTypeahead.bind(typeahead)
+
+      typeaheadProcess = typeahead.process
+
+      typeaheadHide = typeahead.hide
+
+      typeahead.hide = =>
+        @transitionToEditing()
+
+        typeaheadHide.apply typeahead, arguments
+
+      typeahead.process = =>
+        return if @inEditingState()
+
+        typeaheadProcess.apply typeahead, arguments
 
       typeaheadKeydown = typeahead.keydown.bind(typeahead)
 
@@ -73,9 +89,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
           return typeaheadKeydown(e)
 
         if keyCode == @ESCAPE
-          @set 'editorState', 'editing'
-          typeahead.blur()
-          @query = ""
+          @transitionToEditing()
           return false
 
         if keyCode == @DELETE
@@ -95,9 +109,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       typeahead.$element.off 'blur'
 
       blurHandler = (e) =>
-        @set 'editorState', 'editing'
-        @query = ""
-        typeaheadBlur()
+        @transitionToEditing()
+        false
 
       typeahead.blur = null
 
@@ -151,6 +164,11 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   inTemplateSelection: ->
     @editorState == "templateSelection"
 
+  transitionToEditing: ->
+    @set 'editorState', 'editing'
+    @query = ""
+    @$('ul.typeahead').remove()
+
   keyDown: (e) ->
     return false if @inTemplateSelection()
 
@@ -159,9 +177,27 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       @set 'editorState', "templateSelection"
       return false
 
+    if e.keyCode == @DELETE
+      range = Radium.rangy.getRange()
+
+      parentNode = range.startContainer.parentNode
+
+      return unless parentNode.className == "remove-template-item"
+
+      $(parentNode.parentNode).remove()
+
+      e.stopPropagation()
+      return false
+
     @doUpdate()
 
   click: (e) ->
+    if e.target.className == "remove-template-item"
+      $(e.target.parentNode).remove()
+
+      e.stopPropagation()
+      return false
+
     @doUpdate()
     $('[data-toggle=dropdown]').each ->
       $(this).parents('.btn-group.open').removeClass 'open'
@@ -170,16 +206,16 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     content = @$('.note-editable').html()
     @set('content', content)
 
-  onPlaceholderInserted: (key) ->
+  onPlaceholderInserted: (placeholder) ->
     @removePlaceHolder() unless @get('placeholderShown')
 
-    text = Radium.TemplatePlaceholderMap[key]
+    text = Radium.TemplatePlaceholderMap[placeholder.name]
 
-    text = "{#{text}|\"fallback\"}"
+    node = "<span class=\"template-item\">{#{text}|\"fall back\"}&nbsp;<a class=\"remove-template-item\" href=\"#\">x</a></span>"
 
     editable = @$('.note-editable')
 
-    content = editable.html() + text
+    content = editable.html() + node + "&nbsp;"
     editable.html(content)
 
     editable.setEndOfContentEditble()
@@ -192,7 +228,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   showTypeahaedWhenEmpty: false
 
-  showTypeahead: (getSelectionCoords) ->
+  showTypeahead: ->
     selection = Radium.rangy.getSelection()
     range = selection.getRangeAt(0).cloneRange()
     editor = $('.note-editable')
