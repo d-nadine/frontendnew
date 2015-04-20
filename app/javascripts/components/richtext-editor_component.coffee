@@ -2,6 +2,11 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   Radium.AutocompleteMixin,
   Radium.KeyConstantsMixin,
   Radium.ContentEditableBehaviour,
+
+  actions:
+    setBindingValue: (value) ->
+      p value
+
   classNameBindings: [':richtext-editor', 'isInvalid']
   btnSize: 'bth-xs'
   height: 120
@@ -54,6 +59,52 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
       typeahead.show = @showTypeahead.bind(typeahead, @getCaretCharacterOffsetWithin)
 
+      typeaheadKeydown = typeahead.keydown.bind(typeahead)
+
+      typeahead.keyDown = null
+
+      typeahead.$element.off 'keydown'
+
+      keyDownHanlder = (e) =>
+        keyCode = e.keyCode
+
+        if @inEditingState() || [@TAB, @ENTER, @ARROW_UP, @ARROW_DOWN].contains keyCode
+
+          return typeaheadKeydown(e)
+
+        if keyCode == @ESCAPE
+          @set 'editorState', 'editing'
+          typeahead.blur()
+          @query = ""
+          return false
+
+        if keyCode == @DELETE
+          @query = @query.slice(0, (@query.length - 1))
+          return false
+
+        @query += String.fromCharCode(e.keyCode)
+
+        return false
+
+      typeahead.keydown = keyDownHanlder
+
+      typeahead.$element.on 'keydown', keyDownHanlder.bind(typeahead)
+
+      typeaheadBlur = typeahead.blur.bind(typeahead)
+
+      typeahead.$element.off 'blur'
+
+      blurHandler = (e) =>
+        @set 'editorState', 'editing'
+        @query = ""
+        typeaheadBlur()
+
+      typeahead.blur = null
+
+      typeahead.$element.on 'blur', blurHandler.bind(typeahead)
+
+      typeahead.blur = typeaheadBlur.bind(typeahead)
+
     editable = @$('.note-editable')
 
     if tabindex = @get('tabindex')
@@ -92,9 +143,20 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @$('textarea').destroy()
     @$(".note-dropzone").off('drop')
 
+  editorState: 'editing'
+
+  inEditingState: ->
+    @editorState == "editing"
+
+  inTemplateSelection: ->
+    @editorState == "templateSelection"
+
   keyDown: (e) ->
+    return false if @inTemplateSelection()
+
     if e.keyCode == @OPEN_CURLY_BRACE
       @query = "{"
+      @set 'editorState', "templateSelection"
       return false
 
     @doUpdate()
