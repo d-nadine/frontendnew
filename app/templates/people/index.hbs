@@ -192,14 +192,6 @@
         <ul class="col-menu dropdown-menu">
           {{#each column in combinedColumns}}
             {{x-check leader=column.heading checked=column.checked}}
-            <li>
-              <label {{bind-attr for=binding}}><span></span></label>
-              <span>{{heading}}</span> --}}
-              <label {{bind-attr class=binding}}>
-                {{input type="checkbox" checked=checked}}
-                <span>{{heading}}</span>
-              </label>
-            </li>
           {{/each}}
         </ul>
         {{input type="text" value=searchText class="searchbox" placeholder="search"}}
@@ -230,3 +222,4 @@
     </div>
   {{/if}}
 </div>
+
