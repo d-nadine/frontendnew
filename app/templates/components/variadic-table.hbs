@@ -40,9 +40,7 @@
   </tr>
 {{else}}
   {{#unless list.content.isLoading}}
-    <tr>
-      <td {{bind-attr colspan="colSpan"}} class="text-center">No Results</td>
-    </tr>
+    <td {{bind-attr colspan="colSpan"}} class="table-no-results">No Results</td>
   {{/unless}}
 {{/each}}
   </tbody>
