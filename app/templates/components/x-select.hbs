@@ -1,4 +1,2 @@
-<label for="{{unbound checkBoxId}}">
-   {{label}}
-  <input id="{{unbound checkBoxId}}" type="checkbox" {{bind-attr checked="checked"}}>
-</label>
+<input type="checkbox" id="{{unbound view.checkBoxId}}" {{bind-attr disabled=disabled}}/>
+<label for="{{unbound checkBoxId}}"><span>{{leader}}</span></label>

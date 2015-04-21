@@ -1,12 +1,13 @@
-Radium.XSelectComponent = Ember.Component.extend(
-  setup: Ember.on('init', ->
-    @on 'change', this, @_updateElementValue
-    return
-  )
-  checkBoxId: Ember.computed(->
-    'checker-' + @elementId
-  )
+Radium.XSelectComponent = Ember.Component.extend
+  click: (event) ->
+    event.stopPropagation()
+
+  init: ->
+    @_super.apply this, arguments
+    @on "change", this, this._updateElementValue
+
   _updateElementValue: ->
-    @sendAction()
-    @set 'checked', @$('input').prop('checked')
-)
+    @set 'checked', this.$('input').prop('checked')
+
+  checkBoxId: Ember.computed ->
+    "checker-#{@get('elementId')}"

@@ -21,10 +21,7 @@
 {{#each item in list itemController="variadicItem"}}
   <tr {{bind-attr class="item.isChecked:is-checked"}}>
     {{#if check}}
-      <td class="check">
-        {{input type="checkbox" checked=item.isChecked disabled=allChecked id=item.id}} 
-        <label {{bind-attr for="item.id"}}><span></span></label>
-      </td>
+      {{x-select checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
     {{/if}}
     {{#each column in columns}}
       {{#with item}}
