@@ -3,7 +3,7 @@
     <tr>
       {{#if check}}
       <th class="check">
-        {{input type="checkbox" checked=allChecked}}
+        {{x-select leader=column.heading checked=allChecked}}
       </th>
       {{/if}}
       {{#each column in columns}}
