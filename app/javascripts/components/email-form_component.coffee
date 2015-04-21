@@ -38,17 +38,25 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('email.html') || ''
-      currentLength = current.length
+      current = @get('html') || ''
+      currentLength = editable.text().length
       signature = @get('signature').replace(/\n/g, '<br/>')
 
       newMessage = "#{current}<br/><br/>#{signature}"
 
-      @set 'email.html', newMessage
+      @set 'html', newMessage
       editable.html(newMessage)
       editable.height("+=50")
-      editable.restoreCursor(currentLength)
+
+      # FIXME: editor menu appears sometims
+      @$('ul.typeahead').hide()
+
+      # FIXME: restore cursor to position
+      # before signature added
+      # editable.restoreCursor(currentLength)
+
       @set 'signatureAdded', true
+      false
 
     expandList: (section) ->
       @set("show#{section.capitalize()}", true)

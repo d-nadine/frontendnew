@@ -229,6 +229,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   showTypeahaedWhenEmpty: false
 
   showTypeahead: ->
+    return if $('ul.typeahead').is(':visible')
+
     selection = Radium.rangy.getSelection()
     range = selection.getRangeAt(0).cloneRange()
     editor = $('.note-editable')
