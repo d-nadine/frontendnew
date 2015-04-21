@@ -5,40 +5,49 @@
       <i class="ss-standard ss-help"></i>
     </a>
     <div class="type-toggle">
-      <a href="#" class="to active">Single</a>
+      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "showSingleView"}}>Single</a>
       <span>|</span>
-      <a href="#" class="">Mail Merge</a>
+      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "showBulkView"}}>Mail Merge</a>
     </div>
   </div>
   <div class="email-form-body">
-    <div class="addresses">
-      <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-        <span class="toggles pull-right">
-          {{#unless showCc}}
-            <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
-          {{/unless}}
-          {{#unless showBcc}}
-            <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
-          {{/unless}}
-        </span>
-        <label>To:</label>
-        {{view to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+    {{#if singleMode}}
+      <div class="addresses">
+        <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+          <span class="toggles pull-right">
+            {{#unless showCc}}
+              <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
+            {{/unless}}
+            {{#unless showBcc}}
+              <a href="#" class="muted" tabIndex="7" {{action "expandList" 'bcc'}}>BCC</a>
+            {{/unless}}
+          </span>
+          <label>To:</label>
+          {{view to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+        </div>
+
+        {{#if showCc }}
+          <div class="field control-box control-box-block-level recipients cc">
+            <label>CC</label>
+            {{view cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+          </div>
+        {{/if}}
+
+        {{#if showBcc }}
+          <div class="field control-box control-box-block-level recipients bcc">
+            <label>BCC</label>
+            {{view bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
+          </div>
+        {{/if}}
       </div>
-
-      {{#if showCc }}
-        <div class="field control-box control-box-block-level recipients cc">
-          <label>CC</label>
-          {{view cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+    {{/if}}
+    {{#if bulkMode}}
+      <div class="addresses">
+        <div {{bind-attr class="view.bulkList.isInvalid:is-invalid view.bulkList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+          {{view bulk tabindex=1 placeholder="Add recipient or list" viewName="bulkList"}}
         </div>
-      {{/if}}
-
-      {{#if showBcc }}
-        <div class="field control-box control-box-block-level recipients bcc">
-          <label>BCC</label>
-          {{view bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
-        </div>
-      {{/if}}
-    </div>
+      </div>
+    {{/if}}
     <div class="message">
       <div class="subject-wrap">
         <input type="text" placeholder="Subject:" class="subject tt-input" autocomplete="off" spellcheck="false" dir="auto">

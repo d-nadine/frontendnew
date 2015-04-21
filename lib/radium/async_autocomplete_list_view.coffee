@@ -12,7 +12,7 @@ Radium.AsyncAutocompleteView = Radium.AutocompleteView.extend
     Radium.AutocompleteItem.find(queryParameters).then((people) =>
       results = people.filter(@get('parentView').filterResults.bind(this))
                      .map (item) =>
-                        return false unless item.get('email')
+                        return false unless item.get('email') || item.get('isTag')
                         return false if keys.map((key) -> key.key).contains(item.get('key').key || "#{item.get('email')} - user")
                         keys.push(item.get('key'))
                         @mapSearchResult.call this, item
@@ -26,4 +26,4 @@ Radium.EmailAsyncAutocompleteView = Radium.AsyncAutocompleteView.extend
     email_only: true
 
   filterResults: (item) ->
-    !@get('source').contains(item) && item.get('email')
+    !@get('source').contains(item) && item.get('email') || item.get('isTag')

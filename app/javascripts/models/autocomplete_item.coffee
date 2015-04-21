@@ -5,6 +5,7 @@ Radium.AutocompleteItem = Radium.Model.extend
   avatarKey: DS.attr('string')
   type: DS.attr('string')
   displayName: DS.attr('string')
+  count: DS.attr('number')
 
   person: Ember.computed '_personUser', '_personContact', '_personCompany', (key, value) ->
     if arguments.length == 2 && value
@@ -24,3 +25,6 @@ Radium.AutocompleteItem = Radium.Model.extend
 
   isExternal: Ember.computed 'person', ->
     Ember.isEmpty(@get('person'))
+
+  isTag: Ember.computed 'type', ->
+    @get('type') == 'tag'

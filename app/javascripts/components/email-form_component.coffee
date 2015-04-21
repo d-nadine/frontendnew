@@ -67,6 +67,20 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     hideAddSignature: ->
       @set 'signatureAdded', true
 
+    showSingleView: ->
+      @set 'showCc', false
+      @set 'showBcc', false
+      @set('singleMode', true)
+      @set('bulkMode', false)
+      false
+
+    showBulkView: ->
+      @set 'showCc', false
+      @set 'showBcc', false
+      @set('singleMode', false)
+      @set('bulkMode', true)
+      false
+
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     @$('.info').tooltip(html: true)
@@ -122,6 +136,15 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     sourceBinding: 'controller.email.bcc'
     showAvatar: false
 
+  bulk: Radium.EmailAsyncAutocompleteView.extend
+    classNameBindings: [':email']
+    sourceBinding: 'controller.email.bulk'
+    showAvatar: false
+    queryParameters: (query) ->
+      scopes: ['user', 'contact', 'tag']
+      term: query
+      email_only: true
+
   signatureTextArea: Radium.TextArea.extend
     classNameBindings: ['isInvalid']
     placeholder: 'Signature'
@@ -129,3 +152,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       return unless @get('targetObject.signatureSubmited')
 
       @get('value').length == 0
+
+  singleMode: true
+  bulkMode: false

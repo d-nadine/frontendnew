@@ -22,6 +22,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set 'to', to
     @set 'cc', Ember.A()
     @set 'bcc', Ember.A()
+    @set 'bulk', Ember.A()
     @set 'isDraft', false
     @set 'sendTime', null
     @set 'checkForResponse', null
