@@ -1,9 +1,8 @@
 Radium.ToggleSwitchComponent = Ember.Component.extend
   classNames: ['toggle-switch']
 
-  setup: (->
+  setup: Ember.on 'init', ->
     @on 'change', this, @_updateElementValue
-  ).on('init')
 
   checkBoxId: Ember.computed ->
     "checker-#{@get('elementId')}"
