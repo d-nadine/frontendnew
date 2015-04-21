@@ -211,7 +211,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     text = Radium.TemplatePlaceholderMap[placeholder.name]
 
-    node = "<span class=\"template-item\">{#{text}|\"fall back\"}&nbsp;<a class=\"remove-template-item\" href=\"#\">x</a></span>"
+    node = "<span class=\"badge badge-info template-item\">{#{text}|\"fall back\"}&nbsp;<span class=\"remove-template-item\" href=\"#\">x</span></span>"
 
     editable = @$('.note-editable')
 

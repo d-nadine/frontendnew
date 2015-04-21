@@ -4216,8 +4216,7 @@
       button.update($popover, styleInfo);
 
       var $linkPopover = $popover.find('.note-link-popover');
-      // FIXME: Better way to stop link menu showing
-      if (styleInfo.anchor && styleInfo.anchor.className !== 'remove-template-item') {
+      if (styleInfo.anchor) {
         var $anchor = $linkPopover.find('a');
         var href = $(styleInfo.anchor).attr('href');
         var target = $(styleInfo.anchor).attr('target');

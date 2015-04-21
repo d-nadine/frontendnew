@@ -159,12 +159,10 @@
   }
 
   .note-editable .template-item {
-    background-color: #777;
-    color: white;
-    font-weight: bold;
-    padding: 2px 7px 2px 7px;
-    a {
-      color: $white;
+    color: $white;
+    font-size: 14px;
+    border-radius: 12px;
+    span {
       cursor: pointer;
     }
   }
