@@ -25,6 +25,15 @@
       <div class="collapse nav-collapse main-nav-collapse">
         <ul class="nav main-nav">
 
+          <li>
+            <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action "toggleNotifications"}} href="#">
+              <i class="ss-standard ss-notifications"></i>
+              {{#if notificationCount}}
+                {{badge notificationCount style="important"}}
+              {{/if}}
+            </a>
+          </li>
+
           <li class="dropdown">
             {{#link-to "conversations" "incoming"}}
               Conversations
