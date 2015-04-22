@@ -188,4 +188,64 @@
     font-size: 11px;
     color: #aaa;
   }
+
+  .bulk .recipients:not(.control-box) {
+    float: left;
+    display: inline-block;
+    width: 100%;
+    padding: 0px;
+    overflow-y: scroll;
+    background: aliceblue;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    max-height: 105px;
+    min-height: 50px;
+  }
+
+  .bulk .recipients .item {
+    padding: 4px 15px 4px 10px;
+    line-height: 2em;
+    display: inline-block;
+    width: calc(100% - 25px);
+    border-bottom: 1px solid #e9e9e9;
+    display: inline-block;
+    float: left;
+  }
+
+  .bulk .recipients .item .list {
+    display: inline-block;
+    float: left;
+    background: #BFD9F7;
+    border: 1px solid #92BDF2;
+    height: calc(2em - 2px);
+    padding: 0 10px;
+    border-radius: 3px;
+  }
+
+  .bulk .recipients .item .name {
+    display: inline-block;
+    float: left;
+    margin: 0 0 0 10px;
+  }
+
+  .bulk .recipients .item .helper {
+    display: none;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .recipients .item:hover .helper {
+    display: inline-block;
+  }
+
+  .bulk .recipients .item .remove {
+    display: inline-block;
+    color: #ccc;
+    float: right;
+    font-size: 12px;
+  }
+
+  .bulk ul.as-selections li.as-selection-item {
+    display: none;
+  }
 }

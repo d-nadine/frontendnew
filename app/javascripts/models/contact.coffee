@@ -102,12 +102,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   displayName: Ember.computed 'name', 'primaryEmail', 'primaryPhone', ->
     @get('name') || @get('primaryEmail.value') || @get('primaryPhone.value')
 
-  nameWithCompany: Ember.computed 'name', 'company.name', ->
-    if @get('company.name')
-      "#{@get('name')} (#{@get('company.name')})"
-    else
-      @get('name')
-
   nameWithEmail: Ember.computed 'name', 'primaryEmail', ->
     name = @get('name')
     email = @get('email')
