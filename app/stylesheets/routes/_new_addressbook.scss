@@ -784,6 +784,10 @@
 
     td.name {
       font-weight: 600;
+
+      &:first-of-type {
+        padding-top: 18px;
+      }
     }
 
     td.phone {

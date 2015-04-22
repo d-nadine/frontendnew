@@ -1,0 +1,49 @@
+<div id="topbar" role="header" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    {{#linkTo "index" class="brand"}}
+      <img src="/images/logo.png" alt="::radium">
+    {{/linkTo}}
+    <div class="container">
+      <ul class="nav">
+
+        <li>
+          {{#linkTo "calendar" today}}
+            Calendar
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "user" currentUser}}
+            Tasks
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "pipeline"}}
+            Pipeline
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "addressbook.filter" 'all'}}
+            Address Book
+          {{/linkTo}}
+        </li>
+
+        <li>
+          {{#linkTo "reports"}}
+            Reports
+          {{/linkTo}}
+        </li>
+      </ul>
+      <div class="pull-right">
+        {{render "search/main"}}
+        <ul class="nav">
+          <li>
+            <a href="#" {{action "logOut"}}>Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

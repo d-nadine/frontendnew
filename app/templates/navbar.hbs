@@ -24,15 +24,16 @@
       </div>
       <div class="collapse nav-collapse main-nav-collapse">
         <ul class="nav main-nav">
-          <li class="dropdown">
-            {{#link-to "messages" "inbox"}}
-              Messages
-            {{/link-to}}
-          </li>
 
           <li class="dropdown">
             {{#link-to "conversations" "incoming"}}
               Conversations
+            {{/link-to}}
+          </li>
+
+          <li>
+            {{#link-to "people.index" "all"}}
+              Contacts
             {{/link-to}}
           </li>
 
@@ -59,6 +60,7 @@
               Contacts
             {{/link-to}}
           </li>
+
           <li>
             {{#link-to "reports"}}
               Reports
