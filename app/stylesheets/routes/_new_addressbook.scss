@@ -305,7 +305,6 @@
 
   .nav-pills-right.delete span {
     text-align: right;
-    padding: 3px 6px 5px;
   }
 
   .nav li.active .nav-pills-right span {
@@ -638,6 +637,10 @@
 
     td.name {
       font-weight: 600;
+
+      &:first-of-type {
+        padding-top: 18px;
+      }
     }
 
     td.phone {

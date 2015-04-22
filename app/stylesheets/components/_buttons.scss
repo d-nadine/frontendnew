@@ -9,7 +9,7 @@ $lightblue: #3aa6ff;
   text-shadow: none;
   border: none;
   border-radius: 3px;
-  padding: 10px 24px;
+  padding: 12px 32px;
   font-size: 16px;
 
   &.btn-primary {
@@ -34,11 +34,25 @@ $lightblue: #3aa6ff;
     font-size: 14px;
     padding: 8px 20px;
   }
+  &.btn-icon {
+    padding: 12px 26px;
+
+    i {
+      margin-right: 12px;
+    }
+    span {
+      margin-right: 7px;
+      top: -1px;
+      position: relative;
+    }
+  }
 }
 
 .btn-text {
   color: $blue;
   font-size: 16px;
+  position: relative;
+  top: -1px;
 
   &.btn-black {
     color: #29292c;
@@ -49,6 +63,7 @@ $lightblue: #3aa6ff;
   i {
     position: relative;
     top: 2px;
+    right: 3px;
     font-size: 14px;
   }
 }
