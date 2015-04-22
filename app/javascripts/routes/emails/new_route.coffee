@@ -27,11 +27,14 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
 
         @transitionTo 'messages', @controllerFor('messages').get('folder')
 
+  newEmail: Radium.EmailForm.create()
+  bulkEmail: Radium.BulkEmailForm.create()
+
   model: (params) ->
     if params.mode = 'single'
-      model = Radium.EmailForm.create()
+      model = @newEmail
     else
-      model = Radium.EmailForm.create()
+      model = @bulkEmail
 
     model.reset()
 

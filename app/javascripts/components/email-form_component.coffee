@@ -129,7 +129,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
   bulk: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.email.bulkList'
     showAvatar: false
     queryParameters: (query) ->
       scopes: ['user', 'contact', 'tag']

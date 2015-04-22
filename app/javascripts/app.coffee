@@ -63,12 +63,12 @@ requireAll /services/
 
 require 'store'
 
-require 'routes'
-requireAll /routes/
-
 require 'models'
 
 require /^forms/
+
+require 'routes'
+requireAll /routes/
 
 require 'views'
 

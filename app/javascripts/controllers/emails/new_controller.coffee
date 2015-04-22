@@ -6,11 +6,7 @@ Radium.EmailsNewController = Radium.Controller.extend Ember.Evented,
       @get('settings').save(this).then =>
         @send 'flashSuccess', 'Signature updated'
 
-
     changeViewMode: (mode) ->
-      @set 'showCc', false
-      @set 'showBcc', false
-
       @transitionToRoute "emails.new", queryParams: mode: mode
 
       false
