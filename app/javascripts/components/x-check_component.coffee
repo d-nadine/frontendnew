@@ -2,6 +2,11 @@ Radium.XCheckComponent = Ember.Component.extend
   click: (event) ->
     event.stopPropagation()
 
+    Ember.run.schedule('actions', this, 'sendNotification')
+
+  sendNotification: ->
+    @sendAction('sendCheck')
+
   init: ->
     @_super.apply this, arguments
     @on "change", this, this._updateElementValue

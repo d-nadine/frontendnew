@@ -8,7 +8,7 @@
     <a {{action "delete" this true bubbles=false}} href="#" class="btn-icon delete on-sidebar">
       <i class='ss-symbolicons-block ss-trash'></i>
     </a>
-    {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}
+    {{x-check class="check-box" checked=isChecked disabled=disabled sendCheck='checkMessageItem'}}
   </div>
   <div class="message-item-labels">
     {{#if hasLead}}

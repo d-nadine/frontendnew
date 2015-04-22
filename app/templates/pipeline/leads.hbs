@@ -16,7 +16,7 @@
     {{#each visibleContent}}
       <tr {{bind-attr class="isChecked"}}>
         <td class="checkbox">
-          {{check-box checked=isChecked class="checker-block"}}
+          {{x-check checked=isChecked class="checker-block"}}
         </td>
         <td class="lead">{{avatar this size=medium}}</td>
         <td class="assigned-to">

@@ -11,7 +11,7 @@
         <div class="pull-right">
           {{formatDateTime timestamp}}
         </div>
-        {{check-box checked=isChecked disabled=disabled sendCheck='checkMessageItem' target="controller"}}
+        {{x-check checked=isChecked disabled=disabled sendCheck='checkMessageItem' target="controller"}}
         <div class="bulk-actions-list-content">
           <div class="message-item-avatar pull-left">
             {{#if sender.isLoaded}}
