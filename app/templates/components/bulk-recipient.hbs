@@ -1,19 +1,19 @@
 {{#if isTag}}
   <div class="list">
     <div class="name">
-      <b>New Orleans</b>
-      <span class="count">36</span>
+      <b>{{recipient.resourceTag.name}}</b>
+      <span class="count">{{recipient.count}}</span>
     </div>
   </div>
-  <div class="helper">36 people in this list</div>
+  <div class="helper">{{recipient.count}} people in this list</div>
   <a href="#" class="remove" tabindex="-1">
     <i class="ss-standard ss-delete"></i>
   </a>
 {{else}}
   <div class="name">
     <b>{{recipient.person.displayName}}</b>
-    {{#if recipient.person.company.name}}
-      from {{recipient.person.company.name}}
+    {{#if recipient.person.company}}
+      from {{resource-link-to recipient.person}}
     {{/if}}
   </div>
   <div class="helper">

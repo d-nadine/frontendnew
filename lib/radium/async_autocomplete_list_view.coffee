@@ -26,4 +26,7 @@ Radium.EmailAsyncAutocompleteView = Radium.AsyncAutocompleteView.extend
     email_only: true
 
   filterResults: (item) ->
-    !@get('source').contains(item) && item.get('email') || item.get('isTag')
+    return false if @get('source').mapProperty('id').contains(item.get('id'))
+    return false if item.get('type') != 'tag' && !item.get('email')
+
+    true

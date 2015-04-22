@@ -18,6 +18,8 @@ Radium.AutocompleteItem = Radium.Model.extend
   _personUser: DS.belongsTo('Radium.User')
   _personCompany: DS.belongsTo('Radium.Company')
 
+  resourceTag: DS.belongsTo('Radium.Tag')
+
   key: Ember.computed 'email', 'type', ->
     type: @get('type')
     email: @get('email')
