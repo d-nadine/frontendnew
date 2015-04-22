@@ -5,7 +5,9 @@
       <span class="count">{{recipient.count}}</span>
     </div>
   </div>
-  <div class="helper">{{recipient.count}} people in this list</div>
+  {{#if recipient.count}}
+    <div class="helper">{{recipient.count}} people in this list</div>
+  {{/if}}
   <a href="#" class="remove" tabindex="-1">
     <i class="ss-standard ss-delete"></i>
   </a>

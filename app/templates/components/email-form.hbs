@@ -5,9 +5,9 @@
       <i class="ss-standard ss-help"></i>
     </a>
     <div class="type-toggle">
-      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "showSingleView"}}>Single</a>
+      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "changeViewMode" "single"}}>Single</a>
       <span>|</span>
-      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "showBulkView"}}>Mail Merge</a>
+      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk"}}>Mail Merge</a>
     </div>
   </div>
   <div class="email-form-body">

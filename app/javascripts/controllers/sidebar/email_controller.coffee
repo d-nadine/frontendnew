@@ -1,6 +1,6 @@
 require 'controllers/sidebar/sidebar_base_controller'
 
-Radium.EmailForm = Radium.Form.extend
+Radium.SidebarEmailForm = Radium.Form.extend
   init: ->
     @set 'content', Ember.Object.create()
     @_super.apply this, arguments
@@ -19,4 +19,4 @@ Radium.SidebarEmailController = Radium.SidebarBaseController.extend
   isValid: true
 
   form: Ember.computed ->
-    Radium.EmailForm.create()
+    Radium.SidebarEmailForm.create()

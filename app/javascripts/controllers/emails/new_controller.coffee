@@ -7,13 +7,17 @@ Radium.EmailsNewController = Radium.Controller.extend Ember.Evented,
         @send 'flashSuccess', 'Signature updated'
 
 
-  newEmail: Radium.EmailForm.create()
+    changeViewMode: (mode) ->
+      @set 'showCc', false
+      @set 'showBcc', false
 
-  queryParams: ['bulkEmail']
+      @transitionToRoute "emails.new", queryParams: mode: mode
 
-  isBulkEmail: Ember.computed.equal 'bulkEmail', "true"
+      false
 
-  bulkEmail: null
+  queryParams: ['mode']
+
+  isBulkEmail: Ember.computed.equal 'mode', "bulk"
 
   needs: ['userSettings']
 

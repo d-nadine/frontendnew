@@ -67,18 +67,9 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     hideAddSignature: ->
       @set 'signatureAdded', true
 
-    showSingleView: ->
-      @set 'showCc', false
-      @set 'showBcc', false
-      @set('singleMode', true)
-      @set('bulkMode', false)
-      false
+    changeViewMode: (mode) ->
+      @sendAction "changeViewMode", mode
 
-    showBulkView: ->
-      @set 'showCc', false
-      @set 'showBcc', false
-      @set('singleMode', false)
-      @set('bulkMode', true)
       false
 
   _setup: Ember.on 'didInsertElement', ->
@@ -153,5 +144,5 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
       @get('value').length == 0
 
-  singleMode: true
-  bulkMode: false
+  singleMode: Ember.computed.equal 'mode', 'single'
+  bulkMode: Ember.computed.equal 'mode', 'bulk'

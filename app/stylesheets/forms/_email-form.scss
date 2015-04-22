@@ -234,6 +234,16 @@
     margin-left: 10px;
   }
 
+  .recipients .item .count {
+    background: #92BDF2;
+    padding: 2px 5px;
+    border-radius: 25px;
+    margin-left: 7px;
+    font-weight: 600;
+    font-size: 12px;
+    vertical-align: top;
+  }
+
   .recipients .item:hover .helper {
     display: inline-block;
   }
