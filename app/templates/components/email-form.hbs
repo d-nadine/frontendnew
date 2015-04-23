@@ -48,7 +48,7 @@
             {{view bulk tabindex=1 source=email.to placeholder="Add recipient or list" viewName="bulkListView"}}
           </div>
         {{/unless}}
-        {{bulk-recipients recipients=email.to readonly=fromPeople removeFromToList="removeFromToList"}}
+        {{bulk-recipients recipients=email.to readonly=fromPeople removeFromBulkList="removeFromBulkList"}}
       </div>
     {{/if}}
     <div class="message">

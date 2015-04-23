@@ -1,4 +1,5 @@
-Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
+Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
+  Radium.CheckableMixin,
   actions:
     showMore: ->
       return if @get('content.isLoading')

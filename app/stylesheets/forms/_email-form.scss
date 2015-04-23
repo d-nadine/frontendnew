@@ -189,7 +189,7 @@
     color: #aaa;
   }
 
-  .bulk .recipients:not(.control-box) {
+  .bulk .recipients.bulk-recipients-component {
     float: left;
     display: inline-block;
     width: 100%;

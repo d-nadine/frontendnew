@@ -61,9 +61,7 @@ Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEm
 
     model.set 'to', to
 
-    model.set 'totalRecords', controller.get('totalRecords')
-
-    p model.get('totalRecords')
+    model.set 'totalRecords', controller.get('checkedTotal')
 
     model
 

@@ -1,7 +1,7 @@
 Radium.BulkRecipientComponent = Ember.Component.extend
   actions:
-    removeFromToList: (recipient) ->
-      @sendAction "removeFromToList", recipient
+    removeFromBulkList: (recipient) ->
+      @sendAction "removeFromBulkList", recipient
 
       false
 

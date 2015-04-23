@@ -5,8 +5,12 @@ Radium.TemplatePlaceholderMap =
 
 Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   actions:
-    removeFromToList: (recipient) ->
+    removeFromBulkList: (recipient) ->
       @get('email.to').removeObject recipient
+
+      # FIXME: hack to stop the recipients list disappearing
+      Ember.run.next =>
+        @$('.bulk-recipients-component').css 'max-height': '107px'
 
       false
 
