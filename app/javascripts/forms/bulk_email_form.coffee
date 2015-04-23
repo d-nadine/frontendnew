@@ -23,6 +23,7 @@ Radium.BulkEmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('subject', '')
     @set('html', '')
     @set('sendTime', null)
+    @set('totalRecords', 0)
     @_super.apply this, arguments
 
   data: Ember.computed( ->

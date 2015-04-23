@@ -43,10 +43,12 @@
     {{/if}}
     {{#if bulkMode}}
       <div class="addresses bulk">
-        <div {{bind-attr class="bulkListView.isInvalid:is-invalid bulkListView.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-          {{view bulk tabindex=1 source=email.to placeholder="Add recipient or list" viewName="bulkListView"}}
-        </div>
-        {{bulk-recipients recipients=email.to}}
+        {{#unless fromPeople}}
+          <div {{bind-attr class="bulkListView.isInvalid:is-invalid bulkListView.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+            {{view bulk tabindex=1 source=email.to placeholder="Add recipient or list" viewName="bulkListView"}}
+          </div>
+        {{/unless}}
+        {{bulk-recipients recipients=email.to readonly=fromPeople removeFromToList="removeFromToList"}}
       </div>
     {{/if}}
     <div class="message">

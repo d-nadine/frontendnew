@@ -244,6 +244,10 @@
     vertical-align: top;
   }
 
+  .recipients .item .count {
+    margin: 0 2px 0 2px;
+  }
+
   .recipients .item:hover .helper {
     display: inline-block;
   }

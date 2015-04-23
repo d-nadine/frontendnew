@@ -5,6 +5,11 @@ Radium.TemplatePlaceholderMap =
 
 Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   actions:
+    removeFromToList: (recipient) ->
+      @get('email.to').removeObject recipient
+
+      false
+
     insertPlaceholder: (placeholder) ->
       @trigger 'placeholderInsered', placeholder
       false
@@ -80,6 +85,28 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
   _afterSetup: ->
     @$('.autocomplete.email input[type=text]').focus()
+
+    return unless @get('fromPeople')
+
+    toLength = @get('email.to.length')
+    totalRecords = @get('email.totalRecords')
+
+    return if toLength >= totalRecords
+
+    remaining = totalRecords - toLength
+
+    info = """
+      <div class="bulk-recipient-component item">
+        <div class="name">
+          <b>Showing </b>
+          <span class="count">#{toLength}</span>
+          <span class="to-length">of</span>
+          <span class="count">#{totalRecords}</span> selected contacts
+        </div>
+      </div>
+    """
+
+    @$('.bulk-recipients-component.recipients').append($(info))
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments

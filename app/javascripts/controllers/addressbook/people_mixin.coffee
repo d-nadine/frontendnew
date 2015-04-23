@@ -34,7 +34,7 @@ Radium.PeopleMixin = Ember.Mixin.create Radium.CheckableMixin,
         return @send 'flashError', "You have not selected any items."
 
       if action == "compose"
-        return @transitionToRoute 'emails.new', "inbox", queryParams: mode: 'bulk'
+        return @transitionToRoute 'emails.new', "inbox", queryParams: mode: 'bulk', from_people: true
 
       @set 'working', true
 

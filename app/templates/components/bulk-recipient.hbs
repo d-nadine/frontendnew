@@ -8,7 +8,7 @@
   {{#if recipient.count}}
     <div class="helper">{{recipient.count}} people in this list</div>
   {{/if}}
-  <a href="#" class="remove" tabindex="-1">
+  <a href="#" {{action "removeFromToList" recipient}} class="remove" tabindex="-1">
     <i class="ss-standard ss-delete"></i>
   </a>
 {{else}}
@@ -23,7 +23,9 @@
       {{recipient.person.email}}
     {{/if}}
   </div>
-  <a href="#" class="remove" tabindex="-1">
-    <i class="ss-standard ss-delete"></i>
-  </a>
+  {{#unless readonly}}
+    <a href="#" {{action "removeFromToList" recipient}} class="remove" tabindex="-1">
+      <i class="ss-standard ss-delete"></i>
+    </a>
+  {{/unless}}
 {{/if}}
