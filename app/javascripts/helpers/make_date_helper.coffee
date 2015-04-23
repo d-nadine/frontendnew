@@ -4,4 +4,4 @@ Ember.Handlebars.registerHelper 'makeDate', (unit, period, options) ->
     forward["day"] = (unit * 7)
   else
     forward[period] = unit
-  Ember.DateTime.create().advance(forward)
+  Ember.DateTime.create().advance(forward).getRoundTime()

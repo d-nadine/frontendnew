@@ -120,7 +120,7 @@ Ember.DateTime.reopen
     if minutes < 30
       roundUp = 0 - minutes
     else
-      roundUp = 30 - minutes
+      roundUp = 60 - minutes
 
     @advance(minute: roundUp)
 
