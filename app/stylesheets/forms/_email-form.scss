@@ -262,4 +262,46 @@
   .bulk ul.as-selections li.as-selection-item {
     display: none;
   }
+
+  .follow-up {
+    display: inline-block;
+    line-height: 30px;
+  }
+
+  .actions .follow-up .dropdown {
+    display: inline-block;
+    margin-left: 3px;
+    position: static;
+  }
+
+  .actions .follow-up .dropdown .drop {
+    text-decoration: none;
+    background-color: #fff;
+    padding: 5px 11px;
+    margin: 2px 0 0 2px;
+    line-height: 14px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+
+  .actions .follow-up input[type=checkbox] {
+    margin-top: -1px;
+    margin-right: 5px;
+  }
+
+  .actions .follow-up .dropdown span.inactive {
+    padding-right: 3px;
+    color: #333;
+  }
+
+  .actions .follow-up .dropdown .dropdown-menu {
+    top: auto;
+    left: auto;
+  }
+
+  .actions .follow-up label {
+    display: inline;
+  }
 }

@@ -5,9 +5,9 @@
       <i class="ss-standard ss-help"></i>
     </a>
     <div class="type-toggle">
-      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "changeViewMode" "single"}}>Single</a>
+      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "changeViewMode" "single" bubbles=false}}>Single</a>
       <span>|</span>
-      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk"}}>Mail Merge</a>
+      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk" bubbles=false}}>Mail Merge</a>
     </div>
   </div>
   <div class="email-form-body">
@@ -108,13 +108,64 @@
         {{upload-filelist files=email.files hideUploadedBy=true}}
       {{/if}}
     </div>
+    <div class="actions">
+      <div class="follow-up">
+        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" on="change"}}/>
+        <span>Create a task if no reply in</span>
+        <div class="dropdown check-response-opener">
+          <a class="drop" role="button"  href="#">
+            <span class="inactive">
+              {{#if checkForResponse}}
+                {{checkForResponseFormatted}}
+              {{else}}
+                Select Time
+              {{/if}}
+            </span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 1 "hour")}} tabindex="-1" href="#">1 hour</a>
+            </li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 2 "hour")}}  tabindex="-1" href="#">2 hours</a>
+            </li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 4 "hour")}} tabindex="-1" href="#">4 hours</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 1 "day")}} tabindex="-1" href="#">1 day</a>
+            </li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 2 "day")}} tabindex="-1" href="#">2 days</a>
+            </li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 4 "day")}} tabindex="-1" href="#">4 days</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 1 "week")}} tabindex="-1" href="#">1 week</a>
+            </li>
+            <li>
+              <a {{action "setCheckForResponse" (makeDate 2 "week")}} tabindex="-1" href="#">2 weeks</a>
+            </li>
+            <li class="divider"></li>
+            <div class="input-append date">
+              {{date-picker submitForm="setCheckForResponse" model=email}}
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {{partial 'emails/check_for_response'}}
   </div>
 </div>
 {{#if showSignatureModal}}
   <div class="modal-backdrop">
     <div class="modal fade">
       <div class="modal-header">
-        <button type="button" {{action "closeModal" target="view" bubbles=false}} class="close">×</button>
+        <button type="button" {{action "closeModal" target="view"}} class="close">×</button>
         <h2>Add Signature?</h2>
       </div>
       <div class="modal-body">
@@ -124,7 +175,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" {{action "closeModal" target="view" bubbles=false}} class="btn">Cancel</a>
+        <a href="#" {{action "closeModal" target="view"}} class="btn">Cancel</a>
         <a href="#" {{action "createSignature"}} class="btn btn-primary">Done</a>
       </div>
     </div>
