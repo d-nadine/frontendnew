@@ -266,6 +266,10 @@
   .follow-up {
     display: inline-block;
     line-height: 30px;
+
+    &.bulk-mode {
+      visibility: hidden;
+    }
   }
 
   .actions .follow-up .dropdown {

@@ -8,9 +8,46 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     submit: (form) ->
       @set 'email.isDraft', false
 
-      # bulk email stuff or call different action probably?
-
       @sendAction 'saveEmail', form
+
+      false
+
+    submitFromPeople: (form) ->
+      controller = @container.lookup('controller:peopleIndex')
+
+      bulkParams = controller.get('content.params')
+
+      bulkParams.returnFilter = bulkParams.filter
+      bulkParams.returnParameters = user: bulkParams.user, tag: bulkParams.tag
+
+      findRecord = (type, id) ->
+        type.all().find (r) -> r.get('id') == id
+
+      unless controller.get('allChecked')
+        bulkParams.ids = controller.get('checkedContent').mapProperty('id')
+        delete bulkParams.tag
+        delete bulkParams.user
+        bulkParams.filter = null
+      else
+        bulkParams.ids = []
+        bulkParams.filter = controller.get('filter')
+
+        if controller.get('tag') && controller.get('isTagged')
+          bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
+        else if controller.get('isAssignedTo') && user_id = controller.get('user')
+          bulkParams.user = findRecord(Radium.User, bulkParams.user)
+
+      searchText = $.trim(controller.get('searchText') || '')
+
+      if searchText.length
+        bulkParams.like = searchText
+
+      @sendAction 'createBulkEmail', form, bulkParams
+
+      false
+
+    createBulkEmail: (form) ->
+      p "createBulkEmail"
 
       false
 
@@ -261,3 +298,11 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     message = @get('email.html') || ''
 
     !!!message.length
+
+  submitAction: Ember.computed 'singleMode', 'bulkMode', 'fromPeople', ->
+    if @get('singleMode')
+      "submit"
+    else if @get('bulkMode') && @get('fromPeople')
+      "submitFromPeople"
+    else
+      "createBulkEmail"

@@ -119,7 +119,7 @@
       </div>
     </div>
     <div class="actions">
-      <div class="follow-up">
+      <div {{bind-attr class=":follow-up bulkMode"}}>
         <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" email on="change"}}/>
         <span>Create a task if no reply in</span>
         <div class="dropdown check-response-opener">
@@ -174,17 +174,21 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a {{action "submit" email}} href="#" class="btn-save-draft">Now</a>
+            <a {{action submitAction email}} href="#" class="btn-save-draft">Now</a>
           </li>
-          <li>
-            <a {{action "saveAsDraft" email}} href="#" class="btn-save-draft">Save Draft</a>
-          </li>
+          {{#if singleMode}}
+            <li>
+              <a {{action "saveAsDraft" email}} href="#" class="btn-save-draft">Save Draft</a>
+            </li>
+          {{/if}}
           <li>
             <a href="#" class="btn-save-template">Save as Template</a>
           </li>
-          <li>
-            <a {{action "showSendLater"}} href="#" class="btn-send-later">Send Later</a>
-          </li>
+          {{#if singleMode}}
+            <li>
+              <a {{action "showSendLater"}} href="#" class="btn-send-later">Send Later</a>
+            </li>
+          {{/if}}
         </ul>
       </div>
     </div>

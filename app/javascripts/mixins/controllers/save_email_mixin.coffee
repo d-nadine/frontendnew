@@ -1,34 +1,9 @@
 Radium.SaveEmailMixin = Ember.Mixin.create
   actions:
     createBulkEmail: (form, bulkParams) ->
-      return unless form.get('html.length')
+      form.set 'isSubmitted', true
 
-      controller = @container.lookup('controller:peopleIndex')
-
-      filter = bulkParams.filter
-      retParams = user: bulkParams.user, tag: bulkParams.tag
-
-      findRecord = (type, id) ->
-        type.all().find (r) -> r.get('id') == id
-
-      unless controller.get('allChecked')
-        bulkParams.ids = controller.get('checkedContent').mapProperty('id')
-        delete bulkParams.tag
-        delete bulkParams.user
-        bulkParams.filter = null
-      else
-        bulkParams.ids = []
-        bulkParams.filter = controller.get('filter')
-
-        if controller.get('tag') && controller.get('isTagged')
-          bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
-        else if controller.get('isAssignedTo') && user_id = controller.get('user')
-          bulkParams.user = findRecord(Radium.User, bulkParams.user)
-
-      searchText = $.trim(controller.get('searchText') || '')
-
-      if searchText.length
-        bulkParams.like = searchText
+      return unless form.get('isValid')
 
       job = Radium.BulkEmailJob.createRecord bulkParams
 
@@ -37,18 +12,19 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       form.setFilesOnModel(job)
 
       job.save(this).then =>
+        form.set 'isSubmitted', false
         @send "flashSuccess", "The bulk email job has been created."
-        @transitionTo "people.index", filter, queryParams: retParams
+        @getTransitionTo().call this, "people.index", bulkParams.returnFilter, queryParams: bulkParams.returnParameters
 
     saveEmail: (form, options) ->
       options = options || {}
 
       form.set 'isSubmitted', true
 
-      if options.bulkEmail
-        return @send 'createBulkEmail', form, options.bulkEmailParams
-
       return unless form.get('isValid')
+
+      if options.bulkEmail
+        return @send 'createBulkEmail', form, bulkEmailParams
 
       unless form.get('id')
         email = Radium.Email.createRecord form.get('data')
@@ -89,18 +65,18 @@ Radium.SaveEmailMixin = Ember.Mixin.create
             @getController('messagesSidebar').send 'reset'
             @getController('messages').set('selectedContent', result)
 
-            return @getContextTransitionTo().call this, 'emails.edit', folder, result
+            return @getTransitionTo().call this, 'emails.edit', folder, result
           else
             return if options.dontTransition
 
-          @getContextTransitionTo().call this, 'emails.sent', email
+          @getTransitionTo().call this, 'emails.sent', email
 
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           delete result.files
           form.set 'isSubmitted', false
           @send 'flashSuccess', 'Draft saved'
-          @getContextTransitionTo().call(this, 'emails.edit', options.transitionFolder, result)  if options.transitionFolder
+          @getTransitionTo().call(this, 'emails.edit', options.transitionFolder, result)  if options.transitionFolder
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
@@ -112,7 +88,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       @store.commit()
 
-  getContextTransitionTo: ->
+  getTransitionTo: ->
     if this instanceof Ember.Controller
       @transitionToRoute
     else
