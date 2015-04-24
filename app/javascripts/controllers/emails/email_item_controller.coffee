@@ -1,4 +1,5 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
+  Radium.SaveEmailMixin,
   Radium.EmailDealMixin,
   Radium.TrackContactMixin,
   actions:
@@ -149,7 +150,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     Radium.ForwardEmailForm.create
       email: @get('model')
 
-  needs: ['messages', 'deals']
+  needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar']
+
+  settings: Ember.computed.alias 'controllers.userSettings.model'
+  signature: Ember.computed.alias 'settings.signature'
 
   deals: Ember.computed.oneWay 'controllers.deals'
 

@@ -12,6 +12,10 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
       false
 
+    toggleOptions: ->
+      @toggleProperty 'showOptions'
+      false
+
     submitFromPeople: (form) ->
       controller = @container.lookup('controller:peopleIndex')
 
@@ -47,7 +51,24 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       false
 
     createBulkEmail: (form) ->
-      p "createBulkEmail"
+      to = form.get('to')
+
+      contactIds = to.filter((item) -> item.get('_personContact')).mapProperty('_personContact.id')
+
+      tagIds = to.filter((item) -> item.get('resourceTag')).mapProperty('resourceTag.id')
+
+      bulkParams =
+        filter: null
+        ids: contactIds || []
+        tags: tagIds || []
+        private: false
+        public: true
+        returnFilter: "all"
+        returnParameters:
+          tag: undefined
+          user: undefined
+
+      @sendAction 'createBulkEmail', form, bulkParams
 
       false
 
@@ -56,6 +77,18 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       @sendAction 'saveEmail', form, transitionFolder: transitionFolder
 
     scheduleDelivery: (form, date) ->
+      if typeof date is "string"
+        if date == 'tomorrow'
+          date = Ember.DateTime.create().advance(day: 1)
+
+      if @get('bulkMode')
+        form.set 'sendTime', date
+
+        if @get('fromPeople')
+          return @send('submitFromPeople', form)
+
+        return @send('createBulkEmail', form)
+
       @set 'email.sendTime', date
       @send 'saveAsDraft', form, 'scheduled'
       #Hack to close menu
@@ -251,6 +284,17 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
     ret
 
+  showNavigation: Ember.computed 'isDraft', 'forwardMode', 'replyMode', ->
+    return if @get('isDraft') || @get('forwardMode') || @get('replyMode')
+
+    true
+
+  forwardOrReply: Ember.computed 'forwardMode', 'replyMode', ->
+    @get('forwardMode') || @get('replyMode')
+
+  showOptions: Ember.computed 'singleMode', 'bulkMode', 'replyMode', 'forwardMode', ->
+    @get('singleMode') || @get('forwardMode')
+
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
     sourceBinding: 'controller.email.to'
@@ -291,6 +335,8 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
   singleMode: Ember.computed.equal 'mode', 'single'
   bulkMode: Ember.computed.equal 'mode', 'bulk'
+  replyMode: Ember.computed.equal 'mode', 'reply'
+  forwardMode: Ember.computed.equal 'mode', 'forward'
 
   messageIsInvalid: Ember.computed 'isSubmitted', 'email.html.length', ->
     return false unless @get('isSubmitted')
@@ -300,7 +346,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     !!!message.length
 
   submitAction: Ember.computed 'singleMode', 'bulkMode', 'fromPeople', ->
-    if @get('singleMode')
+    if @get('singleMode') || @get('forwardOrReply')
       "submit"
     else if @get('bulkMode') && @get('fromPeople')
       "submitFromPeople"

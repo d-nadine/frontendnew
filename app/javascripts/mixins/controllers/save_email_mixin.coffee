@@ -11,9 +11,15 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       form.setFilesOnModel(job)
 
+      isScheduled = !!job.get('sendTime')
+
       job.save(this).then =>
         form.set 'isSubmitted', false
-        @send "flashSuccess", "The bulk email job has been created."
+        unless isScheduled
+          @send "flashSuccess", "The bulk email job has been created."
+        else
+          @send "flashSuccess", "The bulk email will be sent on #{job.sendTime.toHumanFormatWithTime()}"
+
         @getTransitionTo().call this, "people.index", bulkParams.returnFilter, queryParams: bulkParams.returnParameters
 
     saveEmail: (form, options) ->

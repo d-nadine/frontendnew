@@ -170,12 +170,12 @@
     <div>
       {{#if showReplyForm}}
         <div class="block block-arrow-top">
-          {{render "forms/reply" replyEmail}}
+          {{email-form email=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail"}}
         </div>
       {{/if}}
 
       {{#if showForwardForm}}
-        {{render "forms/forward_email" forwardEmail}}
+        {{email-form email=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail"}}
       {{/if}}
 
 

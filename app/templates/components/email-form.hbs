@@ -1,7 +1,9 @@
 <div id="myModal" class="email-form single-mode">
   <div class="email-form-header">
-    <h3>Compose</h3>
-    {{#unless isDraft}}
+    {{#unless forwardOrReply}}
+      <h3>Compose</h3>
+    {{/unless}}
+    {{#if showNavigation}}
       <a href="#" class="info" data-toggle="tooltip" data-placement="bottom" data-original-title="Use 'Mail Merge' to send custom messages <br> 'Single' for normal emails">
         <i class="ss-standard ss-help"></i>
       </a>
@@ -10,11 +12,18 @@
         <span>|</span>
         <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk" bubbles=false}}>Mail Merge</a>
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
   <div class="email-form-body">
     {{partial 'forms/scheduled_email'}}
-    {{#if singleMode}}
+    {{#if replyMode}}
+      <h5>
+        Reply to
+        {{list "email.to"}}
+        <a class="pull-right" href="#" {{action "toggleOptions"}}>More Options</a>
+      </h5>
+    {{/if}}
+    {{#if showOptions}}
       <div class="addresses">
         <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
           <span class="toggles pull-right">
@@ -55,14 +64,17 @@
       </div>
     {{/if}}
     <div class="message">
-      <div class="subject-wrap">
-        {{input type="text" value=email.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
-      </div>
+      {{#if showOptions}}
+        <div class="subject-wrap">
+          {{input type="text" value=email.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
+        </div>
+      {{/if}}
       <div class="more-options">
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
           <i class="ss-standard ss-font"></i>
         </a>
         {{file-uploader files=email.files disableSave=disableSave bucket=email.bucket model=email.reference class="btn-file btn-messages-action"}}
+        {{#unless forwardOrReply}}
         <div class="btn-group vanilla">
           <a href="#" data-toggle="dropdown" class="dropdown-toggle" tabindex="-1">
             <i class="ss-standard ss-navigatedown"></i>
@@ -97,6 +109,7 @@
             </li>
           </ul>
         </div>
+        {{/unless}}
       </div>
       <div class="textbox-wrap">
         {{richtext-editor files=files queryKey="display" content=email.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
@@ -181,14 +194,14 @@
               <a {{action "saveAsDraft" email}} href="#" class="btn-save-draft">Save Draft</a>
             </li>
           {{/if}}
-          <li>
-            <a href="#" class="btn-save-template">Save as Template</a>
-          </li>
-          {{#if singleMode}}
+          {{#unless forwardOrReply}}
             <li>
-              <a {{action "showSendLater"}} href="#" class="btn-send-later">Send Later</a>
+              <a href="#" class="btn-save-template">Save as Template</a>
             </li>
-          {{/if}}
+          {{/unless}}
+          <li>
+            <a {{action "showSendLater"}} href="#" class="btn-send-later">Send Later</a>
+          </li>
         </ul>
       </div>
     </div>
