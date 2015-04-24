@@ -198,36 +198,4 @@
     background-color: #fff;
     @include add-blinker;
   }
-
-  .main-nav {
-
-    li:first-of-type {
-      margin-right: 0;
-
-      a {
-        padding: 12px 11px 20px 30px;
-
-        i {
-          font-size: 18px;
-          color: #fff;
-          margin-left: 0px;
-        }
-      }
-    }
-
-    li:nth-of-type(2) {
-      margin-left: 2px;
-    }
-
-    .badge {
-      position: relative;
-      top: -16px;
-      left: -10px;
-      border-radius: 30px;
-      height: auto;
-      width: auto;
-      padding: 2px 6px;
-      background: #c6262f;
-    }
-  }
 }
