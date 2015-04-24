@@ -123,7 +123,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     if tabindex = @get('tabindex')
       editable.attr('tabindex', tabindex)
 
-    editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this)
+    editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this) unless @get('content.length')
 
     dropdowns = $('[data-toggle=dropdown]')
 

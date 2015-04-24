@@ -11,6 +11,7 @@
     </div>
   </div>
   <div class="email-form-body">
+    {{partial 'forms/scheduled_email'}}
     {{#if singleMode}}
       <div class="addresses">
         <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
@@ -53,7 +54,7 @@
     {{/if}}
     <div class="message">
       <div class="subject-wrap">
-        <input type="text" placeholder="Subject:" class="subject tt-input" autocomplete="off" spellcheck="false" dir="auto">
+        {{input type="text" value=email.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
       </div>
       <div class="more-options">
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
@@ -96,7 +97,7 @@
         </div>
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
+        {{richtext-editor files=files queryKey="display" content=email.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
         {{#unless signatureAdded}}
           <div class="prompt">
             <a href="#" {{action "addSignature"}} class="add-signature">Add a Signature</a>
@@ -156,6 +157,33 @@
             </div>
           </ul>
         </div>
+      </div>
+      <div class="send-later">
+        <div class="datepicker-wrap">
+          <div class="datepicker datepicker-inline">
+            {{date-timepicker submitDate="scheduleDelivery" model=email}}
+          </div>
+        </div>
+      </div>
+      <div class="btn-group btn-send vanilla">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" tabindex="4">
+          Send
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a {{action "submit" email}} href="#" class="btn-save-draft">Now</a>
+          </li>
+          <li>
+            <a {{action "saveAsDraft" email}} href="#" class="btn-save-draft">Save Draft</a>
+          </li>
+          <li>
+            <a href="#" class="btn-save-template">Save as Template</a>
+          </li>
+          <li>
+            <a {{action "showSendLater"}} href="#" class="btn-send-later">Send Later</a>
+          </li>
+        </ul>
       </div>
     </div>
     {{partial 'emails/check_for_response'}}

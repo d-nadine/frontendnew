@@ -5,6 +5,30 @@ Radium.TemplatePlaceholderMap =
 
 Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   actions:
+    submit: (form) ->
+      @set 'email.isDraft', false
+
+      # bulk email stuff or call different action probably?
+
+      @sendAction 'saveEmail', form
+
+      false
+
+    saveAsDraft: (form, transitionFolder) ->
+      @set 'email.isDraft', true
+      @sendAction 'saveEmail', form, transitionFolder: transitionFolder
+
+    scheduleDelivery: (form, date) ->
+      @set 'email.sendTime', date
+      @send 'saveAsDraft', form, 'scheduled'
+      #Hack to close menu
+      $(window).trigger('click.date-send-menu')
+      @send 'saveAsDraft', form, 'drafts'
+
+    showSendLater: ->
+      @$('.send-later').css(display: 'inline-block')
+      false
+
     setCheckForResponse: (date) ->
       @set 'email.checkForResponse', date
       @set('checkForResponseSet', true)
@@ -16,9 +40,11 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       return unless @get('email.checkForResponse')
 
       @set 'email.checkForResponse', null
+
       Ember.run.next =>
         @set('checkForResponseSet', false)
 
+      # @send 'saveAsDraft', form, 'drafts'
       false
 
     removeFromBulkList: (recipient) ->
@@ -114,8 +140,10 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       return true if e.target.tagName == 'A'
       target = $(e.target)
       return if target.hasClass('ui-timepicker-selected') || target.parents('.date-picker-component').length
-      return if target.parents('#sendMenu').length
+      return if target.parents('.date-timepicker-component').length
+      @$('.send-later').hide()
       @$('.check-response-opener').removeClass('open')
+      @$('')
       e.preventDefault()
       e.stopPropagation()
       false
@@ -156,13 +184,19 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     $(window).off 'click.date-send-menu'
 
   isEditable: true
-  isSubmitted: false
   signatureAdded: false
   showSignatureModal: false
 
   checkForResponse: Ember.computed.oneWay 'email.checkForResponse'
   checkForResponseFormatted: Ember.computed.oneWay 'email.checkForResponseFormatted'
   checkForResponseSet: false
+
+  isScheduled: Ember.computed.oneWay 'email.isScheduled'
+  sendTimeFormatted: Ember.computed.oneWay 'email.sendTimeFormatted'
+
+  isSubmitted: Ember.computed.oneWay 'email.isSubmitted'
+
+  isDraft: Ember.computed.oneWay 'email.isDraft'
 
   insertActions: Ember.computed ->
     placeholderMap = Radium.TemplatePlaceholderMap
@@ -180,10 +214,10 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     classNameBindings: [':email']
     sourceBinding: 'controller.email.to'
     showAvatar: false
-    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.to.[]', ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.email.to.[]', ->
       return unless @get('controller.isSubmitted')
 
-      @get('controller.email.to.length') == 0
+      !!!@get('controller.email.to.length')
 
     isValid: Ember.computed 'controller.email.to.[]', ->
       @get('controller.email.to.length') > 0
@@ -216,3 +250,10 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
   singleMode: Ember.computed.equal 'mode', 'single'
   bulkMode: Ember.computed.equal 'mode', 'bulk'
+
+  messageIsInvalid: Ember.computed 'isSubmitted', 'email.html.length', ->
+    return false unless @get('isSubmitted')
+
+    message = @get('email.html') || ''
+
+    !!!message.length

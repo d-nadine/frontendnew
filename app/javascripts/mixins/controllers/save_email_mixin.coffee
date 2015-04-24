@@ -75,28 +75,32 @@ Radium.SaveEmailMixin = Ember.Mixin.create
           form.set 'isSubmitted', false
           form.set 'isSending', false
           form.reset()
-          messagesController = @controllerFor('messages')
+
+          messagesController = @getController('messages')
+
           messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
+
           if result.get('deal')
             result.get('deal').reloadAfterUpdate()
 
           if result.get('isDraft')
             folder = if result.get('isScheduled') then 'scheduled' else 'drafts'
             @send 'flashSuccess', "Email has been saved to the #{folder} folder"
-            @controllerFor('messagesSidebar').send 'reset'
-            @controllerFor('messages').set('selectedContent', result)
-            @transitionTo 'emails.edit', folder, result
+            @getController('messagesSidebar').send 'reset'
+            @getController('messages').set('selectedContent', result)
+
+            return @getContextTransitionTo().call this, 'emails.edit', folder, result
           else
             return if options.dontTransition
 
-            @transitionTo 'emails.sent', email
+          @getContextTransitionTo().call this, 'emails.sent', email
 
       email.one 'didUpdate', (result) =>
         Ember.run.next =>
           delete result.files
           form.set 'isSubmitted', false
           @send 'flashSuccess', 'Draft saved'
-          @transitionTo 'emails.edit', options.transitionFolder, result if options.transitionFolder
+          @getContextTransitionTo().call(this, 'emails.edit', options.transitionFolder, result)  if options.transitionFolder
 
       email.one 'becameInvalid', =>
         form.set 'isSending', false
@@ -108,4 +112,14 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       @store.commit()
 
+  getContextTransitionTo: ->
+    if this instanceof Ember.Controller
+      @transitionToRoute
+    else
+      @transitionTo
 
+  getController: (controller) ->
+    if this instanceof Ember.Controller
+      @get("controllers.#{controller}")
+    else
+      @controllerFor(controller)
