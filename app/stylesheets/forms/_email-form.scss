@@ -315,36 +315,35 @@
     }
   }
 
-  .actions .send-later {
+  .send-later {
     height: auto;
     position: absolute;
     background: #fff;
-    bottom: 162px;
-    right: 92px;
     border: 1px solid #ccc;
     text-align: center;
     z-index: 9999;
     display: none;
     width: 30%;
+    right: 95px;
   }
 
-  .actions .send-later .datepicker-wrap .datepicker {
+  .send-later .datepicker-wrap .datepicker {
     background: #f9f9f9;
     padding: 15px 0 10px;
     width: 100%;
   }
 
-  .actions .send-later .datepicker-wrap .datepicker .date-timepicker-component {
+  .send-later .datepicker-wrap .datepicker .date-timepicker-component {
     background: #f9f9f9;
     display: block;
   }
 
-  .actions .send-later .datepicker-wrap .datepicker .date-timepicker-component .control-box.timepicker {
+  .send-later .datepicker-wrap .datepicker .date-timepicker-component .control-box.timepicker {
     position: relative;
     top: 4px;
   }
 
-  .actions .send-later .datepicker-wrap .datepicker .date-timepicker-component .submit {
+  .send-later .datepicker-wrap .datepicker .date-timepicker-component .submit {
     visibility: hidden;
   }
 

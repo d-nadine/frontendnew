@@ -8,12 +8,14 @@
           {{else}}
             {{#if isTodo}}
               <li {{bind-attr class="isFinished overdue"}}>
-                <span class="time">
-                  Due
-                  {{#link-to "calendar.task" this}}
+                {{#if time}}
+                  <span class="time">
+                    Due
+                    {{#link-to "calendar.task" this}}
                     {{formatDateTime time format="date"}}
-                  {{/link-to}}
-                </span>
+                    {{/link-to}}
+                  </span>
+                {{/if}}
                 <i class="ss-standard ss-check"></i>
                 {{#link-to "calendar.task" this class="related-task-title"}}{{description}}{{/link-to}}
               </li>

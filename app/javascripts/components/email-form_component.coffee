@@ -23,7 +23,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       @send 'saveAsDraft', form, 'scheduled'
       #Hack to close menu
       $(window).trigger('click.date-send-menu')
-      @send 'saveAsDraft', form, 'drafts'
 
     showSendLater: ->
       @$('.send-later').css(display: 'inline-block')
@@ -36,15 +35,16 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       $(window).trigger('click.date-send-menu')
       false
 
-    cancelCheckForResponse: ->
+    cancelCheckForResponse: (form) ->
       return unless @get('email.checkForResponse')
 
-      @set 'email.checkForResponse', null
+      form.set 'checkForResponse', null
 
       Ember.run.next =>
         @set('checkForResponseSet', false)
 
-      # @send 'saveAsDraft', form, 'drafts'
+      @send('saveEmail', form) if @get('isDraft')
+
       false
 
     removeFromBulkList: (recipient) ->
@@ -138,12 +138,16 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     $(window).on 'click.date-send-menu', (e) =>
       return true if e.target?.type == 'file'
       return true if e.target.tagName == 'A'
+
       target = $(e.target)
+
       return if target.hasClass('ui-timepicker-selected') || target.parents('.date-picker-component').length
+
       return if target.parents('.date-timepicker-component').length
+
       @$('.send-later').hide()
       @$('.check-response-opener').removeClass('open')
-      @$('')
+
       e.preventDefault()
       e.stopPropagation()
       false

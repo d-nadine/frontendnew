@@ -1,14 +1,16 @@
 <div id="myModal" class="email-form single-mode">
   <div class="email-form-header">
     <h3>Compose</h3>
-    <a href="#" class="info" data-toggle="tooltip" data-placement="bottom" data-original-title="Use 'Mail Merge' to send custom messages <br> 'Single' for normal emails">
-      <i class="ss-standard ss-help"></i>
-    </a>
-    <div class="type-toggle">
-      <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "changeViewMode" "single" bubbles=false}}>Single</a>
-      <span>|</span>
-      <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk" bubbles=false}}>Mail Merge</a>
-    </div>
+    {{#unless isDraft}}
+      <a href="#" class="info" data-toggle="tooltip" data-placement="bottom" data-original-title="Use 'Mail Merge' to send custom messages <br> 'Single' for normal emails">
+        <i class="ss-standard ss-help"></i>
+      </a>
+      <div class="type-toggle">
+        <a href="#" {{bind-attr class=":to singleMode:active"}} {{action "changeViewMode" "single" bubbles=false}}>Single</a>
+        <span>|</span>
+        <a href="#" {{bind-attr class="bulkMode:active"}} {{action "changeViewMode" "bulk" bubbles=false}}>Mail Merge</a>
+      </div>
+    {{/unless}}
   </div>
   <div class="email-form-body">
     {{partial 'forms/scheduled_email'}}
@@ -108,10 +110,17 @@
       {{#if email.files.length}}
         {{upload-filelist files=email.files hideUploadedBy=true}}
       {{/if}}
+      <div class="send-later">
+        <div class="datepicker-wrap">
+          <div class="datepicker datepicker-inline">
+            {{date-timepicker submitDate="scheduleDelivery" model=email}}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="actions">
       <div class="follow-up">
-        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" on="change"}}/>
+        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" email on="change"}}/>
         <span>Create a task if no reply in</span>
         <div class="dropdown check-response-opener">
           <a class="drop" role="button"  href="#">
@@ -156,13 +165,6 @@
               {{date-picker submitForm="setCheckForResponse" model=email}}
             </div>
           </ul>
-        </div>
-      </div>
-      <div class="send-later">
-        <div class="datepicker-wrap">
-          <div class="datepicker datepicker-inline">
-            {{date-timepicker submitDate="scheduleDelivery" model=email}}
-          </div>
         </div>
       </div>
       <div class="btn-group btn-send vanilla">

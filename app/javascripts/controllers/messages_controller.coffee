@@ -2,7 +2,7 @@ require 'mixins/controllers/poller_mixin'
 
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin, Radium.PollerMixin,
   drawerOpen: false
-  folder: "inbox"
+  folder: null
   pageSize: 5
   needs: ['messagesSidebar']
   isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
@@ -31,6 +31,10 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   unthreadedRoute: Ember.computed.not 'threadRoute'
 
   onPoll: ->
+    return unless folder = @get('folder')
+
+    return if ['scheduled', 'drafts'].contains folder
+
     currentPath = @get('currentPath')
 
     return if currentPath is 'messages.bulk_actions'
