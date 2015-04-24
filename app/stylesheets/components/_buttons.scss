@@ -1,6 +1,3 @@
-$blue: #3081e2;
-$lightblue: #3aa6ff;
-
 .btn,
 .btn:focus {
   background: $blue;
@@ -56,6 +53,10 @@ $lightblue: #3aa6ff;
 
   &.btn-black {
     color: #29292c;
+
+    i {
+      color: #626262;
+    }
   }
   &:not(.btn-black):hover {
     color: $lightblue;
