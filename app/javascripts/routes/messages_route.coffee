@@ -220,7 +220,9 @@ Radium.MessagesRoute = Radium.Route.extend
 
     return if sidebarController.get('searchIsActive')
 
-    Radium.Email.find(messagesController.requestParams())
+    requestType = messagesController.requestType()
+
+    requestType.find(messagesController.requestParams())
 
   serialize: (model) ->
     folder: @controllerFor('messages').get('folder')

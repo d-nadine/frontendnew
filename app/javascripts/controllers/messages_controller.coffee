@@ -17,6 +17,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     { title: 'Drafts', name: 'drafts', icon: 'file' }
     { title: 'Sent items', name: 'sent', icon: 'send' }
     { title: 'Scheduled', name: 'scheduled', icon: 'clock' }
+    { title: 'Templates', name: 'templates', icon: 'file' }
   ]
 
   nextRoute: Ember.computed 'threadRoute', ->
@@ -33,7 +34,7 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   onPoll: ->
     return unless folder = @get('folder')
 
-    return if ['scheduled', 'drafts'].contains folder
+    return if ['scheduled', 'drafts', 'templates'].contains folder
 
     currentPath = @get('currentPath')
 
@@ -94,12 +95,21 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     return false if @get('hasCheckedContent')
     true
 
+  requestType: ->
+    folder = @get('folder')
+
+    if folder == "templates"
+      Radium.Template
+    else
+      Radium.Email
+
   queryFolders:
     inbox: "INBOX"
     archive: "archived"
     sent: "Sent Messages"
     drafts: "Drafts"
     scheduled: "Scheduled"
+    templates: "Templates"
 
   requestParams: ->
     folder = @get('folder')
@@ -111,6 +121,9 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
       tracked_only: true
       page: 1
       page_size: pageSize
+    else if folder == "templates"
+      {}
+
     else
       user_id: @get('currentUser.id')
       folder: queryFolder

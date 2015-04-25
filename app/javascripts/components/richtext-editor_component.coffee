@@ -52,8 +52,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     parent.on "placeholderInsered", this, "onPlaceholderInserted"
 
   onFormReset: ->
-    @$('.note-editable')
-    editable = @$('.note-editable')
+    return unless editable = @$('.note-editable')
+
     editable.addClass('placeholder')
     editable.html('')
     @set 'placeholderShown', false
@@ -222,7 +222,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     text = Radium.TemplatePlaceholderMap[placeholder.name]
 
-    node = "<span class=\"badge badge-info template-item\">{#{text}|\"fall back\"}&nbsp;<span class=\"remove-template-item\" href=\"#\">x</span></span>"
+    node = "<span class=\"badge badge-info template-item\">#{text} | \"fall back\"&nbsp;<span class=\"remove-template-item\" href=\"#\">x</span></span>"
 
     editable = @$('.note-editable')
 

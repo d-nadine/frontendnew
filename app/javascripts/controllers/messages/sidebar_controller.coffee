@@ -1,14 +1,14 @@
 Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.InfiniteScrollControllerMixin,
   actions:
     refresh: ->
-      return if @get('cannotRefresh') || @get('isSyncing')
+      return if !@get('canRefresh') || @get('isSyncing')
 
       currentUser = @get('currentUser')
 
       job = Radium.EmailSyncJob.createRecord
               user: currentUser
 
-      job.one 'didCreate', (result) =>
+      job.save(this).then((result) ->
         currentUser.reload()
 
         currentUser.one 'didReload', =>
@@ -17,18 +17,10 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
           refreshPoller.set 'controller', this
 
           refreshPoller.start()
-
-      job.one 'becameInvalid', (result) =>
+      ).then ->
         @set 'isSyncing', false
-        @send 'flashError', job
-
-      job.one 'becameInvalid', (result) =>
-        @set 'isSyncing', false
-        @send 'flashError', 'An error has occurred and the refresh command failed'
 
       @set 'isSyncing', true
-
-      @get('store').commit()
 
     checkMessageItem: ->
       currentPath = @get('currentPath')
@@ -75,8 +67,11 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
     @_super.apply this, arguments
     @set 'refreshPoller', Radium.RefreshPoller.create()
 
-  cannotRefresh: Ember.computed 'folder.length', ->
-    @get('folder') != 'inbox'
+  canRefresh: Ember.computed 'folder.length', ->
+    @get('folder') == 'inbox'
+
+  viewingTemplates: Ember.computed 'folder', ->
+    @get('folder') == 'templates'
 
   modelQuery: ->
     requestParams = Ember.merge(@get('controllers.messages').requestParams(), page: @get('page'))

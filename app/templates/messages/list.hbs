@@ -1,11 +1,17 @@
-{{partial "messages/new_email_btn"}}
-{{#unless cannotRefresh}}
+{{#unless viewingTemplates}}
+  {{partial "messages/new_email_btn"}}
+{{else}}
+  <div class="clearfix new-message-btn">
+    {{#link-to "templates.new" class="btn btn-block btn-large btn-primary"}}Templates{{/link-to}}
+  </div>
+{{/unless}}
+{{#if canRefresh}}
   <div class="clearfix new-message-btn">
     <button {{action "refresh"}} {{bind-attr disabled=isSyncing}} class="btn btn-block btn-large">
       <strong>Refresh</strong>
     </button>
   </div>
-{{/unless}}
+{{/if}}
 {{#if isSyncing}}
   <div class="text-center">
     {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
