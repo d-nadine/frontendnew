@@ -1,0 +1,41 @@
+<div class="email-form single-mode">
+  <div class="email-form-body">
+    <div class="message">
+      <div class="subject-wrap">
+        {{input type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
+      </div>
+      <div class="more-options">
+        <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
+          <i class="ss-standard ss-font"></i>
+        </a>
+        {{file-uploader files=form.files disableSave=disableSave bucket=form.bucket model=form.reference class="btn-file btn-messages-action"}}
+        <div class="btn-group vanilla">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle" tabindex="-1">
+            <i class="ss-standard ss-navigatedown"></i>
+          </a>
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Insert Template</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">INSERT CUSTOM TEMPLATES</a>
+                </li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Insert Fields</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Title</a></li>
+                <li><a href="#">Website</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="textbox-wrap">
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions form=form}}
+    </div>
+  </div>
+<div>

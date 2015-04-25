@@ -272,15 +272,20 @@ Radium.MessagesIndexRoute = Radium.Route.extend
 
     messagesController = @controllerFor 'messages'
 
-    unless model.get('length')
+    transitionToEmpty = =>
       folder = messagesController.get('folder') || 'inbox'
+
       @transitionTo 'emails.empty', folder
+
       return
+
+    unless model.get('length')
+      return transitionToEmpty()
 
     item = model.get('firstObject')
 
     unless item
-      return @transitionTo 'emails.empty', folder
+      return transitionToEmpty()
 
     folder = messagesController.get('folder')
 

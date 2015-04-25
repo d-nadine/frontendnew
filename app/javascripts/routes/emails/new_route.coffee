@@ -1,7 +1,8 @@
 require 'mixins/controllers/save_email_mixin'
 require 'routes/mixins/send_email_mixin'
 
-Radium.EmailsNewRoute = Ember.Route.extend  Radium.SaveEmailMixin, Radium.SendEmailMixin,
+Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
+  Radium.SendEmailMixin,
   queryParams:
     mode:
       refreshModel: true
