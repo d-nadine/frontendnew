@@ -10,7 +10,7 @@
       {{render "forms/note" noteForm}}
     {{/if}}
     {{#if showEmailForm}}
-      {{render 'forms/email' emailForm}}
+      {{email-form email=emailForm parent=this signature=signature addSignature="addSignature" mode="form" saveEmail="saveEmail"}}
     {{/if}}
   </div>
   <div class="form-box-controls">

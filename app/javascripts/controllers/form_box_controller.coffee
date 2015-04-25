@@ -15,6 +15,11 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
       activeForm.set('submitForm', true)
       @trigger 'focusTopic'
 
+    saveEmail: (form) ->
+      @get('parentController').send "saveEmail", form
+
+      false
+
   activeForm: 'todo'
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')

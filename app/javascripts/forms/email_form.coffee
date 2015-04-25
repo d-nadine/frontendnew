@@ -3,6 +3,8 @@ require 'forms/forms_attachment_mixin'
 
 Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   Radium.EmailPropertiesMixin,
+  Ember.Evented,
+
   includeReminder: false
   reminderTime: 5
   showAddresses: true
@@ -33,6 +35,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('checkForResponse', null)
     @set('deal', null)
     @set('repliedTo', null)
+    @trigger 'reset'
     @_super.apply this, arguments
 
   data: Ember.computed( ->

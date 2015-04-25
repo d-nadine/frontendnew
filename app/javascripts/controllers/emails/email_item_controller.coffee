@@ -24,14 +24,14 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       return
 
     toggleReplyForm: ->
-      @set('showforwardForm', false)
+      @set('showForwardForm', false)
       @set('showingAddDeal', false)
 
       @toggleProperty 'showReplyForm'
       return
 
     toggleForwardForm: ->
-      @set('showingadddeal', false)
+      @set('showingAddDeal', false)
       @set('showReplyForm', false)
 
       @toggleProperty 'showForwardForm'

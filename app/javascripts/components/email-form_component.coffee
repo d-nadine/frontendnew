@@ -159,7 +159,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('html') || ''
+      current = @get('email.html') || ''
       currentLength = editable.text().length
       signature = @get('signature').replace(/\n/g, '<br/>')
 
@@ -284,16 +284,16 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
     ret
 
-  showNavigation: Ember.computed 'isDraft', 'forwardMode', 'replyMode', ->
-    return if @get('isDraft') || @get('forwardMode') || @get('replyMode')
+  showNavigation: Ember.computed 'isDraft', 'forwardMode', 'replyMode', 'formMode', ->
+    return if @get('isDraft') || @get('forwardMode') || @get('replyMode') || @get('formMode')
 
     true
 
   forwardOrReply: Ember.computed 'forwardMode', 'replyMode', ->
     @get('forwardMode') || @get('replyMode')
 
-  showOptions: Ember.computed 'singleMode', 'bulkMode', 'replyMode', 'forwardMode', ->
-    @get('singleMode') || @get('forwardMode')
+  showOptions: Ember.computed 'singleMode', 'bulkMode', 'replyMode', 'forwardMode', 'formMode', ->
+    @get('singleMode') || @get('forwardMode') || @get('formMode')
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
@@ -337,6 +337,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   bulkMode: Ember.computed.equal 'mode', 'bulk'
   replyMode: Ember.computed.equal 'mode', 'reply'
   forwardMode: Ember.computed.equal 'mode', 'forward'
+  formMode: Ember.computed.equal 'mode', 'form'
 
   messageIsInvalid: Ember.computed 'isSubmitted', 'email.html.length', ->
     return false unless @get('isSubmitted')
@@ -346,7 +347,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
     !!!message.length
 
   submitAction: Ember.computed 'singleMode', 'bulkMode', 'fromPeople', ->
-    if @get('singleMode') || @get('forwardOrReply')
+    if @get('singleMode') || @get('forwardOrReply') || @get('formMode')
       "submit"
     else if @get('bulkMode') && @get('fromPeople')
       "submitFromPeople"

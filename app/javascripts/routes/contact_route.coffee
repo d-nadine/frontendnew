@@ -33,7 +33,11 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
 
     saveEmail: (email) ->
       @_super email, dontTransition: true
+
+      return unless email.get('isValid')
+
       @send 'flashSuccess', 'Email Sent!'
+
       false
 
     deleteFromEditor: ->

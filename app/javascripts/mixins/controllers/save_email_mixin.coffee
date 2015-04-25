@@ -56,7 +56,8 @@ Radium.SaveEmailMixin = Ember.Mixin.create
           result.off 'didUpdate'
           form.set 'isSubmitted', false
           form.set 'isSending', false
-          form.reset()
+          Ember.run.next ->
+            form.reset()
 
           messagesController = @getController('messages')
 

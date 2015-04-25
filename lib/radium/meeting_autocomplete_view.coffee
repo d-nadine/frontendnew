@@ -1,3 +1,5 @@
+require 'lib/radium/async_autocomplete_list_view'
+
 Radium.MeetingAutocompleteView = Radium.AsyncAutocompleteView.extend
   actions:
     addSelection: (item) ->
