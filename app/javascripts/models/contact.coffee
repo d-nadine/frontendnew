@@ -33,7 +33,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   about: DS.attr('string')
   removeCompany: DS.attr('boolean')
   updateStatus: DS.attr('string')
-    lastActivityAt: DS.attr('datetime ')
+  lastActivityAt: DS.attr('datetime')
   activityTotal: DS.attr('number')
   nextTaskDate: DS.attr('datetime')
   website: DS.attr('string')
