@@ -17,6 +17,8 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   source: DS.attr('string')
   external: DS.attr('boolean')
 
+  todo: DS.belongsTo('Radium.Todo')
+
   reference: ((key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.toString().split('.')[1]
