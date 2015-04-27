@@ -19,6 +19,9 @@ Radium.Router.map ->
       @route 'edit', path: '/:email_id/edit'
       @route 'mailTo', path: 'mailto/:recipient_type/:recipient_id'
       @route 'sent', path: '/:email_id/sent'
+    @resource 'templates', ->
+      @route 'empty', path: '/empty'
+      @route 'new', path: '/new'
 
   @resource 'conversations', path: '/conversations/:type'
 
