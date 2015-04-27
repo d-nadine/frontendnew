@@ -127,7 +127,7 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
       false
 
     insertPlaceholder: (placeholder) ->
-      @trigger 'placeholderInsered', placeholder
+      @EventBus.publish('placeholderInsered', placeholder)
       false
 
     closeModal: ->

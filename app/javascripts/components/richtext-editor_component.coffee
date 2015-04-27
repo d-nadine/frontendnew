@@ -15,9 +15,11 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   files: Ember.computed.alias 'targetObject.files'
 
-  setup: Ember.on 'didInsertElement', ->
-    @get('form').on 'reset', this, 'onFormReset'
+  _initialize: Ember.on 'init', ->
+    @EventBus.subscribe('reset', this, 'onFormReset')
+    @EventBus.subscribe('placeholderInsered', this, 'onPlaceholderInserted')
 
+  setup: Ember.on 'didInsertElement', ->
     textarea = @$('textarea')
 
     textarea.summernote
@@ -46,10 +48,6 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     Ember.run.next ->
       superFunc()
-
-    return unless parent = @get('parent')
-
-    parent.on "placeholderInsered", this, "onPlaceholderInserted"
 
   onFormReset: ->
     return unless editable = @$('.note-editable')
@@ -161,6 +159,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     false
 
   teardown: Ember.on 'willDestroyElement', ->
+    @EventBus.unsubscribe('reset')
+    @EventBus.unsubscribe('placeholderInsered')
+
     @_super.apply this, arguments
 
     @$('.note-editable').off 'focus'
