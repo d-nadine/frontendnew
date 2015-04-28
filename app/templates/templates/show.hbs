@@ -1,0 +1,42 @@
+<div class="email-history">
+  <div class="span10 row-fluid">
+    <div class="block email-card message-card span12">
+      <div class="row-fluid">
+        <div class="email-header row-fluid">
+          <div class="span6 pull-left email-header-actions">
+            <small>
+              {{emailSentAt time format="long"}}
+            </small>
+            <div class="text-left">
+              <strong>{{subject}}</strong>
+            </div>
+          </div>
+        </div>
+        <div class="email-wrap span12">
+          <div class="content">
+            <div class="iframe-container">
+              <div {{bind-attr class="html::empty :text"}}>
+                {{{html}}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="email-options">
+      <div class="row-fluid">
+        <div class="clearfix email-item-actions email-item-main-actions email-options-right">
+          <div class="pull-right">
+            {{#link-to "templates.edit" model class="btn btn-link btn-messages-action"}}
+              <i class="ss-standard ss-write"></i> Edit
+            {{/link-to}}
+
+            <a class="btn btn-link btn-messages-action" {{action "delete" model}} {{bind-attr disabled=isSaving}}>
+              <i class="ss-symbolicons-block ss-trash"></i> Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

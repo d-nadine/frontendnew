@@ -12,7 +12,6 @@ Radium.TemplateForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
   reset: ->
     @set('id', null)
-    @set('isNew', true)
     @set('subject', '')
     @set('html', '')
     @trigger 'reset'
@@ -30,3 +29,5 @@ Radium.TemplateForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
   isValid: Ember.computed 'to.[]', 'html', ->
     @get('subject.length') && @get('html.length')
+
+  isNew: Ember.computed.not 'id'

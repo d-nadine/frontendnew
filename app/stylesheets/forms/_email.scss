@@ -13,6 +13,7 @@
     }
   }
 }
+
 .email-options-right {
   display: inline-block;
   float: right;
@@ -552,12 +553,12 @@
       float: right;
     }
   }
+}
 
-  .email-options {
-    background: #f9f9f9;
-    padding: 10px 20px;
-    border: solid 1px #dbdbdb;
-  }
+.email-options {
+  background: #f9f9f9;
+  padding: 10px 20px;
+  border: solid 1px #dbdbdb;
 }
 
 #email-body-iframe body {

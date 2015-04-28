@@ -5,15 +5,17 @@ Radium.TemplatesNewController = Radium.Controller.extend
 
       return unless form.get('isValid')
 
-      unless form.get('id')
-        template = Radium.Template.createRecord form.get('data')
+      template = Radium.Template.createRecord form.get('data')
 
       form.setFilesOnModel(template)
 
       template.save(this).then (result) =>
         @send 'flashSuccess', "Template saved!"
 
-        @get('messagesSidebar').send 'showMore'
+        @get('messagesSidebar').send('showMore')
+
+        p result.get('id')
+        @transitionToRoute "templates.edit", result
 
   needs: ['messagesSidebar']
 
