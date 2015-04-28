@@ -19,13 +19,13 @@
     {{#if replyMode}}
       <h5>
         Reply to
-        {{list "email.to"}}
+        {{list "form.to"}}
         <a class="pull-right" href="#" {{action "toggleOptions"}}>More Options</a>
       </h5>
     {{/if}}
     {{#if forwardMode}}
       <h5>
-        Forward: {{email.subject}}
+        Forward: {{form.subject}}
         <a class="pull-right" href="#" {{action "expand"}}>More Options</a>
       </h5>
     {{/if}}
@@ -63,23 +63,23 @@
       <div class="addresses bulk">
         {{#unless fromPeople}}
           <div {{bind-attr class="bulkListView.isInvalid:is-invalid bulkListView.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-            {{view bulk tabindex=1 source=email.to placeholder="Add recipient or list" viewName="bulkListView"}}
+            {{view bulk tabindex=1 source=form.to placeholder="Add recipient or list" viewName="bulkListView"}}
           </div>
         {{/unless}}
-        {{bulk-recipients recipients=email.to readonly=fromPeople removeFromBulkList="removeFromBulkList"}}
+        {{bulk-recipients recipients=form.to readonly=fromPeople removeFromBulkList="removeFromBulkList"}}
       </div>
     {{/if}}
     <div class="message">
       {{#if showOptions}}
         <div class="subject-wrap">
-          {{input type="text" value=email.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
+          {{input type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
         </div>
       {{/if}}
       <div class="more-options">
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
           <i class="ss-standard ss-font"></i>
         </a>
-        {{file-uploader files=email.files disableSave=disableSave bucket=email.bucket model=email.reference class="btn-file btn-messages-action"}}
+        {{file-uploader files=form.files disableSave=disableSave bucket=form.bucket model=form.reference class="btn-file btn-messages-action"}}
         {{#unless forwardOrReply}}
         <div class="btn-group vanilla">
           <a href="#" data-toggle="dropdown" class="dropdown-toggle" tabindex="-1">
@@ -118,7 +118,7 @@
         {{/unless}}
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=email.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions}}
         {{#unless signatureAdded}}
           <div class="prompt">
             <a href="#" {{action "addSignature"}} class="add-signature">Add a Signature</a>
@@ -126,8 +126,8 @@
           </div>
         {{/unless}}
       </div>
-      {{#if email.files.length}}
-        {{upload-filelist files=email.files hideUploadedBy=true}}
+      {{#if form.files.length}}
+        {{upload-filelist files=form.files hideUploadedBy=true}}
       {{/if}}
       <div class="send-later">
         <div class="datepicker-wrap">
@@ -139,7 +139,7 @@
     </div>
     <div class="actions">
       <div {{bind-attr class=":follow-up bulkMode"}}>
-        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" email on="change"}}/>
+        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" form on="change"}}/>
         <span>Create a task if no reply in</span>
         <div class="dropdown check-response-opener">
           <a class="drop" role="button"  href="#">
@@ -193,11 +193,11 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a {{action submitAction email}} href="#" class="btn-save-draft">Now</a>
+            <a {{action submitAction form}} href="#" class="btn-save-draft">Now</a>
           </li>
           {{#if singleMode}}
             <li>
-              <a {{action "saveAsDraft" email}} href="#" class="btn-save-draft">Save Draft</a>
+              <a {{action "saveAsDraft" form}} href="#" class="btn-save-draft">Save Draft</a>
             </li>
           {{/if}}
           {{#unless forwardOrReply}}

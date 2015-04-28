@@ -3,7 +3,7 @@ require 'mixins/editor_mixin'
 Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   actions:
     submit: (form) ->
-      @set 'email.isDraft', false
+      @set 'form.isDraft', false
 
       @sendAction 'saveEmail', form
 
@@ -70,7 +70,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       false
 
     saveAsDraft: (form, transitionFolder) ->
-      @set 'email.isDraft', true
+      @set 'form.isDraft', true
       @sendAction 'saveEmail', form, transitionFolder: transitionFolder
 
     scheduleDelivery: (form, date) ->
@@ -86,7 +86,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
         return @send('createBulkEmail', form)
 
-      @set 'email.sendTime', date
+      @set 'form.sendTime', date
       @send 'saveAsDraft', form, 'scheduled'
       #Hack to close menu
       $(window).trigger('click.date-send-menu')
@@ -96,14 +96,14 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       false
 
     setCheckForResponse: (date) ->
-      @set 'email.checkForResponse', date
+      @set 'form.checkForResponse', date
       @set('checkForResponseSet', true)
       @$('.check-response-opener').removeClass 'open'
       $(window).trigger('click.date-send-menu')
       false
 
     cancelCheckForResponse: (form) ->
-      return unless @get('email.checkForResponse')
+      return unless @get('form.checkForResponse')
 
       form.set 'checkForResponse', null
 
@@ -115,7 +115,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       false
 
     removeFromBulkList: (recipient) ->
-      @get('email.to').removeObject recipient
+      @get('form.to').removeObject recipient
 
       # FIXME: hack to stop the recipients list disappearing
       Ember.run.next =>
@@ -152,7 +152,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('email.html') || ''
+      current = @get('form.html') || ''
       currentLength = editable.text().length
       signature = @get('signature').replace(/\n/g, '<br/>')
 
@@ -217,8 +217,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     return unless @get('fromPeople')
 
-    toLength = @get('email.to.length')
-    totalRecords = @get('email.totalRecords')
+    toLength = @get('form.to.length')
+    totalRecords = @get('form.totalRecords')
 
     return if toLength >= totalRecords
 
@@ -251,16 +251,16 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   signatureAdded: false
   showSignatureModal: false
 
-  checkForResponse: Ember.computed.oneWay 'email.checkForResponse'
-  checkForResponseFormatted: Ember.computed.oneWay 'email.checkForResponseFormatted'
+  checkForResponse: Ember.computed.oneWay 'form.checkForResponse'
+  checkForResponseFormatted: Ember.computed.oneWay 'form.checkForResponseFormatted'
   checkForResponseSet: false
 
-  isScheduled: Ember.computed.oneWay 'email.isScheduled'
-  sendTimeFormatted: Ember.computed.oneWay 'email.sendTimeFormatted'
+  isScheduled: Ember.computed.oneWay 'form.isScheduled'
+  sendTimeFormatted: Ember.computed.oneWay 'form.sendTimeFormatted'
 
-  isSubmitted: Ember.computed.oneWay 'email.isSubmitted'
+  isSubmitted: Ember.computed.oneWay 'form.isSubmitted'
 
-  isDraft: Ember.computed.oneWay 'email.isDraft'
+  isDraft: Ember.computed.oneWay 'form.isDraft'
 
   showNavigation: Ember.computed 'isDraft', 'forwardMode', 'replyMode', 'formMode', ->
     return if @get('isDraft') || @get('forwardMode') || @get('replyMode') || @get('formMode')
@@ -275,24 +275,24 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.email.to'
+    sourceBinding: 'controller.form.to'
     showAvatar: false
-    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.email.to.[]', ->
+    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.form.to.[]', ->
       return unless @get('controller.isSubmitted')
 
-      !!!@get('controller.email.to.length')
+      !!!@get('controller.form.to.length')
 
-    isValid: Ember.computed 'controller.email.to.[]', ->
-      @get('controller.email.to.length') > 0
+    isValid: Ember.computed 'controller.form.to.[]', ->
+      @get('controller.form.to.length') > 0
 
   cc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.email.cc'
+    sourceBinding: 'controller.form.cc'
     showAvatar: false
 
   bcc: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
-    sourceBinding: 'controller.email.bcc'
+    sourceBinding: 'controller.form.bcc'
     showAvatar: false
 
   bulk: Radium.EmailAsyncAutocompleteView.extend
@@ -317,10 +317,10 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   forwardMode: Ember.computed.equal 'mode', 'forward'
   formMode: Ember.computed.equal 'mode', 'form'
 
-  messageIsInvalid: Ember.computed 'isSubmitted', 'email.html.length', ->
+  messageIsInvalid: Ember.computed 'isSubmitted', 'form.html.length', ->
     return false unless @get('isSubmitted')
 
-    message = @get('email.html') || ''
+    message = @get('form.html') || ''
 
     !!!message.length
 
