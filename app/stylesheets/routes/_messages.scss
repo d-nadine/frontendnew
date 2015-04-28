@@ -212,8 +212,66 @@ $item-border: #dddddd;
   }
 }
 
-.message-item-details {
+.messages-list-item.template {
+  float: left;
+  width: calc(100%);
+  border-bottom: 1px solid #c8c8c8;
+  position: relative;
 
+  &.is-selected {
+    background: aliceblue;
+  }
+}
+
+.messages-list-item.template .item-wrap {
+  padding: 12px 0 10px 15px;
+  margin-right: 45px;
+}
+
+.messages-list-item.template h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 2;
+  margin-bottom: 10px;
+}
+
+.messages-list-item.template .preview {
+  height: 3em;
+  overflow-y: hidden;
+}
+
+.messages-list-item.template .stats {
+  background: #f9f9f9;
+  width: 340px;
+  float: left;
+  margin-left: -15px;
+  padding: 0px 15px 7px;
+  vertical-align: middle;
+  margin-top: 10px;
+  line-height: 12px;
+}
+
+.messages-list-item.template .stats span {
+  color: #aaa;
+  font-size: 12px;
+  width: 32%;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.messages-list-item.template .delete {
+  position: absolute;
+  right: 13px;
+  top: 50px;
+  font-size: 16px;
+  display: none;
+}
+
+.messages-list-item.template:hover .delete {
+  display: block;
+}
+
+.message-item-details {
   .badge.thread {
     overflow: hidden;
     text-overflow: ellipsis;

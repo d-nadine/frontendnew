@@ -1,0 +1,18 @@
+<div class="item active">
+  <div class="item-wrap">
+    <h3>{{subject}} {{#if hasAttachments}}<i class="ss-standard ss-attach"></i>{{/if}}</h3>
+    <div class="preview">{{truncate html}}</div>
+    <div class="stats">
+      <!--<span class="open">38% open</span>-->
+      <span class="sent">{{sentCount}} sent</span>
+      {{#if lastUsed}}
+        <span class="last">last used - </span>
+      {{/if}}
+    </div>
+  </div>
+  <div class="delete">
+    <a href="#" {{action "delete" model true bubbles=false}}>
+      <i class="ss-standard ss-trash"></i>
+    </a>
+  </div>
+</div>

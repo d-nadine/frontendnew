@@ -1,9 +1,6 @@
-Radium.TemplatePlaceholderMap =
-  "name": "name"
-  "company": "company"
-  "signature": "signature"
+require 'mixins/editor_mixin'
 
-Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
+Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   actions:
     submit: (form) ->
       @set 'email.isDraft', false
@@ -126,10 +123,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
       false
 
-    insertPlaceholder: (placeholder) ->
-      @EventBus.publish('placeholderInsered', placeholder)
-      false
-
     closeModal: ->
       @$().one $.support.transition.end, =>
         @set 'showSignatureModal', false
@@ -181,9 +174,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
 
     expandList: (section) ->
       @set("show#{section.capitalize()}", true)
-
-    toggleEditorToolbar: ->
-      @$('.note-toolbar').slideToggle "slow"
 
     hideAddSignature: ->
       @set 'signatureAdded', true
@@ -271,18 +261,6 @@ Radium.EmailFormComponent = Ember.Component.extend Ember.Evented,
   isSubmitted: Ember.computed.oneWay 'email.isSubmitted'
 
   isDraft: Ember.computed.oneWay 'email.isDraft'
-
-  insertActions: Ember.computed ->
-    placeholderMap = Radium.TemplatePlaceholderMap
-
-    ret = Ember.A()
-
-    for i of placeholderMap
-      if placeholderMap.hasOwnProperty(i)
-        item = Ember.Object.create(name: i, display: "{#{placeholderMap[i]}}")
-        ret.pushObject item
-
-    ret
 
   showNavigation: Ember.computed 'isDraft', 'forwardMode', 'replyMode', 'formMode', ->
     return if @get('isDraft') || @get('forwardMode') || @get('replyMode') || @get('formMode')

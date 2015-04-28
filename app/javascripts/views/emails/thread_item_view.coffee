@@ -19,5 +19,8 @@ Radium.ThreadItemView = Radium.View.extend
       Ember.run.next =>
         selector = ".email-history [data-id='#{@get('controller.model.id')}']"
         ele = $(selector).get(0)
+
+        return unless ele.id
+
         Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
         parentController.set 'initialised', true

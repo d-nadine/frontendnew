@@ -76,7 +76,9 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
   modelQuery: ->
     requestParams = Ember.merge(@get('controllers.messages').requestParams(), page: @get('page'))
 
-    Radium.Email.find(requestParams)
+    type = @get('controllers.messages').requestType()
+
+    type.find(requestParams)
 
   isSearchOpen: false
 

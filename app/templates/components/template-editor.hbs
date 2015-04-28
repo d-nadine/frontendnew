@@ -2,7 +2,7 @@
   <div class="email-form-body">
     <div class="message">
       <div class="subject-wrap">
-        {{input type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
+        {{view subjectView type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="1"}}
       </div>
       <div class="more-options">
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
@@ -14,16 +14,12 @@
             <i class="ss-standard ss-navigatedown"></i>
           </a>
           <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-            <li class="dropdown-submenu">
-              <a tabindex="-1" href="#">Insert Template</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="#">INSERT CUSTOM TEMPLATES</a>
-                </li>
-              </ul>
-            </li>
             <li class="divider"></li>
-
+            {{#each insertAction in insertActions}}
+            <li>
+              <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.name}}</a>
+            </li>
+            {{/each}}
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Insert Fields</a>
               <ul class="dropdown-menu">
@@ -35,7 +31,15 @@
         </div>
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions form=form}}
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=insertActions}}
+      </div>
+      {{#if email.files.length}}
+        {{upload-filelist files=email.files hideUploadedBy=true}}
+      {{/if}}
+      <div class="actions">
+        <a href="#" class="btn">Send Me a Test</a>
+        <a href="#" class="btn" {{action "saveTemplate" form}}>Update</a>
+      </div>
     </div>
   </div>
-<div>
+</div>

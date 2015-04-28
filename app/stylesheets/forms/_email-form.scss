@@ -1,4 +1,4 @@
-.email-form-component, .template-form-component {
+.email-form-component, .template-editor-component {
   input[type=text] {
     height: 29px;
     border-radius: 0px;
@@ -168,6 +168,7 @@
     color: #888;
     font-size: 14px;
     border-radius: 12px;
+    font-weight: normal;
     span {
       cursor: pointer;
     }
@@ -378,4 +379,12 @@
     text-align: center;
     padding: 5px 0 15px;
   }
+}
+
+.template-editor-component .actions {
+  float: right;
+}
+
+.template-editor-component .subject-wrap input[type=text].is-invalid {
+  border-color: $red;
 }

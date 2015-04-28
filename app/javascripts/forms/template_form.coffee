@@ -29,4 +29,4 @@ Radium.TemplateForm = Radium.Form.extend Radium.FormsAttachmentMixin,
   ).volatile()
 
   isValid: Ember.computed 'to.[]', 'html', ->
-    @get('to.length') && @get('html.length')
+    @get('subject.length') && @get('html.length')

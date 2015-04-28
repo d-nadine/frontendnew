@@ -232,6 +232,8 @@ Radium.MessagesRoute = Radium.Route.extend
 
     controller.set 'model', model.toArray()
 
+    return unless model.get('length')
+
     @controllerFor('messagesSidebar').send 'loadInitialPages'
 
   renderTemplate: (controller, context) ->
