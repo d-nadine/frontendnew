@@ -1,4 +1,11 @@
 <div class="email-form single-mode">
+  <div class="email-form-header">
+    {{#if form.isNew}}
+      <h3>New Template</h3>
+    {{else}}
+      <h3>Editing Template - {{form.subject}}</h3>
+    {{/if}}
+  </div>
   <div class="email-form-body">
     <div class="message">
       <div class="subject-wrap">
@@ -33,8 +40,8 @@
       <div class="textbox-wrap">
         {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=insertActions}}
       </div>
-      {{#if email.files.length}}
-        {{upload-filelist files=email.files hideUploadedBy=true}}
+      {{#if form.files.length}}
+        {{upload-filelist files=form.files hideUploadedBy=true}}
       {{/if}}
       <div class="actions">
         <a href="#" class="btn">Send Me a Test</a>

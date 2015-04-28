@@ -10,11 +10,13 @@ Radium.TemplatesNewController = Radium.Controller.extend
       form.setFilesOnModel(template)
 
       template.save(this).then (result) =>
+        form.set 'isSubmitted', false
+        form.reset()
+
         @send 'flashSuccess', "Template saved!"
 
         @get('messagesSidebar').send('showMore')
 
-        p result.get('id')
         @transitionToRoute "templates.edit", result
 
   needs: ['messagesSidebar']
