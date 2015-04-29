@@ -1,20 +1,17 @@
-<div class="page-header">
-  <h2>Add Contacts</h2>
-</div>
-
-<div class="new-leads-control">
+<div class="new-leads-control side-tabs">
+  <div class="side-tabs-title">
+    <i class="ss-standard ss-user"></i>
+    <span>Add Contact</span>
+  </div>
   <ul class="nav nav-tabs">
     {{#link-to "leads.single" href=false tagName="li"}}
-      <a href="#"><i class="ss-standard ss-plus"></i> Single Contact</a>
+      <a href="#">Add Single Contact <i class="ss-standard ss-directright"></i></a>
     {{/link-to}}
     {{#link-to "leads.import" href=false tagName="li"}}
-      <a href="#">Import Contacts from File</a>
+      <a href="#">Import from CSV <i class="ss-standard ss-directright"></i></a>
     {{/link-to}}
     {{#link-to "untracked.index" "filtered" tagName="li"}}
-      <a href="#">
-        Import Contacts from Google
-        <span class="badge">{{untrackedTotal}}</span>
-      </a>
+      <a href="#">Import from Google <i class="ss-standard ss-directright"></i></a>
     {{/link-to}}
     {{#unless currentUser.initialContactsImported}}
       <li>

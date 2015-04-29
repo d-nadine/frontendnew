@@ -1,19 +1,28 @@
 .autocomplete {
   ul.as-selections {
+    height: 50px;
     margin: 0;
     padding: 0;
     border: none;
     overflow: hidden;
     @include box-shadow(none);
+    padding-left: 10px;
 
     li {
       margin: 0;
+      height: 50px;
+      line-height: 50px;
+      overflow: visible;
+
+      input {
+        height: 44px !important;
+      }
     }
 
     li.as-selection-item,
     li.as-selection-item.blur {
-      border: solid 1px $control-border-color;
-      background-color: $light-background;
+      background: #ddd;
+      border: 0px;
       color: inherit;
     }
 
@@ -34,6 +43,9 @@
       font-size: inherit;
       padding: 4px 6px;
       margin-right: 10px;
+      margin-top: 7px;
+      height: 28px;
+      line-height: 28px;
       font-family: inherit;
       text-shadow: none;
 
@@ -55,6 +67,7 @@
     }
 
     li.as-original input {
+      line-height: 50px;
       height: auto;
       font-size: inherit;
       padding: 4px 6px;
@@ -69,7 +82,7 @@
 
 li.as-result-item.active {
   cursor: pointer;
-	color: #fff;
+  color: #fff;
   text-decoration: none;
   outline: 0;
   background-color: #0081c2;
@@ -97,4 +110,9 @@ div.autocomplete:not(.tags) {
     box-shadow: none;
     border-radius: none;
   }
+}
+
+ul.as-list {
+  margin-left: -11px;
+  margin-top: 21px;
 }

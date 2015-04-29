@@ -1,11 +1,11 @@
+<div class="tab-content-title">
+  <h1>Add Single Contact</h1>
+</div>
+
+
 <div class="item contact-name">
-  <div class="icon">
-    <i class="ss-standard ss-user"></i>
-  </div>
-  <div class="description">Name</div>
-  <div class="chrome-hack">Chrome Hack</div>
   <div class="field">
-    {{autocomplete-textbox scopes="contact" value=model.name queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid saveModel="saveModel"}}
+    {{autocomplete-textbox scopes="contact" value=model.name placeholder="Name" queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid saveModel="saveModel"}}
     {{#unless model.isNew}}
       <button class="btn btn-primary" {{action "clearExisting"}}>Clear and Add New</button>
     {{/unless}}
@@ -20,45 +20,26 @@
 </div>
 {{/unless}}
 <div class="item company">
-  <div class="icon">
-    <i class="ss-standard ss-buildings"></i>
-  </div>
-  <div class="description">Company</div>
-  <div class="chrome-hack">Chrome Hack</div>
   <div class="field company">
-    {{autocomplete-textbox scopes="company" value=model.companyName queryKey="name" writeableValue=true saveModel="saveModel"}}
-  </div>
-</div>
-<div class="item">
-  <div class="icon">
-    <i class="ss-standard ss-globe"></i>
-  </div>
-  <div class="description">Website</div>
-  <div class="chrome-hack">Chrome Hack</div>
-  <div class="field">
-    {{regex-input value=model.website regex=Radium.URL_REGEX}}
+    {{autocomplete-textbox scopes="company" value=model.companyName placeholder="Company" queryKey="name" writeableValue=true saveModel="saveModel"}}
   </div>
 </div>
 {{#each email in emailAddresses}}
-  {{#multiple-control item=email items=emailAddresses modelChanged="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" icon="ss-mail" queryProfile="queryProfile" labels=Radium.EmailLabels}}
-    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" modelChanged="modelChanged" saveModel="saveModel" queryProfile="queryProfile" validations=_parent.emailValidations validator=_parent.targetObject validationField="email" isValid=_parentObject.isValid}}
+  {{#multiple-control item=email items=emailAddresses modelChanged="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" queryProfile="queryProfile"}}
+    {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" modelChanged="modelChanged" saveModel="saveModel" queryProfile="queryProfile" validations=_parent.emailValidations validator=_parent.targetObject validationField="email" isValid=_parentObject.isValid placeholder="Email"}}
   {{/multiple-control}}
 {{/each}}
 {{#each phoneNumber in phoneNumbers}}
-  {{#multiple-control item=phoneNumber items=phoneNumbers modelChanged="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel" icon="ss-phone" labels=Radium.PhoneLabels}}
-    {{phone-input value=value class="single" saveModel="saveModel" modelChanged="modelchanged"}}
+  {{#multiple-control item=phoneNumber items=phoneNumbers modelChanged="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel"}}
+    {{phone-input value=value class="single" saveModel="saveModel" modelChanged="modelchanged" placeholder="Phone"}}
   {{/multiple-control}}
 {{/each}}
 <div class="item">
-  <div class="icon"><i class="ss-standard ss-list"></i></div>
-  <div class="description">Lists</div>
   <div class="field">
-    {{tag-picker model=model tagNames=model.tagNames}}
+    {{tag-picker model=model tagNames=model.tagNames placeholder="asdf"}}
   </div>
 </div>
 <div class="item">
-  <div class="icon"><i></i></div>
-  <div class="description">Assigned To</div>
   <div class="field">
     {{autocomplete-textbox source=users value=model.user queryKey="displayName" validations=userValidations validator=targetObject validationField="user" isValid=isValid}}
   </div>
@@ -70,37 +51,31 @@
 <div class="clearfix"></div>
 <div class="more">
   <div class="item">
-    <div class="icon"><i class="ss-standard ss-tag"></i></div>
-    <div class="description">Title</div>
     <div class="field">
-      {{autocomplete-textbox autocompleteType=Radium.Title value=model.title queryKey="title" queryParameters=titleQueryParameters writeableValue=true }}
+      {{autocomplete-textbox autocompleteType=Radium.Title value=model.title queryKey="title" queryParameters=titleQueryParameters writeableValue=true placeholder="Title"}}
+    </div>
+  </div>
+  <div class="item">
+    <div class="field">
+      {{regex-input value=model.website regex=Radium.URL_REGEX placeholder="Website"}}
     </div>
   </div>
   <div class="item address">
-    <div class="icon"><i class="ss-standard ss-location"></i></div>
-    <div class="description">Address</div>
-    <div class="chrome-hack">Chrome Hack</div>
     <div class="field">
       {{multiple-address addresses=addresses saveModel=saveModel parent=targetObject}}
     </div>
   </div>
-  <div class="item">
-    <div class="icon"><i class="ss-standard ss-notebook"></i></div>
-    <div class="description">About</div>
+  <div class="item about">
     <div class="field">
-      {{textarea class="single" value=model.about}}
+      {{textarea class="single" value=model.about placeholder="About"}}
     </div>
   </div>
   <div class="item">
-    <div class="icon"><i class="ss-standard ss-fax"></i></div>
-    <div class="description">Fax</div>
     <div class="field">
-      {{input type="text" value=model.fax class="single"}}
+      {{input type="text" value=model.fax class="single" placeholder="Fax"}}
     </div>
   </div>
-  <div class="item">
-    <div class="icon"><i class=""></i></div>
-    <div class="description">Sex</div>
+  <div class="item sex">
     <div class="field">
       <div class="radio-group">
         <div>
@@ -115,17 +90,13 @@
     </div>
   </div>
   <div class="item">
-    <div class="icon"><i class=""></i></div>
-    <div class="description">Source</div>
     <div class="field">
-      {{autocomplete-textbox source=leadSources value=model.source}}
+      {{autocomplete-textbox source=leadSources value=model.source placeholder="Source"}}
     </div>
   </div>
   <div class="item">
-    <div class="icon"><i class=""></i></div>
-    <div class="description">Status</div>
     <div class="field">
-      {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name"}}
+      {{autocomplete-textbox source=contactStatuses value=model.contactStatus queryKey="name" placeholder="Status"}}
     </div>
   </div>
   {{#each field in contactCustomFields}}
@@ -167,6 +138,7 @@
   {{/if}}
 </div>
 <div class="submit">
+<<<<<<< HEAD
   <hr/>
   <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>
     Submit
@@ -174,6 +146,10 @@
       <img src="/images/loading/ajax-loader.gif"/> <span class="muted">saving...</span>
     {{/if}}
   </button>
+=======
+  {{partial "saving"}}
+  <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>Submit</button>
+>>>>>>> add contact page
 </div>
 <div class="modal hide fade">
   <div class="modal-header">

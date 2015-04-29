@@ -6,7 +6,7 @@
   clear: both;
   float: left;
   padding: 7px 0;
-  line-height: 30px;
+  height: 48px;
 }
 
 .form .item > div,
@@ -38,12 +38,34 @@
   border: 1px solid #cccccc;
 }
 
-.form .item input.as-input,
 .form .item input.single {
-  height: 25px !important;
-  margin-bottom: 0;
-  width: 234px;
+  border: 1px solid $border;
+  width: calc(455px - 22px) !important;
+  border-radius: 0px;
+  height: 48px;
+  line-height: 48px;
   float: left;
+  background-color: $input;
+  padding: 0 11px;
+  margin-bottom: 0;
+  box-shadow: none;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form .item textarea.single {
+  background: $input;
+  border: 1px solid $border;
+  border-radius: 0px;
+  width: calc(455px - 22px);
+  line-height: 1.4;
+  padding: 15px 11px;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .form .item input.single::-webkit-input-placeholder {
@@ -54,13 +76,16 @@
   margin-bottom: 8px;
 }
 
-.form .item #addressField .single {
-  float: none;
+.form .item.about {
+  height: auto;
+
+  textarea {
+    height: 70px;
+  }
 }
 
-.form .item textarea {
-  width: 300px;
-  height: 70px;
+.form .item #addressField .single {
+  float: none;
 }
 
 .form .item textarea, .form .item select {
@@ -87,12 +112,22 @@
 }
 
 .form .item .field {
-  width: 300px;
+  width: 455px;
 
-  .ember-text-field {
-    height: 25px;
-    width: 233px;
+  > .ember-text-field {
+    width: calc(455px - 22px);
     margin-bottom: 0;
+    border-radius: 0px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 11px;
+    background-color: $input;
+    border: 1px solid $border;
+    box-shadow: none;
+
+    &:focus {
+      box-shadow: none;
+    }
   }
 }
 
@@ -122,6 +157,7 @@
 
 .form .item .extra-delete {
   padding-right: 6px;
+  float: left;
 }
 
 .form .item .primary-check {
@@ -228,6 +264,10 @@
   margin-right: 20px;
 }
 
+.form .item.sex .field {
+  margin-top: 12px;
+}
+
 .form .radio-group > div {
   display: inline-block;
   margin-right: 10px;
@@ -297,7 +337,7 @@
     display: inline-block;
     float: left;
     clear: both;
-    margin: 10px 0 25px 25px;
+    margin: 20px 0;
   }
 
   .showmore i {
@@ -339,9 +379,11 @@
   }
 
   #locationField input {
-    height: 35px;
+    height: 48px;
     position: static;
     margin-bottom: 0;
+    border-style: none;
+    border: 1px solid $border;
   }
 
   .pac-container {
@@ -354,7 +396,6 @@
 
   #addressField {
     display: none;
-    margin-top: 10px;
   }
 
   #street_number {
@@ -440,7 +481,39 @@
 
 
 
+.tab-content {
+  border: 1px solid $border;
+  background: white;
+  min-width: 836px;
+  padding: 10px 30px;
+
+  .form {
+    padding-left: 0;
+
+    .tab-content-title {
+      border-bottom: 1px solid $border;
+      margin-bottom: 22px;
+
+      h1 {
+        font-size: 24px;
+        font-weight: 300; 
+        line-height: 28px;
+        padding-bottom: 15px;
+      }
+    }
+
+    .submit {
+
+      button {
+        float: right;
+      }
+    }
+  }
+}
 
 
-
-
+.field .dropdown-menu {
+  width: 455px;
+  margin-left: -1px;
+  margin-top: 2px;
+}
