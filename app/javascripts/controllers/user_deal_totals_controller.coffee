@@ -1,25 +1,20 @@
 Radium.UserDealTotalsItemController = Radium.ObjectController.extend
-  deals: Ember.computed.alias 'target.target.deals'
+  deals: Ember.computed.alias 'parentController.deals'
 
-  dealsTotal: ( ->
+  dealsTotal: Ember.computed 'model', 'deals.[]', ->
     return 0 unless @get('model')
     return 0 unless @get('deals.length')
 
     @get('deals').filter((deal) =>
       deal.get('status') == @get('model')
     ).length
-  ).property('model', 'deals.[]')
 
-  dealsValue: ( ->
+  dealsValue: Ember.computed 'deals.@each.status', ->
     return 0 unless @get('model')
     return 0 unless @get('deals.length')
 
     @get('deals').filter((deal) =>
       deal.get('status') == @get('model')
-    )
-    .reduce((preVal, item) ->
+    ).reduce((preVal, item) ->
       preVal + item.get('value')
     , 0, 'value')
-  ).property('checklist.@each.isFinished')
-
-
