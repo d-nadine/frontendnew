@@ -422,3 +422,27 @@ input[type="checkbox"]:checked + label {
     background: url('http://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') 0px top no-repeat;
   }
 }
+
+
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: -2px 7px 0 0;
+  vertical-align: middle;
+  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -40px top no-repeat;
+  cursor: pointer;
+}
+input[type="radio"] + label span:hover {
+  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -20px top no-repeat; 
+}
+input[type="radio"]:checked + label {
+  color: $blue;
+  
+  span {
+    background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') 0px top no-repeat;
+  }
+}

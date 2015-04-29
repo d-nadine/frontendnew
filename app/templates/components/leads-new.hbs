@@ -45,11 +45,13 @@
   </div>
 </div>
 <div class="clearfix"></div>
-<a href="#" class="showmore btn" {{action "toggleMore"}}>
+<a href="#" class="showmore btn-text btn-black" {{action "toggleMore"}}>
   {{#unless showMore}}
-    More
+    <span>Show more</span>
+    <i class="ss-standard ss-ellipsis"></i>
   {{else}}
-    less
+    <span>Show less</span>
+    <i class="ss-standard ss-ellipsis"></i>
   {{/unless}}
 </a>
 <div class="clearfix"></div>

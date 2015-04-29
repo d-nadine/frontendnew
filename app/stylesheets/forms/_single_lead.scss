@@ -9,16 +9,13 @@
   height: 48px;
 }
 
-.form .item > div,
-.form .item input[type=radio] {
+.form .item > div {
   display: inline-block;
   float: left;
 }
 
 .form .item input[type=radio] {
-  position: relative;
-  top: 7px;
-  margin-left: 8px;
+  
 }
 
 .form .item input[type=checkbox] {
@@ -30,8 +27,12 @@
 
 .form .item .description {
   font-size: 14px;
-  width: 170px;
-  margin-left: 12px;
+  width: 145px;
+
+  .control-box {
+    width: 135px;
+    height: 48px;
+  }
 }
 
 .form .item .as-selections {
@@ -280,7 +281,6 @@
 .form .radio-group > div span {
   line-height: 14px;
   vertical-align: top;
-  padding-left: 6px;
 }
 
 #notes {
@@ -338,6 +338,12 @@
     float: left;
     clear: both;
     margin: 20px 0;
+
+    span {
+      float: left;
+      margin-right: 10px;
+      font-size: 14px;
+    }
   }
 
   .showmore i {

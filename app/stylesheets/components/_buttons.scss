@@ -67,4 +67,7 @@
     right: 3px;
     font-size: 14px;
   }
+  &:focus {
+    text-decoration: none;
+  }
 }
