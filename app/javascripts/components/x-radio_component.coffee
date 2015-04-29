@@ -1,8 +1,4 @@
-Radium.RadioButtonComponent = Ember.Component.extend
-  tagName: "input"
-  type: "radio"
-  attributeBindings: ['name', 'type', 'value', 'checked:checked']
-
+Radium.XRadioComponent = Ember.Component.extend
   checked: Ember.computed 'selection', 'value', ->
     @get('value') == @get('selection')
 
@@ -11,4 +7,7 @@ Radium.RadioButtonComponent = Ember.Component.extend
 
   selectionDidChange: Ember.observer 'checked', ->
     Ember.run.next =>
-      this.$().prop('checked', @get('checked'))
+      @$().prop('checked', @get('checked'))
+
+  radioButtonId: Ember.computed ->
+    "checker-#{@get('elementId')}"

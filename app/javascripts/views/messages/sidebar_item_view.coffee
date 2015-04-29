@@ -28,11 +28,3 @@ Radium.MessagesSidebarItemView = Radium.View.extend Radium.ContentIdentification
     return unless content = @get('content.content')
 
     content.humanize().singularize()
-
-  checker: Radium.Checkbox.extend
-    classNames: ['checker-block']
-    checkedBinding: 'controller.isChecked'
-
-    click: (event) ->
-      event.stopPropagation()
-      @get('controller').send('check', @get('controller.content'))

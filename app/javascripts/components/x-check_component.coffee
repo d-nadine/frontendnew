@@ -15,8 +15,7 @@ Radium.XCheckComponent = Ember.Component.extend
     this.$('input').prop('checked', !!this.get('checked'))
 
   _updateElementValue: ->
-    Ember.run.next =>
-      @set 'checked', this.$('input').prop('checked')
+    @set 'checked', this.$('input').prop('checked')
 
   checkBoxId: Ember.computed ->
     "checker-#{@get('elementId')}"

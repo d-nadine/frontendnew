@@ -79,12 +79,10 @@
     <div class="field">
       <div class="radio-group">
         <div>
-          {{radio-button name="gender" value="m" selection=model.gender}}
-          <span class="radio-label">Male</span>
+          {{x-radio leader="Male" name="gender" value="m" selection=model.gender}}
         </div>
         <div>
-          {{radio-button name="gender" value="f" selection=model.gender}}
-          <span class="radio-label">Female</span>
+          {{x-radio leader="Female" name="gender" value="f" selection=model.gender}}
         </div>
       </div>
     </div>
