@@ -46,7 +46,11 @@
 </div>
 <div class="clearfix"></div>
 <a href="#" class="showmore btn" {{action "toggleMore"}}>
-  <i {{bind-attr class=":ss-standard showMore:ss-navigatedown:ss-navigateup"}}></i>
+  {{#unless showMore}}
+    More
+  {{else}}
+    less
+  {{/unless}}
 </a>
 <div class="clearfix"></div>
 <div class="more">
