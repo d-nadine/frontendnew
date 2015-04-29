@@ -1,10 +1,7 @@
 <div class="item">
   <div class="icon"><i {{bind-attr class=":ss-standard icon"}}></i></div>
   <div class="description">
-    {{view Ember.Select
-    content=labels
-    selection=currentValue
-    value=item.name}}
+    {{autocomplete-textbox source=labels value=item.name}}
   </div>
   <div>
     {{#with item}}
