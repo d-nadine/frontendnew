@@ -7,7 +7,7 @@
   <div class="field">
     {{autocomplete-textbox scopes="contact" value=model.name placeholder="Name" queryKey="displayName" action="modelChanged" validations=nameValidations validator=targetObject validationField="name" writeableValue=true isValid=isValid saveModel="saveModel"}}
     {{#unless model.isNew}}
-      <button class="btn btn-primary" {{action "clearExisting"}}>Clear and Add New</button>
+      <button class="btn btn-primary btn-clear" {{action "clearExisting"}}>Clear and Add New</button>
     {{/unless}}
   </div>
 </div>

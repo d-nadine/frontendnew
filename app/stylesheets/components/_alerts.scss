@@ -13,13 +13,17 @@
   border-color: #f88e28;
   background-color: #fed1a7;
 
+  img {
+    margin-right: 6px;
+  }
+
   .close {
     width: 18px;
     height: 18px;
     opacity: 1;
     font-size: 9px;
-    line-height: 19px;
-    top: 0;
+    line-height: 0;
+    top: 6px;
     text-shadow: none;
     color: #fed1a7;
     background: #2d2d2d;
