@@ -215,8 +215,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       $(this).parents('.btn-group.open').removeClass 'open'
 
   doUpdate: ->
-    content = @$('.note-editable').html()
-    @set('content', content)
+    Ember.run.next  =>
+      content = @$('.note-editable').html()
+      @set('content', content)
 
   onPlaceholderInserted: (placeholder) ->
     @removePlaceHolder() unless @get('placeholderShown')

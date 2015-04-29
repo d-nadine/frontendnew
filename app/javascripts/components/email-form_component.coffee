@@ -2,6 +2,11 @@ require 'mixins/editor_mixin'
 
 Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   actions:
+    saveTemplate: (form) ->
+      @sendAction "saveTemplate", form
+
+      false
+
     submit: (form) ->
       @set 'form.isDraft', false
 

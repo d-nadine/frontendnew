@@ -13,7 +13,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set 'content', Ember.Object.create()
     @_super()
 
-  reset: ->
+  reset: (bubbles = true)->
     @set('id', null)
     to = if to = @get('defaults.to')
             to
@@ -36,7 +36,7 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @set('repliedTo', null)
 
     if eventBus = @EventBus
-      eventBus.publish('reset')
+      eventBus.publish('reset') if bubbles
 
     @_super.apply this, arguments
 

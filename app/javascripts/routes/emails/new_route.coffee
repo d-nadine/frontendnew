@@ -68,6 +68,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
 
   deactivate: ->
     controller = @controllerFor('emailsNew')
+    controller.set 'template', null
     controller.get('model').reset()
     controller.set('isSubmitted', false)
     @controllerFor('messagesSidebar').send 'reset'

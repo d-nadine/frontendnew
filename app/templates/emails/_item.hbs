@@ -150,7 +150,7 @@
               <i class="ss-standard ss-right"></i> Forward
             </a>
           {{else}}
-            {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
+            {{#link-to "emails.edit" model (query-params mode="single" from_people=false) class="btn btn-link btn-messages-action"}}
               <i class="ss-standard ss-write"></i> Edit
             {{/link-to}}
             <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
@@ -170,12 +170,12 @@
     <div>
       {{#if showReplyForm}}
         <div class="block block-arrow-top">
-          {{email-form email=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail"}}
+          {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail"}}
         </div>
       {{/if}}
 
       {{#if showForwardForm}}
-        {{email-form email=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail"}}
+        {{email-form form=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail"}}
       {{/if}}
 
       {{#if showFormBox}}

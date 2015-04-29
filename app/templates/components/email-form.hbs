@@ -87,11 +87,12 @@
           </a>
           <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
             <li>
-              <a href="#">Save as Template</a>
+              <a {{action "saveTemplate" form}} href="#">Save as Template</a>
             </li>
             <li>
-              <a href="#">Edit Templates</a>
+              {{#link-to "messages" "templates"}}Edit Templates{{/link-to}}
             </li>
+            <!--
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Insert Template</a>
               <ul class="dropdown-menu">
@@ -100,6 +101,7 @@
                 </li>
               </ul>
             </li>
+            -->
             <li class="divider"></li>
             {{#each insertAction in insertActions}}
             <li>
@@ -202,7 +204,7 @@
           {{/if}}
           {{#unless forwardOrReply}}
             <li>
-              <a href="#" class="btn-save-template">Save as Template</a>
+              <a {{action "saveTemplate" form}} href="#" class="btn-save-template">Save as Template</a>
             </li>
           {{/unless}}
           <li>

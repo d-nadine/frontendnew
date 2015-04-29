@@ -1,6 +1,9 @@
 require 'mixins/controllers/save_email_mixin'
+require 'mixins/controllers/save_template_mixin'
 
 Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
+  Radium.SaveTemplateMixin,
+
   actions:
     deleteFromEditor: ->
       messagesController = @controllerFor('messages')
@@ -19,6 +22,17 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       false
 
   afterModel: (model, transition) ->
+    queryParams = transition.queryParams
+
+    props =
+      mode: queryParams.mode || "single"
+      from_people: queryParams.from_people || false
+
+    if template_id = queryParams.template_id
+      @template = Radium.Template.find template_id
+
+    @controllerFor('emailsEdit').setProperties props
+
     emailForm = Radium.DraftEmailForm.create()
     emailForm.reset()
 
@@ -38,3 +52,6 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       deal: model.get('deal')
 
     @controllerFor('emailsEdit').set('emailForm', emailForm)
+
+  deactivate: ->
+    @set 'template', null

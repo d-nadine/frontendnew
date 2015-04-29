@@ -1,27 +1,5 @@
 Radium.SaveEmailMixin = Ember.Mixin.create
   actions:
-    createBulkEmail: (form, bulkParams) ->
-      form.set 'isSubmitted', true
-
-      return unless form.get('isValid')
-
-      job = Radium.BulkEmailJob.createRecord bulkParams
-
-      job.setProperties form.get('data')
-
-      form.setFilesOnModel(job)
-
-      isScheduled = !!job.get('sendTime')
-
-      job.save(this).then =>
-        form.set 'isSubmitted', false
-        unless isScheduled
-          @send "flashSuccess", "The bulk email job has been created."
-        else
-          @send "flashSuccess", "The bulk email will be sent on #{job.sendTime.toHumanFormatWithTime()}"
-
-        @getTransitionTo().call this, "people.index", bulkParams.returnFilter, queryParams: bulkParams.returnParameters
-
     saveEmail: (form, options) ->
       options = options || {}
 
@@ -50,6 +28,13 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       form.set('isSending', true) unless form.get('isDraft')
 
+      queryParams =
+        mode: 'single'
+        from_people: false
+
+      if template = @get('template')
+        queryParams['template_id'] = template.get('id')
+
       email.one 'didCreate', (result) =>
         Ember.run.next =>
           delete result.files
@@ -57,7 +42,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
           form.set 'isSubmitted', false
           form.set 'isSending', false
           Ember.run.next ->
-            form.reset()
+            form.reset(false)
 
           messagesController = @getController('messages')
 
@@ -72,7 +57,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
             @getController('messagesSidebar').send 'reset'
             @getController('messages').set('selectedContent', result)
 
-            return @getTransitionTo().call this, 'emails.edit', folder, result
+            return @getTransitionTo().call this, 'emails.edit', folder, result, queryParams: queryParams
           else
             return if options.dontTransition
 
@@ -94,6 +79,28 @@ Radium.SaveEmailMixin = Ember.Mixin.create
         @send 'flashError', 'An error has occurred and the email has not been sent'
 
       @store.commit()
+
+    createBulkEmail: (form, bulkParams) ->
+      form.set 'isSubmitted', true
+
+      return unless form.get('isValid')
+
+      job = Radium.BulkEmailJob.createRecord bulkParams
+
+      job.setProperties form.get('data')
+
+      form.setFilesOnModel(job)
+
+      isScheduled = !!job.get('sendTime')
+
+      job.save(this).then =>
+        form.set 'isSubmitted', false
+        unless isScheduled
+          @send "flashSuccess", "The bulk email job has been created."
+        else
+          @send "flashSuccess", "The bulk email will be sent on #{job.sendTime.toHumanFormatWithTime()}"
+
+        @getTransitionTo().call this, "people.index", bulkParams.returnFilter, queryParams: bulkParams.returnParameters
 
   getTransitionTo: ->
     if this instanceof Ember.Controller

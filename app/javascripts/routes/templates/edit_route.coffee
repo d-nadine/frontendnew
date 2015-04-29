@@ -8,6 +8,7 @@ Radium.TemplatesEditRoute = Ember.Route.extend
 
     form.setProperties
       id: model.get('id')
+      reference: model
       subject: model.get('subject')
       html: model.get('html')
       files: model.get('attachments').map (attachment) -> Ember.Object.create(attachment: attachment)

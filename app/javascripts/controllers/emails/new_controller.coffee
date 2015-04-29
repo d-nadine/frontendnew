@@ -1,5 +1,7 @@
 Radium.EmailsNewController = Radium.Controller.extend Ember.Evented,
   Radium.SaveEmailMixin,
+  Radium.SaveTemplateMixin,
+
   actions:
     addSignature: (signature) ->
       @set 'settings.signature', signature
@@ -19,7 +21,7 @@ Radium.EmailsNewController = Radium.Controller.extend Ember.Evented,
 
   isBulkEmail: Ember.computed.equal 'mode', "bulk"
 
-  needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar']
+  needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar', 'templatesNew']
 
   settings: Ember.computed.alias 'controllers.userSettings.model'
   signature: Ember.computed.alias 'settings.signature'
