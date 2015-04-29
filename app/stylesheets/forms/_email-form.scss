@@ -158,22 +158,6 @@
     color: #a9a9a9;
   }
 
-  .note-editable .template-item {
-    color: $white;
-    display: inline-block;
-    background: #e9e9e9;
-    padding: 0 5px;
-    border: 1px solid #ccc;
-    margin: 0 3px;
-    color: #000;
-    font-size: 14px;
-    border-radius: 12px;
-    font-weight: normal;
-    span {
-      cursor: pointer;
-    }
-  }
-
   .textbox-wrap .prompt {
     width: inherit;
     background: #f9f9f9;
@@ -391,4 +375,19 @@
 
 .template-editor-component .subject-wrap input[type=text].is-invalid {
   border-color: $red;
+}
+
+.template-item {
+  display: inline-block;
+  background: #e9e9e9;
+  padding: 0 5px;
+  border: 1px solid #ccc;
+  margin: 0 3px;
+  color: #000;
+  font-size: 14px;
+  border-radius: 12px;
+  font-weight: normal;
+  span {
+    cursor: pointer;
+  }
 }

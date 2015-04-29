@@ -32,11 +32,17 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
   bulkEmail: Radium.BulkEmailForm.create()
 
   beforeModel: (transition) ->
-    @controllerFor('emailsNew').set 'customFields', Radium.CustomField.find({})
-    return unless qps = transition.state.fullQueryParams
+    qps = transition.state.fullQueryParams || {}
 
     if qps.from_people && !@controllerFor('peopleIndex').get('hasCheckedContent')
-      @transitionTo 'people.index', 'all'
+        return @transitionTo 'people.index', 'all'
+
+    new Ember.RSVP.Promise (resolve, reject) =>
+      Radium.CustomField.find({}).then((fields) =>
+        @controllerFor('emailsNew').set 'customFields', fields
+        resolve()
+      ).catch (error) ->
+        reject(error)
 
   model: (params) ->
     if params.mode = 'single'

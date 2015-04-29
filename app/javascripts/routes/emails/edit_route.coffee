@@ -22,7 +22,12 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       false
 
   beforeModel: (transition) ->
-    @controllerFor('emailsEdit').set 'customFields', Radium.CustomField.find({})
+    new Ember.RSVP.Promise (resolve, reject) =>
+      Radium.CustomField.find({}).then((fields) =>
+        @controllerFor('emailsEdit').set 'customFields', fields
+        resolve()
+      ).catch (error) ->
+        reject(error)
 
   afterModel: (model, transition) ->
     queryParams = transition.queryParams

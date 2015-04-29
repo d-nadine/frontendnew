@@ -106,6 +106,10 @@ Radium.MessagesRoute = Radium.Route.extend
       item.one updateEvent, =>
         controller.removeObject item
         sidebarController.set 'isLoading', false
+
+        if controller.get('currentPath') == "messages.templates.edit" && !controller.get('length')
+          return @transitionTo "templates.new"
+
         @send 'selectItem', nextItem
         @controllerFor('messagesSidebar').send('showMore') unless sidebarController.get('allPagesLoaded')
 

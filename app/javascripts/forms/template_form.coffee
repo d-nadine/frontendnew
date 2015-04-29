@@ -27,7 +27,7 @@ Radium.TemplateForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     bucket: @get('bucket')
   ).volatile()
 
-  isValid: Ember.computed 'to.[]', 'html', ->
+  isValid: Ember.computed 'subject.length', 'html.length', 'isSubmitted', ->
     @get('subject.length') && @get('html.length')
 
   isNew: Ember.computed.not 'id'

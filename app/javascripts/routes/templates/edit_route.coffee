@@ -2,7 +2,12 @@ Radium.TemplatesEditRoute = Ember.Route.extend
   templateForm: Radium.TemplateForm.create()
 
   beforeModel: (transition) ->
-    @controllerFor('templatesEdit').set 'customFields', Radium.CustomField.find({})
+    new Ember.RSVP.Promise (resolve, reject) =>
+      Radium.CustomField.find({}).then((fields) =>
+        @controllerFor('templatesEdit').set 'customFields', fields
+        resolve()
+      ).catch (error) ->
+        reject(error)
 
   afterModel: (model, transition) ->
     form = @templateForm
