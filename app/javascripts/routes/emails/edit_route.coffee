@@ -21,6 +21,9 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
 
       false
 
+  beforeModel: (transition) ->
+    @controllerFor('emailsEdit').set 'customFields', Radium.CustomField.find({})
+
   afterModel: (model, transition) ->
     queryParams = transition.queryParams
 

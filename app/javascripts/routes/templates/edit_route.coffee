@@ -1,6 +1,9 @@
 Radium.TemplatesEditRoute = Ember.Route.extend
   templateForm: Radium.TemplateForm.create()
 
+  beforeModel: (transition) ->
+    @controllerFor('templatesEdit').set 'customFields', Radium.CustomField.find({})
+
   afterModel: (model, transition) ->
     form = @templateForm
 

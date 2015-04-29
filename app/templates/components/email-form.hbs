@@ -110,10 +110,7 @@
             {{/each}}
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Insert Fields</a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Title</a></li>
-                <li><a href="#">Website</a></li>
-              </ul>
+              {{customfield-placeholders customFields=customFields insertCustomFieldPlaceholder="insertCustomFieldPlaceholder"}}
             </li>
           </ul>
         </div>

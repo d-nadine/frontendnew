@@ -21,7 +21,6 @@
             <i class="ss-standard ss-navigatedown"></i>
           </a>
           <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-            <li class="divider"></li>
             {{#each insertAction in insertActions}}
             <li>
               <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.name}}</a>
@@ -29,10 +28,7 @@
             {{/each}}
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Insert Fields</a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Title</a></li>
-                <li><a href="#">Website</a></li>
-              </ul>
+              {{customfield-placeholders customFields=customFields insertCustomFieldPlaceholder="insertCustomFieldPlaceholder"}}
             </li>
           </ul>
         </div>

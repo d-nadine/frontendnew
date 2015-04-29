@@ -1,0 +1,7 @@
+{{#each field in customFields}}
+  <li><a href="#" {{action "insertCustomFieldPlaceholder" field bubbles=false}}>{{field.name}}</a></li>
+{{else}}
+  <li>
+    {{#link-to "settings.customFields" class="settings-link"}}Create Custom Fields{{/link-to}}
+  </li>
+{{/each}}
