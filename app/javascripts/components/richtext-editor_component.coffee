@@ -263,6 +263,13 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     $.summernote.core.dom.insertAfter(space, node)
 
+    Ember.run.next ->
+      sel = window.getSelection()
+
+      sel.collapse space.firstChild, 1
+
+      space.focus()
+
     @doUpdate()
 
     false
