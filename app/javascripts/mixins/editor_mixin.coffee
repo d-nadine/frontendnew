@@ -1,6 +1,8 @@
 Radium.TemplatePlaceholderMap =
   "name": "name"
-  "company": "company"
+  "first_name": "first name"
+  "last_name": "last name"
+  "company_name": "company"
   "signature": "signature"
 
 Radium.EditorMixin = Ember.Mixin.create

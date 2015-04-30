@@ -19,4 +19,4 @@ $.fn.setEndOfContentEditble = ->
   range.collapse(false)
   selection = window.getSelection()
   selection.removeAllRanges()
-  selection.addRange(range);
+  selection.addRange(range)

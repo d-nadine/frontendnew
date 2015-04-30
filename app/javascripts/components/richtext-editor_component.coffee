@@ -228,7 +228,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   onCustomFieldInserted: (customField) ->
     node = """
-      <span custom-field-id="#{customField.get('id')}" class="badge badge-info template-item">#{customField.get('name')} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>
+      <span data-custom-field-id="#{customField.get('id')}" class="badge badge-info template-item">#{customField.get('name')} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>&nbsp;
     """
 
     @insertPlaceholder(node)
@@ -237,21 +237,31 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     text = Radium.TemplatePlaceholderMap[placeholder.name]
 
     node = """
-      <span class="badge badge-info template-item">#{text} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>
+      <span data-place-holder="#{placeholder.name}" class="badge badge-info template-item">#{text} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>&nbsp;
     """
 
     @insertPlaceholder(node)
 
-  insertPlaceholder: (node) ->
+  insertPlaceholder: (nodeText) ->
     @removePlaceHolder() unless @get('placeholderShown')
-
 
     editable = @$('.note-editable')
 
-    content = editable.html() + node + "&nbsp;"
-    editable.html(content)
+    sel = window.getSelection()
 
-    editable.setEndOfContentEditble()
+    range = sel.getRangeAt(0)
+
+    range.deleteContents()
+
+    node = $(nodeText)[0]
+
+    range.insertNode(node)
+
+    space = document.createElement("span")
+
+    space.innerHTML = "\u200B"
+
+    $.summernote.core.dom.insertAfter(space, node)
 
     @doUpdate()
 
