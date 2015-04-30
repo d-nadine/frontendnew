@@ -2,8 +2,8 @@ require 'mixins/editor_mixin'
 
 Radium.TemplateEditorComponent = Ember.Component.extend Radium.EditorMixin,
   actions:
-    saveTemplate: (form) ->
-      @sendAction "action", form
+    saveTemplate: ->
+      @sendAction "action", @get('form')
 
       false
 

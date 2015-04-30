@@ -9,7 +9,7 @@
   <div class="email-form-body">
     <div class="message">
       <div class="subject-wrap">
-        {{view subjectView type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="1"}}
+        {{view subjectView type="text" value=form.subject action="saveTemplate" onEvent="enter" class="subject tt-input" placeholder="subject" tabindex="1"}}
       </div>
       <div class="more-options">
         <a href="#" {{action "toggleEditorToolbar"}} class="format" tabindex="-1">
