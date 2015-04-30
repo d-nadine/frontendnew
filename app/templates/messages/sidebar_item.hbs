@@ -3,11 +3,13 @@
     <span class="btn-read-status btn-unread"></span>
   {{/unless}}
 
-  <small class="muted pull-right messages-list-item-timestamp">
-    {{#if isDraft}}Saved at {{/if}}
-      {{emailSentAt time format="brief"}}
-      {{thirdpartyIcon this style="icon"}}
-  </small>
+  <div class="pull-right">
+    <small class="muted messages-list-item-timestamp">
+      {{#if isDraft}}Saved at {{/if}}
+        {{emailSentAt time format="brief"}}
+    </small>
+    <i class="ss-standard ss-directright"></i>
+  </div>
 
   {{yield}}
 </div>

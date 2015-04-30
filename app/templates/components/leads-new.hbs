@@ -25,12 +25,12 @@
   </div>
 </div>
 {{#each email in emailAddresses}}
-  {{#multiple-control item=email items=emailAddresses modelChanged="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" queryProfile="queryProfile"}}
+  {{#multiple-control item=email items=emailAddresses modelChanged="modelChanged" model=model relationship="emailAddresses" saveModel="saveModel" queryProfile="queryProfile" labels=Radium.EmailLabels}}
     {{autocomplete-email queryKey="email" value=value class="single" scopes="contact" modelChanged="modelChanged" saveModel="saveModel" queryProfile="queryProfile" validations=_parent.emailValidations validator=_parent.targetObject validationField="email" isValid=_parentObject.isValid placeholder="Email"}}
   {{/multiple-control}}
 {{/each}}
 {{#each phoneNumber in phoneNumbers}}
-  {{#multiple-control item=phoneNumber items=phoneNumbers modelChanged="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel"}}
+  {{#multiple-control item=phoneNumber items=phoneNumbers modelChanged="modelChanged" model=model relationship="phoneNumbers" saveModel="saveModel" labels=Radium.PhoneLabels}}
     {{phone-input value=value class="single" saveModel="saveModel" modelChanged="modelchanged" placeholder="Phone"}}
   {{/multiple-control}}
 {{/each}}
@@ -142,7 +142,6 @@
   {{/if}}
 </div>
 <div class="submit">
-<<<<<<< HEAD
   <hr/>
   <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>
     Submit
@@ -150,10 +149,6 @@
       <img src="/images/loading/ajax-loader.gif"/> <span class="muted">saving...</span>
     {{/if}}
   </button>
-=======
-  {{partial "saving"}}
-  <button class="btn btn-large btn-primary" {{action "saveModel"}} {{bind-attr disabled=isSaving}}>Submit</button>
->>>>>>> add contact page
 </div>
 <div class="modal hide fade">
   <div class="modal-header">

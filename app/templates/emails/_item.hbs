@@ -4,33 +4,32 @@
 
       <div class="email-header row-fluid">
         <div class="span6 pull-left">
-          <div class="avatar-wrap">
-            {{partial 'emails/sender_avatar'}}
-          </div>
-          <div class="email-sender">
-            <span class="email-source">
-              {{thirdpartyIcon this}}
-            </span>
-            <strong>{{resource-link-to sender}}</strong>
+          <div class="email-sender">{{resource-link-to sender}}</div>
+          <div class="email-info">
+            <div class="email-to">To: <b>{{list "toList"}}</b></div>
+            <div class="email-cc">Copy: {{list "ccList"}}</div>
           </div>
         </div>
         <div class="span6 pull-right email-header-actions">
-          <button class="btn btn-link muted" {{action "toggleMeta"}}>
-            <small>
-              {{emailSentAt time format="long"}}
-              {{#if showMeta}}
-                (less)
-              {{else}}
-                (more)
-              {{/if}}
-            </small>
-            <div class="text-right">{{subject}}</div>
-          </button>
-          {{#if notTracked}}
-            <div class="btn-group btn-add-to-radium">
-              <a class="" {{action "track" sender}}>Track with Radium</a>
-            </div>
-          {{/if}}
+          <div class="email-time">
+            {{emailSentAt time format="long"}}
+          </div>
+          <div class="email-options">
+            {{#unless isDraft}}
+              <a {{action "toggleReplyForm"}} class="btn-messages-action">
+                <i class="ss-standard ss-reply"></i> Reply
+              </a>
+
+              <a {{action "toggleForwardForm"}} class="btn-messages-action">
+                <i class="ss-standard ss-right"></i> Forward
+              </a>
+            {{else}}
+              {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
+                <i class="ss-standard ss-write"></i> Edit
+              {{/link-to}}
+              <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
+            {{/unless}}
+          </div>
           {{#if isTracked}}
             <div class="btn-group btn-add-to-radium">
               <a class="" {{action "stopTracking" sender}}>Stop Tracking</a>
@@ -64,6 +63,8 @@
           </div>
         {{/if}}
       </div>
+
+      <hr>
 
       <div class="email-wrap span12">
 

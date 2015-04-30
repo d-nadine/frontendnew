@@ -177,6 +177,7 @@ a:hover {
 .muted,
 .btn:hover.muted {
   color: $muted;
+  background: none;
 }
 
 .btn-link:hover {

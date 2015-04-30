@@ -11,17 +11,9 @@
 </div>
 <div class="clearfix message-item-details">
   <h5 class="message-item-title">{{resource-link-to sender}}</h5>
-  <p class="message-item-subject">
-    {{#if threadCount}}
-      <span class='badge thread'>{{threadCount}}</span>
-    {{/if}}
-    {{subject}}
-    {{#unless subject}}&nbsp;{{/unless}}
-  </p>
   {{#if contact.isPersonal}}
     <span class="label">
       Not a Radium Contact
     </span>
   {{/if}}
-  {{partial "messages/message_item_actions"}}
 </div>

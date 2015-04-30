@@ -1,21 +1,3 @@
 <div class="messages-list-controls">
-  <ul class="nav nav-tabs messages-tabs">
-    <li {{bind-attr class="inboxIsActive:active"}}>
-      {{#link-to "messages" "inbox"}}
-        <i class="custom-icon-google"></i>
-        {{#if inboxIsActive}}
-          {{folder}} {{#if totalRecords}}({{totalRecords}}){{/if}}
-        {{else}}
-          Inbox
-        {{/if}}
-      {{/link-to}}
-    </li>
-    <li {{bind-attr class="radiumIsActive:active"}}>
-      {{#link-to "messages" "radium"}}
-        <i class="custom-icon-radium"></i>
-        Tracked Email
-      {{/link-to}}
-    </li>
-  </ul>
   {{outlet messages-sidebar-content}}
 </div>

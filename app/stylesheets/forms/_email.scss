@@ -243,7 +243,7 @@
 }
 
 .email-header {
-  padding: 0 0 20px;
+  padding: 0;
   display: inline-block;
   width: 100%;
 
@@ -505,9 +505,13 @@
 
     .email-sender {
       display: inline-block;
-      padding-left: 20px;
-      padding-top: 10px;
       float: left;
+      font-size: 24px;
+      font-weight: 400;
+
+      a {
+        color: $text;
+      }
 
       .email-source img {
         height: 20px !important;
@@ -517,9 +521,22 @@
         filter: grayscale(100%);
         filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
       }
+    }
 
-      strong {
-        font-size: 15px;
+    .email-info {
+      margin-top: 10px;
+      display: inline-block;
+
+      > div {
+        float: left;
+        margin-right: 10px;
+
+        a {
+          color: $text;
+        }
+        b {
+          margin-left: 6px;
+        }
       }
     }
 
@@ -533,6 +550,21 @@
           overflow: hidden;
           white-space: nowrap;
           width: inherit;
+        }
+      }
+
+      .email-time {
+        text-align: right;
+      }
+
+      .email-options {
+
+        a {
+          color: $text;
+
+          i {
+            color: $text;
+          }
         }
       }
 
