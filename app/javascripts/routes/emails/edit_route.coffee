@@ -22,9 +22,16 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
       false
 
   beforeModel: (transition) ->
-    new Ember.RSVP.Promise (resolve, reject) =>
-      Radium.CustomField.find({}).then((fields) =>
-        @controllerFor('emailsEdit').set 'customFields', fields
+    self = this
+
+    new Ember.RSVP.Promise (resolve, reject) ->
+      Ember.RSVP.hash(
+        customFields: Radium.CustomField.find({})
+        templates: Radium.Template.find({})
+      ).then((hash) ->
+        controller = self.controllerFor('emailsEdit')
+        controller.set('customFields', hash.customFields)
+        controller.set('templates', hash.templates)
         resolve()
       ).catch (error) ->
         reject(error)

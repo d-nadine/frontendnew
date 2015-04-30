@@ -24,6 +24,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @EventBus.subscribe('reset', this, 'onFormReset')
     @EventBus.subscribe('placeholderInsered', this, 'onPlaceholderInserted')
     @EventBus.subscribe('customFieldInserted', this, 'onCustomFieldInserted')
+    @EventBus.subscribe('insertTemplate', this, 'onTemplateInserted')
 
   setup: Ember.on 'didInsertElement', ->
     textarea = @$('textarea')
@@ -168,7 +169,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @EventBus.unsubscribe('reset')
     @EventBus.unsubscribe('placeholderInsered')
     @EventBus.unsubscribe('customFieldInserted')
-
+    @EventBus.unsubscribe('insertTemplate')
     @_super.apply this, arguments
 
     @$('.note-editable').off 'focus'
@@ -226,9 +227,21 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       content = @$('.note-editable').html()
       @set('content', content)
 
+  onTemplateInserted: (template) ->
+    editable = @$('.note-editable')
+
+    editable.focus()
+
+    @removePlaceHolder() unless @get('placeholderShown')
+
+    editable.html(template.get('html'))
+
+    Ember.run.next =>
+      @doUpdate()
+
   onCustomFieldInserted: (customField) ->
     node = """
-      <span data-custom-field-id="#{customField.get('id')}" class="badge badge-info template-item">#{customField.get('name')} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>&nbsp;
+      <span data-custom-field-id="#{customField.get('id')}" class="badge badge-info template-item">#{customField.get('name')} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>
     """
 
     @insertPlaceholder(node)
@@ -237,7 +250,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     text = Radium.TemplatePlaceholderMap[placeholder.name]
 
     node = """
-      <span data-place-holder="#{placeholder.name}" class="badge badge-info template-item">#{text} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>&nbsp;
+      <span data-place-holder="#{placeholder.name}" class="badge badge-info template-item">#{text} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>
     """
 
     @insertPlaceholder(node)
@@ -246,6 +259,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @removePlaceHolder() unless @get('placeholderShown')
 
     editable = @$('.note-editable')
+
+    editable.focus()
 
     sel = window.getSelection()
 

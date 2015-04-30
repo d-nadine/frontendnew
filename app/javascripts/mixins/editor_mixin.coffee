@@ -20,7 +20,7 @@ Radium.EditorMixin = Ember.Mixin.create
 
       false
 
-  insertActions: Ember.computed 'customFields.[]', ->
+  insertActions: Ember.computed  ->
     placeholderMap = Radium.TemplatePlaceholderMap
     customFields = @get('customFields') || []
 
@@ -28,15 +28,25 @@ Radium.EditorMixin = Ember.Mixin.create
 
     for i of placeholderMap
       if placeholderMap.hasOwnProperty(i)
-        item = Ember.Object.create(name: i, display: "{#{placeholderMap[i]}}")
+        display = placeholderMap[i]
+        item = Ember.Object.create(name: i, display: "{#{display}}", curlyless: display)
         ret.pushObject item
+
+    ret
+
+  customFieldPlaceholders: Ember.computed 'customFields.[]', ->
+    ret = Ember.A()
+
+    customFields = @get('customFields') || Ember.A()
 
     unless customFields.get('length')
       return ret
 
-    customFields.forEach (field) ->
-      item = Ember.Object.create(field: field, display: "{#{field.get('name')}}")
+    customFields.map (field) ->
+      Ember.Object.create(field: field, display: "{#{field.get('name')}}")
 
-      ret.pushObject item
+  allPlaceholders: Ember.computed 'insertActions.[]', 'customFieldPlaceholders.[]', ->
+    insertActions = @get('insertActions') || Ember.A()
+    customFieldPlaceholders = @get('customFieldPlaceholders') || Ember.A()
 
-    ret
+    insertActions.concat customFieldPlaceholders

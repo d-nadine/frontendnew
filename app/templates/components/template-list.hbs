@@ -1,0 +1,9 @@
+{{#each template in templates}}
+  <li>
+    <a {{action "insertTemplate" template bubbles=false}} href="#">Login help</a>
+  </li>
+{{else}}
+  <li>
+    {{#link-to "templates.new"}}Create Template{{/link-to}}
+  </li>
+{{/each}}

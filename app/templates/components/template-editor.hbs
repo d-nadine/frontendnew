@@ -23,7 +23,7 @@
           <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
             {{#each insertAction in insertActions}}
             <li>
-              <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.name}}</a>
+              <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.curlyless}}</a>
             </li>
             {{/each}}
             <li class="dropdown-submenu">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=insertActions}}
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=allPlaceholders}}
       </div>
       {{#if form.files.length}}
         {{upload-filelist files=form.files hideUploadedBy=true}}

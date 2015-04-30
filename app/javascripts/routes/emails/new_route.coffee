@@ -37,9 +37,15 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     if qps.from_people && !@controllerFor('peopleIndex').get('hasCheckedContent')
         return @transitionTo 'people.index', 'all'
 
-    new Ember.RSVP.Promise (resolve, reject) =>
-      Radium.CustomField.find({}).then((fields) =>
-        @controllerFor('emailsNew').set 'customFields', fields
+    self = this
+    new Ember.RSVP.Promise (resolve, reject) ->
+      Ember.RSVP.hash(
+        customFields: Radium.CustomField.find({})
+        templates: Radium.Template.find({})
+      ).then((hash) ->
+        controller = self.controllerFor('emailsNew')
+        controller.set('customFields', hash.customFields)
+        controller.set('templates', hash.templates)
         resolve()
       ).catch (error) ->
         reject(error)

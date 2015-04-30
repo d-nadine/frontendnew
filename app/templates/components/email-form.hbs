@@ -92,20 +92,14 @@
             <li>
               {{#link-to "messages" "templates"}}Edit Templates{{/link-to}}
             </li>
-            <!--
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Insert Template</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="#">INSERT CUSTOM TEMPLATES</a>
-                </li>
-              </ul>
+              {{template-list templates=templates insertTemplate="insertTemplate"}}
             </li>
-            -->
             <li class="divider"></li>
             {{#each insertAction in insertActions}}
             <li>
-              <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.name}}</a>
+              <a {{action "insertPlaceholder" insertAction}} href="#">Insert {{capitalize insertAction.curlyless}}</a>
             </li>
             {{/each}}
             <li class="dropdown-submenu">
