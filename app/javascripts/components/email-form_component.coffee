@@ -216,7 +216,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     $(window).on 'click.date-send-menu', (e) =>
       return true if e.target?.type == 'file'
-      return true if e.target.tagName == 'A'
+      return true if e.target.tagName == 'A' || e.target.parentNode.tagName == 'A'
 
       target = $(e.target)
 
