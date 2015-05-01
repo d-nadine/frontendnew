@@ -136,7 +136,7 @@
     width: 500px !IMPORTANT;
   }
 
-  input[type=text].combobox {
+  input[type=text].subject, input[type=text].combobox {
     width: 420px;
   }
 
@@ -401,6 +401,6 @@
   }
 }
 
-.template-editor-component .cancel {
+.template-editor-component .actions .cancel {
   float: none;
 }

@@ -1,4 +1,6 @@
-Radium.TemplatesNewRoute = Ember.Route.extend
+require 'mixins/controllers/save_email_mixin'
+
+Radium.TemplatesNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
   templateForm: Radium.TemplateForm.create()
 
   beforeModel: (transition) ->

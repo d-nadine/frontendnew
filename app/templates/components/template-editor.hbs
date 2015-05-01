@@ -40,9 +40,8 @@
         {{upload-filelist files=form.files hideUploadedBy=true}}
       {{/if}}
       <div class="actions">
-        <button {{action "deleteFromEditor"}} class="btn cancel">Cancel</button>
-        <a href="#" class="btn">Send Me a Test</a>
-        <a href="#" class="btn" {{action "saveTemplate" form}}>Update</a>
+        <a href="#" class="btn" {{action "sendTemplateTest"}}>Send Me a Test</a>
+        <a href="#" class="btn" {{action "saveTemplate"}}>Update</a>
       </div>
     </div>
   </div>

@@ -46,7 +46,8 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
           messagesController = @getController('messages')
 
-          messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
+          unless options.dontAdd
+            messagesController.tryAdd [email] unless messagesController.get('folder') == "inbox"
 
           if result.get('deal')
             result.get('deal').reloadAfterUpdate()
