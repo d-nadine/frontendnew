@@ -1,0 +1,9 @@
+.right-column {
+  width: 320px;
+  position: fixed;
+  top: $navbar-height;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  border: 1px solid $red;
+}
