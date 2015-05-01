@@ -52,9 +52,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
         store.commit()
 
-      unless ele.length
-        return self.send()
-
       unless @get('animate')
         return finish()
 

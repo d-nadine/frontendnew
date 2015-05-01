@@ -61,5 +61,3 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
       "#{pre} for #{@get('finishBy').toHumanFormat()}"
 
   onFormReset: ->
-    if description = @get('description')
-      description.reset()
