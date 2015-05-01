@@ -132,7 +132,11 @@
     margin-bottom: 20px;
   }
 
-  input[type=text].subject {
+  .subject-wrap .autocomplete-textbox-component.autocomplete-textbox.field{
+    width: 500px !IMPORTANT;
+  }
+
+  input[type=text].combobox {
     width: 420px;
   }
 
@@ -314,6 +318,11 @@
     }
   }
 
+  .actions .cancel {
+    float: right;
+    margin-right: 10px;
+  }
+
   .send-later {
     height: auto;
     position: absolute;
@@ -390,4 +399,8 @@
   span {
     cursor: pointer;
   }
+}
+
+.template-editor-component .cancel {
+  float: none;
 }

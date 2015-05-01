@@ -8,9 +8,7 @@ Radium.UploadFilelistComponent = Ember.Component.extend
                    else
                      file.get('attachment')
 
-      attachment.deleteRecord()
-
-      attachment.get('transaction').commit()
+      attachment.delete()
 
       false
 

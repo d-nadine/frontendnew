@@ -1,6 +1,6 @@
 {{#each template in templates}}
   <li>
-    <a {{action "insertTemplate" template bubbles=false}} href="#">Login help</a>
+    <a {{action "insertTemplate" template bubbles=false}} href="#">{{template.subject}}</a>
   </li>
 {{else}}
   <li>

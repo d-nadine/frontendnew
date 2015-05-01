@@ -72,7 +72,7 @@
     <div class="message">
       {{#if showOptions}}
         <div class="subject-wrap">
-          {{input type="text" value=form.subject class="subject tt-input" placeholder="subject" tabindex="2"}}
+          {{autocomplete-textbox autocompleteType=Radium.Template value=form.subject queryKey="subject" queryParameters=templateQueryParameters writeableValue=true placeholder="subject" action="insertTemplate" tabindex="2"}}
         </div>
       {{/if}}
       <div class="more-options">
@@ -203,6 +203,7 @@
           </li>
         </ul>
       </div>
+      <button {{action "deleteFromEditor"}} class="btn cancel">Cancel</button>
     </div>
     {{partial 'emails/check_for_response'}}
   </div>

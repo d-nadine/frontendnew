@@ -7,6 +7,11 @@ Radium.TemplateEditorComponent = Ember.Component.extend Radium.EditorMixin,
 
       false
 
+    deleteFromEditor: ->
+      @sendAction 'deleteFromEditor'
+
+      false
+
   _setup: Ember.on 'didInsertElement', ->
     Ember.run.scheduleOnce 'afterRender', this, '_afterSetup'
 

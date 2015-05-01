@@ -5,6 +5,10 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     insertTemplate: (template) ->
       @EventBus.publish "insertTemplate", template
 
+      if template.get('attachments.length')
+        template.get('attachments').forEach (attachment) =>
+          @get('form.files').pushObject Ember.Object.create(attachment: attachment)
+
       false
 
     saveTemplate: (form) ->
@@ -193,6 +197,11 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       false
 
+    deleteFromEditor: ->
+      @sendAction "deleteFromEditor"
+
+      false
+
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     @$('.info').tooltip(html: true)
@@ -341,3 +350,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       "submitFromPeople"
     else
       "createBulkEmail"
+
+  templateQueryParameters: (query) ->
+    like: query
