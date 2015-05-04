@@ -158,6 +158,9 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
   searchText: ""
 
   searchDidChange: Ember.observer "searchText", ->
+    Ember.run.debounce this, @likeNessQuery, 300
+
+  likeNessQuery: ->
     return if @get('filter') is null
 
     searchText = @get('searchText')
