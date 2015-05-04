@@ -8,7 +8,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
       job = Radium.EmailSyncJob.createRecord
               user: currentUser
 
-      job.save(this).then((result) ->
+      job.save(this).then((result) =>
         currentUser.reload()
 
         currentUser.one 'didReload', =>
@@ -17,7 +17,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
           refreshPoller.set 'controller', this
 
           refreshPoller.start()
-      ).then ->
+      ).catch =>
         @set 'isSyncing', false
 
       @set 'isSyncing', true
