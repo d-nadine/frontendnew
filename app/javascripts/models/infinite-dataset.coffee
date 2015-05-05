@@ -14,7 +14,6 @@ Radium.InfiniteDataset = Ember.ArrayProxy.extend
       meta: {}
 
   loadPage: Ember.observer('source.content', ->
-    return if @get('isLoading')
     @set 'isLoading', true
     content = @get('content')
     source = @get('source.content')

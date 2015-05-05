@@ -13,6 +13,7 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
     store = @get('store')
 
     Radium.Email.find(emailId).then( (result) =>
+      return if @isDestroyed || @isDestroying
       @set 'email', result
     ).catch (result) ->
       # pretty hacky but until the email_id is separated
