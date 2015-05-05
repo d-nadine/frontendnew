@@ -597,4 +597,16 @@
   margin: 0;
 }
 
+.email-history {
+  width: calc(100% - 240px);
+  float: left;
+}
 
+.email-menu {
+  margin-bottom: 10px;
+  margin-top: 5px;
+
+  a {
+    margin-right: 40px;
+  }
+}

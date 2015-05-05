@@ -33,6 +33,10 @@ $navbar: #4d5e6d;
       > a {
         padding: 12px 33px 20px;
 
+        @media (max-width: 1280px) {
+          padding: 12px 22px 20px;
+        }
+
         &.active {
           background: $background;
           color: $text;

@@ -1,5 +1,6 @@
-{{partial 'emails/importing'}}
-<div class="email-history">
+<div class="email-main">
+  {{partial 'emails/importing'}}
+  <div class="email-history">
   {{#if isLoading}}
     <div class="email-nav">
       {{partial 'is_loading'}}
@@ -12,7 +13,8 @@
       {{partial 'is_loading'}}
     {{/if}}
   {{/each}}
+  </div>
   <div class="right-column">
-    right column
+    {{person-details person=model.firstObject.sender}}
   </div>
 </div>

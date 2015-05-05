@@ -1,9 +1,7 @@
 .right-column {
-  width: 320px;
-  position: fixed;
-  top: $navbar-height;
-  right: 0;
-  bottom: 0;
-  z-index: 9;
+  width: 210px;
   border: 1px solid $red;
+  float: left;
+  display: inline-block;
+  margin-left: 28px;
 }
