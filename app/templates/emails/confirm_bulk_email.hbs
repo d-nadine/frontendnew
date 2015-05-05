@@ -1,0 +1,15 @@
+<div class="modal fade">
+  <div class="modal-header">
+    <button type="button" class="close" {{action "close"}} aria-hidden="true">&times;</button>
+    <h3>Are You Sure?</h3>
+  </div>
+
+  <div class="modal-body">
+    <p>You are sending a mail merge message to <strong>{{checkedTotal}}</strong> recipients.</p>
+    <button class="btn btn-large btn-danger btn-block" {{action "submitCreateBulkEmail"}}>Confirm</button>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn" {{action "close"}}>Cancel</a>
+  </div>
+</div>

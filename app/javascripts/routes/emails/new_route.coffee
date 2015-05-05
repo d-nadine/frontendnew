@@ -28,6 +28,26 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
 
         @transitionTo 'messages', @controllerFor('messages').get('folder')
 
+    confirmBulkEmail: (form, bulkParams) ->
+      controller = @controllerFor 'emailsConfirmBulkEmail'
+
+      controller.setProperties
+        form: form
+        bulkParams: bulkParams
+
+      @render 'emails/confirm_bulk_email',
+        into: 'application',
+        outlet: 'modal',
+
+      false
+
+    close: ->
+      @render 'nothing',
+        into: 'application',
+        outlet: 'modal'
+
+      false
+
   newEmail: Radium.EmailForm.create()
   bulkEmail: Radium.BulkEmailForm.create()
 
@@ -92,3 +112,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     peopleController.set 'allChecked', false
 
     @controllerFor('emailsNew').set 'mode', 'single'
+
+    @controllerFor('emailsConfirmBulkEmail').setProperties
+      form: null
+      bulkParams: null

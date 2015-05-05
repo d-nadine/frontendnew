@@ -32,7 +32,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       bulkParams = controller.get('content.params')
 
-      bulkParams.returnFilter = bulkParams.filter
       bulkParams.returnParameters = user: bulkParams.user, tag: bulkParams.tag
 
       findRecord = (type, id) ->
@@ -57,7 +56,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       if searchText.length
         bulkParams.like = searchText
 
-      @sendAction 'createBulkEmail', form, bulkParams
+      @get('targetObject').send('confirmBulkEmail', form, bulkParams)
 
       false
 
@@ -74,7 +73,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
         tags: tagIds || []
         private: false
         public: true
-        returnFilter: "all"
         returnParameters:
           tag: undefined
           user: undefined
@@ -291,6 +289,11 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
   showOptions: Ember.computed 'singleMode', 'bulkMode', 'replyMode', 'forwardMode', 'formMode', ->
     @get('singleMode') || @get('forwardMode') || @get('formMode')
+
+  showSubject: Ember.computed 'showOptions', 'replyMode', ->
+    return true unless @get('replyMode')
+
+    @get('showOptions')
 
   to: Radium.EmailAsyncAutocompleteView.extend
     classNameBindings: [':email']
