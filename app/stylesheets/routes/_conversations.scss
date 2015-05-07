@@ -54,41 +54,6 @@
   }
 }
 
-
-
-.conversations-table {
-  display: inline-block;
-  float: left;
-
-  .assignto {
-    img {
-      float: left;
-      top: 6px;
-      position: relative;
-    }
-
-    .to {
-      padding-left: 6px;
-      width: 100px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      display: inline-block;
-      width: calc(100% - 40px);
-      height: 35px;
-      float: left;
-      margin-top: -3px;
-    }
-
-    .caret {
-      position: relative;
-      top: 18px;
-      left: 2px;
-      float: right;
-    }
-  }
-}
-
 .toolbar {
   padding-top: 7px;
   padding-bottom: 30px;
@@ -157,233 +122,6 @@
   left: 2px;
 }
 
-.convo {
-  font-size: 14px;
-  width: 100%;
-  margin-top: 35px;
-  table-layout: fixed;
-}
-
-.convo tbody, .convo thead {
-  display: block;
-}
-
-.convo tbody {
-  overflow: auto;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-}
-
-.convo th {
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.convo tbody td.contact {
-  width: auto;
-
-  a {
-    display: inline-block;
-    float: left;
-
-    &:nth-of-type(1) {
-      width: 23px;
-    }
-    &:nth-of-type(2) {
-      width: calc(10vw + 5px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
-
-
-
-.convo tbody td.assign {
-  width: 15%;
-}
-
-.convo tbody td.follow {
-  width: 9%;
-}
-
-.convo tbody td.subject {
-  width: auto;
-
-  a {
-    width: calc(10vw + 110px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  img {
-    float: right;
-    position: relative;
-    top: 9px;
-  }
-}
-
-.convo tbody td.received {
-  width: 8%;
-  text-align: center;
-}
-
-.convo img {
-  width: 22px;
-  border-radius: 4px;
-}
-
-.convo th, .convo td {
-  padding: 0 10px;
-  line-height: 30px;
-}
-
-.convo tbody tr:first-of-type td {
-  border-top: 0px;
-}
-
-.convo tr {
-  border: {
-    right: 1px solid transparent;
-    left: 1px solid transparent;
-  }
-
-  &.is-checked {
-    border: {
-      right-color: $link;
-      left-color: $link;
-    }
-
-    & td,
-    &:hover td {
-      background: $calendar-active-bg;
-    }
-  }
-}
-
-
-
-.convo tr tbody td{
-  border-top: 1px solid #ddd;
-}
-
-.convo tr td.check{
-  border-left: 1px solid #ddd;
-}
-
-.convo tr td.choose{
-  border-right: 1px solid #ddd;
-}
-
-.convo td {
-  height: 40px;
-  line-height: 40px;
-  background: #fff;
-  border: 1px solid #eee;
-}
-
-.convo tr .check:hover {
-  cursor: pointer;
-}
-
-
-.convo .check {
-  width: 3%;
-  text-align: center;
-
-  input {
-    margin-top: 0;
-  }
-}
-
-.convo td.choose span {
-  padding: 0 4px;
-  color: #ccc;
-}
-
-.convo .btn-group {
-  width: auto;
-}
-
-.convo .btn-group > a {
-  font-size: 13px;
-  display: inline-block;
-  width: auto;
-  color: #333;
-}
-
-.convo .btn-group > a:hover {
-  text-decoration: none;
-}
-
-.convo .btn-group > a:focus {
-  box-shadow: none;
-  outline: 0px;
-  text-decoration: none;
-}
-
-.convo .btn-group > a span {
-  vertical-align: middle;
-}
-
-.convo .btn-group > a .to {
-  padding-left: 5px;
-  width: 100px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  width: 102px;
-  height: 35px;
-  float: left;
-}
-
-.convo .assign:active, .convo .assign:focus {
-  color: red !important;
-}
-
-.convo i {
-  width: 22px;
-  display: inline-block;
-  text-align: center;
-  position: relative;
-  top: 1px;
-}
-
-.convo .contact a {
-  font-weight: 500;
-
-  i {
-    text-align: left;
-    color: $muted;
-
-    &.isPublic {
-      color: $blue;
-    }
-  }
-}
-
-.convo .choose {
-  width: 13%;
-}
-
-.convo .delete {
-  width: 3%;
-  padding: 0;
-
-  a {
-    color: #666;
-
-    &:hover {
-      color: $blue;
-    }
-  }
-}
-
 .follow-yes {
   color: Crimson;
 }
@@ -414,5 +152,61 @@
   }
 }
 
+.conversations-table .table-container {
+  width: calc(100% - 150px) !IMPORTANT;
+}
 
+.conversations-table .table-container .variadic-table th {
+  background: transparent;
+  border-top: none;
+}
 
+.conversations-table .variadic-table .check {
+  border-left: none;
+}
+
+.conversations-table .right-table .variadic-table tr th:last-of-type {
+  border-right: none;
+}
+
+.conversations-table .left-table .variadic-table {
+  td:last-of-type {
+    min-width: 200px;
+  }
+}
+
+.conversations-table .right-table .variadic-table {
+  td.assign {
+    min-width: 150px;
+  }
+}
+
+.conversations-table .variadic-table tbody tr .assign .assignto {
+  height: auto;
+}
+
+.conversations-table .variadic-table tr th.choose {
+  text-align: center;
+}
+
+.conversations-table .variadic-table tbody tr td.choose {
+  min-width: 100px;
+}
+.conversations-table .variadic-table tbody tr td.subject {
+  width: auto;
+
+  a {
+    width: calc(10vw + 20px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  img {
+    float: right;
+    position: relative;
+    top: -3px;
+  }
+}

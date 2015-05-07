@@ -7,7 +7,9 @@ Radium.VariadicItemController = Radium.ObjectController.extend
   contact: Ember.computed.alias 'model'
 
   availableStatuses: Ember.computed 'contactStatuses.[]', 'contactStatus', ->
-    @get('contactStatuses').reject (status) =>
+    return unless contactStatuses = @get('contactStatuses')
+
+    contactStatuses.reject (status) =>
       status == @get('contactStatus')
 
   assignees: Ember.computed 'users.[]', 'user', ->

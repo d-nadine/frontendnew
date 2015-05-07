@@ -1,5 +1,6 @@
 Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.ShowMetalessMoreMixin,
+  Radium.ConversationsColumnsConfig,
   actions:
     updateTotals: ->
       Radium.ConversationsTotals.find({}).then (results) =>

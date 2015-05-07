@@ -1,0 +1,15 @@
+{{#unless model.isIgnored}}
+  {{#unless model.contact.isPublic}}
+    <a {{action "track" contact}} href="#">Track</a>
+    <span> | </span>
+  {{/unless}}
+{{/unless}}
+{{#unless model.isIgnored}}
+  {{#unless model.contact.isPublic}}
+    <a href="#" {{action "ignore" model model.contact}}>Ignore</a>
+  {{else}}
+    <a href="#" {{action "archive" model}}>Archive</a>
+  {{/unless}}
+{{else}}
+  <a href="#" {{action "ignore" model model.contact}}>Stop Ignoring</a>
+{{/unless}}

@@ -79,92 +79,19 @@
         {{#link-to "messages" "inbox" class="chat"}}<i class="ss-standard ss-chat"></i>{{/link-to}}
       </div>
     </div>
-    <table class="convo">
-      <thead>
-        <tr>
-          <th class="check">
-            {{input type="checkbox" class="checker-block" checked=allChecked action="checkAll"}}
-          </th>
-          <th>Contact</th>
-          <th>Assigned To</th>
-          <th>Follow-up</th>
-          <th>Subject</th>
-          <th>Received</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each controller}}
-          <tr data-model="Radium.Email" {{bind-attr data-id=id class=isChecked}}>
-            <td class="check">
-              {{input type="checkbox" checked=isChecked class="checker-block"}}
-            </td>
-            <td class="contact">
-              {{#if contact}}
-                {{#resource-link-to contact}}
-                  {{#unless contact.isPublic}}
-                    <i class="ss-standard ss-user notPublic"></i>
-                  {{else}}
-                    <i class="ss-standard ss-user isPublic"></i>
-                  {{/unless}}
-                {{/resource-link-to}}
-                {{#link-to "emails.show" "inbox" this}}{{truncate contact.displayName length="100"}}{{/link-to}}
-              {{else}}
-                Loading.....
-              {{/if}}
-            </td>
-            <td class="assign">
-              {{assignto-picker assignedTo=assignedTo assignees=assignees model=controller.contact}}
-            </td>
-            <td class="follow">
-              <span class="follow-yes"></span>
-            </td>
-            <td class="subject">
-              {{thirdpartyIcon this}} {{#link-to "emails.show" "inbox" this}}{{truncate subject length="100"}}{{/link-to}}
-            </td>
-            <td class="received">{{ageInWords time}}</td>
-            <td class="choose text-center">
-              {{#unless isIgnored}}
-                {{#unless contact.isPublic}}
-                  <a {{action "track" contact}} href="#">Track</a>
-                  <span> | </span>
-                {{/unless}}
-              {{/unless}}
-              {{#unless isIgnored}}
-                {{#unless contact.isPublic}}
-                  <a href="#" {{action "ignore" this controller.contact}}>Ignore</a>
-                {{else}}
-                  <a href="#" {{action "archive" this}}>Archive</a>
-                {{/unless}}
-              {{else}}
-                <a href="#" {{action "ignore" this controller.contact}}>Stop Ignoring</a>
-              {{/unless}}
-            </td>
-            <td class="delete">
-              <a href="#" {{action "delete" this}} class="btn btn-link btn-remove-field">
-                <i class="ss-symbolicons-block ss-trash"></i>
-              </a>
-            </td>
-          </tr>
-        {{else}}
-          <tr>
-            <td></td>
-            <td colspan="9" class="text-center no-results">
-              No Results
-            </td>
-            <td></td>
-          </tr>
-        {{/each}}
-        {{infinite-scroller isAtBottom=view.isAtBottom getMore='showMore' allLoaded=allPagesLoaded isLoading=isContentLoading}}
-        {{#if isContentLoading}}
-          <tr>
-            <td colspan="9" class="text-center">
-              <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
-            </td>
-          </tr>
-        {{/if}}
-      </tbody>
-    </table>
+    <div class="table-container companies">
+      <div class="left-table">
+        {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table convo" sort="sort" classNames="fixed"}}
+      </div>
+      <div class="right-table">
+        {{variadic-table list=controller columns=columns sort="sort" classNames="variable"}}
+      </div>
+      {{#if content.isLoading}}
+        <div class="loading" class="text-center">
+          <img src="/images/loading/ajax-loader.gif"/> <span class="muted">loading...</span>
+        </div>
+      {{/if}}
+    </div>
+    {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
   </div>
 </div>
