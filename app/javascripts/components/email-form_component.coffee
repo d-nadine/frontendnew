@@ -67,6 +67,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       tagIds = to.filter((item) -> item.get('resourceTag')).mapProperty('resourceTag.id')
 
+      Ember.assert 'You need a valid selection', contactIds.length || tagIds.elgnth
+
       bulkParams =
         filter: null
         ids: contactIds || []

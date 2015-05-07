@@ -71,7 +71,10 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
         reject(error)
 
   model: (params) ->
-    if params.mode = 'single'
+    if bulkForm = @controllerFor('emailsNew').get('bulkForm')
+      return bulkForm
+
+    if params.mode == 'single'
       model = @newEmail
     else
       model = @bulkEmail
@@ -107,11 +110,10 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     @controllerFor('messagesSidebar').send 'reset'
 
     peopleController = @controllerFor 'peopleIndex'
-    peopleController.get('content').setEach 'isChecked', false
-    peopleController.set 'searchText', ''
-    peopleController.set 'allChecked', false
 
-    @controllerFor('emailsNew').set 'mode', 'single'
+    @controllerFor('emailsNew').setProperties
+      mode: 'single'
+      bulkForm: null
 
     @controllerFor('emailsConfirmBulkEmail').setProperties
       form: null

@@ -23,13 +23,26 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       contacts = @get('checkedContent').map (item) =>
         index = @get('content').indexOf item
-        @controllerAt(index).get('contact')
+        contact = @controllerAt(index).get('contact')
+        Ember.Object.create
+          id: contact.get('id')
+          type: 'contact'
+          _personContact: contact
+          person: contact
+          name: contact.get('name')
+          email: contact.get('email')
+          avatarKey: contact.get('avatarKey')
+          displayName: contact.get('displayName')
+          source: contact.get('source')
 
-      emailForm = @get('controllers.emailsNew.newEmail')
+      emailForm = Radium.EmailForm.create()
+      emailForm.reset()
 
       emailForm.set 'to', contacts
 
-      @transitionToRoute 'emails.new', "inbox", queryParams: mode: 'single'
+      @get('emailsNewController').set 'bulkForm', emailForm
+
+      @transitionToRoute 'emails.new', "inbox", queryParams: mode: 'bulk', from_people: false
 
     assignAll: (user) ->
       self = this
@@ -139,6 +152,9 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       self.get('store').commit()
 
   needs: ['users', 'emailsNew']
+
+  emailsNewController: Ember.computed.oneWay 'controllers.emailsNew'
+
   itemController: 'conversationsItem'
   conversationType: null
 

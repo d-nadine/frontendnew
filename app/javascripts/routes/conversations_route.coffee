@@ -60,6 +60,10 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
 
     controller.send 'reset'
 
+    controller.set 'allChecked', false
+    controller.get('content').setEach 'isChecked', false
+    controller.set 'searchText', ''
+
     controller.set 'isLoading', true
     controller.set 'totalsLoading', true
     controller.set('conversationType', type)

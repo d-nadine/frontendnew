@@ -63,7 +63,7 @@
       <div class="addresses bulk">
         {{#unless fromPeople}}
           <div {{bind-attr class="bulkListView.isInvalid:is-invalid bulkListView.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-            {{view bulk tabindex=1 source=form.to placeholder="Add recipient or list" viewName="bulkListView"}}
+            {{view bulk tabindex=1 source=form.to placeholder="Add recipient or list" viewName="bulkListView" deleteOnBackSpace=false}}
           </div>
         {{/unless}}
         {{bulk-recipients recipients=form.to readonly=fromPeople removeFromBulkList="removeFromBulkList"}}

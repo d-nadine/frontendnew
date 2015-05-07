@@ -117,6 +117,7 @@ Radium.AutocompleteView = Radium.View.extend
     placeholderBinding: 'parentView.placeholder'
     listBinding: 'parentView.list'
     tabindexBinding: 'parentView.tabindex'
+    deleteOnBackSpace: Ember.computed.oneWay 'parentView.deleteOnBackSpace'
 
     keyDown: (e) ->
       args = Array.prototype.slice.call(arguments)
@@ -141,6 +142,8 @@ Radium.AutocompleteView = Radium.View.extend
         return false
 
       return callSuper() if value.length
+
+      return unless @get('deleteOnBackSpace')
 
       last = @get('source.lastObject')
 

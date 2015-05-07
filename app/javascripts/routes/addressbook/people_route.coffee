@@ -39,10 +39,13 @@ Radium.PeopleIndexRoute = Radium.Route.extend
   beforeModel: (transition) ->
     filter = transition.params['people.index'].filter
 
-    controller = @controllerFor 'people.index'
+    controller = @controllerFor 'peopleIndex'
 
     controller.send 'updateTotals'
     controller.set 'filter', filter
+    controller.set 'allChecked', false
+    controller.get('content').setEach 'isChecked', false
+    controller.set 'searchText', ''
 
   model: (params) ->
     controller = @controllerFor 'peopleIndex'
