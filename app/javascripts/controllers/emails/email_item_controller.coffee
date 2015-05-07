@@ -163,3 +163,8 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
   canArchive: Ember.computed 'controllers.messages.folder', ->
     @get('controllers.messages.folder') != 'archive'
+
+  _initialize: Ember.on 'init', ->
+    @set('showForwardForm', false)
+    @set('showingAddDeal', false)
+    @set('showReplyForm', false)

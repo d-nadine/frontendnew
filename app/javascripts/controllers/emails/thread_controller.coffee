@@ -34,7 +34,6 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
   pageSize: 7
   hasReplies: true
 
-  setup: (->
+  setup: Ember.on 'init', ->
     @set 'allPagesLoaded', false
     @set 'intialised', false
-  ).on 'init'
