@@ -1,8 +1,3 @@
 <div {{bind-attr class=":sender-avatar senderIsCurrentUser:is-current-user:not-user"}}>
-  <div class="sender-avatar">
-    {{avatar sender style="medium"}}
-    {{#if isTracked}}
-        <span class='badge badge-success'>Tracked</span>
-    {{/if}}
-  </div>
+  {{avatar sender style="medium"}}
 </div>

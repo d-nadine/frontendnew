@@ -1,11 +1,11 @@
-<div class="two-column-layout">
-  <div class="topnav">
-    {{outlet topnav}}
-  </div>
-  <div class="sidebar">
-    {{outlet sidebar}}
-  </div>
+<div class="sub-nav">
   <div class="main-content">
-    {{yield}}
+    <div class="sidebar">
+      {{outlet topnav}}
+      {{outlet sidebar}}
+    </div>
+    <div class="content-right">
+      {{yield}}
+    </div>
   </div>
 </div>

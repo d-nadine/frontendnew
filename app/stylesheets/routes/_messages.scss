@@ -122,6 +122,7 @@ $item-border: #dddddd;
   margin: 0;
   padding: 0;
   border-left: 1px solid $border;
+  border-right: 1px solid $border;
 }
 
 .messages-list-item {
@@ -129,6 +130,7 @@ $item-border: #dddddd;
   background: white;
   @include box-sizing(border-box);
   @include transition(background-color 0.25s);
+
 
   &.is-selected {
     background-color: $background;
@@ -473,11 +475,74 @@ $item-border: #dddddd;
 
 .messages-view {
 
-  .two-column-layout {
-    padding-left: 287px;
-  }
+  .sub-nav {
 
-  .sidebar {
-    margin-left: 5px;
+    .email-folders {
+      padding: 20px 10px;
+      border-bottom: 1px solid $border;
+      line-height: 44px;
+
+      span {
+        color: #6e6e6e;
+
+        &.arrow {
+          margin: 0 3px;
+        }
+      }
+      a {
+        color: $text;
+        font-weight: 600;
+      }
+    }
+
+    .sidebar {
+      margin-left: 5px;
+      display: inline-block;
+      float: left;
+      background: $background;
+      border-right: 0px;
+
+      .messages-list-item:first-of-type {
+        border-top: 0px;
+
+        .message-item-content {
+          border-top: 0px;
+        }
+      }
+      .message-item-content {
+        min-height: 40px;
+      }
+    }
+    .content-right {
+      display: inline-block;
+      width: calc(100% - 340px);
+      padding-left: 10px;
+      padding-top: 20px;
+      margin-left: 327px;
+      margin-top: 70px;
+
+      .email-menu {
+        margin-bottom: 19px;
+
+        a {
+          margin: 0 40px 0 0;
+        }
+      }
+
+      .right-column {
+        color: $text;
+
+        .email-sender {
+          font-size: 24px;
+          font-weight: 300;
+          margin-top: 20px;
+        }
+        .email-company {
+          line-height: 30px;
+        }
+      }
+    }
   }
 }
+
+

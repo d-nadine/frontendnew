@@ -473,7 +473,8 @@
 .email-thread-item {
   .email-card {
     display: inline-block;
-    padding: 20px;
+    padding: 30px;
+    border-color: $border;
 
     .avatar-wrap {
       margin: 0;
@@ -508,9 +509,16 @@
       float: left;
       font-size: 24px;
       font-weight: 400;
+      width: 100%;
 
       a {
         color: $text;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        display: inline-block;
+        height: 25px;
       }
 
       .email-source img {
@@ -524,7 +532,7 @@
     }
 
     .email-info {
-      margin-top: 10px;
+      margin-top: 6px;
       display: inline-block;
 
       > div {
@@ -558,12 +566,15 @@
       }
 
       .email-options {
+        margin-top: 9px;
+        text-align: right;
 
         a {
-          color: $text;
+          color: $grey;
+          margin-left: 25px;
 
           i {
-            color: $text;
+            color: $grey;
           }
         }
       }
@@ -588,9 +599,8 @@
 }
 
 .email-options {
-  background: #f9f9f9;
-  padding: 10px 20px;
-  border: solid 1px #dbdbdb;
+  text-align: right;
+  margin-top: 9px;
 }
 
 #email-body-iframe body {
@@ -600,13 +610,4 @@
 .email-history {
   width: calc(100% - 240px);
   float: left;
-}
-
-.email-menu {
-  margin-bottom: 10px;
-  margin-top: 5px;
-
-  a {
-    margin-right: 40px;
-  }
 }
