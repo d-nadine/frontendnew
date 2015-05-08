@@ -23,6 +23,29 @@
               <a {{action "toggleForwardForm"}} class="btn-messages-action">
                 <i class="ss-standard ss-right"></i> Forward
               </a>
+
+              <div class="btn-group">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                  <i class="ss-standard ss-ellipsis"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  {{#if canArchive}}
+                    <li>
+                      <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
+                        <i class="ss-standard ss-box"></i> 
+                        <span>Archive</span>
+                      </a>
+                    </li>
+                  {{/if}}
+                  <li>
+                    <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
+                      <i class="ss-symbolicons-block ss-trash"></i> 
+                      <span>Delete</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
             {{else}}
               {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
                 <i class="ss-standard ss-write"></i> Edit
@@ -140,32 +163,6 @@
         {{/unless}}
       </div>
 
-      <div class="clearfix email-item-actions email-item-main-actions email-options-right">
-        <div class="pull-right">
-          {{#unless isDraft}}
-            <a {{action "toggleReplyForm"}} class="btn btn-link btn-messages-action">
-              <i class="ss-standard ss-reply"></i> Reply
-            </a>
-
-            <a {{action "toggleForwardForm"}} class="btn btn-link btn-messages-action">
-              <i class="ss-standard ss-right"></i> Forward
-            </a>
-          {{else}}
-            {{#link-to "emails.edit" model (query-params mode="single" from_people=false) class="btn btn-link btn-messages-action"}}
-              <i class="ss-standard ss-write"></i> Edit
-            {{/link-to}}
-            <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
-          {{/unless}}
-          {{#if canArchive}}
-            <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
-              <i class="ss-standard ss-box"></i> Archive </a>
-          {{/if}}
-
-          <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
-            <i class="ss-symbolicons-block ss-trash"></i> Delete
-          </a>
-        </div>
-      </div>
     </div>
 
     <div>

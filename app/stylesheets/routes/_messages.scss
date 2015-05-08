@@ -197,12 +197,6 @@ $item-border: #dddddd;
   }
 
   .check-box {
-    width: 4px;
-    height: 4px;
-    padding: 5px;
-    position: relative;
-    top: 6px;
-    left: 4px;
 
     i {
       margin: 0;
@@ -368,7 +362,7 @@ $item-border: #dddddd;
     color: $muted;
     margin: 0 0 0 5px;
     position: relative;
-    top: -3px;
+    top: 5px;
   }
 
   label {
@@ -455,7 +449,6 @@ $item-border: #dddddd;
 }
 
 .btn-messages-action {
-  padding: 0px !important;
   color: #000;
   @include transition(color 0.25s);
 
@@ -481,6 +474,8 @@ $item-border: #dddddd;
       padding: 20px 10px;
       border-bottom: 1px solid $border;
       line-height: 44px;
+      display: inline-block;
+      width: calc(100% - 20px);
 
       span {
         color: #6e6e6e;
@@ -492,6 +487,40 @@ $item-border: #dddddd;
       a {
         color: $text;
         font-weight: 600;
+        
+        &:focus,
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          position: relative;
+          top: 3px;
+        }
+      }
+
+      .btn-group {
+        font-size: 14px;
+
+        a {
+          
+          .caret {
+            margin-top: 20px;
+            margin-left: 6px;
+          }
+          &:focus {
+            box-shadow: none;
+            text-decoration: none;
+          }
+          i {
+            position: relative;
+            top: 2px;
+            margin-right: 6px;
+            color: #999;
+          }
+          span {
+            font-weight: 400;
+          }
+        }
       }
     }
 
@@ -512,6 +541,14 @@ $item-border: #dddddd;
       .message-item-content {
         min-height: 40px;
       }
+      .message-item-actions {
+
+        .check-box {
+          border: none;
+          background: none;
+          margin-top: -3px;
+        }
+      }
     }
     .content-right {
       display: inline-block;
@@ -526,6 +563,44 @@ $item-border: #dddddd;
 
         a {
           margin: 0 40px 0 0;
+        }
+      }
+
+      .email-options {
+
+        .btn-group {
+          display: inline-block;
+
+          .dropdown-toggle:focus {
+            box-shadow: none;
+            text-decoration: none;
+          }
+
+          ul {
+            float: right;
+            text-align: right;
+            right: 0;
+            left: auto;
+            min-width: 0;
+
+            li {
+
+              a {
+                background: white;
+
+                i {
+                  margin-left: 10px;
+                }
+                span {
+                  margin: 0 10px 0 20px;
+                }
+
+                &:hover {
+                  background: #eee;
+                }
+              }
+            }
+          }
         }
       }
 

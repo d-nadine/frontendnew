@@ -571,7 +571,10 @@
 
         a {
           color: $grey;
-          margin-left: 25px;
+          
+          &.btn-messages-action {
+            margin-right: 25px;
+          }
 
           i {
             color: $grey;
