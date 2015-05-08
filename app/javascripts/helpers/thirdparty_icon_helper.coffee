@@ -1,8 +1,10 @@
 Ember.Handlebars.registerBoundHelper 'thirdpartyIcon', (model, options) ->
   availableIcons = ['intercom', 'gmail', 'olark', 'hubspot', 'wufoo', 'twitter', 'radium']
 
-  icon = if availableIcons.contains(@get('source'))
-           @get('source')
+  source = model.get('source')
+
+  icon = if availableIcons.contains(source)
+           source
          else
            "zapier"
 
