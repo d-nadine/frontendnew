@@ -211,13 +211,20 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
         adapter.didFindQuery(store, type, json, recordArray);
       }).then(null, DS.rejectionHandler);
     }
-    else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored'].contains(query.name)){
+    else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored', 'team', 'shared'].contains(query.name)){
       root = this.rootForType(type);
       adapter = this,
       page = query.page || 1,
       pageSize = query.pageSize;
 
+      var user = null;
+
       url = this.url + '/conversations/' + query.name + '?page=' + page +  '&page_size=' + pageSize;
+
+      if(user = query.user) {
+        url += '&user=' + user;
+        delete query.user;
+      }
 
       delete query.name;
       delete query.page;

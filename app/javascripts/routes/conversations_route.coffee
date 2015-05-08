@@ -1,58 +1,9 @@
 require 'mixins/controllers/track_contact_mixin'
 
 Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
-  actions:
-    delete: (email) ->
-      @send 'removeItem', 'delete', email
-      false
-
-    archive: (email) ->
-      @send 'removeItem', 'archive', email
-      false
-
-    ignore: (email, contact) ->
-      @send 'removeItem', 'ignore', email, contact
-      false
-
-    removeItem: (action, email, contact) ->
-      controller = @controllerFor 'conversations'
-
-      callback = =>
-        finish = =>
-          @send 'flashSuccess', "email #{action}d!"
-          if action == 'archive'
-            @refresh()
-          else
-            @controllerFor('conversations').removeObject email
-
-        if action == 'delete'
-          @send 'notificationDelete', email
-
-          email.deleteRecord()
-          updateEvent = 'didDelete'
-        else if action == 'archive'
-          email.set 'archived', true
-          updateEvent = 'didUpdate'
-        else if action == 'ignore'
-          ignore = @controllerFor('conversations').get('isIgnored')
-          contact.set 'ignored', not ignore
-          contact.one 'didUpdate', finish
-          return @get('store').commit()
-
-        email.one updateEvent, finish
-
-        errorMessage = "an error has occurred and the email could not be #{action}d"
-
-        email.one 'becameInvalid', ->
-          @send 'flashError', errorMessage
-
-        email.one 'becameError', ->
-          @send 'flashError', errorMessage
-
-        @get('store').commit()
-
-      modelSelector = "[data-model='#{email.constructor}'][data-id='#{email.get('id')}']"
-      $("#{modelSelector}".trim()).fadeOut 'medium', callback
+  queryParams:
+    user:
+      refreshModel: true
 
   beforeModel: (transition) ->
     type = transition.params.conversations.type
@@ -67,10 +18,23 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
     controller.set 'isLoading', true
     controller.set 'totalsLoading', true
     controller.set('conversationType', type)
+
+    unless ['team', 'shared'].contains transition.params.conversations.type
+      controller.set 'user', null
+
+      delete transition.params.conversations.user
+
     type
 
   model: (params) ->
-    Radium.Email.find(name: params.type, pageSize: 15)
+    args =
+      name: params.type
+      pageSize: 15
+
+    if user = params.user
+      args.user = user
+
+    Radium.Email.find(args)
 
   setupController: (controller, model) ->
     @_super.apply this, arguments

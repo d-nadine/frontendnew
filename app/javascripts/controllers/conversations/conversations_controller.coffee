@@ -3,6 +3,11 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   Radium.ConversationsColumnsConfig,
   Radium.TrackContactMixin,
   actions:
+    showUserRecords: (user, query) ->
+      @transitionToRoute 'conversations', query, queryParams: user: user.get('id')
+
+      false
+
     updateConversation: (action, controller, contact) ->
       if action == "track"
         return @send "track", contact
@@ -54,8 +59,11 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
         @set 'incoming', totals.get('incoming')
         @set 'waiting', totals.get('waiting')
         @set 'later', totals.get('later')
+
+        @set 'allUsersTotals', totals.get('allUsersTotals')
+
         @set 'usersTotals', totals.get('usersTotals')
-        @set 'sharedTotals', totals.get('tagsTotals')
+        @set 'sharedTotals', totals.get('sharedTotals')
 
         @set 'totalsLoading', false
 
@@ -186,6 +194,18 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           item.save(this).then (result) ->
             finish()
 
+  queryParams: ['user']
+
+  team: Ember.computed 'currentUser', 'users.[]', ->
+    currentUser = @get('currentUser')
+
+    @get('users').reject (user) -> user == currentUser
+
+  sharedInboxes: Ember.computed 'currentUser', 'team.[]', ->
+    team = @get('team')
+
+    team.reject (user) -> not user.get('shareInbox')
+
   needs: ['users', 'emailsNew']
 
   emailsNewController: Ember.computed.oneWay 'controllers.emailsNew'
@@ -203,6 +223,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
   page: 1
   pageSize: 10
+  user: null
   allPagesLoaded: false
 
   users: Ember.computed.alias 'controllers.users'
@@ -211,4 +232,12 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
     @container.lookup("route:conversations")
 
   modelQuery: (page, pageSize) ->
-    Radium.Email.find(name: @get('conversationType'), page: page, pageSize: pageSize)
+    args =
+      name: @get('conversationType')
+      page: page
+      pageSize: pageSize
+
+     if user = @get('user')
+       args.user = user
+
+    Radium.Email.find(args)

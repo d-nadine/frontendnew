@@ -1,4 +1,3 @@
-{{log model.isArchived}}
 {{#unless model.isIgnored}}
   {{#unless model.contact.isPublic}}
     <a {{action "updateConversation" "track" model.contact}} href="#">Track</a>
