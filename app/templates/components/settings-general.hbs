@@ -1,4 +1,6 @@
 <div class="pipeline-states-list">
   <h3>Currency</h3>
   {{country-picker changeCountry="changeCurrency" current=currentCurrency countryList=Radium.Currencies}}
+  <h3>Share Inbox</h3>
+  {{toggle-switch checked=inboxIsShared action="switchShareInbox" disabled=isSaving}}
 </div>

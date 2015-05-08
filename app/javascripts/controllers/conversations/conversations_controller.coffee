@@ -54,6 +54,9 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
         @set 'incoming', totals.get('incoming')
         @set 'waiting', totals.get('waiting')
         @set 'later', totals.get('later')
+        @set 'usersTotals', totals.get('usersTotals')
+        @set 'sharedTotals', totals.get('tagsTotals')
+
         @set 'totalsLoading', false
 
     checkAll: ->

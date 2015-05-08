@@ -23,6 +23,7 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   refreshFailed: DS.attr('boolean')
   syncState: DS.attr('string')
   thirdPartyConnected: DS.attr('boolean')
+  shareInbox: DS.attr('boolean')
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
   subscriptionInvalid: DS.attr('boolean')
