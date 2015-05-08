@@ -64,6 +64,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   isPersonal: Ember.computed.not 'isPublic'
 
   ignored: DS.attr('boolean')
+  archived: DS.attr('boolean')
 
   dealsClosedTotalValue: DS.attr('number')
   dealsClosedTotal: DS.attr('number')

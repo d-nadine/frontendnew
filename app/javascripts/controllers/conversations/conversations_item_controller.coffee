@@ -2,6 +2,7 @@ Radium.ConversationsItemController = Radium.ObjectController.extend
   conversationType: Ember.computed.oneWay 'parentController.conversationType'
   incoming: Ember.computed.equal 'conversationType', 'incoming'
   isIgnored: Ember.computed.oneWay 'parentController.isIgnored'
+  isArchived: Ember.computed.oneWay 'parentController.isArchived'
 
   contact: Ember.computed 'sender', 'conversationType', 'toList.[]', ->
     if @get('sender').constructor is Radium.Contact

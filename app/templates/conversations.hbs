@@ -47,19 +47,24 @@
             <li><a href="#" {{action "emailAll"}}>Compose</a></li>
             <li class="divider"></li>
             {{#unless isIgnored}}
-              <li><a href="#" {{action "trackAll"}}>Track</a></li>
+              <li>
+                <a href="#" {{action "trackAll"}}>Track</a>
+              </li>
             {{/unless}}
             {{#unless isArchived}}
-              {{#unless isIgnored}}
-                <li><a href="#" {{action "archiveAll"}}>Archive</a></li>
-              {{/unless}}
+              <li>
+                <a href="#" {{action "archiveAll"}}>Archive</a>
+              </li>
+            {{else}}
+              <li>
+                <a href="#" {{action "archiveAll"}}>Remove from archive</a>
+              </li>
             {{/unless}}
             {{#unless isIgnored}}
-              <li><a href="#" {{action ignoreAll}}>Ignore</a></li>
+              <li><a href="#" {{action "ignoreAll"}}>Ignore</a></li>
             {{else}}
-              <li><a href="#" {{action ignoreAll}}>Stop Ignoring</a></li>
+              <li><a href="#" {{action "ignoreAll"}}>Stop Ignoring</a></li>
             {{/unless}}
-            <li><a href="#" {{action "deleteAll"}}>Delete</a></li>
             <li class="divider"></li>
             <li class="dropdown-submenu">
               <a tabindex="-1" href="#">Assign To</a>

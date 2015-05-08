@@ -1,7 +1,52 @@
 Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.ShowMetalessMoreMixin,
   Radium.ConversationsColumnsConfig,
+  Radium.TrackContactMixin,
   actions:
+    updateConversation: (action, controller, contact) ->
+      if action == "track"
+        return @send "track", contact
+      else if action == "ignore"
+        property = "ignored"
+        value = true
+      else if action == "archive"
+        property = "archived"
+        value = true
+      else if action == "stopIgnoring"
+        property = "ignored"
+        value = false
+      else if action == "stopArchiving"
+        property = "archived"
+        value = false
+
+      contact.set property, value
+
+      self = this
+
+      contact.save(this).then (result) ->
+        contact.updateLocalProperty property, value
+        self.removeObject controller.get('model')
+        self.send 'updateTotals'
+
+      false
+
+    trackAll: ->
+      self = this
+      ignored = not @get('isIgnored')
+
+      bulkActionDetail =
+        actionFunc: (item) ->
+          contact = item.get('contact')
+          self.send "track", contact
+          return contact
+        endFunc: (item) ->
+          contact = item.get('contact')
+          contact.updateLocalProperty('isPublic', true)
+          self.send 'flashSuccess', "The selected contacts are now tracked."
+
+      @completeAction(bulkActionDetail)
+      false
+
     updateTotals: ->
       Radium.ConversationsTotals.find({}).then (results) =>
         totals = results.get('firstObject')
@@ -69,44 +114,38 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
                   "The selected contacts mail is no longer ignored."
 
       bulkActionDetail =
-        action: 'didUpdate'
         actionFunc: (item) ->
           contact = item.get('contact')
           contact.set 'ignored', ignored
           return contact
-        endFunc: ->
+        endFunc: (item) ->
           self.send 'flashSuccess', message
-          self.container.lookup('route:conversations').refresh()
+          item.get('contact').updateLocalProperty('ignored', ignored)
+          self.removeObject item
+          self.send 'updateTotals'
 
       @completeAction(bulkActionDetail)
       false
 
     archiveAll: ->
       self = this
-      bulkActionDetail =
-        action: 'didUpdate'
-        actionFunc: (item) ->
-          email = item.get('model')
-          email.set 'archived', true
-          return email
-        endFunc: ->
-          self.send 'flashSuccess', 'You have archived all the selected emails'
-          self.container.lookup('route:conversations').refresh()
+      archived = not @get('isArchived')
 
-      @completeAction(bulkActionDetail)
-      false
+      message = if archived
+                  "The selected contacts mail is now archived."
+                else
+                  "The selected contacts mail is no longer archived."
 
-    deleteAll: ->
-      self = this
       bulkActionDetail =
-        action: 'didDelete'
         actionFunc: (item) ->
-          email = item.get('model')
-          email.deleteRecord()
-          return email
-        endFunc: ->
-          self.send 'flashSuccess', 'You have deleted all the deleted emails'
-          self.container.lookup('route:conversations').refresh()
+          contact = item.get('contact')
+          contact.set 'archived', archived
+          return contact
+        endFunc: (item) ->
+          self.send 'flashSuccess', message
+          item.get('contact').updateLocalProperty('archived', archived)
+          self.removeObject item
+          self.send 'updateTotals'
 
       @completeAction(bulkActionDetail)
       false
@@ -114,8 +153,8 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   completeAction: (bulkActionDetail) ->
     @completeBulkAction(bulkActionDetail).then((successFunc) ->
       successFunc()
-    ).catch (errorFunc) ->
-      errorFunc()
+    ).catch (error) ->
+      Ember.Logger.error error
 
   completeBulkAction: (bulkActionDetail) ->
     self = this
@@ -135,21 +174,14 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
         if email == checkedContent.get('lastObject')
           finish = ->
             checkedContent.setEach 'isChecked', false
-            resolve bulkActionDetail.endFunc
+            resolve bulkActionDetail.endFunc.bind self, controller
+            self.set 'allChecked', false
 
           if not item.get('isDirty')
             finish()
 
-          item.one bulkActionDetail.action, ->
+          item.save(this).then (result) ->
             finish()
-
-          item.one 'becameInvalid', ->
-            reject(-> self.send 'flashError', item)
-
-          item.one 'becameError', ->
-            reject(-> self.send 'flashError', "An error has occurred and the operation could not be completed.")
-
-      self.get('store').commit()
 
   needs: ['users', 'emailsNew']
 

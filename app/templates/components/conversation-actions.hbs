@@ -1,15 +1,20 @@
+{{log model.isArchived}}
 {{#unless model.isIgnored}}
   {{#unless model.contact.isPublic}}
-    <a {{action "track" contact}} href="#">Track</a>
+    <a {{action "updateConversation" "track" model.contact}} href="#">Track</a>
     <span> | </span>
   {{/unless}}
 {{/unless}}
 {{#unless model.isIgnored}}
   {{#unless model.contact.isPublic}}
-    <a href="#" {{action "ignore" model model.contact}}>Ignore</a>
+    <a href="#" {{action "updateConversation" "ignore" model.contact}}>Ignore</a>
   {{else}}
-    <a href="#" {{action "archive" model}}>Archive</a>
+    {{#unless model.isArchived}}
+      <a href="#" {{action "updateConversation" "archive" model.contact}}>Archive</a>
+    {{else}}
+      <a href="#" {{action "updateConversation" "stopArchiving" model.contact}}>Stop Archiving</a>
+    {{/unless}}
   {{/unless}}
 {{else}}
-  <a href="#" {{action "ignore" model model.contact}}>Stop Ignoring</a>
+  <a href="#" {{action "updateConversation" "stopIgnoring" model.contact}}>Stop Ignoring</a>
 {{/unless}}
