@@ -481,7 +481,7 @@ $item-border: #dddddd;
       a {
         color: $text;
         font-weight: 600;
-        
+
         &:focus,
         &:hover {
           text-decoration: none;
@@ -496,7 +496,7 @@ $item-border: #dddddd;
         font-size: 14px;
 
         a {
-          
+
           .caret {
             margin-top: 20px;
             margin-left: 6px;
@@ -554,6 +554,15 @@ $item-border: #dddddd;
 
       .email-menu {
         margin-bottom: 19px;
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        background: #f2f4f5;
+        height: 64px;
+        top: 68px;
+        margin-left: -13px;
+        padding-top: 21px;
+        padding-left: 14px;
 
         a {
           margin: 0 40px 0 0;
@@ -600,6 +609,8 @@ $item-border: #dddddd;
 
       .right-column {
         color: $text;
+        position: fixed;
+        z-index: 1001;
 
         .email-sender {
           font-size: 24px;
