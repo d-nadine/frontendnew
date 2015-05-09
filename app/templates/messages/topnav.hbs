@@ -4,9 +4,18 @@
     <span class="arrow">></span>
     {{folder-list folders=folders parent=this class="btn-group" currentFolder=currentFolder}}
   </div>
-  <div class="pull-right">
-    <a href="#">
-      <i class="ss-standard ss-refresh"></i>
-    </a>
-  </div>
+  {{#if canRefresh}}
+    <div class="pull-right">
+      <a href="#" {{action "refresh"}}>
+        <i class="ss-standard ss-refresh"></i>
+      </a>
+    </div>
+  {{/if}}
 </div>
+{{#if isSyncing}}
+  <div class="text-center">
+    {{view Radium.ProgressBar percentageBinding="currentUser.emailsImported"}}
+    <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.emailsImported}}% complete.&hellip;</p>
+    <p><strong>Status</strong> {{currentUser.syncState}}&hellip;</p>
+  </div>
+{{/if}}

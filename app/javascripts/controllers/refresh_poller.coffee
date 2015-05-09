@@ -10,8 +10,9 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
     unless currentUser = @get('controller.currentUser')
       return
 
+    currentUser.set 'emailsImported'
     if currentUser.get('syncState') == 'finished'
-      @get('controller.controllers.messages').onPoll()
+      @get('controller').onPoll()
       @finishSync()
 
     currentUser.reload()

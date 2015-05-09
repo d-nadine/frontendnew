@@ -63,16 +63,6 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
   needs: ['messages', 'emailsThread']
 
-  init: ->
-    @_super.apply this, arguments
-    @set 'refreshPoller', Radium.RefreshPoller.create()
-
-  canRefresh: Ember.computed 'folder.length', ->
-    @get('folder') == 'inbox'
-
-  viewingTemplates: Ember.computed 'folder', ->
-    @get('folder') == 'templates'
-
   modelQuery: ->
     requestParams = Ember.merge(@get('controllers.messages').requestParams(), page: @get('page'))
 
@@ -99,5 +89,3 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
   radiumIsActive: Ember.computed.equal('folder', 'radium')
   searchIsActive: Ember.computed.equal('folder', 'search')
-
-  isSyncing: false
