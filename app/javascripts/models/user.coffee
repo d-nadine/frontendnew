@@ -59,7 +59,9 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
   isSyncing: Ember.computed 'syncState', ->
     @get('syncState') != "waiting"
 
-  displayName: Ember.computed.alias 'name'
+  displayName: Ember.computed.oneWay 'name'
+
+  companyName: Ember.computed.oneWay 'account.name'
 
   clearRelationships: ->
     @get('tasks').compact().forEach (task) =>
