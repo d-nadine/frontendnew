@@ -1,16 +1,18 @@
-<div class="email-menu">
-  {{#unless viewingTemplates}}
-    {{#link-to "emails.new" (query-params mode="single" from_people=false) class="btn btn-large btn-primary"}}
-      <i class="ss-standard ss-plus"></i> <strong>New Email</strong>
-    {{/link-to}}
-  {{else}}
-    {{#link-to "templates.new" class="btn btn-large btn-primary"}}
-      <i class="ss-standard ss-plus"></i> <strong>New Template</strong>
-    {{/link-to}}
-  {{/unless}}
-  <a href="#" class="btn-black btn-text"><i class="ss-standard ss-check"></i> Add Task</a>
-  {{#unless viewingTemplates}}
-    {{#link-to "messages" "templates"class="btn-black btn-text"}}<i class="ss-standard ss-compose"></i> Templates{{/link-to}}
-  {{/unless}}
-</div>
+{{#unless inEditorMode}}
+  <div class="email-menu">
+    {{#unless viewingTemplates}}
+      {{#link-to "emails.new" (query-params mode="single" from_people=false) class="btn btn-large btn-primary"}}
+        <i class="ss-standard ss-plus"></i> <strong>New Email</strong>
+      {{/link-to}}
+    {{else}}
+      {{#link-to "templates.new" class="btn btn-large btn-primary"}}
+        <i class="ss-standard ss-plus"></i> <strong>New Template</strong>
+      {{/link-to}}
+    {{/unless}}
+    <a href="#" class="btn-black btn-text"><i class="ss-standard ss-check"></i> Add Task</a>
+    {{#unless viewingTemplates}}
+      {{#link-to "messages" "templates"class="btn-black btn-text"}}<i class="ss-standard ss-compose"></i> Templates{{/link-to}}
+    {{/unless}}
+  </div>
+{{/unless}}
 {{outlet}}

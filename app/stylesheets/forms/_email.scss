@@ -617,11 +617,11 @@
   top: 65px;
 }
 
-.empty-emails, .email-history, .email-form-component, .template-editor-component {
+.empty-emails, .email-history {
   position: relative;
   top: 66px;
 }
 
 .email-form-component {
-  overflow: hidden;
+  overflow-x: hidden;
 }
