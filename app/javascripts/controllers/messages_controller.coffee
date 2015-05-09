@@ -12,16 +12,14 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   sortProperties: ['time']
   sortAscending: false
   drawerAction: 'toggleFolders'
-  currentFolderName: "inbox"
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
     @set 'refreshPoller', Radium.RefreshPoller.create()
+    @set 'currentFolder', @get('folders').find (f) -> f.name == "inbox"
 
-  currentFolder: Ember.computed 'currentFolderName', ->
-    currentFolderName = @get('currentFolderName')
-
-    @get('folders').find (f) -> f.name == currentFolderName
+  currentFolderName: Ember.computed 'currentFolder', ->
+    @get('currentFolder.title')
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }

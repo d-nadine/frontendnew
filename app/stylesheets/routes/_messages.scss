@@ -555,7 +555,7 @@ $item-border: #dddddd;
       .email-menu {
         margin-bottom: 19px;
         position: fixed;
-        z-index: 1000;
+        z-index: 100;
         width: 100%;
         background: #f2f4f5;
         height: 64px;
@@ -610,7 +610,7 @@ $item-border: #dddddd;
       .right-column {
         color: $text;
         position: fixed;
-        z-index: 1001;
+        z-index: 101;
 
         .email-sender {
           font-size: 24px;
