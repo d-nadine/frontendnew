@@ -1,0 +1,9 @@
+<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+  {{currentFolder.title}}
+  <span class="caret"></span>
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  {{#each folder in folders}}
+    {{folder-item folder=folder action="selectFolder" parent=parent tagName="li"}}
+  {{/each}}
+</ul>

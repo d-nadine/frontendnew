@@ -36,10 +36,14 @@ Radium.MessagesRoute = Radium.Route.extend
       @toggleProperty 'controller.drawerOpen'
       @send 'toggleDrawer', 'messages/folders'
 
-    selectFolder: (name) ->
-      @send 'closeDrawer'
+    selectFolder: (folder) ->
+      folderName = folder.name
 
-      @transitionTo "messages", name
+      @controllerFor('messages').set('currentFolderName', folderName)
+
+      @transitionTo "messages", folderName
+
+      false
 
     selectItem: (item) ->
       messagesController = @controllerFor('messages')
