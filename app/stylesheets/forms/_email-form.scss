@@ -108,7 +108,7 @@
   .subject-wrap {
     position: relative;
     display: inline-block;
-    float: left;
+    // IF YOU USE FLOAT: LEFT HERE THE RICH TEXT EDITOR IN THE EMAIL FORM SCREWS UP
   }
 
   .more-options {
